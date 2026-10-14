@@ -1,0 +1,5 @@
+luac ok hoth_mynock_den_outdoor.lua
+ok creature hoth_ice_mynock
+ok creature hoth_greater_ice_mynock
+ok creature hoth_mynock_broodmother
+option 1 not in dev (as expected, held)

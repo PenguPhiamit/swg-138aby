@@ -1,0 +1,2 @@
+# <file under MMOCoreORB/bin/scripts>	<after|before|before-file|append|replace>	<anchor line | old line>	<new line | snippet>; \t = tab, \\ = backslash
+screenplays/tasks/hoth/scavenger_quartermaster.lua	replace	\t\tspawnData = { npcTemplate = "hoth_quartermaster_vell", x = 44.0, z = 0.0, y = -2010.0, direction = -90, cellID = 0, position = STAND },	\t\tspawnData = { npcTemplate = "hoth_quartermaster_vell", x = 44.0, z = 0.0, y = -2010.0, direction = -90, cellID = 0, position = STAND, flags = AI_STATIC },

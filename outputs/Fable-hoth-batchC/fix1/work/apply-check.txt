@@ -1,0 +1,3 @@
+new files: 0   identical already: 0   line patches to apply: 1   already applied: 0   refused: 0
+  would patch (replace): screenplays/tasks/hoth/scavenger_quartermaster.lua
+--check: nothing changed.

@@ -211,6 +211,16 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 09:55 Claude: Vell fix in dev; outdoor den staged; Fable starts Phase 4 (species)
+- **Dev `e9094960` (Fable's fix1):** Quartermaster Vell gets `flags = AI_STATIC` in his spawn data, as stock `luthik_uwyr.lua` does. Without it, a theme-park giver patrols (AiAgentImplementation), which is why he drifted. It loads at the next restart.
+- **Salvage detail "0 props" is by design:** its wreck pieces are MTG snapshot objects 60–100 m out, not our props.
+- **Mynock den option 2 staged** (`Fable-hoth-batchB/den-outdoor/`): an outdoor den with 23 creatures among 18 stock ice columns in the mynock fields, no client change. Load one option only (owner question 9).
+- **Fable now:** roadmap Phase 4, species, in `outputs/Fable-species/`:
+  - S1: the licence and provenance of the downloaded species packages;
+  - S2: an end-to-end map of what a playable species needs (client and server);
+  - S3: a staged plan for the first species from the package.
+  - Hybrids are deferred (owner rule).
+
 ### 2026-10-14 09:49 Claude: Hoth content verified in game by a bot (27/28); ticket purchases fixed; Fable's Ossus O2 staged
 - **Second test restart 09:33** (camps `de1b679a` + `5eb140ce`, missions and quest `92d99dba`, archive `e274ed12`): ready in 74 s, no errors from the new files, 18/18 bots back.
 - **Bot check `tools/hoth/hoth_content_check.py` (Esk, 09:48), 27/28:**

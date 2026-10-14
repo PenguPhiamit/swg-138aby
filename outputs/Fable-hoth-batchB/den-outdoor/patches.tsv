@@ -1,0 +1,2 @@
+# <file>	<mode>	<anchor>	<new line>
+screenplays/screenplays.lua	after	includeFile("poi/hoth_camps.lua") -- Sandbox: Hoth camps (Fable batch B)	includeFile("poi/hoth_mynock_den_outdoor.lua") -- Sandbox: Hoth mynock den, outdoor option (Fable batch B)

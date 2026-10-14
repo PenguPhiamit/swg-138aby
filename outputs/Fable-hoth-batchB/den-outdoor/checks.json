@@ -1,0 +1,392 @@
+{
+ "site": [
+  -2000.0,
+  -4800.0
+ ],
+ "ground_at_centre": 44.8,
+ "placed": [
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_column_ice_style_01.iff",
+   "x": -1996.5,
+   "z": 43.9,
+   "y": -4793.9,
+   "heading_deg": 0
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_column_ice_style_02.iff",
+   "x": -1996.5,
+   "z": 44.8,
+   "y": -4806.1,
+   "heading_deg": 120
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_column_ice_style_03.iff",
+   "x": -2007.0,
+   "z": 44.6,
+   "y": -4800.0,
+   "heading_deg": 240
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_01.iff",
+   "x": -1996.9,
+   "z": 42.7,
+   "y": -4782.3,
+   "heading_deg": 0
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_02.iff",
+   "x": -1986.2,
+   "z": 42.7,
+   "y": -4788.4,
+   "heading_deg": 40
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_03.iff",
+   "x": -1982.0,
+   "z": 43.7,
+   "y": -4800.0,
+   "heading_deg": 80
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_04.iff",
+   "x": -1986.2,
+   "z": 45.0,
+   "y": -4811.6,
+   "heading_deg": 120
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_05.iff",
+   "x": -1996.9,
+   "z": 43.6,
+   "y": -4817.7,
+   "heading_deg": 160
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_06.iff",
+   "x": -2009.0,
+   "z": 42.8,
+   "y": -4815.6,
+   "heading_deg": 200
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_07.iff",
+   "x": -2016.9,
+   "z": 43.2,
+   "y": -4806.2,
+   "heading_deg": 240
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_08.iff",
+   "x": -2016.9,
+   "z": 44.6,
+   "y": -4793.8,
+   "heading_deg": 280
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_09.iff",
+   "x": -2009.0,
+   "z": 43.7,
+   "y": -4784.4,
+   "heading_deg": 320
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_01.iff",
+   "x": -1985.6,
+   "z": 40.8,
+   "y": -4769.2,
+   "heading_deg": 0
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_03.iff",
+   "x": -1966.1,
+   "z": 42.8,
+   "y": -4797.0,
+   "heading_deg": 60
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_05.iff",
+   "x": -1980.5,
+   "z": 43.9,
+   "y": -4827.9,
+   "heading_deg": 120
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_07.iff",
+   "x": -2014.4,
+   "z": 40.9,
+   "y": -4830.8,
+   "heading_deg": 180
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_09.iff",
+   "x": -2033.9,
+   "z": 42.4,
+   "y": -4803.0,
+   "heading_deg": 240
+  },
+  {
+   "kind": "prop",
+   "template": "object/static/structure/general/cave_stalagmite_ice_style_02.iff",
+   "x": -2019.5,
+   "z": 43.0,
+   "y": -4772.1,
+   "heading_deg": 300
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_mynock_broodmother",
+   "respawn": 1800,
+   "x": -2000.0,
+   "z": 44.6,
+   "y": -4798.0,
+   "heading_deg": 180
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_greater_ice_mynock",
+   "respawn": 420,
+   "x": -2000.0,
+   "z": 43.5,
+   "y": -4788.0,
+   "heading_deg": 0
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_greater_ice_mynock",
+   "respawn": 420,
+   "x": -1990.6,
+   "z": 43.4,
+   "y": -4792.5,
+   "heading_deg": 51
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_greater_ice_mynock",
+   "respawn": 420,
+   "x": -1988.3,
+   "z": 44.3,
+   "y": -4802.7,
+   "heading_deg": 102
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_greater_ice_mynock",
+   "respawn": 420,
+   "x": -1994.8,
+   "z": 44.5,
+   "y": -4810.8,
+   "heading_deg": 154
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_greater_ice_mynock",
+   "respawn": 420,
+   "x": -2005.2,
+   "z": 43.6,
+   "y": -4810.8,
+   "heading_deg": -155
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_greater_ice_mynock",
+   "respawn": 420,
+   "x": -2011.7,
+   "z": 44.0,
+   "y": -4802.7,
+   "heading_deg": -103
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_greater_ice_mynock",
+   "respawn": 420,
+   "x": -2009.4,
+   "z": 44.7,
+   "y": -4792.5,
+   "heading_deg": -52
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -1990.1,
+   "z": 41.7,
+   "y": -4776.0,
+   "heading_deg": 22
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -1976.0,
+   "z": 42.5,
+   "y": -4790.1,
+   "heading_deg": 67
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -1976.0,
+   "z": 44.3,
+   "y": -4809.9,
+   "heading_deg": 112
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -1990.1,
+   "z": 43.6,
+   "y": -4824.0,
+   "heading_deg": 157
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -2009.9,
+   "z": 41.9,
+   "y": -4824.0,
+   "heading_deg": -158
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -2024.0,
+   "z": 42.3,
+   "y": -4809.9,
+   "heading_deg": -113
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -2024.0,
+   "z": 44.6,
+   "y": -4790.1,
+   "heading_deg": -68
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -2009.9,
+   "z": 42.9,
+   "y": -4776.0,
+   "heading_deg": -23
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -2000.0,
+   "z": 40.2,
+   "y": -4756.0,
+   "heading_deg": 0
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -1965.6,
+   "z": 40.6,
+   "y": -4772.6,
+   "heading_deg": 51
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -1957.1,
+   "z": 43.6,
+   "y": -4809.8,
+   "heading_deg": 102
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -1980.9,
+   "z": 42.9,
+   "y": -4839.6,
+   "heading_deg": 154
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -2019.1,
+   "z": 39.6,
+   "y": -4839.6,
+   "heading_deg": -155
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -2042.9,
+   "z": 41.1,
+   "y": -4809.8,
+   "heading_deg": -103
+  },
+  {
+   "kind": "mobile",
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -2034.4,
+   "z": 43.8,
+   "y": -4772.6,
+   "heading_deg": -52
+  }
+ ],
+ "height_range": [
+  39.6,
+  45.0
+ ],
+ "steepest_10m_step_across_site": 0.72,
+ "props": 18,
+ "mobiles": 23,
+ "counts": {
+  "hoth_ice_mynock": 15,
+  "hoth_greater_ice_mynock": 7,
+  "hoth_mynock_broodmother": 1
+ },
+ "server_templates_to_check": [
+  "object/static/structure/general/cave_column_ice_style_01.lua",
+  "object/static/structure/general/cave_column_ice_style_02.lua",
+  "object/static/structure/general/cave_column_ice_style_03.lua",
+  "object/static/structure/general/cave_stalagmite_ice_style_01.lua",
+  "object/static/structure/general/cave_stalagmite_ice_style_02.lua",
+  "object/static/structure/general/cave_stalagmite_ice_style_03.lua",
+  "object/static/structure/general/cave_stalagmite_ice_style_04.lua",
+  "object/static/structure/general/cave_stalagmite_ice_style_05.lua",
+  "object/static/structure/general/cave_stalagmite_ice_style_06.lua",
+  "object/static/structure/general/cave_stalagmite_ice_style_07.lua",
+  "object/static/structure/general/cave_stalagmite_ice_style_08.lua",
+  "object/static/structure/general/cave_stalagmite_ice_style_09.lua"
+ ],
+ "creature_templates": [
+  "hoth_greater_ice_mynock",
+  "hoth_ice_mynock",
+  "hoth_mynock_broodmother"
+ ],
+ "file": "screenplays/poi/hoth_mynock_den_outdoor.lua"
+}

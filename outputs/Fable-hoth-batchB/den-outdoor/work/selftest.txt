@@ -1,0 +1,30 @@
+== selftest in /tmp/tmp.BmjY7afbal: check
+new files: 1   identical already: 0   line patches to apply: 6   already applied: 0   refused: 0
+  would patch (after): a/list.lua
+  would patch (before): a/list.lua
+  would patch (before-file): a/list.lua
+  would patch (append): a/list.lua
+  would patch (after): a/list.lua
+  would patch (replace): a/list.lua
+  would copy: a/new.lua
+--check: nothing changed.
+== selftest: apply
+new files: 1   identical already: 0   line patches to apply: 6   already applied: 0   refused: 0
+  copied a/new.lua
+  patched a/list.lua (after): 7 -> 8 lines
+  patched a/list.lua (before): 8 -> 9 lines
+  patched a/list.lua (before-file): 9 -> 12 lines
+  patched a/list.lua (append): 12 -> 14 lines
+  patched a/list.lua (after): 14 -> 15 lines
+  patched a/list.lua (replace): 15 -> 15 lines
+  luac ok a/new.lua
+  luac ok a/list.lua
+  luac ok a/list.lua
+  luac ok a/list.lua
+  luac ok a/list.lua
+  luac ok a/list.lua
+  luac ok a/list.lua
+== selftest: result matches the expected file
+== selftest: second apply must change nothing
+== selftest: idempotent
+SELFTEST PASSED

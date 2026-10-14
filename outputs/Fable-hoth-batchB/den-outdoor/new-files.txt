@@ -1,0 +1,2 @@
+# new files under MMOCoreORB/bin/scripts
+screenplays/poi/hoth_mynock_den_outdoor.lua
