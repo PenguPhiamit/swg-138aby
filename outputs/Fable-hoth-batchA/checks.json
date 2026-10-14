@@ -1,0 +1,255 @@
+{
+ "areas": [
+  {
+   "name": "hoth_tauntaun_plains_west",
+   "x": -3000,
+   "y": -1500,
+   "radius": 1800,
+   "group": "hoth_tauntaun_plains",
+   "max_lairs": 64,
+   "mean_height": 31.8,
+   "min_height": 11.3,
+   "max_height": 45.0,
+   "steepest_100m_step": 21.2,
+   "distance_to_outpost": 3041,
+   "distance_to_cave_nobuild_centre": 4855,
+   "clear_of_outpost_city_200m": true,
+   "clear_of_cave_nobuild_450m": true
+  },
+  {
+   "name": "hoth_tauntaun_plains_east",
+   "x": 3000,
+   "y": -1200,
+   "radius": 1500,
+   "group": "hoth_tauntaun_plains",
+   "max_lairs": 64,
+   "mean_height": 31.8,
+   "min_height": 11.3,
+   "max_height": 59.6,
+   "steepest_100m_step": 21.0,
+   "distance_to_outpost": 3105,
+   "distance_to_cave_nobuild_centre": 5099,
+   "clear_of_outpost_city_200m": true,
+   "clear_of_cave_nobuild_450m": true
+  },
+  {
+   "name": "hoth_mynock_fields_south",
+   "x": -2000,
+   "y": -4800,
+   "radius": 1200,
+   "group": "hoth_mynock_fields",
+   "max_lairs": 48,
+   "mean_height": 32.7,
+   "min_height": 7.3,
+   "max_height": 103.9,
+   "steepest_100m_step": 29.0,
+   "distance_to_outpost": 3441,
+   "distance_to_cave_nobuild_centre": 7571,
+   "clear_of_outpost_city_200m": true,
+   "clear_of_cave_nobuild_450m": true
+  },
+  {
+   "name": "hoth_wampa_flanks_west",
+   "x": -1800,
+   "y": 3200,
+   "radius": 900,
+   "group": "hoth_wampa_flanks",
+   "max_lairs": 32,
+   "mean_height": 25.2,
+   "min_height": 2.1,
+   "max_height": 44.8,
+   "steepest_100m_step": 19.8,
+   "distance_to_outpost": 5503,
+   "distance_to_cave_nobuild_centre": 1523,
+   "clear_of_outpost_city_200m": true,
+   "clear_of_cave_nobuild_450m": true
+  },
+  {
+   "name": "hoth_wampa_flanks_southeast",
+   "x": 1200,
+   "y": 1500,
+   "radius": 700,
+   "group": "hoth_wampa_flanks",
+   "max_lairs": 32,
+   "mean_height": 19.6,
+   "min_height": 0.0,
+   "max_height": 42.9,
+   "steepest_100m_step": 17.2,
+   "distance_to_outpost": 3700,
+   "distance_to_cave_nobuild_centre": 1942,
+   "clear_of_outpost_city_200m": true,
+   "clear_of_cave_nobuild_450m": true
+  },
+  {
+   "name": "hoth_imperial_zone_east",
+   "x": 2500,
+   "y": -3500,
+   "radius": 1200,
+   "group": "hoth_imperial_zone",
+   "max_lairs": 48,
+   "mean_height": 29.2,
+   "min_height": 7.8,
+   "max_height": 45.0,
+   "steepest_100m_step": 21.9,
+   "distance_to_outpost": 2915,
+   "distance_to_cave_nobuild_centre": 6754,
+   "clear_of_outpost_city_200m": true,
+   "clear_of_cave_nobuild_450m": true
+  },
+  {
+   "name": "hoth_rebel_zone_northwest",
+   "x": -2500,
+   "y": 1000,
+   "radius": 1200,
+   "group": "hoth_rebel_zone",
+   "max_lairs": 48,
+   "mean_height": 29.3,
+   "min_height": 8.4,
+   "max_height": 45.0,
+   "steepest_100m_step": 18.1,
+   "distance_to_outpost": 3905,
+   "distance_to_cave_nobuild_centre": 2640,
+   "clear_of_outpost_city_200m": true,
+   "clear_of_cave_nobuild_450m": true
+  },
+  {
+   "name": "hoth_scavenger_zone_southwest",
+   "x": -1500,
+   "y": -3200,
+   "radius": 900,
+   "group": "hoth_scavenger_zone",
+   "max_lairs": 48,
+   "mean_height": 21.2,
+   "min_height": 8.2,
+   "max_height": 44.0,
+   "steepest_100m_step": 22.1,
+   "distance_to_outpost": 1921,
+   "distance_to_cave_nobuild_centre": 5903,
+   "clear_of_outpost_city_200m": true,
+   "clear_of_cave_nobuild_450m": true
+  }
+ ],
+ "density": {
+  "world_spawner_max_before": 1024,
+  "world_spawner_max_after": 1024,
+  "area_spawner_max_total": 384,
+  "lair_cap_before": 1024,
+  "lair_cap_after": 1408,
+  "change_percent": 37.5,
+  "alternative": "world spawner 768 + areas 384 = 1152 (+12.5%)"
+ },
+ "templates": {
+  "lairs_used": [
+   "hoth_ice_mynock_lair_neutral_medium",
+   "hoth_ice_mynock_pack_neutral_none",
+   "hoth_imperial_salvage_team_imperial_none",
+   "hoth_probe_droid_neutral_none",
+   "hoth_rebel_snow_patrol_rebel_none",
+   "hoth_scavenger_raider_camp_neutral_none",
+   "hoth_snowtrooper_patrol_imperial_none",
+   "hoth_tauntaun_herd_neutral_none",
+   "hoth_tauntaun_lair_neutral_medium",
+   "hoth_wampa_lair_neutral_large",
+   "hoth_wampa_neutral_none"
+  ],
+  "all_present_in_core3_dev": true,
+  "groups": {
+   "hoth_tauntaun_plains": [
+    "hoth_tauntaun_herd_neutral_none",
+    "hoth_tauntaun_lair_neutral_medium",
+    "hoth_probe_droid_neutral_none"
+   ],
+   "hoth_mynock_fields": [
+    "hoth_ice_mynock_pack_neutral_none",
+    "hoth_ice_mynock_lair_neutral_medium",
+    "hoth_wampa_neutral_none"
+   ],
+   "hoth_wampa_flanks": [
+    "hoth_wampa_neutral_none",
+    "hoth_wampa_lair_neutral_large",
+    "hoth_tauntaun_herd_neutral_none"
+   ],
+   "hoth_imperial_zone": [
+    "hoth_snowtrooper_patrol_imperial_none",
+    "hoth_imperial_salvage_team_imperial_none",
+    "hoth_probe_droid_neutral_none"
+   ],
+   "hoth_rebel_zone": [
+    "hoth_rebel_snow_patrol_rebel_none",
+    "hoth_probe_droid_neutral_none",
+    "hoth_tauntaun_herd_neutral_none"
+   ],
+   "hoth_scavenger_zone": [
+    "hoth_scavenger_raider_camp_neutral_none",
+    "hoth_tauntaun_herd_neutral_none",
+    "hoth_ice_mynock_pack_neutral_none"
+   ]
+  }
+ },
+ "rancor": {
+  "body": "object/mobile/rancor.iff (stock, patch_00.tre); shared_rancor_hue.iff -> palette/creature_rancor.pal",
+  "palette_entries": 32,
+  "hue_index": 15,
+  "hue_rgb": [
+   244,
+   220,
+   139
+  ],
+  "level": 400,
+  "scaled_from": "krayt_dragon_ancient (336: HAM 410k-501k, dmg 2270-4250, armor 3, resists 195) x 400/336; ancient_bull_rancor attacks",
+  "bellum_body_missing": "object/mobile/shared_exotic_rancor.iff is in no archive the client loads",
+  "spawned": false
+ },
+ "files": {
+  "managers/planet/hoth_regions.lua": {
+   "staged_sha256": "5d1eae17a666be80d245665e41a9478686ed9ae569c32fe256620bca768adac7",
+   "orig_sha256": "c94c312436f452fd3005d6c4f950d48ffff4453fb2112e0f170582786367f5e3",
+   "bytes": 2416
+  },
+  "mobile/spawn/serverobjects.lua": {
+   "staged_sha256": "7a303b895cc9dbdd131f5cb110c512891585b0741bc82c9537a3333bee1f3b1c",
+   "orig_sha256": "52ee944695a1f21e88264dc26a6717923f9b0836ca8fb31b673a523712fb272e",
+   "bytes": 28299
+  },
+  "mobile/hoth/serverobjects.lua": {
+   "staged_sha256": "2d160baf906570bdf734f7e02767547c32d5e5578b4f1d7bcad9884630cbb6f1",
+   "orig_sha256": "fbf14a77e1041417bcdf49b97ea11bac1f2e4effc5f24ce38bd76eef94203d86",
+   "bytes": 1298
+  },
+  "mobile/hoth/hoth_glacial_rancor.lua": {
+   "staged_sha256": "f1a22db465fa41b8e3b9eab3911802fb1c740438b65cf2cd71db6e4dc958462d",
+   "orig_sha256": "new",
+   "bytes": 2113
+  },
+  "mobile/spawn/hoth/hoth_tauntaun_plains.lua": {
+   "staged_sha256": "b1524335ab10dad213ac8be4546efa86b4782dcfdba0218d36f53634c274f85c",
+   "orig_sha256": "new",
+   "bytes": 940
+  },
+  "mobile/spawn/hoth/hoth_mynock_fields.lua": {
+   "staged_sha256": "189451eeffa9442649653884b6880a3f4943d249b22c49e72632a9b1651ab703",
+   "orig_sha256": "new",
+   "bytes": 930
+  },
+  "mobile/spawn/hoth/hoth_wampa_flanks.lua": {
+   "staged_sha256": "87c8e8a82d317f1b79f55ef7e9bd5c30890dcebc190d2f59907401e1e34b7a8b",
+   "orig_sha256": "new",
+   "bytes": 918
+  },
+  "mobile/spawn/hoth/hoth_imperial_zone.lua": {
+   "staged_sha256": "a65e31cc95b7a34b7f47aa9941f238dd3ad782ace7d62f79c9fb70c648ca4cb4",
+   "orig_sha256": "new",
+   "bytes": 945
+  },
+  "mobile/spawn/hoth/hoth_rebel_zone.lua": {
+   "staged_sha256": "876bcb2ce9e82bcf7355b6ed3bb09ba5fc6b45c5a112af3e7357d026e6fda3fa",
+   "orig_sha256": "new",
+   "bytes": 920
+  },
+  "mobile/spawn/hoth/hoth_scavenger_zone.lua": {
+   "staged_sha256": "ff7c6a90c045a913a8dd8e85aed17511dfe0e3049261caedd58a4ca593aca6fd",
+   "orig_sha256": "new",
+   "bytes": 946
+  }
+ }
+}

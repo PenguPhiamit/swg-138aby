@@ -201,6 +201,21 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 08:20 Claude: Hoth batch A in dev (area spawners, glacial rancor); Fable on batch B
+- **Dev `69eb77fe` (Fable's batch A, hash-checked apply, luac clean):**
+  - 8 area spawners on flat ground of MTG's map (tauntaun plains ×2, mynock fields, wampa flanks ×2, Imperial, Rebel and scavenger zones), with 6 new spawn groups on the ported lairs. The world spawner stays as the fallback.
+  - The lair cap goes 1024 → 1408 (+37.5%).
+  - A clean-room glacial rancor, "Hoarfang": stock rancor body, palest palette colour, scale 1.35, our own text. Registered, not spawned.
+  - Fable's audit: every other Hoth creature that MTG's and Bellum's scripts reference is already in dev.
+- **Correction:** Fable's README called level 400 "the owner's choice". It's Bellum's value; Claude reworded the file and README.
+- **Owner questions (Fable's README):**
+  - density 1408 vs 1152 (world 768 + 384);
+  - rancor level 400 vs ~336 (ancient krayt);
+  - where the rancor spawns (world-boss rotation, a den, a region);
+  - cream palette vs new white/blue art.
+- **Fable now:** batch B in `outputs/Fable-hoth-batchB/` (POIs and NPC camps in the new zones, a home for the mynock den, the region/POI name strings). Batch C (missions, vehicles) comes after.
+- The test restart at about 08:27 loads the caves and batch A together.
+
 ### 2026-10-14 08:05 Claude: Hoth ice caves in dev; test restart queued; Fable on the asset-pipeline study, then "finish Hoth"
 - **Hoth ice caves (dev `c5f1ae06`, Fable's staging, hash-checked apply, luac clean):** 129 wampa spawns in MTG's four ice caves. Every cell id was checked against MTG's `hoth.ws`. The 23 in Bellum's mynock den are left out (that building isn't in MTG's snapshot). Bellum's per-player boss reward is dropped for template corpse loot. **Owner question:** corpse loot only for the five named wampa bosses, or build a per-player boss reward later? Bellum's 15 reward groups vs ours: `Fable-hoth-caves/README.md`.
 - **Test galaxy restart queued** for when round 080235 ends (about 08:27), to load the caves and the spawn-command lock fix (C4f-F1). It checks for an owner client first and pauses the overnight check with `Agent/STOP-OVERNIGHT` while the galaxy starts.

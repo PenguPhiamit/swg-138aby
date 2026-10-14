@@ -1,0 +1,11 @@
+# path relative to MMOCoreORB/bin/scripts	sha256 of the Core3-dev file the staged copy was made from (14 Oct 2026), or new
+managers/planet/hoth_regions.lua	c94c312436f452fd3005d6c4f950d48ffff4453fb2112e0f170582786367f5e3
+mobile/spawn/serverobjects.lua	52ee944695a1f21e88264dc26a6717923f9b0836ca8fb31b673a523712fb272e
+mobile/hoth/serverobjects.lua	fbf14a77e1041417bcdf49b97ea11bac1f2e4effc5f24ce38bd76eef94203d86
+mobile/hoth/hoth_glacial_rancor.lua	new
+mobile/spawn/hoth/hoth_tauntaun_plains.lua	new
+mobile/spawn/hoth/hoth_mynock_fields.lua	new
+mobile/spawn/hoth/hoth_wampa_flanks.lua	new
+mobile/spawn/hoth/hoth_imperial_zone.lua	new
+mobile/spawn/hoth/hoth_rebel_zone.lua	new
+mobile/spawn/hoth/hoth_scavenger_zone.lua	new

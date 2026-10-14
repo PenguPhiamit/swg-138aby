@@ -1,0 +1,5 @@
+luac ok caves/hoth_ice_caves.lua
+luac ok screenplays.lua
+manifest: /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Fable-hoth-caves/apply-manifest.tsv
+to change: 1   new: 1   already identical: 0   refused: 0
+--check: nothing copied.

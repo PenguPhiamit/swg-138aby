@@ -1,0 +1,450 @@
+{
+ "bellum_source": "work/research/Miphstoe_BellumGero-Live/MMOCoreORB/bin/scripts/screenplays/caves/hoth_ice_caves.lua",
+ "snapshot": "snapshot/hoth.ws from mtg_planets.tre (owner's client), read with our ws_read.py",
+ "snapshot_nodes": 94,
+ "snapshot_world_level": 17,
+ "bellum_rows": 152,
+ "kept": 129,
+ "skipped": 23,
+ "per_cave": {
+  "6452962": {
+   "kept": 23,
+   "skipped": 0,
+   "name": "cave_04_ice_s01",
+   "building_in_snapshot": true,
+   "template": "object/building/general/shared_cave_04_ice_s01.iff",
+   "position_matches": true
+  },
+  "6452974": {
+   "kept": 23,
+   "skipped": 0,
+   "name": "cave_02_ice",
+   "building_in_snapshot": true,
+   "template": "object/building/general/shared_cave_02_ice.iff",
+   "position_matches": true
+  },
+  "6452986": {
+   "kept": 23,
+   "skipped": 0,
+   "name": "cave_01_ice",
+   "building_in_snapshot": true,
+   "template": "object/building/general/shared_cave_01_ice.iff",
+   "position_matches": true
+  },
+  "6452998": {
+   "kept": 60,
+   "skipped": 0,
+   "name": "cave_03_ice",
+   "building_in_snapshot": true,
+   "template": "object/building/general/shared_cave_03_ice.iff",
+   "position_matches": true
+  },
+  "6453174": {
+   "kept": 0,
+   "skipped": 23,
+   "name": "cave_06_flatland_s01_ice",
+   "building_in_snapshot": false
+  }
+ },
+ "caves": {
+  "6452962": {
+   "name": "cave_04_ice_s01",
+   "x": -385.0,
+   "z": 58.0,
+   "y": 2436.0,
+   "building_in_snapshot": true,
+   "template": "object/building/general/shared_cave_04_ice_s01.iff",
+   "snapshot_x": -385.0,
+   "snapshot_z": 58.0,
+   "snapshot_y": 2436.0,
+   "position_matches": true,
+   "cells": [
+    6452963,
+    6452964,
+    6452965,
+    6452966,
+    6452967,
+    6452968,
+    6452969,
+    6452970,
+    6452971,
+    6452972,
+    6452973
+   ]
+  },
+  "6452974": {
+   "name": "cave_02_ice",
+   "x": -543.0,
+   "z": 36.5,
+   "y": 2674.0,
+   "building_in_snapshot": true,
+   "template": "object/building/general/shared_cave_02_ice.iff",
+   "snapshot_x": -543.0,
+   "snapshot_z": 36.5,
+   "snapshot_y": 2674.0,
+   "position_matches": true,
+   "cells": [
+    6452975,
+    6452976,
+    6452977,
+    6452978,
+    6452979,
+    6452980,
+    6452981,
+    6452982,
+    6452983,
+    6452984,
+    6452985
+   ]
+  },
+  "6452986": {
+   "name": "cave_01_ice",
+   "x": -622.5,
+   "z": 183.3,
+   "y": 2292.3,
+   "building_in_snapshot": true,
+   "template": "object/building/general/shared_cave_01_ice.iff",
+   "snapshot_x": -622.5499877929688,
+   "snapshot_z": 183.3000030517578,
+   "snapshot_y": 2292.27001953125,
+   "position_matches": true,
+   "cells": [
+    6452987,
+    6452988,
+    6452989,
+    6452990,
+    6452991,
+    6452992,
+    6452993,
+    6452994,
+    6452995,
+    6452996,
+    6452997
+   ]
+  },
+  "6452998": {
+   "name": "cave_03_ice",
+   "x": -75.0,
+   "z": 35.0,
+   "y": 2969.0,
+   "building_in_snapshot": true,
+   "template": "object/building/general/shared_cave_03_ice.iff",
+   "snapshot_x": -75.0,
+   "snapshot_z": 35.0,
+   "snapshot_y": 2969.0,
+   "position_matches": true,
+   "cells": [
+    6452999,
+    6453000,
+    6453001,
+    6453002,
+    6453003,
+    6453004,
+    6453005,
+    6453006,
+    6453007,
+    6453008,
+    6453009,
+    6453010,
+    6453011,
+    6453012,
+    6453013,
+    6453014,
+    6453015,
+    6453016,
+    6453017,
+    6453018,
+    6453019,
+    6453020,
+    6453021,
+    6453022,
+    6453023,
+    6453024,
+    6453025,
+    6453026,
+    6453027
+   ]
+  },
+  "6453174": {
+   "name": "cave_06_flatland_s01_ice",
+   "x": -5819.0,
+   "z": 0.5,
+   "y": 6093.0,
+   "building_in_snapshot": false
+  }
+ },
+ "cell_ids_in_bellum": 73,
+ "cell_ids_missing_in_mtg": [
+  6453175,
+  6453176,
+  6453177,
+  6453178,
+  6453179,
+  6453180,
+  6453181,
+  6453182,
+  6453183,
+  6453184,
+  6453185
+ ],
+ "skipped_rows": [
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": 4.35,
+   "z": -7.68,
+   "y": -11.21,
+   "heading": -103.0,
+   "cell": 6453175,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": 5.8,
+   "z": -4.21,
+   "y": -3.27,
+   "heading": -93.0,
+   "cell": 6453175,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -11.23,
+   "z": -30.6,
+   "y": -51.36,
+   "heading": -8.0,
+   "cell": 6453176,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -4.19,
+   "z": -21.55,
+   "y": -31.12,
+   "heading": -57.0,
+   "cell": 6453176,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -5.73,
+   "z": -32.3,
+   "y": -83.51,
+   "heading": 1.0,
+   "cell": 6453177,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_greater_ice_mynock",
+   "respawn": 420,
+   "x": -10.21,
+   "z": -32.46,
+   "y": -83.92,
+   "heading": 32.0,
+   "cell": 6453177,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": 34.42,
+   "z": -37.21,
+   "y": -95.44,
+   "heading": -112.0,
+   "cell": 6453178,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": 42.64,
+   "z": -38.2,
+   "y": -91.94,
+   "heading": -54.0,
+   "cell": 6453178,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": 50.92,
+   "z": -48.35,
+   "y": -159.39,
+   "heading": 51.0,
+   "cell": 6453179,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_greater_ice_mynock",
+   "respawn": 420,
+   "x": 59.26,
+   "z": -43.38,
+   "y": -139.54,
+   "heading": 109.0,
+   "cell": 6453179,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": 14.01,
+   "z": -55.17,
+   "y": -185.93,
+   "heading": -160.0,
+   "cell": 6453180,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -15.49,
+   "z": -56.09,
+   "y": -185.35,
+   "heading": -150.0,
+   "cell": 6453180,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -3.87,
+   "z": -56.71,
+   "y": -226.56,
+   "heading": 176.0,
+   "cell": 6453181,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_greater_ice_mynock",
+   "respawn": 420,
+   "x": -12.95,
+   "z": -57.77,
+   "y": -213.56,
+   "heading": -121.0,
+   "cell": 6453181,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -69.21,
+   "z": -61.33,
+   "y": -192.88,
+   "heading": -40.0,
+   "cell": 6453182,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -114.59,
+   "z": -62.06,
+   "y": -197.56,
+   "heading": -82.0,
+   "cell": 6453182,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -56.92,
+   "z": -60.35,
+   "y": -107.34,
+   "heading": -79.0,
+   "cell": 6453183,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_greater_ice_mynock",
+   "respawn": 420,
+   "x": -60.53,
+   "z": -60.5,
+   "y": -109.43,
+   "heading": -54.0,
+   "cell": 6453183,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -21.75,
+   "z": -67.36,
+   "y": -126.02,
+   "heading": 82.0,
+   "cell": 6453184,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_ice_mynock",
+   "respawn": 420,
+   "x": -20.18,
+   "z": -70.98,
+   "y": -139.24,
+   "heading": 71.0,
+   "cell": 6453184,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_mynock_broodmother",
+   "respawn": 1800,
+   "x": -82.49,
+   "z": -94.21,
+   "y": -119.0,
+   "heading": -166.0,
+   "cell": 6453185,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_greater_ice_mynock",
+   "respawn": 420,
+   "x": -98.38,
+   "z": -92.16,
+   "y": -102.78,
+   "heading": -55.0,
+   "cell": 6453185,
+   "reason": "cell id not in MTG snapshot"
+  },
+  {
+   "template": "hoth_greater_ice_mynock",
+   "respawn": 420,
+   "x": -85.46,
+   "z": -94.6,
+   "y": -116.09,
+   "heading": -145.0,
+   "cell": 6453185,
+   "reason": "cell id not in MTG snapshot"
+  }
+ ],
+ "templates_used": [
+  "hoth_elder_wampa",
+  "hoth_wampa",
+  "hoth_wampa_frostfang",
+  "hoth_wampa_icemaw",
+  "hoth_wampa_matriarch",
+  "hoth_wampa_patriarch",
+  "hoth_wampa_snowblind"
+ ],
+ "templates_registered_in_core3_dev": {
+  "hoth_elder_wampa": true,
+  "hoth_greater_ice_mynock": true,
+  "hoth_ice_mynock": true,
+  "hoth_mynock_broodmother": true,
+  "hoth_wampa": true,
+  "hoth_wampa_frostfang": true,
+  "hoth_wampa_icemaw": true,
+  "hoth_wampa_matriarch": true,
+  "hoth_wampa_patriarch": true,
+  "hoth_wampa_snowblind": true
+ },
+ "floor_check": "skipped: needs PortalLayout/CellProperty/FloorMesh readers (Core3-dev src/templates/appearance); see README",
+ "screenplays_lua_orig_sha256": "aeff5a52d6f65eaf8de3c3129bb580147449a67bc63ac83075dd8ad457291828",
+ "screenplays_lua_staged_sha256": "d8f9b5f701f6150886f53a5a196b6225b22d5e2f66ca3e47702ff194d6d9cbe0",
+ "screenplays_lua_line_endings": "LF",
+ "include_line_inserted_after": "includeFile(\"caves/endor_orphaned_marauder_cave.lua\")",
+ "cave_file_sha256": "f3af20c715e9b390ee2e7d74ca64614ac569582f776decebe79cd48fa64cc174",
+ "luac": "see luac.txt (run after staging)"
+}

@@ -1,0 +1,10 @@
+luac ok managers/planet/hoth_regions.lua
+luac ok mobile/spawn/serverobjects.lua
+luac ok mobile/hoth/serverobjects.lua
+luac ok mobile/hoth/hoth_glacial_rancor.lua
+luac ok mobile/spawn/hoth/hoth_tauntaun_plains.lua
+luac ok mobile/spawn/hoth/hoth_mynock_fields.lua
+luac ok mobile/spawn/hoth/hoth_wampa_flanks.lua
+luac ok mobile/spawn/hoth/hoth_imperial_zone.lua
+luac ok mobile/spawn/hoth/hoth_rebel_zone.lua
+luac ok mobile/spawn/hoth/hoth_scavenger_zone.lua
