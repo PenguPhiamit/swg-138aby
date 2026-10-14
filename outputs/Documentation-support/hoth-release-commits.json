@@ -1,0 +1,343 @@
+{
+  "dev_head": "eccb53e1ee6f491e84ea8dd3ec2a6f0e3ad5d04d",
+  "sandbox_head": "920203d8fa68b9b573cdcfc8df227deaf2811c6a",
+  "scope": "Conservative superset: every unpromoted dev commit, including shared bot/client helpers; unrelated features need not be promoted with Hoth.",
+  "rows": [
+    {
+      "repo": "dev",
+      "commit": "eccb53e1ee6f491e84ea8dd3ec2a6f0e3ad5d04d",
+      "purpose": "Resources: opt-in backfill of in-shift galaxy-wide spawns onto a newly enabled zone (Fable R2)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "1c4c24fbeb6420509d4a0a39757a70739c64079a",
+      "purpose": "Hoth: MTG's ten Hoth-only minerals, gas and fuels in the minimum pool (owner's first survey found none)",
+      "review": "C24 source review; gameplay pending",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "c046e633e4d2f07eb6a4bf1d05342d6bedb726e9",
+      "purpose": "Agent body: a fight checks scene, connection and target with each attack (C22-F1)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "54a3306310efd2dae46b7ffa12c03ea7f9327c7b",
+      "purpose": "Glacial rancor: use the hue-capable rancor body (C22-F2)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "dd16bcff4422959e09b3159524f781ce7ab90524",
+      "purpose": "Hoth regions: named regions for the caves, camps and zones (Fable batch B3)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "e90949601761d8f89f08b4cbd7a1f5f1f9f4621d",
+      "purpose": "Hoth quest: Quartermaster Vell stands still (AI_STATIC, as stock luthik_uwyr)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "5eb140ce54e8eedf0545041fb59294f91cd6445d",
+      "purpose": "Hoth camps: prop headings in radians (spawnSceneObject's heading; they were degrees)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "92d99dba25d50826a7bf4e4655b34224ef958e03",
+      "purpose": "Hoth missions: outpost mission terminals, destroy and deliver missions, a quest chain (Fable batch C)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "de1b679a8cae4cb4f35cbc2fafc3ebc518f2afd7",
+      "purpose": "Hoth camps: six camps and patrol posts in the batch A zones (Fable batch B1)",
+      "review": "C22: heading finding; follow-up fix separately gated",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "69eb77fe0ad8ec554fc79331edd0d04955fbce54",
+      "purpose": "Hoth batch A: eight area spawners on MTG's map; clean-room glacial rancor (not spawned)",
+      "review": "C22: rancor appearance finding; follow-up fix separately gated",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "c5f1ae069fed022a780c47ff6bf57526557a9b02",
+      "purpose": "Hoth ice caves: 129 wampa spawns in MTG's four ice caves (Fable, from Bellum)",
+      "review": "C22: source/geometry checks, client checks pending",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "90f60a814627298fae2e109913c1a1c31e2723b1",
+      "purpose": "Agent body: straight-line moves belong to their scene and need a connection (C4e-F2)",
+      "review": "C22: enclosing fight incomplete",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "23014f39d10dc54b667f821712f97c9c512d075e",
+      "purpose": "Spawn commands: read each spawn area under its lock (C4f-F1)",
+      "review": "C19 addendum + C22, source finding resolved",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+      "purpose": "Sandbox MTG backport batch 2 (Fable): wire 45 unreached templates, 10 new",
+      "review": "C18 reduced sample only",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "0c44d43114da8274170363352d4f78fc9ad3c640",
+      "purpose": "Sandbox MTG backport batch 1 (Fable): real SOE paths, 13 wearables, 3 client paths",
+      "review": "C18 reduced sample only",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "578861d961c8021f590a81598ac2dc1ae92d9ee9",
+      "purpose": "Sandbox: Botanist feasibility test, server side (trainer in Mos Eisley)",
+      "review": "C19: feasibility trainer, client acceptance pending",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "bea94e7a1cc7b080120cd5c5a3b026d7a8e69c3a",
+      "purpose": "Sandbox leash: an indoor step needs both ends on the floor mesh (C4e-F1)",
+      "review": "C19: floor counterexample resolved in source",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "2f205cd2da8330b1784f65f450553af79fef4872",
+      "purpose": "Sandbox Hoth: resources spawn on Hoth",
+      "review": "C19: data/inheritance reviewed; resource gameplay pending",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+      "purpose": "Sandbox Hoth: reward loot (Bellum Gero, AGPL-3.0) on Hoth's creatures",
+      "review": "C19: offline loot checks, no drop acceptance",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "34d4772a90db8fb0b9325c83459b21c3f2882654",
+      "purpose": "Sandbox staff tools: /spawnStatus and /showSpawnRegion (were empty stubs)",
+      "review": "C19: original counter race; fixed separately",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "c402e4809965b7419db07bba7e2284f4c9d3376c",
+      "purpose": "Sandbox Hoth: ordinary creatures, lairs and a world spawner (Bellum Gero, AGPL-3.0)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "9ac7cdcdd195270cbf02f808237ac4761d35f0bb",
+      "purpose": "Agent body: find and tell; replies from an old scene are discarded",
+      "review": "C4e: reviewed",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "421adb1558ca5dc014a32edf2da5f1e31de93fe3",
+      "purpose": "Sandbox /leash: re-check after the cross-lock; prove each step it moves",
+      "review": "C4e: review findings retained",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "5b2a858f195c33cec375ce32538c961f5bab3f62",
+      "purpose": "Sandbox Hoth v1: planet entry, travel point and regions",
+      "review": "C4e: Hoth travel evidence, review findings retained",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "5aadc8b995bb94cc72d0733c5a735eea0f981bb5",
+      "purpose": "Address ChatGPT's C4b/C4c review: test-galaxy guard, leash locking and routes, request ids",
+      "review": "C4d: remaining findings; later fixes separate",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "2970b47e07338d53602ea464239558a13a5d9680",
+      "purpose": "Normalize line endings (LF) in agent body and sandbox command files",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "f25c90f93ba7abb8b617c426f6db89a8f678cbc3",
+      "purpose": "Sandbox test helpers /agentgear and /agentskill; agent body reads mission objects",
+      "review": "C4b/C4c: changes requested",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "220e0f39a1fc325016b7a601dd59978537e46f43",
+      "purpose": "Sandbox /leash: never re-place a follower out of range; naming the leader keeps it on",
+      "review": "C4b/C4c: changes requested",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "09a5620540e0d549bab7983e39a8f4003f21cdeb",
+      "purpose": "Sandbox /leash: server-side follow assist for group members",
+      "review": "C4b/C4c: changes requested",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "3797430a2a524d1b7ae7db00818d350a4993e83e",
+      "purpose": "Agent body: one move deadline, no walking while down, survey, indoor look",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "cde59ec5860764af4836b4748fee87751cddfe9a",
+      "purpose": "Sandbox /agentpath: enforce the 256-point cap, validate input, echo the request",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "697f2002e01c65130bed9f9c7aea69855953ee6a",
+      "purpose": "Agent body: keep re-planning long paths while each leg gets closer",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "5c39f4113763c7581e67f33bf3b1107b83d58134",
+      "purpose": "Sandbox /agentpath: head part of the way when leaving a building for a far target",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "eebdd99de159b9315891a821e284268f85097d40",
+      "purpose": "Sandbox: /agentpath helper for the agent client (bot accounts only)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "a72026b6249c005fac902e109381963b4ade57eb",
+      "purpose": "Agent body: HAM/posture/combat state, combat log, fight reflex, navmesh path walking",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "e1344defb91903b7a964184a689ca55b0d14c5ff",
+      "purpose": "Agent body: inventory, radial menus, SUI pop-ups, mission-list request, ground height",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "ab9eab6e8517f582c4f11c9ebd07815989725b7c",
+      "purpose": "Agent body: acknowledge teleports after planet changes; decode string-table system messages",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "6cdb4aefecf392019ba5c4e08d681457f1adeb01",
+      "purpose": "Track 18 MTG script files hidden by upstream's *test* ignore rule",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "bda2c0dd35ca9eee1a97272b783b16aa4b4132e5",
+      "purpose": "Sandbox world boss rotation and big game hunter (dev, not deployed)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "b942d9b5745c5eeff9e87a34883f57fc3d5c26bd",
+      "purpose": "Agent body reports failed commands; mercenary broker stands still",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "2347100acf7df9a53ebbb96dfa000dd1ec939d13",
+      "purpose": "Sandbox mercenaries: broker NPC at Mos Eisley, hire up to 3 followers that join your fights",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "dcd2f047cd76d692ef9f86c44e52b9bcfaa51c32",
+      "purpose": "core3client: --agent-control remote control mode for the AI agent player",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "h archive tools",
+      "commit": "1291ba02900f3548b7921a9f40cbae3d3f08e752",
+      "purpose": "Format tools in one package, outputs/tools/swgfmt (Fable T1); Fable's R2 resource backfill staging",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "h archive tools",
+      "commit": "c2573e31b909bb7aac3765a1c18195652bfdc638",
+      "purpose": "Archive builder on our own format tools (Fable B1-B3)",
+      "review": "C24: format switch reviewed; isolated format checks pass",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "h archive tools",
+      "commit": "2009167b42a66d5e7a8c8af065aa265f6e457a01",
+      "purpose": "hoth_client_build: Hoth map markers and place names (Fable's B3) in local_planets.tre",
+      "review": "C24: map integration reviewed; owner confirmed 18 markers",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "h archive tools",
+      "commit": "981c60a32656cfbcaf28af99b7044bf9e5fca20f",
+      "purpose": "hoth_client_build: pack the Hoth quest chain's strings as a new string table",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "h archive tools",
+      "commit": "f0b192e9ce15543fdce0904fc9570bc261cfe2b5",
+      "purpose": "hoth_client_build: never read our own archive; publish only after checks (C4f-F2)",
+      "review": "C19/C22: self-input failure resolved",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "h archive tools",
+      "commit": "8ac785775765b2466e413a86ae723622aa059111",
+      "purpose": "Local history for the SWG project (no remote)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    }
+  ]
+}
