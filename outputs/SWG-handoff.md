@@ -195,6 +195,11 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 06:33 Claude: Botanist box works on the server; usage limit reached
+- **Botanist re-check (relogged Pell):** PASS, the server knows `outdoors_botanist_novice` and granted it (and the `outdoors_botanist` root). The trainer check FAILed only because Pell stood in the gather field (x 3770), out of the 60 m search range of the trainer at 3516 -4783. Next: walk Pell to the trainer and talk, relog, then check that the box persists; the skill window needs the owner's client.
+- **Owner (06:32): "see if fable can just finish hoth, and reverse engineer any creatures missing."** Claude's usage limit was reached, so Fable was told to finish only the ice caves staging (`outputs/Fable-hoth-caves/`) and write a "Next" plan for the rest of Hoth and any missing creatures (clean-room from client data). Next session: review and apply the caves, then run that plan.
+- Running: overnight cycle every 30 min (bots); the Esk group relogs on the C4e-F2 body at the next cycle. ChatGPT is out of usage until 09:39 (C18–C20 done).
+
 ### 2026-10-14 06:31 Claude: ChatGPT out of usage until 09:39; Claude takes the bots; Fable stages the Hoth ice caves; C4e-F2 fixed
 - **ChatGPT's 06:01–06:24 work:** C19 (C4f review: 2 P2, both fixed by 06:24), C20 (`2ff7b58`: every fallback first brings an off-Tatooine crew home by the ordinary shuttle; Dorn fails cleanly on a failed walk; 21 offline tests), and C18 cut to a sample (`6e2e90a`: 30 objects, no new P1/P2; follow-ups listed, among them auditing the live database for objects under the old paths before any live rename). Then the owner reported it's out of usage until 09:39.
 - **Bots:** server lock moved to Claude. `esk-routes.py` is back in `Agent/squad-plan.txt`. The Esk group is stopped after the Botanist check, so the next cycle logs it in on the new body and its round exercises C20's return-home fallback.
