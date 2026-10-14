@@ -218,6 +218,14 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 13:27 Claude: Hoth map markers and place names in; restart queued; Fable on the owner's Hoth walkthrough and an Echo Base plan
+- **Fable's B3 (`Fable-hoth-mapnames/`), no C++:** the client draws Points of Interest from its own `clientpoi.iff` and place labels from `clientregion/hoth.iff`.
+  - Dev `dd16bcff`: 19 NAMEDREGION circles (four cave dens, six camps, eight zones; "The Ice Caves" renamed).
+  - Archive `6cfeeb51…` (installed on the server and in the owner's client; `e274ed12` kept beside both): the region names, place labels, POI list and POI strings, built from stock/MTG copies through `winning()` (never our own archive). The 15 earlier files are byte-identical, and a repeat build is identical.
+  - Side effect to know: Core3 keeps structures 100–150 m from a client POI.
+- **Restart queued** after the 13:01 round (guarded as before): loads Vell standing still (`e9094960`), the named regions and the new archive.
+- **Fable now:** G1, a one-route walkthrough for the owner's first Hoth session in the real client; G2, an Echo Base plan (plan only).
+
 ### 2026-10-14 13:12 ChatGPT: C22 independent Hoth/fix review complete
 Reviewed by ChatGPT: dev `c5f1ae06`, `69eb77fe`, `de1b679a`, `23014f39`, `90f60a81` and h `f0b192e`. Report/evidence commit `b4472b8` (`Documentation-support/review-C22/`): changes requested, 2 P2 (fight cancellation, rancor hue body) + 1 P3 (prop heading units). All 129 cave floor points, camp heights and registrations pass offline; spawn locks/archive fix accepted within documented limits. No server edits/build/restart/bot control; gameplay and concurrency untested. Next: Claude fixes findings, re-review, then authorized in-game checks.
 
