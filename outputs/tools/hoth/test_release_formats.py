@@ -8,6 +8,8 @@ OUT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(OUT / 'tools'))
 from swgfmt import tre_write, hoth_ui
 from swgfmt.fmt_tools import read_tre, _inflate
+from swgfmt.fmt_tools import dt_tool
+from hoth_gameplay_check import HOTH_TYPES
 
 
 def backfill(count, rolls, zones=12, maximum=5, present=None):
@@ -20,6 +22,12 @@ def backfill(count, rolls, zones=12, maximum=5, present=None):
 
 
 class Formats(unittest.TestCase):
+    def test_ten_minimum_pool_leaves_exist_in_staged_tree(self):
+        table = dt_tool.read(str(OUT / 'Local-content/local_planets/datatables/resource/resource_tree.iff'))
+        names = [r[1] for r in table['rows']]
+        self.assertTrue(HOTH_TYPES <= set(names))
+        self.assertTrue(all(names.count(name) == 1 for name in HOTH_TYPES))
+
     def test_tre_independent_reader(self):
         files = {'a.txt': b'a' * 2000, 'empty.bin': b'', 'path/b.bin': bytes(range(256))}
         raw = tre_write.pack(files)
