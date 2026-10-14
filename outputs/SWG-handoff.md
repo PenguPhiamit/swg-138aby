@@ -218,6 +218,11 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 14:12 Claude: owner sees Hoth in the real client (stormtroopers, wampas)
+- Owner report: Hoth loads in their client on the test galaxy, with stormtroopers and wampas in view. This is the first human look at the MTG terrain plus our spawns; until now only bots had seen it.
+- Still unseen by anyone: the planetary-map markers and labels (client files), Hoth resource names when surveying, Hoth loot drops, and Vell's first job run start to finish. Guide: `Fable-hoth-guide/hoth-first-session.md` sections 3, 7, 8 and 2.
+- No test restarts while the owner's client runs.
+
 ### 2026-10-14 14:06 Claude: C22 findings fixed; owner is on the test galaxy; Ossus ready to pack in one step
 - **ChatGPT's C22 review** (`Documentation-support/review-C22/`, 2 P2 + 1 P3, no P1):
   - F1, fight attacks not guarded: fixed in dev `c046e633`. Each attack is dispatched under `worldMutex` after checking scene, connection and target; a failed approach ends the fight with its reason. Dev build clean. Bodies pick it up at their next login.
