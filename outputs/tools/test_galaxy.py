@@ -112,6 +112,13 @@ def start(args):
                 local_tre += (f'Core3.ZonesEnabled = (function(t) for _, z in ipairs(t) do if z == "{zone}" then return t end '
                               f'end table.insert(t, "{zone}") return t end)(Core3.ZonesEnabled)\n')
             print(f'  test zones enabled: {", ".join(TEST_ZONES)}', flush=True)
+            # Every start restores a backup from before these zones existed, so the galaxy-wide resource spawns in it
+            # never reach them; dev eccb53e1 (Fable R2) gives them a fair share at load when backfillZones names them.
+            resources = BIN/'scripts/managers/resource_manager.lua'
+            text, count = re.subn(r'(?m)^backfillZones = ""', f'backfillZones = "{",".join(TEST_ZONES)}"', resources.read_text())
+            if count:
+                resources.write_text(text)
+                print(f'  resource backfill onto: {", ".join(TEST_ZONES)}', flush=True)
         # Core3 holds every shuttle for 5 minutes after a start (ShuttleZoneComponent.cpp, BootDelay); until then a travel
         # point has no shuttle and /purchaseTicket fails without a message (14 Oct: bots' tickets failed for minutes
         # after each test restart). The test galaxy starts its shuttles after 30 s; live keeps the stock delay.
