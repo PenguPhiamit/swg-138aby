@@ -16,7 +16,7 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
 1. **Overnight allow rule (needed before the next overnight run):** Run now once and choose "Always allow" for `overnight_cycle.sh`, or add `"Bash(bash /c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/tools/agents/overnight_cycle.sh)"` to `permissions.allow` in `outputs/.claude/settings.local.json`.
    - Also deny or close the 03:01 overnight run that is still waiting on a prompt.
    - Consider removing the broad `Bash(cat >> *)` rule in that file.
-2. **Hoth loot drops:** 3% common decor (ordinary), 5% rare decor (sergeants and named beasts), 2% vehicle deed (named beasts). Keep these rates? The 18 deeds include non-Hoth vehicles (Anakin's podracer, Sith speeder, Mustafar panning droid): keep them, or trim to Hoth-fitting ones?
+2. **Hoth loot drops:** 3% common decor (ordinary), 5% rare decor (sergeants and named beasts), 2% vehicle deed (named beasts). Keep these rates? The 18 deeds include non-Hoth vehicles (Anakin's podracer, Sith speeder, Mustafar panning droid): keep them, or trim to Hoth-fitting ones? **Owner, 14:56: keep all 18 deeds.**
 3. **Fable's planet:** answered 05:38: **Ossus**. Fable's asset plan (05:54) is in `Fable-planet-test/ossus-assets/README.md`: stock art covers a first playable Ossus at $0. Its section 5 lists 6 owner decisions (second-pass CC0 downloads, a $14 pack that needs the author's written OK, the Blender add-on validation F86, a DDS tool install, stock creature bodies, MTG's Mustafar temple ruins). Its other questions (README section 6) are still open.
 4. **Clean-room pilot (F93):** collections or buffs first?
 5. **Discord (C17):** set up a webhook whenever you're ready; nothing gets posted before your go.
@@ -31,13 +31,13 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
    - Option 1: a stock ice-cave building in the mynock fields. It needs one added flatten layer in Hoth's terrain file, which your client loads from our test archive.
    - Option 2: an outdoor den, with no client change.
    - Also: should camps and dens get planetary-map names? That needs map-marker support in the server code first. And vendors at wilderness camps, or at the starport only?
-10. **Ossus (Fable's O1 is staged, `Fable-ossus/README.md`):**
+10. **Ossus (Fable's O1 is staged, `Fable-ossus/README.md`):** **Owner, 14:56: yes, put Ossus into the test-session archive for a first look; Ossus is the next content after Echo Base E0.**
     - **Story point:** ruins after 137 ABY with the Jedi gone to ground, or the Temple standing with Jedi hiding inside?
     - **Imperial garrison** (Krayt's Empire) or not? **Jedi encounters** here at all?
     - **Placement:** fares Corellia ↔ Ossus 3000/1750 like Hoth? Galaxy-map spot near Yavin IV?
     - **Look:** region names (Knossa, Academy Benchland, Imhar Canyon, Eocho Mountains, Adega Lake); the benchland/canyon scale; the placeholder globe and loading tiles until the map art.
     - **May Claude put `ossus.trn` into the test-session `local_planets.tre`** for a first look in your client?
-11. **Species (Fable's research, `Fable-species/README.md`):**
+11. **Species (Fable's research, `Fable-species/README.md`):** **Owner, 14:56: Chiss first.**
     - **Order:** Chiss first (stock art on the human rig, no art risk), then Nautolan and Togruta (the package's art), then Hutt? Or Hutt, Nautolan, Togruta?
     - **Zeltron:** no Zeltron package exists, only EiF's art (held). Hold it, or try a stand-in (a red-skinned human palette)?
     - **Hutt:** a Hutt standing on the human skeleton; acceptable?
@@ -52,8 +52,8 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
 | **C23: Hoth gameplay acceptance** (ChatGPT owns it end to end) | ChatGPT | claimed — ChatGPT, 14 Oct 14:46 | Instructions above the log. Scenario `tools/hoth/hoth_gameplay_check.py`, written offline now, run after Claude's next restart; ChatGPT keeps the fail list until it is empty |
-| **C24: Hoth release gate** (go/no-go) | ChatGPT | claimed — ChatGPT, 14 Oct 14:46 | Instructions above the log. `Documentation-support/hoth-release-gate.md`; ChatGPT gives the "reviewed by" for any Hoth live deploy |
-| **C25: ChatGPT's server-code worktree** | ChatGPT | claimed — ChatGPT, 14 Oct 14:46 | `/opt/swg/Core3-gpt`, branch `gpt/work` (AGENTS.md rule). First job: the silent ticket failure while a travel point has no shuttle (`PurchaseTicketCommand.h:132`) |
+| **C24: Hoth release gate** (go/no-go) | ChatGPT | checkpoint complete — NO-GO, 14 Oct; C23/owner/client gates open | Instructions above the log. `Documentation-support/hoth-release-gate.md`; ChatGPT gives the "reviewed by" for any Hoth live deploy |
+| **C25: ChatGPT's server-code worktree** | ChatGPT | first patch committed 5c41ed62; Claude review/build/game test pending | `/opt/swg/Core3-gpt`, branch `gpt/work` (AGENTS.md rule). First job: the silent ticket failure while a travel point has no shuttle (`PurchaseTicketCommand.h:132`) |
 | **C22: independent Hoth + C4 fix review** | ChatGPT - GPT-6.1 Sol, **High** | complete - changes requested, 14 Oct | `Documentation-support/review-C22/C22-review.md`: 2 P2 + 1 P3; dev `c5f1ae06`, `69eb77fe`, `de1b679a`, `23014f39`, `90f60a81`; h `f0b192e`; report `b4472b8`; gameplay untested |
 | Creature Handler top-tier build research (owner, 14 Oct) | ChatGPT | bounded pass complete — no game benchmarks | `Documentation-support/creature-handler-top-tier-plan.md`; owner wants all three modes; local build closure verified, improvements proposed |
 | Tames discussion (owner, 14 Oct) | Owner + Claude + ChatGPT | open — discussion requested | Note in `Agent/to-claude.md`, 05:49; eligibility, rare/endgame pets, wild vs BE, control budget; no changes approved |
@@ -244,6 +244,11 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-14 14:56 Claude: owner: Fable does content first; order E0, Ossus, species (Chiss), Hoth extras
+- **Owner: "i would prefer fable handle all the content additions first?"** Fable stopped L1 (live client kit) and T2 (refs scanner); its partial L1 notes stay in `Fable-live-client/` with a status line, for ChatGPT or Claude to finish.
+- **Fable now: E0, Echo Base's first look** (`Fable-echo-base/`): fit the NGE building to MTG's three cut-outs, a dev-ready spawn screenplay, the client files it needs, and a one-page owner check for the next client session.
+- **Owner answers:** Ossus is next after E0, and Claude may put Ossus into the test-session archive for a first look (question 10). Chiss first (question 11). Keep all 18 Hoth deeds (question 2). Then the Hoth extras.
 
 ### 2026-10-14 14:51 Claude: Fable R2 (resource backfill) in dev, T1 (format tools package) in h; Fable on L1 (live client) and T2
 - **R2, dev `eccb53e1`:** `backfillZones` in resource_manager.lua (empty by default, so no change on live). At load, each unrestricted in-shift spawn gets a map on the named zone with the chance it would have had at creation; the roll hashes spawn and zone, so later starts decide the same way. Reviewed by Claude (createSpawnMaps keeps existing maps; locked like the top-up). Dev build clean (14:49). `test_galaxy.py` now sets it to the test zones at every start (h `93ffa9e`): every restart restores a pre-Hoth backup. Fable's estimate: about 24 of the 64 in-shift galaxy-wide spawns reach Hoth (16 mineral, 5 chemical, 3 gas). **Untested:** the next restart waits for ChatGPT's C23 run (Esk, started about 14:50, up to 30 minutes). ChatGPT, C24: R2 is the backfill to review.
