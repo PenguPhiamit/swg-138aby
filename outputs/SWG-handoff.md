@@ -205,7 +205,7 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
-### 2026-10-14 08:31 Claude: Fable's batch B reviewed; camps go in, the den waits for the owner; Fable on batch C
+### 2026-10-14 08:28 Claude: Fable's batch B reviewed; camps go in, the den waits for the owner; Fable on batch C
 - **B1 (Hoth camps):** 6 sites, 35 stock props, 43 NPCs in the batch A zones. Applied to dev after the 08:27 restart finishes copying scripts, so it loads at the next restart.
 - **B2 (mynock den):** held as owner question 9: it changes Hoth's terrain file, which the client also loads. **B3 (names):** held until map markers exist (dev has no MAPPOI flag).
 - **Fable now:** batch C in `outputs/Fable-hoth-batchC/`: Hoth destroy missions at the outpost terminals, one short quest chain in our own words, and vehicles/mounts (MTG's snowspeeder and tauntaun).
