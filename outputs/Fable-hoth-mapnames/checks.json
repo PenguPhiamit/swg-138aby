@@ -1,0 +1,443 @@
+{
+ "built": "2026-10-14",
+ "tool": "tools/hoth_names.py",
+ "sites_on": [
+  "frostfang_cavern",
+  "icemaw_den",
+  "snowblind_lair",
+  "matriarch_cavern",
+  "ice_caves",
+  "imperial_forward_camp",
+  "rebel_forward_camp",
+  "scavenger_camp",
+  "raider_camp",
+  "contested_ground",
+  "lucky_despot_wreck",
+  "tauntaun_plains_west",
+  "tauntaun_plains_east",
+  "mynock_fields",
+  "wampa_flanks_west",
+  "wampa_flanks_southeast",
+  "imperial_zone",
+  "rebel_zone",
+  "scavenger_zone"
+ ],
+ "files": {
+  "string/en/hoth_region_names.stf": {
+   "base_bytes": 122,
+   "base_roundtrip": true,
+   "base_keys": 2,
+   "added": 22,
+   "existing": 2,
+   "existing_text_differs": [],
+   "keys": 24,
+   "next_id": 93,
+   "bytes": 1660,
+   "sha256": "be3e74fe450dbed722a54da8aa0864a98f28a2ac8778a7c26eb8bbec5e34c91c"
+  },
+  "datatables/clientregion/hoth.iff": {
+   "base_bytes": 124,
+   "base_roundtrip": true,
+   "base_rows": 1,
+   "added": 19,
+   "existing": 0,
+   "order": "smallest radius first",
+   "bytes": 1024,
+   "sha256": "021b8af9fb533bda00a0f76fc451fdc08a37801f255acca7de2f072358d05d32"
+  },
+  "datatables/clientpoi/clientpoi.iff": {
+   "base_bytes": 15962,
+   "base_roundtrip": true,
+   "base_rows": 220,
+   "added": 18,
+   "existing": 0,
+   "bytes": 17536,
+   "sha256": "48e5668fa97b42319442291b55d7d099a62402b6f926c32aa360667b0e92fbbd"
+  },
+  "string/en/clientpoi_n.stf": {
+   "base_bytes": 16835,
+   "base_roundtrip": true,
+   "base_keys": 233,
+   "added": 18,
+   "existing": 0,
+   "existing_text_differs": [],
+   "keys": 251,
+   "next_id": 252,
+   "bytes": 18224,
+   "sha256": "4df9b237338d22f7a85675ebda894b6481f40ce0d165725b61608241ca60ebf5"
+  },
+  "string/en/clientpoi_d.stf": {
+   "base_bytes": 123900,
+   "base_roundtrip": true,
+   "base_keys": 233,
+   "added": 18,
+   "existing": 0,
+   "existing_text_differs": [],
+   "keys": 251,
+   "next_id": 266,
+   "bytes": 127677,
+   "sha256": "3146aac090fd180250e21656518a9747cda8a6d159915a563166ea11745dd8ab"
+  }
+ },
+ "hoth_marker_rows": [
+  [
+   "@clientpoi_n:hoth_frostfang_cavern",
+   "@clientpoi_d:hoth_frostfang_cavern",
+   "hoth",
+   "",
+   -622.0,
+   0.0,
+   2292.0
+  ],
+  [
+   "@clientpoi_n:hoth_icemaw_den",
+   "@clientpoi_d:hoth_icemaw_den",
+   "hoth",
+   "",
+   -385.0,
+   0.0,
+   2436.0
+  ],
+  [
+   "@clientpoi_n:hoth_snowblind_lair",
+   "@clientpoi_d:hoth_snowblind_lair",
+   "hoth",
+   "",
+   -543.0,
+   0.0,
+   2674.0
+  ],
+  [
+   "@clientpoi_n:hoth_matriarch_cavern",
+   "@clientpoi_d:hoth_matriarch_cavern",
+   "hoth",
+   "",
+   -75.0,
+   0.0,
+   2969.0
+  ],
+  [
+   "@clientpoi_n:hoth_imperial_forward_camp",
+   "@clientpoi_d:hoth_imperial_forward_camp",
+   "hoth",
+   "",
+   2600.0,
+   0.0,
+   -3900.0
+  ],
+  [
+   "@clientpoi_n:hoth_rebel_forward_camp",
+   "@clientpoi_d:hoth_rebel_forward_camp",
+   "hoth",
+   "",
+   -2800.0,
+   0.0,
+   1200.0
+  ],
+  [
+   "@clientpoi_n:hoth_scavenger_camp",
+   "@clientpoi_d:hoth_scavenger_camp",
+   "hoth",
+   "",
+   -1400.0,
+   0.0,
+   -3300.0
+  ],
+  [
+   "@clientpoi_n:hoth_raider_camp",
+   "@clientpoi_d:hoth_raider_camp",
+   "hoth",
+   "",
+   -1200.0,
+   0.0,
+   -3600.0
+  ],
+  [
+   "@clientpoi_n:hoth_contested_ground",
+   "@clientpoi_d:hoth_contested_ground",
+   "hoth",
+   "",
+   2400.0,
+   0.0,
+   200.0
+  ],
+  [
+   "@clientpoi_n:hoth_lucky_despot_wreck",
+   "@clientpoi_d:hoth_lucky_despot_wreck",
+   "hoth",
+   "",
+   -100.0,
+   0.0,
+   -1960.0
+  ],
+  [
+   "@clientpoi_n:hoth_tauntaun_plains_west",
+   "@clientpoi_d:hoth_tauntaun_plains_west",
+   "hoth",
+   "",
+   -3000.0,
+   0.0,
+   -1500.0
+  ],
+  [
+   "@clientpoi_n:hoth_tauntaun_plains_east",
+   "@clientpoi_d:hoth_tauntaun_plains_east",
+   "hoth",
+   "",
+   3000.0,
+   0.0,
+   -1200.0
+  ],
+  [
+   "@clientpoi_n:hoth_mynock_fields",
+   "@clientpoi_d:hoth_mynock_fields",
+   "hoth",
+   "",
+   -2000.0,
+   0.0,
+   -4400.0
+  ],
+  [
+   "@clientpoi_n:hoth_wampa_flanks_west",
+   "@clientpoi_d:hoth_wampa_flanks_west",
+   "hoth",
+   "",
+   -1800.0,
+   0.0,
+   3200.0
+  ],
+  [
+   "@clientpoi_n:hoth_wampa_flanks_southeast",
+   "@clientpoi_d:hoth_wampa_flanks_southeast",
+   "hoth",
+   "",
+   1200.0,
+   0.0,
+   1500.0
+  ],
+  [
+   "@clientpoi_n:hoth_imperial_zone",
+   "@clientpoi_d:hoth_imperial_zone",
+   "hoth",
+   "",
+   2500.0,
+   0.0,
+   -3500.0
+  ],
+  [
+   "@clientpoi_n:hoth_rebel_zone",
+   "@clientpoi_d:hoth_rebel_zone",
+   "hoth",
+   "",
+   -2500.0,
+   0.0,
+   1000.0
+  ],
+  [
+   "@clientpoi_n:hoth_scavenger_zone",
+   "@clientpoi_d:hoth_scavenger_zone",
+   "hoth",
+   "",
+   -1500.0,
+   0.0,
+   -3200.0
+  ]
+ ],
+ "label_rows": [
+  [
+   "@hoth_region_names:frostfang_cavern",
+   -622.0,
+   2292.0,
+   40.0
+  ],
+  [
+   "@hoth_region_names:icemaw_den",
+   -385.0,
+   2436.0,
+   40.0
+  ],
+  [
+   "@hoth_region_names:snowblind_lair",
+   -543.0,
+   2674.0,
+   40.0
+  ],
+  [
+   "@hoth_region_names:matriarch_cavern",
+   -75.0,
+   2969.0,
+   60.0
+  ],
+  [
+   "@hoth_region_names:lucky_despot_wreck",
+   -100.0,
+   -1960.0,
+   60.0
+  ],
+  [
+   "@hoth_region_names:imperial_forward_camp",
+   2600.0,
+   -3900.0,
+   80.0
+  ],
+  [
+   "@hoth_region_names:rebel_forward_camp",
+   -2800.0,
+   1200.0,
+   80.0
+  ],
+  [
+   "@hoth_region_names:scavenger_camp",
+   -1400.0,
+   -3300.0,
+   80.0
+  ],
+  [
+   "@hoth_region_names:raider_camp",
+   -1200.0,
+   -3600.0,
+   80.0
+  ],
+  [
+   "@hoth_region_names:contested_ground",
+   2400.0,
+   200.0,
+   150.0
+  ],
+  [
+   "@hoth_region_names:hothstarport",
+   0.0,
+   -2000.0,
+   250.0
+  ],
+  [
+   "@hoth_region_names:ice_caves",
+   -400.0,
+   2600.0,
+   450.0
+  ],
+  [
+   "@hoth_region_names:wampa_flanks_southeast",
+   1200.0,
+   1500.0,
+   700.0
+  ],
+  [
+   "@hoth_region_names:wampa_flanks_west",
+   -1800.0,
+   3200.0,
+   900.0
+  ],
+  [
+   "@hoth_region_names:scavenger_zone",
+   -1500.0,
+   -3200.0,
+   900.0
+  ],
+  [
+   "@hoth_region_names:mynock_fields",
+   -2000.0,
+   -4800.0,
+   1200.0
+  ],
+  [
+   "@hoth_region_names:imperial_zone",
+   2500.0,
+   -3500.0,
+   1200.0
+  ],
+  [
+   "@hoth_region_names:rebel_zone",
+   -2500.0,
+   1000.0,
+   1200.0
+  ],
+  [
+   "@hoth_region_names:tauntaun_plains_east",
+   3000.0,
+   -1200.0,
+   1500.0
+  ],
+  [
+   "@hoth_region_names:tauntaun_plains_west",
+   -3000.0,
+   -1500.0,
+   1800.0
+  ]
+ ],
+ "verify": {
+  "string/en/hoth_region_names.stf": {
+   "roundtrip": true,
+   "keys": 24,
+   "duplicate_keys": 0,
+   "ids_unique": true
+  },
+  "datatables/clientregion/hoth.iff": {
+   "roundtrip": true,
+   "rows": 20,
+   "names_resolve": true,
+   "sites_present": true
+  },
+  "datatables/clientpoi/clientpoi.iff": {
+   "roundtrip": true,
+   "rows": 238,
+   "hoth_rows": 18,
+   "names_resolve": true,
+   "sites_present": true
+  },
+  "string/en/clientpoi_n.stf": {
+   "roundtrip": true,
+   "keys": 251,
+   "duplicate_keys": 0,
+   "ids_unique": true
+  },
+  "string/en/clientpoi_d.stf": {
+   "roundtrip": true,
+   "keys": 251,
+   "duplicate_keys": 0,
+   "ids_unique": true
+  },
+  "ok": true
+ },
+ "second_pass_with_staged_base": {
+  "string/en/hoth_region_names.stf": {
+   "added": 0,
+   "identical": true
+  },
+  "datatables/clientregion/hoth.iff": {
+   "added": 0,
+   "identical": true
+  },
+  "datatables/clientpoi/clientpoi.iff": {
+   "added": 0,
+   "identical": true
+  },
+  "string/en/clientpoi_n.stf": {
+   "added": 0,
+   "identical": true
+  },
+  "string/en/clientpoi_d.stf": {
+   "added": 0,
+   "identical": true
+  }
+ },
+ "held_and_large_first_scratch": {
+  "sites": 21,
+  "hoth_markers": 20,
+  "label_rows": 22,
+  "first_label": "@hoth_region_names:tauntaun_plains_west"
+ },
+ "snippet_rows": 18,
+ "apply_sh": {
+  "selftest": "PASSED (every mode on scratch copies)",
+  "check_against_dev": "line patches to apply: 2, refused: 0",
+  "scratch_apply": "hoth_regions.lua 34 -> 56 lines, luac ok, second apply: already applied: 2",
+  "lua53_load": {
+   "rows": 34,
+   "named": 19,
+   "duplicate_names": 0,
+   "ice_caves_flags": 272
+  }
+ },
+ "core3_dev": "e9094960 (read-only)"
+}

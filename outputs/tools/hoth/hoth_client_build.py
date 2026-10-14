@@ -371,6 +371,26 @@ def quest_strings():
     return [f'{path}: new table, {len(back)} strings, read back {"same" if back == entries else "DIFFERS"}']
 
 
+# Hoth map markers and place names (Fable's batch B3, outputs/Fable-hoth-mapnames): no C++, the client's own tables.
+# region names (string/en/hoth_region_names.stf), place labels (datatables/clientregion/hoth.iff), the "Points of
+# Interest" map list (datatables/clientpoi/clientpoi.iff + clientpoi_n/_d.stf). Fable's function takes a base reader;
+# ours never returns our own archive's copy (C4f-F2).
+sys.path.insert(0, os.path.join(H, 'outputs', 'Fable-hoth-mapnames', 'tools'))
+import hoth_names  # noqa: E402  (Fable's)
+
+
+def stock_copy(path):
+    try:
+        return winning(path)[1]
+    except KeyError:
+        return None
+
+
+def map_names():
+    report = hoth_names.stage_hoth_names(STAGE, base=stock_copy)
+    return [f'{rel}: {info["bytes"]} bytes' for rel, info in report['files'].items()] + report.get('notes', [])
+
+
 def check_ui_newlines(path):
     """The stock .inc files use CRLF; ui.load() normalises to LF, so make sure we wrote CRLF back."""
     raw = open(src(path), 'rb').read()
@@ -396,6 +416,8 @@ def main():
         print('botanist:', line)
     for line in quest_strings():
         print('quest strings:', line)
+    for line in map_names():
+        print('map names:', line)
     tre_pack.pack(STAGE, tre_new)
     staged = {os.path.relpath(os.path.join(d, f), STAGE).replace(os.sep, '/'): os.path.join(d, f)
               for d, _, fs in os.walk(STAGE) for f in fs}

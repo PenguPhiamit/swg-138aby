@@ -1,0 +1,22 @@
+key	kind	status	x	y	radius	marker	region	marker_x	marker_y	name	description
+frostfang_cavern	cave	on	-622	2292	40	1	1			Frostfang's Cavern	An ice cave at the western foot of the massif. Wampas den in its tunnels under the elder the scavengers call Frostfang.
+icemaw_den	cave	on	-385	2436	40	1	1			Icemaw's Den	The deepest of the ice caves: a long descent through wampa dens to the lair of the elder known as Icemaw.
+snowblind_lair	cave	on	-543	2674	40	1	1			Snowblind's Lair	A wampa den in the ice caves. The pack here hunts in the blizzards that give the lair its name.
+matriarch_cavern	cave	on	-75	2969	60	1	1			The Matriarch's Cavern	The largest of the ice caves and the heart of the wampa dens. The matriarch of the massif holds its last chamber.
+ice_caves	area	on	-400	2600	450	0	existing			The Ice Caves	The ice caves of the northern massif: four wampa dens cut into the glacier.
+mynock_den	cave	held	-2000	-4800	60	1	1			Mynock Den	A cave in the southern mynock fields where ice mynocks roost in their thousands.
+rancor_grounds	poi	held	600	-4600	200	1	1			Glacial Rancor Grounds	A glacial valley south of the outpost. Scavengers tell of a rancor that hunts here.
+imperial_forward_camp	camp	on	2600	-3900	80	1	1			Imperial Forward Camp	Snowtrooper forward camp on the eastern plains: patrols, a salvage detail and an Imperial recruiter.
+rebel_forward_camp	camp	on	-2800	1200	80	1	1			Rebel Forward Camp	Rebel forward camp in the northwest: snow soldiers, a sergeant and an Alliance recruiter.
+scavenger_camp	camp	on	-1400	-3300	80	1	1			Scavengers' Camp	Camp of the Scavenger Starport's salvage crews, southwest of the outpost. A junk dealer trades here.
+raider_camp	camp	on	-1200	-3600	80	1	1			Raiders' Camp	Camp of the scavenger raiders who prey on salvage crews and travellers in the southwest.
+contested_ground	camp	on	2400	200	150	1	1			Contested Ground	The skirmish line between the Imperial and Rebel patrols. Expect fighting.
+lucky_despot_wreck	camp	on	-100	-1960	60	1	1			Lucky Despot Wreck	The debris field beside the Scavenger Starport, picked over by the outpost's salvage detail.
+tauntaun_plains_west	zone	on	-3000	-1500	1800	1	1			Western Tauntaun Plains	Open snowfields west of the outpost where tauntaun herds graze: the easiest hunting on Hoth.
+tauntaun_plains_east	zone	on	3000	-1200	1500	1	1			Eastern Tauntaun Plains	Open snowfields east of the outpost where tauntaun herds graze.
+mynock_fields	zone	on	-2000	-4800	1200	1	1	-2000	-4400	Mynock Fields	The southern fields where ice mynock packs roost and raiders camp.
+wampa_flanks_west	zone	on	-1800	3200	900	1	1			Western Wampa Flanks	The foothills below the ice caves, hunting ground of the wampas.
+wampa_flanks_southeast	zone	on	1200	1500	700	1	1			Southeastern Wampa Flanks	The foothills southeast of the ice caves, hunting ground of the wampas.
+imperial_zone	zone	on	2500	-3500	1200	1	1			Imperial Patrol Zone	Snowtrooper patrols and salvage teams work this eastern ground.
+rebel_zone	zone	on	-2500	1000	1200	1	1			Rebel Patrol Zone	Rebel snow patrols hold the northwest.
+scavenger_zone	zone	on	-1500	-3200	900	1	1			Scavenger Country	Scavenger country southwest of the outpost: raider camps, tauntaun herds and mynock packs.

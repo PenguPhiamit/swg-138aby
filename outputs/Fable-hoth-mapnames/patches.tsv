@@ -1,0 +1,3 @@
+# <file under MMOCoreORB/bin/scripts>	<after|before|before-file|append|replace>	<anchor line | old line>	<new line | snippet>; \t = tab, \\ = backslash
+managers/planet/hoth_regions.lua	replace	\t{"hoth_ice_caves_nobuild", -400, 2600, {CIRCLE, 450}, NOBUILDZONEAREA},	\t{"@hoth_region_names:ice_caves", -400, 2600, {CIRCLE, 450}, NAMEDREGION + NOBUILDZONEAREA},
+managers/planet/hoth_regions.lua	before-file	\t-- World spawner: lairs, herds and patrols from mobile/spawn/hoth/hoth_world.lua (as Bellum Gero, 1024 at most).	snippets/hoth_regions_named.lua

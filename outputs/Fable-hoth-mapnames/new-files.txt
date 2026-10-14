@@ -1,0 +1,1 @@
+# batch B3 adds no new script files; the region rows go in through patches.tsv (snippets/hoth_regions_named.lua)
