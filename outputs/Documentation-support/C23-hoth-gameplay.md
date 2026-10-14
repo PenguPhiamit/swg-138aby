@@ -49,6 +49,6 @@ Saved evidence: `Bot-reports/Esk/20261014-150233-hoth_gameplay_check.json`, `Bot
 
 Added tool/boss-armor preflight before any travel, searches for tools across crew, uses the tool owner for surveys/sample, logs best concentration explicitly, stops after compromised field traversal, and invokes ordinary death recovery before return. Seven offline fixtures and compilation pass. These changes do not retroactively validate this run or prove the armor marker guarantees survival. No second gameplay hunt was started with the unprepared crew.
 
-## Cleanup complete — run 20261014-150333, report 20261014-150600
+## Cleanup complete — report 20261014-150600
 
 `Bot-reports/Esk/20261014-150600-esk-recover-home.json`: **11/11 PASS**, 145 s. Start-of-run normal death recovery changed Esk from dead to upright; ordinary Hoth -> Corellia -> Tatooine shuttle travel passed. All three crew are home; final squad status checked before restoring `esk-routes.py` to the overnight plan. No staff commands, teleport, server restart or account changes. This validates the separate return-only recovery, not the revised C23 finally block or blocked gameplay checks. Driver claim released to the existing board owner after cleanup.
