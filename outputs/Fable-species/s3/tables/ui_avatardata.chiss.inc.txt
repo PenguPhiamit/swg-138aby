@@ -1,0 +1,16 @@
+<Data
+				appearancefemale='object/creature/player/shared_chiss_female.iff'
+				appearancemale='object/creature/player/shared_chiss_male.iff'
+				cameraoffsetmaxy='1.6'
+				cameraoffsetmaxz='1'
+				cameraoffsety='0.9'
+				cameraoffsetz='5'
+				description='@player_species:desc_chiss'
+				displayname='@player_species:name_chiss'
+				localdescription='[@player_species:desc_chiss]'
+				localdisplayname='[@player_species:name_chiss]'
+				LocalText='[@player_species:name_chiss]'
+				Name='chiss'
+				skill='species_chiss'
+				Text='@player_species:name_chiss'
+			/>

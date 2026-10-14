@@ -1,0 +1,181 @@
+{
+ "files": {
+  "s3/staged/MMOCoreORB/bin/scripts/object/creature/player/chiss_female.lua": {
+   "bytes": 1774,
+   "sha256": "271701063df28c1c69ce644a01d25acc5b0087cb62388ec0e650d585609f196d"
+  },
+  "s3/staged/MMOCoreORB/bin/scripts/object/creature/player/chiss_male.lua": {
+   "bytes": 2199,
+   "sha256": "05e92895ab435ef63c6f03a59906a913f6c6d4a9b7850b63a5865a5a5f224b1a"
+  },
+  "s3/snippets/objects_chiss.lua": {
+   "bytes": 801,
+   "sha256": "1f1549820de1009cc6617520e2d87fbab1852bf43217eeedaf2c1f21e6360e52"
+  },
+  "s3/tables/chiss-rows.json": {
+   "bytes": 47531,
+   "sha256": "c5bb26794242072a1394c536386fc71f2cda92b1b6137dcd6da862357efb2272"
+  },
+  "s3/tables/default_pc_equipment.chiss1.ptmp": {
+   "bytes": 260,
+   "sha256": "767786857ead7bb159f312dfca146572711ffcfa779ca1fe2ab7a3dfc04322e9"
+  },
+  "s3/tables/default_pc_equipment.chiss2.ptmp": {
+   "bytes": 197,
+   "sha256": "4b8e0c46ce3b86fda9f3c92f5247436efda435e35c9bf0891a293e60ec95fcc4"
+  },
+  "s3/tables/default_pc_hairstyles.chiss1.ptmp": {
+   "bytes": 2459,
+   "sha256": "fd86f7f5629ad10854c6266a09d78ae6d6c6bb43c9caf4506d3888966cbbc401"
+  },
+  "s3/tables/default_pc_hairstyles.chiss2.ptmp": {
+   "bytes": 2483,
+   "sha256": "dc8255321f0b7133ff06103430e3906bf86c8d774bbab746ce3bc41ad7600494"
+  },
+  "s3/tables/profession_defaults_combat_brawler.chiss1.ptmp": {
+   "bytes": 331,
+   "sha256": "f7cc7f80b2aa2da3cd97d4064636976b02f21f4b35a1ab938d37d95152f0e491"
+  },
+  "s3/tables/profession_defaults_combat_brawler.chiss2.ptmp": {
+   "bytes": 333,
+   "sha256": "d4bfc2b2639a7743167315c77f68ef52a6733c7e53706890f604a8abd28bb706"
+  },
+  "s3/tables/profession_defaults_combat_marksman.chiss1.ptmp": {
+   "bytes": 265,
+   "sha256": "b314b884dc18480e3dca5e267174d88a016fe7288868eaad96dd7ab0f086fc74"
+  },
+  "s3/tables/profession_defaults_combat_marksman.chiss2.ptmp": {
+   "bytes": 329,
+   "sha256": "345072bb8b7915c8adcd185dd302f8efa9a0f2959ccb7430d8e71dc9c0e15b48"
+  },
+  "s3/tables/profession_defaults_crafting_artisan.chiss1.ptmp": {
+   "bytes": 263,
+   "sha256": "b56d84ddb42d87ce7fdedbd8c4c52238f4141da16d53035a6ebcb84c173c04ca"
+  },
+  "s3/tables/profession_defaults_crafting_artisan.chiss2.ptmp": {
+   "bytes": 265,
+   "sha256": "d1dcfde26b5a4d635694ab981d2355e674aad45cbf0942736800a02294db8d5e"
+  },
+  "s3/tables/profession_defaults_outdoors_scout.chiss1.ptmp": {
+   "bytes": 327,
+   "sha256": "c498046f0054c3997e0c710d5e06a2967d0b510940f02dc8e705b0d3b5c28218"
+  },
+  "s3/tables/profession_defaults_outdoors_scout.chiss2.ptmp": {
+   "bytes": 265,
+   "sha256": "8bd69125f1871b0bfc77dceb53c352259b7e35df9a3a79679700a305b9900aa2"
+  },
+  "s3/tables/profession_defaults_science_medic.chiss1.ptmp": {
+   "bytes": 331,
+   "sha256": "c94a7de65d1ddcda6b971dc2af061a9b644d9733c149dbc8abe1043626f3144a"
+  },
+  "s3/tables/profession_defaults_science_medic.chiss2.ptmp": {
+   "bytes": 273,
+   "sha256": "e3cb7e2ac3fbe9e9862118dadc72a7ad95110ac6c96a31abc1269f49c66a0ff1"
+  },
+  "s3/tables/profession_defaults_social_entertainer.chiss1.ptmp": {
+   "bytes": 263,
+   "sha256": "5b07edce90fc69b73c7ab472da081c5fcb528eb2fbf7cc7804ca4d34951209bc"
+  },
+  "s3/tables/profession_defaults_social_entertainer.chiss2.ptmp": {
+   "bytes": 265,
+   "sha256": "91828524b90bb709e4bea72c7dd0139e90755740649a45afb13f910243894d16"
+  },
+  "s3/tables/ui_avatardata.chiss.inc.txt": {
+   "bytes": 581,
+   "sha256": "61f36fcbb58dd106040d23e9bcb5b9f3c706b9166ec9db8a73664a30fffb7951"
+  },
+  "s3/patches.tsv": {
+   "bytes": 590,
+   "sha256": "4ac7c10b0cb5eae841bd75a6c678dd3b2893eef66da8994d9698f1eae0c0216c"
+  },
+  "s3/new-files.txt": {
+   "bytes": 176,
+   "sha256": "b1f4dd7588c0c30373704d6be2094e07f72f65f5805227341c632e9bffb55559"
+  },
+  "provenance.json": {
+   "bytes": 11359,
+   "sha256": "2f505e6afd3f394a2f33c943cda1ba6561084362aeff49ee09d3ca928b8bf1ca"
+  }
+ },
+ "logs": {
+  "selftest.txt": [
+   "== selftest in /tmp/tmp.d5t1vRqfpP: check",
+   "new files: 1   identical already: 0   line patches to apply: 6   already applied: 0   refused: 0",
+   "  would patch (after): a/list.lua",
+   "  would patch (before): a/list.lua",
+   "  would patch (before-file): a/list.lua",
+   "  would patch (append): a/list.lua",
+   "  would patch (after): a/list.lua",
+   "  would patch (replace): a/list.lua",
+   "  would copy: a/new.lua",
+   "--check: nothing changed.",
+   "== selftest: apply",
+   "new files: 1   identical already: 0   line patches to apply: 6   already applied: 0   refused: 0",
+   "  copied a/new.lua",
+   "  patched a/list.lua (after): 7 -> 8 lines",
+   "  patched a/list.lua (before): 8 -> 9 lines",
+   "  patched a/list.lua (before-file): 9 -> 12 lines",
+   "  patched a/list.lua (append): 12 -> 14 lines",
+   "  patched a/list.lua (after): 14 -> 15 lines",
+   "  patched a/list.lua (replace): 15 -> 15 lines",
+   "  luac ok a/new.lua",
+   "  luac ok a/list.lua",
+   "  luac ok a/list.lua",
+   "  luac ok a/list.lua",
+   "  luac ok a/list.lua",
+   "  luac ok a/list.lua",
+   "  luac ok a/list.lua",
+   "== selftest: result matches the expected file",
+   "== selftest: second apply must change nothing",
+   "== selftest: idempotent",
+   "SELFTEST PASSED"
+  ],
+  "apply-check.txt": [
+   "new files: 2   identical already: 0   line patches to apply: 3   already applied: 0   refused: 0",
+   "  would patch (append): object/creature/player/objects.lua",
+   "  would patch (after): object/creature/player/serverobjects.lua",
+   "  would patch (after): object/creature/player/serverobjects.lua",
+   "  would copy: object/creature/player/chiss_female.lua",
+   "  would copy: object/creature/player/chiss_male.lua",
+   "--check: nothing changed."
+  ],
+  "dev-check.txt": [
+   "luac ok object/creature/player/chiss_female.lua",
+   "luac ok object/creature/player/chiss_male.lua",
+   "luac ok snippets/objects_chiss.lua",
+   "== names must be free in dev",
+   "free    object_creature_player_chiss_male",
+   "free    object_creature_player_chiss_female",
+   "free    object_creature_player_shared_chiss_male",
+   "== anchor occurs once",
+   "1",
+   "== stock race templates in dev for comparison",
+   "20",
+   "== the species skill the template grants (expected absent until skills.iff carries it)",
+   "0"
+  ]
+ },
+ "summary": {
+  "selftest_passed": true,
+  "apply_check_refused": [],
+  "dev_check_problems": [],
+  "chiss_rows_per_table": {
+   "racial_mods.iff": 1,
+   "attribute_limits.iff": 1,
+   "customization_data.iff": 42,
+   "customization_group_instance.iff": 10,
+   "hair_assets_skill_mods.iff": 79,
+   "palette_columns.iff": 2,
+   "allow_bald.iff": 2
+  },
+  "chiss_iff_fragments": 16,
+  "tables_with_schema_drift": [
+   "racial_mods.iff",
+   "customization_data.iff",
+   "customization_group_instance.iff",
+   "hair_assets_skill_mods.iff",
+   "palette_columns.iff"
+  ],
+  "staged_file_count": 24
+ }
+}

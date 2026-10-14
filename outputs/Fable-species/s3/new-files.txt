@@ -1,0 +1,3 @@
+# new files under MMOCoreORB/bin/scripts (copied by apply.sh; refused if a different file exists)
+object/creature/player/chiss_female.lua
+object/creature/player/chiss_male.lua

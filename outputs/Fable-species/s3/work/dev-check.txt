@@ -1,0 +1,13 @@
+luac ok object/creature/player/chiss_female.lua
+luac ok object/creature/player/chiss_male.lua
+luac ok snippets/objects_chiss.lua
+== names must be free in dev
+free    object_creature_player_chiss_male
+free    object_creature_player_chiss_female
+free    object_creature_player_shared_chiss_male
+== anchor occurs once
+1
+== stock race templates in dev for comparison
+20
+== the species skill the template grants (expected absent until skills.iff carries it)
+0

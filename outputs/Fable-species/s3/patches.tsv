@@ -1,0 +1,4 @@
+# <file under MMOCoreORB/bin/scripts>	<after|before|before-file|append|replace>	<anchor line | marker>	<new line | snippet>
+object/creature/player/objects.lua	append	object_creature_player_shared_chiss_male	snippets/objects_chiss.lua
+object/creature/player/serverobjects.lua	after	includeFile("creature/player/zabrak_male.lua")	includeFile("creature/player/chiss_female.lua") -- Sandbox: Chiss (Fable species S3)
+object/creature/player/serverobjects.lua	after	includeFile("creature/player/zabrak_male.lua")	includeFile("creature/player/chiss_male.lua") -- Sandbox: Chiss (Fable species S3)

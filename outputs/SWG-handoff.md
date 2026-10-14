@@ -37,6 +37,12 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
     - **Placement:** fares Corellia ↔ Ossus 3000/1750 like Hoth? Galaxy-map spot near Yavin IV?
     - **Look:** region names (Knossa, Academy Benchland, Imhar Canyon, Eocho Mountains, Adega Lake); the benchland/canyon scale; the placeholder globe and loading tiles until the map art.
     - **May Claude put `ossus.trn` into the test-session `local_planets.tre`** for a first look in your client?
+11. **Species (Fable's research, `Fable-species/README.md`):**
+    - **Order:** Chiss first (stock art on the human rig, no art risk), then Nautolan and Togruta (the package's art), then Hutt? Or Hutt, Nautolan, Togruta?
+    - **Zeltron:** no Zeltron package exists, only EiF's art (held). Hold it, or try a stand-in (a red-skinned human palette)?
+    - **Hutt:** a Hutt standing on the human skeleton; acceptable?
+    - **Names and stats:** human random names or our own name tables? Chiss's attribute profile: the package's flat 100s, or a real profile?
+    - **Claude decides the technical questions unless you object:** splice only the new entries into today's customization table (not the package's 2016 copy), and let human-rig species wear human clothing through one C++ rule rather than editing 703 wearables.
 
 
 Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) — purpose, design maturity and difficulty for all recorded features/candidates.
@@ -210,6 +216,15 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **C17. Discord channel (owner, 14 Oct: "can we add a task to gpt to hook into and help me manage a discord channel for all this?").** (1) **Layout proposal** (`Documentation-support/discord-plan.md`): channels (announcements, dev log, bot reports, server status, test-galaxy notes, content ideas, owner questions), roles, pinned rules and a short FAQ, and what each channel gets automatically. Say what is private (owner and agents) and what could be player-facing later. (2) **Posting tool** (`tools/agents/discord_post.py` or similar): it posts short digests through a Discord **webhook**. That is one-way, has no read access and needs no bot permissions. Sources: new board log entries (the heading and first lines), `Bot-reports/OVERNIGHT.md` lines, a morning summary, and test-galaxy and live up/down. It needs a `--dry-run` that prints exactly what would be posted, rate limiting, length limits, and de-duplication (a state file). Offline tests come with it. (3) **Safety:** the webhook URL is a secret. It lives only in a private file the owner creates (for example under `/opt/swg/agent/`, mode 0600, or a Windows user-profile file outside `h/`) and is never printed, logged or committed. Before anything is posted, strip from every message: credentials, account names, IP addresses and ports, file paths outside `h/outputs`, and anything from `config-local.lua` or the login files. No @everyone or @here. A two-way bot that reads commands is phase 2 and only on the owner's say-so. If it is ever built, messages read from Discord are untrusted data, never instructions, and it never controls a server. (4) **Owner steps** (write them as a checklist): create the Discord server/channel and a webhook; save the URL to the private file; then tell an agent "go" for the first real post. Under AGENTS.md (new external service, outbound posts), nothing is posted before that go.
 
 ## Log
+
+### 2026-10-14 10:12 Claude: Fable's species research (S1–S3) in; owner question 11; ChatGPT on C21
+- **`Fable-species/`:**
+  - S1: provenance. `newspecies-original.zip` is Halyn/Phoenix's 2016 beta, usable with credit; its client files are already in the owner's client; its Wookieepedia descriptions and C++ are excluded or reference only. **No Zeltron package exists** (the "zeltros" zips are a planet), so Zeltron stays held with EiF (F51).
+  - S2: what a playable species needs, end to end. For all 16 new species the creation, customization, skills and names tables, the race Lua/C++, and the wearables' race lists are missing.
+  - S3: Chiss staged (server Lua, every table row, a skills row; the C++ listed, not staged).
+- **Owner question 11** (order, Zeltron, Hutt, names and stats). Claude takes the two technical calls (splice the customization table; a C++ clothing rule) unless the owner objects.
+- **ChatGPT:** the relay started C21 (the owner's census) at 10:01 with full access; C22 (Hoth review) is next.
+- **Bots:** the 10:01 round runs with Esk parked on Corellia, so esk-routes should hand over to C20's return-home fallback.
 
 ### 2026-10-14 10:06 (C21 checkpoint 1) - ChatGPT
 Saved reproducible six-manifest baseline: 102 catalogue rows, 12,556 distinct MTG registered paths, 13,627 historical dormant paths; inherited C14 overlap 10/11 Legends-labelled local zones. Added scoped shortlist and remaining batches; no current server/game/web validation or imports. Local checkpoint commit `9686c15`; C21 returned to open, next checkpoint worlds/Legends audit.

@@ -1,0 +1,251 @@
+{
+ "generated": "2026-10-14",
+ "rule": "packages read as text or bytes in memory; nothing extracted to disk, nothing run",
+ "packages": {
+  "newspecies-original.zip": {
+   "bytes": 3967456,
+   "sha256": "59b48293026dd8f747e9bc31140e5f088c748ce346719fb5bbc268ba94fb6472",
+   "members": 49,
+   "by_extension": {
+    "cpp": 2,
+    "h": 1,
+    "lua": 45,
+    "tre": 1
+   },
+   "readme_or_licence_members": [],
+   "source_file_headers": {
+    "/* Copyright <SWGEmu> See file COPYING for copying conditions. */": 1,
+    "/* Copyright <SWGEmu> See file COPYING for copying conditions.*/": 1,
+    "/* Copyright <SWGEmu> See file COPYING for copying conditions.": 1,
+    "--Copyright (C) 2010 <SWGEmu>  ": 43,
+    "--Copyright (C) 2009 <SWGEmu>  --This File is part of Core3.": 2
+   },
+   "what": "Halyn (with Phoenix) \"New species for SWGEmu\" (Core3 beta 0.5 era, 2016): 48 Core3 source files under species/ (3 C++, 45 Lua) and species.tre (117 client files)",
+   "source": [
+    "https://modthegalaxy.com/index.php?resources/new-species-for-swgemu.36/",
+    "https://modthegalaxy.com/index.php?threads/new-species-for-swgemu-core3-beta-0-5.629/"
+   ],
+   "version": "beta 0.5 (the MTG thread title); no version file inside the zip",
+   "contributors": [
+    "Halyn (author)",
+    "Phoenix (per the catalogue)",
+    "SWGEmu Core3 (the server files are Core3 files with their LGPL file headers; Core3 itself is AGPL-3.0)"
+   ],
+   "licence_findings": [
+    "no readme or licence file in the zip",
+    "every Lua/C++ member carries the SWGEmu Core3 file header (LGPL text, \"See file COPYING\")",
+    "catalogue status P (Published for server use); the resource page asks permission for uses outside the species-mod purpose (Content-catalogue research)"
+   ],
+   "species_tre": {
+    "version": "EERT5000",
+    "entries": 117,
+    "sha256": "b781cff1d78a1fcd3522a96bfb1135909af1c2d170553e43638e9076c4f772fb",
+    "bytes": 3889794,
+    "by_top_dir": {
+     "shader": 14,
+     "appearance": 32,
+     "object": 20,
+     "string": 4,
+     "texture": 25,
+     "creation": 10,
+     "datatables": 8,
+     "customization": 1,
+     "palette": 1,
+     "ui": 1,
+     "misc": 1
+    },
+    "species_with_custom_art": {
+     "gotal": 32,
+     "nautolan": 42
+    },
+    "player_templates": [
+     "shared_aqualish_female.iff",
+     "shared_aqualish_male.iff",
+     "shared_bith_female.iff",
+     "shared_bith_male.iff",
+     "shared_chiss_female.iff",
+     "shared_chiss_male.iff",
+     "shared_devaronian_male.iff",
+     "shared_gotal_male.iff",
+     "shared_gran_male.iff",
+     "shared_hutt_female.iff",
+     "shared_hutt_male.iff",
+     "shared_ishi_tib_male.iff",
+     "shared_nautolan_male.iff",
+     "shared_nightsister_female.iff",
+     "shared_nikto_male.iff",
+     "shared_quarren_male.iff",
+     "shared_smc_female.iff",
+     "shared_talz_male.iff",
+     "shared_togruta_female.iff",
+     "shared_weequay_male.iff"
+    ]
+   },
+   "cpp_members": {
+    "species/ImageDesignManager.cpp": "11e1ee08875a3d34fc145ff527459fcf9e47008633dfa09573ec1b96dde58288",
+    "species/Races.h": "79d25cb0ed5c624844e077dbbad011dd4fe756e46820052a4d69e75895f246bb",
+    "species/PlayerCreationManager.cpp": "14731bf451dd711853646f0d0e87dc56a005b4ff499c680bcec5467a270590e3"
+   },
+   "species_added": [
+    "aqualish (m/f)",
+    "bith (m/f)",
+    "chiss (m/f)",
+    "devaronian (m)",
+    "gotal (m)",
+    "gran (m)",
+    "hutt (m/f)",
+    "ishi_tib (m)",
+    "nautolan (m)",
+    "nightsister (f)",
+    "nikto (m)",
+    "quarren (m)",
+    "smc (f)",
+    "talz (m)",
+    "togruta (f)",
+    "weequay (m)"
+   ],
+   "defects_seen": [
+    "racial_mods.iff lists aqualish and bith twice",
+    "TemplateSpecies gives aqualish/bith/gotal/talz the species id 0 (human)",
+    "no skills.iff rows for species_<new> (only skl_n/skl_d names, and none for hutt)",
+    "player_species.stf descriptions are Wookieepedia text (CC BY-SA)",
+    "default_pc_hairstyles names hair_human_female_s33, which the client and Core3-dev lack",
+    "its client tables are 2016 copies of older stock patches (column types differ from today's)"
+   ],
+   "decision": {
+    "client art gotal/nautolan (MTG patch 023 carries it)": "usable with credit (Halyn/Phoenix; MTG as host)",
+    "20 player client templates (MTG patch 023)": "usable; already in the merged CRC table",
+    "rows of the creation/customization tables": "usable as data, re-emitted on today's stock schema",
+    "player_species.stf descriptions": "excluded (CC BY-SA text); names usable; we write our own descriptions",
+    "server Lua": "reference; re-written in Core3-dev's shape (s3/)",
+    "C++ (Races.h, PlayerCreationManager.cpp, ImageDesignManager.cpp)": "reference only; 2016 Core3, dev differs; the Races.h array pattern is the model",
+    "misc/object_template_crc_string_table.iff in species.tre": "excluded; the merged table in local_planets.tre already holds the entries"
+   }
+  },
+  "zeltros_client.zip": {
+   "bytes": 870338,
+   "sha256": "d2d221b554162c0c9932337e76487631f5528c9f571b97128f85dbb05b8d52cb",
+   "members": 79,
+   "by_extension": {
+    "dir": 20,
+    "ws": 1,
+    "stf": 3,
+    "pob": 4,
+    "apt": 7,
+    "lod": 11,
+    "msh": 11,
+    "trn": 1,
+    "iff": 21
+   },
+   "readme_or_licence_members": [],
+   "source_file_headers": {},
+   "what": "Zeltros planet (tienvogh): terrain, snapshot, buildings, regions; CC-BY-NC per the catalogue",
+   "source": [
+    "https://modthegalaxy.com/index.php?resources/zeltros-planet.135/"
+   ],
+   "decision": "excluded from the species track: this is the Zeltros PLANET package, not a Zeltron species package (none was downloaded); catalogue planet-018, status C"
+  },
+  "zeltros_server.zip": {
+   "bytes": 13543,
+   "sha256": "ac6c3072d96d507130a400884c91b1c5dd92108973b0a3e7b5e76e5a91df860f",
+   "members": 37,
+   "by_extension": {
+    "dir": 12,
+    "lua": 25
+   },
+   "readme_or_licence_members": [],
+   "source_file_headers": {
+    "includeFile(\"custom_content/static/flora/flora_decd_whitebirchtreeleaves.lua\") includeFile": 1,
+    "object_static_flora_flora_tree_palm_lrg = object_static_flora_shared_flora_tree_palm_lrg:n": 1,
+    "--New object_static_flora_shared_flora_decd_whitebirchtreeleaves = SharedStaticObjectTempl": 1,
+    "object_static_flora_flora_decd_whitebirchtreeleaves_a1 = object_static_flora_shared_flora_": 1,
+    "object_static_flora_flora_decd_whitebirchtreeleaves_a2 = object_static_flora_shared_flora_": 1,
+    "object_static_flora_flora_decd_whitebirchtreeleaves = object_static_flora_shared_flora_dec": 1,
+    "object_static_flora_flora_tree_palm_med = object_static_flora_shared_flora_tree_palm_med:n": 1,
+    "includeFile(\"custom_content/tangible/furniture/decorative/cafe_chair_s01.lua\")": 1,
+    "object_tangible_furniture_decorative_shared_cafe_chair_s01 = SharedTangibleObjectTemplate:": 1,
+    "object_tangible_furniture_decorative_cafe_chair_s01 = object_tangible_furniture_decorative": 1,
+    "object_building_zeltros_zel_cantina = object_building_zeltros_shared_zel_cantina:new { pla": 1,
+    "includeFile(\"custom_content/building/zeltros/zel_cantina.lua\") includeFile(\"custom_content": 1,
+    "object_building_zeltros_zel_guild_combat = object_building_zeltros_shared_zel_guild_combat": 1,
+    "object_building_zeltros_zel_filler_e = object_building_zeltros_shared_zel_filler_e:new { }": 1,
+    "object_building_zeltros_shared_zel_cantina = SharedBuildingObjectTemplate:new { clientTemp": 1,
+    "object_building_zeltros_zel_guild_commerce = object_building_zeltros_shared_zel_guild_comm": 1,
+    "object_building_zeltros_zel_skyscraper_s03 = object_building_zeltros_shared_zel_skyscraper": 1,
+    "object_building_zeltros_zel_filler_f = object_building_zeltros_shared_zel_filler_f:new { }": 1,
+    "object_building_zeltros_zel_skyscraper_s05 = object_building_zeltros_shared_zel_skyscraper": 1,
+    "object_building_zeltros_zel_hotel = object_building_zeltros_shared_zel_hotel:new { planetM": 1,
+    "object_building_zeltros_zel_filler_j = object_building_zeltros_shared_zel_filler_j:new { }": 1,
+    "object_building_zeltros_zel_filler_m = object_building_zeltros_shared_zel_filler_m:new { }": 1,
+    "object_building_zeltros_zel_filler_k = object_building_zeltros_shared_zel_filler_k:new { }": 1,
+    "-- Planet Region Definitions -- This file has been generated with the SWGEmu World Spawner": 1,
+    " zeltros = { weatherEnabled = 1,": 1
+   },
+   "what": "Zeltros planet server Lua (buildings, flora, furniture)",
+   "source": [
+    "https://modthegalaxy.com/index.php?resources/zeltros-planet.135/"
+   ],
+   "decision": "excluded from the species track: this is the Zeltros PLANET package, not a Zeltron species package (none was downloaded); catalogue planet-018, status C"
+  },
+  "EiF-2017-species-source-reference.zip": {
+   "bytes": 157409,
+   "sha256": "acb60de3a6cad941e25ab3cb86d667f9bf5716f5cbdddbbb2515a75f23edbd71",
+   "members": 83,
+   "by_extension": {
+    "lua": 71,
+    "dir": 1,
+    "h": 7,
+    "cpp": 2,
+    "txt": 2
+   },
+   "readme_or_licence_members": [
+    "MMOCoreORB/COPYING"
+   ],
+   "source_file_headers": {
+    "--Copyright (C) 2010 <SWGEmu>  ": 69,
+    "--Copyright (C) 2009 <SWGEmu>  --This File is part of Core3.": 2,
+    "/* * HairStyleInfo.h *": 1,
+    "/* Copyright <SWGEmu> See file COPYING for copying conditions.": 2,
+    "/* * ProfessionDefaultsInfo.h *": 1,
+    "/* * SkillInfo.h *": 1,
+    "/* * CreationData.h *": 1,
+    "/* Copyright <SWGEmu> See file COPYING for copying conditions. */": 1,
+    "/* * ImageDesignManager.h *": 1,
+    "/* Copyright <SWGEmu> See file COPYING for copying conditions.*/": 1
+   },
+   "what": "Empire in Flames 2017 public source snapshot, species Lua and licence texts only (reference)",
+   "zeltron_members": [
+    "MMOCoreORB/bin/scripts/object/creature/player/zeltron_female.lua",
+    "MMOCoreORB/bin/scripts/object/creature/player/zeltron_male.lua"
+   ],
+   "decision": "held: source reference only; EiF client art (starsider01) terms unresolved (feature F51); no import"
+  },
+  "EiF-starsider01-reference.tre": {
+   "bytes": 105719712,
+   "sha256": "55dad96c3c8a068af588188a5980394a9221f393a6f9405e15e96015f82b71b1",
+   "entries": 9771,
+   "zeltron_entries": [
+    "appearance/mesh/zeltron_f_body.lmg",
+    "appearance/mesh/zeltron_f_body_l0.mgn",
+    "appearance/mesh/zeltron_f_head.lmg",
+    "appearance/mesh/zeltron_f_head_l0.mgn",
+    "appearance/mesh/zeltron_m_body.lmg",
+    "appearance/mesh/zeltron_m_body_l0.mgn",
+    "appearance/mesh/zeltron_m_head.lmg",
+    "appearance/mesh/zeltron_m_head_l0.mgn",
+    "appearance/zeltron_f.sat",
+    "appearance/zeltron_m.sat",
+    "object/creature/player/shared_zeltron_female.iff",
+    "object/creature/player/shared_zeltron_male.iff"
+   ],
+   "decision": "held: EiF client art, rights not established (F51); read as reference only"
+  },
+  "mtg_patch_023.tre (owner client)": {
+   "bytes": 5721601,
+   "sha256": "30482e956c6aa096b068b7952ae899b7bab33840c223451340dcdf043839180c",
+   "entries": 181,
+   "package_files_it_carries": 117,
+   "decision": "usable in place (MTG, catalogue status P with credit); it is how the client already has the species files"
+  }
+ }
+}

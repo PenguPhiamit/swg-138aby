@@ -1,0 +1,7 @@
+new files: 2   identical already: 0   line patches to apply: 3   already applied: 0   refused: 0
+  would patch (append): object/creature/player/objects.lua
+  would patch (after): object/creature/player/serverobjects.lua
+  would patch (after): object/creature/player/serverobjects.lua
+  would copy: object/creature/player/chiss_female.lua
+  would copy: object/creature/player/chiss_male.lua
+--check: nothing changed.
