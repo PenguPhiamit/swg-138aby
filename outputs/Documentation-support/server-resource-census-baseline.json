@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "checkpoint": "C21-1; saved manifests, not current server or full rights validation",
+  "input_evidence": {
+    "active": {
+      "path": "outputs/Content-catalogue/active-content-catalogue.json",
+      "sha256": "9f7edcf7b920325d3e023b071a27bb68281e5ff87a418bd273bd834f1648e2be"
+    },
+    "mtg": {
+      "path": "outputs/Content-catalogue/MTG-file-inventory.json",
+      "sha256": "afa171a88e344d286a41fc68383b06e25d5cfe0097a6cc5da226c7707847ee4f"
+    },
+    "summary": {
+      "path": "outputs/Content-catalogue/MTG-inventory-summary.json",
+      "sha256": "a59c8a660f076c54a0ba1f6028b28b4855bb0db95bbcdb0c458679e9511a60c3"
+    },
+    "dormant": {
+      "path": "outputs/Content-catalogue/dormant-client-objects.json",
+      "sha256": "9fc30c7c189345cf118dcd5326f131d3660bc8bad6df96c7e2c8f7ac0f629cbd"
+    },
+    "packages": {
+      "path": "outputs/Content-catalogue/downloaded-package-evidence.json",
+      "sha256": "737d23e11ed6177c8088aacd0e5a8dce76b2e628fb93bd321bd4b0f1237a92b0"
+    },
+    "lore": {
+      "path": "outputs/Documentation-support/planets-coordinates.json",
+      "sha256": "e6bb2dda4161d7b262c10088cb6c42a1a28d5ef8d8835b0bec38850fc58a08ab"
+    }
+  },
+  "active_catalogue": {
+    "rows": 102,
+    "by_kind": {
+      "Candidate world": 2,
+      "Design reference": 6,
+      "Legacy/test world": 1,
+      "MTG family": 6,
+      "Pack or tool": 21,
+      "Planet": 18,
+      "Quest example": 1,
+      "Restricted or unverified family": 3,
+      "Species": 40,
+      "Station": 3,
+      "Tool": 1
+    },
+    "by_permission_label": {
+      "Development or legacy data only": 3,
+      "Later EiF implementation; reusable complete package unverified": 3,
+      "Original creator permission required": 10,
+      "Published for identified purpose": 3,
+      "Published for server use": 47,
+      "Published server code; client asset reuse unresolved": 21,
+      "Published with explicit conditions": 1,
+      "Reference only; no official reuse release found": 6,
+      "Release or permission unverified": 8
+    },
+    "local_evidence_zones": [
+      "chandrila",
+      "coruscant",
+      "hoth",
+      "hutta",
+      "jakku",
+      "kaas",
+      "kashyyyk",
+      "mandalore",
+      "moraband",
+      "mustafar",
+      "taanab"
+    ],
+    "runtime_validated_rows_in_old_catalogue": 0
+  },
+  "mtg": {
+    "source_revision": "54deb619e83c2c5e353f6a825a829d56201704f0",
+    "lua_files": 16734,
+    "lua_files_by_category": {
+      "mobile/conversations": 4,
+      "mobile/conversations.lua": 1,
+      "mobile/kashyyyk": 547,
+      "mobile/mobile": 1858,
+      "mobile/npe": 52,
+      "mobile/serverobjects.lua": 1,
+      "mobile/som": 136,
+      "mobile/tatooine": 118,
+      "mobile/the_tutorial": 2,
+      "mtg-shared-template-includes.lua": 1,
+      "object/building": 891,
+      "object/draft_schematic": 1634,
+      "object/installation": 3,
+      "object/intangible": 369,
+      "object/mobile": 3032,
+      "object/serverobjects.lua": 1,
+      "object/ship": 322,
+      "object/soundobject": 3,
+      "object/static": 674,
+      "object/tangible": 6723,
+      "object/weapon": 358,
+      "screenplays/custom_screenplays": 4
+    },
+    "unique_registered_paths": 12556,
+    "registered_paths_by_prefix": {
+      "object/building": 823,
+      "object/draft_schematic": 1533,
+      "object/dungeon": 1,
+      "object/installation": 1,
+      "object/intangible": 346,
+      "object/mobile": 2416,
+      "object/ship": 316,
+      "object/soundobject": 1,
+      "object/static": 601,
+      "object/tangible": 6217,
+      "object/weapon": 301
+    },
+    "archive_entry_records": 209201,
+    "terrain_paths": 64,
+    "snapshot_paths": 29,
+    "player_object_paths": 41
+  },
+  "dormant_snapshot": {
+    "client_object_paths": 29342,
+    "server_template_count": 29180,
+    "unique_dormant_paths": 13627,
+    "by_origin": {
+      "MTG": 13496,
+      "SOE client": 131
+    },
+    "by_prefix": {
+      "object/building": 837,
+      "object/creature": 21,
+      "object/draft_schematic": 1828,
+      "object/installation": 2,
+      "object/intangible": 355,
+      "object/mobile": 2531,
+      "object/player_quest": 2,
+      "object/resource_container": 38,
+      "object/ship": 423,
+      "object/soundobject": 20,
+      "object/static": 612,
+      "object/tangible": 6615,
+      "object/weapon": 343
+    }
+  },
+  "creator_package_records": {
+    "packages": 13,
+    "member_records": 13175,
+    "archive_bytes": 20922851,
+    "note": "Manifest records; no new ZIP integrity/hash verification or blanket import clearance"
+  },
+  "inherited_lore_batch": {
+    "records": 24,
+    "by_continuity": {
+      "Legends": 23,
+      "canon exception": 1
+    },
+    "local_evidence_zones_matched": [
+      "chandrila",
+      "coruscant",
+      "hoth",
+      "hutta",
+      "jakku",
+      "kaas",
+      "kashyyyk",
+      "mandalore",
+      "moraband",
+      "mustafar",
+      "taanab"
+    ],
+    "local_evidence_zones_unmatched": [],
+    "note": "C14 search-extract evidence only; full-page access and citations remain unverified"
+  }
+}

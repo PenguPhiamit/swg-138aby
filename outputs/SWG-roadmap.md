@@ -18,6 +18,7 @@ Shared ideas, purpose, maturity and effort: [SWG-feature-register.md](SWG-featur
 ## House rules for anyone working on the server
 
 - [x] C19/C4f independent review (14 Oct): two P2 findings; [report](Documentation-support/review-C4f/C4f-review.md). Fixes and in-game acceptance remain open.
+- [x] C21 checkpoint 1 saved-manifest baseline (14 Oct): reproducible counts and finite follow-up batches; overall census remains open.
 - [ ] C21 [resource/Legends/implementation census](Documentation-support/server-resource-and-implementation-census.md), queued after Claude's C19 → C20 → C18 queue; resumable across usage resets.
 
 1. All server changes go on the local `sandbox` branch in `/opt/swg/Core3`, **one commit per change**. Experimental C++ goes on `dev` in `/opt/swg/Core3-dev` first. Pushing is disabled; keep it that way until you decide otherwise.
