@@ -1,0 +1,184 @@
+{
+ "galaxy_spot": [
+  425,
+  225
+ ],
+ "ui": {
+  "inserted": {
+   "DataSource": 8,
+   "Button": 11,
+   "CuiWidget3dObjectListViewer": 20,
+   "Page": 20,
+   "Text": 19,
+   "Data line": 1
+  },
+  "ticket_lines_added": 79,
+  "planet_map_lines_added": 22
+ },
+ "files": {
+  "ui/ui_ticketpurchase.inc": {
+   "bytes": 99905,
+   "sha256": "1723ba8d19d046a620d159c30610320c60efb4dbf4b148293ae28fc268d2e639",
+   "base_bytes": 97872,
+   "base_lines_kept": true,
+   "crlf_only": true,
+   "bare_cr": [
+    14,
+    14
+   ]
+  },
+  "ui/ui_planet_map.inc": {
+   "bytes": 47502,
+   "sha256": "f52388c9a81990f60f250d07ff90df77ca4e102715c6e34316c22ec0638fc502",
+   "base_bytes": 46924,
+   "base_lines_kept": true,
+   "crlf_only": true,
+   "bare_cr": [
+    4,
+    4
+   ]
+  }
+ },
+ "diff": {
+  "ui/ui_ticketpurchase.inc": {
+   "hunks": [
+    {
+     "op": "replace",
+     "ours": [
+      199,
+      202
+     ],
+     "theirs": [
+      199,
+      205
+     ],
+     "ours_lines": [
+      "\t\t\t\tOnHide='parent.map.visible=true\r",
+      "parent.bottom.visible=true\r",
+      "parent.buttonShowGalaxy.visible=true\r"
+     ],
+     "theirs_lines": [
+      "\t\t\t\tOnHide='parent.map.visible=true",
+      "",
+      "parent.bottom.visible=true"
+     ],
+     "kind": "bare CR: 3 lone carriage return(s) in the stock lines; Bellum load() turned each into a line break, so an extra blank line"
+    },
+    {
+     "op": "replace",
+     "ours": [
+      203,
+      210
+     ],
+     "theirs": [
+      206,
+      220
+     ],
+     "ours_lines": [
+      "\t\t\t\tOnShow='parent.map.visible=false\r",
+      "parent.bottom.visible=false\r",
+      "parent.buttonShowPlanet.visible=false\r"
+     ],
+     "theirs_lines": [
+      "\t\t\t\tOnShow='parent.map.visible=false",
+      "",
+      "parent.bottom.visible=false"
+     ],
+     "kind": "bare CR: 7 lone carriage return(s) in the stock lines; Bellum load() turned each into a line break, so an extra blank line"
+    },
+    {
+     "op": "replace",
+     "ours": [
+      991,
+      993
+     ],
+     "theirs": [
+      1001,
+      1005
+     ],
+     "ours_lines": [
+      "\t\t\t\t\tOnShow='parent.GalaxyMap.visible=false\r",
+      "\r"
+     ],
+     "theirs_lines": [
+      "\t\t\t\t\tOnShow='parent.GalaxyMap.visible=false",
+      "",
+      ""
+     ],
+     "kind": "bare CR: 2 lone carriage return(s) in the stock lines; Bellum load() turned each into a line break, so an extra blank line"
+    },
+    {
+     "op": "replace",
+     "ours": [
+      1226,
+      1228
+     ],
+     "theirs": [
+      1238,
+      1242
+     ],
+     "ours_lines": [
+      "\t\t\t\t\tOnShow='parent.Planets.visible=false\r",
+      "\r"
+     ],
+     "theirs_lines": [
+      "\t\t\t\t\tOnShow='parent.Planets.visible=false",
+      "",
+      ""
+     ],
+     "kind": "bare CR: 2 lone carriage return(s) in the stock lines; Bellum load() turned each into a line break, so an extra blank line"
+    }
+   ],
+   "bare_cr_in_stock": 14,
+   "only_bare_cr": true
+  },
+  "ui/ui_planet_map.inc": {
+   "hunks": [
+    {
+     "op": "replace",
+     "ours": [
+      285,
+      287
+     ],
+     "theirs": [
+      285,
+      293
+     ],
+     "ours_lines": [
+      "\t\t\t\t\t\tOnHide='parent.loading.visible=true\r\r\r",
+      "parent.labelTree.visible=visible\r\r\r"
+     ],
+     "theirs_lines": [
+      "\t\t\t\t\t\tOnHide='parent.loading.visible=true",
+      "",
+      ""
+     ],
+     "kind": "bare CR: 6 lone carriage return(s) in the stock lines; Bellum load() turned each into a line break, so an extra blank line"
+    },
+    {
+     "op": "replace",
+     "ours": [
+      288,
+      290
+     ],
+     "theirs": [
+      294,
+      302
+     ],
+     "ours_lines": [
+      "\t\t\t\t\t\tOnShow='parent.loading.visible=false\r\r\r",
+      "parent.labelTree.visible=visible\r\r\r"
+     ],
+     "theirs_lines": [
+      "\t\t\t\t\t\tOnShow='parent.loading.visible=false",
+      "",
+      ""
+     ],
+     "kind": "bare CR: 6 lone carriage return(s) in the stock lines; Bellum load() turned each into a line break, so an extra blank line"
+    }
+   ],
+   "bare_cr_in_stock": 12,
+   "only_bare_cr": true
+  }
+ }
+}

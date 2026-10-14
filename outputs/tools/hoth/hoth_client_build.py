@@ -18,25 +18,23 @@ What is added (only Hoth; everything else is byte-for-byte stock):
                                               map page (ui_map_hoth from MTG), data source, code-data entry. No route
                                               line yet (decorative; needs a look in the real client)
     ui/ui_planet_map.inc                      Endor's planetary-map page cloned for Hoth
-Format tools are Bellum Gero's (AGPL-3.0, pinned in work/research, read before use).
+Format tools are ours: Fable's swg_tables, ui_inc and tre_write behind Fable-builder/tools/fmt_tools.py.
 """
 import filecmp, os, shutil, sys
 
 H = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
-BELLUM = os.path.join(H, 'work', 'research', 'Miphstoe_BellumGero-Live', 'MMOCoreORB', 'tools', 'newplanets')
 BASE = os.path.join(H, 'outputs', 'Documentation-support', 'hoth', 'client-base')
 STAGE = os.path.join(H, 'outputs', 'Local-content', 'local_planets')
 TRE = os.path.join(H, 'outputs', 'Local-content', 'local_planets.tre')
-sys.path.insert(0, BELLUM)
-import stf_tool, dt_tool, cstb_tool, tre_pack, merge_ticket_ui as ui  # noqa: E402  (Bellum's)
-exec(open(os.path.join(BELLUM, 'tre_inventory.py'), encoding='utf-8').read().split('if __name__')[0])
+sys.path.insert(0, os.path.join(H, 'outputs', 'Fable-builder', 'tools'))
+from fmt_tools import stf_tool, dt_tool, cstb_tool, tre_pack, read_tre, _inflate  # noqa: E402  (ours: swg_tables, trn_iff, tre_write)
+import hoth_ui  # noqa: E402  (ours: ui_inc)
 
 # Fares: row = departure, column = arrival (credits). Same pattern as Yavin IV: reached from Corellia only.
 FARES_TO_HOTH = {'corellia': 3000}
 FARES_FROM_HOTH = {'corellia': 1750, 'hoth': 100}
 # Provisional galaxy-map spot (free space, right of the map); replace with the C14 grid-square fit.
 GALAXY_SPOT = (425, 225)
-ENDOR_BUTTON = (23, 302)
 
 
 def src(path):
@@ -79,47 +77,10 @@ def waypoints():
     dt_tool.write(t, dst('datatables/player/waypoint_planets.iff'))
 
 
-def shift(line, dx, dy):
-    """Move a Location='x,y' line by (dx, dy)."""
-    key = "Location='"
-    if key not in line:
-        return line
-    head, rest = line.split(key, 1)
-    x, y = rest.split("'", 1)[0].split(',')
-    return f"{head}{key}{int(x) + dx},{int(y) + dy}'" + rest.split("'", 1)[1]
-
-
-def clone(lines, name, tag, renames, move=None):
-    """Copy the element <tag Name=name> with every rename applied (and its Location moved); insert it right after."""
-    s, e = ui.find_block(lines, name, tag)
-    block = []
-    for line in lines[s:e + 1]:
-        for old, new in renames:
-            line = line.replace(old, new)
-        if move and "Location='" in line and line.strip().startswith('Location='):
-            line = shift(line, *move)
-        block.append(line)
-    lines[e + 1:e + 1] = block
-
-
-def ticket_ui():
-    lines = ui.load(src('ui/ui_ticketpurchase.inc'))
-    move = (GALAXY_SPOT[0] - ENDOR_BUTTON[0], GALAXY_SPOT[1] - ENDOR_BUTTON[1])
-    names = [('Endor', 'Hoth'), ('endor', 'hoth'), ('ui_planet_sel_endo.apt', 'ui_planet_sel_hoth.apt')]
-    clone(lines, 'Endor', 'DataSource', names)
-    clone(lines, 'buttonEndor', 'Button', names, move)
-    clone(lines, 'vEndor', 'CuiWidget3dObjectListViewer', names, move)
-    clone(lines, 'Endor', 'Page', names)
-    clone(lines, 'Endor', 'Text', names, move)
-    i = next(i for i, l in enumerate(lines) if l.strip() == "buttonEndor='map.GalaxyMap.buttonEndor'")
-    lines.insert(i + 1, lines[i].replace('buttonEndor', 'buttonHoth'))
-    open(dst('ui/ui_ticketpurchase.inc'), 'wb').write('\r\n'.join(lines).encode('latin-1'))
-
-
-def planet_map_ui():
-    lines = ui.load(src('ui/ui_planet_map.inc'))
-    clone(lines, 'endor', 'Page', [('endor', 'hoth')])
-    open(dst('ui/ui_planet_map.inc'), 'wb').write('\r\n'.join(lines).encode('latin-1'))
+def ui_includes():
+    """Endor's blocks cloned for Hoth in both UI includes (Fable's ui_inc through hoth_ui): the stock bytes outside
+    the inserted blocks stay as they are, the bare carriage returns in the OnShow/OnHide scripts included."""
+    return hoth_ui.stage_hoth_ui(STAGE, base=lambda path: open(src(path), 'rb').read(), spot=GALAXY_SPOT)
 
 
 def archive_file(archive, path):
@@ -392,7 +353,7 @@ def map_names():
 
 
 def check_ui_newlines(path):
-    """The stock .inc files use CRLF; ui.load() normalises to LF, so make sure we wrote CRLF back."""
+    """The stock .inc files use CRLF; hoth_ui keeps every stock byte, so only make sure the stock copy is pure CRLF."""
     raw = open(src(path), 'rb').read()
     return raw.count(b'\r\n') == raw.count(b'\n')
 
@@ -407,7 +368,7 @@ def main():
         shutil.rmtree(STAGE)  # a failed earlier run's leftovers
     for path in ('ui/ui_ticketpurchase.inc', 'ui/ui_planet_map.inc'):
         assert check_ui_newlines(path), f'{path}: stock copy is not pure CRLF; review the writer first'
-    strings(); crc_table(); travel(); waypoints(); ticket_ui(); planet_map_ui()
+    strings(); crc_table(); travel(); waypoints(); ui_includes()
     for line in object_crc_table():
         print('object CRC table:', line)
     for line in resource_tree():

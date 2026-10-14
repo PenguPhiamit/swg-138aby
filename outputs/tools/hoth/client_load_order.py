@@ -14,9 +14,9 @@ crashed the client ("terrain/hoth.trn is not a valid terrain file") although the
 import os, re, sys
 
 H = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
-BELLUM = os.path.join(H, 'work', 'research', 'Miphstoe_BellumGero-Live', 'MMOCoreORB', 'tools', 'newplanets')
 CLIENT = os.path.join(H, 'outputs', 'SWG-client')
-exec(open(os.path.join(BELLUM, 'tre_inventory.py'), encoding='utf-8').read().split('if __name__')[0])
+sys.path.insert(0, os.path.join(H, 'outputs', 'Fable-builder', 'tools'))
+from fmt_tools import read_tre, _inflate  # noqa: E402  (ours; was Bellum's tre_inventory)
 
 HOTH = ['terrain/hoth.trn', 'snapshot/hoth.ws', 'texture/ui_map_hoth.dds', 'appearance/ui_planet_sel_hoth.apt',
         'string/en/planet_n.stf', 'misc/planet_crc_string_table.iff', 'datatables/travel/travel.iff',

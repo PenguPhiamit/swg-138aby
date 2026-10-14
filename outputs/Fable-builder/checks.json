@@ -1,0 +1,118 @@
+{
+ "built": "2026-10-14",
+ "b1": {
+  "files": {
+   "ui/ui_ticketpurchase.inc": {
+    "bytes": 99905,
+    "sha256": "1723ba8d19d046a620d159c30610320c60efb4dbf4b148293ae28fc268d2e639",
+    "base_bytes": 97872,
+    "base_lines_kept": true,
+    "crlf_only": true,
+    "bare_cr": [
+     14,
+     14
+    ]
+   },
+   "ui/ui_planet_map.inc": {
+    "bytes": 47502,
+    "sha256": "f52388c9a81990f60f250d07ff90df77ca4e102715c6e34316c22ec0638fc502",
+    "base_bytes": 46924,
+    "base_lines_kept": true,
+    "crlf_only": true,
+    "bare_cr": [
+     4,
+     4
+    ]
+   }
+  },
+  "ui": {
+   "inserted": {
+    "DataSource": 8,
+    "Button": 11,
+    "CuiWidget3dObjectListViewer": 20,
+    "Page": 20,
+    "Text": 19,
+    "Data line": 1
+   },
+   "ticket_lines_added": 79,
+   "planet_map_lines_added": 22
+  },
+  "diff_vs_staging": {
+   "ui/ui_ticketpurchase.inc": {
+    "hunks": 4,
+    "bare_cr_in_stock": 14,
+    "only_bare_cr": true,
+    "kinds": [
+     "bare CR: 3 lone carriage return(s) in the stock lines; Bellum load() turned each into a line break, so an extra blank line",
+     "bare CR: 7 lone carriage return(s) in the stock lines; Bellum load() turned each into a line break, so an extra blank line",
+     "bare CR: 2 lone carriage return(s) in the stock lines; Bellum load() turned each into a line break, so an extra blank line",
+     "bare CR: 2 lone carriage return(s) in the stock lines; Bellum load() turned each into a line break, so an extra blank line"
+    ]
+   },
+   "ui/ui_planet_map.inc": {
+    "hunks": 2,
+    "bare_cr_in_stock": 12,
+    "only_bare_cr": true,
+    "kinds": [
+     "bare CR: 6 lone carriage return(s) in the stock lines; Bellum load() turned each into a line break, so an extra blank line",
+     "bare CR: 6 lone carriage return(s) in the stock lines; Bellum load() turned each into a line break, so an extra blank line"
+    ]
+   }
+  },
+  "equals_patched_builder_output": true
+ },
+ "b2": {
+  "selftest_stock_rule": [
+   "md5 rule: stored",
+   "packed 20 files, 770953 bytes; read(): 20 files, every record checks (size, CRC, MD5)",
+   "  read() bytes identical to the folder: True",
+   "  trn_iff.list_tre/open_tre_entry: 20 entries, bytes identical: True",
+   "  client_load_order.read_tre: 20 entries, bytes identical: True",
+   "  reference local_planets.tre: 770953 bytes, sha256 6cfeeb517836e829",
+   "  ours:      770953 bytes, sha256 ea57b68f3b748110, byte-identical to the reference: False",
+   "  header fields equal: True ",
+   "  records equal (name, crc, size, offset, comp, csize, name offset): True",
+   "  file data and record/name blocks identical, only the MD5 tail differs: True",
+   "  same files with the same bytes: True",
+   "SELFTEST PASSED"
+  ],
+  "selftest_tre_pack_rule": [
+   "md5 rule: data",
+   "packed 20 files, 770953 bytes; read(): 20 files, every record checks (size, CRC, MD5)",
+   "  read() bytes identical to the folder: True",
+   "  trn_iff.list_tre/open_tre_entry: 20 entries, bytes identical: True",
+   "  client_load_order.read_tre: 20 entries, bytes identical: True",
+   "  reference local_planets.tre: 770953 bytes, sha256 6cfeeb517836e829",
+   "  ours:      770953 bytes, sha256 6cfeeb517836e829, byte-identical to the reference: True",
+   "  header fields equal: True ",
+   "  records equal (name, crc, size, offset, comp, csize, name offset): True",
+   "  file data and record/name blocks identical, only the MD5 tail differs: True",
+   "  same files with the same bytes: True",
+   "SELFTEST PASSED"
+  ]
+ },
+ "b3": {
+  "patch_lines": 102,
+  "changed_lines": 59,
+  "loader_patch_lines": 14,
+  "patch_dry_run": "clean (patch -p1 --dry-run)",
+  "py_compile": "ok",
+  "scratch_build": {
+   "round_trips_exact": 12,
+   "differs": 0,
+   "archive_verified": true,
+   "ok_entries": 20,
+   "bad_entries": 0
+  },
+  "before_after": {
+   "staging_files": 20,
+   "archive_entries": 20,
+   "entries_changed": [
+    "ui/ui_planet_map.inc (47514 -> 47502)",
+    "ui/ui_ticketpurchase.inc (99919 -> 99905)"
+   ],
+   "header": "record_offset 770028 -> 770026, record_csize 365 -> 364, total 770953 -> 770950",
+   "md5_tail": "stock rule (md5 of stored bytes) instead of tre_pack (unpacked data)"
+  }
+ }
+}
