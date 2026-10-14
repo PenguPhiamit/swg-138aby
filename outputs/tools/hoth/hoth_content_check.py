@@ -24,7 +24,7 @@ CAMPS = {  # site: (x, y, an NPC template that stands there)
     "scavengers' camp": (-1400, -3300, 'hoth_scavenger'),
     "raiders' camp": (-1200, -3600, 'hoth_scavenger_raider'),
     'contested ground': (2400, 200, 'hoth_snow'),
-    'salvage detail': (-100, -1960, 'hoth_imperial_salvage_tech'),
+    'salvage detail': (-100, -1960, 'hoth_imperial_salvage_tech'),  # no props by design: MTG's debris is the scenery
 }
 ZONES = {  # batch A area spawners: centre and radius
     'tauntaun plains west': (-3000, -1500, 1800), 'tauntaun plains east': (3000, -1200, 1500),
@@ -54,7 +54,8 @@ def run(g):
     for name, (x, y, template) in CAMPS.items():
         npcs = esk.locate('object/mobile/', 40, x=x, y=y)
         props = esk.locate('object/static/structure/', 40, x=x, y=y)
-        g.check(f'{name}: props at the camp', len(props) > 0, f'{len(props)} props')
+        if name != 'salvage detail':
+            g.check(f'{name}: props at the camp', len(props) > 0, f'{len(props)} props')
         g.check(f'{name}: NPCs at the camp', len(npcs) > 0,
                 f'{len(npcs)}: ' + ', '.join(sorted({o.get("name", "?") for o in npcs}))[:150] + f' (expected {template})')
 
