@@ -182,10 +182,10 @@
         {
             "id": "c23b-hoth-gameplay-run",
             "effort": "medium",
-            "status": "hold",
+            "status": "open",
             "model": "gpt-6.1-sol",
             "added": "2026-10-14 14:35 Claude (owner: more responsibility for GPT)",
-            "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; new rule \"ChatGPT's server-code worktree\"; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (2026-10-14 14:35 entry) and the C23, C24 and C25 instructions on h/outputs/SWG-handoff.md (above the Log). Task C23 part 2 (Claude sets this open after the test-galaxy restart): run tools/hoth/hoth_gameplay_check.py with the Esk crew (driver claim on the board, Esk out of Agent/squad-plan.txt during the run and back afterwards), write Documentation-support/C23-hoth-gameplay.md, and file each failure in Agent/to-claude.md with its evidence. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
+            "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; new rule \"ChatGPT's server-code worktree\"; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (2026-10-14 14:35 entry) and the C23, C24 and C25 instructions on h/outputs/SWG-handoff.md (above the Log). Task C23 part 2 (restart done 2026-10-14 14:47; run it after C23a): run tools/hoth/hoth_gameplay_check.py with the Esk crew (driver claim on the board, Esk out of Agent/squad-plan.txt during the run and back afterwards), write Documentation-support/C23-hoth-gameplay.md, and file each failure in Agent/to-claude.md with its evidence. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
         }
     ]
 }

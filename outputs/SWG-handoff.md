@@ -51,9 +51,9 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
-| **C23: Hoth gameplay acceptance** (ChatGPT owns it end to end) | ChatGPT | assigned 2026-10-14 14:35 | Instructions above the log. Scenario `tools/hoth/hoth_gameplay_check.py`, written offline now, run after Claude's next restart; ChatGPT keeps the fail list until it is empty |
-| **C24: Hoth release gate** (go/no-go) | ChatGPT | assigned 2026-10-14 14:35 | Instructions above the log. `Documentation-support/hoth-release-gate.md`; ChatGPT gives the "reviewed by" for any Hoth live deploy |
-| **C25: ChatGPT's server-code worktree** | ChatGPT | assigned 2026-10-14 14:35 | `/opt/swg/Core3-gpt`, branch `gpt/work` (AGENTS.md rule). First job: the silent ticket failure while a travel point has no shuttle (`PurchaseTicketCommand.h:132`) |
+| **C23: Hoth gameplay acceptance** (ChatGPT owns it end to end) | ChatGPT | claimed — ChatGPT, 14 Oct 14:46 | Instructions above the log. Scenario `tools/hoth/hoth_gameplay_check.py`, written offline now, run after Claude's next restart; ChatGPT keeps the fail list until it is empty |
+| **C24: Hoth release gate** (go/no-go) | ChatGPT | claimed — ChatGPT, 14 Oct 14:46 | Instructions above the log. `Documentation-support/hoth-release-gate.md`; ChatGPT gives the "reviewed by" for any Hoth live deploy |
+| **C25: ChatGPT's server-code worktree** | ChatGPT | claimed — ChatGPT, 14 Oct 14:46 | `/opt/swg/Core3-gpt`, branch `gpt/work` (AGENTS.md rule). First job: the silent ticket failure while a travel point has no shuttle (`PurchaseTicketCommand.h:132`) |
 | **C22: independent Hoth + C4 fix review** | ChatGPT - GPT-6.1 Sol, **High** | complete - changes requested, 14 Oct | `Documentation-support/review-C22/C22-review.md`: 2 P2 + 1 P3; dev `c5f1ae06`, `69eb77fe`, `de1b679a`, `23014f39`, `90f60a81`; h `f0b192e`; report `b4472b8`; gameplay untested |
 | Creature Handler top-tier build research (owner, 14 Oct) | ChatGPT | bounded pass complete — no game benchmarks | `Documentation-support/creature-handler-top-tier-plan.md`; owner wants all three modes; local build closure verified, improvements proposed |
 | Tames discussion (owner, 14 Oct) | Owner + Claude + ChatGPT | open — discussion requested | Note in `Agent/to-claude.md`, 05:49; eligibility, rare/endgame pets, wild vs BE, control budget; no changes approved |
@@ -244,6 +244,13 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-14 14:47 Claude: test galaxy restarted (owner logged off): Hoth minerals in spawn, rebuilt archive installed
+- **Owner, 14:38: "ok logging off now, restart it."** No client running. The 14:31 overnight round was halted (`squad.py halt`, ended 14:39). Stop at 14:39, start 14:42, ready 14:45 (backup galaxy-20261013T172001Z, dev scripts `1c4c24fb`, dev server build). `squad.py setup` relogged the bots.
+- **Hoth minerals:** the server log has "MinimumPool updating: Spawned 10" (the ten `*_hoth` types from `1c4c24fb`; NativePool spawned its 42 as before). Not yet seen in a survey window: that is ChatGPT's C23 check (a).
+- **Archive:** `local_planets.tre` aee83cc6 (Fable B1-B3 build) is now in `SWG-client/` and `/opt/swg/tre/`. The old 6cfeeb51 is kept at `/opt/swg/tre/old/` and in a Windows temp backup.
+- **ChatGPT:** C23b (the gameplay run) is open in the relay queue, after C23a (the scenario), which it needs.
+- Fable reported R2 (resource backfill patch) and T1 (format tools in one package): review next.
 
 ### 2026-10-14 14:35 Claude: owner confirms all 18 Hoth map markers; ChatGPT gets three jobs of its own (C23–C25)
 - **Map markers, verified by the owner:** "only one" was the collapsed category list. With Points of Interest expanded, all 18 Hoth POIs show with their names, in the right places. Categories: City, Cloning Facility, Junk Shop, Points of Interest, Starport, Terminal, Waypoint. Region names also show on entry ("Lucky Despot Wreck", "Scavenger Starport").
