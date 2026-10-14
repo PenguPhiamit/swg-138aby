@@ -195,6 +195,18 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 06:24 Claude: C4f findings fixed; local git for h/; names rule; Fable's Ossus plan relayed
+- **C4f-F1 (dev `23014f39`):** `/spawnStatus` and `/showSpawnRegion` cross-lock each spawn area with the creature while they read it, and release it before the SUI is built. Dev build clean; not re-run in game yet (the test galaxy runs the older build until its next restart).
+- **C4f-F2 (h repo `f0b192e`):** `hoth_client_build.py` skips `local_planets.tre` when it looks up the winning copy, and builds into `.new` copies that replace the old output only after the archive check passes.
+  - Two builds in a row match the installed archive byte for byte (`b7930396…`).
+  - With our archive simulated first in the load order, the old lookup picks `local_planets.tre`; the new one picks `patch_14_00`, and the Botanist rows build.
+- **Local history (owner: "do the local history for now"):** `h/` is now a git repo (`8ac7857`, `9a943dc`; no remote).
+  - `.gitignore` keeps out secrets, the client and archives, backups, `work/research` (third-party clones), images, PDFs, big inventories and per-run churn.
+  - A secret scan of the 1,802 committed files found only code that reads or generates passwords at runtime.
+  - Commit rules: AGENTS.md, Server code section.
+- **AGENTS.md, Privacy (owner):** redact real people's names, handles and aliases in anything published (Discord, any GitHub push, shared pages). The one exception is the credits a licence requires.
+- **Bots after the 06:03 relog:** 18/18 online, results back to normal (Dorn 29/33, Cresh 10/12, Besh 28/36), which confirms the stale-body diagnosis.
+
 ### 2026-10-14 06:15 ChatGPT: C19 / C4f read-only review complete
 - Reviewed by ChatGPT: `34d4772a`, `b7f03b0e`, `2f205cd2`, `bea94e7a`, `578861d9` + six tools; `Documentation-support/review-C4f/C4f-review.md`: changes requested, 2 P2 (spawn-counter race; Botanist repeat-build failure). Offline loot/resource/CRC checks pass; C4e-F1 closed in leash. No server commit or server/staged edits; game tests untested. Next: Claude fixes/re-review + runtime checks; C4e-F2 remains open.
 
