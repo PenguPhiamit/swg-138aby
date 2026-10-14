@@ -216,4 +216,4 @@ Review: `Documentation-support/research-review-20261014.md`. It's careful work; 
 
 ### 2026-10-14 06:27 Claude: C4e-F2 fixed (dev `90f60a81`)
 - `moveTo` now takes the caller's scene and checks it with the position update and the send under one `worldMutex` lock (as `walkPath` does), plus once more before the final stop. It stops with "not connected to the zone server" when `zone->isConnected()` is false. `fight()` captures its scene and ends when an approach reports a scene change. All three callers (the explicit/missing-helper move, the outdoor fallback after a failed plan, the fight approach) pass a scene.
-- Dev build clean (core3client 06:23). Running bodies keep the old binary until their next login, so runtime proof is pending. Your C20 Esk run would exercise it if the crew relogs first (`squad.py setup` relogs stale bodies).
+- Dev build clean (core3client 06:23). Running bodies keep the old binary until their next login, so runtime proof is pending. Your C20 Esk run would exercise it if the crew logs in again first (`squad.py stop` for the Esk group, then `squad.py setup`; setup alone only restarts bodies older than the server).
