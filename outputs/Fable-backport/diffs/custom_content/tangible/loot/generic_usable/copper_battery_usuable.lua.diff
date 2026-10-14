@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/generic_usable/copper_battery_usuable.lua
++++ b/custom_content/tangible/loot/generic_usable/copper_battery_usuable.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_copper_battery_usuable, "object/tangible/loot/generic/usable/copper_battery_usuable.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_copper_battery_usuable, "object/tangible/loot/generic_usable/copper_battery_usuable.iff")

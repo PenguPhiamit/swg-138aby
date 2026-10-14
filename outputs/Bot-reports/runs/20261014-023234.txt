@@ -1,0 +1,337 @@
+
+######## round 1 · 02:37 · 4 min so far
+== Aurek · aurek-doctor-buffs.py · 0/0 passed · 2 s
+  note: Tamsin support gear: {'equipped': ['object/weapon/ranged/pistol/pistol_cdef.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_chest_plate.iff', 'object/tangible/wearables/armor/bone/armor_bone
+  note: BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell.
+  report: Bot-reports/Aurek/20261014-023236-aurek-doctor-buffs.json
+== Besh · besh-harvest.py · 7/10 passed · 98 s
+  PASS artisans reach town staging point — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds"]
+  PASS meat patrol pair upright on Tatooine
+  PASS meat patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 69, 'reply': 'move', 'second", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 69, 'reply': 'move', 'second"]
+  FAIL meat ordinary wild prey found — null
+  PASS hide patrol pair upright on Tatooine
+  PASS hide patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 9, 'reply': 'move', 'seconds"]
+  FAIL hide ordinary wild prey found — null
+  PASS bone patrol pair upright on Tatooine
+  PASS bone patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds"]
+  FAIL bone ordinary wild prey found — null
+  note: Varo basic gear: {'equipped': ['object/weapon/ranged/rifle/rifle_cdef.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_helmet.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_gl
+  note: Fresh kills inspected: 0; one harvest type attempted per corpse.
+  report: Bot-reports/Besh/20261014-023412-besh-harvest.json
+== Cresh · cresh-missions.py · 3/3 passed · 33 s
+  PASS a mission terminal in town — {"template": "object/tangible/terminal/terminal_mission.iff", "distance": 68.69999694824219, "cell": null}
+  PASS reach the mission terminal — [{"arrived": true, "cell": 0, "legs": 2, "ok": true, "points": 2, "reply": "move", "seconds": 25.9, "x": 3501.881591796875, "y": -4870.263671875, "z": 16.546772003173828}, {"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 33, "reply": "move", "seconds": 24.5, "x": 3503.949951171875, "y":…
+  PASS the terminal lists missions — 36 missions: ['0', 'deliver', 'destroy']
+  note: Cresh gear: {'equipped': ['object/weapon/ranged/pistol/pistol_cdef.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_helmet.iff', 'object/tangible/wearables/armor/
+  note: Ilsa gear: {'equipped': ['object/weapon/ranged/pistol/pistol_cdef.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_chest_plate.iff', 'object/tangible/wearables/a
+  note: Kor gear: {'equipped': ['object/weapon/ranged/rifle/rifle_cdef.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_helmet.iff', 'object/tangible/wearables/armor/bo
+  note: BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted.
+  report: Bot-reports/Cresh/20261014-023307-cresh-missions.json
+== Dorn · dorn-social.py · 9/10 passed · 69 s
+  PASS spatial chat heard by both — ["Dorn group checking in", "Dorn group checking in"]
+  PASS tell arrives — {"event": "tell", "from": "Dorn", "text": "Nima, are you with me?"}
+  PASS leash starts — ["Leashed to Dorn: keep using /follow; if it gets stuck you'll be moved closer. /leash off to stop."]
+  FAIL leash brings Nima to Dorn after he stops — 11.7 m from Dorn
+  PASS no repeated hops once Dorn has stopped — 0 hops in 10 s
+  PASS menu: "Stop leash" on the leader — Stop leash
+  PASS menu: another member offers to switch — Leash to this member instead
+  PASS leash off — ["Leash off."]
+  PASS Dax Venn the mercenary broker is nearby — 21.5 m
+  PASS Dax offers options — ["Hire a mercenary.", "Dismiss my mercenaries.", "Not today."]
+  note: Rusk gear: {'equipped': ['object/weapon/melee/knife/knife_dagger.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_helmet.iff', 'object/tangible/wearables/armor/b
+  note: Dorn /startdance basic: posture; @performance:dance_start_self
+  report: Bot-reports/Dorn/20261014-023343-dorn-social.json
+== Esk · esk-routes.py · 3/5 passed · 267 s
+  FAIL Esk reaches the cantina (indoors) — {"seconds": 0.2, "legs": null, "points": null, "cell": null, "z": null, "error": "cell is not in this zone"}
+  PASS Lira reaches the starport — {"seconds": 8.0, "legs": 2, "points": 2, "cell": 0, "z": 12.65625, "error": null}
+  PASS Tovan reaches the plateau — {"seconds": 107.0, "legs": 1, "points": 8, "cell": 0, "z": 178.90994262695312, "error": null}
+  PASS Tovan is up on the plateau (z > 150) — z 178.90994262695312
+  FAIL all three back in the square — [["Esk", 158.8], ["Lira", 8.4], ["Tovan", 89.7]]
+  note: Tovan gear: {'equipped': ['object/weapon/melee/knife/knife_dagger.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_helmet.iff', 'object/tangible/wearables/armor/b
+  note: cantina: Esk sees 2 creatures inside, e.g. R2-M7 (a helper R2 unit), @theme_park_name:transport
+  report: Bot-reports/Esk/20261014-023701-esk-routes.json
+
+######## round 2 · 02:40 · 8 min so far
+== Aurek · aurek-doctor-buffs.py · 0/0 passed · 2 s
+  note: Tamsin support gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell.
+  report: Bot-reports/Aurek/20261014-023703-aurek-doctor-buffs.json
+== Besh · besh-harvest.py · 2/3 passed · 30 s
+  PASS artisans reach town staging point — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds"]
+  PASS meat patrol pair upright on Tatooine
+  FAIL meat patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 15, 'reply': 'move', 'second", "{'cell': 0, 'error': 'cannot move while incapacitated', 'ok': False, 'reply': 'move', 'x':"]
+  note: Varo basic gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: short patrol unreachable; stop before further exposure.
+  note: Fresh kills inspected: 0; one harvest type attempted per corpse.
+  report: Bot-reports/Besh/20261014-023731-besh-harvest.json
+== Cresh · cresh-missions.py · 3/3 passed · 8 s
+  PASS a mission terminal in town — {"template": "object/tangible/terminal/terminal_mission_artisan.iff", "distance": 1.899999976158142, "cell": null}
+  PASS reach the mission terminal — [{"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 3, "reply": "move", "seconds": 1.6, "x": 3503.162109375, "y": -4871.82275390625, "z": 18.202486038208008}, {"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 2, "reply": "move", "seconds": 1.6, "x": 3505.162109375, "y": -4871.…
+  PASS the terminal lists missions — 36 missions: ['0', 'crafting', 'survey']
+  note: Cresh gear: {'skipped': 'already has armor_bone'}
+  note: Ilsa gear: {'skipped': 'already has armor_bone'}
+  note: Kor gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted.
+  report: Bot-reports/Cresh/20261014-023709-cresh-missions.json
+== Dorn · dorn-social.py · 9/10 passed · 73 s
+  PASS spatial chat heard by both — ["Dorn group checking in", "Dorn group checking in"]
+  PASS tell arrives — {"event": "tell", "from": "Dorn", "text": "Nima, are you with me?"}
+  PASS leash starts — ["Leashed to Dorn: keep using /follow; if it gets stuck you'll be moved closer. /leash off to stop."]
+  FAIL leash brings Nima to Dorn after he stops — 12.0 m from Dorn
+  PASS no repeated hops once Dorn has stopped — 0 hops in 10 s
+  PASS menu: "Stop leash" on the leader — Stop leash
+  PASS menu: another member offers to switch — Leash to this member instead
+  PASS leash off — ["Leash off."]
+  PASS Dax Venn the mercenary broker is nearby — 21.5 m
+  PASS Dax offers options — ["Hire a mercenary.", "Dismiss my mercenaries.", "Not today."]
+  note: Rusk gear: {'skipped': 'already has armor_bone'}
+  note: Dorn /startdance basic: posture; @performance:dance_start_self
+  report: Bot-reports/Dorn/20261014-023814-dorn-social.json
+== Esk · esk-routes.py · 3/5 passed · 201 s
+  FAIL Esk reaches the cantina (indoors) — {"seconds": 0.2, "legs": null, "points": null, "cell": null, "z": null, "error": "cell is not in this zone"}
+  PASS Lira reaches the starport — {"seconds": 6.6, "legs": 2, "points": 2, "cell": 0, "z": 12.65625, "error": null}
+  PASS Tovan reaches the plateau — {"seconds": 107.0, "legs": 1, "points": 8, "cell": 0, "z": 178.90994262695312, "error": null}
+  PASS Tovan is up on the plateau (z > 150) — z 178.90994262695312
+  FAIL all three back in the square — [["Esk", 0.2], ["Lira", 8.4], ["Tovan", 89.8]]
+  note: before the run Esk was incapacitated; now upright
+  note: Tovan gear: {'skipped': 'already has armor_bone'}
+  note: cantina: Esk sees 1 creatures inside, e.g. R2-M7 (a helper R2 unit)
+  report: Bot-reports/Esk/20261014-024022-esk-routes.json
+
+######## round 3 · 02:47 · 15 min so far
+== Aurek · aurek-doctor-buffs.py · 0/0 passed · 2 s
+  note: Tamsin support gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell.
+  report: Bot-reports/Aurek/20261014-024024-aurek-doctor-buffs.json
+== Besh · besh-harvest.py · 2/3 passed · 109 s
+  PASS artisans reach town staging point — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds"]
+  PASS meat patrol pair upright on Tatooine
+  FAIL meat patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'cell': 0, 'error': 'timeout', 'ok': False, 'reply': 'move', 'x': 3559.72802734375, 'y': "]
+  note: before the run Pell was dead; now upright
+  note: Varo basic gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: short patrol unreachable; stop before further exposure.
+  note: Fresh kills inspected: 0; one harvest type attempted per corpse.
+  report: Bot-reports/Besh/20261014-024211-besh-harvest.json
+== Cresh · cresh-missions.py · 3/3 passed · 7 s
+  PASS a mission terminal in town — {"template": "object/tangible/terminal/terminal_mission_artisan.iff", "distance": 3.0, "cell": null}
+  PASS reach the mission terminal — [{"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 2, "reply": "move", "seconds": 0.6, "x": 3503.162109375, "y": -4871.82275390625, "z": 17.7353515625}, {"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 2, "reply": "move", "seconds": 0.6, "x": 3505.162109375, "y": -4871.82275…
+  PASS the terminal lists missions — 36 missions: ['0', 'crafting', 'survey']
+  note: Cresh gear: {'skipped': 'already has armor_bone'}
+  note: Ilsa gear: {'skipped': 'already has armor_bone'}
+  note: Kor gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted.
+  report: Bot-reports/Cresh/20261014-024029-cresh-missions.json
+== Dorn · dorn-social.py · 9/10 passed · 86 s
+  PASS spatial chat heard by both — ["Dorn group checking in", "Dorn group checking in"]
+  PASS tell arrives — {"event": "tell", "from": "Dorn", "text": "Nima, are you with me?"}
+  PASS leash starts — ["Leashed to Dorn: keep using /follow; if it gets stuck you'll be moved closer. /leash off to stop."]
+  FAIL leash brings Nima to Dorn after he stops — 12.0 m from Dorn
+  PASS no repeated hops once Dorn has stopped — 0 hops in 10 s
+  PASS menu: "Stop leash" on the leader — Stop leash
+  PASS menu: another member offers to switch — Leash to this member instead
+  PASS leash off — ["Leash off."]
+  PASS Dax Venn the mercenary broker is nearby — 21.5 m
+  PASS Dax offers options — ["Hire a mercenary.", "Dismiss my mercenaries.", "Not today."]
+  note: Rusk gear: {'skipped': 'already has armor_bone'}
+  note: Dorn /startdance basic: posture; @performance:dance_start_self
+  report: Bot-reports/Dorn/20261014-024148-dorn-social.json
+== Esk · esk-routes.py · 3/5 passed · 405 s
+  FAIL Esk reaches the cantina (indoors) — {"seconds": 0.2, "legs": null, "points": null, "cell": null, "z": null, "error": "cell is not in this zone"}
+  PASS Lira reaches the starport — {"seconds": 6.6, "legs": 2, "points": 2, "cell": 0, "z": 12.65625, "error": null}
+  PASS Tovan reaches the plateau — {"seconds": 107.0, "legs": 1, "points": 8, "cell": 0, "z": 178.90994262695312, "error": null}
+  PASS Tovan is up on the plateau (z > 150) — z 178.90994262695312
+  FAIL all three back in the square — [["Esk", 285.5], ["Lira", 8.4], ["Tovan", 89.7]]
+  note: before the run Esk was dead; now upright
+  note: Tovan gear: {'skipped': 'already has armor_bone'}
+  note: cantina: Esk sees 0 creatures inside, e.g. 
+  report: Bot-reports/Esk/20261014-024707-esk-routes.json
+
+######## round 4 · 02:50 · 18 min so far
+== Aurek · aurek-doctor-buffs.py · 0/0 passed · 1 s
+  note: Tamsin support gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell.
+  report: Bot-reports/Aurek/20261014-024709-aurek-doctor-buffs.json
+== Besh · besh-harvest.py · 7/10 passed · 59 s
+  PASS artisans reach town staging point — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds"]
+  PASS meat patrol pair upright on Tatooine
+  PASS meat patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 14, 'reply': 'move', 'second"]
+  FAIL meat ordinary wild prey found — null
+  PASS hide patrol pair upright on Tatooine
+  PASS hide patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 9, 'reply': 'move', 'seconds"]
+  FAIL hide ordinary wild prey found — null
+  PASS bone patrol pair upright on Tatooine
+  PASS bone patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds"]
+  FAIL bone ordinary wild prey found — null
+  note: Varo basic gear: {'skipped': 'already has armor_bone'}
+  note: Fresh kills inspected: 0; one harvest type attempted per corpse.
+  report: Bot-reports/Besh/20261014-024806-besh-harvest.json
+== Cresh · cresh-missions.py · 3/3 passed · 7 s
+  PASS a mission terminal in town — {"template": "object/tangible/terminal/terminal_mission_artisan.iff", "distance": 3.0, "cell": null}
+  PASS reach the mission terminal — [{"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 2, "reply": "move", "seconds": 0.6, "x": 3503.162109375, "y": -4871.82275390625, "z": 17.7353515625}, {"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 2, "reply": "move", "seconds": 0.6, "x": 3505.162109375, "y": -4871.82275…
+  PASS the terminal lists missions — 36 missions: ['0', 'crafting', 'deliver', 'survey']
+  note: Cresh gear: {'skipped': 'already has armor_bone'}
+  note: Ilsa gear: {'skipped': 'already has armor_bone'}
+  note: Kor gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted.
+  report: Bot-reports/Cresh/20261014-024714-cresh-missions.json
+== Dorn · dorn-social.py · 9/10 passed · 86 s
+  PASS spatial chat heard by both — ["Dorn group checking in", "Dorn group checking in"]
+  PASS tell arrives — {"event": "tell", "from": "Dorn", "text": "Nima, are you with me?"}
+  PASS leash starts — ["Leashed to Dorn: keep using /follow; if it gets stuck you'll be moved closer. /leash off to stop."]
+  FAIL leash brings Nima to Dorn after he stops — 12.0 m from Dorn
+  PASS no repeated hops once Dorn has stopped — 0 hops in 10 s
+  PASS menu: "Stop leash" on the leader — Stop leash
+  PASS menu: another member offers to switch — Leash to this member instead
+  PASS leash off — ["Leash off."]
+  PASS Dax Venn the mercenary broker is nearby — 21.5 m
+  PASS Dax offers options — ["Hire a mercenary.", "Dismiss my mercenaries.", "Not today."]
+  note: Rusk gear: {'skipped': 'already has armor_bone'}
+  note: Dorn /startdance basic: posture; @performance:dance_start_self
+  report: Bot-reports/Dorn/20261014-024833-dorn-social.json
+== Esk · esk-routes.py · 3/5 passed · 225 s
+  FAIL Esk reaches the cantina (indoors) — {"seconds": 0.2, "legs": null, "points": null, "cell": null, "z": null, "error": "cell is not in this zone"}
+  PASS Lira reaches the starport — {"seconds": 6.6, "legs": 2, "points": 2, "cell": 0, "z": 12.65625, "error": null}
+  PASS Tovan reaches the plateau — {"seconds": 107.0, "legs": 1, "points": 8, "cell": 0, "z": 178.90994262695312, "error": null}
+  PASS Tovan is up on the plateau (z > 150) — z 178.90994262695312
+  FAIL all three back in the square — [["Esk", 117.0], ["Lira", 8.4], ["Tovan", 89.7]]
+  note: Tovan gear: {'skipped': 'already has armor_bone'}
+  note: cantina: Esk sees 2 creatures inside, e.g. R2-M7 (a helper R2 unit), @mob/creature_names:howling_plumed_rasp
+  report: Bot-reports/Esk/20261014-025052-esk-routes.json
+
+######## round 5 · 02:54 · 22 min so far
+== Aurek · aurek-doctor-buffs.py · 0/0 passed · 1 s
+  note: Tamsin support gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell.
+  report: Bot-reports/Aurek/20261014-025054-aurek-doctor-buffs.json
+== Besh · besh-harvest.py · 7/10 passed · 60 s
+  PASS artisans reach town staging point — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds"]
+  PASS meat patrol pair upright on Tatooine
+  PASS meat patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 15, 'reply': 'move', 'second", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 15, 'reply': 'move', 'second"]
+  FAIL meat ordinary wild prey found — null
+  PASS hide patrol pair upright on Tatooine
+  PASS hide patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 9, 'reply': 'move', 'seconds"]
+  FAIL hide ordinary wild prey found — null
+  PASS bone patrol pair upright on Tatooine
+  PASS bone patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds"]
+  FAIL bone ordinary wild prey found — null
+  note: Varo basic gear: {'skipped': 'already has armor_bone'}
+  note: Fresh kills inspected: 0; one harvest type attempted per corpse.
+  report: Bot-reports/Besh/20261014-025153-besh-harvest.json
+== Cresh · cresh-missions.py · 3/3 passed · 7 s
+  PASS a mission terminal in town — {"template": "object/tangible/terminal/terminal_mission_artisan.iff", "distance": 3.0, "cell": null}
+  PASS reach the mission terminal — [{"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 2, "reply": "move", "seconds": 0.6, "x": 3503.162109375, "y": -4871.82275390625, "z": 17.7353515625}, {"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 2, "reply": "move", "seconds": 0.6, "x": 3505.162109375, "y": -4871.82275…
+  PASS the terminal lists missions — 36 missions: ['0', 'crafting', 'survey']
+  note: Cresh gear: {'skipped': 'already has armor_bone'}
+  note: Ilsa gear: {'skipped': 'already has armor_bone'}
+  note: Kor gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted.
+  report: Bot-reports/Cresh/20261014-025059-cresh-missions.json
+== Dorn · dorn-social.py · 9/10 passed · 86 s
+  PASS spatial chat heard by both — ["Dorn group checking in", "Dorn group checking in"]
+  PASS tell arrives — {"event": "tell", "from": "Dorn", "text": "Nima, are you with me?"}
+  PASS leash starts — ["Leashed to Dorn: keep using /follow; if it gets stuck you'll be moved closer. /leash off to stop."]
+  FAIL leash brings Nima to Dorn after he stops — 12.0 m from Dorn
+  PASS no repeated hops once Dorn has stopped — 0 hops in 10 s
+  PASS menu: "Stop leash" on the leader — Stop leash
+  PASS menu: another member offers to switch — Leash to this member instead
+  PASS leash off — ["Leash off."]
+  PASS Dax Venn the mercenary broker is nearby — 21.5 m
+  PASS Dax offers options — ["Hire a mercenary.", "Dismiss my mercenaries.", "Not today."]
+  note: Rusk gear: {'skipped': 'already has armor_bone'}
+  note: Dorn /startdance basic: posture; @performance:dance_start_self
+  report: Bot-reports/Dorn/20261014-025218-dorn-social.json
+== Esk · esk-routes.py · 3/5 passed · 220 s
+  FAIL Esk reaches the cantina (indoors) — {"seconds": 0.2, "legs": null, "points": null, "cell": null, "z": null, "error": "cell is not in this zone"}
+  PASS Lira reaches the starport — {"seconds": 6.6, "legs": 2, "points": 2, "cell": 0, "z": 12.65625, "error": null}
+  PASS Tovan reaches the plateau — {"seconds": 107.0, "legs": 1, "points": 8, "cell": 0, "z": 178.90994262695312, "error": null}
+  PASS Tovan is up on the plateau (z > 150) — z 178.90994262695312
+  FAIL all three back in the square — [["Esk", 0.2], ["Lira", 8.4], ["Tovan", 89.8]]
+  note: before the run Esk was incapacitated; now upright
+  note: Tovan gear: {'skipped': 'already has armor_bone'}
+  note: cantina: Esk sees 3 creatures inside, e.g. R2-M7 (a helper R2 unit), @mob/creature_names:violent_krahbu, @mob/creature_names:violent_krahbu
+  report: Bot-reports/Esk/20261014-025432-esk-routes.json
+
+######## round 6 · 02:58 · 26 min so far
+== Aurek · aurek-doctor-buffs.py · 0/0 passed · 2 s
+  note: Tamsin support gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell.
+  report: Bot-reports/Aurek/20261014-025435-aurek-doctor-buffs.json
+== Besh · besh-harvest.py · 7/10 passed · 60 s
+  PASS artisans reach town staging point — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds"]
+  PASS meat patrol pair upright on Tatooine
+  PASS meat patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 15, 'reply': 'move', 'second", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 15, 'reply': 'move', 'second"]
+  FAIL meat ordinary wild prey found — null
+  PASS hide patrol pair upright on Tatooine
+  PASS hide patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 9, 'reply': 'move', 'seconds"]
+  FAIL hide ordinary wild prey found — null
+  PASS bone patrol pair upright on Tatooine
+  PASS bone patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds"]
+  FAIL bone ordinary wild prey found — null
+  note: Varo basic gear: {'skipped': 'already has armor_bone'}
+  note: Fresh kills inspected: 0; one harvest type attempted per corpse.
+  report: Bot-reports/Besh/20261014-025534-besh-harvest.json
+== Cresh · cresh-missions.py · 3/3 passed · 7 s
+  PASS a mission terminal in town — {"template": "object/tangible/terminal/terminal_mission_artisan.iff", "distance": 3.0, "cell": null}
+  PASS reach the mission terminal — [{"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 2, "reply": "move", "seconds": 0.6, "x": 3503.162109375, "y": -4871.82275390625, "z": 17.7353515625}, {"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 2, "reply": "move", "seconds": 0.6, "x": 3505.162109375, "y": -4871.82275…
+  PASS the terminal lists missions — 36 missions: ['0', 'crafting', 'survey']
+  note: Cresh gear: {'skipped': 'already has armor_bone'}
+  note: Ilsa gear: {'skipped': 'already has armor_bone'}
+  note: Kor gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted.
+  report: Bot-reports/Cresh/20261014-025440-cresh-missions.json
+== Dorn · dorn-social.py · 9/10 passed · 86 s
+  PASS spatial chat heard by both — ["Dorn group checking in", "Dorn group checking in"]
+  PASS tell arrives — {"event": "tell", "from": "Dorn", "text": "Nima, are you with me?"}
+  PASS leash starts — ["Leashed to Dorn: keep using /follow; if it gets stuck you'll be moved closer. /leash off to stop."]
+  FAIL leash brings Nima to Dorn after he stops — 12.0 m from Dorn
+  PASS no repeated hops once Dorn has stopped — 0 hops in 10 s
+  PASS menu: "Stop leash" on the leader — Stop leash
+  PASS menu: another member offers to switch — Leash to this member instead
+  PASS leash off — ["Leash off."]
+  PASS Dax Venn the mercenary broker is nearby — 21.5 m
+  PASS Dax offers options — ["Hire a mercenary.", "Dismiss my mercenaries.", "Not today."]
+  note: Rusk gear: {'skipped': 'already has armor_bone'}
+  note: Dorn /startdance basic: posture; @performance:dance_start_self
+  report: Bot-reports/Dorn/20261014-025559-dorn-social.json
+== Esk · esk-routes.py · 3/5 passed · 215 s
+  FAIL Esk reaches the cantina (indoors) — {"seconds": 0.2, "legs": null, "points": null, "cell": null, "z": null, "error": "cell is not in this zone"}
+  PASS Lira reaches the starport — {"seconds": 6.6, "legs": 2, "points": 2, "cell": 0, "z": 12.65625, "error": null}
+  PASS Tovan reaches the plateau — {"seconds": 107.0, "legs": 1, "points": 8, "cell": 0, "z": 178.90994262695312, "error": null}
+  PASS Tovan is up on the plateau (z > 150) — z 178.90994262695312
+  FAIL all three back in the square — [["Esk", "run time budget reached"], ["Lira", 8.4], ["Tovan", "run time budget reached"]]
+  note: before the run Esk was dead; now upright
+  note: Tovan gear: {'skipped': 'already has armor_bone'}
+  note: cantina: Esk sees 0 creatures inside, e.g. 
+  note: ERROR in a parallel job: RunStopped: run time budget reached (line 24: back = g.parallel(*[lambda b=b, i=i: b.walk(SQUARE[0] + 3 * i, SQUARE[1]) for i, b in enumerate(g.bots)]))
+  note: ERROR in a parallel job: RunStopped: run time budget reached (line 24: back = g.parallel(*[lambda b=b, i=i: b.walk(SQUARE[0] + 3 * i, SQUARE[1]) for i, b in enumerate(g.bots)]))
+  ERROR RunStopped: run time budget reached
+  report: Bot-reports/Esk/20261014-025808-esk-routes.json
+
+# Squad run 20261014-023234: 6 round(s), 26 min
+
+## Aurek: 0/0 checks passed
+- 6x BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell. (aurek-doctor-buffs.py)
+
+## Besh: 32/46 checks passed
+- FAIL 4/4: bone ordinary wild prey found (besh-harvest.py). Last: null
+- FAIL 4/4: hide ordinary wild prey found (besh-harvest.py). Last: null
+- FAIL 4/4: meat ordinary wild prey found (besh-harvest.py). Last: null
+- FAIL 2/6: meat patrol reached (besh-harvest.py). Last: ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'cell': 0, 'error': 'timeout', 'ok': False, 'reply': 'move', 'x…
+- always passed: artisans reach town staging point; bone patrol pair upright on Tatooine; bone patrol reached; hide patrol pair upright on Tatooine; hide patrol reached; meat patrol pair upright on Tatooine
+- 2x BLOCKED: short patrol unreachable; stop before further exposure. (besh-harvest.py)
+
+## Cresh: 18/18 checks passed
+- always passed: a mission terminal in town; reach the mission terminal; the terminal lists missions
+- 6x BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted. (cresh-missions.py)
+
+## Dorn: 54/60 checks passed
+- FAIL 6/6: leash brings Nima to Dorn after he stops (dorn-social.py). Last: 12.0 m from Dorn
+- always passed: Dax Venn the mercenary broker is nearby; Dax offers options; leash off; leash starts; menu: "Stop leash" on the leader; menu: another member offers to switch; no repeated hops once Dorn has stopped; spatial chat heard by both; tell arrives
+
+## Esk: 18/30 checks passed
+- FAIL 6/6: Esk reaches the cantina (indoors) (esk-routes.py). Last: {"seconds": 0.2, "legs": null, "points": null, "cell": null, "z": null, "error": "cell is not in this zone"}
+- FAIL 6/6: all three back in the square (esk-routes.py). Last: [["Esk", "run time budget reached"], ["Lira", 8.4], ["Tovan", "run time budget reached"]]
+- always passed: Lira reaches the starport; Tovan is up on the plateau (z > 150); Tovan reaches the plateau
+- 2x ERROR in a parallel job: RunStopped: run time budget reached (line 24: back = g.parallel(*[lambda b=b, i=i: b.walk(SQUARE[0] + 3 * i, SQUARE[1]) for i, b in enumerate(g.bots)])) (esk-routes.py)
+- 1x RunStopped: run time budget reached (esk-routes.py)
+

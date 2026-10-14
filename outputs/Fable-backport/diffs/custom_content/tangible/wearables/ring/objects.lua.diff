@@ -1,0 +1,20 @@
+--- /dev/null
++++ b/custom_content/tangible/wearables/ring/objects.lua
+@@ -0,0 +1,17 @@
++-- Fable backport batch 1 (14 Oct 2026): shared templates for NGE ring with no server template in Core3-dev.
++-- Client files come from the Mod the Galaxy archives (see README.md, rights); style as custom_content/tangible/wearables/belt/objects.lua.
++
++--**********************************************
++
++object_tangible_wearables_ring_shared_ring_gcw_imperial = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/ring/shared_ring_gcw_imperial.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_wearables_ring_shared_ring_gcw_imperial, "object/tangible/wearables/ring/shared_ring_gcw_imperial.iff")
++
++--**********************************************
++
++object_tangible_wearables_ring_shared_ring_gcw_rebel = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/ring/shared_ring_gcw_rebel.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_wearables_ring_shared_ring_gcw_rebel, "object/tangible/wearables/ring/shared_ring_gcw_rebel.iff")
++

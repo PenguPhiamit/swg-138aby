@@ -1,0 +1,42 @@
+[
+  {
+    "path": "MMOCoreORB/src/client/agent/AgentControl.cpp",
+    "packet_matches_commit": true,
+    "working_matches_commit": false
+  },
+  {
+    "path": "MMOCoreORB/src/client/agent/AgentControl.h",
+    "packet_matches_commit": true,
+    "working_matches_commit": true
+  },
+  {
+    "path": "MMOCoreORB/src/server/zone/objects/creature/commands/AgentGearCommand.h",
+    "packet_matches_commit": true,
+    "working_matches_commit": true
+  },
+  {
+    "path": "MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h",
+    "packet_matches_commit": true,
+    "working_matches_commit": false
+  },
+  {
+    "path": "MMOCoreORB/src/server/zone/objects/creature/commands/AgentSkillCommand.h",
+    "packet_matches_commit": true,
+    "working_matches_commit": true
+  },
+  {
+    "path": "MMOCoreORB/src/server/zone/objects/creature/commands/LeashCommand.h",
+    "packet_matches_commit": true,
+    "working_matches_commit": true
+  },
+  {
+    "path": "MMOCoreORB/src/server/zone/objects/creature/commands/SandboxTestGalaxy.h",
+    "packet_matches_commit": true,
+    "working_matches_commit": true
+  },
+  {
+    "path": "MMOCoreORB/src/server/zone/objects/player/components/PlayerObjectMenuComponent.cpp",
+    "packet_matches_commit": true,
+    "working_matches_commit": true
+  }
+]

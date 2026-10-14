@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/ig_88_left_leg.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/ig_88_left_leg.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_ig_88_left_leg, "object/tangible/loot/creature/loot/collections/ig_88_left_leg.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_ig_88_left_leg, "object/tangible/loot/creature_loot/collections/ig_88_left_leg.iff")

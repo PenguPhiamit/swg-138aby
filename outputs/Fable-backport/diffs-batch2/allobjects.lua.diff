@@ -1,0 +1,18 @@
+--- a/allobjects.lua
++++ b/allobjects.lua
+@@ -942,6 +942,7 @@
+ includeFile("custom_content/ship/dungeon/objects.lua")
+ includeFile("custom_content/ship/player/objects.lua")
+ includeFile("custom_content/soundobject/objects.lua")
++includeFile("custom_content/static/base/objects.lua")
+ includeFile("custom_content/static/christmas/objects.lua")
+ includeFile("custom_content/static/creature/objects.lua")
+ includeFile("custom_content/static/firework/objects.lua")
+@@ -1049,6 +1050,7 @@
+ includeFile("custom_content/tangible/furniture/nym_themepark/objects.lua")
+ includeFile("custom_content/tangible/furniture/nym_themepark/collection/objects.lua")
+ includeFile("custom_content/tangible/furniture/rustic/objects.lua")
++includeFile("custom_content/tangible/furniture/space/objects.lua")
+ includeFile("custom_content/tangible/furniture/tatooine/objects.lua")
+ includeFile("custom_content/tangible/furniture/technical/objects.lua")
+ includeFile("custom_content/tangible/furniture/terminal/objects.lua")

@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/generic/heroic_tusken_shredded_shoe.lua
++++ b/custom_content/tangible/loot/creature_loot/generic/heroic_tusken_shredded_shoe.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_heroic_tusken_shredded_shoe, "object/tangible/loot/creature/loot/generic/heroic_tusken_shredded_shoe.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_heroic_tusken_shredded_shoe, "object/tangible/loot/creature_loot/generic/heroic_tusken_shredded_shoe.iff")

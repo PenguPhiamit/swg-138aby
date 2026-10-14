@@ -1,0 +1,13 @@
+--- a/custom_content/tangible/wearables/serverobjects.lua
++++ b/custom_content/tangible/wearables/serverobjects.lua
+@@ -59,7 +59,10 @@
+ includeFile("custom_content/tangible/wearables/hat/serverobjects.lua")
+ includeFile("custom_content/tangible/wearables/helmet/serverobjects.lua")
+ includeFile("custom_content/tangible/wearables/jacket/serverobjects.lua")
++includeFile("custom_content/tangible/wearables/necklace/serverobjects.lua")
++includeFile("custom_content/tangible/wearables/pants/serverobjects.lua")
+ includeFile("custom_content/tangible/wearables/robe/serverobjects.lua")
++includeFile("custom_content/tangible/wearables/ring/serverobjects.lua")
+ includeFile("custom_content/tangible/wearables/senator/serverobjects.lua")
+ includeFile("custom_content/tangible/wearables/shirt/serverobjects.lua")
+ includeFile("custom_content/tangible/wearables/skirt/serverobjects.lua")

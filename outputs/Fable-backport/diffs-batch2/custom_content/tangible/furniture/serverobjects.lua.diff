@@ -1,0 +1,10 @@
+--- a/custom_content/tangible/furniture/serverobjects.lua
++++ b/custom_content/tangible/furniture/serverobjects.lua
+@@ -13,6 +13,7 @@
+ includeFile("custom_content/tangible/furniture/modern/serverobjects.lua")
+ includeFile("custom_content/tangible/furniture/nym_themepark/serverobjects.lua")
+ includeFile("custom_content/tangible/furniture/rustic/serverobjects.lua")
++includeFile("custom_content/tangible/furniture/space/serverobjects.lua")
+ includeFile("custom_content/tangible/furniture/tatooine/serverobjects.lua")
+ includeFile("custom_content/tangible/furniture/technical/serverobjects.lua")
+ includeFile("custom_content/tangible/furniture/terminal/serverobjects.lua")

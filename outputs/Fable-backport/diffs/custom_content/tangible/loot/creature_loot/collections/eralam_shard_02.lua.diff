@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/eralam_shard_02.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/eralam_shard_02.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_eralam_shard_02, "object/tangible/loot/creature/loot/collections/eralam_shard_02.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_eralam_shard_02, "object/tangible/loot/creature_loot/collections/eralam_shard_02.iff")

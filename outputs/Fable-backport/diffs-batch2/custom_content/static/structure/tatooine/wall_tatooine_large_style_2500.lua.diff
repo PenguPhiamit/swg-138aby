@@ -1,0 +1,9 @@
+--- /dev/null
++++ b/custom_content/static/structure/tatooine/wall_tatooine_large_style_2500.lua
+@@ -0,0 +1,6 @@
++-- Fable backport batch 2 (14 Oct 2026). Client template object/static/structure/tatooine/shared_wall_tatooine_large_style_2500.iff (mtg_patch_023.tre), form STAT.
++
++object_static_structure_tatooine_wall_tatooine_large_style_2500 = object_static_structure_tatooine_shared_wall_tatooine_large_style_2500:new {
++}
++
++ObjectTemplates:addTemplate(object_static_structure_tatooine_wall_tatooine_large_style_2500, "object/static/structure/tatooine/wall_tatooine_large_style_2500.iff")

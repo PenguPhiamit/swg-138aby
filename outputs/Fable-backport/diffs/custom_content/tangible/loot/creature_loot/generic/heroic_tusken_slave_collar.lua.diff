@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/generic/heroic_tusken_slave_collar.lua
++++ b/custom_content/tangible/loot/creature_loot/generic/heroic_tusken_slave_collar.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_heroic_tusken_slave_collar, "object/tangible/loot/creature/loot/generic/heroic_tusken_slave_collar.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_heroic_tusken_slave_collar, "object/tangible/loot/creature_loot/generic/heroic_tusken_slave_collar.iff")

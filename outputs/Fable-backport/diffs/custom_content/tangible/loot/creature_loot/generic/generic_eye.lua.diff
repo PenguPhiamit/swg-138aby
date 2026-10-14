@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/generic/generic_eye.lua
++++ b/custom_content/tangible/loot/creature_loot/generic/generic_eye.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_generic_eye, "object/tangible/loot/creature/loot/generic/generic_eye.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_generic_eye, "object/tangible/loot/creature_loot/generic/generic_eye.iff")

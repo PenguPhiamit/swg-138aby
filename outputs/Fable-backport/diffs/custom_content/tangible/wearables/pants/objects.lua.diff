@@ -1,0 +1,27 @@
+--- /dev/null
++++ b/custom_content/tangible/wearables/pants/objects.lua
+@@ -0,0 +1,24 @@
++-- Fable backport batch 1 (14 Oct 2026): shared templates for NGE pants with no server template in Core3-dev.
++-- Client files come from the Mod the Galaxy archives (see README.md, rights); style as custom_content/tangible/wearables/belt/objects.lua.
++
++--**********************************************
++
++object_tangible_wearables_pants_shared_pants_outbreak_prison_guard = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/pants/shared_pants_outbreak_prison_guard.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_wearables_pants_shared_pants_outbreak_prison_guard, "object/tangible/wearables/pants/shared_pants_outbreak_prison_guard.iff")
++
++--**********************************************
++
++object_tangible_wearables_pants_shared_wod_nightsister_pants_s01 = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/pants/shared_wod_nightsister_pants_s01.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_wearables_pants_shared_wod_nightsister_pants_s01, "object/tangible/wearables/pants/shared_wod_nightsister_pants_s01.iff")
++
++--**********************************************
++
++object_tangible_wearables_pants_shared_wod_nightsister_pants_s02 = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/pants/shared_wod_nightsister_pants_s02.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_wearables_pants_shared_wod_nightsister_pants_s02, "object/tangible/wearables/pants/shared_wod_nightsister_pants_s02.iff")
++

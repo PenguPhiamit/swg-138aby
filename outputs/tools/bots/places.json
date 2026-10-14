@@ -1,0 +1,60 @@
+{
+ "mos_eisley": {
+  "area": [
+   3200,
+   -5100,
+   3900,
+   -4500
+  ],
+  "terminals": {
+   "terminal_bank": [
+    {
+     "name": "@terminal_name:terminal_bank",
+     "x": 3496.5,
+     "y": -4947.6
+    },
+    {
+     "name": "@terminal_name:terminal_bank",
+     "x": 3495.9,
+     "y": -4941.7
+    },
+    {
+     "name": "@terminal_name:terminal_bank",
+     "x": 3502.4,
+     "y": -4946.9
+    },
+    {
+     "name": "@terminal_name:terminal_bank",
+     "x": 3501.8,
+     "y": -4941.0
+    }
+   ],
+   "terminal_character_builder": [
+    {
+     "name": "@terminal_name:terminal_character_builder",
+     "x": 3533.0,
+     "y": -4796.0
+    }
+   ],
+   "ticket_collector_name": [
+    {
+     "name": "@travel:ticket_collector_name",
+     "x": 3428.0,
+     "y": -4643.5
+    },
+    {
+     "name": "@travel:ticket_collector_name",
+     "x": 3628.8,
+     "y": -4790.9
+    }
+   ],
+   "terminal_travel": [
+    {
+     "name": "@terminal_name:terminal_travel",
+     "x": 3417.7,
+     "y": -4659.5
+    }
+   ]
+  }
+ }
+}

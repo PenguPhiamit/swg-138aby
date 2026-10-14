@@ -1,0 +1,624 @@
+{
+  "schema_version": 1,
+  "researched": "2026-10-13",
+  "scope": "Hoth first, ten stock SWG destinations, all catalogue planets with local terrain evidence, then three orientation worlds",
+  "source_policy": "Wookieepedia Legends preferred; Jakku explicit canon exception; text is original paraphrase, no images imported",
+  "mapping": "Grid centers are approximate atlas-square centres, not physical XYZ or client pixels. Shared-system destinations are duplicate anchors.",
+  "remaining_gaps": [
+    "Complete sector/moon inventories where null or pending",
+    "Resolve Yavin4 submoon contradictions",
+    "Pixel fit against actual stock UI with residuals; no numeric client pixel placement claimed",
+    "Full-page historical citations unavailable through current web access"
+  ],
+  "planets": [
+    {
+      "name": "Hoth",
+      "zone": "hoth",
+      "continuity": "Legends",
+      "grid_square": "K-18",
+      "grid_center": {
+        "column_A1": 11,
+        "row": 18
+      },
+      "region": "Outer Rim Territories / Greater Javin",
+      "sector": "Anoat",
+      "system": "Hoth system",
+      "moons": "3 (names not verified)",
+      "climate_and_terrain": "Frozen ice plains, glaciers and mountains",
+      "species_and_creatures": "Wampas; tauntauns",
+      "notable_places": "Echo Base; wampa caves; Clabburn Range",
+      "summary": "Hoth is a remote frozen world with dangerous wildlife. The Rebels built Echo Base in its caves, then lost it during the Imperial attack in 3 ABY. A local expedition can focus on shelter, supply routes and predator encounters without assuming our snapshot already contains the famous base.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Hoth/Legends",
+        "https://starwars.fandom.com/wiki/Hoth_system/Legends",
+        "https://starwars.fandom.com/wiki/Wampa/Legends",
+        "https://starwars.fandom.com/wiki/Tauntaun/Legends",
+        "https://starwars.fandom.com/wiki/Echo_Base/Legends"
+      ],
+      "local_terrain_evidence": true,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Corellia",
+      "zone": "corellia",
+      "continuity": "Legends",
+      "grid_square": "M-11",
+      "grid_center": {
+        "column_A1": 13,
+        "row": 11
+      },
+      "region": "Core Worlds",
+      "sector": "Corellian",
+      "system": "Corellian system",
+      "moons": "Gus Talon and Gus Treta (system source)",
+      "climate_and_terrain": "Temperate; farms, towns and coasts",
+      "species_and_creatures": "Humans, Drall and Selonians (residents; origins differ)",
+      "notable_places": "Coronet; Tyrena; Gold Beaches",
+      "summary": "Corellia is a major inhabited world of the Corellian system. Its communities include Humans, Drall and Selonians, with many inhabitants living outside the capital. Coronet and its surrounding economy suit shipping, investigation and civilian supply stories.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Corellia/Legends",
+        "https://starwars.fandom.com/wiki/Corell/Legends",
+        "https://starwars.fandom.com/wiki/Talus/Legends"
+      ],
+      "local_terrain_evidence": false,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Dantooine",
+      "zone": "dantooine",
+      "continuity": "Legends",
+      "grid_square": "L-4",
+      "grid_center": {
+        "column_A1": 12,
+        "row": 4
+      },
+      "region": "Outer Rim Territories / New Territories",
+      "sector": "Raioballo",
+      "system": "Dantooine system",
+      "moons": "2 (names not verified)",
+      "climate_and_terrain": "Grasslands, rivers, lakes and blba trees",
+      "species_and_creatures": "Dantari; kath hounds; kinrath; graul",
+      "notable_places": "Ruined Jedi Enclave; former Rebel base",
+      "summary": "Dantooine is a lightly developed agricultural world away from heavy galactic traffic. Native Dantari share it with settlers and varied wildlife. Ancient structures and abandoned military sites support exploration, but Old Republic story events must not be treated as current happenings.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Dantooine/Legends"
+      ],
+      "local_terrain_evidence": false,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Dathomir",
+      "zone": "dathomir",
+      "continuity": "Legends",
+      "grid_square": "O-6",
+      "grid_center": {
+        "column_A1": 15,
+        "row": 6
+      },
+      "region": "Outer Rim Territories / New Territories",
+      "sector": "Quelii",
+      "system": "Dathomir system",
+      "moons": "4, including Koratas",
+      "climate_and_terrain": "Mountain/river terrain documented at Singing Mountain; broader climate pending",
+      "species_and_creatures": "Dathomiri Witches; rancors; gaping spiders; malklocs",
+      "notable_places": "Singing Mountain Clan settlement; Singing Mountain",
+      "summary": "Dathomir is a remote world associated with witch clans and rancors. Singing Mountain is an important place for its namesake clan. Clan relationships and dangerous wilderness offer grounded SWG objectives without importing later canon-only landscapes wholesale.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Dathomir_system/Legends",
+        "https://starwars.fandom.com/wiki/Singing_Mountain_(Dathomir)/Legends"
+      ],
+      "local_terrain_evidence": false,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Endor",
+      "zone": "endor",
+      "continuity": "Legends",
+      "grid_square": "H-16",
+      "grid_center": {
+        "column_A1": 8,
+        "row": 16
+      },
+      "region": "Outer Rim Territories",
+      "sector": "Moddell (within Zuma)",
+      "system": "Endor system",
+      "moons": "Playable destination is the forest moon of gas giant Endor; giant has 9 moons",
+      "climate_and_terrain": "Temperate forests, mountains, lakes and savannas",
+      "species_and_creatures": "Ewoks; Duloks; introduced fauna varies by era",
+      "notable_places": "Forest settlements; wilderness crash sites",
+      "summary": "SWG Endor is the forest moon rather than its parent gas giant. It has a broad ecosystem and a history shaped partly by crashed ships. Wilderness and settlement content fit it, while Death Star-era installations need a deliberate timeline check.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Endor/Legends",
+        "https://starwars.fandom.com/wiki/Endor_system/Legends"
+      ],
+      "local_terrain_evidence": false,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Lok",
+      "zone": "lok",
+      "continuity": "Legends",
+      "grid_square": "Q-17",
+      "grid_center": {
+        "column_A1": 17,
+        "row": 17
+      },
+      "region": "Outer Rim Territories / Trailing Sectors",
+      "sector": "Karthakk",
+      "system": "Karthakk system",
+      "moons": "2, including Khons",
+      "climate_and_terrain": "Arid deserts, jagged ranges, sulfur pools and lava pits",
+      "species_and_creatures": "Kimogila; mixed settler/pirate population",
+      "notable_places": "Nym's Stronghold; Kimogila Town",
+      "summary": "Lok is a harsh world associated with pirates and Nym. Its dangerous terrain and wildlife make travel outside the stronghold consequential. Salvage, contraband and faction-pressure stories fit its established character.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Lok/Legends"
+      ],
+      "local_terrain_evidence": false,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Naboo",
+      "zone": "naboo",
+      "continuity": "Legends",
+      "grid_square": "O-17",
+      "grid_center": {
+        "column_A1": 15,
+        "row": 17
+      },
+      "region": "Mid Rim",
+      "sector": "Chommell",
+      "system": "Naboo system",
+      "moons": "Rori; Ohma-D'un; unnamed third moon",
+      "climate_and_terrain": "Temperate plains, hills, swamps, mountains and seas",
+      "species_and_creatures": "Gungans; Human Naboo colonists",
+      "notable_places": "Lake Paonga; Lianorm Swamp; Emperor's Retreat",
+      "summary": "Naboo combines extensive natural landscapes with distinctive settled societies. Its native Gungans and Human population have separate histories and communities. Civilian diplomacy and Imperial-era local tensions can coexist without assuming every famous Clone Wars event is occurring now.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Naboo/Legends",
+        "https://starwars.fandom.com/wiki/Rori/Legends",
+        "https://starwars.fandom.com/wiki/Third_moon_of_Naboo"
+      ],
+      "local_terrain_evidence": false,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Rori",
+      "zone": "rori",
+      "continuity": "Legends",
+      "grid_square": "O-17",
+      "grid_center": {
+        "column_A1": 15,
+        "row": 17
+      },
+      "region": "Mid Rim",
+      "sector": "Chommell",
+      "system": "Naboo system",
+      "moons": "Rori is a moon of Naboo; submoons not verified",
+      "climate_and_terrain": "Swamps, hills, forests and grasslands under gray skies",
+      "species_and_creatures": "Bark mites; tortons; borgle bats; Gungan outposts",
+      "notable_places": "Narmle; Restuss; Garyn Raider sites",
+      "summary": "Rori is one of Naboo's three moons. Its overgrown terrain makes settlement and travel difficult. Narmle and Restuss are established locations, but their exact state must follow the server's chosen era rather than an assumed later-game event.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Rori/Legends"
+      ],
+      "local_terrain_evidence": false,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Talus",
+      "zone": "talus",
+      "continuity": "Legends",
+      "grid_square": "M-11",
+      "grid_center": {
+        "column_A1": 13,
+        "row": 11
+      },
+      "region": "Core Worlds",
+      "sector": "Corellian",
+      "system": "Corellian system",
+      "moons": "Several (names not verified); Tralus is a paired planet, not a moon",
+      "climate_and_terrain": "Temperate forests, grass plains and mudflats",
+      "species_and_creatures": "Humans, Drall, Selonians; Zabrak colony",
+      "notable_places": "Dearic; Nashal; Centerpoint in the system",
+      "summary": "Talus and Tralus form the Double Worlds around a shared centre of gravity. Talus has farming, mining and manufacturing communities. Its federal institutions and Imperial scrutiny support civic and industrial stories distinct from Corellia's capital.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Talus/Legends",
+        "https://starwars.fandom.com/wiki/Corellian_system/Legends"
+      ],
+      "local_terrain_evidence": false,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Tatooine",
+      "zone": "tatooine",
+      "continuity": "Legends",
+      "grid_square": "R-16",
+      "grid_center": {
+        "column_A1": 18,
+        "row": 16
+      },
+      "region": "Outer Rim Territories",
+      "sector": "Arkanis",
+      "system": "Tatoo system",
+      "moons": null,
+      "climate_and_terrain": "Desert; dry settlements and moisture farms",
+      "species_and_creatures": "Jawas; Tusken Raiders; mixed offworld population",
+      "notable_places": "Mos Eisley; Jabba's Palace; Jundland Wastes",
+      "summary": "Tatooine is a remote desert world in a binary-star system. Moisture farming and equipment trading sustain many residents. Criminal power and scattered settlements make local survival and transport suitable themes.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Tatooine/Legends",
+        "https://starwars.fandom.com/wiki/Category:Locations_in_grid_square_R-16"
+      ],
+      "local_terrain_evidence": false,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Yavin 4",
+      "zone": "yavin4",
+      "continuity": "Legends",
+      "grid_square": "P-6",
+      "grid_center": {
+        "column_A1": 16,
+        "row": 6
+      },
+      "region": "Outer Rim Territories",
+      "sector": "Gordian Reach",
+      "system": "Yavin system",
+      "moons": "Moon of Yavin Prime; submoon counts conflict (0/1/2 in article)",
+      "climate_and_terrain": "Tropical jungle, low-relief continents, mountains and volcanoes",
+      "species_and_creatures": "Massassi heritage; present living native species not established here",
+      "notable_places": "Great Temple; jungle ruins",
+      "summary": "Yavin 4 is a large habitable moon of Yavin Prime. Its jungles conceal structures linked to ancient Sith history and the Rebel base. Exploration should separate those historical layers and avoid placing later Jedi-academy events into an earlier SWG era.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Yavin_4/Legends",
+        "https://starwars.fandom.com/wiki/Yavin_system/Legends"
+      ],
+      "local_terrain_evidence": false,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Taanab",
+      "zone": "taanab",
+      "continuity": "Legends",
+      "grid_square": "O-8",
+      "grid_center": {
+        "column_A1": 15,
+        "row": 8
+      },
+      "region": "Inner Rim / Trans-Hydian",
+      "sector": null,
+      "system": "Taanab system",
+      "moons": "1 (unnamed here)",
+      "climate_and_terrain": "Mild fields, waterways and intensive agriculture",
+      "species_and_creatures": "Imported roba, staga, nerfs and banthas; no original animal fauna per article",
+      "notable_places": "Pandath; Banthal Company Docks",
+      "summary": "Taanab is an agricultural world on useful trade routes. Its commercial farms and imported animals distinguish it from untouched wilderness. Pirate raids and cargo protection are suitable local stories; do not label imported farm animals indigenous.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Taanab/Legends"
+      ],
+      "local_terrain_evidence": true,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Dromund Kaas",
+      "zone": "kaas",
+      "continuity": "Legends",
+      "grid_square": "R-5",
+      "grid_center": {
+        "column_A1": 18,
+        "row": 5
+      },
+      "region": "Outer Rim Territories",
+      "sector": "Esstran / Sith Worlds",
+      "system": "Dromund system",
+      "moons": "2 (names not verified)",
+      "climate_and_terrain": "Sea, swamp and jungle",
+      "species_and_creatures": "Local monsters not individually verified in this pass",
+      "notable_places": "Dark Force Temple; historical Kaas City",
+      "summary": "Dromund Kaas has a long Sith history and extensive swamps. Its Old Republic capital and later forgotten temples belong to different periods. A Galactic Civil War expedition should not simply reproduce the populated SWTOR capital.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Dromund_Kaas/Legends",
+        "https://starwars.fandom.com/wiki/Dromund_system",
+        "https://starwars.fandom.com/wiki/Category:Locations_in_grid_square_R-5"
+      ],
+      "local_terrain_evidence": true,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Mandalore",
+      "zone": "mandalore",
+      "continuity": "Legends",
+      "grid_square": "O-7",
+      "grid_center": {
+        "column_A1": 15,
+        "row": 7
+      },
+      "region": "Outer Rim Territories",
+      "sector": "Mandalore",
+      "system": "Mandalore system",
+      "moons": "2, including Concordia",
+      "climate_and_terrain": "Northern forests with cold winters; regional variety",
+      "species_and_creatures": "Mandalorian residents; shatuals; strills",
+      "notable_places": "Keldabe; Kelita River; Oyu'baat; MandalMotors",
+      "summary": "Mandalore is the cultural homeworld of the Mandalorians. Legends describes northern forests and Keldabe alongside other regional environments. Mining, clan relationships and Imperial pressure suit this period without reducing the entire world to one later television depiction.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Mandalore/Legends",
+        "https://starwars.fandom.com/wiki/Concordia/Legends",
+        "https://starwars.fandom.com/wiki/Keldabe/Legends"
+      ],
+      "local_terrain_evidence": true,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Chandrila",
+      "zone": "chandrila",
+      "continuity": "Legends",
+      "grid_square": "L-9",
+      "grid_center": {
+        "column_A1": 12,
+        "row": 9
+      },
+      "region": "Core Worlds / Ringali Shell",
+      "sector": "Bormea",
+      "system": "Chandrila system",
+      "moons": "Chandra; Chandrakant",
+      "climate_and_terrain": "Temperate forests, hills, plains and seas",
+      "species_and_creatures": "Residents/species not individually verified here",
+      "notable_places": "Hanna City; Crystal Canyons; Silver Sea",
+      "summary": "Chandrila is a temperate Core World. Its towns, natural parks and cultural sites offer a less militarized setting than a battlefield planet. Local antiquities, civic and supply stories can use these places without assuming later New Republic institutions already exist.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Chandrila/Legends",
+        "https://starwars.fandom.com/wiki/Chandra/Legends"
+      ],
+      "local_terrain_evidence": true,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Coruscant",
+      "zone": "coruscant",
+      "continuity": "Legends",
+      "grid_square": "L-9",
+      "grid_center": {
+        "column_A1": 12,
+        "row": 9
+      },
+      "region": "Core Worlds",
+      "sector": "Corusca / Coruscant",
+      "system": "Coruscant system",
+      "moons": "Centax-1, Centax-2, Centax-3; Hesperidium listed as fourth",
+      "climate_and_terrain": "Urban world; detailed climate not verified in extract",
+      "species_and_creatures": "Cosmopolitan residents; individual native fauna pending",
+      "notable_places": "Political/urban districts (specific target locations pending)",
+      "summary": "Coruscant occupies a central political and economic position in galactic history. Its location is also the conventional origin for one coordinate system. Any local urban district needs a defined Imperial-era identity rather than a blend of unrelated historical capitals.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Coruscant/Legends",
+        "https://starwars.fandom.com/wiki/Coruscant_system/Legends"
+      ],
+      "local_terrain_evidence": true,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Jakku",
+      "zone": "jakku",
+      "continuity": "canon exception",
+      "grid_square": "I-13",
+      "grid_center": {
+        "column_A1": 9,
+        "row": 13
+      },
+      "region": "Inner Rim / Western Reaches",
+      "sector": "Unnamed Jakku sector",
+      "system": "Jakku system",
+      "moons": "2 (names not verified)",
+      "climate_and_terrain": "Arid badlands, dunes and salt flats",
+      "species_and_creatures": "Teedo; Uthuthma; diverse settlers",
+      "notable_places": "Desert settlements; Niima Outpost and graveyard are later-period examples only",
+      "summary": "Jakku is a canon world with a desert landscape. Its famous wreck fields and Niima Outpost arose after the Battle of Jakku. A pre-CU-era adaptation must be labelled an optional continuity addition and must not transplant that later aftermath without a deliberate alternate-history choice.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Jakku",
+        "https://starwars.fandom.com/wiki/Jakku_system",
+        "https://starwars.fandom.com/wiki/Niima_Outpost"
+      ],
+      "local_terrain_evidence": true,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Korriban (MTG zone moraband)",
+      "zone": "moraband",
+      "continuity": "Legends",
+      "grid_square": "R-5",
+      "grid_center": {
+        "column_A1": 18,
+        "row": 5
+      },
+      "region": "Outer Rim Territories / Trans-Hydian",
+      "sector": "Esstran / Sith Worlds",
+      "system": "Horuset system",
+      "moons": "7 (names not verified)",
+      "climate_and_terrain": "Dry tomb world; detailed climate pending",
+      "species_and_creatures": "Sith species historically; living population depends on era",
+      "notable_places": "Ancient Dark Lord tombs",
+      "summary": "Korriban is an ancient sacred world of the Sith. Its burial sites and dark-side history make it a place for carefully bounded exploration. The MTG zone name moraband is a runtime alias, not permission to blend all canon and Legends events.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Korriban/Legends"
+      ],
+      "local_terrain_evidence": true,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Nal Hutta",
+      "zone": "hutta",
+      "continuity": "Legends",
+      "grid_square": "S-12",
+      "grid_center": {
+        "column_A1": 19,
+        "row": 12
+      },
+      "region": "Mid Rim / Hutt Space",
+      "sector": "Sector not verified",
+      "system": "Y'Toub system",
+      "moons": "Nar Shaddaa confirmed; complete moon inventory pending",
+      "climate_and_terrain": "Swamp environment; detailed climate pending",
+      "species_and_creatures": "Evocii native; Hutts and t'landa Til are arrivals",
+      "notable_places": "Bilbousa; Jiguuna; Nar Shaddaa in orbit",
+      "summary": "Nal Hutta was once called Evocar. The Hutts displaced the native Evocii and made it a centre of their power. Local stories should reflect clan control and that history, rather than describing Hutts as the original native species.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Nal_Hutta/Legends",
+        "https://starwars.fandom.com/wiki/Hutt_Space/Legends",
+        "https://starwars.fandom.com/wiki/Category:Locations_in_grid_square_S-12"
+      ],
+      "local_terrain_evidence": true,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Kashyyyk",
+      "zone": "kashyyyk",
+      "continuity": "Legends",
+      "grid_square": "P-9",
+      "grid_center": {
+        "column_A1": 16,
+        "row": 9
+      },
+      "region": "Mid Rim",
+      "sector": "Mytaranor",
+      "system": "Kashyyyk system",
+      "moons": "3, including an unnamed farming moon",
+      "climate_and_terrain": "Forested world; full climate detail pending",
+      "species_and_creatures": "Wookiees; other wildlife pending specific article checks",
+      "notable_places": "Forest communities; Avatar Orbital Platform in system",
+      "summary": "Kashyyyk is the Wookiee homeworld. Its system also contains Trandosha and several inhabited moons. A bounded forest settlement or rescue story is feasible separately from a complete port of the later SWG expansion campaign.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Kashyyyk/Legends",
+        "https://starwars.fandom.com/wiki/Kashyyyk_system/Legends"
+      ],
+      "local_terrain_evidence": true,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Mustafar",
+      "zone": "mustafar",
+      "continuity": "Legends",
+      "grid_square": "L-19",
+      "grid_center": {
+        "column_A1": 12,
+        "row": 19
+      },
+      "region": "Outer Rim Territories / Western Reaches",
+      "sector": "Atravis",
+      "system": "Mustafar system",
+      "moons": null,
+      "climate_and_terrain": "Volcanic lava rivers, ash and obsidian mountains",
+      "species_and_creatures": "Northern/Southern Mustafarians; lava fleas; blistmoks; jundaks",
+      "notable_places": "Fralideja; mining settlements; Berken's Flow",
+      "summary": "Mustafar is a volcanically unstable mining world. Native Mustafarians adapted their work and settlements to its severe conditions. Original mining and rescue objectives can use that setting without implying the complete Trials of Obi-Wan campaign has been backported.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Mustafar/Legends",
+        "https://starwars.fandom.com/wiki/Mustafar_system/Legends",
+        "https://starwars.fandom.com/wiki/Mustafarian/Legends"
+      ],
+      "local_terrain_evidence": true,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Dagobah",
+      "zone": "dagobah",
+      "continuity": "Legends",
+      "grid_square": "M-19",
+      "grid_center": {
+        "column_A1": 13,
+        "row": 19
+      },
+      "region": "Outer Rim Territories",
+      "sector": "Sluis",
+      "system": "Dagobah system",
+      "moons": "1 (name not verified)",
+      "climate_and_terrain": "Humid swamps, marshes and dense forests",
+      "species_and_creatures": "Hepsalum Tash; bogwings; dragonsnakes; nudj",
+      "notable_places": "Yoda's refuge; cave",
+      "summary": "Dagobah is a remote swamp world with abundant life and little settlement. It sheltered Yoda after Order 66. Exploration can emphasize navigation and ecology without making access to its hidden resident routine.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Dagobah/Legends"
+      ],
+      "local_terrain_evidence": false,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Bespin",
+      "zone": "bespin",
+      "continuity": "Legends",
+      "grid_square": "K-18",
+      "grid_center": {
+        "column_A1": 11,
+        "row": 18
+      },
+      "region": "Outer Rim Territories",
+      "sector": "Anoat",
+      "system": "Bespin system",
+      "moons": "Several (names/count not verified)",
+      "climate_and_terrain": "Gas giant; narrow habitable atmospheric layer",
+      "species_and_creatures": "Humans/Ugnaught residents; airborne algae",
+      "notable_places": "Cloud City; BesGas Three",
+      "summary": "Bespin is a gas giant with a habitable atmospheric band. Cloud City occupies that band rather than a solid planetary surface. A port therefore needs convincing platform boundaries and travel rules, not merely a conventional walkable ground terrain.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Bespin/Legends",
+        "https://starwars.fandom.com/wiki/List_of_planets_B"
+      ],
+      "local_terrain_evidence": false,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    },
+    {
+      "name": "Alderaan",
+      "zone": "alderaan",
+      "continuity": "Legends",
+      "grid_square": "M-10",
+      "grid_center": {
+        "column_A1": 13,
+        "row": 10
+      },
+      "region": "Core Worlds",
+      "sector": "Alderaan",
+      "system": "Alderaan system",
+      "moons": "One historical moon; destruction chronology requires checking",
+      "climate_and_terrain": "Destroyed in normal post-Yavin timeline; pre-destruction terrain not catalogued here",
+      "species_and_creatures": "Native species not verified in this pass",
+      "notable_places": "The Graveyard after destruction",
+      "summary": "Alderaan was destroyed by the first Death Star before the Battle of Yavin. Its former orbit became the Graveyard asteroid field. A living ground-world destination conflicts with an ordinary post-Yavin SWG timeline and would need an explicit flashback or alternate setting.",
+      "sources": [
+        "https://starwars.fandom.com/wiki/Alderaan_system/Legends",
+        "https://starwars.fandom.com/wiki/Moon_of_Alderaan"
+      ],
+      "local_terrain_evidence": false,
+      "verification": "Wookieepedia search-index excerpts; direct pages restricted. Unknown/pending fields are not inferred.",
+      "ui_pixel_position": null
+    }
+  ],
+  "pixel_calibration": {
+    "report": "hoth/galaxy-map-calibration.json",
+    "accepted": false,
+    "reason": "One affine fit cannot preserve the stylized stock UI; max residual132.63px, max leave-one-out236.66px"
+  }
+}

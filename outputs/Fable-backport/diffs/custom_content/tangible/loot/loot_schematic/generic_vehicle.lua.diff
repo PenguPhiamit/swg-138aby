@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/loot_schematic/generic_vehicle.lua
++++ b/custom_content/tangible/loot/loot_schematic/generic_vehicle.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_generic_vehicle, "object/tangible/loot/loot/schematic/generic_vehicle.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_generic_vehicle, "object/tangible/loot/loot_schematic/generic_vehicle.iff")

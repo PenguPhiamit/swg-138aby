@@ -1,0 +1,2450 @@
+{
+ "group_names_taken": [],
+ "item_names_taken": [],
+ "templates": {
+  "object/creature/player/bothan_female.iff": {
+   "core3_lua": "object/creature/player/bothan_female.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/bothan_male.iff": {
+   "core3_lua": "object/creature/player/bothan_male.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/human_female.iff": {
+   "core3_lua": "object/creature/player/human_female.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/human_male.iff": {
+   "core3_lua": "object/creature/player/human_male.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/ithorian_female.iff": {
+   "core3_lua": "object/creature/player/ithorian_female.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/ithorian_male.iff": {
+   "core3_lua": "object/creature/player/ithorian_male.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/moncal_female.iff": {
+   "core3_lua": "object/creature/player/moncal_female.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/moncal_male.iff": {
+   "core3_lua": "object/creature/player/moncal_male.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/rodian_female.iff": {
+   "core3_lua": "object/creature/player/rodian_female.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/rodian_male.iff": {
+   "core3_lua": "object/creature/player/rodian_male.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/sullustan_female.iff": {
+   "core3_lua": "object/creature/player/sullustan_female.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/sullustan_male.iff": {
+   "core3_lua": "object/creature/player/sullustan_male.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/trandoshan_female.iff": {
+   "core3_lua": "object/creature/player/trandoshan_female.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/trandoshan_male.iff": {
+   "core3_lua": "object/creature/player/trandoshan_male.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/twilek_female.iff": {
+   "core3_lua": "object/creature/player/twilek_female.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/twilek_male.iff": {
+   "core3_lua": "object/creature/player/twilek_male.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/wookiee_female.iff": {
+   "core3_lua": "object/creature/player/wookiee_female.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/wookiee_male.iff": {
+   "core3_lua": "object/creature/player/wookiee_male.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/zabrak_female.iff": {
+   "core3_lua": "object/creature/player/zabrak_female.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/creature/player/zabrak_male.iff": {
+   "core3_lua": "object/creature/player/zabrak_male.lua",
+   "core3_shared": "object/creature/player/objects.lua"
+  },
+  "object/draft_schematic/clothing/clothing_armor_rebel_snow_backpack.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_rebel_snow_belt.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_rebel_snow_bicep_l.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_rebel_snow_bicep_r.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_rebel_snow_boots.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_rebel_snow_bracer_l.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_rebel_snow_bracer_r.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_rebel_snow_chest_plate.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_rebel_snow_gloves.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_rebel_snow_helmet.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_rebel_snow_leggings.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_snowtrooper_backpack.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_snowtrooper_belt.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_snowtrooper_bicep_l.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_snowtrooper_bicep_r.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_snowtrooper_boots.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_snowtrooper_bracer_l.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_snowtrooper_bracer_r.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_snowtrooper_chest_plate.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_snowtrooper_gloves.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_snowtrooper_helmet.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/clothing/clothing_armor_snowtrooper_leggings.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/furniture/hoth/painting_hoth_battle.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/furniture/hoth/painting_hoth_down.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/furniture/hoth/painting_hoth_esb1_1.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/furniture/hoth/painting_hoth_esb1_2.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/furniture/hoth/painting_hoth_esb1_3.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/furniture/hoth/painting_hoth_esb2_1.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/furniture/hoth/painting_hoth_esb2_2.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/furniture/hoth/painting_hoth_esb2_3.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/furniture/hoth/painting_hoth_shield_lg.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/furniture/hoth/painting_hoth_shield_sm.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/furniture/hoth/painting_hoth_walkers_lg.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/furniture/hoth/painting_hoth_walkers_sm.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/a1_deluxe_floater.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/air2_swoop_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/basilisk_war_droid.iff": {
+   "core3_lua": "object/custom_content/draft_schematic/vehicle/civilian/basilisk_war_droid.lua",
+   "core3_shared": "object/custom_content/draft_schematic/vehicle/civilian/objects.lua"
+  },
+  "object/draft_schematic/vehicle/civilian/fg_8t8_podracer.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/flare_s_swoop.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/geonosian_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/grievous_wheel_bike.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/hover_bird.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/hover_chair.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/hoverlifter_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/koro2_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/landspeeder_ab1.iff": {
+   "core3_lua": "object/custom_content/draft_schematic/vehicle/civilian/landspeeder_ab1.lua",
+   "core3_shared": "object/custom_content/draft_schematic/vehicle/civilian/objects.lua"
+  },
+  "object/draft_schematic/vehicle/civilian/landspeeder_organa.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/landspeeder_xp38.iff": {
+   "core3_lua": "object/custom_content/draft_schematic/vehicle/civilian/landspeeder_xp38.lua",
+   "core3_shared": "object/custom_content/draft_schematic/vehicle/civilian/objects.lua"
+  },
+  "object/draft_schematic/vehicle/civilian/mechno_chair.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/mustafar_panning_droid.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/pod_racer_balta_podracer.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/pod_racer_ipg_longtail.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/podracer_anakin.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/senate_pod.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/sith_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/snowspeeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/speeder_ric_920.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/stap_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/swamp_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/tcg_8_single_pod_airspeeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/tcg_hk47_jetpack.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/tcg_military_transport.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/tcg_republic_gunship.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/draft_schematic/vehicle/civilian/xj6_air_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/factory/factory_crate_clothing.iff": {
+   "core3_lua": "object/factory/factory_crate_clothing.lua",
+   "core3_shared": "object/factory/objects.lua"
+  },
+  "object/factory/factory_crate_furniture.iff": {
+   "core3_lua": "object/factory/factory_crate_furniture.lua",
+   "core3_shared": "object/factory/objects.lua"
+  },
+  "object/factory/factory_crate_installation.iff": {
+   "core3_lua": "object/factory/factory_crate_installation.lua",
+   "core3_shared": "object/factory/objects.lua"
+  },
+  "object/intangible/vehicle/a1_deluxe_floater_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/a1_deluxe_floater_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/air2_swoop_speeder_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/air2_swoop_speeder_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/basilisk_war_droid.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/basilisk_war_droid.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/fg_8t8_podracer_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/fg_8t8_podracer_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/flare_s_swoop_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/flare_s_swoop_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/geonosian_speeder_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/geonosian_speeder_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/grievous_wheel_bike_pcd.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/intangible/vehicle/hover_bird_pcd.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/intangible/vehicle/hover_chair_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/hover_chair_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/hoverlifter_speeder_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/hoverlifter_speeder_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/koro2_speeder_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/koro2_speeder_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/landspeeder_ab1_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/landspeeder_ab1_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/landspeeder_organa_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/landspeeder_organa_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/landspeeder_xp38_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/landspeeder_xp38_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/mechno_chair_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/mechno_chair_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/mustafar_panning_droid.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/mustafar_panning_droid.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/pod_racer_balta_podracer_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/pod_racer_balta_podracer_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/pod_racer_ipg_longtail_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/pod_racer_ipg_longtail_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/podracer_anakin_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/podracer_anakin_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/senate_pod_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/senate_pod_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/sith_speeder_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/sith_speeder_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/snowspeeder.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/snowspeeder.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/speeder_ric_920_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/speeder_ric_920_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/stap_speeder_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/stap_speeder_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/swamp_speeder_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/swamp_speeder_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/tcg_8_single_pod_airspeeder.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/tcg_8_single_pod_airspeeder.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/tcg_hk47_jetpack_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/tcg_hk47_jetpack_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/tcg_military_transport_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/tcg_military_transport_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/tcg_republic_gunship_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/tcg_republic_gunship_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/intangible/vehicle/xj6_air_speeder_pcd.iff": {
+   "core3_lua": "object/custom_content/intangible/vehicle/xj6_air_speeder_pcd.lua",
+   "core3_shared": "object/custom_content/intangible/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/a1_deluxe_floater.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/a1_deluxe_floater.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/air2_swoop_speeder.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/air2_swoop_speeder.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/basilisk_war_droid.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/basilisk_war_droid.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/fg_8t8_podracer.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/fg_8t8_podracer.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/flare_s_swoop.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/flare_s_swoop.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/geonosian_speeder.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/geonosian_speeder.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/grievous_wheel_bike.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/grievous_wheel_bike.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/hover_bird.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/mobile/vehicle/hover_chair.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/hover_chair.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/hoverlifter_speeder.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/hoverlifter_speeder.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/koro2_speeder.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/koro2_speeder.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/landspeeder_ab1.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/landspeeder_ab1.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/landspeeder_organa.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/landspeeder_organa.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/landspeeder_xp38.iff": {
+   "core3_lua": "object/mobile/vehicle/landspeeder_xp38.lua",
+   "core3_shared": "object/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/mechno_chair.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/mechno_chair.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/mustafar_panning_droid.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/mustafar_panning_droid.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/pod_racer_balta_podracer.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/pod_racer_balta_podracer.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/pod_racer_ipg_longtail.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/pod_racer_ipg_longtail.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/podracer_anakin.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/podracer_anakin.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/senate_pod.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/senate_pod.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/sith_speeder.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/sith_speeder.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/snowspeeder.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/snowspeeder.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/speeder_ric_920.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/speeder_ric_920.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/stap_speeder.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/stap_speeder.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/swamp_speeder.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/swamp_speeder.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/tcg_8_single_pod_airspeeder.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/tcg_8_single_pod_airspeeder.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/tcg_hk47_jetpack.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/tcg_hk47_jetpack.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/tcg_military_transport.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/tcg_military_transport.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/tcg_republic_gunship.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/tcg_republic_gunship.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vehicle/xj6_air_speeder.iff": {
+   "core3_lua": "object/custom_content/mobile/vehicle/xj6_air_speeder.lua",
+   "core3_shared": "object/custom_content/mobile/vehicle/objects.lua"
+  },
+  "object/mobile/vendor/aqualish_female.iff": {
+   "core3_lua": "object/mobile/vendor/aqualish_female.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/aqualish_male.iff": {
+   "core3_lua": "object/mobile/vendor/aqualish_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/bith_female.iff": {
+   "core3_lua": "object/mobile/vendor/bith_female.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/bith_male.iff": {
+   "core3_lua": "object/mobile/vendor/bith_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/bothan_female.iff": {
+   "core3_lua": "object/mobile/vendor/bothan_female.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/bothan_male.iff": {
+   "core3_lua": "object/mobile/vendor/bothan_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/devaronian_male.iff": {
+   "core3_lua": "object/mobile/vendor/devaronian_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/gran_male.iff": {
+   "core3_lua": "object/mobile/vendor/gran_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/human_female.iff": {
+   "core3_lua": "object/mobile/vendor/human_female.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/human_male.iff": {
+   "core3_lua": "object/mobile/vendor/human_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/ishi_tib_male.iff": {
+   "core3_lua": "object/mobile/vendor/ishi_tib_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/ithorian_female.iff": {
+   "core3_lua": "object/mobile/vendor/ithorian_female.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/ithorian_male.iff": {
+   "core3_lua": "object/mobile/vendor/ithorian_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/moncal_female.iff": {
+   "core3_lua": "object/mobile/vendor/moncal_female.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/moncal_male.iff": {
+   "core3_lua": "object/mobile/vendor/moncal_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/nikto_male.iff": {
+   "core3_lua": "object/mobile/vendor/nikto_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/quarren_male.iff": {
+   "core3_lua": "object/mobile/vendor/quarren_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/rodian_female.iff": {
+   "core3_lua": "object/mobile/vendor/rodian_female.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/rodian_male.iff": {
+   "core3_lua": "object/mobile/vendor/rodian_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/sullustan_female.iff": {
+   "core3_lua": "object/mobile/vendor/sullustan_female.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/sullustan_male.iff": {
+   "core3_lua": "object/mobile/vendor/sullustan_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/trandoshan_female.iff": {
+   "core3_lua": "object/mobile/vendor/trandoshan_female.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/trandoshan_male.iff": {
+   "core3_lua": "object/mobile/vendor/trandoshan_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/twilek_female.iff": {
+   "core3_lua": "object/mobile/vendor/twilek_female.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/twilek_male.iff": {
+   "core3_lua": "object/mobile/vendor/twilek_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/weequay_male.iff": {
+   "core3_lua": "object/mobile/vendor/weequay_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/wookiee_female.iff": {
+   "core3_lua": "object/mobile/vendor/wookiee_female.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/wookiee_male.iff": {
+   "core3_lua": "object/mobile/vendor/wookiee_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/zabrak_female.iff": {
+   "core3_lua": "object/mobile/vendor/zabrak_female.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/mobile/vendor/zabrak_male.iff": {
+   "core3_lua": "object/mobile/vendor/zabrak_male.lua",
+   "core3_shared": "object/mobile/vendor/objects.lua"
+  },
+  "object/player/player.iff": {
+   "core3_lua": "object/player/player.lua",
+   "core3_shared": "object/player/objects.lua"
+  },
+  "object/tangible/bank/character_bank.iff": {
+   "core3_lua": "object/tangible/bank/character_bank.lua",
+   "core3_shared": "object/tangible/bank/objects.lua"
+  },
+  "object/tangible/borrie/wall/cave_ice_wall.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/collection/reward/col_reward_hoth_tauntaun_head.iff": {
+   "core3_lua": "object/custom_content/tangible/collection/reward/col_reward_hoth_tauntaun_head.lua",
+   "core3_shared": "object/custom_content/tangible/collection/reward/objects.lua"
+  },
+  "object/tangible/component/armor/shared_armor_segment_composite.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/component/clothing/shared_fiberplast_panel.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/component/clothing/shared_reinforced_fiber_panels.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/component/clothing/shared_synthetic_cloth.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/datapad/character_datapad.iff": {
+   "core3_lua": "object/tangible/datapad/character_datapad.lua",
+   "core3_shared": "object/tangible/datapad/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/a1_deluxe_floater_deed.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/a1_deluxe_floater_deed.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/air2_swoop_speeder_deed.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/deed/vehicle_deed/basilisk_war_droid.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/basilisk_war_droid.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/fg_8t8_podracer_deed.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/deed/vehicle_deed/flare_s_swoop.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/flare_s_swoop.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/geo_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/deed/vehicle_deed/grievous_wheel_bike_deed.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/grievous_wheel_bike_deed.lua",
+   "core3_shared": null
+  },
+  "object/tangible/deed/vehicle_deed/hover_bird_deed.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/deed/vehicle_deed/hover_chair_deed.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/hover_chair_deed.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/hoverlifter_speeder.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/hoverlifter_speeder.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/koro2_speeder_deed.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/deed/vehicle_deed/landspeeder_ab1_deed.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/landspeeder_ab1_deed.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/landspeeder_xp38_deed.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/landspeeder_xp38_deed.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/military_transport_deed.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/military_transport_deed.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/mustafar_panning_droid.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/mustafar_panning_droid.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/pod_racer_balta_podracer_deed.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/deed/vehicle_deed/pod_racer_ipg_longtail_deed.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/deed/vehicle_deed/podracer_anakin_deed.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/podracer_anakin_deed.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/senate_pod_deed.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/deed/vehicle_deed/snowspeeder_deed.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/snowspeeder_deed.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/speeder_ric_920_deed.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/speeder_ric_920_deed.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/speeder_stap_deed.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/speeder_stap_deed.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/swamp_speeder_deed.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/swamp_speeder_deed.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/tcg_8_air_speeder_deed.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/tcg_8_air_speeder_deed.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/tcg_hk47_jetpack_deed.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/deed/vehicle_deed/tcg_republic_gunship_deed.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/deed/vehicle_deed/vehicle_deed_mechno_chair.iff": {
+   "core3_lua": "object/custom_content/tangible/deed/vehicle_deed/vehicle_deed_mechno_chair.lua",
+   "core3_shared": "object/custom_content/tangible/deed/vehicle_deed/objects.lua"
+  },
+  "object/tangible/deed/vehicle_deed/vehicle_deed_organa_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/deed/vehicle_deed/vehicle_deed_sith_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/deed/vehicle_deed/xj6_air_speeder_deed.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_painting_esb_imperial.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_painting_esb_neutral.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_painting_esb_rebel.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_painting_reward.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_snowglobe.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_snowglobe_gcw.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_snowspeeder_holo.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalactite_01.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalactite_02.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalactite_03.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalactite_04.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalactite_05.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalactite_06.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalagmite_01.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalagmite_02.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalagmite_03.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalagmite_04.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalagmite_05.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalagmite_06.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalagmite_07.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalagmite_08.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_stalagmite_09.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/furniture/hoth/frn_hoth_wampa_rug.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s01.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s01.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s02.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s02.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s03.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s03.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s04.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s04.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s05.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s05.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s06.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s06.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s07.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s07.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s08.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s08.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s09.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s09.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s10.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s10.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s11.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s11.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s12.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s12.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s13.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s13.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s14.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s14.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s15.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s15.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s16.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s16.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s17.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s17.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s18.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s18.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s19.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s19.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_female_s20.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_female_s20.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s01.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s01.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s02.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s02.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s03.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s03.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s04.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s04.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s05.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s05.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s06.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s06.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s07.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s07.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s08.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s08.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s09.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s09.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s10.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s10.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s11.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s11.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s12.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s12.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s13.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s13.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s14.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s14.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s15.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s15.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s17.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s17.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s18.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s18.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s19.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s19.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/bothan/hair_bothan_male_s20.iff": {
+   "core3_lua": "object/tangible/hair/bothan/hair_bothan_male_s20.lua",
+   "core3_shared": "object/tangible/hair/bothan/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s01.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s01.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s02.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s02.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s03.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s03.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s04.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s04.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s05.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s05.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s06.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s06.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s07.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s07.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s08.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s08.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s09.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s09.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s10.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s10.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s11.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s11.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s12.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s12.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s14.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s14.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s15.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s15.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s16.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s16.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s17.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s17.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s18.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s18.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s19.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s19.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s20.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s20.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s21.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s21.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s22.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s22.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s23.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s23.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s24.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s24.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s25.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s25.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s26.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s26.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s27.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s27.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s30.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s30.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s31.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s31.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s32.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s32.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s34.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s34.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s35.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s35.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s36.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s36.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s37.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s37.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s38.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s38.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s39.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s39.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s40.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s40.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s41.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s41.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_female_s42.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_female_s42.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s01.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s01.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s02.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s02.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s03.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s03.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s04.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s04.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s05.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s05.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s06.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s06.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s07.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s07.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s08.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s08.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s09.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s09.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s10.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s10.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s11.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s11.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s12.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s12.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s13.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s13.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s14.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s14.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s15.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s15.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s16.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s16.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s17.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s17.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s18.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s18.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s19.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s19.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s20.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s20.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s21.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s21.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s22.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s22.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s23.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s23.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s24.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s24.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s25.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s25.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s26.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s26.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s27.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s27.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s28.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s28.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s29.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s29.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s30.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s30.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s31.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s31.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s32.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s32.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s33.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s33.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s34.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s34.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s35.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s35.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s37.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s37.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s38.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s38.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s39.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s39.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s40.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s40.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/human/hair_human_male_s41.iff": {
+   "core3_lua": "object/tangible/hair/human/hair_human_male_s41.lua",
+   "core3_shared": "object/tangible/hair/human/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s01.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s01.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s02.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s02.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s03.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s03.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s04.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s04.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s05.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s05.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s06.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s06.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s07.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s07.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s08.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s08.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s09.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s09.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s10.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s10.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s12.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s12.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s13.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s13.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s14.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s14.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s15.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s15.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s16.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s16.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s17.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s17.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s18.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s18.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s19.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s19.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s20.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s20.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s21.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s21.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_female_s22.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_female_s22.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s01.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s01.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s02.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s02.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s03.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s03.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s04.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s04.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s05.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s05.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s06.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s06.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s07.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s07.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s08.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s08.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s09.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s09.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s10.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s10.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s11.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s11.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s12.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s12.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s13.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s13.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s14.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s14.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s15.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s15.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/rodian/hair_rodian_male_s16.iff": {
+   "core3_lua": "object/tangible/hair/rodian/hair_rodian_male_s16.lua",
+   "core3_shared": "object/tangible/hair/rodian/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s01.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s01.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s02.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s02.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s03.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s03.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s04.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s04.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s05.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s05.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s06.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s06.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s07.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s07.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s08.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s08.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s09.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s09.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s10.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s10.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s11.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s11.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s12.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s12.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s13.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s13.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_female_s14.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_female_s14.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s01.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s01.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s02.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s02.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s03.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s03.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s04.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s04.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s05.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s05.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s06.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s06.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s07.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s07.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s08.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s08.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s09.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s09.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s10.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s10.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s11.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s11.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s12.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s12.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s13.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s13.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/trandoshan/hair_trandoshan_male_s14.iff": {
+   "core3_lua": "object/tangible/hair/trandoshan/hair_trandoshan_male_s14.lua",
+   "core3_shared": "object/tangible/hair/trandoshan/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_female_s01.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_female_s01.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_female_s02.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_female_s02.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_female_s03.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_female_s03.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_female_s04.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_female_s04.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_female_s05.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_female_s05.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_female_s06.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_female_s06.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_female_s07.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_female_s07.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_female_s08.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_female_s08.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_male_s01.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_male_s01.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_male_s02.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_male_s02.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_male_s03.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_male_s03.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_male_s04.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_male_s04.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_male_s05.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_male_s05.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_male_s06.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_male_s06.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_male_s07.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_male_s07.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/twilek/hair_twilek_male_s08.iff": {
+   "core3_lua": "object/tangible/hair/twilek/hair_twilek_male_s08.lua",
+   "core3_shared": "object/tangible/hair/twilek/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s01.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s01.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s02.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s02.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s03.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s03.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s04.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s04.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s05.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s05.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s06.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s06.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s07.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s07.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s08.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s08.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s09.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s09.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s10.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s10.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s11.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s11.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s12.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s12.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s13.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s13.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s14.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s14.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s15.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s15.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s16.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s16.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s17.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s17.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s18.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s18.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s19.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s19.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_female_s20.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_female_s20.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s01.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s01.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s02.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s02.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s03.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s03.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s04.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s04.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s05.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s05.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s06.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s06.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s07.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s07.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s08.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s08.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s09.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s09.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s10.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s10.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s11.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s11.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s12.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s12.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s13.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s13.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s14.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s14.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s15.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s15.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s16.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s16.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s17.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s17.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s18.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s18.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s19.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s19.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/hair/zabrak/hair_zabrak_male_s20.iff": {
+   "core3_lua": "object/tangible/hair/zabrak/hair_zabrak_male_s20.lua",
+   "core3_shared": "object/tangible/hair/zabrak/objects.lua"
+  },
+  "object/tangible/inventory/character_inventory.iff": {
+   "core3_lua": "object/tangible/inventory/character_inventory.lua",
+   "core3_shared": "object/tangible/inventory/objects.lua"
+  },
+  "object/tangible/loot/hoth/painting_schematic_hoth_battle.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/hoth/painting_schematic_hoth_down.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/hoth/painting_schematic_hoth_esb1_1.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/hoth/painting_schematic_hoth_esb1_2.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/hoth/painting_schematic_hoth_esb1_3.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/hoth/painting_schematic_hoth_esb2_1.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/hoth/painting_schematic_hoth_esb2_2.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/hoth/painting_schematic_hoth_esb2_3.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/hoth/painting_schematic_hoth_shield_lg.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/hoth/painting_schematic_hoth_shield_sm.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/hoth/painting_schematic_hoth_walkers_lg.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/hoth/painting_schematic_hoth_walkers_sm.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_a1_deluxe_floater.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_air2_swoop_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_basilisk_war_droid.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_fg_8t8_podracer.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_flare_s_swoop.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_geonosian_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_grievous_wheel_bike.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_hover_bird.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_hover_chair.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_hoverlifter_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_koro2_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_landspeeder_ab1.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_landspeeder_organa.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_landspeeder_xp38.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_mechno_chair.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_mustafar_panning_droid.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_pod_racer_balta_podracer.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_pod_racer_ipg_longtail.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_podracer_anakin.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_senate_pod.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_sith_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_snowspeeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_speeder_ric_920.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_stap_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_swamp_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_tcg_8_single_pod_airspeeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_tcg_hk47_jetpack.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_tcg_military_transport.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_tcg_republic_gunship.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/loot_schem_xj6_air_speeder.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/rebel_snow_backpack_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/rebel_snow_belt_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/rebel_snow_bicep_l_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/rebel_snow_bicep_r_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/rebel_snow_boots_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/rebel_snow_bracer_l_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/rebel_snow_bracer_r_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/rebel_snow_chest_plate_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/rebel_snow_gloves_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/rebel_snow_helmet_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/rebel_snow_leggings_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/snowtrooper_backpack_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/snowtrooper_belt_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/snowtrooper_bicep_l_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/snowtrooper_bicep_r_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/snowtrooper_boots_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/snowtrooper_bracer_l_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/snowtrooper_bracer_r_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/snowtrooper_chest_plate_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/snowtrooper_gloves_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/snowtrooper_helmet_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/loot_schematic/snowtrooper_leggings_crafted_schematic.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/themepark/frn_all_atat_chair.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/themepark/frn_atat_statuette.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/themepark/frn_vet_at_at_toy.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/themepark/item_ice_sculpture_tauntaun.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/themepark/item_ice_sculpture_wampa.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/themepark/item_wampa_arm.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/toy/hoth_atat_toy_01.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/toy/hoth_atat_toy_02.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/toy/hoth_atat_toy_03.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/toy/hoth_atat_toy_04.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/toy/hoth_atat_toy_05.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/toy/hoth_atat_toy_06.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/toy/hoth_atat_toy_07.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/toy/hoth_atat_toy_08.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/toy/hoth_atat_toy_09.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/loot/toy/hoth_atat_toy_10.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/mission_bag/mission_bag.iff": {
+   "core3_lua": "object/tangible/mission_bag/mission_bag.lua",
+   "core3_shared": "object/tangible/mission_bag/objects.lua"
+  },
+  "object/tangible/painting/art_esb1_1_f02_000000000000000.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/art_esb1_2_f02_000000000000000.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/art_esb1_3_f02_000000000000000.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/art_esb2_1_f02_000000000000000.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/art_esb2_2_f02_000000000000000.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/art_esb2_3_f02_000000000000000.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/battlehoth_01_f05_000000000000.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hoth_art_astromech_colors.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hoth_art_biker_scout.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hoth_art_blue_unit.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hoth_art_hunters_patience.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hoth_art_kessel_run_age_six.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hoth_art_red_sun_empire.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hoth_art_reprogrammed.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hoth_art_seventy_seven.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hoth_art_this_is_the_way.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hoth_art_utinni.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hothatatlg_01_f00_000000000000.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hothatatsm_01_f00_000000000000.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hothbattle_01_f00_000000000000.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hothshieldlg_01_f00_0000000000.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/painting/hothshieldsm_01_f00_0000000000.iff": {
+   "core3_lua": null,
+   "core3_shared": null
+  },
+  "object/tangible/tcg/series3/decorative_hoth_travel_advertisement.iff": {
+   "core3_lua": "object/custom_content/tangible/tcg/series3/decorative_hoth_travel_advertisement.lua",
+   "core3_shared": "object/custom_content/tangible/tcg/series3/objects.lua"
+  },
+  "object/tangible/tcg/series4/decorative_stuffed_tauntaun.iff": {
+   "core3_lua": "object/custom_content/tangible/tcg/series4/decorative_stuffed_tauntaun.lua",
+   "core3_shared": "object/custom_content/tangible/tcg/series4/objects.lua"
+  },
+  "object/tangible/tcg/series4/decorative_stuffed_wampa.iff": {
+   "core3_lua": "object/custom_content/tangible/tcg/series4/decorative_stuffed_wampa.lua",
+   "core3_shared": "object/custom_content/tangible/tcg/series4/objects.lua"
+  },
+  "object/tangible/tcg/series8/diorama_atat_attack.iff": {
+   "core3_lua": "object/custom_content/tangible/tcg/series8/diorama_atat_attack.lua",
+   "core3_shared": "object/custom_content/tangible/tcg/series8/objects.lua"
+  },
+  "object/tangible/tcg/series8/tauntaun_armored_statue.iff": {
+   "core3_lua": "object/custom_content/tangible/tcg/series8/tauntaun_armored_statue.lua",
+   "core3_shared": "object/custom_content/tangible/tcg/series8/objects.lua"
+  },
+  "object/tangible/veteran_reward/frn_plush_tauntaun.iff": {
+   "core3_lua": "object/custom_content/tangible/veteran_reward/frn_plush_tauntaun.lua",
+   "core3_shared": "object/custom_content/tangible/veteran_reward/objects.lua"
+  },
+  "object/tangible/wearables/armor/rebel_snow/armor_rebel_snow_belt.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/rebel_snow/armor_rebel_snow_belt.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/rebel_snow/objects.lua"
+  },
+  "object/tangible/wearables/armor/rebel_snow/armor_rebel_snow_bicep_l.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/rebel_snow/armor_rebel_snow_bicep_l.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/rebel_snow/objects.lua"
+  },
+  "object/tangible/wearables/armor/rebel_snow/armor_rebel_snow_bicep_r.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/rebel_snow/armor_rebel_snow_bicep_r.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/rebel_snow/objects.lua"
+  },
+  "object/tangible/wearables/armor/rebel_snow/armor_rebel_snow_boots.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/rebel_snow/armor_rebel_snow_boots.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/rebel_snow/objects.lua"
+  },
+  "object/tangible/wearables/armor/rebel_snow/armor_rebel_snow_bracer_l.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/rebel_snow/armor_rebel_snow_bracer_l.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/rebel_snow/objects.lua"
+  },
+  "object/tangible/wearables/armor/rebel_snow/armor_rebel_snow_bracer_r.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/rebel_snow/armor_rebel_snow_bracer_r.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/rebel_snow/objects.lua"
+  },
+  "object/tangible/wearables/armor/rebel_snow/armor_rebel_snow_chest_plate.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/rebel_snow/armor_rebel_snow_chest_plate.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/rebel_snow/objects.lua"
+  },
+  "object/tangible/wearables/armor/rebel_snow/armor_rebel_snow_gloves.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/rebel_snow/armor_rebel_snow_gloves.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/rebel_snow/objects.lua"
+  },
+  "object/tangible/wearables/armor/rebel_snow/armor_rebel_snow_helmet.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/rebel_snow/armor_rebel_snow_helmet.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/rebel_snow/objects.lua"
+  },
+  "object/tangible/wearables/armor/rebel_snow/armor_rebel_snow_leggings.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/rebel_snow/armor_rebel_snow_leggings.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/rebel_snow/objects.lua"
+  },
+  "object/tangible/wearables/armor/snowtrooper/armor_snowtrooper_belt.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/snowtrooper/armor_snowtrooper_belt.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/snowtrooper/objects.lua"
+  },
+  "object/tangible/wearables/armor/snowtrooper/armor_snowtrooper_bicep_l.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/snowtrooper/armor_snowtrooper_bicep_l.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/snowtrooper/objects.lua"
+  },
+  "object/tangible/wearables/armor/snowtrooper/armor_snowtrooper_bicep_r.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/snowtrooper/armor_snowtrooper_bicep_r.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/snowtrooper/objects.lua"
+  },
+  "object/tangible/wearables/armor/snowtrooper/armor_snowtrooper_boots.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/snowtrooper/armor_snowtrooper_boots.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/snowtrooper/objects.lua"
+  },
+  "object/tangible/wearables/armor/snowtrooper/armor_snowtrooper_bracer_l.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/snowtrooper/armor_snowtrooper_bracer_l.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/snowtrooper/objects.lua"
+  },
+  "object/tangible/wearables/armor/snowtrooper/armor_snowtrooper_bracer_r.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/snowtrooper/armor_snowtrooper_bracer_r.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/snowtrooper/objects.lua"
+  },
+  "object/tangible/wearables/armor/snowtrooper/armor_snowtrooper_chest_plate.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/snowtrooper/armor_snowtrooper_chest_plate.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/snowtrooper/objects.lua"
+  },
+  "object/tangible/wearables/armor/snowtrooper/armor_snowtrooper_gloves.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/snowtrooper/armor_snowtrooper_gloves.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/snowtrooper/objects.lua"
+  },
+  "object/tangible/wearables/armor/snowtrooper/armor_snowtrooper_helmet.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/snowtrooper/armor_snowtrooper_helmet.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/snowtrooper/objects.lua"
+  },
+  "object/tangible/wearables/armor/snowtrooper/armor_snowtrooper_leggings.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/armor/snowtrooper/armor_snowtrooper_leggings.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/armor/snowtrooper/objects.lua"
+  },
+  "object/tangible/wearables/backpack/backpack_rebel_snow_soldier.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/backpack/backpack_rebel_snow_soldier.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/backpack/objects.lua"
+  },
+  "object/tangible/wearables/backpack/backpack_snowtrooper.iff": {
+   "core3_lua": "object/custom_content/tangible/wearables/backpack/backpack_snowtrooper.lua",
+   "core3_shared": "object/custom_content/tangible/wearables/backpack/objects.lua"
+  },
+  "object/weapon/melee/unarmed/unarmed_default_player.iff": {
+   "core3_lua": "object/weapon/melee/unarmed/unarmed_default_player.lua",
+   "core3_shared": "object/weapon/melee/unarmed/objects.lua"
+  },
+  "object/weapon/ranged/rifle/rifle_bowcaster.iff": {
+   "core3_lua": "object/weapon/ranged/rifle/rifle_bowcaster.lua",
+   "core3_shared": "object/weapon/ranged/rifle/objects.lua"
+  }
+ }
+}

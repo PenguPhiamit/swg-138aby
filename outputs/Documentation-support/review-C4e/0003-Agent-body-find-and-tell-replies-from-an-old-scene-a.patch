@@ -1,0 +1,400 @@
+From 9ac7cdcdd195270cbf02f808237ac4761d35f0bb Mon Sep 17 00:00:00 2001
+From: SWG Local Dev <swg-local@localhost>
+Date: Wed, 14 Oct 2026 02:19:53 -0700
+Subject: [PATCH 3/3] Agent body: find and tell; replies from an old scene are
+ discarded
+
+- /agentpath find <x> <y> <radius> <text>: the server's object search for
+  bot accounts, nearest first (30 at most), including objects inside
+  buildings (with cell, cell-local position and building). Squad bots use
+  it for starport terminals and hospitals.
+- /agentpath path replies carry the leash's proof for the route.
+- Body: find and tell commands; a scene generation counter, so helper
+  replies and walks started before a zone change return scene_changed
+  instead of acting in the new scene (C4d F3). Sends happen under the
+  world mutex.
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ MMOCoreORB/src/client/agent/AgentControl.cpp  |  69 ++++++++--
+ MMOCoreORB/src/client/agent/AgentControl.h    |   9 +-
+ .../creature/commands/AgentPathCommand.h      | 124 +++++++++++++++++-
+ 3 files changed, 190 insertions(+), 12 deletions(-)
+
+diff --git a/MMOCoreORB/src/client/agent/AgentControl.cpp b/MMOCoreORB/src/client/agent/AgentControl.cpp
+index 58d1a86e..e4736391 100644
+--- a/MMOCoreORB/src/client/agent/AgentControl.cpp
++++ b/MMOCoreORB/src/client/agent/AgentControl.cpp
+@@ -127,6 +127,7 @@ void AgentControl::onStartScene(uint64 oid, const String& terrain, float x, floa
+ 	{
+ 		std::lock_guard<std::recursive_mutex> lock(worldMutex);
+ 		self = oid;
++		++sceneGeneration; // drops helper answers and path walks asked for in the old scene
+ 		// A new scene (login or zone change): the server resends every object, so drop the old
+ 		// scene's objects, including our stale container (e.g. the tutorial room).
+ 		world.clear();
+@@ -964,11 +965,19 @@ JSONSerializationType AgentControl::moveTo(float x, float y, float speed, float
+ 			{"seconds", started.miliDifference() / 1000.0}};
+ }
+ 
+-JSONSerializationType AgentControl::askHelper(const std::string& args, float timeoutSeconds) {
++JSONSerializationType AgentControl::sceneChanged() {
++	return {{"ok", false}, {"error", "the scene changed (zone change or relog); plan again"}, {"scene_changed", true}};
++}
++
++JSONSerializationType AgentControl::askHelper(const std::string& args, float timeoutSeconds, uint32 scene) {
+ 	uint32 before;
+ 	std::string id;
+ 	{
+ 		std::lock_guard<std::recursive_mutex> lock(worldMutex);
++		if (scene == CURRENT_SCENE)
++			scene = sceneGeneration;
++		if (scene != sceneGeneration)
++			return sceneChanged();
+ 		before = helperReplies;
+ 		id = std::to_string(++helperSequence);
+ 	}
+@@ -977,6 +986,9 @@ JSONSerializationType AgentControl::askHelper(const std::string& args, float tim
+ 	for (int i = 0; i < polls; ++i) {
+ 		Thread::sleep(50);
+ 		std::lock_guard<std::recursive_mutex> lock(worldMutex);
++		// A scene start while we wait: even an answer with our id was worked out for the old scene.
++		if (sceneGeneration != scene)
++			return sceneChanged();
+ 		if (helperReplies == before)
+ 			continue;
+ 		before = helperReplies;
+@@ -1016,7 +1028,7 @@ void AgentControl::sendTransformWithParent(uint64 cell, float heading, float spe
+ // Follow /agentpath points [x, y, z, cell]. Inside a cell the coordinates are cell-local and
+ // sent as DataTransformWithParent; outside they are world coordinates. Crossing between cells
+ // (through a door) is a single step to the next point.
+-JSONSerializationType AgentControl::walkPath(const JSONSerializationType& points, float speed, float timeoutSeconds) {
++JSONSerializationType AgentControl::walkPath(const JSONSerializationType& points, float speed, float timeoutSeconds, uint32 scene) {
+ 	speed = std::max(0.5f, std::min(speed, 5.0f));
+ 	Time started;
+ 	uint32 correctionsAtStart = serverCorrections;
+@@ -1032,15 +1044,19 @@ JSONSerializationType AgentControl::walkPath(const JSONSerializationType& points
+ 		uint64 cell = point[3].get<uint64>();
+ 		bool newFrame;
+ 		{
++			// The scene check, the new position and its movement message share one lock, so a scene start can't
++			// land between them (packets are handled on task threads that hold no client lock while they wait).
+ 			std::lock_guard<std::recursive_mutex> lock(worldMutex);
++			if (sceneGeneration != scene)
++				return sceneChanged();
+ 			newFrame = i == 0 || cell != selfParent;
+ 			if (newFrame) {
+ 				// The first point is where the server thinks we are; a cell change is a doorway.
+ 				selfX = px; selfY = py; selfZ = pz; selfParent = cell;
++				if (cell != 0) sendTransformWithParent(cell, heading, speed); else sendTransform(heading, speed);
+ 			}
+ 		}
+ 		if (newFrame) {
+-			if (cell != 0) sendTransformWithParent(cell, heading, speed); else sendTransform(heading, speed);
+ 			Thread::sleep(450);
+ 			continue;
+ 		}
+@@ -1051,6 +1067,8 @@ JSONSerializationType AgentControl::walkPath(const JSONSerializationType& points
+ 			float dx, dy, distance;
+ 			{
+ 				std::lock_guard<std::recursive_mutex> lock(worldMutex);
++				if (sceneGeneration != scene)
++					return sceneChanged();
+ 				dx = px - selfX; dy = py - selfY;
+ 				distance = std::sqrt(dx * dx + dy * dy);
+ 				if (distance < 0.3f)
+@@ -1065,13 +1083,15 @@ JSONSerializationType AgentControl::walkPath(const JSONSerializationType& points
+ 				selfZ += (pz - selfZ) * step / distance;
+ 				selfX += dx / distance * step;
+ 				selfY += dy / distance * step;
++				if (cell != 0) sendTransformWithParent(cell, heading, speed); else sendTransform(heading, speed);
+ 			}
+-			if (cell != 0) sendTransformWithParent(cell, heading, speed); else sendTransform(heading, speed);
+ 			Thread::sleep(450);
+ 		}
+ 	}
+-	if (selfParent != 0) sendTransformWithParent(selfParent, heading, 0.f); else sendTransform(heading, 0.f);
+ 	std::lock_guard<std::recursive_mutex> lock(worldMutex);
++	if (sceneGeneration != scene)
++		return sceneChanged();
++	if (selfParent != 0) sendTransformWithParent(selfParent, heading, 0.f); else sendTransform(heading, 0.f);
+ 	return {{"ok", true}, {"arrived", true}, {"cell", selfParent}, {"x", selfX}, {"y", selfY}, {"z", selfZ},
+ 			{"points", points.size()}, {"seconds", started.miliDifference() / 1000.0}};
+ }
+@@ -1260,6 +1280,11 @@ JSONSerializationType AgentControl::handle(const JSONSerializationType& request)
+ 		Time started;
+ 		auto remainingTime = [&]() { return timeout - started.miliDifference() / 1000.f; };
+ 		uint64 cell = request.value("cell", (uint64) 0);
++		uint32 scene;
++		{
++			std::lock_guard<std::recursive_mutex> lock(worldMutex);
++			scene = sceneGeneration; // the whole move (every plan and leg) belongs to this scene
++		}
+ 		bool indoors = selfParent != 0 || cell != 0;
+ 		bool usePath = cmd == "path" || indoors || (request.value("path", true) && !helperMissing);
+ 		if (cmd == "move") {
+@@ -1272,7 +1297,7 @@ JSONSerializationType AgentControl::handle(const JSONSerializationType& request)
+ 		std::string args = "path " + std::to_string(x) + " " + std::to_string(y);
+ 		if (cell != 0)
+ 			args += " " + std::to_string(request.value("z", 0.0f)) + " " + std::to_string(cell);
+-		JSONSerializationType plan = askHelper(args, remainingTime());
++		JSONSerializationType plan = askHelper(args, remainingTime(), scene);
+ 		if (cmd == "path")
+ 			return plan;
+ 		if (plan.value("ok", false)) {
+@@ -1284,7 +1309,7 @@ JSONSerializationType AgentControl::handle(const JSONSerializationType& request)
+ 			for (int leg = 1; leg <= 25; ++leg) {
+ 				if (remainingTime() <= 0)
+ 					return {{"ok", false}, {"error", "timeout"}, {"legs", leg - 1}, {"cell", selfParent}, {"x", selfX}, {"y", selfY}};
+-				result = walkPath(plan["points"], speed, remainingTime());
++				result = walkPath(plan["points"], speed, remainingTime(), scene);
+ 				if (!result.value("ok", false))
+ 					return result;
+ 				float remaining;
+@@ -1301,7 +1326,9 @@ JSONSerializationType AgentControl::handle(const JSONSerializationType& request)
+ 				lastRemaining = std::min(lastRemaining, remaining);
+ 				if (remainingTime() <= 0)
+ 					break;
+-				plan = askHelper(args, remainingTime());
++				plan = askHelper(args, remainingTime(), scene);
++				if (plan.value("scene_changed", false))
++					return plan;
+ 				if (!plan.value("ok", false))
+ 					break;
+ 			}
+@@ -1309,12 +1336,36 @@ JSONSerializationType AgentControl::handle(const JSONSerializationType& request)
+ 			result["error"] = remainingTime() <= 0 ? "timeout" : "could not reach the destination; stopped at the end of the last path";
+ 			return result;
+ 		}
+-		if (indoors)
++		if (indoors || plan.value("scene_changed", false))
+ 			return plan;
+ 		JSONSerializationType result = moveTo(x, y, speed, std::max(0.f, remainingTime()), request.value("z", std::nanf("")));
+ 		result["note"] = "walked a straight line: " + plan.value("error", std::string("no path"));
+ 		return result;
+ 	}
++	if (cmd == "find") { // the server's object search (/agentpath find): terminals, buildings, NPCs by name
++		std::string text = request.value("text", std::string());
++		if (text.size() < 3 || text.find(' ') != std::string::npos)
++			return {{"ok", false}, {"error", "text: one word, at least 3 characters"}};
++		return askHelper("find " + std::to_string(request.value("x", selfX)) + " " + std::to_string(request.value("y", selfY)) +
++						 " " + std::to_string(request.value("radius", 500.0f)) + " " + text, 6.f);
++	}
++	if (cmd == "tell") { // ChatInstantMessageToCharacter: a private message by character first name
++		String name(request.value("name", "").c_str());
++		UnicodeString text(request.value("text", "").c_str());
++		if (name.isEmpty() || text.isEmpty())
++			return {{"ok", false}, {"error", "name and text required"}};
++		BaseMessage* msg = new BaseMessage();
++		msg->insertShort(5);
++		msg->insertInt(0x84BB21F7);
++		msg->insertAscii("SWG");
++		msg->insertAscii("");
++		msg->insertAscii(name);
++		msg->insertUnicode(text);
++		msg->insertInt(0);
++		msg->insertInt(++actionCount);
++		zone->getZoneClient()->sendMessage(msg);
++		return {{"ok", true}, {"sent", str(name)}};
++	}
+ 	if (cmd == "height") {
+ 		return askHelper("height " + std::to_string(request.value("x", selfX)) + " " +
+ 						 std::to_string(request.value("y", selfY)));
+diff --git a/MMOCoreORB/src/client/agent/AgentControl.h b/MMOCoreORB/src/client/agent/AgentControl.h
+index 454c0790..6363954c 100644
+--- a/MMOCoreORB/src/client/agent/AgentControl.h
++++ b/MMOCoreORB/src/client/agent/AgentControl.h
+@@ -97,9 +97,14 @@ private:
+ 	uint32 helperReplies = 0;
+ 	uint32 helperSequence = 0; // id sent with each /agentpath request and echoed in its reply
+ 	bool helperMissing = false;
+-	JSONSerializationType askHelper(const std::string& args, float timeoutSeconds = 4.f);
++	// Bumped by every scene start (login, zone change). A helper plan or a path walk belongs to the scene it was
++	// asked for in; after a scene start its answers and points are dropped (C4d-F3).
++	uint32 sceneGeneration = 0;
++	static const uint32 CURRENT_SCENE = 0xFFFFFFFF;
++	static JSONSerializationType sceneChanged();
++	JSONSerializationType askHelper(const std::string& args, float timeoutSeconds = 4.f, uint32 scene = CURRENT_SCENE);
+ 	std::string immobileReason();
+-	JSONSerializationType walkPath(const JSONSerializationType& points, float speed, float timeoutSeconds);
++	JSONSerializationType walkPath(const JSONSerializationType& points, float speed, float timeoutSeconds, uint32 scene);
+ 	void sendTransformWithParent(uint64 cell, float heading, float speed);
+ 	bool conversationActive = false;
+ 	uint64 conversationNpc = 0;
+diff --git a/MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h b/MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h
+index dbf68857..789d0b40 100755
+--- a/MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h
++++ b/MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h
+@@ -13,9 +13,14 @@
+ #include "server/zone/managers/collision/CollisionManager.h"
+ #include "server/zone/managers/collision/PathFinderManager.h"
+ #include "server/zone/objects/cell/CellObject.h"
++#include "server/zone/objects/building/BuildingObject.h"
++#include "server/zone/objects/creature/commands/LeashCommand.h"
+ 
+ #include <cmath>
++#include <algorithm>
+ #include <memory>
++#include <unordered_map>
++#include <vector>
+ 
+ /*
+  * Sandbox helper for the agent client (headless bot): it has no terrain or navmeshes,
+@@ -24,6 +29,9 @@
+  *   /agentpath [id:<n>] path <x> <y> [<z> <cellId>]   route from our position; x/y/z are cell-local
+  *                                             when a cell is given, world coordinates otherwise
+  *   /agentpath height <x> <y>                 ground height at a world position
++ *   /agentpath find <x> <y> <radius> <text>   the nearest objects (up to 30) within radius metres whose
++ *                                             template, name key or displayed name contains text,
++ *                                             including objects inside buildings (with cell + local x/y/z)
+  *
+  * The answer is a system message "[agentpath] {json}" sent only to the caller. It echoes the
+  * request ("request") so the client can tell a late answer from the one it is waiting for.
+@@ -80,6 +88,11 @@ public:
+ 						 {"z", CollisionManager::getWorldFloorCollision(x, y, zone, false)}};
+ 			} else if (mode == "path") {
+ 				reply = findPath(creature, zone, x, y, args);
++			} else if (mode == "find") {
++				float radius = args.getFloatToken();
++				String text;
++				args.getStringToken(text);
++				reply = findObjects(zone, x, y, radius, text.toLowerCase());
+ 			} else {
+ 				return INVALIDPARAMETERS;
+ 			}
+@@ -96,6 +109,106 @@ public:
+ 		return SUCCESS;
+ 	}
+ 
++	// Read-only search of the zone around (x, y); building interiors are read the way Core3's own
++	// in-range code reads them (no extra locks, guarded).
++	JSONSerializationType findObjects(Zone* zone, float x, float y, float radius, const String& text) const {
++		const int MAX_FOUND = 30;
++		radius = std::max(1.f, std::min(radius, 3000.f));
++
++		if (text.length() < 3)
++			return {{"mode", "find"}, {"ok", false}, {"error", "text needs at least 3 characters"}};
++
++		std::vector<std::pair<float, JSONSerializationType>> hits;
++		std::unordered_map<uint64, size_t> seen; // object id -> its entry in hits
++
++		auto consider = [&](SceneObject* object, CellObject* cell, SceneObject* building) {
++			if (object == nullptr)
++				return;
++
++			SharedObjectTemplate* objectTemplate = object->getObjectTemplate();
++			String path = objectTemplate != nullptr ? objectTemplate->getFullTemplateString() : "";
++			String key = object->getObjectNameStringIdName();
++			String shown = object->getDisplayedName();
++
++			if (!path.toLowerCase().contains(text) && !key.toLowerCase().contains(text) && !shown.toLowerCase().contains(text))
++				return;
++
++			Vector3 world = object->getWorldPosition();
++			float dx = world.getX() - x, dy = world.getY() - y;
++			float distance = std::sqrt(dx * dx + dy * dy);
++
++			if (distance > radius)
++				return;
++
++			JSONSerializationType entry = {{"oid", object->getObjectID()}, {"template", path.toCharArray()},
++				{"name", shown.toCharArray()}, {"key", key.toCharArray()}, {"x", world.getX()}, {"y", world.getY()},
++				{"z", world.getZ()}, {"distance", std::round(distance * 10) / 10}};
++
++			if (cell != nullptr) {
++				entry["cell"] = cell->getObjectID();
++				entry["local"] = {{"x", object->getPositionX()}, {"y", object->getPositionY()}, {"z", object->getPositionZ()}};
++				entry["building"] = building != nullptr ? building->getObjectID() : 0;
++			}
++
++			// The zone lists objects inside buildings too; keep one entry each, the one with the cell.
++			auto known = seen.find(object->getObjectID());
++
++			if (known != seen.end()) {
++				if (cell != nullptr)
++					hits[known->second].second = entry;
++
++				return;
++			}
++
++			seen[object->getObjectID()] = hits.size();
++			hits.push_back({distance, entry});
++		};
++
++		SortedVector<TreeEntry*> closeObjects;
++		zone->getInRangeObjects(x, 0, y, radius, &closeObjects, true, true);
++
++		for (int i = 0; i < closeObjects.size(); ++i) {
++			ManagedReference<SceneObject*> object = static_cast<SceneObject*>(closeObjects.get(i));
++
++			if (object == nullptr)
++				continue;
++
++			consider(object, nullptr, nullptr);
++
++			if (!object->isBuildingObject())
++				continue;
++
++			try {
++				for (int c = 0; c < object->getContainerObjectsSize(); ++c) {
++					ManagedReference<SceneObject*> child = object->getContainerObject(c);
++
++					if (child == nullptr || !child->isCellObject())
++						continue;
++
++					CellObject* cell = child.castTo<CellObject*>();
++
++					if (!cell->isContainerLoaded())
++						continue;
++
++					for (int j = 0; j < cell->getContainerObjectsSize(); ++j) {
++						ManagedReference<SceneObject*> inside = cell->getContainerObject(j);
++						consider(inside, cell, object);
++					}
++				}
++			} catch (...) {
++			}
++		}
++
++		std::sort(hits.begin(), hits.end(), [](const auto& a, const auto& b) { return a.first < b.first; });
++		JSONSerializationType objects = JSONSerializationType::array();
++
++		for (int i = 0; i < (int) hits.size() && i < MAX_FOUND; ++i)
++			objects.push_back(hits[i].second);
++
++		return {{"mode", "find"}, {"ok", true}, {"count", (int) hits.size()}, {"partial", (int) hits.size() > MAX_FOUND},
++				{"objects", objects}};
++	}
++
+ 	JSONSerializationType findPath(CreatureObject* creature, Zone* zone, float x, float y, StringTokenizer& args) const {
+ 		CellObject* cell = nullptr;
+ 		float z = 0;
+@@ -156,6 +269,15 @@ public:
+ 		// Long outdoor legs get extra points every 8 m with the ground height, so the client can
+ 		// follow the terrain. Every append is checked against MAX_POINTS; when the budget runs out
+ 		// the answer is the continuous prefix so far, marked partial.
++		// Each step of the pathfinder's route (from where we stand) checked the way the leash checks it: "ok", or why it
++		// isn't proved walkable. The pathfinder fills gaps with straight lines it never checked.
++		JSONSerializationType proof = JSONSerializationType::array();
++
++		for (int i = 0; i < path->size(); ++i) {
++			String why = LeashTask::whyNotWalkable(i == 0 ? start : path->get(i - 1), path->get(i), zone);
++			proof.push_back(why.isEmpty() ? "ok" : why.toCharArray());
++		}
++
+ 		JSONSerializationType points = JSONSerializationType::array();
+ 		auto add = [&points](float px, float py, float pz, uint64 cellID) {
+ 			if ((int) points.size() >= MAX_POINTS)
+@@ -188,7 +310,7 @@ public:
+ 			previous = &point;
+ 		}
+ 
+-		return {{"mode", "path"}, {"ok", true}, {"partial", partial}, {"points", points}};
++		return {{"mode", "path"}, {"ok", true}, {"partial", partial}, {"points", points}, {"proof", proof}};
+ 	}
+ };
+ 
+-- 
+2.47.3
+

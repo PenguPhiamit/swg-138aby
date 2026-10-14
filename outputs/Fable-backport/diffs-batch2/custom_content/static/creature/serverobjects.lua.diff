@@ -1,0 +1,7 @@
+--- a/custom_content/static/creature/serverobjects.lua
++++ b/custom_content/static/creature/serverobjects.lua
+@@ -2,3 +2,4 @@
+ 
+ includeFile("custom_content/static/creature/kashyyyk_varactyl.lua")
+ 
++includeFile("custom_content/static/creature/som_droid_mining_facility.lua")

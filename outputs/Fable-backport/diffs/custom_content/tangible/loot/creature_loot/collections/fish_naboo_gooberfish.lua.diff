@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/fish_naboo_gooberfish.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/fish_naboo_gooberfish.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fish_naboo_gooberfish, "object/tangible/loot/creature/loot/collections/fish_naboo_gooberfish.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fish_naboo_gooberfish, "object/tangible/loot/creature_loot/collections/fish_naboo_gooberfish.iff")

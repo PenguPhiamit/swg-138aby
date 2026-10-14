@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/skreeg_bone.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/skreeg_bone.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_skreeg_bone, "object/tangible/loot/creature/loot/collections/skreeg_bone.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_skreeg_bone, "object/tangible/loot/creature_loot/collections/skreeg_bone.iff")

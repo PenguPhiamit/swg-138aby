@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/eow_treasure_hunt_disk_reb.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/eow_treasure_hunt_disk_reb.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_eow_treasure_hunt_disk_reb, "object/tangible/loot/creature/loot/collections/eow_treasure_hunt_disk_reb.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_eow_treasure_hunt_disk_reb, "object/tangible/loot/creature_loot/collections/eow_treasure_hunt_disk_reb.iff")

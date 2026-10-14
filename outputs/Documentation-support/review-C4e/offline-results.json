@@ -1,0 +1,236 @@
+{
+  "evidence": "source assertions and Python model only; no C++/runtime execution",
+  "null_triangles_return_minus_one": true,
+  "on_floor_accepts_minus_one": true,
+  "straight_move_missing_scene_generation": true,
+  "creatures": 20,
+  "lairs": 11,
+  "world_spawn_refs": 11,
+  "missing_spawn_lairs": [],
+  "files": [
+    {
+      "path": "files\\AgentControl.cpp",
+      "sha256": "d1eb7bc9844c6327871d6adc5aed7c6f80c0aaadf45536d59acdf7ad3f0f5807"
+    },
+    {
+      "path": "files\\AgentControl.h",
+      "sha256": "68c63830632906193fe923f36f9e92b13aa94d5ecf6e619af197397ece6f1954"
+    },
+    {
+      "path": "files\\AgentPathCommand.h",
+      "sha256": "9050c02b42afbcd85a6f4ab86aa082711687467bfaadf45a1b0d47f2866ecdf8"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\managers\\planet\\hoth_regions.lua",
+      "sha256": "c94c312436f452fd3005d6c4f950d48ffff4453fb2112e0f170582786367f5e3"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_elder_wampa.lua",
+      "sha256": "281912368717ede6b63db868823acc75a0be8e31fa9c2aab0768a18d32b8665c"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_greater_ice_mynock.lua",
+      "sha256": "14de38f34c2a69de31eed91e6a75083fa5ad2efa55eea25f9d549726b33814ac"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_ice_mynock.lua",
+      "sha256": "f8354a31e3377b59966f38ba249f659f3f2dd04df67f77f75fd90923d122d6ae"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_imperial_salvage_tech.lua",
+      "sha256": "433023e2b39e70af13fe76f60d67a00f4878e07089150518a01798407175ecaf"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_mynock_broodmother.lua",
+      "sha256": "6de4c76399701b39003295f80e2cf4d09799b587f621bed1dc733b4b9e91be28"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_probe_droid.lua",
+      "sha256": "91bd27f396c8b8d14a55c6b0dc82d0a6e6264360acf839cb94e0e4d476363266"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_rebel_snow_sergeant.lua",
+      "sha256": "11273eaace3f653684b152bac5440a18365cc765c4e5d5ae7c1d56687c507a99"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_rebel_snow_soldier.lua",
+      "sha256": "0a90b048ceff6fd923f98ed967dd75efad13abf2a12ff005e423413075c505e3"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_scavenger.lua",
+      "sha256": "eae9ad9114f3b106000d7120b4ad654ab1a275a5726d95b7d8e82fce831dc205"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_scavenger_raider.lua",
+      "sha256": "39dccd01917baa4e0c8464e7253ae8b2f2b125c9f69807a8d7d090eea93732d1"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_snowtrooper.lua",
+      "sha256": "bf7c08282cabe3babb5b730752e16aef061eac224cd92c54435478628221238e"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_snowtrooper_sergeant.lua",
+      "sha256": "eb64d38b425085827d4aa5f11c3fc2168b47ddff6bd60314d2018ee863533f7b"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_tauntaun.lua",
+      "sha256": "03713eabbae09165490198f54ebd06a495f9d77ea86e88463d40d2d6f669fed1"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_tauntaun_bull.lua",
+      "sha256": "9c602a4c539ace3b2411ce65d0d98f1e2d9ce7234d632b95da1412bb979c4259"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_wampa.lua",
+      "sha256": "23566b7c2af4deaf474f9aa76f0d5d2849d21acbe46d79d92181d6ebc7684034"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_wampa_frostfang.lua",
+      "sha256": "d5ef15018513bd0569bff242be91947ccd85b8e886c94c0d7f266de223c2f300"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_wampa_icemaw.lua",
+      "sha256": "bf77b29c8a66809943ba169726a8f20fddc2fc1981675095a0fae7fed963174e"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_wampa_matriarch.lua",
+      "sha256": "bcded02eb85140215db5bfa5df7c373d30194cff14c66ba171f1ab26525ad0e0"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_wampa_patriarch.lua",
+      "sha256": "90e159cd1a60ab2ff23a0cf790e3b5fc8a118fe2cf14dbb2c3bdeed12bf439a1"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\hoth_wampa_snowblind.lua",
+      "sha256": "4a43de5b3518016ed27712100fa3d5f58d0b134a37089a17d6181298b7b7b94c"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\hoth\\serverobjects.lua",
+      "sha256": "fbf14a77e1041417bcdf49b97ea11bac1f2e4effc5f24ce38bd76eef94203d86"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\creature_dynamic\\hoth\\hoth_ice_mynock_pack_neutral_none.lua",
+      "sha256": "3ff35bf70c3d9e1ec2d213eec7406b7b6d0114941087ef6e7462838f2cd14f7c"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\creature_dynamic\\hoth\\hoth_probe_droid_neutral_none.lua",
+      "sha256": "f7fbd8c309a3fd506fe410fe5005d71bc18f69668f146492272de78ac85ac215"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\creature_dynamic\\hoth\\hoth_tauntaun_herd_neutral_none.lua",
+      "sha256": "d31888670ab4fe3648061c5507103f9365d691cf9e0d882da2b01803b19721d4"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\creature_dynamic\\hoth\\hoth_wampa_neutral_none.lua",
+      "sha256": "3f0ef211d906cd8b219a34343bf5a73a257396c0389cc7c928d58d0e39cdb082"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\creature_dynamic\\serverobjects.lua",
+      "sha256": "4e3775cb96ed85e7b83bafee23729781aa9864f83f40cc9c8f6c3f5039bae399"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\creature_lair\\hoth\\hoth_ice_mynock_lair_neutral_medium.lua",
+      "sha256": "2771e8455e67779f79f1b9fe4d4f6d892f4d22204fc9b5f6c971d34b5db649d6"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\creature_lair\\hoth\\hoth_tauntaun_lair_neutral_medium.lua",
+      "sha256": "63b5b137149e6f6ecffd9e312740fef78f47bc4a1bd4ada7dc6ff7564b76f236"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\creature_lair\\hoth\\hoth_wampa_lair_neutral_large.lua",
+      "sha256": "ab8dfae2043f9c78d9bd8faa76826e33bbf6a0fa81f8267da9e11a1891342508"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\creature_lair\\serverobjects.lua",
+      "sha256": "1d9fca0ea307699673d3e6e5b517147f26d0d447b20bc8d284bfd9c4ae9a7c98"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\npc_dynamic\\hoth\\hoth_imperial_salvage_team_imperial_none.lua",
+      "sha256": "f1e4d82e3b2a04bcbbf94822cbb529d792614824490776b286dc70deca28a585"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\npc_dynamic\\hoth\\hoth_rebel_snow_patrol_rebel_none.lua",
+      "sha256": "76bb803f0d4c70216b6a3d55bdead679246fea18f3d4e5597b2dfdab2a9b4bac"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\npc_dynamic\\hoth\\hoth_scavenger_raider_camp_neutral_none.lua",
+      "sha256": "0c780d6037dbb74f0cd6c6285a8d4e466d62fd1cddb8a45f50a3f19c2f82e33e"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\npc_dynamic\\hoth\\hoth_snowtrooper_patrol_imperial_none.lua",
+      "sha256": "46f7669b5762c75cb261c92464be5bd6e426deca9f76668007b0729e4216e309"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\lair\\npc_dynamic\\serverobjects.lua",
+      "sha256": "54e65f8c24f99384f20430fa75ca46e7ae63b591702318aa109d1b6245072288"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\serverobjects.lua",
+      "sha256": "765ad44c4619d9717973be35551f156647e17642370c2beb3db6214352b1f73c"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\spawn\\hoth\\hoth_world.lua",
+      "sha256": "5e8e129f45bb8ae33e3dba0e8e0e3235c791f26ab51b1137720cc90d71e6b327"
+    },
+    {
+      "path": "files\\c402e480\\MMOCoreORB\\bin\\scripts\\mobile\\spawn\\serverobjects.lua",
+      "sha256": "52ee944695a1f21e88264dc26a6717923f9b0836ca8fb31b673a523712fb272e"
+    },
+    {
+      "path": "files\\context\\ChatInstantMessageToCharacter.h",
+      "sha256": "f8b1a660d4b525f6008d2a63f11f2df1016d8030606a025e493b26413c536151"
+    },
+    {
+      "path": "files\\context\\ChatManager.idl",
+      "sha256": "d78b75442cf046560a1c3a57d51e5ee94423f581c8fa307f5734eecbcb2ebfa8"
+    },
+    {
+      "path": "files\\context\\ChatManagerImplementation.cpp",
+      "sha256": "f5286d3803845d0092403f9426d1db3ef492ef2a8b7b09ec048c129fb3a87c3b"
+    },
+    {
+      "path": "files\\context\\engine3-BaseClient.cpp",
+      "sha256": "7a1f6942d944676b2e8d75201aecb27dff5fba548831ab67582e6849d4e760ef"
+    },
+    {
+      "path": "files\\context\\engine3-BaseClient.h",
+      "sha256": "a492a752c76c851ff2bf35feea824a0be633c98b3eb499690a2703b5b112e2ea"
+    },
+    {
+      "path": "files\\context\\engine3-BaseClientProxy.cpp",
+      "sha256": "9b705418af2d932cfee9e9e5d72e1122b470f5d2d32575b6026c3aae03c7de8c"
+    },
+    {
+      "path": "files\\context\\PathFinderManager.cpp",
+      "sha256": "b6036118dd4a9dbb49b49a992fd520827d75ab8f771bbd32ce12e633869957e9"
+    },
+    {
+      "path": "files\\context\\PathFinderManager.h",
+      "sha256": "ccbaebf296db2c575f282e4ee82c2a1fa72333ae4f5b5cef13123bca8fbbca86"
+    },
+    {
+      "path": "files\\context\\PlanetManagerImplementation.cpp",
+      "sha256": "c7515a2ef9c0f9775d9e9cba9a75fc1946d636bbcca0d196aafb8f6d0bd74d74"
+    },
+    {
+      "path": "files\\context\\ZoneClientSession.idl",
+      "sha256": "2b70ce5ab01a5521212a2cdfec1dfe7c3cc4668e2412572a35e3930b6222b399"
+    },
+    {
+      "path": "files\\context\\ZoneClientSessionImplementation.cpp",
+      "sha256": "5551fd4238edf58a704805cdb9ea993058a9cba67932643c09a816a8824aa9c7"
+    },
+    {
+      "path": "files\\context\\ZonePacketHandler.cpp",
+      "sha256": "bf5d115f5b0602785900658ead05b8e46f85b1cab976ae526dd503e5632fa006"
+    },
+    {
+      "path": "files\\hoth_regions.lua",
+      "sha256": "affa470b2a2876152216716be04f63f06cd5970ca60a31460a9f4c3f46195da2"
+    },
+    {
+      "path": "files\\LeashCommand.h",
+      "sha256": "51d5857e0eeb6b4ebc5b94bbfc271dea43ed98d2a54fbbaeb52a705056ba393c"
+    }
+  ]
+}

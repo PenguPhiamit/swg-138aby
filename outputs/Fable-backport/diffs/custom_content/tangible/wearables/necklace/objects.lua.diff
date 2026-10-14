@@ -1,0 +1,62 @@
+--- /dev/null
++++ b/custom_content/tangible/wearables/necklace/objects.lua
+@@ -0,0 +1,59 @@
++-- Fable backport batch 1 (14 Oct 2026): shared templates for NGE necklace with no server template in Core3-dev.
++-- Client files come from the Mod the Galaxy archives (see README.md, rights); style as custom_content/tangible/wearables/belt/objects.lua.
++
++--**********************************************
++
++object_tangible_wearables_necklace_shared_necklace_gcw_imperial = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/necklace/shared_necklace_gcw_imperial.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_wearables_necklace_shared_necklace_gcw_imperial, "object/tangible/wearables/necklace/shared_necklace_gcw_imperial.iff")
++
++--**********************************************
++
++object_tangible_wearables_necklace_shared_necklace_gcw_rebel = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/necklace/shared_necklace_gcw_rebel.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_wearables_necklace_shared_necklace_gcw_rebel, "object/tangible/wearables/necklace/shared_necklace_gcw_rebel.iff")
++
++--**********************************************
++
++object_tangible_wearables_necklace_shared_necklace_lifeday = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/necklace/shared_necklace_lifeday.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_wearables_necklace_shared_necklace_lifeday, "object/tangible/wearables/necklace/shared_necklace_lifeday.iff")
++
++--**********************************************
++
++object_tangible_wearables_necklace_shared_necklace_medallion_black_sun = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/necklace/shared_necklace_medallion_black_sun.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_wearables_necklace_shared_necklace_medallion_black_sun, "object/tangible/wearables/necklace/shared_necklace_medallion_black_sun.iff")
++
++--**********************************************
++
++object_tangible_wearables_necklace_shared_necklace_primitive_01 = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/necklace/shared_necklace_primitive_01.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_wearables_necklace_shared_necklace_primitive_01, "object/tangible/wearables/necklace/shared_necklace_primitive_01.iff")
++
++--**********************************************
++
++object_tangible_wearables_necklace_shared_necklace_primitive_03 = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/necklace/shared_necklace_primitive_03.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_wearables_necklace_shared_necklace_primitive_03, "object/tangible/wearables/necklace/shared_necklace_primitive_03.iff")
++
++--**********************************************
++
++object_tangible_wearables_necklace_shared_necklace_primitive_04 = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/necklace/shared_necklace_primitive_04.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_wearables_necklace_shared_necklace_primitive_04, "object/tangible/wearables/necklace/shared_necklace_primitive_04.iff")
++
++--**********************************************
++
++object_tangible_wearables_necklace_shared_necklace_rodian_safari = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/necklace/shared_necklace_rodian_safari.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_wearables_necklace_shared_necklace_rodian_safari, "object/tangible/wearables/necklace/shared_necklace_rodian_safari.iff")
++

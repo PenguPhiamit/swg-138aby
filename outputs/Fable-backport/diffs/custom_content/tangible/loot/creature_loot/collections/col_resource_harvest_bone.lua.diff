@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/col_resource_harvest_bone.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/col_resource_harvest_bone.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_col_resource_harvest_bone, "object/tangible/loot/creature/loot/collections/col_resource_harvest_bone.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_col_resource_harvest_bone, "object/tangible/loot/creature_loot/collections/col_resource_harvest_bone.iff")

@@ -1,0 +1,40 @@
+From 2f205cd2da8330b1784f65f450553af79fef4872 Mon Sep 17 00:00:00 2001
+From: SWG Local Dev <swg-local@localhost>
+Date: Wed, 14 Oct 2026 05:06:11 -0700
+Subject: [PATCH] Sandbox Hoth: resources spawn on Hoth
+
+Owner, 14 Oct: Hoth content (resources after creatures and loot).
+- resource_manager.lua: hoth in activeZones, as Bellum Gero does. The
+  minimum, random and fixed pools now cover Hoth; the native pool needs
+  <type>_hoth rows in datatables/resource/resource_tree.iff.
+- Those rows ship in local_planets.tre (tools/hoth/hoth_client_build.py):
+  stock's tree plus MTG's 50 *_hoth rows (mtg_planets.tre has them but stock
+  patch_14_00 shadows it) plus solar and wind cloned from Endor; MTG's
+  resource_names.stf already names all 52. Kaas and JTL space rows left out.
+So this needs the rebuilt local_planets.tre first in the server's TreFiles
+(test galaxy) and in the client. Not yet tried in game.
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ MMOCoreORB/bin/scripts/managers/resource_manager.lua | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/MMOCoreORB/bin/scripts/managers/resource_manager.lua b/MMOCoreORB/bin/scripts/managers/resource_manager.lua
+index b4e73d68..53465e58 100644
+--- a/MMOCoreORB/bin/scripts/managers/resource_manager.lua
++++ b/MMOCoreORB/bin/scripts/managers/resource_manager.lua
+@@ -44,7 +44,9 @@ buildInitialResourcesFromScript = 1 -- Use a script to build resource database w
+   -- So that during wipes crafters can mantain spreadsheets with calculations
+ 
+ --  These indicate zone names where resources spawn
+-activeZones = "corellia,tatooine,lok,naboo,rori,endor,talus,yavin4,dathomir,dantooine"
++-- Sandbox Hoth (14 Oct 2026, Claude): hoth added; its 52 native resource types come from the merged
++-- resource_tree.iff in local_planets.tre (MTG's 50 + solar/wind cloned from Endor), so this needs that archive.
++activeZones = "corellia,tatooine,lok,naboo,rori,endor,talus,yavin4,dathomir,dantooine,hoth"
+ 
+ averageShiftTime = 7200000 -- In milliseconds
+   --  This is the time between each time the Resource Manager schedules
+-- 
+2.47.3
+

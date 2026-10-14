@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/generic_usable/generic_crystal.lua
++++ b/custom_content/tangible/loot/generic_usable/generic_crystal.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_generic_crystal, "object/tangible/loot/generic/usable/generic_crystal.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_generic_crystal, "object/tangible/loot/generic_usable/generic_crystal.iff")

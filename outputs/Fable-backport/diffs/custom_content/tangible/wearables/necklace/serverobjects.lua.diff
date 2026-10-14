@@ -1,0 +1,13 @@
+--- /dev/null
++++ b/custom_content/tangible/wearables/necklace/serverobjects.lua
+@@ -0,0 +1,10 @@
++-- Fable backport batch 1 (14 Oct 2026): server objects for NGE necklace.
++
++includeFile("custom_content/tangible/wearables/necklace/necklace_gcw_imperial.lua")
++includeFile("custom_content/tangible/wearables/necklace/necklace_gcw_rebel.lua")
++includeFile("custom_content/tangible/wearables/necklace/necklace_lifeday.lua")
++includeFile("custom_content/tangible/wearables/necklace/necklace_medallion_black_sun.lua")
++includeFile("custom_content/tangible/wearables/necklace/necklace_primitive_01.lua")
++includeFile("custom_content/tangible/wearables/necklace/necklace_primitive_03.lua")
++includeFile("custom_content/tangible/wearables/necklace/necklace_primitive_04.lua")
++includeFile("custom_content/tangible/wearables/necklace/necklace_rodian_safari.lua")

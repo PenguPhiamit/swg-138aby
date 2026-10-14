@@ -1,0 +1,15 @@
+--- a/custom_content/static/structure/tatooine/serverobjects.lua
++++ b/custom_content/static/structure/tatooine/serverobjects.lua
+@@ -4,4 +4,12 @@
+ includeFile("custom_content/static/structure/tatooine/palette_supply_07.lua")
+ includeFile("custom_content/static/structure/tatooine/palette_tatooine_food_crates_01.lua")
+ includeFile("custom_content/static/structure/tatooine/palette_tatooine_food_crates_02.lua")
+-includeFile("custom_content/static/structure/tatooine/poi_podracer_sebulba_destroyed.lua")+includeFile("custom_content/static/structure/tatooine/poi_podracer_sebulba_destroyed.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_100.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_200.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_500.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_1000.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_2000.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_2500.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_4200.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_8000.lua")

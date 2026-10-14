@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/exar_kun_lost_journal_page_08.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/exar_kun_lost_journal_page_08.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_exar_kun_lost_journal_page_08, "object/tangible/loot/creature/loot/collections/exar_kun_lost_journal_page_08.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_exar_kun_lost_journal_page_08, "object/tangible/loot/creature_loot/collections/exar_kun_lost_journal_page_08.iff")

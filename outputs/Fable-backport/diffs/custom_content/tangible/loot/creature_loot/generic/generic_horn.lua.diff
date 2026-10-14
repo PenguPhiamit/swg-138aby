@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/generic/generic_horn.lua
++++ b/custom_content/tangible/loot/creature_loot/generic/generic_horn.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_generic_horn, "object/tangible/loot/creature/loot/generic/generic_horn.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_generic_horn, "object/tangible/loot/creature_loot/generic/generic_horn.iff")

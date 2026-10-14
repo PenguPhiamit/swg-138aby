@@ -1,0 +1,241 @@
+
+######## round 1 · 06:07 · 4 min so far
+== Aurek · aurek-doctor-buffs.py · 0/0 passed · 2 s
+  note: ASSIGNMENT: {"fallback": false, "main": "aurek-doctor-buffs.py", "reason": "scheduled main retry after fallback rounds"}
+  note: Tamsin support gear: {'equipped': ['object/weapon/ranged/pistol/pistol_cdef.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_chest_plate.iff', 'object/tangible/wearables/armor/bone/armor_bone
+  note: BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell.
+  report: Bot-reports/Aurek/20261014-060325-aurek-doctor-buffs.json
+== Besh · besh-harvest.py · 8/10 passed · 120 s
+  PASS artisans reach town staging point — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds"]
+  PASS meat patrol pair upright on Tatooine
+  PASS meat patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 69, 'reply': 'move', 'second", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 69, 'reply': 'move', 'second"]
+  FAIL meat ordinary wild prey found — null
+  PASS hide patrol pair upright on Tatooine
+  PASS hide patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 9, 'reply': 'move', 'seconds"]
+  FAIL hide ordinary wild prey found — null
+  PASS bone patrol pair upright on Tatooine
+  PASS bone patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds"]
+  PASS bone ordinary wild prey found — {"distance": 81.69999694824219, "health_pct": 100, "name": "@mob/creature_names:kreetle", "oid": 281474994070747, "posture": "upright", "type": "CREO", "x": 3839.300048828125, "y": -5039.0, "z": 46.79999923706055}
+  note: ASSIGNMENT: {"fallback": false, "main": "besh-harvest.py", "reason": "scheduled main retry after fallback rounds"}
+  note: Varo basic gear: {'equipped': ['object/weapon/ranged/rifle/rifle_cdef.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_helmet.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_gl
+  note: BLOCKED: bounded fight did not finish; stop rather than repeat a dangerous patrol.
+  note: Fresh kills inspected: 0; one harvest type attempted per corpse.
+  report: Bot-reports/Besh/20261014-060524-besh-harvest.json
+== Cresh · cresh-missions.py · 3/3 passed · 33 s
+  PASS a mission terminal in town — {"template": "object/tangible/terminal/terminal_mission.iff", "distance": 68.69999694824219, "cell": null}
+  PASS reach the mission terminal — [{"arrived": true, "cell": 0, "legs": 2, "ok": true, "points": 2, "reply": "move", "seconds": 26.0, "x": 3501.881591796875, "y": -4870.263671875, "z": 16.546772003173828}, {"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 33, "reply": "move", "seconds": 24.4, "x": 3503.949951171875, "y":…
+  PASS the terminal lists missions — 36 missions: ['0', 'deliver', 'destroy']
+  note: ASSIGNMENT: {"fallback": false, "main": "cresh-missions.py", "reason": "scheduled main retry after fallback rounds"}
+  note: Cresh gear: {'equipped': ['object/weapon/ranged/pistol/pistol_cdef.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_helmet.iff', 'object/tangible/wearables/armor/
+  note: Ilsa gear: {'equipped': ['object/weapon/ranged/pistol/pistol_cdef.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_chest_plate.iff', 'object/tangible/wearables/a
+  note: Kor gear: {'equipped': ['object/weapon/ranged/rifle/rifle_cdef.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_helmet.iff', 'object/tangible/wearables/armor/bo
+  note: BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted.
+  report: Bot-reports/Cresh/20261014-060356-cresh-missions.json
+== Dorn · dorn-social.py · 9/10 passed · 69 s
+  PASS spatial chat heard by both — ["Dorn group checking in", "Dorn group checking in"]
+  PASS tell arrives — {"event": "tell", "from": "Dorn", "text": "Nima, are you with me?"}
+  PASS leash starts — ["Leashed to Dorn: keep using /follow; if it gets stuck you'll be moved closer. /leash off to stop."]
+  FAIL leash brings Nima to Dorn after he stops — 11.7 m from Dorn
+  PASS no repeated hops once Dorn has stopped — 0 hops in 10 s
+  PASS menu: "Stop leash" on the leader — Stop leash
+  PASS menu: another member offers to switch — Leash to this member instead
+  PASS leash off — ["Leash off."]
+  PASS Dax Venn the mercenary broker is nearby — 21.5 m
+  PASS Dax offers options — ["Hire a mercenary.", "Dismiss my mercenaries.", "Not today."]
+  note: ASSIGNMENT: {"fallback": false, "main": "dorn-social.py", "reason": "scheduled main retry after fallback rounds"}
+  note: Rusk gear: {'equipped': ['object/weapon/melee/knife/knife_dagger.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_helmet.iff', 'object/tangible/wearables/armor/b
+  note: Dorn /startdance basic: posture; @performance:dance_start_self
+  report: Bot-reports/Dorn/20261014-060432-dorn-social.json
+== Esk · esk-routes.py · 5/5 passed · 227 s
+  PASS Esk reaches the cantina (indoors) — {"seconds": 95.9, "legs": 1, "points": 2, "cell": 1105883, "z": -4.289999961853027, "error": null}
+  PASS Lira reaches the starport — {"seconds": 8.0, "legs": 2, "points": 2, "cell": 0, "z": 12.65625, "error": null}
+  PASS Tovan reaches the plateau — {"seconds": 107.1, "legs": 1, "points": 8, "cell": 0, "z": 178.90994262695312, "error": null}
+  PASS Tovan is up on the plateau (z > 150) — z 178.90994262695312
+  PASS all three back in the square — [["Esk", 118.2], ["Lira", 8.4], ["Tovan", 89.7]]
+  note: ASSIGNMENT: {"fallback": false, "main": "esk-routes.py", "reason": "scheduled main retry after fallback rounds"}
+  note: Tovan gear: {'equipped': ['object/weapon/melee/knife/knife_dagger.iff', 'object/tangible/wearables/armor/bone/armor_bone_s01_helmet.iff', 'object/tangible/wearables/armor/b
+  note: cantina: Esk sees 0 creatures inside, e.g. 
+  report: Bot-reports/Esk/20261014-060710-esk-routes.json
+
+######## round 2 · 06:10 · 8 min so far
+== Aurek · aurek-doctor-buffs.py · 0/0 passed · 2 s
+  note: ASSIGNMENT: {"fallback": false, "main": "aurek-doctor-buffs.py", "reason": "scheduled main retry after fallback rounds"}
+  note: Tamsin support gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell.
+  report: Bot-reports/Aurek/20261014-060712-aurek-doctor-buffs.json
+== Besh · besh-harvest.py · 1/2 passed · 2 s
+  PASS artisans reach town staging point — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds"]
+  FAIL meat patrol pair upright on Tatooine
+  note: ASSIGNMENT: {"fallback": false, "main": "besh-harvest.py", "reason": "scheduled main retry after fallback rounds"}
+  note: Varo basic gear: {'skipped': 'already has armor_bone'}
+  note: Fresh kills inspected: 0; one harvest type attempted per corpse.
+  report: Bot-reports/Besh/20261014-060712-besh-harvest.json
+== Cresh · cresh-missions.py · 3/3 passed · 8 s
+  PASS a mission terminal in town — {"template": "object/tangible/terminal/terminal_mission_artisan.iff", "distance": 1.899999976158142, "cell": null}
+  PASS reach the mission terminal — [{"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 3, "reply": "move", "seconds": 1.6, "x": 3503.162109375, "y": -4871.82275390625, "z": 18.202486038208008}, {"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 2, "reply": "move", "seconds": 1.6, "x": 3505.162109375, "y": -4871.…
+  PASS the terminal lists missions — 36 missions: ['0', 'crafting', 'survey']
+  note: ASSIGNMENT: {"fallback": false, "main": "cresh-missions.py", "reason": "scheduled main retry after fallback rounds"}
+  note: Cresh gear: {'skipped': 'already has armor_bone'}
+  note: Ilsa gear: {'skipped': 'already has armor_bone'}
+  note: Kor gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted.
+  report: Bot-reports/Cresh/20261014-060718-cresh-missions.json
+== Dorn · dorn-social.py · 9/10 passed · 73 s
+  PASS spatial chat heard by both — ["Dorn group checking in", "Dorn group checking in"]
+  PASS tell arrives — {"event": "tell", "from": "Dorn", "text": "Nima, are you with me?"}
+  PASS leash starts — ["Leashed to Dorn: keep using /follow; if it gets stuck you'll be moved closer. /leash off to stop."]
+  FAIL leash brings Nima to Dorn after he stops — 12.0 m from Dorn
+  PASS no repeated hops once Dorn has stopped — 0 hops in 10 s
+  PASS menu: "Stop leash" on the leader — Stop leash
+  PASS menu: another member offers to switch — Leash to this member instead
+  PASS leash off — ["Leash off."]
+  PASS Dax Venn the mercenary broker is nearby — 21.5 m
+  PASS Dax offers options — ["Hire a mercenary.", "Dismiss my mercenaries.", "Not today."]
+  note: ASSIGNMENT: {"fallback": false, "main": "dorn-social.py", "reason": "scheduled main retry after fallback rounds"}
+  note: Rusk gear: {'skipped': 'already has armor_bone'}
+  note: Dorn /startdance basic: posture; @performance:dance_start_self
+  report: Bot-reports/Dorn/20261014-060823-dorn-social.json
+== Esk · esk-routes.py · 5/5 passed · 226 s
+  PASS Esk reaches the cantina (indoors) — {"seconds": 93.5, "legs": 1, "points": 61, "cell": 1105883, "z": -4.289999961853027, "error": null}
+  PASS Lira reaches the starport — {"seconds": 6.8, "legs": 2, "points": 2, "cell": 0, "z": 12.65625, "error": null}
+  PASS Tovan reaches the plateau — {"seconds": 107.1, "legs": 1, "points": 8, "cell": 0, "z": 178.90994262695312, "error": null}
+  PASS Tovan is up on the plateau (z > 150) — z 178.90994262695312
+  PASS all three back in the square — [["Esk", 118.0], ["Lira", 8.6], ["Tovan", 89.7]]
+  note: ASSIGNMENT: {"fallback": false, "main": "esk-routes.py", "reason": "scheduled main retry after fallback rounds"}
+  note: Tovan gear: {'skipped': 'already has armor_bone'}
+  note: cantina: Esk sees 1 creatures inside, e.g. R2-J5 (a helper R2 unit)
+  report: Bot-reports/Esk/20261014-061057-esk-routes.json
+  NEXT - 2026-10-14 06:10 Aurek: `aurek-doctor-buffs.py` -> `esk-fallback-census.py`: same problem twice: BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell.
+  NEXT - 2026-10-14 06:10 Cresh: `cresh-missions.py` -> `esk-fallback-reach.py`: same problem twice: BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted.
+  NEXT - 2026-10-14 06:10 Dorn: `dorn-social.py` -> `esk-fallback-reach.py`: same problem twice: FAIL: leash brings Nima to Dorn after he stops
+  NEXT - 2026-10-14 06:10 Esk: `esk-routes.py` -> `esk-fallback-reach.py`: all checks passed for two consecutive rounds
+
+######## round 3 · 06:12 · 9 min so far
+== Aurek · esk-fallback-census.py · 1/1 passed · 1 s
+  PASS spawn census reply has a scene — tatooine
+  note: ASSIGNMENT: {"fallback": true, "main": "aurek-doctor-buffs.py", "reason": "same problem twice: BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell."}
+  note: CENSUS: planet=tatooine; at=3528.0,-4804.0; names={'Jesh Kolby': 1, 'Oren Vask': 1, 'Tamsin Voor': 1, 'Sela Marn': 1, 'R2-I9 (a helper R2 unit)': 1, 'R2-X1 (a helper R2 unit)': 1, 'R2-S2 (a helper R2 unit)': 1, 'R2-T6 (a helper R2 unit)': 1, 'R2-U1 (a helper R2 unit)': 1, 'Besh Orlani': 1, 'Esk Morrow': 1, '@npc_spawner_n:guillo_parootchie': 1, '@npc_spawner_n:vincie_kalhoon': 1, 'R2-A0 (a helper R2 unit)': 1, 'Dova Renn': 1, '@npc_spawner_n:mooch_davoney': 1, 'Lira Quell': 1, 'R2-B3 (a helper R…
+  report: Bot-reports/Aurek/20261014-061058-esk-fallback-census.json
+== Besh · besh-harvest.py · 2/3 passed · 109 s
+  PASS artisans reach town staging point — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds"]
+  PASS meat patrol pair upright on Tatooine
+  FAIL meat patrol reached — ["{'cell': 0, 'error': 'timeout', 'ok': False, 'reply': 'move', 'x': 3560.800048828125, 'y':", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 15, 'reply': 'move', 'second"]
+  note: ASSIGNMENT: {"fallback": false, "main": "besh-harvest.py", "reason": "scheduled main retry after fallback rounds"}
+  note: before the run Varo was dead; now upright
+  note: Varo basic gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: short patrol unreachable; stop before further exposure.
+  note: Fresh kills inspected: 0; one harvest type attempted per corpse.
+  report: Bot-reports/Besh/20261014-061246-besh-harvest.json
+== Cresh · esk-fallback-reach.py · 0/1 passed · 4 s
+  FAIL trainer: reachable — {"result": {"arrived": true, "cell": 0, "error": "could not reach the destination; stopped at the end of the last path", "legs": 3, "ok": false, "points": 2, "reply": "move", "seconds": 0.451, "x": 3503.19140625, "y": -4870.7998046875, "z": 17.835050582885742}, "gap": 61.80010109834519, "cell": 0}
+  note: ASSIGNMENT: {"fallback": true, "main": "cresh-missions.py", "reason": "same problem twice: BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted."}
+  note: BLOCKED: no terminal_travel within local reachability sample
+  report: Bot-reports/Cresh/20261014-061101-esk-fallback-reach.json
+== Dorn · esk-fallback-reach.py · 2/2 passed · 59 s
+  PASS terminal_travel: reachable — {"result": {"arrived": true, "cell": 1106372, "legs": 1, "ok": true, "points": 25, "reply": "move", "seconds": 26.559, "x": 12.653599739074707, "y": 51.183799743652344, "z": 0.6394209861755371}, "gap": 0.0, "cell": 1106372}
+  PASS terminal_travel: radial opens — {"counter": 1, "event": "radial_menu", "items": [{"callback": 3, "index": 1, "label": "", "name": "item_use", "parent": 0, "radial_id": 20}], "target": 16796675}
+  note: ASSIGNMENT: {"fallback": true, "main": "dorn-social.py", "reason": "same problem twice: FAIL: leash brings Nima to Dorn after he stops"}
+  note: REACH: terminal_travel radial observed; service transaction not exercised
+  note: BLOCKED: could not return outdoors after reachability probe
+  report: Bot-reports/Dorn/20261014-061156-esk-fallback-reach.json
+== Esk · esk-fallback-reach.py · 4/4 passed · 41 s
+  PASS terminal_travel: reachable — {"result": {"arrived": true, "cell": 1106372, "legs": 1, "ok": true, "points": 19, "reply": "move", "seconds": 16.656, "x": 12.653599739074707, "y": 51.183799743652344, "z": 0.6394209861755371}, "gap": 0.0, "cell": 1106372}
+  PASS terminal_travel: radial opens — {"counter": 1, "event": "radial_menu", "items": [{"callback": 3, "index": 1, "label": "", "name": "item_use", "parent": 0, "radial_id": 20}], "target": 16796675}
+  PASS trainer: reachable — {"result": {"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 9, "reply": "move", "seconds": 5.402, "x": 3519.760009765625, "y": -4786.89990234375, "z": 5.29492712020874}, "gap": 0.0, "cell": 0}
+  PASS trainer: radial opens — {"counter": 2, "event": "radial_menu", "items": [{"callback": 3, "index": 1, "label": "", "name": "item_use", "parent": 0, "radial_id": 20}], "target": 281474994054196}
+  note: ASSIGNMENT: {"fallback": true, "main": "esk-routes.py", "reason": "all checks passed for two consecutive rounds"}
+  note: REACH: terminal_travel radial observed; service transaction not exercised
+  note: REACH: trainer radial observed; service transaction not exercised
+  report: Bot-reports/Esk/20261014-061138-esk-fallback-reach.json
+
+######## round 4 · 06:13 · 10 min so far
+== Aurek · esk-fallback-census.py · 1/1 passed · 1 s
+  PASS spawn census reply has a scene — tatooine
+  note: ASSIGNMENT: {"fallback": true, "main": "aurek-doctor-buffs.py", "reason": "same problem twice: BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell."}
+  note: CENSUS: planet=tatooine; at=3528.0,-4804.0; names={'Oren Vask': 1, 'Jesh Kolby': 1, 'Sela Marn': 1, 'Tamsin Voor': 1, 'R2-I9 (a helper R2 unit)': 1, 'R2-X1 (a helper R2 unit)': 1, 'R2-S2 (a helper R2 unit)': 1, 'R2-T6 (a helper R2 unit)': 1, 'R2-U1 (a helper R2 unit)': 1, 'Besh Orlani': 1, '@npc_spawner_n:guillo_parootchie': 1, '@npc_spawner_n:vincie_kalhoon': 1, 'R2-A0 (a helper R2 unit)': 1, 'Dova Renn': 1, '@npc_spawner_n:mooch_davoney': 1, 'Lira Quell': 1, 'R2-B3 (a helper R2 unit)': 1, 'R2-…
+  report: Bot-reports/Aurek/20261014-061247-esk-fallback-census.json
+== Besh · besh-harvest.py · 8/10 passed · 59 s
+  PASS artisans reach town staging point — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds"]
+  PASS meat patrol pair upright on Tatooine
+  PASS meat patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 14, 'reply': 'move', 'second", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds"]
+  FAIL meat ordinary wild prey found — null
+  PASS hide patrol pair upright on Tatooine
+  PASS hide patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 9, 'reply': 'move', 'seconds"]
+  FAIL hide ordinary wild prey found — null
+  PASS bone patrol pair upright on Tatooine
+  PASS bone patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds"]
+  PASS bone ordinary wild prey found — {"distance": 66.5999984741211, "health_pct": 100, "name": "@mob/creature_names:kreetle", "oid": 281474994070737, "posture": "upright", "type": "CREO", "x": 3826.0, "y": -5027.7998046875, "z": 46.0}
+  note: ASSIGNMENT: {"fallback": false, "main": "besh-harvest.py", "reason": "scheduled main retry after fallback rounds"}
+  note: Varo basic gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: guard below 80% HAM or missing HAM evidence; stop harvest hunt.
+  note: Fresh kills inspected: 0; one harvest type attempted per corpse.
+  report: Bot-reports/Besh/20261014-061345-besh-harvest.json
+== Cresh · esk-fallback-reach.py · 0/1 passed · 3 s
+  FAIL trainer: reachable — {"result": {"arrived": true, "cell": 0, "error": "could not reach the destination; stopped at the end of the last path", "legs": 3, "ok": false, "points": 2, "reply": "move", "seconds": 0.45, "x": 3503.19140625, "y": -4870.7998046875, "z": 17.835050582885742}, "gap": 61.80010109834519, "cell": 0}
+  note: ASSIGNMENT: {"fallback": true, "main": "cresh-missions.py", "reason": "same problem twice: BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted."}
+  note: BLOCKED: no terminal_travel within local reachability sample
+  report: Bot-reports/Cresh/20261014-061249-esk-fallback-reach.json
+== Dorn · esk-fallback-reach.py · 0/1 passed · 31 s
+  FAIL terminal_travel: reachable — {"result": {"cell": 1106373, "error": "timeout", "ok": false, "reply": "move", "x": 28.387815475463867, "y": 62.7625732421875}, "gap": 19.535443188461745, "cell": 1106373}
+  note: ASSIGNMENT: {"fallback": true, "main": "dorn-social.py", "reason": "same problem twice: FAIL: leash brings Nima to Dorn after he stops"}
+  report: Bot-reports/Dorn/20261014-061317-esk-fallback-reach.json
+== Esk · esk-fallback-reach.py · 4/4 passed · 43 s
+  PASS terminal_travel: reachable — {"result": {"arrived": true, "cell": 1106372, "legs": 1, "ok": true, "points": 21, "reply": "move", "seconds": 19.357, "x": 12.653599739074707, "y": 51.183799743652344, "z": 0.6394209861755371}, "gap": 0.0, "cell": 1106372}
+  PASS terminal_travel: radial opens — {"counter": 3, "event": "radial_menu", "items": [{"callback": 3, "index": 1, "label": "", "name": "item_use", "parent": 0, "radial_id": 20}], "target": 16796675}
+  PASS trainer: reachable — {"result": {"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 2, "reply": "move", "seconds": 0.45, "x": 3519.760009765625, "y": -4786.89990234375, "z": 5.0}, "gap": 0.0, "cell": 0}
+  PASS trainer: radial opens — {"counter": 4, "event": "radial_menu", "items": [{"callback": 3, "index": 1, "label": "", "name": "item_use", "parent": 0, "radial_id": 20}], "target": 281474994054196}
+  note: ASSIGNMENT: {"fallback": true, "main": "esk-routes.py", "reason": "all checks passed for two consecutive rounds"}
+  note: REACH: terminal_travel radial observed; service transaction not exercised
+  note: REACH: trainer radial observed; service transaction not exercised
+  report: Bot-reports/Esk/20261014-061329-esk-fallback-reach.json
+  NEXT - 2026-10-14 06:13 Aurek: `esk-fallback-census.py` -> `esk-fallback-grid.py`: all checks passed for two consecutive rounds
+  NEXT - 2026-10-14 06:13 Cresh: `esk-fallback-reach.py` -> `esk-fallback-census.py`: same problem twice: BLOCKED: no terminal_travel within local reachability sample
+  NEXT - 2026-10-14 06:13 Esk: `esk-fallback-reach.py` -> `esk-fallback-census.py`: all checks passed for two consecutive rounds
+
+######## round 5 · 06:14 · 11 min so far
+== Aurek · esk-fallback-grid.py · 4/4 passed · 15 s
+  PASS grid 8,0: arrival — {"trip": {"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 4, "reply": "move", "seconds": 2.251, "x": 3536.0, "y": -4804.0, "z": 5.141625881195068}, "actual": {"cell": 0, "connected": true, "container": 0, "conversation_options": [], "known_objects": 930, "me": {"group": 17359805, "ham":…
+  PASS grid 8,8: arrival — {"trip": {"arrived": true, "cell": 0, "legs": 2, "ok": true, "points": 2, "reply": "move", "seconds": 1.35, "x": 3536.0, "y": -4796.0, "z": 9.533203125}, "actual": {"cell": 0, "connected": true, "container": 0, "conversation_options": [], "known_objects": 930, "me": {"group": 17359805, "ham": {"acti…
+  PASS grid 0,8: arrival — {"trip": {"arrived": true, "cell": 0, "legs": 2, "ok": true, "points": 2, "reply": "move", "seconds": 2.25, "x": 3528.0, "y": -4796.0, "z": 5.0}, "actual": {"cell": 0, "connected": true, "container": 0, "conversation_options": [], "known_objects": 935, "me": {"group": 17359805, "ham": {"action": 900…
+  PASS grid 0,0: arrival — {"trip": {"arrived": true, "cell": 0, "legs": 1, "ok": true, "points": 4, "reply": "move", "seconds": 2.701, "x": 3528.0, "y": -4804.0, "z": 5.085049629211426}, "actual": {"cell": 0, "connected": true, "container": 0, "conversation_options": [], "known_objects": 934, "me": {"group": 17359805, "ham":…
+  note: ASSIGNMENT: {"fallback": true, "main": "aurek-doctor-buffs.py", "reason": "all checks passed for two consecutive rounds"}
+  note: GRID: target=3536.0,-4804.0; z=5.141625881195068; server_z=5.0; corrections=not exposed; real-client comparison untested
+  note: GRID: target=3536.0,-4796.0; z=9.533203125; server_z=9.533203125; corrections=not exposed; real-client comparison untested
+  note: GRID: target=3528.0,-4796.0; z=5.0; server_z=5.0; corrections=not exposed; real-client comparison untested
+  note: GRID: target=3528.0,-4804.0; z=5.085049629211426; server_z=5.0; corrections=not exposed; real-client comparison untested
+  report: Bot-reports/Aurek/20261014-061401-esk-fallback-grid.json
+== Besh · besh-harvest.py · 8/10 passed · 61 s
+  PASS artisans reach town staging point — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 2, 'reply': 'move', 'seconds"]
+  PASS meat patrol pair upright on Tatooine
+  PASS meat patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 15, 'reply': 'move', 'second", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 15, 'reply': 'move', 'second"]
+  FAIL meat ordinary wild prey found — null
+  PASS hide patrol pair upright on Tatooine
+  PASS hide patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 9, 'reply': 'move', 'seconds"]
+  FAIL hide ordinary wild prey found — null
+  PASS bone patrol pair upright on Tatooine
+  PASS bone patrol reached — ["{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds", "{'arrived': True, 'cell': 0, 'legs': 1, 'ok': True, 'points': 8, 'reply': 'move', 'seconds"]
+  PASS bone ordinary wild prey found — {"distance": 50.79999923706055, "health_pct": 100, "name": "@mob/creature_names:kreetle", "oid": 281474994070737, "posture": "upright", "type": "CREO", "x": 3807.300048828125, "y": -5001.7998046875, "z": 36.79999923706055}
+  note: ASSIGNMENT: {"fallback": false, "main": "besh-harvest.py", "reason": "scheduled main retry after fallback rounds"}
+  note: Varo basic gear: {'skipped': 'already has armor_bone'}
+  note: BLOCKED: guard below 80% HAM or missing HAM evidence; stop harvest hunt.
+  note: Fresh kills inspected: 0; one harvest type attempted per corpse.
+  report: Bot-reports/Besh/20261014-061446-besh-harvest.json
+== Cresh · esk-fallback-census.py · 1/1 passed · 1 s
+  PASS spawn census reply has a scene — tatooine
+  note: ASSIGNMENT: {"fallback": true, "main": "cresh-missions.py", "reason": "same problem twice: BLOCKED: no terminal_travel within local reachability sample"}
+  note: CENSUS: planet=tatooine; at=3503.19140625,-4870.7998046875; names={'R2-A2 (a helper R2 unit)': 1, 'R2-B2 (a helper R2 unit)': 1, 'Ilsa Brenn': 1, 'R2-N7 (a helper R2 unit)': 1, 'Kor Vessi': 1, 'R4-Q0': 1, 'LK-796 (a Sand Trooper)': 1, 'Possa Miero (a Jawa)': 1, 'Hadaboe Yiaso (a Jawa)': 1, 'Nesi Stimore (a Jawa)': 1, 'Eire Efakia (a Jawa)': 1, 'Sene Aessapo (a Jawa smuggler)': 1, 'Hese Lagege (a commoner)': 1, 'Poqi (a commoner)': 1, 'TK-132 (an Elite Sand Trooper)': 1, 'Nasma Oife (a Jawa)': 1,…
+  report: Bot-reports/Cresh/20261014-061346-esk-fallback-census.json
+== Dorn · esk-fallback-reach.py · 0/0 passed · 1 s
+  note: ASSIGNMENT: {"fallback": true, "main": "dorn-social.py", "reason": "same problem twice: FAIL: leash brings Nima to Dorn after he stops"}
+  note: BLOCKED: fallback requires outdoor Tatooine; no automatic Hoth exploration
+  report: Bot-reports/Dorn/20261014-061346-esk-fallback-reach.json
+== Esk · esk-fallback-census.py · 1/1 passed · 1 s
+  PASS spawn census reply has a scene — tatooine
+  note: ASSIGNMENT: {"fallback": true, "main": "esk-routes.py", "reason": "all checks passed for two consecutive rounds"}
+  note: CENSUS: planet=tatooine; at=3519.760009765625,-4786.89990234375; names={'Sime Remau (a Scout trainer)': 1, 'R2-J5 (a helper R2 unit)': 1, 'Graki Olfe ()': 1, 'Wali Vigea (a Medic trainer)': 1, 'Fama (an artisan)': 1, '@npc_spawner_n:mooch_davoney': 1, '@npc_spawner_n:vincie_kalhoon': 1, 'R2-U8 (a helper R2 unit)': 1, '@npc_spawner_n:guillo_parootchie': 1, 'Besh Orlani': 1, 'Dova Renn': 1, 'R2-A0 (a helper R2 unit)': 1, 'Lira Quell': 1, 'R2-B3 (a helper R2 unit)': 1, 'R2-C9 (a helper R2 unit)': 1…
+  report: Bot-reports/Esk/20261014-061346-esk-fallback-census.json
+  NEXT - 2026-10-14 06:14 Dorn: `esk-fallback-reach.py` -> `dorn-social.py`: scheduled main retry after fallback rounds
+  NEXT - 2026-10-14 06:14 Esk: `esk-fallback-census.py` -> `esk-routes.py`: scheduled main retry after fallback rounds
+  NEXT - 2026-10-14 06:14 Cresh: `esk-fallback-census.py` -> `cresh-missions.py`: scheduled main retry after fallback rounds
+  NEXT - 2026-10-14 06:14 Aurek: `esk-fallback-grid.py` -> `aurek-doctor-buffs.py`: scheduled main retry after fallback rounds
+  NEXT - 2026-10-14 06:14 Besh: `besh-harvest.py` -> `besh-fallback-crafting.py`: same problem twice: BLOCKED: guard below 80% HAM or missing HAM evidence; stop harvest hunt.

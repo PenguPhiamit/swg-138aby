@@ -1,0 +1,15 @@
+{
+  "backup_linux_path": "/opt/swg/backups/baseline-before-maintenance-20261013T122253Z",
+  "backup_windows_path": "/mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Backups/baseline-before-maintenance-20261013T122253Z",
+  "server_initialized": true,
+  "expected_game_ports_listening": true,
+  "mantis_access_error_after_restart": false,
+  "debugger": "GNU gdb (Debian 16.3-1) 16.3",
+  "schema": "1008",
+  "accounts_and_characters": "1\n1",
+  "server_revision": "403893d9b9f8e6fa712fbb3cb1fcd8f0fe45bb79",
+  "admin_role_matches_upstream": true,
+  "owner_account_admin_level": "15",
+  "source_changes": "M MMOCoreORB/bin/scripts/managers/resource_manager_spawns.lua",
+  "admin_commands_ingame_retest_pending": true
+}

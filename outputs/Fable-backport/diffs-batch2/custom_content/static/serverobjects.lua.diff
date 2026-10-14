@@ -1,0 +1,8 @@
+--- a/custom_content/static/serverobjects.lua
++++ b/custom_content/static/serverobjects.lua
+@@ -1,4 +1,5 @@
+ -- Server Objects
++includeFile("custom_content/static/base/serverobjects.lua")
+ includeFile("custom_content/static/christmas/serverobjects.lua")
+ includeFile("custom_content/static/creature/serverobjects.lua")
+ includeFile("custom_content/static/firework/serverobjects.lua")

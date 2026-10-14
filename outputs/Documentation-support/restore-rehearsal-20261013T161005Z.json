@@ -1,0 +1,48 @@
+{
+  "started_utc": "20261013T161005Z",
+  "backup": "/opt/swg/backups/galaxy-20261013T160706Z",
+  "checks": {
+    "server_archive_checksum": true,
+    "sql_dump_checksum": true,
+    "sql_counts_match_live": true,
+    "config_has_no_live_paths": true,
+    "rehearsal_ports_listening": true,
+    "live_ports_untouched": true,
+    "world_markers_match_live": true,
+    "clean_shutdown": true,
+    "live_world_files_unchanged": true,
+    "live_sql_unchanged": true
+  },
+  "result": "passed",
+  "sql_counts": {
+    "live": {
+      "accounts": 1,
+      "characters": 1
+    },
+    "restored": {
+      "accounts": 1,
+      "characters": 1
+    }
+  },
+  "startup_seconds": 30,
+  "markers": {
+    "resources": {
+      "live_last_start": "15020",
+      "rehearsal": "15020"
+    },
+    "character_names": {
+      "live_last_start": "1",
+      "rehearsal": "1"
+    },
+    "ground_zones": {
+      "live_last_start": "12",
+      "rehearsal": "12"
+    }
+  },
+  "startup_error_lines": [],
+  "objects_at_shutdown": {
+    "rehearsal": "134657",
+    "live_last_shutdown": "142099"
+  },
+  "cleaned_up": true
+}

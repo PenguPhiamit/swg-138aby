@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/dejarik_houjix.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/dejarik_houjix.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_dejarik_houjix, "object/tangible/loot/creature/loot/collections/dejarik_houjix.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_dejarik_houjix, "object/tangible/loot/creature_loot/collections/dejarik_houjix.iff")

@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/generic_deed/generic_deed.lua
++++ b/custom_content/tangible/loot/generic_deed/generic_deed.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_generic_deed_generic_deed, "object/tangible/loot/generic/deed/generic_deed.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_generic_deed_generic_deed, "object/tangible/loot/generic_deed/generic_deed.iff")

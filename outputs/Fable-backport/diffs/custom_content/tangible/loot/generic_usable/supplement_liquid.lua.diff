@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/generic_usable/supplement_liquid.lua
++++ b/custom_content/tangible/loot/generic_usable/supplement_liquid.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_supplement_liquid, "object/tangible/loot/generic/usable/supplement_liquid.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_supplement_liquid, "object/tangible/loot/generic_usable/supplement_liquid.iff")

@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/col_imperial_rank_lt.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/col_imperial_rank_lt.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_col_imperial_rank_lt, "object/tangible/loot/creature/loot/collections/col_imperial_rank_lt.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_col_imperial_rank_lt, "object/tangible/loot/creature_loot/collections/col_imperial_rank_lt.iff")

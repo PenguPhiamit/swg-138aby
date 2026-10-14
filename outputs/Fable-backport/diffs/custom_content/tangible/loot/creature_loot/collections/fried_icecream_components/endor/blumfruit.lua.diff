@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/fried_icecream_components/endor/blumfruit.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/fried_icecream_components/endor/blumfruit.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fried_icecream_components_endor_blumfruit, "object/tangible/loot/creature/loot/collections/fried/icecream/components/endor/blumfruit.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fried_icecream_components_endor_blumfruit, "object/tangible/loot/creature_loot/collections/fried_icecream_components/endor/blumfruit.iff")

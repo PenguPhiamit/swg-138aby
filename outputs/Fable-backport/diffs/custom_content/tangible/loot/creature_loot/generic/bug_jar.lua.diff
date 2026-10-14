@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/generic/bug_jar.lua
++++ b/custom_content/tangible/loot/creature_loot/generic/bug_jar.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_bug_jar, "object/tangible/loot/creature/loot/generic/bug_jar.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_bug_jar, "object/tangible/loot/creature_loot/generic/bug_jar.iff")

@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/simple_kit/legacy_droid_inners.lua
++++ b/custom_content/tangible/loot/simple_kit/legacy_droid_inners.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_simple_kit_legacy_droid_inners, "object/tangible/loot/simple/kit/legacy_droid_inners.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_simple_kit_legacy_droid_inners, "object/tangible/loot/simple_kit/legacy_droid_inners.iff")

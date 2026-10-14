@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/housing_improvement_03.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/housing_improvement_03.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_housing_improvement_03, "object/tangible/loot/creature/loot/collections/housing_improvement_03.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_housing_improvement_03, "object/tangible/loot/creature_loot/collections/housing_improvement_03.iff")

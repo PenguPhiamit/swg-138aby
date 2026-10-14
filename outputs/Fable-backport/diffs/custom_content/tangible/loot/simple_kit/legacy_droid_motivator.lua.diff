@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/simple_kit/legacy_droid_motivator.lua
++++ b/custom_content/tangible/loot/simple_kit/legacy_droid_motivator.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_simple_kit_legacy_droid_motivator, "object/tangible/loot/simple/kit/legacy_droid_motivator.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_simple_kit_legacy_droid_motivator, "object/tangible/loot/simple_kit/legacy_droid_motivator.iff")

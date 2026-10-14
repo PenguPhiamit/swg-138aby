@@ -1,0 +1,2430 @@
+{
+  "object_crc_report": [
+    "patch_14_00.tre: 15792 entries, 15792 new, round trip exact",
+    "mtg_patch_022.tre: 29212 entries, 13420 new, round trip exact",
+    "mtg_patch_023.tre: 29051 entries, 146 new, round trip exact",
+    "merged: 29358 entries; CRC clashes: none"
+  ],
+  "crc_hash_mismatches": [],
+  "crc_sorted": true,
+  "crc_matches_staged": true,
+  "resource_report": [
+    "patch_14_00.tre: 725 rows, round trip exact",
+    "mtg_planets.tre: 845 rows, round trip exact",
+    "added energy_renewable_unlimited_solar_hoth (cloned from energy_renewable_unlimited_solar_endor) at row 776",
+    "added energy_renewable_unlimited_wind_hoth (cloned from energy_renewable_unlimited_wind_endor) at row 764",
+    "stock \"Maximum # types\" equals the leaf count on 538 of 725 rows",
+    "merged: 777 rows (52 Hoth)",
+    "read back: 777 rows, same as written: True"
+  ],
+  "stock_effective_resource_changes": [],
+  "hoth_resource_effective": {
+    "milk_domesticated_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Food",
+        "Milk",
+        "Domesticated Milk",
+        "Hothian Domesticated Milk"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_food",
+        "milk",
+        "milk_domesticated",
+        "milk_domesticated_hoth"
+      ],
+      "object/resource_container/organic_bottle_milk.iff",
+      "plain_resource"
+    ],
+    "milk_wild_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Food",
+        "Milk",
+        "Wild Milk",
+        "Hothian Wild Milk"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_food",
+        "milk",
+        "milk_wild",
+        "milk_wild_hoth"
+      ],
+      "object/resource_container/organic_bottle_milk.iff",
+      "plain_resource"
+    ],
+    "meat_domesticated_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Food",
+        "Meat",
+        "Domesticated Meat",
+        "Hothian Domesticated Meat"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_food",
+        "meat",
+        "meat_domesticated",
+        "meat_domesticated_hoth"
+      ],
+      "object/resource_container/organic_food.iff",
+      "plain_resource"
+    ],
+    "meat_wild_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Food",
+        "Meat",
+        "Wild Meat",
+        "Hothian Wild Meat"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_food",
+        "meat",
+        "meat_wild",
+        "meat_wild_hoth"
+      ],
+      "object/resource_container/organic_food.iff",
+      "plain_resource"
+    ],
+    "meat_herbivore_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Food",
+        "Meat",
+        "Herbivore Meat",
+        "Hothian Herbivore Meat"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_food",
+        "meat",
+        "meat_herbivore",
+        "meat_herbivore_hoth"
+      ],
+      "object/resource_container/organic_food.iff",
+      "plain_resource"
+    ],
+    "meat_carnivore_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Food",
+        "Meat",
+        "Carnivore Meat",
+        "Hothian Carnivore Meat"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_food",
+        "meat",
+        "meat_carnivore",
+        "meat_carnivore_hoth"
+      ],
+      "object/resource_container/organic_food.iff",
+      "plain_resource"
+    ],
+    "meat_reptilian_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Food",
+        "Meat",
+        "Reptillian Meat",
+        "Hothian Reptilian Meat"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_food",
+        "meat",
+        "meat_reptillian",
+        "meat_reptilian_hoth"
+      ],
+      "object/resource_container/organic_food.iff",
+      "plain_resource"
+    ],
+    "meat_avian_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Food",
+        "Meat",
+        "Avian Meat",
+        "Hothian Avian Meat"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_food",
+        "meat",
+        "meat_avian",
+        "meat_avian_hoth"
+      ],
+      "object/resource_container/organic_food.iff",
+      "plain_resource"
+    ],
+    "meat_egg_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Food",
+        "Meat",
+        "Egg",
+        "Hothian Egg"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_food",
+        "meat",
+        "meat_egg",
+        "meat_egg_hoth"
+      ],
+      "object/resource_container/organic_food.iff",
+      "plain_resource"
+    ],
+    "meat_insect_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Food",
+        "Meat",
+        "Insect Meat",
+        "Hothian Insect Meat"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_food",
+        "meat",
+        "meat_insect",
+        "meat_insect_hoth"
+      ],
+      "object/resource_container/organic_food.iff",
+      "plain_resource"
+    ],
+    "seafood_fish_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Food",
+        "Meat",
+        "Seafood",
+        "Fish",
+        "Hothian Fish Meat"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_food",
+        "meat",
+        "seafood",
+        "seafood_fish",
+        "seafood_fish_hoth"
+      ],
+      "object/resource_container/organic_food.iff",
+      "plain_resource"
+    ],
+    "seafood_crustacean_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Food",
+        "Meat",
+        "Seafood",
+        "Crustacean",
+        "Hothian Crustacean Meat"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_food",
+        "meat",
+        "seafood",
+        "seafood_crustacean",
+        "seafood_crustacean_hoth"
+      ],
+      "object/resource_container/organic_food.iff",
+      "plain_resource"
+    ],
+    "seafood_mollusk_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Food",
+        "Meat",
+        "Seafood",
+        "Mollusk",
+        "Hothian Mollusk Meat"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_food",
+        "meat",
+        "seafood",
+        "seafood_mollusk",
+        "seafood_mollusk_hoth"
+      ],
+      "object/resource_container/organic_food.iff",
+      "plain_resource"
+    ],
+    "bone_mammal_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Structural",
+        "Bone",
+        "Hothian Animal Bones"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_structural",
+        "bone",
+        "bone_mammal_hoth"
+      ],
+      "object/resource_container/organic_structure.iff",
+      "plain_resource"
+    ],
+    "bone_avian_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Structural",
+        "Bone",
+        "Avian bone",
+        "Hothian Avian Bones"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_structural",
+        "bone",
+        "bone_avian",
+        "bone_avian_hoth"
+      ],
+      "object/resource_container/organic_structure.iff",
+      "plain_resource"
+    ],
+    "bone_horn_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Structural",
+        "Horn",
+        "Hothian Horn"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_structural",
+        "bone_horn",
+        "bone_horn_hoth"
+      ],
+      "object/resource_container/organic_structure.iff",
+      "plain_resource"
+    ],
+    "hide_wooly_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Structural",
+        "Hide",
+        "Wooly Hide",
+        "Hothian Wooly Hide"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_structural",
+        "hide",
+        "hide_wooly",
+        "hide_wooly_hoth"
+      ],
+      "object/resource_container/organic_wooly_hide.iff",
+      "plain_resource"
+    ],
+    "hide_bristley_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Structural",
+        "Hide",
+        "Bristley Hide",
+        "Hothian Bristley Hide"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_structural",
+        "hide",
+        "hide_bristley",
+        "hide_bristley_hoth"
+      ],
+      "object/resource_container/organic_bristley_hide.iff",
+      "plain_resource"
+    ],
+    "hide_leathery_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Structural",
+        "Hide",
+        "Leathery Hide",
+        "Hothian Leathery Hide"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_structural",
+        "hide",
+        "hide_leathery",
+        "hide_leathery_hoth"
+      ],
+      "object/resource_container/organic_leathery_hide.iff",
+      "plain_resource"
+    ],
+    "hide_scaley_hoth": [
+      [
+        "Organic",
+        "Creature Resources",
+        "Creature Structural",
+        "Hide",
+        "Scaley Hide",
+        "Hothian Scaley Hide"
+      ],
+      [
+        "organic",
+        "creature_resources",
+        "creature_structural",
+        "hide",
+        "hide_scaley",
+        "hide_scaley_hoth"
+      ],
+      "object/resource_container/organic_scaley_hide.iff",
+      "plain_resource"
+    ],
+    "corn_domesticated_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Cereal",
+        "Corn",
+        "Domesticated Corn",
+        "Hothian Domesticated Corn"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "cereal",
+        "corn",
+        "corn_domesticated",
+        "corn_domesticated_hoth"
+      ],
+      "object/resource_container/organic_corn.iff",
+      "plain_resource"
+    ],
+    "corn_wild_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Cereal",
+        "Corn",
+        "Wild Corn",
+        "Hothian Wild Corn"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "cereal",
+        "corn",
+        "corn_wild",
+        "corn_wild_hoth"
+      ],
+      "object/resource_container/organic_corn.iff",
+      "plain_resource"
+    ],
+    "rice_domesticated_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Cereal",
+        "Rice",
+        "Domesticated Rice",
+        "Hothian Domesticated Rice"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "cereal",
+        "rice",
+        "rice_domesticated",
+        "rice_domesticated_hoth"
+      ],
+      "object/resource_container/organic_rice.iff",
+      "plain_resource"
+    ],
+    "rice_wild_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Cereal",
+        "Rice",
+        "Wild Rice",
+        "Hothian Wild Rice"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "cereal",
+        "rice",
+        "rice_wild",
+        "rice_wild_hoth"
+      ],
+      "object/resource_container/organic_rice.iff",
+      "plain_resource"
+    ],
+    "oats_domesticated_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Cereal",
+        "Oats",
+        "Domesticated Oats",
+        "Hothian Domesticated Oats"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "cereal",
+        "oats",
+        "oats_domesticated",
+        "oats_domesticated_hoth"
+      ],
+      "object/resource_container/organic_oats.iff",
+      "plain_resource"
+    ],
+    "oats_wild_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Cereal",
+        "Oats",
+        "Wild Oats",
+        "Hothian Wild Oats"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "cereal",
+        "oats",
+        "oats_wild",
+        "oats_wild_hoth"
+      ],
+      "object/resource_container/organic_oats.iff",
+      "plain_resource"
+    ],
+    "wheat_domesticated_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Cereal",
+        "Wheat",
+        "Domesticated Wheat",
+        "Hothian Domesticated Wheat"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "cereal",
+        "wheat",
+        "wheat_domesticated",
+        "wheat_domesticated_hoth"
+      ],
+      "object/resource_container/organic_wheat.iff",
+      "plain_resource"
+    ],
+    "wheat_wild_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Cereal",
+        "Wheat",
+        "Wild Wheat",
+        "Hothian Wild Wheat"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "cereal",
+        "wheat",
+        "wheat_wild",
+        "wheat_wild_hoth"
+      ],
+      "object/resource_container/organic_wheat.iff",
+      "plain_resource"
+    ],
+    "vegetable_greens_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Seeds",
+        "Vegetables",
+        "Greens",
+        "Hothian Vegetable Greens"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "seeds",
+        "vegetable",
+        "vegetable_greens",
+        "vegetable_greens_hoth"
+      ],
+      "object/resource_container/organic_green_vegetables.iff",
+      "plain_resource"
+    ],
+    "vegetable_beans_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Seeds",
+        "Vegetables",
+        "Beans",
+        "Hothian Vegetable Beans"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "seeds",
+        "vegetable",
+        "vegetable_beans",
+        "vegetable_beans_hoth"
+      ],
+      "object/resource_container/organic_bean.iff",
+      "plain_resource"
+    ],
+    "vegetable_tubers_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Seeds",
+        "Vegetables",
+        "Tubers",
+        "Hothian Vegetable Tubers"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "seeds",
+        "vegetable",
+        "vegetable_tubers",
+        "vegetable_tubers_hoth"
+      ],
+      "object/resource_container/organic_tuber.iff",
+      "plain_resource"
+    ],
+    "vegetable_fungi_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Seeds",
+        "Vegetables",
+        "Fungi",
+        "Hothian Vegetable Fungus"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "seeds",
+        "vegetable",
+        "vegetable_fungi",
+        "vegetable_fungi_hoth"
+      ],
+      "object/resource_container/organic_fungi.iff",
+      "plain_resource"
+    ],
+    "fruit_fruits_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Seeds",
+        "Fruit",
+        "Fruits",
+        "Hothian Fruit"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "seeds",
+        "fruit",
+        "fruit_fruits",
+        "fruit_fruits_hoth"
+      ],
+      "object/resource_container/organic_fruit.iff",
+      "plain_resource"
+    ],
+    "fruit_berries_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Seeds",
+        "Fruit",
+        "Berries",
+        "Hothian Berry Fruit"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "seeds",
+        "fruit",
+        "fruit_berries",
+        "fruit_berries_hoth"
+      ],
+      "object/resource_container/organic_food.iff",
+      "plain_resource"
+    ],
+    "fruit_flowers_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Food",
+        "Seeds",
+        "Fruit",
+        "Flowers",
+        "Hothian Flower Fruit"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_food",
+        "seeds",
+        "fruit",
+        "fruit_flowers",
+        "fruit_flowers_hoth"
+      ],
+      "object/resource_container/organic_food.iff",
+      "plain_resource"
+    ],
+    "wood_deciduous_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Structural",
+        "Wood",
+        "Hard Wood",
+        "Hothian Deciduous Wood"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_structural",
+        "wood",
+        "wood_deciduous",
+        "wood_deciduous_hoth"
+      ],
+      "object/resource_container/organic_structure.iff",
+      "plain_resource"
+    ],
+    "softwood_conifer_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Structural",
+        "Wood",
+        "Soft Wood",
+        "Hothian Conifer Wood"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_structural",
+        "wood",
+        "softwood",
+        "softwood_conifer_hoth"
+      ],
+      "object/resource_container/organic_structure.iff",
+      "plain_resource"
+    ],
+    "softwood_evergreen_hoth": [
+      [
+        "Organic",
+        "Flora Resources",
+        "Flora Structural",
+        "Wood",
+        "Soft Wood",
+        "Evergreen Soft Wood",
+        "Hothian Evergreen Wood"
+      ],
+      [
+        "organic",
+        "flora_resources",
+        "flora_structural",
+        "wood",
+        "softwood",
+        "softwood_evergreen",
+        "softwood_evergreen_hoth"
+      ],
+      "object/resource_container/organic_structure.iff",
+      "plain_resource"
+    ],
+    "petrochem_fuel_liquid_hoth": [
+      [
+        "Inorganic",
+        "Chemical",
+        "Liquid Petrochem Fuel",
+        "Known Liquid Petrochem Fuel",
+        "Hothian Liquid Petro Fuel"
+      ],
+      [
+        "inorganic",
+        "chemical",
+        "fuel_petrochem_liquid",
+        "fuel_petrochem_liquid_known",
+        "petrochem_fuel_liquid_hoth"
+      ],
+      "object/resource_container/inorganic_petrochem_liquid.iff",
+      "energy_resource"
+    ],
+    "fiberplast_hoth": [
+      [
+        "Inorganic",
+        "Chemical",
+        "Fiberplast",
+        "Hothian Fiberplast"
+      ],
+      [
+        "inorganic",
+        "chemical",
+        "fiberplast",
+        "fiberplast_hoth"
+      ],
+      "object/resource_container/inorganic_chemicals.iff",
+      "plain_resource"
+    ],
+    "water_vapor_hoth": [
+      [
+        "Inorganic",
+        "Water",
+        "Hothian Water Vapor"
+      ],
+      [
+        "inorganic",
+        "water",
+        "water_vapor_hoth"
+      ],
+      "object/resource_container/inorganic_bottle_water.iff",
+      "plain_resource"
+    ],
+    "petrochem_fuel_solid_hoth": [
+      [
+        "Inorganic",
+        "Mineral",
+        "Solid Petrochem Fuel",
+        "Known Solid Petrochem Fuel",
+        "Hothian Solid Petro Fuel"
+      ],
+      [
+        "inorganic",
+        "mineral",
+        "fuel_petrochem_solid",
+        "fuel_petrochem_solid_known",
+        "petrochem_fuel_solid_hoth"
+      ],
+      "object/resource_container/energy_solid.iff",
+      "energy_resource"
+    ],
+    "radioactive_hoth": [
+      [
+        "Inorganic",
+        "Mineral",
+        "Radioactive",
+        "Known Radioactive",
+        "Hothian Radioactive"
+      ],
+      [
+        "inorganic",
+        "mineral",
+        "radioactive",
+        "radioactive_known",
+        "radioactive_hoth"
+      ],
+      "object/resource_container/energy_radioactive.iff",
+      "mineral_resource"
+    ],
+    "steel_hoth": [
+      [
+        "Inorganic",
+        "Mineral",
+        "Metal",
+        "Ferrous Metal",
+        "Steel",
+        "Hothian Steel"
+      ],
+      [
+        "inorganic",
+        "mineral",
+        "metal",
+        "metal_ferrous",
+        "steel",
+        "steel_hoth"
+      ],
+      "object/resource_container/inorganic_minerals.iff",
+      "mineral_resource"
+    ],
+    "iron_hoth": [
+      [
+        "Inorganic",
+        "Mineral",
+        "Metal",
+        "Ferrous Metal",
+        "Iron",
+        "Hothian Iron"
+      ],
+      [
+        "inorganic",
+        "mineral",
+        "metal",
+        "metal_ferrous",
+        "iron",
+        "iron_hoth"
+      ],
+      "object/resource_container/inorganic_minerals.iff",
+      "mineral_resource"
+    ],
+    "aluminum_hoth": [
+      [
+        "Inorganic",
+        "Mineral",
+        "Metal",
+        "Non-Ferrous Metal",
+        "Aluminum",
+        "Hothian Aluminum"
+      ],
+      [
+        "inorganic",
+        "mineral",
+        "metal",
+        "metal_nonferrous",
+        "aluminum",
+        "aluminum_hoth"
+      ],
+      "object/resource_container/inorganic_minerals.iff",
+      "mineral_resource"
+    ],
+    "copper_hoth": [
+      [
+        "Inorganic",
+        "Mineral",
+        "Metal",
+        "Non-Ferrous Metal",
+        "Copper",
+        "Hothian Copper"
+      ],
+      [
+        "inorganic",
+        "mineral",
+        "metal",
+        "metal_nonferrous",
+        "copper",
+        "copper_hoth"
+      ],
+      "object/resource_container/inorganic_minerals.iff",
+      "mineral_resource"
+    ],
+    "ore_extrusive_hoth": [
+      [
+        "Inorganic",
+        "Mineral",
+        "Low-Grade Ore",
+        "Igneous Ore",
+        "Extrusive Ore",
+        "Hothian Extrusive Ore"
+      ],
+      [
+        "inorganic",
+        "mineral",
+        "ore",
+        "ore_igneous",
+        "ore_extrusive",
+        "ore_extrusive_hoth"
+      ],
+      "object/resource_container/inorganic_minerals.iff",
+      "mineral_resource"
+    ],
+    "ore_intrusive_hoth": [
+      [
+        "Inorganic",
+        "Mineral",
+        "Low-Grade Ore",
+        "Igneous Ore",
+        "Intrusive Ore",
+        "Hothian Intrusive Ore"
+      ],
+      [
+        "inorganic",
+        "mineral",
+        "ore",
+        "ore_igneous",
+        "ore_intrusive",
+        "ore_intrusive_hoth"
+      ],
+      "object/resource_container/inorganic_minerals.iff",
+      "mineral_resource"
+    ],
+    "gas_reactive_hoth": [
+      [
+        "Inorganic",
+        "Gas",
+        "Reactive Gas",
+        "Known Reactive Gas",
+        "Hothian Reactive Gas"
+      ],
+      [
+        "inorganic",
+        "gas",
+        "gas_reactive",
+        "gas_reactive_known",
+        "gas_reactive_hoth"
+      ],
+      "object/resource_container/energy_gas.iff",
+      "reactive_gas_resource"
+    ],
+    "energy_renewable_unlimited_wind_hoth": [
+      [
+        "Energy",
+        "Renewable energy",
+        "Non Site-Restricted Renewable Energy",
+        "Wind Energy",
+        "Hoth Wind Renewable Energy"
+      ],
+      [
+        "energy",
+        "energy_renewable",
+        "energy_renewable_unlimited",
+        "energy_renewable_unlimited_wind",
+        "energy_renewable_unlimited_wind_hoth"
+      ],
+      "object/resource_container/energy_liquid.iff",
+      "energy_resource"
+    ],
+    "energy_renewable_unlimited_solar_hoth": [
+      [
+        "Energy",
+        "Renewable energy",
+        "Non Site-Restricted Renewable Energy",
+        "Solar Energy",
+        "Hoth Solar Renewable Energy"
+      ],
+      [
+        "energy",
+        "energy_renewable",
+        "energy_renewable_unlimited",
+        "energy_renewable_unlimited_solar",
+        "energy_renewable_unlimited_solar_hoth"
+      ],
+      "object/resource_container/energy_liquid.iff",
+      "energy_resource"
+    ]
+  },
+  "resources_match_staged": true,
+  "count_column_changes": [
+    [
+      "resource",
+      [
+        545,
+        545
+      ],
+      [
+        597,
+        597
+      ]
+    ],
+    [
+      "organic",
+      [
+        390,
+        390
+      ],
+      [
+        428,
+        428
+      ]
+    ],
+    [
+      "creature_resources",
+      [
+        206,
+        206
+      ],
+      [
+        226,
+        226
+      ]
+    ],
+    [
+      "creature_food",
+      [
+        133,
+        133
+      ],
+      [
+        146,
+        146
+      ]
+    ],
+    [
+      "milk",
+      [
+        21,
+        21
+      ],
+      [
+        23,
+        23
+      ]
+    ],
+    [
+      "milk_domesticated",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "milk_wild",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "meat",
+      [
+        112,
+        112
+      ],
+      [
+        123,
+        123
+      ]
+    ],
+    [
+      "meat_domesticated",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "meat_wild",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "meat_herbivore",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "meat_carnivore",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "meat_reptillian",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "meat_avian",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "meat_egg",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "meat_insect",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "seafood",
+      [
+        31,
+        31
+      ],
+      [
+        34,
+        34
+      ]
+    ],
+    [
+      "seafood_fish",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "seafood_crustacean",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "seafood_mollusk",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "creature_structural",
+      [
+        73,
+        73
+      ],
+      [
+        80,
+        80
+      ]
+    ],
+    [
+      "bone",
+      [
+        21,
+        21
+      ],
+      [
+        23,
+        23
+      ]
+    ],
+    [
+      "bone_avian",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "bone_horn",
+      [
+        11,
+        11
+      ],
+      [
+        12,
+        12
+      ]
+    ],
+    [
+      "hide",
+      [
+        41,
+        41
+      ],
+      [
+        45,
+        45
+      ]
+    ],
+    [
+      "hide_wooly",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "hide_bristley",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "hide_leathery",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "hide_scaley",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "flora_resources",
+      [
+        184,
+        184
+      ],
+      [
+        202,
+        202
+      ]
+    ],
+    [
+      "flora_food",
+      [
+        153,
+        153
+      ],
+      [
+        168,
+        168
+      ]
+    ],
+    [
+      "cereal",
+      [
+        81,
+        81
+      ],
+      [
+        89,
+        89
+      ]
+    ],
+    [
+      "corn",
+      [
+        20,
+        20
+      ],
+      [
+        22,
+        22
+      ]
+    ],
+    [
+      "corn_domesticated",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "corn_wild",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "rice",
+      [
+        20,
+        20
+      ],
+      [
+        22,
+        22
+      ]
+    ],
+    [
+      "rice_domesticated",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "rice_wild",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "oats",
+      [
+        20,
+        20
+      ],
+      [
+        22,
+        22
+      ]
+    ],
+    [
+      "oats_domesticated",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "oats_wild",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "wheat",
+      [
+        20,
+        20
+      ],
+      [
+        22,
+        22
+      ]
+    ],
+    [
+      "wheat_domesticated",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "wheat_wild",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "seeds",
+      [
+        72,
+        72
+      ],
+      [
+        79,
+        79
+      ]
+    ],
+    [
+      "vegetable",
+      [
+        41,
+        41
+      ],
+      [
+        45,
+        45
+      ]
+    ],
+    [
+      "vegetable_greens",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "vegetable_beans",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "vegetable_tubers",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "vegetable_fungi",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "fruit",
+      [
+        31,
+        31
+      ],
+      [
+        34,
+        34
+      ]
+    ],
+    [
+      "fruit_fruits",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "fruit_berries",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "fruit_flowers",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "flora_structural",
+      [
+        31,
+        31
+      ],
+      [
+        34,
+        34
+      ]
+    ],
+    [
+      "wood",
+      [
+        31,
+        31
+      ],
+      [
+        34,
+        34
+      ]
+    ],
+    [
+      "wood_deciduous",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "softwood",
+      [
+        20,
+        20
+      ],
+      [
+        22,
+        22
+      ]
+    ],
+    [
+      "softwood_evergreen",
+      [
+        10,
+        10
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    [
+      "inorganic",
+      [
+        126,
+        80
+      ],
+      [
+        138,
+        92
+      ]
+    ],
+    [
+      "chemical",
+      [
+        24,
+        20
+      ],
+      [
+        26,
+        22
+      ]
+    ],
+    [
+      "fuel_petrochem_liquid",
+      [
+        7,
+        1
+      ],
+      [
+        8,
+        2
+      ]
+    ],
+    [
+      "fuel_petrochem_liquid_known",
+      [
+        5,
+        1
+      ],
+      [
+        6,
+        2
+      ]
+    ],
+    [
+      "fiberplast",
+      [
+        11,
+        11
+      ],
+      [
+        12,
+        12
+      ]
+    ],
+    [
+      "water",
+      [
+        16,
+        11
+      ],
+      [
+        17,
+        12
+      ]
+    ],
+    [
+      "mineral",
+      [
+        70,
+        42
+      ],
+      [
+        78,
+        50
+      ]
+    ],
+    [
+      "fuel_petrochem_solid",
+      [
+        8,
+        2
+      ],
+      [
+        9,
+        3
+      ]
+    ],
+    [
+      "fuel_petrochem_solid_known",
+      [
+        6,
+        1
+      ],
+      [
+        7,
+        2
+      ]
+    ],
+    [
+      "radioactive",
+      [
+        6,
+        3
+      ],
+      [
+        7,
+        4
+      ]
+    ],
+    [
+      "radioactive_known",
+      [
+        4,
+        2
+      ],
+      [
+        5,
+        3
+      ]
+    ],
+    [
+      "metal",
+      [
+        60,
+        27
+      ],
+      [
+        64,
+        31
+      ]
+    ],
+    [
+      "metal_ferrous",
+      [
+        42,
+        20
+      ],
+      [
+        44,
+        22
+      ]
+    ],
+    [
+      "steel",
+      [
+        20,
+        4
+      ],
+      [
+        21,
+        5
+      ]
+    ],
+    [
+      "iron",
+      [
+        20,
+        15
+      ],
+      [
+        21,
+        16
+      ]
+    ],
+    [
+      "metal_nonferrous",
+      [
+        32,
+        7
+      ],
+      [
+        34,
+        9
+      ]
+    ],
+    [
+      "aluminum",
+      [
+        12,
+        3
+      ],
+      [
+        13,
+        4
+      ]
+    ],
+    [
+      "copper",
+      [
+        18,
+        3
+      ],
+      [
+        19,
+        4
+      ]
+    ],
+    [
+      "ore",
+      [
+        30,
+        7
+      ],
+      [
+        32,
+        9
+      ]
+    ],
+    [
+      "ore_igneous",
+      [
+        20,
+        3
+      ],
+      [
+        22,
+        5
+      ]
+    ],
+    [
+      "ore_extrusive",
+      [
+        10,
+        1
+      ],
+      [
+        11,
+        2
+      ]
+    ],
+    [
+      "ore_intrusive",
+      [
+        10,
+        1
+      ],
+      [
+        11,
+        2
+      ]
+    ],
+    [
+      "gas",
+      [
+        16,
+        3
+      ],
+      [
+        17,
+        4
+      ]
+    ],
+    [
+      "gas_reactive",
+      [
+        8,
+        2
+      ],
+      [
+        9,
+        3
+      ]
+    ],
+    [
+      "gas_reactive_known",
+      [
+        8,
+        2
+      ],
+      [
+        9,
+        3
+      ]
+    ],
+    [
+      "energy",
+      [
+        55,
+        55
+      ],
+      [
+        57,
+        57
+      ]
+    ],
+    [
+      "energy_renewable",
+      [
+        55,
+        55
+      ],
+      [
+        57,
+        57
+      ]
+    ],
+    [
+      "energy_renewable_unlimited",
+      [
+        22,
+        22
+      ],
+      [
+        24,
+        24
+      ]
+    ],
+    [
+      "energy_renewable_unlimited_wind",
+      [
+        11,
+        11
+      ],
+      [
+        12,
+        12
+      ]
+    ],
+    [
+      "energy_renewable_unlimited_solar",
+      [
+        11,
+        11
+      ],
+      [
+        12,
+        12
+      ]
+    ]
+  ],
+  "current_skill_winner": "patch_14_00.tre",
+  "botanist_clean_report": [
+    "skills.iff from patch_14_00.tre: 1068 rows, round trip exact",
+    "skills.iff: Botanist root + Novice inserted at rows 375-376; read back same",
+    "string/en/skl_n.stf from patch_12_00.tre: round trip exact; added outdoors_botanist, outdoors_botanist_novice",
+    "string/en/skl_d.stf from patch_14_00.tre: round trip exact; added outdoors_botanist, outdoors_botanist_novice",
+    "string/en/skl_t.stf from patch_12_00.tre: round trip exact; added outdoors_botanist_novice",
+    "string/en/skill_teacher.stf from patch_12_00.tre: round trip exact; added trainer_botanist",
+    "string/en/mob/creature_names.stf from patch_14_00.tre: round trip exact; added trainer_botanist"
+  ],
+  "botanist_clean_matches_staged": true,
+  "datatables/command/command_table.iff": [
+    {
+      "commandName": "showSpawnRegion",
+      "defaultPriority": 0,
+      "scriptHook": "showSpawnRegion",
+      "failScriptHook": "",
+      "cppHook": "",
+      "failCppHook": "",
+      "defaultTime": 0.0,
+      "characterAbility": "admin",
+      "L:standing": 1,
+      "L:sneaking": 1,
+      "L:walking": 1,
+      "L:running": 1,
+      "L:kneeling": 1,
+      "L:crouchSneaking": 1,
+      "L:crouchWalking": 1,
+      "L:prone": 1,
+      "L:crawling": 1,
+      "L:climbingStationary": 1,
+      "L:climbing": 1,
+      "L:hovering": 1,
+      "L:flying": 1,
+      "L:lyingDown": 1,
+      "L:sitting": 1,
+      "L:skillAnimating": 1,
+      "L:drivingVehicle": 1,
+      "L:ridingCreature": 1,
+      "L:knockedDown": 1,
+      "L:incapacitated": 1,
+      "L:dead": 1,
+      "L:blocking": 1,
+      "S:cover": 1,
+      "S:combat": 1,
+      "S:peace": 1,
+      "S:aiming": 1,
+      "S:alert": 1,
+      "S:berserk": 1,
+      "S:feignDeath": 1,
+      "S:combatAttitudeEvasive": 1,
+      "S:combatAttitudeNormal": 1,
+      "S:combatAttitudeAggressive": 1,
+      "S:tumbling": 1,
+      "S:rallied": 1,
+      "S:stunned": 1,
+      "S:blinded": 1,
+      "S:dizzy": 1,
+      "S:intimidated": 1,
+      "S:immobilized": 1,
+      "S:frozen": 1,
+      "S:swimming": 1,
+      "S:sittingOnChair": 1,
+      "S:crafting": 1,
+      "S:glowingJedi": 0,
+      "S:maskScent": 1,
+      "S:poisoned": 1,
+      "S:bleeding": 1,
+      "S:diseased": 1,
+      "S:onFire": 1,
+      "S:ridingMount": 1,
+      "S:mountedCreature": 1,
+      "S:pilotingShip": 1,
+      "S:pilotingPobShip": 1,
+      "S:shipOperations": 1,
+      "S:shipGunner": 1,
+      "S:shipInterior": 1,
+      "tempScript": "",
+      "targetType": 0,
+      "stringId": "",
+      "visible": 0,
+      "callOnTarget": 0,
+      "commandGroup": 0,
+      "disabled": 0,
+      "maxRangeToTarget": 0.0,
+      "godLevel": 0,
+      "displayGroup": -307921291,
+      "addToCombatQueue": 0
+    },
+    {
+      "commandName": "spawnStatus",
+      "defaultPriority": 0,
+      "scriptHook": "spawnStatus",
+      "failScriptHook": "failAdmin",
+      "cppHook": "",
+      "failCppHook": "",
+      "defaultTime": 0.0,
+      "characterAbility": "admin",
+      "L:standing": 1,
+      "L:sneaking": 1,
+      "L:walking": 1,
+      "L:running": 1,
+      "L:kneeling": 1,
+      "L:crouchSneaking": 1,
+      "L:crouchWalking": 1,
+      "L:prone": 1,
+      "L:crawling": 1,
+      "L:climbingStationary": 1,
+      "L:climbing": 1,
+      "L:hovering": 1,
+      "L:flying": 1,
+      "L:lyingDown": 1,
+      "L:sitting": 1,
+      "L:skillAnimating": 1,
+      "L:drivingVehicle": 1,
+      "L:ridingCreature": 1,
+      "L:knockedDown": 1,
+      "L:incapacitated": 1,
+      "L:dead": 1,
+      "L:blocking": 1,
+      "S:cover": 1,
+      "S:combat": 1,
+      "S:peace": 1,
+      "S:aiming": 1,
+      "S:alert": 1,
+      "S:berserk": 1,
+      "S:feignDeath": 1,
+      "S:combatAttitudeEvasive": 1,
+      "S:combatAttitudeNormal": 1,
+      "S:combatAttitudeAggressive": 1,
+      "S:tumbling": 1,
+      "S:rallied": 1,
+      "S:stunned": 1,
+      "S:blinded": 1,
+      "S:dizzy": 1,
+      "S:intimidated": 1,
+      "S:immobilized": 1,
+      "S:frozen": 1,
+      "S:swimming": 1,
+      "S:sittingOnChair": 1,
+      "S:crafting": 1,
+      "S:glowingJedi": 0,
+      "S:maskScent": 1,
+      "S:poisoned": 1,
+      "S:bleeding": 1,
+      "S:diseased": 1,
+      "S:onFire": 1,
+      "S:ridingMount": 1,
+      "S:mountedCreature": 1,
+      "S:pilotingShip": 1,
+      "S:pilotingPobShip": 1,
+      "S:shipOperations": 1,
+      "S:shipGunner": 1,
+      "S:shipInterior": 1,
+      "tempScript": "",
+      "targetType": 0,
+      "stringId": "",
+      "visible": 0,
+      "callOnTarget": 0,
+      "commandGroup": 0,
+      "disabled": 0,
+      "maxRangeToTarget": 0.0,
+      "godLevel": 0,
+      "displayGroup": -307921291,
+      "addToCombatQueue": 0
+    }
+  ],
+  "datatables/command/command_table_ground.iff": [],
+  "botanist_repeat": {
+    "exception": "AssertionError",
+    "message": "",
+    "root_already_present": true
+  },
+  "skill_schema": [
+    [
+      "NAME",
+      "s"
+    ],
+    [
+      "PARENT",
+      "s"
+    ],
+    [
+      "GRAPH_TYPE",
+      "e(oneByFour=1,twoByFour=2,threeByFour=3,fourByFour=4,pyramid=5)[fourByFour]"
+    ],
+    [
+      "GOD_ONLY",
+      "b"
+    ],
+    [
+      "IS_TITLE",
+      "b"
+    ],
+    [
+      "IS_PROFESSION",
+      "b"
+    ],
+    [
+      "IS_HIDDEN",
+      "b"
+    ],
+    [
+      "MONEY_REQUIRED",
+      "i"
+    ],
+    [
+      "POINTS_REQUIRED",
+      "i"
+    ],
+    [
+      "SKILLS_REQUIRED_COUNT",
+      "i[0]"
+    ],
+    [
+      "SKILLS_REQUIRED",
+      "s"
+    ],
+    [
+      "PRECLUSION_SKILLS",
+      "s"
+    ],
+    [
+      "XP_TYPE",
+      "s"
+    ],
+    [
+      "XP_COST",
+      "i"
+    ],
+    [
+      "XP_CAP",
+      "i"
+    ],
+    [
+      "MISSIONS_REQUIRED",
+      "s"
+    ],
+    [
+      "APPRENTICESHIPS_REQUIRED",
+      "i"
+    ],
+    [
+      "STATS_REQUIRED",
+      "s"
+    ],
+    [
+      "SPECIES_REQUIRED",
+      "s"
+    ],
+    [
+      "JEDI_STATE_REQUIRED",
+      "e(none=0,forceSensitive=1,jedi=2,forceRankedLight=4,forceRankedDark=8)[none]"
+    ],
+    [
+      "SKILL_ABILITY",
+      "s"
+    ],
+    [
+      "COMMANDS",
+      "s"
+    ],
+    [
+      "SKILL_MODS",
+      "s"
+    ],
+    [
+      "SCHEMATICS_GRANTED",
+      "s"
+    ],
+    [
+      "SCHEMATICS_REVOKED",
+      "s"
+    ],
+    [
+      "SEARCHABLE",
+      "b[1]"
+    ],
+    [
+      "ENDER",
+      "i"
+    ]
+  ],
+  "botanist_rows": [
+    {
+      "NAME": "outdoors_botanist",
+      "PARENT": "outdoors",
+      "GRAPH_TYPE": 4,
+      "GOD_ONLY": 0,
+      "IS_TITLE": 0,
+      "IS_PROFESSION": 1,
+      "IS_HIDDEN": 0,
+      "MONEY_REQUIRED": 0,
+      "POINTS_REQUIRED": 0,
+      "SKILLS_REQUIRED_COUNT": 0,
+      "SKILLS_REQUIRED": "",
+      "PRECLUSION_SKILLS": "",
+      "XP_TYPE": "",
+      "XP_COST": 0,
+      "XP_CAP": 0,
+      "MISSIONS_REQUIRED": "",
+      "APPRENTICESHIPS_REQUIRED": 0,
+      "STATS_REQUIRED": "",
+      "SPECIES_REQUIRED": "",
+      "JEDI_STATE_REQUIRED": 0,
+      "SKILL_ABILITY": "",
+      "COMMANDS": "",
+      "SKILL_MODS": "",
+      "SCHEMATICS_GRANTED": "",
+      "SCHEMATICS_REVOKED": "",
+      "SEARCHABLE": 1,
+      "ENDER": 0
+    },
+    {
+      "NAME": "outdoors_botanist_novice",
+      "PARENT": "outdoors_botanist",
+      "GRAPH_TYPE": 4,
+      "GOD_ONLY": 0,
+      "IS_TITLE": 1,
+      "IS_PROFESSION": 0,
+      "IS_HIDDEN": 0,
+      "MONEY_REQUIRED": 5000,
+      "POINTS_REQUIRED": 6,
+      "SKILLS_REQUIRED_COUNT": 0,
+      "SKILLS_REQUIRED": "outdoors_scout_harvest_04",
+      "PRECLUSION_SKILLS": "",
+      "XP_TYPE": "resource_harvesting_organic",
+      "XP_COST": 10000,
+      "XP_CAP": 40000,
+      "MISSIONS_REQUIRED": "",
+      "APPRENTICESHIPS_REQUIRED": 0,
+      "STATS_REQUIRED": "",
+      "SPECIES_REQUIRED": "",
+      "JEDI_STATE_REQUIRED": 0,
+      "SKILL_ABILITY": "",
+      "COMMANDS": "",
+      "SKILL_MODS": "foraging=10",
+      "SCHEMATICS_GRANTED": "",
+      "SCHEMATICS_REVOKED": "",
+      "SEARCHABLE": 1,
+      "ENDER": 0
+    }
+  ],
+  "loot_weights": {
+    "hoth_decor_common": {
+      "items": 4,
+      "total": 10000000,
+      "range": [
+        2500000,
+        2500000
+      ]
+    },
+    "hoth_decor_rare": {
+      "items": 3,
+      "total": 10000000,
+      "range": [
+        3333333,
+        3333334
+      ]
+    },
+    "hoth_vehicle_deeds": {
+      "items": 18,
+      "total": 10000000,
+      "range": [
+        555555,
+        555565
+      ]
+    }
+  },
+  "loot_shared_crc_missing": [],
+  "loot_mobile_reconstruction_failures": [],
+  "loot_mobile_count": 20,
+  "staged_files_unchanged": true
+}

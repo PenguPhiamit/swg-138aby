@@ -1,0 +1,141 @@
+{
+  "researched": "2026-10-13",
+  "method": "Blobless git clones (no checkout, nothing built or executed); file trees compared with upstream swgemu/Core3 403893d9; READMEs and selected docs read.",
+  "location": "work/research/gap-check",
+  "repositories": [
+    {
+      "clone": "brendenbowers_SWGEmuClient",
+      "url": "https://github.com/brendenbowers/SWGEmuClient.git",
+      "revision": "3377e357eceb632d7936a6521124fed02181b949",
+      "date": "2026-10-12",
+      "files": 1043
+    },
+    {
+      "clone": "chadeadams_SWG-Resurrection",
+      "url": "https://github.com/chadeadams/SWG-Resurrection.git",
+      "revision": "e04c09dc3be4611af8120c2f4355ea497686e8b7",
+      "date": "2020-01-14",
+      "files": 30033
+    },
+    {
+      "clone": "codeberg_SWG-Hunted",
+      "url": "https://codeberg.org/gitfitz1/SWG-Hunted.git",
+      "revision": "9233ca039043438e81c913871bb3a8a75404bb59",
+      "date": "2025-02-18",
+      "files": 34826
+    },
+    {
+      "clone": "DetoxxeGaming_SWG-OrionDawn",
+      "url": "https://github.com/DetoxxeGaming/SWG-OrionDawn.git",
+      "revision": "96dbc0330dfde5e5ff177b36e16ccddc533a5db8",
+      "date": "2018-06-21",
+      "files": 47835
+    },
+    {
+      "clone": "jebot-git_swgxr",
+      "url": "https://github.com/jebot-git/swgxr.git",
+      "revision": "d7b1cdecb7f4fc24af398475f7b5b5175e16a48d",
+      "date": "2026-10-12",
+      "files": 2645
+    },
+    {
+      "clone": "kinshi_Core3",
+      "url": "https://github.com/kinshi/Core3.git",
+      "revision": "0d7e6f2c7531539afcfd56fc8ea9d502a8316825",
+      "date": "2016-10-07",
+      "files": 1
+    },
+    {
+      "clone": "lolidroid86_SWGEmu-Family-Lan-Server",
+      "url": "https://github.com/lolidroid86/SWGEmu-Family-Lan-Server.git",
+      "revision": "001446507a2ebd42a0aa6e314eb1097330065b48",
+      "date": "2026-06-10",
+      "files": 34589
+    },
+    {
+      "clone": "Miphstoe_BellumGero-Live",
+      "url": "https://github.com/Miphstoe/BellumGero-Live.git",
+      "revision": "1f4438a129c0e07d05871fccfb2ed30b21da9539",
+      "date": "2026-10-12",
+      "files": 36496
+    },
+    {
+      "clone": "pickart_Behavior-Studio-SWGEmu",
+      "url": "https://github.com/pickart/Behavior-Studio-SWGEmu.git",
+      "revision": "d11dd0974e434cfbf8cacffd4bdc011bc757a319",
+      "date": "2026-09-18",
+      "files": 8
+    },
+    {
+      "clone": "rambodolphin13_SWGEmu-Solo",
+      "url": "https://github.com/rambodolphin13/SWGEmu-Solo.git",
+      "revision": "348f61c24b935f3a997e3db6d1353026b94a087f",
+      "date": "2026-05-10",
+      "files": 34588
+    },
+    {
+      "clone": "Skyyyr_rotf-os",
+      "url": "https://github.com/Skyyyr/rotf-os.git",
+      "revision": "290dcbff0575a802fe927e0bd80a7b894563f2f7",
+      "date": "2024-07-16",
+      "files": 30530
+    },
+    {
+      "clone": "SWG-Animus_Animus-Core3",
+      "url": "https://github.com/SWG-Animus/Animus-Core3.git",
+      "revision": "15bd49ca7806b5ad3752188795a8b8e258a1c59e",
+      "date": "2024-08-24",
+      "files": 30708
+    },
+    {
+      "clone": "SWG-Awakening_Awakening-Core3",
+      "url": "https://github.com/SWG-Awakening/Awakening-Core3.git",
+      "revision": "139ede608f435dcf6f30628adeaf8c4e1fcbb527",
+      "date": "2025-06-15",
+      "files": 30149
+    },
+    {
+      "clone": "swgemu_Core3_recent",
+      "url": "https://github.com/swgemu/Core3.git",
+      "revision": "403893d9b9f8e6fa712fbb3cb1fcd8f0fe45bb79",
+      "date": "2026-10-01",
+      "files": 34588
+    },
+    {
+      "clone": "swgemu_Tools",
+      "url": "https://github.com/swgemu/Tools.git",
+      "revision": "72ef01b24e322d8f4c6b89f717663eb965ae487b",
+      "date": "2026-01-24",
+      "files": 933
+    },
+    {
+      "clone": "swghardcore_public",
+      "url": "https://github.com/swghardcore/public.git",
+      "revision": "1d00f5a012040f5b4a07cae76779125a23a48580",
+      "date": "2026-04-17",
+      "files": 30248
+    },
+    {
+      "clone": "Thrax989_SWGFlurry",
+      "url": "https://github.com/Thrax989/SWGFlurry.git",
+      "revision": "947a7e666deefc8e271813b83ae759e03ccee44f",
+      "date": "2023-02-07",
+      "files": 53297
+    },
+    {
+      "clone": "XanderOlson_swgemu_single_player",
+      "url": "https://github.com/XanderOlson/swgemu_single_player.git",
+      "revision": "fe88c01841997d0c772054c609fcc2c74f867748",
+      "date": "2026-02-22",
+      "files": 34574
+    }
+  ],
+  "excluded_by_owner": [
+    {
+      "repository": "https://github.com/BorrieBoBaka/SWG_D20_RP_TC",
+      "includes": "Progor-Chat bot",
+      "date": "2026-10-13",
+      "note": "Not to be used; research clone deleted."
+    }
+  ]
+}

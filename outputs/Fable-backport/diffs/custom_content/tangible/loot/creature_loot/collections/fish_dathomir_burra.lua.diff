@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/fish_dathomir_burra.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/fish_dathomir_burra.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fish_dathomir_burra, "object/tangible/loot/creature/loot/collections/fish_dathomir_burra.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fish_dathomir_burra, "object/tangible/loot/creature_loot/collections/fish_dathomir_burra.iff")

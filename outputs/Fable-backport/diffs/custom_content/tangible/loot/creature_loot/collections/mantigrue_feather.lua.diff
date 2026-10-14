@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/mantigrue_feather.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/mantigrue_feather.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_mantigrue_feather, "object/tangible/loot/creature/loot/collections/mantigrue_feather.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_mantigrue_feather, "object/tangible/loot/creature_loot/collections/mantigrue_feather.iff")

@@ -1,0 +1,199 @@
+{
+  "server_initialized": true,
+  "expected_game_ports_listening": true,
+  "schema": "1008",
+  "account_and_character_counts": "1\n1",
+  "owner_admin_level": "15",
+  "error_lines": [],
+  "missing_asset_warning_paths": [
+    "abstract/slot/descriptor/shipcontrol_pob.iff",
+    "appearance/corellian_corvette_pob.pob",
+    "appearance/particle_test_31.prt",
+    "clientdata/ship/client_shared_blacksun_transport.cdf",
+    "clientdata/ship/client_shared_escape_pod.cdf",
+    "clientdata/ship/client_shared_hutt_transport.cdf",
+    "datatables/space/ship_chassis_arc170.iff",
+    "datatables/space/ship_chassis_blacksun_medium_s01.iff",
+    "datatables/space/ship_chassis_blacksun_medium_s02.iff",
+    "datatables/space/ship_chassis_blacksun_medium_s03.iff",
+    "datatables/space/ship_chassis_blacksun_medium_s04.iff",
+    "datatables/space/ship_chassis_blacksun_transport.iff",
+    "datatables/space/ship_chassis_generic.iff",
+    "datatables/space/ship_chassis_hutt_turret_ship.iff",
+    "datatables/space/ship_chassis_merchant_cruiser_light.iff",
+    "datatables/space/ship_chassis_merchant_cruiser_medium.iff",
+    "datatables/space/ship_chassis_mining_asteroid_dynamic.iff",
+    "datatables/space/ship_chassis_mining_asteroid_static.iff",
+    "datatables/space/ship_chassis_player_arc170.iff",
+    "datatables/space/ship_chassis_player_jedi_starfighter.iff",
+    "datatables/space/ship_chassis_player_test_falcon.iff",
+    "datatables/space/ship_chassis_rebel_shuttle.iff",
+    "datatables/space/ship_chassis_smuggler_warlord_ship.iff",
+    "datatables/space/ship_chassis_tiedefender.iff",
+    "datatables/space/ship_chassis_tiedefender_tier1.iff",
+    "datatables/space/ship_chassis_tiedefender_tier2.iff",
+    "datatables/space/ship_chassis_tiedefender_tier3.iff",
+    "datatables/space/ship_chassis_tiedefender_tier4.iff",
+    "datatables/space/ship_chassis_tiedefender_tier5.iff",
+    "datatables/space/ship_chassis_transport_science.iff",
+    "object/tangible/component/vehicle/base/shared_base_vehicle.iff",
+    "snapshot/tutorial.ws"
+  ],
+  "compiled_executable_sha256": "b71a8535b7f53f19064468deb0c9d6910fed39fb936c05a12b503dfd0919c97c",
+  "gameplay_tests": "Login, command entry, resource generation, crafting, house placement, quest completion and ship flight require in-game verification.",
+  "startup_since": "Tue 2026-10-13 06:11:21 PDT",
+  "warning_line_count": 2537,
+  "referenced_warning_paths": [
+    "abstract/slot/descriptor/shipcontrol_pob.iff",
+    "appearance/corellian_corvette_pob.pob",
+    "appearance/particle_test_31.prt",
+    "appearance/pt_light_indoor_glow.prt",
+    "clientdata/ship/client_shared_blacksun_transport.cdf",
+    "clientdata/ship/client_shared_escape_pod.cdf",
+    "clientdata/ship/client_shared_hutt_transport.cdf",
+    "datatables/space/ship_chassis_arc170.iff",
+    "datatables/space/ship_chassis_blacksun_medium_s01.iff",
+    "datatables/space/ship_chassis_blacksun_medium_s02.iff",
+    "datatables/space/ship_chassis_blacksun_medium_s03.iff",
+    "datatables/space/ship_chassis_blacksun_medium_s04.iff",
+    "datatables/space/ship_chassis_blacksun_transport.iff",
+    "datatables/space/ship_chassis_generic.iff",
+    "datatables/space/ship_chassis_hutt_turret_ship.iff",
+    "datatables/space/ship_chassis_merchant_cruiser_light.iff",
+    "datatables/space/ship_chassis_merchant_cruiser_medium.iff",
+    "datatables/space/ship_chassis_mining_asteroid_dynamic.iff",
+    "datatables/space/ship_chassis_mining_asteroid_static.iff",
+    "datatables/space/ship_chassis_player_arc170.iff",
+    "datatables/space/ship_chassis_player_jedi_starfighter.iff",
+    "datatables/space/ship_chassis_player_test_falcon.iff",
+    "datatables/space/ship_chassis_rebel_shuttle.iff",
+    "datatables/space/ship_chassis_smuggler_warlord_ship.iff",
+    "datatables/space/ship_chassis_tiedefender.iff",
+    "datatables/space/ship_chassis_tiedefender_tier1.iff",
+    "datatables/space/ship_chassis_tiedefender_tier2.iff",
+    "datatables/space/ship_chassis_tiedefender_tier3.iff",
+    "datatables/space/ship_chassis_tiedefender_tier4.iff",
+    "datatables/space/ship_chassis_tiedefender_tier5.iff",
+    "datatables/space/ship_chassis_transport_science.iff",
+    "object/tangible/component/vehicle/base/shared_base_vehicle.iff",
+    "snapshot/tutorial.ws"
+  ],
+  "asset_hash_checks": [
+    {
+      "name": "mtg_patch_001_appearance_01.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_002_appearance_02.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_003_appearance_03.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_004_appearance_04.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_005_texture_01.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_006_texture_02.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_007_texture_03.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_008_texture_04.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_009_Shader_01.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_010_object_01.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_011_files_01.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_012_configurable_01.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_013_configurable_02.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_014.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_015.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_016.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_017.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_018.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_019.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_021.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_022.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_patch_023.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    },
+    {
+      "name": "mtg_planets.tre",
+      "server_matches_download": true,
+      "client_matches_download": true
+    }
+  ],
+  "all_23_installed_assets_match_download": true
+}

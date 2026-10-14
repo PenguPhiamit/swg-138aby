@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/space/booster_mark_05_kse.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/space/booster_mark_05_kse.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_space_booster_mark_05_kse, "object/tangible/loot/creature/loot/collections/space/booster_mark_05_kse.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_space_booster_mark_05_kse, "object/tangible/loot/creature_loot/collections/space/booster_mark_05_kse.iff")

@@ -1,0 +1,1717 @@
+From c402e4809965b7419db07bba7e2284f4c9d3376c Mon Sep 17 00:00:00 2001
+From: SWG Local Dev <swg-local@localhost>
+Date: Wed, 14 Oct 2026 03:48:54 -0700
+Subject: [PATCH] Sandbox Hoth: ordinary creatures, lairs and a world spawner
+ (Bellum Gero, AGPL-3.0)
+
+Port of Bellum Gero's (github.com/Miphstoe/BellumGero-Live, 1f4438a1) Hoth mobiles,
+lairs and hoth_world spawn group, by outputs/tools/hoth/hoth_port_mobiles.py:
+- mobile/hoth: 19 templates with Bellum's stats and levels (owner: keep the endgame
+  levels). Loot groups this server lacks are removed; each file names its source,
+  licence and changes. The glacial rancor is left out (its body is in no archive the
+  client loads).
+- 11 lairs (creature_dynamic, creature_lair, npc_dynamic) and spawn/hoth/hoth_world.lua.
+- hoth_regions.lua: a world-spawner region (SPAWNAREA + WORLDSPAWNAREA, 1024 at most);
+  the outpost's no-spawn circle is unchanged. Only loaded where ZonesEnabled has hoth.
+
+Test galaxy, 14 Oct: clean boot ("hoth Loaded 7 total regions"). A bot probe
+(tools/hoth/hoth_creature_probe.py) saw 5 Hoth tauntauns, 8 ice mynocks and a greater
+ice mynock 250-360 m south of the pad; the level-1 bot was killed by them.
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../scripts/managers/planet/hoth_regions.lua  |   4 +
+ .../scripts/mobile/hoth/hoth_elder_wampa.lua  |  74 ++++++++++++
+ .../mobile/hoth/hoth_greater_ice_mynock.lua   |  44 +++++++
+ .../scripts/mobile/hoth/hoth_ice_mynock.lua   |  44 +++++++
+ .../hoth/hoth_imperial_salvage_tech.lua       |  47 ++++++++
+ .../mobile/hoth/hoth_mynock_broodmother.lua   |  44 +++++++
+ .../scripts/mobile/hoth/hoth_probe_droid.lua  |  50 ++++++++
+ .../mobile/hoth/hoth_rebel_snow_sergeant.lua  |  56 +++++++++
+ .../mobile/hoth/hoth_rebel_snow_soldier.lua   |  56 +++++++++
+ .../scripts/mobile/hoth/hoth_scavenger.lua    |  50 ++++++++
+ .../mobile/hoth/hoth_scavenger_raider.lua     |  59 ++++++++++
+ .../scripts/mobile/hoth/hoth_snowtrooper.lua  |  55 +++++++++
+ .../mobile/hoth/hoth_snowtrooper_sergeant.lua |  55 +++++++++
+ .../bin/scripts/mobile/hoth/hoth_tauntaun.lua |  44 +++++++
+ .../mobile/hoth/hoth_tauntaun_bull.lua        |  44 +++++++
+ .../bin/scripts/mobile/hoth/hoth_wampa.lua    |  74 ++++++++++++
+ .../mobile/hoth/hoth_wampa_frostfang.lua      |  43 +++++++
+ .../scripts/mobile/hoth/hoth_wampa_icemaw.lua |  43 +++++++
+ .../mobile/hoth/hoth_wampa_matriarch.lua      |  43 +++++++
+ .../mobile/hoth/hoth_wampa_patriarch.lua      |  43 +++++++
+ .../mobile/hoth/hoth_wampa_snowblind.lua      |  43 +++++++
+ .../bin/scripts/mobile/hoth/serverobjects.lua |  24 ++++
+ .../hoth_ice_mynock_pack_neutral_none.lua     |  18 +++
+ .../hoth/hoth_probe_droid_neutral_none.lua    |  18 +++
+ .../hoth/hoth_tauntaun_herd_neutral_none.lua  |  18 +++
+ .../hoth/hoth_wampa_neutral_none.lua          |  18 +++
+ .../lair/creature_dynamic/serverobjects.lua   |   6 +
+ .../hoth_ice_mynock_lair_neutral_medium.lua   |  16 +++
+ .../hoth_tauntaun_lair_neutral_medium.lua     |  16 +++
+ .../hoth/hoth_wampa_lair_neutral_large.lua    |  16 +++
+ .../lair/creature_lair/serverobjects.lua      |   4 +
+ ...th_imperial_salvage_team_imperial_none.lua |  20 ++++
+ .../hoth_rebel_snow_patrol_rebel_none.lua     |  20 ++++
+ ...oth_scavenger_raider_camp_neutral_none.lua |  19 +++
+ .../hoth_snowtrooper_patrol_imperial_none.lua |  20 ++++
+ .../mobile/lair/npc_dynamic/serverobjects.lua |   6 +
+ .../bin/scripts/mobile/serverobjects.lua      |   1 +
+ .../scripts/mobile/spawn/hoth/hoth_world.lua  | 109 ++++++++++++++++++
+ .../scripts/mobile/spawn/serverobjects.lua    |   3 +
+ 39 files changed, 1367 insertions(+)
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_elder_wampa.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_greater_ice_mynock.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_ice_mynock.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_imperial_salvage_tech.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_mynock_broodmother.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_probe_droid.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_rebel_snow_sergeant.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_rebel_snow_soldier.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_scavenger.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_scavenger_raider.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_snowtrooper.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_snowtrooper_sergeant.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_tauntaun.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_tauntaun_bull.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_frostfang.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_icemaw.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_matriarch.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_patriarch.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_snowblind.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/hoth/serverobjects.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_ice_mynock_pack_neutral_none.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_probe_droid_neutral_none.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_tauntaun_herd_neutral_none.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_wampa_neutral_none.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_ice_mynock_lair_neutral_medium.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_tauntaun_lair_neutral_medium.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_wampa_lair_neutral_large.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_imperial_salvage_team_imperial_none.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_rebel_snow_patrol_rebel_none.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_scavenger_raider_camp_neutral_none.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_snowtrooper_patrol_imperial_none.lua
+ create mode 100644 MMOCoreORB/bin/scripts/mobile/spawn/hoth/hoth_world.lua
+
+diff --git a/MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua b/MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua
+index 7772e20b..4ef63e47 100644
+--- a/MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua
++++ b/MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua
+@@ -15,4 +15,8 @@ hoth_regions = {
+ 
+ 	-- The ice caves (MTG snapshot: cave_01..04_ice)
+ 	{"hoth_ice_caves_nobuild", -400, 2600, {CIRCLE, 450}, NOBUILDZONEAREA},
++
++	-- World spawner: lairs, herds and patrols from mobile/spawn/hoth/hoth_world.lua (as Bellum Gero, 1024 at most).
++	-- Outside the outpost (CITY + NOSPAWNAREA, 200 m) and the no-spawn edges.
++	{"hoth_world_spawner", 0, 0, {RECTANGLE, 0, 0}, SPAWNAREA + WORLDSPAWNAREA, {"hoth_world"}, 1024},
+ }
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_elder_wampa.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_elder_wampa.lua
+new file mode 100644
+index 00000000..2a08d8d7
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_elder_wampa.lua
+@@ -0,0 +1,74 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_elder_wampa.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: bg_token_group, hoth_art_rare, hoth_decor_common, hoth_ice_decor, hoth_vehicle_deeds, hoth_vehicle_schematics, jedi_robe.
++
++hoth_elder_wampa = Creature:new {
++	objectName = "",
++	customName = "an elder wampa",
++	socialGroup = "wampa",
++	faction = "",
++	mobType = MOB_CARNIVORE,
++	level = 98,
++	chanceHit = 0.95,
++	damageMin = 640,
++	damageMax = 980,
++	baseXp = 9400,
++	baseHAM = 22000,
++	baseHAMmax = 27000,
++	armor = 2,
++	resists = {155,170,40,210,40,210,40,40,-1},
++	meatType = "meat_carnivore",
++	meatAmount = 1000,
++	hideType = "hide_wooly",
++	hideAmount = 1000,
++	boneType = "bone_mammal",
++	boneAmount = 850,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++	creatureBitmask = KILLER + STALKER,
++	optionsBitmask = AIENABLED,
++	diet = CARNIVORE,
++	templates = {"object/mobile/wampa.iff"},
++	scale = 1.15,
++	lootGroups = {
++		{
++			groups = {
++				{group = "armor_attachments", chance = 10000000}
++			},
++			lootChance = 250000
++		},
++		{
++			groups = {
++				{group = "clothing_attachments", chance = 10000000}
++			},
++			lootChance = 250000
++		},
++		{
++			groups = {
++				{group = "color_crystals", chance = 10000000}
++			},
++			lootChance = 150000
++		},
++		{
++			groups = {
++				{group = "power_crystals", chance = 10000000}
++			},
++			lootChance = 150000
++		},
++		{
++			groups = {
++				{group = "krayt_pearls", chance = 10000000}
++			},
++			lootChance = 50000
++		}
++	},
++	primaryWeapon = "unarmed",
++	secondaryWeapon = "none",
++	conversationTemplate = "",
++	primaryAttacks = { {"stunattack",""}, {"creatureareaknockdown",""} },
++	secondaryAttacks = { }
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_elder_wampa, "hoth_elder_wampa")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_greater_ice_mynock.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_greater_ice_mynock.lua
+new file mode 100644
+index 00000000..4f849160
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_greater_ice_mynock.lua
+@@ -0,0 +1,44 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_greater_ice_mynock.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: hoth_art_rare.
++
++hoth_greater_ice_mynock = Creature:new {
++	objectName = "",
++	customName = "a greater ice mynock",
++	socialGroup = "mynock",
++	faction = "",
++	mobType = MOB_CARNIVORE,
++	level = 76,
++	chanceHit = 0.73,
++	damageMin = 545,
++	damageMax = 760,
++	baseXp = 7300,
++	baseHAM = 13000,
++	baseHAMmax = 15500,
++	armor = 1,
++	resists = {130,130,25,25,190,130,25,25,-1},
++	meatType = "meat_carnivore",
++	meatAmount = 90,
++	hideType = "hide_leathery",
++	hideAmount = 110,
++	boneType = "bone_mammal",
++	boneAmount = 50,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++	creatureBitmask = PACK + KILLER,
++	optionsBitmask = AIENABLED,
++	diet = CARNIVORE,
++	templates = {"object/mobile/salt_mynock_hue.iff"},
++	hues = { 8, 9, 10, 11, 12, 13, 14, 15 },
++	scale = 1.35,
++	lootGroups = {},
++	primaryWeapon = "unarmed",
++	secondaryWeapon = "none",
++	conversationTemplate = "",
++	primaryAttacks = { {"blindattack",""}, {"creatureareaknockdown",""} },
++	secondaryAttacks = { }
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_greater_ice_mynock, "hoth_greater_ice_mynock")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_ice_mynock.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_ice_mynock.lua
+new file mode 100644
+index 00000000..6db9aee1
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_ice_mynock.lua
+@@ -0,0 +1,44 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_ice_mynock.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: hoth_art_rare.
++
++hoth_ice_mynock = Creature:new {
++	objectName = "",
++	customName = "an ice mynock",
++	socialGroup = "mynock",
++	faction = "",
++	mobType = MOB_CARNIVORE,
++	level = 67,
++	chanceHit = 0.63,
++	damageMin = 480,
++	damageMax = 640,
++	baseXp = 6470,
++	baseHAM = 11500,
++	baseHAMmax = 13500,
++	armor = 1,
++	resists = {110,110,20,20,170,110,20,20,-1},
++	meatType = "meat_carnivore",
++	meatAmount = 60,
++	hideType = "hide_leathery",
++	hideAmount = 80,
++	boneType = "bone_mammal",
++	boneAmount = 30,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++	creatureBitmask = PACK,
++	optionsBitmask = AIENABLED,
++	diet = CARNIVORE,
++	templates = {"object/mobile/salt_mynock_hue.iff"},
++	hues = { 0, 1, 2, 3, 4, 5, 6, 7 },
++	scale = 1.1,
++	lootGroups = {},
++	primaryWeapon = "unarmed",
++	secondaryWeapon = "none",
++	conversationTemplate = "",
++	primaryAttacks = { {"blindattack",""}, {"knockdownattack",""} },
++	secondaryAttacks = { }
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_ice_mynock, "hoth_ice_mynock")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_imperial_salvage_tech.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_imperial_salvage_tech.lua
+new file mode 100644
+index 00000000..c1ff974f
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_imperial_salvage_tech.lua
+@@ -0,0 +1,47 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_imperial_salvage_tech.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: hoth_art_rare, hoth_decor_common.
++
++hoth_imperial_salvage_tech = Creature:new {
++	objectName = "",
++	customName = "an Imperial salvage technician",
++	randomNameType = NAME_STORMTROOPER,
++	randomNameTag = true,
++	mobType = MOB_NPC,
++	socialGroup = "imperial",
++	faction = "imperial",
++	level = 72,
++	chanceHit = 0.66,
++	damageMin = 500,
++	damageMax = 690,
++	baseXp = 6900,
++	baseHAM = 12500,
++	baseHAMmax = 15000,
++	armor = 1,
++	resists = {30,30,30,30,60,30,30,-1,-1},
++	meatType = "",
++	meatAmount = 0,
++	hideType = "",
++	hideAmount = 0,
++	boneType = "",
++	boneAmount = 0,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = ATTACKABLE,
++	creatureBitmask = PACK,
++	optionsBitmask = AIENABLED,
++	diet = HERBIVORE,
++	templates = {
++		"object/mobile/dressed_imperial_atat_pilot_m.iff"
++	},
++	lootGroups = {},
++	primaryWeapon = "imperial_weapons_light",
++	secondaryWeapon = "unarmed",
++	conversationTemplate = "",
++	reactionStf = "@npc_reaction/military",
++	primaryAttacks = marksmanmid,
++	secondaryAttacks = brawlermid
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_imperial_salvage_tech, "hoth_imperial_salvage_tech")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_mynock_broodmother.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_mynock_broodmother.lua
+new file mode 100644
+index 00000000..2985d18d
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_mynock_broodmother.lua
+@@ -0,0 +1,44 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_mynock_broodmother.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_mynock_broodmother = Creature:new {
++	objectName = "",
++	customName = "the mynock broodmother",
++	socialGroup = "mynock",
++	faction = "",
++	mobType = MOB_CARNIVORE,
++	level = 100,
++	chanceHit = 0.97,
++	damageMin = 680,
++	damageMax = 1040,
++	baseXp = 9600,
++	baseHAM = 40000,
++	baseHAMmax = 45000,
++	armor = 2,
++	resists = {160,180,45,220,45,220,45,45,-1},
++	meatType = "meat_carnivore",
++	meatAmount = 150,
++	hideType = "hide_leathery",
++	hideAmount = 200,
++	boneType = "bone_mammal",
++	boneAmount = 80,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++	creatureBitmask = KILLER,
++	optionsBitmask = AIENABLED,
++	diet = CARNIVORE,
++	templates = {"object/mobile/salt_mynock_hue.iff"},
++	hues = { 16, 17, 18, 19, 20, 21, 22, 23 },
++	scale = 1.8,
++	lootGroups = {},
++	primaryWeapon = "unarmed",
++	secondaryWeapon = "none",
++	conversationTemplate = "",
++	primaryAttacks = { {"blindattack",""}, {"creatureareaknockdown",""} },
++	secondaryAttacks = { }
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_mynock_broodmother, "hoth_mynock_broodmother")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_probe_droid.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_probe_droid.lua
+new file mode 100644
+index 00000000..095af21b
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_probe_droid.lua
+@@ -0,0 +1,50 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_probe_droid.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: hoth_art_rare.
++
++hoth_probe_droid = Creature:new {
++	objectName = "",
++	customName = "an Imperial probe droid",
++	socialGroup = "imperial",
++	faction = "",
++	mobType = MOB_DROID,
++	level = 74,
++	chanceHit = 0.72,
++	damageMin = 520,
++	damageMax = 720,
++	baseXp = 7100,
++	baseHAM = 12500,
++	baseHAMmax = 15000,
++	armor = 1,
++	resists = {140,140,140,30,30,30,30,-1,-1},
++	meatType = "",
++	meatAmount = 0,
++	hideType = "",
++	hideAmount = 0,
++	boneType = "",
++	boneAmount = 0,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++	creatureBitmask = KILLER,
++	optionsBitmask = AIENABLED,
++	diet = HERBIVORE,
++	templates = {"object/mobile/probot.iff"},
++	lootGroups = {
++		{
++			groups = {
++				{group = "armor_all", chance = 3000000},
++				{group = "weapons_all", chance = 3500000},
++				{group = "wearables_all", chance = 3500000}
++			},
++			lootChance = 2000000
++		}
++	},
++	defaultAttack = "attack",
++	primaryWeapon = "droid_probot_ranged",
++	secondaryWeapon = "none",
++	conversationTemplate = ""
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_probe_droid, "hoth_probe_droid")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_rebel_snow_sergeant.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_rebel_snow_sergeant.lua
+new file mode 100644
+index 00000000..ee23a3d4
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_rebel_snow_sergeant.lua
+@@ -0,0 +1,56 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_rebel_snow_sergeant.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: bg_token_group, hoth_art_rare, hoth_decor_common, hoth_rebel_snow_schematics.
++
++hoth_rebel_snow_sergeant = Creature:new {
++	objectName = "",
++	customName = "a Rebel snow sergeant",
++	randomNameType = NAME_GENERIC,
++	randomNameTag = true,
++	mobType = MOB_NPC,
++	socialGroup = "rebel",
++	faction = "rebel",
++	level = 85,
++	chanceHit = 0.84,
++	damageMin = 610,
++	damageMax = 870,
++	baseXp = 8160,
++	baseHAM = 15500,
++	baseHAMmax = 18500,
++	armor = 1,
++	resists = {50,50,70,50,90,50,50,-1,-1},
++	meatType = "",
++	meatAmount = 0,
++	hideType = "",
++	hideAmount = 0,
++	boneType = "",
++	boneAmount = 0,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = ATTACKABLE,
++	creatureBitmask = PACK + KILLER,
++	optionsBitmask = AIENABLED,
++	diet = HERBIVORE,
++	templates = {
++		"object/mobile/rebel_snow_m_01.iff",
++		"object/mobile/rebel_snow_f_01.iff"
++	},
++	lootGroups = {
++		{
++			groups = {
++				{group = "rebel_tier_4", chance = 10000000}
++			}
++		}
++	},
++	primaryWeapon = "rebel_carbine",
++	secondaryWeapon = "rebel_pistol",
++	thrownWeapon = "thrown_weapons",
++	conversationTemplate = "",
++	reactionStf = "@npc_reaction/military",
++	personalityStf = "@hireling/hireling_military",
++	primaryAttacks = merge(carbineermaster,marksmanmaster),
++	secondaryAttacks = merge(pistoleermaster,marksmanmaster)
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_rebel_snow_sergeant, "hoth_rebel_snow_sergeant")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_rebel_snow_soldier.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_rebel_snow_soldier.lua
+new file mode 100644
+index 00000000..4fcb71b2
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_rebel_snow_soldier.lua
+@@ -0,0 +1,56 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_rebel_snow_soldier.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: bg_token_group, hoth_art_rare, hoth_decor_common, hoth_rebel_snow_schematics.
++
++hoth_rebel_snow_soldier = Creature:new {
++	objectName = "",
++	customName = "a Rebel snow soldier",
++	randomNameType = NAME_GENERIC,
++	randomNameTag = true,
++	mobType = MOB_NPC,
++	socialGroup = "rebel",
++	faction = "rebel",
++	level = 76,
++	chanceHit = 0.76,
++	damageMin = 540,
++	damageMax = 760,
++	baseXp = 7300,
++	baseHAM = 13500,
++	baseHAMmax = 16500,
++	armor = 1,
++	resists = {40,40,60,40,80,40,40,-1,-1},
++	meatType = "",
++	meatAmount = 0,
++	hideType = "",
++	hideAmount = 0,
++	boneType = "",
++	boneAmount = 0,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = ATTACKABLE,
++	creatureBitmask = PACK + KILLER,
++	optionsBitmask = AIENABLED,
++	diet = HERBIVORE,
++	templates = {
++		"object/mobile/rebel_snow_m_01.iff",
++		"object/mobile/rebel_snow_f_01.iff"
++	},
++	lootGroups = {
++		{
++			groups = {
++				{group = "rebel_tier_3", chance = 10000000}
++			}
++		}
++	},
++	primaryWeapon = "rebel_carbine",
++	secondaryWeapon = "rebel_pistol",
++	thrownWeapon = "thrown_weapons",
++	conversationTemplate = "",
++	reactionStf = "@npc_reaction/military",
++	personalityStf = "@hireling/hireling_military",
++	primaryAttacks = merge(carbineermaster,marksmanmaster),
++	secondaryAttacks = merge(pistoleermaster,marksmanmaster)
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_rebel_snow_soldier, "hoth_rebel_snow_soldier")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_scavenger.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_scavenger.lua
+new file mode 100644
+index 00000000..c3eab1f1
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_scavenger.lua
+@@ -0,0 +1,50 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_scavenger.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: hoth_art_rare.
++
++hoth_scavenger = Creature:new {
++	objectName = "",
++	customName = "a Hoth scavenger",
++	randomNameType = NAME_GENERIC,
++	randomNameTag = true,
++	mobType = MOB_NPC,
++	socialGroup = "townsperson",
++	faction = "",
++	level = 62,
++	chanceHit = 0.58,
++	damageMin = 440,
++	damageMax = 590,
++	baseXp = 6010,
++	baseHAM = 10000,
++	baseHAMmax = 12000,
++	armor = 1,
++	resists = {30,30,30,30,60,30,30,-1,-1},
++	meatType = "",
++	meatAmount = 0,
++	hideType = "",
++	hideAmount = 0,
++	boneType = "",
++	boneAmount = 0,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = NONE,
++	creatureBitmask = NONE,
++	optionsBitmask = AIENABLED,
++	diet = HERBIVORE,
++	templates = {
++		"object/mobile/dressed_tatooine_scavenger.iff",
++		"object/mobile/dressed_mercenary_commander_zab_m.iff",
++		"object/mobile/dressed_goon_twk_male_01.iff",
++		"object/mobile/dressed_robber_human_female_01.iff"
++	},
++	lootGroups = {},
++	primaryWeapon = "pirate_weapons_heavy",
++	secondaryWeapon = "unarmed",
++	conversationTemplate = "",
++	reactionStf = "@npc_reaction/slang",
++	primaryAttacks = marksmanmid,
++	secondaryAttacks = brawlermid
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_scavenger, "hoth_scavenger")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_scavenger_raider.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_scavenger_raider.lua
+new file mode 100644
+index 00000000..e96f1dc6
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_scavenger_raider.lua
+@@ -0,0 +1,59 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_scavenger_raider.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: bg_token_group, hoth_art_rare, hoth_decor_common, hoth_paintings.
++
++hoth_scavenger_raider = Creature:new {
++	objectName = "",
++	customName = "a scavenger raider",
++	randomNameType = NAME_GENERIC,
++	randomNameTag = true,
++	mobType = MOB_NPC,
++	socialGroup = "thug",
++	faction = "thug",
++	level = 74,
++	chanceHit = 0.7,
++	damageMin = 520,
++	damageMax = 720,
++	baseXp = 7100,
++	baseHAM = 13000,
++	baseHAMmax = 15500,
++	armor = 1,
++	resists = {30,30,30,30,60,30,30,-1,-1},
++	meatType = "",
++	meatAmount = 0,
++	hideType = "",
++	hideAmount = 0,
++	boneType = "",
++	boneAmount = 0,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++	creatureBitmask = PACK + KILLER,
++	optionsBitmask = AIENABLED,
++	diet = HERBIVORE,
++	templates = {
++		"object/mobile/dressed_tatooine_scavenger.iff",
++		"object/mobile/dressed_mercenary_commander_zab_m.iff",
++		"object/mobile/dressed_goon_twk_male_01.iff",
++		"object/mobile/dressed_robber_human_female_01.iff"
++	},
++	lootGroups = {
++		{
++			groups = {
++				{group = "armor_all", chance = 3000000},
++				{group = "weapons_all", chance = 3500000},
++				{group = "wearables_all", chance = 3500000}
++			},
++			lootChance = 2500000
++		}
++	},
++	primaryWeapon = "pirate_weapons_heavy",
++	secondaryWeapon = "unarmed",
++	conversationTemplate = "",
++	reactionStf = "@npc_reaction/slang",
++	primaryAttacks = marksmanmid,
++	secondaryAttacks = brawlermid
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_scavenger_raider, "hoth_scavenger_raider")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_snowtrooper.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_snowtrooper.lua
+new file mode 100644
+index 00000000..af6f18fa
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_snowtrooper.lua
+@@ -0,0 +1,55 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_snowtrooper.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: bg_token_group, hoth_art_rare, hoth_decor_common, hoth_snowtrooper_schematics.
++
++hoth_snowtrooper = Creature:new {
++	objectName = "",
++	customName = "a snowtrooper",
++	randomNameType = NAME_STORMTROOPER,
++	randomNameTag = true,
++	mobType = MOB_NPC,
++	socialGroup = "imperial",
++	faction = "imperial",
++	level = 76,
++	chanceHit = 0.76,
++	damageMin = 540,
++	damageMax = 760,
++	baseXp = 7300,
++	baseHAM = 13500,
++	baseHAMmax = 16500,
++	armor = 1,
++	resists = {40,40,60,40,80,40,40,-1,-1},
++	meatType = "",
++	meatAmount = 0,
++	hideType = "",
++	hideAmount = 0,
++	boneType = "",
++	boneAmount = 0,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = ATTACKABLE,
++	creatureBitmask = PACK + KILLER,
++	optionsBitmask = AIENABLED,
++	diet = HERBIVORE,
++	templates = {
++		"object/mobile/snowtrooper_s01.iff"
++	},
++	lootGroups = {
++		{
++			groups = {
++				{group = "imperial_tier_3", chance = 10000000}
++			}
++		}
++	},
++	primaryWeapon = "stormtrooper_rifle",
++	secondaryWeapon = "stormtrooper_pistol",
++	thrownWeapon = "thrown_weapons",
++	conversationTemplate = "",
++	reactionStf = "@npc_reaction/stormtrooper",
++	personalityStf = "@hireling/hireling_stormtrooper",
++	primaryAttacks = merge(riflemanmaster,marksmanmaster),
++	secondaryAttacks = merge(pistoleermaster,marksmanmaster)
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_snowtrooper, "hoth_snowtrooper")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_snowtrooper_sergeant.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_snowtrooper_sergeant.lua
+new file mode 100644
+index 00000000..18144987
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_snowtrooper_sergeant.lua
+@@ -0,0 +1,55 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_snowtrooper_sergeant.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: bg_token_group, hoth_art_rare, hoth_decor_common, hoth_snowtrooper_schematics.
++
++hoth_snowtrooper_sergeant = Creature:new {
++	objectName = "",
++	customName = "a snowtrooper sergeant",
++	randomNameType = NAME_STORMTROOPER,
++	randomNameTag = true,
++	mobType = MOB_NPC,
++	socialGroup = "imperial",
++	faction = "imperial",
++	level = 85,
++	chanceHit = 0.84,
++	damageMin = 610,
++	damageMax = 870,
++	baseXp = 8160,
++	baseHAM = 15500,
++	baseHAMmax = 18500,
++	armor = 1,
++	resists = {50,50,70,50,90,50,50,-1,-1},
++	meatType = "",
++	meatAmount = 0,
++	hideType = "",
++	hideAmount = 0,
++	boneType = "",
++	boneAmount = 0,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = ATTACKABLE,
++	creatureBitmask = PACK + KILLER,
++	optionsBitmask = AIENABLED,
++	diet = HERBIVORE,
++	templates = {
++		"object/mobile/snowtrooper_s01.iff"
++	},
++	lootGroups = {
++		{
++			groups = {
++				{group = "imperial_tier_4", chance = 10000000}
++			}
++		}
++	},
++	primaryWeapon = "stormtrooper_rifle",
++	secondaryWeapon = "stormtrooper_pistol",
++	thrownWeapon = "thrown_weapons",
++	conversationTemplate = "",
++	reactionStf = "@npc_reaction/stormtrooper",
++	personalityStf = "@hireling/hireling_stormtrooper",
++	primaryAttacks = merge(riflemanmaster,marksmanmaster),
++	secondaryAttacks = merge(pistoleermaster,marksmanmaster)
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_snowtrooper_sergeant, "hoth_snowtrooper_sergeant")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_tauntaun.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_tauntaun.lua
+new file mode 100644
+index 00000000..9f7338a2
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_tauntaun.lua
+@@ -0,0 +1,44 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_tauntaun.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: hoth_art_rare.
++
++hoth_tauntaun = Creature:new {
++	objectName = "",
++	customName = "a Hoth tauntaun",
++	socialGroup = "tauntaun",
++	faction = "",
++	mobType = MOB_HERBIVORE,
++	level = 65,
++	chanceHit = 0.6,
++	damageMin = 470,
++	damageMax = 610,
++	baseXp = 6290,
++	baseHAM = 12500,
++	baseHAMmax = 14500,
++	armor = 1,
++	resists = {120,120,20,150,20,150,20,20,-1},
++	meatType = "meat_herbivore",
++	meatAmount = 700,
++	hideType = "hide_wooly",
++	hideAmount = 600,
++	boneType = "bone_mammal",
++	boneAmount = 500,
++	milk = 300,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = ATTACKABLE,
++	creatureBitmask = HERD,
++	optionsBitmask = AIENABLED,
++	diet = HERBIVORE,
++	templates = {"object/mobile/tauntaun_hue.iff"},
++	hues = { 16, 17, 18, 19, 20, 21, 22, 23 },
++	scale = 1.0,
++	lootGroups = {},
++	primaryWeapon = "unarmed",
++	secondaryWeapon = "none",
++	conversationTemplate = "",
++	primaryAttacks = { {"knockdownattack",""}, {"dizzyattack",""} },
++	secondaryAttacks = { }
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_tauntaun, "hoth_tauntaun")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_tauntaun_bull.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_tauntaun_bull.lua
+new file mode 100644
+index 00000000..326a2583
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_tauntaun_bull.lua
+@@ -0,0 +1,44 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_tauntaun_bull.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: hoth_art_rare.
++
++hoth_tauntaun_bull = Creature:new {
++	objectName = "",
++	customName = "a tauntaun bull",
++	socialGroup = "tauntaun",
++	faction = "",
++	mobType = MOB_HERBIVORE,
++	level = 72,
++	chanceHit = 0.68,
++	damageMin = 510,
++	damageMax = 690,
++	baseXp = 6930,
++	baseHAM = 13000,
++	baseHAMmax = 15500,
++	armor = 1,
++	resists = {130,130,25,160,25,160,25,25,-1},
++	meatType = "meat_herbivore",
++	meatAmount = 850,
++	hideType = "hide_wooly",
++	hideAmount = 750,
++	boneType = "bone_mammal",
++	boneAmount = 600,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++	creatureBitmask = PACK + HERD,
++	optionsBitmask = AIENABLED,
++	diet = HERBIVORE,
++	templates = {"object/mobile/tauntaun_hue.iff"},
++	hues = { 24, 25, 26, 27, 28, 29, 30, 31 },
++	scale = 1.15,
++	lootGroups = {},
++	primaryWeapon = "unarmed",
++	secondaryWeapon = "none",
++	conversationTemplate = "",
++	primaryAttacks = { {"knockdownattack",""}, {"creatureareaknockdown",""} },
++	secondaryAttacks = { }
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_tauntaun_bull, "hoth_tauntaun_bull")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa.lua
+new file mode 100644
+index 00000000..331af7b2
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa.lua
+@@ -0,0 +1,74 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: removed loot groups this server lacks: bg_token_group, hoth_art_rare, hoth_decor_common, hoth_ice_decor, hoth_vehicle_deeds, hoth_vehicle_schematics, jedi_robe.
++
++hoth_wampa = Creature:new {
++	objectName = "",
++	customName = "a wampa",
++	socialGroup = "wampa",
++	faction = "",
++	mobType = MOB_CARNIVORE,
++	level = 90,
++	chanceHit = 0.86,
++	damageMin = 590,
++	damageMax = 880,
++	baseXp = 8600,
++	baseHAM = 16000,
++	baseHAMmax = 20000,
++	armor = 1,
++	resists = {150,165,35,200,35,200,35,35,-1},
++	meatType = "meat_carnivore",
++	meatAmount = 900,
++	hideType = "hide_wooly",
++	hideAmount = 900,
++	boneType = "bone_mammal",
++	boneAmount = 750,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++	creatureBitmask = KILLER + STALKER,
++	optionsBitmask = AIENABLED,
++	diet = CARNIVORE,
++	templates = {"object/mobile/wampa.iff"},
++	scale = 1.0,
++	lootGroups = {
++		{
++			groups = {
++				{group = "armor_attachments", chance = 10000000}
++			},
++			lootChance = 250000
++		},
++		{
++			groups = {
++				{group = "clothing_attachments", chance = 10000000}
++			},
++			lootChance = 250000
++		},
++		{
++			groups = {
++				{group = "color_crystals", chance = 10000000}
++			},
++			lootChance = 150000
++		},
++		{
++			groups = {
++				{group = "power_crystals", chance = 10000000}
++			},
++			lootChance = 150000
++		},
++		{
++			groups = {
++				{group = "krayt_pearls", chance = 10000000}
++			},
++			lootChance = 50000
++		}
++	},
++	primaryWeapon = "unarmed",
++	secondaryWeapon = "none",
++	conversationTemplate = "",
++	primaryAttacks = { {"intimidationattack",""}, {"knockdownattack",""} },
++	secondaryAttacks = { }
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_wampa, "hoth_wampa")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_frostfang.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_frostfang.lua
+new file mode 100644
+index 00000000..7848b3ae
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_frostfang.lua
+@@ -0,0 +1,43 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_frostfang.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_wampa_frostfang = Creature:new {
++	objectName = "",
++	customName = "Frostfang",
++	socialGroup = "wampa",
++	faction = "",
++	mobType = MOB_CARNIVORE,
++	level = 105,
++	chanceHit = 1.0,
++	damageMin = 710,
++	damageMax = 1080,
++	baseXp = 10080,
++	baseHAM = 46000,
++	baseHAMmax = 51000,
++	armor = 2,
++	resists = {160,180,45,220,45,220,45,45,-1},
++	meatType = "meat_carnivore",
++	meatAmount = 1400,
++	hideType = "hide_wooly",
++	hideAmount = 1400,
++	boneType = "bone_mammal",
++	boneAmount = 1200,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++	creatureBitmask = KILLER,
++	optionsBitmask = AIENABLED,
++	diet = CARNIVORE,
++	templates = {"object/mobile/wampa.iff"},
++	scale = 1.3,
++	lootGroups = {},
++	primaryWeapon = "unarmed",
++	secondaryWeapon = "none",
++	conversationTemplate = "",
++	primaryAttacks = { {"stunattack",""}, {"creatureareaknockdown",""}, {"intimidationattack",""} },
++	secondaryAttacks = { }
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_wampa_frostfang, "hoth_wampa_frostfang")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_icemaw.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_icemaw.lua
+new file mode 100644
+index 00000000..e2409beb
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_icemaw.lua
+@@ -0,0 +1,43 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_icemaw.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_wampa_icemaw = Creature:new {
++	objectName = "",
++	customName = "Icemaw",
++	socialGroup = "wampa",
++	faction = "",
++	mobType = MOB_CARNIVORE,
++	level = 105,
++	chanceHit = 1.0,
++	damageMin = 710,
++	damageMax = 1080,
++	baseXp = 10080,
++	baseHAM = 46000,
++	baseHAMmax = 51000,
++	armor = 2,
++	resists = {160,180,45,220,45,220,45,45,-1},
++	meatType = "meat_carnivore",
++	meatAmount = 1400,
++	hideType = "hide_wooly",
++	hideAmount = 1400,
++	boneType = "bone_mammal",
++	boneAmount = 1200,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++	creatureBitmask = KILLER,
++	optionsBitmask = AIENABLED,
++	diet = CARNIVORE,
++	templates = {"object/mobile/wampa.iff"},
++	scale = 1.3,
++	lootGroups = {},
++	primaryWeapon = "unarmed",
++	secondaryWeapon = "none",
++	conversationTemplate = "",
++	primaryAttacks = { {"creatureareaknockdown",""}, {"dizzyattack",""}, {"intimidationattack",""} },
++	secondaryAttacks = { }
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_wampa_icemaw, "hoth_wampa_icemaw")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_matriarch.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_matriarch.lua
+new file mode 100644
+index 00000000..6e5dd3e8
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_matriarch.lua
+@@ -0,0 +1,43 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_matriarch.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_wampa_matriarch = Creature:new {
++	objectName = "",
++	customName = "the wampa matriarch",
++	socialGroup = "wampa",
++	faction = "",
++	mobType = MOB_CARNIVORE,
++	level = 110,
++	chanceHit = 1.05,
++	damageMin = 740,
++	damageMax = 1130,
++	baseXp = 10560,
++	baseHAM = 54000,
++	baseHAMmax = 60000,
++	armor = 2,
++	resists = {160,180,45,220,45,220,45,45,-1},
++	meatType = "meat_carnivore",
++	meatAmount = 1200,
++	hideType = "hide_wooly",
++	hideAmount = 1200,
++	boneType = "bone_mammal",
++	boneAmount = 1000,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++	creatureBitmask = KILLER,
++	optionsBitmask = AIENABLED,
++	diet = CARNIVORE,
++	templates = {"object/mobile/wampa.iff"},
++	scale = 1.45,
++	lootGroups = {},
++	primaryWeapon = "unarmed",
++	secondaryWeapon = "none",
++	conversationTemplate = "",
++	primaryAttacks = { {"stunattack",""}, {"creatureareaknockdown",""}, {"intimidationattack",""} },
++	secondaryAttacks = { }
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_wampa_matriarch, "hoth_wampa_matriarch")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_patriarch.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_patriarch.lua
+new file mode 100644
+index 00000000..cac28ad3
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_patriarch.lua
+@@ -0,0 +1,43 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_patriarch.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_wampa_patriarch = Creature:new {
++	objectName = "",
++	customName = "the wampa patriarch",
++	socialGroup = "wampa",
++	faction = "",
++	mobType = MOB_CARNIVORE,
++	level = 115,
++	chanceHit = 1.1,
++	damageMin = 800,
++	damageMax = 1250,
++	baseXp = 11040,
++	baseHAM = 58000,
++	baseHAMmax = 64000,
++	armor = 2,
++	resists = {160,180,45,220,45,220,45,45,-1},
++	meatType = "meat_carnivore",
++	meatAmount = 1400,
++	hideType = "hide_wooly",
++	hideAmount = 1400,
++	boneType = "bone_mammal",
++	boneAmount = 1200,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++	creatureBitmask = KILLER,
++	optionsBitmask = AIENABLED,
++	diet = CARNIVORE,
++	templates = {"object/mobile/wampa.iff"},
++	scale = 1.5,
++	lootGroups = {},
++	primaryWeapon = "unarmed",
++	secondaryWeapon = "none",
++	conversationTemplate = "",
++	primaryAttacks = { {"stunattack",""}, {"creatureareaknockdown",""}, {"intimidationattack",""} },
++	secondaryAttacks = { }
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_wampa_patriarch, "hoth_wampa_patriarch")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_snowblind.lua b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_snowblind.lua
+new file mode 100644
+index 00000000..6e8b2397
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_snowblind.lua
+@@ -0,0 +1,43 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_snowblind.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_wampa_snowblind = Creature:new {
++	objectName = "",
++	customName = "Snowblind the Ravager",
++	socialGroup = "wampa",
++	faction = "",
++	mobType = MOB_CARNIVORE,
++	level = 107,
++	chanceHit = 1.02,
++	damageMin = 725,
++	damageMax = 1100,
++	baseXp = 10270,
++	baseHAM = 48000,
++	baseHAMmax = 53000,
++	armor = 2,
++	resists = {160,180,45,220,45,220,45,45,-1},
++	meatType = "meat_carnivore",
++	meatAmount = 1400,
++	hideType = "hide_wooly",
++	hideAmount = 1400,
++	boneType = "bone_mammal",
++	boneAmount = 1200,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++	creatureBitmask = KILLER,
++	optionsBitmask = AIENABLED,
++	diet = CARNIVORE,
++	templates = {"object/mobile/wampa.iff"},
++	scale = 1.35,
++	lootGroups = {},
++	primaryWeapon = "unarmed",
++	secondaryWeapon = "none",
++	conversationTemplate = "",
++	primaryAttacks = { {"blindattack",""}, {"creatureareaknockdown",""}, {"stunattack",""} },
++	secondaryAttacks = { }
++}
++
++CreatureTemplates:addCreatureTemplate(hoth_wampa_snowblind, "hoth_wampa_snowblind")
+diff --git a/MMOCoreORB/bin/scripts/mobile/hoth/serverobjects.lua b/MMOCoreORB/bin/scripts/mobile/hoth/serverobjects.lua
+new file mode 100644
+index 00000000..2e774c1a
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/hoth/serverobjects.lua
+@@ -0,0 +1,24 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/hoth/serverobjects.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Changed: hoth_glacial_rancor left out (client lacks its body).
++
++includeFile("hoth/hoth_elder_wampa.lua")
++includeFile("hoth/hoth_greater_ice_mynock.lua")
++includeFile("hoth/hoth_ice_mynock.lua")
++includeFile("hoth/hoth_imperial_salvage_tech.lua")
++includeFile("hoth/hoth_mynock_broodmother.lua")
++includeFile("hoth/hoth_probe_droid.lua")
++includeFile("hoth/hoth_rebel_snow_sergeant.lua")
++includeFile("hoth/hoth_rebel_snow_soldier.lua")
++includeFile("hoth/hoth_scavenger.lua")
++includeFile("hoth/hoth_scavenger_raider.lua")
++includeFile("hoth/hoth_snowtrooper.lua")
++includeFile("hoth/hoth_snowtrooper_sergeant.lua")
++includeFile("hoth/hoth_tauntaun.lua")
++includeFile("hoth/hoth_tauntaun_bull.lua")
++includeFile("hoth/hoth_wampa.lua")
++includeFile("hoth/hoth_wampa_frostfang.lua")
++includeFile("hoth/hoth_wampa_icemaw.lua")
++includeFile("hoth/hoth_wampa_matriarch.lua")
++includeFile("hoth/hoth_wampa_patriarch.lua")
++includeFile("hoth/hoth_wampa_snowblind.lua")
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_ice_mynock_pack_neutral_none.lua b/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_ice_mynock_pack_neutral_none.lua
+new file mode 100644
+index 00000000..d21bc1f8
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_ice_mynock_pack_neutral_none.lua
+@@ -0,0 +1,18 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_ice_mynock_pack_neutral_none.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_ice_mynock_pack_neutral_none = Lair:new {
++	mobiles = {{"hoth_ice_mynock", 3}, {"hoth_greater_ice_mynock", 1}},
++	spawnLimit = 15,
++	buildingsVeryEasy = {},
++	buildingsEasy = {},
++	buildingsMedium = {},
++	buildingsHard = {},
++	buildingsVeryHard = {},
++	customName = "Ice Mynock Swarm",
++	missionBuilding = "object/tangible/lair/base/poi_all_lair_nest_small.iff",
++	buildingType = "none"
++}
++
++addLairTemplate("hoth_ice_mynock_pack_neutral_none", hoth_ice_mynock_pack_neutral_none)
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_probe_droid_neutral_none.lua b/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_probe_droid_neutral_none.lua
+new file mode 100644
+index 00000000..094803ff
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_probe_droid_neutral_none.lua
+@@ -0,0 +1,18 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_probe_droid_neutral_none.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_probe_droid_neutral_none = Lair:new {
++	mobiles = {{"hoth_probe_droid", 1}},
++	spawnLimit = 6,
++	buildingsVeryEasy = {},
++	buildingsEasy = {},
++	buildingsMedium = {},
++	buildingsHard = {},
++	buildingsVeryHard = {},
++	customName = "Imperial Probe Droid",
++	missionBuilding = "object/tangible/lair/base/objective_power_node.iff",
++	buildingType = "none"
++}
++
++addLairTemplate("hoth_probe_droid_neutral_none", hoth_probe_droid_neutral_none)
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_tauntaun_herd_neutral_none.lua b/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_tauntaun_herd_neutral_none.lua
+new file mode 100644
+index 00000000..ea1e8526
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_tauntaun_herd_neutral_none.lua
+@@ -0,0 +1,18 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_tauntaun_herd_neutral_none.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_tauntaun_herd_neutral_none = Lair:new {
++	mobiles = {{"hoth_tauntaun", 4}, {"hoth_tauntaun_bull", 1}},
++	spawnLimit = 15,
++	buildingsVeryEasy = {},
++	buildingsEasy = {},
++	buildingsMedium = {},
++	buildingsHard = {},
++	buildingsVeryHard = {},
++	customName = "Tauntaun Herd",
++	missionBuilding = "object/tangible/lair/base/poi_all_lair_mound_large.iff",
++	buildingType = "none"
++}
++
++addLairTemplate("hoth_tauntaun_herd_neutral_none", hoth_tauntaun_herd_neutral_none)
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_wampa_neutral_none.lua b/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_wampa_neutral_none.lua
+new file mode 100644
+index 00000000..b37a2d76
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_wampa_neutral_none.lua
+@@ -0,0 +1,18 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_wampa_neutral_none.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_wampa_neutral_none = Lair:new {
++	mobiles = {{"hoth_wampa", 1}},
++	spawnLimit = 6,
++	buildingsVeryEasy = {},
++	buildingsEasy = {},
++	buildingsMedium = {},
++	buildingsHard = {},
++	buildingsVeryHard = {},
++	customName = "Wampa",
++	missionBuilding = "object/tangible/lair/base/poi_all_lair_bones_large.iff",
++	buildingType = "none"
++}
++
++addLairTemplate("hoth_wampa_neutral_none", hoth_wampa_neutral_none)
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/serverobjects.lua b/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/serverobjects.lua
+index 1ea6748a..2563d10b 100644
+--- a/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/serverobjects.lua
+@@ -432,3 +432,9 @@ includeFile("lair/creature_dynamic/yavin4/yavin4_tanc_mite_pack_neutral_none.lua
+ includeFile("lair/creature_dynamic/yavin4/yavin4_tybis_herd_neutral_none.lua")
+ includeFile("lair/creature_dynamic/yavin4/yavin4_tybis_pack_neutral_none.lua")
+ includeFile("lair/creature_dynamic/yavin4/yavin4_whisper_bird_pack_neutral_none.lua")
++
++-- Sandbox: Hoth (Bellum Gero, AGPL-3.0)
++includeFile("lair/creature_dynamic/hoth/hoth_ice_mynock_pack_neutral_none.lua")
++includeFile("lair/creature_dynamic/hoth/hoth_probe_droid_neutral_none.lua")
++includeFile("lair/creature_dynamic/hoth/hoth_tauntaun_herd_neutral_none.lua")
++includeFile("lair/creature_dynamic/hoth/hoth_wampa_neutral_none.lua")
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_ice_mynock_lair_neutral_medium.lua b/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_ice_mynock_lair_neutral_medium.lua
+new file mode 100644
+index 00000000..84232756
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_ice_mynock_lair_neutral_medium.lua
+@@ -0,0 +1,16 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_ice_mynock_lair_neutral_medium.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_ice_mynock_lair_neutral_medium = Lair:new {
++	mobiles = {{"hoth_ice_mynock", 2}, {"hoth_greater_ice_mynock", 1}},
++	spawnLimit = 15,
++	buildingsVeryEasy = {"object/tangible/lair/base/poi_all_lair_mound_large.iff"},
++	buildingsEasy = {"object/tangible/lair/base/poi_all_lair_mound_large.iff"},
++	buildingsMedium = {"object/tangible/lair/base/poi_all_lair_mound_large.iff"},
++	buildingsHard = {"object/tangible/lair/base/poi_all_lair_mound_large.iff"},
++	buildingsVeryHard = {"object/tangible/lair/base/poi_all_lair_mound_large.iff"},
++	customName = "Ice Mynock Roost"
++}
++
++addLairTemplate("hoth_ice_mynock_lair_neutral_medium", hoth_ice_mynock_lair_neutral_medium)
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_tauntaun_lair_neutral_medium.lua b/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_tauntaun_lair_neutral_medium.lua
+new file mode 100644
+index 00000000..a75d126c
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_tauntaun_lair_neutral_medium.lua
+@@ -0,0 +1,16 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_tauntaun_lair_neutral_medium.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_tauntaun_lair_neutral_medium = Lair:new {
++	mobiles = {{"hoth_tauntaun", 2}, {"hoth_tauntaun_bull", 1}},
++	spawnLimit = 15,
++	buildingsVeryEasy = {"object/tangible/lair/base/poi_all_lair_mound_large.iff"},
++	buildingsEasy = {"object/tangible/lair/base/poi_all_lair_mound_large.iff"},
++	buildingsMedium = {"object/tangible/lair/base/poi_all_lair_mound_large.iff"},
++	buildingsHard = {"object/tangible/lair/base/poi_all_lair_mound_large.iff"},
++	buildingsVeryHard = {"object/tangible/lair/base/poi_all_lair_mound_large.iff"},
++	customName = "Tauntaun Lair"
++}
++
++addLairTemplate("hoth_tauntaun_lair_neutral_medium", hoth_tauntaun_lair_neutral_medium)
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_wampa_lair_neutral_large.lua b/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_wampa_lair_neutral_large.lua
+new file mode 100644
+index 00000000..ac4408c5
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_wampa_lair_neutral_large.lua
+@@ -0,0 +1,16 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/lair/creature_lair/hoth/hoth_wampa_lair_neutral_large.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_wampa_lair_neutral_large = Lair:new {
++	mobiles = {{"hoth_wampa", 2}, {"hoth_elder_wampa", 1}},
++	spawnLimit = 15,
++	buildingsVeryEasy = {"object/tangible/lair/base/poi_all_lair_bones_large.iff"},
++	buildingsEasy = {"object/tangible/lair/base/poi_all_lair_bones_large.iff"},
++	buildingsMedium = {"object/tangible/lair/base/poi_all_lair_bones_large.iff"},
++	buildingsHard = {"object/tangible/lair/base/poi_all_lair_bones_large.iff"},
++	buildingsVeryHard = {"object/tangible/lair/base/poi_all_lair_bones_large.iff"},
++	customName = "Wampa Den"
++}
++
++addLairTemplate("hoth_wampa_lair_neutral_large", hoth_wampa_lair_neutral_large)
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/serverobjects.lua b/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/serverobjects.lua
+index e70846d7..1b27f98d 100644
+--- a/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/serverobjects.lua
+@@ -595,3 +595,7 @@ includeFile("lair/creature_lair/yavin4/yavin4_whisper_bird_lair2_neutral_medium.
+ includeFile("lair/creature_lair/yavin4/yavin4_whisper_bird_lair_neutral_medium.lua")
+ includeFile("lair/creature_lair/yavin4/yavin4_whisper_bird_male_neutral_medium_boss_01.lua")
+ 
++-- Sandbox: Hoth (Bellum Gero, AGPL-3.0)
++includeFile("lair/creature_lair/hoth/hoth_ice_mynock_lair_neutral_medium.lua")
++includeFile("lair/creature_lair/hoth/hoth_tauntaun_lair_neutral_medium.lua")
++includeFile("lair/creature_lair/hoth/hoth_wampa_lair_neutral_large.lua")
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_imperial_salvage_team_imperial_none.lua b/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_imperial_salvage_team_imperial_none.lua
+new file mode 100644
+index 00000000..8bc0f84c
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_imperial_salvage_team_imperial_none.lua
+@@ -0,0 +1,20 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_imperial_salvage_team_imperial_none.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_imperial_salvage_team_imperial_none = Lair:new {
++	mobiles = {{"hoth_imperial_salvage_tech", 3}, {"hoth_snowtrooper", 1}},
++	spawnLimit = 9,
++	buildingsVeryEasy = {},
++	buildingsEasy = {},
++	buildingsMedium = {},
++	buildingsHard = {},
++	buildingsVeryHard = {},
++	customName = "Imperial Salvage Team",
++	faction = "imperial",
++	mobType = "npc",
++	missionBuilding = "object/tangible/lair/base/objective_power_generator.iff",
++	buildingType = "none"
++}
++
++addLairTemplate("hoth_imperial_salvage_team_imperial_none", hoth_imperial_salvage_team_imperial_none)
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_rebel_snow_patrol_rebel_none.lua b/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_rebel_snow_patrol_rebel_none.lua
+new file mode 100644
+index 00000000..ff8d4f03
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_rebel_snow_patrol_rebel_none.lua
+@@ -0,0 +1,20 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_rebel_snow_patrol_rebel_none.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_rebel_snow_patrol_rebel_none = Lair:new {
++	mobiles = {{"hoth_rebel_snow_soldier", 3}, {"hoth_rebel_snow_sergeant", 1}},
++	spawnLimit = 9,
++	buildingsVeryEasy = {},
++	buildingsEasy = {},
++	buildingsMedium = {},
++	buildingsHard = {},
++	buildingsVeryHard = {},
++	customName = "Rebel Snow Patrol",
++	faction = "rebel",
++	mobType = "npc",
++	missionBuilding = "object/tangible/lair/base/objective_banner_rebel.iff",
++	buildingType = "none"
++}
++
++addLairTemplate("hoth_rebel_snow_patrol_rebel_none", hoth_rebel_snow_patrol_rebel_none)
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_scavenger_raider_camp_neutral_none.lua b/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_scavenger_raider_camp_neutral_none.lua
+new file mode 100644
+index 00000000..55d6b83d
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_scavenger_raider_camp_neutral_none.lua
+@@ -0,0 +1,19 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_scavenger_raider_camp_neutral_none.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_scavenger_raider_camp_neutral_none = Lair:new {
++	mobiles = {{"hoth_scavenger_raider", 4}},
++	spawnLimit = 9,
++	buildingsVeryEasy = {},
++	buildingsEasy = {},
++	buildingsMedium = {},
++	buildingsHard = {},
++	buildingsVeryHard = {},
++	customName = "Scavenger Raider Camp",
++	mobType = "npc",
++	missionBuilding = "object/tangible/lair/base/objective_banner_generic_2.iff",
++	buildingType = "none"
++}
++
++addLairTemplate("hoth_scavenger_raider_camp_neutral_none", hoth_scavenger_raider_camp_neutral_none)
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_snowtrooper_patrol_imperial_none.lua b/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_snowtrooper_patrol_imperial_none.lua
+new file mode 100644
+index 00000000..3143f16e
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_snowtrooper_patrol_imperial_none.lua
+@@ -0,0 +1,20 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/hoth/hoth_snowtrooper_patrol_imperial_none.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_snowtrooper_patrol_imperial_none = Lair:new {
++	mobiles = {{"hoth_snowtrooper", 3}, {"hoth_snowtrooper_sergeant", 1}},
++	spawnLimit = 9,
++	buildingsVeryEasy = {},
++	buildingsEasy = {},
++	buildingsMedium = {},
++	buildingsHard = {},
++	buildingsVeryHard = {},
++	customName = "Snowtrooper Patrol",
++	faction = "imperial",
++	mobType = "npc",
++	missionBuilding = "object/tangible/lair/base/objective_banner_imperial.iff",
++	buildingType = "none"
++}
++
++addLairTemplate("hoth_snowtrooper_patrol_imperial_none", hoth_snowtrooper_patrol_imperial_none)
+diff --git a/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/serverobjects.lua b/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/serverobjects.lua
+index ab98ed76..bad1dc39 100644
+--- a/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/mobile/lair/npc_dynamic/serverobjects.lua
+@@ -188,3 +188,9 @@ includeFile("lair/npc_dynamic/tatooine/tatooine_jawa_warband_neutral_none.lua")
+ includeFile("lair/npc_dynamic/tatooine/tatooine_tusken_raider_patrol_neutral_none.lua")
+ includeFile("lair/npc_dynamic/tatooine/tatooine_tusken_raider_warband_neutral_none.lua")
+ includeFile("lair/npc_dynamic/tatooine/tatooine_wandering_kitonak_neutral_none.lua")
++
++-- Sandbox: Hoth (Bellum Gero, AGPL-3.0)
++includeFile("lair/npc_dynamic/hoth/hoth_imperial_salvage_team_imperial_none.lua")
++includeFile("lair/npc_dynamic/hoth/hoth_rebel_snow_patrol_rebel_none.lua")
++includeFile("lair/npc_dynamic/hoth/hoth_scavenger_raider_camp_neutral_none.lua")
++includeFile("lair/npc_dynamic/hoth/hoth_snowtrooper_patrol_imperial_none.lua")
+diff --git a/MMOCoreORB/bin/scripts/mobile/serverobjects.lua b/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
+index 8840defe..801bc359 100644
+--- a/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
+@@ -11,6 +11,7 @@ includeFile("dathomir/serverobjects.lua")
+ includeFile("endor/serverobjects.lua")
+ includeFile("event/serverobjects.lua")
+ includeFile("herald/serverobjects.lua")
++includeFile("hoth/serverobjects.lua") -- Sandbox: Hoth creatures (Bellum Gero, AGPL-3.0)
+ includeFile("lok/serverobjects.lua")
+ includeFile("misc/serverobjects.lua")
+ includeFile("naboo/serverobjects.lua")
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/hoth/hoth_world.lua b/MMOCoreORB/bin/scripts/mobile/spawn/hoth/hoth_world.lua
+new file mode 100644
+index 00000000..6dd69148
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/hoth/hoth_world.lua
+@@ -0,0 +1,109 @@
++-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
++-- MMOCoreORB/bin/scripts/mobile/spawn/hoth/hoth_world.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
++-- Unchanged.
++
++hoth_world = {
++	lairSpawns = {
++		{
++			lairTemplateName = "hoth_tauntaun_herd_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 65,
++			maxDifficulty = 500,
++			numberToSpawn = 15,
++			weighting = 60,
++			size = 25,
++		},
++		{
++			lairTemplateName = "hoth_tauntaun_lair_neutral_medium",
++			spawnLimit = -1,
++			minDifficulty = 65,
++			maxDifficulty = 500,
++			numberToSpawn = 15,
++			weighting = 40,
++			size = 25,
++		},
++		{
++			lairTemplateName = "hoth_ice_mynock_pack_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 67,
++			maxDifficulty = 500,
++			numberToSpawn = 15,
++			weighting = 45,
++			size = 25,
++		},
++		{
++			lairTemplateName = "hoth_ice_mynock_lair_neutral_medium",
++			spawnLimit = -1,
++			minDifficulty = 67,
++			maxDifficulty = 500,
++			numberToSpawn = 15,
++			weighting = 35,
++			size = 25,
++		},
++		{
++			lairTemplateName = "hoth_probe_droid_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 74,
++			maxDifficulty = 500,
++			numberToSpawn = 15,
++			weighting = 25,
++			size = 25,
++		},
++		{
++			lairTemplateName = "hoth_wampa_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 90,
++			maxDifficulty = 500,
++			numberToSpawn = 15,
++			weighting = 30,
++			size = 25,
++		},
++		{
++			lairTemplateName = "hoth_wampa_lair_neutral_large",
++			spawnLimit = -1,
++			minDifficulty = 90,
++			maxDifficulty = 500,
++			numberToSpawn = 15,
++			weighting = 25,
++			size = 25,
++		},
++		{
++			lairTemplateName = "hoth_snowtrooper_patrol_imperial_none",
++			spawnLimit = -1,
++			minDifficulty = 76,
++			maxDifficulty = 500,
++			numberToSpawn = 15,
++			weighting = 12,
++			size = 25,
++		},
++		{
++			lairTemplateName = "hoth_rebel_snow_patrol_rebel_none",
++			spawnLimit = -1,
++			minDifficulty = 76,
++			maxDifficulty = 500,
++			numberToSpawn = 15,
++			weighting = 12,
++			size = 25,
++		},
++		{
++			lairTemplateName = "hoth_scavenger_raider_camp_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 74,
++			maxDifficulty = 500,
++			numberToSpawn = 15,
++			weighting = 10,
++			size = 25,
++		},
++		{
++			lairTemplateName = "hoth_imperial_salvage_team_imperial_none",
++			spawnLimit = -1,
++			minDifficulty = 72,
++			maxDifficulty = 500,
++			numberToSpawn = 15,
++			weighting = 8,
++			size = 25,
++		}
++	}
++}
++
++addSpawnGroup("hoth_world", hoth_world);
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua b/MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua
+index 45056d9b..0720b22a 100644
+--- a/MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua
+@@ -503,3 +503,6 @@ includeFile("spawn/destroy_mission/yavin4_destroy_missions.lua")
+ includeFile("spawn/destroy_mission/factional_imperial_destroy_missions.lua")
+ includeFile("spawn/destroy_mission/factional_neutral_destroy_missions.lua")
+ includeFile("spawn/destroy_mission/factional_rebel_destroy_missions.lua")
++
++-- Sandbox: Hoth world spawns (Bellum Gero, AGPL-3.0)
++includeFile("spawn/hoth/hoth_world.lua")
+-- 
+2.47.3
+

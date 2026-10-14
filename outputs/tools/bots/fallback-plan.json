@@ -1,0 +1,7 @@
+{
+  "Aurek": ["esk-fallback-census.py", "esk-fallback-grid.py", "aurek-doctor-buffs.py"],
+  "Besh": ["esk-fallback-census.py", "besh-gather.py", "besh-harvest.py", "besh-fallback-crafting.py"],
+  "Cresh": ["esk-fallback-census.py", "cresh-fallback-travel.py", "esk-fallback-reach.py", "cresh-missions.py"],
+  "Dorn": ["esk-fallback-census.py", "esk-fallback-grid.py", "esk-fallback-reach.py", "dorn-social.py"],
+  "Esk": ["esk-fallback-census.py", "esk-fallback-grid.py", "esk-fallback-reach.py", "esk-routes.py"]
+}

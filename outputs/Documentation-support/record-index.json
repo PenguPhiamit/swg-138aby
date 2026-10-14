@@ -1,0 +1,7 @@
+{
+  "source_patch": "tracked-source-changes.patch",
+  "startup_log": "sandbox-startup.log",
+  "reproducible_source_package": "../Community-content/Local-sandbox-changes.zip",
+  "private_configuration_included": false,
+  "note": "The standalone profile contains only the new public sandbox and content settings; database credentials are omitted."
+}

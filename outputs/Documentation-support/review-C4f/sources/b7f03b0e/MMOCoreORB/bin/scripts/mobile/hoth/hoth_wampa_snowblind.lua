@@ -1,0 +1,57 @@
+-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
+-- MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_snowblind.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
+-- Unchanged.
+-- Hoth loot slice (14 Oct 2026): drops hoth_decor_rare (5%), hoth_vehicle_deeds (2%).
+
+hoth_wampa_snowblind = Creature:new {
+	objectName = "",
+	customName = "Snowblind the Ravager",
+	socialGroup = "wampa",
+	faction = "",
+	mobType = MOB_CARNIVORE,
+	level = 107,
+	chanceHit = 1.02,
+	damageMin = 725,
+	damageMax = 1100,
+	baseXp = 10270,
+	baseHAM = 48000,
+	baseHAMmax = 53000,
+	armor = 2,
+	resists = {160,180,45,220,45,220,45,45,-1},
+	meatType = "meat_carnivore",
+	meatAmount = 1400,
+	hideType = "hide_wooly",
+	hideAmount = 1400,
+	boneType = "bone_mammal",
+	boneAmount = 1200,
+	milk = 0,
+	tamingChance = 0,
+	ferocity = 0,
+	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
+	creatureBitmask = KILLER,
+	optionsBitmask = AIENABLED,
+	diet = CARNIVORE,
+	templates = {"object/mobile/wampa.iff"},
+	scale = 1.35,
+	lootGroups = {
+		{
+			groups = {
+				{group = "hoth_decor_rare", chance = 10000000}
+			},
+			lootChance = 500000
+		},
+		{
+			groups = {
+				{group = "hoth_vehicle_deeds", chance = 10000000}
+			},
+			lootChance = 200000
+		}
+	},
+	primaryWeapon = "unarmed",
+	secondaryWeapon = "none",
+	conversationTemplate = "",
+	primaryAttacks = { {"blindattack",""}, {"creatureareaknockdown",""}, {"stunattack",""} },
+	secondaryAttacks = { }
+}
+
+CreatureTemplates:addCreatureTemplate(hoth_wampa_snowblind, "hoth_wampa_snowblind")

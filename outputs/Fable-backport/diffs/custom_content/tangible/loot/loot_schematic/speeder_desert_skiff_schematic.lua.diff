@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/loot_schematic/speeder_desert_skiff_schematic.lua
++++ b/custom_content/tangible/loot/loot_schematic/speeder_desert_skiff_schematic.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_speeder_desert_skiff_schematic, "object/tangible/loot/loot/schematic/speeder_desert_skiff_schematic.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_speeder_desert_skiff_schematic, "object/tangible/loot/loot_schematic/speeder_desert_skiff_schematic.iff")

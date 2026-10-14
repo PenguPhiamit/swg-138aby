@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/damind_shard_04.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/damind_shard_04.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_damind_shard_04, "object/tangible/loot/creature/loot/collections/damind_shard_04.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_damind_shard_04, "object/tangible/loot/creature_loot/collections/damind_shard_04.iff")

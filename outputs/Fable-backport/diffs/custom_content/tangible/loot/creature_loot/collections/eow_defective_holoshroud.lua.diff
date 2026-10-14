@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/eow_defective_holoshroud.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/eow_defective_holoshroud.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_eow_defective_holoshroud, "object/tangible/loot/creature/loot/collections/eow_defective_holoshroud.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_eow_defective_holoshroud, "object/tangible/loot/creature_loot/collections/eow_defective_holoshroud.iff")

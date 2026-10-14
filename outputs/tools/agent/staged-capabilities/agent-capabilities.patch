@@ -1,0 +1,239 @@
+--- a/MMOCoreORB/src/client/agent/AgentControl.h
++++ b/MMOCoreORB/src/client/agent/AgentControl.h
+@@ -48,6 +48,7 @@
+ 	void onStringIdSystemMessage(Message* pack);
+ 	void onInstantMessage(const String& from, const String& text);
+ 	void onObjController(uint32 type, uint64 oid, Message* pack);
++	bool onStandalonePacket(uint32 opcode, Message* pack);
+ 
+ 	// Blocking command loop; returns when stdin closes or "quit" is received.
+ 	void run(Zone* zone);
+@@ -76,6 +77,12 @@
+ 	uint32 moveCount = 0;
+ 	uint32 actionCount = 0;
+ 	uint32 clientTime = 0;
++	bool conversationActive = false;
++	uint64 conversationNpc = 0;
++	uint8 radialCounter = 0;
++	std::map<uint64, JSONSerializationType> radialMenus;
++	std::map<uint32, JSONSerializationType> suiPages;
++	JSONSerializationType inventorySnapshot();
+ 	std::vector<std::string> conversationOptions;
+ 	std::map<uint32, std::string> commandNames;
+ };
+--- a/MMOCoreORB/src/client/agent/AgentControl.cpp
++++ b/MMOCoreORB/src/client/agent/AgentControl.cpp
+@@ -64,6 +64,8 @@
+ 	{
+ 		std::lock_guard<std::recursive_mutex> lock(worldMutex);
+ 		self = oid;
++		radialMenus.clear(); suiPages.clear(); conversationOptions.clear();
++		conversationActive = false; conversationNpc = 0;
+ 		planet = str(terrain);
+ 		size_t slash = planet.rfind('/');
+ 		if (slash != std::string::npos)
+@@ -113,6 +115,7 @@
+ 			return;
+ 		bool creature = it->second.type == "CREO";
+ 		name = it->second.name;
++		radialMenus.erase(oid);
+ 		world.erase(it);
+ 		if (!creature)
+ 			return;
+@@ -188,6 +191,24 @@
+ 		return;
+ 
+ 	switch (type) {
++	case 0x147: { // ObjectMenuResponse (header's trailing int already consumed)
++		uint64 target = pack->parseLong();
++		pack->parseLong();
++		uint32 count = pack->parseInt();
++		if (count > 256) throw std::runtime_error("oversized radial menu");
++		JSONSerializationType items = JSONSerializationType::array();
++		for (uint32 i = 0; i < count; ++i) {
++			uint8 index = pack->parseByte(), parent = pack->parseByte();
++			uint8 radial = pack->parseByte(), callback = pack->parseByte();
++			UnicodeString label; pack->parseUnicode(label);
++			items.push_back({{"index", index}, {"parent", parent}, {"radial_id", radial},
++				{"callback", callback}, {"label", str(label.toString())}});
++		}
++		uint8 counter = pack->parseByte();
++		{ std::lock_guard<std::recursive_mutex> lock(worldMutex); radialMenus[target] = items; }
++		emit({{"event", "radial_menu"}, {"target", target}, {"counter", counter}, {"items", items}});
++		break;
++	}
+ 	case 0xF4: { // SpatialChat
+ 		uint64 sender = pack->parseLong();
+ 		pack->parseLong();
+@@ -237,16 +258,30 @@
+ 		break;
+ 	}
+ 	case 0xDD: // NPC conversation started
+-		emit({{"event", "conversation_start"}, {"npc_oid", pack->parseLong()}});
++		conversationNpc = pack->parseLong();
++		conversationActive = true;
++		emit({{"event", "conversation_start"}, {"npc_oid", conversationNpc}});
+ 		break;
+ 	case 0xDE: // NPC conversation ended
+ 		conversationOptions.clear();
++		conversationActive = false;
++		conversationNpc = 0;
+ 		emit({{"event", "conversation_end"}});
+ 		break;
+-	case 0xDF: { // NpcConversationMessage
++	case 0xDF: { // NpcConversationMessage: Unicode or embedded StringId parameters
++		int offset = pack->getOffset();
+ 		UnicodeString message;
+ 		pack->parseUnicode(message);
+-		emit({{"event", "npc_says"}, {"text", str(message.toString())}});
++		std::string text = str(message.toString());
++		if (text.empty() && offset + 12 <= pack->size()) {
++			pack->setOffset(offset);
++			pack->parseInt(); // encoded UTF-16-length wrapper
++			pack->parseShort();
++			String file, key;
++			pack->parseAscii(file); pack->parseInt(); pack->parseAscii(key);
++			if (!file.isEmpty() && !key.isEmpty()) text = "@" + str(file) + ":" + str(key);
++		}
++		emit({{"event", "npc_says"}, {"text", text}});
+ 		break;
+ 	}
+ 	case 0xE0: { // StringList: conversation options
+@@ -263,6 +298,54 @@
+ 	default:
+ 		break;
+ 	}
++}
++
++
++bool AgentControl::onStandalonePacket(uint32 opcode, Message* pack) {
++    if (opcode != 0xD44B7259) return false; // SuiCreatePageMessage
++    try {
++        uint32 page = pack->parseInt(); String script; pack->parseAscii(script);
++        uint32 count = pack->parseInt();
++        if (count > 4096) throw std::runtime_error("oversized SUI command list");
++        JSONSerializationType commands = JSONSerializationType::array();
++        for (uint32 i = 0; i < count; ++i) {
++            uint8 kind = pack->parseByte();
++            uint32 wideCount = pack->parseInt();
++            if (wideCount > 256) throw std::runtime_error("oversized SUI wide list");
++            JSONSerializationType wide = JSONSerializationType::array(), narrow = JSONSerializationType::array();
++            for (uint32 n = 0; n < wideCount; ++n) { UnicodeString v; pack->parseUnicode(v); wide.push_back(str(v.toString())); }
++            uint32 narrowCount = pack->parseInt();
++            if (narrowCount > 256) throw std::runtime_error("oversized SUI narrow list");
++            for (uint32 n = 0; n < narrowCount; ++n) { String v; pack->parseAscii(v); narrow.push_back(str(v)); }
++            commands.push_back({{"kind", kind}, {"wide", wide}, {"narrow", narrow}});
++        }
++        uint64 target = pack->parseLong(); float distance = pack->parseFloat(); pack->parseLong();
++        JSONSerializationType data = {{"page_id", page}, {"script", str(script)},
++            {"target", target}, {"close_distance", distance}, {"commands", commands}};
++        { std::lock_guard<std::recursive_mutex> lock(worldMutex); suiPages[page] = data; }
++        emit({{"event", "sui_page"}, {"page", data}});
++    } catch (...) { emit({{"event", "packet_parse_error"}, {"packet", "SuiCreatePageMessage"}}); }
++    return true;
++}
++
++JSONSerializationType AgentControl::inventorySnapshot() {
++    std::lock_guard<std::recursive_mutex> lock(worldMutex);
++    JSONSerializationType items = JSONSerializationType::array();
++    for (const auto& entry : world) {
++        const WorldObject& object = entry.second;
++        if (object.oid == self || object.type == "PLAY") continue;
++        uint64 parent = object.parent;
++        bool owned = false;
++        for (int depth = 0; parent && depth < 32; ++depth) {
++            if (parent == self) { owned = true; break; }
++            auto it = world.find(parent);
++            if (it == world.end() || it->second.parent == parent) break;
++            parent = it->second.parent;
++        }
++        if (owned) items.push_back({{"oid", object.oid}, {"parent", object.parent},
++            {"type", object.type}, {"name", object.name}, {"crc", object.crc}});
++    }
++    return {{"ok", true}, {"self", self}, {"items", items}};
+ }
+ 
+ JSONSerializationType AgentControl::status() {
+@@ -369,6 +452,60 @@
+ 
+ JSONSerializationType AgentControl::handle(const JSONSerializationType& request) {
+ 	std::string cmd = request.value("cmd", "");
++
++    if (cmd == "inventory") return inventorySnapshot();
++    if (cmd == "sui_pages") {
++        std::lock_guard<std::recursive_mutex> lock(worldMutex);
++        JSONSerializationType pages = JSONSerializationType::array();
++        for (const auto& entry : suiPages) pages.push_back(entry.second);
++        return {{"ok", true}, {"pages", pages}};
++    }
++    if (cmd == "radial_menu") {
++        uint64 target = request.value("target", (uint64)0);
++        if (!target) return {{"ok", false}, {"error", "target required"}};
++        ObjectControllerMessage* msg = new ObjectControllerMessage(self, 0x23, 0x146);
++        msg->insertLong(target); msg->insertLong(self); msg->insertInt(1);
++        msg->insertByte(1); msg->insertByte(0); msg->insertByte(20); msg->insertByte(3);
++        msg->insertUnicode(UnicodeString("")); msg->insertByte(++radialCounter);
++        zone->getZoneClient()->sendMessage(msg);
++        return {{"ok", true}, {"requested", target}};
++    }
++    if (cmd == "select_radial") {
++        uint64 target = request.value("target", (uint64)0);
++        int radial = request.value("radial_id", -1); bool offered = false;
++        { std::lock_guard<std::recursive_mutex> lock(worldMutex);
++          auto it = radialMenus.find(target);
++          if (it != radialMenus.end()) for (const auto& item : it->second)
++              if (item.value("radial_id", -1) == radial) offered = true; }
++        if (!offered) return {{"ok", false}, {"error", "request menu first and select a returned radial_id"}};
++        BaseMessage* msg = new BaseMessage(); msg->insertShort(3); msg->insertInt(0x7CA18726);
++        msg->insertLong(target); msg->insertByte((uint8)radial);
++        zone->getZoneClient()->sendMessage(msg);
++        return {{"ok", true}, {"selected", radial}, {"target", target}};
++    }
++    if (cmd == "mission_list") {
++        uint64 target = request.value("target", (uint64)0);
++        if (!target) return {{"ok", false}, {"error", "mission terminal target required"}};
++        ObjectControllerMessage* msg = new ObjectControllerMessage(self, 0x23, 0xF5);
++        msg->insertByte(0); msg->insertByte(++radialCounter); msg->insertLong(target);
++        zone->getZoneClient()->sendMessage(msg);
++        return {{"ok", true}, {"requested", target}, {"note", "mission deltas still need structured decoding"}};
++    }
++    if (cmd == "sui_respond") {
++        uint32 page = request.value("page_id", (uint32)0);
++        uint32 event = request.value("event", (uint32)0);
++        JSONSerializationType args = request.value("args", JSONSerializationType::array());
++        { std::lock_guard<std::recursive_mutex> lock(worldMutex);
++          if (!suiPages.count(page)) return {{"ok", false}, {"error", "unknown SUI page"}}; }
++        if (!args.is_array() || args.size() > 64) return {{"ok", false}, {"error", "invalid SUI arguments"}};
++        for (const auto& arg : args) if (!arg.is_string()) return {{"ok", false}, {"error", "SUI arguments must be strings"}};
++        BaseMessage* msg = new BaseMessage(); msg->insertShort(5); msg->insertInt(0x092D3564);
++        msg->insertInt(page); msg->insertInt(event); msg->insertInt(args.size()); msg->insertInt(0);
++        for (const auto& arg : args) msg->insertUnicode(UnicodeString(arg.get<std::string>().c_str()));
++        zone->getZoneClient()->sendMessage(msg);
++        { std::lock_guard<std::recursive_mutex> lock(worldMutex); suiPages.erase(page); }
++        return {{"ok", true}, {"responded", page}};
++    }
+ 	if (cmd == "ping")
+ 		return {{"ok", true}};
+ 	if (cmd == "status")
+@@ -397,6 +534,8 @@
+ 	}
+ 	if (cmd == "choose") {
+ 		int index = request.value("index", 0);
++		if (!conversationActive || index < 0 || index >= (int)conversationOptions.size())
++			return {{"ok", false}, {"error", "no active conversation option at that index"}};
+ 		sendCommand("npcconversationselect", 0, UnicodeString(String::valueOf(index)));
+ 		return {{"ok", true}};
+ 	}
+--- a/MMOCoreORB/src/client/zone/ZonePacketHandler.cpp
++++ b/MMOCoreORB/src/client/zone/ZonePacketHandler.cpp
+@@ -25,6 +25,10 @@
+ 
+ 	sys::uint16 opcount = pack->parseShort();
+ 	sys::uint32 opcode = pack->parseInt();
++	if (AgentControl::get() != nullptr && AgentControl::get()->onStandalonePacket(opcode, pack)) {
++		zone->signal(opcode);
++		return;
++	}
+ 
+ 	String what;
+ 

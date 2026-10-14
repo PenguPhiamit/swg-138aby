@@ -1,0 +1,16 @@
+{
+  "active_entries": 102,
+  "legacy_eif_additions": 37,
+  "later_eif_options_unverified": 3,
+  "inspected_source_files": 1100,
+  "original_source_files_in_bundle": 81,
+  "all_legacy_species_registered_and_matching_client_templates": true,
+  "sr_excluded_from_active_plan": true,
+  "source_notices_and_zip_integrity_checked": true,
+  "local_report_links_verified": true,
+  "client_archive_hash_verified": true,
+  "server_changes": false,
+  "gameplay_tested": false,
+  "external_messages_sent": false,
+  "payments_arranged": false
+}

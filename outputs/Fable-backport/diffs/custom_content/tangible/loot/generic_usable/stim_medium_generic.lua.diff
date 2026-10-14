@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/generic_usable/stim_medium_generic.lua
++++ b/custom_content/tangible/loot/generic_usable/stim_medium_generic.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_stim_medium_generic, "object/tangible/loot/generic/usable/stim_medium_generic.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_stim_medium_generic, "object/tangible/loot/generic_usable/stim_medium_generic.iff")

@@ -1,0 +1,7 @@
+--- /dev/null
++++ b/custom_content/tangible/wearables/ring/serverobjects.lua
+@@ -0,0 +1,4 @@
++-- Fable backport batch 1 (14 Oct 2026): server objects for NGE ring.
++
++includeFile("custom_content/tangible/wearables/ring/ring_gcw_imperial.lua")
++includeFile("custom_content/tangible/wearables/ring/ring_gcw_rebel.lua")

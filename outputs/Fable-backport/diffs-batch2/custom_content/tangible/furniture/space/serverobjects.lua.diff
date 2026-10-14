@@ -1,0 +1,6 @@
+--- /dev/null
++++ b/custom_content/tangible/furniture/space/serverobjects.lua
+@@ -0,0 +1,3 @@
++-- Fable backport batch 2 (14 Oct 2026): server objects for custom_content/tangible/furniture/space.
++
++includeFile("custom_content/tangible/furniture/space/frn_chair_y8_passenger_s01.lua")

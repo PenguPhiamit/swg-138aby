@@ -1,0 +1,257 @@
+{
+  "commit": "697f2002e01c65130bed9f9c7aea69855953ee6a",
+  "source": "/opt/swg/Core3-dev",
+  "files": [
+    {
+      "path": "COPYING",
+      "bytes": 34519,
+      "sha256": "91b65277959ec273763d28ef002e83a6b3fba57c7a35436c9e5b66536333d720"
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations/sandbox/sandbox_big_game_hunter_conv.lua",
+      "bytes": 1569,
+      "sha256": "eff8f22a06d764cec83560576dc88488b3ab0a08c0b2aaf057719a379bf23821"
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/sandbox_world_bosses.lua",
+      "bytes": 1111,
+      "sha256": "1d3ed7a137b2eebc5b89d00b05203e95bca717deba05494befe5d0b80f12e331"
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua",
+      "bytes": 10843,
+      "sha256": "0191914a6c7daf2a62b68014d5490cd0d91331a9fe27ca1d2fe5646f28ed9ed5"
+    },
+    {
+      "path": "MMOCoreORB/src/client/agent/AgentControl.cpp",
+      "bytes": 48438,
+      "sha256": "c6faf8235dbe8cd4dded18085382b5a14838c53dcef90a787c3096d9f70cceeb"
+    },
+    {
+      "path": "MMOCoreORB/src/client/agent/AgentControl.h",
+      "bytes": 3979,
+      "sha256": "061e97fc43d4e05735a39923c534fc32dda95c66c26f6fec28883ecb5e24d83d"
+    },
+    {
+      "path": "MMOCoreORB/src/client/zone/ZonePacketHandler.cpp",
+      "bytes": 13240,
+      "sha256": "fe7dd4f7e9b3d964da80aaec9fe5d7ab579f3e20a90bf05ed56f81fdba287a81"
+    },
+    {
+      "path": "MMOCoreORB/src/server/chat/ChatParameter.cpp",
+      "bytes": 516,
+      "sha256": "1cb1e29647851d338a94f719d613c7f8df73ffd7880b8772abc2569f6f10f3fd"
+    },
+    {
+      "path": "MMOCoreORB/src/server/chat/StringIdChatParameter.cpp",
+      "bytes": 2920,
+      "sha256": "aa65a36141fde021c4a96064a2bb4561f4799c50c242795f1d8b490459971ce4"
+    },
+    {
+      "path": "MMOCoreORB/src/server/chat/StringIdChatParameter.h",
+      "bytes": 5454,
+      "sha256": "a4d6c7306cf4f501c2639a05d05c7a17489ec6526503f7aecc32abacc95b1f64"
+    },
+    {
+      "path": "MMOCoreORB/src/server/login/account/AccountManager.cpp",
+      "bytes": 18389,
+      "sha256": "752b0eb34b2c63e645707c363c57e0dbf1b9c1c545a2be242bfba246d59badcd"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/ZonePacketHandler.cpp",
+      "bytes": 13421,
+      "sha256": "bf5d115f5b0602785900658ead05b8e46f85b1cab976ae526dd503e5632fa006"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/managers/collision/CollisionManager.cpp",
+      "bytes": 30469,
+      "sha256": "99949e35024cf52a4e35957892db55874364cf425cbc691034f67c68e556a615"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/managers/collision/PathFinderManager.cpp",
+      "bytes": 41067,
+      "sha256": "b6036118dd4a9dbb49b49a992fd520827d75ab8f771bbd32ce12e633869957e9"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/managers/collision/PathFinderManager.h",
+      "bytes": 3499,
+      "sha256": "ccbaebf296db2c575f282e4ee82c2a1fa72333ae4f5b5cef13123bca8fbbca86"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/managers/creature/CreatureManagerImplementation.cpp",
+      "bytes": 43147,
+      "sha256": "9ec8b6afff1543b24c211140315c8860fdd6136940b2f6f238522ea9103783b6"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/managers/player/PlayerManagerImplementation.cpp",
+      "bytes": 242173,
+      "sha256": "33cd4d944264f11bb440fbae8efc3f6e482ef06497920a9466075d81e2134505"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/managers/radial/RadialOptions.h",
+      "bytes": 5470,
+      "sha256": "d4b6aed2eb4d9872b06f457a5aaccf1c76106fd41e1e426749085c2b6e963415"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/objects/creature/CreatureObjectImplementation.cpp",
+      "bytes": 136743,
+      "sha256": "4386ee8f33f4a7b293a6d177a515ec189230460235d4d5272ddc878fff4a0160"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/objects/creature/LuaCreatureObject.cpp",
+      "bytes": 41475,
+      "sha256": "96c1f63baf020da6704ef436d475ab380ff477bbfb8e45bc93480e1aedcad8d3"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/objects/creature/ai/AiAgentImplementation.cpp",
+      "bytes": 149769,
+      "sha256": "e4f806ffbd05e903b21a4eec1bbf669b52babc1bc846125025c000a3e2714b8f"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h",
+      "bytes": 6063,
+      "sha256": "9787799d0bddedeef30e378f99b6b7dc6e6d075bae333c336c2bfab85bf383be"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/objects/player/sui/SuiCommand.h",
+      "bytes": 2118,
+      "sha256": "c7b8ecc3d8f19e54a0054eb9800f8627a70e1486693710abf6a3039de515681d"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/objects/player/sui/SuiPageData.cpp",
+      "bytes": 4764,
+      "sha256": "c84dedc42235b633df0ee9c2382473fe1a03aa6a318459282b4f17ea402b994c"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/objects/player/sui/SuiPageData.h",
+      "bytes": 2862,
+      "sha256": "0104976db70adacc1161af99948efb1a68a6dadb83d928258a0e0c9d81ff1528"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/objects/scene/WorldCoordinates.h",
+      "bytes": 2578,
+      "sha256": "65d5a7445ffc674f8fe87c0e2628c0b09d88b1cc01f390c48d831db10cbb2130"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/objects/scene/variables/DeltaVector.h",
+      "bytes": 5983,
+      "sha256": "e8c09ad2b00b538f89b02bca6d74fcf71b4bb4fa5d26557b4dd71cee8034bdb3"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/objects/tangible/TangibleObjectImplementation.cpp",
+      "bytes": 47928,
+      "sha256": "651c3469fbaedbdae4dcf1dc3a74fcaa8deb998b03d9dc6692d3f9213d2fd314"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/objects/tangible/threat/ThreatMap.cpp",
+      "bytes": 18021,
+      "sha256": "73732142dc9761a0f1e92cf893d5df58d555e17088920bc240ade93ee8eb0a6f"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/objects/tangible/threat/ThreatMap.h",
+      "bytes": 5597,
+      "sha256": "4a0fc6d425b42a1fa495082930be4d6c1b183bd781f15f64859483d3cb2cd87b"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/DeltaMessage.h",
+      "bytes": 3562,
+      "sha256": "61e111e6c08487281141632b814661702e63694f980c66bcaf434f9bb004cb1d"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/creature/CreatureObjectDeltaMessage3.h",
+      "bytes": 1535,
+      "sha256": "f6801c048eabc597b9c53d71db7341e43152e7467fbb31246c52a95ba9286795"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/creature/CreatureObjectDeltaMessage6.h",
+      "bytes": 1599,
+      "sha256": "367bb34f296e217ed9fc36eba61304326c6e6c7cdfde4df4322cce8ca54d79a0"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/creature/CreatureObjectMessage3.h",
+      "bytes": 860,
+      "sha256": "5f2fa1e6722ea266203fde27d7a8cc072e5b4e5a0d2df19f1eabe4aa9fc1ef4d"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/creature/CreatureObjectMessage6.h",
+      "bytes": 1491,
+      "sha256": "601cc07bdce50595c3862b9a1e5b925c19faf17158b8dcb96287d4f352abfb58"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/object/CombatSpam.h",
+      "bytes": 1676,
+      "sha256": "14b9086e9cef53dfa0065cfee007eba1de4d86e1e85315b19f17d9020bf4d68e"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/object/DataTransform.h",
+      "bytes": 13977,
+      "sha256": "086b1150516fc7e5166c96b6ab2a2b9826cd9bebe951e87585e6b3cf67a97e4b"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/object/DataTransformWithParent.h",
+      "bytes": 16066,
+      "sha256": "3fb4c209e93ad89fd561496407fa957139ee1c0c53d5a2ccb5f8b2525a36b444"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/object/MissionListRequestCallback.h",
+      "bytes": 1892,
+      "sha256": "38300579a0364dcd22ddc962920c55b25e6709f2573e4837ef74e0d97052ec09"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/object/NpcConversationMessage.h",
+      "bytes": 1230,
+      "sha256": "5148ca00d626b8a6e8560ea6e2edd75ca5ef89e9f8ee3f8174d2c4fd5bd1a5bc"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/object/ObjectMenuRequest.h",
+      "bytes": 3621,
+      "sha256": "e0aa022fac82ff0ce3c8919e600955ac5daffb399cc813b2ad8e71d765275698"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/object/ObjectMenuResponse.h",
+      "bytes": 3877,
+      "sha256": "1c2c7484f1d28b4f5f182c08736f94455b3f41d7a1d020e0e74a71bf4c7a0598"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/object/ObjectMenuSelect.h",
+      "bytes": 847,
+      "sha256": "9144e67c12e96571651892d98c487cb44aab3d570277281379be514497c5812a"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/object/transform/Transform.h",
+      "bytes": 11410,
+      "sha256": "51d69ec7385c7cde4c8df9300cb605f80679b8e7561042f2df3b3f99c7f9fbb7"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/tangible/TangibleObjectMessage3.h",
+      "bytes": 1784,
+      "sha256": "4420a7e546468da0527ce4542ad619028db049340228f05e9233be6bb1519fdf"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/tangible/TangibleObjectMessage6.h",
+      "bytes": 773,
+      "sha256": "f9415562f256f5115876e7ad1836a5c9b51cb4ea21034a75b0be48aeb22ed792"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/ui/SuiCreatePageMessage.h",
+      "bytes": 8573,
+      "sha256": "060d617c58e73fad9502623986697a49bf0faed47dd290261b2ac27a2d51c248"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/ui/SuiEventNotificationCallback.h",
+      "bytes": 1222,
+      "sha256": "5b8812a57c48867daad7746ebe86ca0d3bc92b6b2cfd7e0d0b278a25a2c2e301"
+    },
+    {
+      "path": "MMOCoreORB/src/server/zone/packets/ui/SuiForceClosePage.h",
+      "bytes": 360,
+      "sha256": "810a91c4780eaa70d48e48cf90e72d610aaa452850264db7d12bebdf69eb27d1"
+    },
+    {
+      "path": "MMOCoreORB/src/templates/params/creature/CreatureState.h",
+      "bytes": 3364,
+      "sha256": "dd7c3a9faedb07d9230f6b7e9c2801e39407395881d125287d4d3460410653b7"
+    }
+  ],
+  "unmatched_names": []
+}

@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/generic/brain_s01.lua
++++ b/custom_content/tangible/loot/creature_loot/generic/brain_s01.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_brain_s01, "object/tangible/loot/creature/loot/generic/brain_s01.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_brain_s01, "object/tangible/loot/creature_loot/generic/brain_s01.iff")

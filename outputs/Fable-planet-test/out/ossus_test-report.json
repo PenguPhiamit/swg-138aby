@@ -1,0 +1,35 @@
+{
+  "file": "C:\\Users\\Pengw\\Documents\\Codex\\2026-10-13\\h\\outputs\\Fable-planet-test\\tools\\..\\out\\terrain\\ossus_test.trn",
+  "bytes": 1829,
+  "round_trip_identical": true,
+  "core3_order_notes": [],
+  "structure_pairs_not_in_stock": [],
+  "height_survey": {
+    "samples": 4096,
+    "grid_step_m": 256.0,
+    "min": 25.7,
+    "max": 361.8,
+    "mean": 78.3,
+    "below_water_share": 0.058
+  },
+  "pad": {
+    "centre_height": 47.3,
+    "inner_spread": 0.0,
+    "steepest_10m_step_out_to_560m": 2.33
+  },
+  "shader_refs_missing_in_client": [],
+  "verdict": "PASS",
+  "pad_height": 47.3,
+  "pad_centre": [
+    0.0,
+    -3600.0
+  ],
+  "water_height": 35.5,
+  "draft_ground_percentiles": {
+    "0.02": 32.4,
+    "0.1": 37.7,
+    "0.5": 46.6,
+    "0.9": 232.7,
+    "0.99": 332.7
+  }
+}

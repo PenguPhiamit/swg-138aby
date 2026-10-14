@@ -1,0 +1,10 @@
+--- /dev/null
++++ b/custom_content/tangible/furniture/space/objects.lua
+@@ -0,0 +1,7 @@
++-- Fable backport batch 2 (14 Oct 2026): shared template for the Y-8 passenger chair (SOE original, also on the owner's disc).
++-- Style as custom_content/tangible/furniture/tatooine/objects.lua.
++
++object_tangible_furniture_space_shared_frn_chair_y8_passenger_s01 = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/furniture/space/shared_frn_chair_y8_passenger_s01.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_furniture_space_shared_frn_chair_y8_passenger_s01, "object/tangible/furniture/space/shared_frn_chair_y8_passenger_s01.iff")

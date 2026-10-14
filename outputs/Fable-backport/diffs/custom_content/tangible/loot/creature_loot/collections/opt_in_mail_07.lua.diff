@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/opt_in_mail_07.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/opt_in_mail_07.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_opt_in_mail_07, "object/tangible/loot/creature/loot/collections/opt_in_mail_07.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_opt_in_mail_07, "object/tangible/loot/creature_loot/collections/opt_in_mail_07.iff")

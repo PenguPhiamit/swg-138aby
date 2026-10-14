@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/npc_loot/bottle_s04_generic.lua
++++ b/custom_content/tangible/loot/npc_loot/bottle_s04_generic.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_npc_loot_bottle_s04_generic, "object/tangible/loot/npc/loot/bottle_s04_generic.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_npc_loot_bottle_s04_generic, "object/tangible/loot/npc_loot/bottle_s04_generic.iff")

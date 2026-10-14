@@ -1,0 +1,9 @@
+--- /dev/null
++++ b/custom_content/tangible/furniture/space/frn_chair_y8_passenger_s01.lua
+@@ -0,0 +1,6 @@
++-- Fable backport batch 2 (14 Oct 2026). Client template object/tangible/furniture/space/shared_frn_chair_y8_passenger_s01.iff (mtg_patch_010_object_01.tre), form STOT.
++
++object_tangible_furniture_space_frn_chair_y8_passenger_s01 = object_tangible_furniture_space_shared_frn_chair_y8_passenger_s01:new {
++}
++
++ObjectTemplates:addTemplate(object_tangible_furniture_space_frn_chair_y8_passenger_s01, "object/tangible/furniture/space/frn_chair_y8_passenger_s01.iff")

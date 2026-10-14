@@ -1,0 +1,12 @@
+{
+  "asset_archives_installed": 23,
+  "asset_load_order": "Original pre-CU first, MTG fallback second, on both server and client",
+  "lua_files_syntax_checked": 16734,
+  "inventory_catalog_entries": 8051,
+  "example_quest": "MTG The Beginning; Han and Chewbacca at 3565/-4795 and 3568/-4795 Tatooine, outside",
+  "new_planets_enabled": false,
+  "source": "54deb619e83c2c5e353f6a825a829d56201704f0",
+  "runtime_test_pending": false,
+  "server_initialized": true,
+  "startup_error_line_count": 0
+}

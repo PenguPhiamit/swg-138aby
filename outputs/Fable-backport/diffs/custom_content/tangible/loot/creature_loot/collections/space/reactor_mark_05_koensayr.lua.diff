@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/space/reactor_mark_05_koensayr.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/space/reactor_mark_05_koensayr.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_space_reactor_mark_05_koensayr, "object/tangible/loot/creature/loot/collections/space/reactor_mark_05_koensayr.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_space_reactor_mark_05_koensayr, "object/tangible/loot/creature_loot/collections/space/reactor_mark_05_koensayr.iff")

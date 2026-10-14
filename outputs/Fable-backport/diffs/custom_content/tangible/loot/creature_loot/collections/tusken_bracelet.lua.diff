@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/tusken_bracelet.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/tusken_bracelet.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_tusken_bracelet, "object/tangible/loot/creature/loot/collections/tusken_bracelet.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_tusken_bracelet, "object/tangible/loot/creature_loot/collections/tusken_bracelet.iff")

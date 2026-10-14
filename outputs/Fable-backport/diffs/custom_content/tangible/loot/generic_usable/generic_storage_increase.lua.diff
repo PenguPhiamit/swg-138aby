@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/generic_usable/generic_storage_increase.lua
++++ b/custom_content/tangible/loot/generic_usable/generic_storage_increase.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_generic_storage_increase, "object/tangible/loot/generic/usable/generic_storage_increase.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_generic_storage_increase, "object/tangible/loot/generic_usable/generic_storage_increase.iff")

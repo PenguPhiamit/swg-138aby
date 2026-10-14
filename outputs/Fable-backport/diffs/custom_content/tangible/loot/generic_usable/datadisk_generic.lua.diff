@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/generic_usable/datadisk_generic.lua
++++ b/custom_content/tangible/loot/generic_usable/datadisk_generic.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_datadisk_generic, "object/tangible/loot/generic/usable/datadisk_generic.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_datadisk_generic, "object/tangible/loot/generic_usable/datadisk_generic.iff")

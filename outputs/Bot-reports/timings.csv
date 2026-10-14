@@ -1,0 +1,308 @@
+when,kind,name,seconds,result,note
+2026-10-13 17:00,scenario,aurek-hunt.py:Aurek,4,1/4,from LOG.md
+2026-10-13 17:03,scenario,aurek-hunt.py:Aurek,110,1/1,from LOG.md
+2026-10-13 17:05,scenario,aurek-hunt.py:Aurek,38,2/4,from LOG.md
+2026-10-13 17:11,scenario,aurek-hunt.py:Aurek,179,1/2,from LOG.md
+2026-10-13 17:31,scenario,aurek-hunt.py:Aurek,110,1/2,from LOG.md
+2026-10-13 17:35,scenario,aurek-hunt.py:Aurek,52,4/4,from LOG.md
+2026-10-13 17:51,scenario,aurek-hunt.py:Aurek,187,2/4,from LOG.md
+2026-10-13 18:08,scenario,aurek-boss-camp.py:Aurek,182,3/6,from LOG.md
+2026-10-13 18:40,scenario,aurek-boss-camp.py:Aurek,224,6/7,from LOG.md
+2026-10-13 18:43,scenario,aurek-boss-camp.py:Aurek,148,6/7,from LOG.md
+2026-10-13 18:50,scenario,aurek-boss-camp.py:Aurek,352,6/7,from LOG.md
+2026-10-13 18:58,scenario,aurek-boss-camp.py:Aurek,506,5/7,from LOG.md
+2026-10-13 19:08,scenario,aurek-boss-camp.py:Aurek,616,5/7,from LOG.md
+2026-10-13 20:05,scenario,aurek-doctor-buffs.py:Aurek,15,3/4,from LOG.md
+2026-10-13 20:13,scenario,aurek-doctor-buffs.py:Aurek,13,3/4,from LOG.md
+2026-10-13 17:00,scenario,besh-survey.py:Besh,28,2/4,from LOG.md
+2026-10-13 17:03,scenario,besh-survey.py:Besh,114,2/4,from LOG.md
+2026-10-13 17:05,scenario,besh-survey.py:Besh,75,6/8,from LOG.md
+2026-10-13 17:11,scenario,besh-survey.py:Besh,133,8/9,from LOG.md
+2026-10-13 17:32,scenario,besh-gather.py:Besh,159,8/8,from LOG.md
+2026-10-13 17:51,scenario,besh-gather.py:Besh,159,8/8,from LOG.md
+2026-10-13 18:08,scenario,besh-gather.py:Besh,160,8/8,from LOG.md
+2026-10-13 18:37,scenario,besh-gather.py:Besh,67,9/9,from LOG.md
+2026-10-13 18:41,scenario,besh-gather.py:Besh,66,9/9,from LOG.md
+2026-10-13 18:45,scenario,besh-gather.py:Besh,66,9/9,from LOG.md
+2026-10-13 18:51,scenario,besh-gather.py:Besh,66,9/9,from LOG.md
+2026-10-13 18:59,scenario,besh-gather.py:Besh,66,9/9,from LOG.md
+2026-10-13 19:50,scenario,besh-gather.py:Besh,66,9/9,from LOG.md
+2026-10-13 20:07,scenario,besh-harvest.py:Besh,149,4/7,from LOG.md
+2026-10-13 20:16,scenario,besh-harvest.py:Besh,197,3/6,from LOG.md
+2026-10-13 17:00,scenario,cresh-travel.py:Cresh,0,1/1,from LOG.md
+2026-10-13 17:01,scenario,cresh-travel.py:Cresh,12,0/0,from LOG.md
+2026-10-13 17:05,scenario,cresh-travel.py:Cresh,45,4/5,from LOG.md
+2026-10-13 17:11,scenario,cresh-travel.py:Cresh,159,6/7,from LOG.md
+2026-10-13 17:31,scenario,cresh-travel.py:Cresh,141,3/5,from LOG.md
+2026-10-13 17:37,scenario,cresh-travel.py:Cresh,176,6/7,from LOG.md
+2026-10-13 17:51,scenario,cresh-travel.py:Cresh,149,3/5,from LOG.md
+2026-10-13 18:08,scenario,cresh-travel.py:Cresh,149,3/5,from LOG.md
+2026-10-13 18:39,scenario,cresh-travel.py:Cresh,188,6/7,from LOG.md
+2026-10-13 18:43,scenario,cresh-travel.py:Cresh,187,2/4,from LOG.md
+2026-10-13 18:49,scenario,cresh-travel.py:Cresh,297,2/4,from LOG.md
+2026-10-13 18:54,scenario,cresh-travel.py:Cresh,286,2/4,from LOG.md
+2026-10-13 19:01,scenario,cresh-travel.py:Cresh,199,2/4,from LOG.md
+2026-10-13 19:52,scenario,cresh-travel.py:Cresh,199,2/4,from LOG.md
+2026-10-13 20:07,scenario,cresh-travel.py:Cresh,149,3/5,from LOG.md
+2026-10-13 20:16,scenario,cresh-travel.py:Cresh,189,10/11,from LOG.md
+2026-10-13 22:01,scenario,cresh-missions.py:Cresh,490,4/6,from LOG.md
+2026-10-13 17:00,scenario,dorn-social.py:Dorn,8,2/3,from LOG.md
+2026-10-13 17:02,scenario,dorn-social.py:Dorn,49,1/4,from LOG.md
+2026-10-13 17:05,scenario,dorn-social.py:Dorn,45,5/6,from LOG.md
+2026-10-13 17:09,scenario,dorn-social.py:Dorn,70,5/6,from LOG.md
+2026-10-13 17:30,scenario,dorn-social.py:Dorn,42,6/6,from LOG.md
+2026-10-13 17:49,scenario,dorn-social.py:Dorn,42,6/6,from LOG.md
+2026-10-13 18:06,scenario,dorn-social.py:Dorn,42,6/6,from LOG.md
+2026-10-13 18:37,scenario,dorn-social.py:Dorn,53,6/6,from LOG.md
+2026-10-13 18:41,scenario,dorn-social.py:Dorn,48,6/6,from LOG.md
+2026-10-13 18:45,scenario,dorn-social.py:Dorn,48,6/6,from LOG.md
+2026-10-13 18:50,scenario,dorn-social.py:Dorn,48,6/6,from LOG.md
+2026-10-13 18:59,scenario,dorn-social.py:Dorn,48,6/6,from LOG.md
+2026-10-13 19:49,scenario,dorn-social.py:Dorn,48,6/6,from LOG.md
+2026-10-13 20:05,scenario,dorn-social.py:Dorn,61,9/9,from LOG.md
+2026-10-13 20:14,scenario,dorn-social.py:Dorn,56,9/9,from LOG.md
+2026-10-13 21:54,scenario,dorn-social.py:Dorn,68,9/10,from LOG.md
+2026-10-13 22:19,scenario,dorn-social.py:Dorn,68,9/10,from LOG.md
+2026-10-13 17:00,scenario,esk-routes.py:Esk,0,0/0,from LOG.md
+2026-10-13 17:03,scenario,esk-routes.py:Esk,107,3/3,from LOG.md
+2026-10-13 17:06,scenario,esk-routes.py:Esk,119,3/5,from LOG.md
+2026-10-13 17:13,scenario,esk-routes.py:Esk,290,5/5,from LOG.md
+2026-10-13 17:33,scenario,esk-routes.py:Esk,229,5/5,from LOG.md
+2026-10-13 17:57,scenario,esk-map-terminals.py:Esk,520,1/2,from LOG.md
+2026-10-13 18:26,scenario,esk-map-terminals.py:Esk,1270,1/2,from LOG.md
+2026-10-13 18:40,scenario,esk-routes.py:Esk,217,5/5,from LOG.md
+2026-10-13 18:44,scenario,esk-routes.py:Esk,226,5/5,from LOG.md
+2026-10-13 18:48,scenario,esk-routes.py:Esk,226,5/5,from LOG.md
+2026-10-13 18:53,scenario,esk-routes.py:Esk,226,5/5,from LOG.md
+2026-10-13 19:02,scenario,esk-routes.py:Esk,226,5/5,from LOG.md
+2026-10-13 19:52,scenario,esk-routes.py:Esk,226,5/5,from LOG.md
+2026-10-13 20:08,scenario,esk-routes.py:Esk,230,5/5,from LOG.md
+2026-10-13 20:17,scenario,esk-routes.py:Esk,226,5/5,from LOG.md
+2026-10-13 21:57,scenario,esk-routes.py:Esk,228,5/5,from LOG.md
+2026-10-13 22:20,build,dev client+server (incremental),14,,leash proof allows partial route ending on target
+2026-10-13 22:22,galaxy-start,test galaxy restart + 18-bot setup,285,,
+2026-10-13 22:22,build,dev client+server (incremental),15,,
+2026-10-13 22:26,galaxy-start,test galaxy restart + 18-bot setup,385,,leash proof allows partial route ending on target
+2026-10-13 22:27,scenario,dorn-social.py:Dorn,68,9/10,
+2026-10-13 22:29,scenario,esk-routes.py:Esk,181,4/5,
+2026-10-13 22:37,setup,relog 18 bots (stop + setup),6,,new client with the Lua lock fix
+2026-10-13 22:38,setup,log in 18 bots (setup),5,,after reverting the client change
+2026-10-13 22:42,setup,log in 18 bots (setup),51,,after clearing /tmp
+2026-10-13 22:50,setup,log in 18 bots (setup),70,,first run with bot folders on the WSL disk
+2026-10-13 22:56,galaxy-start,test galaxy restart + 18-bot setup,338,,fresh start after /tmp filled
+2026-10-13 22:57,scenario,aurek-doctor-buffs.py:Aurek,1,0/0,
+2026-10-13 22:58,scenario,cresh-missions.py:Cresh,33,3/3,
+2026-10-13 22:59,scenario,besh-harvest.py:Besh,101,7/10,
+2026-10-13 23:06,galaxy-start,test galaxy restart + 18-bot setup,376,,first start with Hoth enabled
+2026-10-13 23:07,scenario,esk-hoth.py:Esk,36,0/1,
+2026-10-13 23:10,scenario,esk-hoth.py:Esk,30,1/2,
+2026-10-13 23:15,scenario,esk-hoth.py:Esk,290,18/19,
+2026-10-14 02:14,scenario,esk-hoth.py:Esk,117,9/9,error
+2026-10-14 02:18,scenario,esk-hoth.py:Esk,217,21/21,
+2026-10-14 02:22,scenario,esk-hoth.py:Esk,182,16/17,
+2026-10-14 02:32,scenario,aurek-doctor-buffs.py:Aurek,2,0/0,
+2026-10-14 02:33,scenario,cresh-missions.py:Cresh,33,3/3,
+2026-10-14 02:33,scenario,dorn-social.py:Dorn,69,9/10,
+2026-10-14 02:34,scenario,besh-harvest.py:Besh,98,7/10,
+2026-10-14 02:37,scenario,esk-routes.py:Esk,267,3/5,
+2026-10-14 02:37,scenario,aurek-doctor-buffs.py:Aurek,2,0/0,
+2026-10-14 02:37,scenario,cresh-missions.py:Cresh,8,3/3,
+2026-10-14 02:37,scenario,besh-harvest.py:Besh,30,2/3,
+2026-10-14 02:38,scenario,dorn-social.py:Dorn,73,9/10,
+2026-10-14 02:40,scenario,esk-routes.py:Esk,201,3/5,
+2026-10-14 02:40,scenario,aurek-doctor-buffs.py:Aurek,2,0/0,
+2026-10-14 02:40,scenario,cresh-missions.py:Cresh,7,3/3,
+2026-10-14 02:41,scenario,dorn-social.py:Dorn,86,9/10,
+2026-10-14 02:42,scenario,besh-harvest.py:Besh,109,2/3,
+2026-10-14 02:47,scenario,esk-routes.py:Esk,405,3/5,
+2026-10-14 02:47,scenario,aurek-doctor-buffs.py:Aurek,1,0/0,
+2026-10-14 02:47,scenario,cresh-missions.py:Cresh,7,3/3,
+2026-10-14 02:48,scenario,besh-harvest.py:Besh,59,7/10,
+2026-10-14 02:48,scenario,dorn-social.py:Dorn,86,9/10,
+2026-10-14 02:50,scenario,esk-routes.py:Esk,225,3/5,
+2026-10-14 02:50,scenario,aurek-doctor-buffs.py:Aurek,1,0/0,
+2026-10-14 02:50,scenario,cresh-missions.py:Cresh,7,3/3,
+2026-10-14 02:51,scenario,besh-harvest.py:Besh,60,7/10,
+2026-10-14 02:52,scenario,dorn-social.py:Dorn,86,9/10,
+2026-10-14 02:54,scenario,esk-routes.py:Esk,220,3/5,
+2026-10-14 02:54,scenario,aurek-doctor-buffs.py:Aurek,2,0/0,
+2026-10-14 02:54,scenario,cresh-missions.py:Cresh,7,3/3,
+2026-10-14 02:55,scenario,besh-harvest.py:Besh,60,7/10,
+2026-10-14 02:55,scenario,dorn-social.py:Dorn,86,9/10,
+2026-10-14 02:58,scenario,esk-routes.py:Esk,215,3/5,error
+2026-10-14 03:07,scenario,hoth_creature_probe.py:Esk,104,2/3,
+2026-10-14 03:17,scenario,hoth_creature_probe.py:Esk,540,4/5,
+2026-10-14 03:20,scenario,_collector_debug.py:Esk,6,0/0,
+2026-10-14 03:21,scenario,_collector_debug.py:Esk,21,1/1,
+2026-10-14 03:29,scenario,hoth_creature_probe.py:Esk,493,8/9,
+2026-10-14 03:32,scenario,hoth_return.py:Esk,65,2/3,
+2026-10-14 04:13,scenario,hoth_terrain_scan.py:Esk,913,2/2,
+2026-10-14 04:21,scenario,hoth_crew_probe.py:Esk,383,22/23,
+2026-10-14 04:57,scenario,aurek-doctor-buffs.py:Aurek,2,0/0,
+2026-10-14 04:57,scenario,cresh-missions.py:Cresh,33,3/3,
+2026-10-14 04:58,scenario,dorn-social.py:Dorn,69,9/10,
+2026-10-14 04:59,scenario,besh-harvest.py:Besh,98,7/10,
+2026-10-14 05:02,scenario,esk-routes.py:Esk,319,0/5,
+2026-10-14 05:02,scenario,aurek-doctor-buffs.py:Aurek,2,0/0,
+2026-10-14 05:02,scenario,cresh-missions.py:Cresh,8,3/3,
+2026-10-14 05:03,scenario,besh-harvest.py:Besh,61,7/10,
+2026-10-14 05:03,scenario,dorn-social.py:Dorn,69,8/9,error
+2026-10-14 05:04,scenario,esk-routes.py:Esk,107,0/3,error
+2026-10-14 05:09,scenario,esk-fallback-census.py:Besh,1,1/1,
+
+2026-10-14 05:09,scenario,esk-fallback-census.py:Aurek,1,1/1,
+2026-10-14 05:09,scenario,esk-fallback-census.py:Esk,12,1/1,
+2026-10-14 05:09,scenario,esk-fallback-census.py:Cresh,1,1/1,
+2026-10-14 05:09,scenario,esk-fallback-census.py:Dorn,1,1/1,
+2026-10-14 05:09,scenario,esk-fallback-census.py:Esk,1,1/1,
+2026-10-14 05:09,scenario,esk-fallback-census.py:Besh,1,1/1,
+2026-10-14 05:09,scenario,esk-fallback-census.py:Aurek,1,1/1,
+2026-10-14 05:09,scenario,esk-fallback-grid.py:Esk,1,0/0,
+2026-10-14 05:10,scenario,esk-fallback-grid.py:Aurek,16,4/4,
+2026-10-14 05:10,scenario,esk-fallback-grid.py:Dorn,19,4/4,
+2026-10-14 05:10,scenario,cresh-fallback-travel.py:Cresh,60,1/1,error
+2026-10-14 05:11,scenario,besh-gather.py:Besh,96,0/0,error
+2026-10-14 05:11,scenario,esk-fallback-grid.py:Esk,1,0/0,
+2026-10-14 05:11,scenario,esk-fallback-grid.py:Aurek,16,4/4,
+2026-10-14 05:11,scenario,esk-fallback-grid.py:Dorn,19,4/4,
+2026-10-14 05:12,scenario,cresh-fallback-travel.py:Cresh,52,8/8,
+2026-10-14 05:12,scenario,besh-gather.py:Besh,60,6/6,error
+2026-10-14 05:12,scenario,aurek-doctor-buffs.py:Aurek,2,0/0,
+2026-10-14 05:12,scenario,besh-harvest.py:Besh,6,0/1,
+2026-10-14 05:12,scenario,esk-fallback-reach.py:Esk,12,0/0,error
+2026-10-14 05:12,scenario,cresh-fallback-travel.py:Cresh,15,3/3,error
+2026-10-14 05:12,scenario,esk-fallback-reach.py:Dorn,20,0/0,error
+2026-10-14 05:31,scenario,esk-routes.py:Esk,1,0/0,
+2026-10-14 05:31,scenario,aurek-doctor-buffs.py:Aurek,5,0/0,
+2026-10-14 05:31,scenario,cresh-missions.py:Cresh,5,0/1,
+2026-10-14 05:32,scenario,dorn-social.py:Dorn,42,0/3,error
+2026-10-14 05:34,scenario,besh-harvest.py:Besh,170,7/10,
+2026-10-14 05:34,scenario,esk-routes.py:Esk,0,0/0,
+2026-10-14 05:34,scenario,aurek-doctor-buffs.py:Aurek,5,0/0,
+2026-10-14 05:34,scenario,cresh-missions.py:Cresh,5,0/1,
+2026-10-14 05:35,scenario,dorn-social.py:Dorn,31,0/3,error
+2026-10-14 05:35,scenario,besh-harvest.py:Besh,55,7/10,
+2026-10-14 05:35,scenario,esk-fallback-census.py:Dorn,1,1/1,
+2026-10-14 05:35,scenario,esk-fallback-census.py:Cresh,1,1/1,
+2026-10-14 05:35,scenario,esk-fallback-census.py:Esk,1,1/1,
+2026-10-14 05:35,scenario,esk-fallback-census.py:Besh,1,1/1,
+2026-10-14 05:35,scenario,esk-fallback-census.py:Aurek,1,1/1,
+2026-10-14 05:35,scenario,esk-fallback-census.py:Cresh,1,1/1,
+2026-10-14 05:35,scenario,esk-fallback-census.py:Dorn,1,1/1,
+2026-10-14 05:35,scenario,esk-fallback-census.py:Besh,1,1/1,
+2026-10-14 05:35,scenario,esk-fallback-census.py:Esk,1,1/1,
+2026-10-14 05:35,scenario,esk-fallback-census.py:Aurek,1,1/1,
+2026-10-14 05:35,scenario,esk-fallback-grid.py:Esk,0,0/0,
+2026-10-14 05:35,scenario,esk-fallback-grid.py:Dorn,1,0/0,
+2026-10-14 05:36,scenario,esk-fallback-grid.py:Aurek,30,4/4,
+2026-10-14 05:36,scenario,cresh-fallback-travel.py:Cresh,33,1/2,
+2026-10-14 05:37,scenario,besh-gather.py:Besh,117,1/5,
+2026-10-14 05:38,scenario,esk-routes.py:Esk,0,0/0,
+2026-10-14 05:38,scenario,aurek-doctor-buffs.py:Aurek,5,0/0,
+2026-10-14 05:38,scenario,cresh-missions.py:Cresh,5,0/1,
+2026-10-14 05:38,scenario,dorn-social.py:Dorn,31,0/3,error
+2026-10-14 05:41,scenario,besh-harvest.py:Besh,163,7/10,
+2026-10-14 05:41,scenario,esk-routes.py:Esk,0,0/0,
+2026-10-14 05:41,scenario,aurek-doctor-buffs.py:Aurek,5,0/0,
+2026-10-14 05:41,scenario,cresh-missions.py:Cresh,5,0/1,
+2026-10-14 05:41,scenario,dorn-social.py:Dorn,31,0/3,error
+2026-10-14 05:41,scenario,besh-harvest.py:Besh,55,7/10,
+2026-10-14 05:42,scenario,esk-fallback-reach.py:Esk,0,0/0,
+2026-10-14 05:42,scenario,besh-fallback-crafting.py:Besh,1,1/1,
+2026-10-14 05:42,scenario,esk-fallback-reach.py:Dorn,1,0/0,
+2026-10-14 05:42,scenario,esk-fallback-census.py:Aurek,1,1/1,
+2026-10-14 05:42,scenario,esk-fallback-reach.py:Cresh,9,0/0,
+2026-10-14 05:42,scenario,esk-fallback-reach.py:Esk,1,0/0,
+2026-10-14 05:42,scenario,besh-fallback-crafting.py:Besh,1,1/1,
+2026-10-14 05:42,scenario,esk-fallback-reach.py:Dorn,1,0/0,
+2026-10-14 05:42,scenario,esk-fallback-census.py:Aurek,1,1/1,
+2026-10-14 05:42,scenario,esk-fallback-reach.py:Cresh,9,0/0,
+2026-10-14 05:42,scenario,esk-fallback-census.py:Dorn,0,1/1,
+2026-10-14 05:42,scenario,esk-fallback-census.py:Esk,1,1/1,
+2026-10-14 05:42,scenario,esk-fallback-census.py:Besh,1,1/1,
+2026-10-14 05:42,scenario,esk-fallback-census.py:Cresh,1,1/1,
+2026-10-14 05:42,scenario,esk-fallback-grid.py:Aurek,26,4/4,
+2026-10-14 05:42,scenario,esk-routes.py:Esk,0,0/0,
+2026-10-14 05:42,scenario,aurek-doctor-buffs.py:Aurek,5,0/0,
+2026-10-14 05:42,scenario,cresh-missions.py:Cresh,5,0/1,
+2026-10-14 05:43,scenario,dorn-social.py:Dorn,31,0/3,error
+2026-10-14 05:43,scenario,besh-harvest.py:Besh,55,7/10,
+2026-10-14 05:43,scenario,esk-routes.py:Esk,0,0/0,
+2026-10-14 05:43,scenario,aurek-doctor-buffs.py:Aurek,5,0/0,
+2026-10-14 05:43,scenario,cresh-missions.py:Cresh,5,0/1,
+2026-10-14 05:44,scenario,dorn-social.py:Dorn,31,0/3,error
+2026-10-14 05:44,scenario,besh-harvest.py:Besh,55,7/10,
+2026-10-14 05:44,scenario,esk-fallback-grid.py:Esk,1,0/0,
+2026-10-14 05:44,scenario,esk-fallback-grid.py:Dorn,1,0/0,
+2026-10-14 05:44,scenario,esk-fallback-census.py:Aurek,1,1/1,
+2026-10-14 05:45,scenario,cresh-fallback-travel.py:Cresh,33,1/2,
+2026-10-14 05:47,scenario,besh-gather.py:Besh,158,5/7,
+2026-10-14 05:47,scenario,esk-fallback-grid.py:Esk,0,0/0,
+2026-10-14 05:47,scenario,esk-fallback-grid.py:Dorn,1,0/0,
+2026-10-14 05:47,scenario,esk-fallback-census.py:Aurek,1,1/1,
+2026-10-14 05:47,scenario,cresh-fallback-travel.py:Cresh,33,1/2,
+2026-10-14 05:48,scenario,besh-gather.py:Besh,67,5/7,
+2026-10-14 05:48,scenario,esk-fallback-reach.py:Esk,0,0/0,
+2026-10-14 05:48,scenario,besh-fallback-crafting.py:Besh,0,1/1,
+2026-10-14 05:48,scenario,esk-fallback-reach.py:Dorn,1,0/0,
+2026-10-14 05:48,scenario,esk-fallback-reach.py:Cresh,9,0/0,
+2026-10-14 05:48,scenario,esk-fallback-grid.py:Aurek,25,4/4,
+2026-10-14 05:48,scenario,esk-routes.py:Esk,0,0/0,
+2026-10-14 05:48,scenario,aurek-doctor-buffs.py:Aurek,5,0/0,
+2026-10-14 05:48,scenario,cresh-missions.py:Cresh,5,0/1,
+2026-10-14 05:49,scenario,dorn-social.py:Dorn,31,0/3,error
+2026-10-14 05:51,scenario,besh-harvest.py:Besh,184,7/10,
+2026-10-14 05:51,scenario,esk-routes.py:Esk,0,0/0,
+2026-10-14 05:51,scenario,aurek-doctor-buffs.py:Aurek,5,0/0,
+2026-10-14 05:51,scenario,cresh-missions.py:Cresh,5,0/1,
+2026-10-14 05:52,scenario,dorn-social.py:Dorn,31,0/3,error
+2026-10-14 05:52,scenario,besh-harvest.py:Besh,55,7/10,
+2026-10-14 05:52,scenario,esk-fallback-census.py:Esk,1,1/1,
+2026-10-14 05:52,scenario,esk-fallback-census.py:Cresh,1,1/1,
+2026-10-14 05:52,scenario,esk-fallback-census.py:Besh,1,1/1,
+2026-10-14 05:52,scenario,esk-fallback-census.py:Aurek,1,1/1,
+2026-10-14 05:52,scenario,esk-fallback-census.py:Esk,1,1/1,
+2026-10-14 05:52,scenario,esk-fallback-census.py:Dorn,1,1/1,
+2026-10-14 05:52,scenario,esk-fallback-census.py:Besh,1,1/1,
+2026-10-14 05:52,scenario,esk-fallback-census.py:Cresh,1,1/1,
+2026-10-14 05:52,scenario,esk-fallback-census.py:Aurek,1,1/1,
+2026-10-14 05:52,scenario,esk-fallback-grid.py:Esk,1,0/0,
+2026-10-14 05:52,scenario,esk-fallback-grid.py:Dorn,1,0/0,
+2026-10-14 05:53,scenario,esk-fallback-grid.py:Aurek,26,4/4,
+2026-10-14 05:53,scenario,cresh-fallback-travel.py:Cresh,33,1/2,
+2026-10-14 05:55,scenario,besh-gather.py:Besh,151,5/7,
+2026-10-14 05:55,scenario,esk-routes.py:Esk,0,0/0,
+2026-10-14 05:55,scenario,aurek-doctor-buffs.py:Aurek,5,0/0,
+2026-10-14 05:55,scenario,cresh-missions.py:Cresh,5,0/1,
+2026-10-14 05:55,scenario,dorn-social.py:Dorn,31,0/3,error
+2026-10-14 05:57,scenario,besh-harvest.py:Besh,156,2/3,error
+2026-10-14 05:58,scenario,botanist_check.py:Besh,26,0/3,
+2026-10-14 06:03,scenario,aurek-doctor-buffs.py:Aurek,2,0/0,
+2026-10-14 06:03,scenario,cresh-missions.py:Cresh,33,3/3,
+2026-10-14 06:04,scenario,dorn-social.py:Dorn,69,9/10,
+2026-10-14 06:05,scenario,besh-harvest.py:Besh,120,8/10,
+2026-10-14 06:07,scenario,esk-routes.py:Esk,227,5/5,
+2026-10-14 06:07,scenario,besh-harvest.py:Besh,2,1/2,
+2026-10-14 06:07,scenario,aurek-doctor-buffs.py:Aurek,2,0/0,
+2026-10-14 06:07,scenario,cresh-missions.py:Cresh,8,3/3,
+2026-10-14 06:08,scenario,dorn-social.py:Dorn,73,9/10,
+2026-10-14 06:10,scenario,esk-routes.py:Esk,226,5/5,
+2026-10-14 06:10,scenario,esk-fallback-census.py:Aurek,1,1/1,
+2026-10-14 06:11,scenario,esk-fallback-reach.py:Cresh,4,0/1,
+2026-10-14 06:11,scenario,esk-fallback-reach.py:Esk,41,4/4,
+2026-10-14 06:11,scenario,esk-fallback-reach.py:Dorn,59,2/2,
+2026-10-14 06:12,scenario,besh-harvest.py:Besh,109,2/3,
+2026-10-14 06:12,scenario,esk-fallback-census.py:Aurek,1,1/1,
+2026-10-14 06:12,scenario,esk-fallback-reach.py:Cresh,3,0/1,
+2026-10-14 06:13,scenario,esk-fallback-reach.py:Dorn,31,0/1,
+2026-10-14 06:13,scenario,esk-fallback-reach.py:Esk,43,4/4,
+2026-10-14 06:13,scenario,besh-harvest.py:Besh,59,8/10,
+2026-10-14 06:13,scenario,esk-fallback-reach.py:Dorn,1,0/0,
+2026-10-14 06:13,scenario,esk-fallback-census.py:Esk,1,1/1,
+2026-10-14 06:13,scenario,esk-fallback-census.py:Cresh,1,1/1,
+2026-10-14 06:14,scenario,esk-fallback-grid.py:Aurek,15,4/4,
+2026-10-14 06:14,scenario,besh-harvest.py:Besh,61,8/10,
+2026-10-14 06:14,scenario,besh-fallback-crafting.py:Besh,1,1/1,
+2026-10-14 06:14,scenario,aurek-doctor-buffs.py:Aurek,2,0/0,
+2026-10-14 06:14,scenario,cresh-missions.py:Cresh,7,3/3,
+2026-10-14 06:16,scenario,dorn-social.py:Dorn,85,9/10,

@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/nightsister_earrings.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/nightsister_earrings.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_nightsister_earrings, "object/tangible/loot/creature/loot/collections/nightsister_earrings.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_nightsister_earrings, "object/tangible/loot/creature_loot/collections/nightsister_earrings.iff")

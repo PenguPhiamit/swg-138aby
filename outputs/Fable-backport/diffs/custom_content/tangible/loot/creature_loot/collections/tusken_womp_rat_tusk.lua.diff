@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/tusken_womp_rat_tusk.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/tusken_womp_rat_tusk.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_tusken_womp_rat_tusk, "object/tangible/loot/creature/loot/collections/tusken_womp_rat_tusk.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_tusken_womp_rat_tusk, "object/tangible/loot/creature_loot/collections/tusken_womp_rat_tusk.iff")

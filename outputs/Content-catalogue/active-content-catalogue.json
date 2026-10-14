@@ -1,0 +1,2608 @@
+{
+  "researched": "2026-10-13",
+  "scope": "Active content research; Sentinel\u2019s Republic excluded by user instruction. Preserve historical research separately. LAN first; public deployment requires a separate rights/dependency review.",
+  "counts": {
+    "entries": 102,
+    "ground_worlds": 18,
+    "stations": 3,
+    "additional_species_candidates": 40
+  },
+  "rows": [
+    {
+      "id": "active-001",
+      "kind": "Planet",
+      "name": "Taanab",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Takhomasak; restoration of unfinished SOE terrain",
+      "availability": "Collected MTG assets; additional published source or original release links",
+      "notes": "Original Takhomasak mini-expansion and MTG terrain/snapshot. Use the original release; write any missing encounters ourselves.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?threads/new-planet-taanab-mini-expansion.686/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "runtime_validated": false,
+      "zone": "taanab",
+      "local_asset_evidence": [
+        {
+          "path": "terrain/taanab.trn",
+          "archives": [
+            "mtg_patch_013_configurable_02.tre",
+            "mtg_patch_022.tre",
+            "mtg_planets.tre"
+          ]
+        },
+        {
+          "path": "snapshot/taanab.ws",
+          "archives": [
+            "mtg_patch_022.tre",
+            "mtg_planets.tre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "active-002",
+      "kind": "Planet",
+      "name": "Hoth",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Takhomasak original public work; other server-specific variants",
+      "availability": "Collected MTG assets; additional published source or original release links",
+      "notes": "MTG terrain and snapshot present; original creator release located. Current Sunrunner and Infinity encounters are separate versions, not covered by this row.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?threads/new-planet-hoth.756/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki",
+        "https://www.swginfinity.com/guides/adventure-guides"
+      ],
+      "runtime_validated": false,
+      "zone": "hoth",
+      "local_asset_evidence": [
+        {
+          "path": "terrain/hoth.trn",
+          "archives": [
+            "mtg_patch_022.tre",
+            "mtg_planets.tre"
+          ]
+        },
+        {
+          "path": "snapshot/hoth.ws",
+          "archives": [
+            "mtg_planets.tre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "active-003",
+      "kind": "Planet",
+      "name": "Dromund Kaas",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Levarrishawk original public release",
+      "availability": "Collected MTG assets; additional published source or original release links",
+      "notes": "Original Levarrishawk release and published Stardust source. Later independent revisions require separate provenance.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?threads/dromund-kaas-for-swgemu-based-emulators.349/",
+        "https://github.com/Levarrishawk/Stardust"
+      ],
+      "runtime_validated": false,
+      "zone": "kaas",
+      "local_asset_evidence": [
+        {
+          "path": "terrain/kaas.trn",
+          "archives": [
+            "mtg_patch_022.tre",
+            "mtg_planets.tre"
+          ]
+        },
+        {
+          "path": "snapshot/kaas.ws",
+          "archives": [
+            "mtg_patch_022.tre",
+            "mtg_planets.tre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "active-004",
+      "kind": "Planet",
+      "name": "Mandalore",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Bats (Ken Austin) original release; later independent revisions",
+      "availability": "Collected MTG assets; additional published source or original release links",
+      "notes": "Bats original release includes terrain, world Lua, NPCs and caves. MTG terrain/snapshot present; later revisions are separate.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?threads/mandalore-for-swgemu-based-emulators.433/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "runtime_validated": false,
+      "zone": "mandalore",
+      "local_asset_evidence": [
+        {
+          "path": "terrain/mandalore.trn",
+          "archives": [
+            "mtg_planets.tre"
+          ]
+        },
+        {
+          "path": "snapshot/mandalore.ws",
+          "archives": [
+            "mtg_patch_022.tre",
+            "mtg_planets.tre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "active-005",
+      "kind": "Planet",
+      "name": "Chandrila",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Levarrishawk/Stardust; acknowledged by EiF",
+      "availability": "Collected MTG assets; additional published source or original release links",
+      "notes": "MTG terrain/snapshot and public Stardust city/POI scripts present. Elysium release described its own version as complete in 2017; this is historical, not a local test.",
+      "sources": [
+        "https://github.com/Levarrishawk/Stardust",
+        "https://github.com/Levarrishawk/DLSWG5",
+        "https://www.empireinflames.net/?page_id=985"
+      ],
+      "runtime_validated": false,
+      "zone": "chandrila",
+      "local_asset_evidence": [
+        {
+          "path": "terrain/chandrila.trn",
+          "archives": [
+            "mtg_planets.tre"
+          ]
+        },
+        {
+          "path": "snapshot/chandrila.ws",
+          "archives": [
+            "mtg_patch_022.tre",
+            "mtg_planets.tre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "active-006",
+      "kind": "Planet",
+      "name": "Coruscant",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Levarrishawk/Stardust; acknowledged by EiF",
+      "availability": "Collected MTG assets; additional published source or original release links",
+      "notes": "MTG terrain/snapshot and public district/race scripts. The Elysium version was a sparse roleplay world. Sunrunner separately credits original third-party 3D art.",
+      "sources": [
+        "https://github.com/Levarrishawk/Stardust",
+        "https://github.com/Levarrishawk/DLSWG5",
+        "https://www.empireinflames.net/?page_id=985",
+        "https://swgsunrunner2.com/about/"
+      ],
+      "runtime_validated": false,
+      "zone": "coruscant",
+      "local_asset_evidence": [
+        {
+          "path": "terrain/coruscant.trn",
+          "archives": [
+            "mtg_planets.tre"
+          ]
+        },
+        {
+          "path": "snapshot/coruscant.ws",
+          "archives": [
+            "mtg_patch_022.tre",
+            "mtg_planets.tre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "active-007",
+      "kind": "Planet",
+      "name": "Jakku",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Public Stardust implementation; precise asset authorship still to trace",
+      "availability": "Collected MTG assets; additional published source or original release links",
+      "notes": "MTG terrain/snapshot and public Stardust battle/Weapons Facility scripts. Precise artwork provenance still needs review.",
+      "sources": [
+        "https://github.com/Levarrishawk/Stardust",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "runtime_validated": false,
+      "zone": "jakku",
+      "local_asset_evidence": [
+        {
+          "path": "terrain/jakku.trn",
+          "archives": [
+            "mtg_planets.tre"
+          ]
+        },
+        {
+          "path": "snapshot/jakku.ws",
+          "archives": [
+            "mtg_patch_022.tre",
+            "mtg_planets.tre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "active-008",
+      "kind": "Planet",
+      "name": "Moraband / Korriban",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Levarrishawk/Darklight/Stardust",
+      "availability": "Collected MTG assets; additional published source or original release links",
+      "notes": "MTG terrain/snapshot and public Valley of the Dark Lords script. The 2017 author release called the world partial. These aliases count as one world.",
+      "sources": [
+        "https://github.com/Levarrishawk/DLSWG5",
+        "https://github.com/Levarrishawk/Stardust"
+      ],
+      "runtime_validated": false,
+      "zone": "moraband",
+      "local_asset_evidence": [
+        {
+          "path": "terrain/moraband.trn",
+          "archives": [
+            "mtg_planets.tre"
+          ]
+        },
+        {
+          "path": "snapshot/moraband.ws",
+          "archives": [
+            "mtg_patch_022.tre",
+            "mtg_planets.tre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "active-009",
+      "kind": "Planet",
+      "name": "Nal Hutta",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Levarrishawk/Darklight public version; Sunrunner later original work",
+      "availability": "Collected MTG assets; additional published source or original release links",
+      "notes": "MTG terrain/snapshot. Elysium called its version partial with no server scripting. Current Sunrunner Nal Hutta content is a separate permission case.",
+      "sources": [
+        "https://github.com/Levarrishawk/DLSWG5",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki",
+        "https://swgsunrunner2.com/about/"
+      ],
+      "runtime_validated": false,
+      "zone": "hutta",
+      "local_asset_evidence": [
+        {
+          "path": "terrain/hutta.trn",
+          "archives": [
+            "mtg_planets.tre"
+          ]
+        },
+        {
+          "path": "snapshot/hutta.ws",
+          "archives": [
+            "mtg_patch_022.tre",
+            "mtg_planets.tre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "active-010",
+      "kind": "Planet",
+      "name": "Kashyyyk",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "SOE expansion assets; community pre-CU adaptation",
+      "availability": "Collected MTG assets; additional published source or original release links",
+      "notes": "MTG full-world and segmented terrain exist. Sytner release directs users to MTG improvements. No complete expansion campaign has been verified for our installation.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/kashyyyk-for-precu.2/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki",
+        "https://www.swginfinity.com/guides/adventure-guides"
+      ],
+      "runtime_validated": false,
+      "zone": "kashyyyk",
+      "local_asset_evidence": [
+        {
+          "path": "terrain/kashyyyk.trn",
+          "archives": [
+            "mtg_patch_013_configurable_02.tre",
+            "mtg_patch_022.tre",
+            "mtg_planets.tre"
+          ]
+        },
+        {
+          "path": "snapshot/kashyyyk.ws",
+          "archives": [
+            "mtg_patch_022.tre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "active-011",
+      "kind": "Planet",
+      "name": "Mustafar",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "SOE expansion assets; community pre-CU adaptation",
+      "availability": "Collected MTG assets; additional published source or original release links",
+      "notes": "MTG terrain/snapshot, NPC definitions and some public Stardust quest/region scripts. Not a verified complete Trials of Obi-Wan campaign.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/mustafar-for-precu.3/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki",
+        "https://github.com/Levarrishawk/Stardust"
+      ],
+      "runtime_validated": false,
+      "zone": "mustafar",
+      "local_asset_evidence": [
+        {
+          "path": "terrain/mustafar.trn",
+          "archives": [
+            "mtg_planets.tre"
+          ]
+        },
+        {
+          "path": "snapshot/mustafar.ws",
+          "archives": [
+            "mtg_patch_022.tre",
+            "mtg_planets.tre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "active-012",
+      "kind": "Planet",
+      "name": "Dagobah",
+      "status": "A",
+      "status_label": "Original creator permission required",
+      "origin": "Sunrunner II team / individually credited contributors",
+      "availability": "Advertised on official server; no reusable full world release verified",
+      "notes": "Modern Sunrunner version: see the common project permission statement below. Full reusable world package not verified.",
+      "sources": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "runtime_validated": false,
+      "zone": "dagobah",
+      "local_asset_evidence": []
+    },
+    {
+      "id": "active-013",
+      "kind": "Planet",
+      "name": "Mon Calamari / Dac",
+      "status": "A",
+      "status_label": "Original creator permission required",
+      "origin": "Sunrunner II team / individually credited contributors",
+      "availability": "Advertised on official server; no reusable full world release verified",
+      "notes": "Modern Sunrunner version: see the common project permission statement below. Full reusable world package not verified.",
+      "sources": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "runtime_validated": false,
+      "zone": "moncalamari",
+      "local_asset_evidence": []
+    },
+    {
+      "id": "active-014",
+      "kind": "Planet",
+      "name": "Kuat",
+      "status": "A",
+      "status_label": "Original creator permission required",
+      "origin": "Sunrunner II team / individually credited contributors",
+      "availability": "Advertised on official server; no reusable full world release verified",
+      "notes": "Modern Sunrunner version: see the common project permission statement below. Full reusable world package not verified.",
+      "sources": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "runtime_validated": false,
+      "zone": "kuat",
+      "local_asset_evidence": []
+    },
+    {
+      "id": "active-015",
+      "kind": "Planet",
+      "name": "Ord Mantell",
+      "status": "A",
+      "status_label": "Original creator permission required",
+      "origin": "Sunrunner II team / individually credited contributors",
+      "availability": "Advertised on official server; no reusable full world release verified",
+      "notes": "Modern Sunrunner version: see the common project permission statement below. Full reusable world package not verified.",
+      "sources": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "runtime_validated": false,
+      "zone": "ordmantell",
+      "local_asset_evidence": []
+    },
+    {
+      "id": "active-016",
+      "kind": "Planet",
+      "name": "Bespin",
+      "status": "A",
+      "status_label": "Original creator permission required",
+      "origin": "Sunrunner II team / individually credited contributors",
+      "availability": "Advertised on official server; no reusable full world release verified",
+      "notes": "Modern Sunrunner version: see the common project permission statement below. Full reusable world package not verified.",
+      "sources": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "runtime_validated": false,
+      "zone": "bespin",
+      "local_asset_evidence": []
+    },
+    {
+      "id": "active-017",
+      "kind": "Planet",
+      "name": "Kessel",
+      "status": "A",
+      "status_label": "Original creator permission required",
+      "origin": "Sunrunner II team / individually credited contributors",
+      "availability": "Advertised on official server; no reusable full world release verified",
+      "notes": "Modern Sunrunner version: see the common project permission statement below. Full reusable world package not verified.",
+      "sources": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "runtime_validated": false,
+      "zone": "kessel",
+      "local_asset_evidence": []
+    },
+    {
+      "id": "active-018",
+      "kind": "Planet",
+      "name": "Zeltros",
+      "status": "C",
+      "status_label": "Published with explicit conditions",
+      "origin": "tienvogh",
+      "availability": "Client and server ZIPs downloaded and inspected; hashes recorded",
+      "notes": "Explicit resource-page CC-BY-NC statement: noncommercial use/modification with author credit. ZIPs contain no separate license-version text. Exploration world with no NPCs/combat initially. Includes terrain, snapshot, custom buildings and region/travel Lua. Old plural objects paths need adapting to our Core3 layout; requires MTG assets.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/zeltros-planet.135/"
+      ],
+      "runtime_validated": false,
+      "zone": "zeltros",
+      "local_asset_evidence": []
+    },
+    {
+      "id": "active-019",
+      "kind": "Station",
+      "name": "Tansarii Point Station",
+      "status": "U",
+      "status_label": "Release or permission unverified",
+      "origin": "SOE station assets; independent community implementations",
+      "availability": "MTG station object candidates and published server descriptions",
+      "notes": "Station assets do not supply a complete travel, vendor or quest implementation. Build missing gameplay ourselves.",
+      "sources": [
+        "https://swgsunrunner2.com/full-change-list/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-020",
+      "kind": "Station",
+      "name": "Nova Orion Station",
+      "status": "A",
+      "status_label": "Original creator permission required",
+      "origin": "Sunrunner II implementation",
+      "availability": "Official server description only",
+      "notes": "Full station layout, travel network and original gameplay package not verified as a reusable release. Seek the relevant creator release or permission.",
+      "sources": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-021",
+      "kind": "Station",
+      "name": "Centerpoint Station",
+      "status": "A",
+      "status_label": "Original creator permission required",
+      "origin": "Sunrunner II implementation",
+      "availability": "Official server description only",
+      "notes": "Full station layout, travel network and original gameplay package not verified as a reusable release. Seek the relevant creator release or permission.",
+      "sources": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-022",
+      "kind": "Candidate world",
+      "name": "Otoh Gunga",
+      "status": "D",
+      "status_label": "Development or legacy data only",
+      "origin": "Legacy SOE terrain; New Beginnings separate development effort",
+      "availability": "terrain/otoh_gunga.trn found in MTG archives",
+      "notes": "Legacy terrain is not a finished underwater destination. New Beginnings advertises a separate version in development; no reusable release verified.",
+      "sources": [
+        "https://www.swgnb.com/swg/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-023",
+      "kind": "Candidate world",
+      "name": "Geonosis",
+      "status": "D",
+      "status_label": "Development or legacy data only",
+      "origin": "Bats announced an intention to build it",
+      "availability": "Mentioned as a future project in original Mandalore thread",
+      "notes": "No completed public planet release verified. Do not confuse Yavin IV Geonosian Bio-Lab with a Geonosis planet.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?threads/mandalore-for-swgemu-based-emulators.433/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-024",
+      "kind": "Legacy/test world",
+      "name": "Umbra and developer terrains",
+      "status": "D",
+      "status_label": "Development or legacy data only",
+      "origin": "SOE development/test data",
+      "availability": "MTG archive index names recorded in MTG-inventory-summary.json",
+      "notes": "Includes Umbra, numeric 09/10/11, dungeon1/2, character_farm, creature_test and other test terrains. Not counted among the 18 content worlds.",
+      "sources": [
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-025",
+      "kind": "Pack or tool",
+      "name": "Borrie's Torch Pack",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Borrie BoBaka",
+      "availability": "ZIP downloaded and inspected; not installed",
+      "notes": "Explicit server TRE redistribution statement; credit appreciated. No acquisition schematics supplied.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/borries-torch-pack.96/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-026",
+      "kind": "Pack or tool",
+      "name": "Borrie's Kitchen Pack",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Borrie BoBaka / Dark Rebellion RP",
+      "availability": "ZIP downloaded and inspected; not installed",
+      "notes": "Explicit server TRE redistribution statement; credit appreciated. Crafters/vendor acquisition must be added.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/borries-kitchen-pack.106/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-027",
+      "kind": "Pack or tool",
+      "name": "Borrie's Dark Interiors",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Borrie BoBaka",
+      "availability": "Published resource or release thread located; not installed by this audit",
+      "notes": "Explicit distributed-server-file use statement. Release 0.5 identifies roughly 13 crashing structures; exclude those until repaired.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/borries-dark-interiors.100/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-028",
+      "kind": "Pack or tool",
+      "name": "Borrie's Naboo Structure Pack",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Borrie BoBaka",
+      "availability": "ZIP downloaded and inspected; not installed",
+      "notes": "Explicit server TRE distribution statement; credit appreciated. Deeds, schematics and placement acquisition not included.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/borries-naboo-structure-pack.98/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-029",
+      "kind": "Pack or tool",
+      "name": "Borrie's Light Megapack",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Borrie BoBaka / Dark Rebellion RP",
+      "availability": "ZIP downloaded and inspected; not installed",
+      "notes": "Published specifically for server/world-builder use; downloaded README confirms integration and credits. No separate redistribution clause found: clarify that before rehosting a bundled public client. 11,928 files; not 11,928 finished items.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/borries-light-megapack.113/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-030",
+      "kind": "Pack or tool",
+      "name": "Borrie's Wall Pack Vol. 1",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Borrie BoBaka",
+      "availability": "ZIP downloaded and inspected; not installed",
+      "notes": "Downloaded README expressly allows repacking into a server TRE for players. Credit appreciated. Client/server asset files included.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/borries-wall-pack-vol-1.12/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-031",
+      "kind": "Pack or tool",
+      "name": "Abi's Lamp Pack",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Abi",
+      "availability": "ZIP downloaded and inspected; not installed",
+      "notes": "Downloaded source files explicitly offer the work through MTG with Abi credited on the server website. Includes schematic and tangible definitions; retain notices.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/abis-lamp-pack.99/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-032",
+      "kind": "Pack or tool",
+      "name": "SWGEmu Core3 Multipassenger",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames",
+      "availability": "ZIP downloaded and inspected; not installed",
+      "notes": "Explicit public code/assets release, AGPLv3 source, credit EiF. Matching passenger TRE downloaded. Demonstrates Flash speeder passengers; not a release of every EiF custom vehicle.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/swgemu-core3-multipassenger.74/",
+        "https://gitlab.com/Empire-In-Flames/swgemu-multipassenger"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-033",
+      "kind": "Pack or tool",
+      "name": "Useful Newsnet Terminals",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames",
+      "availability": "ZIP downloaded and inspected; not installed",
+      "notes": "Creator explicitly releases the script for other servers. Original two-file ZIP inspected. Requires lua-socket and replacing EiF website URLs with our own information source; retain its source notices.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/useful-newsnet-terminals.20/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-034",
+      "kind": "Pack or tool",
+      "name": "Better Astromechs",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames",
+      "availability": "ZIP downloaded and inspected; not installed",
+      "notes": "Explicit server-use offer with EiF credit requested. Changes NPC astromech base/trim colors; not a new playable droid species.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/better-astromechs.35/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-035",
+      "kind": "Pack or tool",
+      "name": "Borrie's Wearable Rank Plates",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Borrie BoBaka",
+      "availability": "ZIP downloaded and inspected; not installed",
+      "notes": "Explicit permission to repack in server TREs; credit appreciated. Gender appearance-table changes required; no player acquisition route supplied.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/borries-wearable-rank-plates.55/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-036",
+      "kind": "Pack or tool",
+      "name": "Named Saber Crystals",
+      "status": "U",
+      "status_label": "Release or permission unverified",
+      "origin": "Original MTG thread author to verify",
+      "availability": "Published resource or release thread located; not installed by this audit",
+      "notes": "Public release thread identified; individual files and terms not inspected.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?threads/named-saber-crystals.419/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-037",
+      "kind": "Pack or tool",
+      "name": "Classic BARC Assets",
+      "status": "U",
+      "status_label": "Release or permission unverified",
+      "origin": "Original MTG thread author to verify",
+      "availability": "Published resource or release thread located; not installed by this audit",
+      "notes": "Public release thread identified; check whether already covered by MTG, and preserve asset provenance.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?threads/classic-barc-speeder-assets-patch.238/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-038",
+      "kind": "Pack or tool",
+      "name": "Post-14.1 House Assets",
+      "status": "U",
+      "status_label": "Release or permission unverified",
+      "origin": "Original MTG thread author to verify",
+      "availability": "Published resource or release thread located; not installed by this audit",
+      "notes": "Historical release identified; MTG also supplies many house definitions. Full placement/crafting still needs testing.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?threads/post-14-1-house-assets-patch.237/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-039",
+      "kind": "Pack or tool",
+      "name": "Borrie's /tool and Jawa object syncing",
+      "status": "U",
+      "status_label": "Release or permission unverified",
+      "origin": "Borrie BoBaka",
+      "availability": "Published resource or release thread located; not installed by this audit",
+      "notes": "Public development tool thread identified; file-level license and current Core3 port not checked.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?threads/borries-tool-command-featuring-the-jawa-toolbox-object-syncing-command.1395/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-040",
+      "kind": "Pack or tool",
+      "name": "Sytner IFF Editor (SIE)",
+      "status": "U",
+      "status_label": "Release or permission unverified",
+      "origin": "Sytner",
+      "availability": "Published resource or release thread located; not installed by this audit",
+      "notes": "Official tool release located. Check distribution terms before bundling the tool; no tool installed during this audit.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/sie.1/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-041",
+      "kind": "Pack or tool",
+      "name": "SWG Galaxy Map Editor",
+      "status": "U",
+      "status_label": "Release or permission unverified",
+      "origin": "digedaduku",
+      "availability": "Published resource or release thread located; not installed by this audit",
+      "notes": "2026 map/UI editor. Full resource content explicitly requires a Mod the Galaxy login; download and license not inspected.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/swg-galaxy-map-editor.173/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-042",
+      "kind": "Pack or tool",
+      "name": "SWG Forge",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "wickedhangover / monkjames",
+      "availability": "Published resource or release thread located; not installed by this audit",
+      "notes": "Public GPL-2.0 source for VS Code IFF/STF/TRE/CRC/texture editors, terrain viewer, crafting and mount tools. Preserve its license; build/runtime quality not tested. No extension installed.",
+      "sources": [
+        "https://github.com/monkjames/SWG-Forge"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-043",
+      "kind": "Tool",
+      "name": "SWG Mobile Template Viewer",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "[name removed] / [name removed]",
+      "availability": "Public source and hosted viewer",
+      "notes": "Creator identifies authorship and asks for credit for modifications; repository carries an informal named license. Useful NPC reference, not a playable species package.",
+      "sources": [
+        "https://github.com/[name removed]/swgmtv"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-044",
+      "kind": "MTG family",
+      "name": "Housing",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "MTG contributors; many restored SOE assets",
+      "availability": "891 published Lua definition files in collected bundle",
+      "notes": "Published definitions: common MTG terms apply. See the per-file inventory; acquisition and runtime behavior require testing.",
+      "sources": [
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-045",
+      "kind": "MTG family",
+      "name": "Schematics",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "MTG contributors; many restored SOE assets",
+      "availability": "1,634 published Lua definition files in collected bundle",
+      "notes": "Published definitions: common MTG terms apply. See the per-file inventory; acquisition and runtime behavior require testing.",
+      "sources": [
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-046",
+      "kind": "MTG family",
+      "name": "Inventory items / decor / armor / vehicles",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "MTG contributors; many restored SOE assets",
+      "availability": "6,723 published Lua definition files in collected bundle",
+      "notes": "Published definitions: common MTG terms apply. See the per-file inventory; acquisition and runtime behavior require testing.",
+      "sources": [
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-047",
+      "kind": "MTG family",
+      "name": "Weapons",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "MTG contributors; many restored SOE assets",
+      "availability": "358 published Lua definition files in collected bundle",
+      "notes": "Published definitions: common MTG terms apply. See the per-file inventory; acquisition and runtime behavior require testing.",
+      "sources": [
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-048",
+      "kind": "MTG family",
+      "name": "NPC and creature objects",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "MTG contributors; many restored SOE assets",
+      "availability": "3,032 published Lua definition files in collected bundle",
+      "notes": "Published definitions: common MTG terms apply. See the per-file inventory; acquisition and runtime behavior require testing.",
+      "sources": [
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-049",
+      "kind": "MTG family",
+      "name": "Ships",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "MTG contributors; many restored SOE assets",
+      "availability": "322 published Lua definition files in collected bundle",
+      "notes": "Published definitions: common MTG terms apply. See the per-file inventory; acquisition and runtime behavior require testing.",
+      "sources": [
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-050",
+      "kind": "Quest example",
+      "name": "The Beginning",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "MTG tutorial contributor; retain original release credits",
+      "availability": "Published Lua plus locally adapted example already installed",
+      "notes": "Han/Chewbacca introductory quest framework. Other duplicate formatted and blank tutorial files are references, not additional finished quests.",
+      "sources": [
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-051",
+      "kind": "Restricted or unverified family",
+      "name": "Sunrunner original Lua quests / encounters",
+      "status": "A",
+      "status_label": "Original creator permission required",
+      "origin": "Relevant original creators",
+      "availability": "Server feature descriptions and credits; full reuse grant not verified",
+      "notes": "Original Lua is held in private repositories; no full creator release verified.",
+      "sources": [
+        "https://swgsunrunner2.com/about/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-052",
+      "kind": "Restricted or unverified family",
+      "name": "Sunrunner original artwork / planet revisions",
+      "status": "A",
+      "status_label": "Original creator permission required",
+      "origin": "Relevant original creators",
+      "availability": "Server feature descriptions and credits; full reuse grant not verified",
+      "notes": "Original artwork requires creator permission and credit under the published project policy.",
+      "sources": [
+        "https://swgsunrunner2.com/about/"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "id": "active-053",
+      "kind": "Restricted or unverified family",
+      "name": "EiF custom ship models and converted third-party artwork",
+      "status": "U",
+      "status_label": "Release or permission unverified",
+      "origin": "Relevant original creators",
+      "availability": "Server feature descriptions and credits; full reuse grant not verified",
+      "notes": "EiF public server source and client patch repository have now been located. Custom ship art still has individual author/license conditions; see the new report.",
+      "sources": [
+        "https://www.empireinflames.net/?page_id=985"
+      ],
+      "runtime_validated": false
+    },
+    {
+      "kind": "Species",
+      "name": "Hutt",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/hutt_male.lua",
+          "sha256": "7b5402dad292208255a2a4948188b45b2cc4151301cb962be36e8926c6ef4b21",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_hutt_male.iff",
+          "starting_skills": [
+            "species_hutt"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        },
+        {
+          "gender": "female",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/hutt_female.lua",
+          "sha256": "46ce0c42951aced4e77365a2c4aa27b458401cacfd10c0ec4d38bc75a8eb1cc1",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_hutt_female.iff",
+          "starting_skills": [
+            "species_hutt"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-054"
+    },
+    {
+      "kind": "Species",
+      "name": "Nautolan",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/nautolan_male.lua",
+          "sha256": "2192a39b9f021e9d16a248a8dda5a79f243263c357d85dcea2888f4d0074db81",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_nautolan_male.iff",
+          "starting_skills": [
+            "species_nautolan"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-055"
+    },
+    {
+      "kind": "Species",
+      "name": "Togruta",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "female",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/togruta_female.lua",
+          "sha256": "a8c319e246326934bb239e3ee4452d46fd3f96583c24b8bcc96410ef6c0df615",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_togruta_female.iff",
+          "starting_skills": [
+            "species_togruta"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-056"
+    },
+    {
+      "kind": "Species",
+      "name": "Chiss",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/chiss_male.lua",
+          "sha256": "1cfd14da8a0b60dc671617dd8d720727c475bf3dbf2f7c5be99939241b2ebc78",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_chiss_male.iff",
+          "starting_skills": [
+            "species_chiss"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        },
+        {
+          "gender": "female",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/chiss_female.lua",
+          "sha256": "80f9675c50f575d29ac656c96ca3d655156c6547c46b7835b97932350a71b1f9",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_chiss_female.iff",
+          "starting_skills": [
+            "species_chiss"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-057"
+    },
+    {
+      "kind": "Species",
+      "name": "Devaronian",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/devaronian_male.lua",
+          "sha256": "940f8ee01b3592f365ebbff5a2288aa46e7c375f7a79657a593fdfa0077e352f",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_devaronian_male.iff",
+          "starting_skills": [
+            "species_devaronian"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-058"
+    },
+    {
+      "kind": "Species",
+      "name": "Gran",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/gran_male.lua",
+          "sha256": "52991c2e863a00d7418e72e23b90a043616da2f829cbbd2196c4f94c8eca573f",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_gran_male.iff",
+          "starting_skills": [
+            "species_gran"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-059"
+    },
+    {
+      "kind": "Species",
+      "name": "Ishi Tib",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/ishi_tib_male.lua",
+          "sha256": "480600d74cad0c604efd3fd8cd32d5bd86d089b6ada065c2db14bbd40104c700",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_ishi_tib_male.iff",
+          "starting_skills": [
+            "species_ishi_tib"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-060"
+    },
+    {
+      "kind": "Species",
+      "name": "Nightsister",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "female",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/nightsister_female.lua",
+          "sha256": "f4d9716d5fc7f08c96967806d946f342265fb8dedfac4f14ddedd375ad8b65e3",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_nightsister_female.iff",
+          "starting_skills": [
+            "species_nightsister"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-061"
+    },
+    {
+      "kind": "Species",
+      "name": "Nikto",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/nikto_male.lua",
+          "sha256": "0eeb8702c79ea1f87468f58d81ac9a3daf0e4dd6375393cee55895d88e7ed5de",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_nikto_male.iff",
+          "starting_skills": [
+            "species_nikto"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-062"
+    },
+    {
+      "kind": "Species",
+      "name": "Quarren",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/quarren_male.lua",
+          "sha256": "04f0254759ebf22b82f879d7f9175eaf039089b0805efeb4c928507f2cff761a",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_quarren_male.iff",
+          "starting_skills": [
+            "species_quarren"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-063"
+    },
+    {
+      "kind": "Species",
+      "name": "Singing Mountain Clan Witch",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "female",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/smc_female.lua",
+          "sha256": "732180d4f9bb79fa9dd185236abc1142a421ba8fa397e2b401fcc9386d24ae72",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_smc_female.iff",
+          "starting_skills": [
+            "species_smc"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-064"
+    },
+    {
+      "kind": "Species",
+      "name": "Weequay",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/weequay_male.lua",
+          "sha256": "31bda37041ce97967dbe90ab472a6febcb36ba9fb63fe723e937e523e65fb26f",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_weequay_male.iff",
+          "starting_skills": [
+            "species_weequay"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-065"
+    },
+    {
+      "kind": "Species",
+      "name": "Aqualish",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/aqualish_male.lua",
+          "sha256": "183f96e616fee08cc22fbaf175ec6a23ba2ba84cc99266aac852c62878ff92e8",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_aqualish_male.iff",
+          "starting_skills": [
+            "species_aqualish"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        },
+        {
+          "gender": "female",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/aqualish_female.lua",
+          "sha256": "a8919689b8af7b4f2a95228fee1470bcb5fb45d390f80b32bffe562d7f91d39d",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_aqualish_female.iff",
+          "starting_skills": [
+            "species_aqualish"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-066"
+    },
+    {
+      "kind": "Species",
+      "name": "Bith",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/bith_male.lua",
+          "sha256": "82f98133c3ab7e7874ae7d73f1211ae0436bfd77fda74e639e573da2e14d4987",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_bith_male.iff",
+          "starting_skills": [
+            "species_bith"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        },
+        {
+          "gender": "female",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/bith_female.lua",
+          "sha256": "4dad47cde0020d01e4db524f29669e1fe6b11def0006d48c98b8aeee67e76b74",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_bith_female.iff",
+          "starting_skills": [
+            "species_bith"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-067"
+    },
+    {
+      "kind": "Species",
+      "name": "Gotal",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/gotal_male.lua",
+          "sha256": "c2e919f7a26e7aa983fe8f8e1181d3f42f683a827c7608c8df564601acf3d088",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_gotal_male.iff",
+          "starting_skills": [
+            "species_gotal"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-068"
+    },
+    {
+      "kind": "Species",
+      "name": "Talz",
+      "status": "P",
+      "status_label": "Published for server use",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Original MTG species package is also collected.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Creator species release"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/talz_male.lua",
+          "sha256": "28f4d2762eba44fcf9d4651732a651471ad3a8dc22e4b80eccdd9fbe9e886001",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [
+            "mtg_patch_023.tre"
+          ],
+          "shared_template": "object/creature/player/shared_talz_male.iff",
+          "starting_skills": [
+            "species_talz"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-069"
+    },
+    {
+      "kind": "Species",
+      "name": "Abyssin",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/abyssin_male.lua",
+          "sha256": "b95f37ee1b8b9ce7ba65a71f582d016f0938f152812909d68c34015a2932c74e",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_abyssin_male.iff",
+          "starting_skills": [
+            "species_abyssin"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-070"
+    },
+    {
+      "kind": "Species",
+      "name": "Arcona",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/arcona_male.lua",
+          "sha256": "eeebbee8c55610a0c85206d41a996ff616d9045abd1b11602fce92372494392f",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_arcona_male.iff",
+          "starting_skills": [
+            "species_arcona"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-071"
+    },
+    {
+      "kind": "Species",
+      "name": "Cerean",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/cerean_male.lua",
+          "sha256": "b6269d3524ccaaf69d58cfb0d59cc4e2b2f5532e86baaf106cc385b18a1216ea",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_cerean_male.iff",
+          "starting_skills": [
+            "species_cerean"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-072"
+    },
+    {
+      "kind": "Species",
+      "name": "Duros",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/duros_male.lua",
+          "sha256": "90f9c8cf93c51115b6d1c948a25a00a63c95a9c14a4f69b05cfc0e9a6aec376e",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_duros_male.iff",
+          "starting_skills": [
+            "species_duros"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-073"
+    },
+    {
+      "kind": "Species",
+      "name": "Gungan",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/gungan_male.lua",
+          "sha256": "08db4f157a332345ed54ee66300ff0bebf2444726f0eff0f3ed5b925b179eda4",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_gungan_male.iff",
+          "starting_skills": [
+            "species_gungan"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-074"
+    },
+    {
+      "kind": "Species",
+      "name": "Iktotchi",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/iktotchi_male.lua",
+          "sha256": "89e47d184e83a8fadfe8777048de626897fb05acf5611ea5f165dd6eddffa293",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_iktotchi_male.iff",
+          "starting_skills": [
+            "species_iktotchi"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-075"
+    },
+    {
+      "kind": "Species",
+      "name": "Jenet",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/jenet_male.lua",
+          "sha256": "81605ae55760338224e5ca365b05a1433f69bde641962850b587d2091af3412f",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_jenet_male.iff",
+          "starting_skills": [
+            "species_jenet"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-076"
+    },
+    {
+      "kind": "Species",
+      "name": "Kel Dor",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/kel_dor_male.lua",
+          "sha256": "e072f17355a25ac802a2e4888bda8fde90f8e43e6ae5cb1d34d6be33c23a3dc9",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_kel_dor_male.iff",
+          "starting_skills": [
+            "species_kel_dor"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-077"
+    },
+    {
+      "kind": "Species",
+      "name": "Kubaz",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/kubaz_male.lua",
+          "sha256": "a87a8a7af9a7c48547a0c1e26b4d227f9fb0bc22ae0276cb1b9df91a4436f0a3",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_kubaz_male.iff",
+          "starting_skills": [
+            "species_kubaz"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-078"
+    },
+    {
+      "kind": "Species",
+      "name": "Sanyassan",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/sanyassan_male.lua",
+          "sha256": "b8cf319271acc32e279d5ab7d73e1f83eaae66e0479561ecee7bb876a4deebeb",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_sanyassan_male.iff",
+          "starting_skills": [
+            "species_sanyassan"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        },
+        {
+          "gender": "female",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/sanyassan_female.lua",
+          "sha256": "4a13947d9c2a85e238ec3a106e728f157b8fbdfd476b338ee36d54be0695cecd",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_sanyassan_female.iff",
+          "starting_skills": [
+            "species_sanyassan"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-079"
+    },
+    {
+      "kind": "Species",
+      "name": "Chadra-Fan",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/chadra_fan_male.lua",
+          "sha256": "fe0386969e578a4e099d2b1afe0b3435152fd8a7153c58e7f28f5244940b7abe",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_chadra_fan_male.iff",
+          "starting_skills": [
+            "species_chadra_fan"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        },
+        {
+          "gender": "female",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/chadra_fan_female.lua",
+          "sha256": "1829f83ec55f4cb1c2c7c7532a6d9bbf0f7d5bc3e88dd97d6785703646967fba",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_chadra_fan_female.iff",
+          "starting_skills": [
+            "species_chadra_fan"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-080"
+    },
+    {
+      "kind": "Species",
+      "name": "Droid (NK3 label in source; not verified IG-100)",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/droid_male.lua",
+          "sha256": "b73ef0cf1d7a826ab4620db75f4c424923cf6c26fc3e725a0af6298baf57083a",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_droid_male.iff",
+          "starting_skills": [
+            "species_droid"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-081"
+    },
+    {
+      "kind": "Species",
+      "name": "Dug",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/dug_male.lua",
+          "sha256": "07580a017453e214d59799cfb8fc2e266a546e55e1d53566310dcda178f4f1b0",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_dug_male.iff",
+          "starting_skills": [
+            "species_dug"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-082"
+    },
+    {
+      "kind": "Species",
+      "name": "Ewok",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/ewok_male.lua",
+          "sha256": "e1198ed7786a0c239051d342b8ca671fb56785613fabbf47d0ed7d3c250ca1ef",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_ewok_male.iff",
+          "starting_skills": [
+            "species_ewok"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        },
+        {
+          "gender": "female",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/ewok_female.lua",
+          "sha256": "2108c01c92903a36a12f20a2b3ee763efe240c4cee36d245f99eb2d169af2428",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_ewok_female.iff",
+          "starting_skills": [
+            "species_ewok"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-083"
+    },
+    {
+      "kind": "Species",
+      "name": "Feeorin",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/feeorin_male.lua",
+          "sha256": "60dd25af6f740e821919695d496056726105e874d4de957e5ca6ffe8088a2b0a",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_feeorin_male.iff",
+          "starting_skills": [
+            "species_feeorin"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-084"
+    },
+    {
+      "kind": "Species",
+      "name": "Geonosian",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/geonosian_male.lua",
+          "sha256": "819f053eabb7849d548c70a4aa7d50ced75082b8f2210cb991d827e5d0efe95d",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_geonosian_male.iff",
+          "starting_skills": [
+            "species_geonosian"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-085"
+    },
+    {
+      "kind": "Species",
+      "name": "Ortolan",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/ortolan_male.lua",
+          "sha256": "936a664cacc7bafb06b23b56d999eee9bfa28b57824cf975dcf85505fd57c63f",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_ortolan_male.iff",
+          "starting_skills": [
+            "species_ortolan"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-086"
+    },
+    {
+      "kind": "Species",
+      "name": "Togorian",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/togorian_male.lua",
+          "sha256": "603a24cedfa109b3f6c1c08dd513c2d038bc2e5902de27de649893dd2d51b02b",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_togorian_male.iff",
+          "starting_skills": [
+            "species_togorian"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-087"
+    },
+    {
+      "kind": "Species",
+      "name": "Toydarian",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/toydarian_male.lua",
+          "sha256": "ebe524751a82b4d039676a99b55e320e31d047d9de28dd56f0f2f230557435ab",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_toydarian_male.iff",
+          "starting_skills": [
+            "species_toydarian"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-088"
+    },
+    {
+      "kind": "Species",
+      "name": "Mirialan",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/mirialan_male.lua",
+          "sha256": "4472089680b46d3796b41c46dcb9157e2e9813d80b3d014679351ad5b5a1e5c0",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_mirialan_male.iff",
+          "starting_skills": [
+            "species_mirialan"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        },
+        {
+          "gender": "female",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/mirialan_female.lua",
+          "sha256": "06a3f175a7a27999ff893c1b50290e2d8cb3a448604326233ffd8c99ad165be6",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_mirialan_female.iff",
+          "starting_skills": [
+            "species_mirialan"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-089"
+    },
+    {
+      "kind": "Species",
+      "name": "Zeltron",
+      "status": "S",
+      "status_label": "Published server code; client asset reuse unresolved",
+      "origin": "Halyn / Empire in Flames public source snapshot",
+      "availability": "Player Lua, race header and matching public starsider01 template located; not installed",
+      "notes": "2017 reference only; client selection, equipment, appearance dependencies and modern Core3 compatibility remain untested. Client art terms need a specific release statement or author agreement before importing that contribution.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "https://gitlab.com/Empire-In-Flames/EiF-Public/-/blob/35bdbed4bba3015d592c928ecf30fb0e40e336c6/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua"
+      ],
+      "runtime_validated": false,
+      "components": {
+        "server_code": "AGPL repository / LGPL player Lua headers",
+        "client_assets": "Reuse not established by player-patch availability"
+      },
+      "model_evidence": [
+        {
+          "gender": "male",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/zeltron_male.lua",
+          "sha256": "3f56d1933e1f4fa0a7fc4c78dfb7d77faebb6bc5e26c553540305c015dfbce8a",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_zeltron_male.iff",
+          "starting_skills": [
+            "species_zeltron"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        },
+        {
+          "gender": "female",
+          "path": "MMOCoreORB/bin/scripts/object/creature/player/zeltron_female.lua",
+          "sha256": "432bc487486183a0f1434cc850e549c309af0ed7b599094f514773d3d1478bb5",
+          "registered_in_serverobjects": true,
+          "declared_shared_template": true,
+          "local_mtg_archives": [],
+          "shared_template": "object/creature/player/shared_zeltron_female.iff",
+          "starting_skills": [
+            "species_zeltron"
+          ],
+          "notice": "LGPL-2-or-later file header",
+          "in_eif_starsider01": true
+        }
+      ],
+      "id": "active-090"
+    },
+    {
+      "kind": "Species",
+      "name": "Arkanian",
+      "status": "U",
+      "status_label": "Later EiF implementation; reusable complete package unverified",
+      "origin": "Empire in Flames",
+      "availability": "Officially documented player option; not in the inspected 2017 species set",
+      "notes": "Do not substitute the NK3 droid implementation for IG-100. Seek exact source/client package and terms.",
+      "sources": [
+        "https://www.empireinflames.net/?p=1745"
+      ],
+      "runtime_validated": false,
+      "id": "active-091"
+    },
+    {
+      "kind": "Species",
+      "name": "Echani",
+      "status": "U",
+      "status_label": "Later EiF implementation; reusable complete package unverified",
+      "origin": "Empire in Flames",
+      "availability": "Officially documented player option; not in the inspected 2017 species set",
+      "notes": "Do not substitute the NK3 droid implementation for IG-100. Seek exact source/client package and terms.",
+      "sources": [
+        "https://www.empireinflames.net/?p=1745"
+      ],
+      "runtime_validated": false,
+      "id": "active-092"
+    },
+    {
+      "kind": "Species",
+      "name": "IG-100 Droid",
+      "status": "U",
+      "status_label": "Later EiF implementation; reusable complete package unverified",
+      "origin": "Empire in Flames",
+      "availability": "Officially documented player option; not in the inspected 2017 species set",
+      "notes": "Do not substitute the NK3 droid implementation for IG-100. Seek exact source/client package and terms.",
+      "sources": [
+        "https://www.empireinflames.net/?p=282"
+      ],
+      "runtime_validated": false,
+      "id": "active-093"
+    },
+    {
+      "kind": "Pack or tool",
+      "name": "Halyn's Development Datapad",
+      "status": "P",
+      "status_label": "Published for identified purpose",
+      "origin": "Halyn / Empire in Flames",
+      "availability": "Collected reference files; not installed",
+      "notes": "Two-file public developer tool; no new client assets. Replace sample calls to missing EiF heroics and restrict controls to authorized staff.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/halyns-datapad.41/"
+      ],
+      "runtime_validated": false,
+      "id": "active-094"
+    },
+    {
+      "kind": "Pack or tool",
+      "name": "Unstable Lightsaber Blades",
+      "status": "P",
+      "status_label": "Published for identified purpose",
+      "origin": "Halyn / Empire in Flames",
+      "availability": "Collected reference files; not installed",
+      "notes": "Halyn shaders and Auri textures. Public use with credit requested. Cosmetic blade overrides; selectively package after testing.",
+      "sources": [
+        "https://modthegalaxy.com/index.php?resources/unstable-lightsaber-blades.118/"
+      ],
+      "runtime_validated": false,
+      "id": "active-095"
+    },
+    {
+      "kind": "Pack or tool",
+      "name": "EiF public server source snapshot",
+      "status": "P",
+      "status_label": "Published for identified purpose",
+      "origin": "Halyn / Empire in Flames",
+      "availability": "Collected reference files; not installed",
+      "notes": "August 2017 AGPL compliance release. Useful selected source; private custom screenplays and modern content are not present.",
+      "sources": [
+        "https://gitlab.com/Empire-In-Flames/EiF-Public"
+      ],
+      "runtime_validated": false,
+      "id": "active-096"
+    },
+    {
+      "kind": "Design reference",
+      "name": "Uprising: Resource search and crafting comparisons",
+      "status": "U",
+      "status_label": "Reference only; no official reuse release found",
+      "origin": "SWG Uprising",
+      "availability": "Documented behavior; no official source/assets collected",
+      "notes": "In-game materials board with recipe comparisons and survey waypoints. Candidate for our own implementation.",
+      "sources": [
+        "https://swguprising.com/#whats-different"
+      ],
+      "runtime_validated": false,
+      "id": "active-097"
+    },
+    {
+      "kind": "Design reference",
+      "name": "Uprising: Crafting and production conveniences",
+      "status": "U",
+      "status_label": "Reference only; no official reuse release found",
+      "origin": "SWG Uprising",
+      "availability": "Documented behavior; no official source/assets collected",
+      "notes": "Recipe recovery, larger factory runs, component returns and clear ingredient names. Candidate for our own implementation.",
+      "sources": [
+        "https://swguprising.com/#whats-different"
+      ],
+      "runtime_validated": false,
+      "id": "active-098"
+    },
+    {
+      "kind": "Design reference",
+      "name": "Uprising: Housing and vendor conveniences",
+      "status": "U",
+      "status_label": "Reference only; no official reuse release found",
+      "origin": "SWG Uprising",
+      "availability": "Documented behavior; no official source/assets collected",
+      "notes": "Furnished-house packing, shared storage, vendor customization and full furniture rotation. Candidate for our own implementation.",
+      "sources": [
+        "https://swguprising.com/#whats-different"
+      ],
+      "runtime_validated": false,
+      "id": "active-099"
+    },
+    {
+      "kind": "Design reference",
+      "name": "Uprising: Companions and service support",
+      "status": "U",
+      "status_label": "Reference only; no official reuse release found",
+      "origin": "SWG Uprising",
+      "availability": "Documented behavior; no official source/assets collected",
+      "notes": "Harvesting droids, enhanced pet genetics and configurable medical assistants. Candidate for our own implementation.",
+      "sources": [
+        "https://swguprising.com/#whats-different"
+      ],
+      "runtime_validated": false,
+      "id": "active-100"
+    },
+    {
+      "kind": "Design reference",
+      "name": "Uprising: Encounters and rewards",
+      "status": "U",
+      "status_label": "Reference only; no official reuse release found",
+      "origin": "SWG Uprising",
+      "availability": "Documented behavior; no official source/assets collected",
+      "notes": "Exar Kun, Axkva Min, Decrepit Droid Factory, Lost Star Destroyer and roaming bosses. Candidate for our own implementation.",
+      "sources": [
+        "https://swguprising.com/#whats-different"
+      ],
+      "runtime_validated": false,
+      "id": "active-101"
+    },
+    {
+      "kind": "Design reference",
+      "name": "Uprising: Jedi and faction progression",
+      "status": "U",
+      "status_label": "Reference only; no official reuse release found",
+      "origin": "SWG Uprising",
+      "availability": "Documented behavior; no official source/assets collected",
+      "notes": "Grey Jedi and Ronin faction development alongside Light/Dark progression. Candidate for our own implementation.",
+      "sources": [
+        "https://swguprising.com/#whats-different"
+      ],
+      "runtime_validated": false,
+      "id": "active-102"
+    }
+  ],
+  "deep_report": "C:\\Users\\Pengw\\Documents\\Codex\\2026-10-13\\h\\outputs\\Content-catalogue\\EiF-Uprising\\EiF-and-Uprising-research.md",
+  "server_changes": false
+}

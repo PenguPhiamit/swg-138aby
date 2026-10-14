@@ -1,0 +1,202 @@
+From eebdd99de159b9315891a821e284268f85097d40 Mon Sep 17 00:00:00 2001
+From: SWG Local Dev <swg-local@localhost>
+Date: Tue, 13 Oct 2026 14:28:49 -0700
+Subject: [PATCH 3/5] Sandbox: /agentpath helper for the agent client (bot
+ accounts only)
+
+The headless agent client has no terrain or navmeshes. /agentpath asks the
+server, which plans with the PathFinderManager the NPCs use:
+  /agentpath path <x> <y> [<z> <cellId>]   world or cell-local route
+  /agentpath height <x> <y>                 ground height
+The answer is a "[agentpath] {json}" system message to the caller only.
+Only accounts listed in Core3.AgentAccounts (config-local.lua) may use it;
+everyone else gets "insufficient permission". Not deployed.
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../command/CommandConfigManager.cpp          |   7 +
+ .../creature/commands/AgentPathCommand.h      | 139 ++++++++++++++++++
+ 2 files changed, 146 insertions(+)
+ create mode 100755 MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h
+
+diff --git a/MMOCoreORB/src/server/zone/managers/objectcontroller/command/CommandConfigManager.cpp b/MMOCoreORB/src/server/zone/managers/objectcontroller/command/CommandConfigManager.cpp
+index 3508f548..adaa62cb 100755
+--- a/MMOCoreORB/src/server/zone/managers/objectcontroller/command/CommandConfigManager.cpp
++++ b/MMOCoreORB/src/server/zone/managers/objectcontroller/command/CommandConfigManager.cpp
+@@ -68,6 +68,7 @@
+ #include "templates/datatables/DataTableIff.h"
+ #include "templates/datatables/DataTableRow.h"
+ #include "CommandList.h"
++#include "server/zone/objects/creature/commands/AgentPathCommand.h"
+ 
+ CommandList* CommandConfigManager::slashCommands = nullptr;
+ ZoneProcessServer* CommandConfigManager::server = nullptr;
+@@ -366,6 +367,9 @@ void CommandConfigManager::registerSpecialCommands(CommandList* sCommands) {
+ 	createCommand(String("creatureRangedAttack").toLowerCase())->setCommandGroup(0xe1c9a54a);
+ 	createCommand(String("defaultDroidAttack").toLowerCase())->setCommandGroup(0xe1c9a54a);
+ 
++	// Sandbox: navmesh path / ground height helper for the agent client (bot accounts only)
++	createCommand(String("agentPath").toLowerCase());
++
+ 	// Space Special Commands
+ 	createCommand(String("comm").toLowerCase())->setCommandGroup(0xD8D3D9F2);
+ 
+@@ -865,6 +869,9 @@ void CommandConfigManager::registerCommands() {
+ 	//Space Commands
+ 	commandFactory.registerCommand<CommCommand>(String("comm").toLowerCase());
+ 
++	// Sandbox: agent client helper
++	commandFactory.registerCommand<AgentPathCommand>(String("agentPath").toLowerCase());
++
+ 	//pet commands
+ 	commandFactory.registerCommand<PetAttackCommand>(String("petAttack").toLowerCase());
+ 	commandFactory.registerCommand<PetEmoteCommand>(String("petEmote").toLowerCase());
+diff --git a/MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h b/MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h
+new file mode 100755
+index 00000000..f0b20aec
+--- /dev/null
++++ b/MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h
+@@ -0,0 +1,139 @@
++/*
++				Copyright <SWGEmu>
++		See file COPYING for copying conditions.*/
++
++#ifndef AGENTPATHCOMMAND_H_
++#define AGENTPATHCOMMAND_H_
++
++#include "conf/ConfigManager.h"
++#include "server/zone/ZoneServer.h"
++#include "server/zone/objects/creature/CreatureObject.h"
++#include "server/zone/objects/creature/commands/QueueCommand.h"
++#include "server/login/account/AccountManager.h"
++#include "server/zone/managers/collision/CollisionManager.h"
++#include "server/zone/managers/collision/PathFinderManager.h"
++#include "server/zone/objects/cell/CellObject.h"
++
++/*
++ * Sandbox helper for the agent client (headless bot): it has no terrain or navmeshes,
++ * so it asks the server, which plans with the same PathFinderManager the NPCs use.
++ *
++ *   /agentpath path <x> <y> [<z> <cellId>]   route from our position; x/y/z are cell-local
++ *                                             when a cell is given, world coordinates otherwise
++ *   /agentpath height <x> <y>                 ground height at a world position
++ *
++ * The answer is a system message "[agentpath] {json}" sent only to the caller.
++ * Only accounts listed in Core3.AgentAccounts (config-local.lua) may use it.
++ */
++class AgentPathCommand : public QueueCommand {
++public:
++	AgentPathCommand(const String& name, ZoneProcessServer* server) : QueueCommand(name, server) {
++	}
++
++	int doQueueCommand(CreatureObject* creature, const uint64& target, const UnicodeString& arguments) const {
++		if (!creature->isPlayerCreature())
++			return GENERALERROR;
++
++		auto ghost = creature->getPlayerObject();
++
++		if (ghost == nullptr)
++			return GENERALERROR;
++
++		auto account = AccountManager::getAccount(ghost->getAccountID(), true);
++		const auto& allowed = ConfigManager::instance()->getStringVector("Core3.AgentAccounts");
++
++		if (account == nullptr || !allowed.contains(account->getUsername()))
++			return INSUFFICIENTPERMISSION;
++
++		Zone* zone = creature->getZone();
++
++		if (zone == nullptr)
++			return GENERALERROR;
++
++		JSONSerializationType reply;
++
++		try {
++			StringTokenizer args(arguments.toString());
++			String mode;
++			args.getStringToken(mode);
++			float x = args.getFloatToken();
++			float y = args.getFloatToken();
++
++			if (mode == "height") {
++				reply = {{"mode", "height"}, {"x", x}, {"y", y},
++						 {"z", CollisionManager::getWorldFloorCollision(x, y, zone, false)}};
++			} else if (mode == "path") {
++				reply = findPath(creature, zone, x, y, args);
++			} else {
++				return INVALIDPARAMETERS;
++			}
++		} catch (const Exception& e) {
++			reply = {{"ok", false}, {"error", "usage: path x y [z cellId] | height x y"}};
++		}
++
++		creature->sendSystemMessage("[agentpath] " + String(reply.dump().c_str()));
++
++		return SUCCESS;
++	}
++
++	JSONSerializationType findPath(CreatureObject* creature, Zone* zone, float x, float y, StringTokenizer& args) const {
++		CellObject* cell = nullptr;
++		float z = 0;
++
++		if (args.hasMoreTokens()) {
++			z = args.getFloatToken();
++			uint64 cellID = args.getLongToken();
++			ManagedReference<SceneObject*> object = server->getZoneServer()->getObject(cellID);
++
++			if (object == nullptr || !object->isCellObject())
++				return {{"mode", "path"}, {"ok", false}, {"error", "unknown cell"}};
++
++			cell = object.castTo<CellObject*>();
++		} else {
++			z = CollisionManager::getWorldFloorCollision(x, y, zone, false);
++		}
++
++		WorldCoordinates start(creature);
++		WorldCoordinates end(Vector3(x, y, z), cell);
++
++		if (start.getWorldPosition().distanceTo(end.getWorldPosition()) > 2048)
++			return {{"mode", "path"}, {"ok", false}, {"error", "destination more than 2 km away"}};
++
++		Vector<WorldCoordinates>* path = PathFinderManager::instance()->findPath(start, end, zone);
++
++		if (path == nullptr || path->size() == 0) {
++			delete path;
++			return {{"mode", "path"}, {"ok", false}, {"error", "no path"}};
++		}
++
++		// [x, y, z, cell]: cell-local coordinates inside buildings, world coordinates outside.
++		// Long outdoor legs get extra points every 8 m with the ground height, so the client
++		// can follow the terrain.
++		JSONSerializationType points = JSONSerializationType::array();
++		const WorldCoordinates* previous = nullptr;
++
++		for (int i = 0; i < path->size() && points.size() < 256; ++i) {
++			const WorldCoordinates& point = path->get(i);
++			CellObject* pointCell = point.getCell();
++
++			if (pointCell == nullptr && previous != nullptr && previous->getCell() == nullptr) {
++				float dx = point.getX() - previous->getX(), dy = point.getY() - previous->getY();
++				int steps = (int) (Math::sqrt(dx * dx + dy * dy) / 8.f);
++
++				for (int s = 1; s < steps; ++s) {
++					float px = previous->getX() + dx * s / steps, py = previous->getY() + dy * s / steps;
++					points.push_back({px, py, CollisionManager::getWorldFloorCollision(px, py, zone, false), 0});
++				}
++			}
++
++			points.push_back({point.getX(), point.getY(), point.getZ(), pointCell != nullptr ? pointCell->getObjectID() : 0});
++			previous = &point;
++		}
++
++		delete path;
++
++		return {{"mode", "path"}, {"ok", true}, {"points", points}};
++	}
++};
++
++#endif // AGENTPATHCOMMAND_H_
+-- 
+2.47.3
+

@@ -1,0 +1,4 @@
+failed-route fallback: moves=1 destination=97,0
+null route: moves=0
+reachable prefix: moves=1 destination=20
+no progress: moves=0

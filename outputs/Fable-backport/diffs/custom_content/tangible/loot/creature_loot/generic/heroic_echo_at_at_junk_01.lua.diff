@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/generic/heroic_echo_at_at_junk_01.lua
++++ b/custom_content/tangible/loot/creature_loot/generic/heroic_echo_at_at_junk_01.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_heroic_echo_at_at_junk_01, "object/tangible/loot/creature/loot/generic/heroic_echo_at_at_junk_01.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_heroic_echo_at_at_junk_01, "object/tangible/loot/creature_loot/generic/heroic_echo_at_at_junk_01.iff")

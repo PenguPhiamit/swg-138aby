@@ -1,0 +1,9 @@
+--- a/custom_content/building/player/serverobjects.lua
++++ b/custom_content/building/player/serverobjects.lua
+@@ -1,5 +1,6 @@
+ --Children folder includes
+ includeFile("custom_content/building/player/city/serverobjects.lua")
++includeFile("custom_content/building/player/construction/serverobjects.lua")
+ 
+ -- Server Objects
+ includeFile("custom_content/building/player/player_house_atat.lua")

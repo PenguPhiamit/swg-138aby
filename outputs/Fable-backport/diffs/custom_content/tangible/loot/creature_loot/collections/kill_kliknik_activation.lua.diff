@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/kill_kliknik_activation.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/kill_kliknik_activation.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_kill_kliknik_activation, "object/tangible/loot/creature/loot/collections/kill_kliknik_activation.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_kill_kliknik_activation, "object/tangible/loot/creature_loot/collections/kill_kliknik_activation.iff")

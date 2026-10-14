@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/generic/wedge_antilles_autograph.lua
++++ b/custom_content/tangible/loot/creature_loot/generic/wedge_antilles_autograph.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_wedge_antilles_autograph, "object/tangible/loot/creature/loot/generic/wedge_antilles_autograph.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_wedge_antilles_autograph, "object/tangible/loot/creature_loot/generic/wedge_antilles_autograph.iff")

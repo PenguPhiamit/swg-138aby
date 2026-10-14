@@ -1,0 +1,48 @@
+{
+  "commit": "bc914eb3b5f484ede0d5161a68711f995161627d",
+  "release_tag_ref": "bc914eb3b5f484ede0d5161a68711f995161627d",
+  "version": "2026-10-13-v6",
+  "hosted_release_fetch": "failed/cache unavailable",
+  "reference_files": [
+    {
+      "path": "VERSION",
+      "sha256": "10347f5235869107fece6c963cc0c6b06640efa6dc2c4e2d013d9ecc4699a4cd"
+    },
+    {
+      "path": "README.md",
+      "sha256": "c64e02e693a4171ab0e60c197614f1f7fb0691ddeacf66b4a57dd29c797b0332"
+    },
+    {
+      "path": "LICENCE.md",
+      "sha256": "28e1c891406d87c5287178a024444fb5c110f4fb783ccfaa90bc6b3fdf88b27a"
+    },
+    {
+      "path": "docs/LICENSE_AUDIT.md",
+      "sha256": "4e1f97bde3b16d244a9125c9b78f2815303fc5b40d73d02e79e2963a88023e4d"
+    },
+    {
+      "path": "docs/concepts/known-limitations.md",
+      "sha256": "35b289564705e49858d1a175bd7421e169f015dc060807621c3b36d6afbbeb73"
+    },
+    {
+      "path": "docs/concepts/architecture-invariants.md",
+      "sha256": "f606e314e98ff7c982bfc7adc07d92e689f98bc88e2b9b742fc14aa7cd63e07c"
+    },
+    {
+      "path": "docs/concepts/strategy-engine.md",
+      "sha256": "4b2b1e1671ba90edb15e8d1e7481c03f0115658d132fb03cd200ef6bbfb402bd"
+    },
+    {
+      "path": "tools/observability/README.md",
+      "sha256": "7ea45e2825d8c8f2542ace0d78bd279d9425130187e20901262247d84214ca25"
+    },
+    {
+      "path": "ai/playerbot/strategy/ActionFailureBackoff.h",
+      "sha256": "226789f54654ba8113ed134bd513594995b02afa5829133621bdc62b4fd8c099"
+    },
+    {
+      "path": "tools/test_engine_failure_backoff.cpp",
+      "sha256": "3a4a3c3934dcfab59149584d6714cb322d6a5e992666211d18ecfbd52eda0c16"
+    }
+  ]
+}

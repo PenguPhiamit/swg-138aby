@@ -1,0 +1,8 @@
+== Esk · hoth_terrain_scan.py · 2/2 passed · 913 s
+  PASS Esk is on Hoth — hoth
+  PASS heights sampled — 4348 points -> hoth_heights.json
+  note: before the run Esk was dead; now upright
+  note: 206 ms per height query
+  note: ring 1500 m / 50 m done: 3721 points, 770 s
+  note: ring 4000 m / 125 m done: 4348 points, 900 s
+  report: Bot-reports/Esk/20261014-041330-hoth_terrain_scan.json

@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/generic_usable/selonian_psg.lua
++++ b/custom_content/tangible/loot/generic_usable/selonian_psg.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_selonian_psg, "object/tangible/loot/generic/usable/selonian_psg.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_generic_usable_selonian_psg, "object/tangible/loot/generic_usable/selonian_psg.iff")

@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/loot_schematic/kashyyyk_treehouse_scem.lua
++++ b/custom_content/tangible/loot/loot_schematic/kashyyyk_treehouse_scem.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_kashyyyk_treehouse_scem, "object/tangible/loot/loot/schematic/kashyyyk_treehouse_scem.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_kashyyyk_treehouse_scem, "object/tangible/loot/loot_schematic/kashyyyk_treehouse_scem.iff")

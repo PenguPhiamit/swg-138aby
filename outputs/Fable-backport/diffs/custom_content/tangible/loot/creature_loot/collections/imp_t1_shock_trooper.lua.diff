@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/imp_t1_shock_trooper.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/imp_t1_shock_trooper.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_imp_t1_shock_trooper, "object/tangible/loot/creature/loot/collections/imp_t1_shock_trooper.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_imp_t1_shock_trooper, "object/tangible/loot/creature_loot/collections/imp_t1_shock_trooper.iff")

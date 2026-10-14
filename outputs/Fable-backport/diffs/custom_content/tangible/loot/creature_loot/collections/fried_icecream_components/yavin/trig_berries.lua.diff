@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/fried_icecream_components/yavin/trig_berries.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/fried_icecream_components/yavin/trig_berries.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fried_icecream_components_yavin_trig_berries, "object/tangible/loot/creature/loot/collections/fried/icecream/components/yavin/trig_berries.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fried_icecream_components_yavin_trig_berries, "object/tangible/loot/creature_loot/collections/fried_icecream_components/yavin/trig_berries.iff")

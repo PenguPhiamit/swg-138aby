@@ -1,0 +1,70 @@
+# Local history for the SWG project (owner, 14 Oct 2026: "do the local history for now"). No remote yet.
+# Keep this list push-safe even though nothing is pushed: no secrets, no game files, no other people's downloads,
+# nothing huge. After adding a folder, check `git status --ignored` before committing. Names: AGENTS.md, Privacy.
+
+# ---- secrets and private settings (AGENTS.md, Privacy) ----
+outputs/SWG-login.txt
+**/config-local.lua
+**/agent-account.json
+**/*.key
+**/*.pem
+**/*webhook*
+**/.claude/settings.local.json
+
+# ---- the game client, archives, backups and other people's files ----
+outputs/SWG-client/
+outputs/Community-content/
+outputs/Backups/
+*.tre
+*.toc
+*.iff
+*.trn
+*.stf
+*.dds
+*.msh
+*.mgn
+*.sht
+*.apt
+*.lod
+*.pob
+*.skt
+*.ans
+*.snd
+*.wav
+*.mp3
+*.zip
+*.pdf
+outputs/Documentation-support/hoth/client-base/
+outputs/Local-content/local_planets/
+tmp/
+# work/: 13 Oct scratch. Only its scripts are kept. It also holds third-party clones (work/research), Python packages,
+# client cfg copies and chat journals. AGENTS.md says which sources are excluded.
+work/*
+!work/*.py
+*.cfg
+
+# ---- screenshots and images from the game ----
+*.png
+*.jpg
+
+# ---- big generated inventories (rebuild them with their tools) ----
+outputs/Content-catalogue/published-source-paths.json
+outputs/Content-catalogue/A2-checkout-sha256.json
+outputs/Content-catalogue/MTG-file-inventory.json
+outputs/Documentation-support/storyteller/client-inventory.json
+outputs/Documentation-support/storyteller/identity-metadata.json
+outputs/Fable-backport/work/
+outputs/Fable-backport/staged/
+outputs/Fable-backport/staged-batch2/
+
+# ---- churn: logs, live status, per-run bot reports ----
+*.log
+*.err
+*.pyc
+__pycache__/
+outputs/Agent/logs/
+outputs/Agent/live/
+outputs/Bot-reports/*/*.json
+outputs/Bot-reports/runs/*.json
+outputs/Bot-reports/runs/STOP
+outputs/Bot-reports/runs/ACTIVE

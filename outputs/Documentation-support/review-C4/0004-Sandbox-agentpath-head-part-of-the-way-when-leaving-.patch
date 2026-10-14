@@ -1,0 +1,64 @@
+From 5c39f4113763c7581e67f33bf3b1107b83d58134 Mon Sep 17 00:00:00 2001
+From: SWG Local Dev <swg-local@localhost>
+Date: Tue, 13 Oct 2026 14:49:57 -0700
+Subject: [PATCH 4/5] Sandbox /agentpath: head part of the way when leaving a
+ building for a far target
+
+findPath from a cell to a world point far away can fail on the outdoor leg.
+Try points 32/64/128 m along the way instead and mark the answer "partial";
+the client re-plans from outside. Verified on the test galaxy: cloning-facility
+basement to the Mos Eisley greeters (330 m) in 3 legs.
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../creature/commands/AgentPathCommand.h      | 26 ++++++++++++++++++-
+ 1 file changed, 25 insertions(+), 1 deletion(-)
+
+diff --git a/MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h b/MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h
+index f0b20aec..a39c864a 100755
+--- a/MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h
++++ b/MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h
+@@ -100,6 +100,30 @@ public:
+ 			return {{"mode", "path"}, {"ok", false}, {"error", "destination more than 2 km away"}};
+ 
+ 		Vector<WorldCoordinates>* path = PathFinderManager::instance()->findPath(start, end, zone);
++		bool partial = false;
++
++		// Leaving a building for a far destination can fail on the outdoor leg; head for a point
++		// part of the way there instead and let the client re-plan from outside.
++		if ((path == nullptr || path->size() == 0) && start.getCell() != nullptr && cell == nullptr) {
++			Vector3 from = start.getWorldPosition(), to = end.getWorldPosition();
++			Vector3 direction = to - from;
++			float length = direction.length();
++
++			for (float step : {32.f, 64.f, 128.f}) {
++				if (step >= length)
++					break;
++
++				delete path;
++				float px = from.getX() + direction.getX() * step / length, py = from.getY() + direction.getY() * step / length;
++				WorldCoordinates waypoint(Vector3(px, py, CollisionManager::getWorldFloorCollision(px, py, zone, false)), nullptr);
++				path = PathFinderManager::instance()->findPath(start, waypoint, zone);
++
++				if (path != nullptr && path->size() > 0) {
++					partial = true;
++					break;
++				}
++			}
++		}
+ 
+ 		if (path == nullptr || path->size() == 0) {
+ 			delete path;
+@@ -132,7 +156,7 @@ public:
+ 
+ 		delete path;
+ 
+-		return {{"mode", "path"}, {"ok", true}, {"points", points}};
++		return {{"mode", "path"}, {"ok", true}, {"partial", partial}, {"points", points}};
+ 	}
+ };
+ 
+-- 
+2.47.3
+

@@ -1,0 +1,22 @@
+[
+  {
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/utils/engine3/MMOEngine/src/system/thread/Locker.h",
+    "sha256": "543ce4f6d4daec3ffff9389dde03e154d3b0c97b4613b5703feacae8f85ea784"
+  },
+  {
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/utils/engine3/MMOEngine/src/system/thread/ReadWriteLock.cpp",
+    "sha256": "71cd27e31c6ad955d02cda8e5bd74ef04d953890217b9cbb54d4ce829aeab8c4"
+  },
+  {
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/managers/collision/PathFinderManager.cpp",
+    "sha256": "b6036118dd4a9dbb49b49a992fd520827d75ab8f771bbd32ce12e633869957e9"
+  },
+  {
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/packets/mission/MissionObjectMessage3.h",
+    "sha256": "edd71b2281840a33e57346cae758255f3fdee18a52e9279542bcea4b7a92a095"
+  },
+  {
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/objects/waypoint/WaypointObjectImplementation.cpp",
+    "sha256": "aec347c4018735ced0ae102d0249d0277c1694b1d8c5af1940b259029006118b"
+  }
+]

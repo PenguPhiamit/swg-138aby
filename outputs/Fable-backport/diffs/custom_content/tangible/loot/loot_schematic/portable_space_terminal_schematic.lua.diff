@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/loot_schematic/portable_space_terminal_schematic.lua
++++ b/custom_content/tangible/loot/loot_schematic/portable_space_terminal_schematic.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_portable_space_terminal_schematic, "object/tangible/loot/loot/schematic/portable_space_terminal_schematic.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_portable_space_terminal_schematic, "object/tangible/loot/loot_schematic/portable_space_terminal_schematic.iff")

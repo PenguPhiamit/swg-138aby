@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/rancor_fang.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/rancor_fang.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_rancor_fang, "object/tangible/loot/creature/loot/collections/rancor_fang.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_rancor_fang, "object/tangible/loot/creature_loot/collections/rancor_fang.iff")

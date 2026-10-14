@@ -1,0 +1,1728 @@
+{
+ "summary": {
+  "batch": "2",
+  "objects": 55,
+  "ok": 55,
+  "problems": 0,
+  "files_staged": 22,
+  "files_changed": 10,
+  "files_new": 12,
+  "client_file_missing": [],
+  "not_in_merged_crc_table": [],
+  "in_stock_crc_table": 0,
+  "forms": {
+   "STOT": 35,
+   "SIOT": 10,
+   "STAT": 10
+  },
+  "winning_archives": {
+   "mtg_patch_022.tre": 44,
+   "mtg_patch_019.tre": 2,
+   "mtg_patch_023.tre": 8,
+   "mtg_patch_010_object_01.tre": 1
+  },
+  "client_name_missing": [
+   "object/tangible/holiday/empire_day/component/aa1n_central_processor.iff",
+   "object/tangible/holiday/empire_day/component/aa1n_circuit_board.iff",
+   "object/tangible/holiday/empire_day/component/aa1n_io_bus_port.iff",
+   "object/tangible/holiday/empire_day/component/aa1n_memory_bank.iff",
+   "object/tangible/holiday/empire_day/component/carrier_rotary_valve.iff",
+   "object/tangible/holiday/empire_day/component/carrier_steering_gear.iff",
+   "object/tangible/holiday/empire_day/component/carrier_steering_shaft.iff",
+   "object/tangible/holiday/empire_day/component/carrier_torque_sensor.iff",
+   "object/tangible/holiday/empire_day/component/console_central_processor.iff",
+   "object/tangible/holiday/empire_day/component/console_circuit_board.iff",
+   "object/tangible/holiday/empire_day/component/console_decryption_coprocessor.iff",
+   "object/tangible/holiday/empire_day/component/console_readout_display.iff",
+   "object/tangible/holiday/empire_day/component/dh17_cartridge_enclosures.iff",
+   "object/tangible/holiday/empire_day/component/dh17_cartridge_grips.iff",
+   "object/tangible/holiday/empire_day/component/dh17_cartridge_valves.iff",
+   "object/tangible/holiday/empire_day/component/dh17_condensed_reactive_gasses.iff",
+   "object/tangible/holiday/empire_day/component/e11_cartridge_enclosures.iff",
+   "object/tangible/holiday/empire_day/component/e11_cartridge_grips.iff",
+   "object/tangible/holiday/empire_day/component/e11_cartridge_valves.iff",
+   "object/tangible/holiday/empire_day/component/e11_condensed_reactive_gasses.iff",
+   "object/tangible/holiday/empire_day/component/mouse_ball_joint.iff",
+   "object/tangible/holiday/empire_day/component/mouse_manipulation_clamp_hand.iff",
+   "object/tangible/holiday/empire_day/component/mouse_servo_motor.iff",
+   "object/tangible/holiday/empire_day/component/mouse_translation_joint.iff",
+   "object/tangible/holiday/empire_day/component/rank_blue_rank_squares.iff",
+   "object/tangible/holiday/empire_day/component/rank_code_cylinder.iff",
+   "object/tangible/holiday/empire_day/component/rank_metal_plaque.iff",
+   "object/tangible/holiday/empire_day/component/rank_red_rank_squares.iff",
+   "object/tangible/holiday/empire_day/component/ration_high_carbohydrate_concentrate.iff",
+   "object/tangible/holiday/empire_day/component/ration_high_protein_concentrate.iff",
+   "object/tangible/holiday/empire_day/component/ration_non_nutritive_preservative.iff",
+   "object/tangible/holiday/empire_day/component/ration_poly_unsaturated_fats.iff",
+   "object/static/base/static_flagpole_base.iff"
+  ],
+  "include_targets_missing": [],
+  "include_targets_missing_preexisting_in_core3": [],
+  "staged_files_unreached_from_main": [],
+  "includes_of_missing_files_whole_tree": [
+   "custom_content/tangible/deed/vehicle_deed/vehicle_deed_sith_speeder.lua -- Hoth loot slice (Bellum Gero)",
+   "custom_content/tangible/deed/vehicle_deed/vehicle_deed_organa_speeder.lua -- Hoth loot slice (Bellum Gero)",
+   "custom_content/mobile/dressed_cal_handro.lua               ",
+   "custom_content/mobile/dressed_bestinejobs_jasha.lua        ",
+   "custom_content/mobile/dressed_arena_champion.lua           ",
+   "custom_content/mobile/dressed_anchorjobs_ordo.lua          ",
+   "custom_content/mobile/dressed_acklay_dakk.lua              ",
+   "custom_content/mobile/disappearances_psycho_male_1.lua     ",
+   "custom_content/mobile/disappearances_psycho_female_1.lua   ",
+   "custom_content/mobile/disappearances_psycho_boss.lua       ",
+   "custom_content/mobile/dewback_armored.lua                  ",
+   "custom_content/mobile/derek_klivian.lua                    ",
+   "custom_content/mobile/dengar.lua                           ",
+   "custom_content/mobile/delrice_capreese.lua                 ",
+   "custom_content/mobile/coronet_sheelya.lua                  ",
+   "custom_content/mobile/coronet_captain_dool.lua          ",
+   "custom_content/mobile/clone_relics_sawtooth.lua          ",
+   "../custom_scripts/object/serverobjects.lua"
+  ],
+  "luac": {
+   "ran": true,
+   "checked": 22,
+   "failed": 0,
+   "report": "C:\\Users\\Pengw\\Documents\\Codex\\2026-10-13\\h\\outputs\\Fable-backport\\work\\luac_batch2.txt",
+   "errors": [
+    "luac: /usr/bin/luac5.3; checked 22 files, 0 failed"
+   ]
+  },
+  "catalogue": null
+ },
+ "objects": [
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/aa1n_central_processor.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_aa1n_central_processor.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "aa1n_central_processor"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/aa1n_central_processor.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/aa1n_circuit_board.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_aa1n_circuit_board.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "aa1n_circuit_board"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/aa1n_circuit_board.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/aa1n_io_bus_port.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_aa1n_io_bus_port.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "aa1n_io_bus_port"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/aa1n_io_bus_port.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/aa1n_memory_bank.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_aa1n_memory_bank.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "aa1n_memory_bank"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/aa1n_memory_bank.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/carrier_rotary_valve.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_carrier_rotary_valve.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "carrier_rotary_valve"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/carrier_rotary_valve.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/carrier_steering_gear.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_carrier_steering_gear.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "carrier_steering_gear"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/carrier_steering_gear.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/carrier_steering_shaft.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_carrier_steering_shaft.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "carrier_steering_shaft"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/carrier_steering_shaft.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/carrier_torque_sensor.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_carrier_torque_sensor.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "carrier_torque_sensor"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/carrier_torque_sensor.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/console_central_processor.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_console_central_processor.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "console_central_processor"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/console_central_processor.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/console_circuit_board.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_console_circuit_board.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "console_circuit_board"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/console_circuit_board.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/console_decryption_coprocessor.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_console_decryption_coprocessor.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "console_decryption_coprocessor"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/console_decryption_coprocessor.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/console_readout_display.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_console_readout_display.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "console_readout_display"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/console_readout_display.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/dh17_cartridge_enclosures.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_dh17_cartridge_enclosures.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "dh17_cartridge_enclosures"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/dh17_cartridge_enclosures.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/dh17_cartridge_grips.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_dh17_cartridge_grips.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "dh17_cartridge_grips"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/dh17_cartridge_grips.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/dh17_cartridge_valves.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_dh17_cartridge_valves.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "dh17_cartridge_valves"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/dh17_cartridge_valves.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/dh17_condensed_reactive_gasses.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_dh17_condensed_reactive_gasses.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "dh17_condensed_reactive_gasses"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/dh17_condensed_reactive_gasses.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/e11_cartridge_enclosures.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_e11_cartridge_enclosures.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "e11_cartridge_enclosures"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/e11_cartridge_enclosures.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/e11_cartridge_grips.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_e11_cartridge_grips.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "e11_cartridge_grips"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/e11_cartridge_grips.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/e11_cartridge_valves.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_e11_cartridge_valves.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "e11_cartridge_valves"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/e11_cartridge_valves.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/e11_condensed_reactive_gasses.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_e11_condensed_reactive_gasses.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "e11_condensed_reactive_gasses"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/e11_condensed_reactive_gasses.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/mouse_ball_joint.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_mouse_ball_joint.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "mouse_ball_joint"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/mouse_ball_joint.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/mouse_manipulation_clamp_hand.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_mouse_manipulation_clamp_hand.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "mouse_manipulation_clamp_hand"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/mouse_manipulation_clamp_hand.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/mouse_servo_motor.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_mouse_servo_motor.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "mouse_servo_motor"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/mouse_servo_motor.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/mouse_translation_joint.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_mouse_translation_joint.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "mouse_translation_joint"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/mouse_translation_joint.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/rank_blue_rank_squares.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_rank_blue_rank_squares.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "rank_blue_rank_squares"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/rank_blue_rank_squares.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/rank_code_cylinder.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_rank_code_cylinder.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "rank_code_cylinder"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/rank_code_cylinder.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/rank_metal_plaque.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_rank_metal_plaque.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "rank_metal_plaque"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/rank_metal_plaque.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/rank_red_rank_squares.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_rank_red_rank_squares.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "rank_red_rank_squares"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/rank_red_rank_squares.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/ration_high_carbohydrate_concentrate.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_ration_high_carbohydrate_concentrate.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "ration_high_carbohydrate_concentrate"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/ration_high_carbohydrate_concentrate.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/ration_high_protein_concentrate.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_ration_high_protein_concentrate.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "ration_high_protein_concentrate"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/ration_high_protein_concentrate.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/ration_non_nutritive_preservative.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_ration_non_nutritive_preservative.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "ration_non_nutritive_preservative"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/ration_non_nutritive_preservative.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/holiday/empire_day/component/ration_poly_unsaturated_fats.iff",
+   "shared": "object/tangible/holiday/empire_day/component/shared_ration_poly_unsaturated_fats.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": [
+    "item_n",
+    "ration_poly_unsaturated_fats"
+   ],
+   "registered_in": [
+    "custom_content/tangible/holiday/empire_day/component/ration_poly_unsaturated_fats.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/holiday/empire_day/component/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/building/player/construction/construction_player_barn.iff",
+   "shared": "object/building/player/construction/shared_construction_player_barn.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "SIOT",
+   "template_class": "SharedInstallationObjectTemplate",
+   "gameObjectType": "0x1001",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "Structure Construction Marker",
+   "objectName": [
+    "player_structure",
+    "temporary_structure"
+   ],
+   "registered_in": [
+    "custom_content/building/player/construction/construction_player_barn.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/building/player/construction/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/building/player/construction/construction_player_diner.iff",
+   "shared": "object/building/player/construction/shared_construction_player_diner.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "SIOT",
+   "template_class": "SharedInstallationObjectTemplate",
+   "gameObjectType": "0x1001",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "Structure Construction Marker",
+   "objectName": [
+    "player_structure",
+    "temporary_structure"
+   ],
+   "registered_in": [
+    "custom_content/building/player/construction/construction_player_diner.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/building/player/construction/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/building/player/construction/construction_player_house_atat.iff",
+   "shared": "object/building/player/construction/shared_construction_player_house_atat.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "SIOT",
+   "template_class": "SharedInstallationObjectTemplate",
+   "gameObjectType": "0x1001",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "Structure Construction Marker",
+   "objectName": [
+    "player_structure",
+    "temporary_structure"
+   ],
+   "registered_in": [
+    "custom_content/building/player/construction/construction_player_house_atat.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/building/player/construction/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/building/player/construction/construction_player_house_hangar.iff",
+   "shared": "object/building/player/construction/shared_construction_player_house_hangar.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "SIOT",
+   "template_class": "SharedInstallationObjectTemplate",
+   "gameObjectType": "0x1001",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "Structure Construction Marker",
+   "objectName": [
+    "player_structure",
+    "temporary_structure"
+   ],
+   "registered_in": [
+    "custom_content/building/player/construction/construction_player_house_hangar.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/building/player/construction/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/building/player/construction/construction_player_house_jabbas_sail_barge.iff",
+   "shared": "object/building/player/construction/shared_construction_player_house_jabbas_sail_barge.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "SIOT",
+   "template_class": "SharedInstallationObjectTemplate",
+   "gameObjectType": "0x1001",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "Structure Construction Marker",
+   "objectName": [
+    "player_structure",
+    "temporary_structure"
+   ],
+   "registered_in": [
+    "custom_content/building/player/construction/construction_player_house_jabbas_sail_barge.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/building/player/construction/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/building/player/construction/construction_player_jedi_meditation_room.iff",
+   "shared": "object/building/player/construction/shared_construction_player_jedi_meditation_room.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "SIOT",
+   "template_class": "SharedInstallationObjectTemplate",
+   "gameObjectType": "0x1001",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "Structure Construction Marker",
+   "objectName": [
+    "player_structure",
+    "temporary_structure"
+   ],
+   "registered_in": [
+    "custom_content/building/player/construction/construction_player_jedi_meditation_room.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/building/player/construction/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/building/player/construction/construction_player_sith_meditation_room.iff",
+   "shared": "object/building/player/construction/shared_construction_player_sith_meditation_room.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "SIOT",
+   "template_class": "SharedInstallationObjectTemplate",
+   "gameObjectType": "0x1001",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "Structure Construction Marker",
+   "objectName": [
+    "player_structure",
+    "temporary_structure"
+   ],
+   "registered_in": [
+    "custom_content/building/player/construction/construction_player_sith_meditation_room.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/building/player/construction/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/building/player/construction/construction_player_tcg_emperors_spire.iff",
+   "shared": "object/building/player/construction/shared_construction_player_tcg_emperors_spire.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "SIOT",
+   "template_class": "SharedInstallationObjectTemplate",
+   "gameObjectType": "0x1001",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "Structure Construction Marker",
+   "objectName": [
+    "player_structure",
+    "temporary_structure"
+   ],
+   "registered_in": [
+    "custom_content/building/player/construction/construction_player_tcg_emperors_spire.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/building/player/construction/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/building/player/construction/construction_player_tcg_rebel_spire.iff",
+   "shared": "object/building/player/construction/shared_construction_player_tcg_rebel_spire.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "SIOT",
+   "template_class": "SharedInstallationObjectTemplate",
+   "gameObjectType": "0x1001",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "Structure Construction Marker",
+   "objectName": [
+    "player_structure",
+    "temporary_structure"
+   ],
+   "registered_in": [
+    "custom_content/building/player/construction/construction_player_tcg_rebel_spire.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/building/player/construction/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/building/player/construction/construction_player_tcg_relaxation_pool.iff",
+   "shared": "object/building/player/construction/shared_construction_player_tcg_relaxation_pool.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "SIOT",
+   "template_class": "SharedInstallationObjectTemplate",
+   "gameObjectType": "0x1001",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "Structure Construction Marker",
+   "objectName": [
+    "player_structure",
+    "temporary_structure"
+   ],
+   "registered_in": [
+    "custom_content/building/player/construction/construction_player_tcg_relaxation_pool.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/building/player/construction/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/content/eow/final_data_disk.iff",
+   "shared": "object/tangible/content/eow/shared_final_data_disk.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x2000",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "Encrypted Imperial Battleplan",
+   "objectName": [
+    "static_item_n",
+    "item_eow_imperial_data_disk_combined"
+   ],
+   "registered_in": [
+    "custom_content/tangible/content/eow/final_data_disk.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/content/eow/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/tangible/content/eow/final_data_disk_rebel.iff",
+   "shared": "object/tangible/content/eow/shared_final_data_disk_rebel.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_022.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x2000",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "Encrypted Rebel Battleplan",
+   "objectName": [
+    "static_item_n",
+    "item_eow_rebel_data_disk_combined"
+   ],
+   "registered_in": [
+    "custom_content/tangible/content/eow/final_data_disk_rebel.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/content/eow/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2a",
+   "kind": "wired",
+   "server": "object/static/base/static_flagpole_base.iff",
+   "shared": "object/static/base/shared_static_flagpole_base.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_019.tre",
+   "form": "STAT",
+   "template_class": "SharedStaticObjectTemplate",
+   "gameObjectType": "0x5",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": null,
+   "objectName": null,
+   "registered_in": [
+    "custom_content/static/base/static_flagpole_base.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/static/base/objects.lua"
+   ],
+   "shared_template_class_staged": null,
+   "was": null,
+   "ok": true
+  },
+  {
+   "batch": "2b",
+   "kind": "new",
+   "server": "object/static/structure/tatooine/wall_tatooine_large_style_100.iff",
+   "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_100.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_023.tre",
+   "form": "STAT",
+   "template_class": "SharedStaticObjectTemplate",
+   "gameObjectType": "0x5",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "an unknown object",
+   "objectName": [
+    "obj_n",
+    "unknown_object"
+   ],
+   "registered_in": [
+    "custom_content/static/structure/tatooine/wall_tatooine_large_style_100.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/static/structure/tatooine/objects.lua"
+   ],
+   "shared_template_class_staged": "SharedStaticObjectTemplate",
+   "shared_registered_elsewhere": [],
+   "name_collision": [],
+   "new_file_exists_in_core3": [],
+   "appearance": "appearance/wall_tatooine_large_style_100.apt",
+   "appearance_in_client": true,
+   "ok": true
+  },
+  {
+   "batch": "2b",
+   "kind": "new",
+   "server": "object/static/structure/tatooine/wall_tatooine_large_style_200.iff",
+   "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_200.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_023.tre",
+   "form": "STAT",
+   "template_class": "SharedStaticObjectTemplate",
+   "gameObjectType": "0x5",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "an unknown object",
+   "objectName": [
+    "obj_n",
+    "unknown_object"
+   ],
+   "registered_in": [
+    "custom_content/static/structure/tatooine/wall_tatooine_large_style_200.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/static/structure/tatooine/objects.lua"
+   ],
+   "shared_template_class_staged": "SharedStaticObjectTemplate",
+   "shared_registered_elsewhere": [],
+   "name_collision": [],
+   "new_file_exists_in_core3": [],
+   "appearance": "appearance/wall_tatooine_large_style_200.apt",
+   "appearance_in_client": true,
+   "ok": true
+  },
+  {
+   "batch": "2b",
+   "kind": "new",
+   "server": "object/static/structure/tatooine/wall_tatooine_large_style_500.iff",
+   "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_500.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_023.tre",
+   "form": "STAT",
+   "template_class": "SharedStaticObjectTemplate",
+   "gameObjectType": "0x5",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "an unknown object",
+   "objectName": [
+    "obj_n",
+    "unknown_object"
+   ],
+   "registered_in": [
+    "custom_content/static/structure/tatooine/wall_tatooine_large_style_500.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/static/structure/tatooine/objects.lua"
+   ],
+   "shared_template_class_staged": "SharedStaticObjectTemplate",
+   "shared_registered_elsewhere": [],
+   "name_collision": [],
+   "new_file_exists_in_core3": [],
+   "appearance": "appearance/wall_tatooine_large_style_500.apt",
+   "appearance_in_client": true,
+   "ok": true
+  },
+  {
+   "batch": "2b",
+   "kind": "new",
+   "server": "object/static/structure/tatooine/wall_tatooine_large_style_1000.iff",
+   "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_1000.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_023.tre",
+   "form": "STAT",
+   "template_class": "SharedStaticObjectTemplate",
+   "gameObjectType": "0x5",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "an unknown object",
+   "objectName": [
+    "obj_n",
+    "unknown_object"
+   ],
+   "registered_in": [
+    "custom_content/static/structure/tatooine/wall_tatooine_large_style_1000.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/static/structure/tatooine/objects.lua"
+   ],
+   "shared_template_class_staged": "SharedStaticObjectTemplate",
+   "shared_registered_elsewhere": [],
+   "name_collision": [],
+   "new_file_exists_in_core3": [],
+   "appearance": "appearance/wall_tatooine_large_style_1000.apt",
+   "appearance_in_client": true,
+   "ok": true
+  },
+  {
+   "batch": "2b",
+   "kind": "new",
+   "server": "object/static/structure/tatooine/wall_tatooine_large_style_2000.iff",
+   "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_2000.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_023.tre",
+   "form": "STAT",
+   "template_class": "SharedStaticObjectTemplate",
+   "gameObjectType": "0x5",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "an unknown object",
+   "objectName": [
+    "obj_n",
+    "unknown_object"
+   ],
+   "registered_in": [
+    "custom_content/static/structure/tatooine/wall_tatooine_large_style_2000.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/static/structure/tatooine/objects.lua"
+   ],
+   "shared_template_class_staged": "SharedStaticObjectTemplate",
+   "shared_registered_elsewhere": [],
+   "name_collision": [],
+   "new_file_exists_in_core3": [],
+   "appearance": "appearance/wall_tatooine_large_style_2000.apt",
+   "appearance_in_client": true,
+   "ok": true
+  },
+  {
+   "batch": "2b",
+   "kind": "new",
+   "server": "object/static/structure/tatooine/wall_tatooine_large_style_2500.iff",
+   "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_2500.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_023.tre",
+   "form": "STAT",
+   "template_class": "SharedStaticObjectTemplate",
+   "gameObjectType": "0x5",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "an unknown object",
+   "objectName": [
+    "obj_n",
+    "unknown_object"
+   ],
+   "registered_in": [
+    "custom_content/static/structure/tatooine/wall_tatooine_large_style_2500.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/static/structure/tatooine/objects.lua"
+   ],
+   "shared_template_class_staged": "SharedStaticObjectTemplate",
+   "shared_registered_elsewhere": [],
+   "name_collision": [],
+   "new_file_exists_in_core3": [],
+   "appearance": "appearance/wall_tatooine_large_style_2500.apt",
+   "appearance_in_client": true,
+   "ok": true
+  },
+  {
+   "batch": "2b",
+   "kind": "new",
+   "server": "object/static/structure/tatooine/wall_tatooine_large_style_4200.iff",
+   "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_4200.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_023.tre",
+   "form": "STAT",
+   "template_class": "SharedStaticObjectTemplate",
+   "gameObjectType": "0x5",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "an unknown object",
+   "objectName": [
+    "obj_n",
+    "unknown_object"
+   ],
+   "registered_in": [
+    "custom_content/static/structure/tatooine/wall_tatooine_large_style_4200.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/static/structure/tatooine/objects.lua"
+   ],
+   "shared_template_class_staged": "SharedStaticObjectTemplate",
+   "shared_registered_elsewhere": [],
+   "name_collision": [],
+   "new_file_exists_in_core3": [],
+   "appearance": "appearance/wall_tatooine_large_style_4200.apt",
+   "appearance_in_client": true,
+   "ok": true
+  },
+  {
+   "batch": "2b",
+   "kind": "new",
+   "server": "object/static/structure/tatooine/wall_tatooine_large_style_8000.iff",
+   "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_8000.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_023.tre",
+   "form": "STAT",
+   "template_class": "SharedStaticObjectTemplate",
+   "gameObjectType": "0x5",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "an unknown object",
+   "objectName": [
+    "obj_n",
+    "unknown_object"
+   ],
+   "registered_in": [
+    "custom_content/static/structure/tatooine/wall_tatooine_large_style_8000.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/static/structure/tatooine/objects.lua"
+   ],
+   "shared_template_class_staged": "SharedStaticObjectTemplate",
+   "shared_registered_elsewhere": [],
+   "name_collision": [],
+   "new_file_exists_in_core3": [],
+   "appearance": "appearance/wall_tatooine_large_style_8000.apt",
+   "appearance_in_client": true,
+   "ok": true
+  },
+  {
+   "batch": "2b",
+   "kind": "new",
+   "server": "object/static/creature/som_droid_mining_facility.iff",
+   "shared": "object/static/creature/shared_som_droid_mining_facility.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_019.tre",
+   "form": "STAT",
+   "template_class": "SharedStaticObjectTemplate",
+   "gameObjectType": "0x5",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "an unknown object",
+   "objectName": [
+    "obj_n",
+    "unknown_object"
+   ],
+   "registered_in": [
+    "custom_content/static/creature/som_droid_mining_facility.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/static/creature/objects.lua"
+   ],
+   "shared_template_class_staged": "SharedStaticObjectTemplate",
+   "shared_registered_elsewhere": [],
+   "name_collision": [],
+   "new_file_exists_in_core3": [],
+   "appearance": "appearance/droid_8t88.sat",
+   "appearance_in_client": true,
+   "appearance_variants": [],
+   "ok": true
+  },
+  {
+   "batch": "2b",
+   "kind": "new",
+   "server": "object/tangible/furniture/space/frn_chair_y8_passenger_s01.iff",
+   "shared": "object/tangible/furniture/space/shared_frn_chair_y8_passenger_s01.iff",
+   "client_file": true,
+   "winning_archive": "mtg_patch_010_object_01.tre",
+   "form": "STOT",
+   "template_class": "SharedTangibleObjectTemplate",
+   "gameObjectType": "0x200b",
+   "in_merged_crc_table": true,
+   "in_stock_crc_table": false,
+   "client_name": "Chair",
+   "objectName": [
+    "frn_n",
+    "frn_chair"
+   ],
+   "registered_in": [
+    "custom_content/tangible/furniture/space/frn_chair_y8_passenger_s01.lua"
+   ],
+   "staged_registration_count": 1,
+   "server_path_registered_elsewhere": [],
+   "shared_template_registered": [
+    "custom_content/tangible/furniture/space/objects.lua"
+   ],
+   "shared_template_class_staged": "SharedTangibleObjectTemplate",
+   "shared_registered_elsewhere": [],
+   "name_collision": [],
+   "new_file_exists_in_core3": [],
+   "appearance": "appearance/frn_spc_chair_pilot_s03.apt",
+   "appearance_in_client": true,
+   "ok": true
+  }
+ ]
+}

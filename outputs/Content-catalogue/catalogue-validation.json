@@ -1,0 +1,17 @@
+{
+  "catalogue_entries": 97,
+  "worlds_with_terrain_and_snapshot": 11,
+  "additional_species_with_player_template_evidence": 16,
+  "mtg_lua_files": 16734,
+  "downloaded_packages": 13,
+  "status_counts": {
+    "Published for server use": 47,
+    "Original creator permission required": 10,
+    "Published with explicit conditions": 1,
+    "Release or permission unverified": 34,
+    "Development or legacy data only": 3,
+    "Conflicting restrictive notice: exclude": 2
+  },
+  "checks": "Identifiers, counts, evidence references, source URL schemes, restrictive-notice scan, runtime-status labels, downloaded ZIP integrity and SHA-256 hashes verified. This does not validate third-party download availability or gameplay.",
+  "server_changes": false
+}

@@ -1,0 +1,40 @@
+From bea94e7a1cc7b080120cd5c5a3b026d7a8e69c3a Mon Sep 17 00:00:00 2001
+From: SWG Local Dev <swg-local@localhost>
+Date: Wed, 14 Oct 2026 05:11:13 -0700
+Subject: [PATCH] Sandbox leash: an indoor step needs both ends on the floor
+ mesh (C4e-F1)
+
+ChatGPT C4e review, P1: PathFinderManager::getFloorPath compares the two
+floor triangles before checking either for null, so two points both off the
+floor mesh return -1 ("same triangle") and onFloor() took that as a proved
+route; unstick could then move a follower to invalid floor space.
+Fixed in LeashCommand::onFloor (both CollisionManager::getTriangle lookups
+must be non-null) rather than in getFloorPath, whose -1 for that case the
+AI indoor pathing still relies on. Dev build clean; not yet run in game.
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../server/zone/objects/creature/commands/LeashCommand.h    | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/MMOCoreORB/src/server/zone/objects/creature/commands/LeashCommand.h b/MMOCoreORB/src/server/zone/objects/creature/commands/LeashCommand.h
+index 950c0ac5..51a482d1 100755
+--- a/MMOCoreORB/src/server/zone/objects/creature/commands/LeashCommand.h
++++ b/MMOCoreORB/src/server/zone/objects/creature/commands/LeashCommand.h
+@@ -245,6 +245,12 @@ public:
+ 		if (floor == nullptr)
+ 			return false;
+ 
++		// C4e-F1 (ChatGPT review, 14 Oct): getFloorPath compares the two floor triangles before checking them for null,
++		// so two points that are both off the floor mesh come back -1 ("same triangle"). Require both to be on it.
++		// Fixed here rather than in getFloorPath, whose -1 for that case the AI's indoor pathing still relies on.
++		if (CollisionManager::getTriangle(a, floor) == nullptr || CollisionManager::getTriangle(b, floor) == nullptr)
++			return false;
++
+ 		Vector<const Triangle*>* triangles = nullptr;
+ 		int result = PathFinderManager::instance()->getFloorPath(a, b, floor, triangles);
+ 		bool found = result == -1 || (result == 0 && triangles != nullptr); // -1: both on one floor triangle
+-- 
+2.47.3
+

@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/fried_icecream_components/tatooine/tatoes.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/fried_icecream_components/tatooine/tatoes.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fried_icecream_components_tatooine_tatoes, "object/tangible/loot/creature/loot/collections/fried/icecream/components/tatooine/tatoes.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fried_icecream_components_tatooine_tatoes, "object/tangible/loot/creature_loot/collections/fried_icecream_components/tatooine/tatoes.iff")

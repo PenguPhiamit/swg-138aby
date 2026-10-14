@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/mustafar/cube_loot/cube_loot_3m.lua
++++ b/custom_content/tangible/loot/mustafar/cube_loot/cube_loot_3m.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_mustafar_cube_loot_cube_loot_3m, "object/tangible/loot/mustafar/cube/loot/cube_loot_3m.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_mustafar_cube_loot_cube_loot_3m, "object/tangible/loot/mustafar/cube_loot/cube_loot_3m.iff")

@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/loot_schematic/planning_table_bestine_imp_schematic.lua
++++ b/custom_content/tangible/loot/loot_schematic/planning_table_bestine_imp_schematic.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_planning_table_bestine_imp_schematic, "object/tangible/loot/loot/schematic/planning_table_bestine_imp_schematic.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_planning_table_bestine_imp_schematic, "object/tangible/loot/loot_schematic/planning_table_bestine_imp_schematic.iff")

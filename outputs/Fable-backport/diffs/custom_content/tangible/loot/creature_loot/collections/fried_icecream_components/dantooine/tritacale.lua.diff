@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/fried_icecream_components/dantooine/tritacale.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/fried_icecream_components/dantooine/tritacale.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fried_icecream_components_dantooine_tritacale, "object/tangible/loot/creature/loot/collections/fried/icecream/components/dantooine/tritacale.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fried_icecream_components_dantooine_tritacale, "object/tangible/loot/creature_loot/collections/fried_icecream_components/dantooine/tritacale.iff")

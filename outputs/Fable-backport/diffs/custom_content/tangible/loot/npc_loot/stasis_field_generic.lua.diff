@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/npc_loot/stasis_field_generic.lua
++++ b/custom_content/tangible/loot/npc_loot/stasis_field_generic.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_npc_loot_stasis_field_generic, "object/tangible/loot/npc/loot/stasis_field_generic.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_npc_loot_stasis_field_generic, "object/tangible/loot/npc_loot/stasis_field_generic.iff")

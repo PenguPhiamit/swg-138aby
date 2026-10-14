@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/ig_88_torso.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/ig_88_torso.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_ig_88_torso, "object/tangible/loot/creature/loot/collections/ig_88_torso.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_ig_88_torso, "object/tangible/loot/creature_loot/collections/ig_88_torso.iff")

@@ -1,0 +1,341 @@
+{
+ "task": "C11 archive downloads",
+ "owner_authorized_date": "2026-10-13",
+ "status": "section A downloaded (A7 CC0 kits deferred: not needed for Hoth); B and C not started",
+ "downloaded_bytes": 1124688367,
+ "budget_bytes": 3000000000,
+ "error": null,
+ "stop_rule": "archive-download-plan.md: If the Codex sandbox has no network, say so and stop.",
+ "notes": "No download, extraction, execution, installation, sign-in or server change. Metadata null because unverified. A7 asset/texture selection not performed. Grouped rows B2/A7 retain planned source links, not completed asset records.",
+ "items": [
+  {
+   "id": "A1",
+   "description": "[Miphstoe/BellumGero-Live](https://github.com/Miphstoe/BellumGero-Live)",
+   "urls": [
+    "https://github.com/Miphstoe/BellumGero-Live"
+   ],
+   "status": "downloaded",
+   "revision_or_version": "1f4438a129c0e07d05871fccfb2ed30b21da9539",
+   "date": "2026-10-13",
+   "bytes": 219152384,
+   "sha256": null,
+   "license_name": "AGPL-3.0",
+   "license_verified": true,
+   "license_or_readme_text": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifically designed to ensure\ncooperation with the community in the case of network server software.\n\n  The licenses for most software and other practical w",
+   "credits": null,
+   "folders_planned": "`MMOCoreORB/bin/scripts` (Hoth and Bellum screenplays) and `tools/` (newplanets, worldbuilder)",
+   "folders_taken": [
+    "MMOCoreORB/bin/scripts",
+    "MMOCoreORB/bin/conf",
+    "MMOCoreORB/tools"
+   ],
+   "local_path": "work/research/Miphstoe_BellumGero-Live",
+   "fetched_by": "Claude from Git Bash (Codex sandbox has no network); owner go in Claude chat 13 Oct 22:35",
+   "note": "git checkout: the commit hash pins the content (sha256 not applicable)"
+  },
+  {
+   "id": "A2",
+   "description": "[Thrax989/SWGFlurry](https://github.com/Thrax989/SWGFlurry) at `947a7e66`",
+   "urls": [
+    "https://github.com/Thrax989/SWGFlurry"
+   ],
+   "status": "downloaded",
+   "revision_or_version": "947a7e666deefc8e271813b83ae759e03ccee44f",
+   "date": "2026-10-13",
+   "bytes": 284164096,
+   "sha256": null,
+   "license_name": "AGPL-3.0",
+   "license_verified": true,
+   "license_or_readme_text": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifically designed to ensure\ncooperation with the community in the case of network server software.\n\n  The licenses for most software and other practical ",
+   "credits": null,
+   "folders_planned": "`MMOCoreORB/bin/scripts` only",
+   "folders_taken": [
+    "MMOCoreORB/bin/scripts"
+   ],
+   "local_path": "work/research/Thrax989_SWGFlurry",
+   "fetched_by": "Claude from Git Bash (Codex sandbox has no network); owner go in Claude chat 13 Oct 22:35",
+   "note": "git checkout: the commit hash pins the content (sha256 not applicable)"
+  },
+  {
+   "id": "A3",
+   "description": "[nostyleguy/io_scene_swg_msh](https://github.com/nostyleguy/io_scene_swg_msh)",
+   "urls": [
+    "https://github.com/nostyleguy/io_scene_swg_msh"
+   ],
+   "status": "downloaded",
+   "revision_or_version": "cdb1cdbbe172a7d46740762f92de855dc60920c7",
+   "date": "2026-10-13",
+   "bytes": 1048576,
+   "sha256": null,
+   "license_name": "MIT",
+   "license_verified": true,
+   "license_or_readme_text": "MIT License\n\nCopyright (c) 2022 Nick Rafalski\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the So",
+   "credits": null,
+   "folders_planned": "latest release zip",
+   "folders_taken": [
+    "whole repo"
+   ],
+   "local_path": "work/research/nostyleguy_io_scene_swg_msh",
+   "fetched_by": "Claude from Git Bash (Codex sandbox has no network); owner go in Claude chat 13 Oct 22:35",
+   "note": "git checkout: the commit hash pins the content (sha256 not applicable)"
+  },
+  {
+   "id": "A4",
+   "description": "[swgemu/Tools](https://github.com/swgemu/Tools)",
+   "urls": [
+    "https://github.com/swgemu/Tools"
+   ],
+   "status": "downloaded",
+   "revision_or_version": "72ef01b24e322d8f4c6b89f717663eb965ae487b",
+   "date": "2026-10-13",
+   "bytes": 139460608,
+   "sha256": null,
+   "license_name": "check the repo's licence file",
+   "license_verified": false,
+   "license_or_readme_text": "No licence file in the repository: read-only reference, \"read, don't copy\".",
+   "credits": null,
+   "folders_planned": "whole repo",
+   "folders_taken": [
+    "whole repo"
+   ],
+   "local_path": "work/research/swgemu_Tools",
+   "fetched_by": "Claude from Git Bash (Codex sandbox has no network); owner go in Claude chat 13 Oct 22:35",
+   "note": "git checkout: the commit hash pins the content (sha256 not applicable)"
+  },
+  {
+   "id": "A5",
+   "description": "[XanderOlson/swgemu_single_player](https://github.com/XanderOlson/swgemu_single_player)",
+   "urls": [
+    "https://github.com/XanderOlson/swgemu_single_player"
+   ],
+   "status": "downloaded",
+   "revision_or_version": "fe88c01841997d0c772054c609fcc2c74f867748",
+   "date": "2026-10-13",
+   "bytes": 7340032,
+   "sha256": null,
+   "license_name": "AGPL-3.0",
+   "license_verified": true,
+   "license_or_readme_text": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifically designed to ensure\ncooperation with the community in the case of network server software.\n\n  The licenses for most software and other practical w",
+   "credits": null,
+   "folders_planned": "`spec/`, the test and CTest files, the README",
+   "folders_taken": [
+    ".github",
+    "spec",
+    "MMOCoreORB/src/tests",
+    "MMOCoreORB/bin/scripts/screenplays/tests"
+   ],
+   "local_path": "work/research/XanderOlson_swgemu_single_player",
+   "fetched_by": "Claude from Git Bash (Codex sandbox has no network); owner go in Claude chat 13 Oct 22:35",
+   "note": "git checkout: the commit hash pins the content (sha256 not applicable)"
+  },
+  {
+   "id": "A6",
+   "description": "[[name removed]/swgmtv](https://github.com/[name removed]/swgmtv)",
+   "urls": [
+    "https://github.com/[name removed]/swgmtv"
+   ],
+   "status": "downloaded",
+   "revision_or_version": "b2103a99b32e602957ff6848d927106d682ea2c2",
+   "date": "2026-10-13",
+   "bytes": 430964736,
+   "sha256": null,
+   "license_name": "check the licence file",
+   "license_verified": false,
+   "license_or_readme_text": "No licence file in the repository: read-only reference, \"read, don't copy\".",
+   "credits": null,
+   "folders_planned": "whole repo",
+   "folders_taken": [
+    "whole repo"
+   ],
+   "local_path": "work/research/[name removed]_swgmtv",
+   "fetched_by": "Claude from Git Bash (Codex sandbox has no network); owner go in Claude chat 13 Oct 22:35",
+   "note": "git checkout: the commit hash pins the content (sha256 not applicable)"
+  },
+  {
+   "id": "A7",
+   "description": "CC0 kits: [Quaternius Ultimate Modular Sci-Fi](https://quaternius.com/packs/ultimatemodularscifi.html), [Kenney Modular Space Kit](https://kenney.nl/assets/modular-space-kit), two or three [Poly Haven](https://polyhaven.com/license) metal or panel textures (1K)",
+   "urls": [
+    "https://quaternius.com/packs/ultimatemodularscifi.html",
+    "https://kenney.nl/assets/modular-space-kit",
+    "https://polyhaven.com/license"
+   ],
+   "status": "not_attempted_network_unavailable",
+   "revision_or_version": null,
+   "date": "2026-10-13",
+   "bytes": null,
+   "sha256": null,
+   "license_name": "CC0, confirmed on the creator pages",
+   "license_verified": false,
+   "license_or_readme_text": null,
+   "credits": null,
+   "folders_planned": "the free downloads only",
+   "folders_taken": []
+  },
+  {
+   "id": "B1",
+   "description": "[Borrie's Dark Interiors](https://modthegalaxy.com/index.php?resources/borries-dark-interiors.100/)",
+   "urls": [
+    "https://modthegalaxy.com/index.php?resources/borries-dark-interiors.100/"
+   ],
+   "status": "not_attempted_network_unavailable",
+   "revision_or_version": null,
+   "date": "2026-10-13",
+   "bytes": null,
+   "sha256": null,
+   "license_name": "completes the Borrie set",
+   "license_verified": false,
+   "license_or_readme_text": null,
+   "credits": null,
+   "folders_planned": null,
+   "folders_taken": []
+  },
+  {
+   "id": "B2",
+   "description": "Original planet releases: [Hoth](https://modthegalaxy.com/index.php?threads/new-planet-hoth.756/), [Taanab](https://modthegalaxy.com/index.php?threads/new-planet-taanab-mini-expansion.686/), [Mandalore](https://modthegalaxy.com/index.php?threads/mandalore-for-swgemu-based-emulators.433/), [Dromund Kaas](https://modthegalaxy.com/index.php?threads/dromund-kaas-for-swgemu-based-emulators.349/), [Kashyyyk](https://modthegalaxy.com/index.php?resources/kashyyyk-for-precu.2/), [Mustafar](https://modthegalaxy.com/index.php?resources/mustafar-for-precu.3/)",
+   "urls": [
+    "https://modthegalaxy.com/index.php?threads/new-planet-hoth.756/",
+    "https://modthegalaxy.com/index.php?threads/new-planet-taanab-mini-expansion.686/",
+    "https://modthegalaxy.com/index.php?threads/mandalore-for-swgemu-based-emulators.433/",
+    "https://modthegalaxy.com/index.php?threads/dromund-kaas-for-swgemu-based-emulators.349/",
+    "https://modthegalaxy.com/index.php?resources/kashyyyk-for-precu.2/",
+    "https://modthegalaxy.com/index.php?resources/mustafar-for-precu.3/"
+   ],
+   "status": "not_attempted_network_unavailable",
+   "revision_or_version": null,
+   "date": "2026-10-13",
+   "bytes": null,
+   "sha256": null,
+   "license_name": "The terrain is already in our MTG TREs. The releases add each author's readme, terms and server files, which the catalogue says to use (\"use the original release\")",
+   "license_verified": false,
+   "license_or_readme_text": null,
+   "credits": null,
+   "folders_planned": null,
+   "folders_taken": []
+  },
+  {
+   "id": "C1",
+   "description": "Named Saber Crystals",
+   "urls": [
+    "https://modthegalaxy.com/index.php?threads/named-saber-crystals.419/"
+   ],
+   "status": "not_attempted_network_unavailable",
+   "revision_or_version": null,
+   "date": "2026-10-13",
+   "bytes": null,
+   "sha256": null,
+   "license_name": null,
+   "license_verified": false,
+   "license_or_readme_text": null,
+   "credits": null,
+   "folders_taken": []
+  },
+  {
+   "id": "C2",
+   "description": "Classic BARC assets",
+   "urls": [
+    "https://modthegalaxy.com/index.php?threads/classic-barc-speeder-assets-patch.238/"
+   ],
+   "status": "not_attempted_network_unavailable",
+   "revision_or_version": null,
+   "date": "2026-10-13",
+   "bytes": null,
+   "sha256": null,
+   "license_name": null,
+   "license_verified": false,
+   "license_or_readme_text": null,
+   "credits": null,
+   "folders_taken": []
+  },
+  {
+   "id": "C3",
+   "description": "Post-14.1 house assets",
+   "urls": [
+    "https://modthegalaxy.com/index.php?threads/post-14-1-house-assets-patch.237/"
+   ],
+   "status": "not_attempted_network_unavailable",
+   "revision_or_version": null,
+   "date": "2026-10-13",
+   "bytes": null,
+   "sha256": null,
+   "license_name": null,
+   "license_verified": false,
+   "license_or_readme_text": null,
+   "credits": null,
+   "folders_taken": []
+  },
+  {
+   "id": "C4",
+   "description": "Borrie's /tool and Jawa toolbox",
+   "urls": [
+    "https://modthegalaxy.com/index.php?threads/borries-tool-command-featuring-the-jawa-toolbox-object-syncing-command.1395/"
+   ],
+   "status": "not_attempted_network_unavailable",
+   "revision_or_version": null,
+   "date": "2026-10-13",
+   "bytes": null,
+   "sha256": null,
+   "license_name": null,
+   "license_verified": false,
+   "license_or_readme_text": null,
+   "credits": null,
+   "folders_taken": []
+  },
+  {
+   "id": "C5",
+   "description": "SWG Galaxy Map Editor",
+   "urls": [
+    "https://modthegalaxy.com/index.php?resources/swg-galaxy-map-editor.173/"
+   ],
+   "status": "not_attempted_network_unavailable",
+   "revision_or_version": null,
+   "date": "2026-10-13",
+   "bytes": null,
+   "sha256": null,
+   "license_name": null,
+   "license_verified": false,
+   "license_or_readme_text": null,
+   "credits": null,
+   "folders_taken": []
+  },
+  {
+   "id": "C6",
+   "description": "Sytner's IFF Editor (SIE)",
+   "urls": [
+    "https://modthegalaxy.com/index.php?resources/sie.1/"
+   ],
+   "status": "not_attempted_network_unavailable",
+   "revision_or_version": null,
+   "date": "2026-10-13",
+   "bytes": null,
+   "sha256": null,
+   "license_name": null,
+   "license_verified": false,
+   "license_or_readme_text": null,
+   "credits": null,
+   "folders_taken": []
+  },
+  {
+   "id": "D1",
+   "description": "[Sagiroth/TortoiseBots](https://github.com/Sagiroth/TortoiseBots): native PlayerBots module for Tortoise WoW 1.18.1 (C++). Design reference for our bot module (living-world pool bots, observability dashboard, stuck tracking, per-behaviour policy tests)",
+   "urls": [
+    "https://github.com/Sagiroth/TortoiseBots"
+   ],
+   "status": "downloaded",
+   "revision_or_version": "bc914eb3b5f484ede0d5161a68711f995161627d",
+   "date": "2026-10-13",
+   "bytes": 42557935,
+   "sha256": null,
+   "license_name": "Mixed, per file (LICENCE.md): AGPL-3.0 target core; original TortoiseBots work under AGPL-3.0 with a section 7(b) attribution term; donor files GPL-2.0 / GPL-3.0 / AGPL-3.0 lineages (cmangos, mangos, AzerothCore mod-playerbots), audit open in docs/LICENSE_AUDIT.md",
+   "license_verified": true,
+   "license_or_readme_text": "# Licence\n\n## TortoiseBots\n\nTortoiseBots is a native module that **links against** the Tortoise core. It\ncontains original source plus copied, ported and reimplemented work from several\ndonor lineages. The licence that applies to a file follows its retained notice,\nthe donor grant and the project's own grant for original work; these must not be\ncollapsed into a blanket \"GPL-2.0\" label without checking the exact variant.\n\nEvery file ported from a donor must retain its original copyright and licence\nnotice. See `ai/playerbot/` headers,\n[`docs/PROVENANCE.md`](docs/PROVENANCE.md), and\n[`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md) for source commits and the\nopen compatibility audit. Do not strip those notices.\n\n## Upstream — tortoise-wow/tortoise-wow\n\nThe canonical target core for this module is:\n\n* **tortoise-wow/tortoise-wow** — <https://github.com/tortoise-wow/tortoise-wow>\n* Licence: **GNU Affero General Public License v3.0 (AGPL-3.0)**\n* Full text: <https://github.com/tortoise-wow/tortoise-wow/blob/main/LICENSE>\n\nA combined build may be distributed or operated only when every included\nTortoiseBots component is available under terms compatible with AGPL-3.0. Once\nthat condition is established, the combined work is governed by AGPL-3.0,\nincluding its Corresponding Source requirement for network use. The donor\ncompatibility audit is still open; do not rely on the target core's licence\nalone to resolve an incompatible or unclear donor grant.\n\n## Attribution (author notice)\n\nTortoiseBots is created and maintained by **Sagiroth**\n(<https://github.com/Sagiroth/TortoiseBots>).\n\nThe module shows this attribution as its Appropriate Legal Notice (AGPL-3.0\nsection 5(d)): in the worldserver startup log, in a login message to every\nplayer, and from `.bot version` / `.bot about`. Under AGPL-3.0 section 7(b), for\noriginal TortoiseBots work, the following additional term applies:\n\n> Modified versions, forks, repacks and bundles must preserve these author\n> attributions and the source link, and must not remove or hide them from\n> the places listed above. You may add your own credit alongside them.\n\nDistributing or publicly showing a build (for example a Docker bundle, repack,\nvideo or public server) should also credit TortoiseBots by Sagiroth with a link\nto the repository. See the README for ready-to-paste credit text.\n\n## Donor / reference projects\n\n| Project | Licence | Notes |\n| --- | --- | --- |\n| `Shyalya/tortoise-wow` | AGPL-3.0 at pinned repository root | Tortoise 1.18.1 donor baseline; verify retained upstream notices per copied file |\n| `cmangos/playerbots` | No root licence file found at pinned commit | PlayerBots behavior; resolve through file notices and upstream history |\n| `cmangos/mangos-classic` | GPL-2.0 at pinned repository root | Host API reference; determine only/or-later if code is copied |\n| `mangoszero/server` | GPL-3.0 at pinned repository root | Lifecycle reference/reimplementation |\n| `mod-playerbots` (`AzerothCore`) | GPL-2.0 at pinned repository root; sampled ported headers grant GPL-2.0-or-later | Newer behavior; verify every copied/ported file |\n\nUpstream licences are preserved — see each referenced repository for its full\nlicence text.\n\n## What this means for you\n\n* Follow the exact licence and copyright notices applicable to each file; do\n  not assume GPL-2.0-only and GPL-2.0-or-later are interchangeable.\n* Do not distribute or operate a combined build until the donor compatibility\n  matrix is complete and every included grant is compatible with AGPL-3.0.\n* Keep the TortoiseBots author attribution and source link intact (see\n  *Attribution* above).\n* Keep notices intact and record substantial ports in\n  [`docs/PROVENANCE.md`](docs/PROVENANCE.md).\n* Track evidence and unresolved items in\n  [`docs/LICENSE_AUDIT.md`](docs/LICENSE_AUDIT.md).\n",
+   "credits": "Playerbots: TortoiseBots by Sagiroth — https://github.com/Sagiroth/TortoiseBots (the author's own credit line, README). The owner promised Sagiroth a credit; Sagiroth is the owner's main inspiration for this project.",
+   "folders_planned": "whole repo (reference copy)",
+   "folders_taken": [
+    "whole repo, shallow clone of main"
+   ],
+   "local_path": "work/research/Sagiroth_TortoiseBots",
+   "fetched_by": "Claude from Git Bash, 13 Oct 2026 23:12. Owner's request in Claude chat (13 Oct: 'my wow dev homie just gave me permission to let you fork his wow turtle bot framework'), with a screenshot of the author's permission on Discord, 13 Oct 22:53: 'Yeah fire it up / Fork it or whatever'",
+   "note": "Reference only: nothing built, run or installed. Not forked on GitHub (that would be an action on the owner's account). WoW-specific code does not transfer to Core3; we take ideas and structure, and write our own code. If any file is ever ported, keep its notices, follow its own licence line (LICENCE.md), and keep the author credit. Core3 is AGPL-3.0, so AGPL/GPL-compatible files could be adapted with notices."
+  }
+ ]
+}

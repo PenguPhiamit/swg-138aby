@@ -1,0 +1,9 @@
+2970b47e Normalize line endings (LF) in agent body and sandbox command files
+f25c90f9 Sandbox test helpers /agentgear and /agentskill; agent body reads mission objects
+220e0f39 Sandbox /leash: never re-place a follower out of range; naming the leader keeps it on
+09a56205 Sandbox /leash: server-side follow assist for group members
+3797430a Agent body: one move deadline, no walking while down, survey, indoor look
+cde59ec5 Sandbox /agentpath: enforce the 256-point cap, validate input, echo the request
+697f2002 Agent body: keep re-planning long paths while each leg gets closer
+5c39f411 Sandbox /agentpath: head part of the way when leaving a building for a far target
+eebdd99d Sandbox: /agentpath helper for the agent client (bot accounts only)

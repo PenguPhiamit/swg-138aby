@@ -1,0 +1,64 @@
+{
+  "_about": "Five bot groups for the TEST galaxy, named after the first five Aurebesh letters. Each group's leader carries the group's name, so reports and in-game sightings say who did what. Edit focus/members freely; account names must stay unique and be listed in AgentAccounts (squad.py accounts).",
+  "city": "mos_eisley",
+  "groups": {
+    "Aurek": {
+      "focus": "World-boss crew: two fighters (boss gear, trained to certify it) with a support camp nearby: Tamsin trained to Doctor (enhancement buffs, healing), Sela the entertainer (dance/music buffs), Oren the scout trained to Ranger (camps). Also: hunting, incapacitation, death and cloning, combat XP. Bosses come from Rhea Tannor's trail list.",
+      "members": [
+        {"account": "aurek1", "name": "Aurek Dannor", "race": "human_male", "profession": "combat_marksman"},
+        {"account": "aurek2", "name": "Jesh Kolby", "race": "rodian_male", "profession": "combat_brawler"},
+        {"account": "aurek3", "name": "Tamsin Voor", "race": "human_female", "profession": "science_medic"},
+        {"account": "aurek4", "name": "Sela Marn", "race": "twilek_female", "profession": "social_entertainer"},
+        {"account": "aurek5", "name": "Oren Vask", "race": "zabrak_male", "profession": "outdoors_scout"}
+      ],
+      "training": {
+        "Aurek": ["combat_marksman_master", "combat_rifleman_novice"],
+        "Jesh": ["combat_brawler_master", "combat_2hsword_novice"],
+        "Tamsin": ["science_doctor_novice", "science_doctor_wound_02"],
+        "Sela": ["social_dancer_novice", "social_musician_novice"],
+        "Oren": ["outdoors_ranger_novice"]
+      }
+    },
+    "Besh": {
+      "focus": "Gatherers with a guard: survey and sample every resource type their tools allow, forage, harvest meat/hide/bone from the guard's kills, train gathering skills at trainers, keep resource containers through a relog; crafting and trade once the body supports them. Varo guards: he clears creatures near the gatherers before they kneel to sample.",
+      "members": [
+        {"account": "besh1", "name": "Besh Orlani", "race": "zabrak_male", "profession": "crafting_artisan"},
+        {"account": "besh2", "name": "Dova Renn", "race": "twilek_female", "profession": "crafting_artisan"},
+        {"account": "besh3", "name": "Pell Marik", "race": "human_male", "profession": "outdoors_scout"},
+        {"account": "besh4", "name": "Varo Kesh", "race": "human_male", "profession": "combat_marksman"}
+      ],
+      "training": {
+        "Pell": ["outdoors_scout_camp_01"]
+      }
+    },
+    "Cresh": {
+      "focus": "Travel and missions: travel terminals and tickets, shuttles and starports, other planets and cities, mission terminals, the world-boss hunter (Rhea Tannor) and boss trails.",
+      "members": [
+        {"account": "cresh1", "name": "Cresh Haldo", "race": "bothan_male", "profession": "outdoors_scout"},
+        {"account": "cresh2", "name": "Ilsa Brenn", "race": "human_female", "profession": "social_entertainer"},
+        {"account": "cresh3", "name": "Kor Vessi", "race": "rodian_male", "profession": "combat_marksman"}
+      ]
+    },
+    "Dorn": {
+      "focus": "Social and group: group invite/join/leave, /leash follow assist, chat and tells, emotes, entertainer dance/music and buffs in the cantina, the mercenary broker (Dax Venn), NPC conversations.",
+      "members": [
+        {"account": "dorn1", "name": "Dorn Talvo", "race": "twilek_male", "profession": "social_entertainer"},
+        {"account": "dorn2", "name": "Nima Sarro", "race": "human_female", "profession": "science_medic"},
+        {"account": "dorn3", "name": "Rusk Odell", "race": "zabrak_male", "profession": "combat_brawler"}
+      ]
+    },
+    "Esk": {
+      "focus": "Navigation and buildings: /agentpath routes outdoors and indoors, multi-cell buildings, doorways, long routes, terrain height, stuck spots; three bots moving at once as a light load test. Also the Hoth crew (owner, 14 Oct: 'give esk a crew similar to the world boss crew'): Esk and Tovan trained and geared like Aurek's fighters (boss kit), Lira trained to Doctor for healing.",
+      "members": [
+        {"account": "esk1", "name": "Esk Morrow", "race": "human_male", "profession": "outdoors_scout"},
+        {"account": "esk2", "name": "Lira Quell", "race": "bothan_female", "profession": "crafting_artisan"},
+        {"account": "esk3", "name": "Tovan Pike", "race": "moncal_male", "profession": "combat_brawler"}
+      ],
+      "training": {
+        "Esk": ["combat_marksman_master", "combat_rifleman_novice"],
+        "Tovan": ["combat_brawler_master", "combat_2hsword_novice"],
+        "Lira": ["science_doctor_novice", "science_doctor_wound_02"]
+      }
+    }
+  }
+}

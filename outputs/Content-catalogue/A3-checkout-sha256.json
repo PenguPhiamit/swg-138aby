@@ -1,0 +1,168 @@
+{
+ "id": "A3",
+ "revision": "cdb1cdbbe172a7d46740762f92de855dc60920c7",
+ "files": [
+  {
+   "path": ".gitignore",
+   "bytes": 42,
+   "sha256": "e9c363204164603f5f65565d72344d1fef902f8f097fe36fa7cfe6f9b430287e"
+  },
+  {
+   "path": "LICENSE",
+   "bytes": 1089,
+   "sha256": "a68217b4c657a89618dc433d337d9d8a0dd7bce55b3ba499a8cc0c915e0011da"
+  },
+  {
+   "path": "README.md",
+   "bytes": 18832,
+   "sha256": "2bd96f368f12fd321821949fa9caaec86d797386d0c757707836c18260f5ed0b"
+  },
+  {
+   "path": "io_scene_swg-3.1.4.zip",
+   "bytes": 96260,
+   "sha256": "729e88308491e280649cba0f85f340b2885ec5bfdce56d0e47b211c1fbbe31cd"
+  },
+  {
+   "path": "io_scene_swg/__init__.py",
+   "bytes": 59401,
+   "sha256": "fd6a8f97aa707190f08b8ee42ab8a00a470d65748251e20ca5a6d9401fcf89e3"
+  },
+  {
+   "path": "io_scene_swg/data_types.py",
+   "bytes": 1688,
+   "sha256": "346f26c897c615f0090e795d35f5d6c5224a8b8242b799492abc8652ce63b969"
+  },
+  {
+   "path": "io_scene_swg/debug_flr.py",
+   "bytes": 14376,
+   "sha256": "c486e3199f646b44308a6bde7f0b3e9d5c3c62ae8c5b5cba8c495b628f0417d1"
+  },
+  {
+   "path": "io_scene_swg/export_ans.py",
+   "bytes": 8200,
+   "sha256": "888c836f72994ea6efdc547d45799537ea5135c3465784f9b6349a0adcf8e120"
+  },
+  {
+   "path": "io_scene_swg/export_flr.py",
+   "bytes": 14337,
+   "sha256": "a104dcda20236c14feebaf8dcb5ce2306e0e32ee12f715c8d2085ee38b38d378"
+  },
+  {
+   "path": "io_scene_swg/export_lmg.py",
+   "bytes": 1384,
+   "sha256": "5c13163cfda1601a3c26ad6f3dc0151d7f3337a38c3bb3a7a16dd634866f9338"
+  },
+  {
+   "path": "io_scene_swg/export_lod.py",
+   "bytes": 8911,
+   "sha256": "0ac184e0504d7e712335c8c4abf15322adb214c478a05fa9c66ab2db64a18718"
+  },
+  {
+   "path": "io_scene_swg/export_mgn.py",
+   "bytes": 10324,
+   "sha256": "f7aa38fac755886f25198f63b2bd55bc2b52c1dd2cb06b8e91207100ae2c9d22"
+  },
+  {
+   "path": "io_scene_swg/export_msh.py",
+   "bytes": 8818,
+   "sha256": "56ca44dfe3654e3042d4fab6d715f5c4c94630988332158bf690b4f54c1e2ea3"
+  },
+  {
+   "path": "io_scene_swg/export_pob.py",
+   "bytes": 16700,
+   "sha256": "9f4b715aabe88bb8e5902668db569f40a29746605ae033b0161ab0db02471acb"
+  },
+  {
+   "path": "io_scene_swg/export_sat.py",
+   "bytes": 2896,
+   "sha256": "8bf216d0512f4eab682ac6f865508b871d1345a70e10bbfa7b59ac0d96829d8b"
+  },
+  {
+   "path": "io_scene_swg/export_skt.py",
+   "bytes": 6986,
+   "sha256": "7fc25d7adfc80e9cd00232b3410593700555b095fde358a71dd5d1b754d84750"
+  },
+  {
+   "path": "io_scene_swg/extents.py",
+   "bytes": 8877,
+   "sha256": "d3c9722db21f6ecd77273e4540f55d740e396097124ec8a39d0fcf2f0db7d2b1"
+  },
+  {
+   "path": "io_scene_swg/import_flr.py",
+   "bytes": 3243,
+   "sha256": "6757db46ee66ba6736fb949369c80d1e350ab5e4cd0a2e0578e53f2fbe63cabe"
+  },
+  {
+   "path": "io_scene_swg/import_lod.py",
+   "bytes": 4286,
+   "sha256": "a81cd8a69bcc2c71278c49b6794db358ecfcd2b118fda445fcd86dd7447227e6"
+  },
+  {
+   "path": "io_scene_swg/import_mgn.py",
+   "bytes": 8635,
+   "sha256": "1c2fcf42bd44a9e7fd64739a49f9eb37f84cb01851da469429f51bc0d6d5b01f"
+  },
+  {
+   "path": "io_scene_swg/import_msh.py",
+   "bytes": 7554,
+   "sha256": "d48199dd19b5be4900e3976e5e86c894cc1ec40ea9fa9b33a7f9090d2684621d"
+  },
+  {
+   "path": "io_scene_swg/import_pob.py",
+   "bytes": 6902,
+   "sha256": "249c13c0d830fc80b06184074bd48eab1e8f83eb4d100cc1dbc79cd1c52e9d88"
+  },
+  {
+   "path": "io_scene_swg/import_skt.py",
+   "bytes": 5697,
+   "sha256": "16f53ce87515ba05eadddfd3fb9d462292db25c8f5ab443bc3c20106e84e8718"
+  },
+  {
+   "path": "io_scene_swg/nsg_iff.py",
+   "bytes": 20319,
+   "sha256": "acd9f25e9303544e08b09a5b015ab3aff2a6291f2230f01bff0bf59087935858"
+  },
+  {
+   "path": "io_scene_swg/palette_argb.py",
+   "bytes": 533,
+   "sha256": "64b339c214ef2fc70de02fa12f66fe6b585d3364f61a66f23ef80e9e7eaf98b9"
+  },
+  {
+   "path": "io_scene_swg/support.py",
+   "bytes": 40745,
+   "sha256": "954e96cdb319381c8d37d5662e64846d5fbc9d2e084c89bd976a13466b2200f3"
+  },
+  {
+   "path": "io_scene_swg/swg_types.py",
+   "bytes": 89852,
+   "sha256": "1e929147e52734dceaada4ed54abeea6ac15720d06a0d7f6ccc2b9454e9a51bc"
+  },
+  {
+   "path": "io_scene_swg/vector3D.py",
+   "bytes": 2484,
+   "sha256": "ea52e1ba140b0e09ffe084a73aee018fc166a8b274bb7b32f16cdc8da9d004f2"
+  },
+  {
+   "path": "io_scene_swg/vertex_buffer_format.py",
+   "bytes": 10218,
+   "sha256": "43e0a8e120e7c80bec2b60cafbf78d4d641afa76e177ba1cf6932b8f0eb5e452"
+  },
+  {
+   "path": "pyrightconfig.json",
+   "bytes": 39,
+   "sha256": "85319f3a8176901a622131531c6ac84504515e2666f2e5290b5b8ad2eff8c125"
+  },
+  {
+   "path": "requirements-dev.txt",
+   "bytes": 305,
+   "sha256": "0129edebd0ea7190b0a9b3f572cb9eef4310bdc839b91512954597042ccedce6"
+  },
+  {
+   "path": "swg_dds_nvidia_tex_tools_preset.dpf",
+   "bytes": 62,
+   "sha256": "30b0f9a33b6ac2d629c8c32b493327f7d00267a8abb60a912b27dee64f4693c6"
+  }
+ ],
+ "absent_tracked_paths": [],
+ "symlinks_not_followed": []
+}

@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/reb_t2_fleet_cmdr.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/reb_t2_fleet_cmdr.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_reb_t2_fleet_cmdr, "object/tangible/loot/creature/loot/collections/reb_t2_fleet_cmdr.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_reb_t2_fleet_cmdr, "object/tangible/loot/creature_loot/collections/reb_t2_fleet_cmdr.iff")

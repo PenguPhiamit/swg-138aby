@@ -1,0 +1,388 @@
+{
+  "ui_file": "C:\\Users\\Pengw\\Documents\\Codex\\2026-10-13\\h\\outputs\\Documentation-support\\hoth\\client-base\\ui\\ui_ticketpurchase.inc",
+  "ui_sha256": "2231a7e95c0f26f6b19ed321b90a785e5eb827152f7ab96f29a88e09de5726fe",
+  "coordinate_frame": "GalaxyMap-local button centres; x right, y down; no screen/resolution scaling applied",
+  "anchors": [
+    {
+      "name": "Corellia",
+      "grid": [
+        13,
+        11
+      ],
+      "pixel": [
+        277.5,
+        190.0
+      ],
+      "button_top_left": [
+        229,
+        142
+      ],
+      "button_size": [
+        97,
+        96
+      ]
+    },
+    {
+      "name": "Dantooine",
+      "grid": [
+        12,
+        4
+      ],
+      "pixel": [
+        100.5,
+        82.5
+      ],
+      "button_top_left": [
+        80,
+        63
+      ],
+      "button_size": [
+        41,
+        39
+      ]
+    },
+    {
+      "name": "Dathomir",
+      "grid": [
+        15,
+        6
+      ],
+      "pixel": [
+        365.0,
+        69.5
+      ],
+      "button_top_left": [
+        336,
+        42
+      ],
+      "button_size": [
+        58,
+        55
+      ]
+    },
+    {
+      "name": "Endor",
+      "grid": [
+        8,
+        16
+      ],
+      "pixel": [
+        53.5,
+        331.5
+      ],
+      "button_top_left": [
+        23,
+        302
+      ],
+      "button_size": [
+        61,
+        59
+      ]
+    },
+    {
+      "name": "Lok",
+      "grid": [
+        17,
+        17
+      ],
+      "pixel": [
+        349.5,
+        431.5
+      ],
+      "button_top_left": [
+        329,
+        412
+      ],
+      "button_size": [
+        41,
+        39
+      ]
+    },
+    {
+      "name": "Naboo",
+      "grid": [
+        15,
+        17
+      ],
+      "pixel": [
+        228.0,
+        373.5
+      ],
+      "button_top_left": [
+        190,
+        336
+      ],
+      "button_size": [
+        76,
+        75
+      ]
+    },
+    {
+      "name": "Rori",
+      "grid": [
+        15,
+        17
+      ],
+      "pixel": [
+        245.5,
+        406.5
+      ],
+      "button_top_left": [
+        230,
+        391
+      ],
+      "button_size": [
+        31,
+        31
+      ]
+    },
+    {
+      "name": "Talus",
+      "grid": [
+        13,
+        11
+      ],
+      "pixel": [
+        252.5,
+        128.0
+      ],
+      "button_top_left": [
+        228,
+        103
+      ],
+      "button_size": [
+        49,
+        50
+      ]
+    },
+    {
+      "name": "Tatooine",
+      "grid": [
+        18,
+        16
+      ],
+      "pixel": [
+        368.5,
+        392.0
+      ],
+      "button_top_left": [
+        341,
+        366
+      ],
+      "button_size": [
+        55,
+        52
+      ]
+    },
+    {
+      "name": "Yavin4",
+      "grid": [
+        16,
+        6
+      ],
+      "pixel": [
+        448.0,
+        95.5
+      ],
+      "button_top_left": [
+        412,
+        60
+      ],
+      "button_size": [
+        72,
+        71
+      ]
+    }
+  ],
+  "independent_system_anchors": [
+    {
+      "names": [
+        "Corellia",
+        "Talus"
+      ],
+      "grid": [
+        13,
+        11
+      ],
+      "pixel": [
+        265.0,
+        159.0
+      ],
+      "fitted": [
+        228.22020725388614,
+        220.20417746113986
+      ],
+      "residual_px": 71.40521334707844,
+      "leave_one_out_error_px": 83.77632933730199
+    },
+    {
+      "names": [
+        "Dantooine"
+      ],
+      "grid": [
+        12,
+        4
+      ],
+      "pixel": [
+        100.5,
+        82.5
+      ],
+      "fitted": [
+        220.69316709844577,
+        26.415985265544023
+      ],
+      "residual_px": 132.63413635218342,
+      "leave_one_out_error_px": 236.66260053769116
+    },
+    {
+      "names": [
+        "Dathomir"
+      ],
+      "grid": [
+        15,
+        6
+      ],
+      "pixel": [
+        365.0,
+        69.5
+      ],
+      "fitted": [
+        326.7918393782383,
+        96.82223121761677
+      ],
+      "residual_px": 46.97199013036656,
+      "leave_one_out_error_px": 65.77612258415164
+    },
+    {
+      "names": [
+        "Endor"
+      ],
+      "grid": [
+        8,
+        16
+      ],
+      "pixel": [
+        53.5,
+        331.5
+      ],
+      "fitted": [
+        14.758581606218044,
+        326.9649651878233
+      ],
+      "residual_px": 39.005948775920345,
+      "leave_one_out_error_px": 201.54841216489234
+    },
+    {
+      "names": [
+        "Lok"
+      ],
+      "grid": [
+        17,
+        17
+      ],
+      "pixel": [
+        349.5,
+        431.5
+      ],
+      "fitted": [
+        355.032901554404,
+        403.7209844559587
+      ],
+      "residual_px": 28.324666003446765,
+      "leave_one_out_error_px": 43.11246481597232
+    },
+    {
+      "names": [
+        "Naboo",
+        "Rori"
+      ],
+      "grid": [
+        15,
+        17
+      ],
+      "pixel": [
+        236.75,
+        390.0
+      ],
+      "fitted": [
+        278.43957253886003,
+        392.6402121113989
+      ],
+      "residual_px": 41.773091559831315,
+      "leave_one_out_error_px": 56.495119667481035
+    },
+    {
+      "names": [
+        "Tatooine"
+      ],
+      "grid": [
+        18,
+        16
+      ],
+      "pixel": [
+        368.5,
+        392.0
+      ],
+      "fitted": [
+        397.7252266839376,
+        382.36882691062203
+      ],
+      "residual_px": 30.77130757386004,
+      "leave_one_out_error_px": 50.20635244070078
+    },
+    {
+      "names": [
+        "Yavin4"
+      ],
+      "grid": [
+        16,
+        6
+      ],
+      "pixel": [
+        448.0,
+        95.5
+      ],
+      "fitted": [
+        365.0885038860103,
+        102.36261738989666
+      ],
+      "residual_px": 83.19502211851524,
+      "leave_one_out_error_px": 124.119782253077
+    }
+  ],
+  "affine_x_y_coefficients": [
+    [
+      38.29666450777196,
+      -4.395660621761659,
+      -221.28416450777107
+    ],
+    [
+      5.540386172279877,
+      26.89254371761656,
+      -147.63882367228075
+    ]
+  ],
+  "rmse_px": 67.85454431495961,
+  "max_residual_px": 132.63413635218342,
+  "max_leave_one_out_error_px": 236.66260053769116,
+  "hoth": {
+    "grid": "K-18",
+    "fitted_center": [
+      120.8572538860106,
+      397.371211139896
+    ],
+    "endor_cloned_button_size": [
+      61,
+      59
+    ],
+    "candidate_button_top_left": [
+      90,
+      368
+    ],
+    "status": "REJECTED for automatic use: stock layout is inconsistent with one atlas affine fit",
+    "adopt_candidate": false
+  },
+  "client_files_changed": false,
+  "fit_accepted": false,
+  "acceptance_rule": "proposed diagnostic gate: max residual <=30px and leave-one-out <=60px; not an owner-approved layout rule"
+}

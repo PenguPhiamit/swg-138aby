@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/space/engine_mark_05_cygnus.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/space/engine_mark_05_cygnus.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_space_engine_mark_05_cygnus, "object/tangible/loot/creature/loot/collections/space/engine_mark_05_cygnus.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_space_engine_mark_05_cygnus, "object/tangible/loot/creature_loot/collections/space/engine_mark_05_cygnus.iff")

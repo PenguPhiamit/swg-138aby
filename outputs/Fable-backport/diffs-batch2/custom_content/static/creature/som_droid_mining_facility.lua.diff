@@ -1,0 +1,9 @@
+--- /dev/null
++++ b/custom_content/static/creature/som_droid_mining_facility.lua
+@@ -0,0 +1,6 @@
++-- Fable backport batch 2 (14 Oct 2026). Client template object/static/creature/shared_som_droid_mining_facility.iff (mtg_patch_019.tre), form STAT.
++
++object_static_creature_som_droid_mining_facility = object_static_creature_shared_som_droid_mining_facility:new {
++}
++
++ObjectTemplates:addTemplate(object_static_creature_som_droid_mining_facility, "object/static/creature/som_droid_mining_facility.iff")

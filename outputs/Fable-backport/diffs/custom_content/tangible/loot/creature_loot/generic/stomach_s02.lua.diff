@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/generic/stomach_s02.lua
++++ b/custom_content/tangible/loot/creature_loot/generic/stomach_s02.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_stomach_s02, "object/tangible/loot/creature/loot/generic/stomach_s02.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_stomach_s02, "object/tangible/loot/creature_loot/generic/stomach_s02.iff")

@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/npc_loot/heroic_sm_generator.lua
++++ b/custom_content/tangible/loot/npc_loot/heroic_sm_generator.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_npc_loot_heroic_sm_generator, "object/tangible/loot/npc/loot/heroic_sm_generator.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_npc_loot_heroic_sm_generator, "object/tangible/loot/npc_loot/heroic_sm_generator.iff")

@@ -1,0 +1,481 @@
+[
+  {
+    "commit": "34d4772a90db8fb0b9325c83459b21c3f2882654",
+    "path": "MMOCoreORB/src/server/zone/managers/creature/CreatureManager.idl",
+    "sha256": "1ad8368d8590efafd9e5735eeb185276dc1cb6dcf18ebfb00b09abdea7306c57"
+  },
+  {
+    "commit": "34d4772a90db8fb0b9325c83459b21c3f2882654",
+    "path": "MMOCoreORB/src/server/zone/objects/creature/commands/ShowSpawnRegionCommand.h",
+    "sha256": "c18ea677c95223b66a066dd9f05a661bb2d0be5300a5adf515f238d50a7d23de"
+  },
+  {
+    "commit": "34d4772a90db8fb0b9325c83459b21c3f2882654",
+    "path": "MMOCoreORB/src/server/zone/objects/creature/commands/SpawnStatusCommand.h",
+    "sha256": "8fbb1dd48633c5688d5be86e9682a786eeb4b1bf6998a8c05eb0013e2f686463"
+  },
+  {
+    "commit": "34d4772a90db8fb0b9325c83459b21c3f2882654",
+    "path": "MMOCoreORB/src/server/zone/objects/region/SpawnArea.idl",
+    "sha256": "307cbaecfd640364c74014c2b979fe6800cf90452cfb4d1f1d8fc52188760f4a"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/groups.lua",
+    "sha256": "81fb963b768d6dcde3c2323bc60371ea1d8871c53276c12b0607a924ed710c40"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/groups/hoth/hoth_decor_common.lua",
+    "sha256": "1ed68c02213b43f18582778b9aa911b11e2010988e6033896b4d75e52384fb26"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/groups/hoth/hoth_decor_rare.lua",
+    "sha256": "fe77ef4dbe5722439e2b97390d3ba4b712bb0447ab5d58e96fd40ba78def5962"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/groups/hoth/hoth_vehicle_deeds.lua",
+    "sha256": "0cf4a8e2b72b4e831e08e1708e9711d4f51584c75227d165ffad0fcd4145c720"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items.lua",
+    "sha256": "176afa7d710ac301c9a90060211b50d737a8f98a4b32e9247eb39a6a9108694d"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_decor_col_reward_hoth_tauntaun_head.lua",
+    "sha256": "2761925dd955250836bb5cc0cf31c8a670b0df82cb0b656741ea779404bcce83"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_decor_decorative_hoth_travel_advertisement.lua",
+    "sha256": "48b7fb5ffaf14e3553dbd3f882a030e7ed7b3ed86478d6fa2a8af5b8afd2e853"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_decor_decorative_stuffed_tauntaun.lua",
+    "sha256": "6af4258063fedbb5858e735add66988f25eb655048504eade362987ded341996"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_decor_decorative_stuffed_wampa.lua",
+    "sha256": "8dab9c0d2cff99756c0439bbe7ab77330bb2d70b2a9ceb9b74846880cd5cb4c9"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_decor_diorama_atat_attack.lua",
+    "sha256": "b763f0aee017092476c319420ef069ce8160a441f106df0c155d6d3e8d6ebefc"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_decor_frn_plush_tauntaun.lua",
+    "sha256": "d7784338f5fc3a0354c69f539187d0b408a5665155b05deb3034fb718bea6e1c"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_decor_tauntaun_armored_statue.lua",
+    "sha256": "e4cbf4f328fb28d0b90edff10183d60173f0052942cf2523659eabe508f96654"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_a1_deluxe_floater_deed.lua",
+    "sha256": "c667b14e34ceaaf31ecaf6e17442f9f97f36bf88bb8fb9baad7775aa7202f987"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_basilisk_war_droid_deed.lua",
+    "sha256": "279ab6b2720492af9bb5cc1ca2b6825bf55185a7d45577d5131e4e87c44334f4"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_flare_s_swoop_deed.lua",
+    "sha256": "03b687697e4de2f3e8d25e92c257f26a30506ab4df78772af2413737d0e05387"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_hover_chair_deed.lua",
+    "sha256": "d02cd4e96bfd0f9adbc46cd63bc3cd3a8a37c715c60fe61477bb94f8d984ee36"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_hoverlifter_speeder_deed.lua",
+    "sha256": "64070e1551fc14f9305095fbd50a098e89fecff6001f4d5843fa60385b4c0eaa"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_landspeeder_ab1_deed.lua",
+    "sha256": "31f219780c78accb231c7777672e49bfbe7ee4ea2ccd91ea243d8f698dbab8c9"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_landspeeder_organa_deed.lua",
+    "sha256": "078efcd11e7bb14731bcd50f967a2d561091d5630461447a617624ea5e4f0aee"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_landspeeder_xp38_deed.lua",
+    "sha256": "9c3cec715d5f5ef402c3fe606c96301c048a81f483e6d6efe5076fba34364867"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_mechno_chair_deed.lua",
+    "sha256": "4e8d36a399170678b21b781c5513838e83a5ffc93e0eba42d5125786190b3f84"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_mustafar_panning_droid_deed.lua",
+    "sha256": "c3b7838ed9cb549a78604cf9ca993228bc5cb43ca839fa8896497ea1d479db4a"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_podracer_anakin_deed.lua",
+    "sha256": "08a804401bd221b572d3ea62c334919d5a02fe9350d67e546679ddb428e578ff"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_sith_speeder_deed.lua",
+    "sha256": "d0ece4851cb0bc01f35a5325ea70fe4c6b3e2d1a22c3a5ffebb16ceb9a3a9504"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_snowspeeder_deed.lua",
+    "sha256": "42c0dac941e22d219828187fe4d000062cdfd51eff68720d1d84d06bbf168d24"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_speeder_ric_920_deed.lua",
+    "sha256": "3f7378d1b1ab7d84430d26bf874616d4974756203bdf2596f7bd7814798d2a39"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_stap_speeder_deed.lua",
+    "sha256": "8de3695fc59ac86160a5f37edc79e4fce52cf48d06b800f6d02c377abebb4053"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_swamp_speeder_deed.lua",
+    "sha256": "4a99f495f933803ab3de0ee71b2a1f9f50a865d3ed58e87c356364be43b1bd2e"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_tcg_8_single_pod_airspeeder_deed.lua",
+    "sha256": "2c0c930d60d3517dce84ace5124c8057b981eae2edd9aec47ac7e714577c08a3"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_tcg_military_transport_deed.lua",
+    "sha256": "922faa2b48c2f71b3335c8647ae095fd378f8f7e8588f180f09e4eebd6a6fe52"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_elder_wampa.lua",
+    "sha256": "956d796eb2fa25f1af049d343e1e33eb57619b3c9cb2256e7c0ca565c094db93"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_greater_ice_mynock.lua",
+    "sha256": "97954b90cae84bdb390874dcfc73b564343a4f472338374e57a0c2175ecc554d"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_ice_mynock.lua",
+    "sha256": "1240ec96480c859089106bd3f8fac661e3744ba0f0da842f320a1fdbeca1cf66"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_imperial_salvage_tech.lua",
+    "sha256": "52de7cd9c9ee6247cc99d5cfb76284680dd22099d2116eca3cf376838528fb64"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_mynock_broodmother.lua",
+    "sha256": "3099c72cce7457ba60971f023f6004e3ef6b9e9e01434153b54e9e87dd7e5ab6"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_probe_droid.lua",
+    "sha256": "bc022e121156691ca523b899738dac6bc7074fa9e1dd844931efe60776103db4"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_rebel_snow_sergeant.lua",
+    "sha256": "dec39dea89a84a9fec8088ef41b7f1b4a892d90181818bb5315bbf324ef3d2ef"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_rebel_snow_soldier.lua",
+    "sha256": "c1cb7f39e7ee9bdbbd75eb50f8269106912b9c835e6d2d6173cfa1975d6d74f9"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_scavenger.lua",
+    "sha256": "6cd92c864989bca42b9af074fc8265055074e2a7f6966ba5674c205b07fcb40d"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_scavenger_raider.lua",
+    "sha256": "147ffe141392ccc48ec6ada1efe7bc2263957ad860c35a7b770cfd204f7bfdf3"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_snowtrooper.lua",
+    "sha256": "df83641ddd3946f3c5af852b1b60ba1bf36e460f07beb8c45c900a6efb225386"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_snowtrooper_sergeant.lua",
+    "sha256": "393bf974816a0b8277394504d9138f77365ff939fcc7312d768d2bc118c56dd3"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_tauntaun.lua",
+    "sha256": "264934ad1ef5010f9fafc1c17f4ffe47cf3276f947364f9da323829e08e911de"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_tauntaun_bull.lua",
+    "sha256": "cc8f4480ad87432251871bbc2c9672863dc9db39f8202fde9828828cce7d3b1f"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa.lua",
+    "sha256": "729d8f691e3366a87f6baa26cfc7b786745f6fd15ced67fda58e372673dcc831"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_frostfang.lua",
+    "sha256": "8cddfa46250475839332a7f4044a31a0dd0b2b8a1110319317702f0347d0e958"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_icemaw.lua",
+    "sha256": "37de9a96add6faa19c0f8fe34a1f54479fa8141d7873ad5f4589c42ab65d292d"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_matriarch.lua",
+    "sha256": "980b6e38518e6fa20821f844021a361038f4dafe2ad86f674aeb0e283451bb44"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_patriarch.lua",
+    "sha256": "44c36239733020e3242c20a74994eeb4f962346187ebff92962467395475054f"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_wampa_snowblind.lua",
+    "sha256": "1bafad22e12d2845b6dd3d234d642c71faed019b5aca5a22e90b3d679125c7c0"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/object/custom_content/tangible/deed/vehicle_deed/objects.lua",
+    "sha256": "b5347f611c56b2691ed5408bca606db26cdb5dc9fab69d0710b41e33baf2bf3e"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/object/custom_content/tangible/deed/vehicle_deed/serverobjects.lua",
+    "sha256": "b54293d18ee06f6fabebfd66c00185fcdb4d3df966226ef9ac453b543d1bd0b8"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/object/custom_content/tangible/deed/vehicle_deed/vehicle_deed_organa_speeder.lua",
+    "sha256": "a0005e75846dcaa390de872e180833e201b9efb73c8a10faa7ceffde29b16a74"
+  },
+  {
+    "commit": "b7f03b0e02dc680f270902857d219d5f744c89f7",
+    "path": "MMOCoreORB/bin/scripts/object/custom_content/tangible/deed/vehicle_deed/vehicle_deed_sith_speeder.lua",
+    "sha256": "f4648684b38bcdba6d31e09ed8931e2c8477c8133b21f3232009c457c9ce1ba8"
+  },
+  {
+    "commit": "2f205cd2da8330b1784f65f450553af79fef4872",
+    "path": "MMOCoreORB/bin/scripts/managers/resource_manager.lua",
+    "sha256": "10a4af243b2e5dd1904f970a1f6e3c4b6865f4bc4641212f3ed646c364975c6a"
+  },
+  {
+    "commit": "bea94e7a1cc7b080120cd5c5a3b026d7a8e69c3a",
+    "path": "MMOCoreORB/src/server/zone/objects/creature/commands/LeashCommand.h",
+    "sha256": "8e5600abfafd973849fe17cf7bf4a9f164194d6556504acf6baf5b33f8124e8b"
+  },
+  {
+    "commit": "578861d961c8021f590a81598ac2dc1ae92d9ee9",
+    "path": "MMOCoreORB/bin/scripts/mobile/conversations/trainer/trainer_conv.lua",
+    "sha256": "fdf9ad4d6c543874e4ec6bede672e17140deb218d789560892fc2968d1ab14bf"
+  },
+  {
+    "commit": "578861d961c8021f590a81598ac2dc1ae92d9ee9",
+    "path": "MMOCoreORB/bin/scripts/mobile/trainer/serverobjects.lua",
+    "sha256": "a17e0d5253165711a7dedee139dfca5bda8d459f493ae48dd7d6a314d57a77ed"
+  },
+  {
+    "commit": "578861d961c8021f590a81598ac2dc1ae92d9ee9",
+    "path": "MMOCoreORB/bin/scripts/mobile/trainer/trainer_botanist.lua",
+    "sha256": "18cbed0fc6992a1f2e1e0af46d6e635ca514231d93227438c28615bb02dc2ef0"
+  },
+  {
+    "commit": "578861d961c8021f590a81598ac2dc1ae92d9ee9",
+    "path": "MMOCoreORB/bin/scripts/screenplays/cities/tatooine_mos_eisley.lua",
+    "sha256": "285f56f8352fce0dd77cd52d17b5f1aaad6096302c57de9386a779d014570e19"
+  },
+  {
+    "commit": "578861d961c8021f590a81598ac2dc1ae92d9ee9",
+    "path": "MMOCoreORB/bin/scripts/screenplays/trainers/trainerData.lua",
+    "sha256": "c775337b1b312bf7ee11a83ecd9630e0de2b766f124eb745fcfffe40c4d891dd"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/managers/resource/resourcespawner/resourcetree/ResourceTree.cpp",
+    "sha256": "8378c61c5aeef8802e5b3f998326bb5fe837402df40c6cd21ad69d9ab264ec9e"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/managers/resource/resourcespawner/resourcetree/ResourceTreeNode.cpp",
+    "sha256": "da9e2c5dc13b743527391fa916f12110cc4045aab43ecacb656d669aa530ac46"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/managers/creature/SpawnAreaMap.h",
+    "sha256": "6bb298489441e761a003f367fd8af783a0f5a416cb63deed197d4250a0817c36"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/objects/region/SpawnAreaImplementation.cpp",
+    "sha256": "04613a8a9ed6926bfe27d30808e5064eddf72f71e78553374b0a65d52e3ccd9b"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/managers/objectcontroller/ObjectControllerImplementation.cpp",
+    "sha256": "51f25609954cb693a5c0027699f190722970f9138c8d032dbdfd3a03ebd084a1"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/managers/objectcontroller/command/CommandConfigManager.cpp",
+    "sha256": "8db8f4563b931c85609032fb8665acd83b3b408c0a62cd5e2bbac20055c2aaba"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/objects/creature/commands/QueueCommand.h",
+    "sha256": "7d892fdc0c9c7135b71bc2e272e57a7729b98984ac169960f6a9494da07cddf5"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/objects/creature/variables/Skill.h",
+    "sha256": "fa7b8ea040243aadac130c0f9ffac1a46b1047f0057a931a3a714830dacde915"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/managers/skill/SkillManager.cpp",
+    "sha256": "ef3fc19839825caae64e874c4cde32943d7fe078025afc48ff98e242228f04ef"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/objects/tangible/TangibleObject.idl",
+    "sha256": "52d5d097f5442b20e3c045adb28123e5848fcdbf9b177fc595dcfaa9e1a2af74"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/templates/crcstringtable/CrcStringTable.cpp",
+    "sha256": "981518c774d8d2fdb9efc698949dfc017134fda5f593bf0321c6b812b2f2b9d1"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/GroundZoneContainerComponent.cpp",
+    "sha256": "bdc6fec96140a60c14aaa05dd943a623a55487efc65336fd5118bca8a21d1b90"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/managers/creature/CreatureManagerImplementation.cpp",
+    "sha256": "9ec8b6afff1543b24c211140315c8860fdd6136940b2f6f238522ea9103783b6"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/managers/creature/SpawnAreaMap.cpp",
+    "sha256": "683085f1cebad83a6d938e3febaeb009d3dd8d6809c66f56c5b7a1515c9594b8"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/objects/tangible/deed/vehicle/VehicleDeedImplementation.cpp",
+    "sha256": "466866bedc86868b123db955567b03162a8818d4bb8ed0217c08bd857e6a1fa8"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/bin/scripts/object/custom_content/tangible/deed/vehicle_deed/landspeeder_ab1_deed.lua",
+    "sha256": "edd86c5439092dcdec5c4e6b6d777bbae76c8f2003cf2a496c37af0cb60905e7"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/templates/tangible/VehicleDeedTemplate.h",
+    "sha256": "9d72d27bf85056437c93d18e47fcf6bf95b1453e0d0710f94b8f8cd00a77e9b0"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/utils/engine3/MMOEngine/src/system/util/SynchronizedVectorMap.h",
+    "sha256": "85b438ac4f5a067b05adb938d2022e41a24c248405be2269001200157ddbb3b8"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/utils/engine3/MMOEngine/src/engine/core/ManagedObject.cpp",
+    "sha256": "ac6d2448d111000b18a9161f48183c2927f3f8e3f335d457e9280804b073915a"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/autogen/server/zone/objects/region/SpawnArea.cpp",
+    "sha256": "4dca19e92a1a217a9d1ce4cabf14a0a2c49a0ae1d30097954820069ca26d22fa"
+  },
+  {
+    "tool": "tools/hoth/hoth_client_build.py",
+    "sha256": "4ee41c522f0d81c63e143159f521dbf8817f479e7f7038612afb0f16e84e76ae"
+  },
+  {
+    "tool": "tools/test_galaxy.py",
+    "sha256": "37608dbaf520ffba774ad01f2d34785eb874f1fc3a553def29e5a92ac30b377b"
+  },
+  {
+    "tool": "tools/hoth/hoth_port_loot.py",
+    "sha256": "bbcce452af84ac810c2044df85468a22e4a6ccdc3486c546957d71f0fadbc9d1"
+  },
+  {
+    "tool": "tools/hoth/hoth_loot_inventory.py",
+    "sha256": "5a53835ef9dd59b3db044ca33b215c87394c461fdda71b7f20b3ffaf5d5fe6fc"
+  },
+  {
+    "tool": "tools/hoth/hoth_loot_core3_check.py",
+    "sha256": "9c927891e21904011c3beebb515508e7cbed6189ff6b7036211e8fbb2d0ec12b"
+  },
+  {
+    "tool": "tools/owner_content/botanist_server.py",
+    "sha256": "892ef7a9b6a7c44e9ba8571e86d6c9871b86b78d91b0d2df9dad7bd8ef0c6bf1"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/templates/LootItemTemplate.h",
+    "sha256": "1db18c2f5637e030a940e0d572e83f05a564a7de66392e735f47f19c32ff56d4"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/objects/tangible/deed/vehicle/VehicleDeed.idl",
+    "sha256": "0e8ab36efaf711c8d0254c7442cac7581d20d0166f85d8c7584cd090d42c2e83"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/managers/loot/LootManagerImplementation.cpp",
+    "sha256": "b69bbfc44a5129321545d7198b66537d989bba689e72ca734722adcf85ba5fbd"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/managers/loot/LootValues.cpp",
+    "sha256": "ce65e104826f9fe06ff9feb0af3af53e14d28b9c8686a3d313633f738e85618b"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/objects/tangible/TangibleObjectImplementation.cpp",
+    "sha256": "651c3469fbaedbdae4dcf1dc3a74fcaa8deb998b03d9dc6692d3f9213d2fd314"
+  },
+  {
+    "context_at_head": "5c7ae017af64676b6b7e321daf5f6e62ed8b3668",
+    "path": "/opt/swg/Core3-dev/MMOCoreORB/src/server/zone/objects/area/events/ActiveAreaEvent.cpp",
+    "sha256": "acecc9b5358c82d106ca99b3fcaae47233260de5a6bc803e52a9a125cb9b3621"
+  }
+]

@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/tusken_sand.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/tusken_sand.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_tusken_sand, "object/tangible/loot/creature/loot/collections/tusken_sand.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_tusken_sand, "object/tangible/loot/creature_loot/collections/tusken_sand.iff")

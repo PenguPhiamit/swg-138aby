@@ -1,0 +1,309 @@
+From 3797430a2a524d1b7ae7db00818d350a4993e83e Mon Sep 17 00:00:00 2001
+From: SWG Local Dev <swg-local@localhost>
+Date: Tue, 13 Oct 2026 15:41:19 -0700
+Subject: [PATCH] Agent body: one move deadline, no walking while down, survey,
+ indoor look
+
+Fixes ChatGPT C4 review findings:
+- F1: one deadline for the whole move (planning, every leg, every re-plan),
+  capped at 95 s so the MCP's 100 s wait never expires first. Test galaxy:
+  a 20 s move toward a 1.9 km target returned "timeout" in time and the next
+  command answered at once.
+- F2: a shared immobileReason() check before and during straight and path
+  walking. Test galaxy (helper on): move while incapacitated -> "cannot move
+  while incapacitated"; while dead -> "cannot move while dead".
+Also:
+- helper replies are matched to their request (late answers ignored);
+- survey: ResourceListForSurveyMessage -> survey_resources event,
+  SurveyMessage -> survey_results (grid + best point). Test galaxy: tool
+  range SUI, resource list, survey, sample -> Iron container + XP;
+- indoor look: our cell also comes from containment (login inside a building);
+- a new scene (login, zone change) clears the old scene's objects, fixing a
+  stale tutorial-room container that blanked look outdoors.
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ MMOCoreORB/src/client/agent/AgentControl.cpp | 141 +++++++++++++++----
+ MMOCoreORB/src/client/agent/AgentControl.h   |   3 +-
+ 2 files changed, 118 insertions(+), 26 deletions(-)
+
+diff --git a/MMOCoreORB/src/client/agent/AgentControl.cpp b/MMOCoreORB/src/client/agent/AgentControl.cpp
+index 657a3d96..2677b11a 100644
+--- a/MMOCoreORB/src/client/agent/AgentControl.cpp
++++ b/MMOCoreORB/src/client/agent/AgentControl.cpp
+@@ -127,6 +127,10 @@ void AgentControl::onStartScene(uint64 oid, const String& terrain, float x, floa
+ 	{
+ 		std::lock_guard<std::recursive_mutex> lock(worldMutex);
+ 		self = oid;
++		// A new scene (login or zone change): the server resends every object, so drop the old
++		// scene's objects, including our stale container (e.g. the tutorial room).
++		world.clear();
++		selfParent = 0;
+ 		radialMenus.clear(); suiPages.clear(); conversationOptions.clear();
+ 		conversationActive = false; conversationNpc = 0;
+ 		planet = str(terrain);
+@@ -190,6 +194,13 @@ void AgentControl::onContainment(uint64 oid, uint64 parent) {
+ 	std::lock_guard<std::recursive_mutex> lock(worldMutex);
+ 	world[oid].oid = oid;
+ 	world[oid].parent = parent;
++	// Logging in (or being moved) into a building cell arrives as containment, not as a
++	// transform; without this look() filters by the wrong cell. A vehicle is not a cell.
++	if (oid == self) {
++		auto it = world.find(parent);
++		if (parent == 0 || (it != world.end() && it->second.type == "SCLT"))
++			selfParent = parent;
++	}
+ }
+ 
+ void AgentControl::onBaseline3(uint64 oid, uint32 typeCode, Message* pack) {
+@@ -631,6 +642,42 @@ void AgentControl::onObjController(uint32 type, uint64 oid, Message* pack) {
+ 
+ 
+ bool AgentControl::onStandalonePacket(uint32 opcode, Message* pack) {
++	if (opcode == 0x8A64B1D5) { // ResourceListForSurveyMessage: what the active survey tool can find
++		try {
++			uint32 count = pack->parseInt();
++			if (count > 1000) throw std::runtime_error("oversized resource list");
++			JSONSerializationType resources = JSONSerializationType::array();
++			for (uint32 i = 0; i < count; ++i) {
++				String name, type;
++				pack->parseAscii(name);
++				pack->parseLong();
++				pack->parseAscii(type);
++				resources.push_back({{"name", str(name)}, {"type", str(type)}});
++			}
++			String toolType;
++			pack->parseAscii(toolType);
++			emit({{"event", "survey_resources"}, {"tool_type", str(toolType)}, {"resources", resources}});
++		} catch (...) { emit({{"event", "packet_parse_error"}, {"packet", "ResourceListForSurveyMessage"}}); }
++		return true;
++	}
++	if (opcode == 0x877F79AC) { // SurveyMessage: concentration grid around us
++		try {
++			uint32 count = pack->parseInt();
++			if (count > 1000) throw std::runtime_error("oversized survey");
++			JSONSerializationType points = JSONSerializationType::array();
++			float bestX = 0, bestY = 0, best = -1;
++			for (uint32 i = 0; i < count; ++i) {
++				float x = pack->parseFloat();
++				pack->parseFloat();
++				float y = pack->parseFloat(), percent = pack->parseFloat();
++				points.push_back({x, y, percent});
++				if (percent > best) { best = percent; bestX = x; bestY = y; }
++			}
++			emit({{"event", "survey_results"}, {"points", points},
++				  {"best", {{"x", bestX}, {"y", bestY}, {"percent", best}}}});
++		} catch (...) { emit({{"event", "packet_parse_error"}, {"packet", "SurveyMessage"}}); }
++		return true;
++	}
+ 	if (opcode != 0xD44B7259) return false; // SuiCreatePageMessage
+ 	try {
+ 		uint32 page = pack->parseInt(); String script; pack->parseAscii(script);
+@@ -692,6 +739,12 @@ JSONSerializationType AgentControl::status() {
+ JSONSerializationType AgentControl::look(float radius, const std::string& typeFilter, int limit) {
+ 	std::vector<std::pair<float, const WorldObject*>> found;
+ 	std::lock_guard<std::recursive_mutex> lock(worldMutex);
++	uint64 here = selfParent;
++	if (here == 0 && world.count(self) && world[self].parent != 0) {
++		auto container = world.find(world[self].parent);
++		if (container == world.end() || container->second.type != "CREO") // a vehicle is CREO, a cell is not
++			here = world[self].parent;
++	}
+ 	for (const auto& entry : world) {
+ 		const WorldObject& object = entry.second;
+ 		if (object.oid == self || object.type.empty() || object.type == "PLAY" || object.type == "SCLT")
+@@ -699,7 +752,7 @@ JSONSerializationType AgentControl::look(float radius, const std::string& typeFi
+ 		if (!typeFilter.empty() && object.type != typeFilter)
+ 			continue;
+ 		// Outdoors only see outdoor objects; inside a cell only that cell's contents.
+-		if (object.parent != selfParent)
++		if (object.parent != here)
+ 			continue;
+ 		float dx = object.x - selfX, dy = object.y - selfY;
+ 		float distance = std::sqrt(dx * dx + dy * dy);
+@@ -765,20 +818,29 @@ bool AgentControl::groundNear(float x, float y, float& z) {
+ 	return true;
+ }
+ 
++// Empty when we may move; otherwise why not. Checked before and during every walk.
++std::string AgentControl::immobileReason() {
++	std::lock_guard<std::recursive_mutex> lock(worldMutex);
++	int posture = world.count(self) ? world[self].posture : -1;
++	if (posture == 13 || posture == 14)
++		return std::string("cannot move while ") + postureName(posture);
++	return "";
++}
++
+ JSONSerializationType AgentControl::moveTo(float x, float y, float speed, float timeoutSeconds, float z) {
+ 	if (selfParent != 0)
+-		return {{"ok", false}, {"error", "moving inside buildings is not supported yet"}};
+-	{
+-		std::lock_guard<std::recursive_mutex> lock(worldMutex);
+-		int posture = world.count(self) ? world[self].posture : -1;
+-		if (posture == 13 || posture == 14)
+-			return {{"ok", false}, {"error", std::string("cannot move while ") + postureName(posture)}};
+-	}
++		return {{"ok", false}, {"error", "moving inside buildings needs the /agentpath helper"}};
++	std::string blocked = immobileReason();
++	if (!blocked.empty())
++		return {{"ok", false}, {"error", blocked}};
+ 	speed = std::max(0.5f, std::min(speed, 5.0f));
+ 	Time started;
+ 	uint32 correctionsAtStart = serverCorrections;
+ 	float heading = 0;
+ 	while (true) {
++		blocked = immobileReason();
++		if (!blocked.empty())
++			return {{"ok", false}, {"error", blocked}, {"x", selfX}, {"y", selfY}};
+ 		float dx, dy, distance;
+ 		{
+ 			std::lock_guard<std::recursive_mutex> lock(worldMutex);
+@@ -809,25 +871,32 @@ JSONSerializationType AgentControl::moveTo(float x, float y, float speed, float
+ 			{"seconds", started.miliDifference() / 1000.0}};
+ }
+ 
+-JSONSerializationType AgentControl::askHelper(const std::string& args) {
++JSONSerializationType AgentControl::askHelper(const std::string& args, float timeoutSeconds) {
+ 	uint32 before;
+ 	{
+ 		std::lock_guard<std::recursive_mutex> lock(worldMutex);
+ 		before = helperReplies;
+ 	}
+ 	sendCommand("agentpath", 0, UnicodeString(args.c_str()));
+-	for (int i = 0; i < 80; ++i) {
++	int polls = (int) (std::max(0.5f, std::min(timeoutSeconds, 4.f)) * 20);
++	for (int i = 0; i < polls; ++i) {
+ 		Thread::sleep(50);
+ 		std::lock_guard<std::recursive_mutex> lock(worldMutex);
+-		if (helperReplies != before) {
+-			try {
+-				return JSONSerializationType::parse(helperReply);
+-			} catch (...) {
+-				return {{"ok", false}, {"error", "unreadable helper reply"}};
+-			}
++		if (helperReplies == before)
++			continue;
++		before = helperReplies;
++		JSONSerializationType reply;
++		try {
++			reply = JSONSerializationType::parse(helperReply);
++		} catch (...) {
++			return {{"ok", false}, {"error", "unreadable helper reply"}};
+ 		}
++		// The server echoes our arguments; a late answer to an earlier request is ignored.
++		if (reply.value("request", std::string()) == args)
++			return reply;
+ 	}
+-	helperMissing = true;
++	if (timeoutSeconds >= 4.f) // a full wait, not one cut short by a move's deadline
++		helperMissing = true;
+ 	return {{"ok", false}, {"error", "no answer from the server's /agentpath helper (not installed, or this account is not in Core3.AgentAccounts)"}};
+ }
+ 
+@@ -857,6 +926,11 @@ JSONSerializationType AgentControl::walkPath(const JSONSerializationType& points
+ 	uint32 correctionsAtStart = serverCorrections;
+ 	float heading = 0;
+ 	for (size_t i = 0; i < points.size(); ++i) {
++		std::string blocked = immobileReason();
++		if (!blocked.empty())
++			return {{"ok", false}, {"error", blocked}, {"cell", selfParent}, {"x", selfX}, {"y", selfY}};
++		if (started.miliDifference() > timeoutSeconds * 1000)
++			return {{"ok", false}, {"error", "timeout"}, {"cell", selfParent}, {"x", selfX}, {"y", selfY}};
+ 		const auto& point = points[i];
+ 		float px = point[0].get<float>(), py = point[1].get<float>(), pz = point[2].get<float>();
+ 		uint64 cell = point[3].get<uint64>();
+@@ -875,6 +949,9 @@ JSONSerializationType AgentControl::walkPath(const JSONSerializationType& points
+ 			continue;
+ 		}
+ 		while (true) {
++			blocked = immobileReason();
++			if (!blocked.empty())
++				return {{"ok", false}, {"error", blocked}, {"cell", selfParent}, {"x", selfX}, {"y", selfY}};
+ 			float dx, dy, distance;
+ 			{
+ 				std::lock_guard<std::recursive_mutex> lock(worldMutex);
+@@ -1056,26 +1133,38 @@ JSONSerializationType AgentControl::handle(const JSONSerializationType& request)
+ 		return look(request.value("radius", 64.0f), request.value("type", ""), request.value("limit", 40));
+ 	if (cmd == "move" || cmd == "path") {
+ 		float x = request.value("x", selfX), y = request.value("y", selfY);
+-		float speed = request.value("speed", 5.0f), timeout = request.value("timeout", 90.0f);
++		float speed = request.value("speed", 5.0f);
++		// One deadline for the whole move: planning, every leg and every re-plan. Keep it below
++		// the MCP wrapper's 100 s wait so the caller never times out while we are still walking.
++		float timeout = std::min(request.value("timeout", 90.0f), 95.0f);
++		Time started;
++		auto remainingTime = [&]() { return timeout - started.miliDifference() / 1000.f; };
+ 		uint64 cell = request.value("cell", (uint64) 0);
+ 		bool indoors = selfParent != 0 || cell != 0;
+ 		bool usePath = cmd == "path" || indoors || (request.value("path", true) && !helperMissing);
++		if (cmd == "move") {
++			std::string blocked = immobileReason();
++			if (!blocked.empty())
++				return {{"ok", false}, {"error", blocked}};
++		}
+ 		if (!usePath)
+ 			return moveTo(x, y, speed, timeout, request.value("z", std::nanf("")));
+ 		std::string args = "path " + std::to_string(x) + " " + std::to_string(y);
+ 		if (cell != 0)
+ 			args += " " + std::to_string(request.value("z", 0.0f)) + " " + std::to_string(cell);
+-		JSONSerializationType plan = askHelper(args);
++		JSONSerializationType plan = askHelper(args, remainingTime());
+ 		if (cmd == "path")
+ 			return plan;
+ 		if (plan.value("ok", false)) {
+-			// The pathfinder can return part of the way (to a ledge, or out of a building towards
+-			// a far target); re-plan from there while each leg gets us closer.
++			// The pathfinder can return part of the way (to a ledge, out of a building towards
++			// a far target, or a capped long route); re-plan from there while each leg gets closer.
+ 			JSONSerializationType result;
+ 			float lastRemaining = 1e9f;
+ 			int stalled = 0;
+ 			for (int leg = 1; leg <= 25; ++leg) {
+-				result = walkPath(plan["points"], speed, timeout);
++				if (remainingTime() <= 0)
++					return {{"ok", false}, {"error", "timeout"}, {"legs", leg - 1}, {"cell", selfParent}, {"x", selfX}, {"y", selfY}};
++				result = walkPath(plan["points"], speed, remainingTime());
+ 				if (!result.value("ok", false))
+ 					return result;
+ 				float remaining;
+@@ -1090,17 +1179,19 @@ JSONSerializationType AgentControl::handle(const JSONSerializationType& request)
+ 				if (stalled >= 2)
+ 					break;
+ 				lastRemaining = std::min(lastRemaining, remaining);
+-				plan = askHelper(args);
++				if (remainingTime() <= 0)
++					break;
++				plan = askHelper(args, remainingTime());
+ 				if (!plan.value("ok", false))
+ 					break;
+ 			}
+ 			result["ok"] = false;
+-			result["error"] = "could not reach the destination; stopped at the end of the last path";
++			result["error"] = remainingTime() <= 0 ? "timeout" : "could not reach the destination; stopped at the end of the last path";
+ 			return result;
+ 		}
+ 		if (indoors)
+ 			return plan;
+-		JSONSerializationType result = moveTo(x, y, speed, timeout, request.value("z", std::nanf("")));
++		JSONSerializationType result = moveTo(x, y, speed, std::max(0.f, remainingTime()), request.value("z", std::nanf("")));
+ 		result["note"] = "walked a straight line: " + plan.value("error", std::string("no path"));
+ 		return result;
+ 	}
+diff --git a/MMOCoreORB/src/client/agent/AgentControl.h b/MMOCoreORB/src/client/agent/AgentControl.h
+index f364b437..77a6b3dd 100644
+--- a/MMOCoreORB/src/client/agent/AgentControl.h
++++ b/MMOCoreORB/src/client/agent/AgentControl.h
+@@ -96,7 +96,8 @@ private:
+ 	std::string helperReply;
+ 	uint32 helperReplies = 0;
+ 	bool helperMissing = false;
+-	JSONSerializationType askHelper(const std::string& args);
++	JSONSerializationType askHelper(const std::string& args, float timeoutSeconds = 4.f);
++	std::string immobileReason();
+ 	JSONSerializationType walkPath(const JSONSerializationType& points, float speed, float timeoutSeconds);
+ 	void sendTransformWithParent(uint64 cell, float heading, float speed);
+ 	bool conversationActive = false;
+-- 
+2.47.3
+

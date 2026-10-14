@@ -1,0 +1,8 @@
+--- /dev/null
++++ b/custom_content/tangible/wearables/pants/serverobjects.lua
+@@ -0,0 +1,5 @@
++-- Fable backport batch 1 (14 Oct 2026): server objects for NGE pants.
++
++includeFile("custom_content/tangible/wearables/pants/pants_outbreak_prison_guard.lua")
++includeFile("custom_content/tangible/wearables/pants/wod_nightsister_pants_s01.lua")
++includeFile("custom_content/tangible/wearables/pants/wod_nightsister_pants_s02.lua")

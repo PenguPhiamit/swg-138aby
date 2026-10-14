@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/dungeon/avatar_platform/avatar_terminal_technical_readout.lua
++++ b/custom_content/tangible/dungeon/avatar_platform/avatar_terminal_technical_readout.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_dungeon_avatar_platform_avatar_terminal_technical_readout, "object/dungeon/avatar_platform/avatar_terminal_technical_readout.iff")
++ObjectTemplates:addTemplate(object_dungeon_avatar_platform_avatar_terminal_technical_readout, "object/tangible/dungeon/avatar_platform/avatar_terminal_technical_readout.iff")

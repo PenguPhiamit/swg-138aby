@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/generic/humanoid_arm_bone.lua
++++ b/custom_content/tangible/loot/creature_loot/generic/humanoid_arm_bone.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_humanoid_arm_bone, "object/tangible/loot/creature/loot/generic/humanoid_arm_bone.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_humanoid_arm_bone, "object/tangible/loot/creature_loot/generic/humanoid_arm_bone.iff")

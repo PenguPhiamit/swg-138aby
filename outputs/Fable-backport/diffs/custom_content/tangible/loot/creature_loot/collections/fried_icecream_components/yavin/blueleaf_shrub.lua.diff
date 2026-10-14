@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/fried_icecream_components/yavin/blueleaf_shrub.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/fried_icecream_components/yavin/blueleaf_shrub.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fried_icecream_components_yavin_blueleaf_shrub, "object/tangible/loot/creature/loot/collections/fried/icecream/components/yavin/blueleaf_shrub.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fried_icecream_components_yavin_blueleaf_shrub, "object/tangible/loot/creature_loot/collections/fried_icecream_components/yavin/blueleaf_shrub.iff")

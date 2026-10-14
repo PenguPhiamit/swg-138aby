@@ -1,0 +1,579 @@
+/*
+ * AgentControl.cpp - see AgentControl.h
+ */
+
+#include "AgentControl.h"
+#include "client/zone/Zone.h"
+#include "client/zone/ZoneClient.h"
+#include "server/zone/packets/object/ObjectControllerMessage.h"
+
+#include <algorithm>
+#include <cmath>
+#include <iostream>
+#include <thread>
+
+static AgentControl* agentInstance = nullptr;
+
+// Client-to-server object controller header without ObjectControllerMessage's trailing
+// int: the server's DataTransform and TeleportAck parsers start right after the object ID
+// (CommandQueueEnqueue does expect that int, so it keeps using ObjectControllerMessage).
+class ClientObjectController : public BaseMessage {
+public:
+	ClientObjectController(uint64 objid, uint32 header1, uint32 type) {
+		insertShort(0x05);
+		insertInt(0x80CE5E46);
+		insertInt(header1);
+		insertInt(type);
+		insertLong(objid);
+		setCompression(true);
+	}
+};
+
+void AgentControl::enable() {
+	if (agentInstance == nullptr)
+		agentInstance = new AgentControl();
+}
+
+AgentControl* AgentControl::get() {
+	return agentInstance;
+}
+
+void AgentControl::emit(const JSONSerializationType& message) {
+	// One write per line so log output from other threads cannot split it.
+	std::string line = "@@AGENT " + message.dump(-1, ' ', false, nlohmann::json::error_handler_t::replace) + "\n";
+	std::lock_guard<std::mutex> lock(outMutex);
+	fwrite(line.data(), 1, line.size(), stdout);
+	fflush(stdout);
+}
+
+static std::string str(const String& s) {
+	return std::string(s.toCharArray());
+}
+
+static std::string typeName(uint32 code) {
+	std::string out;
+	for (int shift = 24; shift >= 0; shift -= 8) {
+		char c = (char) ((code >> shift) & 0xFF);
+		if (c >= 32 && c < 127)
+			out += c;
+	}
+	return out;
+}
+
+void AgentControl::onStartScene(uint64 oid, const String& terrain, float x, float z, float y) {
+	{
+		std::lock_guard<std::recursive_mutex> lock(worldMutex);
+		self = oid;
+		radialMenus.clear(); suiPages.clear(); conversationOptions.clear();
+		conversationActive = false; conversationNpc = 0;
+		planet = str(terrain);
+		size_t slash = planet.rfind('/');
+		if (slash != std::string::npos)
+			planet = planet.substr(slash + 1);
+		if (planet.size() > 4 && planet.substr(planet.size() - 4) == ".trn")
+			planet = planet.substr(0, planet.size() - 4);
+		selfX = x; selfZ = z; selfY = y;
+	}
+	emit({{"event", "scene_start"}, {"self", oid}, {"planet", planet}, {"x", x}, {"y", y}, {"z", z}});
+
+	// A planet change (e.g. /teleport to another zone) leaves us flagged as teleporting
+	// again; acknowledge once the new scene is up, or all movement is ignored.
+	if (zone != nullptr) {
+		std::thread([this]() {
+			Thread::sleep(2000);
+			sendTeleportAck(moveCount);
+		}).detach();
+	}
+}
+
+void AgentControl::onCreate(uint64 oid, uint32 crc, float x, float z, float y) {
+	std::lock_guard<std::recursive_mutex> lock(worldMutex);
+	WorldObject& object = world[oid];
+	object.oid = oid;
+	object.crc = crc;
+	object.x = x; object.z = z; object.y = y;
+}
+
+void AgentControl::onTransform(uint64 oid, uint64 parent, float x, float z, float y) {
+	std::lock_guard<std::recursive_mutex> lock(worldMutex);
+	if (oid == self) {
+		// The server moved us (teleport, correction): accept its position.
+		selfX = x; selfZ = z; selfY = y; selfParent = parent;
+	}
+	WorldObject& object = world[oid];
+	object.oid = oid;
+	object.x = x; object.z = z; object.y = y;
+	object.parent = parent;
+}
+
+void AgentControl::onDestroy(uint64 oid) {
+	std::string name;
+	{
+		std::lock_guard<std::recursive_mutex> lock(worldMutex);
+		auto it = world.find(oid);
+		if (it == world.end())
+			return;
+		bool creature = it->second.type == "CREO";
+		name = it->second.name;
+		radialMenus.erase(oid);
+		world.erase(it);
+		if (!creature)
+			return;
+	}
+	emit({{"event", "gone"}, {"oid", oid}, {"name", name}});
+}
+
+void AgentControl::onContainment(uint64 oid, uint64 parent) {
+	std::lock_guard<std::recursive_mutex> lock(worldMutex);
+	world[oid].oid = oid;
+	world[oid].parent = parent;
+}
+
+void AgentControl::onBaseline3(uint64 oid, uint32 typeCode, Message* pack) {
+	std::string type = typeName(typeCode);
+	pack->parseFloat(); // complexity
+	String file, key;
+	pack->parseAscii(file);
+	pack->parseInt();
+	pack->parseAscii(key);
+	UnicodeString custom;
+	pack->parseUnicode(custom);
+
+	std::lock_guard<std::recursive_mutex> lock(worldMutex);
+	WorldObject& object = world[oid];
+	object.oid = oid;
+	object.type = type;
+	if (!custom.isEmpty())
+		object.name = str(custom.toString());
+	else if (!key.isEmpty())
+		object.name = "@" + str(file) + ":" + str(key);
+}
+
+void AgentControl::onSystemMessage(const String& text) {
+	emit({{"event", "system"}, {"text", str(text)}});
+}
+
+void AgentControl::onStringIdSystemMessage(Message* pack) {
+	// String-table messages carry "file" and "key" inside an out-of-band blob; pull out the
+	// identifier-like ASCII runs so the agent sees e.g. "@error_message:target_out_of_range".
+	std::vector<std::string> words;
+	std::string current;
+	while (pack->getOffset() < pack->size()) {
+		char c = (char) pack->parseByte();
+		if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '_') {
+			current += c;
+		} else if (c != 0) {
+			if (current.size() >= 3)
+				words.push_back(current);
+			current.clear();
+		}
+	}
+	if (current.size() >= 3)
+		words.push_back(current);
+	if (words.size() >= 2)
+		emit({{"event", "system"}, {"text", "@" + words[0] + ":" + words[1]}});
+	else if (!words.empty())
+		emit({{"event", "system"}, {"text", "@" + words[0]}});
+}
+
+void AgentControl::onInstantMessage(const String& from, const String& text) {
+	emit({{"event", "tell"}, {"from", str(from)}, {"text", str(text)}});
+}
+
+std::string AgentControl::nameOf(uint64 oid) {
+	std::lock_guard<std::recursive_mutex> lock(worldMutex);
+	auto it = world.find(oid);
+	return it == world.end() ? std::string() : it->second.name;
+}
+
+void AgentControl::onObjController(uint32 type, uint64 oid, Message* pack) {
+	if (oid != self)
+		return;
+
+	switch (type) {
+	case 0x147: { // ObjectMenuResponse (header's trailing int already consumed)
+		uint64 target = pack->parseLong();
+		pack->parseLong();
+		uint32 count = pack->parseInt();
+		if (count > 256) throw std::runtime_error("oversized radial menu");
+		JSONSerializationType items = JSONSerializationType::array();
+		for (uint32 i = 0; i < count; ++i) {
+			uint8 index = pack->parseByte(), parent = pack->parseByte();
+			uint8 radial = pack->parseByte(), callback = pack->parseByte();
+			UnicodeString label; pack->parseUnicode(label);
+			items.push_back({{"index", index}, {"parent", parent}, {"radial_id", radial},
+				{"callback", callback}, {"label", str(label.toString())}});
+		}
+		uint8 counter = pack->parseByte();
+		{ std::lock_guard<std::recursive_mutex> lock(worldMutex); radialMenus[target] = items; }
+		emit({{"event", "radial_menu"}, {"target", target}, {"counter", counter}, {"items", items}});
+		break;
+	}
+	case 0xF4: { // SpatialChat
+		uint64 sender = pack->parseLong();
+		pack->parseLong();
+		UnicodeString message;
+		pack->parseUnicode(message);
+		emit({{"event", "chat"}, {"from_oid", sender}, {"from", sender == self ? "me" : nameOf(sender)},
+			  {"text", str(message.toString())}});
+		break;
+	}
+	case 0x71:   // DataTransform from the server = we were teleported/corrected
+	case 0xF1: { // DataTransformWithParent (into a building cell)
+		uint32 counter = pack->parseInt();
+		uint64 parent = type == 0xF1 ? pack->parseLong() : 0;
+		for (int i = 0; i < 4; ++i)
+			pack->parseFloat(); // direction
+		float x = pack->parseFloat(), z = pack->parseFloat(), y = pack->parseFloat();
+		{
+			std::lock_guard<std::recursive_mutex> lock(worldMutex);
+			selfX = x; selfZ = z; selfY = y; selfParent = parent;
+			moveCount = counter;
+		}
+		// The server ignores our movement until we acknowledge its teleport.
+		if (zone != nullptr)
+			sendTeleportAck(counter);
+		emit({{"event", "position_set_by_server"}, {"x", x}, {"y", y}, {"z", z}, {"cell", parent}});
+		break;
+	}
+	case 0x117: { // CommandQueueRemove: a queued command finished; report failures
+		uint32 action = pack->parseInt();
+		pack->parseFloat();
+		uint32 error = pack->parseInt();
+		uint32 detail = pack->parseInt();
+		if (error != 0) {
+			static const char* reasons[] = {"ok", "general error", "wrong posture/locomotion", "invalid state",
+				"invalid target", "unknown", "too far", "unknown", "invalid parameters", "unknown", "unknown",
+				"insufficient permission", "not allowed in jedi armor"};
+			std::string name;
+			{
+				std::lock_guard<std::recursive_mutex> lock(worldMutex);
+				auto it = commandNames.find(action);
+				if (it != commandNames.end())
+					name = it->second;
+			}
+			emit({{"event", "command_failed"}, {"command", name}, {"error", error},
+				  {"reason", error < 13 ? reasons[error] : "unknown"}, {"detail", detail}});
+		}
+		break;
+	}
+	case 0xDD: // NPC conversation started
+		conversationNpc = pack->parseLong();
+		conversationActive = true;
+		emit({{"event", "conversation_start"}, {"npc_oid", conversationNpc}});
+		break;
+	case 0xDE: // NPC conversation ended
+		conversationOptions.clear();
+		conversationActive = false;
+		conversationNpc = 0;
+		emit({{"event", "conversation_end"}});
+		break;
+	case 0xDF: { // NpcConversationMessage: Unicode or embedded StringId parameters
+		int offset = pack->getOffset();
+		UnicodeString message;
+		pack->parseUnicode(message);
+		std::string text = str(message.toString());
+		if (text.empty() && offset + 12 <= pack->size()) {
+			pack->setOffset(offset);
+			pack->parseInt(); // encoded UTF-16-length wrapper
+			pack->parseShort();
+			String file, key;
+			pack->parseAscii(file); pack->parseInt(); pack->parseAscii(key);
+			if (!file.isEmpty() && !key.isEmpty()) text = "@" + str(file) + ":" + str(key);
+		}
+		emit({{"event", "npc_says"}, {"text", text}});
+		break;
+	}
+	case 0xE0: { // StringList: conversation options
+		uint8 count = pack->parseByte();
+		conversationOptions.clear();
+		for (int i = 0; i < count; ++i) {
+			UnicodeString option;
+			pack->parseUnicode(option);
+			conversationOptions.push_back(str(option.toString()));
+		}
+		emit({{"event", "conversation_options"}, {"options", conversationOptions}});
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+
+bool AgentControl::onStandalonePacket(uint32 opcode, Message* pack) {
+    if (opcode != 0xD44B7259) return false; // SuiCreatePageMessage
+    try {
+        uint32 page = pack->parseInt(); String script; pack->parseAscii(script);
+        uint32 count = pack->parseInt();
+        if (count > 4096) throw std::runtime_error("oversized SUI command list");
+        JSONSerializationType commands = JSONSerializationType::array();
+        for (uint32 i = 0; i < count; ++i) {
+            uint8 kind = pack->parseByte();
+            uint32 wideCount = pack->parseInt();
+            if (wideCount > 256) throw std::runtime_error("oversized SUI wide list");
+            JSONSerializationType wide = JSONSerializationType::array(), narrow = JSONSerializationType::array();
+            for (uint32 n = 0; n < wideCount; ++n) { UnicodeString v; pack->parseUnicode(v); wide.push_back(str(v.toString())); }
+            uint32 narrowCount = pack->parseInt();
+            if (narrowCount > 256) throw std::runtime_error("oversized SUI narrow list");
+            for (uint32 n = 0; n < narrowCount; ++n) { String v; pack->parseAscii(v); narrow.push_back(str(v)); }
+            commands.push_back({{"kind", kind}, {"wide", wide}, {"narrow", narrow}});
+        }
+        uint64 target = pack->parseLong(); float distance = pack->parseFloat(); pack->parseLong();
+        JSONSerializationType data = {{"page_id", page}, {"script", str(script)},
+            {"target", target}, {"close_distance", distance}, {"commands", commands}};
+        { std::lock_guard<std::recursive_mutex> lock(worldMutex); suiPages[page] = data; }
+        emit({{"event", "sui_page"}, {"page", data}});
+    } catch (...) { emit({{"event", "packet_parse_error"}, {"packet", "SuiCreatePageMessage"}}); }
+    return true;
+}
+
+JSONSerializationType AgentControl::inventorySnapshot() {
+    std::lock_guard<std::recursive_mutex> lock(worldMutex);
+    JSONSerializationType items = JSONSerializationType::array();
+    for (const auto& entry : world) {
+        const WorldObject& object = entry.second;
+        if (object.oid == self || object.type == "PLAY") continue;
+        uint64 parent = object.parent;
+        bool owned = false;
+        for (int depth = 0; parent && depth < 32; ++depth) {
+            if (parent == self) { owned = true; break; }
+            auto it = world.find(parent);
+            if (it == world.end() || it->second.parent == parent) break;
+            parent = it->second.parent;
+        }
+        if (owned) items.push_back({{"oid", object.oid}, {"parent", object.parent},
+            {"type", object.type}, {"name", object.name}, {"crc", object.crc}});
+    }
+    return {{"ok", true}, {"self", self}, {"items", items}};
+}
+
+JSONSerializationType AgentControl::status() {
+	std::lock_guard<std::recursive_mutex> lock(worldMutex);
+	return {{"ok", true}, {"self", self}, {"planet", planet}, {"x", selfX}, {"y", selfY}, {"z", selfZ},
+			{"cell", selfParent}, {"known_objects", world.size()},
+			{"connected", zone != nullptr && zone->isConnected()},
+			{"conversation_options", conversationOptions}};
+}
+
+JSONSerializationType AgentControl::look(float radius, const std::string& typeFilter, int limit) {
+	std::vector<std::pair<float, const WorldObject*>> found;
+	std::lock_guard<std::recursive_mutex> lock(worldMutex);
+	for (const auto& entry : world) {
+		const WorldObject& object = entry.second;
+		if (object.oid == self || object.type.empty() || object.type == "PLAY" || object.type == "SCLT")
+			continue;
+		if (!typeFilter.empty() && object.type != typeFilter)
+			continue;
+		// Outdoors only see outdoor objects; inside a cell only that cell's contents.
+		if (object.parent != selfParent)
+			continue;
+		float dx = object.x - selfX, dy = object.y - selfY;
+		float distance = std::sqrt(dx * dx + dy * dy);
+		if (distance <= radius)
+			found.push_back({distance, &object});
+	}
+	std::sort(found.begin(), found.end(), [](const auto& a, const auto& b) { return a.first < b.first; });
+	JSONSerializationType objects = JSONSerializationType::array();
+	for (int i = 0; i < (int) found.size() && i < limit; ++i) {
+		const WorldObject* object = found[i].second;
+		objects.push_back({{"oid", object->oid}, {"type", object->type}, {"name", object->name},
+						   {"x", std::round(object->x * 10) / 10}, {"y", std::round(object->y * 10) / 10},
+						   {"distance", std::round(found[i].first * 10) / 10}});
+	}
+	return {{"ok", true}, {"x", selfX}, {"y", selfY}, {"count", objects.size()}, {"objects", objects}};
+}
+
+void AgentControl::sendTransform(float heading, float speed) {
+	clientTime += 450;
+	ClientObjectController* msg = new ClientObjectController(self, 0x21, 0x71);
+	msg->insertInt(clientTime);
+	msg->insertInt(++moveCount);
+	msg->insertFloat(0.f);
+	msg->insertFloat(std::sin(heading / 2.f));
+	msg->insertFloat(0.f);
+	msg->insertFloat(std::cos(heading / 2.f));
+	msg->insertFloat(selfX);
+	msg->insertFloat(selfZ);
+	msg->insertFloat(selfY);
+	msg->insertFloat(speed);
+	zone->getZoneClient()->sendMessage(msg);
+}
+
+JSONSerializationType AgentControl::moveTo(float x, float y, float speed, float timeoutSeconds) {
+	if (selfParent != 0)
+		return {{"ok", false}, {"error", "moving inside buildings is not supported yet"}};
+	speed = std::max(0.5f, std::min(speed, 5.0f));
+	Time started;
+	float heading = 0;
+	while (true) {
+		float dx, dy, distance;
+		{
+			std::lock_guard<std::recursive_mutex> lock(worldMutex);
+			dx = x - selfX; dy = y - selfY;
+			distance = std::sqrt(dx * dx + dy * dy);
+			if (distance < 0.6f)
+				break;
+			if (started.miliDifference() > timeoutSeconds * 1000)
+				return {{"ok", false}, {"error", "timeout"}, {"x", selfX}, {"y", selfY}, {"remaining", distance}};
+			heading = std::atan2(dx, dy);
+			float step = std::min(distance, speed * 0.45f);
+			selfX += dx / distance * step;
+			selfY += dy / distance * step;
+		}
+		sendTransform(heading, speed);
+		Thread::sleep(450);
+	}
+	sendTransform(heading, 0.f);
+	return {{"ok", true}, {"arrived", true}, {"x", selfX}, {"y", selfY},
+			{"seconds", started.miliDifference() / 1000.0}};
+}
+
+void AgentControl::sendTeleportAck(uint32 counter) {
+	ClientObjectController* msg = new ClientObjectController(self, 0x23, 0x13F);
+	msg->insertInt(counter);
+	zone->getZoneClient()->sendMessage(msg);
+}
+
+void AgentControl::sendCommand(const String& name, uint64 target, const UnicodeString& args) {
+	ObjectControllerMessage* msg = new ObjectControllerMessage(self, 0x23, 0x116);
+	{
+		std::lock_guard<std::recursive_mutex> lock(worldMutex);
+		commandNames[++actionCount] = str(name);
+		if (commandNames.size() > 200)
+			commandNames.erase(commandNames.begin());
+	}
+	msg->insertInt(actionCount);
+	msg->insertInt(name.toLowerCase().hashCode());
+	msg->insertLong(target);
+	msg->insertUnicode(args);
+	zone->getZoneClient()->sendMessage(msg);
+}
+
+JSONSerializationType AgentControl::handle(const JSONSerializationType& request) {
+	std::string cmd = request.value("cmd", "");
+
+    if (cmd == "inventory") return inventorySnapshot();
+    if (cmd == "sui_pages") {
+        std::lock_guard<std::recursive_mutex> lock(worldMutex);
+        JSONSerializationType pages = JSONSerializationType::array();
+        for (const auto& entry : suiPages) pages.push_back(entry.second);
+        return {{"ok", true}, {"pages", pages}};
+    }
+    if (cmd == "radial_menu") {
+        uint64 target = request.value("target", (uint64)0);
+        if (!target) return {{"ok", false}, {"error", "target required"}};
+        ObjectControllerMessage* msg = new ObjectControllerMessage(self, 0x23, 0x146);
+        msg->insertLong(target); msg->insertLong(self); msg->insertInt(1);
+        msg->insertByte(1); msg->insertByte(0); msg->insertByte(20); msg->insertByte(3);
+        msg->insertUnicode(UnicodeString("")); msg->insertByte(++radialCounter);
+        zone->getZoneClient()->sendMessage(msg);
+        return {{"ok", true}, {"requested", target}};
+    }
+    if (cmd == "select_radial") {
+        uint64 target = request.value("target", (uint64)0);
+        int radial = request.value("radial_id", -1); bool offered = false;
+        { std::lock_guard<std::recursive_mutex> lock(worldMutex);
+          auto it = radialMenus.find(target);
+          if (it != radialMenus.end()) for (const auto& item : it->second)
+              if (item.value("radial_id", -1) == radial) offered = true; }
+        if (!offered) return {{"ok", false}, {"error", "request menu first and select a returned radial_id"}};
+        BaseMessage* msg = new BaseMessage(); msg->insertShort(3); msg->insertInt(0x7CA18726);
+        msg->insertLong(target); msg->insertByte((uint8)radial);
+        zone->getZoneClient()->sendMessage(msg);
+        return {{"ok", true}, {"selected", radial}, {"target", target}};
+    }
+    if (cmd == "mission_list") {
+        uint64 target = request.value("target", (uint64)0);
+        if (!target) return {{"ok", false}, {"error", "mission terminal target required"}};
+        ObjectControllerMessage* msg = new ObjectControllerMessage(self, 0x23, 0xF5);
+        msg->insertByte(0); msg->insertByte(++radialCounter); msg->insertLong(target);
+        zone->getZoneClient()->sendMessage(msg);
+        return {{"ok", true}, {"requested", target}, {"note", "mission deltas still need structured decoding"}};
+    }
+    if (cmd == "sui_respond") {
+        uint32 page = request.value("page_id", (uint32)0);
+        uint32 event = request.value("event", (uint32)0);
+        JSONSerializationType args = request.value("args", JSONSerializationType::array());
+        { std::lock_guard<std::recursive_mutex> lock(worldMutex);
+          if (!suiPages.count(page)) return {{"ok", false}, {"error", "unknown SUI page"}}; }
+        if (!args.is_array() || args.size() > 64) return {{"ok", false}, {"error", "invalid SUI arguments"}};
+        for (const auto& arg : args) if (!arg.is_string()) return {{"ok", false}, {"error", "SUI arguments must be strings"}};
+        BaseMessage* msg = new BaseMessage(); msg->insertShort(5); msg->insertInt(0x092D3564);
+        msg->insertInt(page); msg->insertInt(event); msg->insertInt(args.size()); msg->insertInt(0);
+        for (const auto& arg : args) msg->insertUnicode(UnicodeString(arg.get<std::string>().c_str()));
+        zone->getZoneClient()->sendMessage(msg);
+        { std::lock_guard<std::recursive_mutex> lock(worldMutex); suiPages.erase(page); }
+        return {{"ok", true}, {"responded", page}};
+    }
+	if (cmd == "ping")
+		return {{"ok", true}};
+	if (cmd == "status")
+		return status();
+	if (cmd == "look")
+		return look(request.value("radius", 64.0f), request.value("type", ""), request.value("limit", 40));
+	if (cmd == "move")
+		return moveTo(request.value("x", selfX), request.value("y", selfY), request.value("speed", 5.0f),
+					  request.value("timeout", 90.0f));
+	if (cmd == "say") {
+		String text(request.value("text", "").c_str());
+		sendCommand("spatialchatinternal", 0, UnicodeString("0 0 0 0 1 " + text));
+		return {{"ok", true}};
+	}
+	if (cmd == "command") {
+		String name(request.value("name", "").c_str());
+		if (name.isEmpty())
+			return {{"ok", false}, {"error", "name required"}};
+		uint64 target = request.value("target", (uint64) 0);
+		sendCommand(name, target, UnicodeString(request.value("args", "").c_str()));
+		return {{"ok", true}, {"sent", str(name)}};
+	}
+	if (cmd == "talk") {
+		sendCommand("npcconversationstart", request.value("target", (uint64) 0), UnicodeString(""));
+		return {{"ok", true}};
+	}
+	if (cmd == "choose") {
+		int index = request.value("index", 0);
+		if (!conversationActive || index < 0 || index >= (int)conversationOptions.size())
+			return {{"ok", false}, {"error", "no active conversation option at that index"}};
+		sendCommand("npcconversationselect", 0, UnicodeString(String::valueOf(index)));
+		return {{"ok", true}};
+	}
+	return {{"ok", false}, {"error", "unknown cmd: " + cmd}};
+}
+
+void AgentControl::run(Zone* activeZone) {
+	zone = activeZone;
+	// Zoning in leaves us flagged as "teleporting" until acknowledged.
+	sendTeleportAck(moveCount);
+	emit({{"event", "ready"}, {"self", self}, {"planet", planet}});
+	std::string line;
+	while (std::getline(std::cin, line)) {
+		if (line.empty())
+			continue;
+		JSONSerializationType request, reply;
+		try {
+			request = JSONSerializationType::parse(line);
+		} catch (...) {
+			emit({{"reply", "error"}, {"ok", false}, {"error", "invalid JSON"}});
+			continue;
+		}
+		std::string cmd = request.value("cmd", "");
+		if (cmd == "quit" || cmd == "logout") {
+			emit({{"reply", cmd}, {"ok", true}, {"id", request.value("id", JSONSerializationType())}});
+			break;
+		}
+		try {
+			reply = handle(request);
+		} catch (const std::exception& e) {
+			reply = {{"ok", false}, {"error", e.what()}};
+		} catch (...) {
+			reply = {{"ok", false}, {"error", "exception"}};
+		}
+		reply["reply"] = cmd;
+		if (request.contains("id"))
+			reply["id"] = request["id"];
+		emit(reply);
+	}
+	emit({{"event", "logging_out"}});
+}

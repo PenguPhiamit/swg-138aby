@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/fried_icecream_components/endor/honey_melon.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/fried_icecream_components/endor/honey_melon.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fried_icecream_components_endor_honey_melon, "object/tangible/loot/creature/loot/collections/fried/icecream/components/endor/honey_melon.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fried_icecream_components_endor_honey_melon, "object/tangible/loot/creature_loot/collections/fried_icecream_components/endor/honey_melon.iff")

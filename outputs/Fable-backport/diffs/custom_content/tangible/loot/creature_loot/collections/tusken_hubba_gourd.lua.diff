@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/tusken_hubba_gourd.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/tusken_hubba_gourd.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_tusken_hubba_gourd, "object/tangible/loot/creature/loot/collections/tusken_hubba_gourd.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_tusken_hubba_gourd, "object/tangible/loot/creature_loot/collections/tusken_hubba_gourd.iff")

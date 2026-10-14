@@ -1,0 +1,842 @@
+commit 2970b47e
+Normalize line endings (LF) in agent body and sandbox command files
+
+Edits made on Windows saved four files with CRLF endings, so 220e0f39 and
+f25c90f9 show whole-file diffs. Content is unchanged; review those two
+commits with git show --ignore-cr-at-eol.
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
+commit f25c90f9
+Sandbox test helpers /agentgear and /agentskill; agent body reads mission objects
+
+For the bot squads on the test galaxy. Both helpers are off unless
+Core3.AgentGear = true (test_galaxy.py --config AgentGear=true) and only work
+for accounts in Core3.AgentAccounts, so they never act on live players.
+
+/agentgear basic|boss|support: a weapon for the starting profession, bone or
+composite armor, stimpacks for medics; "support" gives doctor enhancement
+packs, scout camp kits and an instrument. Items go into free equipment slots,
+the rest into the inventory; the answer lists equipped/inventory/failed.
+/agentskill <box> ...: grants skill boxes with their prerequisites and no XP
+(the call character creation uses), so a squad can test trained roles
+(doctor, entertainer, ranger, certified weapons). Real trainers stay a
+separate test.
+
+Agent body: decode MissionObjectMessage3 baselines and deltas (a terminal
+refresh rewrites existing objects): type, title, description, reward,
+difficulty, start/end/waypoint, target. New commands "missions" and
+"mission_accept" (MissionAcceptRequest 0xF9).
+
+Tested on the test galaxy: gear equips and stores (16 bots), training grants
+all five boss-crew roles with prerequisites. Mission decoding is not yet
+tested end to end (no mission terminal found in central Mos Eisley).
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
+commit 220e0f39
+Sandbox /leash: never re-place a follower out of range; naming the leader keeps it on
+
+Found by the bot squads (Dorn group): when the navmesh path stops short of
+the leader (he stood on raised ground), the "3 m behind" point was still
+12.5 m away, so the follower was moved to the same spot every 8 s. If the
+computed point is still beyond the 10 m stuck range, use the leader's own
+spot instead. Re-test: follower ends 2.7 m from the leader, once.
+"/leash <current leader>" now answers "Already leashed" instead of turning
+the leash off; the menu entry and a bare /leash still toggle.
+
+Agent body: label CommandQueueRemove errors as the server sends them (1
+locomotion, 2 missing ability or not allowed, 3 invalid target, 5 state).
+Code 2 was reported as "wrong posture/locomotion", which hid that a fresh
+scout lacks /forage.
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
+commit 09a56205
+Sandbox /leash: server-side follow assist for group members
+
+The client's /follow steers in a straight line and never tells the server,
+so followers get stuck on corners and doorways. While a leash is on, the
+server checks every 2 s; when the follower is more than 10 m from the leader
+and has not closed the gap for 3 checks, it moves them to a walkable point
+3 m short of the leader along a navmesh path (cells and doorways included).
+Otherwise it does nothing and the client's follow keeps steering.
+
+Start/stop with /leash <name>, /leash (target), /leash off, or right-click a
+group member: "Leash (follow assist)" / "Stop leash" (SERVER_MENU10). Group
+members on the same planet only; skipped in combat, dead, incapacitated or
+mounted; refuses buildings the follower may not enter; ends on leaving the
+group, logging out, changing planet or drifting over 512 m apart.
+Core3.LeashEnabled = false turns it off.
+
+Tested on the test galaxy with two bots: refused when not grouped; outdoor
+unstick lands 3.0 m behind the leader, once; leader walking 91 s into the
+cantina pulls a stationary follower into the same cell; right-click on/off;
+leaving the group ends it. Not tested: private-building refusal, mounts,
+a real client running /follow.
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
+
+==== net change 3797430a..2970b47e (line-ending noise removed) ====
+diff --git a/MMOCoreORB/src/client/agent/AgentControl.cpp b/MMOCoreORB/src/client/agent/AgentControl.cpp
+index 2677b11a..4fb9b25a 100644
+--- a/MMOCoreORB/src/client/agent/AgentControl.cpp
++++ b/MMOCoreORB/src/client/agent/AgentControl.cpp
+@@ -183,6 +183,7 @@ void AgentControl::onDestroy(uint64 oid) {
+ 		bool creature = it->second.type == "CREO";
+ 		name = it->second.name;
+ 		radialMenus.erase(oid);
++		missions.erase(oid);
+ 		world.erase(it);
+ 		if (!creature)
+ 			return;
+@@ -223,6 +224,15 @@ void AgentControl::onBaseline3(uint64 oid, uint32 typeCode, Message* pack) {
+ 		else if (!key.isEmpty())
+ 			object.name = "@" + str(file) + ":" + str(key);
+ 	}
++	if (type == "MISO") { // MissionObjectMessage3: fields 3..16 follow the name
++		std::lock_guard<std::recursive_mutex> lock(worldMutex);
++		JSONSerializationType& mission = missions[oid];
++		mission["oid"] = oid;
++		for (uint16 index = 3; index <= 16; ++index)
++			if (!parseMissionField(mission, index, pack))
++				break;
++		return;
++	}
+ 	if (type != "CREO")
+ 		return;
+ 
+@@ -246,6 +256,73 @@ void AgentControl::onBaseline3(uint64 oid, uint32 typeCode, Message* pack) {
+ 	setStates(oid, states);
+ }
+ 
++static std::string planetName(uint32 crc) {
++	static const char* planets[] = {"tatooine", "naboo", "corellia", "rori", "talus", "dantooine", "lok", "yavin4",
++									"endor", "dathomir", "tutorial", "dungeon1"};
++	for (const char* planet : planets)
++		if (String(planet).hashCode() == crc)
++			return planet;
++	return std::to_string(crc);
++}
++
++static std::string missionTypeName(uint32 crc) {
++	static const char* types[] = {"destroy", "deliver", "bounty", "survey", "crafting", "musician", "dancer",
++								  "hunting", "recon", "escort"};
++	for (const char* type : types)
++		if (String(type).hashCode() == crc)
++			return type;
++	return std::to_string(crc);
++}
++
++// One MissionObjectMessage3 field by its index (the baseline order and the delta indices are the same).
++// Returns false for an index whose size is unknown, so the caller stops reading.
++bool AgentControl::parseMissionField(JSONSerializationType& mission, uint16 index, Message* pack) {
++	String a, b;
++	UnicodeString text;
++	auto location = [&](const char* key) {
++		float x = pack->parseFloat(), z = pack->parseFloat(), y = pack->parseFloat();
++		pack->parseLong();
++		mission[key] = {{"x", x}, {"y", y}, {"z", z}, {"planet", planetName(pack->parseInt())}};
++	};
++	auto stringId = [&](const char* key) {
++		pack->parseAscii(a);
++		pack->parseInt();
++		pack->parseAscii(b);
++		mission[key] = "@" + str(a) + ":" + str(b);
++	};
++	switch (index) {
++	case 0x00: pack->parseFloat(); break;
++	case 0x01: stringId("name"); break;
++	case 0x02: pack->parseUnicode(text); break;
++	case 0x03: case 0x04: case 0x0D: pack->parseInt(); break;
++	case 0x05: mission["difficulty"] = pack->parseInt(); break;
++	case 0x06: location("end"); break;
++	case 0x07: pack->parseUnicode(text); mission["creator"] = str(text.toString()); break;
++	case 0x08: mission["reward"] = pack->parseInt(); break;
++	case 0x09: location("start"); break;
++	case 0x0A: mission["target_crc"] = pack->parseInt(); break;
++	case 0x0B: stringId("description"); break;
++	case 0x0C: stringId("title"); break;
++	case 0x0E: { uint32 crc = pack->parseInt(); mission["type"] = missionTypeName(crc); break; }
++	case 0x0F: pack->parseAscii(a); mission["target"] = str(a); break;
++	case 0x10: { // waypoint
++		pack->parseInt();
++		float x = pack->parseFloat(), z = pack->parseFloat(), y = pack->parseFloat();
++		pack->parseLong();
++		std::string planet = planetName(pack->parseInt());
++		pack->parseUnicode(text);
++		pack->parseLong();
++		pack->parseByte();
++		pack->parseByte();
++		if (x != 0 || y != 0)
++			mission["waypoint"] = {{"x", x}, {"y", y}, {"z", z}, {"planet", planet}};
++		break;
++	}
++	default: return false;
++	}
++	return true;
++}
++
+ void AgentControl::onBaseline6(uint64 oid, uint32 typeCode, Message* pack) {
+ 	if (typeName(typeCode) != "CREO")
+ 		return;
+@@ -324,6 +401,16 @@ static bool applyListDelta(Message* pack, int elementSize, std::vector<int>* lis
+ }
+ 
+ void AgentControl::onDelta(uint64 oid, uint32 typeCode, uint8 type, Message* pack) {
++	if (typeName(typeCode) == "MISO" && type == 3) { // a terminal refresh rewrites existing mission objects
++		std::lock_guard<std::recursive_mutex> lock(worldMutex);
++		JSONSerializationType& mission = missions[oid];
++		mission["oid"] = oid;
++		uint16 updates = pack->parseShort();
++		for (int u = 0; u < updates; ++u)
++			if (!parseMissionField(mission, pack->parseShort(), pack))
++				return;
++		return;
++	}
+ 	if (typeName(typeCode) != "CREO" || (type != 3 && type != 6))
+ 		return;
+ 	uint16 updates = pack->parseShort();
+@@ -559,8 +646,10 @@ void AgentControl::onObjController(uint32 type, uint64 oid, Message* pack) {
+ 		uint32 error = pack->parseInt();
+ 		uint32 detail = pack->parseInt();
+ 		if (error != 0) {
+-			static const char* reasons[] = {"ok", "general error", "wrong posture/locomotion", "invalid state",
+-				"invalid target", "unknown", "too far", "unknown", "invalid parameters", "unknown", "unknown",
++			// Codes as the server sends them (QueueCommand.cpp, ObjectControllerImplementation.cpp): 1 locomotion
++			// (detail = locomotion), 2 ability missing / not allowed, 3 invalid target, 5 state (detail = state bit).
++			static const char* reasons[] = {"ok", "wrong locomotion", "missing ability or not allowed", "invalid target",
++				"unknown", "invalid state", "too far", "unknown", "invalid parameters", "unknown", "unknown",
+ 				"insufficient permission", "not allowed in jedi armor"};
+ 			std::string name;
+ 			{
+@@ -1101,6 +1190,30 @@ JSONSerializationType AgentControl::handle(const JSONSerializationType& request)
+ 		zone->getZoneClient()->sendMessage(msg);
+ 		return {{"ok", true}, {"selected", radial}, {"target", target}};
+ 	}
++	if (cmd == "missions") { // every mission object we know: the terminal list (mission bag) and accepted ones
++		std::lock_guard<std::recursive_mutex> lock(worldMutex);
++		JSONSerializationType list = JSONSerializationType::array();
++		for (const auto& entry : missions) {
++			JSONSerializationType mission = entry.second;
++			auto it = world.find(entry.first);
++			uint64 parent = it != world.end() ? it->second.parent : 0;
++			mission["container"] = parent;
++			mission["container_name"] = parent && world.count(parent) ? world[parent].name : "";
++			list.push_back(mission);
++		}
++		return {{"ok", true}, {"missions", list}};
++	}
++	if (cmd == "mission_accept") {
++		uint64 mission = request.value("target", (uint64) 0), terminal = request.value("terminal", (uint64) 0);
++		if (!mission || !terminal)
++			return {{"ok", false}, {"error", "target (mission oid) and terminal required"}};
++		ObjectControllerMessage* msg = new ObjectControllerMessage(self, 0x23, 0xF9);
++		msg->insertLong(mission);
++		msg->insertLong(terminal);
++		msg->insertByte(++radialCounter);
++		zone->getZoneClient()->sendMessage(msg);
++		return {{"ok", true}, {"requested", mission}};
++	}
+ 	if (cmd == "mission_list") {
+ 		uint64 target = request.value("target", (uint64)0);
+ 		if (!target) return {{"ok", false}, {"error", "mission terminal target required"}};
+diff --git a/MMOCoreORB/src/client/agent/AgentControl.h b/MMOCoreORB/src/client/agent/AgentControl.h
+index 77a6b3dd..21f9c29a 100644
+--- a/MMOCoreORB/src/client/agent/AgentControl.h
++++ b/MMOCoreORB/src/client/agent/AgentControl.h
+@@ -108,6 +108,10 @@ private:
+ 	JSONSerializationType inventorySnapshot();
+ 	std::vector<std::string> conversationOptions;
+ 	std::map<uint32, std::string> commandNames;
++
++	// Mission objects (MISO baseline 3 and its deltas): terminal lists and accepted missions.
++	std::map<uint64, JSONSerializationType> missions;
++	bool parseMissionField(JSONSerializationType& mission, uint16 index, Message* pack);
+ };
+ 
+ #endif /* AGENTCONTROL_H_ */
+diff --git a/MMOCoreORB/src/server/zone/managers/objectcontroller/command/CommandConfigManager.cpp b/MMOCoreORB/src/server/zone/managers/objectcontroller/command/CommandConfigManager.cpp
+index adaa62cb..19d22aa9 100755
+--- a/MMOCoreORB/src/server/zone/managers/objectcontroller/command/CommandConfigManager.cpp
++++ b/MMOCoreORB/src/server/zone/managers/objectcontroller/command/CommandConfigManager.cpp
+@@ -69,6 +69,9 @@
+ #include "templates/datatables/DataTableRow.h"
+ #include "CommandList.h"
+ #include "server/zone/objects/creature/commands/AgentPathCommand.h"
++#include "server/zone/objects/creature/commands/LeashCommand.h"
++#include "server/zone/objects/creature/commands/AgentGearCommand.h"
++#include "server/zone/objects/creature/commands/AgentSkillCommand.h"
+ 
+ CommandList* CommandConfigManager::slashCommands = nullptr;
+ ZoneProcessServer* CommandConfigManager::server = nullptr;
+@@ -369,6 +372,11 @@ void CommandConfigManager::registerSpecialCommands(CommandList* sCommands) {
+ 
+ 	// Sandbox: navmesh path / ground height helper for the agent client (bot accounts only)
+ 	createCommand(String("agentPath").toLowerCase());
++	// Sandbox: follow assist for group members (also offered on the right-click menu)
++	createCommand(String("leash").toLowerCase());
++	// Sandbox: test-galaxy gear for agent bots (Core3.AgentGear)
++	createCommand(String("agentGear").toLowerCase());
++	createCommand(String("agentSkill").toLowerCase());
+ 
+ 	// Space Special Commands
+ 	createCommand(String("comm").toLowerCase())->setCommandGroup(0xD8D3D9F2);
+@@ -871,6 +879,9 @@ void CommandConfigManager::registerCommands() {
+ 
+ 	// Sandbox: agent client helper
+ 	commandFactory.registerCommand<AgentPathCommand>(String("agentPath").toLowerCase());
++	commandFactory.registerCommand<LeashCommand>(String("leash").toLowerCase());
++	commandFactory.registerCommand<AgentGearCommand>(String("agentGear").toLowerCase());
++	commandFactory.registerCommand<AgentSkillCommand>(String("agentSkill").toLowerCase());
+ 
+ 	//pet commands
+ 	commandFactory.registerCommand<PetAttackCommand>(String("petAttack").toLowerCase());
+diff --git a/MMOCoreORB/src/server/zone/objects/creature/commands/AgentGearCommand.h b/MMOCoreORB/src/server/zone/objects/creature/commands/AgentGearCommand.h
+new file mode 100755
+index 00000000..64943c03
+--- /dev/null
++++ b/MMOCoreORB/src/server/zone/objects/creature/commands/AgentGearCommand.h
+@@ -0,0 +1,146 @@
++/*
++				Copyright <SWGEmu>
++		See file COPYING for copying conditions.*/
++
++#ifndef AGENTGEARCOMMAND_H_
++#define AGENTGEARCOMMAND_H_
++
++#include "conf/ConfigManager.h"
++#include "server/login/account/AccountManager.h"
++#include "server/zone/ZoneServer.h"
++#include "server/zone/objects/creature/CreatureObject.h"
++#include "server/zone/objects/creature/commands/QueueCommand.h"
++#include "server/zone/objects/player/PlayerObject.h"
++#include "server/zone/objects/tangible/TangibleObject.h"
++
++/*
++ * Sandbox test helper: gear for agent bots on a TEST galaxy. Off unless Core3.AgentGear = true in
++ * config-local.lua (test_galaxy.py --config AgentGear=true), and only for accounts in Core3.AgentAccounts.
++ *
++ *   /agentgear basic   a weapon for the starting profession (any other profession: a pistol), bone
++ *                      armor, and stimpacks for medics. For ordinary combat groups.
++ *   /agentgear boss    T21 rifle or battleaxe, composite armor, more stimpacks. For the world-boss group.
++ *   /agentgear support the camp crew's tools: doctor enhancement packs and stimpacks (medics), camp kits
++ *                      (scouts), an instrument (entertainers), a pistol and bone armor for everyone.
++ *
++ * Items go into free equipment slots, otherwise into the inventory. Answer, to the caller only:
++ * "[agentgear] {json}" with what was equipped, what went to the inventory and what failed.
++ */
++class AgentGearCommand : public QueueCommand {
++public:
++	AgentGearCommand(const String& name, ZoneProcessServer* server) : QueueCommand(name, server) {
++	}
++
++	int doQueueCommand(CreatureObject* creature, const uint64& target, const UnicodeString& arguments) const {
++		if (!creature->isPlayerCreature())
++			return GENERALERROR;
++
++		auto ghost = creature->getPlayerObject();
++
++		if (ghost == nullptr)
++			return GENERALERROR;
++
++		auto account = AccountManager::getAccount(ghost->getAccountID(), true);
++		const auto& allowed = ConfigManager::instance()->getStringVector("Core3.AgentAccounts");
++
++		if (account == nullptr || !allowed.contains(account->getUsername()))
++			return INSUFFICIENTPERMISSION;
++
++		if (!ConfigManager::instance()->getBool("Core3.AgentGear", false)) {
++			creature->sendSystemMessage("[agentgear] {\"error\":\"off on this galaxy (Core3.AgentGear)\"}");
++			return GENERALERROR;
++		}
++
++		String kit = arguments.toString().trim().toLowerCase();
++
++		if (kit != "basic" && kit != "boss" && kit != "support") {
++			creature->sendSystemMessage("[agentgear] {\"error\":\"usage: /agentgear basic|boss|support\"}");
++			return INVALIDPARAMETERS;
++		}
++
++		bool boss = kit == "boss";
++		Vector<String> templates;
++
++		if (kit == "support") {
++			templates.add("object/weapon/ranged/pistol/pistol_cdef.iff");
++
++			if (creature->hasSkill("science_medic_novice")) {
++				const char* packs[] = {"health", "action", "strength", "constitution", "quickness", "stamina"};
++
++				for (const char* pack : packs)
++					for (int i = 0; i < 2; ++i)
++						templates.add(String("object/tangible/medicine/crafted/medpack_enhance_") + pack + "_a.iff");
++
++				for (int i = 0; i < 4; ++i)
++					templates.add("object/tangible/medicine/crafted/crafted_stimpack_sm_s1_a.iff");
++			}
++
++			if (creature->hasSkill("outdoors_scout_novice")) {
++				templates.add("object/tangible/scout/camp/camp_basic.iff");
++				templates.add("object/tangible/scout/camp/camp_improved.iff");
++			}
++
++			if (creature->hasSkill("social_entertainer_novice"))
++				templates.add("object/tangible/instrument/slitherhorn.iff");
++		} else if (creature->hasSkill("combat_marksman_novice")) {
++			templates.add(boss ? "object/weapon/ranged/rifle/rifle_t21.iff" : "object/weapon/ranged/rifle/rifle_cdef.iff");
++			templates.add("object/weapon/ranged/pistol/pistol_cdef.iff");
++		} else if (creature->hasSkill("combat_brawler_novice")) {
++			templates.add(boss ? "object/weapon/melee/2h_sword/2h_sword_battleaxe.iff" : "object/weapon/melee/knife/knife_dagger.iff");
++		} else {
++			templates.add("object/weapon/ranged/pistol/pistol_cdef.iff");
++		}
++
++		const char* pieces[] = {"chest_plate", "leggings", "helmet", "boots", "gloves", "bicep_l", "bicep_r", "bracer_l", "bracer_r"};
++
++		for (const char* piece : pieces)  // support gets bone armor too
++			templates.add(boss ? String("object/tangible/wearables/armor/composite/armor_composite_") + piece + ".iff"
++							   : String("object/tangible/wearables/armor/bone/armor_bone_s01_") + piece + ".iff");
++
++		if (creature->hasSkill("science_medic_novice")) {
++			for (int i = 0; i < (boss ? 6 : 3); ++i)
++				templates.add(boss ? "object/tangible/medicine/crafted/crafted_stimpack_sm_s1_c.iff"
++								   : "object/tangible/medicine/crafted/crafted_stimpack_sm_s1_a.iff");
++		}
++
++		ManagedReference<SceneObject*> inventory = creature->getSlottedObject("inventory");
++
++		if (inventory == nullptr)
++			return GENERALERROR;
++
++		JSONSerializationType reply, equipped = JSONSerializationType::array(), stored = JSONSerializationType::array(),
++			failed = JSONSerializationType::array();
++
++		for (const String& path : templates) {
++			ManagedReference<SceneObject*> item = server->getZoneServer()->createObject(path.hashCode(), 1);
++
++			if (item == nullptr) {
++				failed.push_back(path.toCharArray());
++				continue;
++			}
++
++			String error;
++
++			if (creature->canAddObject(item, 4, error) == 0 && creature->transferObject(item, 4, true)) {
++				creature->broadcastObject(item, true);
++				equipped.push_back(path.toCharArray());
++			} else if (inventory->transferObject(item, -1, true)) {
++				inventory->broadcastObject(item, true);
++				stored.push_back(path.toCharArray());
++			} else {
++				item->destroyObjectFromDatabase(true);
++				failed.push_back(path.toCharArray());
++			}
++		}
++
++		reply["kit"] = kit.toCharArray();
++		reply["equipped"] = equipped;
++		reply["inventory"] = stored;
++		reply["failed"] = failed;
++		creature->sendSystemMessage("[agentgear] " + String(reply.dump().c_str()));
++
++		return SUCCESS;
++	}
++};
++
++#endif // AGENTGEARCOMMAND_H_
+diff --git a/MMOCoreORB/src/server/zone/objects/creature/commands/AgentSkillCommand.h b/MMOCoreORB/src/server/zone/objects/creature/commands/AgentSkillCommand.h
+new file mode 100755
+index 00000000..829fdfb8
+--- /dev/null
++++ b/MMOCoreORB/src/server/zone/objects/creature/commands/AgentSkillCommand.h
+@@ -0,0 +1,83 @@
++/*
++				Copyright <SWGEmu>
++		See file COPYING for copying conditions.*/
++
++#ifndef AGENTSKILLCOMMAND_H_
++#define AGENTSKILLCOMMAND_H_
++
++#include "conf/ConfigManager.h"
++#include "server/login/account/AccountManager.h"
++#include "server/zone/managers/skill/SkillManager.h"
++#include "server/zone/objects/creature/CreatureObject.h"
++#include "server/zone/objects/creature/commands/QueueCommand.h"
++#include "server/zone/objects/player/PlayerObject.h"
++
++/*
++ * Sandbox test helper: skill boxes for agent bots on a TEST galaxy, so a squad can test what trained
++ * characters do (doctor and entertainer buffs, ranger camps, multi-profession builds) without days of
++ * grinding. Off unless Core3.AgentGear = true; only for accounts in Core3.AgentAccounts.
++ *
++ *   /agentskill <skill box> [<skill box> ...]   e.g. science_doctor_novice outdoors_ranger_novice
++ *
++ * Prerequisite boxes are granted too, without XP (the same call character creation uses). Skill-point
++ * limits still apply. Answer, to the caller only: "[agentskill] {json}" with granted/failed/unknown.
++ * Training at trainers is a separate test and should keep using real trainers.
++ */
++class AgentSkillCommand : public QueueCommand {
++public:
++	AgentSkillCommand(const String& name, ZoneProcessServer* server) : QueueCommand(name, server) {
++	}
++
++	int doQueueCommand(CreatureObject* creature, const uint64& target, const UnicodeString& arguments) const {
++		if (!creature->isPlayerCreature())
++			return GENERALERROR;
++
++		auto ghost = creature->getPlayerObject();
++
++		if (ghost == nullptr)
++			return GENERALERROR;
++
++		auto account = AccountManager::getAccount(ghost->getAccountID(), true);
++		const auto& allowed = ConfigManager::instance()->getStringVector("Core3.AgentAccounts");
++
++		if (account == nullptr || !allowed.contains(account->getUsername()))
++			return INSUFFICIENTPERMISSION;
++
++		if (!ConfigManager::instance()->getBool("Core3.AgentGear", false)) {
++			creature->sendSystemMessage("[agentskill] {\"error\":\"off on this galaxy (Core3.AgentGear)\"}");
++			return GENERALERROR;
++		}
++
++		JSONSerializationType reply, granted = JSONSerializationType::array(), failed = JSONSerializationType::array(),
++			unknown = JSONSerializationType::array();
++		StringTokenizer tokenizer(arguments.toString());
++		auto skills = SkillManager::instance();
++		int count = 0;
++
++		while (tokenizer.hasMoreTokens() && count++ < 16) {
++			String box;
++			tokenizer.getStringToken(box);
++
++			if (skills->getSkill(box) == nullptr)
++				unknown.push_back(box.toCharArray());
++			else if (creature->hasSkill(box) || skills->awardSkill(box, creature, true, true, true))
++				granted.push_back(box.toCharArray());
++			else
++				failed.push_back(box.toCharArray());
++		}
++
++		if (count == 0) {
++			creature->sendSystemMessage("[agentskill] {\"error\":\"usage: /agentskill <skill box> [...]\"}");
++			return INVALIDPARAMETERS;
++		}
++
++		reply["granted"] = granted;
++		reply["failed"] = failed;
++		reply["unknown"] = unknown;
++		creature->sendSystemMessage("[agentskill] " + String(reply.dump().c_str()));
++
++		return SUCCESS;
++	}
++};
++
++#endif // AGENTSKILLCOMMAND_H_
+diff --git a/MMOCoreORB/src/server/zone/objects/creature/commands/LeashCommand.h b/MMOCoreORB/src/server/zone/objects/creature/commands/LeashCommand.h
+new file mode 100755
+index 00000000..0a5a5021
+--- /dev/null
++++ b/MMOCoreORB/src/server/zone/objects/creature/commands/LeashCommand.h
+@@ -0,0 +1,257 @@
++/*
++				Copyright <SWGEmu>
++		See file COPYING for copying conditions.*/
++
++#ifndef LEASHCOMMAND_H_
++#define LEASHCOMMAND_H_
++
++#include "conf/ConfigManager.h"
++#include "server/zone/ZoneServer.h"
++#include "server/zone/objects/creature/CreatureObject.h"
++#include "server/zone/objects/creature/commands/QueueCommand.h"
++#include "server/zone/objects/building/BuildingObject.h"
++#include "server/zone/objects/cell/CellObject.h"
++#include "server/zone/objects/player/PlayerObject.h"
++#include "server/zone/managers/collision/CollisionManager.h"
++#include "server/zone/managers/collision/PathFinderManager.h"
++#include "server/zone/managers/player/PlayerManager.h"
++
++#include <memory>
++
++/*
++ * Sandbox: a follow assist for group members.
++ *
++ * The client's own /follow steers in a straight line and never tells the server, so it gets stuck
++ * on corners and doorways. While a leash is on, the server checks every 2 s: when the follower is
++ * more than STUCK_RANGE metres from the leader and has not closed the gap for STUCK_CHECKS checks
++ * in a row, it moves the follower to a walkable point a few metres behind the leader (taken from a
++ * navmesh path). Otherwise it does nothing and the client's follow keeps steering.
++ *
++ * Start/stop: right-click a group member → "Leash (follow assist)" / "Stop leash", or
++ * /leash [name|target] and /leash off. Group members only; never while in combat, dead,
++ * incapacitated or mounted; never into a building the follower may not enter. It ends when they
++ * leave the group, change planet, drift more than MAX_RANGE apart or log out.
++ * Core3.LeashEnabled = false (config-local.lua) turns the feature off.
++ */
++class LeashTask : public Task {
++	ManagedWeakReference<CreatureObject*> followerRef, leaderRef;
++	uint64 leaderID;
++	float lastDistance = -1;
++	int stuckChecks = 0;
++
++public:
++	static const int INTERVAL = 2000;
++	static const int STUCK_CHECKS = 3;
++	constexpr static float STUCK_RANGE = 10.f;
++	constexpr static float MAX_RANGE = 512.f;
++	constexpr static float BEHIND = 3.f; // where an unstick puts the follower: this far short of the leader
++
++	LeashTask(CreatureObject* follower, CreatureObject* leader) : followerRef(follower), leaderRef(leader), leaderID(leader->getObjectID()) {
++	}
++
++	uint64 getLeaderID() const {
++		return leaderID;
++	}
++
++	void run() {
++		ManagedReference<CreatureObject*> follower = followerRef.get();
++
++		if (follower == nullptr)
++			return;
++
++		Locker locker(follower);
++
++		if (follower->getPendingTask("leash") != this)
++			return; // stopped or replaced meanwhile
++
++		ManagedReference<CreatureObject*> leader = leaderRef.get();
++		PlayerObject* ghost = follower->getPlayerObject();
++
++		if (ghost == nullptr || !ghost->isOnline()) {
++			follower->removePendingTask("leash");
++			return;
++		}
++
++		String reason = checkPair(follower, leader);
++
++		if (!reason.isEmpty()) {
++			follower->removePendingTask("leash");
++			follower->sendSystemMessage("Leash ended: " + reason + ".");
++			return;
++		}
++
++		float distance = follower->getWorldPosition().distanceTo(leader->getWorldPosition());
++
++		if (distance > MAX_RANGE) {
++			follower->removePendingTask("leash");
++			follower->sendSystemMessage("Leash ended: you are too far from " + leader->getFirstName() + ".");
++			return;
++		}
++
++		bool busy = follower->isInCombat() || follower->isDead() || follower->isIncapacitated() || follower->isRidingMount() ||
++					leader->isRidingMount();
++
++		if (busy || distance <= STUCK_RANGE)
++			stuckChecks = 0;
++		else if (lastDistance >= 0 && distance > lastDistance - 0.5f)
++			++stuckChecks;
++		else
++			stuckChecks = 0;
++
++		lastDistance = distance;
++
++		if (stuckChecks >= STUCK_CHECKS) {
++			stuckChecks = 0;
++			lastDistance = -1;
++			unstick(follower, leader);
++		}
++
++		reschedule(INTERVAL);
++	}
++
++	// Why the pair can't be leashed, or empty when it can. Follower locked.
++	static String checkPair(CreatureObject* follower, CreatureObject* leader) {
++		if (leader == nullptr || leader == follower || !leader->isPlayerCreature())
++			return "no leader";
++
++		PlayerObject* leaderGhost = leader->getPlayerObject();
++
++		if (leaderGhost == nullptr || !leaderGhost->isOnline())
++			return leader->getFirstName() + " is offline";
++
++		if (follower->getGroupID() == 0 || follower->getGroupID() != leader->getGroupID())
++			return "you are not in a group with " + leader->getFirstName();
++
++		if (follower->getZone() == nullptr || follower->getZone() != leader->getZone())
++			return leader->getFirstName() + " is on another planet";
++
++		return "";
++	}
++
++	// Move the follower to a walkable point a few metres behind the leader. Follower locked.
++	static void unstick(CreatureObject* follower, CreatureObject* leader) {
++		Zone* zone = follower->getZone();
++
++		if (zone == nullptr)
++			return;
++
++		WorldCoordinates start(follower);
++		WorldCoordinates goal(leader);
++		Vector3 leaderPosition = leader->getWorldPosition();
++		std::unique_ptr<Vector<WorldCoordinates>> path(PathFinderManager::instance()->findPath(start, goal, zone));
++		WorldCoordinates target = goal; // fallback: the leader's own spot
++
++		if (path != nullptr && path->size() >= 2) {
++			// Path points can be far apart, so walk back from the leader to the first point at least
++			// BEHIND metres away and stop BEHIND metres short of the leader on that segment.
++			for (int i = path->size() - 2; i >= 0; --i) {
++				const WorldCoordinates& far = path->get(i);
++				const WorldCoordinates& near = path->get(i + 1);
++
++				if (far.getWorldPosition().distanceTo(leaderPosition) < BEHIND)
++					continue;
++
++				if (far.getCell() != near.getCell()) {
++					target = near; // segment crosses a doorway: don't blend coordinates of two cells
++					break;
++				}
++
++				Vector3 from = near.getPoint(), to = far.getPoint();
++				float length = from.distanceTo(to);
++				Vector3 point = length > BEHIND ? from + (to - from) * (BEHIND / length) : to;
++
++				if (far.getCell() == nullptr)
++					point.setZ(CollisionManager::getWorldFloorCollision(point.getX(), point.getY(), zone, false));
++
++				target = WorldCoordinates(point, far.getCell());
++				break;
++			}
++		}
++
++		// The navmesh can stop short of the leader (raised ground, a ramp, a spot off the mesh). Then a point
++		// "behind" them would still be out of range and the follower would be moved there again and again.
++		if (target.getWorldPosition().distanceTo(leaderPosition) > STUCK_RANGE)
++			target = goal;
++
++		CellObject* cell = target.getCell();
++
++		if (cell != nullptr) {
++			ManagedReference<SceneObject*> parent = cell->getParent().get();
++			BuildingObject* building = parent != nullptr && parent->isBuildingObject() ? cast<BuildingObject*>(parent.get()) : nullptr;
++
++			if (building != nullptr && !building->isAllowedEntry(follower)) {
++				follower->sendSystemMessage("Leash: " + leader->getFirstName() + " is inside a building you can't enter.");
++				return;
++			}
++		}
++
++		follower->teleport(target.getX(), target.getZ(), target.getY(), cell != nullptr ? cell->getObjectID() : 0);
++		follower->sendSystemMessage("Leash: you were stuck, so you've been moved closer to " + leader->getFirstName() + ".");
++	}
++};
++
++class LeashCommand : public QueueCommand {
++public:
++	LeashCommand(const String& name, ZoneProcessServer* server) : QueueCommand(name, server) {
++	}
++
++	int doQueueCommand(CreatureObject* creature, const uint64& target, const UnicodeString& arguments) const {
++		if (!creature->isPlayerCreature())
++			return GENERALERROR;
++
++		if (!ConfigManager::instance()->getBool("Core3.LeashEnabled", true)) {
++			creature->sendSystemMessage("The leash is turned off on this galaxy.");
++			return GENERALERROR;
++		}
++
++		String args = arguments.toString().trim();
++		Reference<Task*> pending = creature->getPendingTask("leash");
++		LeashTask* current = dynamic_cast<LeashTask*>(pending.get());
++
++		// Who to leash to: a name, else the target (the right-click menu passes the group member).
++		ManagedReference<CreatureObject*> leader;
++
++		if (!args.isEmpty() && args.toLowerCase() != "off") {
++			leader = server->getZoneServer()->getPlayerManager()->getPlayer(args);
++		} else if (target != 0 && args.isEmpty()) {
++			ManagedReference<SceneObject*> object = server->getZoneServer()->getObject(target);
++
++			if (object != nullptr && object->isPlayerCreature())
++				leader = object.castTo<CreatureObject*>();
++		}
++
++		// "/leash off", "/leash" with nobody chosen, or the menu/target on the current leader again: stop.
++		// Naming the current leader keeps it on.
++		if (current != nullptr && leader != nullptr && leader->getObjectID() == current->getLeaderID() && !args.isEmpty()) {
++			creature->sendSystemMessage("Already leashed to " + leader->getFirstName() + ". /leash off to stop.");
++			return SUCCESS;
++		}
++
++		if (current != nullptr && (leader == nullptr || leader->getObjectID() == current->getLeaderID())) {
++			creature->removePendingTask("leash");
++			creature->sendSystemMessage("Leash off.");
++			return SUCCESS;
++		}
++
++		if (leader == nullptr) {
++			creature->sendSystemMessage("Usage: /leash <group member> (or target them), /leash off. Right-click a group member for the same option.");
++			return INVALIDPARAMETERS;
++		}
++
++		String reason = LeashTask::checkPair(creature, leader);
++
++		if (!reason.isEmpty()) {
++			creature->sendSystemMessage("Can't leash: " + reason + ".");
++			return GENERALERROR;
++		}
++
++		creature->removePendingTask("leash");
++		creature->addPendingTask("leash", new LeashTask(creature, leader), LeashTask::INTERVAL);
++		creature->sendSystemMessage("Leashed to " + leader->getFirstName() +
++			": keep using /follow; if it gets stuck you'll be moved closer. /leash off to stop.");
++
++		return SUCCESS;
++	}
++};
++
++#endif // LEASHCOMMAND_H_
+diff --git a/MMOCoreORB/src/server/zone/objects/player/components/PlayerObjectMenuComponent.cpp b/MMOCoreORB/src/server/zone/objects/player/components/PlayerObjectMenuComponent.cpp
+index aba61af4..4f9d767a 100644
+--- a/MMOCoreORB/src/server/zone/objects/player/components/PlayerObjectMenuComponent.cpp
++++ b/MMOCoreORB/src/server/zone/objects/player/components/PlayerObjectMenuComponent.cpp
+@@ -8,6 +8,8 @@
+ #include "server/zone/objects/player/PlayerObject.h"
+ #include "server/zone/objects/group/GroupObject.h"
+ #include "server/zone/managers/player/PlayerManager.h"
++#include "server/zone/managers/radial/RadialOptions.h"
++#include "conf/ConfigManager.h"
+ 
+ void PlayerObjectMenuComponent::fillObjectMenuResponse(SceneObject* sceneObject, ObjectMenuResponse* menuResponse, CreatureObject* player) const {
+ 	if (!sceneObject->isCreatureObject())
+@@ -19,8 +21,14 @@ void PlayerObjectMenuComponent::fillObjectMenuResponse(SceneObject* sceneObject,
+ 	PlayerObject* targetGhost = creature->getPlayerObject();
+ 
+ 	if (group != nullptr) {
+-		if (group->hasMember(player))
++		if (group->hasMember(player)) {
+ 			menuResponse->addRadialMenuItem(51, 3, "@sui:teach");
++
++			// Sandbox follow assist (LeashCommand.h)
++			if (creature != player && ConfigManager::instance()->getBool("Core3.LeashEnabled", true))
++				menuResponse->addRadialMenuItem(RadialOptions::SERVER_MENU10, 3,
++						player->getPendingTask("leash") != nullptr ? "Stop leash" : "Leash (follow assist)");
++		}
+ 	}
+ 
+ 	if (creature->isPlayingMusic()) {
+@@ -61,6 +69,9 @@ int PlayerObjectMenuComponent::handleObjectMenuSelect(SceneObject* sceneObject,
+ 	case 51:
+ 		player->executeObjectControllerAction(0x5041F83A, sceneObject->getObjectID(), ""); // teach
+ 		break;
++	case RadialOptions::SERVER_MENU10:
++		player->executeObjectControllerAction(STRING_HASHCODE("leash"), sceneObject->getObjectID(), ""); // sandbox follow assist
++		break;
+ 	case 117:
+ 		if (ghost != nullptr && ghost->isPrivileged()) {
+ 			PlayerManager* playerManager = player->getZoneServer()->getPlayerManager();

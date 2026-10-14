@@ -1,0 +1,4673 @@
+{
+ "id": "A4",
+ "revision": "72ef01b24e322d8f4c6b89f717663eb965ae487b",
+ "files": [
+  {
+   "path": ".gitignore",
+   "bytes": 20,
+   "sha256": "486871ba984ee0daba5fc4a178db555d4e1ba1127900e0d50193c977ea828fdf"
+  },
+  {
+   "path": "CRCCalculator/.cproject",
+   "bytes": 7808,
+   "sha256": "6de5d4f723c73d333695d89779f0e253ca7d6bee83381f1ebee5fb09a5cfcade"
+  },
+  {
+   "path": "CRCCalculator/.project",
+   "bytes": 2914,
+   "sha256": "a7cdcaa9d82bcc5895fdd71b46d3efe173c245a032b5b907128122aee6adf87c"
+  },
+  {
+   "path": "CRCCalculator/CRCCalculator.pro",
+   "bytes": 196,
+   "sha256": "488b29d58093e5962a5c196eb91aefeb97c603f6ab9c1130082da7e8ca1b61d0"
+  },
+  {
+   "path": "CRCCalculator/CRCCalculator.pro.user",
+   "bytes": 10900,
+   "sha256": "49db21e1ad1f3828c55e11269b604811c1a3c36eed98569d6549a7f7b6351f60"
+  },
+  {
+   "path": "CRCCalculator/Makefile",
+   "bytes": 5599,
+   "sha256": "4c777c8f8727caf6bf37cb768a116c322adcd7c6f20341016087bace8fcb4994"
+  },
+  {
+   "path": "CRCCalculator/Makefile.Debug",
+   "bytes": 5659,
+   "sha256": "c2dd539799cdee4327d8862cb86ad602b8040e3bd88bdb212acf88eb552bd964"
+  },
+  {
+   "path": "CRCCalculator/Makefile.Release",
+   "bytes": 5732,
+   "sha256": "98a51230388738c066870624cf8bcf4d13240b6bad3f94d428c0a1efa954bd17"
+  },
+  {
+   "path": "CRCCalculator/crccalculator.cpp",
+   "bytes": 4239,
+   "sha256": "dd8f8c857b9b382b44ba03bf4b9f5b9e8e651c43b86f010396f3e782f391b014"
+  },
+  {
+   "path": "CRCCalculator/crccalculator.h",
+   "bytes": 415,
+   "sha256": "bd6dd571042b8fb2f238ba67f90ed071c8d1ab6962a3b09124c8cae00c5a9539"
+  },
+  {
+   "path": "CRCCalculator/crccalculator.ui",
+   "bytes": 1102,
+   "sha256": "d4eeb3667ccd58957effd649934fae1ab30afa3da50f34883a814f2c4c000575"
+  },
+  {
+   "path": "CRCCalculator/main.cpp",
+   "bytes": 211,
+   "sha256": "67add409c7cdf46b1f044f3fb8b837a4b1f90208e9887b0494b9eb64bc3ba441"
+  },
+  {
+   "path": "CRCCalculator/release/CRCCalculator.exe",
+   "bytes": 98816,
+   "sha256": "466126155ca52755f60e68f0c90d48b7f267af75fa4db1b2276fffa8b25bc3f9"
+  },
+  {
+   "path": "CRCCalculator/release/QtCore4.dll",
+   "bytes": 2417664,
+   "sha256": "75b7fad502ed0c304f1b34bd6b9e19186f4a887a3aa8520bc5f35e4d6cbe4215"
+  },
+  {
+   "path": "CRCCalculator/release/QtGui4.dll",
+   "bytes": 9565184,
+   "sha256": "91f3f5be91e3ed328cc482d6641a5fbeb771c4dbb2e79c78e02330d09e865376"
+  },
+  {
+   "path": "CRCCalculator/ui_crccalculator.h",
+   "bytes": 2758,
+   "sha256": "87f93e17148aa513e2e98e10e0f49aa4669a6e0bcb5bab537274b025cefc44cf"
+  },
+  {
+   "path": "DBExplorer/.cproject",
+   "bytes": 12234,
+   "sha256": "4a157908342f4d3a4da4396a630f248237b303f1aeb718869dfb78992d4c6b7c"
+  },
+  {
+   "path": "DBExplorer/.project",
+   "bytes": 838,
+   "sha256": "e5043f561501a6f429e6abaaf2a6f872084d8ae6bf8babac9db818f624f921a1"
+  },
+  {
+   "path": "DBExplorer/.settings/language.settings.xml",
+   "bytes": 2105,
+   "sha256": "3d35bc1a4397d95102502334aa8645591d43a9fceb80f8d4c2389d78cebcad7b"
+  },
+  {
+   "path": "DBExplorer/DBExplorer",
+   "bytes": 124142,
+   "sha256": "9c59eff6e4f78eafcb7bc994a66a8a17a7e7c3f95fe0db47bf8fa7d74c1feb29"
+  },
+  {
+   "path": "DBExplorer/DBExplorer.pro",
+   "bytes": 863,
+   "sha256": "b471694652f27e6eb3e5fb831ca89844b54eda78251ac0296266773935276009"
+  },
+  {
+   "path": "DBExplorer/DBExplorer.pro.user",
+   "bytes": 16320,
+   "sha256": "fac2b68a188f384efdf17e170bf2d50f268c99515cf505c206b17d5cc21b9f49"
+  },
+  {
+   "path": "DBExplorer/Makefile",
+   "bytes": 11008,
+   "sha256": "dc4ff565da0f4043fd8c81fcd2b86b55d4883d04cab2df08ae978398f4436b21"
+  },
+  {
+   "path": "DBExplorer/crccalculator.cpp",
+   "bytes": 3751,
+   "sha256": "4ad60cc834a532a7a0dfd507906fa8422bf66a94582afd9907f9eda9f13ecd8e"
+  },
+  {
+   "path": "DBExplorer/crccalculator.h",
+   "bytes": 225,
+   "sha256": "830aa8afbf241875f674a812ba1b6c92dbc79d4a5df75fb1abe105f7fa9e14b6"
+  },
+  {
+   "path": "DBExplorer/crccalculator.ui",
+   "bytes": 1102,
+   "sha256": "d4eeb3667ccd58957effd649934fae1ab30afa3da50f34883a814f2c4c000575"
+  },
+  {
+   "path": "DBExplorer/database.cpp",
+   "bytes": 2203,
+   "sha256": "2c34e1a9d7bbf26cc8c2c7f465aa2b7f8d267b5edb44d48f4abb46c96ea2509d"
+  },
+  {
+   "path": "DBExplorer/database.h",
+   "bytes": 810,
+   "sha256": "8de4780e14518a6c82cb99cf8eafcf926d1e9c11fbb7173a3b56afdde85aee52"
+  },
+  {
+   "path": "DBExplorer/database.o",
+   "bytes": 18288,
+   "sha256": "4c85a40114422214c04e9e0297aca8f75ccfc89287a12900a18072c5a2df9a5d"
+  },
+  {
+   "path": "DBExplorer/databaseenvironment.cpp",
+   "bytes": 1061,
+   "sha256": "a2f91ba36140ca469eec8d2263e436252a1a05f3ab2c87ae81b8f9ff6fa0e9a9"
+  },
+  {
+   "path": "DBExplorer/databaseenvironment.h",
+   "bytes": 749,
+   "sha256": "e768b42b18052fb6c3cca6d307e8a5b515fa4181934ab41b808296bcd51835d8"
+  },
+  {
+   "path": "DBExplorer/databaseexception.h",
+   "bytes": 600,
+   "sha256": "c960dace7a0c46cb90c9bd7db1b89f8a18bf2a6ed5d4dd2c956e9c2665180c7a"
+  },
+  {
+   "path": "DBExplorer/databaselistmodel.cpp",
+   "bytes": 2626,
+   "sha256": "c3533f8c60154efe0ac416a89e5bbc9702d43a94988bb8ef04d30700162f9d91"
+  },
+  {
+   "path": "DBExplorer/databaselistmodel.h",
+   "bytes": 1510,
+   "sha256": "fa31b310d4f80483302c8ec94b091bd2a315e3ec1cdf85e21f2675717f8929ac"
+  },
+  {
+   "path": "DBExplorer/databasemodel.cpp",
+   "bytes": 9334,
+   "sha256": "26807ee768ddaf7c1937a73aa9204abb703220fe5b18cf7823a05da3c2cfea11"
+  },
+  {
+   "path": "DBExplorer/databasemodel.h",
+   "bytes": 3247,
+   "sha256": "ff3b5ba503b95cf1124d0f6c82f0d52f3c3bfb6a95694cb3cb254d818ec050d8"
+  },
+  {
+   "path": "DBExplorer/databasemodel.o",
+   "bytes": 9040,
+   "sha256": "4a58ae701a4276eff29deceece71bf7dbfc9429fca8d40d42001d2ab7813a5d3"
+  },
+  {
+   "path": "DBExplorer/idlparser.cpp",
+   "bytes": 3002,
+   "sha256": "5af5f05b51d9daaf9109025104393abdec93f77e48662a515396a4a43e165ad7"
+  },
+  {
+   "path": "DBExplorer/idlparser.h",
+   "bytes": 643,
+   "sha256": "30261809ba537c035da0d4143ec616b35ae4331227027e8b477c4c9cb1109203"
+  },
+  {
+   "path": "DBExplorer/inspectiondialog.cpp",
+   "bytes": 1482,
+   "sha256": "0ae104b9e901f778d77cb5a400667ad059114cbe3bb767b2628e34a04d8c07f2"
+  },
+  {
+   "path": "DBExplorer/inspectiondialog.h",
+   "bytes": 521,
+   "sha256": "e1ec9e5876d960939389fd6b68e8ddd021932e86a79e8e0ea6deefbf362e7418"
+  },
+  {
+   "path": "DBExplorer/inspectiondialog.ui",
+   "bytes": 2179,
+   "sha256": "a762db43276219e7d53cb4bda6050cbee3d7935d037d511c8c5d28b0ab269bda"
+  },
+  {
+   "path": "DBExplorer/main.cpp",
+   "bytes": 183,
+   "sha256": "449fcebe127e5378c536ac05212e1af8227c206e331925cd2cacdc93c14b8d11"
+  },
+  {
+   "path": "DBExplorer/main.o",
+   "bytes": 2240,
+   "sha256": "4c30b924d3171a497d484dfda118655858d66c9e51558c206582475053d5f7ff"
+  },
+  {
+   "path": "DBExplorer/mainwindow.cpp",
+   "bytes": 3276,
+   "sha256": "931a6d2a4b793fa3263ea228307f46d2d0a279d0675ce760bdedeba6dea7b7ab"
+  },
+  {
+   "path": "DBExplorer/mainwindow.h",
+   "bytes": 684,
+   "sha256": "588ff50d1118c86ea457f3141c4b57b44b5161afa6af118e35ff858abbf26794"
+  },
+  {
+   "path": "DBExplorer/mainwindow.o",
+   "bytes": 18640,
+   "sha256": "b7eab937dd8cacf74d36eeb03e157628b4110134408c6ee059856c803c922efe"
+  },
+  {
+   "path": "DBExplorer/mainwindow.ui",
+   "bytes": 2761,
+   "sha256": "9e77ecec1a2fe72c16cbc573d77b27e6483597f6b00d6d11e9580e03e306ef7d"
+  },
+  {
+   "path": "DBExplorer/moc_databasemodel.cpp",
+   "bytes": 2481,
+   "sha256": "9f15d23636020f78ce93c1ce3e53e083ed2797ee3de4860a37aca571cce29bbb"
+  },
+  {
+   "path": "DBExplorer/moc_databasemodel.o",
+   "bytes": 12840,
+   "sha256": "bc15d21f4c9742e4741a78145e7fcfa3c2e93affd5f17fc8d2f4c50791020be7"
+  },
+  {
+   "path": "DBExplorer/moc_inspectiondialog.cpp",
+   "bytes": 2496,
+   "sha256": "ffe0f2570612f4a18d0e7aeb002aca61ab6dcc1966c4b96f68cd9989e2ac1bbc"
+  },
+  {
+   "path": "DBExplorer/moc_mainwindow.cpp",
+   "bytes": 3186,
+   "sha256": "6e83b69026375986be0ca9d49b6a1dccd3c18f75c43bf5aefca73c747637f04c"
+  },
+  {
+   "path": "DBExplorer/moc_mainwindow.o",
+   "bytes": 10160,
+   "sha256": "e3750d857bee02789d51686c913e204452b9bec63d2cb3e3239c765dbfa6aa01"
+  },
+  {
+   "path": "DBExplorer/ui_inspectiondialog.h",
+   "bytes": 2646,
+   "sha256": "29225de8152ef8ca02a0235c6eb9ea5e660318657b2ce1637b0e63ae7a0f815d"
+  },
+  {
+   "path": "DBExplorer/valgrind.log",
+   "bytes": 5234813,
+   "sha256": "ed820320ff7a29ddbe6f6f8908274e3809f38e4645abeab304ff24ae545b8408"
+  },
+  {
+   "path": "DBExplorer/zcompression.cpp",
+   "bytes": 2981,
+   "sha256": "4c87165577d14b6717040145e55134a62ddcdb8002026f918266a87f061f9f04"
+  },
+  {
+   "path": "DBExplorer/zcompression.h",
+   "bytes": 342,
+   "sha256": "d903453b3d13ae7685bf72eb05e3eb0c3d2092f70b24a21776853d323c70d8d2"
+  },
+  {
+   "path": "SWGHeightCompiler/.cproject",
+   "bytes": 45979,
+   "sha256": "43985403542da138b8988c091f539080780d55e75ef07be2ab64825d0afb9c46"
+  },
+  {
+   "path": "SWGHeightCompiler/.project",
+   "bytes": 2173,
+   "sha256": "21a498f1bed44d3278c2e069c1345cd5467d092ac5ceb7ae99729d551c136985"
+  },
+  {
+   "path": "SWGHeightCompiler/.settings/org.eclipse.cdt.core.prefs",
+   "bytes": 273,
+   "sha256": "ac103bb9fb8af18c80a5fa858a0c40f291a3f22cde289929ab722931239830b8"
+  },
+  {
+   "path": "SWGHeightCompiler/COPYING",
+   "bytes": 496,
+   "sha256": "2de3e602c846af9d165fa9113f1ccc1286ff3757983b678625f0d0f442cd89da"
+  },
+  {
+   "path": "SWGHeightCompiler/main.cpp",
+   "bytes": 2257,
+   "sha256": "ab0d5912300bf4c400bdd5924e76471e561efb923e8fc21018324fe91f39aaa5"
+  },
+  {
+   "path": "SWGHeightCompiler/system.h",
+   "bytes": 1147,
+   "sha256": "89d244ee787f091c812f3a12ff16b6f3b6853cb3b1e78f4af127d9d7b83650e6"
+  },
+  {
+   "path": "SWGHeightDump/.cproject",
+   "bytes": 54237,
+   "sha256": "1ae43fa541b4ef7c44cc5461cb8c08e06b79bff7ae0fd6da2db8e49bfc5b973e"
+  },
+  {
+   "path": "SWGHeightDump/.project",
+   "bytes": 2163,
+   "sha256": "ed00ea25b6b3f160f30eb0d0276e06d5d945e2957d3ec54743b2f08d4566d663"
+  },
+  {
+   "path": "SWGHeightDump/.settings/org.eclipse.cdt.core.prefs",
+   "bytes": 273,
+   "sha256": "e5d8d36365940e06f0008aa8496e84c47b698e9642b06216e060803dea809729"
+  },
+  {
+   "path": "SWGHeightDump/COPYING",
+   "bytes": 496,
+   "sha256": "2de3e602c846af9d165fa9113f1ccc1286ff3757983b678625f0d0f442cd89da"
+  },
+  {
+   "path": "SWGHeightDump/Debug/pthreadGC2.dll",
+   "bytes": 60273,
+   "sha256": "73a2408b76114f77208a3e610ac6a65770e99652f9a96fca1440dcdf93f00385"
+  },
+  {
+   "path": "SWGHeightDump/README",
+   "bytes": 465,
+   "sha256": "02400d578edeff3cdaa673eebea00adae6a84ba482c5d053576fcbfc781c43d2"
+  },
+  {
+   "path": "SWGHeightDump/bin/SWGHeightDump.exe",
+   "bytes": 2420954,
+   "sha256": "e809f4825e5948ef16f4f09c273c1caf7669ed233ed666e671d7634e3b1178cd"
+  },
+  {
+   "path": "SWGHeightDump/bin/pthreadGC2.dll",
+   "bytes": 60273,
+   "sha256": "73a2408b76114f77208a3e610ac6a65770e99652f9a96fca1440dcdf93f00385"
+  },
+  {
+   "path": "SWGHeightDump/engine/Breakpoint.h",
+   "bytes": 440,
+   "sha256": "cc88998db45281e1075a7f0702c8fa2b15f7fe5a45d48519e31c0784a602dba5"
+  },
+  {
+   "path": "SWGHeightDump/engine/DebuggerEngine.cpp",
+   "bytes": 14551,
+   "sha256": "eefe4cd78d7a44c25a0fbc81a1979bbc291c0ae3f060dfe3549089c54fcc1fb5"
+  },
+  {
+   "path": "SWGHeightDump/engine/DebuggerEngine.h",
+   "bytes": 2705,
+   "sha256": "e1835c61c1e11cdcf909b5e4328a20e2d9ec48873e16accb6b6b3dd810029182"
+  },
+  {
+   "path": "SWGHeightDump/engine/classdiagram.dnx",
+   "bytes": 2111,
+   "sha256": "2461a0eec377eb555aeb93596fb8d46b04424fc299a438410c2a896948e51a4f"
+  },
+  {
+   "path": "SWGHeightDump/engine/system.h",
+   "bytes": 1204,
+   "sha256": "b46d9aae700b7a2a8f98cf3c0a569fe28a136fa77b4102a4c2933ec81ff1a24d"
+  },
+  {
+   "path": "SWGHeightDump/engine/thread/Mutex.h",
+   "bytes": 1375,
+   "sha256": "c71b4a0653df0264e114b299178ed5acc067fe7c40396045b7b1684e22906132"
+  },
+  {
+   "path": "SWGHeightDump/engine/thread/Thread.h",
+   "bytes": 956,
+   "sha256": "52df36b51e0930c7effaf880b2052d510d08cfc9ce73a8fa5aaf5807eb0b4b1f"
+  },
+  {
+   "path": "SWGHeightDump/inject.h",
+   "bytes": 5616,
+   "sha256": "3b8f84d8627d5946f15c127ba7eba2f390060f287a54e807f5c677a53a223c07"
+  },
+  {
+   "path": "SWGHeightDump/main.cpp",
+   "bytes": 4592,
+   "sha256": "0bedb556f96c422668379d7a2abaefb0f8a9c7bcc76c2edd375c85340065e9e9"
+  },
+  {
+   "path": "SWGHeightDump/user.cfg",
+   "bytes": 5333,
+   "sha256": "dfcba11a4354756c11f64645cdc1bbafadc9fae6d6689d79a43514ed5314eb28"
+  },
+  {
+   "path": "WorldSpawnerTool/.cproject",
+   "bytes": 7924,
+   "sha256": "252b438e9bf6ce8d1ccf880d383d26ba0b98e0b4ac893dd04d68b7946d0e7781"
+  },
+  {
+   "path": "WorldSpawnerTool/.project",
+   "bytes": 3034,
+   "sha256": "5edd36150c7d0a551827fce90e89ed3164b935a5fe0b5a8403bb3016750514e6"
+  },
+  {
+   "path": "WorldSpawnerTool/ApplicationSettings.h",
+   "bytes": 2165,
+   "sha256": "c8fac4651c046c18140e0d9cc9446619445e5ada36449918c705709c677c9acc"
+  },
+  {
+   "path": "WorldSpawnerTool/CreatureObject.cpp",
+   "bytes": 17542,
+   "sha256": "e6852a5c8374d386c1f3fd1116159463a6960cb696e242eefeacb69bf0462370"
+  },
+  {
+   "path": "WorldSpawnerTool/CreatureObject.h",
+   "bytes": 10150,
+   "sha256": "e44644bac2a3261630cc7e8b985d4da88db771cc1706c0bbc9eaf741d4e5609d"
+  },
+  {
+   "path": "WorldSpawnerTool/LuaParser.cpp",
+   "bytes": 2069,
+   "sha256": "5dbf126af9604e16bc0d61a2343decbe6321bc1bda0913038c98fe73ddc67f08"
+  },
+  {
+   "path": "WorldSpawnerTool/LuaParser.h",
+   "bytes": 776,
+   "sha256": "7da34d4ed1c59c56a24c7850f552cb6a5775fc5bd36be4c02a60d0232a1129ba"
+  },
+  {
+   "path": "WorldSpawnerTool/LuaSerializerHelper.cpp",
+   "bytes": 969,
+   "sha256": "4a87a25092df837ce1bccbc379a0a00a077eb407843fe3d7c0fb5fcbb01f190a"
+  },
+  {
+   "path": "WorldSpawnerTool/LuaSerializerHelper.h",
+   "bytes": 998,
+   "sha256": "82023b6ab6eebeed12ce55af3eb0c0e8629c3c2bb0baa7855da610dd4846f1f4"
+  },
+  {
+   "path": "WorldSpawnerTool/Makefile",
+   "bytes": 7384,
+   "sha256": "6c7ee1495e63c9617d4350f7abb945aeddac1a237523e68a21a80ddbc90df999"
+  },
+  {
+   "path": "WorldSpawnerTool/Makefile.Debug",
+   "bytes": 18174,
+   "sha256": "d62c3ac780c357aa252601153fdb295eabcab331648ff3938a1dd1f71d5e6309"
+  },
+  {
+   "path": "WorldSpawnerTool/Makefile.Release",
+   "bytes": 18644,
+   "sha256": "f5e0560105c60848aa9d2bb32076b1b8978bccc9420172084a741aab7538e202"
+  },
+  {
+   "path": "WorldSpawnerTool/Resources.qrc",
+   "bytes": 1408,
+   "sha256": "03efc2639ce3ed15b2b1bf8c6178e2de1b5a9955f4c6eed3549a3eeab9c33f3f"
+  },
+  {
+   "path": "WorldSpawnerTool/WorldSpawnerTool.pro",
+   "bytes": 5266,
+   "sha256": "a249736c640de8529c94675389322dedf2bf4d9d68959936eae4d75a775f760b"
+  },
+  {
+   "path": "WorldSpawnerTool/WorldSpawnerTool.pro.user",
+   "bytes": 23295,
+   "sha256": "8241d7bb771b4a7f8772d896f2e31a301ee360bb46cb7602de73f14de819809f"
+  },
+  {
+   "path": "WorldSpawnerTool/WorldSpawnerTool.pro.user.1.3",
+   "bytes": 10013,
+   "sha256": "f8d91bccdc91a6ff6961ef9079b46be9bb70fae8fcdcaefa0e58500d85a4901f"
+  },
+  {
+   "path": "WorldSpawnerTool/WorldSpawnerTool.pro.user.2.1pre1",
+   "bytes": 5328,
+   "sha256": "4a6fde878a39471e501fc07de749208590c472c73bdb7151dd037513192941bf"
+  },
+  {
+   "path": "WorldSpawnerTool/WorldSpawnerTool.pro.user.2.3pre1",
+   "bytes": 19506,
+   "sha256": "c8ee45a1419c5ebb26a295ae640ac740c9700a20a460cc88fe98bd4a846c3931"
+  },
+  {
+   "path": "WorldSpawnerTool/addlairtypetospawn.cpp",
+   "bytes": 1165,
+   "sha256": "22cad1f2adcf63c0850efbf9a9f74affb2db5afa5802466687219f77307cd8d7"
+  },
+  {
+   "path": "WorldSpawnerTool/addlairtypetospawn.h",
+   "bytes": 482,
+   "sha256": "a2e90d5680192c73db489617fb26b25918382a3b07b4b4ae9d6274b21f09030a"
+  },
+  {
+   "path": "WorldSpawnerTool/addlairtypetospawn.ui",
+   "bytes": 2031,
+   "sha256": "cd7d0faa443c60e9db1dce9b33d80a1d0311e3211895e51e46e97bbf3c902d7c"
+  },
+  {
+   "path": "WorldSpawnerTool/addlootgroupdialog.cpp",
+   "bytes": 1027,
+   "sha256": "d7f9fad037be140fef5792b18d76e3f9f3edb9e4ad8d6e7b5f791d5d2dc1b3ff"
+  },
+  {
+   "path": "WorldSpawnerTool/addlootgroupdialog.h",
+   "bytes": 516,
+   "sha256": "d1fe9c38813fc6ab8b317c357d4f0e663dc1288374cac82934149c875826c89e"
+  },
+  {
+   "path": "WorldSpawnerTool/addlootgroupdialog.ui",
+   "bytes": 3014,
+   "sha256": "2eb0dd6e317d7083ce392ea159d095e4511e51eea542f45ff92e73ad90345be2"
+  },
+  {
+   "path": "WorldSpawnerTool/badge.cpp",
+   "bytes": 3581,
+   "sha256": "878dc1690a5deeb54a6d139519650553cec1e598bca78e869e5b6ad150f75cd2"
+  },
+  {
+   "path": "WorldSpawnerTool/badge.h",
+   "bytes": 647,
+   "sha256": "622782a8b7af4953832090f95bed87cba27c29a7d3e77e65f75ee35c3f442939"
+  },
+  {
+   "path": "WorldSpawnerTool/chancelineedit.h",
+   "bytes": 255,
+   "sha256": "5fd181280040d91f26e2871deb12586dc7fc01c0813b6e0e123c02687ea7d1bd"
+  },
+  {
+   "path": "WorldSpawnerTool/cityregion.cpp",
+   "bytes": 302,
+   "sha256": "5e90f654d868facbe41ceaed63f57f240f8bb9a5131ea25d5b8feed1d39be350"
+  },
+  {
+   "path": "WorldSpawnerTool/cityregion.h",
+   "bytes": 175,
+   "sha256": "f7c268910d963d4e0d73065229cec07c38fe5d3217a2cf613ccf120b1695e685"
+  },
+  {
+   "path": "WorldSpawnerTool/clientregion.cpp",
+   "bytes": 539,
+   "sha256": "51ad33506638e955c6fb966fb8408823bba2e2f1ed8e52028edf3e7565bb3d7e"
+  },
+  {
+   "path": "WorldSpawnerTool/clientregion.h",
+   "bytes": 207,
+   "sha256": "c789bce278ea773b1d2e5089d394bcc275140e6d2f544ec6650445a98de7ee74"
+  },
+  {
+   "path": "WorldSpawnerTool/commands.cpp",
+   "bytes": 7140,
+   "sha256": "d864c3045025dedaa03d7bdda68da8e0e053674ed5d1edef8d2cdb67d0009c5d"
+  },
+  {
+   "path": "WorldSpawnerTool/commands.h",
+   "bytes": 2633,
+   "sha256": "0e5fb4f2cc5d9213392e34c35c011c4f340f6aa59d820916f3683cae77a803f4"
+  },
+  {
+   "path": "WorldSpawnerTool/connect.ui",
+   "bytes": 3184,
+   "sha256": "20ea88841c0cf0a73e1fdb585691bf2449262a71590b77f30ce0d767c9e81995"
+  },
+  {
+   "path": "WorldSpawnerTool/console.cpp",
+   "bytes": 323,
+   "sha256": "fdc167782f4f38c97cfb5b4eb01754a13928748031ece2b92085fc8f8e22ebbf"
+  },
+  {
+   "path": "WorldSpawnerTool/console.h",
+   "bytes": 374,
+   "sha256": "96fd29cd9ab05f6e3b3b35f472216f5358c86691787e089e9a91dac3a21588f7"
+  },
+  {
+   "path": "WorldSpawnerTool/console.ui",
+   "bytes": 601,
+   "sha256": "cdce35e0d7925d14ef442cd9da66c46aa0b82a854c996badfed9040d9d1ca35d"
+  },
+  {
+   "path": "WorldSpawnerTool/crccalculatordialog.cpp",
+   "bytes": 556,
+   "sha256": "317b84f066dc77f248885b4e64e4922fdd5a88d75551fb6742c5fec1aae5dae5"
+  },
+  {
+   "path": "WorldSpawnerTool/crccalculatordialog.h",
+   "bytes": 463,
+   "sha256": "9ba2db0067c5f2a8f584614304499a1a84eac12b8bb7592794be39eb2a8a3399"
+  },
+  {
+   "path": "WorldSpawnerTool/crccalculatordialog.ui",
+   "bytes": 2104,
+   "sha256": "2daae01ae57f50d2c48b24f609257f54fb698fca8f20748bcc10bc05b50d3555"
+  },
+  {
+   "path": "WorldSpawnerTool/createnewlootgroup.cpp",
+   "bytes": 1168,
+   "sha256": "fd5fed5656f464979e9e54de57542a9bab44f52c57ed271b4929a7f2dd7f8cc8"
+  },
+  {
+   "path": "WorldSpawnerTool/createnewlootgroup.h",
+   "bytes": 562,
+   "sha256": "4ecf82821fd5580aa71f0ec5abbae22c722f0bcb10a3e6f8b06543d731711628"
+  },
+  {
+   "path": "WorldSpawnerTool/createnewlootgroup.ui",
+   "bytes": 1802,
+   "sha256": "dddb10f05e62e0d8b0f9dd8dbae8d819e2168f510161444ed48ef95c79a94005"
+  },
+  {
+   "path": "WorldSpawnerTool/creature.h",
+   "bytes": 99,
+   "sha256": "bd751d3b2882e1cb7a8ba8df1c60ad09baccd574ef2eb83fc93e4a3a8b24ae7a"
+  },
+  {
+   "path": "WorldSpawnerTool/creaturelootsimulator.cpp",
+   "bytes": 306,
+   "sha256": "9dff12ae0e62e3de005e834bb9f366ceb96fa2809042e63abbf15335043d21b3"
+  },
+  {
+   "path": "WorldSpawnerTool/creaturelootsimulator.h",
+   "bytes": 401,
+   "sha256": "40d7f3027459703b22b56f763c96e0c56d0485aad4d95d1724cff25402c828fc"
+  },
+  {
+   "path": "WorldSpawnerTool/creaturelootsimulator.ui",
+   "bytes": 1862,
+   "sha256": "8f8370def36c83134df4b69aa6df1a6f931ca9152695f6278616751aaf35f71d"
+  },
+  {
+   "path": "WorldSpawnerTool/creaturelootsimulator.ui.autosave",
+   "bytes": 5894,
+   "sha256": "2dfa4c18c9a72b3951b365d9285d81f1d395393bc8487d44d30c7bf0a5ac9907"
+  },
+  {
+   "path": "WorldSpawnerTool/creatureluamanager.cpp",
+   "bytes": 4485,
+   "sha256": "b3cf1d0a32474d2fc85eba58bea673d6cf28f3c6366e315131e988752332adfb"
+  },
+  {
+   "path": "WorldSpawnerTool/creatureluamanager.h",
+   "bytes": 689,
+   "sha256": "d545eebb70635d165788cc120b8417e5e0246e201edea2d6b173dd863e013261"
+  },
+  {
+   "path": "WorldSpawnerTool/creaturemanager.cpp",
+   "bytes": 23235,
+   "sha256": "a6a4fd6061d0a7b22a8672ffed894b64e6138f38afac3481698394bdffd9a16f"
+  },
+  {
+   "path": "WorldSpawnerTool/creaturemanager.h",
+   "bytes": 1994,
+   "sha256": "c9835056e95053934747fadc5daa2bea1c13d66beb76f1b02b0dc868dd40dd49"
+  },
+  {
+   "path": "WorldSpawnerTool/creaturemanager.ui",
+   "bytes": 51361,
+   "sha256": "5c3a48c1064b2683dcf6407d1b62f39bdd07a7845b4da60bce3e5060fb12c13f"
+  },
+  {
+   "path": "WorldSpawnerTool/databaseconnection.cpp",
+   "bytes": 1826,
+   "sha256": "1ed093e012ac665a56866fa21e01dc230f2b0ad2e524d155a374d9038501858b"
+  },
+  {
+   "path": "WorldSpawnerTool/databaseconnection.h",
+   "bytes": 572,
+   "sha256": "11e4dd40a1a38ea60600c780b0d7f82202fe1934721923abec54121a4b7be103"
+  },
+  {
+   "path": "WorldSpawnerTool/datamanager.cpp",
+   "bytes": 2164,
+   "sha256": "f2468ebfd51efb2b4a8aa496ed8b9699fa577e721671215cb96c11873be7ac2d"
+  },
+  {
+   "path": "WorldSpawnerTool/datamanager.h",
+   "bytes": 1099,
+   "sha256": "f9e529bc42069a4d308510e666984557dfe17858b3e3833f940305f86511644e"
+  },
+  {
+   "path": "WorldSpawnerTool/dynamicspawnarea.cpp",
+   "bytes": 135,
+   "sha256": "fe3b19bd1d08c0fc4fc1cf81d875787ef158317543e34f2c32ffd29feb355d67"
+  },
+  {
+   "path": "WorldSpawnerTool/dynamicspawnarea.h",
+   "bytes": 312,
+   "sha256": "ea2b54ba6c1a8d63858f4bdc1452198a9cabc458dc0a918d91d420474401271c"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/AppearanceRedirect.h",
+   "bytes": 695,
+   "sha256": "914825a361672102101d720cceb209c1ec17f97645f5ab089e980f9aa3fd1435"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/AppearanceTemplate.h",
+   "bytes": 553,
+   "sha256": "c64d7d8f78ed46f6a2c1460881781fc71e0519c1424cdf4699752f761b354eb2"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/CMakeLists.txt",
+   "bytes": 852,
+   "sha256": "7dfb05f0479814f2a13786b0394f41df3eec988e4ffdfeca3e82be72d50ca225"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/ComponentAppearanceTemplate.h",
+   "bytes": 1646,
+   "sha256": "0f542a2fa432b443cb236d08d0b79c4a8a29820d23423ee13f4969a95de76be8"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/DetailAppearanceTemplate.cpp",
+   "bytes": 1553,
+   "sha256": "02ef9e07590b3fe245220fb1dc80d0613f4f22625c9a34722709203f4238fe10"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/DetailAppearanceTemplate.h",
+   "bytes": 594,
+   "sha256": "18e5fd48ad10724aebb3acebbedb9de529708ac63d300029444c017f6aaccfd3"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/FindBerkeley.cmake",
+   "bytes": 909,
+   "sha256": "70f08b2596976a5ac33560f64e346361f10a3a75446c4cbb4cd8e0977f241d56"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/FindMySql.cmake",
+   "bytes": 1349,
+   "sha256": "d07adf2606f4db364c525839bbd228310d1617ae6a8666046a1345dc141f6154"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/FloorMesh.cpp",
+   "bytes": 7348,
+   "sha256": "743dff3fea3b5b194849e73e89cfbe4e4dfc2778287d57c98bf0a733ac20165f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/FloorMesh.h",
+   "bytes": 4634,
+   "sha256": "1c3de5b733cc0d714754530efe0c44f79213098dc113dbeb074397d79cb48eb9"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/IffTemplate.h",
+   "bytes": 424,
+   "sha256": "e267782ed5e4d75056f2791f2c2f796927b0e8adbd30aad89818eba8821b9c3d"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/MeshAppearanceTemplate.cpp",
+   "bytes": 4767,
+   "sha256": "0934782c80f53470328dbfbc3d1a31c0f2f2b67c17e47f455c02676a1f067183"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/MeshAppearanceTemplate.h",
+   "bytes": 2397,
+   "sha256": "d5171340378202c135989f09a68889d184536e33284f84650f2866d92a3244c1"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/PathGraph.cpp",
+   "bytes": 3661,
+   "sha256": "4da65ee2039e89cbb3e52555479b08963b746399fc0457de3d0b9c80afa4f3bf"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/PathGraph.h",
+   "bytes": 1870,
+   "sha256": "fa9381ca76759fba5e567a27ab3c1f0cae368c2a792ff1f071569fddf701765a"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/PathNode.h",
+   "bytes": 1674,
+   "sha256": "13a53df75fd2f5ea9f55e28af4787e0144b51b4942d9868cb5fc2f12d098166f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/PortalLayout.cpp",
+   "bytes": 5482,
+   "sha256": "98533fdbd33bcc00259434513a70beed25377a89c86c97fcbaf1e1f43da8328f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/PortalLayout.h",
+   "bytes": 1569,
+   "sha256": "c62522ea0d5d1b6932477ff9d8d75d1f60b6738b90f6bb3aeaea45d5e9745d10"
+  },
+  {
+   "path": "WorldSpawnerTool/external/appearance/src/TemplateData.h",
+   "bytes": 293,
+   "sha256": "6f3bc75085b32f6108cb2358e30061ee528c51f6ba3726992fdc76dd71cd586f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/README.txt",
+   "bytes": 1086,
+   "sha256": "e485dc4873c239dc3f0dd35f2a58372139d8ae927b11eb89e8d11a2895cc3bdf"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/docs/cmp_format.html",
+   "bytes": 1850,
+   "sha256": "ec2d8e45bf217f49ced3612ecd81c68bd3c669d0c812d0ffc2828f5402440a46"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/docs/howto-building-interiors.txt",
+   "bytes": 3932,
+   "sha256": "9afeea880516acb47fd198e3116c7a3e0c0051331e821faadea340b6ab1d007b"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/docs/howto-exteriors.txt",
+   "bytes": 3693,
+   "sha256": "e4eee0619cecad0bb58aa532a8bda05bb0f4dc943e614298978749343d6b572e"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/docs/iff_format.html",
+   "bytes": 2084,
+   "sha256": "13ceb263304bffd2679d94bf96aaa2a4c17959d16f3b9a0c764bcc0472c7bf02"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/docs/lod_format.html",
+   "bytes": 3514,
+   "sha256": "5233560d5e5b27e69fe36672841da2d889d15d798cc8f58ca6231126e5870bbe"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/docs/msh_format.html",
+   "bytes": 10164,
+   "sha256": "e2feddcd4e540d9709f50bcaae28072e8722779e2488081db76395fbf3216a8f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/docs/skmg_format.html",
+   "bytes": 3456,
+   "sha256": "1c70f6e5e31249fe2abcd6bf6a50ea3cc0f3c819a50cfab09f34448ca764ddfd"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/docs/sktm_format.html",
+   "bytes": 2520,
+   "sha256": "1e3bd7bb2c546beb68a99d36d734ba376bd96fb3451fde9272ea0740cf591847"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/gpl.txt",
+   "bytes": 18326,
+   "sha256": "9f2e250993c6206fac643824e05e5a0d7d3e0895d9e09a5ce4b12bc2610afc11"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/apt.hpp",
+   "bytes": 1535,
+   "sha256": "917344eb79b479ad9f54e8ce787d4a4786fbfd85c44e0cc7585fb2dd9edf5856"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/base.hpp",
+   "bytes": 3980,
+   "sha256": "f2109c0461dd0a269678c9136a412e9915dc99ee0543e92d2d9af40a608d70ca"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/box.hpp",
+   "bytes": 1505,
+   "sha256": "ed5763e798efb744cda0b89c93df5fa456ef21c33e6054ff180dd2676b5ae456"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/cach.hpp",
+   "bytes": 1508,
+   "sha256": "1b1a8a68e63407d1a012168b7e0910010b14405052b9450720a8574d18b51512"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/cclt.hpp",
+   "bytes": 1431,
+   "sha256": "47f6111abec6c51f09e9c88a84b38eaae685ede2d0d92d361208f8bf32e624db"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/cell.hpp",
+   "bytes": 2252,
+   "sha256": "f4dcbf127bc2a1b25936084c1bc4943a11cf90f0377b962c8165c35a7094aacb"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/ckat.hpp",
+   "bytes": 2275,
+   "sha256": "92e3f218178dca82fdc164f4a91a6a48f1f30f7ca058aba043dae3ff5caa47a0"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/cldf.hpp",
+   "bytes": 1610,
+   "sha256": "866461dc4210b33796eccf00410058861ee21d9110ec11f9a3b1915be98b27b9"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/cmp.hpp",
+   "bytes": 2580,
+   "sha256": "51e57b5c073049005091f34879ec2c53e2d9e954f5ce8616de70f8f65c21e266"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/cshd.hpp",
+   "bytes": 1623,
+   "sha256": "c954653bbe8ecebcd095508b93ef536abfc7b224107ed28a263d74aad42fd06f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/cstb.hpp",
+   "bytes": 1709,
+   "sha256": "d37aae14bb89d002906c416473ce5a5813556585930d7a1ea8f869e9b8138595"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/dtii.hpp",
+   "bytes": 1683,
+   "sha256": "4ae831efc85cdc9dc8c9a9979ac57ef61b1b1c1382f6151c03f84ea297f30518"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/eft.hpp",
+   "bytes": 2027,
+   "sha256": "fde66696aaf4f1376b7f394e629a5781983a0553eb6d2abdae1f3046d3012f95"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/flor.hpp",
+   "bytes": 1521,
+   "sha256": "4313bacf57d4d28cfbc9e1d23d755db62d2355fab2300cd3a608a2614332dae3"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/foot.hpp",
+   "bytes": 1607,
+   "sha256": "5db93aaf81c4d0b0b98db2717d5ac764f99b3a9b31802e9a66d72523a9afa84b"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/ilf.hpp",
+   "bytes": 2007,
+   "sha256": "dc4aa0066c664140c57efc6ef1188877fd24c2f1ffca977d61ff0677d2402e16"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/lod.hpp",
+   "bytes": 2656,
+   "sha256": "e2a1a18cc9e6ba34a774027c114482532c71e2a93695bb2f2b855620d66619b1"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/matrix3.hpp",
+   "bytes": 1909,
+   "sha256": "f10dccacb3b73e0130c48782297f77641fda8ebea2a187fbbdc7f1c788cbde92"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/mlod.hpp",
+   "bytes": 1745,
+   "sha256": "6b454f94915ca1562875d5bf1c44ce01ad1eb47b42cb274bc9e60761205a8b25"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/model.hpp",
+   "bytes": 2959,
+   "sha256": "c7171ff667394c89fbd7bc1498aff339481df230d7502a62c5276af03e65f96d"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/msh.hpp",
+   "bytes": 3893,
+   "sha256": "1064cd62e7818a461a252333df8cf8ea8320e900f2026d92f619fb937b8cdf2e"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/mshVertex.hpp",
+   "bytes": 2376,
+   "sha256": "faacda144c3deed98e8c92b796a6ee0b2195b0a7b2a2108e6ffe5468c3c81d09"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/mshVertexData.hpp",
+   "bytes": 1841,
+   "sha256": "db473c5628e3f96271968d73fded329ee3a6fb3ade1140cf784ef59e990b19f0"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/mshVertexIndex.hpp",
+   "bytes": 2311,
+   "sha256": "19764341b6139fc463aa29600cf6b88833bb8a567cf971e4f2f967924ad1f2ef"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/peft.hpp",
+   "bytes": 1971,
+   "sha256": "06ea1249590626cb675250916dbe978cbfce8345921c1902ad7fb6cf83caa030"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/portal.hpp",
+   "bytes": 2822,
+   "sha256": "e4776e184506b43bc0b7e829a0e74503ef944b98d543543561a48cd4bcabe155"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/prto.hpp",
+   "bytes": 2780,
+   "sha256": "74d9ba04ae99201557c018fc235c41d3a004b6c3d71a70c68b22085c53fcdf16"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/quat.hpp",
+   "bytes": 2357,
+   "sha256": "d78d7eb8807de47c6cc63e9487b3e635dca7c36e54ce6333b3e5e596ba482175"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/sbot.hpp",
+   "bytes": 1755,
+   "sha256": "9707b0daa56de80abbf07bb3a601ed9479a61d9ddeffbc2875c14cb2063b7ec2"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/scot.hpp",
+   "bytes": 1763,
+   "sha256": "f8aae2703ec36f751d56034cec1684d90e67bbd10e642ed4e9d890d3163237f6"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/sd2d.hpp",
+   "bytes": 1640,
+   "sha256": "8ddc8d2c9acf67c882be30213b831ef1e41ad4b694a86feb19ae31a6acb330d0"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/sd3d.hpp",
+   "bytes": 1403,
+   "sha256": "e944e10a4a68161c5ed03f872d929252e46c10203411bdcc17e3b475addfd13d"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/shot.hpp",
+   "bytes": 3332,
+   "sha256": "9b5be2c6637c36b5ba57a490fa842273c423983e5d0a00026ac3e16b0204e4e7"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/sht.hpp",
+   "bytes": 3871,
+   "sha256": "33f2446b1373936ba12617abc091186938f2c2d01b2e4c77c5cc375adfc53ed8"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/skmg.hpp",
+   "bytes": 6103,
+   "sha256": "c74c18e4686915ade6470ad1a6607f5c4f005736cdb225e2a4dba76d4d98eb37"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/sktm.hpp",
+   "bytes": 3925,
+   "sha256": "0b7f438300c845f8e18dce8d59c446fe19c545635aaf0e2a48bc1d1ea18d72c5"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/slod.hpp",
+   "bytes": 1714,
+   "sha256": "30f15e245c73cf70d86e48f0c87776906f19164ff8b450caa87a338212186887"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/smat.hpp",
+   "bytes": 1822,
+   "sha256": "d08d1e4026527f3ae8e2bd06b3cc96a646ef8787e17e57ba2c1ce4514f864519"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/spam.hpp",
+   "bytes": 1714,
+   "sha256": "85eba621c499f7198407f2689e2495521fd11cf1d9707b86a637d76e57cc8c73"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/stat.hpp",
+   "bytes": 1521,
+   "sha256": "d2814e4b7cc6505717ab097a0df22ca9902cbc99ed9ede1c380cd619c6807677"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/ster.hpp",
+   "bytes": 1477,
+   "sha256": "6fe582db232d15fb8c9b029ddc6b3d7d31885459e4cd42227207d294b87f7250"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/stot.hpp",
+   "bytes": 1561,
+   "sha256": "fdeee9e5f828a85fe633df0324d5dbe492038d5ee2157d7ff3875e00f64e3484"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/str.hpp",
+   "bytes": 1380,
+   "sha256": "8a4f0b9995804fc0583aba782b4562947ce8f5d0395372b2977f79a642d4665c"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/swts.hpp",
+   "bytes": 2074,
+   "sha256": "3626e9635d595f60510b0bd7fdbeb41fb34cc64f782187027194a8ac3dc52b2a"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/trn.hpp",
+   "bytes": 4696,
+   "sha256": "d60035beda47a0b7bf49e7ebaf953684a203e149811563fb7ea1b7ecfec548fa"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/trnAffector.hpp",
+   "bytes": 10473,
+   "sha256": "9c443d749983328cbcfa96aefaeb2dc8384813a0a9f6dee9342bb00d546d4423"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/trnBoundary.hpp",
+   "bytes": 3398,
+   "sha256": "3ca0df4a9822c827a8562e4bba48c7e81d877ad64ae3e2c16e8fa88b3a881370"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/trnLayer.hpp",
+   "bytes": 2071,
+   "sha256": "cd45f778db3542661122c4fd2cd7a658c5f50659a122e83db671947f086ee68b"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/vector3.hpp",
+   "bytes": 2180,
+   "sha256": "44c22ccee20a8f7327f1f6c1f222e0d9622d3803033b7c3b9c4cd548e6985ad4"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/include/meshLib/ws.hpp",
+   "bytes": 3552,
+   "sha256": "5222910b11415d2e3410e0de946d700ba2db88c7ab81b23bc61e4d52700b2bc2"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/mswindows/vs2008/meshlib/iffDump/iffDump.vcproj",
+   "bytes": 4071,
+   "sha256": "f015391bce95bb36de211fd9fc3a983b8dfc102234e5c1591d0c15d058d03d98"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/mswindows/vs2008/meshlib/meshlib.ncb",
+   "bytes": 5286912,
+   "sha256": "69a17ea578d88071ac2bd3966bc47e57a74b4c56f31ae42751027c532d45fbee"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/mswindows/vs2008/meshlib/meshlib.sln",
+   "bytes": 2120,
+   "sha256": "deae73c774720f2f4e02dd6bf4e80159eef962de3afc8c61ac6c0f5f6c75b13d"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/mswindows/vs2008/meshlib/meshlib.suo",
+   "bytes": 68608,
+   "sha256": "7dae7f1a0fa775a9b22d66cbd42489c10ad45ff84633aed2ad0dccf87b0b8fab"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/mswindows/vs2008/meshlib/meshlib/meshlib.vcproj",
+   "bytes": 11476,
+   "sha256": "8940699253713bdcb25d17dbdbe2ec22962e9f7308d68dc699e0e7067e9ef90c"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/mswindows/vs2008/meshlib/meshlib/meshlib.vcproj.TheAnswer-PC.TheAnswer.user",
+   "bytes": 1401,
+   "sha256": "8d5ce1c099cc2870c27c88fe3423b7001bc24b0abcc0db195fd910ba05ec41f0"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/mswindows/vs2008/meshlib/readSWG/readSWG.vcproj",
+   "bytes": 4088,
+   "sha256": "65d747411bb12b077ea122644c38e74f397c8de8d94e77bb3d39a8ab0cbb7f17"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/mswindows/vs2008/meshlib/readSWG/readSWG.vcproj.TheAnswer-PC.TheAnswer.user",
+   "bytes": 1427,
+   "sha256": "b79dc2dc2db5b7573fd252de4b6b297b405549bcb68339753957f57cd722c116"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/mswindows/vs2008/meshlib/readTRN/readTRN.vcproj",
+   "bytes": 4039,
+   "sha256": "a1a821611c7ac7ed488bd0d8904294364981e9e72f01092dfb761d8a1523357f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/mswindows/vs2008/meshlib/readTRN/readTRN.vcproj.TheAnswer-PC.TheAnswer.user",
+   "bytes": 1427,
+   "sha256": "b79dc2dc2db5b7573fd252de4b6b297b405549bcb68339753957f57cd722c116"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/Makefile",
+   "bytes": 6418,
+   "sha256": "4a0ad8e3c4c419cb0a2fac6d7add7c1acb9dad9fe1d6fbef7992fc6baa7a0eb5"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/apt.cpp",
+   "bytes": 3089,
+   "sha256": "5fa8e581af65a679f474388ae40d8061f5c8426e31c3bba3a1095e6b7a959858"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/base.cpp",
+   "bytes": 8607,
+   "sha256": "03a717452f8b710e9d1b99c3b57dac4fd09c9f27f2acf7bdaddf35112409089b"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/box.cpp",
+   "bytes": 2778,
+   "sha256": "a6476de1f51a1187d538dad510155ae734baae1d3c32f7d2a55cd951a04e2379"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/cach.cpp",
+   "bytes": 2117,
+   "sha256": "3e652bea26a21007cf3a5bdf34059ea1f084f888c167d2c02e63033f0a4f0c2f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/cclt.cpp",
+   "bytes": 2459,
+   "sha256": "58429c823ee0d21ee4f8bf1ee95cfb36681344049b71b3bbc7de1eb15627fe84"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/ckat.cpp",
+   "bytes": 16863,
+   "sha256": "1b3d7faa66bb88f04ee5639b9bed6d8ae4eb5f93d7436435b395699b3f6e1a06"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/cldf.cpp",
+   "bytes": 3121,
+   "sha256": "c048c00c3888d808010cb53a4790ccb56153d849661ba13c01867f0e5303466d"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/cmp.cpp",
+   "bytes": 5840,
+   "sha256": "33f7229ba2c1e69ec4c6cd48d6ce87763ad59981a51fa2efb0edeacea50f1d17"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/cshd.cpp",
+   "bytes": 6541,
+   "sha256": "afb5d09aa8cacfda287092714d9f5fb7223303f04297c198dc52c838824a43ca"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/cstb.cpp",
+   "bytes": 5928,
+   "sha256": "8df4fba88356ce6a160595df5f643bb76063ea9f81ff4118220810f5acb5520e"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/dtii.cpp",
+   "bytes": 6522,
+   "sha256": "c59f74bccc32b83ac1e098b73f11da7725c553a059ef5411136289db22a918d1"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/eft.cpp",
+   "bytes": 14441,
+   "sha256": "b00727925c64b067e3e74ab73ff5f1ae9435ee9d8edd8d1bb8c4e6d83da3b6b7"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/flor.cpp",
+   "bytes": 5235,
+   "sha256": "d6353023d1d68bdd4019510cff3100fa5106445303e2c984e141e9c34364a5a1"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/foot.cpp",
+   "bytes": 4273,
+   "sha256": "bc4175350ff7531a219ada89fffd6dcb258ff7ce1286540f9205c86fbba92785"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/iffDump.cpp",
+   "bytes": 42716,
+   "sha256": "747d3bb67601bcb4c57aa95793d53b3a4b39ccbaf9c63064073210ad794ad681"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/ilf.cpp",
+   "bytes": 6099,
+   "sha256": "fb88fb97ae2f8f9ae93fb3e92be867ba70c2820518fddaf37def3ec034f5d49f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/lod.cpp",
+   "bytes": 10261,
+   "sha256": "0a54fa1412edcfcf0495e2b99c42f9594c95c864b692ff59e1e3c1f14ee9ac54"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/mlod.cpp",
+   "bytes": 3086,
+   "sha256": "8ac2ef6792938856f5fede6e06b41f1d24e7588f58c96cef8b7d4854ca787394"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/model.cpp",
+   "bytes": 20949,
+   "sha256": "200bb32ea9ea3e978f0cdae30f180ee30d81bf6edfd3f0b053edc2fac8602e2a"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/msh.cpp",
+   "bytes": 18400,
+   "sha256": "0b6e9a6af2989324368f52f7262147b2e644f4c6716abbd08264044c5782f711"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/mshVertex.cpp",
+   "bytes": 10646,
+   "sha256": "3af68d89c84ac304ecf7597a4d0948fed78f95f7aef34e9164691f672c1387ea"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/mshVertexData.cpp",
+   "bytes": 1991,
+   "sha256": "71b8195f8369ef058a21195ab164b49a3d06284e23af7c3fb0fecff12218940e"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/mshVertexIndex.cpp",
+   "bytes": 2796,
+   "sha256": "0dfc0b45fdc012223bc35ef148f5d8c0fefa702bcd41a413e7fb2849b1d984e1"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/peft.cpp",
+   "bytes": 18942,
+   "sha256": "f99a2a14bc24ed1c8b850352fe42e8a94b1345a152641a4fc297a66cee149221"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/prto.cpp",
+   "bytes": 21776,
+   "sha256": "79877a8294f99e76c7b5678e2108d519c4ee237e12e11fa1bd224ef8261a6dae"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/readLOD.cpp",
+   "bytes": 1443,
+   "sha256": "5e7fb137fe1edfa7264097dc40d9445d6e97c4ac008a1927e38abbb8dbebbd46"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/readMSH.cpp",
+   "bytes": 1581,
+   "sha256": "c22e0585e757803ea5fd844e21e55545b399b4db6068820c4deaddc4fe7843d9"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/readSWG.cpp",
+   "bytes": 7059,
+   "sha256": "8629a0e27886788cb4248de30bf5c689d13909bc19e9c926bde8eddcc3b19bd4"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/readTRN.cpp",
+   "bytes": 1476,
+   "sha256": "5bc304ae1f82dae386f6c79321e1dd7fe83ec42bc0ae50fbb85e88551fb902b6"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/sbot.cpp",
+   "bytes": 3953,
+   "sha256": "6443a613568fc1bd3e3f1aafb082e0a46abeebc075abf85a0a256f4c872f42f1"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/scot.cpp",
+   "bytes": 4191,
+   "sha256": "eec8a14a192c91c3f2c45ea547d0bbb03905be48f2c9cb5a1192e2fa7873778d"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/sd2d.cpp",
+   "bytes": 3399,
+   "sha256": "fe83317314858393e25a3c7b0a5487a096fcc8301ec072bd6397cbc602d62930"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/sd3d.cpp",
+   "bytes": 2450,
+   "sha256": "02829092177ec8b75db4c64194fcdd913c8f16e5577b4874932f8325fda8d3b1"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/shot.cpp",
+   "bytes": 11955,
+   "sha256": "fe83f5b0fd6e3bf88722fed570a6cdd07efc3cf9b1a9843ac3e5442a4ff4ee22"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/sht.cpp",
+   "bytes": 19885,
+   "sha256": "7a489ccdede83219a69982960dd59ea2321d108e13a0d6962104fcab42137567"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/skmg.cpp",
+   "bytes": 38761,
+   "sha256": "0cfddf00062305fec6118348266a37ee9c38f867017907a6ef4add5a92f8347f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/sktm.cpp",
+   "bytes": 11735,
+   "sha256": "8ad3947d59318c21f2bddfd0ffbfc9ce59f0624ab45f2769c9aad87fb1d00cde"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/slod.cpp",
+   "bytes": 2988,
+   "sha256": "8099efb3091edabde881c39f4a2f10134be84f381cfe3895fd68ff0e6555b783"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/smat.cpp",
+   "bytes": 8737,
+   "sha256": "2548d92928b7397a70af4f2940dbbf4cb3d77473a8dc29812d594a79be228adb"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/spam.cpp",
+   "bytes": 6873,
+   "sha256": "c45c11db01390c4eb77d0d43a1e93849de387677e6e9bd641825a98e258a7e38"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/stat.cpp",
+   "bytes": 2455,
+   "sha256": "d4c76b8d04a9c26b2c63a518efa0a09827baa198a0f832f5d93a85e45ae2c82f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/ster.cpp",
+   "bytes": 4380,
+   "sha256": "fb877d392da4d06e6b1c0b3be30a074d3257c5f79f4790b45479f55f3121cc57"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/stot.cpp",
+   "bytes": 5299,
+   "sha256": "e36b71804ef27544d47c6cb7d1d1973c6c5cac258e439f39168b5355095651f5"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/str.cpp",
+   "bytes": 4346,
+   "sha256": "74ba063c9ef0bcd57326530fd735890454078a7bca81dff78bd02b14a67b0c16"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/swts.cpp",
+   "bytes": 7263,
+   "sha256": "88fb0b7bb50038109a5e866828819a2d0808852c2c66ca6c51fd84517b01d7e7"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/trn.cpp",
+   "bytes": 33739,
+   "sha256": "65aeb9e8caedc50d8f8d945c0b3611b892b04d7eb09aab79086b64a08e038ff6"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/trnAffector.cpp",
+   "bytes": 41314,
+   "sha256": "4d0b866ef56e6e44e5f2651275aa06ad8abf02ed78a372e85242b3432983d987"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/trnBoundary.cpp",
+   "bytes": 11765,
+   "sha256": "ec8629dd8d9fd7c6a8a095212b1dc5c21c6a96d87a9722b18cdbb4deea05b7f1"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/trnLayer.cpp",
+   "bytes": 13451,
+   "sha256": "f8a0d8b860465d5cc949e1b86504db1ba1cc3a4eb7bf250e8111612fdb2f41bd"
+  },
+  {
+   "path": "WorldSpawnerTool/external/meshLib/src/ws.cpp",
+   "bytes": 15767,
+   "sha256": "d6ede9bb6dea10298aa0aaae991cd75fc819bdcf2f8d78b99d5ca634e2bc39cc"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/cmake/Modules/FindBerkeley.cmake",
+   "bytes": 909,
+   "sha256": "70f08b2596976a5ac33560f64e346361f10a3a75446c4cbb4cd8e0977f241d56"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/cmake/Modules/FindMySql.cmake",
+   "bytes": 1349,
+   "sha256": "d07adf2606f4db364c525839bbd228310d1617ae6a8666046a1345dc141f6154"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/CMakeLists.txt",
+   "bytes": 787,
+   "sha256": "8174415b5232012bbda2603a4d0a8a7a284e67a985e3806d584ff7d83d9f1c0d"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/EnvironmentData.h",
+   "bytes": 744,
+   "sha256": "3926d61b16a21b15099db5e2378333189ee5d3071378fe5461624598dcde1bb6"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/EnvironmentGroup.h",
+   "bytes": 1143,
+   "sha256": "ea7711ecfb034c35e25916bd3b7460e32c91af780b6e216107fc263f4129baee"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/FindBerkeley.cmake",
+   "bytes": 909,
+   "sha256": "70f08b2596976a5ac33560f64e346361f10a3a75446c4cbb4cd8e0977f241d56"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/FindMySql.cmake",
+   "bytes": 1349,
+   "sha256": "d07adf2606f4db364c525839bbd228310d1617ae6a8666046a1345dc141f6154"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/FloraFamily.h",
+   "bytes": 1600,
+   "sha256": "218ba2d67661afad3287c6c065016b972665f9abc768fc655d2766baf83beb4d"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/FloraGroup.h",
+   "bytes": 1066,
+   "sha256": "fe9311d4703f32e6081af9187b5e5afd7d08462b5327f56e28e0ff8eeeecdcce"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/LayersGroup.h",
+   "bytes": 947,
+   "sha256": "7a4c825dfa8366d9267071a47180c68db09e0ed0e3501060863d9e7a35d4e5b4"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/MapFamily.h",
+   "bytes": 720,
+   "sha256": "f60e057ae0d731cc18cd4817b472ee59ae721249a9c6d29d6f9cfdbe35d1244d"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/MapFractal.cpp",
+   "bytes": 6335,
+   "sha256": "b36c151d62aa4f6d55916b4244ab16946988064ef74f1684281b84deb584d19b"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/MapFractal.h",
+   "bytes": 2423,
+   "sha256": "fa61d361577bd634622bd56f63406949a1c0ae4135606a61ca664eafb8cb43b2"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/MapGroup.h",
+   "bytes": 1305,
+   "sha256": "5a8132663a72ab6cf5157e6f7ea69a84c641bbb4866d6f91e2ee5ded2e5f4d15"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/PerlinNoise.h",
+   "bytes": 2687,
+   "sha256": "d64b9f56457405cbc73233be8634a80bef3129c6da39230d146b6a9bb1ccf8f5"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/ProceduralTerrainAppearance.cpp",
+   "bytes": 12072,
+   "sha256": "e247565d05962ec6d107df9f9ea338e463635fd82af7eb4f932e466e72da4415"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/ProceduralTerrainAppearance.h",
+   "bytes": 3476,
+   "sha256": "099dc2475b57a44d9a0a6b416a5be2dcd40dbde0062c3b6a5690f995580d2451"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/RadialFamily.h",
+   "bytes": 1555,
+   "sha256": "d16f0048cf252179d1dcae04aaaccc4798f4105064e26d2a048057a730f8d36a"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/RadialGroup.h",
+   "bytes": 1079,
+   "sha256": "cac514a3ea77c83f105318ab120f9386357299112020f45acb24fe08967517ac"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/Random.h",
+   "bytes": 1215,
+   "sha256": "5a34f59275a68793903075c6ce177bf611110498564d2bbf088941f6c3176965"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/RegionNames.h",
+   "bytes": 3663,
+   "sha256": "8de530e3d2aff8525091de282482a16e4759656c19d27d04be53b876b422bf8f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/ShaderFamily.h",
+   "bytes": 1639,
+   "sha256": "684a5cc3f7af5afcdb4e09ab0fbf0819bc2adf3de69b65221e8c69554e4bb81d"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/ShadersGroup.h",
+   "bytes": 1170,
+   "sha256": "cdd6c97591288c6e708bdad7a8790aa410ae7f2d03266e0aed7a6c945e1f907c"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/TemplateVariable.h",
+   "bytes": 1029,
+   "sha256": "12e1ae6ff93a46d5912272dff8a1756a1aaa668e351365c9950a819290a6dd74"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/Terrain.h",
+   "bytes": 3902,
+   "sha256": "bf12bddda4b2169f31fc0f61b528145b313ad5f6f231906594a35017ff771327"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/TerrainChunk.h",
+   "bytes": 4423,
+   "sha256": "45434d92e6cf46a22a7824b149d17a68d2efc2b09273760086829934a97db687"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/TerrainGenerator.cpp",
+   "bytes": 1614,
+   "sha256": "43eb3cdd83bf29df3fc90510c650af3bc7800872362ad775e873a5d257021a55"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/TerrainGenerator.h",
+   "bytes": 1343,
+   "sha256": "983756948091fa2a1a1977ccc8546ceaaa86668e20a38b09fdb9446cfa5bba21"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/TerrainMap.h",
+   "bytes": 749,
+   "sha256": "201fee302e6ca08b2bcb234d97fca1e54e609fbd7d9dd910c5b69d931ecbf074"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/TerrainMaps.h",
+   "bytes": 1209,
+   "sha256": "cc85a40b586101bd170b949cd1c1225f3caa082224c69d338382f6b69fc9f01b"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/Hdta.h",
+   "bytes": 1050,
+   "sha256": "afe12257f47f9074666898ef9cef545a4b3ca3a763d2b84673dc012a8e906b19"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/InformationHeader.h",
+   "bytes": 1094,
+   "sha256": "345e336bd6d328e8eb83a9d7b2f4a61cd5c4f869f790ed22d29d63061ef8e93a"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/Layer.cpp",
+   "bytes": 5896,
+   "sha256": "6147ea5b1c62f7ddade58a895595d09600770216fff54ffe127747be97c6ed54"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/Layer.h",
+   "bytes": 2022,
+   "sha256": "d7fc7aa4a211616fbad66ffc0af24d37acece2db591b136022912fc04d58c762"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/ProceduralRule.h",
+   "bytes": 502,
+   "sha256": "0b80d2af6ed4e1b81512dc5075f02ed01fc7f2d8a4b1907e2a85d34b008eb05d"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/Road.h",
+   "bytes": 1042,
+   "sha256": "8b49484c329cd72a895243872ff32b1ce5ef2ac940d6a51d7d6f7596619bd93b"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/Segment.h",
+   "bytes": 835,
+   "sha256": "35f5c365739ee0bfa83887b09fbf54e04a3d36d52baa0946b05a346a209cb780"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors.h",
+   "bytes": 1068,
+   "sha256": "d6af99e57f1e9ec5e1bb9247d4ba564969d42ce5cddc467861b3d547b2980aeb"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorColorConstant.h",
+   "bytes": 2049,
+   "sha256": "395f3a85ab7dc20f7f43df6c0439f6354f5046e063225cd9833c3dfb17263919"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorColorRampFractal.h",
+   "bytes": 1281,
+   "sha256": "256e2b899cb3e5cc800c0ebce4b32a6b517d983429ed24b55cce3af448240840"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorColorRampHeight.h",
+   "bytes": 1224,
+   "sha256": "248d86a472d66f40cb5bf6ccbabe230500ffb398e295694067491de24e86f1f1"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorEnvironment.h",
+   "bytes": 1538,
+   "sha256": "d4f33837f92a2737789773f0adaeece327ad60d6b1fb7d7d5c306f9f1d486a1b"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorExclude.h",
+   "bytes": 964,
+   "sha256": "738d64fa9ac95d003c24a6d7ef0fdffcfefc41f5b3894ace92a2e4e2f566d107"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorFCN.h",
+   "bytes": 1214,
+   "sha256": "f8ac654414bd84587722deff40eed32f8fb5bd3c4804dab5ef929eddb7a7343a"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorFloraNonCollidableConstant.h",
+   "bytes": 1379,
+   "sha256": "a35c562d0c2a9eb1d0e337ac3c57475ee7ef0d8877f093af6f22371bf7f990bf"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorHeightConstant.h",
+   "bytes": 2084,
+   "sha256": "06558d5b6e4b25c72e1e326e814d12ac24157709d4925d8fc395587b17bb298c"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorHeightFractal.cpp",
+   "bytes": 2185,
+   "sha256": "04cb609f9437a23b39d4b18e7260cc96922aa28e520dc718b345a539ca9b9e45"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorHeightFractal.h",
+   "bytes": 1087,
+   "sha256": "9946a88272cfb4de5bc448d391127bdfade594d0eff83963fbcacc86ef30c6e9"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorHeightTerrace.h",
+   "bytes": 1972,
+   "sha256": "7891644284f15ae092c05deb4136cfaf0522bc6cce88b45807c244e64820f119"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorNoncollideFloraConstant.h",
+   "bytes": 1356,
+   "sha256": "28f7b015875d52993b86f86ea09ea2e59c31e4ab9b1c2a2c82115425b9f84102"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorPassable.h",
+   "bytes": 1029,
+   "sha256": "5a15bc46b285ed20b2dccc15f8efd6aea3787006ddc9aa9f49bedcee66aeefd0"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorProceduralRule.h",
+   "bytes": 1259,
+   "sha256": "a78c76d8cfba26bde0aca40e9952ee5a19a0db0db9a265aeb1210e43942af0b2"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorRCN.h",
+   "bytes": 1220,
+   "sha256": "1da2140736aa0452b0f32f1f81346c76529f6377ddd0bd9199604bdce18513c4"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorRadialConstant.h",
+   "bytes": 1296,
+   "sha256": "a907b7b90acbbb53ea8f0e4eab666ec1b56b71bee2c40b69550c211193a5d9d4"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorRadialFarConstant.h",
+   "bytes": 1299,
+   "sha256": "295697dc8133185fb90fe502edbbfb71bec2eb3bf177ee8aa22a716decc603e0"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorRiver.h",
+   "bytes": 2497,
+   "sha256": "07e11657d376bd778acf74c141077405fd23ab0675afeb3cc5f8443f9ec8d648"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorRoad.h",
+   "bytes": 2075,
+   "sha256": "cf220122f28ab06a70af6f7e6d510ad93648cc8b044ae93afcb77d08bca17458"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorShaderConstant.h",
+   "bytes": 1736,
+   "sha256": "2872825a5048f98a93b9e09346591b9fbabb77949185b1cfb382437a5de83366"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/affectors/AffectorShaderReplace.h",
+   "bytes": 1841,
+   "sha256": "07ef0fea3fb713367f43f8789ca47d17e166e1c0d1c1aaf110dfcf826098005a"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/boundaries.h",
+   "bytes": 332,
+   "sha256": "1de572b1f1e247d5dec6494ea555834f90754e6eed5f7228e8b97005211bb11f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/boundaries/Boundary.h",
+   "bytes": 740,
+   "sha256": "862ff95a62544b4a21e5731346e3c3c98387a4b0ddca3600d4e01d916c5e0828"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/boundaries/BoundaryCircle.h",
+   "bytes": 1906,
+   "sha256": "061f5150954fb55ce4141c01ace7bb268adccbb9aa15be07b24caa2585987ff5"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/boundaries/BoundaryPolygon.h",
+   "bytes": 7051,
+   "sha256": "6b445b449da56a5a40bead847c48d40a103f13325d1f6ea4729c73eb143f2840"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/boundaries/BoundaryPolyline.h",
+   "bytes": 3541,
+   "sha256": "57a9015dde9bf32006db7335faf081162253af1853712322326e0e2537f78857"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/boundaries/BoundaryRectangle.h",
+   "bytes": 5364,
+   "sha256": "a33c456491725501049f2319ed1beb0df3ac82a0d429c9e328ef1a39081dfdc4"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/filters.h",
+   "bytes": 360,
+   "sha256": "e5d5d239c092b114355f634e406ec801ac22e2535f4cf5585a1d7db0e2f85a71"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/filters/FilterBIT.h",
+   "bytes": 1263,
+   "sha256": "cbe93e589892afdac0f644ee7a0b9bbff9bbb7d215efa46e66f00cf53c3f73f3"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/filters/FilterDirection.h",
+   "bytes": 1404,
+   "sha256": "d151e4e96a1d6249f2e1d4506f5124af37583f2895dea8f7e3c7dd06bf258225"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/filters/FilterFractal.cpp",
+   "bytes": 1942,
+   "sha256": "c9110987c2833b503f04d5b4d0504a1ede0da5d0d0c1be6c65259e5139066a4e"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/filters/FilterFractal.h",
+   "bytes": 992,
+   "sha256": "dfc47dc221bca680191d5934c1d0a2223e4d94b928de4a6b80748069dd087584"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/filters/FilterHeight.h",
+   "bytes": 1897,
+   "sha256": "ff80c888736a450875cbf6a79be3c0e40e70f7b3dd02459361e920892a76c045"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/filters/FilterProceduralRule.h",
+   "bytes": 994,
+   "sha256": "b8cfc940d7a1f49f95e5d58680f7e19d5470f474cde66cffcbed268b4cc26bec"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/filters/FilterShader.h",
+   "bytes": 1431,
+   "sha256": "428e07e76b2454fd22d71250e25ec9f684cbdd49668af046fc7c3ca431561059"
+  },
+  {
+   "path": "WorldSpawnerTool/external/pterrain/ptat/layer/filters/FilterSlope.h",
+   "bytes": 2801,
+   "sha256": "9f76bc989997fa8b8d8240933383dd33b50b66780d78e6c77c6af0c888532c85"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/README.txt",
+   "bytes": 1928,
+   "sha256": "a487814d1ff49f34943844aef69ce7f43413d07a1690414d7cf364ee6568a77a"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/gpl.txt",
+   "bytes": 18326,
+   "sha256": "9f2e250993c6206fac643824e05e5a0d7d3e0895d9e09a5ce4b12bc2610afc11"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/include/swgRepository.hpp",
+   "bytes": 4157,
+   "sha256": "0ef0741b144f622a33001a0ef2fb95faa76bae3e82a2f9cd342cd4e071be0d98"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/mswindows/vs2008/swgOSG/swgOSG.ncb",
+   "bytes": 13700096,
+   "sha256": "a02271bbac7e3fa4a4e7271e5bc995a7eefe7bc41f6f9121ce3a26db46c948e3"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/mswindows/vs2008/swgOSG/swgOSG.sln",
+   "bytes": 1361,
+   "sha256": "1548a0264d894f798a136b422c4121b7987ca212e859bfb30f1bb7d7ab0a516e"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/mswindows/vs2008/swgOSG/swgOSG.suo",
+   "bytes": 41472,
+   "sha256": "026d9359accc99d4734ddd75cad1e19a5ee4b3fab2c149bb498a4f1985b91ed2"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/mswindows/vs2008/swgOSG/swgOSG/swgOSG.vcproj",
+   "bytes": 5480,
+   "sha256": "3e7724269ef889438a87ce9886529477821832e0bce615c54b0ab6f0c8f23017"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/mswindows/vs2008/swgOSG/swgOSG/swgOSG.vcproj.TheAnswer-PC.TheAnswer.user",
+   "bytes": 1496,
+   "sha256": "d498db4e4f284052e3e922eb2736a32e018608aa737a41eb11e4cc601e539658"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/mswindows/vs2008/swgOSG/swgRepository/ReadMe.txt",
+   "bytes": 934,
+   "sha256": "29d014837c8dca609469693639764cd65308b66afeeb274a8d6b4752e00b9010"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/mswindows/vs2008/swgOSG/swgRepository/swgRepository.vcproj",
+   "bytes": 4414,
+   "sha256": "b27333834c54b6473264aeabc29d0d37c9bc19b4f8b6bb69c5eb0802c09255be"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/mswindows/vs2008/swgOSG/swgRepository/swgRepository.vcproj.TheAnswer-PC.TheAnswer.user",
+   "bytes": 1401,
+   "sha256": "8d5ce1c099cc2870c27c88fe3423b7001bc24b0abcc0db195fd910ba05ec41f0"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/notes.txt",
+   "bytes": 525,
+   "sha256": "8ccc416c0102932f73857451e01675cddc2515d24676c78192e6ae7a25bb8f7f"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/src/Makefile",
+   "bytes": 983,
+   "sha256": "bbe27971933b482fd499b22f63b03f3ce2b0b2ccbb9631a2019e53d50dedf091"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/src/a",
+   "bytes": 11100,
+   "sha256": "996d880a756fe19f400e666324a1d32bed1a0fdc54e230ab72fcc1fbbb76c16e"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/src/swgOSG.cpp",
+   "bytes": 5321,
+   "sha256": "059cda0723c06a2f8ae643768009457e76d82369aee0030755c62a6ca6f6cd7c"
+  },
+  {
+   "path": "WorldSpawnerTool/external/swgOSG/src/swgRepository.cpp",
+   "bytes": 51005,
+   "sha256": "09e36793bf2644f2556b9fd94f650709415a2197f737261cfccd80a5611c8496"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/gpl.txt",
+   "bytes": 18326,
+   "sha256": "9f2e250993c6206fac643824e05e5a0d7d3e0895d9e09a5ce4b12bc2610afc11"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/include/md5.h",
+   "bytes": 2165,
+   "sha256": "ea4416e7a21293f9c8013c3221388ef713c590b466c2a76b81814e2c5bed8b92"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/include/treLib/treArchive.hpp",
+   "bytes": 1832,
+   "sha256": "61158b4321e6e277f7b3aab0adf284e5509f5658861c375f92012c7f61224e7c"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/include/treLib/treClass.hpp",
+   "bytes": 3026,
+   "sha256": "d8fa6f7e71aa725b5273b9bf19e89c050d4f3de91bbb0e3886e5fee9df14f5e4"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/include/treLib/treDataBlock.hpp",
+   "bytes": 2254,
+   "sha256": "78641f558be0e5f146a93fc45bf8c2e0be5fcbd51f58a1b4addbdb1b72115414"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/include/treLib/treFileRecord.hpp",
+   "bytes": 3139,
+   "sha256": "c87426dbb3f00d0d14446f5a361500ba05a466f0f415c01f1fb0f69ef62c4a7d"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/testArchive/testArchive.sln",
+   "bytes": 892,
+   "sha256": "91f71b0e2768dd8bb19001b59eab099727e1ea1472583e8bbd285abb8e1e9c92"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/testArchive/testArchive.suo",
+   "bytes": 7168,
+   "sha256": "11994b90105a8c8de1085cd818e8834a2d97ed1f5ae93913f046e58106805e4b"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/testArchive/testArchive.vcproj",
+   "bytes": 4595,
+   "sha256": "92adcf48bf01e553b67239150977a1ff9a6e06b07337ed0c4725c4ab5b605e9c"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/testArchive/testArchive.vcproj.TheAnswer-PC.TheAnswer.user",
+   "bytes": 1427,
+   "sha256": "b79dc2dc2db5b7573fd252de4b6b297b405549bcb68339753957f57cd722c116"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treBuild/treBuild.vcproj",
+   "bytes": 4576,
+   "sha256": "4079c6ffad40193c2f95c039d42dbcd09fa568d71cf00d4adf116cd0fd831830"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treBuild/treBuild.vcproj.TheAnswer-PC.TheAnswer.user",
+   "bytes": 1427,
+   "sha256": "b79dc2dc2db5b7573fd252de4b6b297b405549bcb68339753957f57cd722c116"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treDump/treDump.sln",
+   "bytes": 883,
+   "sha256": "71ec681968d6db3c6b662a039bf265b2d72634331808906f862c69d2a2a06243"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treDump/treDump.suo",
+   "bytes": 7168,
+   "sha256": "519bd587f1999409f87226cc911f3f954d59d8233c3a6f4f40655dbd9ee0b348"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treDump/treDump.vcproj",
+   "bytes": 4630,
+   "sha256": "2a6e40970b9165e53caa39ddc3e646f7e4a9ecb80c6a786c16854f8bcd62e3b1"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treDump/treDump.vcproj.TheAnswer-PC.TheAnswer.user",
+   "bytes": 1427,
+   "sha256": "b79dc2dc2db5b7573fd252de4b6b297b405549bcb68339753957f57cd722c116"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treLib.suo",
+   "bytes": 7168,
+   "sha256": "9aa96eabe0be8e37c9ae45b6f1eb334b566a26be1014718a35a9cd15df5fb5ca"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treLib/Debug/BuildLog.htm",
+   "bytes": 7982,
+   "sha256": "948c016f3562c8b0b23eac7365f6d0dfd9931dafbd2ed7246c4993fbb930dbdd"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treLib/Debug/vc90.idb",
+   "bytes": 363520,
+   "sha256": "a4e48f229a51e869c9be27f39b033179c3c85648b6aa2cc13afecfe8757fd616"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treLib/Debug/vc90.pdb",
+   "bytes": 315392,
+   "sha256": "e7aeeb5dad6eebfb24529b3d87043834fcd408a2364fd622f7a7958d99743a20"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treLib/treLib.ncb",
+   "bytes": 3894272,
+   "sha256": "4ed283543f86c790b03471224b5dad22730cd7cb6c3f3a73846da89f631a354a"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treLib/treLib.sln",
+   "bytes": 2743,
+   "sha256": "78c1f36e44183a9ce99ea1df68bd8220126ce1582f9e18985553db0ef241e70a"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treLib/treLib.suo",
+   "bytes": 30208,
+   "sha256": "2cb7009520d50b385d5d9d3709374f6fae0322f3c0fd8e1d91c18e114d9df365"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treLib/trelib.vcproj",
+   "bytes": 4766,
+   "sha256": "b816245d48c60a33ed0ce55f12ff8f313e121ea87dd97cef46ea804ba0ce7a7b"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/mswindows/vs2008/treLib/trelib.vcproj.TheAnswer-PC.TheAnswer.user",
+   "bytes": 1401,
+   "sha256": "8d5ce1c099cc2870c27c88fe3423b7001bc24b0abcc0db195fd910ba05ec41f0"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/src/Makefile",
+   "bytes": 1476,
+   "sha256": "8287c164d63ac8217fba1bd3745d2c737860804e12f8d58e7564eeac081607b0"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/src/md5.c",
+   "bytes": 11278,
+   "sha256": "14c4a43a43d25846670baf8b8e6c89f77beadd97ab42102ea19763c330a6080d"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/src/testArchive.cpp",
+   "bytes": 3957,
+   "sha256": "3f2cf11b2094404f727de5ba3c9dc87e481ea52575582914876c6c3f11d23468"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/src/treArchive.cpp",
+   "bytes": 4735,
+   "sha256": "49812de1d4cb7da2a111e6a392f5109fdedbdb3f2885da63d37f112f2cf410a6"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/src/treBuild.cpp",
+   "bytes": 1942,
+   "sha256": "69e2ca1c705cba4354a1984a072bc22d752f2fae2089faa95a93444527c5612a"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/src/treClass.cpp",
+   "bytes": 21399,
+   "sha256": "10d704eedc8990ccac73912352995bd784177f850895c5614ce569a2ce57251b"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/src/treDataBlock.cpp",
+   "bytes": 7141,
+   "sha256": "de79a3119a1e138857b9bf650a6174c68b746fbe36d89cf12e398d2907711496"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/src/treDump.cpp",
+   "bytes": 2445,
+   "sha256": "4ab1723b403b9c581da2b11e169b917dc67087b0b0e09e95f68ff5ce7dd20134"
+  },
+  {
+   "path": "WorldSpawnerTool/external/treLib/src/treFileRecord.cpp",
+   "bytes": 8483,
+   "sha256": "a929dd2ff82c62579ec72a20087de281c00d29e7607df852b0a5792fb7c7e4ac"
+  },
+  {
+   "path": "WorldSpawnerTool/icon.png",
+   "bytes": 6566,
+   "sha256": "69edb8877116163d65f4a1268bc472ac881c62ffa75d6ff553bc43e8fea7bf49"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Alert.png",
+   "bytes": 794,
+   "sha256": "0eca9d8a7d3e74a058f6d277daab8e9453aca5f3e61139913318175bee64acb8"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Briefcase.png",
+   "bytes": 663,
+   "sha256": "192222b78c770e295063c503e418ba7b1ba4009152305655b4a2cf35e4f8efa0"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Cancel.png",
+   "bytes": 937,
+   "sha256": "f07b0ee4141e2b6a946b29dae2fe38ed876a09c9e5313fba7ffd484d71fde622"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Create.png",
+   "bytes": 863,
+   "sha256": "fb31f2a614079f37a990439374db54dcaa0c370f0d96e17e7460fd537b71b40a"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Danger.png",
+   "bytes": 897,
+   "sha256": "53a66e83b89f4e39ac172e2ba25de24739c6c8bd26595b4877df762c768ef63b"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Database.png",
+   "bytes": 813,
+   "sha256": "d922cadf1ce81428daed0222bc0e908a75fa86f8f789db2bd54db26b81b87d53"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Delete.png",
+   "bytes": 753,
+   "sha256": "73d1c54b0809da0224bcb4489b31d7ce41e74dbd1420d922fe226d798fa809d1"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Error.png",
+   "bytes": 736,
+   "sha256": "70fcbdf660536d1d1071f2670cf08524c8be971086ac14a2a9c41e05fddb4d8d"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Globe.png",
+   "bytes": 913,
+   "sha256": "13927d6ed8d0ae5c284afb6594383a5ea8c94e03c0ea89824b5e93da490a4166"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Help book.png",
+   "bytes": 894,
+   "sha256": "decb845db2d67762e6da701efeb64c99ce6f58b24328ad1294c2404466073d2c"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Help symbol.png",
+   "bytes": 939,
+   "sha256": "4eb3aac4ea67b48d16a0d11042b0e40b802348726299d6c998c1aa71a153198f"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Help.png",
+   "bytes": 909,
+   "sha256": "f9c78b26507e70bb037deb569fa8a178d5fd1b48a282e8378f111bfd054c0c56"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Hint.png",
+   "bytes": 876,
+   "sha256": "8cf08ad72ed5beb579ce652d9e73e837366b857ef334cfd67fdb7baf70e0b645"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Modify.png",
+   "bytes": 644,
+   "sha256": "d0af8f56de17888c664224e509c10323680175a08871550ed8684850aebe848f"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/No-entry.png",
+   "bytes": 734,
+   "sha256": "f8879682e0beff020188af60fadc296367140c94368efc61abc3cf58899b5b07"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/No.png",
+   "bytes": 920,
+   "sha256": "c5d791b5621d34bd3d11f2a5d3d196a2dedf43f80e5e37e3c5046ac9d0504fc2"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/OK.png",
+   "bytes": 919,
+   "sha256": "72f99df5e1e4c49d5bf64ff8673ff9f564421e712be112443aa49e0699f5f2ff"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Redo.png",
+   "bytes": 801,
+   "sha256": "17636680b80443881474ed5066469896b1a09dd386c6068e56fe6a56c5b5f45e"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Refresh.png",
+   "bytes": 787,
+   "sha256": "12c58b650fab84018430ebf7dcb3d1e6c3670f8b32920f1508195c85e5c0624e"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Undo.png",
+   "bytes": 795,
+   "sha256": "65b1617ab0f6c7b7dc620121c95e5462ec05185b10fb6195dbdf986d01c7917c"
+  },
+  {
+   "path": "WorldSpawnerTool/icons/Yes.png",
+   "bytes": 575,
+   "sha256": "f579bc537608c1cd1ad2a4c0d63d05ebdffee455ad11c42506d6b3fc16f97efd"
+  },
+  {
+   "path": "WorldSpawnerTool/insertbadgeform.cpp",
+   "bytes": 1439,
+   "sha256": "1048bf73f849b004c25a01f1051866ba2c41f2e99fd588064ac7a64f40cf8ca2"
+  },
+  {
+   "path": "WorldSpawnerTool/insertbadgeform.h",
+   "bytes": 617,
+   "sha256": "6026e375afebf86c9e2d11e59fd24724f6faee3b0349dfb34de94a7344bc0b7c"
+  },
+  {
+   "path": "WorldSpawnerTool/insertbadgeform.ui",
+   "bytes": 5238,
+   "sha256": "b585f0042ad7f82d25d6ace2654f8cfda25018417ab17769542a848bfe6984d2"
+  },
+  {
+   "path": "WorldSpawnerTool/insertwindow.cpp",
+   "bytes": 1225,
+   "sha256": "89f08e988b0f2d421efbeab6411dbb593ca81093005b4349c19d4be2a1ccd8da"
+  },
+  {
+   "path": "WorldSpawnerTool/insertwindow.h",
+   "bytes": 1321,
+   "sha256": "553be1213d13af25045d7b756283f7faae6fdd3bc36e6e78fae1f5d1d0622efc"
+  },
+  {
+   "path": "WorldSpawnerTool/insertwindow.ui",
+   "bytes": 5345,
+   "sha256": "7b7c51026ac542fc862c65660491b8babb66b208bdfc3f90915172b6056c440d"
+  },
+  {
+   "path": "WorldSpawnerTool/lairgroup.cpp",
+   "bytes": 2698,
+   "sha256": "2e9909517c84738b4f755c5d6db5c1fac412d29f31964697a1b5e9763ecd29a3"
+  },
+  {
+   "path": "WorldSpawnerTool/lairgroup.h",
+   "bytes": 3205,
+   "sha256": "d04229d851a3b1e139246dafb20ae367b8b18db3074718cb115329683d2cda8b"
+  },
+  {
+   "path": "WorldSpawnerTool/lairluamanager.cpp",
+   "bytes": 2064,
+   "sha256": "08e3517254cd449310e53a6534d47a9535bf7048bf9057e77a6bc73dbeb78226"
+  },
+  {
+   "path": "WorldSpawnerTool/lairluamanager.h",
+   "bytes": 621,
+   "sha256": "07437904e5150c18fd2b29d482122edc382ce75c0ac075d8ab8850f964b6c3ad"
+  },
+  {
+   "path": "WorldSpawnerTool/lairname.cpp",
+   "bytes": 326,
+   "sha256": "d886ba5cba800feccff178ff24d4626bd3bd65aa75dcef6792d1207db0b24861"
+  },
+  {
+   "path": "WorldSpawnerTool/lairname.h",
+   "bytes": 317,
+   "sha256": "16e04ea91c492577cd66226bd768f8d74cd1a118f1a419a2304ad375e1304fbf"
+  },
+  {
+   "path": "WorldSpawnerTool/lairname.ui",
+   "bytes": 1774,
+   "sha256": "ba6f37629236e64090f3e8f02cd73da7d41d11c010206dafa4345977a63b8584"
+  },
+  {
+   "path": "WorldSpawnerTool/lairspawneditor.cpp",
+   "bytes": 5663,
+   "sha256": "a4ce2ab9a507f2fcbc90621b71857ce58c19926e8c34d24ddde77b792bdea702"
+  },
+  {
+   "path": "WorldSpawnerTool/lairspawneditor.h",
+   "bytes": 893,
+   "sha256": "fac89fe93cbc740b27097847e49c9e0a8b5d69cb00f5d642226be9a2b9753ac5"
+  },
+  {
+   "path": "WorldSpawnerTool/lairspawneditor.ui",
+   "bytes": 6797,
+   "sha256": "9c068b28ae1e02e18c0b738189860ea875d2886c2ea1d25521337d9f6ebb8245"
+  },
+  {
+   "path": "WorldSpawnerTool/lairtemplate.cpp",
+   "bytes": 5373,
+   "sha256": "5bd4c4acac3114e5701e00e9c16c401dd6ea7919bbc19918bf92ac1d37ab2f0f"
+  },
+  {
+   "path": "WorldSpawnerTool/lairtemplate.h",
+   "bytes": 1149,
+   "sha256": "c3800ecf7552bba0ed3dc5d692f21097c8b9d84e419856493b526d26f2244a0e"
+  },
+  {
+   "path": "WorldSpawnerTool/lairtool.cpp",
+   "bytes": 5950,
+   "sha256": "293046817259abc5395cd3d52aec2d86182b1d9ad20335970fa2b90b5cb228e5"
+  },
+  {
+   "path": "WorldSpawnerTool/lairtool.h",
+   "bytes": 936,
+   "sha256": "18b82c21d4d5948b844647c20a0d14efe5b95b9737cff6326606d3c58e01efea"
+  },
+  {
+   "path": "WorldSpawnerTool/lairtool.ui",
+   "bytes": 5585,
+   "sha256": "4bb21783145eb679ae4429b6254b8a10210116ea356c6bcebcfaa080836ec43e"
+  },
+  {
+   "path": "WorldSpawnerTool/lairtypes.cpp",
+   "bytes": 6543,
+   "sha256": "0977c7464a2cb9acc882f9781c30ea632830b44f2c5568fd3db936c944e5bf21"
+  },
+  {
+   "path": "WorldSpawnerTool/lairtypes.h",
+   "bytes": 835,
+   "sha256": "c08124141a2bd3ea1137f87a46bf5af209ea4e5c92f37a36d6938e301191ca4c"
+  },
+  {
+   "path": "WorldSpawnerTool/lairtypes.ui",
+   "bytes": 3085,
+   "sha256": "5d8e28b62525315297feffd77d025b05ba0ed35198d48df43bb1b6a78cd00b73"
+  },
+  {
+   "path": "WorldSpawnerTool/loadingdialog.cpp",
+   "bytes": 563,
+   "sha256": "50975e926cd2afdd49f81a4767a76b864e32f57d34c2f88fbb172e26a3e0f5cd"
+  },
+  {
+   "path": "WorldSpawnerTool/loadingdialog.h",
+   "bytes": 406,
+   "sha256": "ca4e5cbacecb6de3e5dfb8a811de206d6ddf54a02d5d6d546b22be4181c3332e"
+  },
+  {
+   "path": "WorldSpawnerTool/loadingdialog.ui",
+   "bytes": 849,
+   "sha256": "7286ebc246827e589ee7528655da994ee4f46840c3f86c5d83e9d80ecf61e26f"
+  },
+  {
+   "path": "WorldSpawnerTool/lootgroup.cpp",
+   "bytes": 2588,
+   "sha256": "af43e48053d0348d6e7232a914cbc6e4755ecb447eeaaaefd33ef24838c8e488"
+  },
+  {
+   "path": "WorldSpawnerTool/lootgroup.h",
+   "bytes": 2019,
+   "sha256": "f22c9dc749bde57c32ee55e36829aeeb0ec0d65f99a1181c87015a6f2c785729"
+  },
+  {
+   "path": "WorldSpawnerTool/lootitemeditor.cpp",
+   "bytes": 8338,
+   "sha256": "b4c9e0b31f7092bf29c6643d3426d2f417784db103fa38b65772bde783e1c6f6"
+  },
+  {
+   "path": "WorldSpawnerTool/lootitemeditor.h",
+   "bytes": 927,
+   "sha256": "2cb0b0561584f4accf0b15b5f931a25811545e5486a0557b7ce80b40757288f4"
+  },
+  {
+   "path": "WorldSpawnerTool/lootitemeditor.ui",
+   "bytes": 11531,
+   "sha256": "d2c2eb0311af25538aac44fb7e25303e33055d3ef6cc379c8477c7b0ecf10471"
+  },
+  {
+   "path": "WorldSpawnerTool/lootitemtemplate.cpp",
+   "bytes": 7564,
+   "sha256": "53d282f08edf09b09ea367c5d79edb837983986be687333c22a46d10a915522d"
+  },
+  {
+   "path": "WorldSpawnerTool/lootitemtemplate.h",
+   "bytes": 4056,
+   "sha256": "82cc2caf442f9170c603e5984288e5ebaacc40d04265131fdea1c6c152fbd457"
+  },
+  {
+   "path": "WorldSpawnerTool/lootitemtemplatemanager.cpp",
+   "bytes": 4379,
+   "sha256": "faad0abcd34b03a971a84b0148a0af160b24a1199f93cc8261958170e8b2faa6"
+  },
+  {
+   "path": "WorldSpawnerTool/lootitemtemplatemanager.h",
+   "bytes": 1000,
+   "sha256": "8a39b0033fc82699b82bfc2bc45a587deb3e38827d9de4c67b6e8fed4f77b22c"
+  },
+  {
+   "path": "WorldSpawnerTool/lootitemtemplatemanager.ui",
+   "bytes": 7274,
+   "sha256": "63d0d11bc48caf154fe1bdb4708d98bd7c58bc183485036a2daf19fcd55d5357"
+  },
+  {
+   "path": "WorldSpawnerTool/lootitemtemplatetablewidgetitem.cpp",
+   "bytes": 289,
+   "sha256": "a9537bbf157595c7fd16a4fd4d96909eaa63397c439c874812ca0af5833639fc"
+  },
+  {
+   "path": "WorldSpawnerTool/lootitemtemplatetablewidgetitem.h",
+   "bytes": 605,
+   "sha256": "7d690136f23a9ebcccaf10f08ce72330d83a98d9e8c5eb1b3933366d67a25568"
+  },
+  {
+   "path": "WorldSpawnerTool/lootluamanager.cpp",
+   "bytes": 6764,
+   "sha256": "a92126fcf788238fdb5013c01ae845400200f8e24634aa7eab06736eff0c08e1"
+  },
+  {
+   "path": "WorldSpawnerTool/lootluamanager.h",
+   "bytes": 2313,
+   "sha256": "3896615add311083689e85628311c0c0cb834b62e808ae6db934599dfe67ca3f"
+  },
+  {
+   "path": "WorldSpawnerTool/lootmanager.cpp",
+   "bytes": 14371,
+   "sha256": "2f851770fd9c937d9b4bcb90c5ce2296e05d7e626eb3d02bbbf19a5f90930b59"
+  },
+  {
+   "path": "WorldSpawnerTool/lootmanager.h",
+   "bytes": 1337,
+   "sha256": "fa6c160a7c9869aa365fd505a569a0af5b22e320bf762f13f8e328bd5ad45e6c"
+  },
+  {
+   "path": "WorldSpawnerTool/lootmanager.ui",
+   "bytes": 20132,
+   "sha256": "c4d517999693a1c09be1570c53ffdbc4b9e118ca2d3c2c00f9f9119cd77a0091"
+  },
+  {
+   "path": "WorldSpawnerTool/main.cpp",
+   "bytes": 216,
+   "sha256": "c50c28c885661adbbf8e8c733c6bd346227ee59e557150616d720820b33aeec9"
+  },
+  {
+   "path": "WorldSpawnerTool/mainwindow.cpp",
+   "bytes": 44729,
+   "sha256": "15ecce6783d1ec9c6d139704850f8981bea5b2c916c8543b8a77912d5afad3bc"
+  },
+  {
+   "path": "WorldSpawnerTool/mainwindow.h",
+   "bytes": 5951,
+   "sha256": "5b47ce26b361ee1a81e8d1fc1ef032bd77565ee1ba61e495090305750a1354bc"
+  },
+  {
+   "path": "WorldSpawnerTool/mainwindow.ui",
+   "bytes": 23288,
+   "sha256": "001d56eb41ca7bcf9e36afe0a2a0c1f7429a7ebb15f1228ae10e5db13e8c4e8e"
+  },
+  {
+   "path": "WorldSpawnerTool/newlairmobile.cpp",
+   "bytes": 1367,
+   "sha256": "b069c3f927409df0586543c6b5c0cb906f47e7ac863fa9e15b8a1f613fb0b1ea"
+  },
+  {
+   "path": "WorldSpawnerTool/newlairmobile.h",
+   "bytes": 508,
+   "sha256": "d0227fe067ec2a2ca8b99fbb60a371d535df204820b386fdb6a45d117422b07a"
+  },
+  {
+   "path": "WorldSpawnerTool/newlairmobile.ui",
+   "bytes": 2776,
+   "sha256": "32c62c5a58b24d0a58952e482c20ff88234f649182c7803e26baffd5917d4827"
+  },
+  {
+   "path": "WorldSpawnerTool/nobuildzone.cpp",
+   "bytes": 375,
+   "sha256": "262a3397d4302af478eb9d3108170b4b927c4fbb4edde6e15856f6fb62dfe988"
+  },
+  {
+   "path": "WorldSpawnerTool/nobuildzone.h",
+   "bytes": 271,
+   "sha256": "9dff44d38532a46b10e8e6667affab1090d010822782bae376868ec3d2351a38"
+  },
+  {
+   "path": "WorldSpawnerTool/object_script.WorldSpawnerTool.Debug",
+   "bytes": 1116,
+   "sha256": "388596fa9d7f62f14dd16ec81e99f07f976758d652f92aea5c466a30017b2fcc"
+  },
+  {
+   "path": "WorldSpawnerTool/object_script.WorldSpawnerTool.Release",
+   "bytes": 1204,
+   "sha256": "aa0e861f6b1dd98f25a42910b9a616a8e48b19d5107b1e45bca6ac60197b6799"
+  },
+  {
+   "path": "WorldSpawnerTool/objectmodel3dviewer.cpp",
+   "bytes": 14623,
+   "sha256": "8425873fd8d182eccc5c0dcf19580d72cef0f6f7a76b6eca5beb2c992af05612"
+  },
+  {
+   "path": "WorldSpawnerTool/objectmodel3dviewer.h",
+   "bytes": 3102,
+   "sha256": "c40e1df43a285a194f0452f7021ddc27a2e31921edbda6fdbde95f3517fa080b"
+  },
+  {
+   "path": "WorldSpawnerTool/objectmodel3dviewer.ui",
+   "bytes": 3885,
+   "sha256": "739380b33ac5d69eb960ef2967ffa2ea8eea3fd79bb886c2d9b82a5028593004"
+  },
+  {
+   "path": "WorldSpawnerTool/osgqtviewer.cpp",
+   "bytes": 913,
+   "sha256": "f0149fb958518a56391758b1c5129d779e2dae0bc068fdb8eaee606a9af31933"
+  },
+  {
+   "path": "WorldSpawnerTool/planet.cpp",
+   "bytes": 140,
+   "sha256": "e83faeede01395eb6ddf2837e7b94b08077b7f42aec19b19085ccc75ae8dec11"
+  },
+  {
+   "path": "WorldSpawnerTool/planet.h",
+   "bytes": 252,
+   "sha256": "d61731e3d21ea50e8b8548f78c599ab648b59b3af1c51f77a4243aa58b66f1a5"
+  },
+  {
+   "path": "WorldSpawnerTool/planetselection.cpp",
+   "bytes": 853,
+   "sha256": "05dd2afb2da745c455951b127563edfda7a418c8867e7d5785f7ae99a3a96d9c"
+  },
+  {
+   "path": "WorldSpawnerTool/planetselection.h",
+   "bytes": 393,
+   "sha256": "18bfd583484e6a8610bd1ac60075d5b4cd087de4aed937d6c0e360b7b0d5b124"
+  },
+  {
+   "path": "WorldSpawnerTool/planetselection.ui",
+   "bytes": 1213,
+   "sha256": "c9e34d79c0e606dd3fe857836551c8823544701b39b3cb2fbe7c1668639b3557"
+  },
+  {
+   "path": "WorldSpawnerTool/planetspawnregion.cpp",
+   "bytes": 5727,
+   "sha256": "e33ae10265a797ffeb008c59d6b842602f75b9b121429120707b0620da02bf1c"
+  },
+  {
+   "path": "WorldSpawnerTool/planetspawnregion.h",
+   "bytes": 1564,
+   "sha256": "958e013ff21378f37398de4aad5ac0aac0e56f8eae3a26849f5e1179efcb5010"
+  },
+  {
+   "path": "WorldSpawnerTool/preorcreaturemanager.cpp",
+   "bytes": 7238,
+   "sha256": "a6ff90e29b44b527b34b0741edf5d234638c51deb63d08c0eda995ac12ccd332"
+  },
+  {
+   "path": "WorldSpawnerTool/preorcreaturemanager.h",
+   "bytes": 1101,
+   "sha256": "26b3217d07d1ef4d97eb03af2ffc38461075608992ddad3b5bfa8c75ebf3927b"
+  },
+  {
+   "path": "WorldSpawnerTool/preorcreaturemanager.ui",
+   "bytes": 2888,
+   "sha256": "dc75166519bbdb43af6cbb329d6bb0e97b19c92b084c0287a46198542b081169"
+  },
+  {
+   "path": "WorldSpawnerTool/region.cpp",
+   "bytes": 3437,
+   "sha256": "84c9fefa270bab5fa440ca5164a27a0a4ea52fd4e3d324d22be91689b13014ec"
+  },
+  {
+   "path": "WorldSpawnerTool/region.h",
+   "bytes": 1188,
+   "sha256": "e11bba887755712f81b020ef6f1cfa3803884932daf93746ba5e2822a1ca4549"
+  },
+  {
+   "path": "WorldSpawnerTool/release/QtCore4.dll",
+   "bytes": 2557952,
+   "sha256": "cfe9f84c0f2c4e5e10f939df60485a1a956c9c85a50501c0b90423e7dbad987b"
+  },
+  {
+   "path": "WorldSpawnerTool/release/QtGui4.dll",
+   "bytes": 8566272,
+   "sha256": "cfd06dea104f9c3580fab2f5d64019829b056e55d44695764521011abfe946d4"
+  },
+  {
+   "path": "WorldSpawnerTool/release/QtOpenGL4.dll",
+   "bytes": 778240,
+   "sha256": "069fb1f715c83ba27b590a4879a66eb0b5d7b7060b4888549a070d812cb67cdf"
+  },
+  {
+   "path": "WorldSpawnerTool/release/QtSql4.dll",
+   "bytes": 201728,
+   "sha256": "4c1bd56ff3b7cf0b2160017183a3087295378b95a8630190e04edb643b87798c"
+  },
+  {
+   "path": "WorldSpawnerTool/release/WorldSpawnerTool.exe",
+   "bytes": 3707392,
+   "sha256": "25b124471eb0c4c3a2ec6d7d6bbe307e3de8e96f0cdd6b9487c09511cc983dc7"
+  },
+  {
+   "path": "WorldSpawnerTool/release/fonts/Vera.ttf",
+   "bytes": 65932,
+   "sha256": "c4c45690b345435b2cba52ecabe275f05e49b389b39fe68ad03afbb551288d3d"
+  },
+  {
+   "path": "WorldSpawnerTool/release/fonts/arial.ttf",
+   "bytes": 273020,
+   "sha256": "32015260078e6f19452e8f97f2295a5013e7569b84c53de028bd6789c17201c2"
+  },
+  {
+   "path": "WorldSpawnerTool/release/fonts/digital.ttf",
+   "bytes": 31996,
+   "sha256": "5ae41dab75479e45c00c536f864a81ee21796f8902c37634b328a44d9ef94828"
+  },
+  {
+   "path": "WorldSpawnerTool/release/glut32.dll",
+   "bytes": 161280,
+   "sha256": "6d008bdfe52e67e576eaaab4228f010f377726cdfef590576280763d88e2a066"
+  },
+  {
+   "path": "WorldSpawnerTool/release/imageformats/qjpeg4.dll",
+   "bytes": 201216,
+   "sha256": "b98f53e166e78132feed1b874f533ecbb01ce32fcc73ecf57328a4771730142e"
+  },
+  {
+   "path": "WorldSpawnerTool/release/libmySQL.dll",
+   "bytes": 2359296,
+   "sha256": "5e902785bcbecbd975159291f621ac5351a34386a987055a008333d5b1225288"
+  },
+  {
+   "path": "WorldSpawnerTool/release/libpng13.dll",
+   "bytes": 110592,
+   "sha256": "4807b89a780deb2e073e0d1403fca896613fc61a4f1fbad515411929dfaead3b"
+  },
+  {
+   "path": "WorldSpawnerTool/release/lua5.1.dll",
+   "bytes": 167936,
+   "sha256": "26384c6ee7d50863e3fb65fdc1bad452d9311f34d782390401de9bb130eecc4a"
+  },
+  {
+   "path": "WorldSpawnerTool/release/lua51.dll",
+   "bytes": 314880,
+   "sha256": "40e0ea904df735654b54a85f61578b91d6a1aeb6bc87856419a4c7aed88d25b3"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osg80-osg.dll",
+   "bytes": 2038272,
+   "sha256": "aeb2542874860e88e9c2ce57296c05685378a4452c1ef23acb5cff667972ce42"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osg80-osgAnimation.dll",
+   "bytes": 400384,
+   "sha256": "12ed913c0118300e672e2a1ade9289d3cb11669025ef9564c97634fbc6b850d7"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osg80-osgDB.dll",
+   "bytes": 723456,
+   "sha256": "5c1a9a19722e20cb075be1300c71ee39f59d8c31602eec6497b19881b1d5c95d"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osg80-osgGA.dll",
+   "bytes": 242176,
+   "sha256": "7ea33552ecf97f3d60db89ae2770618294324d514fbb9d239899fd09b6c78202"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osg80-osgQt.dll",
+   "bytes": 91648,
+   "sha256": "5563b9b927d08c6beb77096879bd122a92ac8dac376e08b01b14afbbb4626673"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osg80-osgTerrain.dll",
+   "bytes": 187392,
+   "sha256": "7420ae886facd036f122fd121706c79978bd51425f1dffc782cfa392f2edea5f"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osg80-osgText.dll",
+   "bytes": 258560,
+   "sha256": "e8e0f268627f4ccc0bfc68c6315d39d2638d4d0502b0872eb6d4ca10af063539"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osg80-osgUtil.dll",
+   "bytes": 1110528,
+   "sha256": "f6fad8622d336344e8e70cca482cdd9b84fecef39459136534a52bdf6b15ef3c"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osg80-osgViewer.dll",
+   "bytes": 527872,
+   "sha256": "0c5d339641068007a62f1bb878fc84068f1e8f4903e4091022f70155119aec01"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osgdb_dds.dll",
+   "bytes": 37376,
+   "sha256": "33053a0a97b172ab405995dd462ca736ca359c0bcb5c186eeea264b1f45f6e25"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osgdb_freetype.dll",
+   "bytes": 646144,
+   "sha256": "5d4c44adfbd91b0f06160d1bf6ae107fcf97b9def458e92eedb23d7623c10c4c"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osgdb_jpeg.dll",
+   "bytes": 130560,
+   "sha256": "49d46c8c2fffd972875b35b8077d2e126f0c337c6c5636eb0068825da3526222"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osgdb_png.dll",
+   "bytes": 38400,
+   "sha256": "c9aeaffec865e5b0ecc55f529cf6869ec929b561bb2b2ffb934637cb3ceee62b"
+  },
+  {
+   "path": "WorldSpawnerTool/release/osgdb_tga.dll",
+   "bytes": 25088,
+   "sha256": "236cf8acd980918a19655eb4ad51daff39ec652352365ec835878861c9ac32af"
+  },
+  {
+   "path": "WorldSpawnerTool/release/ot12-OpenThreads.dll",
+   "bytes": 23040,
+   "sha256": "f35a9ceb0d73e061fc03956063570a7cf55e8bdf69593cc36d20b0885d0e85e5"
+  },
+  {
+   "path": "WorldSpawnerTool/release/pthreadVC2.dll",
+   "bytes": 45056,
+   "sha256": "c724e44a44b3faa5633ba5b42359246682ac0dff544a66ed312709dbbc831d50"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/WorldSpawnerTool.intermediate.manifest",
+   "bytes": 638,
+   "sha256": "97b1dfac60ade39e293fb39a093e1fd01fec5438549c9bb1e341c7fc82d102fb"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_addlairtypetospawn.cpp",
+   "bytes": 3040,
+   "sha256": "635b1d38cfbda3e656e8abc34eb52872e9b10931cba9e8b476812e75590f9cdb"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_addlootgroupdialog.cpp",
+   "bytes": 2571,
+   "sha256": "e506f9323bd13860deed7db14fadf5fda272df900f13a755f1f5c7a404b358af"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_console.cpp",
+   "bytes": 3020,
+   "sha256": "511e26e113aa37631f76ee6ef7569a9d347aba0fed4c69d78524122320bc0720"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_createnewlootgroup.cpp",
+   "bytes": 3028,
+   "sha256": "bfdcc3340258d6594cabf5d3b5155682f6ffcbd55d48195b356bc98a6f8cd5f1"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_creaturelootsimulator.cpp",
+   "bytes": 2622,
+   "sha256": "9c36de4fc2511d4f09ef574f2af97bdda3b6143032fd1f31a63bee12f5b8d392"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_creaturemanager.cpp",
+   "bytes": 5350,
+   "sha256": "de733955a2dc590f9bef74ee62904789f45fe087bb719ada72f43f5535fc27ed"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_databaseconnection.cpp",
+   "bytes": 3707,
+   "sha256": "bbc64b58c0544a543a3ee5366541302ec93034713359fde9e26821667e8fe355"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_insertbadgeform.cpp",
+   "bytes": 2983,
+   "sha256": "89667c2d5ffabb8a66b180f1ad6723f479fc4ca5881858c34fd500cf0762600b"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_insertwindow.cpp",
+   "bytes": 3371,
+   "sha256": "1fd08a99e87d5b106cf02390c74a0e1db2b43ddc7b8d0e86c7ad7896f23ba9f6"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_lairname.cpp",
+   "bytes": 2400,
+   "sha256": "69f4f44d8e18a09afd5ef272c3e241c7446f7333546e512be0eb3663dba27c61"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_lairspawneditor.cpp",
+   "bytes": 3860,
+   "sha256": "f159ecaa92f4cdf3603a74bfa24254afa53386083a6092af7cb1e463c6f69bc7"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_lairtool.cpp",
+   "bytes": 3480,
+   "sha256": "c4c19df6f4043466ade6942666e699f133e1262cc05943b59c8ef02fe6767d88"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_lairtypes.cpp",
+   "bytes": 3553,
+   "sha256": "4e7edd5b75d235f3e3a4cd0f827212672bee8beb8fd4d0c7e85d23746b3a3ae7"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_loadingdialog.cpp",
+   "bytes": 2485,
+   "sha256": "f1c8d12645f701cce4a08c941da0e4ec4df569746fc1368509545fa8a30e74e1"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_lootitemeditor.cpp",
+   "bytes": 4267,
+   "sha256": "d7cfe270734aaa3503bc259ab393696d557ecc02dd01c3968498e475fe4091b4"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_lootitemtemplatemanager.cpp",
+   "bytes": 4872,
+   "sha256": "dcca9702891a0af92fd5cc813db2c7ae0b5b9a7697f8b99e1c7f394042760990"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_lootmanager.cpp",
+   "bytes": 4773,
+   "sha256": "824f73bcfdf925fed872b4fc1d2e947230518b9b86c480b2758adc88d618c670"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_mainwindow.cpp",
+   "bytes": 8523,
+   "sha256": "38c2b5c511c58f75883d7e929b8e82ff8d42ed55dad68e7a7f035cb4ef8c6289"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_newlairmobile.cpp",
+   "bytes": 3115,
+   "sha256": "f1327c592747e0cc6bc3e5809459644cbd1b93046881ad04417debc12e56f798"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_objectmodel3dviewer.cpp",
+   "bytes": 7124,
+   "sha256": "08e13ee0bff87938a1636983a5e295227b2393ad70e81c4094cfe4fabdbc8b56"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_planetselection.cpp",
+   "bytes": 2519,
+   "sha256": "816f432acd46f405f290c61a0a661a3e0fa73460c79ed2bef01467dd0e0457c6"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_preorcreaturemanager.cpp",
+   "bytes": 4919,
+   "sha256": "4ab2b547d866f720236e1cd2f7e29dd332b941558f0ce4d087c75a0407361e2b"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_settings.cpp",
+   "bytes": 2971,
+   "sha256": "bb70df541a82c32e933713584689d6158d548ae451bc10a9cbe6fc4fdc352c6f"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_staticspawn.cpp",
+   "bytes": 3149,
+   "sha256": "48a417f326783625393f32a7f12570a0d857c21cd3e58eb04a33c4185d6a89ee"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_stfviewer.cpp",
+   "bytes": 2990,
+   "sha256": "4f2f184933624165954db5d687b3a66a03e0a71d3962ef54762f7b1a49477b5c"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_worldmap.cpp",
+   "bytes": 3144,
+   "sha256": "251866a07513dee83d2651b3b03fd06fba80252654423922af3c5ef4edc34f70"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/moc_worldsnapshotobject.cpp",
+   "bytes": 3311,
+   "sha256": "fd59a82bc7ebbc90f05be40e8eec00cd8b716104c4f63301ff5378c854ce2dde"
+  },
+  {
+   "path": "WorldSpawnerTool/release/release/qrc_Resources.cpp",
+   "bytes": 12430662,
+   "sha256": "b3199d0cb639768951496824925deeac21e586feea531b4ccfc1318aa6f2a2e7"
+  },
+  {
+   "path": "WorldSpawnerTool/release/settings.ini",
+   "bytes": 105,
+   "sha256": "67408368482b4e603805fa3fd0cba66a8b2065934bc053dd626be78a20cfc630"
+  },
+  {
+   "path": "WorldSpawnerTool/release/sqldrivers/qsqlite4.dll",
+   "bytes": 443392,
+   "sha256": "f15cc68936c10bf943acf39aeef1831aaee6ba467793b35a1b56db47d53d549a"
+  },
+  {
+   "path": "WorldSpawnerTool/release/sqldrivers/qsqlmysql4.dll",
+   "bytes": 113152,
+   "sha256": "9fa1a4ee6bd3380a15a076635560096d84a34562533681bdbb895055890c4277"
+  },
+  {
+   "path": "WorldSpawnerTool/release/ui_map_corellia.jpg",
+   "bytes": 231574,
+   "sha256": "e95d8c02ca417a02ef309232ac547708ac985c4524a23c19b40be9765e19404f"
+  },
+  {
+   "path": "WorldSpawnerTool/release/ui_map_dantooine.jpg",
+   "bytes": 251268,
+   "sha256": "c12aa1e68379e0c9f2a9044a8e849f3386106175f49413a2ce7d78ed70513346"
+  },
+  {
+   "path": "WorldSpawnerTool/release/ui_map_dathomir.jpg",
+   "bytes": 222026,
+   "sha256": "0088d8d5509492f28fb2b0517a8233a489f051ef4d613a20826aeb617bd266cc"
+  },
+  {
+   "path": "WorldSpawnerTool/release/ui_map_endor.jpg",
+   "bytes": 250073,
+   "sha256": "5409291922e9b368cbb310bf2e012ae177c08f6e8f29dc6dd93621780a6a65ad"
+  },
+  {
+   "path": "WorldSpawnerTool/release/ui_map_lok.jpg",
+   "bytes": 238570,
+   "sha256": "99a4113df2e00372f2a2403e7541f5ae1d57bd1aba48cbc12f6e3c67dde95412"
+  },
+  {
+   "path": "WorldSpawnerTool/release/ui_map_naboo.jpg",
+   "bytes": 216758,
+   "sha256": "19fcbfb9261548e54a3d8cbb6f17a2e1899cef50093612cd8fcff774bb86d4b1"
+  },
+  {
+   "path": "WorldSpawnerTool/release/ui_map_rori.jpg",
+   "bytes": 277727,
+   "sha256": "b5a708e83478475c51bb99aa8ef4bd7e0b39872c02f16ec267f8e978e8507274"
+  },
+  {
+   "path": "WorldSpawnerTool/release/ui_map_talus.jpg",
+   "bytes": 223666,
+   "sha256": "d18283deb0e31ff006a1c909bb9286670bc136550621575a67317d53f40d12d3"
+  },
+  {
+   "path": "WorldSpawnerTool/release/ui_map_tatooine.jpg",
+   "bytes": 236723,
+   "sha256": "7c190ad18a2c76920bfe326665ecf3d47deeb74021c1c1f2aabd096805c5ff0f"
+  },
+  {
+   "path": "WorldSpawnerTool/release/ui_map_yavin4.jpg",
+   "bytes": 239209,
+   "sha256": "46c3daa0852898774edce2ffd215c4577cd275c462f150bb6a387c228f4f3363"
+  },
+  {
+   "path": "WorldSpawnerTool/release/zlib1.dll",
+   "bytes": 65024,
+   "sha256": "982fa6574638bcfab77d6ad790d9a0f6aa851b482ddddaf3525b0d97986811a3"
+  },
+  {
+   "path": "WorldSpawnerTool/settings.cpp",
+   "bytes": 1781,
+   "sha256": "31d0021d1e693cb862a9b8c11d6691254fecd42f5f6c9d971dfe06068b62b7fa"
+  },
+  {
+   "path": "WorldSpawnerTool/settings.h",
+   "bytes": 672,
+   "sha256": "96f057c6c291c55fae26ab385bd940261c28e639443e88f074fc69c4635e1d29"
+  },
+  {
+   "path": "WorldSpawnerTool/settings.ini",
+   "bytes": 62,
+   "sha256": "611e958b48a34b349c05a844b89727a312421e877abc925ae7197e651337ae35"
+  },
+  {
+   "path": "WorldSpawnerTool/settings.ui",
+   "bytes": 2451,
+   "sha256": "3871f428274848d8af51de17fbad5e768ffea983e6c3b19cf2a99a471a46586d"
+  },
+  {
+   "path": "WorldSpawnerTool/spawn.cpp",
+   "bytes": 133,
+   "sha256": "38130e15d2422edabaa4fb01d5524212deba4afc8025f7c2f719b2fc4e02e9b7"
+  },
+  {
+   "path": "WorldSpawnerTool/spawn.h",
+   "bytes": 1260,
+   "sha256": "33ff10df3b5c666aec43441358df32ec0ce14fb2ba79aa0a95417a2b12b48cda"
+  },
+  {
+   "path": "WorldSpawnerTool/spawnluamanager.cpp",
+   "bytes": 11793,
+   "sha256": "8be26e8483704440210206b77c0f568bb327cfd30f7632aa639e4b7efd90c6eb"
+  },
+  {
+   "path": "WorldSpawnerTool/spawnluamanager.h",
+   "bytes": 1569,
+   "sha256": "6e7f1b6147d7ac9aa8ee7bfaee47d77baecfc083d0f6b49a2dfad2cb45d0bcd0"
+  },
+  {
+   "path": "WorldSpawnerTool/splash.png",
+   "bytes": 105009,
+   "sha256": "c02b53c80ebd6ad07144df406236fa01f29f5cb262f4f286a07830423d215df8"
+  },
+  {
+   "path": "WorldSpawnerTool/splashscreen.cpp",
+   "bytes": 291,
+   "sha256": "84a50b0a6d8f868b740b39441e0bb950f0f7a1ea68acef2ef98c4dc3d156038d"
+  },
+  {
+   "path": "WorldSpawnerTool/splashscreen.h",
+   "bytes": 372,
+   "sha256": "4f99bc12788772a6bfb173bf6e957e87b2ce61017c68c3a11cb6de3f87662320"
+  },
+  {
+   "path": "WorldSpawnerTool/staticspawn.cpp",
+   "bytes": 6004,
+   "sha256": "e7e23f2bcc6332a74fdd32e2870abeb3ff5b922bae621a9722b521ca1b8d14d0"
+  },
+  {
+   "path": "WorldSpawnerTool/staticspawn.h",
+   "bytes": 1909,
+   "sha256": "6b50566a0b978e09b159cb19eade2d2d669a3fdcad43fd372f73d8ab761608a9"
+  },
+  {
+   "path": "WorldSpawnerTool/staticspawntableitem.cpp",
+   "bytes": 167,
+   "sha256": "35e1e75514096d2acbb9c2812ea81fa46475feeca855af29a93402ebe3ccb7d1"
+  },
+  {
+   "path": "WorldSpawnerTool/staticspawntableitem.h",
+   "bytes": 709,
+   "sha256": "a19e7bf5d91223b39681a0c9cbf59d1daa1050065347f78dee944ed7e684ec35"
+  },
+  {
+   "path": "WorldSpawnerTool/stfviewer.cpp",
+   "bytes": 3511,
+   "sha256": "a5bbf458a3190293fe541582759f04ed897f258ba52489430f15adb08088cb94"
+  },
+  {
+   "path": "WorldSpawnerTool/stfviewer.h",
+   "bytes": 451,
+   "sha256": "20164a539e8a9ec1748a0a337fa701a82bf4f48f258757c84f512905f818a637"
+  },
+  {
+   "path": "WorldSpawnerTool/stfviewer.ui",
+   "bytes": 3472,
+   "sha256": "de3bc1e51b9a10c9133f69790746af0e95872a320ed08088afafd38bf8e0709f"
+  },
+  {
+   "path": "WorldSpawnerTool/ui_map_corellia.jpg",
+   "bytes": 231574,
+   "sha256": "e95d8c02ca417a02ef309232ac547708ac985c4524a23c19b40be9765e19404f"
+  },
+  {
+   "path": "WorldSpawnerTool/ui_map_dantooine.jpg",
+   "bytes": 251268,
+   "sha256": "c12aa1e68379e0c9f2a9044a8e849f3386106175f49413a2ce7d78ed70513346"
+  },
+  {
+   "path": "WorldSpawnerTool/ui_map_dathomir.jpg",
+   "bytes": 222026,
+   "sha256": "0088d8d5509492f28fb2b0517a8233a489f051ef4d613a20826aeb617bd266cc"
+  },
+  {
+   "path": "WorldSpawnerTool/ui_map_endor.jpg",
+   "bytes": 250073,
+   "sha256": "5409291922e9b368cbb310bf2e012ae177c08f6e8f29dc6dd93621780a6a65ad"
+  },
+  {
+   "path": "WorldSpawnerTool/ui_map_lok.jpg",
+   "bytes": 238570,
+   "sha256": "99a4113df2e00372f2a2403e7541f5ae1d57bd1aba48cbc12f6e3c67dde95412"
+  },
+  {
+   "path": "WorldSpawnerTool/ui_map_naboo.jpg",
+   "bytes": 216758,
+   "sha256": "19fcbfb9261548e54a3d8cbb6f17a2e1899cef50093612cd8fcff774bb86d4b1"
+  },
+  {
+   "path": "WorldSpawnerTool/ui_map_rori.jpg",
+   "bytes": 277727,
+   "sha256": "b5a708e83478475c51bb99aa8ef4bd7e0b39872c02f16ec267f8e978e8507274"
+  },
+  {
+   "path": "WorldSpawnerTool/ui_map_talus.jpg",
+   "bytes": 223666,
+   "sha256": "d18283deb0e31ff006a1c909bb9286670bc136550621575a67317d53f40d12d3"
+  },
+  {
+   "path": "WorldSpawnerTool/ui_map_tatooine.jpg",
+   "bytes": 236723,
+   "sha256": "7c190ad18a2c76920bfe326665ecf3d47deeb74021c1c1f2aabd096805c5ff0f"
+  },
+  {
+   "path": "WorldSpawnerTool/ui_map_yavin4.jpg",
+   "bytes": 239209,
+   "sha256": "46c3daa0852898774edce2ffd215c4577cd275c462f150bb6a387c228f4f3363"
+  },
+  {
+   "path": "WorldSpawnerTool/utils.h",
+   "bytes": 3940,
+   "sha256": "ee9a7db0b47496db7a31a7df31aee567870f26998a0b330532bd0069f7dfbc4e"
+  },
+  {
+   "path": "WorldSpawnerTool/vc100.pdb",
+   "bytes": 8294400,
+   "sha256": "e8d1a5e5819bc4234b64fda2fc812a4aa099831e7090d3c9d42e0bcd94e96343"
+  },
+  {
+   "path": "WorldSpawnerTool/worldmap.cpp",
+   "bytes": 13539,
+   "sha256": "21cd94caf073e21b4a3336cd247a6a21a49f7a36abb101fe66d780cac2e49b0f"
+  },
+  {
+   "path": "WorldSpawnerTool/worldmap.h",
+   "bytes": 2678,
+   "sha256": "3e93390c97a41149e034350c7593f954e8a4755eb0e1dd8bee0d7dddd4054703"
+  },
+  {
+   "path": "WorldSpawnerTool/worldsnapshotobject.cpp",
+   "bytes": 1008,
+   "sha256": "7b88e95755ff7b7bcb7bcf12ce62f50f1b83644eee4647a33c4f0b1adfc22b67"
+  },
+  {
+   "path": "WorldSpawnerTool/worldsnapshotobject.h",
+   "bytes": 555,
+   "sha256": "57f44e6c747fbca45b639cc1f454f5674c36f9e8a0548101c9467e26ac42b615"
+  },
+  {
+   "path": "WorldSpawnerToolLua/.gitignore",
+   "bytes": 12,
+   "sha256": "ae46a3471e6d159eae66a8a44f385edaa3e409daba3697de7c424172ba9a1a06"
+  },
+  {
+   "path": "WorldSpawnerToolLua/README",
+   "bytes": 799,
+   "sha256": "419910716907ac69641f2cbeb56d59271001f0055f13d46141c50e994c36b2ac"
+  },
+  {
+   "path": "WorldSpawnerToolLua/file_system.lua",
+   "bytes": 1484,
+   "sha256": "103d31f2519230080e13724e4916ec07ae5cf0df533430241dc56fdc672a5764"
+  },
+  {
+   "path": "WorldSpawnerToolLua/object.lua",
+   "bytes": 224,
+   "sha256": "fd63b384d8f5eded9a79143cb5506f6a831c90e11378504d4a3b6f907107a611"
+  },
+  {
+   "path": "WorldSpawnerToolLua/string_operations.lua",
+   "bytes": 2331,
+   "sha256": "4ec3ab5c558bee3e3e649bd5b87bc019d2102a5c64f6840a13d12bade7382137"
+  },
+  {
+   "path": "WorldSpawnerToolLua/table_or_item.lua",
+   "bytes": 647,
+   "sha256": "131b56764989ef402d300c77252dc432c1dabd64143a2151cc581bc21f658e17"
+  },
+  {
+   "path": "WorldSpawnerToolLua/world_spawner_tool.lua",
+   "bytes": 7927,
+   "sha256": "d0e3f574d4ba29aaa05fbb9c1e304e9da439f50d6223fe268c0fff8175994789"
+  },
+  {
+   "path": "WorldSpawnerToolLua/world_spawner_window.lua",
+   "bytes": 14126,
+   "sha256": "c7c146a9fdd02509eb1909f747e1464675ec8fef22c6f6fddcb2a3aedff46370"
+  },
+  {
+   "path": "WorldSpawnerToolPython/README",
+   "bytes": 1119,
+   "sha256": "ef5dc49bca4701c2d47bea93b5a817daaaab3cb1f1fd87d2af3eec1ed33fe331"
+  },
+  {
+   "path": "WorldSpawnerToolPython/__init__.py",
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "WorldSpawnerToolPython/planet.py",
+   "bytes": 2430,
+   "sha256": "318195247a0517e11badca9d8e94d3059822f7ee6079bd17fb32af1170ce0d66"
+  },
+  {
+   "path": "WorldSpawnerToolPython/region.py",
+   "bytes": 6763,
+   "sha256": "d325008e0a6d24b3de87cdf33d57826b94c6d5f1a6240a8bf540aa6430f0da8c"
+  },
+  {
+   "path": "WorldSpawnerToolPython/world_spawner_tool.py",
+   "bytes": 19131,
+   "sha256": "3488f3c6c73170a72300d46d917cbb7f841cebf3265f14ead47bdae01493e711"
+  },
+  {
+   "path": "behavior-studio/.gitignore",
+   "bytes": 42,
+   "sha256": "66f2ef368890a1132896345390622ea86696387c0aaba26b1dca9e9cb5ac9d7e"
+  },
+  {
+   "path": "behavior-studio/COPYING",
+   "bytes": 35823,
+   "sha256": "5f631fae467c82b8cd28fd1ec425c816895a35f9d94e36bee0e0164570e8e0f6"
+  },
+  {
+   "path": "behavior-studio/README.txt",
+   "bytes": 2231,
+   "sha256": "b641ab29711757cc21f2ed0747be1a25c316443a665b5ded0ccfdc5776cd5558"
+  },
+  {
+   "path": "behavior-studio/config/behavior_alphabet.xml",
+   "bytes": 6712,
+   "sha256": "7527b4ec2f5d1fe2ca93b288e3bcccd7c771241842d55e2e2593e4d2080224ea"
+  },
+  {
+   "path": "behavior-studio/config/config.xml",
+   "bytes": 4503,
+   "sha256": "ccefd9377eccffc954fa031a9132f5235b0a946230540a19b3b636409050c772"
+  },
+  {
+   "path": "behavior-studio/config/diagram_shapes.xml",
+   "bytes": 6669,
+   "sha256": "cadfad1beeaf7fba95da7a415c8a13231c8192c5864aae5dde84329e2c250fc2"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/SWGEmu.btproj",
+   "bytes": 767,
+   "sha256": "fa613f687d2fee6f24ef2361581bbda2bae53418c31dcf2156432fdc6bc1d13d"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/attack.dgm",
+   "bytes": 73,
+   "sha256": "482ad65a1c85c41694000498052ec8b4cf726d42ce9b9dcc19860150a1fdc884"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/attack.xml",
+   "bytes": 73,
+   "sha256": "482ad65a1c85c41694000498052ec8b4cf726d42ce9b9dcc19860150a1fdc884"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/node_library.xml",
+   "bytes": 49017,
+   "sha256": "c4cf488a94d196b52ef35af646e7631442a3e16fd00c32b1b2aaf7b6258ae927"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/cityPatrol.dgm",
+   "bytes": 1301,
+   "sha256": "53b1f5d78ed0921dfff948580d729b4574049e7405678d05efe23f008eadc0f0"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/cityPatrol.lua",
+   "bytes": 735,
+   "sha256": "5fde0c96eb7c87d5d36e73f32e14e96d280197714fd0aed1370f09a5fb9879ae"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/cityPatrol.xml",
+   "bytes": 1136,
+   "sha256": "a5a38cb4d51541dafad54991333431c092110fc68deb07b1c4c3c2669538955a"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/crackdown.dgm",
+   "bytes": 14463,
+   "sha256": "46f65b8e381189e544c0f90ad5caef5fe8a8c5ad1ec53f4a915642436af39f7b"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/crackdown.lua",
+   "bytes": 6884,
+   "sha256": "3dd9dd31ffb8dc4a7c024041e9e55ccbf954873e622c92afc5088c1ecc921f20"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/crackdown.xml",
+   "bytes": 12102,
+   "sha256": "08133f17e32588706310a1945f447e804a8501f56652ece24af1b1005dd11df9"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/deathWatch.dgm",
+   "bytes": 1737,
+   "sha256": "69acb3cfca3d0fcff18054dc949962c68499b2fe211c59d31ce5630ca2e5fb57"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/deathWatch.lua",
+   "bytes": 897,
+   "sha256": "b828257c52abba876ff1b1009553ceca7601bfcd2fdda8b2ee2e10c42039d149"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/deathWatch.xml",
+   "bytes": 1533,
+   "sha256": "0f8ce3a7775437ae042e9bfc42ed47afdf1eec08957cb50420124a73bd55591a"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/default.dgm",
+   "bytes": 53458,
+   "sha256": "d2a5924c750f703a58cf432a768c53011cc1322e624d43e2acd16f086e6731cd"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/default.lua",
+   "bytes": 25619,
+   "sha256": "08dbdc8d26e7e0b3f32af53c2fc7dfd2e8b1e65919c36a0a50edff83db3eaa7c"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/default.xml",
+   "bytes": 44912,
+   "sha256": "ad586def91101507cb9ffa6971a08eb340b59d70b243fa62d1261d568f2850b4"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/enclaveSentinel.dgm",
+   "bytes": 3473,
+   "sha256": "bcffe3748b8c16b99b8fc9fc1b1f9c419e35eda3027c68159f249bea62faf07b"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/enclaveSentinel.lua",
+   "bytes": 1594,
+   "sha256": "e0bdd4209cea76b9963e76fe712821a3b5752f2623d13a877ce3cac7748ab048"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/enclaveSentinel.xml",
+   "bytes": 2917,
+   "sha256": "3068a72e792e9363b98417cc6c0e53e0e145561c84108ccbeef498b60f0489de"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/escort.dgm",
+   "bytes": 6822,
+   "sha256": "642396813977afc3e9d9d73d0c3efbb8d10a366bae43991955488796a2ee65df"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/escort.lua",
+   "bytes": 3462,
+   "sha256": "37f0e944f351106479e56aee96d66ab35d1bdeb1d56afbe1459cd4372da16fd7"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/escort.xml",
+   "bytes": 5931,
+   "sha256": "342c11f384f8c96b4b95947c44ba1a3b7572e3260771971dc2b090382cf6b085"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/eventControl.dgm",
+   "bytes": 1038,
+   "sha256": "cfce2997c647b9442a65f7b6644ceff237ebf487f07f619b2b5be27921287e3e"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/eventControl.lua",
+   "bytes": 509,
+   "sha256": "ce7e0a157acc193eb917ed0bc1bd3b24bb4841cfdd76e98639136c56eb9bfe76"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/eventControl.xml",
+   "bytes": 877,
+   "sha256": "521119880b4d0df977b08dcaba4088fc9a7d31dbe7628a6f6b0a05305e069de4"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/herd.dgm",
+   "bytes": 3114,
+   "sha256": "b8f64fc29b2a86f63967eeb3633d8419dbe509f906a9a6e7e5a7d83c64e16bbc"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/herd.lua",
+   "bytes": 1349,
+   "sha256": "52338aa27905ccaaa6176716b208b55a7f6bc581a68c09f2bb253f2fe02c01a9"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/herd.xml",
+   "bytes": 2534,
+   "sha256": "c541e1fae13430b2632de48c477610f6d3894697d9ad1d9699d174ea5efc1651"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/pet.dgm",
+   "bytes": 24508,
+   "sha256": "a23579ffe96828d3b56fa3cd01b4cf9b4ef0b214085f6c9c5874edc561413589"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/pet.lua",
+   "bytes": 11906,
+   "sha256": "ab47c3142887a57451772a6fcacd92103044ff657c75e197e3198b9399783c37"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/pet.xml",
+   "bytes": 20872,
+   "sha256": "628bf62796b638d752c76f1e89f3159a7e3c87b9baf2e5e103a7119dbf6fb2cc"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/static.dgm",
+   "bytes": 5016,
+   "sha256": "6951ef0f047140fe19e0540ba3fbbeecf9baa5f9ae68a486dbc160bef45b7710"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/static.lua",
+   "bytes": 2576,
+   "sha256": "19ad334f44207dd8db07da096e03627120b97758c4e5818992c7b2d327582448"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/static.xml",
+   "bytes": 4312,
+   "sha256": "def2ce4a9874f44ddbf0f026e518c01efa43d989c7d65498a88c02d687765d63"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/test.dgm",
+   "bytes": 615,
+   "sha256": "152582d121fe16ce63dcee2288a316f42972f8809ab5c5727bc4cac3920c1449"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/test.lua",
+   "bytes": 328,
+   "sha256": "0b43b73103b6906eb0c029cb3ff069cb4350dcc6e9c99c9234cfd13031ebbc93"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/test.xml",
+   "bytes": 533,
+   "sha256": "c4a411bad7be9259f319b16f430001dda5ac68da4f99fd5fc16f4bc17544919c"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/villageRaider.dgm",
+   "bytes": 1448,
+   "sha256": "27ab8db19fc233b8275798bc16c18d3b1088cb3a18eeadfd134f800e8251b9c1"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/villageRaider.lua",
+   "bytes": 756,
+   "sha256": "558f31bde9317dfd51d4f009a5b0a09d37cbc9dd4fd7239b8893fda8d6d463ae"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmu/trees/villageRaider.xml",
+   "bytes": 1276,
+   "sha256": "f30bbf719d843ec368fabbc3bed27964210a292c18abb4624397717e050fb59c"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/SWGEmuSpace.btproj",
+   "bytes": 514,
+   "sha256": "83953425e5dd57ecb008b774d9b933b17527c11aa3bc98e76d1b697f530522e0"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/node_library.xml",
+   "bytes": 29027,
+   "sha256": "ce9e4960d0ace3629d50e8612873c3905f3fd069326c1642336f309d124aafb9"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/attackableSpaceStation.dgm",
+   "bytes": 1470,
+   "sha256": "977a4f4d705557ca5898446f2593edb97d7d8d2f5e350c3d5fa5763b13909348"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/attackableSpaceStation.lua",
+   "bytes": 937,
+   "sha256": "c4f52cfdb3fce845ad9c586565eb3cea8fcfeeb509f9b032bc355963703c6d6d"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/attackableSpaceStation.xml",
+   "bytes": 1409,
+   "sha256": "7839525ec717d817b4c7be65b19e328d6b9d8906dec116709c2072ffd82026f2"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/default.dgm",
+   "bytes": 17530,
+   "sha256": "c55aca159ffe1456bea6390a2a928930b5fc49166f2e9b9df787219639dc9bcf"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/default.lua",
+   "bytes": 8890,
+   "sha256": "9ba3809be4e17d082dc54ee9fb50fec62b2606192a26e1df132b6ab2fbc19836"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/default.xml",
+   "bytes": 15840,
+   "sha256": "6d906640abd9dbb8442fb521fb856800c21daf4cfe5bd7078e8976f00cd6df50"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/escort.dgm",
+   "bytes": 5651,
+   "sha256": "fb3dbf5280e9ffb5fd4f2910215e53c3c05bbb513e54fdae76b69c46d3f74048"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/escort.lua",
+   "bytes": 2947,
+   "sha256": "00c29459db713b8fec0b58e6381d0ceabab82e33eab9a571d0829f759b6437e8"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/escort.xml",
+   "bytes": 5173,
+   "sha256": "def49e6af64ed4a375379b2ea72ace23e835825f827f021da4b773b0a64f83ed"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/spaceStations.dgm",
+   "bytes": 353,
+   "sha256": "39f21ceef578fb39096f1919ee01d1f1283907d4bb2a85367d3b4f0b32128972"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/spaceStations.lua",
+   "bytes": 209,
+   "sha256": "1e3dd0f53e28c96f63a34a9520ffacc78a16de378f83395a5971b3125caba5b5"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/spaceStations.xml",
+   "bytes": 341,
+   "sha256": "6f39d589eb1484178e9a020d5bab4e2d1eb543982139884e80c6658b2c74fde6"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/space_templates.lua",
+   "bytes": 938,
+   "sha256": "18e42768bbdb18271ed73f050cc50ed9b088fcf74fed8512d41ddb33a018bbb5"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/turretship.dgm",
+   "bytes": 897,
+   "sha256": "6f22606365cc30983fa9a486672b716896f52289526dcf121406be2d71efe08b"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/turretship.lua",
+   "bytes": 446,
+   "sha256": "e958d2a766097d5c14a5ee769f1dd4ab91e9b5eb6723d89646ec7da74a3cda0d"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/turretship.xml",
+   "bytes": 820,
+   "sha256": "69e33719de7ea95044a06ed852ef378dfc8d589e9a82b167cb5d2053c48c2454"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/waveAttack.dgm",
+   "bytes": 1797,
+   "sha256": "9788eda83b6505e8ae6ced6a64f103822f819fc16338c0d1b521b6abad50a272"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/waveAttack.lua",
+   "bytes": 839,
+   "sha256": "5dd5fdaa83892d2a10db1f1b0d8086a0ea94288487434c55944b2c6cbb5c9727"
+  },
+  {
+   "path": "behavior-studio/data/SWGEmuSpace/trees/waveAttack.xml",
+   "bytes": 1602,
+   "sha256": "a42e81d8ef047ecbe90e649f89cf521c7b82232a8e0d87f24ecfa5eed4c14896"
+  },
+  {
+   "path": "behavior-studio/data/background.png",
+   "bytes": 497,
+   "sha256": "d8f6bd62b07553c1dfa7824da079be6560e835975297d6c8a687c0f21e4b8374"
+  },
+  {
+   "path": "behavior-studio/data/background1.png",
+   "bytes": 483,
+   "sha256": "c91b83d46ac157db9bf47f3ffb1c5f1a8eb1a90ea7fb36bccdf8157a9d795014"
+  },
+  {
+   "path": "behavior-studio/data/background2.png",
+   "bytes": 600,
+   "sha256": "a89ee30cb3eaecd27a76fc4529228f5d776014dd2958d81e7ec839e0a6b40643"
+  },
+  {
+   "path": "behavior-studio/data/background3.png",
+   "bytes": 536,
+   "sha256": "82cf81ecfaddabae23f4de750b0dd2c5c10fd09e0a6f41f65e255493559f5238"
+  },
+  {
+   "path": "behavior-studio/data/examples/behavior_trees/human_behavior_tree.xml",
+   "bytes": 8868,
+   "sha256": "2b132b15ce60698f51e2052cbb2c70737dd19944e035824e562286eadc68588f"
+  },
+  {
+   "path": "behavior-studio/data/examples/collections/general_nodes.xml",
+   "bytes": 38636,
+   "sha256": "c5f0dd8b69c50e77bef2128165c13cebd3e05c6e981624943b0fd9f2f559dbb5"
+  },
+  {
+   "path": "behavior-studio/data/examples/collections/human_nodes.xml",
+   "bytes": 12668,
+   "sha256": "84e8a0fece7ae197b1ebdf4beaecb2f2305a03460860f98863885ee7ba38534a"
+  },
+  {
+   "path": "behavior-studio/data/examples/projects/human_example.btproj",
+   "bytes": 371,
+   "sha256": "9c49df15f3a7482b724aa1c4689f781d32e9c04f0dbc45febcd0e23e270499ac"
+  },
+  {
+   "path": "behavior-studio/data/icons/add-2.png",
+   "bytes": 745,
+   "sha256": "86c86d70f8ccc6e1bdb95b073cc345b083d86fe57b0a59edd73427fb7442b0d7"
+  },
+  {
+   "path": "behavior-studio/data/icons/add-3.png",
+   "bytes": 344,
+   "sha256": "745a8d999fadb0962150e09bcdb635968d0db497c01727478c9362eb90446cad"
+  },
+  {
+   "path": "behavior-studio/data/icons/add.png",
+   "bytes": 435,
+   "sha256": "7508f4fb6fd504fbbd3389203cffba394fc5b94cb910c61fa0907142ed89f49c"
+  },
+  {
+   "path": "behavior-studio/data/icons/binary-1.png",
+   "bytes": 931,
+   "sha256": "565d43c7dda3099c6d741cbf9524a67362fa7a274361a18ba467ef8fbdfb8793"
+  },
+  {
+   "path": "behavior-studio/data/icons/book_add.png",
+   "bytes": 603,
+   "sha256": "30fd2bd3346fdd84edc00a23adad5f0cb6685d4aee0262cc55202fae3b219432"
+  },
+  {
+   "path": "behavior-studio/data/icons/book_delete.png",
+   "bytes": 650,
+   "sha256": "309f9fe996f2d5f3d90525f0c4b38d086e8797080943a81dfbce98792522aba0"
+  },
+  {
+   "path": "behavior-studio/data/icons/book_edit.png",
+   "bytes": 813,
+   "sha256": "5ab3924b7d69bdffe92bfb8fc7d89c34247199d56c94d148a4a190797f8ecd9b"
+  },
+  {
+   "path": "behavior-studio/data/icons/book_next.png",
+   "bytes": 702,
+   "sha256": "b80ba5b5fda4791c6b6e61719ef42a0402f55acf433361dc3998262cd115bd0e"
+  },
+  {
+   "path": "behavior-studio/data/icons/book_open.png",
+   "bytes": 622,
+   "sha256": "8bd44dedf43b1a576fbf32a97934a92a703b2d19c4ace265b8c9d8512e9d300b"
+  },
+  {
+   "path": "behavior-studio/data/icons/book_previous.png",
+   "bytes": 680,
+   "sha256": "03f6da8eb275bfc715e3d5d79ab22f34e7adc9ae8adde6f0d09b153946b04f11"
+  },
+  {
+   "path": "behavior-studio/data/icons/cancel-1.png",
+   "bytes": 652,
+   "sha256": "cb5ddebfcb1afec8754fffc46ecae4cfa5c69e4f8cde5e50af19313e2e197519"
+  },
+  {
+   "path": "behavior-studio/data/icons/cancel-2.png",
+   "bytes": 884,
+   "sha256": "50624bd9d6ce0783406b438143d5b9570f5445c1772809ecee81cff0c954bb2b"
+  },
+  {
+   "path": "behavior-studio/data/icons/cancel-3.png",
+   "bytes": 587,
+   "sha256": "1bc3eabbb1069fa663697259fbf6f21eaefd1d51168f33ced13c2965f1e2b1bd"
+  },
+  {
+   "path": "behavior-studio/data/icons/cancel-4.png",
+   "bytes": 842,
+   "sha256": "da308bfce323c102e13ee4b33bc1ff35199621b884104721222e77303a3207fc"
+  },
+  {
+   "path": "behavior-studio/data/icons/cancel-5.png",
+   "bytes": 890,
+   "sha256": "70afec6d2b44df49b455d38e555e3036943dca0af982fc39032358563f629bc1"
+  },
+  {
+   "path": "behavior-studio/data/icons/cancel-6.png",
+   "bytes": 713,
+   "sha256": "670fb6c65eebe631556868f20560771f06d285a73a6c57ed411a6e51902116b5"
+  },
+  {
+   "path": "behavior-studio/data/icons/cancel.png",
+   "bytes": 1211,
+   "sha256": "39af88f248511e08d4706b1eef9a17f9b7e0edda315eadf688285f9da8cf0bc3"
+  },
+  {
+   "path": "behavior-studio/data/icons/chart.png",
+   "bytes": 444,
+   "sha256": "a7c52dd20403a3cd72bd0dc73027177732261c96ad43c1890af7e850505627f5"
+  },
+  {
+   "path": "behavior-studio/data/icons/chart2.png",
+   "bytes": 459,
+   "sha256": "b42ffd2549c45de4a37691a2e7bc2b353dfdd60b49b6928c4d8b09bcdd508793"
+  },
+  {
+   "path": "behavior-studio/data/icons/chart3.png",
+   "bytes": 1191,
+   "sha256": "228ec06290a1807c121a8f5238c696d0180ec74d458ba9e3fed153102e0ed77b"
+  },
+  {
+   "path": "behavior-studio/data/icons/chart_add.png",
+   "bytes": 551,
+   "sha256": "e92b48b0f09adb9326d172edaf73a1232a77550beb54589da6347269b107145f"
+  },
+  {
+   "path": "behavior-studio/data/icons/chart_add2.png",
+   "bytes": 604,
+   "sha256": "d961a3baa842a258bece6e39d5817fc8e179dd80a4b20805af86faf5407c533c"
+  },
+  {
+   "path": "behavior-studio/data/icons/chart_delete.png",
+   "bytes": 563,
+   "sha256": "7ff674d577f29a1036c7a4458f05e6e6802c444627346d78663124bd74df8bba"
+  },
+  {
+   "path": "behavior-studio/data/icons/chart_delete2.png",
+   "bytes": 606,
+   "sha256": "215f5c1fab6790c2f2f27e63c2120d23e1dce21d1cccaa884e0032afce531405"
+  },
+  {
+   "path": "behavior-studio/data/icons/chart_hor.png",
+   "bytes": 512,
+   "sha256": "e1d82dd6cf98f5b9258c369f9ddaa5c0eec5ad50c6b755aa10a8dccdf34c1a12"
+  },
+  {
+   "path": "behavior-studio/data/icons/chart_hor2.png",
+   "bytes": 490,
+   "sha256": "0ba5f394b6c90e5a397c0f5ad8ece2f0985c8946a1120a78cd3ad5520490e4d8"
+  },
+  {
+   "path": "behavior-studio/data/icons/chart_red.png",
+   "bytes": 297,
+   "sha256": "5e2fe7c3fef99cf1e2ab4ce3fdeae20ac3cd3d6b0529e093d4148bd7b2004bb3"
+  },
+  {
+   "path": "behavior-studio/data/icons/cog.png",
+   "bytes": 512,
+   "sha256": "73bd21e518c03a9904199b19dc0a0b621e0b9fafcc9482e8b9623e05bb4cafb6"
+  },
+  {
+   "path": "behavior-studio/data/icons/comment.png",
+   "bytes": 413,
+   "sha256": "2c51e796b8b2242e5778f50a254622e9a90b1a1437b832fce78fb23f382cbc48"
+  },
+  {
+   "path": "behavior-studio/data/icons/comment_add.png",
+   "bytes": 530,
+   "sha256": "e795a59234c8935964ebf74c762f7be09adc7b6b74dd47f982b58d7fbae52516"
+  },
+  {
+   "path": "behavior-studio/data/icons/comment_delete.png",
+   "bytes": 548,
+   "sha256": "5f75b8c437fbb30f082d5fb594cf75c40c2718dd32dbda777193fd05f5d94588"
+  },
+  {
+   "path": "behavior-studio/data/icons/comment_edit.png",
+   "bytes": 644,
+   "sha256": "de6535da6f25054d6a3ef5ddd5ebda741b4b851b9bf7fd70792aab148e5e73f4"
+  },
+  {
+   "path": "behavior-studio/data/icons/connector1.png",
+   "bytes": 257,
+   "sha256": "40e42b541e01e4691f199f0a6c6f537ece15ee72f72acf18933b8b00fb0a1601"
+  },
+  {
+   "path": "behavior-studio/data/icons/copy.png",
+   "bytes": 479,
+   "sha256": "20f61e712b1940cd76a09f33898ac7a6a32ae6ca3356ce7cd788a9e678592684"
+  },
+  {
+   "path": "behavior-studio/data/icons/copy2.png",
+   "bytes": 1131,
+   "sha256": "1e3e777d86399533a4fa433d3aecce65ddd984c69e7547ecb744d00b7cf603b9"
+  },
+  {
+   "path": "behavior-studio/data/icons/copy3.png",
+   "bytes": 2562,
+   "sha256": "b09f2d3aa4768bc3286e2167abc4ed19324fae1b3e872617fb111211afa04b0f"
+  },
+  {
+   "path": "behavior-studio/data/icons/copy4.png",
+   "bytes": 1213,
+   "sha256": "0569c58bb396203743f6a54cd5efeb65eb0dcbb65155dedbefcf4d83e16cc147"
+  },
+  {
+   "path": "behavior-studio/data/icons/cross_red.png",
+   "bytes": 655,
+   "sha256": "d04ecfc93ff86c44f6fc39e35945e3d8a7648ba8fcd97a2635920df2e88893b3"
+  },
+  {
+   "path": "behavior-studio/data/icons/cursor.png",
+   "bytes": 354,
+   "sha256": "f86956c6fdf4d4a3aa74da5fd8c24245e4ddd02a0602ad16f1ef22261576c909"
+  },
+  {
+   "path": "behavior-studio/data/icons/delete.png",
+   "bytes": 715,
+   "sha256": "ce07a8b5022e59a1bde9690b720a6bf10fc9767db6512d14ebff2782ec62b5bf"
+  },
+  {
+   "path": "behavior-studio/data/icons/door.png",
+   "bytes": 508,
+   "sha256": "d6845cf2cc5c1e3a5f3b26e2edddc6c0bf5b95159ba31602e3e49f3319278286"
+  },
+  {
+   "path": "behavior-studio/data/icons/door_.png",
+   "bytes": 412,
+   "sha256": "e18d1a939bae09a48b7d9fa3168950b86ae62904a90b5cb3bc28ee55c28d4b0b"
+  },
+  {
+   "path": "behavior-studio/data/icons/door_in.png",
+   "bytes": 693,
+   "sha256": "f0bedb977786f1b095b611e907387e419aa16a92086405371f6194f7fa005e71"
+  },
+  {
+   "path": "behavior-studio/data/icons/folder.png",
+   "bytes": 537,
+   "sha256": "d049b83cadc5ae55a1639837a7653db1def729761f1913ee5dc4e4eb47fbd2a6"
+  },
+  {
+   "path": "behavior-studio/data/icons/folder_page.png",
+   "bytes": 688,
+   "sha256": "0acea9b259285ef60a9a21bc1fcd82edbe3173239e0c338b5a12781aa28d3576"
+  },
+  {
+   "path": "behavior-studio/data/icons/hand-icon.png",
+   "bytes": 672,
+   "sha256": "e804795c8f1d2768badf2086d718ecee9cafcb7d0a112e45a8f1abacdbaf91fa"
+  },
+  {
+   "path": "behavior-studio/data/icons/hand-icon2.png",
+   "bytes": 511,
+   "sha256": "a0ca9f448a84a4d9229a6e2ab3593bc298bab1512d072c0bd22da2150255a2ad"
+  },
+  {
+   "path": "behavior-studio/data/icons/hand-point-090-icon.png",
+   "bytes": 687,
+   "sha256": "02c6bacedfd02c21cef419f35bce0c63e2b952a0655bb29dfd0e4bf56d82abe0"
+  },
+  {
+   "path": "behavior-studio/data/icons/hand-point-090-icon2.png",
+   "bytes": 519,
+   "sha256": "ff8402a859410cd3a5126b98ab298a6a230278c86d2a14e61a26a16b8989cd41"
+  },
+  {
+   "path": "behavior-studio/data/icons/help.png",
+   "bytes": 786,
+   "sha256": "500476bbc5eb00f0cc9c7eb7e8c47e176888f9087a34c92e7a0571ce3df59765"
+  },
+  {
+   "path": "behavior-studio/data/icons/page_edit.png",
+   "bytes": 807,
+   "sha256": "5bac41bd9ce40d95fa3864f384a02571be59253bb2b719e28e7284e60143b3eb"
+  },
+  {
+   "path": "behavior-studio/data/icons/params1.png",
+   "bytes": 443,
+   "sha256": "24ea115e70392cd92bf73314f11c5f34b0de4f7812ab443d134c4d2e14a198a6"
+  },
+  {
+   "path": "behavior-studio/data/icons/paste.png",
+   "bytes": 910,
+   "sha256": "c8ff8c7a98ee6887dd9cabb399a4346724cbe30d2dabc175647a1c39fe6a4b38"
+  },
+  {
+   "path": "behavior-studio/data/icons/paste2.png",
+   "bytes": 1027,
+   "sha256": "b831c961a705a4ecaaabea47cbda600be2017ebb281e29fa8ed9048ff279f9c3"
+  },
+  {
+   "path": "behavior-studio/data/icons/paste3.png",
+   "bytes": 2484,
+   "sha256": "474f2753be64dd9ea68c81924e74be36522e94b9e791ddf81157184a2f4070f3"
+  },
+  {
+   "path": "behavior-studio/data/icons/paste4.png",
+   "bytes": 1481,
+   "sha256": "9180382bacf00898037348fa27e9bc96e13a797f4f6223d8da077f4b4bb35f16"
+  },
+  {
+   "path": "behavior-studio/data/icons/plugin.png",
+   "bytes": 591,
+   "sha256": "a253fcdaf6dfac5768252be1877d863071d3c181db00656e3d07d79ac6a4b163"
+  },
+  {
+   "path": "behavior-studio/data/icons/plugin_add.png",
+   "bytes": 691,
+   "sha256": "513aee6080c97f9fb3277566c2f41e03f544944f2c9746688f4a357d070cb19a"
+  },
+  {
+   "path": "behavior-studio/data/icons/plugin_delete.png",
+   "bytes": 692,
+   "sha256": "6a37a4b0b782e42ee955cfc43c7c83c6e7873c893bb3e9e85a76d5ddb4f42131"
+  },
+  {
+   "path": "behavior-studio/data/icons/plugin_edit.png",
+   "bytes": 746,
+   "sha256": "0e767d4e688df15699e5661930d631d36faf3735986b9ad9617922ef9dcc5520"
+  },
+  {
+   "path": "behavior-studio/data/icons/red_cross.gif",
+   "bytes": 1045,
+   "sha256": "162c76fc2429a44316b51895f6ecf7a1c74d0c555c68b6165bfd2221c4b8f580"
+  },
+  {
+   "path": "behavior-studio/data/icons/redo1.png",
+   "bytes": 1539,
+   "sha256": "878d830dcb87d129e2c771b91269111b8d4aa5222ab9db085bf208e9dc8e26ae"
+  },
+  {
+   "path": "behavior-studio/data/icons/refresh.gif",
+   "bytes": 1046,
+   "sha256": "e7933073a8eb380e630dd6d1dd7ed117847cc399645b35c91d0507ac38664a74"
+  },
+  {
+   "path": "behavior-studio/data/icons/report_edit.png",
+   "bytes": 762,
+   "sha256": "5299c87271ee8c28b78f8b69727a7c524f7aeb770b22f9a11a8674be65da8431"
+  },
+  {
+   "path": "behavior-studio/data/icons/rounded_arrow.gif",
+   "bytes": 322,
+   "sha256": "d6e02031978a4b12bb0ebfcedb51a66a334d11a1726cd2f98c117b2932828c13"
+  },
+  {
+   "path": "behavior-studio/data/icons/save.gif",
+   "bytes": 91,
+   "sha256": "dd4ebb83f1655b85d9aba913693e053dd3e814faed32400242f51cb209209a48"
+  },
+  {
+   "path": "behavior-studio/data/icons/save.png",
+   "bytes": 620,
+   "sha256": "9697f3ae90bfdbcffe8811d9a5cd2e2a98f1d44a06c2cc9d8eb5674fc414f33e"
+  },
+  {
+   "path": "behavior-studio/data/icons/save_all.png",
+   "bytes": 691,
+   "sha256": "934f631e22c20a4cc07457cb160464743a3b192d379a1a3a52085d1b1b22d4d3"
+  },
+  {
+   "path": "behavior-studio/data/icons/shape_align_bottom.png",
+   "bytes": 398,
+   "sha256": "5a9a5fa975008242dbd60ce44597f8aa05c1806e9f335c677841d171eadeaddd"
+  },
+  {
+   "path": "behavior-studio/data/icons/shape_align_center.png",
+   "bytes": 384,
+   "sha256": "76d2f1651edfd7f8ba0e05d4fba5345573f850b7b329ab6c55a0cf3ac43cda7a"
+  },
+  {
+   "path": "behavior-studio/data/icons/shape_align_left.png",
+   "bytes": 402,
+   "sha256": "8ce60244d8defdde90b9ce816f535c5b6428e3303106483486a40aef7a4b84e1"
+  },
+  {
+   "path": "behavior-studio/data/icons/shape_align_middle.png",
+   "bytes": 414,
+   "sha256": "eb5cd51a674a4f1173e45ccef8719845084ea7629c8bca3c826f03fc5d7f9454"
+  },
+  {
+   "path": "behavior-studio/data/icons/shape_align_right.png",
+   "bytes": 401,
+   "sha256": "9bf98967c6de2173901a7469615a3348915f040a1819412a7ec2832831edee68"
+  },
+  {
+   "path": "behavior-studio/data/icons/shape_align_top.png",
+   "bytes": 406,
+   "sha256": "e472ce94831f4a88a6f180c5cbc1332b44df5634294ae2fbd3ab9760dea9edf8"
+  },
+  {
+   "path": "behavior-studio/data/icons/shape_flip_hor.png",
+   "bytes": 418,
+   "sha256": "41412389184bb2a2a4146d1616fc9450d6d3ff0fc8ab4275c2bee52c5d0dcc30"
+  },
+  {
+   "path": "behavior-studio/data/icons/shape_flip_ver.png",
+   "bytes": 403,
+   "sha256": "5bf0dbf63ab34f143b53a553c9b438acd6ab82b8b38f2765b9580fa856f20353"
+  },
+  {
+   "path": "behavior-studio/data/icons/splash.png",
+   "bytes": 16854,
+   "sha256": "72e6e7ecf2baaef2d6d146c7d3405c562e088d43f89cacd7a15b55e2775bbf6f"
+  },
+  {
+   "path": "behavior-studio/data/icons/splash2.png",
+   "bytes": 54870,
+   "sha256": "acd785479299f9b0daca7fb641743a35fd0c86c51895f86220aa438589088ef0"
+  },
+  {
+   "path": "behavior-studio/data/icons/table.png",
+   "bytes": 566,
+   "sha256": "89a05c1c039884647e00de2fea6b298118cdacdb78f86ed884e0692e7e4af824"
+  },
+  {
+   "path": "behavior-studio/data/icons/table_add.png",
+   "bytes": 663,
+   "sha256": "b6ada72922c8fe490431e9f2bbcfd7320d63ad51022e975ab0168a77b0f4a0df"
+  },
+  {
+   "path": "behavior-studio/data/icons/table_delete.png",
+   "bytes": 660,
+   "sha256": "11509023a56f21793f50fde69a5d96390c09b4c3c18b2845f5dcb7c04f970001"
+  },
+  {
+   "path": "behavior-studio/data/icons/table_edit.png",
+   "bytes": 744,
+   "sha256": "b4870113929f982983766275ce5a05d12718a36bdc05b9e0841ddb31d216dee9"
+  },
+  {
+   "path": "behavior-studio/data/icons/text_align_justify.png",
+   "bytes": 209,
+   "sha256": "dd4c4b387ce83c48999d20269fbde3fb49befb6fb3e16e0ae1cabfa202e4c3dd"
+  },
+  {
+   "path": "behavior-studio/data/icons/trash_empty.png",
+   "bytes": 1747,
+   "sha256": "e805dcf4ecf2fa17350cd7a666b5a92e3e799edcb1e650eb8a4f5869a952414f"
+  },
+  {
+   "path": "behavior-studio/data/icons/trash_empty_small.png",
+   "bytes": 337,
+   "sha256": "727c784e144a0cf53ece8936c63c03b031bbabf8976baf9a890db429773f290e"
+  },
+  {
+   "path": "behavior-studio/data/icons/tree.png",
+   "bytes": 278,
+   "sha256": "8900222d0b9f885b59f73f359e32202153503566698ea53eeb6b04b37bbf030f"
+  },
+  {
+   "path": "behavior-studio/data/icons/tree10.png",
+   "bytes": 4736,
+   "sha256": "bb38934476aaf8e5a1cb2619b0df295aeaa1566d4110e9abb91e58f2d99ed640"
+  },
+  {
+   "path": "behavior-studio/data/icons/tree16.png",
+   "bytes": 6866,
+   "sha256": "eafce9ca5be5ca58414495ce2f4b5527a54daa7847b9f87bed749ea8942b1c2c"
+  },
+  {
+   "path": "behavior-studio/data/icons/tree17.png",
+   "bytes": 19238,
+   "sha256": "32e02a333b960c7612dc42b3f827d540ec0387c210d2d55fb95af69392662e18"
+  },
+  {
+   "path": "behavior-studio/data/icons/tree2.png",
+   "bytes": 508,
+   "sha256": "9ab9d92cd905fe219852a5ea24df7ff8e58d710d1157b8321d8bd6e48e2da443"
+  },
+  {
+   "path": "behavior-studio/data/icons/tree70.png",
+   "bytes": 1377,
+   "sha256": "b20148331f909316a0ec542a66d3d55e364980003657a0d92daf7d92e715cecd"
+  },
+  {
+   "path": "behavior-studio/data/icons/tree71.png",
+   "bytes": 2240,
+   "sha256": "354506c0c7b42140c322b077d662e9431b8458fc0b97c90f726ca00ffeee8565"
+  },
+  {
+   "path": "behavior-studio/data/icons/tree_color.png",
+   "bytes": 406,
+   "sha256": "6f5f104525c479afaecdf9fd686b469ae549312e231451b1d7cb1539db7900fd"
+  },
+  {
+   "path": "behavior-studio/data/icons/tree_hor.png",
+   "bytes": 288,
+   "sha256": "4e65bd463fbc4f5b9d17c51b8ce16d6def1a7b15a7521b18d918a30893c196af"
+  },
+  {
+   "path": "behavior-studio/data/icons/tree_hor2.png",
+   "bytes": 552,
+   "sha256": "38e36629cde403f28e318df2af9574412c8d27f3c1081126dd4fadadeb1b5faf"
+  },
+  {
+   "path": "behavior-studio/data/icons/tree_hor_color.png",
+   "bytes": 432,
+   "sha256": "490337b777c59dbae6260b575ea35885b8d0624ae0367ecfd5cd815c2b821937"
+  },
+  {
+   "path": "behavior-studio/data/icons/undo1.png",
+   "bytes": 1623,
+   "sha256": "a0c997b5e2bb84d324741fd9f75ca5d07f10699f9d3035675d9e0798970f68bf"
+  },
+  {
+   "path": "behavior-studio/data/icons/view_down.gif",
+   "bytes": 305,
+   "sha256": "fe0caf10c072f55a8f11d80190df2cbb4465f24d5a7dd7a9c7da03c3d8f50218"
+  },
+  {
+   "path": "behavior-studio/data/icons/view_down2.gif",
+   "bytes": 308,
+   "sha256": "ec8eee23b733b6f7310fada75ac58f5949181d3aaa9de388aa2c78acac1b1b33"
+  },
+  {
+   "path": "behavior-studio/data/icons/view_right.gif",
+   "bytes": 308,
+   "sha256": "80f76d7b8f73ed814bfd79690a92d54c3e8deba02918f06ee47e57a944c92b21"
+  },
+  {
+   "path": "behavior-studio/data/icons/view_right2.gif",
+   "bytes": 314,
+   "sha256": "f04d095f0a00e6b92bb62d384c3c991469528ca03a8614fb4d67842bff6ac942"
+  },
+  {
+   "path": "behavior-studio/data/icons/wrench_blue.png",
+   "bytes": 610,
+   "sha256": "95cfe28ef28e679cd6ab2f9ca981f9945742e5fe239b1cfa4940c6cd8a487b12"
+  },
+  {
+   "path": "behavior-studio/data/icons/wrench_orange.png",
+   "bytes": 584,
+   "sha256": "77ce6ee6fcc7739b08851e2c53bfeed7746ba06827a88377b6477c7dbf1a0cac"
+  },
+  {
+   "path": "behavior-studio/data/main_window.png",
+   "bytes": 211236,
+   "sha256": "fab461d766e4c390661b8d4b3c572a2c72bff749348dfa37bad532e5aec9444e"
+  },
+  {
+   "path": "behavior-studio/data/signs/diamond.pp",
+   "bytes": 236,
+   "sha256": "39973bc77243077270ad34a4287688d9d45ea6bf9625f8240f015522ba85fa08"
+  },
+  {
+   "path": "behavior-studio/data/signs/diamond_arrow.pp",
+   "bytes": 433,
+   "sha256": "6480526a5032bdf93b567a3e5954eb6bd598af77d8568a58a6a6d6c9777a6a05"
+  },
+  {
+   "path": "behavior-studio/data/signs/diamond_eq.pp",
+   "bytes": 396,
+   "sha256": "2759312cc25384507ece9103d68a0fb8965df0d17d91e58134f9426faa78c6f5"
+  },
+  {
+   "path": "behavior-studio/data/signs/diamond_greater.pp",
+   "bytes": 395,
+   "sha256": "aa6e43a6a6d39a2a4de2f08080ca820e44d504e5c53b19e41aa0298a730275a8"
+  },
+  {
+   "path": "behavior-studio/data/signs/diamond_greater_eq.pp",
+   "bytes": 476,
+   "sha256": "dcca8ddf405286b104c8069166129e5ed23a35fc67fd2f2da925b5f3110e71c5"
+  },
+  {
+   "path": "behavior-studio/data/signs/diamond_less.pp",
+   "bytes": 395,
+   "sha256": "7584484a4c4b49370bec4b8bac3b5cea1a7dfe93bd6923e7562d513ff19395c6"
+  },
+  {
+   "path": "behavior-studio/data/signs/diamond_less_eq.pp",
+   "bytes": 476,
+   "sha256": "65f1cdde48a52bad52cd34100eaa9f0c7267ae680a93e466b85912ffa541d84b"
+  },
+  {
+   "path": "behavior-studio/data/signs/hexagon.pp",
+   "bytes": 321,
+   "sha256": "facdc7fde84de42a97efe2bdd54be971e7a5808c77c04afc92d466e4c68e3953"
+  },
+  {
+   "path": "behavior-studio/data/signs/parallel.pp",
+   "bytes": 307,
+   "sha256": "2831c58ec3c30fc9bed7499fbfe5e6ff9ff4576e7cd2bfeee43cc1f5cc357896"
+  },
+  {
+   "path": "behavior-studio/data/signs/parallel_selector.pp",
+   "bytes": 318,
+   "sha256": "bf4d77cb2a97b83166d3ef15e3deef32e0e07784bdabe901700642192307f10b"
+  },
+  {
+   "path": "behavior-studio/data/signs/parallel_sequence.pp",
+   "bytes": 832,
+   "sha256": "d355e5bd5c0d9099d33e227fb8ca5e8c72bf013dd6d1cdffbf8f8f39107d514c"
+  },
+  {
+   "path": "behavior-studio/data/signs/random_selector.pp",
+   "bytes": 376,
+   "sha256": "eea5abfb1751efa4cda32657e108079437f0913612caf52a853ffe71f61e4464"
+  },
+  {
+   "path": "behavior-studio/data/signs/random_sequence.pp",
+   "bytes": 491,
+   "sha256": "c3f83bd3dcdf133e3cc195991958faa64c7081bed7abc5ce3b67f1dbfb1c95e4"
+  },
+  {
+   "path": "behavior-studio/data/signs/ring.pp",
+   "bytes": 103,
+   "sha256": "4bedd6cf9f5723e442e5c644e2aaa31eb55b76ed820b8aa217abf8ee5b44f33c"
+  },
+  {
+   "path": "behavior-studio/data/signs/selector.pp",
+   "bytes": 307,
+   "sha256": "4cc3aad27681bcd363dd219a7296dc84dd347aba19ce7ccb2d576723b4942437"
+  },
+  {
+   "path": "behavior-studio/data/signs/sequence.pp",
+   "bytes": 437,
+   "sha256": "607d09c7b6edda7b424de2d05ede7cc23d2844ab4ed142dd1bf162f4d1a7129a"
+  },
+  {
+   "path": "behavior-studio/data/signs/square.pp",
+   "bytes": 243,
+   "sha256": "94cdcbc5a1c1fa424d79e82e0209006398d3c29e293725ec4a29e37b5df6562a"
+  },
+  {
+   "path": "behavior-studio/data/signs/switch.pp",
+   "bytes": 510,
+   "sha256": "4b668f258ae9c79c1b8ef546dc00551b4249cb1b37a1a35537f040596923fee1"
+  },
+  {
+   "path": "behavior-studio/data/signs/triangle1.pp",
+   "bytes": 201,
+   "sha256": "4a02163b5ca2f689419aae8705b0d5b46b83b2b0a53ad260ecf8526b602d209a"
+  },
+  {
+   "path": "behavior-studio/data/signs/triangle2.pp",
+   "bytes": 203,
+   "sha256": "87aceb943ff0ba11e9ac6ec80396255b96f24c12871a685326813a01003a11ca"
+  },
+  {
+   "path": "behavior-studio/requirements.txt",
+   "bytes": 212,
+   "sha256": "3ea828e9f8efe37fb21d50c3f989a00fbda29ca92cee0f25e777a57eeea84dc3"
+  },
+  {
+   "path": "behavior-studio/run_behavior_studio.bat",
+   "bytes": 139,
+   "sha256": "03c2f4548a3394c4d2d63ff153e458ad85af4f310402ae2af5dc89f8ab342081"
+  },
+  {
+   "path": "behavior-studio/run_behavior_studio.sh",
+   "bytes": 139,
+   "sha256": "87c937deb622516c19918c74843a9bc3935d16ed95965127919acd3209310784"
+  },
+  {
+   "path": "behavior-studio/source/application_palette.py",
+   "bytes": 31396,
+   "sha256": "7587afe2eec7562cb308a334ca4b1b87ba151ede040a39671d41111319339202"
+  },
+  {
+   "path": "behavior-studio/source/auxtypes.py",
+   "bytes": 3721,
+   "sha256": "4fb8417db8c36e3d10078bcabfecad649ea2e239b708ca71d3351439df0820b7"
+  },
+  {
+   "path": "behavior-studio/source/compat_2to3.py",
+   "bytes": 2090,
+   "sha256": "282652217badebb91ab26712d1facb17e0498dae6ffc4f361f341326f67cc773"
+  },
+  {
+   "path": "behavior-studio/source/extensions/__init__.py",
+   "bytes": 1537,
+   "sha256": "bedd00ced5b6710570cbb41025caf7fe73003127fe22faf348415e329e7a8c12"
+  },
+  {
+   "path": "behavior-studio/source/extensions/help_widget.py",
+   "bytes": 13676,
+   "sha256": "f1132027291ebc765e220a5fa5ee071a7e3a7cbf8f340da353f9e29dcf614cd1"
+  },
+  {
+   "path": "behavior-studio/source/extensions/widgets.py",
+   "bytes": 15351,
+   "sha256": "5ca78727408c3b99eca26986c69fdebd83fad49a0a16dda67d8a31eb1cf66a95"
+  },
+  {
+   "path": "behavior-studio/source/globals.py",
+   "bytes": 20523,
+   "sha256": "a3115a6b5ec6d61d43ec213678f9dea072026d66ef5d7ff0ac33cac590a3def3"
+  },
+  {
+   "path": "behavior-studio/source/language.py",
+   "bytes": 5555,
+   "sha256": "b8daec8bf9627bbe79e6e1325147b89bc9349509478c3e96c036789cf86907d7"
+  },
+  {
+   "path": "behavior-studio/source/libtree/__init__.py",
+   "bytes": 1537,
+   "sha256": "81447a7e85fe7493ed4979da9832a5b399b66c82bf672c21e52bfec5b26b2f6a"
+  },
+  {
+   "path": "behavior-studio/source/libtree/lldialog.py",
+   "bytes": 12204,
+   "sha256": "ff837f4cbc5326614430b55bfe52822bbdfe748bbb8609a4e2923652bdf04cb4"
+  },
+  {
+   "path": "behavior-studio/source/libtree/llinfo.py",
+   "bytes": 96023,
+   "sha256": "023e42f1c04ce53f2cd89487681e4a2bf3b561c942095f4aa069bf4aa7e921d5"
+  },
+  {
+   "path": "behavior-studio/source/libtree/llitem.py",
+   "bytes": 10765,
+   "sha256": "31c5ab9428106e0e5ed90ae491460dbfbd021849a56c52e0ed990b350df48ead"
+  },
+  {
+   "path": "behavior-studio/source/libtree/lltree.py",
+   "bytes": 30561,
+   "sha256": "bd2c2e57119819ac173d275a89ab3c5d5a3e07c8003044c06cccf0f58dfcbc11"
+  },
+  {
+   "path": "behavior-studio/source/libtree/lltreem.py",
+   "bytes": 6630,
+   "sha256": "a6c5a0a381315222af4198b8b337ace7bc2ec28ef975535bd6f20e0faff3d7ac"
+  },
+  {
+   "path": "behavior-studio/source/main.py",
+   "bytes": 12452,
+   "sha256": "c1e5e7e5175a717a3c56f4f76f930d1213627d86889d63a512ef0076b49043e7"
+  },
+  {
+   "path": "behavior-studio/source/main_window.py",
+   "bytes": 86222,
+   "sha256": "b5133e01ce8f501e87abf7cef5e2b34c5d32dc0331597ef96702be3f6843069f"
+  },
+  {
+   "path": "behavior-studio/source/output_log.py",
+   "bytes": 7376,
+   "sha256": "e7750f2950ab8ccf618c80ceb672cba87adfb72e46868281bb87750dfadac61c"
+  },
+  {
+   "path": "behavior-studio/source/pattern_generator/__init__.py",
+   "bytes": 1537,
+   "sha256": "50b19df3ac0c6500b0e102dc49e3e556a9ff15a61a3ffb0e903079cd848ad49d"
+  },
+  {
+   "path": "behavior-studio/source/pattern_generator/tree_node_pattern_gen.py",
+   "bytes": 24930,
+   "sha256": "f63573aa50a081f76be2219cb3d42f90215299ff660d4fbeb44bd0b876890a48"
+  },
+  {
+   "path": "behavior-studio/source/project/__init__.py",
+   "bytes": 1537,
+   "sha256": "81447a7e85fe7493ed4979da9832a5b399b66c82bf672c21e52bfec5b26b2f6a"
+  },
+  {
+   "path": "behavior-studio/source/project/alphabet.py",
+   "bytes": 30833,
+   "sha256": "8bb3ff70824ef02973e61838af5a18d93db2762c074660ce0fc8bfa5d001201e"
+  },
+  {
+   "path": "behavior-studio/source/project/history.py",
+   "bytes": 12318,
+   "sha256": "5f0c2ffe3dfb818528503d70d614845ffc7d0e9f0a655200c26d9421107fcc2e"
+  },
+  {
+   "path": "behavior-studio/source/project/liparser.py",
+   "bytes": 31456,
+   "sha256": "f01d28092e500e39bcd1bb9709a51c9b40c58581875d3f7c66f40e56c7935a2e"
+  },
+  {
+   "path": "behavior-studio/source/project/luaparser.py",
+   "bytes": 5156,
+   "sha256": "f1ba8417a0fddb16f94336147e5acc402b3f17a569f7d605a3526a25bb6657cb"
+  },
+  {
+   "path": "behavior-studio/source/project/parser.py",
+   "bytes": 17502,
+   "sha256": "943c8e27998bb77bb1e2faa4392b35202ada6f505421f33adef0857e822474a2"
+  },
+  {
+   "path": "behavior-studio/source/project/proj.py",
+   "bytes": 30750,
+   "sha256": "06799b82d5d59e571f0cef83e24460786f4b32fcde6ee356d0bc44a1e1d0b11d"
+  },
+  {
+   "path": "behavior-studio/source/project/shapelib.py",
+   "bytes": 15005,
+   "sha256": "07967db0b60734411801b7e92b6cf27c3e8127206a644af1d5661c084808c9d5"
+  },
+  {
+   "path": "behavior-studio/source/project/treeparser.py",
+   "bytes": 34208,
+   "sha256": "5a4a56a1305e4cf736bd63212b00df5cf554673e473ae058e548df0631f5fa9b"
+  },
+  {
+   "path": "behavior-studio/source/remote_debugger/__init__.py",
+   "bytes": 1537,
+   "sha256": "b29e6409bcbc3fc32a32cbb93395574f4dfc543924eb24361b104a2f3b341d10"
+  },
+  {
+   "path": "behavior-studio/source/remote_debugger/debugger_globals.py",
+   "bytes": 2810,
+   "sha256": "106c52cbb953c410ba99122435cba57e723c51825b65c497139cdb525da5c838"
+  },
+  {
+   "path": "behavior-studio/source/remote_debugger/debugger_mode.py",
+   "bytes": 2171,
+   "sha256": "e321411971ac6bbaf7e5f711dfbbfe9d19929f19a493088450b2ada2cc741a0d"
+  },
+  {
+   "path": "behavior-studio/source/remote_debugger/debugger_node_information.py",
+   "bytes": 3640,
+   "sha256": "7569312ef072cca8875f73716a77467d272804015a3704032978c4528d4899bb"
+  },
+  {
+   "path": "behavior-studio/source/remote_debugger/debugger_server.py",
+   "bytes": 20557,
+   "sha256": "69447717c667529805c8755be2dd6f8e461982c0db9ceecfeedcdf90d0786bf0"
+  },
+  {
+   "path": "behavior-studio/source/remote_debugger/debugger_widget.py",
+   "bytes": 5358,
+   "sha256": "95070c1db73fef6386fa576cb156b748c01a550bfad68925860ed09670a60a7b"
+  },
+  {
+   "path": "behavior-studio/source/treelist/__init__.py",
+   "bytes": 1537,
+   "sha256": "95ed30ee64f6875866d96710b232ffb032e897515123c42443bef6402e031c8d"
+  },
+  {
+   "path": "behavior-studio/source/treelist/infotable.py",
+   "bytes": 11618,
+   "sha256": "1cd266e63089e86474c6e4fa03009c1e5de70ef7fcd089b355bb0f2734c917ff"
+  },
+  {
+   "path": "behavior-studio/source/treelist/infotree.py",
+   "bytes": 11572,
+   "sha256": "c81ee1f8ee2f19a8e547c192498b2b03e67a1b2940ba3797e20c9cc6c0321291"
+  },
+  {
+   "path": "behavior-studio/source/treelist/tldialog.py",
+   "bytes": 6706,
+   "sha256": "e6480549ab1b47d2f214d6b632033be0eca602666e4a12e73b86bb0676586f94"
+  },
+  {
+   "path": "behavior-studio/source/treelist/tlinfo.py",
+   "bytes": 50068,
+   "sha256": "be60802ff2b2f149ab4082a1eb4daf7ad08f547f274c5f75410f75ede6605d93"
+  },
+  {
+   "path": "behavior-studio/source/treelist/tlitem.py",
+   "bytes": 5375,
+   "sha256": "69448edc8462c4ecd8a4380f4561b65e07e00decabf938be2573875a4c5d1f8c"
+  },
+  {
+   "path": "behavior-studio/source/treelist/tltree.py",
+   "bytes": 29114,
+   "sha256": "b445529d8bb4e65e7a248b16a9016a14ff6fd2c1206ed65e9a054160791a2758"
+  },
+  {
+   "path": "behavior-studio/source/treenode.py",
+   "bytes": 85689,
+   "sha256": "e7878a26745f14655789c4b6114c0a4a44525f63727d7af2ce09a54c57c92002"
+  },
+  {
+   "path": "behavior-studio/source/treeview/__init__.py",
+   "bytes": 1537,
+   "sha256": "8a33834ce7943771128c6cde7794488d1cd9be5754b9913d597fd51143fdc498"
+  },
+  {
+   "path": "behavior-studio/source/treeview/colors.py",
+   "bytes": 3504,
+   "sha256": "9ef574f23152ac8ac53945bba97609c92f596a5c36b32d6f89ef4f28c3d61a26"
+  },
+  {
+   "path": "behavior-studio/source/treeview/connector.py",
+   "bytes": 19163,
+   "sha256": "3df0195c2697b069231aa0c86119463a076bd0a928bb2a0f38a6c1c3d2228a3e"
+  },
+  {
+   "path": "behavior-studio/source/treeview/diagram.py",
+   "bytes": 72588,
+   "sha256": "f260556d217089b46eb73da8c32391322fa2c5afba95d9fd9058316369f93092"
+  },
+  {
+   "path": "behavior-studio/source/treeview/dispregime.py",
+   "bytes": 2014,
+   "sha256": "4904c058154462f4c8e4428be337ea091ca17cf2476d6437e93cb01274c3113c"
+  },
+  {
+   "path": "behavior-studio/source/treeview/itemgroup.py",
+   "bytes": 15378,
+   "sha256": "e3be07752e9d0004e730b779ba0caa2955a2374c53d512825250dbf234fb0c07"
+  },
+  {
+   "path": "behavior-studio/source/treeview/polyitem.py",
+   "bytes": 79572,
+   "sha256": "3d12786cb50ba69a051217bef9a8515f91691d198abd9a60f27f024e1c214490"
+  },
+  {
+   "path": "behavior-studio/source/treeview/tab.py",
+   "bytes": 12428,
+   "sha256": "a51ce76ac950c61576b66f5f174ad4b030ae9e964e61d35ac8829a8078721f7e"
+  },
+  {
+   "path": "behavior-studio/source/treeview/testdiag.py",
+   "bytes": 6914,
+   "sha256": "00f9fdacc2da9647d301d9517a0f74a50156b2adbdc25de2e56d1f7b057c9164"
+  },
+  {
+   "path": "behavior-studio/source/treeview/textitem.py",
+   "bytes": 5698,
+   "sha256": "a266a67de37af644c32a55085cae265965cbd6eafdf4b7dc635283d202315875"
+  },
+  {
+   "path": "behavior-studio/test.txt",
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "behavior-studio/tutorials/getting_started/00_window.png",
+   "bytes": 147545,
+   "sha256": "2deb0f7f7b13bc32fa04029bae2a593bc83f79f45886c8eb817d943da9728c6c"
+  },
+  {
+   "path": "behavior-studio/tutorials/getting_started/01_open_project_A.png",
+   "bytes": 94529,
+   "sha256": "07f55caccf912d121e69a643d17b318c0bd4476008523a4745904067d97e327a"
+  },
+  {
+   "path": "behavior-studio/tutorials/getting_started/01_open_project_B.png",
+   "bytes": 90408,
+   "sha256": "b4a99bb40bc0f8c9ddd20ba8b4a4dbdd762526c18d4384554ee1f97a480e6428"
+  },
+  {
+   "path": "behavior-studio/tutorials/getting_started/02_open_project.png",
+   "bytes": 138587,
+   "sha256": "83563b99797252526e7bdce5d9b7d40cca7405dd67f7a02fd03f7697c04441d0"
+  },
+  {
+   "path": "behavior-studio/tutorials/getting_started/03_open_bt.png",
+   "bytes": 127563,
+   "sha256": "2826ea4ac143ea3ff7c3d5422c807092f2e79ef4dbbfcbb36f5d6b12de09cf3a"
+  },
+  {
+   "path": "behavior-studio/tutorials/getting_started/04_opened_bt.png",
+   "bytes": 193916,
+   "sha256": "0692a75eff393a257bb57141f72693bda4da89ad3ea182b100e475f289e268c3"
+  },
+  {
+   "path": "behavior-studio/tutorials/getting_started/05_selected_node.png",
+   "bytes": 234740,
+   "sha256": "f1cf35c764f4e5697ba413b2cf52f07fd374743bb99aefe0a48c90ad4fde28ac"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/.classpath",
+   "bytes": 651,
+   "sha256": "912679c5511ceb08e8dbc09e5e8262b235c5ee884c0f55df1ae2c4af22646218"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/.project",
+   "bytes": 680,
+   "sha256": "8d2b2590020c94096dd219a6b7154c1d600f1f3e49e4edb9f3ad3de68c94efb1"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/.settings/org.eclipse.jdt.core.prefs",
+   "bytes": 598,
+   "sha256": "b8dd1c670b785885365ecaf14cdee4184535fbaae7d21c11df444d4a68abfa73"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/META-INF/MANIFEST.MF",
+   "bytes": 925,
+   "sha256": "de44d063138c02d9509e2ad1b156f112094f387e31b472df6cbaeb267bdf8fbc"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/OSGI-INF/l10n/bundle.properties",
+   "bytes": 381,
+   "sha256": "e4c2f48370e908602cdb5c98143449141928d48317d5b1f22a07561a67def4a8"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/build.properties",
+   "bytes": 241,
+   "sha256": "789e4b878da5dfee2e4b3c7310f15bb4f7649f28f0257561d7647952e2d00868"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/icons/sample.gif",
+   "bytes": 983,
+   "sha256": "ea331fb6a23ba1268343ac385428c912d4e226f62932bd19d6efa55a0b1b9236"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/plugin.xml",
+   "bytes": 4214,
+   "sha256": "f32bfc39103a9a99040dedde2322ff0a8d62fb8e5ce7bdc9421e1ea0905ea6c9"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/Activator.java",
+   "bytes": 1125,
+   "sha256": "ec9c6874ee8b7c3eedb31d9ed4462c1de093e32b291aa6f039b3c98435aa2245"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/ColorManager.java",
+   "bytes": 696,
+   "sha256": "42be8d0f4266d18576806b6bb78321951c10ac9aa1aac90110e71f49957bf28a"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/CombinedWordRule.java",
+   "bytes": 10835,
+   "sha256": "8a7ccf7da81b3436c143640d4aa1cb785ffbaa08da061d590b76fa672d8b60b3"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/IDLCodeScanner.java",
+   "bytes": 2914,
+   "sha256": "0c3240824ffb20043c800e7a3c8f605e87b9bc9865b60604317d65d66ec3bff0"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/IDLColorConstants.java",
+   "bytes": 456,
+   "sha256": "fa65f492697a0da6728c7ece77c524cc6ab16a028363eaa6071a13df8c94432a"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/IDLCompletionProcessor.java",
+   "bytes": 11011,
+   "sha256": "1fbe89cfecf5b684d96aa0e128b7797e4d0f4a1ad75c1458dc691f7c680b9ef5"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/IDLConfiguration.java",
+   "bytes": 4132,
+   "sha256": "18fc1402c2de177fc878bfd5de94a29d21b9e9e279adf75b51948e1017c25b0f"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/IDLDocumentProvider.java",
+   "bytes": 927,
+   "sha256": "72bd406a4067b5d24ceaa589112d0b59f503304b1a88e30ea4c72aff8170d337"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/IDLDoubleClickStrategy.java",
+   "bytes": 2080,
+   "sha256": "2184f25b5c5c8ca50b90e9b549ec366206c1b70efb71d67f802457d57f7abea8"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/IDLEditor.java",
+   "bytes": 773,
+   "sha256": "0e96a20c2eb069428b3b2afcf3885f56963b3786657d457aa00b31cd8ce56445"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/IDLEditorMessages.java",
+   "bytes": 1245,
+   "sha256": "e4e16d1bce6f8f41d8a20890cd8e312d434550ea548d5c49a0e8bd77b06563d4"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/IDLPartitionScanner.java",
+   "bytes": 774,
+   "sha256": "01f7bcffce78eca6663c6070d3f543187d1ada2dff58cbd2f0763e48a07a1b17"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/IDLWhitespaceDetector.java",
+   "bytes": 325,
+   "sha256": "2e7399d4745c4966fcb8837af88b7e03522be17370ce0f628c29dec99ceee9a5"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/KeyWordDetector.java",
+   "bytes": 804,
+   "sha256": "e118593197a7624e930890caaf45b6bd9207e788867315606677e40e2bb94773"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/NonRuleBasedDamagerRepairer.java",
+   "bytes": 4128,
+   "sha256": "2f435a8bd56d367e3e59af38f91832627c33539125d22af2c83146e0e6af2897"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/editors/TextHover.java",
+   "bytes": 722,
+   "sha256": "bc1b08778e48b23785e0338dee6902192a4c718f7ffe9852546bde1e071bb587"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/filters/IdlGeneratedFilesFilter.java",
+   "bytes": 1391,
+   "sha256": "7b4bbbe6dbeef6af067969dac32d5a7a88dce960ce08f3d645c76ec5655b0c9d"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/preferences/PreferenceConstants.java",
+   "bytes": 272,
+   "sha256": "e1cc2ebfe192ae5c741cb5dfbbc7bf9f9a475f335feef54b1e1b43164c60e8fc"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/preferences/PreferenceInitializer.java",
+   "bytes": 3414,
+   "sha256": "a89b35c206bdeabe4d9afad0432d364118ac0e7623fece1bfac6693472dd71d3"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/preferences/SWGEmuPreferencesPage.java",
+   "bytes": 1655,
+   "sha256": "e395385d0901278b2da520406160353b6824f74c368923642a30bd94bf6f8893"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/shared/Core3Shared.java",
+   "bytes": 14927,
+   "sha256": "9d0fe63aca2e63fd974daffbdb9a36b7433a1e6bda6a74f6d8c96519aa824c2f"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/trackers/IDLCConsole.java",
+   "bytes": 1439,
+   "sha256": "c92d305cf32be4a2e8ef7802d7be6c00b8af573b17ee0e793846bef17c3e0042"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/trackers/IDLCConsoleLineTracker.java",
+   "bytes": 5175,
+   "sha256": "4f5ec11db005b6bca49bdf07741e924c29c3e308bf6dab857f80d99ee1396892"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/wizards/ManagedObjectWizard.java",
+   "bytes": 5811,
+   "sha256": "ddaf99a5ff7a4e5c9dab2c6fd89b7a2ec04006ab604e036891cce05909a6975c"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/wizards/ManagedObjectWizardPage.java",
+   "bytes": 9519,
+   "sha256": "4ee17729705468371895c72023a6cead4070ab917a0ab283a2bf30dbf26d00a7"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/wizards/ManagerNewWizard.java",
+   "bytes": 11975,
+   "sha256": "67a56d8ead50d3e0cb65ee7d6ff7b472b932860d5036e8a4198b368a0611ab47"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/plugin/wizards/ManagerNewWizardPage.java",
+   "bytes": 8986,
+   "sha256": "6a05aa07cb610556c3a040c91d068f36d7d33901eaf0b5f3fdc45a09e511f7c0"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/popup/actions/BuildAllIDLFiles.java",
+   "bytes": 3400,
+   "sha256": "e999f641ee8cb3364df2efe3a89074cb966aea06a3bea5b31f8f5c68d0c8d1b3"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/core3/popup/actions/BuildIDLFile.java",
+   "bytes": 3088,
+   "sha256": "1ba033b435774d2da8c537dbd5b99e33d8abb70f60f33257c85372f0f2725289"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/idlc/IDLCConsolePatterListener.java",
+   "bytes": 1628,
+   "sha256": "b740805993feb5a8d150966d09f29b5982b37263fbfa98d743dbf644286164c6"
+  },
+  {
+   "path": "eclipse/SWGEmu Core3 Plugin/src/org/swgemu/idlc/IDLCInstance.java",
+   "bytes": 762,
+   "sha256": "7efdcb5facfae77ae53e36aff7b99e5decc2bdd0358d46eb71109596e6bbf80e"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Feature Project/.project",
+   "bytes": 397,
+   "sha256": "588d8c22080617424b1ad453688378862005701f3ace11dece13460bd9e241ed"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Feature Project/build.properties",
+   "bytes": 28,
+   "sha256": "b8a81100459fea030b33decf660ec8c74ac5773e5af91354c3aade0c1cda2784"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Feature Project/feature.xml",
+   "bytes": 2336,
+   "sha256": "5cd008db3429441659db4925c352f29f3d16ceb812a188c9166ac8f0f9f304c3"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Plugins Site/.project",
+   "bytes": 400,
+   "sha256": "b6e6dcde45cd4c800f3e05a4fa9a9efeb5ba1b0162a1b27c68ade49946eeb11a"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Plugins Site/artifacts.jar",
+   "bytes": 722,
+   "sha256": "6365df5035ce65889bc0a8ed253bd92f313e29e67aae0a675e5d0b276c43f222"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Plugins Site/content.jar",
+   "bytes": 2714,
+   "sha256": "9679fd14cfb75c4da20f46e45a44ee91fd3da55a63681d6f9866ae0a53cc0411"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Plugins Site/features/Core3_MangedObject_Wizard_1.0.4.201104020410.jar",
+   "bytes": 859,
+   "sha256": "bc82ce284ba56e4508c5b60d789b97666c27d83ac6015e84430f5637f26540d1"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Plugins Site/features/Core3_MangedObject_Wizard_1.0.5.201203032219.jar",
+   "bytes": 860,
+   "sha256": "4d38d4ab58ead9977237cf2536bc3af5885f7cbca02a6e1a6ece18b21809fd1a"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Plugins Site/features/Core3_MangedObject_Wizard_1.0.6.201203032234.jar",
+   "bytes": 859,
+   "sha256": "c78feebbd5bf5f7cda104de700e6a35241f27100670f70f32b93c50554618bbc"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Plugins Site/features/Core3_MangedObject_Wizard_1.0.7.201203032300.jar",
+   "bytes": 859,
+   "sha256": "1c3e1af837490b4d11c3bfef840f131eadebbba0262547bb0e8430195f79002f"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Plugins Site/plugins/SWGEmu_Core3_ManagedObject_Plugin_0.0.6.201104020410.jar",
+   "bytes": 51293,
+   "sha256": "ff59dd67db2314dd6d0a67e78785c738f1cb68bc1ea8a73b66c66d5b0a21bdd4"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Plugins Site/plugins/SWGEmu_Core3_ManagedObject_Plugin_0.0.7.201203032219.jar",
+   "bytes": 81409,
+   "sha256": "88f4b71f9327fe90b93811ccd698bab00829558fced4cccf3cffe3ffeb7874e0"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Plugins Site/plugins/SWGEmu_Core3_ManagedObject_Plugin_0.0.8.201203032234.jar",
+   "bytes": 81421,
+   "sha256": "d57804b1da2b0727c7684cd0f5b86c15b8af9c0f040a6040200dd58b7e6a03d3"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Plugins Site/plugins/SWGEmu_Core3_ManagedObject_Plugin_0.0.9.201203032300.jar",
+   "bytes": 81611,
+   "sha256": "61a9e09cc6876ea16b16e95678482be58f989c67f1cd9cf682e11f9755e9bb3b"
+  },
+  {
+   "path": "eclipse/SWGEmu Eclipse Plugins Site/site.xml",
+   "bytes": 292,
+   "sha256": "71e3a14f33dc70db140cc08978a0f534b64fb3f486b436dd7ff5787fab25818c"
+  }
+ ],
+ "absent_tracked_paths": [],
+ "symlinks_not_followed": []
+}

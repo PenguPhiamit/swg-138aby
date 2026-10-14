@@ -1,0 +1,24 @@
+-- Adapted from Bellum Gero (github.com/Miphstoe/BellumGero-Live, revision 1f4438a1, AGPL-3.0),
+-- MMOCoreORB/bin/scripts/mobile/hoth/serverobjects.lua. Ported to this server 14 Oct 2026 (Claude; see outputs/Documentation-support/hoth-port-log.md).
+-- Changed: hoth_glacial_rancor left out (client lacks its body).
+
+includeFile("hoth/hoth_elder_wampa.lua")
+includeFile("hoth/hoth_greater_ice_mynock.lua")
+includeFile("hoth/hoth_ice_mynock.lua")
+includeFile("hoth/hoth_imperial_salvage_tech.lua")
+includeFile("hoth/hoth_mynock_broodmother.lua")
+includeFile("hoth/hoth_probe_droid.lua")
+includeFile("hoth/hoth_rebel_snow_sergeant.lua")
+includeFile("hoth/hoth_rebel_snow_soldier.lua")
+includeFile("hoth/hoth_scavenger.lua")
+includeFile("hoth/hoth_scavenger_raider.lua")
+includeFile("hoth/hoth_snowtrooper.lua")
+includeFile("hoth/hoth_snowtrooper_sergeant.lua")
+includeFile("hoth/hoth_tauntaun.lua")
+includeFile("hoth/hoth_tauntaun_bull.lua")
+includeFile("hoth/hoth_wampa.lua")
+includeFile("hoth/hoth_wampa_frostfang.lua")
+includeFile("hoth/hoth_wampa_icemaw.lua")
+includeFile("hoth/hoth_wampa_matriarch.lua")
+includeFile("hoth/hoth_wampa_patriarch.lua")
+includeFile("hoth/hoth_wampa_snowblind.lua")

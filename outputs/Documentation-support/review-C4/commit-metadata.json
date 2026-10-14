@@ -1,0 +1,54 @@
+[
+  {
+    "commit": "e1344def",
+    "metadata": "e1344defb91903b7a964184a689ca55b0d14c5ff\nab9eab6e8517f582c4f11c9ebd07815989725b7c\nAgent body: inventory, radial menus, SUI pop-ups, mission-list request, ground height\n\nBased on ChatGPT's staged patch (tools/agent/staged-capabilities), reviewed and fixed:\n- New commands: inventory, radial_menu/select_radial, sui_pages/sui_respond, mission_list.\n- Localized NPC speech: decode the StringIdChatParameter correctly (the staged\n  version skipped too few bytes), so greeters report \"@file:key\" instead of blank.\n- choose is refused when no conversation is open (stale-choice bug).\n- Ground height: while walking, take z from the nearest outdoor creature; move\n  accepts an explicit z. The old fixed height broke the server's line-of-sight\n  check, which silently blocked Han, Chewbacca and the greeters.\n- look reports z; status reports our container (mount/cell).\n- Conversation state is guarded by the world mutex; SUI pages are forgotten\n  before replying because the server may reuse the page ID.\n\nTested on the test galaxy only (ports 46xxx). Not promoted to the live agent.\n\nAgent: Claude\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n",
+    "changed_paths": [
+      "MMOCoreORB/src/client/agent/AgentControl.cpp",
+      "MMOCoreORB/src/client/agent/AgentControl.h",
+      "MMOCoreORB/src/client/zone/ZonePacketHandler.cpp"
+    ]
+  },
+  {
+    "commit": "a72026b6",
+    "metadata": "a72026b6249c005fac902e109381963b4ade57eb\ne1344defb91903b7a964184a689ca55b0d14c5ff\nAgent body: HAM/posture/combat state, combat log, fight reflex, navmesh path walking\n\n- Decode CREO baselines 3/6 and their deltas: posture, states, HAM, level, group,\n  target. status reports our own state; look adds posture and health %; inspect\n  shows any creature. Events: posture (ours, and anyone incapacitated or dead),\n  combat_started/ended, group_joined/left.\n- CombatSpam -> \"combat\" events (attacker, defender, amount, @cbt_spam key).\n- Radial menu items carry option names (table generated from RadialOptions.h).\n- fight: approach and keep attacking until one side is incapacitated or dead.\n- move refuses while incapacitated/dead and stops when the server keeps\n  resetting our position (it used to spin until its timeout).\n- Ground height: blend nearby creatures within 64 m (Mos Eisley ~5, the\n  plateau north-east ~180).\n- path / height / move use the server's /agentpath helper when present:\n  navmesh routes with ground heights, cell-local points walked with\n  DataTransformWithParent, re-planning partial paths. Falls back to a straight\n  line outdoors when the helper is missing.\n\nTested on the test galaxy (dev server): kill, incapacitation, death, clone\nSUI; path from the Han platform down to the greeters. Indoor walking untested.\n\nAgent: Claude\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n",
+    "changed_paths": [
+      "MMOCoreORB/src/client/agent/AgentControl.cpp",
+      "MMOCoreORB/src/client/agent/AgentControl.h",
+      "MMOCoreORB/src/client/zone/ZonePacketHandler.cpp"
+    ]
+  },
+  {
+    "commit": "eebdd99d",
+    "metadata": "eebdd99de159b9315891a821e284268f85097d40\na72026b6249c005fac902e109381963b4ade57eb\nSandbox: /agentpath helper for the agent client (bot accounts only)\n\nThe headless agent client has no terrain or navmeshes. /agentpath asks the\nserver, which plans with the PathFinderManager the NPCs use:\n  /agentpath path <x> <y> [<z> <cellId>]   world or cell-local route\n  /agentpath height <x> <y>                 ground height\nThe answer is a \"[agentpath] {json}\" system message to the caller only.\nOnly accounts listed in Core3.AgentAccounts (config-local.lua) may use it;\neveryone else gets \"insufficient permission\". Not deployed.\n\nAgent: Claude\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n",
+    "changed_paths": [
+      "MMOCoreORB/src/server/zone/managers/objectcontroller/command/CommandConfigManager.cpp",
+      "MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h"
+    ]
+  },
+  {
+    "commit": "5c39f411",
+    "metadata": "5c39f4113763c7581e67f33bf3b1107b83d58134\neebdd99de159b9315891a821e284268f85097d40\nSandbox /agentpath: head part of the way when leaving a building for a far target\n\nfindPath from a cell to a world point far away can fail on the outdoor leg.\nTry points 32/64/128 m along the way instead and mark the answer \"partial\";\nthe client re-plans from outside. Verified on the test galaxy: cloning-facility\nbasement to the Mos Eisley greeters (330 m) in 3 legs.\n\nAgent: Claude\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n",
+    "changed_paths": [
+      "MMOCoreORB/src/server/zone/objects/creature/commands/AgentPathCommand.h"
+    ]
+  },
+  {
+    "commit": "697f2002",
+    "metadata": "697f2002e01c65130bed9f9c7aea69855953ee6a\n5c39f4113763c7581e67f33bf3b1107b83d58134\nAgent body: keep re-planning long paths while each leg gets closer\n\nUp to 25 legs; stop when two legs in a row make no progress.\n\nAgent: Claude\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n",
+    "changed_paths": [
+      "MMOCoreORB/src/client/agent/AgentControl.cpp"
+    ]
+  },
+  {
+    "commit": "bda2c0dd",
+    "metadata": "bda2c0dd35ca9eee1a97272b783b16aa4b4132e5\nb942d9b5745c5eeff9e87a34883f57fc3d5c26bd\nSandbox world boss rotation and big game hunter (dev, not deployed)\n\nThree named, tougher versions of existing creatures roam their home planets (14-boss roster, 29 wilderness reference points adapted from SWG Flurry's AGPL world_boss_spt.lua). Unkilled bosses slip away after 6 h and are replaced elsewhere; slain bosses pay 25,000 bank credits to every player on the damage list and refill after 90 min. Galaxy-wide announcements on sighting, kill and escape. Rhea Tannor at the Mos Eisley starport reports current bosses and adds datapad waypoints.\n\nAgent: Claude\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n",
+    "changed_paths": [
+      "MMOCoreORB/bin/scripts/mobile/conversations.lua",
+      "MMOCoreORB/bin/scripts/mobile/conversations/sandbox/sandbox_big_game_hunter_conv.lua",
+      "MMOCoreORB/bin/scripts/mobile/sandbox/sandbox_world_bosses.lua",
+      "MMOCoreORB/bin/scripts/mobile/serverobjects.lua",
+      "MMOCoreORB/bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua",
+      "MMOCoreORB/bin/scripts/screenplays/screenplays.lua"
+    ]
+  }
+]

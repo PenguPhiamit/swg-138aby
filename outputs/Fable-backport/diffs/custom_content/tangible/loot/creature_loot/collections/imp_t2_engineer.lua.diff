@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/imp_t2_engineer.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/imp_t2_engineer.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_imp_t2_engineer, "object/tangible/loot/creature/loot/collections/imp_t2_engineer.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_imp_t2_engineer, "object/tangible/loot/creature_loot/collections/imp_t2_engineer.iff")

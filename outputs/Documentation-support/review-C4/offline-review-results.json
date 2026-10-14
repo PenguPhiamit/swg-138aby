@@ -1,0 +1,31 @@
+{
+  "scope": "Offline only; no game connection, protocol replay, full client build or deployment",
+  "pinned_commit": "697f2002e01c65130bed9f9c7aea69855953ee6a",
+  "snapshot_files_verified": 50,
+  "export_commit_ids_and_path_lists_verified": [
+    "e1344defb91903b7a964184a689ca55b0d14c5ff",
+    "a72026b6249c005fac902e109381963b4ade57eb",
+    "eebdd99de159b9315891a821e284268f85097d40",
+    "5c39f4113763c7581e67f33bf3b1107b83d58134",
+    "697f2002e01c65130bed9f9c7aea69855953ee6a",
+    "bda2c0dd35ca9eee1a97272b783b16aa4b4132e5"
+  ],
+  "radial_labels_compared": 234,
+  "radial_label_mismatches": [],
+  "point_cap_compiled_from_reviewed_loop": {
+    "straight_2048m_points": 257,
+    "corner_points": 326
+  },
+  "advertised_cap": 256,
+  "timeout_source_check": {
+    "legs_allowed": 25,
+    "per_leg_default_seconds": 90,
+    "current_mcp_wait_seconds": 100,
+    "illustrative_two_55_second_legs_total": 110,
+    "note": "Timing arithmetic and exact-source structure check, not a wall-clock/game run"
+  },
+  "dead_incap_guard": {
+    "straight_moveTo": true,
+    "path_dispatch_or_walkPath": false
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "scope": "Local pinned source bytes only; no repo code executed, no install or import permission inferred",
+  "items": [
+    {
+      "id": "A1",
+      "local_path": "work/research/Miphstoe_BellumGero-Live",
+      "recorded_revision": "1f4438a129c0e07d05871fccfb2ed30b21da9539",
+      "actual_revision": "1f4438a129c0e07d05871fccfb2ed30b21da9539",
+      "revision_matches": true,
+      "materialized_files": 32268,
+      "materialized_bytes": 121712333,
+      "absent_tracked_count": 4228,
+      "symlinks_not_followed": [],
+      "licence_files": [
+        {
+          "path": "COPYING",
+          "bytes": 35179,
+          "sha256": "f24fa7d9333a3f40314c2f00dd28e0e706997819e66efe19619433dae285f3a3"
+        },
+        {
+          "path": "MMOCoreORB/COPYING",
+          "bytes": 35179,
+          "sha256": "f24fa7d9333a3f40314c2f00dd28e0e706997819e66efe19619433dae285f3a3"
+        }
+      ],
+      "manifest_path": "Content-catalogue\\A1-checkout-sha256.json",
+      "manifest_sha256": "004f3d896068a9bddd56743bbc413c921cdd010f787df72225c5a89f502f4ba7",
+      "tracked_changes": [],
+      "staged_changes": [],
+      "recorded_license_verified": true
+    },
+    {
+      "id": "A2",
+      "local_path": "work/research/Thrax989_SWGFlurry",
+      "recorded_revision": "947a7e666deefc8e271813b83ae759e03ccee44f",
+      "actual_revision": "947a7e666deefc8e271813b83ae759e03ccee44f",
+      "revision_matches": true,
+      "materialized_files": 49488,
+      "materialized_bytes": 151158038,
+      "absent_tracked_count": 3809,
+      "symlinks_not_followed": [],
+      "licence_files": [
+        {
+          "path": "LICENSE",
+          "bytes": 35184,
+          "sha256": "6f1e622c82a380075843bb084a7ec3b1f1d12a4a02526d75e78b0924a860aa75"
+        },
+        {
+          "path": "MMOCoreORB/COPYING",
+          "bytes": 35179,
+          "sha256": "f24fa7d9333a3f40314c2f00dd28e0e706997819e66efe19619433dae285f3a3"
+        }
+      ],
+      "manifest_path": "Content-catalogue\\A2-checkout-sha256.json",
+      "manifest_sha256": "854795f7e3323794adf9829c82889d0d34a543e7dfc10a7b869bcf4256964cdb",
+      "tracked_changes": [],
+      "staged_changes": [],
+      "recorded_license_verified": true
+    },
+    {
+      "id": "A3",
+      "local_path": "work/research/nostyleguy_io_scene_swg_msh",
+      "recorded_revision": "cdb1cdbbe172a7d46740762f92de855dc60920c7",
+      "actual_revision": "cdb1cdbbe172a7d46740762f92de855dc60920c7",
+      "revision_matches": true,
+      "materialized_files": 32,
+      "materialized_bytes": 479995,
+      "absent_tracked_count": 0,
+      "symlinks_not_followed": [],
+      "licence_files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1089,
+          "sha256": "a68217b4c657a89618dc433d337d9d8a0dd7bce55b3ba499a8cc0c915e0011da"
+        }
+      ],
+      "manifest_path": "Content-catalogue\\A3-checkout-sha256.json",
+      "manifest_sha256": "7ceefc0952b3d6f589c25fe88a089d6d5996e3752f5de5022e6e714a811b7263",
+      "tracked_changes": [],
+      "staged_changes": [],
+      "recorded_license_verified": true
+    },
+    {
+      "id": "A4",
+      "local_path": "work/research/swgemu_Tools",
+      "recorded_revision": "72ef01b24e322d8f4c6b89f717663eb965ae487b",
+      "actual_revision": "72ef01b24e322d8f4c6b89f717663eb965ae487b",
+      "revision_matches": true,
+      "materialized_files": 933,
+      "materialized_bytes": 101698075,
+      "absent_tracked_count": 0,
+      "symlinks_not_followed": [],
+      "licence_files": [
+        {
+          "path": "SWGHeightCompiler/COPYING",
+          "bytes": 496,
+          "sha256": "2de3e602c846af9d165fa9113f1ccc1286ff3757983b678625f0d0f442cd89da"
+        },
+        {
+          "path": "SWGHeightDump/COPYING",
+          "bytes": 496,
+          "sha256": "2de3e602c846af9d165fa9113f1ccc1286ff3757983b678625f0d0f442cd89da"
+        },
+        {
+          "path": "behavior-studio/COPYING",
+          "bytes": 35823,
+          "sha256": "5f631fae467c82b8cd28fd1ec425c816895a35f9d94e36bee0e0164570e8e0f6"
+        }
+      ],
+      "manifest_path": "Content-catalogue\\A4-checkout-sha256.json",
+      "manifest_sha256": "a6ee6dbeb1690ec20b4b8443e665dc5d036ccefbf33cace10758688dbdab2986",
+      "tracked_changes": [],
+      "staged_changes": [],
+      "recorded_license_verified": false
+    },
+    {
+      "id": "A5",
+      "local_path": "work/research/XanderOlson_swgemu_single_player",
+      "recorded_revision": "fe88c01841997d0c772054c609fcc2c74f867748",
+      "actual_revision": "fe88c01841997d0c772054c609fcc2c74f867748",
+      "revision_matches": true,
+      "materialized_files": 68,
+      "materialized_bytes": 309426,
+      "absent_tracked_count": 34506,
+      "symlinks_not_followed": [],
+      "licence_files": [
+        {
+          "path": "COPYING",
+          "bytes": 35179,
+          "sha256": "f24fa7d9333a3f40314c2f00dd28e0e706997819e66efe19619433dae285f3a3"
+        },
+        {
+          "path": "MMOCoreORB/COPYING",
+          "bytes": 35179,
+          "sha256": "f24fa7d9333a3f40314c2f00dd28e0e706997819e66efe19619433dae285f3a3"
+        }
+      ],
+      "manifest_path": "Content-catalogue\\A5-checkout-sha256.json",
+      "manifest_sha256": "c6c0bf866f027cfbf94b77d95bc202c9f0a0be4ad8629a81c0c7dfcb15d1810e",
+      "tracked_changes": [],
+      "staged_changes": [],
+      "recorded_license_verified": true
+    },
+    {
+      "id": "A6",
+      "local_path": "work/research/[name removed]_swgmtv",
+      "recorded_revision": "b2103a99b32e602957ff6848d927106d682ea2c2",
+      "actual_revision": "b2103a99b32e602957ff6848d927106d682ea2c2",
+      "revision_matches": true,
+      "materialized_files": 8502,
+      "materialized_bytes": 236063751,
+      "absent_tracked_count": 0,
+      "symlinks_not_followed": [],
+      "licence_files": [],
+      "manifest_path": "Content-catalogue\\A6-checkout-sha256.json",
+      "manifest_sha256": "a794d856b1dfe463912756dabf417d8513ee410d61aaca5e76c06cd7a9ef8dde",
+      "tracked_changes": [],
+      "staged_changes": [],
+      "recorded_license_verified": false
+    },
+    {
+      "id": "D1",
+      "local_path": "work/research/Sagiroth_TortoiseBots",
+      "recorded_revision": "bc914eb3b5f484ede0d5161a68711f995161627d",
+      "actual_revision": "bc914eb3b5f484ede0d5161a68711f995161627d",
+      "revision_matches": true,
+      "materialized_files": 1849,
+      "materialized_bytes": 42557935,
+      "absent_tracked_count": 0,
+      "symlinks_not_followed": [],
+      "licence_files": [
+        {
+          "path": "LICENCE.md",
+          "bytes": 3831,
+          "sha256": "28e1c891406d87c5287178a024444fb5c110f4fb783ccfaa90bc6b3fdf88b27a"
+        },
+        {
+          "path": "docs/LICENSE_AUDIT.md",
+          "bytes": 5305,
+          "sha256": "4e1f97bde3b16d244a9125c9b78f2815303fc5b40d73d02e79e2963a88023e4d"
+        },
+        {
+          "path": "tools/hire_gear/sources/bisclassic/LICENSE.txt",
+          "bytes": 17615,
+          "sha256": "488b93d9162db9953bdec3ae4f35e3573424a649b4cc7a5b43fd1448f5ad16a9"
+        }
+      ],
+      "manifest_path": "Content-catalogue\\D1-checkout-sha256.json",
+      "manifest_sha256": "9afe40f9bfc4d1a22c4f3e21b9b8c758761efb0b7ef299821363d856b99d325c",
+      "tracked_changes": [],
+      "staged_changes": [],
+      "recorded_license_verified": true
+    }
+  ]
+}

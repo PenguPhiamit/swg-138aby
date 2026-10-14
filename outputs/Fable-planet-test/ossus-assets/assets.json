@@ -1,0 +1,482 @@
+{
+  "meta": {
+    "title": "Ossus asset plan",
+    "date": "2026-10-14",
+    "author": "Fable (helper run), research only",
+    "scope": "What a first playable Ossus needs, and where each piece can come from: stock SWG art already in the owner's client, MTG archives, open-licensed sources, cheap paid sources. Nothing was downloaded, bought or installed; no accounts, no contact.",
+    "stock_basis": "Stock assets are referenced in place inside the owner's own client archives (the same basis as the Hoth port); they are never copied out or redistributed. 125,572 stock files were indexed through the client's real load order with our own TRE reader (Fable-planet-test/tools/trn_iff.py).",
+    "disc_archives": "/opt/swg/disc-extracted/SWG-group/files/SWG/: 149 files; the same archives as the installed client through patch_17 plus patch_18..33 and the sku1/sku2/sku3 (expansion) archives. patch_18+ and the later sku archives are TRE version 6 with an all-zero header; our reader and Core3's version-6 branch (tre3/TreeFile.cpp:80 reads no header fields) cannot locate their index. Trials of Obi-Wan (sku3) art such as the Mustafar Jedi temple ruins therefore remains unreadable from the disc; MTG carries the same SOE files.",
+    "mtg_credit": "Catalogue status P for the MTG planets family: credit Mod the Galaxy and the original contributors, preserve file notices (Community-content/CREDITS-and-sources.txt). Original SOE assets inside MTG belong to their rights holders, as for stock art.",
+    "conversion_tools_today": {
+      "iff": "Our own IFF reader/writer (tools/trn_iff.py) handles any IFF file: cloning a stock .sht with a new texture name, cloning a .snd template, writing .apt redirects, writing .trn.",
+      "datatables_strings": "Claude's swg_client_data.py reads datatables and .stf; Bellum's AGPL packers were used for local_planets.tre (to be replaced by our own).",
+      "meshes": "NoStyleGuy io_scene_swg_msh (MIT, Blender 2.9+/3.x): imports/exports MSH, MGN, LOD, POB, SKT and generates .apt/.sat/.lmg; no animation support, SKT export unreliable, collision extents stored but not editable, textures left to external tools. Not validated by us yet (feature register F86); the first external 3D prop is a validation task, not a content task.",
+      "textures": "DDS DXT1/DXT5 via NVIDIA Texture Tools or Microsoft texconv (installs need the owner's OK); our own writer could emit uncompressed DDS as a fallback.",
+      "audio": "SWG .snd is a 160-byte SD2D template naming a sample (e.g. sample/amb_forest_lp.wav); a new loop needs a WAV (stock loops are mono) plus a cloned .snd.",
+      "creatures": "No path for new rigged, animated creatures (MGN+SKT+ANS) today; new creatures use stock bodies with our names and stats, which the owner's encounter policy allows."
+    }
+  },
+  "needs": [
+    {
+      "id": "N1", "need": "Terrain shaders and textures (hills, mountains, gorges, forest floor, rock, water)",
+      "stock": [
+        "shader/grss_long_darkgreen(.sht,_a1,_a2) with abstract/terrain_surface/grass.iff (Dantooine, used in ossus_test.trn)",
+        "shader/grss_dant_yellow, grss_dant_pink, grss_clumpygreen, grss_clumpydark",
+        "shader/frst_fallenleaves(_a1,_a2), frst_dirtwtwigs, frst_fallleafcover_warm (forest floor)",
+        "shader/dirt_mossydirt, dirt_everdirt, dirt_rockmud, dirt_cracks_sm (paths, benchland)",
+        "shader/rock_cliffbrwngray(_a1,_a2), rock_endr_selmamountains, rock_endorriverbed, rock_mtns_whitelimestone, rock_cliffcracked (gorges, Eocho Mountains)",
+        "shader/dirt_scorched_earth, dirt_scorched_rocky, dirt_scorched_tornearth, rock_scorched_limestone + terrain/yavin_colorramp_scorched*.tga (the 137 ABY crater)",
+        "shader/wter_dant_lake, wter_crystalwater, wter_nboo (water); 76 grss_, 75 frst_, 359 rock_, 125 dirt_, 28 wter_ stock terrain shaders in all"
+      ],
+      "mtg": [],
+      "open": ["C1", "C2"],
+      "paid": [],
+      "recommended": "Stock families for the first build; 6-8 CC0 ground textures (C1/C2) later for an Ossus-specific look, each as a new SFAM family with a cloned .sht."
+    },
+    {
+      "id": "N2", "need": "Flora (trees, ground cover)",
+      "stock": [
+        "appearance/decd_blba_tree(.apt,_a1) (Dantooine blba, the 'kingwood' stand-in), decd_whitebirch*, decd_maple*, decd_boffa, decd_brownflaredroots",
+        "appearance/ever_pinetree_large/medium, conf_mtns_pine_full/broken, ever_eucalyptus_* (mountain slopes)",
+        "appearance/leaf_bamboo_med/sm/tri, leaf_bamboogrove (the 'bambwood' of the lore)",
+        "appearance/shrb_leafbush_lg/med/sm, shrb_flowerbush_*, mtns_shrb_evergreen*, fern_groundfern, fern_giantfern, ptch_groundflowers_*, ptch_weeds_*",
+        "radial shaders: radl_dant_grassflowers(_a1), radl_darkfrstgrass, radl_dandelion_yellow, radl_decd_assorttrees (221 radl_ shaders in stock)",
+        "103 decd_, 20 ever_, 45 shrb_, 34 leaf_ stock flora appearances; a tree chain is apt -> lod -> 4 msh -> 3 sht -> dds"
+      ],
+      "mtg": ["112 Kashyyyk/Mustafar tree appearances (decd_wroshyr_*, decd_wasaka_*) if a giant-tree look is wanted; MTG credit applies"],
+      "open": ["C3", "C4", "C5"],
+      "paid": [],
+      "recommended": "Stock only. The open low-poly kits are palette-coloured and look flatter than SWG's textured, alpha-card flora; keep them for blockout or far rocks until the mesh path is validated."
+    },
+    {
+      "id": "N3", "need": "Rocks and cliffs",
+      "stock": [
+        "appearance/rock_dant(.apt,_a1.._a5), rock_graniteslab_large/medium/small, rock_weatheredmossy_large/medium(_a1.._a3), mtns_rock_grey(_a1.._a12), mtns_rock_moss(_a1.._a4)",
+        "appearance/rock_tatt_arch_lrg/med/sm, rock_crystl_arch_med/sm/half (crystal arches for the Crystal Caves)",
+        "147 rock_ and 35 mtns_ stock appearances"
+      ],
+      "mtg": [],
+      "open": ["C9", "C1", "C2"],
+      "paid": [],
+      "recommended": "Stock. Kenney Modular Cave Kit (C9) only if the stock cave interiors are not enough."
+    },
+    {
+      "id": "N4", "need": "Ruins: Great Jedi Library/Temple remains, the 137 ABY crater and destroyed Academy, hidden-Jedi dwellings",
+      "stock": [
+        "appearance/thm_dant_jedi_temple_altar.apt, thm_dant_jedi_temple_pillar(.apt,_base,_fallen,_med,_sm) (Dantooine ruined Jedi temple pieces, via appearance/lod/)",
+        "appearance/poi_temple_ancient_ruined.apt (a whole ruined temple prop)",
+        "appearance/thm_nboo_gungan_pillar_ruined_s01, thm_nboo_gungan_wall_ruined_lg_s01/s02, _sm_s01/s02; thm_tato_imprv_pillar_ruin_s01, _sml_s01; poi_all_obelisk_s01",
+        "appearance/thm_yavn_jedi_enclave_light.pob and _dark.pob (object/building/yavin/shared_light_enclave.iff, shared_dark_enclave.iff): Jedi enclave interiors for a hidden temple or vault",
+        "appearance/thm_yavn_great_massassi_temple.pob, thm_yavn_temple_exar_kun.pob, thm_yavn_palace_woolamander.pob, thm_yavn_temple_blueleaf_cluster.pob (large Yavin IV temple interiors)",
+        "appearance/decd_massassi_a, decd_massassistump, decd_scorched_massassi(_broke) (scorched trees around the crater)",
+        "appearance/poi_yavn_death_star_wreckage_s01..s03, cargo_debris_chunk_s01, cargo_debris_crate_s01/s02, debris_* (51 debris props) for the levelled Academy",
+        "appearance/thm_corl_imprv_arch_lg_s01/s02, thm_corl_imprv_bridge_lg/sm_s01/s02 (canyon bridges, arches)",
+        "caves: object/building/general/shared_cave_01..08*.iff -> appearance/thm_all_cave_s01.pob, thm_all_cave_flatland_s01.pob; thm_all_cave_column_*; poi_all_lair_cave_large/small",
+        "NOT usable: object/building/military/shared_poi_all_jedi_temple_ruined.iff names appearance/poi_all_jedi_temple_ruined.pob, which is in none of the archives the client loads"
+      ],
+      "mtg": [
+        "object/building/mustafar/structures/shared_must_jeditemple_dome/platform_lrg/med/sml/wall_high/_02/wall_long/wall_low/_02.iff with appearance/poi_talus_jeditemple_*.apt (Old Republic Jedi temple ruin pieces from Trials of Obi-Wan; MTG credit, SOE rights as for stock)",
+        "appearance/exarkun_pillar.apt, aurilia_obelisk.apt, frn_all_jedi_temple_destroyed.apt (a destroyed-temple miniature)"
+      ],
+      "open": ["C6", "C7", "C8", "C14"],
+      "paid": ["C15", "C16", "C17", "C18"],
+      "recommended": "Stock Dantooine temple pieces plus the Yavin enclave interiors, the crater from terrain affectors with scorched shaders and debris props; MTG Mustafar temple walls if a bigger ruin field is wanted. Quaternius Ultimate Modular Ruins (C6) as the first external prop once F86 is validated."
+    },
+    {
+      "id": "N5", "need": "Knossa spaceport",
+      "stock": [
+        "object/building/military/shared_outpost_starport.iff -> appearance/mun_all_landing_pad_s01.pob (spawns its own travel terminal, collector, shuttle and cloning/insurance terminals; proven on Hoth)",
+        "object/building/general/shared_starport_general.iff, _style_1, _style_2; shared_shuttleport_general.iff; shared_mun_all_starport_s01.iff",
+        "town pieces if Knossa grows: object/building/general/shared_mun_all_* (cantina, bank, hotel, cloning, medical), player/city shuttleports"
+      ],
+      "mtg": [],
+      "open": [],
+      "paid": [],
+      "recommended": "shared_outpost_starport for the first build; a general starport later."
+    },
+    {
+      "id": "N6", "need": "Ysanna settlement and NPC looks",
+      "stock": [
+        "camps: object/building/poi/shared_dantooine_janta_large1/2, medium1/2, small1/2 and shared_dantooine_kunga_* (Dantari tribal camps, laid out by clientdata/poi/*.cdf)",
+        "object/building/general/shared_dantooine_janta_cave.iff, shared_dantooine_kunga_cave.iff (tribal caves)",
+        "appearance/poi_all_tent_hut_s01.apt, eqp_camping_tent_s1..s6, eqp_camping_cot/chair/crate/log, ply_tato_merchant_tent_s01, shared_endor_forest_hut.iff",
+        "bodies: object/mobile/shared_dantari_male.iff, shared_dantari_female.iff (tribal human-like bodies), plus human and other species NPC looks",
+        "masks and tribal wear: object/tangible/wearables/hat/shared_singing_mountain_clan_mask_s01.iff, base/shared_base_mask_face.iff, bandolier/shared_bandolier_tusken_raider_s01..s03, helmet/shared_helmet_tusken_raider_s01, nightsister hats/dress/boots",
+        "mounts: object/mobile/shared_bol.iff (bol_pack_runner), shared_brackaset.iff, shared_falumpaset.iff for the Ysanna riding beast"
+      ],
+      "mtg": ["appearance/item_mask_*.apt masks (e.g. item_mask_sith_torture.apt); MTG credit"],
+      "open": ["C10", "C11"],
+      "paid": [],
+      "recommended": "Dantari camps and bodies renamed as Ysanna, SMC mask and Tusken bandoliers for ritual dress. Kenney Survival Kit (C10) and the CC-BY tribal hut (C11) only as later variety."
+    },
+    {
+      "id": "N7", "need": "Native creatures (gokob, kirruk, tribis, kaddyr bug, Ossus tree frog, the Ysanna mount beast)",
+      "stock": [
+        "gokob (friendly hairless rodent) -> object/mobile/shared_womp_rat.iff or shared_vrelt.iff or shared_kima.iff",
+        "tribis -> shared_tybis.iff, shared_tybis_youth.iff (the stock tybis is the nearest name and body)",
+        "kaddyr bug -> shared_kliknik.iff/_hatchling or shared_gaping_spider_broodling.iff",
+        "kirruk (undescribed) -> shared_gurreck.iff or shared_huf_dun.iff",
+        "Ossus tree frog -> no frog body; shared_vir_vur.iff (small flyer) or leave out",
+        "mount beast -> shared_bol.iff, shared_brackaset.iff, shared_falumpaset.iff",
+        "birds -> shared_whisper_bird.iff, shared_peko_peko.iff; caves -> shared_crystal_snake.iff, shared_borgle.iff",
+        "every body has a _hue variant for recolouring without new art"
+      ],
+      "mtg": ["3,032 MTG NPC/creature definitions (catalogue P) if a different look is wanted"],
+      "open": [],
+      "paid": [],
+      "recommended": "Stock bodies with our names, stats and loot; no external creature packs (no rig/animation path, see meta.conversion_tools_today.creatures)."
+    },
+    {
+      "id": "N8", "need": "Imperial watch post (Krayt's Empire)",
+      "stock": [
+        "object/building/military/shared_military_imperial_forward_outpost.iff, shared_military_outpost_guard_house_imperial.iff, shared_military_outpost_guard_tower_1.iff (-> mun_all_military_base_lookout_s01.apt)",
+        "object/building/military/shared_poi_all_impl_bunker_recon_outpost.iff (-> poi_all_impl_bunker_small_outpost_s01.pob), general/shared_bunker_imperial_01.iff",
+        "appearance/mun_all_military_wall_med_impl_16/32_s01, mun_all_military_column_*_impl_s01, mun_all_military_base_gate_impl_s01, mun_all_concrete_slab_imperial",
+        "stormtrooper, officer and dark-Jedi NPC looks are stock"
+      ],
+      "mtg": [],
+      "open": [],
+      "paid": [],
+      "recommended": "Stock; no external."
+    },
+    {
+      "id": "N9", "need": "Sky and ambient sound",
+      "stock": [
+        "terrain/environment/tatooine.iff as the ENVM template (it has a second sun chunk SSUN; Ossus orbits two suns) with texture/grad_sky_dantooine.dds or grad_sky_yavin4.dds and terrain/colorramp/stars_*.tga",
+        "sound/amb_forest_outside.snd (sample/amb_forest_lp.wav), amb_forest_night, amb_grassland_outside (sample/amb_grass_lp.wav), amb_mountains_outside, amb_cave_drip/amb_cave_int_lp, amb_insect_swarm_sml/lrg_lp; 326 stock ambient templates",
+        "music/mus_theme_generic_a/b/c.mp3, mus_theme_naboo.mp3, music/grasslands_mus_lp.mp3, mus_jungle_amb_a/b.mp3"
+      ],
+      "mtg": ["music/mus_theme_taanab.mp3 and other MTG themes (credit)"],
+      "open": ["C12", "C13"],
+      "paid": [],
+      "recommended": "Stock sky and loops first; the two CC0 OGA loops (C12, C13) for an Ossus-specific ambience."
+    }
+  ],
+  "candidates": {
+    "C1": {
+      "name": "Poly Haven ground and rock textures",
+      "url": "https://polyhaven.com/textures (ids: forest_floor, forrest_ground_01, forest_leaves_02, forest_leaves_03, brown_mud_leaves_01, aerial_grass_rock, aerial_rocks_02, aerial_rocks_04, mossy_rock, lichen_rock, rock_01, rock_04, rock_05, gray_rocks, grass_ground, grass_path_2, gravel_ground_01, coast_sand_rocks_02, bark_brown_02)",
+      "licence": "CC0 1.0 (https://polyhaven.com/license: all assets are CC0; website text, logos and preview renders are not covered)",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "yes (CC0)",
+      "attribution": "none required; record voluntarily: '<name> - Poly Haven, CC0 1.0'",
+      "price": "free",
+      "format": "PNG/JPG/EXR PBR maps, 1K-8K; terrain shaders use only the base colour (effect/a_simple.eft, one texture)",
+      "conversion_path": "pick 1K colour map -> resize 512 or 1024, bake AO lightly -> DXT1 DDS texture/<name>.dds -> clone a stock .sht (NAME chunk 'texture\\<name>.dds') -> new SFAM family in the .trn",
+      "fit": "good: photographic tiles like SWG's own ground textures",
+      "already_in_C15": "Poly Haven as a source yes; these ids are new"
+    },
+    "C2": {
+      "name": "ambientCG ground and rock materials",
+      "url": "https://ambientcg.com (ids: Grass001, Grass004, Grass005, Ground037 (forest moss), Ground020 (forest leaves), Ground030 (path), Rock063, Rock064 (mossy cliff), Rock051, Rock058, Rock060 (cliff), Rock035 (cave))",
+      "licence": "CC0 1.0 (https://docs.ambientcg.com/license/: raw files inside games, modification and redistribution allowed)",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "yes (CC0)",
+      "attribution": "none required; optional: 'Created using <id> from ambientCG.com, licensed under the Creative Commons CC0 1.0 Universal License'",
+      "price": "free",
+      "format": "PBR maps, 1K-8K (download sizes not listed by the API)",
+      "conversion_path": "as C1",
+      "fit": "good",
+      "already_in_C15": "source yes; ids new"
+    },
+    "C3": {
+      "name": "Kenney Nature Kit",
+      "url": "https://kenney.nl/assets/nature-kit",
+      "licence": "CC0 1.0 (page link)",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "yes (CC0)",
+      "attribution": "none required; optional 'Nature Kit - Kenney (kenney.nl), CC0'",
+      "price": "free (optional donation)",
+      "format": "330 files (formats not listed on the page; Kenney 3D kits normally ship FBX/OBJ/glTF with one palette texture); polycount not stated",
+      "conversion_path": "FBX -> Blender -> io_scene_swg_msh .msh (+.lod/.apt) -> palette texture to DDS -> .sht; flora needs collidable/non-collidable family entries in the .trn",
+      "fit": "weak: flat-colour stylized low poly next to SWG's textured flora; blockout or distant props only"
+    },
+    "C4": {
+      "name": "KayKit Forest Nature Pack",
+      "url": "https://kaylousberg.itch.io/kaykit-forest",
+      "licence": "CC0 1.0 stated on the page (no attribution required)",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "yes (CC0)",
+      "attribution": "none required; optional 'KayKit Forest Nature Pack - Kay Lousberg, CC0'",
+      "price": "free tier $0 (100+ models, 6.1 MB); Extra $9.99+, Source $14.99+",
+      "format": "FBX/glTF/OBJ, 1024x1024 gradient atlas (downsamples to 128)",
+      "conversion_path": "as C3",
+      "fit": "weak to medium (stylized)"
+    },
+    "C5": {
+      "name": "Quaternius Ultimate Nature Pack",
+      "url": "https://quaternius.com/packs/ultimatenature.html",
+      "licence": "pack page links CC0; the site licence page (https://quaternius.com/license.html) now states the Quaternius Asset License v1.0 (updated 2026-08-28): free for personal, educational and commercial games, no attribution, finished games may be distributed, but 'you may not extract, repackage, sublicense, sell, or otherwise redistribute the Assets'. Treat as QAL until clarified.",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "finished-game distribution allowed; a TRE with converted meshes is a finished-game package, but the no-extract wording makes it a question for the creator if the archive is ever shared",
+      "attribution": "none required; optional credit",
+      "price": "free (Patreon source tiers $10-50/month are separate)",
+      "format": "150 models, FBX/OBJ/Blend; page marks Textured as unavailable (vertex colours); polycount not stated",
+      "conversion_path": "as C3; vertex-colour models need a baked texture for SWG",
+      "fit": "weak (stylized)"
+    },
+    "C6": {
+      "name": "Quaternius Ultimate Modular Ruins Pack",
+      "url": "https://quaternius.com/packs/ultimatemodularruins.html",
+      "licence": "pack page links CC0 and says free for personal and commercial projects; site licence page says QAL v1.0 (see C5)",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "as C5",
+      "attribution": "none required; optional 'Ultimate Modular Ruins Pack - Quaternius'",
+      "price": "free",
+      "format": "90 models, textured, FBX/OBJ/Blend, August 2021; includes an animated character (not usable in SWG); polycount not stated",
+      "conversion_path": "static pieces -> Blender -> .msh/.lod/.apt; textures -> DDS; .sht clone",
+      "fit": "medium-good for ruin props (textured low poly)"
+    },
+    "C7": {
+      "name": "Modular Temple collection (Fertile Soil Productions)",
+      "url": "https://opengameart.org/node/81969 (newer free version: https://fertile-soil-productions.itch.io/temple-modular-collection, 213 OBJ models, pay what you want)",
+      "licence": "CC0 (OpenGameArt licence field)",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "yes (CC0)",
+      "attribution": "none required",
+      "price": "free",
+      "format": "OBJ with one .mtl (Asset Forge style); no textures stated; polycount not stated",
+      "conversion_path": "OBJ -> Blender -> .msh; needs our own stone textures (C1/C2)",
+      "fit": "medium: ornate temple kit, not ruined; commenters note it lacks roofs"
+    },
+    "C8": {
+      "name": "Kenney Graveyard Kit",
+      "url": "https://kenney.nl/assets/graveyard-kit",
+      "licence": "CC0 1.0",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "yes",
+      "attribution": "none required",
+      "price": "free",
+      "format": "90 files, v5.0; formats not listed on the page",
+      "conversion_path": "as C3",
+      "fit": "weak-medium (spooky stylized stone pieces)"
+    },
+    "C9": {
+      "name": "Kenney Modular Cave Kit",
+      "url": "https://kenney.nl/assets/modular-cave-kit",
+      "licence": "CC0 1.0",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "yes",
+      "attribution": "none required",
+      "price": "free",
+      "format": "40 files, v1.0 (2026); formats not listed",
+      "conversion_path": "as C3; cave interiors in SWG are .pob buildings (cells, portals, floors), far more than a mesh",
+      "fit": "weak as interiors; medium as loose cave props"
+    },
+    "C10": {
+      "name": "Kenney Survival Kit",
+      "url": "https://kenney.nl/assets/survival-kit",
+      "licence": "CC0 1.0",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "yes",
+      "attribution": "none required",
+      "price": "free",
+      "format": "80 files, v2.0 (camp props; contents not itemised on the page)",
+      "conversion_path": "as C3",
+      "fit": "medium for camp props"
+    },
+    "C11": {
+      "name": "Low-Poly Tribal Hut (NoLogoGames)",
+      "url": "https://opengameart.org/content/low-poly-tribal-hut",
+      "licence": "CC-BY 3.0; author: credit not required for game use 'although it would be polite'; required if bundled into a paid asset pack",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "yes under CC-BY (keep attribution and note the modification)",
+      "attribution": "'Low-Poly Tribal Hut by NoLogoGames, CC BY 3.0, https://opengameart.org/content/low-poly-tribal-hut, converted to SWG format'",
+      "price": "free",
+      "format": "FBX, 512 px albedo + smoothness + normal (2016); polycount not stated",
+      "conversion_path": "FBX -> Blender -> .msh/.apt; albedo -> DDS; normal map dropped unless a dot3 .sht is proven",
+      "fit": "good (one hut)"
+    },
+    "C12": {
+      "name": "Forest Ambience (TinyWorlds)",
+      "url": "https://opengameart.org/node/23888",
+      "licence": "CC0 1.0",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "yes",
+      "attribution": "none required; optional 'Forest Ambience - TinyWorlds (OpenGameArt), CC0'",
+      "price": "free",
+      "format": "Forest_Ambience.mp3, 716.7 KB, seamless loop (2014)",
+      "conversion_path": "mp3 -> WAV (mono, stock loops are mono) as sample/amb_ossus_forest_lp.wav + cloned .snd (SD2D template) + region/ambient hookup",
+      "fit": "good"
+    },
+    "C13": {
+      "name": "Birds and Wind - Ambient (Spring Spring)",
+      "url": "https://opengameart.org/content/birds-and-wind-ambient-birds-wind-and-synth",
+      "licence": "CC0 1.0; bird recordings by isaiah658, syncopika, pauliuw stated as public domain",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "yes",
+      "attribution": "none required; optional credit to all four names",
+      "price": "free",
+      "format": "several mixes, plain ambient about 1.9 MB; loop point to check",
+      "conversion_path": "as C12",
+      "fit": "good (the plain mix without synth)"
+    },
+    "C14": {
+      "name": "100+ Ancient South Indian Temple Ruins Asset Pack (SrushtiLabs / Maheshchandra Hegde)",
+      "url": "https://www.fab.com/listings/a3910c1c-1733-4851-8057-f6b433e1804b",
+      "licence": "CONFLICT: description says 'CC0 / Free Commercial Use'; Fab's licence field says Standard License; Fab flags 'Generated with AI: Yes' (Voxelforge AI)",
+      "private_server_use": "unclear",
+      "modify_convert_redistribute_in_client_archives": "unclear; Fab Standard forbids distributing content in extractable form",
+      "attribution": "none stated",
+      "price": "free",
+      "format": "glb in a 730 MB zip; game-ready claimed, polycount not stated",
+      "conversion_path": "glb -> Blender -> .msh (heavy)",
+      "fit": "medium (Dravidian style); EXCLUDED under the owner's rule on AI packs of unclear provenance and the licence conflict"
+    },
+    "C15": {
+      "name": "Low Poly Temple Ruins Pack Modular (Arludus)",
+      "url": "https://arludus.itch.io/low-poly-temple-ruins-pack-modular (also Unity Asset Store https://assetstore.unity.com/packages/3d/environments/low-poly-temple-ruins-pack-modular-111437, $12, 2018)",
+      "licence": "creator's own terms on the itch page: 'This asset pack is not CC0'; 'You can use it in personal and commercial projects, including games'; 'Redistribution or resale of the files (even modified) is not allowed'; nothing on attribution",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "NOT CLEAR: a converted mesh inside a client archive is a 'modified file' being redistributed; needs the author's written OK before purchase",
+      "attribution": "not required; record creator and purchase",
+      "price": "$14 (itch, 'or more') / $12 (Unity)",
+      "format": "86 FBX models about 200 triangles each, 6 atlas colour textures, plus vegetation; 864 KB zip",
+      "conversion_path": "FBX -> Blender -> .msh/.lod/.apt; atlas -> DDS; one .sht per atlas",
+      "fit": "very good for SWG (low poly, readable, dated look)"
+    },
+    "C16": {
+      "name": "ART - Ancient Ruin Temple - Modular Environment (Chthonian Gods Studio)",
+      "url": "https://www.fab.com/listings/97211b12-b1a7-4dc2-95b2-3091f484f2a9",
+      "licence": "Fab Standard License (see licences.fab)",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "no: Fab Standard requires end users be restricted from extracting content; SWG archives are openly extractable",
+      "attribution": "none required",
+      "price": "$49.99-$59.99 (flash sale pricing in October 2026 may differ)",
+      "format": "99 FBX / 135+ static meshes, Nanite-enabled high poly, PBR, UE 5.7-5.8 + Blender + fbx",
+      "conversion_path": "FBX -> Blender decimate -> .msh; heavy",
+      "fit": "poor (high poly realistic); not recommended"
+    },
+    "C17": {
+      "name": "Ancient Temple Modular Asset Kit (Michelangelo Cellini)",
+      "url": "https://www.fab.com/listings/a39fca7f-fd25-47e9-93fc-6da22724e7b8",
+      "licence": "Fab Standard License",
+      "private_server_use": "yes",
+      "modify_convert_redistribute_in_client_archives": "no (as C16)",
+      "attribution": "none required",
+      "price": "$12.99-$15.99",
+      "format": "22 low-poly PBR assets as an Unreal Engine asset package only (UE 4.22-5.6); no FBX listed",
+      "conversion_path": "needs Unreal Engine to export FBX first; not practical",
+      "fit": "medium (Greek temple); not recommended"
+    },
+    "C18": {
+      "name": "Ancient Temple Ruins (Shapefarm, Epic free promotion)",
+      "url": "https://www.cgchannel.com/2026/01/get-80-free-modular-assets-for-creating-a-temple-environment/ (Fab listing 1be98779-8452-4bc0-b52a-e03e9d68b263)",
+      "licence": "Fab Standard License; free only until 13 January 2026",
+      "private_server_use": "yes if owned",
+      "modify_convert_redistribute_in_client_archives": "no (as C16)",
+      "attribution": "none required",
+      "price": "promotion ended; current price not captured",
+      "format": "80 modular assets, UE 5.2+ asset package",
+      "conversion_path": "needs Unreal Engine; not practical",
+      "fit": "not recommended"
+    },
+    "C19": {
+      "name": "Sketchfab free downloads (per-model Creative Commons)",
+      "url": "https://sketchfab.com/search?features=downloadable&licenses=322a749bcfa841b29dff1e8a1bb74b0b&type=models (CC0 filter)",
+      "licence": "per model: CC0 / CC-BY / CC-BY-SA / NC variants; the paid-store licence (sketchfab.com/licenses) forbids extractable redistribution and does not apply to CC downloads",
+      "private_server_use": "yes for CC0/CC-BY; flag CC-BY-SA (share-alike on the adapted file) and exclude NC",
+      "modify_convert_redistribute_in_client_archives": "CC0 yes; CC-BY yes with credit; CC-BY-SA only with the adapted file under the same licence",
+      "attribution": "per model: '<title> by <author>, <licence>, <url>, modified'",
+      "price": "free",
+      "format": "varies (glTF/FBX/OBJ); check polycount per model; exclude obvious game rips and AI packs",
+      "conversion_path": "as C6",
+      "fit": "varies; no specific model selected in this pass"
+    }
+  },
+  "licences": {
+    "fab_standard": {
+      "url": "https://www.fab.com/eula (checked 14 Oct 2026, last updated 1 Oct 2024)",
+      "clauses": "Summary: 'Use the assets commercially or privately', 'Modify and adjust the assets', 'Use the assets with any compatible tools (usage is not limited to Unreal Engine)', 'Share the asset ... with your collaborators'; 'You may not: Resell or redistribute the asset for free on a standalone basis'. Full text: 'you may Distribute a Project that incorporates Content as an included dependency to end users ... only authorize end users to make use of Content solely as incorporated in the Project in object code and you must restrict end users from extracting or otherwise ...'; 'you may not make Content available in world- or level-editing tools or templates or other modeling tools that allow works to be exported'; no credit required; CC-BY tier governed by CC.",
+      "private_server_ok": "yes",
+      "client_archive_redistribution": "no: SWG TRE archives are openly extractable with public tools, so the 'restrict end users from extracting' duty cannot be met in substance",
+      "attribution": "not required"
+    },
+    "unity_asset_store": {
+      "url": "https://unity.com/legal/as-terms",
+      "clauses": "EULA 2.2.1: incorporate into a product with substantial original content; reproduce/display/distribute the Asset 'as incorporated and embedded in that Licensed Product'; 2.2.1(e) may modify; 2.2.1.1(b) may not 'sell, transfer, distribute, lease, or lend the Assets for commercial gain'; no attribution clause; Restricted Assets may carry their own terms; use outside Unity is not addressed ('intended purpose').",
+      "private_server_ok": "probably (not limited by commercial status)",
+      "client_archive_redistribution": "grey: no extractability clause, but 'embedded' and 'intended purpose' are open to argument; prefer not",
+      "attribution": "not required"
+    },
+    "cgtrader_royalty_free": {
+      "url": "https://www.cgtrader.com/pages/terms-and-conditions",
+      "clauses": "21A.2 games only where the Product 'is contained inside a proprietary format and displays inside the game during play'; 21A.3 'all commercially reasonable measures to prevent the end user from gaining access to the Product'; definition 8: Incorporated Product 'cannot be extracted ... without the use of reverse engineering tools'; 21A.6 no resale or redistribution unless incorporated; no attribution.",
+      "private_server_ok": "yes",
+      "client_archive_redistribution": "no: TRE archives are not a protective format",
+      "attribution": "not required"
+    },
+    "sketchfab_store": {
+      "url": "https://sketchfab.com/licenses (legacy store purchases; the store itself moved to Fab)",
+      "clauses": "2.2(b): may not 'sell, license, distribute or otherwise make available the Licensed Material as a stand-alone file (or group of files) or in a way that allows third parties to use, download, extract or access the Licensed Material'; 2.7 licensee must post terms forbidding reuse as a stand-alone file; Editorial licence excludes commercial use.",
+      "private_server_ok": "yes",
+      "client_archive_redistribution": "no",
+      "attribution": "not required"
+    },
+    "artstation_marketplace": {
+      "url": "https://www.artstation.com/marketplace-product-eula",
+      "clauses": "Standard: 'you may copy, use, modify, adapt, translate, distribute, publicly display, transmit, broadcast, and create derivative works from the Product in works you create ... which may include ... computer games'; restrictions include (c) 'hack, reverse engineer, decompile, disassemble, modify or create derivative works of the Product' outside Works and (h) removing proprietary notices. The stand-alone-distribution clause was not captured in this pass; check per product.",
+      "private_server_ok": "yes",
+      "client_archive_redistribution": "check per product; expect a no-stand-alone clause",
+      "attribution": "not stated"
+    },
+    "itch_io": {
+      "url": "per creator page",
+      "clauses": "itch.io sets no common asset licence; each page states its own (CC0, CC-BY or custom). Arludus: no redistribution of files even modified. KayKit: CC0.",
+      "private_server_ok": "per page",
+      "client_archive_redistribution": "per page",
+      "attribution": "per page"
+    },
+    "cc0": {
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+      "clauses": "no conditions; copying, alteration and redistribution, including inside client archives, are allowed; attribution voluntary",
+      "private_server_ok": "yes", "client_archive_redistribution": "yes", "attribution": "voluntary"
+    },
+    "cc_by": {
+      "url": "https://creativecommons.org/licenses/by/4.0/ (3.0 for older uploads)",
+      "clauses": "credit the author, link the licence, indicate changes; no further restriction",
+      "private_server_ok": "yes", "client_archive_redistribution": "yes with credit", "attribution": "required"
+    },
+    "cc_by_sa": {
+      "clauses": "as CC-BY plus share-alike on the adapted file; flag before use (C15 catalogue note)",
+      "private_server_ok": "yes", "client_archive_redistribution": "only with the adapted file under the same licence", "attribution": "required"
+    },
+    "cc_nc": {
+      "clauses": "non-commercial variants excluded from this plan (catalogue rule)",
+      "private_server_ok": "excluded"
+    }
+  },
+  "recommended_set": {
+    "first_playable": {
+      "terrain": "stock shader families (N1) in our own .trn",
+      "flora_rocks": "stock (N2, N3)",
+      "ruins": "stock Dantooine temple pieces, poi_temple_ancient_ruined, Gungan ruined walls, Yavin enclave interiors, scorched shaders + debris for the crater, stock caves (N4)",
+      "spaceport": "shared_outpost_starport (N5)",
+      "ysanna": "Dantari camps, caves and bodies; SMC mask, Tusken bandoliers; bol mounts (N6)",
+      "creatures": "stock bodies renamed (N7)",
+      "imperial": "stock forward outpost, guard tower, recon bunker (N8)",
+      "sky_sound": "Tatooine ENVM template with Dantooine sky; stock loops and generic theme (N9)",
+      "cost": "$0; no download needed"
+    },
+    "second_pass_optional": {
+      "downloads_for_owner_ok": [
+        "C1: 8 Poly Haven 1K colour maps (about 1-3 MB each)",
+        "C2: 4-6 ambientCG 1K materials (similar)",
+        "C12 + C13: two OGA CC0 loops (about 3 MB)",
+        "C6: Quaternius Ultimate Modular Ruins Pack (size not stated; typically tens of MB) after the Blender add-on is validated (F86)",
+        "C10: Kenney Survival Kit; C9: Modular Cave Kit (tens of MB each) if camp or cave variety is wanted"
+      ],
+      "paid": "none required. Optional: C15 Arludus Low Poly Temple Ruins ($14) only after the author confirms in writing that converted files may ship inside our client archive; otherwise skip.",
+      "excluded": "C14 (AI-generated, licence conflict), C16-C18 (Fab Standard extractability clause, high poly or Unreal-only), any CGTrader/Sketchfab-store purchase (extractability clauses), NC or SA packs"
+    },
+    "total_cost": "$0 recommended; up to $14 optional"
+  },
+  "owner_actions": [
+    "OK each download in second_pass_optional (zip from the creator's page, saved outside the client, hashed and recorded per AGENTS.md).",
+    "Decide whether to contact Arludus about C15 (an outbound message, $14 if yes).",
+    "Confirm the Blender add-on validation task (F86) before any external 3D prop; until then only textures and audio are importable.",
+    "Allow installing NVIDIA Texture Tools or Microsoft texconv for DDS compression, or accept our own uncompressed-DDS writer.",
+    "Accept that native creatures use stock bodies (no rig path).",
+    "Decide whether MTG's Mustafar temple ruins (SOE Trials of Obi-Wan art, MTG credit) may be used; the owner's own disc copies of those files are in unreadable version-6 archives."
+  ]
+}

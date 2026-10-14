@@ -1,0 +1,517 @@
+{
+  "researched": "2026-10-13",
+  "repository": "https://gitlab.com/EiF-Public/patch-files",
+  "revision": "5f97c7983d2ab950255113f9ae96447b3526f454",
+  "scope": "Public archive index names only; no asset payloads extracted or installed. Index presence does not establish reuse permission, correct dependencies, client load priority or gameplay.",
+  "archives": [],
+  "errors": [
+    {
+      "name": "starsider01.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider05.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider03.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider04.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider02.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider06.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider07.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider10.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider09.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider08.tre",
+      "error": "HTTP Error 500: Internal Server Error"
+    },
+    {
+      "name": "starsider13.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider11.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider12.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider16.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider18.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider14.tre",
+      "error": "HTTP Error 500: Internal Server Error"
+    },
+    {
+      "name": "starsider19.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider17.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider20.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider15.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider45.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider22.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider23.tre",
+      "error": "Range not honored: 200"
+    },
+    {
+      "name": "starsider21.tre",
+      "error": "Range not honored: 200"
+    }
+  ],
+  "species_evidence": [
+    {
+      "key": "hutt",
+      "name": "Hutt",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_hutt_male.iff",
+          "archives": []
+        },
+        {
+          "shared_template": "object/creature/player/shared_hutt_female.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "nautolan",
+      "name": "Nautolan",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_nautolan_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "togruta",
+      "name": "Togruta",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_togruta_female.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "chiss",
+      "name": "Chiss",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_chiss_male.iff",
+          "archives": []
+        },
+        {
+          "shared_template": "object/creature/player/shared_chiss_female.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "devaronian",
+      "name": "Devaronian",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_devaronian_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "gran",
+      "name": "Gran",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_gran_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "ishi_tib",
+      "name": "Ishi Tib",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_ishi_tib_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "nightsister",
+      "name": "Nightsister",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_nightsister_female.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "nikto",
+      "name": "Nikto",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_nikto_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "quarren",
+      "name": "Quarren",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_quarren_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "smc",
+      "name": "Singing Mountain Clan Witch",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_smc_female.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "weequay",
+      "name": "Weequay",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_weequay_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "aqualish",
+      "name": "Aqualish",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_aqualish_male.iff",
+          "archives": []
+        },
+        {
+          "shared_template": "object/creature/player/shared_aqualish_female.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "bith",
+      "name": "Bith",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_bith_male.iff",
+          "archives": []
+        },
+        {
+          "shared_template": "object/creature/player/shared_bith_female.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "gotal",
+      "name": "Gotal",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_gotal_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "talz",
+      "name": "Talz",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_talz_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "abyssin",
+      "name": "Abyssin",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_abyssin_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "arcona",
+      "name": "Arcona",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_arcona_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "cerean",
+      "name": "Cerean",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_cerean_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "duros",
+      "name": "Duros",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_duros_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "gungan",
+      "name": "Gungan",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_gungan_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "iktotchi",
+      "name": "Iktotchi",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_iktotchi_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "jenet",
+      "name": "Jenet",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_jenet_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "kel_dor",
+      "name": "Kel Dor",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_kel_dor_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "kubaz",
+      "name": "Kubaz",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_kubaz_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "sanyassan",
+      "name": "Sanyassan",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_sanyassan_male.iff",
+          "archives": []
+        },
+        {
+          "shared_template": "object/creature/player/shared_sanyassan_female.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "chadra_fan",
+      "name": "Chadra-Fan",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_chadra_fan_male.iff",
+          "archives": []
+        },
+        {
+          "shared_template": "object/creature/player/shared_chadra_fan_female.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "droid",
+      "name": "Droid (NK3 label in source; not verified IG-100)",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_droid_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "dug",
+      "name": "Dug",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_dug_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "ewok",
+      "name": "Ewok",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_ewok_male.iff",
+          "archives": []
+        },
+        {
+          "shared_template": "object/creature/player/shared_ewok_female.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "feeorin",
+      "name": "Feeorin",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_feeorin_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "geonosian",
+      "name": "Geonosian",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_geonosian_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "ortolan",
+      "name": "Ortolan",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_ortolan_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "togorian",
+      "name": "Togorian",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_togorian_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "toydarian",
+      "name": "Toydarian",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_toydarian_male.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "mirialan",
+      "name": "Mirialan",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_mirialan_male.iff",
+          "archives": []
+        },
+        {
+          "shared_template": "object/creature/player/shared_mirialan_female.iff",
+          "archives": []
+        }
+      ]
+    },
+    {
+      "key": "zeltron",
+      "name": "Zeltron",
+      "models": [
+        {
+          "shared_template": "object/creature/player/shared_zeltron_male.iff",
+          "archives": []
+        },
+        {
+          "shared_template": "object/creature/player/shared_zeltron_female.iff",
+          "archives": []
+        }
+      ]
+    }
+  ],
+  "terrains": [],
+  "snapshots": [],
+  "bytes_read": 0,
+  "server_changes": false
+}

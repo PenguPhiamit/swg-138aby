@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/aurebesh_tile_cherek.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/aurebesh_tile_cherek.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_aurebesh_tile_cherek, "object/tangible/loot/creature/loot/collections/aurebesh_tile_cherek.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_aurebesh_tile_cherek, "object/tangible/loot/creature_loot/collections/aurebesh_tile_cherek.iff")

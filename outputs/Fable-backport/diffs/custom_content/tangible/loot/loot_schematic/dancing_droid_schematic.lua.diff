@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/loot_schematic/dancing_droid_schematic.lua
++++ b/custom_content/tangible/loot/loot_schematic/dancing_droid_schematic.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_dancing_droid_schematic, "object/tangible/loot/loot/schematic/dancing_droid_schematic.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_dancing_droid_schematic, "object/tangible/loot/loot_schematic/dancing_droid_schematic.iff")

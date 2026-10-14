@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/quest/hero_of_tatooine/squill_skull_pile.lua
++++ b/custom_content/tangible/loot/quest/hero_of_tatooine/squill_skull_pile.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_quest_hero_of_tatooine_squill_skull_pile, "object/tangible/loot/quest/hero/of/tatooine/squill_skull_pile.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_quest_hero_of_tatooine_squill_skull_pile, "object/tangible/loot/quest/hero_of_tatooine/squill_skull_pile.iff")

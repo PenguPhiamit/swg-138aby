@@ -1,0 +1,47 @@
+From 697f2002e01c65130bed9f9c7aea69855953ee6a Mon Sep 17 00:00:00 2001
+From: SWG Local Dev <swg-local@localhost>
+Date: Tue, 13 Oct 2026 14:49:58 -0700
+Subject: [PATCH 5/5] Agent body: keep re-planning long paths while each leg
+ gets closer
+
+Up to 25 legs; stop when two legs in a row make no progress.
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ MMOCoreORB/src/client/agent/AgentControl.cpp | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/MMOCoreORB/src/client/agent/AgentControl.cpp b/MMOCoreORB/src/client/agent/AgentControl.cpp
+index 76d3dbce..657a3d96 100644
+--- a/MMOCoreORB/src/client/agent/AgentControl.cpp
++++ b/MMOCoreORB/src/client/agent/AgentControl.cpp
+@@ -1069,9 +1069,12 @@ JSONSerializationType AgentControl::handle(const JSONSerializationType& request)
+ 		if (cmd == "path")
+ 			return plan;
+ 		if (plan.value("ok", false)) {
+-			// The pathfinder can return part of the way (e.g. to a ledge); re-plan from there.
++			// The pathfinder can return part of the way (to a ledge, or out of a building towards
++			// a far target); re-plan from there while each leg gets us closer.
+ 			JSONSerializationType result;
+-			for (int leg = 1; leg <= 6; ++leg) {
++			float lastRemaining = 1e9f;
++			int stalled = 0;
++			for (int leg = 1; leg <= 25; ++leg) {
+ 				result = walkPath(plan["points"], speed, timeout);
+ 				if (!result.value("ok", false))
+ 					return result;
+@@ -1083,6 +1086,10 @@ JSONSerializationType AgentControl::handle(const JSONSerializationType& request)
+ 				result["legs"] = leg;
+ 				if (remaining < 1.5f)
+ 					return result;
++				stalled = remaining > lastRemaining - 1.f ? stalled + 1 : 0;
++				if (stalled >= 2)
++					break;
++				lastRemaining = std::min(lastRemaining, remaining);
+ 				plan = askHelper(args);
+ 				if (!plan.value("ok", false))
+ 					break;
+-- 
+2.47.3
+

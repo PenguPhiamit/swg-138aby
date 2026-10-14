@@ -1,0 +1,245 @@
+--- a/custom_content/tangible/holiday/empire_day/serverobjects.lua
++++ b/custom_content/tangible/holiday/empire_day/serverobjects.lua
+@@ -1,3 +1,4 @@
++includeFile("custom_content/tangible/holiday/empire_day/component/serverobjects.lua")
+ includeFile("custom_content/tangible/holiday/empire_day/aa1n_vebrobrain_protocol_droid_component_crate.lua")
+ includeFile("custom_content/tangible/holiday/empire_day/command_console_comscan_subcomponent_crate.lua")
+ includeFile("custom_content/tangible/holiday/empire_day/crew_carrier_steering_mechanism_crate.lua")
+--- a/custom_content/building/player/serverobjects.lua
++++ b/custom_content/building/player/serverobjects.lua
+@@ -1,5 +1,6 @@
+ --Children folder includes
+ includeFile("custom_content/building/player/city/serverobjects.lua")
++includeFile("custom_content/building/player/construction/serverobjects.lua")
+ 
+ -- Server Objects
+ includeFile("custom_content/building/player/player_house_atat.lua")
+--- a/custom_content/tangible/content/serverobjects.lua
++++ b/custom_content/tangible/content/serverobjects.lua
+@@ -1,3 +1,4 @@
++includeFile("custom_content/tangible/content/eow/serverobjects.lua")
+ includeFile("custom_content/tangible/content/wod_crafting_alter_1.lua")
+ includeFile("custom_content/tangible/content/wod_crafting_alter_2.lua")
+ includeFile("custom_content/tangible/content/wod_crafting_alter_3.lua")
+--- a/custom_content/static/serverobjects.lua
++++ b/custom_content/static/serverobjects.lua
+@@ -1,4 +1,5 @@
+ -- Server Objects
++includeFile("custom_content/static/base/serverobjects.lua")
+ includeFile("custom_content/static/christmas/serverobjects.lua")
+ includeFile("custom_content/static/creature/serverobjects.lua")
+ includeFile("custom_content/static/firework/serverobjects.lua")
+--- a/allobjects.lua
++++ b/allobjects.lua
+@@ -942,6 +942,7 @@
+ includeFile("custom_content/ship/dungeon/objects.lua")
+ includeFile("custom_content/ship/player/objects.lua")
+ includeFile("custom_content/soundobject/objects.lua")
++includeFile("custom_content/static/base/objects.lua")
+ includeFile("custom_content/static/christmas/objects.lua")
+ includeFile("custom_content/static/creature/objects.lua")
+ includeFile("custom_content/static/firework/objects.lua")
+@@ -1049,6 +1050,7 @@
+ includeFile("custom_content/tangible/furniture/nym_themepark/objects.lua")
+ includeFile("custom_content/tangible/furniture/nym_themepark/collection/objects.lua")
+ includeFile("custom_content/tangible/furniture/rustic/objects.lua")
++includeFile("custom_content/tangible/furniture/space/objects.lua")
+ includeFile("custom_content/tangible/furniture/tatooine/objects.lua")
+ includeFile("custom_content/tangible/furniture/technical/objects.lua")
+ includeFile("custom_content/tangible/furniture/terminal/objects.lua")
+--- /dev/null
++++ b/custom_content/static/structure/tatooine/wall_tatooine_large_style_100.lua
+@@ -0,0 +1,6 @@
++-- Fable backport batch 2 (14 Oct 2026). Client template object/static/structure/tatooine/shared_wall_tatooine_large_style_100.iff (mtg_patch_023.tre), form STAT.
++
++object_static_structure_tatooine_wall_tatooine_large_style_100 = object_static_structure_tatooine_shared_wall_tatooine_large_style_100:new {
++}
++
++ObjectTemplates:addTemplate(object_static_structure_tatooine_wall_tatooine_large_style_100, "object/static/structure/tatooine/wall_tatooine_large_style_100.iff")
+--- /dev/null
++++ b/custom_content/static/structure/tatooine/wall_tatooine_large_style_200.lua
+@@ -0,0 +1,6 @@
++-- Fable backport batch 2 (14 Oct 2026). Client template object/static/structure/tatooine/shared_wall_tatooine_large_style_200.iff (mtg_patch_023.tre), form STAT.
++
++object_static_structure_tatooine_wall_tatooine_large_style_200 = object_static_structure_tatooine_shared_wall_tatooine_large_style_200:new {
++}
++
++ObjectTemplates:addTemplate(object_static_structure_tatooine_wall_tatooine_large_style_200, "object/static/structure/tatooine/wall_tatooine_large_style_200.iff")
+--- /dev/null
++++ b/custom_content/static/structure/tatooine/wall_tatooine_large_style_500.lua
+@@ -0,0 +1,6 @@
++-- Fable backport batch 2 (14 Oct 2026). Client template object/static/structure/tatooine/shared_wall_tatooine_large_style_500.iff (mtg_patch_023.tre), form STAT.
++
++object_static_structure_tatooine_wall_tatooine_large_style_500 = object_static_structure_tatooine_shared_wall_tatooine_large_style_500:new {
++}
++
++ObjectTemplates:addTemplate(object_static_structure_tatooine_wall_tatooine_large_style_500, "object/static/structure/tatooine/wall_tatooine_large_style_500.iff")
+--- /dev/null
++++ b/custom_content/static/structure/tatooine/wall_tatooine_large_style_1000.lua
+@@ -0,0 +1,6 @@
++-- Fable backport batch 2 (14 Oct 2026). Client template object/static/structure/tatooine/shared_wall_tatooine_large_style_1000.iff (mtg_patch_023.tre), form STAT.
++
++object_static_structure_tatooine_wall_tatooine_large_style_1000 = object_static_structure_tatooine_shared_wall_tatooine_large_style_1000:new {
++}
++
++ObjectTemplates:addTemplate(object_static_structure_tatooine_wall_tatooine_large_style_1000, "object/static/structure/tatooine/wall_tatooine_large_style_1000.iff")
+--- /dev/null
++++ b/custom_content/static/structure/tatooine/wall_tatooine_large_style_2000.lua
+@@ -0,0 +1,6 @@
++-- Fable backport batch 2 (14 Oct 2026). Client template object/static/structure/tatooine/shared_wall_tatooine_large_style_2000.iff (mtg_patch_023.tre), form STAT.
++
++object_static_structure_tatooine_wall_tatooine_large_style_2000 = object_static_structure_tatooine_shared_wall_tatooine_large_style_2000:new {
++}
++
++ObjectTemplates:addTemplate(object_static_structure_tatooine_wall_tatooine_large_style_2000, "object/static/structure/tatooine/wall_tatooine_large_style_2000.iff")
+--- /dev/null
++++ b/custom_content/static/structure/tatooine/wall_tatooine_large_style_2500.lua
+@@ -0,0 +1,6 @@
++-- Fable backport batch 2 (14 Oct 2026). Client template object/static/structure/tatooine/shared_wall_tatooine_large_style_2500.iff (mtg_patch_023.tre), form STAT.
++
++object_static_structure_tatooine_wall_tatooine_large_style_2500 = object_static_structure_tatooine_shared_wall_tatooine_large_style_2500:new {
++}
++
++ObjectTemplates:addTemplate(object_static_structure_tatooine_wall_tatooine_large_style_2500, "object/static/structure/tatooine/wall_tatooine_large_style_2500.iff")
+--- /dev/null
++++ b/custom_content/static/structure/tatooine/wall_tatooine_large_style_4200.lua
+@@ -0,0 +1,6 @@
++-- Fable backport batch 2 (14 Oct 2026). Client template object/static/structure/tatooine/shared_wall_tatooine_large_style_4200.iff (mtg_patch_023.tre), form STAT.
++
++object_static_structure_tatooine_wall_tatooine_large_style_4200 = object_static_structure_tatooine_shared_wall_tatooine_large_style_4200:new {
++}
++
++ObjectTemplates:addTemplate(object_static_structure_tatooine_wall_tatooine_large_style_4200, "object/static/structure/tatooine/wall_tatooine_large_style_4200.iff")
+--- /dev/null
++++ b/custom_content/static/structure/tatooine/wall_tatooine_large_style_8000.lua
+@@ -0,0 +1,6 @@
++-- Fable backport batch 2 (14 Oct 2026). Client template object/static/structure/tatooine/shared_wall_tatooine_large_style_8000.iff (mtg_patch_023.tre), form STAT.
++
++object_static_structure_tatooine_wall_tatooine_large_style_8000 = object_static_structure_tatooine_shared_wall_tatooine_large_style_8000:new {
++}
++
++ObjectTemplates:addTemplate(object_static_structure_tatooine_wall_tatooine_large_style_8000, "object/static/structure/tatooine/wall_tatooine_large_style_8000.iff")
+--- a/custom_content/static/structure/tatooine/objects.lua
++++ b/custom_content/static/structure/tatooine/objects.lua
+@@ -24,3 +24,43 @@
+ }
+ ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_poi_podracer_sebulba_destroyed, "object/static/structure/tatooine/shared_poi_podracer_sebulba_destroyed.iff")
+ --**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_100 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_100.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_100, "object/static/structure/tatooine/shared_wall_tatooine_large_style_100.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_200 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_200.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_200, "object/static/structure/tatooine/shared_wall_tatooine_large_style_200.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_500 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_500.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_500, "object/static/structure/tatooine/shared_wall_tatooine_large_style_500.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_1000 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_1000.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_1000, "object/static/structure/tatooine/shared_wall_tatooine_large_style_1000.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_2000 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_2000.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_2000, "object/static/structure/tatooine/shared_wall_tatooine_large_style_2000.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_2500 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_2500.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_2500, "object/static/structure/tatooine/shared_wall_tatooine_large_style_2500.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_4200 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_4200.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_4200, "object/static/structure/tatooine/shared_wall_tatooine_large_style_4200.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_8000 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_8000.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_8000, "object/static/structure/tatooine/shared_wall_tatooine_large_style_8000.iff")
++--**********************************************************************************************************************************
+--- a/custom_content/static/structure/tatooine/serverobjects.lua
++++ b/custom_content/static/structure/tatooine/serverobjects.lua
+@@ -4,4 +4,12 @@
+ includeFile("custom_content/static/structure/tatooine/palette_supply_07.lua")
+ includeFile("custom_content/static/structure/tatooine/palette_tatooine_food_crates_01.lua")
+ includeFile("custom_content/static/structure/tatooine/palette_tatooine_food_crates_02.lua")
+-includeFile("custom_content/static/structure/tatooine/poi_podracer_sebulba_destroyed.lua")+includeFile("custom_content/static/structure/tatooine/poi_podracer_sebulba_destroyed.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_100.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_200.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_500.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_1000.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_2000.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_2500.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_4200.lua")
++includeFile("custom_content/static/structure/tatooine/wall_tatooine_large_style_8000.lua")
+--- /dev/null
++++ b/custom_content/static/creature/som_droid_mining_facility.lua
+@@ -0,0 +1,6 @@
++-- Fable backport batch 2 (14 Oct 2026). Client template object/static/creature/shared_som_droid_mining_facility.iff (mtg_patch_019.tre), form STAT.
++
++object_static_creature_som_droid_mining_facility = object_static_creature_shared_som_droid_mining_facility:new {
++}
++
++ObjectTemplates:addTemplate(object_static_creature_som_droid_mining_facility, "object/static/creature/som_droid_mining_facility.iff")
+--- a/custom_content/static/creature/objects.lua
++++ b/custom_content/static/creature/objects.lua
+@@ -3,4 +3,9 @@
+ object_static_creature_shared_kashyyyk_varactyl = SharedStaticObjectTemplate:new {
+ 	clientTemplateFileName = "object/static/creature/shared_kashyyyk_varactyl.iff"
+ }
+-ObjectTemplates:addClientTemplate(object_static_creature_shared_kashyyyk_varactyl, "object/static/creature/shared_kashyyyk_varactyl.iff")+ObjectTemplates:addClientTemplate(object_static_creature_shared_kashyyyk_varactyl, "object/static/creature/shared_kashyyyk_varactyl.iff")
++
++object_static_creature_shared_som_droid_mining_facility = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/creature/shared_som_droid_mining_facility.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_creature_shared_som_droid_mining_facility, "object/static/creature/shared_som_droid_mining_facility.iff")
+--- a/custom_content/static/creature/serverobjects.lua
++++ b/custom_content/static/creature/serverobjects.lua
+@@ -2,3 +2,4 @@
+ 
+ includeFile("custom_content/static/creature/kashyyyk_varactyl.lua")
+ 
++includeFile("custom_content/static/creature/som_droid_mining_facility.lua")
+--- /dev/null
++++ b/custom_content/tangible/furniture/space/frn_chair_y8_passenger_s01.lua
+@@ -0,0 +1,6 @@
++-- Fable backport batch 2 (14 Oct 2026). Client template object/tangible/furniture/space/shared_frn_chair_y8_passenger_s01.iff (mtg_patch_010_object_01.tre), form STOT.
++
++object_tangible_furniture_space_frn_chair_y8_passenger_s01 = object_tangible_furniture_space_shared_frn_chair_y8_passenger_s01:new {
++}
++
++ObjectTemplates:addTemplate(object_tangible_furniture_space_frn_chair_y8_passenger_s01, "object/tangible/furniture/space/frn_chair_y8_passenger_s01.iff")
+--- /dev/null
++++ b/custom_content/tangible/furniture/space/objects.lua
+@@ -0,0 +1,7 @@
++-- Fable backport batch 2 (14 Oct 2026): shared template for the Y-8 passenger chair (SOE original, also on the owner's disc).
++-- Style as custom_content/tangible/furniture/tatooine/objects.lua.
++
++object_tangible_furniture_space_shared_frn_chair_y8_passenger_s01 = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/furniture/space/shared_frn_chair_y8_passenger_s01.iff"
++}
++ObjectTemplates:addClientTemplate(object_tangible_furniture_space_shared_frn_chair_y8_passenger_s01, "object/tangible/furniture/space/shared_frn_chair_y8_passenger_s01.iff")
+--- /dev/null
++++ b/custom_content/tangible/furniture/space/serverobjects.lua
+@@ -0,0 +1,3 @@
++-- Fable backport batch 2 (14 Oct 2026): server objects for custom_content/tangible/furniture/space.
++
++includeFile("custom_content/tangible/furniture/space/frn_chair_y8_passenger_s01.lua")
+--- a/custom_content/tangible/furniture/serverobjects.lua
++++ b/custom_content/tangible/furniture/serverobjects.lua
+@@ -13,6 +13,7 @@
+ includeFile("custom_content/tangible/furniture/modern/serverobjects.lua")
+ includeFile("custom_content/tangible/furniture/nym_themepark/serverobjects.lua")
+ includeFile("custom_content/tangible/furniture/rustic/serverobjects.lua")
++includeFile("custom_content/tangible/furniture/space/serverobjects.lua")
+ includeFile("custom_content/tangible/furniture/tatooine/serverobjects.lua")
+ includeFile("custom_content/tangible/furniture/technical/serverobjects.lua")
+ includeFile("custom_content/tangible/furniture/terminal/serverobjects.lua")

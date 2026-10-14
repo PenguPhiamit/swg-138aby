@@ -1,0 +1,272 @@
+From 34d4772a90db8fb0b9325c83459b21c3f2882654 Mon Sep 17 00:00:00 2001
+From: SWG Local Dev <swg-local@localhost>
+Date: Wed, 14 Oct 2026 04:25:39 -0700
+Subject: [PATCH] Sandbox staff tools: /spawnStatus and /showSpawnRegion (were
+ empty stubs)
+
+Owner, 14 Oct: make the empty staff commands work, spawn tools first
+(outputs/Documentation-support/core3-staff-stubs.md, batch B).
+- /spawnStatus: every spawn area on the caller's planet, busiest first: spawned
+  count against its limit, players in range, kinds of spawn; planet totals.
+- /showSpawnRegion: the spawn areas where the caller stands, with each possible
+  spawn (lair template, weight and share, per-type limit, difficulty range), and
+  any no-spawn area. Both read-only; a system message plus a SUI window.
+- Read-only getters for them: SpawnArea getTotalSpawnCount/getMaxSpawnLimit/
+  getPlayersInRange; CreatureManager getSpawnAreaCount/getSpawnAreaAt.
+
+Dev build clean. Not yet tried in game (test galaxy restart pending).
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../managers/creature/CreatureManager.idl     | 11 +++
+ .../commands/ShowSpawnRegionCommand.h         | 81 +++++++++++++++++++
+ .../creature/commands/SpawnStatusCommand.h    | 75 +++++++++++++++++
+ .../server/zone/objects/region/SpawnArea.idl  | 16 ++++
+ 4 files changed, 183 insertions(+)
+
+diff --git a/MMOCoreORB/src/server/zone/managers/creature/CreatureManager.idl b/MMOCoreORB/src/server/zone/managers/creature/CreatureManager.idl
+index bdabf6fd..d4f7459c 100644
+--- a/MMOCoreORB/src/server/zone/managers/creature/CreatureManager.idl
++++ b/MMOCoreORB/src/server/zone/managers/creature/CreatureManager.idl
+@@ -117,6 +117,17 @@ class CreatureManager extends ZoneManager {
+ 	@local
+ 	public native SpawnArea getWorldSpawnArea();
+ 
++	// Sandbox: the zone's spawn areas by index, for /spawnStatus (Claude, 14 Oct 2026).
++	@read
++	public int getSpawnAreaCount() {
++		return spawnAreaMap.size();
++	}
++
++	@read
++	public SpawnArea getSpawnAreaAt(int index) {
++		return spawnAreaMap.get(index);
++	}
++
+ 	public void addSpawnAreaToMap(unsigned int nameHash, SpawnArea area) {
+ 		spawnAreaMap.put(nameHash, area);
+ 	}
+diff --git a/MMOCoreORB/src/server/zone/objects/creature/commands/ShowSpawnRegionCommand.h b/MMOCoreORB/src/server/zone/objects/creature/commands/ShowSpawnRegionCommand.h
+index fa130b12..cc121902 100755
+--- a/MMOCoreORB/src/server/zone/objects/creature/commands/ShowSpawnRegionCommand.h
++++ b/MMOCoreORB/src/server/zone/objects/creature/commands/ShowSpawnRegionCommand.h
+@@ -5,6 +5,15 @@
+ #ifndef SHOWSPAWNREGIONCOMMAND_H_
+ #define SHOWSPAWNREGIONCOMMAND_H_
+ 
++#include "server/zone/objects/region/SpawnArea.h"
++#include "server/zone/managers/creature/LairSpawn.h"
++#include "server/zone/objects/player/sui/messagebox/SuiMessageBox.h"
++
++/*
++ * Sandbox (Claude, 14 Oct 2026; owner asked for the empty staff stubs to work): /showSpawnRegion lists the spawn
++ * areas the caller stands in: spawned count against the limit, players in range, and what can spawn there (lair
++ * template, weighting, per-type limit, difficulty range). No-spawn areas the caller is in are named too. Read-only.
++ */
+ class ShowSpawnRegionCommand : public QueueCommand {
+ public:
+ 
+@@ -21,6 +30,78 @@ public:
+ 		if (!checkInvalidLocomotions(creature))
+ 			return INVALIDLOCOMOTION;
+ 
++		if (!creature->isPlayerCreature())
++			return GENERALERROR;
++
++		Zone* zone = creature->getZone();
++
++		if (zone == nullptr || zone->isSpaceZone()) {
++			creature->sendSystemMessage("/showSpawnRegion works on ground zones.");
++			return GENERALERROR;
++		}
++
++		StringBuffer msg;
++		msg << "Spawn areas at " << (int) creature->getPositionX() << " " << (int) creature->getPositionY()
++			<< " on " << zone->getZoneName() << endl;
++
++		int spawnAreas = 0;
++		SortedVector<ManagedReference<ActiveArea*>> areas = *creature->getActiveAreas();
++
++		for (int i = 0; i < areas.size(); ++i) {
++			ManagedReference<ActiveArea*> area = areas.get(i);
++
++			if (area == nullptr)
++				continue;
++
++			if (area->isNoSpawnArea()) {
++				msg << endl << "No-spawn area: " << area->getAreaName() << endl;
++				continue;
++			}
++
++			SpawnArea* spawnArea = dynamic_cast<SpawnArea*>(area.get());
++
++			if (spawnArea == nullptr)
++				continue;
++
++			++spawnAreas;
++			msg << endl << spawnArea->getAreaName() << (spawnArea->isWorldSpawnArea() ? " (world spawner)" : "")
++				<< ": " << spawnArea->getTotalSpawnCount() << " spawned of " << spawnArea->getMaxSpawnLimit()
++				<< " allowed; " << spawnArea->getPlayersInRange() << " player(s) in range" << endl;
++
++			auto spawnList = spawnArea->getSpawnList();
++
++			if (spawnList == nullptr || spawnList->size() == 0) {
++				msg << "  nothing can spawn here" << endl;
++				continue;
++			}
++
++			int total = Math::max(spawnArea->getTotalWeighting(), 1);
++
++			for (int j = 0; j < spawnList->size() && j < 20; ++j) {
++				const LairSpawn* lair = spawnList->get(j);
++
++				if (lair == nullptr)
++					continue;
++
++				msg << "  " << lair->getLairTemplateName() << ": weight " << lair->getWeighting()
++					<< " (" << (lair->getWeighting() * 100 / total) << "%), limit " << lair->getSpawnLimit()
++					<< ", difficulty " << lair->getMinDifficulty() << "-" << lair->getMaxDifficulty() << endl;
++			}
++
++			if (spawnList->size() > 20)
++				msg << "  ... and " << (spawnList->size() - 20) << " more" << endl;
++		}
++
++		if (spawnAreas == 0)
++			msg << endl << "You are not inside any spawn area." << endl;
++
++		creature->sendSystemMessage("/showSpawnRegion: " + String::valueOf(spawnAreas) + " spawn area(s) here; details in the window.");
++
++		ManagedReference<SuiMessageBox*> box = new SuiMessageBox(creature, SuiWindowType::NONE);
++		box->setPromptTitle("Spawn areas here");
++		box->setPromptText(msg.toString());
++		creature->sendMessage(box->generateMessage());
++
+ 		return SUCCESS;
+ 	}
+ 
+diff --git a/MMOCoreORB/src/server/zone/objects/creature/commands/SpawnStatusCommand.h b/MMOCoreORB/src/server/zone/objects/creature/commands/SpawnStatusCommand.h
+index 44cf8a2f..b2d1be35 100755
+--- a/MMOCoreORB/src/server/zone/objects/creature/commands/SpawnStatusCommand.h
++++ b/MMOCoreORB/src/server/zone/objects/creature/commands/SpawnStatusCommand.h
+@@ -7,7 +7,18 @@
+ 
+ #include "server/zone/objects/creature/ai/AiAgent.h"
+ #include "server/zone/objects/creature/CreatureObject.h"
++#include "server/zone/managers/creature/CreatureManager.h"
++#include "server/zone/objects/region/SpawnArea.h"
++#include "server/zone/objects/player/sui/messagebox/SuiMessageBox.h"
++#include <algorithm>
++#include <vector>
+ 
++/*
++ * Sandbox (Claude, 14 Oct 2026; owner asked for the empty staff stubs to work): /spawnStatus summarises the
++ * caller's planet: every spawn area with its spawned count against its limit, players in range and how many
++ * kinds of spawn it holds, busiest first, plus the planet totals. Read-only. /showSpawnRegion gives the details
++ * of the areas where you stand.
++ */
+ class SpawnStatusCommand : public QueueCommand {
+ public:
+ 
+@@ -24,6 +35,70 @@ public:
+ 		if (!checkInvalidLocomotions(creature))
+ 			return INVALIDLOCOMOTION;
+ 
++		if (!creature->isPlayerCreature())
++			return GENERALERROR;
++
++		Zone* zone = creature->getZone();
++
++		if (zone == nullptr || zone->isSpaceZone()) {
++			creature->sendSystemMessage("/spawnStatus works on ground zones.");
++			return GENERALERROR;
++		}
++
++		CreatureManager* creatureManager = zone->getCreatureManager();
++
++		if (creatureManager == nullptr)
++			return GENERALERROR;
++
++		struct Row {
++			String name;
++			int spawned, limit, players, kinds;
++			bool world;
++		};
++
++		std::vector<Row> rows;
++		int totalSpawned = 0, totalLimit = 0;
++		int count = creatureManager->getSpawnAreaCount();
++
++		for (int i = 0; i < count; ++i) {
++			ManagedReference<SpawnArea*> area = creatureManager->getSpawnAreaAt(i);
++
++			if (area == nullptr)
++				continue;
++
++			auto spawnList = area->getSpawnList();
++			Row row = {area->getAreaName(), area->getTotalSpawnCount(), area->getMaxSpawnLimit(),
++					   area->getPlayersInRange(), spawnList == nullptr ? 0 : spawnList->size(), area->isWorldSpawnArea()};
++
++			totalSpawned += row.spawned;
++			totalLimit += row.limit;
++			rows.push_back(row);
++		}
++
++		std::sort(rows.begin(), rows.end(), [](const Row& a, const Row& b) { return a.spawned > b.spawned; });  // busiest first
++
++		StringBuffer msg;
++		msg << zone->getZoneName() << ": " << (int) rows.size() << " spawn areas, " << totalSpawned << " spawned of "
++			<< totalLimit << " allowed in all." << endl << endl;
++
++		for (int i = 0; i < (int) rows.size() && i < 40; ++i) {
++			const Row& row = rows[i];
++			msg << row.name << (row.world ? " (world spawner)" : "") << ": " << row.spawned << "/" << row.limit
++				<< ", " << row.players << " player(s) in range, " << row.kinds << " kind(s) of spawn" << endl;
++		}
++
++		if (rows.size() > 40)
++			msg << "... and " << (int) (rows.size() - 40) << " more" << endl;
++
++		msg << endl << "Use /showSpawnRegion where you stand for what can spawn there.";
++
++		creature->sendSystemMessage("/spawnStatus: " + String::valueOf((int) rows.size()) + " spawn areas on " + zone->getZoneName()
++				+ ", " + String::valueOf(totalSpawned) + " spawned; details in the window.");
++
++		ManagedReference<SuiMessageBox*> box = new SuiMessageBox(creature, SuiWindowType::NONE);
++		box->setPromptTitle("Spawn status: " + zone->getZoneName());
++		box->setPromptText(msg.toString());
++		creature->sendMessage(box->generateMessage());
+ 
+ 		return SUCCESS;
+ 	}
+diff --git a/MMOCoreORB/src/server/zone/objects/region/SpawnArea.idl b/MMOCoreORB/src/server/zone/objects/region/SpawnArea.idl
+index 0226489b..50ae05bc 100644
+--- a/MMOCoreORB/src/server/zone/objects/region/SpawnArea.idl
++++ b/MMOCoreORB/src/server/zone/objects/region/SpawnArea.idl
+@@ -93,6 +93,22 @@ class SpawnArea extends Region {
+ 		return totalWeighting;
+ 	}
+ 
++	// Sandbox: read-only counters for /spawnStatus and /showSpawnRegion (Claude, 14 Oct 2026).
++	@read
++	public int getTotalSpawnCount() {
++		return totalSpawnCount;
++	}
++
++	@read
++	public int getMaxSpawnLimit() {
++		return maxSpawnLimit;
++	}
++
++	@dirty
++	public int getPlayersInRange() {
++		return numberOfPlayersInRange.get();
++	}
++
+ 	@preLocked
+ 	public void setMaxSpawnLimit(int n) {
+ 		maxSpawnLimit = n;
+-- 
+2.47.3
+

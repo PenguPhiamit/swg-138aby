@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/fish_tank_rear_panel.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/fish_tank_rear_panel.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fish_tank_rear_panel, "object/tangible/loot/creature/loot/collections/fish_tank_rear_panel.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_fish_tank_rear_panel, "object/tangible/loot/creature_loot/collections/fish_tank_rear_panel.iff")

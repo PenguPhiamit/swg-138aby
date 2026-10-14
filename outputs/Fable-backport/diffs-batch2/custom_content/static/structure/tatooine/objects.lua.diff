@@ -1,0 +1,46 @@
+--- a/custom_content/static/structure/tatooine/objects.lua
++++ b/custom_content/static/structure/tatooine/objects.lua
+@@ -24,3 +24,43 @@
+ }
+ ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_poi_podracer_sebulba_destroyed, "object/static/structure/tatooine/shared_poi_podracer_sebulba_destroyed.iff")
+ --**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_100 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_100.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_100, "object/static/structure/tatooine/shared_wall_tatooine_large_style_100.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_200 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_200.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_200, "object/static/structure/tatooine/shared_wall_tatooine_large_style_200.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_500 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_500.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_500, "object/static/structure/tatooine/shared_wall_tatooine_large_style_500.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_1000 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_1000.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_1000, "object/static/structure/tatooine/shared_wall_tatooine_large_style_1000.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_2000 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_2000.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_2000, "object/static/structure/tatooine/shared_wall_tatooine_large_style_2000.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_2500 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_2500.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_2500, "object/static/structure/tatooine/shared_wall_tatooine_large_style_2500.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_4200 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_4200.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_4200, "object/static/structure/tatooine/shared_wall_tatooine_large_style_4200.iff")
++--**********************************************************************************************************************************
++object_static_structure_tatooine_shared_wall_tatooine_large_style_8000 = SharedStaticObjectTemplate:new {
++	clientTemplateFileName = "object/static/structure/tatooine/shared_wall_tatooine_large_style_8000.iff"
++}
++ObjectTemplates:addClientTemplate(object_static_structure_tatooine_shared_wall_tatooine_large_style_8000, "object/static/structure/tatooine/shared_wall_tatooine_large_style_8000.iff")
++--**********************************************************************************************************************************

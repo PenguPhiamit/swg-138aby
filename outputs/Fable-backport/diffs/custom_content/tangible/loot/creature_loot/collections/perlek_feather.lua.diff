@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/perlek_feather.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/perlek_feather.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_perlek_feather, "object/tangible/loot/creature/loot/collections/perlek_feather.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_perlek_feather, "object/tangible/loot/creature_loot/collections/perlek_feather.iff")

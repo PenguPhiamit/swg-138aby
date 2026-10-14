@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/loot_schematic/imperial_gunner_helmet_schematic.lua
++++ b/custom_content/tangible/loot/loot_schematic/imperial_gunner_helmet_schematic.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_imperial_gunner_helmet_schematic, "object/tangible/loot/loot/schematic/imperial_gunner_helmet_schematic.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_imperial_gunner_helmet_schematic, "object/tangible/loot/loot_schematic/imperial_gunner_helmet_schematic.iff")

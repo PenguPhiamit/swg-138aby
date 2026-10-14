@@ -1,0 +1,8 @@
+--- a/custom_content/tangible/loot/creature_loot/collections/aurebesh_tile_grek.lua
++++ b/custom_content/tangible/loot/creature_loot/collections/aurebesh_tile_grek.lua
+@@ -2,4 +2,4 @@
+ 
+ }
+ 
+-ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_aurebesh_tile_grek, "object/tangible/loot/creature/loot/collections/aurebesh_tile_grek.iff")
++ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_collections_aurebesh_tile_grek, "object/tangible/loot/creature_loot/collections/aurebesh_tile_grek.iff")
