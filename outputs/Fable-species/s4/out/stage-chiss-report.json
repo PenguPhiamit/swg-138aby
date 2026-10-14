@@ -1,0 +1,149 @@
+{
+ "species": [
+  "chiss"
+ ],
+ "files": {
+  "datatables/creation/racial_mods.iff": {
+   "rows_before": 10,
+   "rows_added": 1,
+   "types_from_base": true,
+   "bytes": 881,
+   "sha256": "82f7911f2b67b3ba507661e20c8b1d16ced30003cb2b96d0abb2bcb3ddc423c6"
+  },
+  "datatables/creation/attribute_limits.iff": {
+   "rows_before": 10,
+   "rows_added": 1,
+   "types_from_base": true,
+   "bytes": 1494,
+   "sha256": "a7c34699d79d6858616e3b89aaf6c7a04e2f27fd2bc12c326d75cf3d39956adb"
+  },
+  "datatables/customization/customization_data.iff": {
+   "rows_before": 467,
+   "rows_added": 42,
+   "types_from_base": true,
+   "bytes": 57650,
+   "sha256": "876134afaaafca0ec9ba5ceb6a5e10f18f13d3cae480f1aa3e8c3cc4bd1fd25a"
+  },
+  "datatables/customization/customization_group_instance.iff": {
+   "rows_before": 96,
+   "rows_added": 10,
+   "types_from_base": true,
+   "bytes": 4246,
+   "sha256": "a033b2229b0ded8fd629740be6fb19eae68199d491a4ce2f9f90fb918f19cd7d"
+  },
+  "datatables/customization/hair_assets_skill_mods.iff": {
+   "rows_before": 235,
+   "rows_added": 78,
+   "types_from_base": true,
+   "bytes": 65545,
+   "sha256": "edd604d4b4955997ac5056b831b3b6042334cb0c7b6971cde5c97babf72a6010"
+  },
+  "datatables/customization/palette_columns.iff": {
+   "rows_before": 37,
+   "rows_added": 2,
+   "types_from_base": true,
+   "bytes": 3081,
+   "sha256": "a3ac9de0ff48df6814e6685af285c05035e0e9a6a33f71ab6f08bdb389b4098d"
+  },
+  "datatables/customization/allow_bald.iff": {
+   "rows_before": 16,
+   "rows_added": 2,
+   "types_from_base": true,
+   "bytes": 401,
+   "sha256": "d5d2146955724d359ad8260ac384d51988178b0e4f83e34755f2995915af497b"
+  },
+  "creation/default_pc_hairstyles.iff": {
+   "blocks_before": 20,
+   "blocks_added": 2,
+   "bytes": 21280,
+   "sha256": "86060b336ab1d4c06f1729e67fe90cbca12d7af1d9ad7cf8bd960858b1ea4591"
+  },
+  "creation/default_pc_equipment.iff": {
+   "blocks_before": 20,
+   "blocks_added": 2,
+   "bytes": 4525,
+   "sha256": "7c9d986c305bc6bc09e985a8e2616eb866d8f1839a95bf7e32b02b4a293d77ea"
+  },
+  "creation/profession_defaults_combat_brawler.iff": {
+   "blocks_before": 21,
+   "blocks_added": 2,
+   "bytes": 6652,
+   "sha256": "a31b2f983b26c91b624eb4e8eefa6300670c43be22ba57bf07380f74fab3478e"
+  },
+  "creation/profession_defaults_combat_marksman.iff": {
+   "blocks_before": 21,
+   "blocks_added": 2,
+   "bytes": 5949,
+   "sha256": "614842a603448e6b9a64d317e7001fddf20d6a78a0da8128fc85c0e09b89a14f"
+  },
+  "creation/profession_defaults_crafting_artisan.iff": {
+   "blocks_before": 21,
+   "blocks_added": 2,
+   "bytes": 5426,
+   "sha256": "18205f87cb05348d7e7ffc268a0a1e64e4c6aebd09e176261e477953dff0a1da"
+  },
+  "creation/profession_defaults_jedi.iff": {
+   "unchanged": true,
+   "blocks_added": 0
+  },
+  "creation/profession_defaults_outdoors_scout.iff": {
+   "blocks_before": 21,
+   "blocks_added": 2,
+   "bytes": 5856,
+   "sha256": "aee187160c55da79d662acd5c8cc01ab725afa33282a4d65caf2514f9356da10"
+  },
+  "creation/profession_defaults_science_medic.iff": {
+   "blocks_before": 21,
+   "blocks_added": 2,
+   "bytes": 6037,
+   "sha256": "19d6dc2f13da129848351cdd00a3ffdd49439b242c6ff6c1f1f3e5262505d520"
+  },
+  "creation/profession_defaults_social_entertainer.iff": {
+   "blocks_before": 21,
+   "blocks_added": 2,
+   "bytes": 5284,
+   "sha256": "582e84671eca12c7270aa94854884fbf3a35c27dc16e316aefa50da915ee76a5"
+  },
+  "ui/ui_avatardata.inc": {
+   "blocks_added": 1,
+   "bytes": 91078,
+   "sha256": "a51ecd355c22743d8a61c81e22c519ea89f6f7d25f1e838d929baf3da926a1ac"
+  },
+  "string/en/player_species.stf": {
+   "keys_added": 2,
+   "bytes": 42969,
+   "sha256": "420ff033217575560a595643dcf6792c6c5f5d0b82154f94c702f8f5d02e1547"
+  },
+  "string/en/skl_n.stf": {
+   "keys_added": 1,
+   "bytes": 153539,
+   "sha256": "260637e2eb8fafc55be795d6f416a4120b33409860140a9636fe70f5fb721d6c"
+  },
+  "string/en/skl_d.stf": {
+   "keys_added": 1,
+   "bytes": 377602,
+   "sha256": "6fa4f8d59a143b4673205097122443cf46cc9e8ad69a509a378f9fbc2b9a0dd4"
+  },
+  "datatables/skill/skills.iff": {
+   "rows_added": 1,
+   "cloned_from": "species_human",
+   "bytes": 274285,
+   "sha256": "d45146a882b15f0d47299914a7e75aae9b6c63d65aedcd0d9b3e85ce8157e668"
+  },
+  "customization/asset_customization_manager.iff": {
+   "unchanged": true,
+   "appearances_already_in_base": [
+    "appearance/chiss_m.sat",
+    "appearance/chiss_f.sat"
+   ]
+  }
+ },
+ "notes": [
+  "datatables/customization/hair_assets_skill_mods.iff: dropped 1 row(s) whose hair object the client lacks",
+  "creation/default_pc_hairstyles.iff: dropped 1 hair(s) the client lacks: ['object/tangible/hair/human/shared_hair_human_female_s33.iff']"
+ ],
+ "summary": {
+  "files_written": 20,
+  "files_unchanged": 2
+ }
+}

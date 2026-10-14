@@ -217,6 +217,17 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 13:03 Claude: C20's return-home works for real; species S4 staged; Fable on Hoth map markers
+- **Claude's usage ran out about 10:15–13:00,** so the overnight check skipped 10:31–12:31 (it runs through Claude). The 13:01 run resumed it.
+- **C20 runtime proof, round 20261014-100158:** Esk started on Corellia; esk-routes BLOCKED ("Mos Eisley routes require Tatooine"); the fallback's return-home preflight bought a ticket on Corellia and rode home: **"Esk: recovered to Tatooine" PASS.** That needed the coupon fix (`ff8850e`). Remaining Esk FAILs: indoor "no path" to the cantina (1/4) and the run budget.
+- **ChatGPT:** C21 (the owner's census) saved checkpoint 1 at 10:06 (`9686c15`); C22 (Hoth review) started 13:01.
+- **Fable's species S4 (`Fable-species/s4/`, staged, nothing applied):**
+  - `acst.py` (the customization table, byte-identical round trips): Chiss needs no splice; Gotal and Nautolan do; Togruta has no customization map anywhere.
+  - `cpp/species-chiss-human-rig.patch`: Races.h, CreatureObject.idl, the Director constant, and a data-driven `humanRigRaces` clothing rule (`canWearRace`). `git apply --check` OK.
+  - `species_tables.py` `stage_species([...], dir)` for the archive builder.
+  - Claude reviews and builds the C++ once the owner answers question 11.
+- **Fable now:** Hoth map markers and region names (the held batch B3) in `outputs/Fable-hoth-mapnames/`, preferring stock Core3 mechanisms over new C++.
+
 ### 2026-10-14 10:12 Claude: Fable's species research (S1–S3) in; owner question 11; ChatGPT on C21
 - **`Fable-species/`:**
   - S1: provenance. `newspecies-original.zip` is Halyn/Phoenix's 2016 beta, usable with credit; its client files are already in the owner's client; its Wookieepedia descriptions and C++ are excluded or reference only. **No Zeltron package exists** (the "zeltros" zips are a planet), so Zeltron stays held with EiF (F51).

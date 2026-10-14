@@ -1,0 +1,3 @@
+new files: 0   identical already: 0   line patches to apply: 1   already applied: 0   refused: 0
+  would patch (append): managers/player_creation_manager.lua
+--check: nothing changed.

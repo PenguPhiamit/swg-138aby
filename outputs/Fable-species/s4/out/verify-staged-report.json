@@ -1,0 +1,208 @@
+{
+ "creation/default_pc_equipment.iff": {
+  "bytes": 4525,
+  "stock_bytes": 4068,
+  "round_trip": true,
+  "form": "LOEQ",
+  "blocks": 22,
+  "blocks_added": 2,
+  "refs_missing_in_merged_crc": []
+ },
+ "creation/default_pc_hairstyles.iff": {
+  "bytes": 21280,
+  "stock_bytes": 16398,
+  "round_trip": true,
+  "form": "HAIR",
+  "blocks": 22,
+  "blocks_added": 2,
+  "refs_missing_in_merged_crc": []
+ },
+ "creation/profession_defaults_combat_brawler.iff": {
+  "bytes": 6652,
+  "stock_bytes": 5988,
+  "round_trip": true,
+  "form": "PRFI",
+  "blocks": 23,
+  "blocks_added": 2,
+  "refs_missing_in_merged_crc": []
+ },
+ "creation/profession_defaults_combat_marksman.iff": {
+  "bytes": 5949,
+  "stock_bytes": 5355,
+  "round_trip": true,
+  "form": "PRFI",
+  "blocks": 23,
+  "blocks_added": 2,
+  "refs_missing_in_merged_crc": []
+ },
+ "creation/profession_defaults_crafting_artisan.iff": {
+  "bytes": 5426,
+  "stock_bytes": 4898,
+  "round_trip": true,
+  "form": "PRFI",
+  "blocks": 23,
+  "blocks_added": 2,
+  "refs_missing_in_merged_crc": []
+ },
+ "creation/profession_defaults_outdoors_scout.iff": {
+  "bytes": 5856,
+  "stock_bytes": 5264,
+  "round_trip": true,
+  "form": "PRFI",
+  "blocks": 23,
+  "blocks_added": 2,
+  "refs_missing_in_merged_crc": []
+ },
+ "creation/profession_defaults_science_medic.iff": {
+  "bytes": 6037,
+  "stock_bytes": 5433,
+  "round_trip": true,
+  "form": "PRFI",
+  "blocks": 23,
+  "blocks_added": 2,
+  "refs_missing_in_merged_crc": []
+ },
+ "creation/profession_defaults_social_entertainer.iff": {
+  "bytes": 5284,
+  "stock_bytes": 4756,
+  "round_trip": true,
+  "form": "PRFI",
+  "blocks": 23,
+  "blocks_added": 2,
+  "refs_missing_in_merged_crc": []
+ },
+ "datatables/creation/attribute_limits.iff": {
+  "bytes": 1494,
+  "stock_bytes": 1394,
+  "round_trip": true,
+  "rows": 11,
+  "rows_added": 1,
+  "stock_rows_kept": true,
+  "types_same_as_stock": true,
+  "refs_missing_in_merged_crc": []
+ },
+ "datatables/creation/racial_mods.iff": {
+  "bytes": 881,
+  "stock_bytes": 821,
+  "round_trip": true,
+  "rows": 11,
+  "rows_added": 1,
+  "stock_rows_kept": true,
+  "types_same_as_stock": true,
+  "refs_missing_in_merged_crc": []
+ },
+ "datatables/customization/allow_bald.iff": {
+  "bytes": 401,
+  "stock_bytes": 369,
+  "round_trip": true,
+  "rows": 18,
+  "rows_added": 2,
+  "stock_rows_kept": true,
+  "types_same_as_stock": true,
+  "refs_missing_in_merged_crc": []
+ },
+ "datatables/customization/customization_data.iff": {
+  "bytes": 57650,
+  "stock_bytes": 52972,
+  "round_trip": true,
+  "rows": 509,
+  "rows_added": 42,
+  "stock_rows_kept": true,
+  "types_same_as_stock": true,
+  "refs_missing_in_merged_crc": []
+ },
+ "datatables/customization/customization_group_instance.iff": {
+  "bytes": 4246,
+  "stock_bytes": 3888,
+  "round_trip": true,
+  "rows": 106,
+  "rows_added": 10,
+  "stock_rows_kept": true,
+  "types_same_as_stock": true,
+  "refs_missing_in_merged_crc": []
+ },
+ "datatables/customization/hair_assets_skill_mods.iff": {
+  "bytes": 65545,
+  "stock_bytes": 49641,
+  "round_trip": true,
+  "rows": 313,
+  "rows_added": 78,
+  "stock_rows_kept": true,
+  "types_same_as_stock": true,
+  "refs_missing_in_merged_crc": []
+ },
+ "datatables/customization/palette_columns.iff": {
+  "bytes": 3081,
+  "stock_bytes": 2939,
+  "round_trip": true,
+  "rows": 39,
+  "rows_added": 2,
+  "stock_rows_kept": true,
+  "types_same_as_stock": true,
+  "refs_missing_in_merged_crc": []
+ },
+ "datatables/skill/skills.iff": {
+  "bytes": 274285,
+  "stock_bytes": 273974,
+  "round_trip": true,
+  "rows": 1069,
+  "rows_added": 1,
+  "stock_rows_kept": true,
+  "types_same_as_stock": true,
+  "refs_missing_in_merged_crc": []
+ },
+ "string/en/player_species.stf": {
+  "bytes": 42969,
+  "stock_bytes": 42071,
+  "round_trip": true,
+  "keys": 22,
+  "keys_added": 2,
+  "stock_keys_kept": true,
+  "new_keys": [
+   "name_chiss",
+   "desc_chiss"
+  ]
+ },
+ "string/en/skl_d.stf": {
+  "bytes": 377602,
+  "stock_bytes": 377501,
+  "round_trip": true,
+  "keys": 1160,
+  "keys_added": 1,
+  "stock_keys_kept": true,
+  "new_keys": [
+   "species_chiss"
+  ]
+ },
+ "string/en/skl_n.stf": {
+  "bytes": 153539,
+  "stock_bytes": 153480,
+  "round_trip": true,
+  "keys": 1482,
+  "keys_added": 1,
+  "stock_keys_kept": true,
+  "new_keys": [
+   "species_chiss"
+  ]
+ },
+ "ui/ui_avatardata.inc": {
+  "bytes": 91078,
+  "stock_bytes": 90493,
+  "species_blocks": [
+   "bothan",
+   "chiss",
+   "human",
+   "ithorian",
+   "moncal",
+   "rodian",
+   "sullustan",
+   "trandoshan",
+   "twilek",
+   "wookiee",
+   "zabrak"
+  ],
+  "stock_text_kept": true,
+  "crlf_only": true
+ },
+ "_verdict": "PASS"
+}

@@ -1,0 +1,6 @@
+Races.h: Chiss male/female appended to Species, TemplateSpecies (CreatureObject::CHISS), Gender, RaceStrs, CCRaceStrs and SharedRace (SOE CRCs of the shared templates, the same hash the stock entries use); RACE_COUNT derived from CCRaceStrs replaces the five "> 19" bounds and the two "< 20" loops; getAttribLimits keeps the ten stock rows and maps added races to the human row.
+CreatureObject.idl: CHISS = 0xE7 (unused in the stock NPC species table, unlike the package's 0x34 = tulgah) and getSpeciesName() -> "chiss".
+DirectorManager.cpp: SPECIES_CHISS for screenplays, next to the stock species constants.
+PlayerCreationManager.h/.cpp: humanRigRaces (race file -> stand-in race file) loaded from the humanRigRaces table in player_creation_manager.lua inside loadLuaConfig; canWearRace(races, raceFile) = the stock contains() test, then the stand-in's. No behaviour change for stock races (an empty or absent table leaves the map empty).
+PlayerContainerComponent.cpp:34 and CreatureManagerImplementation.cpp:1303: the playerRaces test goes through canWearRace; everything else (faction, encumbrance, certifications, the vendor/actor messages) is untouched.
+bin/scripts/managers/player_creation_manager.lua: the humanRigRaces table with the two Chiss race files; add a pair per human-rig species.

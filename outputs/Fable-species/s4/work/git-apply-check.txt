@@ -1,0 +1,36 @@
+patch lines: 306
+23
+== luac on the new Lua
+luac ok player_creation_manager.lua
+== git apply --check in a scratch repository holding the dev originals
+git apply --check: OK
+/mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Fable-species/s4/cpp/species-chiss-human-rig.patch:129: space before tab in indent.
+    	for (int i = 0; i < RACE_COUNT; i++) {
+warning: 1 line adds whitespace errors.
+git apply: applied
+ .../scripts/managers/player_creation_manager.lua   |  9 ++++-
+ .../creature/CreatureManagerImplementation.cpp     |  3 +-
+ .../zone/managers/director/DirectorManager.cpp     |  1 +
+ .../player/creation/PlayerCreationManager.cpp      | 34 +++++++++++++++++
+ .../player/creation/PlayerCreationManager.h        | 11 ++++++
+ .../zone/objects/creature/CreatureObject.idl       |  3 ++
+ MMOCoreORB/src/server/zone/objects/player/Races.h  | 44 +++++++++++++++-------
+ .../player/components/PlayerContainerComponent.cpp |  3 +-
+ 8 files changed, 91 insertions(+), 17 deletions(-)
+applied == new: src/server/zone/objects/player/Races.h
+applied == new: src/server/zone/objects/creature/CreatureObject.idl
+applied == new: src/server/zone/managers/director/DirectorManager.cpp
+applied == new: src/server/zone/objects/player/components/PlayerContainerComponent.cpp
+applied == new: src/server/zone/managers/creature/CreatureManagerImplementation.cpp
+applied == new: src/server/zone/managers/player/creation/PlayerCreationManager.h
+applied == new: src/server/zone/managers/player/creation/PlayerCreationManager.cpp
+applied == new: bin/scripts/managers/player_creation_manager.lua
+== the originals still match dev
+same as dev: src/server/zone/objects/player/Races.h
+same as dev: src/server/zone/objects/creature/CreatureObject.idl
+same as dev: src/server/zone/managers/director/DirectorManager.cpp
+same as dev: src/server/zone/objects/player/components/PlayerContainerComponent.cpp
+same as dev: src/server/zone/managers/creature/CreatureManagerImplementation.cpp
+same as dev: src/server/zone/managers/player/creation/PlayerCreationManager.h
+same as dev: src/server/zone/managers/player/creation/PlayerCreationManager.cpp
+same as dev: bin/scripts/managers/player_creation_manager.lua

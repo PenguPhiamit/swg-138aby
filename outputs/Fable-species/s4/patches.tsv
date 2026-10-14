@@ -1,0 +1,2 @@
+# <file>	<mode>	<marker>	<snippet>
+managers/player_creation_manager.lua	append	humanRigRaces = {	snippets/human_rig_races.lua

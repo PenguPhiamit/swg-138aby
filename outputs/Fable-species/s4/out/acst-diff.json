@@ -1,0 +1,169 @@
+{
+ "counts (stock, 2016)": {
+  "pnof": [
+   192,
+   205
+  ],
+  "vnof": [
+   107,
+   107
+  ],
+  "defv": [
+   195,
+   195
+  ],
+  "irng": [
+   24,
+   27
+  ],
+  "rtyp": [
+   216,
+   232
+  ],
+  "ucmp": [
+   943,
+   985
+  ],
+  "ulst": [
+   22239,
+   25164
+  ],
+  "uidx": [
+   8700,
+   9773
+  ],
+  "llst": [
+   24735,
+   28147
+  ],
+  "lidx": [
+   14968,
+   17143
+  ],
+  "cidx": [
+   19265,
+   21785
+  ]
+ },
+ "names_only_in_2016": [
+  "palette/creature_acklay_carax.pal",
+  "palette/creature_acklay_kkorrwrot.pal",
+  "palette/creature_acklay_walugga.pal",
+  "palette/creature_bear.pal",
+  "palette/creature_minstyngar.pal",
+  "palette/creature_urnsoris.pal",
+  "palette/creature_uwari_beetle.pal",
+  "palette/hologram_main.pal",
+  "palette/hologram_rim.pal",
+  "palette/npc_character_species_gotal.pal",
+  "palette/npc_skin_arcona.pal",
+  "palette/npc_skin_nautolan.pal",
+  "palette/npc_skin_ugnaught_highlights.pal",
+  "palette/rebel_faction_armor.pal"
+ ],
+ "names_only_in_stock": [
+  "palette/npc_droid_fx_7_medical_droid.pal"
+ ],
+ "appearances_only_in_2016": {
+  "total": 2560,
+  "by_kind": {
+   "armor": 1044,
+   "cyborg": 540,
+   "(crc not in this client: NGE-only file)": 311,
+   "frn": 168,
+   "necklace": 90,
+   "other:arc170": 41,
+   "eqp": 33,
+   "other:grievous": 32,
+   "other:jedifighter": 26,
+   "other:thm": 21,
+   "other:gotal": 18,
+   "other:nautolan": 18,
+   "other:arcona": 18,
+   "backpack": 12,
+   "other:bwing": 12,
+   "other:translaver": 12
+  }
+ },
+ "appearances_only_in_stock": {
+  "total": 40,
+  "by_kind": {
+   "(crc not in this client: NGE-only file)": 34,
+   "other:fx": 6
+  },
+  "named": [
+   "appearance/mesh/fx_7_medical_droid_l2.mgn",
+   "appearance/mesh/fx_7_medical_droid.lmg",
+   "appearance/mesh/fx_7_medical_droid_l3.mgn",
+   "appearance/mesh/fx_7_medical_droid_l0.mgn",
+   "appearance/mesh/fx_7_medical_droid_l1.mgn",
+   "appearance/fx_7_medical_droid.sat"
+  ]
+ },
+ "common": 19225,
+ "common_with_different_variables": {
+  "total": 279,
+  "by_kind": {
+   "xwing": 54,
+   "armor": 52,
+   "(crc not in this client: NGE-only file)": 39,
+   "ywing": 23,
+   "awing": 20,
+   "other:z95": 18,
+   "frn": 17,
+   "other:bwing": 12,
+   "other:bantha": 7,
+   "pant": 5,
+   "other:mun": 4,
+   "goggles": 3,
+   "ith": 3,
+   "other:mouf": 2,
+   "belt": 2,
+   "other:zab": 2
+  },
+  "sample": [
+   "appearance/goggles_s06_mon_f.sat",
+   "appearance/mesh/hum_m_hair_s08_l3.mgn",
+   "appearance/mesh/armor_marauder_s01_helmet_maurauder_m_l0.mgn",
+   "0505a4d6",
+   "appearance/mesh/armor_marauder_s03_helmet_maurauder_f_l2.mgn",
+   "appearance/lod/xwing_engine_neg_s02.lod",
+   "appearance/mesh/armor_marauder_s03_helmet_f_l3.mgn",
+   "appearance/lod/ywing_engine_s01.lod",
+   "appearance/mesh/armor_marauder_s03_helmet_maurauder_f.lmg",
+   "0c6fb327",
+   "appearance/mesh/xwing_weapon1_pos_s01_l0.msh",
+   "appearance/mesh/awing_engine_s02_l3.msh",
+   "appearance/mesh/xwing_engine_neg_s02_l0.msh",
+   "appearance/frn_all_painting_square_sm_s03.apt",
+   "appearance/mesh/ywing_engine_s02_l2.msh",
+   "appearance/mesh/z95_body_l2.msh",
+   "115c798f",
+   "appearance/mesh/bwing_body_l2.msh",
+   "appearance/mesh/frn_all_painting_square_lg_s03.msh",
+   "appearance/lod/ywing_body.lod"
+  ]
+ },
+ "species_appearances": {
+  "appearance/aqualish_m_01.sat": "in stock, same variables as 2016",
+  "appearance/aqualish_f_01.sat": "in stock, same variables as 2016",
+  "appearance/bith_m.sat": "in stock, same variables as 2016",
+  "appearance/bith_f.sat": "in stock, same variables as 2016",
+  "appearance/chiss_m.sat": "in stock, same variables as 2016",
+  "appearance/chiss_f.sat": "in stock, same variables as 2016",
+  "appearance/devaronian_m.sat": "in stock, same variables as 2016",
+  "appearance/gotal_m.sat": "only in 2016 (splice needed)",
+  "appearance/gran_m.sat": "in stock, same variables as 2016",
+  "appearance/hutt_m.sat": "in stock, same variables as 2016",
+  "appearance/hutt_f.sat": "in stock, same variables as 2016",
+  "appearance/ishi_tib_m.sat": "in stock, same variables as 2016",
+  "appearance/nautolan_m.sat": "only in 2016 (splice needed)",
+  "appearance/nightsister_f.sat": "in stock, same variables as 2016",
+  "appearance/nikto_m.sat": "in stock, same variables as 2016",
+  "appearance/quarren_m.sat": "in stock, same variables as 2016",
+  "appearance/sing_mt_clan_f.sat": "in stock, same variables as 2016",
+  "appearance/talz_m.sat": "in stock, same variables as 2016",
+  "appearance/togruta_f.sat": "in neither (no customization map)",
+  "appearance/weequay_m.sat": "in stock, same variables as 2016"
+ }
+}

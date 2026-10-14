@@ -1,0 +1,169 @@
+{
+ "species": [
+  "gotal",
+  "nautolan"
+ ],
+ "files": {
+  "datatables/creation/racial_mods.iff": {
+   "rows_before": 10,
+   "rows_added": 2,
+   "types_from_base": true,
+   "bytes": 943,
+   "sha256": "cc66b848851c6b001c0f82b5e8bc898c6fecbb32864793ed498db19f5f124442"
+  },
+  "datatables/creation/attribute_limits.iff": {
+   "rows_before": 10,
+   "rows_added": 2,
+   "types_from_base": true,
+   "bytes": 1596,
+   "sha256": "65ba93190310f56c0285f56db35786a564f9cc7510e6fd3560925de0e1ce096b"
+  },
+  "datatables/customization/customization_data.iff": {
+   "rows_before": 467,
+   "rows_added": 10,
+   "types_from_base": true,
+   "bytes": 53923,
+   "sha256": "090bcacffe316703f2c729c9ecfd6525d4e67e081c541a950ca04b151fb824bb"
+  },
+  "datatables/customization/customization_group_instance.iff": {
+   "rows_before": 96,
+   "rows_added": 8,
+   "types_from_base": true,
+   "bytes": 4182,
+   "sha256": "cd07528cea5128ee941eb35e6af4b57f584aff3d55964f16b7c6557d0379fa26"
+  },
+  "datatables/customization/hair_assets_skill_mods.iff": {
+   "unchanged": true,
+   "rows_added": 0
+  },
+  "datatables/customization/palette_columns.iff": {
+   "unchanged": true,
+   "rows_added": 0
+  },
+  "datatables/customization/allow_bald.iff": {
+   "rows_before": 16,
+   "rows_added": 1,
+   "types_from_base": true,
+   "bytes": 387,
+   "sha256": "130bf2e2744ce6de9574223386f98bceebf821328434618424f1cba514840ee8"
+  },
+  "creation/default_pc_hairstyles.iff": {
+   "blocks_before": 20,
+   "blocks_added": 1,
+   "bytes": 16463,
+   "sha256": "b163fc56b0b766c7130b351e7349e62ca07aec81a50f521c71e6f361ab34a3e4"
+  },
+  "creation/default_pc_equipment.iff": {
+   "blocks_before": 20,
+   "blocks_added": 2,
+   "bytes": 4591,
+   "sha256": "809487247f9cd9d82e1c8cb59a2b874c3ddd9f78a898cb3f6748ceba2323d303"
+  },
+  "creation/profession_defaults_combat_brawler.iff": {
+   "blocks_before": 21,
+   "blocks_added": 2,
+   "bytes": 6653,
+   "sha256": "ede0de20c4bda8a2451e0e9c4f5e1450f4167ea6385e68a2924ffce14523b447"
+  },
+  "creation/profession_defaults_combat_marksman.iff": {
+   "blocks_before": 21,
+   "blocks_added": 2,
+   "bytes": 5888,
+   "sha256": "dea84762912477158eeca59613357c2946019a6ce3480ff8f342404c04f5751f"
+  },
+  "creation/profession_defaults_crafting_artisan.iff": {
+   "blocks_before": 21,
+   "blocks_added": 2,
+   "bytes": 5427,
+   "sha256": "1f6be43af5791da59bce3e1020404df55556b071916cc66e3bfb1a700cd1db91"
+  },
+  "creation/profession_defaults_jedi.iff": {
+   "unchanged": true,
+   "blocks_added": 0
+  },
+  "creation/profession_defaults_outdoors_scout.iff": {
+   "blocks_before": 21,
+   "blocks_added": 2,
+   "bytes": 5921,
+   "sha256": "28fa6cecd473f9d9972328bf4287497d699bb6488bca54d4075492617d5d9ebe"
+  },
+  "creation/profession_defaults_science_medic.iff": {
+   "blocks_before": 21,
+   "blocks_added": 2,
+   "bytes": 6098,
+   "sha256": "75746aba8fbd484d1e3e829f034ff4504d1a9dff5a4dc9d2563d38909c8b8beb"
+  },
+  "creation/profession_defaults_social_entertainer.iff": {
+   "blocks_before": 21,
+   "blocks_added": 2,
+   "bytes": 5285,
+   "sha256": "04fb7bbc4d7c32ef6a97b48ae354f8de467a10a34f653706d0058680ad7ba79f"
+  },
+  "ui/ui_avatardata.inc": {
+   "blocks_added": 2,
+   "bytes": 91485,
+   "sha256": "b15a65f426bcc97c4fc13d87457bfc51ac4acd08c3764061e1548e152acf3b86"
+  },
+  "string/en/player_species.stf": {
+   "keys_added": 4,
+   "bytes": 43781,
+   "sha256": "984624e5aaef18dfd9ea5c12dfb339e90e24536cdb5a9f467ba622bde95b6d03"
+  },
+  "string/en/skl_n.stf": {
+   "keys_added": 2,
+   "bytes": 153607,
+   "sha256": "478e3d4b2f394be40e205a4d45822f30ca45964b53232e21cbc035879c7857f8"
+  },
+  "string/en/skl_d.stf": {
+   "keys_added": 2,
+   "bytes": 377712,
+   "sha256": "8c7d3c145e2679dc44942a6aea4727d6e2ad89609572ab9931666579cd37b3cc"
+  },
+  "datatables/skill/skills.iff": {
+   "rows_added": 2,
+   "cloned_from": "species_human",
+   "bytes": 274602,
+   "sha256": "1028f498e48ffd76cb1abe46df55dd41be573c48688f7e3f3f2624151d37d4a6"
+  },
+  "customization/asset_customization_manager.iff": {
+   "appearances_spliced": {
+    "appearance/gotal_m.sat": {
+     "status": "spliced",
+     "key": 19266,
+     "variables": [
+      "/shared_owner/blend_fat",
+      "/shared_owner/blend_muscle",
+      "/shared_owner/blend_skinny",
+      "/shared_owner/index_color_skin",
+      "/private/index_color_0"
+     ]
+    },
+    "appearance/nautolan_m.sat": {
+     "status": "spliced",
+     "key": 19276,
+     "variables": [
+      "/shared_owner/blend_fat",
+      "/shared_owner/blend_muscle",
+      "/shared_owner/blend_skinny",
+      "/private/index_color_0",
+      "/shared_owner/index_color_skin"
+     ]
+    }
+   },
+   "verification": {
+    "stock_appearances_unchanged": true,
+    "changed_stock_appearances": 0,
+    "spliced_appearances_match_source": true,
+    "tables_sorted": true,
+    "index_limits_ok (u16 keys/positions, u8 UCMP fields)": true
+   },
+   "bytes": 341867,
+   "sha256": "98cee77588fa0bbfee654a9525737b9724fc3daac4b994183b07ac19dc159143"
+  }
+ },
+ "notes": [],
+ "summary": {
+  "files_written": 19,
+  "files_unchanged": 3
+ }
+}
