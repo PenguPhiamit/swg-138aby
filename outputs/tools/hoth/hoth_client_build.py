@@ -352,6 +352,25 @@ def botanist():
     return report
 
 
+# Hoth quest chain (Fable batch C, dev 92d99dba): a new string table, not a change to a stock one. Fable's TSV has the
+# target path on its first line and one key<TAB>text per line; the server reads the same table through TreFiles.
+QUEST_STRINGS = os.path.join(H, 'outputs', 'Fable-hoth-batchC', 'strings.tsv')
+
+
+def quest_strings():
+    lines = [l.rstrip('\r\n') for l in open(QUEST_STRINGS, encoding='utf-8')]
+    path = lines[0].split()[1]
+    assert path.startswith('string/en/') and path.endswith('.stf') and not os.path.exists(src(path)), path
+    stock = stf_tool.read(src('string/en/planet_n.stf'))  # header fields of a stock table
+    t = {'magic': stock['magic'], 'flag': stock['flag'], 'next': 1, 'vals': {}, 'keys': []}
+    entries = dict(l.split('\t', 1) for l in lines if l and not l.startswith('#'))
+    for key, text in entries.items():
+        stf_tool.add(t, key, text)
+    stf_tool.write(t, dst(path))
+    back = stf_tool.as_dict(stf_tool.read(dst(path)))
+    return [f'{path}: new table, {len(back)} strings, read back {"same" if back == entries else "DIFFERS"}']
+
+
 def check_ui_newlines(path):
     """The stock .inc files use CRLF; ui.load() normalises to LF, so make sure we wrote CRLF back."""
     raw = open(src(path), 'rb').read()
@@ -375,6 +394,8 @@ def main():
         print('resource tree:', line)
     for line in botanist():
         print('botanist:', line)
+    for line in quest_strings():
+        print('quest strings:', line)
     tre_pack.pack(STAGE, tre_new)
     staged = {os.path.relpath(os.path.join(d, f), STAGE).replace(os.sep, '/'): os.path.join(d, f)
               for d, _, fs in os.walk(STAGE) for f in fs}
@@ -385,7 +406,8 @@ def main():
             blob = stream.read(entry['comp_size'] if entry['comp'] else entry['size'])
         same = _inflate(blob, entry['comp'], entry['size']) == open(staged[entry['name']], 'rb').read()
         ok &= same
-        print(f'{"OK " if same else "BAD"} {entry["name"]} ({entry["size"]} bytes; stock {os.path.getsize(src(entry["name"]))})')
+        stock = os.path.getsize(src(entry['name'])) if os.path.exists(src(entry['name'])) else 'none, a new file'
+        print(f'{"OK " if same else "BAD"} {entry["name"]} ({entry["size"]} bytes; stock {stock})')
     print('archive verified' if ok else 'ARCHIVE MISMATCH')
     if not ok:
         print(f'kept the old {TRE} and {final_stage}; the failed build is in {tre_new} and {STAGE}')

@@ -1,0 +1,383 @@
+{
+ "placed": [
+  {
+   "what": "mission terminal 1",
+   "template": "object/tangible/terminal/terminal_mission.iff",
+   "x": 48.0,
+   "z": 0.0,
+   "y": -1996.0,
+   "heading_deg": -90,
+   "clearance": {
+    "nearest": "outpost_starport",
+    "distance": 48.2,
+    "needed": 40,
+    "ok": true
+   }
+  },
+  {
+   "what": "mission terminal 2",
+   "template": "object/tangible/terminal/terminal_mission.iff",
+   "x": 48.0,
+   "z": 0.0,
+   "y": -2002.0,
+   "heading_deg": -90,
+   "clearance": {
+    "nearest": "outpost_starport",
+    "distance": 48.0,
+    "needed": 40,
+    "ok": true
+   }
+  },
+  {
+   "what": "Quartermaster Vell (giver)",
+   "template": "hoth_quartermaster_vell",
+   "x": 44.0,
+   "z": 0.0,
+   "y": -2010.0,
+   "heading_deg": -90,
+   "clearance": {
+    "nearest": "outpost_starport",
+    "distance": 45.1,
+    "needed": 40,
+    "ok": true
+   }
+  },
+  {
+   "what": "deliver-mission NPC spawn point (NEUTRALSPAWN)",
+   "x": 62.0,
+   "z": 0.0,
+   "y": -1975.0,
+   "heading_rad": 3.9,
+   "clearance": {
+    "nearest": "outpost_starport",
+    "distance": 66.9,
+    "needed": 40,
+    "ok": true
+   }
+  },
+  {
+   "what": "deliver-mission NPC spawn point (NEUTRALSPAWN)",
+   "x": 70.0,
+   "z": 0.0,
+   "y": -2030.0,
+   "heading_rad": 2.4,
+   "clearance": {
+    "nearest": "outpost_starport",
+    "distance": 76.2,
+    "needed": 40,
+    "ok": true
+   }
+  },
+  {
+   "what": "deliver-mission NPC spawn point (NEUTRALSPAWN)",
+   "x": 30.0,
+   "z": 0.0,
+   "y": -2060.0,
+   "heading_rad": 0.8,
+   "clearance": {
+    "nearest": "pirate_warehouse",
+    "distance": 41.3,
+    "needed": 22,
+    "ok": true
+   }
+  },
+  {
+   "what": "deliver-mission NPC spawn point (NEUTRALSPAWN)",
+   "x": -45.0,
+   "z": 0.0,
+   "y": -2070.0,
+   "heading_rad": 5.5,
+   "clearance": {
+    "nearest": "lucky_despot_debris_lg_engine_s01",
+    "distance": 42.7,
+    "needed": 12,
+    "ok": true
+   }
+  },
+  {
+   "what": "deliver-mission NPC spawn point (NEUTRALSPAWN)",
+   "x": -60.0,
+   "z": 0.0,
+   "y": -1985.0,
+   "heading_rad": 1.6,
+   "clearance": {
+    "nearest": "outpost_starport",
+    "distance": 61.8,
+    "needed": 40,
+    "ok": true
+   }
+  },
+  {
+   "what": "deliver-mission NPC spawn point (NEUTRALSPAWN)",
+   "x": -40.0,
+   "z": 0.0,
+   "y": -1925.0,
+   "heading_rad": 4.7,
+   "clearance": {
+    "nearest": "sandcrawler_debris_01",
+    "distance": 47.0,
+    "needed": 12,
+    "ok": true
+   }
+  },
+  {
+   "what": "deliver-mission NPC spawn point (NEUTRALSPAWN)",
+   "x": 40.0,
+   "z": 0.0,
+   "y": -1935.0,
+   "heading_rad": 3.1,
+   "clearance": {
+    "nearest": "sandcrawler_debris_01",
+    "distance": 38.1,
+    "needed": 12,
+    "ok": true
+   }
+  },
+  {
+   "what": "deliver-mission NPC spawn point (NEUTRALSPAWN)",
+   "x": -140.0,
+   "z": 0.0,
+   "y": -1990.0,
+   "heading_rad": 0.3,
+   "clearance": {
+    "nearest": "salvage_detail (batch B)",
+    "distance": 50.0,
+    "needed": 12,
+    "ok": true
+   }
+  }
+ ],
+ "files": {
+  "mobile/spawn/destroy_mission/hoth_destroy_missions.lua": "7812d9b62cde215594fd544eb811e192bdef17a9690230355703441fc5814510",
+  "screenplays/poi/hoth_outpost_terminals.lua": "6e4d230d098bebd68cf2a953c2f2e6f5982ee4329ff9fe0bb5e8baf9eedbb754",
+  "screenplays/tasks/hoth/scavenger_quartermaster.lua": "2855e1ebec3a031c864e4629277b68faed519566f814eeb3c5ce857502613df4",
+  "mobile/quest/hoth/scavenger_quartermaster_npcs.lua": "427db70ffbc762c539eb87121245d95de0116470b371aff495794737d16d7ec0",
+  "snippets/mission_npc_spawn_points_hoth.lua": "6b40542d129e9c9870a2cfe1f4493153a51ba0751ca61ed80a4e9f511fb01c64"
+ },
+ "patches": [
+  {
+   "file": "mobile/spawn/serverobjects.lua",
+   "mode": "after",
+   "anchor": "includeFile(\"spawn/destroy_mission/factional_rebel_destroy_missions.lua\")",
+   "line": "includeFile(\"spawn/destroy_mission/hoth_destroy_missions.lua\") -- Sandbox: Hoth terminal missions (Fable batch C)"
+  },
+  {
+   "file": "screenplays/screenplays.lua",
+   "mode": "after",
+   "anchor": "includeFile(\"poi/hoth_camps.lua\") -- Sandbox: Hoth camps (Fable batch B)",
+   "line": "includeFile(\"poi/hoth_outpost_terminals.lua\") -- Sandbox: Hoth mission terminals (Fable batch C)"
+  },
+  {
+   "file": "screenplays/screenplays.lua",
+   "mode": "after",
+   "anchor": "includeFile(\"tasks/tatooine/aaph_koden.lua\")",
+   "line": "includeFile(\"tasks/hoth/scavenger_quartermaster.lua\") -- Sandbox: Hoth quest chain (Fable batch C)"
+  },
+  {
+   "file": "mobile/quest/serverobjects.lua",
+   "mode": "after",
+   "anchor": "includeFile(\"quest/tatooine/aaph_koden.lua\")",
+   "line": "includeFile(\"quest/hoth/scavenger_quartermaster_npcs.lua\") -- Sandbox: Hoth quest chain (Fable batch C)"
+  },
+  {
+   "file": "mobile/conversations/themepark/logic/mission_giver_conv.lua",
+   "mode": "after",
+   "anchor": "createMissionGiverConvoTemplate(\"yith_seenath_mission_giver_convotemplate\",\"yith_seenath_mission_giver_conv_handler\")",
+   "line": "createMissionGiverConvoTemplate(\"scavenger_quartermaster_mission_giver_convotemplate\", \"scavenger_quartermaster_mission_giver_conv_handler\") -- Sandbox: Hoth (Fable batch C)"
+  },
+  {
+   "file": "mobile/conversations/themepark/logic/mission_target_conv.lua",
+   "mode": "after",
+   "anchor": "createMissionTargetConvoTemplate(\"yith_seenath_mission_target_convotemplate\",\"yith_seenath_mission_target_conv_handler\")",
+   "line": "createMissionTargetConvoTemplate(\"scavenger_quartermaster_mission_target_convotemplate\", \"scavenger_quartermaster_mission_target_conv_handler\") -- Sandbox: Hoth (Fable batch C)"
+  },
+  {
+   "file": "managers/mission/mission_cities.lua",
+   "mode": "before",
+   "anchor": "\\t{ \"yavin4\", \"Yavin IV Labor Outpost\", -6925, -5707, 130 }",
+   "line": "\\t{ \"hoth\", \"Scavenger Starport\", 0, -2000, 150 },"
+  },
+  {
+   "file": "managers/mission/mission_npc_spawn_points.lua",
+   "mode": "append",
+   "anchor": "planet_hoth",
+   "line": "snippets/mission_npc_spawn_points_hoth.lua"
+  }
+ ],
+ "dev_originals_at_staging": {
+  "managers/mission/mission_cities.lua": "d13452b678c93cf550bc3df07f982a3583d44d06dd826669e3fd582b8a9a7554",
+  "managers/mission/mission_npc_spawn_points.lua": "56657e800ca9b887db5c3a1dd44c79f0ee0133a9dbe69e361fb6e8d37b014565",
+  "mobile/quest/serverobjects.lua": "941f9bf7b3068dda8e7601b9ea7192192d46b1991a05a37862ef42bd8b3e6c5e",
+  "mobile/spawn/serverobjects.lua": "7a303b895cc9dbdd131f5cb110c512891585b0741bc82c9537a3333bee1f3b1c"
+ },
+ "strings": {
+  "stf": "string/en/static_npc/hoth/scavenger_quartermaster.stf",
+  "count": 81
+ },
+ "client_objects": {
+  "mission terminal": {
+   "path": "object/tangible/terminal/shared_terminal_mission.iff",
+   "archive": "patch_05.tre"
+  },
+  "giver appearance": {
+   "path": "object/mobile/shared_dressed_merchant_trainer_02.iff",
+   "archive": "patch_01.tre"
+  },
+  "Baxx appearance": {
+   "path": "object/mobile/shared_dressed_brigade_technician_human_female_01.iff",
+   "archive": "patch_01.tre"
+  },
+  "Korro appearance": {
+   "path": "object/mobile/shared_dressed_mercenary_commander_zab_m.iff",
+   "archive": "patch_01.tre"
+  },
+  "Kett appearance": {
+   "path": "object/mobile/shared_dressed_criminal_smuggler_human_male_01.iff",
+   "archive": "patch_01.tre"
+  },
+  "quest item 1": {
+   "path": "object/tangible/mission/quest_item/shared_power_regulator.iff",
+   "archive": "data_other_00.tre"
+  },
+  "quest item 3": {
+   "path": "object/tangible/mission/quest_item/shared_current_alternator.iff",
+   "archive": "data_other_00.tre"
+  },
+  "ice mynock (secondary spawn; mobile/hoth/hoth_ice_mynock.lua uses salt_mynock_hue)": {
+   "path": "object/mobile/shared_salt_mynock_hue.iff",
+   "archive": "patch_01.tre"
+  },
+  "snowspeeder deed (C2)": {
+   "path": "object/tangible/deed/vehicle_deed/shared_snowspeeder_deed.iff",
+   "archive": "mtg_patch_022.tre"
+  },
+  "snowspeeder pcd (C2)": {
+   "path": "object/intangible/vehicle/shared_snowspeeder.iff",
+   "archive": "mtg_patch_022.tre"
+  },
+  "snowspeeder vehicle (C2)": {
+   "path": "object/mobile/vehicle/shared_snowspeeder.iff",
+   "archive": "mtg_patch_022.tre"
+  },
+  "hoth AT-ST pcd (C2)": {
+   "path": "object/intangible/vehicle/shared_hoth_at_st_pcd.iff",
+   "archive": "mtg_patch_022.tre"
+  },
+  "hoth AT-ST vehicle (C2)": {
+   "path": "object/mobile/vehicle/shared_hoth_at_st.iff",
+   "archive": "mtg_patch_022.tre"
+  },
+  "hoth AT-ST deed (C2, expected absent)": {
+   "path": "object/tangible/deed/vehicle_deed/shared_hoth_at_st_deed.iff",
+   "archive": null
+  },
+  "tauntaun creature (C2)": {
+   "path": "object/mobile/shared_tauntaun_hue.iff",
+   "archive": "patch_01.tre",
+   "template_chain": [
+    {
+     "file": "object/mobile/shared_tauntaun_hue.iff",
+     "archive": "patch_01.tre",
+     "slot_descriptors": []
+    },
+    {
+     "file": "object/mobile/skeleton/shared_tauntaun.iff",
+     "archive": "patch_07.tre",
+     "slot_descriptors": []
+    },
+    {
+     "file": "object/mobile/shared_mobile.iff",
+     "archive": "data_other_00.tre",
+     "slot_descriptors": []
+    }
+   ]
+  },
+  "tauntaun pet pcd (C2)": {
+   "path": "object/intangible/pet/shared_tauntaun_hue.iff",
+   "archive": "mtg_patch_022.tre",
+   "template_chain": [
+    {
+     "file": "object/intangible/pet/shared_tauntaun_hue.iff",
+     "archive": "mtg_patch_022.tre",
+     "slot_descriptors": []
+    }
+   ]
+  },
+  "tauntaun pet deed (C2)": {
+   "path": "object/tangible/deed/pet_deed/shared_tauntaun_deed.iff",
+   "archive": "mtg_patch_022.tre"
+  },
+  "tauntaun appearance (C2)": {
+   "path": "appearance/tauntaun_hue.sat",
+   "archive": "data_other_00.tre"
+  },
+  "mount rider slot descriptor (C2)": {
+   "path": "abstract/slot/descriptor/mount_rider.iff",
+   "archive": "patch_04.tre"
+  },
+  "dewback creature (stock mount, for comparison)": {
+   "path": "object/mobile/shared_dewback_hue.iff",
+   "archive": "patch_03.tre",
+   "template_chain": [
+    {
+     "file": "object/mobile/shared_dewback_hue.iff",
+     "archive": "patch_03.tre",
+     "slot_descriptors": []
+    },
+    {
+     "file": "object/mobile/shared_dewback.iff",
+     "archive": "patch_05.tre",
+     "slot_descriptors": [
+      "abstract/slot/descriptor/mount_rider.iff"
+     ]
+    },
+    {
+     "file": "object/mobile/skeleton/shared_dewback.iff",
+     "archive": "patch_09.tre",
+     "slot_descriptors": []
+    },
+    {
+     "file": "object/mobile/shared_mobile.iff",
+     "archive": "data_other_00.tre",
+     "slot_descriptors": []
+    }
+   ]
+  },
+  "dewback pet pcd (stock mount, for comparison)": {
+   "path": "object/intangible/pet/shared_dewback_hue.iff",
+   "archive": "patch_14_00.tre",
+   "template_chain": [
+    {
+     "file": "object/intangible/pet/shared_dewback_hue.iff",
+     "archive": "patch_14_00.tre",
+     "slot_descriptors": [
+      "abstract/slot/descriptor/mount_pcd.iff"
+     ]
+    }
+   ]
+  },
+  "datatables/mount/valid_scale_range.iff": {
+   "path": "datatables/mount/valid_scale_range.iff",
+   "archive": "patch_11_02.tre",
+   "mentions_tauntaun": true,
+   "mentions_dewback": true
+  },
+  "datatables/mount/saddle_capacity.iff": {
+   "path": "datatables/mount/saddle_capacity.iff",
+   "archive": null,
+   "mentions_tauntaun": false,
+   "mentions_dewback": false
+  }
+ },
+ "clearance_ok": true,
+ "ground_flat": true,
+ "destroy_missions": {
+  "minLevelCeiling": 75,
+  "lairs": [
+   "hoth_tauntaun_lair_neutral_medium 60-72",
+   "hoth_ice_mynock_lair_neutral_medium 64-76",
+   "hoth_scavenger_raider_camp_neutral_none 70-80",
+   "hoth_wampa_lair_neutral_large 85-100"
+  ]
+ }
+}

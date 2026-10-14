@@ -1,0 +1,9 @@
+# <file under MMOCoreORB/bin/scripts>	<after|before|append>	<anchor line | marker>	<new line | snippet file>; a literal \t stands for a tab
+mobile/spawn/serverobjects.lua	after	includeFile("spawn/destroy_mission/factional_rebel_destroy_missions.lua")	includeFile("spawn/destroy_mission/hoth_destroy_missions.lua") -- Sandbox: Hoth terminal missions (Fable batch C)
+screenplays/screenplays.lua	after	includeFile("poi/hoth_camps.lua") -- Sandbox: Hoth camps (Fable batch B)	includeFile("poi/hoth_outpost_terminals.lua") -- Sandbox: Hoth mission terminals (Fable batch C)
+screenplays/screenplays.lua	after	includeFile("tasks/tatooine/aaph_koden.lua")	includeFile("tasks/hoth/scavenger_quartermaster.lua") -- Sandbox: Hoth quest chain (Fable batch C)
+mobile/quest/serverobjects.lua	after	includeFile("quest/tatooine/aaph_koden.lua")	includeFile("quest/hoth/scavenger_quartermaster_npcs.lua") -- Sandbox: Hoth quest chain (Fable batch C)
+mobile/conversations/themepark/logic/mission_giver_conv.lua	after	createMissionGiverConvoTemplate("yith_seenath_mission_giver_convotemplate","yith_seenath_mission_giver_conv_handler")	createMissionGiverConvoTemplate("scavenger_quartermaster_mission_giver_convotemplate", "scavenger_quartermaster_mission_giver_conv_handler") -- Sandbox: Hoth (Fable batch C)
+mobile/conversations/themepark/logic/mission_target_conv.lua	after	createMissionTargetConvoTemplate("yith_seenath_mission_target_convotemplate","yith_seenath_mission_target_conv_handler")	createMissionTargetConvoTemplate("scavenger_quartermaster_mission_target_convotemplate", "scavenger_quartermaster_mission_target_conv_handler") -- Sandbox: Hoth (Fable batch C)
+managers/mission/mission_cities.lua	before	\t{ "yavin4", "Yavin IV Labor Outpost", -6925, -5707, 130 }	\t{ "hoth", "Scavenger Starport", 0, -2000, 150 },
+managers/mission/mission_npc_spawn_points.lua	append	planet_hoth	snippets/mission_npc_spawn_points_hoth.lua

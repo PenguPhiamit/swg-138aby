@@ -1,0 +1,5 @@
+# new files under MMOCoreORB/bin/scripts (copied by apply.sh; refused if a different file exists)
+mobile/spawn/destroy_mission/hoth_destroy_missions.lua
+screenplays/poi/hoth_outpost_terminals.lua
+screenplays/tasks/hoth/scavenger_quartermaster.lua
+mobile/quest/hoth/scavenger_quartermaster_npcs.lua

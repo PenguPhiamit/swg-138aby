@@ -1,0 +1,83 @@
+# string/en/static_npc/hoth/scavenger_quartermaster.stf (client string table; the server reads it too via getStringId)
+# key	text
+cant_work	You're already on a job for someone else. Finish that first, then come and see me.
+notyet	Nothing for you right now. Check back once the next salvage run is in.
+next	That's all the work I have for you. Thanks for keeping the runs moving.
+npc_reset	Fine, we start over. Come back when you're ready.
+npc_backtowork	Then get back out there.
+npc_failure_n	That didn't go the way either of us wanted. Let's try again.
+npc_1_1	Hey. You look like you can handle the cold. One of my salvage techs, Ria Baxx, went out to the Lucky Despot's engine spur for a power regulator and hasn't checked in. Go find her and bring that regulator back to me.
+player_1_1	I'll find her.
+player_2_1	What's out there?
+player_3_1	What's the pay?
+player_4_1	Where's the engine spur?
+player_5_1	Not my problem.
+npc_2_1	Good. I'll mark the last position she reported. Watch the wreck, the mynocks like the power lines.
+npc_3_1	Ice mynocks, mostly. They chew on anything that still carries a charge, and that spur still does.
+npc_4_1	Fifteen hundred credits when I have the regulator in my hands.
+npc_5_1	Out past the outpost, in the drift field. I'll give you a waypoint once you take the job.
+npc_6_1	Then stop warming yourself at my heater.
+npc_noloc_1	I can't get a fix on her position right now. Come back in a moment.
+npc_work_1	Still waiting on that regulator.
+player_reset_1	I lost track of Baxx. Can you reset the job?
+player_sorry_1	Sorry, I'm on it.
+npc_reset_1	Fine. I'll send out a fresh fix. Come back when you're ready.
+npc_backtowork_1	Then go.
+npc_reward_1	That's the one. Baxx made it back ahead of you, by the way. Here's your fifteen hundred.
+waypoint_name_1	Ria Baxx
+waypoint_description_1	Find the salvage tech Ria Baxx and collect the power regulator.
+return_waypoint_name_1	Quartermaster Vell
+return_waypoint_description_1	Return the power regulator to Quartermaster Vell at the Scavenger Starport.
+npc_breech_1	Watch out, they're coming off the wreck!
+npc_smuggle_1	You're from Vell? Take it, the regulator's yours. I'm heading back as soon as my hands thaw.
+dontknowyou_1	I don't know you. Talk to Vell if you want work.
+npc_1_2	The regulator job tells me you can walk the drifts. Here's a harder one. A raider captain called Thane Korro has hit three of my salvage runs this month. Find him and put him down.
+player_1_2	Consider it done.
+player_2_2	Who is Korro?
+player_3_2	What's it pay?
+player_4_2	How many are with him?
+player_5_2	I don't do killings.
+npc_2_2	I'll give you his last position. Don't let his crew flank you on the ice.
+npc_3_2	Used to run with the outpost scavengers until he decided robbing them paid better. Now he takes what my people dig out.
+npc_4_2	Three thousand credits for Korro. His gear is yours too.
+npc_5_2	Two, usually. They're good shots with those heavy rifles, so don't stand in the open.
+npc_6_2	Then I'll find someone who does.
+npc_noloc_2	I don't have a fix on Korro right now. Give me a minute.
+npc_work_2	Korro's still breathing. Get to it.
+player_reset_2	I lost Korro's trail. Can you reset the job?
+player_sorry_2	Sorry, still working on it.
+npc_reset_2	Fine. I'll get a new fix. Come back when you're ready.
+npc_backtowork_2	Then go find him.
+npc_reward_2	Korro's done? That's three runs that come home now. Here's your three thousand.
+waypoint_name_2	Thane Korro
+waypoint_description_2	Kill the raider captain Thane Korro.
+return_waypoint_name_2	Quartermaster Vell
+return_waypoint_description_2	Report Korro's death to Quartermaster Vell at the Scavenger Starport.
+npc_breech_2	Vell sent you? Then Vell gets you back in pieces!
+dontknowyou_2	I don't know you. Talk to Vell if you want work.
+npc_1_3	Last job, and an easy one. A broker named Doro Kett buys what we pull out of the wrecks. Take this salvaged current alternator out to his camp and hand it over.
+player_1_3	I'll take it.
+player_2_3	Who is Kett?
+player_3_3	What's it pay?
+player_4_3	Where's his camp?
+player_5_3	Find another courier.
+npc_2_3	Here's the alternator. Keep it dry and don't drop it, the casing is cracked.
+npc_3_3	A trader who comes out from Corellia for the Despot's parts. Pays well and asks no questions, which suits us.
+npc_4_3	Two thousand credits once Kett confirms delivery.
+npc_5_3	He camps out on the drifts, never the same spot twice. I'll give you a waypoint once you take the job.
+npc_6_3	Then I'll find another courier.
+npc_noloc_3	I don't know where Kett has set up today. Come back in a moment.
+npc_work_3	Kett's still waiting on that alternator.
+player_reset_3	I can't find Kett. Can you reset the job?
+player_sorry_3	Sorry, on my way.
+npc_reset_3	Fine. I'll find out where he is now. Come back when you're ready.
+npc_backtowork_3	Then get moving.
+npc_reward_3	Kett sent word. Here's your two thousand, and you've got a standing welcome at this outpost.
+waypoint_name_3	Doro Kett
+waypoint_description_3	Deliver the salvaged current alternator to the broker Doro Kett.
+return_waypoint_name_3	Quartermaster Vell
+return_waypoint_description_3	Return to Quartermaster Vell at the Scavenger Starport.
+npc_smuggle_3	From Vell? Let's see it. Cracked casing, but it'll do. Tell Vell the credits are on their way.
+notit_3	You haven't got the alternator on you. Go back to Vell.
+npc_dropoff_3	Pleasure doing business. Mind the drifts on the way back.
+dontknowyou_3	I don't know you. Talk to Vell if you want work.
