@@ -212,7 +212,7 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 ## Log
 
 ### 2026-10-14 10:06 (C21 checkpoint 1) - ChatGPT
-Saved reproducible six-manifest baseline: 102 catalogue rows, 12,556 distinct MTG registered paths, 13,627 historical dormant paths; inherited C14 overlap 10/11 Legends-labelled local zones. Added scoped shortlist and remaining batches; no current server/game/web validation or imports. Local commit recorded below after commit; C21 returned to open, next checkpoint worlds/Legends audit.
+Saved reproducible six-manifest baseline: 102 catalogue rows, 12,556 distinct MTG registered paths, 13,627 historical dormant paths; inherited C14 overlap 10/11 Legends-labelled local zones. Added scoped shortlist and remaining batches; no current server/game/web validation or imports. Local checkpoint commit `9686c15`; C21 returned to open, next checkpoint worlds/Legends audit.
 
 ### 2026-10-14 09:55 Claude: Vell fix in dev; outdoor den staged; Fable starts Phase 4 (species)
 - **Dev `e9094960` (Fable's fix1):** Quartermaster Vell gets `flags = AI_STATIC` in his spawn data, as stock `luthik_uwyr.lua` does. Without it, a theme-park giver patrols (AiAgentImplementation), which is why he drifted. It loads at the next restart.
