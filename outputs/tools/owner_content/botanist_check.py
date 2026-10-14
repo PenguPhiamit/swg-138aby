@@ -9,6 +9,7 @@ import json
 
 GROUP = 'Besh'
 BOX = 'outdoors_botanist_novice'
+TRAINER_SPOT = (3516.0, -4783.0)  # the trainer's spawn line in Mos Eisley (dev 578861d9)
 
 
 def skills_seen(bot):
@@ -37,11 +38,15 @@ def run(g):
     reply = ask(pell, 'outdoors_botanist')
     g.note(f'profession root as a box: {reply}')
 
-    found = pell.locate('Botanist', 60) or pell.locate('trainer_botanist', 60)
+    # Search around the trainer's spawn spot, not around Pell (06:29: Pell stood in the gather field, 250 m away).
+    tx, ty = TRAINER_SPOT
+    found = pell.locate('Botanist', 40, x=tx, y=ty) or pell.locate('trainer_botanist', 40, x=tx, y=ty)
     g.check('a Botanist trainer stands in Mos Eisley', bool(found), found[:1] if found else pell.status().get('x'))
     if found:
         trainer = found[0]
         g.note(f'trainer: {trainer.get("name")} at {trainer.get("x")},{trainer.get("y")}')
+        walked = pell.walk(trainer['x'] + 2, trainer['y'])  # conversations need the NPC within a few metres
+        g.note(f'walked to the trainer: {walked.get("arrived")}, {walked.get("seconds")} s')
         events = pell.talk(trainer['oid'], wait=4)
         texts = [str(e.get('text', '')) for e in events if e.get('text')]
         options = pell.status().get('conversation_options', [])
