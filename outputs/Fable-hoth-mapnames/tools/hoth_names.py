@@ -29,12 +29,10 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.dirname(HERE)
 OUTPUTS = os.path.dirname(OUT)
-for rel in ('Fable-ossus/tools', 'Fable-planet-test/tools'):
-    p = os.path.join(OUTPUTS, rel)
-    if p not in sys.path:
-        sys.path.insert(0, p)
-import swg_tables as st  # noqa: E402
-import trn_iff  # noqa: E402
+if os.path.join(OUTPUTS, 'tools') not in sys.path:
+    sys.path.insert(0, os.path.join(OUTPUTS, 'tools'))
+from swgfmt import swg_tables as st  # noqa: E402
+from swgfmt import trn_iff  # noqa: E402
 
 SITES_TSV = os.path.join(OUT, 'sites.tsv')
 NAMES_TSV = os.path.join(OUTPUTS, 'Fable-hoth-batchB', 'names.tsv')

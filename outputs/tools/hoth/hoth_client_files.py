@@ -5,17 +5,15 @@
                                                           bytes must match before we change anything (UM's
                                                           reverse-engineering rule: reader -> writer -> reader)
 
-Format tools come from Bellum Gero's planet tools (AGPL-3.0, pinned in work/research, read before use).
+Format tools are ours (outputs/tools/swgfmt).
 """
 import filecmp, os, sys, tempfile
 
 H = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
-BELLUM = os.path.join(H, 'work', 'research', 'Miphstoe_BellumGero-Live', 'MMOCoreORB', 'tools', 'newplanets')
 CLIENT = os.path.join(H, 'outputs', 'SWG-client')
 BASE = os.path.join(H, 'outputs', 'Documentation-support', 'hoth', 'client-base')
-sys.path.insert(0, BELLUM)
-exec(open(os.path.join(BELLUM, 'tre_inventory.py'), encoding='utf-8').read().split('if __name__')[0])
-import stf_tool, dt_tool, cstb_tool  # noqa: E402  (Bellum's)
+sys.path.insert(0, os.path.join(H, 'outputs', 'tools'))
+from swgfmt.fmt_tools import read_tre, walk_tres, extract_entry, stf_tool, dt_tool, cstb_tool  # noqa: E402  (ours)
 
 FILES = {  # internal path -> format
     'string/en/planet_n.stf': 'stf',

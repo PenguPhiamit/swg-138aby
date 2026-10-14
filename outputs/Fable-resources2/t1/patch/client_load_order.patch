@@ -1,0 +1,13 @@
+--- a/tools/hoth/client_load_order.py
++++ b/tools/hoth/client_load_order.py
+@@ -15,8 +15,8 @@
+ 
+ H = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
+ CLIENT = os.path.join(H, 'outputs', 'SWG-client')
+-sys.path.insert(0, os.path.join(H, 'outputs', 'Fable-builder', 'tools'))
+-from fmt_tools import read_tre, _inflate  # noqa: E402  (ours; was Bellum's tre_inventory)
++sys.path.insert(0, os.path.join(H, 'outputs', 'tools'))
++from swgfmt.fmt_tools import read_tre, _inflate  # noqa: E402  (ours; was Bellum's tre_inventory)
+ 
+ HOTH = ['terrain/hoth.trn', 'snapshot/hoth.ws', 'texture/ui_map_hoth.dds', 'appearance/ui_planet_sel_hoth.apt',
+         'string/en/planet_n.stf', 'misc/planet_crc_string_table.iff', 'datatables/travel/travel.iff',

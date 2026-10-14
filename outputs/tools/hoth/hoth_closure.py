@@ -24,8 +24,10 @@ H = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '.
 BELLUM = os.path.join(H, 'work', 'research', 'Miphstoe_BellumGero-Live', 'MMOCoreORB', 'tools', 'newplanets')
 CLIENT = os.path.join(H, 'outputs', 'SWG-client')
 OUT = os.path.join(H, 'outputs', 'Documentation-support', 'hoth')
-for module in ('tre_inventory.py', 'iff_tool.py'):
-    exec(open(os.path.join(BELLUM, module), encoding='utf-8').read().split('if __name__')[0])
+sys.path.insert(0, os.path.join(H, 'outputs', 'tools'))
+from swgfmt.fmt_tools import read_tre, _inflate  # noqa: E402  (ours; was Bellum's tre_inventory)
+# refs(): Bellum's asset-reference scanner (iff_tool.py); our readers have no equivalent yet, so it stays.
+exec(open(os.path.join(BELLUM, 'iff_tool.py'), encoding='utf-8').read().split('if __name__')[0])
 
 LEAVES = ('.dds', '.tga', '.wav', '.mp3', '.snd')
 

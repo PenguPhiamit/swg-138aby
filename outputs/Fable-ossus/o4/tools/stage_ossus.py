@@ -28,13 +28,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 O4 = os.path.dirname(HERE)
 OSSUS = os.path.dirname(O4)
 OUTPUTS = os.path.dirname(OSSUS)
-for rel in ('Fable-ossus/tools', 'Fable-planet-test/tools', 'Fable-ossus/o4/tools'):
-    p = os.path.join(OUTPUTS, rel)
-    if p not in sys.path:
-        sys.path.insert(0, p)
-import swg_tables as st  # noqa: E402
-import trn_iff  # noqa: E402
-import ui_inc  # noqa: E402
+if os.path.join(OUTPUTS, 'tools') not in sys.path:
+    sys.path.insert(0, os.path.join(OUTPUTS, 'tools'))
+from swgfmt import swg_tables as st  # noqa: E402
+from swgfmt import trn_iff  # noqa: E402
+from swgfmt import ui_inc  # noqa: E402
 
 PLANET, NAME = 'ossus', 'Ossus'
 STAGING = os.path.join(OUTPUTS, 'Local-content', 'local_planets')

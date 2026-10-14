@@ -1,0 +1,147 @@
+--- a/Fable-ossus/o4/tools/ui_inc.py
++++ b/Fable-ossus/o4/tools/ui_inc.py
+@@ -1,130 +1,14 @@
+-"""ui_inc.py: add a planet to the stock ticket-purchase and planetary-map UI includes (Fable O4a, 14 Oct 2026), our own
+-code. The .inc files are the client's XML-like UI pages, CRLF line ends, one attribute per line. We split the raw bytes on
+-b'\\r\\n' and never touch a line we do not insert: the 14 bare '\\r' the stock ticket file carries inside OnShow/OnHide
+-scripts (as '\\r\\r\\n') and whatever a previous merge wrote stay exactly as they were.
+-
+-add_planet(ticket_bytes, planet_map_bytes, name, key, model_apt, map_texture, spot, after='Hoth') clones Endor's five
+-ticket elements (the DataSource, galaxy-map Button, 3D viewer, map Page and label Text), its code-data line and its
+-planet-map Page, renamed for the new planet, each inserted right after the `after` planet's element when that exists
+-(else after Endor's). The button, viewer and label move by (spot - Endor's button) together, as the stock layout does.
+-"""
+-import re
+-
+-ENDOR_BUTTON = (23, 302)      # stock: buttonEndor Location; vEndor is +4,+4 and the Endor label +8,-4 from it
+-
+-
+-def split(data):
+-    return data.decode('latin-1').split('\r\n')
+-
+-
+-def join(lines):
+-    return '\r\n'.join(lines).encode('latin-1')
+-
+-
+-def _indent(line):
+-    return len(line) - len(line.lstrip('\t'))
+-
+-
+-def find_block(lines, tag, name):
+-    """(start, end) of the element <tag ... Name='name' ...> ... (inclusive), or None."""
+-    for k, line in enumerate(lines):
+-        if line.strip() != "Name='%s'" % name:
+-            continue
+-        s = k
+-        while s >= 0 and not lines[s].lstrip().startswith('<'):
+-            s -= 1
+-        if s < 0 or lines[s].strip() != '<' + tag:
+-            continue
+-        n = _indent(lines[s])
+-        j = s + 1
+-        while j < len(lines):
+-            t = lines[j].strip()
+-            if _indent(lines[j]) == n and t:
+-                if t == '>':
+-                    j += 1
+-                    continue
+-                if t.startswith('</') or t.endswith('/>') or (t.startswith('>') and '</' in t):
+-                    return s, j
+-                raise ValueError('unexpected line closing <%s %s>: %r' % (tag, name, t))
+-            j += 1
+-        raise ValueError('no end for <%s %s>' % (tag, name))
+-    return None
+-
+-
+-def shift_location(line, dx, dy):
+-    m = re.match(r"^(\s*Location=')(-?\d+),(-?\d+)('.*)$", line)
+-    if not m:
+-        return line
+-    return '%s%d,%d%s' % (m.group(1), int(m.group(2)) + dx, int(m.group(3)) + dy, m.group(4))
+-
+-
+-def clone_after(lines, tag, src_name, renames, after_name=None, move=None):
+-    """Copy Endor-style element `src_name`, apply the renames (and the move to its Location line), insert it after the
+-    element `after_name` of the same tag when present, else right after the source. Returns the inserted block."""
+-    s, e = find_block(lines, tag, src_name)
+-    block = []
+-    for line in lines[s:e + 1]:
+-        for old, new in renames:
+-            line = line.replace(old, new)
+-        if move:
+-            line = shift_location(line, *move)
+-        block.append(line)
+-    at = e + 1
+-    if after_name:
+-        hit = find_block(lines, tag, after_name)
+-        if hit:
+-            at = hit[1] + 1
+-    lines[at:at] = block
+-    return block
+-
+-
+-def add_planet(ticket, planet_map, name, key, model_apt, map_texture, spot, after='Hoth'):
+-    """name 'Ossus' (element names), key 'ossus' (lower-case names), model_apt 'ui_planet_sel_ossus.apt', map_texture
+-    'ui_map_ossus', spot = galaxy-map button Location. Returns (ticket_bytes, planet_map_bytes, report)."""
+-    t = split(ticket)
+-    if find_block(t, 'Page', name):
+-        return ticket, planet_map, {'ticket': 'already present', 'planet_map': 'already present'}
+-    renames = [('ui_planet_sel_endo.apt', model_apt), ('ui_map_endor', map_texture), ('Endor', name), ('endor', key)]
+-    move = (spot[0] - ENDOR_BUTTON[0], spot[1] - ENDOR_BUTTON[1])
+-    rep = {'inserted': {}}
+-    for tag, src, mv in (('DataSource', 'Endor', None), ('Button', 'buttonEndor', move), ('CuiWidget3dObjectListViewer', 'vEndor', move),
+-                         ('Page', 'Endor', None), ('Text', 'Endor', move)):
+-        aft = src.replace('Endor', after) if after else None
+-        block = clone_after(t, tag, src, renames, aft, mv)
+-        rep['inserted'][tag] = len(block)
+-    # the code-data line that binds the button
+-    i = next(i for i, l in enumerate(t) if l.strip() == "buttonEndor='map.GalaxyMap.buttonEndor'")
+-    j = next((k for k, l in enumerate(t) if l.strip() == "button%s='map.GalaxyMap.button%s'" % (after, after)), i) if after else i
+-    t.insert(j + 1, t[i].replace('Endor', name))
+-    rep['inserted']['Data line'] = 1
+-    rep['ticket_lines_added'] = sum(rep['inserted'].values())
+-    p = split(planet_map)
+-    if not find_block(p, 'Page', key):
+-        block = clone_after(p, 'Page', 'endor', [('ui_map_endor', map_texture), ('endor', key)], after.lower() if after else None)
+-        rep['planet_map_lines_added'] = len(block)
+-    else:
+-        rep['planet_map_lines_added'] = 0
+-    return join(t), join(p), rep
+-
+-
+-def planets_in(ticket):
+-    """Names of the planets that have a map Page in a ticket include (stock: 11)."""
+-    out = []
+-    lines = split(ticket)
+-    for k, l in enumerate(lines):
+-        if l.strip().startswith("Name='") and k > 0 and lines[k - 2].strip() == '<Page' and lines[k - 1].strip().startswith('BackgroundOpacity'):
+-            out.append(l.strip()[6:-1])
+-    return out
+-
+-
+-def lines_kept(base, out):
+-    """True when every line of `base` appears in `out` in order (we only ever insert)."""
+-    b, o = split(base), split(out)
+-    j = 0
+-    for line in b:
+-        while j < len(o) and o[j] != line:
+-            j += 1
+-        if j == len(o):
+-            return False
+-        j += 1
+-    return True
++"""Moved to outputs/tools/swgfmt/ui_inc.py (Fable T1, 14 Oct 2026). This shim hands every import of the old path to the
++package, so `import ui_inc` here and `from swgfmt import ui_inc` are the same module object."""
++import importlib
++import os
++import runpy
++import sys
++
++_tools = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', 'tools'))
++if _tools not in sys.path:
++    sys.path.insert(0, _tools)
++if __name__ == '__main__':
++    runpy.run_module('swgfmt.ui_inc', run_name='__main__', alter_sys=True)
++else:
++    sys.modules[__name__] = importlib.import_module('swgfmt.ui_inc')

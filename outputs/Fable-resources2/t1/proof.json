@@ -1,0 +1,117 @@
+{
+ "tools/hoth/client_load_order.py": {
+  "identical_stdout": true,
+  "lines": 86,
+  "rc": [
+   0,
+   0
+  ],
+  "stderr_new": ""
+ },
+ "Fable-hoth-mapnames/tools/hoth_names.py": {
+  "identical_files": true,
+  "files": 5,
+  "identical_stdout": true,
+  "rc": [
+   0,
+   0
+  ],
+  "stderr_new": ""
+ },
+ "Fable-ossus/o4/tools/stage_ossus.py": {
+  "identical_files": true,
+  "files": 25,
+  "identical_stdout": true,
+  "rc": [
+   0,
+   0
+  ],
+  "selftest_new": true,
+  "stderr_new": ""
+ },
+ "Fable-ossus/o3/tools/map_art.py": {
+  "check_identical_stdout": true,
+  "check_ok": true,
+  "render128_identical_files": true,
+  "files": 7,
+  "stderr_new": ""
+ },
+ "tools/hoth/hoth_client_build.py": {
+  "archive_verified": true,
+  "round_trips_exact": 12,
+  "entries": [
+   20,
+   20
+  ],
+  "same_entries_same_bytes": true,
+  "sha256": [
+   "aee83cc675a1e6cf",
+   "aee83cc675a1e6cf"
+  ],
+  "byte_identical_archive": true,
+  "stderr": ""
+ },
+ "tools/hoth/hoth_client_files.py": {
+  "new_stdout_tail": [
+   "all round trips exact"
+  ],
+  "all_exact": true,
+  "rc": 0,
+  "stderr_new": "",
+  "old_not_run": "its current version execs Bellum tre_inventory (downloaded code: read, not run)"
+ },
+ "tools/hoth/hoth_registration_check.py": {
+  "new_stdout": [
+   "planet display names: string/en/planet_n.stf [patch_12_00.tre] -> no hoth",
+   "travel points / routes: datatables/travel/travel.iff [patch_00.tre] -> no hoth",
+   "ticket purchase UI: ui/ui_ticketpurchase.inc [patch_12_00.tre] -> no hoth",
+   "planetary map UI: ui/ui_planet_map.inc [patch_12_00.tre] -> no hoth",
+   "planet CRC string table: misc/planet_crc_string_table.iff [patch_11_02.tre] -> no hoth",
+   "planet-related datatables: datatables/creation/planet_info.iff [patch_11_03.tre] -> no hoth",
+   "planet-related datatables: datatables/knowledgebase/planets.iff [data_other_00.tre] -> no hoth",
+   "planet-related datatables: datatables/planetary_map/disabled_planetary_map.iff [patch_07.tre] -> no hoth",
+   "planet-related datatables: datatables/player/planet_map_cat.iff [patch_14_00.tre] -> no hoth",
+   "planet-related datatables: datatables/player/waypoint_planets.iff [patch_12_00.tre] -> no hoth",
+   "per-planet environment / music: datatables/environment/hoth.iff [mtg_patch_022.tre] -> mentions hoth",
+   "anything else named hoth: 631 files: appearance 295, clientdata 5, clienteffect 3, datatables 4, object 89, palette 1, playback 1, quest 9, sample 12, shader 75, snapshot 1, sound 14, string 3, terrain 6, texture 112, ui 1"
+  ],
+  "rc": 0,
+  "stderr_new": "",
+  "old_not_run": true
+ },
+ "tools/hoth/hoth_snapshot.py": {
+  "new_stdout_head": [
+   "snapshot/hoth.ws from mtg_planets.tre: 94 objects, 17 at world level",
+   "     2  object/static/structure/general/shared_camp_tent_s01.iff   e.g. -97 -2052; -84 -2041",
+   "     1  object/building/military/shared_outpost_starport.iff   e.g. 0 -2000",
+   "     1  object/building/military/shared_outpost_cloning_facility_s03.iff   e.g. -8 -2025",
+   "     1  object/building/general/shared_cave_04_ice_s01.iff   e.g. -385 2436",
+   "     1  object/building/general/shared_cave_02_ice.iff   e.g. -543 2674"
+  ],
+  "near_outpost": [
+   "snapshot/hoth.ws from mtg_planets.tre: 94 objects, 17 at world level",
+   "       0 m  object/building/military/shared_outpost_starport.iff  at 0 -2000 (height 0)",
+   "      26 m  object/building/military/shared_outpost_cloning_facility_s03.iff  at -8 -2025 (height -0)",
+   "      26 m  object/building/military/shared_pirate_warehouse.iff  at 8 -2025 (height 0)",
+   "      50 m  object/static/structure/general/shared_sandcrawler_debris_02.iff  at 0 -1950 (height 0)",
+   "      56 m  object/static/structure/general/shared_sandcrawler_debris_01.iff  at 3 -1944 (height 0)",
+   "      93 m  object/static/structure/general/shared_camp_tent_s01.iff  at -84 -2041 (height 0)",
+   "     101 m  object/static/structure/general/shared_lucky_despot_debris_lg_engine_s01.iff  at -85 -2055 (height 0)"
+  ],
+  "rc": [
+   0,
+   0
+  ],
+  "stderr_new": "",
+  "recorded_fact": "port log 13 Oct 22:50: 94 objects, 17 at world level; outpost starport at 0,-2000",
+  "old_not_run": true
+ },
+ "tools/hoth/hoth_closure.py": {
+  "tsv_identical_to_recorded": true,
+  "rows": [
+   488,
+   488
+  ],
+  "note": "first proof run only; refs() is still Bellum iff_tool (exec), the TRE side ours"
+ }
+}

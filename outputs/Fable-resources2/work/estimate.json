@@ -1,0 +1,297 @@
+{
+ "assumptions": "Offline estimate: of the test galaxy's in-shift galaxy-wide spawns, how many would the backfill put on Hoth, by class.\nPools from resource_manager.lua (dev 1c4c24fb); min/max pools per type from the merged resource_tree.iff; p = E[k] / N\nwith k uniform in [minpool, maxpool] capped at the 10 zones that existed at creation, N = 11 zones now.",
+ "galaxy_wide_in_shift": 64.0,
+ "by_pool": {
+  "minimum": 15,
+  "fixed": 22,
+  "random": 27.0
+ },
+ "expected_on_hoth_by_class": {
+  "mineral": 16.41,
+  "chemical": 5.1,
+  "gas": 2.71,
+  "water": 0.05
+ },
+ "expected_total": 24.3,
+ "detail": [
+  [
+   "minimum",
+   "steel",
+   1,
+   0.58,
+   {
+    "mineral": 0.58
+   }
+  ],
+  [
+   "minimum",
+   "copper",
+   1,
+   0.612,
+   {
+    "mineral": 0.61
+   }
+  ],
+  [
+   "minimum",
+   "aluminum",
+   1,
+   0.568,
+   {
+    "mineral": 0.57
+   }
+  ],
+  [
+   "minimum",
+   "ore_extrusive",
+   1,
+   0.182,
+   {
+    "mineral": 0.18
+   }
+  ],
+  [
+   "minimum",
+   "ore_intrusive",
+   1,
+   0.182,
+   {
+    "mineral": 0.18
+   }
+  ],
+  [
+   "minimum",
+   "ore_carbonate",
+   1,
+   0.727,
+   {
+    "mineral": 0.73
+   }
+  ],
+  [
+   "minimum",
+   "gemstone_crystalline",
+   1,
+   0.727,
+   {
+    "mineral": 0.73
+   }
+  ],
+  [
+   "minimum",
+   "gemstone_armophous",
+   1,
+   0.727,
+   {
+    "mineral": 0.73
+   }
+  ],
+  [
+   "minimum",
+   "radioactive_known",
+   1,
+   0.648,
+   {
+    "mineral": 0.65
+   }
+  ],
+  [
+   "minimum",
+   "fuel_petrochem_solid",
+   1,
+   0.172,
+   {
+    "mineral": 0.17
+   }
+  ],
+  [
+   "minimum",
+   "fuel_petrochem_liquid",
+   1,
+   0.182,
+   {
+    "chemical": 0.18
+   }
+  ],
+  [
+   "minimum",
+   "petrochem_inert_polymer",
+   2,
+   0.727,
+   {
+    "chemical": 1.45
+   }
+  ],
+  [
+   "minimum",
+   "petrochem_inert_lubricating_oil",
+   2,
+   0.727,
+   {
+    "chemical": 1.45
+   }
+  ],
+  [
+   "fixed",
+   "iron",
+   14,
+   0.172,
+   {
+    "mineral": 2.4
+   }
+  ],
+  [
+   "fixed",
+   "steel_bicorbantium",
+   1,
+   0.091,
+   {
+    "mineral": 0.09
+   }
+  ],
+  [
+   "fixed",
+   "steel_arveshian",
+   1,
+   0.091,
+   {
+    "mineral": 0.09
+   }
+  ],
+  [
+   "fixed",
+   "aluminum_perovskitic",
+   1,
+   0.091,
+   {
+    "mineral": 0.09
+   }
+  ],
+  [
+   "fixed",
+   "copper_borocarbitic",
+   1,
+   0.091,
+   {
+    "mineral": 0.09
+   }
+  ],
+  [
+   "fixed",
+   "fiberplast_gravitonic",
+   1,
+   0.091,
+   {
+    "chemical": 0.09
+   }
+  ],
+  [
+   "fixed",
+   "gas_reactive_organometallic",
+   1,
+   0.091,
+   {
+    "gas": 0.09
+   }
+  ],
+  [
+   "fixed",
+   "ore_siliclastic_fermionic",
+   1,
+   0.091,
+   {
+    "mineral": 0.09
+   }
+  ],
+  [
+   "fixed",
+   "radioactive_polymetric",
+   1,
+   0.091,
+   {
+    "mineral": 0.09
+   }
+  ],
+  [
+   "random",
+   "metal",
+   8.64,
+   0.465,
+   {
+    "mineral": 4.01
+   }
+  ],
+  [
+   "random",
+   "ore",
+   3.51,
+   0.368,
+   {
+    "mineral": 1.29
+   }
+  ],
+  [
+   "random",
+   "fuel_petrochem_solid",
+   1.62,
+   0.172,
+   {
+    "mineral": 0.28
+   }
+  ],
+  [
+   "random",
+   "radioactive",
+   1.08,
+   0.545,
+   {
+    "mineral": 0.59
+   }
+  ],
+  [
+   "random",
+   "gemstone",
+   3.24,
+   0.668,
+   {
+    "mineral": 2.16
+   }
+  ],
+  [
+   "random",
+   "gas",
+   4.32,
+   0.607,
+   {
+    "gas": 2.62
+   }
+  ],
+  [
+   "random",
+   "water",
+   0.54,
+   0.091,
+   {
+    "water": 0.05
+   }
+  ],
+  [
+   "random",
+   "fuel_petrochem_liquid",
+   1.89,
+   0.182,
+   {
+    "chemical": 0.34
+   }
+  ],
+  [
+   "random",
+   "petrochem_inert",
+   2.16,
+   0.727,
+   {
+    "chemical": 1.57
+   }
+  ]
+ ]
+}

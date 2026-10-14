@@ -29,13 +29,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 O3 = os.path.dirname(HERE)
 OSSUS = os.path.dirname(O3)
 OUTPUTS = os.path.dirname(OSSUS)
-for rel in ('Fable-planet-test/tools', 'Fable-ossus/tools', 'Fable-ossus/o3/tools'):
+for rel in ('tools', 'Fable-planet-test/tools', 'Fable-ossus/tools', 'Fable-ossus/o3/tools'):   # trn_read, trn_road and dds stay beside their batches
     p = os.path.join(OUTPUTS, rel)
     if p not in sys.path:
         sys.path.insert(0, p)
-import trn_iff  # noqa: E402
+from swgfmt import trn_iff  # noqa: E402
 import trn_read  # noqa: E402
-import swg_tables as st  # noqa: E402
+from swgfmt import swg_tables as st  # noqa: E402
 import dds  # noqa: E402
 from trn_road import RoadHeightEvaluator  # noqa: E402
 

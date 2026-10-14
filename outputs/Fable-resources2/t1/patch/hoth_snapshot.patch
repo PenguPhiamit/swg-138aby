@@ -1,0 +1,35 @@
+--- a/tools/hoth/hoth_snapshot.py
++++ b/tools/hoth/hoth_snapshot.py
+@@ -3,18 +3,17 @@
+     python -I tools/hoth/hoth_snapshot.py [planet] [x y radius]      default: hoth; with x y radius, only near there
+ 
+ Shows where the buildings, starports, shuttleports and caves of MTG's hoth.ws really are, to check coordinates
+-taken from other servers' scripts (Bellum's Hoth was built on a different snapshot). Read-only; uses Bellum's
+-TRE and IFF readers (AGPL-3.0, read before use).
++taken from other servers' scripts (Bellum's Hoth was built on a different snapshot). Read-only; uses our TRE and
++snapshot readers (outputs/tools/swgfmt).
+ """
+ import os, sys
+ from collections import Counter
+ 
+ H = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
+-BELLUM = os.path.join(H, 'work', 'research', 'Miphstoe_BellumGero-Live', 'MMOCoreORB', 'tools', 'newplanets')
+ CLIENT = os.path.join(H, 'outputs', 'SWG-client')
+-sys.path.insert(0, BELLUM)
+-exec(open(os.path.join(BELLUM, 'tre_inventory.py'), encoding='utf-8').read().split('if __name__')[0])
+-import iff_tool  # noqa: E402  (Bellum's; ws_objects is defined at module level)
++sys.path.insert(0, os.path.join(H, 'outputs', 'tools'))
++from swgfmt.fmt_tools import read_tre, _inflate, walk_tres  # noqa: E402  (ours)
++from swgfmt import ws_read  # noqa: E402  (ours)
+ 
+ 
+ def snapshot(planet):
+@@ -37,7 +36,7 @@
+     planet = args[0] if args and not args[0].lstrip('-').replace('.', '').isdigit() else 'hoth'
+     rest = [float(a) for a in args[1 if args and args[0] == planet else 0:]]
+     tre, data = snapshot(planet)
+-    objects = iff_tool.ws_objects(data)
++    objects = ws_read.ws_objects(data)
+     top = [o for o in objects if o[1] == 0]  # world objects (parent 0); children are cells and their contents
+     print(f'snapshot/{planet}.ws from {tre}: {len(objects)} objects, {len(top)} at world level')
+     if len(rest) == 3:

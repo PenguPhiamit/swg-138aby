@@ -18,7 +18,7 @@ What is added (only Hoth; everything else is byte-for-byte stock):
                                               map page (ui_map_hoth from MTG), data source, code-data entry. No route
                                               line yet (decorative; needs a look in the real client)
     ui/ui_planet_map.inc                      Endor's planetary-map page cloned for Hoth
-Format tools are ours: Fable's swg_tables, ui_inc and tre_write behind Fable-builder/tools/fmt_tools.py.
+Format tools are ours: outputs/tools/swgfmt (swg_tables, ui_inc, tre_write behind fmt_tools).
 """
 import filecmp, os, shutil, sys
 
@@ -26,9 +26,9 @@ H = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '.
 BASE = os.path.join(H, 'outputs', 'Documentation-support', 'hoth', 'client-base')
 STAGE = os.path.join(H, 'outputs', 'Local-content', 'local_planets')
 TRE = os.path.join(H, 'outputs', 'Local-content', 'local_planets.tre')
-sys.path.insert(0, os.path.join(H, 'outputs', 'Fable-builder', 'tools'))
-from fmt_tools import stf_tool, dt_tool, cstb_tool, tre_pack, read_tre, _inflate  # noqa: E402  (ours: swg_tables, trn_iff, tre_write)
-import hoth_ui  # noqa: E402  (ours: ui_inc)
+sys.path.insert(0, os.path.join(H, 'outputs', 'tools'))
+from swgfmt.fmt_tools import stf_tool, dt_tool, cstb_tool, tre_pack, read_tre, _inflate  # noqa: E402  (ours: swg_tables, trn_iff, tre_write)
+from swgfmt import hoth_ui  # noqa: E402  (ours: ui_inc)
 
 # Fares: row = departure, column = arrival (credits). Same pattern as Yavin IV: reached from Corellia only.
 FARES_TO_HOTH = {'corellia': 3000}

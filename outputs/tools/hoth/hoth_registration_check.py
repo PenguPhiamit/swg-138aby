@@ -4,14 +4,14 @@
 
 For each file the client uses to know about a planet (names, travel, ticket UI, planet map, CRC tables, music,
 environment), find the version that wins in our load order and say whether it mentions the planet. Read-only;
-uses Bellum's TRE reader the same way hoth_closure.py does.
+uses our TRE reader (outputs/tools/swgfmt) the same way hoth_closure.py does.
 """
 import os, re, sys
 
 H = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
-BELLUM = os.path.join(H, 'work', 'research', 'Miphstoe_BellumGero-Live', 'MMOCoreORB', 'tools', 'newplanets')
 CLIENT = os.path.join(H, 'outputs', 'SWG-client')
-exec(open(os.path.join(BELLUM, 'tre_inventory.py'), encoding='utf-8').read().split('if __name__')[0])
+sys.path.insert(0, os.path.join(H, 'outputs', 'tools'))
+from swgfmt.fmt_tools import read_tre, _inflate, walk_tres  # noqa: E402  (ours)
 
 # What each file is for, and a pattern for the files to look at (internal paths, lower case).
 WANTED = [
