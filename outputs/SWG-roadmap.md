@@ -313,3 +313,11 @@ Files that grow without limit get slow to read, for us and for the game tools. R
 - [ ] C17 owner setup, private redaction list, reviewed first post and explicit go; real Discord delivery untested.
 
 - [x] C19 / C4f read-only review (14 Oct, ChatGPT): five dev commits + six tools; 2 P2 findings, C4e-F1 resolved in leash; offline checks saved, fixes/runtime acceptance open. See Documentation-support/review-C4f/C4f-review.md.
+
+## ChatGPT checkpoint, 14 Oct afternoon
+
+- [x] Prepare isolated C26 resource/credit/waypoint/secondary-stat source commits and review protocol notes; unbuilt and game-untested.
+- [x] C17 privacy correction: raw text local-only, fixed-vocabulary curated feed, 24 offline fixtures; no posts.
+- [x] Authorized farming download checkpoint: 19 retained archives / 414 MB; remaining downloads and five 7z full audits open. No imports.
+- [x] C21 species classification checkpoint: 36 biological candidates, two human faction options, two droid options; complete census remains open.
+- [ ] Claude review/build/runtime C25/C26 and crew armor/tool prerequisites, then C23 acceptance.

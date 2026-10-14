@@ -1,0 +1,215 @@
+{
+  "slug": "free-houseplants",
+  "authors": "Yughues",
+  "source": "https://opengameart.org/content/free-houseplants",
+  "download": "https://opengameart.org/sites/default/files/Free%20Houseplants.7z",
+  "retrieved_utc": "2026-10-14T23:34:50.188119+00:00",
+  "imported": false,
+  "announced_bytes": 8738871,
+  "bytes": 8738871,
+  "sha256": "1aa8832278fd1df76f48b4b126a4b4926507ebd4c37294db9f0676f2598ecc1f",
+  "files": [
+    {
+      "name": "preview.jpg"
+    },
+    {
+      "name": "cross_bamboo.obj"
+    },
+    {
+      "name": "cross_palm.obj"
+    },
+    {
+      "name": "cross_pine.obj"
+    },
+    {
+      "name": "cross_shrub.obj"
+    },
+    {
+      "name": "cross_spikes.obj"
+    },
+    {
+      "name": "cylinder_bamboo.obj"
+    },
+    {
+      "name": "cylinder_palm.obj"
+    },
+    {
+      "name": "cylinder_pine.obj"
+    },
+    {
+      "name": "cylinder_shrub.obj"
+    },
+    {
+      "name": "cylinder_spikes.obj"
+    },
+    {
+      "name": "sphere_bamboo.obj"
+    },
+    {
+      "name": "sphere_palm.obj"
+    },
+    {
+      "name": "sphere_pine.obj"
+    },
+    {
+      "name": "sphere_shrub.obj"
+    },
+    {
+      "name": "sphere_spikes.obj"
+    },
+    {
+      "name": "square_bamboo.obj"
+    },
+    {
+      "name": "square_palm.obj"
+    },
+    {
+      "name": "square_pine.obj"
+    },
+    {
+      "name": "square_shrub.obj"
+    },
+    {
+      "name": "square_spikes.obj"
+    },
+    {
+      "name": "triangle_bamboo.obj"
+    },
+    {
+      "name": "triangle_palm.obj"
+    },
+    {
+      "name": "triangle_pine.obj"
+    },
+    {
+      "name": "triangle_shrub.obj"
+    },
+    {
+      "name": "triangle_spikes.obj"
+    },
+    {
+      "name": "cross_bamboo.FBX"
+    },
+    {
+      "name": "cross_palm.FBX"
+    },
+    {
+      "name": "cross_pine.FBX"
+    },
+    {
+      "name": "cross_shrub.FBX"
+    },
+    {
+      "name": "cross_spikes.FBX"
+    },
+    {
+      "name": "cylinder_bamboo.FBX"
+    },
+    {
+      "name": "cylinder_palm.FBX"
+    },
+    {
+      "name": "cylinder_pine.FBX"
+    },
+    {
+      "name": "cylinder_shrub.FBX"
+    },
+    {
+      "name": "cylinder_spikes.FBX"
+    },
+    {
+      "name": "sphere_bamboo.FBX"
+    },
+    {
+      "name": "sphere_palm.FBX"
+    },
+    {
+      "name": "sphere_pine.FBX"
+    },
+    {
+      "name": "sphere_shrub.FBX"
+    },
+    {
+      "name": "sphere_spikes.FBX"
+    },
+    {
+      "name": "square_bamboo.FBX"
+    },
+    {
+      "name": "square_palm.FBX"
+    },
+    {
+      "name": "square_pine.FBX"
+    },
+    {
+      "name": "square_shrub.FBX"
+    },
+    {
+      "name": "square_spikes.FBX"
+    },
+    {
+      "name": "triangle_bamboo.FBX"
+    },
+    {
+      "name": "triangle_palm.FBX"
+    },
+    {
+      "name": "triangle_pine.FBX"
+    },
+    {
+      "name": "triangle_shrub.FBX"
+    },
+    {
+      "name": "triangle_spikes.FBX"
+    },
+    {
+      "name": "bamboo.tga"
+    },
+    {
+      "name": "bamboo_normal.tga"
+    },
+    {
+      "name": "cover.tga"
+    },
+    {
+      "name": "cover_normal.tga"
+    },
+    {
+      "name": "palm.tga"
+    },
+    {
+      "name": "palm_normal.tga"
+    },
+    {
+      "name": "pine.tga"
+    },
+    {
+      "name": "pine_normal.tga"
+    },
+    {
+      "name": "pot.tga"
+    },
+    {
+      "name": "pot_normal.tga"
+    },
+    {
+      "name": "shrub.tga"
+    },
+    {
+      "name": "shrub_normal.tga"
+    },
+    {
+      "name": "spikes.tga"
+    },
+    {
+      "name": "spikes_normal.tga"
+    },
+    {
+      "name": "readme.txt"
+    }
+  ],
+  "notices": [],
+  "inventory_limit": "7z member names only; sizes and per-file hashes pending before import",
+  "status": "downloaded; retained original; import held pending full member audit",
+  "license": "CC0 per retained official licence field"
+}

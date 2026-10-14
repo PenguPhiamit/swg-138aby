@@ -1,0 +1,44 @@
+{
+  "slug": "cannabis-plants",
+  "authors": "Yughues",
+  "source": "https://opengameart.org/content/cannabis-plants",
+  "download": "https://opengameart.org/sites/default/files/Cannabis.7z",
+  "retrieved_utc": "2026-10-14T23:34:52.655072+00:00",
+  "imported": false,
+  "announced_bytes": 3275277,
+  "bytes": 3275277,
+  "sha256": "da4a5ae4c3a93a041bde4342e94fa8b78ac6da7ae11152a7beaee1116f95b109",
+  "files": [
+    {
+      "name": "preview.jpg"
+    },
+    {
+      "name": "readme.txt"
+    },
+    {
+      "name": "Cannabis.obj"
+    },
+    {
+      "name": "Cannabis_flowering.obj"
+    },
+    {
+      "name": "Cannabis.FBX"
+    },
+    {
+      "name": "Cannabis_flowering.FBX"
+    },
+    {
+      "name": "diffuse.tga"
+    },
+    {
+      "name": "normal.tga"
+    },
+    {
+      "name": "specular.tga"
+    }
+  ],
+  "notices": [],
+  "inventory_limit": "7z member names only; sizes and per-file hashes pending before import",
+  "status": "downloaded; retained original; import held pending full member audit",
+  "license": "CC0 per retained official licence field"
+}

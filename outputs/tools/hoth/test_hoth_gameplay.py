@@ -21,10 +21,14 @@ class Evidence(unittest.TestCase):
         self.assertEqual(len(notes), 2)
 
     def test_tools_can_belong_to_another_member(self):
-        leader = SimpleNamespace(inventory=lambda: {'items': [{'name': 'armor_composite'}]})
+        leader = SimpleNamespace(inventory=lambda: {'self': 42, 'items': [dict(name='armor_composite_' + k, parent=42) for k in ('chest_plate', 'leggings', 'helmet', 'boots', 'gloves', 'bicep_l', 'bicep_r', 'bracer_l', 'bracer_r')]})
         artisan = SimpleNamespace(inventory=lambda: {'items': [{'name': 'survey_tool_' + k} for k in
                                   ('mineral', 'chemical', 'gas', 'moisture', 'flora', 'liquid')]})
         self.assertTrue(preflight(SimpleNamespace(bots=[leader, artisan], note=lambda x: None)))
+
+    def test_armor_in_bag_does_not_pass_readiness(self):
+        leader = SimpleNamespace(inventory=lambda: {'self': 42, 'items': [dict(name='armor_composite_' + k, parent=99) for k in ('chest_plate', 'leggings', 'helmet', 'boots', 'gloves', 'bicep_l', 'bicep_r', 'bracer_l', 'bracer_r')]})
+        self.assertFalse(preflight(SimpleNamespace(bots=[leader], note=lambda _: None)))
 
     def test_existing_stack_gain(self):
         self.assertEqual(unit_gain({'items': [{'oid': 1, 'name': 'ore', 'units': 10}]},

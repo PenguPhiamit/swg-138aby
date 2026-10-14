@@ -52,3 +52,11 @@ Added tool/boss-armor preflight before any travel, searches for tools across cre
 ## Cleanup complete — report 20261014-150600
 
 `Bot-reports/Esk/20261014-150600-esk-recover-home.json`: **11/11 PASS**, 145 s. Start-of-run normal death recovery changed Esk from dead to upright; ordinary Hoth -> Corellia -> Tatooine shuttle travel passed. All three crew are home; final squad status checked before restoring `esk-routes.py` to the overnight plan. No staff commands, teleport, server restart or account changes. This validates the separate return-only recovery, not the revised C23 finally block or blocked gameplay checks. Driver claim released to the existing board owner after cleanup.
+
+## Approved setup and equipment check, 14 Oct 16:30
+
+Owner approved a setup-only exception for the existing test crew. Report 20261014-162840-esk_test_preparation: 12/12 setup checks passed; requested Master Rifleman, Master Swordsman and Master Doctor boxes plus gathering prerequisites granted; boss/support kits supplied. This does not close gameplay acceptance.
+
+Report 20261014-163001-esk_verify_equipment: 2/4 checks passed. Both fighters wear only composite helmet/gloves; seven other supplied pieces remain in inventory after normal transferItemArmor attempts. Server messages explicitly report insufficient secondary stats. Client string table resolves equip_armor_fail as insufficient health to wear armor; the prose message requests additional attribute values. No stat edits or extra staff grants were attempted. All stayed upright on Tatooine; Esk returned to squad plan.
+
+Lira owns mineral and liquid survey tools; chemical, gas, moisture and flora tools remain missing. Preflight now requires all nine composite pieces actually parented by each fighter, not merely an armor name anywhere in inventory. Nine offline C23 fixtures pass. Combat buffs/feasible kit and remaining tools are open. C26 telemetry build remains pending.

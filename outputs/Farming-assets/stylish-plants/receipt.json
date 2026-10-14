@@ -1,0 +1,98 @@
+{
+  "slug": "stylish-plants",
+  "authors": "Yughues",
+  "source": "https://opengameart.org/content/stylish-plants",
+  "download": "https://opengameart.org/sites/default/files/Stylish%20plants.7z",
+  "retrieved_utc": "2026-10-14T23:34:43.878735+00:00",
+  "imported": false,
+  "announced_bytes": 3859119,
+  "bytes": 3859119,
+  "sha256": "b406fb3f4566abfb8b7c336dd0956f5c24b5d2685c9e28e9a390bfcb0e607359",
+  "files": [
+    {
+      "name": "bush/preview.jpg"
+    },
+    {
+      "name": "bamboo/preview.jpg"
+    },
+    {
+      "name": "hemp/preview.jpg"
+    },
+    {
+      "name": "white flower/preview.jpg"
+    },
+    {
+      "name": "swirl/preview.jpg"
+    },
+    {
+      "name": "preview.jpg"
+    },
+    {
+      "name": "readme.txt"
+    },
+    {
+      "name": "bamboo/bamboo.obj"
+    },
+    {
+      "name": "bush/bush.obj"
+    },
+    {
+      "name": "hemp/hemp.obj"
+    },
+    {
+      "name": "swirl/swirl.obj"
+    },
+    {
+      "name": "white flower/white_flower.obj"
+    },
+    {
+      "name": "bamboo/bamboo.FBX"
+    },
+    {
+      "name": "bush/bush.FBX"
+    },
+    {
+      "name": "hemp/hemp.FBX"
+    },
+    {
+      "name": "swirl/swirl.FBX"
+    },
+    {
+      "name": "white flower/white_flower.FBX"
+    },
+    {
+      "name": "bush/dffuse.tga"
+    },
+    {
+      "name": "white flower/diffuse.tga"
+    },
+    {
+      "name": "hemp/diffuse.tga"
+    },
+    {
+      "name": "bamboo/diffuse.tga"
+    },
+    {
+      "name": "swirl/diffuse.tga"
+    },
+    {
+      "name": "white flower/"
+    },
+    {
+      "name": "swirl/"
+    },
+    {
+      "name": "hemp/"
+    },
+    {
+      "name": "bush/"
+    },
+    {
+      "name": "bamboo/"
+    }
+  ],
+  "notices": [],
+  "inventory_limit": "7z member names only; sizes and per-file hashes pending before import",
+  "status": "downloaded; retained original; import held pending full member audit",
+  "license": "CC0 per retained official licence field"
+}

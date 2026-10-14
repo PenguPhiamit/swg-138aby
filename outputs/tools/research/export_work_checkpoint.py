@@ -16,6 +16,8 @@ DEST = ROOT / 'output/pdf/SWG-project-checkpoint-2026-10-14.pdf'
 SOURCES = [
     'outputs/Documentation-support/available-work-20261014.md',
     'outputs/Documentation-support/C26-telemetry.md',
+    'outputs/Documentation-support/R2-idempotence-proposal.md',
+    'outputs/Documentation-support/server-species-census.md',
     'outputs/Documentation-support/C23-hoth-gameplay.md',
     'outputs/Documentation-support/hoth-release-gate.md',
     'outputs/Documentation-support/server-resource-and-implementation-census.md',

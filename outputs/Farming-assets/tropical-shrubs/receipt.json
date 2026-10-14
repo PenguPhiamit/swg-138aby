@@ -1,0 +1,113 @@
+{
+  "slug": "tropical-shrubs",
+  "authors": "Yughues",
+  "source": "https://opengameart.org/content/tropical-shrubs",
+  "download": "https://opengameart.org/sites/default/files/tropical%20shrubs.7z",
+  "retrieved_utc": "2026-10-14T23:34:47.541018+00:00",
+  "imported": false,
+  "announced_bytes": 4593850,
+  "bytes": 4593850,
+  "sha256": "645d9b4b685ebdbcb1f4bac4110f40c017f66e8540f5698da0a8c762419e7dc0",
+  "files": [
+    {
+      "name": "01/preview.jpg"
+    },
+    {
+      "name": "02/preview.jpg"
+    },
+    {
+      "name": "03/preview.jpg"
+    },
+    {
+      "name": "04/preview.jpg"
+    },
+    {
+      "name": "05/preview.jpg"
+    },
+    {
+      "name": "readme.txt"
+    },
+    {
+      "name": "01/trop_shrub_01.obj"
+    },
+    {
+      "name": "02/trop_shrub_02.obj"
+    },
+    {
+      "name": "03/trop_shrub_03.obj"
+    },
+    {
+      "name": "04/trop_shrub_04.obj"
+    },
+    {
+      "name": "05/trop_shrub_05.obj"
+    },
+    {
+      "name": "01/trop_shrub_01.FBX"
+    },
+    {
+      "name": "02/trop_shrub_02.FBX"
+    },
+    {
+      "name": "03/trop_shrub_03.FBX"
+    },
+    {
+      "name": "04/trop_shrub_04.FBX"
+    },
+    {
+      "name": "05/trop_shrub_05.FBX"
+    },
+    {
+      "name": "02/diffuse.tga"
+    },
+    {
+      "name": "01/diffuse.tga"
+    },
+    {
+      "name": "05/diffuse.tga"
+    },
+    {
+      "name": "03/diffuse.tga"
+    },
+    {
+      "name": "04/diffuse.tga"
+    },
+    {
+      "name": "01/normal.tga"
+    },
+    {
+      "name": "02/normal.tga"
+    },
+    {
+      "name": "05/normal.tga"
+    },
+    {
+      "name": "03/normal.tga"
+    },
+    {
+      "name": "04/normal.tga"
+    },
+    {
+      "name": "preview.jpg"
+    },
+    {
+      "name": "05/"
+    },
+    {
+      "name": "04/"
+    },
+    {
+      "name": "03/"
+    },
+    {
+      "name": "02/"
+    },
+    {
+      "name": "01/"
+    }
+  ],
+  "notices": [],
+  "inventory_limit": "7z member names only; sizes and per-file hashes pending before import",
+  "status": "downloaded; retained original; import held pending full member audit",
+  "license": "CC0 per retained official licence field"
+}

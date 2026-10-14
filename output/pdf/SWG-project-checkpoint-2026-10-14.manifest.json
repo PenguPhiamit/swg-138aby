@@ -6,13 +6,23 @@
   },
   {
     "path": "outputs/Documentation-support/C26-telemetry.md",
-    "sha256": "6375721c0ac2c7d865f612f7420290e58a6616e2313225390600bc6c6d2641d9",
-    "bytes": 3769
+    "sha256": "f3d2a4b27181b3c93870fcee93f0f3591828e0dff2cbfcfdfca94b94a458f76b",
+    "bytes": 4555
+  },
+  {
+    "path": "outputs/Documentation-support/R2-idempotence-proposal.md",
+    "sha256": "8852022d34dd1e0c67b62df570364fbeb314083b4fe9a52b523b4c93e6e17952",
+    "bytes": 2044
+  },
+  {
+    "path": "outputs/Documentation-support/server-species-census.md",
+    "sha256": "4bad3f499c455440c33043dda821bbb440d484afea308aea55271ce94b481778",
+    "bytes": 7569
   },
   {
     "path": "outputs/Documentation-support/C23-hoth-gameplay.md",
-    "sha256": "3cf3738584534c801c98b0e24e39914d63c71c6421c6ad18effd773a7a8be028",
-    "bytes": 6089
+    "sha256": "06ad601c319873b476b8eac3188f1e13e3df27446c495df6de9aa323e62499ec",
+    "bytes": 7333
   },
   {
     "path": "outputs/Documentation-support/hoth-release-gate.md",
@@ -21,8 +31,8 @@
   },
   {
     "path": "outputs/Documentation-support/server-resource-and-implementation-census.md",
-    "sha256": "a05db68efd774957ee6dff522ca44da1ad2a25a87fecf44f08d5ce266a36fc36",
-    "bytes": 14558
+    "sha256": "70656ccea32508890bd8407e134caca1301f1933227792545cd2a4ea9f7d5613",
+    "bytes": 15054
   },
   {
     "path": "outputs/Documentation-support/server-world-census.md",
@@ -31,13 +41,13 @@
   },
   {
     "path": "outputs/Documentation-support/farming-asset-download-queue.md",
-    "sha256": "4681f814082fb7b68f4b89d32cab34c5cee71b40aac173000d545a0067af090a",
-    "bytes": 5569
+    "sha256": "43b7e636a400b9e1f5282b365cd1e0d82db6218222a0efeb6a724aa55622914a",
+    "bytes": 5648
   },
   {
     "path": "outputs/Farming-assets/README.md",
-    "sha256": "1726b8176753467fb4566e2c71b6d2e597678eab0afd764775faab2403a5a8ce",
-    "bytes": 2250
+    "sha256": "27035d1e0cdf3dafb08362a42c70ff5ff3311c4432266010a31f4cbb80a931fd",
+    "bytes": 2872
   },
   {
     "path": "outputs/Documentation-support/creature-handler-top-tier-plan.md",
@@ -56,7 +66,7 @@
   },
   {
     "path": "outputs/SWG-roadmap.md",
-    "sha256": "e7beab9011958f196419f5a5b16ab74ac0dd363aa106b442ebef40b6d6b34329",
-    "bytes": 35632
+    "sha256": "2ac08764ea48814df6bdb6a22b7471f15ba73293f33a102f3b78cc6979f848a0",
+    "bytes": 36315
   }
 ]

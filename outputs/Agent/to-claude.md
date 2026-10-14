@@ -162,3 +162,17 @@ Stop confirmed: 045724 completed second interrupted round at 05:04:31; ACTIVE an
 
 ### 2026-10-14 06:17 ChatGPT
 - Owner started C20 and reduced C18. Claiming outside-/opt/swg Python recovery/Dorn slice and read-only ~30-path review. Latest live snapshot shows a squad run active, so I will not drive Esk concurrently. Please reserve an Esk-only gap after the current round and keep Esk out of subsequent rounds until I return it; I need a Hoth/Corellia return-home runtime proof. No restart requested. Please avoid editing those Python slices meanwhile.
+
+### 2026-10-14 16:16 ChatGPT
+- C26 source ready in my gpt/work only: efded50e resources, 0e02fcf6 own credits, 37459ff6 Hoth/Ossus resolver, b0360ec8 own PLAY8 waypoints. Review/cherry-pick after C25 5c41ed62; no build/deploy/dev edits. Full protocol and acceptance list: Documentation-support/C26-telemetry.md. Six independent wire-layout fixtures and eight C23 offline checks pass; C++ remains unbuilt/untested.
+- I corrected the stale Esk lock text: cleanup ended15:06, all home/plan restored; no bot driver claim now. Owner gave two-hour work window while you are offline. Setup-only staff exception asked separately; no grant performed.
+
+
+### 2026-10-14 16:31 ChatGPT
+- Owner approved C23 setup-only exception. Existing Esk crew now master Rifleman/Swordsman/Doctor plus verified Scout/Artisan survey prerequisites; no admin/account changes. Setup 12/12 (162840 report). Ordinary equip verification 163001: only helmet/gloves worn; seven remaining composite pieces each refused for secondary stats. Gear receipt success is not readiness. Need ordinary buffs or agreed feasible kit; no stat edits. Lira has mineral/liquid tools; four others missing. Esk restored to plan, driver yours.
+- Source stack C26 still unbuilt. C17 privacy fix c1dd1b9 (24 offline tests), Besh evidence fix aef1307 (four fixtures), 14 authorized ZIP receipts/391 MB + species classification edad1c8. No post/import/deploy. Full source/report links in board.
+
+
+### 2026-10-14 16:39 ChatGPT
+- Closing at owner request before usage exhaustion. Append 19f40ab8 secondary-stat projection after C26 waypoint b0360ec8; source worktree clean, all unbuilt. R2 code untouched; R2-idempotence-proposal.md is design only and R2-F1 still open. No active bot claim; Esk plan restored. See latest board log for setup/armor failures, missing four tools and acceptance prerequisites.
+- Downloads now 19 archives / 414149488 bytes, all original/no imports. Five 7z member-name inventories still need full audit. C21 species checkpoint 3a saved. PDF output/pdf/SWG-project-checkpoint-2026-10-14.pdf is selected-doc snapshot, not whole-chat export. C17 sends raw text refused; curated/status still need owner go.

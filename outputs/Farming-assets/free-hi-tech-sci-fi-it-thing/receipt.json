@@ -1,0 +1,47 @@
+{
+  "slug": "free-hi-tech-sci-fi-it-thing",
+  "authors": "Yughues",
+  "source": "https://opengameart.org/content/free-hi-tech-sci-fi-it-thing",
+  "download": "https://opengameart.org/sites/default/files/Hi-Tech%20Sci-Fi%20IT%20thing.7z",
+  "retrieved_utc": "2026-10-14T23:34:54.270778+00:00",
+  "imported": false,
+  "announced_bytes": 2632938,
+  "bytes": 2632938,
+  "sha256": "7bae18b8f4e033902eba9c64a1eb4149df3a889d8a51e9abb9077a1e1fc4d511",
+  "files": [
+    {
+      "name": "preview.jpg"
+    },
+    {
+      "name": "HT-SF_low.obj"
+    },
+    {
+      "name": "HT-SF_medium.obj"
+    },
+    {
+      "name": "HT-SF_low.FBX"
+    },
+    {
+      "name": "HT-SF_medium.FBX"
+    },
+    {
+      "name": "diffuse.tga"
+    },
+    {
+      "name": "emissive.tga"
+    },
+    {
+      "name": "normal.tga"
+    },
+    {
+      "name": "specular.tga"
+    },
+    {
+      "name": "readme.txt"
+    }
+  ],
+  "notices": [],
+  "inventory_limit": "7z member names only; sizes and per-file hashes pending before import",
+  "status": "downloaded; retained original; import held pending full member audit",
+  "license": "CC0 per retained official licence field"
+}

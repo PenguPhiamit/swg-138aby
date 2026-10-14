@@ -83,15 +83,21 @@ def quest_waypoint(before, after, target):
 
 
 def preflight(g):
-    inventories = [(member, member.inventory().get('items', [])) for member in g.bots]
+    snapshots = [(member, member.inventory()) for member in g.bots]
+    inventories = [(member, reply.get('items', [])) for member, reply in snapshots]
     missing = [kind for kind in ('mineral', 'chemical', 'gas', 'moisture', 'flora', 'liquid')
                if not any('survey_tool_' + kind in str(item.get('name'))
                           for _, items in inventories for item in items)]
-    fighter_ready = any('armor_composite' in str(item.get('name')) for item in inventories[0][1])
+    pieces = ('chest_plate', 'leggings', 'helmet', 'boots', 'gloves', 'bicep_l', 'bicep_r', 'bracer_l', 'bracer_r')
+    fighters = [snapshots[0]] + [(member, reply) for member, reply in snapshots[1:]
+                               if getattr(member, 'first', None) == 'Tovan']
+    fighter_ready = all(reply.get('self') and all(any(
+        'armor_composite_' + piece in str(item.get('name')) and item.get('parent') == reply['self']
+        for item in reply.get('items', [])) for piece in pieces) for _, reply in fighters)
     if missing:
         g.note('BLOCKED: crew preparation lacks survey tools: ' + ', '.join(missing))
     if not fighter_ready:
-        g.note('BLOCKED: leader has no observable approved boss-kit armor; do not leave the outpost for Hoth testing')
+        g.note('BLOCKED: fighters must wear all nine approved composite pieces; bag contents are not readiness')
     return not missing and fighter_ready
 
 

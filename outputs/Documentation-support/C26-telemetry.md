@@ -32,6 +32,11 @@ Waypoint records preserve ID, cell, x/y/z, planet CRC/name, Unicode name, color 
 4. Confirm survey resource IDs match the resulting containers. No quantity evidence may be inferred from a system success message.
 5. Compare empty and populated datapad waypoints with the game client. Create/update/delete a normal waypoint; test a quest-created Hoth marker and scene change/relog. Confirm unrelated player data is absent.
 6. Confirm baseline interception restores the packet offset even after parse errors; ordinary client baseline processing still runs.
-7. Run the prepared C23 acceptance only after crew preparation and an exclusive driver claim. Missing survey tools, unsafe kit and the pending setup exception still block that run.
+7. Run the prepared C23 acceptance only after crew preparation and an exclusive driver claim. Setup exception was approved and used at 16:28. Four missing survey-tool categories, insufficient secondary stats for seven composite pieces, and the telemetry build still block that run.
 
 Source recipes under `tools/agent/prepare_*_telemetry.py` document the exact edits but intentionally refuse a dirty/wrong worktree and are not reusable deployment scripts. No runtime claims are made here.
+
+## Secondary attributes follow-up
+
+Append source commit 19f40ab8 after b0360ec8: creatureState now projects all nine received current and maximum attributes under attributes/max_attributes, preserving existing three-pool keys. Ordering verified against templates/params/creature/CreatureAttribute.cpp: health, strength, constitution, action, quickness, stamina, mind, focus, willpower. This enables later inspection of armor prerequisites and buffs; it changes no stats and performs no new parsing. Diff check passed; unbuilt/runtime untested. Compare a known character's nine values and secondary-stat buffs against the client after build.
+

@@ -47,4 +47,4 @@ Not scheduled: paid packs; ARR/NC/unclear-provenance alternatives; Star Wars vap
 
 ## Download checkpoint, 14 Oct afternoon
 
-Fourteen original ZIPs across nine source entries are retained in `../Farming-assets/`, with hashes, file inventories, source evidence and notices. See `../Farming-assets/README.md` and receipts.json. No files imported or executed. Poly Haven API returned HTTP 403 and is held. Remaining packages stay queued; 7z inventories and login-gated sources are not complete.
+Nineteen original archives (14 ZIP, five 7z) across fourteen source entries are retained in `../Farming-assets/`, with hashes, file inventories, source evidence and notices. See `../Farming-assets/README.md` and receipts.json. No files imported or executed. Poly Haven API returned HTTP 403 and is held. Remaining packages stay queued; 7z member-name inventories are saved, but full member/notice audits and login-gated sources are not complete.

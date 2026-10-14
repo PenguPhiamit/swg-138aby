@@ -8,11 +8,18 @@ import json
 from pathlib import Path
 import urllib.request
 import zipfile
+import subprocess
+import urllib.parse
 from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[3] / 'outputs/Farming-assets'
 CAP = 3_000_000_000
 PACKAGES = [
+    *[(slug, 'Yughues', 'https://opengameart.org/content/' + slug,
+       'https://opengameart.org/sites/default/files/' + filename) for slug, filename in [
+           ('stylish-plants', 'Stylish%20plants.7z'), ('tropical-shrubs', 'tropical%20shrubs.7z'),
+           ('free-houseplants', 'Free%20Houseplants.7z'), ('cannabis-plants', 'Cannabis.7z'),
+           ('free-hi-tech-sci-fi-it-thing', 'Hi-Tech%20Sci-Fi%20IT%20thing.7z')]],
     ('interface-textures', 'rubberduck',
      'https://opengameart.org/content/sci-fi-interface-textures',
      'https://opengameart.org/sites/default/files/sci-fi-interface-textures.zip'),
@@ -54,15 +61,16 @@ def get(url):
 def run():
     ROOT.mkdir(parents=True, exist_ok=True)
     receipts = []
-    used = sum(p.stat().st_size for p in ROOT.rglob('*.zip'))
+    used = sum(p.stat().st_size for p in ROOT.rglob('*') if p.suffix in ('.zip', '.7z'))
     for slug, authors, source, url in PACKAGES:
         folder = ROOT / slug
         folder.mkdir(exist_ok=True)
+        target = folder / ('original' + Path(urllib.parse.urlparse(url).path).suffix)
         cached = folder / 'receipt.json'
-        if cached.exists() and (folder / 'original.zip').exists():
+        if cached.exists() and target.exists():
             previous = json.loads(cached.read_text(encoding='utf-8'))
             if previous.get('status', '').startswith('downloaded'):
-                with (folder / 'original.zip').open('rb') as saved:
+                with target.open('rb') as saved:
                     if hashlib.file_digest(saved, 'sha256').hexdigest() == previous.get('sha256'):
                         receipts.append({k: v for k, v in previous.items() if k != 'files'})
                         continue
@@ -73,8 +81,11 @@ def run():
                 page = reply.read(2_000_001)
             if len(page) > 2_000_000 or b'CC0' not in page:
                 raise ValueError('source licence evidence missing or oversized')
+            if 'opengameart.org' in source:
+                field = page[page.index(b'License(s)'):].split(b'Collections:', 1)[0]
+                if b'publicdomain/zero/1.0' not in field:
+                    raise ValueError('CC0 grant missing from actual licence field')
             (folder / 'source.html').write_bytes(page)
-            target = folder / 'original.zip'
             if not target.exists():
                 with get(url) as reply:
                     size = reply.headers.get('Content-Length')
@@ -97,6 +108,21 @@ def run():
             record['bytes'] = target.stat().st_size
             with target.open('rb') as saved:
                 record['sha256'] = hashlib.file_digest(saved, 'sha256').hexdigest()
+            if target.suffix == '.7z':
+                listing = subprocess.run(['tar', '-tf', str(target)], capture_output=True,
+                                         timeout=20, check=True).stdout.decode('utf-8', 'replace')
+                names = listing.splitlines()
+                if len(names) > 100_000 or len(listing) > 10_000_000:
+                    raise ValueError('archive inventory limit exceeded')
+                record['files'] = [dict(name=name) for name in names]
+                record['notices'] = []
+                record['inventory_limit'] = '7z member names only; sizes and per-file hashes pending before import'
+                record['status'] = 'downloaded; retained original; import held pending full member audit'
+                record['license'] = 'CC0 per retained official licence field'
+                (folder / 'receipt.json').write_text(json.dumps(record, indent=2), encoding='utf-8')
+                receipts.append({k: v for k, v in record.items() if k != 'files'})
+                print(slug, record['status'], record['bytes'], flush=True)
+                continue
             with zipfile.ZipFile(target) as archive:
                 files = archive.infolist()
                 if len(files) > 100_000 or sum(f.file_size for f in files) > 10_000_000_000:
