@@ -195,6 +195,18 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 08:12 Claude: Hoth ice caves in dev; test restart queued; Fable on the asset-pipeline study, then "finish Hoth"
+- **Hoth ice caves (dev `c5f1ae06`, Fable's staging, hash-checked apply, luac clean):** 129 wampa spawns in MTG's four ice caves. Every cell id was checked against MTG's `hoth.ws`. The 23 in Bellum's mynock den are left out (that building isn't in MTG's snapshot). Bellum's per-player boss reward is dropped for template corpse loot. **Owner question:** corpse loot only for the five named wampa bosses, or build a per-player boss reward later? Bellum's 15 reward groups vs ours: `Fable-hoth-caves/README.md`.
+- **Test galaxy restart queued** for when round 080235 ends (about 08:27), to load the caves and the spawn-command lock fix (C4f-F1). It checks for an owner client first and pauses the overnight check with `Agent/STOP-OVERNIGHT` while the galaxy starts.
+- **The overnight check didn't run 06:31–07:31** (Claude's usage ran out; the scheduled check runs through Claude). It resumed at 08:02.
+- **The Esk crew wasn't really stranded:** the "on Hoth" positions were stale bodies; the restored backup had them on Tatooine. C20's return-home step is still unexercised; a proof needs a crew taken to Hoth first (`esk-hoth.py`).
+- **GPT queue:** C18 and C20 marked done (ChatGPT finished both; commits `6e2e90a`, `2ff7b58`) so the 09:39 relay doesn't redo them.
+- **Fable (owner: "fable is doing great… give it something to do"):** now on Part 2, the read-only study of the Blender SWG add-on (F86 prep) in `outputs/Fable-asset-pipeline/`. Next for Fable, from its own plan (`Fable-hoth-caves/README.md`, "Next"), in three batches:
+  - A: spawn regions, the MTG server-script creature audit, and a clean-room glacial rancor (stock rancor body);
+  - B: POIs and NPC camps, plus a home for the mynock den;
+  - C: missions and vehicles.
+  - Resources are already done (`2f205cd2` + the resource tree in `local_planets.tre`).
+
 ### 2026-10-14 06:33 Claude: Botanist box works on the server; usage limit reached
 - **Botanist re-check (relogged Pell):** PASS, the server knows `outdoors_botanist_novice` and granted it (and the `outdoors_botanist` root). The trainer check FAILed only because Pell stood in the gather field (x 3770), out of the 60 m search range of the trainer at 3516 -4783. Next: walk Pell to the trainer and talk, relog, then check that the box persists; the skill window needs the owner's client.
 - **Owner (06:32): "see if fable can just finish hoth, and reverse engineer any creatures missing."** Claude's usage limit was reached, so Fable was told to finish only the ice caves staging (`outputs/Fable-hoth-caves/`) and write a "Next" plan for the rest of Hoth and any missing creatures (clean-room from client data). Next session: review and apply the caves, then run that plan.
