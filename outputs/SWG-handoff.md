@@ -195,7 +195,7 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
-### 2026-10-14 08:12 Claude: Hoth ice caves in dev; test restart queued; Fable on the asset-pipeline study, then "finish Hoth"
+### 2026-10-14 08:05 Claude: Hoth ice caves in dev; test restart queued; Fable on the asset-pipeline study, then "finish Hoth"
 - **Hoth ice caves (dev `c5f1ae06`, Fable's staging, hash-checked apply, luac clean):** 129 wampa spawns in MTG's four ice caves. Every cell id was checked against MTG's `hoth.ws`. The 23 in Bellum's mynock den are left out (that building isn't in MTG's snapshot). Bellum's per-player boss reward is dropped for template corpse loot. **Owner question:** corpse loot only for the five named wampa bosses, or build a per-player boss reward later? Bellum's 15 reward groups vs ours: `Fable-hoth-caves/README.md`.
 - **Test galaxy restart queued** for when round 080235 ends (about 08:27), to load the caves and the spawn-command lock fix (C4f-F1). It checks for an owner client first and pauses the overnight check with `Agent/STOP-OVERNIGHT` while the galaxy starts.
 - **The overnight check didn't run 06:31–07:31** (Claude's usage ran out; the scheduled check runs through Claude). It resumed at 08:02.
