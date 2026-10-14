@@ -138,6 +138,22 @@
    "added": "2026-10-14 05:39 Claude",
    "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Task C18 on h/outputs/SWG-handoff.md: cross-review Fable's NGE/MTG backport batches 1 and 2, already applied to dev (commits 0c44d431, 5c7ae017). Everything is in h/outputs/Fable-backport/: README.md, batch1.diff, batch2.diff, diffs/, checks.json, checks-batch2.json and the staged trees. Your usage is limited, so keep this to a sample and stop when you've covered it. Check: (1) the 1,074 path repairs really map a mangled server path to the real client path (sample about 30, covering all nine patterns, against the client paths in checks.json); (2) the 13 new wearables follow Core3's wearable templates and pre-CU species rules; (3) the batch-2 include wiring and the 10 new templates; (4) any risk to existing content (e.g. something that spawned an MTG object by its old mangled path; mtg_catalog.lua users). Write Documentation-support/review-C18/C18-review.md with P1/P2/P3 findings (file:line, concrete failure scenario). Read-only: do not edit /opt/swg or the staged files. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
    "result": "Done by ChatGPT 14 Oct as a reduced sample (commit 6e2e90a, Documentation-support/C18-backport-sample-review.md): 30 objects, no new P1/P2; follow-ups listed. Marked done by Claude 08:05."
+  },
+  {
+   "id": "c21-resource-census",
+   "effort": "medium",
+   "status": "open",
+   "model": "gpt-6.1-sol",
+   "added": "2026-10-14 08:42 Claude (owner's C21, 14 Oct)",
+   "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL now; Claude leads; redact names in anything published; h/ is a local git repo, commit your own finished work ending 'Agent: ChatGPT'). Task C21 (the owner's, on the board): quantify the server's local resources and assets, Wookieepedia Legends coverage and implementation candidates (rights, missing dependencies, maturity, effort), following your own plan in Documentation-support/server-resource-and-implementation-census.md. Work in one bounded checkpoint per run (about a third of your usage at most), save the checkpoint state in that file, and stop so the next queued task gets a turn; set this task back to open in Agent/gpt-queue.json if more checkpoints remain. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
+  },
+  {
+   "id": "c22-hoth-review",
+   "effort": "high",
+   "status": "open",
+   "model": "gpt-6.1-sol",
+   "added": "2026-10-14 08:42 Claude",
+   "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL now; Claude leads; redact names in anything published; h/ is a local git repo, commit your own finished work ending 'Agent: ChatGPT'). Task C22: independent review of the 14 Oct Hoth and fix commits in /opt/swg/Core3-dev (read-only; use git -C /opt/swg/Core3-dev show as swgemu): c5f1ae06 (ice caves, Fable from Bellum), 69eb77fe (8 area spawners + clean-room glacial rancor), de1b679a (Hoth camps), 23014f39 (C4f-F1 spawn-area locks), 90f60a81 (C4e-F2 movement scene/connection guard), plus f0b192e in the h repo (C4f-F2 archive builder). Fable's staging notes are in outputs/Fable-hoth-caves/, Fable-hoth-batchA/, Fable-hoth-batchB/. Check against AGENTS.md (provenance/credit of Bellum's AGPL work, clean-room rancor) and for concrete defects: wrong spawnMobile/spawnSceneObject arguments, cells or coordinates off the map or in no-build areas, spawn-group/lair names that don't exist, region overlaps that matter, lock order in the two C++ fixes. Write Documentation-support/review-C22/C22-review.md with P1/P2/P3 (file:line, concrete failure scenario). Do not edit /opt/swg, build, restart or drive bots. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
   }
  ]
 }
