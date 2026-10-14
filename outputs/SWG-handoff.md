@@ -218,7 +218,7 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
-### 2026-10-14 13:50 Claude: Hoth check 32/33 after the restart; the owner's Hoth walkthrough and an Echo Base plan; Fable on resource names
+### 2026-10-14 13:43 Claude: Hoth check 32/33 after the restart; the owner's Hoth walkthrough and an Echo Base plan; Fable on resource names
 - **Third test restart 13:32:** Vell standing still, 33 Hoth regions (15 + 18 named), archive `6cfeeb51`. **Bot check 13:43, 32/33:** all ticket purchases pass (more than 5 minutes after the start, which supports the boot-delay diagnosis). **Vell stands at exactly (44, -2010)** and talks. The one FAIL was the check's own wrong expectation (salvage-detail props; there are none by design), now fixed.
 - **For the owner: `Fable-hoth-guide/hoth-first-session.md`,** one route through everything built tonight (nine stops: waypoints, fares, boss levels, what to report). Verified versus unverified is marked.
 - **`Fable-hoth-guide/echo-base-plan.md`:**
