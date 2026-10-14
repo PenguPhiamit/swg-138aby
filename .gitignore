@@ -1,8 +1,7 @@
 # Local history for the SWG project (owner, 14 Oct 2026: "do the local history for now"). No remote yet.
 # Keep this list push-safe even though nothing is pushed: no secrets, no game files, no other people's downloads,
 # nothing huge. After adding a folder, check `git status --ignored` before committing. Names: AGENTS.md, Privacy.
-# Before any first push: commit 8ac7857 still holds the three SWG-Source files untracked in bc51078, so push a
-# filtered or fresh history, never this one as it stands.
+# Pushes go only through outputs/tools/github_export.py, which filters the history (AGENTS.md).
 
 # ---- secrets and private settings (AGENTS.md, Privacy) ----
 outputs/SWG-login.txt
