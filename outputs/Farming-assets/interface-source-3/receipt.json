@@ -1,0 +1,126 @@
+{
+  "slug": "interface-source-3",
+  "authors": "rubberduck",
+  "source": "https://opengameart.org/content/sci-fi-interface-textures",
+  "download": "https://opengameart.org/sites/default/files/interface_3_source.zip",
+  "retrieved_utc": "2026-10-14T23:22:05.695788+00:00",
+  "imported": false,
+  "announced_bytes": 22051602,
+  "bytes": 22051602,
+  "sha256": "82315f2238d6f3f1eecfd14dfffb3741a11b795ee43b97368e16764797f0025d",
+  "files": [
+    {
+      "name": "interface_3.blend",
+      "bytes": 1422128,
+      "crc32": 3660048053
+    },
+    {
+      "name": "interface_3.xcf",
+      "bytes": 34244243,
+      "crc32": 3182265592
+    },
+    {
+      "name": "parts/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "parts/001.png",
+      "bytes": 140548,
+      "crc32": 1886104653
+    },
+    {
+      "name": "parts/002.png",
+      "bytes": 192884,
+      "crc32": 2921865903
+    },
+    {
+      "name": "parts/003.png",
+      "bytes": 104313,
+      "crc32": 4021389402
+    },
+    {
+      "name": "parts/004.png",
+      "bytes": 164748,
+      "crc32": 1786162270
+    },
+    {
+      "name": "parts/005.png",
+      "bytes": 96048,
+      "crc32": 3514641051
+    },
+    {
+      "name": "parts/006.png",
+      "bytes": 144463,
+      "crc32": 282744240
+    },
+    {
+      "name": "parts/007.png",
+      "bytes": 113611,
+      "crc32": 36577827
+    },
+    {
+      "name": "parts/008.png",
+      "bytes": 104356,
+      "crc32": 3809986671
+    },
+    {
+      "name": "parts/009.png",
+      "bytes": 281029,
+      "crc32": 2950318722
+    },
+    {
+      "name": "parts/010.png",
+      "bytes": 101525,
+      "crc32": 1461227591
+    },
+    {
+      "name": "parts_w_effect/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "parts_w_effect/001.png",
+      "bytes": 623238,
+      "crc32": 279027728
+    },
+    {
+      "name": "parts_w_effect/002.png",
+      "bytes": 319560,
+      "crc32": 3790037455
+    },
+    {
+      "name": "parts_w_effect/004.png",
+      "bytes": 173195,
+      "crc32": 897882388
+    },
+    {
+      "name": "parts_w_effect/005.png",
+      "bytes": 120077,
+      "crc32": 1384142755
+    },
+    {
+      "name": "parts_w_effect/007.png",
+      "bytes": 222610,
+      "crc32": 3418163037
+    },
+    {
+      "name": "parts_w_effect/008.png",
+      "bytes": 46871,
+      "crc32": 3234970895
+    },
+    {
+      "name": "parts_w_effect/009.png",
+      "bytes": 700568,
+      "crc32": 2955916685
+    },
+    {
+      "name": "parts_w_effect/010.png",
+      "bytes": 163683,
+      "crc32": 1025823492
+    }
+  ],
+  "notices": [],
+  "status": "downloaded; retained original; import not approved",
+  "license": "CC0 per retained official source; inspect notices before import"
+}

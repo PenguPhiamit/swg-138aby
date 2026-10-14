@@ -1,0 +1,950 @@
+{
+  "slug": "industrial-original",
+  "authors": "rubberduck; Yughues (some textures)",
+  "source": "https://opengameart.org/content/high-quality-industrial-asset-pack",
+  "download": "https://opengameart.org/sites/default/files/OGA_industrial.zip",
+  "retrieved_utc": "2026-10-14T23:19:47.894729+00:00",
+  "imported": false,
+  "bytes": 100958013,
+  "sha256": "6516e0c5b58c2724b631d93412f52a5964c8581653ddda3e2566aa3ccb00e5a3",
+  "files": [
+    {
+      "name": "baked_textures/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "baked_textures/wall_thing_spec.jpg",
+      "bytes": 196540,
+      "crc32": 239415473
+    },
+    {
+      "name": "baked_textures/wall_thing_norm.jpg",
+      "bytes": 619232,
+      "crc32": 3809178534
+    },
+    {
+      "name": "baked_textures/wall_thing_diff.jpg",
+      "bytes": 233692,
+      "crc32": 134346461
+    },
+    {
+      "name": "baked_textures/wall_thing_ao.jpg",
+      "bytes": 144056,
+      "crc32": 1248724205
+    },
+    {
+      "name": "baked_textures/vent_spec.jpg",
+      "bytes": 263460,
+      "crc32": 2458236811
+    },
+    {
+      "name": "baked_textures/vent_norm.jpg",
+      "bytes": 295233,
+      "crc32": 2962625957
+    },
+    {
+      "name": "baked_textures/vent_diff.jpg",
+      "bytes": 146678,
+      "crc32": 2077002059
+    },
+    {
+      "name": "baked_textures/vent_ao.jpg",
+      "bytes": 223260,
+      "crc32": 4001340500
+    },
+    {
+      "name": "baked_textures/vent_3_spec.jpg",
+      "bytes": 223350,
+      "crc32": 2146841211
+    },
+    {
+      "name": "baked_textures/vent_3_norm.jpg",
+      "bytes": 128095,
+      "crc32": 1599717139
+    },
+    {
+      "name": "baked_textures/vent_3_diff.jpg",
+      "bytes": 88053,
+      "crc32": 2467575718
+    },
+    {
+      "name": "baked_textures/vent_3_ao.jpg",
+      "bytes": 206101,
+      "crc32": 1435123607
+    },
+    {
+      "name": "baked_textures/vent_2_spec.jpg",
+      "bytes": 217623,
+      "crc32": 1939357098
+    },
+    {
+      "name": "baked_textures/vent_2_norm.jpg",
+      "bytes": 95177,
+      "crc32": 244879383
+    },
+    {
+      "name": "baked_textures/vent_2_diff.jpg",
+      "bytes": 88430,
+      "crc32": 1506628318
+    },
+    {
+      "name": "baked_textures/vent_2_ao.jpg",
+      "bytes": 186937,
+      "crc32": 2541498582
+    },
+    {
+      "name": "baked_textures/tower_spec.jpg",
+      "bytes": 1025814,
+      "crc32": 1615277166
+    },
+    {
+      "name": "baked_textures/tower_part_spec.jpg",
+      "bytes": 105869,
+      "crc32": 1321261683
+    },
+    {
+      "name": "baked_textures/tower_part_norm.jpg",
+      "bytes": 107618,
+      "crc32": 1292418589
+    },
+    {
+      "name": "baked_textures/tower_part_diff.jpg",
+      "bytes": 55680,
+      "crc32": 1672548662
+    },
+    {
+      "name": "baked_textures/tower_part_ao.jpg",
+      "bytes": 56625,
+      "crc32": 172403164
+    },
+    {
+      "name": "baked_textures/tower_norm.jpg",
+      "bytes": 1358638,
+      "crc32": 38201262
+    },
+    {
+      "name": "baked_textures/tower_diff.jpg",
+      "bytes": 863648,
+      "crc32": 1993227627
+    },
+    {
+      "name": "baked_textures/tower_ao.jpg",
+      "bytes": 989229,
+      "crc32": 1445636528
+    },
+    {
+      "name": "baked_textures/tower_2_spec.jpg",
+      "bytes": 696747,
+      "crc32": 2682549881
+    },
+    {
+      "name": "baked_textures/tower_2_norm.jpg",
+      "bytes": 999293,
+      "crc32": 3218973071
+    },
+    {
+      "name": "baked_textures/tower_2_diff.jpg",
+      "bytes": 770890,
+      "crc32": 2429768392
+    },
+    {
+      "name": "baked_textures/tower_2_ao.jpg",
+      "bytes": 1012945,
+      "crc32": 3772330681
+    },
+    {
+      "name": "baked_textures/tank_sphere_spec.jpg",
+      "bytes": 215620,
+      "crc32": 414347378
+    },
+    {
+      "name": "baked_textures/tank_sphere_norm.jpg",
+      "bytes": 132573,
+      "crc32": 737527015
+    },
+    {
+      "name": "baked_textures/tank_sphere_holder_spec.jpg",
+      "bytes": 123855,
+      "crc32": 48463862
+    },
+    {
+      "name": "baked_textures/tank_sphere_holder_norm.jpg",
+      "bytes": 185010,
+      "crc32": 1226872108
+    },
+    {
+      "name": "baked_textures/tank_sphere_holder_diff.jpg",
+      "bytes": 130308,
+      "crc32": 821469358
+    },
+    {
+      "name": "baked_textures/tank_sphere_holder_ao.jpg",
+      "bytes": 304754,
+      "crc32": 2261084620
+    },
+    {
+      "name": "baked_textures/tank_sphere_diff.jpg",
+      "bytes": 135595,
+      "crc32": 704682026
+    },
+    {
+      "name": "baked_textures/tank_sphere_ao.jpg",
+      "bytes": 194018,
+      "crc32": 1526799242
+    },
+    {
+      "name": "baked_textures/tank_spec.jpg",
+      "bytes": 523820,
+      "crc32": 2968807664
+    },
+    {
+      "name": "baked_textures/station_norm.jpg",
+      "bytes": 295660,
+      "crc32": 1699298638
+    },
+    {
+      "name": "baked_textures/tank_capsule_ao.jpg",
+      "bytes": 348569,
+      "crc32": 878353211
+    },
+    {
+      "name": "baked_textures/tank_ao.jpg",
+      "bytes": 389012,
+      "crc32": 3969455424
+    },
+    {
+      "name": "baked_textures/tank_2_spec.jpg",
+      "bytes": 871213,
+      "crc32": 1580160162
+    },
+    {
+      "name": "baked_textures/tank_2_norm.jpg",
+      "bytes": 1268458,
+      "crc32": 4108511070
+    },
+    {
+      "name": "baked_textures/tank_2_diff_edited.jpg",
+      "bytes": 807208,
+      "crc32": 3343960115
+    },
+    {
+      "name": "baked_textures/tank_2_diff.jpg",
+      "bytes": 780062,
+      "crc32": 2733233742
+    },
+    {
+      "name": "baked_textures/tank_2_ao.jpg",
+      "bytes": 949552,
+      "crc32": 4187024024
+    },
+    {
+      "name": "baked_textures/station_spec.jpg",
+      "bytes": 121614,
+      "crc32": 2801089810
+    },
+    {
+      "name": "baked_textures/station_diff.jpg",
+      "bytes": 189986,
+      "crc32": 2349683310
+    },
+    {
+      "name": "baked_textures/station_ao.jpg",
+      "bytes": 128283,
+      "crc32": 1092434905
+    },
+    {
+      "name": "baked_textures/roof_thing_spec.jpg",
+      "bytes": 200649,
+      "crc32": 722849952
+    },
+    {
+      "name": "baked_textures/roof_thing_norm.jpg",
+      "bytes": 385434,
+      "crc32": 2671428360
+    },
+    {
+      "name": "baked_textures/roof_thing_diff.jpg",
+      "bytes": 149035,
+      "crc32": 4045028206
+    },
+    {
+      "name": "baked_textures/roof_thing_ao.jpg",
+      "bytes": 250082,
+      "crc32": 2664416965
+    },
+    {
+      "name": "baked_textures/tank_capsule_diff.jpg",
+      "bytes": 217453,
+      "crc32": 1472837504
+    },
+    {
+      "name": "baked_textures/roof_thing_3_spec.jpg",
+      "bytes": 86286,
+      "crc32": 2069767932
+    },
+    {
+      "name": "baked_textures/roof_thing_3_norm.jpg",
+      "bytes": 79161,
+      "crc32": 2635526004
+    },
+    {
+      "name": "baked_textures/roof_thing_3_diff.jpg",
+      "bytes": 65073,
+      "crc32": 3507855397
+    },
+    {
+      "name": "baked_textures/roof_thing_3_ao.jpg",
+      "bytes": 92463,
+      "crc32": 960053660
+    },
+    {
+      "name": "baked_textures/roof_thing_2_spec.jpg",
+      "bytes": 139098,
+      "crc32": 708748165
+    },
+    {
+      "name": "baked_textures/roof_thing_2_norm.jpg",
+      "bytes": 318353,
+      "crc32": 2325968378
+    },
+    {
+      "name": "baked_textures/roof_thing_2_diff.jpg",
+      "bytes": 175162,
+      "crc32": 3109481016
+    },
+    {
+      "name": "baked_textures/roof_thing_2_ao.jpg",
+      "bytes": 179256,
+      "crc32": 142763926
+    },
+    {
+      "name": "baked_textures/ladder_spec.jpg",
+      "bytes": 165183,
+      "crc32": 1511362160
+    },
+    {
+      "name": "baked_textures/ladder_norm.jpg",
+      "bytes": 202900,
+      "crc32": 337804964
+    },
+    {
+      "name": "baked_textures/ladder_diff.jpg",
+      "bytes": 91506,
+      "crc32": 3303097633
+    },
+    {
+      "name": "baked_textures/ladder_base_spec.jpg",
+      "bytes": 150178,
+      "crc32": 2881004570
+    },
+    {
+      "name": "baked_textures/ladder_base_norm.jpg",
+      "bytes": 181254,
+      "crc32": 2460643487
+    },
+    {
+      "name": "baked_textures/ladder_base_diff.jpg",
+      "bytes": 82962,
+      "crc32": 1658046211
+    },
+    {
+      "name": "baked_textures/ladder_base_ao.jpg",
+      "bytes": 132495,
+      "crc32": 331554590
+    },
+    {
+      "name": "baked_textures/ladder_ao.jpg",
+      "bytes": 149921,
+      "crc32": 2290157067
+    },
+    {
+      "name": "baked_textures/container_diff.jpg",
+      "bytes": 925256,
+      "crc32": 3400014088
+    },
+    {
+      "name": "baked_textures/container_norm.jpg",
+      "bytes": 919702,
+      "crc32": 762241911
+    },
+    {
+      "name": "baked_textures/container_spec.jpg",
+      "bytes": 226829,
+      "crc32": 420604904
+    },
+    {
+      "name": "baked_textures/control_terminal_ao.jpg",
+      "bytes": 229983,
+      "crc32": 2247081710
+    },
+    {
+      "name": "baked_textures/control_terminal_diff.jpg",
+      "bytes": 212072,
+      "crc32": 238428180
+    },
+    {
+      "name": "baked_textures/control_terminal_spec.jpg",
+      "bytes": 236487,
+      "crc32": 1327163113
+    },
+    {
+      "name": "baked_textures/garage_2_ao.jpg",
+      "bytes": 868202,
+      "crc32": 999923439
+    },
+    {
+      "name": "baked_textures/garage_2_diff.jpg",
+      "bytes": 465503,
+      "crc32": 3502436083
+    },
+    {
+      "name": "baked_textures/garage_2_norm.jpg",
+      "bytes": 412961,
+      "crc32": 194662447
+    },
+    {
+      "name": "baked_textures/garage_2_spec.jpg",
+      "bytes": 586005,
+      "crc32": 753365876
+    },
+    {
+      "name": "baked_textures/garage_ao.jpg",
+      "bytes": 871084,
+      "crc32": 2555473063
+    },
+    {
+      "name": "baked_textures/garage_diff.jpg",
+      "bytes": 470991,
+      "crc32": 1213321797
+    },
+    {
+      "name": "baked_textures/garage_norm.jpg",
+      "bytes": 438079,
+      "crc32": 4031610901
+    },
+    {
+      "name": "baked_textures/garage_spec.jpg",
+      "bytes": 586167,
+      "crc32": 3867255270
+    },
+    {
+      "name": "baked_textures/chimney_spec.jpg",
+      "bytes": 1812144,
+      "crc32": 2021965388
+    },
+    {
+      "name": "baked_textures/chimney_norm.jpg",
+      "bytes": 2699120,
+      "crc32": 1233693759
+    },
+    {
+      "name": "baked_textures/chimney_diff.png",
+      "bytes": 13299062,
+      "crc32": 4288754000
+    },
+    {
+      "name": "baked_textures/chimney_ao.jpg",
+      "bytes": 1910173,
+      "crc32": 4036622653
+    },
+    {
+      "name": "baked_textures/big_tank_spec.jpg",
+      "bytes": 703088,
+      "crc32": 1926527966
+    },
+    {
+      "name": "baked_textures/big_tank_norm.jpg",
+      "bytes": 2122644,
+      "crc32": 2063399795
+    },
+    {
+      "name": "baked_textures/big_tank_diff_edited.jpg",
+      "bytes": 1774424,
+      "crc32": 1185587737
+    },
+    {
+      "name": "baked_textures/big_tank_diff.jpg",
+      "bytes": 1594503,
+      "crc32": 3079657815
+    },
+    {
+      "name": "baked_textures/big_tank_ao.jpg",
+      "bytes": 1865149,
+      "crc32": 2927790719
+    },
+    {
+      "name": "baked_textures/tank_norm.jpg",
+      "bytes": 337210,
+      "crc32": 1849993609
+    },
+    {
+      "name": "baked_textures/tank_diff.jpg",
+      "bytes": 288040,
+      "crc32": 2022773630
+    },
+    {
+      "name": "baked_textures/tank_control_panel_spec.jpg",
+      "bytes": 211348,
+      "crc32": 440613174
+    },
+    {
+      "name": "baked_textures/tank_control_panel_norm.jpg",
+      "bytes": 207936,
+      "crc32": 1012928824
+    },
+    {
+      "name": "baked_textures/tank_control_panel_diff.jpg",
+      "bytes": 141509,
+      "crc32": 2834431506
+    },
+    {
+      "name": "baked_textures/tank_control_panel_ao.jpg",
+      "bytes": 157778,
+      "crc32": 2614132520
+    },
+    {
+      "name": "baked_textures/tank_capsule_spec.jpg",
+      "bytes": 343676,
+      "crc32": 1989110028
+    },
+    {
+      "name": "baked_textures/tank_capsule_norm.jpg",
+      "bytes": 210485,
+      "crc32": 3722711355
+    },
+    {
+      "name": "baked_textures/control_terminal_norm.jpg",
+      "bytes": 277355,
+      "crc32": 3741936057
+    },
+    {
+      "name": "brickwall.JPG",
+      "bytes": 418833,
+      "crc32": 780346842
+    },
+    {
+      "name": "brickwall_norm.JPG",
+      "bytes": 468089,
+      "crc32": 1183372331
+    },
+    {
+      "name": "brickwall_spec.JPG",
+      "bytes": 156524,
+      "crc32": 853153447
+    },
+    {
+      "name": "brushed_metal.jpg",
+      "bytes": 81400,
+      "crc32": 2435541737
+    },
+    {
+      "name": "brushed_metal_2.jpg",
+      "bytes": 89488,
+      "crc32": 423676737
+    },
+    {
+      "name": "brushed_metal_norm.jpg",
+      "bytes": 12817,
+      "crc32": 182573184
+    },
+    {
+      "name": "brushed_metal_spec.png",
+      "bytes": 553163,
+      "crc32": 604222757
+    },
+    {
+      "name": "concrete.jpg",
+      "bytes": 610204,
+      "crc32": 1916030172
+    },
+    {
+      "name": "concrete_norm.jpg",
+      "bytes": 804688,
+      "crc32": 563753005
+    },
+    {
+      "name": "concrete_spec.png",
+      "bytes": 2849998,
+      "crc32": 3123987088
+    },
+    {
+      "name": "concrete_wall.jpg",
+      "bytes": 537208,
+      "crc32": 1949848326
+    },
+    {
+      "name": "concrete_wall_norm.jpg",
+      "bytes": 648729,
+      "crc32": 612344479
+    },
+    {
+      "name": "concrete_wall_spec.jpg",
+      "bytes": 734445,
+      "crc32": 1987288482
+    },
+    {
+      "name": "container_1.JPG",
+      "bytes": 859805,
+      "crc32": 3658792892
+    },
+    {
+      "name": "container_1_norm.JPG",
+      "bytes": 1108322,
+      "crc32": 912121976
+    },
+    {
+      "name": "container_1_spec.JPG",
+      "bytes": 305304,
+      "crc32": 1786199294
+    },
+    {
+      "name": "container_2.JPG",
+      "bytes": 1066719,
+      "crc32": 2907546487
+    },
+    {
+      "name": "container_2_norm.JPG",
+      "bytes": 1084053,
+      "crc32": 2883624540
+    },
+    {
+      "name": "container_2_spec.JPG",
+      "bytes": 329022,
+      "crc32": 203082216
+    },
+    {
+      "name": "container_3.JPG",
+      "bytes": 467512,
+      "crc32": 2724817967
+    },
+    {
+      "name": "container_3_norm.JPG",
+      "bytes": 518321,
+      "crc32": 2416726049
+    },
+    {
+      "name": "container_3_spec.JPG",
+      "bytes": 168865,
+      "crc32": 1470987265
+    },
+    {
+      "name": "dirty_metal.jpg",
+      "bytes": 216014,
+      "crc32": 2311758374
+    },
+    {
+      "name": "dirty_metal_norm.jpg",
+      "bytes": 277222,
+      "crc32": 2329333000
+    },
+    {
+      "name": "dirty_metal_spec.png",
+      "bytes": 1320625,
+      "crc32": 3850542198
+    },
+    {
+      "name": "industrial_final.blend",
+      "bytes": 4030200,
+      "crc32": 2177140932
+    },
+    {
+      "name": "industrial_old.blend",
+      "bytes": 2883876,
+      "crc32": 3299931038
+    },
+    {
+      "name": "metal1.jpg",
+      "bytes": 110163,
+      "crc32": 3712454939
+    },
+    {
+      "name": "metal1_norm.jpg",
+      "bytes": 104599,
+      "crc32": 177629706
+    },
+    {
+      "name": "metal1_spec.png",
+      "bytes": 1461008,
+      "crc32": 2616392938
+    },
+    {
+      "name": "metal2.jpg",
+      "bytes": 402810,
+      "crc32": 1162733828
+    },
+    {
+      "name": "metal2_spec.jpg",
+      "bytes": 481543,
+      "crc32": 1470778957
+    },
+    {
+      "name": "metal_ground.jpg",
+      "bytes": 355313,
+      "crc32": 334995937
+    },
+    {
+      "name": "metal_ground_norm.jpg",
+      "bytes": 236694,
+      "crc32": 4293182965
+    },
+    {
+      "name": "metal_ground_spec.jpg",
+      "bytes": 314143,
+      "crc32": 250420802
+    },
+    {
+      "name": "metal_orange.jpg",
+      "bytes": 377058,
+      "crc32": 1137852619
+    },
+    {
+      "name": "metal_orange_spec.jpg",
+      "bytes": 621346,
+      "crc32": 170883596
+    },
+    {
+      "name": "metal_pipe.jpg",
+      "bytes": 161812,
+      "crc32": 3267375617
+    },
+    {
+      "name": "metal_pipe_2.jpg",
+      "bytes": 144521,
+      "crc32": 2964762301
+    },
+    {
+      "name": "metal_pipe_norm.jpg",
+      "bytes": 142198,
+      "crc32": 2901092824
+    },
+    {
+      "name": "metal_pipe_spec.jpg",
+      "bytes": 339594,
+      "crc32": 3222934183
+    },
+    {
+      "name": "metal_planks.png",
+      "bytes": 31011,
+      "crc32": 2904724006
+    },
+    {
+      "name": "metal_plates.jpg",
+      "bytes": 178278,
+      "crc32": 1125328794
+    },
+    {
+      "name": "metal_plates_norm.jpg",
+      "bytes": 322778,
+      "crc32": 4240771492
+    },
+    {
+      "name": "metal_plates_spec.jpg",
+      "bytes": 49277,
+      "crc32": 1821421683
+    },
+    {
+      "name": "metals_norm.jpg",
+      "bytes": 146342,
+      "crc32": 3719027980
+    },
+    {
+      "name": "metal_stuff.jpg",
+      "bytes": 824855,
+      "crc32": 2811706479
+    },
+    {
+      "name": "metal_stuff_lighter.jpg",
+      "bytes": 670903,
+      "crc32": 2578135521
+    },
+    {
+      "name": "metal_stuff_norm.jpg",
+      "bytes": 87775,
+      "crc32": 4218290473
+    },
+    {
+      "name": "metal_stuff_spec.jpg",
+      "bytes": 255285,
+      "crc32": 2613585964
+    },
+    {
+      "name": "red_metal.jpg",
+      "bytes": 326274,
+      "crc32": 1927182731
+    },
+    {
+      "name": "red_metal_norm.jpg",
+      "bytes": 455472,
+      "crc32": 3201118590
+    },
+    {
+      "name": "red_metal_spec.jpg",
+      "bytes": 156818,
+      "crc32": 2095253988
+    },
+    {
+      "name": "scratchy_metal.jpg",
+      "bytes": 598171,
+      "crc32": 803852194
+    },
+    {
+      "name": "scratchy_metal_dark.jpg",
+      "bytes": 365745,
+      "crc32": 3320094962
+    },
+    {
+      "name": "scratchy_metal_norm.jpg",
+      "bytes": 460667,
+      "crc32": 1090159789
+    },
+    {
+      "name": "scratchy_metal_spec.jpg",
+      "bytes": 146589,
+      "crc32": 4133769070
+    },
+    {
+      "name": "stripes.JPG",
+      "bytes": 1773748,
+      "crc32": 7468256
+    },
+    {
+      "name": "structwall.JPG",
+      "bytes": 195336,
+      "crc32": 113931080
+    },
+    {
+      "name": "structwall_norm.JPG",
+      "bytes": 364994,
+      "crc32": 2580647298
+    },
+    {
+      "name": "structwall_spec.JPG",
+      "bytes": 117023,
+      "crc32": 272131923
+    },
+    {
+      "name": "thing_1.JPG",
+      "bytes": 53214,
+      "crc32": 2057080207
+    },
+    {
+      "name": "thing_2.JPG",
+      "bytes": 1301382,
+      "crc32": 833536016
+    },
+    {
+      "name": "thing_2_norm.JPG",
+      "bytes": 1453770,
+      "crc32": 809425629
+    },
+    {
+      "name": "thing_2_spec.JPG",
+      "bytes": 3130908,
+      "crc32": 3745156191
+    },
+    {
+      "name": "vent.JPG",
+      "bytes": 31065,
+      "crc32": 3278365257
+    },
+    {
+      "name": "vent_norm.JPG",
+      "bytes": 36072,
+      "crc32": 2298388915
+    },
+    {
+      "name": "vent_spec.JPG",
+      "bytes": 48328,
+      "crc32": 2936514885
+    },
+    {
+      "name": "wall_thing_1.JPG",
+      "bytes": 921946,
+      "crc32": 2555228544
+    },
+    {
+      "name": "wall_thing_1_norm.JPG",
+      "bytes": 923575,
+      "crc32": 1631089930
+    },
+    {
+      "name": "wall_thing_1_spec.JPG",
+      "bytes": 533859,
+      "crc32": 3916883022
+    },
+    {
+      "name": "wall_thing_2.JPG",
+      "bytes": 330334,
+      "crc32": 3041935209
+    },
+    {
+      "name": "wall_thing_2_norm.JPG",
+      "bytes": 293283,
+      "crc32": 2277077140
+    },
+    {
+      "name": "wall_thing_2_spec.JPG",
+      "bytes": 289036,
+      "crc32": 341281277
+    },
+    {
+      "name": "wall_thing_3.JPG",
+      "bytes": 595242,
+      "crc32": 1439401077
+    },
+    {
+      "name": "wall_thing_3_norm.JPG",
+      "bytes": 510992,
+      "crc32": 4278782534
+    },
+    {
+      "name": "wall_thing_4.JPG",
+      "bytes": 668516,
+      "crc32": 144293626
+    },
+    {
+      "name": "wall_thing_4_norm.JPG",
+      "bytes": 382854,
+      "crc32": 624181795
+    },
+    {
+      "name": "wall_thing_4_spec.JPG",
+      "bytes": 525041,
+      "crc32": 594153795
+    },
+    {
+      "name": "wall_thing_5.JPG",
+      "bytes": 639658,
+      "crc32": 3015387027
+    },
+    {
+      "name": "wall_thing_5_norm.JPG",
+      "bytes": 543060,
+      "crc32": 1738455626
+    },
+    {
+      "name": "wall_thing_5_spec.JPG",
+      "bytes": 392267,
+      "crc32": 3009604867
+    },
+    {
+      "name": "wire.png",
+      "bytes": 527568,
+      "crc32": 671208282
+    },
+    {
+      "name": "wire_norm.jpg",
+      "bytes": 212052,
+      "crc32": 3493697495
+    },
+    {
+      "name": "wire_spec.jpg",
+      "bytes": 181102,
+      "crc32": 1096238588
+    }
+  ],
+  "notices": [],
+  "status": "downloaded; retained original; import not approved",
+  "license": "CC0 per retained official source; inspect notices before import"
+}

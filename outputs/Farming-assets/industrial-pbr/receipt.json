@@ -1,0 +1,696 @@
+{
+  "slug": "industrial-pbr",
+  "authors": "a52; rubberduck; Yughues (some textures)",
+  "source": "https://opengameart.org/content/pbr-industrial-asset-pack",
+  "download": "https://opengameart.org/sites/default/files/oga_industrial_a52_version_0.zip",
+  "retrieved_utc": "2026-10-14T23:19:09.837253+00:00",
+  "imported": false,
+  "announced_bytes": 57954847,
+  "bytes": 57954847,
+  "sha256": "4499f14fa664e83fd2b746c0e88a12249e8143ec9cd2b7ca9dd3d75aad50da47",
+  "files": [
+    {
+      "name": "OGA_industrial_a52_version/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/brickwall/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/brickwall/brickwall.JPG",
+      "bytes": 418833,
+      "crc32": 780346842
+    },
+    {
+      "name": "OGA_industrial_a52_version/brickwall/brickwall_norm.JPG",
+      "bytes": 468089,
+      "crc32": 1183372331
+    },
+    {
+      "name": "OGA_industrial_a52_version/brickwall/brickwall_roughness.png",
+      "bytes": 577882,
+      "crc32": 2924256917
+    },
+    {
+      "name": "OGA_industrial_a52_version/brushed_metal/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/brushed_metal/brushed_metal.jpg",
+      "bytes": 81400,
+      "crc32": 2435541737
+    },
+    {
+      "name": "OGA_industrial_a52_version/brushed_metal/brushed_metal_2.jpg",
+      "bytes": 89488,
+      "crc32": 423676737
+    },
+    {
+      "name": "OGA_industrial_a52_version/brushed_metal/brushed_metal_metallic.bmp",
+      "bytes": 4194358,
+      "crc32": 416601106
+    },
+    {
+      "name": "OGA_industrial_a52_version/brushed_metal/brushed_metal_norm.jpg",
+      "bytes": 12817,
+      "crc32": 182573184
+    },
+    {
+      "name": "OGA_industrial_a52_version/brushed_metal/brushed_metal_roughness.png",
+      "bytes": 282551,
+      "crc32": 740597632
+    },
+    {
+      "name": "OGA_industrial_a52_version/concrete/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/concrete/concrete.jpg",
+      "bytes": 610204,
+      "crc32": 1916030172
+    },
+    {
+      "name": "OGA_industrial_a52_version/concrete/concrete.png",
+      "bytes": 2568863,
+      "crc32": 2371433803
+    },
+    {
+      "name": "OGA_industrial_a52_version/concrete/concrete_norm.jpg",
+      "bytes": 804688,
+      "crc32": 563753005
+    },
+    {
+      "name": "OGA_industrial_a52_version/concrete/concrete_roughness.png",
+      "bytes": 821,
+      "crc32": 2807205389
+    },
+    {
+      "name": "OGA_industrial_a52_version/concrete_wall/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/concrete_wall/concrete_wall.jpg",
+      "bytes": 537208,
+      "crc32": 1949848326
+    },
+    {
+      "name": "OGA_industrial_a52_version/concrete_wall/concrete_wall_metallic.png",
+      "bytes": 12271,
+      "crc32": 400735715
+    },
+    {
+      "name": "OGA_industrial_a52_version/concrete_wall/concrete_wall_norm.jpg",
+      "bytes": 648729,
+      "crc32": 612344479
+    },
+    {
+      "name": "OGA_industrial_a52_version/concrete_wall/concrete_wall_roughness.png",
+      "bytes": 511092,
+      "crc32": 2225722257
+    },
+    {
+      "name": "OGA_industrial_a52_version/container_1/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/container_1/container_1.JPG",
+      "bytes": 859805,
+      "crc32": 3658792892
+    },
+    {
+      "name": "OGA_industrial_a52_version/container_1/container_1_norm.JPG",
+      "bytes": 1108322,
+      "crc32": 912121976
+    },
+    {
+      "name": "OGA_industrial_a52_version/container_1/container_1_roughness.png",
+      "bytes": 345673,
+      "crc32": 3034205637
+    },
+    {
+      "name": "OGA_industrial_a52_version/container_2/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/container_2/container_2.JPG",
+      "bytes": 1066719,
+      "crc32": 2907546487
+    },
+    {
+      "name": "OGA_industrial_a52_version/container_2/container_2_norm.JPG",
+      "bytes": 1084053,
+      "crc32": 2883624540
+    },
+    {
+      "name": "OGA_industrial_a52_version/container_2/container_2_roughness.png",
+      "bytes": 727766,
+      "crc32": 886418544
+    },
+    {
+      "name": "OGA_industrial_a52_version/container_3/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/container_3/container_3.JPG",
+      "bytes": 467512,
+      "crc32": 2724817967
+    },
+    {
+      "name": "OGA_industrial_a52_version/container_3/container_3_norm.JPG",
+      "bytes": 518321,
+      "crc32": 2416726049
+    },
+    {
+      "name": "OGA_industrial_a52_version/container_3/container_3_roughness.png",
+      "bytes": 129848,
+      "crc32": 1439391359
+    },
+    {
+      "name": "OGA_industrial_a52_version/dirty_metal/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/dirty_metal/dirty_metal.jpg",
+      "bytes": 216014,
+      "crc32": 2311758374
+    },
+    {
+      "name": "OGA_industrial_a52_version/dirty_metal/dirty_metal_metallic.png",
+      "bytes": 712596,
+      "crc32": 1355602914
+    },
+    {
+      "name": "OGA_industrial_a52_version/dirty_metal/dirty_metal_norm.jpg",
+      "bytes": 277222,
+      "crc32": 2329333000
+    },
+    {
+      "name": "OGA_industrial_a52_version/dirty_metal/dirty_metal_roughness.png",
+      "bytes": 346072,
+      "crc32": 951144337
+    },
+    {
+      "name": "OGA_industrial_a52_version/gauge/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/gauge/gauge.JPG",
+      "bytes": 53214,
+      "crc32": 2057080207
+    },
+    {
+      "name": "OGA_industrial_a52_version/industrial_final_cycles.blend",
+      "bytes": 4435708,
+      "crc32": 1396775156
+    },
+    {
+      "name": "OGA_industrial_a52_version/industrial_final_cycles.blend1",
+      "bytes": 7146460,
+      "crc32": 232218714
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal1/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal1/dots.png",
+      "bytes": 460216,
+      "crc32": 454847264
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal1/metal1.jpg",
+      "bytes": 110163,
+      "crc32": 3712454939
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal1/metal1_metallic.png",
+      "bytes": 418158,
+      "crc32": 3264493359
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal1/metal1_norm.jpg",
+      "bytes": 104599,
+      "crc32": 177629706
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal1/metal1_roughness.png",
+      "bytes": 343849,
+      "crc32": 3293644617
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal1/metal1_spec.png",
+      "bytes": 1461008,
+      "crc32": 2616392938
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal2 and metal_orange/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal2 and metal_orange/metal2.jpg",
+      "bytes": 402810,
+      "crc32": 1162733828
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal2 and metal_orange/metal2_metallic.png",
+      "bytes": 538868,
+      "crc32": 916440118
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal2 and metal_orange/metal2_roughness.png",
+      "bytes": 412281,
+      "crc32": 428619182
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal2 and metal_orange/metals_norm.jpg",
+      "bytes": 146342,
+      "crc32": 3719027980
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal2 and metal_orange/metal_orange.jpg",
+      "bytes": 377058,
+      "crc32": 1137852619
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal2 and metal_orange/metal_orange_roughness.png",
+      "bytes": 423888,
+      "crc32": 1675829501
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_duct/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_duct/metal_duct.jpg",
+      "bytes": 824855,
+      "crc32": 2811706479
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_duct/metal_duct_lighter.jpg",
+      "bytes": 670903,
+      "crc32": 2578135521
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_duct/metal_duct_metallic.png",
+      "bytes": 2236497,
+      "crc32": 303788102
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_duct/metal_duct_norm.jpg",
+      "bytes": 87775,
+      "crc32": 4218290473
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_duct/metal_duct_roughness.png",
+      "bytes": 1350786,
+      "crc32": 2375265383
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_ground/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_ground/metal_ground.jpg",
+      "bytes": 355313,
+      "crc32": 334995937
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_ground/metal_ground_metallic.png",
+      "bytes": 1254042,
+      "crc32": 230449889
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_ground/metal_ground_norm.jpg",
+      "bytes": 236694,
+      "crc32": 4293182965
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_ground/metal_ground_roughness.png",
+      "bytes": 602135,
+      "crc32": 1292178683
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_pipe/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_pipe/metal_pipe.jpg",
+      "bytes": 161812,
+      "crc32": 3267375617
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_pipe/metal_pipe_2.jpg",
+      "bytes": 144521,
+      "crc32": 2964762301
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_pipe/metal_pipe_metallic.png",
+      "bytes": 1674277,
+      "crc32": 4058271745
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_pipe/metal_pipe_norm.jpg",
+      "bytes": 142198,
+      "crc32": 2901092824
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_pipe/metal_pipe_roughness.png",
+      "bytes": 1293535,
+      "crc32": 4113848507
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_planks/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_planks/metal_planks.png",
+      "bytes": 31011,
+      "crc32": 2904724006
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_planks/metal_planks_metallic.png",
+      "bytes": 24439,
+      "crc32": 3478679609
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_planks/metal_planks_roughness.png",
+      "bytes": 12309,
+      "crc32": 1274106930
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_plates/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_plates/metal_plates.jpg",
+      "bytes": 178278,
+      "crc32": 1125328794
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_plates/metal_plates_metallic.png",
+      "bytes": 379637,
+      "crc32": 3137180888
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_plates/metal_plates_norm.jpg",
+      "bytes": 322778,
+      "crc32": 4240771492
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_plates/metal_plates_roughness.png",
+      "bytes": 47836,
+      "crc32": 4004649322
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_rust/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_rust/metal_rust.jpg",
+      "bytes": 1495008,
+      "crc32": 3813913135
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_rust/metal_rust_metallic.png",
+      "bytes": 1804530,
+      "crc32": 1260417386
+    },
+    {
+      "name": "OGA_industrial_a52_version/metal_rust/metal_rust_roughness.png",
+      "bytes": 1805933,
+      "crc32": 3759710176
+    },
+    {
+      "name": "OGA_industrial_a52_version/preview.png",
+      "bytes": 602621,
+      "crc32": 42176638
+    },
+    {
+      "name": "OGA_industrial_a52_version/radiator/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/radiator/radiator.JPG",
+      "bytes": 1301382,
+      "crc32": 833536016
+    },
+    {
+      "name": "OGA_industrial_a52_version/radiator/radiator_norm.JPG",
+      "bytes": 1453770,
+      "crc32": 809425629
+    },
+    {
+      "name": "OGA_industrial_a52_version/red_metal/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/red_metal/red_metal.jpg",
+      "bytes": 326274,
+      "crc32": 1927182731
+    },
+    {
+      "name": "OGA_industrial_a52_version/red_metal/red_metal_metallic.png",
+      "bytes": 434257,
+      "crc32": 1979183946
+    },
+    {
+      "name": "OGA_industrial_a52_version/red_metal/red_metal_norm.jpg",
+      "bytes": 455472,
+      "crc32": 3201118590
+    },
+    {
+      "name": "OGA_industrial_a52_version/red_metal/red_metal_roughness.png",
+      "bytes": 354589,
+      "crc32": 3180464364
+    },
+    {
+      "name": "OGA_industrial_a52_version/render.png",
+      "bytes": 361825,
+      "crc32": 2228801717
+    },
+    {
+      "name": "OGA_industrial_a52_version/render2.png",
+      "bytes": 267152,
+      "crc32": 2424746464
+    },
+    {
+      "name": "OGA_industrial_a52_version/render3.png",
+      "bytes": 587510,
+      "crc32": 3493505418
+    },
+    {
+      "name": "OGA_industrial_a52_version/scratchy_metal/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/scratchy_metal/scratchy_metal.jpg",
+      "bytes": 598171,
+      "crc32": 803852194
+    },
+    {
+      "name": "OGA_industrial_a52_version/scratchy_metal/scratchy_metal_dark.jpg",
+      "bytes": 365745,
+      "crc32": 3320094962
+    },
+    {
+      "name": "OGA_industrial_a52_version/scratchy_metal/scratchy_metal_metallic.png",
+      "bytes": 461474,
+      "crc32": 860943025
+    },
+    {
+      "name": "OGA_industrial_a52_version/scratchy_metal/scratchy_metal_norm.jpg",
+      "bytes": 460667,
+      "crc32": 1090159789
+    },
+    {
+      "name": "OGA_industrial_a52_version/scratchy_metal/scratchy_metal_roughness.png",
+      "bytes": 318313,
+      "crc32": 1590267099
+    },
+    {
+      "name": "OGA_industrial_a52_version/stripes/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/stripes/stripes.JPG",
+      "bytes": 1773748,
+      "crc32": 7468256
+    },
+    {
+      "name": "OGA_industrial_a52_version/structwall/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/structwall/structwall.JPG",
+      "bytes": 195336,
+      "crc32": 113931080
+    },
+    {
+      "name": "OGA_industrial_a52_version/structwall/structwall_norm.JPG",
+      "bytes": 364994,
+      "crc32": 2580647298
+    },
+    {
+      "name": "OGA_industrial_a52_version/structwall/structwall_roughness.png",
+      "bytes": 389218,
+      "crc32": 2051646574
+    },
+    {
+      "name": "OGA_industrial_a52_version/vent/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/vent/vent.JPG",
+      "bytes": 31065,
+      "crc32": 3278365257
+    },
+    {
+      "name": "OGA_industrial_a52_version/vent/vent_metallic.png",
+      "bytes": 143263,
+      "crc32": 2082153124
+    },
+    {
+      "name": "OGA_industrial_a52_version/vent/vent_norm.JPG",
+      "bytes": 36072,
+      "crc32": 2298388915
+    },
+    {
+      "name": "OGA_industrial_a52_version/vent/vent_roughness.png",
+      "bytes": 69975,
+      "crc32": 1572423238
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_1/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_1/wall_thing_1.JPG",
+      "bytes": 921946,
+      "crc32": 2555228544
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_1/wall_thing_1_norm.JPG",
+      "bytes": 923575,
+      "crc32": 1631089930
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_2/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_2/wall_thing_2.JPG",
+      "bytes": 330334,
+      "crc32": 3041935209
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_2/wall_thing_2_metallic.png",
+      "bytes": 213416,
+      "crc32": 2553995745
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_2/wall_thing_2_norm.JPG",
+      "bytes": 293283,
+      "crc32": 2277077140
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_3/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_3/wall_thing_3.JPG",
+      "bytes": 595242,
+      "crc32": 1439401077
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_3/wall_thing_3_metallic.png",
+      "bytes": 1315885,
+      "crc32": 826036428
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_3/wall_thing_3_norm.JPG",
+      "bytes": 510992,
+      "crc32": 4278782534
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_4/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_4/wall_thing_4.JPG",
+      "bytes": 668516,
+      "crc32": 144293626
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_4/wall_thing_4_metallic.png",
+      "bytes": 144532,
+      "crc32": 661493260
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_4/wall_thing_4_norm.JPG",
+      "bytes": 382854,
+      "crc32": 624181795
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_5/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_5/wall_thing_5.JPG",
+      "bytes": 639658,
+      "crc32": 3015387027
+    },
+    {
+      "name": "OGA_industrial_a52_version/wall_thing_5/wall_thing_5_norm.JPG",
+      "bytes": 543060,
+      "crc32": 1738455626
+    },
+    {
+      "name": "OGA_industrial_a52_version/wire/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version/wire/wire.png",
+      "bytes": 527568,
+      "crc32": 671208282
+    },
+    {
+      "name": "OGA_industrial_a52_version/wire/wire_norm.jpg",
+      "bytes": 212052,
+      "crc32": 3493697495
+    }
+  ],
+  "notices": [],
+  "status": "downloaded; retained original; import not approved",
+  "license": "CC0 per retained official source; inspect notices before import"
+}

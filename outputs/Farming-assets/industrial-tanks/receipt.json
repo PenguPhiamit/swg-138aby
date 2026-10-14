@@ -1,0 +1,316 @@
+{
+  "slug": "industrial-tanks",
+  "authors": "rubberduck",
+  "source": "https://opengameart.org/content/industrial-extension-pack-1-tanks",
+  "download": "https://opengameart.org/sites/default/files/Industrial_pack_1_tanks.zip",
+  "retrieved_utc": "2026-10-14T23:19:37.226534+00:00",
+  "imported": false,
+  "announced_bytes": 36517346,
+  "bytes": 36517346,
+  "sha256": "41dc879807746f1b9dc0ab5008e0e5be1190f7a0b846b9be251e9161e329a6d2",
+  "files": [
+    {
+      "name": "baked_tex/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "baked_tex/tank_2_ladder_diff.jpg",
+      "bytes": 81463,
+      "crc32": 2777110895
+    },
+    {
+      "name": "baked_tex/tank_1_ladder_spec.jpg",
+      "bytes": 229946,
+      "crc32": 1800784784
+    },
+    {
+      "name": "baked_tex/tank_1_ladder_norm.jpg",
+      "bytes": 362211,
+      "crc32": 2920479517
+    },
+    {
+      "name": "baked_tex/tank_1_norm_edit.jpg",
+      "bytes": 981555,
+      "crc32": 91561375
+    },
+    {
+      "name": "baked_tex/tank_1_spec_edit.jpg",
+      "bytes": 611782,
+      "crc32": 3663007268
+    },
+    {
+      "name": "baked_tex/tank_2_norm_edit.jpg",
+      "bytes": 943691,
+      "crc32": 3456340752
+    },
+    {
+      "name": "baked_tex/tank_2_spec_edit.jpg",
+      "bytes": 652081,
+      "crc32": 888381974
+    },
+    {
+      "name": "baked_tex/tank_2_spec.jpg",
+      "bytes": 771454,
+      "crc32": 2104060549
+    },
+    {
+      "name": "baked_tex/tank_2_norm.jpg",
+      "bytes": 1114179,
+      "crc32": 2135320810
+    },
+    {
+      "name": "baked_tex/tank_2_ladder_spec.jpg",
+      "bytes": 246119,
+      "crc32": 1681039350
+    },
+    {
+      "name": "baked_tex/tank_2_ladder_norm.jpg",
+      "bytes": 298377,
+      "crc32": 3780747130
+    },
+    {
+      "name": "baked_tex/tank_2_ladder_ao.jpg",
+      "bytes": 308819,
+      "crc32": 4103383500
+    },
+    {
+      "name": "baked_tex/tank_2_diff.jpg",
+      "bytes": 959188,
+      "crc32": 950084819
+    },
+    {
+      "name": "baked_tex/tank_2_ao_w_ladder.jpg",
+      "bytes": 1120825,
+      "crc32": 54501670
+    },
+    {
+      "name": "baked_tex/tank_2_ao.jpg",
+      "bytes": 1067330,
+      "crc32": 2873416852
+    },
+    {
+      "name": "baked_tex/tank_1_spec.jpg",
+      "bytes": 441394,
+      "crc32": 2941777905
+    },
+    {
+      "name": "baked_tex/tank_1_norm.jpg",
+      "bytes": 1238937,
+      "crc32": 4112520501
+    },
+    {
+      "name": "baked_tex/tank_1_ladder_diff.jpg",
+      "bytes": 191419,
+      "crc32": 107816833
+    },
+    {
+      "name": "baked_tex/tank_1_ladder_ao.jpg",
+      "bytes": 284251,
+      "crc32": 1450214312
+    },
+    {
+      "name": "baked_tex/tank_1_diff.jpg",
+      "bytes": 753393,
+      "crc32": 3491834692
+    },
+    {
+      "name": "baked_tex/tank_1_ao_w_ladder.jpg",
+      "bytes": 1016106,
+      "crc32": 1731291999
+    },
+    {
+      "name": "baked_tex/tank_2_norm_bevel.jpg",
+      "bytes": 470749,
+      "crc32": 2242571171
+    },
+    {
+      "name": "baked_tex/tank_1_norm_bevel.jpg",
+      "bytes": 660905,
+      "crc32": 957726982
+    },
+    {
+      "name": "baked_tex/tank_2_diff_edit.jpg",
+      "bytes": 827931,
+      "crc32": 3721268366
+    },
+    {
+      "name": "baked_tex/tank_1_diff_edit.jpg",
+      "bytes": 894969,
+      "crc32": 2784630915
+    },
+    {
+      "name": "baked_tex/tank_1_ao.jpg",
+      "bytes": 984441,
+      "crc32": 450853730
+    },
+    {
+      "name": "brushed_metal.jpg",
+      "bytes": 81400,
+      "crc32": 2435541737
+    },
+    {
+      "name": "brushed_metal_norm.jpg",
+      "bytes": 12817,
+      "crc32": 182573184
+    },
+    {
+      "name": "brushed_metal_spec.png",
+      "bytes": 553163,
+      "crc32": 604222757
+    },
+    {
+      "name": "concrete.jpg",
+      "bytes": 610204,
+      "crc32": 1916030172
+    },
+    {
+      "name": "concrete_norm.jpg",
+      "bytes": 804688,
+      "crc32": 563753005
+    },
+    {
+      "name": "concrete_spec.png",
+      "bytes": 2849998,
+      "crc32": 3123987088
+    },
+    {
+      "name": "container_1.JPG",
+      "bytes": 859805,
+      "crc32": 3658792892
+    },
+    {
+      "name": "container_1_norm.JPG",
+      "bytes": 1108322,
+      "crc32": 912121976
+    },
+    {
+      "name": "container_1_spec.JPG",
+      "bytes": 305304,
+      "crc32": 1786199294
+    },
+    {
+      "name": "industrial_tanks.blend",
+      "bytes": 1629404,
+      "crc32": 3567123765
+    },
+    {
+      "name": "metal1.jpg",
+      "bytes": 110163,
+      "crc32": 3712454939
+    },
+    {
+      "name": "metal1_norm.jpg",
+      "bytes": 104599,
+      "crc32": 177629706
+    },
+    {
+      "name": "metal1_spec.png",
+      "bytes": 1461008,
+      "crc32": 2616392938
+    },
+    {
+      "name": "metal2.jpg",
+      "bytes": 402810,
+      "crc32": 1162733828
+    },
+    {
+      "name": "metal2_spec.jpg",
+      "bytes": 481543,
+      "crc32": 1470778957
+    },
+    {
+      "name": "metal_orange.jpg",
+      "bytes": 377058,
+      "crc32": 1137852619
+    },
+    {
+      "name": "metal_orange_spec.jpg",
+      "bytes": 621346,
+      "crc32": 170883596
+    },
+    {
+      "name": "metal_pipe_2.jpg",
+      "bytes": 144521,
+      "crc32": 2964762301
+    },
+    {
+      "name": "metal_pipe_norm.jpg",
+      "bytes": 142198,
+      "crc32": 2901092824
+    },
+    {
+      "name": "metal_pipe_spec.jpg",
+      "bytes": 339594,
+      "crc32": 3222934183
+    },
+    {
+      "name": "metals_norm.jpg",
+      "bytes": 146342,
+      "crc32": 3719027980
+    },
+    {
+      "name": "red_metal.jpg",
+      "bytes": 326274,
+      "crc32": 1927182731
+    },
+    {
+      "name": "red_metal_norm.jpg",
+      "bytes": 455472,
+      "crc32": 3201118590
+    },
+    {
+      "name": "red_metal_spec.jpg",
+      "bytes": 156818,
+      "crc32": 2095253988
+    },
+    {
+      "name": "scratchy_metal_dark.jpg",
+      "bytes": 365745,
+      "crc32": 3320094962
+    },
+    {
+      "name": "scratchy_metal_norm.jpg",
+      "bytes": 460667,
+      "crc32": 1090159789
+    },
+    {
+      "name": "scratchy_metal_spec.jpg",
+      "bytes": 146589,
+      "crc32": 4133769070
+    },
+    {
+      "name": "structwall.JPG",
+      "bytes": 195336,
+      "crc32": 113931080
+    },
+    {
+      "name": "structwall_norm.JPG",
+      "bytes": 364994,
+      "crc32": 2580647298
+    },
+    {
+      "name": "structwall_spec.JPG",
+      "bytes": 117023,
+      "crc32": 272131923
+    },
+    {
+      "name": "thing_2.JPG",
+      "bytes": 1301382,
+      "crc32": 833536016
+    },
+    {
+      "name": "thing_2_norm.JPG",
+      "bytes": 1453770,
+      "crc32": 809425629
+    },
+    {
+      "name": "thing_2_spec.JPG",
+      "bytes": 3130908,
+      "crc32": 3745156191
+    }
+  ],
+  "notices": [],
+  "status": "downloaded; retained original; import not approved",
+  "license": "CC0 per retained official source; inspect notices before import"
+}

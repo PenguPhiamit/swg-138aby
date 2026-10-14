@@ -1,0 +1,5110 @@
+{
+  "slug": "kenney-food",
+  "authors": "Kenney",
+  "source": "https://kenney.nl/assets/food-kit",
+  "download": "https://kenney.nl/media/pages/assets/food-kit/83086fa91c-1719418518/kenney_food-kit.zip",
+  "retrieved_utc": "2026-10-14T23:19:48.871983+00:00",
+  "imported": false,
+  "bytes": 4606270,
+  "sha256": "cdad90853682499b94c9fda2f87678b24bfd8f3264e0ed323f6b6a27fd7c6f6f",
+  "files": [
+    {
+      "name": "License.txt",
+      "bytes": 711,
+      "crc32": 1068417716
+    },
+    {
+      "name": "Models/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/FBX format/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/FBX format/advocado-half.fbx",
+      "bytes": 34816,
+      "crc32": 2290092508
+    },
+    {
+      "name": "Models/FBX format/apple-half.fbx",
+      "bytes": 28720,
+      "crc32": 2176427026
+    },
+    {
+      "name": "Models/FBX format/apple.fbx",
+      "bytes": 31056,
+      "crc32": 56661966
+    },
+    {
+      "name": "Models/FBX format/avocado.fbx",
+      "bytes": 27136,
+      "crc32": 4205605645
+    },
+    {
+      "name": "Models/FBX format/bacon-raw.fbx",
+      "bytes": 28192,
+      "crc32": 3977782491
+    },
+    {
+      "name": "Models/FBX format/bacon.fbx",
+      "bytes": 28160,
+      "crc32": 2740567688
+    },
+    {
+      "name": "Models/FBX format/bag-flat.fbx",
+      "bytes": 27968,
+      "crc32": 258376174
+    },
+    {
+      "name": "Models/FBX format/bag.fbx",
+      "bytes": 26976,
+      "crc32": 2944873075
+    },
+    {
+      "name": "Models/FBX format/banana.fbx",
+      "bytes": 31344,
+      "crc32": 2184305243
+    },
+    {
+      "name": "Models/FBX format/barrel.fbx",
+      "bytes": 30304,
+      "crc32": 3799245791
+    },
+    {
+      "name": "Models/FBX format/beet.fbx",
+      "bytes": 27264,
+      "crc32": 2075034694
+    },
+    {
+      "name": "Models/FBX format/bottle-ketchup.fbx",
+      "bytes": 26576,
+      "crc32": 4189327201
+    },
+    {
+      "name": "Models/FBX format/bottle-musterd.fbx",
+      "bytes": 26576,
+      "crc32": 157558318
+    },
+    {
+      "name": "Models/FBX format/bottle-oil.fbx",
+      "bytes": 26464,
+      "crc32": 1573376878
+    },
+    {
+      "name": "Models/FBX format/bowl-broth.fbx",
+      "bytes": 36704,
+      "crc32": 3404636765
+    },
+    {
+      "name": "Models/FBX format/bowl-cereal.fbx",
+      "bytes": 28912,
+      "crc32": 2462287733
+    },
+    {
+      "name": "Models/FBX format/bowl-soup.fbx",
+      "bytes": 28048,
+      "crc32": 2411959260
+    },
+    {
+      "name": "Models/FBX format/bowl.fbx",
+      "bytes": 27712,
+      "crc32": 3337921010
+    },
+    {
+      "name": "Models/FBX format/bread.fbx",
+      "bytes": 26144,
+      "crc32": 2081221034
+    },
+    {
+      "name": "Models/FBX format/broccoli.fbx",
+      "bytes": 34912,
+      "crc32": 176163045
+    },
+    {
+      "name": "Models/FBX format/burger-cheese-double.fbx",
+      "bytes": 72688,
+      "crc32": 4286974678
+    },
+    {
+      "name": "Models/FBX format/burger-cheese.fbx",
+      "bytes": 50576,
+      "crc32": 715638574
+    },
+    {
+      "name": "Models/FBX format/burger-double.fbx",
+      "bytes": 94272,
+      "crc32": 1357341382
+    },
+    {
+      "name": "Models/FBX format/burger.fbx",
+      "bytes": 65024,
+      "crc32": 343362264
+    },
+    {
+      "name": "Models/FBX format/cabbage.fbx",
+      "bytes": 29744,
+      "crc32": 1070699086
+    },
+    {
+      "name": "Models/FBX format/cake-birthday.fbx",
+      "bytes": 98832,
+      "crc32": 3495833803
+    },
+    {
+      "name": "Models/FBX format/cake-slicer.fbx",
+      "bytes": 27936,
+      "crc32": 1313147021
+    },
+    {
+      "name": "Models/FBX format/cake.fbx",
+      "bytes": 91744,
+      "crc32": 1092844197
+    },
+    {
+      "name": "Models/FBX format/can-open.fbx",
+      "bytes": 30480,
+      "crc32": 2036067121
+    },
+    {
+      "name": "Models/FBX format/can-small.fbx",
+      "bytes": 36096,
+      "crc32": 927524199
+    },
+    {
+      "name": "Models/FBX format/can.fbx",
+      "bytes": 27488,
+      "crc32": 1583989918
+    },
+    {
+      "name": "Models/FBX format/candy-bar-wrapper.fbx",
+      "bytes": 25984,
+      "crc32": 1035362325
+    },
+    {
+      "name": "Models/FBX format/candy-bar.fbx",
+      "bytes": 27088,
+      "crc32": 1113326655
+    },
+    {
+      "name": "Models/FBX format/carrot.fbx",
+      "bytes": 29536,
+      "crc32": 3984636642
+    },
+    {
+      "name": "Models/FBX format/carton-small.fbx",
+      "bytes": 26960,
+      "crc32": 757068857
+    },
+    {
+      "name": "Models/FBX format/carton.fbx",
+      "bytes": 26256,
+      "crc32": 1268441912
+    },
+    {
+      "name": "Models/FBX format/cauliflower.fbx",
+      "bytes": 30432,
+      "crc32": 1955011579
+    },
+    {
+      "name": "Models/FBX format/celery-stick.fbx",
+      "bytes": 26096,
+      "crc32": 2413686705
+    },
+    {
+      "name": "Models/FBX format/cheese-cut.fbx",
+      "bytes": 27328,
+      "crc32": 2337938460
+    },
+    {
+      "name": "Models/FBX format/cheese-slicer.fbx",
+      "bytes": 26144,
+      "crc32": 2556160155
+    },
+    {
+      "name": "Models/FBX format/cheese.fbx",
+      "bytes": 107104,
+      "crc32": 2711454086
+    },
+    {
+      "name": "Models/FBX format/cherries.fbx",
+      "bytes": 29520,
+      "crc32": 2042977689
+    },
+    {
+      "name": "Models/FBX format/chinese.fbx",
+      "bytes": 45392,
+      "crc32": 3180253005
+    },
+    {
+      "name": "Models/FBX format/chocolate-wrapper.fbx",
+      "bytes": 27024,
+      "crc32": 1588624040
+    },
+    {
+      "name": "Models/FBX format/chocolate.fbx",
+      "bytes": 27344,
+      "crc32": 1348099802
+    },
+    {
+      "name": "Models/FBX format/chopstic-decorative.fbx",
+      "bytes": 27968,
+      "crc32": 3185916628
+    },
+    {
+      "name": "Models/FBX format/chopstick.fbx",
+      "bytes": 27488,
+      "crc32": 1187788830
+    },
+    {
+      "name": "Models/FBX format/cocktail.fbx",
+      "bytes": 42256,
+      "crc32": 1788594888
+    },
+    {
+      "name": "Models/FBX format/coconut-half.fbx",
+      "bytes": 26832,
+      "crc32": 3694584499
+    },
+    {
+      "name": "Models/FBX format/coconut.fbx",
+      "bytes": 29424,
+      "crc32": 2835554699
+    },
+    {
+      "name": "Models/FBX format/cookie-chocolate.fbx",
+      "bytes": 29424,
+      "crc32": 4263319372
+    },
+    {
+      "name": "Models/FBX format/cookie.fbx",
+      "bytes": 27984,
+      "crc32": 4166584575
+    },
+    {
+      "name": "Models/FBX format/cooking-fork.fbx",
+      "bytes": 28768,
+      "crc32": 1784791398
+    },
+    {
+      "name": "Models/FBX format/cooking-knife-chopping.fbx",
+      "bytes": 27648,
+      "crc32": 2659295984
+    },
+    {
+      "name": "Models/FBX format/cooking-knife.fbx",
+      "bytes": 28288,
+      "crc32": 122041384
+    },
+    {
+      "name": "Models/FBX format/cooking-spatula.fbx",
+      "bytes": 26720,
+      "crc32": 185952391
+    },
+    {
+      "name": "Models/FBX format/cooking-spoon.fbx",
+      "bytes": 27424,
+      "crc32": 376697375
+    },
+    {
+      "name": "Models/FBX format/corn-dog.fbx",
+      "bytes": 34000,
+      "crc32": 1869174866
+    },
+    {
+      "name": "Models/FBX format/corn.fbx",
+      "bytes": 29728,
+      "crc32": 2695944122
+    },
+    {
+      "name": "Models/FBX format/croissant.fbx",
+      "bytes": 32240,
+      "crc32": 4063984588
+    },
+    {
+      "name": "Models/FBX format/cup-coffee.fbx",
+      "bytes": 26464,
+      "crc32": 2232971428
+    },
+    {
+      "name": "Models/FBX format/cup-saucer.fbx",
+      "bytes": 26064,
+      "crc32": 2528061655
+    },
+    {
+      "name": "Models/FBX format/cup-tea.fbx",
+      "bytes": 27120,
+      "crc32": 1947847706
+    },
+    {
+      "name": "Models/FBX format/cup.fbx",
+      "bytes": 26208,
+      "crc32": 3989975561
+    },
+    {
+      "name": "Models/FBX format/cupcake.fbx",
+      "bytes": 42912,
+      "crc32": 2346864229
+    },
+    {
+      "name": "Models/FBX format/cutting-board-japanese.fbx",
+      "bytes": 25680,
+      "crc32": 3268429606
+    },
+    {
+      "name": "Models/FBX format/cutting-board-round.fbx",
+      "bytes": 27344,
+      "crc32": 4163909343
+    },
+    {
+      "name": "Models/FBX format/cutting-board.fbx",
+      "bytes": 26432,
+      "crc32": 1922964955
+    },
+    {
+      "name": "Models/FBX format/dim-sum.fbx",
+      "bytes": 27248,
+      "crc32": 4094707255
+    },
+    {
+      "name": "Models/FBX format/donut-chocolate.fbx",
+      "bytes": 30352,
+      "crc32": 1131638998
+    },
+    {
+      "name": "Models/FBX format/donut-sprinkles.fbx",
+      "bytes": 33408,
+      "crc32": 2693565225
+    },
+    {
+      "name": "Models/FBX format/donut.fbx",
+      "bytes": 29088,
+      "crc32": 3001407950
+    },
+    {
+      "name": "Models/FBX format/egg-cooked.fbx",
+      "bytes": 26944,
+      "crc32": 4256525536
+    },
+    {
+      "name": "Models/FBX format/egg-cup.fbx",
+      "bytes": 27920,
+      "crc32": 3878235710
+    },
+    {
+      "name": "Models/FBX format/egg-half.fbx",
+      "bytes": 28528,
+      "crc32": 3054938060
+    },
+    {
+      "name": "Models/FBX format/egg.fbx",
+      "bytes": 27024,
+      "crc32": 3119642733
+    },
+    {
+      "name": "Models/FBX format/eggplant.fbx",
+      "bytes": 31712,
+      "crc32": 885574686
+    },
+    {
+      "name": "Models/FBX format/fish-bones.fbx",
+      "bytes": 37856,
+      "crc32": 2319838683
+    },
+    {
+      "name": "Models/FBX format/fish.fbx",
+      "bytes": 46128,
+      "crc32": 517374780
+    },
+    {
+      "name": "Models/FBX format/frappe.fbx",
+      "bytes": 32752,
+      "crc32": 596465708
+    },
+    {
+      "name": "Models/FBX format/fries-empty.fbx",
+      "bytes": 27456,
+      "crc32": 1638546274
+    },
+    {
+      "name": "Models/FBX format/fries.fbx",
+      "bytes": 46320,
+      "crc32": 2640078412
+    },
+    {
+      "name": "Models/FBX format/frikandel-speciaal.fbx",
+      "bytes": 43088,
+      "crc32": 1034886489
+    },
+    {
+      "name": "Models/FBX format/frying-pan-lid.fbx",
+      "bytes": 34256,
+      "crc32": 1182044303
+    },
+    {
+      "name": "Models/FBX format/frying-pan.fbx",
+      "bytes": 30944,
+      "crc32": 2248884022
+    },
+    {
+      "name": "Models/FBX format/ginger-bread-cutter.fbx",
+      "bytes": 26336,
+      "crc32": 963387550
+    },
+    {
+      "name": "Models/FBX format/ginger-bread.fbx",
+      "bytes": 27584,
+      "crc32": 1913717027
+    },
+    {
+      "name": "Models/FBX format/glass-wine.fbx",
+      "bytes": 33008,
+      "crc32": 2848491758
+    },
+    {
+      "name": "Models/FBX format/glass.fbx",
+      "bytes": 26208,
+      "crc32": 4068451887
+    },
+    {
+      "name": "Models/FBX format/grapes.fbx",
+      "bytes": 50912,
+      "crc32": 3668217873
+    },
+    {
+      "name": "Models/FBX format/honey.fbx",
+      "bytes": 29344,
+      "crc32": 3936463735
+    },
+    {
+      "name": "Models/FBX format/hot-dog-raw.fbx",
+      "bytes": 27120,
+      "crc32": 597199966
+    },
+    {
+      "name": "Models/FBX format/hot-dog.fbx",
+      "bytes": 46048,
+      "crc32": 179715406
+    },
+    {
+      "name": "Models/FBX format/ice-cream-cne.fbx",
+      "bytes": 26112,
+      "crc32": 1536440964
+    },
+    {
+      "name": "Models/FBX format/ice-cream-cup.fbx",
+      "bytes": 27648,
+      "crc32": 33017352
+    },
+    {
+      "name": "Models/FBX format/ice-cream-scoop-chocolate.fbx",
+      "bytes": 29888,
+      "crc32": 2102476387
+    },
+    {
+      "name": "Models/FBX format/ice-cream-scoop-mint.fbx",
+      "bytes": 27968,
+      "crc32": 1105725272
+    },
+    {
+      "name": "Models/FBX format/ice-cream.fbx",
+      "bytes": 35424,
+      "crc32": 2729586753
+    },
+    {
+      "name": "Models/FBX format/knife-block.fbx",
+      "bytes": 55392,
+      "crc32": 182223601
+    },
+    {
+      "name": "Models/FBX format/leek.fbx",
+      "bytes": 29040,
+      "crc32": 3073720405
+    },
+    {
+      "name": "Models/FBX format/lemon-half.fbx",
+      "bytes": 27552,
+      "crc32": 2817288046
+    },
+    {
+      "name": "Models/FBX format/lemon.fbx",
+      "bytes": 29120,
+      "crc32": 78518019
+    },
+    {
+      "name": "Models/FBX format/loaf-baguette.fbx",
+      "bytes": 29600,
+      "crc32": 730765984
+    },
+    {
+      "name": "Models/FBX format/loaf-round.fbx",
+      "bytes": 28768,
+      "crc32": 2656570145
+    },
+    {
+      "name": "Models/FBX format/loaf.fbx",
+      "bytes": 26048,
+      "crc32": 802637523
+    },
+    {
+      "name": "Models/FBX format/lollypop.fbx",
+      "bytes": 25984,
+      "crc32": 3920025743
+    },
+    {
+      "name": "Models/FBX format/maki-roe.fbx",
+      "bytes": 27184,
+      "crc32": 3791253960
+    },
+    {
+      "name": "Models/FBX format/maki-salmon.fbx",
+      "bytes": 26464,
+      "crc32": 31427139
+    },
+    {
+      "name": "Models/FBX format/maki-vegetable.fbx",
+      "bytes": 26512,
+      "crc32": 4248576808
+    },
+    {
+      "name": "Models/FBX format/meat-cooked.fbx",
+      "bytes": 28512,
+      "crc32": 2181925901
+    },
+    {
+      "name": "Models/FBX format/meat-patty.fbx",
+      "bytes": 26880,
+      "crc32": 3003904933
+    },
+    {
+      "name": "Models/FBX format/meat-raw.fbx",
+      "bytes": 28208,
+      "crc32": 494343587
+    },
+    {
+      "name": "Models/FBX format/meat-ribs.fbx",
+      "bytes": 29264,
+      "crc32": 1285606379
+    },
+    {
+      "name": "Models/FBX format/meat-sausage.fbx",
+      "bytes": 51696,
+      "crc32": 3125106235
+    },
+    {
+      "name": "Models/FBX format/meat-tenderizer.fbx",
+      "bytes": 33360,
+      "crc32": 2869951114
+    },
+    {
+      "name": "Models/FBX format/mincemeat-pie.fbx",
+      "bytes": 29232,
+      "crc32": 2173101311
+    },
+    {
+      "name": "Models/FBX format/mortar-pestle.fbx",
+      "bytes": 27520,
+      "crc32": 4040049991
+    },
+    {
+      "name": "Models/FBX format/mortar.fbx",
+      "bytes": 27728,
+      "crc32": 4141085162
+    },
+    {
+      "name": "Models/FBX format/muffin.fbx",
+      "bytes": 29552,
+      "crc32": 2414854079
+    },
+    {
+      "name": "Models/FBX format/mug.fbx",
+      "bytes": 29136,
+      "crc32": 45401764
+    },
+    {
+      "name": "Models/FBX format/mushroom-half.fbx",
+      "bytes": 27296,
+      "crc32": 1857637882
+    },
+    {
+      "name": "Models/FBX format/mushroom.fbx",
+      "bytes": 28464,
+      "crc32": 143656496
+    },
+    {
+      "name": "Models/FBX format/mussel-open.fbx",
+      "bytes": 28848,
+      "crc32": 574127343
+    },
+    {
+      "name": "Models/FBX format/mussel.fbx",
+      "bytes": 28944,
+      "crc32": 3315645226
+    },
+    {
+      "name": "Models/FBX format/onion-half.fbx",
+      "bytes": 27296,
+      "crc32": 2207851031
+    },
+    {
+      "name": "Models/FBX format/onion.fbx",
+      "bytes": 28832,
+      "crc32": 588357081
+    },
+    {
+      "name": "Models/FBX format/orange.fbx",
+      "bytes": 29152,
+      "crc32": 1413145042
+    },
+    {
+      "name": "Models/FBX format/pan-stew.fbx",
+      "bytes": 34592,
+      "crc32": 877017375
+    },
+    {
+      "name": "Models/FBX format/pan.fbx",
+      "bytes": 31200,
+      "crc32": 2823544869
+    },
+    {
+      "name": "Models/FBX format/pancakes.fbx",
+      "bytes": 67168,
+      "crc32": 2648065720
+    },
+    {
+      "name": "Models/FBX format/paprika-slice.fbx",
+      "bytes": 26192,
+      "crc32": 1980567640
+    },
+    {
+      "name": "Models/FBX format/paprika.fbx",
+      "bytes": 31856,
+      "crc32": 3521887949
+    },
+    {
+      "name": "Models/FBX format/peanut-butter.fbx",
+      "bytes": 30496,
+      "crc32": 523033521
+    },
+    {
+      "name": "Models/FBX format/pear-half.fbx",
+      "bytes": 28816,
+      "crc32": 77449584
+    },
+    {
+      "name": "Models/FBX format/pear.fbx",
+      "bytes": 31168,
+      "crc32": 38410970
+    },
+    {
+      "name": "Models/FBX format/pepper-mill.fbx",
+      "bytes": 36080,
+      "crc32": 3638700967
+    },
+    {
+      "name": "Models/FBX format/pepper.fbx",
+      "bytes": 30112,
+      "crc32": 1981952989
+    },
+    {
+      "name": "Models/FBX format/pie.fbx",
+      "bytes": 33024,
+      "crc32": 3820361011
+    },
+    {
+      "name": "Models/FBX format/pineapple.fbx",
+      "bytes": 31904,
+      "crc32": 2932440164
+    },
+    {
+      "name": "Models/FBX format/pizza-box.fbx",
+      "bytes": 36000,
+      "crc32": 1621015226
+    },
+    {
+      "name": "Models/FBX format/pizza-cutter.fbx",
+      "bytes": 26032,
+      "crc32": 2337586484
+    },
+    {
+      "name": "Models/FBX format/pizza.fbx",
+      "bytes": 105248,
+      "crc32": 4175230478
+    },
+    {
+      "name": "Models/FBX format/plate-broken.fbx",
+      "bytes": 85856,
+      "crc32": 3262795187
+    },
+    {
+      "name": "Models/FBX format/plate-deep.fbx",
+      "bytes": 27376,
+      "crc32": 3992109278
+    },
+    {
+      "name": "Models/FBX format/plate-dinner.fbx",
+      "bytes": 38384,
+      "crc32": 2581578747
+    },
+    {
+      "name": "Models/FBX format/plate-rectangle.fbx",
+      "bytes": 26448,
+      "crc32": 3623795069
+    },
+    {
+      "name": "Models/FBX format/plate-sauerkraut.fbx",
+      "bytes": 61520,
+      "crc32": 283202434
+    },
+    {
+      "name": "Models/FBX format/plate.fbx",
+      "bytes": 27248,
+      "crc32": 617589468
+    },
+    {
+      "name": "Models/FBX format/popsicle-chocolate.fbx",
+      "bytes": 27344,
+      "crc32": 532606233
+    },
+    {
+      "name": "Models/FBX format/popsicle-stick.fbx",
+      "bytes": 28624,
+      "crc32": 151913300
+    },
+    {
+      "name": "Models/FBX format/popsicle.fbx",
+      "bytes": 26688,
+      "crc32": 3135138260
+    },
+    {
+      "name": "Models/FBX format/pot-lid.fbx",
+      "bytes": 27248,
+      "crc32": 3345336957
+    },
+    {
+      "name": "Models/FBX format/pot-stew-lid.fbx",
+      "bytes": 35056,
+      "crc32": 1834801064
+    },
+    {
+      "name": "Models/FBX format/pot-stew.fbx",
+      "bytes": 34176,
+      "crc32": 3824632379
+    },
+    {
+      "name": "Models/FBX format/pot.fbx",
+      "bytes": 30016,
+      "crc32": 2713765046
+    },
+    {
+      "name": "Models/FBX format/pudding.fbx",
+      "bytes": 27504,
+      "crc32": 101916958
+    },
+    {
+      "name": "Models/FBX format/pumpkin-basic.fbx",
+      "bytes": 29008,
+      "crc32": 610510081
+    },
+    {
+      "name": "Models/FBX format/pumpkin.fbx",
+      "bytes": 35920,
+      "crc32": 83753824
+    },
+    {
+      "name": "Models/FBX format/radish.fbx",
+      "bytes": 28992,
+      "crc32": 2385094195
+    },
+    {
+      "name": "Models/FBX format/rice-ball.fbx",
+      "bytes": 26880,
+      "crc32": 1604660852
+    },
+    {
+      "name": "Models/FBX format/rollingPin.fbx",
+      "bytes": 30336,
+      "crc32": 3617105490
+    },
+    {
+      "name": "Models/FBX format/salad.fbx",
+      "bytes": 30384,
+      "crc32": 370184196
+    },
+    {
+      "name": "Models/FBX format/sandwich.fbx",
+      "bytes": 47888,
+      "crc32": 1711560952
+    },
+    {
+      "name": "Models/FBX format/sausage-half.fbx",
+      "bytes": 26688,
+      "crc32": 2945563407
+    },
+    {
+      "name": "Models/FBX format/sausage.fbx",
+      "bytes": 27104,
+      "crc32": 1672920568
+    },
+    {
+      "name": "Models/FBX format/shaker-pepper.fbx",
+      "bytes": 27104,
+      "crc32": 2340131491
+    },
+    {
+      "name": "Models/FBX format/shaker-salt.fbx",
+      "bytes": 28144,
+      "crc32": 3209829649
+    },
+    {
+      "name": "Models/FBX format/skewer-vegetables.fbx",
+      "bytes": 69888,
+      "crc32": 3989933848
+    },
+    {
+      "name": "Models/FBX format/skewer.fbx",
+      "bytes": 55936,
+      "crc32": 3741351846
+    },
+    {
+      "name": "Models/FBX format/soda-bottle.fbx",
+      "bytes": 28272,
+      "crc32": 1386624356
+    },
+    {
+      "name": "Models/FBX format/soda-can-crushed.fbx",
+      "bytes": 32192,
+      "crc32": 842012772
+    },
+    {
+      "name": "Models/FBX format/soda-can.fbx",
+      "bytes": 29792,
+      "crc32": 554666707
+    },
+    {
+      "name": "Models/FBX format/soda-glass.fbx",
+      "bytes": 42480,
+      "crc32": 347039512
+    },
+    {
+      "name": "Models/FBX format/soda.fbx",
+      "bytes": 28768,
+      "crc32": 2999683971
+    },
+    {
+      "name": "Models/FBX format/soy.fbx",
+      "bytes": 26912,
+      "crc32": 2795165761
+    },
+    {
+      "name": "Models/FBX format/steamer.fbx",
+      "bytes": 53968,
+      "crc32": 3558987197
+    },
+    {
+      "name": "Models/FBX format/strawberry.fbx",
+      "bytes": 31232,
+      "crc32": 636005725
+    },
+    {
+      "name": "Models/FBX format/styrofoam-dinner.fbx",
+      "bytes": 59424,
+      "crc32": 1813752242
+    },
+    {
+      "name": "Models/FBX format/styrofoam.fbx",
+      "bytes": 33008,
+      "crc32": 3730908730
+    },
+    {
+      "name": "Models/FBX format/sub.fbx",
+      "bytes": 82272,
+      "crc32": 3202675481
+    },
+    {
+      "name": "Models/FBX format/sundae.fbx",
+      "bytes": 50080,
+      "crc32": 3231638276
+    },
+    {
+      "name": "Models/FBX format/sushi-egg.fbx",
+      "bytes": 26912,
+      "crc32": 4184349188
+    },
+    {
+      "name": "Models/FBX format/sushi-salmon.fbx",
+      "bytes": 26880,
+      "crc32": 2065076731
+    },
+    {
+      "name": "Models/FBX format/taco.fbx",
+      "bytes": 29936,
+      "crc32": 367474993
+    },
+    {
+      "name": "Models/FBX format/tajine-lid.fbx",
+      "bytes": 29376,
+      "crc32": 2333512144
+    },
+    {
+      "name": "Models/FBX format/tajine.fbx",
+      "bytes": 29744,
+      "crc32": 78131101
+    },
+    {
+      "name": "Models/FBX format/Textures/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/FBX format/Textures/colormap.png",
+      "bytes": 10715,
+      "crc32": 3470116947
+    },
+    {
+      "name": "Models/FBX format/tomato-slice.fbx",
+      "bytes": 27184,
+      "crc32": 3816169317
+    },
+    {
+      "name": "Models/FBX format/tomato.fbx",
+      "bytes": 29584,
+      "crc32": 515948987
+    },
+    {
+      "name": "Models/FBX format/turkey.fbx",
+      "bytes": 53792,
+      "crc32": 185871921
+    },
+    {
+      "name": "Models/FBX format/utensil-fork.fbx",
+      "bytes": 26432,
+      "crc32": 3901966979
+    },
+    {
+      "name": "Models/FBX format/utensil-knife.fbx",
+      "bytes": 26256,
+      "crc32": 2462260463
+    },
+    {
+      "name": "Models/FBX format/utensil-spoon.fbx",
+      "bytes": 26608,
+      "crc32": 612561462
+    },
+    {
+      "name": "Models/FBX format/waffle.fbx",
+      "bytes": 39296,
+      "crc32": 1354561170
+    },
+    {
+      "name": "Models/FBX format/watermelon.fbx",
+      "bytes": 91696,
+      "crc32": 2063795136
+    },
+    {
+      "name": "Models/FBX format/whipped-cream.fbx",
+      "bytes": 28880,
+      "crc32": 1200427732
+    },
+    {
+      "name": "Models/FBX format/whisk.fbx",
+      "bytes": 26192,
+      "crc32": 134269109
+    },
+    {
+      "name": "Models/FBX format/whole-ham.fbx",
+      "bytes": 29440,
+      "crc32": 2884586681
+    },
+    {
+      "name": "Models/FBX format/wholer-ham.fbx",
+      "bytes": 30144,
+      "crc32": 3123001694
+    },
+    {
+      "name": "Models/FBX format/wine-red.fbx",
+      "bytes": 30368,
+      "crc32": 73580226
+    },
+    {
+      "name": "Models/FBX format/wine-white.fbx",
+      "bytes": 29536,
+      "crc32": 2843493224
+    },
+    {
+      "name": "Models/GLB format/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/GLB format/advocado-half.glb",
+      "bytes": 11240,
+      "crc32": 1195480299
+    },
+    {
+      "name": "Models/GLB format/apple-half.glb",
+      "bytes": 10948,
+      "crc32": 2710583334
+    },
+    {
+      "name": "Models/GLB format/apple.glb",
+      "bytes": 14376,
+      "crc32": 3261684718
+    },
+    {
+      "name": "Models/GLB format/avocado.glb",
+      "bytes": 6076,
+      "crc32": 3991248608
+    },
+    {
+      "name": "Models/GLB format/bacon-raw.glb",
+      "bytes": 5708,
+      "crc32": 3451409250
+    },
+    {
+      "name": "Models/GLB format/bacon.glb",
+      "bytes": 5696,
+      "crc32": 538522176
+    },
+    {
+      "name": "Models/GLB format/bag-flat.glb",
+      "bytes": 11280,
+      "crc32": 42278112
+    },
+    {
+      "name": "Models/GLB format/bag.glb",
+      "bytes": 6408,
+      "crc32": 733681750
+    },
+    {
+      "name": "Models/GLB format/banana.glb",
+      "bytes": 12348,
+      "crc32": 3616930637
+    },
+    {
+      "name": "Models/GLB format/barrel.glb",
+      "bytes": 26812,
+      "crc32": 3952176321
+    },
+    {
+      "name": "Models/GLB format/beet.glb",
+      "bytes": 10372,
+      "crc32": 41004239
+    },
+    {
+      "name": "Models/GLB format/bottle-ketchup.glb",
+      "bytes": 9620,
+      "crc32": 2881744727
+    },
+    {
+      "name": "Models/GLB format/bottle-musterd.glb",
+      "bytes": 9620,
+      "crc32": 1581170913
+    },
+    {
+      "name": "Models/GLB format/bottle-oil.glb",
+      "bytes": 10500,
+      "crc32": 2939524645
+    },
+    {
+      "name": "Models/GLB format/bowl-broth.glb",
+      "bytes": 16628,
+      "crc32": 1565945953
+    },
+    {
+      "name": "Models/GLB format/bowl-cereal.glb",
+      "bytes": 12468,
+      "crc32": 3824319571
+    },
+    {
+      "name": "Models/GLB format/bowl-soup.glb",
+      "bytes": 11188,
+      "crc32": 7189385
+    },
+    {
+      "name": "Models/GLB format/bowl.glb",
+      "bytes": 6340,
+      "crc32": 1366815325
+    },
+    {
+      "name": "Models/GLB format/bread.glb",
+      "bytes": 9468,
+      "crc32": 3044182289
+    },
+    {
+      "name": "Models/GLB format/broccoli.glb",
+      "bytes": 20452,
+      "crc32": 3386069057
+    },
+    {
+      "name": "Models/GLB format/burger-cheese-double.glb",
+      "bytes": 44420,
+      "crc32": 1228304494
+    },
+    {
+      "name": "Models/GLB format/burger-cheese.glb",
+      "bytes": 25900,
+      "crc32": 180069633
+    },
+    {
+      "name": "Models/GLB format/burger-double.glb",
+      "bytes": 55692,
+      "crc32": 693660356
+    },
+    {
+      "name": "Models/GLB format/burger.glb",
+      "bytes": 34536,
+      "crc32": 3866091528
+    },
+    {
+      "name": "Models/GLB format/cabbage.glb",
+      "bytes": 15360,
+      "crc32": 960181601
+    },
+    {
+      "name": "Models/GLB format/cake-birthday.glb",
+      "bytes": 115324,
+      "crc32": 3213321712
+    },
+    {
+      "name": "Models/GLB format/cake-slicer.glb",
+      "bytes": 5060,
+      "crc32": 224873320
+    },
+    {
+      "name": "Models/GLB format/cake.glb",
+      "bytes": 72884,
+      "crc32": 3568950975
+    },
+    {
+      "name": "Models/GLB format/can-open.glb",
+      "bytes": 18428,
+      "crc32": 2374501189
+    },
+    {
+      "name": "Models/GLB format/can-small.glb",
+      "bytes": 15964,
+      "crc32": 2470144654
+    },
+    {
+      "name": "Models/GLB format/can.glb",
+      "bytes": 13708,
+      "crc32": 2962277454
+    },
+    {
+      "name": "Models/GLB format/candy-bar-wrapper.glb",
+      "bytes": 6120,
+      "crc32": 1071886184
+    },
+    {
+      "name": "Models/GLB format/candy-bar.glb",
+      "bytes": 7504,
+      "crc32": 3875076961
+    },
+    {
+      "name": "Models/GLB format/carrot.glb",
+      "bytes": 16364,
+      "crc32": 3136317632
+    },
+    {
+      "name": "Models/GLB format/carton-small.glb",
+      "bytes": 8352,
+      "crc32": 385568851
+    },
+    {
+      "name": "Models/GLB format/carton.glb",
+      "bytes": 9352,
+      "crc32": 1858045071
+    },
+    {
+      "name": "Models/GLB format/cauliflower.glb",
+      "bytes": 16592,
+      "crc32": 2298379927
+    },
+    {
+      "name": "Models/GLB format/celery-stick.glb",
+      "bytes": 5964,
+      "crc32": 3748616341
+    },
+    {
+      "name": "Models/GLB format/cheese-cut.glb",
+      "bytes": 13456,
+      "crc32": 1679473208
+    },
+    {
+      "name": "Models/GLB format/cheese-slicer.glb",
+      "bytes": 5496,
+      "crc32": 4197160360
+    },
+    {
+      "name": "Models/GLB format/cheese.glb",
+      "bytes": 60976,
+      "crc32": 1818729453
+    },
+    {
+      "name": "Models/GLB format/cherries.glb",
+      "bytes": 13516,
+      "crc32": 2841452315
+    },
+    {
+      "name": "Models/GLB format/chinese.glb",
+      "bytes": 19384,
+      "crc32": 3586293360
+    },
+    {
+      "name": "Models/GLB format/chocolate-wrapper.glb",
+      "bytes": 11720,
+      "crc32": 2546891599
+    },
+    {
+      "name": "Models/GLB format/chocolate.glb",
+      "bytes": 12652,
+      "crc32": 956634734
+    },
+    {
+      "name": "Models/GLB format/chopstic-decorative.glb",
+      "bytes": 5416,
+      "crc32": 4191967621
+    },
+    {
+      "name": "Models/GLB format/chopstick.glb",
+      "bytes": 3008,
+      "crc32": 1416160604
+    },
+    {
+      "name": "Models/GLB format/cocktail.glb",
+      "bytes": 14128,
+      "crc32": 1710868425
+    },
+    {
+      "name": "Models/GLB format/coconut-half.glb",
+      "bytes": 8308,
+      "crc32": 3129004825
+    },
+    {
+      "name": "Models/GLB format/coconut.glb",
+      "bytes": 8984,
+      "crc32": 4167712581
+    },
+    {
+      "name": "Models/GLB format/cookie-chocolate.glb",
+      "bytes": 12344,
+      "crc32": 3643130763
+    },
+    {
+      "name": "Models/GLB format/cookie.glb",
+      "bytes": 7532,
+      "crc32": 3611250692
+    },
+    {
+      "name": "Models/GLB format/cooking-fork.glb",
+      "bytes": 4872,
+      "crc32": 681710509
+    },
+    {
+      "name": "Models/GLB format/cooking-knife-chopping.glb",
+      "bytes": 7796,
+      "crc32": 3990881489
+    },
+    {
+      "name": "Models/GLB format/cooking-knife.glb",
+      "bytes": 5380,
+      "crc32": 4246051358
+    },
+    {
+      "name": "Models/GLB format/cooking-spatula.glb",
+      "bytes": 6144,
+      "crc32": 3642985311
+    },
+    {
+      "name": "Models/GLB format/cooking-spoon.glb",
+      "bytes": 6796,
+      "crc32": 1152052730
+    },
+    {
+      "name": "Models/GLB format/corn-dog.glb",
+      "bytes": 9152,
+      "crc32": 1585252431
+    },
+    {
+      "name": "Models/GLB format/corn.glb",
+      "bytes": 14284,
+      "crc32": 38041242
+    },
+    {
+      "name": "Models/GLB format/croissant.glb",
+      "bytes": 14352,
+      "crc32": 2773621674
+    },
+    {
+      "name": "Models/GLB format/cup-coffee.glb",
+      "bytes": 7872,
+      "crc32": 3800024856
+    },
+    {
+      "name": "Models/GLB format/cup-saucer.glb",
+      "bytes": 7848,
+      "crc32": 65940060
+    },
+    {
+      "name": "Models/GLB format/cup-tea.glb",
+      "bytes": 9780,
+      "crc32": 4292856334
+    },
+    {
+      "name": "Models/GLB format/cup.glb",
+      "bytes": 8008,
+      "crc32": 99542865
+    },
+    {
+      "name": "Models/GLB format/cupcake.glb",
+      "bytes": 22724,
+      "crc32": 285412573
+    },
+    {
+      "name": "Models/GLB format/cutting-board-japanese.glb",
+      "bytes": 9864,
+      "crc32": 1685741983
+    },
+    {
+      "name": "Models/GLB format/cutting-board-round.glb",
+      "bytes": 12608,
+      "crc32": 830973724
+    },
+    {
+      "name": "Models/GLB format/cutting-board.glb",
+      "bytes": 10652,
+      "crc32": 410390793
+    },
+    {
+      "name": "Models/GLB format/dim-sum.glb",
+      "bytes": 7180,
+      "crc32": 2724752724
+    },
+    {
+      "name": "Models/GLB format/donut-chocolate.glb",
+      "bytes": 12568,
+      "crc32": 1581792813
+    },
+    {
+      "name": "Models/GLB format/donut-sprinkles.glb",
+      "bytes": 20008,
+      "crc32": 1142060166
+    },
+    {
+      "name": "Models/GLB format/donut.glb",
+      "bytes": 11360,
+      "crc32": 1576122158
+    },
+    {
+      "name": "Models/GLB format/egg-cooked.glb",
+      "bytes": 6752,
+      "crc32": 1949975409
+    },
+    {
+      "name": "Models/GLB format/egg-cup.glb",
+      "bytes": 6992,
+      "crc32": 2997761019
+    },
+    {
+      "name": "Models/GLB format/egg-half.glb",
+      "bytes": 8256,
+      "crc32": 3634319222
+    },
+    {
+      "name": "Models/GLB format/egg.glb",
+      "bytes": 6044,
+      "crc32": 2346066068
+    },
+    {
+      "name": "Models/GLB format/eggplant.glb",
+      "bytes": 13416,
+      "crc32": 4052620848
+    },
+    {
+      "name": "Models/GLB format/fish-bones.glb",
+      "bytes": 34068,
+      "crc32": 2179729809
+    },
+    {
+      "name": "Models/GLB format/fish.glb",
+      "bytes": 31672,
+      "crc32": 1790862102
+    },
+    {
+      "name": "Models/GLB format/frappe.glb",
+      "bytes": 22548,
+      "crc32": 3982680783
+    },
+    {
+      "name": "Models/GLB format/fries-empty.glb",
+      "bytes": 11376,
+      "crc32": 1923082608
+    },
+    {
+      "name": "Models/GLB format/fries.glb",
+      "bytes": 59228,
+      "crc32": 588507858
+    },
+    {
+      "name": "Models/GLB format/frikandel-speciaal.glb",
+      "bytes": 25532,
+      "crc32": 4208926346
+    },
+    {
+      "name": "Models/GLB format/frying-pan-lid.glb",
+      "bytes": 13856,
+      "crc32": 2928227653
+    },
+    {
+      "name": "Models/GLB format/frying-pan.glb",
+      "bytes": 19216,
+      "crc32": 3530761391
+    },
+    {
+      "name": "Models/GLB format/ginger-bread-cutter.glb",
+      "bytes": 11972,
+      "crc32": 79736553
+    },
+    {
+      "name": "Models/GLB format/ginger-bread.glb",
+      "bytes": 7756,
+      "crc32": 1864300074
+    },
+    {
+      "name": "Models/GLB format/glass-wine.glb",
+      "bytes": 23984,
+      "crc32": 4208509091
+    },
+    {
+      "name": "Models/GLB format/glass.glb",
+      "bytes": 4216,
+      "crc32": 196552957
+    },
+    {
+      "name": "Models/GLB format/grapes.glb",
+      "bytes": 58992,
+      "crc32": 671824246
+    },
+    {
+      "name": "Models/GLB format/honey.glb",
+      "bytes": 14888,
+      "crc32": 1932985000
+    },
+    {
+      "name": "Models/GLB format/hot-dog-raw.glb",
+      "bytes": 9568,
+      "crc32": 2367461359
+    },
+    {
+      "name": "Models/GLB format/hot-dog.glb",
+      "bytes": 27700,
+      "crc32": 4270593431
+    },
+    {
+      "name": "Models/GLB format/ice-cream-cne.glb",
+      "bytes": 5460,
+      "crc32": 3898253782
+    },
+    {
+      "name": "Models/GLB format/ice-cream-cup.glb",
+      "bytes": 7796,
+      "crc32": 18213692
+    },
+    {
+      "name": "Models/GLB format/ice-cream-scoop-chocolate.glb",
+      "bytes": 9016,
+      "crc32": 1915314999
+    },
+    {
+      "name": "Models/GLB format/ice-cream-scoop-mint.glb",
+      "bytes": 7256,
+      "crc32": 656298515
+    },
+    {
+      "name": "Models/GLB format/ice-cream.glb",
+      "bytes": 10124,
+      "crc32": 837262114
+    },
+    {
+      "name": "Models/GLB format/knife-block.glb",
+      "bytes": 20204,
+      "crc32": 2426313576
+    },
+    {
+      "name": "Models/GLB format/leek.glb",
+      "bytes": 16648,
+      "crc32": 30930848
+    },
+    {
+      "name": "Models/GLB format/lemon-half.glb",
+      "bytes": 10280,
+      "crc32": 2217162258
+    },
+    {
+      "name": "Models/GLB format/lemon.glb",
+      "bytes": 11924,
+      "crc32": 2592470750
+    },
+    {
+      "name": "Models/GLB format/loaf-baguette.glb",
+      "bytes": 12824,
+      "crc32": 3633795618
+    },
+    {
+      "name": "Models/GLB format/loaf-round.glb",
+      "bytes": 11112,
+      "crc32": 3571952653
+    },
+    {
+      "name": "Models/GLB format/loaf.glb",
+      "bytes": 9464,
+      "crc32": 3978551655
+    },
+    {
+      "name": "Models/GLB format/lollypop.glb",
+      "bytes": 8544,
+      "crc32": 680154838
+    },
+    {
+      "name": "Models/GLB format/maki-roe.glb",
+      "bytes": 6568,
+      "crc32": 2805246907
+    },
+    {
+      "name": "Models/GLB format/maki-salmon.glb",
+      "bytes": 6004,
+      "crc32": 4154366943
+    },
+    {
+      "name": "Models/GLB format/maki-vegetable.glb",
+      "bytes": 6108,
+      "crc32": 1618822236
+    },
+    {
+      "name": "Models/GLB format/meat-cooked.glb",
+      "bytes": 10540,
+      "crc32": 1096492123
+    },
+    {
+      "name": "Models/GLB format/meat-patty.glb",
+      "bytes": 9092,
+      "crc32": 3779346503
+    },
+    {
+      "name": "Models/GLB format/meat-raw.glb",
+      "bytes": 9936,
+      "crc32": 2117161427
+    },
+    {
+      "name": "Models/GLB format/meat-ribs.glb",
+      "bytes": 14364,
+      "crc32": 4038034027
+    },
+    {
+      "name": "Models/GLB format/meat-sausage.glb",
+      "bytes": 47096,
+      "crc32": 2801341246
+    },
+    {
+      "name": "Models/GLB format/meat-tenderizer.glb",
+      "bytes": 31372,
+      "crc32": 2098500755
+    },
+    {
+      "name": "Models/GLB format/mincemeat-pie.glb",
+      "bytes": 12700,
+      "crc32": 1930319355
+    },
+    {
+      "name": "Models/GLB format/mortar-pestle.glb",
+      "bytes": 7232,
+      "crc32": 2836671329
+    },
+    {
+      "name": "Models/GLB format/mortar.glb",
+      "bytes": 10200,
+      "crc32": 571120016
+    },
+    {
+      "name": "Models/GLB format/muffin.glb",
+      "bytes": 10252,
+      "crc32": 3121333354
+    },
+    {
+      "name": "Models/GLB format/mug.glb",
+      "bytes": 20236,
+      "crc32": 1476998736
+    },
+    {
+      "name": "Models/GLB format/mushroom-half.glb",
+      "bytes": 7024,
+      "crc32": 760565404
+    },
+    {
+      "name": "Models/GLB format/mushroom.glb",
+      "bytes": 8440,
+      "crc32": 1429854750
+    },
+    {
+      "name": "Models/GLB format/mussel-open.glb",
+      "bytes": 10216,
+      "crc32": 3664916775
+    },
+    {
+      "name": "Models/GLB format/mussel.glb",
+      "bytes": 5328,
+      "crc32": 1549007230
+    },
+    {
+      "name": "Models/GLB format/onion-half.glb",
+      "bytes": 9084,
+      "crc32": 15575059
+    },
+    {
+      "name": "Models/GLB format/onion.glb",
+      "bytes": 8356,
+      "crc32": 3840867873
+    },
+    {
+      "name": "Models/GLB format/orange.glb",
+      "bytes": 13088,
+      "crc32": 2466670876
+    },
+    {
+      "name": "Models/GLB format/pan-stew.glb",
+      "bytes": 28316,
+      "crc32": 2781119231
+    },
+    {
+      "name": "Models/GLB format/pan.glb",
+      "bytes": 19956,
+      "crc32": 2878916062
+    },
+    {
+      "name": "Models/GLB format/pancakes.glb",
+      "bytes": 42592,
+      "crc32": 3342600969
+    },
+    {
+      "name": "Models/GLB format/paprika-slice.glb",
+      "bytes": 8988,
+      "crc32": 2972416759
+    },
+    {
+      "name": "Models/GLB format/paprika.glb",
+      "bytes": 15124,
+      "crc32": 596746760
+    },
+    {
+      "name": "Models/GLB format/peanut-butter.glb",
+      "bytes": 17408,
+      "crc32": 3820199550
+    },
+    {
+      "name": "Models/GLB format/pear-half.glb",
+      "bytes": 11336,
+      "crc32": 1655989765
+    },
+    {
+      "name": "Models/GLB format/pear.glb",
+      "bytes": 15556,
+      "crc32": 335091325
+    },
+    {
+      "name": "Models/GLB format/pepper-mill.glb",
+      "bytes": 25664,
+      "crc32": 4273782810
+    },
+    {
+      "name": "Models/GLB format/pepper.glb",
+      "bytes": 12928,
+      "crc32": 3461576815
+    },
+    {
+      "name": "Models/GLB format/pie.glb",
+      "bytes": 22420,
+      "crc32": 595563434
+    },
+    {
+      "name": "Models/GLB format/pineapple.glb",
+      "bytes": 20248,
+      "crc32": 733013109
+    },
+    {
+      "name": "Models/GLB format/pizza-box.glb",
+      "bytes": 8788,
+      "crc32": 166297230
+    },
+    {
+      "name": "Models/GLB format/pizza-cutter.glb",
+      "bytes": 8584,
+      "crc32": 2836039681
+    },
+    {
+      "name": "Models/GLB format/pizza.glb",
+      "bytes": 106780,
+      "crc32": 3071565211
+    },
+    {
+      "name": "Models/GLB format/plate-broken.glb",
+      "bytes": 33220,
+      "crc32": 2321957002
+    },
+    {
+      "name": "Models/GLB format/plate-deep.glb",
+      "bytes": 7944,
+      "crc32": 1378310430
+    },
+    {
+      "name": "Models/GLB format/plate-dinner.glb",
+      "bytes": 27908,
+      "crc32": 1704998983
+    },
+    {
+      "name": "Models/GLB format/plate-rectangle.glb",
+      "bytes": 6756,
+      "crc32": 3506500105
+    },
+    {
+      "name": "Models/GLB format/plate-sauerkraut.glb",
+      "bytes": 64728,
+      "crc32": 3181195021
+    },
+    {
+      "name": "Models/GLB format/plate.glb",
+      "bytes": 8480,
+      "crc32": 1071578137
+    },
+    {
+      "name": "Models/GLB format/popsicle-chocolate.glb",
+      "bytes": 11796,
+      "crc32": 2785257657
+    },
+    {
+      "name": "Models/GLB format/popsicle-stick.glb",
+      "bytes": 4768,
+      "crc32": 91717347
+    },
+    {
+      "name": "Models/GLB format/popsicle.glb",
+      "bytes": 8116,
+      "crc32": 2562354435
+    },
+    {
+      "name": "Models/GLB format/pot-lid.glb",
+      "bytes": 10992,
+      "crc32": 3759795027
+    },
+    {
+      "name": "Models/GLB format/pot-stew-lid.glb",
+      "bytes": 15824,
+      "crc32": 1966559847
+    },
+    {
+      "name": "Models/GLB format/pot-stew.glb",
+      "bytes": 29560,
+      "crc32": 2532451424
+    },
+    {
+      "name": "Models/GLB format/pot.glb",
+      "bytes": 18900,
+      "crc32": 3968345972
+    },
+    {
+      "name": "Models/GLB format/pudding.glb",
+      "bytes": 6612,
+      "crc32": 3300767749
+    },
+    {
+      "name": "Models/GLB format/pumpkin-basic.glb",
+      "bytes": 8484,
+      "crc32": 2530157811
+    },
+    {
+      "name": "Models/GLB format/pumpkin.glb",
+      "bytes": 20436,
+      "crc32": 414559440
+    },
+    {
+      "name": "Models/GLB format/radish.glb",
+      "bytes": 16456,
+      "crc32": 1362389489
+    },
+    {
+      "name": "Models/GLB format/rice-ball.glb",
+      "bytes": 6200,
+      "crc32": 1650554443
+    },
+    {
+      "name": "Models/GLB format/rollingPin.glb",
+      "bytes": 14304,
+      "crc32": 3043534809
+    },
+    {
+      "name": "Models/GLB format/salad.glb",
+      "bytes": 17200,
+      "crc32": 2499150410
+    },
+    {
+      "name": "Models/GLB format/sandwich.glb",
+      "bytes": 19724,
+      "crc32": 805157883
+    },
+    {
+      "name": "Models/GLB format/sausage-half.glb",
+      "bytes": 8852,
+      "crc32": 1122325875
+    },
+    {
+      "name": "Models/GLB format/sausage.glb",
+      "bytes": 9556,
+      "crc32": 1370637996
+    },
+    {
+      "name": "Models/GLB format/shaker-pepper.glb",
+      "bytes": 9300,
+      "crc32": 641207069
+    },
+    {
+      "name": "Models/GLB format/shaker-salt.glb",
+      "bytes": 11792,
+      "crc32": 3645980077
+    },
+    {
+      "name": "Models/GLB format/skewer-vegetables.glb",
+      "bytes": 22604,
+      "crc32": 972806835
+    },
+    {
+      "name": "Models/GLB format/skewer.glb",
+      "bytes": 16544,
+      "crc32": 3256352165
+    },
+    {
+      "name": "Models/GLB format/soda-bottle.glb",
+      "bytes": 11324,
+      "crc32": 1851890657
+    },
+    {
+      "name": "Models/GLB format/soda-can-crushed.glb",
+      "bytes": 21304,
+      "crc32": 4138008823
+    },
+    {
+      "name": "Models/GLB format/soda-can.glb",
+      "bytes": 16384,
+      "crc32": 1056795541
+    },
+    {
+      "name": "Models/GLB format/soda-glass.glb",
+      "bytes": 12888,
+      "crc32": 1445247182
+    },
+    {
+      "name": "Models/GLB format/soda.glb",
+      "bytes": 12356,
+      "crc32": 2713787396
+    },
+    {
+      "name": "Models/GLB format/soy.glb",
+      "bytes": 5144,
+      "crc32": 3993995125
+    },
+    {
+      "name": "Models/GLB format/steamer.glb",
+      "bytes": 45700,
+      "crc32": 1926521894
+    },
+    {
+      "name": "Models/GLB format/strawberry.glb",
+      "bytes": 16620,
+      "crc32": 523498037
+    },
+    {
+      "name": "Models/GLB format/styrofoam-dinner.glb",
+      "bytes": 24448,
+      "crc32": 2673605368
+    },
+    {
+      "name": "Models/GLB format/styrofoam.glb",
+      "bytes": 11980,
+      "crc32": 2894184179
+    },
+    {
+      "name": "Models/GLB format/sub.glb",
+      "bytes": 58388,
+      "crc32": 725205102
+    },
+    {
+      "name": "Models/GLB format/sundae.glb",
+      "bytes": 26416,
+      "crc32": 735504921
+    },
+    {
+      "name": "Models/GLB format/sushi-egg.glb",
+      "bytes": 7644,
+      "crc32": 492772489
+    },
+    {
+      "name": "Models/GLB format/sushi-salmon.glb",
+      "bytes": 8852,
+      "crc32": 1779499307
+    },
+    {
+      "name": "Models/GLB format/taco.glb",
+      "bytes": 17476,
+      "crc32": 1247259384
+    },
+    {
+      "name": "Models/GLB format/tajine-lid.glb",
+      "bytes": 13796,
+      "crc32": 1298005916
+    },
+    {
+      "name": "Models/GLB format/tajine.glb",
+      "bytes": 15644,
+      "crc32": 479896035
+    },
+    {
+      "name": "Models/GLB format/Textures/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/GLB format/Textures/colormap.png",
+      "bytes": 10715,
+      "crc32": 3470116947
+    },
+    {
+      "name": "Models/GLB format/tomato-slice.glb",
+      "bytes": 12348,
+      "crc32": 3831860694
+    },
+    {
+      "name": "Models/GLB format/tomato.glb",
+      "bytes": 14084,
+      "crc32": 2561341380
+    },
+    {
+      "name": "Models/GLB format/turkey.glb",
+      "bytes": 37192,
+      "crc32": 2201913427
+    },
+    {
+      "name": "Models/GLB format/utensil-fork.glb",
+      "bytes": 4816,
+      "crc32": 3120844790
+    },
+    {
+      "name": "Models/GLB format/utensil-knife.glb",
+      "bytes": 3492,
+      "crc32": 249247085
+    },
+    {
+      "name": "Models/GLB format/utensil-spoon.glb",
+      "bytes": 6128,
+      "crc32": 534044675
+    },
+    {
+      "name": "Models/GLB format/waffle.glb",
+      "bytes": 47924,
+      "crc32": 2706829615
+    },
+    {
+      "name": "Models/GLB format/watermelon.glb",
+      "bytes": 93884,
+      "crc32": 1470992718
+    },
+    {
+      "name": "Models/GLB format/whipped-cream.glb",
+      "bytes": 4916,
+      "crc32": 1969468758
+    },
+    {
+      "name": "Models/GLB format/whisk.glb",
+      "bytes": 10264,
+      "crc32": 2200769981
+    },
+    {
+      "name": "Models/GLB format/whole-ham.glb",
+      "bytes": 11752,
+      "crc32": 3324396341
+    },
+    {
+      "name": "Models/GLB format/wholer-ham.glb",
+      "bytes": 12916,
+      "crc32": 1493699152
+    },
+    {
+      "name": "Models/GLB format/wine-red.glb",
+      "bytes": 14200,
+      "crc32": 3812905922
+    },
+    {
+      "name": "Models/GLB format/wine-white.glb",
+      "bytes": 13524,
+      "crc32": 1638738961
+    },
+    {
+      "name": "Models/OBJ format/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/OBJ format/advocado-half.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/advocado-half.obj",
+      "bytes": 8722,
+      "crc32": 4141356541
+    },
+    {
+      "name": "Models/OBJ format/apple-half.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/apple-half.obj",
+      "bytes": 11451,
+      "crc32": 3732494398
+    },
+    {
+      "name": "Models/OBJ format/apple.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/apple.obj",
+      "bytes": 12746,
+      "crc32": 871312071
+    },
+    {
+      "name": "Models/OBJ format/avocado.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/avocado.obj",
+      "bytes": 4157,
+      "crc32": 1341162195
+    },
+    {
+      "name": "Models/OBJ format/bacon-raw.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bacon-raw.obj",
+      "bytes": 2884,
+      "crc32": 3272580913
+    },
+    {
+      "name": "Models/OBJ format/bacon.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bacon.obj",
+      "bytes": 2878,
+      "crc32": 1030922401
+    },
+    {
+      "name": "Models/OBJ format/bag-flat.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bag-flat.obj",
+      "bytes": 9930,
+      "crc32": 1989399660
+    },
+    {
+      "name": "Models/OBJ format/bag.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bag.obj",
+      "bytes": 4654,
+      "crc32": 1589880048
+    },
+    {
+      "name": "Models/OBJ format/banana.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/banana.obj",
+      "bytes": 11319,
+      "crc32": 3418839440
+    },
+    {
+      "name": "Models/OBJ format/barrel.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/barrel.obj",
+      "bytes": 24304,
+      "crc32": 1156895797
+    },
+    {
+      "name": "Models/OBJ format/beet.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/beet.obj",
+      "bytes": 9428,
+      "crc32": 2897370727
+    },
+    {
+      "name": "Models/OBJ format/bottle-ketchup.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bottle-ketchup.obj",
+      "bytes": 7072,
+      "crc32": 2841051417
+    },
+    {
+      "name": "Models/OBJ format/bottle-musterd.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bottle-musterd.obj",
+      "bytes": 7072,
+      "crc32": 2906181044
+    },
+    {
+      "name": "Models/OBJ format/bottle-oil.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bottle-oil.obj",
+      "bytes": 8559,
+      "crc32": 3098892467
+    },
+    {
+      "name": "Models/OBJ format/bowl-broth.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bowl-broth.obj",
+      "bytes": 20791,
+      "crc32": 309967067
+    },
+    {
+      "name": "Models/OBJ format/bowl-cereal.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bowl-cereal.obj",
+      "bytes": 11595,
+      "crc32": 711588220
+    },
+    {
+      "name": "Models/OBJ format/bowl-soup.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bowl-soup.obj",
+      "bytes": 12774,
+      "crc32": 310330482
+    },
+    {
+      "name": "Models/OBJ format/bowl.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bowl.obj",
+      "bytes": 6980,
+      "crc32": 3965659804
+    },
+    {
+      "name": "Models/OBJ format/bread.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bread.obj",
+      "bytes": 9651,
+      "crc32": 873407219
+    },
+    {
+      "name": "Models/OBJ format/broccoli.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/broccoli.obj",
+      "bytes": 23388,
+      "crc32": 1747025196
+    },
+    {
+      "name": "Models/OBJ format/burger-cheese-double.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/burger-cheese-double.obj",
+      "bytes": 17674,
+      "crc32": 1752364786
+    },
+    {
+      "name": "Models/OBJ format/burger-cheese.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/burger-cheese.obj",
+      "bytes": 10713,
+      "crc32": 1686353735
+    },
+    {
+      "name": "Models/OBJ format/burger-double.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/burger-double.obj",
+      "bytes": 23823,
+      "crc32": 2353822074
+    },
+    {
+      "name": "Models/OBJ format/burger.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/burger.obj",
+      "bytes": 15677,
+      "crc32": 4177440078
+    },
+    {
+      "name": "Models/OBJ format/cabbage.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cabbage.obj",
+      "bytes": 14464,
+      "crc32": 1432791453
+    },
+    {
+      "name": "Models/OBJ format/cake-birthday.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cake-birthday.obj",
+      "bytes": 83706,
+      "crc32": 2157274089
+    },
+    {
+      "name": "Models/OBJ format/cake-slicer.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cake-slicer.obj",
+      "bytes": 3295,
+      "crc32": 1701284332
+    },
+    {
+      "name": "Models/OBJ format/cake.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cake.obj",
+      "bytes": 58478,
+      "crc32": 3454919755
+    },
+    {
+      "name": "Models/OBJ format/can-open.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/can-open.obj",
+      "bytes": 16756,
+      "crc32": 384387585
+    },
+    {
+      "name": "Models/OBJ format/can-small.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/can-small.obj",
+      "bytes": 10646,
+      "crc32": 3353525884
+    },
+    {
+      "name": "Models/OBJ format/can.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/can.obj",
+      "bytes": 10636,
+      "crc32": 3149661292
+    },
+    {
+      "name": "Models/OBJ format/candy-bar-wrapper.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/candy-bar-wrapper.obj",
+      "bytes": 4011,
+      "crc32": 1082647955
+    },
+    {
+      "name": "Models/OBJ format/candy-bar.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/candy-bar.obj",
+      "bytes": 5658,
+      "crc32": 4282835538
+    },
+    {
+      "name": "Models/OBJ format/carrot.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/carrot.obj",
+      "bytes": 13824,
+      "crc32": 714255106
+    },
+    {
+      "name": "Models/OBJ format/carton-small.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/carton-small.obj",
+      "bytes": 6467,
+      "crc32": 766366202
+    },
+    {
+      "name": "Models/OBJ format/carton.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/carton.obj",
+      "bytes": 7892,
+      "crc32": 1669922570
+    },
+    {
+      "name": "Models/OBJ format/cauliflower.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cauliflower.obj",
+      "bytes": 15676,
+      "crc32": 3198108898
+    },
+    {
+      "name": "Models/OBJ format/celery-stick.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/celery-stick.obj",
+      "bytes": 4252,
+      "crc32": 2390247827
+    },
+    {
+      "name": "Models/OBJ format/cheese-cut.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cheese-cut.obj",
+      "bytes": 11152,
+      "crc32": 679053161
+    },
+    {
+      "name": "Models/OBJ format/cheese-slicer.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cheese-slicer.obj",
+      "bytes": 4049,
+      "crc32": 1695802923
+    },
+    {
+      "name": "Models/OBJ format/cheese.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cheese.obj",
+      "bytes": 39363,
+      "crc32": 2184601603
+    },
+    {
+      "name": "Models/OBJ format/cherries.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cherries.obj",
+      "bytes": 11602,
+      "crc32": 3566841268
+    },
+    {
+      "name": "Models/OBJ format/chinese.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/chinese.obj",
+      "bytes": 14244,
+      "crc32": 1584599698
+    },
+    {
+      "name": "Models/OBJ format/chocolate-wrapper.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/chocolate-wrapper.obj",
+      "bytes": 9671,
+      "crc32": 1477263686
+    },
+    {
+      "name": "Models/OBJ format/chocolate.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/chocolate.obj",
+      "bytes": 9983,
+      "crc32": 4005426516
+    },
+    {
+      "name": "Models/OBJ format/chopstic-decorative.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/chopstic-decorative.obj",
+      "bytes": 3368,
+      "crc32": 691062508
+    },
+    {
+      "name": "Models/OBJ format/chopstick.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/chopstick.obj",
+      "bytes": 1059,
+      "crc32": 1875244875
+    },
+    {
+      "name": "Models/OBJ format/cocktail.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cocktail.obj",
+      "bytes": 10946,
+      "crc32": 2012935475
+    },
+    {
+      "name": "Models/OBJ format/coconut-half.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/coconut-half.obj",
+      "bytes": 8138,
+      "crc32": 4187270057
+    },
+    {
+      "name": "Models/OBJ format/coconut.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/coconut.obj",
+      "bytes": 6718,
+      "crc32": 1696516153
+    },
+    {
+      "name": "Models/OBJ format/cookie-chocolate.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cookie-chocolate.obj",
+      "bytes": 11512,
+      "crc32": 2670763906
+    },
+    {
+      "name": "Models/OBJ format/cookie.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cookie.obj",
+      "bytes": 6160,
+      "crc32": 1254497428
+    },
+    {
+      "name": "Models/OBJ format/cooking-fork.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cooking-fork.obj",
+      "bytes": 3244,
+      "crc32": 3795572708
+    },
+    {
+      "name": "Models/OBJ format/cooking-knife-chopping.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cooking-knife-chopping.obj",
+      "bytes": 6035,
+      "crc32": 2424935943
+    },
+    {
+      "name": "Models/OBJ format/cooking-knife.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cooking-knife.obj",
+      "bytes": 3300,
+      "crc32": 694583712
+    },
+    {
+      "name": "Models/OBJ format/cooking-spatula.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cooking-spatula.obj",
+      "bytes": 5726,
+      "crc32": 1715662064
+    },
+    {
+      "name": "Models/OBJ format/cooking-spoon.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cooking-spoon.obj",
+      "bytes": 4967,
+      "crc32": 3736559705
+    },
+    {
+      "name": "Models/OBJ format/corn-dog.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/corn-dog.obj",
+      "bytes": 4662,
+      "crc32": 1949560905
+    },
+    {
+      "name": "Models/OBJ format/corn.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/corn.obj",
+      "bytes": 12783,
+      "crc32": 2985743654
+    },
+    {
+      "name": "Models/OBJ format/croissant.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/croissant.obj",
+      "bytes": 15299,
+      "crc32": 4287597138
+    },
+    {
+      "name": "Models/OBJ format/cup-coffee.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cup-coffee.obj",
+      "bytes": 9537,
+      "crc32": 3108630100
+    },
+    {
+      "name": "Models/OBJ format/cup-saucer.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cup-saucer.obj",
+      "bytes": 9036,
+      "crc32": 1283486968
+    },
+    {
+      "name": "Models/OBJ format/cup-tea.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cup-tea.obj",
+      "bytes": 12658,
+      "crc32": 2172276216
+    },
+    {
+      "name": "Models/OBJ format/cup.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cup.obj",
+      "bytes": 9263,
+      "crc32": 3574091496
+    },
+    {
+      "name": "Models/OBJ format/cupcake.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cupcake.obj",
+      "bytes": 15751,
+      "crc32": 2658703524
+    },
+    {
+      "name": "Models/OBJ format/cutting-board-japanese.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cutting-board-japanese.obj",
+      "bytes": 6964,
+      "crc32": 4023026530
+    },
+    {
+      "name": "Models/OBJ format/cutting-board-round.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cutting-board-round.obj",
+      "bytes": 11825,
+      "crc32": 826169955
+    },
+    {
+      "name": "Models/OBJ format/cutting-board.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/cutting-board.obj",
+      "bytes": 8782,
+      "crc32": 2945377648
+    },
+    {
+      "name": "Models/OBJ format/dim-sum.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/dim-sum.obj",
+      "bytes": 4806,
+      "crc32": 4046210873
+    },
+    {
+      "name": "Models/OBJ format/donut-chocolate.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/donut-chocolate.obj",
+      "bytes": 11680,
+      "crc32": 1089653684
+    },
+    {
+      "name": "Models/OBJ format/donut-sprinkles.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/donut-sprinkles.obj",
+      "bytes": 19157,
+      "crc32": 1911414196
+    },
+    {
+      "name": "Models/OBJ format/donut.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/donut.obj",
+      "bytes": 9717,
+      "crc32": 1509330208
+    },
+    {
+      "name": "Models/OBJ format/egg-cooked.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/egg-cooked.obj",
+      "bytes": 7917,
+      "crc32": 2034376820
+    },
+    {
+      "name": "Models/OBJ format/egg-cup.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/egg-cup.obj",
+      "bytes": 6862,
+      "crc32": 4138817072
+    },
+    {
+      "name": "Models/OBJ format/egg-half.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/egg-half.obj",
+      "bytes": 6111,
+      "crc32": 1338680851
+    },
+    {
+      "name": "Models/OBJ format/egg.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/egg.obj",
+      "bytes": 3926,
+      "crc32": 699568413
+    },
+    {
+      "name": "Models/OBJ format/eggplant.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/eggplant.obj",
+      "bytes": 13444,
+      "crc32": 1998639741
+    },
+    {
+      "name": "Models/OBJ format/fish-bones.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/fish-bones.obj",
+      "bytes": 37137,
+      "crc32": 3045202139
+    },
+    {
+      "name": "Models/OBJ format/fish.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/fish.obj",
+      "bytes": 29615,
+      "crc32": 3278053970
+    },
+    {
+      "name": "Models/OBJ format/frappe.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/frappe.obj",
+      "bytes": 31692,
+      "crc32": 3106338567
+    },
+    {
+      "name": "Models/OBJ format/fries-empty.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/fries-empty.obj",
+      "bytes": 9212,
+      "crc32": 2626332884
+    },
+    {
+      "name": "Models/OBJ format/fries.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/fries.obj",
+      "bytes": 37656,
+      "crc32": 4080968048
+    },
+    {
+      "name": "Models/OBJ format/frikandel-speciaal.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/frikandel-speciaal.obj",
+      "bytes": 21017,
+      "crc32": 2829693505
+    },
+    {
+      "name": "Models/OBJ format/frying-pan-lid.mtl",
+      "bytes": 140,
+      "crc32": 3258817978
+    },
+    {
+      "name": "Models/OBJ format/frying-pan-lid.obj",
+      "bytes": 12152,
+      "crc32": 556648629
+    },
+    {
+      "name": "Models/OBJ format/frying-pan.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/frying-pan.obj",
+      "bytes": 16961,
+      "crc32": 527345131
+    },
+    {
+      "name": "Models/OBJ format/ginger-bread-cutter.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/ginger-bread-cutter.obj",
+      "bytes": 9747,
+      "crc32": 2466267343
+    },
+    {
+      "name": "Models/OBJ format/ginger-bread.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/ginger-bread.obj",
+      "bytes": 6472,
+      "crc32": 1926951237
+    },
+    {
+      "name": "Models/OBJ format/glass-wine.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/glass-wine.obj",
+      "bytes": 17600,
+      "crc32": 3342650583
+    },
+    {
+      "name": "Models/OBJ format/glass.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/glass.obj",
+      "bytes": 3576,
+      "crc32": 1322105286
+    },
+    {
+      "name": "Models/OBJ format/grapes.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/grapes.obj",
+      "bytes": 58437,
+      "crc32": 2925553371
+    },
+    {
+      "name": "Models/OBJ format/honey.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/honey.obj",
+      "bytes": 12226,
+      "crc32": 740175264
+    },
+    {
+      "name": "Models/OBJ format/hot-dog-raw.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/hot-dog-raw.obj",
+      "bytes": 7846,
+      "crc32": 2760896517
+    },
+    {
+      "name": "Models/OBJ format/hot-dog.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/hot-dog.obj",
+      "bytes": 20564,
+      "crc32": 2713027043
+    },
+    {
+      "name": "Models/OBJ format/ice-cream-cne.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/ice-cream-cne.obj",
+      "bytes": 3573,
+      "crc32": 4167780691
+    },
+    {
+      "name": "Models/OBJ format/ice-cream-cup.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/ice-cream-cup.obj",
+      "bytes": 5450,
+      "crc32": 1747287910
+    },
+    {
+      "name": "Models/OBJ format/ice-cream-scoop-chocolate.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/ice-cream-scoop-chocolate.obj",
+      "bytes": 7834,
+      "crc32": 3842633938
+    },
+    {
+      "name": "Models/OBJ format/ice-cream-scoop-mint.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/ice-cream-scoop-mint.obj",
+      "bytes": 5207,
+      "crc32": 3400375765
+    },
+    {
+      "name": "Models/OBJ format/ice-cream.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/ice-cream.obj",
+      "bytes": 5336,
+      "crc32": 3439071607
+    },
+    {
+      "name": "Models/OBJ format/knife-block.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/knife-block.obj",
+      "bytes": 10231,
+      "crc32": 3595226676
+    },
+    {
+      "name": "Models/OBJ format/leek.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/leek.obj",
+      "bytes": 17654,
+      "crc32": 4273836570
+    },
+    {
+      "name": "Models/OBJ format/lemon-half.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/lemon-half.obj",
+      "bytes": 9539,
+      "crc32": 2843706509
+    },
+    {
+      "name": "Models/OBJ format/lemon.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/lemon.obj",
+      "bytes": 9367,
+      "crc32": 1553074144
+    },
+    {
+      "name": "Models/OBJ format/loaf-baguette.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/loaf-baguette.obj",
+      "bytes": 10923,
+      "crc32": 509419786
+    },
+    {
+      "name": "Models/OBJ format/loaf-round.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/loaf-round.obj",
+      "bytes": 10265,
+      "crc32": 357694462
+    },
+    {
+      "name": "Models/OBJ format/loaf.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/loaf.obj",
+      "bytes": 9759,
+      "crc32": 4033653373
+    },
+    {
+      "name": "Models/OBJ format/lollypop.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/lollypop.obj",
+      "bytes": 9450,
+      "crc32": 263924856
+    },
+    {
+      "name": "Models/OBJ format/maki-roe.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/maki-roe.obj",
+      "bytes": 4621,
+      "crc32": 3040669087
+    },
+    {
+      "name": "Models/OBJ format/maki-salmon.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/maki-salmon.obj",
+      "bytes": 4142,
+      "crc32": 2766675438
+    },
+    {
+      "name": "Models/OBJ format/maki-vegetable.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/maki-vegetable.obj",
+      "bytes": 4503,
+      "crc32": 4028681493
+    },
+    {
+      "name": "Models/OBJ format/meat-cooked.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/meat-cooked.obj",
+      "bytes": 10076,
+      "crc32": 2939193098
+    },
+    {
+      "name": "Models/OBJ format/meat-patty.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/meat-patty.obj",
+      "bytes": 8653,
+      "crc32": 3340254777
+    },
+    {
+      "name": "Models/OBJ format/meat-raw.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/meat-raw.obj",
+      "bytes": 9280,
+      "crc32": 3700699631
+    },
+    {
+      "name": "Models/OBJ format/meat-ribs.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/meat-ribs.obj",
+      "bytes": 13076,
+      "crc32": 4073343681
+    },
+    {
+      "name": "Models/OBJ format/meat-sausage.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/meat-sausage.obj",
+      "bytes": 32740,
+      "crc32": 2711045770
+    },
+    {
+      "name": "Models/OBJ format/meat-tenderizer.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/meat-tenderizer.obj",
+      "bytes": 27537,
+      "crc32": 3858463223
+    },
+    {
+      "name": "Models/OBJ format/mincemeat-pie.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/mincemeat-pie.obj",
+      "bytes": 13710,
+      "crc32": 3760154847
+    },
+    {
+      "name": "Models/OBJ format/mortar-pestle.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/mortar-pestle.obj",
+      "bytes": 5127,
+      "crc32": 3134010759
+    },
+    {
+      "name": "Models/OBJ format/mortar.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/mortar.obj",
+      "bytes": 8192,
+      "crc32": 2279744576
+    },
+    {
+      "name": "Models/OBJ format/muffin.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/muffin.obj",
+      "bytes": 7706,
+      "crc32": 4122580977
+    },
+    {
+      "name": "Models/OBJ format/mug.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/mug.obj",
+      "bytes": 17591,
+      "crc32": 2754887342
+    },
+    {
+      "name": "Models/OBJ format/mushroom-half.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/mushroom-half.obj",
+      "bytes": 5579,
+      "crc32": 895412588
+    },
+    {
+      "name": "Models/OBJ format/mushroom.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/mushroom.obj",
+      "bytes": 6629,
+      "crc32": 2571225037
+    },
+    {
+      "name": "Models/OBJ format/mussel-open.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/mussel-open.obj",
+      "bytes": 8559,
+      "crc32": 1436793247
+    },
+    {
+      "name": "Models/OBJ format/mussel.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/mussel.obj",
+      "bytes": 3628,
+      "crc32": 1450894847
+    },
+    {
+      "name": "Models/OBJ format/onion-half.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/onion-half.obj",
+      "bytes": 10775,
+      "crc32": 873875449
+    },
+    {
+      "name": "Models/OBJ format/onion.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/onion.obj",
+      "bytes": 5950,
+      "crc32": 950537924
+    },
+    {
+      "name": "Models/OBJ format/orange.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/orange.obj",
+      "bytes": 10589,
+      "crc32": 4240282705
+    },
+    {
+      "name": "Models/OBJ format/pan-stew.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pan-stew.obj",
+      "bytes": 31031,
+      "crc32": 1469211879
+    },
+    {
+      "name": "Models/OBJ format/pan.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pan.obj",
+      "bytes": 20067,
+      "crc32": 1611099437
+    },
+    {
+      "name": "Models/OBJ format/pancakes.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pancakes.obj",
+      "bytes": 32721,
+      "crc32": 3263376060
+    },
+    {
+      "name": "Models/OBJ format/paprika-slice.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/paprika-slice.obj",
+      "bytes": 7947,
+      "crc32": 2398242314
+    },
+    {
+      "name": "Models/OBJ format/paprika.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/paprika.obj",
+      "bytes": 13925,
+      "crc32": 2181402630
+    },
+    {
+      "name": "Models/OBJ format/peanut-butter.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/peanut-butter.obj",
+      "bytes": 13805,
+      "crc32": 3200204682
+    },
+    {
+      "name": "Models/OBJ format/pear-half.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pear-half.obj",
+      "bytes": 11647,
+      "crc32": 211476038
+    },
+    {
+      "name": "Models/OBJ format/pear.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pear.obj",
+      "bytes": 13082,
+      "crc32": 3852377057
+    },
+    {
+      "name": "Models/OBJ format/pepper-mill.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pepper-mill.obj",
+      "bytes": 24633,
+      "crc32": 2955209138
+    },
+    {
+      "name": "Models/OBJ format/pepper.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pepper.obj",
+      "bytes": 9752,
+      "crc32": 2514781952
+    },
+    {
+      "name": "Models/OBJ format/pie.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pie.obj",
+      "bytes": 23177,
+      "crc32": 3560476701
+    },
+    {
+      "name": "Models/OBJ format/pineapple.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pineapple.obj",
+      "bytes": 19012,
+      "crc32": 886136140
+    },
+    {
+      "name": "Models/OBJ format/pizza-box.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pizza-box.obj",
+      "bytes": 5482,
+      "crc32": 1503924985
+    },
+    {
+      "name": "Models/OBJ format/pizza-cutter.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pizza-cutter.obj",
+      "bytes": 7912,
+      "crc32": 3107173261
+    },
+    {
+      "name": "Models/OBJ format/pizza.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pizza.obj",
+      "bytes": 89194,
+      "crc32": 1883171996
+    },
+    {
+      "name": "Models/OBJ format/plate-broken.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/plate-broken.obj",
+      "bytes": 18444,
+      "crc32": 1476663794
+    },
+    {
+      "name": "Models/OBJ format/plate-deep.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/plate-deep.obj",
+      "bytes": 11780,
+      "crc32": 475457523
+    },
+    {
+      "name": "Models/OBJ format/plate-dinner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/plate-dinner.obj",
+      "bytes": 32526,
+      "crc32": 2854817921
+    },
+    {
+      "name": "Models/OBJ format/plate-rectangle.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/plate-rectangle.obj",
+      "bytes": 5052,
+      "crc32": 3458417113
+    },
+    {
+      "name": "Models/OBJ format/plate-sauerkraut.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/plate-sauerkraut.obj",
+      "bytes": 57449,
+      "crc32": 1646900406
+    },
+    {
+      "name": "Models/OBJ format/plate.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/plate.obj",
+      "bytes": 11628,
+      "crc32": 2034454215
+    },
+    {
+      "name": "Models/OBJ format/popsicle-chocolate.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/popsicle-chocolate.obj",
+      "bytes": 11208,
+      "crc32": 3201731721
+    },
+    {
+      "name": "Models/OBJ format/popsicle-stick.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/popsicle-stick.obj",
+      "bytes": 2838,
+      "crc32": 387965398
+    },
+    {
+      "name": "Models/OBJ format/popsicle.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/popsicle.obj",
+      "bytes": 6183,
+      "crc32": 2314718525
+    },
+    {
+      "name": "Models/OBJ format/pot-lid.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pot-lid.obj",
+      "bytes": 11210,
+      "crc32": 3476553419
+    },
+    {
+      "name": "Models/OBJ format/pot-stew-lid.mtl",
+      "bytes": 140,
+      "crc32": 3258817978
+    },
+    {
+      "name": "Models/OBJ format/pot-stew-lid.obj",
+      "bytes": 13977,
+      "crc32": 2240631499
+    },
+    {
+      "name": "Models/OBJ format/pot-stew.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pot-stew.obj",
+      "bytes": 32297,
+      "crc32": 2351708543
+    },
+    {
+      "name": "Models/OBJ format/pot.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pot.obj",
+      "bytes": 18600,
+      "crc32": 1099254772
+    },
+    {
+      "name": "Models/OBJ format/pudding.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pudding.obj",
+      "bytes": 4639,
+      "crc32": 2903234450
+    },
+    {
+      "name": "Models/OBJ format/pumpkin-basic.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pumpkin-basic.obj",
+      "bytes": 6634,
+      "crc32": 3473139532
+    },
+    {
+      "name": "Models/OBJ format/pumpkin.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pumpkin.obj",
+      "bytes": 20077,
+      "crc32": 2266298069
+    },
+    {
+      "name": "Models/OBJ format/radish.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/radish.obj",
+      "bytes": 15920,
+      "crc32": 2655318993
+    },
+    {
+      "name": "Models/OBJ format/rice-ball.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/rice-ball.obj",
+      "bytes": 9881,
+      "crc32": 3963182336
+    },
+    {
+      "name": "Models/OBJ format/rollingPin.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/rollingPin.obj",
+      "bytes": 11763,
+      "crc32": 329191941
+    },
+    {
+      "name": "Models/OBJ format/salad.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/salad.obj",
+      "bytes": 15907,
+      "crc32": 2058793577
+    },
+    {
+      "name": "Models/OBJ format/sandwich.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/sandwich.obj",
+      "bytes": 9198,
+      "crc32": 3533401218
+    },
+    {
+      "name": "Models/OBJ format/sausage-half.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/sausage-half.obj",
+      "bytes": 8796,
+      "crc32": 3508388073
+    },
+    {
+      "name": "Models/OBJ format/sausage.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/sausage.obj",
+      "bytes": 8044,
+      "crc32": 839132056
+    },
+    {
+      "name": "Models/OBJ format/shaker-pepper.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/shaker-pepper.obj",
+      "bytes": 10701,
+      "crc32": 731309972
+    },
+    {
+      "name": "Models/OBJ format/shaker-salt.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/shaker-salt.obj",
+      "bytes": 10837,
+      "crc32": 1529823317
+    },
+    {
+      "name": "Models/OBJ format/skewer-vegetables.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/skewer-vegetables.obj",
+      "bytes": 9537,
+      "crc32": 4189398416
+    },
+    {
+      "name": "Models/OBJ format/skewer.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/skewer.obj",
+      "bytes": 7114,
+      "crc32": 2158101934
+    },
+    {
+      "name": "Models/OBJ format/soda-bottle.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/soda-bottle.obj",
+      "bytes": 9622,
+      "crc32": 349206653
+    },
+    {
+      "name": "Models/OBJ format/soda-can-crushed.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/soda-can-crushed.obj",
+      "bytes": 19251,
+      "crc32": 2325213940
+    },
+    {
+      "name": "Models/OBJ format/soda-can.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/soda-can.obj",
+      "bytes": 14295,
+      "crc32": 1452108361
+    },
+    {
+      "name": "Models/OBJ format/soda-glass.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/soda-glass.obj",
+      "bytes": 9872,
+      "crc32": 2753429045
+    },
+    {
+      "name": "Models/OBJ format/soda.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/soda.obj",
+      "bytes": 16067,
+      "crc32": 4267344141
+    },
+    {
+      "name": "Models/OBJ format/soy.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/soy.obj",
+      "bytes": 5507,
+      "crc32": 448334321
+    },
+    {
+      "name": "Models/OBJ format/steamer.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/steamer.obj",
+      "bytes": 24502,
+      "crc32": 757562097
+    },
+    {
+      "name": "Models/OBJ format/strawberry.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/strawberry.obj",
+      "bytes": 14673,
+      "crc32": 3932800078
+    },
+    {
+      "name": "Models/OBJ format/styrofoam-dinner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/styrofoam-dinner.obj",
+      "bytes": 20307,
+      "crc32": 698529427
+    },
+    {
+      "name": "Models/OBJ format/styrofoam.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/styrofoam.obj",
+      "bytes": 11944,
+      "crc32": 521528489
+    },
+    {
+      "name": "Models/OBJ format/sub.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/sub.obj",
+      "bytes": 32068,
+      "crc32": 656359806
+    },
+    {
+      "name": "Models/OBJ format/sundae.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/sundae.obj",
+      "bytes": 29640,
+      "crc32": 275664749
+    },
+    {
+      "name": "Models/OBJ format/sushi-egg.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/sushi-egg.obj",
+      "bytes": 7151,
+      "crc32": 414472463
+    },
+    {
+      "name": "Models/OBJ format/sushi-salmon.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/sushi-salmon.obj",
+      "bytes": 8726,
+      "crc32": 3943730729
+    },
+    {
+      "name": "Models/OBJ format/taco.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/taco.obj",
+      "bytes": 17266,
+      "crc32": 1505573332
+    },
+    {
+      "name": "Models/OBJ format/tajine-lid.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/tajine-lid.obj",
+      "bytes": 12416,
+      "crc32": 1953873838
+    },
+    {
+      "name": "Models/OBJ format/tajine.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/tajine.obj",
+      "bytes": 13916,
+      "crc32": 1343209140
+    },
+    {
+      "name": "Models/OBJ format/Textures/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/OBJ format/Textures/colormap.png",
+      "bytes": 10715,
+      "crc32": 3470116947
+    },
+    {
+      "name": "Models/OBJ format/tomato-slice.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/tomato-slice.obj",
+      "bytes": 10302,
+      "crc32": 2843851468
+    },
+    {
+      "name": "Models/OBJ format/tomato.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/tomato.obj",
+      "bytes": 12031,
+      "crc32": 194095305
+    },
+    {
+      "name": "Models/OBJ format/turkey.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/turkey.obj",
+      "bytes": 32878,
+      "crc32": 996706111
+    },
+    {
+      "name": "Models/OBJ format/utensil-fork.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/utensil-fork.obj",
+      "bytes": 3116,
+      "crc32": 1067557965
+    },
+    {
+      "name": "Models/OBJ format/utensil-knife.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/utensil-knife.obj",
+      "bytes": 1562,
+      "crc32": 48991819
+    },
+    {
+      "name": "Models/OBJ format/utensil-spoon.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/utensil-spoon.obj",
+      "bytes": 4210,
+      "crc32": 4262679911
+    },
+    {
+      "name": "Models/OBJ format/waffle.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/waffle.obj",
+      "bytes": 45718,
+      "crc32": 4217229677
+    },
+    {
+      "name": "Models/OBJ format/watermelon.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/watermelon.obj",
+      "bytes": 100030,
+      "crc32": 326285679
+    },
+    {
+      "name": "Models/OBJ format/whipped-cream.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/whipped-cream.obj",
+      "bytes": 7282,
+      "crc32": 961826595
+    },
+    {
+      "name": "Models/OBJ format/whisk.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/whisk.obj",
+      "bytes": 10822,
+      "crc32": 2698712073
+    },
+    {
+      "name": "Models/OBJ format/whole-ham.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/whole-ham.obj",
+      "bytes": 13150,
+      "crc32": 3750760664
+    },
+    {
+      "name": "Models/OBJ format/wholer-ham.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wholer-ham.obj",
+      "bytes": 11602,
+      "crc32": 193215842
+    },
+    {
+      "name": "Models/OBJ format/wine-red.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wine-red.obj",
+      "bytes": 12536,
+      "crc32": 802817648
+    },
+    {
+      "name": "Models/OBJ format/wine-white.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wine-white.obj",
+      "bytes": 10983,
+      "crc32": 2674959727
+    },
+    {
+      "name": "Models/Textures/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Overview.html",
+      "bytes": 29848,
+      "crc32": 1080539276
+    },
+    {
+      "name": "Preview.png",
+      "bytes": 139035,
+      "crc32": 1949457586
+    },
+    {
+      "name": "Previews/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Previews/advocado-half.png",
+      "bytes": 1675,
+      "crc32": 2032538040
+    },
+    {
+      "name": "Previews/apple-half.png",
+      "bytes": 1619,
+      "crc32": 396975610
+    },
+    {
+      "name": "Previews/apple.png",
+      "bytes": 1808,
+      "crc32": 4118475002
+    },
+    {
+      "name": "Previews/avocado.png",
+      "bytes": 1698,
+      "crc32": 2043611619
+    },
+    {
+      "name": "Previews/bacon-raw.png",
+      "bytes": 1194,
+      "crc32": 3787227630
+    },
+    {
+      "name": "Previews/bacon.png",
+      "bytes": 1138,
+      "crc32": 3946611104
+    },
+    {
+      "name": "Previews/bag-flat.png",
+      "bytes": 2035,
+      "crc32": 1514321372
+    },
+    {
+      "name": "Previews/bag.png",
+      "bytes": 1677,
+      "crc32": 3361552851
+    },
+    {
+      "name": "Previews/banana.png",
+      "bytes": 1467,
+      "crc32": 897761227
+    },
+    {
+      "name": "Previews/barrel.png",
+      "bytes": 1898,
+      "crc32": 3016850795
+    },
+    {
+      "name": "Previews/beet.png",
+      "bytes": 1496,
+      "crc32": 99595053
+    },
+    {
+      "name": "Previews/bottle-ketchup.png",
+      "bytes": 1451,
+      "crc32": 3855804365
+    },
+    {
+      "name": "Previews/bottle-musterd.png",
+      "bytes": 1447,
+      "crc32": 471015484
+    },
+    {
+      "name": "Previews/bottle-oil.png",
+      "bytes": 1343,
+      "crc32": 2283816220
+    },
+    {
+      "name": "Previews/bowl-broth.png",
+      "bytes": 2218,
+      "crc32": 2783443620
+    },
+    {
+      "name": "Previews/bowl-cereal.png",
+      "bytes": 1900,
+      "crc32": 3315287170
+    },
+    {
+      "name": "Previews/bowl-soup.png",
+      "bytes": 2250,
+      "crc32": 2456717430
+    },
+    {
+      "name": "Previews/bowl.png",
+      "bytes": 2240,
+      "crc32": 2880966112
+    },
+    {
+      "name": "Previews/bread.png",
+      "bytes": 1804,
+      "crc32": 814982546
+    },
+    {
+      "name": "Previews/broccoli.png",
+      "bytes": 2012,
+      "crc32": 2485779744
+    },
+    {
+      "name": "Previews/burger-cheese-double.png",
+      "bytes": 1863,
+      "crc32": 1623594481
+    },
+    {
+      "name": "Previews/burger-cheese.png",
+      "bytes": 1930,
+      "crc32": 425391631
+    },
+    {
+      "name": "Previews/burger-double.png",
+      "bytes": 1893,
+      "crc32": 3852943754
+    },
+    {
+      "name": "Previews/burger.png",
+      "bytes": 1923,
+      "crc32": 2692437015
+    },
+    {
+      "name": "Previews/cabbage.png",
+      "bytes": 1984,
+      "crc32": 3294456975
+    },
+    {
+      "name": "Previews/cake-birthday.png",
+      "bytes": 1992,
+      "crc32": 606323777
+    },
+    {
+      "name": "Previews/cake-slicer.png",
+      "bytes": 984,
+      "crc32": 806676804
+    },
+    {
+      "name": "Previews/cake.png",
+      "bytes": 2123,
+      "crc32": 1253490127
+    },
+    {
+      "name": "Previews/can-open.png",
+      "bytes": 1638,
+      "crc32": 1996792623
+    },
+    {
+      "name": "Previews/can-small.png",
+      "bytes": 1838,
+      "crc32": 4117029482
+    },
+    {
+      "name": "Previews/can.png",
+      "bytes": 1764,
+      "crc32": 3845107240
+    },
+    {
+      "name": "Previews/candy-bar-wrapper.png",
+      "bytes": 1528,
+      "crc32": 2317483544
+    },
+    {
+      "name": "Previews/candy-bar.png",
+      "bytes": 1517,
+      "crc32": 1859430029
+    },
+    {
+      "name": "Previews/carrot.png",
+      "bytes": 1373,
+      "crc32": 3098457189
+    },
+    {
+      "name": "Previews/carton-small.png",
+      "bytes": 1602,
+      "crc32": 2435770522
+    },
+    {
+      "name": "Previews/carton.png",
+      "bytes": 1518,
+      "crc32": 3050407041
+    },
+    {
+      "name": "Previews/cauliflower.png",
+      "bytes": 1963,
+      "crc32": 3624652035
+    },
+    {
+      "name": "Previews/celery-stick.png",
+      "bytes": 1296,
+      "crc32": 589751724
+    },
+    {
+      "name": "Previews/cheese-cut.png",
+      "bytes": 1615,
+      "crc32": 1970246334
+    },
+    {
+      "name": "Previews/cheese-slicer.png",
+      "bytes": 1201,
+      "crc32": 614671209
+    },
+    {
+      "name": "Previews/cheese.png",
+      "bytes": 2108,
+      "crc32": 1263705710
+    },
+    {
+      "name": "Previews/cherries.png",
+      "bytes": 1726,
+      "crc32": 4224933205
+    },
+    {
+      "name": "Previews/chinese.png",
+      "bytes": 1691,
+      "crc32": 1924984209
+    },
+    {
+      "name": "Previews/chocolate-wrapper.png",
+      "bytes": 1700,
+      "crc32": 3184651762
+    },
+    {
+      "name": "Previews/chocolate.png",
+      "bytes": 1833,
+      "crc32": 394997768
+    },
+    {
+      "name": "Previews/chopstic-decorative.png",
+      "bytes": 824,
+      "crc32": 4291252797
+    },
+    {
+      "name": "Previews/chopstick.png",
+      "bytes": 792,
+      "crc32": 1001687440
+    },
+    {
+      "name": "Previews/cocktail.png",
+      "bytes": 1454,
+      "crc32": 148189882
+    },
+    {
+      "name": "Previews/coconut-half.png",
+      "bytes": 2204,
+      "crc32": 4160720775
+    },
+    {
+      "name": "Previews/coconut.png",
+      "bytes": 1940,
+      "crc32": 1439479414
+    },
+    {
+      "name": "Previews/cookie-chocolate.png",
+      "bytes": 2106,
+      "crc32": 2942316160
+    },
+    {
+      "name": "Previews/cookie.png",
+      "bytes": 1763,
+      "crc32": 842132634
+    },
+    {
+      "name": "Previews/cooking-fork.png",
+      "bytes": 1078,
+      "crc32": 1085006079
+    },
+    {
+      "name": "Previews/cooking-knife-chopping.png",
+      "bytes": 1359,
+      "crc32": 889632790
+    },
+    {
+      "name": "Previews/cooking-knife.png",
+      "bytes": 1088,
+      "crc32": 1904334805
+    },
+    {
+      "name": "Previews/cooking-spatula.png",
+      "bytes": 1420,
+      "crc32": 404387198
+    },
+    {
+      "name": "Previews/cooking-spoon.png",
+      "bytes": 1347,
+      "crc32": 309217390
+    },
+    {
+      "name": "Previews/corn-dog.png",
+      "bytes": 1448,
+      "crc32": 2963648875
+    },
+    {
+      "name": "Previews/corn.png",
+      "bytes": 1692,
+      "crc32": 2162683857
+    },
+    {
+      "name": "Previews/croissant.png",
+      "bytes": 1927,
+      "crc32": 1943691080
+    },
+    {
+      "name": "Previews/cup-coffee.png",
+      "bytes": 2100,
+      "crc32": 645505056
+    },
+    {
+      "name": "Previews/cup-saucer.png",
+      "bytes": 1867,
+      "crc32": 1269329786
+    },
+    {
+      "name": "Previews/cup-tea.png",
+      "bytes": 2108,
+      "crc32": 250852820
+    },
+    {
+      "name": "Previews/cup.png",
+      "bytes": 2218,
+      "crc32": 586048844
+    },
+    {
+      "name": "Previews/cupcake.png",
+      "bytes": 1587,
+      "crc32": 1601916410
+    },
+    {
+      "name": "Previews/cutting-board-japanese.png",
+      "bytes": 1297,
+      "crc32": 2698779965
+    },
+    {
+      "name": "Previews/cutting-board-round.png",
+      "bytes": 1974,
+      "crc32": 2022489631
+    },
+    {
+      "name": "Previews/cutting-board.png",
+      "bytes": 1818,
+      "crc32": 3735929090
+    },
+    {
+      "name": "Previews/dim-sum.png",
+      "bytes": 1726,
+      "crc32": 2781660243
+    },
+    {
+      "name": "Previews/donut-chocolate.png",
+      "bytes": 2258,
+      "crc32": 908061349
+    },
+    {
+      "name": "Previews/donut-sprinkles.png",
+      "bytes": 2143,
+      "crc32": 2997945892
+    },
+    {
+      "name": "Previews/donut.png",
+      "bytes": 2187,
+      "crc32": 718176949
+    },
+    {
+      "name": "Previews/egg-cooked.png",
+      "bytes": 1687,
+      "crc32": 3481236517
+    },
+    {
+      "name": "Previews/egg-cup.png",
+      "bytes": 1863,
+      "crc32": 2333236308
+    },
+    {
+      "name": "Previews/egg-half.png",
+      "bytes": 1823,
+      "crc32": 307504262
+    },
+    {
+      "name": "Previews/egg.png",
+      "bytes": 1737,
+      "crc32": 336410466
+    },
+    {
+      "name": "Previews/eggplant.png",
+      "bytes": 1582,
+      "crc32": 2465234400
+    },
+    {
+      "name": "Previews/fish-bones.png",
+      "bytes": 1555,
+      "crc32": 391625546
+    },
+    {
+      "name": "Previews/fish.png",
+      "bytes": 1801,
+      "crc32": 1642224052
+    },
+    {
+      "name": "Previews/frappe.png",
+      "bytes": 1550,
+      "crc32": 2381699950
+    },
+    {
+      "name": "Previews/fries-empty.png",
+      "bytes": 1815,
+      "crc32": 1245544462
+    },
+    {
+      "name": "Previews/fries.png",
+      "bytes": 1613,
+      "crc32": 3417708364
+    },
+    {
+      "name": "Previews/frikandel-speciaal.png",
+      "bytes": 1607,
+      "crc32": 260516162
+    },
+    {
+      "name": "Previews/frying-pan-lid.png",
+      "bytes": 1936,
+      "crc32": 1173719836
+    },
+    {
+      "name": "Previews/frying-pan.png",
+      "bytes": 1531,
+      "crc32": 3580456602
+    },
+    {
+      "name": "Previews/ginger-bread-cutter.png",
+      "bytes": 1898,
+      "crc32": 3654035863
+    },
+    {
+      "name": "Previews/ginger-bread.png",
+      "bytes": 1715,
+      "crc32": 4293652324
+    },
+    {
+      "name": "Previews/glass-wine.png",
+      "bytes": 1448,
+      "crc32": 2014999062
+    },
+    {
+      "name": "Previews/glass.png",
+      "bytes": 1754,
+      "crc32": 1310209690
+    },
+    {
+      "name": "Previews/grapes.png",
+      "bytes": 1764,
+      "crc32": 2333169790
+    },
+    {
+      "name": "Previews/honey.png",
+      "bytes": 1798,
+      "crc32": 2663003520
+    },
+    {
+      "name": "Previews/hot-dog-raw.png",
+      "bytes": 1471,
+      "crc32": 3048159849
+    },
+    {
+      "name": "Previews/hot-dog.png",
+      "bytes": 1843,
+      "crc32": 2263287830
+    },
+    {
+      "name": "Previews/ice-cream-cne.png",
+      "bytes": 1790,
+      "crc32": 2687235398
+    },
+    {
+      "name": "Previews/ice-cream-cup.png",
+      "bytes": 1992,
+      "crc32": 295013687
+    },
+    {
+      "name": "Previews/ice-cream-scoop-chocolate.png",
+      "bytes": 1787,
+      "crc32": 2704264949
+    },
+    {
+      "name": "Previews/ice-cream-scoop-mint.png",
+      "bytes": 1782,
+      "crc32": 3627753666
+    },
+    {
+      "name": "Previews/ice-cream.png",
+      "bytes": 1614,
+      "crc32": 3478242725
+    },
+    {
+      "name": "Previews/knife-block.png",
+      "bytes": 1428,
+      "crc32": 325968881
+    },
+    {
+      "name": "Previews/leek.png",
+      "bytes": 1185,
+      "crc32": 1407627999
+    },
+    {
+      "name": "Previews/lemon-half.png",
+      "bytes": 1931,
+      "crc32": 708325419
+    },
+    {
+      "name": "Previews/lemon.png",
+      "bytes": 1843,
+      "crc32": 3479018665
+    },
+    {
+      "name": "Previews/loaf-baguette.png",
+      "bytes": 1625,
+      "crc32": 3582058496
+    },
+    {
+      "name": "Previews/loaf-round.png",
+      "bytes": 1849,
+      "crc32": 1284980827
+    },
+    {
+      "name": "Previews/loaf.png",
+      "bytes": 1737,
+      "crc32": 3246101249
+    },
+    {
+      "name": "Previews/lollypop.png",
+      "bytes": 1425,
+      "crc32": 2953605268
+    },
+    {
+      "name": "Previews/maki-roe.png",
+      "bytes": 1772,
+      "crc32": 253504903
+    },
+    {
+      "name": "Previews/maki-salmon.png",
+      "bytes": 1871,
+      "crc32": 1499212223
+    },
+    {
+      "name": "Previews/maki-vegetable.png",
+      "bytes": 1879,
+      "crc32": 2563274358
+    },
+    {
+      "name": "Previews/meat-cooked.png",
+      "bytes": 1862,
+      "crc32": 2226589220
+    },
+    {
+      "name": "Previews/meat-patty.png",
+      "bytes": 1997,
+      "crc32": 3939671053
+    },
+    {
+      "name": "Previews/meat-raw.png",
+      "bytes": 1846,
+      "crc32": 291691544
+    },
+    {
+      "name": "Previews/meat-ribs.png",
+      "bytes": 1996,
+      "crc32": 4065267272
+    },
+    {
+      "name": "Previews/meat-sausage.png",
+      "bytes": 1570,
+      "crc32": 1136037682
+    },
+    {
+      "name": "Previews/meat-tenderizer.png",
+      "bytes": 1674,
+      "crc32": 1774898308
+    },
+    {
+      "name": "Previews/mincemeat-pie.png",
+      "bytes": 2286,
+      "crc32": 2130254559
+    },
+    {
+      "name": "Previews/mortar-pestle.png",
+      "bytes": 1461,
+      "crc32": 1092655774
+    },
+    {
+      "name": "Previews/mortar.png",
+      "bytes": 2255,
+      "crc32": 1908509648
+    },
+    {
+      "name": "Previews/muffin.png",
+      "bytes": 1946,
+      "crc32": 2508049839
+    },
+    {
+      "name": "Previews/mug.png",
+      "bytes": 1961,
+      "crc32": 3127134132
+    },
+    {
+      "name": "Previews/mushroom-half.png",
+      "bytes": 1431,
+      "crc32": 2616311442
+    },
+    {
+      "name": "Previews/mushroom.png",
+      "bytes": 1801,
+      "crc32": 205401452
+    },
+    {
+      "name": "Previews/mussel-open.png",
+      "bytes": 1910,
+      "crc32": 81597630
+    },
+    {
+      "name": "Previews/mussel.png",
+      "bytes": 1595,
+      "crc32": 3396004264
+    },
+    {
+      "name": "Previews/onion-half.png",
+      "bytes": 1542,
+      "crc32": 504528326
+    },
+    {
+      "name": "Previews/onion.png",
+      "bytes": 1783,
+      "crc32": 4258334223
+    },
+    {
+      "name": "Previews/orange.png",
+      "bytes": 1787,
+      "crc32": 665880376
+    },
+    {
+      "name": "Previews/pan-stew.png",
+      "bytes": 1940,
+      "crc32": 2559793085
+    },
+    {
+      "name": "Previews/pan.png",
+      "bytes": 1936,
+      "crc32": 1991112503
+    },
+    {
+      "name": "Previews/pancakes.png",
+      "bytes": 1833,
+      "crc32": 1777400641
+    },
+    {
+      "name": "Previews/paprika-slice.png",
+      "bytes": 1835,
+      "crc32": 622465761
+    },
+    {
+      "name": "Previews/paprika.png",
+      "bytes": 1751,
+      "crc32": 2834736029
+    },
+    {
+      "name": "Previews/peanut-butter.png",
+      "bytes": 1716,
+      "crc32": 2595394293
+    },
+    {
+      "name": "Previews/pear-half.png",
+      "bytes": 1420,
+      "crc32": 2764471356
+    },
+    {
+      "name": "Previews/pear.png",
+      "bytes": 1671,
+      "crc32": 2467273387
+    },
+    {
+      "name": "Previews/pepper-mill.png",
+      "bytes": 1380,
+      "crc32": 3188361025
+    },
+    {
+      "name": "Previews/pepper.png",
+      "bytes": 1520,
+      "crc32": 943227474
+    },
+    {
+      "name": "Previews/pie.png",
+      "bytes": 2170,
+      "crc32": 954179578
+    },
+    {
+      "name": "Previews/pineapple.png",
+      "bytes": 1549,
+      "crc32": 3747617883
+    },
+    {
+      "name": "Previews/pizza-box.png",
+      "bytes": 1637,
+      "crc32": 753905711
+    },
+    {
+      "name": "Previews/pizza-cutter.png",
+      "bytes": 1574,
+      "crc32": 4027700273
+    },
+    {
+      "name": "Previews/pizza.png",
+      "bytes": 2200,
+      "crc32": 2672432795
+    },
+    {
+      "name": "Previews/plate-broken.png",
+      "bytes": 2005,
+      "crc32": 3416457909
+    },
+    {
+      "name": "Previews/plate-deep.png",
+      "bytes": 2081,
+      "crc32": 2657947569
+    },
+    {
+      "name": "Previews/plate-dinner.png",
+      "bytes": 2089,
+      "crc32": 1726013991
+    },
+    {
+      "name": "Previews/plate-rectangle.png",
+      "bytes": 1931,
+      "crc32": 2652797910
+    },
+    {
+      "name": "Previews/plate-sauerkraut.png",
+      "bytes": 2085,
+      "crc32": 895109296
+    },
+    {
+      "name": "Previews/plate.png",
+      "bytes": 2001,
+      "crc32": 1005816776
+    },
+    {
+      "name": "Previews/popsicle-chocolate.png",
+      "bytes": 1538,
+      "crc32": 803272122
+    },
+    {
+      "name": "Previews/popsicle-stick.png",
+      "bytes": 906,
+      "crc32": 877155433
+    },
+    {
+      "name": "Previews/popsicle.png",
+      "bytes": 1495,
+      "crc32": 615388892
+    },
+    {
+      "name": "Previews/pot-lid.png",
+      "bytes": 1924,
+      "crc32": 4165229657
+    },
+    {
+      "name": "Previews/pot-stew-lid.png",
+      "bytes": 1870,
+      "crc32": 2340413469
+    },
+    {
+      "name": "Previews/pot-stew.png",
+      "bytes": 2198,
+      "crc32": 2823544242
+    },
+    {
+      "name": "Previews/pot.png",
+      "bytes": 2295,
+      "crc32": 1706944361
+    },
+    {
+      "name": "Previews/pudding.png",
+      "bytes": 1797,
+      "crc32": 3919336803
+    },
+    {
+      "name": "Previews/pumpkin-basic.png",
+      "bytes": 1849,
+      "crc32": 866795925
+    },
+    {
+      "name": "Previews/pumpkin.png",
+      "bytes": 2023,
+      "crc32": 4025809034
+    },
+    {
+      "name": "Previews/radish.png",
+      "bytes": 1436,
+      "crc32": 4252853393
+    },
+    {
+      "name": "Previews/rice-ball.png",
+      "bytes": 1782,
+      "crc32": 1636611841
+    },
+    {
+      "name": "Previews/rollingPin.png",
+      "bytes": 1448,
+      "crc32": 2435103842
+    },
+    {
+      "name": "Previews/salad.png",
+      "bytes": 2174,
+      "crc32": 2203659405
+    },
+    {
+      "name": "Previews/sandwich.png",
+      "bytes": 1762,
+      "crc32": 1960824743
+    },
+    {
+      "name": "Previews/sausage-half.png",
+      "bytes": 1594,
+      "crc32": 2953699462
+    },
+    {
+      "name": "Previews/sausage.png",
+      "bytes": 1642,
+      "crc32": 2213039299
+    },
+    {
+      "name": "Previews/shaker-pepper.png",
+      "bytes": 1549,
+      "crc32": 887692019
+    },
+    {
+      "name": "Previews/shaker-salt.png",
+      "bytes": 1575,
+      "crc32": 814941916
+    },
+    {
+      "name": "Previews/skewer-vegetables.png",
+      "bytes": 1488,
+      "crc32": 1195119235
+    },
+    {
+      "name": "Previews/skewer.png",
+      "bytes": 1464,
+      "crc32": 2108667936
+    },
+    {
+      "name": "Previews/soda-bottle.png",
+      "bytes": 1416,
+      "crc32": 1378987112
+    },
+    {
+      "name": "Previews/soda-can-crushed.png",
+      "bytes": 1951,
+      "crc32": 3574964805
+    },
+    {
+      "name": "Previews/soda-can.png",
+      "bytes": 1624,
+      "crc32": 1531144349
+    },
+    {
+      "name": "Previews/soda-glass.png",
+      "bytes": 1741,
+      "crc32": 1964291400
+    },
+    {
+      "name": "Previews/soda.png",
+      "bytes": 1577,
+      "crc32": 4192980015
+    },
+    {
+      "name": "Previews/soy.png",
+      "bytes": 1723,
+      "crc32": 1841498912
+    },
+    {
+      "name": "Previews/steamer.png",
+      "bytes": 1912,
+      "crc32": 3590759483
+    },
+    {
+      "name": "Previews/strawberry.png",
+      "bytes": 1757,
+      "crc32": 429498491
+    },
+    {
+      "name": "Previews/styrofoam-dinner.png",
+      "bytes": 1704,
+      "crc32": 3914672830
+    },
+    {
+      "name": "Previews/styrofoam.png",
+      "bytes": 1722,
+      "crc32": 4284294282
+    },
+    {
+      "name": "Previews/sub.png",
+      "bytes": 2025,
+      "crc32": 871626380
+    },
+    {
+      "name": "Previews/sundae.png",
+      "bytes": 1390,
+      "crc32": 1725826265
+    },
+    {
+      "name": "Previews/sushi-egg.png",
+      "bytes": 1830,
+      "crc32": 57127810
+    },
+    {
+      "name": "Previews/sushi-salmon.png",
+      "bytes": 1951,
+      "crc32": 2912736219
+    },
+    {
+      "name": "Previews/taco.png",
+      "bytes": 1456,
+      "crc32": 64734608
+    },
+    {
+      "name": "Previews/tajine-lid.png",
+      "bytes": 1667,
+      "crc32": 241694166
+    },
+    {
+      "name": "Previews/tajine.png",
+      "bytes": 2031,
+      "crc32": 2556585172
+    },
+    {
+      "name": "Previews/tomato-slice.png",
+      "bytes": 1834,
+      "crc32": 2372706307
+    },
+    {
+      "name": "Previews/tomato.png",
+      "bytes": 1926,
+      "crc32": 2362402471
+    },
+    {
+      "name": "Previews/turkey.png",
+      "bytes": 2302,
+      "crc32": 2497271465
+    },
+    {
+      "name": "Previews/utensil-fork.png",
+      "bytes": 1157,
+      "crc32": 2084745170
+    },
+    {
+      "name": "Previews/utensil-knife.png",
+      "bytes": 888,
+      "crc32": 2566954800
+    },
+    {
+      "name": "Previews/utensil-spoon.png",
+      "bytes": 1284,
+      "crc32": 2675983109
+    },
+    {
+      "name": "Previews/waffle.png",
+      "bytes": 2034,
+      "crc32": 929661629
+    },
+    {
+      "name": "Previews/watermelon.png",
+      "bytes": 1773,
+      "crc32": 2250214988
+    },
+    {
+      "name": "Previews/whipped-cream.png",
+      "bytes": 1703,
+      "crc32": 2696547080
+    },
+    {
+      "name": "Previews/whisk.png",
+      "bytes": 1600,
+      "crc32": 3313463606
+    },
+    {
+      "name": "Previews/whole-ham.png",
+      "bytes": 1838,
+      "crc32": 3504651639
+    },
+    {
+      "name": "Previews/wholer-ham.png",
+      "bytes": 1699,
+      "crc32": 3140769704
+    },
+    {
+      "name": "Previews/wine-red.png",
+      "bytes": 1262,
+      "crc32": 3108161632
+    },
+    {
+      "name": "Previews/wine-white.png",
+      "bytes": 1374,
+      "crc32": 2405549217
+    },
+    {
+      "name": "View Documentation.url",
+      "bytes": 185,
+      "crc32": 3772593461
+    },
+    {
+      "name": "Visit Kenney.url",
+      "bytes": 118,
+      "crc32": 3375027426
+    },
+    {
+      "name": "Visit Patreon.url",
+      "bytes": 55,
+      "crc32": 432265474
+    }
+  ],
+  "notices": [
+    {
+      "member": "License.txt",
+      "saved": "notice-0.txt"
+    }
+  ],
+  "status": "downloaded; retained original; import not approved",
+  "license": "CC0 per retained official source; inspect notices before import"
+}

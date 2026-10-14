@@ -1,0 +1,56 @@
+{
+  "slug": "interface-textures",
+  "authors": "rubberduck",
+  "source": "https://opengameart.org/content/sci-fi-interface-textures",
+  "download": "https://opengameart.org/sites/default/files/sci-fi-interface-textures.zip",
+  "retrieved_utc": "2026-10-14T23:21:48.641408+00:00",
+  "imported": false,
+  "announced_bytes": 8214555,
+  "bytes": 8214555,
+  "sha256": "dae38a634a2199e8eaef51f7fff6b62b1a20f480121ce570b45578bcb6c1b9f3",
+  "files": [
+    {
+      "name": "interface_1_no_effects.png",
+      "bytes": 717388,
+      "crc32": 1796235093
+    },
+    {
+      "name": "interface_1_with_effects.png",
+      "bytes": 1304741,
+      "crc32": 1321273944
+    },
+    {
+      "name": "interface_2_no_effects.png",
+      "bytes": 813087,
+      "crc32": 746229090
+    },
+    {
+      "name": "interface_2_with_effects.png",
+      "bytes": 1360144,
+      "crc32": 3529817509
+    },
+    {
+      "name": "interface_3_no_effects.png",
+      "bytes": 689927,
+      "crc32": 2890683648
+    },
+    {
+      "name": "interface_3_with_effects.png",
+      "bytes": 1416244,
+      "crc32": 1770642210
+    },
+    {
+      "name": "interface_4_no_effects.png",
+      "bytes": 704032,
+      "crc32": 1439706982
+    },
+    {
+      "name": "interface_4_with_effects.png",
+      "bytes": 1342310,
+      "crc32": 3167067346
+    }
+  ],
+  "notices": [],
+  "status": "downloaded; retained original; import not approved",
+  "license": "CC0 per retained official source; inspect notices before import"
+}

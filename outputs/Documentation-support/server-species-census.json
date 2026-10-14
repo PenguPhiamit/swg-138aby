@@ -1,0 +1,746 @@
+{
+  "date": "2026-10-14",
+  "scope": "40 saved additional-option records; not all Legends species or installed playable count",
+  "counts": {
+    "biological species candidate": 36,
+    "human faction/clan option": 2,
+    "droid implementation/model option": 2
+  },
+  "original_package_option_labels": 16,
+  "original_package_player_templates": 20,
+  "original_package_regular_species": 14,
+  "input_hashes": {
+    "outputs/Content-catalogue/active-content-catalogue.json": "9f7edcf7b920325d3e023b071a27bb68281e5ff87a418bd273bd834f1648e2be",
+    "outputs/Fable-species/provenance.json": "2f505e6afd3f394a2f33c943cda1ba6561084362aeff49ee09d3ca928b8bf1ca",
+    "outputs/Fable-species/checks.json": "bb7db4fe824bafcc313c1901680613c6ecca0ed6f0ba0919bdf668e195e0a683"
+  },
+  "rows": [
+    {
+      "id": "active-054",
+      "name": "Hutt",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_hutt_female.iff",
+        "shared_hutt_male.iff"
+      ],
+      "original_package_gender_variants": [
+        "female",
+        "male"
+      ],
+      "inherited_source_variants": [
+        "male",
+        "female"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required. Package male/female filenames are technical variants, not a verified biological sex model; human-rig upright appearance needs owner review.",
+      "effort": "High, low confidence",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-055",
+      "name": "Nautolan",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_nautolan_male.iff"
+      ],
+      "original_package_gender_variants": [
+        "male"
+      ],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "2026-10-14 search-index extract; direct article blocked",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "lore_url": "https://starwars.fandom.com/wiki/Nautolan/Legends",
+      "lore_note": "Regular species; Glee Anselm origin is separately supported by its Legends world article.",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-056",
+      "name": "Togruta",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_togruta_female.iff"
+      ],
+      "original_package_gender_variants": [
+        "female"
+      ],
+      "inherited_source_variants": [
+        "female"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "2026-10-14 search-index extract; direct article blocked",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "lore_url": "https://starwars.fandom.com/wiki/Togruta/Legends",
+      "lore_note": "Regular species; Shili origin separately supported by Shili/Legends.",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-057",
+      "name": "Chiss",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_chiss_female.iff",
+        "shared_chiss_male.iff"
+      ],
+      "original_package_gender_variants": [
+        "female",
+        "male"
+      ],
+      "inherited_source_variants": [
+        "male",
+        "female"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "2026-10-14 search-index extract; direct article blocked",
+      "implementation": "S3 staged fragments/checks exist; Claude owns integration. Missing female hairstyle s33 omitted; splice tables rather than replace stock. Species IDs, skill/certs and clothing remain acceptance gates.",
+      "effort": "Medium-High remaining; game validation pending",
+      "lore_url": "https://starwars.fandom.com/wiki/Chiss/Legends",
+      "lore_note": "Near-human species; blue skin/red eyes; owner selected first.",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-058",
+      "name": "Devaronian",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_devaronian_male.iff"
+      ],
+      "original_package_gender_variants": [
+        "male"
+      ],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-059",
+      "name": "Gran",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_gran_male.iff"
+      ],
+      "original_package_gender_variants": [
+        "male"
+      ],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-060",
+      "name": "Ishi Tib",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_ishi_tib_male.iff"
+      ],
+      "original_package_gender_variants": [
+        "male"
+      ],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-061",
+      "name": "Nightsister",
+      "classification": "human faction/clan option",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_nightsister_female.iff"
+      ],
+      "original_package_gender_variants": [
+        "female"
+      ],
+      "inherited_source_variants": [
+        "female"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "2026-10-14 search-index extract; direct article blocked",
+      "implementation": "Treat as optional character identity/cosmetic/quest content. Do not count as a new regular species or introduce hybrid biology.",
+      "effort": "High, low confidence",
+      "lore_url": "https://starwars.fandom.com/wiki/Nightsisters/Legends",
+      "lore_note": "Faction/coven identity, not a distinct biological species; this package uses a human female option. Do not infer that every Nightsister is Human in all Legends sources.",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-062",
+      "name": "Nikto",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_nikto_male.iff"
+      ],
+      "original_package_gender_variants": [
+        "male"
+      ],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-063",
+      "name": "Quarren",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_quarren_male.iff"
+      ],
+      "original_package_gender_variants": [
+        "male"
+      ],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-064",
+      "name": "Singing Mountain Clan Witch",
+      "classification": "human faction/clan option",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_smc_female.iff"
+      ],
+      "original_package_gender_variants": [
+        "female"
+      ],
+      "inherited_source_variants": [
+        "female"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "2026-10-14 search-index extract; direct article blocked",
+      "implementation": "Treat as optional character identity/cosmetic/quest content. Do not count as a new regular species or introduce hybrid biology.",
+      "effort": "High, low confidence",
+      "lore_url": "https://starwars.fandom.com/wiki/Singing_Mountain_Clan",
+      "lore_note": "Clan/cultural option, not a separate species; preserve as optional identity content.",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-065",
+      "name": "Weequay",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_weequay_male.iff"
+      ],
+      "original_package_gender_variants": [
+        "male"
+      ],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-066",
+      "name": "Aqualish",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_aqualish_female.iff",
+        "shared_aqualish_male.iff"
+      ],
+      "original_package_gender_variants": [
+        "female",
+        "male"
+      ],
+      "inherited_source_variants": [
+        "male",
+        "female"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-067",
+      "name": "Bith",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_bith_female.iff",
+        "shared_bith_male.iff"
+      ],
+      "original_package_gender_variants": [
+        "female",
+        "male"
+      ],
+      "inherited_source_variants": [
+        "male",
+        "female"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-068",
+      "name": "Gotal",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_gotal_male.iff"
+      ],
+      "original_package_gender_variants": [
+        "male"
+      ],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-069",
+      "name": "Talz",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published for server use",
+      "original_package_templates": [
+        "shared_talz_male.iff"
+      ],
+      "original_package_gender_variants": [
+        "male"
+      ],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Published species-mod purpose per saved audit; retain exact credit/terms and validate selected dependencies. No blanket art permission inferred."
+    },
+    {
+      "id": "active-070",
+      "name": "Abyssin",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-071",
+      "name": "Arcona",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-072",
+      "name": "Cerean",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-073",
+      "name": "Duros",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-074",
+      "name": "Gungan",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-075",
+      "name": "Iktotchi",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-076",
+      "name": "Jenet",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-077",
+      "name": "Kel Dor",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-078",
+      "name": "Kubaz",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-079",
+      "name": "Sanyassan",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male",
+        "female"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-080",
+      "name": "Chadra-Fan",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male",
+        "female"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-081",
+      "name": "Droid (NK3 label in source; not verified IG-100)",
+      "classification": "droid implementation/model option",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-082",
+      "name": "Dug",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-083",
+      "name": "Ewok",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male",
+        "female"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-084",
+      "name": "Feeorin",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-085",
+      "name": "Geonosian",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-086",
+      "name": "Ortolan",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-087",
+      "name": "Togorian",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-088",
+      "name": "Toydarian",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-089",
+      "name": "Mirialan",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male",
+        "female"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-090",
+      "name": "Zeltron",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Published server code; client asset reuse unresolved",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [
+        "male",
+        "female"
+      ],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Server source and client art are separate: client reuse unresolved; original replacement remains possible."
+    },
+    {
+      "id": "active-091",
+      "name": "Arkanian",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Later EiF implementation; reusable complete package unverified",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Later implementation documented; exact reusable package and contributors unverified."
+    },
+    {
+      "id": "active-092",
+      "name": "Echani",
+      "classification": "biological species candidate",
+      "inherited_permission_label": "Later EiF implementation; reusable complete package unverified",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [],
+      "runtime_validated": false,
+      "lore_audit": "not refreshed in this checkpoint",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "rights_gate": "Later implementation documented; exact reusable package and contributors unverified."
+    },
+    {
+      "id": "active-093",
+      "name": "IG-100 Droid",
+      "classification": "droid implementation/model option",
+      "inherited_permission_label": "Later EiF implementation; reusable complete package unverified",
+      "original_package_templates": [],
+      "original_package_gender_variants": [],
+      "inherited_source_variants": [],
+      "runtime_validated": false,
+      "lore_audit": "2026-10-14 search-index extract; direct article blocked",
+      "implementation": "Creation UI/tables, race IDs, species skill/certifications, rig/customization, clothing and relog/death tests required.",
+      "effort": "High, low confidence",
+      "lore_url": "https://starwars.fandom.com/wiki/IG-100_MagnaGuard/Legends",
+      "lore_note": "Droid model option; do not equate with the separately labelled NK3 implementation.",
+      "rights_gate": "Later implementation documented; exact reusable package and contributors unverified."
+    }
+  ]
+}

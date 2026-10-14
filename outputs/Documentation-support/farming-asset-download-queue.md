@@ -1,6 +1,6 @@
 # Farming asset download queue
 
-Owner authorized this batch on 14 October 2026: “schedule all that for download.” Status: **queued, not downloaded**. This is the shared project work queue for the next download session, not a timed/background automation. ChatGPT owns fetching/records outside `/opt/swg`.
+Owner authorized this batch on 14 October 2026: “schedule all that for download.” Status: **partially downloaded, 14 Oct afternoon**. This is the shared project work queue for the next download session, not a timed/background automation. ChatGPT owns fetching/records outside `/opt/swg`.
 
 Download these openly licensed sources, in order below; retain original packages. No installs, auto-imports or server deployment. Resolve direct official download links at execution rather than guessing CDN URLs. Before transfer record size; cap this batch at 3 GB and report any skipped item. On receipt record source/version/date, SHA-256, original readme/licence and contributors, then inventory exact files. If licence/provenance differs from research, hold the package before importing. Do not execute bundled scripts. Login/captcha/new-service gates are held for the owner; do not create accounts. User approval for this batch persists; no repeat download approval needed for these listed sources within scope.
 
@@ -44,3 +44,7 @@ Download these openly licensed sources, in order below; retain original packages
 30. [KLGaming Clone Wars-style crate](https://sketchfab.com/3d-models/chast-clone-wars-3eb26da948e7403fa4951c200dfcdbfb) — CC BY 4.0; earlier preferred branded candidate, optional alongside the owner's newer unbranded direction. Download is not import clearance for underlying franchise rights.
 
 Not scheduled: paid packs; ARR/NC/unclear-provenance alternatives; Star Wars vaporators/barrels held in prior report; Skyrim/ARK mod packages; GPL alien-plant pack; aggregator duplicates; newly researched saber assets (research only this turn). Missing greenhouse/dryer/grinder originals are design work, not downloadable releases. Record batch results here or link the receipt manifest; never mark queued items downloaded without files and hashes.
+
+## Download checkpoint, 14 Oct afternoon
+
+Fourteen original ZIPs across nine source entries are retained in `../Farming-assets/`, with hashes, file inventories, source evidence and notices. See `../Farming-assets/README.md` and receipts.json. No files imported or executed. Poly Haven API returned HTTP 403 and is held. Remaining packages stay queued; 7z inventories and login-gated sources are not complete.

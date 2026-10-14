@@ -1,0 +1,21 @@
+{
+  "slug": "brick-planters",
+  "authors": "tiko479",
+  "source": "https://opengameart.org/content/brick-planters-low-poly-style",
+  "download": "https://opengameart.org/sites/default/files/brick_planters.zip",
+  "retrieved_utc": "2026-10-14T23:19:47.371959+00:00",
+  "imported": false,
+  "announced_bytes": 82248,
+  "bytes": 82248,
+  "sha256": "a42afc0559728a86a1c3970c9ef2fdd37c1d78ba455c9c8ef37f69ff9b2ff285",
+  "files": [
+    {
+      "name": "Brick Planters.fbx",
+      "bytes": 101660,
+      "crc32": 4067298729
+    }
+  ],
+  "notices": [],
+  "status": "downloaded; retained original; import not approved",
+  "license": "CC0 per retained official source; inspect notices before import"
+}

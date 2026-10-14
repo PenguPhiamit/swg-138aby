@@ -1,0 +1,541 @@
+{
+  "slug": "industrial-pbr-baked",
+  "authors": "a52; rubberduck; Yughues (some textures)",
+  "source": "https://opengameart.org/content/pbr-industrial-asset-pack",
+  "download": "https://opengameart.org/sites/default/files/oga_industrial_a52_version_baked_models_0.zip",
+  "retrieved_utc": "2026-10-14T23:19:23.312611+00:00",
+  "imported": false,
+  "announced_bytes": 59061043,
+  "bytes": 59061043,
+  "sha256": "6779e7185ed377cdf99bb6644c7a0e4198e86bf712ccca7fcac62eb4f11a1cf9",
+  "files": [
+    {
+      "name": "OGA_industrial_a52_version_baked_models/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/big_tank_ao.jpg",
+      "bytes": 1865149,
+      "crc32": 2927790719
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/big_tank_diff.jpg",
+      "bytes": 1594503,
+      "crc32": 3079657815
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/big_tank_diff_edited.jpg",
+      "bytes": 1774424,
+      "crc32": 1185587737
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/big_tank_norm.jpg",
+      "bytes": 2122644,
+      "crc32": 2063399795
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/big_tank_spec.jpg",
+      "bytes": 703088,
+      "crc32": 1926527966
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/container_diff.jpg",
+      "bytes": 925256,
+      "crc32": 3400014088
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/container_norm.jpg",
+      "bytes": 919702,
+      "crc32": 762241911
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/container_spec.jpg",
+      "bytes": 226829,
+      "crc32": 420604904
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/control_terminal_ao.jpg",
+      "bytes": 229983,
+      "crc32": 2247081710
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/control_terminal_diff.jpg",
+      "bytes": 212072,
+      "crc32": 238428180
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/control_terminal_norm.jpg",
+      "bytes": 277355,
+      "crc32": 3741936057
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/control_terminal_spec.jpg",
+      "bytes": 236487,
+      "crc32": 1327163113
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/garage_2_ao.jpg",
+      "bytes": 868202,
+      "crc32": 999923439
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/garage_2_diff.jpg",
+      "bytes": 465503,
+      "crc32": 3502436083
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/garage_2_norm.jpg",
+      "bytes": 412961,
+      "crc32": 194662447
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/garage_2_spec.jpg",
+      "bytes": 586005,
+      "crc32": 753365876
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/garage_ao.jpg",
+      "bytes": 871084,
+      "crc32": 2555473063
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/garage_diff.jpg",
+      "bytes": 470991,
+      "crc32": 1213321797
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/garage_norm.jpg",
+      "bytes": 438079,
+      "crc32": 4031610901
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/garage_spec.jpg",
+      "bytes": 586167,
+      "crc32": 3867255270
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/ladder_ao.jpg",
+      "bytes": 149921,
+      "crc32": 2290157067
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/ladder_base_ao.jpg",
+      "bytes": 132495,
+      "crc32": 331554590
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/ladder_base_diff.jpg",
+      "bytes": 82962,
+      "crc32": 1658046211
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/ladder_base_norm.jpg",
+      "bytes": 181254,
+      "crc32": 2460643487
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/ladder_base_spec.jpg",
+      "bytes": 150178,
+      "crc32": 2881004570
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/ladder_diff.jpg",
+      "bytes": 91506,
+      "crc32": 3303097633
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/ladder_norm.jpg",
+      "bytes": 202900,
+      "crc32": 337804964
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/ladder_spec.jpg",
+      "bytes": 165183,
+      "crc32": 1511362160
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/roof_thing_2_ao.jpg",
+      "bytes": 179256,
+      "crc32": 142763926
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/roof_thing_2_diff.jpg",
+      "bytes": 175162,
+      "crc32": 3109481016
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/roof_thing_2_norm.jpg",
+      "bytes": 318353,
+      "crc32": 2325968378
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/roof_thing_2_spec.jpg",
+      "bytes": 139098,
+      "crc32": 708748165
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/roof_thing_3_ao.jpg",
+      "bytes": 92463,
+      "crc32": 960053660
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/roof_thing_3_diff.jpg",
+      "bytes": 65073,
+      "crc32": 3507855397
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/roof_thing_3_norm.jpg",
+      "bytes": 79161,
+      "crc32": 2635526004
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/roof_thing_3_spec.jpg",
+      "bytes": 86286,
+      "crc32": 2069767932
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/roof_thing_ao.jpg",
+      "bytes": 250082,
+      "crc32": 2664416965
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/roof_thing_diff.jpg",
+      "bytes": 149035,
+      "crc32": 4045028206
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/roof_thing_norm.jpg",
+      "bytes": 385434,
+      "crc32": 2671428360
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/roof_thing_spec.jpg",
+      "bytes": 200649,
+      "crc32": 722849952
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/smokestack_ao.jpg",
+      "bytes": 1910173,
+      "crc32": 4036622653
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/smokestack_diff.png",
+      "bytes": 13299062,
+      "crc32": 4288754000
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/smokestack_norm.jpg",
+      "bytes": 2699120,
+      "crc32": 1233693759
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/smokestack_spec.jpg",
+      "bytes": 1812144,
+      "crc32": 2021965388
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/station_ao.jpg",
+      "bytes": 128283,
+      "crc32": 1092434905
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/station_diff.jpg",
+      "bytes": 189986,
+      "crc32": 2349683310
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/station_norm.jpg",
+      "bytes": 295660,
+      "crc32": 1699298638
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/station_spec.jpg",
+      "bytes": 121614,
+      "crc32": 2801089810
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_2_ao.jpg",
+      "bytes": 949552,
+      "crc32": 4187024024
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_2_diff.jpg",
+      "bytes": 780062,
+      "crc32": 2733233742
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_2_diff_edited.jpg",
+      "bytes": 807208,
+      "crc32": 3343960115
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_2_norm.jpg",
+      "bytes": 1268458,
+      "crc32": 4108511070
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_2_spec.jpg",
+      "bytes": 871213,
+      "crc32": 1580160162
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_ao.jpg",
+      "bytes": 389012,
+      "crc32": 3969455424
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_capsule_ao.jpg",
+      "bytes": 348569,
+      "crc32": 878353211
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_capsule_diff.jpg",
+      "bytes": 217453,
+      "crc32": 1472837504
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_capsule_norm.jpg",
+      "bytes": 210485,
+      "crc32": 3722711355
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_capsule_spec.jpg",
+      "bytes": 343676,
+      "crc32": 1989110028
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_control_panel_ao.jpg",
+      "bytes": 157778,
+      "crc32": 2614132520
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_control_panel_diff.jpg",
+      "bytes": 141509,
+      "crc32": 2834431506
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_control_panel_norm.jpg",
+      "bytes": 207936,
+      "crc32": 1012928824
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_control_panel_spec.jpg",
+      "bytes": 211348,
+      "crc32": 440613174
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_diff.jpg",
+      "bytes": 288040,
+      "crc32": 2022773630
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_norm.jpg",
+      "bytes": 337210,
+      "crc32": 1849993609
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_spec.jpg",
+      "bytes": 523820,
+      "crc32": 2968807664
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_sphere_ao.jpg",
+      "bytes": 194018,
+      "crc32": 1526799242
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_sphere_diff.jpg",
+      "bytes": 135595,
+      "crc32": 704682026
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_sphere_holder_ao.jpg",
+      "bytes": 304754,
+      "crc32": 2261084620
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_sphere_holder_diff.jpg",
+      "bytes": 130308,
+      "crc32": 821469358
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_sphere_holder_norm.jpg",
+      "bytes": 185010,
+      "crc32": 1226872108
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_sphere_holder_spec.jpg",
+      "bytes": 123855,
+      "crc32": 48463862
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_sphere_norm.jpg",
+      "bytes": 132573,
+      "crc32": 737527015
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tank_sphere_spec.jpg",
+      "bytes": 215620,
+      "crc32": 414347378
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tower_2_ao.jpg",
+      "bytes": 1012945,
+      "crc32": 3772330681
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tower_2_diff.jpg",
+      "bytes": 770890,
+      "crc32": 2429768392
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tower_2_norm.jpg",
+      "bytes": 999293,
+      "crc32": 3218973071
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tower_2_spec.jpg",
+      "bytes": 696747,
+      "crc32": 2682549881
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tower_ao.jpg",
+      "bytes": 989229,
+      "crc32": 1445636528
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tower_diff.jpg",
+      "bytes": 863648,
+      "crc32": 1993227627
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tower_norm.jpg",
+      "bytes": 1358638,
+      "crc32": 38201262
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tower_part_ao.jpg",
+      "bytes": 56625,
+      "crc32": 172403164
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tower_part_diff.jpg",
+      "bytes": 55680,
+      "crc32": 1672548662
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tower_part_norm.jpg",
+      "bytes": 107618,
+      "crc32": 1292418589
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tower_part_spec.jpg",
+      "bytes": 105869,
+      "crc32": 1321261683
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/tower_spec.jpg",
+      "bytes": 1025814,
+      "crc32": 1615277166
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/vent_2_ao.jpg",
+      "bytes": 186937,
+      "crc32": 2541498582
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/vent_2_diff.jpg",
+      "bytes": 88430,
+      "crc32": 1506628318
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/vent_2_norm.jpg",
+      "bytes": 95177,
+      "crc32": 244879383
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/vent_2_spec.jpg",
+      "bytes": 217623,
+      "crc32": 1939357098
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/vent_3_ao.jpg",
+      "bytes": 206101,
+      "crc32": 1435123607
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/vent_3_diff.jpg",
+      "bytes": 88053,
+      "crc32": 2467575718
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/vent_3_norm.jpg",
+      "bytes": 128095,
+      "crc32": 1599717139
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/vent_3_spec.jpg",
+      "bytes": 223350,
+      "crc32": 2146841211
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/vent_ao.jpg",
+      "bytes": 223260,
+      "crc32": 4001340500
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/vent_diff.jpg",
+      "bytes": 146678,
+      "crc32": 2077002059
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/vent_norm.jpg",
+      "bytes": 295233,
+      "crc32": 2962625957
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/vent_spec.jpg",
+      "bytes": 263460,
+      "crc32": 2458236811
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/wall_thing_ao.jpg",
+      "bytes": 144056,
+      "crc32": 1248724205
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/wall_thing_diff.jpg",
+      "bytes": 233692,
+      "crc32": 134346461
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/wall_thing_norm.jpg",
+      "bytes": 619232,
+      "crc32": 3809178534
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/baked_textures/wall_thing_spec.jpg",
+      "bytes": 196540,
+      "crc32": 239415473
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/industrial_final_cycles_baked.blend",
+      "bytes": 3709804,
+      "crc32": 4263898631
+    },
+    {
+      "name": "OGA_industrial_a52_version_baked_models/industrial_final_cycles_baked.blend1",
+      "bytes": 3834124,
+      "crc32": 2942306024
+    }
+  ],
+  "notices": [],
+  "status": "downloaded; retained original; import not approved",
+  "license": "CC0 per retained official source; inspect notices before import"
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "path": "outputs/Documentation-support/available-work-20261014.md",
+    "sha256": "266f05c12995f1bd0d44c118473a59dcc1da054d459c6e0f898b578c8808e3f0",
+    "bytes": 5868
+  },
+  {
+    "path": "outputs/Documentation-support/C26-telemetry.md",
+    "sha256": "6375721c0ac2c7d865f612f7420290e58a6616e2313225390600bc6c6d2641d9",
+    "bytes": 3769
+  },
+  {
+    "path": "outputs/Documentation-support/C23-hoth-gameplay.md",
+    "sha256": "3cf3738584534c801c98b0e24e39914d63c71c6421c6ad18effd773a7a8be028",
+    "bytes": 6089
+  },
+  {
+    "path": "outputs/Documentation-support/hoth-release-gate.md",
+    "sha256": "860c7f3ada05fdba3ce49524a0b2b29e932de1e50b9c62180b6fa17d8964b344",
+    "bytes": 8422
+  },
+  {
+    "path": "outputs/Documentation-support/server-resource-and-implementation-census.md",
+    "sha256": "a05db68efd774957ee6dff522ca44da1ad2a25a87fecf44f08d5ce266a36fc36",
+    "bytes": 14558
+  },
+  {
+    "path": "outputs/Documentation-support/server-world-census.md",
+    "sha256": "11fc8add378fbad68392d67c02a5903d4ea3ebea4d8df4e9d7c768159b6c2c04",
+    "bytes": 11429
+  },
+  {
+    "path": "outputs/Documentation-support/farming-asset-download-queue.md",
+    "sha256": "4681f814082fb7b68f4b89d32cab34c5cee71b40aac173000d545a0067af090a",
+    "bytes": 5569
+  },
+  {
+    "path": "outputs/Farming-assets/README.md",
+    "sha256": "1726b8176753467fb4566e2c71b6d2e597678eab0afd764775faab2403a5a8ce",
+    "bytes": 2250
+  },
+  {
+    "path": "outputs/Documentation-support/creature-handler-top-tier-plan.md",
+    "sha256": "a4f854967103a85c29ea9849ccbc18a7405c68ba4a798b4f592d5972ea35b251",
+    "bytes": 11692
+  },
+  {
+    "path": "outputs/Documentation-support/darksaber-ghostfire-feasibility.md",
+    "sha256": "38e43e47c4656ba6829f257aaeb989e90615e04b9b6cfd735f950fee5f5771d8",
+    "bytes": 7588
+  },
+  {
+    "path": "outputs/SWG-feature-register.md",
+    "sha256": "e6b2a86b04a02ee665ff8f9531e31c48e0a22b8ac0024379869eb3018739b10c",
+    "bytes": 39686
+  },
+  {
+    "path": "outputs/SWG-roadmap.md",
+    "sha256": "e7beab9011958f196419f5a5b16ab74ac0dd363aa106b442ebef40b6d6b34329",
+    "bytes": 35632
+  }
+]

@@ -1,0 +1,2551 @@
+{
+  "slug": "kenney-space-station",
+  "authors": "Kenney",
+  "source": "https://kenney.nl/assets/space-station-kit",
+  "download": "https://kenney.nl/media/pages/assets/space-station-kit/6475288f2e-1712749919/kenney_space-station-kit.zip",
+  "retrieved_utc": "2026-10-14T23:22:17.757178+00:00",
+  "imported": false,
+  "announced_bytes": 1835875,
+  "bytes": 1835875,
+  "sha256": "215e79bd5415cff93665183390f0343ed9acf87780306331013b78520170c6d8",
+  "files": [
+    {
+      "name": "License.txt",
+      "bytes": 720,
+      "crc32": 3091719559
+    },
+    {
+      "name": "Models/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/FBX format/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/FBX format/balcony-floor-center.fbx",
+      "bytes": 26192,
+      "crc32": 645023089
+    },
+    {
+      "name": "Models/FBX format/balcony-floor-corner.fbx",
+      "bytes": 28000,
+      "crc32": 307655687
+    },
+    {
+      "name": "Models/FBX format/balcony-floor.fbx",
+      "bytes": 25648,
+      "crc32": 2160011101
+    },
+    {
+      "name": "Models/FBX format/balcony-rail-center.fbx",
+      "bytes": 25664,
+      "crc32": 3500245524
+    },
+    {
+      "name": "Models/FBX format/balcony-rail-corner.fbx",
+      "bytes": 28080,
+      "crc32": 3493956694
+    },
+    {
+      "name": "Models/FBX format/balcony-rail.fbx",
+      "bytes": 31424,
+      "crc32": 1095067362
+    },
+    {
+      "name": "Models/FBX format/bed-double-cover.fbx",
+      "bytes": 25680,
+      "crc32": 1137230998
+    },
+    {
+      "name": "Models/FBX format/bed-double.fbx",
+      "bytes": 27280,
+      "crc32": 365417752
+    },
+    {
+      "name": "Models/FBX format/bed-single-cover.fbx",
+      "bytes": 25648,
+      "crc32": 3009857079
+    },
+    {
+      "name": "Models/FBX format/bed-single.fbx",
+      "bytes": 26608,
+      "crc32": 1398454476
+    },
+    {
+      "name": "Models/FBX format/chair-armrest-headrest.fbx",
+      "bytes": 28880,
+      "crc32": 1893147949
+    },
+    {
+      "name": "Models/FBX format/chair-armrest.fbx",
+      "bytes": 26848,
+      "crc32": 1459376584
+    },
+    {
+      "name": "Models/FBX format/chair-cushion-headrest.fbx",
+      "bytes": 27760,
+      "crc32": 2769577428
+    },
+    {
+      "name": "Models/FBX format/chair-cushion.fbx",
+      "bytes": 26816,
+      "crc32": 1699106888
+    },
+    {
+      "name": "Models/FBX format/chair-headrest.fbx",
+      "bytes": 27344,
+      "crc32": 109731723
+    },
+    {
+      "name": "Models/FBX format/chair.fbx",
+      "bytes": 26880,
+      "crc32": 1037337874
+    },
+    {
+      "name": "Models/FBX format/computer-screen.fbx",
+      "bytes": 30528,
+      "crc32": 3618294368
+    },
+    {
+      "name": "Models/FBX format/computer-system.fbx",
+      "bytes": 29488,
+      "crc32": 2845105301
+    },
+    {
+      "name": "Models/FBX format/computer-wide.fbx",
+      "bytes": 29552,
+      "crc32": 1812578815
+    },
+    {
+      "name": "Models/FBX format/computer.fbx",
+      "bytes": 28640,
+      "crc32": 2898900901
+    },
+    {
+      "name": "Models/FBX format/container-flat-open.fbx",
+      "bytes": 28368,
+      "crc32": 3183810895
+    },
+    {
+      "name": "Models/FBX format/container-flat.fbx",
+      "bytes": 28512,
+      "crc32": 1732565458
+    },
+    {
+      "name": "Models/FBX format/container-tall.fbx",
+      "bytes": 34496,
+      "crc32": 2462630316
+    },
+    {
+      "name": "Models/FBX format/container-wide.fbx",
+      "bytes": 27568,
+      "crc32": 412645199
+    },
+    {
+      "name": "Models/FBX format/container.fbx",
+      "bytes": 26560,
+      "crc32": 3526442295
+    },
+    {
+      "name": "Models/FBX format/display-wall-wide.fbx",
+      "bytes": 26960,
+      "crc32": 3026188471
+    },
+    {
+      "name": "Models/FBX format/display-wall.fbx",
+      "bytes": 26624,
+      "crc32": 1218553290
+    },
+    {
+      "name": "Models/FBX format/door-double-closed.fbx",
+      "bytes": 32368,
+      "crc32": 4275186061
+    },
+    {
+      "name": "Models/FBX format/door-double-half.fbx",
+      "bytes": 29088,
+      "crc32": 896436925
+    },
+    {
+      "name": "Models/FBX format/door-double.fbx",
+      "bytes": 25920,
+      "crc32": 2774691628
+    },
+    {
+      "name": "Models/FBX format/door-single-closed.fbx",
+      "bytes": 32384,
+      "crc32": 328611652
+    },
+    {
+      "name": "Models/FBX format/door-single-half.fbx",
+      "bytes": 29104,
+      "crc32": 2562873946
+    },
+    {
+      "name": "Models/FBX format/door-single.fbx",
+      "bytes": 25936,
+      "crc32": 361302195
+    },
+    {
+      "name": "Models/FBX format/floor-corner.fbx",
+      "bytes": 25664,
+      "crc32": 3071786014
+    },
+    {
+      "name": "Models/FBX format/floor-detail.fbx",
+      "bytes": 25776,
+      "crc32": 1850666077
+    },
+    {
+      "name": "Models/FBX format/floor-panel-corner.fbx",
+      "bytes": 26128,
+      "crc32": 524521585
+    },
+    {
+      "name": "Models/FBX format/floor-panel-end.fbx",
+      "bytes": 26608,
+      "crc32": 3739893745
+    },
+    {
+      "name": "Models/FBX format/floor-panel-straight.fbx",
+      "bytes": 26464,
+      "crc32": 1773623319
+    },
+    {
+      "name": "Models/FBX format/floor-panel.fbx",
+      "bytes": 25728,
+      "crc32": 430787705
+    },
+    {
+      "name": "Models/FBX format/floor.fbx",
+      "bytes": 27472,
+      "crc32": 2602612403
+    },
+    {
+      "name": "Models/FBX format/pipe-bend-diagonal.fbx",
+      "bytes": 28960,
+      "crc32": 2958141574
+    },
+    {
+      "name": "Models/FBX format/pipe-bend.fbx",
+      "bytes": 26752,
+      "crc32": 2014242609
+    },
+    {
+      "name": "Models/FBX format/pipe-end-colored.fbx",
+      "bytes": 28000,
+      "crc32": 993717077
+    },
+    {
+      "name": "Models/FBX format/pipe-end.fbx",
+      "bytes": 27984,
+      "crc32": 786063754
+    },
+    {
+      "name": "Models/FBX format/pipe-ring-colored.fbx",
+      "bytes": 28480,
+      "crc32": 3740491736
+    },
+    {
+      "name": "Models/FBX format/pipe-ring.fbx",
+      "bytes": 28432,
+      "crc32": 281842047
+    },
+    {
+      "name": "Models/FBX format/pipe.fbx",
+      "bytes": 26368,
+      "crc32": 740103155
+    },
+    {
+      "name": "Models/FBX format/rail-narrow.fbx",
+      "bytes": 26160,
+      "crc32": 1754005120
+    },
+    {
+      "name": "Models/FBX format/rail.fbx",
+      "bytes": 26128,
+      "crc32": 3143562639
+    },
+    {
+      "name": "Models/FBX format/rocks.fbx",
+      "bytes": 28624,
+      "crc32": 3898673424
+    },
+    {
+      "name": "Models/FBX format/skip-rocks.fbx",
+      "bytes": 27712,
+      "crc32": 442529184
+    },
+    {
+      "name": "Models/FBX format/skip.fbx",
+      "bytes": 25664,
+      "crc32": 1588694205
+    },
+    {
+      "name": "Models/FBX format/stairs-corner-inner.fbx",
+      "bytes": 25936,
+      "crc32": 2889647509
+    },
+    {
+      "name": "Models/FBX format/stairs-corner.fbx",
+      "bytes": 25584,
+      "crc32": 1349592237
+    },
+    {
+      "name": "Models/FBX format/stairs-handrail-single.fbx",
+      "bytes": 28528,
+      "crc32": 3594486105
+    },
+    {
+      "name": "Models/FBX format/stairs-handrail.fbx",
+      "bytes": 26832,
+      "crc32": 133729459
+    },
+    {
+      "name": "Models/FBX format/stairs-ramp.fbx",
+      "bytes": 25648,
+      "crc32": 3148154392
+    },
+    {
+      "name": "Models/FBX format/stairs-small-center.fbx",
+      "bytes": 27280,
+      "crc32": 3084936058
+    },
+    {
+      "name": "Models/FBX format/stairs-small-corner-inner.fbx",
+      "bytes": 28384,
+      "crc32": 901951011
+    },
+    {
+      "name": "Models/FBX format/stairs-small-corner.fbx",
+      "bytes": 25904,
+      "crc32": 60353874
+    },
+    {
+      "name": "Models/FBX format/stairs-small-edge-handrail.fbx",
+      "bytes": 26768,
+      "crc32": 2203136916
+    },
+    {
+      "name": "Models/FBX format/stairs-small-edge.fbx",
+      "bytes": 28080,
+      "crc32": 1259899264
+    },
+    {
+      "name": "Models/FBX format/stairs-small-edges-handrail.fbx",
+      "bytes": 26864,
+      "crc32": 2537878080
+    },
+    {
+      "name": "Models/FBX format/stairs-small-edges.fbx",
+      "bytes": 26016,
+      "crc32": 3581953475
+    },
+    {
+      "name": "Models/FBX format/stairs.fbx",
+      "bytes": 25824,
+      "crc32": 1369842375
+    },
+    {
+      "name": "Models/FBX format/structure-barrier-high.fbx",
+      "bytes": 148048,
+      "crc32": 344873240
+    },
+    {
+      "name": "Models/FBX format/structure-barrier.fbx",
+      "bytes": 148096,
+      "crc32": 3064976036
+    },
+    {
+      "name": "Models/FBX format/structure-panel.fbx",
+      "bytes": 26704,
+      "crc32": 2163604877
+    },
+    {
+      "name": "Models/FBX format/structure.fbx",
+      "bytes": 115168,
+      "crc32": 575163843
+    },
+    {
+      "name": "Models/FBX format/table-display-planet.fbx",
+      "bytes": 43488,
+      "crc32": 3666862010
+    },
+    {
+      "name": "Models/FBX format/table-display-small.fbx",
+      "bytes": 46752,
+      "crc32": 2555899966
+    },
+    {
+      "name": "Models/FBX format/table-display.fbx",
+      "bytes": 37024,
+      "crc32": 1476373650
+    },
+    {
+      "name": "Models/FBX format/table-inset-small.fbx",
+      "bytes": 27392,
+      "crc32": 2002454182
+    },
+    {
+      "name": "Models/FBX format/table-inset.fbx",
+      "bytes": 27376,
+      "crc32": 3156220260
+    },
+    {
+      "name": "Models/FBX format/table-large.fbx",
+      "bytes": 26112,
+      "crc32": 1154832551
+    },
+    {
+      "name": "Models/FBX format/table.fbx",
+      "bytes": 26048,
+      "crc32": 1755993624
+    },
+    {
+      "name": "Models/FBX format/Textures/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/FBX format/Textures/colormap.png",
+      "bytes": 7440,
+      "crc32": 1463886810
+    },
+    {
+      "name": "Models/FBX format/wall-banner.fbx",
+      "bytes": 25904,
+      "crc32": 838539209
+    },
+    {
+      "name": "Models/FBX format/wall-corner-banner.fbx",
+      "bytes": 26944,
+      "crc32": 1422656000
+    },
+    {
+      "name": "Models/FBX format/wall-corner-round-banner.fbx",
+      "bytes": 30432,
+      "crc32": 4003979157
+    },
+    {
+      "name": "Models/FBX format/wall-corner-round.fbx",
+      "bytes": 29456,
+      "crc32": 4165224505
+    },
+    {
+      "name": "Models/FBX format/wall-corner.fbx",
+      "bytes": 26416,
+      "crc32": 3833055571
+    },
+    {
+      "name": "Models/FBX format/wall-detail.fbx",
+      "bytes": 41312,
+      "crc32": 3002590822
+    },
+    {
+      "name": "Models/FBX format/wall-door-banner.fbx",
+      "bytes": 26080,
+      "crc32": 2075307237
+    },
+    {
+      "name": "Models/FBX format/wall-door-center.fbx",
+      "bytes": 26288,
+      "crc32": 3569966725
+    },
+    {
+      "name": "Models/FBX format/wall-door-edge-banner.fbx",
+      "bytes": 26992,
+      "crc32": 684302123
+    },
+    {
+      "name": "Models/FBX format/wall-door-edge.fbx",
+      "bytes": 26656,
+      "crc32": 4194931565
+    },
+    {
+      "name": "Models/FBX format/wall-door-wide-banner.fbx",
+      "bytes": 26112,
+      "crc32": 2970092598
+    },
+    {
+      "name": "Models/FBX format/wall-door-wide.fbx",
+      "bytes": 25776,
+      "crc32": 952486603
+    },
+    {
+      "name": "Models/FBX format/wall-door.fbx",
+      "bytes": 25760,
+      "crc32": 2049768560
+    },
+    {
+      "name": "Models/FBX format/wall-pillar-banner.fbx",
+      "bytes": 28048,
+      "crc32": 149194561
+    },
+    {
+      "name": "Models/FBX format/wall-pillar.fbx",
+      "bytes": 25792,
+      "crc32": 1206566480
+    },
+    {
+      "name": "Models/FBX format/wall-switch.fbx",
+      "bytes": 26096,
+      "crc32": 1418557795
+    },
+    {
+      "name": "Models/FBX format/wall-window-banner.fbx",
+      "bytes": 26128,
+      "crc32": 1712833063
+    },
+    {
+      "name": "Models/FBX format/wall-window-frame.fbx",
+      "bytes": 28384,
+      "crc32": 733218294
+    },
+    {
+      "name": "Models/FBX format/wall-window-shutters.fbx",
+      "bytes": 25520,
+      "crc32": 2586970375
+    },
+    {
+      "name": "Models/FBX format/wall-window.fbx",
+      "bytes": 25856,
+      "crc32": 2015644049
+    },
+    {
+      "name": "Models/FBX format/wall.fbx",
+      "bytes": 25472,
+      "crc32": 1280210795
+    },
+    {
+      "name": "Models/GLB format/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/GLB format/balcony-floor-center.glb",
+      "bytes": 3512,
+      "crc32": 1812717859
+    },
+    {
+      "name": "Models/GLB format/balcony-floor-corner.glb",
+      "bytes": 4448,
+      "crc32": 295613412
+    },
+    {
+      "name": "Models/GLB format/balcony-floor.glb",
+      "bytes": 5312,
+      "crc32": 833428373
+    },
+    {
+      "name": "Models/GLB format/balcony-rail-center.glb",
+      "bytes": 5300,
+      "crc32": 3335118723
+    },
+    {
+      "name": "Models/GLB format/balcony-rail-corner.glb",
+      "bytes": 12912,
+      "crc32": 1946966461
+    },
+    {
+      "name": "Models/GLB format/balcony-rail.glb",
+      "bytes": 21644,
+      "crc32": 1854747188
+    },
+    {
+      "name": "Models/GLB format/bed-double-cover.glb",
+      "bytes": 5352,
+      "crc32": 974341198
+    },
+    {
+      "name": "Models/GLB format/bed-double.glb",
+      "bytes": 7672,
+      "crc32": 3101335787
+    },
+    {
+      "name": "Models/GLB format/bed-single-cover.glb",
+      "bytes": 5356,
+      "crc32": 793795254
+    },
+    {
+      "name": "Models/GLB format/bed-single.glb",
+      "bytes": 6480,
+      "crc32": 618573010
+    },
+    {
+      "name": "Models/GLB format/chair-armrest-headrest.glb",
+      "bytes": 14308,
+      "crc32": 2959703073
+    },
+    {
+      "name": "Models/GLB format/chair-armrest.glb",
+      "bytes": 10304,
+      "crc32": 177012911
+    },
+    {
+      "name": "Models/GLB format/chair-cushion-headrest.glb",
+      "bytes": 11764,
+      "crc32": 1510781888
+    },
+    {
+      "name": "Models/GLB format/chair-cushion.glb",
+      "bytes": 7780,
+      "crc32": 3937282422
+    },
+    {
+      "name": "Models/GLB format/chair-headrest.glb",
+      "bytes": 10936,
+      "crc32": 2517453951
+    },
+    {
+      "name": "Models/GLB format/chair.glb",
+      "bytes": 6952,
+      "crc32": 1375206964
+    },
+    {
+      "name": "Models/GLB format/computer-screen.glb",
+      "bytes": 19584,
+      "crc32": 25012422
+    },
+    {
+      "name": "Models/GLB format/computer-system.glb",
+      "bytes": 17552,
+      "crc32": 2918079560
+    },
+    {
+      "name": "Models/GLB format/computer-wide.glb",
+      "bytes": 17136,
+      "crc32": 1394199792
+    },
+    {
+      "name": "Models/GLB format/computer.glb",
+      "bytes": 13804,
+      "crc32": 60580099
+    },
+    {
+      "name": "Models/GLB format/container-flat-open.glb",
+      "bytes": 13028,
+      "crc32": 3144696385
+    },
+    {
+      "name": "Models/GLB format/container-flat.glb",
+      "bytes": 12196,
+      "crc32": 1720294377
+    },
+    {
+      "name": "Models/GLB format/container-tall.glb",
+      "bytes": 13052,
+      "crc32": 994940425
+    },
+    {
+      "name": "Models/GLB format/container-wide.glb",
+      "bytes": 12212,
+      "crc32": 4060561642
+    },
+    {
+      "name": "Models/GLB format/container.glb",
+      "bytes": 9716,
+      "crc32": 1096135094
+    },
+    {
+      "name": "Models/GLB format/display-wall-wide.glb",
+      "bytes": 9780,
+      "crc32": 2089724723
+    },
+    {
+      "name": "Models/GLB format/display-wall.glb",
+      "bytes": 8776,
+      "crc32": 2465236753
+    },
+    {
+      "name": "Models/GLB format/door-double-closed.glb",
+      "bytes": 6984,
+      "crc32": 443754025
+    },
+    {
+      "name": "Models/GLB format/door-double-half.glb",
+      "bytes": 4764,
+      "crc32": 2973290875
+    },
+    {
+      "name": "Models/GLB format/door-double.glb",
+      "bytes": 5376,
+      "crc32": 3130968099
+    },
+    {
+      "name": "Models/GLB format/door-single-closed.glb",
+      "bytes": 6984,
+      "crc32": 777424196
+    },
+    {
+      "name": "Models/GLB format/door-single-half.glb",
+      "bytes": 4764,
+      "crc32": 51925941
+    },
+    {
+      "name": "Models/GLB format/door-single.glb",
+      "bytes": 5376,
+      "crc32": 3439370060
+    },
+    {
+      "name": "Models/GLB format/floor-corner.glb",
+      "bytes": 3156,
+      "crc32": 2991686611
+    },
+    {
+      "name": "Models/GLB format/floor-detail.glb",
+      "bytes": 5452,
+      "crc32": 1782012926
+    },
+    {
+      "name": "Models/GLB format/floor-panel-corner.glb",
+      "bytes": 5916,
+      "crc32": 2399891475
+    },
+    {
+      "name": "Models/GLB format/floor-panel-end.glb",
+      "bytes": 6508,
+      "crc32": 4091440579
+    },
+    {
+      "name": "Models/GLB format/floor-panel-straight.glb",
+      "bytes": 6488,
+      "crc32": 591854541
+    },
+    {
+      "name": "Models/GLB format/floor-panel.glb",
+      "bytes": 8900,
+      "crc32": 4286956928
+    },
+    {
+      "name": "Models/GLB format/floor.glb",
+      "bytes": 2836,
+      "crc32": 22623179
+    },
+    {
+      "name": "Models/GLB format/pipe-bend-diagonal.glb",
+      "bytes": 5704,
+      "crc32": 1917260912
+    },
+    {
+      "name": "Models/GLB format/pipe-bend.glb",
+      "bytes": 6544,
+      "crc32": 182036515
+    },
+    {
+      "name": "Models/GLB format/pipe-end-colored.glb",
+      "bytes": 5064,
+      "crc32": 3352693103
+    },
+    {
+      "name": "Models/GLB format/pipe-end.glb",
+      "bytes": 5040,
+      "crc32": 2042535298
+    },
+    {
+      "name": "Models/GLB format/pipe-ring-colored.glb",
+      "bytes": 5368,
+      "crc32": 786286777
+    },
+    {
+      "name": "Models/GLB format/pipe-ring.glb",
+      "bytes": 5344,
+      "crc32": 678900973
+    },
+    {
+      "name": "Models/GLB format/pipe.glb",
+      "bytes": 3536,
+      "crc32": 3287982346
+    },
+    {
+      "name": "Models/GLB format/rail-narrow.glb",
+      "bytes": 9716,
+      "crc32": 2124925100
+    },
+    {
+      "name": "Models/GLB format/rail.glb",
+      "bytes": 9692,
+      "crc32": 1093007665
+    },
+    {
+      "name": "Models/GLB format/rocks.glb",
+      "bytes": 9308,
+      "crc32": 4177490461
+    },
+    {
+      "name": "Models/GLB format/skip-rocks.glb",
+      "bytes": 13516,
+      "crc32": 3310175312
+    },
+    {
+      "name": "Models/GLB format/skip.glb",
+      "bytes": 8788,
+      "crc32": 1478568108
+    },
+    {
+      "name": "Models/GLB format/stairs-corner-inner.glb",
+      "bytes": 7184,
+      "crc32": 2112613879
+    },
+    {
+      "name": "Models/GLB format/stairs-corner.glb",
+      "bytes": 8856,
+      "crc32": 3715702386
+    },
+    {
+      "name": "Models/GLB format/stairs-handrail-single.glb",
+      "bytes": 5156,
+      "crc32": 752041112
+    },
+    {
+      "name": "Models/GLB format/stairs-handrail.glb",
+      "bytes": 8484,
+      "crc32": 4139901970
+    },
+    {
+      "name": "Models/GLB format/stairs-ramp.glb",
+      "bytes": 6740,
+      "crc32": 1782120208
+    },
+    {
+      "name": "Models/GLB format/stairs-small-center.glb",
+      "bytes": 4112,
+      "crc32": 3033114354
+    },
+    {
+      "name": "Models/GLB format/stairs-small-corner-inner.glb",
+      "bytes": 4764,
+      "crc32": 2531302796
+    },
+    {
+      "name": "Models/GLB format/stairs-small-corner.glb",
+      "bytes": 5756,
+      "crc32": 3474399001
+    },
+    {
+      "name": "Models/GLB format/stairs-small-edge-handrail.glb",
+      "bytes": 9204,
+      "crc32": 64158858
+    },
+    {
+      "name": "Models/GLB format/stairs-small-edge.glb",
+      "bytes": 5196,
+      "crc32": 267770102
+    },
+    {
+      "name": "Models/GLB format/stairs-small-edges-handrail.glb",
+      "bytes": 14268,
+      "crc32": 262654801
+    },
+    {
+      "name": "Models/GLB format/stairs-small-edges.glb",
+      "bytes": 6288,
+      "crc32": 4065316328
+    },
+    {
+      "name": "Models/GLB format/stairs.glb",
+      "bytes": 5832,
+      "crc32": 4028017343
+    },
+    {
+      "name": "Models/GLB format/structure-barrier-high.glb",
+      "bytes": 44348,
+      "crc32": 229957491
+    },
+    {
+      "name": "Models/GLB format/structure-barrier.glb",
+      "bytes": 44356,
+      "crc32": 1391638324
+    },
+    {
+      "name": "Models/GLB format/structure-panel.glb",
+      "bytes": 12516,
+      "crc32": 2846372694
+    },
+    {
+      "name": "Models/GLB format/structure.glb",
+      "bytes": 29828,
+      "crc32": 1979851035
+    },
+    {
+      "name": "Models/GLB format/table-display-planet.glb",
+      "bytes": 16740,
+      "crc32": 612987010
+    },
+    {
+      "name": "Models/GLB format/table-display-small.glb",
+      "bytes": 29116,
+      "crc32": 1744565522
+    },
+    {
+      "name": "Models/GLB format/table-display.glb",
+      "bytes": 24344,
+      "crc32": 3029271047
+    },
+    {
+      "name": "Models/GLB format/table-inset-small.glb",
+      "bytes": 12260,
+      "crc32": 3610789512
+    },
+    {
+      "name": "Models/GLB format/table-inset.glb",
+      "bytes": 12240,
+      "crc32": 1499757279
+    },
+    {
+      "name": "Models/GLB format/table-large.glb",
+      "bytes": 9828,
+      "crc32": 3477701255
+    },
+    {
+      "name": "Models/GLB format/table.glb",
+      "bytes": 9808,
+      "crc32": 2789632180
+    },
+    {
+      "name": "Models/GLB format/Textures/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/GLB format/Textures/colormap.png",
+      "bytes": 7440,
+      "crc32": 1463886810
+    },
+    {
+      "name": "Models/GLB format/wall-banner.glb",
+      "bytes": 5876,
+      "crc32": 1526912480
+    },
+    {
+      "name": "Models/GLB format/wall-corner-banner.glb",
+      "bytes": 10744,
+      "crc32": 612508352
+    },
+    {
+      "name": "Models/GLB format/wall-corner-round-banner.glb",
+      "bytes": 18556,
+      "crc32": 3813652041
+    },
+    {
+      "name": "Models/GLB format/wall-corner-round.glb",
+      "bytes": 15872,
+      "crc32": 2159953392
+    },
+    {
+      "name": "Models/GLB format/wall-corner.glb",
+      "bytes": 9332,
+      "crc32": 4273018651
+    },
+    {
+      "name": "Models/GLB format/wall-detail.glb",
+      "bytes": 15096,
+      "crc32": 1856771355
+    },
+    {
+      "name": "Models/GLB format/wall-door-banner.glb",
+      "bytes": 10908,
+      "crc32": 3277236613
+    },
+    {
+      "name": "Models/GLB format/wall-door-center.glb",
+      "bytes": 3692,
+      "crc32": 544054777
+    },
+    {
+      "name": "Models/GLB format/wall-door-edge-banner.glb",
+      "bytes": 7608,
+      "crc32": 2565343273
+    },
+    {
+      "name": "Models/GLB format/wall-door-edge.glb",
+      "bytes": 7092,
+      "crc32": 4078713842
+    },
+    {
+      "name": "Models/GLB format/wall-door-wide-banner.glb",
+      "bytes": 10924,
+      "crc32": 2669609273
+    },
+    {
+      "name": "Models/GLB format/wall-door-wide.glb",
+      "bytes": 9904,
+      "crc32": 3192054848
+    },
+    {
+      "name": "Models/GLB format/wall-door.glb",
+      "bytes": 9892,
+      "crc32": 212269832
+    },
+    {
+      "name": "Models/GLB format/wall-pillar-banner.glb",
+      "bytes": 16256,
+      "crc32": 1967978735
+    },
+    {
+      "name": "Models/GLB format/wall-pillar.glb",
+      "bytes": 9224,
+      "crc32": 39956467
+    },
+    {
+      "name": "Models/GLB format/wall-switch.glb",
+      "bytes": 3192,
+      "crc32": 4092681938
+    },
+    {
+      "name": "Models/GLB format/wall-window-banner.glb",
+      "bytes": 10532,
+      "crc32": 441089871
+    },
+    {
+      "name": "Models/GLB format/wall-window-frame.glb",
+      "bytes": 4548,
+      "crc32": 815204554
+    },
+    {
+      "name": "Models/GLB format/wall-window-shutters.glb",
+      "bytes": 5352,
+      "crc32": 2493368224
+    },
+    {
+      "name": "Models/GLB format/wall-window.glb",
+      "bytes": 9720,
+      "crc32": 3690529214
+    },
+    {
+      "name": "Models/GLB format/wall.glb",
+      "bytes": 5252,
+      "crc32": 4238019670
+    },
+    {
+      "name": "Models/OBJ format/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/OBJ format/balcony-floor-center.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/balcony-floor-center.obj",
+      "bytes": 1476,
+      "crc32": 3921173935
+    },
+    {
+      "name": "Models/OBJ format/balcony-floor-corner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/balcony-floor-corner.obj",
+      "bytes": 2329,
+      "crc32": 1669642256
+    },
+    {
+      "name": "Models/OBJ format/balcony-floor.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/balcony-floor.obj",
+      "bytes": 3128,
+      "crc32": 2265662152
+    },
+    {
+      "name": "Models/OBJ format/balcony-rail-center.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/balcony-rail-center.obj",
+      "bytes": 3304,
+      "crc32": 474085805
+    },
+    {
+      "name": "Models/OBJ format/balcony-rail-corner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/balcony-rail-corner.obj",
+      "bytes": 9230,
+      "crc32": 2235068984
+    },
+    {
+      "name": "Models/OBJ format/balcony-rail.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/balcony-rail.obj",
+      "bytes": 15967,
+      "crc32": 1642564783
+    },
+    {
+      "name": "Models/OBJ format/bed-double-cover.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bed-double-cover.obj",
+      "bytes": 3268,
+      "crc32": 1466272879
+    },
+    {
+      "name": "Models/OBJ format/bed-double.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bed-double.obj",
+      "bytes": 5069,
+      "crc32": 3845399761
+    },
+    {
+      "name": "Models/OBJ format/bed-single-cover.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bed-single-cover.obj",
+      "bytes": 3230,
+      "crc32": 398002389
+    },
+    {
+      "name": "Models/OBJ format/bed-single.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/bed-single.obj",
+      "bytes": 4287,
+      "crc32": 327586796
+    },
+    {
+      "name": "Models/OBJ format/chair-armrest-headrest.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/chair-armrest-headrest.obj",
+      "bytes": 11915,
+      "crc32": 3566805573
+    },
+    {
+      "name": "Models/OBJ format/chair-armrest.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/chair-armrest.obj",
+      "bytes": 7741,
+      "crc32": 3218563128
+    },
+    {
+      "name": "Models/OBJ format/chair-cushion-headrest.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/chair-cushion-headrest.obj",
+      "bytes": 10187,
+      "crc32": 2124163285
+    },
+    {
+      "name": "Models/OBJ format/chair-cushion.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/chair-cushion.obj",
+      "bytes": 5862,
+      "crc32": 1844786804
+    },
+    {
+      "name": "Models/OBJ format/chair-headrest.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/chair-headrest.obj",
+      "bytes": 9186,
+      "crc32": 1016666478
+    },
+    {
+      "name": "Models/OBJ format/chair.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/chair.obj",
+      "bytes": 4889,
+      "crc32": 1258288933
+    },
+    {
+      "name": "Models/OBJ format/computer-screen.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/computer-screen.obj",
+      "bytes": 17346,
+      "crc32": 87301025
+    },
+    {
+      "name": "Models/OBJ format/computer-system.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/computer-system.obj",
+      "bytes": 15507,
+      "crc32": 1320269493
+    },
+    {
+      "name": "Models/OBJ format/computer-wide.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/computer-wide.obj",
+      "bytes": 15050,
+      "crc32": 561256416
+    },
+    {
+      "name": "Models/OBJ format/computer.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/computer.obj",
+      "bytes": 12362,
+      "crc32": 3749044309
+    },
+    {
+      "name": "Models/OBJ format/container-flat-open.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/container-flat-open.obj",
+      "bytes": 11755,
+      "crc32": 2047013330
+    },
+    {
+      "name": "Models/OBJ format/container-flat.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/container-flat.obj",
+      "bytes": 10620,
+      "crc32": 146669662
+    },
+    {
+      "name": "Models/OBJ format/container-tall.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/container-tall.obj",
+      "bytes": 6910,
+      "crc32": 345174319
+    },
+    {
+      "name": "Models/OBJ format/container-wide.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/container-wide.obj",
+      "bytes": 9338,
+      "crc32": 1752890762
+    },
+    {
+      "name": "Models/OBJ format/container.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/container.obj",
+      "bytes": 6713,
+      "crc32": 2561111742
+    },
+    {
+      "name": "Models/OBJ format/display-wall-wide.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/display-wall-wide.obj",
+      "bytes": 8499,
+      "crc32": 3953729828
+    },
+    {
+      "name": "Models/OBJ format/display-wall.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/display-wall.obj",
+      "bytes": 7612,
+      "crc32": 230996534
+    },
+    {
+      "name": "Models/OBJ format/door-double-closed.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/door-double-closed.obj",
+      "bytes": 3575,
+      "crc32": 2909635051
+    },
+    {
+      "name": "Models/OBJ format/door-double-half.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/door-double-half.obj",
+      "bytes": 2854,
+      "crc32": 675829494
+    },
+    {
+      "name": "Models/OBJ format/door-double.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/door-double.obj",
+      "bytes": 3539,
+      "crc32": 1452875317
+    },
+    {
+      "name": "Models/OBJ format/door-single-closed.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/door-single-closed.obj",
+      "bytes": 3575,
+      "crc32": 3032430029
+    },
+    {
+      "name": "Models/OBJ format/door-single-half.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/door-single-half.obj",
+      "bytes": 2862,
+      "crc32": 4225310587
+    },
+    {
+      "name": "Models/OBJ format/door-single.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/door-single.obj",
+      "bytes": 3537,
+      "crc32": 186336045
+    },
+    {
+      "name": "Models/OBJ format/floor-corner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/floor-corner.obj",
+      "bytes": 1197,
+      "crc32": 4271839114
+    },
+    {
+      "name": "Models/OBJ format/floor-detail.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/floor-detail.obj",
+      "bytes": 3134,
+      "crc32": 2897498808
+    },
+    {
+      "name": "Models/OBJ format/floor-panel-corner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/floor-panel-corner.obj",
+      "bytes": 3920,
+      "crc32": 4122375661
+    },
+    {
+      "name": "Models/OBJ format/floor-panel-end.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/floor-panel-end.obj",
+      "bytes": 4322,
+      "crc32": 1992201368
+    },
+    {
+      "name": "Models/OBJ format/floor-panel-straight.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/floor-panel-straight.obj",
+      "bytes": 4213,
+      "crc32": 2652488782
+    },
+    {
+      "name": "Models/OBJ format/floor-panel.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/floor-panel.obj",
+      "bytes": 6755,
+      "crc32": 1926572838
+    },
+    {
+      "name": "Models/OBJ format/floor.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/floor.obj",
+      "bytes": 919,
+      "crc32": 2891632716
+    },
+    {
+      "name": "Models/OBJ format/pipe-bend-diagonal.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pipe-bend-diagonal.obj",
+      "bytes": 3533,
+      "crc32": 3441828493
+    },
+    {
+      "name": "Models/OBJ format/pipe-bend.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pipe-bend.obj",
+      "bytes": 4355,
+      "crc32": 3957229248
+    },
+    {
+      "name": "Models/OBJ format/pipe-end-colored.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pipe-end-colored.obj",
+      "bytes": 2681,
+      "crc32": 1193011026
+    },
+    {
+      "name": "Models/OBJ format/pipe-end.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pipe-end.obj",
+      "bytes": 2657,
+      "crc32": 2219121027
+    },
+    {
+      "name": "Models/OBJ format/pipe-ring-colored.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pipe-ring-colored.obj",
+      "bytes": 2862,
+      "crc32": 2166347846
+    },
+    {
+      "name": "Models/OBJ format/pipe-ring.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pipe-ring.obj",
+      "bytes": 2838,
+      "crc32": 1112860987
+    },
+    {
+      "name": "Models/OBJ format/pipe.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/pipe.obj",
+      "bytes": 1525,
+      "crc32": 2439437386
+    },
+    {
+      "name": "Models/OBJ format/rail-narrow.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/rail-narrow.obj",
+      "bytes": 7064,
+      "crc32": 451669688
+    },
+    {
+      "name": "Models/OBJ format/rail.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/rail.obj",
+      "bytes": 7075,
+      "crc32": 128875090
+    },
+    {
+      "name": "Models/OBJ format/rocks.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/rocks.obj",
+      "bytes": 7238,
+      "crc32": 951202476
+    },
+    {
+      "name": "Models/OBJ format/skip-rocks.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/skip-rocks.obj",
+      "bytes": 10278,
+      "crc32": 3490932360
+    },
+    {
+      "name": "Models/OBJ format/skip.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/skip.obj",
+      "bytes": 6277,
+      "crc32": 3123016422
+    },
+    {
+      "name": "Models/OBJ format/stairs-corner-inner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/stairs-corner-inner.obj",
+      "bytes": 5114,
+      "crc32": 2475525069
+    },
+    {
+      "name": "Models/OBJ format/stairs-corner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/stairs-corner.obj",
+      "bytes": 7639,
+      "crc32": 2737073648
+    },
+    {
+      "name": "Models/OBJ format/stairs-handrail-single.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/stairs-handrail-single.obj",
+      "bytes": 3424,
+      "crc32": 1491661092
+    },
+    {
+      "name": "Models/OBJ format/stairs-handrail.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/stairs-handrail.obj",
+      "bytes": 6093,
+      "crc32": 1694666915
+    },
+    {
+      "name": "Models/OBJ format/stairs-ramp.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/stairs-ramp.obj",
+      "bytes": 4337,
+      "crc32": 2796977068
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-center.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-center.obj",
+      "bytes": 1969,
+      "crc32": 2838504851
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-corner-inner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-corner-inner.obj",
+      "bytes": 2505,
+      "crc32": 88591073
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-corner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-corner.obj",
+      "bytes": 3542,
+      "crc32": 814562229
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-edge-handrail.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-edge-handrail.obj",
+      "bytes": 6003,
+      "crc32": 3171089008
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-edge.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-edge.obj",
+      "bytes": 2831,
+      "crc32": 116692922
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-edges-handrail.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-edges-handrail.obj",
+      "bytes": 9820,
+      "crc32": 1028029394
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-edges.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/stairs-small-edges.obj",
+      "bytes": 3550,
+      "crc32": 3466224896
+    },
+    {
+      "name": "Models/OBJ format/stairs.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/stairs.obj",
+      "bytes": 3716,
+      "crc32": 2685306876
+    },
+    {
+      "name": "Models/OBJ format/structure-barrier-high.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/structure-barrier-high.obj",
+      "bytes": 11172,
+      "crc32": 2439337021
+    },
+    {
+      "name": "Models/OBJ format/structure-barrier.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/structure-barrier.obj",
+      "bytes": 11112,
+      "crc32": 192558774
+    },
+    {
+      "name": "Models/OBJ format/structure-panel.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/structure-panel.obj",
+      "bytes": 8819,
+      "crc32": 1438716159
+    },
+    {
+      "name": "Models/OBJ format/structure.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/structure.obj",
+      "bytes": 6105,
+      "crc32": 2704672490
+    },
+    {
+      "name": "Models/OBJ format/table-display-planet.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/table-display-planet.obj",
+      "bytes": 9359,
+      "crc32": 1208312648
+    },
+    {
+      "name": "Models/OBJ format/table-display-small.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/table-display-small.obj",
+      "bytes": 22284,
+      "crc32": 2826960314
+    },
+    {
+      "name": "Models/OBJ format/table-display.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/table-display.obj",
+      "bytes": 19112,
+      "crc32": 1566582059
+    },
+    {
+      "name": "Models/OBJ format/table-inset-small.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/table-inset-small.obj",
+      "bytes": 10127,
+      "crc32": 3913418847
+    },
+    {
+      "name": "Models/OBJ format/table-inset.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/table-inset.obj",
+      "bytes": 9867,
+      "crc32": 1562842737
+    },
+    {
+      "name": "Models/OBJ format/table-large.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/table-large.obj",
+      "bytes": 7274,
+      "crc32": 2313323645
+    },
+    {
+      "name": "Models/OBJ format/table.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/table.obj",
+      "bytes": 7089,
+      "crc32": 3098785341
+    },
+    {
+      "name": "Models/OBJ format/Textures/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/OBJ format/Textures/colormap.png",
+      "bytes": 7440,
+      "crc32": 1463886810
+    },
+    {
+      "name": "Models/OBJ format/wall-banner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-banner.obj",
+      "bytes": 3625,
+      "crc32": 2526483240
+    },
+    {
+      "name": "Models/OBJ format/wall-corner-banner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-corner-banner.obj",
+      "bytes": 7994,
+      "crc32": 2398622306
+    },
+    {
+      "name": "Models/OBJ format/wall-corner-round-banner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-corner-round-banner.obj",
+      "bytes": 15318,
+      "crc32": 4217114815
+    },
+    {
+      "name": "Models/OBJ format/wall-corner-round.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-corner-round.obj",
+      "bytes": 12682,
+      "crc32": 6659162
+    },
+    {
+      "name": "Models/OBJ format/wall-corner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-corner.obj",
+      "bytes": 6640,
+      "crc32": 436961783
+    },
+    {
+      "name": "Models/OBJ format/wall-detail.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-detail.obj",
+      "bytes": 8237,
+      "crc32": 3312552897
+    },
+    {
+      "name": "Models/OBJ format/wall-door-banner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-door-banner.obj",
+      "bytes": 7840,
+      "crc32": 2286165261
+    },
+    {
+      "name": "Models/OBJ format/wall-door-center.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-door-center.obj",
+      "bytes": 1431,
+      "crc32": 3251146948
+    },
+    {
+      "name": "Models/OBJ format/wall-door-edge-banner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-door-edge-banner.obj",
+      "bytes": 5029,
+      "crc32": 1542279043
+    },
+    {
+      "name": "Models/OBJ format/wall-door-edge.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-door-edge.obj",
+      "bytes": 4532,
+      "crc32": 876425471
+    },
+    {
+      "name": "Models/OBJ format/wall-door-wide-banner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-door-wide-banner.obj",
+      "bytes": 7855,
+      "crc32": 1667992999
+    },
+    {
+      "name": "Models/OBJ format/wall-door-wide.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-door-wide.obj",
+      "bytes": 6890,
+      "crc32": 549720203
+    },
+    {
+      "name": "Models/OBJ format/wall-door.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-door.obj",
+      "bytes": 6875,
+      "crc32": 861267076
+    },
+    {
+      "name": "Models/OBJ format/wall-pillar-banner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-pillar-banner.obj",
+      "bytes": 11948,
+      "crc32": 2112331455
+    },
+    {
+      "name": "Models/OBJ format/wall-pillar.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-pillar.obj",
+      "bytes": 6433,
+      "crc32": 1671168886
+    },
+    {
+      "name": "Models/OBJ format/wall-switch.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-switch.obj",
+      "bytes": 1694,
+      "crc32": 1764262382
+    },
+    {
+      "name": "Models/OBJ format/wall-window-banner.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-window-banner.obj",
+      "bytes": 8130,
+      "crc32": 3052063848
+    },
+    {
+      "name": "Models/OBJ format/wall-window-frame.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-window-frame.obj",
+      "bytes": 2426,
+      "crc32": 1881975571
+    },
+    {
+      "name": "Models/OBJ format/wall-window-shutters.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-window-shutters.obj",
+      "bytes": 3108,
+      "crc32": 3676855059
+    },
+    {
+      "name": "Models/OBJ format/wall-window.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall-window.obj",
+      "bytes": 7421,
+      "crc32": 4215394354
+    },
+    {
+      "name": "Models/OBJ format/wall.mtl",
+      "bytes": 98,
+      "crc32": 2212646753
+    },
+    {
+      "name": "Models/OBJ format/wall.obj",
+      "bytes": 3032,
+      "crc32": 1398191033
+    },
+    {
+      "name": "Models/Textures/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Models/Textures/variation-a.png",
+      "bytes": 6586,
+      "crc32": 4096287210
+    },
+    {
+      "name": "Overview.html",
+      "bytes": 17370,
+      "crc32": 2039155893
+    },
+    {
+      "name": "Preview (Variation A).png",
+      "bytes": 115340,
+      "crc32": 3471614119
+    },
+    {
+      "name": "Preview.png",
+      "bytes": 117111,
+      "crc32": 3763255451
+    },
+    {
+      "name": "Previews/",
+      "bytes": 0,
+      "crc32": 0
+    },
+    {
+      "name": "Previews/balcony-floor-center.png",
+      "bytes": 1541,
+      "crc32": 2184108981
+    },
+    {
+      "name": "Previews/balcony-floor-corner.png",
+      "bytes": 1960,
+      "crc32": 1852189403
+    },
+    {
+      "name": "Previews/balcony-floor.png",
+      "bytes": 1903,
+      "crc32": 3295921106
+    },
+    {
+      "name": "Previews/balcony-rail-center.png",
+      "bytes": 1844,
+      "crc32": 2415886322
+    },
+    {
+      "name": "Previews/balcony-rail-corner.png",
+      "bytes": 1689,
+      "crc32": 2846487475
+    },
+    {
+      "name": "Previews/balcony-rail.png",
+      "bytes": 1928,
+      "crc32": 287594427
+    },
+    {
+      "name": "Previews/bed-double-cover.png",
+      "bytes": 1524,
+      "crc32": 590745544
+    },
+    {
+      "name": "Previews/bed-double.png",
+      "bytes": 1945,
+      "crc32": 41677563
+    },
+    {
+      "name": "Previews/bed-single-cover.png",
+      "bytes": 1819,
+      "crc32": 696689627
+    },
+    {
+      "name": "Previews/bed-single.png",
+      "bytes": 1957,
+      "crc32": 2219916332
+    },
+    {
+      "name": "Previews/chair-armrest-headrest.png",
+      "bytes": 1613,
+      "crc32": 3248000357
+    },
+    {
+      "name": "Previews/chair-armrest.png",
+      "bytes": 1720,
+      "crc32": 4134799644
+    },
+    {
+      "name": "Previews/chair-cushion-headrest.png",
+      "bytes": 1578,
+      "crc32": 13367758
+    },
+    {
+      "name": "Previews/chair-cushion.png",
+      "bytes": 1668,
+      "crc32": 3880021155
+    },
+    {
+      "name": "Previews/chair-headrest.png",
+      "bytes": 1571,
+      "crc32": 2881150847
+    },
+    {
+      "name": "Previews/chair.png",
+      "bytes": 1652,
+      "crc32": 672576621
+    },
+    {
+      "name": "Previews/computer-screen.png",
+      "bytes": 1835,
+      "crc32": 2096125866
+    },
+    {
+      "name": "Previews/computer-system.png",
+      "bytes": 1988,
+      "crc32": 1832450786
+    },
+    {
+      "name": "Previews/computer-wide.png",
+      "bytes": 2065,
+      "crc32": 3314110554
+    },
+    {
+      "name": "Previews/computer.png",
+      "bytes": 1700,
+      "crc32": 2952476424
+    },
+    {
+      "name": "Previews/container-flat-open.png",
+      "bytes": 1934,
+      "crc32": 2564237418
+    },
+    {
+      "name": "Previews/container-flat.png",
+      "bytes": 2003,
+      "crc32": 2249445861
+    },
+    {
+      "name": "Previews/container-tall.png",
+      "bytes": 1679,
+      "crc32": 4003453219
+    },
+    {
+      "name": "Previews/container-wide.png",
+      "bytes": 1895,
+      "crc32": 249512225
+    },
+    {
+      "name": "Previews/container.png",
+      "bytes": 1834,
+      "crc32": 4284072213
+    },
+    {
+      "name": "Previews/display-wall-wide.png",
+      "bytes": 1970,
+      "crc32": 3976157471
+    },
+    {
+      "name": "Previews/display-wall.png",
+      "bytes": 1874,
+      "crc32": 3775991731
+    },
+    {
+      "name": "Previews/door-double-closed.png",
+      "bytes": 1703,
+      "crc32": 3296083814
+    },
+    {
+      "name": "Previews/door-double-half.png",
+      "bytes": 1682,
+      "crc32": 3942746362
+    },
+    {
+      "name": "Previews/door-double.png",
+      "bytes": 1717,
+      "crc32": 1480344545
+    },
+    {
+      "name": "Previews/door-single-closed.png",
+      "bytes": 1640,
+      "crc32": 1505728384
+    },
+    {
+      "name": "Previews/door-single-half.png",
+      "bytes": 1641,
+      "crc32": 3808783971
+    },
+    {
+      "name": "Previews/door-single.png",
+      "bytes": 1667,
+      "crc32": 1647922737
+    },
+    {
+      "name": "Previews/floor-corner.png",
+      "bytes": 1641,
+      "crc32": 1579965890
+    },
+    {
+      "name": "Previews/floor-detail.png",
+      "bytes": 1979,
+      "crc32": 3700579982
+    },
+    {
+      "name": "Previews/floor-panel-corner.png",
+      "bytes": 2030,
+      "crc32": 3939858734
+    },
+    {
+      "name": "Previews/floor-panel-end.png",
+      "bytes": 2013,
+      "crc32": 2531143137
+    },
+    {
+      "name": "Previews/floor-panel-straight.png",
+      "bytes": 1987,
+      "crc32": 875020412
+    },
+    {
+      "name": "Previews/floor-panel.png",
+      "bytes": 2074,
+      "crc32": 1400716640
+    },
+    {
+      "name": "Previews/floor.png",
+      "bytes": 1658,
+      "crc32": 2238604107
+    },
+    {
+      "name": "Previews/pipe-bend-diagonal.png",
+      "bytes": 1654,
+      "crc32": 3476709661
+    },
+    {
+      "name": "Previews/pipe-bend.png",
+      "bytes": 2005,
+      "crc32": 2902059746
+    },
+    {
+      "name": "Previews/pipe-end-colored.png",
+      "bytes": 1641,
+      "crc32": 3341855135
+    },
+    {
+      "name": "Previews/pipe-end.png",
+      "bytes": 1664,
+      "crc32": 1802350496
+    },
+    {
+      "name": "Previews/pipe-ring-colored.png",
+      "bytes": 1695,
+      "crc32": 1833382232
+    },
+    {
+      "name": "Previews/pipe-ring.png",
+      "bytes": 1719,
+      "crc32": 3908484242
+    },
+    {
+      "name": "Previews/pipe.png",
+      "bytes": 1648,
+      "crc32": 1017177961
+    },
+    {
+      "name": "Previews/rail-narrow.png",
+      "bytes": 1518,
+      "crc32": 367458803
+    },
+    {
+      "name": "Previews/rail.png",
+      "bytes": 1490,
+      "crc32": 1201004564
+    },
+    {
+      "name": "Previews/rocks.png",
+      "bytes": 1910,
+      "crc32": 27377775
+    },
+    {
+      "name": "Previews/skip-rocks.png",
+      "bytes": 1898,
+      "crc32": 2345963609
+    },
+    {
+      "name": "Previews/skip.png",
+      "bytes": 2098,
+      "crc32": 3979114384
+    },
+    {
+      "name": "Previews/stairs-corner-inner.png",
+      "bytes": 2018,
+      "crc32": 3362596078
+    },
+    {
+      "name": "Previews/stairs-corner.png",
+      "bytes": 1878,
+      "crc32": 3598497314
+    },
+    {
+      "name": "Previews/stairs-handrail-single.png",
+      "bytes": 1308,
+      "crc32": 3226731100
+    },
+    {
+      "name": "Previews/stairs-handrail.png",
+      "bytes": 1492,
+      "crc32": 1519392871
+    },
+    {
+      "name": "Previews/stairs-ramp.png",
+      "bytes": 1992,
+      "crc32": 3608431649
+    },
+    {
+      "name": "Previews/stairs-small-center.png",
+      "bytes": 1958,
+      "crc32": 484402312
+    },
+    {
+      "name": "Previews/stairs-small-corner-inner.png",
+      "bytes": 1738,
+      "crc32": 2122936379
+    },
+    {
+      "name": "Previews/stairs-small-corner.png",
+      "bytes": 1560,
+      "crc32": 3918044550
+    },
+    {
+      "name": "Previews/stairs-small-edge-handrail.png",
+      "bytes": 1717,
+      "crc32": 549291035
+    },
+    {
+      "name": "Previews/stairs-small-edge.png",
+      "bytes": 1968,
+      "crc32": 1219376684
+    },
+    {
+      "name": "Previews/stairs-small-edges-handrail.png",
+      "bytes": 1773,
+      "crc32": 2630241645
+    },
+    {
+      "name": "Previews/stairs-small-edges.png",
+      "bytes": 1870,
+      "crc32": 2374290321
+    },
+    {
+      "name": "Previews/stairs.png",
+      "bytes": 1952,
+      "crc32": 2803382001
+    },
+    {
+      "name": "Previews/structure-barrier-high.png",
+      "bytes": 1697,
+      "crc32": 4121361858
+    },
+    {
+      "name": "Previews/structure-barrier.png",
+      "bytes": 1694,
+      "crc32": 767606097
+    },
+    {
+      "name": "Previews/structure-panel.png",
+      "bytes": 1976,
+      "crc32": 3640581644
+    },
+    {
+      "name": "Previews/structure.png",
+      "bytes": 1686,
+      "crc32": 2403872084
+    },
+    {
+      "name": "Previews/table-display-planet.png",
+      "bytes": 1629,
+      "crc32": 178332221
+    },
+    {
+      "name": "Previews/table-display-small.png",
+      "bytes": 1760,
+      "crc32": 3952662544
+    },
+    {
+      "name": "Previews/table-display.png",
+      "bytes": 1876,
+      "crc32": 3551866667
+    },
+    {
+      "name": "Previews/table-inset-small.png",
+      "bytes": 1926,
+      "crc32": 1163370921
+    },
+    {
+      "name": "Previews/table-inset.png",
+      "bytes": 1969,
+      "crc32": 607114961
+    },
+    {
+      "name": "Previews/table-large.png",
+      "bytes": 2048,
+      "crc32": 3498640195
+    },
+    {
+      "name": "Previews/table.png",
+      "bytes": 2198,
+      "crc32": 169722682
+    },
+    {
+      "name": "Previews/wall-banner.png",
+      "bytes": 1734,
+      "crc32": 2133069068
+    },
+    {
+      "name": "Previews/wall-corner-banner.png",
+      "bytes": 1625,
+      "crc32": 3427366130
+    },
+    {
+      "name": "Previews/wall-corner-round-banner.png",
+      "bytes": 1470,
+      "crc32": 949600994
+    },
+    {
+      "name": "Previews/wall-corner-round.png",
+      "bytes": 1473,
+      "crc32": 1712183267
+    },
+    {
+      "name": "Previews/wall-corner.png",
+      "bytes": 1632,
+      "crc32": 2921213062
+    },
+    {
+      "name": "Previews/wall-detail.png",
+      "bytes": 1596,
+      "crc32": 3963849596
+    },
+    {
+      "name": "Previews/wall-door-banner.png",
+      "bytes": 1751,
+      "crc32": 2376345252
+    },
+    {
+      "name": "Previews/wall-door-center.png",
+      "bytes": 1960,
+      "crc32": 2979272525
+    },
+    {
+      "name": "Previews/wall-door-edge-banner.png",
+      "bytes": 2075,
+      "crc32": 791698382
+    },
+    {
+      "name": "Previews/wall-door-edge.png",
+      "bytes": 2078,
+      "crc32": 1679791191
+    },
+    {
+      "name": "Previews/wall-door-wide-banner.png",
+      "bytes": 1692,
+      "crc32": 924354003
+    },
+    {
+      "name": "Previews/wall-door-wide.png",
+      "bytes": 1699,
+      "crc32": 1559522771
+    },
+    {
+      "name": "Previews/wall-door.png",
+      "bytes": 1761,
+      "crc32": 1262407376
+    },
+    {
+      "name": "Previews/wall-pillar-banner.png",
+      "bytes": 1858,
+      "crc32": 1206494495
+    },
+    {
+      "name": "Previews/wall-pillar.png",
+      "bytes": 1842,
+      "crc32": 935514308
+    },
+    {
+      "name": "Previews/wall-switch.png",
+      "bytes": 1558,
+      "crc32": 4125307631
+    },
+    {
+      "name": "Previews/wall-window-banner.png",
+      "bytes": 1767,
+      "crc32": 768225679
+    },
+    {
+      "name": "Previews/wall-window-frame.png",
+      "bytes": 1777,
+      "crc32": 3327132866
+    },
+    {
+      "name": "Previews/wall-window-shutters.png",
+      "bytes": 1862,
+      "crc32": 349791084
+    },
+    {
+      "name": "Previews/wall-window.png",
+      "bytes": 1776,
+      "crc32": 3554031361
+    },
+    {
+      "name": "Previews/wall.png",
+      "bytes": 1757,
+      "crc32": 3301230528
+    },
+    {
+      "name": "Sample.png",
+      "bytes": 123657,
+      "crc32": 2346551886
+    },
+    {
+      "name": "View Documentation.url",
+      "bytes": 185,
+      "crc32": 3772593461
+    },
+    {
+      "name": "Visit Kenney.url",
+      "bytes": 118,
+      "crc32": 3375027426
+    },
+    {
+      "name": "Visit Patreon.url",
+      "bytes": 55,
+      "crc32": 432265474
+    }
+  ],
+  "notices": [
+    {
+      "member": "License.txt",
+      "saved": "notice-0.txt"
+    }
+  ],
+  "status": "downloaded; retained original; import not approved",
+  "license": "CC0 per retained official source; inspect notices before import"
+}

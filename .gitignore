@@ -77,3 +77,6 @@ work/prepare_cut_content_selection.py
 
 # ---- client UI files (stock-derived, e.g. Fable's staged ui_avatardata.inc); our own .ws/.tga stay tracked ----
 *.inc
+
+# Retained source-page evidence; original archives are already ignored.
+outputs/Farming-assets/*/source.html

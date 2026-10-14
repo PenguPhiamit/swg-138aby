@@ -1,0 +1,31 @@
+{
+  "slug": "industrial-pipes",
+  "authors": "rubberduck",
+  "source": "https://opengameart.org/content/3d-lod-pipe-construction-set",
+  "download": "https://opengameart.org/sites/default/files/3d-LOD-pipe-construction-set.zip",
+  "retrieved_utc": "2026-10-14T23:19:46.510054+00:00",
+  "imported": false,
+  "announced_bytes": 1542148,
+  "bytes": 1542148,
+  "sha256": "a6cb1030781ee1b1458dbb182012ed6de359462d23968d5ad1ef8bec8428ff97",
+  "files": [
+    {
+      "name": "195.JPG",
+      "bytes": 330556,
+      "crc32": 707329145
+    },
+    {
+      "name": "195_norm.JPG",
+      "bytes": 531152,
+      "crc32": 3164000288
+    },
+    {
+      "name": "3d-LOD-pipe-construction-set.blend",
+      "bytes": 3424236,
+      "crc32": 112346786
+    }
+  ],
+  "notices": [],
+  "status": "downloaded; retained original; import not approved",
+  "license": "CC0 per retained official source; inspect notices before import"
+}
