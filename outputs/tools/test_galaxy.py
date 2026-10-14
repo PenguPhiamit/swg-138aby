@@ -22,6 +22,7 @@ DEV_SCRIPTS = Path('/opt/swg/Core3-dev/MMOCoreORB/bin/scripts')
 DEV_CORE3 = Path('/opt/swg/Core3-dev/MMOCoreORB/bin/core3')
 LOCAL_TRE = Path('/opt/swg/tre/local_planets.tre')  # test-only archive; live's config doesn't list it
 TEST_ZONES = ['hoth']  # zones whose client data ships in LOCAL_TRE (added only when it exists)
+SHUTTLE_BOOT_DELAY_MS = 30 * 1000  # stock Core3 waits 5 minutes after a start before scheduling shuttles
 TARGET = Path('/opt/swg/testgalaxy')
 MARKER = TARGET/'.test-galaxy'
 BIN = TARGET/'Core3/MMOCoreORB/bin'
@@ -111,9 +112,14 @@ def start(args):
                 local_tre += (f'Core3.ZonesEnabled = (function(t) for _, z in ipairs(t) do if z == "{zone}" then return t end '
                               f'end table.insert(t, "{zone}") return t end)(Core3.ZonesEnabled)\n')
             print(f'  test zones enabled: {", ".join(TEST_ZONES)}', flush=True)
+        # Core3 holds every shuttle for 5 minutes after a start (ShuttleZoneComponent.cpp, BootDelay); until then a travel
+        # point has no shuttle and /purchaseTicket fails without a message (14 Oct: bots' tickets failed for minutes
+        # after each test restart). The test galaxy starts its shuttles after 30 s; live keeps the stock delay.
+        shuttles = f'Core3.ShuttleZoneComponent = {{ BootDelay = {SHUTTLE_BOOT_DELAY_MS} }}\n'
+        print(f'  shuttles in service {SHUTTLE_BOOT_DELAY_MS // 1000} s after the start (stock: 300 s)', flush=True)
         with config.open('a') as stream:
             stream.write('\n-- TEST GALAXY OVERRIDES (disposable copy)\n'
-                         f'Core3.DBName = "{DB}"\nCore3.MakeWeb = 0\n' + local_tre +
+                         f'Core3.DBName = "{DB}"\nCore3.MakeWeb = 0\n' + local_tre + shuttles +
                          ''.join(f'Core3.{k} = {v}\n' for k, v in PORTS.items()) +
                          ''.join(f'Core3.{a}\n' for i, a in enumerate(args) if i > 0 and args[i - 1] == '--config'))
         run(['chown', '-R', 'swgemu:swgemu', str(TARGET)])

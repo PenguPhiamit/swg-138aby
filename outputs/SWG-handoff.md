@@ -218,6 +218,14 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 13:41 Claude: CORRECTION: silent ticket failures are Core3's 5-minute shuttle delay, not the travel coupon
+- **My 09:40 diagnosis was wrong.** No bot run has ever shown the coupon question (checked in the 09:43 and 13:36 reports). The pattern is timing: purchases failed at 09:37 and 13:36, about 3 minutes after a test restart, and worked at 09:43, 10:01 and later.
+- **The cause, in source:** `ShuttleZoneComponent.cpp` delays every shuttle's `ScheduleShuttleTask` by `Core3.ShuttleZoneComponent.BootDelay` (default 300,000 ms) after a server start. Until then a travel point has no shuttle, and `PurchaseTicketCommand` returns GENERALERROR **with no message** (`arrivalShuttle == nullptr`). This also explains C7's "first purchase after a galaxy start fails silently".
+- **Fix (test only):** `tools/test_galaxy.py` writes `Core3.ShuttleZoneComponent = { BootDelay = 30000 }` into the disposable config. Live keeps the stock delay.
+- **Kept:** `ticket_pages.answer_coupon` (the coupon question is real Core3 behaviour; harmless). Its docstring now carries the correction.
+- **Possible player-facing fix later (dev C++):** a system message when no shuttle is in service yet, instead of silence.
+- **Also seen at boot (13:32), probably not ours:** `[TaskScheduler0] ERROR - custom queue tatooine not found` with an exception, while the JTL space zones deploy; the server still reaches READY.
+
 ### 2026-10-14 13:27 Claude: Hoth map markers and place names in; restart queued; Fable on the owner's Hoth walkthrough and an Echo Base plan
 - **Fable's B3 (`Fable-hoth-mapnames/`), no C++:** the client draws Points of Interest from its own `clientpoi.iff` and place labels from `clientregion/hoth.iff`.
   - Dev `dd16bcff`: 19 NAMEDREGION circles (four cave dens, six camps, eight zones; "The Ice Caves" renamed).
