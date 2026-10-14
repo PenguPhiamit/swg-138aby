@@ -114,6 +114,30 @@ def collect(root, source, now, names=()):
         body = payload(text, names)
         events.append({"id": digest([kind, key]), "payload": body})
 
+    if source == 'curated':
+        # No arbitrary prose, IDs, names, headings or source paths reach the payload.
+        data = json.loads(read_source(root, 'Agent/discord-feed.json'))
+        if not isinstance(data, list) or len(data) > 100:
+            raise SafeError('Invalid curated feed.')
+        topics = {'telemetry': 'Acceptance telemetry', 'hoth': 'Hoth acceptance',
+                  'assets': 'Asset inventory', 'bots': 'Bot checks', 'review': 'Code review'}
+        states = {'prepared': 'Prepared; runtime testing pending.',
+                  'passed': 'Recorded checks passed.', 'blocked': 'Blocked; prerequisites pending.',
+                  'changes_requested': 'Review requests changes.'}
+        for record in data:
+            if not isinstance(record, dict) or set(record) != {'date', 'topic', 'state', 'checks'}:
+                raise SafeError('Invalid curated feed record.')
+            day = record['date']
+            if not isinstance(day, str) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', day):
+                raise SafeError('Invalid curated feed date.')
+            datetime.strptime(day, '%Y-%m-%d')
+            topic, state, checks = record['topic'], record['state'], record['checks']
+            if (topic not in topics or state not in states or type(checks) is not int
+                    or not 0 <= checks <= 100000):
+                raise SafeError('Invalid curated feed values.')
+            add('curated', record, f'{day}: {topics[topic]}\n{states[state]}\nRecorded checks: {checks}')
+        return events
+
     board = overnight = None
     if source in ("board", "morning", "all"):
         board = sections(read_source(root, "SWG-handoff.md").split("## Log\n", 1)[1])
@@ -292,7 +316,7 @@ def send_one(event, state, path, endpoint, post=http_post, clock=time.time):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source", choices=("board", "overnight", "morning", "status", "all"), default="all")
+    parser.add_argument("--source", choices=("board", "overnight", "morning", "status", "all", "curated"), default="all")
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--dry-run", action="store_true", help="Default; no secret/network/state writes")
     mode.add_argument("--send", action="store_true")
@@ -304,6 +328,8 @@ def main(argv=None):
     parser.add_argument("--limit", type=int, default=1, help="Preview size, 1 to 5; send requires 1")
     args = parser.parse_args(argv)
     try:
+        if args.send and args.source not in ('curated', 'status'):
+            raise SafeError('Raw text feeds are local previews only. Send curated or status after owner review.')
         if not 1 <= args.limit <= 5:
             raise SafeError("Limit must be between 1 and 5.")
         if args.send and (not args.owner_approved or not args.approved_digest

@@ -102,3 +102,11 @@ Phase 2 is optional and unbuilt. A two-way bot needs a separate owner request an
 22 offline tests passed with Python 3.14.6 on Windows; local saved-source dry runs also checked all four feed types without state changes. Offline tests cover source projection, private-line/name/address/path removal, Unicode mention bypasses, UTF-16 length, exact dry-run output and unchanged state, approval refusal, confirmed-send de-duplication, cooldown, 429 handling, ambiguous delivery, repeated status transitions, snapshot age/skew, daily recap identity, corrupt state, exclusive locks, source confinement, safe errors and changed-preview refusal. Transport tests use mocked responses; no socket or real endpoint is used. Real Discord permissions, delivery and Windows private-file ACLs remain untested.
 
 Verified against Discord's primary API documentation on 14 October 2026: [Execute Webhook](https://github.com/discord/discord-api-docs/blob/main/developers/resources/webhook.mdx#execute-webhook) (content, mentions, wait confirmation) and [Rate Limits](https://github.com/discord/discord-api-docs/blob/main/developers/topics/rate-limits.mdx) (response headers and retry timing). Incoming webhooks need no bot user; the webhook URL itself grants posting access and must remain private.
+
+## 14 Oct privacy correction
+
+Raw board, overnight, morning and all feeds are now **local previews only**. Sending them is refused before any private file is opened. Keyword/name lists cannot guarantee removal of unknown names and aliases. Only status and the new curated feed can be sent, with the existing exact-preview digest and owner authorization requirements.
+
+The curated source is Agent/discord-feed.json: an array of records with exactly date (YYYY-MM-DD), topic (telemetry/hoth/assets/bots/review), state (prepared/passed/blocked/changes_requested), and checks (integer 0–100000). The tool renders fixed text; no free-form title, author, character name, path or note is accepted. Extra fields and unknown enum values fail closed. The sample is a local draft, not approval to post. Run --source curated to preview. 24 offline tests pass; delivery remains untested and no posts have been sent.
+
+This section supersedes the earlier raw-feed posting instructions and proposed automatic cadence. No scheduler is enabled.

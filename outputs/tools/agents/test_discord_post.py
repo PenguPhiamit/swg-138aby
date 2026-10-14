@@ -26,7 +26,25 @@ class DiscordTests(unittest.TestCase):
             "### 2026-10-13 Claude\nOlder note.\n", encoding="utf-8")
         (self.root / "Bot-reports/OVERNIGHT.md").write_text(
             "### 01:00\n- Old line.\n### 07:30\n- Squads 3/4.\n- FAIL: reachability.\n", encoding="utf-8")
+        (self.root / "Agent/discord-feed.json").write_text(json.dumps([
+            dict(date="2026-10-14", topic="telemetry", state="prepared", checks=14)]), encoding="utf-8")
         self.write_status()
+
+    def test_raw_send_refused_before_private_files(self):
+        with patch.object(dp, "private_file", side_effect=AssertionError("private file read")):
+            code, out, err = self.invoke("--send", "--source", "board")
+        self.assertEqual(code, 2)
+        self.assertIn("local previews only", err)
+
+    def test_curated_projection_rejects_names_and_extra_fields(self):
+        event = self.events("curated")[0]
+        self.assertIn("Acceptance telemetry", event["payload"]["content"])
+        record = dict(date="2026-10-14", topic="telemetry", state="prepared", checks=14)
+        for bad in (record | {"author": "PrivatePerson"}, record | {"topic": "PrivatePerson"},
+                    record | {"state": "PrivateAlias"}, record | {"checks": True}):
+            (self.root / "Agent/discord-feed.json").write_text(json.dumps([bad]), encoding="utf-8")
+            with self.assertRaises(dp.SafeError):
+                self.events("curated")
 
     def write_status(self, live="inactive", servers=None, age=0, extra=None):
         data = {"written": (self.now - timedelta(minutes=age)).strftime("%Y-%m-%d %H:%M:%S"),
@@ -100,7 +118,7 @@ class DiscordTests(unittest.TestCase):
 
     def test_send_without_go_refuses_before_reading_secret(self):
         with patch.object(dp, "read_webhook", side_effect=AssertionError):
-            code, _, err = self.invoke("--send")
+            code, _, err = self.invoke("--send", "--source", "curated")
         self.assertEqual(code, 2)
         self.assertIn("owner go", err)
 
@@ -216,7 +234,7 @@ class DiscordTests(unittest.TestCase):
              patch.object(dp, "read_webhook", side_effect=AssertionError("secret accessed")):
             privacy = self.root / "privacy.json"
             privacy.write_text('{"account_names": [], "private_literals": []}', encoding="utf-8")
-            code, _, err = self.invoke("--send", "--owner-approved", "--source", "board",
+            code, _, err = self.invoke("--send", "--owner-approved", "--source", "curated",
                                        "--approved-digest", "incorrect", "--webhook-file", "unused",
                                        "--privacy-file", str(privacy))
         self.assertEqual(code, 2)
@@ -226,7 +244,7 @@ class DiscordTests(unittest.TestCase):
         privacy = self.root / "privacy.json"
         privacy.write_text('{"account_names": ["TestOwner"], "private_literals": []}', encoding="utf-8")
         with patch.object(dp, "private_file", side_effect=lambda p: p):
-            code, out, err = self.invoke("--source", "board", "--privacy-file", str(privacy))
+            code, out, err = self.invoke("--source", "curated", "--privacy-file", str(privacy))
         self.assertEqual(code, 0, err)
         preview = json.loads(out)
         original = dp.send_one
@@ -239,12 +257,12 @@ class DiscordTests(unittest.TestCase):
         with patch.object(dp, "private_file", side_effect=lambda p: p), \
              patch.object(dp, "read_webhook", return_value=None), \
              patch.object(dp, "send_one", side_effect=mock_send):
-            code, _, err = self.invoke("--send", "--source", "board", "--owner-approved",
+            code, _, err = self.invoke("--send", "--source", "curated", "--owner-approved",
                                        "--approved-digest", dp.digest(preview), "--privacy-file", str(privacy),
                                        "--webhook-file", "unused")
         self.assertEqual(code, 0, err)
         self.assertEqual(requests, preview)
-        self.assertEqual(dp.load_state(self.statefile)["sent"], [self.events()[0]["id"]])
+        self.assertEqual(dp.load_state(self.statefile)["sent"], [self.events("curated")[0]["id"]])
 
     def test_4xx_never_prints_private_response_or_marks_sent(self):
         state = dp.empty_state()
