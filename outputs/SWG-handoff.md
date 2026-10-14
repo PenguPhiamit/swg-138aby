@@ -21,6 +21,12 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
 4. **Clean-room pilot (F93):** collections or buffs first?
 5. **Discord (C17):** set up a webhook whenever you're ready; nothing gets posted before your go.
 6. **Fable's backport (applied to dev; revert if you disagree):** (a) Keep the real SOE paths for 1,073 MTG objects that MTG's import had mangled (applied), or go back to MTG's? (b) Wire NGE junk and collection loot into loot groups, or keep it staff-only? (c) Extend the 13 new wearables to new species when they land? (d) Is it worth cracking the disc's TRE v6 format (patch 18+ and the expansion patches), or is 2006 content enough? (e) Keep the Death Troopers prison-guard pants?
+7. **First real model into the client (F86; Fable's plan: `Fable-asset-pipeline/README.md`, section 5):** OK to:
+   - install Blender 3.6 LTS (free) and the SWG add-on from the copy we already have (MIT);
+   - download one CC0 pack (Quaternius Ultimate Modular Ruins);
+   - get a DDS tool (Microsoft `texconv`, MIT, no account), or let us try our own writer first?
+   Then Claude stages one ruin piece into the test archive and you look at it in the client. Every external art list we have waits on this one test.
+8. **Hoth wampa bosses:** corpse loot only (as staged), or a per-player boss reward later (`Fable-hoth-caves/README.md`)?
 
 
 Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) — purpose, design maturity and difficulty for all recorded features/candidates.
