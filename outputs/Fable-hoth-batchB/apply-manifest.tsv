@@ -1,0 +1,4 @@
+# path relative to MMOCoreORB/bin/scripts	sha256 of the Core3-dev file the staged copy was made from (14 Oct 2026), or new
+screenplays/screenplays.lua	d8f9b5f701f6150886f53a5a196b6225b22d5e2f66ca3e47702ff194d6d9cbe0
+screenplays/poi/hoth_camps.lua	new
+screenplays/poi/hoth_mynock_den.lua	new

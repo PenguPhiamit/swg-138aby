@@ -1,0 +1,40 @@
+== server templates for the props and the cave
+ok  object/static/structure/general/camp_tent_s01.lua
+ok  object/static/structure/general/campfire_fresh.lua
+ok  object/static/structure/general/camp_cot_s01.lua
+ok  object/static/structure/general/camp_stool_short_s01.lua
+ok  object/static/structure/general/camp_spit_s01.lua
+ok  object/static/structure/general/palette_supply_01.lua
+MISSING object/static/structure/general/poi_all_impl_corral_half_64x64_s01.lua
+ok  object/static/structure/general/poi_all_rebl_corral_64x64_s01.lua
+ok  object/static/structure/general/atst_debris_01.lua
+ok  object/static/structure/military/military_wall_med_imperial_16_style_01.lua
+ok  object/static/structure/military/military_wall_med_rebl_16_style_01.lua
+ok  object/static/structure/military/bunker_crate_style_01.lua
+ok  object/building/general/cave_06_flatland_s01_ice.lua
+== NPC templates
+addCreatureTemplate(hoth_greater_ice_mynock, "hoth_greater_ice_mynock"
+addCreatureTemplate(hoth_ice_mynock, "hoth_ice_mynock"
+addCreatureTemplate(hoth_imperial_salvage_tech, "hoth_imperial_salvage_tech"
+addCreatureTemplate(hoth_mynock_broodmother, "hoth_mynock_broodmother"
+addCreatureTemplate(hoth_rebel_snow_sergeant, "hoth_rebel_snow_sergeant"
+addCreatureTemplate(hoth_rebel_snow_soldier, "hoth_rebel_snow_soldier"
+addCreatureTemplate(hoth_scavenger, "hoth_scavenger"
+addCreatureTemplate(hoth_scavenger_raider, "hoth_scavenger_raider"
+addCreatureTemplate(hoth_snowtrooper, "hoth_snowtrooper"
+addCreatureTemplate(hoth_snowtrooper_sergeant, "hoth_snowtrooper_sergeant"
+addCreatureTemplate(imperial_recruiter, "imperial_recruiter"
+addCreatureTemplate(junk_dealer, "junk_dealer"
+addCreatureTemplate(rebel_recruiter, "rebel_recruiter"
+== getCell indexing
+89-
+90-	for i = 1, BuildingObject(pBuilding):getTotalCellNumber(), 1 do
+91:		local pCell = BuildingObject(pBuilding):getCell(i)
+92-
+93-		if (pCell ~= nil) then
+94-			for j = SceneObject(pCell):getContainerObjectsSize(), 1, -1 do
+95-				local pObject = SceneObject(pCell):getContainerObject(j - 1)
+96-				if pObject ~= nil and SceneObject(pObject):isPlayerCreature() and SceneObject(pObject):getObjectID() ~= ownerID then
+97-					SceneObject(pObject):switchZone("tatooine", 3387, 0, -4333, 0)
+98-				end
+99-			end

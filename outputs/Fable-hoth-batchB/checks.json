@@ -1,0 +1,706 @@
+{
+ "terrain_patch": {
+  "source": "terrain/hoth.trn from mtg_patch_022.tre",
+  "source_sha256": "51ede670150650c604dcacf676c96080e92a5859bc4347b681ea69698d1896e2",
+  "patched_sha256": "ef2c1ee2be8475373f5c2314158f24428802f28b8c31a52f1a6f5325cb515209",
+  "bytes": [
+   1071191,
+   1071757
+  ],
+  "round_trip_identical": true,
+  "core3_order_notes_before": 22,
+  "core3_order_notes_after": 22,
+  "top_layers": [
+   12,
+   13
+  ],
+  "heights_before_after": {
+   "cave centre": [
+    44.82,
+    44.8
+   ],
+   "cave mouth": [
+    43.53,
+    44.8
+   ],
+   "150 m south": [
+    38.97,
+    39.44
+   ],
+   "250 m north": [
+    36.5,
+    36.5
+   ],
+   "starport pad": [
+    0.0,
+    0.0
+   ],
+   "500 m north of pad": [
+    44.93,
+    44.93
+   ],
+   "cave_03_ice": [
+    43.79,
+    43.79
+   ]
+  },
+  "layer": {
+   "flatten": {
+    "cx": -2000.0,
+    "cy": -4800.0,
+    "r": 160,
+    "feather": 0.45,
+    "height": 44.8
+   },
+   "exclusion": {
+    "cx": -2000.0,
+    "cy": -4788.0,
+    "r": 12
+   }
+  }
+ },
+ "camps": [
+  {
+   "name": "imperial_forward_camp",
+   "centre": [
+    2600.0,
+    -3900.0
+   ],
+   "zone": "hoth_imperial_zone_east",
+   "ground": 33.5,
+   "props": 8,
+   "npcs": 8
+  },
+  {
+   "name": "rebel_forward_camp",
+   "centre": [
+    -2800.0,
+    1200.0
+   ],
+   "zone": "hoth_rebel_zone_northwest",
+   "ground": 23.3,
+   "props": 7,
+   "npcs": 8
+  },
+  {
+   "name": "scavenger_camp",
+   "centre": [
+    -1400.0,
+    -3300.0
+   ],
+   "zone": "hoth_scavenger_zone_southwest",
+   "ground": 10.0,
+   "props": 9,
+   "npcs": 6
+  },
+  {
+   "name": "raider_camp",
+   "centre": [
+    -1200.0,
+    -3600.0
+   ],
+   "zone": "hoth_scavenger_zone_southwest",
+   "ground": 12.5,
+   "props": 4,
+   "npcs": 6
+  },
+  {
+   "name": "contested_ground",
+   "centre": [
+    2400.0,
+    200.0
+   ],
+   "zone": null,
+   "ground": 23.5,
+   "props": 3,
+   "npcs": 10
+  },
+  {
+   "name": "salvage_detail",
+   "centre": [
+    -100.0,
+    -1960.0
+   ],
+   "zone": "outpost (MTG debris field, flattened ground)",
+   "ground": 0.0,
+   "props": 0,
+   "npcs": 5
+  }
+ ],
+ "placed_objects": [
+  {
+   "camp": "imperial_forward_camp",
+   "object": "object/static/structure/military/military_wall_med_imperial_16_style_01.iff",
+   "x": 2586.0,
+   "z": 33.5,
+   "y": -3882.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "object": "object/static/structure/military/military_wall_med_imperial_16_style_01.iff",
+   "x": 2614.0,
+   "z": 33.2,
+   "y": -3882.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "object": "object/static/structure/military/military_wall_med_imperial_16_style_01.iff",
+   "x": 2586.0,
+   "z": 34.4,
+   "y": -3918.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "object": "object/static/structure/military/military_wall_med_imperial_16_style_01.iff",
+   "x": 2614.0,
+   "z": 33.6,
+   "y": -3918.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "object": "object/static/structure/general/camp_tent_s01.iff",
+   "x": 2592.0,
+   "z": 33.6,
+   "y": -3894.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "object": "object/static/structure/military/bunker_crate_style_01.iff",
+   "x": 2607.0,
+   "z": 33.3,
+   "y": -3893.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "object": "object/static/structure/general/campfire_fresh.iff",
+   "x": 2600.0,
+   "z": 33.5,
+   "y": -3898.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "object": "object/static/structure/general/palette_supply_01.iff",
+   "x": 2610.0,
+   "z": 33.4,
+   "y": -3904.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "object": "object/static/structure/general/poi_all_rebl_corral_64x64_s01.iff",
+   "x": -2800.0,
+   "z": 23.3,
+   "y": 1200.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "object": "object/static/structure/military/military_wall_med_rebl_16_style_01.iff",
+   "x": -2814.0,
+   "z": 22.1,
+   "y": 1182.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "object": "object/static/structure/military/military_wall_med_rebl_16_style_01.iff",
+   "x": -2786.0,
+   "z": 21.6,
+   "y": 1182.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "object": "object/static/structure/general/camp_tent_s01.iff",
+   "x": -2792.0,
+   "z": 22.7,
+   "y": 1194.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "object": "object/static/structure/general/camp_tent_s01.iff",
+   "x": -2809.0,
+   "z": 23.1,
+   "y": 1195.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "object": "object/static/structure/general/campfire_fresh.iff",
+   "x": -2800.0,
+   "z": 23.1,
+   "y": 1198.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "object": "object/static/structure/general/camp_cot_s01.iff",
+   "x": -2794.0,
+   "z": 23.6,
+   "y": 1204.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "object": "object/static/structure/general/camp_tent_s01.iff",
+   "x": -1407.0,
+   "z": 10.0,
+   "y": -3295.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "object": "object/static/structure/general/camp_tent_s01.iff",
+   "x": -1393.0,
+   "z": 10.0,
+   "y": -3294.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "object": "object/static/structure/general/campfire_fresh.iff",
+   "x": -1400.0,
+   "z": 10.0,
+   "y": -3300.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "object": "object/static/structure/general/camp_spit_s01.iff",
+   "x": -1400.0,
+   "z": 10.0,
+   "y": -3297.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "object": "object/static/structure/general/camp_cot_s01.iff",
+   "x": -1406.0,
+   "z": 10.0,
+   "y": -3303.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "object": "object/static/structure/general/camp_stool_short_s01.iff",
+   "x": -1398.0,
+   "z": 10.0,
+   "y": -3302.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "object": "object/static/structure/general/camp_stool_short_s01.iff",
+   "x": -1402.0,
+   "z": 10.0,
+   "y": -3302.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "object": "object/static/structure/general/palette_supply_01.iff",
+   "x": -1391.0,
+   "z": 10.0,
+   "y": -3305.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "object": "object/static/structure/general/atst_debris_01.iff",
+   "x": -1382.0,
+   "z": 10.0,
+   "y": -3286.0
+  },
+  {
+   "camp": "raider_camp",
+   "object": "object/static/structure/general/camp_tent_s01.iff",
+   "x": -1200.0,
+   "z": 12.8,
+   "y": -3593.0
+  },
+  {
+   "camp": "raider_camp",
+   "object": "object/static/structure/general/campfire_fresh.iff",
+   "x": -1200.0,
+   "z": 12.5,
+   "y": -3600.0
+  },
+  {
+   "camp": "raider_camp",
+   "object": "object/static/structure/military/bunker_crate_style_01.iff",
+   "x": -1194.0,
+   "z": 12.5,
+   "y": -3597.0
+  },
+  {
+   "camp": "raider_camp",
+   "object": "object/static/structure/military/bunker_crate_style_01.iff",
+   "x": -1206.0,
+   "z": 12.7,
+   "y": -3597.0
+  },
+  {
+   "camp": "contested_ground",
+   "object": "object/static/structure/general/atst_debris_01.iff",
+   "x": 2400.0,
+   "z": 23.5,
+   "y": 200.0
+  },
+  {
+   "camp": "contested_ground",
+   "object": "object/static/structure/military/bunker_crate_style_01.iff",
+   "x": 2396.0,
+   "z": 23.5,
+   "y": 214.0
+  },
+  {
+   "camp": "contested_ground",
+   "object": "object/static/structure/military/bunker_crate_style_01.iff",
+   "x": 2404.0,
+   "z": 23.7,
+   "y": 186.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "mobile": "hoth_snowtrooper",
+   "x": 2612.0,
+   "z": 33.3,
+   "y": -3900.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "mobile": "hoth_snowtrooper",
+   "x": 2588.0,
+   "z": 33.7,
+   "y": -3900.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "mobile": "hoth_snowtrooper",
+   "x": 2600.0,
+   "z": 33.4,
+   "y": -3887.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "mobile": "hoth_snowtrooper",
+   "x": 2600.0,
+   "z": 33.8,
+   "y": -3913.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "mobile": "hoth_snowtrooper",
+   "x": 2609.0,
+   "z": 33.3,
+   "y": -3891.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "mobile": "hoth_snowtrooper",
+   "x": 2591.0,
+   "z": 33.9,
+   "y": -3909.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "mobile": "hoth_snowtrooper_sergeant",
+   "x": 2603.0,
+   "z": 33.5,
+   "y": -3903.0
+  },
+  {
+   "camp": "imperial_forward_camp",
+   "mobile": "imperial_recruiter",
+   "x": 2596.0,
+   "z": 33.5,
+   "y": -3896.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "mobile": "hoth_rebel_snow_soldier",
+   "x": -2788.0,
+   "z": 23.2,
+   "y": 1200.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "mobile": "hoth_rebel_snow_soldier",
+   "x": -2812.0,
+   "z": 23.6,
+   "y": 1200.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "mobile": "hoth_rebel_snow_soldier",
+   "x": -2800.0,
+   "z": 24.5,
+   "y": 1213.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "mobile": "hoth_rebel_snow_soldier",
+   "x": -2800.0,
+   "z": 22.2,
+   "y": 1187.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "mobile": "hoth_rebel_snow_soldier",
+   "x": -2791.0,
+   "z": 24.0,
+   "y": 1209.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "mobile": "hoth_rebel_snow_soldier",
+   "x": -2809.0,
+   "z": 22.7,
+   "y": 1191.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "mobile": "hoth_rebel_snow_sergeant",
+   "x": -2797.0,
+   "z": 23.5,
+   "y": 1203.0
+  },
+  {
+   "camp": "rebel_forward_camp",
+   "mobile": "rebel_recruiter",
+   "x": -2804.0,
+   "z": 23.0,
+   "y": 1196.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "mobile": "hoth_scavenger",
+   "x": -1395.0,
+   "z": 10.0,
+   "y": -3299.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "mobile": "hoth_scavenger",
+   "x": -1397.0,
+   "z": 10.0,
+   "y": -3305.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "mobile": "hoth_scavenger",
+   "x": -1404.0,
+   "z": 10.0,
+   "y": -3306.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "mobile": "hoth_scavenger",
+   "x": -1406.0,
+   "z": 10.0,
+   "y": -3298.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "mobile": "hoth_scavenger",
+   "x": -1401.0,
+   "z": 10.0,
+   "y": -3294.0
+  },
+  {
+   "camp": "scavenger_camp",
+   "mobile": "junk_dealer",
+   "x": -1396.0,
+   "z": 10.0,
+   "y": -3296.0
+  },
+  {
+   "camp": "raider_camp",
+   "mobile": "hoth_scavenger_raider",
+   "x": -1200.0,
+   "z": 12.9,
+   "y": -3590.0
+  },
+  {
+   "camp": "raider_camp",
+   "mobile": "hoth_scavenger_raider",
+   "x": -1191.3,
+   "z": 12.6,
+   "y": -3595.0
+  },
+  {
+   "camp": "raider_camp",
+   "mobile": "hoth_scavenger_raider",
+   "x": -1191.3,
+   "z": 12.2,
+   "y": -3605.0
+  },
+  {
+   "camp": "raider_camp",
+   "mobile": "hoth_scavenger_raider",
+   "x": -1200.0,
+   "z": 12.3,
+   "y": -3610.0
+  },
+  {
+   "camp": "raider_camp",
+   "mobile": "hoth_scavenger_raider",
+   "x": -1208.7,
+   "z": 12.5,
+   "y": -3605.0
+  },
+  {
+   "camp": "raider_camp",
+   "mobile": "hoth_scavenger_raider",
+   "x": -1208.7,
+   "z": 12.8,
+   "y": -3595.0
+  },
+  {
+   "camp": "contested_ground",
+   "mobile": "hoth_snowtrooper",
+   "x": 2394.0,
+   "z": 23.6,
+   "y": 214.0
+  },
+  {
+   "camp": "contested_ground",
+   "mobile": "hoth_snowtrooper",
+   "x": 2397.0,
+   "z": 23.4,
+   "y": 214.0
+  },
+  {
+   "camp": "contested_ground",
+   "mobile": "hoth_snowtrooper",
+   "x": 2403.0,
+   "z": 23.3,
+   "y": 214.0
+  },
+  {
+   "camp": "contested_ground",
+   "mobile": "hoth_snowtrooper",
+   "x": 2406.0,
+   "z": 23.2,
+   "y": 214.0
+  },
+  {
+   "camp": "contested_ground",
+   "mobile": "hoth_snowtrooper_sergeant",
+   "x": 2400.0,
+   "z": 23.3,
+   "y": 218.0
+  },
+  {
+   "camp": "contested_ground",
+   "mobile": "hoth_rebel_snow_soldier",
+   "x": 2394.0,
+   "z": 24.1,
+   "y": 186.0
+  },
+  {
+   "camp": "contested_ground",
+   "mobile": "hoth_rebel_snow_soldier",
+   "x": 2397.0,
+   "z": 24.0,
+   "y": 186.0
+  },
+  {
+   "camp": "contested_ground",
+   "mobile": "hoth_rebel_snow_soldier",
+   "x": 2403.0,
+   "z": 23.7,
+   "y": 186.0
+  },
+  {
+   "camp": "contested_ground",
+   "mobile": "hoth_rebel_snow_soldier",
+   "x": 2406.0,
+   "z": 23.6,
+   "y": 186.0
+  },
+  {
+   "camp": "contested_ground",
+   "mobile": "hoth_rebel_snow_sergeant",
+   "x": 2400.0,
+   "z": 23.9,
+   "y": 182.0
+  },
+  {
+   "camp": "salvage_detail",
+   "mobile": "hoth_imperial_salvage_tech",
+   "x": -95.0,
+   "z": 0.0,
+   "y": -1956.0
+  },
+  {
+   "camp": "salvage_detail",
+   "mobile": "hoth_imperial_salvage_tech",
+   "x": -102.0,
+   "z": 0.0,
+   "y": -1953.0
+  },
+  {
+   "camp": "salvage_detail",
+   "mobile": "hoth_imperial_salvage_tech",
+   "x": -106.0,
+   "z": 0.0,
+   "y": -1958.0
+  },
+  {
+   "camp": "salvage_detail",
+   "mobile": "hoth_snowtrooper",
+   "x": -90.0,
+   "z": 0.0,
+   "y": -1966.0
+  },
+  {
+   "camp": "salvage_detail",
+   "mobile": "hoth_snowtrooper",
+   "x": -110.0,
+   "z": 0.0,
+   "y": -1966.0
+  }
+ ],
+ "den": {
+  "building": "object/building/general/cave_06_flatland_s01_ice.iff",
+  "site": [
+   -2000.0,
+   -4800.0,
+   0
+  ],
+  "ground": 44.8,
+  "spawns": 23,
+  "cells_used": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ],
+  "templates": [
+   "hoth_greater_ice_mynock",
+   "hoth_ice_mynock",
+   "hoth_mynock_broodmother"
+  ]
+ },
+ "client_templates_in_crc_table": [
+  "object/building/general/cave_06_flatland_s01_ice.iff",
+  "object/static/structure/general/atst_debris_01.iff",
+  "object/static/structure/general/camp_cot_s01.iff",
+  "object/static/structure/general/camp_spit_s01.iff",
+  "object/static/structure/general/camp_stool_short_s01.iff",
+  "object/static/structure/general/camp_tent_s01.iff",
+  "object/static/structure/general/campfire_fresh.iff",
+  "object/static/structure/general/palette_supply_01.iff",
+  "object/static/structure/general/poi_all_rebl_corral_64x64_s01.iff",
+  "object/static/structure/military/bunker_crate_style_01.iff",
+  "object/static/structure/military/military_wall_med_imperial_16_style_01.iff",
+  "object/static/structure/military/military_wall_med_rebl_16_style_01.iff"
+ ],
+ "files": {
+  "screenplays/screenplays.lua": {
+   "staged_sha256": "a5b0c19402c4b9de1046c760341ddedaed126d3e98a310e01b5540bbd09a88d6",
+   "bytes": 38045
+  },
+  "screenplays/poi/hoth_camps.lua": {
+   "staged_sha256": "2c21186661965bb6494322659efe345564f77c36815466add3d82ac36c1d97e2",
+   "bytes": 8023
+  },
+  "screenplays/poi/hoth_mynock_den.lua": {
+   "staged_sha256": "592cd99f4ce4da3481c93360d2f6749b3b2a97d6efe94b2ce4541a75fac559cf",
+   "bytes": 3260
+  }
+ }
+}

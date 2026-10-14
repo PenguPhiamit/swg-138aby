@@ -1,0 +1,23 @@
+stf	key	english	used_by
+string/en/hoth_region_names.stf	hothstarport	Scavenger Starport	exists (MTG); outpost city region
+string/en/hoth_region_names.stf	world_spawner	Hoth	exists (MTG); world spawner
+string/en/hoth_region_names.stf	ice_caves	The Ice Caves	cave no-build region, if renamed to @hoth_region_names:ice_caves
+string/en/hoth_region_names.stf	frostfang_cavern	Frostfang's Cavern	cave_01_ice (-622, 2292), map POI
+string/en/hoth_region_names.stf	icemaw_den	Icemaw's Den	cave_04_ice_s01 (-385, 2436), map POI
+string/en/hoth_region_names.stf	snowblind_lair	Snowblind's Lair	cave_02_ice (-543, 2674), map POI
+string/en/hoth_region_names.stf	matriarch_cavern	The Matriarch's Cavern	cave_03_ice (-75, 2969), map POI
+string/en/hoth_region_names.stf	mynock_den	Mynock Den	spawned cave (-2000, -4800), map POI
+string/en/hoth_region_names.stf	rancor_grounds	Glacial Rancor Grounds	rancor option (c), (600, -4600)
+string/en/hoth_region_names.stf	imperial_forward_camp	Imperial Forward Camp	B1 camp (2600, -3900)
+string/en/hoth_region_names.stf	rebel_forward_camp	Rebel Forward Camp	B1 camp (-2800, 1200)
+string/en/hoth_region_names.stf	scavenger_camp	Scavengers' Camp	B1 camp (-1400, -3300)
+string/en/hoth_region_names.stf	raider_camp	Raiders' Camp	B1 camp (-1200, -3600)
+string/en/hoth_region_names.stf	contested_ground	Contested Ground	B1 skirmish line (2400, 200)
+string/en/hoth_region_names.stf	lucky_despot_wreck	Lucky Despot Wreck	MTG debris field by the outpost (-100, -1960)
+string/en/hoth_region_names.stf	tauntaun_plains_west	Western Tauntaun Plains	batch A area (optional name)
+string/en/hoth_region_names.stf	tauntaun_plains_east	Eastern Tauntaun Plains	batch A area (optional name)
+string/en/hoth_region_names.stf	mynock_fields	Mynock Fields	batch A area (optional name)
+string/en/hoth_region_names.stf	wampa_flanks	Wampa Flanks	batch A areas (optional name)
+string/en/hoth_region_names.stf	imperial_zone	Imperial Patrol Zone	batch A area (optional name)
+string/en/hoth_region_names.stf	rebel_zone	Rebel Patrol Zone	batch A area (optional name)
+string/en/hoth_region_names.stf	scavenger_zone	Scavenger Country	batch A area (optional name)

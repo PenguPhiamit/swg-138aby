@@ -1,0 +1,6 @@
+luac ok screenplays/screenplays.lua
+luac ok screenplays/poi/hoth_camps.lua
+luac ok screenplays/poi/hoth_mynock_den.lua
+manifest: /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Fable-hoth-batchB/apply-manifest.tsv
+to change: 1   new: 2   already identical: 0   refused: 0
+--check: nothing copied.
