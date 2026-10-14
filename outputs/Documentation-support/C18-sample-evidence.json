@@ -1,0 +1,811 @@
+[
+  {
+    "server": "object/tangible/wearables/necklace/necklace_gcw_imperial.iff",
+    "shared": "object/tangible/wearables/necklace/shared_necklace_gcw_imperial.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "c487fcb9a650a852117e913383ead375b567bad5233fd7fa04df6bfc2865fa1a",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/wearables/necklace/necklace_gcw_imperial.lua",
+        "sha256": "8773c628aab310f01dbae093f21201061fe3025038eb08e8036c42dc38d5e937",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/objects.lua",
+        "sha256": "47819297733d11f85537b4f676ff5d3ccc1531afff6c6c187dd98b3c400b6f30",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/serverobjects.lua",
+        "sha256": "d12a1635c46a9a3b9e9a33495d9c2e8539ef3f0e85441f95ca7b8ed8a6742867",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/wearables/necklace/necklace_gcw_rebel.iff",
+    "shared": "object/tangible/wearables/necklace/shared_necklace_gcw_rebel.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "044271fca3d7596fff5084d8958c46eed0bff3d09a97d3015879eb71b59830dc",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/wearables/necklace/necklace_gcw_rebel.lua",
+        "sha256": "aa5e779186ca6ba0edb773618287da8a44af6e222b7e4eb9008a30e94397a8b1",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/objects.lua",
+        "sha256": "47819297733d11f85537b4f676ff5d3ccc1531afff6c6c187dd98b3c400b6f30",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/serverobjects.lua",
+        "sha256": "d12a1635c46a9a3b9e9a33495d9c2e8539ef3f0e85441f95ca7b8ed8a6742867",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/wearables/necklace/necklace_lifeday.iff",
+    "shared": "object/tangible/wearables/necklace/shared_necklace_lifeday.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "cc0f38a4ac22765387dd9b4bafd6ffff905794fdd0e204bfa622fbde6bfefa76",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/wearables/necklace/necklace_lifeday.lua",
+        "sha256": "345ca5b81dd837c15fa7b0a5da7ede006b88f04f76dededfeca4d272397a7711",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/objects.lua",
+        "sha256": "47819297733d11f85537b4f676ff5d3ccc1531afff6c6c187dd98b3c400b6f30",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/serverobjects.lua",
+        "sha256": "d12a1635c46a9a3b9e9a33495d9c2e8539ef3f0e85441f95ca7b8ed8a6742867",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/wearables/necklace/necklace_medallion_black_sun.iff",
+    "shared": "object/tangible/wearables/necklace/shared_necklace_medallion_black_sun.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "166bf81a60c893c10c2123efa9924f27ddbc28eb9c2155f5bb3a17009d2825ca",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/wearables/necklace/necklace_medallion_black_sun.lua",
+        "sha256": "75fb26aa49b0732b700a06de9993fc24140e2301f628bdd4d38ef8378059ec31",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/objects.lua",
+        "sha256": "47819297733d11f85537b4f676ff5d3ccc1531afff6c6c187dd98b3c400b6f30",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/serverobjects.lua",
+        "sha256": "d12a1635c46a9a3b9e9a33495d9c2e8539ef3f0e85441f95ca7b8ed8a6742867",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/wearables/necklace/necklace_primitive_01.iff",
+    "shared": "object/tangible/wearables/necklace/shared_necklace_primitive_01.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "d495dc803c5df76667513a8f951c0386b417d97cdab1a7bab2c2135580dbb428",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/wearables/necklace/necklace_primitive_01.lua",
+        "sha256": "b45725f2c714c65d8d1163e93b60e713febd74feef4b923727fae9f5c1dc49d4",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/objects.lua",
+        "sha256": "47819297733d11f85537b4f676ff5d3ccc1531afff6c6c187dd98b3c400b6f30",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/serverobjects.lua",
+        "sha256": "d12a1635c46a9a3b9e9a33495d9c2e8539ef3f0e85441f95ca7b8ed8a6742867",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/wearables/necklace/necklace_primitive_03.iff",
+    "shared": "object/tangible/wearables/necklace/shared_necklace_primitive_03.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "f0295b45c397874b99c320a795f284aa0e39546f73d20c93ad86e197e3c863bd",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/wearables/necklace/necklace_primitive_03.lua",
+        "sha256": "0bbd6c1803d2ccedf000dad97c9423009f1c94415c5cde818733ddcb27789859",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/objects.lua",
+        "sha256": "47819297733d11f85537b4f676ff5d3ccc1531afff6c6c187dd98b3c400b6f30",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/serverobjects.lua",
+        "sha256": "d12a1635c46a9a3b9e9a33495d9c2e8539ef3f0e85441f95ca7b8ed8a6742867",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/wearables/necklace/necklace_primitive_04.iff",
+    "shared": "object/tangible/wearables/necklace/shared_necklace_primitive_04.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "4573a60cf6151bbd018df2f995e742736da46fb21d3760bc1ebdcbe70436fa52",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/wearables/necklace/necklace_primitive_04.lua",
+        "sha256": "921966bc814b040b5cb2083c9d1a946669e45c3b52500b198b47e929e0225fb0",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/objects.lua",
+        "sha256": "47819297733d11f85537b4f676ff5d3ccc1531afff6c6c187dd98b3c400b6f30",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/serverobjects.lua",
+        "sha256": "d12a1635c46a9a3b9e9a33495d9c2e8539ef3f0e85441f95ca7b8ed8a6742867",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/wearables/necklace/necklace_rodian_safari.iff",
+    "shared": "object/tangible/wearables/necklace/shared_necklace_rodian_safari.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "a261e90344f544665b5fb53a609306b1871ee05ba5b0d8d00b3b556c3f032910",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/wearables/necklace/necklace_rodian_safari.lua",
+        "sha256": "eee024c4a6d269afad93b794067a29d4ff014b7d4ebf41d0f97c0575f973f431",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/objects.lua",
+        "sha256": "47819297733d11f85537b4f676ff5d3ccc1531afff6c6c187dd98b3c400b6f30",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/necklace/serverobjects.lua",
+        "sha256": "d12a1635c46a9a3b9e9a33495d9c2e8539ef3f0e85441f95ca7b8ed8a6742867",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/wearables/pants/pants_outbreak_prison_guard.iff",
+    "shared": "object/tangible/wearables/pants/shared_pants_outbreak_prison_guard.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "d1ae70d79dece1b02d5f62af30b85c7c069a501e058729f8deaf23aa1afbf5b0",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/wearables/pants/pants_outbreak_prison_guard.lua",
+        "sha256": "56f6cbfe8ef1f75dbe8933059956acc3613ab7da4a3352fea472581ee0c84c4d",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/pants/objects.lua",
+        "sha256": "b4391b7d6d3c5f1a8bc8e3217de2df008def686a3a8525725c22c18501e411f4",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/pants/serverobjects.lua",
+        "sha256": "344936d7df65ddbc7ed2d04f2055922f6ed659b1221bcfc7cf28996c09aaa758",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/wearables/pants/wod_nightsister_pants_s01.iff",
+    "shared": "object/tangible/wearables/pants/shared_wod_nightsister_pants_s01.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "76c819b9a11d857212329e0e1526c5ba6959e69fc946720a1cc425bdb9d4e06c",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/wearables/pants/wod_nightsister_pants_s01.lua",
+        "sha256": "115ab9e23f029de8a51c9ded4e3470a5a29bf2f2ef5359346bcddfe27bcdb232",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/pants/objects.lua",
+        "sha256": "b4391b7d6d3c5f1a8bc8e3217de2df008def686a3a8525725c22c18501e411f4",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/pants/serverobjects.lua",
+        "sha256": "344936d7df65ddbc7ed2d04f2055922f6ed659b1221bcfc7cf28996c09aaa758",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/wearables/pants/wod_nightsister_pants_s02.iff",
+    "shared": "object/tangible/wearables/pants/shared_wod_nightsister_pants_s02.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "b16e6f05004e1edb81a36e684cd99367dd5a80c327888eb6b21d9bcd1d2ff440",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/wearables/pants/wod_nightsister_pants_s02.lua",
+        "sha256": "b763a899a548c6b78427d522193d66caed1880ddcc32470c3966f03d4555334c",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/pants/objects.lua",
+        "sha256": "b4391b7d6d3c5f1a8bc8e3217de2df008def686a3a8525725c22c18501e411f4",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/pants/serverobjects.lua",
+        "sha256": "344936d7df65ddbc7ed2d04f2055922f6ed659b1221bcfc7cf28996c09aaa758",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/wearables/ring/ring_gcw_imperial.iff",
+    "shared": "object/tangible/wearables/ring/shared_ring_gcw_imperial.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "72354ab72c3fd292af3063d85959dc0915c81d035f5201adac4cd26c7a3e6f99",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/wearables/ring/ring_gcw_imperial.lua",
+        "sha256": "bc110cbf09d8a377ceba60230719b8e60f66258d89602d60410396313634cbe0",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/ring/objects.lua",
+        "sha256": "f0a8c10ef39264df876c69bf1c575fbee4cbe0f818dceb0bfad9dd89e30a6580",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/ring/serverobjects.lua",
+        "sha256": "d27d928f3d850c06760804b3178e1fe5af63f0ab2b5f1c3ccc43003fe443f2e0",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/wearables/ring/ring_gcw_rebel.iff",
+    "shared": "object/tangible/wearables/ring/shared_ring_gcw_rebel.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "8233f14a6bad73dfa0da2b5b3d5c0e8a2586dd0500186cc672e5528414d14339",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/wearables/ring/ring_gcw_rebel.lua",
+        "sha256": "6d52348a8ccdd000064c4bc9598ff3224155f876619f397e70afcf29962abd84",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/ring/objects.lua",
+        "sha256": "f0a8c10ef39264df876c69bf1c575fbee4cbe0f818dceb0bfad9dd89e30a6580",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/wearables/ring/serverobjects.lua",
+        "sha256": "d27d928f3d850c06760804b3178e1fe5af63f0ab2b5f1c3ccc43003fe443f2e0",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/loot/creature_loot/kashyyyk_loot/adventurers_remains_03.iff",
+    "shared": "object/tangible/loot/creature_loot/kashyyyk_loot/shared_adventurers_remains_03.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "08720ee3479855a7987f2a012c8f88929d4aa94c26b034c2884cdfc9179569b7",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [
+      "custom_content\\tangible\\loot\\creature_loot\\kashyyyk_loot\\adventurers_remains_03.lua"
+    ],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/loot/creature_loot/kashyyyk_loot/objects.lua",
+        "sha256": "8eacb5247316904d1b2e382d98abb5bd853a2a4d2de51a68045c97dcb1ebb504",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/static/worldbuilding/mechanical/hoth_elevator.iff",
+    "shared": "object/static/worldbuilding/mechanical/shared_hoth_elevator.iff",
+    "batch": "1",
+    "form": "STAT",
+    "client_sha256": "cf271bcdaaad19a9b27a12a35d6f352b9e8ec0e441ab71044630abb304fd96aa",
+    "resolved_form": "STAT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [
+      "custom_content/static/worldbuilding/mechanical/hoth_elevator.lua"
+    ],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/static/worldbuilding/mechanical/objects.lua",
+        "sha256": "4f0dba571af88c479515cb5dc439e9fb823bdaaaeb0049349232e4250c6396be",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/dungeon/avatar_platform/avatar_terminal_technical_readout.iff",
+    "shared": "object/tangible/dungeon/avatar_platform/shared_avatar_terminal_technical_readout.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "877319b18f8acfd268dc94fbfd1e7c1d31ccd56cccc7af1b9b060cd12c293215",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/dungeon/avatar_platform/objects.lua",
+        "sha256": "1f933392018dbaad2fa5ffd4f5c151cf02b584670f82c8fb07ba0756d9ccf6c4",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/dungeon/avatar_platform/avatar_terminal_technical_readout.lua",
+        "sha256": "1e240decbf671cfa059596f1004c6f0d6050b60fc464b29369cadab749011f64",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/loot/creature_loot/collections/aurebesh_tile_aurek.iff",
+    "shared": "object/tangible/loot/creature_loot/collections/shared_aurebesh_tile_aurek.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "c2190cbbcc34b6beff88ad0de288b767744446e278625349ae48bf6952788b37",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": true,
+    "files": [
+      {
+        "path": "custom_content/tangible/loot/creature_loot/collections/aurebesh_tile_aurek.lua",
+        "sha256": "4e3eca3ac24285b71f09c5772ec21876373e87afea156fde101c388f6ad29aaf",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/loot/npc_loot/aero_magnifier_generic.iff",
+    "shared": "object/tangible/loot/npc_loot/shared_aero_magnifier_generic.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "8872269733b3c1475cb058d56eacad4c218c36c50113ed6f5900204608817aa8",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": true,
+    "files": [
+      {
+        "path": "custom_content/tangible/loot/npc_loot/aero_magnifier_generic.lua",
+        "sha256": "d47c4d6916fa8a2f6c7b85abb52a94f984c982379cefd226bdbcda579e46d417",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/loot/mustafar/cube_loot/cube_loot_0a.iff",
+    "shared": "object/tangible/loot/mustafar/cube_loot/shared_cube_loot_0a.iff",
+    "batch": "1",
+    "form": "STOT",
+    "client_sha256": "3ea6448a26210c3007592f09af7860dbe3aac741d5821a4fde124498a2ca2428",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": true,
+    "files": [
+      {
+        "path": "custom_content/tangible/loot/mustafar/cube_loot/cube_loot_0a.lua",
+        "sha256": "d3c85fb8c80344ac8e0feb895153b3c5d5afeacc9400b9f0208ec426f0e89055",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/building/kashyyyk/cave_driftwood.iff",
+    "shared": "object/building/kashyyyk/shared_cave_driftwood.iff",
+    "batch": "1",
+    "form": "STAT",
+    "client_sha256": "2403defa37d8f7069eeb3a8482548a0c7faeb86a443fce97faf1e91bf0459268",
+    "resolved_form": "STAT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": true,
+    "files": [
+      {
+        "path": "custom_content/building/kashyyyk/cave_driftwood.lua",
+        "sha256": "1a7975366e63d87d58244c8470f7f3c36066bedc6af8f06fe77c9f7decfdc688",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/static/structure/tatooine/wall_tatooine_large_style_100.iff",
+    "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_100.iff",
+    "batch": "2",
+    "form": "STAT",
+    "client_sha256": "6c611420625208c0618b1f5785529d7e6eec0b0c9e02d844b6542bbf92bcc59d",
+    "resolved_form": "STAT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/static/structure/tatooine/wall_tatooine_large_style_100.lua",
+        "sha256": "1c84cae5d328971dd5a40e0a109213171d5a72f357de9e4306f229e332d14e78",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/objects.lua",
+        "sha256": "9f199446ae767e0667255730e2aa7d913b4dc2d9ff393a7b26112472dfa88107",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/serverobjects.lua",
+        "sha256": "28b81328864d79fd57ecb5f7cf7eabd60beb719e635106c350e64326bbdff7a0",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/static/structure/tatooine/wall_tatooine_large_style_200.iff",
+    "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_200.iff",
+    "batch": "2",
+    "form": "STAT",
+    "client_sha256": "4d41bb61a7ea90aa94062ad2df75ab0e981758706f51ba61540e8aa4646854eb",
+    "resolved_form": "STAT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/static/structure/tatooine/wall_tatooine_large_style_200.lua",
+        "sha256": "2ecc249adfb4debd9eb2c0370f400f109449257a2391429d904d3a6781a33fc5",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/objects.lua",
+        "sha256": "9f199446ae767e0667255730e2aa7d913b4dc2d9ff393a7b26112472dfa88107",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/serverobjects.lua",
+        "sha256": "28b81328864d79fd57ecb5f7cf7eabd60beb719e635106c350e64326bbdff7a0",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/static/structure/tatooine/wall_tatooine_large_style_500.iff",
+    "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_500.iff",
+    "batch": "2",
+    "form": "STAT",
+    "client_sha256": "b2eb8a472e8c66485bf4b05f67e6be0f63c4d8050717f175a55879caafa19372",
+    "resolved_form": "STAT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/static/structure/tatooine/wall_tatooine_large_style_500.lua",
+        "sha256": "eeb90a4dc97ee13816769ab869bb4c62b6397adb2571d71fcba5e5652de324c6",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/objects.lua",
+        "sha256": "9f199446ae767e0667255730e2aa7d913b4dc2d9ff393a7b26112472dfa88107",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/serverobjects.lua",
+        "sha256": "28b81328864d79fd57ecb5f7cf7eabd60beb719e635106c350e64326bbdff7a0",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/static/structure/tatooine/wall_tatooine_large_style_1000.iff",
+    "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_1000.iff",
+    "batch": "2",
+    "form": "STAT",
+    "client_sha256": "fb4432d164dd3be2c358409513773dade0f8c80164e3ce085ecebdc9caed9f8a",
+    "resolved_form": "STAT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/static/structure/tatooine/wall_tatooine_large_style_1000.lua",
+        "sha256": "a4230ecdc88f814e3eebb1576bd06e403d3e9af018533680601ac29a97459689",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/objects.lua",
+        "sha256": "9f199446ae767e0667255730e2aa7d913b4dc2d9ff393a7b26112472dfa88107",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/serverobjects.lua",
+        "sha256": "28b81328864d79fd57ecb5f7cf7eabd60beb719e635106c350e64326bbdff7a0",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/static/structure/tatooine/wall_tatooine_large_style_2000.iff",
+    "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_2000.iff",
+    "batch": "2",
+    "form": "STAT",
+    "client_sha256": "47a206a953380a0382cfcc66cf6511384d58499188b73270a6e170e487c914b8",
+    "resolved_form": "STAT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/static/structure/tatooine/wall_tatooine_large_style_2000.lua",
+        "sha256": "77fd1a430c5befe5bca8819f53bc3fbe245d34254b2435dee8dc5a21ba8274ef",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/objects.lua",
+        "sha256": "9f199446ae767e0667255730e2aa7d913b4dc2d9ff393a7b26112472dfa88107",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/serverobjects.lua",
+        "sha256": "28b81328864d79fd57ecb5f7cf7eabd60beb719e635106c350e64326bbdff7a0",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/static/structure/tatooine/wall_tatooine_large_style_2500.iff",
+    "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_2500.iff",
+    "batch": "2",
+    "form": "STAT",
+    "client_sha256": "e2fc8f2bc0b89103508b49f73bb60eb73d6fda5de1a2421dfff510818ce7c273",
+    "resolved_form": "STAT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/static/structure/tatooine/wall_tatooine_large_style_2500.lua",
+        "sha256": "582ebe5f52f004e5f5b2875a0ce4eed889a702a16c9aae7072f678867479ebdb",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/objects.lua",
+        "sha256": "9f199446ae767e0667255730e2aa7d913b4dc2d9ff393a7b26112472dfa88107",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/serverobjects.lua",
+        "sha256": "28b81328864d79fd57ecb5f7cf7eabd60beb719e635106c350e64326bbdff7a0",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/static/structure/tatooine/wall_tatooine_large_style_4200.iff",
+    "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_4200.iff",
+    "batch": "2",
+    "form": "STAT",
+    "client_sha256": "3f23ad994b0240492cbd780fb806d1af57f9912bf83d07753ca156e9e8111ad0",
+    "resolved_form": "STAT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/static/structure/tatooine/wall_tatooine_large_style_4200.lua",
+        "sha256": "2f553a24b4518707e27e1d53516c7c7a24f1c2d9719d719ba98d05bf295561b0",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/objects.lua",
+        "sha256": "9f199446ae767e0667255730e2aa7d913b4dc2d9ff393a7b26112472dfa88107",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/serverobjects.lua",
+        "sha256": "28b81328864d79fd57ecb5f7cf7eabd60beb719e635106c350e64326bbdff7a0",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/static/structure/tatooine/wall_tatooine_large_style_8000.iff",
+    "shared": "object/static/structure/tatooine/shared_wall_tatooine_large_style_8000.iff",
+    "batch": "2",
+    "form": "STAT",
+    "client_sha256": "c5abf76eea424617f57abfa88073ae44218fa2465001657c927015fa28ef00a1",
+    "resolved_form": "STAT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/static/structure/tatooine/wall_tatooine_large_style_8000.lua",
+        "sha256": "5fa3e16f31f51a0624465a45a5835df7e2d017c699c1f958413dc0a12162e42a",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/objects.lua",
+        "sha256": "9f199446ae767e0667255730e2aa7d913b4dc2d9ff393a7b26112472dfa88107",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/structure/tatooine/serverobjects.lua",
+        "sha256": "28b81328864d79fd57ecb5f7cf7eabd60beb719e635106c350e64326bbdff7a0",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/static/creature/som_droid_mining_facility.iff",
+    "shared": "object/static/creature/shared_som_droid_mining_facility.iff",
+    "batch": "2",
+    "form": "STAT",
+    "client_sha256": "070eeb77eb58b1fad29d9515aec783e992424e2ba9f7688b909081dadd70b201",
+    "resolved_form": "STAT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/static/creature/som_droid_mining_facility.lua",
+        "sha256": "8b28766c175df3c176459ea5509d4ac8ee13a3a8945970f847474807eeaecb19",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/creature/objects.lua",
+        "sha256": "c1e2f9ba6a3d818f1a11bb0aee5cf5f820fc930b7cdf3aeb3c879ba9be4e5fb9",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/static/creature/serverobjects.lua",
+        "sha256": "f3df3321f861a05d0f17d805cee08f0d3167fd7ba214825e8cc7dd9a26c32936",
+        "applied_matches": true
+      }
+    ]
+  },
+  {
+    "server": "object/tangible/furniture/space/frn_chair_y8_passenger_s01.iff",
+    "shared": "object/tangible/furniture/space/shared_frn_chair_y8_passenger_s01.iff",
+    "batch": "2",
+    "form": "STOT",
+    "client_sha256": "c8662ac58400aacf1d21d3ce774e61893dbbb8ff9f7e850cdbde1e04baf5cdea",
+    "resolved_form": "STOT",
+    "crc_present": true,
+    "registered": true,
+    "existing_server_files": [],
+    "one_string_repair_exact": null,
+    "files": [
+      {
+        "path": "custom_content/tangible/furniture/space/frn_chair_y8_passenger_s01.lua",
+        "sha256": "ed4d97339e5148f8240e582b9faf97f2cab74e446d1568a03aa205b9bbef317c",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/furniture/space/objects.lua",
+        "sha256": "7eafb2f9c3485dcf5aee9028d937d4d15f6f31009db67510333f47c23df56bf8",
+        "applied_matches": true
+      },
+      {
+        "path": "custom_content/tangible/furniture/space/serverobjects.lua",
+        "sha256": "a1fbe3bb14985ab867555792f7b6b36b29f459eda62a936b69ca272badc0663c",
+        "applied_matches": true
+      }
+    ]
+  }
+]
