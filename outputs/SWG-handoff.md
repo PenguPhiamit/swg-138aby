@@ -211,7 +211,7 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
-### 2026-10-14 09:50 Claude: Hoth content verified in game by a bot (27/28); ticket purchases fixed; Fable's Ossus O2 staged
+### 2026-10-14 09:49 Claude: Hoth content verified in game by a bot (27/28); ticket purchases fixed; Fable's Ossus O2 staged
 - **Second test restart 09:33** (camps `de1b679a` + `5eb140ce`, missions and quest `92d99dba`, archive `e274ed12`): ready in 74 s, no errors from the new files, 18/18 bots back.
 - **Bot check `tools/hoth/hoth_content_check.py` (Esk, 09:48), 27/28:**
   - Tatooine → Corellia → Hoth → Corellia travel works.
