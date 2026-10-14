@@ -100,3 +100,9 @@ Prioritize completion of the existing Hoth slice before a new planet. Discuss th
 - [ ] **7. Consolidation:** produce non-overlapping category/readiness totals, source-access gaps and prioritized vertical slices after the per-family audits.
 
 **Next run:** checkpoint 2 only, or a smaller finite subset if its budget requires it. Start by rereading handoff/inbox, claim C21, then inspect the existing planet/catalogue records and dated Hoth evidence. Do not regenerate the dormant scan against /opt/swg while Claude holds the lock. New source reads do not authorize imports. Save any partial world list and return C21 to open again. Overall C21 remains incomplete.
+
+## Checkpoint 2a — world/places identity and implementation matrix (14 Oct 14:16)
+
+[World census](server-world-census.md) and [JSON](server-world-census.json): all 24 catalogue world/place rows plus Ossus normalized into 20 ground-world candidates, 3 stations, 1 Naboo city and 1 test-terrain family. Eleven exact terrain/snapshot pairs; Zeltros ZIP manifests and Ossus staging recorded separately. Seven fresh Wookieepedia search-index article extracts, direct-page access restricted; inherited and pending coverage kept distinct. Centerpoint's 40 ABY destruction, Ossus's 137 ABY Temple loss, Jakku's canon exception and Zeltros's NC licence conflict are explicit gates. No imports/game changes. Reproduce saved-data join with `tools/research/world_census.py`.
+
+Checkpoint 2 remains partial: next pass refreshes inherited worlds/permission-held planet lore and Nova Orion's direct article, then finite dependency closure. Other category checkpoints remain open. Research pass stopped at this saved checkpoint under the AGENTS budget; no automatic additional pass or deployment implied.

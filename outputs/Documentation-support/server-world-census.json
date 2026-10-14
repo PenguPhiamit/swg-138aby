@@ -1,0 +1,696 @@
+{
+  "scope": "24 saved catalogue rows + owner-selected Ossus; not all SWG or all Legends worlds",
+  "audited": "2026-10-14",
+  "input_hashes": {
+    "outputs/Content-catalogue/active-content-catalogue.json": "9f7edcf7b920325d3e023b071a27bb68281e5ff87a418bd273bd834f1648e2be",
+    "outputs/Content-catalogue/MTG-inventory-summary.json": "a59c8a660f076c54a0ba1f6028b28b4855bb0db95bbcdb0c458679e9511a60c3",
+    "outputs/Content-catalogue/downloaded-package-evidence.json": "737d23e11ed6177c8088aacd0e5a8dce76b2e628fb93bd321bd4b0f1237a92b0",
+    "outputs/Documentation-support/planets-coordinates.json": "e6bb2dda4161d7b262c10088cb6c42a1a28d5ef8d8835b0bec38850fc58a08ab"
+  },
+  "counts": {
+    "records": 25,
+    "ground_world_candidates": 20,
+    "stations": 3,
+    "cities": 1,
+    "test_terrain_families": 1,
+    "exact_catalogue_terrain_snapshot_pairs": 11,
+    "fresh_article_extracts": 7
+  },
+  "rows": [
+    {
+      "id": "active-001",
+      "name": "Taanab",
+      "zone": "taanab",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Published for server use",
+      "source_urls": [
+        "https://modthegalaxy.com/index.php?threads/new-planet-taanab-mini-expansion.686/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "exact_asset_paths": [
+        "terrain/taanab.trn",
+        "snapshot/taanab.ws"
+      ],
+      "terrain_paths": [
+        "terrain/taanab.trn"
+      ],
+      "snapshot_paths": [
+        "snapshot/taanab.ws"
+      ],
+      "inherited_lore_sources": [
+        "https://starwars.fandom.com/wiki/Taanab/Legends"
+      ],
+      "lore_access": "inherited C14 search extracts; not refreshed",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "Original Takhomasak mini-expansion and MTG terrain/snapshot. Use the original release; write any missing encounters ourselves."
+    },
+    {
+      "id": "active-002",
+      "name": "Hoth",
+      "zone": "hoth",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Published for server use",
+      "source_urls": [
+        "https://modthegalaxy.com/index.php?threads/new-planet-hoth.756/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki",
+        "https://www.swginfinity.com/guides/adventure-guides"
+      ],
+      "exact_asset_paths": [
+        "terrain/hoth.trn",
+        "snapshot/hoth.ws"
+      ],
+      "terrain_paths": [
+        "terrain/hoth.trn"
+      ],
+      "snapshot_paths": [
+        "snapshot/hoth.ws"
+      ],
+      "inherited_lore_sources": [
+        "https://starwars.fandom.com/wiki/Hoth/Legends",
+        "https://starwars.fandom.com/wiki/Hoth_system/Legends",
+        "https://starwars.fandom.com/wiki/Wampa/Legends",
+        "https://starwars.fandom.com/wiki/Tauntaun/Legends",
+        "https://starwars.fandom.com/wiki/Echo_Base/Legends"
+      ],
+      "lore_access": "inherited C14 search extracts; not refreshed",
+      "maturity": "dev/test adaptation; 14 Oct 13:38 saved bot content run 32/33, not real-client acceptance",
+      "remaining_work": "Latest saved failure: salvage-detail camp props (0). Reconcile C22 findings/fixes, real-client cave/terrain/render checks, loot/resource/quest receipts and return travel.",
+      "effort": "Medium-High remaining, low confidence",
+      "notes": "MTG terrain and snapshot present; original creator release located. Current Sunrunner and Infinity encounters are separate versions, not covered by this row."
+    },
+    {
+      "id": "active-003",
+      "name": "Dromund Kaas",
+      "zone": "kaas",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Published for server use",
+      "source_urls": [
+        "https://modthegalaxy.com/index.php?threads/dromund-kaas-for-swgemu-based-emulators.349/",
+        "https://github.com/Levarrishawk/Stardust"
+      ],
+      "exact_asset_paths": [
+        "terrain/kaas.trn",
+        "snapshot/kaas.ws"
+      ],
+      "terrain_paths": [
+        "terrain/kaas.trn"
+      ],
+      "snapshot_paths": [
+        "snapshot/kaas.ws"
+      ],
+      "inherited_lore_sources": [
+        "https://starwars.fandom.com/wiki/Dromund_Kaas/Legends",
+        "https://starwars.fandom.com/wiki/Dromund_system",
+        "https://starwars.fandom.com/wiki/Category:Locations_in_grid_square_R-5"
+      ],
+      "lore_access": "inherited C14 search extracts; not refreshed",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "Original Levarrishawk release and published Stardust source. Later independent revisions require separate provenance."
+    },
+    {
+      "id": "active-004",
+      "name": "Mandalore",
+      "zone": "mandalore",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Published for server use",
+      "source_urls": [
+        "https://modthegalaxy.com/index.php?threads/mandalore-for-swgemu-based-emulators.433/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "exact_asset_paths": [
+        "terrain/mandalore.trn",
+        "snapshot/mandalore.ws"
+      ],
+      "terrain_paths": [
+        "terrain/mandalore.trn"
+      ],
+      "snapshot_paths": [
+        "snapshot/mandalore.ws"
+      ],
+      "inherited_lore_sources": [
+        "https://starwars.fandom.com/wiki/Mandalore/Legends",
+        "https://starwars.fandom.com/wiki/Concordia/Legends",
+        "https://starwars.fandom.com/wiki/Keldabe/Legends"
+      ],
+      "lore_access": "inherited C14 search extracts; not refreshed",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "Bats original release includes terrain, world Lua, NPCs and caves. MTG terrain/snapshot present; later revisions are separate."
+    },
+    {
+      "id": "active-005",
+      "name": "Chandrila",
+      "zone": "chandrila",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Published for server use",
+      "source_urls": [
+        "https://github.com/Levarrishawk/Stardust",
+        "https://github.com/Levarrishawk/DLSWG5",
+        "https://www.empireinflames.net/?page_id=985"
+      ],
+      "exact_asset_paths": [
+        "terrain/chandrila.trn",
+        "snapshot/chandrila.ws"
+      ],
+      "terrain_paths": [
+        "terrain/chandrila.trn"
+      ],
+      "snapshot_paths": [
+        "snapshot/chandrila.ws"
+      ],
+      "inherited_lore_sources": [
+        "https://starwars.fandom.com/wiki/Chandrila/Legends",
+        "https://starwars.fandom.com/wiki/Chandra/Legends"
+      ],
+      "lore_access": "inherited C14 search extracts; not refreshed",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "MTG terrain/snapshot and public Stardust city/POI scripts present. Elysium release described its own version as complete in 2017; this is historical, not a local test."
+    },
+    {
+      "id": "active-006",
+      "name": "Coruscant",
+      "zone": "coruscant",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Published for server use",
+      "source_urls": [
+        "https://github.com/Levarrishawk/Stardust",
+        "https://github.com/Levarrishawk/DLSWG5",
+        "https://www.empireinflames.net/?page_id=985",
+        "https://swgsunrunner2.com/about/"
+      ],
+      "exact_asset_paths": [
+        "terrain/coruscant.trn",
+        "snapshot/coruscant.ws"
+      ],
+      "terrain_paths": [
+        "terrain/coruscant.trn"
+      ],
+      "snapshot_paths": [
+        "snapshot/coruscant.ws"
+      ],
+      "inherited_lore_sources": [
+        "https://starwars.fandom.com/wiki/Coruscant/Legends",
+        "https://starwars.fandom.com/wiki/Coruscant_system/Legends"
+      ],
+      "lore_access": "inherited C14 search extracts; not refreshed",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "MTG terrain/snapshot and public district/race scripts. The Elysium version was a sparse roleplay world. Sunrunner separately credits original third-party 3D art."
+    },
+    {
+      "id": "active-007",
+      "name": "Jakku",
+      "zone": "jakku",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Published for server use",
+      "source_urls": [
+        "https://github.com/Levarrishawk/Stardust",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "exact_asset_paths": [
+        "terrain/jakku.trn",
+        "snapshot/jakku.ws"
+      ],
+      "terrain_paths": [
+        "terrain/jakku.trn"
+      ],
+      "snapshot_paths": [
+        "snapshot/jakku.ws"
+      ],
+      "inherited_lore_sources": [
+        "https://starwars.fandom.com/wiki/Jakku",
+        "https://starwars.fandom.com/wiki/Jakku_system",
+        "https://starwars.fandom.com/wiki/Niima_Outpost"
+      ],
+      "lore_access": "fresh search-index article extract, 2026-10-14; direct-page audit unavailable",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "MTG terrain/snapshot and public Stardust battle/Weapons Facility scripts. Precise artwork provenance still needs review.",
+      "lore_url": "https://starwars.fandom.com/wiki/Jakku",
+      "era_or_identity_gate": "Explicit canon exception; do not import its canon history into Legends by default."
+    },
+    {
+      "id": "active-008",
+      "name": "Moraband / Korriban",
+      "zone": "moraband",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Published for server use",
+      "source_urls": [
+        "https://github.com/Levarrishawk/DLSWG5",
+        "https://github.com/Levarrishawk/Stardust"
+      ],
+      "exact_asset_paths": [
+        "terrain/moraband.trn",
+        "snapshot/moraband.ws"
+      ],
+      "terrain_paths": [
+        "terrain/moraband.trn"
+      ],
+      "snapshot_paths": [
+        "snapshot/moraband.ws"
+      ],
+      "inherited_lore_sources": [
+        "https://starwars.fandom.com/wiki/Korriban/Legends"
+      ],
+      "lore_access": "inherited C14 search extracts; not refreshed",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "MTG terrain/snapshot and public Valley of the Dark Lords script. The 2017 author release called the world partial. These aliases count as one world."
+    },
+    {
+      "id": "active-009",
+      "name": "Nal Hutta",
+      "zone": "hutta",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Published for server use",
+      "source_urls": [
+        "https://github.com/Levarrishawk/DLSWG5",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki",
+        "https://swgsunrunner2.com/about/"
+      ],
+      "exact_asset_paths": [
+        "terrain/hutta.trn",
+        "snapshot/hutta.ws"
+      ],
+      "terrain_paths": [
+        "terrain/hutta.trn"
+      ],
+      "snapshot_paths": [
+        "snapshot/hutta.ws"
+      ],
+      "inherited_lore_sources": [
+        "https://starwars.fandom.com/wiki/Nal_Hutta/Legends",
+        "https://starwars.fandom.com/wiki/Hutt_Space/Legends",
+        "https://starwars.fandom.com/wiki/Category:Locations_in_grid_square_S-12"
+      ],
+      "lore_access": "inherited C14 search extracts; not refreshed",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "MTG terrain/snapshot. Elysium called its version partial with no server scripting. Current Sunrunner Nal Hutta content is a separate permission case."
+    },
+    {
+      "id": "active-010",
+      "name": "Kashyyyk",
+      "zone": "kashyyyk",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Published for server use",
+      "source_urls": [
+        "https://modthegalaxy.com/index.php?resources/kashyyyk-for-precu.2/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki",
+        "https://www.swginfinity.com/guides/adventure-guides"
+      ],
+      "exact_asset_paths": [
+        "terrain/kashyyyk.trn",
+        "snapshot/kashyyyk.ws"
+      ],
+      "terrain_paths": [
+        "terrain/kashyyyk.trn"
+      ],
+      "snapshot_paths": [
+        "snapshot/kashyyyk.ws"
+      ],
+      "inherited_lore_sources": [
+        "https://starwars.fandom.com/wiki/Kashyyyk/Legends",
+        "https://starwars.fandom.com/wiki/Kashyyyk_system/Legends"
+      ],
+      "lore_access": "inherited C14 search extracts; not refreshed",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "MTG full-world and segmented terrain exist. Sytner release directs users to MTG improvements. No complete expansion campaign has been verified for our installation."
+    },
+    {
+      "id": "active-011",
+      "name": "Mustafar",
+      "zone": "mustafar",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Published for server use",
+      "source_urls": [
+        "https://modthegalaxy.com/index.php?resources/mustafar-for-precu.3/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki",
+        "https://github.com/Levarrishawk/Stardust"
+      ],
+      "exact_asset_paths": [
+        "terrain/mustafar.trn",
+        "snapshot/mustafar.ws"
+      ],
+      "terrain_paths": [
+        "terrain/mustafar.trn"
+      ],
+      "snapshot_paths": [
+        "snapshot/mustafar.ws"
+      ],
+      "inherited_lore_sources": [
+        "https://starwars.fandom.com/wiki/Mustafar/Legends",
+        "https://starwars.fandom.com/wiki/Mustafar_system/Legends",
+        "https://starwars.fandom.com/wiki/Mustafarian/Legends"
+      ],
+      "lore_access": "inherited C14 search extracts; not refreshed",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "MTG terrain/snapshot, NPC definitions and some public Stardust quest/region scripts. Not a verified complete Trials of Obi-Wan campaign."
+    },
+    {
+      "id": "active-012",
+      "name": "Dagobah",
+      "zone": "dagobah",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Original creator permission required",
+      "source_urls": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "exact_asset_paths": [],
+      "terrain_paths": [],
+      "snapshot_paths": [],
+      "inherited_lore_sources": [
+        "https://starwars.fandom.com/wiki/Dagobah/Legends"
+      ],
+      "lore_access": "inherited C14 search extracts; not refreshed",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Creator implementation/art rights hold; original replacement remains an option. Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "Modern Sunrunner version: see the common project permission statement below. Full reusable world package not verified."
+    },
+    {
+      "id": "active-013",
+      "name": "Mon Calamari / Dac",
+      "zone": "moncalamari",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Original creator permission required",
+      "source_urls": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "exact_asset_paths": [],
+      "terrain_paths": [],
+      "snapshot_paths": [],
+      "inherited_lore_sources": [],
+      "lore_access": "article audit pending",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Creator implementation/art rights hold; original replacement remains an option. Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "Modern Sunrunner version: see the common project permission statement below. Full reusable world package not verified."
+    },
+    {
+      "id": "active-014",
+      "name": "Kuat",
+      "zone": "kuat",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Original creator permission required",
+      "source_urls": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "exact_asset_paths": [],
+      "terrain_paths": [],
+      "snapshot_paths": [],
+      "inherited_lore_sources": [],
+      "lore_access": "article audit pending",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Creator implementation/art rights hold; original replacement remains an option. Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "Modern Sunrunner version: see the common project permission statement below. Full reusable world package not verified."
+    },
+    {
+      "id": "active-015",
+      "name": "Ord Mantell",
+      "zone": "ordmantell",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Original creator permission required",
+      "source_urls": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "exact_asset_paths": [],
+      "terrain_paths": [],
+      "snapshot_paths": [],
+      "inherited_lore_sources": [],
+      "lore_access": "article audit pending",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Creator implementation/art rights hold; original replacement remains an option. Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "Modern Sunrunner version: see the common project permission statement below. Full reusable world package not verified."
+    },
+    {
+      "id": "active-016",
+      "name": "Bespin",
+      "zone": "bespin",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Original creator permission required",
+      "source_urls": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "exact_asset_paths": [],
+      "terrain_paths": [],
+      "snapshot_paths": [],
+      "inherited_lore_sources": [
+        "https://starwars.fandom.com/wiki/Bespin/Legends",
+        "https://starwars.fandom.com/wiki/List_of_planets_B"
+      ],
+      "lore_access": "inherited C14 search extracts; not refreshed",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Creator implementation/art rights hold; original replacement remains an option. Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "Modern Sunrunner version: see the common project permission statement below. Full reusable world package not verified."
+    },
+    {
+      "id": "active-017",
+      "name": "Kessel",
+      "zone": "kessel",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Original creator permission required",
+      "source_urls": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "exact_asset_paths": [],
+      "terrain_paths": [],
+      "snapshot_paths": [],
+      "inherited_lore_sources": [],
+      "lore_access": "article audit pending",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Creator implementation/art rights hold; original replacement remains an option. Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "Modern Sunrunner version: see the common project permission statement below. Full reusable world package not verified."
+    },
+    {
+      "id": "active-018",
+      "name": "Zeltros",
+      "zone": "zeltros",
+      "catalogue_kind": "Planet",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Published with explicit conditions",
+      "source_urls": [
+        "https://modthegalaxy.com/index.php?resources/zeltros-planet.135/"
+      ],
+      "exact_asset_paths": [],
+      "terrain_paths": [],
+      "snapshot_paths": [],
+      "inherited_lore_sources": [],
+      "lore_access": "fresh search-index article extract, 2026-10-14; direct-page audit unavailable",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Downloaded client/server packages require MTG dependencies and old object-path/API adaptation. CC-BY-NC claim/version/contributors must be reconciled with the project NC-out rule before import; no clearance inferred.",
+      "effort": "High, low confidence",
+      "notes": "Explicit resource-page CC-BY-NC statement: noncommercial use/modification with author credit. ZIPs contain no separate license-version text. Exploration world with no NPCs/combat initially. Includes terrain, snapshot, custom buildings and region/travel Lua. Old plural objects paths need adapting to our Core3 layout; requires MTG assets.",
+      "lore_url": "https://starwars.fandom.com/wiki/Zeltros/Legends",
+      "era_or_identity_gate": "Legends homeworld of Zeltrons; species and world implementation are separate dependencies.",
+      "downloaded_packages": [
+        {
+          "name": "zeltros_client.zip",
+          "members": 59,
+          "sha256": "d2d221b554162c0c9932337e76487631f5528c9f571b97128f85dbb05b8d52cb"
+        },
+        {
+          "name": "zeltros_server.zip",
+          "members": 25,
+          "sha256": "ac6c3072d96d507130a400884c91b1c5dd92108973b0a3e7b5e76e5a91df860f"
+        }
+      ]
+    },
+    {
+      "id": "active-019",
+      "name": "Tansarii Point Station",
+      "zone": null,
+      "catalogue_kind": "Station",
+      "physical_kind": "station",
+      "permission_label": "Release or permission unverified",
+      "source_urls": [
+        "https://swgsunrunner2.com/full-change-list/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "exact_asset_paths": [],
+      "terrain_paths": [],
+      "snapshot_paths": [],
+      "inherited_lore_sources": [],
+      "lore_access": "fresh search-index article extract, 2026-10-14; direct-page audit unavailable",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Creator implementation/art rights hold; original replacement remains an option. Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High-Very high, low confidence",
+      "notes": "Station assets do not supply a complete travel, vendor or quest implementation. Build missing gameplay ourselves.",
+      "lore_url": "https://starwars.fandom.com/wiki/Tansarii_Point_Station/Legends",
+      "era_or_identity_gate": "Station near Ord Mantell, with the same design as Nova Orion; shared design does not prove shared usable game geometry."
+    },
+    {
+      "id": "active-020",
+      "name": "Nova Orion Station",
+      "zone": null,
+      "catalogue_kind": "Station",
+      "physical_kind": "station",
+      "permission_label": "Original creator permission required",
+      "source_urls": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "exact_asset_paths": [],
+      "terrain_paths": [],
+      "snapshot_paths": [],
+      "inherited_lore_sources": [],
+      "lore_access": "article audit pending",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Creator implementation/art rights hold; original replacement remains an option. Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High-Very high, low confidence",
+      "notes": "Full station layout, travel network and original gameplay package not verified as a reusable release. Seek the relevant creator release or permission."
+    },
+    {
+      "id": "active-021",
+      "name": "Centerpoint Station",
+      "zone": null,
+      "catalogue_kind": "Station",
+      "physical_kind": "station",
+      "permission_label": "Original creator permission required",
+      "source_urls": [
+        "https://swgsunrunner2.com/about/",
+        "https://swgsunrunner2.com/full-change-list/"
+      ],
+      "exact_asset_paths": [],
+      "terrain_paths": [],
+      "snapshot_paths": [],
+      "inherited_lore_sources": [],
+      "lore_access": "fresh search-index article extract, 2026-10-14; direct-page audit unavailable",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Creator implementation/art rights hold; original replacement remains an option. Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High-Very high, low confidence",
+      "notes": "Full station layout, travel network and original gameplay package not verified as a reusable release. Seek the relevant creator release or permission.",
+      "lore_url": "https://starwars.fandom.com/wiki/Centerpoint_Station",
+      "era_or_identity_gate": "Destroyed in 40 ABY; an intact Legacy-era station needs an explicit alternate-history premise or historical scenario."
+    },
+    {
+      "id": "active-022",
+      "name": "Otoh Gunga",
+      "zone": null,
+      "catalogue_kind": "Candidate world",
+      "physical_kind": "city",
+      "permission_label": "Development or legacy data only",
+      "source_urls": [
+        "https://www.swgnb.com/swg/",
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "exact_asset_paths": [],
+      "terrain_paths": [
+        "terrain/otoh_gunga.trn"
+      ],
+      "snapshot_paths": [],
+      "inherited_lore_sources": [],
+      "lore_access": "fresh search-index article extract, 2026-10-14; direct-page audit unavailable",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Inspect legacy terrain; build bubble-city geometry, interiors, safe arrivals, water presentation and routing. Avoid assuming underwater movement support.",
+      "effort": "Very high, low confidence",
+      "notes": "Legacy terrain is not a finished underwater destination. New Beginnings advertises a separate version in development; no reusable release verified.",
+      "lore_url": "https://starwars.fandom.com/wiki/Otoh_Gunga/Legends",
+      "era_or_identity_gate": "City on Naboo, not an additional planet; design a city/interior destination."
+    },
+    {
+      "id": "active-023",
+      "name": "Geonosis",
+      "zone": null,
+      "catalogue_kind": "Candidate world",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "Development or legacy data only",
+      "source_urls": [
+        "https://modthegalaxy.com/index.php?threads/mandalore-for-swgemu-based-emulators.433/"
+      ],
+      "exact_asset_paths": [],
+      "terrain_paths": [],
+      "snapshot_paths": [],
+      "inherited_lore_sources": [],
+      "lore_access": "fresh search-index article extract, 2026-10-14; direct-page audit unavailable",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "No completed public planet release verified. Do not confuse Yavin IV Geonosian Bio-Lab with a Geonosis planet.",
+      "lore_url": "https://starwars.fandom.com/wiki/Geonosis/Legends",
+      "era_or_identity_gate": "Rocky desert planet; do not substitute the Yavin IV bio-lab for a completed planetary release."
+    },
+    {
+      "id": "active-024",
+      "name": "Umbra and developer terrains",
+      "zone": null,
+      "catalogue_kind": "Legacy/test world",
+      "physical_kind": "test-terrain family",
+      "permission_label": "Development or legacy data only",
+      "source_urls": [
+        "https://github.com/ModTheGalaxy/mtgserver/wiki"
+      ],
+      "exact_asset_paths": [],
+      "terrain_paths": [],
+      "snapshot_paths": [],
+      "inherited_lore_sources": [],
+      "lore_access": "article audit pending",
+      "maturity": "saved catalogue candidate; current runtime unverified",
+      "remaining_work": "Verify licence/art provenance and transitive dependencies; port zone/travel/regions, gameplay and client UI; run round-trip/relog checks.",
+      "effort": "High, low confidence",
+      "notes": "Includes Umbra, numeric 09/10/11, dungeon1/2, character_farm, creature_test and other test terrains. Not counted among the 18 content worlds."
+    },
+    {
+      "id": "owner-ossus",
+      "name": "Ossus",
+      "zone": "ossus",
+      "catalogue_kind": "owner addition",
+      "physical_kind": "ground-world candidate",
+      "permission_label": "project-original staged data; referenced stock dependencies need validation",
+      "exact_asset_paths": [
+        "outputs/Fable-ossus/staged/client/terrain/ossus.trn"
+      ],
+      "lore_access": "fresh search-index article extract, 2026-10-14; direct-page audit unavailable",
+      "lore_url": "https://starwars.fandom.com/wiki/Ossus/Legends",
+      "era_or_identity_gate": "Temple destroyed in 137 ABY; choose the exact story point before placing an intact academy.",
+      "maturity": "O1 staged, not deployed or game-tested in this census",
+      "remaining_work": "Merge registration tables with Hoth instead of overwriting; validate terrain writer and stock shader/flora closure; snapshot, travel/server zone, safe spawn/navmesh, quests/encounters and story-date decision.",
+      "effort": "High-Very high, low confidence",
+      "source_urls": [
+        "outputs/Fable-ossus/README.md"
+      ]
+    }
+  ]
+}
