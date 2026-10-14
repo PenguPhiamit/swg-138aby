@@ -1,0 +1,428 @@
+{
+ "planet": "ossus",
+ "placeholders": {
+  "corellia_to_ossus_fare": {
+   "value": 3000,
+   "status": "PLACEHOLDER (owner question 10)"
+  },
+  "ossus_to_corellia_fare": {
+   "value": 1750,
+   "status": "PLACEHOLDER (owner question 10)"
+  },
+  "galaxy_map_spot": {
+   "value": [
+    425,
+    290
+   ],
+   "status": "PLACEHOLDER (owner question 10): below Hoth's provisional (425, 225) on the 498x481 map; the button is 61x59, the label sits +8,-4 and the 3D planet +4,+4 from it"
+  }
+ },
+ "shared": {
+  "misc/planet_crc_string_table.iff": {
+   "action": "added",
+   "entries": 27,
+   "crc": "f270b502",
+   "kept": [
+    "hoth",
+    "dungeon1",
+    "dantooine",
+    "rori",
+    "space_lok",
+    "tatooine",
+    "space_corellia",
+    "lok",
+    "space_dathomir",
+    "space_tatooine",
+    "corellia",
+    "dathomir",
+    "space_naboo_2",
+    "space_light1",
+    "endor",
+    "naboo",
+    "space_corellia_2",
+    "talus",
+    "space_heavy1",
+    "yavin4",
+    "space_tatooine_2",
+    "space_env",
+    "space_yavin4",
+    "space_naboo",
+    "space_dantooine",
+    "space_endor"
+   ],
+   "bytes": 559,
+   "sha256": "d1a846140268cff57c415894cdf407b05e935e2c8c6c70e81810c8de49b2ebc7"
+  },
+  "datatables/travel/travel.iff": {
+   "action": "added",
+   "columns": [
+    "Planet",
+    "corellia",
+    "dantooine",
+    "dathomir",
+    "endor",
+    "lok",
+    "naboo",
+    "rori",
+    "talus",
+    "tatooine",
+    "yavin4",
+    "hoth",
+    "ossus"
+   ],
+   "rows": 12,
+   "ossus_row": {
+    "Planet": "ossus",
+    "corellia": 1750,
+    "dantooine": 0,
+    "dathomir": 0,
+    "endor": 0,
+    "lok": 0,
+    "naboo": 0,
+    "rori": 0,
+    "talus": 0,
+    "tatooine": 0,
+    "yavin4": 0,
+    "hoth": 0,
+    "ossus": 100
+   },
+   "kept_rows": [
+    "corellia",
+    "dantooine",
+    "dathomir",
+    "endor",
+    "lok",
+    "naboo",
+    "rori",
+    "talus",
+    "tatooine",
+    "yavin4",
+    "hoth"
+   ],
+   "bytes": 829,
+   "sha256": "3763bbf30fceed1b088d127af28f00d0e3441a037908fde940a2a84599d0dc49"
+  },
+  "string/en/planet_n.stf": {
+   "action": "added",
+   "keys": 34,
+   "kept": [
+    "corellia",
+    "corellia_and_talus",
+    "dantooine",
+    "dathomir",
+    "dungeon1",
+    "endor",
+    "godclient_test",
+    "hoth",
+    "lok",
+    "naboo",
+    "naboo_and_rori",
+    "rori",
+    "simple",
+    "space_corellia",
+    "space_corellia_2",
+    "space_dantooine",
+    "space_dathomir",
+    "space_endor",
+    "space_env",
+    "space_heavy1",
+    "space_light1",
+    "space_lok",
+    "space_naboo",
+    "space_naboo_2",
+    "space_tatooine",
+    "space_tatooine_2",
+    "space_yavin4",
+    "talus",
+    "tatooine",
+    "tutorial",
+    "unknown",
+    "yavin",
+    "yavin4"
+   ],
+   "bytes": 1905,
+   "sha256": "0c11c54ca9f1aa479679ac969774308d29027558cce500ba4de8e9e6e6d351d7"
+  },
+  "datatables/player/waypoint_planets.iff": {
+   "action": "added",
+   "rows": [
+    "corellia",
+    "dantooine",
+    "dathomir",
+    "default",
+    "endor",
+    "lok",
+    "naboo",
+    "rori",
+    "talus",
+    "tatooine",
+    "yavin4",
+    "hoth",
+    "ossus",
+    "space_corellia",
+    "space_dantooine",
+    "space_dathomir",
+    "space_endor",
+    "space_lok",
+    "space_naboo",
+    "space_tatooine",
+    "space_yavin4",
+    "space_tatooine_2",
+    "space_corellia_2",
+    "space_naboo_2",
+    "space_light1",
+    "space_heavy1"
+   ],
+   "model": "ui_planet_sel_ossus.apt",
+   "after": "hoth",
+   "bytes": 962,
+   "sha256": "e30fc587998a06fcf793f6929f5252925863ba44662ba6e01d3aa474a31448f4"
+  },
+  "ui/ui_ticketpurchase.inc": {
+   "ui": {
+    "inserted": {
+     "DataSource": 8,
+     "Button": 11,
+     "CuiWidget3dObjectListViewer": 20,
+     "Page": 20,
+     "Text": 19,
+     "Data line": 1
+    },
+    "ticket_lines_added": 79,
+    "planet_map_lines_added": 22,
+    "bytes_kept": true,
+    "crlf": {
+     "ticket": [
+      3964,
+      3964
+     ],
+     "planet_map": [
+      1819,
+      1819
+     ]
+    },
+    "bare_cr_unchanged": true,
+    "planets": [
+     "Corellia",
+     "Dantooine",
+     "Dathomir",
+     "Endor",
+     "Hoth",
+     "Ossus",
+     "Lok",
+     "Naboo",
+     "Rori",
+     "Talus",
+     "Tatooine",
+     "Yavin4"
+    ]
+   },
+   "bytes": 101965,
+   "sha256": "ef624f51ecdcd474cde48cf39bcf3be8b0ad6e7b82dc73d005f21c8fd4e2de17"
+  },
+  "ui/ui_planet_map.inc": {
+   "planet_map_lines_added": 22,
+   "bytes": 48094,
+   "sha256": "e2943b042f19ee3349e2b4052f3c39359eeeed13af24774f8715dcb6d8138118"
+  },
+  "datatables/resource/resource_tree.iff": {
+   "action": "added",
+   "rows": 822,
+   "added": 45,
+   "first": [
+    [
+     "milk_domesticated_ossus",
+     "Ossus Domesticated Milk"
+    ],
+    [
+     "milk_wild_ossus",
+     "Ossus Wild Milk"
+    ],
+    [
+     "meat_domesticated_ossus",
+     "Ossus Domesticated Meat"
+    ]
+   ],
+   "ancestors_bumped": 77,
+   "bytes": 236248,
+   "sha256": "25e705987a22a8f875746e81847ba8ca164d38a7d26d1bfc2604237ec353a127"
+  }
+ },
+ "copied": {
+  "terrain/ossus.trn": {
+   "from": "Fable-ossus/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 27322,
+   "sha256": "0c2600f08703ed4dd8ee80563964c2ad349f9008823a72f034e03976170bb3ec"
+  },
+  "terrain/ossus_academy.tga": {
+   "from": "Fable-ossus/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 65554,
+   "sha256": "a00934b0936808118253ffd564d060968403d9a838ec41a77018e6d5499285ae"
+  },
+  "terrain/ossus_canyon.tga": {
+   "from": "Fable-ossus/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 262162,
+   "sha256": "67ea35510a46c5e501532ee1bb7d7c269c0621457b2643134996e8555134e97a"
+  },
+  "terrain/ossus_mesa.tga": {
+   "from": "Fable-ossus/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 65554,
+   "sha256": "f3182bff85fc4b27a8ad8c887f852d8dcae2dc1369726a8cec308c2dd9ffdd55"
+  },
+  "terrain/environment/ossus.iff": {
+   "from": "Fable-ossus/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 433,
+   "sha256": "29fe108635a9dc3c2630bac28d825a1cb3e97c098f4c81e1cf589516620cf987"
+  },
+  "datatables/environment/ossus.iff": {
+   "from": "Fable-ossus/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 13956,
+   "sha256": "dc022bb1242bf35ad893c4c14ff5c9658eded5e63c1319ccfed7ebf95663ee70"
+  },
+  "datatables/clientregion/ossus.iff": {
+   "from": "Fable-ossus/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 343,
+   "sha256": "a8e00ab1e9ce7c6edeb4f7260d39b8fde77a9683bec1d43f9f962ac46165c19e"
+  },
+  "string/en/ossus_region_names.stf": {
+   "from": "Fable-ossus/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 344,
+   "sha256": "4841f1e5696dc93868bf08cd06278c2dd686f0956ea7d1f1fe4a040de03720d5"
+  },
+  "string/en/loading/ossus.stf": {
+   "from": "Fable-ossus/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 1085,
+   "sha256": "63111a7099714005378a7fb2b01f1c5be4cba49f1201bc10702fcebab94b0996"
+  },
+  "string/en/loading/ossus_n.stf": {
+   "from": "Fable-ossus/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 221,
+   "sha256": "543494d6c2af4c2837032bc81a1ac61fe8c46b0cf6c00f0aef7136dab1feda0d"
+  },
+  "snapshot/ossus.ws": {
+   "from": "Fable-ossus/o2/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 8614,
+   "sha256": "7f3ec2672ef9da76755e5325fa424dfe29e6ce73a95136aba0bda1a61d53c651"
+  },
+  "texture/ui_map_ossus.dds": {
+   "from": "Fable-ossus/o3/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 4194432,
+   "sha256": "fada32a30189b32ce5d2ba10ecad486b0af20fd34c45a963d58e283247ecd5d6"
+  },
+  "texture/ui_planet_sel_ossus.dds": {
+   "from": "Fable-ossus/o3/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 349652,
+   "sha256": "980f6bf9abd2dfe9e2a56b211f27246748dc4caef5814c81906b264966ead68f"
+  },
+  "appearance/ui_planet_sel_ossus.apt": {
+   "from": "Fable-ossus/o3/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 72,
+   "sha256": "f19e8794b12e59cc8a4f55d6d01c7e466af96a3b5350e57afe8ca5c39dc127b6"
+  },
+  "appearance/mesh/ui_planet_sel_ossus.msh": {
+   "from": "Fable-ossus/o3/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 27054,
+   "sha256": "6199913b9d2cede4596a3d8cc0af361eb8388ee8b28d4d2942d583a96a66dcc1"
+  },
+  "shader/ui_planet_sel_ossus.sht": {
+   "from": "Fable-ossus/o3/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 284,
+   "sha256": "c5c4270867105c2ec24b097254e607b3a1cee01ae01c04ef06c475741fc79566"
+  },
+  "texture/loading/ossus/ui_load_ossus.dds": {
+   "from": "Fable-ossus/o3/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 1048704,
+   "sha256": "7c066c76fc487259d7a42b5beff8a6813bde3044eb02585426e5903c9b7748e4"
+  },
+  "datatables/loading/ossus.iff": {
+   "from": "Fable-ossus/o3/staged/client",
+   "replaced_different_copy": false,
+   "bytes": 413,
+   "sha256": "f6bf62bd04723b7f08f92240cf2bc75e419aed2cd892bc3e73f131144cccd999"
+  }
+ },
+ "notes": [
+  "the server reads the same resource_tree.iff (TreFiles) and needs ossus in resource_manager.lua activeZones (O2c)",
+  "galaxy-map spot and the two fares are placeholders (owner question 10)"
+ ],
+ "verify": {
+  "planet_crc": {
+   "base_kept": true,
+   "ossus": true,
+   "hoth_present": true,
+   "ascending": true
+  },
+  "travel": {
+   "base_columns_kept": true,
+   "base_cells_kept": true,
+   "ossus_column": true,
+   "ossus_row": true,
+   "hoth_present": true
+  },
+  "planet_n": {
+   "base_kept": true,
+   "ossus": "Ossus",
+   "hoth_present": "Hoth"
+  },
+  "waypoint_planets": {
+   "base_rows_kept": true,
+   "ossus": "ui_planet_sel_ossus.apt",
+   "hoth_present": true
+  },
+  "ui/ui_ticketpurchase.inc": {
+   "base_lines_kept": true,
+   "crlf_only": true,
+   "bare_cr_kept": true,
+   "ossus_mentions": 13,
+   "hoth_mentions": 13,
+   "base_hoth_mentions": 13,
+   "planets": [
+    "Corellia",
+    "Dantooine",
+    "Dathomir",
+    "Endor",
+    "Hoth",
+    "Ossus",
+    "Lok",
+    "Naboo",
+    "Rori",
+    "Talus",
+    "Tatooine",
+    "Yavin4"
+   ]
+  },
+  "ui/ui_planet_map.inc": {
+   "base_lines_kept": true,
+   "crlf_only": true,
+   "bare_cr_kept": true,
+   "ossus_mentions": 2,
+   "hoth_mentions": 2,
+   "base_hoth_mentions": 2
+  },
+  "resource_tree": {
+   "base_enums_kept": true,
+   "ossus_rows": 45,
+   "hoth_rows": 52
+  },
+  "copied_present": true,
+  "ok": true,
+  "hoth_kept": true
+ }
+}

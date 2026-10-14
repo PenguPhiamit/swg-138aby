@@ -1,0 +1,152 @@
+{
+ "built": "2026-10-14",
+ "tool": "tools/map_art.py --res 1024",
+ "stage_report": {
+  "files": {
+   "texture/ui_map_ossus.dds": {
+    "what": "planetary map, A8R8G8B8, no mips (stock maps have none)",
+    "bytes": 4194432,
+    "sha256": "fada32a30189b32ce5d2ba10ecad486b0af20fd34c45a963d58e283247ecd5d6"
+   },
+   "texture/ui_planet_sel_ossus.dds": {
+    "what": "globe texture, A8R8G8B8, 9 mips like stock ui_planet_sel_*.dds",
+    "bytes": 349652,
+    "sha256": "980f6bf9abd2dfe9e2a56b211f27246748dc4caef5814c81906b264966ead68f"
+   },
+   "texture/loading/ossus/ui_load_ossus.dds": {
+    "what": "loading tile, 512 A8R8G8B8 like texture/loading/lok/ui_load_lok.dds",
+    "bytes": 1048704,
+    "sha256": "7c066c76fc487259d7a42b5beff8a6813bde3044eb02585426e5903c9b7748e4"
+   },
+   "appearance/ui_planet_sel_ossus.apt": {
+    "from": "appearance/ui_planet_sel_tato.apt",
+    "bytes": 72,
+    "sha256": "f19e8794b12e59cc8a4f55d6d01c7e466af96a3b5350e57afe8ca5c39dc127b6"
+   },
+   "appearance/mesh/ui_planet_sel_ossus.msh": {
+    "from": "appearance/mesh/ui_planet_sel_tato.msh",
+    "bytes": 27054,
+    "sha256": "6199913b9d2cede4596a3d8cc0af361eb8388ee8b28d4d2942d583a96a66dcc1"
+   },
+   "shader/ui_planet_sel_ossus.sht": {
+    "from": "shader/ui_planet_sel_tatt_as8.sht",
+    "bytes": 284,
+    "sha256": "c5c4270867105c2ec24b097254e607b3a1cee01ae01c04ef06c475741fc79566"
+   },
+   "datatables/loading/ossus.iff": {
+    "rows": [
+     [
+      "@loading/ossus:ossus",
+      "loading/ossus/ui_load_ossus",
+      "@loading/ossus_n:ossus"
+     ],
+     [
+      "@loading/ossus:knossa",
+      "loading/ossus/ui_load_ossus",
+      "@loading/ossus_n:knossa"
+     ],
+     [
+      "@loading/ossus:academy_benchland",
+      "loading/ossus/ui_load_ossus",
+      "@loading/ossus_n:academy_benchland"
+     ],
+     [
+      "@loading/ossus:imhar_canyon",
+      "loading/ossus/ui_load_ossus",
+      "@loading/ossus_n:imhar_canyon"
+     ]
+    ],
+    "from": "O1c datatables/loading/ossus.iff",
+    "bytes": 413,
+    "sha256": "f6bf62bd04723b7f08f92240cf2bc75e419aed2cd892bc3e73f131144cccd999"
+   }
+  },
+  "render": {
+   "res": 1024,
+   "size_m": 16384.0,
+   "water_m": 38.5,
+   "height_min": 23.79432938428647,
+   "height_max": 376.35836809548016,
+   "water_fraction": 0.054149627685546875,
+   "seconds_heights": 95.6
+  },
+  "seconds": 103.6,
+  "note_waypoint_planets": "datatables/player/waypoint_planets.iff row 'ossus' still names the placeholder ui_planet_sel_dant.apt (O1 stage_tables PLACEHOLDERS['planet_model']); set it to ui_planet_sel_ossus.apt when this is packed"
+ },
+ "check": {
+  "texture/ui_map_ossus.dds": {
+   "w": 1024,
+   "h": 1024,
+   "mips": 0,
+   "bpp": 32,
+   "uncompressed": true,
+   "data_matches_levels": true,
+   "rewrite_identical": true
+  },
+  "texture/ui_planet_sel_ossus.dds": {
+   "w": 256,
+   "h": 256,
+   "mips": 9,
+   "bpp": 32,
+   "uncompressed": true,
+   "data_matches_levels": true,
+   "rewrite_identical": true
+  },
+  "texture/loading/ossus/ui_load_ossus.dds": {
+   "w": 512,
+   "h": 512,
+   "mips": 0,
+   "bpp": 32,
+   "uncompressed": true,
+   "data_matches_levels": true,
+   "rewrite_identical": true
+  },
+  "appearance/ui_planet_sel_ossus.apt": {
+   "parses": true,
+   "rebuild_identical": true,
+   "names": [
+    "appearance/mesh/ui_planet_sel_ossus.msh"
+   ]
+  },
+  "appearance/mesh/ui_planet_sel_ossus.msh": {
+   "parses": true,
+   "rebuild_identical": true,
+   "names": [
+    "shader/ui_planet_sel_ossus.sht"
+   ]
+  },
+  "shader/ui_planet_sel_ossus.sht": {
+   "parses": true,
+   "rebuild_identical": true,
+   "names": [
+    "texture/ui_planet_sel_ossus.dds",
+    "effect\\a_simple.eft"
+   ]
+  },
+  "chain": {
+   "apt->msh": true,
+   "msh->sht": true,
+   "sht->dds": true
+  },
+  "datatables/loading/ossus.iff": {
+   "rows": 4,
+   "all_point_at_tile": true,
+   "tile_exists": true
+  },
+  "ok": true
+ },
+ "dds_selftest": {
+  "passed": true,
+  "log": [
+   "# swgemu_login.cfg: not found",
+   "texture/loading/lok/ui_load_lok.dds            1048704 B  data_texture_03.tre  fourcc=b'\\x00\\x00\\x00\\x00' bpp=32 mips=0 flags=0xa1007 caps=0x401008  roundtrip True",
+   "    decoded 512x512, first pixel (0, 0, 0, 255), data bytes 1048576 (top level 1048576)",
+   "texture/ui_map_hoth.dds                        3115136 B  mtg_planets.tre  fourcc=b'\\x00\\x00\\x00\\x00' bpp=24 mips=1 flags=0x100f caps=0x1000  roundtrip True",
+   "    decoded 1024x1014, first pixel (199, 200, 202, 255), data bytes 3115008 (top level 3115008)",
+   "texture/ui_planet_sel_tatt.dds                   43832 B  data_texture_07.tre  fourcc=b'DXT1' bpp=0 mips=9 flags=0xa1007 caps=0x401008  roundtrip True",
+   "texture/ui_planet_sel_hoth.dds                   87536 B  mtg_planets.tre  fourcc=b'DXT5' bpp=0 mips=9 flags=0xa1007 caps=0x401008  roundtrip True",
+   "encode/decode 16x8 with a 5-level chain: True",
+   "SELFTEST PASSED"
+  ]
+ }
+}

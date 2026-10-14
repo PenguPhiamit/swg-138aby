@@ -1,0 +1,400 @@
+{
+ "built": "2026-10-14",
+ "tree": "Local-content/local_planets.tre staging copy (merged, 777 rows)",
+ "names_base": "client winning copy (mtg_planets.tre, 898 keys)",
+ "core3_fact": "ResourceSpawner.cpp:387 newSpawn->setName(entry->getFinalClass()): the tree CLASS text is the name; no client file reads resource_names.stf; stock ships none",
+ "audit": {
+  "missing": [
+   [
+    "resource",
+    "Resources",
+    ""
+   ],
+   [
+    "wheat_wild_hoth",
+    "Hothian Wild Wheat",
+    "hoth"
+   ],
+   [
+    "petrochem_fuel_liquid_hoth",
+    "Hothian Liquid Petro Fuel",
+    "hoth"
+   ],
+   [
+    "petrochem_fuel_solid_hoth",
+    "Hothian Solid Petro Fuel",
+    "hoth"
+   ],
+   [
+    "radioactive_hoth",
+    "Hothian Radioactive",
+    "hoth"
+   ],
+   [
+    "steel_hoth",
+    "Hothian Steel",
+    "hoth"
+   ],
+   [
+    "iron_hoth",
+    "Hothian Iron",
+    "hoth"
+   ],
+   [
+    "aluminum_hoth",
+    "Hothian Aluminum",
+    "hoth"
+   ],
+   [
+    "copper_hoth",
+    "Hothian Copper",
+    "hoth"
+   ],
+   [
+    "ore_extrusive_hoth",
+    "Hothian Extrusive Ore",
+    "hoth"
+   ],
+   [
+    "ore_intrusive_hoth",
+    "Hothian Intrusive Ore",
+    "hoth"
+   ],
+   [
+    "gas_reactive_hoth",
+    "Hothian Reactive Gas",
+    "hoth"
+   ]
+  ],
+  "missing_by_planet": {
+   "(no planet)": [
+    "resource"
+   ],
+   "hoth": [
+    "wheat_wild_hoth",
+    "petrochem_fuel_liquid_hoth",
+    "petrochem_fuel_solid_hoth",
+    "radioactive_hoth",
+    "steel_hoth",
+    "iron_hoth",
+    "aluminum_hoth",
+    "copper_hoth",
+    "ore_extrusive_hoth",
+    "ore_intrusive_hoth",
+    "gas_reactive_hoth"
+   ]
+  },
+  "text_differs_count": 88,
+  "text_differs_stock": [
+   [
+    "milk_domesticated_dathomir",
+    "Dathomirian  Domesticated Milk",
+    "Dathomirian Domesticated Milk"
+   ],
+   [
+    "milk_wild_yavin4",
+    "Yavin IV Wild Milk",
+    "Yavinian Wild Milk"
+   ],
+   [
+    "meat_reptillian",
+    "Reptillian Meat",
+    "Reptilian Meat"
+   ],
+   [
+    "meat_reptilian_corellia",
+    "Corellian Reptillian Meat",
+    "Corellian Reptilian Meat"
+   ],
+   [
+    "meat_reptilian_dantooine",
+    "Dantooine Reptillian Meat",
+    "Dantooine Reptilian Meat"
+   ],
+   [
+    "meat_reptilian_dathomir",
+    "Dathomirian Reptillian Meat",
+    "Dathomirian Reptilian Meat"
+   ],
+   [
+    "meat_reptilian_endor",
+    "Endorian Reptillian Meat",
+    "Endorian Reptilian Meat"
+   ],
+   [
+    "meat_reptilian_lok",
+    "Lokian Reptillian Meat",
+    "Lokian Reptilian Meat"
+   ],
+   [
+    "meat_reptilian_naboo",
+    "Nabooian Reptillian Meat",
+    "Nabooian Reptilian Meat"
+   ],
+   [
+    "meat_reptilian_rori",
+    "Rori Reptillian Meat",
+    "Rori Reptilian Meat"
+   ],
+   [
+    "meat_reptilian_talus",
+    "Talusian Reptillian Meat",
+    "Talusian Reptilian Meat"
+   ],
+   [
+    "meat_reptilian_tatooine",
+    "Tatooinian Reptillian Meat",
+    "Tatooinian Reptilian Meat"
+   ],
+   [
+    "meat_reptilian_yavin4",
+    "Yavinian Reptillian Meat",
+    "Yavinian Reptilian Meat"
+   ],
+   [
+    "seafood_crustacean_corellia",
+    "Corellia Crustacean Meat",
+    "Corellian Crustacean Meat"
+   ],
+   [
+    "seafood_crustacean_endor",
+    "Endorian Crustacean Meat",
+    "Endorian Crustancean Meat"
+   ],
+   [
+    "seafood_mollusk_corellia",
+    "Corellia Mollusk Meat",
+    "Corellian Mollusk Meat"
+   ],
+   [
+    "bone_mammal_dantooine",
+    "Dantooine Animal Bones",
+    "Dantooinian Animal Bones"
+   ],
+   [
+    "bone_mammal_lok",
+    "Lokian  Animal Bones",
+    "Lokian Animal Bones"
+   ],
+   [
+    "bone_mammal_naboo",
+    "Nabooian  Animal Bones",
+    "Nabooian Animal Bones"
+   ],
+   [
+    "bone_mammal_rori",
+    "Rori  Animal Bones",
+    "Rori Animal Bones"
+   ],
+   [
+    "bone_mammal_talus",
+    "Talusian  Animal Bones",
+    "Talusian Animal Bones"
+   ],
+   [
+    "bone_mammal_tatooine",
+    "Tatooinian  Animal Bones",
+    "Tatooinian Animal Bones"
+   ],
+   [
+    "bone_mammal_yavin4",
+    "Yavinian  Animal Bones",
+    "Yavinian Animal Bones"
+   ],
+   [
+    "bone_avian",
+    "Avian bone",
+    "Avian Bone"
+   ],
+   [
+    "bone_avian_tatooine",
+    "Tatooinian Avian Bones",
+    "Tatoonian Avian Bones"
+   ],
+   [
+    "bone_horn_dathomir",
+    "Dothomirian Horn",
+    "Dathomirian Horn"
+   ],
+   [
+    "hide_wooly_rori",
+    "Rori Wooly Hide",
+    "Rorian Wooly Hide"
+   ],
+   [
+    "hide_bristley_lok",
+    "Lokian Bristley Hide",
+    "Lokian Bristley Hidee"
+   ],
+   [
+    "oats_domesticated_dantooine",
+    "Dantooine Domesticated Oats",
+    "Dantooinian Domesticated Oats"
+   ],
+   [
+    "oats_wild_dantooine",
+    "Dantooine Wild Oats",
+    "Dantooinian Wild Oats"
+   ],
+   [
+    "wheat_wild_dathomir",
+    "Dathomir Wild Wheat",
+    "Dathomirian Wild Wheat"
+   ],
+   [
+    "fruit_fruits_rori",
+    "Rori Fruit",
+    "Rorian Fruit"
+   ],
+   [
+    "fruit_berries_corellia",
+    "Corellia Berry Fruit",
+    "Corellian Berry Fruit"
+   ],
+   [
+    "fruit_berries_naboo",
+    "Nabooian Berry Fruit",
+    "Nabooina Berry Fruit"
+   ],
+   [
+    "fruit_flowers_corellia",
+    "Corellia Flower Fruit",
+    "Corellian Flower Fruit"
+   ],
+   [
+    "fruit_flowers_rori",
+    "Rori Flower Fruit",
+    "Rorian Flower Fruit"
+   ],
+   [
+    "softwood_evergreen_corellia",
+    "Corellia Evergreen Wood",
+    "Corellian Evergreen Wood"
+   ],
+   [
+    "softwood_evergreen_rori",
+    "Rori Evergreen Wood",
+    "Rorian Evergreen Wood"
+   ],
+   [
+    "fiberplast_corellia",
+    "Corellia Fiberplast",
+    "Corellian Fiberplast"
+   ],
+   [
+    "water_vapor_dathomir",
+    "Dathomir Water Vapor",
+    "Dathomirian Water Vapor"
+   ],
+   [
+    "radioactive_unknown",
+    "Unknown Radioactive",
+    "Unknown Radioactive Isotopes"
+   ],
+   [
+    "ore_extrusive_low_grade",
+    "Low Grade Ore (igneous)",
+    "Low Grade Ore (Igneous)"
+   ],
+   [
+    "ore_carbonate_low_grade",
+    "Low Grade Ore (sedimentary)",
+    "Low Grade Ore (Sedimentary)"
+   ],
+   [
+    "ore_siliclastic_low_grade",
+    "Low Grade Ore (siliclastic)",
+    "Low Grade Ore (Siliclastic)"
+   ],
+   [
+    "gemstone_mixed_low_quality",
+    "Low Quality Gemstones",
+    "Low Quality Gemstone"
+   ],
+   [
+    "gas_inert_bilal",
+    "Bilal gas Inert Gas",
+    "Bilal Inert Gas"
+   ],
+   [
+    "energy_renewable",
+    "Renewable energy",
+    "Renewable Energy"
+   ],
+   [
+    "energy_renewable_site_limited_tidal_endor",
+    "Endor Tidal Renewable Energy",
+    "Endorian Tidal Renewable Energy"
+   ],
+   [
+    "energy_renewable_site_limited_tidal_naboo",
+    "Naboo Tidal Renewable Energy",
+    "Nabooian Tidal Renewable Energy"
+   ]
+  ],
+  "text_differs_hoth": 39
+ },
+ "staged": {
+  "file": "string/en/resource/resource_names.stf",
+  "base_bytes": 74403,
+  "base_roundtrip": true,
+  "base_keys": 898,
+  "tree_rows": 777,
+  "added": [
+   [
+    "wheat_wild_hoth",
+    "Hothian Wild Wheat"
+   ],
+   [
+    "petrochem_fuel_liquid_hoth",
+    "Hothian Liquid Petro Fuel"
+   ],
+   [
+    "petrochem_fuel_solid_hoth",
+    "Hothian Solid Petro Fuel"
+   ],
+   [
+    "radioactive_hoth",
+    "Hothian Radioactive"
+   ],
+   [
+    "steel_hoth",
+    "Hothian Steel"
+   ],
+   [
+    "iron_hoth",
+    "Hothian Iron"
+   ],
+   [
+    "aluminum_hoth",
+    "Hothian Aluminum"
+   ],
+   [
+    "copper_hoth",
+    "Hothian Copper"
+   ],
+   [
+    "ore_extrusive_hoth",
+    "Hothian Extrusive Ore"
+   ],
+   [
+    "ore_intrusive_hoth",
+    "Hothian Intrusive Ore"
+   ],
+   [
+    "gas_reactive_hoth",
+    "Hothian Reactive Gas"
+   ]
+  ],
+  "extra_added": [],
+  "skipped_root": true,
+  "keys": 909,
+  "next_id": 910,
+  "bytes": 75207,
+  "sha256": "23fbcc57502fbc6deb50b5e5c44f82fd56d2e8c22b2c637710f44d01eadc5d1c",
+  "text_differs": 88
+ },
+ "second_pass_added": 0,
+ "second_pass_identical": true,
+ "ossus_optional_keys": 45
+}
