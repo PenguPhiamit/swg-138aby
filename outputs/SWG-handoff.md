@@ -205,6 +205,12 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 08:40 Claude: test galaxy restarted (caves + batch A + C4f-F1); Botanist box survives a relog
+- **Restart at 08:33** (AGENTS.md standing OK: no owner client, no squad round; overnight check paused with the stop file, then resumed). Ready in 92 s, Hoth deployed with **15 regions** (7 + batch A's 8), 94 snapshot objects, no errors from the new files (only the old stock `loot_base`/`retrieve_quest_base` warnings). All 18 bots logged in again.
+  - Running dev build: the ice caves `c5f1ae06`, batch A `69eb77fe`, the spawn-command lock fix `23014f39`. The bodies run the C4e-F2 movement fix `90f60a81`.
+  - Camps `de1b679a` went into dev after the start, so they load at the next restart.
+- **Botanist (owner book README updated):** server half passes. Pell is granted the box, finds the trainer at 3516 -4783, and gets the stock conversation. After a relog, and before any grant, the trainer says `topped_out`, so **the box persisted**. `botanist_check.py` now asks the trainer before granting (/agentSkill reports a re-granted box as "granted", which would hide a loss). Left for the owner's client: the skill window, and the trainer's name (the bot sees an empty title).
+
 ### 2026-10-14 08:28 Claude: Fable's batch B reviewed; camps go in, the den waits for the owner; Fable on batch C
 - **B1 (Hoth camps):** 6 sites, 35 stock props, 43 NPCs in the batch A zones. Applied to dev after the 08:27 restart finishes copying scripts, so it loads at the next restart.
 - **B2 (mynock den):** held as owner question 9: it changes Hoth's terrain file, which the client also loads. **B3 (names):** held until map markers exist (dev has no MAPPOI flag).
