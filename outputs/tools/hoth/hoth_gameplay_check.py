@@ -70,7 +70,22 @@ def choose_job(options):
                  if 'find her' in str(value).lower() or 'player_1_1' in str(value)), None)
 
 
+def preflight(g):
+    inventories = [(member, member.inventory().get('items', [])) for member in g.bots]
+    missing = [kind for kind in ('mineral', 'chemical', 'gas', 'moisture', 'flora', 'liquid')
+               if not any('survey_tool_' + kind in str(item.get('name'))
+                          for _, items in inventories for item in items)]
+    fighter_ready = any('armor_composite' in str(item.get('name')) for item in inventories[0][1])
+    if missing:
+        g.note('BLOCKED: crew preparation lacks survey tools: ' + ', '.join(missing))
+    if not fighter_ready:
+        g.note('BLOCKED: leader has no observable approved boss-kit armor; do not leave the outpost for Hoth testing')
+    return not missing and fighter_ready
+
+
 def run(g):
+    if not preflight(g):
+        return  # remain in the starting safe location; do not travel merely to discover missing prerequisites
     travel = load('c23_travel', 'outputs/tools/bots/scenarios/esk-hoth.py')
     gather = load('c23_gather', 'outputs/tools/bots/scenarios/besh-gather.py')
     from fallback_scenarios import recover_home
@@ -88,21 +103,29 @@ def run(g):
         if not bot.walk(20, -2235, tries=2).get('arrived'):
             g.note('BLOCKED: cannot reach survey field south of outpost')
             return
+        if not healthy(bot):
+            g.note('BLOCKED: survey-field traversal compromised the leader; stop rather than test services while down')
+            return
         sys.path.insert(0, str(ROOT / 'outputs/tools/owner_content'))
         import swg_client_data
         raw = swg_client_data.client_file('string/en/resource_names.stf')
         labels = swg_client_data.string_file(raw) if raw else {}
-        seen, tool_inventory = set(), bot.inventory().get('items', [])
+        seen = set()
+        tool_inventory = [item for member in g.bots for item in member.inventory().get('items', [])]
         for category, kinds in TOOLS.items():
             observed, available = [], False
             for kind in kinds:
-                tool = next((i for i in tool_inventory if 'survey_tool_' + kind in str(i.get('name'))), None)
+                surveyor, tool = next(((member, item) for member in g.bots for item in member.inventory().get('items', [])
+                                      if 'survey_tool_' + kind in str(item.get('name'))), (None, None))
                 if tool is None:
                     continue
+                if surveyor is not bot and not surveyor.walk(20, -2235, tries=1).get('arrived'):
+                    g.note('BLOCKED: tool owner cannot safely reach the survey field')
+                    continue
                 available = True
-                bot.status()  # consume old inbox before opening a fresh survey
-                bot.select(tool['oid'], 20, wait=0)
-                event = bot.wait_for('"survey_resources"', 5)
+                surveyor.status()  # consume old inbox before opening a fresh survey
+                surveyor.select(tool['oid'], 20, wait=0)
+                event = surveyor.wait_for('"survey_resources"', 5)
                 if not event:
                     g.note(f'BLOCKED: {kind} survey list unavailable; range dialog/tool setup may be required')
                     continue
@@ -112,9 +135,10 @@ def run(g):
                     display = labels.get(typ)
                     g.check(f'{kind}: resolved resource names', named(name) and named(display),
                             dict(name=name, type=typ, display=display))
-                    bot.slash('requestSurvey', name, wait=0)
-                    result = bot.wait_for('"survey_results"', 15)
-                    g.note('SURVEY: ' + str(dict(category=category, resource=resource, display=display, result=result)))
+                    surveyor.slash('requestSurvey', name, wait=0)
+                    result = surveyor.wait_for('"survey_results"', 15)
+                    g.note('SURVEY: ' + str(dict(category=category, resource=resource, display=display,
+                                                best=(result or {}).get('best'), reply_received=bool(result))))
                     observed.append(resource)
                     g.sleep(4)
             if available:
@@ -129,9 +153,11 @@ def run(g):
                 g.check('all ten Hoth inorganic types listed', not missing, missing)
             else:
                 g.note('BLOCKED: full ten-type census needs liquid survey tool; missing observed types=' + str(missing))
-        before = bot.inventory()
-        gather.survey_and_sample(g, bot, 'mineral')
-        receipt(g, 'mineral sample', before, bot.inventory())
+        sampler = next((member for member in g.bots if any('survey_tool_mineral' in str(i.get('name'))
+                        for i in member.inventory().get('items', []))), bot)
+        before = sampler.inventory()
+        gather.survey_and_sample(g, sampler, 'mineral')
+        receipt(g, 'mineral sample', before, sampler.inventory())
 
         # One harvest category per fresh corpse avoids the pre-CU one-harvest-per-corpse rule.
         for kind in ('meat', 'hide', 'bone'):
@@ -244,4 +270,5 @@ def run(g):
     finally:
         g.note(f'LOOT OBSERVATION: confirmed kills={kills}; new loot item records={len(loot)}; {loot}')
         # Cleanup has the same run deadline; budget stops are reported, never silently called home.
+        g.parallel(*[lambda member=member: member.recover() for member in g.bots])
         g.check('crew returns to Tatooine', recover_home(g))
