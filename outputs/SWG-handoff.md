@@ -218,6 +218,15 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 13:50 Claude: Hoth check 32/33 after the restart; the owner's Hoth walkthrough and an Echo Base plan; Fable on resource names
+- **Third test restart 13:32:** Vell standing still, 33 Hoth regions (15 + 18 named), archive `6cfeeb51`. **Bot check 13:43, 32/33:** all ticket purchases pass (more than 5 minutes after the start, which supports the boot-delay diagnosis). **Vell stands at exactly (44, -2010)** and talks. The one FAIL was the check's own wrong expectation (salvage-detail props; there are none by design), now fixed.
+- **For the owner: `Fable-hoth-guide/hoth-first-session.md`,** one route through everything built tonight (nine stops: waypoints, fares, boss levels, what to report). Verified versus unverified is marked.
+- **`Fable-hoth-guide/echo-base-plan.md`:**
+  - MTG's `hoth.trn` already carries the Echo Base massif with three cut-outs (hangar, main, tower) near (-5100, 5400).
+  - The NGE `echo_base` building (33 rooms) and its props are in the MTG archives.
+  - First step E0: a one-day look in the real client (does pre-CU draw the NGE building?), with a stock fallback. About 6–7 days in all; owner questions on story and GCW.
+- **Fable's finding:** 11 MTG Hoth resource classes have no name in any `resource_names.stf`, so surveys may show blank names. Fable now: R1, a resource-name audit across all planets with a staging function; then O3 (Ossus map art, globe, loading tile, our own DDS writer).
+
 ### 2026-10-14 13:41 Claude: CORRECTION: silent ticket failures are Core3's 5-minute shuttle delay, not the travel coupon
 - **My 09:40 diagnosis was wrong.** No bot run has ever shown the coupon question (checked in the 09:43 and 13:36 reports). The pattern is timing: purchases failed at 09:37 and 13:36, about 3 minutes after a test restart, and worked at 09:43, 10:01 and later.
 - **The cause, in source:** `ShuttleZoneComponent.cpp` delays every shuttle's `ScheduleShuttleTask` by `Core3.ShuttleZoneComponent.BootDelay` (default 300,000 ms) after a server start. Until then a travel point has no shuttle, and `PurchaseTicketCommand` returns GENERALERROR **with no message** (`arrivalShuttle == nullptr`). This also explains C7's "first purchase after a galaxy start fails silently".
