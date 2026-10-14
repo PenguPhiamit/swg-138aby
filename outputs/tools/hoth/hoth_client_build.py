@@ -253,11 +253,24 @@ sys.path.insert(0, os.path.join(H, 'outputs', 'tools', 'owner_content'))
 import swg_client_data  # noqa: E402  (ours: the client's load order and the archive that wins for each file)
 
 
+OWN_ARCHIVE = os.path.basename(TRE).lower()
+_stock_index = None
+
+
 def winning(path):
-    """(archive name, bytes) of the copy of a file that wins in the client's load order."""
-    if swg_client_data._index is None:
-        swg_client_data._build_index()
-    archive = os.path.basename(swg_client_data._index[path][0])
+    """(archive name, bytes) of the copy of a file that wins in the client's load order, leaving out our own
+    local_planets.tre: once the client loads it, its copy is this script's previous output (C4f-F2)."""
+    global _stock_index
+    if _stock_index is None:
+        _stock_index = {}
+        trees, _, _ = swg_client_data.clo.load_order()
+        for _, name in reversed(trees):  # lowest first, so higher priorities overwrite
+            archive = os.path.basename(name)
+            full = os.path.join(H, 'outputs', 'SWG-client', archive)
+            if archive.lower() != OWN_ARCHIVE and os.path.exists(full):
+                for entry in read_tre(full):
+                    _stock_index[entry['name'].lower()] = archive
+    archive = _stock_index[path]
     return archive, archive_file(archive, path)
 
 
@@ -346,8 +359,13 @@ def check_ui_newlines(path):
 
 
 def main():
+    # Build into fresh copies beside the old output and publish them only when every check has passed, so a failed
+    # run leaves the last good staging folder and archive in place (C4f-F2).
+    global STAGE
+    final_stage, tre_new = STAGE, TRE + '.new'
+    STAGE = final_stage + '.new'
     if os.path.isdir(STAGE):
-        shutil.rmtree(STAGE)  # our own staging folder, rebuilt from scratch every run
+        shutil.rmtree(STAGE)  # a failed earlier run's leftovers
     for path in ('ui/ui_ticketpurchase.inc', 'ui/ui_planet_map.inc'):
         assert check_ui_newlines(path), f'{path}: stock copy is not pure CRLF; review the writer first'
     strings(); crc_table(); travel(); waypoints(); ticket_ui(); planet_map_ui()
@@ -357,18 +375,27 @@ def main():
         print('resource tree:', line)
     for line in botanist():
         print('botanist:', line)
-    tre_pack.pack(STAGE, TRE)
+    tre_pack.pack(STAGE, tre_new)
     staged = {os.path.relpath(os.path.join(d, f), STAGE).replace(os.sep, '/'): os.path.join(d, f)
               for d, _, fs in os.walk(STAGE) for f in fs}
     ok = True
-    for entry in read_tre(TRE):
-        with open(TRE, 'rb') as stream:
+    for entry in read_tre(tre_new):
+        with open(tre_new, 'rb') as stream:
             stream.seek(entry['offset'])
             blob = stream.read(entry['comp_size'] if entry['comp'] else entry['size'])
         same = _inflate(blob, entry['comp'], entry['size']) == open(staged[entry['name']], 'rb').read()
         ok &= same
         print(f'{"OK " if same else "BAD"} {entry["name"]} ({entry["size"]} bytes; stock {os.path.getsize(src(entry["name"]))})')
     print('archive verified' if ok else 'ARCHIVE MISMATCH')
+    if not ok:
+        print(f'kept the old {TRE} and {final_stage}; the failed build is in {tre_new} and {STAGE}')
+        return 1
+    if os.path.isdir(final_stage):
+        shutil.rmtree(final_stage)
+    os.rename(STAGE, final_stage)
+    os.replace(tre_new, TRE)
+    STAGE = final_stage
+    print('published', TRE)
     # The changed files read back with the same tools, as a last check.
     print('planet_n hoth =', stf_tool.as_dict(stf_tool.read(dst('string/en/planet_n.stf'))).get('hoth'))
     print('crc hoth =', hex(cstb_tool.read(dst('misc/planet_crc_string_table.iff'))['hoth']))
