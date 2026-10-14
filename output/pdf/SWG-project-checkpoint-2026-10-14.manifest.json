@@ -6,8 +6,8 @@
   },
   {
     "path": "outputs/Documentation-support/C26-telemetry.md",
-    "sha256": "f3d2a4b27181b3c93870fcee93f0f3591828e0dff2cbfcfdfca94b94a458f76b",
-    "bytes": 4555
+    "sha256": "cae4e5869864fd816d7e457c430125000c4386f489f13efeab42a660428fc2eb",
+    "bytes": 4513
   },
   {
     "path": "outputs/Documentation-support/R2-idempotence-proposal.md",
