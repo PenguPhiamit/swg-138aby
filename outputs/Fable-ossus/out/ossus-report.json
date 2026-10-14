@@ -1,0 +1,282 @@
+{
+ "file": "C:\\Users\\Pengw\\Documents\\Codex\\2026-10-13\\h\\outputs\\Fable-ossus\\staged\\client\\terrain\\ossus.trn",
+ "bytes": 27322,
+ "round_trip_identical": true,
+ "core3_order_notes": [
+  "/PTAT/0014/TGEN/0000/LYRS/LAYR/0003/FBIT: 4 bytes after the fields Core3 reads",
+  "/PTAT/0014/TGEN/0000/LYRS/LAYR/0003/FBIT: 4 bytes after the fields Core3 reads",
+  "/PTAT/0014/TGEN/0000/LYRS/LAYR/0003/FBIT: 4 bytes after the fields Core3 reads"
+ ],
+ "core3_order_notes_unexpected": [],
+ "rule_counts": {
+  "LAYR": 44,
+  "AHFR": 5,
+  "ASCN": 15,
+  "AENV": 6,
+  "AFDN": 16,
+  "AFDF": 12,
+  "AFSC": 16,
+  "AFSN": 13,
+  "FFRA": 1,
+  "BREC": 4,
+  "FHGT": 4,
+  "FBIT": 3,
+  "AHCN": 9,
+  "FSLP": 2,
+  "BCIR": 11,
+  "AROA": 16,
+  "BPLN": 1,
+  "AEXC": 3
+ },
+ "structure_pairs_not_in_stock": [],
+ "references_missing": [],
+ "reference_counts": {
+  "shaders": 33,
+  "flora": 37,
+  "radial": 16,
+  "bitmaps": 3
+ },
+ "verdict": "PASS",
+ "height_survey": {
+  "grid_step_m": 32.0,
+  "samples": 262144,
+  "min": 23.9,
+  "max": 374.2,
+  "mean": 84.5,
+  "below_water_share": 0.054,
+  "water_height": 38.5
+ },
+ "sites": {
+  "starport_pad": {
+   "x": 0.0,
+   "y": -3600.0,
+   "radius": 160.0,
+   "height": 50.3,
+   "flat_inner_radius": 88,
+   "probe": {
+    "centre": 50.3,
+    "mean": 50.3,
+    "spread": 0.0,
+    "steepest_10m_step": 0.76,
+    "samples": 197
+   },
+   "steepest_10m_step_walking_north_out": 2.24
+  },
+  "academy_ruins": {
+   "x": 2016.0,
+   "y": 2848.0,
+   "radius": 130.0,
+   "height": 170.4,
+   "survey_relief_320m": 1.6,
+   "probe": {
+    "centre": 170.4,
+    "mean": 170.47,
+    "spread": 1.04,
+    "steepest_10m_step": 0.18,
+    "samples": 441
+   }
+  },
+  "camps": [
+   {
+    "name": "camp_west_plains",
+    "x": -5344.0,
+    "y": 96.0,
+    "height": 46.1,
+    "survey_relief_192m": 1.6,
+    "probe": {
+     "centre": 45.31,
+     "mean": 45.96,
+     "spread": 3.14,
+     "steepest_10m_step": 0.92,
+     "samples": 113
+    }
+   },
+   {
+    "name": "camp_north_hills",
+    "x": -3744.0,
+    "y": 5792.0,
+    "height": 49.2,
+    "survey_relief_192m": 1.6,
+    "probe": {
+     "centre": 48.53,
+     "mean": 48.6,
+     "spread": 2.89,
+     "steepest_10m_step": 1.03,
+     "samples": 113
+    }
+   },
+   {
+    "name": "camp_east_canyon_rim",
+    "x": 3232.0,
+    "y": -2656.0,
+    "height": 103.8,
+    "survey_relief_192m": 2.9,
+    "probe": {
+     "centre": 104.46,
+     "mean": 104.3,
+     "spread": 1.26,
+     "steepest_10m_step": 0.68,
+     "samples": 113
+    }
+   },
+   {
+    "name": "camp_south_foothills",
+    "x": -6496.0,
+    "y": -4320.0,
+    "height": 58.0,
+    "survey_relief_192m": 2.3,
+    "probe": {
+     "centre": 58.02,
+     "mean": 57.44,
+     "spread": 4.0,
+     "steepest_10m_step": 0.78,
+     "samples": 113
+    }
+   }
+  ],
+  "caves": [
+   {
+    "name": "cave_foothills_west",
+    "x": -2976.0,
+    "y": -4960.0,
+    "height": 51.9,
+    "mouth_faces_deg": 0,
+    "hillside_probe_before_apron": {
+     "centre": 51.93,
+     "mean": 52.34,
+     "spread": 6.6,
+     "steepest_10m_step": 2.92,
+     "samples": 16
+    },
+    "hole_radius": 9.0,
+    "probe": {
+     "centre": 51.9,
+     "mean": 51.95,
+     "spread": 1.71,
+     "steepest_10m_step": 5.17,
+     "samples": 16
+    }
+   },
+   {
+    "name": "cave_foothills_east",
+    "x": 4896.0,
+    "y": -4960.0,
+    "height": 58.5,
+    "mouth_faces_deg": 0,
+    "hillside_probe_before_apron": {
+     "centre": 58.53,
+     "mean": 59.33,
+     "spread": 4.6,
+     "steepest_10m_step": 2.75,
+     "samples": 16
+    },
+    "hole_radius": 9.0,
+    "probe": {
+     "centre": 58.5,
+     "mean": 58.59,
+     "spread": 1.19,
+     "steepest_10m_step": 5.25,
+     "samples": 16
+    }
+   },
+   {
+    "name": "cave_north",
+    "x": 1376.0,
+    "y": 5920.0,
+    "height": 45.7,
+    "mouth_faces_deg": 0,
+    "hillside_probe_before_apron": {
+     "centre": 45.74,
+     "mean": 45.98,
+     "spread": 4.39,
+     "steepest_10m_step": 1.99,
+     "samples": 16
+    },
+    "hole_radius": 9.0,
+    "probe": {
+     "centre": 45.7,
+     "mean": 45.73,
+     "spread": 1.1,
+     "steepest_10m_step": 3.68,
+     "samples": 16
+    }
+   }
+  ],
+  "road": {
+   "points": [
+    [
+     0.0,
+     -3430.0
+    ],
+    [
+     250.0,
+     -2600.0
+    ],
+    [
+     500.0,
+     -1500.0
+    ],
+    [
+     800.0,
+     -400.0
+    ],
+    [
+     1100.0,
+     700.0
+    ],
+    [
+     1300.0,
+     1500.0
+    ],
+    [
+     1976.0,
+     2698.0
+    ]
+   ],
+   "pieces": 16,
+   "width": 12.0,
+   "max_road_vs_ground_m": 0.95,
+   "mean_road_vs_ground_m": 0.21
+  }
+ },
+ "preview": {
+  "file": "out/ossus-height.png",
+  "resolution": 512,
+  "heights": [
+   23.9,
+   374.2
+  ],
+  "legend": "north up; black low, white high (gamma 0.5); mid-grey = under water; crosses = pad, ruins, camps, caves"
+ },
+ "tga": {
+  "terrain/ossus_academy.tga": {
+   "bytes": 65554,
+   "resolution": 256,
+   "round_trip_identical": true,
+   "core3_loader_accepts": true,
+   "max_value_on_frame_edge": 0
+  },
+  "terrain/ossus_canyon.tga": {
+   "bytes": 262162,
+   "resolution": 512,
+   "round_trip_identical": true,
+   "core3_loader_accepts": true,
+   "max_value_on_frame_edge": 0
+  },
+  "terrain/ossus_mesa.tga": {
+   "bytes": 65554,
+   "resolution": 256,
+   "round_trip_identical": true,
+   "core3_loader_accepts": true,
+   "max_value_on_frame_edge": 0
+  }
+ },
+ "heights_used": {
+  "pad_height": 50.3,
+  "water": 38.5,
+  "bench_height": 166.1,
+  "canyon_floor": 44.5,
+  "mesa_height": 100.0
+ },
+ "seconds": 30
+}

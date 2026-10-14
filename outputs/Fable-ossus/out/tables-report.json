@@ -1,0 +1,87 @@
+{
+ "base": "C:\\Users\\Pengw\\Documents\\Codex\\2026-10-13\\h\\outputs\\Documentation-support\\hoth\\client-base",
+ "files": {
+  "misc/planet_crc_string_table.iff": {
+   "stock_round_trip": true,
+   "stock_entries": 25,
+   "staged_entries": 26,
+   "ossus_crc": "f270b502",
+   "crc_order_ascending": true,
+   "stock_names_kept": true,
+   "crc_check_on_stock_names": true
+  },
+  "datatables/travel/travel.iff": {
+   "stock_round_trip": true,
+   "columns": [
+    "Planet",
+    "corellia",
+    "dantooine",
+    "dathomir",
+    "endor",
+    "lok",
+    "naboo",
+    "rori",
+    "talus",
+    "tatooine",
+    "yavin4",
+    "ossus"
+   ],
+   "rows": 11,
+   "stock_cells_unchanged": true,
+   "ossus_row": {
+    "Planet": "ossus",
+    "corellia": 1750,
+    "dantooine": 0,
+    "dathomir": 0,
+    "endor": 0,
+    "lok": 0,
+    "naboo": 0,
+    "rori": 0,
+    "talus": 0,
+    "tatooine": 0,
+    "yavin4": 0,
+    "ossus": 100
+   },
+   "corellia_row_ossus_fare": 3000,
+   "independent_reader_agrees": true
+  },
+  "string/en/planet_n.stf": {
+   "stock_round_trip": true,
+   "entries": 33,
+   "ossus": "Ossus",
+   "next_id": 34,
+   "stock_entries_kept": true,
+   "independent_reader_agrees": true
+  },
+  "datatables/player/waypoint_planets.iff": {
+   "stock_round_trip": true,
+   "rows": 25,
+   "ossus_row": [
+    "ossus",
+    "ui_planet_sel_dant.apt"
+   ],
+   "stock_rows_unchanged": true,
+   "independent_reader_agrees": true
+  }
+ },
+ "placeholders": {
+  "corellia_to_ossus_fare": {
+   "value": 3000,
+   "status": "PLACEHOLDER (owner decision)",
+   "note": "the Yavin IV / Hoth pattern: Corellia -> Ossus 3000, Ossus -> Corellia 1750, Ossus -> Ossus 100"
+  },
+  "ossus_to_corellia_fare": {
+   "value": 1750,
+   "status": "PLACEHOLDER (owner decision)"
+  },
+  "galaxy_map_spot": {
+   "value": null,
+   "status": "PLACEHOLDER (owner decision)",
+   "note": "not in these four tables: the ticket UI (ui/ui_ticketpurchase.inc) places the button; Hoth sits at the provisional (425, 225) and the affine fit of the stock map was rejected (Documentation-support/hoth/galaxy-map-calibration.md). Lore grid for Ossus: Adega system, Outer Rim, near Yavin (R-6 vs P-6)."
+  },
+  "planet_model": {
+   "value": "ui_planet_sel_dant.apt",
+   "status": "PLACEHOLDER (stock Dantooine model referenced in place) until appearance/ui_planet_sel_ossus.apt exists (map-art step)"
+  }
+ }
+}

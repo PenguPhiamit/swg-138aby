@@ -1,0 +1,20 @@
+{
+ "corellia_to_ossus_fare": {
+  "value": 3000,
+  "status": "PLACEHOLDER (owner decision)",
+  "note": "the Yavin IV / Hoth pattern: Corellia -> Ossus 3000, Ossus -> Corellia 1750, Ossus -> Ossus 100"
+ },
+ "ossus_to_corellia_fare": {
+  "value": 1750,
+  "status": "PLACEHOLDER (owner decision)"
+ },
+ "galaxy_map_spot": {
+  "value": null,
+  "status": "PLACEHOLDER (owner decision)",
+  "note": "not in these four tables: the ticket UI (ui/ui_ticketpurchase.inc) places the button; Hoth sits at the provisional (425, 225) and the affine fit of the stock map was rejected (Documentation-support/hoth/galaxy-map-calibration.md). Lore grid for Ossus: Adega system, Outer Rim, near Yavin (R-6 vs P-6)."
+ },
+ "planet_model": {
+  "value": "ui_planet_sel_dant.apt",
+  "status": "PLACEHOLDER (stock Dantooine model referenced in place) until appearance/ui_planet_sel_ossus.apt exists (map-art step)"
+ }
+}

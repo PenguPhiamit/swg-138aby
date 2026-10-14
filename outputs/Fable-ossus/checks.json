@@ -1,0 +1,902 @@
+{
+ "staged_files": {
+  "datatables/clientregion/ossus.iff": {
+   "bytes": 343,
+   "sha256": "a8e00ab1e9ce7c6edeb4f7260d39b8fde77a9683bec1d43f9f962ac46165c19e"
+  },
+  "datatables/environment/ossus.iff": {
+   "bytes": 13956,
+   "sha256": "dc022bb1242bf35ad893c4c14ff5c9658eded5e63c1319ccfed7ebf95663ee70"
+  },
+  "datatables/loading/ossus.iff": {
+   "bytes": 413,
+   "sha256": "25a31ff0292658ceb835a1d1490b926f2e2cdaa3d91f02d8bf1fb882056c4e81"
+  },
+  "datatables/player/waypoint_planets.iff": {
+   "bytes": 933,
+   "sha256": "6ae230a60621fd21ebf4fc663fee372d5af1224008401a86fadfd93edbf6e010"
+  },
+  "datatables/travel/travel.iff": {
+   "bytes": 725,
+   "sha256": "fdee5bf3127f62b4f4a966ce280a2dfcb129a2a91b13c84c5ffc3ebc79e274e0"
+  },
+  "misc/planet_crc_string_table.iff": {
+   "bytes": 546,
+   "sha256": "c2c1afa4f50e68cd0b4dd59f611508b23a822e92627cf874fe70bd897fee9706"
+  },
+  "string/en/ossus_region_names.stf": {
+   "bytes": 344,
+   "sha256": "4841f1e5696dc93868bf08cd06278c2dd686f0956ea7d1f1fe4a040de03720d5"
+  },
+  "string/en/planet_n.stf": {
+   "bytes": 1873,
+   "sha256": "41caa0c1d21d4a2b16bddb82b47dfebe1a35be0314ed1c5d00304c260496e38c"
+  },
+  "string/en/loading/ossus.stf": {
+   "bytes": 1085,
+   "sha256": "63111a7099714005378a7fb2b01f1c5be4cba49f1201bc10702fcebab94b0996"
+  },
+  "string/en/loading/ossus_n.stf": {
+   "bytes": 221,
+   "sha256": "543494d6c2af4c2837032bc81a1ac61fe8c46b0cf6c00f0aef7136dab1feda0d"
+  },
+  "terrain/ossus.trn": {
+   "bytes": 27322,
+   "sha256": "0c2600f08703ed4dd8ee80563964c2ad349f9008823a72f034e03976170bb3ec"
+  },
+  "terrain/ossus_academy.tga": {
+   "bytes": 65554,
+   "sha256": "a00934b0936808118253ffd564d060968403d9a838ec41a77018e6d5499285ae"
+  },
+  "terrain/ossus_canyon.tga": {
+   "bytes": 262162,
+   "sha256": "67ea35510a46c5e501532ee1bb7d7c269c0621457b2643134996e8555134e97a"
+  },
+  "terrain/ossus_mesa.tga": {
+   "bytes": 65554,
+   "sha256": "f3182bff85fc4b27a8ad8c887f852d8dcae2dc1369726a8cec308c2dd9ffdd55"
+  },
+  "terrain/environment/ossus.iff": {
+   "bytes": 433,
+   "sha256": "29fe108635a9dc3c2630bac28d825a1cb3e97c098f4c81e1cf589516620cf987"
+  }
+ },
+ "reports": {
+  "ossus-report.json": {
+   "file": "C:\\Users\\Pengw\\Documents\\Codex\\2026-10-13\\h\\outputs\\Fable-ossus\\staged\\client\\terrain\\ossus.trn",
+   "bytes": 27322,
+   "round_trip_identical": true,
+   "core3_order_notes": [
+    "/PTAT/0014/TGEN/0000/LYRS/LAYR/0003/FBIT: 4 bytes after the fields Core3 reads",
+    "/PTAT/0014/TGEN/0000/LYRS/LAYR/0003/FBIT: 4 bytes after the fields Core3 reads",
+    "/PTAT/0014/TGEN/0000/LYRS/LAYR/0003/FBIT: 4 bytes after the fields Core3 reads"
+   ],
+   "core3_order_notes_unexpected": [],
+   "rule_counts": {
+    "LAYR": 44,
+    "AHFR": 5,
+    "ASCN": 15,
+    "AENV": 6,
+    "AFDN": 16,
+    "AFDF": 12,
+    "AFSC": 16,
+    "AFSN": 13,
+    "FFRA": 1,
+    "BREC": 4,
+    "FHGT": 4,
+    "FBIT": 3,
+    "AHCN": 9,
+    "FSLP": 2,
+    "BCIR": 11,
+    "AROA": 16,
+    "BPLN": 1,
+    "AEXC": 3
+   },
+   "structure_pairs_not_in_stock": [],
+   "references_missing": [],
+   "reference_counts": {
+    "shaders": 33,
+    "flora": 37,
+    "radial": 16,
+    "bitmaps": 3
+   },
+   "verdict": "PASS",
+   "height_survey": {
+    "grid_step_m": 32.0,
+    "samples": 262144,
+    "min": 23.9,
+    "max": 374.2,
+    "mean": 84.5,
+    "below_water_share": 0.054,
+    "water_height": 38.5
+   },
+   "sites": {
+    "starport_pad": {
+     "x": 0.0,
+     "y": -3600.0,
+     "radius": 160.0,
+     "height": 50.3,
+     "flat_inner_radius": 88,
+     "probe": {
+      "centre": 50.3,
+      "mean": 50.3,
+      "spread": 0.0,
+      "steepest_10m_step": 0.76,
+      "samples": 197
+     },
+     "steepest_10m_step_walking_north_out": 2.24
+    },
+    "academy_ruins": {
+     "x": 2016.0,
+     "y": 2848.0,
+     "radius": 130.0,
+     "height": 170.4,
+     "survey_relief_320m": 1.6,
+     "probe": {
+      "centre": 170.4,
+      "mean": 170.47,
+      "spread": 1.04,
+      "steepest_10m_step": 0.18,
+      "samples": 441
+     }
+    },
+    "camps": [
+     {
+      "name": "camp_west_plains",
+      "x": -5344.0,
+      "y": 96.0,
+      "height": 46.1,
+      "survey_relief_192m": 1.6,
+      "probe": {
+       "centre": 45.31,
+       "mean": 45.96,
+       "spread": 3.14,
+       "steepest_10m_step": 0.92,
+       "samples": 113
+      }
+     },
+     {
+      "name": "camp_north_hills",
+      "x": -3744.0,
+      "y": 5792.0,
+      "height": 49.2,
+      "survey_relief_192m": 1.6,
+      "probe": {
+       "centre": 48.53,
+       "mean": 48.6,
+       "spread": 2.89,
+       "steepest_10m_step": 1.03,
+       "samples": 113
+      }
+     },
+     {
+      "name": "camp_east_canyon_rim",
+      "x": 3232.0,
+      "y": -2656.0,
+      "height": 103.8,
+      "survey_relief_192m": 2.9,
+      "probe": {
+       "centre": 104.46,
+       "mean": 104.3,
+       "spread": 1.26,
+       "steepest_10m_step": 0.68,
+       "samples": 113
+      }
+     },
+     {
+      "name": "camp_south_foothills",
+      "x": -6496.0,
+      "y": -4320.0,
+      "height": 58.0,
+      "survey_relief_192m": 2.3,
+      "probe": {
+       "centre": 58.02,
+       "mean": 57.44,
+       "spread": 4.0,
+       "steepest_10m_step": 0.78,
+       "samples": 113
+      }
+     }
+    ],
+    "caves": [
+     {
+      "name": "cave_foothills_west",
+      "x": -2976.0,
+      "y": -4960.0,
+      "height": 51.9,
+      "mouth_faces_deg": 0,
+      "hillside_probe_before_apron": {
+       "centre": 51.93,
+       "mean": 52.34,
+       "spread": 6.6,
+       "steepest_10m_step": 2.92,
+       "samples": 16
+      },
+      "hole_radius": 9.0,
+      "probe": {
+       "centre": 51.9,
+       "mean": 51.95,
+       "spread": 1.71,
+       "steepest_10m_step": 5.17,
+       "samples": 16
+      }
+     },
+     {
+      "name": "cave_foothills_east",
+      "x": 4896.0,
+      "y": -4960.0,
+      "height": 58.5,
+      "mouth_faces_deg": 0,
+      "hillside_probe_before_apron": {
+       "centre": 58.53,
+       "mean": 59.33,
+       "spread": 4.6,
+       "steepest_10m_step": 2.75,
+       "samples": 16
+      },
+      "hole_radius": 9.0,
+      "probe": {
+       "centre": 58.5,
+       "mean": 58.59,
+       "spread": 1.19,
+       "steepest_10m_step": 5.25,
+       "samples": 16
+      }
+     },
+     {
+      "name": "cave_north",
+      "x": 1376.0,
+      "y": 5920.0,
+      "height": 45.7,
+      "mouth_faces_deg": 0,
+      "hillside_probe_before_apron": {
+       "centre": 45.74,
+       "mean": 45.98,
+       "spread": 4.39,
+       "steepest_10m_step": 1.99,
+       "samples": 16
+      },
+      "hole_radius": 9.0,
+      "probe": {
+       "centre": 45.7,
+       "mean": 45.73,
+       "spread": 1.1,
+       "steepest_10m_step": 3.68,
+       "samples": 16
+      }
+     }
+    ],
+    "road": {
+     "points": [
+      [
+       0.0,
+       -3430.0
+      ],
+      [
+       250.0,
+       -2600.0
+      ],
+      [
+       500.0,
+       -1500.0
+      ],
+      [
+       800.0,
+       -400.0
+      ],
+      [
+       1100.0,
+       700.0
+      ],
+      [
+       1300.0,
+       1500.0
+      ],
+      [
+       1976.0,
+       2698.0
+      ]
+     ],
+     "pieces": 16,
+     "width": 12.0,
+     "max_road_vs_ground_m": 0.95,
+     "mean_road_vs_ground_m": 0.21
+    }
+   },
+   "preview": {
+    "file": "out/ossus-height.png",
+    "resolution": 512,
+    "heights": [
+     23.9,
+     374.2
+    ],
+    "legend": "north up; black low, white high (gamma 0.5); mid-grey = under water; crosses = pad, ruins, camps, caves"
+   },
+   "tga": {
+    "terrain/ossus_academy.tga": {
+     "bytes": 65554,
+     "resolution": 256,
+     "round_trip_identical": true,
+     "core3_loader_accepts": true,
+     "max_value_on_frame_edge": 0
+    },
+    "terrain/ossus_canyon.tga": {
+     "bytes": 262162,
+     "resolution": 512,
+     "round_trip_identical": true,
+     "core3_loader_accepts": true,
+     "max_value_on_frame_edge": 0
+    },
+    "terrain/ossus_mesa.tga": {
+     "bytes": 65554,
+     "resolution": 256,
+     "round_trip_identical": true,
+     "core3_loader_accepts": true,
+     "max_value_on_frame_edge": 0
+    }
+   },
+   "heights_used": {
+    "pad_height": 50.3,
+    "water": 38.5,
+    "bench_height": 166.1,
+    "canyon_floor": 44.5,
+    "mesa_height": 100.0
+   },
+   "seconds": 30
+  },
+  "tables-report.json": {
+   "base": "C:\\Users\\Pengw\\Documents\\Codex\\2026-10-13\\h\\outputs\\Documentation-support\\hoth\\client-base",
+   "files": {
+    "misc/planet_crc_string_table.iff": {
+     "stock_round_trip": true,
+     "stock_entries": 25,
+     "staged_entries": 26,
+     "ossus_crc": "f270b502",
+     "crc_order_ascending": true,
+     "stock_names_kept": true,
+     "crc_check_on_stock_names": true
+    },
+    "datatables/travel/travel.iff": {
+     "stock_round_trip": true,
+     "columns": [
+      "Planet",
+      "corellia",
+      "dantooine",
+      "dathomir",
+      "endor",
+      "lok",
+      "naboo",
+      "rori",
+      "talus",
+      "tatooine",
+      "yavin4",
+      "ossus"
+     ],
+     "rows": 11,
+     "stock_cells_unchanged": true,
+     "ossus_row": {
+      "Planet": "ossus",
+      "corellia": 1750,
+      "dantooine": 0,
+      "dathomir": 0,
+      "endor": 0,
+      "lok": 0,
+      "naboo": 0,
+      "rori": 0,
+      "talus": 0,
+      "tatooine": 0,
+      "yavin4": 0,
+      "ossus": 100
+     },
+     "corellia_row_ossus_fare": 3000,
+     "independent_reader_agrees": true
+    },
+    "string/en/planet_n.stf": {
+     "stock_round_trip": true,
+     "entries": 33,
+     "ossus": "Ossus",
+     "next_id": 34,
+     "stock_entries_kept": true,
+     "independent_reader_agrees": true
+    },
+    "datatables/player/waypoint_planets.iff": {
+     "stock_round_trip": true,
+     "rows": 25,
+     "ossus_row": [
+      "ossus",
+      "ui_planet_sel_dant.apt"
+     ],
+     "stock_rows_unchanged": true,
+     "independent_reader_agrees": true
+    }
+   },
+   "placeholders": {
+    "corellia_to_ossus_fare": {
+     "value": 3000,
+     "status": "PLACEHOLDER (owner decision)",
+     "note": "the Yavin IV / Hoth pattern: Corellia -> Ossus 3000, Ossus -> Corellia 1750, Ossus -> Ossus 100"
+    },
+    "ossus_to_corellia_fare": {
+     "value": 1750,
+     "status": "PLACEHOLDER (owner decision)"
+    },
+    "galaxy_map_spot": {
+     "value": null,
+     "status": "PLACEHOLDER (owner decision)",
+     "note": "not in these four tables: the ticket UI (ui/ui_ticketpurchase.inc) places the button; Hoth sits at the provisional (425, 225) and the affine fit of the stock map was rejected (Documentation-support/hoth/galaxy-map-calibration.md). Lore grid for Ossus: Adega system, Outer Rim, near Yavin (R-6 vs P-6)."
+    },
+    "planet_model": {
+     "value": "ui_planet_sel_dant.apt",
+     "status": "PLACEHOLDER (stock Dantooine model referenced in place) until appearance/ui_planet_sel_ossus.apt exists (map-art step)"
+    }
+   }
+  },
+  "env-report.json": {
+   "files": {
+    "terrain/environment/ossus.iff": {
+     "stock_round_trips": true,
+     "chunks": [
+      "NSKY",
+      "STAR",
+      "SUN ",
+      "SSUN",
+      "MOON",
+      "SMOO",
+      "CELS",
+      "CELS"
+     ],
+     "bytes": 433,
+     "ssun_bytes_identical_to_tatooine": true,
+     "rest_identical_to_dantooine": true
+    },
+    "datatables/environment/ossus.iff": {
+     "rows": 30,
+     "families": [
+      "ossus_benchland",
+      "ossus_canyon",
+      "ossus_forest",
+      "ossus_knossa",
+      "ossus_mountains",
+      "ossus_plains"
+     ],
+     "weather_rows_per_family": 5,
+     "families_match_terrain": true,
+     "columns": 25,
+     "source_families": {
+      "ossus_plains": "main_base",
+      "ossus_forest": "second_stepes",
+      "ossus_mountains": "stepes",
+      "ossus_benchland": "jedi_temple",
+      "ossus_canyon": "dantari1",
+      "ossus_knossa": "outpost"
+     },
+     "referenced_files_exist": true,
+     "missing": []
+    },
+    "datatables/clientregion/ossus.iff": {
+     "rows": [
+      [
+       "@ossus_region_names:knossa",
+       0.0,
+       -3600.0,
+       300.0
+      ],
+      [
+       "@ossus_region_names:academy_benchland",
+       1600.0,
+       2600.0,
+       1300.0
+      ],
+      [
+       "@ossus_region_names:imhar_canyon",
+       5150.0,
+       100.0,
+       1400.0
+      ],
+      [
+       "@ossus_region_names:eocho_mountains",
+       0.0,
+       -6600.0,
+       3200.0
+      ],
+      [
+       "@ossus_region_names:adega_lake",
+       -3600.0,
+       1200.0,
+       700.0
+      ],
+      [
+       "@ossus_region_names:ossus",
+       0.0,
+       0.0,
+       9000.0
+      ]
+     ],
+     "columns": [
+      "Name",
+      "X",
+      "Z",
+      "Radius"
+     ],
+     "names_file": "string/en/ossus_region_names.stf",
+     "names": [
+      [
+       "knossa",
+       "Knossa"
+      ],
+      [
+       "academy_benchland",
+       "the Academy Benchland"
+      ],
+      [
+       "imhar_canyon",
+       "Imhar Canyon"
+      ],
+      [
+       "eocho_mountains",
+       "the Eocho Mountains"
+      ],
+      [
+       "adega_lake",
+       "Adega Lake"
+      ],
+      [
+       "ossus",
+       "Ossus"
+      ]
+     ]
+    },
+    "datatables/loading/ossus.iff": {
+     "rows": [
+      [
+       "@loading/ossus:ossus",
+       "loading/generic/generic_swg",
+       "@loading/ossus_n:ossus"
+      ],
+      [
+       "@loading/ossus:knossa",
+       "loading/generic/generic_swg",
+       "@loading/ossus_n:knossa"
+      ],
+      [
+       "@loading/ossus:academy_benchland",
+       "loading/generic/generic_swg",
+       "@loading/ossus_n:academy_benchland"
+      ],
+      [
+       "@loading/ossus:imhar_canyon",
+       "loading/generic/generic_swg",
+       "@loading/ossus_n:imhar_canyon"
+      ]
+     ],
+     "pictures_exist_in_client": true,
+     "pictures": [
+      "loading/generic/generic_swg"
+     ],
+     "strings": [
+      "string/en/loading/ossus.stf",
+      "string/en/loading/ossus_n.stf"
+     ]
+    },
+    "string/en/ossus_region_names.stf": {
+     "round_trip": true,
+     "entries": 6
+    },
+    "string/en/loading/ossus.stf": {
+     "round_trip": true,
+     "entries": 4
+    },
+    "string/en/loading/ossus_n.stf": {
+     "round_trip": true,
+     "entries": 4
+    }
+   }
+  },
+  "ossus-sites.json": {
+   "starport_pad": {
+    "x": 0.0,
+    "y": -3600.0,
+    "radius": 160.0,
+    "height": 50.3,
+    "flat_inner_radius": 88,
+    "probe": {
+     "centre": 50.3,
+     "mean": 50.3,
+     "spread": 0.0,
+     "steepest_10m_step": 0.76,
+     "samples": 197
+    },
+    "steepest_10m_step_walking_north_out": 2.24
+   },
+   "academy_ruins": {
+    "x": 2016.0,
+    "y": 2848.0,
+    "radius": 130.0,
+    "height": 170.4,
+    "survey_relief_320m": 1.6,
+    "probe": {
+     "centre": 170.4,
+     "mean": 170.47,
+     "spread": 1.04,
+     "steepest_10m_step": 0.18,
+     "samples": 441
+    }
+   },
+   "camps": [
+    {
+     "name": "camp_west_plains",
+     "x": -5344.0,
+     "y": 96.0,
+     "height": 46.1,
+     "survey_relief_192m": 1.6,
+     "probe": {
+      "centre": 45.31,
+      "mean": 45.96,
+      "spread": 3.14,
+      "steepest_10m_step": 0.92,
+      "samples": 113
+     }
+    },
+    {
+     "name": "camp_north_hills",
+     "x": -3744.0,
+     "y": 5792.0,
+     "height": 49.2,
+     "survey_relief_192m": 1.6,
+     "probe": {
+      "centre": 48.53,
+      "mean": 48.6,
+      "spread": 2.89,
+      "steepest_10m_step": 1.03,
+      "samples": 113
+     }
+    },
+    {
+     "name": "camp_east_canyon_rim",
+     "x": 3232.0,
+     "y": -2656.0,
+     "height": 103.8,
+     "survey_relief_192m": 2.9,
+     "probe": {
+      "centre": 104.46,
+      "mean": 104.3,
+      "spread": 1.26,
+      "steepest_10m_step": 0.68,
+      "samples": 113
+     }
+    },
+    {
+     "name": "camp_south_foothills",
+     "x": -6496.0,
+     "y": -4320.0,
+     "height": 58.0,
+     "survey_relief_192m": 2.3,
+     "probe": {
+      "centre": 58.02,
+      "mean": 57.44,
+      "spread": 4.0,
+      "steepest_10m_step": 0.78,
+      "samples": 113
+     }
+    }
+   ],
+   "caves": [
+    {
+     "name": "cave_foothills_west",
+     "x": -2976.0,
+     "y": -4960.0,
+     "height": 51.9,
+     "mouth_faces_deg": 0,
+     "hillside_probe_before_apron": {
+      "centre": 51.93,
+      "mean": 52.34,
+      "spread": 6.6,
+      "steepest_10m_step": 2.92,
+      "samples": 16
+     },
+     "hole_radius": 9.0,
+     "probe": {
+      "centre": 51.9,
+      "mean": 51.95,
+      "spread": 1.71,
+      "steepest_10m_step": 5.17,
+      "samples": 16
+     }
+    },
+    {
+     "name": "cave_foothills_east",
+     "x": 4896.0,
+     "y": -4960.0,
+     "height": 58.5,
+     "mouth_faces_deg": 0,
+     "hillside_probe_before_apron": {
+      "centre": 58.53,
+      "mean": 59.33,
+      "spread": 4.6,
+      "steepest_10m_step": 2.75,
+      "samples": 16
+     },
+     "hole_radius": 9.0,
+     "probe": {
+      "centre": 58.5,
+      "mean": 58.59,
+      "spread": 1.19,
+      "steepest_10m_step": 5.25,
+      "samples": 16
+     }
+    },
+    {
+     "name": "cave_north",
+     "x": 1376.0,
+     "y": 5920.0,
+     "height": 45.7,
+     "mouth_faces_deg": 0,
+     "hillside_probe_before_apron": {
+      "centre": 45.74,
+      "mean": 45.98,
+      "spread": 4.39,
+      "steepest_10m_step": 1.99,
+      "samples": 16
+     },
+     "hole_radius": 9.0,
+     "probe": {
+      "centre": 45.7,
+      "mean": 45.73,
+      "spread": 1.1,
+      "steepest_10m_step": 3.68,
+      "samples": 16
+     }
+    }
+   ],
+   "lake": {
+    "x": -3600.0,
+    "y": 1200.0,
+    "radius": 600.0,
+    "centre_height": 28.5
+   },
+   "benchland": {
+    "cx": 1600.0,
+    "cy": 2600.0,
+    "height": 166.1,
+    "centre_probe": {
+     "centre": 169.29,
+     "mean": 169.32,
+     "spread": 0.83,
+     "steepest_20m_step": 0.37,
+     "samples": 29
+    }
+   },
+   "canyon": {
+    "path": [
+     [
+      3400.0,
+      -2000.0
+     ],
+     [
+      3900.0,
+      -1500.0
+     ],
+     [
+      4300.0,
+      -700.0
+     ],
+     [
+      4800.0,
+      -200.0
+     ],
+     [
+      5300.0,
+      500.0
+     ],
+     [
+      5600.0,
+      1200.0
+     ],
+     [
+      6100.0,
+      1600.0
+     ],
+     [
+      6600.0,
+      2000.0
+     ]
+    ],
+    "floor_height": 44.5,
+    "mesa_height": 100.0,
+    "floor_probe": {
+     "centre": 44.74,
+     "mean": 44.74,
+     "spread": 0.0,
+     "steepest_10m_step": 0.0,
+     "samples": 49
+    },
+    "mesa_top_350m_east_of_path_point_3": 104.6,
+    "wall_profile_east_from_path_point_3_every_20m": [
+     44.7,
+     44.7,
+     44.7,
+     44.7,
+     44.7,
+     44.7,
+     44.7,
+     44.8,
+     48.0,
+     56.8,
+     69.1,
+     82.7,
+     94.6,
+     102.4,
+     104.0,
+     104.1,
+     104.2,
+     104.4,
+     104.7
+    ]
+   },
+   "road": {
+    "points": [
+     [
+      0.0,
+      -3430.0
+     ],
+     [
+      250.0,
+      -2600.0
+     ],
+     [
+      500.0,
+      -1500.0
+     ],
+     [
+      800.0,
+      -400.0
+     ],
+     [
+      1100.0,
+      700.0
+     ],
+     [
+      1300.0,
+      1500.0
+     ],
+     [
+      1976.0,
+      2698.0
+     ]
+    ],
+    "pieces": 16,
+    "width": 12.0,
+    "max_road_vs_ground_m": 0.95,
+    "mean_road_vs_ground_m": 0.21
+   },
+   "water_height": 38.5,
+   "units": "metres, world x east / y north, heights from the Core3 port (server view)"
+  }
+ },
+ "summary": {
+  "terrain_verdict": "PASS",
+  "terrain_bytes": 27322,
+  "round_trip": true,
+  "core3_notes_unexpected": [],
+  "structure_pairs_not_in_stock": [],
+  "references_missing": [],
+  "height_survey": {
+   "grid_step_m": 32.0,
+   "samples": 262144,
+   "min": 23.9,
+   "max": 374.2,
+   "mean": 84.5,
+   "below_water_share": 0.054,
+   "water_height": 38.5
+  },
+  "tables": {
+   "misc/planet_crc_string_table.iff": true,
+   "datatables/travel/travel.iff": true,
+   "string/en/planet_n.stf": true,
+   "datatables/player/waypoint_planets.iff": true
+  },
+  "env_families_match_terrain": true,
+  "env_referenced_files_exist": true,
+  "staged_file_count": 15
+ }
+}

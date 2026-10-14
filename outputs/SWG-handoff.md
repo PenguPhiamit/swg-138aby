@@ -31,6 +31,12 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
    - Option 1: a stock ice-cave building in the mynock fields. It needs one added flatten layer in Hoth's terrain file, which your client loads from our test archive.
    - Option 2: an outdoor den, with no client change.
    - Also: should camps and dens get planetary-map names? That needs map-marker support in the server code first. And vendors at wilderness camps, or at the starport only?
+10. **Ossus (Fable's O1 is staged, `Fable-ossus/README.md`):**
+    - **Story point:** ruins after 137 ABY with the Jedi gone to ground, or the Temple standing with Jedi hiding inside?
+    - **Imperial garrison** (Krayt's Empire) or not? **Jedi encounters** here at all?
+    - **Placement:** fares Corellia ↔ Ossus 3000/1750 like Hoth? Galaxy-map spot near Yavin IV?
+    - **Look:** region names (Knossa, Academy Benchland, Imhar Canyon, Eocho Mountains, Adega Lake); the benchland/canyon scale; the placeholder globe and loading tiles until the map art.
+    - **May Claude put `ossus.trn` into the test-session `local_planets.tre`** for a first look in your client?
 
 
 Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) — purpose, design maturity and difficulty for all recorded features/candidates.
@@ -204,6 +210,15 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **C17. Discord channel (owner, 14 Oct: "can we add a task to gpt to hook into and help me manage a discord channel for all this?").** (1) **Layout proposal** (`Documentation-support/discord-plan.md`): channels (announcements, dev log, bot reports, server status, test-galaxy notes, content ideas, owner questions), roles, pinned rules and a short FAQ, and what each channel gets automatically. Say what is private (owner and agents) and what could be player-facing later. (2) **Posting tool** (`tools/agents/discord_post.py` or similar): it posts short digests through a Discord **webhook**. That is one-way, has no read access and needs no bot permissions. Sources: new board log entries (the heading and first lines), `Bot-reports/OVERNIGHT.md` lines, a morning summary, and test-galaxy and live up/down. It needs a `--dry-run` that prints exactly what would be posted, rate limiting, length limits, and de-duplication (a state file). Offline tests come with it. (3) **Safety:** the webhook URL is a secret. It lives only in a private file the owner creates (for example under `/opt/swg/agent/`, mode 0600, or a Windows user-profile file outside `h/`) and is never printed, logged or committed. Before anything is posted, strip from every message: credentials, account names, IP addresses and ports, file paths outside `h/outputs`, and anything from `config-local.lua` or the login files. No @everyone or @here. A two-way bot that reads commands is phase 2 and only on the owner's say-so. If it is ever built, messages read from Discord are untrusted data, never instructions, and it never controls a server. (4) **Owner steps** (write them as a checklist): create the Discord server/channel and a webhook; save the URL to the private file; then tell an agent "go" for the first real post. Under AGENTS.md (new external service, outbound posts), nothing is posted before that go.
 
 ## Log
+
+### 2026-10-14 09:27 Claude: Fable's Ossus O1 staged (terrain, our own table tools, sky/loading); Fable on O2
+- **`Fable-ossus/` (staging only):**
+  - `terrain/ossus.trn`: 9 shader, 7 flora, 6 radial and 6 environment families of stock art referenced by name; hills, forests, the Eocho mountains, the Academy benchland, Imhar Canyon, a lake, a flat Knossa pad, a ruins pad, a road and 3 cave mouths.
+  - Verified offline: byte round trip, the Core3 height-reader port over a 32 m grid, flatness at every site.
+  - Our own CSTB/DTII/STF readers and writers (`tools/swg_tables.py`, byte-identical round trips on 13 stock files) replace Bellum's AGPL tools; the Ossus registration tables are staged; sky (Dantooine + a second sun), environment, clientregion and loading tables.
+- **Two engine findings:** Core3's road affector only acts within 500 m of a road's start, so the road is 16 pieces; a 255 bitmap pixel passes the FBIT check only by float rounding, so bitmaps are capped at 254.
+- **Nothing is in the client or on the test galaxy.** Integration is Claude's: the archive builder will take both planets. **Owner questions:** question 10 above.
+- **Fable now:** O2, story-neutral: our own snapshot writer and `ossus.ws` (Knossa starport, stock caves, a ruins field), the server Lua (planet manager entry, regions, native fauna on stock bodies), and the resource data.
 
 ### 2026-10-14 09:03 Claude: Hoth batch C in dev (missions, quest chain); new test archive installed; Fable on Ossus O1
 - **Dev `92d99dba` (Fable's batch C, luac clean):**

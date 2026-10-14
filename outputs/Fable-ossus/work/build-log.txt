@@ -1,0 +1,12 @@
+bitmaps: {'terrain/ossus_academy.tga': {'bytes': 65554, 'resolution': 256, 'round_trip_identical': True, 'core3_loader_accepts': True, 'max_value_on_frame_edge': 0}, 'terrain/ossus_canyon.tga': {'bytes': 262162, 'resolution': 512, 'round_trip_identical': True, 'core3_loader_accepts': True, 'max_value_on_frame_edge': 0}, 'terrain/ossus_mesa.tga': {'bytes': 65554, 'resolution': 256, 'round_trip_identical': True, 'core3_loader_accepts': True, 'max_value_on_frame_edge': 0}}
+pass 0 (2 s): water 38.5 m (p6 of the plains), pad 50.3 m, benchland 166.1 m (ground 56.1 + 110.0), mesa 100.0 m, canyon floor 44.5 m
+pass 1 (5 s): surveyed 65536 cells at 64 m
+sites: ruins {'x': 2016.0, 'y': 2848.0, 'radius': 130.0, 'height': 170.4, 'survey_relief_320m': 1.6}; camps [('camp_west_plains', -5344.0, 96.0), ('camp_north_hills', -3744.0, 5792.0), ('camp_east_canyon_rim', 3232.0, -2656.0), ('camp_south_foothills', -6496.0, -4320.0)]; caves [('cave_foothills_west', -2976.0, -4960.0), ('cave_foothills_east', 4896.0, -4960.0), ('cave_north', 1376.0, 5920.0)]; road 16 pieces
+wrote C:\Users\Pengw\Documents\Codex\2026-10-13\h\outputs\Fable-ossus\staged\client\terrain\ossus.trn (27322 bytes)
+1. byte round trip: IDENTICAL
+2. Core3-order re-read: version 0014, 36 top layers, 3 notes (0 unexpected); rules {'LAYR': 44, 'AHFR': 5, 'ASCN': 15, 'AENV': 6, 'AFDN': 16, 'AFDF': 12, 'AFSC': 16, 'AFSN': 13, 'FFRA': 1, 'BREC': 4, 'FHGT': 4, 'FBIT': 3, 'AHCN': 9, 'FSLP': 2, 'BCIR': 11, 'AROA': 16, 'BPLN': 1, 'AEXC': 3}
+3. structure vs stock tutorial/simple/tatooine/dantooine + MTG hoth: 0 parent/child pairs not seen
+4. references ({'shaders': 33, 'flora': 37, 'radial': 16, 'bitmaps': 3}): missing none
+5. heights on the 32 m grid: {'grid_step_m': 32.0, 'samples': 262144, 'min': 23.9, 'max': 374.2, 'mean': 84.5, 'below_water_share': 0.054, 'water_height': 38.5}
+6. sites: pad spread 0.0 m; ruins spread 1.04 m; camps spread [3.14, 2.89, 1.26, 4.0]; caves [1.71, 1.19, 1.1]; road vs ground max 0.95 m
+VERDICT: PASS (30 s)

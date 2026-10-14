@@ -1,0 +1,161 @@
+{
+ "files": {
+  "terrain/environment/ossus.iff": {
+   "stock_round_trips": true,
+   "chunks": [
+    "NSKY",
+    "STAR",
+    "SUN ",
+    "SSUN",
+    "MOON",
+    "SMOO",
+    "CELS",
+    "CELS"
+   ],
+   "bytes": 433,
+   "ssun_bytes_identical_to_tatooine": true,
+   "rest_identical_to_dantooine": true
+  },
+  "datatables/environment/ossus.iff": {
+   "rows": 30,
+   "families": [
+    "ossus_benchland",
+    "ossus_canyon",
+    "ossus_forest",
+    "ossus_knossa",
+    "ossus_mountains",
+    "ossus_plains"
+   ],
+   "weather_rows_per_family": 5,
+   "families_match_terrain": true,
+   "columns": 25,
+   "source_families": {
+    "ossus_plains": "main_base",
+    "ossus_forest": "second_stepes",
+    "ossus_mountains": "stepes",
+    "ossus_benchland": "jedi_temple",
+    "ossus_canyon": "dantari1",
+    "ossus_knossa": "outpost"
+   },
+   "referenced_files_exist": true,
+   "missing": []
+  },
+  "datatables/clientregion/ossus.iff": {
+   "rows": [
+    [
+     "@ossus_region_names:knossa",
+     0.0,
+     -3600.0,
+     300.0
+    ],
+    [
+     "@ossus_region_names:academy_benchland",
+     1600.0,
+     2600.0,
+     1300.0
+    ],
+    [
+     "@ossus_region_names:imhar_canyon",
+     5150.0,
+     100.0,
+     1400.0
+    ],
+    [
+     "@ossus_region_names:eocho_mountains",
+     0.0,
+     -6600.0,
+     3200.0
+    ],
+    [
+     "@ossus_region_names:adega_lake",
+     -3600.0,
+     1200.0,
+     700.0
+    ],
+    [
+     "@ossus_region_names:ossus",
+     0.0,
+     0.0,
+     9000.0
+    ]
+   ],
+   "columns": [
+    "Name",
+    "X",
+    "Z",
+    "Radius"
+   ],
+   "names_file": "string/en/ossus_region_names.stf",
+   "names": [
+    [
+     "knossa",
+     "Knossa"
+    ],
+    [
+     "academy_benchland",
+     "the Academy Benchland"
+    ],
+    [
+     "imhar_canyon",
+     "Imhar Canyon"
+    ],
+    [
+     "eocho_mountains",
+     "the Eocho Mountains"
+    ],
+    [
+     "adega_lake",
+     "Adega Lake"
+    ],
+    [
+     "ossus",
+     "Ossus"
+    ]
+   ]
+  },
+  "datatables/loading/ossus.iff": {
+   "rows": [
+    [
+     "@loading/ossus:ossus",
+     "loading/generic/generic_swg",
+     "@loading/ossus_n:ossus"
+    ],
+    [
+     "@loading/ossus:knossa",
+     "loading/generic/generic_swg",
+     "@loading/ossus_n:knossa"
+    ],
+    [
+     "@loading/ossus:academy_benchland",
+     "loading/generic/generic_swg",
+     "@loading/ossus_n:academy_benchland"
+    ],
+    [
+     "@loading/ossus:imhar_canyon",
+     "loading/generic/generic_swg",
+     "@loading/ossus_n:imhar_canyon"
+    ]
+   ],
+   "pictures_exist_in_client": true,
+   "pictures": [
+    "loading/generic/generic_swg"
+   ],
+   "strings": [
+    "string/en/loading/ossus.stf",
+    "string/en/loading/ossus_n.stf"
+   ]
+  },
+  "string/en/ossus_region_names.stf": {
+   "round_trip": true,
+   "entries": 6
+  },
+  "string/en/loading/ossus.stf": {
+   "round_trip": true,
+   "entries": 4
+  },
+  "string/en/loading/ossus_n.stf": {
+   "round_trip": true,
+   "entries": 4
+  }
+ }
+}
