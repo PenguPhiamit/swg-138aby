@@ -643,8 +643,9 @@ def run_job(path, group_name, spec, results, deadline=None, assignment=None):
             if isinstance(item, tuple) and item[1][0] in ('incapacitated', 'dead'):
                 group.note(f'before the run {item[0]} was {item[1][0]}; now {item[1][1]}')
         group.checkpoint()
-        if assignment and assignment.get('fallback') and 'census' not in path.name and 'crafting' not in path.name and group.leader.status().get('planet') != 'tatooine':
-            group.note('BLOCKED: fallback requires Tatooine; Hoth spawn exploration is held')
+        from fallback_scenarios import recover_home
+        if assignment and assignment.get('fallback') and not recover_home(group):
+            group.note('BLOCKED: return-home recovery incomplete; fallback deferred')
         else:
             module.run(group)
         group.checkpoint()

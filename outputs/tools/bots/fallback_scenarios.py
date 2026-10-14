@@ -2,6 +2,48 @@
 import math
 
 
+def recover_home(g, ride=None):
+    """Return every stranded member by ordinary shuttles; unknown planets stay blocked.
+
+    Travel is checkpointed by the body API/run control. No teleport or exploration.
+    Re-read position after each leg: a failed ride must never start the next one.
+    """
+    if ride is None:
+        import importlib.util
+        from pathlib import Path
+        path = Path(__file__).parent / 'scenarios/esk-hoth.py'
+        spec = importlib.util.spec_from_file_location('fallback_home_travel', path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        ride = module.ride
+    eisley = ('tatooine', 'Mos_Eisley_Starport', (3599.9, -4780.4))
+    coronet = ('corellia', 'Coronet_Starport', (-66.8, -4711.3))
+    hoth = ('hoth', 'Scavenger_Starport', (20.3, -1982.2))
+
+    def member(bot):
+        g.checkpoint()
+        planet = bot.status().get('planet')
+        if planet == 'tatooine':
+            return True
+        if planet not in ('hoth', 'corellia'):
+            g.note(f'BLOCKED: {bot.first} recovery has no verified home route from {planet!r}')
+            return False
+        for origin, destination in ((hoth, coronet), (coronet, eisley)):
+            if bot.status().get('planet') != origin[0]:
+                continue
+            g.checkpoint()
+            if not ride(g, bot, origin, destination):
+                g.note(f'BLOCKED: {bot.first} return-home leg {origin[0]} -> {destination[0]} failed')
+                return False
+            if bot.status().get('planet') != destination[0]:
+                g.note(f'BLOCKED: {bot.first} return-home arrival was not confirmed')
+                return False
+        return g.check(f'{bot.first}: recovered to Tatooine', bot.status().get('planet') == 'tatooine')
+
+    results = g.parallel(*[lambda bot=bot: member(bot) for bot in g.bots])
+    return all(result is True for result in results)
+
+
 def outdoor(g):
     bot = g.leader
     s = bot.status()

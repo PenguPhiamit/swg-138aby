@@ -26,11 +26,25 @@ def run(g):
     events = nima.slash('leash', 'Dorn', wait=1)
     g.check('leash starts', any('Leashed to' in str(e.get('text')) for e in events), [e.get('text') for e in events if e.get('text')])
     start = dorn.status()
+    if not all(isinstance(start.get(k), (int, float)) for k in ('x', 'y')):
+        g.check('leader position available before leash walk', False, start)
+        nima.slash('leash', 'off', wait=1)
+        return
     walk_started = time.time() - nima.started
     end = dorn.walk(start['x'], start['y'] + 30)  # Nima stands still; the leash should hop her after him
+    # A failed walk returns an error dict, not a position. Do not dereference it or keep the leash active.
+    if not isinstance(end, dict) or not end.get('ok', True) or not end.get('arrived') or not all(
+            isinstance(end.get(k), (int, float)) for k in ('x', 'y')):
+        g.check('leader leash test walk arrived', False, end)
+        nima.slash('leash', 'off', wait=1)
+        return
     gap, deadline = 99.0, time.time() + 20
     while time.time() < deadline:
         spot = nima.status()
+        if not all(isinstance(spot.get(k), (int, float)) for k in ('x', 'y')):
+            g.check('follower position available during leash test', False, spot)
+            nima.slash('leash', 'off', wait=1)
+            return
         gap = ((spot['x'] - end['x']) ** 2 + (spot['y'] - end['y']) ** 2) ** 0.5
         if gap < 10:
             break
