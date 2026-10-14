@@ -70,6 +70,18 @@ def choose_job(options):
                  if 'find her' in str(value).lower() or 'player_1_1' in str(value)), None)
 
 
+def quest_waypoint(before, after, target):
+    """None means telemetry unavailable; [] means observed but no matching new marker."""
+    if not isinstance(before.get('waypoints'), list) or not isinstance(after.get('waypoints'), list):
+        return None
+    old = {str(p.get('oid')): p for p in before['waypoints']}
+    return [p for p in after['waypoints'] if p != old.get(str(p.get('oid')))
+            and p.get('planet') == 'hoth' and p.get('active') is True
+            and all(isinstance(p.get(k), (int, float)) and not isinstance(p[k], bool)
+                    for k in ('x', 'y'))
+            and math.hypot(p['x'] - target['x'], p['y'] - target['y']) <= 5]
+
+
 def preflight(g):
     inventories = [(member, member.inventory().get('items', [])) for member in g.bots]
     missing = [kind for kind in ('mineral', 'chemical', 'gas', 'moisture', 'flora', 'liquid')
@@ -222,10 +234,16 @@ def run(g):
                 g.note('BLOCKED: Vell first-job option unavailable; quest state retained, no reset')
             else:
                 previous_ria = {o['oid'] for o in bot.locate('Ria', 1000, x=44, y=-2010)}
+                before_waypoints = bot.status()
                 bot.choose(index, wait=4)
                 ria = [o for o in bot.locate('Ria', 1000, x=44, y=-2010) if o['oid'] not in previous_ria]
                 g.check('Ria spawned 600–900 m from Vell', bool(ria) and 600 <= math.hypot(ria[0]['x'] - 44, ria[0]['y'] + 2010) <= 900, ria)
-                g.note('BLOCKED: quest waypoint telemetry unavailable; spawned-NPC position is not waypoint proof')
+                if len(ria) == 1:
+                    markers = quest_waypoint(before_waypoints, bot.status(), ria[0])
+                    if markers is None:
+                        g.note('BLOCKED: quest waypoint telemetry unavailable; spawned-NPC position is not waypoint proof')
+                    else:
+                        g.check('new active Hoth quest waypoint matches Ria', bool(markers), markers)
                 if len(ria) != 1:
                     g.note('BLOCKED: cannot identify exactly one newly spawned quest target; no unrelated target touched')
                 else:

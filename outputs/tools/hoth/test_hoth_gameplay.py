@@ -1,10 +1,19 @@
 """Offline acceptance evidence checks; no game/network access."""
 import unittest
-from hoth_gameplay_check import unit_gain, named, choose_job, preflight
+from hoth_gameplay_check import unit_gain, named, choose_job, preflight, quest_waypoint
 from types import SimpleNamespace
 
 
 class Evidence(unittest.TestCase):
+    def test_waypoint_requires_new_active_matching_hoth_marker(self):
+        target = {'x': 20, 'y': 30}
+        marker = dict(oid=12, x=20, y=30, planet='hoth', active=True)
+        self.assertIsNone(quest_waypoint({}, {}, target))
+        self.assertEqual(quest_waypoint({'waypoints': []}, {'waypoints': [marker]}, target), [marker])
+        self.assertEqual(quest_waypoint({'waypoints': [marker]}, {'waypoints': [marker]}, target), [])
+        for changes in ({'active': False}, {'planet': 'corellia'}, {'x': 200}, {'y': True}):
+            self.assertEqual(quest_waypoint({'waypoints': []}, {'waypoints': [marker | changes]}, target), [])
+
     def test_missing_kit_and_tools_block_before_travel(self):
         notes = []
         g = SimpleNamespace(bots=[SimpleNamespace(inventory=lambda: {'items': []})], note=notes.append)
