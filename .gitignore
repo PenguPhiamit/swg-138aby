@@ -68,3 +68,8 @@ outputs/Bot-reports/*/*.json
 outputs/Bot-reports/runs/*.json
 outputs/Bot-reports/runs/STOP
 outputs/Bot-reports/runs/ACTIVE
+
+# ---- records of and scripts for the excluded SWG-Source material (AGENTS.md, Source and rights) ----
+outputs/Content-catalogue/Cut-content-and-backports/
+work/audit_backport_candidates.py
+work/prepare_cut_content_selection.py
