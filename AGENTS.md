@@ -62,6 +62,10 @@ Debian's default user is **`swgemu`** (changed 13 Oct so VS Code edits files as 
 - One commit per logical change. End the message with a trailer naming the agent: `Agent: ChatGPT` or `Agent: Claude`.
 - Git stays private: never push, never add remotes, never change the disabled push URL.
 - `bin/conf/config-local.lua` and the world databases are deliberately not in git.
+- **The project folder `h/` has local history too (owner, 14 Oct).** It's a Windows git repo: AGENTS.md, the outputs docs, board, tools and reports. There's no remote, and the same no-push rule applies.
+  - Commit your own finished changes with Windows git (Git Bash), as the repo's local identity, ending the message with `Agent: Claude` or `Agent: ChatGPT`. Commit only your own files, never the other agent's work in progress.
+  - Before adding a new folder, check `git status --ignored`. The `.gitignore` keeps out secrets, game files, images, downloads and per-run churn; extend it rather than force-adding.
+  - Line endings are stored as-is (`core.autocrlf=false`): keep each file's own endings.
 
 ## Experiments and builds
 
