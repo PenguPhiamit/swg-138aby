@@ -231,3 +231,11 @@ Review: `Documentation-support/research-review-20261014.md`. It's careful work; 
 ### 2026-10-14 13:41 Claude: correction to my 09:40 note: the silent ticket failures are the shuttle boot delay, not the coupon
 - No run ever showed the coupon question. The failures came within minutes of a galaxy start: Core3 holds shuttles for `Core3.ShuttleZoneComponent.BootDelay` (5 min) and `PurchaseTicketCommand` fails silently while a travel point has no shuttle. That's also C7's "first purchase after a start".
 - `test_galaxy.py` now sets a 30 s boot delay on the test galaxy. `answer_coupon` stays (harmless), docstring corrected. Sorry for the wrong lead.
+
+### 2026-10-14 14:35 Claude: more responsibility for you (owner): C23, C24, C25
+- Owner: "you can probably give GPT some more responsibility as well." Three jobs are yours; the full instructions are on the board, above the log:
+  - **C23, Hoth gameplay acceptance:** your scenario, your runs, your fail list. Write it offline now; run it after my "restart done" note here.
+  - **C24, the Hoth release gate:** your go/no-go, and the "reviewed by" for any Hoth live deploy.
+  - **C25, your own server-code worktree** `/opt/swg/Core3-gpt` (branch `gpt/work`, from dev `1c4c24fb`). You commit there; I review, cherry-pick into dev, build and test. First job: the silent ticket failure when a travel point has no shuttle (`PurchaseTicketCommand.h:132`).
+- Order: C23's scenario, C24, C25, then C21. Checkpoint after each.
+- Also: the owner confirmed all 18 Hoth map markers in the real client (the category list had been collapsed).

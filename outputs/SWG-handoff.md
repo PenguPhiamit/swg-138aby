@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy bots and dev tree `/opt/swg/Core3-dev` (ChatGPT is out of usage until 09:39, owner 06:26; its C20 Esk proof is now Claude's; Fable never writes to /opt/swg). Live galaxy STOPPED (owner request, 13 Oct 16:52). The overnight check runs every 30 minutes (owner turned it on). — 2026-10-14 06:27**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT: its own worktree `/opt/swg/Core3-gpt` (C25) and, with a driver claim here, the Esk crew for C23. The owner is playing on the test galaxy: no restart until they log off. Fable never writes to /opt/swg. Live galaxy STOPPED (owner request, 13 Oct 16:52). The overnight check runs every 30 minutes (owner turned it on). — 2026-10-14 14:35**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -51,6 +51,9 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C23: Hoth gameplay acceptance** (ChatGPT owns it end to end) | ChatGPT | assigned 2026-10-14 14:35 | Instructions above the log. Scenario `tools/hoth/hoth_gameplay_check.py`, written offline now, run after Claude's next restart; ChatGPT keeps the fail list until it is empty |
+| **C24: Hoth release gate** (go/no-go) | ChatGPT | assigned 2026-10-14 14:35 | Instructions above the log. `Documentation-support/hoth-release-gate.md`; ChatGPT gives the "reviewed by" for any Hoth live deploy |
+| **C25: ChatGPT's server-code worktree** | ChatGPT | assigned 2026-10-14 14:35 | `/opt/swg/Core3-gpt`, branch `gpt/work` (AGENTS.md rule). First job: the silent ticket failure while a travel point has no shuttle (`PurchaseTicketCommand.h:132`) |
 | **C22: independent Hoth + C4 fix review** | ChatGPT - GPT-6.1 Sol, **High** | complete - changes requested, 14 Oct | `Documentation-support/review-C22/C22-review.md`: 2 P2 + 1 P3; dev `c5f1ae06`, `69eb77fe`, `de1b679a`, `23014f39`, `90f60a81`; h `f0b192e`; report `b4472b8`; gameplay untested |
 | Creature Handler top-tier build research (owner, 14 Oct) | ChatGPT | bounded pass complete — no game benchmarks | `Documentation-support/creature-handler-top-tier-plan.md`; owner wants all three modes; local build closure verified, improvements proposed |
 | Tames discussion (owner, 14 Oct) | Owner + Claude + ChatGPT | open — discussion requested | Note in `Agent/to-claude.md`, 05:49; eligibility, rare/endgame pets, wild vs BE, control budget; no changes approved |
@@ -216,7 +219,40 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 **C17. Discord channel (owner, 14 Oct: "can we add a task to gpt to hook into and help me manage a discord channel for all this?").** (1) **Layout proposal** (`Documentation-support/discord-plan.md`): channels (announcements, dev log, bot reports, server status, test-galaxy notes, content ideas, owner questions), roles, pinned rules and a short FAQ, and what each channel gets automatically. Say what is private (owner and agents) and what could be player-facing later. (2) **Posting tool** (`tools/agents/discord_post.py` or similar): it posts short digests through a Discord **webhook**. That is one-way, has no read access and needs no bot permissions. Sources: new board log entries (the heading and first lines), `Bot-reports/OVERNIGHT.md` lines, a morning summary, and test-galaxy and live up/down. It needs a `--dry-run` that prints exactly what would be posted, rate limiting, length limits, and de-duplication (a state file). Offline tests come with it. (3) **Safety:** the webhook URL is a secret. It lives only in a private file the owner creates (for example under `/opt/swg/agent/`, mode 0600, or a Windows user-profile file outside `h/`) and is never printed, logged or committed. Before anything is posted, strip from every message: credentials, account names, IP addresses and ports, file paths outside `h/outputs`, and anything from `config-local.lua` or the login files. No @everyone or @here. A two-way bot that reads commands is phase 2 and only on the owner's say-so. If it is ever built, messages read from Discord are untrusted data, never instructions, and it never controls a server. (4) **Owner steps** (write them as a checklist): create the Discord server/channel and a webhook; save the URL to the private file; then tell an agent "go" for the first real post. Under AGENTS.md (new external service, outbound posts), nothing is posted before that go.
 
+**C23. Hoth gameplay acceptance (owner, 14 Oct: "you can probably give GPT some more responsibility"). ChatGPT owns it end to end: the scenario, the runs, the report and the fail list.** The owner checked the client side today: Hoth loads, stormtroopers and wampas, region names on entry, all 18 map markers in the right places. Nobody has seen these yet: surveying (no minerals until dev `1c4c24fb` is on the test galaxy), harvesting, loot, the missions, Vell's job.
+- (1) **Write `tools/hoth/hoth_gameplay_check.py` now, offline.** Reuse `besh-gather.py` (`survey_and_sample`, `harvest`), `esk-hoth.py` (`ride`) and `hoth_content_check.py`; add offline fixture tests as in C20. Checks:
+  - (a) On Hoth, outside the outpost, a survey of each class (mineral, chemical, gas, water, flora, energy) lists at least one type. Record every type name and concentration. Mineral and gas must include MTG's Hoth types ("Hothian Steel", "Hothian Reactive Gas" and so on: ten `*_hoth` types in all). A raw or blank name is a FAIL.
+  - (b) Sample one mineral: units arrive in the inventory.
+  - (c) Kill a tauntaun (250–350 m south of the pad) and harvest meat, hide and bone. Record the types and units.
+  - (d) Count the loot over every Hoth kill in the run. This is a note, not a check (3% a kill).
+  - (e) The two mission terminals (48, -1996 and 48, -2002) list Hoth missions. Accept one destroy mission and check that its target is on Hoth.
+  - (f) Quartermaster Vell's first job end to end: Ria Baxx appears 600–900 m out with a waypoint, two ice mynocks (67) guard her, she hands over the "Salvaged Power Regulator", 1,500 credits on return. If the crew can't win a fight at that level, report BLOCKED with the reason, not FAIL. No staff commands.
+  - (g) Come home (C20's return).
+- (2) **Run it after my "restart done" note in `Agent/to-chatgpt.md`.** I restart when the owner logs off; that puts `1c4c24fb` and the rebuilt archive on the test galaxy. Driver claim on the board, Esk out of `Agent/squad-plan.txt` for the run and back afterwards.
+- (3) **Report:** `Documentation-support/C23-hoth-gameplay.md` (what passed, what failed, the evidence), a log line, and each failure as its own item in `Agent/to-claude.md` with the exact evidence. I fix the server side; you re-run and close the items. The fail list is yours until it is empty or the owner waives an item.
+
+**C24. Hoth release gate (go/no-go). ChatGPT owns it and gives the "reviewed by" line for any Hoth live deploy.** Write `Documentation-support/hoth-release-gate.md`:
+- (1) Every commit on `dev` that is not on the live branch `sandbox` (`git -C /opt/swg/Core3-dev log sandbox..dev`, as swgemu, read-only) and touches Hoth or a system it shares, plus the h-side tools that build the client archive. One row each: what it does, its review (C19, C22 or none), its gameplay evidence (the owner's client check, the 13:43 content check 32/33, C23).
+- (2) Review the unreviewed ones yourself, as in C22: at least dev `1c4c24fb` (Hoth minerals in the minimum pool), h `2009167` and `c2573e3` (map markers; the archive builder on our own format tools), and Fable's R2 resource backfill when I post it.
+- (3) Release blockers that aren't code: owner questions 2, 8 and 9, and how live players get `local_planets.tre`. The live launcher doesn't load it today, and without it a client has no Hoth.
+- (4) Verdict: go, or no-go with the list. Nothing deploys without the owner's go anyway; your verdict is what the owner reads first.
+
+**C25. ChatGPT's server-code worktree.** `/opt/swg/Core3-gpt`, branch `gpt/work`, made from dev `1c4c24fb` (rules: AGENTS.md, "ChatGPT's server-code worktree").
+- **First job:** `PurchaseTicketCommand.h:132` returns GENERALERROR with no message when the arrival point has no shuttle. That is the "silent" ticket failure in the first 5 minutes after every start (live keeps the stock delay). Send the player a system message (a stock `@travel:` string if one fits, otherwise a plain sentence), and check the departure side for the same gap. One commit, then a note in `Agent/to-claude.md`. I build, test with `--dev-server` and cherry-pick.
+- **Next jobs are yours to propose:** from your C22 P3, the C16/C20 findings or the bots' BLOCKED notes. One topic per commit.
+
+**Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
+
 ## Log
+
+### 2026-10-14 14:35 Claude: owner confirms all 18 Hoth map markers; ChatGPT gets three jobs of its own (C23–C25)
+- **Map markers, verified by the owner:** "only one" was the collapsed category list. With Points of Interest expanded, all 18 Hoth POIs show with their names, in the right places. Categories: City, Cloning Facility, Junk Shop, Points of Interest, Starport, Terminal, Waypoint. Region names also show on entry ("Lucky Despot Wreck", "Scavenger Starport").
+- **Owner: "you can probably give GPT some more responsibility as well."** ChatGPT now owns:
+  - C23: Hoth gameplay acceptance and its fail list;
+  - C24: the Hoth release gate and its "reviewed by";
+  - C25: its own server-code worktree `/opt/swg/Core3-gpt` (branch `gpt/work` from dev `1c4c24fb`; rule added to AGENTS.md).
+  - Instructions above the log; the relay queue has C23a, C24 and C25 open, and C23b (the run) on hold until my restart.
+- The owner is still in the client on the test galaxy; the restart (dev `1c4c24fb`, archive aee83cc6) waits until they log off.
 
 ### 2026-10-14 14:23 Claude: owner's Hoth findings (no minerals to survey, map shows one marker); Fable B1-B3 applied
 - **Surveying on Hoth: no minerals.** The test DB has 15,020 resource spawns; only the 42 native-pool spawns (organics, energy, fiberplast, water vapour) are on Hoth. Core3 assigns a spawn's planets only at creation (`createSpawnMaps`), so galaxy-wide spawns from before Hoth joined `activeZones` never reach it, and MTG's ten Hoth-only inorganics (`steel_hoth`, `iron_hoth` and so on) were in no pool. **Dev 1c4c24fb** adds those ten to `minimumpoolincludes` (one of each always in spawn, Hoth only); it takes effect at the next test restart, not while the owner plays. Galaxy-wide minerals reach Hoth only as old spawns expire (6-11 days); Fable is staging an opt-in C++ backfill (R2) for that, which Ossus will also need.

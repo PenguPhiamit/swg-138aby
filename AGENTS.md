@@ -121,6 +121,7 @@ Before downloading, importing, deploying, or acting in-game, check:
      - Git only as swgemu, never as root in `/opt/swg/Core3`.
      - Never the live galaxy.
      - **Claude leads (owner, 14 Oct):** Claude keeps the dev tree `/opt/swg/Core3-dev`, dev builds and test-galaxy restarts unless the board hands them over. ChatGPT asks in `Agent/to-claude.md`.
+     - **ChatGPT's server-code worktree (owner, 14 Oct: "give GPT some more responsibility"):** `/opt/swg/Core3-gpt`, branch `gpt/work` (made from `dev`), is ChatGPT's. ChatGPT edits and commits there as swgemu, one topic per commit, each message ending `Agent: ChatGPT`, and rebases on `dev` itself. Claude never edits it; ChatGPT never edits `/opt/swg/Core3-dev`. Claude reviews each commit, cherry-picks it into `dev`, then builds and tests it. No cmake/make in the worktree (the test galaxy and the dev build share the RAM): ask for a build in `Agent/to-claude.md`.
      - ChatGPT drives bots only with the driver claim on the board, and only outside overnight rounds, or after taking its groups out of `Agent/squad-plan.txt`; it puts them back when done.
 3. **Honest reporting.** Report what was actually verified versus assumed. Label things "untested" and say plainly when something failed. Never claim a test you didn't run.
 4. **Fair play in-game.** As Kael: no harassing or exploiting other players' characters, no griefing, no chat spam, no using staff commands except as `Agent/AGENT-GUIDE.md` allows. Bugs you find are reported, not exploited.
