@@ -2,7 +2,7 @@
 walk a short loop on the snow, and fly back to Corellia. Hoth is reached only from Corellia (travel.iff in
 local_planets.tre). Coordinates: the landing points in planet_manager.lua; the outpost is MTG's snapshot at 0 -2000."""
 import json, time
-from ticket_pages import newest_ticket_list
+from ticket_pages import newest_ticket_list, answer_coupon
 
 GROUP = 'Esk'
 # planet, point (as /purchaseTicket wants it), landing spot
@@ -42,7 +42,10 @@ def ride(g, bot, origin, destination):
     previous = {str(i.get('oid')) for i in bot.inventory().get('items', [])}
     tickets, texts = [], []
     for attempt in range(3):  # the first purchase after a galaxy start can fail silently (C7 finding)
+        pages_before = bot.sui_pages().get('pages', [])
         bot.slash('purchaseTicket', f'{origin[0]} {origin[1]} {destination[0]} {destination[1]} single', wait=2)
+        if answer_coupon(bot, pages_before):
+            texts.append('answered the new-player travel coupon question (used the coupon)')
         for _ in range(5):
             texts += [e.get('text', '') or e.get('reason', '') for e in bot.inbox if e.get('event') in ('system', 'command_failed')]
             tickets = [i for i in bot.inventory().get('items', []) if 'ticket' in str(i.get('name')).lower() and i.get('oid') is not None

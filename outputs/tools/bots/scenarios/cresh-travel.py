@@ -1,7 +1,7 @@
 """Cresh, starter: Ilsa asks the big game hunter Rhea Tannor about the world bosses at the starport while Cresh
 rides the shuttle Mos Eisley <-> Bestine and back (from whichever is nearer), and Kor looks for a mission terminal."""
 import json, time
-from ticket_pages import newest_ticket_list
+from ticket_pages import newest_ticket_list, answer_coupon
 
 GROUP = 'Cresh'
 STARPORT = (3546, -4790)                 # Rhea Tannor stands here
@@ -28,7 +28,10 @@ def ride(g, bot, origin, destination):
     tickets, texts = [], []
     previous = {str(i.get('oid')) for i in bot.inventory().get('items', [])}
     for attempt in range(2):  # the answer can take a few seconds when the command queue is busy
+        pages_before = bot.sui_pages().get('pages', [])
         bot.slash('purchaseTicket', ticket_args, wait=2)
+        if answer_coupon(bot, pages_before):
+            texts.append('answered the new-player travel coupon question (used the coupon)')
         for _ in range(5):
             texts += [e.get('text', '') or e.get('reason', '') for e in bot.inbox
                       if e.get('event') in ('system', 'command_failed') and 'World boss' not in str(e.get('text'))]
