@@ -1,7 +1,7 @@
 """Besh, gatherers with a guard. Each gathering type is one routine (a "macro") that any scenario can reuse:
 
   guard_sweep(g, guard, spot)     Varo clears ordinary creatures within 40 m before anyone kneels; returns the kills
-  harvest(g, bot, corpse)         meat, hide and bone from a fresh kill (scout)
+  harvest(g, bot, corpse, kind)   one harvest choice per fresh kill (scout)
   survey_and_sample(g, bot, kind) any survey tool the bot carries: mineral, liquid, and chemical/flora/gas/
                                   moisture/wind/solar once crafted; surveys, then takes a core sample of the best
   forage(g, bot)                  scout foraging
@@ -10,6 +10,27 @@
 Missing skills show up as BLOCKED notes ("missing ability"): train the skill, then run again.
 """
 import json
+
+
+def resource_units(reply):
+    return {str(i['oid']): i['units'] for i in reply.get('items', [])
+            if i.get('oid') is not None and type(i.get('units')) is int and i['units'] >= 0}
+
+
+def received_units(before, after):
+    old, new = resource_units(before), resource_units(after)
+    if not new:
+        return None
+    return sum(max(0, quantity - old.get(oid, 0)) for oid, quantity in new.items())
+
+
+def check_receipt(g, label, before, after):
+    gain = received_units(before, after)
+    if gain is None:
+        g.note('BLOCKED: ' + label + ': numeric resource units unavailable')
+    else:
+        g.check(label, gain > 0, {'units_received': gain})
+    return gain
 
 GROUP = 'Besh'
 FIELD = (3760, -4600)  # open ground below the plateau, outside Mos Eisley
@@ -34,7 +55,7 @@ def guard_sweep(g, guard, spot, radius=40, most=2):
             break
         result = guard.fight(prey['oid'], 90)
         g.note(f"{guard.first} vs {prey['name'].split(':')[-1]}: {result.get('result')}")
-        if 'target' in str(result.get('result')):
+        if result.get('result') == 'target dead':
             kills.append(prey)
         if guard.posture() != 'upright':
             g.note(f'{guard.first} went down; gatherers carry on unguarded')
@@ -43,17 +64,18 @@ def guard_sweep(g, guard, spot, radius=40, most=2):
     return kills
 
 
-def harvest(g, bot, corpse):
-    bot.go(corpse)
-    got = {}
-    for what in ('meat', 'hide', 'bone'):
-        events = bot.slash('harvestcorpse', what, target=corpse['oid'], wait=3)
-        if missing_ability(events):
-            g.note(f'BLOCKED: {bot.first} lacks the harvesting ability (train it at a scout trainer)')
-            return got
-        got[what] = '; '.join(e.get('text', '') for e in events if e.get('event') == 'system')[:120]
-    g.check(f'{bot.first} harvests {corpse["name"].split(":")[-1]}', any('harvest' in v.lower() for v in got.values()), got)
-    return got
+def harvest(g, bot, corpse, kind='meat'):
+    if kind not in ('meat', 'hide', 'bone'):
+        raise ValueError('unknown harvest kind')
+    if not bot.go(corpse).get('arrived'):
+        g.note('BLOCKED: cannot reach fresh corpse for harvesting')
+        return None
+    before = bot.inventory()
+    events = bot.slash('harvestcorpse', kind, target=corpse['oid'], wait=3)
+    if missing_ability(events):
+        g.note(f'BLOCKED: {bot.first} lacks the harvesting ability (train it at a scout trainer)')
+        return None
+    return check_receipt(g, f'{bot.first} harvests {kind}', before, bot.inventory())
 
 
 def survey_and_sample(g, bot, kind):
@@ -80,14 +102,12 @@ def survey_and_sample(g, bot, kind):
         bot.idle(4)  # survey cooldown
     if not g.check(f'{bot.first} {kind} survey finds a concentration', best[0], best):
         return None
-    before = len(bot.inventory().get('items', []))
+    before = bot.inventory()
     bot.slash('requestCoreSample', best[0], wait=0)
     located = bot.wait_for(lambda e: 'sample' in str(e.get('text', '')).lower(), 40)
     bot.idle(15)
-    after = len(bot.inventory().get('items', []))
-    texts = '; '.join(bot.messages())[:200]
-    g.check(f'{bot.first} {kind} core sample of {best[0]}', after > before or 'located' in str(located),
-            f'inventory {before} -> {after}; {texts}')
+    after = bot.inventory()
+    check_receipt(g, f'{bot.first} {kind} core sample of {best[0]}', before, after)
     bot.slash('stand', wait=1)
     return best[0]
 
@@ -123,7 +143,10 @@ def run(g):
 
     kills = guard_sweep(g, varo, FIELD)
     jobs = [lambda: survey_and_sample(g, besh, 'mineral'), lambda: survey_and_sample(g, dova, 'liquid')]
-    jobs.append(lambda: [harvest(g, pell, k) for k in kills] if kills else forage(g, pell))
+    jobs.append(lambda: [harvest(g, pell, k, ('meat', 'hide', 'bone')[i % 3])
+                         for i, k in enumerate(kills)] if kills else forage(g, pell))
+    if len(kills) < 3:
+        g.note('BLOCKED: full meat/hide/bone coverage needs three separate fresh corpses')
     g.parallel(*jobs)
     if kills:
         forage(g, pell)
