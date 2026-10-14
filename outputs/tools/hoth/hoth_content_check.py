@@ -49,9 +49,14 @@ def run(g):
         inside = [o for o in wampas if o.get('cell')]
         g.check(f'wampas in {name}', len(inside) > 0, f'{len(inside)} inside cells, {len(wampas)} found')
 
+    # The server's search matches template paths, name keys and displayed names, not Core3 mobile names
+    # (09:43: "hoth_snowtrooper" found nothing). Count any creature (object/mobile/...) and the camp props.
     for name, (x, y, template) in CAMPS.items():
-        npcs = esk.locate(template, 40, x=x, y=y)
-        g.check(f'{name}: NPCs at the camp', len(npcs) > 0, f'{len(npcs)} x {template}')
+        npcs = esk.locate('object/mobile/', 40, x=x, y=y)
+        props = esk.locate('object/static/structure/', 40, x=x, y=y)
+        g.check(f'{name}: props at the camp', len(props) > 0, f'{len(props)} props')
+        g.check(f'{name}: NPCs at the camp', len(npcs) > 0,
+                f'{len(npcs)}: ' + ', '.join(sorted({o.get("name", "?") for o in npcs}))[:150] + f' (expected {template})')
 
     lairs = {}
     for name, (x, y, r) in ZONES.items():
