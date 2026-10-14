@@ -1,0 +1,1508 @@
+{
+ "staged_files": {
+  "staged/client/snapshot/ossus.ws": {
+   "bytes": 8614,
+   "sha256": "7f3ec2672ef9da76755e5325fa424dfe29e6ce73a95136aba0bda1a61d53c651"
+  },
+  "staged/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua": {
+   "bytes": 2204,
+   "sha256": "5935b810cfbcb030066bdd25271ad426bb51fe7a1ce760e818cd1f777592d0e4"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/ossus/ossus_bol_herd_neutral_none.lua": {
+   "bytes": 634,
+   "sha256": "3f02f827daf023e01b214b799be19a510c71b2360a57abbaabb9eb2c22d7fc41"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/ossus/ossus_gokob_pack_neutral_none.lua": {
+   "bytes": 652,
+   "sha256": "dc4b5cf5ee605eefa5e0cc4f13f1e095a892585d86ab7c0d3ba0e6e989fe8d3e"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/ossus/ossus_kaddyr_swarm_neutral_none.lua": {
+   "bytes": 668,
+   "sha256": "cde0e8ebe9fe444162c1dd66f181c3690b3484863f5db9243486deaf8cbcecdf"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/ossus/ossus_kirruk_pack_neutral_none.lua": {
+   "bytes": 660,
+   "sha256": "5cd570d6d76b4da8a7912c7e0430108d22b8e0b028a4f5c9e16bf06f4089eb66"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/ossus/ossus_tribis_herd_neutral_none.lua": {
+   "bytes": 652,
+   "sha256": "aeefeb16dd93fd8128ca725f5bf0667aa231316343374f5409c52b1d9951a85b"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/ossus/serverobjects.lua": {
+   "bytes": 588,
+   "sha256": "9869194e2c6e3099f861b26025d82350cc50d6eb8375aa4c014151b862cca736"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/ossus/ossus_bol_lair_neutral_medium.lua": {
+   "bytes": 1144,
+   "sha256": "5323223bc5efd0f9dab80921864a229499495ee505f7916d5affda86f3e55ba6"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/ossus/ossus_gokob_den_neutral_medium.lua": {
+   "bytes": 1127,
+   "sha256": "d7043a4020001dd5fcc6e8321ca2e5832e8bf2cfbfdc1b557877ba6a6574969e"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/ossus/ossus_kaddyr_hive_neutral_medium.lua": {
+   "bytes": 1184,
+   "sha256": "cbb1f136feb443b3b7246ec0c9b065cb4fd95f6eecc5705dd4b5d885eecd1150"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/ossus/ossus_kirruk_den_neutral_large.lua": {
+   "bytes": 1156,
+   "sha256": "b887abed177cdc48a1010c7b5f7cd2745cf724289fd24d69149c35fb3dd55445"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/ossus/ossus_tribis_lair_neutral_medium.lua": {
+   "bytes": 1137,
+   "sha256": "9e9a81d865355c31c876fae8a96a90806131ccb2870bcacb7b6c7fed9e908178"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/lair/creature_lair/ossus/serverobjects.lua": {
+   "bytes": 579,
+   "sha256": "792cead483b60e9eafb5f76dc1c2fa5d871cc929abde8b0b6c1193b964eaf40b"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/ossus/ossus_bol.lua": {
+   "bytes": 1160,
+   "sha256": "ef6b62faa21bc2ddfc086199ae3eba4948e258fb6ba3f4914d34942fca6f119d"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/ossus/ossus_bol_bull.lua": {
+   "bytes": 1202,
+   "sha256": "83bd11f3f6c1a9ae7f9dd967f519ad1b20a5f0be410f6979abfce8c8c5dab765"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/ossus/ossus_gokob.lua": {
+   "bytes": 1187,
+   "sha256": "b5bec322a87f3e130eb5271d4f023f09a929dccb20ca8c4957da8a54976d7909"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/ossus/ossus_gokob_scavenger.lua": {
+   "bytes": 1290,
+   "sha256": "984b1c5e4f18dba724eaa74f0e541e74cc61c217a69930c805b50a7cecc50cd5"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/ossus/ossus_kaddyr_bug.lua": {
+   "bytes": 1211,
+   "sha256": "4e2299095c3054f8c38e2af23dc81521f49e4d751c85f48c8a3c1e22721c4651"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/ossus/ossus_kaddyr_soldier.lua": {
+   "bytes": 1278,
+   "sha256": "023a2534a77576b8fbe553df0635d1d5756cde538378a014eef82feab3d26999"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/ossus/ossus_kirruk.lua": {
+   "bytes": 1242,
+   "sha256": "41d903cca9a1f674369764f7c0596d9a87b02c6cadc716aa2da6cce58f09f8d8"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/ossus/ossus_kirruk_alpha.lua": {
+   "bytes": 1315,
+   "sha256": "4f041eaf18c0b987c63f91c9dace15bcc2e72327bba47d2195b49cd21e83ed6c"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/ossus/ossus_tribis.lua": {
+   "bytes": 1141,
+   "sha256": "cda354df17247ece84381d825c2e5b4bc5dbb0df4600d0135f13b97491919b4a"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/ossus/ossus_tribis_bull.lua": {
+   "bytes": 1213,
+   "sha256": "9f59e2ba55a21cdcbfe0a885b754d7935f527f460fe3070c815fb90cfe4838c0"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/ossus/serverobjects.lua": {
+   "bytes": 611,
+   "sha256": "c42980a55c6138f7c0740950783c031f29212948f83e32f8452cbda24bf2bae4"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_canyon.lua": {
+   "bytes": 1040,
+   "sha256": "2ccb7e721f74e1e656699ed9abede568cf28197ca8c025faec93d112d561b718"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_forest.lua": {
+   "bytes": 1041,
+   "sha256": "625339a99d3c08331af74bf7895691c718d8651b669c794964f175ad4f1277f6"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_highlands.lua": {
+   "bytes": 1044,
+   "sha256": "2abc2e0056b442a68bdbd66ceff750ff93328a19cb60a5f6120ab85f46b1b16c"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_plains.lua": {
+   "bytes": 1410,
+   "sha256": "1e8753891928851516864b451ae8f5eaf207c8f2a86944deaf1ce5b70b3cd9a3"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_world.lua": {
+   "bytes": 2158,
+   "sha256": "38c107b845b5fb3851231f8490012f360999e28ed6212d2c701120f13195b025"
+  },
+  "staged/MMOCoreORB/bin/scripts/mobile/spawn/ossus/serverobjects.lua": {
+   "bytes": 423,
+   "sha256": "c205077faf0b9e180d68fa583b89038adc189b2dc0a65b868201735bf7f42a38"
+  },
+  "snippets/planet_manager_ossus.lua": {
+   "bytes": 728,
+   "sha256": "5f9746169871619f55aca36442a071541cfb28d762db383f092cd276f90ce2fc"
+  },
+  "resources/activeZones.txt": {
+   "bytes": 195,
+   "sha256": "2e8e1ab623c9a5f75c0a1d1a5ceae80df429c177a959ec76f72881b18c07dd4a"
+  },
+  "resources/ossus_resource_rows.json": {
+   "bytes": 13791,
+   "sha256": "647df98c5729eb8a1fb941ce63c7040ae2247173f3f7e701ec3101bd3acfa1fe"
+  },
+  "resources/ossus_resource_rows.tsv": {
+   "bytes": 5957,
+   "sha256": "e4be84acf58ee30be5bf12ec90997f7108283d05633c71f5c40c7cd56e49a6ba"
+  },
+  "resources/resource_names.tsv": {
+   "bytes": 2112,
+   "sha256": "cf0e7920c2772346ca5f388729bebfe3f465691423926d098a450ec13d4e50c2"
+  },
+  "resources/resource_tree_with_ossus.iff": {
+   "bytes": 220623,
+   "sha256": "48dafdef80c0eb951ff6deb7d4ef82cdc2ab8a8a3877b0be4b4400b0fcaec919"
+  }
+ },
+ "reports": {
+  "snapshot-report.json": {
+   "objects": [
+    {
+     "what": "Knossa starport",
+     "id": 6900000,
+     "template": "object/building/military/shared_outpost_starport.iff",
+     "x": 0.0,
+     "z": 50.3,
+     "y": -3600.0,
+     "heading": 180.0,
+     "cells": 1,
+     "pob_crc": 3606209763
+    },
+    {
+     "what": "cave at cave_foothills_west",
+     "id": 6900002,
+     "template": "object/building/general/shared_cave_01.iff",
+     "x": -2976.3,
+     "z": 56.1,
+     "y": -4978.0,
+     "heading": 0.0,
+     "cells": 11,
+     "pob_crc": 3748666653
+    },
+    {
+     "what": "cave at cave_foothills_east",
+     "id": 6900014,
+     "template": "object/building/general/shared_cave_03.iff",
+     "x": 4895.7,
+     "z": 62.6,
+     "y": -4978.0,
+     "heading": 0.0,
+     "cells": 29,
+     "pob_crc": 3787008917
+    },
+    {
+     "what": "cave at cave_north",
+     "id": 6900044,
+     "template": "object/building/general/shared_cave_02.iff",
+     "x": 1393.4,
+     "z": 46.1,
+     "y": 5915.1,
+     "heading": 0.0,
+     "cells": 11,
+     "pob_crc": 2294240807
+    },
+    {
+     "what": "ruins: dant_jedi_main_structure",
+     "id": 6900056,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_main_structure.iff",
+     "x": 2016.0,
+     "z": 170.4,
+     "y": 2848.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: poi_temple_ancient_ruined",
+     "id": 6900057,
+     "template": "object/static/structure/general/shared_poi_temple_ancient_ruined.iff",
+     "x": 2016.0,
+     "z": 170.41,
+     "y": 2934.0,
+     "heading": 90.0
+    },
+    {
+     "what": "ruins: dant_jedi_temple_altar",
+     "id": 6900058,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_altar.iff",
+     "x": 2016.0,
+     "z": 170.4,
+     "y": 2804.0,
+     "heading": 180.0
+    },
+    {
+     "what": "ruins: dant_jedi_temple_pillar",
+     "id": 6900059,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar.iff",
+     "x": 2010.0,
+     "z": 170.4,
+     "y": 2792.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: dant_jedi_temple_pillar_med",
+     "id": 6900060,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_med.iff",
+     "x": 2022.0,
+     "z": 170.4,
+     "y": 2792.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: dant_jedi_temple_pillar_base",
+     "id": 6900061,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_base.iff",
+     "x": 2010.0,
+     "z": 170.4,
+     "y": 2781.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: dant_jedi_temple_pillar",
+     "id": 6900062,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar.iff",
+     "x": 2022.0,
+     "z": 170.4,
+     "y": 2781.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: dant_jedi_temple_pillar_fallen",
+     "id": 6900063,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_fallen.iff",
+     "x": 2012.0,
+     "z": 170.4,
+     "y": 2770.0,
+     "heading": 70.0
+    },
+    {
+     "what": "ruins: dant_jedi_temple_pillar_sm",
+     "id": 6900064,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_sm.iff",
+     "x": 2022.0,
+     "z": 170.4,
+     "y": 2770.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: dant_jedi_temple_pillar",
+     "id": 6900065,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar.iff",
+     "x": 2010.0,
+     "z": 170.41,
+     "y": 2759.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: dant_jedi_temple_pillar_base",
+     "id": 6900066,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_base.iff",
+     "x": 2022.0,
+     "z": 170.42,
+     "y": 2759.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: dant_jedi_temple_pillar_med",
+     "id": 6900067,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_med.iff",
+     "x": 2010.0,
+     "z": 170.47,
+     "y": 2748.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: dant_jedi_temple_pillar_fallen",
+     "id": 6900068,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_fallen.iff",
+     "x": 2025.0,
+     "z": 170.5,
+     "y": 2747.0,
+     "heading": 20.0
+    },
+    {
+     "what": "ruins: dant_jedi_wall_1",
+     "id": 6900069,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_wall_1.iff",
+     "x": 1964.0,
+     "z": 170.4,
+     "y": 2868.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: dant_jedi_wall_1",
+     "id": 6900070,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_wall_1.iff",
+     "x": 1964.0,
+     "z": 170.4,
+     "y": 2844.0,
+     "heading": 10.0
+    },
+    {
+     "what": "ruins: dant_jedi_wall_2",
+     "id": 6900071,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_wall_2.iff",
+     "x": 1968.0,
+     "z": 170.4,
+     "y": 2886.0,
+     "heading": 35.0
+    },
+    {
+     "what": "ruins: dant_jedi_wall_1",
+     "id": 6900072,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_wall_1.iff",
+     "x": 2070.0,
+     "z": 170.4,
+     "y": 2866.0,
+     "heading": 180.0
+    },
+    {
+     "what": "ruins: dant_jedi_wall_2",
+     "id": 6900073,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_wall_2.iff",
+     "x": 2071.0,
+     "z": 170.4,
+     "y": 2842.0,
+     "heading": 160.0
+    },
+    {
+     "what": "ruins: dant_jedi_wall_1",
+     "id": 6900074,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_wall_1.iff",
+     "x": 2066.0,
+     "z": 170.4,
+     "y": 2888.0,
+     "heading": 150.0
+    },
+    {
+     "what": "ruins: dant_jedi_wall_2",
+     "id": 6900075,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_wall_2.iff",
+     "x": 2046.0,
+     "z": 170.4,
+     "y": 2802.0,
+     "heading": 90.0
+    },
+    {
+     "what": "ruins: dant_jedi_wall_2",
+     "id": 6900076,
+     "template": "object/static/structure/dantooine/shared_dant_jedi_wall_2.iff",
+     "x": 1986.0,
+     "z": 170.4,
+     "y": 2802.0,
+     "heading": 90.0
+    },
+    {
+     "what": "ruins: gungan_wall_ruined_lg_s01",
+     "id": 6900077,
+     "template": "object/static/structure/naboo/shared_gungan_wall_ruined_lg_s01.iff",
+     "x": 1936.0,
+     "z": 170.51,
+     "y": 2898.0,
+     "heading": 60.0
+    },
+    {
+     "what": "ruins: gungan_wall_ruined_sm_s01",
+     "id": 6900078,
+     "template": "object/static/structure/naboo/shared_gungan_wall_ruined_sm_s01.iff",
+     "x": 1928.0,
+     "z": 170.58,
+     "y": 2888.0,
+     "heading": 60.0
+    },
+    {
+     "what": "ruins: gungan_pillar_ruined_s01",
+     "id": 6900079,
+     "template": "object/static/structure/naboo/shared_gungan_pillar_ruined_s01.iff",
+     "x": 1932.0,
+     "z": 170.65,
+     "y": 2910.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: gungan_wall_ruined_lg_s01",
+     "id": 6900080,
+     "template": "object/static/structure/naboo/shared_gungan_wall_ruined_lg_s01.iff",
+     "x": 1934.0,
+     "z": 170.42,
+     "y": 2808.0,
+     "heading": 120.0
+    },
+    {
+     "what": "ruins: gungan_pillar_ruined_s01",
+     "id": 6900081,
+     "template": "object/static/structure/naboo/shared_gungan_pillar_ruined_s01.iff",
+     "x": 1926.0,
+     "z": 170.46,
+     "y": 2820.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: wall_ruined_tatooine_large_style_01",
+     "id": 6900082,
+     "template": "object/static/structure/tatooine/shared_wall_ruined_tatooine_large_style_01.iff",
+     "x": 2098.0,
+     "z": 170.5,
+     "y": 2896.0,
+     "heading": 120.0
+    },
+    {
+     "what": "ruins: pillar_ruined_large_style_01",
+     "id": 6900083,
+     "template": "object/static/structure/tatooine/shared_pillar_ruined_large_style_01.iff",
+     "x": 2104.0,
+     "z": 170.48,
+     "y": 2884.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: wall_ruined_tatooine_large_style_01",
+     "id": 6900084,
+     "template": "object/static/structure/tatooine/shared_wall_ruined_tatooine_large_style_01.iff",
+     "x": 2100.0,
+     "z": 170.47,
+     "y": 2810.0,
+     "heading": 60.0
+    },
+    {
+     "what": "ruins: pillar_ruined_large_style_01",
+     "id": 6900085,
+     "template": "object/static/structure/tatooine/shared_pillar_ruined_large_style_01.iff",
+     "x": 2092.0,
+     "z": 170.48,
+     "y": 2796.0,
+     "heading": 0.0
+    },
+    {
+     "what": "ruins: pillar_ruined_large_style_01",
+     "id": 6900086,
+     "template": "object/static/structure/tatooine/shared_pillar_ruined_large_style_01.iff",
+     "x": 2108.0,
+     "z": 170.58,
+     "y": 2802.0,
+     "heading": 0.0
+    }
+   ],
+   "caves": [
+    {
+     "site": "cave_foothills_west",
+     "cave": "cave_01",
+     "origin": [
+      -2976.3,
+      56.1,
+      -4978.0
+     ],
+     "heading": 0.0,
+     "mouth_world": [
+      -2976.0,
+      -4960.0
+     ],
+     "mouth_matches_hole": true,
+     "portal_floor_height": 51.9,
+     "apron_height": 51.9,
+     "exterior_box_building_space": {
+      "max": [
+       23.850631713867188,
+       9.356231689453125,
+       35.63286590576172
+      ],
+      "min": [
+       -25.120731353759766,
+       -24.925703048706055,
+       -3.7280197143554688
+      ]
+     },
+     "footprint_corners": [
+      [
+       -3001.4,
+       -4981.7
+      ],
+      [
+       -3001.4,
+       -4942.4
+      ],
+      [
+       -2952.4,
+       -4981.7
+      ],
+      [
+       -2952.4,
+       -4942.4
+      ]
+     ],
+     "ground_at_corners": [
+      58.81,
+      53.51,
+      52.94,
+      48.55
+     ],
+     "ground_minus_origin_at_corners": [
+      2.71,
+      -2.59,
+      -3.16,
+      -7.55
+     ],
+     "exterior_height_range_above_origin": [
+      -24.9,
+      9.4
+     ],
+     "farthest_corner_from_mouth": 33.4,
+     "apron_radius": 30.0,
+     "hole_radius": 9.0
+    },
+    {
+     "site": "cave_foothills_east",
+     "cave": "cave_03",
+     "origin": [
+      4895.7,
+      62.6,
+      -4978.0
+     ],
+     "heading": 0.0,
+     "mouth_world": [
+      4896.0,
+      -4960.0
+     ],
+     "mouth_matches_hole": true,
+     "portal_floor_height": 58.5,
+     "apron_height": 58.5,
+     "exterior_box_building_space": {
+      "max": [
+       23.850631713867188,
+       9.356231689453125,
+       35.63286590576172
+      ],
+      "min": [
+       -25.120731353759766,
+       -24.925703048706055,
+       -3.7280197143554688
+      ]
+     },
+     "footprint_corners": [
+      [
+       4870.6,
+       -4981.7
+      ],
+      [
+       4870.6,
+       -4942.4
+      ],
+      [
+       4919.6,
+       -4981.7
+      ],
+      [
+       4919.6,
+       -4942.4
+      ]
+     ],
+     "ground_at_corners": [
+      62.61,
+      57.97,
+      64.69,
+      59.15
+     ],
+     "ground_minus_origin_at_corners": [
+      0.01,
+      -4.63,
+      2.09,
+      -3.45
+     ],
+     "exterior_height_range_above_origin": [
+      -24.9,
+      9.4
+     ],
+     "farthest_corner_from_mouth": 33.4,
+     "apron_radius": 30.0,
+     "hole_radius": 9.0
+    },
+    {
+     "site": "cave_north",
+     "cave": "cave_02",
+     "origin": [
+      1393.4,
+      46.1,
+      5915.1
+     ],
+     "heading": 0.0,
+     "mouth_world": [
+      1376.0,
+      5920.0
+     ],
+     "mouth_matches_hole": true,
+     "portal_floor_height": 45.7,
+     "apron_height": 45.7,
+     "exterior_box_building_space": {
+      "max": [
+       6.193398952484131,
+       13.083133697509766,
+       22.548608779907227
+      ],
+      "min": [
+       -42.7779655456543,
+       -21.198801040649414,
+       -16.81227684020996
+      ]
+     },
+     "footprint_corners": [
+      [
+       1350.6,
+       5898.3
+      ],
+      [
+       1350.6,
+       5937.6
+      ],
+      [
+       1399.6,
+       5898.3
+      ],
+      [
+       1399.6,
+       5937.6
+      ]
+     ],
+     "ground_at_corners": [
+      49.13,
+      44.2,
+      49.96,
+      44.08
+     ],
+     "ground_minus_origin_at_corners": [
+      3.03,
+      -1.9,
+      3.86,
+      -2.02
+     ],
+     "exterior_height_range_above_origin": [
+      -21.2,
+      13.1
+     ],
+     "farthest_corner_from_mouth": 33.4,
+     "apron_radius": 30.0,
+     "hole_radius": 9.0
+    }
+   ],
+   "checks": {
+    "bytes": 8614,
+    "nodes": 87,
+    "world_level": 35,
+    "templates": [
+     "object/building/military/shared_outpost_starport.iff",
+     "object/cell/shared_cell.iff",
+     "object/building/general/shared_cave_01.iff",
+     "object/building/general/shared_cave_03.iff",
+     "object/building/general/shared_cave_02.iff",
+     "object/static/structure/dantooine/shared_dant_jedi_main_structure.iff",
+     "object/static/structure/general/shared_poi_temple_ancient_ruined.iff",
+     "object/static/structure/dantooine/shared_dant_jedi_temple_altar.iff",
+     "object/static/structure/dantooine/shared_dant_jedi_temple_pillar.iff",
+     "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_med.iff",
+     "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_base.iff",
+     "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_fallen.iff",
+     "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_sm.iff",
+     "object/static/structure/dantooine/shared_dant_jedi_wall_1.iff",
+     "object/static/structure/dantooine/shared_dant_jedi_wall_2.iff",
+     "object/static/structure/naboo/shared_gungan_wall_ruined_lg_s01.iff",
+     "object/static/structure/naboo/shared_gungan_wall_ruined_sm_s01.iff",
+     "object/static/structure/naboo/shared_gungan_pillar_ruined_s01.iff",
+     "object/static/structure/tatooine/shared_wall_ruined_tatooine_large_style_01.iff",
+     "object/static/structure/tatooine/shared_pillar_ruined_large_style_01.iff"
+    ],
+    "round_trip_identical": true,
+    "ids": [
+     6900000,
+     6900086
+    ],
+    "ids_unique": true,
+    "ids_used_by_other_snapshots": [],
+    "templates_missing_in_client": [],
+    "templates_missing_in_merged_crc_table": [],
+    "portal_layouts_present": {
+     "appearance/thm_all_cave_s01.pob": true,
+     "appearance/thm_all_cave_s02.pob": true,
+     "appearance/thm_all_cave_s03.pob": true,
+     "appearance/mun_all_landing_pad_s01.pob": true
+    },
+    "hoth_ws_round_trip": true
+   },
+   "starport": {
+    "travel_point": {
+     "x": 20.3,
+     "z": 50.3,
+     "y": -3582.2
+    },
+    "footprint_corners": [
+     [
+      24.0,
+      -3577.5
+     ],
+     [
+      24.0,
+      -3608.0
+     ],
+     [
+      -24.0,
+      -3577.5
+     ],
+     [
+      -24.0,
+      -3608.0
+     ]
+    ],
+    "ground_at_corners": [
+     50.3,
+     50.3,
+     50.3,
+     50.3
+    ],
+    "exterior_box": {
+     "max": [
+      24.0,
+      18.0,
+      8.0
+     ],
+     "min": [
+      -24.0,
+      -3.000000238418579,
+      -22.513113021850586
+     ]
+    },
+    "flat_pad_radius": 88
+   },
+   "ruins": {
+    "centre": [
+     2016.0,
+     2848.0
+    ],
+    "pieces": 31,
+    "height_range": [
+     170.4,
+     170.65
+    ],
+    "pad_radius": 130.0,
+    "farthest_piece_from_centre": 104.4
+   }
+  },
+  "server-report.json": {
+   "new_files": [
+    "mobile/ossus/ossus_gokob.lua",
+    "mobile/ossus/ossus_gokob_scavenger.lua",
+    "mobile/ossus/ossus_tribis.lua",
+    "mobile/ossus/ossus_tribis_bull.lua",
+    "mobile/ossus/ossus_kaddyr_bug.lua",
+    "mobile/ossus/ossus_kaddyr_soldier.lua",
+    "mobile/ossus/ossus_kirruk.lua",
+    "mobile/ossus/ossus_kirruk_alpha.lua",
+    "mobile/ossus/ossus_bol.lua",
+    "mobile/ossus/ossus_bol_bull.lua",
+    "mobile/ossus/serverobjects.lua",
+    "mobile/lair/creature_lair/ossus/ossus_gokob_den_neutral_medium.lua",
+    "mobile/lair/creature_lair/ossus/ossus_tribis_lair_neutral_medium.lua",
+    "mobile/lair/creature_lair/ossus/ossus_kaddyr_hive_neutral_medium.lua",
+    "mobile/lair/creature_lair/ossus/ossus_kirruk_den_neutral_large.lua",
+    "mobile/lair/creature_lair/ossus/ossus_bol_lair_neutral_medium.lua",
+    "mobile/lair/creature_dynamic/ossus/ossus_gokob_pack_neutral_none.lua",
+    "mobile/lair/creature_dynamic/ossus/ossus_tribis_herd_neutral_none.lua",
+    "mobile/lair/creature_dynamic/ossus/ossus_kaddyr_swarm_neutral_none.lua",
+    "mobile/lair/creature_dynamic/ossus/ossus_kirruk_pack_neutral_none.lua",
+    "mobile/lair/creature_dynamic/ossus/ossus_bol_herd_neutral_none.lua",
+    "mobile/spawn/ossus/ossus_plains.lua",
+    "mobile/spawn/ossus/ossus_forest.lua",
+    "mobile/spawn/ossus/ossus_highlands.lua",
+    "mobile/spawn/ossus/ossus_canyon.lua",
+    "mobile/spawn/ossus/ossus_world.lua",
+    "managers/planet/ossus_regions.lua",
+    "mobile/lair/creature_lair/ossus/serverobjects.lua",
+    "mobile/lair/creature_dynamic/ossus/serverobjects.lua",
+    "mobile/spawn/ossus/serverobjects.lua"
+   ],
+   "patches": [
+    {
+     "file": "mobile/serverobjects.lua",
+     "mode": "after",
+     "anchor": "includeFile(\"hoth/serverobjects.lua\") -- Sandbox: Hoth creatures (Bellum Gero, AGPL-3.0)",
+     "new": "includeFile(\"ossus/serverobjects.lua\") -- Sandbox: Ossus fauna (Fable batch O2)"
+    },
+    {
+     "file": "mobile/lair/creature_lair/serverobjects.lua",
+     "mode": "after",
+     "anchor": "includeFile(\"lair/creature_lair/hoth/hoth_wampa_lair_neutral_large.lua\")",
+     "new": "includeFile(\"lair/creature_lair/ossus/serverobjects.lua\") -- Sandbox: Ossus lairs (Fable batch O2)"
+    },
+    {
+     "file": "mobile/lair/creature_dynamic/serverobjects.lua",
+     "mode": "after",
+     "anchor": "includeFile(\"lair/creature_dynamic/hoth/hoth_wampa_neutral_none.lua\")",
+     "new": "includeFile(\"lair/creature_dynamic/ossus/serverobjects.lua\") -- Sandbox: Ossus herds and packs (Fable batch O2)"
+    },
+    {
+     "file": "mobile/spawn/serverobjects.lua",
+     "mode": "after",
+     "anchor": "includeFile(\"spawn/hoth/hoth_scavenger_zone.lua\")",
+     "new": "includeFile(\"spawn/ossus/serverobjects.lua\") -- Sandbox: Ossus spawn groups (Fable batch O2)"
+    },
+    {
+     "file": "managers/planet/planet_manager.lua",
+     "mode": "before-file",
+     "anchor": "tutorial = {",
+     "new": "snippets/planet_manager_ossus.lua"
+    }
+   ],
+   "fauna": [
+    {
+     "key": "ossus_gokob",
+     "name": "a gokob",
+     "body": "object/mobile/womp_rat_hue.iff",
+     "level": 22
+    },
+    {
+     "key": "ossus_gokob_scavenger",
+     "name": "a gokob scavenger",
+     "body": "object/mobile/womp_rat_hue.iff",
+     "level": 27
+    },
+    {
+     "key": "ossus_tribis",
+     "name": "a tribis",
+     "body": "object/mobile/tybis_hue.iff",
+     "level": 28
+    },
+    {
+     "key": "ossus_tribis_bull",
+     "name": "a tribis bull",
+     "body": "object/mobile/tybis_hue.iff",
+     "level": 34
+    },
+    {
+     "key": "ossus_kaddyr_bug",
+     "name": "a kaddyr bug",
+     "body": "object/mobile/kliknik_hue.iff",
+     "level": 32
+    },
+    {
+     "key": "ossus_kaddyr_soldier",
+     "name": "a kaddyr soldier",
+     "body": "object/mobile/kliknik_hue.iff",
+     "level": 40
+    },
+    {
+     "key": "ossus_kirruk",
+     "name": "a kirruk",
+     "body": "object/mobile/gurreck_hue.iff",
+     "level": 48
+    },
+    {
+     "key": "ossus_kirruk_alpha",
+     "name": "a kirruk alpha",
+     "body": "object/mobile/gurreck_hue.iff",
+     "level": 56
+    },
+    {
+     "key": "ossus_bol",
+     "name": "an Ossus bol",
+     "body": "object/mobile/bol_hue.iff",
+     "level": 30
+    },
+    {
+     "key": "ossus_bol_bull",
+     "name": "an Ossus bol bull",
+     "body": "object/mobile/bol_hue.iff",
+     "level": 36
+    }
+   ],
+   "lairs": [
+    {
+     "name": "ossus_gokob_den_neutral_medium",
+     "kind": "creature_lair",
+     "mobiles": [
+      [
+       "ossus_gokob",
+       3
+      ],
+      [
+       "ossus_gokob_scavenger",
+       1
+      ]
+     ],
+     "buildings": [
+      "poi_all_lair_warren_large",
+      "poi_all_lair_mound_small"
+     ],
+     "mission_building": null
+    },
+    {
+     "name": "ossus_tribis_lair_neutral_medium",
+     "kind": "creature_lair",
+     "mobiles": [
+      [
+       "ossus_tribis",
+       2
+      ],
+      [
+       "ossus_tribis_bull",
+       1
+      ]
+     ],
+     "buildings": [
+      "poi_all_lair_mound_large",
+      "poi_all_lair_thicket_large"
+     ],
+     "mission_building": null
+    },
+    {
+     "name": "ossus_kaddyr_hive_neutral_medium",
+     "kind": "creature_lair",
+     "mobiles": [
+      [
+       "ossus_kaddyr_bug",
+       3
+      ],
+      [
+       "ossus_kaddyr_soldier",
+       1
+      ]
+     ],
+     "buildings": [
+      "poi_all_lair_insecthill_large",
+      "poi_all_lair_insecthill_small"
+     ],
+     "mission_building": null
+    },
+    {
+     "name": "ossus_kirruk_den_neutral_large",
+     "kind": "creature_lair",
+     "mobiles": [
+      [
+       "ossus_kirruk",
+       2
+      ],
+      [
+       "ossus_kirruk_alpha",
+       1
+      ]
+     ],
+     "buildings": [
+      "poi_all_lair_rock_shelter_large",
+      "poi_all_lair_bones_large"
+     ],
+     "mission_building": null
+    },
+    {
+     "name": "ossus_bol_lair_neutral_medium",
+     "kind": "creature_lair",
+     "mobiles": [
+      [
+       "ossus_bol",
+       2
+      ],
+      [
+       "ossus_bol_bull",
+       1
+      ]
+     ],
+     "buildings": [
+      "poi_all_lair_rocks_large",
+      "poi_all_lair_rock_shelter_large"
+     ],
+     "mission_building": null
+    },
+    {
+     "name": "ossus_gokob_pack_neutral_none",
+     "kind": "creature_dynamic",
+     "mobiles": [
+      [
+       "ossus_gokob",
+       4
+      ],
+      [
+       "ossus_gokob_scavenger",
+       1
+      ]
+     ],
+     "buildings": [],
+     "mission_building": "poi_all_lair_warren_large"
+    },
+    {
+     "name": "ossus_tribis_herd_neutral_none",
+     "kind": "creature_dynamic",
+     "mobiles": [
+      [
+       "ossus_tribis",
+       4
+      ],
+      [
+       "ossus_tribis_bull",
+       1
+      ]
+     ],
+     "buildings": [],
+     "mission_building": "poi_all_lair_mound_large"
+    },
+    {
+     "name": "ossus_kaddyr_swarm_neutral_none",
+     "kind": "creature_dynamic",
+     "mobiles": [
+      [
+       "ossus_kaddyr_bug",
+       4
+      ],
+      [
+       "ossus_kaddyr_soldier",
+       1
+      ]
+     ],
+     "buildings": [],
+     "mission_building": "poi_all_lair_insecthill_large"
+    },
+    {
+     "name": "ossus_kirruk_pack_neutral_none",
+     "kind": "creature_dynamic",
+     "mobiles": [
+      [
+       "ossus_kirruk",
+       3
+      ],
+      [
+       "ossus_kirruk_alpha",
+       1
+      ]
+     ],
+     "buildings": [],
+     "mission_building": "poi_all_lair_rock_shelter_large"
+    },
+    {
+     "name": "ossus_bol_herd_neutral_none",
+     "kind": "creature_dynamic",
+     "mobiles": [
+      [
+       "ossus_bol",
+       4
+      ],
+      [
+       "ossus_bol_bull",
+       1
+      ]
+     ],
+     "buildings": [],
+     "mission_building": "poi_all_lair_rocks_large"
+    }
+   ],
+   "spawn_groups": {
+    "ossus_plains": [
+     "ossus_tribis_herd_neutral_none",
+     "ossus_tribis_lair_neutral_medium",
+     "ossus_bol_herd_neutral_none",
+     "ossus_bol_lair_neutral_medium",
+     "ossus_gokob_pack_neutral_none",
+     "ossus_gokob_den_neutral_medium"
+    ],
+    "ossus_forest": [
+     "ossus_kaddyr_swarm_neutral_none",
+     "ossus_kaddyr_hive_neutral_medium",
+     "ossus_gokob_pack_neutral_none",
+     "ossus_tribis_lair_neutral_medium"
+    ],
+    "ossus_highlands": [
+     "ossus_kirruk_pack_neutral_none",
+     "ossus_kirruk_den_neutral_large",
+     "ossus_kaddyr_swarm_neutral_none",
+     "ossus_bol_herd_neutral_none"
+    ],
+    "ossus_canyon": [
+     "ossus_kaddyr_hive_neutral_medium",
+     "ossus_kaddyr_swarm_neutral_none",
+     "ossus_kirruk_pack_neutral_none",
+     "ossus_gokob_den_neutral_medium"
+    ],
+    "ossus_world": [
+     "ossus_gokob_pack_neutral_none",
+     "ossus_gokob_den_neutral_medium",
+     "ossus_tribis_herd_neutral_none",
+     "ossus_tribis_lair_neutral_medium",
+     "ossus_bol_herd_neutral_none",
+     "ossus_bol_lair_neutral_medium",
+     "ossus_kaddyr_swarm_neutral_none",
+     "ossus_kaddyr_hive_neutral_medium",
+     "ossus_kirruk_pack_neutral_none",
+     "ossus_kirruk_den_neutral_large"
+    ]
+   },
+   "spawn_areas": [
+    [
+     "ossus_plains_west",
+     -4400,
+     -1200,
+     1800,
+     "ossus_plains",
+     64
+    ],
+    [
+     "ossus_plains_north",
+     -1500,
+     5200,
+     1700,
+     "ossus_plains",
+     64
+    ],
+    [
+     "ossus_forest_east",
+     1200,
+     5400,
+     1200,
+     "ossus_forest",
+     48
+    ],
+    [
+     "ossus_forest_southwest",
+     -3200,
+     -3400,
+     1000,
+     "ossus_forest",
+     48
+    ],
+    [
+     "ossus_highlands_south",
+     2600,
+     -4300,
+     1500,
+     "ossus_highlands",
+     48
+    ],
+    [
+     "ossus_canyon_country",
+     5100,
+     -100,
+     1600,
+     "ossus_canyon",
+     48
+    ]
+   ],
+   "stock_bodies": [
+    "object/mobile/bol_hue.iff",
+    "object/mobile/gurreck_hue.iff",
+    "object/mobile/kliknik_hue.iff",
+    "object/mobile/tybis_hue.iff",
+    "object/mobile/womp_rat_hue.iff"
+   ],
+   "stock_pcds": [
+    "object/intangible/pet/gurreck_hue.iff",
+    "object/intangible/pet/kliknik_hue.iff",
+    "object/intangible/pet/womp_rat_hue.iff"
+   ],
+   "lair_props": [
+    "object/tangible/lair/base/poi_all_lair_bones_large.iff",
+    "object/tangible/lair/base/poi_all_lair_insecthill_large.iff",
+    "object/tangible/lair/base/poi_all_lair_insecthill_small.iff",
+    "object/tangible/lair/base/poi_all_lair_mound_large.iff",
+    "object/tangible/lair/base/poi_all_lair_mound_small.iff",
+    "object/tangible/lair/base/poi_all_lair_rock_shelter_large.iff",
+    "object/tangible/lair/base/poi_all_lair_rocks_large.iff",
+    "object/tangible/lair/base/poi_all_lair_thicket_large.iff",
+    "object/tangible/lair/base/poi_all_lair_warren_large.iff"
+   ],
+   "travel_point": ", x = 20.3, z = 50.3, y = -3582.2, interplanetaryTravelAllowed = 1, incomingTravelAllowed = 1, landingRange = 3"
+  },
+  "resources-report.json": {
+   "stock_rows": 725,
+   "rows_with_ossus": 770,
+   "added": 45,
+   "stock_round_trip": true,
+   "staged_round_trip": true,
+   "ancestors_bumped": 77,
+   "sample": [
+    {
+     "after": "milk_domesticated_dantooine",
+     "enum": "milk_domesticated_ossus",
+     "name": "Ossus Domesticated Milk",
+     "container": "object/resource_container/organic_bottle_milk.iff",
+     "random_name_class": "plain_resource"
+    },
+    {
+     "after": "milk_wild_dantooine",
+     "enum": "milk_wild_ossus",
+     "name": "Ossus Wild Milk",
+     "container": "object/resource_container/organic_bottle_milk.iff",
+     "random_name_class": "plain_resource"
+    },
+    {
+     "after": "meat_domesticated_dantooine",
+     "enum": "meat_domesticated_ossus",
+     "name": "Ossus Domesticated Meat",
+     "container": "object/resource_container/organic_food.iff",
+     "random_name_class": "plain_resource"
+    }
+   ],
+   "energy_rows_included": [
+    "energy_renewable_site_limited_tidal_ossus",
+    "energy_renewable_site_limited_hydron3_ossus",
+    "energy_renewable_site_limited_geothermal_ossus",
+    "energy_renewable_unlimited_wind_ossus",
+    "energy_renewable_unlimited_solar_ossus"
+   ],
+   "source_set_equals_endor_set": true,
+   "hoth_leaves_in_merged_tree": 52,
+   "type_count_rule_check": {
+    "resource": {
+     "stock": 545,
+     "merged_hoth": 597,
+     "staged_ossus": 590
+    },
+    "organic": {
+     "stock": 390,
+     "merged_hoth": 428,
+     "staged_ossus": 428
+    },
+    "creature_resources": {
+     "stock": 206,
+     "merged_hoth": 226,
+     "staged_ossus": 226
+    },
+    "creature_food": {
+     "stock": 133,
+     "merged_hoth": 146,
+     "staged_ossus": 146
+    },
+    "milk": {
+     "stock": 21,
+     "merged_hoth": 23,
+     "staged_ossus": 23
+    },
+    "milk_domesticated": {
+     "stock": 10,
+     "merged_hoth": 11,
+     "staged_ossus": 11
+    },
+    "energy": {
+     "stock": 55,
+     "merged_hoth": 57,
+     "staged_ossus": 60
+    },
+    "energy_renewable_unlimited_solar": {
+     "stock": 11,
+     "merged_hoth": 12,
+     "staged_ossus": 12
+    }
+   }
+  },
+  "dev-check.txt": [
+   "== luac on the staged Lua and the planet block snippet",
+   "luac ok managers/planet/ossus_regions.lua",
+   "luac ok mobile/lair/creature_dynamic/ossus/ossus_bol_herd_neutral_none.lua",
+   "luac ok mobile/lair/creature_dynamic/ossus/ossus_gokob_pack_neutral_none.lua",
+   "luac ok mobile/lair/creature_dynamic/ossus/ossus_kaddyr_swarm_neutral_none.lua",
+   "luac ok mobile/lair/creature_dynamic/ossus/ossus_kirruk_pack_neutral_none.lua",
+   "luac ok mobile/lair/creature_dynamic/ossus/ossus_tribis_herd_neutral_none.lua",
+   "luac ok mobile/lair/creature_dynamic/ossus/serverobjects.lua",
+   "luac ok mobile/lair/creature_lair/ossus/ossus_bol_lair_neutral_medium.lua",
+   "luac ok mobile/lair/creature_lair/ossus/ossus_gokob_den_neutral_medium.lua",
+   "luac ok mobile/lair/creature_lair/ossus/ossus_kaddyr_hive_neutral_medium.lua",
+   "luac ok mobile/lair/creature_lair/ossus/ossus_kirruk_den_neutral_large.lua",
+   "luac ok mobile/lair/creature_lair/ossus/ossus_tribis_lair_neutral_medium.lua",
+   "luac ok mobile/lair/creature_lair/ossus/serverobjects.lua",
+   "luac ok mobile/ossus/ossus_bol_bull.lua",
+   "luac ok mobile/ossus/ossus_bol.lua",
+   "luac ok mobile/ossus/ossus_gokob.lua",
+   "luac ok mobile/ossus/ossus_gokob_scavenger.lua",
+   "luac ok mobile/ossus/ossus_kaddyr_bug.lua",
+   "luac ok mobile/ossus/ossus_kaddyr_soldier.lua",
+   "luac ok mobile/ossus/ossus_kirruk_alpha.lua",
+   "luac ok mobile/ossus/ossus_kirruk.lua",
+   "luac ok mobile/ossus/ossus_tribis_bull.lua",
+   "luac ok mobile/ossus/ossus_tribis.lua",
+   "luac ok mobile/ossus/serverobjects.lua",
+   "luac ok mobile/spawn/ossus/ossus_canyon.lua",
+   "luac ok mobile/spawn/ossus/ossus_forest.lua",
+   "luac ok mobile/spawn/ossus/ossus_highlands.lua",
+   "luac ok mobile/spawn/ossus/ossus_plains.lua",
+   "luac ok mobile/spawn/ossus/ossus_world.lua",
+   "luac ok mobile/spawn/ossus/serverobjects.lua",
+   "luac ok snippets/planet_manager_ossus.lua",
+   "== server templates the snapshot needs (work/dev-templates.txt)",
+   "ok      object/building/military/outpost_starport.lua",
+   "ok      object/cell/cell.lua",
+   "ok      object/building/general/cave_01.lua",
+   "ok      object/building/general/cave_03.lua",
+   "ok      object/building/general/cave_02.lua",
+   "ok      object/static/structure/dantooine/dant_jedi_main_structure.lua",
+   "ok      object/static/structure/general/poi_temple_ancient_ruined.lua",
+   "ok      object/static/structure/dantooine/dant_jedi_temple_altar.lua",
+   "ok      object/static/structure/dantooine/dant_jedi_temple_pillar.lua",
+   "ok      object/static/structure/dantooine/dant_jedi_temple_pillar_med.lua",
+   "ok      object/static/structure/dantooine/dant_jedi_temple_pillar_base.lua",
+   "ok      object/static/structure/dantooine/dant_jedi_temple_pillar_fallen.lua",
+   "ok      object/static/structure/dantooine/dant_jedi_temple_pillar_sm.lua",
+   "ok      object/static/structure/dantooine/dant_jedi_wall_1.lua",
+   "ok      object/static/structure/dantooine/dant_jedi_wall_2.lua",
+   "ok      object/static/structure/naboo/gungan_wall_ruined_lg_s01.lua",
+   "ok      object/static/structure/naboo/gungan_wall_ruined_sm_s01.lua",
+   "ok      object/static/structure/naboo/gungan_pillar_ruined_s01.lua",
+   "ok      object/static/structure/tatooine/wall_ruined_tatooine_large_style_01.lua",
+   "ok      object/static/structure/tatooine/pillar_ruined_large_style_01.lua",
+   "== stock bodies, pet control devices and lair props the fauna use",
+   "ok      object/mobile/womp_rat_hue.lua",
+   "ok      object/mobile/tybis_hue.lua",
+   "ok      object/mobile/kliknik_hue.lua",
+   "ok      object/mobile/gurreck_hue.lua",
+   "ok      object/mobile/bol_hue.lua",
+   "ok      object/intangible/pet/womp_rat_hue.lua",
+   "ok      object/intangible/pet/kliknik_hue.lua",
+   "ok      object/intangible/pet/gurreck_hue.lua",
+   "ok      object/tangible/lair/base/poi_all_lair_warren_large.lua",
+   "ok      object/tangible/lair/base/poi_all_lair_mound_small.lua",
+   "ok      object/tangible/lair/base/poi_all_lair_mound_large.lua",
+   "ok      object/tangible/lair/base/poi_all_lair_thicket_large.lua",
+   "ok      object/tangible/lair/base/poi_all_lair_insecthill_large.lua",
+   "ok      object/tangible/lair/base/poi_all_lair_insecthill_small.lua",
+   "ok      object/tangible/lair/base/poi_all_lair_rock_shelter_large.lua",
+   "ok      object/tangible/lair/base/poi_all_lair_bones_large.lua",
+   "ok      object/tangible/lair/base/poi_all_lair_rocks_large.lua",
+   "== names that must not already exist in dev (creature templates, lairs, spawn groups, regions file, planet block)",
+   "free    ossus_gokob",
+   "free    ossus_tribis",
+   "free    ossus_kaddyr_bug",
+   "free    ossus_kirruk",
+   "free    ossus_bol",
+   "free    managers/planet/ossus_regions.lua",
+   "free    ossus block in planet_manager.lua",
+   "== patch anchors occur exactly once",
+   "1",
+   "1",
+   "1",
+   "1",
+   "1"
+  ],
+  "apply-check.txt": [
+   "new files: 30   identical already: 0   line patches to apply: 5   already applied: 0   refused: 0",
+   "  would patch (after): mobile/serverobjects.lua",
+   "  would patch (after): mobile/lair/creature_lair/serverobjects.lua",
+   "  would patch (after): mobile/lair/creature_dynamic/serverobjects.lua",
+   "  would patch (after): mobile/spawn/serverobjects.lua",
+   "  would patch (before-file): managers/planet/planet_manager.lua",
+   "  would copy: mobile/ossus/ossus_gokob.lua",
+   "  would copy: mobile/ossus/ossus_gokob_scavenger.lua",
+   "  would copy: mobile/ossus/ossus_tribis.lua",
+   "  would copy: mobile/ossus/ossus_tribis_bull.lua",
+   "  would copy: mobile/ossus/ossus_kaddyr_bug.lua",
+   "  would copy: mobile/ossus/ossus_kaddyr_soldier.lua",
+   "  would copy: mobile/ossus/ossus_kirruk.lua",
+   "  would copy: mobile/ossus/ossus_kirruk_alpha.lua",
+   "  would copy: mobile/ossus/ossus_bol.lua",
+   "  would copy: mobile/ossus/ossus_bol_bull.lua",
+   "  would copy: mobile/ossus/serverobjects.lua",
+   "  would copy: mobile/lair/creature_lair/ossus/ossus_gokob_den_neutral_medium.lua",
+   "  would copy: mobile/lair/creature_lair/ossus/ossus_tribis_lair_neutral_medium.lua",
+   "  would copy: mobile/lair/creature_lair/ossus/ossus_kaddyr_hive_neutral_medium.lua",
+   "  would copy: mobile/lair/creature_lair/ossus/ossus_kirruk_den_neutral_large.lua",
+   "  would copy: mobile/lair/creature_lair/ossus/ossus_bol_lair_neutral_medium.lua",
+   "  would copy: mobile/lair/creature_dynamic/ossus/ossus_gokob_pack_neutral_none.lua",
+   "  would copy: mobile/lair/creature_dynamic/ossus/ossus_tribis_herd_neutral_none.lua",
+   "  would copy: mobile/lair/creature_dynamic/ossus/ossus_kaddyr_swarm_neutral_none.lua",
+   "  would copy: mobile/lair/creature_dynamic/ossus/ossus_kirruk_pack_neutral_none.lua",
+   "  would copy: mobile/lair/creature_dynamic/ossus/ossus_bol_herd_neutral_none.lua",
+   "  would copy: mobile/spawn/ossus/ossus_plains.lua",
+   "  would copy: mobile/spawn/ossus/ossus_forest.lua",
+   "  would copy: mobile/spawn/ossus/ossus_highlands.lua",
+   "  would copy: mobile/spawn/ossus/ossus_canyon.lua",
+   "  would copy: mobile/spawn/ossus/ossus_world.lua",
+   "  would copy: managers/planet/ossus_regions.lua",
+   "  would copy: mobile/lair/creature_lair/ossus/serverobjects.lua",
+   "  would copy: mobile/lair/creature_dynamic/ossus/serverobjects.lua",
+   "  would copy: mobile/spawn/ossus/serverobjects.lua",
+   "--check: nothing changed."
+  ],
+  "selftest.txt": [
+   "== selftest in /tmp/tmp.BN1LYBKrH0: check",
+   "new files: 1   identical already: 0   line patches to apply: 5   already applied: 0   refused: 0",
+   "  would patch (after): a/list.lua",
+   "  would patch (before): a/list.lua",
+   "  would patch (before-file): a/list.lua",
+   "  would patch (append): a/list.lua",
+   "  would patch (after): a/list.lua",
+   "  would copy: a/new.lua",
+   "--check: nothing changed.",
+   "== selftest: apply",
+   "new files: 1   identical already: 0   line patches to apply: 5   already applied: 0   refused: 0",
+   "  copied a/new.lua",
+   "  patched a/list.lua (after): 7 -> 8 lines",
+   "  patched a/list.lua (before): 8 -> 9 lines",
+   "  patched a/list.lua (before-file): 9 -> 12 lines",
+   "  patched a/list.lua (append): 12 -> 14 lines",
+   "  patched a/list.lua (after): 14 -> 15 lines",
+   "  luac ok a/new.lua",
+   "  luac ok a/list.lua",
+   "  luac ok a/list.lua",
+   "  luac ok a/list.lua",
+   "  luac ok a/list.lua",
+   "  luac ok a/list.lua",
+   "== selftest: result matches the expected file",
+   "== selftest: second apply must change nothing",
+   "== selftest: idempotent",
+   "SELFTEST PASSED"
+  ]
+ },
+ "summary": {
+  "snapshot": {
+   "bytes": 8614,
+   "nodes": 87,
+   "world_level": 35,
+   "round_trip": true,
+   "hoth_ws_round_trip": true,
+   "ids": [
+    6900000,
+    6900086
+   ],
+   "ids_clash": [],
+   "templates_missing_client": [],
+   "templates_missing_crc": []
+  },
+  "server": {
+   "new_files": 30,
+   "patches": 5
+  },
+  "resources": {
+   "rows_added": 45,
+   "stock_round_trip": true,
+   "staged_round_trip": true,
+   "type_count_rule_check": {
+    "resource": {
+     "stock": 545,
+     "merged_hoth": 597,
+     "staged_ossus": 590
+    },
+    "organic": {
+     "stock": 390,
+     "merged_hoth": 428,
+     "staged_ossus": 428
+    },
+    "creature_resources": {
+     "stock": 206,
+     "merged_hoth": 226,
+     "staged_ossus": 226
+    },
+    "creature_food": {
+     "stock": 133,
+     "merged_hoth": 146,
+     "staged_ossus": 146
+    },
+    "milk": {
+     "stock": 21,
+     "merged_hoth": 23,
+     "staged_ossus": 23
+    },
+    "milk_domesticated": {
+     "stock": 10,
+     "merged_hoth": 11,
+     "staged_ossus": 11
+    },
+    "energy": {
+     "stock": 55,
+     "merged_hoth": 57,
+     "staged_ossus": 60
+    },
+    "energy_renewable_unlimited_solar": {
+     "stock": 11,
+     "merged_hoth": 12,
+     "staged_ossus": 12
+    }
+   }
+  },
+  "dev_check_problems": [],
+  "apply_check_refused": [],
+  "selftest_passed": true,
+  "staged_file_count": 37
+ }
+}

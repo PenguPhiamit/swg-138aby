@@ -1,0 +1,6 @@
+# <file under MMOCoreORB/bin/scripts>	<after|before|before-file|append>	<anchor line | marker>	<new line | snippet>; \t = tab, \\ = backslash
+mobile/serverobjects.lua	after	includeFile("hoth/serverobjects.lua") -- Sandbox: Hoth creatures (Bellum Gero, AGPL-3.0)	includeFile("ossus/serverobjects.lua") -- Sandbox: Ossus fauna (Fable batch O2)
+mobile/lair/creature_lair/serverobjects.lua	after	includeFile("lair/creature_lair/hoth/hoth_wampa_lair_neutral_large.lua")	includeFile("lair/creature_lair/ossus/serverobjects.lua") -- Sandbox: Ossus lairs (Fable batch O2)
+mobile/lair/creature_dynamic/serverobjects.lua	after	includeFile("lair/creature_dynamic/hoth/hoth_wampa_neutral_none.lua")	includeFile("lair/creature_dynamic/ossus/serverobjects.lua") -- Sandbox: Ossus herds and packs (Fable batch O2)
+mobile/spawn/serverobjects.lua	after	includeFile("spawn/hoth/hoth_scavenger_zone.lua")	includeFile("spawn/ossus/serverobjects.lua") -- Sandbox: Ossus spawn groups (Fable batch O2)
+managers/planet/planet_manager.lua	before-file	tutorial = {	snippets/planet_manager_ossus.lua

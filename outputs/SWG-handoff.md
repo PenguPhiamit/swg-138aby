@@ -211,6 +211,23 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 09:50 Claude: Hoth content verified in game by a bot (27/28); ticket purchases fixed; Fable's Ossus O2 staged
+- **Second test restart 09:33** (camps `de1b679a` + `5eb140ce`, missions and quest `92d99dba`, archive `e274ed12`): ready in 74 s, no errors from the new files, 18/18 bots back.
+- **Bot check `tools/hoth/hoth_content_check.py` (Esk, 09:48), 27/28:**
+  - Tatooine → Corellia → Hoth → Corellia travel works.
+  - Wampas are inside the ice-cave cells (53 and 46 found).
+  - All six camps have their NPCs; five have their props (the salvage detail found none under `object/static/structure/`, so Fable is checking).
+  - Both mission terminals stand at the outpost.
+  - **Quartermaster Vell talks** (opening screen and two player options from our string table).
+  - Area-spawner lairs: none yet, as expected; zones fill only near players.
+- **Ticket purchases failed silently** (Cresh's travel since 06:03, Esk 09:37). The cause is the new-player travel coupon: `PurchaseTicketCommand` asks "use the coupon?" and makes no ticket until that's answered, and the galaxy restores give the bots their coupons back. Fixed: `ticket_pages.answer_coupon` in `esk-hoth.py` and `cresh-travel.py` (`ff8850e`). This likely also explains C7's "first purchase after a start fails".
+- **Vell wanders** (26 m from his spawn), so a bot that walks to his old spot can miss him. Fable is making the quest NPCs stand still (fix1).
+- **Fable's Ossus O2 (`Fable-ossus/o2/`, staged, not applied):**
+  - Our own snapshot writer (byte-identical on 4 stock snapshots) and `ossus.ws`: the Knossa starport, 3 stock caves at the terrain's cave mouths, 31 ruin pieces.
+  - Server Lua: planet block, regions, 10 native creatures on stock bodies, lairs, spawn groups.
+  - Resource rows (45 cloned from Dantooine).
+  - Held until the owner answers question 10.
+
 ### 2026-10-14 09:27 Claude: Fable's Ossus O1 staged (terrain, our own table tools, sky/loading); Fable on O2
 - **`Fable-ossus/` (staging only):**
   - `terrain/ossus.trn`: 9 shader, 7 flora, 6 radial and 6 environment families of stock art referenced by name; hills, forests, the Eocho mountains, the Academy benchland, Imhar Canyon, a lake, a flat Knossa pad, a ruins pad, a road and 3 cave mouths.

@@ -1,0 +1,37 @@
+new files: 30   identical already: 0   line patches to apply: 5   already applied: 0   refused: 0
+  would patch (after): mobile/serverobjects.lua
+  would patch (after): mobile/lair/creature_lair/serverobjects.lua
+  would patch (after): mobile/lair/creature_dynamic/serverobjects.lua
+  would patch (after): mobile/spawn/serverobjects.lua
+  would patch (before-file): managers/planet/planet_manager.lua
+  would copy: mobile/ossus/ossus_gokob.lua
+  would copy: mobile/ossus/ossus_gokob_scavenger.lua
+  would copy: mobile/ossus/ossus_tribis.lua
+  would copy: mobile/ossus/ossus_tribis_bull.lua
+  would copy: mobile/ossus/ossus_kaddyr_bug.lua
+  would copy: mobile/ossus/ossus_kaddyr_soldier.lua
+  would copy: mobile/ossus/ossus_kirruk.lua
+  would copy: mobile/ossus/ossus_kirruk_alpha.lua
+  would copy: mobile/ossus/ossus_bol.lua
+  would copy: mobile/ossus/ossus_bol_bull.lua
+  would copy: mobile/ossus/serverobjects.lua
+  would copy: mobile/lair/creature_lair/ossus/ossus_gokob_den_neutral_medium.lua
+  would copy: mobile/lair/creature_lair/ossus/ossus_tribis_lair_neutral_medium.lua
+  would copy: mobile/lair/creature_lair/ossus/ossus_kaddyr_hive_neutral_medium.lua
+  would copy: mobile/lair/creature_lair/ossus/ossus_kirruk_den_neutral_large.lua
+  would copy: mobile/lair/creature_lair/ossus/ossus_bol_lair_neutral_medium.lua
+  would copy: mobile/lair/creature_dynamic/ossus/ossus_gokob_pack_neutral_none.lua
+  would copy: mobile/lair/creature_dynamic/ossus/ossus_tribis_herd_neutral_none.lua
+  would copy: mobile/lair/creature_dynamic/ossus/ossus_kaddyr_swarm_neutral_none.lua
+  would copy: mobile/lair/creature_dynamic/ossus/ossus_kirruk_pack_neutral_none.lua
+  would copy: mobile/lair/creature_dynamic/ossus/ossus_bol_herd_neutral_none.lua
+  would copy: mobile/spawn/ossus/ossus_plains.lua
+  would copy: mobile/spawn/ossus/ossus_forest.lua
+  would copy: mobile/spawn/ossus/ossus_highlands.lua
+  would copy: mobile/spawn/ossus/ossus_canyon.lua
+  would copy: mobile/spawn/ossus/ossus_world.lua
+  would copy: managers/planet/ossus_regions.lua
+  would copy: mobile/lair/creature_lair/ossus/serverobjects.lua
+  would copy: mobile/lair/creature_dynamic/ossus/serverobjects.lua
+  would copy: mobile/spawn/ossus/serverobjects.lua
+--check: nothing changed.

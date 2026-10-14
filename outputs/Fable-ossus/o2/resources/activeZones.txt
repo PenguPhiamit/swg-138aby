@@ -1,0 +1,2 @@
+-- managers/resource_manager.lua: append ",ossus" to the activeZones string (dev line 49 today):
+activeZones = "corellia,tatooine,lok,naboo,rori,endor,talus,yavin4,dathomir,dantooine,hoth,ossus"

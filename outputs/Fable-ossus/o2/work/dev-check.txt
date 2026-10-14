@@ -1,0 +1,85 @@
+== luac on the staged Lua and the planet block snippet
+luac ok managers/planet/ossus_regions.lua
+luac ok mobile/lair/creature_dynamic/ossus/ossus_bol_herd_neutral_none.lua
+luac ok mobile/lair/creature_dynamic/ossus/ossus_gokob_pack_neutral_none.lua
+luac ok mobile/lair/creature_dynamic/ossus/ossus_kaddyr_swarm_neutral_none.lua
+luac ok mobile/lair/creature_dynamic/ossus/ossus_kirruk_pack_neutral_none.lua
+luac ok mobile/lair/creature_dynamic/ossus/ossus_tribis_herd_neutral_none.lua
+luac ok mobile/lair/creature_dynamic/ossus/serverobjects.lua
+luac ok mobile/lair/creature_lair/ossus/ossus_bol_lair_neutral_medium.lua
+luac ok mobile/lair/creature_lair/ossus/ossus_gokob_den_neutral_medium.lua
+luac ok mobile/lair/creature_lair/ossus/ossus_kaddyr_hive_neutral_medium.lua
+luac ok mobile/lair/creature_lair/ossus/ossus_kirruk_den_neutral_large.lua
+luac ok mobile/lair/creature_lair/ossus/ossus_tribis_lair_neutral_medium.lua
+luac ok mobile/lair/creature_lair/ossus/serverobjects.lua
+luac ok mobile/ossus/ossus_bol_bull.lua
+luac ok mobile/ossus/ossus_bol.lua
+luac ok mobile/ossus/ossus_gokob.lua
+luac ok mobile/ossus/ossus_gokob_scavenger.lua
+luac ok mobile/ossus/ossus_kaddyr_bug.lua
+luac ok mobile/ossus/ossus_kaddyr_soldier.lua
+luac ok mobile/ossus/ossus_kirruk_alpha.lua
+luac ok mobile/ossus/ossus_kirruk.lua
+luac ok mobile/ossus/ossus_tribis_bull.lua
+luac ok mobile/ossus/ossus_tribis.lua
+luac ok mobile/ossus/serverobjects.lua
+luac ok mobile/spawn/ossus/ossus_canyon.lua
+luac ok mobile/spawn/ossus/ossus_forest.lua
+luac ok mobile/spawn/ossus/ossus_highlands.lua
+luac ok mobile/spawn/ossus/ossus_plains.lua
+luac ok mobile/spawn/ossus/ossus_world.lua
+luac ok mobile/spawn/ossus/serverobjects.lua
+luac ok snippets/planet_manager_ossus.lua
+== server templates the snapshot needs (work/dev-templates.txt)
+ok      object/building/military/outpost_starport.lua
+ok      object/cell/cell.lua
+ok      object/building/general/cave_01.lua
+ok      object/building/general/cave_03.lua
+ok      object/building/general/cave_02.lua
+ok      object/static/structure/dantooine/dant_jedi_main_structure.lua
+ok      object/static/structure/general/poi_temple_ancient_ruined.lua
+ok      object/static/structure/dantooine/dant_jedi_temple_altar.lua
+ok      object/static/structure/dantooine/dant_jedi_temple_pillar.lua
+ok      object/static/structure/dantooine/dant_jedi_temple_pillar_med.lua
+ok      object/static/structure/dantooine/dant_jedi_temple_pillar_base.lua
+ok      object/static/structure/dantooine/dant_jedi_temple_pillar_fallen.lua
+ok      object/static/structure/dantooine/dant_jedi_temple_pillar_sm.lua
+ok      object/static/structure/dantooine/dant_jedi_wall_1.lua
+ok      object/static/structure/dantooine/dant_jedi_wall_2.lua
+ok      object/static/structure/naboo/gungan_wall_ruined_lg_s01.lua
+ok      object/static/structure/naboo/gungan_wall_ruined_sm_s01.lua
+ok      object/static/structure/naboo/gungan_pillar_ruined_s01.lua
+ok      object/static/structure/tatooine/wall_ruined_tatooine_large_style_01.lua
+ok      object/static/structure/tatooine/pillar_ruined_large_style_01.lua
+== stock bodies, pet control devices and lair props the fauna use
+ok      object/mobile/womp_rat_hue.lua
+ok      object/mobile/tybis_hue.lua
+ok      object/mobile/kliknik_hue.lua
+ok      object/mobile/gurreck_hue.lua
+ok      object/mobile/bol_hue.lua
+ok      object/intangible/pet/womp_rat_hue.lua
+ok      object/intangible/pet/kliknik_hue.lua
+ok      object/intangible/pet/gurreck_hue.lua
+ok      object/tangible/lair/base/poi_all_lair_warren_large.lua
+ok      object/tangible/lair/base/poi_all_lair_mound_small.lua
+ok      object/tangible/lair/base/poi_all_lair_mound_large.lua
+ok      object/tangible/lair/base/poi_all_lair_thicket_large.lua
+ok      object/tangible/lair/base/poi_all_lair_insecthill_large.lua
+ok      object/tangible/lair/base/poi_all_lair_insecthill_small.lua
+ok      object/tangible/lair/base/poi_all_lair_rock_shelter_large.lua
+ok      object/tangible/lair/base/poi_all_lair_bones_large.lua
+ok      object/tangible/lair/base/poi_all_lair_rocks_large.lua
+== names that must not already exist in dev (creature templates, lairs, spawn groups, regions file, planet block)
+free    ossus_gokob
+free    ossus_tribis
+free    ossus_kaddyr_bug
+free    ossus_kirruk
+free    ossus_bol
+free    managers/planet/ossus_regions.lua
+free    ossus block in planet_manager.lua
+== patch anchors occur exactly once
+1
+1
+1
+1
+1

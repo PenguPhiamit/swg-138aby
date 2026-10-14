@@ -1,0 +1,21 @@
+# server templates the snapshot needs in Core3-dev (object/<path>/<name>.lua without shared_)
+object/building/military/outpost_starport.lua
+object/cell/cell.lua
+object/building/general/cave_01.lua
+object/building/general/cave_03.lua
+object/building/general/cave_02.lua
+object/static/structure/dantooine/dant_jedi_main_structure.lua
+object/static/structure/general/poi_temple_ancient_ruined.lua
+object/static/structure/dantooine/dant_jedi_temple_altar.lua
+object/static/structure/dantooine/dant_jedi_temple_pillar.lua
+object/static/structure/dantooine/dant_jedi_temple_pillar_med.lua
+object/static/structure/dantooine/dant_jedi_temple_pillar_base.lua
+object/static/structure/dantooine/dant_jedi_temple_pillar_fallen.lua
+object/static/structure/dantooine/dant_jedi_temple_pillar_sm.lua
+object/static/structure/dantooine/dant_jedi_wall_1.lua
+object/static/structure/dantooine/dant_jedi_wall_2.lua
+object/static/structure/naboo/gungan_wall_ruined_lg_s01.lua
+object/static/structure/naboo/gungan_wall_ruined_sm_s01.lua
+object/static/structure/naboo/gungan_pillar_ruined_s01.lua
+object/static/structure/tatooine/wall_ruined_tatooine_large_style_01.lua
+object/static/structure/tatooine/pillar_ruined_large_style_01.lua

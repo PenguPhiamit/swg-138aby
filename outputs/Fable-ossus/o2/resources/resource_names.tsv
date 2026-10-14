@@ -1,0 +1,47 @@
+# string/en/resource/resource_names.stf keys the client shows for the new types (key = ENUM); add if the merged
+# resource_names.stf lacks them (MTG named Hoth's; Ossus has none yet)
+milk_domesticated_ossus	Ossus Domesticated Milk
+milk_wild_ossus	Ossus Wild Milk
+meat_domesticated_ossus	Ossus Domesticated Meat
+meat_wild_ossus	Ossus Wild Meat
+meat_herbivore_ossus	Ossus Herbivore Meat
+meat_carnivore_ossus	Ossus Carnivore Meat
+meat_reptilian_ossus	Ossus Reptillian Meat
+meat_avian_ossus	Ossus Avian Meat
+meat_egg_ossus	Ossus Egg
+meat_insect_ossus	Ossus Insect Meat
+seafood_fish_ossus	Ossus Fish Meat
+seafood_crustacean_ossus	Ossus Crustacean Meat
+seafood_mollusk_ossus	Ossus Mollusk Meat
+bone_mammal_ossus	Ossus Animal Bones
+bone_avian_ossus	Ossus Avian Bones
+bone_horn_ossus	Ossus Horn
+hide_wooly_ossus	Ossus Wooly Hide
+hide_bristley_ossus	Ossus Bristley Hide
+hide_leathery_ossus	Ossus Leathery Hide
+hide_scaley_ossus	Ossus Scaley Hide
+corn_domesticated_ossus	Ossus Domesticated Corn
+corn_wild_ossus	Ossus Wild Corn
+rice_domesticated_ossus	Ossus Domesticated Rice
+rice_wild_ossus	Ossus Wild Rice
+oats_domesticated_ossus	Ossus Domesticated Oats
+oats_wild_ossus	Ossus Wild Oats
+wheat_domesticated_ossus	Ossus Domesticated Wheat
+wheat_wild_ossus	Ossus Wild Wheat
+vegetable_greens_ossus	Ossus Vegetable Greens
+vegetable_beans_ossus	Ossus Vegetable Beans
+vegetable_tubers_ossus	Ossus Vegetable Tubers
+vegetable_fungi_ossus	Ossus Vegetable Fungus
+fruit_fruits_ossus	Ossus Fruit
+fruit_berries_ossus	Ossus Berry Fruit
+fruit_flowers_ossus	Ossus Flower Fruit
+wood_deciduous_ossus	Ossus Deciduous Wood
+softwood_conifer_ossus	Ossus Conifer Wood
+softwood_evergreen_ossus	Ossus Evergreen Wood
+fiberplast_ossus	Ossus Fiberplast
+water_vapor_ossus	Ossus Water Vapor
+energy_renewable_site_limited_tidal_ossus	Ossus Tidal Renewable Energy
+energy_renewable_site_limited_hydron3_ossus	Ossus Hydron-3 Renewable Energy
+energy_renewable_site_limited_geothermal_ossus	Ossus Geothermal Renewable Energy
+energy_renewable_unlimited_wind_ossus	Ossus Wind Renewable Energy
+energy_renewable_unlimited_solar_ossus	Ossus Solar Renewable Energy

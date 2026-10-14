@@ -1,0 +1,627 @@
+{
+ "objects": [
+  {
+   "what": "Knossa starport",
+   "id": 6900000,
+   "template": "object/building/military/shared_outpost_starport.iff",
+   "x": 0.0,
+   "z": 50.3,
+   "y": -3600.0,
+   "heading": 180.0,
+   "cells": 1,
+   "pob_crc": 3606209763
+  },
+  {
+   "what": "cave at cave_foothills_west",
+   "id": 6900002,
+   "template": "object/building/general/shared_cave_01.iff",
+   "x": -2976.3,
+   "z": 56.1,
+   "y": -4978.0,
+   "heading": 0.0,
+   "cells": 11,
+   "pob_crc": 3748666653
+  },
+  {
+   "what": "cave at cave_foothills_east",
+   "id": 6900014,
+   "template": "object/building/general/shared_cave_03.iff",
+   "x": 4895.7,
+   "z": 62.6,
+   "y": -4978.0,
+   "heading": 0.0,
+   "cells": 29,
+   "pob_crc": 3787008917
+  },
+  {
+   "what": "cave at cave_north",
+   "id": 6900044,
+   "template": "object/building/general/shared_cave_02.iff",
+   "x": 1393.4,
+   "z": 46.1,
+   "y": 5915.1,
+   "heading": 0.0,
+   "cells": 11,
+   "pob_crc": 2294240807
+  },
+  {
+   "what": "ruins: dant_jedi_main_structure",
+   "id": 6900056,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_main_structure.iff",
+   "x": 2016.0,
+   "z": 170.4,
+   "y": 2848.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: poi_temple_ancient_ruined",
+   "id": 6900057,
+   "template": "object/static/structure/general/shared_poi_temple_ancient_ruined.iff",
+   "x": 2016.0,
+   "z": 170.41,
+   "y": 2934.0,
+   "heading": 90.0
+  },
+  {
+   "what": "ruins: dant_jedi_temple_altar",
+   "id": 6900058,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_altar.iff",
+   "x": 2016.0,
+   "z": 170.4,
+   "y": 2804.0,
+   "heading": 180.0
+  },
+  {
+   "what": "ruins: dant_jedi_temple_pillar",
+   "id": 6900059,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar.iff",
+   "x": 2010.0,
+   "z": 170.4,
+   "y": 2792.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: dant_jedi_temple_pillar_med",
+   "id": 6900060,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_med.iff",
+   "x": 2022.0,
+   "z": 170.4,
+   "y": 2792.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: dant_jedi_temple_pillar_base",
+   "id": 6900061,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_base.iff",
+   "x": 2010.0,
+   "z": 170.4,
+   "y": 2781.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: dant_jedi_temple_pillar",
+   "id": 6900062,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar.iff",
+   "x": 2022.0,
+   "z": 170.4,
+   "y": 2781.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: dant_jedi_temple_pillar_fallen",
+   "id": 6900063,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_fallen.iff",
+   "x": 2012.0,
+   "z": 170.4,
+   "y": 2770.0,
+   "heading": 70.0
+  },
+  {
+   "what": "ruins: dant_jedi_temple_pillar_sm",
+   "id": 6900064,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_sm.iff",
+   "x": 2022.0,
+   "z": 170.4,
+   "y": 2770.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: dant_jedi_temple_pillar",
+   "id": 6900065,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar.iff",
+   "x": 2010.0,
+   "z": 170.41,
+   "y": 2759.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: dant_jedi_temple_pillar_base",
+   "id": 6900066,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_base.iff",
+   "x": 2022.0,
+   "z": 170.42,
+   "y": 2759.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: dant_jedi_temple_pillar_med",
+   "id": 6900067,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_med.iff",
+   "x": 2010.0,
+   "z": 170.47,
+   "y": 2748.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: dant_jedi_temple_pillar_fallen",
+   "id": 6900068,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_fallen.iff",
+   "x": 2025.0,
+   "z": 170.5,
+   "y": 2747.0,
+   "heading": 20.0
+  },
+  {
+   "what": "ruins: dant_jedi_wall_1",
+   "id": 6900069,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_wall_1.iff",
+   "x": 1964.0,
+   "z": 170.4,
+   "y": 2868.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: dant_jedi_wall_1",
+   "id": 6900070,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_wall_1.iff",
+   "x": 1964.0,
+   "z": 170.4,
+   "y": 2844.0,
+   "heading": 10.0
+  },
+  {
+   "what": "ruins: dant_jedi_wall_2",
+   "id": 6900071,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_wall_2.iff",
+   "x": 1968.0,
+   "z": 170.4,
+   "y": 2886.0,
+   "heading": 35.0
+  },
+  {
+   "what": "ruins: dant_jedi_wall_1",
+   "id": 6900072,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_wall_1.iff",
+   "x": 2070.0,
+   "z": 170.4,
+   "y": 2866.0,
+   "heading": 180.0
+  },
+  {
+   "what": "ruins: dant_jedi_wall_2",
+   "id": 6900073,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_wall_2.iff",
+   "x": 2071.0,
+   "z": 170.4,
+   "y": 2842.0,
+   "heading": 160.0
+  },
+  {
+   "what": "ruins: dant_jedi_wall_1",
+   "id": 6900074,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_wall_1.iff",
+   "x": 2066.0,
+   "z": 170.4,
+   "y": 2888.0,
+   "heading": 150.0
+  },
+  {
+   "what": "ruins: dant_jedi_wall_2",
+   "id": 6900075,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_wall_2.iff",
+   "x": 2046.0,
+   "z": 170.4,
+   "y": 2802.0,
+   "heading": 90.0
+  },
+  {
+   "what": "ruins: dant_jedi_wall_2",
+   "id": 6900076,
+   "template": "object/static/structure/dantooine/shared_dant_jedi_wall_2.iff",
+   "x": 1986.0,
+   "z": 170.4,
+   "y": 2802.0,
+   "heading": 90.0
+  },
+  {
+   "what": "ruins: gungan_wall_ruined_lg_s01",
+   "id": 6900077,
+   "template": "object/static/structure/naboo/shared_gungan_wall_ruined_lg_s01.iff",
+   "x": 1936.0,
+   "z": 170.51,
+   "y": 2898.0,
+   "heading": 60.0
+  },
+  {
+   "what": "ruins: gungan_wall_ruined_sm_s01",
+   "id": 6900078,
+   "template": "object/static/structure/naboo/shared_gungan_wall_ruined_sm_s01.iff",
+   "x": 1928.0,
+   "z": 170.58,
+   "y": 2888.0,
+   "heading": 60.0
+  },
+  {
+   "what": "ruins: gungan_pillar_ruined_s01",
+   "id": 6900079,
+   "template": "object/static/structure/naboo/shared_gungan_pillar_ruined_s01.iff",
+   "x": 1932.0,
+   "z": 170.65,
+   "y": 2910.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: gungan_wall_ruined_lg_s01",
+   "id": 6900080,
+   "template": "object/static/structure/naboo/shared_gungan_wall_ruined_lg_s01.iff",
+   "x": 1934.0,
+   "z": 170.42,
+   "y": 2808.0,
+   "heading": 120.0
+  },
+  {
+   "what": "ruins: gungan_pillar_ruined_s01",
+   "id": 6900081,
+   "template": "object/static/structure/naboo/shared_gungan_pillar_ruined_s01.iff",
+   "x": 1926.0,
+   "z": 170.46,
+   "y": 2820.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: wall_ruined_tatooine_large_style_01",
+   "id": 6900082,
+   "template": "object/static/structure/tatooine/shared_wall_ruined_tatooine_large_style_01.iff",
+   "x": 2098.0,
+   "z": 170.5,
+   "y": 2896.0,
+   "heading": 120.0
+  },
+  {
+   "what": "ruins: pillar_ruined_large_style_01",
+   "id": 6900083,
+   "template": "object/static/structure/tatooine/shared_pillar_ruined_large_style_01.iff",
+   "x": 2104.0,
+   "z": 170.48,
+   "y": 2884.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: wall_ruined_tatooine_large_style_01",
+   "id": 6900084,
+   "template": "object/static/structure/tatooine/shared_wall_ruined_tatooine_large_style_01.iff",
+   "x": 2100.0,
+   "z": 170.47,
+   "y": 2810.0,
+   "heading": 60.0
+  },
+  {
+   "what": "ruins: pillar_ruined_large_style_01",
+   "id": 6900085,
+   "template": "object/static/structure/tatooine/shared_pillar_ruined_large_style_01.iff",
+   "x": 2092.0,
+   "z": 170.48,
+   "y": 2796.0,
+   "heading": 0.0
+  },
+  {
+   "what": "ruins: pillar_ruined_large_style_01",
+   "id": 6900086,
+   "template": "object/static/structure/tatooine/shared_pillar_ruined_large_style_01.iff",
+   "x": 2108.0,
+   "z": 170.58,
+   "y": 2802.0,
+   "heading": 0.0
+  }
+ ],
+ "caves": [
+  {
+   "site": "cave_foothills_west",
+   "cave": "cave_01",
+   "origin": [
+    -2976.3,
+    56.1,
+    -4978.0
+   ],
+   "heading": 0.0,
+   "mouth_world": [
+    -2976.0,
+    -4960.0
+   ],
+   "mouth_matches_hole": true,
+   "portal_floor_height": 51.9,
+   "apron_height": 51.9,
+   "exterior_box_building_space": {
+    "max": [
+     23.850631713867188,
+     9.356231689453125,
+     35.63286590576172
+    ],
+    "min": [
+     -25.120731353759766,
+     -24.925703048706055,
+     -3.7280197143554688
+    ]
+   },
+   "footprint_corners": [
+    [
+     -3001.4,
+     -4981.7
+    ],
+    [
+     -3001.4,
+     -4942.4
+    ],
+    [
+     -2952.4,
+     -4981.7
+    ],
+    [
+     -2952.4,
+     -4942.4
+    ]
+   ],
+   "ground_at_corners": [
+    58.81,
+    53.51,
+    52.94,
+    48.55
+   ],
+   "ground_minus_origin_at_corners": [
+    2.71,
+    -2.59,
+    -3.16,
+    -7.55
+   ],
+   "exterior_height_range_above_origin": [
+    -24.9,
+    9.4
+   ],
+   "farthest_corner_from_mouth": 33.4,
+   "apron_radius": 30.0,
+   "hole_radius": 9.0
+  },
+  {
+   "site": "cave_foothills_east",
+   "cave": "cave_03",
+   "origin": [
+    4895.7,
+    62.6,
+    -4978.0
+   ],
+   "heading": 0.0,
+   "mouth_world": [
+    4896.0,
+    -4960.0
+   ],
+   "mouth_matches_hole": true,
+   "portal_floor_height": 58.5,
+   "apron_height": 58.5,
+   "exterior_box_building_space": {
+    "max": [
+     23.850631713867188,
+     9.356231689453125,
+     35.63286590576172
+    ],
+    "min": [
+     -25.120731353759766,
+     -24.925703048706055,
+     -3.7280197143554688
+    ]
+   },
+   "footprint_corners": [
+    [
+     4870.6,
+     -4981.7
+    ],
+    [
+     4870.6,
+     -4942.4
+    ],
+    [
+     4919.6,
+     -4981.7
+    ],
+    [
+     4919.6,
+     -4942.4
+    ]
+   ],
+   "ground_at_corners": [
+    62.61,
+    57.97,
+    64.69,
+    59.15
+   ],
+   "ground_minus_origin_at_corners": [
+    0.01,
+    -4.63,
+    2.09,
+    -3.45
+   ],
+   "exterior_height_range_above_origin": [
+    -24.9,
+    9.4
+   ],
+   "farthest_corner_from_mouth": 33.4,
+   "apron_radius": 30.0,
+   "hole_radius": 9.0
+  },
+  {
+   "site": "cave_north",
+   "cave": "cave_02",
+   "origin": [
+    1393.4,
+    46.1,
+    5915.1
+   ],
+   "heading": 0.0,
+   "mouth_world": [
+    1376.0,
+    5920.0
+   ],
+   "mouth_matches_hole": true,
+   "portal_floor_height": 45.7,
+   "apron_height": 45.7,
+   "exterior_box_building_space": {
+    "max": [
+     6.193398952484131,
+     13.083133697509766,
+     22.548608779907227
+    ],
+    "min": [
+     -42.7779655456543,
+     -21.198801040649414,
+     -16.81227684020996
+    ]
+   },
+   "footprint_corners": [
+    [
+     1350.6,
+     5898.3
+    ],
+    [
+     1350.6,
+     5937.6
+    ],
+    [
+     1399.6,
+     5898.3
+    ],
+    [
+     1399.6,
+     5937.6
+    ]
+   ],
+   "ground_at_corners": [
+    49.13,
+    44.2,
+    49.96,
+    44.08
+   ],
+   "ground_minus_origin_at_corners": [
+    3.03,
+    -1.9,
+    3.86,
+    -2.02
+   ],
+   "exterior_height_range_above_origin": [
+    -21.2,
+    13.1
+   ],
+   "farthest_corner_from_mouth": 33.4,
+   "apron_radius": 30.0,
+   "hole_radius": 9.0
+  }
+ ],
+ "checks": {
+  "bytes": 8614,
+  "nodes": 87,
+  "world_level": 35,
+  "templates": [
+   "object/building/military/shared_outpost_starport.iff",
+   "object/cell/shared_cell.iff",
+   "object/building/general/shared_cave_01.iff",
+   "object/building/general/shared_cave_03.iff",
+   "object/building/general/shared_cave_02.iff",
+   "object/static/structure/dantooine/shared_dant_jedi_main_structure.iff",
+   "object/static/structure/general/shared_poi_temple_ancient_ruined.iff",
+   "object/static/structure/dantooine/shared_dant_jedi_temple_altar.iff",
+   "object/static/structure/dantooine/shared_dant_jedi_temple_pillar.iff",
+   "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_med.iff",
+   "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_base.iff",
+   "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_fallen.iff",
+   "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_sm.iff",
+   "object/static/structure/dantooine/shared_dant_jedi_wall_1.iff",
+   "object/static/structure/dantooine/shared_dant_jedi_wall_2.iff",
+   "object/static/structure/naboo/shared_gungan_wall_ruined_lg_s01.iff",
+   "object/static/structure/naboo/shared_gungan_wall_ruined_sm_s01.iff",
+   "object/static/structure/naboo/shared_gungan_pillar_ruined_s01.iff",
+   "object/static/structure/tatooine/shared_wall_ruined_tatooine_large_style_01.iff",
+   "object/static/structure/tatooine/shared_pillar_ruined_large_style_01.iff"
+  ],
+  "round_trip_identical": true,
+  "ids": [
+   6900000,
+   6900086
+  ],
+  "ids_unique": true,
+  "ids_used_by_other_snapshots": [],
+  "templates_missing_in_client": [],
+  "templates_missing_in_merged_crc_table": [],
+  "portal_layouts_present": {
+   "appearance/thm_all_cave_s01.pob": true,
+   "appearance/thm_all_cave_s02.pob": true,
+   "appearance/thm_all_cave_s03.pob": true,
+   "appearance/mun_all_landing_pad_s01.pob": true
+  },
+  "hoth_ws_round_trip": true
+ },
+ "starport": {
+  "travel_point": {
+   "x": 20.3,
+   "z": 50.3,
+   "y": -3582.2
+  },
+  "footprint_corners": [
+   [
+    24.0,
+    -3577.5
+   ],
+   [
+    24.0,
+    -3608.0
+   ],
+   [
+    -24.0,
+    -3577.5
+   ],
+   [
+    -24.0,
+    -3608.0
+   ]
+  ],
+  "ground_at_corners": [
+   50.3,
+   50.3,
+   50.3,
+   50.3
+  ],
+  "exterior_box": {
+   "max": [
+    24.0,
+    18.0,
+    8.0
+   ],
+   "min": [
+    -24.0,
+    -3.000000238418579,
+    -22.513113021850586
+   ]
+  },
+  "flat_pad_radius": 88
+ },
+ "ruins": {
+  "centre": [
+   2016.0,
+   2848.0
+  ],
+  "pieces": 31,
+  "height_range": [
+   170.4,
+   170.65
+  ],
+  "pad_radius": 130.0,
+  "farthest_piece_from_centre": 104.4
+ }
+}

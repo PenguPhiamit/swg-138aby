@@ -1,0 +1,419 @@
+{
+ "new_files": [
+  "mobile/ossus/ossus_gokob.lua",
+  "mobile/ossus/ossus_gokob_scavenger.lua",
+  "mobile/ossus/ossus_tribis.lua",
+  "mobile/ossus/ossus_tribis_bull.lua",
+  "mobile/ossus/ossus_kaddyr_bug.lua",
+  "mobile/ossus/ossus_kaddyr_soldier.lua",
+  "mobile/ossus/ossus_kirruk.lua",
+  "mobile/ossus/ossus_kirruk_alpha.lua",
+  "mobile/ossus/ossus_bol.lua",
+  "mobile/ossus/ossus_bol_bull.lua",
+  "mobile/ossus/serverobjects.lua",
+  "mobile/lair/creature_lair/ossus/ossus_gokob_den_neutral_medium.lua",
+  "mobile/lair/creature_lair/ossus/ossus_tribis_lair_neutral_medium.lua",
+  "mobile/lair/creature_lair/ossus/ossus_kaddyr_hive_neutral_medium.lua",
+  "mobile/lair/creature_lair/ossus/ossus_kirruk_den_neutral_large.lua",
+  "mobile/lair/creature_lair/ossus/ossus_bol_lair_neutral_medium.lua",
+  "mobile/lair/creature_dynamic/ossus/ossus_gokob_pack_neutral_none.lua",
+  "mobile/lair/creature_dynamic/ossus/ossus_tribis_herd_neutral_none.lua",
+  "mobile/lair/creature_dynamic/ossus/ossus_kaddyr_swarm_neutral_none.lua",
+  "mobile/lair/creature_dynamic/ossus/ossus_kirruk_pack_neutral_none.lua",
+  "mobile/lair/creature_dynamic/ossus/ossus_bol_herd_neutral_none.lua",
+  "mobile/spawn/ossus/ossus_plains.lua",
+  "mobile/spawn/ossus/ossus_forest.lua",
+  "mobile/spawn/ossus/ossus_highlands.lua",
+  "mobile/spawn/ossus/ossus_canyon.lua",
+  "mobile/spawn/ossus/ossus_world.lua",
+  "managers/planet/ossus_regions.lua",
+  "mobile/lair/creature_lair/ossus/serverobjects.lua",
+  "mobile/lair/creature_dynamic/ossus/serverobjects.lua",
+  "mobile/spawn/ossus/serverobjects.lua"
+ ],
+ "patches": [
+  {
+   "file": "mobile/serverobjects.lua",
+   "mode": "after",
+   "anchor": "includeFile(\"hoth/serverobjects.lua\") -- Sandbox: Hoth creatures (Bellum Gero, AGPL-3.0)",
+   "new": "includeFile(\"ossus/serverobjects.lua\") -- Sandbox: Ossus fauna (Fable batch O2)"
+  },
+  {
+   "file": "mobile/lair/creature_lair/serverobjects.lua",
+   "mode": "after",
+   "anchor": "includeFile(\"lair/creature_lair/hoth/hoth_wampa_lair_neutral_large.lua\")",
+   "new": "includeFile(\"lair/creature_lair/ossus/serverobjects.lua\") -- Sandbox: Ossus lairs (Fable batch O2)"
+  },
+  {
+   "file": "mobile/lair/creature_dynamic/serverobjects.lua",
+   "mode": "after",
+   "anchor": "includeFile(\"lair/creature_dynamic/hoth/hoth_wampa_neutral_none.lua\")",
+   "new": "includeFile(\"lair/creature_dynamic/ossus/serverobjects.lua\") -- Sandbox: Ossus herds and packs (Fable batch O2)"
+  },
+  {
+   "file": "mobile/spawn/serverobjects.lua",
+   "mode": "after",
+   "anchor": "includeFile(\"spawn/hoth/hoth_scavenger_zone.lua\")",
+   "new": "includeFile(\"spawn/ossus/serverobjects.lua\") -- Sandbox: Ossus spawn groups (Fable batch O2)"
+  },
+  {
+   "file": "managers/planet/planet_manager.lua",
+   "mode": "before-file",
+   "anchor": "tutorial = {",
+   "new": "snippets/planet_manager_ossus.lua"
+  }
+ ],
+ "fauna": [
+  {
+   "key": "ossus_gokob",
+   "name": "a gokob",
+   "body": "object/mobile/womp_rat_hue.iff",
+   "level": 22
+  },
+  {
+   "key": "ossus_gokob_scavenger",
+   "name": "a gokob scavenger",
+   "body": "object/mobile/womp_rat_hue.iff",
+   "level": 27
+  },
+  {
+   "key": "ossus_tribis",
+   "name": "a tribis",
+   "body": "object/mobile/tybis_hue.iff",
+   "level": 28
+  },
+  {
+   "key": "ossus_tribis_bull",
+   "name": "a tribis bull",
+   "body": "object/mobile/tybis_hue.iff",
+   "level": 34
+  },
+  {
+   "key": "ossus_kaddyr_bug",
+   "name": "a kaddyr bug",
+   "body": "object/mobile/kliknik_hue.iff",
+   "level": 32
+  },
+  {
+   "key": "ossus_kaddyr_soldier",
+   "name": "a kaddyr soldier",
+   "body": "object/mobile/kliknik_hue.iff",
+   "level": 40
+  },
+  {
+   "key": "ossus_kirruk",
+   "name": "a kirruk",
+   "body": "object/mobile/gurreck_hue.iff",
+   "level": 48
+  },
+  {
+   "key": "ossus_kirruk_alpha",
+   "name": "a kirruk alpha",
+   "body": "object/mobile/gurreck_hue.iff",
+   "level": 56
+  },
+  {
+   "key": "ossus_bol",
+   "name": "an Ossus bol",
+   "body": "object/mobile/bol_hue.iff",
+   "level": 30
+  },
+  {
+   "key": "ossus_bol_bull",
+   "name": "an Ossus bol bull",
+   "body": "object/mobile/bol_hue.iff",
+   "level": 36
+  }
+ ],
+ "lairs": [
+  {
+   "name": "ossus_gokob_den_neutral_medium",
+   "kind": "creature_lair",
+   "mobiles": [
+    [
+     "ossus_gokob",
+     3
+    ],
+    [
+     "ossus_gokob_scavenger",
+     1
+    ]
+   ],
+   "buildings": [
+    "poi_all_lair_warren_large",
+    "poi_all_lair_mound_small"
+   ],
+   "mission_building": null
+  },
+  {
+   "name": "ossus_tribis_lair_neutral_medium",
+   "kind": "creature_lair",
+   "mobiles": [
+    [
+     "ossus_tribis",
+     2
+    ],
+    [
+     "ossus_tribis_bull",
+     1
+    ]
+   ],
+   "buildings": [
+    "poi_all_lair_mound_large",
+    "poi_all_lair_thicket_large"
+   ],
+   "mission_building": null
+  },
+  {
+   "name": "ossus_kaddyr_hive_neutral_medium",
+   "kind": "creature_lair",
+   "mobiles": [
+    [
+     "ossus_kaddyr_bug",
+     3
+    ],
+    [
+     "ossus_kaddyr_soldier",
+     1
+    ]
+   ],
+   "buildings": [
+    "poi_all_lair_insecthill_large",
+    "poi_all_lair_insecthill_small"
+   ],
+   "mission_building": null
+  },
+  {
+   "name": "ossus_kirruk_den_neutral_large",
+   "kind": "creature_lair",
+   "mobiles": [
+    [
+     "ossus_kirruk",
+     2
+    ],
+    [
+     "ossus_kirruk_alpha",
+     1
+    ]
+   ],
+   "buildings": [
+    "poi_all_lair_rock_shelter_large",
+    "poi_all_lair_bones_large"
+   ],
+   "mission_building": null
+  },
+  {
+   "name": "ossus_bol_lair_neutral_medium",
+   "kind": "creature_lair",
+   "mobiles": [
+    [
+     "ossus_bol",
+     2
+    ],
+    [
+     "ossus_bol_bull",
+     1
+    ]
+   ],
+   "buildings": [
+    "poi_all_lair_rocks_large",
+    "poi_all_lair_rock_shelter_large"
+   ],
+   "mission_building": null
+  },
+  {
+   "name": "ossus_gokob_pack_neutral_none",
+   "kind": "creature_dynamic",
+   "mobiles": [
+    [
+     "ossus_gokob",
+     4
+    ],
+    [
+     "ossus_gokob_scavenger",
+     1
+    ]
+   ],
+   "buildings": [],
+   "mission_building": "poi_all_lair_warren_large"
+  },
+  {
+   "name": "ossus_tribis_herd_neutral_none",
+   "kind": "creature_dynamic",
+   "mobiles": [
+    [
+     "ossus_tribis",
+     4
+    ],
+    [
+     "ossus_tribis_bull",
+     1
+    ]
+   ],
+   "buildings": [],
+   "mission_building": "poi_all_lair_mound_large"
+  },
+  {
+   "name": "ossus_kaddyr_swarm_neutral_none",
+   "kind": "creature_dynamic",
+   "mobiles": [
+    [
+     "ossus_kaddyr_bug",
+     4
+    ],
+    [
+     "ossus_kaddyr_soldier",
+     1
+    ]
+   ],
+   "buildings": [],
+   "mission_building": "poi_all_lair_insecthill_large"
+  },
+  {
+   "name": "ossus_kirruk_pack_neutral_none",
+   "kind": "creature_dynamic",
+   "mobiles": [
+    [
+     "ossus_kirruk",
+     3
+    ],
+    [
+     "ossus_kirruk_alpha",
+     1
+    ]
+   ],
+   "buildings": [],
+   "mission_building": "poi_all_lair_rock_shelter_large"
+  },
+  {
+   "name": "ossus_bol_herd_neutral_none",
+   "kind": "creature_dynamic",
+   "mobiles": [
+    [
+     "ossus_bol",
+     4
+    ],
+    [
+     "ossus_bol_bull",
+     1
+    ]
+   ],
+   "buildings": [],
+   "mission_building": "poi_all_lair_rocks_large"
+  }
+ ],
+ "spawn_groups": {
+  "ossus_plains": [
+   "ossus_tribis_herd_neutral_none",
+   "ossus_tribis_lair_neutral_medium",
+   "ossus_bol_herd_neutral_none",
+   "ossus_bol_lair_neutral_medium",
+   "ossus_gokob_pack_neutral_none",
+   "ossus_gokob_den_neutral_medium"
+  ],
+  "ossus_forest": [
+   "ossus_kaddyr_swarm_neutral_none",
+   "ossus_kaddyr_hive_neutral_medium",
+   "ossus_gokob_pack_neutral_none",
+   "ossus_tribis_lair_neutral_medium"
+  ],
+  "ossus_highlands": [
+   "ossus_kirruk_pack_neutral_none",
+   "ossus_kirruk_den_neutral_large",
+   "ossus_kaddyr_swarm_neutral_none",
+   "ossus_bol_herd_neutral_none"
+  ],
+  "ossus_canyon": [
+   "ossus_kaddyr_hive_neutral_medium",
+   "ossus_kaddyr_swarm_neutral_none",
+   "ossus_kirruk_pack_neutral_none",
+   "ossus_gokob_den_neutral_medium"
+  ],
+  "ossus_world": [
+   "ossus_gokob_pack_neutral_none",
+   "ossus_gokob_den_neutral_medium",
+   "ossus_tribis_herd_neutral_none",
+   "ossus_tribis_lair_neutral_medium",
+   "ossus_bol_herd_neutral_none",
+   "ossus_bol_lair_neutral_medium",
+   "ossus_kaddyr_swarm_neutral_none",
+   "ossus_kaddyr_hive_neutral_medium",
+   "ossus_kirruk_pack_neutral_none",
+   "ossus_kirruk_den_neutral_large"
+  ]
+ },
+ "spawn_areas": [
+  [
+   "ossus_plains_west",
+   -4400,
+   -1200,
+   1800,
+   "ossus_plains",
+   64
+  ],
+  [
+   "ossus_plains_north",
+   -1500,
+   5200,
+   1700,
+   "ossus_plains",
+   64
+  ],
+  [
+   "ossus_forest_east",
+   1200,
+   5400,
+   1200,
+   "ossus_forest",
+   48
+  ],
+  [
+   "ossus_forest_southwest",
+   -3200,
+   -3400,
+   1000,
+   "ossus_forest",
+   48
+  ],
+  [
+   "ossus_highlands_south",
+   2600,
+   -4300,
+   1500,
+   "ossus_highlands",
+   48
+  ],
+  [
+   "ossus_canyon_country",
+   5100,
+   -100,
+   1600,
+   "ossus_canyon",
+   48
+  ]
+ ],
+ "stock_bodies": [
+  "object/mobile/bol_hue.iff",
+  "object/mobile/gurreck_hue.iff",
+  "object/mobile/kliknik_hue.iff",
+  "object/mobile/tybis_hue.iff",
+  "object/mobile/womp_rat_hue.iff"
+ ],
+ "stock_pcds": [
+  "object/intangible/pet/gurreck_hue.iff",
+  "object/intangible/pet/kliknik_hue.iff",
+  "object/intangible/pet/womp_rat_hue.iff"
+ ],
+ "lair_props": [
+  "object/tangible/lair/base/poi_all_lair_bones_large.iff",
+  "object/tangible/lair/base/poi_all_lair_insecthill_large.iff",
+  "object/tangible/lair/base/poi_all_lair_insecthill_small.iff",
+  "object/tangible/lair/base/poi_all_lair_mound_large.iff",
+  "object/tangible/lair/base/poi_all_lair_mound_small.iff",
+  "object/tangible/lair/base/poi_all_lair_rock_shelter_large.iff",
+  "object/tangible/lair/base/poi_all_lair_rocks_large.iff",
+  "object/tangible/lair/base/poi_all_lair_thicket_large.iff",
+  "object/tangible/lair/base/poi_all_lair_warren_large.iff"
+ ],
+ "travel_point": ", x = 20.3, z = 50.3, y = -3582.2, interplanetaryTravelAllowed = 1, incomingTravelAllowed = 1, landingRange = 3"
+}

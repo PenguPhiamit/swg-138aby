@@ -1,0 +1,82 @@
+{
+ "stock_rows": 725,
+ "rows_with_ossus": 770,
+ "added": 45,
+ "stock_round_trip": true,
+ "staged_round_trip": true,
+ "ancestors_bumped": 77,
+ "sample": [
+  {
+   "after": "milk_domesticated_dantooine",
+   "enum": "milk_domesticated_ossus",
+   "name": "Ossus Domesticated Milk",
+   "container": "object/resource_container/organic_bottle_milk.iff",
+   "random_name_class": "plain_resource"
+  },
+  {
+   "after": "milk_wild_dantooine",
+   "enum": "milk_wild_ossus",
+   "name": "Ossus Wild Milk",
+   "container": "object/resource_container/organic_bottle_milk.iff",
+   "random_name_class": "plain_resource"
+  },
+  {
+   "after": "meat_domesticated_dantooine",
+   "enum": "meat_domesticated_ossus",
+   "name": "Ossus Domesticated Meat",
+   "container": "object/resource_container/organic_food.iff",
+   "random_name_class": "plain_resource"
+  }
+ ],
+ "energy_rows_included": [
+  "energy_renewable_site_limited_tidal_ossus",
+  "energy_renewable_site_limited_hydron3_ossus",
+  "energy_renewable_site_limited_geothermal_ossus",
+  "energy_renewable_unlimited_wind_ossus",
+  "energy_renewable_unlimited_solar_ossus"
+ ],
+ "source_set_equals_endor_set": true,
+ "hoth_leaves_in_merged_tree": 52,
+ "type_count_rule_check": {
+  "resource": {
+   "stock": 545,
+   "merged_hoth": 597,
+   "staged_ossus": 590
+  },
+  "organic": {
+   "stock": 390,
+   "merged_hoth": 428,
+   "staged_ossus": 428
+  },
+  "creature_resources": {
+   "stock": 206,
+   "merged_hoth": 226,
+   "staged_ossus": 226
+  },
+  "creature_food": {
+   "stock": 133,
+   "merged_hoth": 146,
+   "staged_ossus": 146
+  },
+  "milk": {
+   "stock": 21,
+   "merged_hoth": 23,
+   "staged_ossus": 23
+  },
+  "milk_domesticated": {
+   "stock": 10,
+   "merged_hoth": 11,
+   "staged_ossus": 11
+  },
+  "energy": {
+   "stock": 55,
+   "merged_hoth": 57,
+   "staged_ossus": 60
+  },
+  "energy_renewable_unlimited_solar": {
+   "stock": 11,
+   "merged_hoth": 12,
+   "staged_ossus": 12
+  }
+ }
+}
