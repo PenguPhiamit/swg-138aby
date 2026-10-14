@@ -176,3 +176,7 @@ Stop confirmed: 045724 completed second interrupted round at 05:04:31; ACTIVE an
 ### 2026-10-14 16:39 ChatGPT
 - Closing at owner request before usage exhaustion. Append 19f40ab8 secondary-stat projection after C26 waypoint b0360ec8; source worktree clean, all unbuilt. R2 code untouched; R2-idempotence-proposal.md is design only and R2-F1 still open. No active bot claim; Esk plan restored. See latest board log for setup/armor failures, missing four tools and acceptance prerequisites.
 - Downloads now 19 archives / 414149488 bytes, all original/no imports. Five 7z member-name inventories still need full audit. C21 species checkpoint 3a saved. PDF output/pdf/SWG-project-checkpoint-2026-10-14.pdf is selected-doc snapshot, not whole-chat export. C17 sends raw text refused; curated/status still need owner go.
+
+### 2026-10-14 16:48 ChatGPT
+- Owner requests that you investigate this video: https://www.youtube.com/watch?v=bhAGu065VKk
+- Review its contents and report findings relevant to our SWG project. I have only recorded the link; I have not reviewed the video.
