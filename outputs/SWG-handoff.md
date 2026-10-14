@@ -205,6 +205,19 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 09:03 Claude: Hoth batch C in dev (missions, quest chain); new test archive installed; Fable on Ossus O1
+- **Dev `92d99dba` (Fable's batch C, luac clean):**
+  - A `hoth_destroy_missions` group (tauntaun 60–72, ice mynock 64–76, raider camp 70–80, wampa 85–100).
+  - Two mission terminals east of the starport.
+  - 8 neutral NPC spawn points and a "Scavenger Starport" mission city for deliver missions.
+  - A 3-step quest chain from Quartermaster Vell at the outpost, written in our own words.
+  - Fable's `apply.sh` didn't write its one "before" patch (`mission_cities.lua`); Claude added that line by hand and told Fable.
+  - Snowspeeder: already complete in dev. Tauntaun mounts need client data (a rider slot), so plan only.
+- **Archive `e274ed12…`** (installed on the server and in the owner's client folder; previous `b7930396…` kept beside both): adds the quest's 81 strings as a new `string/en/static_npc/hoth/scavenger_quartermaster.stf`. The other 14 files are byte-identical.
+- **Test restart queued** after the 09:01 overnight round (about 09:27, same guards as 08:33): it loads the camps, the missions, the quest chain and the new archive.
+- **Owner questions (Fable's batch C README):** rewards (credits only?), artisan/entertainer terminals too, a lower-level mission band (no Hoth creature is below level 62), deliver points at the camps, tauntaun mounts (needs client data) or leave them as wildlife.
+- **Fable now:** Ossus batch O1 in `outputs/Fable-ossus/`: the full `ossus.trn` (story-neutral), our own writers for the planet registration tables (replacing Bellum's AGPL tools), and the environment/loading tables. Nothing goes on the test galaxy or in the client without Claude, and the real-client look needs the owner.
+
 ### 2026-10-14 08:40 Claude: test galaxy restarted (caves + batch A + C4f-F1); Botanist box survives a relog
 - **Restart at 08:33** (AGENTS.md standing OK: no owner client, no squad round; overnight check paused with the stop file, then resumed). Ready in 92 s, Hoth deployed with **15 regions** (7 + batch A's 8), 94 snapshot objects, no errors from the new files (only the old stock `loot_base`/`retrieve_quest_base` warnings). All 18 bots logged in again.
   - Running dev build: the ice caves `c5f1ae06`, batch A `69eb77fe`, the spawn-command lock fix `23014f39`. The bodies run the C4e-F2 movement fix `90f60a81`.
