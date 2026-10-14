@@ -1,0 +1,229 @@
+{
+  "rows": 129,
+  "distinct_cells": 62,
+  "no_triangle": [],
+  "over_1m": [],
+  "max_delta": 0.005932976841634741,
+  "inputs": {
+    "appearance/thm_all_cave_s01_ice.pob": "1c7926a022f7db5cc37ad9d83616c8213f91b93cbe1270c3e50fff988c1ebb91",
+    "appearance/collision/thm_all_cave_s01_ice_r1_collision_floor.flr": "331ef3b34b49e99f5adfcc3cbd6f1b202fcce930f32614f173d28a04700d478b",
+    "appearance/collision/thm_all_cave_s01_ice_r2_collision_floor.flr": "a2217aa06c5fbdd1176cfa380cb7648443eb844434d45fb54626e701a5ee538f",
+    "appearance/collision/thm_all_cave_s01_ice_r3_collision_floor.flr": "7f9d080f269e07d0334c7ffe732fa24d46e963f37d71d700926df3717f894693",
+    "appearance/collision/thm_all_cave_s01_ice_r4_collision_floor.flr": "a9a8bb93d07692450d497aec5e9210ee0ff6ac466b801043a98f326fd21a4816",
+    "appearance/collision/thm_all_cave_s01_ice_r5_collision_floor.flr": "d79e4c8d8a3f5ac095e19959904faff5a8b84e99b41425914e3bc3505b8aae0f",
+    "appearance/collision/thm_all_cave_s01_ice_r6_collision_floor.flr": "e00d3a16131a243fe617575b2ec571868f3c3252519507d42fe488e3306b2d58",
+    "appearance/collision/thm_all_cave_s01_ice_r7_collision_floor.flr": "4a3dfdf1c3a483e251ded9e0f98bc7dc7d97da921a2258bdf104b92e2488610a",
+    "appearance/collision/thm_all_cave_s01_ice_r8_collision_floor.flr": "08eda9f7a85ec0897e104c2a0e853a40058eaf7b679a7a9602a845ae433c55e2",
+    "appearance/collision/thm_all_cave_s01_ice_r9_collision_floor.flr": "757e3f69e2fab5edf26b9355fbb6a6f5069dc543c4bac4082e190c6ca5223175",
+    "appearance/collision/thm_all_cave_s01_ice_r10_collision_floor.flr": "4cf1e1ccab297452e673941d4b7d88e03faa7b19850c2c28d6d5e7d32d0bace0",
+    "appearance/collision/thm_all_cave_s01_ice_r11_collision_floor.flr": "da71a04dd0018be7ef4ec9b1b57db2005ac6eb273b474fb8fdd706604d3e0938",
+    "appearance/thm_all_cave_s02_ice.pob": "15f7a68bc722a474a3b15dfb5099a17c08a296b95cd146f35f09a4b1987bae65",
+    "appearance/collision/thm_all_cave_s02_ice_r1_collision_floor.flr": "defe40d0e23334e58489c0b2e87c80704a44fb8732a66a9fd9b67b968b434403",
+    "appearance/collision/thm_all_cave_s02_ice_r2_collision_floor.flr": "fabc70f04d0f9a3215faaea6bbe9592f82eef0c021314e9968124a4adc529484",
+    "appearance/collision/thm_all_cave_s02_ice_r3_collision_floor.flr": "30697f47ea9977ea3d7044722139fdd6cf545cb2decf348e91f8bb4ce36836d7",
+    "appearance/collision/thm_all_cave_s02_ice_r4_collision_floor.flr": "b50e82eff2092150f38fbbbc394c63cd570716cdb9bc7dbf40ebbafaa0d09b27",
+    "appearance/collision/thm_all_cave_s02_ice_r5_collision_floor.flr": "ceccc7ce62f8711aeade3d7cd4388479215c8e848c03af7847d6f5d3cef3704f",
+    "appearance/collision/thm_all_cave_s02_ice_r6_collision_floor.flr": "3993ee1afe036d02fd6a991d59fc0c09bca19403798b6b536a24c88f74d1d40a",
+    "appearance/collision/thm_all_cave_s02_ice_r7_collision_floor.flr": "78b092d5d3e779b4c064d0cc395fc5616ccd059116746df4084e4f957c5c4166",
+    "appearance/collision/thm_all_cave_s02_ice_r8_collision_floor.flr": "5ac0a64ad896c9853b9059ebd41fde124e51b03295f4d2a0219f2924afdb73ae",
+    "appearance/collision/thm_all_cave_s02_ice_r9_collision_floor.flr": "171294298026ae32205401e8ca21db49fc5d6e655179fae8342266673e3cf32d",
+    "appearance/collision/thm_all_cave_s02_ice_r10_collision_floor.flr": "c031ed00e0a1530e6a1a92c330ad79f699bef12ae2af334ae60ec987ddd16204",
+    "appearance/collision/thm_all_cave_s02_ice_r11_collision_floor.flr": "8eb0c74cfff70507595d170ec27bd927913a639d4a2e53524bb6144c22fac0cf",
+    "appearance/thm_all_cave_s03_ice.pob": "e39c7089583ec52cd03df57579864a5221756f404ffb7e2448737a336970bc62",
+    "appearance/collision/thm_all_cave_s03_ice_r1_collision_floor.flr": "d3b9e12642be790925ab86308d5f22f4a46cdff7049f28837d764287ff6891e2",
+    "appearance/collision/thm_all_cave_s03_ice_r2_collision_floor.flr": "928cd64317688a915b4a244276c9b3f40a1eda2e3751edc9fa25b5b3069f1ab1",
+    "appearance/collision/thm_all_cave_s03_ice_r3_collision_floor.flr": "687bcf50bc05bb04e75a5597bf4b1a1733d6ea62a896f0f29380597b4ffed2eb",
+    "appearance/collision/thm_all_cave_s03_ice_r4_collision_floor.flr": "40fa1a722be6f25951fc2e5ef296595eb507fcb7ceff6099e6c55ddced0825d8",
+    "appearance/collision/thm_all_cave_s03_ice_r5_collision_floor.flr": "2c9a6110d3380e40d0e33be7572b4431c4c30e6864b4d3fe0fe02518ea4c332c",
+    "appearance/collision/thm_all_cave_s03_ice_r6_collision_floor.flr": "4a09686851bbd61f11b5977f552493641afcc60bcd06942ad1113a11f8df877f",
+    "appearance/collision/thm_all_cave_s03_ice_r7_collision_floor.flr": "0f88fc50200e81b5e6d147e2365602c605eb216b68e3ac167b07a3e3b42ad436",
+    "appearance/collision/thm_all_cave_s03_ice_r8_collision_floor.flr": "1e21676061879e58fa6db207277c499a8e6197c45adc91e48517df23aaaddfc9",
+    "appearance/collision/thm_all_cave_s03_ice_r9_collision_floor.flr": "a13c8ac40dd80f592fff7ea11baefbf7474a10bff1d5875cea581a364afc8d5a",
+    "appearance/collision/thm_all_cave_s03_ice_r10_collision_floor.flr": "d28093a036b56454d05144beac20cf463cc6674fc5056aa6f6f4f2ce51ef69c4",
+    "appearance/collision/thm_all_cave_s03_ice_r11_collision_floor.flr": "4f45eec1611c2c8fcfaca7abc0dcb4306f1cac1a10f9cb80eb14afa6d234cdf0",
+    "appearance/collision/thm_all_cave_s03_ice_r12_collision_floor.flr": "f99c282e9e242c71aae0046e41aa8ce8a4a1db8da8d40a5db5d448fb12ad8080",
+    "appearance/collision/thm_all_cave_s03_ice_r13_collision_floor.flr": "248f7febd01ba7f16216155f994e93b7e7598337abbabd1246af3f85f4dee702",
+    "appearance/collision/thm_all_cave_s03_ice_r14_collision_floor.flr": "1c7dee29850c193c5dfc2037d54c74d27d5508d125b96fcd1f267a386a473085",
+    "appearance/collision/thm_all_cave_s03_ice_r15_collision_floor.flr": "c686b5329968c667b85c15887a2e8c37881ed623e6bab80cda61b2f5003820d6",
+    "appearance/collision/thm_all_cave_s03_ice_r16_collision_floor.flr": "d2c1f5d5035509cabf7e91d899079244f917918039d2571a02dc59d3ef164212",
+    "appearance/collision/thm_all_cave_s03_ice_r17_collision_floor.flr": "c10a0e22aa4a061627ea511fb4598dc349b2300f7567ca824b29d197f3347be6",
+    "appearance/collision/thm_all_cave_s03_ice_r18_collision_floor.flr": "60fe0fc1aaa1c3019830da7886831a866fc293972a51b833ea8cfd98584182e8",
+    "appearance/collision/thm_all_cave_s03_ice_r19_collision_floor.flr": "306890efd9f848ed39ae8c16e51447f26e2d598c9f18af93b2c1d8ff46fbd3bd",
+    "appearance/collision/thm_all_cave_s03_ice_r20_collision_floor.flr": "6a684697a10f8377fd0ed0c2092cae0c4a11ca0345a1bc1a800dc1558a63cc55",
+    "appearance/collision/thm_all_cave_s03_ice_r21_collision_floor.flr": "3e18dc3dd61a92c20b2a8386f3cf97747738e65f06a696a19e9e668736f442b1",
+    "appearance/collision/thm_all_cave_s03_ice_r22_collision_floor.flr": "298ab3e86764bed8cc5c9436964f5352c9afb901c1e6f9a86d44526c88bca789",
+    "appearance/collision/thm_all_cave_s03_ice_r23_collision_floor.flr": "eeb04b334b5576faad9b35fea50339c4486f33f8ef4edf4a476cf2b95eaa5e5a",
+    "appearance/collision/thm_all_cave_s03_ice_r24_collision_floor.flr": "bf4b62fa1f309b0a487b3bd873ee74c49a2510a33049cd5b510cdf023f07c01f",
+    "appearance/collision/thm_all_cave_s03_ice_r25_collision_floor.flr": "5af93f784bb95b50e433248868b24cbc41f172313b5738341416231a4e1fdccb",
+    "appearance/collision/thm_all_cave_s03_ice_r26_collision_floor.flr": "16ea17139c59e29b8fae30b3e422e514a743063262abf7a98804e3ef2a7de654",
+    "appearance/collision/thm_all_cave_s03_ice_r27_collision_floor.flr": "1dc9e8abb79b2fe42d3d5f87f22a6d5cc18815aa5b6b9f6a27c57a377ce37ac6",
+    "appearance/collision/thm_all_cave_s03_ice_r28_collision_floor.flr": "fb712de3baf01ad1269bf815915afc9d6861865ecae4e5ef429795aef5b7d3dc",
+    "appearance/collision/thm_all_cave_s03_ice_r29_collision_floor.flr": "a2870b517694cea56109ad7a96558c5e46d5601f5d5107ee7422b98da13d56d6"
+  },
+  "cave_script_sha256": "f3af20c715e9b390ee2e7d74ca64614ac569582f776decebe79cd48fa64cc174",
+  "camps": {
+    "mobiles": 43,
+    "props": 31,
+    "maximum_ground_delta": 0.0498737009582797,
+    "off_map": 0,
+    "degrees_passed_to_scene_heading": [
+      27,
+      28,
+      36,
+      38,
+      40,
+      41,
+      44,
+      48,
+      50,
+      55
+    ]
+  },
+  "registrations": {
+    "distinct_used_mobiles": 22,
+    "distinct_used_lairs": 11,
+    "missing": [],
+    "area_groups": 6
+  },
+  "regions": {
+    "areas": [
+      {
+        "name": "hoth_tauntaun_plains_west",
+        "x": -3000,
+        "y": -1500,
+        "radius": 1800,
+        "group": "hoth_tauntaun_plains",
+        "limit": 64
+      },
+      {
+        "name": "hoth_tauntaun_plains_east",
+        "x": 3000,
+        "y": -1200,
+        "radius": 1500,
+        "group": "hoth_tauntaun_plains",
+        "limit": 64
+      },
+      {
+        "name": "hoth_mynock_fields_south",
+        "x": -2000,
+        "y": -4800,
+        "radius": 1200,
+        "group": "hoth_mynock_fields",
+        "limit": 48
+      },
+      {
+        "name": "hoth_wampa_flanks_west",
+        "x": -1800,
+        "y": 3200,
+        "radius": 900,
+        "group": "hoth_wampa_flanks",
+        "limit": 32
+      },
+      {
+        "name": "hoth_wampa_flanks_southeast",
+        "x": 1200,
+        "y": 1500,
+        "radius": 700,
+        "group": "hoth_wampa_flanks",
+        "limit": 32
+      },
+      {
+        "name": "hoth_imperial_zone_east",
+        "x": 2500,
+        "y": -3500,
+        "radius": 1200,
+        "group": "hoth_imperial_zone",
+        "limit": 48
+      },
+      {
+        "name": "hoth_rebel_zone_northwest",
+        "x": -2500,
+        "y": 1000,
+        "radius": 1200,
+        "group": "hoth_rebel_zone",
+        "limit": 48
+      },
+      {
+        "name": "hoth_scavenger_zone_southwest",
+        "x": -1500,
+        "y": -3200,
+        "radius": 900,
+        "group": "hoth_scavenger_zone",
+        "limit": 48
+      }
+    ],
+    "area_limit": 384,
+    "overlapping_pairs": [
+      {
+        "a": "hoth_tauntaun_plains_west",
+        "b": "hoth_rebel_zone_northwest",
+        "overlap_along_centres": 450.49
+      },
+      {
+        "a": "hoth_tauntaun_plains_west",
+        "b": "hoth_scavenger_zone_southwest",
+        "overlap_along_centres": 432.84
+      },
+      {
+        "a": "hoth_tauntaun_plains_east",
+        "b": "hoth_imperial_zone_east",
+        "overlap_along_centres": 346.28
+      },
+      {
+        "a": "hoth_mynock_fields_south",
+        "b": "hoth_scavenger_zone_southwest",
+        "overlap_along_centres": 423.69
+      }
+    ],
+    "clears_map_edges_and_outpost_300m_and_caves_450m": true,
+    "area_flags": "SPAWNAREA only; world spawns also eligible"
+  },
+  "rancor_appearance": {
+    "plain": {
+      "paths": [
+        "object/mobile/shared_rancor.iff",
+        "appearance/rancor.sat",
+        "appearance/mesh/rancor.lmg",
+        "appearance/mesh/rancor_l0.mgn",
+        "shader/rancor_asb13.sht"
+      ],
+      "sha256": [
+        "2f3adc63aa5ddc2532e92659252b5d229dbaf67cae2181f83b8df75870297dc2",
+        "96ceca2da5bd23d1e411dd38f556f54ccaac40cdf98efa68383101982fc518a5",
+        "4c554f1c487412f78ab8f8c2d65b5a955f1c8ceb2f30667a49e67258d66e038e",
+        "f0497ee276c4560ee46f8ec5e5af55553f650739a48e368aa874cfe70592c11b",
+        "53416e315e4c8af5560f4466596e5c3ac6adc15b178727ef26954a123be41577"
+      ],
+      "has_rancor_palette": false,
+      "shader_form": "SSHT"
+    },
+    "_hue": {
+      "paths": [
+        "object/mobile/shared_rancor_hue.iff",
+        "appearance/rancor_hue.sat",
+        "appearance/mesh/rancor_hue.lmg",
+        "appearance/mesh/rancor_hue_l0.mgn",
+        "shader/rancor_hue_hcsb21.sht"
+      ],
+      "sha256": [
+        "ea5b186e7995509685de9d411162fb7494df9a0ae2af1ec8c3e03bab4c327003",
+        "42927b27b501b30d978f93ff30623eb6a43552a6183b748cb63667617a8b73c0",
+        "1f0794e820319bd3aaed1b47e9669194688e3b22e668dc2643c89691539b3d5a",
+        "1a8f239d67b86cb265b6fa01b99d99a80ee00c764f30a732ec383bc81ec7f001",
+        "79dd9ba984884a5eb92df34fd1089e095925f9d82117e2b9c47d712f68e85c2c"
+      ],
+      "has_rancor_palette": true,
+      "shader_form": "CSHD"
+    }
+  },
+  "archive_fix": {
+    "commit": "f0b192e",
+    "source_sha256": "f5bb0dce50e3879a915f10838765bef1eb108e98c3e276bb017712396616209a",
+    "skill_source_with_own_archive_first": "patch_14_00.tre",
+    "two_botanist_outputs_identical": true,
+    "matches_installed_botanist_staging": true,
+    "protected_staging_unchanged": true,
+    "synthetic_verification_failure_preserves_prior_stage_and_archive": true,
+    "full_archive_pack_or_publish": false
+  }
+}
