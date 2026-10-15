@@ -50,7 +50,7 @@ IDLE_S, OWN_SLACK_S, GPU_BUSY = 600, 90, 30
 # that still counts as watching the server continuously; how long past its expiry a loaded model counts as mid-request.
 REMOTE_SLACK_S, REMOTE_GAP_S, OVERDUE_S = 30, 8 * 60, 20
 EXPIRES = re.compile(r'(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)(?:\.(\d+))?(Z|[+-]\d\d:\d\d)')
-SOURCE_CAP = 120_000  # characters per topic: the brief, the files and the agent's notes share a 64K-token window
+SOURCE_CAP = 120_000  # characters per topic at a 64K-token window (scaled by source_cap()): the brief, files and notes share it
 MAX_STEPS, RUN_LIMIT_S = 40, 3 * 3600
 GIN = re.compile(r'\[GIN\] (\d{4}/\d\d/\d\d - \d\d:\d\d:\d\d) \|.*POST +"/api/(?:chat|generate)"')
 
@@ -233,12 +233,25 @@ def blockers(record=False):
         base = ollama_url.base_url()
     except ollama_url.OllamaUrlError as error:
         return why + [f'bad Ollama address ({error})']
-    if not ollama_url.is_local(base):
-        return why + remote_blockers(base, record)
     try:
-        urllib.request.urlopen(ollama_url.api('/api/tags', base), timeout=5).read()
-    except OSError:
-        why.append('Ollama is not answering')
+        model, _ = ollama_url.model(), ollama_url.ctx()
+    except ollama_url.OllamaSettingError as error:
+        return why + [f'bad Ollama setting ({error})']
+    remote = not ollama_url.is_local(base)
+    if remote:
+        why += remote_blockers(base, record)
+    tags = None
+    if not any('not answering' in reason for reason in why):   # (a remote server that is down has said so already)
+        try:
+            tags = urllib.request.urlopen(ollama_url.api('/api/tags', base), timeout=5).read()
+        except OSError:
+            if not remote:
+                why.append('Ollama is not answering')
+    absent = ollama_url.model_missing(tags, model) if tags is not None else None   # else every topic would fail
+    if absent:
+        why.append(absent)
+    if remote:
+        return why
     last = last_request()
     own = load(STATE, {}).get('last_finish', 0)
     if last is None:
@@ -254,7 +267,12 @@ def blockers(record=False):
     return why
 
 
-def copy_sources(topic, src):
+def source_cap(ctx):
+    """Characters of source per topic for a context window of ctx tokens: SOURCE_CAP at 64K, in proportion otherwise."""
+    return max(10_000, SOURCE_CAP * ctx // 65536)
+
+
+def copy_sources(topic, src, cap=SOURCE_CAP):
     """Line-numbered copies of the topic's files; returns (copied, skipped) descriptions."""
     copied, skipped, total = [], [], 0
     for spec in topic.get('sources', []):
@@ -267,8 +285,8 @@ def copy_sources(topic, src):
             continue
         first, last = (int(a), min(int(b), len(text))) if a else (1, len(text))
         body = '\n'.join(f'{n:6d}| {text[n - 1]}' for n in range(first, last + 1)) + '\n'
-        if total + len(body) > SOURCE_CAP:
-            skipped.append(f'{spec} (over the {SOURCE_CAP}-character budget)')
+        if total + len(body) > cap:
+            skipped.append(f'{spec} (over the {cap}-character budget)')
             continue
         total += len(body)
         out = src / (rel + (f'.lines-{first}-{last}' if a else ''))
@@ -285,7 +303,8 @@ def run(topic):
     for old in ('report.md', 'TASK.md', 'agent-log.jsonl'):
         (ws / old).unlink(missing_ok=True)
     src.mkdir(parents=True)
-    copied, skipped = copy_sources(topic, src)
+    model, ctx = ollama_url.model(), ollama_url.ctx()   # blockers() has checked them; local_agent.py gets them as flags
+    copied, skipped = copy_sources(topic, src, source_cap(ctx))
     scenario = any('/scenarios/' in c for c in copied)
     (ws / 'TASK.md').write_text(BRIEF.format(
         title=topic['title'], question=topic['question'],
@@ -296,7 +315,7 @@ def run(topic):
     env = dict(os.environ, OLLAMA_URL=base) if base else None
     try:
         out = subprocess.run([sys.executable, str(AGENT), '--workspace', str(ws), '--max-steps', str(MAX_STEPS),
-                              '--task', 'Read TASK.md, then the files it lists, then write report.md as TASK.md asks.'],
+                              '--model', model, '--ctx', str(ctx), '--task', 'Read TASK.md, then the files it lists, then write report.md as TASK.md asks.'],
                              capture_output=True, text=True, errors='replace', timeout=RUN_LIMIT_S, env=env)
         output = out.stdout + out.stderr
     except subprocess.TimeoutExpired:

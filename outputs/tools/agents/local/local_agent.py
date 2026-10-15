@@ -5,10 +5,12 @@ profile for gpt-oss, so tool calls came out in the wrong shape (tests in the 14 
 own tool calling and is deliberately narrow: three file tools inside ONE workspace folder. No shell, no network, no
 paths outside the workspace, so it can't touch /opt/swg, the board or the bots. Claude reviews everything it writes.
 
-    python -I local_agent.py --workspace DIR --task "..." [--model gpt-oss:20b] [--max-steps 25] [--ollama-url URL]
+    python -I local_agent.py --workspace DIR --task "..." [--model M] [--ctx N] [--max-steps 25] [--ollama-url URL]
 
 Writes DIR/agent-log.jsonl (every request and reply) and prints the final answer. The Ollama address comes from
-ollama_url.py (OLLAMA_URL, then ollama-url.txt, then this PC); --ollama-url overrides it for one run.
+ollama_url.py (OLLAMA_URL, then ollama-url.txt, then this PC); --ollama-url overrides it for one run. The model
+(default gpt-oss:20b) and the context size in tokens (default 65536) come the same way from OLLAMA_MODEL / ollama-model.txt
+and OLLAMA_CTX / ollama-ctx.txt; --model and --ctx override them.
 """
 import argparse, json, pathlib, sys, time, urllib.request
 
@@ -87,8 +89,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--workspace', required=True)
     parser.add_argument('--task', required=True)
-    parser.add_argument('--model', default='gpt-oss:20b')
-    parser.add_argument('--ctx', type=int, default=65536)
+    parser.add_argument('--model', help='default: OLLAMA_MODEL, ollama-model.txt or gpt-oss:20b')
+    parser.add_argument('--ctx', type=int, help='context size in tokens; default: OLLAMA_CTX, ollama-ctx.txt or 65536')
     parser.add_argument('--max-steps', type=int, default=25)
     parser.add_argument('--ollama-url', help='Ollama server address; default: OLLAMA_URL, ollama-url.txt or this PC')
     args = parser.parse_args()
@@ -96,6 +98,11 @@ def main():
         base = ollama_url.normalize(args.ollama_url) if args.ollama_url else ollama_url.base_url()
     except ollama_url.OllamaUrlError as error:
         parser.error(f'bad Ollama address: {error}')
+    try:
+        model = ollama_url.parse_model(args.model) if args.model else ollama_url.model()
+        ctx = ollama_url.parse_ctx(args.ctx) if args.ctx else ollama_url.ctx()
+    except ollama_url.OllamaSettingError as error:
+        parser.error(f'bad Ollama setting: {error}')
 
     root = pathlib.Path(args.workspace).resolve()
     protected = {p.resolve() for p in root.rglob('*') if p.is_file()}  # files present at the start are inputs
@@ -103,7 +110,7 @@ def main():
     messages = [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': args.task}]
     started = time.monotonic()
     for step in range(1, args.max_steps + 1):
-        reply = chat(args.model, messages, args.ctx, base)
+        reply = chat(model, messages, ctx, base)
         message = reply.get('message', {})
         log.write(json.dumps({'step': step, 'reply': message, 'eval_count': reply.get('eval_count'),
                               'prompt_eval_count': reply.get('prompt_eval_count')}) + '\n')

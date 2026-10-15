@@ -98,9 +98,32 @@ wsl -d Debian -u swgemu -- python3 /mnt/c/Users/Pengw/Documents/Codex/2026-10-13
 wsl -d Debian -u swgemu -- python3 /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/tools/agents/local/idle_research.py status
 ```
 
-The first prints the address and "another PC". A typo in the file or variable is an error, not a quiet fallback to this
-PC. For one run: `python -I local_agent.py --workspace DIR --task "..." --ollama-url http://<friend-ip>:11434`.
+The first prints the address ("this PC" or "another PC"), the model and the context size. A typo in a file or variable
+is an error, not a quiet fallback to the default. For one run:
+`python -I local_agent.py --workspace DIR --task "..." --ollama-url http://<friend-ip>:11434 [--model M] [--ctx N]`.
 Scripts you write should call `ollama_url.api('/api/chat')` instead of a fixed address.
+
+### Model and context size
+
+Which model the scripts ask for, and how big a context window, are set the same way (variable, then file, then default),
+wherever the server is:
+
+| Setting | Variable | File (gitignored, one line) | Default |
+|---|---|---|---|
+| address | `OLLAMA_URL` | `ollama-url.txt` | `http://127.0.0.1:11434` |
+| model | `OLLAMA_MODEL` | `ollama-model.txt` | `gpt-oss:20b` |
+| context size, in tokens | `OLLAMA_CTX` | `ollama-ctx.txt` | `65536` |
+
+The files live in `outputs/tools/agents/local/` and are read on this PC, so they apply to whichever server the address
+points at. A model that fits entirely on a 12 GB card keeps the RAM and CPU use down. For example, to run `qwen3:8b`
+with a 32K window, put `qwen3:8b` in `ollama-model.txt` and `32768` in `ollama-ctx.txt`; the friend's PC can later use
+`gpt-oss:20b` and 65536 (the defaults) by deleting both files. The model must already be on the server
+(`ollama pull qwen3:8b` there); if it isn't, `idle_research.py status` says so and no topic is started. The scripts
+never pull or load anything themselves.
+
+`idle_research.py` hands both to `local_agent.py` (`--model`, `--ctx`) and scales the amount of source it copies in
+for a topic with the window: 120,000 characters at 65536 tokens, 60,000 at 32768. `qwen3:8b` with this tool loop is
+untested: check the first report it writes before relying on it.
 
 `swg-idle-research.timer` needs no change: it runs `idle_research.py check` every 5 minutes and reads the file each time.
 If `outputs/Agent/local-research/STOP` exists (the owner paused research while Ollama ran out of memory on this PC),

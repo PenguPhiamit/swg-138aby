@@ -1,26 +1,39 @@
-"""Where the project's Ollama server is (Claude, 15 Oct 2026). Every script that calls Ollama asks this module.
+"""Where the project's Ollama server is, and which model it runs (Claude, 15 Oct 2026). Every script that calls Ollama
+asks this module. Three settings, each with the same order, first one that is set wins:
 
-Order, first one that is set wins:
-  1. the OLLAMA_URL environment variable;
-  2. the first line of ollama-url.txt next to this file (gitignored: a LAN address is private; "#" lines are ignored);
-  3. http://127.0.0.1:11434, Ollama on this PC.
+                 environment variable   file next to this one (gitignored)   default
+  address        OLLAMA_URL             ollama-url.txt                       http://127.0.0.1:11434
+  model          OLLAMA_MODEL           ollama-model.txt                     gpt-oss:20b
+  context size   OLLAMA_CTX             ollama-ctx.txt                       65536 (tokens)
 
-An address may be written as http://192.168.x.y:11434, or bare as 192.168.x.y (then http:// and port 11434 are added).
-Set the variable for one terminal only; the WSL timer (swg-idle-research.timer) never sees a terminal's variables, so
-use the file for that. See REMOTE-OLLAMA.md for a server on another PC.
+A file holds one line ("#" lines are ignored). An address may be written as http://192.168.x.y:11434, or bare as
+192.168.x.y (then http:// and port 11434 are added). Set a variable for one terminal only; the WSL timer
+(swg-idle-research.timer) never sees a terminal's variables, so use the files for that. See REMOTE-OLLAMA.md for a
+server on another PC and for choosing a smaller model.
+
+    python3 ollama_url.py     # shows what a script would use now
 """
 import ipaddress
+import json
 import os
+import re
 import urllib.parse
 from pathlib import Path
 
-ENV = 'OLLAMA_URL'
-DEFAULT = 'http://127.0.0.1:11434'
+HERE = Path(__file__).resolve().parent
+ENV, URL_FILE, DEFAULT = 'OLLAMA_URL', HERE / 'ollama-url.txt', 'http://127.0.0.1:11434'
+ENV_MODEL, MODEL_FILE, DEFAULT_MODEL = 'OLLAMA_MODEL', HERE / 'ollama-model.txt', 'gpt-oss:20b'
+ENV_CTX, CTX_FILE, DEFAULT_CTX = 'OLLAMA_CTX', HERE / 'ollama-ctx.txt', 65536
 PORT = 11434
-URL_FILE = Path(__file__).resolve().parent / 'ollama-url.txt'
+CTX_RANGE = (2048, 2_097_152)
+MODEL_NAME = re.compile(r'[A-Za-z0-9][A-Za-z0-9._:/@+-]*')
 
 
-class OllamaUrlError(ValueError):
+class OllamaSettingError(ValueError):
+    pass
+
+
+class OllamaUrlError(OllamaSettingError):
     pass
 
 
@@ -52,8 +65,27 @@ def normalize(text):
     return f'{parts.scheme}://{shown}' + (f':{port}' if port else '') + path
 
 
+def parse_model(text):
+    """A model name as Ollama spells it (qwen3:8b, gpt-oss:20b, hf.co/user/repo:Q4_K_M), or OllamaSettingError."""
+    text = text.strip()
+    if not MODEL_NAME.fullmatch(text):
+        raise OllamaSettingError(f'"{text}" is not a model name (like qwen3:8b: letters, digits and . _ : / @ + -)')
+    return text
+
+
+def parse_ctx(text):
+    """A context size in tokens, or OllamaSettingError."""
+    try:
+        value = int(str(text).strip())
+    except ValueError:
+        raise OllamaSettingError(f'"{str(text).strip()}" is not a whole number of tokens (like 32768)') from None
+    if not CTX_RANGE[0] <= value <= CTX_RANGE[1]:
+        raise OllamaSettingError(f'{value} tokens is outside {CTX_RANGE[0]}..{CTX_RANGE[1]}')
+    return value
+
+
 def read_file(path):
-    """The address line of ollama-url.txt, or None when the file is missing or holds only comments."""
+    """The value line of a settings file, or None when the file is missing or holds only comments."""
     try:
         raw = path.read_bytes()
     except OSError:
@@ -67,21 +99,35 @@ def read_file(path):
     return None
 
 
-def base_url(environ=None, path=None):
-    """The Ollama server's base address (see the module note for the order). Raises OllamaUrlError when it is
-    set but unusable, so a typo fails loudly instead of quietly using this PC."""
+def setting(env_name, path, default, parse, environ=None):
+    """The value for one setting (see the module note for the order). Raises OllamaSettingError when it is set but
+    unusable, so a typo fails loudly instead of quietly using the default."""
     environ = os.environ if environ is None else environ
-    path = URL_FILE if path is None else path
-    value = environ.get(ENV, '').strip()
-    source = f'{ENV} variable'
+    value = environ.get(env_name, '').strip()
+    source = f'{env_name} variable'
     if not value:
         value, source = read_file(path), path.name
     if not value:
-        return DEFAULT
+        return default
     try:
-        return normalize(value)
-    except OllamaUrlError as error:
-        raise OllamaUrlError(f'{source}: {error}') from None
+        return parse(value)
+    except OllamaSettingError as error:
+        raise type(error)(f'{source}: {error}') from None
+
+
+def base_url(environ=None, path=None):
+    """The Ollama server's base address."""
+    return setting(ENV, URL_FILE if path is None else path, DEFAULT, normalize, environ)
+
+
+def model(environ=None, path=None):
+    """The model every script asks for."""
+    return setting(ENV_MODEL, MODEL_FILE if path is None else path, DEFAULT_MODEL, parse_model, environ)
+
+
+def ctx(environ=None, path=None):
+    """The context window (tokens) every script asks for."""
+    return setting(ENV_CTX, CTX_FILE if path is None else path, DEFAULT_CTX, parse_ctx, environ)
 
 
 def api(route, base=None):
@@ -108,9 +154,21 @@ def describe(base):
     return f'{parts.hostname}:{parts.port or (443 if parts.scheme == "https" else 80)}'
 
 
+def model_missing(tags_body, wanted):
+    """Why `wanted` is not on the server, from the body of its /api/tags answer; None when it is there or the answer
+    can't be read (an unreadable answer is not a reason to hold work back)."""
+    try:
+        names = {m.get('name') or m.get('model') for m in json.loads(tags_body).get('models') or []}
+    except (ValueError, AttributeError, TypeError):
+        return None
+    if wanted in names or (':' not in wanted and f'{wanted}:latest' in names):
+        return None
+    return f'model {wanted} is not on the server (ollama pull {wanted})'
+
+
 if __name__ == '__main__':
     try:
-        url = base_url()
-    except OllamaUrlError as error:
-        raise SystemExit(f'bad Ollama address: {error}')
-    print(f'{url} ({"this PC" if is_local(url) else "another PC"})')
+        url, name, size = base_url(), model(), ctx()
+    except OllamaSettingError as error:
+        raise SystemExit(f'bad Ollama setting: {error}')
+    print(f'{url} ({"this PC" if is_local(url) else "another PC"}), model {name}, context {size}')

@@ -13,6 +13,9 @@ outputs/SWG-login.txt
 **/.claude/settings.local.json
 # The LAN address of a friend's Ollama server (outputs/tools/agents/local/REMOTE-OLLAMA.md): private
 outputs/tools/agents/local/ollama-url.txt
+# Which model and context size this PC's scripts ask for (per machine, not shared)
+outputs/tools/agents/local/ollama-model.txt
+outputs/tools/agents/local/ollama-ctx.txt
 
 # ---- the game client, archives, backups and other people's files ----
 outputs/SWG-client/

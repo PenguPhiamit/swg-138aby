@@ -55,6 +55,19 @@ def tearDownModule():
     _guard.stop()
 
 
+def isolate(case, root):
+    """No settings from the real environment or from the real folder's ollama-*.txt files."""
+    patcher = mock.patch.dict(os.environ)
+    patcher.start()
+    case.addCleanup(patcher.stop)
+    for name in ('OLLAMA_URL', 'OLLAMA_MODEL', 'OLLAMA_CTX'):
+        os.environ.pop(name, None)
+    for name in ('URL_FILE', 'MODEL_FILE', 'CTX_FILE'):
+        patcher = mock.patch.object(ollama_url, name, Path(root) / f'no-{name}.txt')
+        patcher.start()
+        case.addCleanup(patcher.stop)
+
+
 def iso(epoch, hours=-7):
     """An expires_at the way Ollama writes it: RFC 3339, 7 fraction digits, the zone's offset."""
     when = datetime.fromtimestamp(epoch, timezone(timedelta(hours=hours)))
@@ -66,6 +79,7 @@ class FakeOllama:
 
     def __init__(self):
         self.models, self.clock, self.requests = [], 1_800_000_000.0, []
+        self.tags = ['gpt-oss:20b']   # what the server has pulled (/api/tags)
         self.chat_reply = {'message': {'role': 'assistant', 'content': 'all done'}}
         fake = self
 
@@ -86,7 +100,8 @@ class FakeOllama:
 
             def do_GET(self):
                 fake.requests.append(('GET', self.path, None))
-                self.reply({'models': fake.models} if self.path == '/api/ps' else {'models': []})
+                self.reply({'models': fake.models} if self.path == '/api/ps'
+                           else {'models': [{'name': n, 'model': n} for n in fake.tags]})
 
             def do_POST(self):
                 body = json.loads(self.rfile.read(int(self.headers.get('Content-Length', 0))) or b'null')
@@ -175,9 +190,61 @@ class AddressTests(unittest.TestCase):
         root = next((p for p in HERE.parents if (p / '.gitignore').exists()), None)
         if root is None:
             self.skipTest('no .gitignore above this folder')
-        rule = ollama_url.URL_FILE.relative_to(root).as_posix()
-        lines = (root / '.gitignore').read_text(encoding='utf-8').splitlines()
-        self.assertIn(rule, [line.strip() for line in lines])
+        lines = [line.strip() for line in (root / '.gitignore').read_text(encoding='utf-8').splitlines()]
+        for path in (ollama_url.URL_FILE, ollama_url.MODEL_FILE, ollama_url.CTX_FILE):
+            self.assertIn(path.relative_to(root).as_posix(), lines)
+
+    # ---- model and context size: the same order as the address ----
+    def setting(self, getter, env=None, file=None):
+        if file is not None:
+            self.file.write_bytes(file if isinstance(file, bytes) else file.encode())
+        return getter(environ=env or {}, path=self.file)
+
+    def test_model_and_ctx_defaults_are_as_before(self):
+        self.assertEqual(self.setting(ollama_url.model), 'gpt-oss:20b')
+        self.assertEqual(self.setting(ollama_url.ctx), 65536)
+
+    def test_model_and_ctx_come_from_variable_then_file_then_default(self):
+        self.assertEqual(self.setting(ollama_url.model, file='# small\r\nqwen3:8b\r\n'), 'qwen3:8b')
+        self.assertEqual(self.setting(ollama_url.model, {'OLLAMA_MODEL': 'gpt-oss:20b'}), 'gpt-oss:20b')
+        self.assertEqual(self.setting(ollama_url.model, {'OLLAMA_MODEL': ' '}), 'qwen3:8b')
+        self.assertEqual(self.setting(ollama_url.ctx, file=b'\xff\xfe' + '32768\r\n'.encode('utf-16-le')), 32768)
+        self.assertEqual(self.setting(ollama_url.ctx, {'OLLAMA_CTX': '16384'}), 16384)
+        self.assertEqual(self.setting(ollama_url.ctx, {'OLLAMA_CTX': ''}), 32768)
+
+    def test_model_names(self):
+        for name in ('qwen3:8b', 'gpt-oss:20b', 'llama3.1', 'hf.co/user/repo:Q4_K_M', 'registry.example/lib/m:1b@x'):
+            self.assertEqual(ollama_url.parse_model(f' {name} '), name)
+        for bad in ('', 'qwen3 8b', '-m', 'qwen3:8b;rm', 'a\tb', '"qwen3:8b"'):
+            with self.assertRaises(ollama_url.OllamaSettingError, msg=bad):
+                ollama_url.parse_model(bad)
+
+    def test_context_sizes(self):
+        self.assertEqual(ollama_url.parse_ctx(' 32768 '), 32768)
+        for bad in ('', 'lots', '32k', '3.5', '-1', '0', '1024', '99999999'):
+            with self.assertRaises(ollama_url.OllamaSettingError, msg=bad):
+                ollama_url.parse_ctx(bad)
+
+    def test_a_bad_model_or_ctx_fails_loudly_and_names_its_source(self):
+        with self.assertRaisesRegex(ollama_url.OllamaSettingError, 'OLLAMA_CTX variable'):
+            self.setting(ollama_url.ctx, {'OLLAMA_CTX': 'lots'})
+        model_file = Path(self.dir.name) / 'ollama-model.txt'
+        model_file.write_text('qwen3 8b')
+        with self.assertRaisesRegex(ollama_url.OllamaSettingError, 'ollama-model.txt'):
+            ollama_url.model(environ={}, path=model_file)
+        self.assertNotIsInstance(ollama_url.OllamaSettingError('x'), ollama_url.OllamaUrlError)
+        self.assertIsInstance(ollama_url.OllamaUrlError('x'), ollama_url.OllamaSettingError)
+
+    def test_model_missing_reads_the_tags_answer(self):
+        tags = json.dumps({'models': [{'name': 'qwen3:8b'}, {'model': 'gpt-oss:20b'}, {'name': 'tiny:latest'}]})
+        self.assertIsNone(ollama_url.model_missing(tags, 'qwen3:8b'))
+        self.assertIsNone(ollama_url.model_missing(tags, 'gpt-oss:20b'))
+        self.assertIsNone(ollama_url.model_missing(tags, 'tiny'))          # "tiny" means tiny:latest
+        self.assertIn('qwen3:8B is not on the server', ollama_url.model_missing(tags, 'qwen3:8B'))
+        self.assertIn('ollama pull llama3', ollama_url.model_missing(tags, 'llama3'))
+        self.assertIsNotNone(ollama_url.model_missing('{"models": []}', 'qwen3:8b'))
+        for unreadable in (b'', b'<html>', b'[1]', b'null', b'{"models": 5}'):
+            self.assertIsNone(ollama_url.model_missing(unreadable, 'qwen3:8b'), unreadable)
 
 
 @unittest.skipIf(ir is None, 'idle_research.py needs fcntl (run in WSL)')
@@ -272,13 +339,8 @@ class IdleResearchTests(unittest.TestCase):
             self.addCleanup(patcher.stop)
         self.fake = FakeOllama()
         self.addCleanup(self.fake.stop)
-        env = mock.patch.dict(os.environ, {'OLLAMA_URL': self.fake.base})
-        env.start()
-        self.addCleanup(env.stop)
-        # the address file must not leak in from the real folder
-        patcher = mock.patch.object(ollama_url, 'URL_FILE', root / 'none.txt')
-        patcher.start()
-        self.addCleanup(patcher.stop)
+        isolate(self, root)    # nothing from the real environment or the real folder's ollama-*.txt files
+        os.environ['OLLAMA_URL'] = self.fake.base
 
     def as_other_pc(self):
         """Treat the fake (which is on 127.0.0.1) as a server on another PC, and fail if a local check runs."""
@@ -335,6 +397,43 @@ class IdleResearchTests(unittest.TestCase):
     def test_a_bad_address_is_a_blocker_not_a_crash(self):
         with mock.patch.dict(os.environ, {'OLLAMA_URL': 'ftp://nowhere'}):
             self.assertIn('bad Ollama address', ir.blockers()[0])
+
+    def test_a_bad_model_or_ctx_is_a_blocker_not_a_crash(self):
+        for name, value in (('OLLAMA_CTX', 'lots'), ('OLLAMA_MODEL', 'not a model')):
+            with mock.patch.dict(os.environ, {name: value}):
+                why = ir.blockers()
+                self.assertEqual((len(why), why[0].startswith(f'bad Ollama setting ({name} variable')), (1, True), why)
+        self.assertEqual(self.fake.requests, [])
+
+    def test_a_model_the_server_does_not_have_is_a_blocker(self):
+        self.local_checks()
+        self.log_request(3600)
+        self.fake.tags = ['qwen3:8b']
+        self.assertEqual(ir.blockers(), ['model gpt-oss:20b is not on the server (ollama pull gpt-oss:20b)'])
+        with mock.patch.dict(os.environ, {'OLLAMA_MODEL': 'qwen3:8b'}):
+            self.assertEqual(ir.blockers(), [])
+
+    def test_the_settings_do_not_change_what_this_pc_sends(self):
+        self.local_checks()
+        self.log_request(3600)
+        self.fake.tags = ['qwen3:8b']
+        with mock.patch.dict(os.environ, {'OLLAMA_MODEL': 'qwen3:8b', 'OLLAMA_CTX': '32768'}):
+            self.assertEqual(ir.blockers(), [])
+        self.assertEqual(self.fake.requests, [('GET', '/api/tags', None)])
+
+    def test_source_budget_follows_the_context_size(self):
+        self.assertEqual(ir.source_cap(65536), ir.SOURCE_CAP)       # unchanged at the old default
+        self.assertEqual(ir.source_cap(32768), ir.SOURCE_CAP // 2)
+        self.assertEqual(ir.source_cap(2048), 10_000)
+        src = self.root / 'src'
+        (self.root / 'big.txt').write_text('\n'.join('x' * 70 for _ in range(500)))     # about 40,000 characters numbered
+        topic = {'sources': ['h:big.txt', 'h:big.txt:1-100']}
+        with mock.patch.object(ir, 'H', self.root):
+            copied, skipped = ir.copy_sources(topic, src, ir.source_cap(65536))
+            self.assertEqual((len(copied), skipped), (2, []))
+            copied, skipped = ir.copy_sources(topic, src, 45_000)
+            self.assertEqual((len(copied), len(skipped)), (1, 1))
+            self.assertIn('over the 45000-character budget', skipped[0])
 
     # ---- another PC ----
     def test_other_pc_needs_ten_quiet_minutes_over_consecutive_runs(self):
@@ -462,6 +561,36 @@ class IdleResearchTests(unittest.TestCase):
         self.assertFalse(ir.run(self.topic()))
         self.assertEqual(ir.load(ir.QUEUE, {})['topics'][0]['status'], 'failed')
 
+    def test_a_run_passes_model_and_ctx_to_the_agent(self):
+        self.stub_agent('print("args", " ".join(sys.argv[1:]))\n(ws / "report.md").write_text("r" * 400)\n')
+        self.assertTrue(ir.run(self.topic()))
+        self.assertIn('--model gpt-oss:20b --ctx 65536', (self.root / 't1' / 'agent-output.txt').read_text())
+        with mock.patch.dict(os.environ, {'OLLAMA_MODEL': 'qwen3:8b', 'OLLAMA_CTX': '32768'}):
+            self.assertTrue(ir.run(self.topic()))
+        self.assertIn('--model qwen3:8b --ctx 32768', (self.root / 't1' / 'agent-output.txt').read_text())
+
+    # ---- the whole check against a server on another PC, model list included ----
+    def test_other_pc_through_blockers_asks_ps_and_tags(self):
+        self.as_other_pc()
+        self.assertIn('first look', ir.blockers(record=True)[0])
+        self.assertEqual(sorted(r[1] for r in self.fake.requests), ['/api/ps', '/api/tags'])
+
+    def test_other_pc_without_the_model_says_so(self):
+        self.as_other_pc()
+        self.fake.tags = ['qwen3:8b']
+        why = ir.blockers()
+        self.assertEqual(len(why), 2, why)
+        self.assertIn('is not on the server', why[1])
+        with mock.patch.dict(os.environ, {'OLLAMA_MODEL': 'qwen3:8b'}):
+            self.assertEqual(len(ir.blockers()), 1)
+
+    def test_other_pc_that_is_off_says_so_once(self):
+        self.as_other_pc()
+        self.fake.stop()
+        why = ir.blockers(record=True)
+        self.assertEqual(len(why), 1, why)
+        self.assertIn('is not answering', why[0])
+
 
 class LocalAgentTests(unittest.TestCase):
     def setUp(self):
@@ -469,13 +598,36 @@ class LocalAgentTests(unittest.TestCase):
         self.addCleanup(self.fake.stop)
         self.dir = tempfile.TemporaryDirectory()
         self.addCleanup(self.dir.cleanup)
+        isolate(self, self.dir.name)
 
     def run_main(self, *argv, env=None):
         out = io.StringIO()
         with mock.patch.object(sys, 'argv', ['local_agent.py', '--workspace', self.dir.name, '--task', 'hi', *argv]), \
-                mock.patch.dict(os.environ, env or {}), mock.patch.object(ollama_url, 'URL_FILE', Path(self.dir.name) / 'x'), \
-                contextlib.redirect_stdout(out):
+                mock.patch.dict(os.environ, env or {}), contextlib.redirect_stdout(out):
             return local_agent.main(), out.getvalue()
+
+    def sent(self):
+        return self.fake.requests[0][2]
+
+    def test_model_and_ctx_default_to_what_they_were(self):
+        self.run_main(env={'OLLAMA_URL': self.fake.base})
+        self.assertEqual((self.sent()['model'], self.sent()['options']['num_ctx']), ('gpt-oss:20b', 65536))
+
+    def test_model_and_ctx_from_variables_and_flags(self):
+        self.run_main(env={'OLLAMA_URL': self.fake.base, 'OLLAMA_MODEL': 'qwen3:8b', 'OLLAMA_CTX': '32768'})
+        self.assertEqual((self.sent()['model'], self.sent()['options']['num_ctx']), ('qwen3:8b', 32768))
+        self.fake.requests.clear()
+        self.run_main('--model', 'tiny:1b', '--ctx', '4096',
+                      env={'OLLAMA_URL': self.fake.base, 'OLLAMA_MODEL': 'qwen3:8b', 'OLLAMA_CTX': '32768'})
+        self.assertEqual((self.sent()['model'], self.sent()['options']['num_ctx']), ('tiny:1b', 4096))
+
+    def test_a_bad_model_or_ctx_stops_before_any_request(self):
+        for argv, env in ((('--ctx', '100'), {}), (('--model', 'a b'), {}), ((), {'OLLAMA_CTX': 'lots'}),
+                          ((), {'OLLAMA_MODEL': '-x'})):
+            with contextlib.redirect_stderr(io.StringIO()) as err, self.assertRaises(SystemExit):
+                self.run_main(*argv, env={'OLLAMA_URL': self.fake.base, **env})
+            self.assertIn('bad Ollama setting', err.getvalue())
+        self.assertEqual(self.fake.requests, [])
 
     def test_chat_posts_to_the_given_server(self):
         reply = local_agent.chat('gpt-oss:20b', [{'role': 'user', 'content': 'hi'}], 4096, self.fake.base)
