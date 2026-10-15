@@ -14,6 +14,7 @@ Every 2 s each bot, in its own thread and talking only to its own bot (a request
   * jumps to the player (/agentgear goto) when the player is on another planet, or out of sight and over 300 m away.
 Orders, from the player by spatial chat or a tell to any crew member (a leading "crew" is optional):
   follow | stay | attack | passive | heal | status | dismiss | waypoints (the leader mails the waypoint list)
+  | buff (the healer enhances the player's health, action, strength, constitution, quickness and stamina)
 The leader acknowledges in spatial chat. The run ends on "dismiss", after `minutes`, or when the player has been
 offline for 5 minutes.
 """
@@ -63,7 +64,8 @@ def walk_time(row, x, y):
         return 30
     return min(60, max(8, math.hypot(x - row['x'], y - row['y']) / 4 + 5))
 FORMATION = [(3, 2), (-3, 2), (0, -4), (3, -4), (-3, -4), (5, 0), (-5, 0), (0, 5)]   # metres from the player
-ORDERS = ('follow', 'stay', 'attack', 'passive', 'heal', 'status', 'dismiss', 'waypoints')
+ORDERS = ('follow', 'stay', 'attack', 'passive', 'heal', 'status', 'dismiss', 'waypoints', 'buff')
+BUFFS = ('health', 'action', 'strength', 'constitution', 'quickness', 'stamina')   # the support kit's enhance packs
 
 
 def word(text):
@@ -100,6 +102,7 @@ class Shared:
         self.table = {}                # crew first name -> self row
         self.player = {}               # the player's row for the healer
         self.trail = []                # where the player stood indoors (cell, x, y, z), oldest first
+        self.buffs = []                # enhancements the healer still owes the player ("buff" order)
         self.log = []
 
     def order(self, text, sender, now):
@@ -117,6 +120,8 @@ class Shared:
                 self.assist, self.attack_until = False, 0.0
             elif verb == 'heal':
                 self.heal_now = True
+            elif verb == 'buff':
+                self.buffs = list(BUFFS)
             elif verb == 'dismiss':
                 self.ended = True
             self.log.append((round(now), verb))
@@ -124,7 +129,8 @@ class Shared:
 
 
 ACK = {'follow': 'Following.', 'stay': 'Holding here.', 'attack': 'Engaging your target.', 'passive': 'Weapons down.',
-       'heal': 'Healing you.', 'dismiss': 'Crew dismissed.', 'waypoints': 'Mailing you the waypoints.'}
+       'heal': 'Healing you.', 'dismiss': 'Crew dismissed.', 'waypoints': 'Mailing you the waypoints.',
+       'buff': 'Mirren will buff you: stay close.'}
 
 
 def goto(bot, planet, x, y):
@@ -279,6 +285,44 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
             goto(bot, zone_row.get('zone'), float(zone_row.get('worldPositionX', 0)) + dx,
                  float(zone_row.get('worldPositionY', 0)) + dy)
 
+    tries = {'n': 0, 'restocked': False}
+
+    def buff(bot, row, player):
+        """One step of the "buff" order: walk to the player, then one doctor enhancement (owner, 15 Oct: buffs in
+        dungeons; the test galaxy's MedicalAnywhere makes them work away from hospitals). The doctor's ~20 s
+        cooldown refuses the next one for a while; it stays queued."""
+        with shared.lock:
+            attribute = shared.buffs[0] if shared.buffs else None
+        if attribute is None:
+            return False
+        same = (player['cell'] or 0) == (row.get('cell') or 0)
+        if not same or row.get('x') is None or math.hypot(player['x'] - row['x'], player['y'] - row['y']) > 5:
+            bot.doing(f'going to {owner} to buff')
+            if player['cell']:
+                bot.move(player['x'] + 1, player['y'], player.get('z') or 0.0, player['cell'], timeout=20)
+            else:
+                bot.move(player['x'] + 1.5, player['y'], timeout=walk_time(row, player['x'], player['y']))
+            return True
+        bot.doing(f'buffing {owner}: {attribute}')
+        events = bot.slash('healenhance', attribute, target=player['oid'], wait=1.5)
+        said = ' '.join(str(e.get('text', '')) for e in events)
+        done = 'You enhance' in said
+        if 'healing_response_60' in said and not tries['restocked']:   # no enhance pack left: fetch the support kit
+            tries['restocked'] = True
+            bot.slash('agentGear', 'support', wait=0)
+            bot.wait_for(lambda e: str(e.get('text', '')).startswith('[agentgear]'), 8)
+        elif not done and 'must_wait' not in said and 'in Combat' not in said:
+            tries['n'] += 1
+        note_play({'kind': 'buff', 'attribute': attribute, 'done': done, 'said': said[:200]})
+        if done or tries['n'] >= 3:
+            tries['n'] = 0
+            with shared.lock:
+                if shared.buffs and shared.buffs[0] == attribute:
+                    shared.buffs.pop(0)
+                if not shared.buffs:
+                    tries['restocked'] = False
+        return True
+
     def drain(bot):
         """Hear what arrived since the last tick. Must run before this tick's first request, which clears the inbox."""
         bot._read()
@@ -350,6 +394,8 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
                 if fighter.mend(row, patients):
                     bot.doing('healing the lowest of the crew')
                     acted = True
+                elif player and shared.buffs:
+                    acted = buff(bot, row, player)
             if not acted:
                 target = target_for(bot, player)
                 if target and (row.get('cell') or 0) == (player or {}).get('cell', 0):

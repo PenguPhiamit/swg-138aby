@@ -168,6 +168,9 @@ def start(args):
         # Owner, 15 Oct: "allow all creatures to be tamed": any creature, any age or level, always succeeds (dev build;
         # CreatureManagerImplementation::tame reads it only on a _test database).
         shuttles += 'Core3.TameAnything = true\n'
+        # Owner, 15 Oct: doctor buffs in dungeons. A doctor counts as by a top surgical droid (rating 100) where there is
+        # no hospital, camp or droid (dev build; SandboxTestGalaxy.h medicalAnywhere).
+        shuttles += 'Core3.MedicalAnywhere = true\n'
         # A resumed copy still has the last start's overrides at the end of config-local.lua: replace them.
         text = config.read_text(errors='surrogateescape')
         cut = text.find('\n-- TEST GALAXY OVERRIDES')

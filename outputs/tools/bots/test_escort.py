@@ -168,6 +168,28 @@ class Escort(unittest.TestCase):
         self.assertEqual(set(brask.moves), {(4, -2)})          # the player's own spot, no formation offset
         self.assertEqual(set(brask.cells), {5996315})
 
+    def test_the_buff_order_walks_the_healer_through_the_enhancements(self):
+        view = {OWNER: {'ok': True, 'x': 100.0, 'y': 90.0, 'z': 0.0, 'parent': 0,
+                        'creature': {'posture': 'upright', 'states': [], 'ham': {'health': 1000},
+                                     'max_ham': {'health': 1000}}}}
+        mirren = Bot('Mirren', 2, view)
+        mirren.arriving = [{'event': 'tell', 'from': '[name removed]', 'text': 'crew buff'}]
+        real_slash = mirren.slash
+
+        def slash(name, args='', target=0, wait=0):
+            real_slash(name, target=target)
+            return [{'event': 'system', 'text': f"You enhance [name removed]'s {args.title()} by 200."}] if name == 'healenhance' else []
+
+        mirren.slash = slash
+        with tempfile.TemporaryDirectory() as tmp:
+            escort.PLAY, real_who = Path(tmp), escort.who
+            escort.who = lambda owner: {'oid': OWNER, 'zone': 'tatooine', 'worldPositionX': 100, 'worldPositionY': 90}
+            try:
+                escort.escort(Group([mirren]), '[name removed]', {'Mirren': {'weapon': 'rifle', 'ranged': True, 'healer': True}}, minutes=.004)
+            finally:
+                escort.who = real_who
+        self.assertEqual([t for name, t in mirren.sent if name == 'healenhance'], [OWNER] * len(escort.BUFFS))
+
 
 class Trail(unittest.TestCase):
     def test_a_point_some_metres_back_along_the_path(self):
