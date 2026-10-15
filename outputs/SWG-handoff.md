@@ -269,8 +269,8 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 - **C33** committed: the class-check scenario (GPT, finished by the Sonnet helper) and its 52 offline tests.
 - **Route for the month** (owner asked how to get the most out of the Max plan in the first month; awaiting the owner's OK): `SWG-roadmap.md`, "Route for the first month". Lanes, waste to cut, four weekly milestones.
 - **Board trimmed** from 150 KB to about 50 KB: log entries older than the newest four are in `SWG-handoff-archive.md`. The task board and the C-task instructions still hold about 38 KB; finished rows go next.
-- Names sweep: 12K context instead of 64K puts 71% of the model on the GPU; about 3 s a chunk outside name-heavy files.
-- This Claude Code session restarted at about 07:31; the restart's WSL side carried on, so nothing was lost.
+- **Windows ran out of memory at 07:31** (commit 50.2 of 51.5 GB, 0.7 GB free; the Ollama runner held 22.6 GB, WSL 12 GB). That crashed GPT's C24b run at once ("memory allocation failed") and very likely restarted this Claude session. Owner, 07:57: the names sweep moves to GPT (C36, after the C24b retry): the local sweep is stopped at 1,037 of 1,979 chunks, the model unloaded, idle research paused (`Agent/local-research/STOP`; delete it to resume). Commit is back to 27 GB. The local model should run on the friend's PC (helper session on remote-Ollama support) or after a RAM upgrade.
+- The 07:31 cycle saw the galaxy down mid-restart and wrote its own restart, which (as at 06:35) never ran from the detached shell. Harmless this time; a restart must not overlap a cycle slot (:01/:31; the scheduled-task list's next-run time was stale).
 
 ### 2026-10-15 07:09 ChatGPT: C34r review complete
 
