@@ -45,6 +45,11 @@ def _seek(bot, target):
     return obj
 
 
+def _indoors(row, obj):
+    """(z, cell) for a move inside the bot's building cell (positions there are cell-local), else (None, None)."""
+    return (obj.get('z', 0.0), row['cell']) if row.get('cell') else (None, None)
+
+
 def _toward(me, obj, stop):
     """A point `stop` metres short of obj on the line from me."""
     dx, dy = obj['x'] - me['x'], obj['y'] - me['y']
@@ -52,43 +57,103 @@ def _toward(me, obj, stop):
     return obj['x'] - dx / d * stop, obj['y'] - dy / d * stop
 
 
+class Fighter:
+    """One bot's side of a fight, one tick at a time (fight() below, and escort.py). Talks only to its own bot."""
+
+    def __init__(self, bot, role, record):
+        self.bot, self.role, self.rec = bot, role, record
+        self.turn, self.last_ok, self._rotation = 0, True, None
+
+    def rotation(self):
+        if self._rotation is None:
+            self._rotation = specials(self.bot.profession('list').get('skills', []), self.role.get('weapon', ''))
+            self.rec['rotation'] = len(self._rotation)
+        return self._rotation
+
+    def send(self, name, to):
+        events = self.bot.slash(name, target=to, wait=.4)
+        self.rec['sent'][name] += 1
+        refused = [e for e in events if e.get('event') == 'command_failed']
+        for e in refused:
+            self.rec['refused'][f"{name}: {e.get('reason') or e.get('error')}"] += 1
+        return not refused
+
+    def open(self, target):
+        for call in self.role.get('opener', []):
+            self.send(call, target)
+
+    def strike(self, row, obj):
+        """Close to reach if needed, then one attack: a special while the last one landed; the plain attack
+        after a refusal (cooldown, action) and every third tick, as a player would weave them."""
+        gap = math.hypot(obj['x'] - row['x'], obj['y'] - row['y']) if row.get('x') is not None else 0
+        ranged = self.role.get('ranged')
+        if gap > (self.role.get('reach', RANGED_REACH) if ranged else MELEE_REACH):
+            x, y = _toward(row, obj, self.role.get('stand', RANGED_STAND) if ranged else 1.5)
+            self.bot.move(x, y, *_indoors(row, obj), timeout=8)
+            self.rec['moves'] += 1
+        rotation = self.rotation()
+        if rotation and self.last_ok and self.turn % 3 != 2:
+            self.last_ok = self.send(rotation[self.turn % len(rotation)], obj['oid'])
+        else:
+            self.send('attack', obj['oid'])
+            self.last_ok = True
+        self.turn += 1
+
+
+class Healer(Fighter):
+    def mend(self, row, patients):
+        """Heal the lowest of patients (name -> {'health': ratio, 'posture', 'x', 'y', 'oid'}) under HEAL_BELOW.
+        True when someone needed it."""
+        hurt = sorted(((r['health'], name, r) for name, r in patients.items()
+                       if r.get('posture') not in DOWN and r.get('health', 1) < HEAL_BELOW and r.get('oid')),
+                      key=lambda t: t[0])
+        if not hurt:
+            return False
+        _, name, patient = hurt[0]
+        if row.get('x') is not None and patient.get('x') is not None and                 math.hypot(patient['x'] - row['x'], patient['y'] - row['y']) > HEAL_REACH:
+            self.bot.move(patient['x'] + 1.5, patient['y'], *_indoors(row, patient), timeout=8)
+            self.rec['moves'] += 1
+        if self.send('healDamage', patient['oid']):
+            self.rec['heals'] += 1
+        return True
+
+
+def new_record():
+    return {'sent': collections.Counter(), 'refused': collections.Counter(), 'moves': 0, 'lowest_health': 1.0,
+            'heals': 0, 'end': None}
+
+
+def self_row(bot, rec=None):
+    """The bot's own health ratio, posture and position, from its status."""
+    me = bot.status()
+    ham, top = me.get('me', {}).get('ham', {}), me.get('me', {}).get('max_ham', {})
+    ratio = ham.get('health', 0) / top['health'] if top.get('health') else 1.0
+    if rec is not None:
+        rec['lowest_health'] = round(min(rec['lowest_health'], ratio), 2)
+    return {'health': ratio, 'posture': me.get('me', {}).get('posture'), 'x': me.get('x'), 'y': me.get('y'),
+            'oid': me.get('self'), 'cell': me.get('cell') or 0}
+
+
 def fight(g, target, roles, seconds=180):
     stop = threading.Event()
     table = {}             # first name -> {'health': ratio, 'posture', 'x', 'y', 'oid'}
     lock = threading.Lock()
-    record = {b.first: {'sent': collections.Counter(), 'refused': collections.Counter(), 'moves': 0,
-                        'lowest_health': 1.0, 'heals': 0, 'end': None} for b in g.bots if b.first in roles}
+    record = {b.first: new_record() for b in g.bots if b.first in roles}
     outcome = {'result': 'timeout', 'seconds': None}
     began = time.time()
 
     def note_self(bot):
-        me = bot.status()
-        ham, top = me.get('me', {}).get('ham', {}), me.get('me', {}).get('max_ham', {})
-        ratio = ham.get('health', 0) / top['health'] if top.get('health') else 1.0
-        row = {'health': ratio, 'posture': me.get('me', {}).get('posture'), 'x': me.get('x'), 'y': me.get('y'),
-               'oid': me.get('self')}
+        row = self_row(bot, record[bot.first])
         with lock:
             table[bot.first] = row
-        rec = record[bot.first]
-        rec['lowest_health'] = round(min(rec['lowest_health'], ratio), 2)
-        return me, row
-
-    def send(bot, name, to):
-        events = bot.slash(name, target=to, wait=.4)
-        record[bot.first]['sent'][name] += 1
-        refused = [e for e in events if e.get('event') == 'command_failed']
-        for e in refused:
-            record[bot.first]['refused'][f"{name}: {e.get('reason') or e.get('error')}"] += 1
-        return not refused
+        return row
 
     def drive(bot, role):
-        rotation = specials(bot.profession('list').get('skills', []), role['weapon'])
-        record[bot.first]['rotation'] = len(rotation)
-        for call in role.get('opener', []):
-            send(bot, call, target)
-        turn, last_ok = 0, True
+        fighter = Fighter(bot, role, record[bot.first])
+        fighter.rotation()
+        fighter.open(target)
         while not stop.is_set() and time.time() - began < seconds:
-            me, row = note_self(bot)
+            row = note_self(bot)
             if row['posture'] in DOWN:
                 break
             obj = _seek(bot, target)
@@ -96,41 +161,20 @@ def fight(g, target, roles, seconds=180):
                 outcome['result'] = 'target ' + (obj.get('posture') if obj else 'gone')
                 stop.set()
                 break
-            gap = math.hypot(obj['x'] - row['x'], obj['y'] - row['y']) if row['x'] is not None else 0
-            reach = role.get('reach', RANGED_REACH) if role.get('ranged') else MELEE_REACH
-            if gap > reach:
-                x, y = _toward(row, obj, role.get('stand', RANGED_STAND) if role.get('ranged') else 1.5)
-                bot.move(x, y, timeout=8)
-                record[bot.first]['moves'] += 1
-            # A special while the last one landed; the plain attack after a refusal (cooldown, action) and every
-            # third tick, as a player would weave them.
-            if rotation and last_ok and turn % 3 != 2:
-                last_ok = send(bot, rotation[turn % len(rotation)], target)
-            else:
-                send(bot, 'attack', target)
-                last_ok = True
-            turn += 1
+            fighter.strike(row, obj)
             bot.idle(TICK)
         record[bot.first]['end'] = table.get(bot.first, {}).get('posture')
 
     def heal(bot, role):
+        healer = Healer(bot, role, record[bot.first])
         while not stop.is_set() and time.time() - began < seconds:
-            me, row = note_self(bot)
+            row = note_self(bot)
             if row['posture'] in DOWN:
                 break
             with lock:
-                hurt = sorted(((r['health'], name, r) for name, r in table.items()
-                               if r['posture'] not in DOWN and r['health'] < HEAL_BELOW), key=lambda t: t[0])
-            if hurt:
-                _, name, patient = hurt[0]
-                if row['x'] is not None and patient['x'] is not None and \
-                        math.hypot(patient['x'] - row['x'], patient['y'] - row['y']) > HEAL_REACH:
-                    bot.move(patient['x'] + 1.5, patient['y'], timeout=8)
-                    record[bot.first]['moves'] += 1
-                if send(bot, 'healDamage', patient['oid']):
-                    record[bot.first]['heals'] += 1
-            elif role.get('weapon'):
-                send(bot, 'attack', target)
+                patients = dict(table)
+            if not healer.mend(row, patients) and role.get('weapon'):
+                healer.send('attack', target)
             bot.idle(TICK)
         record[bot.first]['end'] = table.get(bot.first, {}).get('posture')
 

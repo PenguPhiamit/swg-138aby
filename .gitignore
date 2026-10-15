@@ -105,3 +105,5 @@ outputs/Agent/local-research/*.tmp
 outputs/Agent/local-research/state.json
 # live_map.py temporary movement logs (48 h, rotated)
 outputs/Bot-reports/tracker/
+# escort.py play data (combat near the player, for Creature Handler work)
+outputs/Bot-reports/play/
