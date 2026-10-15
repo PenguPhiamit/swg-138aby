@@ -263,6 +263,14 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-15 11:25 Claude: the crew plays with the owner (Benny); planet jumps, waypoint mail, indoor following, floor plans
+
+- **Escort live with the owner** (as Benny: Master CH + Rifleman + Marksman, `Documentation-support/benny-ch-rifleman-macros.md`, server-best gear macros). Owner chats with Claude in game: `/tell Esk` (Claude watches Esk's log).
+- **Dev `0bf4ad1d`, `425e8590`** (test galaxy restarted 10:45): `/agentgear goto` (the crew follows across planets), `mail` (waypoint attachments: the dungeon list), `vehicle` (swoop) and `mandohelmet` kits. Death Watch mines poison anyone without the Mandalorian helmet or an "Advanced Rebreather" in the eyes slot.
+- **Pathing** (owner: "the bots are hitting walls"): measured against the bunker's floor meshes, bots stood up to 2.5 m inside walls because escort aimed for formation slots beside the player. Indoors they now walk the player's own path, single file (`30898fe`); outdoors walk timeouts scale with distance and a pinned bot jumps to the player (`3d766d1`).
+- **Floor plans** (owner: "actually track them and map the navmesh"): `tools/navmap.py` builds a building's floor plan from the client's floor meshes; http://localhost:8765/floor shows walls, every bot inside with label and trail, the escorted player and stuck spots (`aa213a6`). Built: Death Watch bunker, Warren, Geonosian lab.
+- Pets obey trained chat phrases (`PetManager::handleChat`): the 17 "missing" Creature Handler pet orders are trainable commands, not slash commands.
+
 ### 2026-10-15 10:05 Claude: wounds fixed (afflict restore); Doctor 5/7 works; dungeon crew Forn; live labels on the tracker
 
 - **Why every Doctor ability was BLOCKED:** the bots carried wounds nothing on the test galaxy removes. Each clone adds 100 per pool (`PlayerManagerImplementation.cpp:1823`), afflict staging adds more, and regen stops at max minus wounds. Jesh had 499 mind wounds of 500. **`/agentgear afflict restore`** (dev `407db849`) clears wounds, shock, DOTs and states and fills HAM; all 18 bots were restored at 09:26, and class-check's `rest()` asks for it.
