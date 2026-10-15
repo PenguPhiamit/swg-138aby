@@ -1,0 +1,275 @@
+{
+ "template": "object/building/heroic/shared_echo_base.iff",
+ "template_archive": "mtg_patch_019.tre",
+ "pob_archive": "mtg_patch_016.tre",
+ "portal_geometries": 41,
+ "cells": 41,
+ "cell_names": [
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
+ ],
+ "exterior_portals": [
+  {
+   "geometry": 0,
+   "to_cell": 1,
+   "to_cell_name": "",
+   "centre_local_xyz": [
+    59.44,
+    51.67,
+    314.84
+   ],
+   "floor_y": 47.4,
+   "top_y": 55.94,
+   "width_x_m": 5.2,
+   "width_z_m": 4.8,
+   "vertices": 4
+  },
+  {
+   "geometry": 1,
+   "to_cell": 11,
+   "to_cell_name": "",
+   "centre_local_xyz": [
+    -199.38,
+    89.68,
+    596.17
+   ],
+   "floor_y": 71.67,
+   "top_y": 107.69,
+   "width_x_m": 49.3,
+   "width_z_m": 35.9,
+   "vertices": 4
+  },
+  {
+   "geometry": 2,
+   "to_cell": 34,
+   "to_cell_name": "",
+   "centre_local_xyz": [
+    -109.11,
+    95.01,
+    -296.32
+   ],
+   "floor_y": 81.89,
+   "top_y": 108.13,
+   "width_x_m": 19.8,
+   "width_z_m": 22.8,
+   "vertices": 4
+  },
+  {
+   "geometry": 3,
+   "to_cell": 36,
+   "to_cell_name": "",
+   "centre_local_xyz": [
+    -401.99,
+    101.38,
+    42.29
+   ],
+   "floor_y": 86.96,
+   "top_y": 115.8,
+   "width_x_m": 37.6,
+   "width_z_m": 20.4,
+   "vertices": 4
+  },
+  {
+   "geometry": 4,
+   "to_cell": 40,
+   "to_cell_name": "",
+   "centre_local_xyz": [
+    77.63,
+    150.99,
+    6.89
+   ],
+   "floor_y": 149.82,
+   "top_y": 152.24,
+   "width_x_m": 6.3,
+   "width_z_m": 10.0,
+   "vertices": 8
+  }
+ ],
+ "cutouts": {
+  "hangar": {
+   "centre": [
+    -5307.2,
+    5692.4
+   ],
+   "extent_m": [
+    59.8,
+    45.8
+   ]
+  },
+  "main": {
+   "centre": [
+    -5050.4,
+    5409.9
+   ],
+   "extent_m": [
+    19.2,
+    18.3
+   ]
+  },
+  "tower": {
+   "centre": [
+    -5036.4,
+    5106.0
+   ],
+   "extent_m": [
+    6.5,
+    12.3
+   ]
+  }
+ },
+ "pairing": [
+  [
+   1,
+   "hangar",
+   "portal 49.3x35.9 m, cut-out 59.8x45.8 m"
+  ],
+  [
+   0,
+   "main",
+   "portal 5.2x4.8 m, cut-out 19.2x18.3 m"
+  ],
+  [
+   4,
+   "tower",
+   "portal 6.3x10.0 m, cut-out 6.5x12.3 m"
+  ]
+ ],
+ "door_distances_m": {
+  "local_hangar_main": 382.3,
+  "world_hangar_main": 381.7,
+  "local_hangar_tower": 651.1,
+  "world_hangar_tower": 645.9,
+  "local_main_tower": 308.5,
+  "world_main_tower": 304.3
+ },
+ "fit": {
+  "mirror_x": false,
+  "theta_rad": -0.007458932885501756,
+  "theta_deg": -0.4273653740105875,
+  "origin": [
+   -5112.820033110632,
+   5096.647340692783
+  ],
+  "residual_m": [
+   1.993255979892235,
+   1.2881118586886473,
+   3.253790946651944
+  ],
+  "rms_m": 2.325185088430928,
+  "mapped_doors": [
+   [
+    "hangar",
+    [
+     -5307.7,
+     5694.3
+    ],
+    "cut-out",
+    [
+     -5307.2,
+     5692.4
+    ]
+   ],
+   [
+    "main",
+    [
+     -5051.0,
+     5411.0
+    ],
+    "cut-out",
+    [
+     -5050.4,
+     5409.9
+    ]
+   ],
+   [
+    "tower",
+    [
+     -5035.1,
+     5103.0
+    ],
+    "cut-out",
+    [
+     -5036.4,
+     5106.0
+    ]
+   ]
+  ]
+ },
+ "terrain_at_cutouts_m": {
+  "hangar": 110.4,
+  "main": 85.0,
+  "tower": 186.4
+ },
+ "building_z_from_each_door": [
+  [
+   "hangar",
+   38.7
+  ],
+  [
+   "main",
+   37.6
+  ],
+  [
+   "tower",
+   36.6
+  ]
+ ],
+ "building_z_choice": 37.6,
+ "building_z_spread_m": 2.1,
+ "closure": {
+  "files": 285,
+  "missing": [],
+  "by_archive": {
+   "mtg_patch_019.tre": 1,
+   "data_other_00.tre": 9,
+   "patch_09.tre": 2,
+   "patch_05.tre": 1,
+   "mtg_patch_016.tre": 85,
+   "mtg_patch_018.tre": 85,
+   "mtg_patch_014.tre": 95,
+   "data_texture_01.tre": 1,
+   "patch_11_00.tre": 3,
+   "mtg_patch_022.tre": 2,
+   "data_texture_06.tre": 1
+  }
+ }
+}

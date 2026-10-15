@@ -1,0 +1,5 @@
+C=/opt/swg/Core3-dev/MMOCoreORB/src/server/zone
+echo "===== start scene packet"; f=$(grep -rl 'CmdStartScene' $C/packets 2>/dev/null | head -1); echo $f; grep -n 'insertAscii\|insertString\|terrain\|insertUnicode' $f | head -8
+echo "===== config.lua zones/tre"; sed -n '95,100p;148,160p' /opt/swg/Core3-dev/MMOCoreORB/bin/conf/config.lua
+echo "===== test_galaxy injected lines"; sed -n '100,131p' /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/tools/test_galaxy.py
+echo "===== T2 git apply check (h layout)"; T=$(mktemp -d); cd $T; git init -q .; git config user.email f@x; git config user.name f; mkdir -p outputs/tools/hoth outputs/tools/swgfmt; cp /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/tools/hoth/hoth_closure.py outputs/tools/hoth/; cp /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/tools/swgfmt/__init__.py outputs/tools/swgfmt/; git add -A; git commit -q -m base; for p in hoth_closure asset_refs; do git apply --check /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Fable-live-client/t2/patch/$p.patch && echo "$p.patch: clean"; done; cd /; rm -rf "$T"

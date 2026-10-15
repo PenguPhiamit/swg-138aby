@@ -1,0 +1,9 @@
+--- a/outputs/SWG-client/swgemu.cfg
++++ b/outputs/SWG-client/swgemu.cfg
+@@ -1,5 +1,6 @@
+ .include "swgemu_login.cfg"
+ .include "swgemu_live.cfg"
++.include "local_planets.cfg"
+ .include "swgemu_preload.cfg"
+ .include "options.cfg"
+ .include "user.cfg"

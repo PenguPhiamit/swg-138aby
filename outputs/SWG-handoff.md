@@ -51,8 +51,9 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
-| **C23: Hoth gameplay acceptance** (ChatGPT owns it end to end) | ChatGPT | claimed — ChatGPT, 14 Oct 14:46 | Instructions above the log. Scenario `tools/hoth/hoth_gameplay_check.py`, written offline now, run after Claude's next restart; ChatGPT keeps the fail list until it is empty |
+| **C23: Hoth gameplay acceptance** (ChatGPT owns it end to end) | ChatGPT | first pass BLOCKED; normal cleanup 11/11, all home; readiness/telemetry open | Instructions above the log. Scenario `tools/hoth/hoth_gameplay_check.py`, written offline now, run after Claude's next restart; ChatGPT keeps the fail list until it is empty |
 | **C24: Hoth release gate** (go/no-go) | ChatGPT | checkpoint complete — NO-GO, 14 Oct; C23/owner/client gates open | Instructions above the log. `Documentation-support/hoth-release-gate.md`; ChatGPT gives the "reviewed by" for any Hoth live deploy |
+| **C29: pre-CU resources/crafting + Galaxy Harvester** | ChatGPT, Medium | claimed - bounded research checkpoint | Owner requests Claude reference; mechanics/source, harvester tools, private integration; no installs/public submissions |
 | **C28: browser planet/squad/fleet monitor** | ChatGPT outside tools/UI; Claude telemetry review/build | owner idea; design scoped, implementation pending | Documentation-support/bot-fleet-browser-monitor.md; F100. Map-first fleet view, optional selected-squad observer video; no service/capture started |
 | **C27: player report inbox and agent-to-Discord relay** | Claude server intake; ChatGPT outside tools/review | owner requested; design scoped, implementation pending | Documentation-support/player-bug-inbox-design.md; native Mantis route inspected, no local queue today; F98 |
 | **C26: acceptance telemetry** | ChatGPT | source committed; Claude review/build/runtime pending | Resource units/spawn IDs, own cash/bank credits, own quest waypoints, Hoth/Ossus planet names; `Documentation-support/C26-telemetry.md` |
@@ -248,16 +249,27 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 18:50 Claude: ChatGPT's C25/C26 and the R2-F1 fix in dev; Echo Base and Ossus on the test galaxy; owner: wide resources, coverage kept at 80%
+- **ChatGPT's six worktree commits reviewed and in dev** (`-x`): `7267cf3c` C25 ticket messages; C26 telemetry `58797fdf` resource units, `788e456f` own credits, `7e6625c0` Hoth/Ossus names, `7817437a` waypoints, `e9a8a6c0` nine attributes. Checked against the server serializers (RCNO3 quantity and spawn ID after the TANO3 fields, delta 0x0B; CREO1 bank then cash; DeltaVectorMap ADD/DROP/SET with the value on drop; WaypointObject::insertToMessage). No findings. Built 18:09 (core3 + core3client).
+- **R2-F1 fixed (`98ad1d1d`)** with ChatGPT's proposal: the chance counts maps outside the backfill zones. Model, 20,000 spawns x 5 starts: 333 changed after the first start with the old rule, 0 now.
+- **Fable E0 Echo Base `8f2072e7`, Fable O5 Ossus `2ada3784`** in dev. `test_galaxy.py` TEST_ZONES = hoth, ossus. Archive `254d0e49` (Hoth + Ossus) on the server and in `SWG-client/`; `aee83cc6` kept in `/opt/swg/tre/old/` and `Temp/archive-backup-1830/`. **Re-running `hoth_client_build.py` alone republishes a Hoth-only archive:** use `Fable-ossus/o5/build_test_archive.py` until R3 merges the builders.
+- **Restarts 18:17 and 18:35** (no owner client; the 18:02 round halted at 18:10; the 18:31 cycle slot didn't fire). Ossus deployed: 9 regions, 87 snapshot objects (Knossa starport), native pool 84 (42 + 42). Bots relogged 18:37 on ChatGPT's new body. Echo Base loaded with no errors; owner check in `Fable-echo-base/README.md` section 4.
+- **Backfill was thin:** Hoth 3 added (44 at max pool), Ossus 1 (47 at max). The galaxy-wide minerals are 8-planet types, already on 8 of the old 10. **Owner: "Scale the galaxy-wide coverage to about 80% as planets are added."** Dev `3a0b154f`: `poolScaleZones = 10`, so each galaxy-wide type's planet range scales by active zones / 10 (8 of 10 becomes 10 of 12). Backfill cap = scaled max, chance = share of 10. Key missing (live) = stock. Built 18:48; restart after the 19:01 round starts.
+- **Owner: "get hoth and ossus their resources, add everything we have for them then lets layout all the resources we have and get them adapted for swg and integrated. (a wide crafting pool keeps people interested.)"** Fable R3 (`Fable-resources3/`): Hoth's 4 MTG gems and 3 missing energies, Ossus's own minerals, then the full inventory (stock 725, MTG's 120 extras incl. Dromund Kaas 45 and space 18, Ossus, the owner's book) with an integration list. ChatGPT C29: Legends lore materials for it.
+- **TortoiseBots, owner: "we do have auth to use its code and assets fully, hes the one who sent me UM".** Sagiroth's own code and assets may be ported (AGPL notices and credit kept); donor files keep their licences. Fable's fallback after R3: our SWG bot framework from it, staged in `Fable-tortoise/` (tools/bots stays ChatGPT's).
+- **Next:** Claude reviews Fable S5 (Chiss, staged in `Fable-species/s5/`). ChatGPT: C24b, C23c, C29 (relay queue).
+
+### 2026-10-14 18:40 ChatGPT: C29 resource/crafting research claimed
+- Owner requests resources/crafting and external Galaxy Harvester research for Claude. Bounded pass: primary local Core3 source + historical player workflow, Galaxy Harvester official help/source and SWGAide desktop distinction. No bot/game operations, external accounts, downloads/installs or resource publication.
+
+
 ### 2026-10-14 18:03 ChatGPT: C28/F100 browser fleet monitor scoped
 - Owner proposes planet maps/moving bot markers; actual video for small squads, maps sufficient at fleet scale. Saved Documentation-support/bot-fleet-browser-monitor.md with snapshot-backed TortoiseBots reference and current telemetry inspection. Current status is five-minute text; activity records lack positions; headless bodies cannot render video.
 - Proposed passive telemetry, epoch/sequence/stale guards, calibrated maps/interior coordinates, selected graphical observer feed, bounded fleet overhead and C27 incident links. No code/assets copied, bot queries/driving, UI/capture, services/accounts/network changes or deployment. Next: local map telemetry prototype after intake/build priorities and owner scheduling.
 
 
-
 ### 2026-10-14 18:00 ChatGPT: planet fleet monitor idea claimed
 - Owner proposes browser planet maps with moving bot markers, video preferred for small squads and map-first fleet scale. Claim design/telemetry feasibility against existing saved sources only; no bot driving, capture, services or deployment.
-
-
 
 
 ### 2026-10-14 17:52 ChatGPT: C27 scoped; screenshot leads screened
@@ -265,11 +277,8 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 - Screenshot supplied seven sources: SWAPI, Jedi-Faker, OpenSWE1R, Open Rebellion, OpenJKDF2, KYBER, NGECore2. Bounded primary-source screen saved; most promising gameplay lead Open Rebellion MIT engine, data separate. Other grants/components and NGECore2 restrictions recorded narrowly. No clones/imports/new services or Discord posts. Research checkpoint ends here.
 
 
-
 ### 2026-10-14 17:47 ChatGPT: player bug inbox design claimed
 - Owner wants developers, experienced players and new players, plus in-game bug reports persisted locally for agents to read when available. Claim native-report source inspection and local queue contract/design; no deployment, server edits or Discord creation.
-
-
 
 
 ### 2026-10-14 17:40 ChatGPT: C17 remote-tester Discord blueprint complete
@@ -277,49 +286,12 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 - Official Discord/WSL/Tailscale docs checked; plugin search returned no Discord integration in this session. Existing sender verified by source inspection to permit only curated/status sends; no delivery/runtime claim. Claude owns any later QA host/account/galaxy preparation.
 
 
-
 ### 2026-10-14 17:36 ChatGPT: C17 developer/tester Discord plan claimed
 - Owner asks to investigate Discord integrations for a private developer server and potential hired testers. Claim documentation/integration research only; no server, app, webhook, invitations or posts created.
 
 
-
-
 ### 2026-10-14 16:48 ChatGPT: owner video investigation request
 - Claimed and completed the inbox handoff: owner asks Claude to investigate https://www.youtube.com/watch?v=bhAGu065VKk. Video contents have not been reviewed by ChatGPT; Claude investigation is pending.
-
-
-### 2026-10-14 16:36 ChatGPT: R2-F1 isolated fix proposal claimed
-- Claim R2-F1 in GPT worktree only. Prepare a fixed non-target-map numerator so unchanged backfill configuration is restart-idempotent across multiple zones. This is a conservative migration policy, not exact reconstruction of historical random selection. No resource DB or running galaxy change; Claude must review the policy/diff and build/test.
-
-### 2026-10-14 16:33 ChatGPT: C26 secondary-stat diagnostic follow-up
-- Claim isolated AgentControl creatureState projection only in GPT worktree. Existing body already receives all nine HAM values but exports only three pools, hiding strength/quickness/focus armor prerequisites. Prepare named nine-value diagnostics for Claude review/build; no stat/gameplay changes.
-
-
-### 2026-10-14 16:31 ChatGPT: Esk setup finished; driver returned
-- Approved setup ran 12/12 checks, report Bot-reports/Esk/20261014-162840-esk_test_preparation.json. Master Rifleman/Scout novice (Esk), Master Swordsman/Scout novice (Tovan), Master Doctor/Artisan surveying IV (Lira) granted. Boss/support kit receipts: no failed items. Client-table prerequisite closures 155/155/169 points with current configured training (not an independent runtime skill-list audit).
-- Ordinary equipment verification report Bot-reports/Esk/20261014-163001-esk_verify_equipment.json: 2/4 checks pass, both fighters wear only helmet/gloves of nine composite pieces. Seven equip attempts each refused: lack necessary secondary stats, system_msg:equip_armor_fail/prose. Master skills do not solve armor encumbrance. No stat edits or extra staff grants. All stay upright on Tatooine.
-- Lira inventory contains mineral/liquid tools; chemical/gas/moisture/flora still missing. No Hoth acceptance rerun. Esk restored to squad-plan; no ChatGPT bot driver claim remains.
-
-
-### 2026-10-14 16:28 ChatGPT: owner approves C23 setup-only exception
-- Owner explicitly approved test-only agentgear boss/support and agentskill preparation for existing Esk/Lira/Tovan. Claim Esk driver for setup only; Esk removed from squad-plan, no squad run active at pgrep preflight. No server lock transfer/restart/build/live changes. Skills verified against current client datatable; no admin grants. Restore plan and return driver after setup.
-
-
-### 2026-10-14 16:26 ChatGPT: C21 checkpoint 3a claimed
-- Bounded species classification pass: the 40 saved species records, regular biological species versus human faction options/droids, package/gender evidence and creation dependencies. No new KOTOR audit, imports or dev edits. Fresh Wookieepedia checks for selected identities only; stop at checkpoint.
-
-
-### 2026-10-14 16:22 ChatGPT: gathering evidence follow-up claimed
-- Claim Besh gather scenario and new offline evidence fixtures. Found one corpse harvested three ways, guard timeout treated as kill if text contains target, and sample success inferred from text/item count. Fix evidence before further runs; no bot control/server changes.
-
-
-### 2026-10-14 16:20 ChatGPT: C17 privacy follow-up claimed
-- Claim C17 outbound projection fix in tools/agents/discord_post.py and fixtures. Raw free-text board/overnight feeds cannot guarantee removal of names/aliases under the owner's new privacy rule. Prepare a fixed-vocabulary curated feed and block sending raw feeds; no actual post/webhook/service.
-
-
-### 2026-10-14 16:04 ChatGPT: owner gives a two-hour independent-work window
-- Audited available work: Documentation-support/available-work-20261014.md. Priority: isolated telemetry source work, harness/reports/privacy fixes, then already-authorized downloads and bounded census/docs. No dev edits/builds/restarts/live changes.
-- Claim C26: resource-unit, credit and quest-waypoint telemetry in /opt/swg/Core3-gpt only; separate topic commits for Claude review/build later. No other agent's slice edited. C23 setup-only exception requested from owner separately; no staff setup performed yet.
 
 
 ### 2026-10-14 16:39 ChatGPT: session closed at owner request
@@ -328,8 +300,6 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 - Local commits: 088465d telemetry/fixtures; c1dd1b9 privacy; aef1307 gather evidence; edad1c8 initial asset/species receipts. Closing commit follows. Offline: six wire-layout fixtures, nine C23 evidence fixtures, 24 Discord privacy/transport fixtures, four gather fixtures. These are not C++ execution or gameplay acceptance.
 - Nineteen authorized archives retained, 414149488 bytes; no imports/scripts/installs. Five 7z inventories are names-only, full audit held. Poly Haven API 403 held. C21 species checkpoint: 36 biological candidates + two human faction options + two droid options; overall census open.
 - R2-F1 remains open: isolated design proposal saved, source implementation not started. C24 remains NO-GO. PDF snapshot refreshed with selected docs, scope/manifest; not a verbatim chat export. Next: Claude review/build C25/C26, solve ordinary buffs/kit and remaining survey tools, then C23 rerun. C3/C5 remain open.
-
-
 
 
 ### 2026-10-14 14:56 Claude: owner: Fable does content first; order E0, Ossus, species (Chiss), Hoth extras
@@ -802,3 +772,36 @@ Read board, roadmap, queue and inbox. Next queued tasks: C12 Hoth adaptation, C1
 
 ### 2026-10-14 14:49 ChatGPT: C23 Esk driver claim
 - Claude's 14:47 restart-ready note received; no squad.py process at preflight. ChatGPT claims Esk crew for one bounded C23 gameplay acceptance run (30-minute ceiling). Esk removed from squad-plan.txt until cleanup; no server changes/restart. Scenario offline compilation and five receipt/name/option fixtures pass. C24/C25 preparation continues independently during the run.
+
+### 2026-10-14 15:08 ChatGPT: C23/C24/C25 checkpoint, Esk returned
+- C23 scenario/report: fbd691f, then f1ec6ef safety correction/outcomes. Main run 20261014-144837 finished BLOCKED (836s): 59/61 mostly repeated travel checks. Three reached Hoth, terminals/Vell found; Esk dead after field walk, no leader tools, no resource/harvest/service/quest acceptance. Own scenario preparation gap corrected; seven fixtures pass. See Documentation-support/C23-hoth-gameplay.md for B1-B4/F1, not server-regression assertions.
+- Normal clone/return-only cleanup report 20261014-150600: 11/11 PASS, 145s. Final squad status: all three upright on Tatooine. Esk restored to squad-plan.txt; driver claim released back to Claude. No server restart, staff provisioning, teleport or live changes.
+- C24 NO-GO: e29f926 then d74b71d; 48-row pinned inventory and five format/data/arithmetic checks. R2 multi-zone idempotence P2 sent to Claude; source-review/runtime/owner/client-distribution gates retained.
+- C25 server source 5c41ed62 in Core3-gpt gpt/work only; local recipe/report 9b3087b. Diff check passed; Claude review/cherry-pick/build/runtime pending. No build in GPT worktree. Next: prepare lawful ordinary test tools/agreed kit and telemetry, rerun blocked C23 items; C21 resumes after higher-priority tasks permit.
+
+### 2026-10-14 16:04 ChatGPT: owner gives a two-hour independent-work window
+- Audited available work: Documentation-support/available-work-20261014.md. Priority: isolated telemetry source work, harness/reports/privacy fixes, then already-authorized downloads and bounded census/docs. No dev edits/builds/restarts/live changes.
+- Claim C26: resource-unit, credit and quest-waypoint telemetry in /opt/swg/Core3-gpt only; separate topic commits for Claude review/build later. No other agent's slice edited. C23 setup-only exception requested from owner separately; no staff setup performed yet.
+
+### 2026-10-14 16:20 ChatGPT: C17 privacy follow-up claimed
+- Claim C17 outbound projection fix in tools/agents/discord_post.py and fixtures. Raw free-text board/overnight feeds cannot guarantee removal of names/aliases under the owner's new privacy rule. Prepare a fixed-vocabulary curated feed and block sending raw feeds; no actual post/webhook/service.
+
+### 2026-10-14 16:22 ChatGPT: gathering evidence follow-up claimed
+- Claim Besh gather scenario and new offline evidence fixtures. Found one corpse harvested three ways, guard timeout treated as kill if text contains target, and sample success inferred from text/item count. Fix evidence before further runs; no bot control/server changes.
+
+### 2026-10-14 16:26 ChatGPT: C21 checkpoint 3a claimed
+- Bounded species classification pass: the 40 saved species records, regular biological species versus human faction options/droids, package/gender evidence and creation dependencies. No new KOTOR audit, imports or dev edits. Fresh Wookieepedia checks for selected identities only; stop at checkpoint.
+
+### 2026-10-14 16:28 ChatGPT: owner approves C23 setup-only exception
+- Owner explicitly approved test-only agentgear boss/support and agentskill preparation for existing Esk/Lira/Tovan. Claim Esk driver for setup only; Esk removed from squad-plan, no squad run active at pgrep preflight. No server lock transfer/restart/build/live changes. Skills verified against current client datatable; no admin grants. Restore plan and return driver after setup.
+
+### 2026-10-14 16:31 ChatGPT: Esk setup finished; driver returned
+- Approved setup ran 12/12 checks, report Bot-reports/Esk/20261014-162840-esk_test_preparation.json. Master Rifleman/Scout novice (Esk), Master Swordsman/Scout novice (Tovan), Master Doctor/Artisan surveying IV (Lira) granted. Boss/support kit receipts: no failed items. Client-table prerequisite closures 155/155/169 points with current configured training (not an independent runtime skill-list audit).
+- Ordinary equipment verification report Bot-reports/Esk/20261014-163001-esk_verify_equipment.json: 2/4 checks pass, both fighters wear only helmet/gloves of nine composite pieces. Seven equip attempts each refused: lack necessary secondary stats, system_msg:equip_armor_fail/prose. Master skills do not solve armor encumbrance. No stat edits or extra staff grants. All stay upright on Tatooine.
+- Lira inventory contains mineral/liquid tools; chemical/gas/moisture/flora still missing. No Hoth acceptance rerun. Esk restored to squad-plan; no ChatGPT bot driver claim remains.
+
+### 2026-10-14 16:33 ChatGPT: C26 secondary-stat diagnostic follow-up
+- Claim isolated AgentControl creatureState projection only in GPT worktree. Existing body already receives all nine HAM values but exports only three pools, hiding strength/quickness/focus armor prerequisites. Prepare named nine-value diagnostics for Claude review/build; no stat/gameplay changes.
+
+### 2026-10-14 16:36 ChatGPT: R2-F1 isolated fix proposal claimed
+- Claim R2-F1 in GPT worktree only. Prepare a fixed non-target-map numerator so unchanged backfill configuration is restart-idempotent across multiple zones. This is a conservative migration policy, not exact reconstruction of historical random selection. No resource DB or running galaxy change; Claude must review the policy/diff and build/test.

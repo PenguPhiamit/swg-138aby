@@ -1,0 +1,27 @@
+--- a/outputs/tools/hoth/hoth_closure.py
++++ b/outputs/tools/hoth/hoth_closure.py
+@@ -12,22 +12,18 @@
+ ([SharedFile] only). Bellum's walk_tres() counted searchTree lines in any section, so this tool once reported the
+ MTG archives as loaded when the client ignored them.
+ 
+-It reuses the TRE and IFF readers from Bellum Gero's planet tools (AGPL-3.0, pinned in
+-work/research/Miphstoe_BellumGero-Live, read before use: standard library, no writes, no network), loaded the
+-same way Bellum's own dep_closure.py loads them. Writes Documentation-support/hoth/hoth-closure.tsv and prints a
++The TRE reader and the asset-reference scanner are ours (outputs/tools/swgfmt: fmt_tools, asset_refs). Writes Documentation-support/hoth/hoth-closure.tsv and prints a
+ summary.
+ """
+ import os, sys
+ from collections import Counter
+ 
+ H = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
+-BELLUM = os.path.join(H, 'work', 'research', 'Miphstoe_BellumGero-Live', 'MMOCoreORB', 'tools', 'newplanets')
+ CLIENT = os.path.join(H, 'outputs', 'SWG-client')
+ OUT = os.path.join(H, 'outputs', 'Documentation-support', 'hoth')
+ sys.path.insert(0, os.path.join(H, 'outputs', 'tools'))
+ from swgfmt.fmt_tools import read_tre, _inflate  # noqa: E402  (ours; was Bellum's tre_inventory)
+-# refs(): Bellum's asset-reference scanner (iff_tool.py); our readers have no equivalent yet, so it stays.
+-exec(open(os.path.join(BELLUM, 'iff_tool.py'), encoding='utf-8').read().split('if __name__')[0])
++from swgfmt.asset_refs import refs  # noqa: E402  (ours; was Bellum's iff_tool)
+ 
+ LEAVES = ('.dds', '.tga', '.wav', '.mp3', '.snd')
+ 

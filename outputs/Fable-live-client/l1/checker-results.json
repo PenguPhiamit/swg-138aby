@@ -1,0 +1,66 @@
+{
+ "diff_lines": {
+  "swgemu.cfg": 9,
+  "local_planets.cfg": 0,
+  "Play SWG Test Galaxy.cmd": 11
+ },
+ "client_today": {
+  "verdict": "0 of 20 entries win",
+  "ours_loaded_at": [],
+  "archives_loaded": 74,
+  "ignored_lines": [],
+  "mtg_loaded": {
+   "mtg_planets.tre": true,
+   "mtg_patch_022.tre": true,
+   "mtg_patch_019.tre": true,
+   "mtg_patch_016.tre": true
+  }
+ },
+ "staged_live_cfg": {
+  "verdict": "all 20 entries win",
+  "ours_loaded_at": [
+   49
+  ],
+  "archives_loaded": 75,
+  "duplicates": [],
+  "mtg_loaded": {
+   "mtg_planets.tre": true,
+   "mtg_patch_022.tre": true,
+   "mtg_patch_019.tre": true,
+   "mtg_patch_016.tre": true
+  },
+  "cfg_priorities_disagrees": []
+ },
+ "staged_plus_test_launcher_line": {
+  "verdict": "all 20 entries win",
+  "ours_loaded_at": [
+   49,
+   49
+  ],
+  "duplicates": [
+   "local_planets.tre"
+  ]
+ },
+ "entries_staged": {
+  "string/en/skl_n.stf": "WINS",
+  "string/en/clientpoi_n.stf": "WINS",
+  "ui/ui_ticketpurchase.inc": "WINS",
+  "datatables/resource/resource_tree.iff": "WINS",
+  "string/en/static_npc/hoth/scavenger_quartermaster.stf": "WINS",
+  "string/en/planet_n.stf": "WINS",
+  "string/en/skl_t.stf": "WINS",
+  "datatables/clientpoi/clientpoi.iff": "WINS",
+  "datatables/travel/travel.iff": "WINS",
+  "datatables/clientregion/hoth.iff": "WINS",
+  "string/en/hoth_region_names.stf": "WINS",
+  "ui/ui_planet_map.inc": "WINS",
+  "misc/object_template_crc_string_table.iff": "WINS",
+  "datatables/skill/skills.iff": "WINS",
+  "string/en/skill_teacher.stf": "WINS",
+  "string/en/clientpoi_d.stf": "WINS",
+  "string/en/skl_d.stf": "WINS",
+  "string/en/mob/creature_names.stf": "WINS",
+  "datatables/player/waypoint_planets.iff": "WINS",
+  "misc/planet_crc_string_table.iff": "WINS"
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "rc": 0,
+ "stdout": [
+  "487 files reached from terrain/hoth.trn, snapshot/hoth.ws: missing 2, mtg 41, stock 444",
+  "missing by folder: shader 2",
+  "  MISSING shader/rock.sht  (from terrain/hoth.trn)",
+  "  MISSING shader/snow.sht  (from terrain/hoth.trn)",
+  "supplied by MTG archives: mtg_planets.tre 25, mtg_patch_022.tre 6, mtg_patch_016.tre 5, mtg_patch_006_texture_02.tre 3, mtg_patch_009_Shader_01.tre 2"
+ ],
+ "stderr": "",
+ "tsv_identical": true
+}

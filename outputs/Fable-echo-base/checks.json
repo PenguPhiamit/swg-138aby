@@ -1,0 +1,34 @@
+{
+ "built": "2026-10-14",
+ "core3_dev": "eccb53e1 (read-only)",
+ "fit": {
+  "pob": "appearance/echo_base_pob.pob (mtg_patch_016.tre, 51404 B): 41 cells, 41 portal geometries, 5 exterior portals",
+  "template": "object/building/heroic/shared_echo_base.iff (mtg_patch_019.tre, 1419 B): portalLayoutFilename appearance/echo_base_pob.pob",
+  "pairing": {"hangar": "portal 1 -> cell 11, 49.3x35.9 m", "main": "portal 0 -> cell 1, 5.2x4.8 m", "tower": "portal 4 -> cell 40, 6.3x10.0 m"},
+  "door_distances_m": {"local_hangar_main": 382.3, "world_hangar_main": 381.7, "local_hangar_tower": 651.1, "world_hangar_tower": 645.9, "local_main_tower": 308.5, "world_main_tower": 304.3},
+  "transform": {"mirror": false, "heading_deg": -0.43, "origin_x": -5112.8, "origin_y": 5096.6, "residual_m": [2.0, 1.3, 3.3], "rms_m": 2.3},
+  "terrain_at_cutouts_m": {"hangar": 110.4, "main": 85.0, "tower": 186.4},
+  "height_from_each_door_m": {"hangar": 38.7, "main": 37.6, "tower": 36.6},
+  "height_chosen_m": 37.6,
+  "height_spread_m": 2.1,
+  "unmatched_exterior_portals": ["geometry 2 -> cell 34 at local (-109, -296)", "geometry 3 -> cell 36 at local (-402, 42)"],
+  "source": "out/fit.json (tools/fit_echo_base.py)"
+ },
+ "server_patch": {
+  "file": "patch/echo-base-e0.patch",
+  "lines": 92,
+  "modified": ["MMOCoreORB/bin/scripts/screenplays/screenplays.lua (+1)", "MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua (+2)", "MMOCoreORB/bin/scripts/object/allobjects.lua (+1)", "MMOCoreORB/bin/scripts/object/building/serverobjects.lua (+1)"],
+  "new": ["MMOCoreORB/bin/scripts/screenplays/poi/hoth_echo_base.lua", "MMOCoreORB/bin/scripts/object/building/heroic/objects.lua", "MMOCoreORB/bin/scripts/object/building/heroic/echo_base.lua", "MMOCoreORB/bin/scripts/object/building/heroic/serverobjects.lua"],
+  "git_apply_check": "clean (scratch repo in WSL holding the verbatim dev files)",
+  "luac": "ok on all 8 files",
+  "spawn": "spawnSceneObject(\"hoth\", \"object/building/heroic/echo_base.iff\", -5112.8, 37.6, 5096.6, 0, 0)",
+  "region": "{\"hoth_echo_base_nobuild\", -5113, 5097, {CIRCLE, 750}, NOBUILDZONEAREA + NOSPAWNAREA}",
+  "untested": "that a screenplay-spawned building gets its 41 cells (no such spawn exists in dev); fallback: a snapshot node via ws_write"
+ },
+ "client_side": {
+  "closure_files": 285,
+  "missing": [],
+  "by_archive": {"mtg_patch_019.tre": 1, "mtg_patch_016.tre": 85, "mtg_patch_018.tre": 85, "mtg_patch_014.tre": 95, "mtg_patch_022.tre": 2, "data_other_00.tre": 9, "patch_09.tre": 2, "patch_05.tre": 1, "data_texture_01.tre": 1, "patch_11_00.tre": 3, "data_texture_06.tre": 1},
+  "local_planets_changes_needed": "none (template CRC already in the merged object CRC table)"
+ }
+}

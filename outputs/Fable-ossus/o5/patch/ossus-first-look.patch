@@ -1,0 +1,72 @@
+--- a/MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua
++++ b/MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua
+@@ -619,6 +619,30 @@
+ 	}
+ }
+ 
++ossus = {
++	-- Sandbox: Ossus first look (Fable O5, 14 Oct 2026; outputs/Fable-ossus/o5/README.md). Our own terrain
++	-- (terrain/ossus.trn) and snapshot (snapshot/ossus.ws) in local_planets.tre; the Knossa starport sits on the
++	-- flattened pad at 0 -3600 (50.3 m). Reached from Corellia (datatables/travel/travel.iff; placeholder fares, Q10).
++	weatherEnabled = 1,
++	gcwEnabled = 1,
++
++	planetTravelPoints = {
++		-- the outpost_starport landing pad: the same offset from the building as Hoth and Yavin IV (yaw 180); the
++		-- building's own child objects give the travel terminal, the ticket collector and the shuttle, as on Hoth
++		{name = "Knossa", x = 20.3, z = 50.3, y = -3582.2, interplanetaryTravelAllowed = 1, incomingTravelAllowed = 1, landingRange = 3},
++	},
++
++	badgeAreas = {
++	},
++
++	navAreas = {
++		{"ossus_knossa", 0, -3600, 150},
++	},
++
++	planetObjects = {
++	}
++}
++
+ tutorial = {
+ 	weatherEnabled = 0,
+ 	gcwEnabled = 0,
+--- a/MMOCoreORB/bin/scripts/managers/resource_manager.lua
++++ b/MMOCoreORB/bin/scripts/managers/resource_manager.lua
+@@ -46,7 +46,9 @@
+ --  These indicate zone names where resources spawn
+ -- Sandbox Hoth (14 Oct 2026, Claude): hoth added; its 52 native resource types come from the merged
+ -- resource_tree.iff in local_planets.tre (MTG's 50 + solar/wind cloned from Endor), so this needs that archive.
+-activeZones = "corellia,tatooine,lok,naboo,rori,endor,talus,yavin4,dathomir,dantooine,hoth"
++-- Sandbox Ossus (14 Oct 2026, Fable O5): ossus added; its 45 native types are in the merged resource_tree.iff of the
++-- test-session local_planets.tre (stage_ossus, O4). Give it backfillZones = "hoth,ossus" for its first start (test_galaxy.py).
++activeZones = "corellia,tatooine,lok,naboo,rori,endor,talus,yavin4,dathomir,dantooine,hoth,ossus"
+ 
+ -- Zones (from activeZones) that take a fair share of the spawns already in shift when the server starts: a planet
+ -- added to activeZones otherwise waits for every galaxy-wide spawn to expire (6-11 days) before minerals, gas and
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua
+@@ -0,0 +1,23 @@
++require("scripts.managers.planet.regions")
++
++-- Sandbox: Ossus first look (Fable O5, 14 Oct 2026; outputs/Fable-ossus/o5/README.md): the edges, the Knossa landing
++-- field as a city (its name is string/en/ossus_region_names.stf in local_planets.tre), no-build circles at the ruins
++-- and the three caves. No spawn areas and no world spawner yet: O2b's fauna, lairs and spawn groups follow once the
++-- owner has seen the planet (outputs/Fable-ossus/o2/staged/.../ossus_regions.lua holds the full file).
++ossus_regions = {
++	-- No Build Zones
++	{"northedge_ossus_nobuild", -8000, 7640, {RECTANGLE, 8000, 8000}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"westedge_ossus_nobuild", -8000, -7640, {RECTANGLE, -7640, 7640}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"southedge_ossus_nobuild", -8000, -8000, {RECTANGLE, 8000, -7640}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"eastedge_ossus_nobuild", 7640, -7640, {RECTANGLE, 7999, 7640}, NOSPAWNAREA + NOBUILDZONEAREA},
++
++	-- The landing field
++	{"@ossus_region_names:knossa", 0, -3600, {CIRCLE, 200}, CITY + NOSPAWNAREA},
++	{"ossus_knossa_nobuild", 0, -3600, {CIRCLE, 320}, NOBUILDZONEAREA},
++
++	-- The academy ruins and the three cave mouths
++	{"ossus_academy_ruins_nobuild", 2016, 2848, {CIRCLE, 260}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_cave_foothills_west_nobuild", -2976, -4960, {CIRCLE, 120}, NOBUILDZONEAREA},
++	{"ossus_cave_foothills_east_nobuild", 4896, -4960, {CIRCLE, 120}, NOBUILDZONEAREA},
++	{"ossus_cave_north_nobuild", 1376, 5920, {CIRCLE, 120}, NOBUILDZONEAREA},
++}

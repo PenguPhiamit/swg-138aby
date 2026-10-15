@@ -1,0 +1,142 @@
+{
+ "built": "2026-10-14",
+ "archive": "o5/local_planets.tre",
+ "sha256": "254d0e497497a78e86a27eac9b5d201e9527d8d5a3f3e3229ce12866f2fa1604",
+ "bytes": 3758629,
+ "entries": 38,
+ "hoth_build": {
+  "archive_verified": true,
+  "round_trips_exact": 12,
+  "sha256": "aee83cc675a1e6cf",
+  "identical_to_installed": true
+ },
+ "ossus_stage": {
+  "shared": {
+   "misc/planet_crc_string_table.iff": "added",
+   "datatables/travel/travel.iff": "added",
+   "string/en/planet_n.stf": "added",
+   "datatables/player/waypoint_planets.iff": "added",
+   "ui/ui_ticketpurchase.inc": null,
+   "ui/ui_planet_map.inc": null,
+   "datatables/resource/resource_tree.iff": "added"
+  },
+  "copied": 18,
+  "verify_ok": true,
+  "hoth_kept": true
+ },
+ "against_installed_aee83cc6": {
+  "entries_installed": 20,
+  "shared_identical": [
+   "datatables/clientpoi/clientpoi.iff",
+   "datatables/clientregion/hoth.iff",
+   "datatables/skill/skills.iff",
+   "misc/object_template_crc_string_table.iff",
+   "string/en/clientpoi_d.stf",
+   "string/en/clientpoi_n.stf",
+   "string/en/hoth_region_names.stf",
+   "string/en/mob/creature_names.stf",
+   "string/en/skill_teacher.stf",
+   "string/en/skl_d.stf",
+   "string/en/skl_n.stf",
+   "string/en/skl_t.stf",
+   "string/en/static_npc/hoth/scavenger_quartermaster.stf"
+  ],
+  "shared_changed_by_ossus": [
+   "datatables/player/waypoint_planets.iff",
+   "datatables/resource/resource_tree.iff",
+   "datatables/travel/travel.iff",
+   "misc/planet_crc_string_table.iff",
+   "string/en/planet_n.stf",
+   "ui/ui_planet_map.inc",
+   "ui/ui_ticketpurchase.inc"
+  ],
+  "new_entries": [
+   "appearance/mesh/ui_planet_sel_ossus.msh",
+   "appearance/ui_planet_sel_ossus.apt",
+   "datatables/clientregion/ossus.iff",
+   "datatables/environment/ossus.iff",
+   "datatables/loading/ossus.iff",
+   "shader/ui_planet_sel_ossus.sht",
+   "snapshot/ossus.ws",
+   "string/en/loading/ossus.stf",
+   "string/en/loading/ossus_n.stf",
+   "string/en/ossus_region_names.stf",
+   "terrain/environment/ossus.iff",
+   "terrain/ossus.trn",
+   "terrain/ossus_academy.tga",
+   "terrain/ossus_canyon.tga",
+   "terrain/ossus_mesa.tga",
+   "texture/loading/ossus/ui_load_ossus.dds",
+   "texture/ui_map_ossus.dds",
+   "texture/ui_planet_sel_ossus.dds"
+  ],
+  "entries_gone": []
+ },
+ "registration": {
+  "planet_crc": {
+   "hoth": true,
+   "ossus": true
+  },
+  "travel": {
+   "columns": [
+    "yavin4",
+    "hoth",
+    "ossus"
+   ],
+   "rows": [
+    "hoth",
+    "ossus"
+   ],
+   "corellia_to": {
+    "hoth": 3000,
+    "ossus": 3000
+   }
+  },
+  "planet_n": {
+   "hoth": "Hoth",
+   "ossus": "Ossus"
+  },
+  "waypoint_planets": [
+   "hoth",
+   "ossus"
+  ],
+  "resource_rows": {
+   "total": 822,
+   "hoth": 52,
+   "ossus": 45
+  }
+ },
+ "closure": {
+  "seeds": [
+   "terrain/ossus.trn",
+   "snapshot/ossus.ws",
+   "appearance/ui_planet_sel_ossus.apt",
+   "texture/ui_map_ossus.dds",
+   "texture/loading/ossus/ui_load_ossus.dds",
+   "datatables/environment/ossus.iff",
+   "terrain/environment/ossus.iff"
+  ],
+  "files": 859,
+  "from_our_archive": 13,
+  "missing": [
+   "shader/and.sht",
+   "shader/bed.sht",
+   "shader/dirt.sht",
+   "shader/dry.sht",
+   "shader/floor.sht",
+   "shader/grass.sht",
+   "shader/limestone.sht",
+   "shader/meadow.sht",
+   "shader/rock.sht",
+   "shader/shore.sht",
+   "shader/valleys.sht",
+   "shader/wall.sht"
+  ],
+  "real_shaders": {
+   "count": 33,
+   "all_in_client": true,
+   "missing": []
+  }
+ },
+ "closure_note": "the 12 \"missing\" shader/<word>.sht are words of the 11 multi-word shader family names (ossus grass, highland dry grass, forest floor, mossy valleys, cliff rock, summit limestone, canyon floor, canyon wall, lake bed and shore, road dirt, benchland meadow); the scanner takes every word after the first in an SFAM chunk as a shader name, so multi-word names leak (Hoth's recorded shader/rock.sht and shader/snow.sht are the same artefact). The 33 real shaders the families name are all in the client: True"
+}

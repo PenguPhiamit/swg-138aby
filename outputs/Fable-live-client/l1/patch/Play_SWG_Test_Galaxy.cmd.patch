@@ -1,0 +1,11 @@
+--- a/outputs/Play SWG Test Galaxy.cmd
++++ b/outputs/Play SWG Test Galaxy.cmd
+@@ -29,7 +29,7 @@
+ rem    itself since 14 Oct: the owner OKd a [SharedFile] header above them. Before that they sat after its
+ rem    [Station] header, where the client ignores them, which caused the 14 Oct Hoth crash.
+ >> swgemu_login.cfg echo [SharedFile]
+-if exist local_planets.tre >> swgemu_login.cfg echo searchTree_00_49=local_planets.tre
++if not exist local_planets.cfg if exist local_planets.tre >> swgemu_login.cfg echo searchTree_00_49=local_planets.tre
+ if exist local_planets.tre echo Test content: Hoth (local_planets.tre and the MTG archives) is loaded for this session.
+ 
+ echo Starting the client on the TEST galaxy (%WSLIP%:46453).
