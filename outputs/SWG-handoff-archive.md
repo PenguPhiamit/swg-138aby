@@ -1176,3 +1176,18 @@ For each planet:
 
 Claude uses the grid squares to place new planets on the ticket-purchase galaxy map in proportion to the existing ten, and the lore to lay out Hoth's content.
 
+## Moved 2026-10-15 08:06 (C24b closeout)
+
+### 2026-10-15 06:45 Claude: back up after Miniverse restart; GitHub export check fixed
+
+- **Test galaxy restarted 06:38 by resume** (AGENTS.md standing OK: no owner client, client config on 44453, no squad round). Ready in 74 s; dev 41df647d, so the instruments-kit fix is now live on the test galaxy. `squad.py setup`: 18/18 bots online.
+  - A first try at 06:35 (detached `setsid nohup` from Git Bash, as `overnight_cycle.sh` does it) never ran: no log, no process. The foreground start worked. If the cycle's own restart path ever reports "restart started" with no galaxy afterwards, this is why.
+- **Automation:** live map back as a transient systemd unit `swg-live-map` (127.0.0.1:8765, as swgemu); `gpt-relay-overnight` re-enabled 06:45 (dry run clean: 18/18, GPT open tasks c34r and c24b). The live-status timer never stopped.
+- **GitHub:** the repo is still private with the 05:15 push; the owner's one-time `--force` push hasn't happened, and couldn't: `github_export.py build` failed its own check on the script itself (its filter lists contain the reworded phrases). Fix 99d64ef: the script stays out of every pushed version; check now ok (124 commits).
+  - Re-checked: full history free of the 24 real secret values and of SOE game data (history-wide variant of `prepush_scan.py`); the 21 "password assignment" hits in the current tree are all false positives (PASS lines, test strings, code that generates passwords).
+  - Before going public: a local-model (gpt-oss:20b, on this PC) sweep for real people's names over every unique pushed line is running; the export only scrubs the brother-search handles. Owner questions in chat (brother mentions, Sagiroth, the Recycle Bin wording).
+- **Idle research for the local model (owner, 06:47: "when ollama goes idle for more than 10 mins, start researching game mechanics (taking over for gpt) that will help our testing"):** `tools/agents/local/idle_research.py`, run every 5 minutes by the WSL timer `swg-idle-research.timer` (as swgemu; unit files in `tools/agents/local/systemd/`).
+  - Starts the next open topic in `Agent/local-research/queue.json` when Ollama has had no chat/generate request for 10 minutes (its own previous topic doesn't count), the GPU is under 30 % and no owner SWG client is running. `Agent/local-research/STOP` pauses it.
+  - Each topic copies named Core3-dev sources (line-numbered, read-only) into `Agent/local-research/<id>/src/` (gitignored), and `local_agent.py` (one folder, no shell, no network) writes `<id>/report.md`. Status `review` means a report waits for Claude or ChatGPT to check against the source; nothing relies on it before that. One line per topic in `Agent/local-research/LOG.md`.
+  - Seeded with 7 topics from current test gaps: cure poison (the class check's NO_EFFECT), doctor enhance/wounds, entertainer buffs, survey/sample, creature harvest, travel/shuttles, missions. Anyone may add an open topic.
+- **Not done yet:** the leaked-copy sweep the restart cut short.

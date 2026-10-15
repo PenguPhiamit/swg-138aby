@@ -1,13 +1,190 @@
 {
-  "dev_head": "eccb53e1ee6f491e84ea8dd3ec2a6f0e3ad5d04d",
+  "captured_at": "2026-10-15T08:04:28-07:00",
+  "dev_head": "90044b8e39e10beaddaa91fb3cfa3f5f99c88f26",
   "sandbox_head": "920203d8fa68b9b573cdcfc8df227deaf2811c6a",
-  "scope": "Conservative superset: every unpromoted dev commit, including shared bot/client helpers; unrelated features need not be promoted with Hoth.",
+  "h_head": "623588282983b0b587ca5f4c533ebe712b798fd7",
+  "scope": "Conservative superset: every unpromoted dev commit, including shared bot/client helpers; unrelated features need not be promoted with Hoth. Refreshing history does not renew reviews or establish runtime acceptance.",
   "rows": [
+    {
+      "repo": "dev",
+      "commit": "90044b8e39e10beaddaa91fb3cfa3f5f99c88f26",
+      "purpose": "Make agent affliction DOT staging deterministic and report rejection",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "41df647da3cbb7b9f7027d988276230c515385d8",
+      "purpose": "Agent gear: item kits equip weapons only (the instruments kit logged 'could not add Instrument ... containmentType: 4' before falling back to the inventory); built in dev, live at the next test-galaxy start",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "d5554d44cec0ece1bdafa8cab446ae527a468cd1",
+      "purpose": "Character builder: no draft schematics as items (they crash the client); console cleanup for one handed out",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "77ba99bdfedf03807b933128b22477e8266595fd",
+      "purpose": "Sandbox Tools datapad: an admin-only test menu, first in the character builder terminal (owner: \"make a command datapad\")",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "9b93665db20cd0b2f3f1716f03a462c435b5bb43",
+      "purpose": "Agent gear: /agentgear afflict <kind> puts a condition on the caller or its target, so healers can be tested",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "60ed897119f341cc04a9541a0de16d440bf85d19",
+      "purpose": "Agent gear: item kits for the class check (C34, done by Claude while ChatGPT is out of usage)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "615ca43ef94f6b5838d1f14821b5cf92a5d2290a",
+      "purpose": "Weather: Hoth and Ossus get their own entries (the restart log said \"ERROR in Lua config. Loading default values\" for both)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "80b66e6503582f0e328b6f87c9bc5c95fd929f05",
+      "purpose": "Wire six reviewed Ossus fauna into habitat encounters",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "740b2426ec12b204bf25134ea4053c457cb4f13d",
+      "purpose": "Vehicles: the BARC speeder is a vehicle (templateType was missing, so its deed made an object the call code silently refused)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "6f3ce06f6740271bf3b7c6b3f12d03ab2be7638d",
+      "purpose": "Add test-only agent profession grant, clear and list kits",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "f1ce7007adfbf2aee718715a659508a77f1765a7",
+      "purpose": "Agent gear: /agentgear survey gives one survey tool per resource class (C23 prep)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "08e6a92452b52c1219faba701392f27624309c03",
+      "purpose": "Resources: two Legends materials, Adegan crystal on Ossus and lumni lichen on Hoth, in the minimum pool (Fable C29)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "9d6b4a78f267cc98b58acf547d36291a9acde5d9",
+      "purpose": "Resources: geothermal, tidal and hydron-3 energy are natives on every planet (owner)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "b7976890a4705af89cd74de5f36c80b4a0b3e2fa",
+      "purpose": "Resources: Hoth complete and Ossus's own minerals, one of each always in spawn (Fable R3 parts 1-2)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "a32566bc253683745837bc4ca90b5ffc3f63c97f",
+      "purpose": "Species: Chiss, the first new playable species on the human rig (Fable S3-S5)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "3a0b154f97ee7bee8de03092a23ab9ed84010cb2",
+      "purpose": "Resources: galaxy-wide coverage scales with the planet count (poolScaleZones, owner)",
+      "review": "C24b: scaling/rounding/caps/default/top-up reviewed; offline fixtures pass; resource gameplay untested",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "2ada3784131326df247ec4994de058ca5d505c3a",
+      "purpose": "Ossus: first look on the test galaxy, zone, Knossa travel point, regions, native resources (Fable O5)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "8f2072e735c8d1c277d793d524276f5a85bd04fb",
+      "purpose": "Hoth: Echo Base first look, the NGE building at MTG's terrain cut-outs (Fable E0)",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "e9a8a6c004681a28a2fa702181c03309fddbabfa",
+      "purpose": "Expose received secondary creature attributes for diagnostics",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "7817437a076ce690d240527bebd7953ecc713f47",
+      "purpose": "Observe own quest waypoints from PLAY8 baselines and deltas",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "7e6625c0066e09abd88ade2685dee2cd88571ea3",
+      "purpose": "Resolve Hoth and Ossus planet CRCs in agent mission telemetry",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "788e456f6a8a90f29f099e8c08b40775aada0306",
+      "purpose": "Expose own bank and cash balances from CREO baseline and deltas",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "58797fdf94253e45a4859808aedcbb15cdd3d504",
+      "purpose": "Expose authoritative resource units and spawn IDs to agent inventory",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "7267cf3ca1896c9ab47a0670a9b7c4adc6078a2a",
+      "purpose": "Explain unavailable departure and destination shuttles",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "dev",
+      "commit": "98ad1d1d7d9ead7c87a5f36d885b29c665a56455",
+      "purpose": "Resources: backfill odds count only maps outside the backfill zones (C24 R2-F1)",
+      "review": "C24b: R2-F1 resolved in source; multi-zone fixed-point fixtures pass; repeated-start runtime untested",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
     {
       "repo": "dev",
       "commit": "eccb53e1ee6f491e84ea8dd3ec2a6f0e3ad5d04d",
       "purpose": "Resources: opt-in backfill of in-shift galaxy-wide spawns onto a newly enabled zone (Fable R2)",
-      "review": "No independent per-commit approval recorded in this inventory",
+      "review": "C24: R2-F1 P2; corrected in 98ad1d1d, re-reviewed C24b",
       "gameplay": "C23 pending; source review is not gameplay acceptance"
     },
     {
@@ -21,14 +198,14 @@
       "repo": "dev",
       "commit": "c046e633e4d2f07eb6a4bf1d05342d6bedb726e9",
       "purpose": "Agent body: a fight checks scene, connection and target with each attack (C22-F1)",
-      "review": "No independent per-commit approval recorded in this inventory",
+      "review": "C24: C22-F1 source race addressed; cancellation stress test pending",
       "gameplay": "C23 pending; source review is not gameplay acceptance"
     },
     {
       "repo": "dev",
       "commit": "54a3306310efd2dae46b7ffa12c03ea7f9327c7b",
       "purpose": "Glacial rancor: use the hue-capable rancor body (C22-F2)",
-      "review": "No independent per-commit approval recorded in this inventory",
+      "review": "C24: C22-F2 source finding resolved; real-client appearance pending",
       "gameplay": "C23 pending; source review is not gameplay acceptance"
     },
     {
@@ -294,6 +471,13 @@
       "repo": "dev",
       "commit": "dcd2f047cd76d692ef9f86c44e52b9bcfaa51c32",
       "purpose": "core3client: --agent-control remote control mode for the AI agent player",
+      "review": "No independent per-commit approval recorded in this inventory",
+      "gameplay": "C23 pending; source review is not gameplay acceptance"
+    },
+    {
+      "repo": "h archive tools",
+      "commit": "1198dc9af7646f6e1409037fc2fc688b841db80d",
+      "purpose": "Archive builder: Hoth's four MTG gems and three site-limited energies (Fable R3); Fable's S5 and R3 staging",
       "review": "No independent per-commit approval recorded in this inventory",
       "gameplay": "C23 pending; source review is not gameplay acceptance"
     },

@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C34r taken into dev; GPT on C24b, read-only). Bot driver: the 30-minute cycle (`gpt-relay-overnight`, squads from `Agent/squad-plan.txt`); Aurek back in the squad plan at 07:40. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy UP since 07:33 (dev 90044b8e = C34r, dev scripts; archive 8ad04fec on server and client). Live map on http://localhost:8765 (unit `swg-live-map`). - 2026-10-15 07:40**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C34r taken into dev; C24b read-only review complete). Bot driver: the 30-minute cycle (`gpt-relay-overnight`, squads from `Agent/squad-plan.txt`); Aurek back in the squad plan at 07:40. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy UP since 07:33 (dev 90044b8e = C34r, dev scripts; archive 8ad04fec on server and client). Live map on http://localhost:8765 (unit `swg-live-map`). - 2026-10-15 07:40**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -59,7 +59,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 |---|---|---|---|
 | **C34r: independent item-kit and affliction review** | ChatGPT, High; Claude integrated | **in dev `90044b8e` and on the test galaxy (07:33); bot probe 41/41 DOTs land, no errors (07:36)** | Report `Documentation-support/review-C34r.md`; cure retest BLOCKED by staging (07:38: tester's inventory full, so no cure pack; allies out of view): C33 follow-up for GPT; gate denials and logout not re-run |
 | **C33: owner class check P0/P1** | ChatGPT, Medium; finished by Claude's Sonnet helper | scenario and 52 offline tests committed by Claude (07:4x); runs on Aurek since 04:3x: P0, brawler, marksman, scout, medic, rifleman, pistol, ranger, image designer | `tools/bots/scenarios/class-check.py`, `tools/bots/test_class_check.py`; results per profession in `Bot-reports/Aurek/class-check-*.json` |
-| **C24b: R2 idempotence + poolScaleZones re-review** | ChatGPT - GPT-6.1 Sol, **High** | claimed 2026-10-15 08:01; read-only re-review in progress | dev 98ad1d1d + 3a0b154f; offline fixtures and release gate/inventory only; no builds, restarts or bots |
+| **C24b: R2 idempotence + poolScaleZones re-review** | ChatGPT - GPT-6.1 Sol, **High** | complete 2026-10-15 08:06; R2-F1 resolved in source; release NO-GO | dev 98ad1d1d + 3a0b154f at 90044b8e; 16/16 offline checks, 74-row inventory; repeated-start/gameplay untested; no builds, restarts or bots |
 | **C30: six reviewed Ossus fauna + habitat spawns** | ChatGPT, Medium | in dev `80b66e65` (01:40) and on the test galaxy since then; names in archive `8ad04fec` | Six unchanged creatures, six dynamic lairs, three groups/five habitats; a bot visit to each habitat is still open |
 | **C32: agent profession kits + squad wrappers** | ChatGPT, Medium | **passed on the test galaxy** (Claude, 01:40: grant, list, refusal, clear, 4/4) | C++ 4a340565 after dev merge 220700d0; gated profession grant/clear/list + Bot wrappers; 7 offline tests pass |
 | **C23: Hoth gameplay acceptance** (ChatGPT owns it end to end) | ChatGPT | first pass BLOCKED; normal cleanup 11/11, all home; readiness/telemetry open | Instructions above the log. Scenario `tools/hoth/hoth_gameplay_check.py`, written offline now, run after Claude's next restart; ChatGPT keeps the fail list until it is empty |
@@ -260,6 +260,10 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-15 08:06 ChatGPT: C24b re-review complete
+
+- Reviewed dev `98ad1d1d` + `3a0b154f` at `90044b8e`: R2-F1 resolved in source, no new blocking source defect; 16/16 offline checks (20,000 multi-zone cases/five loads, rounding/caps/defaults/top-up), inventory refreshed to 74 rows. `Documentation-support/hoth-release-gate.md` stays NO-GO: C23/client/owner gates open. Backfill is conservative migration, not exact creation-time odds (comment clarification for Claude). Repeated-start persistence and gameplay untested here; no builds/restarts/bots/server edits. Next: Claude runtime evidence when scheduled; GPT queue per latest inbox. Review/tools and handoff recorded in this local commit.
+
 ### 2026-10-15 08:15 Claude: regression gate; C34r in dev and passing in game; a route for the month; board trimmed
 
 - **Regression gate (route, week 1):** `tools/bots/gate.py` checks the server (running, initialized, dev commit, archive), logs in missing bots, runs one 10-minute round of `Agent/squad-plan.txt` without fallbacks, and compares every check with its own history (`Bot-reports/gate/baseline.json`, seeded from recent reports). A check that passed before and fails now is a regression and fails the gate; flaky, fixed, new and still-failing checks are listed; a scenario with no checks or a BLOCKED note is a WARN line. Verdict: **`Bot-reports/GATE.md`; read it first after any restart.** First gate 08:02: **PASS**, 27/28 (the known leash miss). Aurek's doctor scenario runs no checks at all (BLOCKED: no hospital treatment anchor), so it now shows as WARN. Offline tests `tools/bots/test_gate.py`.
@@ -285,18 +289,4 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 - Owner, 07:00: "Yes, run the private --force push now." Before it: `prepush_scan.py` (only the 21 known false positives), the history-wide secret check (clean), `github_export.py` check ok (127 commits).
 - `github_export.py push … --force`: GitHub main `3610812` → `d9e5b06`, verified with `git ls-remote`; still PRIVATE, one branch, no tags. Gone from GitHub's history: the four early files (SWG-Source records and scripts, the stock client UI file), the owner's character names and a third-party developer's handle (3c3c2c8).
 - Still before going public: the local-model names sweep (running, about 2.5 h) and the owner's four decisions (brother mentions, non-credit Sagiroth mentions, the "clones were in work/research" wording, usernames in download-source URLs). GitHub may keep the old commits reachable by hash for a while, so publish as a fresh public repository, or have GitHub purge them, rather than flipping this one public.
-
-### 2026-10-15 06:45 Claude: back up after Miniverse restart; GitHub export check fixed
-
-- **Test galaxy restarted 06:38 by resume** (AGENTS.md standing OK: no owner client, client config on 44453, no squad round). Ready in 74 s; dev 41df647d, so the instruments-kit fix is now live on the test galaxy. `squad.py setup`: 18/18 bots online.
-  - A first try at 06:35 (detached `setsid nohup` from Git Bash, as `overnight_cycle.sh` does it) never ran: no log, no process. The foreground start worked. If the cycle's own restart path ever reports "restart started" with no galaxy afterwards, this is why.
-- **Automation:** live map back as a transient systemd unit `swg-live-map` (127.0.0.1:8765, as swgemu); `gpt-relay-overnight` re-enabled 06:45 (dry run clean: 18/18, GPT open tasks c34r and c24b). The live-status timer never stopped.
-- **GitHub:** the repo is still private with the 05:15 push; the owner's one-time `--force` push hasn't happened, and couldn't: `github_export.py build` failed its own check on the script itself (its filter lists contain the reworded phrases). Fix 99d64ef: the script stays out of every pushed version; check now ok (124 commits).
-  - Re-checked: full history free of the 24 real secret values and of SOE game data (history-wide variant of `prepush_scan.py`); the 21 "password assignment" hits in the current tree are all false positives (PASS lines, test strings, code that generates passwords).
-  - Before going public: a local-model (gpt-oss:20b, on this PC) sweep for real people's names over every unique pushed line is running; the export only scrubs the brother-search handles. Owner questions in chat (brother mentions, Sagiroth, the Recycle Bin wording).
-- **Idle research for the local model (owner, 06:47: "when ollama goes idle for more than 10 mins, start researching game mechanics (taking over for gpt) that will help our testing"):** `tools/agents/local/idle_research.py`, run every 5 minutes by the WSL timer `swg-idle-research.timer` (as swgemu; unit files in `tools/agents/local/systemd/`).
-  - Starts the next open topic in `Agent/local-research/queue.json` when Ollama has had no chat/generate request for 10 minutes (its own previous topic doesn't count), the GPU is under 30 % and no owner SWG client is running. `Agent/local-research/STOP` pauses it.
-  - Each topic copies named Core3-dev sources (line-numbered, read-only) into `Agent/local-research/<id>/src/` (gitignored), and `local_agent.py` (one folder, no shell, no network) writes `<id>/report.md`. Status `review` means a report waits for Claude or ChatGPT to check against the source; nothing relies on it before that. One line per topic in `Agent/local-research/LOG.md`.
-  - Seeded with 7 topics from current test gaps: cure poison (the class check's NO_EFFECT), doctor enhance/wounds, entertainer buffs, survey/sample, creature harvest, travel/shuttles, missions. Anyone may add an open topic.
-- **Not done yet:** the leaked-copy sweep the restart cut short.
 

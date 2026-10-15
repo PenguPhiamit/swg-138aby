@@ -1,15 +1,40 @@
 # C24 commit inventory
 
-Pinned dev `eccb53e1ee6f491e84ea8dd3ec2a6f0e3ad5d04d`, sandbox `920203d8fa68b9b573cdcfc8df227deaf2811c6a`.
+Captured 2026-10-15T08:04:28-07:00; pinned dev `90044b8e39e10beaddaa91fb3cfa3f5f99c88f26`, sandbox `920203d8fa68b9b573cdcfc8df227deaf2811c6a`, h history `623588282983b0b587ca5f4c533ebe712b798fd7`.
 
-Conservative superset: every unpromoted dev commit, including shared bot/client helpers; unrelated features need not be promoted with Hoth.
+Conservative superset: every unpromoted dev commit, including shared bot/client helpers; unrelated features need not be promoted with Hoth. Refreshing history does not renew reviews or establish runtime acceptance.
 
 | Repo | Commit | Purpose | Independent review | Gameplay |
 |---|---|---|---|---|
-| dev | `eccb53e1` | Resources: opt-in backfill of in-shift galaxy-wide spawns onto a newly enabled zone (Fable R2) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `90044b8e` | Make agent affliction DOT staging deterministic and report rejection | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `41df647d` | Agent gear: item kits equip weapons only (the instruments kit logged 'could not add Instrument ... containmentType: 4' before falling back to the inventory); built in dev, live at the next test-galaxy start | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `d5554d44` | Character builder: no draft schematics as items (they crash the client); console cleanup for one handed out | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `77ba99bd` | Sandbox Tools datapad: an admin-only test menu, first in the character builder terminal (owner: "make a command datapad") | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `9b93665d` | Agent gear: /agentgear afflict <kind> puts a condition on the caller or its target, so healers can be tested | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `60ed8971` | Agent gear: item kits for the class check (C34, done by Claude while ChatGPT is out of usage) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `615ca43e` | Weather: Hoth and Ossus get their own entries (the restart log said "ERROR in Lua config. Loading default values" for both) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `80b66e65` | Wire six reviewed Ossus fauna into habitat encounters | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `740b2426` | Vehicles: the BARC speeder is a vehicle (templateType was missing, so its deed made an object the call code silently refused) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `6f3ce06f` | Add test-only agent profession grant, clear and list kits | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `f1ce7007` | Agent gear: /agentgear survey gives one survey tool per resource class (C23 prep) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `08e6a924` | Resources: two Legends materials, Adegan crystal on Ossus and lumni lichen on Hoth, in the minimum pool (Fable C29) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `9d6b4a78` | Resources: geothermal, tidal and hydron-3 energy are natives on every planet (owner) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `b7976890` | Resources: Hoth complete and Ossus's own minerals, one of each always in spawn (Fable R3 parts 1-2) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `a32566bc` | Species: Chiss, the first new playable species on the human rig (Fable S3-S5) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `3a0b154f` | Resources: galaxy-wide coverage scales with the planet count (poolScaleZones, owner) | C24b: scaling/rounding/caps/default/top-up reviewed; offline fixtures pass; resource gameplay untested | C23 pending; source review is not gameplay acceptance |
+| dev | `2ada3784` | Ossus: first look on the test galaxy, zone, Knossa travel point, regions, native resources (Fable O5) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `8f2072e7` | Hoth: Echo Base first look, the NGE building at MTG's terrain cut-outs (Fable E0) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `e9a8a6c0` | Expose received secondary creature attributes for diagnostics | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `7817437a` | Observe own quest waypoints from PLAY8 baselines and deltas | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `7e6625c0` | Resolve Hoth and Ossus planet CRCs in agent mission telemetry | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `788e456f` | Expose own bank and cash balances from CREO baseline and deltas | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `58797fdf` | Expose authoritative resource units and spawn IDs to agent inventory | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `7267cf3c` | Explain unavailable departure and destination shuttles | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `98ad1d1d` | Resources: backfill odds count only maps outside the backfill zones (C24 R2-F1) | C24b: R2-F1 resolved in source; multi-zone fixed-point fixtures pass; repeated-start runtime untested | C23 pending; source review is not gameplay acceptance |
+| dev | `eccb53e1` | Resources: opt-in backfill of in-shift galaxy-wide spawns onto a newly enabled zone (Fable R2) | C24: R2-F1 P2; corrected in 98ad1d1d, re-reviewed C24b | C23 pending; source review is not gameplay acceptance |
 | dev | `1c4c24fb` | Hoth: MTG's ten Hoth-only minerals, gas and fuels in the minimum pool (owner's first survey found none) | C24 source review; gameplay pending | C23 pending; source review is not gameplay acceptance |
-| dev | `c046e633` | Agent body: a fight checks scene, connection and target with each attack (C22-F1) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
-| dev | `54a33063` | Glacial rancor: use the hue-capable rancor body (C22-F2) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| dev | `c046e633` | Agent body: a fight checks scene, connection and target with each attack (C22-F1) | C24: C22-F1 source race addressed; cancellation stress test pending | C23 pending; source review is not gameplay acceptance |
+| dev | `54a33063` | Glacial rancor: use the hue-capable rancor body (C22-F2) | C24: C22-F2 source finding resolved; real-client appearance pending | C23 pending; source review is not gameplay acceptance |
 | dev | `dd16bcff` | Hoth regions: named regions for the caves, camps and zones (Fable batch B3) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
 | dev | `e9094960` | Hoth quest: Quartermaster Vell stands still (AI_STATIC, as stock luthik_uwyr) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
 | dev | `5eb140ce` | Hoth camps: prop headings in radians (spawnSceneObject's heading; they were degrees) | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
@@ -48,6 +73,7 @@ Conservative superset: every unpromoted dev commit, including shared bot/client 
 | dev | `b942d9b5` | Agent body reports failed commands; mercenary broker stands still | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
 | dev | `2347100a` | Sandbox mercenaries: broker NPC at Mos Eisley, hire up to 3 followers that join your fights | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
 | dev | `dcd2f047` | core3client: --agent-control remote control mode for the AI agent player | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
+| h archive tools | `1198dc9a` | Archive builder: Hoth's four MTG gems and three site-limited energies (Fable R3); Fable's S5 and R3 staging | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
 | h archive tools | `1291ba02` | Format tools in one package, outputs/tools/swgfmt (Fable T1); Fable's R2 resource backfill staging | No independent per-commit approval recorded in this inventory | C23 pending; source review is not gameplay acceptance |
 | h archive tools | `c2573e31` | Archive builder on our own format tools (Fable B1-B3) | C24: format switch reviewed; isolated format checks pass | C23 pending; source review is not gameplay acceptance |
 | h archive tools | `2009167b` | hoth_client_build: Hoth map markers and place names (Fable's B3) in local_planets.tre | C24: map integration reviewed; owner confirmed 18 markers | C23 pending; source review is not gameplay acceptance |

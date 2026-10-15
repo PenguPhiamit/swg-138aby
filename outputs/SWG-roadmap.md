@@ -390,6 +390,7 @@ Files that grow without limit get slow to read, for us and for the game tools. R
 
 ## ChatGPT resource/crafting checkpoint, 14 Oct evening
 
+- [x] C24b resource re-review (15 Oct): `98ad1d1d` + `3a0b154f`; R2-F1 resolved in source, 16 offline checks pass, 74-row inventory refreshed; repeated-start/gameplay gates remain open and release stays NO-GO.
 - [x] C29 mechanics + Galaxy Harvester/SWGAide research reference saved; 15-file source manifest and eight client class leads, no installs or gameplay claims.
 - [x] Owner TTRPG resource handoff: all 265 existing extracted rows, 28 husbandry and 16 recipe input references listed in clean Markdown and JSON; source/coverage checks pass.
 - [ ] Remaining C29 Legends/era material audit and implementation integration, after C24b independent resource-fix review and C23c runtime acceptance; owner-book routes are proposals only.
