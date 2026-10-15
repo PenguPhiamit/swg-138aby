@@ -6,7 +6,7 @@ Private, single-owner pre-CU galaxy (SWGEmu Core3 on WSL Debian). Last updated 1
 
 Shared ideas, purpose, maturity and effort: [SWG-feature-register.md](SWG-feature-register.md). References: [professions/gameplay](Documentation-support/SWG-professions-and-gameplay-reference.md), [Universal Modder](Documentation-support/universal-modder-reference-for-Claude.md).
 
-## Route for the first month (15 Oct – 11 Nov; Claude, 15 Oct, for the owner's OK)
+## Route for the first month (15 Oct – 11 Nov; Claude, 15 Oct; **approved by the owner 15 Oct 16:00** with the day's additions)
 
 Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heavy lifting in the first month to shorten the whole project. (Max 5x. Even so, Claude's weekly limit is the scarcest resource, and the 30-minute cycle spends it too. Claude does what only Claude can do, and everything else goes to the lanes that cost no Claude usage.) Three days in, making things is not what holds us back. **Closing them is**: about ten items wait on a Claude game check, about twenty owner questions are open, and nothing new is live (the live galaxy is stopped). So the order is:
 1. the things that make every later change cheap: a regression gate, a release train, pipelines;
@@ -37,16 +37,26 @@ Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heav
   - the open leash and body findings (C4d, C4e, C4f).
 - **Regression gate:** one command after every restart (the squads, class check P0, Hoth/Ossus acceptance) gives one pass/fail report. The cycle runs it automatically. It is what makes every later change cheap. **Built 15 Oct:** `tools/bots/gate.py`, verdict in `Bot-reports/GATE.md`; first gate PASS (27/28).
 - **First live release:** the bot body and `/agentpath`, `/leash`, the world boss, and Hoth if the C24 gate turns GO. Cross-review plus the owner's OK, as a batch, then weekly.
+- Done or added on 15 Oct:
+  - the name filter (no profanity censor; only non-name words blocked; dev `0f045a47`, on the test galaxy);
+  - GPT's class-check campaign C38 (all professions);
+  - the 30-minute cycle is paused by the owner; GPT jobs are dispatched by hand or by one-time schedules.
 
 **Week 2, Ossus and Chiss playable; long-lead items started (to 28 Oct):**
 - Ossus: NPCs (C35), missions, resources, caves; the bots map it (B6) and it passes the gate.
 - Chiss: playable in the client.
 - Phase 1 baseline finished by bots: loot, trade, craft, housing (R4/R5).
-- **Asset converter, first static prop round trip (F86).** Needs owner question 7 (Blender, one CC0 pack, texconv). It is the longest-lead risk and unlocks all original art.
+- **Asset converter, first static prop round trip (F86).** Done 15 Oct: the Quaternius wall draws in the client, and Blender 3.6.23 with NSG SWG Tools 3.1.4 is installed and proven by an identical `.msh` round trip.
 - **Client patch distribution for friends.** Players need `local_planets.tre` for Hoth and Ossus. This is a release blocker for anyone but the owner.
+- Added 15 Oct (owner):
+  - **Hutt launch:** the player Hutt has its own skeleton; it launches with remapped animations (sit, dance, riding), designed by Fable (`Fable-species/s7-hutt/`);
+  - **the photo studio:** a test-galaxy-only shot set on one of SOE's test terrains, with a Universal Modder capture routine;
+  - **Ossus:** scorched and cratered ruins, flat areas for player settlements, as many lore-friendly POIs as possible.
 
 **Week 3, pipelines at scale (to 4 Nov):**
-- The third planet goes through the Hoth/Ossus playbook as a repeatable kit; the owner picks Kashyyyk or Mustafar. Measure it: it should take days, not a week.
+- The third planet goes through the Hoth/Ossus playbook as a repeatable kit. Measure it: it should take days, not a week. The candidates are Kashyyyk, Mustafar, or (owner, 15 Oct) a **KOTOR clean-room planet**, Nar Shaddaa or Taris, after a pilot of the Dantooine Jedi Enclave ruins.
+  - Clean room: describe from public sources and observation only, and build with SWG's own art; never use KOTOR's files.
+- Hutt gear (level 2), rigged to `hutt.skt` in Blender.
 - Species 2 (Nautolan or Togruta).
 - Resources and crafting (C29) integrated; the resource board terminal.
 
@@ -54,6 +64,8 @@ Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heav
 - Ambient adventurers v1 (B3).
 - Discord and the player bug inbox (C17, C27).
 - The first playtest with friends on live.
+- Added 15 Oct (owner): **Battlefront-style battles**, conquest with command posts and tickets on a Hoth or Ossus battlefield, plus NPC behaviour ideas for our bots and creatures (GPT research C43, from public docs of Battlefront II 2005).
+- Creature level brackets per planet: **shelved** until more planets exist. A draft ladder covering the existing and planned planets is on the board, 15 Oct.
 
 Done means live and passing the gate, not "built on the test galaxy". The board keeps the daily detail; this section changes only when the route does.
 

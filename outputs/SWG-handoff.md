@@ -99,6 +99,7 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
   - `export_ans.py` (an animation exporter) is in the add-on but not registered: the starting point for new Hutt animations (level 3).
   - texconv was already at `C:/Users/Pengw/Tools/texconv`.
   - Scripting quirk: the importers loop over `files`, so pass `files=[{'name': ...}]` with `filepath`.
+- **Q6, the month's route:** approved as written plus the day's additions (Hutt launch and photo studio in week 2, a KOTOR clean-room planet in week 3, Battlefront-style battles in week 4); `SWG-roadmap.md` updated.
 - Also: KOTOR 1/2 places to be rebuilt clean-room (descriptions from public sources and observation only, built with SWG's own art; never KOTOR's files); pilot is the Dantooine Jedi Enclave ruins; then Nar Shaddaa or Taris.
 
 Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) — purpose, design maturity and difficulty for all recorded features/candidates.
