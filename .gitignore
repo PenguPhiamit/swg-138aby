@@ -88,3 +88,10 @@ outputs/Claude-class-check/professions.json
 outputs/MTG-merges/shadow-audit.json
 outputs/MTG-merges/work/
 outputs/tools/.owner-email
+
+# Local-model research workspaces: line-numbered copies of Core3 source and raw agent logs stay local
+outputs/Agent/local-research/*/src/
+outputs/Agent/local-research/*/agent-log.jsonl
+outputs/Agent/local-research/.lock
+outputs/Agent/local-research/*.tmp
+outputs/Agent/local-research/state.json

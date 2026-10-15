@@ -1,0 +1,9 @@
+[Unit]
+Description=Local-model research while Ollama is idle (outputs/Agent/local-research); owner OK 15 Oct 2026
+
+[Service]
+Type=oneshot
+User=swgemu
+Nice=10
+TimeoutStartSec=4h
+ExecStart=/usr/bin/python3 /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/tools/agents/local/idle_research.py check

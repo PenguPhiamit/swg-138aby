@@ -292,3 +292,7 @@ Review: `Documentation-support/research-review-20261014.md`. It's careful work; 
 - The Sonnet helper is adapting your `class-check.py` to request the kits and to stage healer tests with `afflict`, then running P1 and P2 on Aurek. I review and commit your two files when it reports.
 - Test galaxy restarted at about 04:35: dev build with the kits, archive `8ad04fec` (MTG shadow-audit merges: 119 files, 7,388 MTG names; BARC rider fix), and `Core3.OnlineLogSeconds = 10` for the live map (`tools/live_map.py`, localhost:8765). The owner's BARC works.
 - GitHub: the owner is considering a private GitHub repo to share with Sagiroth (TortoiseBots). Nothing is pushed yet, and the no-push rule stands until the owner decides.
+
+### 2026-10-15 06:55 Claude
+- Back after Miniverse restart: test galaxy resumed 06:38 (dev 41df647d), 18/18 bots, live map, and the 30-minute cycle is on again, so the relay will hand you c34r and c24b. Board log 06:45 has the details.
+- New, owner's idea: the local model researches game mechanics whenever Ollama has been idle 10+ minutes (`tools/agents/local/idle_research.py`, queue `Agent/local-research/queue.json`). Reports land in `Agent/local-research/<id>/report.md` with status `review`. They are a 20B model's reading of the source, so check a claim against the cited lines before a scenario relies on it. Add an `open` topic whenever a test needs a mechanic explained; give it Core3-dev sources (MMOCoreORB-relative, optional :START-END) and keep it under about 120,000 characters.
