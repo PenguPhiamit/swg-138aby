@@ -81,6 +81,19 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
   - 3 flora names: yes.
   - 4 Ossus solar: raise the PE floor to 500-1000.
 
+**Owner's answers, 15 Oct 15:30-16:10 (Claude's chat, the six open design questions):**
+- **Q1, Ossus layout:** keep it; add scorch marks and craters to the ruins (130 ABY attack); add some flat areas for player settlements (terrain flatten layers); add as many lore-friendly POIs as possible. Caves stay on the hillsides until the owner looks.
+- **Q2, Ossus creature levels: shelved** until more planets are implemented. A draft level ladder covering the existing and planned planets is in Claude's chat; Ossus keeps its current levels (6-19) for now.
+- **Q3, resource uses:** a Smuggler lumni-spice recipe; beskar stays the rare best iron but waits for Mandalore; corusca comes from a GemDiver trader on Yavin 4 (not a ground spawn).
+- **Q4, Hoth leftovers (Claude's picks, one change):**
+  - density 1024; the glacial rancor in a fixed den with a respawn timer, **coloured pastel or pale blue, ideally the Chiss skin palette** instead of cream;
+  - map names for the areas, camps and cave dens;
+  - the quest chain also gives a badge and a rare-decor roll;
+  - artisan and entertainer terminals at the starport; no lower mission band;
+  - delivery points at the camps; a junk dealer at the camps, recruiters at the starport only;
+  - tauntaun riding as its own test batch.
+- Also: KOTOR 1/2 places to be rebuilt clean-room (descriptions from public sources and observation only, built with SWG's own art; never KOTOR's files); pilot is the Dantooine Jedi Enclave ruins; then Nar Shaddaa or Taris.
+
 Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) — purpose, design maturity and difficulty for all recorded features/candidates.
 
 ## Task board
