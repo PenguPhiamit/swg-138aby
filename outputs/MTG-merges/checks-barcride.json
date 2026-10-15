@@ -1,0 +1,13 @@
+{
+ "built": "2026-10-15",
+ "archive": "local_planets-barcride.tre",
+ "sha256": "f7cc806fc3c4581cf48e1b3fd608b2daade833c3aaf68c7a802e78719ce0541c",
+ "bytes": 3842100,
+ "entries": 61,
+ "base": "1315dbb4c9f39250bfb7030441483090c2b3bd9c6ef006795bc9ad244c7b74aa",
+ "added": "appearance/lat/all_m.lat",
+ "added_from": "mtg_patch_022.tre",
+ "added_sha256": "8afc6f77b4d769efa1ea6764d7d4e80ff236f4b917dd50ddafd45253dc29f494",
+ "other_entries_identical": true,
+ "ok": true
+}
