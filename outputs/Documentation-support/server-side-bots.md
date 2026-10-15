@@ -94,7 +94,7 @@ Build (c), the hybrid, using (b) for the population. Don't spend more on (a) tha
    - One stats line per minute goes to `core3.log` (online, active, tick ms).
 4. **Day 5:** measure 100, 250, 500 and 1,000 bots at Mos Eisley and Coronet with `load_fleet.py`'s sampler, in both budget modes, then write the results next to the fleet test.
 
-**Done when:** 1,000 server bots stay online for 30 minutes on the test galaxy with no crash, the server's RAM growth and lag are recorded for both modes, and the real-client squads still pass the class check. After that come follow and group behaviour (as the crew does now), travel, and the scenario command channel.
+**Done when:** 1,000 server bots stay online for 30 minutes on the test galaxy with no crash, the server's RAM growth and lag are recorded for both modes, and the real-client squads still pass the class check. After that come follow and group behaviour (as the crew does now), travel, and the scenario command channel. When the new public repo is made, this work moves into a fork of TortoiseBots: see [tortoisebots-fork-plan.md](tortoisebots-fork-plan.md).
 
 ## Sources
 

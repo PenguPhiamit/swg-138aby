@@ -238,6 +238,7 @@ Goals: (1) **automated regression tests** after every rebuild, (2) make a one-pe
 | B5 | Optional | Discord bridge (status + chat); persona chatter |
 | B6 | Map new areas (owner, 13 Oct) | Bots survey a planet or town on their own: towns, buildings and cells, terminals, trainers, travel points, NPCs, creature spawns by level, unreachable ground. Written to a shared map file the scenarios use. Hoth is the first real job. Plan: C10 |
 | B7 | Test the whole server (owner, 13 Oct) | A coverage matrix links every feature group and profession to a scenario. Runs as a regression suite after each rebuild, with one report. Plan: C10 |
+| B8 | Server-side population bots, then the TortoiseBots fork (owner, 15 Oct) | 1,000 client-less bots on the test galaxy, measured ([plan](Documentation-support/server-side-bots.md)); with the new public repo, the bot module moves into a fork of TortoiseBots by Sagiroth ([fork plan](Documentation-support/tortoisebots-fork-plan.md)) |
 
 - [x] C7 unattended scenario authoring (14 Oct, ChatGPT): doctor max-HAM evidence and fresh-kill harvesting added to the squad plan; Python compilation/offline mocks passed, in-game validation pending Claude?s overnight check.
 
