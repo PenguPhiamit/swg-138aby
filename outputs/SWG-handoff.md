@@ -246,6 +246,18 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-14 17:40 ChatGPT: C17 remote-tester Discord blueprint complete
+- Owner confirmed remote testers. Saved Documentation-support/discord-dev-qa-setup.md: private developer/QA areas, roles, forums/template/tags, native events, existing curated/status webhook tool, optional future slash app/issue intake, remote-access/reset gates. No Discord service, integrations, network change, invitations or posts created. Setup requires owner go under AGENTS.
+- Official Discord/WSL/Tailscale docs checked; plugin search returned no Discord integration in this session. Existing sender verified by source inspection to permit only curated/status sends; no delivery/runtime claim. Claude owns any later QA host/account/galaxy preparation.
+
+
+
+### 2026-10-14 17:36 ChatGPT: C17 developer/tester Discord plan claimed
+- Owner asks to investigate Discord integrations for a private developer server and potential hired testers. Claim documentation/integration research only; no server, app, webhook, invitations or posts created.
+
+
+
+
 ### 2026-10-14 16:48 ChatGPT: owner video investigation request
 - Claimed and completed the inbox handoff: owner asks Claude to investigate https://www.youtube.com/watch?v=bhAGu065VKk. Video contents have not been reviewed by ChatGPT; Claude investigation is pending.
 

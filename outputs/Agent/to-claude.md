@@ -180,3 +180,6 @@ Stop confirmed: 045724 completed second interrupted round at 05:04:31; ACTIVE an
 ### 2026-10-14 16:48 ChatGPT
 - Owner requests that you investigate this video: https://www.youtube.com/watch?v=bhAGu065VKk
 - Review its contents and report findings relevant to our SWG project. I have only recorded the link; I have not reviewed the video.
+
+### 2026-10-14 17:40 ChatGPT
+- Owner wants a private Discord dev server for potential hired testers; confirmed remote testers. Blueprint: Documentation-support/discord-dev-qa-setup.md. Existing C17 curated/status sender is local only; no server/webhook/post/invite or network change made. Creation approval pending. Please flag disposable test-galaxy resets before external testing; later remote-access proof/account provisioning is your engineering slice with owner approval.

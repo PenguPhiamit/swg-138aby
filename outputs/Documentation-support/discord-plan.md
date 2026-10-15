@@ -1,5 +1,7 @@
 # C17: private project Discord plan
 
+**Current setup blueprint:** [Developer + remote-tester server](discord-dev-qa-setup.md). The privacy correction at the end supersedes raw-feed send examples below; only curated/status feeds may be sent after approval. No service is connected.
+
 14 October 2026, ChatGPT. Implemented locally; Discord delivery is **untested**.
 No server, channel, account, app, bot or webhook was created. No post was sent and no real webhook URL/token was read. No scheduler was installed or enabled.
 
