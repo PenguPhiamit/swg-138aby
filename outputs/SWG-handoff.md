@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only; back with usage, owner 06:40). Bot driver: the 30-minute cycle (`gpt-relay-overnight` re-enabled 06:45 on the owner's word, squads from `Agent/squad-plan.txt`). Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy UP since 06:38 (resumed after Miniverse restart; dev 41df647d with dev scripts; MTG-merge archive 1315dbb4). Live map on http://localhost:8765 (unit `swg-live-map`). - 2026-10-15 06:45**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source idle; C34r fix 19cfb3a5 awaits Claude review/build). Bot driver: the 30-minute cycle (`gpt-relay-overnight` re-enabled 06:45 on the owner's word, squads from `Agent/squad-plan.txt`). Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy UP since 06:38 (resumed after Miniverse restart; dev 41df647d with dev scripts; MTG-merge archive 1315dbb4). Live map on http://localhost:8765 (unit `swg-live-map`). - 2026-10-15 06:45**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -57,7 +57,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
-| **C34r: independent item-kit and affliction review** | ChatGPT, High | claimed 2026-10-15 07:01 | Read-only review of dev 60ed8971 + 9b93665d; fixes only in gpt/work; no builds, restarts or bots |
+| **C34r: independent item-kit and affliction review** | ChatGPT, High | review complete 2026-10-15 07:09; one P2, source fixed | Report `Documentation-support/review-C34r.md`; gpt/work 19cfb3a5 after dev merge cb4e2b9e; offline regression passes; Claude review/build/game checks pending |
 | **C33: owner class check P0/P1** | ChatGPT, Medium; finishing: Claude's Sonnet helper | GPT's run ended at its usage limit (03:3x); the Sonnet helper is reviewing its uncommitted scenario and tests and running P0/P1 on Aurek (03:4x) | Scenario + offline verdict tests, then Aurek P0 and six starters only; no server code changes; driver claim taken when runtime starts |
 | **C24b: R2 idempotence + poolScaleZones re-review** | ChatGPT - GPT-6.1 Sol, **High** | interrupted 02:42-02:52 (network loss, then PC shutdown); requeued 2026-10-15 03:03 after C33/C34 | dev 98ad1d1d + 3a0b154f; offline fixtures and release gate/inventory only; no builds, restarts or bots |
 | **C30: six reviewed Ossus fauna + habitat spawns** | ChatGPT, Medium | source complete 6f25b704; Claude review/build/game test pending | Six unchanged creatures, six dynamic lairs, three groups/five habitats; 20 Lua syntax checks + stubbed loading pass; game-untested |
@@ -259,6 +259,10 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-15 07:09 ChatGPT: C34r review complete
+
+- Reviewed dev 60ed8971 + 9b93665d: one P2 (silent random DOT staging failure), fixed on gpt/work in 19cfb3a5 after dev merge cb4e2b9e; report `Documentation-support/review-C34r.md`. Extracted-code regression: missing DOTs 84/404 -> 0/404, swimming/fire errors 0/101 -> 101/101; 63 kit paths registered. No demonstrated gate bypass/crash defect; full build/in-game checks untested here. Claude: review/cherry-pick 19cfb3a5, build/test; dev, bots and runtime untouched.
 
 ### 2026-10-15 07:01 Claude: private GitHub copy force-pushed (owner's OK)
 

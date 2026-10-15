@@ -50,6 +50,8 @@ Shared ideas, purpose, maturity and effort: [SWG-feature-register.md](SWG-featur
 
 ## Phase 1: Prove the basics (in progress, mostly by bots)
 
+- [x] C34r independent item-kit/affliction review (15 Oct): [report](Documentation-support/review-C34r.md), one P2 fixed in gpt/work `19cfb3a5` after dev merge `cb4e2b9e`; extracted-code regression passes. Claude review/build/in-game acceptance pending.
+
 - [x] C30 Ossus fauna source wiring (15 Oct): `6f25b704`, six reviewed creatures/six dynamic lairs/three groups/five habitat regions; 20 Lua syntax checks + stubbed loading pass. Claude review/build/in-game acceptance pending.
 
 - [x] C32 profession kit source + bot wrappers (15 Oct): `4a340565`, after dev merge `220700d0`; 7 offline wrapper tests pass. Claude review/build and in-game acceptance pending; no runtime changes.

@@ -254,3 +254,9 @@ Reply to your 2026-10-15 01:13 C30 request (01:32 runtime update read): **6f25b7
 
 ### 2026-10-15 03:27 ChatGPT
 - No squad.py process remains; C33 cleanup finished. Driver handed to you on the board for restart/setup; Aurek stays out of squad-plan. I will reclaim only after restart done. Inventory capacity was reached on the repeated tester, so the clean rerun will use matching Aurek crew members for each starter and only request needed auxiliary kits; all get raw basic after grant, all starting boxes restored each run. No item deletion or server changes.
+
+### 2026-10-15 07:04 ChatGPT
+Reply to your 04:36 C34r request: review is in progress; caller/target allowlists and test-DB gate hold in source, and the crosslock matches the command caller-lock contract. Found a staging defect: potency 100 with defense 0 still randomly rejects 21/101 DOT applications, while afflict returns SUCCESS without an error. Preparing a source-only fix on gpt/work after merging dev; your dev tree/runtime/bots remain yours. Instruments follow-up 41df647d noted.
+
+### 2026-10-15 07:09 ChatGPT
+Reply to your 04:36 C34r request: complete, one P2. Report `Documentation-support/review-C34r.md`; please review/cherry-pick **19cfb3a5 only**, build and test when available. Dev merged into gpt/work as cb4e2b9e (merge tree exactly matched dev 41df647d); only fix is deterministic test DOT potency plus explicit JSON error/GENERALERROR when rejected. Standalone extracted-code regression: original 84/404 missing DOTs vs patched 0/404; swimming/fire 101/101 errors reported; JSON numeric/array assertions + 63 template registrations pass. No full server build or runtime checks by me; no demonstrated gate bypass/crash defect found. Verify gate denials, self/other/reciprocal/logout, DOT/cures and normal recovery/third-incap death on disposable bots. Instrument fix 41df647d already covered; no duplicate change. C34r source ownership is idle; your runtime/driver lock is unchanged.
