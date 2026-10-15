@@ -301,6 +301,107 @@ def kits_for(abilities, cmds):
 # for again. (Multi-item kits cannot be told apart by name, and a half-delivered kit must be asked again.)
 KIT_MARKER = {'carbine': 'carbine_cdef', 'polearm': 'lance_staff_wood_s1', 'twohand': 'axe_heavy_duty'}
 
+# Names are client STF keys, not the kit reply's template-path list.
+MEDICINE = {'curePoison': 'cure_poison', 'cureDisease': 'cure_disease',
+            'extinguishFire': 'fire_blanket', 'healEnhance': 'enhance',
+            'revivePlayer': 'revive', 'healState': 'medpack_dizzy',
+            'applyPoison': 'poison_health', 'applyDisease': 'disease_health'}
+ITEM_NAMES = {'stimpack': 'stimpack', 'wound_pack': 'wound',
+              'enhance_pack': 'enhance', 'revive_pack': 'revive'}
+
+
+def required_items(entry):
+    if entry['ability'] in MEDICINE:
+        return [MEDICINE[entry['ability']]]
+    return [ITEM_NAMES[t[5:]] for t in entry.get('setup_tags', [])
+            if t.startswith('item:') and t[5:] in ITEM_NAMES]
+
+
+def make_room(bot, issued, keep, reserve=40):
+    """Bank or drop only observed new kit OIDs; never infer ownership from names.
+
+    Keep one copy of each required item, and all gear present before the run.
+    A full inventory with no expendable issued items is left untouched.
+    """
+    evidence = []
+    items = bot.inventory().get('items', [])
+    protected = {matches[0]['oid'] for token in keep
+                 if (matches := matching(items, token))}
+    bank = next((i for i in items if str(i.get('name', '')).endswith(':bank')
+                 and i.get('parent') == bot.oid), None)
+    bank_ready = False
+    def occupancy():
+        current = bot.inventory().get('items', [])
+        stored = {bank['oid']} if bank else set()
+        for _ in range(32):
+            more = {i['oid'] for i in current if i.get('parent') in stored} - stored
+            if not more:
+                break
+            stored.update(more)
+        return sum(i.get('oid') not in stored for i in current)
+    for item in items:
+        if occupancy() <= 80 - reserve:
+            break
+        oid = item.get('oid')
+        if (oid not in issued or oid in protected or item.get('parent') == bot.oid
+                or bank and item.get('parent') == bank['oid']):
+            continue
+        if bank:
+            if not bank_ready:
+                terminals = bot.locate('terminal_bank', radius=800)
+                if terminals:
+                    trip = bot.go(terminals[0])
+                    evidence.append(dict(bank_trip=trip))
+                    bank_ready = bool(trip.get('arrived'))
+            if bank_ready:
+                events = bot.slash('transferItemMisc', f"{bank['oid']} -1 0 0 0", target=oid, wait=1)
+                moved = any(i.get('oid') == oid and i.get('parent') == bank['oid']
+                            for i in bot.inventory().get('items', []))
+                evidence.append(dict(oid=oid, name=item.get('name'), bank=bank['oid'], moved=moved, events=events))
+                if moved:
+                    continue
+        menu = bot.radial(oid)
+        drop = next((r for r in menu.get('items', []) if r.get('name') == 'item_drop'), None)
+        if drop is None:
+            evidence.append(dict(oid=oid, blocked='no drop radial'))
+            continue
+        events = bot.select(oid, drop['radial_id'])
+        gone = not any(i.get('oid') == oid for i in bot.inventory().get('items', []))
+        evidence.append(dict(oid=oid, name=item.get('name'), dropped=gone, events=events))
+    return evidence
+
+
+def provision(bot, kits, entries, report):
+    kits = list(kits)
+    if 'medicine2' in kits and 'support' in kits:
+        # The fire blanket is last in medicine2. Give the treatment kit the
+        # available slots before support's duplicate armour and enhancements.
+        kits.remove('medicine2')
+        kits.insert(kits.index('support'), 'medicine2')
+    issued = set()
+    keep = {token for e in entries for token in required_items(e)}
+    report['issued_items'] = []
+    report['inventory_room'] = []
+    answers = {}
+    for kit in kits:
+        # Reuse the medicines already carried; a kit is not an instruction to
+        # fill every free slot with duplicate packs on every run.
+        relevant = [e for e in entries if (kit == 'medicine2' and kit in (e.get('kits') or []))
+                    or (kit == 'support' and any(t in e.get('setup_tags', [])
+                                                for t in ('item:enhance_pack', 'item:stimpack')))]
+        needed = {token for e in relevant for token in required_items(e)}
+        if needed and all(carried(bot, token) for token in needed):
+            answers[kit] = {'skipped': 'required medicines already carried', 'items': sorted(needed)}
+            continue
+        report['inventory_room'] += make_room(bot, issued, keep)
+        before = {i['oid'] for i in bot.inventory().get('items', [])}
+        answers[kit] = ({'skipped': 'already carried ' + KIT_MARKER[kit]}
+                        if kit in KIT_MARKER and carried(bot, KIT_MARKER[kit]) else gear(bot, kit))
+        new = [i for i in bot.inventory().get('items', []) if i['oid'] not in before]
+        issued.update(i['oid'] for i in new)
+        report['issued_items'] += new
+    return answers
+
 
 def short_name(obj):
     return str(obj.get('name', ''))
@@ -589,12 +690,34 @@ def wait_clean(bot, limit=90):
     return False
 
 
+def patient_problem(kinds, patient):
+    """The treatment still has something to treat at the instant of the probe."""
+    if patient.get('posture') == 'dead':
+        return 'dead after afflict'
+    for kind in kinds:
+        state = AFFLICTION_STATE.get(kind)
+        if state and state not in (patient.get('states') or []):
+            return 'afflict %s did not set the state %s (or it expired)' % (kind, state)
+        if kind == 'incap' and patient.get('posture') != 'incapacitated':
+            return 'afflict incap left it %s' % patient.get('posture')
+        if kind == 'damage' and patient.get('ham', {}).get('health', 0) >= .8 * patient.get('max_ham', {}).get('health', 1):
+            return 'afflict damage left it above 80% health'
+    return None
+
+
 def stage_partner(bot, ally, kinds, setup):
     """Bring the partner next to the tester and put the afflictions on it. None when it is ready,
     else the reason it is not (the caller then tries another partner)."""
     other, status = ally.status(), bot.status()
-    if other.get('planet') != status.get('planet') or other.get('cell') != status.get('cell'):
-        return 'in another scene'
+    if not status.get('planet') or other.get('planet') != status.get('planet'):
+        return 'in another planet or scene unavailable'
+    # setup can leave the crew in different hospital rooms. Walk both outside
+    # before comparing local coordinates; never compare coordinates across cells.
+    if (other.get('cell') or 0) != (status.get('cell') or 0):
+        setup['gather_moves'] = [bot.walk(*TOWN), ally.walk(TOWN[0] + 1, TOWN[1])]
+        other, status = ally.status(), bot.status()
+    if (other.get('cell') or 0) != (status.get('cell') or 0):
+        return 'in another scene after gathering'
 
     def apart(a, b):
         return math.hypot(a.get('x', 1e9) - b.get('x', -1e9), a.get('y', 1e9) - b.get('y', -1e9))
@@ -604,6 +727,11 @@ def stage_partner(bot, ally, kinds, setup):
         other = ally.status()
     if apart(other, bot.status()) > 4:  # healState and healEnhance answer "too far" a little beyond that
         return 'out of healing range'
+    seen = [any(o.get('oid') == partner.oid for o in viewer.look(16, 'CREO', 400))
+            for viewer, partner in ((bot, ally), (ally, bot))]
+    setup['mutual_visibility'] = seen
+    if not all(seen):
+        return 'tester and ally do not see each other after gathering'
     if not kinds:
         return None
     # An earlier affliction (a poison or fire that is still burning) would muddy this one.
@@ -616,18 +744,7 @@ def stage_partner(bot, ally, kinds, setup):
         setup.setdefault('afflict', []).append(answer)
         if answer.get('error'):
             return 'afflict %s failed: %s' % (kind, answer['error'])
-    patient = ally.status().get('me', {})
-    if patient.get('posture') == 'dead':
-        return 'dead after afflict'
-    for kind in kinds:
-        state = AFFLICTION_STATE.get(kind)
-        if state and state not in (patient.get('states') or []):
-            return 'afflict %s did not set the state %s (armor or resistance?)' % (kind, state)
-        if kind == 'incap' and patient.get('posture') != 'incapacitated':
-            return 'afflict incap left it %s' % patient.get('posture')
-        if kind == 'damage' and patient.get('ham', {}).get('health', 0) >= .8 * patient.get('max_ham', {}).get('health', 1):
-            return 'afflict damage left it above 80% health'
-    return None
+    return patient_problem(kinds, ally.status().get('me', {}))
 
 
 def needed_afflictions(tags):
@@ -666,13 +783,21 @@ def settle(bot, entry, limit=30, ctx=None):
 
 def rest(bot, action=.3, health=.5, limit=90, mind=.25):
     """Bounded wait until action, health and mind are back above their floors (healers spend mind).
-    False if they never are."""
+    False if they never are. Below a floor, the bot first asks for /agentgear afflict restore (no wounds, shock,
+    DOTs or states, full HAM): regen stops at max minus wounds, and on 15 Oct the tester Jesh carried 499 mind wounds
+    of 500 from clonings and earlier staging, so every Doctor ability was BLOCKED. A server without the kind
+    answers with an error and the bot waits on regen as before."""
+    restored = False
     for _ in range(limit // 15 + 1):
         me = bot.status().get('me', {})
         ham, top = me.get('ham', {}), me.get('max_ham', {})
         if all(not top.get(pool) or ham.get(pool, 0) / top[pool] >= floor
                for pool, floor in (('action', action), ('health', health), ('mind', mind))):
             return True
+        if not restored:
+            restored = True
+            if not afflict(bot, 'restore').get('error'):
+                continue
         bot.idle(15)
     return False
 
@@ -719,6 +844,9 @@ def probe(g, bot, ally, entry, ctx=None):
         return blocked('action below 30% or health below 50% after bounded regeneration')
     ctx['rest_failed'] = 0
     tags = entry['setup_tags']
+    for token in required_items(entry):
+        if not carried(bot, token):
+            return blocked('missing kit item: ' + token)
     if 'outdoors' in tags and status.get('cell'):
         return blocked('requires outdoors')
     # Squad leader commands need the tester to lead a group, which the leader of the squad group does.
@@ -817,6 +945,11 @@ def probe(g, bot, ally, entry, ctx=None):
             result['setup']['recover'] = bot.recover()
             return blocked('tester was %s before the command could be sent' % before['posture'])
         patient_before = ally.status().get('me', {}) if target == ally.oid else {}
+        if patient_before:
+            why = patient_problem(needed_afflictions(tags), patient_before)
+            if why:
+                result['setup']['patient_before'] = patient_before
+                return blocked('patient no longer staged: ' + why)
         events = call(bot, effective, target, wait=12 if 'Forage' in entry['ability'] or entry['ability'] == 'forage' else None)
         after = bot.status().get('me', {})
         patient_after = ally.status().get('me', {}) if patient_before else {}
@@ -1010,9 +1143,7 @@ def run_one(g, row, tester, ally, profs, cmds, deadline, controls_data, first, r
             g.check(row['profession'] + ' full grant verified', True, len(expected))
             tags = {tag for ability in abilities for tag in cmds[ability]['setup_tags']}
             kits = kits_for(abilities, cmds)
-            report['gear'] = {kit: ({'skipped': 'already carried ' + KIT_MARKER[kit]}
-                                    if kit in KIT_MARKER and carried(tester, KIT_MARKER[kit]) else gear(tester, kit))
-                              for kit in kits}
+            report['gear'] = provision(tester, kits, [cmds[a] for a in abilities], report)
             for kit, answer in report['gear'].items():
                 if answer.get('failed') or answer.get('error'):
                     g.note('gear kit %s incomplete (full inventory?): %s; weapons already carried are used'

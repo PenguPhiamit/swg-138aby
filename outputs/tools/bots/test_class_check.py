@@ -513,6 +513,8 @@ class Verdicts(unittest.TestCase):
         bot, ally = Mock(oid=1, first='Tamsin'), Mock(oid=2, first='Jesh')
         bot.status.return_value = here
         ally.status.return_value = dict(here, me=hurt)
+        bot.look.return_value = [{'oid': 2}]
+        ally.look.return_value = [{'oid': 1}]
         ally.wait_for.return_value = {'text': '[agentgear] {"kit":"afflict","kind":"damage"}'}
         ally.walk.return_value = {'arrived': True}
         answers = iter([[system('@healing:no_line_of_sight')], [system('You heal Jesh for 300 health damage.')]])
@@ -529,6 +531,142 @@ class Verdicts(unittest.TestCase):
 
     def test_surprise_shot_gets_its_cover_first(self):
         self.assertEqual(cc.PRE_COMMAND['surpriseShot'], 'takeCover')
+
+    def test_gather_cross_cell_partners_before_afflicting(self):
+        bot, ally = Mock(oid=1), Mock(oid=2)
+        here = dict(planet='tatooine', cell=0, x=3528, y=-4804)
+        bot.status.return_value = here
+        ally.status.side_effect = [dict(here, cell=99), dict(here, x=3529)]
+        bot.look.return_value, ally.look.return_value = [{'oid': 2}], [{'oid': 1}]
+        setup = {}
+        self.assertIsNone(cc.stage_partner(bot, ally, [], setup))
+        bot.walk.assert_called_once_with(*cc.TOWN)
+        ally.walk.assert_called_once_with(3529, -4804)
+        self.assertEqual(setup['mutual_visibility'], [True, True])
+        ally.slash.assert_not_called()
+
+    def test_gather_failure_and_missing_visibility_prevent_affliction(self):
+        bot, ally = Mock(oid=1), Mock(oid=2)
+        here = dict(planet='tatooine', cell=0, x=1, y=1)
+        bot.status.return_value = here
+        ally.status.return_value = dict(here, cell=9)
+        self.assertIn('after gathering', cc.stage_partner(bot, ally, ['poison'], {}))
+        ally.slash.assert_not_called()
+        ally.status.return_value = here
+        bot.look.return_value, ally.look.return_value = [{'oid': 2}], []
+        self.assertIn('do not see', cc.stage_partner(bot, ally, ['poison'], {}))
+        ally.slash.assert_not_called()
+
+    def test_other_planet_is_not_walked(self):
+        bot, ally = Mock(), Mock()
+        bot.status.return_value = dict(planet='tatooine')
+        ally.status.return_value = dict(planet='naboo')
+        self.assertIn('another planet', cc.stage_partner(bot, ally, [], {}))
+        bot.walk.assert_not_called()
+        ally.walk.assert_not_called()
+
+    def test_expired_afflictions_or_recovered_incap_are_not_server_failures(self):
+        self.assertIsNone(cc.patient_problem(['poison'], {'states': ['poisoned']}))
+        self.assertIn('expired', cc.patient_problem(['poison'], {'states': []}))
+        self.assertIn('upright', cc.patient_problem(['incap'], {'posture': 'upright'}))
+        self.assertIsNone(cc.patient_problem(['incap'], {'posture': 'incapacitated'}))
+
+    def test_each_doctor_medicine_is_named_before_patient_is_afflicted(self):
+        for ability, token in cc.MEDICINE.items():
+            bot, ally = Mock(), Mock()
+            me = dict(posture='upright', ham={'health': 900, 'action': 900, 'mind': 900},
+                      max_ham={'health': 900, 'action': 900, 'mind': 900})
+            bot.status.return_value = dict(me=me)
+            bot.inventory.return_value = {'items': []}
+            e = dict(ability=ability, test_kind='heal_other', readiness='ready', slash=ability,
+                     setup_tags=['friendly_target'], messages=[])
+            result = cc.probe(Mock(), bot, ally, e)
+            self.assertEqual(result['verdict'], 'BLOCKED')
+            self.assertEqual(result['reason'], 'missing kit item: ' + token)
+            self.assertEqual(result['attempts'], [])
+            ally.status.assert_not_called()
+
+    def test_room_only_drops_observed_issued_surplus_and_confirms_removal(self):
+        bot = Mock(oid=42)
+        own = dict(oid=1, parent=99, name='own gear')
+        pack = dict(oid=2, parent=99, name='cure_poison')
+        surplus = dict(oid=3, parent=99, name='duplicate kit item')
+        worn = dict(oid=4, parent=42, name='kit armor')
+        items = [own, pack, surplus, worn]
+        bot.inventory.side_effect = lambda: {'items': list(items)}
+        bot.radial.return_value = {'items': [dict(name='item_drop', radial_id=12)]}
+        bot.select.side_effect = lambda oid, radial: items.remove(surplus) or []
+        evidence = cc.make_room(bot, {2, 3, 4}, {'cure_poison'}, reserve=80)
+        bot.select.assert_called_once_with(3, 12)
+        self.assertTrue(evidence[0]['dropped'])
+        self.assertIn(own, items)
+        self.assertIn(pack, items)
+        self.assertIn(worn, items)
+
+    def test_full_inventory_without_provenance_is_untouched(self):
+        bot = Mock(oid=42)
+        bot.inventory.return_value = {'items': [dict(oid=i, parent=99) for i in range(90)]}
+        self.assertEqual(cc.make_room(bot, set(), set()), [])
+        bot.radial.assert_not_called()
+        bot.select.assert_not_called()
+
+    def test_room_banks_only_new_surplus_after_walking_to_known_terminal(self):
+        bot = Mock(oid=42)
+        items = [dict(oid=1, parent=42, name='@item_n:bank'),
+                 dict(oid=2, parent=99, name='own gear'),
+                 dict(oid=3, parent=99, name='new surplus')]
+        bot.inventory.side_effect = lambda: {'items': list(items)}
+        terminal = dict(oid=7, x=1, y=2)
+        bot.locate.return_value = [terminal]
+        bot.go.return_value = {'arrived': True}
+        bot.slash.side_effect = lambda *a, **kw: items[2].update(parent=1) or []
+        evidence = cc.make_room(bot, {3}, set(), reserve=80)
+        bot.go.assert_called_once_with(terminal)
+        bot.slash.assert_called_once_with('transferItemMisc', '1 -1 0 0 0', target=3, wait=1)
+        bot.radial.assert_not_called()
+        self.assertTrue(evidence[-1]['moved'])
+        self.assertEqual(items[1]['parent'], 99)
+
+    def test_incomplete_medicine_kit_is_requested_but_complete_one_reused(self):
+        from unittest.mock import patch
+        bot = Mock(oid=42)
+        e = dict(ability='curePoison', setup_tags=['item:cure_pack'], kits=['medicine2'])
+        items = []
+        bot.inventory.side_effect = lambda: {'items': list(items)}
+        with patch.object(cc, 'gear', return_value={'kit': 'medicine2'}) as kit:
+            cc.provision(bot, ['medicine2'], [e], {})
+            kit.assert_called_once()
+            kit.reset_mock()
+            items.append(dict(oid=1, parent=99, name='@medicine_name:medpack_cure_poison'))
+            result = cc.provision(bot, ['medicine2'], [e], {})
+            kit.assert_not_called()
+            self.assertIn('skipped', result['medicine2'])
+
+    def test_provision_records_inventory_diff_and_makes_room_before_next_kit(self):
+        bot = Mock(oid=42)
+        old = dict(oid=1, parent=99, name='own')
+        new = dict(oid=2, parent=99, name='kit')
+        items = [old]
+        bot.inventory.side_effect = lambda: {'items': list(items)}
+        def kit(b, name):
+            items.append(new) if name == 'basic' else None
+            return {'kit': name}
+        from unittest.mock import patch
+        with patch.object(cc, 'gear', side_effect=kit), patch.object(cc, 'make_room', return_value=[]) as room:
+            report = {}
+            cc.provision(bot, ['basic', 'medicine2'], [], report)
+            self.assertEqual(report['issued_items'], [new])
+            self.assertEqual(room.call_args_list[1].args[1], {2})
+
+    def test_treatment_kit_precedes_bulk_support_without_changing_kit_selection(self):
+        from unittest.mock import patch
+        bot = Mock(oid=42)
+        bot.inventory.return_value = {'items': []}
+        kits = ['support', 'medicine2']
+        with patch.object(cc, 'gear', return_value={}) as gear:
+            cc.provision(bot, kits, [], {})
+            self.assertEqual([c.args[1] for c in gear.call_args_list], ['medicine2', 'support'])
+        self.assertEqual(kits, ['support', 'medicine2'])
 
     def test_weapon_route_needs_a_carried_stock_weapon_except_unarmed(self):
         bot = Mock()
@@ -554,6 +692,30 @@ class Verdicts(unittest.TestCase):
         bot.slash.assert_not_called()  # already in hand: no transfer
         bot.inventory.return_value['items'][0]['parent'] = 99
         self.assertFalse(cc.equip(bot, 'rifle_cdef')[0])
+
+
+class Rest(unittest.TestCase):
+    """rest() asks for /agentgear afflict restore once instead of waiting on regen that wounds have capped."""
+    worn = {'me': {'ham': {'health': 279, 'action': 499, 'mind': 1},
+                   'max_ham': {'health': 1000, 'action': 1000, 'mind': 500}}}
+    fresh = {'me': {'ham': {'health': 1000, 'action': 1000, 'mind': 500},
+                    'max_ham': {'health': 1000, 'action': 1000, 'mind': 500}}}
+
+    def test_a_worn_tester_is_restored_without_waiting(self):
+        bot = Mock()
+        bot.status.side_effect = [self.worn, self.fresh]
+        bot.wait_for.return_value = {'text': '[agentgear] {"kit":"afflict","kind":"restore","wounds":[0,0,0,0,0,0,0,0,0]}'}
+        self.assertTrue(cc.rest(bot))
+        bot.slash.assert_called_once_with('agentGear', 'afflict restore', target=0, wait=0)
+        bot.idle.assert_not_called()
+
+    def test_a_server_without_restore_falls_back_to_regen(self):
+        bot = Mock()
+        bot.status.side_effect = [self.worn, self.fresh]
+        bot.wait_for.return_value = {'text': '[agentgear] {"kit":"afflict","error":"usage: /agentgear afflict ..."}'}
+        self.assertTrue(cc.rest(bot))
+        self.assertEqual(bot.slash.call_count, 1)
+        bot.idle.assert_called_once_with(15)
 
 
 if __name__ == '__main__':
