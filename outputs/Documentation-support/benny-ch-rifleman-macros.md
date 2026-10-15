@@ -2,7 +2,43 @@
 
 The owner's play-data character (Master Creature Handler, Rifleman, Marksman: 246 points). Every command below was checked against the server's command table: all have a real handler on our server. Pets tank; Benny shoots from range; the Forn crew escorts (`tools/bots/escort.py`).
 
-## Gear (admin, test galaxy): `/object createitem <template> [quantity]`
+## Server-best gear as two macros (owner: "make me a macro for server bests of the gear i need")
+
+Picked from the item templates (15 Oct), because `/object createitem` gives an item its template's base stats; crafted
+items with good resources can beat these.
+- **Rifle: T21.** Ties the Berserker rifle for the best rifle damage (38 per second at base) and has **heavy armour
+  piercing**; the flame thrower and lightning rifle hit harder but need Commando certifications Benny lacks.
+- **Armour: Composite.** The best any species can wear: 75 kinetic, energy, blast, heat, cold and acid, 30 stun. It is
+  heavy (encumbrance 300/120/85); if action drains too fast, Padded or Bounty Hunter armour weigh almost nothing.
+- **Mandalorian helmet**, for the Death Watch bunker: its mines poison every 45 s unless the eyes slot holds this helmet
+  or a rebreather renamed "Advanced Rebreather" by the bunker's own workbench (`DeathWatchBunkerScreenPlay:hasRebreather`).
+  A created rebreather does not count. Swap it on in the mines.
+- **Speeder: AV-21 landspeeder**, tied fastest with the swoop and Flash bikes (speed 17).
+- **Pet medicine:** the strongest stimpack (d) and vitapack (c).
+
+**bestgear**
+```
+/object createitem object/weapon/ranged/rifle/rifle_t21.iff
+/object createitem object/tangible/wearables/armor/mandalorian/armor_mandalorian_helmet.iff
+/object createitem object/tangible/medicine/pet/pet_stimpack_d.iff 10
+/object createitem object/tangible/medicine/pet/pet_vitapack_c.iff 3
+/object createitem object/tangible/deed/vehicle_deed/landspeeder_av21_deed.iff
+```
+
+**bestarmor**
+```
+/object createitem object/tangible/wearables/armor/composite/armor_composite_helmet.iff
+/object createitem object/tangible/wearables/armor/composite/armor_composite_chest_plate.iff
+/object createitem object/tangible/wearables/armor/composite/armor_composite_leggings.iff
+/object createitem object/tangible/wearables/armor/composite/armor_composite_boots.iff
+/object createitem object/tangible/wearables/armor/composite/armor_composite_gloves.iff
+/object createitem object/tangible/wearables/armor/composite/armor_composite_bicep_l.iff
+/object createitem object/tangible/wearables/armor/composite/armor_composite_bicep_r.iff
+/object createitem object/tangible/wearables/armor/composite/armor_composite_bracer_l.iff
+/object createitem object/tangible/wearables/armor/composite/armor_composite_bracer_r.iff
+```
+
+## Gear one line at a time (admin, test galaxy): `/object createitem <template> [quantity]`
 
 ```
 /object createitem object/weapon/ranged/rifle/rifle_t21.iff

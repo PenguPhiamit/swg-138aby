@@ -15,6 +15,8 @@ The owner asked for builds that can do dungeons, then for a bot crew to test the
 
 All four Core3 dungeons are registered screenplays (`bin/scripts/screenplays/dungeon/`).
 
+Entrances (client world snapshots): Warren dantooine -547 -3846, Geonosian lab yavin4 -6449 -401, Death Watch bunker endor -4662 4326. **Death Watch mines:** players there are poisoned every 45 s unless the eyes slot holds the Mandalorian helmet (`armor_mandalorian_helmet`) or a rebreather renamed "Advanced Rebreather" by the bunker's workbench (`deathWatchBunker.lua`, `hasRebreather`, `poisonEvent`). The crew bots are players too: they need a helmet kit before the mines. Players have long run this bunker behind a Jedi tank (owner, 15 Oct); our crew tests whether Brask can hold it.
+
 ## The crew (bot group Forn, accounts forn1–5)
 
 | Bot | Role | Template | Points | Weapon |
