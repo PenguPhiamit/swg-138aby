@@ -1,0 +1,47 @@
+{
+ "generated": "2026-10-14 19:25:35",
+ "passed": 8,
+ "total": 8,
+ "checks": [
+  {
+   "check": "test_failure_backoff.py",
+   "ok": true,
+   "detail": "PASS test_failure_backoff (62 checks)"
+  },
+  {
+   "check": "test_incidents.py",
+   "ok": true,
+   "detail": "PASS test_incidents (43 checks)"
+  },
+  {
+   "check": "incidents.py on Bot-reports (read-only)",
+   "ok": true,
+   "detail": "149 reports, 0 unreadable, 9 open, 8 resolved, 30 seen once, 6 stopped ignored"
+  },
+  {
+   "check": "real reports: open incidents by class",
+   "ok": true,
+   "detail": "{\"blocked\": 5, \"defect-candidate\": 4}"
+  },
+  {
+   "check": "real reports: no bot-down class opened without epochs given (expected: none in the saved set)",
+   "ok": true,
+   "detail": "bot-down open: 0"
+  },
+  {
+   "check": "baseline sample written",
+   "ok": true,
+   "detail": "baseline sample: test galaxy 14 Oct, archive 248092a2 and earlier mixed: 143 runs, 24 rows -> C:\\Users\\Pengw\\Documents\\Codex\\2026-10-13\\h\\outputs\\Fable-tortoise\\out\\baseline-sample.json"
+  },
+  {
+   "check": "compare against its own baseline flags nothing",
+   "ok": true,
+   "detail": "0 of 24 rows flagged -> C:\\Users\\Pengw\\Documents\\Codex\\2026-10-13\\h\\outputs\\Fable-tortoise\\out\\compare.md"
+  },
+  {
+   "check": "archive read-only: no files of ours under it",
+   "ok": true,
+   "detail": "C:\\Users\\Pengw\\Documents\\Codex\\2026-10-13\\h\\work\\research\\Sagiroth_TortoiseBots"
+  }
+ ]
+}

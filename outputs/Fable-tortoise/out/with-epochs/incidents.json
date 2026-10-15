@@ -1,0 +1,1147 @@
+{
+ "incidents": [
+  {
+   "id": "Au-Bbe5339-2",
+   "group": "Aurek",
+   "scenario": "aurek-doctor-buffs.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell.",
+   "state": "open",
+   "severity": "persistent",
+   "runs_seen": 5,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 14:01:57",
+   "last_seen": "2026-10-14 14:35:47",
+   "age_s": 2030,
+   "epoch": 1,
+   "continues": "Au-Bbe5339-1",
+   "resolved_at": null,
+   "resolved_by": null,
+   "evidence": [
+    {
+     "report": "Aurek/20261014-140157-aurek-doctor-buffs.json",
+     "t": null,
+     "detail": "BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell."
+    },
+    {
+     "report": "Aurek/20261014-141430-aurek-doctor-buffs.json",
+     "t": null,
+     "detail": "BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell."
+    },
+    {
+     "report": "Aurek/20261014-141543-aurek-doctor-buffs.json",
+     "t": null,
+     "detail": "BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell."
+    },
+    {
+     "report": "Aurek/20261014-143158-aurek-doctor-buffs.json",
+     "t": null,
+     "detail": "BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell."
+    },
+    {
+     "report": "Aurek/20261014-143547-aurek-doctor-buffs.json",
+     "t": null,
+     "detail": "BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell."
+    }
+   ]
+  },
+  {
+   "id": "Be-B6cbea2-2",
+   "group": "Besh",
+   "scenario": "besh-fallback-crafting.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "full crafting session/ingredient/assembly body API unavailable; no crafting success claimed",
+   "state": "open",
+   "severity": "watch",
+   "runs_seen": 2,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 14:14:29",
+   "last_seen": "2026-10-14 18:09:07",
+   "age_s": 14078,
+   "epoch": 1,
+   "continues": "Be-B6cbea2-1",
+   "resolved_at": null,
+   "resolved_by": null,
+   "evidence": [
+    {
+     "report": "Besh/20261014-141429-besh-fallback-crafting.json",
+     "t": null,
+     "detail": "BLOCKED: full crafting session/ingredient/assembly body API unavailable; no crafting success claimed"
+    },
+    {
+     "report": "Besh/20261014-180907-besh-fallback-crafting.json",
+     "t": null,
+     "detail": "BLOCKED: full crafting session/ingredient/assembly body API unavailable; no crafting success claimed"
+    }
+   ]
+  },
+  {
+   "id": "Be-Fbe7974-3",
+   "group": "Besh",
+   "scenario": "besh-harvest.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "bone ordinary wild prey found",
+   "state": "open",
+   "severity": "persistent",
+   "runs_seen": 3,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 14:20:05",
+   "last_seen": "2026-10-14 18:06:21",
+   "age_s": 13576,
+   "epoch": 1,
+   "continues": null,
+   "resolved_at": null,
+   "resolved_by": null,
+   "evidence": [
+    {
+     "report": "Besh/20261014-142005-besh-harvest.json",
+     "t": 60.4,
+     "detail": "null"
+    },
+    {
+     "report": "Besh/20261014-180342-besh-harvest.json",
+     "t": 98.1,
+     "detail": "null"
+    },
+    {
+     "report": "Besh/20261014-180621-besh-harvest.json",
+     "t": 61.7,
+     "detail": "null"
+    }
+   ]
+  },
+  {
+   "id": "Be-F42d045-2",
+   "group": "Besh",
+   "scenario": "besh-harvest.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "hide ordinary wild prey found",
+   "state": "open",
+   "severity": "persistent",
+   "runs_seen": 3,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 14:20:05",
+   "last_seen": "2026-10-14 18:06:21",
+   "age_s": 13576,
+   "epoch": 1,
+   "continues": null,
+   "resolved_at": null,
+   "resolved_by": null,
+   "evidence": [
+    {
+     "report": "Besh/20261014-142005-besh-harvest.json",
+     "t": 45.1,
+     "detail": "null"
+    },
+    {
+     "report": "Besh/20261014-180342-besh-harvest.json",
+     "t": 82.9,
+     "detail": "null"
+    },
+    {
+     "report": "Besh/20261014-180621-besh-harvest.json",
+     "t": 46.5,
+     "detail": "null"
+    }
+   ]
+  },
+  {
+   "id": "Be-Ff69483-3",
+   "group": "Besh",
+   "scenario": "besh-harvest.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "meat ordinary wild prey found",
+   "state": "open",
+   "severity": "persistent",
+   "runs_seen": 4,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 14:19:04",
+   "last_seen": "2026-10-14 18:06:21",
+   "age_s": 13637,
+   "epoch": 1,
+   "continues": null,
+   "resolved_at": null,
+   "resolved_by": null,
+   "evidence": [
+    {
+     "report": "Besh/20261014-141904-besh-harvest.json",
+     "t": 170.5,
+     "detail": "null"
+    },
+    {
+     "report": "Besh/20261014-142005-besh-harvest.json",
+     "t": 29.8,
+     "detail": "null"
+    },
+    {
+     "report": "Besh/20261014-180342-besh-harvest.json",
+     "t": 67.6,
+     "detail": "null"
+    },
+    {
+     "report": "Besh/20261014-180621-besh-harvest.json",
+     "t": 29.8,
+     "detail": "null"
+    }
+   ]
+  },
+  {
+   "id": "Cr-B27600a-2",
+   "group": "Cresh",
+   "scenario": "cresh-missions.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "no same-planet destroy mission with a known waypoint within # m; no mission accepted.",
+   "state": "open",
+   "severity": "persistent",
+   "runs_seen": 5,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 14:02:27",
+   "last_seen": "2026-10-14 14:35:52",
+   "age_s": 2005,
+   "epoch": 1,
+   "continues": "Cr-B27600a-1",
+   "resolved_at": null,
+   "resolved_by": null,
+   "evidence": [
+    {
+     "report": "Cresh/20261014-140227-cresh-missions.json",
+     "t": null,
+     "detail": "BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted."
+    },
+    {
+     "report": "Cresh/20261014-141436-cresh-missions.json",
+     "t": null,
+     "detail": "BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted."
+    },
+    {
+     "report": "Cresh/20261014-141550-cresh-missions.json",
+     "t": null,
+     "detail": "BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted."
+    },
+    {
+     "report": "Cresh/20261014-143205-cresh-missions.json",
+     "t": null,
+     "detail": "BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted."
+    },
+    {
+     "report": "Cresh/20261014-143552-cresh-missions.json",
+     "t": null,
+     "detail": "BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted."
+    }
+   ]
+  },
+  {
+   "id": "Do-F37b6b9-2",
+   "group": "Dorn",
+   "scenario": "dorn-social.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "leash brings Nima to Dorn after he stops",
+   "state": "open",
+   "severity": "persistent",
+   "runs_seen": 5,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 14:03:04",
+   "last_seen": "2026-10-14 14:37:11",
+   "age_s": 2047,
+   "epoch": 1,
+   "continues": "Do-F37b6b9-1",
+   "resolved_at": null,
+   "resolved_by": null,
+   "evidence": [
+    {
+     "report": "Dorn/20261014-140304-dorn-social.json",
+     "t": 39.7,
+     "detail": "11.7 m from Dorn"
+    },
+    {
+     "report": "Dorn/20261014-141541-dorn-social.json",
+     "t": 43.5,
+     "detail": "12.0 m from Dorn"
+    },
+    {
+     "report": "Dorn/20261014-141708-dorn-social.json",
+     "t": 56.9,
+     "detail": "12.0 m from Dorn"
+    },
+    {
+     "report": "Dorn/20261014-143322-dorn-social.json",
+     "t": 56.9,
+     "detail": "12.0 m from Dorn"
+    },
+    {
+     "report": "Dorn/20261014-143711-dorn-social.json",
+     "t": 56.9,
+     "detail": "12.0 m from Dorn"
+    }
+   ]
+  },
+  {
+   "id": "Do-B807c42-2",
+   "group": "Dorn",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "no terminal_bazaar within local reachability sample",
+   "state": "open",
+   "severity": "persistent",
+   "runs_seen": 3,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 14:19:05",
+   "last_seen": "2026-10-14 18:09:11",
+   "age_s": 13806,
+   "epoch": 1,
+   "continues": null,
+   "resolved_at": null,
+   "resolved_by": null,
+   "evidence": [
+    {
+     "report": "Dorn/20261014-141905-esk-fallback-reach.json",
+     "t": null,
+     "detail": "BLOCKED: no terminal_bazaar within local reachability sample"
+    },
+    {
+     "report": "Dorn/20261014-142056-esk-fallback-reach.json",
+     "t": null,
+     "detail": "BLOCKED: no terminal_bazaar within local reachability sample"
+    },
+    {
+     "report": "Dorn/20261014-180911-esk-fallback-reach.json",
+     "t": null,
+     "detail": "BLOCKED: no terminal_bazaar within local reachability sample"
+    }
+   ]
+  },
+  {
+   "id": "Es-B7facfb-1",
+   "group": "Esk",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "no terminal_bank within local reachability sample",
+   "state": "open",
+   "severity": "watch",
+   "runs_seen": 2,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 14:14:35",
+   "last_seen": "2026-10-14 14:15:43",
+   "age_s": 68,
+   "epoch": 1,
+   "continues": null,
+   "resolved_at": null,
+   "resolved_by": null,
+   "evidence": [
+    {
+     "report": "Esk/20261014-141435-esk-fallback-reach.json",
+     "t": null,
+     "detail": "BLOCKED: no terminal_bank within local reachability sample"
+    },
+    {
+     "report": "Esk/20261014-141543-esk-fallback-reach.json",
+     "t": null,
+     "detail": "BLOCKED: no terminal_bank within local reachability sample"
+    }
+   ]
+  }
+ ],
+ "resolved": [
+  {
+   "id": "Au-Bbe5339-1",
+   "group": "Aurek",
+   "scenario": "aurek-doctor-buffs.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell.",
+   "state": "resolved",
+   "severity": "persistent",
+   "runs_seen": 6,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 10:11:30",
+   "last_seen": "2026-10-14 13:25:33",
+   "age_s": 11643,
+   "epoch": 0,
+   "continues": null,
+   "resolved_at": "2026-10-14 13:27:00",
+   "resolved_by": "server restart (epoch 1)",
+   "evidence": [
+    {
+     "report": "Aurek/20261014-102146-aurek-doctor-buffs.json",
+     "t": null,
+     "detail": "BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell."
+    },
+    {
+     "report": "Aurek/20261014-102452-aurek-doctor-buffs.json",
+     "t": null,
+     "detail": "BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell."
+    },
+    {
+     "report": "Aurek/20261014-131226-aurek-doctor-buffs.json",
+     "t": null,
+     "detail": "BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell."
+    },
+    {
+     "report": "Aurek/20261014-131530-aurek-doctor-buffs.json",
+     "t": null,
+     "detail": "BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell."
+    },
+    {
+     "report": "Aurek/20261014-132533-aurek-doctor-buffs.json",
+     "t": null,
+     "detail": "BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell."
+    }
+   ]
+  },
+  {
+   "id": "Be-B6cbea2-1",
+   "group": "Besh",
+   "scenario": "besh-fallback-crafting.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "full crafting session/ingredient/assembly body API unavailable; no crafting success claimed",
+   "state": "resolved",
+   "severity": "persistent",
+   "runs_seen": 3,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 10:20:11",
+   "last_seen": "2026-10-14 13:20:56",
+   "age_s": 10845,
+   "epoch": 0,
+   "continues": null,
+   "resolved_at": "2026-10-14 13:27:00",
+   "resolved_by": "server restart (epoch 1)",
+   "evidence": [
+    {
+     "report": "Besh/20261014-102011-besh-fallback-crafting.json",
+     "t": null,
+     "detail": "BLOCKED: full crafting session/ingredient/assembly body API unavailable; no crafting success claimed"
+    },
+    {
+     "report": "Besh/20261014-131711-besh-fallback-crafting.json",
+     "t": null,
+     "detail": "BLOCKED: full crafting session/ingredient/assembly body API unavailable; no crafting success claimed"
+    },
+    {
+     "report": "Besh/20261014-132056-besh-fallback-crafting.json",
+     "t": null,
+     "detail": "BLOCKED: full crafting session/ingredient/assembly body API unavailable; no crafting success claimed"
+    }
+   ]
+  },
+  {
+   "id": "Be-B67ecab-1",
+   "group": "Besh",
+   "scenario": "besh-harvest.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "prey level unknown or above #; need a mapped weak-animal spawn.",
+   "state": "resolved",
+   "severity": "persistent",
+   "runs_seen": 3,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 10:12:24",
+   "last_seen": "2026-10-14 10:25:46",
+   "age_s": 802,
+   "epoch": 0,
+   "continues": null,
+   "resolved_at": "2026-10-14 13:15:29",
+   "resolved_by": "Besh/20261014-131529-besh-harvest.json",
+   "evidence": [
+    {
+     "report": "Besh/20261014-101224-besh-harvest.json",
+     "t": null,
+     "detail": "BLOCKED: prey level unknown or above 5; need a mapped weak-animal spawn."
+    },
+    {
+     "report": "Besh/20261014-102450-besh-harvest.json",
+     "t": null,
+     "detail": "BLOCKED: prey level unknown or above 5; need a mapped weak-animal spawn."
+    },
+    {
+     "report": "Besh/20261014-102546-besh-harvest.json",
+     "t": null,
+     "detail": "BLOCKED: prey level unknown or above 5; need a mapped weak-animal spawn."
+    }
+   ]
+  },
+  {
+   "id": "Be-B67ecab-2",
+   "group": "Besh",
+   "scenario": "besh-harvest.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "prey level unknown or above #; need a mapped weak-animal spawn.",
+   "state": "resolved",
+   "severity": "persistent",
+   "runs_seen": 3,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 14:03:34",
+   "last_seen": "2026-10-14 14:19:04",
+   "age_s": 930,
+   "epoch": 1,
+   "continues": null,
+   "resolved_at": "2026-10-14 14:20:05",
+   "resolved_by": "Besh/20261014-142005-besh-harvest.json",
+   "evidence": [
+    {
+     "report": "Besh/20261014-140334-besh-harvest.json",
+     "t": null,
+     "detail": "BLOCKED: prey level unknown or above 5; need a mapped weak-animal spawn."
+    },
+    {
+     "report": "Besh/20261014-140436-besh-harvest.json",
+     "t": null,
+     "detail": "BLOCKED: prey level unknown or above 5; need a mapped weak-animal spawn."
+    },
+    {
+     "report": "Besh/20261014-141904-besh-harvest.json",
+     "t": null,
+     "detail": "BLOCKED: prey level unknown or above 5; need a mapped weak-animal spawn."
+    }
+   ]
+  },
+  {
+   "id": "Be-Fbe7974-1",
+   "group": "Besh",
+   "scenario": "besh-harvest.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "bone ordinary wild prey found",
+   "state": "resolved",
+   "severity": "persistent",
+   "runs_seen": 3,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 10:25:46",
+   "last_seen": "2026-10-14 13:16:24",
+   "age_s": 10238,
+   "epoch": 0,
+   "continues": null,
+   "resolved_at": "2026-10-14 13:27:00",
+   "resolved_by": "server restart (epoch 1)",
+   "evidence": [
+    {
+     "report": "Besh/20261014-102546-besh-harvest.json",
+     "t": 55.7,
+     "detail": "null"
+    },
+    {
+     "report": "Besh/20261014-131529-besh-harvest.json",
+     "t": 183.7,
+     "detail": "null"
+    },
+    {
+     "report": "Besh/20261014-131624-besh-harvest.json",
+     "t": 55.2,
+     "detail": "null"
+    }
+   ]
+  },
+  {
+   "id": "Be-F42d045-1",
+   "group": "Besh",
+   "scenario": "besh-harvest.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "hide ordinary wild prey found",
+   "state": "resolved",
+   "severity": "watch",
+   "runs_seen": 2,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 13:15:29",
+   "last_seen": "2026-10-14 13:16:24",
+   "age_s": 55,
+   "epoch": 0,
+   "continues": null,
+   "resolved_at": "2026-10-14 13:27:00",
+   "resolved_by": "server restart (epoch 1)",
+   "evidence": [
+    {
+     "report": "Besh/20261014-131529-besh-harvest.json",
+     "t": 169.9,
+     "detail": "null"
+    },
+    {
+     "report": "Besh/20261014-131624-besh-harvest.json",
+     "t": 41.3,
+     "detail": "null"
+    }
+   ]
+  },
+  {
+   "id": "Be-Ff69483-2",
+   "group": "Besh",
+   "scenario": "besh-harvest.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "meat ordinary wild prey found",
+   "state": "resolved",
+   "severity": "persistent",
+   "runs_seen": 3,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 10:25:46",
+   "last_seen": "2026-10-14 13:16:24",
+   "age_s": 10238,
+   "epoch": 0,
+   "continues": null,
+   "resolved_at": "2026-10-14 13:27:00",
+   "resolved_by": "server restart (epoch 1)",
+   "evidence": [
+    {
+     "report": "Besh/20261014-102546-besh-harvest.json",
+     "t": 27.6,
+     "detail": "null"
+    },
+    {
+     "report": "Besh/20261014-131529-besh-harvest.json",
+     "t": 156.0,
+     "detail": "null"
+    },
+    {
+     "report": "Besh/20261014-131624-besh-harvest.json",
+     "t": 27.4,
+     "detail": "null"
+    }
+   ]
+  },
+  {
+   "id": "Cr-B27600a-1",
+   "group": "Cresh",
+   "scenario": "cresh-missions.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "no same-planet destroy mission with a known waypoint within # m; no mission accepted.",
+   "state": "resolved",
+   "severity": "persistent",
+   "runs_seen": 6,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 10:11:35",
+   "last_seen": "2026-10-14 13:25:48",
+   "age_s": 11653,
+   "epoch": 0,
+   "continues": null,
+   "resolved_at": "2026-10-14 13:27:00",
+   "resolved_by": "server restart (epoch 1)",
+   "evidence": [
+    {
+     "report": "Cresh/20261014-102208-cresh-missions.json",
+     "t": null,
+     "detail": "BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted."
+    },
+    {
+     "report": "Cresh/20261014-102458-cresh-missions.json",
+     "t": null,
+     "detail": "BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted."
+    },
+    {
+     "report": "Cresh/20261014-131233-cresh-missions.json",
+     "t": null,
+     "detail": "BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted."
+    },
+    {
+     "report": "Cresh/20261014-131537-cresh-missions.json",
+     "t": null,
+     "detail": "BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted."
+    },
+    {
+     "report": "Cresh/20261014-132548-cresh-missions.json",
+     "t": null,
+     "detail": "BLOCKED: no same-planet destroy mission with a known waypoint within 600 m; no mission accepted."
+    }
+   ]
+  },
+  {
+   "id": "Cr-B807c42-1",
+   "group": "Cresh",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "no terminal_bazaar within local reachability sample",
+   "state": "resolved",
+   "severity": "watch",
+   "runs_seen": 2,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 13:02:00",
+   "last_seen": "2026-10-14 13:05:50",
+   "age_s": 230,
+   "epoch": 0,
+   "continues": null,
+   "resolved_at": "2026-10-14 13:25:31",
+   "resolved_by": "Cresh/20261014-132531-esk-fallback-reach.json",
+   "evidence": [
+    {
+     "report": "Cresh/20261014-130200-esk-fallback-reach.json",
+     "t": null,
+     "detail": "BLOCKED: no terminal_bazaar within local reachability sample"
+    },
+    {
+     "report": "Cresh/20261014-130550-esk-fallback-reach.json",
+     "t": null,
+     "detail": "BLOCKED: no terminal_bazaar within local reachability sample"
+    }
+   ]
+  },
+  {
+   "id": "Do-F37b6b9-1",
+   "group": "Dorn",
+   "scenario": "dorn-social.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "leash brings Nima to Dorn after he stops",
+   "state": "resolved",
+   "severity": "persistent",
+   "runs_seen": 6,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 10:12:43",
+   "last_seen": "2026-10-14 13:26:57",
+   "age_s": 11654,
+   "epoch": 0,
+   "continues": null,
+   "resolved_at": "2026-10-14 13:27:00",
+   "resolved_by": "server restart (epoch 1)",
+   "evidence": [
+    {
+     "report": "Dorn/20261014-102311-dorn-social.json",
+     "t": 56.9,
+     "detail": "12.0 m from Dorn"
+    },
+    {
+     "report": "Dorn/20261014-102616-dorn-social.json",
+     "t": 56.9,
+     "detail": "12.0 m from Dorn"
+    },
+    {
+     "report": "Dorn/20261014-131351-dorn-social.json",
+     "t": 56.9,
+     "detail": "12.0 m from Dorn"
+    },
+    {
+     "report": "Dorn/20261014-131655-dorn-social.json",
+     "t": 56.9,
+     "detail": "12.0 m from Dorn"
+    },
+    {
+     "report": "Dorn/20261014-132657-dorn-social.json",
+     "t": 55.7,
+     "detail": "11.7 m from Dorn"
+    }
+   ]
+  },
+  {
+   "id": "Do-B807c42-1",
+   "group": "Dorn",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "no terminal_bazaar within local reachability sample",
+   "state": "resolved",
+   "severity": "watch",
+   "runs_seen": 2,
+   "runs_between": 0,
+   "first_seen": "2026-10-14 13:02:00",
+   "last_seen": "2026-10-14 13:06:37",
+   "age_s": 277,
+   "epoch": 0,
+   "continues": null,
+   "resolved_at": "2026-10-14 13:25:05",
+   "resolved_by": "Dorn/20261014-132505-esk-fallback-reach.json",
+   "evidence": [
+    {
+     "report": "Dorn/20261014-130200-esk-fallback-reach.json",
+     "t": null,
+     "detail": "BLOCKED: no terminal_bazaar within local reachability sample"
+    },
+    {
+     "report": "Dorn/20261014-130637-esk-fallback-reach.json",
+     "t": null,
+     "detail": "BLOCKED: no terminal_bazaar within local reachability sample"
+    }
+   ]
+  }
+ ],
+ "seen_once": [
+  {
+   "group": "Cresh",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "no terminal_bazaar within local reachability sample",
+   "seen": "2026-10-14 18:09:23",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "no terminal_bazaar within local reachability sample",
+   "seen": "2026-10-14 14:15:43",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "esk_verify_equipment.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "Esk: all supplied composite pieces worn",
+   "seen": "2026-10-14 16:30:01",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "esk_verify_equipment.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "Tovan: all supplied composite pieces worn",
+   "seen": "2026-10-14 16:30:01",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_content_check.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "salvage detail: props at the camp",
+   "seen": "2026-10-14 13:42:59",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_gameplay_check.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "Esk return-home leg hoth -> corellia failed",
+   "seen": "2026-10-14 15:02:33",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_gameplay_check.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "Vell first-job option unavailable; quest state retained, no reset",
+   "seen": "2026-10-14 15:02:33",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_gameplay_check.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "cannot reach mission terminal",
+   "seen": "2026-10-14 15:02:33",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_gameplay_check.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "chemical: no ordinary survey tool in inventory",
+   "seen": "2026-10-14 15:02:33",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_gameplay_check.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "energy: no ordinary survey tool in inventory",
+   "seen": "2026-10-14 15:02:33",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_gameplay_check.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "flora: no ordinary survey tool in inventory",
+   "seen": "2026-10-14 15:02:33",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_gameplay_check.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "gas: no ordinary survey tool in inventory",
+   "seen": "2026-10-14 15:02:33",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_gameplay_check.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "mineral sample: inventory units unavailable; new item or success text is insufficient",
+   "seen": "2026-10-14 15:02:33",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_gameplay_check.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "mineral: no ordinary survey tool in inventory",
+   "seen": "2026-10-14 15:02:33",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_gameplay_check.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "tauntaun combat requires upright crew leader with >=#% known HAM",
+   "seen": "2026-10-14 15:02:33",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_gameplay_check.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "water: no ordinary survey tool in inventory",
+   "seen": "2026-10-14 15:02:33",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_gameplay_check.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "crew returns to Tatooine",
+   "seen": "2026-10-14 15:02:33",
+   "state": "open"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_gameplay_check.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "hoth -> corellia: at the terminal (# m to buy)",
+   "seen": "2026-10-14 15:02:33",
+   "state": "open"
+  },
+  {
+   "group": "Besh",
+   "scenario": "besh-harvest.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "bone ordinary wild prey found",
+   "seen": "2026-10-14 14:04:36",
+   "state": "resolved"
+  },
+  {
+   "group": "Besh",
+   "scenario": "besh-harvest.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "meat ordinary wild prey found",
+   "seen": "2026-10-14 10:12:24",
+   "state": "resolved"
+  },
+  {
+   "group": "Cresh",
+   "scenario": "cresh-fallback-travel.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "Mos Eisley -> Bestine: travel terminal",
+   "seen": "2026-10-14 14:10:46",
+   "state": "resolved"
+  },
+  {
+   "group": "Cresh",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "could not return outdoors after reachability probe",
+   "seen": "2026-10-14 13:25:31",
+   "state": "resolved"
+  },
+  {
+   "group": "Cresh",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "no terminal_bank within local reachability sample",
+   "seen": "2026-10-14 13:02:00",
+   "state": "resolved"
+  },
+  {
+   "group": "Dorn",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "could not return outdoors after reachability probe",
+   "seen": "2026-10-14 13:06:37",
+   "state": "resolved"
+  },
+  {
+   "group": "Dorn",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "could not return outdoors after reachability probe",
+   "seen": "2026-10-14 14:20:56",
+   "state": "resolved"
+  },
+  {
+   "group": "Dorn",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "no terminal_bank within local reachability sample",
+   "seen": "2026-10-14 13:02:00",
+   "state": "resolved"
+  },
+  {
+   "group": "Dorn",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "no terminal_bank within local reachability sample",
+   "seen": "2026-10-14 13:25:05",
+   "state": "resolved"
+  },
+  {
+   "group": "Dorn",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "no terminal_bank within local reachability sample",
+   "seen": "2026-10-14 14:19:05",
+   "state": "resolved"
+  },
+  {
+   "group": "Esk",
+   "scenario": "esk-fallback-reach.py",
+   "kind": "BLOCKED",
+   "class": "blocked",
+   "key": "no terminal_bazaar within local reachability sample",
+   "seen": "2026-10-14 13:09:38",
+   "state": "resolved"
+  },
+  {
+   "group": "Esk",
+   "scenario": "esk-routes.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "Esk reaches the cantina (indoors)",
+   "seen": "2026-10-14 14:06:54",
+   "state": "resolved"
+  },
+  {
+   "group": "Esk",
+   "scenario": "esk-routes.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "Esk reaches the cantina (indoors)",
+   "seen": "2026-10-14 18:05:19",
+   "state": "resolved"
+  },
+  {
+   "group": "Esk",
+   "scenario": "hoth_content_check.py",
+   "kind": "FAIL",
+   "class": "defect-candidate",
+   "key": "tatooine -> corellia: buy a ticket",
+   "seen": "2026-10-14 13:36:19",
+   "state": "resolved"
+  }
+ ],
+ "seen_once_total": 32,
+ "suppressed": [],
+ "suppressed_total": 0,
+ "ignored_stopped": [
+  "Esk/20261014-102814-esk-routes.json",
+  "Besh/20261014-132709-besh-harvest.json",
+  "Esk/20261014-142716-esk-routes.json",
+  "Besh/20261014-143851-besh-harvest.json",
+  "Esk/20261014-143909-esk-routes.json",
+  "Esk/20261014-181042-esk-routes.json"
+ ],
+ "epochs": [
+  "2026-10-14 13:27:00"
+ ],
+ "params": {
+  "min_runs": 2,
+  "persistent_runs": 3,
+  "blackout_s": 300,
+  "evidence": 5
+ },
+ "generated": "2026-10-14 19:24:42",
+ "reports": "C:\\Users\\Pengw\\Documents\\Codex\\2026-10-13\\h\\outputs\\Bot-reports",
+ "reports_read": 149,
+ "unreadable": [],
+ "per_group": {
+  "Aurek": {
+   "runs": 29,
+   "stopped": 0,
+   "scenarios": [
+    "aurek-doctor-buffs.py",
+    "esk-fallback-census.py",
+    "esk-fallback-grid.py"
+   ],
+   "first": "2026-10-14 10:11:30",
+   "last": "2026-10-14 18:09:21"
+  },
+  "Besh": {
+   "runs": 29,
+   "stopped": 2,
+   "scenarios": [
+    "besh-fallback-crafting.py",
+    "besh-gather.py",
+    "besh-harvest.py",
+    "esk-fallback-census.py"
+   ],
+   "first": "2026-10-14 10:12:24",
+   "last": "2026-10-14 18:09:07"
+  },
+  "Cresh": {
+   "runs": 29,
+   "stopped": 0,
+   "scenarios": [
+    "cresh-fallback-travel.py",
+    "cresh-missions.py",
+    "esk-fallback-census.py",
+    "esk-fallback-reach.py"
+   ],
+   "first": "2026-10-14 10:11:35",
+   "last": "2026-10-14 18:09:23"
+  },
+  "Dorn": {
+   "runs": 29,
+   "stopped": 0,
+   "scenarios": [
+    "dorn-social.py",
+    "esk-fallback-census.py",
+    "esk-fallback-grid.py",
+    "esk-fallback-reach.py"
+   ],
+   "first": "2026-10-14 10:12:43",
+   "last": "2026-10-14 18:09:11"
+  },
+  "Esk": {
+   "runs": 33,
+   "stopped": 4,
+   "scenarios": [
+    "esk-fallback-census.py",
+    "esk-fallback-grid.py",
+    "esk-fallback-reach.py",
+    "esk-recover-home.py",
+    "esk-routes.py",
+    "esk_test_preparation.py",
+    "esk_verify_equipment.py",
+    "hoth_content_check.py",
+    "hoth_gameplay_check.py"
+   ],
+   "first": "2026-10-14 10:19:03",
+   "last": "2026-10-14 18:10:42"
+  }
+ },
+ "scope": "saved reports only; not live bot or server state"
+}
