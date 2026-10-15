@@ -105,6 +105,14 @@ the species skill and certs are granted, clothing equips.
    with the NPC animation set (206 entries against the human's 908): no sit, mount, dance, kneel or crouch; 22 emotes
    against 190; pistol stances only. It can't wear human clothing or armour either. Evidence:
    `Documentation-support/fable-return-brief.md`, section "Hutt".
+   **Owner, 15 Oct 15:12:** "Make the Hutt a restricted playable species (no mounts, dancing or clothes; trader and
+   crime-lord roles)". Then asked "do they have to be restricted or can we make stuff for them?", and decided:
+   "Hutts launch with remapped animations (sit, dance, riding); Fable designs all three levels tonight (concept,
+   animation map, Hutt gear list, order), plus the photo studio set and Nal Hutta as a possible Hutt home."
+   - Level 1 (launch): point missing actions in `hutt.lat` at existing Hutt animations (data only).
+   - Level 2: Hutt gear rigged to `hutt.skt` (Blender; owner question 7).
+   - Level 3: new animations, once the `.ans` format is cracked (research).
+   Fable's staging folder: `s7-hutt/`.
 4. `asset_customization_manager.iff`: use the package's 2016 copy (386 KB) over today's stock (341 KB) or diff and
    splice only the new entries (Claude's builder, one more round)?
 5. Clothing: patch `playerRaces` in all 703 wearable templates per new species (generated, mechanical), or a C++

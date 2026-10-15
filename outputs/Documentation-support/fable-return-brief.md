@@ -55,6 +55,16 @@ Human clothing and armour are built for the human skeleton, so they won't fit a 
 
 **Existing NPC Hutts in dev:** Jabba (`mobile/tatooine/jabba_the_hutt.lua`, Jabba's palace), Borvo and Shalera (quest Hutts), the Hutt expeditionary force leader on Yavin 4, and the plain bodies `object/mobile/hutt_male.iff` and `hutt_female.iff` (the same `hutt_m/f.sat` the player template uses, so a spawned NPC shows exactly the player look).
 
+**Owner's decision (15 Oct 15:12-15:25), which replaces the options below:** "Hutts launch with remapped animations (sit, dance, riding); Fable designs all three levels tonight (concept, animation map, Hutt gear list, order), plus the photo studio set and Nal Hutta as a possible Hutt home."
+- **Level 1, the launch:** missing actions in `hutt.lat` point at existing Hutt animations. Data only, in `local_planets.tre`:
+  - sit and kneel use the idle;
+  - dance uses a looping emote;
+  - riding gets a rider-pose entry, the same gap that broke the BARC on 15 Oct, with a vehicle the Hutt can ride.
+- **Level 2:** Hutt gear rigged to `hutt.skt` (jewellery, sashes, robes, armour plates). Art work in Blender with the SWG add-on (owner question 7).
+- **Level 3:** new Hutt animations, once SWG's `.ans` format is decoded and proven by a round trip. A research task for GPT and Claude; it would also serve every other creature.
+- **Photo studio:** SOE's test terrains are in the client (`terrain/test_wearables.trn` 143 KB, `simple.trn` 2 KB, `creature_test.trn` 10 KB, `character_farm.trn`, in `data_other_00`). Core3 lists `character_farm` and `simple` commented out in `config.lua:113,122`. Test galaxy only: a no-spawn zone at fixed noon and clear weather, a spawn pad, and a Universal Modder capture routine.
+- **Nal Hutta:** `terrain/hutta.trn` (1 MB) is in `mtg_planets.tre`. The catalogue rates it P (`Content-catalogue/SWG-content-catalogue.md`, Nal Hutta row: Levarrishawk/Darklight public version, credit required).
+
 **For Fable's design:** a playable Hutt is a restricted species, or it isn't playable at all. Options to weigh:
 - **(a) Restricted species:** no mounts, no dancing or entertainer buffs, no clothing (or Hutt-only items), a short emote list. It suits trader, crime-lord, politician and merchant roles. The engineering list would be: refuse those actions for the Hutt race with a clear message, a race-restricted item set, and the species tables as for Chiss.
 - **(b) A Hutt on a repulsor sled:** the Legends look. The Hutt has no rider pose, so this needs new animation or art work; the hardest option.

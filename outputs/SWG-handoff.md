@@ -40,7 +40,7 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
 11. **Species (Fable's research, `Fable-species/README.md`):** **Owner, 14:56: Chiss first.**
     - **Order:** Chiss first (stock art on the human rig, no art risk), then Nautolan and Togruta (the package's art), then Hutt? Or Hutt, Nautolan, Togruta?
     - **Zeltron:** no Zeltron package exists, only EiF's art (held). Hold it, or try a stand-in (a red-skinned human palette)?
-    - **Hutt:** a Hutt standing on the human skeleton; acceptable?
+    - **Hutt:** a Hutt standing on the human skeleton; acceptable? **Owner, 15 Oct 15:25:** the Hutt has its own skeleton (Claude's correction); it launches as a playable with remapped animations (sit, dance, riding); gear and new animations follow; Fable designs it tonight (`Documentation-support/fable-return-brief.md`, Hutt).
     - **Names and stats:** human random names or our own name tables? Chiss's attribute profile: the package's flat 100s, or a real profile?
     - **Claude decides the technical questions unless you object:** splice only the new entries into today's customization table (not the package's 2016 copy), and let human-rig species wear human clothing through one C++ rule rather than editing 703 wearables.
 
