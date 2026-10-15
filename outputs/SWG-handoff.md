@@ -271,6 +271,15 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 - **Chunk jobs for idle research:** queue topics of `"kind": "map"` run `local_jobs.py` (input and report) and `local_map.py` (one request per chunk, resumable, yields to the owner's client and to low memory). Queued: `bot-gap-list` (192 de-duplicated BLOCKED/NO_EFFECT/FAIL notes sorted into gaps) and `proofread-player-text` (488 strings: our archive strings that differ from stock and MTG, plus messages added on dev since sandbox). Reports land in `Agent/local-research/<id>/report.md` as drafts. **The STOP file is removed**, so idle research runs again when the owner's client is closed; create `Agent/local-research/STOP` to pause it.
 - Tests: `test_local_map.py` 10/10 (Windows and WSL); `test_ollama_url.py` 61/61 (one expectation changed: local_agent now unloads the model when it finishes). A 2-chunk live run from WSL worked (lowest headroom 8.6 GB). The full jobs run when the PC is idle; untested end to end through the timer.
 
+### 2026-10-15 12:05 Claude: test-galaxy dev tools: tame anything, buffs anywhere, dev datapad = full character builder, /goto back
+
+- Test galaxy restarted 12:01 on dev `81384b90` (all below live; Core3.TameAnything and Core3.MedicalAnywhere are set by test_galaxy.py and only read on a `_test` database).
+- **Taming** (owner, in game): any creature, any age or level, always succeeds (`6063ecc8`); the admin force tame already existed (`/tame force`, `/tame adult`). **God mode** has no pet count or control limits when taming, calling, using deeds or receiving pets (`90e54a47`; not test-only, staff in god mode only).
+- **Doctor buffs anywhere** (`81a5f056`): a doctor counts as by a top surgical droid (rating 100) where there is no hospital, camp or droid; the rating also scales buff power. A real surgical droid needs a crafted medical module (later). Crew order "buff": Mirren enhances the player's six attributes (`908abd9`).
+- **Dev menus** (`a6be1f41`, `480dd8f`): the sandbox test datapad is a full character builder (radial "Character builder"); its spawner lists all 1052 creatures by folder and page (`tools/sandbox_menus.py`); the builder menu lost 113 MTG duplicates, is sorted and paged at 50, has a Pets menu (70 creature, 26 droid deeds) and agent-written section descriptions.
+- **`/goto back`** (`81384b90`): god-mode players return to their spot before the last jump (recorded in switchZone, kept across restarts).
+- **Mistake fixed:** a `>` inside a `wsl … grep` pattern became a redirect and overwrote ObjectManager.cpp (restored from git before any build went out). `wsl` re-parses its arguments: no `> < | $ ( ) #` in them (memory updated). The morning's ActivateQuestCommand.h damage fits the same pattern.
+
 ### 2026-10-15 11:25 Claude: the crew plays with the owner (Benny); planet jumps, waypoint mail, indoor following, floor plans
 
 - **Escort live with the owner** (as Benny: Master CH + Rifleman + Marksman, `Documentation-support/benny-ch-rifleman-macros.md`, server-best gear macros). Owner chats with Claude in game: `/tell Esk` (Claude watches Esk's log).
