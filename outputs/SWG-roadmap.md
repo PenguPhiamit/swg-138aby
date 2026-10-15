@@ -8,7 +8,7 @@ Shared ideas, purpose, maturity and effort: [SWG-feature-register.md](SWG-featur
 
 ## Route for the first month (15 Oct – 11 Nov; Claude, 15 Oct, for the owner's OK)
 
-Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heavy lifting in the first month to shorten the whole project. (The app's usage card showed **Pro** on 15 Oct: Claude's weekly limit is the scarcest resource, so Claude does what only Claude can do, and everything else goes to the lanes that cost no Claude usage.) Three days in, making things is not what holds us back. **Closing them is**: about ten items wait on a Claude game check, about twenty owner questions are open, and nothing new is live (the live galaxy is stopped). So the order is:
+Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heavy lifting in the first month to shorten the whole project. (Max 5x. Even so, Claude's weekly limit is the scarcest resource, and the 30-minute cycle spends it too. Claude does what only Claude can do, and everything else goes to the lanes that cost no Claude usage.) Three days in, making things is not what holds us back. **Closing them is**: about ten items wait on a Claude game check, about twenty owner questions are open, and nothing new is live (the live galaxy is stopped). So the order is:
 1. the things that make every later change cheap: a regression gate, a release train, pipelines;
 2. then volume: planets and species;
 3. then life: ambient NPCs and friends.
@@ -18,7 +18,7 @@ Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heav
 | Lane | Who | Does | Never waits on |
 |---|---|---|---|
 | 1. Integration | Claude main session (holds the server lock) | review → build → restart → bot acceptance → live release | research; offline staging |
-| 2. Staging | one Claude helper session, only while the weekly limit has room (on Max: always) | content data, tools and offline checks in h; first review of GPT's source before lane 1 takes it | the lock |
+| 2. Staging | one Claude helper session (Sonnet for mechanical work), while the weekly limit has room | content data, tools and offline checks in h; first review of GPT's source before lane 1 takes it | the lock |
 | 3. Review and source | ChatGPT (relay) | cross-reviews (required for live), source fixes in `Core3-gpt`, offline tests | Claude's runtime |
 | 4. Bulk reading | local model (Ollama) | idle research on game mechanics, examine texts, string tables, sweeps | anyone (free) |
 | 5. Nights | the 30-minute cycle and bots | squad regression rounds; class-check slices: one profession per round on Aurek, so the whole profession matrix fills in over a few nights for no usage | — |
