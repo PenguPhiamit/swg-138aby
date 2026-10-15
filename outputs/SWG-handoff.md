@@ -53,7 +53,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 |---|---|---|---|
 | **C23: Hoth gameplay acceptance** (ChatGPT owns it end to end) | ChatGPT | first pass BLOCKED; normal cleanup 11/11, all home; readiness/telemetry open | Instructions above the log. Scenario `tools/hoth/hoth_gameplay_check.py`, written offline now, run after Claude's next restart; ChatGPT keeps the fail list until it is empty |
 | **C24: Hoth release gate** (go/no-go) | ChatGPT | checkpoint complete â€” NO-GO, 14 Oct; C23/owner/client gates open | Instructions above the log. `Documentation-support/hoth-release-gate.md`; ChatGPT gives the "reviewed by" for any Hoth live deploy |
-| **C29: pre-CU resources/crafting + Galaxy Harvester** | ChatGPT, Medium | claimed - bounded research checkpoint | Owner requests Claude reference; mechanics/source, harvester tools, private integration; no installs/public submissions |
+| **C29: pre-CU resources/crafting + Galaxy Harvester** | ChatGPT, Medium | mechanics/books checkpoint complete; lore pass queued | 265 owner-book material rows + 28 husbandry/16 recipe references; source-backed mechanics and GH/SWGAide briefs; no integration yet |
 | **C28: browser planet/squad/fleet monitor** | ChatGPT outside tools/UI; Claude telemetry review/build | owner idea; design scoped, implementation pending | Documentation-support/bot-fleet-browser-monitor.md; F100. Map-first fleet view, optional selected-squad observer video; no service/capture started |
 | **C27: player report inbox and agent-to-Discord relay** | Claude server intake; ChatGPT outside tools/review | owner requested; design scoped, implementation pending | Documentation-support/player-bug-inbox-design.md; native Mantis route inspected, no local queue today; F98 |
 | **C26: acceptance telemetry** | ChatGPT | source committed; Claude review/build/runtime pending | Resource units/spawn IDs, own cash/bank credits, own quest waypoints, Hoth/Ossus planet names; `Documentation-support/C26-telemetry.md` |
@@ -248,6 +248,13 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-14 18:55 ChatGPT: C29 mechanics and owner-resource handoff complete
+- Owner requested pre-CU resource/crafting and external Galaxy Harvester research for Claude, then all extracted TTRPG materials in a clean adaptation list. Saved Documentation-support/resources-crafting-and-galaxy-harvester.md and owner-ttrpg-resource-handoff.md/.json.
+- Verified exact preservation of 185 planet + 80 pharmacopoeia rows (241 distinct names), 28 husbandry references, 16 recipe input groups and all three source hashes. Armory 247 items and pharmacopoeia 85 finished substances remain separately catalogued. Routes are proposals; no SW5E mechanics transferred or new resource classes enabled.
+- Read-only source pin 19f40ab89363d865f4b9d1ae9435a0099c94c595: 15-file hash/range manifest plus eight client resource-class leads. Documented lifecycle, concentration versus quality, weighted experimentation, stations, harvester limits and exact factory ingredients; GH GPLv3 and SWGAide-Unity desktop distinction. No downloads/installs/accounts/public submissions, bot driving or server changes.
+- Received Claude 18:50 update: C25/C26 reviewed/built; R2 98ad1d1d and coverage 3a0b154f await our independent C24b review. This source/mechanics checkpoint does not review those newer commits or claim gameplay acceptance. Next queue remains C24b, C23c after restart-ready, remaining C29 Legends/lore integration with Fable R3. Source-backed planning ready; effective runtime settings and companion-tool compatibility untested.
+
 
 ### 2026-10-14 18:50 Claude: ChatGPT's C25/C26 and the R2-F1 fix in dev; Echo Base and Ossus on the test galaxy; owner: wide resources, coverage kept at 80%
 - **ChatGPT's six worktree commits reviewed and in dev** (`-x`): `7267cf3c` C25 ticket messages; C26 telemetry `58797fdf` resource units, `788e456f` own credits, `7e6625c0` Hoth/Ossus names, `7817437a` waypoints, `e9a8a6c0` nine attributes. Checked against the server serializers (RCNO3 quantity and spawn ID after the TANO3 fields, delta 0x0B; CREO1 bank then cash; DeltaVectorMap ADD/DROP/SET with the value on drop; WaypointObject::insertToMessage). No findings. Built 18:09 (core3 + core3client).

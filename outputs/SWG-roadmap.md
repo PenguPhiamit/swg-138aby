@@ -321,3 +321,10 @@ Files that grow without limit get slow to read, for us and for the game tools. R
 - [x] Authorized farming download checkpoint: 19 retained archives / 414 MB; remaining downloads and five 7z full audits open. No imports.
 - [x] C21 species classification checkpoint: 36 biological candidates, two human faction options, two droid options; complete census remains open.
 - [ ] Claude review/build/runtime C25/C26 and crew armor/tool prerequisites, then C23 acceptance.
+
+
+## ChatGPT resource/crafting checkpoint, 14 Oct evening
+
+- [x] C29 mechanics + Galaxy Harvester/SWGAide research reference saved; 15-file source manifest and eight client class leads, no installs or gameplay claims.
+- [x] Owner TTRPG resource handoff: all 265 existing extracted rows, 28 husbandry and 16 recipe input references listed in clean Markdown and JSON; source/coverage checks pass.
+- [ ] Remaining C29 Legends/era material audit and implementation integration, after C24b independent resource-fix review and C23c runtime acceptance; owner-book routes are proposals only.

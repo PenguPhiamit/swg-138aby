@@ -1,0 +1,219 @@
+{
+  "source_pin": "19f40ab89363d865f4b9d1ae9435a0099c94c595",
+  "root": "/opt/swg/Core3-gpt",
+  "files": [
+    {
+      "file": "MMOCoreORB/src/server/zone/managers/crafting/labratories/SharedLabratory.cpp",
+      "ranges": [
+        [
+          21,
+          57
+        ],
+        [
+          73,
+          180
+        ]
+      ],
+      "sha256": "fa3e1e4358eec700ee5bdec23bae2926fd6fee0338c52e26d5400bb901eb046d",
+      "line_count": 209
+    },
+    {
+      "file": "MMOCoreORB/src/server/zone/managers/crafting/labratories/ResourceLabratory.cpp",
+      "ranges": [
+        [
+          39,
+          152
+        ],
+        [
+          260,
+          355
+        ]
+      ],
+      "sha256": "e16e6af791fc2428469dd1df4689d1d02e58898c231a2a8dbc3176d2f9c5d3a1",
+      "line_count": 384
+    },
+    {
+      "file": "MMOCoreORB/src/server/zone/managers/crafting/CraftingManagerImplementation.cpp",
+      "ranges": [
+        [
+          33,
+          100
+        ]
+      ],
+      "sha256": "c43c8268c77fa937b7177f427132654f9df877ef1914cf0f95304113a076fc5a",
+      "line_count": 186
+    },
+    {
+      "file": "MMOCoreORB/src/server/zone/managers/resource/resourcespawner/ResourceSpawner.cpp",
+      "ranges": [
+        [
+          497,
+          548
+        ],
+        [
+          585,
+          637
+        ],
+        [
+          1070,
+          1100
+        ]
+      ],
+      "sha256": "30dab3f86db270d291fe8a91db600a76ae619376907290a8f4813d4e6d5c0360",
+      "line_count": 1306
+    },
+    {
+      "file": "MMOCoreORB/src/server/zone/objects/installation/InstallationObjectImplementation.cpp",
+      "ranges": [
+        [
+          81,
+          100
+        ],
+        [
+          275,
+          425
+        ],
+        [
+          721,
+          745
+        ]
+      ],
+      "sha256": "071f43f12b906d56a656ced028fafd18d8628140bb5657f1a244c6ce6cd19dbf",
+      "line_count": 941
+    },
+    {
+      "file": "MMOCoreORB/src/server/zone/objects/installation/harvester/HarvesterObjectImplementation.cpp",
+      "ranges": [
+        [
+          29,
+          44
+        ]
+      ],
+      "sha256": "c31c1f3bddb0f2c5b07e739e847c156389672d36ed61cd8fabb441cd05042e90",
+      "line_count": 99
+    },
+    {
+      "file": "MMOCoreORB/src/server/zone/objects/installation/factory/FactoryObjectImplementation.cpp",
+      "ranges": [
+        [
+          269,
+          285
+        ],
+        [
+          667,
+          758
+        ],
+        [
+          850,
+          895
+        ]
+      ],
+      "sha256": "197b21fb2bda77549cd8d5f86000b22beae407169db750fa9502c09b7f308d43",
+      "line_count": 935
+    },
+    {
+      "file": "MMOCoreORB/src/server/zone/objects/manufactureschematic/factoryblueprint/BlueprintEntry.h",
+      "ranges": [
+        [
+          40,
+          55
+        ],
+        [
+          103,
+          125
+        ]
+      ],
+      "sha256": "9e68c3056dadd936b308f2b2b7837df5469a115afff2ddcfcdd5abd8bd3f8cc5",
+      "line_count": 177
+    },
+    {
+      "file": "MMOCoreORB/src/server/zone/objects/player/sessions/crafting/CraftingSessionImplementation.cpp",
+      "ranges": [
+        [
+          129,
+          150
+        ],
+        [
+          755,
+          770
+        ],
+        [
+          1075,
+          1133
+        ],
+        [
+          1395,
+          1445
+        ]
+      ],
+      "sha256": "b9afd9bb4e461c79293802001de1d5fb152af62a517bdedf9fef910ccb82cf36",
+      "line_count": 1601
+    },
+    {
+      "file": "MMOCoreORB/src/server/zone/objects/player/sessions/survey/SurveySessionImplementation.cpp",
+      "ranges": [
+        [
+          63,
+          233
+        ]
+      ],
+      "sha256": "1fefce7f57abad9c213a77e31b00d4309cbff525e162b3d19a618fab5f97ae6e",
+      "line_count": 397
+    },
+    {
+      "file": "MMOCoreORB/src/server/zone/objects/creature/commands/RequestSurveyCommand.h",
+      "ranges": [
+        [
+          26,
+          66
+        ]
+      ],
+      "sha256": "0ffa1c52f02912af79cf7febba41c89476aef888454becfe904d8ca761d22ac1",
+      "line_count": 71
+    },
+    {
+      "file": "MMOCoreORB/src/server/zone/objects/creature/commands/RequestCoreSampleCommand.h",
+      "ranges": [
+        [
+          25,
+          79
+        ]
+      ],
+      "sha256": "1cdcdfa8aac38b2f0aef3cddd3d74137d6a1656ccfbe5309283e1c96436772ef",
+      "line_count": 83
+    },
+    {
+      "file": "MMOCoreORB/src/server/zone/objects/tangible/tool/CraftingToolImplementation.cpp",
+      "ranges": [
+        [
+          22,
+          35
+        ]
+      ],
+      "sha256": "6a19b5e87c021503f6f77b37fdc4d4ab133df54f1dd667254dc0086f68acaae5",
+      "line_count": 197
+    },
+    {
+      "file": "MMOCoreORB/bin/scripts/managers/resource_manager.lua",
+      "ranges": [
+        [
+          43,
+          131
+        ]
+      ],
+      "sha256": "926fcd6e808aabd0a5d524b79b3935e308e07ea37c04d1fc56f9728c7005bb09",
+      "line_count": 132
+    },
+    {
+      "file": "MMOCoreORB/bin/scripts/object/draft_schematic/chemistry/med_stimpack_a.lua",
+      "ranges": [
+        [
+          44,
+          78
+        ]
+      ],
+      "sha256": "784c2c042f81e62d65768a5a9e64f56c60e7d7098ab37b4098d348d63a823fe0",
+      "line_count": 78
+    }
+  ]
+}

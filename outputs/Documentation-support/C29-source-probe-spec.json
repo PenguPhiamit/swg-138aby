@@ -1,0 +1,185 @@
+[
+  {
+    "file": "MMOCoreORB/src/server/zone/managers/crafting/labratories/SharedLabratory.cpp",
+    "ranges": [
+      [
+        21,
+        57
+      ],
+      [
+        73,
+        180
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/src/server/zone/managers/crafting/labratories/ResourceLabratory.cpp",
+    "ranges": [
+      [
+        39,
+        152
+      ],
+      [
+        260,
+        355
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/src/server/zone/managers/crafting/CraftingManagerImplementation.cpp",
+    "ranges": [
+      [
+        33,
+        100
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/src/server/zone/managers/resource/resourcespawner/ResourceSpawner.cpp",
+    "ranges": [
+      [
+        497,
+        548
+      ],
+      [
+        585,
+        637
+      ],
+      [
+        1070,
+        1100
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/src/server/zone/objects/installation/InstallationObjectImplementation.cpp",
+    "ranges": [
+      [
+        81,
+        100
+      ],
+      [
+        275,
+        425
+      ],
+      [
+        721,
+        745
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/src/server/zone/objects/installation/harvester/HarvesterObjectImplementation.cpp",
+    "ranges": [
+      [
+        29,
+        44
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/src/server/zone/objects/installation/factory/FactoryObjectImplementation.cpp",
+    "ranges": [
+      [
+        269,
+        285
+      ],
+      [
+        667,
+        758
+      ],
+      [
+        850,
+        895
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/src/server/zone/objects/manufactureschematic/factoryblueprint/BlueprintEntry.h",
+    "ranges": [
+      [
+        40,
+        55
+      ],
+      [
+        103,
+        125
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/src/server/zone/objects/player/sessions/crafting/CraftingSessionImplementation.cpp",
+    "ranges": [
+      [
+        129,
+        150
+      ],
+      [
+        755,
+        770
+      ],
+      [
+        1075,
+        1133
+      ],
+      [
+        1395,
+        1445
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/src/server/zone/objects/player/sessions/survey/SurveySessionImplementation.cpp",
+    "ranges": [
+      [
+        63,
+        233
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/src/server/zone/objects/creature/commands/RequestSurveyCommand.h",
+    "ranges": [
+      [
+        26,
+        66
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/src/server/zone/objects/creature/commands/RequestCoreSampleCommand.h",
+    "ranges": [
+      [
+        25,
+        79
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/src/server/zone/objects/tangible/tool/CraftingToolImplementation.cpp",
+    "ranges": [
+      [
+        22,
+        35
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/bin/scripts/managers/resource_manager.lua",
+    "ranges": [
+      [
+        43,
+        131
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/bin/scripts/object/draft_schematic/chemistry/med_stimpack_a.lua",
+    "ranges": [
+      [
+        44,
+        78
+      ]
+    ]
+  }
+]
