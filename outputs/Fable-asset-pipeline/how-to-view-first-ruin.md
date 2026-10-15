@@ -1,5 +1,7 @@
 # How to see the first outside-art prop (F86), 15 Oct 2026, Claude
 
+**Verified 15 Oct 14:46 in the owner's client (screenshot by another Claude session, not in the repo): the wall draws upright on the ground at Mos Eisley, both tones visible, no black or white block, no crash, 30 fps. The spawn command prints `oid: <number>` in chat. Collision not checked.**
+
 **The piece:** Quaternius' `Wall_Broken` (CC0, Ultimate Modular Ruins), 976 triangles, about 2 m wide, 2 m high, 0.28 m thick, two flat colours (dark and light grey-green, the pack's own materials; the pack has no texture atlas).
 
 **How it is wired (test archive only):** it replaces the appearance of the stock *fresh campfire log*, so the stock campfire object shows our wall. No server change, no restart, no new object template. Every campfire in a test session looks like the wall; live sessions are untouched (they do not load `local_planets.tre`).
@@ -12,10 +14,10 @@
 
    `/createSpawningElement spawn object/static/structure/general/campfire_fresh.iff`
 
-   The object appears at your feet (if it lands inside you, step sideways).
+   The object appears at your feet (if it lands inside you, step sideways); chat prints its `oid`. If nothing seems to happen, look behind and beside you before trying again.
 4. Look at it. What a pass looks like: a broken grey-green stone wall, lit by the sun, no flicker, standing on the ground, its two tones visible (the lighter one on the edges and capstones).
 5. Walk up to it and into it. Expect to walk **through** it: the exporter writes no collision (known, in the plan).
-6. To remove it: `/createSpawningElement delete <object id>` (target it and use its id), or `/createSpawningElement deleteall`.
+6. To remove it: `/createSpawningElement delete <the oid chat printed>`, or `/createSpawningElement deleteall`.
 
 ## What to tell me
 
