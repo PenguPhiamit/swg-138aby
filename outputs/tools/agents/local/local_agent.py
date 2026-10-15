@@ -61,7 +61,11 @@ def run_tool(root, name, args, protected):
             if path in protected:
                 return f'refused: {args["path"]} is an input file and must not change'
             path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(str(args.get('content', '')), encoding='utf-8')
+            content = str(args.get('content', ''))
+            if content and not content.endswith('\n'):
+                content += '\n'
+            with path.open('w', encoding='utf-8', newline='') as out:   # exactly as given: no CRLF on Windows
+                out.write(content)
             return f'wrote {args["path"]} ({len(str(args.get("content", "")))} characters)'
         return f'unknown tool {name}'
     except Exception as error:  # the model sees the error and can correct itself
