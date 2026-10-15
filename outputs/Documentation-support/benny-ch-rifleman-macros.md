@@ -2,6 +2,18 @@
 
 The owner's play-data character (Master Creature Handler, Rifleman, Marksman: 246 points). Every command below was checked against the server's command table: all have a real handler on our server. Pets tank; Benny shoots from range; the Forn crew escorts (`tools/bots/escort.py`).
 
+## Skills first (admin): target yourself
+
+`/grantSkill` needs a target (`GrantSkillCommand.h`: no target gives "invalid target" and grants nothing). Click your
+own character, then:
+```
+/grantSkill outdoors_creaturehandler_master
+/grantSkill combat_rifleman_master
+/grantSkill combat_marksman_master
+```
+Each answers "Granted skill". "Failed to grant skill" means the 250-point cap: the starting profession's boxes use the
+points, so `/surrenderSkill <profession>_novice` and repeat. Gear before skills gives errors (no rifle certification).
+
 ## Server-best gear as two macros (owner: "make me a macro for server bests of the gear i need")
 
 Picked from the item templates (15 Oct), because `/object createitem` gives an item its template's base stats; crafted
