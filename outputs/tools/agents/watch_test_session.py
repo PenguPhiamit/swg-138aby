@@ -46,7 +46,8 @@ def handle(path, line):
             return
         name = event.get('first_name') or '?'
         names.add(name)
-        say(f"player {name}: {event.get('log', '')}")
+        if not NOISE.search(str(event.get('log', ''))):
+            say(f"player {name}: {event.get('log', '')}")
     elif path.endswith('admin.log'):
         match = re.search(r'\[AdminCommands\] \w+ - (.*)', line)
         say('staff: ' + (match.group(1) if match else line))

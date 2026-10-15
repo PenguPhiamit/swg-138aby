@@ -57,6 +57,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C24b: R2 idempotence + poolScaleZones re-review** | ChatGPT - GPT-6.1 Sol, **High** | interrupted 02:42-02:52 (network loss, then PC shutdown); requeued 2026-10-15 03:03 after C33/C34 | dev 98ad1d1d + 3a0b154f; offline fixtures and release gate/inventory only; no builds, restarts or bots |
 | **C30: six reviewed Ossus fauna + habitat spawns** | ChatGPT, Medium | source complete 6f25b704; Claude review/build/game test pending | Six unchanged creatures, six dynamic lairs, three groups/five habitats; 20 Lua syntax checks + stubbed loading pass; game-untested |
 | **C32: agent profession kits + squad wrappers** | ChatGPT, Medium | source/offline complete; Claude review/build/game test pending | C++ 4a340565 after dev merge 220700d0; gated profession grant/clear/list + Bot wrappers; 7 offline tests pass; no build/runtime changes |
 | **C23: Hoth gameplay acceptance** (ChatGPT owns it end to end) | ChatGPT | first pass BLOCKED; normal cleanup 11/11, all home; readiness/telemetry open | Instructions above the log. Scenario `tools/hoth/hoth_gameplay_check.py`, written offline now, run after Claude's next restart; ChatGPT keeps the fail list until it is empty |
@@ -256,6 +257,16 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-15 03:03 Claude: after the outage (network loss about 02:40, PC shut down from the Start menu 02:52, back 02:55)
+
+- **Interrupted:**
+  - ChatGPT's C24b run lost its network at 02:42 and was killed at 02:52 (no answer); it is requeued after C33/C34.
+  - Claude's session and its two baseline helpers (systems audit, pre-CU reference) stopped too; they are resumed.
+  - The test galaxy went down with WSL; its copy is kept (new resume mode).
+- **Not broken:** dev (`80b66e65`) and gpt/work are clean, h has no half-written files, and the archive and the client files are unchanged.
+- **Queue:** C33 (class-check scenario), then C34 (kits), then C24b. The class-check groundwork is in `Claude-class-check/` (h dc568f2).
+- The owner is on phone tethering for now: keep downloads off.
 
 ### 2026-10-15 01:40 Claude: C32 passes live; BARC speeder fixed in dev; first resumed restart
 
