@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C34r taken into dev; C24b read-only review complete). Bot driver: the 30-minute cycle (`gpt-relay-overnight`, squads from `Agent/squad-plan.txt`); Aurek back in the squad plan at 07:40. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy UP since 07:33 (dev 90044b8e = C34r, dev scripts; archive 8ad04fec on server and client). Live map on http://localhost:8765 (unit `swg-live-map`). - 2026-10-15 07:40**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C34r taken into dev; C24b read-only review complete). Bot driver: the 30-minute cycle (`gpt-relay-overnight`, squads from `Agent/squad-plan.txt`); Aurek driver: ChatGPT C33b (08:31), removed from squad plan; waiting for active rounds before commands. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy UP since 07:33 (dev 90044b8e = C34r, dev scripts; archive 8ad04fec on server and client). Live map on http://localhost:8765 (unit `swg-live-map`). - 2026-10-15 07:40**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -58,6 +58,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
 | **C34r: independent item-kit and affliction review** | ChatGPT, High; Claude integrated | **in dev `90044b8e` and on the test galaxy (07:33); bot probe 41/41 DOTs land, no errors (07:36)** | Report `Documentation-support/review-C34r.md`; cure retest BLOCKED by staging (07:38: tester's inventory full, so no cure pack; allies out of view): C33 follow-up for GPT; gate denials and logout not re-run |
+| **C33b: cure staging + science_doctor rerun** | ChatGPT, Medium; finished by Claude | GPT ran out of usage at 08:59 (until 12:01) halfway; Claude took over 09:05: GPT's staging (inventory room from issued items only, gathering into one cell, mutual visibility, missing kit item = BLOCKED) passes 63 offline tests; doctor run on Aurek started 09:05 | `tools/bots/scenarios/class-check.py`; results in `Bot-reports/Aurek/class-check-science_doctor.json` |
 | **C33: owner class check P0/P1** | ChatGPT, Medium; finished by Claude's Sonnet helper | scenario and 52 offline tests committed by Claude (07:4x); runs on Aurek since 04:3x: P0, brawler, marksman, scout, medic, rifleman, pistol, ranger, image designer | `tools/bots/scenarios/class-check.py`, `tools/bots/test_class_check.py`; results per profession in `Bot-reports/Aurek/class-check-*.json` |
 | **C24b: R2 idempotence + poolScaleZones re-review** | ChatGPT - GPT-6.1 Sol, **High** | complete 2026-10-15 08:06; R2-F1 resolved in source; release NO-GO | dev 98ad1d1d + 3a0b154f at 90044b8e; 16/16 offline checks, 74-row inventory; repeated-start/gameplay untested; no builds, restarts or bots |
 | **C30: six reviewed Ossus fauna + habitat spawns** | ChatGPT, Medium | in dev `80b66e65` (01:40) and on the test galaxy since then; names in archive `8ad04fec` | Six unchanged creatures, six dynamic lairs, three groups/five habitats; a bot visit to each habitat is still open |
@@ -260,6 +261,14 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-15 09:10 Claude: 13 mechanics reports; scenario fixes from them; relay lanes; C33b taken over (GPT out of usage)
+
+- **Research (owner: "another haiku to research crafting, resources, OQ, and faction", "add the HAM and lacking professions"):** 13 reports in `Agent/local-research/<topic>/report.md`, status review; **start with `Agent/local-research/FINDINGS.md`**. Written by Haiku agents and finished by Opus after a session restart. The first run hung for 40 min because its searches went through the WSL network share (`\wsl.localhost`); the reruns grep inside WSL.
+- **Scenario fixes from them** (`1c301a4`, `adc67da`): cresh-missions accepts destroy missions up to 2300 m (the 600 m bound refused every one), uses general terminals only, follows the moved waypoint and checks the bank payout. besh-gather skips the organic tool (toolType 0 on this server), treats an empty gas/moisture/wind list as server state, and checks mind. dorn-social has a real entertainer buff check (70 s watch). aurek-doctor-buffs walks into any hospital cell (checked live: the trainers stand in cell 9655496) and waits out the 20 s cooldown. **The gate will call the changed checks NEW, not regressions.**
+- **GPT relay tuned** (`c403b6b`): a bots lane and a desk lane (one task each), a memory guard (6 GB commit headroom), one retry for an early crash, recovery of orphaned "running" tasks. Status shows lanes and memory.
+- **C24b done** by GPT (08:07, `4458b42`). **C33b:** GPT hit its usage limit at 08:59 (resets 12:01) halfway. Claude took it over (63 offline tests pass) and runs science_doctor on Aurek; Aurek stays out of the squad plan until that run ends. Queue: only C36 (names sweep) is open, for 12:01.
+- **Remote Ollama** (helper session; `ebadb4f`, and part of `7674330` by a shared-checkout slip): OLLAMA_URL/MODEL/CTX settings, remote idle detection, `tools/agents/local/REMOTE-OLLAMA.md` for the friend's PC (tomorrow). `qwen3:8b` pulled (owner): it runs fully on the GPU, but its research is too weak. Idle research stays paused (`Agent/local-research/STOP`).
+
 ### 2026-10-15 08:06 ChatGPT: C24b re-review complete
 
 - Reviewed dev `98ad1d1d` + `3a0b154f` at `90044b8e`: R2-F1 resolved in source, no new blocking source defect; 16/16 offline checks (20,000 multi-zone cases/five loads, rounding/caps/defaults/top-up), inventory refreshed to 74 rows. `Documentation-support/hoth-release-gate.md` stays NO-GO: C23/client/owner gates open. Backfill is conservative migration, not exact creation-time odds (comment clarification for Claude). Repeated-start persistence and gameplay untested here; no builds/restarts/bots/server edits. Next: Claude runtime evidence when scheduled; GPT queue per latest inbox. Review/tools and handoff recorded in this local commit.
@@ -272,7 +281,7 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 - **GPT queue:** C24b (running again since 08:01), then C33b (class-check staging for cures plus the Doctor rerun, owner wants bots first), then C36 (names sweep).
 - **C34r** (`19cfb3a5`): reviewed (potency -1 is Core3's own "can't be resisted" path, `DamageOverTimeList.cpp:124-126`), cherry-picked as dev `90044b8e`, built. Test galaxy restarted 07:33 by resume after the 07:01 squad round (no owner client, client config on 44453); `squad.py setup` 18/18.
   - Probe `scenarios/claude-probe-c34r.py` on Aurek: poison, disease, fire and bleeding 10/10 each plus one on self, no errors (`Bot-reports/Aurek/20261015-073623-claude-probe-c34r.json`). The old roll would pass that about once in 9,000 tries.
-  - Cure retest (class check science_doctor, 07:38, 11/11 checks): the grant works, but every cure was BLOCKED by staging. The tester's inventory was full, so medicine2 came without its cure-poison pack, and the allies were out of the tester's view ("in another scene") after setup spread them around Mos Eisley. curePoison stays untested: a C33 follow-up (gather the group, make inventory room) for GPT. Aurek back in the squad plan at 07:40.
+  - Cure retest (class check science_doctor, 07:38, 11/11 checks): the grant works, but every cure was BLOCKED by staging. The tester's inventory was full, so medicine2 came without its cure-poison pack, and the allies were out of the tester's view ("in another scene") after setup spread them around Mos Eisley. curePoison stays untested: a C33 follow-up (gather the group, make inventory room) for GPT. Aurek driver: ChatGPT C33b (08:31), removed from squad plan; waiting for active rounds before commands.
 - **C30** was already in dev as `80b66e65` (cherry-picked 01:40 without -x), so cherry-picking 6f25b704 came out empty. Its names are in archive `8ad04fec`; the habitat visit is still open.
 - **C33** committed: the class-check scenario (GPT, finished by the Sonnet helper) and its 52 offline tests.
 - **Route for the month** (owner asked how to get the most out of the Max plan in the first month; awaiting the owner's OK): `SWG-roadmap.md`, "Route for the first month". Lanes, waste to cut, four weekly milestones.
@@ -283,10 +292,4 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 ### 2026-10-15 07:09 ChatGPT: C34r review complete
 
 - Reviewed dev 60ed8971 + 9b93665d: one P2 (silent random DOT staging failure), fixed on gpt/work in 19cfb3a5 after dev merge cb4e2b9e; report `Documentation-support/review-C34r.md`. Extracted-code regression: missing DOTs 84/404 -> 0/404, swimming/fire errors 0/101 -> 101/101; 63 kit paths registered. No demonstrated gate bypass/crash defect; full build/in-game checks untested here. Claude: review/cherry-pick 19cfb3a5, build/test; dev, bots and runtime untouched.
-
-### 2026-10-15 07:01 Claude: private GitHub copy force-pushed (owner's OK)
-
-- Owner, 07:00: "Yes, run the private --force push now." Before it: `prepush_scan.py` (only the 21 known false positives), the history-wide secret check (clean), `github_export.py` check ok (127 commits).
-- `github_export.py push … --force`: GitHub main `3610812` → `d9e5b06`, verified with `git ls-remote`; still PRIVATE, one branch, no tags. Gone from GitHub's history: the four early files (SWG-Source records and scripts, the stock client UI file), the owner's character names and a third-party developer's handle (3c3c2c8).
-- Still before going public: the local-model names sweep (running, about 2.5 h) and the owner's four decisions (brother mentions, non-credit Sagiroth mentions, the "clones were in work/research" wording, usernames in download-source URLs). GitHub may keep the old commits reachable by hash for a while, so publish as a fresh public repository, or have GitHub purge them, rather than flipping this one public.
 

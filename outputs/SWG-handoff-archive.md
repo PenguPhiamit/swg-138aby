@@ -6,6 +6,12 @@ Finished task rows and older log entries moved out of `SWG-handoff.md` to keep t
 
 ### Older log entries (newest first)
 
+#### 2026-10-15 07:01 Claude: private GitHub copy force-pushed (owner's OK)
+
+- Owner, 07:00: "Yes, run the private --force push now." Before it: `prepush_scan.py` (only the 21 known false positives), the history-wide secret check (clean), `github_export.py` check ok (127 commits).
+- `github_export.py push … --force`: GitHub main `3610812` → `d9e5b06`, verified with `git ls-remote`; still PRIVATE, one branch, no tags. Gone from GitHub's history: the four early files (SWG-Source records and scripts, the stock client UI file), the owner's character names and a third-party developer's handle (3c3c2c8).
+- Still before going public: the local-model names sweep (running, about 2.5 h) and the owner's four decisions (brother mentions, non-credit Sagiroth mentions, the "clones were in work/research" wording, usernames in download-source URLs). GitHub may keep the old commits reachable by hash for a while, so publish as a fresh public repository, or have GitHub purge them, rather than flipping this one public.
+
 #### 2026-10-15 03:55 Claude: the invisible BARC was MTG shadowing; MTG merges installed; helpers on the class check, the MTG audit and examine texts
 
 - **BARC root cause.** The server spawned it (a bot's `locate` found it next to the owner), but the client had nothing to draw. The client and the server both load MTG's archives below stock, so stock's copies of shared files win. The four mount tables (`datatables/mount/*`) and `string/en/monster_name.stf` in stock know nothing of the BARC, so its rows in MTG's copies never reached the client. That is also why the datapad said `monster_name:[barc_speeder]`.
