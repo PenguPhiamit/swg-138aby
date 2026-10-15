@@ -29,6 +29,22 @@ RANGED_REACH = 45.0
 HEAL_BELOW = .7        # the healer acts on anyone under 70% health
 HEAL_REACH = 5.0
 DOWN = ('incapacitated', 'dead')
+LOW = ('crouched', 'prone', 'sitting', 'kneeling', 'lying_down', 'knocked_down', 'sneaking')
+# Heal refusals (HealDamageCommand.h) and how long the healer leaves that patient alone. On 15 Oct Mirren sent heals
+# for minutes to a patient she could not see (65 no_line_of_sight) and to herself with only wounds left (19 "no damage
+# to heal": wounds cap health, healDamage cannot touch them), so "healing" never ended and the buff order never ran.
+SKIP_PATIENT = {'no_line_of_sight': 15, 'healing_response_61': 60, 'no_help_target': 60, 'pvp_no_help': 60}
+REST = {'not_enough_mind': 20}   # the healer's own mind is spent: no heal from anyone for a while
+
+
+def stand_up(bot, row):
+    """/stand before a walk. A crouched bot cannot walk, and the server puts every step back (owner, 15 Oct: Forn's
+    "rubber banding kinda bad"; his status said crouched). True when it stood up."""
+    if row.get('posture') in LOW:
+        bot.slash('stand', wait=.5)
+        row['posture'] = 'upright'
+        return True
+    return False
 
 
 def specials(skills, weapon):
@@ -89,6 +105,7 @@ class Fighter:
         ranged = self.role.get('ranged')
         if gap > (self.role.get('reach', RANGED_REACH) if ranged else MELEE_REACH):
             x, y = _toward(row, obj, self.role.get('stand', RANGED_STAND) if ranged else 1.5)
+            stand_up(self.bot, row)
             self.bot.move(x, y, *_indoors(row, obj), timeout=8)
             self.rec['moves'] += 1
         rotation = self.rotation()
@@ -101,19 +118,48 @@ class Fighter:
 
 
 class Healer(Fighter):
+    def __init__(self, bot, role, record):
+        super().__init__(bot, role, record)
+        self.skip, self.rest_until = {}, 0.0   # patient name -> when to try again; no heals before rest_until
+
     def mend(self, row, patients):
         """Heal the lowest of patients (name -> {'health': ratio, 'posture', 'x', 'y', 'oid'}) under HEAL_BELOW.
-        True when someone needed it."""
+        True when a heal went out, False when nobody needs one, or the ones who do are being left alone after a
+        refusal, or the healer is out of mind or on cooldown (so the caller can buff or fight instead)."""
+        now = time.time()
+        if now < self.rest_until:
+            return False
         hurt = sorted(((r['health'], name, r) for name, r in patients.items()
-                       if r.get('posture') not in DOWN and r.get('health', 1) < HEAL_BELOW and r.get('oid')),
+                       if r.get('posture') not in DOWN and r.get('health', 1) < HEAL_BELOW and r.get('oid')
+                       and self.skip.get(name, 0) <= now),
                       key=lambda t: t[0])
         if not hurt:
             return False
         _, name, patient = hurt[0]
         if row.get('x') is not None and patient.get('x') is not None and                 math.hypot(patient['x'] - row['x'], patient['y'] - row['y']) > HEAL_REACH:
+            stand_up(self.bot, row)
             self.bot.move(patient['x'] + 1.5, patient['y'], *_indoors(row, patient), timeout=8)
             self.rec['moves'] += 1
-        if self.send('healDamage', patient['oid']):
+        events = self.bot.slash('healDamage', target=patient['oid'], wait=.8)
+        self.rec['sent']['healDamage'] += 1
+        said = ' '.join(str(e.get('text', '')) + ' ' + str(e.get('reason') or e.get('error') or '') for e in events)
+        for key, seconds in SKIP_PATIENT.items():
+            if key in said:
+                self.skip[name] = now + seconds
+                self.rec['refused'][f'healDamage: {key}'] += 1
+                return False
+        for key, seconds in REST.items():
+            if key in said:
+                self.rest_until = now + seconds
+                self.rec['refused'][f'healDamage: {key}'] += 1
+                return False
+        if 'healing_must_wait' in said:
+            return False
+        if any(e.get('event') == 'command_failed' for e in events):
+            self.skip[name] = now + 10   # wrong locomotion, out of range: try someone else, then again
+            self.rec['refused'][f"healDamage: {next(e.get('reason') for e in events if e.get('event') == 'command_failed')}"] += 1
+            return False
+        if 'You heal' in said:
             self.rec['heals'] += 1
         return True
 

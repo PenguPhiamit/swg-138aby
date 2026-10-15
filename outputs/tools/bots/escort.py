@@ -13,11 +13,12 @@ Every 2 s each bot, in its own thread and talking only to its own bot (a request
   * otherwise follows: its formation slot around the player, into the player's building cell too.
   * jumps to the player (/agentgear goto) when the player is on another planet, or out of sight and over 300 m away.
 Orders, from the player by spatial chat or a tell to any crew member (a leading "crew" is optional):
-  follow | stay | attack | passive | heal | status | dismiss | waypoints (the leader mails the waypoint list)
+  follow | stay | attack | passive (also /peace) | heal | status | dismiss | waypoints (mails the waypoint list)
   | buff (the healer enhances the player's health, action, strength, constitution, quickness and stamina)
-  | invite (the leader sends the group invite again)
-The leader acknowledges in spatial chat. The run ends on "dismiss", after `minutes`, or when the player has been
-offline for 5 minutes.
+  | invite (the leader sends the group invite again) | help (or "commands", "orders": the list)
+The bot that hears an order first answers it: in spatial chat, or by tell when the order came as a tell. Every bot
+stands up before it walks (a crouched bot cannot). The run ends on "dismiss", after `minutes`, or when the player has
+been offline for 5 minutes.
 """
 import json
 import math
@@ -65,7 +66,8 @@ def walk_time(row, x, y):
         return 30
     return min(60, max(8, math.hypot(x - row['x'], y - row['y']) / 4 + 5))
 FORMATION = [(3, 2), (-3, 2), (0, -4), (3, -4), (-3, -4), (5, 0), (-5, 0), (0, 5)]   # metres from the player
-ORDERS = ('follow', 'stay', 'attack', 'passive', 'heal', 'status', 'dismiss', 'waypoints', 'buff', 'invite')
+ORDERS = ('follow', 'stay', 'attack', 'passive', 'heal', 'status', 'dismiss', 'waypoints', 'buff', 'invite', 'help')
+SAME = {'commands': 'help', 'orders': 'help'}   # owner, in game: "what where the crew commands again"
 BUFFS = ('health', 'action', 'strength', 'constitution', 'quickness', 'stamina')   # the support kit's enhance packs
 
 
@@ -74,7 +76,8 @@ def word(text):
     words = re.findall(r'[a-z]+', str(text).lower())
     if words and words[0] == 'crew':
         words = words[1:]
-    return words[0] if words and words[0] in ORDERS else None
+    first = SAME.get(words[0], words[0]) if words else None
+    return first if first in ORDERS else None
 
 
 def who(owner):
@@ -104,6 +107,8 @@ class Shared:
         self.player = {}               # the player's row for the healer
         self.trail = []                # where the player stood indoors (cell, x, y, z), oldest first
         self.buffs = []                # enhancements the healer still owes the player ("buff" order)
+        self.leader_jobs = []          # orders only the group leader can carry out (invite), whoever heard them
+        self.passive_at = 0.0          # the last "passive": each bot sends /peace once after it
         self.log = []
 
     def order(self, text, sender, now):
@@ -118,11 +123,13 @@ class Shared:
             elif verb == 'attack':
                 self.attack_until, self.assist = now + 60, True
             elif verb == 'passive':
-                self.assist, self.attack_until = False, 0.0
+                self.assist, self.attack_until, self.passive_at = False, 0.0, now
             elif verb == 'heal':
                 self.heal_now = True
             elif verb == 'buff':
                 self.buffs = list(BUFFS)
+            elif verb == 'invite':
+                self.leader_jobs.append(verb)
             elif verb == 'dismiss':
                 self.ended = True
             self.log.append((round(now), verb))
@@ -131,7 +138,9 @@ class Shared:
 
 ACK = {'follow': 'Following.', 'stay': 'Holding here.', 'attack': 'Engaging your target.', 'passive': 'Weapons down.',
        'heal': 'Healing you.', 'dismiss': 'Crew dismissed.', 'waypoints': 'Mailing you the waypoints.',
-       'buff': 'Mirren will buff you: stay close.', 'invite': 'Group invite sent: accept it or type /join.'}
+       'buff': 'Mirren will buff you: stay close.', 'invite': 'The leader is sending the group invite: accept it.',
+       'help': 'Crew orders (say or tell, "crew" optional): follow, stay, attack, passive, heal, buff, status, '
+               'waypoints, invite, dismiss.'}
 
 
 def goto(bot, planet, x, y):
@@ -158,6 +167,7 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
     counts = {b.first: {'fights': 0, 'follows': 0, 'orders': 0, 'unstuck': 0} for b in g.bots if b.first in roles}
     began, last_seen = time.time(), {'t': time.time()}
     jumped = {}            # first name -> time of the last /agentgear goto
+    peaced = {}            # first name -> the "passive" order it last sent /peace for
     stuck = {}             # first name -> follow walks in a row that went nowhere
     play, flushed = [], {'t': time.time(), 'snap': 0.0}
     play_file = PLAY / f"{time.strftime('%Y%m%d-%H%M')}-{g.name}-escort.jsonl"
@@ -175,6 +185,22 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
                 f.write(''.join(json.dumps(r) + '\n' for r in play))
             del play[:]
 
+    def answer(bot, verb, by_tell):
+        """The bot that heard an order first answers it. Until 15 Oct only the leader answered, and it skipped every
+        line another bot had heard first (one line, once), so the owner got silence: "things dont seem to be working".
+        A tell gets a tell back, so it reaches the player anywhere."""
+        if verb == 'status':
+            with shared.lock:
+                rows = dict(shared.table)
+            text = ', '.join(f"{n} {round(r['health'] * 100)}% {r.get('posture') or ''}".strip()
+                             for n, r in rows.items()) or 'No reports yet.'
+        else:
+            text = ACK.get(verb)
+        if text:
+            bot.tell(owner, text) if by_tell else bot.say(text)
+        if verb == 'waypoints':
+            note_play({'kind': 'mail', 'answer': (mail(bot, owner, 'Waypoints', waypoints or []) or {}).get('text')})
+
     def listen(bot, events):
         for e in events:
             if e.get('event') in ('chat', 'tell') and str(e.get('from', '')).lower().startswith(owner.lower()):
@@ -182,17 +208,7 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
                 if verb:
                     counts[bot.first]['orders'] += 1
                     note_play({'kind': 'order', 'order': verb, 'heard_by': bot.first})
-                    if bot is g.leader:
-                        if verb == 'status':
-                            with shared.lock:
-                                rows = dict(shared.table)
-                            bot.say(', '.join(f"{n} {round(r['health'] * 100)}%" for n, r in rows.items()) or 'No reports yet.')
-                        elif verb in ACK:
-                            bot.say(ACK[verb])
-                        if verb == 'invite':  # owner, in game: 'can you have them invite me again'
-                            bot.slash('invite', target=(who(owner) or {}).get('oid', 0), wait=0)
-                        if verb == 'waypoints':
-                            note_play({'kind': 'mail', 'answer': (mail(bot, owner, 'Waypoints', waypoints or []) or {}).get('text')})
+                    answer(bot, verb, e.get('event') == 'tell')
             if e.get('event') == 'combat' and bot is g.leader:
                 me = shared.player.get('oid')
                 note_play({'kind': 'combat', **{k: e.get(k) for k in ('attacker', 'attacker_name', 'defender',
@@ -301,6 +317,7 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
         same = (player['cell'] or 0) == (row.get('cell') or 0)
         if not same or row.get('x') is None or math.hypot(player['x'] - row['x'], player['y'] - row['y']) > 5:
             bot.doing(f'going to {owner} to buff')
+            crew_combat.stand_up(bot, row)
             if player['cell']:
                 bot.move(player['x'] + 1, player['y'], player.get('z') or 0.0, player['cell'], timeout=20)
             else:
@@ -339,6 +356,18 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
             with shared.lock:
                 if shared.ended:
                     break
+                jobs = shared.leader_jobs if bot is g.leader else []
+                if jobs:
+                    shared.leader_jobs = []
+                passive_at = shared.passive_at
+            for job in jobs:
+                if job == 'invite':   # owner, in game: 'can you have them invite me again'
+                    bot.slash('invite', target=(who(owner) or {}).get('oid', 0), wait=0)
+                    note_play({'kind': 'invite'})
+            if passive_at > peaced.get(bot.first, 0):   # "passive" also ends the fight the bot is in
+                peaced[bot.first] = passive_at
+                bot.slash('peace', wait=0)
+                engaged = None
             row = crew_combat.self_row(bot, records[bot.first])
             with shared.lock:
                 shared.table[bot.first] = row
@@ -417,6 +446,7 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
                 if mode == 'stay':
                     bot.doing(f'holding position ({owner} said stay)')
                 else:
+                    crew_combat.stand_up(bot, row)
                     follow(bot, row, player, zone_row)
             bot.idle(TICK)
         bot.doing('dismissed' if shared.ended else 'escort over')
@@ -429,7 +459,7 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
     start = who(owner)
     if start and g.leader.oid:
         g.leader.slash('invite', target=start.get('oid'), wait=1)   # the player accepts the group window
-        g.leader.say(f'{g.name} crew here. Orders: follow, stay, attack, passive, heal, status, dismiss.')
+        g.leader.say(f'{g.name} crew here. ' + ACK['help'])
     g.parallel(*[lambda b=b: run(b, roles[b.first]) for b in g.bots if b.first in roles])
     flush()
     for rec in records.values():

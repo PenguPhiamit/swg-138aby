@@ -14,8 +14,9 @@ OWNER, PREY = 7, 500
 class Bot:
     def __init__(self, first, oid, view):
         self.first, self.oid, self.view = first, oid, view
-        self.inbox, self.sent, self.moves, self.said, self.labels = [], [], [], [], []
+        self.inbox, self.sent, self.moves, self.said, self.labels, self.told = [], [], [], [], [], []
         self.arriving = []   # events the server sends during the next idle
+        self.stance = 'upright'
         self.now = {'zone': 'tatooine'}
         self.planet = 'tatooine'
 
@@ -24,7 +25,7 @@ class Bot:
 
     def status(self):
         self.inbox = []
-        return {'me': {'ham': {'health': 1000}, 'max_ham': {'health': 1000}, 'posture': 'upright'},
+        return {'me': {'ham': {'health': 1000}, 'max_ham': {'health': 1000}, 'posture': self.stance},
                 'x': 100.0, 'y': 90.0, 'self': self.oid, 'cell': 0, 'planet': self.planet}
 
     def inspect(self, oid):
@@ -32,6 +33,8 @@ class Bot:
 
     def slash(self, name, args='', target=0, wait=0):
         self.sent.append((name, target))
+        if name == 'stand':
+            self.stance = 'upright'
         return []
 
     def wait_for(self, match, timeout=10):
@@ -49,6 +52,9 @@ class Bot:
 
     def say(self, text):
         self.said.append(text)
+
+    def tell(self, name, text):
+        self.told.append((name, text))
 
     def profession(self, name):
         return {'skills': ['combat_rifleman_novice']}
@@ -84,6 +90,8 @@ class Orders(unittest.TestCase):
         self.assertEqual(escort.word('Follow'), 'follow')
         self.assertIsNone(escort.word('stay here please crew'.replace('stay', 'wait')))
         self.assertIsNone(escort.word('hello crew'))
+        self.assertEqual(escort.word('what are the crew commands'.split(' ', 3)[-1]), 'help')
+        self.assertEqual(escort.word('crew orders?'), 'help')
 
     def test_a_line_heard_by_five_bots_counts_once(self):
         shared = escort.Shared('[name removed]')
@@ -188,6 +196,81 @@ class Escort(unittest.TestCase):
                 escort.escort(Group([mirren]), '[name removed]', {'Mirren': {'weapon': 'rifle', 'ranged': True, 'healer': True}}, minutes=.004)
             finally:
                 escort.who = real_who
+        self.assertEqual([t for name, t in mirren.sent if name == 'healenhance'], [OWNER] * len(escort.BUFFS))
+
+    def run_crew(self, bots, roles, minutes=.004, x=100, y=90):
+        with tempfile.TemporaryDirectory() as tmp:
+            escort.PLAY, real_who = Path(tmp), escort.who
+            escort.who = lambda owner: {'oid': OWNER, 'zone': 'tatooine', 'worldPositionX': x, 'worldPositionY': y}
+            try:
+                return escort.escort(Group(bots), '[name removed]', roles, minutes=minutes)
+            finally:
+                escort.who = real_who
+
+    def test_an_order_another_bot_hears_first_is_still_answered(self):
+        # 15 Oct: Benny's heal, buff and status were heard by Dask, Mirren and Brask; only Forn could answer, and Forn
+        # skipped them as duplicates. Now the bot that hears answers (a tell gets a tell), and the invite reaches Forn.
+        view = {OWNER: {'ok': True, 'x': 100.0, 'y': 90.0, 'z': 0.0, 'parent': 0,
+                        'creature': {'posture': 'upright', 'states': [], 'ham': {'health': 1000},
+                                     'max_ham': {'health': 1000}}}}
+        forn, brask = Bot('Forn', 1, view), Bot('Brask', 3, view)
+        brask.arriving = [{'event': 'tell', 'from': '[name removed]', 'text': 'invite'},
+                          {'event': 'chat', 'from': '[name removed]', 'text': 'crew commands'}]
+        self.run_crew([forn, brask], {'Forn': {'weapon': 'rifle', 'ranged': True}, 'Brask': {'weapon': 'polearm'}})
+        self.assertIn(('[name removed]', escort.ACK['invite']), brask.told)
+        self.assertIn(escort.ACK['help'], brask.said)
+        self.assertEqual([t for name, t in forn.sent if name == 'invite'], [OWNER, OWNER])   # the start, then the order
+        self.assertNotIn('invite', [name for name, _ in brask.sent])
+
+    def test_passive_sends_peace_once_per_bot(self):
+        view = {OWNER: {'ok': True, 'x': 100.0, 'y': 90.0, 'z': 0.0, 'parent': 0,
+                        'creature': {'posture': 'upright', 'states': [], 'ham': {'health': 1000},
+                                     'max_ham': {'health': 1000}}}}
+        forn, brask = Bot('Forn', 1, view), Bot('Brask', 3, view)
+        forn.arriving = [{'event': 'chat', 'from': '[name removed]', 'text': 'passive'}]
+        self.run_crew([forn, brask], {'Forn': {'weapon': 'rifle', 'ranged': True}, 'Brask': {'weapon': 'polearm'}})
+        self.assertEqual([name for name, _ in forn.sent].count('peace'), 1)
+        self.assertEqual([name for name, _ in brask.sent].count('peace'), 1)
+
+    def test_a_crouched_bot_stands_before_it_walks(self):
+        # 15 Oct: Forn, crouched, "rubber banding kinda bad": the server puts a crouched bot's steps back.
+        view = {OWNER: {'ok': True, 'x': 100.0, 'y': 140.0, 'z': 0.0, 'parent': 0,
+                        'creature': {'posture': 'upright', 'states': [], 'ham': {'health': 1000},
+                                     'max_ham': {'health': 1000}}}}
+        forn = Bot('Forn', 1, view)
+        forn.stance = 'crouched'
+        real_move = forn.move
+
+        def move(x, y, z=None, cell=None, timeout=90):
+            self.assertEqual(forn.stance, 'upright')
+            return real_move(x, y, z, cell, timeout)
+
+        forn.move = move
+        self.run_crew([forn], {'Forn': {'weapon': 'rifle', 'ranged': True}}, minutes=.002, y=140)
+        self.assertTrue(forn.moves)
+        self.assertIn(('stand', 0), forn.sent)
+
+    def test_a_patient_out_of_sight_is_left_alone_and_the_buff_goes_ahead(self):
+        # 15 Oct: Mirren healed "the lowest of the crew" for minutes (65 times "You cannot see your target"), so the
+        # buff order never started.
+        view = {OWNER: {'ok': True, 'x': 100.0, 'y': 90.0, 'z': 0.0, 'parent': 0,
+                        'creature': {'posture': 'upright', 'states': [], 'ham': {'health': 300},
+                                     'max_ham': {'health': 1000}}}}
+        mirren = Bot('Mirren', 2, view)
+        mirren.arriving = [{'event': 'tell', 'from': '[name removed]', 'text': 'buff'}]
+        real_slash = mirren.slash
+
+        def slash(name, args='', target=0, wait=0):
+            real_slash(name, target=target)
+            if name == 'healDamage':
+                return [{'event': 'system', 'text': '@healing:no_line_of_sight'}]
+            if name == 'healenhance':
+                return [{'event': 'system', 'text': f"You enhance [name removed]'s {args.title()} by 200."}]
+            return []
+
+        mirren.slash = slash
+        self.run_crew([mirren], {'Mirren': {'weapon': 'rifle', 'ranged': True, 'healer': True}})
+        self.assertEqual([name for name, _ in mirren.sent].count('healDamage'), 1)   # then 15 s off this patient
         self.assertEqual([t for name, t in mirren.sent if name == 'healenhance'], [OWNER] * len(escort.BUFFS))
 
 
