@@ -278,7 +278,8 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 - Restarted 13:5x on dev with `BotPop=true` (ready in 66 s, 0 error lines). The botpop scale series (owner OK earlier) was stopped at its 500 step for this; its 100 and 250 results stand (`Bot-reports/botpop-scale-test.md`).
 - Up now: 23 squad bots, the Forn escort run (20261015-135721, waits up to 3 h for Benny), 77 load bots (`load_fleet.py step 77 60 7200`: 2 h of fights with the memory guard), and the server-side population at 500 throttled, going to 1,000 only if the load average stays under 9 of 12 threads. Results: `/var/tmp/swg-bots/load/*fullfleet*`. Client logs over 200 MB are emptied every 5 min for 4 h.
 - Earlier today: the crew answers every order, Mirren's heal loop, Forn's crouch (`dd9febe`); `/tame train` (dev `398744b5`); the pet follow gap (dev `57a52553`) is live since 13:26 but untested in game.
-- Open: the full-fleet numbers (read the fullfleet JSON files); Benny's "disengaging scripts brok" (asked in game, no answer yet); "better zoom" (client side).
+- **Full fleet result (14:05):** 100 client bodies + 500 server-side bots (165 active, throttled). core3 3.9 cores avg (4.7 max), 4.8 GB; WSL 10.1 GB free, commit headroom 9.3 GB; chat 107 ms avg, 450 ms max; no safety stop. Load average reached 10 of 12 threads, so it held at 500 and did not go to 1,000: CPU binds first, as projected.
+- Open: Benny's "disengaging scripts brok" (asked in game, no answer yet); "better zoom" (client side).
 
 ### 2026-10-15 13:55 Claude: server-side population bots (/botpop), milestone 1 built; 100 and 250 measured
 
