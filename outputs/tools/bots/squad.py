@@ -40,6 +40,7 @@ REPORTS = OUTPUTS / 'Bot-reports'
 CLIENT = '/opt/swg/Core3-dev/MMOCoreORB/build/dev/src/client/core3client'
 CREDS = Path('/opt/swg/agent/bots')
 RUNS = Path('/var/tmp/swg-bots')  # on the WSL disk: /tmp is a RAM disk (filled on 13 Oct and broke MariaDB)
+NOW = RUNS / 'now'                # one small JSON per bot: what it is doing and where (live_map.py reads it)
 LOGIN_PORT = '46453'
 KEEP_EVENTS = 400  # notable events kept per bot in a report
 TEST_GALAXY = Path(__file__).resolve().parents[1] / 'test_galaxy.py'
@@ -101,7 +102,57 @@ class Bot:
         self.history = []  # notable events for the report
         self.oid = None
         self.started = time.time()
+        self.names = {}    # oid -> short name, from look replies, so labels say what a command was aimed at
+        self.now = {'name': self.first, 'group': group.name, 'doing': '', 'since': None}
         self._skip_to_end()
+
+    # ---- live label (owner, 15 Oct: "relabel the tracker so i can read what everyone is doing") ----
+    def doing(self, text):
+        """Say in plain words what this bot is doing; live_map.py shows it on the map and in its log.
+        Commands set it themselves (see describe); a scenario may call this for a clearer phrase."""
+        if text and text != self.now.get('doing'):
+            self.now.update(doing=text, since=time.time())
+        self._publish()
+
+    def describe(self, cmd, args):
+        """The plain-words label for a body command, or None to keep the current one (status, look, ...)."""
+        what = lambda oid: self.label_of(oid)
+        if cmd == 'move':
+            return f"walking to {args['x']:.0f}, {args['y']:.0f}" + (' (indoors)' if args.get('cell') else '')
+        if cmd == 'fight':
+            return f"fighting {what(args.get('target'))}"
+        if cmd == 'command':
+            text = '/' + args.get('name', '?') + (f" {args['args']}" if args.get('args') else '')
+            return text + (f" on {what(args['target'])}" if args.get('target') else '')
+        return {'talk': f"talking to {what(args.get('target'))}", 'choose': f"choosing option {args.get('index')}",
+                'select_radial': f"using {what(args.get('target'))}", 'mission_list': 'reading a mission terminal',
+                'mission_accept': 'accepting a mission', 'say': 'talking', 'tell': f"telling {args.get('name')}",
+                'sui_respond': 'answering a window'}.get(cmd)
+
+    def label_of(self, oid):
+        for bot in self.group.bots:
+            if oid and bot.oid == oid:
+                return bot.first
+        name = str(self.names.get(oid, ''))
+        return name.split(':')[-1].replace('_', ' ') if name else f'#{str(oid)[-5:]}'
+
+    def _publish(self, reply=None):
+        if reply and isinstance(reply.get('x'), (int, float)) and isinstance(reply.get('y'), (int, float)):
+            # Inside a building the body reports cell-local coordinates: keep the last outdoor spot, mark indoors.
+            if reply.get('cell'):
+                self.now.update(cell=reply['cell'])
+            else:
+                self.now.update(x=round(reply['x'], 1), y=round(reply['y'], 1), cell=0, pos_at=time.time())
+            if reply.get('planet'):
+                self.now['zone'] = reply['planet']
+        self.now['updated'] = time.time()
+        try:
+            NOW.mkdir(parents=True, exist_ok=True)
+            tmp = NOW / f'.{self.first}.tmp'
+            tmp.write_text(json.dumps(self.now))
+            os.replace(tmp, NOW / f'{self.first}.json')
+        except OSError:
+            pass
 
     # ---- process ----
     def pid(self):
@@ -260,12 +311,17 @@ class Bot:
         self._read()
         self.inbox = []
         request = {'cmd': cmd, **args}
+        self.doing(self.describe(cmd, args))
         self._write(request)
         deadline = time.time() + within
         while time.time() < deadline:
             for event in self._read():
                 if event.get('reply') in (cmd, 'error'):
                     self.group.step(self, request, event)
+                    for obj in event.get('objects', []) if cmd == 'look' else []:
+                        if obj.get('oid'):
+                            self.names[obj['oid']] = obj.get('name', '')
+                    self._publish(event)
                     self.group.checkpoint()
                     return event
             time.sleep(0.2)

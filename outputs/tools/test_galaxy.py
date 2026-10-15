@@ -162,8 +162,9 @@ def start(args):
         # after each test restart). The test galaxy starts its shuttles after 30 s; live keeps the stock delay.
         shuttles = f'Core3.ShuttleZoneComponent = {{ BootDelay = {SHUTTLE_BOOT_DELAY_MS} }}\n'
         print(f'  shuttles in service {SHUTTLE_BOOT_DELAY_MS // 1000} s after the start (stock: 300 s)', flush=True)
-        # The live map (tools/live_map.py) reads log/who.json; Core3 writes it every 300 s by default, 10 s at least.
-        shuttles += 'Core3.OnlineLogSeconds = 10\n'
+        # The live map (tools/live_map.py) reads log/who.json; Core3 writes it every 300 s by default. The dev build
+        # allows 2 s (PlayerManagerImplementation.cpp; stock refuses under 10 s): owner, 15 Oct, "closer to a live view".
+        shuttles += 'Core3.OnlineLogSeconds = 2\n'
         # A resumed copy still has the last start's overrides at the end of config-local.lua: replace them.
         text = config.read_text(errors='surrogateescape')
         cut = text.find('\n-- TEST GALAXY OVERRIDES')

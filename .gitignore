@@ -103,3 +103,5 @@ outputs/Agent/local-research/*/agent-log.jsonl
 outputs/Agent/local-research/.lock
 outputs/Agent/local-research/*.tmp
 outputs/Agent/local-research/state.json
+# live_map.py temporary movement logs (48 h, rotated)
+outputs/Bot-reports/tracker/

@@ -59,6 +59,23 @@
         "Tovan": ["combat_brawler_master", "combat_2hsword_novice"],
         "Lira": ["science_doctor_novice", "science_doctor_wound_02"]
       }
+    },
+    "Forn": {
+      "focus": "Dungeon crew (owner, 15 Oct: 'give me a crew and we can test their combat more and their movement and mapping'): five full 250-point pre-CU templates (Documentation-support/dungeon-builds.md). Forn leads as Squad Leader/Rifleman; Brask tanks as Fencer/Pikeman/Medic; Ressa is Teras Kasi/Fencer/Medic; Dask is Commando/Rifleman; Mirren heals as Doctor/Combat Medic. Combat drills, travel and mapping on other planets, then the dungeons: Warren, Geonosian lab, Death Watch bunker, Corellian corvette.",
+      "members": [
+        {"account": "forn1", "name": "Forn Halcyr", "race": "human_male", "profession": "combat_marksman"},
+        {"account": "forn2", "name": "Brask Tolen", "race": "zabrak_male", "profession": "combat_brawler"},
+        {"account": "forn3", "name": "Ressa Vay", "race": "twilek_female", "profession": "combat_brawler"},
+        {"account": "forn4", "name": "Dask Orrin", "race": "rodian_male", "profession": "combat_marksman"},
+        {"account": "forn5", "name": "Mirren Sol", "race": "bothan_female", "profession": "science_medic"}
+      ],
+      "training": {
+        "Forn": ["outdoors_squadleader_master", "combat_rifleman_master", "science_medic_novice", "science_medic_injury_01", "science_medic_injury_02"],
+        "Brask": ["combat_1hsword_master", "combat_polearm_master", "science_medic_master"],
+        "Ressa": ["combat_unarmed_master", "combat_1hsword_master", "science_medic_master"],
+        "Dask": ["combat_commando_master", "combat_rifleman_master", "science_medic_novice", "science_medic_injury_01"],
+        "Mirren": ["science_doctor_master", "science_combatmedic_master", "combat_marksman_novice"]
+      }
     }
   }
 }

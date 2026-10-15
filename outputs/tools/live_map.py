@@ -11,10 +11,22 @@ never sent to the page), the squads' activity records (Bot-reports/runs/*-activi
 (tools/bots/groups.json) and the known places (tools/bots/places.json). It never talks to a bot or to the server.
 Positions are as fresh as who.json, which Core3 writes every Core3.OnlineLogSeconds (default 300 s; tools/test_galaxy.py
 sets 10) and on logins. Listens on 127.0.0.1 only.
+
+Labels and live positions (owner, 15 Oct: "relabel the tracker so i can read what everyone is doing ... closer to a
+live view"): squad.py writes what each bot is doing ("walking to 3830, -4520", "/polearmLegHit2 on sevorrt") and its
+own latest position to /var/tmp/swg-bots/now/<name>.json on every command; a bot's own position is used when it is
+fresher than who.json. The page refreshes every 1.5 s.
+
+Temporary log (owner, 15 Oct: "maybe the tracker can keep some temp logs?"): every 3 s, if any bot moved or changed
+what it is doing, or a squad changed state, a background thread appends machine lines to
+Bot-reports/tracker/<yyyymmdd-hh>.jsonl and a readable snapshot (a line per bot: where, doing what, for how long, in
+which scenario) to <yyyymmdd-hh>.txt. Files older than 48 hours are deleted; the folder is not in git. Players who are
+not bots (the owner) are never logged.
 """
 import argparse
 import json
 import os
+import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -27,10 +39,13 @@ GROUPS = HERE / 'bots' / 'groups.json'
 PLACES = HERE / 'bots' / 'places.json'
 CITY_PLANET = {'mos_eisley': 'tatooine', 'coronet': 'corellia', 'theed': 'naboo', 'mos_espa': 'tatooine'}
 TRAIL = 40
+LOGS = OUTPUTS / 'Bot-reports' / 'tracker'
+KEEP_HOURS = 48
+NOW = Path('/var/tmp/swg-bots/now')   # squad.py: what each bot is doing, and where it last said it was
+NOW_FRESH = 15 * 60                   # an older label is stale (the bot's script ended)
 
 roster = {}     # first name -> group
 trails = {}     # first name -> [(x, y)]
-seen = {'mtime': 0.0}
 
 
 def load_roster():
@@ -77,31 +92,108 @@ def activity():
     return rows
 
 
-def snapshot():
-    chars, age, error = [], None, ''
+def labels():
+    """name -> the bot's own 'now' record (squad.py), if it is fresh."""
+    out, now = {}, time.time()
+    for path in NOW.glob('*.json') if NOW.is_dir() else ():
+        try:
+            row = json.loads(path.read_text(encoding='utf-8'))
+        except (OSError, ValueError):
+            continue
+        if now - float(row.get('updated', 0)) < NOW_FRESH:
+            out[row.get('name') or path.stem] = row
+    return out
+
+
+def present():
+    """Everyone online, with the freshest position known and, for bots, what they are doing.
+    Returns (chars, who_age, error, who_mtime)."""
+    chars, age, error, now = [], None, '', time.time()
     try:
         mtime = WHO.stat().st_mtime
-        age = round(time.time() - mtime)
+        age = round(now - mtime)
         clients = json.loads(WHO.read_text(encoding='utf-8', errors='replace')).get('clients', [])
     except (OSError, ValueError) as e:
-        clients, error = [], f'cannot read who.json: {type(e).__name__}'
-        mtime = seen['mtime']
-    fresh = mtime != seen['mtime']
-    seen['mtime'] = mtime
+        clients, error, mtime = [], f'cannot read who.json: {type(e).__name__}', 0.0
+    told = labels()
     for c in clients:
         name = c.get('firstName') or '?'
         x, y = float(c.get('worldPositionX', 0)), float(c.get('worldPositionY', 0))
-        zone = c.get('zone') or '?'
-        trail = trails.setdefault(name, [])
-        if fresh and (not trail or trail[-1][:2] != [x, y] or trail[-1][2] != zone):
-            trail.append([x, y, zone])
+        zone, pos_s = c.get('zone') or '?', age
+        own = told.get(name, {}) if name in roster else {}
+        # A bot's own status reply is usually fresher than who.json (written every few seconds at best).
+        if own.get('pos_at', 0) > mtime and own.get('zone', zone) == zone and own.get('x') is not None:
+            x, y, pos_s = own['x'], own['y'], round(now - own['pos_at'])
+        doing = own.get('doing', '')
+        chars.append({'name': name, 'zone': zone, 'x': x, 'y': y, 'pos_s': pos_s,
+                      'kind': 'bot' if name in roster else 'player', 'group': roster.get(name, ''),
+                      'online_s': c.get('sessionSeconds'), 'indoors': bool(own.get('cell')),
+                      'doing': doing, 'doing_s': round(now - own['since']) if doing and own.get('since') else None})
+    return chars, age, error, mtime
+
+
+def snapshot():
+    chars, age, error, mtime = present()
+    for c in chars:
+        trail = trails.setdefault(c['name'], [])
+        if not trail or trail[-1][:2] != [c['x'], c['y']] or trail[-1][2] != c['zone']:
+            trail.append([c['x'], c['y'], c['zone']])
             del trail[:-TRAIL]
-        group = roster.get(name)
-        chars.append({'name': name, 'zone': zone, 'x': x, 'y': y, 'kind': 'bot' if group else 'player',
-                      'group': group or '', 'online_s': c.get('sessionSeconds'),
-                      'trail': [[tx, ty] for tx, ty, tz in trail if tz == zone]})
+        c['trail'] = [[tx, ty] for tx, ty, tz in trail if tz == c['zone']]
     return {'who_age': age, 'error': error, 'time': time.strftime('%H:%M:%S'), 'chars': chars,
             'activity': activity(), 'places': places()}
+
+
+def readable(chars, scenario):
+    """One snapshot as text: a line per bot, grouped by squad, saying where it is and what it is doing."""
+    rows = sorted((c for c in chars if c['kind'] == 'bot'), key=lambda c: (c['group'], c['name']))
+    out = [time.strftime('%H:%M:%S') + ' ' + '-' * 60]
+    for c in rows:
+        doing = (c['doing'] or 'idle') + (f" ({c['doing_s']} s)" if c['doing_s'] is not None else '')
+        where = f"{c['zone']} {c['x']:.0f} {c['y']:.0f}" + (' indoors' if c['indoors'] else '')
+        job = scenario.get(c['group'], '')
+        out.append(f"  {c['name']:<8} {c['group']:<6} {where:<28} {doing}" + (f"   [{job}]" if job else ''))
+    return '\n'.join(out) + '\n'
+
+
+def record(last, every=3):
+    """The temporary log (see the top of this file). Runs forever in its own thread: every few seconds, if any
+    bot moved, changed what it is doing, or a squad changed state, it appends machine lines (.jsonl) and a
+    readable snapshot of every bot (.txt)."""
+    while True:
+        try:
+            load_roster()  # a crew added to groups.json is logged without a restart
+            chars, _, _, _ = present()
+            stamp, lines = round(time.time()), []
+            for c in chars:
+                if c['kind'] != 'bot':
+                    continue
+                state = (c['zone'], round(c['x']), round(c['y']), c['doing'])
+                if last.get(c['name']) != state:
+                    last[c['name']] = state
+                    lines.append({'t': stamp, 'kind': 'bot', **{k: c[k] for k in (
+                        'name', 'group', 'zone', 'x', 'y', 'indoors', 'doing', 'doing_s', 'pos_s')}})
+            scenario = {}
+            for row in activity():
+                scenario[row['group']] = f"{row['scenario'].replace('.py', '')}: {row['state']}" if row['scenario'] else row['state']
+                state = (row['scenario'], row['state'], row['detail'])
+                if last.get('activity:' + row['group']) != state:
+                    last['activity:' + row['group']] = state
+                    lines.append(dict(row, t=stamp, kind='activity'))
+            if lines:
+                LOGS.mkdir(parents=True, exist_ok=True)
+                hour = time.strftime('%Y%m%d-%H')
+                with open(LOGS / f'{hour}.jsonl', 'a', encoding='utf-8') as f:
+                    f.write(''.join(json.dumps(line) + '\n' for line in lines))
+                with open(LOGS / f'{hour}.txt', 'a', encoding='utf-8') as f:
+                    f.write(readable(chars, scenario))
+            cutoff = time.time() - KEEP_HOURS * 3600
+            for old in list(LOGS.glob('*.jsonl')) + list(LOGS.glob('*.txt')):
+                if old.stat().st_mtime < cutoff:
+                    old.unlink()
+        except (OSError, ValueError):
+            pass
+        time.sleep(every)
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -159,9 +251,12 @@ tbody tr{cursor:pointer}
 <button class="tool" id="whole">Whole planet</button></div><div id="tip"></div></div>
 <aside><section><h2>On this planet</h2><table><tbody id="people"></tbody></table></section>
 <section><h2>Squads</h2><table><tbody id="squads"></tbody></table>
-<div class="small" style="margin-top:6px">Positions come from the server's player list (who.json); trails show where each one was at earlier updates.</div></section></aside></main>
+<div class="small" style="margin-top:6px">A bot's position comes from its own last report when that is fresher than the server's player list (who.json). Labels say what each bot is doing and for how long; trails show where it was.</div></section></aside></main>
 <script>
-const COLORS={Aurek:'#d1495b',Besh:'#2f9e44',Cresh:'#2f6fde',Dorn:'#8e5bd6',Esk:'#e07b00',Kael:'#0ca5a5'};
+const COLORS={Aurek:'#d1495b',Besh:'#2f9e44',Cresh:'#2f6fde',Dorn:'#8e5bd6',Esk:'#e07b00',Forn:'#c2185b',Kael:'#0ca5a5'};
+function says(c){return c.kind==='player'?'you':(c.doing||'idle')+(c.doing_s!=null?' · '+ago(c.doing_s):'')+(c.indoors?' · indoors':'')}
+function ago(s){return s<90?s+' s':s<5400?Math.round(s/60)+' min':Math.round(s/3600)+' h'}
+function clip(t,n){return t.length>n?t.slice(0,n-1)+'…':t}
 const cv=document.getElementById('map'),ctx=cv.getContext('2d'),tip=document.getElementById('tip');
 let data=null,zone=localGet('zone')||'tatooine',view=null,picked=null,drag=null,hits=[],fitted=false;
 function localGet(k){try{return localStorage.getItem('map.'+k)}catch(e){return null}}
@@ -192,16 +287,20 @@ function draw(){const r=cv.getBoundingClientRect(),d=devicePixelRatio||1;cv.widt
  spots.forEach(s=>{s.list.forEach((c,i)=>{const a=i*2.4,r0=s.list.length>1?Math.min(4+i*1.6,22)*d:0;const x=s.x+Math.cos(a)*r0,y=s.y+Math.sin(a)*r0;
    const rad=(c.kind==='player'?7:5)*d*(picked===c.name?1.5:1);ctx.fillStyle=color(c);ctx.beginPath();ctx.arc(x,y,rad,0,7);ctx.fill();
    ctx.strokeStyle=css('--panel');ctx.lineWidth=2*d;ctx.stroke();
-   hits.push({x,y,label:c.name+(c.group?' · '+c.group:' · you')+' ('+Math.round(c.x)+', '+Math.round(c.y)+')',name:c.name})});
-  const first=s.list[0],more=s.list.length-1;ctx.fillStyle=css('--ink');ctx.font=(first.kind==='player'?'600 ':'')+(12*d)+'px system-ui';
-  ctx.fillText(first.name+(more?' +'+more:''),s.x+(more?26:10)*d,s.y+4*d)})}
+   hits.push({x,y,label:c.name+(c.group?' · '+c.group:' · you')+': '+says(c)+' ('+Math.round(c.x)+', '+Math.round(c.y)+')',name:c.name})});
+  const shown=s.list.slice(0,6),lx=s.x+(s.list.length>1?28:10)*d,top=s.y+4*d-(shown.length-1)*7*d;
+  shown.forEach((c,i)=>{const y=top+i*14*d,text=c.name+(c.kind==='bot'?' — '+clip(c.doing||'idle',34):'');
+   ctx.font=(c.kind==='player'?'600 ':'')+(12*d)+'px system-ui';ctx.lineWidth=3*d;ctx.strokeStyle=css('--panel');ctx.strokeText(text,lx,y);
+   ctx.fillStyle=css('--ink');ctx.fillText(text,lx,y)});
+  if(s.list.length>shown.length){ctx.fillStyle=css('--muted');ctx.fillText('+'+(s.list.length-shown.length)+' more',lx,top+shown.length*14*d)}})}
 function render(){if(!data)return;if(!fitted&&here().length){fit(false);fitted=true}const zones={};data.chars.forEach(c=>zones[c.zone]=(zones[c.zone]||0)+1);
  if(!zones[zone]&&Object.keys(zones).length)zone=Object.keys(zones).sort((a,b)=>zones[b]-zones[a])[0];
  document.getElementById('tabs').innerHTML=Object.keys(zones).sort().map(z=>`<button class="${z===zone?'on':''}" data-z="${z}">${z} · ${zones[z]}</button>`).join('');
  const age=data.who_age==null?'?':data.who_age<90?data.who_age+' s':Math.round(data.who_age/60)+' min';
- document.getElementById('status').textContent=(data.error||`${data.chars.length} online · positions ${age} old · page ${data.time}`);
+ const live=data.chars.filter(c=>c.kind==='bot'&&c.pos_s!=null&&c.pos_s<10).length;
+ document.getElementById('status').textContent=(data.error||`${data.chars.length} online · ${live} bots live (under 10 s) · server list ${age} old · ${data.time}`);
  document.getElementById('people').innerHTML=here().sort((a,b)=>(a.kind>b.kind?-1:1)||a.name.localeCompare(b.name)).map(c=>
-  `<tr data-n="${c.name}" class="${picked===c.name?'pick':''}"><td><span class="dot" style="background:${color(c)}"></span>${c.name}</td><td class="small">${c.group||'you'}</td><td class="n">${Math.round(c.x)}, ${Math.round(c.y)}</td></tr>`).join('')||'<tr><td class="small">nobody</td></tr>';
+  `<tr data-n="${c.name}" class="${picked===c.name?'pick':''}"><td><span class="dot" style="background:${color(c)}"></span><b>${c.name}</b> <span class="small">${c.group||''}</span><div class="small">${esc(says(c))}</div></td><td class="n">${Math.round(c.x)}, ${Math.round(c.y)}<div>${c.pos_s!=null?ago(c.pos_s):''}</div></td></tr>`).join('')||'<tr><td class="small">nobody</td></tr>';
  document.getElementById('squads').innerHTML=data.activity.map(a=>`<tr><td><span class="dot" style="background:${COLORS[a.group]||css('--accent')}"></span>${a.group}</td>
   <td>${a.scenario.replace('.py','')}<div class="small">${a.state}${a.age<3600?' · '+Math.round(a.age/60)+' min ago':''}</div></td></tr>`).join('');
  draw()}
@@ -219,7 +318,8 @@ cv.addEventListener('pointermove',e=>{const d=devicePixelRatio||1,r=cv.getBoundi
  if(drag){const s=view.span/cv.width*d;view.cx=drag.cx-(e.clientX-drag.x)*s;view.cy=drag.cy+(e.clientY-drag.y)*s;draw();return}
  const px=(e.clientX-r.left)*d,py=(e.clientY-r.top)*d,h=hits.filter(h=>Math.hypot(h.x-px,h.y-py)<10*d).pop();
  if(h){tip.style.display='block';tip.textContent=h.label;tip.style.left=(e.clientX-r.left+12)+'px';tip.style.top=(e.clientY-r.top+12)+'px'}else tip.style.display='none'});
-addEventListener('resize',draw);poll();setInterval(poll,5000);
+function esc(t){return String(t).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]))}
+addEventListener('resize',draw);poll();setInterval(poll,1500);
 </script></body></html>
 '''
 
@@ -229,6 +329,7 @@ def main():
     parser.add_argument('--port', type=int, default=8765)
     args = parser.parse_args()
     load_roster()
+    threading.Thread(target=record, args=({},), daemon=True).start()
     server = ThreadingHTTPServer(('127.0.0.1', args.port), Handler)
     print(f'live map on http://localhost:{args.port} (who.json: {WHO})', flush=True)
     server.serve_forever()
