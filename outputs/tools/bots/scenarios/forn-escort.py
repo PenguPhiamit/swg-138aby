@@ -50,9 +50,10 @@ def run(g):
         g.leader.idle(15)
     if not g.check(f'{owner} is online', escort.who(owner), 'waited 15 minutes'):
         return
-    sent = escort.mail(g.leader, owner, 'Dungeon waypoints', DUNGEONS)
-    g.check(f'waypoints mailed to {owner}', sent and '"result":0' in str(sent.get('text', '')).replace(' ', ''),
-            (sent or {}).get('text'))
+    if os.environ.get('ESCORT_MAIL', '1') != '0':   # ESCORT_MAIL=0 when restarting the escort mid-session
+        sent = escort.mail(g.leader, owner, 'Dungeon waypoints', DUNGEONS)
+        g.check(f'waypoints mailed to {owner}', sent and '"result":0' in str(sent.get('text', '')).replace(' ', ''),
+                (sent or {}).get('text'))
     summary = escort.escort(g, owner, crew.ROLES, minutes, waypoints=DUNGEONS)
     g.check(f'the crew saw {owner}', summary['owner_seen'])
     g.note(f"escort: {summary['minutes']} min; orders {summary['orders']}; play data {summary['play_data']}")

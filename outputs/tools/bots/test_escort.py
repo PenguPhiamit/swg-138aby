@@ -33,9 +33,12 @@ class Bot:
         self.sent.append((name, target))
         return []
 
+    def wait_for(self, match, timeout=10):
+        return None
+
     def move(self, x, y, z=None, cell=None, timeout=90):
         self.moves.append((round(x), round(y)))
-        return {}
+        return dict(self.move_reply) if hasattr(self, 'move_reply') else {}
 
     def idle(self, seconds):
         time.sleep(.005)
@@ -120,6 +123,23 @@ class Escort(unittest.TestCase):
         self.assertIn('status', [verb for _, verb in summary['orders']])
         self.assertTrue(any(r['kind'] == 'combat' and r['on_player'] for r in rows))
         self.assertTrue(any(r['kind'] == 'player' and r['fighting'] for r in rows))
+
+
+    def test_a_bot_whose_walks_go_nowhere_jumps_to_the_player(self):
+        view = {OWNER: {'ok': True, 'x': 100.0, 'y': 140.0, 'z': 0.0, 'parent': 0,
+                        'creature': {'posture': 'upright', 'states': [], 'ham': {'health': 1000},
+                                     'max_ham': {'health': 1000}}}}
+        brask = Bot('Brask', 3, view)
+        brask.move_reply = {'arrived': False, 'x': 100.0, 'y': 90.0}   # where it already stands: pinned
+        with tempfile.TemporaryDirectory() as tmp:
+            escort.PLAY, real_who = Path(tmp), escort.who
+            escort.who = lambda owner: {'oid': OWNER, 'zone': 'tatooine', 'worldPositionX': 100, 'worldPositionY': 140}
+            try:
+                summary = escort.escort(Group([brask]), '[name removed]', {'Brask': {'weapon': 'polearm'}}, minutes=.004)
+            finally:
+                escort.who = real_who
+        self.assertTrue(summary['counts']['Brask']['unstuck'] >= 1)
+        self.assertIn('stuck: jumping to [name removed]', brask.labels)
 
 
 if __name__ == '__main__':

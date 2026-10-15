@@ -37,6 +37,15 @@ THREAT_SECONDS = 20    # how long "something hit us" stays a reason to fight
 OFFLINE_LIMIT = 300
 CATCHUP = 300          # out of sight and this far away (a speeder, a /teleport): jump to the player
 GOTO_PAUSE = 25        # seconds a zone change takes before the next jump may be tried
+STUCK_TRIES = 2        # follow walks that end where they began (outdoors) before the bot jumps to the player
+
+
+def walk_time(row, x, y):
+    """A move's timeout from the distance: about 4 m/s plus a margin. A flat 15 s cut long walks off and called them
+    stuck (owner, 15 Oct: "the crews pathing needs work")."""
+    if row.get('x') is None:
+        return 30
+    return min(60, max(8, math.hypot(x - row['x'], y - row['y']) / 4 + 5))
 FORMATION = [(3, 2), (-3, 2), (0, -4), (3, -4), (-3, -4), (5, 0), (-5, 0), (0, 5)]   # metres from the player
 ORDERS = ('follow', 'stay', 'attack', 'passive', 'heal', 'status', 'dismiss', 'waypoints')
 
@@ -121,9 +130,10 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
     slots = dict(zip([b.first for b in g.bots], formation or FORMATION))
     crew_oids = set()
     records = {b.first: crew_combat.new_record() for b in g.bots if b.first in roles}
-    counts = {b.first: {'fights': 0, 'follows': 0, 'orders': 0} for b in g.bots if b.first in roles}
+    counts = {b.first: {'fights': 0, 'follows': 0, 'orders': 0, 'unstuck': 0} for b in g.bots if b.first in roles}
     began, last_seen = time.time(), {'t': time.time()}
     jumped = {}            # first name -> time of the last /agentgear goto
+    stuck = {}             # first name -> follow walks in a row that went nowhere
     play, flushed = [], {'t': time.time(), 'snap': 0.0}
     play_file = PLAY / f"{time.strftime('%Y%m%d-%H%M')}-{g.name}-escort.jsonl"
 
@@ -206,16 +216,33 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
             if far:
                 bot.doing(f'following {owner}' + (' inside' if player['cell'] else ''))
                 if player['cell']:
-                    bot.move(spot[0], spot[1], player.get('z') or 0.0, player['cell'], timeout=15)
+                    reply = bot.move(spot[0], spot[1], player.get('z') or 0.0, player['cell'], timeout=walk_time(row, *spot) if same_frame else 30)
                 else:
-                    bot.move(spot[0], spot[1], timeout=15)
+                    reply = bot.move(spot[0], spot[1], timeout=walk_time(row, *spot))
                 counts[bot.first]['follows'] += 1
+                unstick(bot, row, reply, zone_row, outdoors=not player['cell'])
             else:
+                stuck[bot.first] = 0
                 bot.doing(f'with {owner}')
         elif zone_row:
             # Out of sight: walk toward who.json's world position (outdoors) on the same planet.
             bot.doing(f'catching up with {owner}')
-            bot.move(float(zone_row.get('worldPositionX', 0)) + dx, float(zone_row.get('worldPositionY', 0)) + dy, timeout=30)
+            x, y = float(zone_row.get('worldPositionX', 0)) + dx, float(zone_row.get('worldPositionY', 0)) + dy
+            unstick(bot, row, bot.move(x, y, timeout=walk_time(row, x, y)), zone_row, outdoors=True)
+
+    def unstick(bot, row, reply, zone_row, outdoors):
+        """Count follow walks that end where they began; after STUCK_TRIES, outdoors, jump next to the player. Outdoor
+        walks have no navmesh between towns, so trees and rocks can pin a bot (owner: "pathing needs work")."""
+        reply = reply if isinstance(reply, dict) else {}
+        moved = row.get('x') is None or not isinstance(reply.get('x'), (int, float)) or             math.hypot(reply['x'] - row['x'], reply['y'] - row['y']) > 1.0
+        stuck[bot.first] = 0 if reply.get('arrived') or moved else stuck.get(bot.first, 0) + 1
+        if stuck[bot.first] >= STUCK_TRIES and outdoors and zone_row:
+            stuck[bot.first] = 0
+            dx, dy = slots.get(bot.first, (0, -3))
+            bot.doing(f'stuck: jumping to {owner}')
+            counts[bot.first]['unstuck'] += 1
+            goto(bot, zone_row.get('zone'), float(zone_row.get('worldPositionX', 0)) + dx,
+                 float(zone_row.get('worldPositionY', 0)) + dy)
 
     def drain(bot):
         """Hear what arrived since the last tick. Must run before this tick's first request, which clears the inbox."""
@@ -246,7 +273,11 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
                 bot.doing(f'{owner} went offline: stopping')
                 break
             player = player_now(bot, zone_row.get('oid') if zone_row else None)
-            here = bot.now.get('zone')
+            here = row.get('zone') or bot.now.get('zone')
+            if not here:  # never walk blind: on 15 Oct the crew walked toward Endor coordinates on Tatooine
+                bot.doing('finding out which planet I am on')
+                bot.idle(TICK)
+                continue
             dx, dy = slots.get(bot.first, (0, -3))
             far = zone_row and not player and row.get('x') is not None and math.hypot(
                 float(zone_row.get('worldPositionX', 0)) - row['x'], float(zone_row.get('worldPositionY', 0)) - row['y']) > CATCHUP

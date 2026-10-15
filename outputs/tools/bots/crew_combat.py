@@ -131,7 +131,7 @@ def self_row(bot, rec=None):
     if rec is not None:
         rec['lowest_health'] = round(min(rec['lowest_health'], ratio), 2)
     return {'health': ratio, 'posture': me.get('me', {}).get('posture'), 'x': me.get('x'), 'y': me.get('y'),
-            'oid': me.get('self'), 'cell': me.get('cell') or 0}
+            'oid': me.get('self'), 'cell': me.get('cell') or 0, 'zone': me.get('planet')}
 
 
 def fight(g, target, roles, seconds=180):
