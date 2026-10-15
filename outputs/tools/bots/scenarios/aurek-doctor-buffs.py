@@ -2,6 +2,11 @@
 
 Never count command acknowledgements or unrelated/refusal messages as buffs.
 Medical-facility refusals identify the next prerequisite; no guessed cell IDs.
+
+Server rules (Agent/local-research/doctor-enhance-wounds/report.md, 15 Oct): ANY cell of the hospital gives the doctor
+its medical rating (no treatment room), so the bots walk to an object that is inside the building (in Mos Eisley the
+trainers stand in cell 9655496). healEnhance range is 7 m, and one ~20 s cooldown covers enhance and wound healing.
+Error 2 is either a missing ability or a refused posture/locomotion (INVALIDLOCOMOTION).
 """
 GROUP = 'Aurek'
 SQUARE = (3528, -4800)
@@ -22,19 +27,20 @@ def run(g):
         g.note('BLOCKED: no hospital mapped within 2 km; no buff attempted.')
         return
     hospital = hospitals[0]
-    # An outdoor building position cannot identify its treatment cell. Search interior occupants.
-    rooms = doctor.locate('medical', radius=100, x=hospital['x'], y=hospital['y'])
-    rooms += doctor.locate('healer', radius=100, x=hospital['x'], y=hospital['y'])
-    rooms += doctor.locate('hospital', radius=100, x=hospital['x'], y=hospital['y'])
-    rooms = [r for r in rooms if r.get('cell') and r.get('local')
-             and (r.get('building') == hospital.get('oid') or r.get('oid') == hospital.get('oid'))]
+    # Any object inside the building gives a real cell and a local position to walk to.
+    rooms = {}
+    for text in ('object/mobile', 'object/tangible'):
+        for r in doctor.locate(text, radius=40, x=hospital['x'], y=hospital['y']):
+            if r.get('cell') and r.get('local') and r.get('building') == hospital.get('oid'):
+                rooms[r['oid']] = r
+    rooms = list(rooms.values())
     if not rooms:
-        g.note('BLOCKED: hospital found but no interior treatment anchor; Claude should expose building cells/medical rating. No guessed cell.')
+        g.note('BLOCKED: hospital found but no object inside it to walk to (no cell known). No guessed cell.')
         return
     room = rooms[0]
     local = room['local']
-    trips = g.parallel(*[lambda b=b: b.walk(local['x'], local['y'], local['z'], room['cell'], tries=3)
-                         for b in (doctor,) + fighters])
+    trips = g.parallel(*[lambda b=b, i=i: b.walk(local['x'] + 1.0 + i, local['y'] + 1.0, local['z'], room['cell'], tries=3)
+                         for i, b in enumerate((doctor,) + fighters)])
     if not g.check('doctor and fighters enter mapped hospital cell',
                    all(isinstance(t, dict) and t.get('arrived') for t in trips), trips):
         return
@@ -66,8 +72,8 @@ def run(g):
                      if e.get('event') in ('system', 'command_failed')]
             failures = [e for e in events if e.get('event') == 'command_failed']
             if any(e.get('error') == 2 for e in failures):
-                g.note('BLOCKED: Tamsin lacks healEnhance; Claude should re-run setup Aurek '
-                       '(science_doctor_wound_02 is already listed in training)')
+                g.note('BLOCKED: healEnhance refused with error 2: Tamsin lacks the ability, or her posture or '
+                       'locomotion was refused (stand still and retry); science_doctor_wound_02 is in her training')
                 return
             after = fighter.status().get('me', {}).get('max_ham', {}).get(attribute)
             gained = isinstance(after, (int, float)) and after > initial
@@ -81,4 +87,6 @@ def run(g):
             if not gained and not failures:
                 g.note(f'{fighter.first} {attribute}: no max-HAM gain observed. Existing buff '
                        'refresh is unverified: body exposes no buff list/duration; do not infer success.')
-            doctor.idle(5)  # avoid overlapping heal cooldowns
+            # One ~20 s cooldown covers enhance and wound healing; it ends with healing_response_59.
+            if not doctor.wait_for(lambda e: 'healing_response_59' in str(e.get('text', '')), 25):
+                doctor.idle(2)
