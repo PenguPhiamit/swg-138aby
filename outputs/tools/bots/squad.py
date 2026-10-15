@@ -147,6 +147,15 @@ class Bot:
                 self.now.update(x=round(reply['x'], 1), y=round(reply['y'], 1), cell=0, pos_at=time.time())
             if reply.get('planet'):
                 self.now['zone'] = reply['planet']
+        if reply and isinstance(reply.get('me'), dict):   # status and fight replies: the dashboard's bars, target, credits
+            me = reply['me']
+            self.now.update(ham=me.get('ham'), max_ham=me.get('max_ham'), posture=me.get('posture'), level=me.get('level'),
+                            target=self.label_of(me['target']) if me.get('target') else None, vitals_at=time.time())
+            self.now.update({k: reply[k] for k in ('cash_credits', 'bank_credits') if k in reply})
+        if reply and reply.get('reply') == 'inventory' and isinstance(reply.get('items'), list):
+            self.now['items'] = [{'name': str(i.get('name', ''))[:60], 'worn': i.get('parent') == self.oid}
+                                 for i in reply['items'][:80]]
+            self.now['items_at'] = time.time()
         self.now['updated'] = time.time()
         try:
             NOW.mkdir(parents=True, exist_ok=True)

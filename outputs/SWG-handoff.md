@@ -269,6 +269,16 @@ ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fi
 
 ## Log
 
+### 2026-10-15 13:05 Claude: the bot tracker is now a fleet dashboard (http://localhost:8765)
+
+- The owner sent three screenshots of a WoW bot dashboard as the look they want. `tools/live_map.py` now has a sidebar and six pages:
+  - **Overview:** bots online, players, bots indoors, issues and squads.
+  - **Bots:** all 100 roster bots (groups.json plus the fleet test's load-groups.json). Search takes fields such as `planet:naboo prof:rifleman doing:stuck squad:forn role:healer`, with Online/Offline, state and profession chips. Click a bot to see species, professions, combat role, planet and area, what it is doing, health/action/mind bars, credits, target, gear, XP grants per hour, and an Activity tab (recent labels, refused commands, falls). "Show on map" centres the map on it.
+  - **Map:** each planet's own map image, decoded from the client's `ui_map_<planet>.dds` and cached in `/var/tmp/swg-bots/mapimg` (not in git). Planet tabs and area chips with counts, dots coloured by profession with a legend, a path-trails toggle, and "N bots indoors" linking to /floor.
+  - **Activity:** each squad's state and every change of a bot's label. **Issues:** stuck now, dead or incapacitated, refused commands (squad reports, last 24 h; escort play data). **Server:** uptime, who.json, and core3.log error lines with repeats folded and IPs removed.
+- Bars, credits and target need a small `tools/bots/squad.py` change (same commit): a bot now publishes them from its status and fight replies. Running squads pick it up on their next start; until then the panel says "not reported".
+- Labels, /floor, the tracker logs and the 1.5 s refresh are unchanged. All assets are inline (no CDN). Tests: `tools/test_live_map.py` 11/11. Tracker restarted 13:05 as a plain background process (log `/var/tmp/swg-bots/live_map.log`), not the `swg-live-map` unit. Nothing under /opt/swg was written.
+
 ### 2026-10-15 12:57 Claude: research: what 1,000+ bots would take (server-side bots)
 
 - `Documentation-support/server-side-bots.md` (`ef46438`), research only. WoW playerbots scale because each bot is an in-server player with no socket, and by default only about 10% are active. Our one-client-per-bot design tops out in the low hundreds (estimate; the fleet test is measuring it). Core3 already drops packets sent to a player with no client. The gaps are a client-less login, a driver, an active-bot budget and one unguarded `SuiPageData::sendTo`.
