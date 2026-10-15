@@ -101,6 +101,8 @@ Done means live and passing the gate, not "built on the test galaxy". The board 
 
 ## Phase 1: Prove the basics (in progress, mostly by bots)
 
+- [x] C39 independent dev review (15 Oct): [report](Documentation-support/review-C39.md), 1 P1 / 4 P2 / 2 P3; five source fixes on gpt/work, offline checks pass. Claude review/full build/in-game/persistence acceptance pending; no bots or restarts during review.
+
 - [x] C34r independent item-kit/affliction review (15 Oct): [report](Documentation-support/review-C34r.md), one P2 fixed in gpt/work `19cfb3a5` after dev merge `cb4e2b9e`; extracted-code regression passes. Claude review/build/in-game acceptance pending.
 
 - [x] C30 Ossus fauna source wiring (15 Oct): `6f25b704`, six reviewed creatures/six dynamic lairs/three groups/five habitat regions; 20 Lua syntax checks + stubbed loading pass. In dev as `80b66e65` and on the test galaxy since 15 Oct 01:40; its client names are in archive `8ad04fec`. A bot visit to each habitat is still pending.
