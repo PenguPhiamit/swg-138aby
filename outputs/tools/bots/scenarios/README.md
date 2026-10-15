@@ -79,6 +79,17 @@ Aurek is the world-boss crew. Aurek and Jesh are the fighters, trained so their 
 - **Name new files `<group>-<topic>.py`**, e.g. `aurek-loot.py`, so reports group by topic.
 - **Write facts.** Only PASS/FAIL and notes count. If something can't be tested because the body lacks a feature, write `g.note('BLOCKED: …')` and move on. Claude adds body features from those notes.
 
+## Class check (C33, 15 October)
+
+`class-check.py` grants a test bot one whole profession at a time (`Bot.profession`), tries each of that profession's abilities once and records which ones the server accepts. Plan: `Claude-class-check/test-plan.md`; results: `Documentation-support/class-check-results.md`. It always runs the P0 control first (a cleared bot must be refused `unarmedHit1` and `healDamage` with error 2; `stopDance` must still answer), then one profession per run:
+
+```
+CLASS_CHECK_PHASE=P1 CLASS_CHECK_PROFESSIONS=combat_marksman \
+  python3 squad.py run scenarios/class-check.py --group Aurek --rounds 1 --round-minutes 30 --no-fallback
+```
+
+`CLASS_CHECK_PHASE=P0` (default) runs only the controls. `CLASS_CHECK_TESTER` names the group member (default: the member who started as that profession, else the leader); `CLASS_CHECK_MINUTES` caps the slice (default and maximum 23). Verdicts: WORKS, RAN, NOT_GRANTED (error 2 after a verified grant, a FAIL), NO_EFFECT (a FAIL), BLOCKED (a note, never a FAIL). A BLOCKED result carries `gate_passed` when the command was sent and no error 2 came back: the server checks the ability first, so the profession holds it. Per-profession JSON goes to `Bot-reports/<Group>/class-check-<profession>.json`; at the end the tester is cleared and every member's starting boxes (`groups.json` training) are granted again. Attacks need live wildlife: the scenario walks to the sevorrt plateau and uses only passive animals (dwarf eopie, worrt, rill, eopie); the server's `locate` cannot see live spawns. Offline tests: `python -I tools/bots/test_class_check.py`.
+
 ## Fallback scheduling (C16, 14 October)
 
 Repeated `squad.py run` rounds now use `../fallback-plan.json`. After two consecutive all-PASS rounds, or the same FAIL/BLOCKED/ERROR twice, the group switches to the next available fallback. Empty-check scenarios count as blocked. Round timeouts count as repeated blockage; an owner halt never starts fallback work. The main scenario is retried after three fallback rounds or when its contents change. State is kept in `Bot-reports/runs/fallback-state.json`, independently per group.

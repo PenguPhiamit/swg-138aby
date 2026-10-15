@@ -6,6 +6,57 @@ Private, single-owner pre-CU galaxy (SWGEmu Core3 on WSL Debian). Last updated 1
 
 Shared ideas, purpose, maturity and effort: [SWG-feature-register.md](SWG-feature-register.md). References: [professions/gameplay](Documentation-support/SWG-professions-and-gameplay-reference.md), [Universal Modder](Documentation-support/universal-modder-reference-for-Claude.md).
 
+## Route for the first month (15 Oct – 11 Nov; Claude, 15 Oct, for the owner's OK)
+
+Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heavy lifting in the first month to shorten the whole project. (The app's usage card showed **Pro** on 15 Oct: Claude's weekly limit is the scarcest resource, so Claude does what only Claude can do, and everything else goes to the lanes that cost no Claude usage.) Three days in, making things is not what holds us back. **Closing them is**: about ten items wait on a Claude game check, about twenty owner questions are open, and nothing new is live (the live galaxy is stopped). So the order is:
+1. the things that make every later change cheap: a regression gate, a release train, pipelines;
+2. then volume: planets and species;
+3. then life: ambient NPCs and friends.
+
+**How the usage is spent (lanes that run side by side):**
+
+| Lane | Who | Does | Never waits on |
+|---|---|---|---|
+| 1. Integration | Claude main session (holds the server lock) | review → build → restart → bot acceptance → live release | research; offline staging |
+| 2. Staging | one Claude helper session, only while the weekly limit has room (on Max: always) | content data, tools and offline checks in h; first review of GPT's source before lane 1 takes it | the lock |
+| 3. Review and source | ChatGPT (relay) | cross-reviews (required for live), source fixes in `Core3-gpt`, offline tests | Claude's runtime |
+| 4. Bulk reading | local model (Ollama) | idle research on game mechanics, examine texts, string tables, sweeps | anyone (free) |
+| 5. Nights | the 30-minute cycle and bots | squad regression rounds; class-check slices: one profession per round on Aurek, so the whole profession matrix fills in over a few nights for no usage | — |
+| 6. Owner | you | one decision batch a day (about 15 minutes); one real-client session every 2–3 days from `Owner-test-list.md` | — |
+
+**Waste to cut first (usage that buys nothing):**
+- The board is 150 KB and both agents read all of it every session (the house rule says about 25 KB). Archive finished rows and old log entries to `SWG-handoff-archive.md`.
+- Park research tracks that feed nothing this month (owner's call): the Storyteller weapon, the Prophecy archive, the Darksaber trail, KOTOR authors and farming art. Keep their records; they come back as tracks.
+- Every owner question carries a default and a date ("Claude does X unless you object by …"), so a missing answer never stalls a lane.
+
+**Week 1, close the loops (to 21 Oct):**
+- Empty the integration queue:
+  - C34r (dev `90044b8e`) and the C30 Ossus fauna game check;
+  - runtime acceptance for C25, C26, C9, C16 and the C8 wrappers;
+  - C23 Hoth acceptance;
+  - the open leash and body findings (C4d, C4e, C4f).
+- **Regression gate:** one command after every restart (the squads, class check P0, Hoth/Ossus acceptance) gives one pass/fail report. The cycle runs it automatically. It is what makes every later change cheap.
+- **First live release:** the bot body and `/agentpath`, `/leash`, the world boss, and Hoth if the C24 gate turns GO. Cross-review plus the owner's OK, as a batch, then weekly.
+
+**Week 2, Ossus and Chiss playable; long-lead items started (to 28 Oct):**
+- Ossus: NPCs (C35), missions, resources, caves; the bots map it (B6) and it passes the gate.
+- Chiss: playable in the client.
+- Phase 1 baseline finished by bots: loot, trade, craft, housing (R4/R5).
+- **Asset converter, first static prop round trip (F86).** Needs owner question 7 (Blender, one CC0 pack, texconv). It is the longest-lead risk and unlocks all original art.
+- **Client patch distribution for friends.** Players need `local_planets.tre` for Hoth and Ossus. This is a release blocker for anyone but the owner.
+
+**Week 3, pipelines at scale (to 4 Nov):**
+- The third planet goes through the Hoth/Ossus playbook as a repeatable kit; the owner picks Kashyyyk or Mustafar. Measure it: it should take days, not a week.
+- Species 2 (Nautolan or Togruta).
+- Resources and crafting (C29) integrated; the resource board terminal.
+
+**Week 4, a galaxy that feels alive (to 11 Nov):**
+- Ambient adventurers v1 (B3).
+- Discord and the player bug inbox (C17, C27).
+- The first playtest with friends on live.
+
+Done means live and passing the gate, not "built on the test galaxy". The board keeps the daily detail; this section changes only when the route does.
+
 - [x] Farming reference and permission research checkpoint (14 Oct): [Minecraft, Skyrim and ARK comparison](Documentation-support/farming-system-UM-feasibility.md). F90 implementation remains proposed and untested.
 - [x] Farming art source shortlist (14 Oct): [Star Wars candidates and CC0 crop/prop fallbacks](Documentation-support/farming-open-art-shortlist.md). No assets downloaded/imported; individual provenance gates recorded.
 - [x] Unbranded farming art follow-up (14 Oct): [Functional gap/source matrix](Documentation-support/farming-unbranded-art-gap-fill.md); industrial frontier direction, remaining custom shell/machine/stage work identified. No imports or game validation.
@@ -52,9 +103,9 @@ Shared ideas, purpose, maturity and effort: [SWG-feature-register.md](SWG-featur
 
 - [x] C34r independent item-kit/affliction review (15 Oct): [report](Documentation-support/review-C34r.md), one P2 fixed in gpt/work `19cfb3a5` after dev merge `cb4e2b9e`; extracted-code regression passes. Claude review/build/in-game acceptance pending.
 
-- [x] C30 Ossus fauna source wiring (15 Oct): `6f25b704`, six reviewed creatures/six dynamic lairs/three groups/five habitat regions; 20 Lua syntax checks + stubbed loading pass. Claude review/build/in-game acceptance pending.
+- [x] C30 Ossus fauna source wiring (15 Oct): `6f25b704`, six reviewed creatures/six dynamic lairs/three groups/five habitat regions; 20 Lua syntax checks + stubbed loading pass. In dev as `80b66e65` and on the test galaxy since 15 Oct 01:40; its client names are in archive `8ad04fec`. A bot visit to each habitat is still pending.
 
-- [x] C32 profession kit source + bot wrappers (15 Oct): `4a340565`, after dev merge `220700d0`; 7 offline wrapper tests pass. Claude review/build and in-game acceptance pending; no runtime changes.
+- [x] C32 profession kit source + bot wrappers (15 Oct): `4a340565`, after dev merge `220700d0`; 7 offline wrapper tests pass. In dev and passed on the test galaxy (Claude, 15 Oct 01:40: grant, list, refusal, clear, 4/4).
 
 The checklist from [SWG-developer-baseline.md](SWG-developer-baseline.md):
 
