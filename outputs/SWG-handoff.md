@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C34r taken into dev; C24b read-only review complete). Bot driver: the 30-minute cycle (`gpt-relay-overnight`, squads from `Agent/squad-plan.txt`); Aurek driver: ChatGPT C33b (08:31), removed from squad plan; waiting for active rounds before commands. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy UP since 07:33 (dev 90044b8e = C34r, dev scripts; archive 8ad04fec on server and client). Live map on http://localhost:8765 (unit `swg-live-map`). - 2026-10-15 07:40**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt`. Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy restarted ~10:05 on dev `bb51ec97` (afflict restore, crew kits, who.json every 2 s) with the Forn crew accounts. Live map on http://localhost:8765 (unit `swg-live-map`) with labels. - 2026-10-15 10:05**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -58,7 +58,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
 | **C34r: independent item-kit and affliction review** | ChatGPT, High; Claude integrated | **in dev `90044b8e` and on the test galaxy (07:33); bot probe 41/41 DOTs land, no errors (07:36)** | Report `Documentation-support/review-C34r.md`; cure retest BLOCKED by staging (07:38: tester's inventory full, so no cure pack; allies out of view): C33 follow-up for GPT; gate denials and logout not re-run |
-| **C33b: cure staging + science_doctor rerun** | ChatGPT, Medium; finished by Claude | GPT ran out of usage at 08:59 (until 12:01) halfway; Claude took over 09:05: GPT's staging (inventory room from issued items only, gathering into one cell, mutual visibility, missing kit item = BLOCKED) passes 63 offline tests; doctor run on Aurek started 09:05 | `tools/bots/scenarios/class-check.py`; results in `Bot-reports/Aurek/class-check-science_doctor.json` |
+| **C33b: cure staging + science_doctor rerun** | ChatGPT, Medium; finished by Claude | **5 of 7 WORKS** (09:44): curePoison, extinguishFire, cureDisease, healEnhance, revivePlayer; registerWithLocation RAN; healState BLOCKED (dizzy pack not delivered, open) | `tools/bots/scenarios/class-check.py` (`090c1dd`, `8bb6e70`); results in `Bot-reports/Aurek/class-check-science_doctor.json` |
 | **C33: owner class check P0/P1** | ChatGPT, Medium; finished by Claude's Sonnet helper | scenario and 52 offline tests committed by Claude (07:4x); runs on Aurek since 04:3x: P0, brawler, marksman, scout, medic, rifleman, pistol, ranger, image designer | `tools/bots/scenarios/class-check.py`, `tools/bots/test_class_check.py`; results per profession in `Bot-reports/Aurek/class-check-*.json` |
 | **C24b: R2 idempotence + poolScaleZones re-review** | ChatGPT - GPT-6.1 Sol, **High** | complete 2026-10-15 08:06; R2-F1 resolved in source; release NO-GO | dev 98ad1d1d + 3a0b154f at 90044b8e; 16/16 offline checks, 74-row inventory; repeated-start/gameplay untested; no builds, restarts or bots |
 | **C30: six reviewed Ossus fauna + habitat spawns** | ChatGPT, Medium | in dev `80b66e65` (01:40) and on the test galaxy since then; names in archive `8ad04fec` | Six unchanged creatures, six dynamic lairs, three groups/five habitats; a bot visit to each habitat is still open |
@@ -260,6 +260,17 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-15 10:05 Claude: wounds fixed (afflict restore); Doctor 5/7 works; dungeon crew Forn; live labels on the tracker
+
+- **Why every Doctor ability was BLOCKED:** the bots carried wounds nothing on the test galaxy removes. Each clone adds 100 per pool (`PlayerManagerImplementation.cpp:1823`), afflict staging adds more, and regen stops at max minus wounds. Jesh had 499 mind wounds of 500. **`/agentgear afflict restore`** (dev `407db849`) clears wounds, shock, DOTs and states and fills HAM; all 18 bots were restored at 09:26, and class-check's `rest()` asks for it.
+- **Doctor (C33b), third run:** 5 WORKS (curePoison, extinguishFire, cureDisease, healEnhance +200 in the hospital, revivePlayer on a patient that really died), registerWithLocation RAN, healState BLOCKED (the dizzy pack still did not arrive; open). Setup added (`8bb6e70`): hospital cell for healEnhance/registerWithLocation, a dead patient for revive (third incapacitation), spare copies banked, never dropped. GPT's C33b work committed in `090c1dd`. 69 offline tests.
+- **Fixed-scenario round (09:38):** aurek-doctor-buffs **10/10** (it ran no checks before); besh-gather 14/16 (moisture and wind found no concentration); dorn-social 9/12 (Nima's /watch: no line of sight; the known leash miss); cresh-missions offered 36 missions but none it could take (open).
+- **Dungeon crew Forn** (owner: "give me a crew and we can test their combat more and their movement and mapping"; `64a83b8`, `b2a3206`): five bots on accounts forn1–5 with full 250-point templates from the server's skill table (Squad Leader/Rifleman, Fencer/Pikeman/Medic, Teras Kasi/Fencer/Medic, Commando/Rifleman, Doctor/Combat Medic). `tools/bots/crew_combat.py` fights with real special-attack rotations; the body's own fight reflex only sends the default attack in melee. New kits onehand/lance/knuckler (dev `0901664a`). Builds, dungeons and monster levels: `Documentation-support/dungeon-builds.md`. Round 1 (`forn-crew.py`) runs after the restart.
+- **Tracker** (owner: "relabel the tracker so i can read what everyone is doing ... closer to a live view"): every bot command writes what the bot is doing and its own position (`/var/tmp/swg-bots/now`); the map labels every marker and row, uses the fresher position, refreshes every 1.5 s; who.json every 2 s (dev `bb51ec97`). Readable snapshots in `Bot-reports/tracker/<hour>.txt` (48 h, not in git; bots only).
+- **Damage repaired:** at 08:55 a research agent's command overwrote `ActivateQuestCommand.h` in the dev tree with three lines of grep output; restored from git (a copy of the damaged file is in Claude's scratchpad).
+- **Valve research** saved in `Documentation-support/valve-open-source-assets.md`: Wine + DXVK runs our client (it is 32-bit Direct3D 9, not large-address-aware); Valve's wiki allows first-party assets in non-commercial fangames (low value for us).
+- Test galaxy restarted ~10:05 on dev `bb51ec97` with the crew accounts (owner offline). The cycle stays paused.
 
 ### 2026-10-15 09:10 Claude: 13 mechanics reports; scenario fixes from them; relay lanes; C33b taken over (GPT out of usage)
 
