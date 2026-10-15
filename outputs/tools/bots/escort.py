@@ -143,6 +143,15 @@ ACK = {'follow': 'Following.', 'stay': 'Holding here.', 'attack': 'Engaging your
                'waypoints, invite, dismiss.'}
 
 
+def walk_trail(bot, spot, timeout):
+    """Replay a player's cell-local floor, including zero/negative/upper-floor heights.
+    An unknown floor must not silently become z=0 in a multi-storey dungeon.
+    """
+    if spot.get('z') is None:
+        return {'ok': False, 'error': 'player trail height is unknown'}
+    return bot.move(spot['x'], spot['y'], spot['z'], spot['cell'], timeout=timeout)
+
+
 def goto(bot, planet, x, y):
     """Jump to a planet and spot (/agentgear goto, test galaxy bot accounts; the way an admin's /teleport works)."""
     bot.slash('agentGear', f'goto {planet} {x:.0f} {y:.0f}', wait=0)
@@ -265,8 +274,7 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
                 return
             bot.doing(f'following {owner} inside')
             same = (row.get('cell') or 0) == spot['cell']
-            bot.move(spot['x'], spot['y'], spot.get('z') or 0.0, spot['cell'],
-                     timeout=walk_time(row, spot['x'], spot['y']) if same else 30)
+            walk_trail(bot, spot, walk_time(row, spot['x'], spot['y']) if same else 30)
             counts[bot.first]['follows'] += 1
             return
         if player and player['x'] is not None:
@@ -276,7 +284,7 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
             if far:
                 bot.doing(f'following {owner}' + (' inside' if player['cell'] else ''))
                 if player['cell']:
-                    reply = bot.move(spot[0], spot[1], player.get('z') or 0.0, player['cell'], timeout=walk_time(row, *spot) if same_frame else 30)
+                    reply = walk_trail(bot, dict(player, x=spot[0], y=spot[1]), walk_time(row, *spot) if same_frame else 30)
                 else:
                     reply = bot.move(spot[0], spot[1], timeout=walk_time(row, *spot))
                 counts[bot.first]['follows'] += 1
@@ -319,7 +327,7 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
             bot.doing(f'going to {owner} to buff')
             crew_combat.stand_up(bot, row)
             if player['cell']:
-                bot.move(player['x'] + 1, player['y'], player.get('z') or 0.0, player['cell'], timeout=20)
+                walk_trail(bot, dict(player, x=player['x'] + 1), 20)
             else:
                 bot.move(player['x'] + 1.5, player['y'], timeout=walk_time(row, player['x'], player['y']))
             return True

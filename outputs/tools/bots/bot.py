@@ -9,6 +9,8 @@ Character creation is limited to one per account per hour (a test galaxy restart
   bot.py NAME start [--create race profession]  log in (optionally creating the character first)
   bot.py NAME send '<json>' [wait_s]            send one command, print @@AGENT lines that arrive
   bot.py NAME stop
+For raw move/path JSON, omit z outdoors to follow the current floor; supply cell-local z with a cell.
+To recover from a roof, plan then walk to clear ground beyond the roof edge (no z).
 NAME "kael" uses /opt/swg/agent/agent-account.json. Credentials are never printed.
 """
 import json, os, secrets, subprocess, sys, time

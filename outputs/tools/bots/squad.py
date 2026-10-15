@@ -384,12 +384,25 @@ class Bot:
         return None
 
     def move(self, x, y, z=None, cell=None, timeout=90):
+        """Walk a server path. Omitted outdoor z chooses the floor nearest our current height.
+        To leave a roof, walk to clear ground beyond its edge. Indoors supply local z and cell.
+        Explicit world z is forwarded as well; it must describe the destination floor.
+        """
         args = {'x': x, 'y': y, 'timeout': timeout}
         if z is not None:
             args['z'] = z
         if cell:
             args['cell'] = cell
         return self.request('move', timeout + 15, **args)
+
+    def path(self, x, y, z=None, cell=None, timeout=90):
+        """Plan without moving; use this to inspect floor heights before a roof recovery walk."""
+        args = {'x': x, 'y': y, 'timeout': timeout}
+        if z is not None:
+            args['z'] = z
+        if cell:
+            args['cell'] = cell
+        return self.request('path', timeout + 15, **args)
 
     def walk(self, x, y, z=None, cell=None, tries=3):
         """move, repeated while it times out but gets closer (one move is capped at 95 s). Returns the last reply
@@ -1055,7 +1068,7 @@ def main():
     elif command == 'galaxy':
         accounts = ['agent01'] + [m['account'] for g in load_spec()['groups'].values() for m in g['members']]
         value = 'AgentAccounts={' + ','.join(f'"{a}"' for a in accounts) + '}'
-        print('# As root inside Debian. Restoring wipes characters made after the newest backup; squad.py setup remakes them.')
+        print('# As root inside Debian. Start resumes the test copy. Only start --fresh restores a backup; squad.py setup remakes missing bots.')
         print(f'python3 {TEST_GALAXY} stop')
         print(f"python3 {TEST_GALAXY} start --dev-server --config '{value}' --config 'AgentGear=true'")
     elif command == 'setup':
