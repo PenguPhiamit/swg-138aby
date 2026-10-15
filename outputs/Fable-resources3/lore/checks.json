@@ -1,0 +1,151 @@
+{
+ "built": "2026-10-14",
+ "archive": "local_planets-lore.tre",
+ "sha256": "fbf62971bbbf2b65e613c7972e2a65ea78b98740d0fa39e26e1613beb97d95b1",
+ "bytes": 3785357,
+ "entries": 55,
+ "reference": {
+  "file": "local_planets-part2.tre",
+  "sha256_expected": "248092a2db7ddb1a2d90f2ca15bcd8ed1064c9757ec07d3362681550ed7dc98c",
+  "sha256_ok": true
+ },
+ "against_part2": {
+  "changed": [
+   "datatables/resource/resource_tree.iff"
+  ],
+  "new_entries": [],
+  "only_resource_tree_changed": true,
+  "chiss_entries_identical": true
+ },
+ "resource_tree": {
+  "rows_before": 843,
+  "rows_after": 845,
+  "added": [
+   "vegetable_fungi_lumni_hoth",
+   "crystalline_adegan_ossus"
+  ],
+  "added_detail": [
+   {
+    "enum": "crystalline_adegan_ossus",
+    "text": "Adegan Crystal Crystalline Gemstone",
+    "after": "crystalline_ossus_2",
+    "cloned_from": "crystalline_vertex",
+    "rule": "part-2",
+    "pools": [
+     1,
+     1
+    ],
+    "types": [
+     1,
+     2
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      850,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      850,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      951,
+      1000
+     ],
+     [
+      "res_malleability",
+      350,
+      400
+     ],
+     [
+      "res_toughness",
+      900,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      900,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      950,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "vegetable_fungi_lumni_hoth",
+    "text": "Lumni Lichen Fungus",
+    "after": "vegetable_fungi_hoth",
+    "cloned_from": "vegetable_fungi_hoth",
+    "rule": "variant {'res_quality': 500, 'res_flavor': 700, 'res_potential_energy': 500}",
+    "pools": [
+     1,
+     1
+    ],
+    "types": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      1,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_flavor",
+      700,
+      1000
+     ],
+     [
+      "res_potential_energy",
+      500,
+      1000
+     ]
+    ]
+   }
+  ],
+  "ancestor_counts_bumped": [
+   "resource",
+   "organic",
+   "flora_resources",
+   "flora_food",
+   "seeds",
+   "vegetable",
+   "vegetable_fungi",
+   "inorganic",
+   "mineral",
+   "gemstone",
+   "gemstone_crystalline"
+  ],
+  "other_cell_changes": [],
+  "stock_order_kept": true,
+  "zone_substrings": {
+   "vegetable_fungi_lumni_hoth": [
+    false,
+    true
+   ],
+   "crystalline_adegan_ossus": [
+    true,
+    false
+   ]
+  },
+  "idempotent": true
+ },
+ "ok": true
+}

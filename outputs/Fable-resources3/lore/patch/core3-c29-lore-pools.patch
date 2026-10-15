@@ -1,0 +1,15 @@
+--- a/MMOCoreORB/bin/scripts/managers/resource_manager.lua
++++ b/MMOCoreORB/bin/scripts/managers/resource_manager.lua
+@@ -141,6 +141,12 @@
+ 		"petrochem_fuel_liquid_ossus", "petrochem_fuel_solid_ossus", "radioactive_ossus", "armophous_ossus_1", "armophous_ossus_2", "crystalline_ossus_1", "crystalline_ossus_2"}) do
+ 	table.insert(minimumpoolincludes, {ossusType, 1})
+ end
++-- C29 (Fable, 14 Oct 2026): two Legends materials in the merged resource_tree.iff of the test-session local_planets.tre
++-- (stage_lore_materials): the Adegan crystal gem on Ossus and the lumni lichen fungus on Hoth; one of each always in spawn,
++-- on its own planet only (the _ossus / _hoth substring is the zone restriction).
++for _, loreType in ipairs({"crystalline_adegan_ossus", "vegetable_fungi_lumni_hoth"}) do
++	table.insert(minimumpoolincludes, {loreType, 1})
++end
+ 
+ -- The random pool includes is a table of resources and weights. The higher the weight, the more likely the resource is to be chosen when a random pool resource shifts.
+   -- The random pool will never include the items in the excludes
