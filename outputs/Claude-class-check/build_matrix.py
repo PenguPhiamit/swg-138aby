@@ -1396,6 +1396,9 @@ KIT_PROPOSALS = OrderedDict([
     ('item:revive_pack', ('medicine2', ['object/tangible/medicine/crafted/medpack_revive.iff'])),
     ('item:medicine', ('medicine2', ['object/tangible/medicine/crafted/crafted_stimpack_sm_s1_a.iff'])),
 ])
+# Kits /agentgear has had since dev 60ed8971 (15 Oct): their tags count as ready, and entry['kits'] names the kits the
+# scenario asks for. Unarmed (unequipping) is not a kit and stays needs_new_kit.
+KITS_BUILT = {'carbine', 'polearm', 'twohand', 'heavy', 'saber1h', 'saber2h', 'saberpole', 'medicine2', 'instruments'}
 
 
 def assess_readiness(entries, costs):
@@ -1419,7 +1422,10 @@ def assess_readiness(entries, costs):
             status = 'blocked_world'
             missing += sorted(tags & WORLD_BLOCK_TAGS)
         else:
-            newkit = [t for t in tags if t in KIT_PROPOSALS or (t.startswith('item:instrument:') and t != 'item:instrument:slitherhorn')]
+            kitted = [t for t in tags if t in KIT_PROPOSALS or (t.startswith('item:instrument:') and t != 'item:instrument:slitherhorn')]
+            kit_of = {t: KIT_PROPOSALS.get(t, ('instruments', []))[0] for t in kitted}
+            e['kits'] = sorted({kit_of[t] for t in kitted if kit_of[t] in KITS_BUILT})
+            newkit = [t for t in kitted if kit_of[t] not in KITS_BUILT]
             if newkit:
                 status = 'needs_new_kit'
                 missing += sorted(newkit)

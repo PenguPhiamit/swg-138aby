@@ -1,9 +1,7 @@
 # Pre-CU class check: profession / ability matrix
 
-Generated 2026-10-15 02:05:49 by `outputs/Claude-class-check/build_matrix.py` (re-run it after any server or table change).
-Source: Core3-dev `80b66e65 2026-10-15 Wire six reviewed Ossus fauna into habitat encounters dev`. Data tables resolved by: server TreFiles order from bin/conf/config.lua. Archives: `skills.iff` from patch_14_00.tre; `command_table.iff` from patch_14_00.tre; `command_table_ground.iff` from patch_12_00.tre; `command_table_space.iff` from patch_11_03.tre; `skl_n.stf` from patch_12_00.tre; `cmd_n.stf` from patch_14_00.tre.
-
-**The live client resolves some of these files differently** (`skills.iff from local_planets.tre, skl_n.stf from local_planets.tre`). Rows that exist only in the client's winning archive are NOT in this matrix: skills: outdoors_botanist, outdoors_botanist_novice, species_chiss. The server does not list that archive in config.lua; if config-local.lua adds it (not read), the server has those rows too.
+Generated 2026-10-15 04:32:30 by `outputs/Claude-class-check/build_matrix.py` (re-run it after any server or table change).
+Source: Core3-dev `60ed8971 2026-10-15 Agent gear: item kits for the class check (C34, done by Claude while ChatGPT is out of usage) dev`. Data tables resolved by: server TreFiles order from bin/conf/config.lua. Archives: `skills.iff` from patch_14_00.tre; `command_table.iff` from patch_14_00.tre; `command_table_ground.iff` from patch_12_00.tre; `command_table_space.iff` from patch_11_03.tre; `skl_n.stf` from patch_12_00.tre; `cmd_n.stf` from patch_14_00.tre.
 
 ## Totals
 
@@ -319,32 +317,32 @@ Each run: `/agentgear profession clear`, grant the profession (it also grants bo
 
 | step | phase | profession | grant | tries | excl | ready / staging / new kit / blocked |
 |---|---|---|---|---|---|---|
-| 1 | P1 | combat_marksman | /agentgear profession combat_marksman | 25 | 25 | 21 / 0 / 4 / 0 |
-| 2 | P1 | combat_brawler | /agentgear profession combat_brawler | 32 | 32 | 14 / 0 / 18 / 0 |
+| 1 | P1 | combat_marksman | /agentgear profession combat_marksman | 25 | 25 | 25 / 0 / 0 / 0 |
+| 2 | P1 | combat_brawler | /agentgear profession combat_brawler | 32 | 32 | 26 / 0 / 6 / 0 |
 | 3 | P1 | outdoors_scout | /agentgear profession outdoors_scout | 3 | 3 | 2 / 1 / 0 / 0 |
-| 4 | P1 | science_medic | /agentgear profession science_medic | 9 | 9 | 5 / 2 / 2 / 0 |
-| 5 | P1 | social_entertainer | /agentgear profession social_entertainer | 31 | 31 | 27 / 0 / 4 / 0 |
+| 4 | P1 | science_medic | /agentgear profession science_medic | 9 | 9 | 5 / 4 / 0 / 0 |
+| 5 | P1 | social_entertainer | /agentgear profession social_entertainer | 31 | 31 | 31 / 0 / 0 / 0 |
 | 6 | P1 | crafting_artisan | /agentgear profession crafting_artisan | 3 | 3 | 1 / 1 / 0 / 1 |
 | 7 | P2 | combat_rifleman | /agentgear profession combat_rifleman | 13 | 13 | 13 / 0 / 0 / 0 |
 | 8 | P2 | combat_pistol | /agentgear profession combat_pistol | 12 | 12 | 12 / 0 / 0 / 0 |
 | 9 | P2 | combat_1hsword | /agentgear profession combat_1hsword | 12 | 12 | 12 / 0 / 0 / 0 |
 | 10 | P2 | social_dancer | /agentgear profession social_dancer | 20 | 20 | 19 / 1 / 0 / 0 |
-| 11 | P2 | social_musician | /agentgear profession social_musician | 17 | 17 | 11 / 1 / 5 / 0 |
+| 11 | P2 | social_musician | /agentgear profession social_musician | 17 | 17 | 16 / 1 / 0 / 0 |
 | 12 | P2 | outdoors_ranger | /agentgear profession outdoors_ranger | 3 | 3 | 3 / 0 / 0 / 0 |
-| 13 | P2 | science_doctor | /agentgear profession science_doctor | 7 | 7 | 1 / 1 / 5 / 0 |
+| 13 | P2 | science_doctor | /agentgear profession science_doctor | 7 | 7 | 1 / 6 / 0 / 0 |
 | 14 | P2 | outdoors_squadleader | /agentgear profession outdoors_squadleader | 7 | 7 | 7 / 0 / 0 / 0 |
 | 15 | P2 | combat_smuggler | /agentgear profession combat_smuggler | 4 | 4 | 4 / 0 / 0 / 0 |
 | 16 | P2 | outdoors_bio_engineer | /agentgear profession outdoors_bio_engineer | 1 | 1 | 1 / 0 / 0 / 0 |
 | 17 | P2 | outdoors_creaturehandler | /agentgear profession outdoors_creaturehandler | 3 | 3 | 1 / 0 / 0 / 2 |
 | 18 | P2 | social_imagedesigner | /agentgear profession social_imagedesigner | 0 | 0 | 0 / 0 / 0 / 0 |
 | 19 | P2 | social_politician | /agentgear profession social_politician | 3 | 3 | 0 / 0 / 0 / 3 |
-| 20 | P3 | combat_carbine | /agentgear profession combat_carbine | 15 | 15 | 0 / 0 / 15 / 0 |
-| 21 | P3 | combat_2hsword | /agentgear profession combat_2hsword | 11 | 11 | 0 / 0 / 11 / 0 |
-| 22 | P3 | combat_polearm | /agentgear profession combat_polearm | 12 | 12 | 0 / 0 / 12 / 0 |
+| 20 | P3 | combat_carbine | /agentgear profession combat_carbine | 15 | 15 | 15 / 0 / 0 / 0 |
+| 21 | P3 | combat_2hsword | /agentgear profession combat_2hsword | 11 | 11 | 11 / 0 / 0 / 0 |
+| 22 | P3 | combat_polearm | /agentgear profession combat_polearm | 12 | 12 | 12 / 0 / 0 / 0 |
 | 23 | P3 | combat_unarmed | /agentgear profession combat_unarmed | 14 | 14 | 2 / 1 / 11 / 0 |
-| 24 | P3 | combat_commando | /agentgear profession combat_commando | 8 | 8 | 0 / 0 / 8 / 0 |
-| 25 | P3 | combat_bountyhunter | /agentgear profession combat_bountyhunter | 12 | 12 | 4 / 0 / 8 / 0 |
-| 26 | P3 | science_combatmedic | /agentgear profession science_combatmedic | 3 | 3 | 1 / 0 / 2 / 0 |
+| 24 | P3 | combat_commando | /agentgear profession combat_commando | 8 | 8 | 8 / 0 / 0 / 0 |
+| 25 | P3 | combat_bountyhunter | /agentgear profession combat_bountyhunter | 12 | 12 | 12 / 0 / 0 / 0 |
+| 26 | P3 | science_combatmedic | /agentgear profession science_combatmedic | 3 | 3 | 3 / 0 / 0 / 0 |
 | 27 | P4 | crafting_armorsmith | /agentgear profession crafting_armorsmith | 0 | 0 | 0 / 0 / 0 / 0 |
 | 28 | P4 | crafting_weaponsmith | /agentgear profession crafting_weaponsmith | 0 | 0 | 0 / 0 / 0 / 0 |
 | 29 | P4 | crafting_chef | /agentgear profession crafting_chef | 0 | 0 | 0 / 0 / 0 / 0 |
@@ -353,11 +351,11 @@ Each run: `/agentgear profession clear`, grant the profession (it also grants bo
 | 32 | P4 | crafting_droidengineer | /agentgear profession crafting_droidengineer | 0 | 0 | 0 / 0 / 0 / 0 |
 | 33 | P4 | crafting_merchant | /agentgear profession crafting_merchant | 0 | 0 | 0 / 0 / 0 / 0 |
 | 34 | P4 | crafting_shipwright | /agentgear profession crafting_shipwright | 0 | 0 | 0 / 0 / 0 / 0 |
-| 35 | P5 | jedi_padawan | /agentskill jedi_padawan_master | 24 | 24 | 9 / 6 / 9 / 0 |
-| 36 | P5 | jedi_light_side_journeyman | /agentskill jedi_light_side_journeyman_master | 33 | 33 | 15 / 8 / 10 / 0 |
-| 37 | P5 | jedi_light_side_master | /agentskill jedi_light_side_master_master | 21 | 21 | 6 / 8 / 7 / 0 |
-| 38 | P5 | jedi_dark_side_journeyman | /agentskill jedi_dark_side_journeyman_master | 29 | 29 | 11 / 8 / 10 / 0 |
-| 39 | P5 | jedi_dark_side_master | /agentskill jedi_dark_side_master_master | 25 | 25 | 10 / 8 / 7 / 0 |
+| 35 | P5 | jedi_padawan | /agentskill jedi_padawan_master | 24 | 24 | 18 / 6 / 0 / 0 |
+| 36 | P5 | jedi_light_side_journeyman | /agentskill jedi_light_side_journeyman_master | 33 | 33 | 25 / 8 / 0 / 0 |
+| 37 | P5 | jedi_light_side_master | /agentskill jedi_light_side_master_master | 21 | 21 | 13 / 8 / 0 / 0 |
+| 38 | P5 | jedi_dark_side_journeyman | /agentskill jedi_dark_side_journeyman_master | 29 | 29 | 21 / 8 / 0 / 0 |
+| 39 | P5 | jedi_dark_side_master | /agentskill jedi_dark_side_master_master | 25 | 25 | 17 / 8 / 0 / 0 |
 | 40 | P5 | force_sensitive_combat_prowess | blocked (force_sensitive_combat_prowess_master needs Jedi state 1) | 0 | 0 | 0 / 0 / 0 / 0 |
 | 41 | P5 | force_sensitive_enhanced_reflexes | blocked (force_sensitive_enhanced_reflexes_master needs Jedi state 1) | 0 | 0 | 0 / 0 / 0 / 0 |
 | 42 | P5 | force_sensitive_crafting_mastery | blocked (force_sensitive_crafting_mastery_assembly_01 needs Jedi state 1) | 0 | 0 | 0 / 0 / 0 / 0 |
@@ -383,29 +381,20 @@ Phases: P1 starters; P2 elites whose weapons and items exist today; P3 elites th
 | test kind | ready | needs_staging | needs_new_kit | blocked_world | blocked_jedi | blocked_space | n/a_passive |
 |---|---|---|---|---|---|---|---|
 | self | 33 | 11 | 0 | 2 | 19 | 0 | 0 |
-| attack | 90 | 1 | 115 | 0 | 16 | 0 | 0 |
-| heal_other | 6 | 12 | 7 | 0 | 0 | 0 | 0 |
+| attack | 188 | 1 | 17 | 0 | 16 | 0 | 0 |
+| heal_other | 6 | 19 | 0 | 0 | 0 | 0 | 0 |
 | target_friendly | 3 | 1 | 0 | 1 | 1 | 0 | 0 |
-| item | 2 | 2 | 9 | 3 | 0 | 0 | 0 |
+| item | 11 | 2 | 0 | 3 | 0 | 0 | 0 |
 | crafting | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | performance | 53 | 0 | 0 | 0 | 0 | 0 | 0 |
 | passive | 0 | 0 | 0 | 0 | 0 | 0 | 507 |
 | unknown | 0 | 0 | 0 | 0 | 0 | 22 | 0 |
-| total | 187 | 27 | 131 | 6 | 36 | 22 | 507 |
+| total | 294 | 34 | 17 | 6 | 36 | 22 | 507 |
 
 Kits the scenario needs that `/agentgear` does not have (proposed names; templates are candidates and not tried):
 
 | proposed kit | candidate templates | abilities it unlocks | which (first 12) |
 |---|---|---|---|
-| carbine | object/weapon/ranged/carbine/carbine_cdef.iff | 23 | actionShot1, actionShot2, burstShot1, burstShot2, chargeShot1, chargeShot2, confusionShot, cripplingShot, fullAutoArea1, fullAutoArea2, fullAutoSingle1, fullAutoSingle2 |
-| medicine2 | object/tangible/medicine/crafted/medpack_poison_health_a.iff<br>object/tangible/medicine/crafted/medpack_disease_health_a.iff | 9 | applyDisease, applyPoison, cureDisease, curePoison, extinguishFire, firstAid, healState, healWound, revivePlayer |
-| instruments | object/tangible/instrument/bandfill.iff<br>object/tangible/instrument/fanfar.iff<br>object/tangible/instrument/fizz.iff<br>object/tangible/instrument/flute_droopy.iff<br>object/tangible/instrument/kloo_horn.iff<br>object/tangible/instrument/mandoviol.iff<br>object/tangible/instrument/nalargon.iff<br>object/tangible/instrument/ommni_box.iff<br>object/tangible/instrument/traz.iff | 9 | bandfill, fanfar, fizz, flutedroopy, kloohorn, mandoviol, nalargon, omnibox, traz |
-| heavy | object/weapon/ranged/heavy/heavy_acid_beam.iff<br>object/weapon/ranged/heavy/heavy_lightning_beam.iff<br>object/weapon/ranged/heavy/heavy_particle_beam.iff | 12 | fireAcidCone1, fireAcidCone2, fireAcidSingle1, fireAcidSingle2, fireLightningCone1, fireLightningCone2, fireLightningSingle1, fireLightningSingle2, flameCone1, flameCone2, flameSingle1, flameSingle2 |
-| twohand | object/weapon/melee/axe/axe_heavy_duty.iff | 17 | melee2hArea1, melee2hArea2, melee2hArea3, melee2hHeadHit1, melee2hHeadHit2, melee2hHeadHit3, melee2hHit1, melee2hHit2, melee2hHit3, melee2hLunge1, melee2hLunge2, melee2hMindHit1 |
-| polearm | object/weapon/melee/polearm/lance_staff_wood_s1.iff | 18 | polearmActionHit1, polearmActionHit2, polearmArea1, polearmArea2, polearmHit1, polearmHit2, polearmHit3, polearmLegHit1, polearmLegHit2, polearmLegHit3, polearmLunge1, polearmLunge2 |
-| saber1h | a 1h lightsaber template (see weapon table) | 11 | saber1hComboHit1, saber1hComboHit2, saber1hFlurry, saber1hHeadHit1, saber1hHeadHit2, saber1hHit1, saber1hHit2, saberSlash1, saberSlash2, saberThrow1, saberThrow2 |
-| saber2h | a 2h lightsaber template (see weapon table) | 8 | saber2hBodyHit1, saber2hBodyHit2, saber2hFrenzy, saber2hHit1, saber2hHit2, saber2hHit3, saber2hSweep1, saber2hSweep2 |
-| saberpole | a polearm lightsaber template (see weapon table) | 7 | saberPolearmDervish, saberPolearmHit1, saberPolearmHit2, saberPolearmLegHit1, saberPolearmLegHit2, saberPolearmSpinAttack1, saberPolearmSpinAttack2 |
 | unarmed | (no weapon: unequip the current one with transferItemWeapon) | 17 | unarmedBlind1, unarmedBodyHit1, unarmedCombo1, unarmedCombo2, unarmedDizzy1, unarmedHeadHit1, unarmedHit1, unarmedHit2, unarmedHit3, unarmedKnockdown1, unarmedKnockdown2, unarmedLegHit1 |
 
 ## Weapon classes and candidate templates
@@ -461,13 +450,13 @@ Class comes from the template's `xpType`; candidates must also have a `shared_` 
 | bot body: posture/combat state events | src/client/agent/AgentControl.cpp | 668 |
 | /agentskill: grants boxes and prerequisites, 16 per call | src/server/zone/objects/creature/commands/AgentSkillCommand.h | 59 |
 | /agentskill: answer prefix | src/server/zone/objects/creature/commands/AgentSkillCommand.h | 79 |
-| /agentgear: the only item kits | src/server/zone/objects/creature/commands/AgentGearCommand.h | 178 |
-| /agentgear profession <name>: whole profession, no point limit | src/server/zone/objects/creature/commands/AgentGearCommand.h | 172 |
-| /agentgear profession: refused for god-only or non-profession rows | src/server/zone/objects/creature/commands/AgentGearCommand.h | 117 |
-| /agentgear profession clear (unlearn all) | src/server/zone/objects/creature/commands/AgentGearCommand.h | 104 |
-| /agentgear profession: answer carries granted/failed/skills | src/server/zone/objects/creature/commands/AgentGearCommand.h | 141 |
+| /agentgear: the only item kits | src/server/zone/objects/creature/commands/AgentGearCommand.h | 262 |
+| /agentgear profession <name>: whole profession, no point limit | src/server/zone/objects/creature/commands/AgentGearCommand.h | 252 |
+| /agentgear profession: refused for god-only or non-profession rows | src/server/zone/objects/creature/commands/AgentGearCommand.h | 186 |
+| /agentgear profession clear (unlearn all) | src/server/zone/objects/creature/commands/AgentGearCommand.h | 173 |
+| /agentgear profession: answer carries granted/failed/skills | src/server/zone/objects/creature/commands/AgentGearCommand.h | 210 |
 | squad.py gear(): skipped when armor is already carried | outputs/tools/bots/squad.py | 396 |
-| /agentgear: support kit (medic packs, camps, instrument) | src/server/zone/objects/creature/commands/AgentGearCommand.h | 210 |
+| /agentgear: support kit (medic packs, camps, instrument) | src/server/zone/objects/creature/commands/AgentGearCommand.h | 104 |
 | skill point cap | src/server/zone/managers/skill/SkillManager.cpp | 428 |
 | Jedi state gate for boxes | src/server/zone/managers/skill/SkillManager.cpp | 940 |
 | force_* boxes go through the Jedi manager | src/server/zone/managers/skill/SkillManager.cpp | 948 |
