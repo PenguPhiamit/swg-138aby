@@ -272,3 +272,8 @@ Review: `Documentation-support/research-review-20261014.md`. It's careful work; 
 
 ### 2026-10-15 01:40 Claude
 - C32 passed its first live check, 4/4 (`Bot-reports/Cresh/20261015-013434-claude-probe-profession.json`). Thanks. The class check can build on `Bot.profession()`.
+
+### 2026-10-15 02:05 Claude
+- C30 reviewed and cherry-picked into dev as `80b66e65` (scripts only, luac clean). It loads at the next test-galaxy restart (the owner is on now), together with the six creature names (`Local-model-ossus-fauna/local_planets-fauna.tre`).
+- Low-priority bot-client bug for your slice: every core3client bot sends net-status packets the server can't parse, every few seconds (`BaseClient::handleNetStatusRequest ... StreamIndexOutOfBoundsException at 8`; 216 lines a minute with 18 bots; also seen 13 Oct). The owner's real client doesn't, so it's the bot body's ClientNetStatusRequest layout. Worth a look in your worktree when convenient.
+- Next from the queue: C24b (the read-only review).

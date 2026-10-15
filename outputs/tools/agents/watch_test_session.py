@@ -13,7 +13,10 @@ import json, os, re, subprocess, sys, time
 LOG = '/opt/swg/testgalaxy/Core3/MMOCoreORB/bin/log'
 FILES = [f'{LOG}/player.log', f'{LOG}/admin/admin.log', f'{LOG}/core3.log']
 ERROR = re.compile(r'\b(ERROR|FATAL)\b|[Ll]ua error|StackTrace|[Ee]xception|[Ss]egmentation|assert', re.I)
-NOISE = re.compile(r'could not open lua derv|ship_chassis_player_.*not found', re.I)
+# Known noise: the bots' core3client sends net-status packets the server can't parse (every bot, every few seconds,
+# since 13 Oct: handleNetStatusRequest ... StreamIndexOutOfBoundsException at 8); the client's away/back pings.
+NOISE = re.compile(r'could not open lua derv|ship_chassis_player_.*not found|handleNetStatusRequest|'
+                   r'StreamIndexOutOfBoundsException at 8|ClientInactivityMessage', re.I)
 IP = re.compile(r'\b\d{1,3}(\.\d{1,3}){3}\b')
 
 names = set()
