@@ -8,6 +8,11 @@
   relog_keeps(g, bot)             log out and back in; is every item (resource containers too) still there?
 
 Missing skills show up as BLOCKED notes ("missing ability"): train the skill, then run again.
+
+Server rules (Agent/local-research/survey-sample/report.md, 15 Oct): the organic survey tool has toolType 0 on this
+server and can never list anything (flora needs the lumber tool), so it is skipped. A tool lists only spawns of its
+class that are in shift on this planet: an empty list for gas, moisture, wind or solar is server state, not a fault.
+"liquid" is the chemical tool. A survey costs about 100 mind, and running low gives survey_mind (no results).
 """
 import json
 
@@ -78,7 +83,18 @@ def harvest(g, bot, corpse, kind='meat'):
     return check_receipt(g, f'{bot.first} harvests {kind}', before, bot.inventory())
 
 
+ALWAYS_SPAWNED = ('mineral', 'liquid')  # ore and chemical spawns are always in shift; other classes come and go
+SURVEY_MIND = 110                          # a survey costs 100 - focus/15 mind
+
+
+def mind(bot):
+    return ((bot.status().get('me') or {}).get('ham') or {}).get('mind')
+
+
 def survey_and_sample(g, bot, kind):
+    if kind == 'organic':
+        g.note(f'{bot.first}: organic survey tool skipped (toolType 0 on this server; it lists nothing)')
+        return None
     tool = next((i for i in bot.inventory().get('items', []) if f'survey_tool_{kind}' in str(i.get('name'))), None)
     if tool is None:
         return None
@@ -90,16 +106,30 @@ def survey_and_sample(g, bot, kind):
             bot.sui_respond(pages[-1]['page_id'], 0, ['0'], wait=2)
             bot.select(tool['oid'], 20, wait=0)
             found = bot.wait_for('"survey_resources"', 10)
-    names = [r['name'] for r in (found or {}).get('resources', [])]
+    if not found:
+        g.note(f'BLOCKED: {bot.first} {kind} survey: no resource list arrived (range pop-up not answered?)')
+        return None
+    names = [r['name'] for r in found.get('resources', [])]
+    if not names and kind not in ALWAYS_SPAWNED:
+        g.note(f'{bot.first} {kind} survey: empty list, no {kind} spawn in shift on this planet now (server state)')
+        return None
     if not g.check(f'{bot.first} {kind} survey lists resources', names, names[:6]):
         return None
-    best = (None, 0)
+    best, tired = (None, 0), False
     for name in names[:5]:
+        left = mind(bot)
+        if isinstance(left, int) and left < SURVEY_MIND:
+            g.note(f'{bot.first} {kind}: mind {left} too low for another survey; stopped after the ones done')
+            tired = True
+            break
         bot.slash('requestSurvey', name, wait=0)
         top = ((bot.wait_for('"survey_results"', 12) or {}).get('best') or {}).get('percent', 0)
         if top > best[1]:
             best = (name, top)
         bot.idle(4)  # survey cooldown
+    if best[0] is None and tired:
+        g.note(f'BLOCKED: {bot.first} {kind}: out of mind before any survey found a concentration')
+        return None
     if not g.check(f'{bot.first} {kind} survey finds a concentration', best[0], best):
         return None
     before = bot.inventory()

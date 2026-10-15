@@ -72,10 +72,27 @@ def run(g):
     events = nima.slash('leash', 'off', wait=1)
     g.check('leash off', any('Leash off' in str(e.get('text')) for e in events), [e.get('text') for e in events if e.get('text')])
 
+    # Entertainer buff (Agent/local-research/entertainer-buffs/report.md, 15 Oct): a patron grouped with the performer
+    # who watches for at least 60 s gets the dance buff when the watching ends, here when Dorn stops dancing.
     events = dorn.slash('startdance', 'basic', wait=4)
     g.note('Dorn /startdance basic: ' + '; '.join(e.get('text', e.get('event', '')) for e in events
                                                     if e.get('event') in ('system', 'posture', 'command_failed'))[:300])
-    dorn.slash('stopdance', wait=2)
+    dancing = any('dance_start_self' in str(e.get('text')) or 'start dancing' in str(e.get('text')).lower()
+                  for e in events)
+    if dancing:
+        watch = nima.slash('watch', target=dorn.oid, wait=3)
+        g.check('Nima watches Dorn dance', any('dance_watch_self' in str(e.get('text')) or 'watch' in str(e.get('text')).lower()
+                                               for e in watch if e.get('event') == 'system'),
+                [e.get('text') for e in watch if e.get('text')][:3])
+        nima.idle(70)
+        dorn.slash('stopdance', wait=3)
+        buff = nima.wait_for(lambda e: 'performance_enhance_dance_mind' in str(e.get('text', '')), 8)
+        g.check('Nima gets the dance buff after 70 s of watching', buff,
+                (buff or {}).get('text') or 'no performance_enhance message: does Dorn have private_buff_mind and '
+                'healing_dance_mind (novice entertainer only)?')
+    else:
+        g.note('BLOCKED: Dorn did not start dancing, so the entertainer buff was not tried')
+        dorn.slash('stopdance', wait=2)
 
     dax = rusk.find('Dax Venn', radius=96, type='CREO')
     if g.check('Dax Venn the mercenary broker is nearby', dax, dax and f"{dax['distance']} m"):
