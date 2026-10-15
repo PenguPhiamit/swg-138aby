@@ -23,7 +23,9 @@ that log in through the real game protocol to check what works for every profess
 ## Working together
 
 If you run or develop an SWG server and would like to work together, share ideas or use anything here, I would love
-to hear from you, whether that's the Empire in Flames team, SWGEmu themselves or anyone else. A Discord server is
-coming and its link will be posted here; until then, message me on GitHub.
+to hear from you, whether that's the teams behind Empire in Flames, Sentinels Republic or Restoration, SWGEmu
+themselves or anyone else. Every one of those communities has kept this game alive, and I have nothing but respect for
+them. The only line I keep is for this project's own code and assets, as above. A Discord server is coming and its link
+will be posted here; until then, message me on GitHub.
 
 Discord: *link coming*
