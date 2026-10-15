@@ -2,6 +2,12 @@
 
 The owner's play-data character (Master Creature Handler, Rifleman, Marksman: 246 points). Every command below was checked against the server's command table: all have a real handler on our server. Pets tank; Benny shoots from range; the Forn crew escorts (`tools/bots/escort.py`).
 
+## Getting around (admin)
+
+- `/goto <part of a waypoint name>` jumps to that waypoint (`/goto krayt` after the graveyard mail), `/goto ?` lists them all.
+- `/goto back` returns to where you stood before your last jump; twice in a row toggles (dev `81384b90`, god mode; live after the next test-galaxy restart). The test datapad's Teleport list has it first.
+- `/teleport <x> <y> <planet>` for raw coordinates.
+
 ## Skills first (admin): target yourself
 
 `/grantSkill` needs a target (`GrantSkillCommand.h`: no target gives "invalid target" and grants nothing). Click your
