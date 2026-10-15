@@ -269,6 +269,11 @@ ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fi
 
 ## Log
 
+### 2026-10-15 13:07 Claude: plan to fork TortoiseBots with the new public repo
+
+- `Documentation-support/tortoisebots-fork-plan.md` (`7128ade`; roadmap row B8). Fork Sagiroth's TortoiseBots on GitHub when the new public repo is made. The fork's `main` mirrors upstream; a `swg` branch holds our Core3 module in a new `swg/` folder, pinned as a submodule in the new repo. Core3 keeps only the hooks and builds with the module off.
+- Port only Sagiroth's original AGPL work for now: the host boundary, `BotTurnScheduler` and `ActionFailureBackoff`. The engine waits on TortoiseBots' open licence audit (its `cmangos/playerbots` lineage is unresolved). The attribution term needs credit in `core3.log`, at login and in `/bot about`. A fork of a public repo is public, so every push gets the export checks. Owner decisions: fork name, submodule vs in-tree, and whether to ask Sagiroth about the engine files.
+
 ### 2026-10-15 13:05 Claude: the bot tracker is now a fleet dashboard (http://localhost:8765)
 
 - The owner sent three screenshots of a WoW bot dashboard as the look they want. `tools/live_map.py` now has a sidebar and six pages:
