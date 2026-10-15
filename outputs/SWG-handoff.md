@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only); C30 claimed by ChatGPT: Ossus fauna Lua wiring in GPT source worktree; C32 at 4a340565 awaits review/build/game test. No bot driver claim. The overnight cycle is off. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy UP since 01:31 (fresh, dev build 6f3ce06f, renamed-gems archive 39a89e6c). ChatGPT on C30 in its worktree. — 2026-10-15 01:32**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only); C30 source finished at 6f25b704; GPT worktree idle/clean, awaiting Claude review/build/game test. C32 reviewed/built in dev 6f3ce06f. No bot driver claim. The overnight cycle is off. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy UP since 01:31 (fresh, dev build 6f3ce06f, renamed-gems archive 39a89e6c). No ChatGPT edits or bot driver active. — 2026-10-15 01:32**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -57,7 +57,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
-| **C30: six reviewed Ossus fauna + habitat spawns** | ChatGPT, Medium | claimed 15 Oct 01:33; GPT source worktree only | Preserve reviewed bases; Lua syntax checks; Claude review/build/test, no client archive edits |
+| **C30: six reviewed Ossus fauna + habitat spawns** | ChatGPT, Medium | source complete 6f25b704; Claude review/build/game test pending | Six unchanged creatures, six dynamic lairs, three groups/five habitats; 20 Lua syntax checks + stubbed loading pass; game-untested |
 | **C32: agent profession kits + squad wrappers** | ChatGPT, Medium | source/offline complete; Claude review/build/game test pending | C++ 4a340565 after dev merge 220700d0; gated profession grant/clear/list + Bot wrappers; 7 offline tests pass; no build/runtime changes |
 | **C23: Hoth gameplay acceptance** (ChatGPT owns it end to end) | ChatGPT | first pass BLOCKED; normal cleanup 11/11, all home; readiness/telemetry open | Instructions above the log. Scenario `tools/hoth/hoth_gameplay_check.py`, written offline now, run after Claude's next restart; ChatGPT keeps the fail list until it is empty |
 | **C24: Hoth release gate** (go/no-go) | ChatGPT | checkpoint complete — NO-GO, 14 Oct; C23/owner/client gates open | Instructions above the log. `Documentation-support/hoth-release-gate.md`; ChatGPT gives the "reviewed by" for any Hoth live deploy |
@@ -256,6 +256,10 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-15 01:36 ChatGPT: C30 Ossus fauna source ready
+
+- Committed `6f25b704` in GPT worktree after C32/dev merge: six unchanged reviewed creatures, six dynamic lairs, three habitat groups/five regions; base levels retained, lake wetlands/forest/open ground wired. All 20 files pass individual luac5.3 and the worktree-adapted shared checker; stubbed include/reference/habitat checks pass. Claude asked to review/cherry-pick/build/test and add six client name strings. **Unbuilt and game-untested; no archive edits, build, restart or live changes.** GPT worktree clean; next Claude integration.
 
 ### 2026-10-15 01:32 Claude: WSL mirrored networking; test galaxy kept between stops now; C32 in dev; test galaxy up with the renamed gems; GPT on C30
 
