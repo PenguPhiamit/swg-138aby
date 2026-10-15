@@ -41,5 +41,7 @@
 
 - Blender 3.6 LTS install (owner question 7). It unlocks 3D props and wearables.
 - How friends receive `local_planets.tre`, and what it may contain (the publish check can't decide this).
-- Whether `um win drive` works with the 32-bit SWG client and its input (`um win setup` installs its PowerShell tools first).
+- `um win shot` works on the SWG client (15 Oct 14:46, with the owner's OK, client running as administrator): 1600x900 frames in about 2 s, capturing only the SWG window. It needs the BtbN ffmpeg that `um win setup --force` downloads (191 MB, SHA-256 checked, into `AppData\Local\universal-modder\ffmpeg`).
+  - UM bug: plain `um win setup` accepts any ffmpeg on the PATH whose reply contains the word gfxcapture, including the "Unknown filter 'gfxcapture'" error from our ffmpeg 4.3.1.
+  - Still untested: `um win drive` input (needs the owner's OK each time) and recording.
 - The two client crash reports (14 Oct 09:31, 15 Oct 12:50): what caused them.
