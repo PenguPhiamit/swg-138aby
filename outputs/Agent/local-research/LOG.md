@@ -1,1 +1,2 @@
 - 2026-10-15 06:52 creature-harvest: report written (6036 bytes), 2 min, 2 files
+- 2026-10-15 09:00 12 topics researched by Claude agents (Haiku, finished by Opus): cure-poison, doctor-enhance-wounds, entertainer-buffs, survey-sample, travel-shuttles, missions, crafting, resources, quests, factions, resource-quality, ham; status review
