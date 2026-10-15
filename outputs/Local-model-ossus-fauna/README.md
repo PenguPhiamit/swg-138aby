@@ -40,3 +40,4 @@ writing.
 3. Spawn groups and lairs in Ossus's regions (swamps for the mud yak, forest canopy for the gokob and tree frog).
 4. Levels for Ossus. They are the bases' levels for now: 19, 19, 10, 6, 10, 10.
 5. Own appearances or hues. They use the stock bodies for now.
+6. Examine texts: `detail.tsv` (15 Oct). The local model drafted them; Claude rewrote all six for the era, because the academy is a ruin by 138 ABY and the model wrote as if it still ran. Each is at most 220 characters. They are not wired in yet. The client takes a creature's examine text from its shared object template (`detailedDescription`). These creatures still borrow stock bodies such as `womp_rat_hue.iff`, so each needs its own shared template first. That is the same step as item 5.

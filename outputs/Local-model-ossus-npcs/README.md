@@ -33,3 +33,4 @@ Five NPC templates for Ossus in 138–139 ABY: three of the native Ysanna, and t
 3. Names in the client (`npc_names.tsv`, the same step as the creatures in `Local-model-ossus-fauna/`).
 4. Server wiring and spawns: Ysanna camps in Ossus's wilderness; One Sith only in the raid and at a few hidden sites.
 5. Levels: the One Sith are 140 and 265, raid-tier. Open-world Ossus ones would need lower variants.
+6. Examine texts: `detail.tsv` (15 Oct). The local model drafted them; Claude rewrote all five in neutral, in-era wording. They wait on the same step as the bodies: their own shared templates. The creatures' README, item 6, explains why.
