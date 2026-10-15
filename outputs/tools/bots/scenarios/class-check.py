@@ -83,6 +83,11 @@ PERSISTENT = ('berserk1', 'berserk2', 'takeCover', 'aim', 'centerOfBeing', 'mask
 # needs the cover state (SurpriseShotCommand.h: !hasState(COVER) -> GENERALERROR); without it the
 # probe would report NO_EFFECT for an ability that works.
 LOS_OFFSETS = ((3, 0), (0, 3), (-3, -3))   # where the ally is moved when the healer cannot see it
+# The server refuses these outside a hospital, a campsite or near a surgical droid (HealEnhanceCommand.h:94,
+# HealWoundCommand.h:116, HealDroidWoundCommand.h:71); registerWithLocation needs a medical or entertainment
+# building. Any cell of a hospital counts, so tester and partner walk into one first (Claude, 15 Oct).
+MEDICAL_FACILITY = ('healEnhance', 'healWound', 'healDroidWound', 'registerWithLocation')
+BUILDINGS = ('building:medical_or_entertainment',)
 PRE_COMMAND = {'surpriseShot': 'takeCover'}
 MUSIC_EFFECTS = ('firejet', 'ventriloquism')   # effects that only a song, not a dance, can carry
 HEAL_TEXT = re.compile(r'^(You heal |You remove the |You apply |You enhance |You re-apply |'
@@ -321,12 +326,22 @@ def make_room(bot, issued, keep, reserve=40):
     """Bank or drop only observed new kit OIDs; never infer ownership from names.
 
     Keep one copy of each required item, and all gear present before the run.
-    A full inventory with no expendable issued items is left untouched.
+    Spare copies (the second and later item of the same name in the inventory) may be banked, never dropped:
+    on 15 Oct Jesh carried 59 items from earlier runs (three bone armour sets, seven stimpacks), so the
+    35-item medicine kit did not fit and healState was BLOCKED for a missing dizzy pack (Claude).
     """
     evidence = []
     items = bot.inventory().get('items', [])
     protected = {matches[0]['oid'] for token in keep
                  if (matches := matching(items, token))}
+    inventory = next((i['oid'] for i in items if str(i.get('name', '')).endswith(':inventory')
+                      and i.get('parent') == bot.oid), None)
+    seen, spare = set(), set()
+    for item in items:
+        if inventory is not None and item.get('parent') == inventory:
+            if item.get('name') in seen:
+                spare.add(item['oid'])
+            seen.add(item.get('name'))
     bank = next((i for i in items if str(i.get('name', '')).endswith(':bank')
                  and i.get('parent') == bot.oid), None)
     bank_ready = False
@@ -343,7 +358,7 @@ def make_room(bot, issued, keep, reserve=40):
         if occupancy() <= 80 - reserve:
             break
         oid = item.get('oid')
-        if (oid not in issued or oid in protected or item.get('parent') == bot.oid
+        if (oid not in issued and oid not in spare or oid in protected or item.get('parent') == bot.oid
                 or bank and item.get('parent') == bank['oid']):
             continue
         if bank:
@@ -360,6 +375,8 @@ def make_room(bot, issued, keep, reserve=40):
                 evidence.append(dict(oid=oid, name=item.get('name'), bank=bank['oid'], moved=moved, events=events))
                 if moved:
                     continue
+        if oid not in issued:  # a spare copy from an earlier run: banked or kept, never dropped
+            continue
         menu = bot.radial(oid)
         drop = next((r for r in menu.get('items', []) if r.get('name') == 'item_drop'), None)
         if drop is None:
@@ -692,6 +709,8 @@ def wait_clean(bot, limit=90):
 
 def patient_problem(kinds, patient):
     """The treatment still has something to treat at the instant of the probe."""
+    if 'dead' in kinds:
+        return None if patient.get('posture') == 'dead' else 'not dead after the incapacitations (%s)' % patient.get('posture')
     if patient.get('posture') == 'dead':
         return 'dead after afflict'
     for kind in kinds:
@@ -705,12 +724,59 @@ def patient_problem(kinds, patient):
     return None
 
 
-def stage_partner(bot, ally, kinds, setup):
+def hospital_room(bot, ctx):
+    """A cell and local spot inside the nearest hospital, from any object the server's search finds in it
+    (as aurek-doctor-buffs.py does; in Mos Eisley that is cell 9655496). Cached per run. None if none is found."""
+    if 'hospital_room' not in ctx:
+        ctx['hospital_room'] = None
+        hospitals = bot.locate('hospital', radius=2000)
+        for text in ('object/mobile', 'object/tangible') if hospitals else ():
+            found = [r for r in bot.locate(text, radius=40, x=hospitals[0]['x'], y=hospitals[0]['y'])
+                     if r.get('cell') and r.get('local') and r.get('building') == hospitals[0].get('oid')]
+            if found:
+                ctx['hospital_room'] = found[0]
+                break
+    return ctx['hospital_room']
+
+
+def walk_into(room, *bots):
+    """Walk each bot to its own spot in the room's cell; True when all arrived."""
+    local = room['local']
+    trips = [b.walk(local['x'] + 1.0 + i, local['y'] + 1.0, local['z'], room['cell'], tries=3) for i, b in enumerate(bots)]
+    return all(isinstance(t, dict) and t.get('arrived') for t in trips), trips
+
+
+def kill(ally, setup, limit=75):
+    """Revive needs a dead patient. The third incapacitation inside 10 minutes kills, as in combat
+    (PlayerManagerImplementation.cpp:1156-1166, 1222-1223), so incapacitate the partner until it is dead.
+    None when it is dead, else the reason."""
+    posture = None
+    for _ in range(4):
+        answer = afflict(ally, 'incap')
+        setup.setdefault('afflict', []).append(answer)
+        if answer.get('error'):
+            return 'afflict incap failed: ' + answer['error']
+        for _ in range(limit // 3):
+            posture = ally.status().get('me', {}).get('posture')
+            if posture != 'incapacitated':
+                break
+            ally.idle(3)
+        if posture == 'dead':
+            return None
+    return 'still %s after four incapacitations' % posture
+
+
+def stage_partner(bot, ally, kinds, setup, room=None):
     """Bring the partner next to the tester and put the afflictions on it. None when it is ready,
-    else the reason it is not (the caller then tries another partner)."""
+    else the reason it is not (the caller then tries another partner). With a room, both go into it."""
     other, status = ally.status(), bot.status()
     if not status.get('planet') or other.get('planet') != status.get('planet'):
         return 'in another planet or scene unavailable'
+    if room and not (status.get('cell') == room['cell'] == other.get('cell')):
+        arrived, setup['hospital'] = walk_into(room, bot, ally)
+        if not arrived:
+            return 'could not walk into the hospital cell'
+        other, status = ally.status(), bot.status()
     # setup can leave the crew in different hospital rooms. Walk both outside
     # before comparing local coordinates; never compare coordinates across cells.
     if (other.get('cell') or 0) != (status.get('cell') or 0):
@@ -740,6 +806,11 @@ def stage_partner(bot, ally, kinds, setup):
     if not rest(ally, action=.3, health=.5, limit=60):
         return 'below 50% health before the afflict'
     for kind in kinds:
+        if kind == 'dead':
+            why = kill(ally, setup)
+            if why:
+                return why
+            continue
         answer = afflict(ally, kind)
         setup.setdefault('afflict', []).append(answer)
         if answer.get('error'):
@@ -748,8 +819,11 @@ def stage_partner(bot, ally, kinds, setup):
 
 
 def needed_afflictions(tags):
-    """Kinds to put on the patient for these setup tags, most specific first."""
+    """Kinds to put on the patient for these setup tags, most specific first. A revive pack needs a dead
+    patient ("Your target does not require resuscitation!" otherwise, RevivePlayerCommand.h:27)."""
     kinds = [AFFLICT[t] for t in tags if t.startswith('affliction:')]
+    if not kinds and 'item:revive_pack' in tags:
+        kinds = ['dead']
     if not kinds and 'incapacitated_friendly' in tags:
         kinds = ['incap']
     if not kinds and 'wounded_friendly' in tags:
@@ -758,8 +832,9 @@ def needed_afflictions(tags):
 
 
 def stageable(missing):
-    """True when everything a needs_staging entry lacks is something afflict can put on the ally."""
-    return bool(missing) and all(m in AFFLICT for m in missing)
+    """True when everything a needs_staging entry lacks is something afflict can put on the ally, or a
+    building the bots can walk into."""
+    return bool(missing) and all(m in AFFLICT or m in BUILDINGS for m in missing)
 
 
 def settle(bot, entry, limit=30, ctx=None):
@@ -847,8 +922,10 @@ def probe(g, bot, ally, entry, ctx=None):
     for token in required_items(entry):
         if not carried(bot, token):
             return blocked('missing kit item: ' + token)
-    if 'outdoors' in tags and status.get('cell'):
-        return blocked('requires outdoors')
+    if 'outdoors' in tags and status.get('cell'):  # still in the hospital from an earlier ability
+        result['setup']['walk_out'] = bot.walk(*TOWN)
+        if bot.status().get('cell'):
+            return blocked('requires outdoors')
     # Squad leader commands need the tester to lead a group, which the leader of the squad group does.
     leads = bot is g.leader and bool(me.get('group'))
     unverified = [t for t in tags if t in ('force_power', 'no_armor', 'pet', 'creature_target')
@@ -880,7 +957,17 @@ def probe(g, bot, ally, entry, ctx=None):
             return blocked('no live creature reachable within 3 m')
         target = obj['oid']
         result['setup']['target'] = obj
-    if any(t in tags for t in ('friendly_target', 'wounded_friendly', 'incapacitated_friendly')):
+    friendly = any(t in tags for t in ('friendly_target', 'wounded_friendly', 'incapacitated_friendly'))
+    room = None
+    if entry['ability'] in MEDICAL_FACILITY or any(t in BUILDINGS for t in tags):
+        room = hospital_room(bot, ctx)
+        if room is None:
+            return blocked('no hospital cell found within 2 km')
+        if not friendly:
+            arrived, result['setup']['hospital'] = walk_into(room, bot)
+            if not arrived:
+                return blocked('could not walk into the hospital cell')
+    if friendly:
         allies = ctx.get('allies') or [ally]  # a different partner each time: wounds pile up on one
         kinds = needed_afflictions(tags)
         reasons = []
@@ -888,7 +975,7 @@ def probe(g, bot, ally, entry, ctx=None):
         for _ in range(len(allies)):
             ally = allies[ctx.get('ally_turn', 0) % len(allies)]
             ctx['ally_turn'] = ctx.get('ally_turn', 0) + 1
-            why = stage_partner(bot, ally, kinds, result['setup'])
+            why = stage_partner(bot, ally, kinds, result['setup'], room)
             if why is None:
                 staged = True
                 break
@@ -976,8 +1063,11 @@ def probe(g, bot, ally, entry, ctx=None):
     result.update(verdict=verdict, reason=reason)
     if entry['ability'] in ('berserk1', 'berserk2') and verdict != 'BLOCKED':
         ctx['berserk_until'] = time.monotonic() + BERSERK_SECONDS
-    if target == ally.oid and any(k == 'incap' for k in needed_afflictions(tags)):
+    staged_kinds = needed_afflictions(tags)
+    if target == ally.oid and any(k in ('incap', 'dead') for k in staged_kinds):
         result['setup']['patient_recover'] = ally.recover()
+        if 'dead' in staged_kinds:  # a clone (when the revive failed) adds 100 wounds per pool
+            result['setup']['patient_restore'] = afflict(ally, 'restore').get('wounds')
     if entry['ability'] == 'survey':
         result['tool_probe'] = survey_tool(bot)
         g.note('Survey real tool gate: ' + result['tool_probe']['verdict'] + ': ' + result['tool_probe']['reason'])

@@ -718,5 +718,50 @@ class Rest(unittest.TestCase):
         bot.idle.assert_called_once_with(15)
 
 
+class DoctorStaging(unittest.TestCase):
+    """The four Doctor BLOCKs of 15 Oct 09:28: a dead patient for revive, a hospital cell, and inventory room."""
+
+    def test_revive_needs_a_dead_patient(self):
+        self.assertEqual(cc.needed_afflictions(['incapacitated_friendly', 'item:revive_pack']), ['dead'])
+        self.assertEqual(cc.needed_afflictions(['incapacitated_friendly']), ['incap'])
+        self.assertIsNone(cc.patient_problem(['dead'], {'posture': 'dead'}))
+        self.assertIn('not dead', cc.patient_problem(['dead'], {'posture': 'upright'}))
+        self.assertEqual(cc.patient_problem(['incap'], {'posture': 'dead'}), 'dead after afflict')
+
+    def test_kill_incapacitates_until_dead(self):
+        ally = Mock()
+        ally.wait_for.return_value = {'text': '[agentgear] {"kit":"afflict","kind":"incap"}'}
+        ally.status.side_effect = [{'me': {'posture': p}} for p in ('incapacitated', 'upright', 'incapacitated', 'upright', 'dead')]
+        setup = {}
+        self.assertIsNone(cc.kill(ally, setup))
+        self.assertEqual(ally.slash.call_count, 3)
+        self.assertEqual(len(setup['afflict']), 3)
+
+    def test_a_building_is_stageable(self):
+        self.assertTrue(cc.stageable(['building:medical_or_entertainment']))
+        self.assertFalse(cc.stageable(['building:cantina_owner']))
+
+    def test_spare_copies_are_banked_but_never_dropped(self):
+        bot = Mock(oid=1)
+        inv, bank = 10, 11
+        items = ([dict(oid=inv, name='@item_n:inventory', parent=1), dict(oid=bank, name='@item_n:bank', parent=1)]
+                 + [dict(oid=100 + i, name='@wearables_name:armor_bone_s01_boots', parent=inv) for i in range(3)]
+                 + [dict(oid=200 + i, name='@medicine_name:filler_%d' % i, parent=inv) for i in range(60)])
+        state = {'items': items}
+        bot.inventory.side_effect = lambda: state
+        bot.locate.return_value = [{'oid': 5}]
+        bot.go.return_value = {'arrived': True}
+
+        def bank_it(name, args='', target=0, wait=0):
+            state['items'] = [dict(i, parent=bank) if i['oid'] == target else i for i in state['items']]
+            return []
+
+        bot.slash.side_effect = bank_it
+        evidence = cc.make_room(bot, issued=set(), keep=set())
+        moved = sorted(e['oid'] for e in evidence if e.get('moved'))
+        self.assertEqual(moved, [101, 102])  # the first boots stay; the fillers are single copies
+        bot.radial.assert_not_called()  # nothing was dropped
+
+
 if __name__ == '__main__':
     unittest.main()
