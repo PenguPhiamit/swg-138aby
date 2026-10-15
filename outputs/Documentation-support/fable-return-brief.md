@@ -60,4 +60,8 @@ Human clothing and armour are built for the human skeleton, so they won't fit a 
 - **(b) A Hutt on a repulsor sled:** the Legends look. The Hutt has no rider pose, so this needs new animation or art work; the hardest option.
 - **(c) NPC-only Hutts:** crime lords and quest givers. The 138-139 ABY setting has Hutt cartels to use.
 
-Universal Modder evidence for the owner: Claude takes `um win shot` screenshots of a spawned Hutt in the owner's client (`/createSpawningElement spawn object/mobile/hutt_male.iff`), saved outside the repo because they show the owner's character name.
+**Seen in the owner's client (15 Oct 15:05):**
+- `/createCreature object/mobile/hutt_male.iff` spawned the plain Hutt body as an NPC (labelled "hutt base male"), the same `hutt_m.sat` a player Hutt would wear. `/createSpawningElement spawn` creates nothing for creature templates; it is only for static objects and buildings.
+- Next to the owner's Chiss, the Hutt stands about as tall and is much wider; its tail makes it about three times as long.
+- Claude took Universal Modder screenshots (`um win shot`) and a 15-second clip with game sound (`um win record --pid`, `um video mux`).
+- The images are in Claude's session scratchpad (`um-shots/hutt-*`), not in the repo, because they show the owner's character name. The owner has copies.
