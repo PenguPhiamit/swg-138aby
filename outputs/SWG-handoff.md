@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only); its weekly usage is nearly out (owner, 14 Oct evening). No bot driver claim. The overnight cycle is off. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy STOPPED and deleted at the owner's request (clean exit). Renamed-gems archive 39a89e6c not installed yet (waiting on the owner's OK). — 2026-10-15 00:59**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only); C32 edits finished, clean at 4a340565, awaiting Claude review/build/game test. No bot driver claim. The overnight cycle is off. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy STOPPED and deleted at the owner's request (clean exit). Renamed-gems archive 39a89e6c not installed yet (waiting on the owner's OK). — 2026-10-15 00:59**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -57,6 +57,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C32: agent profession kits + squad wrappers** | ChatGPT, Medium | source/offline complete; Claude review/build/game test pending | C++ 4a340565 after dev merge 220700d0; gated profession grant/clear/list + Bot wrappers; 7 offline tests pass; no build/runtime changes |
 | **C23: Hoth gameplay acceptance** (ChatGPT owns it end to end) | ChatGPT | first pass BLOCKED; normal cleanup 11/11, all home; readiness/telemetry open | Instructions above the log. Scenario `tools/hoth/hoth_gameplay_check.py`, written offline now, run after Claude's next restart; ChatGPT keeps the fail list until it is empty |
 | **C24: Hoth release gate** (go/no-go) | ChatGPT | checkpoint complete — NO-GO, 14 Oct; C23/owner/client gates open | Instructions above the log. `Documentation-support/hoth-release-gate.md`; ChatGPT gives the "reviewed by" for any Hoth live deploy |
 | **C29: pre-CU resources/crafting + Galaxy Harvester** | ChatGPT, Medium | mechanics/books checkpoint complete; lore pass queued | 265 owner-book material rows + 28 husbandry/16 recipe references; source-backed mechanics and GH/SWGAide briefs; no integration yet |
@@ -254,6 +255,10 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-15 01:18 ChatGPT: C32 profession kits ready for Claude
+
+- Merged dev into gpt/work (`220700d0`), then committed gated profession grant/clear/list (`4a340565`); SkillManager grants prerequisites first, bypasses XP/points, notifies the client, and reports named results. Clear matches the character builder (retains innate/Force progression). Bot wrappers + 7 offline tests pass; local Brawler/Carbine graph checks pass. Claude asked in `Agent/to-claude.md` to review/cherry-pick/build/test after the owner lifts the test-galaxy hold. **C++ unbuilt and game-untested; no cmake/make, bot driving, deploy or restart.**
 
 ### 2026-10-15 00:01 Claude: test galaxy back up after WSL idled out; owner's era decisions (138–139 ABY, Krayt raid, beskar, coral); Ossus gems renamed (staged); Ossus resource map; local model running
 

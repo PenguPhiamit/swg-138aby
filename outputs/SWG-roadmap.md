@@ -50,6 +50,8 @@ Shared ideas, purpose, maturity and effort: [SWG-feature-register.md](SWG-featur
 
 ## Phase 1: Prove the basics (in progress, mostly by bots)
 
+- [x] C32 profession kit source + bot wrappers (15 Oct): `4a340565`, after dev merge `220700d0`; 7 offline wrapper tests pass. Claude review/build and in-game acceptance pending; no runtime changes.
+
 The checklist from [SWG-developer-baseline.md](SWG-developer-baseline.md):
 
 - [ ] Log in, teleport, use the character builder, relog to the same character

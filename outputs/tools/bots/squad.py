@@ -401,6 +401,45 @@ class Bot:
         except (TypeError, KeyError, ValueError):
             return {'error': 'no answer (is Core3.AgentGear on?)'}
 
+    def profession(self, name):
+        """Grant a test-galaxy profession and its prerequisites (e.g. combat_carbine).
+        Use 'list' to inspect current boxes. Returns granted/failed/skills or an error;
+        existing boxes are retained. Requires the same server/account gate as gear()."""
+        if not isinstance(name, str):
+            raise ValueError('profession must be a skill-tree name, list or clear')
+        name = name.strip().lower()
+        if not name or any(c not in 'abcdefghijklmnopqrstuvwxyz0123456789_' for c in name):
+            raise ValueError('profession must be a skill-tree name, list or clear')
+        prefix = '[agentgear] '
+
+        def matches(event):
+            text = event.get('text', '')
+            if not isinstance(text, str) or not text.startswith(prefix):
+                return False
+            try:
+                data = json.loads(text[len(prefix):])
+            except ValueError:
+                return True  # report a malformed answer explicitly
+            return (not isinstance(data, dict) or
+                    (data.get('kit') == 'profession' and data.get('profession') == name) or
+                    ('error' in data and 'kit' not in data))
+
+        self.slash('agentGear', f'profession {name}', wait=0)
+        answer = self.wait_for(matches, 30)
+        if answer is None:
+            return {'error': 'no profession answer (check test galaxy, AgentGear and AgentAccounts)'}
+        try:
+            data = json.loads(answer['text'][len(prefix):])
+            if isinstance(data, dict):
+                return data
+        except (TypeError, KeyError, ValueError):
+            pass
+        return {'error': 'invalid profession answer'}
+
+    def clear_professions(self):
+        """Character-builder Unlearn All Skills on the test galaxy; innate/Force skills remain."""
+        return self.profession('clear')
+
     def locate(self, text, radius=800, x=None, y=None):
         """The server's object search: the nearest objects (up to 30) whose template, name key or displayed name
         contains text, including inside buildings (then with cell, local x/y/z and building). Each object has
