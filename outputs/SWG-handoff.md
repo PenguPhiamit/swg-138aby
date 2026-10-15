@@ -269,6 +269,11 @@ ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fi
 
 ## Log
 
+### 2026-10-15 12:57 Claude: research: what 1,000+ bots would take (server-side bots)
+
+- `Documentation-support/server-side-bots.md` (`ef46438`), research only. WoW playerbots scale because each bot is an in-server player with no socket, and by default only about 10% are active. Our one-client-per-bot design tops out in the low hundreds (estimate; the fleet test is measuring it). Core3 already drops packets sent to a player with no client. The gaps are a client-less login, a driver, an active-bot budget and one unguarded `SuiPageData::sendTo`.
+- Recommendation: a hybrid. Real-client squads stay for tests; server-side bots provide population. Milestone 1 is about 5 days on Core3-dev: `/botpop spawn N`, a wander and fight-back tick, the active budget, then measure 100 to 1,000 bots. Nothing is built; it needs the owner's go-ahead.
+
 ### 2026-10-15 12:49 ChatGPT: C40 roof-floor source fix ready
 
 - Server `7c68e39f` on gpt/work after dev merge `7df4f2c7`; h `e86fcf7`: nearest outdoor floor, route-relative samples, explicit world-z forwarding, safe missing-height errors and escort trail-floor preservation. Report `Documentation-support/C40-roof-ledge.md`. Offline: Python 6/6, existing escort 11/11, compiled actual selector 7 assertions; old 9.5-vs-5 choice reproduced with synthetic surfaces. Unbuilt/game-untested; Claude reviews/cherry-picks/builds and verifies roof descent plus bunker/Warren escort. No bots, restarts, deployments or downloads. Source slice idle.
