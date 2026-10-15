@@ -51,6 +51,36 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
 3. **Ossus flora names** (text only, new spawns only): "Kingwood Deciduous Wood", "Bambwood Evergreen Wood", "Potam Tubers" (potam is our reading). Yes or no?
 4. **Ossus solar:** the twin suns give weeks without night. Raise Ossus solar's PE floor (stock 200–600, e.g. to 500–1000)?
 
+**Owner's answers, 15 Oct 14:24 (in Claude's chat; questions above by set and number):**
+- **14 Oct set:**
+  - 1 overnight allow rule: not now, the cycle stays paused.
+  - 2 Hoth loot: keep the 3% / 5% / 2% rates (and all 18 deeds, answered earlier).
+  - 4 clean-room pilot: **collections first**.
+  - 5 Discord: still open (the owner sets up the webhook).
+  - 7 first model import: **yes to all three**. Install Blender 3.6 LTS and the SWG add-on, download Quaternius Ultimate Modular Ruins (CC0), get texconv. Then Claude stages one ruin piece for the owner to view.
+  - 8 wampa bosses: corpse loot now, a per-player boss reward later.
+  - 9 mynock den: **the ice-cave building** (Option 1, with the added flatten layer in Hoth's terrain in the test archive). Map names and camp vendors were not asked.
+  - 10 Ossus: an **Imperial garrison, yes**; **rare hidden Jedi** encounters.
+    - Fares **cheaper than Hoth** if Ossus is further from endgame.
+    - **All planets should sit where they really are in the galaxy: a rework of the galactic map may be in order** (see C14's coordinates and the rejected Hoth atlas fit).
+    - Story point (ruins with the Jedi gone to ground, or the Temple standing): **to discuss**. The owner suggests a research or roleplay model help.
+  - 11 species:
+    - order: Chiss, Nautolan, Togruta, then Hutt;
+    - Zeltron held;
+    - a Hutt on the human skeleton is **not acceptable**: hold Hutt until it has a proper body;
+    - **our own name tables and a real attribute profile**.
+  - 6 Fable's backport:
+    - (a) keep the SOE paths. The owner asked whether this is a problem; it is a fix, not a problem.
+    - (b) wire the NGE junk and collection loot into loot groups.
+    - (c) extend the 13 wearables to the new species.
+    - (d) yes, work out a read-only TRE v6 reader.
+    - (e) the prison-guard pants stay staff-only.
+- **15 Oct set:**
+  - 1 adegan: real tiers (kathracite, relacite, danite lower; pontite at the top).
+  - 2 voxyn: a new tame line regrown by Nei Rin's Shapers, possibly breedable once traditional line breeding works.
+  - 3 flora names: yes.
+  - 4 Ossus solar: raise the PE floor to 500-1000.
+
 Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) — purpose, design maturity and difficulty for all recorded features/candidates.
 
 ## Task board
