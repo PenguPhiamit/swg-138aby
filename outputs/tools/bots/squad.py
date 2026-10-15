@@ -117,8 +117,8 @@ class Bot:
     def describe(self, cmd, args):
         """The plain-words label for a body command, or None to keep the current one (status, look, ...)."""
         what = lambda oid: self.label_of(oid)
-        if cmd == 'move':
-            return f"walking to {args['x']:.0f}, {args['y']:.0f}" + (' (indoors)' if args.get('cell') else '')
+        if cmd == 'move':  # indoors the body takes cell-local coordinates, which mean nothing on the map
+            return 'walking inside a building' if args.get('cell') else f"walking to {args['x']:.0f}, {args['y']:.0f}"
         if cmd == 'fight':
             return f"fighting {what(args.get('target'))}"
         if cmd == 'command':
@@ -321,6 +321,13 @@ class Bot:
                     for obj in event.get('objects', []) if cmd == 'look' else []:
                         if obj.get('oid'):
                             self.names[obj['oid']] = obj.get('name', '')
+                    if cmd == 'move':  # say how the walk ended: a stuck bot is what movement tests look for
+                        if event.get('arrived'):
+                            self.now.update(doing='waiting indoors' if args.get('cell') else
+                                            f"waiting at {args['x']:.0f}, {args['y']:.0f}", since=time.time())
+                        else:
+                            self.now.update(doing=f"stuck {self.now.get('doing', '')}: {event.get('error') or 'did not arrive'}",
+                                            since=time.time())
                     self._publish(event)
                     self.group.checkpoint()
                     return event

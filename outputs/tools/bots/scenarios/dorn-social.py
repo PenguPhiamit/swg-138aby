@@ -80,9 +80,19 @@ def run(g):
     dancing = any('dance_start_self' in str(e.get('text')) or 'start dancing' in str(e.get('text')).lower()
                   for e in events)
     if dancing:
-        watch = nima.slash('watch', target=dorn.oid, wait=3)
+        # /watch needs a clear line of sight. After the leash test Nima can be 12 m off behind town clutter
+        # ("@healing:no_line_of_sight", 15 Oct 09:38), so she stands next to Dorn and steps round him if she must.
+        spot = dorn.status()
+        watch = []
+        for dx, dy in ((2, 0), (0, 2), (-2, 0), (0, -2)):
+            if isinstance(spot.get('x'), (int, float)):
+                nima.walk(spot['x'] + dx, spot['y'] + dy)
+            watch = nima.slash('watch', target=dorn.oid, wait=3)
+            if not any('no_line_of_sight' in str(e.get('text')) for e in watch):
+                break
         g.check('Nima watches Dorn dance', any('dance_watch_self' in str(e.get('text')) or 'watch' in str(e.get('text')).lower()
-                                               for e in watch if e.get('event') == 'system'),
+                                               for e in watch if e.get('event') == 'system'
+                                               and 'no_line_of_sight' not in str(e.get('text'))),
                 [e.get('text') for e in watch if e.get('text')][:3])
         nima.idle(70)
         dorn.slash('stopdance', wait=3)

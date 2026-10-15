@@ -18,6 +18,17 @@ MAX_ROUTE = 2300  # 2000 m placement plus the lair's offset
 LOCATED = 'Mission Target has been located'
 
 
+def point(m):
+    """Where the mission sends us: its waypoint once it has one, else its start. A listed mission's waypoint is an
+    empty one (planet "0" at 0, 0); reading it as the target refused all six destroy missions on 15 Oct (Claude)."""
+    for key in ('waypoint', 'start'):
+        p = (m or {}).get(key) or {}
+        if str(p.get('planet', '0')) not in ('0', '') and isinstance(p.get('x'), (int, float)) \
+                and isinstance(p.get('y'), (int, float)) and (p['x'] or p['y']):
+            return p
+    return {}
+
+
 def run(g):
     cresh, ilsa, kor = g['Cresh'], g['Ilsa'], g['Kor']
     for bot in g.bots:
@@ -52,7 +63,7 @@ def run(g):
     here = cresh.status()  # where the list was requested: the server measures from here
 
     def distance(m):
-        target = m.get('waypoint') or m.get('start') or {}
+        target = point(m)
         if target.get('planet', here.get('planet')) != here.get('planet'):
             return math.inf
         if not all(isinstance(target.get(k), (int, float)) for k in ('x', 'y')):
@@ -70,7 +81,7 @@ def run(g):
     if not g.check('accept the nearest destroy mission', 'datapad' in str(mine.get('container_name')),
             {k: mission.get(k) for k in ('title', 'target', 'difficulty', 'reward')}):
         return
-    target = mine.get('waypoint') or mine.get('start') or mission.get('waypoint') or mission.get('start')
+    target = point(mine) or point(mission)
     if not target or not all(isinstance(target.get(k), (int, float)) for k in ('x', 'y')):
         g.note('BLOCKED: accepted mission omitted usable target coordinates.')
         return
@@ -89,7 +100,7 @@ def run(g):
     located = cresh.wait_for(lambda e: LOCATED in str(e.get('text', '')), 20)
     g.check('the target is located (waypoint updated)', located, (located or {}).get('text'))
     moved = next((m for m in cresh.missions() if m['oid'] == mission['oid']), {})
-    spot = moved.get('waypoint') or moved.get('start') or target
+    spot = point(moved) or target
     if located and all(isinstance(spot.get(k), (int, float)) for k in ('x', 'y')) \
             and math.hypot(spot['x'] - target['x'], spot['y'] - target['y']) > 20:
         g.note(f"waypoint moved {math.hypot(spot['x'] - target['x'], spot['y'] - target['y']):.0f} m to the lair")
