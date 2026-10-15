@@ -318,6 +318,14 @@ Files that grow without limit get slow to read, for us and for the game tools. R
 
 - [x] C19 / C4f read-only review (14 Oct, ChatGPT): five dev commits + six tools; 2 P2 findings, C4e-F1 resolved in leash; offline checks saved, fixes/runtime acceptance open. See Documentation-support/review-C4f/C4f-review.md.
 
+- [x] C18 reduced independent backport review (14 Oct): 30-object sample; no new P1/P2 established, runtime/migration gates remain. `Documentation-support/C18-backport-sample-review.md`, local commit `6e2e90a`.
+
+- [x] C21 checkpoint 2a (14 Oct): world/place identity and implementation matrix, 25 records/7 fresh article extracts. `Documentation-support/server-world-census.md`; full world lore/dependency audit and overall C21 remain open.
+
+- [x] C23a offline Hoth acceptance scenario + five evidence fixtures (14 Oct); gameplay run underway, full acceptance open.
+- [x] C24 release gate checkpoint: NO-GO; 48-row inventory, R2 multi-zone P2 counterexample and four format/arithmetic fixtures. No live approval.
+- [x] C25 initial isolated ticket-feedback source patch `5c41ed62` prepared; Claude review/build/runtime pending, not deployed.
+
 ## ChatGPT checkpoint, 14 Oct afternoon
 
 - [x] Prepare isolated C26 resource/credit/waypoint/secondary-stat source commits and review protocol notes; unbuilt and game-untested.
