@@ -1,0 +1,53 @@
+# Board housekeeping proposals - 15 October 2026
+
+Read-only audit of `SWG-handoff.md` at C42 claim. **None of these cleanup proposals has been applied.** Only C42's required claim/completion row and Log rotation are authorized in this pass. Paths below are relative to `outputs/`. Archive preserves text/evidence; delete means remove a redundant active-board pointer only after preserving it. Runtime success is not inferred from a commit.
+
+## Task rows
+
+| Board row(s) / stale text | Checked evidence | Proposed action and destination |
+|---|---|---|
+| C12/C13/C14/C15, C10; completed atlas fit; completed Tortoise/WoW brief; farming research rows and Darksaber research | Each row says plan/bounded pass complete and names its report. This does not close implementation or rights gates. | **Archive** completed research rows to `SWG-handoff-archive.md`, new "C42 proposed completed research rows" section; retain one current dependency/gate pointer where actually needed. Do not treat broader research parking as approved. |
+| C18, C22, C4c/C4d/C4e/C19 review rows | Named review reports exist; `Documentation-support/review-C4f/C4f-review.md` follow-up resolves its two findings in source; newer C39 remains changes-requested. | **Merge** open findings and runtime gates into one current review/promotion row; **archive** completed review history under "Review milestones". Preserve report links and unresolved findings, not original historical counts as today's totals. |
+| C20 still "claimed-runtime waits" | Archive 14 Oct 13:03 records Corellia-Tatooine recovery PASS; `2ff7b58`; separate Hoth cleanup 11/11 in `Documentation-support/C23-hoth-gameplay.md`. | **Archive** implemented/proven return-home milestone under "Bot recovery"; **merge** remaining path/deadline failures into current bot acceptance row. Corellia proof is not every Hoth/death failure path. |
+| C25 first patch / C26 still awaiting review/build | Dev `7267cf3c`, `58797fdf`, `788e456f`, `7e6625c0`, `7817437a`, `e9a8a6c0`; archive 14 Oct 18:50 says reviewed and built. | **Merge** as "integrated; acceptance outstanding" into C23/C24; **archive** source-preparation rows under "Telemetry". Keep explicit runtime steps, not the stale build wait. |
+| C29 lore "queued"; C34r cure staging still describes original full block | Archive 14 Oct 23:17 reassigns lore to Fable; `Fable-resources3/lore/`; C33b row records 5/7 works with healState still blocked. | **Merge** C29 into mechanics/book reference + Fable resource-consumer follow-up; **merge** cure remainder into C33b. Archive original staging block as historical evidence, never delete the open healState item. |
+| C32 profession kits 4/4 | Board C32 and archive 15 Oct 01:40. | **Archive** completed milestone under "Profession kits"; keep expanded class-check coverage in C33/C33b, not duplicate grant implementation work. |
+| "Bot B0-unclaimed ready"; "Agent body v0.2-unclaimed open"; separate staged interaction upgrade | Roadmap B0 checked; dev `e1344def` onward and C26 current telemetry; existing upgrade row already reports tests. | **Merge** only outstanding body/promotion/client checks into one body row; **archive** proven B0/v0.2 implementation milestone. Do not close mount/trade/crafting checks by association. |
+| "Flurry world-boss rotation port-unclaimed open" and implemented world-boss rotation + normal-damage credit check | Implemented row cites `bda2c0dd`; reward check explicitly open. | **Merge** into one pending release/reward-test row; **archive** duplicate port placeholder under "World boss". |
+| Hoth row still first client crash/owner retry/next caves; Coronet travel UI report | Board C23 instruction records owner saw Hoth, spawns, all 18 markers; `Agent/to-chatgpt.md` 14 Oct 14:35; archive 14 Oct 14:56; C23 report. | **Merge** current state into C23/C24 Hoth acceptance. **Archive** resolved missing-archive crash and initial UI diagnosis under "Hoth client setup"; retain any direct-route question not actually checked. |
+| Encounter policy "exact year open"; stationary bots "WSL sandbox blocked" | `../AGENTS.md`: 138-139 ABY and WSL access; current status snapshot `Agent/live/status.md`. | **Archive** answered era/access triage under "Policy and access"; keep genuinely unresolved bot behavior in current diagnostics. Historical access failure is not a present blocker. |
+| Export pending research PDF | Archive 14 Oct 16:39 and 16:31 checkpoint: `output/pdf/SWG-project-checkpoint-2026-10-14.pdf` was refreshed as a selected-doc snapshot. | **Merge** as "clarify if another export is wanted", **archive** completed snapshot receipt. Exact equivalence to the old request is **UNVERIFIED**; don't silently mark the old scope done. |
+| Many historical weapon/Storyteller rows, one still "claimed" | Rows point to bounded reports; `Agent/to-claude.md` 14 Oct follow-ups explicitly leave identity unresolved. | **Merge** into one owner track with unresolved identity and last checked report; **archive** individual research receipts under "Historical research". Parking/cancellation needs the owner; no claims of solved identity. |
+| Farming downloads section 14 ZIPs/391 MB" | `Agent/to-claude.md` 14 Oct 16:39: 19 archives/414149488 bytes, five 7z inventories still need full audit. | **Merge** row into accurate partial-download checkpoint; **archive** old receipt count. No new download permission implied. |
+
+## Questions for the owner
+
+| Entry / duplicate | Proposed action / evidence |
+|---|---|
+| 14 Oct Q2 all 18 deeds | **Archive** answered subquestion with Owner 14:56 answer; **merge** still-open rate question into H1 of `Documentation-support/owner-decisions-for-fable.md`. |
+| Q3 "Fable's planet"; Q10 archive permission and old story-date alternatives | **Archive** Ossus selection and test-first-look permission with Q10 Owner answer/archive 14 Oct 14:56. **Merge** faction/encounter/look questions into O1-O4. Exact era answered in `../AGENTS.md`; no choice between pre-138 timelines remains. |
+| Q11 Chiss-first, customization splice and C++ clothing choice | **Archive** answered first choice and delegated technical decisions with dev `a32566bc`; **merge** remaining order/names/stats/Hutt/Zeltron choices into S1-S3. Owner played Chiss: archive 15 Oct 01:32. |
+| Q7 duplicates Q3 asset approvals; Q8 duplicates cave/batch-A boss reward question; Q9 map-support premise stale | **Merge** into A1-A4/H1/H3; **archive** duplicate wording with source pointers. General Hoth names/POIs already owner-verified; optional new encounter markers still depend on placement. |
+| Era header says owner raid/beskar/coral answers "below", but none below on active board | **Merge** a link to archive 15 Oct 00:01 instead of repeating the answers; retain all four genuinely open grade/voxyn/flora/solar questions (O5-O7). |
+| Overnight allow prompt from 14 Oct 04:59 | **Merge** into Claude's automation follow-up, **archive** historic exact prompt after checking existence. Obsolete/answered status of that specific prompt is **UNVERIFIED**; later running cycles alone are not proof. |
+| Q4 clean-room pilot, Q5 Discord, Q6 backport | **Merge** into lower-priority decisions list section 5. No answer found; don't delete as "done". |
+
+## Instructions C1-C25 and repeated orders
+
+- **C4 and C4d:** **archive** original one-off review instructions to archive "Completed C-task instructions"; retain links in current review-gate row. Reviews were performed; their historical test lists are not blanket closures.
+- **C9:** **merge** three remaining scenario acceptance checks into C33/C23/C16 coverage as appropriate; archive original implementation prescription. Implementation exists; mission completion/harvest still need actual evidence.
+- **C11:** **merge** remaining terms/donor/hold decisions into the archive-download record; archive completed fetch/pin-audit prescription. Never automatically resume deferred downloads or excluded-source work.
+- **C7:** **archive** "owner napping" job instructions and initial five-squad launch recipe; **merge** current operational rules into `tools/bots/scenarios/README.md` only after Claude checks them against today's plan. One-driver/restart safeguards remain in `../AGENTS.md`; C42 itself never runs bots.
+- **C15:** **archive** completed bounded research prescription; catalogue remains the reference. No download permission follows.
+- **C16/C17:** **merge** implementation instructions into compact runtime/coverage or setup/first-post gates; archive detailed original specification. C17 privacy correction supersedes raw board-line forwarding (`Agent/to-claude.md`, 14 Oct 16:31; `Documentation-support/discord-plan.md`).
+- **C23/C24/C25 and "Order for ChatGPT: C23-C24-C25":** **merge** current acceptance steps with C24b/C39/current queue; archive historic restart waiting/order and C25 first implementation job. Do not remove release NO-GO, owner consent, or pending runtime checks.
+- **C1/C2/C3/C5/C6:** no checked evidence of completion for their full stated scope. **Merge** only duplicate row/instruction pointers, retaining the actual open task. C6's owner-present/client/promotion gate remains. C8/C10/C12-14/C18-22 have rows but no surviving full instruction blocks to remove: do not invent missing blocks.
+
+## Log and status
+
+- At claim, Log has four headings: 12:39 C39, 12:40 crew, 12:05 tools, 11:40 local jobs. **Archive** oldest 11:40 when adding C42; move its complete text to `SWG-handoff-archive.md`, "Moved 2026-10-15 C42". **Merge** ordering so 12:40 precedes 12:39; no deletion of technical history. C42's final rotation is the only log housekeeping applied here.
+- Server lock status still says dev `bb51ec97`/10:05 while 12:40 log reports restart on `398744b5`. **Merge** latest deployment record into the status line by Claude, preserving Claude's ownership. Running binary independently **UNVERIFIED** by C42; git HEAD is not binary proof.
+- Active logs saying C39 fixes are "ready" remain current: do not archive as integrated without Claude review/cherry-pick evidence (`Documentation-support/review-C39.md`).
+- Board is about 55 KB at claim, above its ~25 KB target (`SWG-roadmap.md`, housekeeping). Proposed compaction above is not a reason to discard unresolved questions or claim all old rows finished.
+
+Outside this pass: Fable READMEs, `Owner-test-list.md` and roadmap carry stale "stage only/no creatures/Chiss pending" passages. Their corrections belong in a separate approved docs task; C42 changes none of them. The newer return brief provides the checked override meanwhile. No public export or outbound post performed.
