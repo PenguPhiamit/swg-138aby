@@ -11,7 +11,7 @@ Research only. Nothing was pulled, downloaded, installed or changed, and no mode
 - **Tool use has the best-documented numbers of the candidates that fit.** The card says it "excels in tool calling" and reports BFCL-V4 66.1 and TAU2-Bench 79.1 (vendor numbers). Apache 2.0.
 - **Twice the source per topic.** `source_cap()` in [idle_research.py](../tools/agents/local/idle_research.py) gives 30,000 characters at 16K (today), 60,000 at 32K, 120,000 at 64K.
 
-**Not yet established:** no benchmark compares it with `qwen3:8b` on our tasks, and speed is unmeasured. The test in section 5 settles both. If it fails, `gemma4:12b` is the next choice. If neither beats `qwen3:8b`, keep the current model. Three models the owner and a peer session suggested were checked in section 3b: none beats the recommendation.
+**Not yet established:** no benchmark compares it with `qwen3:8b` on our tasks, and speed is unmeasured. The test in section 5 settles both. If it fails, `gemma4:12b` is the next choice. If neither beats `qwen3:8b`, keep the current model. Six models the owner and a peer session suggested were checked in sections 3b and 3c: none beats the recommendation.
 
 ## 1. What runs now
 
@@ -83,13 +83,25 @@ Three models suggested after the table above. Same rules: research only, nothing
 
 **What this means.** None of the three beats `qwen3.5:9b` for this PC. `0x-lite` does not fit the card at any useful window. `wraith-8b` has no tool-calling statement and no coding numbers. The Nemotron 1.5B is the only one small enough to be a cheap-job candidate, and only if a test shows it returns the short JSON answer `local_map.py` asks for. Its non-commercial licence is fine for private research but worth noting.
 
+## 3c. Three more owner-suggested links (15 Oct)
+
+Same rules: research only, nothing downloaded. Sizes come from GGUF listings or Q4 estimates (est.). Per-token KV figures come from the config values.
+
+| Model | Ollama or GGUF | Size and context | Licence | Tool calling | What the card says it is good at | Jobs it could take |
+|---|---|---|---|---|---|---|
+| `Merlin-Research/Qwen3.5-4B-Safety-Thinking` | The card says GGUF builds are "in active development and validation" and recommends the BF16 checkpoint, loaded with `ollama create` from a local Modelfile. The Hugging Face "Use this model" panel lists `ollama run hf.co/Merlin-Research/...:Q4_K_M`. That panel is not card text and the Q4 build is not validated. | 4B dense, fine-tuned from Qwen3.5-4B (LoRA SFT). 32 layers, 8 with full attention, 4 KV heads × 256 dim, so 32 KB per token (same as `qwen3.5:9b`). Config max positions 262,144. A search listing says 32K, and the card header says "1M context possible". Q4_K_M about 2.5–3 GB (est.); BF16 about 8 GB (est.). | Apache 2.0 | Not mentioned | Safety-oriented reasoning, strict instruction-following, alignment and safety research. No numeric benchmarks. Writes a `<think>…</think>` reasoning block before each answer. | Poor fit for either job. The reasoning block risks breaking the JSON in `local_map.py`. No tool-calling statement for `local_agent.py`. Tuned for safety, not proofreading or code. |
+| `Venastine-Research/Xing4.0-29B-A4B-GGUF` (original: `XingChen-AGI/Xing4.0-29B-A4B`, China Telecom; the GGUF is a third-party repackage) | No official Ollama tag found. A guide dated 2026 says llama.cpp support was still an unmerged PR (#29012, opened 17 Sep 2026) with a fork as a workaround. Not verified. | 29B MoE, 4B active (64 routed experts, 4 active, 1 shared). GGUF: IQ2_M 9.9 GB, IQ3_XXS 11.6 GB, Q4_K_M 19 GB. 256K native (card), extensible to 512K. Uses multi-latent attention (kv_lora_rank 512, rope dim 64), so about 45 KB per token (est.), or 1.5 GB at 32K (est.). | Apache 2.0 (card) | Card: "tool calling" under an agent architecture | Agent workflows, complex engineering and coding. Self-reported: SWE-bench Verified 75.00; Terminal-Bench 2.1 57.50; Tau3-Bench 64.63; IFBench 69.67. The card gives Qwen3.6-35B-A3B 76.00 on SWE-bench Verified; Qwen's own card reports 73.4, so the harnesses differ. | Only if it runs at all. IQ2_M plus KV is about 1 GB over the ~11 GB free (est.), so part would run on CPU. IQ2 and IQ3 quants cost quality. Not for now; revisit when an Ollama build supports it. |
+| `ibm-research/granite-vision-3.2-2b-GGUF` | Official Ollama tag `granite3.2-vision`: 2.4 GB, 16K context, vision and tools badges. This GGUF is a Q4_K_M at 1.55 GB. | 2B-class (the GGUF section says 3B). Text decoder: 40 layers, 8 KV heads × 64 dim, so 80 KB per token (est.). The card gives no native context; the Ollama tag caps at 16K. | Apache 2.0 | Ollama tag shows tools; card does not mention tool calling | Enterprise visual document understanding: tables, charts, OCR and questions about document images. The card says text-only tasks should go to the Granite LLMs. | Not research chunks or Core3 source. Could help if you ever need OCR of screenshots, scanned tables or a PDF page. |
+
+**What this means.** None of the three beats `qwen3.5:9b` for the research jobs. The Merlin model is small and fits easily, but it is a safety-tuned reasoning model with no tool-calling statement. Xing 4.0 has the strongest agent numbers of the batch, but it has no confirmed Ollama path and a 29B quant would spill to CPU. Granite Vision is a document-image model, so it is a different job.
+
 ## 4. Why this order
 
 - **`qwen3.5:9b` over `gemma4:12b`.** They are close. `gemma4:12b` has the higher LiveCodeBench (72.0 against 65.6). `qwen3.5:9b` has the stronger tool-use evidence (TAU2 79.1 against 69.0, and a BFCL figure that `gemma4:12b`'s card doesn't give), and it leaves more room at 64K. `local_agent.py` leans on tool calls, so `qwen3.5:9b` goes first.
 - **`qwen3.6:35b` is not for now.** It has the best coding numbers in the table, but 23–24 GB will not stay on a 12 GB card. On this PC that means ~14 GB in RAM on 32 GB, the SWG client running, and the 15 Oct crash. Revisit it only after a memory test, or on a machine with more RAM.
 - **`gpt-oss:20b` is not better on the numbers we have.** It is the code default and already installed, and it runs partly on CPU at any window above 16K. Keep it installed for now; deleting it is an owner decision.
 - **`devstral-small-2:24b`** has a good tool number, but as a dense 24B it would be slow here (speed not measured).
-- **Owner-suggested models (section 3b)** do not beat the recommendation on card numbers, fit, or tool calling. Nemotron 1.5B is the only one worth a test for the cheapest chunk jobs.
+- **Owner-suggested models (sections 3b and 3c)** do not beat the recommendation on card numbers, fit, or tool calling. Nemotron 1.5B is the only one worth a test for the cheapest chunk jobs.
 - **`qwen3:8b`** stays as the fallback. Its 16K window is what limits source, and it fits 32K only borderline.
 
 ## 5. Steps the owner would approve (none done)
@@ -151,5 +163,14 @@ Section 3b (owner-suggested):
 - https://www.promptlayer.com/models/ozone-ai0x-lite-gguf (third-party GGUF listing, not verified against the files)
 - https://huggingface.co/vanta-research/wraith-8b (config: https://huggingface.co/vanta-research/wraith-8b/raw/main/config.json)
 - https://ollama.com/vanta-research/wraith-8b/tags (seen in a search listing, not fetched directly)
+
+Section 3c (owner-suggested):
+- https://huggingface.co/Merlin-Research/Qwen3.5-4B-Safety-Thinking (config: https://huggingface.co/Merlin-Research/Qwen3.5-4B-Safety-Thinking/raw/main/config.json)
+- https://huggingface.co/Venastine-Research/Xing4.0-29B-A4B-GGUF
+- https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B (config: https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B/raw/main/config.json)
+- https://www.mindstudio.ai/blog/xing4-29b-a4b-benchmarks and https://andrew.ooo/answers/what-is-xing4-0-29b-a4b-china-telecom-single-gpu-agent-model-september-2026/ (secondary guides, for the llama.cpp PR status; not verified)
+- https://huggingface.co/ibm-research/granite-vision-3.2-2b-GGUF
+- https://huggingface.co/ibm-granite/granite-vision-3.2-2b (config: https://huggingface.co/ibm-granite/granite-vision-3.2-2b/raw/main/config.json)
+- https://ollama.com/library/granite3.2-vision
 
 Local files: [ollama-model.txt](../tools/agents/local/ollama-model.txt), [ollama-ctx.txt](../tools/agents/local/ollama-ctx.txt), [REMOTE-OLLAMA.md](../tools/agents/local/REMOTE-OLLAMA.md), [idle_research.py](../tools/agents/local/idle_research.py), [local_agent.py](../tools/agents/local/local_agent.py), [local_map.py](../tools/agents/local/local_map.py), [memguard.py](../tools/agents/local/memguard.py), [ollama_url.py](../tools/agents/local/ollama_url.py).
