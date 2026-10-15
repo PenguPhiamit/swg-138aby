@@ -336,6 +336,78 @@
    "local_path": "work/research/Sagiroth_TortoiseBots",
    "fetched_by": "Claude from Git Bash, 13 Oct 2026 23:12. Owner's request in Claude chat (13 Oct: 'my wow dev homie just gave me permission to let you fork his wow turtle bot framework'), with a screenshot of the author's permission on Discord, 13 Oct 22:53: 'Yeah fire it up / Fork it or whatever'",
    "note": "Reference only: nothing built, run or installed. Not forked on GitHub (that would be an action on the owner's account). WoW-specific code does not transfer to Core3; we take ideas and structure, and write our own code. If any file is ever ported, keep its notices, follow its own licence line (LICENCE.md), and keep the author credit. Core3 is AGPL-3.0, so AGPL/GPL-compatible files could be adapted with notices."
+  },
+  {
+   "date": "2026-10-15",
+   "fetched_by": "Claude (F86 first-model session) from Git Bash; owner's go 15 Oct 14:24 (board, Owner's answers, set 14 Oct item 7: install Blender 3.6 LTS and the SWG add-on, download Quaternius Ultimate Modular Ruins, get texconv)",
+   "license_verified": true,
+   "credits": null,
+   "folders_planned": null,
+   "id": "F86a",
+   "description": "Blender 3.6 LTS (3.6.23, portable zip) from the official Blender download server, for the SWG model path (F86). Not installed system-wide: unzipped to C:/Users/Pengw/Tools/blender-3.6.23-windows-x64; the SWG add-on io_scene_swg 3.1.4 (MIT, work/research/nostyleguy_io_scene_swg_msh) enabled in its user preferences.",
+   "urls": [
+    "https://download.blender.org/release/Blender3.6/blender-3.6.23-windows-x64.zip",
+    "https://download.blender.org/release/Blender3.6/blender-3.6.23.sha256"
+   ],
+   "status": "downloaded and unzipped",
+   "revision_or_version": "3.6.23 (hash e467db79ca8c)",
+   "bytes": 388356346,
+   "sha256": "e3296eba7eab32c2e5182459ec7614af32224eee2bd32c9d0a08ffd751c54f3b",
+   "license_name": "GPL-2.0-or-later (Blender); add-on io_scene_swg: MIT",
+   "license_or_readme_text": "SHA-256 equals the line for this file in blender-3.6.23.sha256 on download.blender.org (same host, same folder). The add-on's LICENSE (MIT, Copyright (c) 2022 Nick Rafalski) is in work/research/nostyleguy_io_scene_swg_msh/LICENSE.",
+   "folders_taken": [
+    "whole release, unzipped outside the repo"
+   ],
+   "local_path": "C:/Users/Pengw/Tools/blender-3.6.23-windows-x64 (outside the repo)",
+   "note": "Tool only; nothing from it ships. The zip was kept in the session scratchpad, not in the repo."
+  },
+  {
+   "date": "2026-10-15",
+   "fetched_by": "Claude (F86 first-model session) from Git Bash; owner's go 15 Oct 14:24 (board, Owner's answers, set 14 Oct item 7: install Blender 3.6 LTS and the SWG add-on, download Quaternius Ultimate Modular Ruins, get texconv)",
+   "license_verified": true,
+   "credits": "Models by Quaternius (https://quaternius.com), CC0; not required, but credit when the piece is shown.",
+   "folders_planned": null,
+   "id": "F86b",
+   "description": "Quaternius Ultimate Modular Ruins Pack (Aug 2021 build, 90 models, OBJ/FBX/Blend), CC0. Source: the Download button on https://quaternius.com/packs/ultimatemodularruins.html, which opens the author's Google Drive folder.",
+   "urls": [
+    "https://quaternius.com/packs/ultimatemodularruins.html",
+    "https://drive.google.com/drive/folders/1ETp2ldaHaP0BkS4FBmkT-g9Yf88T_cIX"
+   ],
+   "status": "downloaded; one piece (Wall_Broken.obj) used",
+   "revision_or_version": "folder title 'Ultimate Modular Ruins Pack - Aug 2021'; Drive 'Download all' zip",
+   "bytes": 28989667,
+   "sha256": "6e3afcbb603316a6004092f128d1dec36a0b6c8cd5bfffbd23d30a33471d6d59",
+   "license_name": "CC0 1.0 Universal (pack's License.txt and the pack page)",
+   "license_or_readme_text": "License.txt in the pack: 'License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/'. The pack page shows 'License CC0'. Fable (14 Oct) also recorded that the site's licence page now shows QAL v1.0 (no attribution needed, finished games allowed, no repackaging); our use is one converted prop in a test archive.",
+   "folders_taken": [
+    "OBJ/Wall_Broken.obj and its .mtl"
+   ],
+   "local_path": "session scratchpad only (zip and extract are outside the repo); the converted output is in Fable-asset-pipeline/",
+   "note": "Drive's per-file links answered 'quota exceeded' for scripts; the folder's own Download all (browser pane) worked. The pack has no atlas: its materials are two flat colours (Main, Highlights), no UVs; Textures/ holds only bark and leaf images for the overgrown pieces."
+  },
+  {
+   "date": "2026-10-15",
+   "fetched_by": "Claude (F86 first-model session) from Git Bash; owner's go 15 Oct 14:24 (board, Owner's answers, set 14 Oct item 7: install Blender 3.6 LTS and the SWG add-on, download Quaternius Ultimate Modular Ruins, get texconv)",
+   "license_verified": true,
+   "credits": null,
+   "folders_planned": null,
+   "id": "F86c",
+   "description": "Microsoft texconv.exe (DirectXTex release may2026, x64), DDS writer for the SWG textures (F86).",
+   "urls": [
+    "https://github.com/microsoft/DirectXTex/releases/tag/may2026",
+    "https://github.com/microsoft/DirectXTex/releases/download/may2026/texconv.exe"
+   ],
+   "status": "downloaded",
+   "revision_or_version": "DirectXTex may2026 (published 2026-05-08)",
+   "bytes": 966480,
+   "sha256": "dcfdec10244e02cf5037fba089c55fb7e1326b1c8181742d77d15fa5cb5eef06",
+   "license_name": "MIT",
+   "license_or_readme_text": "Release asset of github.com/microsoft/DirectXTex (MIT licence at the repo root). Authenticode check on the exe: status Valid, signer 'Microsoft 3rd Party Application Component, Microsoft Corporation'.",
+   "folders_taken": [
+    "texconv.exe only"
+   ],
+   "local_path": "C:/Users/Pengw/Tools/texconv/texconv.exe (outside the repo)",
+   "note": "Tool only. Used as: texconv -f BC1_UNORM -m 0 -y <png> (DXT1, full mip chain)."
   }
  ]
 }

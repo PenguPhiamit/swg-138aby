@@ -303,6 +303,13 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 
 ## Log
 
+### 2026-10-15 14:45 Claude: first outside-art prop staged (F86): a CC0 ruined wall, in the test archive, ready for the owner to look at
+
+- Done: Blender 3.6.23 (portable, official site, hash matches), the SWG add-on, texconv and the Quaternius Ultimate Modular Ruins pack (CC0, via the author's Drive folder; the per-file links hit Drive's quota, the folder's Download all worked) are in; recorded as F86a/b/c in `Content-catalogue/archive-downloads.json`. `Wall_Broken` (976 triangles) converted to `.msh`, `.apt`, two `.sht` and two DXT1 `.dds`, and added to the client's `local_planets.tre` (166 -> 173 entries, read back exact, reference closure OK; previous archive saved as `Local-content/old-client-local_planets.tre.8ad04fec`).
+- How the owner sees it, no server change or restart: the piece replaces the stock campfire log's appearance, so `/createSpawningElement spawn object/static/structure/general/campfire_fresh.iff` in a test session shows the wall. Steps: `Fable-asset-pipeline/how-to-view-first-ruin.md`.
+- Findings: the pack has no texture atlas (two flat material colours, no UVs), so the textures are flat colours; the exporter writes no collision (walk-through), as the plan expected. Not done: own object template, CRC entry and server Lua (needs a restart by the galaxy owner), LODs, a stone texture.
+- Not verified in the real client yet. Any session that rebuilds `local_planets.tre` from its own staging drops these files: re-run `Fable-asset-pipeline/stage_ruin.py` (inputs in `Fable-asset-pipeline/converted/`).
+
 ### 2026-10-15 14:00 Claude: test galaxy restarted for the full fleet (owner: "restart and ... deploy the full fleet")
 
 - Restarted 13:5x on dev with `BotPop=true` (ready in 66 s, 0 error lines). The botpop scale series (owner OK earlier) was stopped at its 500 step for this; its 100 and 250 results stand (`Bot-reports/botpop-scale-test.md`).
