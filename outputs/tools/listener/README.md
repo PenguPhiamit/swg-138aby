@@ -45,7 +45,7 @@ names are left out by `setup`, so a bot being online never opens the gate.
 | key press | key name and how long it was held, for example `{"k":"W","ms":1840}` |
 | mouse button | which button, how long, and the position inside the client window |
 | position | your character's zone and x, y from the player list (every 2 s on the test galaxy, every 5 min on the live one) |
-| typing | how many characters and how long, never which: after Enter (chat) or `/` (a slash command), and for any typing-like run of letters (six presses, four different keys, under 1.2 s apart) |
+| typing | how many characters and how long, never which: after Enter (chat) or `/` (a slash command), and for any typing-like run of letters (four presses, three different keys, under 1.2 s apart) |
 | gate | when listening opened and closed, and why |
 
 Never written: window titles, other programs, screenshots, anything typed, or the player list's account numbers and
@@ -53,10 +53,12 @@ addresses. Letters wait 7 s before being written so a typing-like run can be rec
 behind for letter keys). Digits, F-keys, arrows, Space and mouse buttons are written straight away, so hotbar use is kept.
 
 **Limits, said plainly**
-- A fast run of W/A/S/D taps with four different keys can look like typing and be counted instead of written. If that
+- A fast run of four W/A/S/D/E/R-type letter taps with three different keys can look like typing and be counted instead of written. If that
   bothers you, list keys in `"movement_keys"` in `listener-config.json` to exempt them (a password made of only those letters
   would then show, which the closed gate prevents).
-- Typing slower than 1.2 s per key *outside* chat would be written key by key. The gate is what protects there.
+- Outside chat, a word of one to three letters, or typing slower than 1.2 s per key, is written key by key. The gate is what
+  protects there. (On 15 Oct the first live run wrote a five-letter word typed into a game text field because the rule then
+  needed six presses; it now needs four.)
 - Keys are sampled 50 times a second; a tap shorter than 20 ms can be missed.
 - In-game events other than your position (combat, commands you ran, chat) are not captured: that would need a server-side
   feed, which is a separate piece of work under the server lock.

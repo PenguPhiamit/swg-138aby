@@ -23,9 +23,9 @@ WHAT IT WRITES (Agent/listener/events-<day>-<hour>.jsonl, kept 48 hours, gitigno
 and how long it was held, mouse buttons with the position inside the window, the character's zone and position from the
 player list, and gate open/close times. It never writes window titles, other programs, screenshots or typed text: after
 Enter (chat) or / (a slash command) the letters, digits and punctuation are only counted, and so is any run of typing-like
-letters and punctuation (six presses, four different keys, under 1.2 s apart; digits and F-keys are exempt so hotbar use
-is kept). Letters are held back for 7 s before writing so such a run can be recognised first. Known limit: typing slower
-than 1.2 s per key outside chat would be written key by key, which is why the gate above is the real protection.
+letters and punctuation (four presses, three different keys, under 1.2 s apart; digits and F-keys are exempt so hotbar use
+is kept). Letters are held back for 7 s before writing so such a run can be recognised first. Known limit: a word of one to three letters, or typing
+slower than 1.2 s per key, outside chat is written key by key; the gate above is the real protection.
 
 This is an exception to live_map.py's rule that the owner is never logged: it exists because the owner asked for it.
 """
@@ -57,7 +57,7 @@ DEFAULTS = {
                             # would then be written out
 }
 POLL_S, FG_S, WHO_S, STATE_S = 0.02, 0.25, 2.0, 2.0
-HOLD_S, BURST_N, BURST_DISTINCT, BURST_GAP_S = 7.0, 6, 4, 1.2
+HOLD_S, BURST_N, BURST_DISTINCT, BURST_GAP_S = 7.0, 4, 3, 1.2
 IDLE_EXPLICIT_S, IDLE_IMPLICIT_S = 20.0, 3.0
 
 LETTERS = set('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
@@ -150,6 +150,10 @@ class Redactor:
         if len(run) >= BURST_N and len({p['k'] for p in run}) >= BURST_DISTINCT:
             self.pending = [p for p in self.pending if p not in run]
             self.typing = {'since': run[0]['t'], 'last': press['end'], 'n': len(run), 'explicit': False}
+            for k, (t, _, _) in list(self.holds.items()):     # keys rolled into the run and still down are part of it
+                if k in self.burst_keys and t >= run[0]['t']:
+                    del self.holds[k]
+                    self.typing['n'] += 1
         return []
 
     def tick(self, now):

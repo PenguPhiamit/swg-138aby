@@ -97,9 +97,16 @@ class RedactorTests(unittest.TestCase):
         self.assertNotIn('"P"', json.dumps(out))
 
     def test_a_short_run_of_letters_is_a_normal_press_after_the_hold(self):
-        events = [e for i, k in enumerate('RFXZC') for e in key(T0 + i * 0.3, k, 0.08)]
+        events = [e for i, k in enumerate('RFX') for e in key(T0 + i * 0.3, k, 0.08)]
         self.assertEqual(feed_all(self.red, events), [])              # held back, not yet written
-        self.assertEqual(names(self.red.tick(T0 + 20)), list('RFXZC'))
+        self.assertEqual(names(self.red.tick(T0 + 20)), list('RFX'))
+
+    def test_a_five_letter_word_typed_outside_chat_is_counted_not_kept(self):
+        # the first live run (15 Oct) wrote E N D O R key by key under the old six-press rule
+        events = [e for i, k in enumerate('ENDOR') for e in key(T0 + i * 0.01, k, 0.13)]
+        out = feed_all(self.red, events) + self.red.tick(T0 + 30)
+        self.assertEqual(names(out), [])
+        self.assertEqual([(e['typed'], e['end']) for e in out if 'typed' in e], [(5, 'idle')])
 
     def test_slow_typing_is_the_residual_risk_and_is_logged(self):
         events = [e for i, k in enumerate('PASSWORD') for e in key(T0 + i * 2.0, k, 0.08)]
