@@ -165,6 +165,9 @@ def start(args):
         # The live map (tools/live_map.py) reads log/who.json; Core3 writes it every 300 s by default. The dev build
         # allows 2 s (PlayerManagerImplementation.cpp; stock refuses under 10 s): owner, 15 Oct, "closer to a live view".
         shuttles += 'Core3.OnlineLogSeconds = 2\n'
+        # Owner, 15 Oct: "allow all creatures to be tamed": any creature, any age or level, always succeeds (dev build;
+        # CreatureManagerImplementation::tame reads it only on a _test database).
+        shuttles += 'Core3.TameAnything = true\n'
         # A resumed copy still has the last start's overrides at the end of config-local.lua: replace them.
         text = config.read_text(errors='surrogateescape')
         cut = text.find('\n-- TEST GALAXY OVERRIDES')
