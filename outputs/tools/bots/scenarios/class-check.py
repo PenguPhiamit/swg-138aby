@@ -309,7 +309,7 @@ KIT_MARKER = {'carbine': 'carbine_cdef', 'polearm': 'lance_staff_wood_s1', 'twoh
 # Names are client STF keys, not the kit reply's template-path list.
 MEDICINE = {'curePoison': 'cure_poison', 'cureDisease': 'cure_disease',
             'extinguishFire': 'fire_blanket', 'healEnhance': 'enhance',
-            'revivePlayer': 'revive', 'healState': 'medpack_dizzy',
+            'revivePlayer': 'revive', 'healState': 'medic_dizzy',  # @medicine_name:medic_dizzy_a, not medpack_
             'applyPoison': 'poison_health', 'applyDisease': 'disease_health'}
 ITEM_NAMES = {'stimpack': 'stimpack', 'wound_pack': 'wound',
               'enhance_pack': 'enhance', 'revive_pack': 'revive'}

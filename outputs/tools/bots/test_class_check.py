@@ -737,6 +737,11 @@ class DoctorStaging(unittest.TestCase):
         self.assertEqual(ally.slash.call_count, 3)
         self.assertEqual(len(setup['afflict']), 3)
 
+    def test_the_dizzy_pack_is_found_by_its_real_name(self):
+        items = [{'oid': 1, 'name': '@medicine_name:medic_dizzy_a'}, {'oid': 2, 'name': '@medicine_name:medic_blinded_a'}]
+        entry = {'ability': 'healState', 'setup_tags': ['item:state_pack']}
+        self.assertEqual([i['oid'] for i in cc.matching(items, cc.required_items(entry))], [1])
+
     def test_a_building_is_stageable(self):
         self.assertTrue(cc.stageable(['building:medical_or_entertainment']))
         self.assertFalse(cc.stageable(['building:cantina_owner']))
