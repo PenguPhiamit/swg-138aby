@@ -35,8 +35,12 @@ def run(g):
     for bot in g.bots:
         bot.slash('agentGear', 'afflict restore', wait=0)
         bot.wait_for(lambda e: str(e.get('text', '')).startswith('[agentgear]'), 8)
-        if not any('speederbike_swoop' in str(i.get('name')) for i in bot.inventory().get('items', [])):
+        carried = [str(i.get('name')) for i in bot.inventory().get('items', [])]
+        if not any('speederbike_swoop' in name for name in carried):
             bot.slash('agentGear', 'vehicle', wait=0)   # owner: "provide everyone with speeders" (a swoop deed)
+            bot.wait_for(lambda e: str(e.get('text', '')).startswith('[agentgear]'), 8)
+        if not any('mandalorian_helmet' in name for name in carried):
+            bot.slash('agentGear', 'mandohelmet', wait=0)   # the Death Watch mines poison anyone without it (dev 425e8590)
             bot.wait_for(lambda e: str(e.get('text', '')).startswith('[agentgear]'), 8)
     for _ in range(60):
         if escort.who(owner):
