@@ -1,7 +1,9 @@
 # The owner's local stand-in agent (14 Oct 2026): OpenAI's gpt-oss-20b with a 64K-token context window.
-# Ollama defaults to a 4K window on cards under 24 GB, too small to hold AGENTS.md, a task brief and the files an agent
-# reads. Create it once, after `ollama pull gpt-oss:20b`:
-#   ollama create gpt-oss-20b-64k -f Modelfile.gpt-oss-20b-64k
-# The relay then runs: codex exec --oss --local-provider ollama -m gpt-oss-20b-64k ...
+# Ollama defaults to a 4K window on cards under 24 GB, too small for a task brief plus the files the agent reads.
+# local_agent.py asks for 64K on every request (num_ctx), so this file is optional. On 14 Oct Claude also gave the stock
+# tag the 64K default while testing Codex (`ollama create gpt-oss:20b` from this file); `ollama pull gpt-oss:20b`
+# restores the stock manifest (same weights, no new download of the blobs).
+# Codex (`codex exec --oss`) is NOT used for the local model: with Codex 0.162-alpha and Ollama 0.40 every reply was cut
+# off after ~260 tokens and Codex had no gpt-oss profile. local_agent.py replaces it.
 FROM gpt-oss:20b
 PARAMETER num_ctx 65536
