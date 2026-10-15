@@ -16,6 +16,10 @@ import escort
 
 GROUP = 'Forn'
 HERE = Path(__file__).resolve().parent
+# Entrances from the client's world snapshots (Fable's ws_read) and the Corvette NPCs from Core3's scripts (15 Oct).
+DUNGEONS = [('dantooine', -547, -3846, 'Warren'), ('yavin4', -6449, -401, 'Geonosian lab'),
+            ('endor', -4662, 4326, 'Death Watch bunker'), ('tatooine', -5985, -6301, 'Corvette tickets (Jabba palace)'),
+            ('tatooine', -6179, -6382, 'Corvette boarding (Klaatu)')]
 _spec = importlib.util.spec_from_file_location('forn_crew', HERE / 'forn-crew.py')
 crew = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(crew)
@@ -31,6 +35,9 @@ def run(g):
     for bot in g.bots:
         bot.slash('agentGear', 'afflict restore', wait=0)
         bot.wait_for(lambda e: str(e.get('text', '')).startswith('[agentgear]'), 8)
+        if not any('speederbike_swoop' in str(i.get('name')) for i in bot.inventory().get('items', [])):
+            bot.slash('agentGear', 'vehicle', wait=0)   # owner: "provide everyone with speeders" (a swoop deed)
+            bot.wait_for(lambda e: str(e.get('text', '')).startswith('[agentgear]'), 8)
     for _ in range(60):
         if escort.who(owner):
             break
@@ -39,7 +46,10 @@ def run(g):
         g.leader.idle(15)
     if not g.check(f'{owner} is online', escort.who(owner), 'waited 15 minutes'):
         return
-    summary = escort.escort(g, owner, crew.ROLES, minutes)
+    sent = escort.mail(g.leader, owner, 'Dungeon waypoints', DUNGEONS)
+    g.check(f'waypoints mailed to {owner}', sent and '"result":0' in str(sent.get('text', '')).replace(' ', ''),
+            (sent or {}).get('text'))
+    summary = escort.escort(g, owner, crew.ROLES, minutes, waypoints=DUNGEONS)
     g.check(f'the crew saw {owner}', summary['owner_seen'])
     g.note(f"escort: {summary['minutes']} min; orders {summary['orders']}; play data {summary['play_data']}")
     for first, c in summary['counts'].items():

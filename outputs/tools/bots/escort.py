@@ -11,8 +11,9 @@ Every 2 s each bot, in its own thread and talking only to its own bot (a request
     player or a crew member (combat messages), with tools/bots/crew_combat.py's rotations; the healer heals the lowest
     of the player and the crew first;
   * otherwise follows: its formation slot around the player, into the player's building cell too.
+  * jumps to the player (/agentgear goto) when the player is on another planet, or out of sight and over 300 m away.
 Orders, from the player by spatial chat or a tell to any crew member (a leading "crew" is optional):
-  follow | stay | attack | passive | heal | status | dismiss
+  follow | stay | attack | passive | heal | status | dismiss | waypoints (the leader mails the waypoint list)
 The leader acknowledges in spatial chat. The run ends on "dismiss", after `minutes`, or when the player has been
 offline for 5 minutes.
 """
@@ -34,8 +35,10 @@ TICK = crew_combat.TICK
 SLACK = 4.0            # metres a bot may drift from its slot before it walks back
 THREAT_SECONDS = 20    # how long "something hit us" stays a reason to fight
 OFFLINE_LIMIT = 300
+CATCHUP = 300          # out of sight and this far away (a speeder, a /teleport): jump to the player
+GOTO_PAUSE = 25        # seconds a zone change takes before the next jump may be tried
 FORMATION = [(3, 2), (-3, 2), (0, -4), (3, -4), (-3, -4), (5, 0), (-5, 0), (0, 5)]   # metres from the player
-ORDERS = ('follow', 'stay', 'attack', 'passive', 'heal', 'status', 'dismiss')
+ORDERS = ('follow', 'stay', 'attack', 'passive', 'heal', 'status', 'dismiss', 'waypoints')
 
 
 def word(text):
@@ -95,16 +98,32 @@ class Shared:
 
 
 ACK = {'follow': 'Following.', 'stay': 'Holding here.', 'attack': 'Engaging your target.', 'passive': 'Weapons down.',
-       'heal': 'Healing you.', 'dismiss': 'Crew dismissed.'}
+       'heal': 'Healing you.', 'dismiss': 'Crew dismissed.', 'waypoints': 'Mailing you the waypoints.'}
 
 
-def escort(g, owner, roles, minutes=120, formation=None):
+def goto(bot, planet, x, y):
+    """Jump to a planet and spot (/agentgear goto, test galaxy bot accounts; the way an admin's /teleport works)."""
+    bot.slash('agentGear', f'goto {planet} {x:.0f} {y:.0f}', wait=0)
+    answer = bot.wait_for(lambda e: str(e.get('text', '')).startswith('[agentgear]'), 8)
+    bot.idle(10)  # the zone change
+    return answer
+
+
+def mail(bot, to, subject, waypoints):
+    """Mail waypoints (planet, x, y, name) to a player: /agentgear mail, attachments the player can add."""
+    body = ' ; '.join(f'{p} {x:.0f} {y:.0f} {n}' for p, x, y, n in waypoints)
+    bot.slash('agentGear', f'mail {to} {subject} | {body}', wait=0)
+    return bot.wait_for(lambda e: str(e.get('text', '')).startswith('[agentgear]'), 8)
+
+
+def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
     shared = Shared(owner)
     slots = dict(zip([b.first for b in g.bots], formation or FORMATION))
     crew_oids = set()
     records = {b.first: crew_combat.new_record() for b in g.bots if b.first in roles}
     counts = {b.first: {'fights': 0, 'follows': 0, 'orders': 0} for b in g.bots if b.first in roles}
     began, last_seen = time.time(), {'t': time.time()}
+    jumped = {}            # first name -> time of the last /agentgear goto
     play, flushed = [], {'t': time.time(), 'snap': 0.0}
     play_file = PLAY / f"{time.strftime('%Y%m%d-%H%M')}-{g.name}-escort.jsonl"
 
@@ -135,6 +154,8 @@ def escort(g, owner, roles, minutes=120, formation=None):
                             bot.say(', '.join(f"{n} {round(r['health'] * 100)}%" for n, r in rows.items()) or 'No reports yet.')
                         elif verb in ACK:
                             bot.say(ACK[verb])
+                        if verb == 'waypoints':
+                            note_play({'kind': 'mail', 'answer': (mail(bot, owner, 'Waypoints', waypoints or []) or {}).get('text')})
             if e.get('event') == 'combat' and bot is g.leader:
                 me = shared.player.get('oid')
                 note_play({'kind': 'combat', **{k: e.get(k) for k in ('attacker', 'attacker_name', 'defender',
@@ -226,9 +247,15 @@ def escort(g, owner, roles, minutes=120, formation=None):
                 break
             player = player_now(bot, zone_row.get('oid') if zone_row else None)
             here = bot.now.get('zone')
-            if zone_row and here and zone_row.get('zone') != here:
-                bot.doing(f"waiting: {owner} is on {zone_row.get('zone')}")
-                bot.idle(TICK)
+            dx, dy = slots.get(bot.first, (0, -3))
+            far = zone_row and not player and row.get('x') is not None and math.hypot(
+                float(zone_row.get('worldPositionX', 0)) - row['x'], float(zone_row.get('worldPositionY', 0)) - row['y']) > CATCHUP
+            if zone_row and here and (zone_row.get('zone') != here or far) and time.time() - jumped.get(bot.first, 0) > GOTO_PAUSE:
+                jumped[bot.first] = time.time()
+                bot.doing(f"jumping to {owner} on {zone_row.get('zone')}")
+                goto(bot, zone_row.get('zone'), float(zone_row.get('worldPositionX', 0)) + dx,
+                     float(zone_row.get('worldPositionY', 0)) + dy)
+                bot.status()  # learn the new planet
                 continue
             if player:
                 with shared.lock:
