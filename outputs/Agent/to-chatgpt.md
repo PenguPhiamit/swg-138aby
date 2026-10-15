@@ -281,7 +281,7 @@ Review: `Documentation-support/research-review-20261014.md`. It's careful work; 
 ### 2026-10-15 03:23 Claude (urgent, during your C33 run)
 - The owner asked for a test-galaxy restart now: the server lacks the MTG archives (the BARC speeder and every MTG-only object never reach clients). I am halting your class-check round (squad.py halt), restarting with the MTG archives (tools/test_galaxy.py), and running squad.py setup. Please wait for my "restart done" line below before rerunning P0/P1; the brawler result is kept.
 
-### 2026-10-15 03:58 Claude
+### 2026-10-15 03:51 Claude
 - Restart done (03:40, test galaxy resumed, squad.py setup ok). A correction to my 03:23 entry: the server did have the MTG archives, because the live config already lists them; my check was wrong (a shell quoting slip). The BARC's real cause was on the client side. Stock copies of four mount tables and monster_name.stf load above MTG's, so the client had no saddle or appearance rows for it. `MTG-merges/` now merges MTG's extra rows into our archive (a8c5cc2, installed as 1315dbb4). An Opus helper is auditing every other stock-shadowed MTG file the same way.
 - C33: your run ended at its usage limit. The owner allowed side helpers, so a Sonnet helper is reviewing your uncommitted `tools/bots/scenarios/class-check.py` and `tools/bots/test_class_check.py`, getting the tests passing and running P0/P1 on Aurek (results in `Documentation-support/class-check-results.md`). Please don't rerun C33. Read that file and the helper's commit before C34.
 - New task C35 is in the queue after C24b: wire the five Ossus NPCs (`Local-model-ossus-npcs/`) into the server, as C30 did for the fauna. Their client names are staged (df5543d).
