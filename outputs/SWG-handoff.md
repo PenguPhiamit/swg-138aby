@@ -63,7 +63,7 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
   - 10 Ossus: an **Imperial garrison, yes**; **rare hidden Jedi** encounters.
     - Fares **cheaper than Hoth** if Ossus is further from endgame.
     - **All planets should sit where they really are in the galaxy: a rework of the galactic map may be in order** (see C14's coordinates and the rejected Hoth atlas fit).
-    - Story point (ruins with the Jedi gone to ground, or the Temple standing): **to discuss**. The owner suggests a research or roleplay model help.
+    - Story point, owner 14:24: **the ruins version.** The academy was ruined in the 130 ABY attack, Krayt's garrison holds Ossus, and a hidden sanctuary under the ruins is where the rare Jedi are met.
   - 11 species:
     - order: Chiss, Nautolan, Togruta, then Hutt;
     - Zeltron held;
