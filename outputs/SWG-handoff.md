@@ -273,6 +273,13 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 
 ## Log
 
+### 2026-10-15 14:00 Claude: test galaxy restarted for the full fleet (owner: "restart and ... deploy the full fleet")
+
+- Restarted 13:5x on dev with `BotPop=true` (ready in 66 s, 0 error lines). The botpop scale series (owner OK earlier) was stopped at its 500 step for this; its 100 and 250 results stand (`Bot-reports/botpop-scale-test.md`).
+- Up now: 23 squad bots, the Forn escort run (20261015-135721, waits up to 3 h for Benny), 77 load bots (`load_fleet.py step 77 60 7200`: 2 h of fights with the memory guard), and the server-side population at 500 throttled, going to 1,000 only if the load average stays under 9 of 12 threads. Results: `/var/tmp/swg-bots/load/*fullfleet*`. Client logs over 200 MB are emptied every 5 min for 4 h.
+- Earlier today: the crew answers every order, Mirren's heal loop, Forn's crouch (`dd9febe`); `/tame train` (dev `398744b5`); the pet follow gap (dev `57a52553`) is live since 13:26 but untested in game.
+- Open: the full-fleet numbers (read the fullfleet JSON files); Benny's "disengaging scripts brok" (asked in game, no answer yet); "better zoom" (client side).
+
 ### 2026-10-15 13:55 Claude: server-side population bots (/botpop), milestone 1 built; 100 and 250 measured
 
 - Owner's go 13:00 (Claude weekly usage 83%). Dev `e6749a9e` (SuiPageData::sendTo null guard) and `7f58804d` (`/botpop`), both on the test galaxy since 13:39. All bot code is in `src/server/zone/managers/botpop/` (header-only, movable into a TortoiseBots fork). Core3 hooks: the command registration, the observer flag (AiAgent insert/disappear, SpawnArea position update) and `ClientlessLogin.h`, the one login/logout boundary. Sagiroth's TortoiseBots is the design reference; no code copied.
