@@ -10,6 +10,9 @@ that log in through the real game protocol to check what works for every profess
 - Keep the pre-CU game as it was, and finish what was left thin or broken (Image Designer, Politician and others).
 - Add places and story that fit the setting, in our own words.
 - Make testing cheap and honest: bots that play each profession and report what works and what doesn't.
+- Give back. If this works out and there is demand for it, I want to help the rest of the community and open it up as
+  open source, as far as I can while respecting the developers whose work it builds on. I'm here for the love of the
+  game, not for profit or clout.
 
 ## Transparency
 

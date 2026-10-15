@@ -62,7 +62,7 @@ Debian's default user is **`swgemu`** (changed 13 Oct so VS Code edits files as 
 - One commit per logical change. End the message with a trailer naming the agent: `Agent: ChatGPT` or `Agent: Claude`.
 - Git stays private: never push, never add remotes, never change the disabled push URL.
 - `bin/conf/config-local.lua` and the world databases are deliberately not in git.
-- **The project folder `h/` has local history too (owner, 14 Oct).** It's a Windows git repo: AGENTS.md, the outputs docs, board, tools and reports. There's no remote, and the same no-push rule applies.
+- **The project folder `h/` has local history too (owner, 14 Oct).** It's a Windows git repo: AGENTS.md, the outputs docs, board, tools and reports. There's no remote, and the same no-push rule applies, with one exception (owner, 15 Oct): a filtered copy of `h` goes to the owner's private GitHub repository, made and pushed only by `outputs/tools/github_export.py` (it scrubs the handles from the owner's brother search out of every past version and leaves that search's files out). Never add a remote to the local repository, never push it directly, and run `outputs/tools/prepush_scan.py` (as root in WSL) before each push. The server repositories under `/opt/swg` stay unpushed until the owner decides.
   - Commit your own finished changes with Windows git (Git Bash), as the repo's local identity, ending the message with `Agent: Claude` or `Agent: ChatGPT`. Commit only your own files, never the other agent's work in progress.
   - Before adding a new folder, check `git status --ignored`. The `.gitignore` keeps out secrets, game files, images, downloads and per-run churn; extend it rather than force-adding.
   - Line endings are stored as-is (`core.autocrlf=false`): keep each file's own endings.
@@ -133,7 +133,7 @@ Before downloading, importing, deploying, or acting in-game, check:
 
 Never copy passwords, account hashes, or database secrets (`SWG-login.txt`, `config-local.lua`, backups) into docs, commits, or chat.
 
-**Redact people's names when publishing (owner, 14 Oct).** Anything that leaves this PC must not name real people: a Discord post, a GitHub push (even to a private repo), a shared page or doc.
+**Redact people's names when publishing (owner, 14 Oct).** Anything that leaves this PC must not name real people: a Discord post, a GitHub push (even to a private repo), a shared page or doc. Exception (owner, 15 Oct): author credits that the licences of reused work require (mod and code authors' own public credits, such as the MTG/Hoth port headers, TortoiseBots and SWGEmu) stay in what is pushed; nobody else's usernames go up.
 - That covers names, forum handles, aliases and character names that identify a real person: the owner's family, players, staff of other servers, and anyone named in the Storyteller research.
 - Replace them with roles ("a player", "a former admin") or leave the line out.
 - The one exception is the credit line an asset's licence requires (for example a CC-BY author credit). Keep that exactly as the licence asks.
