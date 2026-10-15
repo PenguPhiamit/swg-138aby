@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only); C30 source finished at 6f25b704; GPT worktree idle/clean, awaiting Claude review/build/game test. C32 reviewed/built in dev 6f3ce06f. No bot driver claim. The overnight cycle is off. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy UP since 01:31 (fresh, dev build 6f3ce06f, renamed-gems archive 39a89e6c). No ChatGPT edits or bot driver active. — 2026-10-15 01:32**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only; idle, at its usage limit until about 06:13). Bot driver: Claude's Sonnet helper (class check P0/P1 on Aurek). The overnight cycle is off. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy UP since 03:40 (resumed; dev build 6f3ce06f with dev scripts at 80b66e65; MTG-merge archive 1315dbb4). - 2026-10-15 03:55**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -57,6 +57,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C33: owner class check P0/P1** | ChatGPT, Medium; finishing: Claude's Sonnet helper | GPT's run ended at its usage limit (03:3x); the Sonnet helper is reviewing its uncommitted scenario and tests and running P0/P1 on Aurek (03:4x) | Scenario + offline verdict tests, then Aurek P0 and six starters only; no server code changes; driver claim taken when runtime starts |
 | **C24b: R2 idempotence + poolScaleZones re-review** | ChatGPT - GPT-6.1 Sol, **High** | interrupted 02:42-02:52 (network loss, then PC shutdown); requeued 2026-10-15 03:03 after C33/C34 | dev 98ad1d1d + 3a0b154f; offline fixtures and release gate/inventory only; no builds, restarts or bots |
 | **C30: six reviewed Ossus fauna + habitat spawns** | ChatGPT, Medium | source complete 6f25b704; Claude review/build/game test pending | Six unchanged creatures, six dynamic lairs, three groups/five habitats; 20 Lua syntax checks + stubbed loading pass; game-untested |
 | **C32: agent profession kits + squad wrappers** | ChatGPT, Medium | source/offline complete; Claude review/build/game test pending | C++ 4a340565 after dev merge 220700d0; gated profession grant/clear/list + Bot wrappers; 7 offline tests pass; no build/runtime changes |
@@ -257,6 +258,18 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-15 03:55 Claude: the invisible BARC was MTG shadowing; MTG merges installed; helpers on the class check, the MTG audit and examine texts
+
+- **BARC root cause.** The server spawned it (a bot's `locate` found it next to the owner), but the client had nothing to draw. The client and the server both load MTG's archives below stock, so stock's copies of shared files win. The four mount tables (`datatables/mount/*`) and `string/en/monster_name.stf` in stock know nothing of the BARC, so its rows in MTG's copies never reached the client. That is also why the datapad said `monster_name:[barc_speeder]`.
+  - Earlier leads (the empty template, "the server lacks the MTG archives") were wrong. The live config already lists MTG's archives; my 03:23 check was a shell quoting slip.
+- **Fix:** `MTG-merges/` (a8c5cc2) keeps every stock row and appends MTG's rows with new keys (48/44/54/58 rows, 183 strings). Archive `local_planets.tre` 1315dbb4 is on the server and the client (6556537d backed up). Test galaxy resumed 03:40; squad.py setup 13. The owner's BARC test is next.
+- **Helpers (owner OK'd):**
+  - Opus: auditing every other stock-shadowed MTG file (names, deeds, vehicles, items) into `MTG-merges/shadow-audit.md`.
+  - Sonnet: reviewing and finishing C33's class check and running P0/P1 on Aurek.
+  - Local model: examine texts for the Ossus creatures and NPCs, reviewed and rewritten (c951d80; not wired, they need their own shared templates).
+- **Staged:** the five Ossus NPC names (`Local-model-ossus-npcs/stage_npc_names.py`, df5543d). They go in at the next archive build.
+- **Queued for GPT:** C35, Ossus NPC server wiring, after C34 and C24b.
 
 ### 2026-10-15 03:03 Claude: after the outage (network loss about 02:40, PC shut down from the Start menu 02:52, back 02:55)
 
