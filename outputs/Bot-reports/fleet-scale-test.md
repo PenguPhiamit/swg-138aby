@@ -1,6 +1,6 @@
 # Fleet-scale test: how many test bots the PC carries (15 Oct, 12:52-13:17 PDT)
 
-**Answer: 100 bots run comfortably.** At 100 bodies, all fighting near Mos Eisley, Theed and Coronet, the PC used about 2 of its 12 CPU threads and about 0.6 GB more WSL memory than with 23 bots. The server logged no lag, and its chat round trip stayed at 81 ms. **Recommended fleet: up to 100 for routine testing.** 150-200 probably fits too (see "Room above 100"), but that was not measured.
+**Answer: 100 bots run comfortably.** At 100 bodies, all fighting near Mos Eisley, Theed and Coronet, the PC used about 2 of its 12 CPU threads and about 0.6 GB more WSL memory than with 23 bots. The server logged no lag, and its chat round trip stayed at 81 ms. **Recommended fleet: up to 100 for routine testing.** 150-200 probably fits too, but that was not measured. Projected from the measurements, CPU runs out first, at roughly 350-650 bodies; see "Projected ceiling".
 
 Bots cost no Claude usage. Claude's cost is only the output it reads, so scripts summarise each run.
 
@@ -37,12 +37,23 @@ Notes on the table:
   - `decreaseOnlineCharCount missing account` when the load bots logged out.
 - **No free walking was tested.** There was always a creature within 80 m, so the load was approach-and-fight, never a walking leg.
 
-## Room above 100
+## Projected ceiling: CPU runs out first, at roughly 350-650 bodies
 
-The step-to-step growth is roughly linear. Each extra 50 fighting bots add about 0.3 cores to core3, 0.2 cores to the bodies, 0.1 cores to the driver and 0.3 GB of WSL memory. So memory leaves room for hundreds more: the 4 GB guard is 6 GB away. CPU at 200 bots would be about 3-4 of 12 threads. Untested limits that would show up before that:
-- core3's busiest single thread;
-- login bursts;
-- **client logs.** A fighting body writes about 2 MB a minute to `/var/tmp/swg-bots/<account>/log/core3client.log` (45 MB in 20 minutes). 100 fighting bots write about 12 GB an hour into the WSL disk. C: had 330 GB free. For long 100-bot runs, trim these logs. `load_fleet.py down` now deletes the load bots' logs; the 1.9 GB from this test is already deleted.
+These are straight-line projections, not measurements. Each one takes the cost per load bot at that step, compared with the 23 idle squad bodies (0.93 cores, 10.66 GB available), and asks how many bodies fit before each resource runs out.
+
+| Projected from | CPU per bot (server + body + driver) | Memory per bot (WSL) | CPU: 6 cores busy | CPU: 10 of 12 threads | WSL memory down to the 4 GB guard | Windows commit | Binds first |
+|---|---|---|---|---|---|---|---|
+| 50-bot step | 0.023 cores (0.014 + 0.006 + 0.002) | 8.1 MB | ~250 bodies | ~425 | ~840 | does not bind | CPU |
+| 100-bot step | 0.015 cores (0.009 + 0.004 + 0.002) | 6.5 MB | ~365 bodies | ~635 | ~1,040 | does not bind | CPU |
+
+- **CPU binds first.** The bodies and the driver run on the same 6-core / 12-thread CPU as the server, so the useful limit is the whole fleet's CPU. The server's share alone would reach 6 cores at about 610 bodies (100-bot slope). The 100-bot slope is the better guide: the cost per bot fell from 50 to 100, because the first fighting bots also woke up the creature AI.
+- **WSL memory comes second.** The bodies share library pages, so the measured cost is about 6.5 MB per bot. If each body cost its full 12.8 MB RSS plus server growth (about 14.3 MB in all), memory would bind at about 490 bodies, which is still above the CPU estimate.
+- **Windows commit does not bind** while WSL stays capped at 16 GB. The WSL VM already holds its whole allowance, so bots inside it cannot take more. Raising the WSL memory limit would make commit count again, one GB of commit per GB of WSL.
+- **Why not thousands.** Server-side bot systems that live inside the server process reach thousands of bots on similar PCs. Each of these bots is a full separate client: its own process, network session and copy of the world, plus a driver thread. The server also has to treat each one as a remote player, with packets, position updates and object visibility.
+- **Untested limits that may bind before these numbers:**
+  - core3's busiest single thread (only total core3 CPU was sampled);
+  - login bursts;
+  - **client logs.** A fighting body writes about 2 MB a minute to `/var/tmp/swg-bots/<account>/log/core3client.log` (45 MB in 20 minutes). 100 fighting bots write about 12 GB an hour into the WSL disk. C: had 330 GB free. For long 100-bot runs, trim these logs. `load_fleet.py down` now deletes the load bots' logs; the 1.9 GB from this test is already deleted.
 
 ## Use
 
