@@ -324,6 +324,15 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 
 ## Log
 
+### 2026-10-15 16:51 Claude: StarCraft as inspiration for the Vong, the Gree and the Starweird (legal check)
+
+- `Documentation-support/starcraft-inspiration-vong-gree.md`. Legal verdict: **ideas and mechanics yes; no StarCraft files and no StarCraft fan assets** (Blizzard art and its derivatives; custom content reportedly assigned to Blizzard; already excluded by AGENTS.md's rules for other games' assets). Screenshots stay private and out of the repo.
+- Ideas in Star Wars terms:
+  - Vong: worldshaping zones, a damutek dungeon for Nei Rin's voxyn line, coral-implanted prisoners at Krayt's Ossus garrison, living gear, a yammosk raid with dovin basals.
+  - Gree: sensor obelisks, attunement relics with colour and tone puzzles, shield constructs keyed to a damage type, stasis traps.
+  - Others: the Starweird as a rare anomaly encounter; Killiks as a hive dungeon.
+- Recommended first prototype: the damutek dungeon. Lore checks go to ChatGPT's research lane; art comes from our own pipeline and CC0 kitbashing.
+
 ### 2026-10-15 16:40 Claude: C39 and C40 fixes in dev, built, gated; the mercenary broker stood on a roof
 
 - Owner (16:00): fix the open C4d/C4e/C19 findings, review C25/C26, then build, restart and gate after the escort run, with C38 after the gate. Those findings and C22's were already fixed in dev on 14 Oct, and C25/C26 were already reviewed and merged; their rows above were stale and are updated. The open work was GPT's C39 and C40 fixes on `gpt/work`.
