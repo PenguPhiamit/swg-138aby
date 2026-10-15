@@ -271,6 +271,7 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 - **Damage repaired:** at 08:55 a research agent's command overwrote `ActivateQuestCommand.h` in the dev tree with three lines of grep output; restored from git (a copy of the damaged file is in Claude's scratchpad).
 - **Valve research** saved in `Documentation-support/valve-open-source-assets.md`: Wine + DXVK runs our client (it is 32-bit Direct3D 9, not large-address-aware); Valve's wiki allows first-party assets in non-commercial fangames (low value for us).
 - Test galaxy restarted ~10:05 on dev `bb51ec97` with the crew accounts (owner offline). The cycle stays paused.
+- **Forn round 1 (10:20): 21/22.** All five templates granted and confirmed, role weapons in hand, hospital buffs +200 (7 of 8; Mirren likely ran out of mind on the last), three kills (13, 6 and 6 s), nobody down; Mirren healed Forn from 29 %. The plateau only had scyks, so the fights were too short to test rotations or the tank: next is harder content (the Warren on Dantooine). Fixed meanwhile: cresh-missions read the empty waypoint of listed missions (`ab0fbbc`), the dizzy pack name for healState (`66aae60`), Nima's /watch line of sight.
 
 ### 2026-10-15 09:10 Claude: 13 mechanics reports; scenario fixes from them; relay lanes; C33b taken over (GPT out of usage)
 
