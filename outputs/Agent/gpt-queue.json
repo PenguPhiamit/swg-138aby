@@ -1,254 +1,262 @@
 ﻿{
-  "_about": "Tasks Claude's relay hands to ChatGPT (Codex, unattended) when its usage allows. tools/agents/gpt_relay.ps1 runs the first 'open' task with codex exec (GPT-6.1 Sol, full access with WSL since 14 Oct 05:58, owner) and writes GPT's final answer to Agent/relay/. Status: open, running, done, failed, hold (wait for the owner). Claude's overnight check adds follow-ups until 07:30; the owner can edit, reorder or delete tasks.",
-  "tasks": [
-    {
-      "id": "c4b-c4c-review",
-      "effort": "high",
-      "status": "done",
-      "prompt": "You are ChatGPT working unattended on the owner's private SWGEmu server project (the owner is asleep; nobody will answer). Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox cannot run WSL, so you cannot reach /opt/swg or the game; work only with files under h/. Claude's overnight check runs the bots and the server side. Do tasks C4b and C4c from the board (h/outputs/SWG-handoff.md) as read-only code reviews, using the exported packet in h/outputs/Documentation-support/review-C4b/ (start with its README.md; the patches and files/ hold everything). Write the review to h/outputs/Documentation-support/review-C4b/C4b-C4c-review.md: numbered findings, each with file:line, severity, and a concrete failure scenario, or 'no findings' per commit; check especially that /agentgear and /agentskill can never act on the live galaxy. Then add one short log entry at the top of the Log in SWG-handoff.md headed '### 2026-10-14 (C4b + C4c reviews, unattended) â€” ChatGPT' saying 're-reviewed by ChatGPT' for the commits you finished. End with a five-line summary.",
-      "model": "gpt-6.1-sol"
-    },
-    {
-      "id": "c7-scenarios-1",
-      "effort": "medium",
-      "status": "done",
-      "prompt": "You are ChatGPT working unattended on the owner's private SWGEmu server project (the owner is asleep; nobody will answer). Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox cannot run WSL, so you cannot reach /opt/swg or the game; work only with files under h/. Claude's overnight check runs the bots and the server side. Task C7 (bot squads): read the C7 section of h/outputs/SWG-handoff.md, h/outputs/tools/bots/scenarios/README.md, h/outputs/tools/bots/groups.json, each group's newest lines in h/outputs/Bot-reports/<Group>/LOG.md, h/outputs/Bot-reports/OVERNIGHT.md if present, and the newest h/outputs/Bot-reports/runs/*-summary.md. Pick the two most valuable open problems (e.g. Doctor buffs now that science_doctor_wound_02 is trained, Pell's forage now that outdoors_scout_camp_01 is trained, a harvest after Varo's kill, mission terminals inside buildings, the flaky /purchaseTicket) and improve or add scenarios for them in h/outputs/tools/bots/scenarios (new files are <group>-<topic>.py; keep the Bot API from the README; Python must compile; use LF line endings). To have a new scenario run, put its file name on its group's line in h/outputs/Agent/squad-plan.txt (one scenario per group). You cannot run them yourself: Claude's overnight check runs the plan every 30 minutes and reports in Bot-reports. Add one short log entry at the top of the Log in SWG-handoff.md headed '### 2026-10-14 (C7 scenarios, unattended) â€” ChatGPT' saying what you changed and why. Keep about 15-20% of your usage for that entry. End with a five-line summary.",
-      "model": "gpt-6.1-sol"
-    },
-    {
-      "id": "c4d-rereview",
-      "effort": "high",
-      "status": "done",
-      "prompt": "You are ChatGPT working on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox may not reach WSL; everything you need is under h/. Do task C4d from the board (h/outputs/SWG-handoff.md): a read-only re-review of dev commit 5aadc8b9 using h/outputs/Documentation-support/review-C4d/ (README, 5aadc8b9.patch, files/). For each of your seven findings in h/outputs/Documentation-support/review-C4b/C4b-C4c-review.md say resolved, partly resolved or not resolved, with file:line and why; list any new finding the fix introduces. Write h/outputs/Documentation-support/review-C4d/C4d-review.md and add one short log entry at the top of the Log in SWG-handoff.md headed '### <date> (C4d re-review) â€” ChatGPT'. Keep the board's existing line endings. End with a five-line summary.",
-      "model": "gpt-6.1-sol"
-    },
-    {
-      "id": "c12-hoth-adaptation",
-      "effort": "medium",
-      "model": "gpt-6.1-sol",
-      "status": "done",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Do task C12 from h/outputs/SWG-handoff.md (Hoth adaptation table). Claim it on the board first; add one short log entry at the top of the Log when you stop (keep its line endings). End with a five-line summary.",
-      "result": "228-file hashed adaptation table/inventory complete; no port/runtime validation. Documentation-support/hoth/hoth-adaptation-table.md"
-    },
-    {
-      "id": "c14-planet-lore",
-      "effort": "medium",
-      "model": "gpt-6.1-sol",
-      "status": "done",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Do task C14 from h/outputs/SWG-handoff.md (planet lore and galaxy coordinates; Wookieepedia, Legends preferred). The research budget applies. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep its line endings). End with a five-line summary.",
-      "result": "24-record bounded lore/grid pass complete; all11terrain-backed catalogue zones covered. Follow-up stock UI affine fit rejected; no client edits."
-    },
-    {
-      "id": "c13-server-sops",
-      "effort": "medium",
-      "model": "gpt-6.1-sol",
-      "status": "done",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Do task C13 from h/outputs/SWG-handoff.md (server SOPs). The research budget in AGENTS.md applies. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep its line endings). End with a five-line summary.",
-      "result": "9runbooks/10ranked gaps, commands source-inspected and unexecuted. Documentation-support/SWG-server-SOPs.md"
-    },
-    {
-      "id": "c8-mcp-wrappers",
-      "effort": "medium",
-      "status": "done",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox may not reach WSL; work with files under h/. Do task C8 from h/outputs/SWG-handoff.md (MCP wrappers). Claim it on the board first; add one short log entry at the top of the Log in SWG-handoff.md when you stop (keep its line endings). End with a five-line summary.",
-      "model": "gpt-6.1-sol",
-      "result": "Implementation/design and offline checks complete. Runtime acceptance remains with Claude; see Documentation-support/C8-C10-validation.md."
-    },
-    {
-      "id": "c9-scenario-fixes",
-      "effort": "medium",
-      "status": "done",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox may not reach WSL; work with files under h/. Do task C9 from h/outputs/SWG-handoff.md (fix the open squad scenarios). Claim it on the board first; add one short log entry at the top of the Log in SWG-handoff.md when you stop (keep its line endings). End with a five-line summary.",
-      "model": "gpt-6.1-sol",
-      "result": "Implementation/design and offline checks complete. Runtime acceptance remains with Claude; see Documentation-support/C8-C10-validation.md."
-    },
-    {
-      "id": "c10-mapping-coverage",
-      "effort": "medium",
-      "status": "done",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox may not reach WSL; work with files under h/. Do task C10 from h/outputs/SWG-handoff.md (bot mapping and whole-server coverage plan). The research budget in AGENTS.md applies. Claim it on the board first; add one short log entry at the top of the Log in SWG-handoff.md when you stop (keep its line endings). End with a five-line summary.",
-      "model": "gpt-6.1-sol",
-      "result": "Implementation/design and offline checks complete. Runtime acceptance remains with Claude; see Documentation-support/C8-C10-validation.md."
-    },
-    {
-      "id": "c11-archive-downloads",
-      "effort": "low",
-      "status": "hold",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox may not reach WSL; work with files under h/. Do task C11 from h/outputs/SWG-handoff.md only once the owner has said go: follow Documentation-support/archive-download-plan.md exactly. Claim it on the board first; add one short log entry at the top of the Log in SWG-handoff.md when you stop (keep its line endings). End with a five-line summary.",
-      "blocker": "Already-fetched A1–A6+D1 audited:7pins match, hashes saved. A4partial component terms, A6owner-excluded source hold, D1open donor audit. Remaining A7/B/C deferred; canonical fetch record managed by Claude.",
-      "model": "gpt-6.1-sol",
-      "result": "Content-catalogue/archive-record-review.md + archive-checkout-audit.json; downloaded-source review only, not full-plan completion or import clearance."
-    },
-    {
-      "id": "c4e-review",
-      "effort": "high",
-      "status": "done",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Task C4e on h/outputs/SWG-handoff.md: a read-only code review of three dev commits, exported to h/outputs/Documentation-support/review-C4e/ (README lists what to check: leash F1/F2, agent body F3, /agentpath find and tell, Hoth v1 Lua). Write findings to review-C4e/C4e-review.md, P1/P2/P3 as in C4d, each with file:line and a concrete failure scenario; include your best idea for the open leash second-hop refusal. Do not edit /opt/swg. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 02:25 Claude",
-      "result": "Review saved: 1 P1 null/null floor proof, 1 P2 scene-unguarded straight movement. c402e480 included; client lock context/runtime checks requested from Claude. No live approval."
-    },
-    {
-      "id": "c15-open-assets",
-      "effort": "medium",
-      "status": "done",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Task C15 on h/outputs/SWG-handoff.md (owner, 14 Oct 2026: 'find open source/public/or free use shader/textures/etc we can use'). Research only: read web pages, download nothing. Find sources of textures, materials, decals, skyboxes/terrain textures, sound effects and similar that we may legally use and ship in a private SWG server's client archives. For each source record: URL, the exact licence (version, link to the licence text) checked on the creator's own page, attribution wording required, whether modification and redistribution inside a game archive are allowed, asset types, resolution/format, and fit for pre-CU SWG (sci-fi, snow/Hoth, desert, jungle, metal/industrial). Prefer CC0/public domain; list CC-BY separately with its attribution duty; flag CC-BY-SA share-alike effects; exclude non-commercial-only, no-redistribution, 'free for personal use' and anything ripped from other games or of unclear origin; flag AI-generated packs with unclear provenance. Build on what exists: Documentation-support/KOTOR-to-SWG-and-open-assets-feasibility.md (Quaternius, Kenney, Poly Haven shortlist, F85), Community-content/CREDITS-and-sources.txt and the content audits in Content-catalogue/. Shaders: SWG uses its own shader templates (.sht) and effect files, so free GLSL/HLSL code is not directly usable; note which material maps SWG can use (diffuse, normal, specular/gloss, emissive, environment) using Documentation-support/swg-format-inventory.md, and how PBR sets would convert (to DDS, DXT1/DXT5). Write Documentation-support/open-assets-catalogue.md plus open-assets-catalogue.json, a top-10 shortlist for Hoth and sci-fi props first. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
-      "model": "gpt-6.1-sol",
-      "result": "10 creator-source CC0 candidates, MD/JSON, conversion and rights gates. No downloads/imports/runtime tests."
-    },
-    {
-      "id": "c16-bot-fallback",
-      "effort": "medium",
-      "status": "done",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Task C16 on h/outputs/SWG-handoff.md (owner, 14 Oct 2026: 'when bots finish or fail loops and they cant be completed to find something else the bots can test, travel, navmesh mapping, etc'). Give the bot squads fallback work: when a group's scenario is finished, or keeps failing or BLOCKED for the same reason, the group switches to the next useful test instead of retrying. The design, the files and the fallback list are in the C16 paragraph on the board. Work in h/outputs/tools/bots (squad.py and the scenarios are yours); offline mocks and py_compile if your sandbox can't reach WSL, a real test-galaxy round if it can. Test galaxy only. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 04:35 Claude",
-      "result": "Initial scheduler/fallback probes/ticket filtering implemented; 15 offline tests passed. Claude runtime acceptance requested; full travel graph, crafting API and expanded mapping remain open in fallback-coverage.md."
-    },
-    {
-      "id": "c17-discord",
-      "effort": "medium",
-      "status": "done",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Task C17 on h/outputs/SWG-handoff.md (owner, 14 Oct 2026: 'can we add a task to gpt to hook into and help me manage a discord channel for all this?'). Plan and build the Discord side as described in the C17 paragraph on the board: the channel layout, then a posting tool with a dry-run mode and offline tests. Do not create Discord accounts, apps, webhooks or bots, do not post, and do not handle any token: the owner sets those up and says go. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 04:55 Claude"
-    },
-    {
-      "id": "c19-c4f-review",
-      "effort": "high",
-      "status": "done",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 05:39 Claude",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Task C19 on h/outputs/SWG-handoff.md: the C4f code review of Claude's 14 Oct dev commits and client-archive tooling. Exports and the checklist: h/outputs/Documentation-support/review-C4f/README.md. Write C4f-review.md there, P1/P2/P3 as in C4d/C4e. Read-only: do not edit /opt/swg or the staged files. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
-    },
-    {
-      "id": "c20-c16b-recovery",
-      "effort": "medium",
-      "status": "done",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 06:03 Claude",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first; note the new 'ChatGPT has WSL' rules: you can now run wsl -d Debian -u swgemu, and Claude leads). Task C20 (C16 follow-up; read Agent/to-chatgpt.md 05:51 first). Overnight, every Esk scenario reported BLOCKED all night because Esk's crew (Esk, Lira, Tovan) is stranded on Hoth, and the fallbacks only refuse. (1) Add a recovery fallback that runs before the others when a crew is off Tatooine: bring it home with the return half of scenarios/esk-hoth.py's shuttle trip (it passed 21/21 both ways), and record it in Bot-reports/fallback-coverage.md. (2) Fix scenarios/dorn-social.py line 34: KeyError 'x' when a move fails (end is an error dict). (3) Prove both on the test galaxy yourself, Esk group only: write the driver claim on the board, take esk-routes.py out of Agent/squad-plan.txt while you test (put it back when done), run squad.py between overnight rounds (rounds start about :02 and :31 and last 25 min; check pgrep -f 'squad.py run' first), and report real pass counts. Do not restart the test galaxy, edit /opt/swg, or build; if a bot body needs a C++ change, write it up in Agent/to-claude.md. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
-      "result": "Done by ChatGPT 14 Oct (commit 2ff7b58: return-home preflight for every fallback, Dorn failed-move guard, 21 offline tests). Its own Esk runtime proof was not run (usage ran out at 06:26); Claude runs it. Marked done by Claude 08:05 so the relay does not redo it."
-    },
-    {
-      "id": "c18-fable-backport-review",
-      "effort": "medium",
-      "status": "done",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 05:39 Claude",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Task C18 on h/outputs/SWG-handoff.md: cross-review Fable's NGE/MTG backport batches 1 and 2, already applied to dev (commits 0c44d431, 5c7ae017). Everything is in h/outputs/Fable-backport/: README.md, batch1.diff, batch2.diff, diffs/, checks.json, checks-batch2.json and the staged trees. Your usage is limited, so keep this to a sample and stop when you've covered it. Check: (1) the 1,074 path repairs really map a mangled server path to the real client path (sample about 30, covering all nine patterns, against the client paths in checks.json); (2) the 13 new wearables follow Core3's wearable templates and pre-CU species rules; (3) the batch-2 include wiring and the 10 new templates; (4) any risk to existing content (e.g. something that spawned an MTG object by its old mangled path; mtg_catalog.lua users). Write Documentation-support/review-C18/C18-review.md with P1/P2/P3 findings (file:line, concrete failure scenario). Read-only: do not edit /opt/swg or the staged files. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
-      "result": "Done by ChatGPT 14 Oct as a reduced sample (commit 6e2e90a, Documentation-support/C18-backport-sample-review.md): 30 objects, no new P1/P2; follow-ups listed. Marked done by Claude 08:05."
-    },
-    {
-      "id": "c21-resource-census",
-      "effort": "medium",
-      "status": "done",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 08:42 Claude (owner's C21, 14 Oct)",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL now; Claude leads; redact names in anything published; h/ is a local git repo, commit your own finished work ending 'Agent: ChatGPT'). Task C21 (the owner's, on the board): quantify the server's local resources and assets, Wookieepedia Legends coverage and implementation candidates (rights, missing dependencies, maturity, effort), following your own plan in Documentation-support/server-resource-and-implementation-census.md. Work in one bounded checkpoint per run (about a third of your usage at most), save the checkpoint state in that file, and stop so the next queued task gets a turn; set this task back to open in Agent/gpt-queue.json if more checkpoints remain. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
-    },
-    {
-      "id": "c22-hoth-review",
-      "effort": "high",
-      "status": "done",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 08:42 Claude",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL now; Claude leads; redact names in anything published; h/ is a local git repo, commit your own finished work ending 'Agent: ChatGPT'). Task C22: independent review of the 14 Oct Hoth and fix commits in /opt/swg/Core3-dev (read-only; use git -C /opt/swg/Core3-dev show as swgemu): c5f1ae06 (ice caves, Fable from Bellum), 69eb77fe (8 area spawners + clean-room glacial rancor), de1b679a (Hoth camps), 23014f39 (C4f-F1 spawn-area locks), 90f60a81 (C4e-F2 movement scene/connection guard), plus f0b192e in the h repo (C4f-F2 archive builder). Fable's staging notes are in outputs/Fable-hoth-caves/, Fable-hoth-batchA/, Fable-hoth-batchB/. Check against AGENTS.md (provenance/credit of Bellum's AGPL work, clean-room rancor) and for concrete defects: wrong spawnMobile/spawnSceneObject arguments, cells or coordinates off the map or in no-build areas, spawn-group/lair names that don't exist, region overlaps that matter, lock order in the two C++ fixes. Write Documentation-support/review-C22/C22-review.md with P1/P2/P3 (file:line, concrete failure scenario). Do not edit /opt/swg, build, restart or drive bots. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
-    },
-    {
-      "id": "c23a-hoth-gameplay-scenario",
-      "effort": "medium",
-      "status": "done",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 14:35 Claude (owner: more responsibility for GPT)",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; new rule \"ChatGPT's server-code worktree\"; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (2026-10-14 14:35 entry) and the C23, C24 and C25 instructions on h/outputs/SWG-handoff.md (above the Log). Task C23 part 1: write tools/hoth/hoth_gameplay_check.py and its offline fixture tests (checks a to g in the C23 instructions). Do not drive bots or touch /opt/swg in this task; the run is C23b, after Claude's restart. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
-      "result": "Scenario fbd691f/f1ec6ef; seven fixtures pass, readiness and telemetry gates recorded."
-    },
-    {
-      "id": "c24-hoth-release-gate",
-      "effort": "high",
-      "status": "done",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 14:35 Claude (owner: more responsibility for GPT)",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; new rule \"ChatGPT's server-code worktree\"; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (2026-10-14 14:35 entry) and the C23, C24 and C25 instructions on h/outputs/SWG-handoff.md (above the Log). Task C24: write Documentation-support/hoth-release-gate.md (commit table for sandbox..dev, your own review of the unreviewed commits as in C22 with P1/P2/P3 and file:line, the non-code blockers, a verdict). Read-only on /opt/swg (git as swgemu); no builds, restarts or bots. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
-      "result": "NO-GO checkpoint e29f926/d74b71d; 48-row inventory, R2 multi-zone P2, five offline checks; gameplay/owner gates open."
-    },
-    {
-      "id": "c25-gpt-worktree-shuttle-message",
-      "effort": "medium",
-      "status": "done",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 14:35 Claude (owner: more responsibility for GPT)",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; new rule \"ChatGPT's server-code worktree\"; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (2026-10-14 14:35 entry) and the C23, C24 and C25 instructions on h/outputs/SWG-handoff.md (above the Log). Task C25: in your worktree /opt/swg/Core3-gpt (branch gpt/work, as swgemu), fix the silent ticket failure at MMOCoreORB/src/server/zone/objects/creature/commands/PurchaseTicketCommand.h:132 (and the same gap on the departure side, if any). One commit ending 'Agent: ChatGPT', no cmake/make; then ask Claude in Agent/to-claude.md to build and test it. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
-      "result": "5c41ed62 on gpt/work: origin/destination missing-shuttle feedback; Claude review/build/runtime pending."
-    },
-    {
-      "id": "c23b-hoth-gameplay-run",
-      "effort": "medium",
-      "status": "hold",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 14:35 Claude (owner: more responsibility for GPT)",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; new rule \"ChatGPT's server-code worktree\"; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (2026-10-14 14:35 entry) and the C23, C24 and C25 instructions on h/outputs/SWG-handoff.md (above the Log). Task C23 part 2 (restart done 2026-10-14 14:47; run it after C23a): run tools/hoth/hoth_gameplay_check.py with the Esk crew (driver claim on the board, Esk out of Agent/squad-plan.txt during the run and back afterwards), write Documentation-support/C23-hoth-gameplay.md, and file each failure in Agent/to-claude.md with its evidence. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
-      "result": "First run 144837 BLOCKED readiness/tools/death; separate recovery 150600 11/11, all home/plan restored. Re-run after preparation/telemetry; C23 overall open."
-    },
-    {
-      "id": "c32-agentgear-profession",
-      "effort": "high",
-      "status": "done",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-15 01:13 Claude",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; rule \"ChatGPT's server-code worktree\"; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (the 2026-10-15 01:13 Claude entry). Task C32, for the owner's class check (15 Oct: 'the bots need to work better for better testing now ... so we can see what all works for what classes'): in your worktree /opt/swg/Core3-gpt (branch gpt/work, git as swgemu), first merge dev into gpt/work (dev is 16 commits ahead, including f1ce7007 '/agentgear survey'). Then extend MMOCoreORB/src/server/zone/objects/creature/commands/AgentGearCommand.h with three kits behind the same gate as the others (test galaxy only, SandboxTestGalaxy.h, and accounts in Core3.AgentAccounts): '/agentgear profession <name>' grants every skill box of one profession (a starter such as combat_brawler, or an elite such as combat_carbine) in prerequisite order through SkillManager, ignoring XP and skill-point limits and notifying the client; '/agentgear profession clear' surrenders all skills, as the character builder's unlearn_all_skills does; '/agentgear profession list' replies with the current skill boxes. Reply in the existing '[agentgear] {json}' style, naming granted and failed boxes. One commit ending 'Agent: ChatGPT', no cmake/make. Then, in tools/bots/squad.py (your slice), add Bot.profession(name) and Bot.clear_professions() wrappers with an offline test. Ask Claude in Agent/to-claude.md to build and test it. A Claude helper is mapping every profession's boxes and commands into outputs/Claude-class-check/ (professions.json, commands.json, test-plan.md); use it if it exists when you start, but don't wait for it. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
-    },
-    {
-      "id": "c30-ossus-fauna-server",
-      "effort": "medium",
-      "status": "done",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-15 01:13 Claude",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; rule \"ChatGPT's server-code worktree\"; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (the 2026-10-15 01:13 Claude entry). Task C30: wire the six reviewed Ossus creatures in outputs/Local-model-ossus-fauna/ (read its README) into the server, in your worktree /opt/swg/Core3-gpt (after C32's merge of dev; git as swgemu). Put the six files in MMOCoreORB/bin/scripts/mobile/ossus/ with a serverobjects.lua, included from mobile/serverobjects.lua the way the other planets are. Add spawn groups and lairs (study bin/scripts/mobile/spawn/ and lair/ for naboo or dantooine) and Ossus spawn regions in managers/planet/ossus_regions.lua (read its current regions first): wetlands for mud yak herds; forest for gokob, tree frog, tribis and kaddyr bug; open ground for kirruk. Keep the base levels in the files; propose Ossus levels in the commit message if the regions call for other ones. luac5.3 -p every file. Don't touch the client archive: Claude adds the six creature_names strings. One commit ending 'Agent: ChatGPT', no cmake/make; ask Claude in Agent/to-claude.md to build and test it. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
-    },
-    {
-      "id": "c33-class-check-scenario",
-      "effort": "high",
-      "status": "open",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-15 02:07 Claude",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; rule \"ChatGPT's server-code worktree\"; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (the newest Claude entries). Task C33, the owner's class check (15 Oct: 'see what all works for what classes'): write the scenario tools/bots/scenarios/class-check.py from outputs/Claude-class-check/test-plan.md (read it fully; also matrix.md; the data is professions.json and commands.json there; if they are missing, run python -I outputs/Claude-class-check/build_matrix.py). Follow the plan: P0 control runs first; then one profession per run in proposed_run_order, sliced by an argument or environment variable (phase, profession list, group) so one run stays under 30 minutes; grant with /agentgear profession (Bot.profession), gear after the grant with a raw slash('agentGear','basic') (Bot.gear skips when armour is carried); verdicts WORKS / RAN / NOT_GRANTED / NO_EFFECT / BLOCKED exactly as section 5 defines them, BLOCKED as g.note and never FAIL; per-run results also written to Bot-reports/<Group>/class-check-<profession>.json so a later step can build the matrix; a tidy final clear plus the group's starting boxes back (groups.json training) at the end. Offline tests for the classification with recorded or synthetic events. Then run only P0 and P1 (the six starters) on the test galaxy with the Aurek group, and only when no squad round is running and the board's Server lock allows bot runs (driver claim on the board; Aurek out of Agent/squad-plan.txt during the run and back afterwards; 30-minute ceiling). If the owner's client is running (tasklist shows SWGEmu.exe), you may still run: bots are separate characters. Write the first results to Documentation-support/class-check-results.md (per profession: tries, WORKS, RAN, NOT_GRANTED, NO_EFFECT, BLOCKED, and the failing abilities with evidence). No server code changes in this task. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
-    },
-    {
-      "id": "c34-class-check-kits",
-      "effort": "high",
-      "status": "open",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-15 02:07 Claude",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; rule \"ChatGPT's server-code worktree\"; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (the newest Claude entries). Task C34, kits for the class check: in your worktree /opt/swg/Core3-gpt (branch gpt/work; first merge dev, which has C30 as 80b66e65), extend AgentGearCommand.h with the item kits outputs/Claude-class-check/matrix.md lists as missing ('Kits the scenario needs'): carbine, polearm, two-hand, special heavy, the lightsaber kits, medicine2 (wound, state, cure, dot and revive packs) and the eight instruments, each a separate '/agentgear <kit>' with the same gate as the others (test galaxy only, Core3.AgentAccounts) and the same '[agentgear] {json}' reply. Check every template path against the server's object templates (bin/scripts/object) and say which ones don't exist. Also: '/agentgear profession list' should list the character's abilities as well as its boxes (test-plan.md section 8 point 3). One commit ending 'Agent: ChatGPT', no cmake/make; ask Claude in Agent/to-claude.md to build and test it. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
-    },
-    {
-      "id": "c24b-r2-coverage-review",
-      "effort": "high",
-      "status": "open",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 18:50 Claude",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (the newest Claude entries). Task C24b: read-only re-review of dev 98ad1d1d (your R2-F1 proposal, implemented) and 3a0b154f (the owner's coverage scaling, poolScaleZones) in /opt/swg/Core3-dev (git as swgemu). Check idempotence with several backfill zones and scaling together, rounding and caps, live safety (key missing = stock sizes), and that the load-time top-up is unaffected; extend tools/hoth/test_release_formats.py if useful. Update Documentation-support/hoth-release-gate.md (R2 row, a refreshed commit inventory, the verdict). No builds, restarts or bots. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
-      "blocker": "2026-10-15 03:03 Claude: the 02:05 run lost its network at 02:42 and was ended by the PC shutdown at 02:52 (no answer); requeued after C33/C34."
-    },
-    {
-      "id": "c23c-hoth-gameplay-rerun",
-      "effort": "medium",
-      "status": "hold",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 18:50 Claude",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (the newest Claude entries). Task C23c: re-run your C23 acceptance on the new bot body (C25/C26 in dev, built 18:09), only once Claude's newest 'restart done' note in Agent/to-chatgpt.md is later than 19:00 and no squad round is running (pgrep -f 'squad.py run'). First the C26 runtime acceptance steps 2-6 in Documentation-support/C26-telemetry.md with the Esk crew, then the C23 checks (Ossus exists now too). Prepare the crew by ordinary play: armor encumbrance is stock (Claude's note), so buff with the crew Doctor and entertainer/food for focus and willpower, or use a lighter set; get the missing survey tools by ordinary means. Driver claim on the board, Esk out of Agent/squad-plan.txt during the run and back afterwards, 30-minute ceiling. Update Documentation-support/C23-hoth-gameplay.md and file each server failure in Agent/to-claude.md with its evidence. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
-      "blocker": "2026-10-15 01:13 Claude: the test galaxy is stopped (owner, 15 Oct 00:55); reopen after the next restart."
-    },
-    {
-      "id": "c29-lore-materials",
-      "effort": "medium",
-      "status": "hold",
-      "model": "gpt-6.1-sol",
-      "added": "2026-10-14 18:50 Claude",
-      "prompt": "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (the newest Claude entries). Task C29, the owner's resource plan (14 Oct: 'lets layout all the resources we have and get them adapted for swg and integrated. (a wide crafting pool keeps people interested.)'): research Legends materials tied to our current and planned planets (Hoth, Ossus and the candidates in Documentation-support/server-world-census.md; e.g. Mandalorian iron for Mandalore, Adegan crystals for Ossus, cortosis, phrik, and others you find). The research budget applies; Wookieepedia is CC BY-SA, so write our own text. For each: planet(s), a short lore summary in our words with the source URL, the stock SWG resource class it would sit under (or why it needs a new class), attribute emphasis (OQ, CD, DR, FL, HR, MA, PE, SR, UT, CR, ER), rarity, and what could consume it (existing schematics through the class tree, or a new recipe or loot). Write Documentation-support/resource-lore-materials.md and .json; Fable's inventory (outputs/Fable-resources3/) leaves a slot for it. No game or server changes. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
-      "blocker": "19:25 Claude: reassigned to Fable (Fable-resources3/lore/); ChatGPT's weekly usage is nearly out (owner, 14 Oct)."
-    }
-  ]
+    "_about":  "Tasks Claude\u0027s relay hands to ChatGPT (Codex, unattended) when its usage allows. tools/agents/gpt_relay.ps1 runs the first \u0027open\u0027 task with codex exec (GPT-6.1 Sol, full access with WSL since 14 Oct 05:58, owner) and writes GPT\u0027s final answer to Agent/relay/. Status: open, running, done, failed, hold (wait for the owner). Claude\u0027s overnight check adds follow-ups until 07:30; the owner can edit, reorder or delete tasks.",
+    "tasks":  [
+                  {
+                      "id":  "c4b-c4c-review",
+                      "effort":  "high",
+                      "status":  "done",
+                      "prompt":  "You are ChatGPT working unattended on the owner\u0027s private SWGEmu server project (the owner is asleep; nobody will answer). Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox cannot run WSL, so you cannot reach /opt/swg or the game; work only with files under h/. Claude\u0027s overnight check runs the bots and the server side. Do tasks C4b and C4c from the board (h/outputs/SWG-handoff.md) as read-only code reviews, using the exported packet in h/outputs/Documentation-support/review-C4b/ (start with its README.md; the patches and files/ hold everything). Write the review to h/outputs/Documentation-support/review-C4b/C4b-C4c-review.md: numbered findings, each with file:line, severity, and a concrete failure scenario, or \u0027no findings\u0027 per commit; check especially that /agentgear and /agentskill can never act on the live galaxy. Then add one short log entry at the top of the Log in SWG-handoff.md headed \u0027### 2026-10-14 (C4b + C4c reviews, unattended) â€” ChatGPT\u0027 saying \u0027re-reviewed by ChatGPT\u0027 for the commits you finished. End with a five-line summary.",
+                      "model":  "gpt-6.1-sol"
+                  },
+                  {
+                      "id":  "c7-scenarios-1",
+                      "effort":  "medium",
+                      "status":  "done",
+                      "prompt":  "You are ChatGPT working unattended on the owner\u0027s private SWGEmu server project (the owner is asleep; nobody will answer). Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox cannot run WSL, so you cannot reach /opt/swg or the game; work only with files under h/. Claude\u0027s overnight check runs the bots and the server side. Task C7 (bot squads): read the C7 section of h/outputs/SWG-handoff.md, h/outputs/tools/bots/scenarios/README.md, h/outputs/tools/bots/groups.json, each group\u0027s newest lines in h/outputs/Bot-reports/\u003cGroup\u003e/LOG.md, h/outputs/Bot-reports/OVERNIGHT.md if present, and the newest h/outputs/Bot-reports/runs/*-summary.md. Pick the two most valuable open problems (e.g. Doctor buffs now that science_doctor_wound_02 is trained, Pell\u0027s forage now that outdoors_scout_camp_01 is trained, a harvest after Varo\u0027s kill, mission terminals inside buildings, the flaky /purchaseTicket) and improve or add scenarios for them in h/outputs/tools/bots/scenarios (new files are \u003cgroup\u003e-\u003ctopic\u003e.py; keep the Bot API from the README; Python must compile; use LF line endings). To have a new scenario run, put its file name on its group\u0027s line in h/outputs/Agent/squad-plan.txt (one scenario per group). You cannot run them yourself: Claude\u0027s overnight check runs the plan every 30 minutes and reports in Bot-reports. Add one short log entry at the top of the Log in SWG-handoff.md headed \u0027### 2026-10-14 (C7 scenarios, unattended) â€” ChatGPT\u0027 saying what you changed and why. Keep about 15-20% of your usage for that entry. End with a five-line summary.",
+                      "model":  "gpt-6.1-sol"
+                  },
+                  {
+                      "id":  "c4d-rereview",
+                      "effort":  "high",
+                      "status":  "done",
+                      "prompt":  "You are ChatGPT working on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox may not reach WSL; everything you need is under h/. Do task C4d from the board (h/outputs/SWG-handoff.md): a read-only re-review of dev commit 5aadc8b9 using h/outputs/Documentation-support/review-C4d/ (README, 5aadc8b9.patch, files/). For each of your seven findings in h/outputs/Documentation-support/review-C4b/C4b-C4c-review.md say resolved, partly resolved or not resolved, with file:line and why; list any new finding the fix introduces. Write h/outputs/Documentation-support/review-C4d/C4d-review.md and add one short log entry at the top of the Log in SWG-handoff.md headed \u0027### \u003cdate\u003e (C4d re-review) â€” ChatGPT\u0027. Keep the board\u0027s existing line endings. End with a five-line summary.",
+                      "model":  "gpt-6.1-sol"
+                  },
+                  {
+                      "id":  "c12-hoth-adaptation",
+                      "effort":  "medium",
+                      "model":  "gpt-6.1-sol",
+                      "status":  "done",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Do task C12 from h/outputs/SWG-handoff.md (Hoth adaptation table). Claim it on the board first; add one short log entry at the top of the Log when you stop (keep its line endings). End with a five-line summary.",
+                      "result":  "228-file hashed adaptation table/inventory complete; no port/runtime validation. Documentation-support/hoth/hoth-adaptation-table.md"
+                  },
+                  {
+                      "id":  "c14-planet-lore",
+                      "effort":  "medium",
+                      "model":  "gpt-6.1-sol",
+                      "status":  "done",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Do task C14 from h/outputs/SWG-handoff.md (planet lore and galaxy coordinates; Wookieepedia, Legends preferred). The research budget applies. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep its line endings). End with a five-line summary.",
+                      "result":  "24-record bounded lore/grid pass complete; all11terrain-backed catalogue zones covered. Follow-up stock UI affine fit rejected; no client edits."
+                  },
+                  {
+                      "id":  "c13-server-sops",
+                      "effort":  "medium",
+                      "model":  "gpt-6.1-sol",
+                      "status":  "done",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Do task C13 from h/outputs/SWG-handoff.md (server SOPs). The research budget in AGENTS.md applies. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep its line endings). End with a five-line summary.",
+                      "result":  "9runbooks/10ranked gaps, commands source-inspected and unexecuted. Documentation-support/SWG-server-SOPs.md"
+                  },
+                  {
+                      "id":  "c8-mcp-wrappers",
+                      "effort":  "medium",
+                      "status":  "done",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox may not reach WSL; work with files under h/. Do task C8 from h/outputs/SWG-handoff.md (MCP wrappers). Claim it on the board first; add one short log entry at the top of the Log in SWG-handoff.md when you stop (keep its line endings). End with a five-line summary.",
+                      "model":  "gpt-6.1-sol",
+                      "result":  "Implementation/design and offline checks complete. Runtime acceptance remains with Claude; see Documentation-support/C8-C10-validation.md."
+                  },
+                  {
+                      "id":  "c9-scenario-fixes",
+                      "effort":  "medium",
+                      "status":  "done",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox may not reach WSL; work with files under h/. Do task C9 from h/outputs/SWG-handoff.md (fix the open squad scenarios). Claim it on the board first; add one short log entry at the top of the Log in SWG-handoff.md when you stop (keep its line endings). End with a five-line summary.",
+                      "model":  "gpt-6.1-sol",
+                      "result":  "Implementation/design and offline checks complete. Runtime acceptance remains with Claude; see Documentation-support/C8-C10-validation.md."
+                  },
+                  {
+                      "id":  "c10-mapping-coverage",
+                      "effort":  "medium",
+                      "status":  "done",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox may not reach WSL; work with files under h/. Do task C10 from h/outputs/SWG-handoff.md (bot mapping and whole-server coverage plan). The research budget in AGENTS.md applies. Claim it on the board first; add one short log entry at the top of the Log in SWG-handoff.md when you stop (keep its line endings). End with a five-line summary.",
+                      "model":  "gpt-6.1-sol",
+                      "result":  "Implementation/design and offline checks complete. Runtime acceptance remains with Claude; see Documentation-support/C8-C10-validation.md."
+                  },
+                  {
+                      "id":  "c11-archive-downloads",
+                      "effort":  "low",
+                      "status":  "hold",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Your sandbox may not reach WSL; work with files under h/. Do task C11 from h/outputs/SWG-handoff.md only once the owner has said go: follow Documentation-support/archive-download-plan.md exactly. Claim it on the board first; add one short log entry at the top of the Log in SWG-handoff.md when you stop (keep its line endings). End with a five-line summary.",
+                      "blocker":  "Already-fetched A1–A6+D1 audited:7pins match, hashes saved. A4partial component terms, A6owner-excluded source hold, D1open donor audit. Remaining A7/B/C deferred; canonical fetch record managed by Claude.",
+                      "model":  "gpt-6.1-sol",
+                      "result":  "Content-catalogue/archive-record-review.md + archive-checkout-audit.json; downloaded-source review only, not full-plan completion or import clearance."
+                  },
+                  {
+                      "id":  "c4e-review",
+                      "effort":  "high",
+                      "status":  "done",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Task C4e on h/outputs/SWG-handoff.md: a read-only code review of three dev commits, exported to h/outputs/Documentation-support/review-C4e/ (README lists what to check: leash F1/F2, agent body F3, /agentpath find and tell, Hoth v1 Lua). Write findings to review-C4e/C4e-review.md, P1/P2/P3 as in C4d, each with file:line and a concrete failure scenario; include your best idea for the open leash second-hop refusal. Do not edit /opt/swg. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 02:25 Claude",
+                      "result":  "Review saved: 1 P1 null/null floor proof, 1 P2 scene-unguarded straight movement. c402e480 included; client lock context/runtime checks requested from Claude. No live approval."
+                  },
+                  {
+                      "id":  "c15-open-assets",
+                      "effort":  "medium",
+                      "status":  "done",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Task C15 on h/outputs/SWG-handoff.md (owner, 14 Oct 2026: \u0027find open source/public/or free use shader/textures/etc we can use\u0027). Research only: read web pages, download nothing. Find sources of textures, materials, decals, skyboxes/terrain textures, sound effects and similar that we may legally use and ship in a private SWG server\u0027s client archives. For each source record: URL, the exact licence (version, link to the licence text) checked on the creator\u0027s own page, attribution wording required, whether modification and redistribution inside a game archive are allowed, asset types, resolution/format, and fit for pre-CU SWG (sci-fi, snow/Hoth, desert, jungle, metal/industrial). Prefer CC0/public domain; list CC-BY separately with its attribution duty; flag CC-BY-SA share-alike effects; exclude non-commercial-only, no-redistribution, \u0027free for personal use\u0027 and anything ripped from other games or of unclear origin; flag AI-generated packs with unclear provenance. Build on what exists: Documentation-support/KOTOR-to-SWG-and-open-assets-feasibility.md (Quaternius, Kenney, Poly Haven shortlist, F85), Community-content/CREDITS-and-sources.txt and the content audits in Content-catalogue/. Shaders: SWG uses its own shader templates (.sht) and effect files, so free GLSL/HLSL code is not directly usable; note which material maps SWG can use (diffuse, normal, specular/gloss, emissive, environment) using Documentation-support/swg-format-inventory.md, and how PBR sets would convert (to DDS, DXT1/DXT5). Write Documentation-support/open-assets-catalogue.md plus open-assets-catalogue.json, a top-10 shortlist for Hoth and sci-fi props first. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
+                      "model":  "gpt-6.1-sol",
+                      "result":  "10 creator-source CC0 candidates, MD/JSON, conversion and rights gates. No downloads/imports/runtime tests."
+                  },
+                  {
+                      "id":  "c16-bot-fallback",
+                      "effort":  "medium",
+                      "status":  "done",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Task C16 on h/outputs/SWG-handoff.md (owner, 14 Oct 2026: \u0027when bots finish or fail loops and they cant be completed to find something else the bots can test, travel, navmesh mapping, etc\u0027). Give the bot squads fallback work: when a group\u0027s scenario is finished, or keeps failing or BLOCKED for the same reason, the group switches to the next useful test instead of retrying. The design, the files and the fallback list are in the C16 paragraph on the board. Work in h/outputs/tools/bots (squad.py and the scenarios are yours); offline mocks and py_compile if your sandbox can\u0027t reach WSL, a real test-galaxy round if it can. Test galaxy only. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 04:35 Claude",
+                      "result":  "Initial scheduler/fallback probes/ticket filtering implemented; 15 offline tests passed. Claude runtime acceptance requested; full travel graph, crafting API and expanded mapping remain open in fallback-coverage.md."
+                  },
+                  {
+                      "id":  "c17-discord",
+                      "effort":  "medium",
+                      "status":  "done",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Task C17 on h/outputs/SWG-handoff.md (owner, 14 Oct 2026: \u0027can we add a task to gpt to hook into and help me manage a discord channel for all this?\u0027). Plan and build the Discord side as described in the C17 paragraph on the board: the channel layout, then a posting tool with a dry-run mode and offline tests. Do not create Discord accounts, apps, webhooks or bots, do not post, and do not handle any token: the owner sets those up and says go. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 04:55 Claude"
+                  },
+                  {
+                      "id":  "c19-c4f-review",
+                      "effort":  "high",
+                      "status":  "done",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 05:39 Claude",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Task C19 on h/outputs/SWG-handoff.md: the C4f code review of Claude\u0027s 14 Oct dev commits and client-archive tooling. Exports and the checklist: h/outputs/Documentation-support/review-C4f/README.md. Write C4f-review.md there, P1/P2/P3 as in C4d/C4e. Read-only: do not edit /opt/swg or the staged files. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
+                  },
+                  {
+                      "id":  "c20-c16b-recovery",
+                      "effort":  "medium",
+                      "status":  "done",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 06:03 Claude",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first; note the new \u0027ChatGPT has WSL\u0027 rules: you can now run wsl -d Debian -u swgemu, and Claude leads). Task C20 (C16 follow-up; read Agent/to-chatgpt.md 05:51 first). Overnight, every Esk scenario reported BLOCKED all night because Esk\u0027s crew (Esk, Lira, Tovan) is stranded on Hoth, and the fallbacks only refuse. (1) Add a recovery fallback that runs before the others when a crew is off Tatooine: bring it home with the return half of scenarios/esk-hoth.py\u0027s shuttle trip (it passed 21/21 both ways), and record it in Bot-reports/fallback-coverage.md. (2) Fix scenarios/dorn-social.py line 34: KeyError \u0027x\u0027 when a move fails (end is an error dict). (3) Prove both on the test galaxy yourself, Esk group only: write the driver claim on the board, take esk-routes.py out of Agent/squad-plan.txt while you test (put it back when done), run squad.py between overnight rounds (rounds start about :02 and :31 and last 25 min; check pgrep -f \u0027squad.py run\u0027 first), and report real pass counts. Do not restart the test galaxy, edit /opt/swg, or build; if a bot body needs a C++ change, write it up in Agent/to-claude.md. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
+                      "result":  "Done by ChatGPT 14 Oct (commit 2ff7b58: return-home preflight for every fallback, Dorn failed-move guard, 21 offline tests). Its own Esk runtime proof was not run (usage ran out at 06:26); Claude runs it. Marked done by Claude 08:05 so the relay does not redo it."
+                  },
+                  {
+                      "id":  "c18-fable-backport-review",
+                      "effort":  "medium",
+                      "status":  "done",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 05:39 Claude",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Task C18 on h/outputs/SWG-handoff.md: cross-review Fable\u0027s NGE/MTG backport batches 1 and 2, already applied to dev (commits 0c44d431, 5c7ae017). Everything is in h/outputs/Fable-backport/: README.md, batch1.diff, batch2.diff, diffs/, checks.json, checks-batch2.json and the staged trees. Your usage is limited, so keep this to a sample and stop when you\u0027ve covered it. Check: (1) the 1,074 path repairs really map a mangled server path to the real client path (sample about 30, covering all nine patterns, against the client paths in checks.json); (2) the 13 new wearables follow Core3\u0027s wearable templates and pre-CU species rules; (3) the batch-2 include wiring and the 10 new templates; (4) any risk to existing content (e.g. something that spawned an MTG object by its old mangled path; mtg_catalog.lua users). Write Documentation-support/review-C18/C18-review.md with P1/P2/P3 findings (file:line, concrete failure scenario). Read-only: do not edit /opt/swg or the staged files. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
+                      "result":  "Done by ChatGPT 14 Oct as a reduced sample (commit 6e2e90a, Documentation-support/C18-backport-sample-review.md): 30 objects, no new P1/P2; follow-ups listed. Marked done by Claude 08:05."
+                  },
+                  {
+                      "id":  "c21-resource-census",
+                      "effort":  "medium",
+                      "status":  "done",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 08:42 Claude (owner\u0027s C21, 14 Oct)",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL now; Claude leads; redact names in anything published; h/ is a local git repo, commit your own finished work ending \u0027Agent: ChatGPT\u0027). Task C21 (the owner\u0027s, on the board): quantify the server\u0027s local resources and assets, Wookieepedia Legends coverage and implementation candidates (rights, missing dependencies, maturity, effort), following your own plan in Documentation-support/server-resource-and-implementation-census.md. Work in one bounded checkpoint per run (about a third of your usage at most), save the checkpoint state in that file, and stop so the next queued task gets a turn; set this task back to open in Agent/gpt-queue.json if more checkpoints remain. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
+                  },
+                  {
+                      "id":  "c22-hoth-review",
+                      "effort":  "high",
+                      "status":  "done",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 08:42 Claude",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL now; Claude leads; redact names in anything published; h/ is a local git repo, commit your own finished work ending \u0027Agent: ChatGPT\u0027). Task C22: independent review of the 14 Oct Hoth and fix commits in /opt/swg/Core3-dev (read-only; use git -C /opt/swg/Core3-dev show as swgemu): c5f1ae06 (ice caves, Fable from Bellum), 69eb77fe (8 area spawners + clean-room glacial rancor), de1b679a (Hoth camps), 23014f39 (C4f-F1 spawn-area locks), 90f60a81 (C4e-F2 movement scene/connection guard), plus f0b192e in the h repo (C4f-F2 archive builder). Fable\u0027s staging notes are in outputs/Fable-hoth-caves/, Fable-hoth-batchA/, Fable-hoth-batchB/. Check against AGENTS.md (provenance/credit of Bellum\u0027s AGPL work, clean-room rancor) and for concrete defects: wrong spawnMobile/spawnSceneObject arguments, cells or coordinates off the map or in no-build areas, spawn-group/lair names that don\u0027t exist, region overlaps that matter, lock order in the two C++ fixes. Write Documentation-support/review-C22/C22-review.md with P1/P2/P3 (file:line, concrete failure scenario). Do not edit /opt/swg, build, restart or drive bots. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
+                  },
+                  {
+                      "id":  "c23a-hoth-gameplay-scenario",
+                      "effort":  "medium",
+                      "status":  "done",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 14:35 Claude (owner: more responsibility for GPT)",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; new rule \"ChatGPT\u0027s server-code worktree\"; redact names in anything published; commit your own finished h/ work ending \u0027Agent: ChatGPT\u0027). Read Agent/to-chatgpt.md (2026-10-14 14:35 entry) and the C23, C24 and C25 instructions on h/outputs/SWG-handoff.md (above the Log). Task C23 part 1: write tools/hoth/hoth_gameplay_check.py and its offline fixture tests (checks a to g in the C23 instructions). Do not drive bots or touch /opt/swg in this task; the run is C23b, after Claude\u0027s restart. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
+                      "result":  "Scenario fbd691f/f1ec6ef; seven fixtures pass, readiness and telemetry gates recorded."
+                  },
+                  {
+                      "id":  "c24-hoth-release-gate",
+                      "effort":  "high",
+                      "status":  "done",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 14:35 Claude (owner: more responsibility for GPT)",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; new rule \"ChatGPT\u0027s server-code worktree\"; redact names in anything published; commit your own finished h/ work ending \u0027Agent: ChatGPT\u0027). Read Agent/to-chatgpt.md (2026-10-14 14:35 entry) and the C23, C24 and C25 instructions on h/outputs/SWG-handoff.md (above the Log). Task C24: write Documentation-support/hoth-release-gate.md (commit table for sandbox..dev, your own review of the unreviewed commits as in C22 with P1/P2/P3 and file:line, the non-code blockers, a verdict). Read-only on /opt/swg (git as swgemu); no builds, restarts or bots. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
+                      "result":  "NO-GO checkpoint e29f926/d74b71d; 48-row inventory, R2 multi-zone P2, five offline checks; gameplay/owner gates open."
+                  },
+                  {
+                      "id":  "c25-gpt-worktree-shuttle-message",
+                      "effort":  "medium",
+                      "status":  "done",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 14:35 Claude (owner: more responsibility for GPT)",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; new rule \"ChatGPT\u0027s server-code worktree\"; redact names in anything published; commit your own finished h/ work ending \u0027Agent: ChatGPT\u0027). Read Agent/to-chatgpt.md (2026-10-14 14:35 entry) and the C23, C24 and C25 instructions on h/outputs/SWG-handoff.md (above the Log). Task C25: in your worktree /opt/swg/Core3-gpt (branch gpt/work, as swgemu), fix the silent ticket failure at MMOCoreORB/src/server/zone/objects/creature/commands/PurchaseTicketCommand.h:132 (and the same gap on the departure side, if any). One commit ending \u0027Agent: ChatGPT\u0027, no cmake/make; then ask Claude in Agent/to-claude.md to build and test it. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
+                      "result":  "5c41ed62 on gpt/work: origin/destination missing-shuttle feedback; Claude review/build/runtime pending."
+                  },
+                  {
+                      "id":  "c23b-hoth-gameplay-run",
+                      "effort":  "medium",
+                      "status":  "hold",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 14:35 Claude (owner: more responsibility for GPT)",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; new rule \"ChatGPT\u0027s server-code worktree\"; redact names in anything published; commit your own finished h/ work ending \u0027Agent: ChatGPT\u0027). Read Agent/to-chatgpt.md (2026-10-14 14:35 entry) and the C23, C24 and C25 instructions on h/outputs/SWG-handoff.md (above the Log). Task C23 part 2 (restart done 2026-10-14 14:47; run it after C23a): run tools/hoth/hoth_gameplay_check.py with the Esk crew (driver claim on the board, Esk out of Agent/squad-plan.txt during the run and back afterwards), write Documentation-support/C23-hoth-gameplay.md, and file each failure in Agent/to-claude.md with its evidence. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
+                      "result":  "First run 144837 BLOCKED readiness/tools/death; separate recovery 150600 11/11, all home/plan restored. Re-run after preparation/telemetry; C23 overall open."
+                  },
+                  {
+                      "id":  "c32-agentgear-profession",
+                      "effort":  "high",
+                      "status":  "done",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-15 01:13 Claude",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; rule \"ChatGPT\u0027s server-code worktree\"; redact names in anything published; commit your own finished h/ work ending \u0027Agent: ChatGPT\u0027). Read Agent/to-chatgpt.md (the 2026-10-15 01:13 Claude entry). Task C32, for the owner\u0027s class check (15 Oct: \u0027the bots need to work better for better testing now ... so we can see what all works for what classes\u0027): in your worktree /opt/swg/Core3-gpt (branch gpt/work, git as swgemu), first merge dev into gpt/work (dev is 16 commits ahead, including f1ce7007 \u0027/agentgear survey\u0027). Then extend MMOCoreORB/src/server/zone/objects/creature/commands/AgentGearCommand.h with three kits behind the same gate as the others (test galaxy only, SandboxTestGalaxy.h, and accounts in Core3.AgentAccounts): \u0027/agentgear profession \u003cname\u003e\u0027 grants every skill box of one profession (a starter such as combat_brawler, or an elite such as combat_carbine) in prerequisite order through SkillManager, ignoring XP and skill-point limits and notifying the client; \u0027/agentgear profession clear\u0027 surrenders all skills, as the character builder\u0027s unlearn_all_skills does; \u0027/agentgear profession list\u0027 replies with the current skill boxes. Reply in the existing \u0027[agentgear] {json}\u0027 style, naming granted and failed boxes. One commit ending \u0027Agent: ChatGPT\u0027, no cmake/make. Then, in tools/bots/squad.py (your slice), add Bot.profession(name) and Bot.clear_professions() wrappers with an offline test. Ask Claude in Agent/to-claude.md to build and test it. A Claude helper is mapping every profession\u0027s boxes and commands into outputs/Claude-class-check/ (professions.json, commands.json, test-plan.md); use it if it exists when you start, but don\u0027t wait for it. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
+                  },
+                  {
+                      "id":  "c30-ossus-fauna-server",
+                      "effort":  "medium",
+                      "status":  "done",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-15 01:13 Claude",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; rule \"ChatGPT\u0027s server-code worktree\"; redact names in anything published; commit your own finished h/ work ending \u0027Agent: ChatGPT\u0027). Read Agent/to-chatgpt.md (the 2026-10-15 01:13 Claude entry). Task C30: wire the six reviewed Ossus creatures in outputs/Local-model-ossus-fauna/ (read its README) into the server, in your worktree /opt/swg/Core3-gpt (after C32\u0027s merge of dev; git as swgemu). Put the six files in MMOCoreORB/bin/scripts/mobile/ossus/ with a serverobjects.lua, included from mobile/serverobjects.lua the way the other planets are. Add spawn groups and lairs (study bin/scripts/mobile/spawn/ and lair/ for naboo or dantooine) and Ossus spawn regions in managers/planet/ossus_regions.lua (read its current regions first): wetlands for mud yak herds; forest for gokob, tree frog, tribis and kaddyr bug; open ground for kirruk. Keep the base levels in the files; propose Ossus levels in the commit message if the regions call for other ones. luac5.3 -p every file. Don\u0027t touch the client archive: Claude adds the six creature_names strings. One commit ending \u0027Agent: ChatGPT\u0027, no cmake/make; ask Claude in Agent/to-claude.md to build and test it. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
+                  },
+                  {
+                      "id":  "c33-class-check-scenario",
+                      "effort":  "high",
+                      "status":  "failed",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-15 02:07 Claude",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; rule \"ChatGPT\u0027s server-code worktree\"; redact names in anything published; commit your own finished h/ work ending \u0027Agent: ChatGPT\u0027). Read Agent/to-chatgpt.md (the newest Claude entries). Task C33, the owner\u0027s class check (15 Oct: \u0027see what all works for what classes\u0027): write the scenario tools/bots/scenarios/class-check.py from outputs/Claude-class-check/test-plan.md (read it fully; also matrix.md; the data is professions.json and commands.json there; if they are missing, run python -I outputs/Claude-class-check/build_matrix.py). Follow the plan: P0 control runs first; then one profession per run in proposed_run_order, sliced by an argument or environment variable (phase, profession list, group) so one run stays under 30 minutes; grant with /agentgear profession (Bot.profession), gear after the grant with a raw slash(\u0027agentGear\u0027,\u0027basic\u0027) (Bot.gear skips when armour is carried); verdicts WORKS / RAN / NOT_GRANTED / NO_EFFECT / BLOCKED exactly as section 5 defines them, BLOCKED as g.note and never FAIL; per-run results also written to Bot-reports/\u003cGroup\u003e/class-check-\u003cprofession\u003e.json so a later step can build the matrix; a tidy final clear plus the group\u0027s starting boxes back (groups.json training) at the end. Offline tests for the classification with recorded or synthetic events. Then run only P0 and P1 (the six starters) on the test galaxy with the Aurek group, and only when no squad round is running and the board\u0027s Server lock allows bot runs (driver claim on the board; Aurek out of Agent/squad-plan.txt during the run and back afterwards; 30-minute ceiling). If the owner\u0027s client is running (tasklist shows SWGEmu.exe), you may still run: bots are separate characters. Write the first results to Documentation-support/class-check-results.md (per profession: tries, WORKS, RAN, NOT_GRANTED, NO_EFFECT, BLOCKED, and the failing abilities with evidence). No server code changes in this task. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
+                  },
+                  {
+                      "id":  "c34-class-check-kits",
+                      "effort":  "high",
+                      "status":  "open",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-15 02:07 Claude",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; rule \"ChatGPT\u0027s server-code worktree\"; redact names in anything published; commit your own finished h/ work ending \u0027Agent: ChatGPT\u0027). Read Agent/to-chatgpt.md (the newest Claude entries). Task C34, kits for the class check: in your worktree /opt/swg/Core3-gpt (branch gpt/work; first merge dev, which has C30 as 80b66e65), extend AgentGearCommand.h with the item kits outputs/Claude-class-check/matrix.md lists as missing (\u0027Kits the scenario needs\u0027): carbine, polearm, two-hand, special heavy, the lightsaber kits, medicine2 (wound, state, cure, dot and revive packs) and the eight instruments, each a separate \u0027/agentgear \u003ckit\u003e\u0027 with the same gate as the others (test galaxy only, Core3.AgentAccounts) and the same \u0027[agentgear] {json}\u0027 reply. Check every template path against the server\u0027s object templates (bin/scripts/object) and say which ones don\u0027t exist. Also: \u0027/agentgear profession list\u0027 should list the character\u0027s abilities as well as its boxes (test-plan.md section 8 point 3). One commit ending \u0027Agent: ChatGPT\u0027, no cmake/make; ask Claude in Agent/to-claude.md to build and test it. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
+                  },
+                  {
+                      "id":  "c24b-r2-coverage-review",
+                      "effort":  "high",
+                      "status":  "open",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 18:50 Claude",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; redact names in anything published; commit your own finished h/ work ending \u0027Agent: ChatGPT\u0027). Read Agent/to-chatgpt.md (the newest Claude entries). Task C24b: read-only re-review of dev 98ad1d1d (your R2-F1 proposal, implemented) and 3a0b154f (the owner\u0027s coverage scaling, poolScaleZones) in /opt/swg/Core3-dev (git as swgemu). Check idempotence with several backfill zones and scaling together, rounding and caps, live safety (key missing = stock sizes), and that the load-time top-up is unaffected; extend tools/hoth/test_release_formats.py if useful. Update Documentation-support/hoth-release-gate.md (R2 row, a refreshed commit inventory, the verdict). No builds, restarts or bots. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
+                      "blocker":  "2026-10-15 03:03 Claude: the 02:05 run lost its network at 02:42 and was ended by the PC shutdown at 02:52 (no answer); requeued after C33/C34."
+                  },
+                  {
+                      "id":  "c35-ossus-npcs-server",
+                      "effort":  "high",
+                      "status":  "open",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-15 03:58 Claude",
+                      "prompt":  "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; rule \"ChatGPT's server-code worktree\"; redact names in anything published; commit your own finished h/ work ending 'Agent: ChatGPT'). Read Agent/to-chatgpt.md (the newest Claude entries). Task C35: wire the five reviewed Ossus NPCs in outputs/Local-model-ossus-npcs/ (read its README) into the server, in your worktree /opt/swg/Core3-gpt (branch gpt/work; first merge dev; git as swgemu), the same way C30 wired the fauna (80b66e65). Copy the five files unchanged into MMOCoreORB/bin/scripts/mobile/ossus/ and register them in its serverobjects.lua. The three Ysanna (hunter, warrior, shaman; social group ysanna) get camps in Ossus's wilderness: study how stock places the Janta (Dantooine) and other tribal NPC camps (lairs, spawn groups or static spawns, whichever stock uses) and do the same, two or three camps away from the fauna habitats' centres and outside the existing no-spawn and build regions in managers/planet/ossus_regions.lua. The Ysanna's base levels (50-70, from the Janta) are far above Ossus's fauna (6-19): keep the files' levels, and propose open-world Ysanna levels in the commit message. The two One Sith (acolyte 140, warrior 265) are raid-tier (Documentation-support/krayt-raid-design.md): register them only, with no open-world spawns. Keep faction \"\" for all five. luac5.3 -p every file and run the shared check_lua.py. Don't touch the client archive: Claude has staged the five names (stage_npc_names.py). One commit ending 'Agent: ChatGPT', no cmake/make; ask Claude in Agent/to-claude.md to review, build and test it. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
+                  },
+                  {
+                      "id":  "c23c-hoth-gameplay-rerun",
+                      "effort":  "medium",
+                      "status":  "hold",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 18:50 Claude",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; redact names in anything published; commit your own finished h/ work ending \u0027Agent: ChatGPT\u0027). Read Agent/to-chatgpt.md (the newest Claude entries). Task C23c: re-run your C23 acceptance on the new bot body (C25/C26 in dev, built 18:09), only once Claude\u0027s newest \u0027restart done\u0027 note in Agent/to-chatgpt.md is later than 19:00 and no squad round is running (pgrep -f \u0027squad.py run\u0027). First the C26 runtime acceptance steps 2-6 in Documentation-support/C26-telemetry.md with the Esk crew, then the C23 checks (Ossus exists now too). Prepare the crew by ordinary play: armor encumbrance is stock (Claude\u0027s note), so buff with the crew Doctor and entertainer/food for focus and willpower, or use a lighter set; get the missing survey tools by ordinary means. Driver claim on the board, Esk out of Agent/squad-plan.txt during the run and back afterwards, 30-minute ceiling. Update Documentation-support/C23-hoth-gameplay.md and file each server failure in Agent/to-claude.md with its evidence. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
+                      "blocker":  "2026-10-15 01:13 Claude: the test galaxy is stopped (owner, 15 Oct 00:55); reopen after the next restart."
+                  },
+                  {
+                      "id":  "c29-lore-materials",
+                      "effort":  "medium",
+                      "status":  "hold",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-14 18:50 Claude",
+                      "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; redact names in anything published; commit your own finished h/ work ending \u0027Agent: ChatGPT\u0027). Read Agent/to-chatgpt.md (the newest Claude entries). Task C29, the owner\u0027s resource plan (14 Oct: \u0027lets layout all the resources we have and get them adapted for swg and integrated. (a wide crafting pool keeps people interested.)\u0027): research Legends materials tied to our current and planned planets (Hoth, Ossus and the candidates in Documentation-support/server-world-census.md; e.g. Mandalorian iron for Mandalore, Adegan crystals for Ossus, cortosis, phrik, and others you find). The research budget applies; Wookieepedia is CC BY-SA, so write our own text. For each: planet(s), a short lore summary in our words with the source URL, the stock SWG resource class it would sit under (or why it needs a new class), attribute emphasis (OQ, CD, DR, FL, HR, MA, PE, SR, UT, CR, ER), rarity, and what could consume it (existing schematics through the class tree, or a new recipe or loot). Write Documentation-support/resource-lore-materials.md and .json; Fable\u0027s inventory (outputs/Fable-resources3/) leaves a slot for it. No game or server changes. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary.",
+                      "blocker":  "19:25 Claude: reassigned to Fable (Fable-resources3/lore/); ChatGPT\u0027s weekly usage is nearly out (owner, 14 Oct)."
+                  }
+              ]
 }
