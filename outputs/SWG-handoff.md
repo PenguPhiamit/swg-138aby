@@ -331,7 +331,7 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
   - Vong: worldshaping zones, a damutek dungeon for Nei Rin's voxyn line, coral-implanted prisoners at Krayt's Ossus garrison, living gear, a yammosk raid with dovin basals.
   - Gree: sensor obelisks, attunement relics with colour and tone puzzles, shield constructs keyed to a damage type, stasis traps.
   - Others: the Starweird as a rare anomaly encounter; Killiks as a hive dungeon.
-- Recommended first prototype: the damutek dungeon. Lore checks go to ChatGPT's research lane; art comes from our own pipeline and CC0 kitbashing.
+- **Owner: wait, no prototype yet; art inspiration only.** The Zerg look is the starting point for the Vong (made Vong with coral, crab armour and scars), and the Protoss look is the starting point for the Celestials (gold and teal, floating crystals, glyph lines; Gree tech can borrow it). The mechanics stay ideas on file.
 
 ### 2026-10-15 16:40 Claude: C39 and C40 fixes in dev, built, gated; the mercenary broker stood on a roof
 

@@ -2,6 +2,29 @@
 
 Owner: "check out starcraft 1 and 2 and the custom assets that exist for them for inspiration on the Vong, gree, and maybe other potential things like star weirds or other crazy legends things"; "we need the legal checks".
 
+## Owner's direction (15 Oct, after reading this)
+
+"no lets wait, lets just use for art insporation and do what we can. the zerg had features i think would work well enough as a starting point. and the protoss for the celestial stuff."
+
+- **No prototype yet.** The damutek dungeon and the other mechanics below are ideas on file, not tasks.
+- **Art inspiration only**, made our own way: our models through the pipeline, CC0 kitbashing, and recolours of SWG's own assets.
+- **Zerg → the Vong look, as a starting point.** Keep:
+  - chitin and carapace plates with segmented joints;
+  - bone spikes and claws, sinew and membrane between plates;
+  - glowing sacs and veins;
+  - organic spires and grown structures;
+  - ground that looks overgrown by living tissue.
+  
+  Make it Vong, not Zerg: yorik coral and vonduun-crab textures, ritual scars and tattoos on the Vong themselves, and coral greys, deep reds and bone in place of the Zerg purple-brown. Don't copy any one Zerg unit's silhouette.
+- **Protoss → the Celestials.** These are the Legends Celestials (the Architects behind ancient megastructures such as Centerpoint Station). Keep:
+  - gold and teal plating;
+  - floating crystals and hovering geometry;
+  - obelisks and pylon-like power stones;
+  - glowing glyph lines;
+  - serene, monumental shrines.
+  
+  This is for Celestial ruins and relics, and Gree tech can borrow from the same lane. Again, no Protoss silhouettes one-to-one.
+
 ## Legal check first: ideas yes, files no
 
 | What | Verdict | Why |
