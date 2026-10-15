@@ -1,0 +1,3387 @@
+{
+ "meta": {
+  "generated": "2026-10-15 03:23",
+  "generator": "outputs/Systems-baseline/build_systems.py",
+  "repo": "/opt/swg/Core3-dev",
+  "head": "80b66e65 2026-10-15 Wire six reviewed Ossus fauna into habitat encounters",
+  "local_commits_since_upstream_403893d9": "64",
+  "command_audit": "859 commands, file dated 2026-10-14 03:43",
+  "method": "Static reading of server source only; 'implemented' means code exists, not that it was tested. Code counts are git ls-files/git grep over each system's paths; TODO hits match TODO|FIXME|not implemented|unimplemented|not yet implemented. Commands from the command audit, stubs re-checked against the current headers."
+ },
+ "status_counts": {
+  "implemented": 38,
+  "partial": 6,
+  "stub": 2,
+  "disabled": 1,
+  "missing": 2
+ },
+ "biggest_gaps": [
+  {
+   "system": "32",
+   "label": "Space (Jump to Lightspeed)",
+   "text": "Only partly done and off by default upstream: 22 space combat commands have no script, component repair is a stub, and nothing has been flight-tested here. It is the largest system on the list."
+  },
+  {
+   "system": "47",
+   "label": "Staff tools",
+   "text": "43 of 117 staff commands are still stubs, among them `/money`, `/planetWarp`, `/setRank`, `/grantTitle` and the spawner controls (the audit counted 45; `/spawnStatus` and `/showSpawnRegion` have since been made real locally). This affects running the server every day."
+  },
+  {
+   "system": "15",
+   "label": "Player cities and Politician",
+   "text": "Two of eight specialisations (Clone Lab, Entertainment District) cost 80,000 credits and do nothing; militia have no law-enforcement powers; `/cityWarn` and city guards are missing; the weekly cadence hides everything in short tests."
+  },
+  {
+   "system": "18",
+   "label": "Battlefields",
+   "text": "Markers only, no rules, and the three battlefield commands do nothing. This is the main pre-CU PvP content gap."
+  },
+  {
+   "system": "7",
+   "label": "Image Designer",
+   "text": "The server trusts the client on colour palettes and holo-emote purchases, and stat migration only works in the 4 salon templates. Otherwise the code is complete, not bare bones."
+  },
+  {
+   "system": "21",
+   "label": "Bounty Hunter",
+   "text": "No mission failure when someone else kills the target; `bounty_mission_level` is unread."
+  },
+  {
+   "system": "23",
+   "label": "Creature Handler and pets",
+   "text": "Owner priority. The code is complete, but the three CH skill mods (`private_creature_empathy`, `_training`, `_management`) are read nowhere, and pet balance and AI reliability have never been measured."
+  },
+  {
+   "system": "36",
+   "label": "Gambling",
+   "text": "Sabacc is commented out; only slot machines and roulette work."
+  },
+  {
+   "system": "35",
+   "label": "Tutorial",
+   "text": "Off by default although the zone is loaded (owner choice)."
+  },
+  {
+   "system": "10",
+   "label": "Stubs to check in game",
+   "text": "`/harvesterHarvest`, `/harvesterMakeCrate`, `/harvesterTakeSurvey` and `/lootAll` are stubs that matter only if the pre-CU client sends them: check before building anything."
+  }
+ ],
+ "systems": [
+  {
+   "id": "1",
+   "group": "Characters",
+   "name": "Species, character creation, attributes, skills, XP, trainers, titles",
+   "status": "implemented",
+   "gaps": [
+    "Staff `/grantTitle` is a stub (players' own `/setCurrentSkillTitle` works).",
+    "Stat changes after creation only through Image Designer stat migration (row 7)."
+   ],
+   "evidence": [
+    "`src/server/zone/managers/player/creation/PlayerCreationManager.cpp`; `bin/scripts/managers/player_creation_manager.lua` (10 pre-CU species plus local Chiss, commit a32566bc)",
+    "`src/server/zone/managers/skill/SkillManager.cpp` loads client `skills.iff`; sandbox skill points from `Core3.Sandbox.SkillPoints` (profile: 1000)",
+    "XP: `PlayerManagerImplementation::awardExperience`, sandbox multiplier (profile: 5x, Jedi 2x); training cost `Skill.h` x `Core3.Sandbox.TrainingCostMultiplier` (0.25)",
+    "Trainers: about 35 trainer templates `bin/scripts/mobile/trainer/`, `screenplays/trainers/trainerData.lua` (893 lines); apprenticeship on (`managers/skill_manager.lua`)",
+    "Languages: `bin/scripts/skills/language/` (23), `/setSpokenLanguage`"
+   ],
+   "config_switches": [
+    "Core3.Sandbox.SkillPoints",
+    "Core3.Sandbox.TrainingCostMultiplier",
+    "Core3.PlayerCreationManager.MaxCharactersPerGalaxy"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/player/creation",
+     "MMOCoreORB/src/server/zone/managers/skill/SkillManager*",
+     "MMOCoreORB/src/server/zone/managers/skill/SkillModManager*",
+     "MMOCoreORB/src/server/zone/objects/creature/variables/Skill*",
+     "MMOCoreORB/bin/scripts/screenplays/trainers",
+     "MMOCoreORB/bin/scripts/managers/player_creation_manager.lua",
+     "MMOCoreORB/bin/scripts/managers/skill_manager.lua"
+    ],
+    "files": 21,
+    "lines": 6051,
+    "todo_hits": 4,
+    "todo_samples": [
+     "src/server/zone/managers/player/creation/PlayerCreationManager.cpp:359:\t//TODO: Replace this at some point?",
+     "src/server/zone/managers/player/creation/PlayerCreationManager.cpp:413:\tplayerCreature->setCustomObjectName(characterName, false); //TODO: Validate with Name Manager.",
+     "src/server/zone/managers/player/creation/PlayerCreationManager.cpp:880:\t//TODO: Validate hairCustomization",
+     "src/server/zone/managers/player/creation/PlayerCreationManager.cpp:913:\t//TODO: Validate customizationString"
+    ]
+   },
+   "commands": {
+    "total": 28,
+    "implemented": 21,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 7,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "clientqualifiedforskill",
+     "getattributes",
+     "newbierequeststartinglocations",
+     "setmatchmakingcharacterid",
+     "setmatchmakingpersonalid",
+     "skill",
+     "stat"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Fresh agent of each species: `/agentskill` a starter box at its trainer, assert skill points left, XP cap and the box in the character sheet.",
+   "fix_work": "None for pre-CU. Keep species work (Chiss) on the human rig; re-check skill-point and XP sandbox values before any live promotion."
+  },
+  {
+   "id": "2",
+   "group": "Combat",
+   "name": "Melee and ranged combat, specials, states, DoTs, posture, wounds and battle fatigue, incapacitation",
+   "status": "implemented",
+   "gaps": [
+    "`/coupDeGrace` is a stub; `/deathBlow` is the working finisher (animation TODO, `DeathBlowCommand.h:37`).",
+    "`/combatEscape` and `/multiTargetShot` are stubs (neither is granted by a pre-CU box); `/target`, `/combatSpam`, `/combatTarget`, `/toggleCombatTaunts` are stubs too, probably client-side settings.",
+    "CombatManager TODOs: tangible-vs-tangible damage not implemented (`CombatManager.cpp:584`), unskilled-weapon penalty unresearched (`:1980`), animation choice (`:485`)."
+   ],
+   "evidence": [
+    "`src/server/zone/managers/combat/CombatManager.cpp` (shared engine for 190+ combat commands whose numbers live in `bin/scripts/commands/*.lua`)",
+    "States and DoTs: `objects/creature/commands/StateEffect.h`, `DotEffect.h`, `CreatureObject::addDotState`",
+    "Squad Leader commands on `SquadLeaderCommand.h` (all 10 implemented)",
+    "Class check: 222 attack abilities across professions, 2 stub-looking handlers (`outputs/Claude-class-check/matrix.md`)"
+   ],
+   "config_switches": [
+    "Core3.CombatManager.AllowSameAccountLinkDeadBeneficialActions"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/combat",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/CombatQueueCommand.h",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/SquadLeaderCommand.h",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/DotEffect.h",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/StateEffect.h",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/CommandEffect.h",
+     "MMOCoreORB/bin/scripts/commands"
+    ],
+    "files": 812,
+    "lines": 51893,
+    "todo_hits": 4,
+    "todo_samples": [
+     "src/server/zone/managers/combat/CombatManager.cpp:485:\t\t\t// TODO: animations are probably determined by which pools are damaged (high, mid, low, combos, etc)",
+     "src/server/zone/managers/combat/CombatManager.cpp:584:\t\t// TODO: Implement TanO vs TanO damage -- This currently has no use",
+     "src/server/zone/managers/combat/CombatManager.cpp:1980:\t\tattackerAccuracy = -15; // unskilled penalty, TODO: this might be -50 or -125, do research",
+     "src/server/zone/objects/creature/commands/CombatQueueCommand.h:469:\t\t\t\t// TODO: Actually sequence these"
+    ]
+   },
+   "commands": {
+    "total": 227,
+    "implemented": 58,
+    "base_class": 158,
+    "inherits": 1,
+    "todo": 3,
+    "stub": 7,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "combatescape",
+     "combatspam",
+     "combattarget",
+     "coupdegrace",
+     "multitargetshot",
+     "target",
+     "togglecombattaunts"
+    ],
+    "todo_names": [
+     "deathblow",
+     "powerboost",
+     "surpriseshot"
+    ]
+   },
+   "bot_probe": "Agent fight reflex vs a weak creature with each weapon class; assert damage lines in the combat log, a posture/state change from one special, and wounds after incapacitation.",
+   "fix_work": "Decide whether `/coupDeGrace` should alias `/deathBlow`. Otherwise balance testing, not building."
+  },
+  {
+   "id": "3",
+   "group": "Combat",
+   "name": "Death, cloning, insurance, corpses and consent",
+   "status": "implemented",
+   "gaps": [
+    "`/clone` is a stub, but cloning runs through the clone SUI (`PlayerManagerImplementation.cpp:1576-1740`).",
+    "`/lootPlayerCorpse`, `/corpse` and `/deathCount` are stubs; check whether the pre-CU client uses them."
+   ],
+   "evidence": [
+    "`PlayerManagerImplementation::killPlayer` (`:1316`), `sendActivateCloneRequest` (`:1576`), `sendPlayerToCloner` (`:1740`); city-banned players can't use a city's cloner (`:1720`)",
+    "Item decay on death: insured 1%, uninsured 5%, insurance cleared (`:1855-1862`)",
+    "Insurance: `InsureCommand.h`, `objects/tangible/components/InsuranceTerminalMenuComponent`",
+    "Agent already observed death and cloning on the test galaxy (feature register F18)"
+   ],
+   "config_switches": [
+    "Core3.PlayerManager.WipeFillingOnClone"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/player/PlayerManagerImplementation.cpp",
+     "MMOCoreORB/src/server/zone/objects/building/cloning",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/InsureCommand.h",
+     "MMOCoreORB/src/server/zone/objects/tangible/components/InsuranceTerminalMenuComponent*",
+     "MMOCoreORB/src/server/zone/objects/player/sui/callbacks/CloningRequestSuiCallback.h"
+    ],
+    "files": 5,
+    "lines": 7720,
+    "todo_hits": 2,
+    "todo_samples": [
+     "src/server/zone/managers/player/PlayerManagerImplementation.cpp:2099:\t\t\t// TODO: Find a more correct CH xp formula",
+     "src/server/zone/managers/player/PlayerManagerImplementation.cpp:7292:\t\t\t\t// TODO - Periodic cleanup of these?"
+    ]
+   },
+   "commands": {
+    "total": 11,
+    "implemented": 7,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 4,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "clone",
+     "corpse",
+     "deathcount",
+     "lootplayercorpse"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Agent dies to a strong creature, picks the nearest cloner, then insures one item at a terminal; assert respawn location, clone sickness/decay and the insured flag.",
+   "fix_work": "None needed for play."
+  },
+  {
+   "id": "4",
+   "group": "Combat",
+   "name": "PvP, TEF, duels and faction combat flags",
+   "status": "implemented",
+   "gaps": [
+    "Staff `/setTef`, `/harmful`, `/harmless` are stubs.",
+    "`Core3.PvpMode` (all players attackable) defaults off; `useCovertOvertSystem` (CU/NGE-style rules) defaults off, so pre-CU behaviour applies."
+   ],
+   "evidence": [
+    "`objects/player/events/PvpTefRemovalTask.h`; duel and TEF checks in `CreatureObjectImplementation.cpp:3470-3482` (crackdown TEF, PvpMode, duels)",
+    "`DuelCommand.h`, `EndDuelCommand.h`, `ShowPvPRatingCommand.h`; `ConfigManager::useCovertOvertSystem()` used in about 25 places (`CombatManager.cpp:380`, `GCWManagerImplementation.cpp:758`, ...)"
+   ],
+   "config_switches": [
+    "Core3.PvpMode (default false)",
+    "Core3.GCWManager.useCovertOvertSystem (default false)"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/player/events/PvpTefRemovalTask.h",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/DuelCommand.h",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/EndDuelCommand.h",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/DeclareOvertCommand.h",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/ShowPvPRatingCommand.h"
+    ],
+    "files": 5,
+    "lines": 389,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 3,
+    "implemented": 3,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Two agents `/duel` each other and trade one attack; assert both flagged attackable and the flag clears after `/endDuel`.",
+   "fix_work": "None for pre-CU. Write the staff `/setTef` only if moderators need it."
+  },
+  {
+   "id": "5",
+   "group": "Medical",
+   "name": "Healing, wounds, buffs, cures, revives, hospitals and medical rating",
+   "status": "implemented",
+   "gaps": [
+    "`/tendDamageTool` and `/tendWoundsTool` are stubs (`/tendDamage` and `/tendWound` work).",
+    "TODOs in `/healDamage` (area-target refactor, `HealDamageCommand.h:312`), `/healWound` (string, `:314`) and `/revivePlayer` (debuff message, `:109`) are cosmetic."
+   ],
+   "evidence": [
+    "Heal commands in `objects/creature/commands/Heal*.h`, `ForceHealQueueCommand` family, `CurePackCommand`, `DotPackCommand`, `TendCommand`",
+    "Medical rating: building templates and `private_medical_rating` (`BuildingObjectImplementation.cpp:1211`, `HealEnhanceCommand.h:91`)",
+    "Class check: 25 heal-other abilities, none stub-looking"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Heal*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Tend*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Cure*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Apply*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/FirstAid*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/QuickHeal*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Diagnose*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/RevivePlayer*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/StopBleeding*",
+     "MMOCoreORB/src/server/zone/objects/tangible/pharmaceutical"
+    ],
+    "files": 71,
+    "lines": 6637,
+    "todo_hits": 4,
+    "todo_samples": [
+     "src/server/zone/objects/creature/commands/CurePackCommand.h:209:\t\t// TODO: Convert this to a CombatManager::getAreaTargets() call",
+     "src/server/zone/objects/creature/commands/HealDamageCommand.h:312:\t\t// TODO: Replace this with a CombatManager::getAreaTargets() call",
+     "src/server/zone/objects/creature/commands/HealWoundCommand.h:314:\t\t\t\t//TODO: Patch the tre later to include a %NT.",
+     "src/server/zone/objects/creature/commands/RevivePlayerCommand.h:109:\t\t// TODO: Find potential end message for groggy debuff"
+    ]
+   },
+   "commands": {
+    "total": 24,
+    "implemented": 9,
+    "base_class": 2,
+    "inherits": 8,
+    "todo": 3,
+    "stub": 2,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "tenddamagetool",
+     "tendwoundstool"
+    ],
+    "todo_names": [
+     "healdamage",
+     "healwound",
+     "reviveplayer"
+    ]
+   },
+   "bot_probe": "Medic agent heals a wounded group mate with a stim and a wound pack in a hospital; assert HAM and wound values rose and one charge was used.",
+   "fix_work": "None needed. Map the two tool stubs to the real tend code if the client sends them."
+  },
+  {
+   "id": "6",
+   "group": "Entertainment",
+   "name": "Dancing and music, flourishes, bands, entertainer buffs, wound and battle-fatigue healing, venues",
+   "status": "implemented",
+   "gaps": [
+    "`/pauseDance`, `/pauseMusic`, `/showDanceVisuals`, `/showMusicianVisuals` are stubs (cosmetic)."
+   ],
+   "evidence": [
+    "`objects/player/sessions/EntertainingSessionImplementation.cpp` (1250 lines): patron effects (`:33`), venue check (`:128`), wound/BF healing (`:145-180`), bands (`:334`, `:1199`), buffs (`:694-930`), XP (`:1002`), entertainer missions (`:933`)",
+    "`managers/skill/PerformanceManager.cpp`, `objects/creature/buffs/PerformanceBuff*`",
+    "Class check: 53 performance abilities"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/player/sessions/EntertainingSession*",
+     "MMOCoreORB/src/server/zone/managers/skill/Performance*",
+     "MMOCoreORB/src/server/zone/objects/creature/buffs/PerformanceBuff*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Start*Dance*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Start*Music*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/*Band*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Flourish*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Change*"
+    ],
+    "files": 17,
+    "lines": 3542,
+    "todo_hits": 1,
+    "todo_samples": [
+     "src/server/zone/objects/creature/commands/ChangeMusicCommand.h:33:\t\t// TODO: outro check"
+    ]
+   },
+   "commands": {
+    "total": 28,
+    "implemented": 23,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 1,
+    "stub": 4,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "pausedance",
+     "pausemusic",
+     "showdancevisuals",
+     "showmusicianvisuals"
+    ],
+    "todo_names": [
+     "changemusic"
+    ]
+   },
+   "bot_probe": "Dancer agent `/startDance` in a cantina while a wounded agent `/watch`es for 2 minutes; assert Mind wounds and battle fatigue fell and the watcher gets the dance buff on leaving.",
+   "fix_work": "None needed."
+  },
+  {
+   "id": "7",
+   "group": "Entertainment",
+   "name": "Image Designer: customisation sessions, stat migration, holo-emotes",
+   "status": "partial",
+   "gaps": [
+    "Server trusts the client on colour palette indices: the per-level check is commented out (`ImageDesignManager.cpp:489-562`).",
+    "Holo-emote purchase has no skill or price check (`ImageDesignSessionImplementation.cpp:283-297`).",
+    "Stat migration only inside the 4 salon building templates (`gameObjectType 530`); no ID tent or player salon.",
+    "Designer's salon checked twice instead of designer and target (`ImageDesignSessionImplementation.cpp:198`).",
+    "`/requestStatMigrationStart` and `/requestStatMigrationStop` are empty (the `...Data` commands do the work)."
+   ],
+   "evidence": [
+    "Session: `objects/player/sessions/ImageDesignSessionImplementation.cpp` (start `:50`, commit `:111`, payment `:320`, timeout `:385`)",
+    "Manager: `managers/skill/imagedesign/ImageDesignManager.cpp` (skill-mod gate `:41`, hair `:396-487`)",
+    "Packets `0x238`/`0x239` at `ZonePacketHandler.cpp:211-212`; `/holoEmote` `HoloEmoteCommand.h` (16 emotes, 20 charges, 30 s cooldown)",
+    "Full function table: `id-politician-gaps.md` section 1"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/skill/imagedesign",
+     "MMOCoreORB/src/server/zone/objects/player/sessions/ImageDesign*",
+     "MMOCoreORB/src/server/zone/objects/player/sessions/MigrateStatsSession.idl",
+     "MMOCoreORB/src/server/zone/objects/player/events/ImageDesignTimeoutEvent.h",
+     "MMOCoreORB/src/server/zone/packets/object/ImageDesign*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/ImagedesignCommand.h",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/HoloEmoteCommand.h",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Request*StatMigration*"
+    ],
+    "files": 18,
+    "lines": 2434,
+    "todo_hits": 2,
+    "todo_samples": [
+     "src/server/zone/managers/skill/imagedesign/ImageDesignManager.cpp:426:\t//TODO: Validate hairCustomization",
+     "src/server/zone/objects/player/sessions/ImageDesignSessionImplementation.cpp:435:\t// TODO: Needs research."
+    ]
+   },
+   "commands": {
+    "total": 6,
+    "implemented": 4,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 2,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "requeststatmigrationstart",
+     "requeststatmigrationstop"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Two grouped agents in the Theed salon: `/imagedesign <target>`, one hair change, both accept; assert the target's hair template and the designer's `imagedesigner` XP. Needs a new agent ability to send ImageDesignChange (0x238).",
+   "fix_work": "Re-enable the palette check by designer level; gate holo-emotes on ID skill; fix the double salon check; optionally a config switch or ID tent so migration works outside the 4 salons."
+  },
+  {
+   "id": "8",
+   "group": "Crafting",
+   "name": "Crafting: schematics, assembly, experimentation, customisation, crafting stations, factories",
+   "status": "implemented",
+   "gaps": [
+    "Staff `/craft` and `/manufacture` are stubs.",
+    "Player stubs `/requestDraftSlots`, `/requestResourceWeights`, `/getPrototype`, `/requestManfSchematicSlots`, `/restartCraftingSession`, `/stopCraftingSession`; the `...Batch` variants and crafting-session packets carry the real work (check in game).",
+    "Droid lab TODO: `droid_count` property not read (`DroidLabratory.cpp:18`)."
+   ],
+   "evidence": [
+    "`managers/crafting/CraftingManagerImplementation.cpp`, labs in `managers/crafting/labratories/`, `objects/player/sessions/crafting/CraftingSessionImplementation.cpp` (sandbox `Core3.Sandbox.CraftSeconds`)",
+    "2252 draft schematic templates in `bin/scripts/object/draft_schematic/` (clothing 519, space 336, chemistry 204, bio_engineer 155, ...)",
+    "Factories: `objects/installation/factory/FactoryObjectImplementation.cpp` (sandbox time x0.25); stations `objects/tangible/tool/CraftingStation*`"
+   ],
+   "config_switches": [
+    "Core3.Sandbox.CraftSeconds",
+    "Core3.Sandbox.FactoryTimeMultiplier"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/crafting",
+     "MMOCoreORB/src/server/zone/objects/player/sessions/crafting",
+     "MMOCoreORB/src/server/zone/objects/draftschematic",
+     "MMOCoreORB/src/server/zone/objects/manufactureschematic",
+     "MMOCoreORB/src/server/zone/objects/installation/factory",
+     "MMOCoreORB/src/server/zone/objects/tangible/tool/Crafting*",
+     "MMOCoreORB/src/server/zone/objects/factorycrate",
+     "MMOCoreORB/bin/scripts/managers/crafting"
+    ],
+    "files": 51,
+    "lines": 13747,
+    "todo_hits": 1,
+    "todo_samples": [
+     "src/server/zone/managers/crafting/labratories/DroidLabratory.cpp:18:\t// TODO check for the droid_count property and return the value"
+    ]
+   },
+   "commands": {
+    "total": 16,
+    "implemented": 10,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 6,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "getprototype",
+     "requestdraftslots",
+     "requestmanfschematicslots",
+     "requestresourceweights",
+     "restartcraftingsession",
+     "stopcraftingsession"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Artisan agent crafts a survey tool from granted resources, experiments once, then runs 2 in a factory; assert item stats and the crate count. Needs the planned crafting agent protocol (F22).",
+   "fix_work": "None for play; build the agent crafting protocol to test it."
+  },
+  {
+   "id": "9",
+   "group": "Crafting",
+   "name": "Resources and spawning, surveying and sampling",
+   "status": "implemented",
+   "gaps": [
+    "`/survey`, `/makeSurvey`, `/resSampleLoop`, `/resourceSetName` are stubs; surveying runs from the survey tool (`SurveyToolImplementation.cpp`, needs `survey` ability)."
+   ],
+   "evidence": [
+    "`managers/resource/` (30 files) incl. `resourcespawner/ResourceSpawner.cpp` (city Sample Rich bonus `:1083,:1096`)",
+    "`bin/scripts/managers/resource_manager.lua`: 12 active zones incl. Hoth and Ossus, minimum pools with local Hoth/Ossus/Legends types",
+    "Agent survey and sample already passed on the test galaxy (feature register F21)"
+   ],
+   "config_switches": [
+    "Core3.Sandbox resource deed 100000 and stack 999999 (compiled, commit 4357970d)"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/resource",
+     "MMOCoreORB/src/server/zone/objects/resource",
+     "MMOCoreORB/src/server/zone/objects/tangible/tool/SurveyTool*",
+     "MMOCoreORB/bin/scripts/managers/resource_manager.lua"
+    ],
+    "files": 41,
+    "lines": 7696,
+    "todo_hits": 4,
+    "todo_samples": [
+     "src/server/zone/objects/resource/simplexnoise/SimplexNoise.cpp:139:  /* TODO: This should not be required, backport it from the original GLSL code! */",
+     "src/server/zone/objects/resource/simplexnoise/SimplexNoise.cpp:240:    return 40.0f * (n0 + n1 + n2); // TODO: The scale factor is preliminary!",
+     "src/server/zone/objects/resource/simplexnoise/SimplexNoise.cpp:338:    return 32.0f * (n0 + n1 + n2 + n3); // TODO: The scale factor is preliminary!",
+     "src/server/zone/objects/resource/simplexnoise/SimplexNoise.cpp:474:    return 27.0f * (n0 + n1 + n2 + n3 + n4); // TODO: The scale factor is preliminary!"
+    ]
+   },
+   "commands": {
+    "total": 9,
+    "implemented": 5,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 4,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "makesurvey",
+     "resourcesetname",
+     "ressampleloop",
+     "survey"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Agent uses a mineral survey tool, waypoints the best concentration and samples 3 times; assert resource units rose (agent already reads authoritative units).",
+   "fix_work": "None."
+  },
+  {
+   "id": "10",
+   "group": "Crafting",
+   "name": "Harvesters, power generators, installation maintenance",
+   "status": "implemented",
+   "gaps": [
+    "`/harvesterHarvest`, `/harvesterMakeCrate`, `/harvesterTakeSurvey` are stubs; activate, deactivate, select resource, get data and discard hopper are real. Unsure whether the pre-CU harvester window sends the stubbed three: check in game.",
+    "Power and maintenance deposits live in SUI callbacks with TODOs to move them to StructureManager (`InsertPowerSuiCallback.h:46`, `InstallationObjectMenuComponent.cpp:96`)."
+   ],
+   "evidence": [
+    "`objects/installation/harvester/HarvesterObjectImplementation.cpp`, `objects/installation/generator/GeneratorObjectImplementation.cpp`, `objects/installation/InstallationObjectImplementation.cpp`",
+    "Maintenance: `objects/structure/events/StructureMaintenanceTask.cpp` (sandbox x0.5)"
+   ],
+   "config_switches": [
+    "Core3.Sandbox.StructureMaintenanceMultiplier",
+    "Core3.StructureMaintenanceTask.AllowBankPayments"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/installation",
+     "MMOCoreORB/src/server/zone/packets/harvester",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Harvester*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/AddPower*"
+    ],
+    "files": 63,
+    "lines": 7001,
+    "todo_hits": 5,
+    "todo_samples": [
+     "src/server/zone/objects/installation/components/InstallationObjectMenuComponent.cpp:96:\t\t//TODO: Move to structure manager.",
+     "src/server/zone/objects/installation/components/MinefieldMenuComponent.cpp:182:\t\t\tgcwManager->sendSelectMineToDonate(minefield, player);",
+     "src/server/zone/objects/installation/components/TurretMenuComponent.cpp:183:\t\t\tgcwManager->sendSelectMineToDonate(turret, player);",
+     "src/server/zone/objects/installation/shuttle/ShuttleInstallationImplementation.cpp:15:\t//TODO: Check to make sure the player is the mayor of the city."
+    ]
+   },
+   "commands": {
+    "total": 9,
+    "implemented": 6,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 3,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "harvesterharvest",
+     "harvestermakecrate",
+     "harvestertakesurvey"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Agent places a personal mineral harvester and a generator from deeds, adds power and maintenance, waits one cycle; assert hopper quantity > 0.",
+   "fix_work": "Confirm the three stubs in game; implement only if the client uses them."
+  },
+  {
+   "id": "11",
+   "group": "Economy",
+   "name": "Bazaar (auction) and player vendors",
+   "status": "implemented",
+   "gaps": [
+    "All `/auction*` slash commands are stubs: the bazaar runs on client packets (`packets/auction/`), so this is expected.",
+    "`/giveMaintenanceToVendor` and `/giveVendorMaint` are stubs (vendor maintenance through the vendor radial; check).",
+    "TODO in bid handling: 'prior didn't have enough money' (`AuctionManagerImplementation.cpp:1243`)."
+   ],
+   "evidence": [
+    "`managers/auction/AuctionManagerImplementation.cpp` (city sales tax `:689,:1022`), `objects/auction/AuctionItem*`",
+    "`managers/vendor/VendorManager.cpp`, `objects/tangible/components/vendor/` (ads and map registration need Merchant Advertising boxes, `VendorMenuComponent.cpp:87,95`), `bin/scripts/managers/vendor_manager.lua` hiring tiers",
+    "Merchant perks are checked by skill box, not by the `*_fees_1` ability names: bazaar fee -20%/-40% (`AuctionManagerImplementation.cpp:744-749`), vendor rate (`VendorDataComponent.cpp:440-442`), ad barking (`VendorAdBarkingSessionImplementation.cpp:60`), barker droid (`DroidMerchantModuleDataComponent.cpp:41`), maintenance discount by ability (`StructureManager.cpp:1382`)"
+   ],
+   "config_switches": [
+    "Core3.MaxAuctionSearchJobs",
+    "Core3.AuctionManager.Startup.ExpireInvalid"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/auction",
+     "MMOCoreORB/src/server/zone/managers/vendor",
+     "MMOCoreORB/src/server/zone/objects/auction",
+     "MMOCoreORB/src/server/zone/objects/tangible/components/vendor",
+     "MMOCoreORB/src/server/zone/packets/auction",
+     "MMOCoreORB/bin/scripts/managers/vendor_manager.lua"
+    ],
+    "files": 52,
+    "lines": 8031,
+    "todo_hits": 3,
+    "todo_samples": [
+     "src/server/zone/managers/auction/AuctionManagerImplementation.cpp:1243:\t\t//TODO: prior didnt have enough money -> assert.. fix properly",
+     "src/server/zone/managers/vendor/VendorManager.cpp:583:\t\t\t// TODO: randomize hair customization",
+     "src/server/zone/packets/auction/AuctionQueryHeadersResponseMessage.h:122:\t    \tinsertInt(il->getProxy()); // my proxy not implemented yet"
+    ]
+   },
+   "commands": {
+    "total": 12,
+    "implemented": 4,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 8,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "auctionaccept",
+     "auctionbid",
+     "auctioncancel",
+     "auctioncreate",
+     "auctionquery",
+     "auctionretrieve",
+     "givemaintenancetovendor",
+     "givevendormaint"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Agent A lists an item on a bazaar terminal; agent B buys it; assert credits moved minus sales tax and B can retrieve it.",
+   "fix_work": "None for play; confirm vendor maintenance works from the vendor radial."
+  },
+  {
+   "id": "12",
+   "group": "Economy",
+   "name": "Banks, secure trade, tips and wire transfers, credit sinks",
+   "status": "implemented",
+   "gaps": [
+    "`/tip` carries a TODO but is real (cash and bank wire with 5% surcharge, `TipCommand.h:24-221`).",
+    "Staff `/money`, `/editBank`, `/editBankAccount` are stubs (`/credits` works)."
+   ],
+   "evidence": [
+    "`objects/tangible/components/BankTerminalMenuComponent.cpp`, `objects/player/sui/callbacks/BankTerminalSuiCallback.h`",
+    "`objects/player/sessions/TradeSession.idl` (secure trade); `managers/credit/` and `objects/transaction/TransactionLog.cpp` log every credit move",
+    "Credit sinks with code: structure and city maintenance, five city taxes, cloning, insurance, trainer fees, travel tickets, ID payments, vehicle repair"
+   ],
+   "config_switches": [
+    "Core3.SameAccountTipsAreFree"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/credit",
+     "MMOCoreORB/src/server/zone/objects/transaction",
+     "MMOCoreORB/src/server/zone/objects/player/sessions/TradeSession.idl",
+     "MMOCoreORB/src/server/zone/objects/tangible/components/BankTerminal*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/TipCommand.h"
+    ],
+    "files": 8,
+    "lines": 2150,
+    "todo_hits": 2,
+    "todo_samples": [
+     "src/server/zone/objects/creature/commands/TipCommand.h:179:\t\t\t\tisBank = (param.toLowerCase() == \"bank\"); //TODO: locale aware. Possibly @acct_n:bank",
+     "src/server/zone/objects/tangible/components/BankTerminalMenuComponent.h:24:\t// @TODO Move this to a proper configuration manager so no rebuild is necessary"
+    ]
+   },
+   "commands": {
+    "total": 2,
+    "implemented": 1,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 1,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": [
+     "tip"
+    ]
+   },
+   "bot_probe": "Agent A `/tip`s agent B 100 credits in cash and 100 by bank; assert both balances (agent reads cash and bank).",
+   "fix_work": "None. Secure trade needs the planned agent trade protocol (F23) to be tested."
+  },
+  {
+   "id": "13",
+   "group": "Economy",
+   "name": "Loot tables and group loot rules",
+   "status": "implemented",
+   "gaps": [
+    "`/lootAll` is a stub; `/loot` and the group loot task are real. Unsure whether the client's loot-all uses it: check in game.",
+    "`/openLotteryContainer` and `/closeLotteryContainer` are stubs; lottery runs on `LootLotterySession` and lottery window packets."
+   ],
+   "evidence": [
+    "`managers/loot/` (12 files), `bin/scripts/managers/loot_manager.lua` (yellow/exceptional/legendary chances), 659 loot groups and 2222 loot items in `bin/scripts/loot/`",
+    "Group rules free-for-all, master looter, lottery, random: `managers/group/GroupLootTask.h:45-126`, `GroupManager.cpp:606-682`, `objects/player/sessions/LootLotterySessionImplementation.cpp`; credits auto-split (`GroupLootTask.h:126`)"
+   ],
+   "config_switches": [
+    "Core3.LootManager.DebugAttributes"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/loot",
+     "MMOCoreORB/src/server/zone/managers/group/GroupLootTask.h",
+     "MMOCoreORB/src/server/zone/objects/player/sessions/LootLottery*",
+     "MMOCoreORB/bin/scripts/loot/groups.lua",
+     "MMOCoreORB/bin/scripts/managers/loot_manager.lua"
+    ],
+    "files": 18,
+    "lines": 4946,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 6,
+    "implemented": 3,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 3,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "closelotterycontainer",
+     "lootall",
+     "openlotterycontainer"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Grouped agents set lottery, kill a creature and loot; assert the lottery window opens and one item lands with the winner.",
+   "fix_work": "None for play."
+  },
+  {
+   "id": "14",
+   "group": "Housing",
+   "name": "Structure placement, permissions, decoration, storage limits, maintenance, condemnation",
+   "status": "implemented",
+   "gaps": [
+    "`/vertFurniture` is a stub (raise/lower uses `/itemMoveUp`/`Down`, which work); `Core3.StructureManager.EnhancedFurnitureRotate` defaults off.",
+    "`/transferStructure` has a TODO but is real; staff `/addAllowedPlayer`/`/removeAllowedPlayer` are stubs."
+   ],
+   "evidence": [
+    "`managers/structure/StructureManager.cpp`: placement checks `:300-476`, residence `:683-748`, property tax `:1015`, uncondemn `:1149-1182`, Merchant maintenance discount `:1382`",
+    "Permissions `objects/structure/StructurePermissionList.cpp`; storage `BuildingObjectImplementation.cpp` lots x `Core3.Sandbox.HouseItemsPerLot` (profile 1000, cap 10000)",
+    "Maintenance and decay `objects/structure/StructureObjectImplementation.cpp`, `events/StructureMaintenanceTask.cpp`"
+   ],
+   "config_switches": [
+    "Core3.Sandbox.HouseItemsPerLot",
+    "Core3.Sandbox.HouseMaxItems",
+    "Core3.StructureObject.MaintenanceBootDelay",
+    "Core3.Tweaks.StructureObject.DestoryOrphans",
+    "Core3.StructureManager.EnhancedFurnitureRotate"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/structure",
+     "MMOCoreORB/src/server/zone/objects/structure",
+     "MMOCoreORB/src/server/zone/objects/building/BuildingObject*",
+     "MMOCoreORB/src/server/zone/objects/player/sessions/PlaceStructureSession*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/*Structure*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/*Furniture*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/ItemMove*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/ItemRotate*"
+    ],
+    "files": 32,
+    "lines": 8132,
+    "todo_hits": 6,
+    "todo_samples": [
+     "src/server/zone/managers/structure/StructureManager.cpp:503:\tfloat zIncreaseWhenNoAvailableFootprint = 0.f; // TODO: remove this when it has been verified that all buildings have astructure",
+     "src/server/zone/managers/structure/StructureManager.cpp:1168:\t\t// TODO: investigate sui packets to see if it is possible to send StringIdChatParameter directly.",
+     "src/server/zone/managers/structure/StructureManager.cpp:1182:\t\t// TODO: investigate sui packets to see if it is possible to send StringIdChatParameter directly.",
+     "src/server/zone/objects/building/BuildingObjectImplementation.cpp:1170:\t//TODO: Fix sign object to handle string id's."
+    ]
+   },
+   "commands": {
+    "total": 21,
+    "implemented": 18,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 1,
+    "stub": 2,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "setowner",
+     "vertfurniture"
+    ],
+    "todo_names": [
+     "transferstructure"
+    ]
+   },
+   "bot_probe": "Agent places a small house from a deed, adds a second agent to entry, drops and rotates one item inside; assert the item count and the permission list after relog.",
+   "fix_work": "None for play."
+  },
+  {
+   "id": "15",
+   "group": "Cities",
+   "name": "Player cities and Politician",
+   "status": "partial",
+   "gaps": [
+    "Clone Lab and Entertainment District specialisations grant mods nothing reads (`private_spec_cloning`, `private_spec_entertainer`).",
+    "Militia can ban, pardon and grant zoning, but have no law-enforcement attack right the UI promises (`CityManagerImplementation.cpp:1480`).",
+    "`/cityWarn` does not exist (switch `EnableCityWarn` in `city_manager.lua:73`, no command).",
+    "City guards: `/startCitySpawner` and `/stopCitySpawner` are empty stubs.",
+    "Weekly updates and 3-update elections make it look idle in short tests (God-mode city hall menu can force updates)."
+   ],
+   "evidence": [
+    "`managers/city/CityManagerImplementation.cpp` (2481 lines, 1 TODO): founding `:196`, updates `:737`, taxes `:814,:1846-1944`, elections `:1118-1255`, militia `:1463-1580`, zoning `:2404`",
+    "`objects/region/CityRegionImplementation.cpp`, city hall and voting menus `objects/region/components/`",
+    "All five taxes have consumers (income, property, sales, travel, garage); 6 of 8 specialisations have readers",
+    "Full function table: `id-politician-gaps.md` section 2"
+   ],
+   "config_switches": [
+    "city_manager.lua: CitizensPerRank {1,2,3,4,5} (sandbox), CityUpdateInterval 10080 min, CityVotingCycles 3, maintenanceDiscount 0.5, EnableCityWarn false, CitiesAllowed (none on Dathomir/Endor/Yavin 4; Hoth/Ossus not listed)"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/city",
+     "MMOCoreORB/src/server/zone/objects/region/CityRegion*",
+     "MMOCoreORB/src/server/zone/objects/region/Citizen*",
+     "MMOCoreORB/src/server/zone/objects/region/components",
+     "MMOCoreORB/src/server/zone/objects/region/events",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/City*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/*CitySpawner*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/GrantZoningRights*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/InstallMissionTerminal*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/RecruitSkillTrainer*",
+     "MMOCoreORB/src/server/zone/objects/player/sui/callbacks/City*",
+     "MMOCoreORB/src/server/zone/objects/player/sui/callbacks/PlaceCityHall*",
+     "MMOCoreORB/bin/scripts/managers/city_manager.lua"
+    ],
+    "files": 49,
+    "lines": 7792,
+    "todo_hits": 2,
+    "todo_samples": [
+     "src/server/zone/managers/city/CityManagerImplementation.cpp:2320:\t\t//TODO: Modify Chat Manager so that you can send a creo instead of simply the firstname, since sendMail eventually gets th",
+     "src/server/zone/objects/region/CityRegion.idl:820:\tpublic native void cleanupDuplicateCityStructures(); // TODO: Remove"
+    ]
+   },
+   "commands": {
+    "total": 7,
+    "implemented": 5,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 2,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "startcityspawner",
+     "stopcityspawner"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Politician agent places a city hall, a second agent declares residence in the radius, staff forces a city update; assert 'New City Approved' mail, rank in `/cityInfo` and `political` XP.",
+   "fix_work": "Read the two dead spec mods (cloning, entertainer); add militia TEF and `/cityWarn`; optional city guard spawner; a test-galaxy multiplier for the update interval."
+  },
+  {
+   "id": "16",
+   "group": "Factions and GCW",
+   "name": "Factions: recruiters, ranks, overt/covert, faction points, perks",
+   "status": "implemented",
+   "gaps": [
+    "Staff `/showFactionInformation`, `/getRank`, `/setRank` are stubs.",
+    "`useCovertOvertSystem` (later CU/NGE rules) is off by default; pre-CU on-leave/covert/overt status applies."
+   ],
+   "evidence": [
+    "`managers/faction/` (FactionManager), `bin/scripts/managers/faction_manager.lua` (faction relationship table), recruiters `screenplays/gcw/recruiters/` with `factionPerkData.lua`",
+    "`DeclareOvertCommand.h`, `DelegateFactionPointsCommand.h`, `ToggleDisplayingFactionRankCommand.h`"
+   ],
+   "config_switches": [
+    "Core3.GCWManager.useCovertOvertSystem (default false)"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/faction",
+     "MMOCoreORB/bin/scripts/managers/faction_manager.lua",
+     "MMOCoreORB/bin/scripts/screenplays/gcw/recruiters",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/DeclareOvert*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/DelegateFactionPoints*"
+    ],
+    "files": 11,
+    "lines": 2396,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 4,
+    "implemented": 4,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Agent joins the Rebels at a recruiter, buys one perk with faction points, goes overt; assert faction status and points.",
+   "fix_work": "None for play."
+  },
+  {
+   "id": "17",
+   "group": "Factions and GCW",
+   "name": "GCW bases (placement, terminals, vulnerability, destruction), turrets and minefields, contraband scans",
+   "status": "implemented",
+   "gaps": [
+    "`/purchaseReinforcement` is a stub.",
+    "Base alarms off (`spawnBaseAlarms = false`, `gcw_manager.lua`)."
+   ],
+   "evidence": [
+    "`managers/gcw/GCWManagerImplementation.cpp` and 32 more files: vulnerability tasks, DNA and slicing terminals, power switches, shutdown and destruction tasks, donations, contraband scans",
+    "`bin/scripts/managers/gcw_manager.lua` (25 bases per planet, 3 per player, 3 h vulnerability every 48 h), city control banners and crackdown screenplays"
+   ],
+   "config_switches": [
+    "gcw_manager.lua: maxBasesPerPlanet, maxBasesPerPlayer, allowPveBases, spawnBaseAlarms"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/gcw",
+     "MMOCoreORB/bin/scripts/managers/gcw_manager.lua",
+     "MMOCoreORB/bin/scripts/screenplays/gcw",
+     "MMOCoreORB/bin/scripts/screenplays/crackdown",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Minefield*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Defuse*"
+    ],
+    "files": 43,
+    "lines": 11277,
+    "todo_hits": 4,
+    "todo_samples": [
+     "src/server/zone/managers/gcw/GCWManager.idl:294:\tpublic native void sendSelectDeedToDonate(BuildingObject building, CreatureObject creature);",
+     "src/server/zone/managers/gcw/GCWManager.idl:295:\tpublic native void sendSelectMineToDonate(InstallationObject installation, CreatureObject player);",
+     "src/server/zone/managers/gcw/GCWManagerImplementation.cpp:2641:void GCWManagerImplementation::sendSelectDeedToDonate(BuildingObject* building, CreatureObject* creature) {",
+     "src/server/zone/managers/gcw/GCWManagerImplementation.cpp:2725:void GCWManagerImplementation::sendSelectMineToDonate(InstallationObject* installation, CreatureObject* player) {"
+    ]
+   },
+   "commands": {
+    "total": 4,
+    "implemented": 3,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 1,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "purchasereinforcement"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Faction agent places a small base deed, waits for vulnerability (staff can shorten), slices a terminal; assert the base state changes.",
+   "fix_work": "None for play; base fights need several agents."
+  },
+  {
+   "id": "18",
+   "group": "Factions and GCW",
+   "name": "Battlefields",
+   "status": "stub",
+   "gaps": [
+    "Only no-build markers are spawned (`screenplays/battlefields/battlefield_spawner.lua`); no battlefield game logic in C++.",
+    "`/battlefieldStatus`, `/placeBattlefieldStructure`, `/repairBattlefieldStructure` are empty stubs."
+   ],
+   "evidence": [
+    "`bin/scripts/screenplays/battlefields/battlefield_spawner.lua` (112 lines, marker list for 8 planets)",
+    "No battlefield code in `src/server` beyond the three stub commands"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/bin/scripts/screenplays/battlefields",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/*Battlefield*"
+    ],
+    "files": 4,
+    "lines": 198,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 3,
+    "implemented": 0,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 3,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "battlefieldstatus",
+     "placebattlefieldstructure",
+     "repairbattlefieldstructure"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "`/battlefieldStatus` inside a marker: expect a status window; today nothing happens.",
+   "fix_work": "Large build (pre-CU battlefield rules, structures, scoring) or leave out. Low priority for a LAN PvE server."
+  },
+  {
+   "id": "19",
+   "group": "Factions and GCW",
+   "name": "GCW invasions",
+   "status": "missing",
+   "gaps": [
+    "Only object templates exist (`object/custom_content/tangible/gcw/flip_banner_invasion_spawner.lua`, invasion binoculars); no invasion logic. Invasions are a later (CU/NGE-era) feature."
+   ],
+   "evidence": [
+    "`git grep -i invasion` finds templates only"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [],
+    "files": 0,
+    "lines": 0,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 0,
+    "implemented": 0,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Not applicable.",
+   "fix_work": "Leave out for pre-CU unless the owner wants it."
+  },
+  {
+   "id": "20",
+   "group": "Missions",
+   "name": "Mission terminals: destroy, deliver, survey, hunting, recon, crafting, dancer and musician, bounty",
+   "status": "implemented",
+   "gaps": [
+    "TODOs: deliver item is a placeholder (`DeliverMissionObjectiveImplementation.cpp:185`), destroy string id (`DestroyMissionObjectiveImplementation.cpp:182`)."
+   ],
+   "evidence": [
+    "`managers/mission/MissionManagerImplementation.cpp` (all nine types at `:438-460`, city mission bonus `:638-725`, city ban `:188`)",
+    "Objectives `objects/mission/*MissionObjective*`; terminal templates general, artisan, bounty, entertainer, imperial, rebel, scout, newbie, statue (`object/tangible/terminal/terminal_mission*.lua`)",
+    "Local Hoth outpost terminals with destroy and deliver missions (commit 92d99dba); agent mission list/accept works (F20)"
+   ],
+   "config_switches": [
+    "Core3.MissionManager.ListRequestCooldown",
+    "Core3.MissionManager.IncludeFactionPets"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/mission",
+     "MMOCoreORB/src/server/zone/objects/mission",
+     "MMOCoreORB/bin/scripts/managers/mission"
+    ],
+    "files": 53,
+    "lines": 14158,
+    "todo_hits": 5,
+    "todo_samples": [
+     "src/server/zone/objects/mission/BountyMissionObjectiveImplementation.cpp:177:\t\t\t//TODO add observer to catch player kill and fail mission in that case.",
+     "src/server/zone/objects/mission/DeliverMissionObjectiveImplementation.cpp:185:\t\t//TODO: create correct item.",
+     "src/server/zone/objects/mission/DestroyMissionObjectiveImplementation.cpp:182:\t\t//TODO: find correct string id",
+     "src/server/zone/objects/mission/LuaMissionObject.cpp:275:\t//TODO: Taret Temp Setting"
+    ]
+   },
+   "commands": {
+    "total": 0,
+    "implemented": 0,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Agent takes a destroy mission at a general terminal, kills the lair and returns; assert the payout and mission removal.",
+   "fix_work": "None for play."
+  },
+  {
+   "id": "21",
+   "group": "Missions",
+   "name": "Bounty Hunter: player bounties, Jedi bounties, probe droids and tracking",
+   "status": "partial",
+   "gaps": [
+    "No observer fails a bounty mission when someone else kills the target (`BountyMissionObjectiveImplementation.cpp:177`).",
+    "`bounty_mission_level` skill mod has no reader (unsure how BH mission level is chosen).",
+    "Several BH `private_*_combat_difficulty` mods have no reader."
+   ],
+   "evidence": [
+    "`objects/mission/BountyMissionObjectiveImplementation.cpp`, `objects/mission/PlayerBounty*`, `objects/mission/bountyhunter/` (probe droid, `FindTargetTask.h` reads `droid_find_chance`, `droid_track_chance`, `droid_tracks`)",
+    "Jedi bounties via visibility (`bin/scripts/managers/jedi/visibility_manager.lua`: terminal threshold 1500)"
+   ],
+   "config_switches": [
+    "Core3.MissionManager.MaxBountiesPerJedi",
+    "Core3.MissionManager.PlayerBountyCooldown",
+    "Core3.MissionManager.AnonymousBountyTerminals",
+    "Core3.MissionManager.PrivateStructureJediMissions",
+    "Core3.MissionManager.BountyExpirationTime"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/mission/Bounty*",
+     "MMOCoreORB/src/server/zone/objects/mission/PlayerBounty*",
+     "MMOCoreORB/src/server/zone/objects/mission/bountyhunter",
+     "MMOCoreORB/src/server/zone/managers/visibility"
+    ],
+    "files": 13,
+    "lines": 2408,
+    "todo_hits": 2,
+    "todo_samples": [
+     "src/server/zone/objects/mission/BountyMissionObjectiveImplementation.cpp:177:\t\t\t//TODO add observer to catch player kill and fail mission in that case.",
+     "src/server/zone/objects/mission/bountyhunter/events/FindTargetTask.h:236:\t\t\t\t//TODO: modify this to better suit the calculation."
+    ]
+   },
+   "commands": {
+    "total": 0,
+    "implemented": 0,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "BH agent takes an NPC bounty, calls a seeker droid, tracks and kills the target; assert payout. Player bounty needs a second agent with a bounty placed.",
+   "fix_work": "Add the kill observer; decide whether BH skill should set mission level."
+  },
+  {
+   "id": "22",
+   "group": "Creatures",
+   "name": "Creature spawning, lairs, herds and creature AI",
+   "status": "implemented",
+   "gaps": [
+    "AI TODOs: reaction attacks (`AiAgentImplementation.cpp:1735`), indoor follow pathing (`FollowActions.h:492`)."
+   ],
+   "evidence": [
+    "`managers/creature/` (30 files: CreatureManager, SpawnAreaMap, LairObserver, DynamicSpawnObserver, CreatureHerdObserver)",
+    "Behaviour trees `objects/creature/ai/bt/`; 1870 lair templates, 492 spawn groups (`bin/scripts/mobile/`)",
+    "Local Hoth and Ossus creature spawns (commits c402e480, 80b66e65)"
+   ],
+   "config_switches": [
+    "Core3.Regions.DisableWorldSpawns",
+    "Core3.Regions.minimumLairSpawnInterval",
+    "Core3.Regions.spawnCheckRange"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/creature/CreatureManager*",
+     "MMOCoreORB/src/server/zone/managers/creature/Spawn*",
+     "MMOCoreORB/src/server/zone/managers/creature/Lair*",
+     "MMOCoreORB/src/server/zone/managers/creature/Dynamic*",
+     "MMOCoreORB/src/server/zone/managers/creature/CreatureHerd*",
+     "MMOCoreORB/src/server/zone/objects/creature/ai",
+     "MMOCoreORB/src/server/zone/objects/region/SpawnArea*"
+    ],
+    "files": 66,
+    "lines": 20893,
+    "todo_hits": 5,
+    "todo_samples": [
+     "src/server/zone/objects/creature/ai/AiAgentImplementation.cpp:1735:\t// TODO: add reaction attacks",
+     "src/server/zone/objects/creature/ai/bt/Behavior.cpp:122:\t// Step 4:\tIf the result is anything else (TODO: SUSPEND?) just return that",
+     "src/server/zone/objects/creature/ai/bt/decorator/LookForTarget.h:61:\t\t// TODO: might have to fix numberOfPlayersInRange here",
+     "src/server/zone/objects/creature/ai/bt/leaf/FollowActions.h:492:\t\t// TODO: Change when we can do interior pathing"
+    ]
+   },
+   "commands": {
+    "total": 9,
+    "implemented": 8,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 1,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "deploytrap"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Agent walks into a spawn region and kills one lair; assert the lair spawns defenders and repopulates.",
+   "fix_work": "None for play."
+  },
+  {
+   "id": "23",
+   "group": "Creatures",
+   "name": "Pets: taming, Creature Handler training, Bio-Engineer DNA and pet crafting",
+   "status": "implemented",
+   "gaps": [
+    "CH skill mods `private_creature_empathy`, `private_creature_training`, `private_creature_management` have no reader.",
+    "Balance and pet AI reliability never measured (`Documentation-support/creature-handler-top-tier-plan.md`).",
+    "`/sampleDNA` has no `characterAbility` in the command table; the handler's BE Novice check (`SampleDNACommand.h:39`) is the only gate."
+   ],
+   "evidence": [
+    "`managers/creature/PetManagerImplementation.cpp`, `objects/intangible/PetControlDeviceImplementation.cpp` (command training gated per CH box `:1296-1309`, mount training `:1339`)",
+    "`managers/creature/DnaManager.cpp`, `objects/tangible/component/dna/`, `objects/tangible/deed/pet/PetDeed*`; `bin/scripts/managers/crafting/bio_dna_sets.lua`, `bio_skill_mods.lua`; 155 BE schematics",
+    "All 26 pet commands `implemented` in the audit"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/creature/PetManager*",
+     "MMOCoreORB/src/server/zone/managers/creature/Dna*",
+     "MMOCoreORB/src/server/zone/objects/intangible/PetControlDevice*",
+     "MMOCoreORB/src/server/zone/objects/tangible/component/dna",
+     "MMOCoreORB/src/server/zone/objects/tangible/deed/pet",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/pet",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/TameCommand.h",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/SampleDNACommand.h",
+     "MMOCoreORB/bin/scripts/managers/pet_manager.lua",
+     "MMOCoreORB/bin/scripts/managers/dna_manager.lua"
+    ],
+    "files": 39,
+    "lines": 7655,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 29,
+    "implemented": 29,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "CH agent tames a baby creature, trains 'follow' and 'attack' by chat, calls it on a target; BE agent samples DNA from the same species; assert the pet device and the DNA component.",
+   "fix_work": "Measure first (CH plan); then decide whether to wire the three dead CH mods."
+  },
+  {
+   "id": "24",
+   "group": "Creatures",
+   "name": "Mounts",
+   "status": "implemented",
+   "gaps": [
+    "`/dismountAndStore` is a stub (its body is commented out); use `/dismount`, then store from the control device."
+   ],
+   "evidence": [
+    "Mount training `PetControlDeviceImplementation.cpp:1339`, `managers/creature/MountSpeedData.h`, `ValidMountScaleRange.h`; `/gallop`, `/gallopStop`"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/creature/Mount*",
+     "MMOCoreORB/src/server/zone/managers/creature/ValidMount*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Mount*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Dismount*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Gallop*"
+    ],
+    "files": 7,
+    "lines": 787,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 3,
+    "implemented": 2,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 1,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "dismountandstore"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "CH agent with Support IV trains a tamed pet as a mount and rides it; assert mounted speed.",
+   "fix_work": "Optional: make `/dismountAndStore` dismount then store."
+  },
+  {
+   "id": "25",
+   "group": "Vehicles",
+   "name": "Vehicles: deeds, calling, riding, repair at garages, decay, customisation",
+   "status": "implemented",
+   "gaps": [
+    "`/customizeVehicle` (granted by Master Artisan) is a stub; customisation kits work from their radial (`VehicleCustomKitObjectMenuComponent.cpp`).",
+    "BARC speeder template fixed locally (740b2426); check other custom-content vehicles the same way."
+   ],
+   "evidence": [
+    "`objects/creature/VehicleObjectImplementation.cpp` (garage tax `:238`), `objects/intangible/VehicleControlDeviceImplementation.cpp`, `objects/tangible/deed/vehicle/VehicleDeed*`, `RepairVehicleSuiCallback.h`",
+    "Templates `bin/scripts/object/mobile/vehicle/` (landspeeders, speeder bikes, swoop, jetpack); sandbox run speed 30 m/s"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/creature/VehicleObject*",
+     "MMOCoreORB/src/server/zone/objects/intangible/VehicleControl*",
+     "MMOCoreORB/src/server/zone/objects/tangible/deed/vehicle",
+     "MMOCoreORB/src/server/zone/objects/tangible/components/VehicleCustomKit*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/CustomizeVehicle*",
+     "MMOCoreORB/bin/scripts/object/mobile/vehicle"
+    ],
+    "files": 23,
+    "lines": 3058,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 3,
+    "implemented": 2,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 1,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "customizevehicle"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Agent uses a speederbike deed, calls, mounts and drives 200 m, then repairs at a garage; assert speed and the repair charge (agent historically passed deed/call).",
+   "fix_work": "Point `/customizeVehicle` at the kit code if the client sends it."
+  },
+  {
+   "id": "26",
+   "group": "Travel",
+   "name": "Shuttles, starports, tickets, travel coupons and shuttle beacons",
+   "status": "implemented",
+   "gaps": [
+    "Player-city shuttleport's own placement check is commented out (`ShuttleInstallationImplementation.cpp:11-30`), covered by the general civic checks.",
+    "No instant-travel terminals or vehicles exist (a later feature); 'instant' travel here = travel coupons and the shuttle-beacon event perk."
+   ],
+   "evidence": [
+    "`objects/building/components/ShuttleZoneComponent.cpp`, `managers/planet/PlanetTravelPointList.h` (city travel tax `:98`), `PurchaseTicketCommand.h`, `BoardShuttleCommand.h`, `objects/tangible/ticket/`, `objects/tangible/terminal/ticketcollector/`",
+    "`TravelCouponUseSuiCallback.h`, `objects/tangible/eventperk/ShuttleBeacon*`; sandbox shuttle timings 10 s away, 2 s landing, 600 s landed",
+    "Local Hoth and Ossus travel points (5b2a858f, 2ada3784)"
+   ],
+   "config_switches": [
+    "Core3.PlanetManager.Shuttleport*/Starport* times",
+    "Core3.ShuttleZoneComponent.BootDelay"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/building/components/Shuttle*",
+     "MMOCoreORB/src/server/zone/objects/building/travel",
+     "MMOCoreORB/src/server/zone/managers/planet/PlanetTravel*",
+     "MMOCoreORB/src/server/zone/managers/planet/TravelFare.h",
+     "MMOCoreORB/src/server/zone/objects/tangible/ticket",
+     "MMOCoreORB/src/server/zone/objects/tangible/terminal/travel",
+     "MMOCoreORB/src/server/zone/objects/tangible/terminal/ticketcollector",
+     "MMOCoreORB/src/server/zone/objects/installation/shuttle",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/PurchaseTicket*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/BoardShuttle*"
+    ],
+    "files": 16,
+    "lines": 1626,
+    "todo_hits": 1,
+    "todo_samples": [
+     "src/server/zone/objects/installation/shuttle/ShuttleInstallationImplementation.cpp:15:\t//TODO: Check to make sure the player is the mayor of the city."
+    ]
+   },
+   "commands": {
+    "total": 2,
+    "implemented": 2,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Agent buys a Mos Eisley to Coronet ticket and boards; assert the planet change (already part of the routine bot runs).",
+   "fix_work": "None."
+  },
+  {
+   "id": "27",
+   "group": "Social",
+   "name": "Groups, chat channels, mail, friends and ignore, waypoints",
+   "status": "implemented",
+   "gaps": [
+    "`/splitCreditsWithGroup` is a stub (looted credits auto-split, `GroupLootTask.h:126`).",
+    "`/getFriendList`, `/getIgnoreList`, `/spatialChat`, `/social` are stubs; the *internal* variants and client packets do the work.",
+    "Test-side gap: the agent body cannot send or read tells (feature register F24)."
+   ],
+   "evidence": [
+    "`managers/group/GroupManager.cpp`, `objects/group/GroupObject*` (galaxy-wide grouping switch)",
+    "`server/chat/ChatManagerImplementation.cpp`, chat rooms, `PersistentMessage` mail, `SendMailTask.h`"
+   ],
+   "config_switches": [
+    "Core3.PlayerManager.GalaxyWideGrouping",
+    "Core3.PlayerManager.DisableGroupVisibility",
+    "Core3.CleanupMailCount",
+    "Core3.ChatManager.PvpBroadcastChannel"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/group",
+     "MMOCoreORB/src/server/zone/objects/group",
+     "MMOCoreORB/src/server/chat",
+     "MMOCoreORB/src/server/zone/objects/waypoint"
+    ],
+    "files": 36,
+    "lines": 8296,
+    "todo_hits": 1,
+    "todo_samples": [
+     "src/server/chat/ChatManagerImplementation.cpp:1461://TODO: Refactor into a sendInstantMessage() method that returns a returnCode."
+    ]
+   },
+   "commands": {
+    "total": 37,
+    "implemented": 28,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 9,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "addmaplocation",
+     "getfriendlist",
+     "getignorelist",
+     "getmaplocations",
+     "setmood",
+     "social",
+     "spatialchat",
+     "splitcreditswithgroup",
+     "systemmessage"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Two agents group, one mails the other; assert group membership and the mail in the inbox (grouping already tested).",
+   "fix_work": "Give the agent body tells (F24) before testing chat."
+  },
+  {
+   "id": "28",
+   "group": "Social",
+   "name": "Guilds",
+   "status": "implemented",
+   "gaps": [
+    "`/paWithdraw` (guild treasury) is a stub."
+   ],
+   "evidence": [
+    "`managers/guild/GuildManagerImplementation.cpp`: create, rename, sponsor, kick, titles, permissions, guild wars, leader elections, guild hall transfer (`GuildManager.idl:71-204`)"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/guild",
+     "MMOCoreORB/src/server/zone/objects/guild",
+     "MMOCoreORB/bin/scripts/managers/guild_manager.lua"
+    ],
+    "files": 36,
+    "lines": 5145,
+    "todo_hits": 2,
+    "todo_samples": [
+     "src/server/zone/managers/guild/GuildManagerImplementation.cpp:419:\t\t//TODO: This could probably be moved to the GuildObject destructor!",
+     "src/server/zone/objects/guild/GuildMemberInfo.h:25:\t\tuint64 declaredAllegiance; // TODO: remove after wipe"
+    ]
+   },
+   "commands": {
+    "total": 6,
+    "implemented": 5,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 1,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "pawithdraw"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Agent creates a guild at a guild terminal and sponsors a second agent; assert both in the member list.",
+   "fix_work": "None for play."
+  },
+  {
+   "id": "29",
+   "group": "Quests",
+   "name": "Quests and themeparks, dungeons, caves and POIs",
+   "status": "implemented",
+   "gaps": [
+    "Corellian Corvette spawns at fixed spots (TODO `corellianCorvette.lua:698,843`).",
+    "Implemented in Lua; individual quest steps have not been played through here."
+   ],
+   "evidence": [
+    "Themeparks `screenplays/themepark/`: Jabba, Imperial (with Emperor's Retreat), Rebel, Nym, Marauder (3), Nightsister, SMC (3), Valarian, helper droid",
+    "Dungeons `screenplays/dungeon/`: Corellian Corvette, Death Watch Bunker, Geonosian Lab, Warren; 39 caves and bunkers, 59 POIs, 184 task screenplays, events (Life Day, Bestine election and museum, COA, race droid)",
+    "637 active `includeFile` lines in `screenplays/screenplays.lua`, none commented out; local Hoth quest chain and The Beginning (MTG)"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/bin/scripts/screenplays/themepark",
+     "MMOCoreORB/bin/scripts/screenplays/dungeon",
+     "MMOCoreORB/bin/scripts/screenplays/caves",
+     "MMOCoreORB/bin/scripts/screenplays/poi",
+     "MMOCoreORB/bin/scripts/screenplays/tasks",
+     "MMOCoreORB/bin/scripts/screenplays/events",
+     "MMOCoreORB/bin/scripts/screenplays/quest_tasks",
+     "MMOCoreORB/bin/scripts/managers/quest"
+    ],
+    "files": 433,
+    "lines": 66006,
+    "todo_hits": 12,
+    "todo_samples": [
+     "bin/scripts/screenplays/dungeon/corellian_corvette/corellianCorvette.lua:698:\t-- TODO: pick random spot in room for spawn loc once we can find random good room location",
+     "bin/scripts/screenplays/dungeon/corellian_corvette/corellianCorvette.lua:843:\t\t-- TODO: pick random spot in room for spawn loc once we can find random good room location",
+     "bin/scripts/screenplays/events/syren/conversations/imperial_jevan_monsul_conv_handler.lua:49:\t\tSecretsOfTheSyren:acceptQuestTalkToDoctor(pPlayer, Syren.act1.IMPERIAL_CRC)",
+     "bin/scripts/screenplays/events/syren/conversations/neutral_tyla_jinn_conv_handler.lua:49:\t\tSecretsOfTheSyren:acceptQuestTalkToDoctor(pPlayer, Syren.act1.NEUTRAL_CRC)"
+    ]
+   },
+   "commands": {
+    "total": 1,
+    "implemented": 0,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 1,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "requestquesttimersandcounters"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Agent talks to a Jabba themepark giver and completes step one; assert the quest waypoint (agent already observes quest waypoints) and the reward.",
+   "fix_work": "None in code; play-through testing."
+  },
+  {
+   "id": "30",
+   "group": "Jedi",
+   "name": "Force-sensitive unlock path (Village of Aurilia)",
+   "status": "implemented",
+   "gaps": [
+    "Hologrind progression exists (`hologrind_jedi_manager.lua`) but is not selected: `jediProgressionType = VILLAGEJEDIPROGRESSION` (`managers/jedi/jedi_manager.lua:14`).",
+    "Village phases shortened to 7 days in the sandbox (`village_jedi_manager_township.lua:12`; the comment still says 3 weeks)."
+   ],
+   "evidence": [
+    "84 village screenplays `screenplays/village/` (phases 1-4, raids, community crafting), Jedi trials `screenplays/jedi/`",
+    "`managers/jedi/JediManager`, staff `/gmFsVillage`, `/gmJediState` implemented"
+   ],
+   "config_switches": [
+    "jedi_manager.lua jediProgressionType",
+    "VILLAGE_PHASE_DURATION",
+    "Core3.Sandbox.JediXpMultiplier"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/jedi",
+     "MMOCoreORB/bin/scripts/managers/jedi",
+     "MMOCoreORB/bin/scripts/screenplays/village",
+     "MMOCoreORB/bin/scripts/screenplays/jedi"
+    ],
+    "files": 122,
+    "lines": 18950,
+    "todo_hits": 3,
+    "todo_samples": [
+     "bin/scripts/screenplays/village/phase3/fs_counterstrike/fs_cs_base_control.lua:689:\tlocal distToDoor1 = SceneObject(pMobile):getDistanceToPosition(door1X, door1Z, door1Y)",
+     "bin/scripts/screenplays/village/phase3/fs_counterstrike/fs_cs_base_control.lua:698:\tlocal distToDoor2 = SceneObject(pMobile):getDistanceToPosition(door2X, door2Z, door2Y)",
+     "bin/scripts/screenplays/village/phase3/fs_counterstrike/fs_cs_base_control.lua:708:\tif (distToDoor1 < distToDoor2 or not door1Destroyed) then"
+    ]
+   },
+   "commands": {
+    "total": 1,
+    "implemented": 1,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Staff `/gmJediState` an agent to force-sensitive, run one village quest; assert the FS branch box and quest state.",
+   "fix_work": "Owner decision: keep Village or switch to Hologrind for an older pre-CU feel (config)."
+  },
+  {
+   "id": "31",
+   "group": "Jedi",
+   "name": "Jedi skill trees, Force powers, visibility, Force Ranking System",
+   "status": "implemented",
+   "gaps": [
+    "`/forceProtection` is a stub; staff `/gmForceRank` and `/overridePadawanTrialsEligibility` are stubs.",
+    "`/regainConsciousness` has message TODOs (`RegainConsciousnessCommand.h:39,48`)."
+   ],
+   "evidence": [
+    "Force commands on `JediCombatQueueCommand`, `ForcePowersQueueCommand`, `ForceHealQueueCommand`, `JediQueueCommand` (113 commands mapped to this row)",
+    "FRS: `managers/frs/` (11 files), `bin/scripts/managers/jedi/frs_manager.lua` (`frsEnabled = 1`, enclave voting, arena challenges, rank XP)",
+    "Visibility: `managers/visibility/`, `visibility_manager.lua`"
+   ],
+   "config_switches": [
+    "frs_manager.lua frsEnabled",
+    "Core3.FrsManager.ImmediateMaintXpDeduction"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/frs",
+     "MMOCoreORB/src/server/zone/managers/visibility",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Force*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Jedi*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Saber*",
+     "MMOCoreORB/bin/scripts/managers/jedi/frs_manager.lua",
+     "MMOCoreORB/bin/scripts/managers/jedi/visibility_manager.lua"
+    ],
+    "files": 97,
+    "lines": 10368,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 113,
+    "implemented": 17,
+    "base_class": 56,
+    "inherits": 38,
+    "todo": 1,
+    "stub": 1,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "forceprotection"
+    ],
+    "todo_names": [
+     "regainconsciousness"
+    ]
+   },
+   "bot_probe": "Staff-granted Padawan agent uses one Force power on a creature and one heal on itself; assert Force pool drop and visibility rise.",
+   "fix_work": "None for play."
+  },
+  {
+   "id": "32",
+   "group": "Space",
+   "name": "Space (Jump to Lightspeed): ships, components, space zones, combat, quests, POB ships",
+   "status": "partial",
+   "gaps": [
+    "Upstream default is off: `Core3.JTL.JTLEnabled` and `Core3.JTL.LaunchFromDevice` default false; the sandbox profile records both on (set in config-local.lua, not read here). Space NPC conversations check `isJtlEnabled()`.",
+    "22 space combat commands have no Lua script, so defaults apply (bstrike, epulse, eshields, ethrust, eweapons, iffscramble, inspace*, jstart, nblast, ptrap, pumpreactor, vrepair...).",
+    "`/repairShipComponentInSlot`, `/unassociateDroidControlDeviceWithShip` are stubs; `/installShipComponent` has a TODO; space spawner doesn't refill to max (`SpaceSpawnObserverImplementation.cpp:45`)."
+   ],
+   "evidence": [
+    "`managers/space`, `managers/ship`, `managers/spacecombat`, `managers/spacecollision`; ship classes `objects/ship/` (Fighter, POB, MultiPassenger, Capital, ship AI)",
+    "10 space zones in `bin/conf/config.lua` `SpaceZonesEnabled`; 1925 ship mobiles; quests `screenplays/space/` (patrol, destroy, assassinate; 9 squadron screenplays)",
+    "Shipwright crafting: 336 space schematics"
+   ],
+   "config_switches": [
+    "Core3.JTL.JTLEnabled (default false)",
+    "Core3.JTL.LaunchFromDevice (default false)",
+    "Core3.SpaceZonesEnabled",
+    "Core3.Regions.DisableSpaceSpawns"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/space",
+     "MMOCoreORB/src/server/zone/managers/ship",
+     "MMOCoreORB/src/server/zone/managers/spacecombat",
+     "MMOCoreORB/src/server/zone/managers/spacecollision",
+     "MMOCoreORB/src/server/zone/objects/ship",
+     "MMOCoreORB/bin/scripts/screenplays/space",
+     "MMOCoreORB/bin/scripts/managers/space",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/SpaceQueueCommand.h",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/*Ship*"
+    ],
+    "files": 276,
+    "lines": 57182,
+    "todo_hits": 9,
+    "todo_samples": [
+     "bin/scripts/screenplays/space/conversations/neutral/corsec_squadron/rikkhConvoHandler.lua:237:\t\tCreatureObject(pPlayer):sendSystemMessage(\"Recovery Duty Missions are not implemented yet!\")",
+     "bin/scripts/screenplays/space/conversations/neutral/rsf_squadron/kaydineConvoHandler.lua:229:\t\tCreatureObject(pPlayer):sendSystemMessage(\"Recovery Duty Missions are not implemented yet!\")",
+     "bin/scripts/screenplays/space/ship_components/pilot_seat_menu_component.lua:81:\t\t-- TODO?: Unsure if we need to use this check",
+     "bin/scripts/screenplays/space/ship_components/ship_turret_menu_component.lua:63:\t--[[ TODO:"
+    ]
+   },
+   "commands": {
+    "total": 49,
+    "implemented": 16,
+    "base_class": 30,
+    "inherits": 0,
+    "todo": 1,
+    "stub": 2,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "repairshipcomponentinslot",
+     "unassociatedroidcontroldevicewithship"
+    ],
+    "todo_names": [
+     "installshipcomponent"
+    ]
+   },
+   "bot_probe": "Agent launches a starter ship from its device into space_tatooine and destroys one tier-1 NPC; assert the kill and the ship's damage state. Needs a flying agent (not built).",
+   "fix_work": "Flight testing first; then scripts for the 22 unscripted commands and the component repair command."
+  },
+  {
+   "id": "33",
+   "group": "Smaller systems",
+   "name": "Badges and exploration badges",
+   "status": "implemented",
+   "gaps": [],
+   "evidence": [
+    "`objects/player/badges/` (BadgeList, Badges), `objects/area/BadgeActiveArea*`, `/requestBadges`, staff `/grantBadge`/`/revokeBadge`"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/player/badges",
+     "MMOCoreORB/src/server/zone/objects/area/BadgeActiveArea*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/*Badge*"
+    ],
+    "files": 7,
+    "lines": 708,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 1,
+    "implemented": 1,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Agent walks into an exploration badge area; assert the badge in `/requestBadges`.",
+   "fix_work": "None."
+  },
+  {
+   "id": "34",
+   "group": "Smaller systems",
+   "name": "Collections",
+   "status": "missing",
+   "gaps": [
+    "No collection system (only loot-group 'collections'). Collections are NGE; note only."
+   ],
+   "evidence": [
+    "No collection code in `src/server/zone/objects/player/`"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [],
+    "files": 0,
+    "lines": 0,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 0,
+    "implemented": 0,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Not applicable.",
+   "fix_work": "Leave out for pre-CU."
+  },
+  {
+   "id": "35",
+   "group": "Smaller systems",
+   "name": "New-player tutorial",
+   "status": "disabled",
+   "gaps": [
+    "`Core3.PlayerCreationManager.EnableTutorial` defaults false and is not set in `bin/conf/config.lua` (config-local.lua not read, so the live value is unsure). The `tutorial` zone is loaded and its screenplays exist."
+   ],
+   "evidence": [
+    "`PlayerCreationManager.cpp:400`; `screenplays/tutorial/` (12 includes); stat migration is free in the tutorial zone (`RequestSetStatMigrationDataCommand.h:86-94`)"
+   ],
+   "config_switches": [
+    "Core3.PlayerCreationManager.EnableTutorial (default false)"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/bin/scripts/screenplays/tutorial"
+    ],
+    "files": 12,
+    "lines": 2407,
+    "todo_hits": 2,
+    "todo_samples": [
+     "bin/scripts/screenplays/tutorial/tutorial.lua:3:TODO:",
+     "bin/scripts/screenplays/tutorial/tutorial.lua:191:\t\t--TODO: Should be newbie dispenser of some sort?"
+    ]
+   },
+   "commands": {
+    "total": 0,
+    "implemented": 0,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Create a character with the switch on; assert it starts in the tutorial zone.",
+   "fix_work": "Owner choice: turn on if new players should get the tutorial."
+  },
+  {
+   "id": "36",
+   "group": "Smaller systems",
+   "name": "Gambling mini-games (slot machines, roulette, sabacc)",
+   "status": "partial",
+   "gaps": [
+    "Sabacc is commented out (`GamblingTerminal.idl:59`); only slot machines and roulette work. Pazaak is not in the game (and not pre-CU)."
+   ],
+   "evidence": [
+    "`managers/minigames/GamblingManagerImplementation.cpp`, `objects/tangible/terminal/gambling/GamblingTerminal*`, `/bet`"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/minigames/Gambling*",
+     "MMOCoreORB/src/server/zone/objects/tangible/terminal/gambling"
+    ],
+    "files": 5,
+    "lines": 2326,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 1,
+    "implemented": 1,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Agent uses a slot machine in a cantina and `/bet`s 10; assert credits change.",
+   "fix_work": "Sabacc needs a full card game and UI: large; skip unless wanted."
+  },
+  {
+   "id": "37",
+   "group": "Smaller systems",
+   "name": "Swoop and speeder racing",
+   "status": "implemented",
+   "gaps": [],
+   "evidence": [
+    "`screenplays/racetracks/` engine plus 6 tracks (Agrilat swamp, Keren, Lok, Mos Espa, Narmle, Nashal)"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/bin/scripts/screenplays/racetracks"
+    ],
+    "files": 8,
+    "lines": 682,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 0,
+    "implemented": 0,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Agent on a speeder starts the Mos Espa race and passes every waypoint; assert the finish time message.",
+   "fix_work": "None."
+  },
+  {
+   "id": "38",
+   "group": "Smaller systems",
+   "name": "Camps",
+   "status": "implemented",
+   "gaps": [],
+   "evidence": [
+    "`objects/area/CampSiteActiveAreaImplementation.cpp`, camp kit and terminal menu components, `CampAbandonTask`, `CampDespawnTask`"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/area/Camp*",
+     "MMOCoreORB/src/server/zone/objects/area/events/Camp*",
+     "MMOCoreORB/src/server/zone/objects/tangible/components/Camp*"
+    ],
+    "files": 9,
+    "lines": 1455,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 0,
+    "implemented": 0,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Scout agent drops a basic camp kit outdoors; assert the camp terminal and the healing-in-camp effect.",
+   "fix_work": "None."
+  },
+  {
+   "id": "39",
+   "group": "Smaller systems",
+   "name": "Foraging and fishing",
+   "status": "implemented",
+   "gaps": [
+    "Fishing TODOs: water vegetation and density not modelled, bait stacks consumed whole (`FishingManager.idl:136-412`)."
+   ],
+   "evidence": [
+    "`managers/minigames/ForageManagerImplementation.cpp`, `FishingManagerImplementation.cpp`, `/forage`, `/fish`, fishing pole/bait/fish objects"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/minigames/Forag*",
+     "MMOCoreORB/src/server/zone/managers/minigames/Fish*",
+     "MMOCoreORB/src/server/zone/objects/tangible/fishing"
+    ],
+    "files": 11,
+    "lines": 3127,
+    "todo_hits": 4,
+    "todo_samples": [
+     "src/server/zone/managers/minigames/FishingManager.idl:136:\t * @TODO { once actually craftable the line range calculation probably needs to be adjusted to affect the outcome less }",
+     "src/server/zone/managers/minigames/FishingManager.idl:237:\t * @TODO { Actually make vegetation a property of a body of water }",
+     "src/server/zone/managers/minigames/FishingManager.idl:248:\t * @TODO { Actually make density a property of a body of water }",
+     "src/server/zone/managers/minigames/FishingManager.idl:412:\t * @TODO { For stacks (more than 1 of the bait) remove just one of it }"
+    ]
+   },
+   "commands": {
+    "total": 2,
+    "implemented": 2,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Scout agent `/forage`s 3 times outdoors; assert an item appears. Fishing: equip pole and bait, `/fish` at water.",
+   "fix_work": "None for play."
+  },
+  {
+   "id": "40",
+   "group": "Smaller systems",
+   "name": "Food, drink, Chef buffs and spice",
+   "status": "implemented",
+   "gaps": [
+    "`/eat` is a stub (eating works from the item radial); instant-effect foods share one generic handler (TODO `ConsumableImplementation.cpp:306`)."
+   ],
+   "evidence": [
+    "`objects/tangible/consumable/ConsumableImplementation.cpp`, `DelayedBuffObserver`, spice buffs and downers (`objects/creature/buffs/SpiceBuff*`); 123 food and 17 spice schematics"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/tangible/consumable",
+     "MMOCoreORB/src/server/zone/objects/creature/buffs/Spice*"
+    ],
+    "files": 9,
+    "lines": 1066,
+    "todo_hits": 1,
+    "todo_samples": [
+     "src/server/zone/objects/tangible/consumable/ConsumableImplementation.cpp:306:\t\t//TODO: Handle each instant effect on its own..."
+    ]
+   },
+   "commands": {
+    "total": 1,
+    "implemented": 0,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 1,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "eat"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Agent uses a crafted food from the radial; assert the buff on the character.",
+   "fix_work": "None."
+  },
+  {
+   "id": "41",
+   "group": "Smaller systems",
+   "name": "Droids and Droid Engineer modules",
+   "status": "implemented",
+   "gaps": [
+    "`/assignDroid` and `/customizeDroid` are stubs."
+   ],
+   "evidence": [
+    "`objects/tangible/components/droid/` (46 files: armor, combat, crafting, harvest, medical, merchant barker, stimpack, trap, repair, storage, playback, personality, detonation...)",
+    "`/detonateDroid`, `/healDroidDamage`, `/healDroidWound`, droid pet commands"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/tangible/components/droid",
+     "MMOCoreORB/src/server/zone/objects/creature/ai/DroidObject*",
+     "MMOCoreORB/src/server/zone/managers/crafting/labratories/DroidLabratory*"
+    ],
+    "files": 50,
+    "lines": 7412,
+    "todo_hits": 1,
+    "todo_samples": [
+     "src/server/zone/managers/crafting/labratories/DroidLabratory.cpp:18:\t// TODO check for the droid_count property and return the value"
+    ]
+   },
+   "commands": {
+    "total": 6,
+    "implemented": 4,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 2,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "assigndroid",
+     "customizedroid"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Droid Engineer agent crafts a droid with one module and calls it; assert the module's radial option.",
+   "fix_work": "None for play."
+  },
+  {
+   "id": "42",
+   "group": "Smaller systems",
+   "name": "Slicing (Smuggler)",
+   "status": "implemented",
+   "gaps": [
+    "Smuggler perk `language_all_comprehend` has no reader."
+   ],
+   "evidence": [
+    "`objects/player/sessions/SlicingSessionImplementation.cpp` (skill by box name `:242-261`), slicing tools, GCW security slicing (`managers/gcw/tasks/SecuritySliceTask.h`)"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/player/sessions/SlicingSession*",
+     "MMOCoreORB/src/server/zone/objects/tangible/tool/smuggler"
+    ],
+    "files": 6,
+    "lines": 1301,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 0,
+    "implemented": 0,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Smuggler agent slices a weapon with a tool kit; assert the changed weapon stat.",
+   "fix_work": "Wire the language perk if wanted."
+  },
+  {
+   "id": "43",
+   "group": "World",
+   "name": "NPC conversations and social reactions",
+   "status": "implemented",
+   "gaps": [
+    "Ship AI has no reaction chat (`ShipAiAgentImplementation.cpp:1970`)."
+   ],
+   "evidence": [
+    "`managers/conversation/`, 306 conversation templates (`bin/scripts/mobile/conversations/`), `managers/reaction/` with `reaction_manager.lua`"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/conversation",
+     "MMOCoreORB/src/server/zone/managers/reaction",
+     "MMOCoreORB/bin/scripts/managers/reaction_manager.lua"
+    ],
+    "files": 7,
+    "lines": 1075,
+    "todo_hits": 1,
+    "todo_samples": [
+     "src/server/zone/managers/reaction/ReactionManagerImplementation.cpp:183:\tcase ReactionManager::THREAT: // TODO: add trigger"
+    ]
+   },
+   "commands": {
+    "total": 3,
+    "implemented": 3,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Agent opens and closes a conversation with a trainer; assert the options list.",
+   "fix_work": "None."
+  },
+  {
+   "id": "44",
+   "group": "World",
+   "name": "Weather",
+   "status": "implemented",
+   "gaps": [],
+   "evidence": [
+    "`managers/weather/` (4 files), `bin/scripts/managers/weather_manager.lua`"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/weather",
+     "MMOCoreORB/bin/scripts/managers/weather_manager.lua"
+    ],
+    "files": 5,
+    "lines": 921,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 0,
+    "implemented": 0,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Staff changes weather on one planet; assert the client weather packet.",
+   "fix_work": "None."
+  },
+  {
+   "id": "45",
+   "group": "World",
+   "name": "Veteran rewards and event perks",
+   "status": "implemented",
+   "gaps": [
+    "Staff `/hasVeteranReward`, `/setVeteranReward` are stubs; `/launchFirework` is a stub (fireworks launch from the item radial; check)."
+   ],
+   "evidence": [
+    "`managers/player/VeteranReward.h`, `/claimVeteranReward`; event perks `objects/tangible/eventperk/` (lottery droid, shuttle beacon, flag game, ...), `screenplays/events/eventPerkData.lua`"
+   ],
+   "config_switches": [],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/tangible/eventperk",
+     "MMOCoreORB/src/server/zone/managers/player/VeteranReward.h"
+    ],
+    "files": 14,
+    "lines": 2513,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 6,
+    "implemented": 3,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 3,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "getveteranrewardtimecs",
+     "launchfirework",
+     "overrideactivemonths"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Agent claims a veteran reward; assert the item in inventory.",
+   "fix_work": "None."
+  },
+  {
+   "id": "46",
+   "group": "Admin",
+   "name": "Customer service tickets and in-game bug reports",
+   "status": "stub",
+   "gaps": [
+    "All ten `/cs*` ticket commands, `/report` and `/executeKnowledgeBaseMessage` are stubs.",
+    "Holocron bug reports write to the Mantis database, but the reply packet is disabled (`HolocronManager.cpp:92`); `Core3.AccountManager.HolocronTicketsEnabled` defaults false."
+   ],
+   "evidence": [
+    "`managers/holocron/HolocronManager.cpp`; stub headers `objects/creature/commands/Cs*.h`"
+   ],
+   "config_switches": [
+    "Core3.AccountManager.HolocronTicketsEnabled (default false)"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/managers/holocron",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Cs*"
+    ],
+    "files": 13,
+    "lines": 618,
+    "todo_hits": 1,
+    "todo_samples": [
+     "src/server/zone/managers/holocron/HolocronManager.cpp:92:\t//TODO: Find out why this is causing a crash!"
+    ]
+   },
+   "commands": {
+    "total": 12,
+    "implemented": 0,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 12,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "csappendcomment",
+     "cscancelticket",
+     "csconnectplayer",
+     "cscreateticket",
+     "csdisconnectplayer",
+     "csgetarticle",
+     "csgetcomments",
+     "csgettickets",
+     "csrequestcategories",
+     "cssearchknowledgebase",
+     "executeknowledgebasemessage",
+     "report"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Not worth a bot probe on a LAN server.",
+   "fix_work": "Leave out; use Discord or a text file for reports."
+  },
+  {
+   "id": "47",
+   "group": "Admin",
+   "name": "Admin and staff tools",
+   "status": "partial",
+   "gaps": [
+    "Staff commands that are stubs include `/money`, `/setRank`, `/getRank`, `/planetWarp`, `/editBank`, `/editStats`, `/maxStats`, `/grantTitle`, spawner controls (`/startSpawner`, `/stopSpawner`, `/setMinimumSpawnTime`...), `/setLoginMessage`. See `Documentation-support/core3-command-audit.md`.",
+    "Web and REST admin off by default (`MakeWeb = 0`, `RESTServerPort = 0`)."
+   ],
+   "evidence": [
+    "117 staff commands; `/setGodMode`, `/teleport`, `/grantSkill`, `/credits`, `/broadcast`, `/script`, `/server`, `/createCreature` etc. are real",
+    "Character builder terminal on (`CharacterBuilderEnabled = \"true\"` in `bin/conf/config.lua`); local `/spawnStatus` and `/showSpawnRegion` made real (34d4772a)"
+   ],
+   "config_switches": [
+    "Core3.CharacterBuilderEnabled",
+    "Core3.MakeWeb",
+    "Core3.RESTServerPort",
+    "Core3.CommandConfigManager.DumpAdminCommands"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/bin/scripts/staff",
+     "MMOCoreORB/src/server/zone/managers/director",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Server*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Admin*"
+    ],
+    "files": 39,
+    "lines": 7930,
+    "todo_hits": 1,
+    "todo_samples": [
+     "src/server/zone/managers/director/DirectorManager.cpp:1151:\t// TODO: Global resource types"
+    ]
+   },
+   "commands": {
+    "total": 129,
+    "implemented": 75,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 2,
+    "stub": 52,
+    "fixed_since_audit": [
+     "showspawnregion",
+     "spawnstatus"
+    ],
+    "stub_names": [
+     "addallowedplayer",
+     "aiignore",
+     "combat",
+     "craft",
+     "destroy",
+     "editappearance",
+     "editbank",
+     "editbankaccount",
+     "editstats",
+     "forcecommand",
+     "gc",
+     "getgametime",
+     "getrank",
+     "getspawndelays",
+     "gmforcecommand",
+     "gmforcerank",
+     "granttitle",
+     "harmful",
+     "harmless",
+     "hasveteranreward",
+     "initializecomponent",
+     "lag",
+     "manufacture",
+     "maxcombatability",
+     "maxstats",
+     "money",
+     "npc",
+     "objvar",
+     "overridepadawantrialseligibility",
+     "planetwarp",
+     "planetwarptarget",
+     "remote",
+     "removeallowedplayer",
+     "searchcorpse",
+     "secretspawnspam",
+     "setloginmessage",
+     "setlogintitle",
+     "setmaximumspawntime",
+     "setminimumspawntime",
+     "setplanetlimit",
+     "setrank",
+     "settef",
+     "setveteranreward",
+     "showfactioninformation",
+     "startspawner",
+     "starttargetspawner",
+     "starttracelogging",
+     "stopspawner",
+     "stoptargetspawner",
+     "stoptracelogging",
+     "uncityban",
+     "unsnoop"
+    ],
+    "todo_names": [
+     "dumptargetinformation",
+     "goto"
+    ]
+   },
+   "bot_probe": "Staff agent runs each staff command once in a test galaxy and records whether anything changed (stub list already known).",
+   "fix_work": "Write the handful of stubs the owner actually uses (`/money`, `/planetWarp`, `/setRank`, spawner controls)."
+  },
+  {
+   "id": "48",
+   "group": "Infrastructure",
+   "name": "Login, logout, containers, inventory and UI plumbing",
+   "status": "implemented",
+   "gaps": [
+    "`/logout` is a stub while `/logoutServer` is implemented; unsure which one the client's logout uses, so check the 30-second countdown in game. `/joinGame`, `/leaveGame`, `/transferItem` are stubs (the typed `/transferItem*` variants are real)."
+   ],
+   "evidence": [
+    "`objects/player/PlayerObjectImplementation.cpp` link-dead and logout handling (`Core3.PlayerObject.LinkDeadDelay`, `AlwaysSafeLogout`)",
+    "`/openContainer`, `/closeContainer`, `/transferItemArmor`/`Misc`/`Weapon` implemented"
+   ],
+   "config_switches": [
+    "Core3.PlayerObject.LinkDeadDelay",
+    "Core3.PlayerObject.AlwaysSafeLogout",
+    "Core3.UnloadContainers"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/src/server/zone/objects/creature/commands/Logout*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/TransferItem*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/OpenContainer*",
+     "MMOCoreORB/src/server/zone/objects/creature/commands/CloseContainer*"
+    ],
+    "files": 8,
+    "lines": 1038,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 14,
+    "implemented": 9,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 5,
+    "fixed_since_audit": [],
+    "stub_names": [
+     "joingame",
+     "leavegame",
+     "logout",
+     "reconnecttotransferserver",
+     "transferitem"
+    ],
+    "todo_names": []
+   },
+   "bot_probe": "Agent logs out from the menu; assert the countdown messages and the character offline after 30 s.",
+   "fix_work": "None expected."
+  },
+  {
+   "id": "49",
+   "group": "Local additions",
+   "name": "Local sandbox additions (agent body, leash, mercenaries, world bosses, Hoth, Ossus, Chiss, Botanist)",
+   "status": "implemented",
+   "gaps": [
+    "Test-only or dev-only; see `SWG-feature-register.md` F14-F31, F46. Not part of the pre-CU baseline."
+   ],
+   "evidence": [
+    "Local commits on top of upstream 403893d9: `/agentgear`, `/agentpath`, `/agentskill`, `/leash`, mercenary broker, world boss rotation, Hoth and Ossus zones, Chiss species, Botanist trainer"
+   ],
+   "config_switches": [
+    "Core3.AgentGear (default false)",
+    "Core3.AgentAccounts",
+    "Core3.LeashEnabled"
+   ],
+   "code": {
+    "paths": [
+     "MMOCoreORB/bin/scripts/screenplays/sandbox",
+     "MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua",
+     "MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua"
+    ],
+    "files": 4,
+    "lines": 525,
+    "todo_hits": 0,
+    "todo_samples": []
+   },
+   "commands": {
+    "total": 4,
+    "implemented": 4,
+    "base_class": 0,
+    "inherits": 0,
+    "todo": 0,
+    "stub": 0,
+    "fixed_since_audit": [],
+    "stub_names": [],
+    "todo_names": []
+   },
+   "bot_probe": "Covered by the existing bot squads.",
+   "fix_work": "Keep separate from baseline work."
+  }
+ ],
+ "unassigned_commands": {
+  "total": 7,
+  "implemented": 0,
+  "base_class": 0,
+  "inherits": 0,
+  "todo": 0,
+  "stub": 7,
+  "fixed_since_audit": [],
+  "stub_names": [
+   "alert",
+   "restartconversion",
+   "segoggles",
+   "setcharge",
+   "setpublicstate",
+   "userecondrone",
+   "useskillbuff"
+  ],
+  "todo_names": []
+ },
+ "professions": [
+  {
+   "profession": "social_entertainer",
+   "english": "Entertainer",
+   "skill_mods": 7,
+   "mods_no_reader": [
+    "markings"
+   ],
+   "ability_flags": 26,
+   "flags_no_reader": [
+    "private_entertainer_dance_1",
+    "private_entertainer_dance_2",
+    "private_entertainer_dance_3",
+    "private_entertainer_dance_4",
+    "private_entertainer_hair_1",
+    "private_entertainer_hair_2",
+    "private_entertainer_hair_3",
+    "private_entertainer_hair_4",
+    "private_entertainer_healing_1",
+    "private_entertainer_healing_2",
+    "private_entertainer_healing_3",
+    "private_entertainer_healing_4",
+    "private_entertainer_master",
+    "private_entertainer_music_1",
+    "private_entertainer_music_2",
+    "private_entertainer_music_3",
+    "private_entertainer_music_4",
+    "private_entertainer_novice"
+   ]
+  },
+  {
+   "profession": "outdoors_scout",
+   "english": "Scout",
+   "skill_mods": 9,
+   "mods_no_reader": [],
+   "ability_flags": 18,
+   "flags_no_reader": [
+    "private_scout_camp_1",
+    "private_scout_camp_2",
+    "private_scout_camp_3",
+    "private_scout_camp_4",
+    "private_scout_harvest_1",
+    "private_scout_harvest_2",
+    "private_scout_harvest_3",
+    "private_scout_harvest_4",
+    "private_scout_master",
+    "private_scout_movement_1",
+    "private_scout_movement_2",
+    "private_scout_movement_3",
+    "private_scout_movement_4",
+    "private_scout_novice",
+    "private_scout_tools_1",
+    "private_scout_tools_2",
+    "private_scout_tools_3",
+    "private_scout_tools_4"
+   ]
+  },
+  {
+   "profession": "science_medic",
+   "english": "Medic",
+   "skill_mods": 7,
+   "mods_no_reader": [],
+   "ability_flags": 18,
+   "flags_no_reader": [
+    "private_medic_ability_1",
+    "private_medic_ability_2",
+    "private_medic_ability_3",
+    "private_medic_ability_4",
+    "private_medic_crafting_1",
+    "private_medic_crafting_2",
+    "private_medic_crafting_3",
+    "private_medic_crafting_4",
+    "private_medic_injury_1",
+    "private_medic_injury_2",
+    "private_medic_injury_3",
+    "private_medic_injury_4",
+    "private_medic_master",
+    "private_medic_novice",
+    "private_medic_speed_1",
+    "private_medic_speed_2",
+    "private_medic_speed_3",
+    "private_medic_speed_4"
+   ]
+  },
+  {
+   "profession": "crafting_artisan",
+   "english": "Artisan",
+   "skill_mods": 8,
+   "mods_no_reader": [],
+   "ability_flags": 20,
+   "flags_no_reader": [
+    "access_fee",
+    "premium_auctions",
+    "private_artisan_business_1",
+    "private_artisan_business_2",
+    "private_artisan_business_3",
+    "private_artisan_business_4",
+    "private_artisan_domestic_1",
+    "private_artisan_domestic_2",
+    "private_artisan_domestic_3",
+    "private_artisan_domestic_4",
+    "private_artisan_engineering_1",
+    "private_artisan_engineering_2",
+    "private_artisan_engineering_3",
+    "private_artisan_engineering_4",
+    "private_artisan_master",
+    "private_artisan_novice",
+    "private_artisan_survey_1",
+    "private_artisan_survey_2",
+    "private_artisan_survey_3",
+    "private_artisan_survey_4"
+   ]
+  },
+  {
+   "profession": "combat_brawler",
+   "english": "Brawler",
+   "skill_mods": 31,
+   "mods_no_reader": [
+    "private_onehandmelee_combat_difficulty",
+    "private_polearm_combat_difficulty",
+    "private_twohandmelee_combat_difficulty",
+    "private_unarmed_combat_difficulty"
+   ],
+   "ability_flags": 33,
+   "flags_no_reader": [
+    "private_brawler_1hand_1",
+    "private_brawler_1hand_2",
+    "private_brawler_1hand_3",
+    "private_brawler_1hand_4",
+    "private_brawler_2hand_1",
+    "private_brawler_2hand_2",
+    "private_brawler_2hand_3",
+    "private_brawler_2hand_4",
+    "private_brawler_master",
+    "private_brawler_novice",
+    "private_brawler_polearm_1",
+    "private_brawler_polearm_2",
+    "private_brawler_polearm_3",
+    "private_brawler_polearm_4",
+    "private_brawler_unarmed_1",
+    "private_brawler_unarmed_2",
+    "private_brawler_unarmed_3",
+    "private_brawler_unarmed_4"
+   ]
+  },
+  {
+   "profession": "combat_marksman",
+   "english": "Marksman",
+   "skill_mods": 14,
+   "mods_no_reader": [
+    "private_carbine_combat_difficulty",
+    "private_pistol_combat_difficulty",
+    "private_rifle_combat_difficulty",
+    "rifle_concealment_chance"
+   ],
+   "ability_flags": 42,
+   "flags_no_reader": [
+    "private_marksman_carbine_1",
+    "private_marksman_carbine_2",
+    "private_marksman_carbine_3",
+    "private_marksman_carbine_4",
+    "private_marksman_master",
+    "private_marksman_novice",
+    "private_marksman_pistol_1",
+    "private_marksman_pistol_2",
+    "private_marksman_pistol_3",
+    "private_marksman_pistol_4",
+    "private_marksman_rifle_1",
+    "private_marksman_rifle_2",
+    "private_marksman_rifle_3",
+    "private_marksman_rifle_4",
+    "private_marksman_support_1",
+    "private_marksman_support_2",
+    "private_marksman_support_3",
+    "private_marksman_support_4"
+   ]
+  },
+  {
+   "profession": "combat_rifleman",
+   "english": "Rifleman",
+   "skill_mods": 14,
+   "mods_no_reader": [
+    "private_rifle_combat_difficulty",
+    "rifle_concealment_chance"
+   ],
+   "ability_flags": 23,
+   "flags_no_reader": [
+    "private_rifle_ability_1",
+    "private_rifle_ability_2",
+    "private_rifle_ability_3",
+    "private_rifle_ability_4",
+    "private_rifle_accuracy_1",
+    "private_rifle_accuracy_2",
+    "private_rifle_accuracy_3",
+    "private_rifle_accuracy_4",
+    "private_rifle_master",
+    "private_rifle_novice",
+    "private_rifle_speed_1",
+    "private_rifle_speed_2",
+    "private_rifle_speed_3",
+    "private_rifle_speed_4",
+    "private_rifle_support_1",
+    "private_rifle_support_2",
+    "private_rifle_support_3",
+    "private_rifle_support_4",
+    "ranged_damage_mitigation_1",
+    "ranged_damage_mitigation_2",
+    "ranged_damage_mitigation_3",
+    "sneak"
+   ]
+  },
+  {
+   "profession": "combat_pistol",
+   "english": "Pistoleer",
+   "skill_mods": 14,
+   "mods_no_reader": [
+    "private_pistol_combat_difficulty"
+   ],
+   "ability_flags": 23,
+   "flags_no_reader": [
+    "private_pistol_ability_1",
+    "private_pistol_ability_2",
+    "private_pistol_ability_3",
+    "private_pistol_ability_4",
+    "private_pistol_accuracy_1",
+    "private_pistol_accuracy_2",
+    "private_pistol_accuracy_3",
+    "private_pistol_accuracy_4",
+    "private_pistol_defense_1",
+    "private_pistol_defense_2",
+    "private_pistol_defense_3",
+    "private_pistol_defense_4",
+    "private_pistol_master",
+    "private_pistol_novice",
+    "private_pistol_speed_1",
+    "private_pistol_speed_2",
+    "private_pistol_speed_3",
+    "private_pistol_speed_4",
+    "ranged_damage_mitigation_1",
+    "ranged_damage_mitigation_2",
+    "ranged_damage_mitigation_3"
+   ]
+  },
+  {
+   "profession": "combat_carbine",
+   "english": "Carbineer",
+   "skill_mods": 9,
+   "mods_no_reader": [
+    "private_carbine_combat_difficulty"
+   ],
+   "ability_flags": 23,
+   "flags_no_reader": [
+    "private_carbine_ability_1",
+    "private_carbine_ability_2",
+    "private_carbine_ability_3",
+    "private_carbine_ability_4",
+    "private_carbine_accuracy_1",
+    "private_carbine_accuracy_2",
+    "private_carbine_accuracy_3",
+    "private_carbine_accuracy_4",
+    "private_carbine_master",
+    "private_carbine_novice",
+    "private_carbine_speed_1",
+    "private_carbine_speed_2",
+    "private_carbine_speed_3",
+    "private_carbine_speed_4",
+    "private_carbine_support_1",
+    "private_carbine_support_2",
+    "private_carbine_support_3",
+    "private_carbine_support_4",
+    "ranged_damage_mitigation_1",
+    "ranged_damage_mitigation_2",
+    "ranged_damage_mitigation_3"
+   ]
+  },
+  {
+   "profession": "combat_unarmed",
+   "english": "Teras Kasi Artist",
+   "skill_mods": 19,
+   "mods_no_reader": [
+    "private_med_dot",
+    "private_med_wound",
+    "private_unarmed_combat_difficulty"
+   ],
+   "ability_flags": 22,
+   "flags_no_reader": [
+    "melee_damage_mitigation_1",
+    "melee_damage_mitigation_2",
+    "melee_damage_mitigation_3",
+    "private_unarmed_ability_1",
+    "private_unarmed_ability_2",
+    "private_unarmed_ability_3",
+    "private_unarmed_ability_4",
+    "private_unarmed_accuarcy_1",
+    "private_unarmed_accuarcy_2",
+    "private_unarmed_accuracy_3",
+    "private_unarmed_accuracy_4",
+    "private_unarmed_master",
+    "private_unarmed_novice",
+    "private_unarmed_speed_1",
+    "private_unarmed_speed_2",
+    "private_unarmed_speed_3",
+    "private_unarmed_speed_4",
+    "private_unarmed_support_1",
+    "private_unarmed_support_2",
+    "private_unarmed_support_3",
+    "private_unarmed_support_4"
+   ]
+  },
+  {
+   "profession": "combat_1hsword",
+   "english": "Fencer",
+   "skill_mods": 16,
+   "mods_no_reader": [
+    "private_onehandmelee_combat_difficulty"
+   ],
+   "ability_flags": 22,
+   "flags_no_reader": [
+    "melee_damage_mitigation_1",
+    "melee_damage_mitigation_2",
+    "melee_damage_mitigation_3",
+    "private_1hand_ability_1",
+    "private_1hand_ability_2",
+    "private_1hand_ability_3",
+    "private_1hand_ability_4",
+    "private_1hand_accuracy_1",
+    "private_1hand_accuracy_2",
+    "private_1hand_accuracy_3",
+    "private_1hand_accuracy_4",
+    "private_1hand_master",
+    "private_1hand_novice",
+    "private_1hand_speed_1",
+    "private_1hand_speed_2",
+    "private_1hand_speed_3",
+    "private_1hand_speed_4",
+    "private_1hand_support_1",
+    "private_1hand_support_2",
+    "private_1hand_support_3",
+    "private_1hand_support_4"
+   ]
+  },
+  {
+   "profession": "combat_2hsword",
+   "english": "Swordsman",
+   "skill_mods": 15,
+   "mods_no_reader": [
+    "private_twohandmelee_combat_difficulty"
+   ],
+   "ability_flags": 13,
+   "flags_no_reader": [
+    "melee_damage_mitigation_1",
+    "melee_damage_mitigation_2",
+    "melee_damage_mitigation_3",
+    "private_2hand_accuracy_1",
+    "private_2hand_accuracy_2",
+    "private_2hand_accuracy_3",
+    "private_2hand_accuracy_4",
+    "private_2hand_master",
+    "private_2hand_novice",
+    "private_2hand_speed_1",
+    "private_2hand_speed_2"
+   ]
+  },
+  {
+   "profession": "combat_polearm",
+   "english": "Pikeman",
+   "skill_mods": 14,
+   "mods_no_reader": [
+    "private_polearm_combat_difficulty"
+   ],
+   "ability_flags": 10,
+   "flags_no_reader": [
+    "melee_damage_mitigation_1",
+    "melee_damage_mitigation_2",
+    "melee_damage_mitigation_3",
+    "private_polearm_accuracy_1",
+    "private_polearm_accuracy_2",
+    "private_polearm_accuracy_3",
+    "private_polearm_accuracy_4",
+    "private_polearm_master",
+    "private_polearm_novice"
+   ]
+  },
+  {
+   "profession": "social_dancer",
+   "english": "Dancer",
+   "skill_mods": 8,
+   "mods_no_reader": [
+    "private_place_cantina",
+    "private_place_theater"
+   ],
+   "ability_flags": 2,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "social_musician",
+   "english": "Musician",
+   "skill_mods": 9,
+   "mods_no_reader": [
+    "private_place_cantina",
+    "private_place_theater"
+   ],
+   "ability_flags": 7,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "science_doctor",
+   "english": "Doctor",
+   "skill_mods": 6,
+   "mods_no_reader": [
+    "private_place_hospital"
+   ],
+   "ability_flags": 1,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "outdoors_ranger",
+   "english": "Ranger",
+   "skill_mods": 13,
+   "mods_no_reader": [
+    "private_areatrack"
+   ],
+   "ability_flags": 5,
+   "flags_no_reader": [
+    "areatrack_animal",
+    "areatrack_direction",
+    "areatrack_distance",
+    "areatrack_npc",
+    "areatrack_player"
+   ]
+  },
+  {
+   "profession": "outdoors_creaturehandler",
+   "english": "Creature Handler",
+   "skill_mods": 8,
+   "mods_no_reader": [
+    "private_creature_empathy",
+    "private_creature_management",
+    "private_creature_training"
+   ],
+   "ability_flags": 17,
+   "flags_no_reader": [
+    "pet_attack",
+    "pet_follow",
+    "pet_followother",
+    "pet_formation",
+    "pet_friend",
+    "pet_group",
+    "pet_guard",
+    "pet_patrol",
+    "pet_rangedattack",
+    "pet_release",
+    "pet_specialattack1",
+    "pet_specialattack2",
+    "pet_stay",
+    "pet_transfer",
+    "train_mount",
+    "trick1",
+    "trick2"
+   ]
+  },
+  {
+   "profession": "outdoors_bio_engineer",
+   "english": "Bio-Engineer",
+   "skill_mods": 3,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "crafting_armorsmith",
+   "english": "Armorsmith",
+   "skill_mods": 3,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "crafting_weaponsmith",
+   "english": "Weaponsmith",
+   "skill_mods": 2,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "crafting_chef",
+   "english": "Chef",
+   "skill_mods": 3,
+   "mods_no_reader": [
+    "private_place_cantina"
+   ],
+   "ability_flags": 1,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "crafting_tailor",
+   "english": "Tailor",
+   "skill_mods": 3,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "crafting_architect",
+   "english": "Architect",
+   "skill_mods": 2,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "crafting_droidengineer",
+   "english": "Droid Engineer",
+   "skill_mods": 3,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "crafting_merchant",
+   "english": "Merchant",
+   "skill_mods": 5,
+   "mods_no_reader": [
+    "private_place_merchant_tent",
+    "shop_sign"
+   ],
+   "ability_flags": 5,
+   "flags_no_reader": [
+    "ad_fees_1",
+    "merchant_fees_1",
+    "vendor_fees_1"
+   ]
+  },
+  {
+   "profession": "combat_smuggler",
+   "english": "Smuggler",
+   "skill_mods": 4,
+   "mods_no_reader": [
+    "language_all_comprehend"
+   ],
+   "ability_flags": 7,
+   "flags_no_reader": [
+    "melee_damage_mitigation_1",
+    "ranged_damage_mitigation_1",
+    "slice_armor",
+    "slice_containers",
+    "slice_terminals",
+    "slice_weaponsadvanced",
+    "slice_weaponsbasic"
+   ]
+  },
+  {
+   "profession": "combat_bountyhunter",
+   "english": "Bounty Hunter",
+   "skill_mods": 18,
+   "mods_no_reader": [
+    "bounty_mission_level",
+    "private_carbine_combat_difficulty",
+    "private_carbine_difficulty",
+    "private_heavyweapon_combat_difficulty",
+    "private_pistol_combat_difficulty",
+    "private_pistol_difficulty"
+   ],
+   "ability_flags": 7,
+   "flags_no_reader": [
+    "droid_find",
+    "droid_track",
+    "ranged_damage_mitigation_1",
+    "ranged_damage_mitigation_2",
+    "ranged_damage_mitigation_3"
+   ]
+  },
+  {
+   "profession": "combat_commando",
+   "english": "Commando",
+   "skill_mods": 18,
+   "mods_no_reader": [
+    "private_heavyweapon_combat_difficulty"
+   ],
+   "ability_flags": 16,
+   "flags_no_reader": [
+    "ranged_damage_mitigation_1",
+    "ranged_damage_mitigation_2",
+    "ranged_damage_mitigation_3"
+   ]
+  },
+  {
+   "profession": "science_combatmedic",
+   "english": "Combat Medic",
+   "skill_mods": 9,
+   "mods_no_reader": [
+    "private_place_hospital"
+   ],
+   "ability_flags": 1,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "social_imagedesigner",
+   "english": "Image Designer",
+   "skill_mods": 4,
+   "mods_no_reader": [
+    "markings"
+   ],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "outdoors_squadleader",
+   "english": "Squad Leader",
+   "skill_mods": 6,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "social_politician",
+   "english": "Politician",
+   "skill_mods": 9,
+   "mods_no_reader": [
+    "private_place_bank",
+    "private_place_cityhall",
+    "private_place_cloning",
+    "private_place_exotic_garden",
+    "private_place_garage",
+    "private_place_large_garden",
+    "private_place_medium_garden",
+    "private_place_shuttleport",
+    "private_place_small_garden"
+   ],
+   "ability_flags": 24,
+   "flags_no_reader": [
+    "city_spec_cloning",
+    "city_spec_doctor",
+    "city_spec_entertainer",
+    "city_spec_industry",
+    "city_spec_missions",
+    "city_spec_research",
+    "city_spec_sample_rich",
+    "city_spec_stronghold"
+   ]
+  },
+  {
+   "profession": "jedi_padawan",
+   "english": "Jedi Padawan",
+   "skill_mods": 12,
+   "mods_no_reader": [
+    "onehandlightsaber_toughness"
+   ],
+   "ability_flags": 1,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "jedi_light_side_journeyman",
+   "english": "Jedi Knight",
+   "skill_mods": 14,
+   "mods_no_reader": [
+    "onehandlightsaber_toughness",
+    "private_force_lightning_single_power",
+    "twohandlightsaber_toughness"
+   ],
+   "ability_flags": 1,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "jedi_light_side_master",
+   "english": "Jedi Master",
+   "skill_mods": 15,
+   "mods_no_reader": [
+    "onehandlightsaber_toughness",
+    "polearmlightsaber_toughness",
+    "private_force_lightning_cone_power",
+    "private_force_lightning_single_power",
+    "twohandlightsaber_toughness"
+   ],
+   "ability_flags": 2,
+   "flags_no_reader": [
+    "forceIntimidate"
+   ]
+  },
+  {
+   "profession": "jedi_dark_side_journeyman",
+   "english": "Dark Jedi Knight",
+   "skill_mods": 14,
+   "mods_no_reader": [
+    "onehandlightsaber_toughness",
+    "private_force_lightning_single_power",
+    "twohandlightsaber_toughness"
+   ],
+   "ability_flags": 1,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "jedi_dark_side_master",
+   "english": "Dark Jedi Master",
+   "skill_mods": 15,
+   "mods_no_reader": [
+    "onehandlightsaber_toughness",
+    "polearmlightsaber_toughness",
+    "private_force_lightning_cone_power",
+    "private_force_lightning_single_power",
+    "twohandlightsaber_toughness"
+   ],
+   "ability_flags": 2,
+   "flags_no_reader": [
+    "forceIntimidate"
+   ]
+  },
+  {
+   "profession": "force_sensitive_combat_prowess",
+   "english": "Combat Prowess",
+   "skill_mods": 4,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "force_sensitive_enhanced_reflexes",
+   "english": "Enhanced Reflexes",
+   "skill_mods": 11,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "force_sensitive_crafting_mastery",
+   "english": "Crafting Mastery",
+   "skill_mods": 4,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "force_sensitive_heightened_senses",
+   "english": "Heightened Senses",
+   "skill_mods": 7,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "force_discipline_light_saber",
+   "english": "Lightsaber",
+   "skill_mods": 15,
+   "mods_no_reader": [
+    "private_onehandlightsaber_combat_difficulty",
+    "private_polearmlightsaber_combat_difficulty",
+    "private_twohandlightsaber_combat_difficulty"
+   ],
+   "ability_flags": 12,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "force_discipline_powers",
+   "english": "Force Powers",
+   "skill_mods": 12,
+   "mods_no_reader": [
+    "private_force_lightning_cone_power",
+    "private_force_lightning_single_power"
+   ],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "force_discipline_healing",
+   "english": "Force Healing",
+   "skill_mods": 3,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "force_discipline_enhancements",
+   "english": "Force Enhancement",
+   "skill_mods": 3,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "force_discipline_defender",
+   "english": "Force Defense",
+   "skill_mods": 8,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "force_rank_light",
+   "english": "Light Force Rankings",
+   "skill_mods": 3,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "force_rank_dark",
+   "english": "Dark Force Rankings",
+   "skill_mods": 3,
+   "mods_no_reader": [],
+   "ability_flags": 0,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "force_title_jedi",
+   "english": "Force Progression",
+   "skill_mods": 5,
+   "mods_no_reader": [
+    "private_onehandlightsaber_combat_difficulty",
+    "private_polearmlightsaber_combat_difficulty",
+    "private_twohandlightsaber_combat_difficulty"
+   ],
+   "ability_flags": 1,
+   "flags_no_reader": []
+  },
+  {
+   "profession": "crafting_shipwright",
+   "english": "Shipwright",
+   "skill_mods": 18,
+   "mods_no_reader": [],
+   "ability_flags": 18,
+   "flags_no_reader": [
+    "private_shipwright_defense_1",
+    "private_shipwright_defense_2",
+    "private_shipwright_defense_3",
+    "private_shipwright_defense_4",
+    "private_shipwright_engineering_1",
+    "private_shipwright_engineering_2",
+    "private_shipwright_engineering_3",
+    "private_shipwright_engineering_4",
+    "private_shipwright_master",
+    "private_shipwright_novice",
+    "private_shipwright_propulsion_1",
+    "private_shipwright_propulsion_2",
+    "private_shipwright_propulsion_3",
+    "private_shipwright_propulsion_4",
+    "private_shipwright_systems_1",
+    "private_shipwright_systems_2",
+    "private_shipwright_systems_3",
+    "private_shipwright_systems_4"
+   ]
+  },
+  {
+   "profession": "pilot_rebel_navy",
+   "english": "Alliance Starfighter Pilot",
+   "skill_mods": 2,
+   "mods_no_reader": [
+    "missile_launching",
+    "pilot_special_tactics"
+   ],
+   "ability_flags": 54,
+   "flags_no_reader": [
+    "private_rebel_navy_droid_1",
+    "private_rebel_navy_droid_2",
+    "private_rebel_navy_droid_3",
+    "private_rebel_navy_droid_4",
+    "private_rebel_navy_master",
+    "private_rebel_navy_novice",
+    "private_rebel_navy_starships_1",
+    "private_rebel_navy_starships_2",
+    "private_rebel_navy_starships_3",
+    "private_rebel_navy_starships_4"
+   ]
+  },
+  {
+   "profession": "pilot_imperial_navy",
+   "english": "Imperial Navy Pilot",
+   "skill_mods": 2,
+   "mods_no_reader": [
+    "missile_launching",
+    "pilot_special_tactics"
+   ],
+   "ability_flags": 55,
+   "flags_no_reader": [
+    "private_imperial_navy_droid_1",
+    "private_imperial_navy_droid_2",
+    "private_imperial_navy_droid_3",
+    "private_imperial_navy_droid_4",
+    "private_imperial_navy_master",
+    "private_imperial_navy_novice",
+    "private_imperial_navy_starships_1",
+    "private_imperial_navy_starships_2",
+    "private_imperial_navy_starships_3",
+    "private_imperial_navy_starships_4"
+   ]
+  },
+  {
+   "profession": "pilot_neutral",
+   "english": "Freelance Pilot",
+   "skill_mods": 2,
+   "mods_no_reader": [
+    "missile_launching",
+    "pilot_special_tactics"
+   ],
+   "ability_flags": 50,
+   "flags_no_reader": [
+    "private_neutral_droid_1",
+    "private_neutral_droid_2",
+    "private_neutral_droid_3",
+    "private_neutral_droid_4",
+    "private_neutral_master",
+    "private_neutral_novice",
+    "private_neutral_starships_1",
+    "private_neutral_starships_2",
+    "private_neutral_starships_3",
+    "private_neutral_starships_4"
+   ]
+  }
+ ]
+}
