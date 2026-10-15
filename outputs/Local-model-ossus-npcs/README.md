@@ -30,7 +30,9 @@ Five NPC templates for Ossus in 138–139 ABY: three of the native Ysanna, and t
    bodies stand in for now.
 2. Loot: the Janta and dark-Jedi loot groups stand in. The Ysanna want their own, without lightsaber parts; the One
    Sith get the raid tables.
-3. Names in the client (`npc_names.tsv`, the same step as the creatures in `Local-model-ossus-fauna/`).
+3. ~~Names in the client~~ **Staged (Claude, 15 Oct 03:5x):** `stage_npc_names.py` adds the five keys from
+   `npc_names.tsv` to `string/en/mob/creature_names.stf`, after the creatures' step. Tested on the fauna archive's strings:
+   five added, every existing key kept, a second run adds nothing. It joins the chain with the next archive build.
 4. Server wiring and spawns: Ysanna camps in Ossus's wilderness; One Sith only in the raid and at a few hidden sites.
 5. Levels: the One Sith are 140 and 265, raid-tier. Open-world Ossus ones would need lower variants.
 6. Examine texts: `detail.tsv` (15 Oct). The local model drafted them; Claude rewrote all five in neutral, in-era wording. They wait on the same step as the bodies: their own shared templates. The creatures' README, item 6, explains why.
