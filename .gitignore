@@ -107,3 +107,6 @@ outputs/Agent/local-research/state.json
 outputs/Bot-reports/tracker/
 # escort.py play data (combat near the player, for Creature Handler work)
 outputs/Bot-reports/play/
+# Input listener (owner's own keys and clicks while logged in, 48 h) and its config with the owner's character names
+outputs/Agent/listener/
+outputs/tools/listener/listener-config.json

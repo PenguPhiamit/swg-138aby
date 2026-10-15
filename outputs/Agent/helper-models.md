@@ -16,6 +16,10 @@ Defined in `outputs/.claude/agents/` (one file each; the `model:` line is the on
 | `swg-digest` | Haiku | no | Gate, overnight and bot reports, test output, live status: at most 12 lines with the numbers quoted exactly and the first error line of each failure. |
 | `swg-mechanic` | Sonnet | yes, outside `/opt/swg` only | A fully specified mechanical edit: renames, moves, table rows, the same small change across files. Stops and asks instead of guessing; commits only when told, with `git commit -o` and explicit paths. |
 
+A fifth helper, `swg-listener` (Haiku), runs the owner's input listener for the main chat: start, stop, pause, "what did
+I just do?" and notes. It only runs `tools/listener/listener.py` commands; the recorder itself is a plain script, not a model.
+See `tools/listener/README.md` for exactly when it listens and what it keeps.
+
 Call one with the Agent tool: `subagent_type: "swg-reader"`, and a prompt that names the question, the starting paths and the
 answer size you want. For a piece big enough to deserve its own conversation, start a side session with a cheaper `model`
 instead.
