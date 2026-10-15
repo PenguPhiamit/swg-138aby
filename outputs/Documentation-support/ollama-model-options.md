@@ -11,7 +11,7 @@ Research only. Nothing was pulled, downloaded, installed or changed, and no mode
 - **Tool use has the best-documented numbers of the candidates that fit.** The card says it "excels in tool calling" and reports BFCL-V4 66.1 and TAU2-Bench 79.1 (vendor numbers). Apache 2.0.
 - **Twice the source per topic.** `source_cap()` in [idle_research.py](../tools/agents/local/idle_research.py) gives 30,000 characters at 16K (today), 60,000 at 32K, 120,000 at 64K.
 
-**Not yet established:** no benchmark compares it with `qwen3:8b` on our tasks, and speed is unmeasured. The test in section 5 settles both. If it fails, `gemma4:12b` is the next choice. If neither beats `qwen3:8b`, keep the current model.
+**Not yet established:** no benchmark compares it with `qwen3:8b` on our tasks, and speed is unmeasured. The test in section 5 settles both. If it fails, `gemma4:12b` is the next choice. If neither beats `qwen3:8b`, keep the current model. Three models the owner and a peer session suggested were checked in section 3b: none beats the recommendation.
 
 ## 1. What runs now
 
@@ -71,12 +71,25 @@ Sizes and tags are from the Ollama library pages. Licence, context and tool call
 | **`devstral-small-2:24b`** (dense) | about 13–14 GB (third-party; not read from the library page) | 256K | Apache 2.0 | Card: tool calling supported; Ollama tag: tools | SWE-bench Verified 68.0%; SWE-bench Multilingual 55.7%; Terminal-Bench 2 22.5% | Dense, so every token touches all the weights and most run on CPU. Not for unattended runs here. |
 | *Current:* `qwen3:8b` | 5.2 GB | 32K (card); config max 40,960; 131K with YaRN | Apache 2.0 | Card: tool calling supported | Not in the fetched card text | Fits at 16K; borderline at 32K |
 
+## 3b. Owner-suggested candidates (added 15 Oct)
+
+Three models suggested after the table above. Same rules: research only, nothing downloaded. The GGUF sizes come from third-party listings and were not checked against the files. Per-token KV figures use the config values in section 2.
+
+| Model | Ollama or GGUF | Size and context | Licence | Tool calling | What the card says it is good at | Jobs it could take |
+|---|---|---|---|---|---|---|
+| `nvidia/Nemotron-Research-Reasoning-Qwen-1.5B` | No official tag. The Ollama `nemotron` page lists only 70B tags (2 of 17 shown). No community GGUF verified. Importing one means a download, which needs the owner's OK. | 1.5B by name; the card header says "2B params" (F32). Qwen2 architecture, 28 layers, 2 KV heads × 128 dim, so 28 KB per token (est.); config max positions 131,072; the card does not state a native context. | CC-BY-NC-4.0 (non-commercial). The card says "for research and development only". | Not stated | Math and reasoning (v1): AIME24 48.13, AIME25 33.33, GPQA 41.78, IFEval 66.02, Reasoning Gym 59.06. Code average 37.49 (v1). Trained with ProRL; fine-tuned from DeepSeek-R1-Distill-Qwen-1.5B. | Probably none on this PC. A reasoning-distilled model usually writes a long reasoning trace before its answer. That could use up `num_predict 1536` and break the JSON in `local_map.py`. Untested. Not for reading Core3 C++. |
+| `ozone-research/0x-lite` | No official tag. A GGUF by bartowski (`ozone-ai_0x-lite-GGUF`) is listed by a third-party aggregator. | 15B per the page (about 14.8B per another listing). Qwen2 architecture, 48 layers, 8 KV heads × 128 dim, so 192 KB per token (est.). Config max positions 32,768. Q4_K_M about 9.0 GB (third-party listing). | Apache 2.0 | Not stated | No benchmarks on the card. Listed uses are text completion, summaries, chat and education, and the card calls it suited to "resource-constrained settings". | None on this PC. At 32K it needs about 16 GB of VRAM (est.); at 8K about 12 GB (est.). |
+| `vanta-research/wraith-8b` | `vanta-research/wraith-8b:1.0` on Ollama, 4.9 GB, 128K per a search listing (publisher namespace, not the official library). A third-party GGUF (mradermacher, Q4_K_M) is 4.7 GB. | 8.03B dense Llama 3.1 fine-tune (QLoRA). 32 layers, 8 KV heads × 128 dim, so 128 KB per token (est.). Config max positions 131,072; the card recommends an 8,192 window. | Llama 3.1 Community Licence (commercial use allowed with attribution) | Not mentioned on the card | Math and STEM tutoring, logic and technical writing (self-reported): GSM8K 70.0 (base 51.0); TruthfulQA MC2 58.5; MMLU 66.4 (base 66.6); ARC-Challenge 50.0 (base 52.9); HellaSwag 70.0 (base 73.0). | Not a fit. Tool calling isn't stated, MMLU shows no gain, ARC and HellaSwag fall, and there is no code benchmark. Same memory class as `qwen3:8b` (about 10 GB at 32K, est.). |
+
+**What this means.** None of the three beats `qwen3.5:9b` for this PC. `0x-lite` does not fit the card at any useful window. `wraith-8b` has no tool-calling statement and no coding numbers. The Nemotron 1.5B is the only one small enough to be a cheap-job candidate, and only if a test shows it returns the short JSON answer `local_map.py` asks for. Its non-commercial licence is fine for private research but worth noting.
+
 ## 4. Why this order
 
 - **`qwen3.5:9b` over `gemma4:12b`.** They are close. `gemma4:12b` has the higher LiveCodeBench (72.0 against 65.6). `qwen3.5:9b` has the stronger tool-use evidence (TAU2 79.1 against 69.0, and a BFCL figure that `gemma4:12b`'s card doesn't give), and it leaves more room at 64K. `local_agent.py` leans on tool calls, so `qwen3.5:9b` goes first.
 - **`qwen3.6:35b` is not for now.** It has the best coding numbers in the table, but 23–24 GB will not stay on a 12 GB card. On this PC that means ~14 GB in RAM on 32 GB, the SWG client running, and the 15 Oct crash. Revisit it only after a memory test, or on a machine with more RAM.
 - **`gpt-oss:20b` is not better on the numbers we have.** It is the code default and already installed, and it runs partly on CPU at any window above 16K. Keep it installed for now; deleting it is an owner decision.
 - **`devstral-small-2:24b`** has a good tool number, but as a dense 24B it would be slow here (speed not measured).
+- **Owner-suggested models (section 3b)** do not beat the recommendation on card numbers, fit, or tool calling. Nemotron 1.5B is the only one worth a test for the cheapest chunk jobs.
 - **`qwen3:8b`** stays as the fallback. Its 16K window is what limits source, and it fits 32K only borderline.
 
 ## 5. Steps the owner would approve (none done)
@@ -130,5 +143,13 @@ Hugging Face model cards and configs (`config.json` read from each `raw/main` pa
 - https://huggingface.co/openai/gpt-oss-20b (config: https://huggingface.co/openai/gpt-oss-20b/raw/main/config.json)
 - https://huggingface.co/mistralai/Devstral-Small-2-24B-Instruct-2512
 - https://huggingface.co/Qwen/Qwen3-8B (config: https://huggingface.co/Qwen/Qwen3-8B/raw/main/config.json)
+
+Section 3b (owner-suggested):
+- https://huggingface.co/nvidia/Nemotron-Research-Reasoning-Qwen-1.5B (config: https://huggingface.co/nvidia/Nemotron-Research-Reasoning-Qwen-1.5B/raw/main/config.json)
+- https://ollama.com/library/nemotron (checked for a 1.5B tag)
+- https://huggingface.co/ozone-research/0x-lite (config: https://huggingface.co/ozone-research/0x-lite/raw/main/config.json)
+- https://www.promptlayer.com/models/ozone-ai0x-lite-gguf (third-party GGUF listing, not verified against the files)
+- https://huggingface.co/vanta-research/wraith-8b (config: https://huggingface.co/vanta-research/wraith-8b/raw/main/config.json)
+- https://ollama.com/vanta-research/wraith-8b/tags (seen in a search listing, not fetched directly)
 
 Local files: [ollama-model.txt](../tools/agents/local/ollama-model.txt), [ollama-ctx.txt](../tools/agents/local/ollama-ctx.txt), [REMOTE-OLLAMA.md](../tools/agents/local/REMOTE-OLLAMA.md), [idle_research.py](../tools/agents/local/idle_research.py), [local_agent.py](../tools/agents/local/local_agent.py), [local_map.py](../tools/agents/local/local_map.py), [memguard.py](../tools/agents/local/memguard.py), [ollama_url.py](../tools/agents/local/ollama_url.py).
