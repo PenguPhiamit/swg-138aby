@@ -17,6 +17,7 @@ class Bot:
         self.inbox, self.sent, self.moves, self.said, self.labels = [], [], [], [], []
         self.arriving = []   # events the server sends during the next idle
         self.now = {'zone': 'tatooine'}
+        self.planet = 'tatooine'
 
     def _read(self):
         pass
@@ -24,7 +25,7 @@ class Bot:
     def status(self):
         self.inbox = []
         return {'me': {'ham': {'health': 1000}, 'max_ham': {'health': 1000}, 'posture': 'upright'},
-                'x': 100.0, 'y': 90.0, 'self': self.oid, 'cell': 0}
+                'x': 100.0, 'y': 90.0, 'self': self.oid, 'cell': 0, 'planet': self.planet}
 
     def inspect(self, oid):
         return self.view.get(oid, {'ok': False})
@@ -140,6 +141,42 @@ class Escort(unittest.TestCase):
                 escort.who = real_who
         self.assertTrue(summary['counts']['Brask']['unstuck'] >= 1)
         self.assertIn('stuck: jumping to [name removed]', brask.labels)
+
+
+    def test_indoors_the_crew_walks_where_the_player_stood(self):
+        view = {OWNER: {'ok': True, 'x': 4.0, 'y': -2.0, 'z': -10.0, 'parent': 5996315,
+                        'creature': {'posture': 'upright', 'states': [], 'ham': {'health': 1000},
+                                     'max_ham': {'health': 1000}}}}
+        brask = Bot('Brask', 3, view)
+        brask.planet = 'endor'
+        brask.cells = []
+        real_move = brask.move
+
+        def move(x, y, z=None, cell=None, timeout=90):
+            brask.cells.append(cell)
+            return real_move(x, y, z, cell, timeout)
+
+        brask.move = move
+        with tempfile.TemporaryDirectory() as tmp:
+            escort.PLAY, real_who = Path(tmp), escort.who
+            escort.who = lambda owner: {'oid': OWNER, 'zone': 'endor', 'worldPositionX': -4660, 'worldPositionY': 4320}
+            try:
+                escort.escort(Group([brask]), '[name removed]', {'Brask': {'weapon': 'polearm'}}, minutes=.003)
+            finally:
+                escort.who = real_who
+        self.assertTrue(brask.moves)
+        self.assertEqual(set(brask.moves), {(4, -2)})          # the player's own spot, no formation offset
+        self.assertEqual(set(brask.cells), {5996315})
+
+
+class Trail(unittest.TestCase):
+    def test_a_point_some_metres_back_along_the_path(self):
+        trail = [{'cell': 1, 'x': 0.0, 'y': 0.0}, {'cell': 1, 'x': 2.0, 'y': 0.0}, {'cell': 1, 'x': 4.0, 'y': 0.0},
+                 {'cell': 2, 'x': 4.0, 'y': 3.0}, {'cell': 2, 'x': 4.0, 'y': 5.0}]
+        self.assertEqual(escort.trail_point(trail, 1.5)['y'], 3.0)    # 2 m back, within the newest cell
+        self.assertEqual(escort.trail_point(trail, 3.0)['x'], 2.0)    # the cell change counts as no distance
+        self.assertEqual(escort.trail_point(trail, 99)['x'], 0.0)
+        self.assertIsNone(escort.trail_point([], 2))
 
 
 if __name__ == '__main__':

@@ -38,6 +38,22 @@ OFFLINE_LIMIT = 300
 CATCHUP = 300          # out of sight and this far away (a speeder, a /teleport): jump to the player
 GOTO_PAUSE = 25        # seconds a zone change takes before the next jump may be tried
 STUCK_TRIES = 2        # follow walks that end where they began (outdoors) before the bot jumps to the player
+TRAIL_STEP = 0.75      # metres the player moves indoors before the trail gets a new point
+TRAIL_KEEP = 300
+SPACING = (2.0, 1.5)   # indoors, bot n stands 2 + 1.5 n metres back along the player's path
+
+
+def trail_point(trail, back):
+    """The point `back` metres behind the newest one, measured along the trail (cell changes count as no distance)."""
+    if not trail:
+        return None
+    gone = 0.0
+    for older, newer in zip(reversed(trail[:-1]), reversed(trail[1:])):
+        if older['cell'] == newer['cell']:
+            gone += math.hypot(newer['x'] - older['x'], newer['y'] - older['y'])
+        if gone >= back:
+            return older
+    return trail[0]
 
 
 def walk_time(row, x, y):
@@ -83,6 +99,7 @@ class Shared:
         self.threat = (None, 0.0)      # (attacker oid, when)
         self.table = {}                # crew first name -> self row
         self.player = {}               # the player's row for the healer
+        self.trail = []                # where the player stood indoors (cell, x, y, z), oldest first
         self.log = []
 
     def order(self, text, sender, now):
@@ -128,6 +145,7 @@ def mail(bot, to, subject, waypoints):
 def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
     shared = Shared(owner)
     slots = dict(zip([b.first for b in g.bots], formation or FORMATION))
+    order = {b.first: i for i, b in enumerate(g.bots)}   # single-file order indoors
     crew_oids = set()
     records = {b.first: crew_combat.new_record() for b in g.bots if b.first in roles}
     counts = {b.first: {'fights': 0, 'follows': 0, 'orders': 0, 'unstuck': 0} for b in g.bots if b.first in roles}
@@ -209,6 +227,23 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
 
     def follow(bot, row, player, zone_row):
         dx, dy = slots.get(bot.first, (0, -3))
+        if player and player['x'] is not None and player['cell']:
+            # Indoors there is no room for a formation: on 15 Oct the bots walked to slots 3-5 m off the player, which in
+            # the Death Watch bunker's chambers were inside the walls (positions up to 2.5 m off the floor mesh). They
+            # walk the player's own path instead, single file: every trail point is a spot the player stood on.
+            with shared.lock:
+                trail = list(shared.trail)
+            back = SPACING[0] + SPACING[1] * order.get(bot.first, 0)
+            spot = trail_point(trail, back) or {'cell': player['cell'], 'x': player['x'], 'y': player['y'], 'z': player['z']}
+            if (row.get('cell') or 0) == spot['cell'] and row.get('x') is not None and                     math.hypot(spot['x'] - row['x'], spot['y'] - row['y']) <= 1.0:
+                bot.doing(f'with {owner} (inside, {back:.0f} m back)')
+                return
+            bot.doing(f'following {owner} inside')
+            same = (row.get('cell') or 0) == spot['cell']
+            bot.move(spot['x'], spot['y'], spot.get('z') or 0.0, spot['cell'],
+                     timeout=walk_time(row, spot['x'], spot['y']) if same else 30)
+            counts[bot.first]['follows'] += 1
+            return
         if player and player['x'] is not None:
             spot = (player['x'] + dx, player['y'] + dy)
             same_frame = (player['cell'] or 0) == (row.get('cell') or 0)
@@ -291,6 +326,13 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
             if player:
                 with shared.lock:
                     shared.player = dict(player)
+                    last = shared.trail[-1] if shared.trail else None
+                    if player['cell'] and (last is None or last['cell'] != player['cell'] or
+                                           math.hypot(player['x'] - last['x'], player['y'] - last['y']) >= TRAIL_STEP):
+                        shared.trail.append({k: player[k] for k in ('cell', 'x', 'y', 'z')})
+                        del shared.trail[:-TRAIL_KEEP]
+                    elif not player['cell'] and shared.trail:
+                        shared.trail.clear()   # outdoors again: the next building starts a new trail
                 if bot is g.leader and time.time() - flushed['snap'] >= 10:
                     flushed['snap'] = time.time()
                     note_play({'kind': 'player', 'health': round(player['health'], 3), 'fighting': player['fighting'],
