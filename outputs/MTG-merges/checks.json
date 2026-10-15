@@ -1,0 +1,142 @@
+{
+ "built": "2026-10-15",
+ "archive": "local_planets-mtgmerge.tre",
+ "sha256": "1315dbb4c9f39250bfb7030441483090c2b3bd9c6ef006795bc9ad244c7b74aa",
+ "bytes": 3806301,
+ "entries": 60,
+ "reference": {
+  "file": "Local-model-ossus-fauna/local_planets-fauna.tre",
+  "sha256_expected": "6556537d589c411f9b0c1697c2a4f5bdd792800f96d0ee517d38cd3cd3dcb072",
+  "sha256_ok": true
+ },
+ "against_fauna": {
+  "changed": [],
+  "new_entries": [
+   "datatables/mount/logical_saddle_name_map.iff",
+   "datatables/mount/rider_pose_map.iff",
+   "datatables/mount/saddle_appearance_map.iff",
+   "datatables/mount/valid_scale_range.iff",
+   "string/en/monster_name.stf"
+  ],
+  "missing_entries": []
+ },
+ "merged": {
+  "datatables/mount/logical_saddle_name_map.iff": {
+   "added": 48,
+   "from": {
+    "mtg_patch_022.tre": 48,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [
+    [
+     "appearance/pv_clone_barc_speeder.sat"
+    ],
+    [
+     "appearance/light_bending_barc_speeder.sat"
+    ],
+    [
+     "appearance/pv_clone_barc_speeder_rebel.sat"
+    ],
+    [
+     "appearance/pv_clone_barc_speeder_imperial.sat"
+    ]
+   ],
+   "sha256": "586b264cd2844350b6449545bf88454d090889174d3aa9dcc1e45b825f264c77"
+  },
+  "datatables/mount/saddle_appearance_map.iff": {
+   "added": 44,
+   "from": {
+    "mtg_patch_022.tre": 44,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [
+    [
+     "lookup/clone_barc_speeder",
+     1
+    ],
+    [
+     "lookup/clone_barc_speeder_rebel",
+     1
+    ],
+    [
+     "lookup/clone_barc_speeder_imperial",
+     1
+    ],
+    [
+     "lookup/barc_speeder_light_bend",
+     1
+    ]
+   ],
+   "sha256": "7c47374f341e8879a2e11c5690a6715d796a01ac6f7dc2a04176b1414b06ce25"
+  },
+  "datatables/mount/rider_pose_map.iff": {
+   "added": 54,
+   "from": {
+    "mtg_patch_022.tre": 54,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [
+    [
+     "appearance/clone_barc_speeder.apt",
+     1
+    ],
+    [
+     "appearance/pvp_rebel_barc.apt",
+     1
+    ],
+    [
+     "appearance/pvp_imperial_barc.apt",
+     1
+    ],
+    [
+     "appearance/light_bending_barc_speeder.apt",
+     1
+    ]
+   ],
+   "sha256": "fc41eaac4ba1bf08beb4a17cf41964ed2f638511074a7e0d4aeb16bae3c2af07"
+  },
+  "datatables/mount/valid_scale_range.iff": {
+   "added": 58,
+   "from": {
+    "mtg_patch_022.tre": 58,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [
+    [
+     "appearance/pv_clone_barc_speeder.sat",
+     1
+    ],
+    [
+     "appearance/light_bending_barc_speeder.sat",
+     1
+    ],
+    [
+     "appearance/pv_clone_barc_speeder_imperial.sat",
+     1
+    ],
+    [
+     "appearance/pv_clone_barc_speeder_rebel.sat",
+     1
+    ]
+   ],
+   "sha256": "ba5644836231b5d4df5510e794a1617446945230e15dcdfe36e905b2056f76ae"
+  },
+  "string/en/monster_name.stf": {
+   "added": 183,
+   "from": {
+    "mtg_patch_022.tre": 183,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [
+    "barc_mini",
+    "barc_speeder",
+    "barc_speeder_imperial",
+    "barc_speeder_rebel",
+    "light_bending_barc_n"
+   ],
+   "sha256": "2d7ee372a1c2ca31fbd780f60c09aa89635e58c3007038da903efa14ab292441"
+  }
+ },
+ "idempotent": true,
+ "ok": true
+}
