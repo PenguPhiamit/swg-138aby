@@ -110,3 +110,5 @@ outputs/Bot-reports/play/
 # Input listener (owner's own keys and clicks while logged in, 48 h) and its config with the owner's character names
 outputs/Agent/listener/
 outputs/tools/listener/listener-config.json
+# navmap.py floor plans (derived from the client files)
+outputs/Bot-reports/navmaps/
