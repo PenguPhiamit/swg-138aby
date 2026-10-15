@@ -5,7 +5,7 @@ heal, status, dismiss), and a play-data log of the combat around the player (Bot
 
 Who: ESCORT_OWNER, else the group's "escort_owner" in groups.json. How long: ESCORT_MINUTES (default 120); give
 squad.py --round-minutes a few minutes more. Before setting off: templates and gear as in forn-crew.py, and everyone
-restored. The crew waits up to 15 minutes for the player to log in.
+restored. The crew waits up to 15 minutes (ESCORT_WAIT) for the player to log in.
 """
 import importlib.util
 import json
@@ -42,13 +42,14 @@ def run(g):
         if not any('mandalorian_helmet' in name for name in carried):
             bot.slash('agentGear', 'mandohelmet', wait=0)   # the Death Watch mines poison anyone without it (dev 425e8590)
             bot.wait_for(lambda e: str(e.get('text', '')).startswith('[agentgear]'), 8)
-    for _ in range(60):
+    wait = float(os.environ.get('ESCORT_WAIT', 15))   # minutes; longer when started while the player is offline
+    for _ in range(int(wait * 4)):
         if escort.who(owner):
             break
         for bot in g.bots:
             bot.doing(f'waiting for {owner} to log in')
         g.leader.idle(15)
-    if not g.check(f'{owner} is online', escort.who(owner), 'waited 15 minutes'):
+    if not g.check(f'{owner} is online', escort.who(owner), f'waited {wait:.0f} minutes'):
         return
     if os.environ.get('ESCORT_MAIL', '1') != '0':   # ESCORT_MAIL=0 when restarting the escort mid-session
         sent = escort.mail(g.leader, owner, 'Dungeon waypoints', DUNGEONS)
