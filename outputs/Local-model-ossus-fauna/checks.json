@@ -1,0 +1,34 @@
+{
+ "built": "2026-10-15",
+ "archive": "local_planets-fauna.tre",
+ "sha256": "6556537d589c411f9b0c1697c2a4f5bdd792800f96d0ee517d38cd3cd3dcb072",
+ "bytes": 3785512,
+ "entries": 55,
+ "reference": {
+  "file": "Fable-resources3/names/local_planets-names.tre",
+  "sha256_expected": "39a89e6c1bfdf72811e6b68be035d0228542f6dd9886c2c0ca1438a780d977db",
+  "sha256_ok": true
+ },
+ "against_names": {
+  "changed": [
+   "string/en/mob/creature_names.stf"
+  ],
+  "new_entries": [],
+  "missing_entries": []
+ },
+ "creature_names": {
+  "keys_before": 2877,
+  "keys_after": 2883,
+  "added": {
+   "ossus_mud_yak": "a mud yak",
+   "ossus_kirruk": "a kirruk",
+   "ossus_gokob": "a gokob",
+   "ossus_tree_frog": "an Ossus tree frog",
+   "ossus_tribis": "a tribis",
+   "ossus_kaddyr_bug": "a kaddyr bug"
+  },
+  "existing_kept": true,
+  "idempotent": true
+ },
+ "ok": true
+}

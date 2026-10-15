@@ -32,8 +32,10 @@ writing.
 
 **Not done yet** (before they can appear on Ossus):
 
-1. Names for the client: the six `@mob/creature_names:<var>` keys, from `creature_names.tsv`, go into
-   `string/en/mob/creature_names.stf` in the test archive.
+1. ~~Names for the client~~ **Staged (Claude, 15 Oct 01:5x):** `stage_creature_names.py` adds the six keys to
+   `string/en/mob/creature_names.stf` the stock way ("a mud yak", "an Ossus tree frog"). `build_fauna_archive.py` builds
+   `local_planets-fauna.tre` (sha256 `6556537d589c411f9b0c1697c2a4f5bdd792800f96d0ee517d38cd3cd3dcb072`, gitignored) and checks it against the installed names archive 39a89e6c:
+   only that string file changes, by the six keys, with every existing key kept (`checks.json`). Install together with C30.
 2. Server includes: a `mobile/ossus/` folder with `serverobjects.lua`, as for the other planets.
 3. Spawn groups and lairs in Ossus's regions (swamps for the mud yak, forest canopy for the gokob and tree frog).
 4. Levels for Ossus. They are the bases' levels for now: 19, 19, 10, 6, 10, 10.
