@@ -62,7 +62,7 @@
     },
     "Forn": {
       "focus": "Dungeon crew (owner, 15 Oct: 'give me a crew and we can test their combat more and their movement and mapping'): five full 250-point pre-CU templates (Documentation-support/dungeon-builds.md). Forn leads as Squad Leader/Rifleman; Brask tanks as Fencer/Pikeman/Medic; Ressa is Teras Kasi/Fencer/Medic; Dask is Commando/Rifleman; Mirren heals as Doctor/Combat Medic. Main job: escort the owner (owner: 'the dungeon crew was meant to run with me'): forn-escort.py with tools/bots/escort.py (follow, fight the owner's target, heal, chat orders, play data). Also combat drills (forn-crew.py) and the dungeons: Warren, Geonosian lab, Death Watch bunker, Corellian corvette.",
-      "escort_owner": "[name removed]",
+      "escort_owner": "Benny",
       "members": [
         {"account": "forn1", "name": "Forn Halcyr", "race": "human_male", "profession": "combat_marksman"},
         {"account": "forn2", "name": "Brask Tolen", "race": "zabrak_male", "profession": "combat_brawler"},
