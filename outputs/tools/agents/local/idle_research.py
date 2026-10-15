@@ -8,7 +8,8 @@ Inside Debian as swgemu; swg-idle-research.timer runs `check` every 5 minutes:
 
 Idle means all of: no /api/chat or /api/generate request in Ollama's log for 10 minutes (this runner's own last topic
 doesn't count, so topics follow each other while nobody else needs the model); the GPU below 30 %; none of the owner's
-SWG clients running; no Agent/local-research/STOP file.
+SWG clients running; no Agent/local-research/STOP file; and (15 Oct) at least 8 GB of Windows commit headroom, because
+Ollama's prompt cache once grew by ~15 GB in 25 requests (memguard.py).
 
 Where Ollama runs comes from ollama_url.py (OLLAMA_URL, then ollama-url.txt, then 127.0.0.1). For a server on another
 PC (REMOTE-OLLAMA.md) the log, GPU and client checks are about this PC and are skipped; instead each timer run asks
@@ -20,6 +21,10 @@ Each topic in Agent/local-research/queue.json names Core3-dev sources (MMOCoreOR
 Agent/local-research/<id>/src/, and local_agent.py (file tools inside that folder only: no shell, no network) writes
 <id>/report.md. Reports are notes: Claude or ChatGPT checks them against the source before a test relies on them.
 Nothing here touches the server, the bots or the board. Anyone may add an "open" topic to the queue.
+
+A topic with "kind": "map" and "job": <name> is a chunk job instead (local_jobs.py names them: proofread, bot-gaps):
+local_jobs.py prepares <id>/input.jsonl, local_map.py asks the model about one chunk at a time (yielding to the owner's
+client and to low memory; a paused topic stays open and resumes), and local_jobs.py writes <id>/report.md.
 """
 import fcntl
 import hashlib
@@ -36,6 +41,7 @@ from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent))
+import memguard
 import ollama_url
 
 H = Path('/mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h')
@@ -43,6 +49,8 @@ BASE = H / 'outputs' / 'Agent' / 'local-research'
 QUEUE, LOG, STATE, STOP = BASE / 'queue.json', BASE / 'LOG.md', BASE / 'state.json', BASE / 'STOP'
 CORE3 = Path('/opt/swg/Core3-dev/MMOCoreORB')
 AGENT = H / 'outputs' / 'tools' / 'agents' / 'local' / 'local_agent.py'
+MAP, JOBS = AGENT.with_name('local_map.py'), AGENT.with_name('local_jobs.py')
+START_HEADROOM_GB = 8.0   # don't start below this: the model and its cache need room (memguard.py)
 OLLAMA_LOG = Path('/mnt/c/Users/Pengw/AppData/Local/Ollama/server.log')
 NVIDIA_SMI = '/usr/lib/wsl/lib/nvidia-smi'  # WSL's GPU tools; not on a systemd service's PATH
 IDLE_S, OWN_SLACK_S, GPU_BUSY = 600, 90, 30
@@ -264,6 +272,9 @@ def blockers(record=False):
     client = owner_client()
     if client is None or client:
         why.append("an owner's SWG client is running" if client else 'tasklist.exe failed')
+    room = memguard.commit_headroom_gb()
+    if room is not None and room < START_HEADROOM_GB:
+        why.append(f'Windows commit headroom {room:.1f} GB (needs {START_HEADROOM_GB:.0f} GB)')
     return why
 
 
@@ -296,7 +307,70 @@ def copy_sources(topic, src, cap=SOURCE_CAP):
     return copied, skipped
 
 
+def run_map(topic):
+    """A chunk job: local_jobs.py prepares the input, local_map.py asks the model chunk by chunk, local_jobs.py writes
+    report.md. A run paused by the owner's client or low memory leaves the topic open; it resumes where it stopped."""
+    ws = BASE / topic['id']
+    ws.mkdir(parents=True, exist_ok=True)
+    job, started, steps, code = topic.get('job', ''), time.time(), [], 1
+    base = remote_base()
+    env = dict(os.environ, OLLAMA_URL=base) if base else None
+    try:
+        prep = subprocess.run([sys.executable, str(JOBS), 'prepare', job, str(ws)], capture_output=True, text=True,
+                              errors='replace', timeout=1800)
+        steps.append(prep.stdout + prep.stderr)
+        if prep.returncode == 0:
+            mapped = subprocess.run([sys.executable, str(MAP), '--input', str(ws / 'input.jsonl'), '--instruction',
+                                     str(ws / 'instruction.txt'), '--out', str(ws), '--yield-to-owner'],
+                                    capture_output=True, text=True, errors='replace', timeout=RUN_LIMIT_S, env=env)
+            steps.append(mapped.stdout + mapped.stderr)
+            code = mapped.returncode
+    except subprocess.TimeoutExpired:
+        code = 3
+        steps.append(f'stopped after {RUN_LIMIT_S} s; resumes next time')
+    output = '\n'.join(s.strip() for s in steps if s.strip())
+    tries = topic.get('tries', 0) + 1
+    # a few chunks that fail every time shouldn't hold the report back for ever
+    finished = code == 0 or (code == 3 and 'failed; rerun' in output and tries >= 3)
+    if finished:
+        made = subprocess.run([sys.executable, str(JOBS), 'report', job, str(ws)], capture_output=True, text=True,
+                              errors='replace', timeout=600)
+        output += '\n' + (made.stdout + made.stderr).strip()
+        finished = made.returncode == 0
+        code = 0 if finished else 1
+    if base:   # map-output.txt is tracked in git; the LAN address is not
+        output = output.replace(base, '<ollama-url>').replace(ollama_url.describe(base).rsplit(':', 1)[0], '<ollama-host>')
+    (ws / 'map-output.txt').write_text(output + '\n', encoding='utf-8')
+    status = 'review' if finished else 'open' if code == 3 else 'failed'
+    minutes = round((time.time() - started) / 60)
+    queue = load(QUEUE, {'topics': []})   # re-read: someone may have added topics meanwhile
+    for t in queue['topics']:
+        if t['id'] == topic['id']:
+            t.update(status=status, minutes=t.get('minutes', 0) + minutes, tries=tries,
+                     **({'finished': now()} if finished else {}))
+    save(QUEUE, queue)
+    state = load(STATE, {})
+    if base:   # as in run(): our own use doesn't count against the idle window
+        try:
+            models, _ = fetch_ps(base)
+            state['remote'] = {'key': remote_key(base), 'models': models, 'since': time.time() - IDLE_S,
+                               'seen': time.time()} if None not in models.values() else None
+        except (OSError, ValueError):
+            state['remote'] = None
+        if state['remote'] is None:
+            state.pop('remote')
+    state.update(last_finish=time.time(), last_topic=topic['id'])
+    save(STATE, state)
+    last = output.strip().splitlines()[-1][:160] if output.strip() else 'no output'
+    with LOG.open('a', encoding='utf-8', newline='') as f:
+        f.write(f'- {now()} {topic["id"]} ({job}): ' + {'review': 'report written', 'open': 'paused, resumes when idle',
+                                                         'failed': 'failed'}[status] + f' ({last}), {minutes} min\n')
+    return status != 'failed'
+
+
 def run(topic):
+    if topic.get('kind') == 'map':
+        return run_map(topic)
     ws = BASE / topic['id']
     src = ws / 'src'
     shutil.rmtree(src, ignore_errors=True)

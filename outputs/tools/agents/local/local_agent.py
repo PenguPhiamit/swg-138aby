@@ -15,6 +15,7 @@ and OLLAMA_CTX / ollama-ctx.txt; --model and --ctx override them.
 import argparse, json, pathlib, sys, time, urllib.request
 
 sys.path.append(str(pathlib.Path(__file__).resolve().parent))  # python -I leaves the script's own folder off sys.path
+import memguard
 import ollama_url
 
 READ_CAP = 20000  # characters per read_file call; the model pages with offset
@@ -109,7 +110,27 @@ def main():
     log = (root / 'agent-log.jsonl').open('a', encoding='utf-8')
     messages = [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': args.task}]
     started = time.monotonic()
+    try:
+        return loop(args, root, protected, log, messages, model, ctx, base, started)
+    finally:
+        if ollama_url.is_local(base):
+            memguard.unload(base, model)   # frees the model and its prompt cache for whoever needs the PC next
+
+
+def loop(args, root, protected, log, messages, model, ctx, base, started):
+    local = ollama_url.is_local(base)
     for step in range(1, args.max_steps + 1):
+        if local:   # memguard.py: the prompt cache grows with every request; unloading empties it
+            if step > 1 and (step - 1) % 5 == 0:
+                memguard.unload(base, model)
+            room = memguard.commit_headroom_gb()
+            if room is not None and room < memguard.MIN_HEADROOM_GB:
+                memguard.unload(base, model)
+                time.sleep(5)
+                room = memguard.commit_headroom_gb()
+                if room is not None and room < memguard.MIN_HEADROOM_GB:
+                    print(f'stopped: Windows commit headroom {room:.1f} GB after {step - 1} steps')
+                    return 3
         reply = chat(model, messages, ctx, base)
         message = reply.get('message', {})
         log.write(json.dumps({'step': step, 'reply': message, 'eval_count': reply.get('eval_count'),

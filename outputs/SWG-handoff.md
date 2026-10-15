@@ -263,6 +263,14 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-15 11:40 Claude (side session): names sweep second half done; local-model background jobs
+
+- **Names sweep, second half (owner asked for Haiku and the local model; GPT's C36 put on hold, `f0584c6`):** all 942 remaining chunks read. Local model qwen3:8b on every chunk (937, plus 2 read by Claude), two Haiku agents on the 162 prose chunks, and a pattern pass for URL usernames and e-mails. **152 new candidates** beyond the first half's list, 16 found by two methods. They are in `work/names-sweep/new-names.json` (git-ignored, local only) for the owner's decisions before going public.
+- **The local model is a drafter, not a checker:** on the same prose chunks it found 41% of what Haiku found. Use it for drafts and first passes that something stronger checks, not for privacy, reviews or research a test relies on.
+- **Memory cause found:** Ollama keeps each request's KV state in a host-RAM prompt cache (about 0.5 GB per 4K-token request with qwen3:8b). It grew commit by ~15 GB in 25 requests, very likely what crashed the PC at 07:31. New `tools/agents/local/memguard.py`: the local-model scripts unload the model every 5 requests (empties the cache), pause under 6 GB of commit headroom, and idle research won't start under 8 GB. On this PC, `ollama-model.txt` = qwen3:8b and `ollama-ctx.txt` = 16384 (per-PC, git-ignored).
+- **Chunk jobs for idle research:** queue topics of `"kind": "map"` run `local_jobs.py` (input and report) and `local_map.py` (one request per chunk, resumable, yields to the owner's client and to low memory). Queued: `bot-gap-list` (192 de-duplicated BLOCKED/NO_EFFECT/FAIL notes sorted into gaps) and `proofread-player-text` (488 strings: our archive strings that differ from stock and MTG, plus messages added on dev since sandbox). Reports land in `Agent/local-research/<id>/report.md` as drafts. **The STOP file is removed**, so idle research runs again when the owner's client is closed; create `Agent/local-research/STOP` to pause it.
+- Tests: `test_local_map.py` 10/10 (Windows and WSL); `test_ollama_url.py` 61/61 (one expectation changed: local_agent now unloads the model when it finishes). A 2-chunk live run from WSL worked (lowest headroom 8.6 GB). The full jobs run when the PC is idle; untested end to end through the timer.
+
 ### 2026-10-15 11:25 Claude: the crew plays with the owner (Benny); planet jumps, waypoint mail, indoor following, floor plans
 
 - **Escort live with the owner** (as Benny: Master CH + Rifleman + Marksman, `Documentation-support/benny-ch-rifleman-macros.md`, server-best gear macros). Owner chats with Claude in game: `/tell Esk` (Claude watches Esk's log).

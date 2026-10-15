@@ -341,6 +341,9 @@ class IdleResearchTests(unittest.TestCase):
         self.addCleanup(self.fake.stop)
         isolate(self, root)    # nothing from the real environment or the real folder's ollama-*.txt files
         os.environ['OLLAMA_URL'] = self.fake.base
+        patcher = mock.patch.object(ir.memguard, 'commit_headroom_gb', return_value=None)   # never this PC's memory
+        patcher.start()
+        self.addCleanup(patcher.stop)
 
     def as_other_pc(self):
         """Treat the fake (which is on 127.0.0.1) as a server on another PC, and fail if a local check runs."""
@@ -348,6 +351,10 @@ class IdleResearchTests(unittest.TestCase):
             patcher = mock.patch.object(ir, name, side_effect=AssertionError(f'{name} is about this PC'))
             patcher.start()
             self.addCleanup(patcher.stop)
+        patcher = mock.patch.object(ir.memguard, 'commit_headroom_gb',
+                                    side_effect=AssertionError('commit_headroom_gb is about this PC'))
+        patcher.start()
+        self.addCleanup(patcher.stop)
         patcher = mock.patch.object(ollama_url, 'is_local', lambda base: False)
         patcher.start()
         self.addCleanup(patcher.stop)
@@ -361,11 +368,17 @@ class IdleResearchTests(unittest.TestCase):
         with (self.root / 'server.log').open('a') as f:
             f.write(f'[GIN] {stamp} | 200 |  1m2s |  127.0.0.1 | POST     "/api/chat"\n')
 
-    def local_checks(self, gpu=0, client=False):
-        for name, value in (('gpu_busy', gpu), ('owner_client', client)):
-            patcher = mock.patch.object(ir, name, return_value=value)
+    def local_checks(self, gpu=0, client=False, headroom=None):
+        for target, name, value in ((ir, 'gpu_busy', gpu), (ir, 'owner_client', client),
+                                    (ir.memguard, 'commit_headroom_gb', headroom)):   # None: can't be read
+            patcher = mock.patch.object(target, name, return_value=value)
             patcher.start()
             self.addCleanup(patcher.stop)
+
+    def test_this_pc_low_memory_is_a_blocker(self):
+        self.local_checks(headroom=5.5)
+        self.log_request(3600)
+        self.assertEqual(ir.blockers(), ['Windows commit headroom 5.5 GB (needs 8 GB)'])
 
     def test_this_pc_idle_when_the_log_is_quiet(self):
         self.local_checks()
@@ -599,6 +612,9 @@ class LocalAgentTests(unittest.TestCase):
         self.dir = tempfile.TemporaryDirectory()
         self.addCleanup(self.dir.cleanup)
         isolate(self, self.dir.name)
+        headroom = mock.patch.object(local_agent.memguard, 'commit_headroom_gb', return_value=None)  # not this PC's
+        headroom.start()
+        self.addCleanup(headroom.stop)
 
     def run_main(self, *argv, env=None):
         out = io.StringIO()
@@ -643,7 +659,17 @@ class LocalAgentTests(unittest.TestCase):
 
     def test_variable_is_used_without_the_flag(self):
         code, out = self.run_main(env={'OLLAMA_URL': self.fake.base})
-        self.assertEqual((code, len(self.fake.requests)), (0, 1))
+        # one chat, then (Ollama on this PC) the unload that empties the prompt cache (memguard.py)
+        self.assertEqual((code, len(self.fake.requests)), (0, 2))
+        self.assertEqual((self.fake.requests[1][2]['keep_alive'], self.fake.requests[1][2]['messages']), (0, []))
+
+    def test_low_memory_stops_before_a_chat(self):
+        with mock.patch.object(local_agent.memguard, 'commit_headroom_gb', return_value=2.0), \
+                mock.patch.object(local_agent.time, 'sleep'):
+            code, out = self.run_main(env={'OLLAMA_URL': self.fake.base})
+        self.assertEqual(code, 3)
+        self.assertIn('commit headroom 2.0 GB', out)
+        self.assertTrue(all(r[2]['messages'] == [] for r in self.fake.requests))   # unloads only, no chat
 
     def test_a_bad_address_stops_before_any_request(self):
         with contextlib.redirect_stderr(io.StringIO()) as err, self.assertRaises(SystemExit):

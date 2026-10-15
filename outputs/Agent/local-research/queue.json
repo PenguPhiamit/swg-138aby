@@ -1,168 +1,186 @@
 {
-  "about": "Research topics for the local model (tools/agents/local/idle_research.py), taken in order whenever Ollama has been idle 10+ minutes. Status: open, running, review (report written; Claude or ChatGPT checks it against the source), done, failed. Sources: Core3-dev paths relative to MMOCoreORB, or h: paths in the project, each with an optional :START-END line range; about 120,000 characters per topic at most. Anyone may add an open topic.",
-  "topics": [
-    {
-      "id": "cure-poison",
-      "title": "Curing poison with a cure pack",
-      "added_by": "Claude, 15 Oct (class check: curePoison NO_EFFECT)",
-      "status": "review",
-      "question": "How does curing poison work (the curePoison command with a cure pack)? What must be true for it to have an effect (the target poisoned, skill, range, pack type), what does the player see, and how can a test first poison a target so the cure can be checked? The class-check bot test reports curePoison as NO_EFFECT: 'verified setup; no error, message or observable result'.",
-      "sources": [
-        "src/server/zone/objects/creature/commands/CurePoisonCommand.h",
-        "src/server/zone/objects/creature/commands/CurePackCommand.h",
-        "src/server/zone/objects/tangible/pharmaceutical/CurePack.idl",
-        "src/server/zone/objects/tangible/pharmaceutical/CurePackImplementation.cpp",
-        "src/server/zone/objects/tangible/pharmaceutical/DotPack.idl",
-        "src/server/zone/objects/tangible/pharmaceutical/DotPackImplementation.cpp"
-      ],
-      "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
-    },
-    {
-      "id": "doctor-enhance-wounds",
-      "title": "Doctor enhancement buffs and wound healing",
-      "added_by": "Claude, 15 Oct (Aurek's doctor-buff scenario)",
-      "status": "review",
-      "question": "How do a doctor's enhancement buffs (healenhance) and wound healing (healwound with a wound pack) work: requirements, range, skill mods, how buff strength and duration are worked out, what the patient sees, and what stops them working? Compare with what aurek-doctor-buffs.py checks and say what it should check instead or as well.",
-      "sources": [
-        "src/server/zone/objects/creature/commands/HealEnhanceCommand.h",
-        "src/server/zone/objects/creature/commands/HealWoundCommand.h",
-        "src/server/zone/objects/tangible/pharmaceutical/WoundPack.idl",
-        "src/server/zone/objects/tangible/pharmaceutical/WoundPackImplementation.cpp",
-        "h:outputs/tools/bots/scenarios/aurek-doctor-buffs.py"
-      ],
-      "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
-    },
-    {
-      "id": "entertainer-buffs",
-      "title": "Entertainer performance and buffs",
-      "added_by": "Claude, 15 Oct (Dorn's social scenario)",
-      "status": "review",
-      "question": "How do dancing and playing music give buffs and remove battle fatigue/mind wounds: who must watch or listen and for how long, what flourishes and skill mods change, and what the audience and performer see? Compare with what dorn-social.py checks and say what a test should observe to prove a buff was given.",
-      "sources": [
-        "src/server/zone/managers/skill/PerformanceManager.cpp",
-        "src/server/zone/objects/player/sessions/EntertainingSessionImplementation.cpp",
-        "h:outputs/tools/bots/scenarios/dorn-social.py"
-      ],
-      "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
-    },
-    {
-      "id": "survey-sample",
-      "title": "Surveying and sampling resources",
-      "added_by": "Claude, 15 Oct (Besh's gathering scenario)",
-      "status": "review",
-      "question": "How do surveying and sampling work: survey tool range and resolution settings, what a survey returns, the sampling loop (timing, action cost, success chance, concentration, when it stops), and the messages the player sees? Compare with what besh-harvest.py does and list the observable checks a gathering test should make.",
-      "sources": [
-        "src/server/zone/objects/player/sessions/survey/SurveySessionImplementation.cpp",
-        "src/server/zone/managers/resource/resourcespawner/SampleTask.h",
-        "src/server/zone/objects/tangible/tool/SurveyToolImplementation.cpp",
-        "h:outputs/tools/bots/scenarios/besh-harvest.py"
-      ],
-      "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
-    },
-    {
-      "id": "creature-harvest",
-      "title": "Harvesting meat, hide and bone from creatures",
-      "added_by": "Claude, 15 Oct (Besh's gathering scenario)",
-      "status": "review",
-      "question": "How does harvesting a dead creature work: who may harvest (killer, group), range, which creatures give which resource and how much, skill effects, how often a corpse can be harvested, and what the player sees? List what a test must set up and observe.",
-      "sources": [
-        "src/server/zone/managers/creature/CreatureManagerImplementation.cpp:900-1075",
-        "h:outputs/tools/bots/scenarios/besh-harvest.py"
-      ],
-      "started": "2026-10-15 06:49",
-      "finished": "2026-10-15 06:52",
-      "minutes": 2,
-      "skipped": null
-    },
-    {
-      "id": "travel-shuttles",
-      "title": "Travel tickets and shuttles",
-      "added_by": "Claude, 15 Oct (Cresh's travel checks; shuttle timing)",
-      "status": "review",
-      "question": "How does travel work: buying a ticket at a travel terminal, the shuttle's landing and departure cycle (timings and config settings), boarding with the ticket collector (range, shuttle state, which ticket is accepted), and what the traveller sees at each step? List the conditions that make boarding fail and how a test can tell them apart.",
-      "sources": [
-        "src/server/zone/objects/tangible/terminal/travel/TravelTerminalImplementation.cpp",
-        "src/server/zone/objects/tangible/terminal/ticketcollector/TicketCollectorImplementation.cpp",
-        "src/server/zone/objects/building/tasks/ShuttleDepartureTask.h",
-        "src/server/zone/managers/planet/PlanetManagerImplementation.cpp:200-250",
-        "src/server/zone/managers/planet/PlanetManagerImplementation.cpp:1460-1620"
-      ],
-      "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
-    },
-    {
-      "id": "missions",
-      "title": "Mission terminals and mission completion",
-      "added_by": "Claude, 15 Oct (Cresh's mission scenario)",
-      "status": "review",
-      "question": "How are missions generated and completed: which terminal gives which mission types, how difficulty, distance and reward are chosen, how many missions a player may hold, and what completes or fails each type (destroy, deliver, survey, entertainer, crafting)? Compare with cresh-missions.py and list the checks a mission test should make.",
-      "sources": [
-        "src/server/zone/managers/mission/MissionManagerImplementation.cpp",
-        "h:outputs/tools/bots/scenarios/cresh-missions.py"
-      ],
-      "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
-    },
-    {
-      "id": "crafting",
-      "title": "Crafting end to end: session stages, assembly, experimentation, prototype",
-      "added_by": "owner, 15 Oct 09:00",
-      "status": "review",
-      "question": "See the report brief in the Claude session of 15 Oct.",
-      "sources": [],
-      "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
-    },
-    {
-      "id": "resources",
-      "title": "Resources: spawning, shifts, concentration maps, harvesters, stacking",
-      "added_by": "owner, 15 Oct 09:00",
-      "status": "review",
-      "question": "See the report brief in the Claude session of 15 Oct.",
-      "sources": [],
-      "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
-    },
-    {
-      "id": "quests",
-      "title": "Quests: screenplays, theme parks, The Beginning step by step",
-      "added_by": "Claude (read \"OQ\" as quests; kept), 15 Oct 09:00",
-      "status": "review",
-      "question": "See the report brief in the Claude session of 15 Oct.",
-      "sources": [],
-      "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
-    },
-    {
-      "id": "factions",
-      "title": "Factions and the GCW: joining, standing, status, TEF, attackability",
-      "added_by": "owner, 15 Oct 09:00",
-      "status": "review",
-      "question": "See the report brief in the Claude session of 15 Oct.",
-      "sources": [],
-      "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
-    },
-    {
-      "id": "resource-quality",
-      "title": "Resource stats (OQ and the rest) in crafting results, with a worked DL44 example",
-      "added_by": "owner (\"OQ\" = overall quality), 15 Oct 09:00",
-      "status": "review",
-      "question": "See the report brief in the Claude session of 15 Oct.",
-      "sources": [],
-      "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
-    },
-    {
-      "id": "ham",
-      "title": "HAM pools: regeneration, wounds, battle fatigue, encumbrance, incapacitation",
-      "added_by": "owner, 15 Oct 09:00",
-      "status": "review",
-      "question": "See the report brief in the Claude session of 15 Oct.",
-      "sources": [],
-      "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
-    },
-    {
-      "id": "profession-gaps",
-      "title": "Professions and abilities that are missing or stubbed on the server",
-      "added_by": "owner, 15 Oct 09:00",
-      "status": "review",
-      "question": "See the report brief in the Claude session of 15 Oct.",
-      "sources": [],
-      "researched_by": "Claude Haiku agent, finished by Claude Opus after a resume (15 Oct 09:05)"
-    }
-  ]
+ "about": "Research topics for the local model (tools/agents/local/idle_research.py), taken in order whenever Ollama has been idle 10+ minutes. Status: open, running, review (report written; Claude or ChatGPT checks it against the source), done, failed. Sources: Core3-dev paths relative to MMOCoreORB, or h: paths in the project, each with an optional :START-END line range; about 120,000 characters per topic at most. Anyone may add an open topic. Topics with \"kind\": \"map\" are chunk jobs (local_jobs.py names them; local_map.py runs them one chunk at a time and they resume after a pause).",
+ "topics": [
+  {
+   "id": "cure-poison",
+   "title": "Curing poison with a cure pack",
+   "added_by": "Claude, 15 Oct (class check: curePoison NO_EFFECT)",
+   "status": "review",
+   "question": "How does curing poison work (the curePoison command with a cure pack)? What must be true for it to have an effect (the target poisoned, skill, range, pack type), what does the player see, and how can a test first poison a target so the cure can be checked? The class-check bot test reports curePoison as NO_EFFECT: 'verified setup; no error, message or observable result'.",
+   "sources": [
+    "src/server/zone/objects/creature/commands/CurePoisonCommand.h",
+    "src/server/zone/objects/creature/commands/CurePackCommand.h",
+    "src/server/zone/objects/tangible/pharmaceutical/CurePack.idl",
+    "src/server/zone/objects/tangible/pharmaceutical/CurePackImplementation.cpp",
+    "src/server/zone/objects/tangible/pharmaceutical/DotPack.idl",
+    "src/server/zone/objects/tangible/pharmaceutical/DotPackImplementation.cpp"
+   ],
+   "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
+  },
+  {
+   "id": "doctor-enhance-wounds",
+   "title": "Doctor enhancement buffs and wound healing",
+   "added_by": "Claude, 15 Oct (Aurek's doctor-buff scenario)",
+   "status": "review",
+   "question": "How do a doctor's enhancement buffs (healenhance) and wound healing (healwound with a wound pack) work: requirements, range, skill mods, how buff strength and duration are worked out, what the patient sees, and what stops them working? Compare with what aurek-doctor-buffs.py checks and say what it should check instead or as well.",
+   "sources": [
+    "src/server/zone/objects/creature/commands/HealEnhanceCommand.h",
+    "src/server/zone/objects/creature/commands/HealWoundCommand.h",
+    "src/server/zone/objects/tangible/pharmaceutical/WoundPack.idl",
+    "src/server/zone/objects/tangible/pharmaceutical/WoundPackImplementation.cpp",
+    "h:outputs/tools/bots/scenarios/aurek-doctor-buffs.py"
+   ],
+   "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
+  },
+  {
+   "id": "entertainer-buffs",
+   "title": "Entertainer performance and buffs",
+   "added_by": "Claude, 15 Oct (Dorn's social scenario)",
+   "status": "review",
+   "question": "How do dancing and playing music give buffs and remove battle fatigue/mind wounds: who must watch or listen and for how long, what flourishes and skill mods change, and what the audience and performer see? Compare with what dorn-social.py checks and say what a test should observe to prove a buff was given.",
+   "sources": [
+    "src/server/zone/managers/skill/PerformanceManager.cpp",
+    "src/server/zone/objects/player/sessions/EntertainingSessionImplementation.cpp",
+    "h:outputs/tools/bots/scenarios/dorn-social.py"
+   ],
+   "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
+  },
+  {
+   "id": "survey-sample",
+   "title": "Surveying and sampling resources",
+   "added_by": "Claude, 15 Oct (Besh's gathering scenario)",
+   "status": "review",
+   "question": "How do surveying and sampling work: survey tool range and resolution settings, what a survey returns, the sampling loop (timing, action cost, success chance, concentration, when it stops), and the messages the player sees? Compare with what besh-harvest.py does and list the observable checks a gathering test should make.",
+   "sources": [
+    "src/server/zone/objects/player/sessions/survey/SurveySessionImplementation.cpp",
+    "src/server/zone/managers/resource/resourcespawner/SampleTask.h",
+    "src/server/zone/objects/tangible/tool/SurveyToolImplementation.cpp",
+    "h:outputs/tools/bots/scenarios/besh-harvest.py"
+   ],
+   "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
+  },
+  {
+   "id": "creature-harvest",
+   "title": "Harvesting meat, hide and bone from creatures",
+   "added_by": "Claude, 15 Oct (Besh's gathering scenario)",
+   "status": "review",
+   "question": "How does harvesting a dead creature work: who may harvest (killer, group), range, which creatures give which resource and how much, skill effects, how often a corpse can be harvested, and what the player sees? List what a test must set up and observe.",
+   "sources": [
+    "src/server/zone/managers/creature/CreatureManagerImplementation.cpp:900-1075",
+    "h:outputs/tools/bots/scenarios/besh-harvest.py"
+   ],
+   "started": "2026-10-15 06:49",
+   "finished": "2026-10-15 06:52",
+   "minutes": 2,
+   "skipped": null
+  },
+  {
+   "id": "travel-shuttles",
+   "title": "Travel tickets and shuttles",
+   "added_by": "Claude, 15 Oct (Cresh's travel checks; shuttle timing)",
+   "status": "review",
+   "question": "How does travel work: buying a ticket at a travel terminal, the shuttle's landing and departure cycle (timings and config settings), boarding with the ticket collector (range, shuttle state, which ticket is accepted), and what the traveller sees at each step? List the conditions that make boarding fail and how a test can tell them apart.",
+   "sources": [
+    "src/server/zone/objects/tangible/terminal/travel/TravelTerminalImplementation.cpp",
+    "src/server/zone/objects/tangible/terminal/ticketcollector/TicketCollectorImplementation.cpp",
+    "src/server/zone/objects/building/tasks/ShuttleDepartureTask.h",
+    "src/server/zone/managers/planet/PlanetManagerImplementation.cpp:200-250",
+    "src/server/zone/managers/planet/PlanetManagerImplementation.cpp:1460-1620"
+   ],
+   "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
+  },
+  {
+   "id": "missions",
+   "title": "Mission terminals and mission completion",
+   "added_by": "Claude, 15 Oct (Cresh's mission scenario)",
+   "status": "review",
+   "question": "How are missions generated and completed: which terminal gives which mission types, how difficulty, distance and reward are chosen, how many missions a player may hold, and what completes or fails each type (destroy, deliver, survey, entertainer, crafting)? Compare with cresh-missions.py and list the checks a mission test should make.",
+   "sources": [
+    "src/server/zone/managers/mission/MissionManagerImplementation.cpp",
+    "h:outputs/tools/bots/scenarios/cresh-missions.py"
+   ],
+   "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
+  },
+  {
+   "id": "crafting",
+   "title": "Crafting end to end: session stages, assembly, experimentation, prototype",
+   "added_by": "owner, 15 Oct 09:00",
+   "status": "review",
+   "question": "See the report brief in the Claude session of 15 Oct.",
+   "sources": [],
+   "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
+  },
+  {
+   "id": "resources",
+   "title": "Resources: spawning, shifts, concentration maps, harvesters, stacking",
+   "added_by": "owner, 15 Oct 09:00",
+   "status": "review",
+   "question": "See the report brief in the Claude session of 15 Oct.",
+   "sources": [],
+   "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
+  },
+  {
+   "id": "quests",
+   "title": "Quests: screenplays, theme parks, The Beginning step by step",
+   "added_by": "Claude (read \"OQ\" as quests; kept), 15 Oct 09:00",
+   "status": "review",
+   "question": "See the report brief in the Claude session of 15 Oct.",
+   "sources": [],
+   "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
+  },
+  {
+   "id": "factions",
+   "title": "Factions and the GCW: joining, standing, status, TEF, attackability",
+   "added_by": "owner, 15 Oct 09:00",
+   "status": "review",
+   "question": "See the report brief in the Claude session of 15 Oct.",
+   "sources": [],
+   "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
+  },
+  {
+   "id": "resource-quality",
+   "title": "Resource stats (OQ and the rest) in crafting results, with a worked DL44 example",
+   "added_by": "owner (\"OQ\" = overall quality), 15 Oct 09:00",
+   "status": "review",
+   "question": "See the report brief in the Claude session of 15 Oct.",
+   "sources": [],
+   "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
+  },
+  {
+   "id": "ham",
+   "title": "HAM pools: regeneration, wounds, battle fatigue, encumbrance, incapacitation",
+   "added_by": "owner, 15 Oct 09:00",
+   "status": "review",
+   "question": "See the report brief in the Claude session of 15 Oct.",
+   "sources": [],
+   "researched_by": "Claude Haiku agents, finished by Claude Opus after a resume (15 Oct 08:55)"
+  },
+  {
+   "id": "profession-gaps",
+   "title": "Professions and abilities that are missing or stubbed on the server",
+   "added_by": "owner, 15 Oct 09:00",
+   "status": "review",
+   "question": "See the report brief in the Claude session of 15 Oct.",
+   "sources": [],
+   "researched_by": "Claude Haiku agent, finished by Claude Opus after a resume (15 Oct 09:05)"
+  },
+  {
+   "id": "bot-gap-list",
+   "kind": "map",
+   "job": "bot-gaps",
+   "title": "Sort the bots' BLOCKED, NO_EFFECT and FAIL notes into a gap list",
+   "added_by": "Claude, 15 Oct (owner: give the local model background jobs that save time)",
+   "status": "open",
+   "question": "Every problem note in Bot-reports/*/*.json, de-duplicated; the model names the missing feature or bug behind each and whose it is (body, server, scenario, staging). Report: gaps by kind, most seen first."
+  },
+  {
+   "id": "proofread-player-text",
+   "kind": "map",
+   "job": "proofread",
+   "title": "Proofread our player-facing text (Hoth, Ossus, server messages)",
+   "added_by": "Claude, 15 Oct (owner: give the local model background jobs that save time)",
+   "status": "open",
+   "question": "Strings in SWG-client/local_planets.tre that differ from the stock and MTG archives, plus message text added on Core3-dev since the live branch; the model lists typos, grammar and inconsistent names with a suggested fix. Nothing is changed by it."
+  }
+ ]
 }

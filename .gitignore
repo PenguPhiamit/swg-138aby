@@ -103,6 +103,12 @@ outputs/Agent/local-research/*/agent-log.jsonl
 outputs/Agent/local-research/.lock
 outputs/Agent/local-research/*.tmp
 outputs/Agent/local-research/state.json
+# chunk jobs (local_jobs.py / local_map.py): inputs and raw answers stay local; report.md and map-output.txt are kept
+outputs/Agent/local-research/*/input.jsonl
+outputs/Agent/local-research/*/instruction.txt
+outputs/Agent/local-research/*/lines.json
+outputs/Agent/local-research/*/results.jsonl
+outputs/Agent/local-research/*/errors.jsonl
 # live_map.py temporary movement logs (48 h, rotated)
 outputs/Bot-reports/tracker/
 # escort.py play data (combat near the player, for Creature Handler work)
