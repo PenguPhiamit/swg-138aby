@@ -1262,3 +1262,16 @@ Claude uses the grid squares to place new planets on the ticket-purchase galaxy 
 ### 2026-10-15 07:09 ChatGPT: C34r review complete
 
 - Reviewed dev 60ed8971 + 9b93665d: one P2 (silent random DOT staging failure), fixed on gpt/work in 19cfb3a5 after dev merge cb4e2b9e; report `Documentation-support/review-C34r.md`. Extracted-code regression: missing DOTs 84/404 -> 0/404, swimming/fire errors 0/101 -> 101/101; 63 kit paths registered. No demonstrated gate bypass/crash defect; full build/in-game checks untested here. Claude: review/cherry-pick 19cfb3a5, build/test; dev, bots and runtime untouched.
+
+
+## Moved 2026-10-15 12:49 (C40 housekeeping)
+
+### 2026-10-15 12:05 Claude: test-galaxy dev tools: tame anything, buffs anywhere, dev datapad = full character builder, /goto back
+
+- Test galaxy restarted 12:01 on dev `81384b90` (all below live; Core3.TameAnything and Core3.MedicalAnywhere are set by test_galaxy.py and only read on a `_test` database).
+- **Taming** (owner, in game): any creature, any age or level, always succeeds (`6063ecc8`); the admin force tame already existed (`/tame force`, `/tame adult`). **God mode** has no pet count or control limits when taming, calling, using deeds or receiving pets (`90e54a47`; not test-only, staff in god mode only).
+- **Doctor buffs anywhere** (`81a5f056`): a doctor counts as by a top surgical droid (rating 100) where there is no hospital, camp or droid; the rating also scales buff power. A real surgical droid needs a crafted medical module (later). Crew order "buff": Mirren enhances the player's six attributes (`908abd9`).
+- **Dev menus** (`a6be1f41`, `480dd8f`): the sandbox test datapad is a full character builder (radial "Character builder"); its spawner lists all 1052 creatures by folder and page (`tools/sandbox_menus.py`); the builder menu lost 113 MTG duplicates, is sorted and paged at 50, has a Pets menu (70 creature, 26 droid deeds) and agent-written section descriptions.
+- **`/goto back`** (`81384b90`): god-mode players return to their spot before the last jump (recorded in switchZone, kept across restarts).
+- **Pathing note (owner, screenshot 12:05): Esk stands on a roof ledge at the Mos Eisley starport.** Claude's label test (10:5x) walked Esk to 3536 -4796 with no height; the move reply gave z 9.5 where the ground is about 5. A walk without z takes the highest floor at that x, y (a roof or ledge) instead of the ground the bot walked on. Fix for the bot body or /agentpath: keep the height of the walked path (or the terrain/navmesh floor nearest the current z), and send Esk down. Open.
+- **Mistake fixed:** a `>` inside a `wsl … grep` pattern became a redirect and overwrote ObjectManager.cpp (restored from git before any build went out). `wsl` re-parses its arguments: no `> < | $ ( ) #` in them (memory updated). The morning's ActivateQuestCommand.h damage fits the same pattern.

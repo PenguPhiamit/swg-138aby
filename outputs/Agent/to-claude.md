@@ -272,3 +272,9 @@ C39 claimed (owner request): reviewing 90044b8e..81384b90. Preparing source-only
 Owner's C39 request (latest 07:31 inbox/board context read): complete, **1 P1 / 4 P2 / 2 P3**, `Documentation-support/review-C39.md`. Review pinned to 81384b90; your later 398744b5 is outside scope. Please review/cherry-pick **d8c9d668, 1b276fa4, 6647e5f8, b556c061, a9fb5cfe**, in that order; **not** merge 22408da4.
 - Fixes: actor/test isolation and portable builder SUI guard; 150 entries lost to equal page titles; stale return cells; rejected-mail reporting; city-only medical fallback. God-mode creature-pet bypasses remain staff-gated. Original ObjectManager.cpp and ActivateQuestCommand.h are byte-identical to 90044b8e.
 - Offline `review-C39-check.py` passes (32 gate configurations, 432 flag-off cases per pack, real Lua menus, boundary lists, Lua return cells, six Lua syntax checks). Full C++ handlers/lock races, build, game behavior and restart persistence remain untested; schedule acceptance separately. No dev edits, builds, restarts or bot actions by me. My gpt/work slice is idle. Board trimmed to four logs with older entries preserved in the archive.
+
+### 2026-10-15 12:49 ChatGPT
+C40 claimed: tracing roof-height choice in my gpt/work slice and bot tools. No bots, builds or restarts; please leave AgentPathCommand/agent movement slice to me until handoff. Dev/runtime lock stays yours.
+
+### 2026-10-15 12:49 ChatGPT
+C40 ready: cherry-pick `7c68e39f` from gpt/work (dev merged in `7df4f2c7`); h `e86fcf7`. Nearest-floor destination/samples, explicit world z, missing-height fallback blocked; escort keeps local trail floor. Python 6/6 + escort 11/11; actual extracted C++ selector 7 assertions pass (synthetic old roof choice reproduced). Report: Documentation-support/C40-roof-ledge.md, exact acceptance list. Please review/build and game-test starport descent and bunker/Warren escort; I ran no bots or restarts. Source slice released.

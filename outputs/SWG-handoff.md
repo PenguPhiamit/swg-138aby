@@ -263,7 +263,15 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
+## C40 ? roof-ledge pathing (Medium)
+
+ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fix `7c68e39f` (gpt/work, dev merged first); h implementation/report `e86fcf7`. See `Documentation-support/C40-roof-ledge.md`. C40 source slice idle; Claude retains dev/runtime lock and bot driver. No bots/build/restart by ChatGPT.
+
 ## Log
+
+### 2026-10-15 12:49 ChatGPT: C40 roof-floor source fix ready
+
+- Server `7c68e39f` on gpt/work after dev merge `7df4f2c7`; h `e86fcf7`: nearest outdoor floor, route-relative samples, explicit world-z forwarding, safe missing-height errors and escort trail-floor preservation. Report `Documentation-support/C40-roof-ledge.md`. Offline: Python 6/6, existing escort 11/11, compiled actual selector 7 assertions; old 9.5-vs-5 choice reproduced with synthetic surfaces. Unbuilt/game-untested; Claude reviews/cherry-picks/builds and verifies roof descent plus bunker/Warren escort. No bots, restarts, deployments or downloads. Source slice idle.
 
 ### 2026-10-15 12:45 ChatGPT: C42 Fable return prep complete
 
@@ -288,14 +296,3 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 ### 2026-10-15 12:39 ChatGPT: C39 review complete
 
 - Reviewed 90044b8e..81384b90: 1 P1 / 4 P2 / 2 P3; report `Documentation-support/review-C39.md`. Source fixes on owned gpt/work after merge 22408da4: d8c9d668, 1b276fa4, 6647e5f8, b556c061, a9fb5cfe (Claude review/cherry-pick in that order). Offline gates, 432 medical cases per pack, paging/stale-cell Lua checks and six Lua syntax checks pass; restored files match baseline blobs. Full server build/gameplay/restart persistence untested. Dev/runtime/bots untouched; later dev 398744b5 is outside scope. Source slice idle; next: Claude review and separate acceptance. Older logs moved to the archive; newest four retained.
-
-### 2026-10-15 12:05 Claude: test-galaxy dev tools: tame anything, buffs anywhere, dev datapad = full character builder, /goto back
-
-- Test galaxy restarted 12:01 on dev `81384b90` (all below live; Core3.TameAnything and Core3.MedicalAnywhere are set by test_galaxy.py and only read on a `_test` database).
-- **Taming** (owner, in game): any creature, any age or level, always succeeds (`6063ecc8`); the admin force tame already existed (`/tame force`, `/tame adult`). **God mode** has no pet count or control limits when taming, calling, using deeds or receiving pets (`90e54a47`; not test-only, staff in god mode only).
-- **Doctor buffs anywhere** (`81a5f056`): a doctor counts as by a top surgical droid (rating 100) where there is no hospital, camp or droid; the rating also scales buff power. A real surgical droid needs a crafted medical module (later). Crew order "buff": Mirren enhances the player's six attributes (`908abd9`).
-- **Dev menus** (`a6be1f41`, `480dd8f`): the sandbox test datapad is a full character builder (radial "Character builder"); its spawner lists all 1052 creatures by folder and page (`tools/sandbox_menus.py`); the builder menu lost 113 MTG duplicates, is sorted and paged at 50, has a Pets menu (70 creature, 26 droid deeds) and agent-written section descriptions.
-- **`/goto back`** (`81384b90`): god-mode players return to their spot before the last jump (recorded in switchZone, kept across restarts).
-- **Pathing note (owner, screenshot 12:05): Esk stands on a roof ledge at the Mos Eisley starport.** Claude's label test (10:5x) walked Esk to 3536 -4796 with no height; the move reply gave z 9.5 where the ground is about 5. A walk without z takes the highest floor at that x, y (a roof or ledge) instead of the ground the bot walked on. Fix for the bot body or /agentpath: keep the height of the walked path (or the terrain/navmesh floor nearest the current z), and send Esk down. Open.
-- **Mistake fixed:** a `>` inside a `wsl … grep` pattern became a redirect and overwrote ObjectManager.cpp (restored from git before any build went out). `wsl` re-parses its arguments: no `> < | $ ( ) #` in them (memory updated). The morning's ActivateQuestCommand.h damage fits the same pattern.
-

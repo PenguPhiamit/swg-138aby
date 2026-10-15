@@ -396,3 +396,5 @@ Files that grow without limit get slow to read, for us and for the game tools. R
 - [x] C29 mechanics + Galaxy Harvester/SWGAide research reference saved; 15-file source manifest and eight client class leads, no installs or gameplay claims.
 - [x] Owner TTRPG resource handoff: all 265 existing extracted rows, 28 husbandry and 16 recipe input references listed in clean Markdown and JSON; source/coverage checks pass.
 - [ ] Remaining C29 Legends/era material audit and implementation integration, after C24b independent resource-fix review and C23c runtime acceptance; owner-book routes are proposals only.
+
+- [x] C40 roof-height source/offline fix (15 Oct): server `7c68e39f`, h `e86fcf7`; Python 6/6, escort 11/11, selector 7 assertions. Claude review/build/starport recovery and bunker/Warren gameplay pending.
