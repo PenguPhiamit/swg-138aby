@@ -1,30 +1,304 @@
 {
  "built": "2026-10-15",
  "archive": "local_planets-mtgmerge.tre",
- "sha256": "1315dbb4c9f39250bfb7030441483090c2b3bd9c6ef006795bc9ad244c7b74aa",
- "bytes": 3806301,
- "entries": 60,
+ "sha256": "8ad04fecff021f920891facfc6c30739bc2f65f1ea79e7cecac3f85640aa26ed",
+ "bytes": 4605441,
+ "entries": 166,
+ "merged_files": 119,
+ "npc_names": {
+  "file": "string/en/mob/creature_names.stf",
+  "keys": 2888,
+  "added": [
+   "ossus_ysanna_hunter",
+   "ossus_ysanna_warrior",
+   "ossus_ysanna_shaman",
+   "ossus_one_sith_acolyte",
+   "ossus_one_sith_warrior"
+  ],
+  "sha256": "64b6c11d76218fddabdc9f8598a01c7cd990122fa05078ca52c7d2c862c7a36c"
+ },
  "reference": {
   "file": "Local-model-ossus-fauna/local_planets-fauna.tre",
   "sha256_expected": "6556537d589c411f9b0c1697c2a4f5bdd792800f96d0ee517d38cd3cd3dcb072",
   "sha256_ok": true
  },
  "against_fauna": {
-  "changed": [],
+  "changed": [
+   "misc/planet_crc_string_table.iff",
+   "string/en/clientpoi_d.stf",
+   "string/en/clientpoi_n.stf",
+   "string/en/mob/creature_names.stf",
+   "string/en/planet_n.stf",
+   "string/en/player_species.stf",
+   "string/en/skl_d.stf",
+   "string/en/skl_n.stf"
+  ],
   "new_entries": [
+   "appearance/lat/all_m.lat",
    "datatables/mount/logical_saddle_name_map.iff",
    "datatables/mount/rider_pose_map.iff",
    "datatables/mount/saddle_appearance_map.iff",
    "datatables/mount/valid_scale_range.iff",
-   "string/en/monster_name.stf"
+   "datatables/planetary_map/disabled_planetary_map.iff",
+   "datatables/radar/radar_range.iff",
+   "misc/quest_crc_string_table.iff",
+   "string/en/badge_d.stf",
+   "string/en/badge_n.stf",
+   "string/en/building_detail.stf",
+   "string/en/building_lookat.stf",
+   "string/en/building_name.stf",
+   "string/en/container_error_message.stf",
+   "string/en/craft_armor_ingredients_d.stf",
+   "string/en/craft_armor_ingredients_n.stf",
+   "string/en/craft_clothing_ingredients_d.stf",
+   "string/en/craft_clothing_ingredients_n.stf",
+   "string/en/craft_dna_components_d.stf",
+   "string/en/craft_dna_components_n.stf",
+   "string/en/craft_item_ingredients_d.stf",
+   "string/en/craft_item_ingredients_n.stf",
+   "string/en/craft_results.stf",
+   "string/en/crafting.stf",
+   "string/en/crafting_detail.stf",
+   "string/en/deed.stf",
+   "string/en/deed_detail.stf",
+   "string/en/dungeon/death_watch.stf",
+   "string/en/dungeon/space_dungeon.stf",
+   "string/en/error_message.stf",
+   "string/en/event_perk.stf",
+   "string/en/event_perk_jukebox_songs.stf",
+   "string/en/faction/faction_names.stf",
+   "string/en/food_detail.stf",
+   "string/en/food_name.stf",
+   "string/en/frn_d.stf",
+   "string/en/frn_n.stf",
+   "string/en/game_language.stf",
+   "string/en/gcw.stf",
+   "string/en/got_n.stf",
+   "string/en/group.stf",
+   "string/en/hyperspace_points_d.stf",
+   "string/en/hyperspace_points_n.stf",
+   "string/en/item_d.stf",
+   "string/en/item_n.stf",
+   "string/en/lair_d.stf",
+   "string/en/lair_n.stf",
+   "string/en/launch_names.stf",
+   "string/en/money/acct_n.stf",
+   "string/en/monster_detail.stf",
+   "string/en/monster_lookat.stf",
+   "string/en/monster_name.stf",
+   "string/en/npc_lookat.stf",
+   "string/en/npc_name.stf",
+   "string/en/obj_d.stf",
+   "string/en/obj_n.stf",
+   "string/en/performance.stf",
+   "string/en/pet/pet_menu.stf",
+   "string/en/pet_deed.stf",
+   "string/en/player/player_utility.stf",
+   "string/en/player_structure.stf",
+   "string/en/quest/groundquests.stf",
+   "string/en/quest/pirates.stf",
+   "string/en/quest_armorsmith.stf",
+   "string/en/quest_item_d.stf",
+   "string/en/quest_item_n.stf",
+   "string/en/ship_component_n.stf",
+   "string/en/ship_slot_compatabilities_d.stf",
+   "string/en/ship_slot_compatabilities_n.stf",
+   "string/en/ship_slot_d.stf",
+   "string/en/ship_slot_n.stf",
+   "string/en/sign_name.stf",
+   "string/en/slicing/slicing.stf",
+   "string/en/space/cargo.stf",
+   "string/en/space/quest.stf",
+   "string/en/space/scst_short_n.stf",
+   "string/en/space/ship_names.stf",
+   "string/en/space/space_interaction.stf",
+   "string/en/space/space_item.stf",
+   "string/en/space/space_mobile_type.stf",
+   "string/en/space_crafting_d.stf",
+   "string/en/space_crafting_n.stf",
+   "string/en/space_item_n.stf",
+   "string/en/space_ship.stf",
+   "string/en/spacequest/escort_duty/corellia_imperial_tier4_2.stf",
+   "string/en/spacequest/escort_duty/tatooine_imperial_tier4_escortduty_1.stf",
+   "string/en/spacequest/quests.stf",
+   "string/en/terminal_detail.stf",
+   "string/en/terminal_lookat.stf",
+   "string/en/terminal_name.stf",
+   "string/en/terminal_ui.stf",
+   "string/en/texture_kit.stf",
+   "string/en/theme_park/racing/racing.stf",
+   "string/en/theme_park_name.stf",
+   "string/en/theme_park_nym/messages.stf",
+   "string/en/ui.stf",
+   "string/en/ui_auc.stf",
+   "string/en/ui_chatroom.stf",
+   "string/en/ui_group_launch.stf",
+   "string/en/ui_opt.stf",
+   "string/en/ui_opt_sound.stf",
+   "string/en/ui_planet_map.stf",
+   "string/en/ui_radial.stf",
+   "string/en/ui_spacehud.stf",
+   "string/en/ui_text_color.stf",
+   "string/en/ui_trade.stf",
+   "string/en/weapon_detail.stf",
+   "string/en/weapon_name.stf",
+   "string/en/wearables_detail.stf",
+   "string/en/wearables_name.stf",
+   "string/en/wound_terminal.stf"
   ],
-  "missing_entries": []
+  "missing_entries": [],
+  "expected_changed": [
+   "misc/planet_crc_string_table.iff",
+   "string/en/clientpoi_d.stf",
+   "string/en/clientpoi_n.stf",
+   "string/en/mob/creature_names.stf",
+   "string/en/planet_n.stf",
+   "string/en/player_species.stf",
+   "string/en/skl_d.stf",
+   "string/en/skl_n.stf"
+  ],
+  "staged_entries_kept": {
+   "misc/planet_crc_string_table.iff": true,
+   "string/en/clientpoi_d.stf": true,
+   "string/en/clientpoi_n.stf": true,
+   "string/en/mob/creature_names.stf": true,
+   "string/en/planet_n.stf": true,
+   "string/en/player_species.stf": true,
+   "string/en/skl_d.stf": true,
+   "string/en/skl_n.stf": true
+  }
+ },
+ "against_installed": {
+  "file": "SWG-client/local_planets.tre",
+  "sha256": "f7cc806fc3c4581cf48e1b3fd608b2daade833c3aaf68c7a802e78719ce0541c",
+  "changed": [
+   "misc/planet_crc_string_table.iff",
+   "string/en/clientpoi_d.stf",
+   "string/en/clientpoi_n.stf",
+   "string/en/mob/creature_names.stf",
+   "string/en/planet_n.stf",
+   "string/en/player_species.stf",
+   "string/en/skl_d.stf",
+   "string/en/skl_n.stf"
+  ],
+  "new_entries": [
+   "datatables/planetary_map/disabled_planetary_map.iff",
+   "datatables/radar/radar_range.iff",
+   "misc/quest_crc_string_table.iff",
+   "string/en/badge_d.stf",
+   "string/en/badge_n.stf",
+   "string/en/building_detail.stf",
+   "string/en/building_lookat.stf",
+   "string/en/building_name.stf",
+   "string/en/container_error_message.stf",
+   "string/en/craft_armor_ingredients_d.stf",
+   "string/en/craft_armor_ingredients_n.stf",
+   "string/en/craft_clothing_ingredients_d.stf",
+   "string/en/craft_clothing_ingredients_n.stf",
+   "string/en/craft_dna_components_d.stf",
+   "string/en/craft_dna_components_n.stf",
+   "string/en/craft_item_ingredients_d.stf",
+   "string/en/craft_item_ingredients_n.stf",
+   "string/en/craft_results.stf",
+   "string/en/crafting.stf",
+   "string/en/crafting_detail.stf",
+   "string/en/deed.stf",
+   "string/en/deed_detail.stf",
+   "string/en/dungeon/death_watch.stf",
+   "string/en/dungeon/space_dungeon.stf",
+   "string/en/error_message.stf",
+   "string/en/event_perk.stf",
+   "string/en/event_perk_jukebox_songs.stf",
+   "string/en/faction/faction_names.stf",
+   "string/en/food_detail.stf",
+   "string/en/food_name.stf",
+   "string/en/frn_d.stf",
+   "string/en/frn_n.stf",
+   "string/en/game_language.stf",
+   "string/en/gcw.stf",
+   "string/en/got_n.stf",
+   "string/en/group.stf",
+   "string/en/hyperspace_points_d.stf",
+   "string/en/hyperspace_points_n.stf",
+   "string/en/item_d.stf",
+   "string/en/item_n.stf",
+   "string/en/lair_d.stf",
+   "string/en/lair_n.stf",
+   "string/en/launch_names.stf",
+   "string/en/money/acct_n.stf",
+   "string/en/monster_detail.stf",
+   "string/en/monster_lookat.stf",
+   "string/en/npc_lookat.stf",
+   "string/en/npc_name.stf",
+   "string/en/obj_d.stf",
+   "string/en/obj_n.stf",
+   "string/en/performance.stf",
+   "string/en/pet/pet_menu.stf",
+   "string/en/pet_deed.stf",
+   "string/en/player/player_utility.stf",
+   "string/en/player_structure.stf",
+   "string/en/quest/groundquests.stf",
+   "string/en/quest/pirates.stf",
+   "string/en/quest_armorsmith.stf",
+   "string/en/quest_item_d.stf",
+   "string/en/quest_item_n.stf",
+   "string/en/ship_component_n.stf",
+   "string/en/ship_slot_compatabilities_d.stf",
+   "string/en/ship_slot_compatabilities_n.stf",
+   "string/en/ship_slot_d.stf",
+   "string/en/ship_slot_n.stf",
+   "string/en/sign_name.stf",
+   "string/en/slicing/slicing.stf",
+   "string/en/space/cargo.stf",
+   "string/en/space/quest.stf",
+   "string/en/space/scst_short_n.stf",
+   "string/en/space/ship_names.stf",
+   "string/en/space/space_interaction.stf",
+   "string/en/space/space_item.stf",
+   "string/en/space/space_mobile_type.stf",
+   "string/en/space_crafting_d.stf",
+   "string/en/space_crafting_n.stf",
+   "string/en/space_item_n.stf",
+   "string/en/space_ship.stf",
+   "string/en/spacequest/escort_duty/corellia_imperial_tier4_2.stf",
+   "string/en/spacequest/escort_duty/tatooine_imperial_tier4_escortduty_1.stf",
+   "string/en/spacequest/quests.stf",
+   "string/en/terminal_detail.stf",
+   "string/en/terminal_lookat.stf",
+   "string/en/terminal_name.stf",
+   "string/en/terminal_ui.stf",
+   "string/en/texture_kit.stf",
+   "string/en/theme_park/racing/racing.stf",
+   "string/en/theme_park_name.stf",
+   "string/en/theme_park_nym/messages.stf",
+   "string/en/ui.stf",
+   "string/en/ui_auc.stf",
+   "string/en/ui_chatroom.stf",
+   "string/en/ui_group_launch.stf",
+   "string/en/ui_opt.stf",
+   "string/en/ui_opt_sound.stf",
+   "string/en/ui_planet_map.stf",
+   "string/en/ui_radial.stf",
+   "string/en/ui_spacehud.stf",
+   "string/en/ui_text_color.stf",
+   "string/en/ui_trade.stf",
+   "string/en/weapon_detail.stf",
+   "string/en/weapon_name.stf",
+   "string/en/wearables_detail.stf",
+   "string/en/wearables_name.stf",
+   "string/en/wound_terminal.stf"
+  ],
+  "missing_entries": [],
+  "only_merged_files_differ": true
  },
  "merged": {
   "datatables/mount/logical_saddle_name_map.iff": {
    "added": 48,
    "from": {
+    "mtg_patch_023.tre": 0,
     "mtg_patch_022.tre": 48,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
     "mtg_patch_013_configurable_02.tre": 0
    },
    "barc_keys": [
@@ -46,7 +320,10 @@
   "datatables/mount/saddle_appearance_map.iff": {
    "added": 44,
    "from": {
+    "mtg_patch_023.tre": 0,
     "mtg_patch_022.tre": 44,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
     "mtg_patch_013_configurable_02.tre": 0
    },
    "barc_keys": [
@@ -72,7 +349,10 @@
   "datatables/mount/rider_pose_map.iff": {
    "added": 54,
    "from": {
+    "mtg_patch_023.tre": 0,
     "mtg_patch_022.tre": 54,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
     "mtg_patch_013_configurable_02.tre": 0
    },
    "barc_keys": [
@@ -98,7 +378,10 @@
   "datatables/mount/valid_scale_range.iff": {
    "added": 58,
    "from": {
+    "mtg_patch_023.tre": 0,
     "mtg_patch_022.tre": 58,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
     "mtg_patch_013_configurable_02.tre": 0
    },
    "barc_keys": [
@@ -121,10 +404,37 @@
    ],
    "sha256": "ba5644836231b5d4df5510e794a1617446945230e15dcdfe36e905b2056f76ae"
   },
+  "datatables/planetary_map/disabled_planetary_map.iff": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 1,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "715abac06f71e78ac72e509bdb54ebf5226d0aa5a3a8c895b134945aeca86cfc"
+  },
+  "datatables/radar/radar_range.iff": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 1,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "f5c350cf2f19b981c9c6d3e9e4dedd955ab17ceddd6aa64e87c660665eb596a5"
+  },
   "string/en/monster_name.stf": {
    "added": 183,
    "from": {
+    "mtg_patch_023.tre": 0,
     "mtg_patch_022.tre": 183,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
     "mtg_patch_013_configurable_02.tre": 0
    },
    "barc_keys": [
@@ -135,6 +445,1369 @@
     "light_bending_barc_n"
    ],
    "sha256": "2d7ee372a1c2ca31fbd780f60c09aa89635e58c3007038da903efa14ab292441"
+  },
+  "string/en/badge_d.stf": {
+   "added": 19,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 19,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "c37af110cabce6dc81dd888d2811831229ddb175c1c946588b4eff671b031624"
+  },
+  "string/en/badge_n.stf": {
+   "added": 20,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 20,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "0182a1299160f4123812da9c43d5a5ee1808a2622ccf5d0cfb5bbb1783ba17a8"
+  },
+  "string/en/building_detail.stf": {
+   "added": 25,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 25,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "053c07c43b2d43156d6fd346b81524328e6020562046d4821e5490d3dd819257"
+  },
+  "string/en/building_lookat.stf": {
+   "added": 6,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 6,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "6e37542d4c686d2d6cdd8025e60420b1d61472c28c56f5857f02db2738366377"
+  },
+  "string/en/craft_armor_ingredients_n.stf": {
+   "added": 309,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 309
+   },
+   "barc_keys": [],
+   "sha256": "1383af83cb1ee19ea013d71b63c05c3b18cba108ccf22a668a94c661abd4850f"
+  },
+  "string/en/craft_clothing_ingredients_d.stf": {
+   "added": 4,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 4
+   },
+   "barc_keys": [],
+   "sha256": "93e40235ad7a95dc40c1cb0cb0adabfeb1d119e6d5072cf951748fcfb3f01f1c"
+  },
+  "string/en/craft_clothing_ingredients_n.stf": {
+   "added": 10,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 10
+   },
+   "barc_keys": [],
+   "sha256": "e631c708566176cae2c9e0d2ba7cad13f9ecd32a83535c1c6454100c9e2c32be"
+  },
+  "string/en/craft_dna_components_d.stf": {
+   "added": 3,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 3
+   },
+   "barc_keys": [],
+   "sha256": "e6ea370ca105667086e208ea6fcd0359bf99b57ec5e1076a60527886d6790dfc"
+  },
+  "string/en/craft_dna_components_n.stf": {
+   "added": 3,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 3
+   },
+   "barc_keys": [],
+   "sha256": "070d02cdf7be5adcce247ff7e09a8c088ed544e8593e05fe4ca86caefee4f618"
+  },
+  "string/en/craft_item_ingredients_d.stf": {
+   "added": 27,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 27
+   },
+   "barc_keys": [],
+   "sha256": "80fd5a594dde6606e6a343de81245778945fc869285964878b762533740f3f7e"
+  },
+  "string/en/craft_item_ingredients_n.stf": {
+   "added": 27,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 27
+   },
+   "barc_keys": [],
+   "sha256": "1fd09a0f498aa982cad34c560a9901bd0404a9817bc4297d9abaa0a855a54025"
+  },
+  "string/en/craft_results.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "0bc50c23dff3dd887f2a1033b4f17766afcaa1ac1a9294ec84244dcf22efb7ed"
+  },
+  "string/en/deed.stf": {
+   "added": 29,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 29
+   },
+   "barc_keys": [],
+   "sha256": "f445417e5be3ee2af7850753c7e845c79713205600657d9663646db4a0815d36"
+  },
+  "string/en/deed_detail.stf": {
+   "added": 29,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 29
+   },
+   "barc_keys": [],
+   "sha256": "77ec16675ca0bc90f8b6ff91ae89400a372556dea02f04a6573d8b828352c79c"
+  },
+  "string/en/dungeon/space_dungeon.stf": {
+   "added": 11,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 11
+   },
+   "barc_keys": [],
+   "sha256": "02d4ef60ffba5ffff09830e6aa524ff5397fc4b1f14ef7e5d37ff1ea9daafede"
+  },
+  "string/en/error_message.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "3be720d26bba5dca3d76585a77e3d503faece7e62aebaee9b479b42b9781e8f4"
+  },
+  "string/en/event_perk_jukebox_songs.stf": {
+   "added": 20,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 20,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "83c3d7d60fe14422c6711edac81ffc2b12af7a9630d14527f1b06b535b13f8c7"
+  },
+  "string/en/faction/faction_names.stf": {
+   "added": 17,
+   "from": {
+    "mtg_patch_023.tre": 15,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 2,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "284b790fa5e7c3eb1c89f6c66d46715f62b362a2a6e6c30894671cc210dc1896"
+  },
+  "string/en/food_name.stf": {
+   "added": 28,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 28,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "da39040e35f62158502fe5951c52e962184b0dc8e16cbcc325aca1f0cb320d65"
+  },
+  "string/en/game_language.stf": {
+   "added": 2,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 2
+   },
+   "barc_keys": [],
+   "sha256": "5a52fdbf69bd313f766751a5e4b7000e907ded7cea9bcd95e4a9c74f92ab50a6"
+  },
+  "string/en/got_n.stf": {
+   "added": 9,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 9
+   },
+   "barc_keys": [],
+   "sha256": "2bdc4ba8e816f9233a45ab81fe05e8dd5313c50e49d0d5a300cf93a23b1b7912"
+  },
+  "string/en/group.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "1e03c59dec487955b254ac5c9583183fe4d01bdeba23d962de9ab5cb51458512"
+  },
+  "string/en/hyperspace_points_d.stf": {
+   "added": 4,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 4
+   },
+   "barc_keys": [],
+   "sha256": "7d67d833121d090396dad4abf617472adf2256cae74b9050367ed82b61c1a89d"
+  },
+  "string/en/hyperspace_points_n.stf": {
+   "added": 4,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 4
+   },
+   "barc_keys": [],
+   "sha256": "e98e4633e6d69e2806657cedac5900f1f13f180ca0bd7fa4e8f0dc38bbec56db"
+  },
+  "string/en/lair_d.stf": {
+   "added": 5,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 5,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "7795f565bcd22049b8b24f4912cbcbcced3f1fafb2bcccba0e868a6ccf1b622f"
+  },
+  "string/en/lair_n.stf": {
+   "added": 12,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 12,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "d3c648808410f9f3835d64a249babb86f5f991e73342ee4f696e1385ebf9791a"
+  },
+  "string/en/launch_names.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "af2abe523639e0460527be6c6b84c65003d1263627d08df0b278926e10585286"
+  },
+  "string/en/mob/creature_names.stf": {
+   "added": 313,
+   "from": {
+    "mtg_patch_023.tre": 27,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 286
+   },
+   "barc_keys": [],
+   "sha256": "ec041ffe4582eedef3a23097c52d6e5426048fa05f932d88c8b41ba631e832bf"
+  },
+  "string/en/money/acct_n.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "1e385eac24be2c1244d022a925caf18f749acf0340426d1528996619625a4482"
+  },
+  "string/en/monster_lookat.stf": {
+   "added": 19,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 19,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "f4351da82720443998567b4666bef293937118fbe0af29c4df39322c9e33cd85"
+  },
+  "string/en/npc_lookat.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "c0ec6b2134eb79d2610a7c473d7f9c8c5af85a509525c7e0c280593dde8f5bd6"
+  },
+  "string/en/npc_name.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "a9a538584185e7ce937c3b54e033bcac15db46cc5060c0cbf14a92e1b2396714"
+  },
+  "string/en/obj_d.stf": {
+   "added": 27,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 27,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "a511287f7bb03fe44881e7d3946acc94cbcd742c3eac931b6da70bb9d57ad275"
+  },
+  "string/en/performance.stf": {
+   "added": 6,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 6
+   },
+   "barc_keys": [],
+   "sha256": "ddf2ac853a3809360a36e987ee95a2843c026d46d808561d0cec6d4f9a41eae2"
+  },
+  "string/en/pet/pet_menu.stf": {
+   "added": 3,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 3
+   },
+   "barc_keys": [],
+   "sha256": "357410ee1d09836dc30531fcee275c263b712f7ece93351eb6ae91e26c625912"
+  },
+  "string/en/player/player_utility.stf": {
+   "added": 26,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 26,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "9314999a880f0d60cc9fc7584da77179697aeac398601e1580796f8005f0643d"
+  },
+  "string/en/player_species.stf": {
+   "added": 30,
+   "from": {
+    "mtg_patch_023.tre": 30,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "6abdebc37be5b118328a82a34bf6ce77195cecef698e0ed1184e66523fb4c399"
+  },
+  "string/en/quest/pirates.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "8c903db5e0d34cd68717fe914f0fbcfab57b955f62875c56e256bfcc674c09b1"
+  },
+  "string/en/ship_component_n.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "f34f8a65885dc96eeae0a31ffc5f796486c18366c9fcbb3924941d275e19cc8f"
+  },
+  "string/en/ship_slot_compatabilities_d.stf": {
+   "added": 2,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 2
+   },
+   "barc_keys": [],
+   "sha256": "3f5eb1ef346a0ad7590bef618604f3f9ab7266fa22969754c7e18415600fbd3c"
+  },
+  "string/en/ship_slot_compatabilities_n.stf": {
+   "added": 5,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 5
+   },
+   "barc_keys": [],
+   "sha256": "eac0b8576057335c8327891d262bf991101ffd91b9f50e9640f469913561eed8"
+  },
+  "string/en/ship_slot_d.stf": {
+   "added": 2,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 2
+   },
+   "barc_keys": [],
+   "sha256": "44289027f4febb8da7db0c503b795627b4d3b8fa588b9f18d7aac983ab39985b"
+  },
+  "string/en/ship_slot_n.stf": {
+   "added": 2,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 2
+   },
+   "barc_keys": [],
+   "sha256": "5df8295cbc7971cdbec57da992791ca29242b7600f37693d9581ea197085c65b"
+  },
+  "string/en/sign_name.stf": {
+   "added": 36,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 36,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "f0c22ed1a18b7320e1604c1c962161047a31fdd648bf6625dbbdef2357751b90"
+  },
+  "string/en/skl_d.stf": {
+   "added": 14,
+   "from": {
+    "mtg_patch_023.tre": 14,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "a2033a72161b1065eed090b14fa9d7d30a9a81eea1c8f9ef8d05373968f6a0fe"
+  },
+  "string/en/skl_n.stf": {
+   "added": 14,
+   "from": {
+    "mtg_patch_023.tre": 14,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "b60e5de256865219a9a1e2293c8cd43d46630aef1f1667849f9f7683b2487b42"
+  },
+  "string/en/slicing/slicing.stf": {
+   "added": 3,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 3
+   },
+   "barc_keys": [],
+   "sha256": "1d5ea578fc941c0ede33fefd505f7354857fd8f1a36ed3fa8bf9984b01cc9e62"
+  },
+  "string/en/space/quest.stf": {
+   "added": 4,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 4
+   },
+   "barc_keys": [],
+   "sha256": "ff81f22e7588f93fcb3477a148f9354cc095c2682b5bcc5dc6c0b44257d40e24"
+  },
+  "string/en/space/scst_short_n.stf": {
+   "added": 3,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 3
+   },
+   "barc_keys": [],
+   "sha256": "4582cf807a98150410321577cc5ee5910f20e6b44758f66ed23ca699425fe781"
+  },
+  "string/en/space/ship_names.stf": {
+   "added": 83,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 83
+   },
+   "barc_keys": [],
+   "sha256": "93a04a2fd57b4fc6e6e5a08a9104d26e59aaed31c6e2ad547a01c44e27ff8474"
+  },
+  "string/en/space/space_interaction.stf": {
+   "added": 5,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 5
+   },
+   "barc_keys": [],
+   "sha256": "a3645bb62cc62907802ccccce50fe41fb5c690470c78d04a4df3816488adfcc2"
+  },
+  "string/en/space/space_item.stf": {
+   "added": 16,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 16
+   },
+   "barc_keys": [],
+   "sha256": "e0fcf5c7e1f4072b49cad4d4dcb0790302a965bcdb9c5f7af046b42d943c091b"
+  },
+  "string/en/space/space_mobile_type.stf": {
+   "added": 17,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 17
+   },
+   "barc_keys": [],
+   "sha256": "271892947885874faf2ea105d29857559fe602fecbc948ab1049022b5c4b7ec9"
+  },
+  "string/en/space_crafting_d.stf": {
+   "added": 5,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 5
+   },
+   "barc_keys": [],
+   "sha256": "81d396fa305afcd077531ecf91bc3bc2088c3b8fcb7cbe910fc485c5e35c30a8"
+  },
+  "string/en/space_crafting_n.stf": {
+   "added": 39,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 39
+   },
+   "barc_keys": [],
+   "sha256": "436c6af378a7b456966fd3327b041f719b5a14179bcd2d55e18ac4dd2a07a4b5"
+  },
+  "string/en/space_item_n.stf": {
+   "added": 9,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 9
+   },
+   "barc_keys": [],
+   "sha256": "7513c8326c685c895ab6134a69bb64d6cb6ad1f1eeb3a3db2c6ac62551ccd9e5"
+  },
+  "string/en/space_ship.stf": {
+   "added": 30,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 30,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "59e0e2e7b59f05d0ed82dd08158490a3d3fe65cb9e25b590509cace176db90c4"
+  },
+  "string/en/spacequest/quests.stf": {
+   "added": 17,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 17,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "75bb99f22733ada43d8d1bd6bb9e1ed8d7a33ba602fbde9784431550f13a0846"
+  },
+  "string/en/terminal_lookat.stf": {
+   "added": 4,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 4,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "438d10aa0ad141894e22973a3196754910d8bcbc774a6a74e20c5683f69e4f3c"
+  },
+  "string/en/terminal_ui.stf": {
+   "added": 8,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 8
+   },
+   "barc_keys": [],
+   "sha256": "55a6e15d5a44c526f048e5b39b6fd36ce875a4bbea0b941a432b88c92b31f319"
+  },
+  "string/en/texture_kit.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "9f5f7256a18093dbd387a50418dd6830aea6f9644e9e65d93589ad3804521f03"
+  },
+  "string/en/theme_park/racing/racing.stf": {
+   "added": 36,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 36,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "5645be2a336b4123e46e58d396e38ca72845993e36468886dabbff5e5081f757"
+  },
+  "string/en/theme_park_name.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "cb0ca47bd3b1ad7d24cf498be3d4f7502c256f93a2af8fa300d3307499418692"
+  },
+  "string/en/ui_auc.stf": {
+   "added": 7,
+   "from": {
+    "mtg_patch_023.tre": 7,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "15efd9773183ff8e0fc16a290e5fc6720577347ed08f35a05a12495ad82468f4"
+  },
+  "string/en/ui_chatroom.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "28d2820c6edae62ec71eb016506f6248e4ccb54f89c0ba2d52bb6632175f27ad"
+  },
+  "string/en/ui_group_launch.stf": {
+   "added": 2,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 2
+   },
+   "barc_keys": [],
+   "sha256": "64eaa08b15d72e8c745f7f80cf6e2fbebeee03fdf9f5da01d0abc9e02d5ce7b9"
+  },
+  "string/en/ui_opt.stf": {
+   "added": 17,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 17
+   },
+   "barc_keys": [],
+   "sha256": "25936008927e9f414606f21e25c7484773aa3b822992eaab44939d933eca27bb"
+  },
+  "string/en/ui_opt_sound.stf": {
+   "added": 2,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 2
+   },
+   "barc_keys": [],
+   "sha256": "bfc2690f83ec126ac830913b3b64cae6d64419d5e98600af9d75229ab5ea5a08"
+  },
+  "string/en/ui_planet_map.stf": {
+   "added": 2,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 2
+   },
+   "barc_keys": [],
+   "sha256": "c3c98541720b0a60d4eb77d54ec2dc718f06c668eaed814e7952faf5144db2ba"
+  },
+  "string/en/ui_radial.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "a3d906576b8c57fe62e859b60401024ebc618fa8c4de443df28a6c6fcb45f8e7"
+  },
+  "string/en/ui_spacehud.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "fd7089780158ddf1676989cb8646ef0a56edafd2f1d1091754ebd08d2a96c400"
+  },
+  "string/en/ui_text_color.stf": {
+   "added": 3,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 3
+   },
+   "barc_keys": [],
+   "sha256": "4d490d5eea45fc11b5d44e00350cf96637b350e55de1ab9c87139612098c5883"
+  },
+  "string/en/ui_trade.stf": {
+   "added": 4,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 4
+   },
+   "barc_keys": [],
+   "sha256": "027eda74024254359fab16da1ac21ecbd3f62e2a33793a59a453c420eacb90dc"
+  },
+  "string/en/wound_terminal.stf": {
+   "added": 2,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 2
+   },
+   "barc_keys": [],
+   "sha256": "f22c8c7f412ce838f513e3a7b8e83bd6c076bf7b77866cbd93bb422b69166d52"
+  },
+  "string/en/building_name.stf": {
+   "added": 185,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 174,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 11
+   },
+   "barc_keys": [],
+   "sha256": "ac758c49ad13579adb67c8dc59228c85d7260315a87ebec016f2f5c6b36444a1"
+  },
+  "string/en/clientpoi_d.stf": {
+   "added": 81,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 81,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "3fe1f4c0941bda93044e312b6a4e0019771b42485f4066aba02f4a7dfa08868a"
+  },
+  "string/en/clientpoi_n.stf": {
+   "added": 117,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 117,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "bed94df70a47e24a6b2283c8f82910248909edd457d1fcfa4eb35b8aa2fa529b"
+  },
+  "string/en/container_error_message.stf": {
+   "added": 2,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 2
+   },
+   "barc_keys": [],
+   "sha256": "e8d70669f018b04bcabf199c7ef069b759c4abddf2af0194927a80f5f3478c78"
+  },
+  "string/en/craft_armor_ingredients_d.stf": {
+   "added": 52,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 52
+   },
+   "barc_keys": [],
+   "sha256": "575898ba59e57a5c05817a63851763a9822512f553b964e91259c89edc354baa"
+  },
+  "string/en/crafting.stf": {
+   "added": 119,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 119,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "7e65bf3a32ea6789c3d418197ebe5dfae2766f1b9ee76f3abf973a1d03342537"
+  },
+  "string/en/crafting_detail.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 1,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "a4aa74fef44d3b9bd6c21dd255a0a2e8670378a13cfc0641cb8e3290dfa198cf"
+  },
+  "string/en/dungeon/death_watch.stf": {
+   "added": 2,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 2
+   },
+   "barc_keys": [],
+   "sha256": "51225534071ff81b462d23534b1a4fddd114cb2d6888c2de934441eccaebf829"
+  },
+  "string/en/event_perk.stf": {
+   "added": 7,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 7,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "72c65ec39a8767b2f1f9713659b132b2db7362e5fa604f9a919c101e72070d14"
+  },
+  "string/en/food_detail.stf": {
+   "added": 29,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 29,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "0d35a7e6882f5a797aa291b77ee0acbd9ca104e7dd588ab517d79587cdad12fc"
+  },
+  "string/en/frn_d.stf": {
+   "added": 170,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 170,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "f3bd09cbf7e2dd55fb409e4b6f1f2caefce2b53e74c49d59082f1820b97b6e67"
+  },
+  "string/en/frn_n.stf": {
+   "added": 212,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 212,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "2f10974dbfd7af74dd395b0c596d96fb9ece6ade1a755e43d5c6fe22acb135f1"
+  },
+  "string/en/gcw.stf": {
+   "added": 390,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 390,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "65f5e6c9559ecf2486fec86e6f1750db23fa6d105d81de46c1034d1de13377eb"
+  },
+  "string/en/item_d.stf": {
+   "added": 737,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 737,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [
+    "barc_repair_tool"
+   ],
+   "sha256": "48d56c86533655f6fbc75a8be068ed7ab4ec00294f89a25da8fc906c4f333fcc"
+  },
+  "string/en/item_n.stf": {
+   "added": 1439,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 1435,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 4
+   },
+   "barc_keys": [
+    "barc_repair_tool",
+    "pr_clone_barc_speeder_d",
+    "pr_clone_barc_speeder_n"
+   ],
+   "sha256": "3ed3220a0e5115b2f0910016b73fc01001995551b212380a843eef03a23af331"
+  },
+  "string/en/monster_detail.stf": {
+   "added": 64,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 63,
+    "mtg_planets.tre": 1,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [
+    "barc_mini",
+    "barc_speeder",
+    "barc_speeder_imperial",
+    "barc_speeder_rebel",
+    "light_bending_barc_d"
+   ],
+   "sha256": "8747add9d48a36e98146cb1a4a8be8712140cfee1976d3ed49aa867f46af8fdb"
+  },
+  "string/en/obj_n.stf": {
+   "added": 211,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 211,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "00d00a5ca3c4c0a17aaab6ecf4bc29d3124fff7976051af738b5645fa675c0f3"
+  },
+  "string/en/pet_deed.stf": {
+   "added": 35,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 35,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [
+    "barc_speeder",
+    "barc_speeder_imperial",
+    "barc_speeder_rebel"
+   ],
+   "sha256": "87c358012f7ac4daa80068ba3c593e87c5fd606bd32ec7fcf90935c6cc87fda1"
+  },
+  "string/en/planet_n.stf": {
+   "added": 30,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 30,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "29d45bd91e3d8cbb6215273b8690db710c271529e85a71647259d658d9c2ac74"
+  },
+  "string/en/player_structure.stf": {
+   "added": 782,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 782
+   },
+   "barc_keys": [],
+   "sha256": "1d422a6f70ae00d84c1808ae441d6b34e4eb9e2f2d129088f03c0f09613ef085"
+  },
+  "string/en/quest/groundquests.stf": {
+   "added": 5,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 5
+   },
+   "barc_keys": [],
+   "sha256": "262bf86922b7ef2bbcc975673088f0c267a05cb2f3d9b3167daa107474390c2f"
+  },
+  "string/en/quest_armorsmith.stf": {
+   "added": 5,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 5
+   },
+   "barc_keys": [],
+   "sha256": "e54a64b6c0a17f2724e89a3c8903e9178750ab697df8f6176fe190cad7eb39a7"
+  },
+  "string/en/quest_item_d.stf": {
+   "added": 48,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 48,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "3daeb81e9540d21d7fb839c76bcdf59ad598eeb1f47c4edf0d3ce8b7aa42e37c"
+  },
+  "string/en/quest_item_n.stf": {
+   "added": 80,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 80,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "026296712f46b921a5d7dd04021eb369e40b34ce97c48ba25ff80c41e6a4a637"
+  },
+  "string/en/space/cargo.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 1
+   },
+   "barc_keys": [],
+   "sha256": "36f73f2759d28b45f8bb79f86ea436543e12f09be87f056a639c1b8e3d03f6d4"
+  },
+  "string/en/spacequest/escort_duty/corellia_imperial_tier4_2.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 1,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "65189c70bc442728833eb89b3297682a3e1d909bedb3c3d79b813b84e39cac11"
+  },
+  "string/en/spacequest/escort_duty/tatooine_imperial_tier4_escortduty_1.stf": {
+   "added": 1,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 1,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "8e6547fd07e4f68bc3de033a619e21b36addff6dd4ba82c24ce5b8de6091a7e2"
+  },
+  "string/en/terminal_detail.stf": {
+   "added": 25,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 25,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "b34efe9858a08c312b251f83de2e189180935ef2688b27abb27057db26bf7a7f"
+  },
+  "string/en/terminal_name.stf": {
+   "added": 32,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 32,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "cba1253ce50917afa94a0c6b3d6204fccd9d9dcde36dfbeded7c5f64223c3ad7"
+  },
+  "string/en/theme_park_nym/messages.stf": {
+   "added": 52,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 52,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "ad52de12c9eb96253fca2f4c925bbe1ffff2c09254fb0e1e75890ed281ce7e8d"
+  },
+  "string/en/ui.stf": {
+   "added": 5,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 5
+   },
+   "barc_keys": [],
+   "sha256": "d022f13a7e34e3328938a0db0be0445c94958f692d08d76540a5dbc2e9c4ef09"
+  },
+  "string/en/weapon_detail.stf": {
+   "added": 187,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 187,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "b0713cbcf2010db33174d5af634e2c9d7b0f78190822cb795acfa0b2a036c919"
+  },
+  "string/en/weapon_name.stf": {
+   "added": 199,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 199,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "0444dae373f6db53da10aecdb23f4e6c8a6ac660e760d57dab1ae0b66af17c8d"
+  },
+  "string/en/wearables_detail.stf": {
+   "added": 217,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 217,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "44d7f78b0f11f21ce96cb198d42532034333a33a579d3ad797940f4cef3d3ba2"
+  },
+  "string/en/wearables_name.stf": {
+   "added": 228,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 228,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "91a1779f687ed35031084bae8229c73a5ca9331290d2786a9fa12e169f3f141e"
+  },
+  "misc/planet_crc_string_table.iff": {
+   "added": 39,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 25,
+    "mtg_planets.tre": 3,
+    "mtg_patch_019.tre": 11,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "91e5014e053ffc232b8dcf353a1fbb3acc729d5fc83321f2a1235efd3f8be43a"
+  },
+  "misc/quest_crc_string_table.iff": {
+   "added": 1953,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 0,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 1953,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [],
+   "sha256": "37e801c65fe9f71256bfe52762a2efecf61dcc63bdbfa7def151ff0229fb53ad"
+  },
+  "appearance/lat/all_m.lat": {
+   "added": 189,
+   "from": {
+    "mtg_patch_023.tre": 0,
+    "mtg_patch_022.tre": 189,
+    "mtg_planets.tre": 0,
+    "mtg_patch_019.tre": 0,
+    "mtg_patch_013_configurable_02.tre": 0
+   },
+   "barc_keys": [
+    "appearance/animation/all_b_mnt_ride_barc_speeder.ans",
+    "vehicle_barc_speeder"
+   ],
+   "sha256": "8afc6f77b4d769efa1ea6764d7d4e80ff236f4b917dd50ddafd45253dc29f494"
   }
  },
  "idempotent": true,

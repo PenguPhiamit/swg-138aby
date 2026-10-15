@@ -85,3 +85,5 @@ outputs/Farming-assets/*/source.html
 # Class-check data: regenerate with python -I outputs/Claude-class-check/build_matrix.py (about 35 s)
 outputs/Claude-class-check/commands.json
 outputs/Claude-class-check/professions.json
+outputs/MTG-merges/shadow-audit.json
+outputs/MTG-merges/work/
