@@ -1,0 +1,533 @@
+{
+ "_about": "Plain load-test bots for the TEST galaxy (fleet-scale test, 15 Oct), named after the Aurebesh letters after Forn. Kept out of groups.json so squad.py setup/status/run never start them by accident. Driven by load_fleet.py; they need no AgentAccounts entry. Account names must stay unique.",
+ "groups": {
+  "Grek": {
+   "focus": "Load test only: log in, walk and fight near the starting city.",
+   "city": "mos_eisley",
+   "members": [
+    {
+     "account": "grek1",
+     "name": "Grek Dilvur",
+     "race": "human_male",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "grek2",
+     "name": "Goken Roxur",
+     "race": "human_female",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "grek3",
+     "name": "Galkor Volvur",
+     "race": "rodian_male",
+     "profession": "outdoors_scout"
+    },
+    {
+     "account": "grek4",
+     "name": "Gidis Randur",
+     "race": "zabrak_female",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "grek5",
+     "name": "Golkor Dilvow",
+     "race": "twilek_male",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "grek6",
+     "name": "Gundok Rithek",
+     "race": "bothan_female",
+     "profession": "science_medic"
+    },
+    {
+     "account": "grek7",
+     "name": "Golor Bethur",
+     "race": "trandoshan_male",
+     "profession": "social_entertainer"
+    }
+   ]
+  },
+  "Herf": {
+   "focus": "Load test only: log in, walk and fight near the starting city.",
+   "city": "theed",
+   "members": [
+    {
+     "account": "herf1",
+     "name": "Herf Bolvan",
+     "race": "human_female",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "herf2",
+     "name": "Hadis Madrix",
+     "race": "rodian_male",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "herf3",
+     "name": "Hevith Molvix",
+     "race": "zabrak_female",
+     "profession": "outdoors_scout"
+    },
+    {
+     "account": "herf4",
+     "name": "Hulkax Kulvur",
+     "race": "twilek_male",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "herf5",
+     "name": "Hurok Vedran",
+     "race": "bothan_female",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "herf6",
+     "name": "Hathok Kudrix",
+     "race": "trandoshan_male",
+     "profession": "science_medic"
+    },
+    {
+     "account": "herf7",
+     "name": "Holkan Kendek",
+     "race": "human_male",
+     "profession": "social_entertainer"
+    }
+   ]
+  },
+  "Isk": {
+   "focus": "Load test only: log in, walk and fight near the starting city.",
+   "city": "coronet",
+   "members": [
+    {
+     "account": "isk1",
+     "name": "Isk Rirrur",
+     "race": "rodian_male",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "isk2",
+     "name": "Iidis Bedrell",
+     "race": "zabrak_female",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "isk3",
+     "name": "Iuthith Zaskek",
+     "race": "twilek_male",
+     "profession": "outdoors_scout"
+    },
+    {
+     "account": "isk4",
+     "name": "Ialkul Ruthell",
+     "race": "bothan_female",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "isk5",
+     "name": "Iorra Kalvow",
+     "race": "trandoshan_male",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "isk6",
+     "name": "Iukith Rurran",
+     "race": "human_male",
+     "profession": "science_medic"
+    },
+    {
+     "account": "isk7",
+     "name": "Iovra Dethek",
+     "race": "human_female",
+     "profession": "social_entertainer"
+    }
+   ]
+  },
+  "Jenth": {
+   "focus": "Load test only: log in, walk and fight near the starting city.",
+   "city": "mos_eisley",
+   "members": [
+    {
+     "account": "jenth1",
+     "name": "Jenth Toxow",
+     "race": "zabrak_female",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "jenth2",
+     "name": "Jakor Muxell",
+     "race": "twilek_male",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "jenth3",
+     "name": "Juskok Methan",
+     "race": "bothan_female",
+     "profession": "outdoors_scout"
+    },
+    {
+     "account": "jenth4",
+     "name": "Judul Tiskow",
+     "race": "trandoshan_male",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "jenth5",
+     "name": "Jolra Bathek",
+     "race": "human_male",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "jenth6",
+     "name": "Jurvul Bandow",
+     "race": "human_female",
+     "profession": "science_medic"
+    },
+    {
+     "account": "jenth7",
+     "name": "Jodith Zithur",
+     "race": "rodian_male",
+     "profession": "social_entertainer"
+    }
+   ]
+  },
+  "Krill": {
+   "focus": "Load test only: log in, walk and fight near the starting city.",
+   "city": "theed",
+   "members": [
+    {
+     "account": "krill1",
+     "name": "Krill Koxek",
+     "race": "twilek_male",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "krill2",
+     "name": "Kothul Maxell",
+     "race": "bothan_female",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "krill3",
+     "name": "Kalkax Zerrow",
+     "race": "trandoshan_male",
+     "profession": "outdoors_scout"
+    },
+    {
+     "account": "krill4",
+     "name": "Kilra Kondek",
+     "race": "human_male",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "krill5",
+     "name": "Kelkek Rithix",
+     "race": "human_female",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "krill6",
+     "name": "Kedok Borrow",
+     "race": "rodian_male",
+     "profession": "science_medic"
+    },
+    {
+     "account": "krill7",
+     "name": "Kirith Talvur",
+     "race": "zabrak_female",
+     "profession": "social_entertainer"
+    }
+   ]
+  },
+  "Leth": {
+   "focus": "Load test only: log in, walk and fight near the starting city.",
+   "city": "coronet",
+   "members": [
+    {
+     "account": "leth1",
+     "name": "Leth Duskan",
+     "race": "bothan_female",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "leth2",
+     "name": "Lathul Dundell",
+     "race": "trandoshan_male",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "leth3",
+     "name": "Lakith Zaskur",
+     "race": "human_male",
+     "profession": "outdoors_scout"
+    },
+    {
+     "account": "leth4",
+     "name": "Laskek Balvix",
+     "race": "human_female",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "leth5",
+     "name": "Lurok Tindan",
+     "race": "rodian_male",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "leth6",
+     "name": "Lilax Turrell",
+     "race": "zabrak_female",
+     "profession": "science_medic"
+    },
+    {
+     "account": "leth7",
+     "name": "Lerra Zulvur",
+     "race": "twilek_male",
+     "profession": "social_entertainer"
+    }
+   ]
+  },
+  "Mern": {
+   "focus": "Load test only: log in, walk and fight near the starting city.",
+   "city": "mos_eisley",
+   "members": [
+    {
+     "account": "mern1",
+     "name": "Mern Zethix",
+     "race": "trandoshan_male",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "mern2",
+     "name": "Malkan Rirran",
+     "race": "human_male",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "mern3",
+     "name": "Mukis Tixell",
+     "race": "human_female",
+     "profession": "outdoors_scout"
+    },
+    {
+     "account": "mern4",
+     "name": "Murul Melvow",
+     "race": "rodian_male",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "mern5",
+     "name": "Mokok Vaskix",
+     "race": "zabrak_female",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "mern6",
+     "name": "Molkra Volvix",
+     "race": "twilek_male",
+     "profession": "science_medic"
+    },
+    {
+     "account": "mern7",
+     "name": "Mindax Kedrell",
+     "race": "bothan_female",
+     "profession": "social_entertainer"
+    }
+   ]
+  },
+  "Nern": {
+   "focus": "Load test only: log in, walk and fight near the starting city.",
+   "city": "theed",
+   "members": [
+    {
+     "account": "nern1",
+     "name": "Nern Buskek",
+     "race": "human_male",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "nern2",
+     "name": "Nevis Tidrow",
+     "race": "human_female",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "nern3",
+     "name": "Nikul Merrow",
+     "race": "rodian_male",
+     "profession": "outdoors_scout"
+    },
+    {
+     "account": "nern4",
+     "name": "Nevith Moxur",
+     "race": "zabrak_female",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "nern5",
+     "name": "Nuthok Doskix",
+     "race": "twilek_male",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "nern6",
+     "name": "Nudor Tulvek",
+     "race": "bothan_female",
+     "profession": "science_medic"
+    },
+    {
+     "account": "nern7",
+     "name": "Naran Tiskix",
+     "race": "trandoshan_male",
+     "profession": "social_entertainer"
+    }
+   ]
+  },
+  "Osk": {
+   "focus": "Load test only: log in, walk and fight near the starting city.",
+   "city": "coronet",
+   "members": [
+    {
+     "account": "osk1",
+     "name": "Osk Vundan",
+     "race": "human_female",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "osk2",
+     "name": "Oekan Molvell",
+     "race": "rodian_male",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "osk3",
+     "name": "Oilkan Taskur",
+     "race": "zabrak_female",
+     "profession": "outdoors_scout"
+    },
+    {
+     "account": "osk4",
+     "name": "Oukor Mexell",
+     "race": "twilek_male",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "osk5",
+     "name": "Oodul Rorrix",
+     "race": "bothan_female",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "osk6",
+     "name": "Oendek Bethek",
+     "race": "trandoshan_male",
+     "profession": "science_medic"
+    },
+    {
+     "account": "osk7",
+     "name": "Ourvan Zodran",
+     "race": "human_male",
+     "profession": "social_entertainer"
+    }
+   ]
+  },
+  "Peth": {
+   "focus": "Load test only: log in, walk and fight near the starting city.",
+   "city": "mos_eisley",
+   "members": [
+    {
+     "account": "peth1",
+     "name": "Peth Belvix",
+     "race": "rodian_male",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "peth2",
+     "name": "Polen Murrek",
+     "race": "zabrak_female",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "peth3",
+     "name": "Puven Rilvix",
+     "race": "twilek_male",
+     "profession": "outdoors_scout"
+    },
+    {
+     "account": "peth4",
+     "name": "Porvul Voskur",
+     "race": "bothan_female",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "peth5",
+     "name": "Podek Kuskell",
+     "race": "trandoshan_male",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "peth6",
+     "name": "Pindan Ralvek",
+     "race": "human_male",
+     "profession": "science_medic"
+    },
+    {
+     "account": "peth7",
+     "name": "Poskan Turrek",
+     "race": "human_female",
+     "profession": "social_entertainer"
+    }
+   ]
+  },
+  "Qek": {
+   "focus": "Load test only: log in, walk and fight near the starting city.",
+   "city": "theed",
+   "members": [
+    {
+     "account": "qek1",
+     "name": "Qek Toxek",
+     "race": "zabrak_female",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "qek2",
+     "name": "Qorvith Kilvur",
+     "race": "twilek_male",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "qek3",
+     "name": "Qurul Zoxek",
+     "race": "bothan_female",
+     "profession": "outdoors_scout"
+    },
+    {
+     "account": "qek4",
+     "name": "Quendis Rondell",
+     "race": "trandoshan_male",
+     "profession": "combat_marksman"
+    },
+    {
+     "account": "qek5",
+     "name": "Qekek Vodrell",
+     "race": "human_male",
+     "profession": "combat_brawler"
+    },
+    {
+     "account": "qek6",
+     "name": "Qirvis Kothur",
+     "race": "human_female",
+     "profession": "science_medic"
+    },
+    {
+     "account": "qek7",
+     "name": "Qervan Vilvell",
+     "race": "rodian_male",
+     "profession": "social_entertainer"
+    }
+   ]
+  }
+ }
+}

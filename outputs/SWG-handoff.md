@@ -269,6 +269,11 @@ ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fi
 
 ## Log
 
+### 2026-10-15 13:18 Claude: fleet-scale test, 100 bots run comfortably (recommend up to 100)
+
+- 23 -> 50 -> 100 bodies fighting on Tatooine/Naboo/Corellia: core3 0.89 -> 1.22 -> 1.49 cores, 4.76 -> 4.87 GB; bodies 1.28 GB RSS (370 MB PSS) at 100; WSL MemAvailable never under 10.0 GB, commit headroom never under 11.6 GB; chat round trip flat 81 ms; no lag lines. No galaxy restart: the load bots need no AgentAccounts, so the Forn escort run kept going. Report `Bot-reports/fleet-scale-test.md`.
+- New `tools/bots/load_fleet.py` + `load-groups.json` (77 plain bots, Grek-Qek, kept out of groups.json). Watch for long big runs: each fighting body writes ~2 MB/min of client log to /var/tmp (12 GB/h at 100); `load_fleet.py down` deletes them.
+
 ### 2026-10-15 13:07 Claude: plan to fork TortoiseBots with the new public repo
 
 - `Documentation-support/tortoisebots-fork-plan.md` (`7128ade`; roadmap row B8). Fork Sagiroth's TortoiseBots on GitHub when the new public repo is made. The fork's `main` mirrors upstream; a `swg` branch holds our Core3 module in a new `swg/` folder, pinned as a submodule in the new repo. Core3 keeps only the hooks and builds with the module off.
