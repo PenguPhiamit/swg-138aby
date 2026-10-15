@@ -13,7 +13,7 @@ Most useful:
 4. Minor: **Fossilize** (MIT) to share Vulkan shader caches, and **gamescope** for fixed-size test windows on a Linux desktop.
 
 Hard no's:
-- Valve game models, textures, sounds or maps in SWG or the art pipeline.
+- ~~Valve game models, textures, sounds or maps in SWG or the art pipeline.~~ Corrected in section 6: Valve's wiki allows first-party Valve assets in non-commercial fangames, on any engine. Still low value here.
 - Source SDK 2013 or Half-Life 1 SDK code in Core3 or the bots.
 - The Steamworks SDK, which is built for Steam titles.
 - Steam or Valve logos and names as project branding.
@@ -68,3 +68,30 @@ Hard no's:
 - Not verified in this run: gamescope and Steam Runtime licence files, Wine's official licence page, the Valve wiki licence, the Steamworks access agreement text, and the Half-Life SDK repo LICENSE.
 - Core3's own licence was not checked. It matters before importing LGPL or zlib code.
 - The legal status of SWG emulation is outside Valve's terms and is unresolved. This is general information, not legal advice.
+
+## 6. Checked after the owner's search (Claude, 15 Oct 2026)
+
+The owner shared a Google AI summary. Two of its claims were new or unverified above; both were checked.
+
+**Valve assets in fangames: allowed for non-commercial use.** Claude read the Valve Developer Community page "Mod Content Usage" in the browser pane; the agent's fetch had been refused. It says that non-commercial mods and fangames may port assets from first-party Valve games to other games, including games on non-Valve engines. That covers models, textures, materials, sounds, dialogue and music. Its conditions:
+- no game code (the SDK licences cover that);
+- no stock maps ported verbatim;
+- no Workshop content without the author's permission;
+- assets from third-party games that use Valve's IP have their own rules (its example is Counter-Strike Nexon);
+- commercial games must contact Valve first.
+
+The page was last edited on 24 June 2023 and is tagged "update needed", because Valve is less strict than the page implies. It is a community wiki page, not a licence, and the footer names no content licence, only Valve's Terms of Use.
+
+For this project, a non-commercial SWG server fits that wording, but three things keep it low value:
+- SWG's own IP is Lucasfilm's either way;
+- Half-Life, Portal and TF2 art rarely fits Star Wars (generic props and sounds at most);
+- every model needs the same MDL/VTF to SWG conversion as F86.
+
+Anything that sells items or access would make the project commercial, and the permission would end.
+
+**S&box and Source 2.** Late in March 2026, Facepunch signed an agreement with Valve that lets games made in S&box be exported and sold on Steam as standalone titles without engine royalties. Garry Newman confirmed it on Discord, and Valve's wiki calls it the first Source 2 licence to third parties ([Wikipedia](https://en.wikipedia.org/wiki/S%26box), [VDC](https://developer.valvesoftware.com/wiki/S%26box), [igor'sLAB](https://www.igorslab.de/en/sandbox-launches-on-steam-facepunch-is-turning-garrys-mod-into-an-open-gaming-platform-rather-than-a-sequel/)). Other details from the coverage:
+- April coverage still showed the standalone export as "coming soon" on Steam;
+- S&box's own code has been MIT-licensed since November 2025, but Source 2 stays proprietary;
+- Steam's usual cut still applies to sales.
+
+For this project: no use. The SWG client runs on SOE's engine, and S&box would matter only for building a new client from scratch, which is not on the roadmap.
