@@ -138,9 +138,11 @@ class Bot:
 
     def _publish(self, reply=None):
         if reply and isinstance(reply.get('x'), (int, float)) and isinstance(reply.get('y'), (int, float)):
-            # Inside a building the body reports cell-local coordinates: keep the last outdoor spot, mark indoors.
+            # Inside a building the body reports cell-local coordinates: keep the last outdoor spot for the world map,
+            # and the local spot for the floor plan (live_map.py /floor, owner: "actually track them").
             if reply.get('cell'):
-                self.now.update(cell=reply['cell'])
+                self.now.update(cell=reply['cell'], lx=round(reply['x'], 2), ly=round(reply['y'], 2),
+                                lz=round(reply.get('z') or 0.0, 2), local_at=time.time())
             else:
                 self.now.update(x=round(reply['x'], 1), y=round(reply['y'], 1), cell=0, pos_at=time.time())
             if reply.get('planet'):

@@ -43,6 +43,7 @@ LOGS = OUTPUTS / 'Bot-reports' / 'tracker'
 KEEP_HOURS = 48
 NOW = Path('/var/tmp/swg-bots/now')   # squad.py: what each bot is doing, and where it last said it was
 NOW_FRESH = 15 * 60                   # an older label is stale (the bot's script ended)
+NAVMAPS = OUTPUTS / 'Bot-reports' / 'navmaps'   # tools/navmap.py: building floor plans for /floor
 
 roster = {}     # first name -> group
 trails = {}     # first name -> [(x, y)]
@@ -125,11 +126,23 @@ def present():
         if own.get('pos_at', 0) > mtime and own.get('zone', zone) == zone and own.get('x') is not None:
             x, y, pos_s = own['x'], own['y'], round(now - own['pos_at'])
         doing = own.get('doing', '')
+        local = own.get('cell') and now - float(own.get('local_at', 0)) < 60
         chars.append({'name': name, 'zone': zone, 'x': x, 'y': y, 'pos_s': pos_s,
                       'kind': 'bot' if name in roster else 'player', 'group': roster.get(name, ''),
                       'online_s': c.get('sessionSeconds'), 'indoors': bool(own.get('cell')),
-                      'doing': doing, 'doing_s': round(now - own['since']) if doing and own.get('since') else None})
+                      'doing': doing, 'doing_s': round(now - own['since']) if doing and own.get('since') else None,
+                      **({'cell': own['cell'], 'lx': own.get('lx'), 'ly': own.get('ly'), 'lz': own.get('lz')} if local else {})})
     return chars, age, error, mtime
+
+
+def escorted():
+    """Players an escort crew is with indoors (escort.py puts the player's cell and spot in the leader's label)."""
+    out, now = [], time.time()
+    for row in labels().values():
+        seen = row.get('escorted')
+        if seen and now - float(seen.get('at', 0)) < 20:
+            out.append(seen)
+    return out
 
 
 def snapshot():
@@ -141,7 +154,7 @@ def snapshot():
             del trail[:-TRAIL]
         c['trail'] = [[tx, ty] for tx, ty, tz in trail if tz == c['zone']]
     return {'who_age': age, 'error': error, 'time': time.strftime('%H:%M:%S'), 'chars': chars,
-            'activity': activity(), 'places': places()}
+            'activity': activity(), 'places': places(), 'escorted': escorted()}
 
 
 def readable(chars, scenario):
@@ -168,11 +181,12 @@ def record(last, every=3):
             for c in chars:
                 if c['kind'] != 'bot':
                     continue
-                state = (c['zone'], round(c['x']), round(c['y']), c['doing'])
+                state = (c['zone'], round(c['x']), round(c['y']), c['doing'], c.get('cell'), c.get('lx'), c.get('ly'))
                 if last.get(c['name']) != state:
                     last[c['name']] = state
                     lines.append({'t': stamp, 'kind': 'bot', **{k: c[k] for k in (
-                        'name', 'group', 'zone', 'x', 'y', 'indoors', 'doing', 'doing_s', 'pos_s')}})
+                        'name', 'group', 'zone', 'x', 'y', 'indoors', 'doing', 'doing_s', 'pos_s')},
+                        **{k: c[k] for k in ('cell', 'lx', 'ly', 'lz') if k in c}})
             scenario = {}
             for row in activity():
                 scenario[row['group']] = f"{row['scenario'].replace('.py', '')}: {row['state']}" if row['scenario'] else row['state']
@@ -196,10 +210,34 @@ def record(last, every=3):
         time.sleep(every)
 
 
+def navmaps():
+    """The floor plans navmap.py built: name, planet, building and the server ids of its cells."""
+    out = []
+    for path in sorted(NAVMAPS.glob('*.json')):
+        try:
+            plan = json.loads(path.read_text(encoding='utf-8'))
+        except (OSError, ValueError):
+            continue
+        out.append({'name': path.stem, 'planet': plan.get('planet'), 'building': plan.get('building'),
+                    'template': plan.get('template', '').rsplit('/', 1)[-1],
+                    'cells': [c['oid'] for c in plan.get('cells', []) if c.get('oid')]})
+    return out
+
+
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path.startswith('/data.json'):
             body, kind = json.dumps(snapshot()).encode(), 'application/json'
+        elif self.path.startswith('/navmaps.json'):
+            body, kind = json.dumps(navmaps()).encode(), 'application/json'
+        elif self.path.startswith('/navmap/') and self.path.endswith('.json') and '..' not in self.path:
+            target = NAVMAPS / self.path[len('/navmap/'):].split('?')[0]
+            if not target.is_file():
+                self.send_error(404)
+                return
+            body, kind = target.read_bytes(), 'application/json'
+        elif self.path.split('?')[0] in ('/floor', '/floor.html'):
+            body, kind = FLOOR_PAGE.encode(), 'text/html; charset=utf-8'
         elif self.path in ('/', '/index.html'):
             body, kind = PAGE.encode(), 'text/html; charset=utf-8'
         else:
@@ -246,7 +284,7 @@ td.n{font-variant-numeric:tabular-nums;color:var(--muted);text-align:right;white
 .small{font-size:12px;color:var(--muted)}tr.pick td{background:color-mix(in srgb,var(--accent) 12%,transparent)}
 tbody tr{cursor:pointer}
 </style></head><body>
-<header><h1>Test galaxy</h1><div id="tabs"></div><div id="status">loading…</div></header>
+<header><h1>Test galaxy</h1><div id="tabs"></div><div id="status">loading…</div><a class="tool" href="/floor" style="text-decoration:none">Floor plans</a></header>
 <main><div id="wrap"><canvas id="map"></canvas><div id="tools"><button class="tool" id="fit">Fit</button>
 <button class="tool" id="whole">Whole planet</button></div><div id="tip"></div></div>
 <aside><section><h2>On this planet</h2><table><tbody id="people"></tbody></table></section>
@@ -320,6 +358,106 @@ cv.addEventListener('pointermove',e=>{const d=devicePixelRatio||1,r=cv.getBoundi
  if(h){tip.style.display='block';tip.textContent=h.label;tip.style.left=(e.clientX-r.left+12)+'px';tip.style.top=(e.clientY-r.top+12)+'px'}else tip.style.display='none'});
 function esc(t){return String(t).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]))}
 addEventListener('resize',draw);poll();setInterval(poll,1500);
+</script></body></html>
+'''
+
+
+# Floor plan of a building interior (owner, 15 Oct: "try and find a way to actually track them and map the navmesh"):
+# the cells' floor meshes from tools/navmap.py (pale: where a body can stand; dark lines: walls, Core3's uncrossable
+# edges; orange: blocking edges), the bots inside at their cell-local spots with labels and trails, the escorted
+# player, and an X wherever a bot reported itself stuck.
+FLOOR_PAGE = r'''<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Floor Plans</title>
+<style>
+:root{--bg:#f6f5f2;--panel:#ffffff;--ink:#1d1d1b;--muted:#6b6a65;--line:#e2e0da;--floor:#e9eef6;--floor2:#f3f2ee;
+--wall:#3a3a36;--block:#d9822b;--you:#c98a00;--stuck:#d1495b;--accent:#2f6fde}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141413;--panel:#1d1d1b;--ink:#ecebe6;--muted:#9c9a92;
+--line:#2e2d2a;--floor:#22303f;--floor2:#1f1f1d;--wall:#cfcdc5;--block:#f0a050;--you:#f2b632;--stuck:#ff6b7d;--accent:#6c9cff}}
+:root[data-theme="dark"]{--bg:#141413;--panel:#1d1d1b;--ink:#ecebe6;--muted:#9c9a92;--line:#2e2d2a;--floor:#22303f;
+--floor2:#1f1f1d;--wall:#cfcdc5;--block:#f0a050;--you:#f2b632;--stuck:#ff6b7d;--accent:#6c9cff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
+h1{font-size:16px;margin:0;font-weight:600}#status{color:var(--muted);font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:6px}.bar button,.tool{border:1px solid var(--line);background:var(--panel);color:var(--ink);
+border-radius:6px;padding:4px 10px;font:inherit;cursor:pointer;text-decoration:none}.bar button.on{border-color:var(--accent);color:var(--accent);font-weight:600}
+main{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:12px;padding:12px 16px}@media (max-width:860px){main{grid-template-columns:1fr}}
+#wrap{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;aspect-ratio:1/1;max-height:82vh}
+canvas{width:100%;height:100%;display:block;cursor:grab;touch-action:none}
+#tip{position:absolute;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:12px;display:none;white-space:nowrap}
+aside{display:flex;flex-direction:column;gap:12px;min-width:0}section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+h2{font-size:13px;margin:0 0 6px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+table{width:100%;border-collapse:collapse;font-size:13px}td{padding:3px 4px;border-top:1px solid var(--line);vertical-align:top}
+.small{font-size:12px;color:var(--muted)}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle}
+</style></head><body>
+<header><h1>Floor plans</h1><div class="bar" id="maps"></div><div class="bar" id="levels"></div><div id="status">loading…</div>
+<a class="tool" href="/">World map</a></header>
+<main><div id="wrap"><canvas id="map"></canvas><div id="tip"></div></div>
+<aside><section><h2>Inside</h2><table><tbody id="inside"></tbody></table></section>
+<section><h2>Stuck spots</h2><table><tbody id="stuck"></tbody></table>
+<div class="small" style="margin-top:6px">Pale: the floor mesh Core3 paths over. Dark lines: walls (uncrossable edges). Orange: blocking edges. X: a bot said it was stuck there. Trails are kept while this page is open.</div></section></aside></main>
+<script>
+const COLORS={Aurek:'#d1495b',Besh:'#2f9e44',Cresh:'#2f6fde',Dorn:'#8e5bd6',Esk:'#e07b00',Forn:'#c2185b',Kael:'#0ca5a5'};
+const cv=document.getElementById('map'),ctx=cv.getContext('2d'),tip=document.getElementById('tip');
+let maps=[],plan=null,planName=null,cellInfo={},data=null,view=null,drag=null,hits=[],level='all',trails={},stuck=[],autoPicked=false;
+function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+function esc(t){return String(t).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]))}
+function lvl(h){return h==null?null:Math.round(h/4)*4}
+function inside(){if(!data||!plan)return[];const out=[];data.chars.forEach(c=>{if(c.cell&&cellInfo[c.cell])out.push(c)});
+ (data.escorted||[]).forEach(p=>{if(cellInfo[p.cell])out.push({name:p.name,kind:'player',cell:p.cell,lx:p.lx,ly:p.ly,lz:p.lz,doing:'',group:''})});return out}
+function shown(cell){return level==='all'||lvl(cell.height)===level}
+function fit(){if(!plan)return;let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;plan.cells.filter(shown).forEach(c=>c.tris.forEach(t=>t.forEach(p=>{
+ x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);y0=Math.min(y0,p[1]);y1=Math.max(y1,p[1])})));if(x0>x1){view={cx:0,cy:0,span:100};return}
+ view={cx:(x0+x1)/2,cy:(y0+y1)/2,span:Math.max(20,Math.max(x1-x0,y1-y0)*1.1)}}
+function toS(x,y){const s=cv.width/view.span;return[(x-view.cx)*s+cv.width/2,(view.cy-y)*s+cv.height/2]}
+function toW(px,py){const s=cv.width/view.span;return[(px-cv.width/2)/s+view.cx,view.cy-(py-cv.height/2)/s]}
+function draw(){const r=cv.getBoundingClientRect(),d=devicePixelRatio||1;cv.width=r.width*d;cv.height=r.height*d;ctx.clearRect(0,0,cv.width,cv.height);
+ if(!plan||!view)return;hits=[];const s=cv.width/view.span;
+ plan.cells.forEach(c=>{const on=shown(c);ctx.fillStyle=on?css('--floor'):css('--floor2');ctx.globalAlpha=on?1:.35;
+  c.tris.forEach(t=>{ctx.beginPath();t.forEach((p,i)=>{const[x,y]=toS(p[0],p[1]);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.closePath();ctx.fill()})});
+ ctx.globalAlpha=1;plan.cells.filter(shown).forEach(c=>{[['walls','--wall',1.4],['blocks','--block',1.6]].forEach(([k,col,w])=>{
+  ctx.strokeStyle=css(col);ctx.lineWidth=w*d;ctx.beginPath();c[k].forEach(e=>{const[a,b]=toS(e[0],e[1]),[p,q]=toS(e[2],e[3]);ctx.moveTo(a,b);ctx.lineTo(p,q)});ctx.stroke()})
+  if(s*8>40*d&&c.tris.length){let sx=0,sy=0,n=0;c.tris.forEach(t=>t.forEach(p=>{sx+=p[0];sy+=p[1];n++}));const[x,y]=toS(sx/n,sy/n);
+   ctx.fillStyle=css('--muted');ctx.font=(10*d)+'px system-ui';ctx.fillText(c.room,x-12*d,y)}});
+ Object.entries(trails).forEach(([name,t])=>{const pts=t.filter(p=>cellInfo[p[0]]&&shown(cellInfo[p[0]]));if(pts.length<2)return;
+  ctx.strokeStyle=COLORS[t.group]||css('--accent');ctx.globalAlpha=.4;ctx.lineWidth=2*d;ctx.beginPath();
+  pts.forEach((p,i)=>{const[x,y]=toS(p[1],p[2]);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();ctx.globalAlpha=1});
+ stuck.forEach(st=>{if(!cellInfo[st.cell]||!shown(cellInfo[st.cell]))return;const[x,y]=toS(st.x,st.y);ctx.strokeStyle=css('--stuck');ctx.lineWidth=2.5*d;
+  ctx.beginPath();ctx.moveTo(x-5*d,y-5*d);ctx.lineTo(x+5*d,y+5*d);ctx.moveTo(x+5*d,y-5*d);ctx.lineTo(x-5*d,y+5*d);ctx.stroke();
+  hits.push({x,y,label:'stuck: '+st.name+' at '+st.time+' ('+st.room+')'})});
+ inside().forEach((c,i)=>{if(c.lx==null)return;const[x,y]=toS(c.lx,c.ly);const col=c.kind==='player'?css('--you'):(COLORS[c.group]||css('--accent'));
+  ctx.fillStyle=col;ctx.beginPath();ctx.arc(x,y,(c.kind==='player'?7:5)*d,0,7);ctx.fill();ctx.strokeStyle=css('--panel');ctx.lineWidth=2*d;ctx.stroke();
+  const text=c.name+(c.doing?' — '+(c.doing.length>34?c.doing.slice(0,33)+'…':c.doing):'');ctx.font=(c.kind==='player'?'600 ':'')+(12*d)+'px system-ui';
+  ctx.lineWidth=3*d;ctx.strokeStyle=css('--panel');ctx.strokeText(text,x+9*d,y+4*d+i%2*12*d);ctx.fillStyle=css('--ink');ctx.fillText(text,x+9*d,y+4*d+i%2*12*d);
+  hits.push({x,y,label:c.name+' · '+(cellInfo[c.cell]||{}).room+' · height '+(c.lz!=null?c.lz.toFixed(1):'?')+(c.doing?' · '+c.doing:'')})})}
+function sideList(){const rows=inside();document.getElementById('inside').innerHTML=rows.map(c=>`<tr><td><span class="dot" style="background:${c.kind==='player'?css('--you'):(COLORS[c.group]||css('--accent'))}"></span><b>${esc(c.name)}</b>
+ <div class="small">${esc((cellInfo[c.cell]||{}).room||'')} · height ${c.lz!=null?c.lz.toFixed(1):'?'}${c.doing?' · '+esc(c.doing):''}</div></td></tr>`).join('')||'<tr><td class="small">nobody inside</td></tr>';
+ document.getElementById('stuck').innerHTML=stuck.slice(-12).reverse().map(s=>`<tr><td>${esc(s.name)}<div class="small">${s.time} · ${esc(s.room)} · ${s.x.toFixed(1)}, ${s.y.toFixed(1)}</div></td></tr>`).join('')||'<tr><td class="small">none yet</td></tr>'}
+function levels(){if(!plan)return;const hs=[...new Set(plan.cells.filter(c=>c.height!=null).map(c=>lvl(c.height)))].sort((a,b)=>b-a);
+ document.getElementById('levels').innerHTML=['all',...hs].map(h=>`<button class="${h===level?'on':''}" data-l="${h}">${h==='all'?'all levels':'level '+h}</button>`).join('')}
+async function loadPlan(name){const r=await fetch('navmap/'+name+'.json',{cache:'no-store'});plan=await r.json();planName=name;cellInfo={};
+ plan.cells.forEach(c=>{if(c.oid)cellInfo[c.oid]=c});level='all';levels();fit();renderMaps();draw()}
+function renderMaps(){document.getElementById('maps').innerHTML=maps.map(m=>`<button class="${m.name===planName?'on':''}" data-m="${m.name}">${esc(m.template.replace('shared_','').replace('.iff',''))} · ${m.planet}</button>`).join('')||'<span class="small">no floor plans yet: python tools/navmap.py build &lt;planet&gt; &lt;building id&gt;</span>'}
+async function poll(){try{data=await(await fetch('data.json',{cache:'no-store'})).json()}catch(e){document.getElementById('status').textContent='map server not answering';return}
+ if(!autoPicked&&maps.length){const counts=maps.map(m=>data.chars.filter(c=>c.cell&&m.cells.includes(c.cell)).length);const best=counts.indexOf(Math.max(...counts));
+  if(counts[best]>0||!plan){autoPicked=counts[best]>0;await loadPlan(maps[best].name)}}
+ const now=new Date().toTimeString().slice(0,8);inside().forEach(c=>{if(c.lx==null)return;const t=trails[c.name]||(trails[c.name]=Object.assign([],{group:c.group}));
+  const last=t[t.length-1];if(!last||last[0]!==c.cell||Math.hypot(last[1]-c.lx,last[2]-c.ly)>0.3){t.push([c.cell,c.lx,c.ly]);if(t.length>200)t.shift()}
+  if(String(c.doing).startsWith('stuck')&&!stuck.some(s=>s.name===c.name&&Math.hypot(s.x-c.lx,s.y-c.ly)<1&&s.cell===c.cell))
+   stuck.push({name:c.name,cell:c.cell,x:c.lx,y:c.ly,time:now,room:(cellInfo[c.cell]||{}).room||''})});
+ document.getElementById('status').textContent=`${inside().length} inside · ${data.time}`;sideList();draw()}
+document.getElementById('maps').onclick=e=>{const n=e.target.dataset.m;if(n){autoPicked=true;loadPlan(n)}};
+document.getElementById('levels').onclick=e=>{const l=e.target.dataset.l;if(l!==undefined){level=l==='all'?'all':Number(l);levels();fit();draw()}};
+cv.addEventListener('wheel',e=>{e.preventDefault();if(!view)return;const d=devicePixelRatio||1,r=cv.getBoundingClientRect(),[wx,wy]=toW((e.clientX-r.left)*d,(e.clientY-r.top)*d);
+ view.span=Math.min(2000,Math.max(5,view.span*(e.deltaY>0?1.25:.8)));const[nx,ny]=toW((e.clientX-r.left)*d,(e.clientY-r.top)*d);view.cx+=wx-nx;view.cy+=wy-ny;draw()},{passive:false});
+cv.addEventListener('pointerdown',e=>{if(view){drag={x:e.clientX,y:e.clientY,cx:view.cx,cy:view.cy};cv.setPointerCapture(e.pointerId)}});
+cv.addEventListener('pointerup',()=>drag=null);
+cv.addEventListener('pointermove',e=>{const d=devicePixelRatio||1,r=cv.getBoundingClientRect();
+ if(drag){const s=view.span/cv.width*d;view.cx=drag.cx-(e.clientX-drag.x)*s;view.cy=drag.cy+(e.clientY-drag.y)*s;draw();return}
+ const px=(e.clientX-r.left)*d,py=(e.clientY-r.top)*d,h=hits.filter(h=>Math.hypot(h.x-px,h.y-py)<10*d).pop();
+ if(h){tip.style.display='block';tip.textContent=h.label;tip.style.left=(e.clientX-r.left+12)+'px';tip.style.top=(e.clientY-r.top+12)+'px'}else tip.style.display='none'});
+addEventListener('resize',draw);
+(async()=>{try{maps=await(await fetch('navmaps.json',{cache:'no-store'})).json()}catch(e){}renderMaps();await poll();setInterval(poll,1500)})();
 </script></body></html>
 '''
 

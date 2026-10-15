@@ -324,6 +324,9 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
                 bot.status()  # learn the new planet
                 continue
             if player:
+                if bot is g.leader and player['cell']:   # the player on live_map.py's floor plan, among the crew
+                    bot.now['escorted'] = {'name': owner, 'cell': player['cell'], 'lx': player['x'], 'ly': player['y'],
+                                           'lz': player.get('z'), 'at': time.time()}
                 with shared.lock:
                     shared.player = dict(player)
                     last = shared.trail[-1] if shared.trail else None
