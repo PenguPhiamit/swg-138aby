@@ -218,10 +218,19 @@
                   {
                       "id":  "c34-class-check-kits",
                       "effort":  "high",
-                      "status":  "open",
+                      "status":  "done",
                       "model":  "gpt-6.1-sol",
                       "added":  "2026-10-15 02:07 Claude",
+                      "blocker":  "2026-10-15 04:36 Claude: done by Claude while GPT was out of usage (owner wanted the profession testing now): dev 60ed8971 (kits + abilities in profession list) and 9b93665d (afflict); see c34r",
                       "prompt":  "You are ChatGPT on the owner\u0027s private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first: you have WSL; Claude leads; rule \"ChatGPT\u0027s server-code worktree\"; redact names in anything published; commit your own finished h/ work ending \u0027Agent: ChatGPT\u0027). Read Agent/to-chatgpt.md (the newest Claude entries). Task C34, kits for the class check: in your worktree /opt/swg/Core3-gpt (branch gpt/work; first merge dev, which has C30 as 80b66e65), extend AgentGearCommand.h with the item kits outputs/Claude-class-check/matrix.md lists as missing (\u0027Kits the scenario needs\u0027): carbine, polearm, two-hand, special heavy, the lightsaber kits, medicine2 (wound, state, cure, dot and revive packs) and the eight instruments, each a separate \u0027/agentgear \u003ckit\u003e\u0027 with the same gate as the others (test galaxy only, Core3.AgentAccounts) and the same \u0027[agentgear] {json}\u0027 reply. Check every template path against the server\u0027s object templates (bin/scripts/object) and say which ones don\u0027t exist. Also: \u0027/agentgear profession list\u0027 should list the character\u0027s abilities as well as its boxes (test-plan.md section 8 point 3). One commit ending \u0027Agent: ChatGPT\u0027, no cmake/make; ask Claude in Agent/to-claude.md to build and test it. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
+                  },
+                  {
+                      "id":  "c34r-agentgear-kits-review",
+                      "effort":  "high",
+                      "status":  "open",
+                      "model":  "gpt-6.1-sol",
+                      "added":  "2026-10-15 04:36 Claude",
+                      "prompt":  "You are ChatGPT on the owner's private SWGEmu server project. Rules: C:/Users/Pengw/Documents/Codex/2026-10-13/h/AGENTS.md (read it first). Read Agent/to-chatgpt.md (the newest Claude entries). Task C34r, a read-only code review: Claude did C34 itself while you were out of usage, in /opt/swg/Core3-dev (branch dev): 60ed8971 (item kits carbine, polearm, twohand, heavy, grenades, saber1h/2h/pole, medicine2, instruments, traps, crafting, bounty, slicing; abilities in '/agentgear profession list') and 9b93665d ('/agentgear afflict <kind>': wounds, states, dots, damage, incap on the caller or an agent-account target). Review both in MMOCoreORB/src/server/zone/objects/creature/commands/AgentGearCommand.h (git show, as swgemu; do not edit dev): locking (the crosslock on a target, the incap path through inflictDamage and notifyDestruction), the gate (can afflict ever reach a non-agent player or the live galaxy?), dot arguments, JSON reply types, anything that could crash the server. Write numbered findings with file:line, severity and a failure scenario to Documentation-support/review-C34r.md; fixes, if any, as a commit on gpt/work after merging dev. Claim it on the board first; add one short log entry at the top of the Log when you stop (keep CRLF line endings). End with a five-line summary."
                   },
                   {
                       "id":  "c24b-r2-coverage-review",
