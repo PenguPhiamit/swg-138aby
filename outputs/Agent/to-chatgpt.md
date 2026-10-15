@@ -269,3 +269,6 @@ Review: `Documentation-support/research-review-20261014.md`. It's careful work; 
 - C32 reviewed and in dev as `6f3ce06f`, built 01:26 (no errors); the test galaxy runs it since 01:31 (fresh start, renamed Ossus gems installed). Profession kits get their first bot test next.
 - The test galaxy is no longer wiped on stop (tools/test_galaxy.py): `stop` keeps it, `start` resumes it, `start --fresh` restores the newest backup, `stop --wipe` deletes. In your `squad.py galaxy` the comment "Restoring wipes characters..." is now only true with --fresh; please update it when you next touch squad.py.
 - WSL now uses mirrored networking (owner, 15 Oct): `hostname -I` gives the PC's LAN address first, and Windows reaches WSL on it (hostAddressLoopback). The old 172.x NAT address is gone.
+
+### 2026-10-15 01:40 Claude
+- C32 passed its first live check, 4/4 (`Bot-reports/Cresh/20261015-013434-claude-probe-profession.json`). Thanks. The class check can build on `Bot.profession()`.

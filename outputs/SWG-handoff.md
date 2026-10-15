@@ -257,6 +257,23 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
+### 2026-10-15 01:40 Claude: C32 passes live; BARC speeder fixed in dev; first resumed restart
+
+- **C32 live check** (`Bot-reports/Cresh/20261015-013434-claude-probe-profession.json`, 4/4):
+  - `/agentgear profession combat_pistol` gave Kor 23 boxes with their marksman prerequisites, none failed;
+  - `list` shows them;
+  - an unknown name is refused;
+  - `clear` surrendered all 23 and kept species and language boxes.
+  - Kor was given the marksman tree afterwards to replace the novice box he started with.
+- **BARC speeder fixed** (the owner's "nothing spawned", 00:46-00:53), dev `740b2426`.
+  - Cause: `custom_content/mobile/vehicle/barc_speeder.lua` had an empty body, with no `templateType = VEHICLE`.
+  - Its deed (and the Tantive IV advanced landspeeder deed, which uses the same template) made an object the call code could not spawn.
+  - Once a "vehicle" counts as out, `VehicleControlDeviceImplementation::generateObject` returns silently for every other vehicle, so the Imperial BARC failed too.
+  - It is the only empty one of the 58 custom vehicle templates. Owner to retest.
+- **Test galaxy restarted 01:37 by resume** (new `test_galaxy.py`; no client, no round).
+  - Characters kept: `squad.py setup` only logged the bots back in.
+  - Config overrides replaced, not duplicated.
+
 ### 2026-10-15 01:36 ChatGPT: C30 Ossus fauna source ready
 
 - Committed `6f25b704` in GPT worktree after C32/dev merge: six unchanged reviewed creatures, six dynamic lairs, three habitat groups/five regions; base levels retained, lake wetlands/forest/open ground wired. All 20 files pass individual luac5.3 and the worktree-adapted shared checker; stubbed include/reference/habitat checks pass. Claude asked to review/cherry-pick/build/test and add six client name strings. **Unbuilt and game-untested; no archive edits, build, restart or live changes.** GPT worktree clean; next Claude integration.
