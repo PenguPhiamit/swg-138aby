@@ -104,7 +104,7 @@ Debian's default user is **`swgemu`** (changed 13 Oct so VS Code edits files as 
 
 Before downloading, importing, deploying, or acting in-game, check:
 
-1. **Source and rights.** No leaked, stolen or "not for distribution" material: don't search for it, download it, or reference it. That includes the 2026 "Legends" leak and the SWG-Source repositories (widely understood to derive from leaked SOE server code). Honour licences and creator terms (AGPL notices, MTG credit, art permissions). If rights are unclear, stop and ask the owner.
+1. **Source and rights.** No leaked, stolen or "not for distribution" material: don't search for it, download it, or reference it. That includes the 2026 "Legends" leak and the SWG-Source repositories (widely understood to derive from leaked SOE server code). The SWG-Source clones that were in `work/research` went to the Recycle Bin on 15 Oct (owner); their file fingerprints stay in `work/excluded-fingerprints/`, and `outputs/tools/excluded_fingerprints.py check` reports any file of ours identical to one of them (15 Oct: none in h, none in Core3-dev). Honour licences and creator terms (AGPL notices, MTG credit, art permissions). If rights are unclear, stop and ask the owner.
    - **Assets from other games or mods** (KOTOR and similar; from ChatGPT's 13 Oct audit):
      - Only creator-original work whose terms explicitly allow use in other games or conversions qualifies, with the author's required credit.
      - Stock game files are excluded unless their rights holder allows it. So are retextures, upscales and edited meshes made from stock files. A mod author's permission covers only their own contribution, not the original game's art or other contributors' work.

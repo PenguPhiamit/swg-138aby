@@ -39,7 +39,7 @@ outputs/Documentation-support/hoth/client-base/
 outputs/Local-content/local_planets/
 tmp/
 # work/: 13 Oct scratch. Only its scripts are kept. It also holds third-party clones (work/research), Python packages,
-# client cfg copies and chat journals. AGENTS.md says which sources are excluded.
+# client cfg copies and chat journals. The SWG-Source clones were removed on 15 Oct (fingerprints: work/excluded-fingerprints/).
 work/*
 !work/*.py
 *.cfg
