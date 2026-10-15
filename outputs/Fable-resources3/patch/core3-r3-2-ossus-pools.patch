@@ -1,0 +1,15 @@
+--- a/MMOCoreORB/bin/scripts/managers/resource_manager.lua
++++ b/MMOCoreORB/bin/scripts/managers/resource_manager.lua
+@@ -137,6 +137,12 @@
+ 		"energy_renewable_site_limited_geothermal_hoth", "energy_renewable_site_limited_tidal_hoth", "energy_renewable_site_limited_hydron3_hoth"}) do
+ 	table.insert(minimumpoolincludes, {hothType, 1})
+ end
++-- R3 part 2 (Fable, 14 Oct 2026): Ossus's own fourteen minerals, gas and fuels (<class>_ossus, gems <class>_ossus_<n>), in the
++-- merged resource_tree.iff of the test-session local_planets.tre (stage_ossus_minerals); one of each always in spawn, on Ossus only.
++for _, ossusType in ipairs({"steel_ossus", "iron_ossus", "copper_ossus", "aluminum_ossus", "ore_extrusive_ossus", "ore_intrusive_ossus", "gas_reactive_ossus",
++		"petrochem_fuel_liquid_ossus", "petrochem_fuel_solid_ossus", "radioactive_ossus", "armophous_ossus_1", "armophous_ossus_2", "crystalline_ossus_1", "crystalline_ossus_2"}) do
++	table.insert(minimumpoolincludes, {ossusType, 1})
++end
+ 
+ -- The random pool includes is a table of resources and weights. The higher the weight, the more likely the resource is to be chosen when a random pool resource shifts.
+   -- The random pool will never include the items in the excludes

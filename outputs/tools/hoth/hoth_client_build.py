@@ -143,6 +143,13 @@ def leaf_counts(rows):
     return counts
 
 
+# MTG's four Hoth gem leaves are named <class>_hoth_<n>, so endswith('_hoth') missed them (Fable R3, 14 Oct 2026). Core3
+# restricts a type by the '_hoth' substring (ResourceTree::setZoneRestriction), so the names are kept; their text is
+# retyped (MTG: "Hothian Type 1 Crystal Amorphous Gem"), spelt as the stock class text ("Amorphous Gemstone").
+HOTH_GEMS = {'armophous_hoth_1': 'Hothian Type 1 Amorphous Gemstone', 'armophous_hoth_2': 'Hothian Type 2 Amorphous Gemstone',
+             'crystalline_hoth_1': 'Hothian Type 1 Crystalline Gemstone', 'crystalline_hoth_2': 'Hothian Type 2 Crystalline Gemstone'}
+
+
 def resource_tree():
     """Hoth resources: stock's resource tree plus MTG's 50 *_hoth rows (mtg_planets.tre has them, but stock
     patch_14_00 shadows it). Core3 reads the rows in order (hierarchy from the CLASS columns; the container and
@@ -169,19 +176,30 @@ def resource_tree():
     for r in mtg['rows']:
         if r[1] in by_enum:
             rows.append(list(by_enum[r[1]]))
-        elif r[1].endswith('_hoth'):
-            rows.append(list(r))
+        elif r[1].endswith('_hoth') or r[1] in HOTH_GEMS:
+            row = list(r)
+            if r[1] in HOTH_GEMS:
+                row[next(j for j in range(2, 10) if r[j] != '')] = HOTH_GEMS[r[1]]
+            rows.append(row)
     assert [r[1] for r in rows if r[1] in by_enum] == [r[1] for r in stock['rows']], 'stock order changed'
     # MTG's Hoth set lacks the two native energies Core3's native pool asks every planet for. Clone Endor's rows as
     # Hoth's, at the end of their class (so the carried-forward container and name class stay right). MTG's
     # resource_names.stf, which wins in the client, already names both ("Hoth Solar/Wind Renewable Energy").
+    # The three site-limited energies too (R3): stock has no class row for them, only the per-planet leaves, so a new
+    # leaf goes after the last leaf of its kind.
     for base, label in (('energy_renewable_unlimited_solar', 'Hoth Solar Renewable Energy'),
-                        ('energy_renewable_unlimited_wind', 'Hoth Wind Renewable Energy')):
+                        ('energy_renewable_unlimited_wind', 'Hoth Wind Renewable Energy'),
+                        ('energy_renewable_site_limited_geothermal', 'Hoth Geothermal Renewable Energy'),
+                        ('energy_renewable_site_limited_tidal', 'Hoth Tidal Renewable Energy'),
+                        ('energy_renewable_site_limited_hydron3', 'Hoth Hydron-3 Renewable Energy')):
         if any(r[1] == base + '_hoth' for r in rows):
             continue
         depth = [next(j for j in range(2, 10) if r[j] != '') for r in rows]
-        p = next(i for i, r in enumerate(rows) if r[1] == base)
-        end = next((i for i in range(p + 1, len(rows)) if depth[i] <= depth[p]), len(rows))
+        p = next((i for i, r in enumerate(rows) if r[1] == base), None)
+        if p is None:   # no class row (the site-limited energies): after the last leaf named <base>_<planet>
+            end = max(i for i, r in enumerate(rows) if r[1].startswith(base + '_')) + 1
+        else:
+            end = next((i for i in range(p + 1, len(rows)) if depth[i] <= depth[p]), len(rows))
         clone = list(next(r for r in rows if r[1] == base + '_endor'))
         clone[1] = base + '_hoth'
         col = depth[next(i for i, r in enumerate(rows) if r[1] == base + '_endor')]

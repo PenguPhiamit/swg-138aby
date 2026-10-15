@@ -1,0 +1,339 @@
+{
+ "built": "2026-10-14",
+ "part": "part1",
+ "archive": "local_planets-part1.tre",
+ "sha256": "fa7d3391814e2c354158300cfc2b126524f8abec0c5d9a8bcf1258b5fc40b13e",
+ "bytes": 3785030,
+ "entries": 55,
+ "builder_log_tree_lines": [
+  "resource tree: patch_14_00.tre: 725 rows, round trip exact",
+  "resource tree: mtg_planets.tre: 845 rows, round trip exact",
+  "resource tree: added energy_renewable_unlimited_solar_hoth (cloned from energy_renewable_unlimited_solar_endor) at row 780",
+  "resource tree: added energy_renewable_unlimited_wind_hoth (cloned from energy_renewable_unlimited_wind_endor) at row 768",
+  "resource tree: added energy_renewable_site_limited_geothermal_hoth (cloned from energy_renewable_site_limited_geothermal_endor) at row 755",
+  "resource tree: added energy_renewable_site_limited_tidal_hoth (cloned from energy_renewable_site_limited_tidal_endor) at row 733",
+  "resource tree: added energy_renewable_site_limited_hydron3_hoth (cloned from energy_renewable_site_limited_hydron3_endor) at row 745",
+  "resource tree: stock \"Maximum # types\" equals the leaf count on 538 of 725 rows",
+  "resource tree: merged: 784 rows (55 Hoth)",
+  "resource tree: read back: 784 rows, same as written: True"
+ ],
+ "against_S5_b1a0a232": {
+  "changed": [
+   "datatables/resource/resource_tree.iff"
+  ],
+  "new_entries": [],
+  "only_resource_tree_changed": true,
+  "chiss_entries_identical": true
+ },
+ "resource_tree": {
+  "rows_before": 822,
+  "rows_after": 829,
+  "added": [
+   "armophous_hoth_1",
+   "armophous_hoth_2",
+   "crystalline_hoth_1",
+   "crystalline_hoth_2",
+   "energy_renewable_site_limited_tidal_hoth",
+   "energy_renewable_site_limited_hydron3_hoth",
+   "energy_renewable_site_limited_geothermal_hoth"
+  ],
+  "added_detail": [
+   {
+    "enum": "armophous_hoth_1",
+    "text": "Hothian Type 1 Amorphous Gemstone",
+    "after": "armophous_baltaran",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      870,
+      1000
+     ],
+     [
+      "res_quality",
+      1,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      870,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      948,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      870,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      870,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      750,
+      800
+     ]
+    ]
+   },
+   {
+    "enum": "armophous_hoth_2",
+    "text": "Hothian Type 2 Amorphous Gemstone",
+    "after": "armophous_hoth_1",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      870,
+      1000
+     ],
+     [
+      "res_quality",
+      1,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      870,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      948,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      870,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      870,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      750,
+      800
+     ]
+    ]
+   },
+   {
+    "enum": "crystalline_hoth_1",
+    "text": "Hothian Type 1 Crystalline Gemstone",
+    "after": "crystalline_vertex",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      838,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      838,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      951,
+      1000
+     ],
+     [
+      "res_malleability",
+      350,
+      400
+     ],
+     [
+      "res_toughness",
+      886,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      886,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      919,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "crystalline_hoth_2",
+    "text": "Hothian Type 2 Crystalline Gemstone",
+    "after": "crystalline_hoth_1",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      838,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      838,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      951,
+      1000
+     ],
+     [
+      "res_malleability",
+      350,
+      400
+     ],
+     [
+      "res_toughness",
+      886,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      886,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      919,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "energy_renewable_site_limited_tidal_hoth",
+    "text": "Hoth Tidal Renewable Energy",
+    "after": "energy_renewable_site_limited_tidal_yavin4",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_quality",
+      500,
+      500
+     ],
+     [
+      "res_potential_energy",
+      1,
+      500
+     ]
+    ]
+   },
+   {
+    "enum": "energy_renewable_site_limited_hydron3_hoth",
+    "text": "Hoth Hydron-3 Renewable Energy",
+    "after": "energy_renewable_site_limited_hydron3_yavin4",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_quality",
+      500,
+      500
+     ],
+     [
+      "res_potential_energy",
+      1,
+      500
+     ]
+    ]
+   },
+   {
+    "enum": "energy_renewable_site_limited_geothermal_hoth",
+    "text": "Hoth Geothermal Renewable Energy",
+    "after": "energy_renewable_site_limited_geothermal_yavin4",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_quality",
+      500,
+      500
+     ],
+     [
+      "res_potential_energy",
+      1,
+      500
+     ]
+    ]
+   }
+  ],
+  "ancestor_counts_bumped": [
+   "resource",
+   "inorganic",
+   "mineral",
+   "gemstone",
+   "gemstone_armophous",
+   "gemstone_crystalline",
+   "energy",
+   "energy_renewable",
+   "energy_renewable_site_limited"
+  ],
+  "other_cell_changes": [],
+  "stock_order_kept": true
+ },
+ "registration": {
+  "planet_crc": {
+   "hoth": true,
+   "ossus": true
+  },
+  "travel_columns": [
+   "yavin4",
+   "hoth",
+   "ossus"
+  ],
+  "travel_rows": [
+   "hoth",
+   "ossus"
+  ]
+ },
+ "part2": {}
+}

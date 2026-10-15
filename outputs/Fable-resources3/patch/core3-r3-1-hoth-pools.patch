@@ -1,0 +1,17 @@
+--- a/MMOCoreORB/bin/scripts/managers/resource_manager.lua
++++ b/MMOCoreORB/bin/scripts/managers/resource_manager.lua
+@@ -128,7 +128,13 @@
+ -- *_hoth, so the tree restricts them to Hoth, but no pool asked for them and the galaxy-wide spawns predate Hoth: the
+ -- owner's first survey on Hoth found no minerals at all. One of each is now always in spawn, on Hoth only.
+ for _, hothType in ipairs({"steel_hoth", "iron_hoth", "aluminum_hoth", "copper_hoth", "ore_extrusive_hoth", "ore_intrusive_hoth",
+-		"radioactive_hoth", "gas_reactive_hoth", "petrochem_fuel_liquid_hoth", "petrochem_fuel_solid_hoth"}) do
++		"radioactive_hoth", "gas_reactive_hoth", "petrochem_fuel_liquid_hoth", "petrochem_fuel_solid_hoth",
++		-- R3 (Fable, 14 Oct 2026): MTG's four Hoth gem leaves (<class>_hoth_<n>; Core3 restricts them by the "_hoth" substring)
++		"armophous_hoth_1", "armophous_hoth_2", "crystalline_hoth_1", "crystalline_hoth_2",
++		-- R3: Hoth's three site-limited energies. No stock pool spawns the site-limited energies anywhere (nativepoolincludes
++		-- lists 42 types: solar and wind are its only energies, hence 42 natives a planet, not 45); here they are Hoth-only,
++		-- one of each. The galaxy-wide alternative is adding the three to nativepoolincludes (+3 natives on every planet).
++		"energy_renewable_site_limited_geothermal_hoth", "energy_renewable_site_limited_tidal_hoth", "energy_renewable_site_limited_hydron3_hoth"}) do
+ 	table.insert(minimumpoolincludes, {hothType, 1})
+ end
+ 

@@ -1,0 +1,170 @@
+{
+ "built": "2026-10-14",
+ "archive": "s5/local_planets.tre",
+ "sha256": "b1a0a232a13072cd5a2805a5e0f53ebd0b89da348aaf5a4af4abe8020fc46354",
+ "bytes": 3784927,
+ "entries": 55,
+ "o5_rebuild_identical_to_o5_archive": true,
+ "species_stage": {
+  "files": {
+   "datatables/creation/racial_mods.iff": {
+    "rows_added": 1,
+    "bytes": 881
+   },
+   "datatables/creation/attribute_limits.iff": {
+    "rows_added": 1,
+    "bytes": 1494
+   },
+   "datatables/customization/customization_data.iff": {
+    "rows_added": 42,
+    "bytes": 57650
+   },
+   "datatables/customization/customization_group_instance.iff": {
+    "rows_added": 10,
+    "bytes": 4246
+   },
+   "datatables/customization/hair_assets_skill_mods.iff": {
+    "rows_added": 78,
+    "bytes": 65545
+   },
+   "datatables/customization/palette_columns.iff": {
+    "rows_added": 2,
+    "bytes": 3081
+   },
+   "datatables/customization/allow_bald.iff": {
+    "rows_added": 2,
+    "bytes": 401
+   },
+   "creation/default_pc_hairstyles.iff": {
+    "bytes": 21280
+   },
+   "creation/default_pc_equipment.iff": {
+    "bytes": 4525
+   },
+   "creation/profession_defaults_combat_brawler.iff": {
+    "bytes": 6652
+   },
+   "creation/profession_defaults_combat_marksman.iff": {
+    "bytes": 5949
+   },
+   "creation/profession_defaults_crafting_artisan.iff": {
+    "bytes": 5426
+   },
+   "creation/profession_defaults_jedi.iff": {
+    "unchanged": true
+   },
+   "creation/profession_defaults_outdoors_scout.iff": {
+    "bytes": 5856
+   },
+   "creation/profession_defaults_science_medic.iff": {
+    "bytes": 6037
+   },
+   "creation/profession_defaults_social_entertainer.iff": {
+    "bytes": 5284
+   },
+   "ui/ui_avatardata.inc": {
+    "bytes": 91078
+   },
+   "string/en/player_species.stf": {
+    "keys_added": 2,
+    "bytes": 42969
+   },
+   "string/en/skl_n.stf": {
+    "keys_added": 1,
+    "bytes": 153666
+   },
+   "string/en/skl_d.stf": {
+    "keys_added": 1,
+    "bytes": 378245
+   },
+   "datatables/skill/skills.iff": {
+    "rows_added": 1,
+    "bytes": 274552
+   },
+   "customization/asset_customization_manager.iff": {
+    "unchanged": true
+   }
+  },
+  "notes": [
+   "datatables/customization/hair_assets_skill_mods.iff: dropped 1 row(s) whose hair object the client lacks",
+   "creation/default_pc_hairstyles.iff: dropped 1 hair(s) the client lacks: ['object/tangible/hair/human/shared_hair_human_female_s33.iff']"
+  ]
+ },
+ "against_o5_254d0e49": {
+  "entries_o5": 38,
+  "identical": 35,
+  "changed_by_chiss": [
+   "datatables/skill/skills.iff",
+   "string/en/skl_d.stf",
+   "string/en/skl_n.stf"
+  ],
+  "new_entries": [
+   "creation/default_pc_equipment.iff",
+   "creation/default_pc_hairstyles.iff",
+   "creation/profession_defaults_combat_brawler.iff",
+   "creation/profession_defaults_combat_marksman.iff",
+   "creation/profession_defaults_crafting_artisan.iff",
+   "creation/profession_defaults_outdoors_scout.iff",
+   "creation/profession_defaults_science_medic.iff",
+   "creation/profession_defaults_social_entertainer.iff",
+   "datatables/creation/attribute_limits.iff",
+   "datatables/creation/racial_mods.iff",
+   "datatables/customization/allow_bald.iff",
+   "datatables/customization/customization_data.iff",
+   "datatables/customization/customization_group_instance.iff",
+   "datatables/customization/hair_assets_skill_mods.iff",
+   "datatables/customization/palette_columns.iff",
+   "string/en/player_species.stf",
+   "ui/ui_avatardata.inc"
+  ]
+ },
+ "registration": {
+  "planet_crc": {
+   "hoth": true,
+   "ossus": true
+  },
+  "travel_columns": [
+   "yavin4",
+   "hoth",
+   "ossus"
+  ],
+  "travel_rows": [
+   "hoth",
+   "ossus"
+  ],
+  "waypoint_rows": [
+   "hoth",
+   "ossus"
+  ]
+ },
+ "closure": {
+  "seeds": [
+   "object/creature/player/shared_chiss_male.iff",
+   "object/creature/player/shared_chiss_female.iff"
+  ],
+  "files": 134,
+  "from_our_archive": 0,
+  "missing": [
+   "sound/voice_pl_hum_f_blow_kiss.snd",
+   "sound/voice_pl_hum_f_cough.snd",
+   "sound/voice_pl_hum_f_death.snd",
+   "sound/voice_pl_hum_f_dmg_hvy.snd",
+   "sound/voice_pl_hum_f_hiccup.snd",
+   "sound/voice_pl_hum_f_sigh.snd",
+   "sound/voice_pl_hum_f_sneeze.snd",
+   "sound/voice_pl_hum_f_sniff.snd",
+   "sound/voice_pl_hum_f_yawn.snd",
+   "sound/voice_pl_hum_m_blow_kiss.snd",
+   "sound/voice_pl_hum_m_cough.snd",
+   "sound/voice_pl_hum_m_dmg_hvy.snd",
+   "sound/voice_pl_hum_m_dmg_lgt.snd",
+   "sound/voice_pl_hum_m_hiccup.snd",
+   "sound/voice_pl_hum_m_sigh.snd",
+   "sound/voice_pl_hum_m_sneeze.snd",
+   "sound/voice_pl_hum_m_sniff.snd",
+   "sound/voice_pl_hum_m_yawn.snd"
+  ],
+  "note": "the 18 missing files are stock human voice .snd files the chiss templates inherit from the human rig; the stock human templates miss the same 18 (a stock gap, silent emotes at worst), so Chiss adds nothing missing",
+  "stock_human_missing_same": true
+ }
+}

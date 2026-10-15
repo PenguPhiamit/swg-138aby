@@ -1,0 +1,393 @@
+--- a/MMOCoreORB/src/server/zone/objects/player/Races.h
++++ b/MMOCoreORB/src/server/zone/objects/player/Races.h
+@@ -27,7 +27,9 @@
+     "moncal", // moncal female
+     "wookiee", // wookiee female
+     "sullustan", // sullustan female
+-    "ithorian"  // DA E7   -   ithorian female
++    "ithorian", // DA E7   -   ithorian female
++    "chiss", // chiss male (Fable species S4)
++    "chiss"  // chiss female
+ };
+ 
+ const static int TemplateSpecies[] = {
+@@ -50,7 +52,9 @@
+ 		3,
+ 		4,
+ 		0x31,
+-		0x21
++		0x21,
++		0xE7, // chiss male: CreatureObject::CHISS
++		0xE7  // chiss female
+ };
+ 
+ const static char* Gender[] = {
+@@ -73,7 +77,9 @@
+     "female", // moncal female
+     "female", // wookiee female
+     "female", // sullustan female
+-    "female"  // DA E7   -   ithorian female
++    "female", // DA E7   -   ithorian female
++    "male", // chiss male
++    "female"  // chiss female
+ };
+ 
+ const static char* RaceStrs[] = {
+@@ -96,7 +102,9 @@
+     "object/creature/player/shared_moncal_female.iff", // moncal female
+     "object/creature/player/shared_wookiee_female.iff", // wookiee female
+     "object/creature/player/shared_sullustan_female.iff", // sullustan female
+-    "object/creature/player/shared_ithorian_female.iff"  // DA E7   -   ithorian female
++    "object/creature/player/shared_ithorian_female.iff", // DA E7   -   ithorian female
++    "object/creature/player/shared_chiss_male.iff", // chiss male
++    "object/creature/player/shared_chiss_female.iff"  // chiss female
+ };
+ 
+ const static char* CCRaceStrs[] = {
+@@ -119,9 +127,14 @@
+     "object/creature/player/moncal_female.iff", // moncal female
+     "object/creature/player/wookiee_female.iff", // wookiee female
+     "object/creature/player/sullustan_female.iff", // sullustan female
+-    "object/creature/player/ithorian_female.iff"  // DA E7   -   ithorian female
++    "object/creature/player/ithorian_female.iff", // DA E7   -   ithorian female
++    "object/creature/player/chiss_male.iff", // chiss male
++    "object/creature/player/chiss_female.iff"  // chiss female
+ };
+ 
++// the number of race entries above; every array in this file has RACE_COUNT entries in the same order
++const static int RACE_COUNT = sizeof(CCRaceStrs) / sizeof(CCRaceStrs[0]);
++
+ static uint32 SharedRace[] = {
+     0xAF1DC1A1,
+     0x50C45B8F,
+@@ -142,7 +155,9 @@
+     0x982FBFDE,
+     0x0DAB65E2,
+     0x1573341A,
+-    0xB3E08013
++    0xB3E08013,
++    0x02F60EAC, // chiss male: SOE CRC of object/creature/player/shared_chiss_male.iff
++    0x614A1B68  // chiss female
+ };
+ 
+ static unsigned int attributeLimits[10][19] = {
+@@ -161,35 +176,35 @@
+ class Races {
+ public:
+ 	inline const static char* getRace(int raceid) {
+-		if (raceid < 0 || raceid > 19)
++		if (raceid < 0 || raceid >= RACE_COUNT)
+ 			return "";
+ 
+ 		return RaceStrs[raceid];
+ 	}
+ 
+ 	inline static int getSpeciesID(int raceid) {
+-		if (raceid < 0 || raceid > 19)
++		if (raceid < 0 || raceid >= RACE_COUNT)
+ 			return 0;
+ 
+ 		return TemplateSpecies[raceid];
+ 	}
+ 
+ 	inline const static char* getSpecies(int raceid) {
+-		if (raceid < 0 || raceid > 19)
++		if (raceid < 0 || raceid >= RACE_COUNT)
+ 			return "";
+ 
+ 		return Species[raceid];
+ 	}
+ 
+ 	inline const static char* getGender(int raceid) {
+-		if (raceid < 0 || raceid > 19)
++		if (raceid < 0 || raceid >= RACE_COUNT)
+ 			return "";
+ 
+ 		return Gender[raceid];
+ 	}
+ 
+ 	inline static uint32 getRaceCRC(int raceid) {
+-		if (raceid < 0 || raceid > 19)
++		if (raceid < 0 || raceid >= RACE_COUNT)
+ 			return 0;
+ 
+ 		return SharedRace[raceid];
+@@ -197,7 +212,7 @@
+ 
+ 	inline static const char* getCompleteRace(uint32 sharedRaceCRC) {
+ 		int race = -1;
+-		for (int i = 0; i < 20; ++i) {
++		for (int i = 0; i < RACE_COUNT; ++i) {
+ 			if (SharedRace[i] == sharedRaceCRC) {
+ 				race = i;
+ 				break;
+@@ -211,7 +226,7 @@
+ 	}
+ 
+ 	inline static int getRaceID(const String& name) {
+-    	for (int i = 0; i < 20; i++) {
++    	for (int i = 0; i < RACE_COUNT; i++) {
+         	if (strcmp(name.toCharArray(), CCRaceStrs[i]) == 0)
+             	return i;
+     	}
+@@ -220,7 +235,8 @@
+ 	}
+ 
+ 	inline static unsigned int * getAttribLimits(int raceid) {
+-		return attributeLimits[raceid % 10];
++		// the ten stock limit rows; added races use the human row (their real limits come from datatables/creation/attribute_limits.iff)
++		return attributeLimits[raceid < 20 ? raceid % 10 : 0];
+ 	}
+ 
+ };
+--- a/MMOCoreORB/src/server/zone/objects/creature/CreatureObject.idl
++++ b/MMOCoreORB/src/server/zone/objects/creature/CreatureObject.idl
+@@ -225,6 +225,7 @@
+ 	public static final int ZABRAK = 7;
+ 	public static final int ITHORIAN = 0x21;
+ 	public static final int SULLUSTAN = 0x31;
++	public static final int CHISS = 0xE7; // Fable species S4: first id past the stock species table (managers/creature_manager.lua aiSpeciesData ends at 230)
+ 
+ 	public static final int MALE = 0;
+ 	public static final int FEMALE = 1;
+@@ -1970,6 +1971,8 @@
+ 			return "ithorian";
+ 		else if(species == 0x31)
+ 			return "sullustan";
++		else if(species == CHISS)
++			return "chiss";
+ 		else
+ 			return "";
+ 	}
+--- a/MMOCoreORB/src/server/zone/managers/director/DirectorManager.cpp
++++ b/MMOCoreORB/src/server/zone/managers/director/DirectorManager.cpp
+@@ -655,6 +655,7 @@
+ 	luaEngine->setGlobalInt("SPECIES_ZABRAK", CreatureObject::ZABRAK);
+ 	luaEngine->setGlobalInt("SPECIES_ITHORIAN", CreatureObject::ITHORIAN);
+ 	luaEngine->setGlobalInt("SPECIES_SULLUSTAN", CreatureObject::SULLUSTAN);
++	luaEngine->setGlobalInt("SPECIES_CHISS", CreatureObject::CHISS);
+ 
+ 	//Player Arrangements
+ 	luaEngine->setGlobalLong("RIDER", PlayerArrangement::RIDER);
+--- a/MMOCoreORB/src/server/zone/objects/player/components/PlayerContainerComponent.cpp
++++ b/MMOCoreORB/src/server/zone/objects/player/components/PlayerContainerComponent.cpp
+@@ -12,6 +12,7 @@
+ #include "server/zone/objects/tangible/wearables/ArmorObject.h"
+ #include "server/zone/objects/tangible/weapon/WeaponObject.h"
+ #include "server/zone/managers/player/PlayerManager.h"
++#include "server/zone/managers/player/creation/PlayerCreationManager.h"
+ #include "server/zone/ZoneServer.h"
+ #include "server/zone/managers/visibility/VisibilityManager.h"
+ 
+@@ -31,7 +32,7 @@
+ 			const auto races = tanoData->getPlayerRaces();
+ 			String race = creo->getObjectTemplate()->getFullTemplateString();
+ 
+-			if (!races->contains(race.hashCode())) {
++			if (!PlayerCreationManager::instance()->canWearRace(races, race)) {
+ 				errorDescription = "You lack the necessary requirements to wear this object";
+ 
+ 				return TransferErrorCode::PLAYERUSEMASKERROR;
+--- a/MMOCoreORB/src/server/zone/managers/creature/CreatureManagerImplementation.cpp
++++ b/MMOCoreORB/src/server/zone/managers/creature/CreatureManagerImplementation.cpp
+@@ -38,6 +38,7 @@
+ #include "server/zone/objects/building/PoiBuilding.h"
+ #include "server/zone/objects/intangible/TheaterObject.h"
+ #include "server/zone/objects/transaction/TransactionLog.h"
++#include "server/zone/managers/player/creation/PlayerCreationManager.h"
+ 
+ Mutex CreatureManagerImplementation::loadMutex;
+ 
+@@ -1300,7 +1301,7 @@
+ 	const Vector<uint32>* races = tanoData->getPlayerRaces();
+ 	const String race = creature->getObjectTemplate()->getFullTemplateString();
+ 
+-	if (clothing->isWearableObject() && !races->contains(race.hashCode())) {
++	if (clothing->isWearableObject() && !PlayerCreationManager::instance()->canWearRace(races, race)) {
+ 		int species = creature->getSpecies();
+ 		UnicodeString message;
+ 
+--- a/MMOCoreORB/src/server/zone/managers/player/creation/PlayerCreationManager.h
++++ b/MMOCoreORB/src/server/zone/managers/player/creation/PlayerCreationManager.h
+@@ -64,6 +64,12 @@
+ 	VectorMap<String, Reference<HairStyleInfo*> > hairStyleInfo;
+ 
+ 	/**
++	 * Fable species S4: race file -> the race file whose wearable permissions it shares (a species whose player
++	 * template rides the human skeleton wears what a human of the same gender wears). From player_creation_manager.lua.
++	 */
++	VectorMap<String, String> humanRigRaces;
++
++	/**
+ 	 * Vector containing starting items common for all races and professions.
+ 	 */
+ 	Vector<String> commonStartingItems;
+@@ -98,6 +104,11 @@
+ 	//void generateHologrindProfessions(CreatureObject* creature);
+ 
+ public:
++	/**
++	 * True when the wearable's playerRaces list names the race file, or the race file it stands in for (humanRigRaces).
++	 */
++	bool canWearRace(const Vector<uint32>* races, const String& raceFile) const;
++
+ 	PlayerCreationManager();
+ 	~PlayerCreationManager();
+ 
+--- a/MMOCoreORB/src/server/zone/managers/player/creation/PlayerCreationManager.cpp
++++ b/MMOCoreORB/src/server/zone/managers/player/creation/PlayerCreationManager.cpp
+@@ -34,6 +34,7 @@
+ 	zoneServer = ServerCore::getZoneServer();
+ 
+ 	racialCreationData.setNoDuplicateInsertPlan();
++	humanRigRaces.setNoDuplicateInsertPlan();
+ 	professionDefaultsInfo.setNoDuplicateInsertPlan();
+ 	hairStyleInfo.setNoDuplicateInsertPlan();
+ 
+@@ -269,6 +270,26 @@
+ 	skillPoints = lua->getGlobalInt("skillPoints");
+ 	freeGodMode = lua->getGlobalByte("freeGodMode");
+ 
++	// Fable species S4: { race file, race file whose playerRaces entries apply } pairs
++	humanRigRaces.removeAll();
++
++	LuaObject humanRig = lua->getGlobalObject("humanRigRaces");
++
++	if (humanRig.isValidTable()) {
++		for (int i = 1; i <= humanRig.getTableSize(); ++i) {
++			LuaObject pair = humanRig.getObjectAt(i);
++
++			if (pair.isValidTable() && pair.getTableSize() >= 2)
++				humanRigRaces.put(pair.getStringAt(1), pair.getStringAt(2));
++
++			pair.pop();
++		}
++	}
++
++	humanRig.pop();
++
++	info() << "Loaded " << humanRigRaces.size() << " human-rig race mappings.";
++
+ 	loadLuaStartingItems(lua);
+ 
+ 	delete lua;
+@@ -1105,3 +1126,16 @@
+ 		}
+ 	}
+ }
++
++bool PlayerCreationManager::canWearRace(const Vector<uint32>* races, const String& raceFile) const {
++	if (races == nullptr)
++		return false;
++
++	if (races->contains(raceFile.hashCode()))
++		return true;
++
++	if (humanRigRaces.contains(raceFile))
++		return races->contains(humanRigRaces.get(raceFile).hashCode());
++
++	return false;
++}
+--- a/MMOCoreORB/bin/scripts/managers/player_creation_manager.lua
++++ b/MMOCoreORB/bin/scripts/managers/player_creation_manager.lua
+@@ -57,4 +57,11 @@
+ 	social_entertainer = { slitherhorn }
+ }
+ 
+-commonStartingItems = { marojMelon, survivalKnife, x31Speeder }
+\ No newline at end of file
++commonStartingItems = { marojMelon, survivalKnife, x31Speeder }
++
++-- Fable species S4: species whose player template rides the human skeleton wear what a human of the same gender
++-- wears. Each pair = { race file, race file whose playerRaces entries apply }; read by PlayerCreationManager::loadLuaConfig.
++humanRigRaces = {
++	{ "object/creature/player/chiss_male.iff", "object/creature/player/human_male.iff" },
++	{ "object/creature/player/chiss_female.iff", "object/creature/player/human_female.iff" },
++}
+--- a/MMOCoreORB/bin/scripts/object/creature/player/objects.lua
++++ b/MMOCoreORB/bin/scripts/object/creature/player/objects.lua
+@@ -1700,3 +1700,15 @@
+ }
+ 
+ ObjectTemplates:addClientTemplate(object_creature_player_shared_zabrak_male, "object/creature/player/shared_zabrak_male.iff")
++
++-- Sandbox: Chiss shared client templates (Fable species S3, 14 Oct 2026). Minimal declarations as the Halyn/Phoenix
++-- species package made them; Core3 reads object/creature/player/shared_chiss_*.iff from the tre (MTG patch 023) first.
++object_creature_player_shared_chiss_female = SharedCreatureObjectTemplate:new {
++	clientTemplateFileName = "object/creature/player/shared_chiss_female.iff"
++}
++ObjectTemplates:addClientTemplate(object_creature_player_shared_chiss_female, "object/creature/player/shared_chiss_female.iff")
++
++object_creature_player_shared_chiss_male = SharedCreatureObjectTemplate:new {
++	clientTemplateFileName = "object/creature/player/shared_chiss_male.iff"
++}
++ObjectTemplates:addClientTemplate(object_creature_player_shared_chiss_male, "object/creature/player/shared_chiss_male.iff")
+--- a/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua
+@@ -66,3 +66,5 @@
+ includeFile("creature/player/wookiee_male.lua")
+ includeFile("creature/player/zabrak_female.lua")
+ includeFile("creature/player/zabrak_male.lua")
++includeFile("creature/player/chiss_male.lua") -- Sandbox: Chiss (Fable species S3)
++includeFile("creature/player/chiss_female.lua") -- Sandbox: Chiss (Fable species S3)
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/creature/player/chiss_male.lua
+@@ -0,0 +1,29 @@
++-- Chiss male player race template. Sandbox: Fable species S3 (14 Oct 2026; outputs/Fable-species/README.md).
++-- Shape: Core3-dev's object/creature/player/zabrak_male.lua. The shared client template (object/creature/player/
++-- shared_chiss_male.iff) is the Halyn/Phoenix species package's, carried by MTG patch 023 and declared in objects.lua.
++-- Attribute mods: the package's racial_mods row for chiss (all 100, human-like); the same row goes into the client's
++-- datatables/creation/racial_mods.iff. Harmless until the client lists Chiss (ui_avatardata.inc) and Races.h names it.
++
++object_creature_player_chiss_male = object_creature_player_shared_chiss_male:new {
++	baseHAM = { 100, 100, 100, 100, 100, 100, 100, 100, 100 },
++	gameObjectType = 1033,
++	groundZoneComponent = "PlayerZoneComponent",
++	spaceZoneComponent = "PlayerSpaceZoneComponent",
++	objectMenuComponent = "PlayerObjectMenuComponent",
++	containerComponent = "PlayerContainerComponent",
++	pvpStatusBitmask = PLAYER,
++	templateType = PLAYERCREATURE,
++	childObjects = {
++		{templateFile = "object/player/player.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/inventory/character_inventory.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/datapad/character_datapad.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/mission_bag/mission_bag.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/weapon/melee/unarmed/unarmed_default_player.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/bank/character_bank.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4}
++	},
++	defaultLanguage = 1,
++	startingItems = { },
++	startingSkills = { "species_chiss", "social_language_basic_comprehend", "social_language_basic_speak" }
++}
++
++ObjectTemplates:addTemplate(object_creature_player_chiss_male, "object/creature/player/chiss_male.iff")
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/creature/player/chiss_female.lua
+@@ -0,0 +1,26 @@
++-- Chiss female player race template. Sandbox: Fable species S3 (14 Oct 2026; outputs/Fable-species/README.md).
++-- See chiss_male.lua for the notes.
++
++object_creature_player_chiss_female = object_creature_player_shared_chiss_female:new {
++	baseHAM = { 100, 100, 100, 100, 100, 100, 100, 100, 100 },
++	gameObjectType = 1033,
++	groundZoneComponent = "PlayerZoneComponent",
++	spaceZoneComponent = "PlayerSpaceZoneComponent",
++	objectMenuComponent = "PlayerObjectMenuComponent",
++	containerComponent = "PlayerContainerComponent",
++	pvpStatusBitmask = PLAYER,
++	templateType = PLAYERCREATURE,
++	childObjects = {
++		{templateFile = "object/player/player.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/inventory/character_inventory.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/datapad/character_datapad.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/mission_bag/mission_bag.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/weapon/melee/unarmed/unarmed_default_player.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/bank/character_bank.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4}
++	},
++	defaultLanguage = 1,
++	startingItems = { },
++	startingSkills = { "species_chiss", "social_language_basic_comprehend", "social_language_basic_speak" }
++}
++
++ObjectTemplates:addTemplate(object_creature_player_chiss_female, "object/creature/player/chiss_female.iff")

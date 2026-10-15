@@ -1,0 +1,1581 @@
+{
+ "built": "2026-10-14",
+ "part": "part2",
+ "archive": "local_planets-part2.tre",
+ "sha256": "248092a2db7ddb1a2d90f2ca15bcd8ed1064c9757ec07d3362681550ed7dc98c",
+ "bytes": 3785306,
+ "entries": 55,
+ "builder_log_tree_lines": [
+  "resource tree: patch_14_00.tre: 725 rows, round trip exact",
+  "resource tree: mtg_planets.tre: 845 rows, round trip exact",
+  "resource tree: added energy_renewable_unlimited_solar_hoth (cloned from energy_renewable_unlimited_solar_endor) at row 780",
+  "resource tree: added energy_renewable_unlimited_wind_hoth (cloned from energy_renewable_unlimited_wind_endor) at row 768",
+  "resource tree: added energy_renewable_site_limited_geothermal_hoth (cloned from energy_renewable_site_limited_geothermal_endor) at row 755",
+  "resource tree: added energy_renewable_site_limited_tidal_hoth (cloned from energy_renewable_site_limited_tidal_endor) at row 733",
+  "resource tree: added energy_renewable_site_limited_hydron3_hoth (cloned from energy_renewable_site_limited_hydron3_endor) at row 745",
+  "resource tree: stock \"Maximum # types\" equals the leaf count on 538 of 725 rows",
+  "resource tree: merged: 784 rows (55 Hoth)",
+  "resource tree: read back: 784 rows, same as written: True"
+ ],
+ "against_S5_b1a0a232": {
+  "changed": [
+   "datatables/resource/resource_tree.iff"
+  ],
+  "new_entries": [],
+  "only_resource_tree_changed": true,
+  "chiss_entries_identical": true
+ },
+ "resource_tree": {
+  "rows_before": 822,
+  "rows_after": 843,
+  "added": [
+   "petrochem_fuel_liquid_ossus",
+   "petrochem_fuel_solid_ossus",
+   "radioactive_ossus",
+   "steel_ossus",
+   "iron_ossus",
+   "aluminum_ossus",
+   "copper_ossus",
+   "ore_extrusive_ossus",
+   "ore_intrusive_ossus",
+   "armophous_hoth_1",
+   "armophous_hoth_2",
+   "armophous_ossus_1",
+   "armophous_ossus_2",
+   "crystalline_hoth_1",
+   "crystalline_hoth_2",
+   "crystalline_ossus_1",
+   "crystalline_ossus_2",
+   "gas_reactive_ossus",
+   "energy_renewable_site_limited_tidal_hoth",
+   "energy_renewable_site_limited_hydron3_hoth",
+   "energy_renewable_site_limited_geothermal_hoth"
+  ],
+  "added_detail": [
+   {
+    "enum": "petrochem_fuel_liquid_ossus",
+    "text": "Ossus Liquid Petro Fuel",
+    "after": "petrochem_fuel_liquid_hoth",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      1,
+      600
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_potential_energy",
+      1,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "petrochem_fuel_solid_ossus",
+    "text": "Ossus Solid Petro Fuel",
+    "after": "petrochem_fuel_solid_hoth",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      700,
+      800
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_potential_energy",
+      900,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "radioactive_ossus",
+    "text": "Ossus Radioactive",
+    "after": "radioactive_hoth",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      750,
+      800
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_potential_energy",
+      950,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "steel_ossus",
+    "text": "Ossus Steel",
+    "after": "steel_hoth",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      950,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      700,
+      800
+     ],
+     [
+      "res_heat_resist",
+      950,
+      1000
+     ],
+     [
+      "res_malleability",
+      350,
+      400
+     ],
+     [
+      "res_toughness",
+      950,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      950,
+      1000
+     ],
+     [
+      "res_conductivity",
+      600,
+      650
+     ]
+    ]
+   },
+   {
+    "enum": "iron_ossus",
+    "text": "Ossus Iron",
+    "after": "iron_hoth",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      900,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      700,
+      800
+     ],
+     [
+      "res_heat_resist",
+      950,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      950,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      950,
+      1000
+     ],
+     [
+      "res_conductivity",
+      450,
+      500
+     ]
+    ]
+   },
+   {
+    "enum": "aluminum_ossus",
+    "text": "Ossus Aluminum",
+    "after": "aluminum_hoth",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      650,
+      800
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      650,
+      800
+     ],
+     [
+      "res_heat_resist",
+      700,
+      800
+     ],
+     [
+      "res_malleability",
+      850,
+      1000
+     ],
+     [
+      "res_toughness",
+      800,
+      900
+     ],
+     [
+      "res_shock_resistance",
+      800,
+      900
+     ],
+     [
+      "res_conductivity",
+      700,
+      800
+     ]
+    ]
+   },
+   {
+    "enum": "copper_ossus",
+    "text": "Ossus Copper",
+    "after": "copper_hoth",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      600,
+      700
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      700,
+      800
+     ],
+     [
+      "res_heat_resist",
+      600,
+      650
+     ],
+     [
+      "res_malleability",
+      950,
+      1000
+     ],
+     [
+      "res_toughness",
+      750,
+      800
+     ],
+     [
+      "res_shock_resistance",
+      750,
+      800
+     ],
+     [
+      "res_conductivity",
+      950,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "ore_extrusive_ossus",
+    "text": "Ossus Extrusive Ore",
+    "after": "ore_extrusive_hoth",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      950,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      900,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      950,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      950,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      950,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "ore_intrusive_ossus",
+    "text": "Ossus Intrusive Ore",
+    "after": "ore_intrusive_hoth",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      900,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      900,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      957,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      950,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      950,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "armophous_hoth_1",
+    "text": "Hothian Type 1 Amorphous Gemstone",
+    "after": "armophous_baltaran",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      870,
+      1000
+     ],
+     [
+      "res_quality",
+      1,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      870,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      948,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      870,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      870,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      750,
+      800
+     ]
+    ]
+   },
+   {
+    "enum": "armophous_hoth_2",
+    "text": "Hothian Type 2 Amorphous Gemstone",
+    "after": "armophous_hoth_1",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      870,
+      1000
+     ],
+     [
+      "res_quality",
+      1,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      870,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      948,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      870,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      870,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      750,
+      800
+     ]
+    ]
+   },
+   {
+    "enum": "armophous_ossus_1",
+    "text": "Ossus Type 1 Amorphous Gemstone",
+    "after": "armophous_hoth_2",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      900,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      900,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      950,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      900,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      900,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      700,
+      800
+     ]
+    ]
+   },
+   {
+    "enum": "armophous_ossus_2",
+    "text": "Ossus Type 2 Amorphous Gemstone",
+    "after": "armophous_ossus_1",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      900,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      900,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      950,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      900,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      900,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      700,
+      800
+     ]
+    ]
+   },
+   {
+    "enum": "crystalline_hoth_1",
+    "text": "Hothian Type 1 Crystalline Gemstone",
+    "after": "crystalline_vertex",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      838,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      838,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      951,
+      1000
+     ],
+     [
+      "res_malleability",
+      350,
+      400
+     ],
+     [
+      "res_toughness",
+      886,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      886,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      919,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "crystalline_hoth_2",
+    "text": "Hothian Type 2 Crystalline Gemstone",
+    "after": "crystalline_hoth_1",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      838,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      838,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      951,
+      1000
+     ],
+     [
+      "res_malleability",
+      350,
+      400
+     ],
+     [
+      "res_toughness",
+      886,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      886,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      919,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "crystalline_ossus_1",
+    "text": "Ossus Type 1 Crystalline Gemstone",
+    "after": "crystalline_hoth_2",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      850,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      850,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      951,
+      1000
+     ],
+     [
+      "res_malleability",
+      350,
+      400
+     ],
+     [
+      "res_toughness",
+      900,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      900,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      950,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "crystalline_ossus_2",
+    "text": "Ossus Type 2 Crystalline Gemstone",
+    "after": "crystalline_ossus_1",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      850,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      850,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      951,
+      1000
+     ],
+     [
+      "res_malleability",
+      350,
+      400
+     ],
+     [
+      "res_toughness",
+      900,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      900,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      950,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "gas_reactive_ossus",
+    "text": "Ossus Reactive Gas",
+    "after": "gas_reactive_hoth",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_decay_resist",
+      500,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "energy_renewable_site_limited_tidal_hoth",
+    "text": "Hoth Tidal Renewable Energy",
+    "after": "energy_renewable_site_limited_tidal_yavin4",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_quality",
+      500,
+      500
+     ],
+     [
+      "res_potential_energy",
+      1,
+      500
+     ]
+    ]
+   },
+   {
+    "enum": "energy_renewable_site_limited_hydron3_hoth",
+    "text": "Hoth Hydron-3 Renewable Energy",
+    "after": "energy_renewable_site_limited_hydron3_yavin4",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_quality",
+      500,
+      500
+     ],
+     [
+      "res_potential_energy",
+      1,
+      500
+     ]
+    ]
+   },
+   {
+    "enum": "energy_renewable_site_limited_geothermal_hoth",
+    "text": "Hoth Geothermal Renewable Energy",
+    "after": "energy_renewable_site_limited_geothermal_yavin4",
+    "pools": [
+     1,
+     1
+    ],
+    "attrs": [
+     [
+      "res_quality",
+      500,
+      500
+     ],
+     [
+      "res_potential_energy",
+      1,
+      500
+     ]
+    ]
+   }
+  ],
+  "ancestor_counts_bumped": [
+   "resource",
+   "inorganic",
+   "chemical",
+   "fuel_petrochem_liquid",
+   "fuel_petrochem_liquid_known",
+   "mineral",
+   "fuel_petrochem_solid",
+   "fuel_petrochem_solid_known",
+   "radioactive",
+   "radioactive_known",
+   "metal",
+   "metal_ferrous",
+   "steel",
+   "iron",
+   "metal_nonferrous",
+   "aluminum",
+   "copper",
+   "ore",
+   "ore_igneous",
+   "ore_extrusive",
+   "ore_intrusive",
+   "gemstone",
+   "gemstone_armophous",
+   "gemstone_crystalline",
+   "gas",
+   "gas_reactive",
+   "gas_reactive_known",
+   "energy",
+   "energy_renewable",
+   "energy_renewable_site_limited"
+  ],
+  "other_cell_changes": [],
+  "stock_order_kept": true
+ },
+ "registration": {
+  "planet_crc": {
+   "hoth": true,
+   "ossus": true
+  },
+  "travel_columns": [
+   "yavin4",
+   "hoth",
+   "ossus"
+  ],
+  "travel_rows": [
+   "hoth",
+   "ossus"
+  ]
+ },
+ "part2": {
+  "file": "datatables/resource/resource_tree.iff",
+  "rows": 843,
+  "added": [
+   {
+    "enum": "steel_ossus",
+    "text": "Ossus Steel",
+    "after": "steel_hoth",
+    "cloned_from": "steel_duralloy",
+    "attrs": [
+     [
+      "res_decay_resist",
+      950,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      700,
+      800
+     ],
+     [
+      "res_heat_resist",
+      950,
+      1000
+     ],
+     [
+      "res_malleability",
+      350,
+      400
+     ],
+     [
+      "res_toughness",
+      950,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      950,
+      1000
+     ],
+     [
+      "res_conductivity",
+      600,
+      650
+     ]
+    ]
+   },
+   {
+    "enum": "iron_ossus",
+    "text": "Ossus Iron",
+    "after": "iron_hoth",
+    "cloned_from": "iron_kammris",
+    "attrs": [
+     [
+      "res_decay_resist",
+      900,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      700,
+      800
+     ],
+     [
+      "res_heat_resist",
+      950,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      950,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      950,
+      1000
+     ],
+     [
+      "res_conductivity",
+      450,
+      500
+     ]
+    ]
+   },
+   {
+    "enum": "copper_ossus",
+    "text": "Ossus Copper",
+    "after": "copper_hoth",
+    "cloned_from": "copper_polysteel",
+    "attrs": [
+     [
+      "res_decay_resist",
+      600,
+      700
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      700,
+      800
+     ],
+     [
+      "res_heat_resist",
+      600,
+      650
+     ],
+     [
+      "res_malleability",
+      950,
+      1000
+     ],
+     [
+      "res_toughness",
+      750,
+      800
+     ],
+     [
+      "res_shock_resistance",
+      750,
+      800
+     ],
+     [
+      "res_conductivity",
+      950,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "aluminum_ossus",
+    "text": "Ossus Aluminum",
+    "after": "aluminum_hoth",
+    "cloned_from": "aluminum_phrik",
+    "attrs": [
+     [
+      "res_decay_resist",
+      650,
+      800
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      650,
+      800
+     ],
+     [
+      "res_heat_resist",
+      700,
+      800
+     ],
+     [
+      "res_malleability",
+      850,
+      1000
+     ],
+     [
+      "res_toughness",
+      800,
+      900
+     ],
+     [
+      "res_shock_resistance",
+      800,
+      900
+     ],
+     [
+      "res_conductivity",
+      700,
+      800
+     ]
+    ]
+   },
+   {
+    "enum": "ore_extrusive_ossus",
+    "text": "Ossus Extrusive Ore",
+    "after": "ore_extrusive_hoth",
+    "cloned_from": "ore_extrusive_vintrium",
+    "attrs": [
+     [
+      "res_decay_resist",
+      950,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      900,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      950,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      950,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      950,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "ore_intrusive_ossus",
+    "text": "Ossus Intrusive Ore",
+    "after": "ore_intrusive_hoth",
+    "cloned_from": "ore_intrusive_katrium",
+    "attrs": [
+     [
+      "res_decay_resist",
+      900,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      900,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      957,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      950,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      950,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "gas_reactive_ossus",
+    "text": "Ossus Reactive Gas",
+    "after": "gas_reactive_hoth",
+    "cloned_from": "gas_reactive_tolium",
+    "attrs": [
+     [
+      "res_decay_resist",
+      500,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "petrochem_fuel_liquid_ossus",
+    "text": "Ossus Liquid Petro Fuel",
+    "after": "petrochem_fuel_liquid_hoth",
+    "cloned_from": "petrochem_fuel_liquid_type1",
+    "attrs": [
+     [
+      "res_decay_resist",
+      1,
+      600
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_potential_energy",
+      1,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "petrochem_fuel_solid_ossus",
+    "text": "Ossus Solid Petro Fuel",
+    "after": "petrochem_fuel_solid_hoth",
+    "cloned_from": "petrochem_fuel_solid_type7",
+    "attrs": [
+     [
+      "res_decay_resist",
+      700,
+      800
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_potential_energy",
+      900,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "radioactive_ossus",
+    "text": "Ossus Radioactive",
+    "after": "radioactive_hoth",
+    "cloned_from": "radioactive_type7",
+    "attrs": [
+     [
+      "res_decay_resist",
+      750,
+      800
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_potential_energy",
+      950,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "armophous_ossus_1",
+    "text": "Ossus Type 1 Amorphous Gemstone",
+    "after": "armophous_hoth_2",
+    "cloned_from": "armophous_baltaran",
+    "attrs": [
+     [
+      "res_decay_resist",
+      900,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      900,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      950,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      900,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      900,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      700,
+      800
+     ]
+    ]
+   },
+   {
+    "enum": "armophous_ossus_2",
+    "text": "Ossus Type 2 Amorphous Gemstone",
+    "after": "armophous_ossus_1",
+    "cloned_from": "armophous_baltaran",
+    "attrs": [
+     [
+      "res_decay_resist",
+      900,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      900,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      950,
+      1000
+     ],
+     [
+      "res_malleability",
+      550,
+      600
+     ],
+     [
+      "res_toughness",
+      900,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      900,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      700,
+      800
+     ]
+    ]
+   },
+   {
+    "enum": "crystalline_ossus_1",
+    "text": "Ossus Type 1 Crystalline Gemstone",
+    "after": "crystalline_hoth_2",
+    "cloned_from": "crystalline_vertex",
+    "attrs": [
+     [
+      "res_decay_resist",
+      850,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      850,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      951,
+      1000
+     ],
+     [
+      "res_malleability",
+      350,
+      400
+     ],
+     [
+      "res_toughness",
+      900,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      900,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      950,
+      1000
+     ]
+    ]
+   },
+   {
+    "enum": "crystalline_ossus_2",
+    "text": "Ossus Type 2 Crystalline Gemstone",
+    "after": "crystalline_ossus_1",
+    "cloned_from": "crystalline_vertex",
+    "attrs": [
+     [
+      "res_decay_resist",
+      850,
+      1000
+     ],
+     [
+      "res_quality",
+      500,
+      1000
+     ],
+     [
+      "res_cold_resist",
+      850,
+      1000
+     ],
+     [
+      "res_heat_resist",
+      951,
+      1000
+     ],
+     [
+      "res_malleability",
+      350,
+      400
+     ],
+     [
+      "res_toughness",
+      900,
+      1000
+     ],
+     [
+      "res_shock_resistance",
+      900,
+      1000
+     ],
+     [
+      "entangle_resistance",
+      950,
+      1000
+     ]
+    ]
+   }
+  ],
+  "ancestors_bumped": {
+   "resource": 14,
+   "inorganic": 14,
+   "mineral": 12,
+   "metal": 4,
+   "metal_ferrous": 2,
+   "steel": 1,
+   "iron": 1,
+   "metal_nonferrous": 2,
+   "copper": 1,
+   "aluminum": 1,
+   "ore": 2,
+   "ore_igneous": 2,
+   "ore_extrusive": 1,
+   "ore_intrusive": 1,
+   "gas": 1,
+   "gas_reactive": 1,
+   "gas_reactive_known": 1,
+   "chemical": 1,
+   "fuel_petrochem_liquid": 1,
+   "fuel_petrochem_liquid_known": 1,
+   "fuel_petrochem_solid": 1,
+   "fuel_petrochem_solid_known": 1,
+   "radioactive": 1,
+   "radioactive_known": 1,
+   "gemstone": 4,
+   "gemstone_armophous": 2,
+   "gemstone_crystalline": 2
+  },
+  "sha256": "48f1d01e13beffa2f201f7d87d232e0c5dbb7b944b2ca8a0d7d6f3080ff79e08",
+  "enums": [
+   "steel_ossus",
+   "iron_ossus",
+   "copper_ossus",
+   "aluminum_ossus",
+   "ore_extrusive_ossus",
+   "ore_intrusive_ossus",
+   "gas_reactive_ossus",
+   "petrochem_fuel_liquid_ossus",
+   "petrochem_fuel_solid_ossus",
+   "radioactive_ossus",
+   "armophous_ossus_1",
+   "armophous_ossus_2",
+   "crystalline_ossus_1",
+   "crystalline_ossus_2"
+  ]
+ }
+}
