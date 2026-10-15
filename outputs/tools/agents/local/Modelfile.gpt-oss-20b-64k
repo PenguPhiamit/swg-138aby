@@ -1,0 +1,7 @@
+# The owner's local stand-in agent (14 Oct 2026): OpenAI's gpt-oss-20b with a 64K-token context window.
+# Ollama defaults to a 4K window on cards under 24 GB, too small to hold AGENTS.md, a task brief and the files an agent
+# reads. Create it once, after `ollama pull gpt-oss:20b`:
+#   ollama create gpt-oss-20b-64k -f Modelfile.gpt-oss-20b-64k
+# The relay then runs: codex exec --oss --local-provider ollama -m gpt-oss-20b-64k ...
+FROM gpt-oss:20b
+PARAMETER num_ctx 65536

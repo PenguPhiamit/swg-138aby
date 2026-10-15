@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude retains test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C25/C26 source only). Esk C23 driver claim ended 15:06; crew returned home and squad plan restored. No current ChatGPT bot driver claim. Live galaxy STOPPED. Overnight checks every 30 minutes. — 2026-10-14 16:16**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only); its weekly usage is nearly out (owner, 14 Oct evening). No bot driver claim. The overnight cycle is off. Fable never writes to /opt/swg. Live galaxy STOPPED. — 2026-10-14 23:17**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -248,6 +248,13 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-14 23:17 Claude: the evening: test galaxy with Chiss, Ossus and the wide resources (19:13); owner test list; Fable's TortoiseBots slice 1 and C29; a local stand-in agent
+- **Test restart 19:10–19:13** (no client, no round): archive `248092a2` in `SWG-client/` and `/opt/swg/tre/`; test zones hoth and ossus. Log: "Resource backfill: zone hoth: 63 checked, 33 added, 8 at max pool, 22 not chosen"; "zone ossus: 23 added"; NativePool 120, MinimumPool 28. `squad.py setup` relogged the bots 19:14.
+- **For the owner: `Owner-test-list.md`** (Chiss creation, Ossus first look, Hoth/Ossus resources, Echo Base, the Hoth leftovers), and `Client-graphics/` (ReShade and DLSS 5 through the Feeder for the 32-bit client, owner-installed; `SpeciesColorLock.fx`, ours). h `f12c2f0`.
+- **Fable, TortoiseBots slice 1** (`Fable-tortoise/`, owner authorised full use; AGPL-3.0 notice and credit kept): failure backoff ported, our incident layer over Bot-reports; run_checks 8/8 on my side. On 149 reports: 9 open (5 blocked, 4 defect candidates). Besh "ordinary wild prey found" fails since 14:19 because only bots and helper droids are within 90 m of the patrol spot (a patrol-spot problem, not the server). h `f12c2f0`.
+- **C29 moved from ChatGPT to Fable** (queue: hold, reassigned). Fable's `Fable-resources3/lore/`: 19 Legends materials mapped to stock classes (stock ones not duplicated: cortosis, phrik, doonium...), and two staged: Adegan crystal (Ossus) and lumni lichen (Hoth). Archive `local_planets-lore.tre` fbf62971 (verified), installed at the next restart. Dev `08e6a924` (pool lines, luac ok). h `acb25c4`. Fable's owner questions: rename Ossus Type 1/2 gems to Kathracite/Pontite; a Smuggler lumni-spice schematic; beskar stats; Corusca on Yavin 4; yorik coral.
+- **Third agent (owner):** a local model, OpenAI's gpt-oss-20b through Ollama and `codex --oss` (nothing leaves the PC). `tools/agents/local/Modelfile.gpt-oss-20b-64k` written (64K context). Owner installs Ollama and the model; then Claude adds a local switch to the relay and runs one watched test. Scope: bot scenarios, tools, docs, first-pass reviews; Claude reviews all.
 
 ### 2026-10-14 18:55 ChatGPT: C29 mechanics and owner-resource handoff complete
 - Owner requested pre-CU resource/crafting and external Galaxy Harvester research for Claude, then all extracted TTRPG materials in a clean adaptation list. Saved Documentation-support/resources-crafting-and-galaxy-harvester.md and owner-ttrpg-resource-handoff.md/.json.
