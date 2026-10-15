@@ -50,6 +50,25 @@ items with good resources can beat these.
 /object createitem object/tangible/wearables/armor/composite/armor_composite_bracer_r.iff
 ```
 
+**mando** (the full Mandalorian set, 10 pieces: lighter than composite, a little weaker at base, and its helmet keeps
+the Death Watch mines' gas off):
+```
+/object createitem object/tangible/wearables/armor/mandalorian/armor_mandalorian_helmet.iff
+/object createitem object/tangible/wearables/armor/mandalorian/armor_mandalorian_chest_plate.iff
+/object createitem object/tangible/wearables/armor/mandalorian/armor_mandalorian_leggings.iff
+/object createitem object/tangible/wearables/armor/mandalorian/armor_mandalorian_shoes.iff
+/object createitem object/tangible/wearables/armor/mandalorian/armor_mandalorian_gloves.iff
+/object createitem object/tangible/wearables/armor/mandalorian/armor_mandalorian_belt.iff
+/object createitem object/tangible/wearables/armor/mandalorian/armor_mandalorian_bicep_l.iff
+/object createitem object/tangible/wearables/armor/mandalorian/armor_mandalorian_bicep_r.iff
+/object createitem object/tangible/wearables/armor/mandalorian/armor_mandalorian_bracer_l.iff
+/object createitem object/tangible/wearables/armor/mandalorian/armor_mandalorian_bracer_r.iff
+```
+
+**Surgical droid?** A droid gives the doctor's medical rating only through a medical module a Droid Engineer crafts
+into it (`DroidMedicalModuleDataComponent`); the stock surgical droid deed's medical_module range is 0 to 0, so a
+created deed makes a droid with none. Full heal for an admin: target yourself and `/gmrevive`.
+
 ## Gear one line at a time (admin, test galaxy): `/object createitem <template> [quantity]`
 
 ```
