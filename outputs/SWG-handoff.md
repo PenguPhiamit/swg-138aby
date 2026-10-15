@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only); its weekly usage is nearly out (owner, 14 Oct evening). No bot driver claim. The overnight cycle is off. Fable never writes to /opt/swg. Live galaxy STOPPED. — 2026-10-14 23:17**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only); its weekly usage is nearly out (owner, 14 Oct evening). No bot driver claim. The overnight cycle is off. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. The owner is testing on the test galaxy. — 2026-10-15 00:01**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -44,6 +44,12 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
     - **Names and stats:** human random names or our own name tables? Chiss's attribute profile: the package's flat 100s, or a real profile?
     - **Claude decides the technical questions unless you object:** splice only the new entries into today's customization table (not the package's 2016 copy), and let human-rig species wear human clothing through one C++ rule rather than editing 703 wearables.
 
+
+**Claude, 2026-10-15 00:01 (era content; the owner answered the raid, beskar and coral questions in chat, below):**
+1. **Adegan grades:** the five Ossus gems now carry the five grade names, but all have the same ranges. Should kathracite, relacite and danite get lower floors, with pontite at the top (a stated variant)?
+2. **Voxyn pets:** Wookieepedia has the last voxyn dying in 28 ABY (clones of one queen; they could not breed). For 138 ABY: invent a tame line grown by Nei Rin's Shapers, or pick another Vong-bred creature?
+3. **Ossus flora names** (text only, new spawns only): "Kingwood Deciduous Wood", "Bambwood Evergreen Wood", "Potam Tubers" (potam is our reading). Yes or no?
+4. **Ossus solar:** the twin suns give weeks without night. Raise Ossus solar's PE floor (stock 200–600, e.g. to 500–1000)?
 
 Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) — purpose, design maturity and difficulty for all recorded features/candidates.
 
@@ -248,6 +254,52 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-15 00:01 Claude: test galaxy back up after WSL idled out; owner's era decisions (138–139 ABY, Krayt raid, beskar, coral); Ossus gems renamed (staged); Ossus resource map; local model running
+
+- **Test galaxy, part 1: the outage and restart.**
+  - Down from about 19:43: Windows stopped the idle WSL VM, and MariaDB and core3 went with it.
+  - Restarted at 23:42 at the owner's request (no client running, no squad round). Ready 23:43:53 with fbf62971 (C29), resource backfill hoth +33, ossus +23. Bots left offline on purpose.
+  - A permanent fix for the idle stop is a `.wslconfig` setting: the owner's call.
+- **Test galaxy, part 2: the session watch.**
+  - Two monitors watch the owner's session.
+  - `tools/agents/watch_test_session.py` (new): player, staff-command and error lines, IPs masked. It also keeps a WSL session open, so the VM stays up.
+  - A client process and crash-file watch.
+  - The owner is on as [name removed] from 23:53 (character builder: FRS dark side; /invulnerable).
+  - The login ERROR "skill points on load mismatch" is Core3 correcting the stored count (`CreatureObjectImplementation.cpp:2471`); harmless.
+- **Owner decisions, part 1: setting and raid.**
+  - Setting: **around 138–139 ABY** (AGENTS.md setting line updated).
+  - Wookieepedia on Krayt: he died in 137 at Had Abbadon and came back, then died for good in 138 on Coruscant.
+  - After 138, Nihl hid the fleet and the One Sith went underground. Darth Wredd belongs here too: the 138 ABY Carreras Incident; he died in 139 on Mala.
+  - **Krayt raid:** the main boss is one of Krayt's successors (e.g. Darth Nihl). The **secret boss** is a Krayt echo or Sith spirit, unlocked by a loot item that drops in the same raid.
+  - Lore hook: Krayt's Vong implants grew a bony exoskeleton that served as armour, and his empty armour was found in the Korriban Stasis Room.
+- **Owner decisions, part 2: beskar and coral.**
+  - **Beskar: option A.** Its own class, used only by a few new Mandalorian armour and weapon schematics; not under iron, which has 693 recipes.
+  - **Yorik coral: option A.** Its own class, for Vong decor, weapons, armour and ships; maybe pets (voxyn).
+  - Proposed placement for both: directly under the tree's root, so no stock recipe accepts them (`Fable-resources3/lore/ossus-resource-map.md` §6).
+- **Ossus gems renamed (staged, `Fable-resources3/names/`; Fable was out of usage, so Claude did it).**
+  - The five Wookieepedia Adegan grades, one per Ossus gem leaf: kathracite, relacite, danite, mephite, pontite. Text only: ENUMs, attributes and pools unchanged.
+  - `local_planets-names.tre` 39a89e6c is verified against the installed fbf62971: only `resource_tree.iff` differs, and only those five CLASS cells.
+  - Installs at the next restart once the owner's client is closed. Spawns already in play keep their old names.
+- **Ossus resource map:** `Fable-resources3/lore/ossus-resource-map.md`.
+  - Every Ossus resource on Wookieepedia, mapped: the gems; kingwood and bambwood; potam; the fauna drops (mud yak, kirruk, gokob, tree frog, tribis, kaddyr bug, Adegan eel).
+  - Also: the twin-sun solar; and the Vong line (Ossus Project, yorik coral, lambent, voxyn, yorik-kul).
+  - Wookieepedia lists Ossus's exports as "none", so its metals stay generic.
+- **A trap for chain builds.** While the test launcher's `swgemu_login.cfg` is in place, the client load order includes our own `local_planets.tre`.
+  - A chain build then reads our archive as its base and silently drops the Chiss files.
+  - `build_names_archive.py` drops `local_planets.tre` from the order. Anyone else building the chain during a test session must do the same.
+- **Fable** hit its weekly limit (HTTP 429) in the middle of S6 (Nautolan and Togruta, partial in `Fable-species/s6/`). It resumes at the reset; S6 waits on the owner's Chiss test anyway.
+- **Local stand-in model** (dc8de92): Ollama `gpt-oss:20b` through `tools/agents/local/local_agent.py`.
+  - Three file tools inside one workspace; no shell and no network. 64K context, about 27 tok/s.
+  - First test: it summarised a bot report correctly in 4 steps, 16 s.
+  - `codex exec --oss` cut every reply off at about 260 tokens, so it is not used. Not yet in the relay.
+
+### 2026-10-14 23:27 Claude: dev build done; test-galaxy restart denied (waiting on the owner)
+- Dev built after `08e6a924`: `core3` relinked at 23:25 with no errors. The `core3client` binary is still the 18:08 build. Nothing was stopped or started.
+- New dev commit `f1ce7007`: `/agentgear survey` gives one survey tool per resource class (mineral, inorganic/chemical, gas, liquid/water, moisture, organic/flora, solar and wind/energy). No armour or stimpacks. Compiled; not exercised on the galaxy. This closes the C23-B1 gap (the crew had no chemical, gas, moisture or flora tools).
+- **Test-galaxy restart NOT done.** The auto-mode permission check denied the restart command ("interfere with workloads"). The galaxy is still down and no bots are logged in. Waiting for the owner's go or a permission rule before retrying.
+- ChatGPT: C23 can't run until "restart done" is posted. When the galaxy is up, the C23 preflight should call `bot.gear('survey')` for each crew member (`gear()` is in `tools/bots/squad.py`).
+- Owner's rule, saved to memory: fix forward on dev; no auto-revert unless a failure is catastrophic. No dev reverts were made.
 
 ### 2026-10-14 23:17 Claude: the evening: test galaxy with Chiss, Ossus and the wide resources (19:13); owner test list; Fable's TortoiseBots slice 1 and C29; a local stand-in agent
 - **Test restart 19:10–19:13** (no client, no round): archive `248092a2` in `SWG-client/` and `/opt/swg/tre/`; test zones hoth and ossus. Log: "Resource backfill: zone hoth: 63 checked, 33 added, 8 at max pool, 22 not chosen"; "zone ossus: 23 added"; NativePool 120, MinimumPool 28. `squad.py setup` relogged the bots 19:14.

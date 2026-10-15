@@ -1,0 +1,58 @@
+{
+ "built": "2026-10-14",
+ "archive": "local_planets-names.tre",
+ "sha256": "39a89e6c1bfdf72811e6b68be035d0228542f6dd9886c2c0ca1438a780d977db",
+ "bytes": 3785376,
+ "entries": 55,
+ "reference": {
+  "file": "lore/local_planets-lore.tre",
+  "sha256_expected": "fbf62971bbbf2b65e613c7972e2a65ea78b98740d0fa39e26e1613beb97d95b1",
+  "sha256_ok": true
+ },
+ "against_lore": {
+  "changed": [
+   "datatables/resource/resource_tree.iff"
+  ],
+  "new_entries": [],
+  "missing_entries": []
+ },
+ "resource_tree": {
+  "rows": 845,
+  "same_rows_same_order": true,
+  "cells_changed": [
+   [
+    "armophous_ossus_1",
+    "CLASS 6",
+    "Ossus Type 1 Amorphous Gemstone",
+    "Relacite Crystal Amorphous Gemstone"
+   ],
+   [
+    "armophous_ossus_2",
+    "CLASS 6",
+    "Ossus Type 2 Amorphous Gemstone",
+    "Danite Crystal Amorphous Gemstone"
+   ],
+   [
+    "crystalline_ossus_1",
+    "CLASS 6",
+    "Ossus Type 1 Crystalline Gemstone",
+    "Kathracite Crystalline Gemstone"
+   ],
+   [
+    "crystalline_ossus_2",
+    "CLASS 6",
+    "Ossus Type 2 Crystalline Gemstone",
+    "Pontite Crystalline Gemstone"
+   ],
+   [
+    "crystalline_adegan_ossus",
+    "CLASS 6",
+    "Adegan Crystal Crystalline Gemstone",
+    "Mephite Crystalline Gemstone"
+   ]
+  ],
+  "only_the_five_names": true,
+  "idempotent": true
+ },
+ "ok": true
+}

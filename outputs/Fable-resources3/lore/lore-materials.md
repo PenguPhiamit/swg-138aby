@@ -23,7 +23,7 @@ Already in the stock tree (galaxy-wide random pool; **not duplicated**): `ore_si
 | Chandrilan foods (muja, jaquira) | Chandrila [candidate] | Agriworld through the window. | `fruit_fruits` -> `fruit_fruits_muja_chandrila` "Muja Fruit" (leaf) | DR 1-1000 OQ 500-1000 FL 600-1000 PE 1-1000 | minimum pool 1 on Chandrila, types 1/1; a second leaf "Jaquira Fruit" the same way | 199 | no |
 | Taanab livestock (roba, staga) | Taanab [candidate] | Agriworld through the window. | `meat_domesticated` -> `meat_domesticated_taanab` "Roba Meat (text only)" (creature-text) | - | unchanged | 178 | no |
 | Nal Hutta swamp chemicals | Nal Hutta [candidate] | Vongformed in the war (the page lists Vongformed terrain), so the window has both swamp and coral. | `petrochem_inert` -> `-` "Hutta Swamp Distillate (class to choose with the planet)" (rule) | - | design rule: no metal in Nal Hutta's pools (no heavy metals); a chemical/petrochem leaf as its one signature material | 397 | no |
-| Korriban | Korriban (zone moraband) [candidate] | Held by the One Sith in the window (137 ABY). | none | - | - | - | no |
+| Korriban | Korriban (zone moraband) [candidate] | Sith ground in every era; the Legacy comics (130-139 ABY) have Krayt's One Sith, and the page gives no mining history for the window. | none | - | - | - | no |
 | Coruscant | Coruscant [candidate] | - | none | - | - | - | no |
 | Kaiburr / kyber crystal | Mimban (Legends relic); everywhere (canon kyber) [other] | n/a | none | - | - | - | no |
 | Durasteel | manufactured [other] | - | none | - | - | 984 | no |
@@ -214,7 +214,7 @@ A world without natural heavy metals, strip-mined and bulldozed into swamps whos
 
 Red sands, tombs and the Valley of the Dark Lords; the page lists generic exports (raw material, weapons, artifacts) and no named mineral, and Sith lightsaber crystals are synthetic, not mined.
 
-- Planets: Korriban (zone moraband) (candidate). Continuity: Legends. Era: Held by the One Sith in the window (137 ABY). Canon note: Canon calls it Moraband (our zone key).
+- Planets: Korriban (zone moraband) (candidate). Continuity: Legends. Era: Sith ground in every era; the Legacy comics (130-139 ABY) have Krayt's One Sith, and the page gives no mining history for the window. Canon note: Canon calls it Moraband (our zone key).
 - Sources: <https://starwars.fandom.com/wiki/Korriban/Legends>, <https://starwars.fandom.com/wiki/Sith_lightsaber/Legends>
 - Stock: -
 - Proposal: none; class `-`, leaf `-` "-"; rule n/a; -.
