@@ -53,6 +53,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 |---|---|---|---|
 | **C23: Hoth gameplay acceptance** (ChatGPT owns it end to end) | ChatGPT | claimed — ChatGPT, 14 Oct 14:46 | Instructions above the log. Scenario `tools/hoth/hoth_gameplay_check.py`, written offline now, run after Claude's next restart; ChatGPT keeps the fail list until it is empty |
 | **C24: Hoth release gate** (go/no-go) | ChatGPT | checkpoint complete — NO-GO, 14 Oct; C23/owner/client gates open | Instructions above the log. `Documentation-support/hoth-release-gate.md`; ChatGPT gives the "reviewed by" for any Hoth live deploy |
+| **C27: player report inbox and agent-to-Discord relay** | Claude server intake; ChatGPT outside tools/review | owner requested; design scoped, implementation pending | Documentation-support/player-bug-inbox-design.md; native Mantis route inspected, no local queue today; F98 |
 | **C26: acceptance telemetry** | ChatGPT | source committed; Claude review/build/runtime pending | Resource units/spawn IDs, own cash/bank credits, own quest waypoints, Hoth/Ossus planet names; `Documentation-support/C26-telemetry.md` |
 | **C25: ChatGPT's server-code worktree** | ChatGPT | first patch committed 5c41ed62; Claude review/build/game test pending | `/opt/swg/Core3-gpt`, branch `gpt/work` (AGENTS.md rule). First job: the silent ticket failure while a travel point has no shuttle (`PurchaseTicketCommand.h:132`) |
 | **C22: independent Hoth + C4 fix review** | ChatGPT - GPT-6.1 Sol, **High** | complete - changes requested, 14 Oct | `Documentation-support/review-C22/C22-review.md`: 2 P2 + 1 P3; dev `c5f1ae06`, `69eb77fe`, `de1b679a`, `23014f39`, `90f60a81`; h `f0b192e`; report `b4472b8`; gameplay untested |
@@ -245,6 +246,18 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-14 17:52 ChatGPT: C27 scoped; screenshot leads screened
+- Owner clarified agent relay to Discord after durable in-game intake; mixed developer/experienced/new player team. C27/F98 and onboarding F99 added. Source inspection: /report stub; native CreateTicket callback gated off by default, Mantis submission, category early return and commented receipt/crash TODO. Design saved, not implemented; no Mantis install or backend toggle.
+- Screenshot supplied seven sources: SWAPI, Jedi-Faker, OpenSWE1R, Open Rebellion, OpenJKDF2, KYBER, NGECore2. Bounded primary-source screen saved; most promising gameplay lead Open Rebellion MIT engine, data separate. Other grants/components and NGECore2 restrictions recorded narrowly. No clones/imports/new services or Discord posts. Research checkpoint ends here.
+
+
+
+### 2026-10-14 17:47 ChatGPT: player bug inbox design claimed
+- Owner wants developers, experienced players and new players, plus in-game bug reports persisted locally for agents to read when available. Claim native-report source inspection and local queue contract/design; no deployment, server edits or Discord creation.
+
+
+
 
 ### 2026-10-14 17:40 ChatGPT: C17 remote-tester Discord blueprint complete
 - Owner confirmed remote testers. Saved Documentation-support/discord-dev-qa-setup.md: private developer/QA areas, roles, forums/template/tags, native events, existing curated/status webhook tool, optional future slash app/issue intake, remote-access/reset gates. No Discord service, integrations, network change, invitations or posts created. Setup requires owner go under AGENTS.

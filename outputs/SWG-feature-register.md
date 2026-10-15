@@ -283,3 +283,10 @@ Owner ideas, 14 Oct 2026. Proposals only; nothing built.
 When a feature changes: retain its ID; update maturity, evidence/test link and dependency; split a large row into named subfeatures rather than silently treating it as done. Claude should challenge the preliminary difficulty estimates after reading the actual code. This register aggregates the roadmap, handoff, format inventory, gameplay reports, asset note and active catalogue; public historical feature research is a separate evidence section as it lands.
 
 
+
+## Player reporting and mixed-experience QA (owner, 14 Oct)
+
+| ID | Feature / purpose | How thought out | Preliminary difficulty / gate |
+|---|---|---|---|
+| F98 | In-game problem report -> durable local queue -> agent triage -> Discord tracking; usable by new players while agents are offline | [Scoped source-backed design](Documentation-support/player-bug-inbox-design.md); native ticket route is Mantis-based, categories disabled and receipt commented out. C27 proposed; no implementation/deployment | Medium; native UI/receipt proof, authenticated metadata, concurrent durable spool outside reset path, claim/delivery tracking and Discord setup |
+| F99 | Developer friends + experienced/new-player QA onboarding in private Discord | [Server blueprint](Documentation-support/discord-dev-qa-setup.md); add getting-started/help, scoped Developer/Tester roles, test plans/forums; remote testers confirmed | Low-Medium for Discord setup; separate remote game access/persistence proof. No server, accounts or invites created |

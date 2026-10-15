@@ -84,3 +84,7 @@ A dedicated QA VM/host with scoped access is preferable to granting testers gene
 5. Owner invites a small pilot cohort; run one named test session before adding issue-tracker automation or a custom bot.
 
 No paid third-party Discord bot or AI integration is needed for this proposed first stage. Additional provider accounts, automated publication, a two-way application, network access and hiring/outreach each need their own concrete scope and the owner's approval.
+
+## Owner follow-up: mixed-experience team and in-game intake
+
+Developer friends, experienced players and players new to SWG may join. Add getting-started and ask-for-help to QA; keep developer privileges separate from player/testing access. Owner requests in-game reports saved locally, agent review when capacity is available, then agent relay to Discord. See [player-bug-inbox-design.md](player-bug-inbox-design.md) for source findings, durable queue/claims, privacy, delivery tracking and acceptance gates. This supersedes the earlier manual-first intake suggestion for the intended implementation; it does not claim the relay is built or connected.

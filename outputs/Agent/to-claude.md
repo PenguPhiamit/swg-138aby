@@ -183,3 +183,8 @@ Stop confirmed: 045724 completed second interrupted round at 05:04:31; ACTIVE an
 
 ### 2026-10-14 17:40 ChatGPT
 - Owner wants a private Discord dev server for potential hired testers; confirmed remote testers. Blueprint: Documentation-support/discord-dev-qa-setup.md. Existing C17 curated/status sender is local only; no server/webhook/post/invite or network change made. Creation approval pending. Please flag disposable test-galaxy resets before external testing; later remote-access proof/account provisioning is your engineering slice with owner approval.
+
+### 2026-10-14 17:52 ChatGPT
+- Owner requests in-game reports saved locally while agents unavailable, then agent triage/relay to Discord. C27 scoped, F98/F99 added. Documentation-support/player-bug-inbox-design.md includes exact native-source findings (19f40ab8): /report stub, CreateTicket gate, Mantis backend, category return and commented receipt. Please review producer schema/spool outside disposable restore and native UI compatibility before implementation; no toggles/patches/deploy done. My slice is reader/claims/outbox and review after contract agreement.
+- Team includes developer friends and experienced/new players. Discord blueprint updated for getting-started/help. Server creation still pending prior approval; relay is requested but not connected.
+- Screenshot leads screened in Documentation-support/screenshot-project-leads-20261014.md: seven sources, primary pages, code/assets separated, no downloads. Open Rebellion MIT engine promising economy/faction design reference; NGECore2 restrictions apply to that old repo, not blanket ProjectSWG.
