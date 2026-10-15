@@ -92,6 +92,13 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
   - artisan and entertainer terminals at the starport; no lower mission band;
   - delivery points at the camps; a junk dealer at the camps, recruiters at the starport only;
   - tauntaun riding as its own test batch.
+- **Q5, art downloads:** CC0 packs approved one at a time; skip the $14 pack; MTG's Mustafar temple ruins only if the catalogue rates them P. **Blender installed** (owner's 14:24 OK, repeated 15:43):
+  - Blender 3.6.23 portable at `C:/Users/Pengw/Tools/blender-3.6.23-windows-x64` (388 MB zip from download.blender.org, SHA-256 checked; settings inside its own folder; no system install);
+  - NSG SWG Tools 3.1.4 (MIT, our copy in `work/research/nostyleguy_io_scene_swg_msh`) enabled: import and export of msh, mgn, lod and pob, plus skt loading, sat/mgn setup, flr floors and pob rooms, portals and lights;
+  - proven by a round trip of our wall model (`Fable-asset-pipeline/converted/fable_ruin_01.msh`: 940 triangles, 2 materials, 1.99 x 0.29 x 1.95 m), whose export has the identical IFF structure (37 records);
+  - `export_ans.py` (an animation exporter) is in the add-on but not registered: the starting point for new Hutt animations (level 3).
+  - texconv was already at `C:/Users/Pengw/Tools/texconv`.
+  - Scripting quirk: the importers loop over `files`, so pass `files=[{'name': ...}]` with `filepath`.
 - Also: KOTOR 1/2 places to be rebuilt clean-room (descriptions from public sources and observation only, built with SWG's own art; never KOTOR's files); pilot is the Dantooine Jedi Enclave ruins; then Nar Shaddaa or Taris.
 
 Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) — purpose, design maturity and difficulty for all recorded features/candidates.

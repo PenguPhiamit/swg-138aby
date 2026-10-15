@@ -65,6 +65,12 @@ Human clothing and armour are built for the human skeleton, so they won't fit a 
 - **Photo studio:** SOE's test terrains are in the client (`terrain/test_wearables.trn` 143 KB, `simple.trn` 2 KB, `creature_test.trn` 10 KB, `character_farm.trn`, in `data_other_00`). Core3 lists `character_farm` and `simple` commented out in `config.lua:113,122`. Test galaxy only: a no-spawn zone at fixed noon and clear weather, a spawn pad, and a Universal Modder capture routine.
 - **Nal Hutta:** `terrain/hutta.trn` (1 MB) is in `mtg_planets.tre`. The catalogue rates it P (`Content-catalogue/SWG-content-catalogue.md`, Nal Hutta row: Levarrishawk/Darklight public version, credit required).
 
+**Blender is ready (15 Oct 15:50), which changes levels 2 and 3:**
+- Blender 3.6.23 portable with NSG SWG Tools 3.1.4 is at `C:/Users/Pengw/Tools/blender-3.6.23-windows-x64`.
+- It imports and exports `.mgn` skinned meshes and loads `.skt` skeletons (`swg_load_skt_mgn`), so Hutt gear can be rigged to `hutt.skt`.
+- Its `export_ans.py` is an unregistered animation exporter: the starting point for new Hutt animations.
+- A round trip of our wall model gave an identical `.msh` structure.
+
 **For Fable's design:** a playable Hutt is a restricted species, or it isn't playable at all. Options to weigh:
 - **(a) Restricted species:** no mounts, no dancing or entertainer buffs, no clothing (or Hutt-only items), a short emote list. It suits trader, crime-lord, politician and merchant roles. The engineering list would be: refuse those actions for the Hutt race with a clear message, a race-restricted item set, and the species tables as for Chiss.
 - **(b) A Hutt on a repulsor sled:** the Legends look. The Hutt has no rider pose, so this needs new animation or art work; the hardest option.
