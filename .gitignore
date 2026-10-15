@@ -87,3 +87,4 @@ outputs/Claude-class-check/commands.json
 outputs/Claude-class-check/professions.json
 outputs/MTG-merges/shadow-audit.json
 outputs/MTG-merges/work/
+outputs/tools/.owner-email
