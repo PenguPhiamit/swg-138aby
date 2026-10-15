@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C41 packet writer claimed 2026-10-15 12:49). Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy restarted ~10:05 on dev `bb51ec97` (afflict restore, crew kits, who.json every 2 s) with the Forn crew accounts. Live map on http://localhost:8765 (unit `swg-live-map`) with labels. - 2026-10-15 10:05. Claude (botpop session), 13:55: `/botpop` committed (dev `e6749a9e`, `7f58804d`); this session no longer uses the test galaxy (stopped at 13:51 for the owner's full-fleet run by the main session).**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C41 packet writer claimed 2026-10-15 12:49). Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy restarted 16:27 on dev `80895f63` (C39/C40 fixes, mercenary broker on the ground) with the squad accounts, AgentGear and BotPop; the Forn escort run was halted at 16:06 (owner: "shutdown test, see what the data says, then restart"). Live map on http://localhost:8765 (unit `swg-live-map`). - 2026-10-15 16:45.**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -324,13 +324,16 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 
 ## Log
 
-### 2026-10-15 16:40 Claude: C39 and C40 fixes reviewed and in dev; build, restart and gate after the Forn escort run
+### 2026-10-15 16:40 Claude: C39 and C40 fixes in dev, built, gated; the mercenary broker stood on a roof
 
 - Owner (16:00): fix the open C4d/C4e/C19 findings, review C25/C26, then build, restart and gate after the escort run, with C38 after the gate. Those findings and C22's were already fixed in dev on 14 Oct, and C25/C26 were already reviewed and merged; their rows above were stale and are updated. The open work was GPT's C39 and C40 fixes on `gpt/work`.
 - Reviewed and cherry-picked (`-x`) into dev: C39 `8a00b08b` (sandbox datapad, TameAnything and MedicalAnywhere only for god mode or agent accounts on `_test`; 2 s online log only on `_test`), `01b94e13` (unique builder page titles), `f5462270` (/goto back rejects stale cells), `e5c56727` (rejected waypoint mail is an error), `1f8982f3` (MedicalAnywhere keeps the city bonus); C40 `b587e530` (bot walks without z use the floor nearest the bot, not the roof).
 - Claude's follow-ups: `b9653a73` /goto back checks the cell under its lock but releases it before switchZone, which takes the zone lock. `fe188e31`: C40 refused every move without z or route, and `load_fleet.py:234` sends exactly that (`path=False`), so all load bots would have stopped; an explicit `path:false` walks as before.
 - Changed for players on the test galaxy: TameAnything and MedicalAnywhere now need god mode or a bot account.
-- Not built yet: the Forn escort run (round ends about 19:07) runs on the current binaries. Then: incremental build, test-galaxy restart, `gate.py run`. C38's dispatch moved to 20:30 and starts only after a new gate verdict.
+- Owner (16:05): halt the escort run, read the data, restart. The run halted cleanly at 16:06 (11/11 gear checks; Benny never logged in, so no escort play). Server log of the 2 h 15 min session: clean exit, no crash, 13 warning lines. Built in 33 s (core3 + core3client), restarted 16:13 (ready in 70 s).
+- Gate 16:19 FAIL, 29/35: one regression, "Dax offers options". Cause: `sandbox_mercenaries.lua` spawned Dax Venn at `getWorldFloor` (the highest surface), on a roof 16.4 m over the 5 m street at 3552,-4782; bots reached him only through the old highest-surface walk rule that C40 removed. Fixed in dev `80895f63`: he is moved to the terrain, and hired mercenaries spawn at the player's own height (they used the same call). Restarted 16:27.
+- Gate 16:31 FAIL, 22/35: Dax fixed. The new "regressions" are not the build: (1) the four doctor-buff checks say "You re-apply ... enhancement" with max HAM unchanged: the buffs from the 16:19 run were still on (history PF); (2) "the server keeps putting us back" on Besh, Cresh and Esk routes (10 put-backs; none in the 16:19 run; the same Esk plateau route had 5 per run at 08:08 and 08:11 on the old build; Cresh's crew was in a fight, Ilsa died). A direct probe walked Tovan 118 m up the plateau with one put-back before the 150 s limit. Still failing as before: the 12 m leash and Nima's dance line of sight.
+- C38's dispatch moved to 17:40 (after the gate, once Codex is back at 17:29). Doctor-buff artefact and the put-back history are in GPT's inbox.
 
 ### 2026-10-15 14:45 Claude: first outside-art prop staged (F86): a CC0 ruined wall, in the test archive, ready for the owner to look at
 
