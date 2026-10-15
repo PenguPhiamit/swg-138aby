@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C41 packet writer claimed 2026-10-15 12:49). Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy restarted ~10:05 on dev `bb51ec97` (afflict restore, crew kits, who.json every 2 s) with the Forn crew accounts. Live map on http://localhost:8765 (unit `swg-live-map`) with labels. - 2026-10-15 10:05. Claude (botpop session), 13:00, owner's go: server-side bots milestone 1 in `/opt/swg/Core3-dev` (`/botpop`, test galaxy only); no dev build or test-galaxy restart until the running fleet-scale test and forn-escort run end.**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C41 packet writer claimed 2026-10-15 12:49). Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy restarted ~10:05 on dev `bb51ec97` (afflict restore, crew kits, who.json every 2 s) with the Forn crew accounts. Live map on http://localhost:8765 (unit `swg-live-map`) with labels. - 2026-10-15 10:05. Claude (botpop session), 13:55: `/botpop` committed (dev `e6749a9e`, `7f58804d`); this session no longer uses the test galaxy (stopped at 13:51 for the owner's full-fleet run by the main session).**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -272,6 +272,13 @@ ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fi
 Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test only; Claude reviews/builds/game-tests. No bots or restarts.
 
 ## Log
+
+### 2026-10-15 13:55 Claude: server-side population bots (/botpop), milestone 1 built; 100 and 250 measured
+
+- Owner's go 13:00 (Claude weekly usage 83%). Dev `e6749a9e` (SuiPageData::sendTo null guard) and `7f58804d` (`/botpop`), both on the test galaxy since 13:39. All bot code is in `src/server/zone/managers/botpop/` (header-only, movable into a TortoiseBots fork). Core3 hooks: the command registration, the observer flag (AiAgent insert/disappear, SpawnArea position update) and `ClientlessLogin.h`, the one login/logout boundary. Sagiroth's TortoiseBots is the design reference; no code copied.
+- `/botpop spawn N [here|mos_eisley|coronet|split] [radius] | despawn [N|all] | status | mode [all|throttled]`; `_test` database plus `Core3.BotPop = true`, then god mode or an AgentAccounts account. Bots are transient `Popbot<n>` player characters with no client, rows or account; they wander the navmesh, sit, emote, fight back. Throttled mode: only bots near a real player (150), a rotating 50 and fighters act, and they don't wake AI or spawns. All mode: every bot acts and counts as a player. One `[BotPop]` line a minute in core3.log.
+- Measured (throttled, split Mos Eisley/Coronet, 23 squads idle): 100 bots: 1.26 cores, 4.57 GB; 250 bots: 2.03 cores, 4.78 GB (4.52 GB with none); about 0.005 cores and 1.4 MB per extra bot; chat round trip 80 ms; no errors. Report: `Bot-reports/botpop-scale-test.md`; driver `tools/bots/botpop_scale.py` (load_fleet.py's sampler and memory stops).
+- **Not done:** 500 and 1,000, the all mode, the 30-minute 1,000-bot hold and the class check alongside. The main session stopped the series at 13:51 for the owner's full-fleet run; it uses `botpop_scale.py` with BotPop on. About half the walk attempts find no path (not investigated). Escort run: halted twice for /botpop restarts (owner OK) and restarted each time until 17:47.
 
 ### 2026-10-15 13:50 Claude: name filter: only non-name words stay out (test galaxy)
 
