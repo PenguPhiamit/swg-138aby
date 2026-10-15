@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only); C32 edits finished, clean at 4a340565, awaiting Claude review/build/game test. No bot driver claim. The overnight cycle is off. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy STOPPED and deleted at the owner's request (clean exit). Renamed-gems archive 39a89e6c not installed yet (waiting on the owner's OK). — 2026-10-15 00:59**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only); C30 claimed by ChatGPT: Ossus fauna Lua wiring in GPT source worktree; C32 at 4a340565 awaits review/build/game test. No bot driver claim. The overnight cycle is off. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy UP since 01:31 (fresh, dev build 6f3ce06f, renamed-gems archive 39a89e6c). ChatGPT on C30 in its worktree. — 2026-10-15 01:32**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -57,6 +57,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C30: six reviewed Ossus fauna + habitat spawns** | ChatGPT, Medium | claimed 15 Oct 01:33; GPT source worktree only | Preserve reviewed bases; Lua syntax checks; Claude review/build/test, no client archive edits |
 | **C32: agent profession kits + squad wrappers** | ChatGPT, Medium | source/offline complete; Claude review/build/game test pending | C++ 4a340565 after dev merge 220700d0; gated profession grant/clear/list + Bot wrappers; 7 offline tests pass; no build/runtime changes |
 | **C23: Hoth gameplay acceptance** (ChatGPT owns it end to end) | ChatGPT | first pass BLOCKED; normal cleanup 11/11, all home; readiness/telemetry open | Instructions above the log. Scenario `tools/hoth/hoth_gameplay_check.py`, written offline now, run after Claude's next restart; ChatGPT keeps the fail list until it is empty |
 | **C24: Hoth release gate** (go/no-go) | ChatGPT | checkpoint complete — NO-GO, 14 Oct; C23/owner/client gates open | Instructions above the log. `Documentation-support/hoth-release-gate.md`; ChatGPT gives the "reviewed by" for any Hoth live deploy |
@@ -255,6 +256,25 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-15 01:32 Claude: WSL mirrored networking; test galaxy kept between stops now; C32 in dev; test galaxy up with the renamed gems; GPT on C30
+
+- **WSL settings (owner's go):** new `%UserProfile%/.wslconfig`. It has:
+  - `networkingMode=mirrored`, to try against the 9% packet resends on 15 Oct;
+  - `hostAddressLoopback=true`, so Windows reaches WSL on the PC's LAN address and not only on 127.0.0.1 (tested over TCP and UDP both ways);
+  - `vmIdleTimeout=-1` and `instanceIdleTimeout=-1`, so WSL no longer stops itself when idle (it did at 19:43 on 14 Oct and again around 01:00).
+  - Undo: delete the file and run `wsl --shutdown`.
+  - **Live galaxy:** its stored address (`swgemu.galaxy`) is still the old NAT address, so live login needs one update before the next live start. That needs the owner's OK.
+- **Test galaxy no longer wiped** (owner: "do we need it wiped everytime in the first place?"). In `tools/test_galaxy.py`:
+  - `stop` keeps the copy, and `start` resumes it with fresh dev scripts, config overrides and address.
+  - `start --fresh` restores the newest backup; `stop --wipe` deletes the copy. AGENTS.md is updated.
+- **C32** (ChatGPT, the agent profession kits): reviewed and cherry-picked into dev as `6f3ce06f`, built 01:26 with no errors.
+- **Test galaxy started 01:30** (owner's go; no client running, no round).
+  - Fresh copy of galaxy-20261013T172001Z, dev build, Hoth and Ossus.
+  - The renamed-gems archive 39a89e6c is installed on server and client; fbf62971 is backed up in `/opt/swg/tre/old/` and `Local-content/`.
+  - `squad.py setup` is running.
+- **Owner's Chiss test:** Tulde Dedra (made 00:31) was a Chiss and played normally (teleports, travel to Ossus, deeds). Fable's S6 can go ahead at its reset.
+- **ChatGPT on C30** (Ossus creatures) since 01:32. The local model's six creature files are in `Local-model-ossus-fauna/` (h 2e438bf).
 
 ### 2026-10-15 01:18 ChatGPT: C32 profession kits ready for Claude
 

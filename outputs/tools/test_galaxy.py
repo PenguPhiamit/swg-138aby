@@ -1,12 +1,16 @@
-"""A disposable test galaxy for trying dev-branch scripts without touching the live galaxy.
+"""A test galaxy for trying dev-branch scripts without touching the live galaxy.
 
 Restores a backup into /opt/swg/testgalaxy with its own database (swgemu_test) and ports
 46xxx, replaces bin/scripts with the dev worktree's, and runs it beside the live galaxy.
 
+Since 15 Oct (owner: "do we need it wiped everytime in the first place?") a stop KEEPS the copy: characters, items,
+bots and resource spawns survive, and the next start resumes it with fresh dev scripts, config overrides and address.
+--fresh replaces it with the newest backup; stop --wipe deletes it (the old behaviour).
+
 Inside Debian, as root:
-  python3 test_galaxy.py start [--backup DIR] [--set FILE:KEY=VALUE ...] [--config KEY=VALUE ...] [--dev-server]
+  python3 test_galaxy.py start [--fresh] [--backup DIR] [--set FILE:KEY=VALUE ...] [--config KEY=VALUE ...] [--dev-server]
   python3 test_galaxy.py status
-  python3 test_galaxy.py stop                                              # clean exit + delete
+  python3 test_galaxy.py stop [--wipe]                                     # clean exit; --wipe also deletes
 
 --set tweaks a Lua table value in the test copy only, e.g. to shorten timers:
   --set screenplays/sandbox/sandbox_world_bosses.lua:lifetime=240
@@ -59,19 +63,35 @@ def cleanup():
         shutil.rmtree(TARGET)
 
 
+def kept():
+    """A stopped copy that can be resumed: folder, server binary and database all there, nothing running."""
+    return (MARKER.exists() and (BIN/'core3').exists() and not test_pids()
+            and sql(f"SHOW DATABASES LIKE '{DB}'") == DB)
+
+
 def start(args):
-    if TARGET.exists():
-        raise SystemExit('A test galaxy already exists; run stop first.')
+    resume = TARGET.exists() and '--fresh' not in args and kept()
+    if TARGET.exists() and not resume:
+        if test_pids():
+            raise SystemExit('The test galaxy is running; stop it first.')
+        if '--fresh' not in args:
+            raise SystemExit('An incomplete test galaxy copy exists; start --fresh replaces it with the newest backup.')
+        stop(['--wipe'], quiet=True)
+        print('  previous copy wiped (--fresh)', flush=True)
     free_gb = int(open('/proc/meminfo').read().split('MemAvailable:')[1].split()[0]) / 2**20
     if free_gb < 6.5:
         raise SystemExit(f'Only {free_gb:.1f} GiB free in Debian; a galaxy needs about 6.')
-    backup = Path(args[args.index('--backup') + 1]) if '--backup' in args else max(
-        (p for p in BACKUPS.iterdir() if (p/'manifest.json').exists()), key=lambda p: p.name.rsplit('-', 1)[-1])
-    print(f'Test galaxy from {backup.name} with dev scripts', flush=True)
-    TARGET.mkdir(mode=0o750)
-    MARKER.write_text('Disposable test galaxy; safe to delete.\n')
+    if resume:
+        print('Test galaxy resumed (characters, items, bots and spawns kept) with fresh dev scripts', flush=True)
+    else:
+        backup = Path(args[args.index('--backup') + 1]) if '--backup' in args else max(
+            (p for p in BACKUPS.iterdir() if (p/'manifest.json').exists()), key=lambda p: p.name.rsplit('-', 1)[-1])
+        print(f'Test galaxy from {backup.name} with dev scripts', flush=True)
+        TARGET.mkdir(mode=0o750)
+        MARKER.write_text('Test galaxy copy; safe to delete (test_galaxy.py stop --wipe).\n')
     try:
-        run(['tar', '-xzf', str(backup/'server.tar.gz'), '-C', str(TARGET)])
+        if not resume:
+            run(['tar', '-xzf', str(backup/'server.tar.gz'), '-C', str(TARGET)])
         shutil.rmtree(BIN/'scripts')
         shutil.copytree(DEV_SCRIPTS, BIN/'scripts', symlinks=True)
         if '--dev-server' in args:
@@ -87,15 +107,17 @@ def start(args):
             path.write_text(text)
             print(f'  test-only setting: {rel} {key} = {value}')
 
-        dump = (backup/'galaxy.sql').read_text(errors='surrogateescape').splitlines(keepends=True)
-        skip = {i for i, l in enumerate(dump) if re.match(r'CREATE DATABASE .*`swgemu`', l) or l.strip() == 'USE `swgemu`;'}
-        if len(skip) != 2 or any('`swgemu`.' in l for i, l in enumerate(dump) if i not in skip):
-            raise SystemExit('Unexpected SQL dump layout; refusing to import.')
-        (TARGET/'galaxy-test.sql').write_text(''.join(l for i, l in enumerate(dump) if i not in skip), errors='surrogateescape')
-        sql(f'CREATE DATABASE {DB}')
-        with (TARGET/'galaxy-test.sql').open('rb') as stream:
-            run(['mariadb', DB], stdin=stream)
-        sql(f'GRANT ALL PRIVILEGES ON `{DB}`.* TO {USER}')
+        if not resume:
+            dump = (backup/'galaxy.sql').read_text(errors='surrogateescape').splitlines(keepends=True)
+            skip = {i for i, l in enumerate(dump) if re.match(r'CREATE DATABASE .*`swgemu`', l) or l.strip() == 'USE `swgemu`;'}
+            if len(skip) != 2 or any('`swgemu`.' in l for i, l in enumerate(dump) if i not in skip):
+                raise SystemExit('Unexpected SQL dump layout; refusing to import.')
+            (TARGET/'galaxy-test.sql').write_text(''.join(l for i, l in enumerate(dump) if i not in skip), errors='surrogateescape')
+            sql(f'CREATE DATABASE {DB}')
+            with (TARGET/'galaxy-test.sql').open('rb') as stream:
+                run(['mariadb', DB], stdin=stream)
+            sql(f'GRANT ALL PRIVILEGES ON `{DB}`.* TO {USER}')
+        # Every start, resumed or not: the address can change between WSL boots (and with the networking mode).
         host = subprocess.check_output(['hostname', '-I'], text=True).split()[0]
         sql(f"UPDATE galaxy SET name='Test Galaxy', address='{host}', port={PORTS['ZoneServerPort']}, "
             f"pingport={PORTS['PingPort']} WHERE galaxy_id=2", DB)
@@ -124,12 +146,20 @@ def start(args):
         # after each test restart). The test galaxy starts its shuttles after 30 s; live keeps the stock delay.
         shuttles = f'Core3.ShuttleZoneComponent = {{ BootDelay = {SHUTTLE_BOOT_DELAY_MS} }}\n'
         print(f'  shuttles in service {SHUTTLE_BOOT_DELAY_MS // 1000} s after the start (stock: 300 s)', flush=True)
+        # A resumed copy still has the last start's overrides at the end of config-local.lua: replace them.
+        text = config.read_text(errors='surrogateescape')
+        cut = text.find('\n-- TEST GALAXY OVERRIDES')
+        if cut >= 0:
+            config.write_text(text[:cut], errors='surrogateescape')
         with config.open('a') as stream:
             stream.write('\n-- TEST GALAXY OVERRIDES (disposable copy)\n'
                          f'Core3.DBName = "{DB}"\nCore3.MakeWeb = 0\n' + local_tre + shuttles +
                          ''.join(f'Core3.{k} = {v}\n' for k, v in PORTS.items()) +
                          ''.join(f'Core3.{a}\n' for i, a in enumerate(args) if i > 0 and args[i - 1] == '--config'))
         run(['chown', '-R', 'swgemu:swgemu', str(TARGET)])
+        for leftover in (FIFO, LOG):  # a resumed copy's old pipe and log (the wait below reads the log)
+            if leftover.exists():
+                leftover.unlink()
         run(['runuser', '-u', 'swgemu', '--', 'mkfifo', str(FIFO)])
         # Hold the console pipe open so core3 never sees end-of-input; stop writes "exit".
         # Detach fully (no inherited stdout) so callers piping this script are not held open.
@@ -147,7 +177,7 @@ def start(args):
             time.sleep(2)
         print(f'Test galaxy ready in {round(time.monotonic() - started)} s: login {host}:{PORTS["LoginPort"]}', flush=True)
     except BaseException:
-        stop([], quiet=True)
+        stop([] if resume else ['--wipe'], quiet=True)  # a half-made fresh copy goes; a resumed one is kept
         raise
 
 
@@ -167,8 +197,15 @@ def stop(args, quiet=False):
             subprocess.run(['kill', '-9', pid])
     shutil.copy2(LOG, '/opt/swg/agent/logs/test-galaxy-last.log') if LOG.exists() else None
     clean = LOG.exists() and '[Core] server closed' in LOG.read_text(errors='replace')
-    cleanup()
-    print(f'Test galaxy stopped ({"clean exit" if clean else "forced"}) and deleted. Log kept at /opt/swg/agent/logs/test-galaxy-last.log')
+    how = 'clean exit' if clean else 'forced'
+    if '--wipe' in args:
+        cleanup()
+        print(f'Test galaxy stopped ({how}) and deleted. Log kept at /opt/swg/agent/logs/test-galaxy-last.log')
+    else:
+        subprocess.run(['pkill', '-f', 'sleep infinity # test-galaxy-holder'])
+        if not quiet:
+            print(f'Test galaxy stopped ({how}) and kept: start resumes it, start --fresh replaces it, stop --wipe deletes it. '
+                  'Log kept at /opt/swg/agent/logs/test-galaxy-last.log')
 
 
 def status(args):
