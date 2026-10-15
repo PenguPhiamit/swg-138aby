@@ -10,6 +10,11 @@ Idle means all of: no /api/chat or /api/generate request in Ollama's log for 10 
 doesn't count, so topics follow each other while nobody else needs the model); the GPU below 30 %; none of the owner's
 SWG clients running; no Agent/local-research/STOP file.
 
+Where Ollama runs comes from ollama_url.py (OLLAMA_URL, then ollama-url.txt, then 127.0.0.1). For a server on another
+PC (REMOTE-OLLAMA.md) the log, GPU and client checks are about this PC and are skipped; instead each timer run asks
+the server's /api/ps which models are loaded and when they expire. A request that finishes moves a model's expires_at,
+so the same list on consecutive runs means nobody used it; 10 minutes of that, written to state.json, count as idle.
+
 Each topic in Agent/local-research/queue.json names Core3-dev sources (MMOCoreORB-relative, with an optional
 :START-END line range) and project files (prefix h:). They are copied, read-only and line-numbered, into
 Agent/local-research/<id>/src/, and local_agent.py (file tools inside that folder only: no shell, no network) writes
@@ -17,15 +22,21 @@ Agent/local-research/<id>/src/, and local_agent.py (file tools inside that folde
 Nothing here touches the server, the bots or the board. Anyone may add an "open" topic to the queue.
 """
 import fcntl
+import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
 import sys
 import time
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
+
+sys.path.append(str(Path(__file__).resolve().parent))
+import ollama_url
 
 H = Path('/mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h')
 BASE = H / 'outputs' / 'Agent' / 'local-research'
@@ -33,9 +44,12 @@ QUEUE, LOG, STATE, STOP = BASE / 'queue.json', BASE / 'LOG.md', BASE / 'state.js
 CORE3 = Path('/opt/swg/Core3-dev/MMOCoreORB')
 AGENT = H / 'outputs' / 'tools' / 'agents' / 'local' / 'local_agent.py'
 OLLAMA_LOG = Path('/mnt/c/Users/Pengw/AppData/Local/Ollama/server.log')
-OLLAMA = 'http://127.0.0.1:11434/api/tags'
 NVIDIA_SMI = '/usr/lib/wsl/lib/nvidia-smi'  # WSL's GPU tools; not on a systemd service's PATH
 IDLE_S, OWN_SLACK_S, GPU_BUSY = 600, 90, 30
+# Server on another PC: timer jitter (AccuracySec=30s) allowed on the 10 minutes; the longest gap between two timer runs
+# that still counts as watching the server continuously; how long past its expiry a loaded model counts as mid-request.
+REMOTE_SLACK_S, REMOTE_GAP_S, OVERDUE_S = 30, 8 * 60, 20
+EXPIRES = re.compile(r'(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)(?:\.(\d+))?(Z|[+-]\d\d:\d\d)')
 SOURCE_CAP = 120_000  # characters per topic: the brief, the files and the agent's notes share a 64K-token window
 MAX_STEPS, RUN_LIMIT_S = 40, 3 * 3600
 GIN = re.compile(r'\[GIN\] (\d{4}/\d\d/\d\d - \d\d:\d\d:\d\d) \|.*POST +"/api/(?:chat|generate)"')
@@ -116,13 +130,113 @@ def save(path, data):
     tmp.replace(path)
 
 
-def blockers():
+def parse_expiry(text, server_now):
+    """Epoch seconds of an /api/ps expires_at, or None when it is no use: missing, unreadable, or "never" (keep-alive -1
+    shows year 1 or a date centuries away), where a finished request leaves no trace."""
+    found = EXPIRES.fullmatch(text or '')
+    if not found or int(found.group(1)) <= 1:
+        return None
+    year, month, day, hour, minute, second, fraction, zone = found.groups()
+    offset = timedelta() if zone == 'Z' else timedelta(hours=int(zone[1:3]), minutes=int(zone[4:6])) * (
+        -1 if zone[0] == '-' else 1)
+    try:
+        when = datetime(int(year), int(month), int(day), int(hour), int(minute), int(second),
+                        int((fraction or '0')[:6].ljust(6, '0')), timezone(offset))
+        epoch = when.timestamp()
+    except (ValueError, OverflowError):
+        return None
+    return epoch if epoch < server_now + 30 * 86400 else None
+
+
+def fetch_ps(base):
+    """({loaded model: expiry epoch or None}, the server's own clock) from its /api/ps. The server's Date header is
+    the clock, so a skewed clock on the other PC doesn't matter. OSError or ValueError when it isn't answering."""
+    with urllib.request.urlopen(ollama_url.api('/api/ps', base), timeout=10) as response:
+        data = json.load(response)
+        stamp = response.headers.get('Date')
+    if not isinstance(data, dict):
+        raise ValueError('/api/ps did not answer with an object')
+    try:
+        server_now = parsedate_to_datetime(stamp).timestamp()
+    except (TypeError, ValueError):
+        server_now = time.time()
+    return {m.get('name') or m.get('model') or '?': parse_expiry(m.get('expires_at'), server_now)
+            for m in data.get('models') or []}, server_now
+
+
+def remote_key(base):
+    return hashlib.sha1(base.encode()).hexdigest()[:10]  # state.json holds this, not the LAN address itself
+
+
+def remote_step(prev, key, models, server_now, now):
+    """One look at a server on another PC. prev is the record the last look stored (or None). Returns (record, why):
+    the record to store (None: start over next time) and the reasons it isn't idle yet (empty: idle).
+    A request that finishes moves its model's expires_at, so a model list that stays the same between looks means
+    nobody used the server in between. A model that vanishes after its expiry just timed out; one that vanishes
+    early was unloaded by someone. A loaded model past its expiry is mid-request."""
+    blind = sorted(n for n, e in models.items() if e is None)
+    if blind:
+        return None, [f'remote Ollama keeps {", ".join(blind)} loaded with no usable expiry (keep-alive -1?), '
+                      'so use cannot be told']
+    busy = sorted(n for n, e in models.items() if e < server_now - OVERDUE_S)
+    old = prev.get('models', {}) if prev and prev.get('key') == key and 0 <= now - prev.get('seen', -1e9) <= \
+        REMOTE_GAP_S else None
+    changed = old is not None and (any(n not in old or abs(old[n] - e) > 0.001 for n, e in models.items())
+                                   or any(n not in models and e > server_now + 2 for n, e in old.items()))
+    since = prev['since'] if old is not None and not changed and not busy else now
+    record = {'key': key, 'models': models, 'since': since, 'seen': now}
+    if busy:
+        return record, [f'remote Ollama is mid-request ({", ".join(busy)} is past its expiry)']
+    covered = now - since
+    if covered >= IDLE_S - REMOTE_SLACK_S:
+        return record, []
+    return record, [('first look at remote Ollama' if old is None else
+                     'remote Ollama was used since the last look' if changed else 'remote Ollama quiet')
+                    + f' ({int(covered // 60)} of {IDLE_S // 60} min so far, counted on the timer runs)']
+
+
+def remote_blockers(base, record=False, now=None):
+    """Reasons not to start while Ollama runs on another PC; the local log, GPU and client checks don't apply to it.
+    record=True (the timer's `check`) stores this look in state.json; `status` only reads."""
+    now = time.time() if now is None else now
+    state = load(STATE, {})
+    try:
+        models, server_now = fetch_ps(base)
+    except (OSError, ValueError):
+        new, why = None, [f'remote Ollama at {ollama_url.describe(base)} is not answering']
+    else:
+        new, why = remote_step(state.get('remote'), remote_key(base), models, server_now, now)
+    if record:
+        if new:
+            state['remote'] = new
+        else:
+            state.pop('remote', None)
+        save(STATE, state)
+    return why
+
+
+def remote_base():
+    """The other PC's address, or None when Ollama is on this PC (or the address is unusable: blockers() says so)."""
+    try:
+        base = ollama_url.base_url()
+    except ollama_url.OllamaUrlError:
+        return None
+    return None if ollama_url.is_local(base) else base
+
+
+def blockers(record=False):
     """Reasons not to start now; an empty list means idle."""
     why = []
     if STOP.exists():
         why.append('Agent/local-research/STOP exists')
     try:
-        urllib.request.urlopen(OLLAMA, timeout=5).read()
+        base = ollama_url.base_url()
+    except ollama_url.OllamaUrlError as error:
+        return why + [f'bad Ollama address ({error})']
+    if not ollama_url.is_local(base):
+        return why + remote_blockers(base, record)
+    try:
+        urllib.request.urlopen(ollama_url.api('/api/tags', base), timeout=5).read()
     except OSError:
         why.append('Ollama is not answering')
     last = last_request()
@@ -178,26 +292,45 @@ def run(topic):
         scenario_note=' and, where its path says scenarios/, of the bot test scenario' if scenario else '')
         + '\nFiles:\n' + ''.join(f'- {c}\n' for c in copied), encoding='utf-8')
     started = time.time()
+    base = remote_base()   # a server on another PC: hand local_agent.py the very address this run was decided on
+    env = dict(os.environ, OLLAMA_URL=base) if base else None
     try:
         out = subprocess.run([sys.executable, str(AGENT), '--workspace', str(ws), '--max-steps', str(MAX_STEPS),
                               '--task', 'Read TASK.md, then the files it lists, then write report.md as TASK.md asks.'],
-                             capture_output=True, text=True, errors='replace', timeout=RUN_LIMIT_S)
+                             capture_output=True, text=True, errors='replace', timeout=RUN_LIMIT_S, env=env)
         output = out.stdout + out.stderr
     except subprocess.TimeoutExpired:
         output = f'stopped after {RUN_LIMIT_S} s'
+    if base:   # agent-output.txt is tracked in git; the LAN address is not
+        output = output.replace(base, '<ollama-url>').replace(ollama_url.describe(base).rsplit(':', 1)[0], '<ollama-host>')
     (ws / 'agent-output.txt').write_text(output, encoding='utf-8')
     report = ws / 'report.md'
     ok = report.exists() and report.stat().st_size > 300
     minutes = round((time.time() - started) / 60)
+    state = load(STATE, {})
+    gone = False
+    if base:   # our own use doesn't count against the idle window (as with the local log); a vanished server does
+        try:
+            models, _ = fetch_ps(base)
+            if None in models.values():
+                state.pop('remote', None)
+            else:
+                state['remote'] = {'key': remote_key(base), 'models': models, 'since': time.time() - IDLE_S,
+                                   'seen': time.time()}
+        except (OSError, ValueError):
+            state.pop('remote', None)
+            gone = not ok
     queue = load(QUEUE, {'topics': []})   # re-read: someone may have added topics meanwhile
     for t in queue['topics']:
         if t['id'] == topic['id']:
-            t.update(status='review' if ok else 'failed', finished=now(), minutes=minutes,
+            t.update(status='review' if ok else 'open' if gone else 'failed', finished=now(), minutes=minutes,
                      skipped=skipped or None)
     save(QUEUE, queue)
-    save(STATE, {'last_finish': time.time(), 'last_topic': topic['id']})
+    state.update(last_finish=time.time(), last_topic=topic['id'])
+    save(STATE, state)
     with LOG.open('a', encoding='utf-8', newline='') as f:
         f.write(f'- {now()} {topic["id"]}: ' + (f'report written ({report.stat().st_size} bytes)' if ok else
+                'no report: remote Ollama stopped answering, topic left open' if gone else
                 f'no report ({output.strip().splitlines()[-1][:120] if output.strip() else "no output"})')
                 + f', {minutes} min, {len(copied)} files' + (f'; skipped {", ".join(skipped)}' if skipped else '')
                 + '\n')
@@ -221,9 +354,11 @@ def main():
                 t['status'] = 'open'
         save(QUEUE, queue)
     todo = [t for t in queue['topics'] if t.get('status') == 'open']
-    why = blockers()
-    print(f'{len(todo)} open topic(s); ' + ('idle: would start ' + todo[0]['id'] if not why and todo else
-                                           'not starting: ' + ('; '.join(why) if why else 'queue empty')))
+    why = blockers(record=sys.argv[1] == 'check')
+    remote = remote_base()
+    print((f'[remote Ollama {ollama_url.describe(remote)}] ' if remote else '')
+          + f'{len(todo)} open topic(s); ' + ('idle: would start ' + todo[0]['id'] if not why and todo else
+                                              'not starting: ' + ('; '.join(why) if why else 'queue empty')))
     if sys.argv[1] == 'status' or why or not todo:
         return 0
     topic = todo[0]

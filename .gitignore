@@ -11,6 +11,8 @@ outputs/SWG-login.txt
 **/*.pem
 **/*webhook*
 **/.claude/settings.local.json
+# The LAN address of a friend's Ollama server (outputs/tools/agents/local/REMOTE-OLLAMA.md): private
+outputs/tools/agents/local/ollama-url.txt
 
 # ---- the game client, archives, backups and other people's files ----
 outputs/SWG-client/
@@ -69,6 +71,9 @@ outputs/Bot-reports/*/*.json
 outputs/Bot-reports/runs/*.json
 outputs/Bot-reports/runs/STOP
 outputs/Bot-reports/runs/ACTIVE
+outputs/Bot-reports/gate/*.txt
+outputs/Bot-reports/gate/*.log
+outputs/Bot-reports/gate/RUNNING
 
 # ---- records of and scripts for the excluded SWG-Source material (AGENTS.md, Source and rights) ----
 outputs/Content-catalogue/Cut-content-and-backports/

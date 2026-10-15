@@ -35,7 +35,7 @@ Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heav
   - runtime acceptance for C25, C26, C9, C16 and the C8 wrappers;
   - C23 Hoth acceptance;
   - the open leash and body findings (C4d, C4e, C4f).
-- **Regression gate:** one command after every restart (the squads, class check P0, Hoth/Ossus acceptance) gives one pass/fail report. The cycle runs it automatically. It is what makes every later change cheap.
+- **Regression gate:** one command after every restart (the squads, class check P0, Hoth/Ossus acceptance) gives one pass/fail report. The cycle runs it automatically. It is what makes every later change cheap. **Built 15 Oct:** `tools/bots/gate.py`, verdict in `Bot-reports/GATE.md`; first gate PASS (27/28).
 - **First live release:** the bot body and `/agentpath`, `/leash`, the world boss, and Hoth if the C24 gate turns GO. Cross-review plus the owner's OK, as a batch, then weekly.
 
 **Week 2, Ossus and Chiss playable; long-lead items started (to 28 Oct):**

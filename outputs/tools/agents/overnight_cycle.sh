@@ -13,7 +13,9 @@
 #   3. Squads: if any bot is offline or lost its connection, squad.py setup. If nobody can log in, the test galaxy is down: restart it
 #      (AGENTS.md standing OK) unless one of the owner's clients is running; the start takes about 5 minutes,
 #      so setup happens on the next run.
-#   4. A 25-minute squad round in the background from Agent/squad-plan.txt (a running one is left alone).
+#   4. Once per server start, the regression gate (tools/bots/gate.py start: health, all bots in, one round of the
+#      plan compared with each check's history; verdict in Bot-reports/GATE.md). Otherwise a 25-minute squad round
+#      in the background from Agent/squad-plan.txt (a running one is left alone).
 #   5. 3-6 lines in Bot-reports/OVERNIGHT.md; squad.py tidy every 4th run.
 set -u
 O=/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs
@@ -32,6 +34,10 @@ owner_on() {  # an owner client is running, or the client still points at the te
     tasklist //FO CSV //NH 2>/dev/null | grep -q -i -E '^"(swgclient|swgemu)' && return 0
     grep -q 46453 "$O/SWG-client/swgemu_login.cfg" 2>/dev/null && return 0
     return 1
+}
+gate() {  # gate SECONDS ARGS...: tools/bots/gate.py as swgemu inside Debian
+    local t=$1; shift
+    MSYS_NO_PATHCONV=1 timeout "$t" wsl -d Debian -u swgemu -- python3 "$W/tools/bots/gate.py" "$@" 2>&1 </dev/null | tr -d '\r'
 }
 online() { echo "$1" | grep -E '^  [A-Z][a-z]+ ' | grep -v -c -E 'HNone|offline'; }
 lines=()
@@ -79,13 +85,17 @@ if [ "$n" -lt 18 ] && [ $DRY = 0 ]; then  # any bot down or disconnected (a gala
 fi
 say "- Bots online: $n/18"
 
-# 4. a squad round
-if [ "$n" != 0 ] && [ $DRY = 0 ]; then
+# 4. the regression gate once per server start (tools/bots/gate.py, 15 Oct), otherwise a squad round
+due=$(gate 60 due | tail -1)
+if [ "$n" != 0 ] && [ $DRY = 0 ] && [ "$due" = "due" ]; then
+    say "- Gate: $(gate 60 start | tail -1 | cut -c1-160)"
+elif [ "$n" != 0 ] && [ $DRY = 0 ] && [ "$due" != "running" ]; then
     plan=()
     for s in $(tr -d '\r' < "$O/Agent/squad-plan.txt"); do plan+=("$W/tools/bots/scenarios/$s"); done
     r=$(sq 120 run "${plan[@]}" --minutes 25 --detach | tr -d '\r' | grep -v '^$' | tail -1 | cut -c1-160)
     say "- Squad round: $r"
 fi
+say "- Gate: $(head -1 "$O/Bot-reports/GATE.md" 2>/dev/null | sed 's/^# Gate: //') (this server: $due)"
 
 # 5. newest results, log, tidy
 lr=$(sq 120 last | tr -d '\r')

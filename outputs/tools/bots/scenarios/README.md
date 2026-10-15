@@ -79,6 +79,10 @@ Aurek is the world-boss crew. Aurek and Jesh are the fighters, trained so their 
 - **Name new files `<group>-<topic>.py`**, e.g. `aurek-loot.py`, so reports group by topic.
 - **Write facts.** Only PASS/FAIL and notes count. If something can't be tested because the body lacks a feature, write `g.note('BLOCKED: …')` and move on. Claude adds body features from those notes.
 
+## Regression gate (Claude, 15 October)
+
+`tools/bots/gate.py` answers one question after every test-galaxy start: does everything that passed before still pass? It checks the server (running, initialized, dev commit, archive), logs in any missing bot, runs one 10-minute round of `Agent/squad-plan.txt` without fallbacks, and compares each check with its own history. A check that passed before and fails now, and never failed before, is a **regression** and fails the gate. Flaky, fixed, new and still-failing checks are listed but don't fail it. The verdict is in `Bot-reports/GATE.md`. The 30-minute cycle starts it once per server start (`gate.py due`, then `gate.py start`), so after a restart, read `GATE.md` before anything else. **Keep check labels stable:** the history is keyed by group, scenario and label, so renaming a check starts a new history.
+
 ## Class check (C33, 15 October)
 
 `class-check.py` grants a test bot one whole profession at a time (`Bot.profession`), tries each of that profession's abilities once and records which ones the server accepts. Plan: `Claude-class-check/test-plan.md`; results: `Documentation-support/class-check-results.md`. It always runs the P0 control first (a cleared bot must be refused `unarmedHit1` and `healDamage` with error 2; `stopDance` must still answer), then one profession per run:

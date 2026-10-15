@@ -5,13 +5,16 @@ profile for gpt-oss, so tool calls came out in the wrong shape (tests in the 14 
 own tool calling and is deliberately narrow: three file tools inside ONE workspace folder. No shell, no network, no
 paths outside the workspace, so it can't touch /opt/swg, the board or the bots. Claude reviews everything it writes.
 
-    python -I local_agent.py --workspace DIR --task "..." [--model gpt-oss:20b] [--max-steps 25]
+    python -I local_agent.py --workspace DIR --task "..." [--model gpt-oss:20b] [--max-steps 25] [--ollama-url URL]
 
-Writes DIR/agent-log.jsonl (every request and reply) and prints the final answer.
+Writes DIR/agent-log.jsonl (every request and reply) and prints the final answer. The Ollama address comes from
+ollama_url.py (OLLAMA_URL, then ollama-url.txt, then this PC); --ollama-url overrides it for one run.
 """
 import argparse, json, pathlib, sys, time, urllib.request
 
-OLLAMA = 'http://127.0.0.1:11434/api/chat'
+sys.path.append(str(pathlib.Path(__file__).resolve().parent))  # python -I leaves the script's own folder off sys.path
+import ollama_url
+
 READ_CAP = 20000  # characters per read_file call; the model pages with offset
 
 SYSTEM = (
@@ -72,10 +75,10 @@ def run_tool(root, name, args, protected):
         return f'error: {error}'
 
 
-def chat(model, messages, ctx):
+def chat(model, messages, ctx, base=None):
     body = json.dumps({'model': model, 'messages': messages, 'tools': TOOLS, 'stream': False,
                        'options': {'num_ctx': ctx, 'temperature': 0.2}}).encode()
-    request = urllib.request.Request(OLLAMA, body, {'Content-Type': 'application/json'})
+    request = urllib.request.Request(ollama_url.api('/api/chat', base), body, {'Content-Type': 'application/json'})
     with urllib.request.urlopen(request, timeout=900) as response:
         return json.load(response)
 
@@ -87,7 +90,12 @@ def main():
     parser.add_argument('--model', default='gpt-oss:20b')
     parser.add_argument('--ctx', type=int, default=65536)
     parser.add_argument('--max-steps', type=int, default=25)
+    parser.add_argument('--ollama-url', help='Ollama server address; default: OLLAMA_URL, ollama-url.txt or this PC')
     args = parser.parse_args()
+    try:
+        base = ollama_url.normalize(args.ollama_url) if args.ollama_url else ollama_url.base_url()
+    except ollama_url.OllamaUrlError as error:
+        parser.error(f'bad Ollama address: {error}')
 
     root = pathlib.Path(args.workspace).resolve()
     protected = {p.resolve() for p in root.rglob('*') if p.is_file()}  # files present at the start are inputs
@@ -95,7 +103,7 @@ def main():
     messages = [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': args.task}]
     started = time.monotonic()
     for step in range(1, args.max_steps + 1):
-        reply = chat(args.model, messages, args.ctx)
+        reply = chat(args.model, messages, args.ctx, base)
         message = reply.get('message', {})
         log.write(json.dumps({'step': step, 'reply': message, 'eval_count': reply.get('eval_count'),
                               'prompt_eval_count': reply.get('prompt_eval_count')}) + '\n')
