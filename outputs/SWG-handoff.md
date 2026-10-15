@@ -57,6 +57,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C42: Fable return prep + housekeeping** | ChatGPT, Medium | complete 2026-10-15 12:45 | Docs 8c795f7; three checked briefs; cleanup proposals unapplied; no server writes/bots/downloads/restarts |
 | **Escort crew and crew vendor (owner, 15 Oct)** | Claude | escort mode built, offline tests pass; first live run with the owner pending | Owner: "the dungeon crew was meant to run with me"; "this function can lead into the crew vendor, and future solo features". `tools/bots/escort.py` (generic: any group, any player): follow in formation into buildings, fight the player's target with real rotations, defend, heal the lowest, chat orders (follow, stay, attack, passive, heal, status, dismiss), play data in `Bot-reports/play/` (escort only). Run: `squad.py run scenarios/forn-escort.py --round-minutes 125`. **Next:** travel-following (shuttles), a crew vendor NPC that hires a crew to a player (Dax Venn's mercenary broker is the model), solo-player features. Owner's build for Creature Handler play data: Master CH + Rifleman + Marksman (246) |
 | **Remote access + second owner account (owner, 15 Oct)** | Claude | prep done 10:15, docs only; nothing opened or changed; waits for the owner's go | `Documentation-support/remote-access-and-second-owner.md`: ports read from the configs (forward UDP login/zone/ping only; never ORB, status, MariaDB, live map); mirrored WSL with the Hyper-V firewall blocking inbound today; the owner's router and firewall checklist with exact PowerShell; the hairpin catch (a public galaxy address also sends the owner's client and the bots through the router); the friend makes their own account by AutoReg login, then one `UPDATE` to admin_level 15 by the lock holder. Test galaxy first, short window, rules limited to the friend's IP |
 | **C39: dev since C34r independent review** | ChatGPT, High | complete; changes requested 2026-10-15 | 1 P1 / 4 P2 / 2 P3; review-C39.md; five gpt/work source fixes ready for Claude; full build/gameplay/persistence untested; no bots/restarts |
@@ -264,9 +265,9 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ## Log
 
-### 2026-10-15 12:39 ChatGPT: C39 review complete
+### 2026-10-15 12:45 ChatGPT: C42 Fable return prep complete
 
-- Reviewed 90044b8e..81384b90: 1 P1 / 4 P2 / 2 P3; report `Documentation-support/review-C39.md`. Source fixes on owned gpt/work after merge 22408da4: d8c9d668, 1b276fa4, 6647e5f8, b556c061, a9fb5cfe (Claude review/cherry-pick in that order). Offline gates, 432 medical cases per pack, paging/stale-cell Lua checks and six Lua syntax checks pass; restored files match baseline blobs. Full server build/gameplay/restart persistence untested. Dev/runtime/bots untouched; later dev 398744b5 is outside scope. Source slice idle; next: Claude review and separate acceptance. Older logs moved to the archive; newest four retained.
+- Docs commit `8c795f7`: `Documentation-support/fable-return-brief.md` (18 folders, 842 words), `owner-decisions-for-fable.md`, `board-housekeeping-1015.md`. Checked dev HEAD `398744b5`, README/owner-answer records and archive hashes: installed client/server both `8ad04fec`; Local-content copy remains `aee83cc6`. Chiss played; E0 visual/habitat/full gameplay acceptance UNVERIFIED. References/CRLF checked; no downloads, bots, restarts or writes under /opt/swg. Next: owner decision batch, then Fable design and delegated mechanical checks. Housekeeping proposals unapplied; oldest 11:40 log preserved in archive, newest four retained. Board/log record committed separately.
 
 ### 2026-10-15 12:40 Claude: the crew answers every order; Mirren's heal loop and Forn's rubber-banding fixed; /tame train
 
@@ -284,6 +285,10 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
   - better camera zoom in and out (client side);
   - "disengaging scripts brok" (asked in game which: the crew not stopping, or Benny's macros).
 
+### 2026-10-15 12:39 ChatGPT: C39 review complete
+
+- Reviewed 90044b8e..81384b90: 1 P1 / 4 P2 / 2 P3; report `Documentation-support/review-C39.md`. Source fixes on owned gpt/work after merge 22408da4: d8c9d668, 1b276fa4, 6647e5f8, b556c061, a9fb5cfe (Claude review/cherry-pick in that order). Offline gates, 432 medical cases per pack, paging/stale-cell Lua checks and six Lua syntax checks pass; restored files match baseline blobs. Full server build/gameplay/restart persistence untested. Dev/runtime/bots untouched; later dev 398744b5 is outside scope. Source slice idle; next: Claude review and separate acceptance. Older logs moved to the archive; newest four retained.
+
 ### 2026-10-15 12:05 Claude: test-galaxy dev tools: tame anything, buffs anywhere, dev datapad = full character builder, /goto back
 
 - Test galaxy restarted 12:01 on dev `81384b90` (all below live; Core3.TameAnything and Core3.MedicalAnywhere are set by test_galaxy.py and only read on a `_test` database).
@@ -293,12 +298,4 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 - **`/goto back`** (`81384b90`): god-mode players return to their spot before the last jump (recorded in switchZone, kept across restarts).
 - **Pathing note (owner, screenshot 12:05): Esk stands on a roof ledge at the Mos Eisley starport.** Claude's label test (10:5x) walked Esk to 3536 -4796 with no height; the move reply gave z 9.5 where the ground is about 5. A walk without z takes the highest floor at that x, y (a roof or ledge) instead of the ground the bot walked on. Fix for the bot body or /agentpath: keep the height of the walked path (or the terrain/navmesh floor nearest the current z), and send Esk down. Open.
 - **Mistake fixed:** a `>` inside a `wsl â€¦ grep` pattern became a redirect and overwrote ObjectManager.cpp (restored from git before any build went out). `wsl` re-parses its arguments: no `> < | $ ( ) #` in them (memory updated). The morning's ActivateQuestCommand.h damage fits the same pattern.
-
-### 2026-10-15 11:40 Claude (side session): names sweep second half done; local-model background jobs
-
-- **Names sweep, second half (owner asked for Haiku and the local model; GPT's C36 put on hold, `f0584c6`):** all 942 remaining chunks read. Local model qwen3:8b on every chunk (937, plus 2 read by Claude), two Haiku agents on the 162 prose chunks, and a pattern pass for URL usernames and e-mails. **152 new candidates** beyond the first half's list, 16 found by two methods. They are in `work/names-sweep/new-names.json` (git-ignored, local only) for the owner's decisions before going public.
-- **The local model is a drafter, not a checker:** on the same prose chunks it found 41% of what Haiku found. Use it for drafts and first passes that something stronger checks, not for privacy, reviews or research a test relies on.
-- **Memory cause found:** Ollama keeps each request's KV state in a host-RAM prompt cache (about 0.5 GB per 4K-token request with qwen3:8b). It grew commit by ~15 GB in 25 requests, very likely what crashed the PC at 07:31. New `tools/agents/local/memguard.py`: the local-model scripts unload the model every 5 requests (empties the cache), pause under 6 GB of commit headroom, and idle research won't start under 8 GB. On this PC, `ollama-model.txt` = qwen3:8b and `ollama-ctx.txt` = 16384 (per-PC, git-ignored).
-- **Chunk jobs for idle research:** queue topics of `"kind": "map"` run `local_jobs.py` (input and report) and `local_map.py` (one request per chunk, resumable, yields to the owner's client and to low memory). Queued: `bot-gap-list` (192 de-duplicated BLOCKED/NO_EFFECT/FAIL notes sorted into gaps) and `proofread-player-text` (488 strings: our archive strings that differ from stock and MTG, plus messages added on dev since sandbox). Reports land in `Agent/local-research/<id>/report.md` as drafts. **The STOP file is removed**, so idle research runs again when the owner's client is closed; create `Agent/local-research/STOP` to pause it.
-- Tests: `test_local_map.py` 10/10 (Windows and WSL); `test_ollama_url.py` 61/61 (one expectation changed: local_agent now unloads the model when it finishes). A 2-chunk live run from WSL worked (lowest headroom 8.6 GB). The full jobs run when the PC is idle; untested end to end through the timer.
 
