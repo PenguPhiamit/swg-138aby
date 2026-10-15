@@ -15,6 +15,7 @@ Every 2 s each bot, in its own thread and talking only to its own bot (a request
 Orders, from the player by spatial chat or a tell to any crew member (a leading "crew" is optional):
   follow | stay | attack | passive | heal | status | dismiss | waypoints (the leader mails the waypoint list)
   | buff (the healer enhances the player's health, action, strength, constitution, quickness and stamina)
+  | invite (the leader sends the group invite again)
 The leader acknowledges in spatial chat. The run ends on "dismiss", after `minutes`, or when the player has been
 offline for 5 minutes.
 """
@@ -64,7 +65,7 @@ def walk_time(row, x, y):
         return 30
     return min(60, max(8, math.hypot(x - row['x'], y - row['y']) / 4 + 5))
 FORMATION = [(3, 2), (-3, 2), (0, -4), (3, -4), (-3, -4), (5, 0), (-5, 0), (0, 5)]   # metres from the player
-ORDERS = ('follow', 'stay', 'attack', 'passive', 'heal', 'status', 'dismiss', 'waypoints', 'buff')
+ORDERS = ('follow', 'stay', 'attack', 'passive', 'heal', 'status', 'dismiss', 'waypoints', 'buff', 'invite')
 BUFFS = ('health', 'action', 'strength', 'constitution', 'quickness', 'stamina')   # the support kit's enhance packs
 
 
@@ -130,7 +131,7 @@ class Shared:
 
 ACK = {'follow': 'Following.', 'stay': 'Holding here.', 'attack': 'Engaging your target.', 'passive': 'Weapons down.',
        'heal': 'Healing you.', 'dismiss': 'Crew dismissed.', 'waypoints': 'Mailing you the waypoints.',
-       'buff': 'Mirren will buff you: stay close.'}
+       'buff': 'Mirren will buff you: stay close.', 'invite': 'Group invite sent: accept it or type /join.'}
 
 
 def goto(bot, planet, x, y):
@@ -188,6 +189,8 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
                             bot.say(', '.join(f"{n} {round(r['health'] * 100)}%" for n, r in rows.items()) or 'No reports yet.')
                         elif verb in ACK:
                             bot.say(ACK[verb])
+                        if verb == 'invite':  # owner, in game: 'can you have them invite me again'
+                            bot.slash('invite', target=(who(owner) or {}).get('oid', 0), wait=0)
                         if verb == 'waypoints':
                             note_play({'kind': 'mail', 'answer': (mail(bot, owner, 'Waypoints', waypoints or []) or {}).get('text')})
             if e.get('event') == 'combat' and bot is g.leader:
