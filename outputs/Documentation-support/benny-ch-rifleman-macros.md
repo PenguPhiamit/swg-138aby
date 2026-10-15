@@ -98,7 +98,12 @@ T21: the Rifleman's heavy hitter; the DLT-20A is the spare. Pet stimpacks heal a
 ## Pets first
 
 1. Target a creature (young or baby ones tame easily) and `/tame`. Call the pet from the datapad.
-2. Train its commands: radial menu on the pet, **Train Command**, choose one, then **say** the word you want for it. Suggested words: Attack = `sic`, Follow = `heel`, Stay = `stay`, Guard = `guard`.
+2. Train its commands. **Quick way (god mode, dev `398744b5`):** call the pets, then `/tame train` with no target. Every
+   called pet learns each command it has no word for yet: Attack = `sic`, Follow = `heel`, `stay`, `guard`, and `store`,
+   `friend`, `follow other`, `trick one`, `trick two`, `patrol`, `patrol point`, `clear patrol`, `wedge`, `column`,
+   `special one`, `special two`, `ranged`, `group`, `transfer`. Words you trained yourself are kept. By hand: radial
+   menu on the pet, **Train Command**, choose one, then **say** the word you want for it (in god mode it always takes).
+   The crew also obeys `stay`, so one word holds pets and crew together.
 3. Pets obey trained phrases in spatial chat (`PetManager::handleChat`), which is why a macro can command them with `/say`. The 17 "pet order" abilities in the skill boxes are these trainable commands, not slash commands; the 15 Oct research counted them as missing for that reason.
 
 ## Macros (Command Browser, Macro tab, New; one command per line)

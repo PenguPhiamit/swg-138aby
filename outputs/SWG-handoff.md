@@ -59,6 +59,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 |---|---|---|---|
 | **Escort crew and crew vendor (owner, 15 Oct)** | Claude | escort mode built, offline tests pass; first live run with the owner pending | Owner: "the dungeon crew was meant to run with me"; "this function can lead into the crew vendor, and future solo features". `tools/bots/escort.py` (generic: any group, any player): follow in formation into buildings, fight the player's target with real rotations, defend, heal the lowest, chat orders (follow, stay, attack, passive, heal, status, dismiss), play data in `Bot-reports/play/` (escort only). Run: `squad.py run scenarios/forn-escort.py --round-minutes 125`. **Next:** travel-following (shuttles), a crew vendor NPC that hires a crew to a player (Dax Venn's mercenary broker is the model), solo-player features. Owner's build for Creature Handler play data: Master CH + Rifleman + Marksman (246) |
 | **Remote access + second owner account (owner, 15 Oct)** | Claude | prep done 10:15, docs only; nothing opened or changed; waits for the owner's go | `Documentation-support/remote-access-and-second-owner.md`: ports read from the configs (forward UDP login/zone/ping only; never ORB, status, MariaDB, live map); mirrored WSL with the Hyper-V firewall blocking inbound today; the owner's router and firewall checklist with exact PowerShell; the hairpin catch (a public galaxy address also sends the owner's client and the bots through the router); the friend makes their own account by AutoReg login, then one `UPDATE` to admin_level 15 by the lock holder. Test galaxy first, short window, rules limited to the friend's IP |
+| **C39: dev since C34r independent review** | ChatGPT, High | claimed 2026-10-15 12:31; read-only dev review in progress | 90044b8e..81384b90, ten commits; no bots or restarts; fixes only in owned gpt/work |
 | **C34r: independent item-kit and affliction review** | ChatGPT, High; Claude integrated | **in dev `90044b8e` and on the test galaxy (07:33); bot probe 41/41 DOTs land, no errors (07:36)** | Report `Documentation-support/review-C34r.md`; cure retest BLOCKED by staging (07:38: tester's inventory full, so no cure pack; allies out of view): C33 follow-up for GPT; gate denials and logout not re-run |
 | **C33b: cure staging + science_doctor rerun** | ChatGPT, Medium; finished by Claude | **5 of 7 WORKS** (09:44): curePoison, extinguishFire, cureDisease, healEnhance, revivePlayer; registerWithLocation RAN; healState BLOCKED (dizzy pack not delivered, open) | `tools/bots/scenarios/class-check.py` (`090c1dd`, `8bb6e70`); results in `Bot-reports/Aurek/class-check-science_doctor.json` |
 | **C33: owner class check P0/P1** | ChatGPT, Medium; finished by Claude's Sonnet helper | scenario and 52 offline tests committed by Claude (07:4x); runs on Aurek since 04:3x: P0, brawler, marksman, scout, medic, rifleman, pistol, ranger, image designer | `tools/bots/scenarios/class-check.py`, `tools/bots/test_class_check.py`; results per profession in `Bot-reports/Aurek/class-check-*.json` |
@@ -262,6 +263,22 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-15 12:40 Claude: the crew answers every order; Mirren's heal loop and Forn's rubber-banding fixed; /tame train
+
+- **Owner in game, 12:15-12:25: "things dont seem to be working", "Forn is rubber banding kinda bad".** Three bugs, all in `tools/bots/` (`dd9febe`):
+  - Orders were heard, but only the leader (Forn) could answer them, and he skipped any line another bot heard first. Benny's heal, buff and status got silence. Now the bot that hears an order answers it, and a tell gets a tell back. `invite` is queued for the leader, the only one who can invite. New order `help` (also `commands`, `orders`) lists the orders. `passive` now also sends `/peace`.
+  - Mirren sent heals 65 times at a patient she could not see, and 19 times at herself with only wounds left. She never stopped "healing", so the buff order never ran. Now a refusal leaves that patient alone for 15-60 s, and low mind rests her for 20 s; she buffs or fights in the meantime.
+  - Forn was crouched, and the server puts a crouched bot's steps back. Every bot now stands before walking.
+  - Tests: escort and combat 12/12 (4 new), class-check 70/70. The crew run restarted with the galaxy (run 20261015-123727) and waits up to 3 h for Benny (`ESCORT_WAIT`, `36a249f`). Esk mailed Benny a one-line note with a waypoint to the crew.
+- **`/tame train` (owner, in game: "can you train my pets"; dev `398744b5`, live: test galaxy restarted 12:36, ready in 86 s, 0 error lines, Benny offline):** god mode, no target. Every called pet learns every command it has no word for yet:
+  - the doc's words: sic, heel, stay, guard;
+  - plain words for the rest: store, friend, follow other, trick one/two, patrol, patrol point, clear patrol, wedge, column, special one/two, ranged, group, transfer.
+  - Words Benny trained are kept. God mode also always passes the training roll when training by hand.
+- **Owner's notes from play, open:**
+  - pets need a follow distance that depends on their size (the AI's follow range is in `ai/bt/leaf/FollowActions.h`, `UpdateRangeToFollow`);
+  - better camera zoom in and out (client side);
+  - "disengaging scripts brok" (asked in game which: the crew not stopping, or Benny's macros).
 
 ### 2026-10-15 11:40 Claude (side session): names sweep second half done; local-model background jobs
 
