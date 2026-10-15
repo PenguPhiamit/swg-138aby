@@ -27,10 +27,9 @@ def say(text):
     if now - seen < 120:
         last[text] = (seen, count + 1)
         return
-    if count:
-        print(f'  (previous line repeated {count} more times)', flush=True)
     last[text] = (now, 0)
-    print(time.strftime('%H:%M:%S ') + text, flush=True)
+    extra = f'  [+{count} more of this line since it was last shown]' if count else ''
+    print(time.strftime('%H:%M:%S ') + text + extra, flush=True)
 
 
 def handle(path, line):

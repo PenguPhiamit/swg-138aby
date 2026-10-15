@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only); its weekly usage is nearly out (owner, 14 Oct evening). No bot driver claim. The overnight cycle is off. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. The owner is testing on the test galaxy. — 2026-10-15 00:01**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (source only); its weekly usage is nearly out (owner, 14 Oct evening). No bot driver claim. The overnight cycle is off. Fable never writes to /opt/swg (and is out of weekly usage). Live galaxy STOPPED. Test galaxy STOPPED and deleted at the owner's request (clean exit). Renamed-gems archive 39a89e6c not installed yet (waiting on the owner's OK). — 2026-10-15 00:59**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
