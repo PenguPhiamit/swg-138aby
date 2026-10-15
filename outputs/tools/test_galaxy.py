@@ -26,9 +26,9 @@ DEV_SCRIPTS = Path('/opt/swg/Core3-dev/MMOCoreORB/bin/scripts')
 DEV_CORE3 = Path('/opt/swg/Core3-dev/MMOCoreORB/bin/core3')
 LOCAL_TRE = Path('/opt/swg/tre/local_planets.tre')  # test-only archive; live's config doesn't list it
 TEST_ZONES = ['hoth', 'ossus']  # zones whose client data ships in LOCAL_TRE (added only when it exists)
-# MTG's archives, in the client's priority order (SWG-client/swgemu_live.cfg). The client loads them below stock; the
-# server did not load them at all, so MTG-only objects (the BARC speeder, 15 Oct) had no shared template data on the
-# server: no names, no rider slot, never sent to clients. Appended after stock, so they only fill in what stock lacks.
+# MTG's archives, in the client's priority order (SWG-client/swgemu_live.cfg). The live config-local.lua already appends
+# them after stock (checked 15 Oct 03:30; an earlier check that said otherwise was a shell-quoting mistake), so start()
+# only adds any it lacks.
 MTG_TRES = ['mtg_patch_023.tre', 'mtg_patch_022.tre', 'mtg_planets.tre', 'mtg_patch_021.tre', 'mtg_patch_019.tre',
             'mtg_patch_018.tre', 'mtg_patch_017.tre', 'mtg_patch_016.tre', 'mtg_patch_015.tre', 'mtg_patch_014.tre',
             'mtg_patch_013_configurable_02.tre', 'mtg_patch_012_configurable_01.tre', 'mtg_patch_011_files_01.tre',
@@ -151,10 +151,12 @@ def start(args):
             if count:
                 resources.write_text(text)
                 print(f'  resource backfill onto: {", ".join(TEST_ZONES)}', flush=True)
-        mtg = [name for name in MTG_TRES if (LOCAL_TRE.parent/name).exists()]
+        # The live config-local.lua (restored with every copy) already appends MTG_TRES; only add the ones it lacks.
+        listed = config.read_text(errors='surrogateescape')
+        mtg = [name for name in MTG_TRES if (LOCAL_TRE.parent/name).exists() and f'"{name}"' not in listed.split('\n-- TEST GALAXY OVERRIDES')[0]]
         if mtg:
             local_tre += ''.join(f'table.insert(Core3.TreFiles, "{name}")\n' for name in mtg)
-            print(f'  {len(mtg)} MTG archives after stock in the server archive list (test only)', flush=True)
+            print(f'  {len(mtg)} MTG archives the live config lacks, after stock in the server archive list (test only)', flush=True)
         # Core3 holds every shuttle for 5 minutes after a start (ShuttleZoneComponent.cpp, BootDelay); until then a travel
         # point has no shuttle and /purchaseTicket fails without a message (14 Oct: bots' tickets failed for minutes
         # after each test restart). The test galaxy starts its shuttles after 30 s; live keeps the stock delay.
