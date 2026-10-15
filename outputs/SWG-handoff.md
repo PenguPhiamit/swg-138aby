@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt`. Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy restarted ~10:05 on dev `bb51ec97` (afflict restore, crew kits, who.json every 2 s) with the Forn crew accounts. Live map on http://localhost:8765 (unit `swg-live-map`) with labels. - 2026-10-15 10:05**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C41 packet writer claimed 2026-10-15 12:49). Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy restarted ~10:05 on dev `bb51ec97` (afflict restore, crew kits, who.json every 2 s) with the Forn crew accounts. Live map on http://localhost:8765 (unit `swg-live-map`) with labels. - 2026-10-15 10:05. Claude (botpop session), 13:00, owner's go: server-side bots milestone 1 in `/opt/swg/Core3-dev` (`/botpop`, test galaxy only); no dev build or test-galaxy restart until the running fleet-scale test and forn-escort run end.**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -267,7 +267,17 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 
 ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fix `7c68e39f` (gpt/work, dev merged first); h implementation/report `e86fcf7`. See `Documentation-support/C40-roof-ledge.md`. C40 source slice idle; Claude retains dev/runtime lock and bot driver. No bots/build/restart by ChatGPT.
 
+## C41 - bot net-status packet (Low to Medium)
+
+Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test only; Claude reviews/builds/game-tests. No bots or restarts.
+
 ## Log
+
+### 2026-10-15 13:40 Claude: name filter without the censor (test galaxy)
+
+- Owner: "non name names can stay out, but censors can begone". Core3's active name list (`oldFilterWords` in `bin/scripts/managers/name/name_manager.lua`) matched every entry anywhere in a name, case-insensitively, so plain entries like "ec", "ct", "dev", "gm", "mod", "christ" and "ass" refused Rebecca, Hector, Victor, Devon, Sigmund, Modesto, Christopher and Cassandra (23 of 319 common names). The unused `filterWords` list was worse (refused Jesse, Felix, 4 bots; let GM and Dev through).
+- Dev `d1cd02c6` (Lua only, appended to name_manager.lua): the default table is rebuilt from stock. Profanity, slurs and religious names dropped; ranks, titles, species, staff and game words kept as reserved; canon names kept as fiction; plain words match whole words only; Admin, Administrator and Moderator added. Offline: 1 of 319 real names refused (Carl, a stock canon entry), no bot name, no swear word. Stock list kept as `stockOldFilterWords`.
+- **On the test galaxy now** without a restart (console `reloadmanager name`: 634 -> 466 patterns). Not yet tried in game with a character name. Live needs the owner's deploy OK. Open owner questions: allow canon names too? keep a short slur list?
 
 ### 2026-10-15 13:18 Claude: fleet-scale test, 100 bots run comfortably (recommend up to 100)
 
