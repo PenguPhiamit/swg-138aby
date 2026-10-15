@@ -73,7 +73,7 @@ def activity():
             continue
         rows.append({'group': row.get('group', path.stem.split('-')[0]), 'scenario': row.get('scenario', ''),
                      'state': row.get('state', ''), 'detail': str(row.get('detail', ''))[:160],
-                     'age': round(now - float(row.get('updated', 0)))})
+                     'age': max(0, round(now - float(row.get('updated', 0))))})   # a running round stamps ahead
     return rows
 
 
@@ -163,7 +163,7 @@ tbody tr{cursor:pointer}
 <script>
 const COLORS={Aurek:'#d1495b',Besh:'#2f9e44',Cresh:'#2f6fde',Dorn:'#8e5bd6',Esk:'#e07b00',Kael:'#0ca5a5'};
 const cv=document.getElementById('map'),ctx=cv.getContext('2d'),tip=document.getElementById('tip');
-let data=null,zone=localGet('zone')||'tatooine',view=null,picked=null,drag=null,hits=[];
+let data=null,zone=localGet('zone')||'tatooine',view=null,picked=null,drag=null,hits=[],fitted=false;
 function localGet(k){try{return localStorage.getItem('map.'+k)}catch(e){return null}}
 function localSet(k,v){try{localStorage.setItem('map.'+k,v)}catch(e){}}
 function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
@@ -187,11 +187,15 @@ function draw(){const r=cv.getBoundingClientRect(),d=devicePixelRatio||1;cv.widt
   ctx.fillRect(x-2*d,y-2*d,4*d,4*d);hits.push({x,y,label:p.kind+' ('+Math.round(p.x)+', '+Math.round(p.y)+')'})});
  here().forEach(c=>{if(c.trail.length<2)return;ctx.strokeStyle=color(c);ctx.globalAlpha=.35;ctx.lineWidth=2*d;ctx.beginPath();
   c.trail.forEach((p,i)=>{const[x,y]=toScreen(p[0],p[1]);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();ctx.globalAlpha=1});
- here().forEach(c=>{const[x,y]=toScreen(c.x,c.y),rad=(c.kind==='player'?7:5)*d*(picked===c.name?1.5:1);ctx.fillStyle=color(c);
-  ctx.beginPath();ctx.arc(x,y,rad,0,7);ctx.fill();ctx.strokeStyle=css('--panel');ctx.lineWidth=2*d;ctx.stroke();
-  ctx.fillStyle=css('--ink');ctx.font=(c.kind==='player'?'600 ':'')+(12*d)+'px system-ui';ctx.fillText(c.name,x+rad+3*d,y+4*d);
-  hits.push({x,y,label:c.name+(c.group?' · '+c.group:' · you')+' ('+Math.round(c.x)+', '+Math.round(c.y)+')',name:c.name})})}
-function render(){if(!data)return;const zones={};data.chars.forEach(c=>zones[c.zone]=(zones[c.zone]||0)+1);
+ const spots=[];here().sort((a,b)=>(a.kind>b.kind?-1:1)).forEach(c=>{const[x,y]=toScreen(c.x,c.y);
+  const s=spots.find(s=>Math.hypot(s.x-x,s.y-y)<14*d);if(s)s.list.push(c);else spots.push({x,y,list:[c]})});
+ spots.forEach(s=>{s.list.forEach((c,i)=>{const a=i*2.4,r0=s.list.length>1?Math.min(4+i*1.6,22)*d:0;const x=s.x+Math.cos(a)*r0,y=s.y+Math.sin(a)*r0;
+   const rad=(c.kind==='player'?7:5)*d*(picked===c.name?1.5:1);ctx.fillStyle=color(c);ctx.beginPath();ctx.arc(x,y,rad,0,7);ctx.fill();
+   ctx.strokeStyle=css('--panel');ctx.lineWidth=2*d;ctx.stroke();
+   hits.push({x,y,label:c.name+(c.group?' · '+c.group:' · you')+' ('+Math.round(c.x)+', '+Math.round(c.y)+')',name:c.name})});
+  const first=s.list[0],more=s.list.length-1;ctx.fillStyle=css('--ink');ctx.font=(first.kind==='player'?'600 ':'')+(12*d)+'px system-ui';
+  ctx.fillText(first.name+(more?' +'+more:''),s.x+(more?26:10)*d,s.y+4*d)})}
+function render(){if(!data)return;if(!fitted&&here().length){fit(false);fitted=true}const zones={};data.chars.forEach(c=>zones[c.zone]=(zones[c.zone]||0)+1);
  if(!zones[zone]&&Object.keys(zones).length)zone=Object.keys(zones).sort((a,b)=>zones[b]-zones[a])[0];
  document.getElementById('tabs').innerHTML=Object.keys(zones).sort().map(z=>`<button class="${z===zone?'on':''}" data-z="${z}">${z} · ${zones[z]}</button>`).join('');
  const age=data.who_age==null?'?':data.who_age<90?data.who_age+' s':Math.round(data.who_age/60)+' min';
