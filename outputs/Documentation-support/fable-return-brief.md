@@ -35,3 +35,29 @@ Each entry gives staging -> later change -> remaining gate. Historical "stage on
 - GPT: C23/C24 acceptance reporting, S6/source cross-checks, Tortoise integration; Claude: review/build/runtime and C35.
 - Haiku: inventories, licence evidence, table splices and housekeeping with checked manifests; local model: drafts only, stronger review required (`SWG-handoff.md`, 11:40 log).
 - Downloads/installs only after specific owner yes; F86 execution and L1 kit need engineering/checks, not another design census (`Fable-asset-pipeline/README.md` section 5).
+
+## Hutt (added by Claude, 15 Oct 15:10; owner: "maybe we could use it [Universal Modder] for the hutts?")
+
+**Correction to `Fable-species/README.md` (owner question 3):** the package's player Hutt is not a Hutt on the human skeleton. `object/creature/player/shared_hutt_male.iff` (mtg_patch_023) uses `appearance/hutt_m.sat`, and that file (data_other_00, 177 bytes) names `appearance/mesh/hutt_m.lmg`, the skeleton `appearance/skeleton/hutt.skt` (4 LODs, 47 bones at LOD 0) and the animation table `appearance/lat/hutt.lat` (patch_05 copy wins). Only the sound file `clientdata/player/client_shared_player_human_m.cdf` is human. Checked by extracting both files with `tools/swgfmt/fmt_tools.py`.
+
+**What a player Hutt can and can't animate** (counted from the tables; the human tables are `all_m.lat`/`all_f.lat`):
+
+| | Hutt | Human |
+|---|---|---|
+| ANIM entries | 206 | 908 |
+| Walk, run, swim, death | yes | yes |
+| Melee attacks / get-hit | 5 / 4 | 14 / 21 |
+| Ranged stances | 20 (pistol) | 73 |
+| Emotes | 22 | 190 |
+| Sit, mount, dance, kneel or crouch, survey | none | yes |
+
+Human clothing and armour are built for the human skeleton, so they won't fit a Hutt either.
+
+**Existing NPC Hutts in dev:** Jabba (`mobile/tatooine/jabba_the_hutt.lua`, Jabba's palace), Borvo and Shalera (quest Hutts), the Hutt expeditionary force leader on Yavin 4, and the plain bodies `object/mobile/hutt_male.iff` and `hutt_female.iff` (the same `hutt_m/f.sat` the player template uses, so a spawned NPC shows exactly the player look).
+
+**For Fable's design:** a playable Hutt is a restricted species, or it isn't playable at all. Options to weigh:
+- **(a) Restricted species:** no mounts, no dancing or entertainer buffs, no clothing (or Hutt-only items), a short emote list. It suits trader, crime-lord, politician and merchant roles. The engineering list would be: refuse those actions for the Hutt race with a clear message, a race-restricted item set, and the species tables as for Chiss.
+- **(b) A Hutt on a repulsor sled:** the Legends look. The Hutt has no rider pose, so this needs new animation or art work; the hardest option.
+- **(c) NPC-only Hutts:** crime lords and quest givers. The 138-139 ABY setting has Hutt cartels to use.
+
+Universal Modder evidence for the owner: Claude takes `um win shot` screenshots of a spawned Hutt in the owner's client (`/createSpawningElement spawn object/mobile/hutt_male.iff`), saved outside the repo because they show the owner's character name.

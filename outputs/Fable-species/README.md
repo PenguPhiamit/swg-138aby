@@ -99,6 +99,12 @@ the species skill and certs are granted, clothing equips.
    EiF terms are settled, or try a stock-art stand-in (a red-skinned human palette)?
 3. Hutt as a playable: the package's Hutt stands on the human skeleton (`hutt_m.sat` on `client_shared_player_human_m`);
    acceptable look?
+   **Correction (Claude, 15 Oct 15:10, checked in the files):** it doesn't. `appearance/hutt_m.sat` (data_other_00)
+   names its own skeleton `appearance/skeleton/hutt.skt` and animation table `appearance/lat/hutt.lat`; the player
+   template takes only footstep and voice sounds from `client_shared_player_human_m.cdf`. A player Hutt is a real Hutt
+   with the NPC animation set (206 entries against the human's 908): no sit, mount, dance, kneel or crouch; 22 emotes
+   against 190; pistol stances only. It can't wear human clothing or armour either. Evidence:
+   `Documentation-support/fable-return-brief.md`, section "Hutt".
 4. `asset_customization_manager.iff`: use the package's 2016 copy (386 KB) over today's stock (341 KB) or diff and
    splice only the new entries (Claude's builder, one more round)?
 5. Clothing: patch `playerRaces` in all 703 wearable templates per new species (generated, mechanical), or a C++
