@@ -273,11 +273,12 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 
 ## Log
 
-### 2026-10-15 13:40 Claude: name filter without the censor (test galaxy)
+### 2026-10-15 13:50 Claude: name filter: only non-name words stay out (test galaxy)
 
 - Owner: "non name names can stay out, but censors can begone". Core3's active name list (`oldFilterWords` in `bin/scripts/managers/name/name_manager.lua`) matched every entry anywhere in a name, case-insensitively, so plain entries like "ec", "ct", "dev", "gm", "mod", "christ" and "ass" refused Rebecca, Hector, Victor, Devon, Sigmund, Modesto, Christopher and Cassandra (23 of 319 common names). The unused `filterWords` list was worse (refused Jesse, Felix, 4 bots; let GM and Dev through).
 - Dev `d1cd02c6` (Lua only, appended to name_manager.lua): the default table is rebuilt from stock. Profanity, slurs and religious names dropped; ranks, titles, species, staff and game words kept as reserved; canon names kept as fiction; plain words match whole words only; Admin, Administrator and Moderator added. Offline: 1 of 319 real names refused (Carl, a stock canon entry), no bot name, no swear word. Stock list kept as `stockOldFilterWords`.
-- **On the test galaxy now** without a restart (console `reloadmanager name`: 634 -> 466 patterns). Not yet tried in game with a character name. Live needs the owner's deploy OK. Open owner questions: allow canon names too? keep a short slur list?
+- **On the test galaxy now** without a restart (console `reloadmanager name`: 634 -> 466 patterns). Not yet tried in game with a character name. Live needs the owner's deploy OK.
+- 13:50, owner: "Allow canon names too". Dev `0f045a47`: the default table keeps only stock developer and reserved entries (whole words), the non-name words stock filed as profanity, and Admin/Administrator/Moderator: 71 entries. Offline: no real name (319), bot name (100), canon name or swear word refused; every non-name word refused. The test galaxy (restarted by another session at 13:48) loaded it at 77 s: `Loaded 71 regex filter patterns`. Slurs now pass too; the owner was told.
 
 ### 2026-10-15 13:18 Claude: fleet-scale test, 100 bots run comfortably (recommend up to 100)
 
