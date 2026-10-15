@@ -57,6 +57,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C34r: independent item-kit and affliction review** | ChatGPT, High | claimed 2026-10-15 07:01 | Read-only review of dev 60ed8971 + 9b93665d; fixes only in gpt/work; no builds, restarts or bots |
 | **C33: owner class check P0/P1** | ChatGPT, Medium; finishing: Claude's Sonnet helper | GPT's run ended at its usage limit (03:3x); the Sonnet helper is reviewing its uncommitted scenario and tests and running P0/P1 on Aurek (03:4x) | Scenario + offline verdict tests, then Aurek P0 and six starters only; no server code changes; driver claim taken when runtime starts |
 | **C24b: R2 idempotence + poolScaleZones re-review** | ChatGPT - GPT-6.1 Sol, **High** | interrupted 02:42-02:52 (network loss, then PC shutdown); requeued 2026-10-15 03:03 after C33/C34 | dev 98ad1d1d + 3a0b154f; offline fixtures and release gate/inventory only; no builds, restarts or bots |
 | **C30: six reviewed Ossus fauna + habitat spawns** | ChatGPT, Medium | source complete 6f25b704; Claude review/build/game test pending | Six unchanged creatures, six dynamic lairs, three groups/five habitats; 20 Lua syntax checks + stubbed loading pass; game-untested |
@@ -258,6 +259,12 @@ Put the files on their group lines in `Agent/squad-plan.txt`. Claude runs them a
 **Order for ChatGPT:** C23's scenario (offline, now), then C24, then C25; C21 continues after them unless the owner says otherwise. With usage short, checkpoint after each.
 
 ## Log
+
+### 2026-10-15 07:01 Claude: private GitHub copy force-pushed (owner's OK)
+
+- Owner, 07:00: "Yes, run the private --force push now." Before it: `prepush_scan.py` (only the 21 known false positives), the history-wide secret check (clean), `github_export.py` check ok (127 commits).
+- `github_export.py push … --force`: GitHub main `3610812` → `d9e5b06`, verified with `git ls-remote`; still PRIVATE, one branch, no tags. Gone from GitHub's history: the four early files (SWG-Source records and scripts, the stock client UI file), the owner's character names and a third-party developer's handle (3c3c2c8).
+- Still before going public: the local-model names sweep (running, about 2.5 h) and the owner's four decisions (brother mentions, non-credit Sagiroth mentions, the "clones were in work/research" wording, usernames in download-source URLs). GitHub may keep the old commits reachable by hash for a while, so publish as a fresh public repository, or have GitHub purge them, rather than flipping this one public.
 
 ### 2026-10-15 06:45 Claude: back up after Miniverse restart; GitHub export check fixed
 
