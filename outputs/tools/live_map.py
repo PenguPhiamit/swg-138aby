@@ -67,6 +67,7 @@ MAPIMG = NOW.parent / 'mapimg'                  # planet maps decoded from the c
 HISTORY = 60                                    # label changes kept per bot for the Activity tab
 POP_LOG = Path('/opt/swg/testgalaxy/Core3/MMOCoreORB/bin/log/botpop-launch.jsonl')  # server-side bots (BotPopLaunch.h)
 POP_STALE = 300                                 # a server bot with no event for this long has left (restart, despawn)
+POP_POS = POP_LOG.parent / 'botpop-positions.json'  # every server bot's place, rewritten every 10 s by the server
 
 roster = {}     # first name -> group
 profiles = {}   # first name -> {'full', 'group', 'species', 'profession', 'skills'}
@@ -516,7 +517,30 @@ def bot_rows(chars, reports):
     return out
 
 
-pop = {'inode': None, 'offset': 0, 'bots': {}, 'server': {}}
+pop = {'inode': None, 'offset': 0, 'bots': {}, 'server': {}, 'pos_mtime': 0}
+
+
+def pop_positions():
+    """Moves the server bots to the places in botpop-positions.json (written every 10 s), fresher than their events."""
+    try:
+        mtime = POP_POS.stat().st_mtime
+        if mtime == pop['pos_mtime']:
+            return
+        doc = json.loads(POP_POS.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return
+    pop['pos_mtime'] = mtime
+    for b, planet, x, y, s in doc.get('bots', []):
+        row = pop['bots'].get(b)
+        if row is None or row.get('planet') not in (None, planet) and row.get('t', 0) > doc.get('t', 0):
+            continue
+        row.update(planet=planet, x=x, y=y)
+        if s == 2:
+            row['state'] = 'dead'
+        elif s == 1 and row.get('state') not in ('dead', 'incapacitated'):
+            row['state'] = 'fighting'
+        elif s == 0 and row.get('state') in ('fighting', 'dead'):
+            row['state'] = 'walking'
 
 
 def pop_read():
@@ -553,6 +577,8 @@ def pop_read():
         row['t'] = r.get('t', 0)
         if e == 'spawn':
             row.update(name=r.get('name', ''), state='walking', last='new character')
+        elif e == 'sell':
+            row['last'] = f"sold {r.get('items')} items for {r.get('credits')} credits"
         elif e == 'snap':
             row.update(state=r.get('state', ''), kills=r.get('kills', row['kills']), deaths=r.get('deaths', row['deaths']))
         elif e == 'kill':
@@ -575,6 +601,7 @@ def pop_read():
 def pop_rows():
     """Server bots seen in the last POP_STALE seconds, as compact rows for the page (see POPK in the script)."""
     pop_read()
+    pop_positions()
     cutoff = time.time() * 1000 - POP_STALE * 1000
     return [[b, r.get('name', ''), r.get('role', ''), r.get('planet', ''),
              None if r.get('x') is None else round(r['x']), None if r.get('y') is None else round(r['y']),
@@ -1159,7 +1186,7 @@ function renderMap(){const zones={},bz={};data.chars.forEach(c=>zones[c.zone]=(z
   (onPlanet.length?`<span class="small" style="margin-left:8px">Server bots:</span>`+Object.entries(ps).sort((a,b)=>b[1]-a[1]).map(([s,n])=>`<span class="chip ${popState===s?'on':''}" data-ps="${esc(s)}" style="cursor:pointer">${esc(s)}<span class="n">${n}</span></span>`).join(''):'');
  const inside=data.bots.filter(b=>b.online&&b.indoors).length,away=data.chars.filter(c=>c.zone!==zone).length;
  $('indoorLine').innerHTML=`${inside} bot${inside===1?'':'s'} indoors (<a href="/floor">see the floor plans</a>) · ${away} on other planets · positions come from each bot's own reply when it is fresher than who.json (${data.who_age!=null?ago(data.who_age)+' old':'unknown'}).`+
-  (onPlanet.length?` <b>${onPlanet.length} server bots</b> on ${esc(zone)}: their dots move with each one-minute snapshot and each kill, death or box (red ring: fighting; faint: dead). <a href="#bots">By city</a>.`:'');
+  (onPlanet.length?` <b>${onPlanet.length} server bots</b> on ${esc(zone)}: their dots move every 10 s (red ring: fighting; faint: dead). <a href="#bots">By city</a>.`:'');
  draw()}
 $('legend').onclick=e=>{const c=e.target.closest('.chip');if(!c)return;if(c.dataset.pr){const r=c.dataset.pr;popHide.has(r)?popHide.delete(r):popHide.add(r)}
  else if(c.dataset.ps!=null){popState=popState===c.dataset.ps?'':c.dataset.ps}render()};

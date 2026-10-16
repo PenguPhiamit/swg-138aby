@@ -165,7 +165,13 @@ def report(events, host):
               f"Training would have cost {cost} credits for {len(trains)} boxes (not charged); "
               f"{sum(1 for t in trains if t.get('credits', 0) >= t.get('cost', 0))} boxes were affordable when trained. "
               f"Corpses looted {sum(r.get('loots', 0) for r in last.values())}, harvested {sum(r.get('harvests', 0) for r in last.values())}; "
-              f"items carried median {median([r.get('inventory', 0) for r in last.values()])}.\n")
+              f"items carried median {median([r.get('inventory', 0) for r in last.values()])}.")
+    sells = by['sell']
+    if sells:
+        earned = sum(s.get('credits', 0) for s in sells)
+        md.append(f"Junk dealer: {len(sells)} sales, {sum(s.get('items', 0) for s in sells)} items, {earned} credits "
+                  f"({earned / hours / max(len(spawn), 1):.0f} credits per bot-hour; median sale {median([s.get('credits', 0) for s in sells])}).")
+    md.append('')
 
     # Support roles
     md.append('## Medics and entertainers (social professions)\n')
