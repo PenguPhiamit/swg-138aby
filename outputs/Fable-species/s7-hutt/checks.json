@@ -7,11 +7,11 @@
  },
  "out": {
   "path": "Fable-species/s7-hutt/local_planets-s7.tre",
-  "bytes": 4649376,
-  "sha256": "7f28f0272a0924596abd483681b6d8160302fe58159046652a040cd22bc5ba94",
+  "bytes": 4649025,
+  "sha256": "76ea1fe8db65b56f967289f1ccc2f9731fd83d28a0d5d94368f7e35b2ccafae6",
   "entries": 174
  },
- "untouched_identical": 164,
+ "untouched_identical": 163,
  "changed": [
   "datatables/creation/attribute_limits.iff",
   "datatables/creation/racial_mods.iff",
@@ -19,6 +19,7 @@
   "datatables/customization/customization_data.iff",
   "datatables/customization/customization_group_instance.iff",
   "datatables/skill/skills.iff",
+  "string/en/player_species.stf",
   "string/en/skl_d.stf",
   "string/en/skl_n.stf",
   "ui/ui_avatardata.inc"
