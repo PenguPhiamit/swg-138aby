@@ -1,0 +1,5243 @@
+{
+ "title": "Hutt Level 1 animation map: human (all_m.lat) action names the Hutt table lacks, and the existing Hutt .ans each should use",
+ "author": "Fable, 15 Oct 2026 (staging only; nothing built)",
+ "sources": {
+  "hutt_lat": "appearance/lat/hutt.lat, winning copy patch_05.tre (49,242 B, 206 ANIM entries, header appearance/ash/all_b.ash)",
+  "human_lat": "appearance/lat/all_m.lat as installed in local_planets.tre (MTG whole-file copy, 361,386 B, 904 ANIM entries)",
+  "ash": "appearance/ash/all_b.ash: the state hierarchy both tables share (root/standing, sitting_chair, sitting_ground, crouched, kneeling, skill, riding, prone, blocking, stand_attention, swimming, knocked_down, incapacitated_*, per-weapon states pistol/rifle/sword_1h/sword_2h/polearm, each with a combat child)",
+  "hutt_ans_files": "127 appearance/animation/hutt_*.ans exist in the client (data_animation_00 + patch_05); hutt.lat references 116; the 11 unreferenced ones include hutt_loc_crawl.ans, hutt_idl_stand.ans, hutt_idl_stand_look_forward.ans and the swim get-hits"
+ },
+ "how_to_build": [
+  "Start from the patch_05 hutt.lat bytes. Append one FORM ANIM per entry below after the existing 206, inside FORM LATT > FORM 0000 (no count chunk exists; the first child INFO is the ash path and stays).",
+  "ANIM = INFO \"<action>\\0\" + one sub-form. PXAT/0000 = INFO \"<ans path>\\0\" + PUNF \"<category>\\0<category>\\0\" (categories seen in the Hutt table: emote, yaw, zero_speed, locomotion; the human table also uses transition and action). Never use PPTR (it names a human bone mask).",
+  "TSCL/0000 = INFO float32 2.0 + a PXAT child (transitions). SPAT/0000 = INFO byte 0x03 + idle branch + two PXAT locomotion children (walk, run), as in hutt loop_standing; for loop_crouched/loop_prone use idle + hutt_loc_crawl + hutt_loc_crawl. YWAT/DRAT: byte-copy the named Hutt entry and change only the INFO name.",
+  "AGAT (loop_skill): copy the first AGAT block of hutt loop_standing (INFO two float32 = min/max seconds, ACTN = int16 count + (name\\0 + float32 weight) pairs, FORM LOOP with the base animation), set interval 2.0/4.0 and the six gestures listed.",
+  "Re-read the result with tools/swgfmt/trn_iff.py (parse -> build must round-trip; every .ans path must resolve in the client archives) and pack it into local_planets.tre as a whole file, the way MTG's all_m.lat already ships (MTG-merges/shadow-audit.md, WHOLE_FILES).",
+  "Verification in the owner's client: a Hutt NPC via /createCreature object/mobile/hutt_male.iff shows the same table; then a player Hutt: /sit, /kneel, /prone, sneak, /dance basic, survey, a vehicle call; no T-pose, no frozen frame."
+ ],
+ "counts": {
+  "human_actions": 904,
+  "hutt_actions": 206,
+  "missing_in_hutt": 714,
+  "mapped_here": 631,
+  "deliberately_skipped": 84,
+  "skipped_outside_rules": []
+ },
+ "skipped_rules": {
+  "force_*, jedi_*, *_jedi_combo_*, add_force": "No Hutt Jedi at launch (owner: Hutts are traders and crime lords; Jedi unlock is a later decision). If a Hutt ever gets a lightsaber these map to the sword set.",
+  "sword_attack_mask, unarmed_attack_mask, polearm_attack_mask": "Bone masks, not animations: they name human bones. The Hutt table has none and needs none."
+ },
+ "entries": [
+  {
+   "action": "add_duck",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_rea_stand_combat_get_hit_light.ans",
+   "category": "emote",
+   "note": "Duck = light flinch."
+  },
+  {
+   "action": "add_rifle_fire_11",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_pistol_fire_add_11.ans",
+   "category": "emote",
+   "note": "Additive fire 11."
+  },
+  {
+   "action": "add_rifle_fire_9",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_pistol_fire_add_9.ans",
+   "category": "emote",
+   "note": "Additive fire 9 (as the Hutt pistol add)."
+  },
+  {
+   "action": "ag_look_nervous",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_nervous.ans",
+   "category": "emote",
+   "note": "Ambient nervous look."
+  },
+  {
+   "action": "ag_sitting_chair_f_1",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_stand_look_left.ans",
+   "category": "emote",
+   "note": "Seated ambient fidget: look left / look right / fidget in turn."
+  },
+  {
+   "action": "ag_sitting_chair_f_2",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_stand_look_right.ans",
+   "category": "emote",
+   "note": "Seated ambient fidget: look left / look right / fidget in turn."
+  },
+  {
+   "action": "ag_sitting_chair_m2",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Seated ambient fidget: look left / look right / fidget in turn."
+  },
+  {
+   "action": "ag_sitting_chair_m_1",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_stand_look_left.ans",
+   "category": "emote",
+   "note": "Seated ambient fidget: look left / look right / fidget in turn."
+  },
+  {
+   "action": "ag_sitting_chair_m_2",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_stand_look_right.ans",
+   "category": "emote",
+   "note": "Seated ambient fidget: look left / look right / fidget in turn."
+  },
+  {
+   "action": "ag_sitting_ground_fidget_1",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Seated ambient fidget: look left / look right / fidget in turn."
+  },
+  {
+   "action": "ag_sitting_ground_fidget_2",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_stand_look_left.ans",
+   "category": "emote",
+   "note": "Seated ambient fidget: look left / look right / fidget in turn."
+  },
+  {
+   "action": "ag_sitting_ground_fidget_3",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_stand_look_right.ans",
+   "category": "emote",
+   "note": "Seated ambient fidget: look left / look right / fidget in turn."
+  },
+  {
+   "action": "cbt_charge",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_threaten.ans",
+   "category": "emote",
+   "note": "Charge shout."
+  },
+  {
+   "action": "cbt_intimidate",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_threaten.ans",
+   "category": "emote",
+   "note": "Intimidate."
+  },
+  {
+   "action": "cbt_rescue",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_alert.ans",
+   "category": "emote",
+   "note": "Rescue call."
+  },
+  {
+   "action": "cbt_warcry",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_furious.ans",
+   "category": "emote",
+   "note": "War cry (human: raise fist with a mask; Hutt: furious, no mask)."
+  },
+  {
+   "action": "coup_de_grace",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_attack_melee_heavy.ans",
+   "category": "emote",
+   "note": "Finisher = heavy melee."
+  },
+  {
+   "action": "dance_lyrical",
+   "human_kind": "AGAT",
+   "hutt_kind": "AGAT over LOOP",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "zero_speed",
+   "note": "Named dance loop (NGE-era test): same block as loop_skill.",
+   "copy_structure_of": "loop_skill above"
+  },
+  {
+   "action": "dance_lyrical_sp1",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain_enthusiastic.ans",
+   "category": "emote",
+   "note": "Named dance flourish."
+  },
+  {
+   "action": "dance_test_african_sp_1",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain_enthusiastic.ans",
+   "category": "emote",
+   "note": "Named dance flourish."
+  },
+  {
+   "action": "emt_2hot4u",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_accept_affection",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_yes.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nod."
+  },
+  {
+   "action": "emt_adjust",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_alert.ans",
+   "category": "emote",
+   "note": "Emote by keyword: alert/look."
+  },
+  {
+   "action": "emt_adn",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_afk",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Emote by keyword: idle fidget."
+  },
+  {
+   "action": "emt_airguitar",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_furious.ans",
+   "category": "emote",
+   "note": "Emote by keyword: furious."
+  },
+  {
+   "action": "emt_angry_ambient_01_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_angry.ans",
+   "category": "emote",
+   "note": "Emote by keyword: angry strike."
+  },
+  {
+   "action": "emt_angry_ambient_02_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_angry.ans",
+   "category": "emote",
+   "note": "Emote by keyword: angry strike."
+  },
+  {
+   "action": "emt_angry_ambient_03_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_angry.ans",
+   "category": "emote",
+   "note": "Emote by keyword: angry strike."
+  },
+  {
+   "action": "emt_apologize",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_nervous.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nervous."
+  },
+  {
+   "action": "emt_applause_excited",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic greeting."
+  },
+  {
+   "action": "emt_applause_polite",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic greeting."
+  },
+  {
+   "action": "emt_ayt",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_backhand",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_threaten.ans",
+   "category": "emote",
+   "note": "Emote by keyword: threat."
+  },
+  {
+   "action": "emt_backhand_threaten",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_threaten.ans",
+   "category": "emote",
+   "note": "Emote by keyword: threat."
+  },
+  {
+   "action": "emt_bang",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_angry.ans",
+   "category": "emote",
+   "note": "Emote by keyword: angry strike."
+  },
+  {
+   "action": "emt_beckon",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greet.ans",
+   "category": "emote",
+   "note": "Emote by keyword: greeting wave."
+  },
+  {
+   "action": "emt_beg",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_nervous.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nervous."
+  },
+  {
+   "action": "emt_belly_laugh",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_laugh.ans",
+   "category": "emote",
+   "note": "Emote by keyword: laugh."
+  },
+  {
+   "action": "emt_blame",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain.ans",
+   "category": "emote",
+   "note": "Emote by keyword: explain."
+  },
+  {
+   "action": "emt_blow_bubbles",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic greeting."
+  },
+  {
+   "action": "emt_bored_ambient_01_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_stand_stretch.ans",
+   "category": "emote",
+   "note": "Emote by keyword: stretch."
+  },
+  {
+   "action": "emt_bored_ambient_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_stand_stretch.ans",
+   "category": "emote",
+   "note": "Emote by keyword: stretch."
+  },
+  {
+   "action": "emt_bounce",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic (stand-in dance)."
+  },
+  {
+   "action": "emt_bow3",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_bow.ans",
+   "category": "emote",
+   "note": "Emote by keyword: bow."
+  },
+  {
+   "action": "emt_bow4",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_bow.ans",
+   "category": "emote",
+   "note": "Emote by keyword: bow."
+  },
+  {
+   "action": "emt_bow5",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_bow.ans",
+   "category": "emote",
+   "note": "Emote by keyword: bow."
+  },
+  {
+   "action": "emt_bump",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_rea_stand_combat_get_hit_light.ans",
+   "category": "emote",
+   "note": "Emote by keyword: light stumble."
+  },
+  {
+   "action": "emt_catchbreath",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_stand_stretch.ans",
+   "category": "emote",
+   "note": "Emote by keyword: stretch."
+  },
+  {
+   "action": "emt_celebrate",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic greeting."
+  },
+  {
+   "action": "emt_celebrate1",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic greeting."
+  },
+  {
+   "action": "emt_check_wrist_device",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_alert.ans",
+   "category": "emote",
+   "note": "Emote by keyword: alert/look."
+  },
+  {
+   "action": "emt_check_wrist_device_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_alert.ans",
+   "category": "emote",
+   "note": "Emote by keyword: alert/look."
+  },
+  {
+   "action": "emt_chicken",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_laugh.ans",
+   "category": "emote",
+   "note": "Emote by keyword: laugh."
+  },
+  {
+   "action": "emt_chopped_liver",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_laugh.ans",
+   "category": "emote",
+   "note": "Emote by keyword: laugh."
+  },
+  {
+   "action": "emt_clap_rousing",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic greeting."
+  },
+  {
+   "action": "emt_claw",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_conversation_2",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain.ans",
+   "category": "emote",
+   "note": "Emote by keyword: explain."
+  },
+  {
+   "action": "emt_cough_polite",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote by keyword: shoulder shrug (no cough exists)."
+  },
+  {
+   "action": "emt_cough_polite_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote by keyword: shoulder shrug (no cough exists)."
+  },
+  {
+   "action": "emt_cover_ears_mocking",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_laugh.ans",
+   "category": "emote",
+   "note": "Emote by keyword: laugh."
+  },
+  {
+   "action": "emt_cover_eyes",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_yes.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nod."
+  },
+  {
+   "action": "emt_cover_mouth",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shocked.ans",
+   "category": "emote",
+   "note": "Emote by keyword: shocked."
+  },
+  {
+   "action": "emt_crack_neck_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_cuckoo",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_laugh.ans",
+   "category": "emote",
+   "note": "Emote by keyword: laugh."
+  },
+  {
+   "action": "emt_curtsey",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_bow.ans",
+   "category": "emote",
+   "note": "Emote by keyword: bow."
+  },
+  {
+   "action": "emt_curtsey1",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_bow.ans",
+   "category": "emote",
+   "note": "Emote by keyword: bow."
+  },
+  {
+   "action": "emt_door_knock",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_angry.ans",
+   "category": "emote",
+   "note": "Emote by keyword: angry strike."
+  },
+  {
+   "action": "emt_door_pound",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_angry.ans",
+   "category": "emote",
+   "note": "Emote by keyword: angry strike."
+  },
+  {
+   "action": "emt_dream",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Emote by keyword: idle fidget."
+  },
+  {
+   "action": "emt_drink_01_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_eat_slowly.ans",
+   "category": "emote",
+   "note": "Emote by keyword: drink (eat slowly)."
+  },
+  {
+   "action": "emt_drink_02_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_eat_slowly.ans",
+   "category": "emote",
+   "note": "Emote by keyword: drink (eat slowly)."
+  },
+  {
+   "action": "emt_drink_03_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_eat_slowly.ans",
+   "category": "emote",
+   "note": "Emote by keyword: drink (eat slowly)."
+  },
+  {
+   "action": "emt_elbow",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_bow.ans",
+   "category": "emote",
+   "note": "Emote by keyword: bow."
+  },
+  {
+   "action": "emt_embarrassed",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_nervous.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nervous."
+  },
+  {
+   "action": "emt_expect_tip",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_fakepunch",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_angry.ans",
+   "category": "emote",
+   "note": "Emote by keyword: angry strike."
+  },
+  {
+   "action": "emt_feed_creature_high",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_eat.ans",
+   "category": "emote",
+   "note": "Emote by keyword: eat."
+  },
+  {
+   "action": "emt_feed_creature_low",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_eat.ans",
+   "category": "emote",
+   "note": "Emote by keyword: eat."
+  },
+  {
+   "action": "emt_feed_creature_medium",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_eat.ans",
+   "category": "emote",
+   "note": "Emote by keyword: eat."
+  },
+  {
+   "action": "emt_female_model",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_fishing_cast",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_fishing_reel",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_fishing_tug_back",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_fishing_tug_left",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_fishing_tug_right",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_flex3",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_flex_biceps",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_flipcoin",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic (stand-in dance)."
+  },
+  {
+   "action": "emt_giveup",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_wave_item.ans",
+   "category": "emote",
+   "note": "Emote by keyword: wave item."
+  },
+  {
+   "action": "emt_hair_flip",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic (stand-in dance)."
+  },
+  {
+   "action": "emt_hands_above_head",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_wave_item.ans",
+   "category": "emote",
+   "note": "Emote by keyword: wave item."
+  },
+  {
+   "action": "emt_hands_behind_head",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_wave_item.ans",
+   "category": "emote",
+   "note": "Emote by keyword: wave item."
+  },
+  {
+   "action": "emt_happy_ambient_01_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_happy_ambient_02_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_he_dies",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_he_lives",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_heavy_cough_vomit",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote by keyword: shoulder shrug (no cough exists)."
+  },
+  {
+   "action": "emt_helpme",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_high_five",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_hold_nose",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_eat.ans",
+   "category": "emote",
+   "note": "Emote by keyword: eat."
+  },
+  {
+   "action": "emt_hug_self",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic greeting."
+  },
+  {
+   "action": "emt_huge",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic greeting."
+  },
+  {
+   "action": "emt_huh",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_implore",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_jam",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_kiss",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic greeting."
+  },
+  {
+   "action": "emt_kiss_blow_kiss",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic greeting."
+  },
+  {
+   "action": "emt_kisscheek",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic greeting."
+  },
+  {
+   "action": "emt_laugh",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_laugh.ans",
+   "category": "emote",
+   "note": "Emote by keyword: laugh."
+  },
+  {
+   "action": "emt_laugh_pointing",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_laugh.ans",
+   "category": "emote",
+   "note": "Emote by keyword: laugh."
+  },
+  {
+   "action": "emt_laugh_titter",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_laugh.ans",
+   "category": "emote",
+   "note": "Emote by keyword: laugh."
+  },
+  {
+   "action": "emt_listen",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_alert.ans",
+   "category": "emote",
+   "note": "Emote by keyword: alert/look."
+  },
+  {
+   "action": "emt_look_casual_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_alert.ans",
+   "category": "emote",
+   "note": "Emote by keyword: alert/look."
+  },
+  {
+   "action": "emt_look_left_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_alert.ans",
+   "category": "emote",
+   "note": "Emote by keyword: alert/look."
+  },
+  {
+   "action": "emt_look_right_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_alert.ans",
+   "category": "emote",
+   "note": "Emote by keyword: alert/look."
+  },
+  {
+   "action": "emt_loser",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_male_groove_1",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic (stand-in dance)."
+  },
+  {
+   "action": "emt_medium",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_mock",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_laugh.ans",
+   "category": "emote",
+   "note": "Emote by keyword: laugh."
+  },
+  {
+   "action": "emt_model",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_music_horn_play_1",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Emote by keyword: idle fidget."
+  },
+  {
+   "action": "emt_music_horn_play_2",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Emote by keyword: idle fidget."
+  },
+  {
+   "action": "emt_music_horn_play_3",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Emote by keyword: idle fidget."
+  },
+  {
+   "action": "emt_music_horn_play_4",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Emote by keyword: idle fidget."
+  },
+  {
+   "action": "emt_nervous_ambient_01_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_nervous.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nervous."
+  },
+  {
+   "action": "emt_nod",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_yes.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nod."
+  },
+  {
+   "action": "emt_nod_head_multiple",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_yes.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nod."
+  },
+  {
+   "action": "emt_offer_affection",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_wave_item.ans",
+   "category": "emote",
+   "note": "Emote by keyword: wave item."
+  },
+  {
+   "action": "emt_offer_affection_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_wave_item.ans",
+   "category": "emote",
+   "note": "Emote by keyword: wave item."
+  },
+  {
+   "action": "emt_paper",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_pat",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain.ans",
+   "category": "emote",
+   "note": "Emote by keyword: explain."
+  },
+  {
+   "action": "emt_pat_abdomen",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain.ans",
+   "category": "emote",
+   "note": "Emote by keyword: explain."
+  },
+  {
+   "action": "emt_pet_creature_high",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_eat.ans",
+   "category": "emote",
+   "note": "Emote by keyword: eat."
+  },
+  {
+   "action": "emt_pet_creature_low",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_eat.ans",
+   "category": "emote",
+   "note": "Emote by keyword: eat."
+  },
+  {
+   "action": "emt_pet_creature_medium",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_eat.ans",
+   "category": "emote",
+   "note": "Emote by keyword: eat."
+  },
+  {
+   "action": "emt_point_accusingly",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_point_straight.ans",
+   "category": "emote",
+   "note": "Emote by keyword: point."
+  },
+  {
+   "action": "emt_point_accusingly_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_point_straight.ans",
+   "category": "emote",
+   "note": "Emote by keyword: point."
+  },
+  {
+   "action": "emt_point_away",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_point_straight.ans",
+   "category": "emote",
+   "note": "Emote by keyword: point."
+  },
+  {
+   "action": "emt_point_down",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_point_straight.ans",
+   "category": "emote",
+   "note": "Emote by keyword: point."
+  },
+  {
+   "action": "emt_point_left",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_point_straight.ans",
+   "category": "emote",
+   "note": "Emote by keyword: point."
+  },
+  {
+   "action": "emt_point_right",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_point_straight.ans",
+   "category": "emote",
+   "note": "Emote by keyword: point."
+  },
+  {
+   "action": "emt_point_to_self",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_point_straight.ans",
+   "category": "emote",
+   "note": "Emote by keyword: point."
+  },
+  {
+   "action": "emt_point_up",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_point_straight.ans",
+   "category": "emote",
+   "note": "Emote by keyword: point."
+  },
+  {
+   "action": "emt_poke",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_polearm_ambient_02",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_polearm_ambient_03",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_polearm_ambient_04",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_polearm_ambient_05",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_polearm_ambient_06",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_pose_proudly",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_pound_fist_palm_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_angry.ans",
+   "category": "emote",
+   "note": "Emote by keyword: angry strike."
+  },
+  {
+   "action": "emt_refuse_offer_affection",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_no.ans",
+   "category": "emote",
+   "note": "Emote by keyword: head shake."
+  },
+  {
+   "action": "emt_refuse_offer_formal",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_no.ans",
+   "category": "emote",
+   "note": "Emote by keyword: head shake."
+  },
+  {
+   "action": "emt_rifle_ambient_01",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_rifle_ambient_02",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_rifle_ambient_03",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_rofl",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_rose",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_rub_belly",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_rub_chin_thoughtful",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_rub_chin_thoughtful_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_rude",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_eat.ans",
+   "category": "emote",
+   "note": "Emote by keyword: eat."
+  },
+  {
+   "action": "emt_sad_ambient_01_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_nervous.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nervous."
+  },
+  {
+   "action": "emt_sad_ambient_02_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_nervous.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nervous."
+  },
+  {
+   "action": "emt_salute1",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greet.ans",
+   "category": "emote",
+   "note": "Emote by keyword: greeting wave."
+  },
+  {
+   "action": "emt_salute2",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greet.ans",
+   "category": "emote",
+   "note": "Emote by keyword: greeting wave."
+  },
+  {
+   "action": "emt_scare",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_scared",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_scratch_head",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_alert.ans",
+   "category": "emote",
+   "note": "Emote by keyword: alert/look."
+  },
+  {
+   "action": "emt_scratch_head_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_alert.ans",
+   "category": "emote",
+   "note": "Emote by keyword: alert/look."
+  },
+  {
+   "action": "emt_scream",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_furious.ans",
+   "category": "emote",
+   "note": "Emote by keyword: furious."
+  },
+  {
+   "action": "emt_shake_head_disgust",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_no.ans",
+   "category": "emote",
+   "note": "Emote by keyword: head shake."
+  },
+  {
+   "action": "emt_shake_head_no_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_no.ans",
+   "category": "emote",
+   "note": "Emote by keyword: head shake."
+  },
+  {
+   "action": "emt_shakefist",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_threaten.ans",
+   "category": "emote",
+   "note": "Emote by keyword: threat."
+  },
+  {
+   "action": "emt_shiver",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_nervous.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nervous."
+  },
+  {
+   "action": "emt_shoo",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_goodbye.ans",
+   "category": "emote",
+   "note": "Emote by keyword: goodbye wave."
+  },
+  {
+   "action": "emt_shush",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_sigh_deeply",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_nervous.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nervous."
+  },
+  {
+   "action": "emt_sitting_chair_idl_f_01_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Emote by keyword: idle fidget."
+  },
+  {
+   "action": "emt_sitting_chair_idl_f_02_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Emote by keyword: idle fidget."
+  },
+  {
+   "action": "emt_sitting_ground_idl_f_02_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Emote by keyword: idle fidget."
+  },
+  {
+   "action": "emt_sitting_ground_idl_f_03_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Emote by keyword: idle fidget."
+  },
+  {
+   "action": "emt_sitting_table_1_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Emote by keyword: idle fidget."
+  },
+  {
+   "action": "emt_sitting_table_eat",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Emote by keyword: idle fidget."
+  },
+  {
+   "action": "emt_slit_throat",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_slow_down",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_slump_head",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_smack_self",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_angry.ans",
+   "category": "emote",
+   "note": "Emote by keyword: angry strike."
+  },
+  {
+   "action": "emt_smackbottom",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_angry.ans",
+   "category": "emote",
+   "note": "Emote by keyword: angry strike."
+  },
+  {
+   "action": "emt_small",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_smell_air",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic (stand-in dance)."
+  },
+  {
+   "action": "emt_smell_armpit",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_snap",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Emote by keyword: idle fidget."
+  },
+  {
+   "action": "emt_snap_finger1",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_threaten.ans",
+   "category": "emote",
+   "note": "Emote by keyword: threat."
+  },
+  {
+   "action": "emt_snap_finger2",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_threaten.ans",
+   "category": "emote",
+   "note": "Emote by keyword: threat."
+  },
+  {
+   "action": "emt_sneeze",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote by keyword: shoulder shrug (no cough exists)."
+  },
+  {
+   "action": "emt_soapbox",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_spin",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic (stand-in dance)."
+  },
+  {
+   "action": "emt_spit_hands",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_eat.ans",
+   "category": "emote",
+   "note": "Emote by keyword: eat."
+  },
+  {
+   "action": "emt_squirm",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_stamp_feet",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_standing_idle_ambient_1_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_standing_idle_ambient_2_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_standing_idle_ambient_3_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_standing_idle_ambient_4_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_standing_idle_ambient_5_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_standing_idle_ambient_6_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_standing_placate",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_standing_placate_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_standing_raise_fist",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_stop",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_strangle_other",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_angry.ans",
+   "category": "emote",
+   "note": "Emote by keyword: angry strike."
+  },
+  {
+   "action": "emt_strangle_self",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_angry.ans",
+   "category": "emote",
+   "note": "Emote by keyword: angry strike."
+  },
+  {
+   "action": "emt_stretch",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_stand_stretch.ans",
+   "category": "emote",
+   "note": "Emote by keyword: stretch."
+  },
+  {
+   "action": "emt_stretch_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_stand_stretch.ans",
+   "category": "emote",
+   "note": "Emote by keyword: stretch."
+  },
+  {
+   "action": "emt_strut",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_sweat",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_eat.ans",
+   "category": "emote",
+   "note": "Emote by keyword: eat."
+  },
+  {
+   "action": "emt_swoon",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_sword_1h_ambient_02",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_sword_1h_ambient_03",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_sword_1h_ambient_04",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_sword_1h_ambient_05",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_sword_1h_ambient_06",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_sword_2h_ambient_02",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_sword_2h_ambient_03",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_sword_2h_ambient_04",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_sword_2h_ambient_05",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_taken_aback",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_tandem_handshake",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_wave_item.ans",
+   "category": "emote",
+   "note": "Emote by keyword: wave item."
+  },
+  {
+   "action": "emt_tandem_hi5",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_tandem_hug",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic greeting."
+  },
+  {
+   "action": "emt_tandem_kiss",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Emote by keyword: enthusiastic greeting."
+  },
+  {
+   "action": "emt_tap_foot",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_alert.ans",
+   "category": "emote",
+   "note": "Emote by keyword: alert/look."
+  },
+  {
+   "action": "emt_tap_foot_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_alert.ans",
+   "category": "emote",
+   "note": "Emote by keyword: alert/look."
+  },
+  {
+   "action": "emt_tap_head",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_alert.ans",
+   "category": "emote",
+   "note": "Emote by keyword: alert/look."
+  },
+  {
+   "action": "emt_taunt3",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_threaten.ans",
+   "category": "emote",
+   "note": "Emote by keyword: threat."
+  },
+  {
+   "action": "emt_thank",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_yes.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nod."
+  },
+  {
+   "action": "emt_throwat",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_throw_item.ans",
+   "category": "emote",
+   "note": "Emote by keyword: throw."
+  },
+  {
+   "action": "emt_throwdown",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_throw_item.ans",
+   "category": "emote",
+   "note": "Emote by keyword: throw."
+  },
+  {
+   "action": "emt_thumb_down",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_thumb_up",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_thumbs_down",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_thumbs_up_double_fisted",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_tickle",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_tiny",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_tiphat",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_twitch",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_udaman",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_unarmed_ambient_01",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_unarmed_ambient_02",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_unarmed_ambient_04",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_use_console",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_use_console_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_use_data_terminal",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_use_data_terminal_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_waft",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_wave2",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greet.ans",
+   "category": "emote",
+   "note": "Emote by keyword: greeting wave."
+  },
+  {
+   "action": "emt_wave_finger_warning",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greet.ans",
+   "category": "emote",
+   "note": "Emote by keyword: greeting wave."
+  },
+  {
+   "action": "emt_wave_hail",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greet.ans",
+   "category": "emote",
+   "note": "Emote by keyword: greeting wave."
+  },
+  {
+   "action": "emt_wave_on_directing",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greet.ans",
+   "category": "emote",
+   "note": "Emote by keyword: greeting wave."
+  },
+  {
+   "action": "emt_wave_on_dismissing",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_goodbye.ans",
+   "category": "emote",
+   "note": "Emote by keyword: goodbye wave."
+  },
+  {
+   "action": "emt_weeping",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_nervous.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nervous."
+  },
+  {
+   "action": "emt_weeping_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_nervous.ans",
+   "category": "emote",
+   "note": "Emote by keyword: nervous."
+  },
+  {
+   "action": "emt_whisper",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain.ans",
+   "category": "emote",
+   "note": "Emote by keyword: explain."
+  },
+  {
+   "action": "emt_wke_roar",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_furious.ans",
+   "category": "emote",
+   "note": "Emote by keyword: furious."
+  },
+  {
+   "action": "emt_worship",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_wtf",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shoulder_shrug.ans",
+   "category": "emote",
+   "note": "Emote with no Hutt equivalent: the shoulder shrug, so no emote leaves the Hutt frozen."
+  },
+  {
+   "action": "emt_yawn_ag",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_stand_stretch.ans",
+   "category": "emote",
+   "note": "Emote by keyword: stretch."
+  },
+  {
+   "action": "fire_flare",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_throw_item.ans",
+   "category": "emote",
+   "note": "Flare = throw."
+  },
+  {
+   "action": "heal_other",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_point_straight.ans",
+   "category": "action",
+   "note": "Heal other = reaches toward the target (point straight)."
+  },
+  {
+   "action": "heal_other_kneeling",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_point_straight.ans",
+   "category": "action",
+   "note": "Heal other = reaches toward the target (point straight)."
+  },
+  {
+   "action": "heal_other_sitting_chair",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_point_straight.ans",
+   "category": "action",
+   "note": "Heal other = reaches toward the target (point straight)."
+  },
+  {
+   "action": "heal_self",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_hold_object.ans",
+   "category": "action",
+   "note": "Heal self = holds the stim to the chest (hold object)."
+  },
+  {
+   "action": "heal_self_kneeling",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_hold_object.ans",
+   "category": "action",
+   "note": "Heal self = holds the stim to the chest (hold object)."
+  },
+  {
+   "action": "heal_self_sitting chair",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_hold_object.ans",
+   "category": "action",
+   "note": "Heal self = holds the stim to the chest (hold object)."
+  },
+  {
+   "action": "heal_self_sitting_chair",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_hold_object.ans",
+   "category": "action",
+   "note": "Heal self = holds the stim to the chest (hold object)."
+  },
+  {
+   "action": "heavy_weapon_launch",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_throw_item.ans",
+   "category": "emote",
+   "note": "Heavy weapon = throw."
+  },
+  {
+   "action": "jump",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "A Hutt does not jump; a fidget."
+  },
+  {
+   "action": "jump_add",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "emote",
+   "note": "Additive jump = fidget."
+  },
+  {
+   "action": "loop_attention",
+   "human_kind": "SPAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_stand_breathe.ans",
+   "category": "zero_speed",
+   "note": "Stand at attention (AFK/attention posture) = idle."
+  },
+  {
+   "action": "loop_blocking",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_stand_combat.ans",
+   "category": "zero_speed",
+   "note": "Block posture = the combat idle."
+  },
+  {
+   "action": "loop_combat_riding",
+   "human_kind": "PBAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_stand_combat.ans",
+   "category": "zero_speed",
+   "note": "Mounted combat idle."
+  },
+  {
+   "action": "loop_crouched",
+   "human_kind": "SPAT",
+   "hutt_kind": "SPAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_idl_stand_breathe.ans",
+    "appearance/animation/hutt_loc_crawl.ans"
+   ],
+   "category": "locomotion",
+   "note": "Sneak: idle + the unused stock crawl hutt_loc_crawl.ans as the crouched walk. SPAT like the Hutt loop_standing (speed blend, no yaw turns needed).",
+   "copy_structure_of": "hutt loop_standing (SPAT) minus the AGAT/mood block"
+  },
+  {
+   "action": "loop_dance_test",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "zero_speed",
+   "note": "Test dance loop; same as loop_skill without gestures."
+  },
+  {
+   "action": "loop_incapacitated_face_down",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_incapacitated.ans",
+   "category": "zero_speed",
+   "note": "Only one incapacitated pose exists; use it for face down too."
+  },
+  {
+   "action": "loop_kneeling",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_stand_breathe.ans",
+   "category": "zero_speed",
+   "note": "Kneel = idle (no legs to kneel on). Medic heals and the /kneel emote keep working."
+  },
+  {
+   "action": "loop_knocked_down",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_incapacitated.ans",
+   "category": "zero_speed",
+   "note": "Knockdown = the incapacitated loop."
+  },
+  {
+   "action": "loop_pistol_combat_kneeling",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 21 files as hutt loop_pistol_combat_standing_aimed",
+   "category": "locomotion",
+   "note": "pistol combat while kneeling: byte-copy of the Hutt loop_pistol_combat_standing_aimed entry under this name (directional run/walk/idle ready set).",
+   "copy_structure_of": "hutt loop_pistol_combat_standing_aimed"
+  },
+  {
+   "action": "loop_pistol_combat_kneeling_aimed",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 21 files as hutt loop_pistol_combat_standing_aimed",
+   "category": "locomotion",
+   "note": "pistol combat while kneeling: byte-copy of the Hutt loop_pistol_combat_standing_aimed entry under this name (directional run/walk/idle ready set).",
+   "copy_structure_of": "hutt loop_pistol_combat_standing_aimed"
+  },
+  {
+   "action": "loop_pistol_combat_prone",
+   "human_kind": "SPAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 21 files as hutt loop_pistol_combat_standing_aimed",
+   "category": "locomotion",
+   "note": "pistol combat while prone: byte-copy of the Hutt loop_pistol_combat_standing_aimed entry under this name (directional run/walk/idle ready set).",
+   "copy_structure_of": "hutt loop_pistol_combat_standing_aimed"
+  },
+  {
+   "action": "loop_pistol_combat_prone_aimed",
+   "human_kind": "SPAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 21 files as hutt loop_pistol_combat_standing_aimed",
+   "category": "locomotion",
+   "note": "pistol combat while prone: byte-copy of the Hutt loop_pistol_combat_standing_aimed entry under this name (directional run/walk/idle ready set).",
+   "copy_structure_of": "hutt loop_pistol_combat_standing_aimed"
+  },
+  {
+   "action": "loop_pistol_combat_riding",
+   "human_kind": "PBAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 21 files as hutt loop_pistol_combat_standing_aimed",
+   "category": "locomotion",
+   "note": "pistol combat while riding: byte-copy of the Hutt loop_pistol_combat_standing_aimed entry under this name (directional run/walk/idle ready set).",
+   "copy_structure_of": "hutt loop_pistol_combat_standing_aimed"
+  },
+  {
+   "action": "loop_pistol_combat_standing",
+   "human_kind": "DRAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_pistol_standing_ready_idle.ans",
+   "category": "zero_speed",
+   "note": "Un-aimed pistol combat idle."
+  },
+  {
+   "action": "loop_pistol_kneeling",
+   "human_kind": "PXAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_idl_stand_breathe.ans"
+   ],
+   "category": "zero_speed",
+   "note": "pistol out of combat while kneeling: same as the Hutt loop_pistol_standing (YWAT turn left/right + idle).",
+   "copy_structure_of": "hutt loop_pistol_standing"
+  },
+  {
+   "action": "loop_pistol_prone",
+   "human_kind": "SPAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_idl_stand_breathe.ans"
+   ],
+   "category": "zero_speed",
+   "note": "pistol out of combat while prone: same as the Hutt loop_pistol_standing (YWAT turn left/right + idle).",
+   "copy_structure_of": "hutt loop_pistol_standing"
+  },
+  {
+   "action": "loop_pistol_riding",
+   "human_kind": "PBAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_idl_stand_breathe.ans"
+   ],
+   "category": "zero_speed",
+   "note": "pistol out of combat while riding: same as the Hutt loop_pistol_standing (YWAT turn left/right + idle).",
+   "copy_structure_of": "hutt loop_pistol_standing"
+  },
+  {
+   "action": "loop_polearm",
+   "human_kind": "SPAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_idl_stand_breathe.ans"
+   ],
+   "category": "zero_speed",
+   "note": "Polearm carried: the plain idle (the Hutt has no polearm stance; the weapon still draws in hold_r).",
+   "copy_structure_of": "hutt loop_pistol_standing"
+  },
+  {
+   "action": "loop_polearm_combat",
+   "human_kind": "SPAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_cbt_sword_1h_standing_ready.ans"
+   ],
+   "category": "zero_speed",
+   "note": "Melee weapon ready: the Hutt one-hand sword ready stance stands in for polearm, two-hand sword, mounted and prone variants.",
+   "copy_structure_of": "hutt loop_sword_1h_ready"
+  },
+  {
+   "action": "loop_polearm_combat_kneeling",
+   "human_kind": "PXAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_cbt_sword_1h_standing_ready.ans"
+   ],
+   "category": "zero_speed",
+   "note": "Melee weapon ready: the Hutt one-hand sword ready stance stands in for polearm, two-hand sword, mounted and prone variants.",
+   "copy_structure_of": "hutt loop_sword_1h_ready"
+  },
+  {
+   "action": "loop_polearm_combat_riding",
+   "human_kind": "PBAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_cbt_sword_1h_standing_ready.ans"
+   ],
+   "category": "zero_speed",
+   "note": "Melee weapon ready: the Hutt one-hand sword ready stance stands in for polearm, two-hand sword, mounted and prone variants.",
+   "copy_structure_of": "hutt loop_sword_1h_ready"
+  },
+  {
+   "action": "loop_polearm_kneeling",
+   "human_kind": "PXAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_idl_stand_breathe.ans"
+   ],
+   "category": "zero_speed",
+   "note": "Polearm carried: the plain idle (the Hutt has no polearm stance; the weapon still draws in hold_r).",
+   "copy_structure_of": "hutt loop_pistol_standing"
+  },
+  {
+   "action": "loop_polearm_riding",
+   "human_kind": "PBAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_idl_stand_breathe.ans"
+   ],
+   "category": "zero_speed",
+   "note": "Polearm carried: the plain idle (the Hutt has no polearm stance; the weapon still draws in hold_r).",
+   "copy_structure_of": "hutt loop_pistol_standing"
+  },
+  {
+   "action": "loop_prone",
+   "human_kind": "SPAT",
+   "hutt_kind": "SPAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_idl_stand_breathe.ans",
+    "appearance/animation/hutt_loc_crawl.ans"
+   ],
+   "category": "locomotion",
+   "note": "Prone: the Hutt is already low; idle + crawl. Not hutt_idl_incapacitated (that reads as dead).",
+   "copy_structure_of": "loop_crouched above"
+  },
+  {
+   "action": "loop_riding",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_stand_breathe.ans",
+   "category": "zero_speed",
+   "note": "RIDING. The human entry is an SSAT on the rider_pose variable (vehicle_landspeeder, vehicle_barc_speeder, vehicle_hover_chair ... from datatables/mount/rider_pose_map.iff). The Hutt gets one PXAT for every value: the standing idle, no mask, so the body rests whole on the vehicle. Launch vehicle: the A1 Deluxe Floater (rider_pose vehicle_landspeeder), see README Level 1."
+  },
+  {
+   "action": "loop_rifle_combat_prone",
+   "human_kind": "SPAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 21 files as hutt loop_rifle_a_combat_standing_aimed",
+   "category": "locomotion",
+   "note": "rifle combat while prone: byte-copy of the Hutt loop_rifle_a_combat_standing_aimed entry under this name (directional run/walk/idle ready set).",
+   "copy_structure_of": "hutt loop_rifle_a_combat_standing_aimed"
+  },
+  {
+   "action": "loop_rifle_combat_prone_aimed",
+   "human_kind": "SPAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 21 files as hutt loop_rifle_a_combat_standing_aimed",
+   "category": "locomotion",
+   "note": "rifle combat while prone: byte-copy of the Hutt loop_rifle_a_combat_standing_aimed entry under this name (directional run/walk/idle ready set).",
+   "copy_structure_of": "hutt loop_rifle_a_combat_standing_aimed"
+  },
+  {
+   "action": "loop_rifle_combat_riding",
+   "human_kind": "PBAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 21 files as hutt loop_rifle_a_combat_standing_aimed",
+   "category": "locomotion",
+   "note": "rifle combat while riding: byte-copy of the Hutt loop_rifle_a_combat_standing_aimed entry under this name (directional run/walk/idle ready set).",
+   "copy_structure_of": "hutt loop_rifle_a_combat_standing_aimed"
+  },
+  {
+   "action": "loop_rifle_combat_standing",
+   "human_kind": "DRAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_rifle_standing_ready_idle.ans",
+   "category": "zero_speed",
+   "note": "Un-aimed rifle combat idle."
+  },
+  {
+   "action": "loop_rifle_kneeling",
+   "human_kind": "PXAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_idl_stand_breathe.ans"
+   ],
+   "category": "zero_speed",
+   "note": "rifle out of combat while kneeling: same as the Hutt loop_rifle_standing (YWAT turn left/right + idle).",
+   "copy_structure_of": "hutt loop_rifle_standing"
+  },
+  {
+   "action": "loop_rifle_kneeling_combat",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 21 files as hutt loop_rifle_a_combat_standing_aimed",
+   "category": "locomotion",
+   "note": "Copy of the Hutt rifle aimed set.",
+   "copy_structure_of": "hutt loop_rifle_a_combat_standing_aimed"
+  },
+  {
+   "action": "loop_rifle_kneeling_combat_aimed",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 21 files as hutt loop_rifle_a_combat_standing_aimed",
+   "category": "locomotion",
+   "note": "Copy of the Hutt rifle aimed set.",
+   "copy_structure_of": "hutt loop_rifle_a_combat_standing_aimed"
+  },
+  {
+   "action": "loop_rifle_prone",
+   "human_kind": "SPAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_idl_stand_breathe.ans"
+   ],
+   "category": "zero_speed",
+   "note": "rifle out of combat while prone: same as the Hutt loop_rifle_standing (YWAT turn left/right + idle).",
+   "copy_structure_of": "hutt loop_rifle_standing"
+  },
+  {
+   "action": "loop_rifle_riding",
+   "human_kind": "PBAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_idl_stand_breathe.ans"
+   ],
+   "category": "zero_speed",
+   "note": "rifle out of combat while riding: same as the Hutt loop_rifle_standing (YWAT turn left/right + idle).",
+   "copy_structure_of": "hutt loop_rifle_standing"
+  },
+  {
+   "action": "loop_sitting_chair",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_stand_breathe.ans",
+   "category": "zero_speed",
+   "note": "A Hutt is already a seated shape: sit = the standing idle. The human entry carries mask_upper_body.iff (human bone names); drop the mask, the Hutt has no mask files. Wrong at launch: the Hutt stands through the chair; Level 3 gives it a settle pose and chairs stay refused until then if the owner prefers."
+  },
+  {
+   "action": "loop_sitting_ground",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_stand_breathe.ans",
+   "category": "zero_speed",
+   "note": "A Hutt is already a seated shape: sit = the standing idle. The human entry carries mask_upper_body.iff (human bone names); drop the mask, the Hutt has no mask files."
+  },
+  {
+   "action": "loop_skill",
+   "human_kind": "SPAT",
+   "hutt_kind": "AGAT over LOOP",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "zero_speed",
+   "note": "DANCE AND MUSIC. loop_skill is the entertainer performance loop; the human table switches on the performance variable (dance_1..32, music_1..6). The Hutt gets ONE branch: an AGAT (ambient-gesture) form, interval 2.0-4.0 s, whose LOOP is hutt_idl_fidget and whose ACTN gestures are sp_02, emt_gesticulate_wildly, emt_laugh_cackle, emt_shrug_hands, emt_wave_2, emt_nod_head_once (weight 200.0 each): the Hutt sways and gesticulates every few seconds. Copy the AGAT layout from the Hutt loop_standing entry (INFO two floats, ACTN count + name/weight pairs, FORM LOOP). Wrong at launch: no rhythm, and a musician Hutt shows no instrument.",
+   "copy_structure_of": "hutt loop_standing AGAT block",
+   "gestures": [
+    "sp_02",
+    "emt_gesticulate_wildly",
+    "emt_laugh_cackle",
+    "emt_shrug_hands",
+    "emt_wave_2",
+    "emt_nod_head_once"
+   ],
+   "interval_seconds": [
+    2.0,
+    4.0
+   ]
+  },
+  {
+   "action": "loop_sword2h_combat",
+   "human_kind": "SPAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_cbt_sword_1h_standing_ready.ans"
+   ],
+   "category": "zero_speed",
+   "note": "Melee weapon ready: the Hutt one-hand sword ready stance stands in for polearm, two-hand sword, mounted and prone variants.",
+   "copy_structure_of": "hutt loop_sword_1h_ready"
+  },
+  {
+   "action": "loop_sword_1h_combat_riding",
+   "human_kind": "PBAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_cbt_sword_1h_standing_ready.ans"
+   ],
+   "category": "zero_speed",
+   "note": "Melee weapon ready: the Hutt one-hand sword ready stance stands in for polearm, two-hand sword, mounted and prone variants.",
+   "copy_structure_of": "hutt loop_sword_1h_ready"
+  },
+  {
+   "action": "loop_sword_1h_prone",
+   "human_kind": "PXAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_cbt_sword_1h_standing_ready.ans"
+   ],
+   "category": "zero_speed",
+   "note": "Melee weapon ready: the Hutt one-hand sword ready stance stands in for polearm, two-hand sword, mounted and prone variants.",
+   "copy_structure_of": "hutt loop_sword_1h_ready"
+  },
+  {
+   "action": "loop_sword_1h_riding",
+   "human_kind": "PBAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_idl_stand_breathe.ans"
+   ],
+   "category": "zero_speed",
+   "note": "Sword carried while riding: plain idle.",
+   "copy_structure_of": "hutt loop_pistol_standing"
+  },
+  {
+   "action": "loop_sword_2h_combat_riding",
+   "human_kind": "PBAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_cbt_sword_1h_standing_ready.ans"
+   ],
+   "category": "zero_speed",
+   "note": "Melee weapon ready: the Hutt one-hand sword ready stance stands in for polearm, two-hand sword, mounted and prone variants.",
+   "copy_structure_of": "hutt loop_sword_1h_ready"
+  },
+  {
+   "action": "loop_sword_2h_riding",
+   "human_kind": "PBAT",
+   "hutt_kind": "YWAT",
+   "hutt_ans": [
+    "appearance/animation/hutt_std_turn_left.ans",
+    "appearance/animation/hutt_std_turn_right.ans",
+    "appearance/animation/hutt_idl_stand_breathe.ans"
+   ],
+   "category": "zero_speed",
+   "note": "Sword carried while riding: plain idle.",
+   "copy_structure_of": "hutt loop_pistol_standing"
+  },
+  {
+   "action": "mnt_pole_hrz_slash_middle_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Mounted slash = sword light."
+  },
+  {
+   "action": "mnt_sword_1h_hrz_slash_middle_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Mounted slash = sword light."
+  },
+  {
+   "action": "pistol_combat_kneeling_fire_1",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from kneeling: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_combat_kneeling_fire_3",
+   "human_kind": "TSCL",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from kneeling: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_combat_kneeling_fire_5",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from kneeling: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_combat_kneeling_fire_7",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from kneeling: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_combat_prone_fire_1",
+   "human_kind": "PXAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from prone: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_combat_prone_fire_11",
+   "human_kind": "PXAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from prone: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_combat_prone_fire_3",
+   "human_kind": "TSCL",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from prone: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_combat_prone_fire_5",
+   "human_kind": "PXAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from prone: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_combat_prone_fire_7",
+   "human_kind": "PXAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from prone: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_combat_prone_fire_9",
+   "human_kind": "PXAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from prone: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_combat_standing_fire_11",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from standing: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_combat_standing_fire_9",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from standing: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_coup_de_grace",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_pistol_standing_fire_3_front.ans",
+   "category": "emote",
+   "note": "Pistol finisher = front fire."
+  },
+  {
+   "action": "pistol_kneeling_fire_11",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from kneeling: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_kneeling_fire_9",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt pistol_combat_standing_fire_3",
+   "category": "action",
+   "note": "pistol fire from kneeling: byte-copy of the Hutt pistol_combat_standing_fire_3 (7 directions).",
+   "copy_structure_of": "hutt pistol_combat_standing_fire_3"
+  },
+  {
+   "action": "pistol_ranged_weapon_melee_attack",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_attack_melee_light.ans",
+   "category": "action",
+   "note": "Pistol-whip / rifle butt = light melee."
+  },
+  {
+   "action": "pistol_reload",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_hold_object.ans",
+   "category": "action",
+   "note": "Reload = hold object."
+  },
+  {
+   "action": "pole_standing_ready_block_high",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_block_high_l",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_block_high_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_block_low_l",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_block_low_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_block_middle_l",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_block_middle_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_combo_2a",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_combo_2b",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_combo_2c",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_combo_2d",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_combo_3a",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_combo_3b",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_combo_3c",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_combo_3d",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_combo_4a",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_combo_4b",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_combo_4c",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_combo_5a",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_combo_5b",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_hrz_slash_high_l",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_hrz_slash_high_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_hrz_slash_low_l",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_hrz_slash_low_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_hrz_slash_middle_l",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_hrz_slash_middle_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_leap_back",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_leap_up",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_lunge_high",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_lunge_low",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_lunge_middle",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_off_balance",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_high_l",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_high_l_counter_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_high_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_high_r_counter_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_low_l",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_low_l_counter_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_low_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_low_r_counter_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_mid_c",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_mid_c_counter_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_mid_l",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_mid_l_counter_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_mid_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_parry_mid_r_counter_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_showoff_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_showoff_2",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_showoff_3",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_spn_hrz_slash_l",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_spn_hrz_slash_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "pole_standing_ready_thrust_high",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "polearm_attack_mask",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "polearm_standing_ready_showoff_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Polearm move = the one-hand sword attack (combo/lunge/spin heavy, the rest light). The polearm draws in the hand; no polearm stance exists."
+  },
+  {
+   "action": "rifle_combat_prone_fire_1",
+   "human_kind": "PXAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from prone: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "rifle_combat_prone_fire_11",
+   "human_kind": "PXAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from prone: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "rifle_combat_prone_fire_3",
+   "human_kind": "TSCL",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from prone: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "rifle_combat_prone_fire_5",
+   "human_kind": "PXAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from prone: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "rifle_combat_prone_fire_7",
+   "human_kind": "PXAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from prone: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "rifle_combat_prone_fire_9",
+   "human_kind": "PXAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from prone: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "rifle_kneeling_fire_1",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from kneeling: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "rifle_kneeling_fire_11",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from kneeling: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "rifle_kneeling_fire_3",
+   "human_kind": "TSCL",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from kneeling: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "rifle_kneeling_fire_5",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from kneeling: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "rifle_kneeling_fire_7",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from kneeling: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "rifle_kneeling_fire_9",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from kneeling: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "rifle_kneeling_ranged_weapon_melee_attack",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_attack_melee_light.ans",
+   "category": "action",
+   "note": "Pistol-whip / rifle butt = light melee."
+  },
+  {
+   "action": "rifle_ranged_weapon_melee_attack",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_attack_melee_light.ans",
+   "category": "action",
+   "note": "Pistol-whip / rifle butt = light melee."
+  },
+  {
+   "action": "rifle_reload",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_hold_object.ans",
+   "category": "action",
+   "note": "Reload = hold object."
+  },
+  {
+   "action": "rifle_standing_aimed_fire_11",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from standing: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "rifle_standing_aimed_fire_9",
+   "human_kind": "DRAT",
+   "hutt_kind": "DRAT",
+   "hutt_ans": "same 7 files as hutt rifle_standing_aimed_fire_3",
+   "category": "action",
+   "note": "rifle fire from standing: byte-copy of the Hutt rifle_standing_aimed_fire_3 (7 directions).",
+   "copy_structure_of": "hutt rifle_standing_aimed_fire_3"
+  },
+  {
+   "action": "sitting_ground_heal_other",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_point_straight.ans",
+   "category": "action",
+   "note": "Heal other = reaches toward the target (point straight)."
+  },
+  {
+   "action": "sitting_ground_heal_self",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_hold_object.ans",
+   "category": "action",
+   "note": "Heal self = holds the stim to the chest (hold object)."
+  },
+  {
+   "action": "sitting_heal_other",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_point_straight.ans",
+   "category": "action",
+   "note": "Heal other = reaches toward the target (point straight)."
+  },
+  {
+   "action": "skill_action_1",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain_enthusiastic.ans",
+   "category": "emote",
+   "note": "Entertainer flourish 1: a one-shot emote over the dance loop (human: an SSAT per performance; Hutt: one PXAT)."
+  },
+  {
+   "action": "skill_action_10",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greet.ans",
+   "category": "emote",
+   "note": "Entertainer flourish 10: a one-shot emote over the dance loop (human: an SSAT per performance; Hutt: one PXAT)."
+  },
+  {
+   "action": "skill_action_2",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_greeting_enthusiastic.ans",
+   "category": "emote",
+   "note": "Entertainer flourish 2: a one-shot emote over the dance loop (human: an SSAT per performance; Hutt: one PXAT)."
+  },
+  {
+   "action": "skill_action_3",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_laugh.ans",
+   "category": "emote",
+   "note": "Entertainer flourish 3: a one-shot emote over the dance loop (human: an SSAT per performance; Hutt: one PXAT)."
+  },
+  {
+   "action": "skill_action_4",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_wave_item.ans",
+   "category": "emote",
+   "note": "Entertainer flourish 4: a one-shot emote over the dance loop (human: an SSAT per performance; Hutt: one PXAT)."
+  },
+  {
+   "action": "skill_action_5",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_furious.ans",
+   "category": "emote",
+   "note": "Entertainer flourish 5: a one-shot emote over the dance loop (human: an SSAT per performance; Hutt: one PXAT)."
+  },
+  {
+   "action": "skill_action_6",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shrug.ans",
+   "category": "emote",
+   "note": "Entertainer flourish 6: a one-shot emote over the dance loop (human: an SSAT per performance; Hutt: one PXAT)."
+  },
+  {
+   "action": "skill_action_7",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_throw_item.ans",
+   "category": "emote",
+   "note": "Entertainer flourish 7: a one-shot emote over the dance loop (human: an SSAT per performance; Hutt: one PXAT)."
+  },
+  {
+   "action": "skill_action_8",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_bow.ans",
+   "category": "emote",
+   "note": "Entertainer flourish 8: a one-shot emote over the dance loop (human: an SSAT per performance; Hutt: one PXAT)."
+  },
+  {
+   "action": "skill_action_9",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_explain.ans",
+   "category": "emote",
+   "note": "Entertainer flourish 9: a one-shot emote over the dance loop (human: an SSAT per performance; Hutt: one PXAT)."
+  },
+  {
+   "action": "skill_mistake",
+   "human_kind": "SSAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_emt_shocked.ans",
+   "category": "emote",
+   "note": "Flourish mistake = shocked."
+  },
+  {
+   "action": "sp_ambush_fist",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_attack_melee_heavy.ans",
+   "category": "action",
+   "note": "MTG special melee = heavy attack."
+  },
+  {
+   "action": "sp_ambush_locomotion_fist",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_loc_run.ans",
+   "category": "locomotion",
+   "note": "MTG special move locomotion = run."
+  },
+  {
+   "action": "sp_ambush_locomotion_pole",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_loc_run.ans",
+   "category": "locomotion",
+   "note": "MTG special move locomotion = run."
+  },
+  {
+   "action": "sp_ambush_locomotion_sword",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_loc_run.ans",
+   "category": "locomotion",
+   "note": "MTG special move locomotion = run."
+  },
+  {
+   "action": "sp_ambush_pole",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "MTG special melee = heavy attack."
+  },
+  {
+   "action": "sp_ambush_sword",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "MTG special melee = heavy attack."
+  },
+  {
+   "action": "sp_razor_slash_fist",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_attack_melee_heavy.ans",
+   "category": "action",
+   "note": "MTG special melee = heavy attack."
+  },
+  {
+   "action": "sp_razor_slash_locomotion_fist",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_loc_run.ans",
+   "category": "locomotion",
+   "note": "MTG special move locomotion = run."
+  },
+  {
+   "action": "sp_razor_slash_locomotion_pole",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_loc_run.ans",
+   "category": "locomotion",
+   "note": "MTG special move locomotion = run."
+  },
+  {
+   "action": "sp_razor_slash_locomotion_sword",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_loc_run.ans",
+   "category": "locomotion",
+   "note": "MTG special move locomotion = run."
+  },
+  {
+   "action": "sp_razor_slash_pole",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "MTG special melee = heavy attack."
+  },
+  {
+   "action": "sp_razor_slash_sword",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "MTG special melee = heavy attack."
+  },
+  {
+   "action": "sp_snipe_pistol",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_pistol_standing_fire_3_front.ans",
+   "category": "action",
+   "note": "MTG special: snipe = front fire."
+  },
+  {
+   "action": "sp_snipe_rifle",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_rifle_standing_fire_3_front.ans",
+   "category": "action",
+   "note": "MTG special: snipe = front fire."
+  },
+  {
+   "action": "std_forage",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_pick_up_object.ans",
+   "category": "action",
+   "note": "Forage = pick up from the ground."
+  },
+  {
+   "action": "std_kneeling_throw_object",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_throw_item.ans",
+   "category": "action",
+   "note": "Throw while kneeling = the standing throw."
+  },
+  {
+   "action": "std_manipulate_high",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_hold_object.ans",
+   "category": "action",
+   "note": "Use object (high) = hold object."
+  },
+  {
+   "action": "std_manipulate_low",
+   "human_kind": null,
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_put_down_object.ans",
+   "category": "action",
+   "note": "Use object (low) = put down."
+  },
+  {
+   "action": "std_manipulate_medium",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_pick_up_object.ans",
+   "category": "action",
+   "note": "Use object (medium) = pick up."
+  },
+  {
+   "action": "std_prone_throw_object",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_throw_item.ans",
+   "category": "action",
+   "note": "Throw while prone = the standing throw."
+  },
+  {
+   "action": "std_survey",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_hold_object.ans",
+   "category": "action",
+   "note": "Survey/sample: holds the device up and looks at it. Human entry uses PPTR with mask_spine3_arms; use PUNF, no mask."
+  },
+  {
+   "action": "sword_1h_prone_block_middle",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Prone/showoff sword move = sword light."
+  },
+  {
+   "action": "sword_1h_prone_hrz_slash_low",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Prone/showoff sword move = sword light."
+  },
+  {
+   "action": "sword_1h_prone_thrust_low",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Prone/showoff sword move = sword light."
+  },
+  {
+   "action": "sword_1h_standing_ready_showoff_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Prone/showoff sword move = sword light."
+  },
+  {
+   "action": "sword_1h_standing_ready_showoff_2",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Prone/showoff sword move = sword light."
+  },
+  {
+   "action": "sword_2h_attack_high_center_0",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_high_center_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_high_center_2",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_high_left_0",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_high_left_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_high_left_2",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_high_right_0",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_high_right_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_high_right_2",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_low_left_0",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_low_left_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_low_left_2",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_low_right_0",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_low_right_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_low_right_2",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_mid_center_0",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_mid_center_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_mid_center_2",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_mid_left_0",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_mid_left_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_mid_left_2",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_mid_right_0",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_mid_right_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_attack_mid_right_2",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_combo_2a",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_combo_2b",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_combo_2c",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_combo_2d",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_combo_3a",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_combo_3b",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_combo_3c",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_combo_3d",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_combo_4a",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_combo_4b",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_combo_4c",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_combo_5a",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_combo_5b",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_counter_high_center",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_counter_high_left",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_counter_high_right",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_counter_low_left",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_counter_low_right",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_counter_mid_center",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_counter_mid_left",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_counter_mid_right",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_heavy.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_standing_ready_block_high_l",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_standing_ready_block_high_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_standing_ready_block_hrz_high",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_standing_ready_block_low_l",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_standing_ready_block_low_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_standing_ready_block_middle_l",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_standing_ready_block_middle_r",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_standing_ready_showoff_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_standing_ready_showoff_2",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "sword_2h_standing_ready_showoff_3",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_sword_1h_attack_light.ans",
+   "category": "action",
+   "note": "Two-hand sword move = one-hand sword attack (combos/counters heavy)."
+  },
+  {
+   "action": "test_headbutt",
+   "human_kind": "PXAT",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_attack_melee_heavy.ans",
+   "category": "action",
+   "note": "Test entry."
+  },
+  {
+   "action": "trn_cbt_sword_1h_standing_ready_to_standing_2",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_combat_to_stand.ans",
+   "category": "transition",
+   "note": "Sheathe = combat-to-stand."
+  },
+  {
+   "action": "trn_combat_prone_hit_to_incapacitated_face_up",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_rea_stand_combat_get_hit_heavy.ans",
+   "category": "transition",
+   "note": "Going down = the heavy get-hit, then the incapacitated loop takes over."
+  },
+  {
+   "action": "trn_combat_standing_hit_to_incapacitated_face_up",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_rea_stand_combat_get_hit_heavy.ans",
+   "category": "transition",
+   "note": "Going down = the heavy get-hit, then the incapacitated loop takes over."
+  },
+  {
+   "action": "trn_crouched_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT.",
+   "copy_structure_of": "human trn_crouched_to_kneeling (TSCL) with the .ans swapped"
+  },
+  {
+   "action": "trn_crouched_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT.",
+   "copy_structure_of": "human trn_crouched_to_standing (TSCL) with the .ans swapped"
+  },
+  {
+   "action": "trn_incapacitated_face_down_to_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_incapacitate_to_stand.ans",
+   "category": "transition",
+   "note": "Getting up = the Hutt incapacitate-to-stand."
+  },
+  {
+   "action": "trn_incapacitated_face_down_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_incapacitate_to_stand.ans",
+   "category": "transition",
+   "note": "Getting up = the Hutt incapacitate-to-stand."
+  },
+  {
+   "action": "trn_kneeling_to knocked_down",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_rea_stand_combat_get_hit_heavy.ans",
+   "category": "transition",
+   "note": "Going down = the heavy get-hit, then the incapacitated loop takes over."
+  },
+  {
+   "action": "trn_kneeling_to_incapacitated_face_up",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_rea_stand_combat_get_hit_heavy.ans",
+   "category": "transition",
+   "note": "Going down = the heavy get-hit, then the incapacitated loop takes over."
+  },
+  {
+   "action": "trn_kneeling_to_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT.",
+   "copy_structure_of": "human trn_kneeling_to_prone (TSCL) with the .ans swapped"
+  },
+  {
+   "action": "trn_kneeling_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT.",
+   "copy_structure_of": "human trn_kneeling_to_standing (TSCL) with the .ans swapped"
+  },
+  {
+   "action": "trn_knocked_down_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_incapacitate_to_stand.ans",
+   "category": "transition",
+   "note": "Getting up = the Hutt incapacitate-to-stand."
+  },
+  {
+   "action": "trn_pistol_combat_dive_kneeling_to_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_dive_standing_to_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_fire_kneeling_to_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_fire_standing_to_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_fire_tumble_prone_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_fire_tumble_prone_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_fire_tumble_standing_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_hurry_keeling_to_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_hurry_kneeling_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_hurry_prone_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_hurry_prone_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_hurry_standing_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_hurry_standing_to_prone",
+   "human_kind": "PXAT",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_kneeling_aimed_to_pistol_combat_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_kneeling_aimed_to_pistol_combat_prone_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_kneeling_aimed_to_pistol_combat_standing_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_kneeling_dodge",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_kneeling_to_pistol_combat_kneeling_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_kneeling_to_pistol_combat_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_kneeling_to_pistol_combat_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_prone_aimed_to_pistol_combat_kneleing_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_prone_aimed_to_pistol_combat_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_prone_aimed_to_pistol_combat_standing_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_prone_dodge",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_prone_hit_to_incapacitated_face_up",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_rea_stand_combat_get_hit_heavy.ans",
+   "category": "transition",
+   "note": "Going down = the heavy get-hit, then the incapacitated loop takes over."
+  },
+  {
+   "action": "trn_pistol_combat_prone_to_pistol_combat_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_prone_to_pistol_combat_prone_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_prone_to_pistol_combat_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_standing_aimed_to_pistol_combat_kneeling_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_standing_aimed_to_pistol_combat_prone_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_standing_aimed_to_pistol_combat_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_standing_dodge",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_standing_hit_to_incapacitated_face_up",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_rea_stand_combat_get_hit_heavy.ans",
+   "category": "transition",
+   "note": "Going down = the heavy get-hit, then the incapacitated loop takes over."
+  },
+  {
+   "action": "trn_pistol_combat_standing_to_pistol_combat_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_standing_to_pistol_combat_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_to_pistol_combat_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_tumble_kneeling_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_tumble_prone_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_tumble_prone_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_combat_tumble_standing_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_kip_prone_to_standing_ranged_ready",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_kneeling_to_pistol",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_standing_to_pistol_combat_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_pistol_stanging_stow_pistol_pack",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_prone_to_incapacitated_face_up",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_rea_stand_combat_get_hit_heavy.ans",
+   "category": "transition",
+   "note": "Going down = the heavy get-hit, then the incapacitated loop takes over."
+  },
+  {
+   "action": "trn_prone_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT.",
+   "copy_structure_of": "human trn_prone_to_kneeling (TSCL) with the .ans swapped"
+  },
+  {
+   "action": "trn_prone_to_knocked_down",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_rea_stand_combat_get_hit_heavy.ans",
+   "category": "transition",
+   "note": "Going down = the heavy get-hit, then the incapacitated loop takes over."
+  },
+  {
+   "action": "trn_prone_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT.",
+   "copy_structure_of": "human trn_prone_to_standing (TSCL) with the .ans swapped"
+  },
+  {
+   "action": "trn_rea_get_hit_heavy_forward",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_rea_stand_combat_get_hit_heavy.ans",
+   "category": "transition",
+   "note": "Heavy hit forward = the one heavy get-hit."
+  },
+  {
+   "action": "trn_rea_get_knocked_down",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_rea_stand_combat_get_hit_heavy.ans",
+   "category": "transition",
+   "note": "Going down = the heavy get-hit, then the incapacitated loop takes over."
+  },
+  {
+   "action": "trn_rifle_a_standing_aimed_to_ready",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_a_standing_hold_to_ready",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_a_standing_ready_to_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_dive_kneeling_to_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_dive_standing_to_prone",
+   "human_kind": "PXAT",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_fire_kneeling_to_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_fire_standing_to_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_fire_tumble_kneeling_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_fire_tumble_prone_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_fire_tumble_prone_to_standing",
+   "human_kind": "PXAT",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_fire_tumble_standing_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_hurry_keeling_to_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_hurry_kneeling_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_hurry_prone_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_hurry_prone_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_hurry_standing_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_hurry_standing_to_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_kneeling_aimed_to_rifle_combat_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_kneeling_aimed_to_rifle_combat_prone_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_kneeling_aimed_to_rifle_combat_standing_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_kneeling_dodge",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_kneeling_to_rifle_combat_kneeling_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_kneeling_to_rifle_combat_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_kneeling_to_rifle_combat_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_prone_aimed_to_rifle_combat_kneeling_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_prone_aimed_to_rifle_combat_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_prone_aimed_to_rifle_combat_standing_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_prone_dodge",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_prone_to_rifle_combat_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_prone_to_rifle_combat_prone_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_prone_to_rifle_combat_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_standing_aimed_to_rifle_combat_prone_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_standing_dodge",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_standing_to_rifle_combat_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_standing_to_rifle_combat_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_tumble_kneeling_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_tumble_prone_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_tumble_prone_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_combat_tumble_standing_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rifle_kip_prone_to_standing_ranged_ready",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Ranged posture/aim transitions (dive, tumble, hurry, kip, stow): all the short stand-to-combat shift. A Hutt neither dives nor tumbles."
+  },
+  {
+   "action": "trn_rilfe_combat_standing_aimed_to_rifle_combat_kneeling_aimed",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Stock typo kept as the client names it; aim transition = stand-to-combat."
+  },
+  {
+   "action": "trn_sitting_chair_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT.",
+   "copy_structure_of": "human trn_sitting_chair_to_standing (TSCL) with the .ans swapped"
+  },
+  {
+   "action": "trn_sitting_ground_to_standing",
+   "human_kind": "SSAT",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT.",
+   "copy_structure_of": "human trn_sitting_ground_to_standing (TSCL) with the .ans swapped"
+  },
+  {
+   "action": "trn_standing_to_crouched",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT.",
+   "copy_structure_of": "human trn_standing_to_crouched (TSCL) with the .ans swapped"
+  },
+  {
+   "action": "trn_standing_to_kneeling",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT.",
+   "copy_structure_of": "human trn_standing_to_kneeling (TSCL) with the .ans swapped"
+  },
+  {
+   "action": "trn_standing_to_prone",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT.",
+   "copy_structure_of": "human trn_standing_to_prone (TSCL) with the .ans swapped"
+  },
+  {
+   "action": "trn_standing_to_sitting_chair",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT.",
+   "copy_structure_of": "human trn_standing_to_sitting_chair (TSCL) with the .ans swapped"
+  },
+  {
+   "action": "trn_standing_to_sitting_ground",
+   "human_kind": "SSAT",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT.",
+   "copy_structure_of": "human trn_standing_to_sitting_ground (TSCL) with the .ans swapped"
+  },
+  {
+   "action": "trn_standing_to_sword_1h_standing_ready",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Draw = stand-to-combat."
+  },
+  {
+   "action": "trn_swim_to_incapacitated_water",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_rea_stand_combat_get_hit_heavy.ans",
+   "category": "transition",
+   "note": "Going down = the heavy get-hit, then the incapacitated loop takes over."
+  },
+  {
+   "action": "trn_sword_1h_prone_to_standing",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_idl_fidget.ans",
+   "category": "transition",
+   "note": "Posture change = hutt_idl_fidget (a short shift of the bulk), category transition. Keep the human TSCL wrapper (INFO float 2.0 time scale) around the PXAT."
+  },
+  {
+   "action": "trn_sword_1h_to_sword_1h_combat",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Draw = stand-to-combat."
+  },
+  {
+   "action": "trn_sword_2h_combat_to_sword_2h",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_combat_to_stand.ans",
+   "category": "transition",
+   "note": "Sheathe = combat-to-stand."
+  },
+  {
+   "action": "trn_sword_2h_to_sword_2h_combat",
+   "human_kind": "TSCL",
+   "hutt_kind": "TSCL/PXAT",
+   "hutt_ans": "appearance/animation/hutt_std_stand_to_stand_combat.ans",
+   "category": "transition",
+   "note": "Draw = stand-to-combat."
+  },
+  {
+   "action": "unarmed_attack_mask",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_attack_melee_light.ans",
+   "category": "action",
+   "note": "Showoff/prone/mask unarmed = light melee."
+  },
+  {
+   "action": "unarmed_prone_block",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_attack_melee_light.ans",
+   "category": "action",
+   "note": "Showoff/prone/mask unarmed = light melee."
+  },
+  {
+   "action": "unarmed_prone_punch",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_attack_melee_light.ans",
+   "category": "action",
+   "note": "Showoff/prone/mask unarmed = light melee."
+  },
+  {
+   "action": "unarmed_standing_ready_showoff_1",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_attack_melee_light.ans",
+   "category": "action",
+   "note": "Showoff/prone/mask unarmed = light melee."
+  },
+  {
+   "action": "unarmed_standing_ready_showoff_2",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_attack_melee_light.ans",
+   "category": "action",
+   "note": "Showoff/prone/mask unarmed = light melee."
+  },
+  {
+   "action": "unarmed_standing_ready_showoff_3",
+   "human_kind": "TSCL",
+   "hutt_kind": "PXAT",
+   "hutt_ans": "appearance/animation/hutt_cbt_attack_melee_light.ans",
+   "category": "action",
+   "note": "Showoff/prone/mask unarmed = light melee."
+  }
+ ]
+}

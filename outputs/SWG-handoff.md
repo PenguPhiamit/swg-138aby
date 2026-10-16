@@ -325,6 +325,13 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 
 ## Log
 
+### 2026-10-15 22:35 Fable: Hutt S7 designed (concept, animation map, gear, new animations, Nal Hutta), photo studio, Ossus O6 pass
+
+- `Fable-species/s7-hutt/README.md` + `animation-map.json`: the Hutt shares the human state hierarchy (`all_b.ash`) but `hutt.lat` (206 entries) lacks 714 of `all_m.lat`'s 904 names; the JSON maps 631 of them to existing Hutt `.ans` files (sit/kneel = idle + fidget transitions, sneak/prone = the unused `hutt_loc_crawl`, dance = an AGAT gesture loop like the Hutt's own idle, riding = idle on the A1 Deluxe Floater as the launch vehicle, 249 emotes by keyword), skips 84 (Force, Jedi, masks); all 52 referenced files exist. Species facts: 900-point profile 100/150/300/0/0/50/0/0/300, refusal texts, our own name tables, id 0xEA. Level 2 gear list (10 items, slots and rigging notes for `hutt.skt`, 47 bones), Level 3 animation list and what `export_ans.py` lacks (unregistered stub writing zeros). Nal Hutta: `hutta.trn` is an edited Rori (water 75 m), one Tatooine-built town Bilbousa (281 nodes), fits the era, first-look steps listed.
+- `Fable-studio/README.md`: the four SOE test terrains have no shader families; pick zone `simple` with our own flat terrain, fixed light via colour ramps, no-spawn region, two backdrop walls, six-shot set, `um win shot` routine.
+- `Fable-ossus/o6/README.md`: 5 craters + scorch fans + glass pan on the ruins (layer specs), 5 settlement flatten fields outside the no-build circles, 18 lore POIs with locations and stock pieces. Creature levels untouched.
+- Nothing built or seen in a client; no /opt/swg writes. Next: Claude builds the modified `hutt.lat` and the S7 tables/patch; GPT reviews and takes the `.ans` format research; owner answers the five S7 questions.
+
 ### 2026-10-15 17:40 ChatGPT: C43 BF2 2005 research/design complete
 
 - Report `86f9200`: public official-tool documentation/manual evidence, read-only Core3-dev/bot mapping, three-post Hoth conquest design and five NPC priorities. Local links/CRLF checked; exact Follow signature and retail constants left open. No BF2 files, downloads, server/dev/bot changes or gameplay. Implementation and all in-game acceptance untested; next: Claude reviews the pilot and scopes controller/activity/combat work. Older Log entries preserved in the archive; newest four retained.
