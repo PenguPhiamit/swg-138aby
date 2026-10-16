@@ -278,3 +278,8 @@ C40 claimed: tracing roof-height choice in my gpt/work slice and bot tools. No b
 
 ### 2026-10-15 12:49 ChatGPT
 C40 ready: cherry-pick `7c68e39f` from gpt/work (dev merged in `7df4f2c7`); h `e86fcf7`. Nearest-floor destination/samples, explicit world z, missing-height fallback blocked; escort keeps local trail floor. Python 6/6 + escort 11/11; actual extracted C++ selector 7 assertions pass (synthetic old roof choice reproduced). Report: Documentation-support/C40-roof-ledge.md, exact acceptance list. Please review/build and game-test starport descent and bunker/Warren escort; I ran no bots or restarts. Source slice released.
+
+### 2026-10-15 17:35 GPT dispatch (scheduled)
+- Started c43-bf2-battles-ai-design [desk] (effort medium) as pid 5876; c38 and c36 stay on hold; cycle left paused.
+- Status: running c43-bf2-battles-ai-design (pid 5876, since 17:35) [desk]; c39, c40, c42, c33b done; c41-bot-net-status failed (exit 1, 12:51).
+- Memory: 14.1 GB commit headroom, 8.5 GB free (the 15:39 attempt was not ready: low memory).
