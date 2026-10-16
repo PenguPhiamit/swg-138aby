@@ -134,6 +134,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C51: approved checkout housekeeping (morning sheet 1-3)** | ChatGPT, Low | complete 2026-10-16 | `a5b7604`; targeted ignores, 45 cached-only removals, author inventory; queues/history/local files kept; 23 ignore checks pass |
 | **C50: verify idle-model medic/scout/entertainer XP research** | ChatGPT interactive, Medium | claimed 2026-10-16 | Read-only source audit of three local-model review topics; corrected references, no gameplay/server changes |
 | **C49: Claude Python follow-ups: escort range, doctor reapply, movement evidence** | ChatGPT interactive, Medium | source/offline complete; Claude runtime pending | b5cdbb6; 21 offline checks; C49-python-followups.md; no bot/server actions |
 | **C46: Discord feed + public bot map** | ChatGPT, Medium | offline complete 2026-10-16; staged for Claude review | `3150acf`; 53 tests pass + PNG visual/shell syntax checks; public serving/Discord/tunnel untested; nothing started or posted; start/stop docs in `Documentation-support/C46-discord-public-map.md` |
@@ -360,6 +361,10 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-16 08:49 ChatGPT: C51 approved checkout housekeeping complete
+
+- `a5b7604`: targeted ignores and 45 cached-only removals; all 15 present files retain their hashes, 30 rotated summaries stay in ZIP/history without restore. Queues remain tracked; remaining author commits listed in `Agent/checkout-churn-1016.md`; unfinished Fable work untouched. 23 ignore/exception checks pass. No files deleted or server/bot actions; next: each author reviews and commits their listed finished work. Oldest Log entry archived.
+
 ### 2026-10-16 04:20 ChatGPT: C49 complete; C50 idle source audit claimed
 
 - C49 source/report b5cdbb6: escort combat checks observed 3D range after approach, defers target openers, preserves target cell and resolves ID-matched leader 'me'; doctor gate accepts exact patient/attribute refresh receipts. 21 offline checks pass; all four saved false buff failures explained. No runtime acceptance claimed.
@@ -373,8 +378,3 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 ### 2026-10-16 03:58 ChatGPT: C46 Discord/public map staged
 
 - `3150acf`: anonymous public map, Windows PNG/status feed with PATCH identity, transition/watchdog alerts, 07:00 numeric digest and quick-tunnel wrapper; 53 offline tests pass, saved PNG visually checked, shell syntax clean. All runtime/delivery untested; no feed/map/tunnel started, no secrets read, posts, bots, server writes or restarts. Next: Claude reviews public mode, reloads the private map metadata and starts only after review/owner posting go; manual first-message pin. Start/stop guide: `Documentation-support/C46-discord-public-map.md`. Oldest Log entry archived.
-
-### 2026-10-16 03:47 ChatGPT: board and queue checked
-
-- Status check only; no implementation or bot/server actions. Queue: 33 done, 8 hold, 2 failed, 2 open. Ready order C46 staging-only Discord/public-map tooling, then C48 run-8 analysis/morning sheet; neither output exists yet. C47 completed by Claude helper 3639bb2 despite queue hold. C45 dev fixes db5952f5 + 74fa3e8c are reported integrated; crafting/full-datapad gameplay gates remain. C33/C41 failed queue entries need report reconciliation before retry. Source/code commits unchanged; next work awaits owner direction.
-

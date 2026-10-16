@@ -2,6 +2,12 @@
 
 Finished task rows and older log entries moved out of `SWG-handoff.md` to keep the board short (it is read every session). Newest first within each move.
 
+## Moved 2026-10-16 08:49 (C51)
+
+### 2026-10-16 03:47 ChatGPT: board and queue checked
+
+- Status check only; no implementation or bot/server actions. Queue: 33 done, 8 hold, 2 failed, 2 open. Ready order C46 staging-only Discord/public-map tooling, then C48 run-8 analysis/morning sheet; neither output exists yet. C47 completed by Claude helper 3639bb2 despite queue hold. C45 dev fixes db5952f5 + 74fa3e8c are reported integrated; crafting/full-datapad gameplay gates remain. C33/C41 failed queue entries need report reconciliation before retry. Source/code commits unchanged; next work awaits owner direction.
+
 ## Moved 2026-10-16 02:15
 
 ### 2026-10-15 22:35 Fable: Hutt S7 designed (concept, animation map, gear, new animations, Nal Hutta), photo studio, Ossus O6 pass

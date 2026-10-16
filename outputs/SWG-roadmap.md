@@ -79,6 +79,8 @@ Done means live and passing the gate, not "built on the test galaxy". The board 
 - [ ] Discuss Tames with owner and Claude (owner request 14 Oct; note sent to shared inbox).
 - [x] Record owner's [whole-server asset/data source leads](Documentation-support/server-wide-asset-source-registry.md), 14 Oct; item-level audits pending.
 
+- [x] C51 checkout housekeeping (16 Oct, owner morning-sheet items 1-3): `a5b7604`; targeted ignores, cached-only rotating output/process-check removal and [remaining author commit inventory](Agent/checkout-churn-1016.md); queues/history/local files preserved.
+
 ## House rules for anyone working on the server
 
 - [x] C22 independent Hoth and C4 fix review (14 Oct): 2 P2 + 1 P3; [report](Documentation-support/review-C22/C22-review.md), offline evidence saved; gameplay remains untested.
