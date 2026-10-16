@@ -117,6 +117,8 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 
 ## Task board
 
+**C48 â€” done ChatGPT, 16 Oct 4:03 AM (Medium): [morning sheet](Bot-reports/launch-sim/MORNING-SHEET.md), [run-8 numbers](Bot-reports/launch-sim/numbers-run8.md), [style/SP and watchdog](Bot-reports/launch-sim/run8-style-watchdog.md); report commit `bc166df`. Active-run checkpoint through 3:59 AM; no bot commands or galaxy changes.**
+
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
 | **C46: Discord feed + public bot map** | ChatGPT, Medium | offline complete 2026-10-16; staged for Claude review | `3150acf`; 53 tests pass + PNG visual/shell syntax checks; public serving/Discord/tunnel untested; nothing started or posted; start/stop docs in `Documentation-support/C46-discord-public-map.md` |
@@ -343,6 +345,10 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-16 04:03 ChatGPT: C48 overnight checkpoint and morning sheet
+
+- Reports `bc166df`: run 8 through 3:59 AM, 1,700 bots, 20,009 kills, 1,043 deaths, 2,358 completed missions; style/SP totals reconcile. Morning sheet lists 29 owner decisions with recommendations; watchdog has no recorded low-memory despawn, latest 6,646 MB available. 748 snapshots exceed their assigned point-budget label; cap enforcement unverified. Read-only WSL analysis only; crafting/full-datapad, Hutt/Ossus client checks and live release remain open. Next: owner decisions and Claude runtime follow-up; oldest log entry archived.
+
 ### 2026-10-16 03:58 ChatGPT: C46 Discord/public map staged
 
 - `3150acf`: anonymous public map, Windows PNG/status feed with PATCH identity, transition/watchdog alerts, 07:00 numeric digest and quick-tunnel wrapper; 53 offline tests pass, saved PNG visually checked, shell syntax clean. All runtime/delivery untested; no feed/map/tunnel started, no secrets read, posts, bots, server writes or restarts. Next: Claude reviews public mode, reloads the private map metadata and starts only after review/owner posting go; manual first-message pin. Start/stop guide: `Documentation-support/C46-discord-public-map.md`. Oldest Log entry archived.
@@ -356,8 +362,3 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 - Since 22:40: runs 6-8 (spawn level gate and five newbie fixes `b20a46d7`; bots on missions near their level that follow the mission waypoint `41ea45b5`; C44 F2/F5/F8 `e033e8b8`; C45 recipe fix `db5952f5` + one-item delivery `74fa3e8c`; per-type XP `40af2c78`; multiclass new players `8b48a044`). Run 8: 603 missions paid by 01:50, deaths with a killer 8+ levels above the bot down from 24-33% to 7%.
 - Helpers' reports: C47 report tools `3639bb2`, Hutt animation table `e55bd4d`, Ossus o7 build data `4502fc7`, C30 census check and city proposals `797d19d`, checkout churn `d815f5b`, pre-CU player builds `4cefab2`, player cities `e2e058e`, Ossus census `b589da3`.
 - Owner decisions waiting: GPT's C48 morning sheet collects them. The 6-mission release still needs an in-game crafting-mission test and the full-datapad gate.
-
-### 2026-10-15 23:46 ChatGPT: C45 shared mission recipe fix ready
-
-- Source `e75794da` on `gpt/c45-mission-recipes` from dev `40af2c78`; report/diff/tests `dfe81df` (`Documentation-support/review-C44/F1-fix.md`). Preserve shared recipes on abort/complete; final consumer cleans up. Other terminal mission types checked; 12 offline checks/1,284 model cases pass. Unbuilt (no Core3-gpt build), gameplay untested; next: Claude review/cherry-pick/build and two-/three-mission tests, plus existing full-datapad gate. No dev/test-galaxy writes, bots, restarts or deploys; run 6 untouched.
-
