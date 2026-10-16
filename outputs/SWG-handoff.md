@@ -115,6 +115,17 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 - Hutt: Claude picks the species ID; chairs refused until new animations exist; Huttese at creation, yes; **the floater is crafted by Artisans** (not free at creation); Nal Hutta's first look in the same restart as the Hutt check.
 - Ossus: craters 2-4 m deep as designed; start with two settlement fields (Westmarch and Knossa Fields); Krayt's garrison on the benchland rim over the ruins; the Vong project fields held until the voxyn content exists.
 
+**Owner's answers, 16 Oct 05:40 (Claude's chat, prompt cards; GPT's C48 morning sheet `Bot-reports/launch-sim/MORNING-SHEET.md` and `Documentation-support/player-cities-research.md`):**
+- **Team:** Claude Opus 5.5 and GPT 6.1 Sol only. Fable is retired (its scheduled tasks stay disabled); no Sonnet or Haiku helper fleets. The local Ollama model stays as the idle-research fallback.
+- Housekeeping (sheet 1-3): approved as GPT recommended (targeted ignore rules; untrack rotating run output and process checks; queues stay tracked; each author commits their own finished work; nothing deleted without its author).
+- Spawns (sheet 4-10): **test all of them** in the next run: T1, T2 and S1-S5 (`Bot-reports/launch-sim/city-spawn-proposals.patch`).
+- Ossus (sheet 11-13): accept all: 2 m crater floors, the pod on crater 2, field feather 0.3, POI 17 to the flat foothills (x 1,850-2,450 / y -4,800 to -4,500), and the terrain-driven moves of POIs 5, 6, 8, 9, 10, 16.
+- Six-mission live release (27): **hold** until Claude's in-game checks (shared crafting recipes, relog, six missions and the seventh refused, the full-datapad gate).
+- Playable Hutt (28): **full build now**, by Claude and GPT only; the owner checks it in the client.
+- Multiclass (29): bots heal others for medical XP, the researched buying orders, a real 250-point cap (the server reset 250-point bots to 1,000 in run 8, so run 8's split is void); restart when built.
+- AGENTS.md's 'stop the test galaxy when nobody is testing' stays as written (an unattended simulation does not count as testing).
+- Player cities: Q1 disposable simulation towns first, persistent ones later from a staff Town Keeper; Q2 a 6-minute simulated week on the test copy only; Q3 bots use at most 30% of a planet's city slots, never on the planet being tested; Q4 political XP grants only in labeled accelerated runs; Q5 bots donate plus logged treasury top-ups, with a no-top-up baseline, upkeep x0.5 kept; Q6 a monthly Home Show / Best Dressed City with a modest credit prize; Q7 test 30 decorations per rank and zero decoration upkeep; Q8 make Clone Lab and Entertainment District work at their configured values; **Q9 the CitiesAllowed guard only: no player cities on Hoth or Ossus**; **Q10 no terrain edits for founding sites**; Q11 a pilot of 10 static event props per city; Q12 era-fitting names and themes from our own lists; **Q13 do not cite Legends or Restoration pages** (remove those citations).
+
 ## Task board
 
 **C48 â€” done ChatGPT, 16 Oct 4:03 AM (Medium): [morning sheet](Bot-reports/launch-sim/MORNING-SHEET.md), [run-8 numbers](Bot-reports/launch-sim/numbers-run8.md), [style/SP and watchdog](Bot-reports/launch-sim/run8-style-watchdog.md); report commit `bc166df`. Active-run checkpoint through 3:59 AM; no bot commands or galaxy changes.**
