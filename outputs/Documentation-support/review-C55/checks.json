@@ -1,0 +1,776 @@
+{
+  "head_start": "a8ece12b6705158b1ec9706ba61077a4249be226",
+  "pins": {
+    "b20a46d7": {
+      "full_hash": "b20a46d7550ec2b720f606158812309a8763e5bd",
+      "changed_files": [
+        "MMOCoreORB/bin/scripts/managers/planet/talus_regions.lua",
+        "MMOCoreORB/bin/scripts/managers/planet/tatooine_regions.lua",
+        "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/naboo/naboo_capper_spineflap_flight_neutral_none.lua",
+        "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/naboo/naboo_nightspider_pack_newbie_neutral_none.lua",
+        "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/serverobjects.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_beachtown_easy_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_beachtown_medium_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_deeja_easy_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_deeja_medium_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_keren_easy_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_keren_medium_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_moenia_easy_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_moenia_medium_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_theed_easy_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_theed_medium_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/rori/rori_narmle_easy_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/rori/rori_narmle_medium_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/rori/rori_restuss_easy_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/rori/rori_restuss_medium_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_dearic_easy_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_dearic_medium_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_nashal_easy_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_nashal_medium_newbie.lua",
+        "MMOCoreORB/bin/scripts/screenplays/cities/rori_restuss.lua",
+        "MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h",
+        "MMOCoreORB/src/server/zone/objects/region/SpawnAreaImplementation.cpp"
+      ]
+    },
+    "40af2c78": {
+      "full_hash": "40af2c78ebad1257a9ff5972a4ea2a4ba80fa571",
+      "changed_files": [
+        "MMOCoreORB/src/server/zone/managers/player/PlayerManagerImplementation.cpp"
+      ]
+    },
+    "64156084": {
+      "full_hash": "64156084f356345376df59aa3ef007a1cc20bb84",
+      "changed_files": [
+        "MMOCoreORB/bin/scripts/mobile/spawn/corellia/coronet_easy_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/corellia/tyrena_easy_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_dearic_easy_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_dearic_medium_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_nashal_easy_newbie.lua",
+        "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_nashal_medium_newbie.lua",
+        "MMOCoreORB/bin/scripts/screenplays/cities/corellia_coronet.lua",
+        "MMOCoreORB/bin/scripts/screenplays/cities/corellia_tyrena.lua",
+        "MMOCoreORB/bin/scripts/screenplays/cities/naboo_kaadara.lua",
+        "MMOCoreORB/bin/scripts/screenplays/cities/talus_dearic.lua",
+        "MMOCoreORB/bin/scripts/screenplays/cities/talus_nashal.lua",
+        "MMOCoreORB/src/server/zone/managers/city/CityManagerImplementation.cpp"
+      ]
+    },
+    "74fa3e8c": {
+      "full_hash": "74fa3e8c5623395ef1f5975e504e69fa41c0c07c",
+      "changed_files": [
+        "MMOCoreORB/src/server/zone/objects/mission/CraftingMissionObjectiveImplementation.cpp"
+      ]
+    },
+    "3dca6772": {
+      "full_hash": "3dca67721ab752ef7b680c339f75b2c93e8e0bf9",
+      "changed_files": [
+        "MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h",
+        "MMOCoreORB/src/server/zone/managers/botpop/BotPopRegistry.h",
+        "MMOCoreORB/src/server/zone/objects/player/PlayerObjectImplementation.cpp"
+      ]
+    },
+    "61f5d886": {
+      "full_hash": "61f5d886e5aab552eff62b27010039b76cba4467",
+      "changed_files": [
+        "MMOCoreORB/src/server/zone/objects/player/events/SpawnHelperDroidTask.h"
+      ]
+    },
+    "26b54813": {
+      "full_hash": "26b54813f746b9f9679735f2bb982f0183b8ecb4",
+      "changed_files": [
+        "MMOCoreORB/bin/scripts/object/creature/player/hutt_female.lua",
+        "MMOCoreORB/bin/scripts/object/creature/player/hutt_male.lua",
+        "MMOCoreORB/bin/scripts/object/creature/player/objects.lua",
+        "MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua",
+        "MMOCoreORB/src/server/zone/managers/director/DirectorManager.cpp",
+        "MMOCoreORB/src/server/zone/objects/creature/CreatureObject.idl",
+        "MMOCoreORB/src/server/zone/objects/creature/commands/MountCommand.h",
+        "MMOCoreORB/src/server/zone/objects/creature/commands/SitServerCommand.h",
+        "MMOCoreORB/src/server/zone/objects/player/Races.h",
+        "MMOCoreORB/src/server/zone/objects/player/components/PlayerContainerComponent.cpp"
+      ]
+    }
+  },
+  "lua": [
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/managers/planet/talus_regions.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/managers/planet/tatooine_regions.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/naboo/naboo_capper_spineflap_flight_neutral_none.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/naboo/naboo_nightspider_pack_newbie_neutral_none.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/serverobjects.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_beachtown_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_beachtown_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_deeja_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_deeja_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_keren_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_keren_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_moenia_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_moenia_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_theed_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_theed_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/rori/rori_narmle_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/rori/rori_narmle_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/rori/rori_restuss_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/rori/rori_restuss_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_dearic_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_dearic_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_nashal_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_nashal_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "b20a46d7",
+      "path": "MMOCoreORB/bin/scripts/screenplays/cities/rori_restuss.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "64156084",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/corellia/coronet_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "64156084",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/corellia/tyrena_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "64156084",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_dearic_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "64156084",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_dearic_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "64156084",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_nashal_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "64156084",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_nashal_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "64156084",
+      "path": "MMOCoreORB/bin/scripts/screenplays/cities/corellia_coronet.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "64156084",
+      "path": "MMOCoreORB/bin/scripts/screenplays/cities/corellia_tyrena.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "64156084",
+      "path": "MMOCoreORB/bin/scripts/screenplays/cities/naboo_kaadara.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "64156084",
+      "path": "MMOCoreORB/bin/scripts/screenplays/cities/talus_dearic.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "64156084",
+      "path": "MMOCoreORB/bin/scripts/screenplays/cities/talus_nashal.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "26b54813",
+      "path": "MMOCoreORB/bin/scripts/object/creature/player/hutt_female.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "26b54813",
+      "path": "MMOCoreORB/bin/scripts/object/creature/player/hutt_male.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "26b54813",
+      "path": "MMOCoreORB/bin/scripts/object/creature/player/objects.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "26b54813",
+      "path": "MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/managers/planet/talus_regions.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/managers/planet/tatooine_regions.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/naboo/naboo_capper_spineflap_flight_neutral_none.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/naboo/naboo_nightspider_pack_newbie_neutral_none.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/serverobjects.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/corellia/coronet_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/corellia/tyrena_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_beachtown_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_beachtown_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_deeja_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_deeja_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_keren_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_keren_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_moenia_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_moenia_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_theed_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/naboo/naboo_theed_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/rori/rori_narmle_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/rori/rori_narmle_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/rori/rori_restuss_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/rori/rori_restuss_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_dearic_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_dearic_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_nashal_easy_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/talus/talus_nashal_medium_newbie.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/object/creature/player/hutt_female.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/object/creature/player/hutt_male.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/object/creature/player/objects.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/screenplays/cities/corellia_coronet.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/screenplays/cities/corellia_tyrena.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/screenplays/cities/naboo_kaadara.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/screenplays/cities/rori_restuss.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/screenplays/cities/talus_dearic.lua",
+      "returncode": 0,
+      "error": ""
+    },
+    {
+      "pin": "a8ece12b6705158b1ec9706ba61077a4249be226",
+      "path": "MMOCoreORB/bin/scripts/screenplays/cities/talus_nashal.lua",
+      "returncode": 0,
+      "error": ""
+    }
+  ],
+  "city_proposals": {
+    "corellia_coronet": 53,
+    "corellia_tyrena": 36,
+    "talus_dearic": 49,
+    "talus_nashal": 47,
+    "naboo_kaadara": 39
+  },
+  "references": [
+    {
+      "pin": "b20a46d7",
+      "name": "capper_spineflap",
+      "path": "MMOCoreORB/bin/scripts/mobile/naboo/capper_spineflap.lua",
+      "level": [
+        "6"
+      ],
+      "mentions": 1
+    },
+    {
+      "pin": "b20a46d7",
+      "name": "nightspider",
+      "path": "MMOCoreORB/bin/scripts/mobile/naboo/nightspider.lua",
+      "level": [
+        "7"
+      ],
+      "mentions": 1
+    },
+    {
+      "pin": "b20a46d7",
+      "name": "naboo_nightspider_pack_newbie_neutral_none",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/naboo/naboo_nightspider_pack_newbie_neutral_none.lua",
+      "level": [],
+      "mentions": 10
+    },
+    {
+      "pin": "b20a46d7",
+      "name": "rori_nightspider_lair_neutral_small",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_lair/rori/rori_nightspider_lair_neutral_small.lua",
+      "level": [],
+      "mentions": 4
+    },
+    {
+      "pin": "b20a46d7",
+      "name": "talus_fynock_youth_lair_neutral_small",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_lair/talus/talus_fynock_youth_lair_neutral_small.lua",
+      "level": [],
+      "mentions": 4
+    },
+    {
+      "pin": "b20a46d7",
+      "name": "talus_fynock_lair_neutral_small_01",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_lair/talus/talus_fynock_lair_neutral_small_01.lua",
+      "level": [],
+      "mentions": 8
+    },
+    {
+      "pin": "b20a46d7",
+      "name": "talus_dung_mite_lair_neutral_small",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_lair/talus/talus_dung_mite_lair_neutral_small.lua",
+      "level": [],
+      "mentions": 4
+    },
+    {
+      "pin": "b20a46d7",
+      "name": "talus_paralope_herd_neutral_none",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/talus/talus_paralope_herd_neutral_none.lua",
+      "level": [],
+      "mentions": 4
+    },
+    {
+      "pin": "b20a46d7",
+      "name": "talus_paralope_lair_neutral_medium",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_lair/talus/talus_paralope_lair_neutral_medium.lua",
+      "level": [],
+      "mentions": 4
+    },
+    {
+      "pin": "64156084",
+      "name": "corellia_corellian_butterfly_drone_large_neutral_none",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/corellia/corellia_corellian_butterfly_drone_large_neutral_none.lua",
+      "level": [],
+      "mentions": 2
+    },
+    {
+      "pin": "64156084",
+      "name": "corellia_plumed_rasp_howling_large_neutral_none",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/corellia/corellia_plumed_rasp_howling_large_neutral_none.lua",
+      "level": [],
+      "mentions": 2
+    },
+    {
+      "pin": "64156084",
+      "name": "corellia_gubbur_herd_neutral_none",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/corellia/corellia_gubbur_herd_neutral_none.lua",
+      "level": [],
+      "mentions": 2
+    },
+    {
+      "pin": "64156084",
+      "name": "talus_putrid_decay_mite_hatchling_neutral_none",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/talus/talus_putrid_decay_mite_hatchling_neutral_none.lua",
+      "level": [],
+      "mentions": 4
+    },
+    {
+      "pin": "64156084",
+      "name": "talus_fynock_youth_lair_neutral_small",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_lair/talus/talus_fynock_youth_lair_neutral_small.lua",
+      "level": [],
+      "mentions": 4
+    },
+    {
+      "pin": "64156084",
+      "name": "corellian_butterfly_drone",
+      "path": "MMOCoreORB/bin/scripts/mobile/corellia/corellian_butterfly_drone.lua",
+      "level": [
+        "5"
+      ],
+      "mentions": 34
+    },
+    {
+      "pin": "64156084",
+      "name": "minor_gubbur",
+      "path": "MMOCoreORB/bin/scripts/mobile/corellia/minor_gubbur.lua",
+      "level": [
+        "4"
+      ],
+      "mentions": 32
+    },
+    {
+      "pin": "64156084",
+      "name": "paralope",
+      "path": "MMOCoreORB/bin/scripts/mobile/corellia/paralope.lua",
+      "level": [
+        "6"
+      ],
+      "mentions": 33
+    },
+    {
+      "pin": "64156084",
+      "name": "vrelt",
+      "path": "MMOCoreORB/bin/scripts/mobile/corellia/vrelt.lua",
+      "level": [
+        "6"
+      ],
+      "mentions": 16
+    },
+    {
+      "pin": "64156084",
+      "name": "gnort",
+      "path": "MMOCoreORB/bin/scripts/mobile/naboo/gnort.lua",
+      "level": [
+        "4"
+      ],
+      "mentions": 16
+    },
+    {
+      "pin": "64156084",
+      "name": "chuba",
+      "path": "MMOCoreORB/bin/scripts/mobile/naboo/chuba.lua",
+      "level": [
+        "5"
+      ],
+      "mentions": 15
+    },
+    {
+      "pin": "64156084",
+      "name": "mott_calf",
+      "path": "MMOCoreORB/bin/scripts/mobile/naboo/mott_calf.lua",
+      "level": [
+        "4"
+      ],
+      "mentions": 8
+    },
+    {
+      "pin": "64156084",
+      "name": "fearful_fynock_youth",
+      "path": "MMOCoreORB/bin/scripts/mobile/talus/fearful_fynock_youth.lua",
+      "level": [
+        "5"
+      ],
+      "mentions": 42
+    },
+    {
+      "pin": "64156084",
+      "name": "putrid_decay_mite_hatchling",
+      "path": "MMOCoreORB/bin/scripts/mobile/talus/putrid_decay_mite_hatchling.lua",
+      "level": [
+        "7"
+      ],
+      "mentions": 16
+    },
+    {
+      "pin": "64156084",
+      "name": "feared_fynock_youth",
+      "path": "MMOCoreORB/bin/scripts/mobile/talus/feared_fynock_youth.lua",
+      "level": [
+        "7"
+      ],
+      "mentions": 12
+    }
+  ],
+  "spawn_gate": {
+    "base": 10,
+    "solo_max": 25,
+    "solo_threshold": 85,
+    "krayt_rows": [
+      [
+        "tatooine_canyon_krayt_dragon_pack_neutral_none",
+        122
+      ],
+      [
+        "tatooine_giant_canyon_krayt_dragon_pack_neutral_none",
+        275
+      ],
+      [
+        "tatooine_krayt_dragon_grand_neutral_none",
+        320
+      ],
+      [
+        "tatooine_krayt_dragon_ancient_neutral_none",
+        320
+      ]
+    ],
+    "solo_rejected": [
+      "tatooine_canyon_krayt_dragon_pack_neutral_none",
+      "tatooine_giant_canyon_krayt_dragon_pack_neutral_none",
+      "tatooine_krayt_dragon_grand_neutral_none",
+      "tatooine_krayt_dragon_ancient_neutral_none"
+    ]
+  },
+  "proposal_added_rows_match": true,
+  "proposal_removed_lair_rows_match": true,
+  "head_end": "a8ece12b6705158b1ec9706ba61077a4249be226",
+  "lua_invocations": 74,
+  "distinct_lua_files": 35,
+  "lua_failures": []
+}
