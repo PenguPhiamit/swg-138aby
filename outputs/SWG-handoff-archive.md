@@ -2,6 +2,18 @@
 
 Finished task rows and older log entries moved out of `SWG-handoff.md` to keep the board short (it is read every session). Newest first within each move.
 
+## Moved 2026-10-16 16:28 (Claude, content backlog)
+
+### 2026-10-16 08:56 ChatGPT: C52 city answers and M1 plan complete
+
+- `dc469f8`: removed excluded citations and dependent claims, recorded all 13 owner answers, wrote `Documentation-support/bot-cities-plan.md` with Claude's build order and maintenance/jitter/slot probes. CRLF, answer/source scans and diff checks pass; no code or server/bot actions. Implementation and in-game acceptance untested; next: Claude reviews and builds M1. Oldest Log entry archived.
+
+## Moved 2026-10-16 16:08 (C55)
+
+### 2026-10-16 08:49 ChatGPT: C51 approved checkout housekeeping complete
+
+- `a5b7604`: targeted ignores and 45 cached-only removals; all 15 present files retain their hashes, 30 rotated summaries stay in ZIP/history without restore. Queues remain tracked; remaining author commits listed in `Agent/checkout-churn-1016.md`; unfinished Fable work untouched. 23 ignore/exception checks pass. No files deleted or server/bot actions; next: each author reviews and commits their listed finished work. Oldest Log entry archived.
+
 ## Moved 2026-10-16 08:49 (C51)
 
 ### 2026-10-16 03:47 ChatGPT: board and queue checked

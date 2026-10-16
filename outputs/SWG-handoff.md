@@ -136,6 +136,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C55: first-release independent non-bot dev review** | ChatGPT, High | complete; changes requested 2026-10-16 16:08 | `fbee3aa`: [report](Documentation-support/review-C55/C55-review.md); open inherited helper P1 + global spawn-gate P2; XP/delivery/city-guard source shortlist; 74 Lua checks pass; gameplay untested; no galaxy actions |
 | **C54: review playable Hutt; Artisan floater and Hutt names** | ChatGPT, High review / Medium source | review/source complete; Claude integration pending | `82e52303`, `deb3319e`, `8ebace32` on gpt/c54-hutt-floater (base 26b54813); report/tool `a07d346`, Documentation-support/hutt-c54.md; 1 P1 + 5 P2; client stats/text/builder fixes open; full build/gameplay untested; run 10 untouched |
 | **C53: apply accepted Ossus o7 decisions** | ChatGPT, Medium | staging complete 2026-10-16 | `3f64720`; POI 17 (2200, -4725), accepted settings retained; run_all ALL CHECKS PASS (119 s), 90 server references pass; client untested; nothing packed or deployed |
 | **C52: owner city answers, source cleanup and M1 probe plan** | ChatGPT, Medium | complete 2026-10-16 | `dc469f8`; excluded citations/sole-source claims removed, Q1-Q13 recorded, ordered M1 plan; documentation checks pass; implementation/runtime untested |
@@ -366,6 +367,14 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-16 16:28 Claude: Fable's content-design job: ranked backlog and faction plan
+
+- `Fable-backlog/README.md` + `backlog.json`: 73 cut and custom items by theme (71 ranked, Hutt and world boss in flight), client archives surveyed with swgfmt. Top 5: Ossus O7 build, Hoth leftovers, Nal Hutta first look, faction foundation, Ossus people; next to design: faction data, Ossus people, Nautolan/Togruta/Chiss names and profiles. `Fable-factions/README.md`: the 138-139 ABY sides checked on Wookieepedia (Legends), Core3 faction code read-only (dev `a8ece12b`), options A/B/C, recommends A (two GCW sides as Triumvirate and Krayt's holdouts, seven NPC standing sides), 13 owner questions with defaults. Design only; nothing built, run or written under /opt/swg. Board commit includes ChatGPT's finished C55 row and entry (report `fbee3aa`). Oldest Log entry archived.
+
+### 2026-10-16 16:08 ChatGPT: C55 release review complete
+
+- Reviewed by ChatGPT: seven requested non-bot commits; report/evidence `fbee3aa`, `Documentation-support/review-C55/C55-review.md`. Open inherited helper lock P1 and global spawn-gate P2; original Hutt defects already corrected by excluded C54 source. XP, delivery-on-C45 and isolated city guard fit in source; spawn experiments/bot workaround stay on test. 74 Lua checks pass; gameplay/mission/Hutt gates remain untested here. No server writes or galaxy commands. Next: Claude fixes/splits, acceptance, exact release cross-review and owner OK. Oldest Log entry archived.
+
 ### 2026-10-16 09:12 ChatGPT: C54 Hutt review and source complete
 
 - Reviewed by ChatGPT: 26b54813/S7, 1 P1 + 5 P2 with failing cases; `82e52303` species/refusals, `deb3319e` Artisan floater, `8ebace32` Hutt names on gpt/c54-hutt-floater; report/client staging `a07d346`. 17 changed/new Lua pass; all 47,406 checked (one unchanged legacy migration error); race-header/LAT/link/archive checks pass. No configured build; full server/gameplay untested. Next: Claude review/cherry-pick, fix client profile/text/builder gates, owner floater visit. Run 10/dev/galaxy untouched; oldest log entry archived.
@@ -374,10 +383,3 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 - `3f64720`: accepted crater/pod/field and six POI layouts retained; POI 17 centre (2200, -4725), minimum tested 600 x 300 m relief 12.56 m. `run_all.py` ALL CHECKS PASS (119 s), 90 read-only server references pass; README regenerated/open decisions closed. Client checks and two existing POI 13 boulder tilt warnings remain untested; next: Claude review and owner client visit. No packing, /opt/swg writes or galaxy commands. Oldest Log entry archived.
 
-### 2026-10-16 08:56 ChatGPT: C52 city answers and M1 plan complete
-
-- `dc469f8`: removed excluded citations and dependent claims, recorded all 13 owner answers, wrote `Documentation-support/bot-cities-plan.md` with Claude's build order and maintenance/jitter/slot probes. CRLF, answer/source scans and diff checks pass; no code or server/bot actions. Implementation and in-game acceptance untested; next: Claude reviews and builds M1. Oldest Log entry archived.
-
-### 2026-10-16 08:49 ChatGPT: C51 approved checkout housekeeping complete
-
-- `a5b7604`: targeted ignores and 45 cached-only removals; all 15 present files retain their hashes, 30 rotated summaries stay in ZIP/history without restore. Queues remain tracked; remaining author commits listed in `Agent/checkout-churn-1016.md`; unfinished Fable work untouched. 23 ignore/exception checks pass. No files deleted or server/bot actions; next: each author reviews and commits their listed finished work. Oldest Log entry archived.
