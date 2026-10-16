@@ -1,0 +1,35 @@
+[
+  {
+    "file": "MMOCoreORB/src/server/zone/objects/creature/commands/HealEnhanceCommand.h",
+    "terms": [
+      "reapply",
+      "re-apply",
+      "heal_enhance",
+      "hasBuff",
+      "getBuff",
+      "sendSystemMessage"
+    ],
+    "before": 3,
+    "after": 5
+  },
+  {
+    "file": "MMOCoreORB/src/server/zone/packets/object/DataTransform.h",
+    "ranges": [
+      [
+        250,
+        350
+      ]
+    ]
+  },
+  {
+    "file": "MMOCoreORB/src/client/agent/AgentControl.cpp",
+    "terms": [
+      "maxRange",
+      "weapon",
+      "buffs",
+      "position_set_by_server"
+    ],
+    "before": 1,
+    "after": 3
+  }
+]

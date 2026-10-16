@@ -1,4 +1,4 @@
-"""Verify all four doctor enhancements by max-HAM changes, away from camp combat.
+"""Verify doctor enhancements by max-HAM gain or an exact server re-apply receipt.
 
 Never count command acknowledgements or unrelated/refusal messages as buffs.
 Medical-facility refusals identify the next prerequisite; no guessed cell IDs.
@@ -8,8 +8,27 @@ its medical rating (no treatment room), so the bots walk to an object that is in
 trainers stand in cell 9655496). healEnhance range is 7 m, and one ~20 s cooldown covers enhance and wound healing.
 Error 2 is either a missing ability or a refused posture/locomotion (INVALIDLOCOMOTION).
 """
+import math
+
 GROUP = 'Aurek'
 SQUARE = (3528, -4800)
+
+
+def enhancement_result(initial, after, events, patient, attribute):
+    """A refresh has no max-HAM gain; match the recipient and attribute exactly.
+
+    This proves the server accepted the refresh, not an independently measured duration.
+    Acknowledgements, other patients' messages, silence and any refusal never suffice.
+    """
+    valid = all(type(n) in (int, float) and math.isfinite(n) for n in (initial, after))
+    failed = any(e.get('event') == 'command_failed' for e in events)
+    refreshed = any(e.get('event') == 'system' and e.get('text') ==
+                    f"You re-apply {patient}'s {attribute.title()} enhancement." for e in events)
+    if not valid or failed:
+        return 'unverified'
+    if after > initial:
+        return 'increased'
+    return 'reapplied' if refreshed and after == initial else 'unverified'
 
 
 def ready(status):
@@ -76,15 +95,15 @@ def run(g):
                        'locomotion was refused (stand still and retry); science_doctor_wound_02 is in her training')
                 return
             after = fighter.status().get('me', {}).get('max_ham', {}).get(attribute)
-            gained = isinstance(after, (int, float)) and after > initial
-            g.check(f'{fighter.first} receives {attribute} enhancement', gained and not failures,
+            outcome = enhancement_result(initial, after, events, fighter.first, attribute)
+            g.check(f'{fighter.first} receives {attribute} enhancement', outcome != 'unverified',
                     {'max_ham_before': initial, 'max_ham_after': after,
-                     'messages': texts, 'failures': failures})
+                     'outcome': outcome, 'messages': texts, 'failures': failures})
             if any('must_be_near_droid' in str(t) for t in texts):
                 g.note('RULE: enhancement refused at town staging point; map a medical-centre '
                        'cell or provide a medical droid before retrying. No buff verified.')
                 return
-            if not gained and not failures:
+            if outcome == 'unverified' and not failures:
                 g.note(f'{fighter.first} {attribute}: no max-HAM gain observed. Existing buff '
                        'refresh is unverified: body exposes no buff list/duration; do not infer success.')
             # One ~20 s cooldown covers enhance and wound healing; it ends with healing_response_59.

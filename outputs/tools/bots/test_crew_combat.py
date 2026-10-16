@@ -12,17 +12,22 @@ class FakeBot:
     def __init__(self, first, oid, skills, health=1000, ticks_to_kill=3):
         self.first, self.oid, self.skills, self.health = first, oid, skills, health
         self.looks, self.ticks_to_kill, self.sent, self.moves = 0, ticks_to_kill, [], []
+        self.x, self.y = 0.0, 0.0
 
     def profession(self, name):
         return {'skills': self.skills}
 
     def status(self):
         return {'me': {'ham': {'health': self.health}, 'max_ham': {'health': 1000}, 'posture': 'upright'},
-                'x': 0.0, 'y': 0.0, 'self': self.oid}
+                'x': self.x, 'y': self.y, 'z': 0.0, 'self': self.oid}
 
     def look(self, radius, type, limit):
         self.looks += 1
-        return [{'oid': TARGET, 'x': 30.0, 'y': 0.0, 'posture': 'dead' if self.looks > self.ticks_to_kill else 'upright'}]
+        return [{'oid': TARGET, 'x': 30.0, 'y': 0.0, 'z': 0.0, 'posture': 'dead' if self.looks > self.ticks_to_kill else 'upright'}]
+
+    def inspect(self, oid):
+        return {'ok': True, 'oid': oid, 'x': 30.0, 'y': 0.0, 'z': 0.0, 'parent': 0,
+                'creature': {'posture': 'upright'}}
 
     def slash(self, name, args='', target=0, wait=0):
         self.sent.append((name, target))
@@ -32,7 +37,8 @@ class FakeBot:
 
     def move(self, x, y, z=None, cell=None, timeout=90):
         self.moves.append((round(x), round(y)))
-        return {}
+        self.x, self.y = x, y
+        return {'arrived': True, 'x': x, 'y': y}
 
     def idle(self, seconds):
         time.sleep(.01)  # the real tick is 2 s; this only lets the threads interleave

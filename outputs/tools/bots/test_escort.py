@@ -19,6 +19,7 @@ class Bot:
         self.stance = 'upright'
         self.now = {'zone': 'tatooine'}
         self.planet = 'tatooine'
+        self.position = (100.0, 90.0, 0.0)
 
     def _read(self):
         pass
@@ -26,7 +27,8 @@ class Bot:
     def status(self):
         self.inbox = []
         return {'me': {'ham': {'health': 1000}, 'max_ham': {'health': 1000}, 'posture': self.stance},
-                'x': 100.0, 'y': 90.0, 'self': self.oid, 'cell': 0, 'planet': self.planet}
+                'x': self.position[0], 'y': self.position[1], 'z': self.position[2],
+                'self': self.oid, 'cell': 0, 'planet': self.planet}
 
     def inspect(self, oid):
         return self.view.get(oid, {'ok': False})
@@ -42,6 +44,8 @@ class Bot:
 
     def move(self, x, y, z=None, cell=None, timeout=90):
         self.moves.append((round(x), round(y)))
+        if not hasattr(self, 'move_reply'):
+            self.position = (x, y, z or 0.0)
         return dict(self.move_reply) if hasattr(self, 'move_reply') else {}
 
     def idle(self, seconds):

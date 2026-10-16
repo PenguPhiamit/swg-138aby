@@ -1,0 +1,322 @@
+[
+  {
+    "report": "20261015-162921-besh-harvest.json",
+    "sha256": "6fe37bf08cfc3ed161924b970456d24b5e5657da231ed3a149b6f293e2d661c8",
+    "correction_events": {
+      "Besh": 0,
+      "Dova": 0,
+      "Pell": 1,
+      "Varo": 3
+    },
+    "posture_event_count": 0,
+    "moves": [
+      {
+        "bot": "Besh",
+        "completion_t": 1.4,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3528,
+          "y": -4800
+        },
+        "outcome": "arrived",
+        "final_position": {
+          "x": 3528.0,
+          "y": -4800.0,
+          "z": 5.0
+        }
+      },
+      {
+        "bot": "Dova",
+        "completion_t": 1.5,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3531,
+          "y": -4800
+        },
+        "outcome": "arrived",
+        "final_position": {
+          "x": 3531.0,
+          "y": -4800.0,
+          "z": 5.0
+        }
+      },
+      {
+        "bot": "Pell",
+        "completion_t": 2.5,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3663,
+          "y": -4940
+        },
+        "outcome": "arrived",
+        "final_position": {
+          "x": 3663.0,
+          "y": -4940.0,
+          "z": 5.0
+        }
+      },
+      {
+        "bot": "Varo",
+        "completion_t": 66.9,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3660,
+          "y": -4940
+        },
+        "outcome": "arrived",
+        "final_position": {
+          "x": 3660.0,
+          "y": -4940.0,
+          "z": 5.085049629211426
+        }
+      },
+      {
+        "bot": "Varo",
+        "completion_t": 80.0,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3710,
+          "y": -4980
+        },
+        "outcome": "generic correction failure",
+        "final_position": {
+          "x": 3688.298828125,
+          "y": -4962.63916015625
+        }
+      },
+      {
+        "bot": "Pell",
+        "completion_t": 83.6,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3713,
+          "y": -4980
+        },
+        "outcome": "arrived",
+        "final_position": {
+          "x": 3713.0,
+          "y": -4980.0,
+          "z": 14.936962127685547
+        }
+      }
+    ],
+    "reason": "undetermined: position_set_by_server carries no rejection reason"
+  },
+  {
+    "report": "20261015-163055-cresh-missions.json",
+    "sha256": "1e00e7eaed2436deb880213aaa13cc19945fcc7bba8367c860e4f7a868834cd7",
+    "correction_events": {
+      "Cresh": 5,
+      "Ilsa": 3,
+      "Kor": 3
+    },
+    "posture_event_count": 0,
+    "moves": [
+      {
+        "bot": "Ilsa",
+        "completion_t": 87.8,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3709.47705078125,
+          "y": -4865.0
+        },
+        "outcome": "generic correction failure",
+        "final_position": {
+          "x": 4181.7490234375,
+          "y": -4904.74072265625
+        }
+      },
+      {
+        "bot": "Cresh",
+        "completion_t": 97.2,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3707.47705078125,
+          "y": -4865.0
+        },
+        "outcome": "timeout",
+        "final_position": {
+          "x": 4131.21142578125,
+          "y": -4900.69921875
+        }
+      },
+      {
+        "bot": "Kor",
+        "completion_t": 97.4,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3711.47705078125,
+          "y": -4865.0
+        },
+        "outcome": "timeout",
+        "final_position": {
+          "x": 3547.28369140625,
+          "y": -4969.3369140625
+        }
+      },
+      {
+        "bot": "Kor",
+        "completion_t": 129.0,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3711.47705078125,
+          "y": -4865.0
+        },
+        "outcome": "generic correction failure",
+        "final_position": {
+          "x": 3608.522216796875,
+          "y": -4881.97412109375
+        }
+      },
+      {
+        "bot": "Cresh",
+        "completion_t": 177.5,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3707.47705078125,
+          "y": -4865.0
+        },
+        "outcome": "generic correction failure",
+        "final_position": {
+          "x": 3795.421875,
+          "y": -4872.4091796875
+        }
+      }
+    ],
+    "reason": "undetermined: position_set_by_server carries no rejection reason"
+  },
+  {
+    "report": "20261015-163117-esk-routes.json",
+    "sha256": "25f78f1109fcc8339f46d26426ecf9103bbea01a55b5c364d57edd122277a53e",
+    "correction_events": {
+      "Esk": 4,
+      "Lira": 0,
+      "Tovan": 3
+    },
+    "posture_event_count": 0,
+    "moves": [
+      {
+        "bot": "Lira",
+        "completion_t": 8.1,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3546,
+          "y": -4790
+        },
+        "outcome": "arrived",
+        "final_position": {
+          "x": 3546.0,
+          "y": -4790.0,
+          "z": 5.0
+        }
+      },
+      {
+        "bot": "Tovan",
+        "completion_t": 59.8,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3830,
+          "y": -4530
+        },
+        "outcome": "generic correction failure",
+        "final_position": {
+          "x": 3626.90087890625,
+          "y": -4622.80224609375
+        }
+      },
+      {
+        "bot": "Esk",
+        "completion_t": 96.3,
+        "cell": 1105883,
+        "explicit_z": true,
+        "destination": {
+          "x": 16.58,
+          "y": -14.21,
+          "z": -4.29
+        },
+        "outcome": "arrived",
+        "final_position": {
+          "x": 16.579999923706055,
+          "y": -14.210000038146973,
+          "z": -4.289999961853027
+        }
+      },
+      {
+        "bot": "Lira",
+        "completion_t": 102.9,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3531,
+          "y": -4800
+        },
+        "outcome": "arrived",
+        "final_position": {
+          "x": 3531.0,
+          "y": -4800.0,
+          "z": 5.0
+        }
+      },
+      {
+        "bot": "Tovan",
+        "completion_t": 150.9,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3534,
+          "y": -4800
+        },
+        "outcome": "arrived",
+        "final_position": {
+          "x": 3534.0,
+          "y": -4800.0,
+          "z": 5.085049629211426
+        }
+      },
+      {
+        "bot": "Esk",
+        "completion_t": 191.9,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3528,
+          "y": -4800
+        },
+        "outcome": "timeout",
+        "final_position": {
+          "x": 3459.904052734375,
+          "y": -4748.43603515625
+        }
+      },
+      {
+        "bot": "Esk",
+        "completion_t": 199.8,
+        "cell": 0,
+        "explicit_z": false,
+        "destination": {
+          "x": 3528,
+          "y": -4800
+        },
+        "outcome": "generic correction failure",
+        "final_position": {
+          "x": 3473.648681640625,
+          "y": -4750.9921875
+        }
+      }
+    ],
+    "reason": "undetermined: position_set_by_server carries no rejection reason"
+  }
+]

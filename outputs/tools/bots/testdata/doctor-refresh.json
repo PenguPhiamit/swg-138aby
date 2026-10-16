@@ -1,0 +1,57 @@
+{
+  "source_report": "20261015-162926-aurek-doctor-buffs.json",
+  "rows": [
+    {
+      "patient": "Aurek",
+      "attribute": "health",
+      "before": 1235,
+      "after": 1235,
+      "events": [
+        {
+          "event": "system",
+          "text": "You re-apply Aurek's Health enhancement."
+        }
+      ]
+    },
+    {
+      "patient": "Aurek",
+      "attribute": "action",
+      "before": 1035,
+      "after": 1035,
+      "events": [
+        {
+          "event": "system",
+          "text": "You re-apply Aurek's Action enhancement."
+        }
+      ]
+    },
+    {
+      "patient": "Jesh",
+      "attribute": "health",
+      "before": 1135,
+      "after": 1135,
+      "events": [
+        {
+          "event": "system",
+          "text": "You re-apply Jesh's Health enhancement."
+        }
+      ]
+    },
+    {
+      "patient": "Jesh",
+      "attribute": "action",
+      "before": 1135,
+      "after": 1135,
+      "events": [
+        {
+          "event": "system",
+          "text": "You re-apply Jesh's Action enhancement."
+        },
+        {
+          "event": "system",
+          "text": "\\#ffcc66[World boss]\\#ffffff Gnasher the Graul Marauder has been sighted on Dantooine. Ask a big game hunter in Mos Eisley for its trail."
+        }
+      ]
+    }
+  ]
+}

@@ -73,12 +73,23 @@ def _toward(me, obj, stop):
     return obj['x'] - dx / d * stop, obj['y'] - dy / d * stop
 
 
+def attack_distance(row, obj):
+    """Distance only for known finite coordinates in the same cell frame."""
+    if (row.get('cell') or 0) != (obj.get('cell', obj.get('parent')) or 0):
+        return None
+    axes = ('x', 'y', 'z')
+    if not all(type(p.get(k)) in (int, float) and math.isfinite(p[k]) for p in (row, obj) for k in axes):
+        return None
+    return math.sqrt(sum((obj[k] - row[k]) ** 2 for k in axes))
+
+
 class Fighter:
     """One bot's side of a fight, one tick at a time (fight() below, and escort.py). Talks only to its own bot."""
 
     def __init__(self, bot, role, record):
         self.bot, self.role, self.rec = bot, role, record
         self.turn, self.last_ok, self._rotation = 0, True, None
+        self.pending_openers = []
 
     def rotation(self):
         if self._rotation is None:
@@ -95,19 +106,41 @@ class Fighter:
         return not refused
 
     def open(self, target):
-        for call in self.role.get('opener', []):
-            self.send(call, target)
+        # Some opening group calls target the enemy. Queue them until strike has
+        # verified range, just like the ordinary rotation.
+        self.pending_openers = [(call, target) for call in self.role.get('opener', [])]
 
     def strike(self, row, obj):
         """Close to reach if needed, then one attack: a special while the last one landed; the plain attack
         after a refusal (cooldown, action) and every third tick, as a player would weave them."""
-        gap = math.hypot(obj['x'] - row['x'], obj['y'] - row['y']) if row.get('x') is not None else 0
+        gap = attack_distance(row, obj)
+        if gap is None:
+            return False
         ranged = self.role.get('ranged')
-        if gap > (self.role.get('reach', RANGED_REACH) if ranged else MELEE_REACH):
-            x, y = _toward(row, obj, self.role.get('stand', RANGED_STAND) if ranged else 1.5)
+        reach = self.role.get('reach', RANGED_REACH) if ranged else self.role.get('reach', MELEE_REACH)
+        if gap > reach:
+            stop = min(self.role.get('stand', RANGED_STAND), reach * .75) if ranged else min(1.5, reach * .75)
+            x, y = _toward(row, obj, stop)
             stand_up(self.bot, row)
             self.bot.move(x, y, *_indoors(row, obj), timeout=8)
             self.rec['moves'] += 1
+            # A move may time out, be corrected or stop short. Never attack from the
+            # stale pre-move position, nor mix world and cell-local coordinates.
+            previous_zone = row.get('zone')
+            row = self_row(self.bot, self.rec)
+            if previous_zone and row.get('zone') != previous_zone:
+                return False
+            seen = self.bot.inspect(obj['oid'])
+            if not seen.get('ok') or seen.get('creature', {}).get('posture') in DOWN:
+                return False
+            obj = dict(seen, oid=obj['oid'])
+            gap = attack_distance(row, obj)
+            if gap is None or gap > reach or row.get('posture') in DOWN:
+                self.rec['approach_deferred'] = self.rec.get('approach_deferred', 0) + 1
+                return False
+        for call, target in self.pending_openers:
+            self.send(call, target)
+        self.pending_openers = []
         rotation = self.rotation()
         if rotation and self.last_ok and self.turn % 3 != 2:
             self.last_ok = self.send(rotation[self.turn % len(rotation)], obj['oid'])
@@ -115,6 +148,7 @@ class Fighter:
             self.send('attack', obj['oid'])
             self.last_ok = True
         self.turn += 1
+        return True
 
 
 class Healer(Fighter):
@@ -176,7 +210,7 @@ def self_row(bot, rec=None):
     ratio = ham.get('health', 0) / top['health'] if top.get('health') else 1.0
     if rec is not None:
         rec['lowest_health'] = round(min(rec['lowest_health'], ratio), 2)
-    return {'health': ratio, 'posture': me.get('me', {}).get('posture'), 'x': me.get('x'), 'y': me.get('y'),
+    return {'health': ratio, 'posture': me.get('me', {}).get('posture'), 'x': me.get('x'), 'y': me.get('y'), 'z': me.get('z'),
             'oid': me.get('self'), 'cell': me.get('cell') or 0, 'zone': me.get('planet')}
 
 
@@ -220,7 +254,9 @@ def fight(g, target, roles, seconds=180):
             with lock:
                 patients = dict(table)
             if not healer.mend(row, patients) and role.get('weapon'):
-                healer.send('attack', target)
+                obj = _seek(bot, target)
+                if obj is not None and obj.get('posture') not in DOWN:
+                    healer.strike(row, obj)
             bot.idle(TICK)
         record[bot.first]['end'] = table.get(bot.first, {}).get('posture')
 

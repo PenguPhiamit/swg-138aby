@@ -94,6 +94,16 @@ def health_of(creature):
     return ham.get('health', 0) / top['health'] if top.get('health') else 1.0
 
 
+def combat_names(event, observer):
+    """Resolve the body's local 'me' label only when the participant ID agrees."""
+    row = {k: event.get(k) for k in ('attacker', 'attacker_name', 'defender',
+                                   'defender_name', 'amount', 'what', 'weapon')}
+    for side in ('attacker', 'defender'):
+        if row.get(side + '_name') == 'me' and observer.oid and row.get(side) == observer.oid:
+            row[side + '_name'] = observer.first
+    return row
+
+
 class Shared:
     """What the crew agrees on: orders, the player, threats. One lock; every bot thread reads and writes it."""
 
@@ -220,8 +230,7 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
                     answer(bot, verb, e.get('event') == 'tell')
             if e.get('event') == 'combat' and bot is g.leader:
                 me = shared.player.get('oid')
-                note_play({'kind': 'combat', **{k: e.get(k) for k in ('attacker', 'attacker_name', 'defender',
-                           'defender_name', 'amount', 'what', 'weapon')},
+                note_play({'kind': 'combat', **combat_names(e, bot),
                            'by_player': e.get('attacker') == me, 'on_player': e.get('defender') == me,
                            'by_crew': e.get('attacker') in crew_oids, 'on_crew': e.get('defender') in crew_oids})
             if e.get('event') == 'combat' and e.get('attacker') not in crew_oids \
@@ -256,7 +265,7 @@ def escort(g, owner, roles, minutes=120, formation=None, waypoints=None):
             creature = seen.get('creature') or {}
             if seen.get('ok') and seen.get('type') == 'CREO' and creature.get('posture') not in crew_combat.DOWN:
                 return {'oid': oid, 'x': seen.get('x'), 'y': seen.get('y'), 'z': seen.get('z'),
-                        'name': str(seen.get('name', '')).split(':')[-1]}
+                        'cell': seen.get('parent') or 0, 'name': str(seen.get('name', '')).split(':')[-1]}
         return None
 
     def follow(bot, row, player, zone_row):
