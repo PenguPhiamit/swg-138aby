@@ -1,0 +1,2321 @@
+{
+ "title": "Ranked backlog of our cut and custom content",
+ "date": "2026-10-16",
+ "author": "Claude Opus 5.5 (taking over the content-design job Fable had queued)",
+ "readme": "README.md",
+ "scales": {
+  "kind": {
+   "cut": "from SOE's own client files: never shipped, unfinished, or later SOE content a pre-CU galaxy never had",
+   "custom": "ours, or community work we adapt (credit and catalogue rating in \"source\")"
+  },
+  "size": {
+   "S": "about a day of Claude build time",
+   "M": "2-3 days",
+   "L": "about a week",
+   "XL": "several weeks"
+  },
+  "value": "1-5: what it adds for a small friends' server",
+  "score": "value / cost (S=1, M=2, L=4, XL=8) + 0.5 per item it unblocks; a guide, not the rank",
+  "rank": "recommended build order; null = already built and waiting in the release lane"
+ },
+ "items": [
+  {
+   "id": "PL-01",
+   "name": "Ossus O7 build: craters, scorch, glass pan, two settlement fields, 16 places placed",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "ours (Fable o6 design, Claude o7 data, GPT C53 staging)",
+   "status": "staged",
+   "exists": [
+    "Fable-ossus/o6/README.md (design)",
+    "Fable-ossus/o7-build/ (statics.json 295 objects, terrain.json 14 layers, poi-placements.json, checks; C53 `3f64720`, ALL CHECKS PASS)",
+    "dev `2ada3784` (O5 first look on the test galaxy)"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "none for the statics (all 89 server templates exist in dev)",
+    "client": "rebuild ossus.trn and ossus.ws, region labels (stage_env.py), rebuild the archive chain on top of the C54 Hutt archive",
+    "testing": "owner client visit (craters, three flatland caves, pier, bridge); bot walk of the 16 places"
+   },
+   "size": "M",
+   "era_fit": "core: the 130 ABY massacre scars and the 130-139 occupation",
+   "depends_on": [],
+   "unblocks": [
+    "PL-02",
+    "DR-02",
+    "DR-03",
+    "PR-02"
+   ],
+   "decisions_made": "craters 2-4 m (floors 2 m for 4 and 5), Westmarch and Knossa Fields only, garrison on the benchland rim guarding the dig, POI 7 held, POI 17 in the foothills (owner 15 Oct 23:15 and 16 Oct 05:40)",
+   "decisions_open": "none before the build; the look after the client visit",
+   "value": 5,
+   "rank": 1,
+   "reason": "Designed, staged, every decision answered: only Claude's build and the owner's look stand between it and done.",
+   "score": 4.5
+  },
+  {
+   "id": "PL-05",
+   "name": "Hoth leftovers: the owner's 15 Oct answers",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "ours (Fable batches A-C)",
+   "status": "answered, not built",
+   "exists": [
+    "Fable-hoth-batchA/, Fable-hoth-batchB/ (ice-cave den option 1), Fable-hoth-batchC/",
+    "dev `c5f1ae06`, `69eb77fe`, `de1b679a`, `dd16bcff`, `54a33063`"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "density 1024; glacial rancor in a fixed den with respawn, pale blue (Chiss palette); quest badge + rare-decor roll; starport artisan and entertainer terminals; camp delivery points and junk dealer; recruiters at the starport only",
+    "client": "mynock ice-cave building + one flatten layer in hoth.trn; map names for areas, camps and dens",
+    "testing": "GPT's C23 Hoth acceptance; owner look at the den"
+   },
+   "size": "M",
+   "era_fit": "fair: an Outer Rim world; Echo Base is a 3 ABY ruin",
+   "depends_on": [],
+   "unblocks": [
+    "DR-01",
+    "FW-05"
+   ],
+   "decisions_made": "all of Q4 (15 Oct 15:30-16:10) and the ice-cave den (14 Oct set, Q9 option 1)",
+   "decisions_open": "none",
+   "value": 4,
+   "rank": 2,
+   "reason": "Fully answered and cheap; closes Hoth's content for the release gate (C24).",
+   "score": 3.0
+  },
+  {
+   "id": "PL-03",
+   "name": "Nal Hutta first look (Bilbousa)",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "community planet in MTG (catalogue P, creator credit required)",
+   "status": "designed",
+   "exists": [
+    "terrain/hutta.trn and snapshot/hutta.ws in SWG-client/mtg_planets.tre (verified today)",
+    "Fable-species/s7-hutt/README.md section 8 (first-look steps)",
+    "planet CRC rows hutta/nalhutta already in the installed table"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "zone on the test galaxy, planet_manager block (GCW off), hutta_regions.lua (edge strips, Bilbousa CITY+NOSPAWN)",
+    "client": "hutta_region_names.stf, planet name, travel rows (Tatooine <-> Nal Hutta), loading strings, credit line",
+    "testing": "owner lands and walks Bilbousa"
+   },
+   "size": "S",
+   "era_fit": "good: the kajidics' council world, unchanged through Krayt's years",
+   "depends_on": [],
+   "unblocks": [
+    "PL-04"
+   ],
+   "decisions_made": "first look in the same restart as the Hutt check (owner 15 Oct 23:15); not built yet",
+   "decisions_open": "fares and route",
+   "value": 4,
+   "rank": 3,
+   "reason": "Owner asked for it with the Hutt check; small; gives the Hutt and the cartel faction a home.",
+   "score": 4.5
+  },
+  {
+   "id": "FW-01",
+   "name": "Faction foundation (Option A): era meaning for the two GCW sides and seven NPC standing factions",
+   "theme": "factions-and-war",
+   "kind": "custom",
+   "source": "ours (Fable-factions/README.md)",
+   "status": "designed in outline",
+   "exists": [
+    "Fable-factions/README.md",
+    "Core3 loads scripts/custom_scripts/managers/faction_manager.lua after the stock file (absent today)",
+    "local_planets.tre already ships a 95-key faction name table"
+   ],
+   "needs": {
+    "design": "the exact table, standing sources and rewards",
+    "art": "",
+    "cpp": "",
+    "lua": "one data file plus standing gates in screenplays",
+    "client": "faction name rows; optional relabel of the GCW names",
+    "testing": "bot kill checks standing deltas; -3000/+3000 aggression; vendor gate"
+   },
+   "size": "M",
+   "era_fit": "core",
+   "depends_on": [],
+   "unblocks": [
+    "PL-02",
+    "PL-04",
+    "DR-01",
+    "DR-03",
+    "FW-05",
+    "FW-02"
+   ],
+   "decisions_made": "",
+   "decisions_open": "the option and the questions at the end of Fable-factions/README.md",
+   "value": 5,
+   "rank": 4,
+   "reason": "Unblocks six items and is mostly data in our own file.",
+   "score": 5.5
+  },
+  {
+   "id": "PL-02",
+   "name": "Ossus people: NPCs, conversations and first missions at the places",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "ours",
+   "status": "designed in outline",
+   "exists": [
+    "Fable-ossus/o7-build/poi-placements.json (npc_points with stock mobile candidates)",
+    "Fable-ossus/inspiration.md, Fable-ossus/o6/README.md section 3",
+    "Local-model-ossus-npcs/ (local model drafts, unreviewed)"
+   ],
+   "needs": {
+    "design": "rosters, dialogue, standing gates, 3-5 starter missions (Ysanna highland hunt, the pilot's part errand, the memorial-road walk and badge)",
+    "art": "none (stock bodies; Sith troopers as hued stock troopers)",
+    "cpp": "",
+    "lua": "mobiles with the new faction strings, one screenplay per place, conversations",
+    "client": "our strings, one badge row",
+    "testing": "bots visit each place; standing deltas; owner visit"
+   },
+   "size": "L",
+   "era_fit": "core",
+   "depends_on": [
+    "PL-01",
+    "FW-01"
+   ],
+   "unblocks": [
+    "DR-02",
+    "DR-03",
+    "CR-02"
+   ],
+   "decisions_made": "Imperial (Krayt) garrison yes; rare hidden Jedi met in the sanctuary under the ruins (owner 15 Oct 14:24)",
+   "decisions_open": "what meeting a hidden Jedi gives a player; whether hidden Jedi can be attacked",
+   "value": 5,
+   "rank": 5,
+   "reason": "Turns the built planet into a place with sides; needs the faction foundation (rank 4) first.",
+   "score": 2.75
+  },
+  {
+   "id": "SP-02",
+   "name": "Nautolan and Togruta, plus Chiss name tables and a real Chiss profile",
+   "theme": "species",
+   "kind": "custom",
+   "source": "MTG species package (catalogue P) + ours",
+   "status": "staged",
+   "exists": [
+    "Fable-species/s6/ (patch, provenance, archive on the old chain)",
+    "dev has no chiss.lua name table yet (checked today)"
+   ],
+   "needs": {
+    "design": "name tables and attribute profiles for three species",
+    "art": "",
+    "cpp": "",
+    "lua": "re-base the S6 patch on today's dev",
+    "client": "rebuild the archive chain",
+    "testing": "owner creates each"
+   },
+   "size": "S",
+   "era_fit": "good",
+   "depends_on": [
+    "SP-01"
+   ],
+   "unblocks": [
+    "SP-03"
+   ],
+   "decisions_made": "order Chiss, Nautolan, Togruta, then Hutt; our own name tables and real profiles (owner 14 Oct)",
+   "decisions_open": "",
+   "value": 4,
+   "rank": 6,
+   "reason": "Staged and cheap; finishes what the owner already ordered.",
+   "score": 4.5
+  },
+  {
+   "id": "PR-01",
+   "name": "Resource follow-ups and consumers (all answered)",
+   "theme": "professions-and-crafting",
+   "kind": "custom",
+   "source": "ours (Fable R3/C29)",
+   "status": "answered, not built",
+   "exists": [
+    "Fable-resources3/lore/lore-materials.md",
+    "Fable-resources3/names/README.md"
+   ],
+   "needs": {
+    "design": "recipe stats for lumni-spice; the GemDiver trader's stock",
+    "art": "",
+    "cpp": "",
+    "lua": "adegan tiers, Ossus solar PE 500-1000, flora names, Smuggler lumni-spice schematic, corusca trader on Yavin 4",
+    "client": "resource names",
+    "testing": "survey, craft, buy"
+   },
+   "size": "S",
+   "era_fit": "good",
+   "depends_on": [],
+   "unblocks": [
+    "DR-03"
+   ],
+   "decisions_made": "real adegan tiers; flora names yes; solar PE 500-1000; lumni-spice recipe; corusca from a trader; beskar waits for Mandalore (15 Oct)",
+   "decisions_open": "",
+   "value": 4,
+   "rank": 7,
+   "reason": "Five answered changes in one small batch.",
+   "score": 4.5
+  },
+  {
+   "id": "QL-01",
+   "name": "Client patch kit for friends (local_planets.tre delivery and rollback)",
+   "theme": "quality-of-life",
+   "kind": "custom",
+   "source": "ours (Fable L1, partial)",
+   "status": "partial",
+   "exists": [
+    "Fable-live-client/README.md",
+    "roadmap week 2: a release blocker"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "",
+    "client": "installer, version check, rollback",
+    "testing": "a friend's PC"
+   },
+   "size": "M",
+   "era_fit": "n/a",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "how friends get it",
+   "value": 4,
+   "rank": 8,
+   "reason": "Without it no friend sees any custom planet or species; needed before the friends' playtest (route week 4).",
+   "score": 2.0
+  },
+  {
+   "id": "PL-07",
+   "name": "Photo studio on an SOE test terrain",
+   "theme": "planets",
+   "kind": "cut",
+   "source": "SOE test terrains in the stock client (character_farm, simple, creature_test, test_wearables)",
+   "status": "designed",
+   "exists": [
+    "Fable-studio/README.md (design; the four terrains read from data_other_00)",
+    "Core3 lists the test zones commented out in config.lua"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "test-only zone, no spawns, fixed noon, clear weather",
+    "client": "planet CRC row, a shader family (none of the four has one), environment row",
+    "testing": "one standard shot set with Universal Modder"
+   },
+   "size": "M",
+   "era_fit": "n/a (test galaxy only)",
+   "depends_on": [],
+   "unblocks": [
+    "SP-03",
+    "SP-04",
+    "HC-06"
+   ],
+   "decisions_made": "approved for week 2 (owner 15 Oct)",
+   "decisions_open": "which terrain (Fable leaned to a fixed one; Claude picks)",
+   "value": 3,
+   "rank": 9,
+   "reason": "Every species, gear and prop review after this gets a repeatable picture.",
+   "score": 3.0
+  },
+  {
+   "id": "DR-01",
+   "name": "Echo Base E1-E5: shell, outside, inside, missions, names",
+   "theme": "dungeons-and-raids",
+   "kind": "cut",
+   "source": "SOE later building (Echo Base heroic) placed by us",
+   "status": "E0 built",
+   "exists": [
+    "dev `8f2072e7` (E0)",
+    "Fable-echo-base/README.md",
+    "Fable-hoth-guide/echo-base-plan.md",
+    "Owner-test-list.md item 4"
+   ],
+   "needs": {
+    "design": "story: who holds it (Fable-factions proposes a Triumvirate relay under holdout attack)",
+    "art": "",
+    "cpp": "",
+    "lua": "rooms roster, elevators, missions",
+    "client": "names",
+    "testing": "owner's E0 look first; bots inside 33 cells"
+   },
+   "size": "L",
+   "era_fit": "fair: a 3 ABY ruin reused",
+   "depends_on": [
+    "PL-05",
+    "FW-01"
+   ],
+   "unblocks": [
+    "FW-05"
+   ],
+   "decisions_made": "",
+   "decisions_open": "E0 result; who holds it; a GCW HQ at the base or not",
+   "value": 4,
+   "rank": 10,
+   "reason": "Hoth's big set piece; waits on the owner's E0 look.",
+   "score": 1.5
+  },
+  {
+   "id": "PR-02",
+   "name": "Collections first: Ossus lost-library fragments and the memorial road, plus the backport loot wiring",
+   "theme": "professions-and-crafting",
+   "kind": "custom",
+   "source": "ours (clean room) + Fable backport",
+   "status": "answered",
+   "exists": [
+    "Fable-backport/README.md section 8",
+    "Fable-ossus/o6/README.md POIs 4 and 12"
+   ],
+   "needs": {
+    "design": "the collection list",
+    "art": "",
+    "cpp": "maybe collection plumbing",
+    "lua": "collection items, loot groups (NGE junk and collection loot), 13 wearables for new species",
+    "client": "collection strings",
+    "testing": "bots collect; owner"
+   },
+   "size": "M",
+   "era_fit": "good",
+   "depends_on": [
+    "PL-01"
+   ],
+   "unblocks": [],
+   "decisions_made": "collections first (14 Oct set Q4); wire NGE junk and collection loot; extend the 13 wearables (Q6)",
+   "decisions_open": "",
+   "value": 3,
+   "rank": 11,
+   "reason": "First clean-room system the owner chose, with Ossus as its first set.",
+   "score": 1.5
+  },
+  {
+   "id": "QL-02",
+   "name": "Crew vendor: hire an escort crew",
+   "theme": "quality-of-life",
+   "kind": "custom",
+   "source": "ours (escort mode built)",
+   "status": "escort built",
+   "exists": [
+    "tools/bots/escort.py, scenarios/forn-escort.py",
+    "Dax Venn broker (live) as the model"
+   ],
+   "needs": {
+    "design": "vendor, prices, limits",
+    "art": "",
+    "cpp": "maybe",
+    "lua": "vendor NPC",
+    "client": "",
+    "testing": "owner runs a dungeon with a crew"
+   },
+   "size": "M",
+   "era_fit": "fine (Mandalorian and cartel hirelings fit 138 ABY)",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "owner 15 Oct: escort leads into the crew vendor and solo features",
+   "decisions_open": "",
+   "value": 4,
+   "rank": 12,
+   "reason": "Biggest solo-play win for a small server.",
+   "score": 2.0
+  },
+  {
+   "id": "DR-03",
+   "name": "Krayt raid 'Nihl's Hold' with the Echo of Krayt secret boss",
+   "theme": "dungeons-and-raids",
+   "kind": "custom",
+   "source": "ours (Claude draft)",
+   "status": "draft",
+   "exists": [
+    "Documentation-support/krayt-raid-design.md",
+    "Ossus POI 14 Sith post as the lead-in"
+   ],
+   "needs": {
+    "design": "finish the draft (owner questions 1-5)",
+    "art": "hued stock bodies first",
+    "cpp": "maybe phase logic helpers",
+    "lua": "templates, phases, key, loot, yorik coral class",
+    "client": "loot names",
+    "testing": "bots fight it; Doctors cure the DoT"
+   },
+   "size": "L",
+   "era_fit": "excellent: Nihl in 138-139; the Echo is our invention",
+   "depends_on": [
+    "FW-01",
+    "PL-02"
+   ],
+   "unblocks": [
+    "FW-04"
+   ],
+   "decisions_made": "make Krayt a raid boss, main boss a successor, secret boss behind a loot key (owner 14-15 Oct)",
+   "decisions_open": "location, key, size, mechanics (draft section 7)",
+   "value": 4,
+   "rank": 13,
+   "reason": "The owner's endgame ask; interim on Ossus keeps it cheap.",
+   "score": 1.5
+  },
+  {
+   "id": "SP-03",
+   "name": "Species wave 2: Bith, Gran, Devaronian, Weequay, Nikto, Aqualish, Quarren, Ishi Tib, Gotal, Talz (+ Nightsister and Singing Mountain witch options)",
+   "theme": "species",
+   "kind": "custom",
+   "source": "MTG species package (catalogue P, credit)",
+   "status": "in client",
+   "exists": [
+    "player templates in mtg_patch_023 (verified today)",
+    "Content-catalogue/newspecies-original.zip"
+   ],
+   "needs": {
+    "design": "names and profiles per species",
+    "art": "",
+    "cpp": "",
+    "lua": "races, creation, ID tables",
+    "client": "creation tables",
+    "testing": "owner creates each; clothing checks"
+   },
+   "size": "M",
+   "era_fit": "good (galaxy-wide species)",
+   "depends_on": [
+    "SP-02",
+    "PL-07"
+   ],
+   "unblocks": [],
+   "decisions_made": "no hybrid species until all regular species are in (owner 14 Oct)",
+   "decisions_open": "order",
+   "value": 3,
+   "rank": 14,
+   "reason": "Big creation-screen variety for little cost once S6 proves the method.",
+   "score": 1.5
+  },
+  {
+   "id": "FW-05",
+   "name": "Battlefront-style Hoth conquest pilot (PvE first)",
+   "theme": "factions-and-war",
+   "kind": "custom",
+   "source": "ours (GPT C43 design)",
+   "status": "designed",
+   "exists": [
+    "Documentation-support/bf2-battles-and-ai-for-swg.md"
+   ],
+   "needs": {
+    "design": "sides from FW-01",
+    "art": "",
+    "cpp": "match controller, scoped attackability, AI goal adapter",
+    "lua": "screenplay, posts",
+    "client": "",
+    "testing": "bot-only matches, then the owner"
+   },
+   "size": "L",
+   "era_fit": "good: Triumvirate vs holdouts on Hoth",
+   "depends_on": [
+    "FW-01",
+    "PL-05",
+    "DR-01"
+   ],
+   "unblocks": [
+    "FW-02"
+   ],
+   "decisions_made": "Battlefront-style battles in week 4 (owner 15 Oct)",
+   "decisions_open": "",
+   "value": 4,
+   "rank": 15,
+   "reason": "Owner's week-4 item and the first place the faction plan becomes a fight.",
+   "score": 1.5
+  },
+  {
+   "id": "PL-08",
+   "name": "Dantooine Jedi Enclave ruins (clean-room pilot)",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "ours, clean room (public descriptions only, SWG art)",
+   "status": "approved, not designed",
+   "exists": [
+    "owner 15 Oct: pilot before a KOTOR clean-room planet",
+    "Fable-asset-pipeline/ (first ruin piece drawn in the client)"
+   ],
+   "needs": {
+    "design": "site, layout, encounters (clean room)",
+    "art": "stock ruins + CC0 kitbash + our pieces",
+    "cpp": "",
+    "lua": "spawns, POI content",
+    "client": "snapshot on stock Dantooine",
+    "testing": "owner look; rights record"
+   },
+   "size": "L",
+   "era_fit": "good: an ancient ruin in 138 ABY",
+   "depends_on": [],
+   "unblocks": [
+    "PL-19"
+   ],
+   "decisions_made": "clean-room rule; pilot is the Enclave ruins",
+   "decisions_open": "where on Dantooine; scale",
+   "value": 3,
+   "rank": 16,
+   "reason": "Owner's week-3 pilot; proves the clean-room method before a whole planet.",
+   "score": 1.25
+  },
+  {
+   "id": "PL-04",
+   "name": "Nal Hutta as the Hutt home: palatial Bilbousa, kajidic seats, Hutt vendors, smuggler terminals, swamp spawns",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "ours on the community planet",
+   "status": "idea",
+   "exists": [
+    "Fable-species/s7-hutt/README.md sections 1 and 8 (concept)"
+   ],
+   "needs": {
+    "design": "layout, swamp fauna, kajidic standing loop, vendors",
+    "art": "kajidic seal textures (ours, through the Blender pipeline)",
+    "cpp": "",
+    "lua": "spawns, vendors, missions, screenplays",
+    "client": "snapshot edits, strings",
+    "testing": "bots and owner visit"
+   },
+   "size": "L",
+   "era_fit": "good",
+   "depends_on": [
+    "PL-03",
+    "FW-01"
+   ],
+   "unblocks": [
+    "HC-07"
+   ],
+   "decisions_made": "kajidics invented for play, Legends kajidics as background only (S7 section 1)",
+   "decisions_open": "how many kajidic seats; whether Hutt gear sells here",
+   "value": 4,
+   "rank": 17,
+   "reason": "The playable Hutt's reason to go home; after the first look proves the planet.",
+   "score": 1.5
+  },
+  {
+   "id": "HC-01",
+   "name": "City fixes from the owner's answers: Clone Lab, Entertainment District, 30 decorations per rank, no decoration upkeep, 10 event props, era names",
+   "theme": "housing-and-cities",
+   "kind": "custom",
+   "source": "ours (C52 answers)",
+   "status": "answered",
+   "exists": [
+    "Documentation-support/player-cities-research.md",
+    "Documentation-support/bot-cities-plan.md"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "Clone Lab and Entertainment District effects",
+    "lua": "settings, name lists",
+    "client": "",
+    "testing": "a town on the test copy"
+   },
+   "size": "M",
+   "era_fit": "n/a",
+   "depends_on": [],
+   "unblocks": [
+    "HC-02"
+   ],
+   "decisions_made": "Q6-Q8, Q11, Q12 (16 Oct 05:40); no cities on Hoth or Ossus (Q9); no terrain edits for founding (Q10)",
+   "decisions_open": "",
+   "value": 3,
+   "rank": 18,
+   "reason": "Makes cities worth founding for friends.",
+   "score": 2.0
+  },
+  {
+   "id": "CR-03",
+   "name": "Tames discussion: rare and endgame pets, wild vs BE, control budget",
+   "theme": "creatures",
+   "kind": "custom",
+   "source": "ours",
+   "status": "open discussion",
+   "exists": [
+    "Agent/to-claude.md (owner asked to discuss tames)",
+    "Documentation-support/creature-handler-top-tier-plan.md"
+   ],
+   "needs": {
+    "design": "one decision sheet",
+    "art": "",
+    "cpp": "",
+    "lua": "",
+    "client": "",
+    "testing": ""
+   },
+   "size": "S",
+   "era_fit": "n/a",
+   "depends_on": [],
+   "unblocks": [
+    "CR-02"
+   ],
+   "decisions_made": "",
+   "decisions_open": "eligibility, rare pets, budget",
+   "value": 3,
+   "rank": 19,
+   "reason": "Cheap and unblocks the voxyn line.",
+   "score": 3.5
+  },
+  {
+   "id": "PL-09",
+   "name": "Third planet through the playbook: Kashyyyk",
+   "theme": "planets",
+   "kind": "cut",
+   "source": "SOE later expansion (never in pre-CU), MTG adaptation, catalogue P",
+   "status": "assets in client",
+   "exists": [
+    "MTG kashyyyk.trn + 7 sub-terrains and snapshots (verified today)",
+    "338 dormant ep3 mobiles (Content-catalogue/dormant-client-objects.md)"
+   ],
+   "needs": {
+    "design": "zones and story for 138 ABY",
+    "art": "",
+    "cpp": "",
+    "lua": "zone, travel, regions, spawns from ep3 mobiles, resources (wroshyr wood)",
+    "client": "travel and map rows",
+    "testing": "bots map it, gate"
+   },
+   "size": "L",
+   "era_fit": "good (the Wookiee homeworld; check its Legacy status)",
+   "depends_on": [
+    "PL-01",
+    "PL-03"
+   ],
+   "unblocks": [],
+   "decisions_made": "third-planet candidates: Kashyyyk, Mustafar or a KOTOR clean-room planet (route, 15 Oct)",
+   "decisions_open": "which third planet",
+   "value": 3,
+   "rank": 20,
+   "reason": "Cheapest third planet: terrain, buildings and mobiles already exist.",
+   "score": 0.75
+  },
+  {
+   "id": "SP-04",
+   "name": "Hutt gear (level 2): ten items rigged to hutt.skt",
+   "theme": "species",
+   "kind": "custom",
+   "source": "ours (Blender + the MIT SWG add-on)",
+   "status": "designed",
+   "exists": [
+    "Fable-species/s7-hutt/README.md section 3"
+   ],
+   "needs": {
+    "design": "",
+    "art": "ten items modelled and rigged",
+    "cpp": "",
+    "lua": "Tailor schematics",
+    "client": "object templates",
+    "testing": "studio shots, owner"
+   },
+   "size": "L",
+   "era_fit": "good",
+   "depends_on": [
+    "SP-01",
+    "PL-07"
+   ],
+   "unblocks": [
+    "PL-04"
+   ],
+   "decisions_made": "route week 3",
+   "decisions_open": "",
+   "value": 3,
+   "rank": 21,
+   "reason": "Gives Hutt players something to wear; art-heavy.",
+   "score": 1.25
+  },
+  {
+   "id": "DR-02",
+   "name": "Ossus vaults and the Jedi path: pilgrimage stones to the sanctuary, the library vault",
+   "theme": "dungeons-and-raids",
+   "kind": "custom",
+   "source": "ours",
+   "status": "idea",
+   "exists": [
+    "Fable-ossus/inspiration.md section 5",
+    "o7 cell ids for the sanctuary and the vault"
+   ],
+   "needs": {
+    "design": "the quest",
+    "art": "",
+    "cpp": "",
+    "lua": "screenplay in the cave cells",
+    "client": "strings",
+    "testing": "bots, owner"
+   },
+   "size": "M",
+   "era_fit": "core (Nei Rin kept Jedi relics under the temple, 130-137 ABY)",
+   "depends_on": [
+    "PL-02"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "what it rewards",
+   "value": 3,
+   "rank": 22,
+   "reason": "The Jedi thread of Ossus; after the people exist.",
+   "score": 1.5
+  },
+  {
+   "id": "PL-20",
+   "name": "Galactic map rework: planets where they really are",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "ours",
+   "status": "researched",
+   "exists": [
+    "Documentation-support/planets-lore-and-coordinates.md and .json (C14)",
+    "rejected Hoth atlas fit"
+   ],
+   "needs": {
+    "design": "fares by distance",
+    "art": "galaxy map positions",
+    "cpp": "",
+    "lua": "travel fares",
+    "client": "galaxy map UI data",
+    "testing": "owner look"
+   },
+   "size": "M",
+   "era_fit": "n/a",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "all planets at their real positions (owner 14 Oct)",
+   "decisions_open": "fare formula",
+   "value": 3,
+   "rank": 23,
+   "reason": "Owner asked; do it once the planet list settles.",
+   "score": 1.5
+  },
+  {
+   "id": "PR-04",
+   "name": "Resource and recipe board terminal",
+   "theme": "professions-and-crafting",
+   "kind": "custom",
+   "source": "ours (F38)",
+   "status": "idea",
+   "exists": [
+    "SWG-feature-register.md F38"
+   ],
+   "needs": {
+    "design": "layout",
+    "art": "",
+    "cpp": "",
+    "lua": "terminal, SUI",
+    "client": "",
+    "testing": "owner"
+   },
+   "size": "M",
+   "era_fit": "n/a",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "route week 3",
+   "decisions_open": "",
+   "value": 3,
+   "rank": 24,
+   "reason": "Helps every crafter on a small server.",
+   "score": 1.5
+  },
+  {
+   "id": "QL-03",
+   "name": "Ambient adventurers v1",
+   "theme": "quality-of-life",
+   "kind": "custom",
+   "source": "ours (B3, F27)",
+   "status": "planned",
+   "exists": [
+    "SWG-roadmap.md Phase 6"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "behaviour tree",
+    "client": "",
+    "testing": "off switch"
+   },
+   "size": "L",
+   "era_fit": "n/a",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "route week 4",
+   "decisions_open": "",
+   "value": 3,
+   "rank": 25,
+   "reason": "Makes towns feel lived in.",
+   "score": 0.75
+  },
+  {
+   "id": "CR-01",
+   "name": "Tauntaun riding (its own test batch)",
+   "theme": "creatures",
+   "kind": "custom",
+   "source": "MTG scale rows; rider slots unproven",
+   "status": "answered",
+   "exists": [
+    "Fable-hoth-batchC/README.md Q5",
+    "MTG-merges/shadow-audit.md risks"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "mount data",
+    "client": "rider pose rows",
+    "testing": "owner rides one"
+   },
+   "size": "M",
+   "era_fit": "good",
+   "depends_on": [
+    "PL-05"
+   ],
+   "unblocks": [],
+   "decisions_made": "a separate test batch (owner 15 Oct)",
+   "decisions_open": "",
+   "value": 3,
+   "rank": 26,
+   "reason": "Fun on Hoth; separate risk from the rest.",
+   "score": 1.5
+  },
+  {
+   "id": "HC-02",
+   "name": "Bot cities M1: one disposable town",
+   "theme": "housing-and-cities",
+   "kind": "custom",
+   "source": "ours (GPT C52 plan)",
+   "status": "planned",
+   "exists": [
+    "Documentation-support/bot-cities-plan.md"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "city manager calls for bots, compressed clock",
+    "lua": "",
+    "client": "",
+    "testing": "probes 1-3"
+   },
+   "size": "L",
+   "era_fit": "n/a",
+   "depends_on": [
+    "HC-01"
+   ],
+   "unblocks": [],
+   "decisions_made": "Q1-Q5 (16 Oct)",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 27,
+   "reason": "Living towns, but a test feature first.",
+   "score": 0.5
+  },
+  {
+   "id": "HC-03",
+   "name": "SOE's cut city building styles: Corellia, Naboo and Tatooine banks, capitols, cloners, hospitals, theatres",
+   "theme": "housing-and-cities",
+   "kind": "cut",
+   "source": "SOE client: 15 templates with no server side (F59)",
+   "status": "in client",
+   "exists": [
+    "Content-catalogue/dormant-client-objects.md (SOE examples)"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "server templates, deeds",
+    "client": "",
+    "testing": "place each; services work"
+   },
+   "size": "M",
+   "era_fit": "fine",
+   "depends_on": [
+    "HC-01"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 3,
+   "rank": 28,
+   "reason": "Real cut content: city buildings that look local.",
+   "score": 1.5
+  },
+  {
+   "id": "CR-02",
+   "name": "Voxyn tame line grown by Nei Rin's Shapers, and the Vong project fields (Ossus POI 7)",
+   "theme": "creatures",
+   "kind": "custom",
+   "source": "ours (invented line; Legends voxyn died out in 28 ABY)",
+   "status": "decided, not designed",
+   "exists": [
+    "Documentation-support/starcraft-inspiration-vong-gree.md (art direction)",
+    "Fable-ossus/o6/README.md POI 7 (held)"
+   ],
+   "needs": {
+    "design": "creature, taming route, the fields",
+    "art": "voxyn body (recolour first, our model later)",
+    "cpp": "",
+    "lua": "creature, lair, pet rules",
+    "client": "creature names",
+    "testing": "CH tames it"
+   },
+   "size": "L",
+   "era_fit": "invented, flagged as such",
+   "depends_on": [
+    "PL-02",
+    "CR-03"
+   ],
+   "unblocks": [],
+   "decisions_made": "a tame line by Nei Rin's Shapers, maybe breedable later (owner 15 Oct); POI 7 held until this exists",
+   "decisions_open": "",
+   "value": 3,
+   "rank": 29,
+   "reason": "Owner wants it; waits on the tames talk.",
+   "score": 0.75
+  },
+  {
+   "id": "PL-11",
+   "name": "Korriban (Moraband)",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "community planet in MTG, catalogue P (author called it partial)",
+   "status": "assets in client",
+   "exists": [
+    "MTG moraband.trn and snapshot"
+   ],
+   "needs": {
+    "design": "Sith tombs for 138 ABY; Krayt's Stasis Room (137 ABY)",
+    "art": "",
+    "cpp": "",
+    "lua": "zone, spawns, tomb encounters",
+    "client": "travel rows",
+    "testing": "bots, owner look"
+   },
+   "size": "L",
+   "era_fit": "good: Krayt's stasis room is canon here",
+   "depends_on": [
+    "FW-01"
+   ],
+   "unblocks": [
+    "DR-03"
+   ],
+   "decisions_made": "",
+   "decisions_open": "raid location B (krayt-raid-design.md)",
+   "value": 3,
+   "rank": 30,
+   "reason": "Best long-term home for the One Sith and raid option B.",
+   "score": 1.25
+  },
+  {
+   "id": "PL-12",
+   "name": "Mandalore",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "community planet in MTG, catalogue P (original release had world Lua, NPCs, caves)",
+   "status": "assets in client",
+   "exists": [
+    "MTG mandalore.trn and snapshot"
+   ],
+   "needs": {
+    "design": "clans under a disputed Mand'alor (Legends, 127 ABY on)",
+    "art": "",
+    "cpp": "",
+    "lua": "zone, clans, beskar spawn",
+    "client": "travel rows",
+    "testing": "bots"
+   },
+   "size": "L",
+   "era_fit": "good: Mandalorian clans as mercenaries",
+   "depends_on": [
+    "FW-01"
+   ],
+   "unblocks": [
+    "PR-01"
+   ],
+   "decisions_made": "beskar stays the rare best iron but waits for Mandalore (owner 15 Oct)",
+   "decisions_open": "",
+   "value": 3,
+   "rank": 31,
+   "reason": "Unlocks beskar and the Mandalorian standing line.",
+   "score": 1.25
+  },
+  {
+   "id": "QL-05",
+   "name": "POI waypoints and vendor/bazaar search waypoints",
+   "theme": "quality-of-life",
+   "kind": "custom",
+   "source": "Flurry/Bellum ideas (F32, F33)",
+   "status": "idea",
+   "exists": [
+    "SWG-feature-register.md"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "helpers",
+    "client": "",
+    "testing": ""
+   },
+   "size": "M",
+   "era_fit": "n/a",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 32,
+   "reason": "Quality of life on stock planets.",
+   "score": 1.0
+  },
+  {
+   "id": "QL-07",
+   "name": "Read-only TRE v6 reader for the disc's later patches",
+   "theme": "quality-of-life",
+   "kind": "custom",
+   "source": "ours (tool)",
+   "status": "answered",
+   "exists": [
+    "Fable-backport/README.md section 8 Q4"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "",
+    "client": "reader",
+    "testing": "round trip"
+   },
+   "size": "M",
+   "era_fit": "n/a",
+   "depends_on": [],
+   "unblocks": [
+    "PR-02"
+   ],
+   "decisions_made": "yes, read-only (owner 15 Oct)",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 33,
+   "reason": "Opens patches 18-33 to clean-room backports.",
+   "score": 1.5
+  },
+  {
+   "id": "FW-02",
+   "name": "Contested zones and guild-war allegiances (Option B pieces)",
+   "theme": "factions-and-war",
+   "kind": "custom",
+   "source": "ours on Core3's PvP areas and guild wars",
+   "status": "idea",
+   "exists": [
+    "Core3: PVPAREA region flag, guild wars, duels and bounty TEFs (read today)"
+   ],
+   "needs": {
+    "design": "where, rules, rewards",
+    "art": "",
+    "cpp": "maybe a newbie guard",
+    "lua": "region flags",
+    "client": "",
+    "testing": "two clients in a zone"
+   },
+   "size": "M",
+   "era_fit": "good",
+   "depends_on": [
+    "FW-01"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "only when there are enough players",
+   "value": 3,
+   "rank": 34,
+   "reason": "Three-way fights without new faction code, once there are players to fight.",
+   "score": 1.5
+  },
+  {
+   "id": "FW-04",
+   "name": "Darth Wredd's insurgency: Sith hunting Sith (139 ABY world event)",
+   "theme": "factions-and-war",
+   "kind": "custom",
+   "source": "ours on Legends events",
+   "status": "idea",
+   "exists": [
+    "Fable-factions/README.md (Legends check)"
+   ],
+   "needs": {
+    "design": "event chain ending at the Floating World",
+    "art": "",
+    "cpp": "",
+    "lua": "event screenplay, spawns",
+    "client": "strings",
+    "testing": "bots"
+   },
+   "size": "M",
+   "era_fit": "excellent (139 ABY)",
+   "depends_on": [
+    "FW-01",
+    "DR-03"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 3,
+   "rank": 35,
+   "reason": "A server event that moves the year forward when the owner wants.",
+   "score": 1.5
+  },
+  {
+   "id": "QL-04",
+   "name": "HoloNet terminal with Triumvirate bulletins",
+   "theme": "quality-of-life",
+   "kind": "custom",
+   "source": "ours (F41/F74, local only)",
+   "status": "idea",
+   "exists": [
+    "SWG-feature-register.md F41, F74"
+   ],
+   "needs": {
+    "design": "bulletin texts",
+    "art": "",
+    "cpp": "",
+    "lua": "terminal",
+    "client": "",
+    "testing": ""
+   },
+   "size": "S",
+   "era_fit": "good",
+   "depends_on": [
+    "FW-01"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 36,
+   "reason": "Cheap way to tell the era's story.",
+   "score": 2.0
+  },
+  {
+   "id": "DR-05",
+   "name": "Hoth wampa bosses: per-player reward",
+   "theme": "dungeons-and-raids",
+   "kind": "custom",
+   "source": "ours",
+   "status": "answered: later",
+   "exists": [
+    "Fable-hoth-caves/README.md"
+   ],
+   "needs": {
+    "design": "the reward",
+    "art": "",
+    "cpp": "",
+    "lua": "loot logic",
+    "client": "",
+    "testing": "bots"
+   },
+   "size": "S",
+   "era_fit": "fine",
+   "depends_on": [
+    "PL-05"
+   ],
+   "unblocks": [],
+   "decisions_made": "corpse loot now, per-player later (owner 15 Oct)",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 37,
+   "reason": "Owner said later.",
+   "score": 2.0
+  },
+  {
+   "id": "HC-04",
+   "name": "Decor packs rated P (torch, kitchen, wall, Naboo structure, lamp; light megapack after a redistribution check)",
+   "theme": "housing-and-cities",
+   "kind": "custom",
+   "source": "community packs in Content-catalogue (catalogue P, credit)",
+   "status": "downloaded",
+   "exists": [
+    "Content-catalogue/*.zip (inspected, not installed)"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "schematics or vendors",
+    "client": "archive",
+    "testing": "place each"
+   },
+   "size": "M",
+   "era_fit": "fine",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "the packs' author also made a project the owner excluded (the D20 RP total conversion); confirm before import",
+   "value": 2,
+   "rank": 38,
+   "reason": "Decor for houses; one owner check first.",
+   "score": 1.0
+  },
+  {
+   "id": "HC-06",
+   "name": "A landed freighter you can walk into (SOE's cut test_falcon building)",
+   "theme": "housing-and-cities",
+   "kind": "cut",
+   "source": "SOE client: a 3-cell freighter interior with no server template",
+   "status": "in client",
+   "exists": [
+    "object/building/general/shared_test_falcon.iff, appearance/thm_all_test_falcon.pob (patch_05, verified today)"
+   ],
+   "needs": {
+    "design": "where: smugglers' landing or the Ossus Hutt field",
+    "art": "",
+    "cpp": "",
+    "lua": "server template, placement",
+    "client": "",
+    "testing": "owner walks in"
+   },
+   "size": "S",
+   "era_fit": "good as a generic freighter (not the Falcon itself)",
+   "depends_on": [
+    "PL-07"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "POI or player-house deed",
+   "value": 2,
+   "rank": 39,
+   "reason": "A fun cut interior for little work.",
+   "score": 2.0
+  },
+  {
+   "id": "PL-10",
+   "name": "Mustafar",
+   "theme": "planets",
+   "kind": "cut",
+   "source": "SOE later expansion, MTG adaptation, catalogue P",
+   "status": "assets in client",
+   "exists": [
+    "MTG mustafar.trn and snapshots",
+    "166 dormant Mustafar buildings"
+   ],
+   "needs": {
+    "design": "era story",
+    "art": "",
+    "cpp": "",
+    "lua": "zone, spawns, resources",
+    "client": "travel rows",
+    "testing": "bots, gate"
+   },
+   "size": "L",
+   "era_fit": "fair (a mining world)",
+   "depends_on": [
+    "PL-09"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 40,
+   "reason": "Second expansion world once the playbook is quick.",
+   "score": 0.5
+  },
+  {
+   "id": "PR-05",
+   "name": "Five new professions from the owner's book, Archaeologist first",
+   "theme": "professions-and-crafting",
+   "kind": "custom",
+   "source": "owner's SWG x SW5E book (F87)",
+   "status": "mapped",
+   "exists": [
+    "Content-catalogue/owner-SWG-SW5E/README.md"
+   ],
+   "needs": {
+    "design": "skill boxes, XP",
+    "art": "Cyberneticist needs art",
+    "cpp": "trainer hooks",
+    "lua": "schematics",
+    "client": "skills.iff, strings",
+    "testing": "a Novice box test"
+   },
+   "size": "XL",
+   "era_fit": "good (Archaeologist fits the Ossus dig)",
+   "depends_on": [
+    "PR-02"
+   ],
+   "unblocks": [],
+   "decisions_made": "entries at IV like every elite (owner 14 Oct)",
+   "decisions_open": "which first",
+   "value": 3,
+   "rank": 41,
+   "reason": "Large; Archaeologist pairs with the library collection.",
+   "score": 0.38
+  },
+  {
+   "id": "PR-07",
+   "name": "Farming: a planter, plus SOE's cut crop containers and flora components",
+   "theme": "professions-and-crafting",
+   "kind": "cut",
+   "source": "SOE client (organic corn, wheat, rice, oats, beans, tubers...; fungus, ice plant, mushroom, nebula orchid, pika) + ours (F90)",
+   "status": "in client / researched",
+   "exists": [
+    "Content-catalogue/dormant-client-objects.md (38 resource containers, chemistry components)",
+    "Documentation-support/farming-system-UM-feasibility.md"
+   ],
+   "needs": {
+    "design": "planter loop",
+    "art": "plant stages (CC0 or ours)",
+    "cpp": "persistent growth",
+    "lua": "resources, schematics",
+    "client": "container rows",
+    "testing": "grow and harvest"
+   },
+   "size": "L",
+   "era_fit": "good",
+   "depends_on": [
+    "PR-05"
+   ],
+   "unblocks": [
+    "PL-13"
+   ],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 42,
+   "reason": "SOE left crop containers behind; farming gives them a use.",
+   "score": 1.0
+  },
+  {
+   "id": "PL-19",
+   "name": "Nar Shaddaa (clean room)",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "ours, clean room after the Enclave pilot",
+   "status": "idea",
+   "exists": [
+    "owner 15 Oct: Nar Shaddaa or Taris after the Dantooine pilot"
+   ],
+   "needs": {
+    "design": "vertical city from SWG art",
+    "art": "a lot",
+    "cpp": "",
+    "lua": "zone, cartels",
+    "client": "everything",
+    "testing": "everything"
+   },
+   "size": "XL",
+   "era_fit": "excellent: the Hutts' open market by 130 ABY (Legends)",
+   "depends_on": [
+    "PL-08",
+    "FW-01"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "Nar Shaddaa or Taris",
+   "value": 4,
+   "rank": 43,
+   "reason": "Best cartel planet, but a whole city to build.",
+   "score": 0.5
+  },
+  {
+   "id": "PL-15",
+   "name": "Coruscant",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "community planet in MTG, catalogue P (sparse)",
+   "status": "assets in client",
+   "exists": [
+    "MTG coruscant.trn and snapshot"
+   ],
+   "needs": {
+    "design": "a capital that reads as Coruscant",
+    "art": "a lot (city density)",
+    "cpp": "",
+    "lua": "zone, districts",
+    "client": "travel rows",
+    "testing": "bots, owner"
+   },
+   "size": "XL",
+   "era_fit": "excellent: the Triumvirate's capital, rebuilding after 138",
+   "depends_on": [
+    "FW-01"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 3,
+   "rank": 44,
+   "reason": "Right place, wrong cost: sparse terrain needs a city built.",
+   "score": 0.38
+  },
+  {
+   "id": "PL-13",
+   "name": "Taanab",
+   "theme": "planets",
+   "kind": "cut",
+   "source": "unfinished SOE terrain in the stock client (data_other_00) plus an MTG restoration, catalogue P",
+   "status": "assets in client",
+   "exists": [
+    "terrain/taanab.trn in data_other_00 and MTG",
+    "Fable-resources3/lore/lore-materials.md (Taanab livestock)"
+   ],
+   "needs": {
+    "design": "farm world content",
+    "art": "",
+    "cpp": "",
+    "lua": "zone, spawns",
+    "client": "travel rows",
+    "testing": "bots"
+   },
+   "size": "L",
+   "era_fit": "good (an agricultural world)",
+   "depends_on": [
+    "PR-07"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 45,
+   "reason": "SOE's own unfinished world; best paired with farming.",
+   "score": 0.5
+  },
+  {
+   "id": "SP-05",
+   "name": "Hutt animations (level 3) and a working .ans exporter",
+   "theme": "species",
+   "kind": "custom",
+   "source": "ours",
+   "status": "designed",
+   "exists": [
+    "Fable-species/s7-hutt/README.md section 4; export_ans.py stub in the add-on"
+   ],
+   "needs": {
+    "design": "",
+    "art": "animation work",
+    "cpp": "",
+    "lua": "",
+    "client": "lat entries",
+    "testing": "round trip, client"
+   },
+   "size": "XL",
+   "era_fit": "good",
+   "depends_on": [
+    "SP-04"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 3,
+   "rank": 46,
+   "reason": "Unlocks chairs and mounts for Hutts and new creature moves; hardest art.",
+   "score": 0.38
+  },
+  {
+   "id": "PR-06",
+   "name": "New materials and consumables from the owner's book",
+   "theme": "professions-and-crafting",
+   "kind": "custom",
+   "source": "owner's book (F88, F89)",
+   "status": "mapped",
+   "exists": [
+    "SWG-feature-register.md F88-F89"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "resource classes, schematics",
+    "client": "resource tree",
+    "testing": "craft checks"
+   },
+   "size": "L",
+   "era_fit": "good",
+   "depends_on": [
+    "PR-05"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 47,
+   "reason": "Only worth it with the professions that use them.",
+   "score": 0.5
+  },
+  {
+   "id": "CR-04",
+   "name": "Ossus native fauna wave 2",
+   "theme": "creatures",
+   "kind": "custom",
+   "source": "ours",
+   "status": "idea",
+   "exists": [
+    "dev `80b66e65` (six reviewed creatures)"
+   ],
+   "needs": {
+    "design": "more species after habitat checks",
+    "art": "stock bodies",
+    "cpp": "",
+    "lua": "mobiles, lairs",
+    "client": "names",
+    "testing": "bots"
+   },
+   "size": "M",
+   "era_fit": "core",
+   "depends_on": [
+    "PL-01"
+   ],
+   "unblocks": [],
+   "decisions_made": "levels shelved until more planets (owner 15 Oct)",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 48,
+   "reason": "After the people; levels are shelved.",
+   "score": 1.0
+  },
+  {
+   "id": "PR-08",
+   "name": "Chef and BE cut components, clothing and hair dyes",
+   "theme": "professions-and-crafting",
+   "kind": "cut",
+   "source": "SOE client (F60)",
+   "status": "in client",
+   "exists": [
+    "Content-catalogue/dormant-client-objects.md (food bases, bio food components, dye_clothing, dye_hair)"
+   ],
+   "needs": {
+    "design": "what each does",
+    "art": "",
+    "cpp": "",
+    "lua": "schematics",
+    "client": "",
+    "testing": "craft checks"
+   },
+   "size": "M",
+   "era_fit": "fine",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 49,
+   "reason": "Real cut items; check they are not aliases first.",
+   "score": 1.0
+  },
+  {
+   "id": "CR-05",
+   "name": "Morag encounter (Endor)",
+   "theme": "creatures",
+   "kind": "cut",
+   "source": "SOE client art (F58)",
+   "status": "in client",
+   "exists": [
+    "SWG-feature-register.md F58"
+   ],
+   "needs": {
+    "design": "an original encounter",
+    "art": "",
+    "cpp": "",
+    "lua": "spawn, dialogue, rewards",
+    "client": "",
+    "testing": "bots"
+   },
+   "size": "M",
+   "era_fit": "fine",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 50,
+   "reason": "Small cut-content restoration on a stock planet.",
+   "score": 1.0
+  },
+  {
+   "id": "DR-04",
+   "name": "Old-AI dungeon and event ports",
+   "theme": "dungeons-and-raids",
+   "kind": "custom",
+   "source": "published Flurry/Bellum sources (F44)",
+   "status": "researched",
+   "exists": [
+    "SWG-feature-register.md F44"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "API port per module",
+    "client": "",
+    "testing": "bots"
+   },
+   "size": "L",
+   "era_fit": "mixed",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "keep server-added encounters as options (owner 14 Oct)",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 51,
+   "reason": "Module by module, after our own content.",
+   "score": 0.5
+  },
+  {
+   "id": "PR-10",
+   "name": "Official cut designs: player contracts, crafter usage XP, theatre",
+   "theme": "professions-and-crafting",
+   "kind": "cut",
+   "source": "developer accounts of planned systems (F65, F70, F73)",
+   "status": "researched",
+   "exists": [
+    "Documentation-support/SWG-official-plans-cut-content-and-backports.md"
+   ],
+   "needs": {
+    "design": "one at a time",
+    "art": "",
+    "cpp": "yes",
+    "lua": "yes",
+    "client": "",
+    "testing": ""
+   },
+   "size": "L",
+   "era_fit": "n/a",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 52,
+   "reason": "Interesting systems, none started.",
+   "score": 0.5
+  },
+  {
+   "id": "QL-06",
+   "name": "Multi-passenger vehicles",
+   "theme": "quality-of-life",
+   "kind": "custom",
+   "source": "public AGPL release (catalogue P, credit)",
+   "status": "downloaded",
+   "exists": [
+    "Content-catalogue/multipassenger.zip"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "port",
+    "lua": "",
+    "client": "passenger archive",
+    "testing": "two clients"
+   },
+   "size": "M",
+   "era_fit": "fine",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 53,
+   "reason": "Fun with friends; needs a port.",
+   "score": 1.0
+  },
+  {
+   "id": "PL-14",
+   "name": "Dromund Kaas",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "community planet in MTG, catalogue P",
+   "status": "assets in client",
+   "exists": [
+    "MTG kaas.trn and snapshot"
+   ],
+   "needs": {
+    "design": "era story",
+    "art": "",
+    "cpp": "",
+    "lua": "zone, spawns",
+    "client": "travel rows",
+    "testing": "bots"
+   },
+   "size": "L",
+   "era_fit": "fair (Sith relics)",
+   "depends_on": [
+    "FW-01"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 54,
+   "reason": "Overlaps Korriban; later.",
+   "score": 0.5
+  },
+  {
+   "id": "FW-07",
+   "name": "Covert detector (GCW base perk) check",
+   "theme": "factions-and-war",
+   "kind": "cut",
+   "source": "stock client; Core3 has the deed, the base template is dormant",
+   "status": "in client",
+   "exists": [
+    "object/installation/faction_perk/covert_detector/shared_detector_base.iff (dormant)",
+    "Core3 deed detector_32m (read today)"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "",
+    "client": "",
+    "testing": "does it work?"
+   },
+   "size": "S",
+   "era_fit": "fine",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 1,
+   "rank": 55,
+   "reason": "Probably already works; a check, not a build.",
+   "score": 1.0
+  },
+  {
+   "id": "PR-03",
+   "name": "JTL cut components: mass reduction kits, retro thrusters, TIE and Z-95 reactors",
+   "theme": "professions-and-crafting",
+   "kind": "cut",
+   "source": "SOE client (F61)",
+   "status": "in client",
+   "exists": [
+    "Content-catalogue/dormant-client-objects.md"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "schematics",
+    "client": "",
+    "testing": "flight checks"
+   },
+   "size": "M",
+   "era_fit": "fine",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 1,
+   "rank": 56,
+   "reason": "Needs JTL acceptance first.",
+   "score": 0.5
+  },
+  {
+   "id": "HC-05",
+   "name": "Monthly Home Show / Best Dressed City",
+   "theme": "housing-and-cities",
+   "kind": "custom",
+   "source": "ours (Q6)",
+   "status": "answered",
+   "exists": [
+    "Documentation-support/bot-cities-plan.md"
+   ],
+   "needs": {
+    "design": "rules",
+    "art": "",
+    "cpp": "",
+    "lua": "",
+    "client": "",
+    "testing": ""
+   },
+   "size": "S",
+   "era_fit": "n/a",
+   "depends_on": [
+    "HC-01"
+   ],
+   "unblocks": [],
+   "decisions_made": "modest credit prize (Q6)",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 57,
+   "reason": "Needs players first.",
+   "score": 2.0
+  },
+  {
+   "id": "QL-08",
+   "name": "Owner developer datapad",
+   "theme": "quality-of-life",
+   "kind": "custom",
+   "source": "ours (F37)",
+   "status": "idea",
+   "exists": [
+    "SWG-feature-register.md F37"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "staff SUI",
+    "client": "",
+    "testing": ""
+   },
+   "size": "M",
+   "era_fit": "n/a",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 58,
+   "reason": "Staff tool; nice, not urgent.",
+   "score": 1.0
+  },
+  {
+   "id": "PR-09",
+   "name": "Darksaber and Ghostfire sabers",
+   "theme": "professions-and-crafting",
+   "kind": "custom",
+   "source": "CC BY model candidate + CC0 VFX (F95, F96)",
+   "status": "researched",
+   "exists": [
+    "Documentation-support/darksaber-ghostfire-feasibility.md"
+   ],
+   "needs": {
+    "design": "",
+    "art": "blade material and trails",
+    "cpp": "",
+    "lua": "",
+    "client": "saber rows",
+    "testing": "client"
+   },
+   "size": "L",
+   "era_fit": "fair (a Mandalorian heirloom)",
+   "depends_on": [
+    "PL-12"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "author notification",
+   "value": 2,
+   "rank": 59,
+   "reason": "Art risk and rights gates.",
+   "score": 0.5
+  },
+  {
+   "id": "DR-07",
+   "name": "Zonama Sekot rotating raid",
+   "theme": "dungeons-and-raids",
+   "kind": "custom",
+   "source": "ours (F94)",
+   "status": "idea",
+   "exists": [
+    "SWG-feature-register.md F94"
+   ],
+   "needs": {
+    "design": "zone, rotation",
+    "art": "Sekotan look",
+    "cpp": "",
+    "lua": "rotation screenplay",
+    "client": "terrain",
+    "testing": "bots"
+   },
+   "size": "XL",
+   "era_fit": "good",
+   "depends_on": [
+    "DR-03"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 60,
+   "reason": "Big; after the first raid.",
+   "score": 0.25
+  },
+  {
+   "id": "FW-03",
+   "name": "A third GCW banner (Option C)",
+   "theme": "factions-and-war",
+   "kind": "custom",
+   "source": "ours",
+   "status": "idea",
+   "exists": [
+    "Fable-factions/README.md, Option C"
+   ],
+   "needs": {
+    "design": "everything",
+    "art": "third HQ look",
+    "cpp": "Factions.h hash, ~45 files with Imperial/Rebel branches",
+    "lua": "recruiters, GCW manager",
+    "client": "pvp_factions.iff row; client behaviour unknown",
+    "testing": "a client test first"
+   },
+   "size": "XL",
+   "era_fit": "good",
+   "depends_on": [
+    "FW-01",
+    "FW-02"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 61,
+   "reason": "True three-way PvP; large and risky for a handful of friends.",
+   "score": 0.25
+  },
+  {
+   "id": "PL-18",
+   "name": "Zeltros",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "community planet, catalogue C (CC-BY-NC, author credit)",
+   "status": "downloaded, not installed",
+   "exists": [
+    "Content-catalogue/zeltros_client.zip, zeltros_server.zip"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "port old object paths",
+    "client": "",
+    "testing": "owner look"
+   },
+   "size": "M",
+   "era_fit": "fair",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 1,
+   "rank": 62,
+   "reason": "Exploration-only world under a non-commercial licence.",
+   "score": 0.5
+  },
+  {
+   "id": "PL-16",
+   "name": "Chandrila",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "community planet in MTG, catalogue P",
+   "status": "assets in client",
+   "exists": [
+    "MTG chandrila.trn and snapshot"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "zone, spawns",
+    "client": "travel rows",
+    "testing": "bots"
+   },
+   "size": "L",
+   "era_fit": "fair",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 1,
+   "rank": 63,
+   "reason": "Little story pull in 138-139.",
+   "score": 0.25
+  },
+  {
+   "id": "HC-07",
+   "name": "Kajidic palaces as player-city sites on Nal Hutta",
+   "theme": "housing-and-cities",
+   "kind": "custom",
+   "source": "ours (S7 concept)",
+   "status": "idea",
+   "exists": [
+    "Fable-species/s7-hutt/README.md section 1"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "",
+    "client": "",
+    "testing": ""
+   },
+   "size": "L",
+   "era_fit": "good",
+   "depends_on": [
+    "PL-04",
+    "HC-01"
+   ],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 64,
+   "reason": "Much later.",
+   "score": 0.5
+  },
+  {
+   "id": "CR-06",
+   "name": "Legends oddities: Killik hive, Starweird anomaly",
+   "theme": "creatures",
+   "kind": "custom",
+   "source": "ours (ideas)",
+   "status": "ideas on file",
+   "exists": [
+    "Documentation-support/starcraft-inspiration-vong-gree.md"
+   ],
+   "needs": {
+    "design": "lore checks first",
+    "art": "a lot",
+    "cpp": "",
+    "lua": "",
+    "client": "",
+    "testing": ""
+   },
+   "size": "L",
+   "era_fit": "good (Killiks still exist in 138 ABY; check)",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 1,
+   "rank": 65,
+   "reason": "Ideas only.",
+   "score": 0.25
+  },
+  {
+   "id": "DR-06",
+   "name": "Damutek dungeon (Vong)",
+   "theme": "dungeons-and-raids",
+   "kind": "custom",
+   "source": "ours (ideas)",
+   "status": "parked by the owner",
+   "exists": [
+    "Documentation-support/starcraft-inspiration-vong-gree.md"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "",
+    "client": "",
+    "testing": ""
+   },
+   "size": "L",
+   "era_fit": "good",
+   "depends_on": [
+    "CR-02"
+   ],
+   "unblocks": [],
+   "decisions_made": "ideas on file, no prototype (owner 15 Oct)",
+   "decisions_open": "",
+   "value": 2,
+   "rank": 66,
+   "reason": "Parked.",
+   "score": 0.5
+  },
+  {
+   "id": "PL-06",
+   "name": "Space stations (Tansarii Point; the others)",
+   "theme": "planets",
+   "kind": "cut",
+   "source": "SOE station art; other stations are another server's work (catalogue A)",
+   "status": "rights unclear",
+   "exists": [
+    "Content-catalogue/SWG-content-catalogue.md, stations rows"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "",
+    "client": "",
+    "testing": ""
+   },
+   "size": "L",
+   "era_fit": "fair",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 1,
+   "rank": 67,
+   "reason": "Rights and availability unresolved.",
+   "score": 0.25
+  },
+  {
+   "id": "PL-17",
+   "name": "Jakku",
+   "theme": "planets",
+   "kind": "custom",
+   "source": "community planet in MTG, catalogue P",
+   "status": "assets in client",
+   "exists": [
+    "MTG jakku.trn and snapshot"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "zone",
+    "client": "travel rows",
+    "testing": "bots"
+   },
+   "size": "L",
+   "era_fit": "weak (almost no Legends presence)",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 1,
+   "rank": 68,
+   "reason": "Weak era fit.",
+   "score": 0.25
+  },
+  {
+   "id": "SP-06",
+   "name": "Zeltron",
+   "theme": "species",
+   "kind": "custom",
+   "source": "no package; only another server's art (rights unresolved)",
+   "status": "held by the owner",
+   "exists": [
+    "Fable-species/README.md S1"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "",
+    "client": "",
+    "testing": ""
+   },
+   "size": "M",
+   "era_fit": "good",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "held (owner 14 Oct)",
+   "decisions_open": "stand-in palette or wait",
+   "value": 2,
+   "rank": 69,
+   "reason": "Held.",
+   "score": 1.0
+  },
+  {
+   "id": "SP-07",
+   "name": "Thirteen species only another server ever made playable (Cerean, Duros, Kel Dor, Mirialan and others)",
+   "theme": "species",
+   "kind": "custom",
+   "source": "rights unresolved (catalogue U)",
+   "status": "blocked",
+   "exists": [
+    "Content-catalogue/SWG-content-catalogue.md species rows"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "",
+    "client": "",
+    "testing": ""
+   },
+   "size": "L",
+   "era_fit": "good",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "fresh port from available NPC art?",
+   "value": 2,
+   "rank": 70,
+   "reason": "Blocked on rights.",
+   "score": 0.5
+  },
+  {
+   "id": "PL-21",
+   "name": "SOE developer terrains and Otoh Gunga",
+   "theme": "planets",
+   "kind": "cut",
+   "source": "SOE dev data (catalogue D)",
+   "status": "in client",
+   "exists": [
+    "umbra, 09, 10, 11, rivertest, floratest, watertabletest, godclient_test, cinco_city_test_m5, runtimerules, an Endor dev terrain, otoh_gunga (all verified today)"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "",
+    "client": "",
+    "testing": ""
+   },
+   "size": "XL",
+   "era_fit": "n/a",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "",
+   "value": 1,
+   "rank": 71,
+   "reason": "Test data, not places; only the studio (PL-07) uses one.",
+   "score": 0.12
+  },
+  {
+   "id": "SP-01",
+   "name": "Playable Hutt (finish: restart, owner's floater checks, fixes)",
+   "theme": "species",
+   "kind": "custom",
+   "source": "ours on the MTG species package (catalogue P)",
+   "status": "built; the owner is testing it",
+   "exists": [
+    "Fable-species/s7-hutt/",
+    "dev `26b54813`, `6769ad7a`, `b01768bf`; archive work/c54-crafting/local_planets-c54.tre installed",
+    "Documentation-support/hutt-c54.md (owner checklist)",
+    "h `a07b46e`: creation-screen crash fixed 16 Oct 4:21 PM, archive 6ff21312 installed"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "",
+    "client": "",
+    "testing": "owner: both genders, Artisan floater, call and ride, refusals, chair"
+   },
+   "size": "S",
+   "era_fit": "good",
+   "depends_on": [],
+   "unblocks": [
+    "PL-03",
+    "SP-04"
+   ],
+   "decisions_made": "remapped animations, species id by Claude, chairs refused, Huttese, floater crafted by Artisans (15 Oct)",
+   "decisions_open": "",
+   "value": 5,
+   "rank": null,
+   "reason": "In flight: integration lane, not new design.",
+   "score": 6.0
+  },
+  {
+   "id": "FW-06",
+   "name": "World boss rotation and the big game hunter",
+   "theme": "factions-and-war",
+   "kind": "custom",
+   "source": "ours (Flurry-inspired, existing creatures)",
+   "status": "built, waiting for review and OK",
+   "exists": [
+    "dev `bda2c0dd`"
+   ],
+   "needs": {
+    "design": "",
+    "art": "",
+    "cpp": "",
+    "lua": "",
+    "client": "",
+    "testing": "a real player hit for the credit reward"
+   },
+   "size": "S",
+   "era_fit": "fine",
+   "depends_on": [],
+   "unblocks": [],
+   "decisions_made": "",
+   "decisions_open": "owner OK to deploy",
+   "value": 3,
+   "rank": null,
+   "reason": "In flight: release lane.",
+   "score": 3.0
+  }
+ ]
+}
