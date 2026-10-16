@@ -2,6 +2,12 @@
 
     python3 live_map.py [--port 8765]
 
+C46 staging public mode (only after Claude's review):
+    python3 live_map.py --public --port 8766
+Stop either foreground process with Ctrl+C (or SIGTERM its own PID). Public mode binds
+127.0.0.1, serves only / and /data.json, never starts tracker logging or loads the squad
+roster, and uses an original coordinate grid (no redistribution of client map images).
+
 then open http://localhost:8765 on Windows (WSL mirrored networking reaches it). The idea is item 1 of the
 TortoiseBots study (Documentation-support/tortoisebots-study.md): Sagiroth's observability dashboard, a 2D map per
 planet with a marker per bot. Our code; nothing ported.
@@ -45,6 +51,7 @@ import zlib
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
+from bots.public_map_data import public_filter
 
 HERE = Path(__file__).resolve().parent
 OUTPUTS = HERE.parent
@@ -306,6 +313,7 @@ def png(w, h, rgb):
 
 
 _map_lock = threading.Lock()
+_pop_lock = threading.RLock()
 
 
 def map_image(planet):
@@ -517,7 +525,8 @@ def bot_rows(chars, reports):
     return out
 
 
-pop = {'inode': None, 'offset': 0, 'bots': {}, 'server': {}, 'pos_mtime': 0}
+pop = {'inode': None, 'offset': 0, 'bots': {}, 'server': {}, 'pos_mtime': 0,
+       'run_id': None, 'missions_done': 0, 'ended': False}
 
 
 def pop_positions():
@@ -552,7 +561,8 @@ def pop_read():
     except OSError:
         return
     if pop['inode'] != st.st_ino or st.st_size < pop['offset']:
-        pop.update(inode=st.st_ino, offset=0, bots={}, server={})
+        pop.update(inode=st.st_ino, offset=0, bots={}, server={}, pos_mtime=0,
+                   run_id=None, missions_done=0, ended=False)
     if st.st_size <= pop['offset']:
         return
     with POP_LOG.open('rb') as f:
@@ -566,6 +576,16 @@ def pop_read():
         except ValueError:
             continue
         e, b = r.get('e'), r.get('bot')
+        if e in ('stop', 'despawn'):
+            pop['ended'] = True
+            pop['bots'].clear()
+        if e == 'mission_done':
+            pop['missions_done'] += 1
+        if e == 'spawn':
+            if pop['run_id'] is None or pop['ended']:
+                pop['run_id'] = r.get('t')
+                pop['missions_done'] = 0
+            pop['ended'] = False
         if e == 'server':
             pop['server'] = r
         if not b:
@@ -599,6 +619,11 @@ def pop_read():
 
 
 def pop_rows():
+    with _pop_lock:
+        return _pop_rows()
+
+
+def _pop_rows():
     """Server bots seen in the last POP_STALE seconds, as compact rows for the page (see POPK in the script)."""
     pop_read()
     pop_positions()
@@ -621,7 +646,39 @@ def snapshot():
     bots = bot_rows(chars, reports)
     return {'who_age': age, 'error': error, 'time': time.strftime('%H:%M:%S'), 'chars': chars,
             'activity': activity(), 'places': places(), 'escorted': escorted(), 'bots': bots, 'areas': areas(),
-            'issues': issues(bots, reports, latest_play(), time.time()), 'pop': pop_rows(), 'pop_server': pop['server']}
+            'issues': issues(bots, reports, latest_play(), time.time()), 'pop': pop_rows(), 'pop_server': pop['server'],
+            'feed': feed_status()}
+
+
+def feed_status():
+    """Freshness-based status, not a process probe; down detection takes up to 180 s.
+
+    Server samples arrive once a minute. who.json covers a galaxy without a BotPop run.
+    Missing telemetry is unknown; an old readable sample is down, not a fetch failure.
+    """
+    now = time.time()
+    stamp = pop['server'].get('t')
+    try:
+        who_age = now - WHO.stat().st_mtime
+    except OSError:
+        who_age = None
+    recent = isinstance(stamp, (int, float)) and 0 <= now - stamp / 1000 <= 180
+    who_recent = who_age is not None and 0 <= who_age <= 60
+    up = bool(recent or who_recent) if stamp is not None or who_age is not None else None
+    active = (not pop['ended'] and pop['server'].get('online', 0) > 0) if recent else (False if up is False else None)
+    return {'server_up': up, 'run_active': active, 'run_id': pop['run_id'],
+            'missions_done': pop['missions_done']}
+
+
+def public_snapshot():
+    """Do not build the private snapshot: no roster, player names, logs or account reads."""
+    with _pop_lock:
+        rows = pop_rows()
+        data = public_filter({'pop': rows, 'pop_server': pop['server'], 'feed': feed_status()})
+        if data['stats']['server_up'] is False or pop['ended']:
+            data['bots'] = []
+            data['stats']['online'] = 0
+        return data
 
 
 def bot_detail(name):
@@ -794,6 +851,67 @@ class Handler(BaseHTTPRequestHandler):
 
     def log_message(self, *args):
         pass
+
+
+class PublicHandler(BaseHTTPRequestHandler):
+    """Exact route allowlist; no client image, private API or static-file fallback."""
+    def do_GET(self):
+        route = urlparse(self.path)
+        if route.query or route.path not in ('/', '/index.html', '/data.json'):
+            self.send_error(404)
+            return
+        if route.path == '/data.json':
+            body, kind = json.dumps(public_snapshot(), allow_nan=False).encode(), 'application/json'
+        else:
+            body, kind = PUBLIC_PAGE.encode(), 'text/html; charset=utf-8'
+        self.send_response(200)
+        self.send_header('Content-Type', kind)
+        self.send_header('Content-Length', str(len(body)))
+        self.send_header('Cache-Control', 'no-store')
+        self.send_header('X-Content-Type-Options', 'nosniff')
+        self.send_header('Content-Security-Policy', "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; img-src data:; frame-ancestors 'none'")
+        self.end_headers()
+        self.wfile.write(body)
+
+    def log_message(self, *args):
+        pass
+
+
+PUBLIC_PAGE = r'''<!doctype html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,">
+<title>Galaxy bot map</title><style>
+body{background:#0d1117;color:#e6e8eb;font:16px system-ui;margin:24px}h1{font-size:24px}
+button,select{background:#151b23;color:inherit;border:1px solid #394555;padding:8px;border-radius:6px}
+#panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+section{background:#151b23;padding:16px;border-radius:12px}canvas{width:100%;aspect-ratio:1;touch-action:none}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+label{margin-right:16px;display:inline-block;font-size:14px}#status{color:#adb7c4}
+</style><h1>Galaxy bot map</h1><p id="status">Waiting for telemetry</p>
+<p>Planet <select id="planet"><option value="">All planets</option></select></p>
+<div id="legend"></div><p>Server bots by profession. Hover a dot for state and level.</p><main id="panels"></main>
+<script>
+const hidden=new Set();let data=null;const panels=document.getElementById('panels');
+function draw(){if(!data)return;panels.replaceChildren();const sel=document.getElementById('planet').value;
+ const planets=[...new Set(data.bots.map(b=>b.planet))].sort();
+ for(const p of planets.filter(p=>!sel||p===sel)){const bs=data.bots.filter(b=>b.planet===p),sec=document.createElement('section');
+ const h=document.createElement('h2');h.textContent=p[0].toUpperCase()+p.slice(1)+' · '+bs.length+' bots';sec.append(h);
+ const cv=document.createElement('canvas');cv.width=cv.height=640;sec.append(cv);panels.append(sec);const c=cv.getContext('2d'),hits=[];
+ const xy=(x,y)=>[20+(x+8192)/16384*600,20+(8192-y)/16384*600];c.strokeStyle='#303c49';c.fillStyle='#8b949e';c.font='12px system-ui';
+ for(let n=-8192;n<=8192;n+=2048){let[x,y]=xy(n,n);c.beginPath();c.moveTo(x,20);c.lineTo(x,620);c.moveTo(20,y);c.lineTo(620,y);c.stroke()}
+ for(const [city,pos] of Object.entries(data.cities[p]||{})){let[x,y]=xy(...pos);c.fillStyle='#c1cad4';c.fillRect(x-2,y-2,4,4);c.fillText(city,Math.min(x+5,540),y-5)}
+ for(const b of bs){if(hidden.has(b.role)||b.x===null||b.y===null)continue;const[x,y]=xy(b.x,b.y);c.fillStyle=data.roles[b.role][1];c.beginPath();c.arc(x,y,3,0,7);c.fill();hits.push({x,y,b})}
+ cv.onmousemove=e=>{const r=cv.getBoundingClientRect(),x=(e.clientX-r.left)*640/r.width,y=(e.clientY-r.top)*640/r.height;
+ const hit=hits.findLast(h=>Math.hypot(h.x-x,h.y-y)<8);cv.title=hit?`${hit.b.label}: ${data.roles[hit.b.role][0]}, ${hit.b.state}, level ${hit.b.level}`:''};
+ }if(!planets.length)panels.textContent='No server bots in the latest snapshot.';
+}
+document.getElementById('planet').onchange=draw;
+async function poll(){try{const r=await fetch('/data.json',{cache:'no-store'});if(!r.ok)throw Error();data=await r.json();
+ const s=data.stats;document.getElementById('status').textContent=`${s.server_up===null?'Status unknown':s.server_up?'Galaxy up':'Galaxy down'} · ${s.online} bots · ${s.kills} kills · ${s.deaths} deaths · ${s.boxes} boxes`;
+ const select=document.getElementById('planet'),old=select.value;select.replaceChildren(new Option('All planets',''));for(const p of [...new Set(data.bots.map(b=>b.planet))].sort())select.add(new Option(p,p));select.value=old;
+ const legend=document.getElementById('legend');legend.replaceChildren();for(const [role,[name,color]] of Object.entries(data.roles)){const label=document.createElement('label'),input=document.createElement('input'),dot=document.createElement('span');input.type='checkbox';input.checked=!hidden.has(role);input.onchange=()=>{input.checked?hidden.delete(role):hidden.add(role);draw()};dot.className='dot';dot.style.background=color;label.append(input,dot,document.createTextNode(name));legend.append(label)}draw();
+ }catch(e){document.getElementById('status').textContent='Map telemetry unavailable';panels.replaceChildren()}}
+poll();setInterval(poll,5000);
+</script></html>'''
 
 
 PAGE = r'''<!doctype html>
@@ -1353,12 +1471,15 @@ addEventListener('resize',draw);
 
 def main():
     parser = argparse.ArgumentParser(description='Live map of the test galaxy (read-only).')
-    parser.add_argument('--port', type=int, default=8765)
+    parser.add_argument('--public', action='store_true', help='C46: only the anonymous server-bot map')
+    parser.add_argument('--port', type=int)
     args = parser.parse_args()
-    load_roster()
-    seed_history()
-    threading.Thread(target=record, args=({},), daemon=True).start()
-    server = ThreadingHTTPServer(('127.0.0.1', args.port), Handler)
+    args.port = args.port or (8766 if args.public else 8765)
+    if not args.public:
+        load_roster()
+        seed_history()
+        threading.Thread(target=record, args=({},), daemon=True).start()
+    server = ThreadingHTTPServer(('127.0.0.1', args.port), PublicHandler if args.public else Handler)
     print(f'live map on http://localhost:{args.port} (who.json: {WHO})', flush=True)
     server.serve_forever()
 

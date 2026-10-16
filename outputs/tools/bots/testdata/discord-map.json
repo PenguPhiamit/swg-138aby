@@ -1,0 +1,14 @@
+{
+  "chars": [{"name": "PRIVATE PLAYER", "kind": "player", "ip": "192.0.2.1"}],
+  "bots": [{"full": "PRIVATE SQUAD", "account": "PRIVATE ACCOUNT"}],
+  "activity": [{"detail": "PRIVATE LOG /private/source"}],
+  "issues": [{"bot": "PRIVATE PLAYER"}],
+  "pop": [
+    [123, "PRIVATE NAME", "marksman", "tatooine", 3528, -4804, "fighting", 2, 3, 20, 1, "PRIVATE CITY", "PRIVATE TARGET"],
+    [124, "PRIVATE NAME", "medic", "naboo", -4850, 4160, "walking", 1, 2, 4, 0, "PRIVATE CITY", "PRIVATE TARGET"],
+    [125, "PRIVATE NAME", "scout", "tatooine", 3200, -4200, "walking", 2, 1, 8, 2, "PRIVATE CITY", "PRIVATE TARGET"]
+  ],
+  "pop_server": {"online": 3, "tick_ms_avg": 4.6, "tick_ms_max": 46, "rss_mb": 5292, "account": "PRIVATE ACCOUNT"},
+  "feed": {"server_up": true, "run_active": true, "run_id": 100000, "missions_done": 7},
+  "error": "/private/source: PRIVATE PLAYER"
+}

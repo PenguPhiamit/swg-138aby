@@ -119,3 +119,5 @@ outputs/Agent/listener/
 outputs/tools/listener/listener-config.json
 # navmap.py floor plans (derived from the client files)
 outputs/Bot-reports/navmaps/
+# C46: webhook message ID, private previews, public quick-tunnel URL and process state
+outputs/Agent/discord-feed/
