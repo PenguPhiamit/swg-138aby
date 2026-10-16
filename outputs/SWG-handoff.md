@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C41 packet writer claimed 2026-10-15 12:49). Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy restarted 16:27 on dev `80895f63` (C39/C40 fixes, mercenary broker on the ground) with the squad accounts, AgentGear and BotPop; the Forn escort run was halted at 16:06 (owner: "shutdown test, see what the data says, then restart"). Live map on http://localhost:8765 (unit `swg-live-map`). - 2026-10-15 16:45.**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C41 packet writer claimed 2026-10-15 12:49). Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy: overnight launch simulation since 22:26 on dev `7bd915b6` (BotPop "all", 1,500 new players taking missions + 200 Ossus explorers; no squad runs). Owner, 22:37: no further restart without asking. Live map on http://localhost:8765 (a setsid process as swgemu while the simulation runs). - 2026-10-15 22:40.**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -324,6 +324,13 @@ ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fi
 Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test only; Claude reviews/builds/game-tests. No bots or restarts.
 
 ## Log
+
+### 2026-10-15 22:40 Claude: launch simulation run 4, overnight (missions, Ossus explorers, real purse)
+
+- Run 4 stopped at 22:07, five minutes in, on the first bot mission: `MissionObject::setMissionObjective` asserts the mission is locked. Bots now lock it as `MissionAcceptCallback` and `MissionAbortCallback` do (dev `17cacd70`). Rerun: 710 missions taken in 10 minutes; all 18 starting cities have an outdoor general terminal. The unpaid "mission_gone" rows at its end were the despawn.
+- Owner, 22:20: bots get the creation purse (10,000 cash, 100,000 bank) and pay trainers as `trainerConvHandler.lua` does (dev `7bd915b6`; row "broke" when short). Overnight run since 22:26: purse and training charges confirmed; 159 mission lairs spawned in 12 minutes, none destroyed yet. Level 1-2 bots take missions up to level 10 and are incapacitated by the lair defenders; left as is (owner: no restart without asking).
+- Reports (all four in): server rates `c213e8c`, starter economy `8cc38b7`, pacing `8878023`, spawns `a961ef8`. Owner decisions tomorrow: purse and training cost, per-type XP, the spawn level gate and five data edits.
+- Census tool `667725f`: Ossus export at 00:20 to `Bot-reports/launch-sim/ossus-census.md`. Fable's scheduled 00:32 job (after the 22:05 Hutt run ends) places Ossus points of interest and settlement flats on it, in `Fable-ossus/o7`. C38 stays paused until the simulation ends.
 
 ### 2026-10-15 22:35 Fable: Hutt S7 designed (concept, animation map, gear, new animations, Nal Hutta), photo studio, Ossus O6 pass
 
