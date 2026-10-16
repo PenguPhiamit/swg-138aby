@@ -46,10 +46,15 @@ DESCRIPTION = ("Slow to move and quick to count, the Hutts of Nal Hutta have run
                        ['Health', 'Strength', 'Constitution', 'Action', 'Quickness', 'Stamina', 'Mind', 'Focus', 'Willpower'],
                        RACIAL_MODS)))
 SKILL_NAME, SKILL_DESC = 'Hutt Special Features', 'Hutt Abilities'
+HUTT_PALETTE = ['npc_species_hutts', 8, 32]  # set_hutt_creation: 32 colours, 8 columns at creation
+CREATION_TABLES = ['creation/default_pc_equipment.iff', 'creation/default_pc_hairstyles.iff'] + [
+    'creation/profession_defaults_%s.iff' % p for p in (
+    'combat_brawler', 'combat_marksman', 'crafting_artisan', 'outdoors_scout', 'science_medic', 'social_entertainer')]
 ALLOWED_CHANGES = {'datatables/creation/attribute_limits.iff', 'datatables/creation/racial_mods.iff',
                    'datatables/customization/allow_bald.iff', 'datatables/customization/customization_data.iff',
                    'datatables/customization/customization_group_instance.iff', 'datatables/skill/skills.iff',
-                   'string/en/skl_d.stf', 'string/en/skl_n.stf', 'string/en/player_species.stf', 'ui/ui_avatardata.inc'}
+                   'string/en/skl_d.stf', 'string/en/skl_n.stf', 'string/en/player_species.stf', 'ui/ui_avatardata.inc',
+                   'datatables/customization/palette_columns.iff'} | set(CREATION_TABLES)
 
 
 def _set_row(stage, rel, values):
@@ -80,6 +85,42 @@ def set_hutt_facts(stage):
     _set_text(stage, 'string/en/skl_d.stf', 'species_hutt', SKILL_DESC)
 
 
+# The owner's client crashed creating a Hutt (16 Oct 4:12 PM, integer divide by zero on the customization screen):
+# 1. the Hutt skin colour (index_color_1 in shader/hutt_*_hue_*.sht) is palette/npc_species_hutts.pal (32 colours), which
+#    had no palette_columns row, so the creation colour grid had 0 columns. The Chiss needed the same (npc_chiss_skin).
+# 2. no Hutt block in default_pc_equipment, default_pc_hairstyles or the six profession_defaults, so the client dressed
+#    the Hutt in the first block's human-male clothes (pants_s05_m in the crash log) and would offer human hair. Hutts
+#    get NAME-only blocks, exactly like the stock Wookiee ones.
+def _player(name):
+    return b'object/creature/player/shared_%s.iff\x00' % name.encode()
+
+
+def set_hutt_creation(stage):
+    from swgfmt import trn_iff as iff
+    path = os.path.join(stage, 'datatables', 'customization', 'palette_columns.iff')
+    table = st.read_dtii(open(path, 'rb').read())
+    rows = [r for r in table['rows'] if r[0] == HUTT_PALETTE[0]]
+    if not rows:
+        like = next(r for r in table['rows'] if r[0] == 'npc_chiss_skin')
+        table['rows'].append(HUTT_PALETTE + like[3:])
+        open(path, 'wb').write(st.write_dtii(table))
+    for rel in CREATION_TABLES:
+        path = os.path.join(stage, rel.replace('/', os.sep))
+        root = iff.parse(open(path, 'rb').read())
+        body = root[0].children[0]
+        names = [c.children[0].data for c in body.children if c.is_form and c.form == 'PTMP']
+        for gender in ('male', 'female'):
+            if _player('hutt_' + gender) in names:
+                continue
+            wookiee = names.index(_player('wookiee_' + gender))
+            blocks = [c for c in body.children if c.is_form and c.form == 'PTMP']
+            assert len(blocks[wookiee].children) == 1, rel  # the stock Wookiee block is its NAME alone
+            at = body.children.index(blocks[wookiee]) + 1
+            body.children.insert(at, iff.form('PTMP', iff.chunk('NAME', _player('hutt_' + gender))))
+            names = [c.children[0].data for c in body.children if c.is_form and c.form == 'PTMP']
+        open(path, 'wb').write(iff.build(root))
+
+
 def main():
     stage = os.path.join(WORK, 'stage')
     if os.path.isdir(stage):
@@ -102,6 +143,7 @@ def main():
     # The S7 profile (GPT's C54 F2/F3): the generic stager copies the package's Wookiee-like row and keeps the
     # imported description, so the approved values are set here explicitly.
     set_hutt_facts(stage)
+    set_hutt_creation(stage)
 
     # Always rebuild and check the Level 1 animation table (C54 F6: a cached table was copied unchecked).
     lat_tool = os.path.join(HERE, 'tools', 'build_hutt_lat.py')
@@ -138,7 +180,13 @@ def main():
     al = [r for r in st.read_dtii(ours['datatables/creation/attribute_limits.iff'])['rows'] if r[0] == 'hutt_male']
     assert rm == [['hutt_male', 'hutt_female'] + RACIAL_MODS], rm
     assert al == [['hutt_male', 'hutt_female'] + ATTRIBUTE_LIMITS], al
-    print('S7 facts verified in the packed archive: racial mods, limits; allowed changes only')
+    pc = [r for r in st.read_dtii(ours['datatables/customization/palette_columns.iff'])['rows'] if r[0] == HUTT_PALETTE[0]]
+    assert len(pc) == 1 and pc[0][:3] == HUTT_PALETTE, pc
+    for rel in CREATION_TABLES:
+        for gender in ('male', 'female'):
+            assert ours[rel].count(_player('hutt_' + gender)) == 1, (rel, gender)
+    print('S7 facts verified in the packed archive: racial mods, limits, the skin palette row, empty clothing blocks; '
+          'allowed changes only')
     return 0
 
 
