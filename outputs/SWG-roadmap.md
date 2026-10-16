@@ -81,6 +81,8 @@ Done means live and passing the gate, not "built on the test galaxy". The board 
 
 - [x] C51 checkout housekeeping (16 Oct, owner morning-sheet items 1-3): `a5b7604`; targeted ignores, cached-only rotating output/process-check removal and [remaining author commit inventory](Agent/checkout-churn-1016.md); queues/history/local files preserved.
 
+- [x] C52 city research revision and [M1 disposable-town probe plan](Documentation-support/bot-cities-plan.md) (16 Oct): owner Q1-Q13 recorded; excluded citations removed. Plan only; implementation and in-game acceptance remain open.
+
 ## House rules for anyone working on the server
 
 - [x] C22 independent Hoth and C4 fix review (14 Oct): 2 P2 + 1 P3; [report](Documentation-support/review-C22/C22-review.md), offline evidence saved; gameplay remains untested.

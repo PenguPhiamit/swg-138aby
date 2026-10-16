@@ -1,5 +1,7 @@
 # Player cities: what players built, how Core3 runs them, how our bots would build one, and how to push cities toward creativity
 
+**16 Oct revision (C52): SWG Legends and SWG Restoration citations and claims dependent only on them were removed at the owner's request (Q13, 05:40). Owner answers below supersede the original proposals; [bot-cities-plan.md](bot-cities-plan.md) is the current M1 plan.**
+
 16 Oct 2026, 2:10 AM. Claude (Sonnet 5.5), for the owner's 1:30 AM request ("research player cities, notable ones of live servers and private servers and how they develop, and 1. how our bots will do it, and 2. find a way to encourage more creativity in city design"). Research and design only. No code, config, server, bot or board entry was changed, and nothing under `/opt/swg` was written. Core3 facts are from `/opt/swg/Core3-dev` at `8b48a044` (1:03 AM, 16 Oct), read inside WSL; line numbers move, so re-grep before building.
 
 **Labels used for every claim**
@@ -9,23 +11,23 @@
 ## Summary
 
 1. **Real cities were friend-group and guild cities.** The official SOE list of 3 Feb 2011 [official][archive] names 1,308 cities of rank 2 or higher on 14 servers; 420 were rank 5. The biggest server (Starsider) had 111 of its 110 rank-4-or-higher slots taken, so on big servers the caps, not demand, limited growth. Section 1.1.
-2. **Notable cities were notable for a job, not for size:** a role-play hub that outlived the CU and NGE (Black Sands), a guild fortress under base raids (Hero's Legacy), a crafters' research town (Black Sun Ravine, Bantha Cairns), an underworld slum (Pelgo Slums), a guild with three malls and a temple (Elysium). Section 1.3 and 1.4.
-3. **What kept them:** a guild or friend group that stays, a site with room and services, regular events, and rules that clear dead cities (live removed citizens inactive for 90 days from 1 May 2009; Infinity cleaned up inactive cities in 2023). **What killed or stalled them:** caps (Legends in 2019: "permanently city-capped" planets), uneven terrain (one Restoration city moved twice), upkeep shocks (Restoration, March 2024), and the end of the servers.
+2. **Notable cities had a purpose:** Hero's Legacy was a guild fortress under base raids, and Elysium had three malls and a temple. Sections 1.3 and 1.4.
+3. **What kept them:** a guild or friend group that stays, room and services, and rules that clear inactive cities (live removed inactive citizens from 1 May 2009; Infinity prepared inactive cities for demolition in 2023). **What stalled them:** city caps (the SOE list) and upkeep (our calculation in 2.6).
 4. **Core3's city system matches the Feb 2005 pre-CU design closely** (upkeep, structure ranks, eight specializations, 24-hour founding window). Our two settings change its feel: citizens per rank {1,2,3,4,5} (stock {2,4,6,8,10}, pre-CU {10,20,35,55,85}) and upkeep ×0.5. A five-character city reaches rank 5 in **4 weekly updates (28 days)**, because rank moves one step per update. Section 2.
 5. **Money is the hidden wall at our settings.** Rank 5 hall upkeep alone is 67,500 a week and a "full" town about 240,000, while the highest taxes a 5-citizen city can set raise about 12,700 a week [calc]. A city funds itself only by donation. Section 2.6.
 6. **Gaps in Core3** (ranked in 2.11): Clone Lab and Entertainment District do nothing; no `/cityWarn`; city guards and `/unCityBan` are stubs; militia have no force powers; no inactive-citizen purge and no city faction alignment; Hoth and Ossus are missing from `CitiesAllowed`, so founding there likely hits an empty-vector index.
 7. **Bots can found and grow cities if they call the city manager directly** (the stock flows open windows, and a window sent to a client-less bot would crash `SuiPageData::sendTo`, which has no null check on the client). The design below: settler roles, a site planner that reuses the Ossus census, a compressed city clock (one simulated week = 6 minutes), transient structures, a quota of at most 30% of each planet's city slots, and a JSONL event stream. Five probes come first (Section 3.12). Section 3.
 8. **Three showstoppers to prove first:** the structure maintenance task destroys any structure whose owner has no player name (`StructureMaintenanceTask.cpp`), so bot-owned structures need a plan; the weekly cadence needs compressing; and bots could fill the planets' city caps and lock humans out.
-9. **Creativity: what worked.** Contests (a "Galactic Home Show" ran on Legends monthly, on Empire in Flames, Restoration and SWGEmu's Finalizer in 2023; Infinity ran a "Best Dressed City" with a 135-million-credit prize), free-form object placement ("pod-racers built from hundreds of parts"), generous decoration limits (live raised them 50% in 2009), props that stay (Restoration, June 2024), and specializations as identity (Restoration's 2026 refresh). Section 4.
-10. **Top ideas for our server, cheapest first:** a Home Show / Best Dressed City contest with a badge; raise the decoration cap and drop decoration upkeep; make all eight specializations real; pre-flattened founding sites; let mayors keep static event-perk props. Bot-seeded example towns come after the bot harness works. Ranked list in 4.3. Owner's questions are at the end.
+9. **Creativity evidence retained:** Home Shows on Empire in Flames and Finalizer, Infinity's Best Dressed City, free-form object placement on live, and the decoration-limit increase in Game Update 8. Section 4.
+10. **Owner-approved direction:** a monthly Home Show / Best Dressed City with a modest credit prize; test 30 decorations per rank and zero decoration upkeep; make Clone Lab and Entertainment District work at configured values; a 10-static-prop pilot. No terrain edits or cities on Hoth/Ossus. Disposable bot towns come first. See the answered question list and [M1 plan](bot-cities-plan.md).
 
 ## 0. Method and limits
 
 - **Read:** Core3-dev city code (`src/server/zone/managers/city/`, `objects/region/CityRegion*`, `StructureManager.cpp`, place-structure sessions, deed components, `bin/scripts/managers/city_manager.lua`, the civic structure templates under `bin/scripts/object/building/player/city/`), the bot code in `src/server/zone/managers/botpop/`, the launch-simulation reports, and our earlier `Systems-baseline/id-politician-gaps.md` (15 Oct), which I re-checked against the tree rather than copying.
 - **Web:** public pages only; no logins, downloads or posts. Fandom pages (blocked for the fetch tool) were read in the browser pane, as `AGENTS.md` says.
-- **Not read:** the 2007 official manual and the "Advanced Guide" on swgemu.com / swgreckoning.org sit behind a Cloudflare "just a moment" check. I stopped there and did not try to pass it. I used the Internet Archive copies of two forum guides (25 and 26 Feb 2005) instead. MassivelyOP's Felucia article, the Unwinnable retrospective, a 2004 retrospective on when cities arrived (https://archive.rpgamer.com/news/Q2-2004/062804c.html), Legends' spring 2024 newsletter, the SWG wiki's Servers page (server closure dates), Shacknews and a forum repost for the Forces Under Siege update, and the Storyteller launch coverage (Chapter 6, 22 May 2007) were only seen as search snippets or titles; the claims taken from them are marked "search summary" or sit in the "seen only" list at the end.
+- **Not read:** the 2007 official manual and the "Advanced Guide" on swgemu.com / swgreckoning.org sit behind a Cloudflare "just a moment" check. I stopped there and did not try to pass it. I used the Internet Archive copies of two forum guides (25 and 26 Feb 2005) instead. the Unwinnable retrospective, a 2004 retrospective on when cities arrived (https://archive.rpgamer.com/news/Q2-2004/062804c.html), the SWG wiki's Servers page (server closure dates), Shacknews and a forum repost for the Forces Under Siege update, and the Storyteller launch coverage (Chapter 6, 22 May 2007) were only seen as search snippets or titles; the claims taken from them are marked "search summary" or sit in the "seen only" list at the end.
 - **People:** no player, mayor or guild-leader names are used. Guild, city, server and site names are. Press authors are not named.
-- **Provenance note.** Legends and Restoration are not on SWGEmu's list of AGPL-compliant servers (the SWGEmu wiki says some servers are "illegally operated source distributions"). I used only their public wiki pages, news posts and dev diaries as evidence of what players did. Nothing of theirs was downloaded and no code or data was looked at. Sentinel's Republic is excluded by the owner and is not used, though it appears in some of the roundups I read.
+- **Provenance:** only the retained sources below support this revision; no material from the excluded servers is an implementation dependency.
 - **Gaps:** I found no public city documentation for Awakening, and none for Finalizer or Basilisk beyond one guild's recruiting post. The SWGEmu forums are not indexed publicly; the Finalizer/Basilisk Discord is where that evidence would be.
 
 ## 1. Notable player cities
@@ -63,16 +65,16 @@ What else the list shows:
 ### 1.2 Patterns that matter for our design
 
 1. **Cities were social, not geographic.** Guild pages describe a city as the guild's home; the 2005 guide says outright that a city is "not a solo venture" and that having a goal (role-play, PvP, commerce, crafting) is the way to a lasting city [community][archive].
-2. **Slots saturate on a big server.** Starsider was at its cap in 2011. Legends hit the same thing: "way too easy to hold a player city with just a few people and almost no cash", so most planets were "permanently city-capped" and small cities could not grow [press: MassivelyOP, 1 Apr 2019]. The fixes aimed at clearing dead or tiny cities: live removed citizens inactive 90 days (Game Update 8, 12 Mar 2009, from 1 May 2009) [official]; Legends raised the players and characters per rank and the upkeep (Mar 2019); Infinity prepared inactive cities for demolition in March 2023 [press: mmofolklorist roundup].
-3. **Services draw crowds, crowds draw shops.** Entertainers and medics work in player cantinas and hospitals; merchants moved into the biggest cities [press: Unwinnable, snippet]. Mos Pelgo's early growth came from "four mini malls" stocked by early vendors plus a shuttle [official: Restoration spotlight, 26 May 2024]. Our own run shows the same effect for bots: 2,659 of 2,661 rests watched a dancer when hurt hunters, medics and dancers met in town [measured: `FINDINGS.md` section 6].
-4. **Terrain and object count are the practical limits.** One Restoration city moved twice (three sites in all) because its first site was uneven and limited expansion; another found its mushroom-shaped rocks difficult for planning; the first one's market district is hard on the processor [official: Restoration spotlights]. Restoration put terraforming off to "a future, larger update" [official: dev diary, 24 Aug 2026].
-5. **Identity is the retention tool.** Players chose specializations for the guild's trade (Research Center for crafters), named districts, ran Friday role-play nights and anniversary parties [official: Restoration spotlights]. Restoration's 2026 diary says rank 5 was "the city end game", with nothing after it, and wants "cities to be unique".
+2. **Slots saturate on a big server.** Starsider was at its cap in the 2011 SOE list. Live removed citizens inactive 90 days (Game Update 8, effective 1 May 2009) [official]; Infinity prepared inactive cities for demolition in March 2023 [press: mmofolklorist roundup].
+3. **Services draw crowds.** Entertainers and medics work in player cantinas and hospitals; merchants moved into big cities [press: Unwinnable, snippet]. Our launch run recorded 2,659 of 2,661 rests watching a dancer where hurt hunters, medics and dancers met [measured: `FINDINGS.md` section 6].
+4. **Terrain constrains placement here.** Core3 checks build permission and footprints and does not flatten terrain [code: 2.2]. Select naturally suitable sites; owner Q10 forbids terrain edits.
+5. **Identity is a design goal.** Guild homes and Elysium's three approved house styles are retained examples [community: guild pages, City:Elysium]. Their effect on retention has not been measured here.
 
 ### 1.3 Live servers (2003-2011): notable cities
 
 | City | Server, planet, era | What made it notable | How it grew | What kept or ended it | Source |
 |---|---|---|---|---|---|
-| **Black Sands** | Gorath, Tatooine. Founded 29 Mar 2004; rank 4 in Feb 2011 | Role-play and crafting hub; a valley about 3 km north-east of Mos Eisley, near the NPC town's services but outside its lag. The mayor's own claim: "the largest and oldest city on Tatooine" at shutdown | Founded early 2004; "took a couple of months" to become an official city | Outlived the CU and NGE until the Dec 2011 shutdown. The same group re-founded it on Restoration in Sept 2022, at the same spot, three days after choosing that server, with the hall up within two weeks | [official] Restoration spotlight, 26 May 2024; [official][archive] SOE list 2011 |
+| **Black Sands** | Gorath, Tatooine; founded 29 Mar 2004; rank 4 in Feb 2011 | Listed in SOE's survivor snapshot | No development history retained | Present in the February 2011 list | [official][archive] SOE list 2011 |
 | **Hero's Legacy** | Starsider, Talus (east of Dearic, Azaki Plains). Founded 27 Apr 2004; rank 5 in Feb 2011 | A guild city: the Heroes of Hope player association used static Anchorhead as its town (shops, tavern shows, flag fights) until official cities began, then "dropped a city hall on Talus" | Houses and structures first built by guild crafters; hunting in the swamps, fishing; PA halls and safehouses added for defence | Imperial players raided it (turrets burned, bases lost); the guild rebuilt. Still rank 5 after 6.8 years | [community] SWG wiki "HERO (PA)"; [official][archive] SOE list |
 | **Echo Base** (my match to the guild's "Echo Base City") | Eclipse, Corellia. Founded 2 Jan 2005; rank 4 | Prime city of a rebel and neutral-traders guild of up to 500 members that ran a chain of cities, with **its own militia and leaders separate from the guild** and neutrals welcome | A founder-architect built the first buildings; later cities were added | A match on name and server only; the guild page does not give the rank | [community] SWG wiki "Guild:ECHO"; [official][archive] SOE list |
 | **Mandalorian Brotherhood city** | Chilastra, Lok | A role-play guild city made of all its members, hosting a "Dueling Arena" the whole server could watch and bet on | n/a | Which row of the 2011 list it is, is not stated | [community] SWG wiki "Guild:-MB-" |
@@ -89,11 +91,7 @@ Guinness World Records credits SWG with the first game to let "groups of houses"
 | **Honour** (+ Honour Outpost) | SWGEmu **Basilisk**, Lok (Metropolis) and Corellia, Jul 2019 | A rebel guild's "well established" city and a second outpost city next to the Corellia rebel base that "recently got a shuttle"; "pretty much self sufficient with our crafters"; raids; recruits by Discord and website | [community] Steam post, 25 Jul 2019 (last edited 16 Sep 2019) |
 | **Elysium** | **Infinity**, Talus (-5850, -300), undated page | Metropolis, population 113, Research Center. An Imperial guild's home: three large guild malls, a Dark Jedi temple, medical and cloning centres, a garage, a shuttleport, a cantina. To join you need the guild and one of **3 pre-approved house designs** | [community] SWG wiki "City:Elysium" |
 | **Infinity: Best Dressed City** | Infinity, Mar-May 2023 | A faction-based contest, applications in March, winner announced 4 May, **135-million-credit prize**; praised as "a great display of using the game's props and furniture to its fullest". Infinity also readied inactive cities for demolition and added a 6th rank, Megalopolis, in March 2023 | [press] mmofolklorist roundups, Apr and 4 May 2023 |
-| **Black Sun Ravine** | **Restoration**, Tatooine (north-central, near Mos Espa). Founded 16 May 2022 | 15 adventurers founded it and nearly all still play there. A valley with remnants of a podrace course; a mall with a museum, a waterfall viewpoint, "Twin Sun Square". Research Centre because the founders are crafters. Hosts cantina crawls and a cross-galaxy race | [official] spotlight, 26 Jan 2024 |
-| **Mos Pelgo** and **Pelgo Slums** | Restoration, Tatooine (Valley of the Wind). Mos Pelgo founded late 2021; Pelgo Slums' founding date is not given (spotlight 10 Dec 2024) | Mos Pelgo: a Western main street with staged shootouts, a "Shadow Market" district of very high object density (hard on the processor), moved twice (three sites) before this valley because the first had uneven ground. Pelgo Slums: alleys instead of streets, "a glorious gritty chaotic mess", no medical centre (street surgeons), Improved Job Market because of bounty hunters, founded by people pushed out of the town next door | [official] spotlights, 26 May and 10 Dec 2024 |
-| **Bantha Cairns** | Restoration, Tatooine (stone arches north-west of Mos Entha). 17 Jan 2025 | A research town for crafters built around the natural arches with a green "Bantha Star" light system; a renovated cantina with public crafting stations; a "hidden" spaceport. Founded by a few friends from another emulator and grew "far beyond their expectations" | [official] spotlight, 20 Sep 2025 |
 | **Stardust** | SWGEmu-based; custom planets | 13 cities listed on 10 of its 12 planets, including its added planets (Chandrila, Lothal, Kaas; Moraband and Nal Hutta are listed with none). Uses stock thresholds {2,4,6,8,10}. Its page says elections are every 3 days (a custom change) | [community] Stardust wiki (undated) |
-| **Legends** | Legends (not Core3), 2019-2024 | Raised the characters and accounts per rank in 2019; added Bespin (Cloud City apartments) in 2021 and a new planet, Felucia, "with new houses, player cities" (headline only); a monthly **Galactic Home Show** with themes; a winter 2023-24 revamp of cities with "new specs and deco" (new parks and a landing pad teased in a spring 2024 newsletter, seen only in a search summary) | [press] MassivelyOP 1 Apr 2019, 16 Apr 2021, 11 Mar 2024; [press] mmofolklorist Mar-Jun 2023 |
 | **Empire in Flames** | SWGEmu-based, 2023 | "Strict player cities", an "anti-urban-sprawl housing system"; its first Galactic Home Show (June 2023) with a **Home Show winner's badge** | [press] MassivelyOP (search snippet); mmofolklorist May-Jun 2023 |
 | **SWGEmu Finalizer / Basilisk** | 2023 | Finalizer's first Galactic Home Show ran during Empire Day, 26 Jun-5 Jul 2023; Core3 added rotate-on-every-axis furniture (Apr 2023) | [press] mmofolklorist Apr and Jul 2023 |
 | **Awakening** | 2022 | 8th anniversary in Nov 2022 with paintings and a badge. No public city documentation found | [press] mmofolklorist, Dec 2022 |
@@ -115,16 +113,16 @@ What went wrong in practice: citizens drifting off (demotion), upkeep outrunning
 
 ### 2.1 Our settings against others
 
-| Setting | Pre-CU 2005 [archive] | Late live ~2011 [community] | Core3 stock [code] | **Ours** [code] | Restoration | Legends | Stardust |
-|---|---|---|---|---|---|---|---|
-| Citizens per rank 1-5 | 10, 20, 35, 55, 85 | 5, 10, 15, 30, 40 | 2, 4, 6, 8, 10 | **1, 2, 3, 4, 5** | wiki 25 Sep 2026: 5, 10, 15, 30, 40; update 1.2.1 (1 Mar 2024): 16, 24, 32, 48, 64 (unresolved); 8-rank refresh planned | accounts/characters: 2/7, 3/14, 5/22, 7/35, 10/50 | 2, 4, 6, 8, 10 |
-| Radius, m | 150, 200, 300, 400, 450 | same | same | **same** | same (1.2.1: 250-800) | 150, 200, 300, 425, 500 | same |
-| Update | weekly | weekly | 10,080 min | **10,080 min** | weekly | weekly | weekly |
-| Election | 3 weeks | 3 weeks | 3 updates | **3 updates** | n/a | n/a | page says 3 days |
-| Hall upkeep rank 1 to 5, per week | 35k, 60k, 85k, 110k, 135k | wiki lists 3.5k to 13.5k (a tenth; unresolved) | 35k + 25k x (rank-1) | **x0.5: 17.5k, 30k, 42.5k, 55k, 67.5k** | 1.2.1: 50k x rank | 41k to 201k | n/a |
-| Spacing from other cities | 1,000 m | not stated | 1,024 m centre to centre; NPC towns 2 x max(radius, 512) | **same** | 1,500 m | n/a | n/a |
-| Cities per planet | 20 (core), 50 (others) | same | same | **same** | same | same | same |
-| Founding window | 24 h | 24 h | `NewCityGracePeriod` 1,440 min | **same** | n/a | n/a | n/a |
+| Setting | Pre-CU 2005 [archive] | Late live ~2011 [community] | Core3 stock [code] | **Ours** [code] | Stardust |
+|---|---|---|---|---|---|
+| Citizens per rank 1-5 | 10, 20, 35, 55, 85 | 5, 10, 15, 30, 40 | 2, 4, 6, 8, 10 | **1, 2, 3, 4, 5** | 2, 4, 6, 8, 10 |
+| Radius, m | 150, 200, 300, 400, 450 | same | same | **same** | same |
+| Update | weekly | weekly | 10,080 min | **10,080 min** | weekly |
+| Election | 3 weeks | 3 weeks | 3 updates | **3 updates** | page says 3 days |
+| Hall upkeep rank 1 to 5, per week | 35k, 60k, 85k, 110k, 135k | wiki lists 3.5k to 13.5k (a tenth; unresolved) | 35k + 25k x (rank-1) | **x0.5: 17.5k, 30k, 42.5k, 55k, 67.5k** | n/a |
+| Spacing from other cities | 1,000 m | not stated | 1,024 m centre to centre; NPC towns 2 x max(radius, 512) | **same** | n/a |
+| Cities per planet | 20 (core), 50 (others) | same | same | **same** | same |
+| Founding window | 24 h | 24 h | `NewCityGracePeriod` 1,440 min | **same** | n/a |
 
 Sources for stock and ours: `bin/scripts/managers/city_manager.lua` and `git log -p` on it (`4357970d`, the 13 Oct sandbox commit, changed `CitizensPerRank` from {2,4,6,8,10} to {1,2,3,4,5} and `maintenanceDiscount` from 1.0 to 0.5). The file keeps a commented-out {10, 20, 35, 55, 85}: that is the 2005 value.
 
@@ -245,6 +243,8 @@ No 90-day inactive-citizen purge (Game Update 8, 1 May 2009), no city faction al
 
 ## 3. Part 1: how our server bots found and grow a city
 
+**Historical proposal:** the owner answers below and the [M1 plan](bot-cities-plan.md) supersede this section's probe ordering, clock overrides and rollout size. Retained for technical context, not execution instructions.
+
 ### 3.1 Goal and scope
 
 Give the launch simulation a **settler** population that behaves like a friend group founding a town: choose a site, place a city hall, bring in citizens with houses, let the weekly update promote the city, run taxes and an election, build the civic structures its rank allows, then decorate and trade. It exists to **measure** (time to each rank, credits, upkeep load, server cost) and, later, to **seed** example towns (Part 2). **Test galaxy only**, behind `isDisposableTestGalaxy()` as `/botpop` is (`BotPopCommand.h`) and a new `Core3.BotPopCities` flag. No code is written here.
@@ -288,18 +288,18 @@ Settlers are a new launch role next to `BRAWLER ... EXPLORER` in `LaunchState` (
    - `PlanetManager::isBuildingPermittedAt`, `findObjectInNoBuildZone`, `validateClientCityInRange` (NPC towns), `CityManager::validateCityInRange` (other cities), name checks;
    - not on water, not within 128 m of a lair, camp, POI or another structure's footprint;
    - at least **1,400 m** from any other player city centre (the code needs 1,024; the extra covers a 450 m radius).
-3. **Quota.** Bots may use at most **30% of each planet's slots at each rank** (core planets: 6 cities, others: 15), and no bot cities on the planet the owner is testing on. The city report counts the free slots left for people.
+3. **Quota.** Bots may use at most **30% of each planet's slots at each rank** (rank-1 caps: core 6, others 15; higher-rank limits are smaller, see the M1 plan), and no bot cities on the planet the owner is testing on. The city report counts the free slots left for people.
 4. **Placement coordinates.** Houses are placed on a ring or grid around the hall inside the current radius (150 m at founding), 12 m apart as a minimum, rotated to face the hall; later buildings go in the ring the next rank's radius opens (200 m, 300 m, 400 m).
 
 **Archetypes** (each is a layout recipe plus a decoration palette; names from our own word lists, themed to 138-139 ABY, no real names):
 
 | Archetype | Evidence it is real | Layout |
 |---|---|---|
-| Crafters' market | Black Sun Ravine, Bantha Cairns, Elysium malls | hall, plaza, ring of shops and houses, Research Center |
-| Role-play town | Black Sands, Pelgo | main street with cantina at one end, amphitheater (theater) at the other |
+| Crafters' market | Elysium malls | hall, plaza, ring of shops and houses, Research Center |
+| Role-play town | Original layout proposal; no retained case-specific evidence | main street with cantina at one end, theater at the other |
 | Guild fortress | Hero's Legacy, Echo Base | tight compound near the hall, turrets/flags as props |
 | Hunters' outpost | Honour-style guild satellite | small, near wildlife, a garage and garden |
-| Temple camp | "Temple", "Jedi", "Sith" names (16 in the 2011 list) | ruin-themed ring on Ossus, no shuttleport |
+| Temple camp | "Temple", "Jedi", "Sith" names (16 in the 2011 list) | ruin-themed ring on an allowed planet, no shuttleport |
 | Port town | Elysium (shuttleport, garage), Honour Outpost | shuttleport at the edge, bank and garage on the road |
 
 ### 3.5 Order of work (organic against accelerated)
@@ -381,7 +381,7 @@ One JSONL stream beside `log/botpop-launch.jsonl` (`botpop-city.jsonl`), same wr
 2. **Clock (F2).** Without 3.7 the system shows nothing in a session. Mitigation as 3.7; `Force City Update` already exists for staff.
 3. **Slot grab.** Bots take real players' city slots. Mitigation: the 30% quota, a per-planet allow-list, and `destroyCity` for all bot cities before any human test.
 4. **Window flows crash a bot (F4).** Mitigation: call only the manager methods and extracted callback logic; add the one-line null guard in `SuiPageData::sendTo`.
-5. **Empty `CitiesAllowed` entry** (2.11 item 1). Do not test on Hoth or Ossus until `CitiesAllowed` lists them and `isCityRankCapped` guards a missing key.
+5. **Empty `CitiesAllowed` entry** (historical finding, 2.11 item 1). Verify safe refusal only; Hoth and Ossus must stay forbidden (owner Q9).
 6. **Locks (F10).** Inline calls from a bot step can deadlock with the city and structure locks. Mitigation: queued tasks, lock order city then mayor.
 7. **Treasury wall (2.6).** Expect cities to stall at rank 3 or 4. This is a result, not a bug; the donation policy and an `--endow` switch (harness donates to a floor) let a run go further and log it.
 8. **Nav mesh and objects.** Every city builds a 480 m nav mesh (`CityRegionImplementation.cpp:627`) and every house adds cells; 40 cities at once could queue a lot of Recast jobs. Start at 5 cities, step to 10, 20 and 40, and stagger founding by 20 s.
@@ -410,18 +410,17 @@ Estimates are [est]. Claude builds, ChatGPT reviews, per `AGENTS.md`; the test g
 
 | Mechanic | Where, when | Effect | Source |
 |---|---|---|---|
-| **Contests with a prize or badge** | Legends monthly Galactic Home Show with themes (2023); Empire in Flames first show Jun 2023 (winner's badge); Restoration GCW-themed show, 5-million prize (Jul 2023); Finalizer first show 26 Jun-5 Jul 2023; Infinity Best Dressed City, 135-million prize (May 2023) | entries use "props and furniture to its fullest"; winners publicised; repeatable and cheap | [press] mmofolklorist Mar-Jul 2023 |
+| **Contests with a prize or badge** | Empire in Flames first show Jun 2023 (winner's badge); Finalizer first show 26 Jun-5 Jul 2023; Infinity Best Dressed City (May 2023) | public recognition and entries using props and furniture | [press] mmofolklorist May-Jul 2023 |
 | **Free-form object placement** | live "advanced object manipulation system": sculptures, pod-racers from hundreds of parts, a custom starport; decorators wrote macros for the slow slash commands | the engine of creativity: renaming crafted items to reuse them (a painting as a shower tile) | [press] PC Gamer 16 Dec 2011; Engadget 9 Dec 2011 |
-| **Better tools** | SWGEmu added rotate on every axis (Apr 2023); Core3 `/rotateFurniture` with yaw, pitch or roll; Restoration Storyteller blueprints save a scene to redeploy; a community city-map planner existed on live | lowers the cost of a good layout | [press] mmofolklorist Apr 2023; [code] `RotateFurnitureCommand.h`; [community] Restoration wiki; SWG wiki links |
-| **Decoration limits that grow** | live Game Update 8: base decorations and civic structures +50%; Outdoor Enhancement specialization +33%; Restoration June 2024: decorations and gardens lost city upkeep, props placed in a city stopped expiring, 3-million-credit payout to compensate | caps and upkeep were the brakes on creativity; backlash when upkeep rose | [official] Game Update 8 notes; Restoration 1.2.1 (1 Mar 2024) and 1.2.3 (10 Jun 2024) |
-| **Props that persist** | Storyteller (Chapter 6, 22 May 2007, tokens at theatre vendors; static props, effects, NPCs); Restoration: static props in a city no longer expire (1.2.3), mayors and militia can remove them; Storyteller items last 8 extra hours in a city, "Encore Performance" specialization 12 more | stage dressing, event sets, fake landmarks | [press] Shacknews and Engadget coverage via search; [official] Game Update 8; Restoration notes |
-| **Specializations as identity** | live 9 specializations; Restoration refresh: ~25 planned, major and minor, "forcing trade-offs" so every city differs | the city says what it is for | [official] Restoration dev diary, 24 Aug 2026 |
-| **New planets with their own cities** | Legends Bespin (Cloud City apartments), Felucia; Stardust's added planets (one city each) | new ground and new styles | [press] MassivelyOP; [community] Stardust wiki |
+| **Better tools** | SWGEmu rotate on every axis (Apr 2023); Core3 yaw, pitch and roll | lowers layout effort | [press] mmofolklorist Apr 2023; [code] `RotateFurnitureCommand.h` |
+| **Decoration limits that grow** | live GU8: base decorations/civic structures +50%; Outdoor Enhancement +33% | greater placement capacity | [official] Game Update 8 notes |
+| **Event staging** | Storyteller (Chapter 6, 22 May 2007); GU8 extends Storyteller lifetime in cities and with Encore Performance | temporary scene dressing | [press] Shacknews and Engadget search summaries; [official] GU8 |
+| **Specializations** | Core3 has eight configured options, two without consumers at the research snapshot | distinct services are possible; implementation gaps remain | [code] 2.5 |
+| **Added planets with cities** | Stardust's added planets | additional sites | [community] Stardust wiki |
 | **House-style limits** | Elysium: 1 of 3 pre-approved houses; Empire in Flames: anti-sprawl housing | a shared look | [community] SWG wiki; [press] MassivelyOP |
-| **Recognition** | Restoration "Player City Spotlight" posts (at least eight in 2024-25; I read five); SOE's public city list; badges for events | pride and visitors | [official] swgr.org; [official][archive] SOE list |
-| **Terrain** | the planners' constant complaint; terraforming deferred | cities move or accept ugly ground | [official] Restoration spotlights and diary |
+| **Recognition** | SOE's public city list | public visibility; retention effect unmeasured | [official][archive] SOE list |
 
-What did **not** work or backfired: raising upkeep and thresholds without warning (Restoration 1.2.1, "took some players by surprise", apology and payout); relying on thresholds alone to clear dead cities (Legends 2019: "not entirely clear" it would change much); Stronghold (removed on live in 2009).
+Stronghold was removed on live in Game Update 8 [official]. The retained research does not establish a general outcome for raising upkeep or changing thresholds.
 
 ### 4.2 What our server already has
 
@@ -436,46 +435,62 @@ Rank order is value for a few friends per unit of effort. Cost: **S** under 1 da
 
 | # | Idea | Needs | Cost | Why it should work here | Risk |
 |---:|---|---|---|---|---|
-| 1 | **Home Show and Best Dressed City contests**, monthly, with themes (138-139 ABY: "Imperial Remnant", "Jedi in hiding", "Frontier"), a credit prize and an existing badge | staff process; screenshot rules; `/grantBadge` with an existing unused badge ID (new badge text needs a client string file); Discord posting (C17, after the owner's go) | S | Five servers ran it in 2023; it needs no code; a small server can judge by hand | judging fairness; the owner's Discord approval |
-| 2 | **Raise decoration freedom:** `DecorationsPerRank` 10 to 30, decoration/terminal/trainer upkeep to 0 (a config key replacing the hard-coded 1,500 in `CityManagerImplementation.cpp:889, 895, 900` and the report at `:2050, 2064, 2074`), placement cost 1,000 to 100 (a constant in `CityDecorationTask.h`) | Lua; about 10 lines of C++; `maintenanceDiscount` is shared with structures so a separate key is cleaner | S | live raised caps by 50%; Restoration removed upkeep after backlash; our rank-5 decoration upkeep is 37,500 a week, 15% of a full town's bill | cap hit by many props: object count |
+| 1 | **Home Show and Best Dressed City contests**, monthly, with themes (138-139 ABY: "Imperial Remnant", "Jedi in hiding", "Frontier"), a credit prize and an existing badge | staff process; screenshot rules; `/grantBadge` with an existing unused badge ID (new badge text needs a client string file); Discord posting (C17, after the owner's go) | S | Retained examples are Empire in Flames, Finalizer and Infinity; it needs no code; a small server can judge by hand | judging fairness; the owner's Discord approval |
+| 2 | **Test decoration freedom:** 30 per rank, zero decoration upkeep | separate test configuration for decoration upkeep; leave terminal/trainer charges and placement cost unchanged | S-M | current rank-5 decoration upkeep is 37,500 per week [calc]; owner Q7 authorizes a test | object count; distinguish decorations from props |
 | 3 | **Make all eight specializations real:** read `private_spec_cloning` (cheaper clone or shorter sickness) and `private_spec_entertainer` (buff strength or duration) | about 10 lines each, in `PlayerManagerImplementation::sendPlayerToCloner` and the entertaining session | S | currently two of eight cost 40,000 a week and do nothing; identity needs choices that work | untested effect sizes |
-| 4 | **Pre-flattened founding sites:** 6 to 10 curated plateaus per planet, each with a waypoint and a one-line brief, using the bots' flat-square census and a terrain flatten layer (the owner's client already loads edited Hoth terrain from the test archive) | terrain edit per site (client and server read the same terrain), Lua waypoints, the census (exists) | M | the planners' main complaint was ground (Mos Pelgo moved twice); Core3 does not flatten | client file work; every site needs checking against NPC no-build zones |
-| 5 | **Mayor-pinned static props** (Restoration 1.2.3): a mayor or militia member can mark a static event-perk prop in the city as permanent, free of rental time, up to a props cap; the mayor can remove them | C++ small (an `EventPerk` flag and a per-city counter); Lua list of allowed props | S-M | stage sets and a landmark without upkeep; reuses 40 existing static props | exploitation as free decor; keep a cap |
-| 6 | **Rank rewards that are visible, not powerful:** rank 3 a banner and flag set; rank 4 a plaza prop slot; rank 5 one "landmark" slot beyond the decoration cap (pick one from a short list of large client props) | Lua list; C++ small for the slot | M | with ranks reached in four weeks, rank 5 would otherwise be "the end game" (Restoration's complaint); a landmark becomes the city's signature | the large props must exist in the client data (check the list first) |
-| 7 | **Spotlight and gallery:** a "City of the month" post and a screenshots channel; register cities on the planetary map at rank 3 (exists) | staff time; Discord | S | recognition drove Restoration's series; visitors are the reward | Discord approval |
-| 8 | **City-ready Ossus and Hoth:** add both to `CitiesAllowed` (with a small cap, 3 to 5), fix the empty-key index, and place flat plateaus at the census sites | Lua; C++ small guard; Ossus census | S-M | Legends' new planets were headline content; Ossus is the next planet | probe 2 first |
+| 4 | **Naturally suitable founding sites**; terrain edits rejected by owner Q10 | census and server validation | M | Core3 does not flatten terrain | no-build zones, slope and footprints |
+| 5 | **Mayor-pinned static event props**, pilot 10 per city (owner Q11) | static-template allow-list, city ownership/count, removal and teardown | S-M | original proposal reusing existing static props | rental timers, collision, quota enforcement |
+| 6 | **Visible rank rewards**: banners, a plaza or a landmark from existing art | design and template review | M | original optional design; not approved as extra slots | object count and art provenance |
+| 7 | **Spotlight and gallery** alongside the monthly contest | staff process, explicit permission before posting | S | original recognition proposal; SOE listed cities publicly | Discord approval |
+| 8 | **CitiesAllowed safety guard only**: safely refuse missing/zero entries; Hoth and Ossus remain forbidden (owner Q9) | validate current guard; regression probes | S | prevents invalid indexing without enabling planets | fail-open behavior |
 | 9 | **Bot-seeded example towns** (Part 1 archetypes) built by a persistent staff "Town Keeper" character, in the test galaxy first, as examples to visit and copy | the bot harness (3.12 M1-M3); a persistent-owner mode; a clean-up list | M-L | new players see six distinct designs before they place a house; shops and a cantina give life | persistence (F7); a town of bots must not block human slots |
 | 10 | **Bots fill shops and give a city life:** vendor bots with stock priced from a table, entertainers and medics at the plaza, scheduled events | M4; vendor placement from `VendorManager`; stock from loot and junk | M | merchants gather in busy cities; our hub effect is measured | unbalanced prices; economy noise |
 | 11 | **Mayor's style rule:** a city may limit the house styles it allows (Elysium's three pre-approved houses; Empire in Flames' anti-sprawl) | C++ small in the zoning check; a per-city Lua whitelist | M | gives a mayor a tool to keep a theme | friction between friends |
 | 12 | **Blueprints and a web planner:** save a layout of decorations and redeploy it (Storyteller blueprint idea); a web city map maker using real footprints | in-game version L (C++); web tool S-M (Python or JS, uses template footprints) | S (web) / L (in game) | cuts the cost of a good layout; the web tool helps bots and people | scope |
-| 13 | **New civic structures:** a park, a landing pad (Legends' newsletter, spring 2024), a library or observatory themed to the setting | Lua templates plus existing client meshes; new meshes via the asset pipeline (Fable) | M-L | more things to build for the same rank | client art rights; check each asset |
+| 13 | **New civic structures**: original park, library or observatory proposal | existing licensed meshes/templates or own art pipeline; Claude and GPT only | M-L | optional things to build | art rights and scope; outside M1 |
 | 14 | **City guards:** make `/startCitySpawner` spawn `cityPatrol` guards at rank 3+ | C++ plus Lua | M | atmosphere; was in live design (stub here) | spawn load |
-| 15 | **Terraforming** | client terrain runtime edits | L | Restoration deferred it too | out of reach now |
+| 15 | **Terraforming** | terrain changes | L | rejected for founding sites by owner Q10 | outside approved plan |
 
 **Where the bots help** (ideas 9, 10 and parts of 1, 4, 6): seed varied example towns; fill shops; keep plazas busy with dancers and medics; test the cap and upkeep settings before humans meet them (the treasury wall in 2.6 is the first case); and measure the cost of 10,000 decorations before the owner raises the cap.
 
 ### 4.4 A suggested first month
 
+Historical estimate only; the ordered M1 plan now takes precedence. The approved contest prize is modest credits; a badge remains an unapproved option.
+
 1. Week 1 (no code): contest rules, a prize, a badge choice; ideas 1 and 7 written up for the owner's Discord decision.
-2. Week 1-2 (small): ideas 2 and 3 (about 40 lines in all) and idea 8's Lua and guard, after probe 2.
-3. Week 2-3: bot probes 0-4 and M1; idea 4 for the first two sites on Tatooine and Rori.
+2. Week 1-2 (small): ideas 2 and 3 (about 40 lines in all) and verification of idea 8's guard, after safe-refusal probes.
+3. Week 2-3: bot probes 0-4 and M1; idea 4 selects natural sites on an eligible planet, with no terrain edits.
 4. Week 4: idea 5 and idea 6 design; M2; decide idea 9 from the bots' data.
 
 ## Owner's questions
 
 1. **Persistence for bot cities.** Should bot cities be disposable (non-persistent; gone at every restart, recommended for the simulation) and the persistent example towns come later from a staff "Town Keeper" character, or do you want persistent bot towns from the start?
+   **Owner, 16 Oct 05:40:** Disposable simulation towns first; persistent towns later from a staff Town Keeper.
 2. **Clock.** May I set a compressed city clock (one simulated week = 6 minutes) in the **test galaxy's copy** of `city_manager.lua` only, never on the live galaxy, and change the update jitter line? The alternative is to drive updates from the harness.
+   **Owner, 16 Oct 05:40:** A 6-minute simulated week on the test copy only.
 3. **Slot share.** What share of each planet's city slots may bots use (I propose at most 30%), and on which planets (not the one you are testing on)?
+   **Owner, 16 Oct 05:40:** At most 30% of a planet's city slots, never on the planet the owner is testing.
 4. **Political XP shortcut.** Is it acceptable to grant political XP or ability flags to bot mayors in an "accelerated" run, with the natural run kept as the baseline? Both are logged.
+   **Owner, 16 Oct 05:40:** Political XP grants only in labeled accelerated runs; keep the natural baseline.
 5. **Treasury.** Cities at our settings cannot pay their upkeep from taxes. Do you want (a) the bots to donate and the harness to top up a floor, (b) a lower `maintenanceDiscount` on the test galaxy, or (c) to leave the numbers alone and treat the stall as the finding? And is 0.5 the number you want for the friends' server?
+   **Owner, 16 Oct 05:40:** Bots donate plus logged treasury top-ups, with a no-top-up baseline; upkeep x0.5 stays.
 6. **Contests.** Do you want a monthly Home Show / Best Dressed City, and what prize (credits, an existing badge)? Posting needs your Discord go.
+   **Owner, 16 Oct 05:40:** A monthly Home Show / Best Dressed City with a modest credit prize. Posting still needs approval.
 7. **Decoration cap.** Raise `DecorationsPerRank` from 10 (to 30?) and make decoration upkeep 0? Idea 2.
+   **Owner, 16 Oct 05:40:** Test 30 decorations per rank and zero decoration upkeep.
 8. **Specializations.** May I make Clone Lab and Entertainment District work (idea 3)? What effect size do you prefer?
+   **Owner, 16 Oct 05:40:** Make Clone Lab and Entertainment District work at their configured values.
 9. **Hoth and Ossus.** Should they allow player cities, how many (3 to 5?), and can I add the guard for the missing `CitiesAllowed` key first?
+   **Owner, 16 Oct 05:40:** The CitiesAllowed guard only; no player cities on Hoth or Ossus.
 10. **Founding sites.** May I edit planet terrain files in the test archive to flatten 6 to 10 curated sites (idea 4), starting with Tatooine and Rori?
+   **Owner, 16 Oct 05:40:** No terrain edits for founding sites.
 11. **Props.** Do you want mayors to be able to keep static event-perk props (idea 5) and with what cap?
+   **Owner, 16 Oct 05:40:** A pilot of 10 static event props per city.
 12. **Setting.** Should bot towns follow the 138-139 ABY setting (names and themes from our own lists) or be neutral?
-13. **Provenance.** Are you comfortable with me citing Legends and Restoration's public wiki and news pages as evidence (they are not on SWGEmu's AGPL-compliant list)? I used nothing else from them. Sentinel's Republic was left out as you asked.
+   **Owner, 16 Oct 05:40:** Era-fitting names and themes from our own lists (138-139 ABY).
+13. **Provenance.** May the two disputed servers' public wiki/news pages be cited?
+   **Owner, 16 Oct 05:40:** Do not cite SWG Legends or SWG Restoration pages; those citations and sole-source claims are removed in this revision.
+
 
 ## Sources
 
@@ -495,17 +510,10 @@ Rank order is value for a few friends per unit of effort. Cost: **S** under 1 da
 - Engadget (Massively), "Some Assembly Required: SWG housing extravaganza", 9 Dec 2011: https://www.engadget.com/2011-12-09-some-assembly-required-swg-housing-extravaganza.html
 - Engadget, "The Game Archaeologist and the Star of the Galaxies: The players (part 2)", 15 Jun 2010: https://www.engadget.com/2010-06-15-the-game-archaeologist-and-the-star-of-the-galaxies-the-players.html
 - PC Gamer, "Inside the final hours of Star Wars: Galaxies", 16 Dec 2011: https://www.pcgamer.com/the-end-of-star-wars-galaxies/
-- MassivelyOP, Legends city update, 1 Apr 2019: https://massivelyop.com/2019/04/01/star-wars-galaxies-legends-emulator-put-out-a-huge-march-update-trying-to-fix-player-cities/
-- MassivelyOP, Bespin date, 16 Apr 2021: https://massivelyop.com/2021/04/16/star-wars-galaxies-legends-bespin-city-in-the-clouds/
-- MassivelyOP, "Cloud City apartments and player cities on Star Wars Galaxies Legends", 11 Mar 2024: https://massivelyop.com/2024/03/11/working-as-intended-cloud-city-apartments-and-player-cities-on-star-wars-galaxies-legends/
 - mmofolklorist, Rogue server roundups: Nov-Dec 2022 https://mmofolklorist.com/2022/12/11/star-wars-galaxies-rogue-server-roundup-november-december-2022/ ; Mar 2023 https://mmofolklorist.com/2023/04/star-wars-galaxies-rogue-server-roundup-march-2023/ ; Apr 2023 (4 May) https://mmofolklorist.com/2023/05/04/star-wars-galaxies-rogue-server-roundup-april-2023 ; May 2023 (8 Jun) https://mmofolklorist.com/2023/06/08/star-wars-galaxies-rogue-server-roundup-may-2023/ ; Jun 2023 (5 Jul) https://mmofolklorist.com/2023/07/05/star-wars-galaxies-rogue-server-roundup-june-2023/
-- Seen only as search snippets or titles (not opened): Unwinnable retrospective (https://unwinnable.com/?p=35045); MassivelyOP Felucia headline (https://massivelyop.com/?p=239683); a 2004 retrospective on when cities arrived (https://archive.rpgamer.com/news/Q2-2004/062804c.html); Shacknews (https://www.shacknews.com/article/62108/star-wars-galaxies-forces-under) and a forum repost for the Forces Under Siege / Game Update 15 city alignment; the Storyteller launch coverage of 22 May 2007 (Shacknews, Engadget); Legends' spring 2024 newsletter; the SWG wiki "Servers" page (https://swg.fandom.com/wiki/Servers) for the Oct 2009 closures; a MassivelyOP piece on Empire in Flames (https://massivelyop.com/?p=340022) for "strict player cities" and the anti-sprawl housing.
+- Seen only as search snippets or titles (not opened): Unwinnable retrospective (https://unwinnable.com/?p=35045); a 2004 retrospective on when cities arrived (https://archive.rpgamer.com/news/Q2-2004/062804c.html); Shacknews (https://www.shacknews.com/article/62108/star-wars-galaxies-forces-under) and a forum repost for the Forces Under Siege / Game Update 15 city alignment; the Storyteller launch coverage of 22 May 2007 (Shacknews, Engadget); the SWG wiki "Servers" page (https://swg.fandom.com/wiki/Servers) for the Oct 2009 closures; a MassivelyOP piece on Empire in Flames (https://massivelyop.com/?p=340022) for "strict player cities" and the anti-sprawl housing.
 
 **Private servers (public pages)**
-- Restoration wiki, "Player Cities" (updated 25 Sep 2026): https://swgr.org/wiki/player_cities ; "Storyteller": https://swgr.org/wiki/storyteller
-- Restoration Update 1.2.1, 1 Mar 2024: https://swgr.org/post/update-1-2-1.2660/ ; Update 1.2.3, 10 Jun 2024: https://swgr.org/post/update-1-2-3-skyward-bound.3231/ ; Developer Diary "Player City Refresh", 24-25 Aug 2026: https://swgr.org/post/player-city-refresh.7513/
-- Restoration spotlights: Black Sun Ravine 26 Jan 2024 https://swgr.org/post/player-city-spotlight-black-sun-ravine.4961 ; Black Sands 26 May 2024 https://swgr.org/post/player-city-spotlight-black-sands.4960/ ; Mos Pelgo 26 May 2024 https://swgr.org/post/player-city-spotlight-mos-pelgo.4963/ ; Pelgo Slums 10 Dec 2024 https://swgr.org/post/player-city-spotlight-pelgo-slums.4964 ; Bantha Cairns 20 Sep 2025 https://swgr.org/post/player-city-spotlight-bantha-cairns.5245
-- SWG Legends wiki, "Player city": https://swglegends.com/wiki/index.php?title=Player_city
 - Stardust wiki, "Player Cities": https://stardust-swg.fandom.com/wiki/Player_Cities
 - SWGEmu wiki, "Servers": https://swgemulator.fandom.com/wiki/Servers
 - Steam discussion, Basilisk guild recruiting post, 25 Jul 2019: https://steamcommunity.com/app/24170/discussions/0/3428846977635816013
