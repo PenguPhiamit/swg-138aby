@@ -1,0 +1,18 @@
+test_all_one_to_six_consumer_assignments (__main__.LifecycleModel.test_all_one_to_six_consumer_assignments) ... ok
+test_nonmission_and_other_type_do_not_hold_recipe (__main__.LifecycleModel.test_nonmission_and_other_type_do_not_hold_recipe) ... ok
+test_original_three_mission_counterexample (__main__.LifecycleModel.test_original_three_mission_counterexample) ... ok
+test_six_crafting_missions_with_five_recipes (__main__.LifecycleModel.test_six_crafting_missions_with_five_recipes) ... ok
+test_three_finish_then_abort_and_reverse (__main__.LifecycleModel.test_three_finish_then_abort_and_reverse) ... ok
+test_two_distinct_and_shared_missions (__main__.LifecycleModel.test_two_distinct_and_shared_missions) ... ok
+test_unpicked_and_already_assembled_survivor (__main__.LifecycleModel.test_unpicked_and_already_assembled_survivor) ... ok
+test_both_end_paths_cleanup_before_base (__main__.SourceContracts.test_both_end_paths_cleanup_before_base) ... ok
+test_full_scan_under_player_lock (__main__.SourceContracts.test_full_scan_under_player_lock) ... ok
+test_matching_consumer_returns_before_removal (__main__.SourceContracts.test_matching_consumer_returns_before_removal) ... ok
+test_positive_use_count_is_reloaded (__main__.SourceContracts.test_positive_use_count_is_reloaded) ... ok
+test_six_total_and_single_bounty_unchanged (__main__.SourceContracts.test_six_total_and_single_bounty_unchanged) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.006s
+
+OK
+Exhaustive model: 1284 single-ending cases, 1-6 active missions, two recipe labels

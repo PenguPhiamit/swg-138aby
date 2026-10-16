@@ -1,0 +1,93 @@
+diff --git a/MMOCoreORB/src/server/zone/objects/mission/CraftingMissionObjective.idl b/MMOCoreORB/src/server/zone/objects/mission/CraftingMissionObjective.idl
+index b8a65b95..3d2fd97c 100644
+--- a/MMOCoreORB/src/server/zone/objects/mission/CraftingMissionObjective.idl
++++ b/MMOCoreORB/src/server/zone/objects/mission/CraftingMissionObjective.idl
+@@ -28,4 +28,5 @@ class CraftingMissionObjective extends DeliverMissionObjective {
+ 	@preLocked
+ 	public abstract native void updateMissionStatus(CreatureObject player);
+ 	public abstract native void abort();
++	public abstract native void complete();
+ }
+diff --git a/MMOCoreORB/src/server/zone/objects/mission/CraftingMissionObjectiveImplementation.cpp b/MMOCoreORB/src/server/zone/objects/mission/CraftingMissionObjectiveImplementation.cpp
+index cfd80ccc..ea6c1188 100644
+--- a/MMOCoreORB/src/server/zone/objects/mission/CraftingMissionObjectiveImplementation.cpp
++++ b/MMOCoreORB/src/server/zone/objects/mission/CraftingMissionObjectiveImplementation.cpp
+@@ -9,6 +9,44 @@
+ #include "server/zone/managers/crafting/schematicmap/SchematicMap.h"
+ #include "server/zone/objects/mission/MissionObject.h"
+ 
++// Mission recipes can be shared when more than two crafting missions are active.
++// Keep the pooled grant until the last mission using it ends, including missions
++// whose pickup has not happened yet. The caller's mission is still in the datapad.
++static void removeUnusedMissionSchematic(MissionObject* mission, CreatureObject* player) {
++	if (mission == nullptr || player == nullptr) {
++		return;
++	}
++
++	Locker playerLock(player);
++	SceneObject* datapad = player->getSlottedObject("datapad");
++
++	if (datapad == nullptr) {
++		return;
++	}
++
++	for (int i = 0; i < datapad->getContainerObjectsSize(); ++i) {
++		ManagedReference<SceneObject*> object = datapad->getContainerObject(i);
++
++		if (object == nullptr || !object->isMissionObject()) {
++			continue;
++		}
++
++		MissionObject* otherMission = cast<MissionObject*>(object.get());
++
++		if (otherMission != mission && otherMission->getTypeCRC() == MissionTypes::CRAFTING &&
++				otherMission->getTemplateString1() == mission->getTemplateString1()) {
++			return;
++		}
++	}
++
++	ManagedReference<PlayerObject*> ghost = player->getPlayerObject();
++	DraftSchematic* schematic = SchematicMap::instance()->get(mission->getTemplateString1().hashCode());
++
++	if (ghost != nullptr && schematic != nullptr) {
++		ghost->removeRewardedSchematic(schematic, true);
++	}
++}
++
+ void CraftingMissionObjectiveImplementation::updateMissionStatus(CreatureObject* player) {
+ 	ManagedReference<MissionObject* > mission = this->mission.get();
+ 
+@@ -81,22 +119,20 @@ void CraftingMissionObjectiveImplementation::updateMissionStatus(CreatureObject*
+ }
+ 
+ void CraftingMissionObjectiveImplementation::abort() {
+-	//Remove the schematic.
+-	ManagedReference<MissionObject* > mission = this->mission.get();
++	ManagedReference<MissionObject*> mission = this->mission.get();
+ 	ManagedReference<CreatureObject*> player = getPlayerOwner();
+ 
+-	if (player != nullptr && mission != nullptr) {
+-		ManagedReference<PlayerObject*> ghost = player->getPlayerObject();
+-
+-		if (ghost != nullptr) {
+-			DraftSchematic* schematic = SchematicMap::instance()->get(mission->getTemplateString1().hashCode());
+-
+-			if (schematic != nullptr) {
+-				ghost->removeRewardedSchematic(schematic, true);
+-			}
+-		}
+-	}
++	removeUnusedMissionSchematic(mission, player);
+ 
+ 	//Run normal abort for deliver missions.
+ 	DeliverMissionObjectiveImplementation::abort();
+ }
++
++void CraftingMissionObjectiveImplementation::complete() {
++	ManagedReference<MissionObject*> mission = this->mission.get();
++	ManagedReference<CreatureObject*> player = getPlayerOwner();
++
++	removeUnusedMissionSchematic(mission, player);
++
++	DeliverMissionObjectiveImplementation::complete();
++}

@@ -1,0 +1,74 @@
+# C45: fix for C44-F1, shared crafting mission recipes
+
+ChatGPT, 2026-10-15 23:45. **Source fix ready for Claude's review/cherry-pick; unbuilt and untested in-game. This is not live-release approval.**
+
+- Branch: `gpt/c45-mission-recipes`, in `/opt/swg/Core3-gpt`.
+- Base: `40af2c78ebad1257a9ff5972a4ea2a4ba80fa571` (Claude's dev HEAD when this task started).
+- Source commit: `e75794dadf0f64bb0d1c345a562e32d2452da7f5` (two files; 50 insertions, 13 deletions).
+- Exact diff: [F1-fix.patch](F1-fix.patch). Reproducible offline checks: [check_f1_fix.py](check_f1_fix.py), [results](F1-check-results.txt).
+- Claude's server/driver lock was retained. No writes in Core3-dev or the test galaxy, builds, bot commands, process attachments, backups, restarts, deployments, downloads or pushes. All `/opt/swg` Git/search/edit operations ran as `swgemu` inside Debian through script files on the Windows filesystem. No network-share access or excluded source.
+
+## Cause and correction to the original review
+
+All paths below are relative to `Core3-gpt/MMOCoreORB/`. Unmodified references are at the base above; the crafting-objective references after this paragraph are at the fix commit.
+
+`src/server/zone/managers/mission/MissionManagerImplementation.cpp:340-359` retains only the last other crafting mission's recipe when choosing a new one. With more than two missions, A/B/A is possible. There are only **five** recipe templates (`bin/scripts/managers/mission/mission_manager.lua:3-9`), so six crafting missions necessarily share one. Avoiding duplicates alone would introduce a five-crafting-mission limit or need more content.
+
+Before this fix, `CraftingMissionObjectiveImplementation.cpp:83-101` unconditionally removed the entire rewarded schematic on abort. `src/server/zone/objects/player/PlayerObjectImplementation.cpp:1291-1297` drops the rewarded-map entry, not one mission's entitlement. This makes a surviving mission with the same template lose its recipe, including when the aborted mission had not picked up its resources yet.
+
+**Correction to C44-F1's use-count concern:** ordinary successful assembly does not by itself lose a shared positive use count. `src/server/zone/objects/player/variables/SchematicList.cpp:75-87` decrements the pooled count. Although it returns true, `PlayerObjectImplementation.cpp:1300-1306` calls `removeSchematics`, which rebuilds skills and **all remaining rewarded entries** at `:1348`; `SchematicList.cpp:32-50` re-adds them. The original review did not follow that reload far enough. Completion previously did not directly remove the recipe. Abort is the confirmed loss path; the new completion cleanup below prevents residual grants after the last mission ends.
+
+## What the diff does
+
+`src/server/zone/objects/mission/CraftingMissionObjectiveImplementation.cpp:15-48` adds one local helper. It takes the player lock, scans the entire datapad, excludes the ending mission and non-mission/non-crafting entries, and preserves the schematic whenever **any other active crafting mission has the same template string**. It checks accepted missions regardless of pickup state and safely skips null entries/missing owners/datapads/schematics. It acquires no sibling-mission locks; the player lock serializes the ordinary acceptance/removal paths, and the scanned template/type belong to already accepted missions.
+
+`abort()` calls that helper before the existing delivery cleanup (`:121-128`). `complete()` does the same before the inherited delivery completion (`:131-137`); its native override is declared in `CraftingMissionObjective.idl:31`. The completing/aborting mission is still in the datapad during this check. Base cleanup still frees NPCs/cancels expiry or awards/removes the completed mission as before.
+
+This deliberately keeps the existing **pooled grants**, rather than inventing persisted per-mission recipe ownership: aborting one sharer can leave already-awarded uses available until the remaining sharers end. It adds no uses. The new completion override removes that remainder when the last matching mission completes; last abort/failure also removes it. An exact one-use-per-surviving-mission allocation is not claimed. No IDL fields, database migration, recipe pool, mission selection, total-six setting, one-bounty restriction, client files or generic loot/quest schematic APIs change. Already-lost recipes from an earlier bad abort are not reconstructed; reaccept affected missions in a later authorized test session if needed.
+
+## Checks actually run
+
+- Clean starting Core3-gpt worktree; branch created directly at the requested dev HEAD; source diff contains only the two crafting-objective files. `git diff --check` passed before commit.
+- Read the grant, assembly decrement, list reload, abort/failure, delivery completion and mission removal paths. Checked the generated-method declaration pattern in the existing IDL; no generated files were edited.
+- `nice -n 10 python3 .../check_f1_fix.py --root /opt/swg/Core3-gpt`: **12/12 passed**, including **1,284 modeled single-ending cases** spanning one through six active missions and two recipe labels. Specific cases cover baseline A/B/A failure, abort either A, two distinct/shared missions, finish/abort in both orders, sixth mission with five templates, pre-pickup and already-assembled survivors, relog modeling, unrelated missions, and final grant cleanup.
+- These are **source-contract checks and an independent Python lifecycle model**. They do not compile/execute the C++ or reproduce engine locks, IDL dispatch, persistence, NPC conversations, client deltas or gameplay. The model's relog is a copy of the persisted grant map, not a real database round trip.
+- `find . -name CMakeCache.txt` found **no configured build in Core3-gpt**. Per the owner's instruction, no build was configured or run (including no standalone C++ harness). Claude must regenerate the IDL and compile after review in the normal dev build when permitted.
+
+## Other mission types and C44 compatibility paths
+
+The audit checked the objective factory switch (`MissionManagerImplementation.cpp:437-468`), each implementation/IDL and relevant consumers. No additional active-two dependency was found in these paths. This is a focused source audit, not runtime acceptance or an exhaustive audit of every scripted quest.
+
+| Type/path | Source locations | Result |
+|---|---|---|
+| Destroy | `objects/mission/DestroyMissionObjectiveImplementation.cpp:43,259,300`; `objects/area/MissionSpawnActiveArea.idl:15,31` | Each objective owns its area/lair/observer; abort acts on that lair. No two-entry owner array. The `<2` checks in `managers/mission/DestroyMissionLairObserverImplementation.cpp:174,295` count spawn waves, not active missions. C44-F2 permanent-bot teardown remains a separate concern. |
+| Deliver, neutral and faction | `objects/mission/DeliverMissionObjectiveImplementation.cpp:100-124,156-166,169-223`; `objects/creature/conversation/screenhandlers/DeliverMissionScreenHandler.cpp:23-40` | Each objective stores its item and two NPC endpoints. Conversation scans the full datapad and matches endpoint identity. Two endpoints are not two player missions. Shared NPCs use `inUseByNumberOfMissions` (`managers/mission/spawnmaps/NpcSpawnPoint.cpp:85-117`), with despawn only at zero. No owner-two cap. Shared NPCs can require repeated conversations, so exercise them in-game. |
+| Survey | `objects/mission/SurveyMissionObjectiveImplementation.cpp:15-43,51-93` | Per-objective observer, spawn-family and efficiency; abort unregisters its specific observer. Multiple qualifying missions can observe one survey. No two-slot limit. |
+| Hunting | `objects/mission/HuntingMissionObjectiveImplementation.cpp:21-51,61-108` | Per-objective kill counter and observer; matching kills can advance several missions. No two-slot storage. |
+| Recon | `objects/mission/ReconMissionObjectiveImplementation.cpp:18-94`; `objects/area/MissionReconActiveArea.idl:15,27-45` | Area and timer are per objective and check the owner; teardown targets that area. No two-slot storage. |
+| Dancer and musician | `objects/mission/EntertainerMissionObjectiveImplementation.cpp:19-78,89-115,130-152`; `objects/player/sessions/EntertainingSessionImplementation.cpp:930-961` | Full-datapad notification for the correct type; each objective owns its area, enter/exit observers and completion timer. Observer indexes 0/1 represent area events, not mission slots. |
+| Bounty, NPC and player | `MissionManagerImplementation.cpp:253-289,1981-1999`; `objects/mission/BountyMissionObjectiveImplementation.cpp:30-50,74-139` | Intentional one-bounty restriction is unchanged; helper returning the first bounty is sound under it. `getObserverCount()==2` is an NPC target's two event observers. Bounty levels 1/2/3 are progression, not active mission count. Check one bounty plus five others and second-bounty refusal in-game. |
+| Escort enum variants | `objects/mission/MissionTypes.h:11-13`; factory at `MissionManagerImplementation.cpp:437-468` | No factory branch or implemented terminal escort objective. Whole-src symbolic search found only type-to-string cases for these enums. Do not claim terminal escort functionality or six-escort runtime support. Other scripted/space quests are outside this terminal-cap change and not certified by this audit. |
+| Offer lists and faction terminals | `MissionManagerImplementation.cpp:593-760` | Full bag loops and per-category offer counts; six offers/category is unrelated to the active limit. Faction versions use the same objective classes. No second fixed-two active list found. |
+| Waypoints, group nearest and relog cleanup | `objects/mission/MissionObjectImplementation.cpp:210-245,251-270`; `objects/group/tasks/UpdateNearestMissionForGroupTask.cpp:79-110,133-142`; `MissionManagerImplementation.cpp:2295-2321` | Waypoint per mission, all datapad entries scanned/updated/deactivated. Group `>=2` occurs after the complete inner scan and only continues the outer loop. The distance comment saying "two missions" describes comparing distances; selection scans all. No truncation at two. |
+
+Searches used `git grep`/`find` inside WSL because `rg` is not installed there. The full source scan for two-mission wording/comparisons also found bounty progression comparisons; those are not active-cap checks. C44's owned-client data findings were read, not rerun: no client UI/string patch is indicated, but compiled-client behavior still needs a real-client pass.
+
+## Manual in-game acceptance for Claude, after the simulation
+
+**Not run by ChatGPT.** Wait for the permitted post-run slot; Claude retains the galaxy lock and chooses the build/start procedure. Use a normal non-staff character with Novice Artisan, a usable crafting tool and ample datapad/inventory space. Log mission IDs, recipe paths, pickup status and recipe visibility at each step. Use only test-galaxy staging and ordinary terminal/NPC/crafting interactions; no live migration or restart is authorized here.
+
+1. **Two ordinary crafting missions:** accept A and B (normally different recipes), pick up both grants/resources. Finish A, verify B's recipe and waypoint remain, relog, craft/deliver B. Repeat from clean missions, abort A before crafting it, then craft/deliver B. Repeat with A/B reversed. Check payout only on completion and no mission recipe remains after the last mission ends.
+2. **Three crafting missions with a real collision:** get A/B/C where A and C have the same recipe and B differs. Record actual paths rather than assuming acceptance order equals datapad order. If random selection does not provide it promptly, accept six crafting missions (five templates guarantee a duplicate), retain a shared pair plus one unrelated mission and abort the other three. This also verifies six crafting missions really fit; do not silently impose a five-crafting cap.
+3. Pick up all three. **Finish A**: after its successful assembly and delivery, C's recipe must still be visible/usable; B must be unchanged. Relog. **Abort C**: its shared recipe must now be gone; B still works. Finish B; no awarded mission recipes remain.
+4. Repeat the same collision setup. **Abort A** before assembly; C's recipe must remain. Relog, assemble and finish C; check that the preserved leftover grant is removed when C completes and that B still works. Abort B, confirming final cleanup. Repeat aborting C first instead of A.
+5. Edge passes: abort A before its pickup while C has picked up; reverse pickup states; assemble C before aborting A, then deliver C; abort both sharers without crafting. Recipe visibility must survive while needed and end after the last matching mission. On a controlled fixture, also reduce to **two shared missions** and repeat finish/abort, testing already-persisted duplicates. Relog after pickup and after the first end action.
+6. **Six-limit/client regression:** six mixed missions retained across refresh/relog, seventh refused; individually complete/abort and toggle all waypoints; group nearest can select missions beyond the first two. One bounty plus five others succeeds, a second bounty fails. Exercise artisan/survey, scout/hunting/recon, dancer/musician and faction terminals. Multiple matching survey/hunting/performance missions may progress together; unrelated missions must survive aborts. Check full datapad acceptance as described below.
+
+## Remaining live-release gates
+
+**Do not mark C44 clean or approve the live release yet.**
+
+- Claude's independent review/cherry-pick and a successful IDL/C++ build are pending, followed by the crafting cases above and actual six-mission client/persistence checks. This session cannot supply those results.
+- C44's **full-datapad** concern remains at `MissionManagerImplementation.cpp:294-296`: ignored `transferObject` result before creating/activating the objective. `objects/scene/SceneObject.idl:357` defaults `allowOverflow=false`; `objects/scene/components/ContainerComponent.cpp:304-305` can reject. This predates the six-cap change, but was explicitly retained in C44's release acceptance: test it and fix or obtain the owner's explicit waiver before calling the review clean. No broad acceptance-path edit was bundled into the recipe fix.
+- C44-F2/F4/F5/F6/F7/F8 are not resolved by this commit; F3 has a later candidate change in `b20a46d7`, not independently cleared here. These concern the bot population/workload rather than the ordinary mission total-cap check. They remain gates for any release that includes that bot behavior; do not equate this source fix with approval of the full launch simulation or all dev commits.
+- The positive mission-count configuration and the actual live value still need operator validation; no private config was read. The owner must explicitly approve the final live release. Run 6 and the running world remain untouched.
