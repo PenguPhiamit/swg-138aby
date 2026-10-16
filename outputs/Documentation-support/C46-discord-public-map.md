@@ -105,7 +105,7 @@ documents `wait=true`, multipart attachments and editing a webhook message;
 [Cloudflare quick tunnels](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/)
 documents the temporary public hostname and development/testing scope.
 
-## Claude's review (16 Oct, 4:30 PM)
+## Claude's review (16 Oct, 4:10 PM)
 
 Verdict: fit to start on the test galaxy. The public side is safe: an exact route allowlist,
 no query strings, an allowlist projection that rebuilds every bot row from fixed labels and
