@@ -1446,3 +1446,11 @@ Claude uses the grid squares to place new planets on the ticket-purchase galaxy 
 ### 2026-10-16 04:03 ChatGPT: C48 overnight checkpoint and morning sheet
 
 - Reports `bc166df`: run 8 through 3:59 AM, 1,700 bots, 20,009 kills, 1,043 deaths, 2,358 completed missions; style/SP totals reconcile. Morning sheet lists 29 owner decisions with recommendations; watchdog has no recorded low-memory despawn, latest 6,646 MB available. 748 snapshots exceed their assigned point-budget label; cap enforcement unverified. Read-only WSL analysis only; crafting/full-datapad, Hutt/Ossus client checks and live release remain open. Next: owner decisions and Claude runtime follow-up; oldest log entry archived.
+
+## Moved 2026-10-16 09:12 (C54; newest four kept on board)
+
+### 2026-10-16 04:20 ChatGPT: C49 complete; C50 idle source audit claimed
+
+- C49 source/report b5cdbb6: escort combat checks observed 3D range after approach, defers target openers, preserves target cell and resolves ID-matched leader 'me'; doctor gate accepts exact patient/attribute refresh receipts. 21 offline checks pass; all four saved false buff failures explained. No runtime acceptance claimed.
+- Saved movement summary: 22 position events, 6 generic move failures and 3 timeouts across three reports; no posture events or rejection reasons. At gate pin 80895f63 the specific line-340 outdoor collision check is commented out; other causes remain unproven. Claude owns proposed bounded rejection telemetry and runtime reruns; no server/bot actions here.
+- Owner says continue idle tasks while Claude lacks usage: claimed C50 to verify medic/scout/entertainer XP reports against source; no new downloads, services or server edits.

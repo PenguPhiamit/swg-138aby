@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C45 source ready on `gpt/c45-mission-recipes`, `e75794da`; no galaxy ownership). Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy: overnight launch simulation run 6 since about 23:30 on dev `b20a46d7` (spawn level gate, newbie spawn fixes, bots on missions near their level, launch purse; BotPop "all", 1,500 new players + 200 Ossus explorers; no squad runs). Owner, 23:15: next restart about 06:45 after the overnight analysis. Live map on http://localhost:8765 (a setsid process as swgemu while the simulation runs). - 2026-10-15 23:35.**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C54 source ready on `gpt/c54-hutt-floater`, `8ebace32`; no galaxy ownership). Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy: overnight launch simulation run 6 since about 23:30 on dev `b20a46d7` (spawn level gate, newbie spawn fixes, bots on missions near their level, launch purse; BotPop "all", 1,500 new players + 200 Ossus explorers; no squad runs). Owner, 23:15: next restart about 06:45 after the overnight analysis. Live map on http://localhost:8765 (a setsid process as swgemu while the simulation runs). - 2026-10-15 23:35.**
 
 **Overnight 16 Oct (owner, 02:15): the bots are handed to GPT and the local model.** Claude's 5-hour usage is spent until 05:30. GPT (usage back at 03:45) runs C46 (Discord feed and public map, staging only) and then C48 (overnight analysis and the owner's morning sheet). The local model (Ollama qwen3:8b, `tools/agents/local/idle_research.py`, every 5 minutes when idle) keeps researching `Agent/local-research/queue.json`. **Rule: when no agent has usage, the local model researches until usage resumes; anyone may add open topics to its queue.** The test galaxy (run 8: 1,500 multiclass new players + 200 Ossus explorers, dev `8b48a044`) runs unattended; the memory watchdog despawns the bots if WSL memory falls below 2 GB; no restarts until the owner or Claude is back. Fable is paused (owner, 00:05).
 
@@ -134,10 +134,11 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C54: review playable Hutt; Artisan floater and Hutt names** | ChatGPT, High review / Medium source | review/source complete; Claude integration pending | `82e52303`, `deb3319e`, `8ebace32` on gpt/c54-hutt-floater (base 26b54813); report/tool `a07d346`, Documentation-support/hutt-c54.md; 1 P1 + 5 P2; client stats/text/builder fixes open; full build/gameplay untested; run 10 untouched |
 | **C53: apply accepted Ossus o7 decisions** | ChatGPT, Medium | staging complete 2026-10-16 | `3f64720`; POI 17 (2200, -4725), accepted settings retained; run_all ALL CHECKS PASS (119 s), 90 server references pass; client untested; nothing packed or deployed |
 | **C52: owner city answers, source cleanup and M1 probe plan** | ChatGPT, Medium | complete 2026-10-16 | `dc469f8`; excluded citations/sole-source claims removed, Q1-Q13 recorded, ordered M1 plan; documentation checks pass; implementation/runtime untested |
 | **C51: approved checkout housekeeping (morning sheet 1-3)** | ChatGPT, Low | complete 2026-10-16 | `a5b7604`; targeted ignores, 45 cached-only removals, author inventory; queues/history/local files kept; 23 ignore checks pass |
-| **C50: verify idle-model medic/scout/entertainer XP research** | ChatGPT interactive, Medium | claimed 2026-10-16 | Read-only source audit of three local-model review topics; corrected references, no gameplay/server changes |
+| **C50: verify idle-model medic/scout/entertainer XP research** | Claude | superseded by C54, owner 16 Oct | Claude completed the audit while ChatGPT was at its usage limit |
 | **C49: Claude Python follow-ups: escort range, doctor reapply, movement evidence** | ChatGPT interactive, Medium | source/offline complete; Claude runtime pending | b5cdbb6; 21 offline checks; C49-python-followups.md; no bot/server actions |
 | **C46: Discord feed + public bot map** | ChatGPT, Medium | offline complete 2026-10-16; staged for Claude review | `3150acf`; 53 tests pass + PNG visual/shell syntax checks; public serving/Discord/tunnel untested; nothing started or posted; start/stop docs in `Documentation-support/C46-discord-public-map.md` |
 | **C45: C44-F1 crafting recipe fix + mission-type audit** | ChatGPT, High | source/offline complete 2026-10-15 23:46; Claude review/build/gameplay pending | Core3-gpt `gpt/c45-mission-recipes` at `e75794da` (base `40af2c78`); report/checks `dfe81df`, `Documentation-support/review-C44/F1-fix.md`; 12 tests/1,284 model cases pass; unbuilt; full-datapad gate open; run 6 untouched |
@@ -363,6 +364,10 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-16 09:12 ChatGPT: C54 Hutt review and source complete
+
+- Reviewed by ChatGPT: 26b54813/S7, 1 P1 + 5 P2 with failing cases; `82e52303` species/refusals, `deb3319e` Artisan floater, `8ebace32` Hutt names on gpt/c54-hutt-floater; report/client staging `a07d346`. 17 changed/new Lua pass; all 47,406 checked (one unchanged legacy migration error); race-header/LAT/link/archive checks pass. No configured build; full server/gameplay untested. Next: Claude review/cherry-pick, fix client profile/text/builder gates, owner floater visit. Run 10/dev/galaxy untouched; oldest log entry archived.
+
 ### 2026-10-16 09:01 ChatGPT: C53 Ossus o7 staging complete
 
 - `3f64720`: accepted crater/pod/field and six POI layouts retained; POI 17 centre (2200, -4725), minimum tested 600 x 300 m relief 12.56 m. `run_all.py` ALL CHECKS PASS (119 s), 90 read-only server references pass; README regenerated/open decisions closed. Client checks and two existing POI 13 boulder tilt warnings remain untested; next: Claude review and owner client visit. No packing, /opt/swg writes or galaxy commands. Oldest Log entry archived.
@@ -374,9 +379,3 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 ### 2026-10-16 08:49 ChatGPT: C51 approved checkout housekeeping complete
 
 - `a5b7604`: targeted ignores and 45 cached-only removals; all 15 present files retain their hashes, 30 rotated summaries stay in ZIP/history without restore. Queues remain tracked; remaining author commits listed in `Agent/checkout-churn-1016.md`; unfinished Fable work untouched. 23 ignore/exception checks pass. No files deleted or server/bot actions; next: each author reviews and commits their listed finished work. Oldest Log entry archived.
-
-### 2026-10-16 04:20 ChatGPT: C49 complete; C50 idle source audit claimed
-
-- C49 source/report b5cdbb6: escort combat checks observed 3D range after approach, defers target openers, preserves target cell and resolves ID-matched leader 'me'; doctor gate accepts exact patient/attribute refresh receipts. 21 offline checks pass; all four saved false buff failures explained. No runtime acceptance claimed.
-- Saved movement summary: 22 position events, 6 generic move failures and 3 timeouts across three reports; no posture events or rejection reasons. At gate pin 80895f63 the specific line-340 outdoor collision check is commented out; other causes remain unproven. Claude owns proposed bounded rejection telemetry and runtime reruns; no server/bot actions here.
-- Owner says continue idle tasks while Claude lacks usage: claimed C50 to verify medic/scout/entertainer XP reports against source; no new downloads, services or server edits.
