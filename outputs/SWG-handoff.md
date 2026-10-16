@@ -8,6 +8,8 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 **Overnight 16 Oct (owner, 02:15): the bots are handed to GPT and the local model.** Claude's 5-hour usage is spent until 05:30. GPT (usage back at 03:45) runs C46 (Discord feed and public map, staging only) and then C48 (overnight analysis and the owner's morning sheet). The local model (Ollama qwen3:8b, `tools/agents/local/idle_research.py`, every 5 minutes when idle) keeps researching `Agent/local-research/queue.json`. **Rule: when no agent has usage, the local model researches until usage resumes; anyone may add open topics to its queue.** The test galaxy (run 8: 1,500 multiclass new players + 200 Ossus explorers, dev `8b48a044`) runs unattended; the memory watchdog despawns the bots if WSL memory falls below 2 GB; no restarts until the owner or Claude is back. Fable is paused (owner, 00:05).
 
+**Owner, 16 Oct 06:00: run 10 stays up until the owner is back; this is the one exception to AGENTS.md's "stop the test galaxy when nobody is testing".** Run 10 (dev `26b54813`): multiclass with the researched buying orders and a real 250-point cap, medics heal others, all spawn tests (T1, T2, S1-S5), the CitiesAllowed guard, and the playable Hutt (server `26b54813`; client archive `Fable-species/s7-hutt/local_planets-s7.tre`, installed on the test server `/opt/swg/tre/local_planets.tre` and in `SWG-client/local_planets.tre`; the originals are `local_planets.tre.bak-20261016` in both places). The owner checks the Hutt in the client when back (Fable S7 section 7 item 5).
+
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
 ## Questions for the owner
