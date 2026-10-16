@@ -119,6 +119,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C46: Discord feed + public bot map** | ChatGPT, Medium | offline complete 2026-10-16; staged for Claude review | `3150acf`; 53 tests pass + PNG visual/shell syntax checks; public serving/Discord/tunnel untested; nothing started or posted; start/stop docs in `Documentation-support/C46-discord-public-map.md` |
 | **C45: C44-F1 crafting recipe fix + mission-type audit** | ChatGPT, High | source/offline complete 2026-10-15 23:46; Claude review/build/gameplay pending | Core3-gpt `gpt/c45-mission-recipes` at `e75794da` (base `40af2c78`); report/checks `dfe81df`, `Documentation-support/review-C44/F1-fix.md`; 12 tests/1,284 model cases pass; unbuilt; full-datapad gate open; run 6 untouched |
 | **C44: launch simulation + mission independent review** | ChatGPT, High | complete 2026-10-15 22:57; changes requested | Report `2de5175`: `Documentation-support/review-C44/C44-review.md`; 7 P2 + 1 P3; crafting recipe collision blocks live mission-cap approval; bot cleanup/lifecycle/telemetry and memory measurements open; no server writes, bots, builds or restarts |
 | **C43: BF2 2005 battles and AI design** | ChatGPT, Medium | complete 2026-10-15 17:40; research/design only | Report `86f9200`: `Documentation-support/bf2-battles-and-ai-for-swg.md`; Hoth pilot, Core3 mapping and behavior priorities; implementation/in-game untested; no server/bot changes |
@@ -342,6 +343,10 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-16 03:58 ChatGPT: C46 Discord/public map staged
+
+- `3150acf`: anonymous public map, Windows PNG/status feed with PATCH identity, transition/watchdog alerts, 07:00 numeric digest and quick-tunnel wrapper; 53 offline tests pass, saved PNG visually checked, shell syntax clean. All runtime/delivery untested; no feed/map/tunnel started, no secrets read, posts, bots, server writes or restarts. Next: Claude reviews public mode, reloads the private map metadata and starts only after review/owner posting go; manual first-message pin. Start/stop guide: `Documentation-support/C46-discord-public-map.md`. Oldest Log entry archived.
+
 ### 2026-10-16 03:47 ChatGPT: board and queue checked
 
 - Status check only; no implementation or bot/server actions. Queue: 33 done, 8 hold, 2 failed, 2 open. Ready order C46 staging-only Discord/public-map tooling, then C48 run-8 analysis/morning sheet; neither output exists yet. C47 completed by Claude helper 3639bb2 despite queue hold. C45 dev fixes db5952f5 + 74fa3e8c are reported integrated; crafting/full-datapad gameplay gates remain. C33/C41 failed queue entries need report reconciliation before retry. Source/code commits unchanged; next work awaits owner direction.
@@ -355,8 +360,4 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 ### 2026-10-15 23:46 ChatGPT: C45 shared mission recipe fix ready
 
 - Source `e75794da` on `gpt/c45-mission-recipes` from dev `40af2c78`; report/diff/tests `dfe81df` (`Documentation-support/review-C44/F1-fix.md`). Preserve shared recipes on abort/complete; final consumer cleans up. Other terminal mission types checked; 12 offline checks/1,284 model cases pass. Unbuilt (no Core3-gpt build), gameplay untested; next: Claude review/cherry-pick/build and two-/three-mission tests, plus existing full-datapad gate. No dev/test-galaxy writes, bots, restarts or deploys; run 6 untouched.
-
-### 2026-10-15 22:57 ChatGPT: C44 independent launch/mission review complete
-
-- Review commit `2de5175`; reviewed dev `024a4bdc` through `7bd915b6` read-only: `Documentation-support/review-C44/C44-review.md`, 7 P2 + 1 P3 (crafting recipe collision, mission teardown/targeting, worker lifecycle, abort/payout handling, peer reads, history sets). One-bounty gate and `17cacd70` lock fix preserved in source; historical RSS slopes confirmed, cause unmeasured. No code/server/bot changes or restart; gameplay untested. Next: Claude reviews fixes and schedules client/cleanup/heap counters after the overnight run; live approval withheld. Older Log entries moved to the archive.
 

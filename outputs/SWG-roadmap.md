@@ -384,6 +384,8 @@ Files that grow without limit get slow to read, for us and for the game tools. R
 
 - [x] C17 Discord layout and webhook posting tool implemented (14 Oct, ChatGPT); 22 offline tests pass, saved-source dry runs checked. See Documentation-support/discord-plan.md.
 - [ ] C17 owner setup, private redaction list, reviewed first post and explicit go; real Discord delivery untested.
+- [x] C46 Discord bot feed + anonymous public-map/tunnel tools staged (16 Oct, ChatGPT), `3150acf`; 53 offline tests pass; PNG inspected; no services started or posts sent. `Documentation-support/C46-discord-public-map.md`.
+- [ ] C46 Claude public-mode review, reviewed start, webhook delivery/manual pin and browser/tunnel acceptance; runtime untested.
 
 - [x] C19 / C4f read-only review (14 Oct, ChatGPT): five dev commits + six tools; 2 P2 findings, C4e-F1 resolved in leash; offline checks saved, fixes/runtime acceptance open. See Documentation-support/review-C4f/C4f-review.md.
 
