@@ -2,6 +2,12 @@
 
 Finished task rows and older log entries moved out of `SWG-handoff.md` to keep the board short (it is read every session). Newest first within each move.
 
+## Moved 2026-10-16 17:00 (Claude, Hutt crash)
+
+### 2026-10-16 09:01 ChatGPT: C53 Ossus o7 staging complete
+
+- `3f64720`: accepted crater/pod/field and six POI layouts retained; POI 17 centre (2200, -4725), minimum tested 600 x 300 m relief 12.56 m. `run_all.py` ALL CHECKS PASS (119 s), 90 read-only server references pass; README regenerated/open decisions closed. Client checks and two existing POI 13 boulder tilt warnings remain untested; next: Claude review and owner client visit. No packing, /opt/swg writes or galaxy commands. Oldest Log entry archived.
+
 ## Moved 2026-10-16 16:28 (Claude, content backlog)
 
 ### 2026-10-16 08:56 ChatGPT: C52 city answers and M1 plan complete

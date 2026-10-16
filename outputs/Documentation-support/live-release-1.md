@@ -1,7 +1,35 @@
-# Live release 1: plan (draft, Claude, 16 Oct 4:25 PM)
+# Live release 1: plan (draft, Claude, 16 Oct 4:25 PM; revised 4:45 PM after GPT's C55)
 
 Nothing is deployed. This is the plan the owner OKs or changes; GPT's C55 review decides
 which commits are fit, and the dress rehearsal (step 3) proves it before live is touched.
+
+## After C55 (4:45 PM): a small first release instead of all of dev
+
+GPT's C55 approves no whole-dev merge, and it is right on the facts that matter:
+- `64156084` also starts 224 test creatures (T1/T2/S1-S5) in five cities for everyone, with no
+  test-only switch;
+- the spawn gate (`b20a46d7`) as written removed krayt spawns for solo masters (F2);
+- the helper droid deadlock reaches real new players (F1).
+
+The whole-dev route below stays as the later "friends launch" release (with C57's client patch
+and the Hoth gate). **Release 1 becomes a release branch cut from live (`920203d8`)** with only
+reviewed, player-facing changes:
+
+| Change | Source | State |
+|---|---|---|
+| Helper droid deadlock fix (stock bug: device locked before the droid) | new, dev 16 Oct (C55 F1) | written and built; GPT re-review (C58) |
+| Per-type XP multipliers | `40af2c78` | fit (C55); all 1.0 unless configured |
+| CitiesAllowed guard only | from `64156084`, split out | fit after splitting (C55) |
+| Name filter: canon names, whole words | `d1cd02c6`, `0f045a47` | reviewed earlier; owner's rule |
+| Spawn gate, new characters only, and the five newbie spawn fixes | `b20a46d7` + F2 fix | after a test of solo-master and novice spawns |
+
+Held for later releases:
+- crafting missions (`db5952f5`, `74fa3e8c`) and six missions: the owner's mission hold and C56;
+- the city spawn tests;
+- BotPop;
+- Hoth, Ossus and the species (C57 client patch).
+
+Cherry-picks onto live's older base are checked by building and by the dress rehearsal (step 3).
 
 ## Where live is
 
@@ -77,6 +105,7 @@ Already reviewed earlier (C4b-C4f, C19, C22, C24b, C34r, C39):
 
 ## Open questions for the owner
 
-- Whole dev (recommended) or only the C55-approved player-facing fixes?
-- Ship the spawn level gate on live now, or keep it test-only (`LevelGateBase = 0`) until it
-  has been tested with real players?
+- Release 1 as the small set above (recommended since C55), or wait and ship everything
+  together at the friends launch?
+- The spawn level gate on live in release 1 (new characters only, after the spawn test), or
+  off on live (`LevelGateBase = 0`) for now?
