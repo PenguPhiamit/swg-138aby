@@ -134,6 +134,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C53: apply accepted Ossus o7 decisions** | ChatGPT, Medium | staging complete 2026-10-16 | `3f64720`; POI 17 (2200, -4725), accepted settings retained; run_all ALL CHECKS PASS (119 s), 90 server references pass; client untested; nothing packed or deployed |
 | **C52: owner city answers, source cleanup and M1 probe plan** | ChatGPT, Medium | complete 2026-10-16 | `dc469f8`; excluded citations/sole-source claims removed, Q1-Q13 recorded, ordered M1 plan; documentation checks pass; implementation/runtime untested |
 | **C51: approved checkout housekeeping (morning sheet 1-3)** | ChatGPT, Low | complete 2026-10-16 | `a5b7604`; targeted ignores, 45 cached-only removals, author inventory; queues/history/local files kept; 23 ignore checks pass |
 | **C50: verify idle-model medic/scout/entertainer XP research** | ChatGPT interactive, Medium | claimed 2026-10-16 | Read-only source audit of three local-model review topics; corrected references, no gameplay/server changes |
@@ -362,6 +363,10 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-16 09:01 ChatGPT: C53 Ossus o7 staging complete
+
+- `3f64720`: accepted crater/pod/field and six POI layouts retained; POI 17 centre (2200, -4725), minimum tested 600 x 300 m relief 12.56 m. `run_all.py` ALL CHECKS PASS (119 s), 90 read-only server references pass; README regenerated/open decisions closed. Client checks and two existing POI 13 boulder tilt warnings remain untested; next: Claude review and owner client visit. No packing, /opt/swg writes or galaxy commands. Oldest Log entry archived.
+
 ### 2026-10-16 08:56 ChatGPT: C52 city answers and M1 plan complete
 
 - `dc469f8`: removed excluded citations and dependent claims, recorded all 13 owner answers, wrote `Documentation-support/bot-cities-plan.md` with Claude's build order and maintenance/jitter/slot probes. CRLF, answer/source scans and diff checks pass; no code or server/bot actions. Implementation and in-game acceptance untested; next: Claude reviews and builds M1. Oldest Log entry archived.
@@ -375,7 +380,3 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 - C49 source/report b5cdbb6: escort combat checks observed 3D range after approach, defers target openers, preserves target cell and resolves ID-matched leader 'me'; doctor gate accepts exact patient/attribute refresh receipts. 21 offline checks pass; all four saved false buff failures explained. No runtime acceptance claimed.
 - Saved movement summary: 22 position events, 6 generic move failures and 3 timeouts across three reports; no posture events or rejection reasons. At gate pin 80895f63 the specific line-340 outdoor collision check is commented out; other causes remain unproven. Claude owns proposed bounded rejection telemetry and runtime reruns; no server/bot actions here.
 - Owner says continue idle tasks while Claude lacks usage: claimed C50 to verify medic/scout/entertainer XP reports against source; no new downloads, services or server edits.
-
-### 2026-10-16 04:03 ChatGPT: C48 overnight checkpoint and morning sheet
-
-- Reports `bc166df`: run 8 through 3:59 AM, 1,700 bots, 20,009 kills, 1,043 deaths, 2,358 completed missions; style/SP totals reconcile. Morning sheet lists 29 owner decisions with recommendations; watchdog has no recorded low-memory despawn, latest 6,646 MB available. 748 snapshots exceed their assigned point-budget label; cap enforcement unverified. Read-only WSL analysis only; crafting/full-datapad, Hutt/Ossus client checks and live release remain open. Next: owner decisions and Claude runtime follow-up; oldest log entry archived.

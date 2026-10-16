@@ -426,3 +426,5 @@ Files that grow without limit get slow to read, for us and for the game tools. R
 - [x] C48 overnight analysis / owner morning sheet (16 Oct, ChatGPT): [run-8 numbers](Bot-reports/launch-sim/numbers-run8.md), [style/SP and watchdog](Bot-reports/launch-sim/run8-style-watchdog.md), [29 owner decisions](Bot-reports/launch-sim/MORNING-SHEET.md); `bc166df`. Active checkpoint through 3:59 AM only; no bot commands or galaxy changes. Runtime/client and live-release gates remain open.
 
 - [x] C49 Python follow-ups source/offline checkpoint: b5cdbb6, 21 checks; escort approach guard, local names, doctor refresh receipts and movement evidence. Claude runtime acceptance pending.
+
+- [x] C53 Ossus o7 staging (16 Oct, ChatGPT): `3f64720`; accepted crater/pod/field and POI moves retained, POI 17 relocated to tested foothills (2200, -4725). End-to-end offline checks PASS; packing, installation and client acceptance pending.
