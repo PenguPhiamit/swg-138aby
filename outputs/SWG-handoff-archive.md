@@ -1397,3 +1397,14 @@ Claude uses the grid squares to place new planets on the ticket-purchase galaxy 
 - How the owner sees it, no server change or restart: the piece replaces the stock campfire log's appearance, so `/createSpawningElement spawn object/static/structure/general/campfire_fresh.iff` in a test session shows the wall. Steps: `Fable-asset-pipeline/how-to-view-first-ruin.md`.
 - Findings: the pack has no texture atlas (two flat material colours, no UVs), so the textures are flat colours; the exporter writes no collision (walk-through), as the plan expected. Not done: own object template, CRC entry and server Lua (needs a restart by the galaxy owner), LODs, a stone texture.
 - **Verified in the owner's client, 14:46** (screenshot by the main session via `um win shot`, kept out of the repo): the wall draws upright at Mos Eisley with both tones, no black or white block, no crash, 30 fps. Collision not checked. Any session that rebuilds `local_planets.tre` from its own staging drops these files: re-run `Fable-asset-pipeline/stage_ruin.py` (inputs in `Fable-asset-pipeline/converted/`).
+
+
+## Moved 2026-10-16 03:47 (task status check)
+
+### 2026-10-15 22:40 Claude: launch simulation run 4, overnight (missions, Ossus explorers, real purse)
+
+- Run 4 stopped at 22:07, five minutes in, on the first bot mission: `MissionObject::setMissionObjective` asserts the mission is locked. Bots now lock it as `MissionAcceptCallback` and `MissionAbortCallback` do (dev `17cacd70`). Rerun: 710 missions taken in 10 minutes; all 18 starting cities have an outdoor general terminal. The unpaid "mission_gone" rows at its end were the despawn.
+- Owner, 22:20: bots get the creation purse (10,000 cash, 100,000 bank) and pay trainers as `trainerConvHandler.lua` does (dev `7bd915b6`; row "broke" when short). Overnight run since 22:26: purse and training charges confirmed; 159 mission lairs spawned in 12 minutes, none destroyed yet. Level 1-2 bots take missions up to level 10 and are incapacitated by the lair defenders; left as is (owner: no restart without asking).
+- Reports (all four in): server rates `c213e8c`, starter economy `8cc38b7`, pacing `8878023`, spawns `a961ef8`. Owner decisions tomorrow: purse and training cost, per-type XP, the spawn level gate and five data edits.
+- Census tool `667725f`: Ossus export at 00:20 to `Bot-reports/launch-sim/ossus-census.md`. Fable's scheduled 00:32 job (after the 22:05 Hutt run ends) places Ossus points of interest and settlement flats on it, in `Fable-ossus/o7`. C38 stays paused until the simulation ends.
+

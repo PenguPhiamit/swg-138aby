@@ -342,6 +342,10 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-16 03:47 ChatGPT: board and queue checked
+
+- Status check only; no implementation or bot/server actions. Queue: 33 done, 8 hold, 2 failed, 2 open. Ready order C46 staging-only Discord/public-map tooling, then C48 run-8 analysis/morning sheet; neither output exists yet. C47 completed by Claude helper 3639bb2 despite queue hold. C45 dev fixes db5952f5 + 74fa3e8c are reported integrated; crafting/full-datapad gameplay gates remain. C33/C41 failed queue entries need report reconciliation before retry. Source/code commits unchanged; next work awaits owner direction.
+
 ### 2026-10-16 02:15 Claude: night shift handed to GPT and the local model
 
 - Since 22:40: runs 6-8 (spawn level gate and five newbie fixes `b20a46d7`; bots on missions near their level that follow the mission waypoint `41ea45b5`; C44 F2/F5/F8 `e033e8b8`; C45 recipe fix `db5952f5` + one-item delivery `74fa3e8c`; per-type XP `40af2c78`; multiclass new players `8b48a044`). Run 8: 603 missions paid by 01:50, deaths with a killer 8+ levels above the bot down from 24-33% to 7%.
@@ -355,11 +359,4 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 ### 2026-10-15 22:57 ChatGPT: C44 independent launch/mission review complete
 
 - Review commit `2de5175`; reviewed dev `024a4bdc` through `7bd915b6` read-only: `Documentation-support/review-C44/C44-review.md`, 7 P2 + 1 P3 (crafting recipe collision, mission teardown/targeting, worker lifecycle, abort/payout handling, peer reads, history sets). One-bounty gate and `17cacd70` lock fix preserved in source; historical RSS slopes confirmed, cause unmeasured. No code/server/bot changes or restart; gameplay untested. Next: Claude reviews fixes and schedules client/cleanup/heap counters after the overnight run; live approval withheld. Older Log entries moved to the archive.
-
-### 2026-10-15 22:40 Claude: launch simulation run 4, overnight (missions, Ossus explorers, real purse)
-
-- Run 4 stopped at 22:07, five minutes in, on the first bot mission: `MissionObject::setMissionObjective` asserts the mission is locked. Bots now lock it as `MissionAcceptCallback` and `MissionAbortCallback` do (dev `17cacd70`). Rerun: 710 missions taken in 10 minutes; all 18 starting cities have an outdoor general terminal. The unpaid "mission_gone" rows at its end were the despawn.
-- Owner, 22:20: bots get the creation purse (10,000 cash, 100,000 bank) and pay trainers as `trainerConvHandler.lua` does (dev `7bd915b6`; row "broke" when short). Overnight run since 22:26: purse and training charges confirmed; 159 mission lairs spawned in 12 minutes, none destroyed yet. Level 1-2 bots take missions up to level 10 and are incapacitated by the lair defenders; left as is (owner: no restart without asking).
-- Reports (all four in): server rates `c213e8c`, starter economy `8cc38b7`, pacing `8878023`, spawns `a961ef8`. Owner decisions tomorrow: purse and training cost, per-type XP, the spawn level gate and five data edits.
-- Census tool `667725f`: Ossus export at 00:20 to `Bot-reports/launch-sim/ossus-census.md`. Fable's scheduled 00:32 job (after the 22:05 Hutt run ends) places Ossus points of interest and settlement flats on it, in `Fable-ossus/o7`. C38 stays paused until the simulation ends.
 
