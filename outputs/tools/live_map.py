@@ -966,7 +966,7 @@ padding:7px 14px;cursor:pointer;color:var(--muted);border-radius:8px 8px 0 0;fon
 
 <script>
 const PROF={marksman:['Marksman','#e8c547'],brawler:['Brawler','#c79c6e'],scout:['Scout','#7fd35b'],medic:['Medic','#4cc9f0'],
- entertainer:['Entertainer','#f78fb3'],artisan:['Artisan','#ff8c42'],other:['Other','#a78bfa']};
+ entertainer:['Entertainer','#f78fb3'],artisan:['Artisan','#ff8c42'],explorer:['Explorer','#ffffff'],other:['Other','#a78bfa']};
 const TITLES={overview:'Overview',bots:'Bots',map:'Map',activity:'Activity',issues:'Issues',server:'Server'};
 const STATES=['fighting','moving','waiting','busy','idle','stuck','down','offline'];
 const STATE_COL={fighting:'--bad',moving:'--info',waiting:'--gold',busy:'--accent',idle:'--muted',stuck:'--warn',down:'--bad',offline:'--muted'};
