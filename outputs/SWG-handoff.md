@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C41 packet writer claimed 2026-10-15 12:49). Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy: overnight launch simulation since 22:26 on dev `7bd915b6` (BotPop "all", 1,500 new players taking missions + 200 Ossus explorers; no squad runs). Owner, 22:37: no further restart without asking. Live map on http://localhost:8765 (a setsid process as swgemu while the simulation runs). - 2026-10-15 22:40.**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C41 packet writer claimed 2026-10-15 12:49). Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy: overnight launch simulation run 6 since about 23:30 on dev `b20a46d7` (spawn level gate, newbie spawn fixes, bots on missions near their level, launch purse; BotPop "all", 1,500 new players + 200 Ossus explorers; no squad runs). Owner, 23:15: next restart about 06:45 after the overnight analysis. Live map on http://localhost:8765 (a setsid process as swgemu while the simulation runs). - 2026-10-15 23:35.**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -103,6 +103,15 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
 - Also: KOTOR 1/2 places to be rebuilt clean-room (descriptions from public sources and observation only, built with SWG's own art; never KOTOR's files); pilot is the Dantooine Jedi Enclave ruins; then Nar Shaddaa or Taris.
 
 Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) — purpose, design maturity and difficulty for all recorded features/candidates.
+
+**Owner's answers, 15 Oct 23:15 (Claude's chat, prompt cards; the launch simulation's reports and Fable's Hutt and Ossus questions):**
+- Launch economy: stock starting credits (100 cash, 1,000 bank) with training at x0.25. The test galaxy keeps its test values; from run 6 the simulated players get the launch purse (`Core3.BotPopLaunchCash`, `BotPopLaunchBank`).
+- XP: keep 5x; add per-type XP multipliers (code only; nothing changes until a rate is set). Claude builds it overnight for the 06:45 restart.
+- Spawns: the level gate and the five spawn-data fixes, yes (dev `b20a46d7`). Bots take missions near their level, yes (same commit).
+- Restart: one before bed (run 6, about 23:30, done) and one at about 06:45 after the overnight analysis, with whatever else is approved and built.
+- Six active missions: in the next live release once GPT's C44 review is clean; the owner still OKs the release.
+- Hutt: Claude picks the species ID; chairs refused until new animations exist; Huttese at creation, yes; **the floater is crafted by Artisans** (not free at creation); Nal Hutta's first look in the same restart as the Hutt check.
+- Ossus: craters 2-4 m deep as designed; start with two settlement fields (Westmarch and Knossa Fields); Krayt's garrison on the benchland rim over the ruins; the Vong project fields held until the voxyn content exists.
 
 ## Task board
 
