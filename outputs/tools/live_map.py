@@ -855,6 +855,8 @@ class Handler(BaseHTTPRequestHandler):
 
 class PublicHandler(BaseHTTPRequestHandler):
     """Exact route allowlist; no client image, private API or static-file fallback."""
+    server_version, sys_version = 'map', ''  # no Python version banner on the public tunnel
+
     def do_GET(self):
         route = urlparse(self.path)
         if route.query or route.path not in ('/', '/index.html', '/data.json'):

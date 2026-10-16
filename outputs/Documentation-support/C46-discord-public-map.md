@@ -104,3 +104,32 @@ API references: [Discord webhooks](https://docs.discord.com/developers/resources
 documents `wait=true`, multipart attachments and editing a webhook message;
 [Cloudflare quick tunnels](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/)
 documents the temporary public hostname and development/testing scope.
+
+## Claude's review (16 Oct, 4:30 PM)
+
+Verdict: fit to start on the test galaxy. The public side is safe: an exact route allowlist,
+no query strings, an allowlist projection that rebuilds every bot row from fixed labels and
+numbers (no names, activities, logs or paths), textContent-only rendering, a strict CSP, and a
+tunnel wrapper that checks the public schema before it exposes only 127.0.0.1:8766. The feed
+never forwards the private JSON, prose or a raw URL. The feared false "simulation ended"
+alert cannot happen: the server never writes "stop" or "despawn" events (those are console
+verbs), so a run ends only when `online` reaches 0 or a new log starts.
+
+Fixed in review (tests 21 feed + 11 map + 24 Discord privacy, all pass):
+1. P2: one network blip or Discord 5xx during the minute PATCH left `inflight` set and stopped
+   the feed until someone reconciled it by hand. Editing the one card is idempotent, so a
+   failed PATCH now retries next minute; a 404 (card deleted) still stops it, and POSTs keep
+   the no-blind-retry rule.
+2. P2: every cycle wrote a new card JSON and PNG into `preview/`, about 1,440 files a day,
+   in both modes. The latest card and map are now overwritten; alerts are still kept.
+3. P3: after every success the feed waited 60 s (the 429 floor in `retry_seconds`), so an
+   upload over 1 s skipped a minute's update. It now waits for the bucket reset only when
+   Discord says the bucket is empty, else 1 s.
+4. P3: the public server no longer sends a Python version banner.
+
+Accepted as is: Python's ThreadingHTTPServer behind a quick tunnel is fine for a temporary
+test map, not for a permanent public page (use a named tunnel and a real server then).
+
+Still needed: the owner's webhook file (`C:\Users\Pengw\.swg-private\discord-webhook.txt`
+does not exist yet) and the owner's OK to open the public link. The private map on 8765 is
+already running the C46 code (run 13's start script launched it).

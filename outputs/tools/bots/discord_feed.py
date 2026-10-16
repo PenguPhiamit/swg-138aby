@@ -247,9 +247,20 @@ def deliver(state, path, endpoint, payload, png=None, live=False, request=discor
     target = endpoint.split('?', 1)[0] + '/messages/' + message if message else endpoint
     state['inflight'] = {'method': method, 'live': live}
     save_state(path, state)
-    code, headers, response = request(target, method, payload, png)
+    try:
+        code, headers, response = request(target, method, payload, png)
+    except SafeError:
+        if method != 'PATCH':
+            raise
+        code, headers, response = None, {}, b''
     if code == 429:
         state.update(inflight=None, next_at=clock() + retry_seconds(headers, response))
+        save_state(path, state)
+        return False
+    if method == 'PATCH' and (code is None or code >= 500):
+        # Editing the one card is idempotent: a network blip or a Discord outage retries next minute
+        # instead of stopping the feed (Claude's C46 review). A 404 (card deleted) still stops it.
+        state.update(inflight=None, next_at=clock() + INTERVAL)
         save_state(path, state)
         return False
     if not 200 <= code < 300:
@@ -270,10 +281,22 @@ def deliver(state, path, endpoint, payload, png=None, live=False, request=discor
     else:
         state['last_live'] = clock()
     state['inflight'] = None
-    state['next_at'] = clock() + max(1, retry_seconds(headers, b'{"retry_after":0}') if
-                                   any(k.lower().startswith('x-ratelimit') for k in headers) else 1)
+    state['next_at'] = clock() + bucket_wait(headers)
     save_state(path, state)
     return True
+
+
+def bucket_wait(headers):
+    """After a success, wait for the bucket reset only when it is empty, else one second. (retry_seconds floors at
+    60 s for a 429, which turned every success into a 60-s pause: an upload over 1 s skipped a minute's update.)"""
+    h = {k.lower(): v for k, v in headers.items()}
+    if h.get('x-ratelimit-remaining') != '0':
+        return 1
+    try:
+        wait = float(h.get('x-ratelimit-reset-after', 1))
+    except (TypeError, ValueError):
+        return INTERVAL
+    return min(INTERVAL, max(1, wait)) if wait == wait else INTERVAL
 
 
 def empty_state():
@@ -295,10 +318,11 @@ def load_state(path):
 
 
 def preview(folder, payload, png, events, now):
+    """The latest card and map are overwritten (a file per minute filled the disk); alerts are rare and kept."""
     folder.mkdir(parents=True, exist_ok=True)
     stem = now.strftime('%Y%m%d-%H%M%S')
-    (folder / (stem + '-card.json')).write_text(json.dumps(payload, indent=2), encoding='utf-8')
-    (folder / (stem + '-map.png')).write_bytes(png)
+    (folder / 'latest-card.json').write_text(json.dumps(payload, indent=2), encoding='utf-8')
+    (folder / 'latest-map.png').write_bytes(png)
     for i, event in enumerate(events):
         (folder / (stem + f'-event-{i}.json')).write_text(json.dumps(event, indent=2), encoding='utf-8')
 

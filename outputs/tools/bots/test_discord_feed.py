@@ -244,6 +244,34 @@ class Delivery(unittest.TestCase):
             with self.assertRaises(f.SafeError):
                 f.deliver(state, path, 'unused', {}, request=lambda *a: self.fail(), clock=lambda: 200)
 
+    def test_failed_patch_retries_next_minute_and_404_stops(self):
+        with tempfile.TemporaryDirectory() as temp:
+            state, path = f.empty_state(), Path(temp) / 'state.json'
+            state['message_id'] = '12345'
+            def blip(*a):
+                raise f.SafeError('Discord result unknown')
+            self.assertFalse(f.deliver(state, path, 'https://example.invalid?wait=true', {}, b'P', True, blip, lambda: 100))
+            self.assertIsNone(f.load_state(path)['inflight'])
+            self.assertEqual(state['next_at'], 100 + f.INTERVAL)
+            outage = lambda *a: (503, {}, b'')
+            self.assertFalse(f.deliver(state, path, 'https://example.invalid?wait=true', {}, b'P', True, outage, lambda: 200))
+            gone = lambda *a: (404, {}, b'')
+            with self.assertRaises(f.SafeError):
+                f.deliver(state, path, 'https://example.invalid?wait=true', {}, b'P', True, gone, lambda: 300)
+
+    def test_success_spacing_waits_only_for_an_empty_bucket(self):
+        self.assertEqual(f.bucket_wait({'X-RateLimit-Remaining': '4', 'X-RateLimit-Reset-After': '2.5'}), 1)
+        self.assertEqual(f.bucket_wait({'X-RateLimit-Remaining': '0', 'X-RateLimit-Reset-After': '2.5'}), 2.5)
+        self.assertEqual(f.bucket_wait({}), 1)
+
+    def test_preview_overwrites_latest_card_and_map(self):
+        data = public_filter(fixture())
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp)
+            for minute in range(3):
+                f.preview(path, f.card_payload(data), b'PNG', [], datetime(2026, 10, 16, 6, minute))
+            self.assertEqual(sorted(p.name for p in path.iterdir()), ['latest-card.json', 'latest-map.png'])
+
     def test_multipart_payload_json_and_file(self):
         body, kind = f.multipart(f.card_payload(public_filter(fixture())), b'PNGDATA')
         self.assertIn(b'name="payload_json"', body)
