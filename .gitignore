@@ -35,6 +35,7 @@ outputs/Backups/
 *.pob
 *.skt
 *.ans
+*.lat
 *.snd
 *.wav
 *.mp3

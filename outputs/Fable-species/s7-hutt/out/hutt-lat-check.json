@@ -1,0 +1,425 @@
+{
+ "numbers": {
+  "absent_by_skip_rule": 84,
+  "added_by_top_node": {
+   "AGAT": 2,
+   "DRAT": 38,
+   "PXAT": 455,
+   "SPAT": 2,
+   "TSCL": 116,
+   "YWAT": 18
+  },
+  "agat_gestures": {
+   "angry": [
+    "emt_pound_fist_palm"
+   ],
+   "conversation_1": [
+    "emt_conversation_1"
+   ],
+   "fidget": [
+    "emt_look_casual"
+   ],
+   "gesticulate_wildly": [
+    "emt_gesticulate_wildly"
+   ],
+   "greet": [
+    "emt_wave_2"
+   ],
+   "laugh_cackle": [
+    "emt_laugh_cackle"
+   ],
+   "look_casual": [
+    "emt_look_casual"
+   ],
+   "nod_head_once": [
+    "emt_nod_head_once"
+   ],
+   "shake_head_no": [
+    "emt_shake_head_no"
+   ],
+   "shrug_hands": [
+    "emt_shrug_hands"
+   ],
+   "sp_01": [
+    "sp_01"
+   ],
+   "sp_02": [
+    "sp_02"
+   ],
+   "threaten": [
+    "emt_taunt1"
+   ],
+   "yes": [
+    "emt_nod_head_once"
+   ]
+  },
+  "ans_distinct_in_added_entries": 104,
+  "ans_distinct_in_new_table": 117,
+  "ans_distinct_in_stock_table": 116,
+  "ans_new_to_the_table": [
+   "appearance/animation/hutt_loc_crawl.ans"
+  ],
+  "ans_winning_archive": {
+   "data_animation_00.tre (priority 25)": 102,
+   "patch_05.tre (priority 31)": 15
+  },
+  "ash_names": 935,
+  "ash_names_missing_after": 156,
+  "ash_names_missing_after_list": [
+   "add_cbt_attack_ranged_add",
+   "add_face_blink",
+   "add_force",
+   "cbt_attack_ranged",
+   "emt_trick_1",
+   "emt_trick_2",
+   "face_angry",
+   "face_bat_eyes",
+   "face_blink",
+   "face_blow_kiss",
+   "face_blush",
+   "face_bored",
+   "face_close_eyes",
+   "face_disappointed",
+   "face_evil_grin",
+   "face_eye_roll",
+   "face_eyebrow_arch",
+   "face_frown",
+   "face_get_hit",
+   "face_glare",
+   "face_grimace",
+   "face_happy",
+   "face_idle",
+   "face_innocent",
+   "face_pensive",
+   "face_pout",
+   "face_sad",
+   "face_scowl",
+   "face_shy",
+   "face_sigh",
+   "face_smile",
+   "face_sneer",
+   "face_sneeze",
+   "face_snob",
+   "face_squint",
+   "face_surprised",
+   "face_suspicious",
+   "face_wink",
+   "face_worried",
+   "face_yawn",
+   "face_yuck_face",
+   "force_absorb",
+   "force_absorb_polearm",
+   "force_absorb_sword_1h",
+   "force_absorb_sword_2h",
+   "force_absorb_unarmed",
+   "force_blast",
+   "force_blast_polearm",
+   "force_blast_sword_1h",
+   "force_blast_sword_2h",
+   "force_blast_unarmed",
+   "force_channel",
+   "force_channel_polearm",
+   "force_channel_sword_1h",
+   "force_channel_sword_2h",
+   "force_channel_unarmed",
+   "force_choke",
+   "force_choke_polearm",
+   "force_choke_sword_1h",
+   "force_choke_sword_2h",
+   "force_choke_unarmed",
+   "force_dampen",
+   "force_dampen_polearm",
+   "force_dampen_sword_1h",
+   "force_dampen_sword_2h",
+   "force_dampen_unarmed",
+   "force_destruction",
+   "force_destruction_polearm",
+   "force_destruction_sword_1h",
+   "force_destruction_sword_2h",
+   "force_destruction_unarmed",
+   "force_illusion",
+   "force_illusion_polearm",
+   "force_illusion_sword_1h",
+   "force_illusion_sword_2h",
+   "force_illusion_unarmed",
+   "force_lightning",
+   "force_lightning_polearm",
+   "force_lightning_sword_1h",
+   "force_lightning_sword_2h",
+   "force_lightning_unarmed",
+   "force_persuasion",
+   "force_persuasion_polearm",
+   "force_persuasion_sword_1h",
+   "force_persuasion_sword_2h",
+   "force_persuasion_unarmed",
+   "force_protection",
+   "force_protection_polearm",
+   "force_protection_sword_1h",
+   "force_protection_sword_2h",
+   "force_protection_unarmed",
+   "force_pull",
+   "force_pull_polearm",
+   "force_pull_sword_1h",
+   "force_pull_sword_2h",
+   "force_pull_unarmed",
+   "force_push",
+   "force_push_polearm",
+   "force_push_sword_1h",
+   "force_push_sword_2h",
+   "force_push_unarmed",
+   "force_strength",
+   "force_strength_polearm",
+   "force_strength_sword_1h",
+   "force_strength_sword_2h",
+   "force_strength_unarmed",
+   "force_throw",
+   "force_throw_polearm",
+   "force_throw_sword_1h",
+   "force_throw_sword_2h",
+   "force_throw_unarmed",
+   "heal_other_moving",
+   "heal_self_move",
+   "jedi_catch_sword",
+   "jedi_catch_sword_mov",
+   "jedi_throw_sword",
+   "jedi_throw_sword_mov",
+   "pistol_kneeling_ranged_weapon_melee_attack",
+   "pistol_prone_ranged_weapon_melee_attack",
+   "pistol_prone_ranged_weapon_melee_attack_mask",
+   "pistol_ranged_weapon_melee_attack_mask",
+   "pole_jedi_combo_1",
+   "pole_jedi_combo_2",
+   "rifle_prone_ranged_weapon_melee_attack",
+   "rifle_prone_ranged_weapon_melee_attack_mask",
+   "rifle_ranged_weapon_melee_attack_mask",
+   "sp_09",
+   "sp_10",
+   "sp_11",
+   "sp_12",
+   "sp_13",
+   "sp_14",
+   "sp_15",
+   "sp_16",
+   "sp_17",
+   "sp_18",
+   "sp_19",
+   "sp_20",
+   "sp_21",
+   "std_maniipulate_high",
+   "std_power_down",
+   "std_power_up",
+   "sword_1h_jedi_combo_1",
+   "sword_1h_jedi_combo_2",
+   "sword_1h_jedi_combo_3",
+   "sword_1h_jedi_combo_4",
+   "sword_2h_jedi_combo_1",
+   "sword_2h_jedi_combo_2",
+   "sword_attack_mask",
+   "trn_cbt_unarmed_incapacitated_face_up_to_prone",
+   "trn_combat_standing_hit_to_incapacitated_face_up  ",
+   "trn_incapacitated_water_to_swim",
+   "trn_prone_to_stand",
+   "trn_re_get_hit_heavy_backward",
+   "trn_stand_combat_to_stand",
+   "trn_stand_to_stand_combat"
+  ],
+  "ash_names_missing_before": 731,
+  "ash_state_loops": 45,
+  "ash_state_loops_missing_before": [
+   "loop_attention",
+   "loop_blocking",
+   "loop_combat_riding",
+   "loop_crouched",
+   "loop_incapacitated_face_down",
+   "loop_kneeling",
+   "loop_pistol_combat_kneeling_aimed",
+   "loop_pistol_combat_prone_aimed",
+   "loop_pistol_combat_riding",
+   "loop_pistol_kneeling",
+   "loop_pistol_prone",
+   "loop_pistol_riding",
+   "loop_polearm",
+   "loop_polearm_combat",
+   "loop_polearm_combat_kneeling",
+   "loop_polearm_combat_riding",
+   "loop_polearm_kneeling",
+   "loop_polearm_riding",
+   "loop_prone",
+   "loop_riding",
+   "loop_rifle_combat_prone_aimed",
+   "loop_rifle_combat_riding",
+   "loop_rifle_kneeling",
+   "loop_rifle_kneeling_combat_aimed",
+   "loop_rifle_prone",
+   "loop_rifle_riding",
+   "loop_sitting_chair",
+   "loop_sitting_ground",
+   "loop_skill",
+   "loop_sword2h_combat",
+   "loop_sword_1h_combat_riding",
+   "loop_sword_1h_prone",
+   "loop_sword_1h_riding",
+   "loop_sword_2h_combat_riding",
+   "loop_sword_2h_riding"
+  ],
+  "dance_gestures_from_map": {
+   "emt_gesticulate_wildly": "gesticulate_wildly",
+   "emt_laugh_cackle": "laugh_cackle",
+   "emt_nod_head_once": "nod_head_once",
+   "emt_shrug_hands": "shrug_hands",
+   "emt_wave_2": "greet",
+   "sp_02": "sp_02"
+  },
+  "entries": 837,
+  "human_distinct": 904,
+  "human_names_in_new_hutt": 820,
+  "human_names_in_stock_hutt": 190,
+  "human_names_missing_from_stock_hutt": 714,
+  "human_tables": {
+   "tre:local_planets.tre:appearance/lat/all_m.lat": {
+    "distinct": 904,
+    "entries": 908
+   },
+   "tre:mtg_patch_022.tre:appearance/lat/all_f.lat": {
+    "distinct": 904,
+    "entries": 908
+   }
+  },
+  "hutt_ans_in_client": 127,
+  "hutt_ans_unreferenced_after": [
+   "appearance/animation/hutt_cbt_pistol_standing_aimed_idle.ans",
+   "appearance/animation/hutt_cbt_rifle_standing_aimed_idle.ans",
+   "appearance/animation/hutt_idl_stand.ans",
+   "appearance/animation/hutt_idl_stand_look.ans",
+   "appearance/animation/hutt_idl_stand_look_forward.ans",
+   "appearance/animation/hutt_rea_stand_get_hit_heavy.ans",
+   "appearance/animation/hutt_rea_stand_get_hit_light.ans",
+   "appearance/animation/hutt_rea_stand_get_hit_mediium.ans",
+   "appearance/animation/hutt_rea_swim_get_hit_heavy.ans",
+   "appearance/animation/hutt_rea_swim_get_hit_light.ans"
+  ],
+  "hutt_only_names": [
+   "attack_heavy_add",
+   "attack_heavy_standing",
+   "attack_light_add",
+   "attack_light_standing",
+   "sp_01",
+   "sp_02",
+   "sp_03",
+   "sp_04",
+   "sp_05",
+   "sp_06",
+   "sp_07",
+   "sp_08",
+   "std_hold_object",
+   "std_manipulate_low",
+   "std_pick_up_object",
+   "std_put_down_object",
+   "trn_unarmed_standing_to_standing_ready"
+  ],
+  "mapped_though_a_skip_rule_matches": [
+   "polearm_attack_mask",
+   "unarmed_attack_mask"
+  ],
+  "output_bytes": 208161,
+  "output_sha256": "1b7e2f03b314f64454f992ad1be0e4487c7087ec3593fd707e2430ebbcf0aa7b",
+  "stock_bytes": 49242,
+  "stock_sha256": "80424b19f79a09ed6f2f36a4f6af231fec183cae051b4508ed657ae4e1e8bfcb"
+ },
+ "pass": true,
+ "stock_source": {
+  "archive": "patch_05.tre",
+  "priority": 31
+ },
+ "tests": {
+  "agat() reproduces a stock AGAT block": {
+   "detail": "['angry', 'threaten'] every 5.0-8.0 s",
+   "pass": true
+  },
+  "count = stock + map": {
+   "detail": "206 + 631 = 837",
+   "pass": true
+  },
+  "count field equals the ANIM forms": {
+   "detail": "837 == 837",
+   "pass": true
+  },
+  "every .ans animates only bones that hutt.skt has": {
+   "detail": {},
+   "pass": true
+  },
+  "every .ans is a CKAT/KFAT animation": {
+   "detail": [],
+   "pass": true
+  },
+  "every .ans is a hutt_* file": {
+   "detail": [],
+   "pass": true
+  },
+  "every AGAT gesture is an ash action whose animation is in the table": {
+   "detail": [],
+   "pass": true
+  },
+  "every human action is present except the skip rules": {
+   "detail": {
+    "absent": 84,
+    "absent_not_covered_by_a_rule": []
+   },
+   "pass": true
+  },
+  "every map action added, in map order": {
+   "pass": true
+  },
+  "every referenced .ans exists in the loaded client archives": {
+   "detail": [],
+   "pass": true
+  },
+  "every state loop animation the ash can enter is in the table (nothing freezes in a posture)": {
+   "detail": [],
+   "pass": true
+  },
+  "header": {
+   "detail": "appearance/ash/all_b.ash",
+   "pass": true
+  },
+  "independent walker counts the same ANIM forms": {
+   "detail": 837,
+   "pass": true
+  },
+  "names unique": {
+   "pass": true
+  },
+  "no .ans is held at the same top priority by two archives": {
+   "detail": [],
+   "pass": true
+  },
+  "no PPTR (human bone masks) in the added entries": {
+   "detail": [
+    "ACTN",
+    "FORM",
+    "INFO",
+    "PUNF"
+   ],
+   "pass": true
+  },
+  "pxat() reproduces the stock PXAT entries": {
+   "detail": "189/189",
+   "pass": true
+  },
+  "round trip": {
+   "detail": "parse -> build gives the same bytes",
+   "pass": true
+  },
+  "spat() reproduces the human loop_crouched": {
+   "pass": true
+  },
+  "stock entries untouched, in order": {
+   "detail": "first 206 entries byte-identical",
+   "pass": true
+  },
+  "tscl() reproduces a human TSCL entry": {
+   "detail": "trn_pistol_combat_kneeling_to_pistol_combat_kneeling_aimed",
+   "pass": true
+  }
+ }
+}
