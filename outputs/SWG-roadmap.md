@@ -414,3 +414,5 @@ Files that grow without limit get slow to read, for us and for the game tools. R
 - [x] C40 roof-height source/offline fix (15 Oct): server `7c68e39f`, h `e86fcf7`; Python 6/6, escort 11/11, selector 7 assertions. Claude review/build/starport recovery and bunker/Warren gameplay pending.
 
 - [x] C44 independent launch/mission source review (15 Oct, ChatGPT): [7 P2 + 1 P3](Documentation-support/review-C44/C44-review.md); one-bounty and accept/abort lock fix checked, client-data limits and memory measurement plan recorded. Changes requested; fixes, runtime/client validation and RSS attribution open; no galaxy actions.
+
+- [x] C45 source/offline checkpoint (15 Oct, ChatGPT): C44-F1 shared recipe protection and other terminal-mission audit; source `e75794da` on `gpt/c45-mission-recipes`, [report/diff/manual tests](Documentation-support/review-C44/F1-fix.md) `dfe81df`; 12 checks/1,284 modeled cases pass. Claude review/build/in-game acceptance and full-datapad gate pending; no live approval or galaxy changes.

@@ -2,6 +2,12 @@
 
 Finished task rows and older log entries moved out of `SWG-handoff.md` to keep the board short (it is read every session). Newest first within each move.
 
+## Moved 2026-10-15 23:46 C45
+
+### 2026-10-15 17:40 ChatGPT: C43 BF2 2005 research/design complete
+
+- Report `86f9200`: public official-tool documentation/manual evidence, read-only Core3-dev/bot mapping, three-post Hoth conquest design and five NPC priorities. Local links/CRLF checked; exact Follow signature and retail constants left open. No BF2 files, downloads, server/dev/bot changes or gameplay. Implementation and all in-game acceptance untested; next: Claude reviews the pilot and scopes controller/activity/combat work. Older Log entries preserved in the archive; newest four retained.
+
 ## Moved 2026-10-15 C42
 
 #### 2026-10-15 11:40 Claude (side session): names sweep second half done; local-model background jobs

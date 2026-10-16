@@ -4,7 +4,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C41 packet writer claimed 2026-10-15 12:49). Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy: overnight launch simulation run 6 since about 23:30 on dev `b20a46d7` (spawn level gate, newbie spawn fixes, bots on missions near their level, launch purse; BotPop "all", 1,500 new players + 200 Ossus explorers; no squad runs). Owner, 23:15: next restart about 06:45 after the overnight analysis. Live map on http://localhost:8765 (a setsid process as swgemu while the simulation runs). - 2026-10-15 23:35.**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (C45 source ready on `gpt/c45-mission-recipes`, `e75794da`; no galaxy ownership). Bot driver: Claude (the 30-minute cycle is paused by the owner, 08:35). Fable never writes to /opt/swg. Live galaxy STOPPED. Test galaxy: overnight launch simulation run 6 since about 23:30 on dev `b20a46d7` (spawn level gate, newbie spawn fixes, bots on missions near their level, launch purse; BotPop "all", 1,500 new players + 200 Ossus explorers; no squad runs). Owner, 23:15: next restart about 06:45 after the overnight analysis. Live map on http://localhost:8765 (a setsid process as swgemu while the simulation runs). - 2026-10-15 23:35.**
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -117,6 +117,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C45: C44-F1 crafting recipe fix + mission-type audit** | ChatGPT, High | source/offline complete 2026-10-15 23:46; Claude review/build/gameplay pending | Core3-gpt `gpt/c45-mission-recipes` at `e75794da` (base `40af2c78`); report/checks `dfe81df`, `Documentation-support/review-C44/F1-fix.md`; 12 tests/1,284 model cases pass; unbuilt; full-datapad gate open; run 6 untouched |
 | **C44: launch simulation + mission independent review** | ChatGPT, High | complete 2026-10-15 22:57; changes requested | Report `2de5175`: `Documentation-support/review-C44/C44-review.md`; 7 P2 + 1 P3; crafting recipe collision blocks live mission-cap approval; bot cleanup/lifecycle/telemetry and memory measurements open; no server writes, bots, builds or restarts |
 | **C43: BF2 2005 battles and AI design** | ChatGPT, Medium | complete 2026-10-15 17:40; research/design only | Report `86f9200`: `Documentation-support/bf2-battles-and-ai-for-swg.md`; Hoth pilot, Core3 mapping and behavior priorities; implementation/in-game untested; no server/bot changes |
 | **C42: Fable return prep + housekeeping** | ChatGPT, Medium | complete 2026-10-15 12:45 | Docs 8c795f7; three checked briefs; cleanup proposals unapplied; no server writes/bots/downloads/restarts |
@@ -335,6 +336,10 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 
 ## Log
 
+### 2026-10-15 23:46 ChatGPT: C45 shared mission recipe fix ready
+
+- Source `e75794da` on `gpt/c45-mission-recipes` from dev `40af2c78`; report/diff/tests `dfe81df` (`Documentation-support/review-C44/F1-fix.md`). Preserve shared recipes on abort/complete; final consumer cleans up. Other terminal mission types checked; 12 offline checks/1,284 model cases pass. Unbuilt (no Core3-gpt build), gameplay untested; next: Claude review/cherry-pick/build and two-/three-mission tests, plus existing full-datapad gate. No dev/test-galaxy writes, bots, restarts or deploys; run 6 untouched.
+
 ### 2026-10-15 22:57 ChatGPT: C44 independent launch/mission review complete
 
 - Review commit `2de5175`; reviewed dev `024a4bdc` through `7bd915b6` read-only: `Documentation-support/review-C44/C44-review.md`, 7 P2 + 1 P3 (crafting recipe collision, mission teardown/targeting, worker lifecycle, abort/payout handling, peer reads, history sets). One-bounty gate and `17cacd70` lock fix preserved in source; historical RSS slopes confirmed, cause unmeasured. No code/server/bot changes or restart; gameplay untested. Next: Claude reviews fixes and schedules client/cleanup/heap counters after the overnight run; live approval withheld. Older Log entries moved to the archive.
@@ -352,7 +357,3 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 - `Fable-studio/README.md`: the four SOE test terrains have no shader families; pick zone `simple` with our own flat terrain, fixed light via colour ramps, no-spawn region, two backdrop walls, six-shot set, `um win shot` routine.
 - `Fable-ossus/o6/README.md`: 5 craters + scorch fans + glass pan on the ruins (layer specs), 5 settlement flatten fields outside the no-build circles, 18 lore POIs with locations and stock pieces. Creature levels untouched.
 - Nothing built or seen in a client; no /opt/swg writes. Next: Claude builds the modified `hutt.lat` and the S7 tables/patch; GPT reviews and takes the `.ans` format research; owner answers the five S7 questions.
-
-### 2026-10-15 17:40 ChatGPT: C43 BF2 2005 research/design complete
-
-- Report `86f9200`: public official-tool documentation/manual evidence, read-only Core3-dev/bot mapping, three-post Hoth conquest design and five NPC priorities. Local links/CRLF checked; exact Follow signature and retail constants left open. No BF2 files, downloads, server/dev/bot changes or gameplay. Implementation and all in-game acceptance untested; next: Claude reviews the pilot and scopes controller/activity/combat work. Older Log entries preserved in the archive; newest four retained.
