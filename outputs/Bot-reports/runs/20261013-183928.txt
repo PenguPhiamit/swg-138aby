@@ -1,1 +1,0 @@
-A background run (pid 113993) is using the bots. squad.py last shows its progress; squad.py halt stops it after its current round.

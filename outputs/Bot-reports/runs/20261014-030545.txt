@@ -1,5 +1,0 @@
-== Esk · hoth_creature_probe.py · 2/3 passed · 104 s
-  PASS tatooine -> corellia: travel terminal — object/tangible/terminal/terminal_travel.iff 34 m from the pad (indoors, cell 1106372)
-  PASS tatooine -> corellia: at the terminal (8 m to buy) — 0.0 m; {'arrived': True, 'cell': 1106372, 'legs': 1, 'ok': True, 'points': 34, 'reply': 'move', 'seconds': 29.9, 'x': 12.653599739074707, 'y': 51.183799743652344, 'z':
-  FAIL tatooine -> corellia: buy a ticket
-  report: Bot-reports/Esk/20261014-030729-hoth_creature_probe.json

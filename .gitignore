@@ -121,3 +121,22 @@ outputs/tools/listener/listener-config.json
 outputs/Bot-reports/navmaps/
 # C46: webhook message ID, private previews, public quick-tunnel URL and process state
 outputs/Agent/discord-feed/
+
+# C51: owner-approved checkout housekeeping (16 Oct 2026, morning sheet 1-3)
+# Stock client archive copies may have a suffix after .tre.
+outputs/Local-content/*.tre*
+# Raw launch streams and rotating squad output; keep authored launch reports.
+outputs/Bot-reports/launch-sim/*.jsonl
+outputs/Bot-reports/runs/*.txt
+outputs/Bot-reports/runs/*-summary.md
+outputs/Bot-reports/**/*-console.txt
+outputs/Agent/proc-check.md
+outputs/Agent/relay/*.prompt.txt
+# Nested scratch copies stay local; retain the workspace's own top-level scripts.
+# Do not reopen orig/, new/, local_planets/ or other copied directory trees.
+outputs/**/work/*
+!outputs/**/work/*.py
+!outputs/**/work/*.sh
+# Generated views; their source tools, prompts and authored reports stay visible.
+outputs/SWG-roadmap-*.html
+outputs/Agent/notes/roadmap-digest.md

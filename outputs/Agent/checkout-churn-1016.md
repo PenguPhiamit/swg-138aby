@@ -32,3 +32,51 @@ Survey by Claude, read-only, run after 00:35 on 16 Oct. Nothing below was change
 4. **Rights and secrets.** The Ossus terrain copies (`ossus_academy.tga` and the others, in four untracked folders) are byte-identical (md5 319ead4d) to `Fable-ossus/o4/staged/client/terrain/ossus_academy.tga`, which is tracked. They are copies of our own art. The `.tre` copies are stock files and must not be committed. A keyword search (password, api key, secret, bearer, sk-) over modified and untracked text files found no credential values. The hits were the task name "sk-fallback" and policy wording. Code files and `.json`/`.jsonl` files were skipped in that search. A 40-character hex search also found nothing.
 5. **Board log.** `SWG-handoff.md` has 4 entries under `## Log`, so no entry was moved. Its uncommitted C47 claim belongs to ChatGPT (note in the table).
 6. **Not covered.** Root-level changes (`work/`, `output/`, `tmp/`) sit outside `outputs/` and were not reviewed.
+
+## C51 applied ? 16 Oct 2026, 08:48 Pacific (ChatGPT)
+
+Owner approval: board answers of 16 Oct 05:40, morning-sheet items 1?3. Added targeted rules for suffixed Local-content TREs, raw launch JSONL, runs/*.txt and *-summary.md, bot console dumps, proc-check.md, relay prompts, nested work copies, rendered roadmap HTML and roadmap-digest.md. Top-level Python **and shell** scripts in nested work folders stay visible; copied orig/new/local_planets trees stay ignored, including Python files inside those trees. Authored reports, digest source/prompt, local-model reports and map outputs remain visible. Existing tracked work copies are unchanged.
+
+Used `git rm --cached` on **45 paths**: 30 already-rotated summaries, 14 run text files (including one console dump), and Agent/proc-check.md. This changes the index only: all 15 existing files retained their SHA-256 hashes; the 30 missing loose summaries were not restored. Verified every summary name in archive-202610.zip and every prior version in HEAD. No history rewrite, deletion, build, server access or bot action. Both queues stay tracked. Per-group LOG.md, GATE.md, OVERNIGHT.md, fallback-coverage.md and timings.csv remain tracked pending an explicit snapshot/state policy; this task only untracks the approved rotating run directory and generated process check.
+
+Validation: 23 positive/negative `git check-ignore --no-index` checks cover every new category plus report/script/queue exceptions. No gameplay changes; no in-game test required. The original survey above is retained as a dated baseline, not current status.
+
+### Remaining finished authored work ? commit separately by its author
+
+Paths below are relative to `outputs/`. These are a commit inventory, not files staged by C51. Each author should review and use explicit paths. Prior tool changes from C47 are already committed in 3639bb2; do not recommit them.
+
+**ChatGPT:**
+
+- `Documentation-support/review-C4f/C4f-review.md` (the six-line signed follow-up), `Documentation-support/review-C4f/check-fixes.py`, `Documentation-support/review-C4f/fixed-results.json`: completed offline follow-up review; gameplay remains open.
+- `Bot-reports/launch-sim/report-tools.md`, `Bot-reports/launch-sim/numbers-run6-early.md`: C47 authored usage notes and explicitly bounded early sample; retain sample limits.
+- Returned relay records listed below are completed ChatGPT turn records, even where the underlying task still has a gameplay/review gate. Preserve failures/limitations; their authored implementation reports are already committed separately.
+- `Agent/relay/20261014-1001-c21-resource-census.md`
+- `Agent/relay/20261014-1301-c22-hoth-review.md`
+- `Agent/relay/20261015-0113-c32-agentgear-profession.md`
+- `Agent/relay/20261015-0132-c30-ossus-fauna-server.md`
+- `Agent/relay/20261015-0701-c34r-agentgear-kits-review.md`
+- `Agent/relay/20261015-0801-c24b-r2-coverage-review.md`
+- `Agent/relay/20261015-1229-c39-dev-review-1015.md`
+- `Agent/relay/20261015-1241-c42-fable-return-prep.md`
+- `Agent/relay/20261015-1246-c40-roof-ledge-pathing.md`
+- `Agent/relay/20261015-1735-c43-bf2-battles-ai-design.md`
+- `Agent/relay/20261015-2245-c44-launch-sim-review.md`
+- `Agent/relay/20261015-2340-c45-mission-recipe-fix.md`
+- `Agent/relay/20261016-0348-c46-discord-feed.md`
+- `Agent/relay/20261016-0358-c48-morning-sheet.md`
+
+**Claude:**
+
+- `tools/agents/roadmap_digest.py` and `Agent/notes/roadmap-digest-prompt.md`: tool and source prompt identify Claude, 15 Oct. Review the now-retired helper-model instructions before committing; the rendered digest is ignored.
+- `Agent/local-research/bot-gap-list/report.md`, `Agent/local-research/bot-gap-list/map-output.txt`, `Agent/local-research/proofread-player-text/report.md`, `Agent/local-research/proofread-player-text/map-output.txt`: finished local-model outputs from the original survey, retained for Claude's review and explicit-path commit. Machine-produced claims are not verified facts.
+- `Documentation-support/class-check-results.md`: Claude-run C33 results; commit only after reconciling its pending rows with actual run evidence. A saved results document does not close the remaining class campaign.
+- `Bot-reports/launch-sim/numbers.md`: old generated report snapshot, 15 Oct 17:09?17:27. Claude owns the launch report stream; decide whether this named checkpoint is useful before committing it. Do not treat it as current results.
+
+### Pending, generated and unfinished work ? leave in place
+
+- **ChatGPT C50, still claimed on the board:** `Documentation-support/C50-source-probe.json`; local-model review inputs/outputs under `Agent/local-research/{medic-xp-healing,scout-xp-sources,entertainer-xp-sources}/` (`TASK.md`, `agent-output.txt`, `report.md` in each). Not marked finished by C51; commit only with the completed source audit. Local-model output provenance stays explicit.
+- **Runtime state, not finished authored work:** `Agent/gpt-queue.json`, `Agent/local-research/queue.json`, `Agent/local-research/LOG.md`, `Agent/relay/RUNNING`; generated `Bot-reports/{Aurek,Besh,Cresh,Dorn,Esk,Forn}/LOG.md`, `Bot-reports/GATE.md`, `Bot-reports/OVERNIGHT.md`, `Bot-reports/fallback-coverage.md`, `Bot-reports/timings.csv`. Keep queues tracked; choose one named report snapshot separately after a run rather than committing a growing file as finished work.
+- **Unfinished retired Fable lane:** modified `Fable-hoth-guide/hoth-first-session.md`, `Fable-ossus/o2/README.md`; untracked `Fable-species/s6/README.md`, `build_test_archive.py`, `checks.json`, `new-files.txt`, `patch/species-s6.patch`, `provenance.json`, `tools/acst_togruta.py`, `tools/make_patch.py`, `tools/make_provenance.py`, `tools/stage_s6.py`. No completion or new ownership inferred from retirement. No Fable file edited, staged or committed.
+- **Fable scratch scripts preserved and visible:** top-level `.py`/`.sh` in `Fable-hoth-batchB/den-outdoor/work/`, `Fable-hoth-mapnames/work/`, `Fable-ossus/o5/work/`, `Fable-resources3/work/`, `Fable-species/{s5,s6}/work/`. Copies underneath orig/new/new2/local_planets/stage remain on disk but ignored. Do not sweep these scripts into a commit without review.
+- **Commit drafts, keep pending author confirmation:** `Documentation-support/C26-{attributes,credit,planet,resource,waypoint}-commit.txt`. No deletion authorized by C51.
+- **Root scratch outside the survey:** the existing visible `work/c33*.py`, `work/c40*.py`, `work/c45*.py`, `work/c46*.py`, `work/c47*.py`, `work/c48*.py` are session helpers, not independently reviewed deliverables; no blanket add. Suffixed client archives and other ignored scratch stay local. Nothing deleted.
