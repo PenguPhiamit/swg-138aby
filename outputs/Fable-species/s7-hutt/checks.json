@@ -1,0 +1,58 @@
+{
+ "installed": {
+  "path": "SWG-client/local_planets.tre",
+  "bytes": 4636682,
+  "sha256": "f10460257981971e9a2505e7cd8d816cb1cb80dd74ee23275d7b9b3f520ea9ac",
+  "entries": 173
+ },
+ "out": {
+  "path": "Fable-species/s7-hutt/local_planets-s7.tre",
+  "bytes": 4649376,
+  "sha256": "7f28f0272a0924596abd483681b6d8160302fe58159046652a040cd22bc5ba94",
+  "entries": 174
+ },
+ "untouched_identical": 164,
+ "changed": [
+  "datatables/creation/attribute_limits.iff",
+  "datatables/creation/racial_mods.iff",
+  "datatables/customization/allow_bald.iff",
+  "datatables/customization/customization_data.iff",
+  "datatables/customization/customization_group_instance.iff",
+  "datatables/skill/skills.iff",
+  "string/en/skl_d.stf",
+  "string/en/skl_n.stf",
+  "ui/ui_avatardata.inc"
+ ],
+ "new": [
+  "appearance/lat/hutt.lat"
+ ],
+ "dropped": [],
+ "lat_bytes": 208161,
+ "species_report": {
+  "files": [
+   "creation/default_pc_equipment.iff",
+   "creation/default_pc_hairstyles.iff",
+   "creation/profession_defaults_combat_brawler.iff",
+   "creation/profession_defaults_combat_marksman.iff",
+   "creation/profession_defaults_crafting_artisan.iff",
+   "creation/profession_defaults_jedi.iff",
+   "creation/profession_defaults_outdoors_scout.iff",
+   "creation/profession_defaults_science_medic.iff",
+   "creation/profession_defaults_social_entertainer.iff",
+   "customization/asset_customization_manager.iff",
+   "datatables/creation/attribute_limits.iff",
+   "datatables/creation/racial_mods.iff",
+   "datatables/customization/allow_bald.iff",
+   "datatables/customization/customization_data.iff",
+   "datatables/customization/customization_group_instance.iff",
+   "datatables/customization/hair_assets_skill_mods.iff",
+   "datatables/customization/palette_columns.iff",
+   "datatables/skill/skills.iff",
+   "string/en/player_species.stf",
+   "string/en/skl_d.stf",
+   "string/en/skl_n.stf",
+   "ui/ui_avatardata.inc"
+  ],
+  "notes": []
+ }
+}
