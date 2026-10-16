@@ -65,6 +65,8 @@ PLAY = REPORTS / 'play'                         # escort.py's play data (.jsonl)
 CORE3_LOG = WHO.parent / 'core3.log'
 MAPIMG = NOW.parent / 'mapimg'                  # planet maps decoded from the client (derived from its files: not in git)
 HISTORY = 60                                    # label changes kept per bot for the Activity tab
+POP_LOG = Path('/opt/swg/testgalaxy/Core3/MMOCoreORB/bin/log/botpop-launch.jsonl')  # server-side bots (BotPopLaunch.h)
+POP_STALE = 300                                 # a server bot with no event for this long has left (restart, despawn)
 
 roster = {}     # first name -> group
 profiles = {}   # first name -> {'full', 'group', 'species', 'profession', 'skills'}
@@ -514,6 +516,72 @@ def bot_rows(chars, reports):
     return out
 
 
+pop = {'inode': None, 'offset': 0, 'bots': {}, 'server': {}}
+
+
+def pop_read():
+    """The launch population (server-side bots, Core3-dev BotPopLaunch.h): reads the new lines of the server's event
+    log and keeps each bot's latest place, profession, level, state and tallies. A new log (a new run) starts over.
+    Positions come from each bot's one-minute snapshot and from its events (kills, deaths, training)."""
+    try:
+        st = POP_LOG.stat()
+    except OSError:
+        return
+    if pop['inode'] != st.st_ino or st.st_size < pop['offset']:
+        pop.update(inode=st.st_ino, offset=0, bots={}, server={})
+    if st.st_size <= pop['offset']:
+        return
+    with POP_LOG.open('rb') as f:
+        f.seek(pop['offset'])
+        chunk = f.read(min(st.st_size - pop['offset'], 32 << 20))
+    end = chunk.rfind(b'\n') + 1
+    pop['offset'] += end
+    for line in chunk[:end].splitlines():
+        try:
+            r = json.loads(line)
+        except ValueError:
+            continue
+        e, b = r.get('e'), r.get('bot')
+        if e == 'server':
+            pop['server'] = r
+        if not b:
+            continue
+        row = pop['bots'].setdefault(b, {'kills': 0, 'deaths': 0, 'boxes': 0, 'lvl': 1})
+        for key in ('role', 'planet', 'city', 'x', 'y', 'boxes', 'lvl'):
+            if key in r:
+                row[key] = r[key]
+        row['t'] = r.get('t', 0)
+        if e == 'spawn':
+            row.update(name=r.get('name', ''), state='walking', last='new character')
+        elif e == 'snap':
+            row.update(state=r.get('state', ''), kills=r.get('kills', row['kills']), deaths=r.get('deaths', row['deaths']))
+        elif e == 'kill':
+            row.update(kills=row['kills'] + 1, last=f"killed a {r.get('target', '?')} (level {r.get('tlvl', '?')})")
+        elif e == 'death':
+            row.update(deaths=row['deaths'] + 1, state='dead', last=f"killed by a {r.get('killer') or '?'} (level {r.get('klvl', '?')})")
+        elif e == 'incap':
+            row.update(state='incapacitated', last=f"incapacitated by a {r.get('by') or '?'}")
+        elif e == 'aggro':
+            row.update(state='fighting', last=f"attacked by a {r.get('by', '?')}")
+        elif e == 'train':
+            row['last'] = 'trained ' + r.get('skill', '?')
+        elif e == 'rested':
+            row.update(state='walking', last='rested in town' + (', watching a dancer' if r.get('watched') else ''))
+        elif e == 'travel':
+            row.update(planet=r.get('to_planet'), city=r.get('to_city'), x=None, y=None,
+                       last=f"moved to {r.get('to_city')} ({r.get('reason')})")
+
+
+def pop_rows():
+    """Server bots seen in the last POP_STALE seconds, as compact rows for the page (see POPK in the script)."""
+    pop_read()
+    cutoff = time.time() * 1000 - POP_STALE * 1000
+    return [[b, r.get('name', ''), r.get('role', ''), r.get('planet', ''),
+             None if r.get('x') is None else round(r['x']), None if r.get('y') is None else round(r['y']),
+             r.get('state', ''), r.get('lvl', 1), r.get('boxes', 0), r.get('kills', 0), r.get('deaths', 0),
+             r.get('city', ''), r.get('last', '')] for b, r in pop['bots'].items() if r.get('t', 0) >= cutoff]
+
+
 def snapshot():
     chars, age, error, mtime = present()
     for c in chars:
@@ -526,7 +594,7 @@ def snapshot():
     bots = bot_rows(chars, reports)
     return {'who_age': age, 'error': error, 'time': time.strftime('%H:%M:%S'), 'chars': chars,
             'activity': activity(), 'places': places(), 'escorted': escorted(), 'bots': bots, 'areas': areas(),
-            'issues': issues(bots, reports, latest_play(), time.time())}
+            'issues': issues(bots, reports, latest_play(), time.time()), 'pop': pop_rows(), 'pop_server': pop['server']}
 
 
 def bot_detail(name):
@@ -826,6 +894,9 @@ padding:7px 14px;cursor:pointer;color:var(--muted);border-radius:8px 8px 0 0;fon
   <div class="chips" id="stateChips"></div><div class="chips" id="profChips"></div></div>
  <div class="card"><div class="cardhead"><b id="botCount"></b><span class="small">Fields: planet, area, prof, role, squad, species, doing, state, name. Click a bot for details.</span></div>
   <div class="scroll"><table><thead><tr><th data-s="name">Name</th><th data-s="prof">Profession</th><th data-s="group">Squad</th><th data-s="zone">Where</th><th data-s="doing">Doing</th><th data-s="since" style="text-align:right">For</th></tr></thead><tbody id="botRows"></tbody></table></div></div>
+ <div class="card"><div class="cardhead"><b id="popCount">Server bots</b><span class="small">the launch simulation: server-side bots playing new characters, by planet and city. Click a city for the map.</span></div>
+  <div class="chips" id="popRoleChips" style="margin-top:0"></div>
+  <div class="scroll"><table><thead><tr><th>Planet</th><th>City</th><th style="text-align:right">Bots</th><th>Professions</th><th style="text-align:right">Level</th><th style="text-align:right">Boxes</th><th style="text-align:right">Kills</th><th style="text-align:right">Deaths</th><th>Doing</th></tr></thead><tbody id="popRows"></tbody></table></div></div>
 </section>
 
 <section class="page" id="p-map">
@@ -874,6 +945,13 @@ const STATES=['fighting','moving','waiting','busy','idle','stuck','down','offlin
 const STATE_COL={fighting:'--bad',moving:'--info',waiting:'--gold',busy:'--accent',idle:'--muted',stuck:'--warn',down:'--bad',offline:'--muted'};
 let data=null,page='overview',picked=null,detailTab='overview',detail=null,botSort='name',online='all',stateF='',profF='',issueF='';
 let zone=localGet('zone')||'tatooine',view=null,drag=null,hits=[],fitted=false,areaFocus='',imgs={},feed=[],server=null;
+/* server-side bots (the launch simulation): compact rows from data.json */
+const POPK=['id','name','role','planet','x','y','state','lvl','boxes','kills','deaths','city','last'];
+let popAll=[],popHide=new Set(),popState='';
+function pops(){return data&&data.pop?data.pop.map(r=>Object.fromEntries(POPK.map((k,i)=>[k,r[i]]))):[]}
+function popHere(){return popAll.filter(p=>p.planet===zone&&p.x!=null&&!popHide.has(p.role)&&(!popState||p.state===popState))}
+function popSum(l,k){return l.reduce((s,p)=>s+(p[k]||0),0)}
+function popMedian(a){const s=a.slice().sort((x,y)=>x-y);return s.length?s[s.length>>1]:0}
 function localGet(k){try{return localStorage.getItem('fleet.'+k)}catch(e){return null}}
 function localSet(k,v){try{localStorage.setItem('fleet.'+k,v)}catch(e){}}
 function $(id){return document.getElementById(id)}
@@ -898,7 +976,7 @@ function route(){const h=location.hash.slice(1);const [p,qs]=h.split('?');page=T
 addEventListener('hashchange',route);
 
 /* ---- polling ---- */
-async function poll(){try{data=await(await fetch('data.json',{cache:'no-store'})).json()}catch(e){setPill('bad','tracker not answering');return}render()}
+async function poll(){try{data=await(await fetch('data.json',{cache:'no-store'})).json()}catch(e){setPill('bad','tracker not answering');return}popAll=pops();render()}
 async function loadFeed(){try{feed=await(await fetch('feed.json',{cache:'no-store'})).json();if(page==='activity')renderActivity()}catch(e){}}
 async function loadServer(){try{server=await(await fetch('server.json',{cache:'no-store'})).json();if(page==='server')renderServer()}catch(e){}}
 async function loadDetail(){if(!picked)return;try{detail=await(await fetch('bot.json?name='+encodeURIComponent(picked),{cache:'no-store'})).json();renderDetail()}catch(e){}}
@@ -906,9 +984,10 @@ function setPill(kind,text){const p=$('pill');p.className='pill '+kind;p.querySe
 
 function render(){if(!data)return;
  const bots=data.chars.filter(c=>c.kind==='bot').length,players=data.chars.filter(c=>c.kind==='player').length;
+ const sb=popAll.length?` · <b>${popAll.length}</b> server bots`:'';
  if(data.error)setPill('bad',esc(data.error));
- else if(data.who_age!=null&&data.who_age>120)setPill('warn',`server list ${ago(data.who_age)} old · <b>${bots}</b> bots · <b>${players}</b> player${players===1?'':'s'}`);
- else setPill('ok',`running · <b>${bots}</b> bots · <b>${players}</b> player${players===1?'':'s'}`);
+ else if(data.who_age!=null&&data.who_age>120)setPill('warn',`server list ${ago(data.who_age)} old · <b>${bots}</b> bots${sb} · <b>${players}</b> player${players===1?'':'s'}`);
+ else setPill('ok',`running · <b>${bots}</b> bots${sb} · <b>${players}</b> player${players===1?'':'s'}`);
  $('nIssues').textContent=data.issues.length||'';$('clock').textContent=data.time;
  if(page==='overview')renderOverview();if(page==='bots')renderBots();if(page==='map')renderMap();
  if(page==='activity')renderActivity();if(page==='issues')renderIssues();if(picked)renderDetail()}
@@ -919,11 +998,12 @@ function renderOverview(){const B=data.bots,on=B.filter(b=>b.online);const playe
  const running=data.activity.filter(a=>a.state==='running').length;
  $('ovStats').innerHTML=stat('Bots online',on.length,`of ${B.length} on the roster`)+stat('Players',players.length,players.map(p=>esc(p.name)).join(', ')||'nobody')+
   stat('Indoors',on.filter(b=>b.indoors).length,'<a href="/floor">floor plans</a>')+stat('Issues',data.issues.length,'<a href="#issues">stuck, down, refused</a>')+
-  stat('Squads running',running,`${data.activity.length} squads known`);
+  stat('Squads running',running,`${data.activity.length} squads known`)+
+  (popAll.length?stat('Server bots',popAll.length,`<a href="#bots">${num(popSum(popAll,'kills'))} kills · ${num(popSum(popAll,'deaths'))} deaths · ${num(popSum(popAll,'boxes'))} boxes</a>`):'');
  $('ovSquads').innerHTML=data.activity.map(a=>`<tr><td><b>${esc(a.group)}</b></td><td>${esc(a.scenario.replace('.py',''))}<div class="small">${esc(a.state)}${a.age<86400?' · '+ago(a.age)+' ago':''}</div></td></tr>`).join('')||'<tr><td class="empty">no squad records</td></tr>';
  const sc={};on.forEach(b=>sc[b.state]=(sc[b.state]||0)+1);
  $('ovStates').innerHTML=STATES.filter(s=>sc[s]).map(s=>`<a class="chip" href="#bots" onclick="stateF='${s}'">${stateDot(s)}<b>${s}</b><span class="n">${sc[s]}</span></a>`).join('')||'<span class="empty">no bots online</span>';
- const pc={};data.chars.forEach(c=>pc[c.zone]=(pc[c.zone]||0)+1);
+ const pc={};data.chars.forEach(c=>pc[c.zone]=(pc[c.zone]||0)+1);popAll.forEach(p=>{if(p.planet)pc[p.planet]=(pc[p.planet]||0)+1});
  $('ovPlanets').innerHTML=Object.keys(pc).sort().map(z=>`<a class="chip" href="#map" onclick="setZone('${esc(z)}')"><b>${esc(z)}</b><span class="n">${pc[z]}</span></a>`).join('')||'<span class="empty">nobody online</span>';
  $('ovIssues').innerHTML=data.issues.slice(0,6).map(issueRow).join('')||'<tr><td class="empty">none</td></tr>'}
 
@@ -952,7 +1032,24 @@ function renderBots(){const base=filtered();const sc={},pc={};base.forEach(b=>{s
  $('botRows').innerHTML=rows.map(b=>`<tr class="click ${picked===b.name?'pick':''}" data-b="${esc(b.name)}"><td><span class="dot" style="background:${profCol(b.prof)}"></span> <b>${esc(b.name)}</b><div class="small">${esc(b.full)}</div></td>
   <td>${esc(b.profession)}<div class="small">${esc(b.skills.join(', ')||b.species)}</div></td><td>${esc(b.group)}</td><td>${where(b)}</td>
   <td>${stateDot(b.state)} <span class="ell" style="display:inline-block;vertical-align:bottom">${esc(b.online?(b.doing||b.state):'offline')}</span>${!b.online&&b.last_doing?`<div class="small ell">last: ${esc(b.last_doing)}</div>`:''}</td>
-  <td class="n">${b.online&&b.doing_s!=null?ago(b.doing_s):''}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">no bot matches</td></tr>'}
+  <td class="n">${b.online&&b.doing_s!=null?ago(b.doing_s):''}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">no bot matches</td></tr>';renderPop()}
+function renderPop(){const rc={};popAll.forEach(p=>rc[p.role]=(rc[p.role]||0)+1);const live=popAll.filter(p=>!popHide.has(p.role));
+ $('popCount').textContent=popAll.length?`${popAll.length} server bots`:'Server bots';
+ $('popRoleChips').innerHTML=Object.keys(PROF).filter(r=>rc[r]).map(r=>`<span class="chip ${popHide.has(r)?'':'on'}" data-pr="${r}"><span class="dot" style="background:${profCol(r)}"></span>${PROF[r][0]}<span class="n">${rc[r]}</span>
+  <span class="small">&nbsp;lvl ${popMedian(popAll.filter(p=>p.role===r).map(p=>p.lvl))} · ${num(popSum(popAll.filter(p=>p.role===r),'boxes'))} boxes</span></span>`).join('');
+ const g={};live.forEach(p=>{const k=(p.planet||'?')+'|'+(p.city||'?');(g[k]=g[k]||[]).push(p)});
+ $('popRows').innerHTML=Object.entries(g).sort((a,b)=>a[0]<b[0]?-1:1).map(([k,l])=>{const[pl,ci]=k.split('|');const c={},s={};
+  l.forEach(p=>{c[p.role]=(c[p.role]||0)+1;s[p.state||'?']=(s[p.state||'?']||0)+1});
+  return `<tr class="click" data-pk="${esc(k)}"><td>${esc(pl)}</td><td><b>${esc(ci)}</b></td><td class="n">${l.length}</td>
+   <td>${Object.keys(PROF).filter(r=>c[r]).map(r=>`<span class="dot" style="background:${profCol(r)}"></span>${c[r]}`).join(' &nbsp;')}</td>
+   <td class="n">${popMedian(l.map(p=>p.lvl))}</td><td class="n">${num(popSum(l,'boxes'))}</td><td class="n">${num(popSum(l,'kills'))}</td>
+   <td class="n" style="color:${popSum(l,'deaths')>popSum(l,'kills')/5?'var(--bad)':'inherit'}">${num(popSum(l,'deaths'))}</td>
+   <td class="small">${Object.entries(s).sort((a,b)=>b[1]-a[1]).map(([x,n])=>esc(x)+' '+n).join(' · ')}</td></tr>`}).join('')||
+  '<tr><td colspan="9" class="empty">no server bots (start one with the server console: botpop launch &lt;n&gt;)</td></tr>'}
+$('popRoleChips').onclick=e=>{const r=e.target.closest('.chip')?.dataset.pr;if(!r)return;popHide.has(r)?popHide.delete(r):popHide.add(r);render()};
+$('popRows').onclick=e=>{const k=e.target.closest('tr')?.dataset.pk;if(!k)return;const[pl,ci]=k.split('|');
+ const l=popAll.filter(p=>p.planet===pl&&p.city===ci&&p.x!=null);if(!l.length)return;setZone(pl);
+ view={cx:l.reduce((s,p)=>s+p.x,0)/l.length,cy:l.reduce((s,p)=>s+p.y,0)/l.length,span:3000};fitted=true;location.hash='#map'};
 
 /* ---- detail drawer ---- */
 function openBot(name,push=true){picked=name;detail=null;$('drawer').classList.add('on');if(push&&page!=='map')history.replaceState(null,'','#'+page+'?bot='+encodeURIComponent(name));
@@ -1006,7 +1103,7 @@ function profOf(c){const b=bot(c.name);return b?b.prof:'other'}
 function colorOf(c){return c.kind==='player'?css('--you'):profCol(profOf(c))}
 function mapImg(z){if(!imgs[z]){const img=new Image();imgs[z]={img,ok:false,failed:false};img.onload=()=>{imgs[z].ok=true;if(page==='map')draw()};
  img.onerror=()=>{imgs[z].failed=true;if(page==='map')draw()};img.src='mapimg/'+encodeURIComponent(z)+'.png'}return imgs[z]}
-function fit(whole){const pts=[];if(!whole){here().forEach(c=>{pts.push([c.x,c.y]);c.trail.forEach(p=>pts.push(p))})}
+function fit(whole){const pts=[];if(!whole){here().forEach(c=>{pts.push([c.x,c.y]);c.trail.forEach(p=>pts.push(p))});popHere().forEach(p=>pts.push([p.x,p.y]))}
  if(!pts.length){view={cx:0,cy:0,span:16384};return}
  const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
  view={cx:(x0+x1)/2,cy:(y0+y1)/2,span:Math.max(300,Math.max(x1-x0,y1-y0)*1.5)}}
@@ -1025,9 +1122,16 @@ function draw(){const r=cv.getBoundingClientRect(),d=devicePixelRatio||1;if(!r.w
  if(areaFocus){const a=areaBox(areaFocus);if(a){const[p,q]=toScreen(a[0],a[3]),[s,t]=toScreen(a[2],a[1]);ctx.strokeStyle=css('--info');ctx.setLineDash([6*d,4*d]);ctx.lineWidth=1.5*d;ctx.strokeRect(p,q,s-p,t-q);ctx.setLineDash([])}}
  (data?data.places:[]).filter(p=>p.zone===zone).forEach(p=>{const[x,y]=toScreen(p.x,p.y);ctx.fillStyle=css('--place');ctx.fillRect(x-2*d,y-2*d,4*d,4*d);
   hits.push({x,y,label:p.kind+' ('+Math.round(p.x)+', '+Math.round(p.y)+')'})});
+ // Server bots: small dots by profession (outlined red while fighting, faint when dead); hover for the bot.
+ const near=view.span<2500;popHere().forEach(p=>{const[x,y]=toScreen(p.x,p.y);if(x<-20||y<-20||x>cv.width+20||y>cv.height+20)return;
+  ctx.globalAlpha=p.state==='dead'?.3:.9;ctx.fillStyle=profCol(p.role);ctx.beginPath();ctx.arc(x,y,(near?4:2.6)*d,0,7);ctx.fill();
+  if(p.state==='fighting'||p.state==='incapacitated'){ctx.strokeStyle=css('--bad');ctx.lineWidth=1.3*d;ctx.stroke()}ctx.globalAlpha=1;
+  if(view.span<450&&$('labelsOn').checked){ctx.font=(10*d)+'px system-ui';ctx.lineWidth=3*d;ctx.strokeStyle=pic?'rgba(0,0,0,.8)':css('--halo');
+   ctx.strokeText(p.name,x+6*d,y+3*d);ctx.fillStyle=pic?'#fff':css('--ink');ctx.fillText(p.name,x+6*d,y+3*d)}
+  hits.push({x,y,label:`${p.name} · ${(PROF[p.role]||[p.role])[0]} · level ${p.lvl}, ${p.boxes} box${p.boxes===1?'':'es'} · ${p.state||'?'} · ${p.kills} kills, ${p.deaths} deaths · from ${p.city}${p.last?' · '+p.last:''} (${p.x}, ${p.y})`})});
  if($('trailsOn').checked)here().forEach(c=>{if(c.trail.length<2)return;ctx.strokeStyle=colorOf(c);ctx.globalAlpha=.5;ctx.lineWidth=2*d;ctx.beginPath();
   c.trail.forEach((p,i)=>{const[x,y]=toScreen(p[0],p[1]);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();ctx.globalAlpha=1});
- const spots=[];here().sort((a,b)=>(a.kind>b.kind?-1:1)).forEach(c=>{const[x,y]=toScreen(c.x,c.y);const s=spots.find(s=>Math.hypot(s.x-x,s.y-y)<14*d);if(s)s.list.push(c);else spots.push({x,y,list:[c]})});
+ const spots=[];here().filter(c=>c.kind!=='bot'||!popHide.has(profOf(c))).sort((a,b)=>(a.kind>b.kind?-1:1)).forEach(c=>{const[x,y]=toScreen(c.x,c.y);const s=spots.find(s=>Math.hypot(s.x-x,s.y-y)<14*d);if(s)s.list.push(c);else spots.push({x,y,list:[c]})});
  const halo=pic?'rgba(0,0,0,.8)':css('--halo'),ink=pic?'#fff':css('--ink');
  spots.forEach(s=>{s.list.forEach((c,i)=>{const a=i*2.4,r0=s.list.length>1?Math.min(4+i*1.6,22)*d:0,x=s.x+Math.cos(a)*r0,y=s.y+Math.sin(a)*r0;
    const rad=(c.kind==='player'?7:5)*d*(picked===c.name?1.6:1);ctx.fillStyle=colorOf(c);ctx.beginPath();ctx.arc(x,y,rad,0,7);ctx.fill();
@@ -1039,21 +1143,26 @@ function draw(){const r=cv.getBoundingClientRect(),d=devicePixelRatio||1;if(!r.w
   if(s.list.length>shown.length){ctx.fillStyle=ink;ctx.fillText('+'+(s.list.length-shown.length)+' more',lx,top+shown.length*14*d)}})}
 function sectorBox(n){const m=/^sector ([A-H])([1-8])$/.exec(n);if(!m)return null;const c='ABCDEFGH'.indexOf(m[1]),r=+m[2]-1;return[-8192+c*2048,8192-(r+1)*2048,-8192+(c+1)*2048,8192-r*2048]}
 function areaBox(n){const a=(data?data.areas:[]).find(a=>a.zone===zone&&a.name===n);if(a){const[x0,y0,x1,y1]=a.box;return[Math.min(x0,x1),Math.min(y0,y1),Math.max(x0,x1),Math.max(y0,y1)]}return sectorBox(n)}
-function renderMap(){const zones={},bz={};data.chars.forEach(c=>zones[c.zone]=(zones[c.zone]||0)+1);
+function renderMap(){const zones={},bz={};data.chars.forEach(c=>zones[c.zone]=(zones[c.zone]||0)+1);popAll.forEach(p=>{if(p.planet)zones[p.planet]=(zones[p.planet]||0)+1});
  if(!zones[zone]&&Object.keys(zones).length&&!picked)setZone(Object.keys(zones).sort((a,b)=>zones[b]-zones[a])[0]);
- if(!fitted&&here().length){fit(false);fitted=true}
+ if(!fitted&&(here().length||popHere().length)){fit(false);fitted=true}
  $('planetTabs').innerHTML=Object.keys(zones).sort().map(z=>`<button class="${z===zone?'on':''}" data-z="${esc(z)}"><b>${esc(z)}</b> · ${zones[z]}</button>`).join('')||'<span class="empty" style="padding:6px 10px">nobody online</span>';
  const ac={};data.bots.filter(b=>b.online&&b.zone===zone).forEach(b=>ac[b.area]=(ac[b.area]||0)+1);const f=$('areaFilter').value.toLowerCase();
  const names=Object.keys(ac).filter(a=>a.toLowerCase().includes(f)).sort((a,b)=>ac[b]-ac[a]||a.localeCompare(b));
  $('areaCount').textContent=Object.keys(ac).length+' areas';
  $('areaChips').innerHTML=names.map(a=>`<span class="chip ${areaFocus===a?'on':''}" data-a="${esc(a)}"><b>${esc(a)}</b><span class="n">${ac[a]}</span></span>`).join('')||'<span class="empty">no bots here</span>';
- const pc={};data.bots.filter(b=>b.online&&b.zone===zone).forEach(b=>pc[b.prof]=1);
- $('legend').innerHTML=Object.keys(PROF).filter(p=>pc[p]).map(p=>`<span><span class="dot" style="background:${PROF[p][1]}"></span>${PROF[p][0]}</span>`).join('')+
+ const pc={};data.bots.filter(b=>b.online&&b.zone===zone).forEach(b=>pc[b.prof]=(pc[b.prof]||0)+1);
+ const onPlanet=popAll.filter(p=>p.planet===zone),pr={},ps={};onPlanet.forEach(p=>{pr[p.role]=(pr[p.role]||0)+1;ps[p.state||'?']=(ps[p.state||'?']||0)+1});
+ $('legend').innerHTML=Object.keys(PROF).filter(p=>pc[p]||pr[p]).map(p=>`<span class="chip ${popHide.has(p)?'':'on'}" data-pr="${p}" title="show or hide this profession" style="cursor:pointer"><span class="dot" style="background:${PROF[p][1]}"></span>${PROF[p][0]}<span class="n">${(pc[p]||0)+(pr[p]||0)}</span></span>`).join('')+
   (here().some(c=>c.kind==='player')?`<span><span class="dot" style="background:var(--you);outline:1px solid var(--muted)"></span>Player</span>`:'')+
-  `<span><span class="dot" style="background:var(--place);border-radius:1px"></span>Terminal</span>`;
+  `<span><span class="dot" style="background:var(--place);border-radius:1px"></span>Terminal</span>`+
+  (onPlanet.length?`<span class="small" style="margin-left:8px">Server bots:</span>`+Object.entries(ps).sort((a,b)=>b[1]-a[1]).map(([s,n])=>`<span class="chip ${popState===s?'on':''}" data-ps="${esc(s)}" style="cursor:pointer">${esc(s)}<span class="n">${n}</span></span>`).join(''):'');
  const inside=data.bots.filter(b=>b.online&&b.indoors).length,away=data.chars.filter(c=>c.zone!==zone).length;
- $('indoorLine').innerHTML=`${inside} bot${inside===1?'':'s'} indoors (<a href="/floor">see the floor plans</a>) · ${away} on other planets · positions come from each bot's own reply when it is fresher than who.json (${data.who_age!=null?ago(data.who_age)+' old':'unknown'}).`;
+ $('indoorLine').innerHTML=`${inside} bot${inside===1?'':'s'} indoors (<a href="/floor">see the floor plans</a>) · ${away} on other planets · positions come from each bot's own reply when it is fresher than who.json (${data.who_age!=null?ago(data.who_age)+' old':'unknown'}).`+
+  (onPlanet.length?` <b>${onPlanet.length} server bots</b> on ${esc(zone)}: their dots move with each one-minute snapshot and each kill, death or box (red ring: fighting; faint: dead). <a href="#bots">By city</a>.`:'');
  draw()}
+$('legend').onclick=e=>{const c=e.target.closest('.chip');if(!c)return;if(c.dataset.pr){const r=c.dataset.pr;popHide.has(r)?popHide.delete(r):popHide.add(r)}
+ else if(c.dataset.ps!=null){popState=popState===c.dataset.ps?'':c.dataset.ps}render()};
 $('planetTabs').onclick=e=>{const z=e.target.closest('button')?.dataset.z;if(z){setZone(z);render()}};
 $('areaChips').onclick=e=>{const a=e.target.closest('.chip')?.dataset.a;if(a==null)return;if(areaFocus===a){areaFocus='';fit(false)}else{areaFocus=a;const b=areaBox(a);
  if(b)view={cx:(b[0]+b[2])/2,cy:(b[1]+b[3])/2,span:Math.max(b[2]-b[0],b[3]-b[1])*1.15}}render()};
