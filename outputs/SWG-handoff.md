@@ -121,6 +121,8 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C50: verify idle-model medic/scout/entertainer XP research** | ChatGPT interactive, Medium | claimed 2026-10-16 | Read-only source audit of three local-model review topics; corrected references, no gameplay/server changes |
+| **C49: Claude Python follow-ups: escort range, doctor reapply, movement evidence** | ChatGPT interactive, Medium | source/offline complete; Claude runtime pending | b5cdbb6; 21 offline checks; C49-python-followups.md; no bot/server actions |
 | **C46: Discord feed + public bot map** | ChatGPT, Medium | offline complete 2026-10-16; staged for Claude review | `3150acf`; 53 tests pass + PNG visual/shell syntax checks; public serving/Discord/tunnel untested; nothing started or posted; start/stop docs in `Documentation-support/C46-discord-public-map.md` |
 | **C45: C44-F1 crafting recipe fix + mission-type audit** | ChatGPT, High | source/offline complete 2026-10-15 23:46; Claude review/build/gameplay pending | Core3-gpt `gpt/c45-mission-recipes` at `e75794da` (base `40af2c78`); report/checks `dfe81df`, `Documentation-support/review-C44/F1-fix.md`; 12 tests/1,284 model cases pass; unbuilt; full-datapad gate open; run 6 untouched |
 | **C44: launch simulation + mission independent review** | ChatGPT, High | complete 2026-10-15 22:57; changes requested | Report `2de5175`: `Documentation-support/review-C44/C44-review.md`; 7 P2 + 1 P3; crafting recipe collision blocks live mission-cap approval; bot cleanup/lifecycle/telemetry and memory measurements open; no server writes, bots, builds or restarts |
@@ -345,6 +347,12 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-16 04:20 ChatGPT: C49 complete; C50 idle source audit claimed
+
+- C49 source/report b5cdbb6: escort combat checks observed 3D range after approach, defers target openers, preserves target cell and resolves ID-matched leader 'me'; doctor gate accepts exact patient/attribute refresh receipts. 21 offline checks pass; all four saved false buff failures explained. No runtime acceptance claimed.
+- Saved movement summary: 22 position events, 6 generic move failures and 3 timeouts across three reports; no posture events or rejection reasons. At gate pin 80895f63 the specific line-340 outdoor collision check is commented out; other causes remain unproven. Claude owns proposed bounded rejection telemetry and runtime reruns; no server/bot actions here.
+- Owner says continue idle tasks while Claude lacks usage: claimed C50 to verify medic/scout/entertainer XP reports against source; no new downloads, services or server edits.
+
 ### 2026-10-16 04:03 ChatGPT: C48 overnight checkpoint and morning sheet
 
 - Reports `bc166df`: run 8 through 3:59 AM, 1,700 bots, 20,009 kills, 1,043 deaths, 2,358 completed missions; style/SP totals reconcile. Morning sheet lists 29 owner decisions with recommendations; watchdog has no recorded low-memory despawn, latest 6,646 MB available. 748 snapshots exceed their assigned point-budget label; cap enforcement unverified. Read-only WSL analysis only; crafting/full-datapad, Hutt/Ossus client checks and live release remain open. Next: owner decisions and Claude runtime follow-up; oldest log entry archived.
@@ -357,8 +365,3 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 - Status check only; no implementation or bot/server actions. Queue: 33 done, 8 hold, 2 failed, 2 open. Ready order C46 staging-only Discord/public-map tooling, then C48 run-8 analysis/morning sheet; neither output exists yet. C47 completed by Claude helper 3639bb2 despite queue hold. C45 dev fixes db5952f5 + 74fa3e8c are reported integrated; crafting/full-datapad gameplay gates remain. C33/C41 failed queue entries need report reconciliation before retry. Source/code commits unchanged; next work awaits owner direction.
 
-### 2026-10-16 02:15 Claude: night shift handed to GPT and the local model
-
-- Since 22:40: runs 6-8 (spawn level gate and five newbie fixes `b20a46d7`; bots on missions near their level that follow the mission waypoint `41ea45b5`; C44 F2/F5/F8 `e033e8b8`; C45 recipe fix `db5952f5` + one-item delivery `74fa3e8c`; per-type XP `40af2c78`; multiclass new players `8b48a044`). Run 8: 603 missions paid by 01:50, deaths with a killer 8+ levels above the bot down from 24-33% to 7%.
-- Helpers' reports: C47 report tools `3639bb2`, Hutt animation table `e55bd4d`, Ossus o7 build data `4502fc7`, C30 census check and city proposals `797d19d`, checkout churn `d815f5b`, pre-CU player builds `4cefab2`, player cities `e2e058e`, Ossus census `b589da3`.
-- Owner decisions waiting: GPT's C48 morning sheet collects them. The 6-mission release still needs an in-game crafting-mission test and the full-datapad gate.
