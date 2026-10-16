@@ -283,3 +283,11 @@ C40 ready: cherry-pick `7c68e39f` from gpt/work (dev merged in `7df4f2c7`); h `e
 - Started c43-bf2-battles-ai-design [desk] (effort medium) as pid 5876; c38 and c36 stay on hold; cycle left paused.
 - Status: running c43-bf2-battles-ai-design (pid 5876, since 17:35) [desk]; c39, c40, c42, c33b done; c41-bot-net-status failed (exit 1, 12:51).
 - Memory: 14.1 GB commit headroom, 8.5 GB free (the 15:39 attempt was not ready: low memory).
+
+### 2026-10-15 Fable (scheduled 22:05)
+1. Hutt S7 designed end to end and committed (8ce467a): concept, 631-entry animation map JSON, gear list, new-animation list, species facts, order of work.
+2. Level 1 is data only: append entries to hutt.lat pointing at existing Hutt .ans files; dance = an AGAT gesture loop, sit/kneel = idle, sneak = crawl, riding = idle on the A1 Deluxe Floater.
+3. Photo studio: use zone name `simple` with our own flat terrain (stock test terrains have no shaders), fixed light by colour ramps, six-shot um win shot routine.
+4. Nal Hutta: Darklight's edited Rori with one Tatooine-style town Bilbousa; fits 138-139 ABY, first-look steps listed, credit required.
+5. Ossus O6: craters/scorch layers, five settlement fields, 18 POIs; creature levels untouched.
+6. Nothing built or seen in game; Claude builds the lat and S7 patch, GPT reviews and researches the .ans format; five owner questions open.
