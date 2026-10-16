@@ -108,6 +108,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C43: BF2 2005 battles and AI design** | ChatGPT, Medium | complete 2026-10-15 17:40; research/design only | Report `86f9200`: `Documentation-support/bf2-battles-and-ai-for-swg.md`; Hoth pilot, Core3 mapping and behavior priorities; implementation/in-game untested; no server/bot changes |
 | **C42: Fable return prep + housekeeping** | ChatGPT, Medium | complete 2026-10-15 12:45 | Docs 8c795f7; three checked briefs; cleanup proposals unapplied; no server writes/bots/downloads/restarts |
 | **Escort crew and crew vendor (owner, 15 Oct)** | Claude | escort mode built, offline tests pass; first live run with the owner pending | Owner: "the dungeon crew was meant to run with me"; "this function can lead into the crew vendor, and future solo features". `tools/bots/escort.py` (generic: any group, any player): follow in formation into buildings, fight the player's target with real rotations, defend, heal the lowest, chat orders (follow, stay, attack, passive, heal, status, dismiss), play data in `Bot-reports/play/` (escort only). Run: `squad.py run scenarios/forn-escort.py --round-minutes 125`. **Next:** travel-following (shuttles), a crew vendor NPC that hires a crew to a player (Dax Venn's mercenary broker is the model), solo-player features. Owner's build for Creature Handler play data: Master CH + Rifleman + Marksman (246) |
 | **Remote access + second owner account (owner, 15 Oct)** | Claude | prep done 10:15, docs only; nothing opened or changed; waits for the owner's go | `Documentation-support/remote-access-and-second-owner.md`: ports read from the configs (forward UDP login/zone/ping only; never ORB, status, MariaDB, live map); mirrored WSL with the Hyper-V firewall blocking inbound today; the owner's router and firewall checklist with exact PowerShell; the hairpin catch (a public galaxy address also sends the owner's client and the bots through the router); the friend makes their own account by AutoReg login, then one `UPDATE` to admin_level 15 by the lock holder. Test galaxy first, short window, rules limited to the friend's IP |
@@ -324,6 +325,10 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 
 ## Log
 
+### 2026-10-15 17:40 ChatGPT: C43 BF2 2005 research/design complete
+
+- Report `86f9200`: public official-tool documentation/manual evidence, read-only Core3-dev/bot mapping, three-post Hoth conquest design and five NPC priorities. Local links/CRLF checked; exact Follow signature and retail constants left open. No BF2 files, downloads, server/dev/bot changes or gameplay. Implementation and all in-game acceptance untested; next: Claude reviews the pilot and scopes controller/activity/combat work. Older Log entries preserved in the archive; newest four retained.
+
 ### 2026-10-15 16:51 Claude: StarCraft as inspiration for the Vong, the Gree and the Starweird (legal check)
 
 - `Documentation-support/starcraft-inspiration-vong-gree.md`. Legal verdict: **ideas and mechanics yes; no StarCraft files and no StarCraft fan assets** (Blizzard art and its derivatives; custom content reportedly assigned to Blizzard; already excluded by AGENTS.md's rules for other games' assets). Screenshots stay private and out of the repo.
@@ -350,79 +355,3 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 - How the owner sees it, no server change or restart: the piece replaces the stock campfire log's appearance, so `/createSpawningElement spawn object/static/structure/general/campfire_fresh.iff` in a test session shows the wall. Steps: `Fable-asset-pipeline/how-to-view-first-ruin.md`.
 - Findings: the pack has no texture atlas (two flat material colours, no UVs), so the textures are flat colours; the exporter writes no collision (walk-through), as the plan expected. Not done: own object template, CRC entry and server Lua (needs a restart by the galaxy owner), LODs, a stone texture.
 - **Verified in the owner's client, 14:46** (screenshot by the main session via `um win shot`, kept out of the repo): the wall draws upright at Mos Eisley with both tones, no black or white block, no crash, 30 fps. Collision not checked. Any session that rebuilds `local_planets.tre` from its own staging drops these files: re-run `Fable-asset-pipeline/stage_ruin.py` (inputs in `Fable-asset-pipeline/converted/`).
-
-### 2026-10-15 14:00 Claude: test galaxy restarted for the full fleet (owner: "restart and ... deploy the full fleet")
-
-- Restarted 13:5x on dev with `BotPop=true` (ready in 66 s, 0 error lines). The botpop scale series (owner OK earlier) was stopped at its 500 step for this; its 100 and 250 results stand (`Bot-reports/botpop-scale-test.md`).
-- Up now: 23 squad bots, the Forn escort run (20261015-135721, waits up to 3 h for Benny), 77 load bots (`load_fleet.py step 77 60 7200`: 2 h of fights with the memory guard), and the server-side population at 500 throttled, going to 1,000 only if the load average stays under 9 of 12 threads. Results: `/var/tmp/swg-bots/load/*fullfleet*`. Client logs over 200 MB are emptied every 5 min for 4 h.
-- Earlier today: the crew answers every order, Mirren's heal loop, Forn's crouch (`dd9febe`); `/tame train` (dev `398744b5`); the pet follow gap (dev `57a52553`) is live since 13:26 but untested in game.
-- **Full fleet result (14:05):** 100 client bodies + 500 server-side bots (165 active, throttled). core3 3.9 cores avg (4.7 max), 4.8 GB; WSL 10.1 GB free, commit headroom 9.3 GB; chat 107 ms avg, 450 ms max; no safety stop. Load average reached 10 of 12 threads, so it held at 500 and did not go to 1,000: CPU binds first, as projected.
-- Open: Benny's "disengaging scripts brok" (asked in game, no answer yet); "better zoom" (client side).
-
-### 2026-10-15 13:55 Claude: server-side population bots (/botpop), milestone 1 built; 100 and 250 measured
-
-- Owner's go 13:00 (Claude weekly usage 83%). Dev `e6749a9e` (SuiPageData::sendTo null guard) and `7f58804d` (`/botpop`), both on the test galaxy since 13:39. All bot code is in `src/server/zone/managers/botpop/` (header-only, movable into a TortoiseBots fork). Core3 hooks: the command registration, the observer flag (AiAgent insert/disappear, SpawnArea position update) and `ClientlessLogin.h`, the one login/logout boundary. Sagiroth's TortoiseBots is the design reference; no code copied.
-- `/botpop spawn N [here|mos_eisley|coronet|split] [radius] | despawn [N|all] | status | mode [all|throttled]`; `_test` database plus `Core3.BotPop = true`, then god mode or an AgentAccounts account. Bots are transient `Popbot<n>` player characters with no client, rows or account; they wander the navmesh, sit, emote, fight back. Throttled mode: only bots near a real player (150), a rotating 50 and fighters act, and they don't wake AI or spawns. All mode: every bot acts and counts as a player. One `[BotPop]` line a minute in core3.log.
-- Measured (throttled, split Mos Eisley/Coronet, 23 squads idle): 100 bots: 1.26 cores, 4.57 GB; 250 bots: 2.03 cores, 4.78 GB (4.52 GB with none); about 0.005 cores and 1.4 MB per extra bot; chat round trip 80 ms; no errors. Report: `Bot-reports/botpop-scale-test.md`; driver `tools/bots/botpop_scale.py` (load_fleet.py's sampler and memory stops).
-- **Not done:** 500 and 1,000, the all mode, the 30-minute 1,000-bot hold and the class check alongside. The main session stopped the series at 13:51 for the owner's full-fleet run; it uses `botpop_scale.py` with BotPop on. About half the walk attempts find no path (not investigated). Escort run: halted twice for /botpop restarts (owner OK) and restarted each time until 17:47.
-
-### 2026-10-15 13:50 Claude: name filter: only non-name words stay out (test galaxy)
-
-- Owner: "non name names can stay out, but censors can begone". Core3's active name list (`oldFilterWords` in `bin/scripts/managers/name/name_manager.lua`) matched every entry anywhere in a name, case-insensitively, so plain entries like "ec", "ct", "dev", "gm", "mod", "christ" and "ass" refused Rebecca, Hector, Victor, Devon, Sigmund, Modesto, Christopher and Cassandra (23 of 319 common names). The unused `filterWords` list was worse (refused Jesse, Felix, 4 bots; let GM and Dev through).
-- Dev `d1cd02c6` (Lua only, appended to name_manager.lua): the default table is rebuilt from stock. Profanity, slurs and religious names dropped; ranks, titles, species, staff and game words kept as reserved; canon names kept as fiction; plain words match whole words only; Admin, Administrator and Moderator added. Offline: 1 of 319 real names refused (Carl, a stock canon entry), no bot name, no swear word. Stock list kept as `stockOldFilterWords`.
-- **On the test galaxy now** without a restart (console `reloadmanager name`: 634 -> 466 patterns). Not yet tried in game with a character name. Live needs the owner's deploy OK.
-- 13:50, owner: "Allow canon names too". Dev `0f045a47`: the default table keeps only stock developer and reserved entries (whole words), the non-name words stock filed as profanity, and Admin/Administrator/Moderator: 71 entries. Offline: no real name (319), bot name (100), canon name or swear word refused; every non-name word refused. The test galaxy (restarted by another session at 13:48) loaded it at 77 s: `Loaded 71 regex filter patterns`. Slurs now pass too; the owner was told.
-
-### 2026-10-15 13:18 Claude: fleet-scale test, 100 bots run comfortably (recommend up to 100)
-
-- 23 -> 50 -> 100 bodies fighting on Tatooine/Naboo/Corellia: core3 0.89 -> 1.22 -> 1.49 cores, 4.76 -> 4.87 GB; bodies 1.28 GB RSS (370 MB PSS) at 100; WSL MemAvailable never under 10.0 GB, commit headroom never under 11.6 GB; chat round trip flat 81 ms; no lag lines. No galaxy restart: the load bots need no AgentAccounts, so the Forn escort run kept going. Report `Bot-reports/fleet-scale-test.md`.
-- New `tools/bots/load_fleet.py` + `load-groups.json` (77 plain bots, Grek-Qek, kept out of groups.json). Watch for long big runs: each fighting body writes ~2 MB/min of client log to /var/tmp (12 GB/h at 100); `load_fleet.py down` deletes them.
-
-### 2026-10-15 13:07 Claude: plan to fork TortoiseBots with the new public repo
-
-- `Documentation-support/tortoisebots-fork-plan.md` (`7128ade`; roadmap row B8). Fork Sagiroth's TortoiseBots on GitHub when the new public repo is made. The fork's `main` mirrors upstream; a `swg` branch holds our Core3 module in a new `swg/` folder, pinned as a submodule in the new repo. Core3 keeps only the hooks and builds with the module off.
-- Port only Sagiroth's original AGPL work for now: the host boundary, `BotTurnScheduler` and `ActionFailureBackoff`. The engine waits on TortoiseBots' open licence audit (its `cmangos/playerbots` lineage is unresolved). The attribution term needs credit in `core3.log`, at login and in `/bot about`. A fork of a public repo is public, so every push gets the export checks. Owner decisions: fork name, submodule vs in-tree, and whether to ask Sagiroth about the engine files.
-
-### 2026-10-15 13:05 Claude: the bot tracker is now a fleet dashboard (http://localhost:8765)
-
-- The owner sent three screenshots of a WoW bot dashboard as the look they want. `tools/live_map.py` now has a sidebar and six pages:
-  - **Overview:** bots online, players, bots indoors, issues and squads.
-  - **Bots:** all 100 roster bots (groups.json plus the fleet test's load-groups.json). Search takes fields such as `planet:naboo prof:rifleman doing:stuck squad:forn role:healer`, with Online/Offline, state and profession chips. Click a bot to see species, professions, combat role, planet and area, what it is doing, health/action/mind bars, credits, target, gear, XP grants per hour, and an Activity tab (recent labels, refused commands, falls). "Show on map" centres the map on it.
-  - **Map:** each planet's own map image, decoded from the client's `ui_map_<planet>.dds` and cached in `/var/tmp/swg-bots/mapimg` (not in git). Planet tabs and area chips with counts, dots coloured by profession with a legend, a path-trails toggle, and "N bots indoors" linking to /floor.
-  - **Activity:** each squad's state and every change of a bot's label. **Issues:** stuck now, dead or incapacitated, refused commands (squad reports, last 24 h; escort play data). **Server:** uptime, who.json, and core3.log error lines with repeats folded and IPs removed.
-- Bars, credits and target need a small `tools/bots/squad.py` change (same commit): a bot now publishes them from its status and fight replies. Running squads pick it up on their next start; until then the panel says "not reported".
-- Labels, /floor, the tracker logs and the 1.5 s refresh are unchanged. All assets are inline (no CDN). Tests: `tools/test_live_map.py` 11/11. Tracker restarted 13:05 as a plain background process (log `/var/tmp/swg-bots/live_map.log`), not the `swg-live-map` unit. Nothing under /opt/swg was written.
-
-### 2026-10-15 12:57 Claude: research: what 1,000+ bots would take (server-side bots)
-
-- `Documentation-support/server-side-bots.md` (`ef46438`), research only. WoW playerbots scale because each bot is an in-server player with no socket, and by default only about 10% are active. Our one-client-per-bot design tops out in the low hundreds (estimate; the fleet test is measuring it). Core3 already drops packets sent to a player with no client. The gaps are a client-less login, a driver, an active-bot budget and one unguarded `SuiPageData::sendTo`.
-- Recommendation: a hybrid. Real-client squads stay for tests; server-side bots provide population. Milestone 1 is about 5 days on Core3-dev: `/botpop spawn N`, a wander and fight-back tick, the active budget, then measure 100 to 1,000 bots. Nothing is built; it needs the owner's go-ahead.
-- 13:00 (`4d14de7`): Sagiroth's TortoiseBots is now credited by name as the comparison point. The owner says Sagiroth gave permission and has no SWG ties. A correction from TortoiseBots' own source: it ships with every bot fully active and throttling is opt-in, so the gain comes mainly from bots living inside the server with no client. Milestone 1 now measures both modes.
-
-### 2026-10-15 12:49 ChatGPT: C40 roof-floor source fix ready
-
-- Server `7c68e39f` on gpt/work after dev merge `7df4f2c7`; h `e86fcf7`: nearest outdoor floor, route-relative samples, explicit world-z forwarding, safe missing-height errors and escort trail-floor preservation. Report `Documentation-support/C40-roof-ledge.md`. Offline: Python 6/6, existing escort 11/11, compiled actual selector 7 assertions; old 9.5-vs-5 choice reproduced with synthetic surfaces. Unbuilt/game-untested; Claude reviews/cherry-picks/builds and verifies roof descent plus bunker/Warren escort. No bots, restarts, deployments or downloads. Source slice idle.
-
-### 2026-10-15 12:45 ChatGPT: C42 Fable return prep complete
-
-- Docs commit `8c795f7`: `Documentation-support/fable-return-brief.md` (18 folders, 842 words), `owner-decisions-for-fable.md`, `board-housekeeping-1015.md`. Checked dev HEAD `398744b5`, README/owner-answer records and archive hashes: installed client/server both `8ad04fec`; Local-content copy remains `aee83cc6`. Chiss played; E0 visual/habitat/full gameplay acceptance UNVERIFIED. References/CRLF checked; no downloads, bots, restarts or writes under /opt/swg. Next: owner decision batch, then Fable design and delegated mechanical checks. Housekeeping proposals unapplied; oldest 11:40 log preserved in archive, newest four retained. Board/log record committed separately.
-
-### 2026-10-15 12:40 Claude: the crew answers every order; Mirren's heal loop and Forn's rubber-banding fixed; /tame train
-
-- **Owner in game, 12:15-12:25: "things dont seem to be working", "Forn is rubber banding kinda bad".** Three bugs, all in `tools/bots/` (`dd9febe`):
-  - Orders were heard, but only the leader (Forn) could answer them, and he skipped any line another bot heard first. Benny's heal, buff and status got silence. Now the bot that hears an order answers it, and a tell gets a tell back. `invite` is queued for the leader, the only one who can invite. New order `help` (also `commands`, `orders`) lists the orders. `passive` now also sends `/peace`.
-  - Mirren sent heals 65 times at a patient she could not see, and 19 times at herself with only wounds left. She never stopped "healing", so the buff order never ran. Now a refusal leaves that patient alone for 15-60 s, and low mind rests her for 20 s; she buffs or fights in the meantime.
-  - Forn was crouched, and the server puts a crouched bot's steps back. Every bot now stands before walking.
-  - Tests: escort and combat 12/12 (4 new), class-check 70/70. The crew run restarted with the galaxy (run 20261015-123727) and waits up to 3 h for Benny (`ESCORT_WAIT`, `36a249f`). Esk mailed Benny a one-line note with a waypoint to the crew.
-- **`/tame train` (owner, in game: "can you train my pets"; dev `398744b5`, live: test galaxy restarted 12:36, ready in 86 s, 0 error lines, Benny offline):** god mode, no target. Every called pet learns every command it has no word for yet:
-  - the doc's words: sic, heel, stay, guard;
-  - plain words for the rest: store, friend, follow other, trick one/two, patrol, patrol point, clear patrol, wedge, column, special one/two, ranged, group, transfer.
-  - Words Benny trained are kept. God mode also always passes the training roll when training by hand.
-- **Owner's notes from play, open:**
-  - pets need a follow distance that depends on their size (the AI's follow range is in `ai/bt/leaf/FollowActions.h`, `UpdateRangeToFollow`);
-  - better camera zoom in and out (client side);
-  - "disengaging scripts brok" (asked in game which: the crew not stopping, or Benny's macros).
-
-### 2026-10-15 12:39 ChatGPT: C39 review complete
-
-- Reviewed 90044b8e..81384b90: 1 P1 / 4 P2 / 2 P3; report `Documentation-support/review-C39.md`. Source fixes on owned gpt/work after merge 22408da4: d8c9d668, 1b276fa4, 6647e5f8, b556c061, a9fb5cfe (Claude review/cherry-pick in that order). Offline gates, 432 medical cases per pack, paging/stale-cell Lua checks and six Lua syntax checks pass; restored files match baseline blobs. Full server build/gameplay/restart persistence untested. Dev/runtime/bots untouched; later dev 398744b5 is outside scope. Source slice idle; next: Claude review and separate acceptance. Older logs moved to the archive; newest four retained.

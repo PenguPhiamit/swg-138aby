@@ -65,6 +65,7 @@ Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heav
 - Discord and the player bug inbox (C17, C27).
 - The first playtest with friends on live.
 - Added 15 Oct (owner): **Battlefront-style battles**, conquest with command posts and tickets on a Hoth or Ossus battlefield, plus NPC behaviour ideas for our bots and creatures (GPT research C43, from public docs of Battlefront II 2005).
+- [x] C43 research/design checkpoint (15 Oct): [BF2 2005 systems and Hoth conquest pilot](Documentation-support/bf2-battles-and-ai-for-swg.md), report `86f9200`; implementation and in-game acceptance remain open.
 - Creature level brackets per planet: **shelved** until more planets exist. A draft ladder covering the existing and planned planets is on the board, 15 Oct.
 
 Done means live and passing the gate, not "built on the test galaxy". The board keeps the daily detail; this section changes only when the route does.
