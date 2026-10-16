@@ -1434,3 +1434,9 @@ Claude uses the grid squares to place new planets on the ticket-purchase galaxy 
 - Since 22:40: runs 6-8 (spawn level gate and five newbie fixes `b20a46d7`; bots on missions near their level that follow the mission waypoint `41ea45b5`; C44 F2/F5/F8 `e033e8b8`; C45 recipe fix `db5952f5` + one-item delivery `74fa3e8c`; per-type XP `40af2c78`; multiclass new players `8b48a044`). Run 8: 603 missions paid by 01:50, deaths with a killer 8+ levels above the bot down from 24-33% to 7%.
 - Helpers' reports: C47 report tools `3639bb2`, Hutt animation table `e55bd4d`, Ossus o7 build data `4502fc7`, C30 census check and city proposals `797d19d`, checkout churn `d815f5b`, pre-CU player builds `4cefab2`, player cities `e2e058e`, Ossus census `b589da3`.
 - Owner decisions waiting: GPT's C48 morning sheet collects them. The 6-mission release still needs an in-game crafting-mission test and the full-datapad gate.
+
+## Moved 2026-10-16 08:56 C52
+
+### 2026-10-16 03:58 ChatGPT: C46 Discord/public map staged
+
+- `3150acf`: anonymous public map, Windows PNG/status feed with PATCH identity, transition/watchdog alerts, 07:00 numeric digest and quick-tunnel wrapper; 53 offline tests pass, saved PNG visually checked, shell syntax clean. All runtime/delivery untested; no feed/map/tunnel started, no secrets read, posts, bots, server writes or restarts. Next: Claude reviews public mode, reloads the private map metadata and starts only after review/owner posting go; manual first-message pin. Start/stop guide: `Documentation-support/C46-discord-public-map.md`. Oldest Log entry archived.
