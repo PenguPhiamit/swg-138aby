@@ -1,0 +1,1417 @@
+{
+ "schema": "o7-resolution-1",
+ "source": "misc/object_template_crc_string_table.iff, stock copy in patch_14_00.tre (15,792 names) and the installed local_planets.tre (29,358 names)",
+ "items": [
+  {
+   "o6": "POI 1 craters: shader ACCN to a dark burnt ground (candidates shader/must_ash_* (confirm), else Dathomir black rock)",
+   "poi": 1,
+   "status": "resolved: other stock shaders",
+   "why": "No shader/must_ash_* exists (the Mustafar terrain uses rock_mustafar_*, MTG art, not needed). Stock Yavin 4 already ships dirt_scorched_tornearth (crater floor) and dirt_scorched_earth (scorch fans; Endor uses it too); the glass pan keeps o6's \"limestone family already in the file\" (rock_mtns_whitelimestone). ACCN is a vertex-colour affector in the stock files, not a shader, so the shader goes in as ASCN (shader family constant), the affector every stock layer uses for ground shaders.",
+   "chosen": [],
+   "shaders": [
+    {
+     "shader": "shader/dirt_scorched_tornearth.sht",
+     "in_client": true
+    },
+    {
+     "shader": "shader/dirt_scorched_tornearth_a1.sht",
+     "in_client": true
+    },
+    {
+     "shader": "shader/dirt_scorched_tornearth_a2.sht",
+     "in_client": true
+    },
+    {
+     "shader": "shader/dirt_scorched_earth.sht",
+     "in_client": true
+    },
+    {
+     "shader": "shader/dirt_scorched_earth_a1.sht",
+     "in_client": true
+    },
+    {
+     "shader": "shader/dirt_scorched_earth_a2.sht",
+     "in_client": true
+    },
+    {
+     "shader": "shader/rock_mtns_whitelimestone.sht",
+     "in_client": true
+    }
+   ]
+  },
+  {
+   "o6": "POI 1 rubble apron: ACRF radial/flora off inside, rocks on",
+   "poi": 1,
+   "status": "resolved: other affectors",
+   "why": "ACRF is a colour-ramp-by-fractal affector. The apron uses the file's own flora affectors: clear_flora() (the removal pattern Dantooine's stock layers use) over r 130, then AFSC (rocks, family 4) outside r 60.",
+   "chosen": [],
+   "shaders": []
+  },
+  {
+   "o6": "POI 1 blast debris: shared_debris_* stock piles (confirm names; Endor and Corellia have object/static/structure/general/shared_debris_*)",
+   "poi": 1,
+   "status": "resolved: other names",
+   "why": "The shared_debris_* names that exist are all Death Star pieces (conduit, tubes, turbolaser): wrong for a ground attack. The same folder has rubble and wreck pieces; stone and metal piles for the lips, an AT-ST and AT-AT wreck, a transport hull section and a junk heap for the Sith and Imperial ground forces.",
+   "chosen": [
+    {
+     "template": "object/static/structure/general/shared_poi_all_construction_stone_pile.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      12.5,
+      6.7,
+      14.5
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_poi_all_construction_metal_pile.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      4.4,
+      1.5,
+      3.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_atst_debris_01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      3.5,
+      1.7,
+      3.9
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_atat_debris_01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      6.5,
+      4.1,
+      11.4
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_atat_debris_02.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.0,
+      0.7,
+      4.7
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_transport_debris_02.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      16.0,
+      6.0,
+      21.2
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_prp_junk_s5.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.6,
+      3.9,
+      2.3
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 1 downed Imperial drop-pod or shuttle: Tatooine shared_crashed_ship_* or Dantooine crashed escape pod (confirm)",
+   "poi": 1,
+   "status": "resolved: other name",
+   "why": "No shared_crashed_ship_* exists. object/static/structure/general/shared_escape_pod.iff (3.9 x 8.5 m, 18 stock snapshot nodes) is the drop pod. The destroyed Lambda shuttle (object/static/worldbuilding/vehicles/shared_lambda_shuttle_static_destroyed.iff) is MTG-only, not mapped to a catalogue P row: not used.",
+   "chosen": [
+    {
+     "template": "object/static/structure/general/shared_escape_pod.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      3.9,
+      8.5,
+      3.9
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_escape_pod_door.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.7,
+      3.0,
+      0.4
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 1 memorial: six standing stones (stock shared_marker_*/Dantooine standing stones (confirm))",
+   "poi": 1,
+   "status": "resolved: other name",
+   "why": "No shared_marker_* exists. poi_all_monolith_s01 is 36 m tall and gravestone_generic_style_* are 0.7 m: both wrong. The Dantooine temple's own short pillar (2 x 4.7 m, 24 uses here) reads as a Jedi memorial stone and is already in the ruins set.",
+   "chosen": [
+    {
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_sm.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.0,
+      4.7,
+      2.0
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 2 sanctuary: shared_cave_01 or a cellar .pob from the stock bunker set (confirm); holocron pedestal decor shared_holocron_* (confirm)",
+   "poi": 2,
+   "status": "resolved: other name; holocron decor has no static",
+   "why": "The ruins pad is flat ground with no hillside, so the self-contained flatland variant of cave_01 is used (same 13-portal layout as cave_01_damprock, damp-rock look; 12 cells). The bunker interiors are Imperial concrete. No holocron static or pedestal exists in the stock table: the stock item object/tangible/jedi/shared_jedi_holocron_light.iff can be created by script, and the Dantooine altar static (object/static/structure/dantooine/shared_dant_jedi_temple_altar.iff) is the pedestal. Interior contents are a screenplay job (cell ids = building id + 1..11).",
+   "chosen": [
+    {
+     "template": "object/building/general/shared_cave_06_flatland_s01_damprock.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      56.4,
+      31.4,
+      78.8
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 3 garrison: object/building/military/shared_military_guard_tower, shared_military_outpost_* (confirm)",
+   "poi": 3,
+   "status": "resolved: other names",
+   "why": "shared_military_guard_tower does not exist; shared_military_outpost_guard_tower_1 does (no portal layout, no interior) but the guard tower with a door and two cells, mun_all_military_tower_impl_guard_s01, is what the Yavin 4 snapshot places (ten of them). The sheds are the Imperial-style buildings Corellia, Rori, Lok, Naboo and Dantooine place (a node plus 6 cells each).",
+   "chosen": [
+    {
+     "template": "object/building/military/shared_mun_all_military_tower_impl_guard_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      6.0,
+      15.2,
+      6.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/building/military/shared_military_base_shed_imperial_style_officer_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      15.0,
+      5.5,
+      15.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/building/military/shared_military_base_shed_imperial_barracks_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      15.0,
+      5.5,
+      15.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/military/shared_military_wall_strong_imperial_32_style_01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      32.0,
+      6.9,
+      2.5
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/military/shared_military_wall_strong_imperial_16_style_01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      16.0,
+      6.9,
+      2.5
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/military/shared_military_wall_strong_imperial_style_01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      8.0,
+      6.9,
+      2.5
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/military/shared_military_column_strong_imperial_style_01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.7,
+      7.4,
+      2.7
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_banner_imperial_style_01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.2,
+      4.4,
+      0.5
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 4 vaults: third stock cave (cave_02 flatland variant) + Dantooine temple pillars",
+   "poi": 4,
+   "status": "resolved",
+   "why": "cave_07_flatland_s02 is the flatland variant of the cave_02 layout (14 portals, 12 cells).",
+   "chosen": [
+    {
+     "template": "object/building/general/shared_cave_07_flatland_s02.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      56.4,
+      31.4,
+      78.8
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_base.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.0,
+      3.4,
+      2.1
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_fallen.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.8,
+      0.9,
+      0.9
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_sm.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.0,
+      4.7,
+      2.0
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 5 Ysanna camp: stock Tusken/Dantari-style camp statics (hide tents, racks, a fire)",
+   "poi": 5,
+   "status": "resolved",
+   "why": "The Dantooine Dantari camp set, the same pieces Dantooine's stock snapshot places in bulk (fence_8m 151 nodes, totem poles 66, spear racks 42).",
+   "chosen": [
+    {
+     "template": "object/static/structure/dantooine/shared_dant_small_mudhut.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      9.4,
+      6.8,
+      11.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_large_rock_hut.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      11.4,
+      7.9,
+      13.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_hide_tanning_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.4,
+      1.8,
+      0.4
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_hide_tanning_s02.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.4,
+      1.8,
+      0.4
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_rack_spears.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.0,
+      2.3,
+      0.4
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_cooking_stone.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.5,
+      2.0,
+      1.2
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_mud_oven.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      4.3,
+      2.6,
+      5.1
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_fire_pit.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      3.5,
+      2.5,
+      3.1
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_skull_bol.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.4,
+      0.6,
+      1.6
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_skull_thune.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.9,
+      1.3,
+      1.9
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_skull_lizard.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      0.3,
+      0.5,
+      0.6
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_totem_pole.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.6,
+      7.0,
+      2.3
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_fence_8m.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      8.0,
+      3.0,
+      1.1
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 6 stone circle: standing stones + a fire pit + bone totems",
+   "poi": 6,
+   "status": "resolved",
+   "why": "Boulders for the stones (no stock standing-stone static of a sensible size), the Dantooine fire pit and totem poles.",
+   "chosen": [
+    {
+     "template": "object/static/structure/general/shared_rock_mossy_big.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      6.2,
+      4.9,
+      6.1
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_rock_mossy_big_a1.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      7.1,
+      3.1,
+      7.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_tato_cave_rock_large.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.0,
+      2.3,
+      2.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_fire_pit.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      3.5,
+      2.5,
+      3.1
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_totem_pole.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.6,
+      7.0,
+      2.3
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_skull_thune.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.9,
+      1.3,
+      1.9
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 8 hamlet: Dantooine farmstead set, a dock of Naboo pier pieces, nets",
+   "poi": 8,
+   "status": "resolved: Endor pier instead of Naboo",
+   "why": "No Naboo pier statics exist (the seawall_* pieces are Theed harbour walls). Endor's wooden lake walkway and platform (60 and 41 stock snapshot nodes, one Dantooine snapshot also uses them) are the dock; dant_fish_rack are the nets and racks.",
+   "chosen": [
+    {
+     "template": "object/static/structure/dantooine/shared_dant_small_mudhut.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      9.4,
+      6.8,
+      11.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_large_mudhut.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      16.2,
+      7.9,
+      16.7
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_fish_rack.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.4,
+      1.8,
+      0.6
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_hide_tanning_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.4,
+      1.8,
+      0.4
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_fence_8m.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      8.0,
+      3.0,
+      1.1
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_boundary_post.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.3,
+      4.6,
+      1.2
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/building/endor/shared_endor_lake_walkway_straight.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      8.7,
+      12.4,
+      16.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/building/endor/shared_endor_lake_platform.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      16.7,
+      2.4,
+      16.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/item/shared_item_basket_closed.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.0,
+      0.5,
+      1.0
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 9 adit: stock mine entrance static + ore carts + a lamp string; the cave mouth is a flatland cave",
+   "poi": 9,
+   "status": "resolved: allum_mine_* statics; one piece dropped",
+   "why": "The stock allum-mine set is exactly the ore carts, timbers, lamps, buckets, pipes and crusher; the cave mouth is cave_08_flatland_s03 (30 cells). object/building/general/shared_bunker_allum_mine.iff exists (Endor uses it) but its entrance portal lies 5 to 8 m below the building origin and needs a pit, so it is not used. allum_mine_console_s01 names appearance/bunker_mine_console_s01.apt, which is not in the client archives: dropped (the crafting station is a script object).",
+   "chosen": [
+    {
+     "template": "object/building/general/shared_cave_08_flatland_s03.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      56.4,
+      31.4,
+      78.8
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_allum_mine_car_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.3,
+      2.0,
+      3.8
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_allum_mine_support_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.1,
+      1.9,
+      1.2
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_allum_mine_wall_lamp_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.0,
+      1.0,
+      0.1
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_allum_mine_bucket_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.7,
+      1.7,
+      2.3
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_allum_mine_pipes_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.7,
+      5.5,
+      10.2
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_allum_mine_device_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      6.0,
+      2.9,
+      2.5
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 7 Vong project fields: MTG/stock Kashyyyk Vong statics if the merged table has them (confirm shared_vong_* names)",
+   "poi": 7,
+   "status": "held by the owner (15 Oct); recorded only",
+   "why": "Not placed. For the record: the stock table and the installed merged table (29,358 names) have no shared_vong_*, yuuzhan, coral, damutek or voxyn template (the only match for \"coral\" is a player-style mobile, dressed_coraline_dynes), so the fields will need new art or Dathomir and Mustafar stand-ins when the voxyn content exists.",
+   "chosen": [],
+   "shaders": []
+  },
+  {
+   "o6": "POI 10 crossing: Naboo or Corellian bridge pieces (confirm a static bridge exists; else platform pieces)",
+   "poi": 10,
+   "status": "resolved: Tatooine bridge",
+   "why": "Static bridges exist: Tatooine small_style_01/02/03 (8, 16, 32 m), Corellia imprv_bridge_sm/lg (16, 28 m), Naboo bridge_naboo_theed_style_1 (50 m). The 32.5 m Tatooine piece (Lok places ten) chains 10 times (325 m) over the 284 m rim-to-rim span, with about 20 m resting on each rim. Nothing in stock supports a span this long: the deck is unsupported.",
+   "chosen": [
+    {
+     "template": "object/static/structure/tatooine/shared_bridge_tatooine_small_style_03.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      5.5,
+      5.9,
+      32.5
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 11 old town: Tatooine/Dantooine filler blocks, merchant tents, stock Dantooine cantina",
+   "poi": 11,
+   "status": "resolved",
+   "why": "There is no separate Dantooine cantina object: Dantooine's own snapshot uses the Imperial-style shed with the cantina name (military_base_shed_imperial_style_cantina_s01). The merchant tent has a one-room interior.",
+   "chosen": [
+    {
+     "template": "object/building/general/shared_merchant_tent_all_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      9.1,
+      8.8,
+      10.7
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/corellia/shared_corl_tent_large.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      10.9,
+      5.2,
+      10.6
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/corellia/shared_corl_tent_med.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      6.5,
+      4.1,
+      9.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/building/military/shared_military_base_shed_imperial_style_cantina_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      15.0,
+      5.5,
+      15.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/tatooine/shared_stone_hovel_tatooine_style_01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      6.7,
+      4.1,
+      6.9
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/tatooine/shared_shed_junkshop_watto.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      9.0,
+      5.6,
+      9.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/tatooine/shared_wall_ruined_tatooine_large_style_01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.8,
+      4.0,
+      16.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/tatooine/shared_wall_ruined_tatooine_large_style_02.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      8.8,
+      4.2,
+      2.2
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/tatooine/shared_pillar_ruined_large_style_01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.5,
+      4.3,
+      2.2
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/tatooine/shared_pillar_ruined_small_style_01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.5,
+      2.3,
+      1.9
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_large_rock_hut_dest.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      19.4,
+      6.4,
+      19.9
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 12 road markers: small standing stones or lamp posts",
+   "poi": 12,
+   "status": "resolved",
+   "why": "The same short temple pillar as the memorial.",
+   "chosen": [
+    {
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_sm.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.0,
+      4.7,
+      2.0
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 13 watch ruin: Dantooine temple base + one pillar, Yavin-style tower stub (confirm)",
+   "poi": 13,
+   "status": "resolved; no tower stub",
+   "why": "The Yavin 4 temples are whole buildings with interiors (object/building/yavin/temple_*), not stubs; the Dantooine pieces make the tower footing.",
+   "chosen": [
+    {
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_base.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.0,
+      3.4,
+      2.1
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.0,
+      15.5,
+      2.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_med.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.0,
+      9.8,
+      2.1
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_fallen.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.8,
+      0.9,
+      0.9
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_jedi_wall_1.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.9,
+      4.1,
+      16.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_jedi_wall_2.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.7,
+      4.2,
+      8.8
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_sm.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.0,
+      4.7,
+      2.0
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 14 Sith post: stock Imperial crates, a cage, a terminal",
+   "poi": 14,
+   "status": "resolved (outside); interior by screenplay",
+   "why": "Outside dressing only. For the cells: object/static/item/shared_item_cage_bamboo.iff (1 x 0.8 m cage), shared_item_door_impl_s01.iff (Imperial door), shared_item_datapad_s1.iff exist as statics a screenplay can create inside the cave's cells.",
+   "chosen": [
+    {
+     "template": "object/static/structure/military/shared_bunker_crate_style_01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      3.8,
+      3.4,
+      3.4
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_data_terminal_free_s2.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.2,
+      1.9,
+      0.4
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_banner_imperial_style_01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.2,
+      4.4,
+      0.5
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_palette_supply_02.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.5,
+      0.1,
+      2.5
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_campfire_burnt.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.2,
+      0.5,
+      1.2
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 15 crashed fighter: stock crashed X-wing/A-wing static (confirm shared_crashed_*)",
+   "poi": 15,
+   "status": "resolved: other name",
+   "why": "No shared_crashed_* statics; object/static/structure/general/shared_xwing.iff (13 x 15.6 m, 5 stock snapshot nodes) is the fighter. There is no A-wing static; the X-wing plus wreckage piles do the job.",
+   "chosen": [
+    {
+     "template": "object/static/structure/general/shared_xwing.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      13.0,
+      3.3,
+      15.6
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 16 sky burial: bone totems, a wooden platform",
+   "poi": 16,
+   "status": "resolved",
+   "why": "Dantooine totem poles and skulls; Endor's wooden lake platform is the burial platform.",
+   "chosen": [
+    {
+     "template": "object/static/structure/dantooine/shared_dant_totem_pole.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      2.6,
+      7.0,
+      2.3
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_skull_bol.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.4,
+      0.6,
+      1.6
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/general/shared_skeleton_human_headandbody.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.0,
+      0.2,
+      1.6
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/building/endor/shared_endor_lake_platform.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      16.7,
+      2.4,
+      16.0
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/dantooine/shared_dant_rack_spears.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      1.0,
+      2.3,
+      0.4
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  },
+  {
+   "o6": "POI 18 Hutt landing field: object/building/poi/shared_tatooine_hutt_businessmen_camp_medium.iff (verified to exist in the client)",
+   "poi": 18,
+   "status": "not usable as a camp; composed from statics",
+   "why": "The path exists, but the client template carries only terrainModificationFileName terrain/poi_medium.lay and no appearance: it is a server theater anchor (Core3 creates the camp's contents), so placed in a snapshot it is an invisible flattening. The field is built from a stock landing pad, tents, pallets and crates. object/mobile/shared_hutt_male.iff (the Hutt broker's body) exists in the client and in dev.",
+   "chosen": [
+    {
+     "template": "object/static/structure/general/shared_landing_pad_transport.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      46.2,
+      2.7,
+      20.7
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/structure/corellia/shared_corl_tent_hut_s01.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      12.0,
+      6.5,
+      10.4
+     ],
+     "in_statics_json": true
+    },
+    {
+     "template": "object/static/item/shared_item_crate_spice.iff",
+     "in_stock_table": true,
+     "client_file": true,
+     "appearances_missing": [],
+     "server_template": "ok",
+     "size_xyz_m": [
+      0.9,
+      0.9,
+      0.7
+     ],
+     "in_statics_json": true
+    }
+   ],
+   "shaders": []
+  }
+ ]
+}

@@ -1,0 +1,1625 @@
+{
+ "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_sm.iff": {
+  "nodes": 133,
+  "planets": {
+   "corellia": 10,
+   "dantooine": 37,
+   "dathomir": 10,
+   "endor": 10,
+   "kaas": 5,
+   "lok": 10,
+   "naboo": 9,
+   "rori": 10,
+   "talus": 9,
+   "tatooine": 10,
+   "yavin4": 13
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 133
+  },
+  "node_child_counts": {
+   "0": 133
+  }
+ },
+ "object/static/structure/military/shared_bunker_crate_style_01.iff": {
+  "nodes": 26,
+  "planets": {
+   "coruscant": 22,
+   "talus": 2,
+   "tatooine": 2
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 26
+  },
+  "node_child_counts": {
+   "0": 26
+  }
+ },
+ "object/static/structure/general/shared_skeleton_human_headandbody.iff": {
+  "nodes": 200,
+  "planets": {
+   "corellia": 10,
+   "dantooine": 10,
+   "dathomir": 28,
+   "endor": 11,
+   "jakku": 1,
+   "kashyyyk": 1,
+   "kashyyyk_dead_forest": 1,
+   "lok": 15,
+   "naboo": 32,
+   "rori": 5,
+   "talus": 26,
+   "tatooine": 51,
+   "yavin4": 9
+  },
+  "node_float_mode": "64.0",
+  "node_crcs": {
+   "0": 200
+  },
+  "node_child_counts": {
+   "0": 200
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_base.iff": {
+  "nodes": 122,
+  "planets": {
+   "corellia": 10,
+   "dantooine": 23,
+   "dathomir": 10,
+   "endor": 10,
+   "kaas": 10,
+   "lok": 10,
+   "naboo": 9,
+   "rori": 10,
+   "talus": 9,
+   "tatooine": 10,
+   "yavin4": 11
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 122
+  },
+  "node_child_counts": {
+   "0": 122
+  }
+ },
+ "object/building/military/shared_military_base_shed_imperial_style_cantina_s01.iff": {
+  "nodes": 3,
+  "planets": {
+   "dantooine": 1,
+   "talus": 1,
+   "yavin4": 1
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "4052750128": 3
+  },
+  "node_child_counts": {
+   "6": 3
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_med.iff": {
+  "nodes": 79,
+  "planets": {
+   "corellia": 1,
+   "dantooine": 42,
+   "endor": 1,
+   "kaas": 16,
+   "talus": 4,
+   "yavin4": 15
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 79
+  },
+  "node_child_counts": {
+   "0": 79
+  }
+ },
+ "object/static/structure/general/shared_transport_debris_02.iff": {
+  "nodes": 5,
+  "planets": {
+   "dathomir": 1,
+   "hoth": 1,
+   "jakku": 1,
+   "kaas": 1,
+   "rori": 1
+  },
+  "node_float_mode": "256.0",
+  "node_crcs": {
+   "0": 5
+  },
+  "node_child_counts": {
+   "0": 5
+  }
+ },
+ "object/static/structure/general/shared_campfire_fresh.iff": {
+  "nodes": 119,
+  "planets": {
+   "corellia": 4,
+   "dantooine": 19,
+   "dathomir": 14,
+   "endor": 19,
+   "hoth": 1,
+   "kashyyyk": 17,
+   "kashyyyk_dead_forest": 5,
+   "kashyyyk_hunting": 9,
+   "kashyyyk_main-orig": 3,
+   "kashyyyk_main": 3,
+   "lok": 5,
+   "naboo": 4,
+   "rori": 2,
+   "taanab": 2,
+   "talus": 3,
+   "tatooine": 9
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 119
+  },
+  "node_child_counts": {
+   "0": 119
+  }
+ },
+ "object/static/structure/tatooine/shared_debris_tatt_crate_1.iff": {
+  "nodes": 956,
+  "planets": {
+   "corellia": 50,
+   "dantooine": 142,
+   "dathomir": 6,
+   "endor": 17,
+   "kashyyyk": 9,
+   "kashyyyk_dead_forest": 1,
+   "kashyyyk_hunting": 4,
+   "kashyyyk_main-orig": 4,
+   "kashyyyk_main": 4,
+   "lok": 38,
+   "mandalore": 1,
+   "mustafar se": 13,
+   "naboo": 23,
+   "rori": 47,
+   "talus": 426,
+   "tatooine": 153,
+   "yavin4": 18
+  },
+  "node_float_mode": "32.0",
+  "node_crcs": {
+   "0": 956
+  },
+  "node_child_counts": {
+   "0": 956
+  }
+ },
+ "object/static/structure/general/shared_allum_mine_device_s01.iff": {
+  "nodes": 8,
+  "planets": {
+   "kashyyyk": 3,
+   "kashyyyk_hunting": 3,
+   "taanab": 2
+  },
+  "node_float_mode": "0.0",
+  "node_crcs": {
+   "0": 8
+  },
+  "node_child_counts": {
+   "0": 8
+  }
+ },
+ "object/static/structure/military/shared_military_wall_strong_imperial_16_style_01.iff": {
+  "nodes": 105,
+  "planets": {
+   "dantooine": 2,
+   "dathomir": 50,
+   "kashyyyk": 1,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1,
+   "rori": 8,
+   "talus": 42
+  },
+  "node_float_mode": "128.0",
+  "node_crcs": {
+   "0": 105
+  },
+  "node_child_counts": {
+   "0": 105
+  }
+ },
+ "object/static/structure/tatooine/shared_pillar_ruined_large_style_01.iff": {
+  "nodes": 120,
+  "planets": {
+   "dantooine": 3,
+   "lok": 8,
+   "talus": 3,
+   "tatooine": 106
+  },
+  "node_float_mode": "128.0",
+  "node_crcs": {
+   "0": 120
+  },
+  "node_child_counts": {
+   "0": 120
+  }
+ },
+ "object/building/endor/shared_endor_lake_walkway_straight.iff": {
+  "nodes": 60,
+  "planets": {
+   "dantooine": 9,
+   "endor": 34,
+   "kashyyyk": 7,
+   "kashyyyk_hunting": 7,
+   "rori": 3
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 60
+  },
+  "node_child_counts": {
+   "0": 60
+  }
+ },
+ "object/static/structure/general/shared_tato_cave_rock_large.iff": {
+  "nodes": 192,
+  "planets": {
+   "corellia": 6,
+   "dantooine": 92,
+   "dathomir": 6,
+   "endor": 31,
+   "lok": 10,
+   "naboo": 3,
+   "talus": 21,
+   "tatooine": 20,
+   "yavin4": 3
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 192
+  },
+  "node_child_counts": {
+   "0": 192
+  }
+ },
+ "object/static/structure/tatooine/shared_wall_ruined_tatooine_large_style_02.iff": {
+  "nodes": 119,
+  "planets": {
+   "dantooine": 2,
+   "jakku": 6,
+   "lok": 23,
+   "talus": 3,
+   "tatooine": 85
+  },
+  "node_float_mode": "128.0",
+  "node_crcs": {
+   "0": 119
+  },
+  "node_child_counts": {
+   "0": 119
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_fallen.iff": {
+  "nodes": 81,
+  "planets": {
+   "corellia": 1,
+   "dantooine": 38,
+   "kaas": 20,
+   "naboo": 3,
+   "talus": 3,
+   "yavin4": 16
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 81
+  },
+  "node_child_counts": {
+   "0": 81
+  }
+ },
+ "object/static/structure/corellia/shared_corl_tent_hut_s01.iff": {
+  "nodes": 3,
+  "planets": {
+   "chandrila": 1,
+   "lok": 2
+  },
+  "node_float_mode": "64.0",
+  "node_crcs": {
+   "0": 3
+  },
+  "node_child_counts": {
+   "0": 3
+  }
+ },
+ "object/static/structure/general/shared_xwing.iff": {
+  "nodes": 5,
+  "planets": {
+   "chandrila": 4,
+   "jakku": 1
+  },
+  "node_float_mode": "256.0",
+  "node_crcs": {
+   "0": 5
+  },
+  "node_child_counts": {
+   "0": 5
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_jedi_wall_1.iff": {
+  "nodes": 37,
+  "planets": {
+   "dantooine": 20,
+   "kaas": 7,
+   "naboo": 1,
+   "talus": 3,
+   "yavin4": 6
+  },
+  "node_float_mode": "256.0",
+  "node_crcs": {
+   "0": 37
+  },
+  "node_child_counts": {
+   "0": 37
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_boundary_post.iff": {
+  "nodes": 94,
+  "planets": {
+   "corellia": 2,
+   "dantooine": 59,
+   "dathomir": 12,
+   "endor": 8,
+   "lok": 2,
+   "naboo": 2,
+   "talus": 1,
+   "tatooine": 1,
+   "yavin4": 7
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 94
+  },
+  "node_child_counts": {
+   "0": 94
+  }
+ },
+ "object/static/structure/tatooine/shared_pillar_ruined_small_style_01.iff": {
+  "nodes": 122,
+  "planets": {
+   "dantooine": 4,
+   "lok": 12,
+   "talus": 1,
+   "tatooine": 105
+  },
+  "node_float_mode": "128.0",
+  "node_crcs": {
+   "0": 122
+  },
+  "node_child_counts": {
+   "0": 122
+  }
+ },
+ "object/static/structure/general/shared_prp_junk_s5.iff": {
+  "nodes": 33,
+  "planets": {
+   "corellia": 6,
+   "dathomir": 1,
+   "endor": 7,
+   "lok": 3,
+   "mustafar se": 1,
+   "naboo": 2,
+   "rori": 1,
+   "taanab": 1,
+   "talus": 3,
+   "tatooine": 6,
+   "yavin4": 2
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 33
+  },
+  "node_child_counts": {
+   "0": 33
+  }
+ },
+ "object/static/structure/tatooine/shared_bridge_tatooine_small_style_03.iff": {
+  "nodes": 13,
+  "planets": {
+   "lok": 10,
+   "talus": 1,
+   "tatooine": 2
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 13
+  },
+  "node_child_counts": {
+   "0": 13
+  }
+ },
+ "object/static/structure/general/shared_palette_supply_01.iff": {
+  "nodes": 32,
+  "planets": {
+   "dathomir": 1,
+   "endor": 1,
+   "mandalore": 23,
+   "taanab": 6,
+   "yavin4": 1
+  },
+  "node_float_mode": "32.0",
+  "node_crcs": {
+   "0": 32
+  },
+  "node_child_counts": {
+   "0": 32
+  }
+ },
+ "object/building/general/shared_merchant_tent_all_s01.iff": {
+  "nodes": 10,
+  "planets": {
+   "hutta": 10
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "2674264926": 10
+  },
+  "node_child_counts": {
+   "1": 10
+  }
+ },
+ "object/static/structure/tatooine/shared_wall_ruined_tatooine_large_style_01.iff": {
+  "nodes": 92,
+  "planets": {
+   "corellia": 2,
+   "dantooine": 2,
+   "endor": 1,
+   "jakku": 1,
+   "lok": 19,
+   "talus": 5,
+   "tatooine": 62
+  },
+  "node_float_mode": "128.0",
+  "node_crcs": {
+   "0": 92
+  },
+  "node_child_counts": {
+   "0": 92
+  }
+ },
+ "object/building/general/shared_cave_06_flatland_s01_damprock.iff": {
+  "nodes": 0,
+  "planets": {},
+  "node_float_mode": null,
+  "node_crcs": {},
+  "node_child_counts": {}
+ },
+ "object/static/structure/dantooine/shared_dant_skull_lizard.iff": {
+  "nodes": 30,
+  "planets": {
+   "dantooine": 19,
+   "dathomir": 3,
+   "lok": 1,
+   "tatooine": 2,
+   "yavin4": 5
+  },
+  "node_float_mode": "128.0",
+  "node_crcs": {
+   "0": 30
+  },
+  "node_child_counts": {
+   "0": 30
+  }
+ },
+ "object/building/general/shared_cave_08_flatland_s03.iff": {
+  "nodes": 1,
+  "planets": {
+   "moraband": 1
+  },
+  "node_float_mode": "1024.0",
+  "node_crcs": {
+   "1503435334": 1
+  },
+  "node_child_counts": {
+   "29": 1
+  }
+ },
+ "object/static/structure/general/shared_banner_imperial_style_01.iff": {
+  "nodes": 105,
+  "planets": {
+   "corellia": 2,
+   "coruscant": 2,
+   "dantooine": 13,
+   "dathomir": 4,
+   "endor": 4,
+   "jakku": 2,
+   "kashyyyk": 4,
+   "kashyyyk_dead_forest": 3,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1,
+   "lok": 12,
+   "naboo": 4,
+   "rori": 10,
+   "talus": 16,
+   "tatooine": 22,
+   "yavin4": 5
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 105
+  },
+  "node_child_counts": {
+   "0": 105
+  }
+ },
+ "object/static/structure/general/shared_atat_debris_02.iff": {
+  "nodes": 4,
+  "planets": {
+   "kashyyyk": 1,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1,
+   "talus": 1
+  },
+  "node_float_mode": "0.0",
+  "node_crcs": {
+   "0": 4
+  },
+  "node_child_counts": {
+   "0": 4
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_jedi_temple_pillar.iff": {
+  "nodes": 46,
+  "planets": {
+   "dantooine": 29,
+   "endor": 1,
+   "kaas": 9,
+   "yavin4": 7
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 46
+  },
+  "node_child_counts": {
+   "0": 46
+  }
+ },
+ "object/static/structure/tatooine/shared_stone_hovel_tatooine_style_01.iff": {
+  "nodes": 113,
+  "planets": {
+   "lok": 19,
+   "taanab": 4,
+   "tatooine": 90
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 113
+  },
+  "node_child_counts": {
+   "0": 113
+  }
+ },
+ "object/static/structure/general/shared_poi_all_construction_metal_pile.iff": {
+  "nodes": 7,
+  "planets": {
+   "kashyyyk": 1,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1,
+   "taanab": 4
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 7
+  },
+  "node_child_counts": {
+   "0": 7
+  }
+ },
+ "object/static/structure/general/shared_palette_supply_02.iff": {
+  "nodes": 3,
+  "planets": {
+   "dathomir": 1,
+   "endor": 1,
+   "yavin4": 1
+  },
+  "node_float_mode": "32.0",
+  "node_crcs": {
+   "0": 3
+  },
+  "node_child_counts": {
+   "0": 3
+  }
+ },
+ "object/static/structure/military/shared_military_wall_strong_imperial_32_style_01.iff": {
+  "nodes": 30,
+  "planets": {
+   "dantooine": 2,
+   "dathomir": 12,
+   "rori": 4,
+   "talus": 12
+  },
+  "node_float_mode": "128.0",
+  "node_crcs": {
+   "0": 30
+  },
+  "node_child_counts": {
+   "0": 30
+  }
+ },
+ "object/building/military/shared_mun_all_military_tower_impl_guard_s01.iff": {
+  "nodes": 76,
+  "planets": {
+   "corellia": 2,
+   "coruscant": 19,
+   "dantooine": 4,
+   "dathomir": 1,
+   "jakku": 9,
+   "kashyyyk": 2,
+   "kashyyyk_main-orig": 2,
+   "kashyyyk_main": 2,
+   "lok": 4,
+   "naboo": 8,
+   "rori": 4,
+   "talus": 9,
+   "yavin4": 10
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "3851682719": 76
+  },
+  "node_child_counts": {
+   "1": 76
+  }
+ },
+ "object/static/structure/corellia/shared_corl_tent_large.iff": {
+  "nodes": 10,
+  "planets": {
+   "corellia": 2,
+   "dathomir": 2,
+   "mandalore": 6
+  },
+  "node_float_mode": "64.0",
+  "node_crcs": {
+   "0": 10
+  },
+  "node_child_counts": {
+   "0": 10
+  }
+ },
+ "object/static/structure/military/shared_military_column_strong_imperial_style_01.iff": {
+  "nodes": 497,
+  "planets": {
+   "dantooine": 14,
+   "dathomir": 227,
+   "kaas": 7,
+   "kashyyyk": 1,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1,
+   "lok": 66,
+   "naboo": 3,
+   "rori": 22,
+   "talus": 84,
+   "tatooine": 34,
+   "yavin4": 37
+  },
+  "node_float_mode": "128.0",
+  "node_crcs": {
+   "0": 497
+  },
+  "node_child_counts": {
+   "0": 497
+  }
+ },
+ "object/building/military/shared_military_base_shed_imperial_style_officer_s01.iff": {
+  "nodes": 8,
+  "planets": {
+   "corellia": 3,
+   "lok": 1,
+   "naboo": 1,
+   "rori": 1,
+   "talus": 1,
+   "tatooine": 1
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "4052750128": 8
+  },
+  "node_child_counts": {
+   "6": 8
+  }
+ },
+ "object/static/item/shared_item_crate_spice.iff": {
+  "nodes": 84,
+  "planets": {
+   "corellia": 8,
+   "dantooine": 13,
+   "dathomir": 4,
+   "endor": 7,
+   "kashyyyk": 2,
+   "kashyyyk_hunting": 1,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1,
+   "lok": 7,
+   "naboo": 9,
+   "rori": 3,
+   "talus": 14,
+   "tatooine": 10,
+   "yavin4": 4
+  },
+  "node_float_mode": "32.0",
+  "node_crcs": {
+   "0": 84
+  },
+  "node_child_counts": {
+   "0": 84
+  }
+ },
+ "object/static/structure/general/shared_allum_mine_pipes_s01.iff": {
+  "nodes": 5,
+  "planets": {
+   "kashyyyk": 2,
+   "kashyyyk_hunting": 1,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1
+  },
+  "node_float_mode": "0.0",
+  "node_crcs": {
+   "0": 5
+  },
+  "node_child_counts": {
+   "0": 5
+  }
+ },
+ "object/static/structure/corellia/shared_corl_tent_med.iff": {
+  "nodes": 13,
+  "planets": {
+   "corellia": 5,
+   "lok": 2,
+   "talus": 5,
+   "yavin4": 1
+  },
+  "node_float_mode": "64.0",
+  "node_crcs": {
+   "0": 13
+  },
+  "node_child_counts": {
+   "0": 13
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_large_rock_hut.iff": {
+  "nodes": 40,
+  "planets": {
+   "corellia": 2,
+   "dantooine": 24,
+   "dathomir": 1,
+   "endor": 8,
+   "lok": 1,
+   "talus": 1,
+   "yavin4": 3
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 40
+  },
+  "node_child_counts": {
+   "0": 40
+  }
+ },
+ "object/static/structure/general/shared_allum_mine_bucket_s01.iff": {
+  "nodes": 37,
+  "planets": {
+   "mustafar se": 15,
+   "taanab": 22
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 37
+  },
+  "node_child_counts": {
+   "0": 37
+  }
+ },
+ "object/static/structure/general/shared_rock_mossy_big.iff": {
+  "nodes": 7,
+  "planets": {
+   "dantooine": 2,
+   "lok": 1,
+   "naboo": 2,
+   "rori": 1,
+   "talus": 1
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 7
+  },
+  "node_child_counts": {
+   "0": 7
+  }
+ },
+ "object/static/structure/military/shared_military_wall_strong_imperial_style_01.iff": {
+  "nodes": 153,
+  "planets": {
+   "dantooine": 11,
+   "dathomir": 16,
+   "kashyyyk": 1,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1,
+   "lok": 80,
+   "talus": 6,
+   "tatooine": 9,
+   "yavin4": 28
+  },
+  "node_float_mode": "128.0",
+  "node_crcs": {
+   "0": 153
+  },
+  "node_child_counts": {
+   "0": 153
+  }
+ },
+ "object/static/structure/tatooine/shared_debris_tatt_drum_storage_1.iff": {
+  "nodes": 512,
+  "planets": {
+   "corellia": 39,
+   "dantooine": 35,
+   "dathomir": 20,
+   "endor": 12,
+   "kaas": 1,
+   "kashyyyk": 30,
+   "kashyyyk_hunting": 20,
+   "kashyyyk_main-orig": 10,
+   "kashyyyk_main": 10,
+   "lok": 12,
+   "mandalore": 3,
+   "naboo": 26,
+   "rori": 25,
+   "talus": 55,
+   "tatooine": 202,
+   "yavin4": 12
+  },
+  "node_float_mode": "32.0",
+  "node_crcs": {
+   "0": 512
+  },
+  "node_child_counts": {
+   "0": 512
+  }
+ },
+ "object/static/structure/general/shared_allum_mine_car_s01.iff": {
+  "nodes": 4,
+  "planets": {
+   "mustafar se": 4
+  },
+  "node_float_mode": "0.0",
+  "node_crcs": {
+   "0": 4
+  },
+  "node_child_counts": {
+   "0": 4
+  }
+ },
+ "object/static/structure/general/shared_data_terminal_free_s2.iff": {
+  "nodes": 15,
+  "planets": {
+   "corellia": 2,
+   "rori": 1,
+   "talus": 2,
+   "tatooine": 10
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 15
+  },
+  "node_child_counts": {
+   "0": 15
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_skull_thune.iff": {
+  "nodes": 20,
+  "planets": {
+   "dantooine": 14,
+   "dathomir": 2,
+   "kashyyyk": 1,
+   "kashyyyk_hunting": 1,
+   "rori": 1,
+   "talus": 1
+  },
+  "node_float_mode": "128.0",
+  "node_crcs": {
+   "0": 20
+  },
+  "node_child_counts": {
+   "0": 20
+  }
+ },
+ "object/static/item/shared_item_basket_closed.iff": {
+  "nodes": 159,
+  "planets": {
+   "corellia": 3,
+   "dantooine": 27,
+   "dathomir": 1,
+   "endor": 57,
+   "kashyyyk": 27,
+   "kashyyyk_dead_forest": 23,
+   "kashyyyk_main-orig": 4,
+   "kashyyyk_main": 4,
+   "naboo": 1,
+   "rori": 1,
+   "talus": 1,
+   "tatooine": 8,
+   "yavin4": 2
+  },
+  "node_float_mode": "32.0",
+  "node_crcs": {
+   "0": 159
+  },
+  "node_child_counts": {
+   "0": 159
+  }
+ },
+ "object/static/structure/general/shared_atat_debris_01.iff": {
+  "nodes": 1,
+  "planets": {
+   "talus": 1
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 1
+  },
+  "node_child_counts": {
+   "0": 1
+  }
+ },
+ "object/static/structure/corellia/shared_corl_tent_small.iff": {
+  "nodes": 42,
+  "planets": {
+   "chandrila": 1,
+   "corellia": 17,
+   "dantooine": 5,
+   "dathomir": 1,
+   "lok": 3,
+   "naboo": 1,
+   "rori": 3,
+   "talus": 11
+  },
+  "node_float_mode": "64.0",
+  "node_crcs": {
+   "0": 42
+  },
+  "node_child_counts": {
+   "0": 42
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_small_mudhut.iff": {
+  "nodes": 62,
+  "planets": {
+   "dantooine": 39,
+   "dathomir": 6,
+   "endor": 9,
+   "mandalore": 7,
+   "yavin4": 1
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 62
+  },
+  "node_child_counts": {
+   "0": 62
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_fire_pit.iff": {
+  "nodes": 50,
+  "planets": {
+   "dantooine": 12,
+   "dathomir": 2,
+   "endor": 1,
+   "kashyyyk": 10,
+   "kashyyyk_hunting": 8,
+   "kashyyyk_main-orig": 2,
+   "kashyyyk_main": 2,
+   "lok": 2,
+   "mandalore": 3,
+   "naboo": 2,
+   "taanab": 2,
+   "talus": 3,
+   "tatooine": 1
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 50
+  },
+  "node_child_counts": {
+   "0": 50
+  }
+ },
+ "object/static/structure/general/shared_campfire_burnt.iff": {
+  "nodes": 28,
+  "planets": {
+   "dantooine": 3,
+   "dathomir": 6,
+   "endor": 2,
+   "kashyyyk": 2,
+   "kashyyyk_main-orig": 2,
+   "kashyyyk_main": 2,
+   "lok": 1,
+   "naboo": 4,
+   "rori": 2,
+   "talus": 2,
+   "tatooine": 2
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 28
+  },
+  "node_child_counts": {
+   "0": 28
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_totem_pole.iff": {
+  "nodes": 76,
+  "planets": {
+   "corellia": 1,
+   "dantooine": 66,
+   "endor": 1,
+   "talus": 2,
+   "yavin4": 6
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 76
+  },
+  "node_child_counts": {
+   "0": 76
+  }
+ },
+ "object/static/structure/general/shared_camp_cot_s01.iff": {
+  "nodes": 27,
+  "planets": {
+   "dathomir": 10,
+   "kashyyyk": 3,
+   "kashyyyk_main-orig": 3,
+   "kashyyyk_main": 3,
+   "naboo": 2,
+   "rori": 5,
+   "talus": 1
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 27
+  },
+  "node_child_counts": {
+   "0": 27
+  }
+ },
+ "object/static/structure/general/shared_palette_supply_03.iff": {
+  "nodes": 0,
+  "planets": {},
+  "node_float_mode": null,
+  "node_crcs": {},
+  "node_child_counts": {}
+ },
+ "object/static/structure/tatooine/shared_debris_tatt_drum_dented_1.iff": {
+  "nodes": 505,
+  "planets": {
+   "corellia": 12,
+   "dantooine": 74,
+   "dathomir": 18,
+   "endor": 20,
+   "kashyyyk": 29,
+   "kashyyyk_dead_forest": 2,
+   "kashyyyk_hunting": 26,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1,
+   "lok": 41,
+   "naboo": 22,
+   "rori": 14,
+   "talus": 72,
+   "tatooine": 165,
+   "yavin4": 8
+  },
+  "node_float_mode": "32.0",
+  "node_crcs": {
+   "0": 505
+  },
+  "node_child_counts": {
+   "0": 505
+  }
+ },
+ "object/static/structure/general/shared_escape_pod_door.iff": {
+  "nodes": 15,
+  "planets": {
+   "corellia": 2,
+   "dathomir": 2,
+   "endor": 1,
+   "lok": 1,
+   "naboo": 4,
+   "rori": 2,
+   "talus": 1,
+   "tatooine": 2
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 15
+  },
+  "node_child_counts": {
+   "0": 15
+  }
+ },
+ "object/static/structure/general/shared_landing_pad_transport.iff": {
+  "nodes": 0,
+  "planets": {},
+  "node_float_mode": null,
+  "node_crcs": {},
+  "node_child_counts": {}
+ },
+ "object/static/structure/general/shared_allum_mine_support_s01.iff": {
+  "nodes": 10,
+  "planets": {
+   "mustafar se": 3,
+   "taanab": 7
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 10
+  },
+  "node_child_counts": {
+   "0": 10
+  }
+ },
+ "object/static/structure/tatooine/shared_shed_junkshop_watto.iff": {
+  "nodes": 68,
+  "planets": {
+   "corellia": 1,
+   "dantooine": 2,
+   "dathomir": 1,
+   "jakku": 4,
+   "lok": 14,
+   "taanab": 2,
+   "talus": 1,
+   "tatooine": 43
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 68
+  },
+  "node_child_counts": {
+   "0": 68
+  }
+ },
+ "object/building/military/shared_military_base_shed_imperial_barracks_s01.iff": {
+  "nodes": 16,
+  "planets": {
+   "corellia": 7,
+   "lok": 2,
+   "naboo": 1,
+   "rori": 2,
+   "talus": 2,
+   "tatooine": 1,
+   "yavin4": 1
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "4052750128": 16
+  },
+  "node_child_counts": {
+   "6": 16
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_skull_bol.iff": {
+  "nodes": 35,
+  "planets": {
+   "dantooine": 18,
+   "dathomir": 7,
+   "endor": 1,
+   "kashyyyk": 1,
+   "kashyyyk_hunting": 1,
+   "mandalore": 1,
+   "naboo": 2,
+   "talus": 2,
+   "tatooine": 2
+  },
+  "node_float_mode": "128.0",
+  "node_crcs": {
+   "0": 35
+  },
+  "node_child_counts": {
+   "0": 35
+  }
+ },
+ "object/static/structure/general/shared_poi_all_construction_stone_pile.iff": {
+  "nodes": 6,
+  "planets": {
+   "taanab": 6
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 6
+  },
+  "node_child_counts": {
+   "0": 6
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_mud_oven.iff": {
+  "nodes": 17,
+  "planets": {
+   "dantooine": 9,
+   "dathomir": 4,
+   "endor": 2,
+   "mandalore": 1,
+   "yavin4": 1
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 17
+  },
+  "node_child_counts": {
+   "0": 17
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_cooking_stone.iff": {
+  "nodes": 33,
+  "planets": {
+   "dantooine": 22,
+   "dathomir": 2,
+   "endor": 3,
+   "kashyyyk": 2,
+   "kashyyyk_hunting": 1,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1,
+   "tatooine": 1
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 33
+  },
+  "node_child_counts": {
+   "0": 33
+  }
+ },
+ "object/static/structure/general/shared_palette_supply_05.iff": {
+  "nodes": 0,
+  "planets": {},
+  "node_float_mode": null,
+  "node_crcs": {},
+  "node_child_counts": {}
+ },
+ "object/static/structure/dantooine/shared_dant_rack_spears.iff": {
+  "nodes": 124,
+  "planets": {
+   "corellia": 8,
+   "dantooine": 42,
+   "dathomir": 10,
+   "endor": 15,
+   "kashyyyk": 17,
+   "kashyyyk_dead_forest": 4,
+   "kashyyyk_hunting": 13,
+   "mandalore": 1,
+   "naboo": 7,
+   "talus": 1,
+   "tatooine": 5,
+   "yavin4": 1
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 124
+  },
+  "node_child_counts": {
+   "0": 124
+  }
+ },
+ "object/static/structure/general/shared_atst_debris_01.iff": {
+  "nodes": 10,
+  "planets": {
+   "dathomir": 1,
+   "jakku": 1,
+   "kashyyyk": 1,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1,
+   "lok": 1,
+   "talus": 2,
+   "tatooine": 1,
+   "yavin4": 1
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 10
+  },
+  "node_child_counts": {
+   "0": 10
+  }
+ },
+ "object/building/general/shared_cave_07_flatland_s02.iff": {
+  "nodes": 0,
+  "planets": {},
+  "node_float_mode": null,
+  "node_crcs": {},
+  "node_child_counts": {}
+ },
+ "object/static/structure/general/shared_palette_supply_04.iff": {
+  "nodes": 9,
+  "planets": {
+   "kaas": 9
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 9
+  },
+  "node_child_counts": {
+   "0": 9
+  }
+ },
+ "object/building/endor/shared_endor_lake_platform.iff": {
+  "nodes": 41,
+  "planets": {
+   "dantooine": 1,
+   "endor": 36,
+   "rori": 2,
+   "tatooine": 2
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 41
+  },
+  "node_child_counts": {
+   "0": 41
+  }
+ },
+ "object/static/structure/general/shared_streetlamp_medium_style_01.iff": {
+  "nodes": 87,
+  "planets": {
+   "corellia": 7,
+   "dantooine": 5,
+   "dathomir": 3,
+   "lok": 31,
+   "naboo": 3,
+   "rori": 7,
+   "taanab": 5,
+   "talus": 13,
+   "tatooine": 7,
+   "yavin4": 6
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 87
+  },
+  "node_child_counts": {
+   "0": 87
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_hide_tanning_s01.iff": {
+  "nodes": 73,
+  "planets": {
+   "dantooine": 20,
+   "dathomir": 1,
+   "endor": 5,
+   "kashyyyk": 21,
+   "kashyyyk_dead_forest": 5,
+   "kashyyyk_hunting": 15,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1,
+   "mandalore": 1,
+   "rori": 2,
+   "taanab": 1
+  },
+  "node_float_mode": "0.0",
+  "node_crcs": {
+   "0": 73
+  },
+  "node_child_counts": {
+   "0": 73
+  }
+ },
+ "object/static/structure/general/shared_rock_mossy_big_a1.iff": {
+  "nodes": 6,
+  "planets": {
+   "dantooine": 1,
+   "lok": 1,
+   "naboo": 1,
+   "rori": 1,
+   "talus": 2
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 6
+  },
+  "node_child_counts": {
+   "0": 6
+  }
+ },
+ "object/static/structure/general/shared_allum_mine_wall_lamp_s01.iff": {
+  "nodes": 0,
+  "planets": {},
+  "node_float_mode": null,
+  "node_crcs": {},
+  "node_child_counts": {}
+ },
+ "object/static/structure/tatooine/shared_debris_tatt_crate_metal_1.iff": {
+  "nodes": 492,
+  "planets": {
+   "corellia": 39,
+   "dantooine": 41,
+   "dathomir": 31,
+   "endor": 20,
+   "kashyyyk": 22,
+   "kashyyyk_dead_forest": 1,
+   "kashyyyk_hunting": 17,
+   "kashyyyk_main-orig": 4,
+   "kashyyyk_main": 4,
+   "lok": 22,
+   "naboo": 36,
+   "rori": 27,
+   "talus": 35,
+   "tatooine": 182,
+   "yavin4": 11
+  },
+  "node_float_mode": "32.0",
+  "node_crcs": {
+   "0": 492
+  },
+  "node_child_counts": {
+   "0": 492
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_fish_rack.iff": {
+  "nodes": 97,
+  "planets": {
+   "dantooine": 19,
+   "endor": 9,
+   "kashyyyk": 27,
+   "kashyyyk_dead_forest": 6,
+   "kashyyyk_hunting": 16,
+   "kashyyyk_main-orig": 5,
+   "kashyyyk_main": 5,
+   "mandalore": 1,
+   "naboo": 2,
+   "rori": 3,
+   "taanab": 1,
+   "talus": 3
+  },
+  "node_float_mode": "0.0",
+  "node_crcs": {
+   "0": 97
+  },
+  "node_child_counts": {
+   "0": 97
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_large_rock_hut_dest.iff": {
+  "nodes": 6,
+  "planets": {
+   "kashyyyk": 3,
+   "kashyyyk_hunting": 3
+  },
+  "node_float_mode": "0.0",
+  "node_crcs": {
+   "0": 6
+  },
+  "node_child_counts": {
+   "0": 6
+  }
+ },
+ "object/static/structure/tatooine/shared_debris_tatt_drum_storage_2.iff": {
+  "nodes": 312,
+  "planets": {
+   "corellia": 13,
+   "dantooine": 8,
+   "dathomir": 23,
+   "endor": 6,
+   "kashyyyk": 3,
+   "kashyyyk_hunting": 2,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1,
+   "lok": 2,
+   "naboo": 12,
+   "rori": 7,
+   "talus": 17,
+   "tatooine": 210,
+   "yavin4": 7
+  },
+  "node_float_mode": "32.0",
+  "node_crcs": {
+   "0": 312
+  },
+  "node_child_counts": {
+   "0": 312
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_fence_8m.iff": {
+  "nodes": 632,
+  "planets": {
+   "dantooine": 151,
+   "dathomir": 42,
+   "endor": 17,
+   "kashyyyk": 181,
+   "kashyyyk_hunting": 176,
+   "kashyyyk_main-orig": 5,
+   "kashyyyk_main": 5,
+   "lok": 14,
+   "naboo": 11,
+   "rori": 6,
+   "talus": 1,
+   "tatooine": 10,
+   "yavin4": 13
+  },
+  "node_float_mode": "0.0",
+  "node_crcs": {
+   "0": 632
+  },
+  "node_child_counts": {
+   "0": 632
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_hide_tanning_s02.iff": {
+  "nodes": 49,
+  "planets": {
+   "dantooine": 16,
+   "dathomir": 2,
+   "endor": 1,
+   "kashyyyk": 13,
+   "kashyyyk_dead_forest": 4,
+   "kashyyyk_hunting": 8,
+   "kashyyyk_main-orig": 1,
+   "kashyyyk_main": 1,
+   "naboo": 1,
+   "rori": 1,
+   "taanab": 1
+  },
+  "node_float_mode": "0.0",
+  "node_crcs": {
+   "0": 49
+  },
+  "node_child_counts": {
+   "0": 49
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_jedi_wall_2.iff": {
+  "nodes": 48,
+  "planets": {
+   "dantooine": 27,
+   "kaas": 10,
+   "naboo": 1,
+   "talus": 2,
+   "yavin4": 8
+  },
+  "node_float_mode": "256.0",
+  "node_crcs": {
+   "0": 48
+  },
+  "node_child_counts": {
+   "0": 48
+  }
+ },
+ "object/static/structure/dantooine/shared_dant_large_mudhut.iff": {
+  "nodes": 12,
+  "planets": {
+   "dantooine": 9,
+   "endor": 2,
+   "mandalore": 1
+  },
+  "node_float_mode": "512.0",
+  "node_crcs": {
+   "0": 12
+  },
+  "node_child_counts": {
+   "0": 12
+  }
+ },
+ "object/static/structure/general/shared_escape_pod.iff": {
+  "nodes": 18,
+  "planets": {
+   "corellia": 2,
+   "dathomir": 1,
+   "endor": 1,
+   "lok": 1,
+   "mustafar se": 1,
+   "naboo": 3,
+   "rori": 4,
+   "talus": 1,
+   "tatooine": 4
+  },
+  "node_float_mode": "200.0",
+  "node_crcs": {
+   "0": 18
+  },
+  "node_child_counts": {
+   "0": 18
+  }
+ }
+}

@@ -1,0 +1,2524 @@
+{
+ "objects": 295,
+ "ids": [
+  6900087,
+  6900461
+ ],
+ "templates": 89,
+ "template_problems": [],
+ "overlaps": [],
+ "non_poi1_objects_inside_crater_burn_zones": [],
+ "static_ground_tilt_over_2_5_m": [
+  {
+   "poi": 13,
+   "role": "boulder",
+   "template": "shared_rock_mossy_big.iff",
+   "ground_spread_under_footprint_m": 2.8
+  },
+  {
+   "poi": 13,
+   "role": "boulder",
+   "template": "shared_rock_mossy_big_a1.iff",
+   "ground_spread_under_footprint_m": 2.7
+  }
+ ],
+ "objects_with_ground_at_or_under_water": [],
+ "objects_inside_no_build_circles": {
+  "1 / Academy ruins": 20,
+  "2 / Academy ruins": 6,
+  "3 / Academy ruins": 45,
+  "11 / Knossa (city r 200 inside)": 25,
+  "12 / Academy ruins": 1,
+  "14 / west foothill cave": 10
+ },
+ "building_ground_fit": [
+  {
+   "poi": 2,
+   "role": "hidden sanctuary (cave, 12 cells)",
+   "template": "shared_cave_06_flatland_s01_damprock.iff",
+   "origin_z": 167.01,
+   "ground_minus_origin_min": 3.5,
+   "ground_minus_origin_max": 3.9,
+   "mesh_height_range_above_origin": [
+    -2.53,
+    28.9
+   ],
+   "verdict": "fits"
+  },
+  {
+   "poi": 3,
+   "role": "guard tower",
+   "template": "shared_mun_all_military_tower_impl_guard_s01.iff",
+   "origin_z": 171.38,
+   "ground_minus_origin_min": -0.0,
+   "ground_minus_origin_max": 0.0,
+   "mesh_height_range_above_origin": [
+    -3.0,
+    12.25
+   ],
+   "verdict": "fits"
+  },
+  {
+   "poi": 3,
+   "role": "guard tower",
+   "template": "shared_mun_all_military_tower_impl_guard_s01.iff",
+   "origin_z": 170.94,
+   "ground_minus_origin_min": -0.0,
+   "ground_minus_origin_max": 0.0,
+   "mesh_height_range_above_origin": [
+    -3.0,
+    12.25
+   ],
+   "verdict": "fits"
+  },
+  {
+   "poi": 3,
+   "role": "commander's quarters",
+   "template": "shared_military_base_shed_imperial_style_officer_s01.iff",
+   "origin_z": 171.28,
+   "ground_minus_origin_min": -0.1,
+   "ground_minus_origin_max": 0.1,
+   "mesh_height_range_above_origin": [
+    0.0,
+    5.5
+   ],
+   "verdict": "fits"
+  },
+  {
+   "poi": 3,
+   "role": "barracks 1",
+   "template": "shared_military_base_shed_imperial_barracks_s01.iff",
+   "origin_z": 171.05,
+   "ground_minus_origin_min": -0.2,
+   "ground_minus_origin_max": 0.1,
+   "mesh_height_range_above_origin": [
+    0.0,
+    5.5
+   ],
+   "verdict": "fits"
+  },
+  {
+   "poi": 3,
+   "role": "barracks 2",
+   "template": "shared_military_base_shed_imperial_barracks_s01.iff",
+   "origin_z": 171.28,
+   "ground_minus_origin_min": -0.1,
+   "ground_minus_origin_max": 0.1,
+   "mesh_height_range_above_origin": [
+    0.0,
+    5.5
+   ],
+   "verdict": "fits"
+  },
+  {
+   "poi": 4,
+   "role": "Great Library vault (cave, 12 cells)",
+   "template": "shared_cave_07_flatland_s02.iff",
+   "origin_z": 38.71,
+   "ground_minus_origin_min": 3.9,
+   "ground_minus_origin_max": 6.8,
+   "mesh_height_range_above_origin": [
+    -2.53,
+    28.9
+   ],
+   "verdict": "fits"
+  },
+  {
+   "poi": 9,
+   "role": "kathracite adit (cave, 30 cells)",
+   "template": "shared_cave_08_flatland_s03.iff",
+   "origin_z": 41.23,
+   "ground_minus_origin_min": 3.5,
+   "ground_minus_origin_max": 38.2,
+   "mesh_height_range_above_origin": [
+    -2.53,
+    28.9
+   ],
+   "verdict": "ground above the mesh top"
+  },
+  {
+   "poi": 11,
+   "role": "market tent (with interior)",
+   "template": "shared_merchant_tent_all_s01.iff",
+   "origin_z": 50.3,
+   "ground_minus_origin_min": -0.0,
+   "ground_minus_origin_max": -0.0,
+   "mesh_height_range_above_origin": [
+    -3.07,
+    5.74
+   ],
+   "verdict": "fits"
+  },
+  {
+   "poi": 11,
+   "role": "market tent (with interior)",
+   "template": "shared_merchant_tent_all_s01.iff",
+   "origin_z": 50.3,
+   "ground_minus_origin_min": -0.0,
+   "ground_minus_origin_max": -0.0,
+   "mesh_height_range_above_origin": [
+    -3.07,
+    5.74
+   ],
+   "verdict": "fits"
+  },
+  {
+   "poi": 11,
+   "role": "market tent (with interior)",
+   "template": "shared_merchant_tent_all_s01.iff",
+   "origin_z": 50.3,
+   "ground_minus_origin_min": -0.0,
+   "ground_minus_origin_max": -0.0,
+   "mesh_height_range_above_origin": [
+    -3.07,
+    5.74
+   ],
+   "verdict": "fits"
+  },
+  {
+   "poi": 11,
+   "role": "cantina",
+   "template": "shared_military_base_shed_imperial_style_cantina_s01.iff",
+   "origin_z": 50.3,
+   "ground_minus_origin_min": -0.0,
+   "ground_minus_origin_max": 0.0,
+   "mesh_height_range_above_origin": [
+    0.0,
+    5.5
+   ],
+   "verdict": "fits"
+  }
+ ],
+ "templates_table": [
+  {
+   "template": "object/building/endor/shared_endor_lake_platform.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    16.7,
+    2.4,
+    16.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 41,
+   "stock_snapshot_planets": {
+    "dantooine": 1,
+    "endor": 36,
+    "rori": 2,
+    "tatooine": 2
+   },
+   "uses": 2,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/building/endor/shared_endor_lake_walkway_straight.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    8.7,
+    12.4,
+    16.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 60,
+   "stock_snapshot_planets": {
+    "dantooine": 9,
+    "endor": 34,
+    "kashyyyk": 7,
+    "kashyyyk_hunting": 7,
+    "rori": 3
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/building/general/shared_cave_06_flatland_s01_damprock.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    56.4,
+    31.4,
+    78.8
+   ],
+   "portal_layout": "appearance/thm_all_cave_flatland_s01_damprock.pob",
+   "cells": 12,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 0,
+   "stock_snapshot_planets": {},
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/building/general/shared_cave_07_flatland_s02.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    56.4,
+    31.4,
+    78.8
+   ],
+   "portal_layout": "appearance/thm_all_cave_flatland_s02.pob",
+   "cells": 12,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 0,
+   "stock_snapshot_planets": {},
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/building/general/shared_cave_08_flatland_s03.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    56.4,
+    31.4,
+    78.8
+   ],
+   "portal_layout": "appearance/thm_all_cave_flatland_s03.pob",
+   "cells": 30,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 1,
+   "stock_snapshot_planets": {
+    "moraband": 1
+   },
+   "uses": 1,
+   "building_node_vs_stock": {
+    "stock_crcs": [
+     "1503435334"
+    ],
+    "stock_child_counts": [
+     "29"
+    ],
+    "ours_crc": 1503435334,
+    "ours_children": 29,
+    "match": true
+   }
+  },
+  {
+   "template": "object/building/general/shared_merchant_tent_all_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    9.1,
+    8.8,
+    10.7
+   ],
+   "portal_layout": "appearance/ply_all_merchant_tent_s01.pob",
+   "cells": 2,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 10,
+   "stock_snapshot_planets": {
+    "hutta": 10
+   },
+   "uses": 3,
+   "building_node_vs_stock": {
+    "stock_crcs": [
+     "2674264926"
+    ],
+    "stock_child_counts": [
+     "1"
+    ],
+    "ours_crc": 2674264926,
+    "ours_children": 1,
+    "match": true
+   }
+  },
+  {
+   "template": "object/building/military/shared_military_base_shed_imperial_barracks_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    15.0,
+    5.5,
+    15.0
+   ],
+   "portal_layout": "appearance/mun_all_military_storage_shed_impl_s01.pob",
+   "cells": 7,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 16,
+   "stock_snapshot_planets": {
+    "corellia": 7,
+    "lok": 2,
+    "naboo": 1,
+    "rori": 2,
+    "talus": 2,
+    "tatooine": 1,
+    "yavin4": 1
+   },
+   "uses": 2,
+   "building_node_vs_stock": {
+    "stock_crcs": [
+     "4052750128"
+    ],
+    "stock_child_counts": [
+     "6"
+    ],
+    "ours_crc": 4052750128,
+    "ours_children": 6,
+    "match": true
+   }
+  },
+  {
+   "template": "object/building/military/shared_military_base_shed_imperial_style_cantina_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    15.0,
+    5.5,
+    15.0
+   ],
+   "portal_layout": "appearance/mun_all_military_storage_shed_impl_s01.pob",
+   "cells": 7,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 3,
+   "stock_snapshot_planets": {
+    "dantooine": 1,
+    "talus": 1,
+    "yavin4": 1
+   },
+   "uses": 1,
+   "building_node_vs_stock": {
+    "stock_crcs": [
+     "4052750128"
+    ],
+    "stock_child_counts": [
+     "6"
+    ],
+    "ours_crc": 4052750128,
+    "ours_children": 6,
+    "match": true
+   }
+  },
+  {
+   "template": "object/building/military/shared_military_base_shed_imperial_style_officer_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    15.0,
+    5.5,
+    15.0
+   ],
+   "portal_layout": "appearance/mun_all_military_storage_shed_impl_s01.pob",
+   "cells": 7,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 8,
+   "stock_snapshot_planets": {
+    "corellia": 3,
+    "lok": 1,
+    "naboo": 1,
+    "rori": 1,
+    "talus": 1,
+    "tatooine": 1
+   },
+   "uses": 1,
+   "building_node_vs_stock": {
+    "stock_crcs": [
+     "4052750128"
+    ],
+    "stock_child_counts": [
+     "6"
+    ],
+    "ours_crc": 4052750128,
+    "ours_children": 6,
+    "match": true
+   }
+  },
+  {
+   "template": "object/building/military/shared_mun_all_military_tower_impl_guard_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    6.0,
+    15.2,
+    6.0
+   ],
+   "portal_layout": "appearance/mun_all_military_tower_impl_guard_s01.pob",
+   "cells": 2,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 76,
+   "stock_snapshot_planets": {
+    "corellia": 2,
+    "coruscant": 19,
+    "dantooine": 4,
+    "dathomir": 1,
+    "jakku": 9,
+    "kashyyyk": 2,
+    "kashyyyk_main-orig": 2,
+    "kashyyyk_main": 2,
+    "lok": 4,
+    "naboo": 8,
+    "rori": 4,
+    "talus": 9,
+    "yavin4": 10
+   },
+   "uses": 2,
+   "building_node_vs_stock": {
+    "stock_crcs": [
+     "3851682719"
+    ],
+    "stock_child_counts": [
+     "1"
+    ],
+    "ours_crc": 3851682719,
+    "ours_children": 1,
+    "match": true
+   }
+  },
+  {
+   "template": "object/static/item/shared_item_basket_closed.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.0,
+    0.5,
+    1.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 159,
+   "stock_snapshot_planets": {
+    "corellia": 3,
+    "dantooine": 27,
+    "dathomir": 1,
+    "endor": 57,
+    "kashyyyk": 27,
+    "kashyyyk_dead_forest": 23,
+    "kashyyyk_main-orig": 4,
+    "kashyyyk_main": 4,
+    "naboo": 1,
+    "rori": 1,
+    "talus": 1,
+    "tatooine": 8,
+    "yavin4": 2
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/item/shared_item_crate_spice.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    0.9,
+    0.9,
+    0.7
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 84,
+   "stock_snapshot_planets": {
+    "corellia": 8,
+    "dantooine": 13,
+    "dathomir": 4,
+    "endor": 7,
+    "kashyyyk": 2,
+    "kashyyyk_hunting": 1,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1,
+    "lok": 7,
+    "naboo": 9,
+    "rori": 3,
+    "talus": 14,
+    "tatooine": 10,
+    "yavin4": 4
+   },
+   "uses": 4,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/corellia/shared_corl_tent_hut_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    12.0,
+    6.5,
+    10.4
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 3,
+   "stock_snapshot_planets": {
+    "chandrila": 1,
+    "lok": 2
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/corellia/shared_corl_tent_large.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    10.9,
+    5.2,
+    10.6
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 10,
+   "stock_snapshot_planets": {
+    "corellia": 2,
+    "dathomir": 2,
+    "mandalore": 6
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/corellia/shared_corl_tent_med.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    6.5,
+    4.1,
+    9.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 13,
+   "stock_snapshot_planets": {
+    "corellia": 5,
+    "lok": 2,
+    "talus": 5,
+    "yavin4": 1
+   },
+   "uses": 8,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/corellia/shared_corl_tent_small.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    4.9,
+    3.7,
+    5.3
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 42,
+   "stock_snapshot_planets": {
+    "chandrila": 1,
+    "corellia": 17,
+    "dantooine": 5,
+    "dathomir": 1,
+    "lok": 3,
+    "naboo": 1,
+    "rori": 3,
+    "talus": 11
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_boundary_post.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.3,
+    4.6,
+    1.2
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 94,
+   "stock_snapshot_planets": {
+    "corellia": 2,
+    "dantooine": 59,
+    "dathomir": 12,
+    "endor": 8,
+    "lok": 2,
+    "naboo": 2,
+    "talus": 1,
+    "tatooine": 1,
+    "yavin4": 7
+   },
+   "uses": 2,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_cooking_stone.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.5,
+    2.0,
+    1.2
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 33,
+   "stock_snapshot_planets": {
+    "dantooine": 22,
+    "dathomir": 2,
+    "endor": 3,
+    "kashyyyk": 2,
+    "kashyyyk_hunting": 1,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1,
+    "tatooine": 1
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_fence_8m.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    8.0,
+    3.0,
+    1.1
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 632,
+   "stock_snapshot_planets": {
+    "dantooine": 151,
+    "dathomir": 42,
+    "endor": 17,
+    "kashyyyk": 181,
+    "kashyyyk_hunting": 176,
+    "kashyyyk_main-orig": 5,
+    "kashyyyk_main": 5,
+    "lok": 14,
+    "naboo": 11,
+    "rori": 6,
+    "talus": 1,
+    "tatooine": 10,
+    "yavin4": 13
+   },
+   "uses": 12,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_fire_pit.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    3.5,
+    2.5,
+    3.1
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 50,
+   "stock_snapshot_planets": {
+    "dantooine": 12,
+    "dathomir": 2,
+    "endor": 1,
+    "kashyyyk": 10,
+    "kashyyyk_hunting": 8,
+    "kashyyyk_main-orig": 2,
+    "kashyyyk_main": 2,
+    "lok": 2,
+    "mandalore": 3,
+    "naboo": 2,
+    "taanab": 2,
+    "talus": 3,
+    "tatooine": 1
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_fish_rack.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.4,
+    1.8,
+    0.6
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 97,
+   "stock_snapshot_planets": {
+    "dantooine": 19,
+    "endor": 9,
+    "kashyyyk": 27,
+    "kashyyyk_dead_forest": 6,
+    "kashyyyk_hunting": 16,
+    "kashyyyk_main-orig": 5,
+    "kashyyyk_main": 5,
+    "mandalore": 1,
+    "naboo": 2,
+    "rori": 3,
+    "taanab": 1,
+    "talus": 3
+   },
+   "uses": 4,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_hide_tanning_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.4,
+    1.8,
+    0.4
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 73,
+   "stock_snapshot_planets": {
+    "dantooine": 20,
+    "dathomir": 1,
+    "endor": 5,
+    "kashyyyk": 21,
+    "kashyyyk_dead_forest": 5,
+    "kashyyyk_hunting": 15,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1,
+    "mandalore": 1,
+    "rori": 2,
+    "taanab": 1
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_hide_tanning_s02.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.4,
+    1.8,
+    0.4
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 49,
+   "stock_snapshot_planets": {
+    "dantooine": 16,
+    "dathomir": 2,
+    "endor": 1,
+    "kashyyyk": 13,
+    "kashyyyk_dead_forest": 4,
+    "kashyyyk_hunting": 8,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1,
+    "naboo": 1,
+    "rori": 1,
+    "taanab": 1
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.0,
+    15.5,
+    2.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 46,
+   "stock_snapshot_planets": {
+    "dantooine": 29,
+    "endor": 1,
+    "kaas": 9,
+    "yavin4": 7
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_base.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.0,
+    3.4,
+    2.1
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 122,
+   "stock_snapshot_planets": {
+    "corellia": 10,
+    "dantooine": 23,
+    "dathomir": 10,
+    "endor": 10,
+    "kaas": 10,
+    "lok": 10,
+    "naboo": 9,
+    "rori": 10,
+    "talus": 9,
+    "tatooine": 10,
+    "yavin4": 11
+   },
+   "uses": 7,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_fallen.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.8,
+    0.9,
+    0.9
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 81,
+   "stock_snapshot_planets": {
+    "corellia": 1,
+    "dantooine": 38,
+    "kaas": 20,
+    "naboo": 3,
+    "talus": 3,
+    "yavin4": 16
+   },
+   "uses": 8,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_med.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.0,
+    9.8,
+    2.1
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 79,
+   "stock_snapshot_planets": {
+    "corellia": 1,
+    "dantooine": 42,
+    "endor": 1,
+    "kaas": 16,
+    "talus": 4,
+    "yavin4": 15
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_jedi_temple_pillar_sm.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.0,
+    4.7,
+    2.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 133,
+   "stock_snapshot_planets": {
+    "corellia": 10,
+    "dantooine": 37,
+    "dathomir": 10,
+    "endor": 10,
+    "kaas": 5,
+    "lok": 10,
+    "naboo": 9,
+    "rori": 10,
+    "talus": 9,
+    "tatooine": 10,
+    "yavin4": 13
+   },
+   "uses": 24,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_jedi_wall_1.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.9,
+    4.1,
+    16.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 37,
+   "stock_snapshot_planets": {
+    "dantooine": 20,
+    "kaas": 7,
+    "naboo": 1,
+    "talus": 3,
+    "yavin4": 6
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_jedi_wall_2.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.7,
+    4.2,
+    8.8
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 48,
+   "stock_snapshot_planets": {
+    "dantooine": 27,
+    "kaas": 10,
+    "naboo": 1,
+    "talus": 2,
+    "yavin4": 8
+   },
+   "uses": 2,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_large_mudhut.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    16.2,
+    7.9,
+    16.7
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 12,
+   "stock_snapshot_planets": {
+    "dantooine": 9,
+    "endor": 2,
+    "mandalore": 1
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_large_rock_hut.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    11.4,
+    7.9,
+    13.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 40,
+   "stock_snapshot_planets": {
+    "corellia": 2,
+    "dantooine": 24,
+    "dathomir": 1,
+    "endor": 8,
+    "lok": 1,
+    "talus": 1,
+    "yavin4": 3
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_large_rock_hut_dest.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    19.4,
+    6.4,
+    19.9
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 6,
+   "stock_snapshot_planets": {
+    "kashyyyk": 3,
+    "kashyyyk_hunting": 3
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_mud_oven.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    4.3,
+    2.6,
+    5.1
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 17,
+   "stock_snapshot_planets": {
+    "dantooine": 9,
+    "dathomir": 4,
+    "endor": 2,
+    "mandalore": 1,
+    "yavin4": 1
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_rack_spears.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.0,
+    2.3,
+    0.4
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 124,
+   "stock_snapshot_planets": {
+    "corellia": 8,
+    "dantooine": 42,
+    "dathomir": 10,
+    "endor": 15,
+    "kashyyyk": 17,
+    "kashyyyk_dead_forest": 4,
+    "kashyyyk_hunting": 13,
+    "mandalore": 1,
+    "naboo": 7,
+    "talus": 1,
+    "tatooine": 5,
+    "yavin4": 1
+   },
+   "uses": 5,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_skull_bol.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.4,
+    0.6,
+    1.6
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 35,
+   "stock_snapshot_planets": {
+    "dantooine": 18,
+    "dathomir": 7,
+    "endor": 1,
+    "kashyyyk": 1,
+    "kashyyyk_hunting": 1,
+    "mandalore": 1,
+    "naboo": 2,
+    "talus": 2,
+    "tatooine": 2
+   },
+   "uses": 4,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_skull_lizard.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    0.3,
+    0.5,
+    0.6
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 30,
+   "stock_snapshot_planets": {
+    "dantooine": 19,
+    "dathomir": 3,
+    "lok": 1,
+    "tatooine": 2,
+    "yavin4": 5
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_skull_thune.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.9,
+    1.3,
+    1.9
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 20,
+   "stock_snapshot_planets": {
+    "dantooine": 14,
+    "dathomir": 2,
+    "kashyyyk": 1,
+    "kashyyyk_hunting": 1,
+    "rori": 1,
+    "talus": 1
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_small_mudhut.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    9.4,
+    6.8,
+    11.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 62,
+   "stock_snapshot_planets": {
+    "dantooine": 39,
+    "dathomir": 6,
+    "endor": 9,
+    "mandalore": 7,
+    "yavin4": 1
+   },
+   "uses": 5,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/dantooine/shared_dant_totem_pole.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.6,
+    7.0,
+    2.3
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 76,
+   "stock_snapshot_planets": {
+    "corellia": 1,
+    "dantooine": 66,
+    "endor": 1,
+    "talus": 2,
+    "yavin4": 6
+   },
+   "uses": 11,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_allum_mine_bucket_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.7,
+    1.7,
+    2.3
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 37,
+   "stock_snapshot_planets": {
+    "mustafar se": 15,
+    "taanab": 22
+   },
+   "uses": 5,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_allum_mine_car_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.3,
+    2.0,
+    3.8
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 4,
+   "stock_snapshot_planets": {
+    "mustafar se": 4
+   },
+   "uses": 5,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_allum_mine_device_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    6.0,
+    2.9,
+    2.5
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 8,
+   "stock_snapshot_planets": {
+    "kashyyyk": 3,
+    "kashyyyk_hunting": 3,
+    "taanab": 2
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_allum_mine_pipes_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.7,
+    5.5,
+    10.2
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 5,
+   "stock_snapshot_planets": {
+    "kashyyyk": 2,
+    "kashyyyk_hunting": 1,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_allum_mine_support_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.1,
+    1.9,
+    1.2
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 10,
+   "stock_snapshot_planets": {
+    "mustafar se": 3,
+    "taanab": 7
+   },
+   "uses": 4,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_allum_mine_wall_lamp_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.0,
+    1.0,
+    0.1
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 0,
+   "stock_snapshot_planets": {},
+   "uses": 2,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_atat_debris_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    6.5,
+    4.1,
+    11.4
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 1,
+   "stock_snapshot_planets": {
+    "talus": 1
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_atat_debris_02.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.0,
+    0.7,
+    4.7
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 4,
+   "stock_snapshot_planets": {
+    "kashyyyk": 1,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1,
+    "talus": 1
+   },
+   "uses": 2,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_atst_debris_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    3.5,
+    1.7,
+    3.9
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 10,
+   "stock_snapshot_planets": {
+    "dathomir": 1,
+    "jakku": 1,
+    "kashyyyk": 1,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1,
+    "lok": 1,
+    "talus": 2,
+    "tatooine": 1,
+    "yavin4": 1
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_banner_imperial_style_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.2,
+    4.4,
+    0.5
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 105,
+   "stock_snapshot_planets": {
+    "corellia": 2,
+    "coruscant": 2,
+    "dantooine": 13,
+    "dathomir": 4,
+    "endor": 4,
+    "jakku": 2,
+    "kashyyyk": 4,
+    "kashyyyk_dead_forest": 3,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1,
+    "lok": 12,
+    "naboo": 4,
+    "rori": 10,
+    "talus": 16,
+    "tatooine": 22,
+    "yavin4": 5
+   },
+   "uses": 4,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_camp_cot_s01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.0,
+    0.5,
+    0.9
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 27,
+   "stock_snapshot_planets": {
+    "dathomir": 10,
+    "kashyyyk": 3,
+    "kashyyyk_main-orig": 3,
+    "kashyyyk_main": 3,
+    "naboo": 2,
+    "rori": 5,
+    "talus": 1
+   },
+   "uses": 5,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_campfire_burnt.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.2,
+    0.5,
+    1.2
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 28,
+   "stock_snapshot_planets": {
+    "dantooine": 3,
+    "dathomir": 6,
+    "endor": 2,
+    "kashyyyk": 2,
+    "kashyyyk_main-orig": 2,
+    "kashyyyk_main": 2,
+    "lok": 1,
+    "naboo": 4,
+    "rori": 2,
+    "talus": 2,
+    "tatooine": 2
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_campfire_fresh.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.2,
+    0.5,
+    1.2
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 119,
+   "stock_snapshot_planets": {
+    "corellia": 4,
+    "dantooine": 19,
+    "dathomir": 14,
+    "endor": 19,
+    "hoth": 1,
+    "kashyyyk": 17,
+    "kashyyyk_dead_forest": 5,
+    "kashyyyk_hunting": 9,
+    "kashyyyk_main-orig": 3,
+    "kashyyyk_main": 3,
+    "lok": 5,
+    "naboo": 4,
+    "rori": 2,
+    "taanab": 2,
+    "talus": 3,
+    "tatooine": 9
+   },
+   "uses": 5,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_data_terminal_free_s2.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.2,
+    1.9,
+    0.4
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 15,
+   "stock_snapshot_planets": {
+    "corellia": 2,
+    "rori": 1,
+    "talus": 2,
+    "tatooine": 10
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_escape_pod.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    3.9,
+    8.5,
+    3.9
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 18,
+   "stock_snapshot_planets": {
+    "corellia": 2,
+    "dathomir": 1,
+    "endor": 1,
+    "lok": 1,
+    "mustafar se": 1,
+    "naboo": 3,
+    "rori": 4,
+    "talus": 1,
+    "tatooine": 4
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_escape_pod_door.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.7,
+    3.0,
+    0.4
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 15,
+   "stock_snapshot_planets": {
+    "corellia": 2,
+    "dathomir": 2,
+    "endor": 1,
+    "lok": 1,
+    "naboo": 4,
+    "rori": 2,
+    "talus": 1,
+    "tatooine": 2
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_landing_pad_transport.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    46.2,
+    2.7,
+    20.7
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 0,
+   "stock_snapshot_planets": {},
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_palette_supply_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.5,
+    0.1,
+    2.5
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 32,
+   "stock_snapshot_planets": {
+    "dathomir": 1,
+    "endor": 1,
+    "mandalore": 23,
+    "taanab": 6,
+    "yavin4": 1
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_palette_supply_02.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.5,
+    0.1,
+    2.5
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 3,
+   "stock_snapshot_planets": {
+    "dathomir": 1,
+    "endor": 1,
+    "yavin4": 1
+   },
+   "uses": 5,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_palette_supply_03.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.5,
+    0.1,
+    2.5
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 0,
+   "stock_snapshot_planets": {},
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_palette_supply_04.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.5,
+    0.1,
+    2.5
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 9,
+   "stock_snapshot_planets": {
+    "kaas": 9
+   },
+   "uses": 2,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_palette_supply_05.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.5,
+    0.1,
+    2.5
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 0,
+   "stock_snapshot_planets": {},
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_poi_all_construction_metal_pile.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    4.4,
+    1.5,
+    3.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 7,
+   "stock_snapshot_planets": {
+    "kashyyyk": 1,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1,
+    "taanab": 4
+   },
+   "uses": 5,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_poi_all_construction_stone_pile.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    12.5,
+    6.7,
+    14.5
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 6,
+   "stock_snapshot_planets": {
+    "taanab": 6
+   },
+   "uses": 4,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_prp_junk_s5.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.6,
+    3.9,
+    2.3
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 33,
+   "stock_snapshot_planets": {
+    "corellia": 6,
+    "dathomir": 1,
+    "endor": 7,
+    "lok": 3,
+    "mustafar se": 1,
+    "naboo": 2,
+    "rori": 1,
+    "taanab": 1,
+    "talus": 3,
+    "tatooine": 6,
+    "yavin4": 2
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_rock_mossy_big.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    6.2,
+    4.9,
+    6.1
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 7,
+   "stock_snapshot_planets": {
+    "dantooine": 2,
+    "lok": 1,
+    "naboo": 2,
+    "rori": 1,
+    "talus": 1
+   },
+   "uses": 5,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_rock_mossy_big_a1.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    7.1,
+    3.1,
+    7.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 6,
+   "stock_snapshot_planets": {
+    "dantooine": 1,
+    "lok": 1,
+    "naboo": 1,
+    "rori": 1,
+    "talus": 2
+   },
+   "uses": 4,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_skeleton_human_headandbody.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.0,
+    0.2,
+    1.6
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 200,
+   "stock_snapshot_planets": {
+    "corellia": 10,
+    "dantooine": 10,
+    "dathomir": 28,
+    "endor": 11,
+    "jakku": 1,
+    "kashyyyk": 1,
+    "kashyyyk_dead_forest": 1,
+    "lok": 15,
+    "naboo": 32,
+    "rori": 5,
+    "talus": 26,
+    "tatooine": 51,
+    "yavin4": 9
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.3,
+    3.0,
+    0.2
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 87,
+   "stock_snapshot_planets": {
+    "corellia": 7,
+    "dantooine": 5,
+    "dathomir": 3,
+    "lok": 31,
+    "naboo": 3,
+    "rori": 7,
+    "taanab": 5,
+    "talus": 13,
+    "tatooine": 7,
+    "yavin4": 6
+   },
+   "uses": 8,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_tato_cave_rock_large.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.0,
+    2.3,
+    2.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 192,
+   "stock_snapshot_planets": {
+    "corellia": 6,
+    "dantooine": 92,
+    "dathomir": 6,
+    "endor": 31,
+    "lok": 10,
+    "naboo": 3,
+    "talus": 21,
+    "tatooine": 20,
+    "yavin4": 3
+   },
+   "uses": 4,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_transport_debris_02.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    16.0,
+    6.0,
+    21.2
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 5,
+   "stock_snapshot_planets": {
+    "dathomir": 1,
+    "hoth": 1,
+    "jakku": 1,
+    "kaas": 1,
+    "rori": 1
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/general/shared_xwing.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    13.0,
+    3.3,
+    15.6
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 5,
+   "stock_snapshot_planets": {
+    "chandrila": 4,
+    "jakku": 1
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/military/shared_bunker_crate_style_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    3.8,
+    3.4,
+    3.4
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 26,
+   "stock_snapshot_planets": {
+    "coruscant": 22,
+    "talus": 2,
+    "tatooine": 2
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/military/shared_military_column_strong_imperial_style_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    2.7,
+    7.4,
+    2.7
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 497,
+   "stock_snapshot_planets": {
+    "dantooine": 14,
+    "dathomir": 227,
+    "kaas": 7,
+    "kashyyyk": 1,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1,
+    "lok": 66,
+    "naboo": 3,
+    "rori": 22,
+    "talus": 84,
+    "tatooine": 34,
+    "yavin4": 37
+   },
+   "uses": 6,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/military/shared_military_wall_strong_imperial_16_style_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    16.0,
+    6.9,
+    2.5
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 105,
+   "stock_snapshot_planets": {
+    "dantooine": 2,
+    "dathomir": 50,
+    "kashyyyk": 1,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1,
+    "rori": 8,
+    "talus": 42
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/military/shared_military_wall_strong_imperial_32_style_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    32.0,
+    6.9,
+    2.5
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 30,
+   "stock_snapshot_planets": {
+    "dantooine": 2,
+    "dathomir": 12,
+    "rori": 4,
+    "talus": 12
+   },
+   "uses": 4,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/military/shared_military_wall_strong_imperial_style_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    8.0,
+    6.9,
+    2.5
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 153,
+   "stock_snapshot_planets": {
+    "dantooine": 11,
+    "dathomir": 16,
+    "kashyyyk": 1,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1,
+    "lok": 80,
+    "talus": 6,
+    "tatooine": 9,
+    "yavin4": 28
+   },
+   "uses": 3,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/tatooine/shared_bridge_tatooine_small_style_03.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    5.5,
+    5.9,
+    32.5
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 13,
+   "stock_snapshot_planets": {
+    "lok": 10,
+    "talus": 1,
+    "tatooine": 2
+   },
+   "uses": 10,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/tatooine/shared_debris_tatt_crate_1.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    0.7,
+    0.7,
+    0.9
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 956,
+   "stock_snapshot_planets": {
+    "corellia": 50,
+    "dantooine": 142,
+    "dathomir": 6,
+    "endor": 17,
+    "kashyyyk": 9,
+    "kashyyyk_dead_forest": 1,
+    "kashyyyk_hunting": 4,
+    "kashyyyk_main-orig": 4,
+    "kashyyyk_main": 4,
+    "lok": 38,
+    "mandalore": 1,
+    "mustafar se": 13,
+    "naboo": 23,
+    "rori": 47,
+    "talus": 426,
+    "tatooine": 153,
+    "yavin4": 18
+   },
+   "uses": 12,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/tatooine/shared_debris_tatt_crate_metal_1.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    0.8,
+    0.3,
+    0.4
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 492,
+   "stock_snapshot_planets": {
+    "corellia": 39,
+    "dantooine": 41,
+    "dathomir": 31,
+    "endor": 20,
+    "kashyyyk": 22,
+    "kashyyyk_dead_forest": 1,
+    "kashyyyk_hunting": 17,
+    "kashyyyk_main-orig": 4,
+    "kashyyyk_main": 4,
+    "lok": 22,
+    "naboo": 36,
+    "rori": 27,
+    "talus": 35,
+    "tatooine": 182,
+    "yavin4": 11
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/tatooine/shared_debris_tatt_drum_dented_1.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.0,
+    1.2,
+    1.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 505,
+   "stock_snapshot_planets": {
+    "corellia": 12,
+    "dantooine": 74,
+    "dathomir": 18,
+    "endor": 20,
+    "kashyyyk": 29,
+    "kashyyyk_dead_forest": 2,
+    "kashyyyk_hunting": 26,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1,
+    "lok": 41,
+    "naboo": 22,
+    "rori": 14,
+    "talus": 72,
+    "tatooine": 165,
+    "yavin4": 8
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/tatooine/shared_debris_tatt_drum_storage_1.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    0.8,
+    0.9,
+    0.8
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 512,
+   "stock_snapshot_planets": {
+    "corellia": 39,
+    "dantooine": 35,
+    "dathomir": 20,
+    "endor": 12,
+    "kaas": 1,
+    "kashyyyk": 30,
+    "kashyyyk_hunting": 20,
+    "kashyyyk_main-orig": 10,
+    "kashyyyk_main": 10,
+    "lok": 12,
+    "mandalore": 3,
+    "naboo": 26,
+    "rori": 25,
+    "talus": 55,
+    "tatooine": 202,
+    "yavin4": 12
+   },
+   "uses": 7,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/tatooine/shared_debris_tatt_drum_storage_2.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    0.7,
+    0.6,
+    0.4
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 312,
+   "stock_snapshot_planets": {
+    "corellia": 13,
+    "dantooine": 8,
+    "dathomir": 23,
+    "endor": 6,
+    "kashyyyk": 3,
+    "kashyyyk_hunting": 2,
+    "kashyyyk_main-orig": 1,
+    "kashyyyk_main": 1,
+    "lok": 2,
+    "naboo": 12,
+    "rori": 7,
+    "talus": 17,
+    "tatooine": 210,
+    "yavin4": 7
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/tatooine/shared_pillar_ruined_large_style_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.5,
+    4.3,
+    2.2
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 120,
+   "stock_snapshot_planets": {
+    "dantooine": 3,
+    "lok": 8,
+    "talus": 3,
+    "tatooine": 106
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/tatooine/shared_pillar_ruined_small_style_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.5,
+    2.3,
+    1.9
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 122,
+   "stock_snapshot_planets": {
+    "dantooine": 4,
+    "lok": 12,
+    "talus": 1,
+    "tatooine": 105
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/tatooine/shared_shed_junkshop_watto.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    9.0,
+    5.6,
+    9.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 68,
+   "stock_snapshot_planets": {
+    "corellia": 1,
+    "dantooine": 2,
+    "dathomir": 1,
+    "jakku": 4,
+    "lok": 14,
+    "taanab": 2,
+    "talus": 1,
+    "tatooine": 43
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/tatooine/shared_stone_hovel_tatooine_style_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    6.7,
+    4.1,
+    6.9
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 113,
+   "stock_snapshot_planets": {
+    "lok": 19,
+    "taanab": 4,
+    "tatooine": 90
+   },
+   "uses": 2,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/tatooine/shared_wall_ruined_tatooine_large_style_01.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    1.8,
+    4.0,
+    16.0
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 92,
+   "stock_snapshot_planets": {
+    "corellia": 2,
+    "dantooine": 2,
+    "endor": 1,
+    "jakku": 1,
+    "lok": 19,
+    "talus": 5,
+    "tatooine": 62
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  },
+  {
+   "template": "object/static/structure/tatooine/shared_wall_ruined_tatooine_large_style_02.iff",
+   "client_table": "stock",
+   "client_file": true,
+   "missing_appearances": [],
+   "size_xyz_m": [
+    8.8,
+    4.2,
+    2.2
+   ],
+   "portal_layout": null,
+   "cells": null,
+   "server_template": "ok",
+   "stock_snapshot_nodes": 119,
+   "stock_snapshot_planets": {
+    "dantooine": 2,
+    "jakku": 6,
+    "lok": 23,
+    "talus": 3,
+    "tatooine": 85
+   },
+   "uses": 1,
+   "building_node_vs_stock": null
+  }
+ ]
+}

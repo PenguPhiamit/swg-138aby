@@ -1,0 +1,1076 @@
+{
+ "schema": "o7-terrain-1",
+ "what": "Layers for Fable-ossus/tools/ossus_terrain.py (read by o7_terrain.py). Coordinates: x east, y north, metres. BCIR feather is a fraction of the radius, BPOL feather is a distance in metres, AHCN op 0 sets the height, op 1 adds.",
+ "insert_after_layer": "academy ruins pad (flattened)",
+ "shader_families": {
+  "crater": {
+   "id": 12,
+   "name": "crater floor (torn scorched earth)",
+   "children": [
+    [
+     "dirt_scorched_tornearth",
+     1.0
+    ],
+    [
+     "dirt_scorched_tornearth_a1",
+     1.0
+    ],
+    [
+     "dirt_scorched_tornearth_a2",
+     1.0
+    ]
+   ]
+  },
+  "scorch": {
+   "id": 13,
+   "name": "scorch fans (scorched earth)",
+   "children": [
+    [
+     "dirt_scorched_earth",
+     1.0
+    ],
+    [
+     "dirt_scorched_earth_a1",
+     1.0
+    ],
+    [
+     "dirt_scorched_earth_a2",
+     1.0
+    ]
+   ]
+  }
+ },
+ "layers": [
+  {
+   "name": "o7 crater 1 (r 22 m, 3.5 m deep)",
+   "children": [
+    {
+     "name": "crater 1 bowl",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "bowl",
+       "cx": 1870.0,
+       "cy": 2930.0,
+       "radius": 22.0,
+       "feather_type": 3,
+       "feather": 0.9
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "dig 3.5 m",
+       "op": 1,
+       "height": -3.5
+      }
+     ]
+    },
+    {
+     "name": "crater 1 lip raise",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "lip",
+       "cx": 1870.0,
+       "cy": 2930.0,
+       "radius": 28.0,
+       "feather_type": 3,
+       "feather": 0.6
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "raise 1.0 m",
+       "op": 1,
+       "height": 1.0
+      }
+     ]
+    },
+    {
+     "name": "crater 1 lip trim",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "trim",
+       "cx": 1870.0,
+       "cy": 2930.0,
+       "radius": 23.0,
+       "feather_type": 3,
+       "feather": 0.9
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "lower 1.0 m",
+       "op": 1,
+       "height": -1.0
+      }
+     ]
+    },
+    {
+     "name": "crater 1 burn",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "burn",
+       "cx": 1870.0,
+       "cy": 2930.0,
+       "radius": 32.0,
+       "feather_type": 3,
+       "feather": 0.5
+      }
+     ],
+     "affectors": [
+      {
+       "type": "ASCN",
+       "name": "crater floor",
+       "family": "crater",
+       "feather_type": 1,
+       "feather": 0.4
+      },
+      {
+       "type": "CLEAR_FLORA",
+       "prefix": "crater 1"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "o7 crater 2 (r 18 m, 2.5 m deep)",
+   "children": [
+    {
+     "name": "crater 2 bowl",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "bowl",
+       "cx": 2140.0,
+       "cy": 2790.0,
+       "radius": 18.0,
+       "feather_type": 3,
+       "feather": 0.9
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "dig 2.5 m",
+       "op": 1,
+       "height": -2.5
+      }
+     ]
+    },
+    {
+     "name": "crater 2 lip raise",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "lip",
+       "cx": 2140.0,
+       "cy": 2790.0,
+       "radius": 24.0,
+       "feather_type": 3,
+       "feather": 0.6
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "raise 0.8 m",
+       "op": 1,
+       "height": 0.8
+      }
+     ]
+    },
+    {
+     "name": "crater 2 lip trim",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "trim",
+       "cx": 2140.0,
+       "cy": 2790.0,
+       "radius": 19.0,
+       "feather_type": 3,
+       "feather": 0.9
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "lower 0.8 m",
+       "op": 1,
+       "height": -0.8
+      }
+     ]
+    },
+    {
+     "name": "crater 2 burn",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "burn",
+       "cx": 2140.0,
+       "cy": 2790.0,
+       "radius": 28.0,
+       "feather_type": 3,
+       "feather": 0.5
+      }
+     ],
+     "affectors": [
+      {
+       "type": "ASCN",
+       "name": "crater floor",
+       "family": "crater",
+       "feather_type": 1,
+       "feather": 0.4
+      },
+      {
+       "type": "CLEAR_FLORA",
+       "prefix": "crater 2"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "o7 crater 3 (r 14 m, 2.0 m deep)",
+   "children": [
+    {
+     "name": "crater 3 bowl",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "bowl",
+       "cx": 2010.0,
+       "cy": 3010.0,
+       "radius": 14.0,
+       "feather_type": 3,
+       "feather": 0.9
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "dig 2.0 m",
+       "op": 1,
+       "height": -2.0
+      }
+     ]
+    },
+    {
+     "name": "crater 3 lip raise",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "lip",
+       "cx": 2010.0,
+       "cy": 3010.0,
+       "radius": 20.0,
+       "feather_type": 3,
+       "feather": 0.6
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "raise 0.6 m",
+       "op": 1,
+       "height": 0.6
+      }
+     ]
+    },
+    {
+     "name": "crater 3 lip trim",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "trim",
+       "cx": 2010.0,
+       "cy": 3010.0,
+       "radius": 15.0,
+       "feather_type": 3,
+       "feather": 0.9
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "lower 0.6 m",
+       "op": 1,
+       "height": -0.6
+      }
+     ]
+    },
+    {
+     "name": "crater 3 burn",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "burn",
+       "cx": 2010.0,
+       "cy": 3010.0,
+       "radius": 24.0,
+       "feather_type": 3,
+       "feather": 0.5
+      }
+     ],
+     "affectors": [
+      {
+       "type": "ASCN",
+       "name": "crater floor",
+       "family": "crater",
+       "feather_type": 1,
+       "feather": 0.4
+      },
+      {
+       "type": "CLEAR_FLORA",
+       "prefix": "crater 3"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "o7 crater 4 (r 12 m, 2.0 m deep)",
+   "children": [
+    {
+     "name": "crater 4 bowl",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "bowl",
+       "cx": 1930.0,
+       "cy": 2700.0,
+       "radius": 12.0,
+       "feather_type": 3,
+       "feather": 0.9
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "dig 2.0 m",
+       "op": 1,
+       "height": -2.0
+      }
+     ]
+    },
+    {
+     "name": "crater 4 lip raise",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "lip",
+       "cx": 1930.0,
+       "cy": 2700.0,
+       "radius": 18.0,
+       "feather_type": 3,
+       "feather": 0.6
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "raise 0.6 m",
+       "op": 1,
+       "height": 0.6
+      }
+     ]
+    },
+    {
+     "name": "crater 4 lip trim",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "trim",
+       "cx": 1930.0,
+       "cy": 2700.0,
+       "radius": 13.0,
+       "feather_type": 3,
+       "feather": 0.9
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "lower 0.6 m",
+       "op": 1,
+       "height": -0.6
+      }
+     ]
+    },
+    {
+     "name": "crater 4 burn",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "burn",
+       "cx": 1930.0,
+       "cy": 2700.0,
+       "radius": 22.0,
+       "feather_type": 3,
+       "feather": 0.5
+      }
+     ],
+     "affectors": [
+      {
+       "type": "ASCN",
+       "name": "crater floor",
+       "family": "crater",
+       "feather_type": 1,
+       "feather": 0.4
+      },
+      {
+       "type": "CLEAR_FLORA",
+       "prefix": "crater 4"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "o7 crater 5 (r 9 m, 2.0 m deep)",
+   "children": [
+    {
+     "name": "crater 5 bowl",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "bowl",
+       "cx": 2210.0,
+       "cy": 2920.0,
+       "radius": 9.0,
+       "feather_type": 3,
+       "feather": 0.9
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "dig 2.0 m",
+       "op": 1,
+       "height": -2.0
+      }
+     ]
+    },
+    {
+     "name": "crater 5 lip raise",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "lip",
+       "cx": 2210.0,
+       "cy": 2920.0,
+       "radius": 15.0,
+       "feather_type": 3,
+       "feather": 0.6
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "raise 0.5 m",
+       "op": 1,
+       "height": 0.5
+      }
+     ]
+    },
+    {
+     "name": "crater 5 lip trim",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "trim",
+       "cx": 2210.0,
+       "cy": 2920.0,
+       "radius": 10.0,
+       "feather_type": 3,
+       "feather": 0.9
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AHCN",
+       "name": "lower 0.5 m",
+       "op": 1,
+       "height": -0.5
+      }
+     ]
+    },
+    {
+     "name": "crater 5 burn",
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "burn",
+       "cx": 2210.0,
+       "cy": 2920.0,
+       "radius": 19.0,
+       "feather_type": 3,
+       "feather": 0.5
+      }
+     ],
+     "affectors": [
+      {
+       "type": "ASCN",
+       "name": "crater floor",
+       "family": "crater",
+       "feather_type": 1,
+       "feather": 0.4
+      },
+      {
+       "type": "CLEAR_FLORA",
+       "prefix": "crater 5"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "o7 scorch fan 1",
+   "boundaries": [
+    {
+     "type": "BPOL",
+     "name": "fan",
+     "points": [
+      [
+       1856.0,
+       2944.0
+      ],
+      [
+       1884.0,
+       2916.0
+      ],
+      [
+       1812.0,
+       2872.0
+      ]
+     ],
+     "feather_type": 3,
+     "feather": 10.0
+    }
+   ],
+   "affectors": [
+    {
+     "type": "ASCN",
+     "name": "scorched earth",
+     "family": "scorch",
+     "feather_type": 1,
+     "feather": 0.4
+    },
+    {
+     "type": "CLEAR_FLORA",
+     "prefix": "fan 1"
+    }
+   ]
+  },
+  {
+   "name": "o7 scorch fan 2",
+   "boundaries": [
+    {
+     "type": "BPOL",
+     "name": "fan",
+     "points": [
+      [
+       2128.5,
+       2801.5
+      ],
+      [
+       2151.5,
+       2778.5
+      ],
+      [
+       2088.4,
+       2738.4
+      ]
+     ],
+     "feather_type": 3,
+     "feather": 10.0
+    }
+   ],
+   "affectors": [
+    {
+     "type": "ASCN",
+     "name": "scorched earth",
+     "family": "scorch",
+     "feather_type": 1,
+     "feather": 0.4
+    },
+    {
+     "type": "CLEAR_FLORA",
+     "prefix": "fan 2"
+    }
+   ]
+  },
+  {
+   "name": "o7 scorch fan 3",
+   "boundaries": [
+    {
+     "type": "BPOL",
+     "name": "fan",
+     "points": [
+      [
+       2001.1,
+       3018.9
+      ],
+      [
+       2018.9,
+       3001.1
+      ],
+      [
+       1968.3,
+       2968.3
+      ]
+     ],
+     "feather_type": 3,
+     "feather": 10.0
+    }
+   ],
+   "affectors": [
+    {
+     "type": "ASCN",
+     "name": "scorched earth",
+     "family": "scorch",
+     "feather_type": 1,
+     "feather": 0.4
+    },
+    {
+     "type": "CLEAR_FLORA",
+     "prefix": "fan 3"
+    }
+   ]
+  },
+  {
+   "name": "o7 scorch fan 4",
+   "boundaries": [
+    {
+     "type": "BPOL",
+     "name": "fan",
+     "points": [
+      [
+       1922.4,
+       2707.6
+      ],
+      [
+       1937.6,
+       2692.4
+      ],
+      [
+       1893.2,
+       2663.2
+      ]
+     ],
+     "feather_type": 3,
+     "feather": 10.0
+    }
+   ],
+   "affectors": [
+    {
+     "type": "ASCN",
+     "name": "scorched earth",
+     "family": "scorch",
+     "feather_type": 1,
+     "feather": 0.4
+    },
+    {
+     "type": "CLEAR_FLORA",
+     "prefix": "fan 4"
+    }
+   ]
+  },
+  {
+   "name": "o7 glass pan (r 60 m)",
+   "boundaries": [
+    {
+     "type": "BCIR",
+     "name": "pan",
+     "cx": 2016.0,
+     "cy": 2848.0,
+     "radius": 60.0,
+     "feather_type": 3,
+     "feather": 0.25
+    }
+   ],
+   "affectors": [
+    {
+     "type": "ASCN",
+     "name": "limestone sheen",
+     "family": "summit",
+     "feather_type": 1,
+     "feather": 0.3
+    },
+    {
+     "type": "CLEAR_FLORA",
+     "prefix": "glass pan"
+    }
+   ]
+  },
+  {
+   "name": "o7 rubble apron (r 60-130 m)",
+   "boundaries": [
+    {
+     "type": "BCIR",
+     "name": "apron",
+     "cx": 2016.0,
+     "cy": 2848.0,
+     "radius": 130.0,
+     "feather_type": 3,
+     "feather": 0.35
+    }
+   ],
+   "affectors": [
+    {
+     "type": "CLEAR_FLORA",
+     "prefix": "apron"
+    }
+   ],
+   "children": [
+    {
+     "name": "apron rocks (outside r 60)",
+     "invert_boundaries": true,
+     "boundaries": [
+      {
+       "type": "BCIR",
+       "name": "inner",
+       "cx": 2016.0,
+       "cy": 2848.0,
+       "radius": 60.0,
+       "feather_type": 3,
+       "feather": 0.3
+      }
+     ],
+     "affectors": [
+      {
+       "type": "AFSC",
+       "name": "rubble rocks",
+       "family": "rocks",
+       "op": 1,
+       "remove_all": 0,
+       "feather_type": 1,
+       "feather": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "o7 field Westmarch (flat to 46.0 m)",
+   "boundaries": [
+    {
+     "type": "BCIR",
+     "name": "Westmarch",
+     "cx": -5344.0,
+     "cy": 96.0,
+     "radius": 400.0,
+     "feather_type": 3,
+     "feather": 0.3
+    }
+   ],
+   "affectors": [
+    {
+     "type": "AHCN",
+     "name": "flatten",
+     "op": 0,
+     "height": 46.0
+    },
+    {
+     "type": "ASCN",
+     "name": "plains grass",
+     "family": "grass",
+     "feather_type": 1,
+     "feather": 0.4
+    },
+    {
+     "type": "CLEAR_FLORA",
+     "prefix": "westmarch"
+    }
+   ]
+  },
+  {
+   "name": "o7 field Knossa Fields (flat to 50.0 m)",
+   "boundaries": [
+    {
+     "type": "BCIR",
+     "name": "Knossa Fields",
+     "cx": 1500.0,
+     "cy": -3300.0,
+     "radius": 450.0,
+     "feather_type": 3,
+     "feather": 0.3
+    }
+   ],
+   "affectors": [
+    {
+     "type": "AHCN",
+     "name": "flatten",
+     "op": 0,
+     "height": 50.0
+    },
+    {
+     "type": "ASCN",
+     "name": "plains grass",
+     "family": "grass",
+     "feather_type": 1,
+     "feather": 0.4
+    },
+    {
+     "type": "CLEAR_FLORA",
+     "prefix": "knossa_fields"
+    }
+   ]
+  },
+  {
+   "name": "o7 supernova glass plain (POI 17)",
+   "boundaries": [
+    {
+     "type": "BPOL",
+     "name": "plain",
+     "points": [
+      [
+       -300.0,
+       -5650.0
+      ],
+      [
+       300.0,
+       -5650.0
+      ],
+      [
+       300.0,
+       -5350.0
+      ],
+      [
+       -300.0,
+       -5350.0
+      ]
+     ],
+     "feather_type": 3,
+     "feather": 25.0
+    }
+   ],
+   "affectors": [
+    {
+     "type": "ASCN",
+     "name": "limestone",
+     "family": "summit",
+     "feather_type": 1,
+     "feather": 0.3
+    },
+    {
+     "type": "CLEAR_FLORA",
+     "prefix": "glass plain"
+    }
+   ]
+  }
+ ],
+ "design": {
+  "craters": [
+   {
+    "id": 1,
+    "cx": 1870.0,
+    "cy": 2930.0,
+    "radius": 22.0,
+    "depth_m": 3.5,
+    "o6_depth_m": 3.5,
+    "lip_raise_m": 1.0,
+    "bowl_feather": 0.9,
+    "lip_outer_radius": 28.0,
+    "lip_trim_radius": 23.0,
+    "burn_radius": 32.0,
+    "distance_to_ruins_centre": 167.5
+   },
+   {
+    "id": 2,
+    "cx": 2140.0,
+    "cy": 2790.0,
+    "radius": 18.0,
+    "depth_m": 2.5,
+    "o6_depth_m": 2.5,
+    "lip_raise_m": 0.8,
+    "bowl_feather": 0.9,
+    "lip_outer_radius": 24.0,
+    "lip_trim_radius": 19.0,
+    "burn_radius": 28.0,
+    "distance_to_ruins_centre": 136.9
+   },
+   {
+    "id": 3,
+    "cx": 2010.0,
+    "cy": 3010.0,
+    "radius": 14.0,
+    "depth_m": 2.0,
+    "o6_depth_m": 2.0,
+    "lip_raise_m": 0.6,
+    "bowl_feather": 0.9,
+    "lip_outer_radius": 20.0,
+    "lip_trim_radius": 15.0,
+    "burn_radius": 24.0,
+    "distance_to_ruins_centre": 162.1
+   },
+   {
+    "id": 4,
+    "cx": 1930.0,
+    "cy": 2700.0,
+    "radius": 12.0,
+    "depth_m": 2.0,
+    "o6_depth_m": 1.5,
+    "lip_raise_m": 0.6,
+    "bowl_feather": 0.9,
+    "lip_outer_radius": 18.0,
+    "lip_trim_radius": 13.0,
+    "burn_radius": 22.0,
+    "distance_to_ruins_centre": 171.2
+   },
+   {
+    "id": 5,
+    "cx": 2210.0,
+    "cy": 2920.0,
+    "radius": 9.0,
+    "depth_m": 2.0,
+    "o6_depth_m": 1.0,
+    "lip_raise_m": 0.5,
+    "bowl_feather": 0.9,
+    "lip_outer_radius": 15.0,
+    "lip_trim_radius": 10.0,
+    "burn_radius": 19.0,
+    "distance_to_ruins_centre": 206.9
+   }
+  ],
+  "scorch_fans": [
+   {
+    "crater": 1,
+    "heading_deg": 225.0,
+    "length_beyond_rim_m": 60.0,
+    "points": [
+     [
+      1856.0,
+      2944.0
+     ],
+     [
+      1884.0,
+      2916.0
+     ],
+     [
+      1812.0,
+      2872.0
+     ]
+    ],
+    "feather_m": 10.0
+   },
+   {
+    "crater": 2,
+    "heading_deg": 225.0,
+    "length_beyond_rim_m": 55.0,
+    "points": [
+     [
+      2128.5,
+      2801.5
+     ],
+     [
+      2151.5,
+      2778.5
+     ],
+     [
+      2088.4,
+      2738.4
+     ]
+    ],
+    "feather_m": 10.0
+   },
+   {
+    "crater": 3,
+    "heading_deg": 225.0,
+    "length_beyond_rim_m": 45.0,
+    "points": [
+     [
+      2001.1,
+      3018.9
+     ],
+     [
+      2018.9,
+      3001.1
+     ],
+     [
+      1968.3,
+      2968.3
+     ]
+    ],
+    "feather_m": 10.0
+   },
+   {
+    "crater": 4,
+    "heading_deg": 225.0,
+    "length_beyond_rim_m": 40.0,
+    "points": [
+     [
+      1922.4,
+      2707.6
+     ],
+     [
+      1937.6,
+      2692.4
+     ],
+     [
+      1893.2,
+      2663.2
+     ]
+    ],
+    "feather_m": 10.0
+   }
+  ],
+  "glass_pan": {
+   "cx": 2016.0,
+   "cy": 2848.0,
+   "radius": 60.0
+  },
+  "rubble_apron": {
+   "cx": 2016.0,
+   "cy": 2848.0,
+   "outer_radius": 130.0,
+   "inner_radius": 60.0
+  },
+  "fields": [
+   {
+    "key": "westmarch",
+    "label": "Westmarch",
+    "cx": -5344.0,
+    "cy": 96.0,
+    "radius": 400.0,
+    "height_m": 46.0,
+    "feather": 0.3,
+    "flat_radius_m": 280,
+    "ramp_m": 120
+   },
+   {
+    "key": "knossa_fields",
+    "label": "Knossa Fields",
+    "cx": 1500.0,
+    "cy": -3300.0,
+    "radius": 450.0,
+    "height_m": 50.0,
+    "feather": 0.3,
+    "flat_radius_m": 315,
+    "ramp_m": 135
+   }
+  ],
+  "glass_plain": {
+   "rect": [
+    -300.0,
+    -5650.0,
+    300.0,
+    -5350.0
+   ],
+   "poi": 17
+  },
+  "held": [
+   "North Reach",
+   "Rim Mesa",
+   "Lakeshore"
+  ],
+  "held_note": "the owner kept three of the five o6 fields as later options; not staged"
+ }
+}
