@@ -412,3 +412,5 @@ Files that grow without limit get slow to read, for us and for the game tools. R
 - [ ] Remaining C29 Legends/era material audit and implementation integration, after C24b independent resource-fix review and C23c runtime acceptance; owner-book routes are proposals only.
 
 - [x] C40 roof-height source/offline fix (15 Oct): server `7c68e39f`, h `e86fcf7`; Python 6/6, escort 11/11, selector 7 assertions. Claude review/build/starport recovery and bunker/Warren gameplay pending.
+
+- [x] C44 independent launch/mission source review (15 Oct, ChatGPT): [7 P2 + 1 P3](Documentation-support/review-C44/C44-review.md); one-bounty and accept/abort lock fix checked, client-data limits and memory measurement plan recorded. Changes requested; fixes, runtime/client validation and RSS attribution open; no galaxy actions.

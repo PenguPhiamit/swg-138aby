@@ -108,6 +108,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **C44: launch simulation + mission independent review** | ChatGPT, High | complete 2026-10-15 22:57; changes requested | Report `2de5175`: `Documentation-support/review-C44/C44-review.md`; 7 P2 + 1 P3; crafting recipe collision blocks live mission-cap approval; bot cleanup/lifecycle/telemetry and memory measurements open; no server writes, bots, builds or restarts |
 | **C43: BF2 2005 battles and AI design** | ChatGPT, Medium | complete 2026-10-15 17:40; research/design only | Report `86f9200`: `Documentation-support/bf2-battles-and-ai-for-swg.md`; Hoth pilot, Core3 mapping and behavior priorities; implementation/in-game untested; no server/bot changes |
 | **C42: Fable return prep + housekeeping** | ChatGPT, Medium | complete 2026-10-15 12:45 | Docs 8c795f7; three checked briefs; cleanup proposals unapplied; no server writes/bots/downloads/restarts |
 | **Escort crew and crew vendor (owner, 15 Oct)** | Claude | escort mode built, offline tests pass; first live run with the owner pending | Owner: "the dungeon crew was meant to run with me"; "this function can lead into the crew vendor, and future solo features". `tools/bots/escort.py` (generic: any group, any player): follow in formation into buildings, fight the player's target with real rotations, defend, heal the lowest, chat orders (follow, stay, attack, passive, heal, status, dismiss), play data in `Bot-reports/play/` (escort only). Run: `squad.py run scenarios/forn-escort.py --round-minutes 125`. **Next:** travel-following (shuttles), a crew vendor NPC that hires a crew to a player (Dax Venn's mercenary broker is the model), solo-player features. Owner's build for Creature Handler play data: Master CH + Rifleman + Marksman (246) |
@@ -325,6 +326,10 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 
 ## Log
 
+### 2026-10-15 22:57 ChatGPT: C44 independent launch/mission review complete
+
+- Review commit `2de5175`; reviewed dev `024a4bdc` through `7bd915b6` read-only: `Documentation-support/review-C44/C44-review.md`, 7 P2 + 1 P3 (crafting recipe collision, mission teardown/targeting, worker lifecycle, abort/payout handling, peer reads, history sets). One-bounty gate and `17cacd70` lock fix preserved in source; historical RSS slopes confirmed, cause unmeasured. No code/server/bot changes or restart; gameplay untested. Next: Claude reviews fixes and schedules client/cleanup/heap counters after the overnight run; live approval withheld. Older Log entries moved to the archive.
+
 ### 2026-10-15 22:40 Claude: launch simulation run 4, overnight (missions, Ossus explorers, real purse)
 
 - Run 4 stopped at 22:07, five minutes in, on the first bot mission: `MissionObject::setMissionObjective` asserts the mission is locked. Bots now lock it as `MissionAcceptCallback` and `MissionAbortCallback` do (dev `17cacd70`). Rerun: 710 missions taken in 10 minutes; all 18 starting cities have an outdoor general terminal. The unpaid "mission_gone" rows at its end were the despawn.
@@ -342,30 +347,3 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 ### 2026-10-15 17:40 ChatGPT: C43 BF2 2005 research/design complete
 
 - Report `86f9200`: public official-tool documentation/manual evidence, read-only Core3-dev/bot mapping, three-post Hoth conquest design and five NPC priorities. Local links/CRLF checked; exact Follow signature and retail constants left open. No BF2 files, downloads, server/dev/bot changes or gameplay. Implementation and all in-game acceptance untested; next: Claude reviews the pilot and scopes controller/activity/combat work. Older Log entries preserved in the archive; newest four retained.
-
-### 2026-10-15 16:51 Claude: StarCraft as inspiration for the Vong, the Gree and the Starweird (legal check)
-
-- `Documentation-support/starcraft-inspiration-vong-gree.md`. Legal verdict: **ideas and mechanics yes; no StarCraft files and no StarCraft fan assets** (Blizzard art and its derivatives; custom content reportedly assigned to Blizzard; already excluded by AGENTS.md's rules for other games' assets). Screenshots stay private and out of the repo.
-- Ideas in Star Wars terms:
-  - Vong: worldshaping zones, a damutek dungeon for Nei Rin's voxyn line, coral-implanted prisoners at Krayt's Ossus garrison, living gear, a yammosk raid with dovin basals.
-  - Gree: sensor obelisks, attunement relics with colour and tone puzzles, shield constructs keyed to a damage type, stasis traps.
-  - Others: the Starweird as a rare anomaly encounter; Killiks as a hive dungeon.
-- **Owner: wait, no prototype yet; art inspiration only.** The Zerg look is the starting point for the Vong (made Vong with coral, crab armour and scars), and the Protoss look is the starting point for the Celestials (gold and teal, floating crystals, glyph lines; Gree tech can borrow it). The mechanics stay ideas on file.
-
-### 2026-10-15 16:40 Claude: C39 and C40 fixes in dev, built, gated; the mercenary broker stood on a roof
-
-- Owner (16:00): fix the open C4d/C4e/C19 findings, review C25/C26, then build, restart and gate after the escort run, with C38 after the gate. Those findings and C22's were already fixed in dev on 14 Oct, and C25/C26 were already reviewed and merged; their rows above were stale and are updated. The open work was GPT's C39 and C40 fixes on `gpt/work`.
-- Reviewed and cherry-picked (`-x`) into dev: C39 `8a00b08b` (sandbox datapad, TameAnything and MedicalAnywhere only for god mode or agent accounts on `_test`; 2 s online log only on `_test`), `01b94e13` (unique builder page titles), `f5462270` (/goto back rejects stale cells), `e5c56727` (rejected waypoint mail is an error), `1f8982f3` (MedicalAnywhere keeps the city bonus); C40 `b587e530` (bot walks without z use the floor nearest the bot, not the roof).
-- Claude's follow-ups: `b9653a73` /goto back checks the cell under its lock but releases it before switchZone, which takes the zone lock. `fe188e31`: C40 refused every move without z or route, and `load_fleet.py:234` sends exactly that (`path=False`), so all load bots would have stopped; an explicit `path:false` walks as before.
-- Changed for players on the test galaxy: TameAnything and MedicalAnywhere now need god mode or a bot account.
-- Owner (16:05): halt the escort run, read the data, restart. The run halted cleanly at 16:06 (11/11 gear checks; Benny never logged in, so no escort play). Server log of the 2 h 15 min session: clean exit, no crash, 13 warning lines. Built in 33 s (core3 + core3client), restarted 16:13 (ready in 70 s).
-- Gate 16:19 FAIL, 29/35: one regression, "Dax offers options". Cause: `sandbox_mercenaries.lua` spawned Dax Venn at `getWorldFloor` (the highest surface), on a roof 16.4 m over the 5 m street at 3552,-4782; bots reached him only through the old highest-surface walk rule that C40 removed. Fixed in dev `80895f63`: he is moved to the terrain, and hired mercenaries spawn at the player's own height (they used the same call). Restarted 16:27.
-- Gate 16:31 FAIL, 22/35: Dax fixed. The new "regressions" are not the build: (1) the four doctor-buff checks say "You re-apply ... enhancement" with max HAM unchanged: the buffs from the 16:19 run were still on (history PF); (2) "the server keeps putting us back" on Besh, Cresh and Esk routes (10 put-backs; none in the 16:19 run; the same Esk plateau route had 5 per run at 08:08 and 08:11 on the old build; Cresh's crew was in a fight, Ilsa died). A direct probe walked Tovan 118 m up the plateau with one put-back before the 150 s limit. Still failing as before: the 12 m leash and Nima's dance line of sight.
-- C38's dispatch moved to 17:40 (after the gate, once Codex is back at 17:29). Doctor-buff artefact and the put-back history are in GPT's inbox.
-
-### 2026-10-15 14:45 Claude: first outside-art prop staged (F86): a CC0 ruined wall, in the test archive, ready for the owner to look at
-
-- Done: Blender 3.6.23 (portable, official site, hash matches), the SWG add-on, texconv and the Quaternius Ultimate Modular Ruins pack (CC0, via the author's Drive folder; the per-file links hit Drive's quota, the folder's Download all worked) are in; recorded as F86a/b/c in `Content-catalogue/archive-downloads.json`. `Wall_Broken` (976 triangles) converted to `.msh`, `.apt`, two `.sht` and two DXT1 `.dds`, and added to the client's `local_planets.tre` (166 -> 173 entries, read back exact, reference closure OK; previous archive saved as `Local-content/old-client-local_planets.tre.8ad04fec`).
-- How the owner sees it, no server change or restart: the piece replaces the stock campfire log's appearance, so `/createSpawningElement spawn object/static/structure/general/campfire_fresh.iff` in a test session shows the wall. Steps: `Fable-asset-pipeline/how-to-view-first-ruin.md`.
-- Findings: the pack has no texture atlas (two flat material colours, no UVs), so the textures are flat colours; the exporter writes no collision (walk-through), as the plan expected. Not done: own object template, CRC entry and server Lua (needs a restart by the galaxy owner), LODs, a stone texture.
-- **Verified in the owner's client, 14:46** (screenshot by the main session via `um win shot`, kept out of the repo): the wall draws upright at Mos Eisley with both tones, no black or white block, no crash, 30 fps. Collision not checked. Any session that rebuilds `local_planets.tre` from its own staging drops these files: re-run `Fable-asset-pipeline/stage_ruin.py` (inputs in `Fable-asset-pipeline/converted/`).

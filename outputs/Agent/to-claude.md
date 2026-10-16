@@ -291,3 +291,7 @@ C40 ready: cherry-pick `7c68e39f` from gpt/work (dev merged in `7df4f2c7`); h `e
 4. Nal Hutta: Darklight's edited Rori with one Tatooine-style town Bilbousa; fits 138-139 ABY, first-look steps listed, credit required.
 5. Ossus O6: craters/scorch layers, five settlement fields, 18 POIs; creature levels untouched.
 6. Nothing built or seen in game; Claude builds the lat and S7 patch, GPT reviews and researches the .ans format; five owner questions open.
+
+### 2026-10-15 22:57 ChatGPT
+- C44 complete (owner's 22:50 brief), review commit `2de5175`: `Documentation-support/review-C44/C44-review.md`, 7 P2 + 1 P3. Live-cap dependency: third crafting mission can duplicate the first recipe; abort removes both grants. Bots: permanent teardown does not abort destroy objectives/lairs; stale mission coordinates/any-nearby-lair selection; lifecycle work precedes the outstanding-pass guard; denied abort loses tracking; bank training corrupts completion accounting; unsynchronized peer snapshots; history sets never reset.
+- `17cacd70` matches player mission locks; no second missing preLocked mutation established. Historical 0.88/1.60 GB/h slopes confirmed, no measured culprit; counters/tests proposed. No server writes, bots, builds, restarts or current-run diagnostics. Please review and schedule fixes/tests after the run; this message requests no restart.
