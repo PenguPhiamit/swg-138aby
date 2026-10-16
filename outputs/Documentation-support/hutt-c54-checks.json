@@ -1,0 +1,59 @@
+{
+  "s7_archive": {
+    "sha256": "7f28f0272a0924596abd483681b6d8160302fe58159046652a040cd22bc5ba94",
+    "changed": [
+      "datatables/creation/attribute_limits.iff",
+      "datatables/creation/racial_mods.iff",
+      "datatables/customization/allow_bald.iff",
+      "datatables/customization/customization_data.iff",
+      "datatables/customization/customization_group_instance.iff",
+      "datatables/skill/skills.iff",
+      "string/en/skl_d.stf",
+      "string/en/skl_n.stf",
+      "ui/ui_avatardata.inc"
+    ],
+    "new": [
+      "appearance/lat/hutt.lat"
+    ],
+    "unchanged": 164,
+    "dropped": []
+  },
+  "shared_species": {
+    "male": 4,
+    "female": 4
+  },
+  "s7_racial_mods": [
+    "hutt_male",
+    "hutt_female",
+    350,
+    350,
+    150,
+    200,
+    100,
+    100,
+    100,
+    150,
+    100
+  ],
+  "s7_racial_total": 1600,
+  "builder_counterexample": {
+    "exit": 0,
+    "invalid_cached_lat_accepted": true,
+    "unrelated_file_change_accepted": true,
+    "input_was_disposable": true
+  },
+  "c54_crafting": {
+    "idempotent": true,
+    "preserves_untouched_base_entries": true,
+    "only_changed_base_entry": "string/en/pet_deed.stf",
+    "group": "craftArtisanVehicle",
+    "skill": "crafting_artisan_master",
+    "schematic": "object/draft_schematic/vehicle/civilian/shared_a1_deluxe_floater.iff",
+    "shared_crc": "0x2386ac6b",
+    "x34_shared_crc": "0xbd720fa1",
+    "group_rows": 1658,
+    "new_group_rows": 1,
+    "client_display": "A1 Deluxe Floater",
+    "deed_display": "A1 Deluxe Floater Deed"
+  }
+}
