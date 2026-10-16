@@ -1,7 +1,7 @@
 # Ossus O7: Fable's o6 made buildable — Claude, 16 Oct 2026
 
 Fable's first Ossus pass (`../o6/README.md`: craters and scorch on the academy ruins, settlement fields, 18 points of interest) as build-ready
-data, with the owner's answers of 15 Oct 23:15 applied. Stock art only, by template path: every one of the 89 templates is in the stock client's
+data, with the owner's answers of 15 Oct 23:15 and 16 Oct 05:40 applied (C53, ChatGPT). Stock art only, by template path: every one of the 89 templates is in the stock client's
 object template table (none MTG-only). Nothing under `/opt/swg` was written, Fable's staged files are untouched (the terrain was built in a temp
 folder, the real rebuild is step 1 below), nothing was run in a client or on a galaxy. Our own code and data; the stock names are references only.
 
@@ -17,12 +17,13 @@ folder, the real rebuild is step 1 below), nothing was run in a client or on a g
 
 ## The owner's answers, as applied
 
-| Answer (15 Oct 23:15) | In this batch |
+| Answer (15 Oct 23:15; confirmed 16 Oct 05:40) | In this batch |
 |---|---|
 | Craters 2-4 m deep as designed | Five craters, 3.5 / 2.5 / 2.0 / 2.0 / 2.0 m. o6's own list ended 1.5 and 1.0 m, outside the owner's range, so craters 4 and 5 are 2.0 m (`terrain.json` keeps `o6_depth_m`). Lips peak at 0.37-0.41 m, under o6's 0.6 m. |
 | Only Westmarch and Knossa Fields | Two flatten layers. North Reach, Rim Mesa and Lakeshore are listed under `design.held`, not staged. |
 | Garrison on the benchland rim over the ruins, guarding the dig | POI 3 moved from east of Knossa to the flat ground nearest the crest north-east of the ruins, with the dig between its gate and the hall. |
 | Hold POI 7 (Vong fields) | Not placed. POI 17 (terrain only) is not held and is in `terrain.json`. |
+| Accepted o7 choices (16 Oct 05:40) | Craters 4 and 5 have floors 2.0 m below the benchland; pod on crater 2's lip; field feather 0.3; terrain-driven moves of POIs 5, 6, 8, 9, 10 and 16 retained. POI 17 moved to the foothills as detailed below. |
 | Creature levels unchanged | No mobile, lair or spawn file is touched or proposed. |
 | Stock art first, MTG only where the catalogue rates it usable | No MTG art at all. One MTG-only candidate was left out (the destroyed Lambda shuttle: stock `escape_pod` does the job); the Mustafar ash shaders o6 named do not exist. |
 
@@ -31,7 +32,7 @@ folder, the real rebuild is step 1 below), nothing was run in a client or on a g
 The table of names is `misc/object_template_crc_string_table.iff`: the winning copy in `patch_14_00.tre` (15,792 names) and the installed
 `local_planets.tre` (29,358, stock plus 13,566 MTG and Hoth names), read with `outputs/tools/swgfmt` in memory (nothing extracted). A path counts as
 resolved when it is in the stock table, its client template and every appearance it names are in the archives, and Core3-dev has its server
-template (`object/<path>/<name>.lua`, checked read-only inside WSL as swgemu, dev HEAD 8b48a044: 89 of 89 present, and the Hutt body). `dir/shared_{a, b}.iff` below means `dir/shared_a.iff` and `dir/shared_b.iff`.
+template (`object/<path>/<name>.lua`, checked read-only inside WSL as swgemu, dev HEAD 26b54813: 89 of 89 present, and the Hutt body). `dir/shared_{a, b}.iff` below means `dir/shared_a.iff` and `dir/shared_b.iff`.
 
 <!-- RESOLUTION -->
 - **POI 1 craters: shader ACCN to a dark burnt ground (candidates shader/must_ash_* (confirm), else Dathomir black rock)**
@@ -135,7 +136,7 @@ only the final pass has them. Layer order matters and is the one o6 asked for: a
 | **Rubble apron** | `BCIR` r 130 (feather 0.35): flora removed; child layer with the r 60 circle inverted: rocks added (family `rocks`). |
 | **Field Westmarch** | `BCIR` (-5344, 96) r 400, feather 0.3: `AHCN` op 0 to 46.0 m, plains grass shader, flora removed. Flat to r 280, ramp 120 m. |
 | **Field Knossa Fields** | `BCIR` (1500, -3300) r 450, feather 0.3: flat 50.0 m, same surface. Flat to r 315, ramp 135 m. |
-| **Glass plain (POI 17)** | `BPOL` rectangle (-300..300, -5650..-5350), feather 25 m: limestone, flora removed. |
+| **Glass plain (POI 17)** | `BPOL` rectangle (1900..2500, -4875..-4575), centre (2200, -4725), feather 25 m: limestone, flora removed; no height change. |
 
 New shader families (stock shaders, all in the client): `crater` = `dirt_scorched_tornearth` (+ `_a1`, `_a2`), `scorch` = `dirt_scorched_earth` (+ `_a1`, `_a2`).
 
@@ -154,7 +155,7 @@ Measured on the built file (Core3 port, `checks.json` -> `terrain` and `terrain_
 - Craters: centre drops 3.5 / 2.5 / 2.0 / 2.0 / 2.0 m; lip peaks 0.41 / 0.40 / 0.37 / 0.40 / 0.38 m; steepest 1 m step 21.8 / 20.4 / 21.6 / 24.6 / 30.3 degrees (the smallest, crater 5, is the steep one); the layers change the height no farther than 26 / 22 / 18 / 16 / 13 m from each centre.
 - Fields: spread over r 60 is 0.00 m (flat core exactly 46.0 and 50.0); steepest 20 m step 11.1 degrees (the natural ground there: 11.7) and 12.4 (natural 14.0); 1.2 % and 0.25 % of each disc lies under the 38.5 m water, all of it in the outer ramp where natural hollows are not fully filled; clear of every no-build circle by 5,063 m (Westmarch; the nearest is the west cave's) and 760 m (Knossa Fields; the nearest is Knossa's r 320 circle).
 - Whole planet, 96 m grid, 29,241 samples: 122 changed, all inside the o7 discs, 0 outside, worst change outside 0.0000 m. The 87 nodes already in the snapshot stand on unchanged ground (max shift 0.00 m).
-- Not a plain: POI 17's ground has 105 m of relief and 41 degree slopes (the Eocho band). The layer paints and clears it; it does not flatten it. A flat 600 x 300 m alternative exists at x 1850-2450, y -4800 to -4500 (12.6 m of relief).
+- POI 17 moved to the accepted foothills, centre (2200, -4725); its full 600 x 300 m rectangle has 12.56 m of relief on a 25 m grid. The layer paints and clears it without flattening. Selection evidence and footprint bounds are in section 7.
 
 ## 3. Placements
 
@@ -182,7 +183,7 @@ POIs 9, 10, 16 and 18 mean "nobody recorded any"; whether the east is empty or j
 | 14 | Sith interrogation post | -2,976 / -4,954 | 51.9 | 24 m: z 56 (terrain there 52.1) | none (nearest ossus_kaddyr_bug L10, 773 m) | none | 3,270 m | in no-build: west foothill cave |
 | 15 | Crashed Alliance fighter | -1,500 / 5,200 | 61.8 | 39 m: z 60 (terrain there 60.6) | ossus_kirruk L19 x2 (127 m) | 3 (nearest 124 m) | 8,927 m | none |
 | 16 | Ysanna sky-burial cliff | 5,233 / 786 | 105.2 | 170 m: z 103 (terrain there 103.0) | none (nearest ossus_kaddyr_bug L10, 4,949 m) | none | 6,828 m | none |
-| 17 | Supernova glass plain (terrain only) | 0 / -5,500 | 201.8 | 185 m: z 171 (terrain there 172.2) | none (nearest ossus_gokob L10, 2,957 m) | none | 1,900 m | **steep** 38 deg over r 45 m (spread 25 m) |
+| 17 | Supernova glass plain (terrain only) | 2,200 / -4,725 | 47.9 | 163 m: z 51 (terrain there 51.6) | none (nearest ossus_kaddyr_bug L10, 4,652 m) | none | 2,471 m | none |
 | 18 | The Hutt landing field | 3,400 / -2,300 | 106.2 | 44 m: z 105 (terrain there 105.6) | none (nearest ossus_gokob L10, 5,824 m) | none | 3,640 m | none |
 <!-- /POI_TABLE -->
 
@@ -204,7 +205,7 @@ Notes on each place (what moved and why):
 - **14 Sith interrogation post** (10 objects). Moved 6 m from o6's (-2,976, -4,960). Outside dressing only. The cave node (6900002) and its 10 cell nodes already exist; the cells are dressed by screenplay.
 - **15 Crashed Alliance fighter** (10 objects). At o6's point (flat plain, 62 m).
 - **16 Ysanna sky-burial cliff** (11 objects). Moved 260 m from o6's (5,000, 900). o6's (5000, 900) is flat mesa top 280 m from the nearest canyon rim. The platform stands 16 m back from that rim point.
-- **17 Supernova glass plain (terrain only)** (0 objects). Terrain only (terrain.json layer 'o7 supernova glass plain'). The ground there is a 105 m, 41 degree mountain slope: the layer paints and clears it, it does not make a plain. The flat alternative (spread 12.6 m) is the foothills at x 1850-2450, y -4800 to -4500.
+- **17 Supernova glass plain (terrain only)** (0 objects). Moved 2,333 m from o6's (0, -5,500). Terrain only (terrain.json layer 'o7 supernova glass plain'). Owner accepted the foothills on 16 Oct 05:40. Centre (2200, -4725) is the flattest tested 600 x 300 m footprint among centres in x 1850-2450 / y -4800 to -4500, on 25 m grids (12.56 m full-footprint relief). The footprint is x 1900-2500 / y -4875 to -4575; the centre is inside the approved window. One census sample in the window cross-checks the terrain. Only limestone and flora removal: no height affector. See out/glass-plain-selection.json.
 - **18 The Hutt landing field** (18 objects). o6's camp building (object/building/poi/shared_tatooine_hutt_businessmen_camp_medium) is a server theater anchor with no art, so the field is built from statics: a landing pad, tents, pallets, crates.
 <!-- /POI_NOTES -->
 
@@ -239,6 +240,8 @@ What each place holds (object counts by role; the garrison is a 48 x 40 m walled
 
 ## 5. Checked, and not checked
 
+C53 rerun (16 Oct): `run_all.py` **ALL CHECKS PASS**, 119 s; `render_tables.py` refreshed these tables. Accepted-choice assertions confirm actual 2.0 m drops for craters 4/5, zero height changes outside the o7 discs, zero existing-node ground shift, and all 295 statics plus POIs 5/6/8/9/10/16 identical to the staging baseline. The two existing boulder ground-tilt warnings at POI 13 (2.8 and 2.7 m) remain for the client visit. The template check was refreshed read-only at dev `26b54813`.
+
 Checked (all in `checks.json`, regenerate with `tools/run_all.py`, about four minutes; only the server-template lookup is a separate WSL step, `tools/server_check.sh`; after any change to `o7_pois.py` run `run_all.py`, then `render_tables.py`):
 - templates: stock table, client files, appearances, Core3-dev server templates (above); one piece dropped (`allum_mine_console_s01`: its appearance is not in the client);
 - no overlaps among the 295 objects or with the 31 ruin statics and the starport footprint (separating-axis test on each template's footprint box; for the flatland caves the open apron in front of the mouth is left free);
@@ -262,6 +265,8 @@ Nothing here needs the server lock until step 5. Run from `outputs`, Windows Pyt
 
 ## 7. Open
 
-- Owner: crater 4 and 5 raised to 2.0 m (o6 had 1.5 and 1.0); the pod on crater 2's lip instead of at (2160, 2700); field feather 0.3 instead of "0.5 over 100 m"; POI 17 on a steep slope (keep, or move to the flat foothill window); the moves of POIs 5, 6, 8, 9, 10 and 16 (notes above).
-- Fable's later pass: the interiors of POIs 2, 4, 9 and 14 (cells, props, the vault door), the story text and datapads, the Hutt broker's conversation, the held POI 7.
+- Owner decisions closed, 16 Oct 05:40: 2.0 m crater floors for 4/5, pod on crater 2, field feather 0.3, foothill POI 17 and terrain-driven moves of 5/6/8/9/10/16 accepted.
+- C53 selection: `tools/select_glass_plain.py` compares 325 centres inside x 1850-2450 / y -4800 to -4500, preserving the 600 x 300 m footprint and sampling its entire rectangle every 25 m. Minimum tested relief is 12.5582 m at (2200, -4725), ground 40.9944-53.5526 m. The centre is in the accepted window; the painted footprint extends to x 2500 and y -4875. Census has one sample in that window: (2440, -4665), truncated z 50; terrain 50.1197 m. Evidence: `out/glass-plain-selection.json`. Selection is a grid minimum, not a continuous optimum.
+- Staging regeneration and offline checks only; terrain and snapshot builds stay in temporary folders. Packing, installation and all client/game checks remain pending.
+- Future content work (Claude/GPT; Fable retired): the interiors of POIs 2, 4, 9 and 14 (cells, props, the vault door), the story text and datapads, the Hutt broker's conversation, the held POI 7.
 - If the first client look shows the flatland caves floating or sunk, only the three `z` values of the caves in `statics.json` and `CAVE_FLOOR` in `tools/o7_pois.py` change.

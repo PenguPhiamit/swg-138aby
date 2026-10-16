@@ -1,0 +1,99 @@
+{
+ "centre_window": [
+  1850,
+  -4800,
+  2450,
+  -4500
+ ],
+ "footprint_size_m": [
+  600,
+  300
+ ],
+ "centre_grid_m": 25,
+ "footprint_grid_m": 25,
+ "criterion": "minimum full-rectangle max-minus-min height; ties: Manhattan distance to window centre, then x/y",
+ "candidate_count": 325,
+ "selected_centre": [
+  2200,
+  -4725
+ ],
+ "selected_rect": [
+  1900,
+  -4875,
+  2500,
+  -4575
+ ],
+ "ground_min_m": 40.99439421228909,
+ "ground_max_m": 53.552571823992636,
+ "relief_m": 12.558177611703549,
+ "census_samples_in_window": [
+  {
+   "kind": "creature",
+   "name": "helper_r2_unit",
+   "lvl": "7",
+   "x": 2440,
+   "y": -4665,
+   "z": 50,
+   "terrain_z": 50.1197
+  }
+ ],
+ "note": "Centre constrained to owner window; footprint may extend beyond it. Census z is truncated; no terrain flattening.",
+ "best_candidates": [
+  {
+   "centre": [
+    2200,
+    -4725
+   ],
+   "relief_m": 12.558177611703549
+  },
+  {
+   "centre": [
+    2150,
+    -4600
+   ],
+   "relief_m": 12.772154142238143
+  },
+  {
+   "centre": [
+    2150,
+    -4575
+   ],
+   "relief_m": 12.772154142238143
+  },
+  {
+   "centre": [
+    2150,
+    -4650
+   ],
+   "relief_m": 12.915558033426258
+  },
+  {
+   "centre": [
+    2150,
+    -4675
+   ],
+   "relief_m": 12.915558033426258
+  },
+  {
+   "centre": [
+    2150,
+    -4625
+   ],
+   "relief_m": 12.915558033426258
+  },
+  {
+   "centre": [
+    2175,
+    -4650
+   ],
+   "relief_m": 12.915558033426258
+  },
+  {
+   "centre": [
+    2150,
+    -4700
+   ],
+   "relief_m": 12.915558033426258
+  }
+ ]
+}

@@ -205,13 +205,13 @@
   },
   "glass_plain": {
    "centre": [
-    0.0,
-    -5500.0
+    2200.0,
+    -4725.0
    ],
-   "ground_min": 167.3,
-   "ground_max": 272.5,
-   "spread_m": 105.2,
-   "steepest_25m_step_deg_r150": 40.8
+   "ground_min": 41.0,
+   "ground_max": 53.5,
+   "spread_m": 12.5,
+   "steepest_25m_step_deg_r150": 6.9
   }
  },
  "statics": {
@@ -504,9 +504,9 @@
  },
  "server_templates": {
   "file": "out/server-templates.txt",
-  "header": "# server templates checked in /opt/swg/Core3-dev/MMOCoreORB/bin/scripts on 16 Oct 2026 01:13 AM; dev HEAD 8b48a044",
+  "header": "# server templates checked in /opt/swg/Core3-dev/MMOCoreORB/bin/scripts on 16 Oct 2026 08:59 AM; dev HEAD 26b54813",
   "ok": 90,
   "missing": []
  },
- "seconds": 205
+ "seconds": 119
 }

@@ -50,8 +50,10 @@ NOTES = {
     14: "Outside dressing only. The cave node (6900002) and its 10 cell nodes already exist; the cells are dressed by screenplay.",
     15: "At o6's point (flat plain, 62 m).",
     16: "o6's (5000, 900) is flat mesa top 280 m from the nearest canyon rim. The platform stands 16 m back from that rim point.",
-    17: "Terrain only (terrain.json layer 'o7 supernova glass plain'). The ground there is a 105 m, 41 degree mountain slope: the layer paints and clears it, it does not make a plain. "
-        "The flat alternative (spread 12.6 m) is the foothills at x 1850-2450, y -4800 to -4500.",
+    17: "Terrain only (terrain.json layer 'o7 supernova glass plain'). Owner accepted the foothills on 16 Oct 05:40. Centre (2200, -4725) is the flattest tested "
+        "600 x 300 m footprint among centres in x 1850-2450 / y -4800 to -4500, on 25 m grids (12.56 m full-footprint relief). "
+        "The footprint is x 1900-2500 / y -4875 to -4575; the centre is inside the approved window. One census sample in the window cross-checks the terrain. "
+        "Only limestone and flora removal: no height affector. See out/glass-plain-selection.json.",
     18: "o6's camp building (object/building/poi/shared_tatooine_hutt_businessmen_camp_medium) is a server theater anchor with no art, so the field is built from statics: a landing pad, tents, pallets, crates.",
 }
 SKIP_OVERLAP_GROUPS ={'fortification', 'markers', 'bridge', 'fence', 'pier', 'platform'}

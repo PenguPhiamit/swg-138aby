@@ -1224,56 +1224,56 @@
    "name": "Supernova glass plain (terrain only)",
    "objects": 0,
    "centre": [
-    0.0,
-    -5500.0
+    2200.0,
+    -4725.0
    ],
    "o6_point": [
     0.0,
     -5500.0
    ],
-   "moved_from_o6_m": 0,
-   "ground_z_terrain": 201.8,
+   "moved_from_o6_m": 2333,
+   "ground_z_terrain": 47.9,
    "census_nearest_sample": {
     "kind": "creature",
     "name": "helper_r2_unit",
-    "distance_m": 185,
-    "z": 171,
-    "terrain_minus_sample_z": 1.2
+    "distance_m": 163,
+    "z": 51,
+    "terrain_minus_sample_z": 0.56
    },
    "census_nearest_3_ground_samples": [
     {
-     "distance_m": 185,
+     "distance_m": 163,
      "kind": "creature",
      "name": "helper_r2_unit",
-     "census_z": 171,
-     "terrain_z_at_sample": 172.2
+     "census_z": 51,
+     "terrain_z_at_sample": 51.6
     },
     {
-     "distance_m": 231,
+     "distance_m": 166,
      "kind": "creature",
      "name": "helper_r2_unit",
-     "census_z": 252,
-     "terrain_z_at_sample": 252.8
+     "census_z": 51,
+     "terrain_z_at_sample": 51.2
     },
     {
-     "distance_m": 257,
+     "distance_m": 247,
      "kind": "creature",
      "name": "helper_r2_unit",
-     "census_z": 194,
-     "terrain_z_at_sample": 194.2
+     "census_z": 50,
+     "terrain_z_at_sample": 50.1
     }
    ],
    "footprint_probe_radius_m": 45.0,
-   "ground_min": 187.6,
-   "ground_max": 212.8,
-   "relief_m": 25.3,
-   "steepest_slope_deg": 38.5,
-   "distance_from_knossa_m": 1900,
+   "ground_min": 46.4,
+   "ground_max": 51.7,
+   "relief_m": 5.3,
+   "steepest_slope_deg": 8.7,
+   "distance_from_knossa_m": 2471,
    "creatures_within_300m": [],
    "nearest_creature": {
-    "name": "ossus_gokob",
+    "name": "ossus_kaddyr_bug",
     "level": "10",
-    "distance_m": 2957
+    "distance_m": 4652
    },
    "lair_props_within_300m": {
     "count": 0,
@@ -1284,10 +1284,9 @@
    "objects_inside_no_build": {},
    "edge_strip": false,
    "flags": [
-    "STEEP: 38 deg over r 45 m (spread 25 m)",
-    "no census creature within 300 m (nearest ossus_gokob at 2957 m)"
+    "no census creature within 300 m (nearest ossus_kaddyr_bug at 4652 m)"
    ],
-   "notes": "Terrain only (terrain.json layer 'o7 supernova glass plain'). The ground there is a 105 m, 41 degree mountain slope: the layer paints and clears it, it does not make a plain. The flat alternative (spread 12.6 m) is the foothills at x 1850-2450, y -4800 to -4500.",
+   "notes": "Terrain only (terrain.json layer 'o7 supernova glass plain'). Owner accepted the foothills on 16 Oct 05:40. Centre (2200, -4725) is the flattest tested 600 x 300 m footprint among centres in x 1850-2450 / y -4800 to -4500, on 25 m grids (12.56 m full-footprint relief). The footprint is x 1900-2500 / y -4875 to -4575; the centre is inside the approved window. One census sample in the window cross-checks the terrain. Only limestone and flora removal: no height affector. See out/glass-plain-selection.json.",
    "extra": {}
   },
   "18": {

@@ -54,7 +54,9 @@ FIELDS = [
     ('westmarch', 'Westmarch', -5344.0, 96.0, 400.0, 46.0, 0.3),
     ('knossa_fields', 'Knossa Fields', 1500.0, -3300.0, 450.0, 50.0, 0.3),
 ]
-GLASS_PLAIN = (-300.0, -5650.0, 300.0, -5350.0)     # POI 17, 600 x 300 m centred on (0, -5500)
+GLASS_PLAIN = (1900.0, -4875.0, 2500.0, -4575.0)    # POI 17: flattest tested 600 x 300 m footprint; centre (2200, -4725)
+# Owner 16 Oct 05:40: centre in the foothill window x 1850-2450 / y -4800 to -4500.
+# Selected by tools/select_glass_plain.py: 25 m centre and footprint grids, minimum full-footprint relief.
 GLASS_PLAIN_FEATHER_M = 25.0
 
 SHADER_FAMILIES = {
