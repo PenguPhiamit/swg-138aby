@@ -18,6 +18,11 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 Agents add a question here when the owner isn't in their chat: name, time, the options. The owner answers inline. Messages between the agents go in `Agent/to-claude.md` and `Agent/to-chatgpt.md` (AGENTS.md, "Asking questions").
 
+**Claude, 17 Oct 2:30 AM (PL-05 Hoth leftovers, staged in `Hoth-leftovers/`; answer inline):**
+1. **Glacial rancor's den site:** the Glacial Rancor Grounds, an open valley at 600, -4600 (staged, no client change); or one cell of the new mynock ice cave; or a second stock ice cave at the grounds (needs a second flatten layer and your OK)?
+2. **Rancor colour:** the Chiss skin palette's lightest blue (staged; a true blue, not pastel); or our own pastel-blue palette file (one new `.pal` in the archive)?
+3. **Rancor respawn:** 30 minutes (staged, like the cave bosses); 2 hours; or 6 hours? Each kill drops a rare decor item every time and a vehicle deed half the time.
+
 **Claude, 14 Oct 04:59 (owner stepped away; answer inline when back):**
 1. **Overnight allow rule (needed before the next overnight run):** Run now once and choose "Always allow" for `overnight_cycle.sh`, or add `"Bash(bash /c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/tools/agents/overnight_cycle.sh)"` to `permissions.allow` in `outputs/.claude/settings.local.json`.
    - Also deny or close the 03:01 overnight run that is still waiting on a prompt.
@@ -366,6 +371,10 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests and early run 6 sample only. Claude retains all server/runtime ownership; no restarts or bot commands.
 
 ## Log
+
+### 2026-10-17 2:30 AM Claude: PL-05 Hoth leftovers staged (scheduled run; nothing installed)
+
+Built only what the owner answered (15 Oct Q4; 14 Oct question 9). Folder `Hoth-leftovers/`: `hoth-leftovers.patch` (13 Lua files against Core3-dev `07d9f61e`; `git apply --check` and `luac -p` pass, read-only), `build_hoth_leftovers.py` (chains on the installed `df1d538e`; candidate `work/hoth-leftovers/local_planets-hoth-leftovers.tre`, sha256 `108d4234...`, 178 entries byte-identical, 8 changed, 13 new) and `LEFTOVERS-INSTALL.md` (install order: archive on both sides first, then the patch). Adds: the mynock ice cave with Fable's flatten layer; Hoarfang in a fixed spot with a 30-minute respawn, blue through a `rancor_ice` chain on the Chiss skin palette; badge 141 and a rare-decor roll at the end of Vell's chain; artisan and entertainer terminals plus both recruiters at the starport (recruiters off the camps); deliveries to three camps; map names for the two dens. Density, area and camp names and the camp junk dealer were already in dev. Untested; three owner questions at the top. Tauntaun riding stays its own batch.
 
 ### 2026-10-16 16:40 Claude: Hutt crash fixed, C55 answered, release plan, C46 reviewed
 

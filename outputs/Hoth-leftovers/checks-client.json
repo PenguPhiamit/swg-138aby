@@ -1,0 +1,229 @@
+{
+ "base": {
+  "path": "work/chain-1016/local_planets-chain-1016.tre",
+  "bytes": 4841629,
+  "sha256": "df1d538e0e23488683406e81b550f4355330865f75e75ec40ec7d36cc4d2ba88",
+  "entries": 186
+ },
+ "out": {
+  "path": "work/hoth-leftovers/local_planets-hoth-leftovers.tre",
+  "bytes": 5304956,
+  "sha256": "108d4234e43b9b1804cd89416745f13f65c399f07625e7ce1a2aead8fcc52812",
+  "entries": 199
+ },
+ "untouched_identical": 178,
+ "changed": [
+  "datatables/badge/badge_map.iff",
+  "datatables/clientpoi/clientpoi.iff",
+  "datatables/clientregion/hoth.iff",
+  "misc/object_template_crc_string_table.iff",
+  "string/en/badge_d.stf",
+  "string/en/badge_n.stf",
+  "string/en/clientpoi_d.stf",
+  "string/en/clientpoi_n.stf"
+ ],
+ "new": [
+  "appearance/mesh/rancor_ice.lmg",
+  "appearance/mesh/rancor_ice_l0.mgn",
+  "appearance/mesh/rancor_ice_l1.mgn",
+  "appearance/mesh/rancor_ice_l2.mgn",
+  "appearance/mesh/rancor_ice_l3.mgn",
+  "appearance/mesh/rancor_ice_l4.mgn",
+  "appearance/rancor_ice.sat",
+  "object/mobile/shared_rancor_ice.iff",
+  "shader/rancor_ice_hc8.sht",
+  "shader/rancor_ice_hcb13.sht",
+  "shader/rancor_ice_hcsb21.sht",
+  "shader/rancor_ice_lod_hc8.sht",
+  "terrain/hoth.trn"
+ ],
+ "dropped": [],
+ "report": {
+  "terrain/hoth.trn": {
+   "from": "Fable-hoth-batchB/staged/client/terrain/hoth.trn",
+   "sha256": "ef2c1ee2be8475373f5c2314158f24428802f28b8c31a52f1a6f5325cb515209",
+   "source_sha256": "51ede670150650c604dcacf676c96080e92a5859bc4347b681ea69698d1896e2"
+  },
+  "string/en/hoth_region_names.stf": {
+   "added": {},
+   "unchanged": true
+  },
+  "string/en/clientpoi_n.stf": {
+   "added": {
+    "hoth_mynock_den": "Mynock Den",
+    "hoth_rancor_grounds": "Glacial Rancor Grounds"
+   },
+   "unchanged": false
+  },
+  "string/en/clientpoi_d.stf": {
+   "added": {
+    "hoth_mynock_den": "A cave in the southern mynock fields where ice mynocks roost in their thousands.",
+    "hoth_rancor_grounds": "A glacial valley south of the outpost. Scavengers tell of a rancor that hunts here."
+   },
+   "unchanged": false
+  },
+  "datatables/clientregion/hoth.iff": {
+   "rows": 22,
+   "added": [
+    [
+     "@hoth_region_names:mynock_den",
+     -2000.0,
+     -4800.0,
+     60.0
+    ],
+    [
+     "@hoth_region_names:rancor_grounds",
+     600.0,
+     -4600.0,
+     200.0
+    ]
+   ]
+  },
+  "datatables/clientpoi/clientpoi.iff": {
+   "rows": 240,
+   "added": [
+    [
+     "@clientpoi_n:hoth_mynock_den",
+     "@clientpoi_d:hoth_mynock_den",
+     "hoth",
+     "",
+     -2000.0,
+     0.0,
+     -4800.0
+    ],
+    [
+     "@clientpoi_n:hoth_rancor_grounds",
+     "@clientpoi_d:hoth_rancor_grounds",
+     "hoth",
+     "",
+     600.0,
+     0.0,
+     -4600.0
+    ]
+   ]
+  },
+  "names_tool_sites": [
+   "frostfang_cavern",
+   "icemaw_den",
+   "snowblind_lair",
+   "matriarch_cavern",
+   "ice_caves",
+   "mynock_den",
+   "rancor_grounds",
+   "imperial_forward_camp",
+   "rebel_forward_camp",
+   "scavenger_camp",
+   "raider_camp",
+   "contested_ground",
+   "lucky_despot_wreck",
+   "tauntaun_plains_west",
+   "tauntaun_plains_east",
+   "mynock_fields",
+   "wampa_flanks_west",
+   "wampa_flanks_southeast",
+   "imperial_zone",
+   "rebel_zone",
+   "scavenger_zone"
+  ],
+  "badge_map": {
+   "rows": 142,
+   "added": [
+    141,
+    "bdg_thm_park_hoth_salvage",
+    "NONE",
+    2,
+    1,
+    "content"
+   ],
+   "from": "base"
+  },
+  "string/en/badge_n.stf": {
+   "keys": 173,
+   "bdg_thm_park_hoth_salvage": "Vell's Salvage Crew",
+   "from": "base"
+  },
+  "string/en/badge_d.stf": {
+   "keys": 163,
+   "bdg_thm_park_hoth_salvage": "...ran all three of Quartermaster Vell's salvage jobs on Hoth and came back to collect the pay.",
+   "from": "base"
+  },
+  "chiss_palette": {
+   "entries": [
+    [
+     0,
+     36,
+     204
+    ],
+    [
+     0,
+     62,
+     208
+    ],
+    [
+     0,
+     79,
+     204
+    ],
+    [
+     0,
+     98,
+     205
+    ],
+    [
+     0,
+     118,
+     198
+    ],
+    [
+     0,
+     128,
+     182
+    ],
+    [
+     14,
+     123,
+     156
+    ],
+    [
+     5,
+     104,
+     128
+    ]
+   ],
+   "default": 5,
+   "rgb": [
+    0,
+    128,
+    182
+   ]
+  },
+  "shader_old_defaults": {
+   "shader/rancor_hue_hcsb21.sht": 23,
+   "shader/rancor_hue_hcb13.sht": 1,
+   "shader/rancor_hue_hc8.sht": 23,
+   "shader/rancor_hue_lod_hc8.sht": 23
+  },
+  "crc_table": {
+   "from": "base",
+   "rows": 29359,
+   "added": [
+    1988888622,
+    "object/mobile/shared_rancor_ice.iff"
+   ]
+  },
+  "chain": [
+   "appearance/mesh/rancor_ice.lmg",
+   "appearance/mesh/rancor_ice_l0.mgn",
+   "appearance/mesh/rancor_ice_l1.mgn",
+   "appearance/mesh/rancor_ice_l2.mgn",
+   "appearance/mesh/rancor_ice_l3.mgn",
+   "appearance/mesh/rancor_ice_l4.mgn",
+   "appearance/rancor_ice.sat",
+   "object/mobile/shared_rancor_ice.iff",
+   "shader/rancor_ice_hc8.sht",
+   "shader/rancor_ice_hcb13.sht",
+   "shader/rancor_ice_hcsb21.sht",
+   "shader/rancor_ice_lod_hc8.sht"
+  ]
+ }
+}
