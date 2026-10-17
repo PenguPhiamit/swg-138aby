@@ -34,9 +34,31 @@ until Claude or ChatGPT has checked it against the source.
 | **Bot chat drafts** (social play, later) | a new local_jobs.py job, then a queue topic | `"model": "gemma4:12b"` |
 | **A quick one-off**: summarise a log, list files that mention X | run `local_map.py` or `local_agent.py` by hand (below) | any |
 
-Not for the local model: decisions, reviews and sign-offs, anything that must be right the first time, credentials or
-account data, and **text with real people's names** (the names sweep stays with ChatGPT, owner 15 Oct). If a topic
-must read such text, mark it `"local_only": true`. It then waits for this PC and never goes over the network.
+Not for the friend's PC: decisions, reviews and sign-offs, anything that must be right the first time, credentials or
+account data, and **text with real people's names**. A topic that must read such text is marked `"local_only": true`.
+It then waits for this PC's model and never goes over the network (AGENTS.md, Privacy; the friend agreed to source,
+bot notes and game text only).
+
+### Queued by the owner: the names delta sweep (17 Oct)
+
+The owner, 17 Oct: "save it for the local model we are setting up". It runs before the repository goes public, and
+it is a drafting job, so Claude or ChatGPT reviews its list before any push.
+
+- **Where:** this PC only (`local_only`), because its input is the text that may hold real names. If the owner wants
+  it on the friend's PC instead, that needs their explicit OK for this job, because it sends those lines over the
+  home network.
+- **Scope:** the files in `h` changed since 2026-10-15 11:40 AM (324 when it was queued). Only the lines added since
+  then are checked (`git log --since="2026-10-15 11:40" -p`, added lines only).
+- **Rules:** `work/names-sweep/RULES.md`, plus the owner's decisions in `work/names-sweep/decisions-2026-10-17.json`.
+  Keep credits for community creators, whole source links, family mentions without a name, and the owner's own
+  characters listed there. Flag other real people's names, handles that are not credits, and e-mail addresses.
+- **Output:** `work/names-sweep/delta-2026-10.json`, in the same shape as `new-names.json`. Everything stays under
+  `work/` (gitignored, never exported). **No found name goes into a tracked file**: not the queue, LOG.md, the
+  board, or this page.
+- **How:** it needs a chunk job in `local_jobs.py` (`names-delta`: prepare the added lines, the instruction from
+  RULES.md and the decisions, a report that writes the JSON under `work/`). That job is not written yet. Until it
+  is, nothing is queued, so a topic can't put input copies under `Agent/local-research/`, which git tracks.
+- **Review:** the agent that runs the push check (Claude or ChatGPT) goes through every flagged line before the push.
 
 ## How each agent queues work
 
