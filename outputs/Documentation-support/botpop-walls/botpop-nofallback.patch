@@ -1,0 +1,468 @@
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+index fa337ec..2b9c7b9 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+@@ -17,6 +17,7 @@
+ #include "server/zone/objects/waypoint/WaypointObject.h"
+ #include "server/zone/managers/collision/CollisionManager.h"
+ #include "server/zone/managers/collision/PathFinderManager.h"
++#include "pathfinding/RecastPolygon.h"
+ #include "server/zone/managers/botpop/BotPopRegistry.h"
+ #include "server/zone/managers/botpop/ClientlessLogin.h"
+ #include "server/zone/managers/botpop/BotPopLaunch.h"
+@@ -97,6 +98,8 @@ public:
+ 	size_t chaseNext = 0;
+ 	float chaseX = 0, chaseY = 0; // where the target was when the route was planned
+ 	uint64 chasePlannedMs = 0;
++	int chaseRoute = 0;       // planRoute's result for `chase` (ROUTE_*)
++	uint64 routeRetryMs = 0;  // startRoute found no route: not again before this
+ 	uint64 lastStepMs = 0, nextActionMs = 0, nextAttackMs = 0, deadSinceMs = 0;
+ 	std::atomic<bool> replace{false}; // dead too long: log out and spawn a fresh one at home (set by a step, read by the tick)
+ 	std::atomic<bool> travelNow{false}; // "botpop travel": a launch bot moves on at its next step
+@@ -147,6 +150,8 @@ private:
+ 	std::atomic<uint64> stepMicros{0}, chunkMicrosMax{0};
+ 	std::atomic<int> failedPaths{0};
+ 	std::atomic<int> routeBudget{ROUTES_PER_PASS}, routesPlanned{0}, routesDeferred{0};
++	// Navmesh legs that could not be walked as asked (meshPath): the bot stops or waits instead of crossing the mesh straight.
++	std::atomic<int> legNoStart{0}, legNoEnd{0}, legNoPath{0}, legPartial{0}, legNoMesh{0}, legSnapped{0}, routesNone{0};
+ 	std::atomic<int> launchBots{0}, launchKills{0}, launchDeaths{0}, launchBoxes{0}, launchTravels{0};
+ 	uint64 nextPositionsMs = 0; // the tick writes log/botpop-positions.json every 10 s (the live map)
+ 	std::atomic<int> launchMissions{0}, launchMissionsDone{0};
+@@ -314,7 +319,15 @@ private:
+ 		return Vector3(point.getX() + sy / length * lane, point.getY() - sx / length * lane, point.getZ());
+ 	}
+ 	static bool stepToward(CreatureObject* bot, Zone* zone, float tx, float ty, float speed, float seconds, float stopAt);
++	// planRoute's results.
++	static const int ROUTE_NONE = -2;     // no route: the start or the goal is off the mesh, or no path; choose another or wait
++	static const int ROUTE_DEFERRED = -1; // this pass's ROUTES_PER_PASS are spent: try again next step
++	static const int ROUTE_STRAIGHT = 0;  // no navmesh on the way: the straight line
++	static const int ROUTE_FULL = 1;      // a navmesh route to the goal
++	static const int ROUTE_SHORT = 2;     // a navmesh route that stops where the mesh stops reaching; walk it and stop
+ 	int planRoute(Zone* zone, const Vector3& from, float gx, float gy, std::vector<Vector3>& out);
++	int meshPath(NavArea* area, const Vector3& a, const Vector3& b, std::vector<Vector3>& out);
++	void snapToMesh(Zone* zone, Vector3& point);
+ 	bool startRoute(BotState* state, CreatureObject* bot, Zone* zone, float gx, float gy, float speed);
+ 	bool chaseToward(BotState* state, CreatureObject* bot, Zone* zone, float tx, float ty, float speed, float seconds, float stopAt);
+ 	static int combatLevel(CreatureObject* bot);
+@@ -484,6 +497,8 @@ private:
+ 			point.setZ(CollisionManager::getWorldFloorCollision(point.getX(), point.getY(), zone, false));
+ 		}
+ 
++		snapToMesh(zone, point); // not inside a building's footprint, where no route starts
++
+ 		bot->initializePosition(point.getX(), point.getZ(), point.getY());
+ 		bot->setDirection(frand() * 2 * M_PI);
+ 
+@@ -540,38 +555,14 @@ private:
+ 		move(bot, bot->getPosition(), 0, 0, 0);
+ 	}
+ 
+-	static bool startWalk(BotState* state, CreatureObject* bot, Zone* zone) {
++	// A wander to a random walkable point near home, along planRoute (findPath's straight-line fallback crossed buildings).
++	bool startWalk(BotState* state, CreatureObject* bot, Zone* zone) {
+ 		Vector3 goal;
+ 
+ 		if (!PathFinderManager::instance()->getSpawnPointInArea(Sphere(state->home, state->radius), zone, goal, false))
+ 			return false;
+ 
+-		WorldCoordinates start(bot);
+-		WorldCoordinates end(goal, nullptr);
+-		std::unique_ptr<Vector<WorldCoordinates>> route(PathFinderManager::instance()->findPath(start, end, zone));
+-
+-		if (route == nullptr || route->size() == 0)
+-			return false;
+-
+-		state->path.clear();
+-
+-		// Outdoors only for now: the walk ends where the route would enter a building.
+-		for (int i = 0; i < route->size(); ++i) {
+-			const WorldCoordinates& point = route->get(i);
+-
+-			if (point.getCell() != nullptr)
+-				break;
+-
+-			state->path.push_back(Vector3(point.getX(), point.getY(), point.getZ()));
+-		}
+-
+-		if (state->path.empty())
+-			return false;
+-
+-		state->next = 0;
+-		state->mode = BotState::WALKING;
+-
+-		return true;
++		return startRoute(state, bot, zone, goal.getX(), goal.getY(), state->speed);
+ 	}
+ 
+ 	static void walk(BotState* state, CreatureObject* bot, Zone* zone, float seconds, uint64 now) {
+@@ -752,7 +743,9 @@ private:
+ 			 << " ms per second across workers, slowest chunk " << std::round(chunkMicrosMax.exchange(0) / 10.0) / 100
+ 			 << " ms, real players " << lastRealPlayers << ", spawned " << spawnedTotal << ", logged out " << loggedOutTotal
+ 			 << ", failed " << failedTotal << ", no path " << failedPaths.exchange(0) << ", routes " << routesPlanned.exchange(0)
+-			 << " (" << routesDeferred.exchange(0) << " deferred)" << (final ? " (stopped: no bots)" : "");
++			 << " (" << routesDeferred.exchange(0) << " deferred, " << routesNone.exchange(0) << " none), legs stopped: no start "
++			 << legNoStart.exchange(0) << ", no end " << legNoEnd.exchange(0) << ", no path " << legNoPath.exchange(0) << ", partial "
++			 << legPartial.exchange(0) << ", unloaded mesh " << legNoMesh.exchange(0) << ", snapped " << legSnapped.exchange(0) << (final ? " (stopped: no bots)" : "");
+ 
+ 		info(true) << line.toString();
+ 
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+index 8071c68..6a0230a 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+@@ -59,14 +59,151 @@ inline bool BotPopManager::stepToward(CreatureObject* bot, Zone* zone, float tx,
+ 	return there;
+ }
+ 
++// BotPop's own Detour query on one navmesh, one per worker thread (PathFinderManager's is protected). Core3's
++// getRecastPath looks only 3 m north-south for the nearest polygon (extents {8, 8, 3}: Recast's x, height, z), takes
++// partial paths, and findPathFromWorldToWorld turns every failure into the straight line from start to end
++// (PathFinderManager.cpp:461-465): in a town, a bot running through whole buildings (owner, run 15, Coronet).
++static const constexpr int MESH_NODES = 8192; // Core3: 4096 (MAX_QUERY_NODES)
++static const constexpr int MESH_POLYS = 2048; // as Core3 (getRecastPath MAX_POLYS)
++static const constexpr int MESH_POINTS = 256;
++enum { MESH_OK = 0, MESH_PARTIAL = 1, MESH_NO_START = -1, MESH_NO_END = -2, MESH_NO_PATH = -3, MESH_NO_MESH = -4 };
++
++inline dtNavMeshQuery* meshQuery() {
++	static thread_local dtNavMeshQuery* query = dtAllocNavMeshQuery();
++	return query;
++}
++
++inline const dtQueryFilter& meshFilter() {
++	static const dtQueryFilter filter = [] {
++		dtQueryFilter f;
++		f.setIncludeFlags(SAMPLE_POLYFLAGS_ALL ^ (SAMPLE_POLYFLAGS_DISABLED | SAMPLE_POLYFLAGS_SWIM));
++		f.setExcludeFlags(0);
++		return f;
++	}();
++
++	return filter;
++}
++
++// The nearest polygon to p (world x, y, z) within `reach` m across and `rise` m up or down, and the point on it.
++inline bool meshNearest(dtNavMeshQuery* query, const Vector3& p, float reach, float rise, dtPolyRef& ref, float* nearest) {
++	const float centre[3] = {p.getX(), p.getZ(), -p.getY()};
++	const float extents[3] = {reach, rise, reach};
++	ref = 0;
++
++	return (query->findNearestPoly(centre, extents, &meshFilter(), &ref, nearest) & DT_SUCCESS) && ref != 0;
++}
++
++// The navmesh path from a to b on `area`, appended to `out` without a. MESH_OK, or MESH_PARTIAL when b can't be reached
++// (`out` then ends at the reachable point nearest it), or a failure with `out` unchanged. A start off the mesh (a bot
++// left in a building's footprint) is taken from the nearest polygon within 10 m, the hop to it first in `out`; an end
++// within 10 m, then 40 m (a town centre inside a building). 2.5 m up or down: the street, not a roof above it.
++inline int BotPopManager::meshPath(NavArea* area, const Vector3& a, const Vector3& b, std::vector<Vector3>& out) {
++	RecastNavMesh* mesh = area->getNavMesh();
++
++	if (mesh == nullptr) {
++		++legNoMesh;
++		return MESH_NO_MESH;
++	}
++
++	ReadLocker locker(area);
++	dtNavMesh* navMesh = mesh->getNavMesh();
++	dtNavMeshQuery* query = meshQuery();
++
++	if (navMesh == nullptr || query == nullptr || !(query->init(navMesh, MESH_NODES) & DT_SUCCESS)) {
++		++legNoMesh;
++		return MESH_NO_MESH;
++	}
++
++	dtPolyRef startRef, endRef;
++	float startPos[3], endPos[3];
++
++	if (!meshNearest(query, a, 10.f, 2.5f, startRef, startPos)) {
++		++legNoStart;
++		return MESH_NO_START;
++	}
++
++	if (!meshNearest(query, b, 10.f, 2.5f, endRef, endPos) && !meshNearest(query, b, 40.f, 4.f, endRef, endPos)) {
++		++legNoEnd;
++		return MESH_NO_END;
++	}
++
++	float hopX = startPos[0] - a.getX(), hopY = -startPos[2] - a.getY();
++	float endX = endPos[0] - b.getX(), endY = -endPos[2] - b.getY();
++	bool hop = hopX * hopX + hopY * hopY > 0.25f;
++
++	if (hop || endX * endX + endY * endY > 2.25f)
++		++legSnapped;
++
++	dtPolyRef polys[MESH_POLYS];
++	int count = 0;
++	dtStatus status = query->findPath(startRef, endRef, startPos, endPos, &meshFilter(), polys, &count, MESH_POLYS);
++
++	if (!(status & DT_SUCCESS) || count == 0) {
++		++legNoPath;
++		return MESH_NO_PATH;
++	}
++
++	bool partial = (status & DT_PARTIAL_RESULT) || polys[count - 1] != endRef;
++
++	if (partial) { // out of nodes, or b on a part of the mesh this one doesn't join: as near as it gets
++		++legPartial;
++		query->closestPointOnPoly(polys[count - 1], endPos, endPos, nullptr);
++	}
++
++	float points[MESH_POINTS * 3];
++	int n = 0;
++
++	if (!(query->findStraightPath(startPos, endPos, polys, count, points, nullptr, nullptr, &n, MESH_POINTS, 0) & DT_SUCCESS) || n == 0) {
++		++legNoPath;
++		return MESH_NO_PATH;
++	}
++
++	for (int i = hop ? 0 : 1; i < n; ++i)
++		out.push_back(Vector3(points[i * 3], -points[i * 3 + 2], points[i * 3 + 1]));
++
++	return partial ? MESH_PARTIAL : MESH_OK;
++}
++
++// `point` moved onto the nearest walkable navmesh point within 40 m when it lies in a navmesh, so a bot doesn't start
++// inside a building's footprint (getSpawnPointInArea can leave one there: its fallback, and its pull back inside the
++// radius); unchanged outside the meshes.
++inline void BotPopManager::snapToMesh(Zone* zone, Vector3& point) {
++	SortedVector<ManagedReference<NavArea*>> areas;
++	zone->getInRangeNavMeshes(point.getX(), point.getY(), &areas, true);
++
++	if (areas.size() == 0)
++		return;
++
++	NavArea* area = areas.get(0).get();
++	RecastNavMesh* mesh = area->getNavMesh();
++
++	if (mesh == nullptr)
++		return;
++
++	ReadLocker locker(area);
++	dtNavMesh* navMesh = mesh->getNavMesh();
++	dtNavMeshQuery* query = meshQuery();
++
++	if (navMesh == nullptr || query == nullptr || !(query->init(navMesh, MESH_NODES) & DT_SUCCESS))
++		return;
++
++	Vector3 ground(point.getX(), point.getY(), floorNear(zone, point.getX(), point.getY(), std::nanf("")));
++	dtPolyRef ref;
++	float nearest[3];
++
++	if (meshNearest(query, ground, 10.f, 2.5f, ref, nearest) || meshNearest(query, ground, 40.f, 4.f, ref, nearest))
++		point = Vector3(nearest[0], -nearest[2], floorNear(zone, nearest[0], -nearest[2], std::nanf("")));
++}
++
+ // The route from `from` to (gx, gy), round the buildings and walls of a city at either end, into `out` (the points
+ // after `from`, the goal last). PathFinderManager::findPath looks for navmeshes only at a leg's midpoint
+ // (findPathFromWorldToWorld), so a long leg out of a city or into one finds none and comes back as the straight line;
+ // here each end that lies in a navmesh gets its own leg, between that end and the mesh's edge. The open ground between
+ // is sampled every 25 m for the meshes it crosses (a POI, another town), and each of those gets a leg from where the
+-// line enters it to where it leaves; the rest stays straight. Returns 1 for a navmesh route, 0 for the straight line
+-// (no navmesh on the way: area lookups, nothing else), -1 when this pass's ROUTES_PER_PASS are spent (`out` empty: try
+-// again next step). A route costs one unit of the budget for its ends and one for each mesh crossed.
++// line enters it to where it leaves; the rest stays straight. Each leg is meshPath's, never findPath's: a leg that
++// cannot be walked ends the route where it stopped (ROUTE_SHORT) or leaves none (ROUTE_NONE), instead of the straight
++// line findPath falls back to. Returns a ROUTE_* (BotPopManager.h). A route costs one unit of the budget for its ends
++// and one for each mesh crossed.
+ inline int BotPopManager::planRoute(Zone* zone, const Vector3& from, float gx, float gy, std::vector<Vector3>& out) {
+ 	out.clear();
+ 
+@@ -76,23 +213,28 @@ inline int BotPopManager::planRoute(Zone* zone, const Vector3& from, float gx, f
+ 
+ 	Vector3 goal(gx, gy, floorNear(zone, gx, gy, std::nanf("")));
+ 
+-	// findPath from a to b, without a (the world -> world path is world points only).
+-	auto leg = [&](const Vector3& a, const Vector3& b) {
+-		WorldCoordinates start(a, nullptr);
+-		WorldCoordinates end(b, nullptr);
+-		std::unique_ptr<Vector<WorldCoordinates>> route(PathFinderManager::instance()->findPath(start, end, zone));
++	// One navmesh leg from a to b on `area` (meshPath); false when the route stops here: `out` then ends at the last point
++	// reached, never with a straight line across the mesh.
++	auto leg = [&](NavArea* area, const Vector3& a, const Vector3& b) {
++		int result = meshPath(area, a, b, out);
++
++		if (result == MESH_OK)
++			return true;
+ 
+-		if (route == nullptr || route->size() < 2) {
++		if (result == MESH_NO_MESH) { // unloaded since the lookup (a rebuild): nothing to route on
+ 			out.push_back(b);
+-			return;
++			return true;
+ 		}
+ 
+-		for (int i = 1; i < route->size(); ++i) {
+-			const WorldCoordinates& point = route->get(i);
++		return false;
++	};
+ 
+-			if (point.getCell() == nullptr)
+-				out.push_back(Vector3(point.getX(), point.getY(), point.getZ()));
+-		}
++	auto stopped = [&]() {
++		if (!out.empty())
++			return ROUTE_SHORT;
++
++		++routesNone;
++		return ROUTE_NONE;
+ 	};
+ 
+ 	// The last point of the line inside->outside that is still in the area, 2 m back inside (12 halvings: within 2 m
+@@ -131,10 +273,9 @@ inline int BotPopManager::planRoute(Zone* zone, const Vector3& from, float gx, f
+ 	for (int i = 0; i < atStart.size(); ++i) {
+ 		if (atStart.get(i)->containsPoint(gx, gy)) { // both ends in one city: the midpoint is in it too
+ 			if (!spend(1))
+-				return -1;
++				return ROUTE_DEFERRED;
+ 
+-			leg(from, goal);
+-			return 1;
++			return leg(atStart.get(i).get(), from, goal) ? ROUTE_FULL : stopped();
+ 		}
+ 	}
+ 
+@@ -148,7 +289,12 @@ inline int BotPopManager::planRoute(Zone* zone, const Vector3& from, float gx, f
+ 	// The meshes it crosses, at most MAX_CROSSINGS, each as (entry, exit) 2 m inside its edge.
+ 	static const constexpr float SAMPLE_M = 25.f;
+ 	static const constexpr int MAX_CROSSINGS = 4;
+-	std::vector<std::pair<Vector3, Vector3>> crossings;
++	struct Crossing {
++		NavArea* area;
++		Vector3 entry, exit;
++	};
++
++	std::vector<Crossing> crossings;
+ 	float sx = open1.getX() - open0.getX(), sy = open1.getY() - open0.getY();
+ 	float length = std::sqrt(sx * sx + sy * sy);
+ 	int samples = (int)(length / SAMPLE_M);
+@@ -178,7 +324,7 @@ inline int BotPopManager::planRoute(Zone* zone, const Vector3& from, float gx, f
+ 
+ 		if (inside != nullptr && area != inside) { // out of it: into the open, or straight into the next mesh
+ 			last = edge(inside, entry, sample);
+-			crossings.push_back(std::make_pair(entry, last));
++			crossings.push_back({inside, entry, last});
+ 			inside = nullptr;
+ 		}
+ 
+@@ -189,37 +335,50 @@ inline int BotPopManager::planRoute(Zone* zone, const Vector3& from, float gx, f
+ 	}
+ 
+ 	if (inside != nullptr)
+-		crossings.push_back(std::make_pair(entry, edge(inside, entry, open1)));
++		crossings.push_back({inside, entry, edge(inside, entry, open1)});
+ 
+ 	if (startArea == nullptr && goalArea == nullptr && crossings.empty()) {
+ 		out.push_back(goal);
+-		return 0;
++		return ROUTE_STRAIGHT;
+ 	}
+ 
+ 	if (!spend((startArea != nullptr || goalArea != nullptr ? 1 : 0) + (int)crossings.size()))
+-		return -1;
++		return ROUTE_DEFERRED;
+ 
+-	if (startArea != nullptr)
+-		leg(from, open0);
++	if (startArea != nullptr && !leg(startArea, from, open0))
++		return stopped();
+ 
+ 	for (const auto& crossing : crossings) {
+-		out.push_back(crossing.first);
+-		leg(crossing.first, crossing.second);
++		out.push_back(crossing.entry);
++
++		if (!leg(crossing.area, crossing.entry, crossing.exit))
++			return stopped();
+ 	}
+ 
+ 	if (goalArea != nullptr) {
+ 		out.push_back(open1);
+-		leg(open1, goal);
++
++		if (!leg(goalArea, open1, goal))
++			return stopped();
+ 	} else {
+ 		out.push_back(goal);
+ 	}
+ 
+-	return 1;
++	return ROUTE_FULL;
+ }
+ 
+-// A walk to (gx, gy) along planRoute; false (and still not walking) when this pass's routes are spent.
++// A walk to (gx, gy) along planRoute; false (and still not walking) when this pass's routes are spent, or when there is
++// no route (then not again for 5 s: a bot off the mesh would otherwise spend the budget every step).
+ inline bool BotPopManager::startRoute(BotState* state, CreatureObject* bot, Zone* zone, float gx, float gy, float speed) {
+-	if (planRoute(zone, bot->getPosition(), gx, gy, state->path) < 0)
++	if (state->lastStepMs < state->routeRetryMs)
++		return false;
++
++	int result = planRoute(zone, bot->getPosition(), gx, gy, state->path);
++
++	if (result == ROUTE_NONE)
++		state->routeRetryMs = state->lastStepMs + 5000;
++
++	if (result < ROUTE_STRAIGHT)
+ 		return false;
+ 
+ 	state->next = 0;
+@@ -232,7 +391,8 @@ inline bool BotPopManager::startRoute(BotState* state, CreatureObject* bot, Zone
+ // stepToward round the buildings: the same contract (true once within stopAt of the target), along a planRoute route
+ // that is planned again only when the target has moved 4 m or a quarter of the distance (AiAgent re-plans a follow at
+ // 4 m: findNextPosition), and at most every 2 s unless it jumped 30 m. Away from the navmeshes the route is the
+-// straight line and this is stepToward plus two area lookups every 2 s.
++// straight line and this is stepToward plus area lookups every 2 s. In a mesh it never steps straight across: with no
++// route yet (budget spent, or none) the bot waits, and on a route that stops short it walks to the end and waits there.
+ inline bool BotPopManager::chaseToward(BotState* state, CreatureObject* bot, Zone* zone, float tx, float ty, float speed, float seconds, float stopAt) {
+ 	Vector3 position = bot->getPosition();
+ 	float dx = tx - position.getX(), dy = ty - position.getY();
+@@ -244,17 +404,28 @@ inline bool BotPopManager::chaseToward(BotState* state, CreatureObject* bot, Zon
+ 		bool stale = state->chaseNext >= state->chase.size() || moved > Math::max(4.f, distance * 0.25f);
+ 
+ 		if (stale && (state->lastStepMs >= state->chasePlannedMs + 2000 || moved > 30.f)) {
+-			if (planRoute(zone, position, tx, ty, state->chase) < 1)
+-				state->chase.clear(); // straight, or over budget: straight this time
+-
+-			state->chaseNext = 0;
+-			state->chaseX = tx;
+-			state->chaseY = ty;
+-			state->chasePlannedMs = state->lastStepMs;
++			std::vector<Vector3> route;
++			int result = planRoute(zone, position, tx, ty, route);
++
++			if (result != ROUTE_DEFERRED) {
++				state->chase.swap(route);
++				state->chaseRoute = result;
++				state->chaseNext = 0;
++				state->chaseX = tx;
++				state->chaseY = ty;
++				state->chasePlannedMs = state->lastStepMs;
++			} else if (state->chaseNext >= state->chase.size()) {
++				state->chaseRoute = ROUTE_NONE; // nothing left to follow: wait for next step's budget
++			}
+ 		}
+ 
+-		// Each waypoint but the last; the last is the target itself, wherever it is now.
+-		while (state->chaseNext + 1 < state->chase.size()) {
++		// Each waypoint but the last, which is the target itself wherever it is now; on a short route, every waypoint.
++		size_t follow = state->chase.size();
++
++		if (state->chaseRoute != ROUTE_SHORT && follow > 0)
++			--follow;
++
++		while (state->chaseNext < follow) {
+ 			const Vector3 point = state->chaseNext > 0 ? inLane(state->chase[state->chaseNext - 1], state->chase[state->chaseNext], laneOf(bot))
+ 					: state->chase[state->chaseNext];
+ 			float px = point.getX() - position.getX(), py = point.getY() - position.getY();
+@@ -266,6 +437,13 @@ inline bool BotPopManager::chaseToward(BotState* state, CreatureObject* bot, Zon
+ 
+ 			++state->chaseNext;
+ 		}
++
++		if (state->chaseRoute == ROUTE_NONE || state->chaseRoute == ROUTE_SHORT) { // wait; plan again in 2 s
++			if (bot->getCurrentSpeed() != 0)
++				move(bot, position, 0, dx, dy);
++
++			return false;
++		}
+ 	}
+ 
+ 	return stepToward(bot, zone, tx, ty, speed, seconds, stopAt);

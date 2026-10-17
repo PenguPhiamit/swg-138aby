@@ -167,3 +167,53 @@ The patch is against Core3-dev HEAD `b6059d7a` and changes `BotPopLaunchBrain.h`
 - Hunters and explorers crossing a POI that has a mesh, or another town, on their way out should go round its buildings and walls, not through them.
 - Examples: a Tatooine camp from the `navAreas` list, or a hunter from Mos Eisley crossing Bestine's edge.
 - Nothing changes in open country, or for POIs without a mesh. Option 4 (more POI meshes) is what widens the coverage.
+
+## Bots running through whole buildings in Coronet: `botpop-nofallback.patch` (16 Oct, about 10 PM)
+
+The owner saw this in run 15 at about 9:20 PM. The patch applies to Core3-dev `e7512cb8` and to `665bea04`, the current HEAD; `git apply --check` passes on both. A syntax-only clang compile passes too. It is **untested in game**.
+
+**Cause (confirmed in the code, not yet counted in game):**
+- My `planRoute` legs called `PathFinderManager::findPath`. Whenever Core3's Recast query fails, `findPathFromWorldToWorld` returns the straight line from start to end (`PathFinderManager.cpp:461-465`), and `leg()` took it as a route. So did `startWalk` and `chaseToward`.
+- The query fails or comes up short in these cases:
+  - **Start or end off the mesh.** `getRecastPath` looks for the nearest polygon within extents `{8, 8, 3}` in Recast order (x, height, z): only 3 m north-south (`:228`). A bot or goal in a building's footprint, a town centre inside a building, or a point that `getSpawnPointInArea` pulled back inside its radius (`:1335-1344`) finds no polygon.
+  - **Partial paths are accepted.** `findPathFromWorldToWorld` passes `allowPartial = true` (`:476`). On a big mesh, the A* search stops at 4,096 nodes (`MAX_QUERY_NODES`, `:25`), and Coronet's mesh has 0.15 m cells. The route then ends partway, and the rest was walked straight.
+  - **A disconnected part of the mesh**, such as a roof or a walled yard, gives the same partial path.
+- Spawns: `getSpawnPointInArea` falls back to the city centre itself, which can be inside a building (`BotPopManager.h:482-485`).
+
+**Step CPU (1,335-1,389 ms per second) is not a regression.** Run 14's log shows the same rise:
+- run 14: 769 ms/s at 5 minutes, 1,431 ms/s at 10 minutes;
+- run 15: 752 ms/s at 5 minutes, then 1,277-1,433 ms/s.
+
+The 761 ms/s figure was read in the first minutes, before the bots spread out to hunt.
+
+**The fix:**
+- **`meshPath`:** BotPop's own Detour query, using the same Detour library and the mesh's own `dtNavMesh`, with one query object per worker thread.
+  - It snaps the start to the nearest polygon within 10 m. It snaps the end within 10 m, then 40 m. Both search only 2.5 m up or down (4 m for the 40 m search), so a roof isn't chosen.
+  - It allows 8,192 nodes, twice Core3's limit.
+  - A partial path is reported as partial, and the route ends at the reachable point nearest the goal.
+- **Failure handling:**
+  - Every `planRoute` leg uses `meshPath`. When a leg fails, the route ends at the last point reached (`ROUTE_SHORT`), or there is no route at all (`ROUTE_NONE`). It is never a straight line across the mesh.
+  - `startRoute` retries a failed route after 5 s; hunters and explorers then pick a new goal.
+  - `startWalk` (the wander) now goes through `startRoute`.
+  - `chaseToward` waits instead of stepping straight while it has no route: budget spent, no route, or at the end of a short route. It plans again after 2 s.
+- **Spawns** are snapped to the mesh (`snapToMesh`).
+- **The stats line** adds `routes N (M deferred, K none), legs stopped: no start, no end, no path, partial, unloaded mesh, snapped`. Those counters are the in-game check. The patch counts failures instead of falling back, so they show where the mesh doesn't reach.
+- **`no path`** (the wander) now also counts wanders refused because the budget was spent or there was no route.
+
+**What a player should see:**
+- In Coronet and other towns, bots keep to the streets.
+- A bot whose goal can't be reached stops where the street ends and turns away, instead of walking through the building.
+- A bot found inside a footprint hops at most 10 m to the street. Watch for that hop.
+
+**Risks:**
+- A bot whose start is more than 10 m from any walkable polygon stays put. It retries every 5 s, and the `no start` counter shows it.
+- A large `partial` count would mean the 8,192-node limit is too low for the biggest cities.
+- **CPU:** a failing search can now run to 8,192 nodes instead of 4,096, but failures retry only every 5 s (routes) or 2 s (chases). Snapping adds one or two cheap nearest-polygon lookups per leg. I expect step CPU to stay about the same; compare the stats line.
+
+### Planetary map landmarks as destinations (described, not in the patch)
+
+- The M-key map image has no walkability data. But Core3 keeps the map's locations by category: `Zone::getPlanetaryObjectList(category)` (`GroundZone.idl:141`). Core3 already uses it for `"cloningfacility"` (`PlayerManagerImplementation.cpp:1640`) and `"trainer"` (`FindMyTrainerCommand.h:88`).
+- Wandering and idle bots could pick a cantina, starport, shuttleport, bank or terminal in their own city as a goal, a few metres in front of the building, snapped to the mesh. Then they would go where players go instead of to random points.
+- It needs the category names and a per-city filter (within the city radius), and goals must stay outside the buildings until interiors (option 5) exist.
+- **Effort:** small, about 40 lines. **CPU:** a list lookup per goal.
+- It's best done after the counters above show the routes are clean.
