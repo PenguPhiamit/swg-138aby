@@ -139,3 +139,9 @@ Next: Claude reviews the three source commits and stages the client corrections 
      - `hutt.skt` has `head` (lowercase), no `neck`, no `hold_l`, its face bones inside the body skeleton, and no face skeleton.
      - MTG's player Hutt templates come from a later client whose code knows Hutts; our pre-CU client does not.
    - Not proven: the client's code is closed, so this is the best structural explanation, not a traced one.
+
+3. **5:46 PM, rig experiment (owner: "test once")** (`d3bfe26`, archive `dd28259b`, client only).
+   - What it added: 35 human bone names and `hold_l` on `hutt.skt`, and the human face skeleton attached at `head`.
+   - Result: the client crashed on character select, before the Hutt logged in, and left no crash dump.
+   - The client is back on `6ff21312` (5:54 PM), matching the server.
+   - Untested: bones only (no face skeleton), and the reverse.
