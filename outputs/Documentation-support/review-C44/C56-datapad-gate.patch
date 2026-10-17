@@ -1,0 +1,55 @@
+diff --git a/MMOCoreORB/src/server/zone/managers/mission/MissionManagerImplementation.cpp b/MMOCoreORB/src/server/zone/managers/mission/MissionManagerImplementation.cpp
+--- a/MMOCoreORB/src/server/zone/managers/mission/MissionManagerImplementation.cpp
++++ b/MMOCoreORB/src/server/zone/managers/mission/MissionManagerImplementation.cpp
+@@ -247,7 +247,7 @@
+ 
+ 	SceneObject* datapad = player->getSlottedObject("datapad");
+ 
+-	if (mission->getParent().get() == datapad)
++	if (datapad == nullptr || mission->getParent().get() == datapad)
+ 		return;
+ 
+ 	int missionCount = 0;
+@@ -275,6 +275,15 @@
+ 		return;
+ 	}
+ 
++	// C56: a full datapad refuses the mission before anything is claimed or created. transferObject takes the mission
++	// out of the mission bag before it checks the datapad's volume limit (ContainerComponent::transferObject), so a
++	// failed transfer used to leave it in neither, with its objective, waypoint and spawn still created below.
++	if (datapad->getContainerObjectsSize() >= datapad->getContainerVolumeLimit()) {
++		StringIdChatParameter stringId("mission/mission_generic", "datapad_full"); // Your datapad is full. You must first free some space.
++		player->sendSystemMessage(stringId);
++		return;
++	}
++
+ 	if (mission->getTypeCRC() == MissionTypes::BOUNTY) {
+ 		Locker listLocker(&playerBountyListMutex);
+ 
+@@ -291,7 +300,25 @@
+ 		}
+ 	}
+ 
+-	datapad->transferObject(mission, -1, true);
++	if (!datapad->transferObject(mission, -1, true)) {
++		// Refused for another reason: back on the terminal's list (the client was not told it left), the bounty claim
++		// undone without the abort cooldown, and no objective.
++		if (!missionBag->hasObjectInContainer(mission->getObjectID()))
++			missionBag->transferObject(mission, -1, false, true);
++
++		if (mission->getTypeCRC() == MissionTypes::BOUNTY && mission->getTargetObjectId() != 0) {
++			Locker listLocker(&playerBountyListMutex);
++
++			PlayerBounty* bounty = playerBountyList.get(mission->getTargetObjectId());
++
++			if (bounty != nullptr)
++				bounty->removeBountyHunter(player->getObjectID());
++		}
++
++		StringIdChatParameter stringId("mission/mission_generic", "datapad_full");
++		player->sendSystemMessage(stringId);
++		return;
++	}
+ 
+ 	createMissionObjectives(mission, missionTerminal, player);
+ 

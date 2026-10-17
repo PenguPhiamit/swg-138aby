@@ -1,0 +1,36 @@
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+@@ -555,6 +555,21 @@
+ 		bot->addBankCredits(ConfigManager::instance()->getInt("Core3.BotPopLaunchBank", creation->getStartingBank()), false);
+ 	}
+ 
++	// And the species skill (PlayerCreationManager::addRacialMods), which carries the starting weapon certifications
++	// (cert_rifle_cdef, cert_carbine_cdef, cert_pistol_cdef, cert_knife_survival...). Without it a bot's CDEF rifle
++	// is uncertified, and an uncertified weapon hits a lair for 5-10 (CombatManager::calculateDamage, TanO defender)
++	// against a lair's 2,000-7,000 condition: C61, ranged bots almost never destroyed a lair.
++	PlayerCreatureTemplate* playerTemplate = dynamic_cast<PlayerCreatureTemplate*>(bot->getObjectTemplate());
++
++	if (playerTemplate != nullptr) {
++		const Vector<String>& startingSkills = playerTemplate->getStartingSkills();
++
++		for (int i = 0; i < startingSkills.size(); ++i) {
++			if (!bot->hasSkill(startingSkills.get(i)))
++				SkillManager::instance()->awardSkill(startingSkills.get(i), bot, false, true, true);
++		}
++	}
++
+ 	SkillManager::instance()->awardSkill(L->profession + "_novice", bot, false, false, true);
+ 
+ 	ManagedReference<SceneObject*> inventory = bot->getSlottedObject("inventory");
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+@@ -14,6 +14,7 @@
+ #include "server/zone/objects/scene/WorldCoordinates.h"
+ #include "server/zone/managers/player/PlayerManager.h"
+ #include "server/zone/managers/player/creation/PlayerCreationManager.h"
++#include "templates/creature/PlayerCreatureTemplate.h"
+ #include "server/zone/objects/waypoint/WaypointObject.h"
+ #include "server/zone/managers/collision/CollisionManager.h"
+ #include "server/zone/managers/collision/PathFinderManager.h"
