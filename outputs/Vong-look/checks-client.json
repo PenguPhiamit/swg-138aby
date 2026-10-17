@@ -1,0 +1,280 @@
+{
+ "base": {
+  "path": "work/nal-hutta-life/local_planets-nalhutta-life.tre",
+  "bytes": 5308921,
+  "sha256": "b01e9f44aeba99f2ceb9878d1328792da0707a53dba3f30de4e657ea66e47f87",
+  "entries": 201
+ },
+ "out": {
+  "path": "work/vong-look/local_planets-vong-look.tre",
+  "bytes": 6801895,
+  "sha256": "185b3d7ff558f95a39aa47ae07ec8769aa9ae36cf6dd6d1b5120d3972ad23196",
+  "entries": 332
+ },
+ "untouched_identical": 200,
+ "changed": [
+  "misc/object_template_crc_string_table.iff"
+ ],
+ "new": [
+  "appearance/armor_vong_s01_bicep_l_f.sat",
+  "appearance/armor_vong_s01_bicep_l_m.sat",
+  "appearance/armor_vong_s01_bicep_r_f.sat",
+  "appearance/armor_vong_s01_bicep_r_m.sat",
+  "appearance/armor_vong_s01_boots_f.sat",
+  "appearance/armor_vong_s01_boots_m.sat",
+  "appearance/armor_vong_s01_bracer_l_f.sat",
+  "appearance/armor_vong_s01_bracer_l_m.sat",
+  "appearance/armor_vong_s01_bracer_r_f.sat",
+  "appearance/armor_vong_s01_bracer_r_m.sat",
+  "appearance/armor_vong_s01_gloves_f.sat",
+  "appearance/armor_vong_s01_gloves_m.sat",
+  "appearance/armor_vong_s01_leggings_f.sat",
+  "appearance/armor_vong_s01_leggings_m.sat",
+  "appearance/armor_vongcrab_s02_chest_plate_f.sat",
+  "appearance/armor_vongcrab_s02_chest_plate_m.sat",
+  "appearance/mesh/armor_vong_s01_bicep_l_f.lmg",
+  "appearance/mesh/armor_vong_s01_bicep_l_f_l0.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_l_f_l1.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_l_f_l2.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_l_f_l3.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_l_m.lmg",
+  "appearance/mesh/armor_vong_s01_bicep_l_m_l0.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_l_m_l1.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_l_m_l2.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_l_m_l3.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_r_f.lmg",
+  "appearance/mesh/armor_vong_s01_bicep_r_f_l0.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_r_f_l1.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_r_f_l2.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_r_f_l3.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_r_m.lmg",
+  "appearance/mesh/armor_vong_s01_bicep_r_m_l0.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_r_m_l1.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_r_m_l2.mgn",
+  "appearance/mesh/armor_vong_s01_bicep_r_m_l3.mgn",
+  "appearance/mesh/armor_vong_s01_boots_f.lmg",
+  "appearance/mesh/armor_vong_s01_boots_f_l0.mgn",
+  "appearance/mesh/armor_vong_s01_boots_f_l1.mgn",
+  "appearance/mesh/armor_vong_s01_boots_f_l2.mgn",
+  "appearance/mesh/armor_vong_s01_boots_f_l3.mgn",
+  "appearance/mesh/armor_vong_s01_boots_m.lmg",
+  "appearance/mesh/armor_vong_s01_boots_m_l0.mgn",
+  "appearance/mesh/armor_vong_s01_boots_m_l1.mgn",
+  "appearance/mesh/armor_vong_s01_boots_m_l2.mgn",
+  "appearance/mesh/armor_vong_s01_boots_m_l3.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_l_f.lmg",
+  "appearance/mesh/armor_vong_s01_bracer_l_f_l0.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_l_f_l1.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_l_f_l2.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_l_f_l3.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_l_m.lmg",
+  "appearance/mesh/armor_vong_s01_bracer_l_m_l0.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_l_m_l1.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_l_m_l2.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_l_m_l3.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_r_f.lmg",
+  "appearance/mesh/armor_vong_s01_bracer_r_f_l0.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_r_f_l1.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_r_f_l2.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_r_f_l3.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_r_m.lmg",
+  "appearance/mesh/armor_vong_s01_bracer_r_m_l0.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_r_m_l1.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_r_m_l2.mgn",
+  "appearance/mesh/armor_vong_s01_bracer_r_m_l3.mgn",
+  "appearance/mesh/armor_vong_s01_gloves_f.lmg",
+  "appearance/mesh/armor_vong_s01_gloves_f_l0.mgn",
+  "appearance/mesh/armor_vong_s01_gloves_f_l1.mgn",
+  "appearance/mesh/armor_vong_s01_gloves_f_l2.mgn",
+  "appearance/mesh/armor_vong_s01_gloves_f_l3.mgn",
+  "appearance/mesh/armor_vong_s01_gloves_m.lmg",
+  "appearance/mesh/armor_vong_s01_gloves_m_l0.mgn",
+  "appearance/mesh/armor_vong_s01_gloves_m_l1.mgn",
+  "appearance/mesh/armor_vong_s01_gloves_m_l2.mgn",
+  "appearance/mesh/armor_vong_s01_gloves_m_l3.mgn",
+  "appearance/mesh/armor_vong_s01_leggings_f.lmg",
+  "appearance/mesh/armor_vong_s01_leggings_f_l0.mgn",
+  "appearance/mesh/armor_vong_s01_leggings_f_l1.mgn",
+  "appearance/mesh/armor_vong_s01_leggings_f_l2.mgn",
+  "appearance/mesh/armor_vong_s01_leggings_f_l3.mgn",
+  "appearance/mesh/armor_vong_s01_leggings_m.lmg",
+  "appearance/mesh/armor_vong_s01_leggings_m_l0.mgn",
+  "appearance/mesh/armor_vong_s01_leggings_m_l1.mgn",
+  "appearance/mesh/armor_vong_s01_leggings_m_l2.mgn",
+  "appearance/mesh/armor_vong_s01_leggings_m_l3.mgn",
+  "appearance/mesh/armor_vongcrab_s02_chest_plate_f.lmg",
+  "appearance/mesh/armor_vongcrab_s02_chest_plate_f_l0.mgn",
+  "appearance/mesh/armor_vongcrab_s02_chest_plate_f_l1.mgn",
+  "appearance/mesh/armor_vongcrab_s02_chest_plate_f_l2.mgn",
+  "appearance/mesh/armor_vongcrab_s02_chest_plate_f_l3.mgn",
+  "appearance/mesh/armor_vongcrab_s02_chest_plate_m.lmg",
+  "appearance/mesh/armor_vongcrab_s02_chest_plate_m_l0.mgn",
+  "appearance/mesh/armor_vongcrab_s02_chest_plate_m_l1.mgn",
+  "appearance/mesh/armor_vongcrab_s02_chest_plate_m_l2.mgn",
+  "appearance/mesh/armor_vongcrab_s02_chest_plate_m_l3.mgn",
+  "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bicep_l.iff",
+  "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bicep_r.iff",
+  "object/tangible/wearables/armor/vong/shared_armor_vong_s01_boots.iff",
+  "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bracer_l.iff",
+  "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bracer_r.iff",
+  "object/tangible/wearables/armor/vong/shared_armor_vong_s01_gloves.iff",
+  "object/tangible/wearables/armor/vong/shared_armor_vong_s01_leggings.iff",
+  "object/tangible/wearables/armor/vongcrab/shared_armor_vongcrab_s02_chest_plate.iff",
+  "shader/armor_vong_bicep_hcsb21.sht",
+  "shader/armor_vong_bicep_hcsb21_sm.sht",
+  "shader/armor_vong_boots_hcsb21.sht",
+  "shader/armor_vong_boots_hcsb21_sm.sht",
+  "shader/armor_vong_bracer_hcsb21.sht",
+  "shader/armor_vong_bracer_hcsb21_sm.sht",
+  "shader/armor_vong_gloves_hcsb21.sht",
+  "shader/armor_vong_gloves_hcsb21_sm.sht",
+  "shader/armor_vong_leggings_hcsb21.sht",
+  "shader/armor_vong_leggings_hcsb21_sm.sht",
+  "shader/armor_vong_leggings_waist_hcsb21.sht",
+  "shader/armor_vongcrab_chest_s02_hcsb21.sht",
+  "shader/armor_vongcrab_chest_s02_hcsb21_sm.sht",
+  "shader/armor_vongcrab_chest_s02_hue_hc8.sht",
+  "shader/armor_vongcrab_chest_s02_hue_hc8_sm.sht",
+  "texture/armor_vong_bicep.dds",
+  "texture/armor_vong_bicep_sm.dds",
+  "texture/armor_vong_boots.dds",
+  "texture/armor_vong_boots_sm.dds",
+  "texture/armor_vong_bracer.dds",
+  "texture/armor_vong_bracer_sm.dds",
+  "texture/armor_vong_gloves.dds",
+  "texture/armor_vong_gloves_sm.dds",
+  "texture/armor_vong_leggings.dds",
+  "texture/armor_vong_leggings_sm.dds",
+  "texture/armor_vongcrab_chest_s02.dds",
+  "texture/armor_vongcrab_chest_s02_sm.dds"
+ ],
+ "report": {
+  "rebound": {
+   "shader/armor_vong_leggings_waist_hcsb21.sht": {
+    "variable": "index_color_2",
+    "from": "palette/wr_metal.pal",
+    "from_default": 0,
+    "to": "palette/white.pal",
+    "to_default": 0
+   },
+   "shader/armor_vongcrab_chest_s02_hcsb21.sht": {
+    "variable": "index_color_1",
+    "from": "palette/wr_metal.pal",
+    "from_default": 61,
+    "to": "palette/white.pal",
+    "to_default": 0
+   },
+   "shader/armor_vongcrab_chest_s02_hcsb21_sm.sht": {
+    "variable": "index_color_1",
+    "from": "palette/wr_metal.pal",
+    "from_default": 61,
+    "to": "palette/white.pal",
+    "to_default": 0
+   },
+   "shader/armor_vongcrab_chest_s02_hue_hc8.sht": {
+    "variable": "index_color_3",
+    "from": "palette/wr_cloth_general.pal",
+    "from_default": 120,
+    "to": "palette/white.pal",
+    "to_default": 0
+   },
+   "shader/armor_vongcrab_chest_s02_hue_hc8_sm.sht": {
+    "variable": "index_color_3",
+    "from": "palette/wr_cloth_general.pal",
+    "from_default": 120,
+    "to": "palette/white.pal",
+    "to_default": 0
+   }
+  },
+  "swap_only_files": 114,
+  "rebound_files": 5,
+  "textures": {
+   "texture/armor_vong_bicep.dds": {
+    "bytes": 43856,
+    "sha256": "b26489849397f8046819243adb8e7e5945ff322f8d87ad54ff0aa57e940fd695"
+   },
+   "texture/armor_vong_bicep_sm.dds": {
+    "bytes": 2896,
+    "sha256": "235c80185561a8ed4ce910ed06ac5db9b1a2e3af0db097a05396ae90504f5d65"
+   },
+   "texture/armor_vong_boots.dds": {
+    "bytes": 43856,
+    "sha256": "ad167143291e534da7936354cecead30254ecd8c72bd9efc2f451cec2a763972"
+   },
+   "texture/armor_vong_boots_sm.dds": {
+    "bytes": 2896,
+    "sha256": "ed35596f90a427a6d6e31ba2cc7d8ea717b00aa8982188a5c393d98199642e35"
+   },
+   "texture/armor_vong_bracer.dds": {
+    "bytes": 43856,
+    "sha256": "ee692ca0e1c42cb09076ccfbe4473ff627761f912498e7f71d70cad50158ca88"
+   },
+   "texture/armor_vong_bracer_sm.dds": {
+    "bytes": 2896,
+    "sha256": "bdfaaf384ece9705c1d1531f09a16f18914d208df7d9f3cd4906f143bbd8a85b"
+   },
+   "texture/armor_vong_gloves.dds": {
+    "bytes": 11088,
+    "sha256": "a6f8f8d37c9492fe744eeab9e343593185351e8e0a29b9b31965be8c0b17e79e"
+   },
+   "texture/armor_vong_gloves_sm.dds": {
+    "bytes": 848,
+    "sha256": "e9b2ec43915d5d5f9506f0780cee9fdf6360e979fc5d584e19b1392e61e0ed74"
+   },
+   "texture/armor_vong_leggings.dds": {
+    "bytes": 87536,
+    "sha256": "0a15a954af080a76109e371f54c6d44ed6e129d4bcc5eb2ec4153d8816f9dd94"
+   },
+   "texture/armor_vong_leggings_sm.dds": {
+    "bytes": 5616,
+    "sha256": "69554c2ca031e55ee9f6ab2d675afced679b3aa280142f3c378fefa7fd8df404"
+   },
+   "texture/armor_vongcrab_chest_s02.dds": {
+    "bytes": 87536,
+    "sha256": "d8263b786e164d8eb55fcec814d49ac2569e6036a93c3df44820e66fff15b1e7"
+   },
+   "texture/armor_vongcrab_chest_s02_sm.dds": {
+    "bytes": 5616,
+    "sha256": "5eac9c961c24f0ec83a1b6226e25a65d2aede941176385d468f8208a56b45c44"
+   }
+  },
+  "crc_table": {
+   "from": "base",
+   "rows": 29367,
+   "added": [
+    [
+     3357863424,
+     "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bicep_l.iff"
+    ],
+    [
+     3102845843,
+     "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bicep_r.iff"
+    ],
+    [
+     4149512357,
+     "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bracer_l.iff"
+    ],
+    [
+     2273430838,
+     "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bracer_r.iff"
+    ],
+    [
+     351244332,
+     "object/tangible/wearables/armor/vong/shared_armor_vong_s01_boots.iff"
+    ],
+    [
+     931734918,
+     "object/tangible/wearables/armor/vong/shared_armor_vong_s01_gloves.iff"
+    ],
+    [
+     2020627898,
+     "object/tangible/wearables/armor/vong/shared_armor_vong_s01_leggings.iff"
+    ],
+    [
+     499885171,
+     "object/tangible/wearables/armor/vongcrab/shared_armor_vongcrab_s02_chest_plate.iff"
+    ]
+   ]
+  }
+ }
+}

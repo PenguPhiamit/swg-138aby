@@ -1,0 +1,1691 @@
+diff --git a/MMOCoreORB/bin/scripts/mobile/outfits/serverobjects.lua b/MMOCoreORB/bin/scripts/mobile/outfits/serverobjects.lua
+index e4f4c14..1cd3894 100644
+--- a/MMOCoreORB/bin/scripts/mobile/outfits/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/mobile/outfits/serverobjects.lua
+@@ -27,3 +27,4 @@ includeFile("outfits/tekil_barje_outfit.lua")
+ includeFile("outfits/testoutfit.lua")
+ includeFile("outfits/thracken_sal_solo_outfit.lua")
+ includeFile("outfits/vardias_tyne_outfit.lua")
++includeFile("outfits/vong_fanatic_warrior_outfit.lua") -- Sandbox: Vong look test
+diff --git a/MMOCoreORB/bin/scripts/mobile/outfits/vong_fanatic_warrior_outfit.lua b/MMOCoreORB/bin/scripts/mobile/outfits/vong_fanatic_warrior_outfit.lua
+new file mode 100644
+index 0000000..ace337f
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/outfits/vong_fanatic_warrior_outfit.lua
+@@ -0,0 +1,18 @@
++-- Vong look test (owner, 17 Oct 2026): our armour clones; the client files are in local_planets.tre
++-- (outputs/Vong-look/tools/build_vong_client.py). The cloned shaders take colour 0 from palette/white.pal and our textures' alpha (the hue mask) is 0, so
++-- no customization is set. Claude.
++
++vong_fanatic_warrior_outfit = {
++	{
++		{objectTemplate = "object/tangible/wearables/armor/vongcrab/armor_vongcrab_s02_chest_plate.iff", customizationVariables = {} },
++		{objectTemplate = "object/tangible/wearables/armor/vong/armor_vong_s01_bicep_l.iff", customizationVariables = {} },
++		{objectTemplate = "object/tangible/wearables/armor/vong/armor_vong_s01_bicep_r.iff", customizationVariables = {} },
++		{objectTemplate = "object/tangible/wearables/armor/vong/armor_vong_s01_bracer_l.iff", customizationVariables = {} },
++		{objectTemplate = "object/tangible/wearables/armor/vong/armor_vong_s01_bracer_r.iff", customizationVariables = {} },
++		{objectTemplate = "object/tangible/wearables/armor/vong/armor_vong_s01_boots.iff", customizationVariables = {} },
++		{objectTemplate = "object/tangible/wearables/armor/vong/armor_vong_s01_gloves.iff", customizationVariables = {} },
++		{objectTemplate = "object/tangible/wearables/armor/vong/armor_vong_s01_leggings.iff", customizationVariables = {} }
++	}
++}
++
++addOutfitGroup("vong_fanatic_warrior_outfit", vong_fanatic_warrior_outfit)
+diff --git a/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_vong.lua b/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_vong.lua
+new file mode 100644
+index 0000000..ba5679f
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_vong.lua
+@@ -0,0 +1,42 @@
++-- Vong look test (owner, 17 Oct 2026): our armour clones; the client files are in local_planets.tre
++-- (outputs/Vong-look/tools/build_vong_client.py). One warrior for the owner's look at the Ossus Project fields. Claude.
++
++vong_fanatic_warrior_look = Creature:new {
++	objectName = "",
++	customName = "a Vong warrior",
++	socialGroup = "",
++	mobType = MOB_NPC,
++	faction = "",
++	level = 30,
++	chanceHit = 0.39,
++	damageMin = 290,
++	damageMax = 300,
++	baseXp = 0,
++	baseHAM = 8400,
++	baseHAMmax = 10200,
++	armor = 0,
++	resists = {0,0,0,0,0,0,0,-1,-1},
++	meatType = "",
++	meatAmount = 0,
++	hideType = "",
++	hideAmount = 0,
++	boneType = "",
++	boneAmount = 0,
++	milk = 0,
++	tamingChance = 0,
++	ferocity = 0,
++	pvpBitmask = NONE,
++	creatureBitmask = NONE,
++	optionsBitmask = AIENABLED + INVULNERABLE,
++	diet = HERBIVORE,
++	scale = 1.15,
++	templates = {"object/mobile/human_male.iff"},
++	lootGroups = {},
++	primaryWeapon = "unarmed",
++	secondaryWeapon = "none",
++	outfit = "vong_fanatic_warrior_outfit",
++	primaryAttacks = {},
++	secondaryAttacks = {}
++}
++
++CreatureTemplates:addCreatureTemplate(vong_fanatic_warrior_look, "vong_fanatic_warrior_look")
+diff --git a/MMOCoreORB/bin/scripts/mobile/serverobjects.lua b/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
+index 211ba42..cbd3bc4 100644
+--- a/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
+@@ -59,6 +59,7 @@ includeFile("sandbox/sandbox_mercenaries.lua")
+ includeFile("sandbox/sandbox_world_bosses.lua")
+ -- Ossus people (PL-02)
+ includeFile("sandbox/ossus_people.lua")
++includeFile("sandbox/ossus_vong.lua") -- Sandbox: Vong look test
+ includeFile("sandbox/ossus_world.lua")
+ -- Nal Hutta as the Hutt home (PL-04)
+ includeFile("sandbox/hutta_home.lua")
+diff --git a/MMOCoreORB/bin/scripts/object/allobjects.lua b/MMOCoreORB/bin/scripts/object/allobjects.lua
+index ded14c3..00446c3 100644
+--- a/MMOCoreORB/bin/scripts/object/allobjects.lua
++++ b/MMOCoreORB/bin/scripts/object/allobjects.lua
+@@ -734,6 +734,7 @@ includeFile("tangible/veteran_reward/one_year_anniversary/objects.lua")
+ includeFile("tangible/veteran_reward/objects.lua")
+ includeFile("tangible/wearables/apron/objects.lua")
+ includeFile("tangible/wearables/armor/bone/objects.lua")
++includeFile("tangible/wearables/armor/vong/objects.lua") -- Sandbox: Vong look test
+ includeFile("tangible/wearables/armor/bounty_hunter/objects.lua")
+ includeFile("tangible/wearables/armor/chitin/objects.lua")
+ includeFile("tangible/wearables/armor/composite/objects.lua")
+@@ -745,6 +746,7 @@ includeFile("tangible/wearables/armor/kashyyykian_ceremonial/objects.lua")
+ includeFile("tangible/wearables/armor/kashyyykian_hunting/objects.lua")
+ includeFile("tangible/wearables/armor/mandalorian/objects.lua")
+ includeFile("tangible/wearables/armor/marauder/objects.lua")
++includeFile("tangible/wearables/armor/vongcrab/objects.lua") -- Sandbox: Vong look test
+ includeFile("tangible/wearables/armor/marine/objects.lua")
+ includeFile("tangible/wearables/armor/nightsister/objects.lua")
+ includeFile("tangible/wearables/armor/padded/objects.lua")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/serverobjects.lua b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/serverobjects.lua
+index 367e783..593a40f 100644
+--- a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/serverobjects.lua
+@@ -44,6 +44,7 @@
+ 
+ --Children folder includes
+ includeFile("tangible/wearables/armor/bone/serverobjects.lua")
++includeFile("tangible/wearables/armor/vong/serverobjects.lua") -- Sandbox: Vong look test
+ includeFile("tangible/wearables/armor/bounty_hunter/serverobjects.lua")
+ includeFile("tangible/wearables/armor/chitin/serverobjects.lua")
+ includeFile("tangible/wearables/armor/composite/serverobjects.lua")
+@@ -55,6 +56,7 @@ includeFile("tangible/wearables/armor/kashyyykian_ceremonial/serverobjects.lua")
+ includeFile("tangible/wearables/armor/kashyyykian_hunting/serverobjects.lua")
+ includeFile("tangible/wearables/armor/mandalorian/serverobjects.lua")
+ includeFile("tangible/wearables/armor/marauder/serverobjects.lua")
++includeFile("tangible/wearables/armor/vongcrab/serverobjects.lua") -- Sandbox: Vong look test
+ includeFile("tangible/wearables/armor/marine/serverobjects.lua")
+ includeFile("tangible/wearables/armor/nightsister/serverobjects.lua")
+ includeFile("tangible/wearables/armor/padded/serverobjects.lua")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bicep_l.lua b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bicep_l.lua
+new file mode 100644
+index 0000000..e880596
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bicep_l.lua
+@@ -0,0 +1,122 @@
++--Copyright (C) 2010 <SWGEmu>
++
++
++--This File is part of Core3.
++
++--This program is free software; you can redistribute 
++--it and/or modify it under the terms of the GNU Lesser 
++--General Public License as published by the Free Software
++--Foundation; either version 2 of the License, 
++--or (at your option) any later version.
++
++--This program is distributed in the hope that it will be useful, 
++--but WITHOUT ANY WARRANTY; without even the implied warranty of 
++--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
++--See the GNU Lesser General Public License for
++--more details.
++
++--You should have received a copy of the GNU Lesser General 
++--Public License along with this program; if not, write to
++--the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
++
++--Linking Engine3 statically or dynamically with other modules 
++--is making a combined work based on Engine3. 
++--Thus, the terms and conditions of the GNU Lesser General Public License 
++--cover the whole combination.
++
++--In addition, as a special exception, the copyright holders of Engine3 
++--give you permission to combine Engine3 program with free software 
++--programs or libraries that are released under the GNU LGPL and with 
++--code included in the standard release of Core3 under the GNU LGPL 
++--license (or modified versions of such code, with unchanged license). 
++--You may copy and distribute such a system following the terms of the 
++--GNU LGPL for Engine3 and the licenses of the other code concerned, 
++--provided that you include the source code of that other code when 
++--and as the GNU LGPL requires distribution of source code.
++
++--Note that people who make modified versions of Engine3 are not obligated 
++--to grant this special exception for their modified versions; 
++--it is their choice whether to do so. The GNU Lesser General Public License 
++--gives permission to release a modified version without this exception; 
++--this exception also makes it possible to release a modified version 
++
++
++object_tangible_wearables_armor_vong_armor_vong_s01_bicep_l = object_tangible_wearables_armor_vong_shared_armor_vong_s01_bicep_l:new {
++	templateType = ARMOROBJECT,
++
++	playerRaces = { "object/creature/player/bothan_male.iff",
++				"object/creature/player/bothan_female.iff",
++				"object/creature/player/human_male.iff",
++				"object/creature/player/human_female.iff",
++				"object/creature/player/moncal_male.iff",
++				"object/creature/player/moncal_female.iff",
++				"object/creature/player/rodian_male.iff",
++				"object/creature/player/rodian_female.iff",
++				"object/creature/player/sullustan_male.iff",
++				"object/creature/player/sullustan_female.iff",
++				"object/creature/player/trandoshan_male.iff",
++				"object/creature/player/trandoshan_female.iff",
++				"object/creature/player/twilek_male.iff",
++				"object/creature/player/twilek_female.iff",
++				"object/creature/player/zabrak_male.iff",
++				"object/creature/player/zabrak_female.iff",
++				"object/mobile/vendor/aqualish_female.iff",
++				"object/mobile/vendor/aqualish_male.iff",
++				"object/mobile/vendor/bith_female.iff",
++				"object/mobile/vendor/bith_male.iff",
++				"object/mobile/vendor/bothan_female.iff",
++				"object/mobile/vendor/bothan_male.iff",
++				"object/mobile/vendor/devaronian_male.iff",
++				"object/mobile/vendor/gran_male.iff",
++				"object/mobile/vendor/human_female.iff",
++				"object/mobile/vendor/human_male.iff",
++				"object/mobile/vendor/ishi_tib_male.iff",
++				"object/mobile/vendor/moncal_female.iff",
++				"object/mobile/vendor/moncal_male.iff",
++				"object/mobile/vendor/nikto_male.iff",
++				"object/mobile/vendor/quarren_male.iff",
++				"object/mobile/vendor/rodian_female.iff",
++				"object/mobile/vendor/rodian_male.iff",
++				"object/mobile/vendor/sullustan_female.iff",
++				"object/mobile/vendor/sullustan_male.iff",
++				"object/mobile/vendor/trandoshan_female.iff",
++				"object/mobile/vendor/trandoshan_male.iff",
++				"object/mobile/vendor/twilek_female.iff",
++				"object/mobile/vendor/twilek_male.iff",
++				"object/mobile/vendor/weequay_male.iff",
++				"object/mobile/vendor/zabrak_female.iff",
++				"object/mobile/vendor/zabrak_male.iff" },
++
++	-- kineticeffectiveness, energyeffectiveness, electricaleffectiveness, stuneffectiveness, blasteffectiveness, heateffectiveness, coldeffectiveness, acideffectiveness, restraineffectiveness
++	vulnerability = KINETIC + BLAST + STUN + HEAT + COLD + ACID + LIGHTSABER,
++
++	-- These are default Blue Frog stats
++	healthEncumbrance = 6,
++	actionEncumbrance = 15,
++	mindEncumbrance = 4,
++
++	-- LIGHT, MEDIUM, HEAVY
++	rating = LIGHT,
++
++	kinetic = 0,
++	energy = 20,
++	electricity = 10,
++	stun = 0,
++	blast = 0,
++	heat = 0,
++	cold = 0,
++	acid = 0,
++	lightSaber = 0,
++
++	numberExperimentalProperties = {1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 2, 1},
++	experimentalProperties = {"XX", "XX", "XX", "OQ", "SR", "OQ", "SR", "OQ", "UT", "MA", "OQ", "MA", "OQ", "MA", "OQ", "XX", "XX", "OQ", "SR", "XX"},
++	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
++	experimentalGroupTitles = {"null", "null", "null", "exp_durability", "exp_quality", "exp_durability", "exp_durability", "exp_durability", "exp_durability", "null", "null", "exp_resistance", "null"},
++	experimentalSubGroupTitles = {"null", "null", "sockets", "hit_points", "armor_effectiveness", "armor_integrity", "armor_health_encumbrance", "armor_action_encumbrance", "armor_mind_encumbrance", "armor_rating", "armor_special_type", "armor_special_effectiveness", "armor_special_integrity"},
++	experimentalMin = {0, 0, 0, 1000, 5, 7500, 6, 8, 4, 1, 2, 5, 7500},
++	experimentalMax = {0, 0, 0, 1000, 20, 12500, 4, 4, 2, 1, 2, 30, 12500},
++	experimentalPrecision = {0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0},
++	experimentalCombineType = {0, 0, 4, 1, 1, 1, 1, 1, 1, 4, 4, 4, 1},
++}
++
++ObjectTemplates:addTemplate(object_tangible_wearables_armor_vong_armor_vong_s01_bicep_l, "object/tangible/wearables/armor/vong/armor_vong_s01_bicep_l.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bicep_r.lua b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bicep_r.lua
+new file mode 100644
+index 0000000..62efbf1
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bicep_r.lua
+@@ -0,0 +1,122 @@
++--Copyright (C) 2010 <SWGEmu>
++
++
++--This File is part of Core3.
++
++--This program is free software; you can redistribute 
++--it and/or modify it under the terms of the GNU Lesser 
++--General Public License as published by the Free Software
++--Foundation; either version 2 of the License, 
++--or (at your option) any later version.
++
++--This program is distributed in the hope that it will be useful, 
++--but WITHOUT ANY WARRANTY; without even the implied warranty of 
++--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
++--See the GNU Lesser General Public License for
++--more details.
++
++--You should have received a copy of the GNU Lesser General 
++--Public License along with this program; if not, write to
++--the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
++
++--Linking Engine3 statically or dynamically with other modules 
++--is making a combined work based on Engine3. 
++--Thus, the terms and conditions of the GNU Lesser General Public License 
++--cover the whole combination.
++
++--In addition, as a special exception, the copyright holders of Engine3 
++--give you permission to combine Engine3 program with free software 
++--programs or libraries that are released under the GNU LGPL and with 
++--code included in the standard release of Core3 under the GNU LGPL 
++--license (or modified versions of such code, with unchanged license). 
++--You may copy and distribute such a system following the terms of the 
++--GNU LGPL for Engine3 and the licenses of the other code concerned, 
++--provided that you include the source code of that other code when 
++--and as the GNU LGPL requires distribution of source code.
++
++--Note that people who make modified versions of Engine3 are not obligated 
++--to grant this special exception for their modified versions; 
++--it is their choice whether to do so. The GNU Lesser General Public License 
++--gives permission to release a modified version without this exception; 
++--this exception also makes it possible to release a modified version 
++
++
++object_tangible_wearables_armor_vong_armor_vong_s01_bicep_r = object_tangible_wearables_armor_vong_shared_armor_vong_s01_bicep_r:new {
++	templateType = ARMOROBJECT,
++
++	playerRaces = { "object/creature/player/bothan_male.iff",
++				"object/creature/player/bothan_female.iff",
++				"object/creature/player/human_male.iff",
++				"object/creature/player/human_female.iff",
++				"object/creature/player/moncal_male.iff",
++				"object/creature/player/moncal_female.iff",
++				"object/creature/player/rodian_male.iff",
++				"object/creature/player/rodian_female.iff",
++				"object/creature/player/sullustan_male.iff",
++				"object/creature/player/sullustan_female.iff",
++				"object/creature/player/trandoshan_male.iff",
++				"object/creature/player/trandoshan_female.iff",
++				"object/creature/player/twilek_male.iff",
++				"object/creature/player/twilek_female.iff",
++				"object/creature/player/zabrak_male.iff",
++				"object/creature/player/zabrak_female.iff",
++				"object/mobile/vendor/aqualish_female.iff",
++				"object/mobile/vendor/aqualish_male.iff",
++				"object/mobile/vendor/bith_female.iff",
++				"object/mobile/vendor/bith_male.iff",
++				"object/mobile/vendor/bothan_female.iff",
++				"object/mobile/vendor/bothan_male.iff",
++				"object/mobile/vendor/devaronian_male.iff",
++				"object/mobile/vendor/gran_male.iff",
++				"object/mobile/vendor/human_female.iff",
++				"object/mobile/vendor/human_male.iff",
++				"object/mobile/vendor/ishi_tib_male.iff",
++				"object/mobile/vendor/moncal_female.iff",
++				"object/mobile/vendor/moncal_male.iff",
++				"object/mobile/vendor/nikto_male.iff",
++				"object/mobile/vendor/quarren_male.iff",
++				"object/mobile/vendor/rodian_female.iff",
++				"object/mobile/vendor/rodian_male.iff",
++				"object/mobile/vendor/sullustan_female.iff",
++				"object/mobile/vendor/sullustan_male.iff",
++				"object/mobile/vendor/trandoshan_female.iff",
++				"object/mobile/vendor/trandoshan_male.iff",
++				"object/mobile/vendor/twilek_female.iff",
++				"object/mobile/vendor/twilek_male.iff",
++				"object/mobile/vendor/weequay_male.iff",
++				"object/mobile/vendor/zabrak_female.iff",
++				"object/mobile/vendor/zabrak_male.iff" },
++
++	-- kineticeffectiveness, energyeffectiveness, electricaleffectiveness, stuneffectiveness, blasteffectiveness, heateffectiveness, coldeffectiveness, acideffectiveness, restraineffectiveness
++	vulnerability = KINETIC + BLAST + STUN + HEAT + COLD + ACID + LIGHTSABER,
++
++	-- These are default Blue Frog stats
++	healthEncumbrance = 6,
++	actionEncumbrance = 15,
++	mindEncumbrance = 4,
++
++	-- LIGHT, MEDIUM, HEAVY
++	rating = LIGHT,
++
++	kinetic = 0,
++	energy = 20,
++	electricity = 10,
++	stun = 0,
++	blast = 0,
++	heat = 0,
++	cold = 0,
++	acid = 0,
++	lightSaber = 0,
++
++	numberExperimentalProperties = {1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 2, 1},
++	experimentalProperties = {"XX", "XX", "XX", "OQ", "SR", "OQ", "SR", "OQ", "UT", "MA", "OQ", "MA", "OQ", "MA", "OQ", "XX", "XX", "OQ", "SR", "XX"},
++	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
++	experimentalGroupTitles = {"null", "null", "null", "exp_durability", "exp_quality", "exp_durability", "exp_durability", "exp_durability", "exp_durability", "null", "null", "exp_resistance", "null"},
++	experimentalSubGroupTitles = {"null", "null", "sockets", "hit_points", "armor_effectiveness", "armor_integrity", "armor_health_encumbrance", "armor_action_encumbrance", "armor_mind_encumbrance", "armor_rating", "armor_special_type", "armor_special_effectiveness", "armor_special_integrity"},
++	experimentalMin = {0, 0, 0, 1000, 5, 7500, 6, 8, 4, 1, 2, 5, 7500},
++	experimentalMax = {0, 0, 0, 1000, 20, 12500, 4, 4, 2, 1, 2, 30, 12500},
++	experimentalPrecision = {0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0},
++	experimentalCombineType = {0, 0, 4, 1, 1, 1, 1, 1, 1, 4, 4, 4, 1},
++}
++
++ObjectTemplates:addTemplate(object_tangible_wearables_armor_vong_armor_vong_s01_bicep_r, "object/tangible/wearables/armor/vong/armor_vong_s01_bicep_r.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_boots.lua b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_boots.lua
+new file mode 100644
+index 0000000..27f5bdd
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_boots.lua
+@@ -0,0 +1,118 @@
++--Copyright (C) 2010 <SWGEmu>
++
++
++--This File is part of Core3.
++
++--This program is free software; you can redistribute 
++--it and/or modify it under the terms of the GNU Lesser 
++--General Public License as published by the Free Software
++--Foundation; either version 2 of the License, 
++--or (at your option) any later version.
++
++--This program is distributed in the hope that it will be useful, 
++--but WITHOUT ANY WARRANTY; without even the implied warranty of 
++--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
++--See the GNU Lesser General Public License for
++--more details.
++
++--You should have received a copy of the GNU Lesser General 
++--Public License along with this program; if not, write to
++--the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
++
++--Linking Engine3 statically or dynamically with other modules 
++--is making a combined work based on Engine3. 
++--Thus, the terms and conditions of the GNU Lesser General Public License 
++--cover the whole combination.
++
++--In addition, as a special exception, the copyright holders of Engine3 
++--give you permission to combine Engine3 program with free software 
++--programs or libraries that are released under the GNU LGPL and with 
++--code included in the standard release of Core3 under the GNU LGPL 
++--license (or modified versions of such code, with unchanged license). 
++--You may copy and distribute such a system following the terms of the 
++--GNU LGPL for Engine3 and the licenses of the other code concerned, 
++--provided that you include the source code of that other code when 
++--and as the GNU LGPL requires distribution of source code.
++
++--Note that people who make modified versions of Engine3 are not obligated 
++--to grant this special exception for their modified versions; 
++--it is their choice whether to do so. The GNU Lesser General Public License 
++--gives permission to release a modified version without this exception; 
++--this exception also makes it possible to release a modified version 
++
++
++object_tangible_wearables_armor_vong_armor_vong_s01_boots = object_tangible_wearables_armor_vong_shared_armor_vong_s01_boots:new {
++	templateType = ARMOROBJECT,
++
++	playerRaces = { "object/creature/player/bothan_male.iff",
++				"object/creature/player/bothan_female.iff",
++				"object/creature/player/human_male.iff",
++				"object/creature/player/human_female.iff",
++				"object/creature/player/moncal_male.iff",
++				"object/creature/player/moncal_female.iff",
++				"object/creature/player/rodian_male.iff",
++				"object/creature/player/rodian_female.iff",
++				"object/creature/player/sullustan_male.iff",
++				"object/creature/player/sullustan_female.iff",
++				"object/creature/player/twilek_male.iff",
++				"object/creature/player/twilek_female.iff",
++				"object/creature/player/zabrak_male.iff",
++				"object/creature/player/zabrak_female.iff",
++				"object/mobile/vendor/aqualish_female.iff",
++				"object/mobile/vendor/aqualish_male.iff",
++				"object/mobile/vendor/bith_female.iff",
++				"object/mobile/vendor/bith_male.iff",
++				"object/mobile/vendor/bothan_female.iff",
++				"object/mobile/vendor/bothan_male.iff",
++				"object/mobile/vendor/devaronian_male.iff",
++				"object/mobile/vendor/gran_male.iff",
++				"object/mobile/vendor/human_female.iff",
++				"object/mobile/vendor/human_male.iff",
++				"object/mobile/vendor/ishi_tib_male.iff",
++				"object/mobile/vendor/moncal_female.iff",
++				"object/mobile/vendor/moncal_male.iff",
++				"object/mobile/vendor/nikto_male.iff",
++				"object/mobile/vendor/quarren_male.iff",
++				"object/mobile/vendor/rodian_female.iff",
++				"object/mobile/vendor/rodian_male.iff",
++				"object/mobile/vendor/sullustan_female.iff",
++				"object/mobile/vendor/sullustan_male.iff",
++				"object/mobile/vendor/twilek_female.iff",
++				"object/mobile/vendor/twilek_male.iff",
++				"object/mobile/vendor/weequay_male.iff",
++				"object/mobile/vendor/zabrak_female.iff",
++				"object/mobile/vendor/zabrak_male.iff" },
++
++	-- kineticeffectiveness, energyeffectiveness, electricaleffectiveness, stuneffectiveness, blasteffectiveness, heateffectiveness, coldeffectiveness, acideffectiveness, restraineffectiveness
++	vulnerability = KINETIC + BLAST + STUN + HEAT + COLD + ACID + LIGHTSABER,
++
++	-- These are default Blue Frog stats
++	healthEncumbrance = 6,
++	actionEncumbrance = 15,
++	mindEncumbrance = 4,
++
++	-- LIGHT, MEDIUM, HEAVY
++	rating = LIGHT,
++
++	kinetic = 0,
++	energy = 20,
++	electricity = 10,
++	stun = 0,
++	blast = 0,
++	heat = 0,
++	cold = 0,
++	acid = 0,
++	lightSaber = 0,
++
++	numberExperimentalProperties = {1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 2, 1},
++	experimentalProperties = {"XX", "XX", "XX", "XX", "OQ", "SR", "OQ", "SR", "MA", "OQ", "MA", "OQ", "MA", "OQ", "XX", "XX", "OQ", "SR", "XX"},
++	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
++	experimentalGroupTitles = {"null", "null", "null", "null", "exp_quality", "exp_durability", "exp_durability", "exp_durability", "exp_durability", "null", "null", "exp_resistance", "null"},
++	experimentalSubGroupTitles = {"null", "null", "sockets", "hit_points", "armor_effectiveness", "armor_integrity", "armor_health_encumbrance", "armor_action_encumbrance", "armor_mind_encumbrance", "armor_rating", "armor_special_type", "armor_special_effectiveness", "armor_special_integrity"},
++	experimentalMin = {0, 0, 0, 1000, 5, 7500, 6, 16, 4, 1, 2, 5, 7500},
++	experimentalMax = {0, 0, 0, 1000, 20, 12500, 4, 8, 2, 1, 2, 30, 12500},
++	experimentalPrecision = {0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0},
++	experimentalCombineType = {0, 0, 4, 1, 1, 1, 1, 1, 1, 4, 4, 4, 1},
++}
++
++ObjectTemplates:addTemplate(object_tangible_wearables_armor_vong_armor_vong_s01_boots, "object/tangible/wearables/armor/vong/armor_vong_s01_boots.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bracer_l.lua b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bracer_l.lua
+new file mode 100644
+index 0000000..8e145ac
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bracer_l.lua
+@@ -0,0 +1,122 @@
++--Copyright (C) 2010 <SWGEmu>
++
++
++--This File is part of Core3.
++
++--This program is free software; you can redistribute 
++--it and/or modify it under the terms of the GNU Lesser 
++--General Public License as published by the Free Software
++--Foundation; either version 2 of the License, 
++--or (at your option) any later version.
++
++--This program is distributed in the hope that it will be useful, 
++--but WITHOUT ANY WARRANTY; without even the implied warranty of 
++--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
++--See the GNU Lesser General Public License for
++--more details.
++
++--You should have received a copy of the GNU Lesser General 
++--Public License along with this program; if not, write to
++--the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
++
++--Linking Engine3 statically or dynamically with other modules 
++--is making a combined work based on Engine3. 
++--Thus, the terms and conditions of the GNU Lesser General Public License 
++--cover the whole combination.
++
++--In addition, as a special exception, the copyright holders of Engine3 
++--give you permission to combine Engine3 program with free software 
++--programs or libraries that are released under the GNU LGPL and with 
++--code included in the standard release of Core3 under the GNU LGPL 
++--license (or modified versions of such code, with unchanged license). 
++--You may copy and distribute such a system following the terms of the 
++--GNU LGPL for Engine3 and the licenses of the other code concerned, 
++--provided that you include the source code of that other code when 
++--and as the GNU LGPL requires distribution of source code.
++
++--Note that people who make modified versions of Engine3 are not obligated 
++--to grant this special exception for their modified versions; 
++--it is their choice whether to do so. The GNU Lesser General Public License 
++--gives permission to release a modified version without this exception; 
++--this exception also makes it possible to release a modified version 
++
++
++object_tangible_wearables_armor_vong_armor_vong_s01_bracer_l = object_tangible_wearables_armor_vong_shared_armor_vong_s01_bracer_l:new {
++	templateType = ARMOROBJECT,
++
++	playerRaces = { "object/creature/player/bothan_male.iff",
++				"object/creature/player/bothan_female.iff",
++				"object/creature/player/human_male.iff",
++				"object/creature/player/human_female.iff",
++				"object/creature/player/moncal_male.iff",
++				"object/creature/player/moncal_female.iff",
++				"object/creature/player/rodian_male.iff",
++				"object/creature/player/rodian_female.iff",
++				"object/creature/player/sullustan_male.iff",
++				"object/creature/player/sullustan_female.iff",
++				"object/creature/player/trandoshan_male.iff",
++				"object/creature/player/trandoshan_female.iff",
++				"object/creature/player/twilek_male.iff",
++				"object/creature/player/twilek_female.iff",
++				"object/creature/player/zabrak_male.iff",
++				"object/creature/player/zabrak_female.iff",
++				"object/mobile/vendor/aqualish_female.iff",
++				"object/mobile/vendor/aqualish_male.iff",
++				"object/mobile/vendor/bith_female.iff",
++				"object/mobile/vendor/bith_male.iff",
++				"object/mobile/vendor/bothan_female.iff",
++				"object/mobile/vendor/bothan_male.iff",
++				"object/mobile/vendor/devaronian_male.iff",
++				"object/mobile/vendor/gran_male.iff",
++				"object/mobile/vendor/human_female.iff",
++				"object/mobile/vendor/human_male.iff",
++				"object/mobile/vendor/ishi_tib_male.iff",
++				"object/mobile/vendor/moncal_female.iff",
++				"object/mobile/vendor/moncal_male.iff",
++				"object/mobile/vendor/nikto_male.iff",
++				"object/mobile/vendor/quarren_male.iff",
++				"object/mobile/vendor/rodian_female.iff",
++				"object/mobile/vendor/rodian_male.iff",
++				"object/mobile/vendor/sullustan_female.iff",
++				"object/mobile/vendor/sullustan_male.iff",
++				"object/mobile/vendor/trandoshan_female.iff",
++				"object/mobile/vendor/trandoshan_male.iff",
++				"object/mobile/vendor/twilek_female.iff",
++				"object/mobile/vendor/twilek_male.iff",
++				"object/mobile/vendor/weequay_male.iff",
++				"object/mobile/vendor/zabrak_female.iff",
++				"object/mobile/vendor/zabrak_male.iff" },
++
++	-- kineticeffectiveness, energyeffectiveness, electricaleffectiveness, stuneffectiveness, blasteffectiveness, heateffectiveness, coldeffectiveness, acideffectiveness, restraineffectiveness
++	vulnerability = KINETIC + BLAST + STUN + HEAT + COLD + ACID + LIGHTSABER,
++
++	-- These are default Blue Frog stats
++	healthEncumbrance = 6,
++	actionEncumbrance = 8,
++	mindEncumbrance = 4,
++
++	-- LIGHT, MEDIUM, HEAVY
++	rating = LIGHT,
++
++	kinetic = 0,
++	energy = 20,
++	electricity = 10,
++	stun = 0,
++	blast = 0,
++	heat = 0,
++	cold = 0,
++	acid = 0,
++	lightSaber = 0,
++
++	numberExperimentalProperties = {1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 2, 1},
++	experimentalProperties = {"XX", "XX", "XX", "OQ", "SR", "OQ", "SR", "OQ", "UT", "MA", "OQ", "MA", "OQ", "MA", "OQ", "XX", "XX", "OQ", "SR", "XX"},
++	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
++	experimentalGroupTitles = {"null", "null", "null", "exp_durability", "exp_quality", "exp_durability", "exp_durability", "exp_durability", "exp_durability", "null", "null", "exp_resistance", "null"},
++	experimentalSubGroupTitles = {"null", "null", "sockets", "hit_points", "armor_effectiveness", "armor_integrity", "armor_health_encumbrance", "armor_action_encumbrance", "armor_mind_encumbrance", "armor_rating", "armor_special_type", "armor_special_effectiveness", "armor_special_integrity"},
++	experimentalMin = {0, 0, 0, 1000, 5, 7500, 6, 8, 4, 1, 2, 5, 7500},
++	experimentalMax = {0, 0, 0, 1000, 20, 12500, 4, 4, 2, 1, 2, 30, 12500},
++	experimentalPrecision = {0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0},
++	experimentalCombineType = {0, 0, 4, 1, 1, 1, 1, 1, 1, 4, 4, 4, 1},
++}
++
++ObjectTemplates:addTemplate(object_tangible_wearables_armor_vong_armor_vong_s01_bracer_l, "object/tangible/wearables/armor/vong/armor_vong_s01_bracer_l.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bracer_r.lua b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bracer_r.lua
+new file mode 100644
+index 0000000..456fdff
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bracer_r.lua
+@@ -0,0 +1,122 @@
++--Copyright (C) 2010 <SWGEmu>
++
++
++--This File is part of Core3.
++
++--This program is free software; you can redistribute 
++--it and/or modify it under the terms of the GNU Lesser 
++--General Public License as published by the Free Software
++--Foundation; either version 2 of the License, 
++--or (at your option) any later version.
++
++--This program is distributed in the hope that it will be useful, 
++--but WITHOUT ANY WARRANTY; without even the implied warranty of 
++--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
++--See the GNU Lesser General Public License for
++--more details.
++
++--You should have received a copy of the GNU Lesser General 
++--Public License along with this program; if not, write to
++--the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
++
++--Linking Engine3 statically or dynamically with other modules 
++--is making a combined work based on Engine3. 
++--Thus, the terms and conditions of the GNU Lesser General Public License 
++--cover the whole combination.
++
++--In addition, as a special exception, the copyright holders of Engine3 
++--give you permission to combine Engine3 program with free software 
++--programs or libraries that are released under the GNU LGPL and with 
++--code included in the standard release of Core3 under the GNU LGPL 
++--license (or modified versions of such code, with unchanged license). 
++--You may copy and distribute such a system following the terms of the 
++--GNU LGPL for Engine3 and the licenses of the other code concerned, 
++--provided that you include the source code of that other code when 
++--and as the GNU LGPL requires distribution of source code.
++
++--Note that people who make modified versions of Engine3 are not obligated 
++--to grant this special exception for their modified versions; 
++--it is their choice whether to do so. The GNU Lesser General Public License 
++--gives permission to release a modified version without this exception; 
++--this exception also makes it possible to release a modified version 
++
++
++object_tangible_wearables_armor_vong_armor_vong_s01_bracer_r = object_tangible_wearables_armor_vong_shared_armor_vong_s01_bracer_r:new {
++	templateType = ARMOROBJECT,
++
++	playerRaces = { "object/creature/player/bothan_male.iff",
++				"object/creature/player/bothan_female.iff",
++				"object/creature/player/human_male.iff",
++				"object/creature/player/human_female.iff",
++				"object/creature/player/moncal_male.iff",
++				"object/creature/player/moncal_female.iff",
++				"object/creature/player/rodian_male.iff",
++				"object/creature/player/rodian_female.iff",
++				"object/creature/player/sullustan_male.iff",
++				"object/creature/player/sullustan_female.iff",
++				"object/creature/player/trandoshan_male.iff",
++				"object/creature/player/trandoshan_female.iff",
++				"object/creature/player/twilek_male.iff",
++				"object/creature/player/twilek_female.iff",
++				"object/creature/player/zabrak_male.iff",
++				"object/creature/player/zabrak_female.iff",
++				"object/mobile/vendor/aqualish_female.iff",
++				"object/mobile/vendor/aqualish_male.iff",
++				"object/mobile/vendor/bith_female.iff",
++				"object/mobile/vendor/bith_male.iff",
++				"object/mobile/vendor/bothan_female.iff",
++				"object/mobile/vendor/bothan_male.iff",
++				"object/mobile/vendor/devaronian_male.iff",
++				"object/mobile/vendor/gran_male.iff",
++				"object/mobile/vendor/human_female.iff",
++				"object/mobile/vendor/human_male.iff",
++				"object/mobile/vendor/ishi_tib_male.iff",
++				"object/mobile/vendor/moncal_female.iff",
++				"object/mobile/vendor/moncal_male.iff",
++				"object/mobile/vendor/nikto_male.iff",
++				"object/mobile/vendor/quarren_male.iff",
++				"object/mobile/vendor/rodian_female.iff",
++				"object/mobile/vendor/rodian_male.iff",
++				"object/mobile/vendor/sullustan_female.iff",
++				"object/mobile/vendor/sullustan_male.iff",
++				"object/mobile/vendor/trandoshan_female.iff",
++				"object/mobile/vendor/trandoshan_male.iff",
++				"object/mobile/vendor/twilek_female.iff",
++				"object/mobile/vendor/twilek_male.iff",
++				"object/mobile/vendor/weequay_male.iff",
++				"object/mobile/vendor/zabrak_female.iff",
++				"object/mobile/vendor/zabrak_male.iff" },
++
++	-- kineticeffectiveness, energyeffectiveness, electricaleffectiveness, stuneffectiveness, blasteffectiveness, heateffectiveness, coldeffectiveness, acideffectiveness, restraineffectiveness
++	vulnerability = KINETIC + BLAST + STUN + HEAT + COLD + ACID + LIGHTSABER,
++
++	-- These are default Blue Frog stats
++	healthEncumbrance = 6,
++	actionEncumbrance = 8,
++	mindEncumbrance = 4,
++
++	-- LIGHT, MEDIUM, HEAVY
++	rating = LIGHT,
++
++	kinetic = 0,
++	energy = 20,
++	electricity = 10,
++	stun = 0,
++	blast = 0,
++	heat = 0,
++	cold = 0,
++	acid = 0,
++	lightSaber = 0,
++
++	numberExperimentalProperties = {1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 2, 1},
++	experimentalProperties = {"XX", "XX", "XX", "OQ", "SR", "OQ", "SR", "OQ", "UT", "MA", "OQ", "MA", "OQ", "MA", "OQ", "XX", "XX", "OQ", "SR", "XX"},
++	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
++	experimentalGroupTitles = {"null", "null", "null", "exp_durability", "exp_quality", "exp_durability", "exp_durability", "exp_durability", "exp_durability", "null", "null", "exp_resistance", "null"},
++	experimentalSubGroupTitles = {"null", "null", "sockets", "hit_points", "armor_effectiveness", "armor_integrity", "armor_health_encumbrance", "armor_action_encumbrance", "armor_mind_encumbrance", "armor_rating", "armor_special_type", "armor_special_effectiveness", "armor_special_integrity"},
++	experimentalMin = {0, 0, 0, 1000, 5, 7500, 6, 8, 4, 1, 2, 5, 7500},
++	experimentalMax = {0, 0, 0, 1000, 20, 12500, 4, 4, 2, 1, 2, 30, 12500},
++	experimentalPrecision = {0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0},
++	experimentalCombineType = {0, 0, 4, 1, 1, 1, 1, 1, 1, 4, 4, 4, 1},
++}
++
++ObjectTemplates:addTemplate(object_tangible_wearables_armor_vong_armor_vong_s01_bracer_r, "object/tangible/wearables/armor/vong/armor_vong_s01_bracer_r.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_gloves.lua b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_gloves.lua
+new file mode 100644
+index 0000000..ead95ed
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_gloves.lua
+@@ -0,0 +1,118 @@
++--Copyright (C) 2010 <SWGEmu>
++
++
++--This File is part of Core3.
++
++--This program is free software; you can redistribute 
++--it and/or modify it under the terms of the GNU Lesser 
++--General Public License as published by the Free Software
++--Foundation; either version 2 of the License, 
++--or (at your option) any later version.
++
++--This program is distributed in the hope that it will be useful, 
++--but WITHOUT ANY WARRANTY; without even the implied warranty of 
++--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
++--See the GNU Lesser General Public License for
++--more details.
++
++--You should have received a copy of the GNU Lesser General 
++--Public License along with this program; if not, write to
++--the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
++
++--Linking Engine3 statically or dynamically with other modules 
++--is making a combined work based on Engine3. 
++--Thus, the terms and conditions of the GNU Lesser General Public License 
++--cover the whole combination.
++
++--In addition, as a special exception, the copyright holders of Engine3 
++--give you permission to combine Engine3 program with free software 
++--programs or libraries that are released under the GNU LGPL and with 
++--code included in the standard release of Core3 under the GNU LGPL 
++--license (or modified versions of such code, with unchanged license). 
++--You may copy and distribute such a system following the terms of the 
++--GNU LGPL for Engine3 and the licenses of the other code concerned, 
++--provided that you include the source code of that other code when 
++--and as the GNU LGPL requires distribution of source code.
++
++--Note that people who make modified versions of Engine3 are not obligated 
++--to grant this special exception for their modified versions; 
++--it is their choice whether to do so. The GNU Lesser General Public License 
++--gives permission to release a modified version without this exception; 
++--this exception also makes it possible to release a modified version 
++
++
++object_tangible_wearables_armor_vong_armor_vong_s01_gloves = object_tangible_wearables_armor_vong_shared_armor_vong_s01_gloves:new {
++	templateType = ARMOROBJECT,
++
++	playerRaces = { "object/creature/player/bothan_male.iff",
++				"object/creature/player/bothan_female.iff",
++				"object/creature/player/human_male.iff",
++				"object/creature/player/human_female.iff",
++				"object/creature/player/moncal_male.iff",
++				"object/creature/player/moncal_female.iff",
++				"object/creature/player/rodian_male.iff",
++				"object/creature/player/rodian_female.iff",
++				"object/creature/player/sullustan_male.iff",
++				"object/creature/player/sullustan_female.iff",
++				"object/creature/player/twilek_male.iff",
++				"object/creature/player/twilek_female.iff",
++				"object/creature/player/zabrak_male.iff",
++				"object/creature/player/zabrak_female.iff",
++				"object/mobile/vendor/aqualish_female.iff",
++				"object/mobile/vendor/aqualish_male.iff",
++				"object/mobile/vendor/bith_female.iff",
++				"object/mobile/vendor/bith_male.iff",
++				"object/mobile/vendor/bothan_female.iff",
++				"object/mobile/vendor/bothan_male.iff",
++				"object/mobile/vendor/devaronian_male.iff",
++				"object/mobile/vendor/gran_male.iff",
++				"object/mobile/vendor/human_female.iff",
++				"object/mobile/vendor/human_male.iff",
++				"object/mobile/vendor/ishi_tib_male.iff",
++				"object/mobile/vendor/moncal_female.iff",
++				"object/mobile/vendor/moncal_male.iff",
++				"object/mobile/vendor/nikto_male.iff",
++				"object/mobile/vendor/quarren_male.iff",
++				"object/mobile/vendor/rodian_female.iff",
++				"object/mobile/vendor/rodian_male.iff",
++				"object/mobile/vendor/sullustan_female.iff",
++				"object/mobile/vendor/sullustan_male.iff",
++				"object/mobile/vendor/twilek_female.iff",
++				"object/mobile/vendor/twilek_male.iff",
++				"object/mobile/vendor/weequay_male.iff",
++				"object/mobile/vendor/zabrak_female.iff",
++				"object/mobile/vendor/zabrak_male.iff" },
++
++	-- kineticeffectiveness, energyeffectiveness, electricaleffectiveness, stuneffectiveness, blasteffectiveness, heateffectiveness, coldeffectiveness, acideffectiveness, restraineffectiveness
++	vulnerability = KINETIC + BLAST + STUN + HEAT + COLD + ACID + LIGHTSABER,
++
++	-- These are default Blue Frog stats
++	healthEncumbrance = 6,
++	actionEncumbrance = 8,
++	mindEncumbrance = 4,
++
++	-- LIGHT, MEDIUM, HEAVY
++	rating = LIGHT,
++
++	kinetic = 0,
++	energy = 20,
++	electricity = 10,
++	stun = 0,
++	blast = 0,
++	heat = 0,
++	cold = 0,
++	acid = 0,
++	lightSaber = 0,
++
++	numberExperimentalProperties = {1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 2, 1},
++	experimentalProperties = {"XX", "XX", "XX", "XX", "OQ", "SR", "OQ", "UT", "MA", "OQ", "MA", "OQ", "MA", "OQ", "XX", "XX", "OQ", "SR", "XX"},
++	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
++	experimentalGroupTitles = {"null", "null", "null", "null", "exp_quality", "exp_durability", "exp_durability", "exp_durability", "exp_durability", "null", "null", "exp_resistance", "null"},
++	experimentalSubGroupTitles = {"null", "null", "sockets", "hit_points", "armor_effectiveness", "armor_integrity", "armor_health_encumbrance", "armor_action_encumbrance", "armor_mind_encumbrance", "armor_rating", "armor_special_type", "armor_special_effectiveness", "armor_special_integrity"},
++	experimentalMin = {0, 0, 0, 1000, 5, 7500, 6, 16, 4, 1, 2, 5, 7500},
++	experimentalMax = {0, 0, 0, 1000, 20, 12500, 4, 8, 2, 1, 2, 30, 12500},
++	experimentalPrecision = {0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0},
++	experimentalCombineType = {0, 0, 4, 1, 1, 1, 1, 1, 1, 4, 4, 4, 1},
++}
++
++ObjectTemplates:addTemplate(object_tangible_wearables_armor_vong_armor_vong_s01_gloves, "object/tangible/wearables/armor/vong/armor_vong_s01_gloves.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_leggings.lua b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_leggings.lua
+new file mode 100644
+index 0000000..138318f
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_leggings.lua
+@@ -0,0 +1,122 @@
++--Copyright (C) 2010 <SWGEmu>
++
++
++--This File is part of Core3.
++
++--This program is free software; you can redistribute 
++--it and/or modify it under the terms of the GNU Lesser 
++--General Public License as published by the Free Software
++--Foundation; either version 2 of the License, 
++--or (at your option) any later version.
++
++--This program is distributed in the hope that it will be useful, 
++--but WITHOUT ANY WARRANTY; without even the implied warranty of 
++--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
++--See the GNU Lesser General Public License for
++--more details.
++
++--You should have received a copy of the GNU Lesser General 
++--Public License along with this program; if not, write to
++--the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
++
++--Linking Engine3 statically or dynamically with other modules 
++--is making a combined work based on Engine3. 
++--Thus, the terms and conditions of the GNU Lesser General Public License 
++--cover the whole combination.
++
++--In addition, as a special exception, the copyright holders of Engine3 
++--give you permission to combine Engine3 program with free software 
++--programs or libraries that are released under the GNU LGPL and with 
++--code included in the standard release of Core3 under the GNU LGPL 
++--license (or modified versions of such code, with unchanged license). 
++--You may copy and distribute such a system following the terms of the 
++--GNU LGPL for Engine3 and the licenses of the other code concerned, 
++--provided that you include the source code of that other code when 
++--and as the GNU LGPL requires distribution of source code.
++
++--Note that people who make modified versions of Engine3 are not obligated 
++--to grant this special exception for their modified versions; 
++--it is their choice whether to do so. The GNU Lesser General Public License 
++--gives permission to release a modified version without this exception; 
++--this exception also makes it possible to release a modified version 
++
++
++object_tangible_wearables_armor_vong_armor_vong_s01_leggings = object_tangible_wearables_armor_vong_shared_armor_vong_s01_leggings:new {
++	templateType = ARMOROBJECT,
++
++	playerRaces = { "object/creature/player/bothan_male.iff",
++				"object/creature/player/bothan_female.iff",
++				"object/creature/player/human_male.iff",
++				"object/creature/player/human_female.iff",
++				"object/creature/player/moncal_male.iff",
++				"object/creature/player/moncal_female.iff",
++				"object/creature/player/rodian_male.iff",
++				"object/creature/player/rodian_female.iff",
++				"object/creature/player/sullustan_male.iff",
++				"object/creature/player/sullustan_female.iff",
++				"object/creature/player/trandoshan_male.iff",
++				"object/creature/player/trandoshan_female.iff",
++				"object/creature/player/twilek_male.iff",
++				"object/creature/player/twilek_female.iff",
++				"object/creature/player/zabrak_male.iff",
++				"object/creature/player/zabrak_female.iff",
++				"object/mobile/vendor/aqualish_female.iff",
++				"object/mobile/vendor/aqualish_male.iff",
++				"object/mobile/vendor/bith_female.iff",
++				"object/mobile/vendor/bith_male.iff",
++				"object/mobile/vendor/bothan_female.iff",
++				"object/mobile/vendor/bothan_male.iff",
++				"object/mobile/vendor/devaronian_male.iff",
++				"object/mobile/vendor/gran_male.iff",
++				"object/mobile/vendor/human_female.iff",
++				"object/mobile/vendor/human_male.iff",
++				"object/mobile/vendor/ishi_tib_male.iff",
++				"object/mobile/vendor/moncal_female.iff",
++				"object/mobile/vendor/moncal_male.iff",
++				"object/mobile/vendor/nikto_male.iff",
++				"object/mobile/vendor/quarren_male.iff",
++				"object/mobile/vendor/rodian_female.iff",
++				"object/mobile/vendor/rodian_male.iff",
++				"object/mobile/vendor/sullustan_female.iff",
++				"object/mobile/vendor/sullustan_male.iff",
++				"object/mobile/vendor/trandoshan_female.iff",
++				"object/mobile/vendor/trandoshan_male.iff",
++				"object/mobile/vendor/twilek_female.iff",
++				"object/mobile/vendor/twilek_male.iff",
++				"object/mobile/vendor/weequay_male.iff",
++				"object/mobile/vendor/zabrak_female.iff",
++				"object/mobile/vendor/zabrak_male.iff" },
++
++	-- kineticeffectiveness, energyeffectiveness, electricaleffectiveness, stuneffectiveness, blasteffectiveness, heateffectiveness, coldeffectiveness, acideffectiveness, restraineffectiveness
++	vulnerability = KINETIC + BLAST + STUN + HEAT + COLD + ACID + LIGHTSABER,
++
++	-- These are default Blue Frog stats
++	healthEncumbrance = 17,
++	actionEncumbrance = 60,
++	mindEncumbrance = 4,
++
++	-- LIGHT, MEDIUM, HEAVY
++	rating = LIGHT,
++
++	kinetic = 0,
++	energy = 20,
++	electricity = 10,
++	stun = 0,
++	blast = 0,
++	heat = 0,
++	cold = 0,
++	acid = 0,
++	lightSaber = 0,
++
++	numberExperimentalProperties = {1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 2, 1},
++	experimentalProperties = {"XX", "XX", "XX", "OQ", "SR", "OQ", "SR", "OQ", "UT", "MA", "OQ", "MA", "OQ", "MA", "OQ", "XX", "XX", "OQ", "SR", "XX"},
++	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
++	experimentalGroupTitles = {"null", "null", "null", "exp_durability", "exp_quality", "exp_durability", "exp_durability", "exp_durability", "exp_durability", "null", "null", "exp_resistance", "null"},
++	experimentalSubGroupTitles = {"null", "null", "sockets", "hit_points", "armor_effectiveness", "armor_integrity", "armor_health_encumbrance", "armor_action_encumbrance", "armor_mind_encumbrance", "armor_rating", "armor_special_type", "armor_special_effectiveness", "armor_special_integrity"},
++	experimentalMin = {0, 0, 0, 1000, 5, 7500, 18, 60, 4, 1, 2, 5, 7500},
++	experimentalMax = {0, 0, 0, 1000, 20, 12500, 10, 36, 2, 1, 2, 30, 12500},
++	experimentalPrecision = {0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0},
++	experimentalCombineType = {0, 0, 4, 1, 1, 1, 1, 1, 1, 4, 4, 4, 1},
++}
++
++ObjectTemplates:addTemplate(object_tangible_wearables_armor_vong_armor_vong_s01_leggings, "object/tangible/wearables/armor/vong/armor_vong_s01_leggings.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/objects.lua b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/objects.lua
+new file mode 100644
+index 0000000..27c09d2
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/objects.lua
+@@ -0,0 +1,415 @@
++-- Vong look test (owner, 17 Oct 2026): our armour clones; the client files are in local_planets.tre
++-- (outputs/Vong-look/tools/build_vong_client.py). Shared templates cloned from the stock bone set. Claude.
++
++object_tangible_wearables_armor_vong_shared_armor_vong_s01_bicep_l = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bicep_l.iff"
++	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
++--[[
++	appearanceFilename = "appearance/armor_vong_s01_bicep_l_f.sat",
++	arrangementDescriptorFilename = "abstract/slot/arrangement/wearables/bicep_l.iff",
++
++	certificationsRequired = {},
++	clearFloraRadius = 0,
++	clientDataFile = "",
++	clientGameObjectType = 261,
++	collisionActionBlockFlags = 0,
++	collisionActionFlags = 51,
++	collisionActionPassFlags = 1,
++	collisionMaterialBlockFlags = 0,
++	collisionMaterialFlags = 1,
++	collisionMaterialPassFlags = 0,
++	containerType = 0,
++	containerVolumeLimit = 1,
++	customizationVariableMapping = {},
++
++	detailedDescription = "@wearables_detail:armor_bone_s01_bicep_l",
++
++	gameObjectType = 261,
++
++	locationReservationRadius = 0,
++	lookAtText = "@wearables_lookat:armor_bone_s01_bicep_l",
++
++	noBuildRadius = 0,
++
++	objectName = "@wearables_name:armor_bone_s01_bicep_l",
++	onlyVisibleInTools = 0,
++
++	paletteColorCustomizationVariables = {},
++	portalLayoutFilename = "",
++
++	rangedIntCustomizationVariables = {},
++
++	scale = 1,
++	scaleThresholdBeforeExtentTest = 0.5,
++	sendToClient = 1,
++	slotDescriptorFilename = "abstract/slot/descriptor/tangible.iff",
++	snapToTerrain = 1,
++	socketDestinations = {},
++	structureFootprintFileName = "",
++	surfaceType = 0,
++
++	targetable = 1,
++	totalCellNumber = 0,
++
++	useStructureFootprintOutline = 0,
++
++	clientObjectCRC = 2085871516,
++	derivedFromTemplates = {"object/object/base/shared_base_object.iff", "object/tangible/base/shared_tangible_base.iff", "object/tangible/base/shared_tangible_craftable.iff", "object/tangible/wearables/base/shared_wearables_base.iff", "object/tangible/wearables/base/shared_armor_base.iff", "object/tangible/wearables/base/shared_base_bicep_l.iff"}
++]]
++}
++
++ObjectTemplates:addClientTemplate(object_tangible_wearables_armor_vong_shared_armor_vong_s01_bicep_l, "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bicep_l.iff")
++
++object_tangible_wearables_armor_vong_shared_armor_vong_s01_bicep_r = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bicep_r.iff"
++	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
++--[[
++	appearanceFilename = "appearance/armor_vong_s01_bicep_r_f.sat",
++	arrangementDescriptorFilename = "abstract/slot/arrangement/wearables/bicep_r.iff",
++
++	certificationsRequired = {},
++	clearFloraRadius = 0,
++	clientDataFile = "",
++	clientGameObjectType = 261,
++	collisionActionBlockFlags = 0,
++	collisionActionFlags = 51,
++	collisionActionPassFlags = 1,
++	collisionMaterialBlockFlags = 0,
++	collisionMaterialFlags = 1,
++	collisionMaterialPassFlags = 0,
++	containerType = 0,
++	containerVolumeLimit = 1,
++	customizationVariableMapping = {},
++
++	detailedDescription = "@wearables_detail:armor_bone_s01_bicep_r",
++
++	gameObjectType = 261,
++
++	locationReservationRadius = 0,
++	lookAtText = "@wearables_lookat:armor_bone_s01_bicep_r",
++
++	noBuildRadius = 0,
++
++	objectName = "@wearables_name:armor_bone_s01_bicep_r",
++	onlyVisibleInTools = 0,
++
++	paletteColorCustomizationVariables = {},
++	portalLayoutFilename = "",
++
++	rangedIntCustomizationVariables = {},
++
++	scale = 1,
++	scaleThresholdBeforeExtentTest = 0.5,
++	sendToClient = 1,
++	slotDescriptorFilename = "abstract/slot/descriptor/tangible.iff",
++	snapToTerrain = 1,
++	socketDestinations = {},
++	structureFootprintFileName = "",
++	surfaceType = 0,
++
++	targetable = 1,
++	totalCellNumber = 0,
++
++	useStructureFootprintOutline = 0,
++
++	clientObjectCRC = 210147855,
++	derivedFromTemplates = {"object/object/base/shared_base_object.iff", "object/tangible/base/shared_tangible_base.iff", "object/tangible/base/shared_tangible_craftable.iff", "object/tangible/wearables/base/shared_wearables_base.iff", "object/tangible/wearables/base/shared_armor_base.iff", "object/tangible/wearables/base/shared_base_bicep_r.iff"}
++]]
++}
++
++ObjectTemplates:addClientTemplate(object_tangible_wearables_armor_vong_shared_armor_vong_s01_bicep_r, "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bicep_r.iff")
++
++object_tangible_wearables_armor_vong_shared_armor_vong_s01_bracer_l = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bracer_l.iff"
++	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
++--[[
++	appearanceFilename = "appearance/armor_vong_s01_bracer_l_f.sat",
++	arrangementDescriptorFilename = "abstract/slot/arrangement/wearables/bracer_l.iff",
++
++	certificationsRequired = {},
++	clearFloraRadius = 0,
++	clientDataFile = "",
++	clientGameObjectType = 261,
++	collisionActionBlockFlags = 0,
++	collisionActionFlags = 51,
++	collisionActionPassFlags = 1,
++	collisionMaterialBlockFlags = 0,
++	collisionMaterialFlags = 1,
++	collisionMaterialPassFlags = 0,
++	containerType = 0,
++	containerVolumeLimit = 1,
++	customizationVariableMapping = {},
++
++	detailedDescription = "@wearables_detail:armor_bone_s01_bracer_l",
++
++	gameObjectType = 261,
++
++	locationReservationRadius = 0,
++	lookAtText = "@wearables_lookat:armor_bone_s01_bracer_l",
++
++	noBuildRadius = 0,
++
++	objectName = "@wearables_name:armor_bone_s01_bracer_l",
++	onlyVisibleInTools = 0,
++
++	paletteColorCustomizationVariables = {},
++	portalLayoutFilename = "",
++
++	rangedIntCustomizationVariables = {},
++
++	scale = 1,
++	scaleThresholdBeforeExtentTest = 0.5,
++	sendToClient = 1,
++	slotDescriptorFilename = "abstract/slot/descriptor/tangible.iff",
++	snapToTerrain = 1,
++	socketDestinations = {},
++	structureFootprintFileName = "",
++	surfaceType = 0,
++
++	targetable = 1,
++	totalCellNumber = 0,
++
++	useStructureFootprintOutline = 0,
++
++	clientObjectCRC = 778039047,
++	derivedFromTemplates = {"object/object/base/shared_base_object.iff", "object/tangible/base/shared_tangible_base.iff", "object/tangible/base/shared_tangible_craftable.iff", "object/tangible/wearables/base/shared_wearables_base.iff", "object/tangible/wearables/base/shared_armor_base.iff", "object/tangible/wearables/base/shared_base_bracer_l.iff"}
++]]
++}
++
++ObjectTemplates:addClientTemplate(object_tangible_wearables_armor_vong_shared_armor_vong_s01_bracer_l, "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bracer_l.iff")
++
++object_tangible_wearables_armor_vong_shared_armor_vong_s01_bracer_r = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bracer_r.iff"
++	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
++--[[
++	appearanceFilename = "appearance/armor_vong_s01_bracer_r_f.sat",
++	arrangementDescriptorFilename = "abstract/slot/arrangement/wearables/bracer_r.iff",
++
++	certificationsRequired = {},
++	clearFloraRadius = 0,
++	clientDataFile = "",
++	clientGameObjectType = 261,
++	collisionActionBlockFlags = 0,
++	collisionActionFlags = 51,
++	collisionActionPassFlags = 1,
++	collisionMaterialBlockFlags = 0,
++	collisionMaterialFlags = 1,
++	collisionMaterialPassFlags = 0,
++	containerType = 0,
++	containerVolumeLimit = 1,
++	customizationVariableMapping = {},
++
++	detailedDescription = "@wearables_detail:armor_bone_s01_bracer_r",
++
++	gameObjectType = 261,
++
++	locationReservationRadius = 0,
++	lookAtText = "@wearables_lookat:armor_bone_s01_bracer_r",
++
++	noBuildRadius = 0,
++
++	objectName = "@wearables_name:armor_bone_s01_bracer_r",
++	onlyVisibleInTools = 0,
++
++	paletteColorCustomizationVariables = {},
++	portalLayoutFilename = "",
++
++	rangedIntCustomizationVariables = {},
++
++	scale = 1,
++	scaleThresholdBeforeExtentTest = 0.5,
++	sendToClient = 1,
++	slotDescriptorFilename = "abstract/slot/descriptor/tangible.iff",
++	snapToTerrain = 1,
++	socketDestinations = {},
++	structureFootprintFileName = "",
++	surfaceType = 0,
++
++	targetable = 1,
++	totalCellNumber = 0,
++
++	useStructureFootprintOutline = 0,
++
++	clientObjectCRC = 1586145940,
++	derivedFromTemplates = {"object/object/base/shared_base_object.iff", "object/tangible/base/shared_tangible_base.iff", "object/tangible/base/shared_tangible_craftable.iff", "object/tangible/wearables/base/shared_wearables_base.iff", "object/tangible/wearables/base/shared_armor_base.iff", "object/tangible/wearables/base/shared_base_bracer_r.iff"}
++]]
++}
++
++ObjectTemplates:addClientTemplate(object_tangible_wearables_armor_vong_shared_armor_vong_s01_bracer_r, "object/tangible/wearables/armor/vong/shared_armor_vong_s01_bracer_r.iff")
++
++object_tangible_wearables_armor_vong_shared_armor_vong_s01_boots = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/armor/vong/shared_armor_vong_s01_boots.iff"
++	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
++--[[
++	appearanceFilename = "appearance/armor_vong_s01_boots_f.sat",
++	arrangementDescriptorFilename = "abstract/slot/arrangement/wearables/shoe.iff",
++
++	certificationsRequired = {},
++	clearFloraRadius = 0,
++	clientDataFile = "",
++	clientGameObjectType = 263,
++	collisionActionBlockFlags = 0,
++	collisionActionFlags = 51,
++	collisionActionPassFlags = 1,
++	collisionMaterialBlockFlags = 0,
++	collisionMaterialFlags = 1,
++	collisionMaterialPassFlags = 0,
++	containerType = 0,
++	containerVolumeLimit = 1,
++	customizationVariableMapping = {},
++
++	detailedDescription = "@wearables_detail:armor_bone_s01_boots",
++
++	gameObjectType = 263,
++
++	locationReservationRadius = 0,
++	lookAtText = "@wearables_lookat:armor_bone_s01_boots",
++
++	noBuildRadius = 0,
++
++	objectName = "@wearables_name:armor_bone_s01_boots",
++	onlyVisibleInTools = 0,
++
++	paletteColorCustomizationVariables = {},
++	portalLayoutFilename = "",
++
++	rangedIntCustomizationVariables = {},
++
++	scale = 1,
++	scaleThresholdBeforeExtentTest = 0.5,
++	sendToClient = 1,
++	slotDescriptorFilename = "abstract/slot/descriptor/tangible.iff",
++	snapToTerrain = 1,
++	socketDestinations = {},
++	structureFootprintFileName = "",
++	surfaceType = 0,
++
++	targetable = 1,
++	totalCellNumber = 0,
++
++	useStructureFootprintOutline = 0,
++
++	clientObjectCRC = 802627120,
++	derivedFromTemplates = {"object/object/base/shared_base_object.iff", "object/tangible/base/shared_tangible_base.iff", "object/tangible/base/shared_tangible_craftable.iff", "object/tangible/wearables/base/shared_wearables_base.iff", "object/tangible/wearables/base/shared_base_shoes.iff"}
++]]
++}
++
++ObjectTemplates:addClientTemplate(object_tangible_wearables_armor_vong_shared_armor_vong_s01_boots, "object/tangible/wearables/armor/vong/shared_armor_vong_s01_boots.iff")
++
++object_tangible_wearables_armor_vong_shared_armor_vong_s01_gloves = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/armor/vong/shared_armor_vong_s01_gloves.iff"
++	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
++--[[
++	appearanceFilename = "appearance/armor_vong_s01_gloves_f.sat",
++	arrangementDescriptorFilename = "abstract/slot/arrangement/wearables/gauntlets.iff",
++
++	certificationsRequired = {},
++	clearFloraRadius = 0,
++	clientDataFile = "",
++	clientGameObjectType = 262,
++	collisionActionBlockFlags = 0,
++	collisionActionFlags = 51,
++	collisionActionPassFlags = 1,
++	collisionMaterialBlockFlags = 0,
++	collisionMaterialFlags = 1,
++	collisionMaterialPassFlags = 0,
++	containerType = 0,
++	containerVolumeLimit = 1,
++	customizationVariableMapping = {},
++
++	detailedDescription = "@wearables_detail:armor_bone_s01_gloves",
++
++	gameObjectType = 262,
++
++	locationReservationRadius = 0,
++	lookAtText = "@wearables_lookat:armor_bone_s01_gloves",
++
++	noBuildRadius = 0,
++
++	objectName = "@wearables_name:armor_bone_s01_gloves",
++	onlyVisibleInTools = 0,
++
++	paletteColorCustomizationVariables = {},
++	portalLayoutFilename = "",
++
++	rangedIntCustomizationVariables = {},
++
++	scale = 1,
++	scaleThresholdBeforeExtentTest = 0.5,
++	sendToClient = 1,
++	slotDescriptorFilename = "abstract/slot/descriptor/tangible.iff",
++	snapToTerrain = 1,
++	socketDestinations = {},
++	structureFootprintFileName = "",
++	surfaceType = 0,
++
++	targetable = 1,
++	totalCellNumber = 0,
++
++	useStructureFootprintOutline = 0,
++
++	clientObjectCRC = 4034830199,
++	derivedFromTemplates = {"object/object/base/shared_base_object.iff", "object/tangible/base/shared_tangible_base.iff", "object/tangible/base/shared_tangible_craftable.iff", "object/tangible/wearables/base/shared_wearables_base.iff", "object/tangible/wearables/base/shared_armor_base.iff", "object/tangible/wearables/base/shared_base_gauntlets.iff"}
++]]
++}
++
++ObjectTemplates:addClientTemplate(object_tangible_wearables_armor_vong_shared_armor_vong_s01_gloves, "object/tangible/wearables/armor/vong/shared_armor_vong_s01_gloves.iff")
++
++object_tangible_wearables_armor_vong_shared_armor_vong_s01_leggings = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/armor/vong/shared_armor_vong_s01_leggings.iff"
++	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
++--[[
++	appearanceFilename = "appearance/armor_vong_s01_leggings_f.sat",
++	arrangementDescriptorFilename = "abstract/slot/arrangement/wearables/skirt.iff",
++
++	certificationsRequired = {},
++	clearFloraRadius = 0,
++	clientDataFile = "",
++	clientGameObjectType = 260,
++	collisionActionBlockFlags = 0,
++	collisionActionFlags = 51,
++	collisionActionPassFlags = 1,
++	collisionMaterialBlockFlags = 0,
++	collisionMaterialFlags = 1,
++	collisionMaterialPassFlags = 0,
++	containerType = 0,
++	containerVolumeLimit = 1,
++	customizationVariableMapping = {},
++
++	detailedDescription = "@wearables_detail:armor_bone_s01_leggings",
++
++	gameObjectType = 260,
++
++	locationReservationRadius = 0,
++	lookAtText = "@wearables_lookat:armor_bone_s01_leggings",
++
++	noBuildRadius = 0,
++
++	objectName = "@wearables_name:armor_bone_s01_leggings",
++	onlyVisibleInTools = 0,
++
++	paletteColorCustomizationVariables = {},
++	portalLayoutFilename = "",
++
++	rangedIntCustomizationVariables = {},
++
++	scale = 1,
++	scaleThresholdBeforeExtentTest = 0.5,
++	sendToClient = 1,
++	slotDescriptorFilename = "abstract/slot/descriptor/tangible.iff",
++	snapToTerrain = 1,
++	socketDestinations = {},
++	structureFootprintFileName = "",
++	surfaceType = 0,
++
++	targetable = 1,
++	totalCellNumber = 0,
++
++	useStructureFootprintOutline = 0,
++
++	clientObjectCRC = 2709205528,
++	derivedFromTemplates = {"object/object/base/shared_base_object.iff", "object/tangible/base/shared_tangible_base.iff", "object/tangible/base/shared_tangible_craftable.iff", "object/tangible/wearables/base/shared_wearables_base.iff", "object/tangible/wearables/base/shared_base_skirt.iff"}
++]]
++}
++
++ObjectTemplates:addClientTemplate(object_tangible_wearables_armor_vong_shared_armor_vong_s01_leggings, "object/tangible/wearables/armor/vong/shared_armor_vong_s01_leggings.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/serverobjects.lua b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/serverobjects.lua
+new file mode 100644
+index 0000000..18de38e
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/serverobjects.lua
+@@ -0,0 +1,10 @@
++-- Vong look test (owner, 17 Oct 2026): our armour clones; the client files are in local_planets.tre
++-- (outputs/Vong-look/tools/build_vong_client.py). Server templates. Claude.
++
++includeFile("tangible/wearables/armor/vong/armor_vong_s01_bicep_l.lua")
++includeFile("tangible/wearables/armor/vong/armor_vong_s01_bicep_r.lua")
++includeFile("tangible/wearables/armor/vong/armor_vong_s01_bracer_l.lua")
++includeFile("tangible/wearables/armor/vong/armor_vong_s01_bracer_r.lua")
++includeFile("tangible/wearables/armor/vong/armor_vong_s01_boots.lua")
++includeFile("tangible/wearables/armor/vong/armor_vong_s01_gloves.lua")
++includeFile("tangible/wearables/armor/vong/armor_vong_s01_leggings.lua")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/armor_vongcrab_s02_chest_plate.lua b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/armor_vongcrab_s02_chest_plate.lua
+new file mode 100644
+index 0000000..81ad423
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/armor_vongcrab_s02_chest_plate.lua
+@@ -0,0 +1,112 @@
++--Copyright (C) 2010 <SWGEmu>
++
++
++--This File is part of Core3.
++
++--This program is free software; you can redistribute 
++--it and/or modify it under the terms of the GNU Lesser 
++--General Public License as published by the Free Software
++--Foundation; either version 2 of the License, 
++--or (at your option) any later version.
++
++--This program is distributed in the hope that it will be useful, 
++--but WITHOUT ANY WARRANTY; without even the implied warranty of 
++--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
++--See the GNU Lesser General Public License for
++--more details.
++
++--You should have received a copy of the GNU Lesser General 
++--Public License along with this program; if not, write to
++--the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
++
++--Linking Engine3 statically or dynamically with other modules 
++--is making a combined work based on Engine3. 
++--Thus, the terms and conditions of the GNU Lesser General Public License 
++--cover the whole combination.
++
++--In addition, as a special exception, the copyright holders of Engine3 
++--give you permission to combine Engine3 program with free software 
++--programs or libraries that are released under the GNU LGPL and with 
++--code included in the standard release of Core3 under the GNU LGPL 
++--license (or modified versions of such code, with unchanged license). 
++--You may copy and distribute such a system following the terms of the 
++--GNU LGPL for Engine3 and the licenses of the other code concerned, 
++--provided that you include the source code of that other code when 
++--and as the GNU LGPL requires distribution of source code.
++
++--Note that people who make modified versions of Engine3 are not obligated 
++--to grant this special exception for their modified versions; 
++--it is their choice whether to do so. The GNU Lesser General Public License 
++--gives permission to release a modified version without this exception; 
++--this exception also makes it possible to release a modified version 
++
++
++object_tangible_wearables_armor_vongcrab_armor_vongcrab_s02_chest_plate = object_tangible_wearables_armor_vongcrab_shared_armor_vongcrab_s02_chest_plate:new {
++	templateType = ARMOROBJECT,
++
++	playerRaces = { "object/creature/player/bothan_male.iff",
++				"object/creature/player/bothan_female.iff",
++				"object/creature/player/human_male.iff",
++				"object/creature/player/human_female.iff",
++				"object/creature/player/moncal_male.iff",
++				"object/creature/player/moncal_female.iff",
++				"object/creature/player/rodian_male.iff",
++				"object/creature/player/rodian_female.iff",
++				"object/creature/player/sullustan_male.iff",
++				"object/creature/player/sullustan_female.iff",
++				"object/creature/player/trandoshan_male.iff",
++				"object/creature/player/trandoshan_female.iff",
++				"object/creature/player/twilek_male.iff",
++				"object/creature/player/twilek_female.iff",
++				"object/creature/player/zabrak_male.iff",
++				"object/creature/player/zabrak_female.iff",
++				"object/mobile/vendor/aqualish_female.iff",
++				"object/mobile/vendor/aqualish_male.iff",
++				"object/mobile/vendor/bith_female.iff",
++				"object/mobile/vendor/bith_male.iff",
++				"object/mobile/vendor/bothan_female.iff",
++				"object/mobile/vendor/bothan_male.iff",
++				"object/mobile/vendor/devaronian_male.iff",
++				"object/mobile/vendor/gran_male.iff",
++				"object/mobile/vendor/human_female.iff",
++				"object/mobile/vendor/human_male.iff",
++				"object/mobile/vendor/ishi_tib_male.iff",
++				"object/mobile/vendor/moncal_female.iff",
++				"object/mobile/vendor/moncal_male.iff",
++				"object/mobile/vendor/nikto_male.iff",
++				"object/mobile/vendor/quarren_male.iff",
++				"object/mobile/vendor/rodian_female.iff",
++				"object/mobile/vendor/rodian_male.iff",
++				"object/mobile/vendor/sullustan_female.iff",
++				"object/mobile/vendor/sullustan_male.iff",
++				"object/mobile/vendor/trandoshan_female.iff",
++				"object/mobile/vendor/trandoshan_male.iff",
++				"object/mobile/vendor/twilek_female.iff",
++				"object/mobile/vendor/twilek_male.iff",
++				"object/mobile/vendor/weequay_male.iff",
++				"object/mobile/vendor/zabrak_female.iff",
++				"object/mobile/vendor/zabrak_male.iff" },
++	
++	-- Damage types in WeaponObject
++	vulnerability = ELECTRICITY + COLD + STUN + LIGHTSABER,
++
++	-- These are default Blue Frog stats
++	healthEncumbrance = 125,
++	actionEncumbrance = 23,
++	mindEncumbrance = 10,
++
++	-- LIGHT, MEDIUM, HEAVY
++	rating = LIGHT,
++
++	kinetic = 25,
++	energy = 15,
++	electricity = 0,
++	stun = 0,
++	blast = 15,
++	heat = 15,
++	cold = 0,
++	acid = 15,
++	lightSaber = 0
++}
++
++ObjectTemplates:addTemplate(object_tangible_wearables_armor_vongcrab_armor_vongcrab_s02_chest_plate, "object/tangible/wearables/armor/vongcrab/armor_vongcrab_s02_chest_plate.iff")
+\ No newline at end of file
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/objects.lua b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/objects.lua
+new file mode 100644
+index 0000000..80db706
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/objects.lua
+@@ -0,0 +1,61 @@
++-- Vong look test (owner, 17 Oct 2026): our armour clones; the client files are in local_planets.tre
++-- (outputs/Vong-look/tools/build_vong_client.py). Shared templates cloned from the stock marauder set. Claude.
++
++object_tangible_wearables_armor_vongcrab_shared_armor_vongcrab_s02_chest_plate = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/wearables/armor/vongcrab/shared_armor_vongcrab_s02_chest_plate.iff"
++	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
++--[[
++	appearanceFilename = "appearance/armor_vongcrab_s02_chest_plate_f.sat",
++	arrangementDescriptorFilename = "abstract/slot/arrangement/wearables/vest.iff",
++
++	certificationsRequired = {},
++	clearFloraRadius = 0,
++	clientDataFile = "",
++	clientGameObjectType = 257,
++	collisionActionBlockFlags = 0,
++	collisionActionFlags = 51,
++	collisionActionPassFlags = 1,
++	collisionMaterialBlockFlags = 0,
++	collisionMaterialFlags = 1,
++	collisionMaterialPassFlags = 0,
++	containerType = 0,
++	containerVolumeLimit = 1,
++	customizationVariableMapping = {},
++
++	detailedDescription = "@wearables_detail:armor_marauder_s02_chest_plate",
++
++	gameObjectType = 257,
++
++	locationReservationRadius = 0,
++	lookAtText = "@wearables_lookat:armor_marauder_s02_chest_plate",
++
++	noBuildRadius = 0,
++
++	objectName = "@wearables_name:armor_marauder_s02_chest_plate",
++	onlyVisibleInTools = 0,
++
++	paletteColorCustomizationVariables = {},
++	portalLayoutFilename = "",
++
++	rangedIntCustomizationVariables = {},
++
++	scale = 1,
++	scaleThresholdBeforeExtentTest = 0.5,
++	sendToClient = 1,
++	slotDescriptorFilename = "abstract/slot/descriptor/tangible.iff",
++	snapToTerrain = 1,
++	socketDestinations = {},
++	structureFootprintFileName = "",
++	surfaceType = 0,
++
++	targetable = 1,
++	totalCellNumber = 0,
++
++	useStructureFootprintOutline = 0,
++
++	clientObjectCRC = 2524065296,
++	derivedFromTemplates = {"object/object/base/shared_base_object.iff", "object/tangible/base/shared_tangible_base.iff", "object/tangible/base/shared_tangible_craftable.iff", "object/tangible/wearables/base/shared_wearables_base.iff", "object/tangible/wearables/base/shared_base_vest.iff"}
++]]
++}
++
++ObjectTemplates:addClientTemplate(object_tangible_wearables_armor_vongcrab_shared_armor_vongcrab_s02_chest_plate, "object/tangible/wearables/armor/vongcrab/shared_armor_vongcrab_s02_chest_plate.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/serverobjects.lua b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/serverobjects.lua
+new file mode 100644
+index 0000000..1cd43a5
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/serverobjects.lua
+@@ -0,0 +1,4 @@
++-- Vong look test (owner, 17 Oct 2026): our armour clones; the client files are in local_planets.tre
++-- (outputs/Vong-look/tools/build_vong_client.py). Server templates. Claude.
++
++includeFile("tangible/wearables/armor/vongcrab/armor_vongcrab_s02_chest_plate.lua")
+diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_vong_look.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_vong_look.lua
+new file mode 100644
+index 0000000..1bf8849
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_vong_look.lua
+@@ -0,0 +1,19 @@
++-- Vong look test (owner, 17 Oct 2026): our armour clones; the client files are in local_planets.tre
++-- (outputs/Vong-look/tools/build_vong_client.py). One warrior at POI 7 for the owner's look; patrols later. Claude.
++
++OssusVongLookScreenPlay = ScreenPlay:new {
++	numberOfActs = 1,
++
++	screenplayName = "OssusVongLookScreenPlay",
++
++	planet = "ossus",
++	x = 1400, y = 4900, heading = 200,
++}
++
++registerScreenPlay("OssusVongLookScreenPlay", true)
++
++function OssusVongLookScreenPlay:start()
++	if (isZoneEnabled(self.planet)) then
++		spawnMobile(self.planet, "vong_fanatic_warrior_look", 0, self.x, getWorldFloor(self.x, self.y, self.planet), self.y, self.heading, 0)
++	end
++end
+diff --git a/MMOCoreORB/bin/scripts/screenplays/screenplays.lua b/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
+index 79dffbc..b7bc6fa 100644
+--- a/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
++++ b/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
+@@ -750,6 +750,7 @@ includeFile("sandbox/sandbox_creatures.lua")
+ includeFile("sandbox/sandbox_tools_datapad.lua")
+ includeFile("sandbox/ossus_people.lua")
+ includeFile("sandbox/ossus_world.lua")
++includeFile("sandbox/ossus_vong_look.lua") -- Sandbox: Vong look test
+ includeFile("sandbox/hutta_home_places.lua")
+ includeFile("sandbox/hutta_home.lua")
+ includeFile("sandbox/hutta_life_places.lua")

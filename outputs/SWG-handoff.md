@@ -152,7 +152,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
-| **Vong look test: the first ComfyUI job (CR-02 / Ossus POI 7, first step)** | Claude (local-art side session) | **queued 17 Oct 8:10 AM, the owner's pick**; offline prep under way | Plan: `Documentation-support/vong-look-test.md`. A vonduun-crab texture for the stock chitin armour, then one `vong_fanatic` warrior at the Ossus Project fields for the owner's look; patrols after that. The ComfyUI run waits until the owner is out of the game. The NPC is staged as a patch for the lock holder; this session does not touch `/opt/swg`. Lifts the 15 Oct POI 7 hold (owner's card answer) |
+| **Vong look test: the first ComfyUI job (CR-02 / Ossus POI 7, first step)** | Claude (local-art side session) | **staged 17 Oct ~10 AM: ready for the lock holder to install** (owner's OK for the archive); untested in game | Install: `Vong-look/INSTALL.md`. Client candidate `work/vong-look/local_planets-vong-look.tre` (sha256 `185b3d7f...`, on `b01e9f44`); server `Vong-look/vong-look.patch` (Core3-dev `91cf87ed`, Lua only). The owner's mix (bone s01 + marauder s02 chest, swatch 12, no helmet) as 8 new wearables; one bare-headed warrior at Ossus POI 7 (1400, 4900). Plan and history: `Documentation-support/vong-look-test.md`. Lifts the 15 Oct POI 7 hold (owner's card answer) |
 | **C55: first-release independent non-bot dev review** | ChatGPT, High | complete; changes requested 2026-10-16 16:08 | `fbee3aa`: [report](Documentation-support/review-C55/C55-review.md); open inherited helper P1 + global spawn-gate P2; XP/delivery/city-guard source shortlist; 74 Lua checks pass; gameplay untested; no galaxy actions |
 | **C54: review playable Hutt; Artisan floater and Hutt names** | ChatGPT, High review / Medium source | review/source complete; Claude integration pending | `82e52303`, `deb3319e`, `8ebace32` on gpt/c54-hutt-floater (base 26b54813); report/tool `a07d346`, Documentation-support/hutt-c54.md; 1 P1 + 5 P2; client stats/text/builder fixes open; full build/gameplay untested; run 10 untouched; **17 Oct 6:17 AM: F1-F3 verified in game by `creation-sweep.py`** (Hutt attributes = profession + S7 row, text and skill labels as approved, Hutt name rules; test plan section 2) |
 | **C53: apply accepted Ossus o7 decisions** | ChatGPT, Medium | staging complete 2026-10-16 | `3f64720`; POI 17 (2200, -4725), accepted settings retained; run_all ALL CHECKS PASS (119 s), 90 server references pass; client untested; nothing packed or deployed |
@@ -383,6 +383,17 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests and early run 6 sample only. Claude retains all server/runtime ownership; no restarts or bot commands.
 
 ## Log
+
+### 2026-10-17 10:00 AM Claude: Vong look step 4 staged: client archive candidate + server patch, ready for the lock holder
+
+- **The owner:** "The mix is close enough. Go on to step 4".
+- **Client** (`Vong-look/tools/build_vong_client.py`, on the installed `b01e9f44`): candidate `work/vong-look/local_planets-vong-look.tre`, sha256 `185b3d7f...`, 332 entries. It adds 8 wearable templates, 16 `.sat`, 16 `.lmg`, 64 `.mgn`, 15 shaders and 12 textures, plus 8 CRC rows. The other 200 entries are byte-identical, and two runs give the same bytes.
+  - 114 files are same-length swaps, with counts asserted and differing bytes counted.
+  - 5 shaders get colour 0 rebound to `white.pal`: the chest's stock default was an olive brown.
+  - Every reference resolves.
+- **Server** `Vong-look/vong-look.patch` (20 files, Lua only): the 8 server templates, `vong_fanatic_warrior_outfit`, mobile `vong_fanatic_warrior_look` (human male body, scale 1.15, not attackable, no faction) and `OssusVongLookScreenPlay` at POI 7. `git apply --check` passes on Core3-dev `91cf87ed` (read-only), and `luac5.3 -p` passes on all 20.
+- **Nothing was installed, and `/opt/swg` was not written.**
+- **Next:** the lock holder installs (`Vong-look/INSTALL.md`) with the owner's OK for the archive, then the owner's look in game, then patrols.
 
 ### 2026-10-17 9:30 AM Claude: Vong look: chitin dropped; the owner picked a bone + marauder s02 mix, no helmet
 

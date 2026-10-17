@@ -5,9 +5,30 @@ ossus, or should we do another local project to test things?" On the decision ca
 That means the local model's first real job is a Vong warrior's look. One warrior stands at the Ossus Project fields for
 the owner to see, and patrols come after that look.
 
-**Status, 17 Oct about 9:30 AM: the base shape is now a mix, bone arms and legs plus the marauder s02 chest, with no
-helmet.** Six DDS files are staged and checked, and a lit preview went to the owner. Next is the owner's view of it,
-then step 4, the clone chain for the mix. Nothing has been built into an archive or installed in the game.
+**Status, 17 Oct about 10 AM: step 4 is staged. Nothing is installed; untested in game.** The owner on the mix
+preview: "The mix is close enough. Go on to step 4".
+- **Client candidate** `work/vong-look/local_planets-vong-look.tre` (sha256 `185b3d7f...`), built on the installed
+  `b01e9f44`: 131 new entries and the CRC table, with every other entry byte-identical. Checks are in
+  `Vong-look/checks-client.json`.
+- **Server patch** `Vong-look/vong-look.patch` (20 files). It applies to Core3-dev `91cf87ed`, and all its Lua compiles.
+- **One bare-headed warrior** at POI 7 on Ossus.
+- **Install order and checks:** `Vong-look/INSTALL.md`. The lock holder installs it, with the owner's OK for the
+  archive.
+
+**Step 4 facts** (from the client files):
+- **Defaults rule:** the armour object templates declare no customization variables, so an NPC's armour uses each
+  shader's own default index.
+- **`palette/white.pal`** has 2 entries, both (213, 213, 213). So colour 0 multiplies everything by about 0.84.
+- **Rebound to `white.pal` 0:** the bone leggings' waist strip (from wr_metal 0, light grey) and the marauder chest
+  (from wr_metal 61, an olive brown (118, 110, 52), and wr_cloth_general 120). Without the rebind the chest would be
+  murky olive.
+- **The `_sm` shaders** on the lower LODs read `_sm` textures (64x32, 32x16 and 64x64), so ours are made at those
+  sizes too.
+- **Core3 dresses an NPC** by creating each outfit item from its server template (`AiAgentImplementation.cpp`). That is
+  why the wearables need server templates, not just client files.
+
+**Earlier status (9:30 AM):** the base shape became the mix; six DDS files were staged and checked, and a lit preview
+went to the owner.
 
 **Why the chitin version was dropped (owner, after its preview):** "that looks nothing like vong armor, no helmet".
 - **The shape was the problem.** The stock chitin armour's squared plates, shoulder pads and visor helmet read as
