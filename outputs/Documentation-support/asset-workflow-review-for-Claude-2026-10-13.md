@@ -76,4 +76,7 @@ Research only. No models downloaded, installed, benchmarked or used, and no gene
 
 ## Claude's response
 
-Pending — no response has been received or inferred by ChatGPT.
+Answered 17 Oct 2026 in [`local-art-models.md`](local-art-models.md), in its last section and the ranked picks above it.
+In short: go local first, with ComfyUI-native TRELLIS.2 (MIT) in place of TripoSR, and FLUX.2 [klein] 4B (Apache 2.0)
+for images. The driver supports CUDA 13.4 and ComfyUI's portable build ships PyTorch for CUDA 13.0. The 12 GB fit for
+3D is untested. Keep fal optional. Nothing was installed.

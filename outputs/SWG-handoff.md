@@ -199,7 +199,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 | Phase 1 runner `tools/bots/phase1.py` | ChatGPT | open — see C3 below | No lock needed to write it |
 | Real-client checks with Universal Modder `um win` | ChatGPT (Codex + Universal Modder) | open — see C2; needs the owner at the PC | Two clients: window/pointer; later JTL |
 | SWG file-format and cut-content source inventory (research only) | Claude (v1), ChatGPT (finish later) | **v1 done 13 Oct (Claude)** — formats mapped to the Core3 readers, Hoth recommended as the first UM job, cut-content candidates; open: archive.org copies and licences, add-on `skt`/`ans`, dormant-object audit | `Documentation-support/swg-format-inventory.md` |
-| Claude: review original-asset workflow and give opinion | unclaimed | open — owner requested Claude's opinion | Please respond in `Documentation-support/asset-workflow-review-for-Claude-2026-10-13.md`: RTX 5070 compatibility, local model choice, SWG conversion, first prop and optional fal fallback |
+| Claude: review original-asset workflow and give opinion | Claude | **answered 17 Oct 7:46 AM** in `Documentation-support/local-art-models.md` (last section); research only, nothing installed; the owner picks what to install | Pick 1: ComfyUI + FLUX.2 [klein] 4B (Apache 2.0) for 2D art; TRELLIS.2 (MIT) for 3D props is an experiment whose 12 GB fit is unknown |
 | Research Universal Modder for Claude | ChatGPT | paused — owner requested task check, then wait for confirmation | Source inspection partly complete; checkpoint in 14:53 log. Final Claude brief not yet written; no CLI generation or UI control run |
 | **Follow assist `/leash` (server-side, temporary fix for client `/follow`)** | Claude | built + tested on test galaxy — dev `09a56205`; **not live** (C4c changes requested, 14 Oct; owner deploy OK still needed) | Right-click a group member → "Leash (follow assist)", or `/leash <name>` / `/leash off`. Untested: real client with `/follow`, private buildings, mounts |
 | **C4c: review `/leash` + test helpers (`09a56205`, `220e0f39`, `f25c90f9`)** | ChatGPT | complete — changes requested, 14 Oct | Combined C4b/C4c report: 3 P1 + 4 P2; includes live-isolation gap, leash races/fallback/menu, correlation and mission cache |
@@ -382,6 +382,21 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests and early run 6 sample only. Claude retains all server/runtime ownership; no restarts or bot commands.
 
 ## Log
+
+### 2026-10-17 7:50 AM Claude: local AI models for art and planet work (research only)
+
+- **The owner asked** whether a local model on this PC can do some of the art or planet work. The answer is in `Documentation-support/local-art-models.md`. Nothing was downloaded, installed or run.
+- **This PC:** RTX 5070 with 12 GB (9.8 GB free with two clients open), 32 GB RAM (6.4 GB free in Windows; WSL 10.8 GB), and 90 GB free on C:. The driver supports CUDA 13.4.
+- **Ranked picks:**
+  1. ComfyUI portable (cu130) + FLUX.2 [klein] 4B fp8 (Apache 2.0, about 8.4 GB VRAM by ComfyUI's figure), for kajidic seals and banners, the Hutt sash decal, Nal Hutta loading screens, concept sheets and texture sources. 14.5 GB of downloads.
+  2. `um sprite seamless` for tiling (already installed); SDXL only if seams show.
+  3. TRELLIS.2 native in ComfyUI (MIT, int8, 8.95 GB) for static prop drafts. Experimental: Microsoft asks for 24 GB.
+  4. Hunyuan3D 2.0 shape only, as a fallback. Its licence excludes the EU, the UK and South Korea.
+- **No model helps** with `.trn` terrain (scripted, and the maps and globes come from it), `.mgn` weighting to `hutt.skt`, or `.ans` animation.
+- **Also answers** the 13 Oct asset-workflow review; the board row is updated and the note links here.
+- **Verified:** hardware, licence tags, file sizes and gating, and client texture sizes (loading screens 512 DXT1, globes 256 DXT1 with 9 mips, maps 1024 DXT1).
+- **Untested:** every speed and VRAM figure on this card.
+- **Next:** the owner's pick of what to install (decision card in Claude's chat). One download OK per item.
 
 ### 2026-10-17 6:40 AM Claude: creation sweep: every species and gender created, read back and deleted (test plan section 2)
 
