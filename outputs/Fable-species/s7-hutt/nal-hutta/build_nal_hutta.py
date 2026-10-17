@@ -14,10 +14,13 @@ table already lists hutta. What the client still lacks, and this step adds on to
                                           the stock generic tile (as Ossus had before its own art)
 Every other entry of the base stays byte-identical (checked). Nothing is installed.
 
+    C:/Users/Pengw/miniconda3/python.exe -I build_nal_hutta.py --floater   # the archive to install (16 Oct, 8 PM)
     C:/Users/Pengw/miniconda3/python.exe -I build_nal_hutta.py [--base PATH]
-Default base: ../work/nal-hutta/base-6ff21312.tre (a copy of the installed Hutt archive, sha256 6ff21312...). If the
-floater candidate lands first, pass it as --base: this step touches none of the floater's files.
-Writes ../work/nal-hutta/local_planets-nalhutta.tre, its .sha256, and checks.json beside this file.
+--floater chains this step after tools/build_hutt_c54_floater.py: base = ../work/c54-floater/local_planets-c54-floater.tre
+(sha256 1ca2a091..., h 569f489), out = ../work/nal-hutta/local_planets-nalhutta-floater.tre and checks-floater.json; every
+floater entry must come through byte for byte except the five tables named below (the floater changes none of them).
+Default base: ../work/nal-hutta/base-6ff21312.tre (a copy of the installed Hutt archive, sha256 6ff21312...), writing
+../work/nal-hutta/local_planets-nalhutta.tre and checks.json. Each output gets a .sha256 beside it.
 """
 import argparse
 import hashlib
@@ -40,6 +43,9 @@ PLANET, NAME = 'hutta', 'Nal Hutta'
 DEFAULT_BASE = os.path.join(WORK, 'base-6ff21312.tre')
 BASE_SHA_PREFIX = '6ff21312'
 OUT_TRE = os.path.join(WORK, 'local_planets-nalhutta.tre')
+FLOATER_BASE = os.path.join(H, 'work', 'c54-floater', 'local_planets-c54-floater.tre')
+FLOATER_SHA_PREFIX = '1ca2a091'
+FLOATER_OUT = os.path.join(WORK, 'local_planets-nalhutta-floater.tre')
 GLOBE = 'ui_planet_sel_rori.apt'        # placeholder: no appearance/ui_planet_sel_nalhutta.apt in any client archive
 MAP_TEXTURE = 'ui_map_nalhutta'         # MTG 022's planetary map image (texture/ui_map_nalhutta.dds)
 PLACEHOLDERS = {
@@ -150,11 +156,17 @@ def new_files():
 def main(argv):
     ap = argparse.ArgumentParser()
     ap.add_argument('--base', default=DEFAULT_BASE)
+    ap.add_argument('--floater', action='store_true', help='build on the floater candidate (the archive to install)')
     args = ap.parse_args(argv)
+    out_tre, checks_name = OUT_TRE, 'checks.json'
+    if args.floater:
+        args.base, out_tre, checks_name = FLOATER_BASE, FLOATER_OUT, 'checks-floater.json'
     base_bytes = open(args.base, 'rb').read()
     base_sha = hashlib.sha256(base_bytes).hexdigest()
     if args.base == DEFAULT_BASE:
         assert base_sha.startswith(BASE_SHA_PREFIX), 'default base is not the 6ff21312 archive: ' + base_sha
+    if args.floater:
+        assert base_sha.startswith(FLOATER_SHA_PREFIX), 'floater base is not the 1ca2a091 candidate: ' + base_sha
     base = tre_write.read(base_bytes)[0]
 
     # what the client already has (MTG): checked, not changed
@@ -194,11 +206,11 @@ def main(argv):
 
     data = tre_write.pack(files)
     os.makedirs(WORK, exist_ok=True)
-    with open(OUT_TRE, 'wb') as f:
+    with open(out_tre, 'wb') as f:
         f.write(data)
     sha = hashlib.sha256(data).hexdigest()
-    with open(OUT_TRE + '.sha256', 'w', newline='\n') as f:
-        f.write('%s *%s\n' % (sha, os.path.basename(OUT_TRE)))
+    with open(out_tre + '.sha256', 'w', newline='\n') as f:
+        f.write('%s *%s\n' % (sha, os.path.basename(out_tre)))
 
     ours = tre_write.read(data)[0]
     changed = sorted(n for n in base if n in ours and base[n] != ours[n])
@@ -207,7 +219,7 @@ def main(argv):
     checks = {
         'base': {'path': os.path.relpath(args.base, H).replace(os.sep, '/'), 'bytes': len(base_bytes), 'sha256': base_sha,
                  'entries': len(base)},
-        'out': {'path': os.path.relpath(OUT_TRE, H).replace(os.sep, '/'), 'bytes': len(data), 'sha256': sha,
+        'out': {'path': os.path.relpath(out_tre, H).replace(os.sep, '/'), 'bytes': len(data), 'sha256': sha,
                 'entries': len(ours)},
         'untouched_identical': len(base) - len(changed) - len(dropped),
         'changed': changed, 'new': new, 'dropped': dropped,
@@ -215,7 +227,7 @@ def main(argv):
         'new_texts': {rel: st.stf_items(st.read_stf(ours[rel])) for rel in sorted(NEW) if rel.endswith('.stf')},
         'loading_rows': st.read_dtii(ours['datatables/loading/hutta.iff'])['rows'],
     }
-    with open(os.path.join(HERE, 'checks.json'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(HERE, checks_name), 'w', encoding='utf-8') as f:
         json.dump(checks, f, indent=1)
     assert not dropped, dropped
     assert set(changed) == CHANGED, changed

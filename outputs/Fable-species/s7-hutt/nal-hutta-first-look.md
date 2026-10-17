@@ -24,16 +24,20 @@ in `tools/test_galaxy.py`, which writes the `Core3.ZonesEnabled` line into confi
 get theirs the same way. It also puts hutta in the `backfillZones` line. Because hutta isn't in `activeZones`, the server
 then logs one harmless warning: `backfillZones: hutta is not in activeZones, ignored`.
 
-**Client: `nal-hutta/build_nal_hutta.py`.** This step goes on top of the newest Hutt archive. The floater folder wasn't
-committed when this was built, so it builds on `6ff21312`.
-- **Base:** `work/nal-hutta/base-6ff21312.tre`, a copy of the installed archive (4,662,363 B).
-- **Candidate:** `work/nal-hutta/local_planets-nalhutta.tre`, 4,663,445 B, 180 entries.
-  - sha256 `d804d98ab7d367932a2c8dc459e82e80a578df314b5670611c619a3d42a7a68d` (also in the `.sha256` file beside it).
-  - The build is deterministic: two builds gave the same bytes.
-- **What it adds:**
-  - 171 of the base's 176 entries are byte-identical.
-  - 5 entries change and 4 are new. The builder fails if anything else differs.
-  - The full report is in `nal-hutta/checks.json`.
+**Client: `nal-hutta/build_nal_hutta.py --floater`.** This step runs after `tools/build_hutt_c54_floater.py` (h `569f489`).
+- **Base:** the floater candidate, `work/c54-floater/local_planets-c54-floater.tre`, sha256 `1ca2a091…`, 176 entries.
+  The builder checks that sha.
+- **The archive to install:** `work/nal-hutta/local_planets-nalhutta-floater.tre`, 4,670,862 B, 181 entries.
+  - sha256 `503401b49a0c46110a2f36cb332aaa51042b960758925e21a8f9f10d788a8d17` (also in the `.sha256` file beside it).
+  - The full report is in `nal-hutta/checks-floater.json`.
+- **What was checked:**
+  - 172 of the floater's 176 entries are byte-identical. The other 5 are this step's tables below, which the floater
+    doesn't change.
+  - The floater's own changes are there byte for byte: `hutt_mnt_ride_floater.ans` and `hutt.lat`.
+  - The 9 Nal Hutta entries are byte-identical to the earlier build on `6ff21312`.
+  - The archive is exactly the floater's entries plus ours, nothing else. The builder fails if anything else differs.
+- **Superseded:** the earlier build on `6ff21312` (`work/nal-hutta/local_planets-nalhutta.tre`, `d804d98a…`, 180
+  entries; `checks.json`) lacks the floater pose. Don't install it.
 
 | Entry | Change |
 |---|---|
@@ -77,11 +81,10 @@ the commit. Tracking the credits file is the owner's call.
    - No owner client is running.
    - No squad round is running (`pgrep -f "squad.py run"`).
    - The owner has OKed this restart.
-2. **Floater first?** If the hutt-floater candidate is ready, rebuild this on top of it:
-   `C:/Users/Pengw/miniconda3/python.exe -I outputs/Fable-species/s7-hutt/nal-hutta/build_nal_hutta.py --base <floater .tre>`
-   - The two steps touch different entries. Note the new sha.
-   - It fails loudly if the floater already changed one of this step's five tables (`travel`, `planet_n`,
-     `waypoint_planets` and the two UI files). In that case, merge by hand instead.
+2. **One archive for both.** `work/nal-hutta/local_planets-nalhutta-floater.tre` (sha256 `503401b4…`) carries the floater
+   pose and Nal Hutta. Install it instead of the floater's own candidate. If the floater candidate is rebuilt, rebuild this
+   with `C:/Users/Pengw/miniconda3/python.exe -I outputs/Fable-species/s7-hutt/nal-hutta/build_nal_hutta.py --floater`
+   (update `FLOATER_SHA_PREFIX` first).
 3. **Server scripts.** As swgemu:
    - `runuser -u swgemu -- git -C /opt/swg/Core3-dev apply /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Fable-species/s7-hutt/nal-hutta/core3-dev-nal-hutta.patch`
    - Commit it with `Agent: Claude`.
@@ -89,7 +92,7 @@ the commit. Tracking the credits file is the owner's call.
    - No C++ build is needed.
 4. **Test galaxy tool.** In h, run `git apply outputs/Fable-species/s7-hutt/nal-hutta/test-galaxy-hutta.patch` and commit
    it.
-5. **Archive, both sides.** Copy the candidate over `/opt/swg/tre/local_planets.tre` (the server reads `travel.iff` from
+5. **Archive, both sides.** Copy `local_planets-nalhutta-floater.tre` over `/opt/swg/tre/local_planets.tre` (the server reads `travel.iff` from
    it) and over `SWG-client/local_planets.tre`.
    - Back up the current file on each side first, as `.bak-6ff21312`.
    - Check the sha256 on both sides afterwards.
