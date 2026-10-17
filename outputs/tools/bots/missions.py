@@ -53,6 +53,9 @@ OFFERS = {'general': {'destroy', 'deliver'}, 'artisan': {'survey', 'crafting'}, 
 DISABLED = '@skill_teacher:skill_terminal_disabled'
 GENERIC = '@mission:mission_generic'  # how success_w_amount and too_many_missions reach the body (see above)
 CARRY = ('deliver', 'crafting', 'survey')  # missions that put something in the inventory
+# Held missions a later run may finish instead of taking another. Not deliver or crafting: a held one may be stuck
+# (its NPCs gone after a full-inventory pickup); not bounty: one at a time, and its target moves.
+REUSE = ('destroy', 'survey', 'recon', 'hunting', 'dancer', 'musician')
 LOCATED = 'Mission Target has been located'
 CAP = 6
 LIST_COOLDOWN = 1.6            # s between list requests (the server's 1.4 s and a margin)
@@ -305,6 +308,12 @@ def take(g, bot, terminal, ttype, choices, label, divisor, listed=None):
     """List at terminal (unless listed is given), pick with the first (mission type, chooser) that finds one, accept.
     divisor is the bot's group size (group_size, read before any parallel jobs). Returns (mission, bank before,
     divisor), or (None, None, None) after a BLOCKED result."""
+    for mtype, choose in choices:  # finish a mission an earlier run left (there is no abort; the cap is 6)
+        old = choose([m for m in held(bot) if m.get('type') == mtype]) if mtype in REUSE else None
+        if old:
+            g.note(f'{label}: {bot.first} finishes a held {mtype} mission from an earlier run: '
+                   + json.dumps({k: old.get(k) for k in ('title', 'target', 'difficulty', 'reward')}))
+            return old, bank(bot), divisor
     if len(held(bot)) >= CAP:
         blocked(g, label, f'{bot.first} already holds {CAP} missions')
         return None, None, None
@@ -430,6 +439,46 @@ def creatures_near(bot, radius, squad):
             and o.get('posture') not in DOWN and (o.get('health_pct') or 100) > 0]
 
 
+def guarded_walk(g, team, point, label, leg=250, minutes=15):
+    """Walk the team to point in legs; after each leg fight whatever stands next to anyone, and wait for the downed to
+    get up. 17 Oct 6:25 AM: three Marksmen walking 1.7 km north of Mos Eisley to a destroy waypoint were each
+    incapacitated by creatures on the way, because a walk never fights back. team[0] leads; a dead member drops out.
+    Returns {'arrived', 'seconds', 'fights', 'downed'}."""
+    squad = {b.oid for b in g.bots}
+    began, fights, downed = time.time(), 0, set()
+    deadline = began + minutes * 60
+    team = list(team)
+    while time.time() < deadline:
+        here = team[0].status()
+        if (here.get('me') or {}).get('posture') == 'dead':
+            break
+        left = far(here, point)
+        if left <= 20:
+            return {'arrived': True, 'seconds': round(time.time() - began, 1), 'fights': fights, 'downed': sorted(downed)}
+        share = min(1.0, leg / left) if left != math.inf else 1.0
+        step = {'x': here['x'] + (point['x'] - here['x']) * share, 'y': here['y'] + (point['y'] - here['y']) * share}
+        g.parallel(*[lambda b=b, i=i: b.walk(step['x'] + 3 * i, step['y'], tries=2) for i, b in enumerate(team)])
+        for _ in range(4):  # clear what is next to us before the next leg
+            standing = [b for b in team if b.posture() not in DOWN]
+            near = [o for b in standing for o in creatures_near(b, 20, squad)]
+            if not standing or not near:
+                break
+            target = min(near, key=lambda o: o.get('distance', 99))
+            fights += 1
+            g.parallel(*[lambda b=b: b.fight(target['oid'], 40) for b in standing])
+        wait_until = time.time() + 120  # incapacitation lasts about a minute
+        while time.time() < wait_until:
+            postures = {b.first: b.posture() for b in team}
+            downed |= {n for n, p in postures.items() if p in DOWN}
+            team = [b for b in team if postures[b.first] != 'dead'] or team[:1]
+            if not any(p == 'incapacitated' for n, p in postures.items() if n in {b.first for b in team}):
+                break
+            team[0].idle(5)
+    g.note(f'{label}: guarded walk stopped {far(team[0].status(), point):.0f} m short after {fights} fights; '
+           f'downed {sorted(downed)}')
+    return {'arrived': False, 'seconds': round(time.time() - began, 1), 'fights': fights, 'downed': sorted(downed)}
+
+
 def lair_standing(bot, lair):
     return any(o.get('oid') == lair['oid'] for o in bot.look(radius=150, type='TANO', limit=400))
 
@@ -464,12 +513,9 @@ def destroy(g, team, mission, before, divisor, label):
     owner, began, since = team[0], time.time(), mark(team[0])
     banks = {b.first: bank(b) for b in team[1:]}
     target = where(mission)
-    here = owner.status()
-    trips = g.parallel(*[lambda b=b, i=i: b.walk(target['x'] + 3 * i, target['y'] - 12, tries=tries_for(far(here, target)))
-                         for i, b in enumerate(team)])
-    if not g.check(f'{label}: reach the mission area', arrived(trips[0]),
-                   [(b.first, t.get('seconds') if isinstance(t, dict) else str(t)) for b, t in zip(team, trips)]):
-        return unfinished(g, label, mission, 'mission area not reached', began)
+    trip = guarded_walk(g, team, {'x': target['x'], 'y': target['y'] - 12}, label)
+    if not g.check(f'{label}: reach the mission area', trip['arrived'], trip):
+        return unfinished(g, label, mission, 'mission area not reached', began, walk=trip)
     located = said(owner, LOCATED, since) or owner.wait_for(lambda e: LOCATED in str(e.get('text', '')), 20)
     g.check(f'{label}: the target is located', located)
     spot = where(mission_now(owner, mission['oid']) or {}) or target
@@ -580,6 +626,28 @@ def crafting(g, bot, mission, before, divisor, label):
 
 # ---- survey ----
 SURVEY_TOOLS = ('mineral', 'liquid')  # the mission's two classes: mineral and chemical (liquid is the chemical tool)
+# A survey mission names a resource CLASS, the third from the end of the spawn's class list (second for chemicals;
+# ResourceSpawnImplementation::getSurveyMissionSpawnFamilyName), while the survey list shows each spawn's TYPE, its
+# last class. 17 Oct 6:35 AM: "non-ferrous_metal" against aluminum_agrinium, copper_diatium and others. Each class
+# here maps to the type prefixes under it (SWG's resource tree); a class not listed falls back to its own words.
+FAMILY_TYPES = {
+    'ferrous_metal': ('iron_', 'steel_'), 'non-ferrous_metal': ('aluminum_', 'copper_'),
+    'metal': ('iron_', 'steel_', 'aluminum_', 'copper_'),
+    'igneous_ore': ('ore_extrusive', 'ore_intrusive'), 'sedimentary_ore': ('ore_carbonate', 'ore_siliclastic'),
+    'ore': ('ore_',), 'gemstone': ('armophous_', 'crystalline_'), 'amorphous_gemstone': ('armophous_',),
+    'crystalline_gemstone': ('crystalline_',), 'radioactive': ('radioactive_',),
+    'fuel_petrochem_solid': ('petrochem_fuel_solid',), 'petrochem_fuel_solid': ('petrochem_fuel_solid',),
+    'fuel_petrochem_liquid': ('petrochem_fuel_liquid',), 'petrochem_fuel_liquid': ('petrochem_fuel_liquid',),
+    'petrochem_inert': ('petrochem_inert',), 'inert_petrochem': ('petrochem_inert',), 'fiberplast': ('fiberplast',)}
+
+
+def in_family(rtype, family):
+    rtype = str(rtype or '').lower()
+    prefixes = FAMILY_TYPES.get(family)
+    if prefixes:
+        return rtype.startswith(prefixes)
+    words = [w for w in family.replace('-', '_').split('_') if len(w) >= 4]
+    return bool(words) and any(w in rtype for w in words)
 
 
 def survey_list(bot, tool):
@@ -614,16 +682,14 @@ def survey(g, bot, mission, before, divisor, label, guard=None, spots=4):
         bearing = math.radians(45 + 90 * n)
         spot = {'x': start['x'] + 1150 * math.cos(bearing), 'y': start['y'] + 1150 * math.sin(bearing)}
         walkers = [bot] + ([guard] if guard else [])
-        trips = g.parallel(*[lambda b=b, i=i: b.walk(spot['x'] + 3 * i, spot['y'], tries=tries_for(1200))
-                             for i, b in enumerate(walkers)])
+        guarded_walk(g, walkers, spot, f'{label} spot {n + 1}')
         here = bot.status()
         if far(here, start) <= SURVEY_DISTANCE:
             g.note(f'{label}: spot {n + 1} not reached ({far(here, start):.0f} m from the start); next bearing')
             continue
         for tool in tools:
             listed = survey_list(bot, tool)
-            names = [r['name'] for r in listed.get('resources', []) if family in str(r.get('type', '')).lower()
-                     or family in str(r.get('name', '')).lower()]
+            names = [r['name'] for r in listed.get('resources', []) if in_family(r.get('type'), family)]
             if not names and n == 0:  # the class is the resource's third class from the end; types are the last one
                 g.note(f"{label}: {tool.get('name')} lists no {family}; types: "
                        + ', '.join(sorted({str(r.get('type')) for r in listed.get('resources', [])}))[:300])
@@ -719,10 +785,11 @@ def perform(g, bot, mission, before, divisor, label, minutes=12):
 def recon(g, bot, mission, before, divisor, label):
     began, since = time.time(), mark(bot)
     spot = where(mission)
-    trip = bot.walk(spot['x'], spot['y'], tries=tries_for(far(bot.status(), spot)))
-    if not g.check(f'{label}: reach the recon area', arrived(trip) or far(bot.status(), spot) < 30,
-                   {k: trip.get(k) for k in ('arrived', 'error', 'seconds')} if isinstance(trip, dict) else trip):
-        return unfinished(g, label, mission, 'recon area not reached', began)
+    trip = guarded_walk(g, [bot], spot, label, minutes=25)
+    if trip['arrived']:
+        bot.walk(spot['x'], spot['y'], tries=1)  # into the 32 m area's middle
+    if not g.check(f'{label}: reach the recon area', trip['arrived'] or far(bot.status(), spot) < 30, trip):
+        return unfinished(g, label, mission, 'recon area not reached', began, walk=trip)
     return paid(g, bot, mission, before, divisor, label, since, seconds=60, began=began,
                 distance=round(far(mission.get('start'), spot)) if mission.get('start') else None)
 
@@ -751,20 +818,28 @@ def hunt(g, bot, mission, before, divisor, label, minutes=20):
                      and o.get('posture') not in DOWN), None)
         if not live:
             continue
-        fought = bot.fight(live['oid'], 60)
-        if str(fought.get('result', '')).startswith('target'):  # "target dead/incapacitated", not "we are ..."
-            kills += 1
+        bot.fight(live['oid'], 60)
+        # Each kill the server counts sends mission_generic:hunting_kills_remaining, which the body turns into
+        # "@mission:mission_generic" like success_w_amount (17 Oct 6:35 AM: 13 such messages for Forn's rills).
+        kills = len(success(bot, since))
         if bot.posture() in DOWN:
             g.note(f'{label}: {bot.first} went down after {kills} kills')
             break
-    g.check(f'{label}: kills', kills, f'{kills} of {need}')
+    kills = len(success(bot, since))
+    g.check(f'{label}: kills', kills, f'{kills} counted by the server (kill messages; the last one may be the pay) of {need}')
     if in_datapad(mission_now(bot, mission['oid'])):
         return unfinished(g, label, mission, f'{kills} of {need} {key} killed', began, kills=kills, needed=need)
     return paid(g, bot, mission, before, divisor, label, since, began=began, kills=kills, needed=need)
 
 
 # ---- bounty ----
-BOUNTY_BOXES = ('combat_bountyhunter_novice', 'combat_bountyhunter_investigation_01')  # level 2: droids work
+BOUNTY_BOXES = ('combat_bountyhunter_novice',)  # mission level 1: the informant gives the waypoint, no droids
+
+
+def bounty_level(bot):
+    """The level of the bounty missions this bot is offered (MMI randomizeGenericBountyMission)."""
+    skills = ' '.join(str(s) for s in bot.profession('list').get('skills', []))
+    return 3 if 'combat_bountyhunter_investigation_03' in skills else 2 if 'combat_bountyhunter_investigation_01' in skills else 1
 
 
 def npc_bounty(bot, limit):
@@ -778,44 +853,61 @@ def npc_bounty(bot, limit):
 
 
 def bounty(g, bot, terminal, label, divisor, limit=4000):
-    """An NPC bounty: probe droid (signature), seeker droid (waypoint), walk there, kill the target."""
+    """An NPC bounty. The informant of the mission's level comes first (InformantMissionScreenHandler: the objective
+    leaves INITSTATUS; a level-1 informant also gives the target's waypoint). At level 2 and 3 the probe droid then
+    transmits the signature and the seeker droid gives the waypoint (both refuse before the informant:
+    bounty_no_signature, 17 Oct 6:35 AM). Then walk there, and kill the target when it spawns (within 256 m)."""
     began = time.time()
     g.note(f"{label}: {bot.first} skills: " + agentskill(bot, *BOUNTY_BOXES)[:160])
-    if not (items(bot, 'probot') and items(bot, 'seeker')):
-        agentgear(bot, 'bounty')
+    level = bounty_level(bot)
     mission, before, divisor = take(g, bot, terminal, 'bounty', [('bounty', npc_bounty(bot, limit))], label, divisor)
     if mission is None:
         return None
     since = mark(bot)
-    probot, seeker = (items(bot, 'probot') or [None])[0], (items(bot, 'seeker') or [None])[0]
-    if not g.check(f'{label}: probe and seeker droids', probot and seeker,
-                   [i.get('name') for i in items(bot, 'bounty_droid')]):
-        return unfinished(g, label, mission, 'no droids', began)
-    bot.select(probot['oid'], 138, wait=3)  # call the probe droid
-    deadline, landed = time.time() + 60, None
-    while time.time() < deadline and not landed:
-        landed = next((o for o in bot.look(radius=40, type='CREO', limit=200)
-                       if 'probe' in str(o.get('name', '')).lower() or 'probot' in str(o.get('name', '')).lower()), None)
-        if not landed:
-            bot.idle(5)
-    if not g.check(f'{label}: the probe droid lands', landed, landed and landed.get('name')):
-        return unfinished(g, label, mission, 'probe droid did not land', began)
-    bot.select(landed['oid'], 184, wait=5)  # transmit the biological signature
     old = where(mission_now(bot, mission['oid']) or {})
-    bot.select(seeker['oid'], 137, wait=3)  # find the target
+    squad = {b.oid for b in g.bots}
+    helpers = sorted((o for o in bot.locate(f'informant_npc_lvl_{level}', radius=3000) if not o.get('cell')),
+                     key=lambda o: o.get('distance', 0))
+    if not g.check(f'{label}: an outdoor level-{level} informant within 3 km', helpers,
+                   helpers and {k: helpers[0].get(k) for k in ('name', 'distance')}):
+        return unfinished(g, label, mission, f'no level-{level} informant', began, level=level)
+    informant = helpers[0]
+    bot.walk(informant['x'] + 1.5, informant['y'], tries=tries_for(informant.get('distance', 400)))
+    person = npc_at(bot, informant, squad, radius=6) or informant
+    bot.talk(person['oid'], wait=4)
+    told = said(bot, '@', since)[-4:]
+    g.note(f'{label}: informant {person.get("name")}: {told}')
+    if level >= 2:
+        if not (items(bot, 'probot') and items(bot, 'seeker')):
+            agentgear(bot, 'bounty')
+        probot, seeker = (items(bot, 'probot') or [None])[0], (items(bot, 'seeker') or [None])[0]
+        if not g.check(f'{label}: probe and seeker droids', probot and seeker):
+            return unfinished(g, label, mission, 'no droids', began, level=level)
+        town = guarded_walk(g, [bot], {'x': bot.status()['x'], 'y': bot.status()['y'] + 600}, label)  # out of town
+        bot.select(probot['oid'], 138, wait=3)  # call the probe droid (refused inside a city)
+        deadline, landed = time.time() + 90, None
+        while time.time() < deadline and not landed:
+            landed = next((o for o in bot.look(radius=40, type='CREO', limit=200)
+                           if 'probe' in str(o.get('name', '')).lower()), None)
+            if not landed:
+                bot.idle(5)
+        if not g.check(f'{label}: the probe droid lands', landed, said(bot, '@', since)[-3:]):
+            return unfinished(g, label, mission, 'probe droid did not land', began, level=level, walk=town)
+        bot.select(landed['oid'], 184, wait=5)  # transmit the biological signature
+        bot.select(seeker['oid'], 137, wait=3)  # find the target
     deadline, spot = time.time() + 120, {}
     while time.time() < deadline:
         spot = where(mission_now(bot, mission['oid']) or {})
         if spot and far(spot, old) > 5:
             break
         bot.idle(5)
-    if not g.check(f'{label}: the seeker gives the target\'s waypoint', spot and far(spot, old) > 5,
+    if not g.check(f"{label}: the target's waypoint arrives", spot and far(spot, old) > 5,
                    {'waypoint': spot, 'messages': said(bot, '@', since)[-4:]}):
-        return unfinished(g, label, mission, 'no target waypoint', began)
+        return unfinished(g, label, mission, 'no target waypoint', began, level=level)
     away = far(bot.status(), spot)
     if away > limit:
         return unfinished(g, label, mission, f'target {away:.0f} m away (limit {limit})', began)
-    trip = bot.walk(spot['x'], spot['y'] - 20, tries=tries_for(away))
+    trip = guarded_walk(g, [bot], {'x': spot['x'], 'y': spot['y'] - 20}, label, minutes=25)
     squad = {b.oid for b in g.bots}
     target = None
     deadline = time.time() + 60
@@ -931,7 +1023,7 @@ def hunting_choice(bot, radius=1500):
 def faction(g, bot, terminal, ttype, divisor):
     """An imperial or rebel terminal: an in-town deliver mission, else the nearest recon (both need no fight)."""
     mission, before, divisor = take(g, bot, terminal, ttype, [('deliver', in_town(bot)),
-                                                              ('recon', nearest(bot, limit=3000))],
+                                                              ('recon', nearest(bot, limit=4500))],
                                     f'{ttype}/mission', divisor)
     if mission is None:
         return None

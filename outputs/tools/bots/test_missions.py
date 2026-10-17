@@ -89,6 +89,11 @@ class Galaxy:
 
     def talk(self, bot, target):
         npc = self.objects[target]
+        if npc.get('key') == 'informant_npc_lvl_1':
+            for record in bot.records.values():
+                if record['type'] == 'bounty' and 'datapad' in record['container_name']:
+                    record['waypoint'] = dict(record['end'])
+            return
         record = bot.records.get(npc.get('mission'))
         if record is None:
             return
@@ -154,6 +159,8 @@ class Galaxy:
                 record['kills'] = record.get('kills', 0) + 1
                 if record['kills'] >= 15 * record['difficulty']:
                     self.complete(bot, record)
+                else:
+                    bot.hear('@mission:mission_generic')  # hunting_kills_remaining, truncated like success
         return {'result': 'target dead'}
 
 
@@ -461,9 +468,23 @@ class Taking(Base):
         terminal = self.galaxy.terminal('general', bot.x, bot.y)
         for m in [m for m in bot.mission_list(terminal['oid']) if M.in_bag(m)][:M.CAP]:
             bot.accept_mission(m['oid'], terminal['oid'])
-        mission, _, _ = M.take(g, bot, terminal, 'general', [('destroy', M.easiest(bot))], 'general/destroy', 1)
-        self.assertIsNone(mission)
+        mission, _, _ = M.take(g, bot, terminal, 'general', [('deliver', M.in_town(bot))], 'general/deliver', 1)
+        self.assertIsNone(mission)  # a delivery is never reused, and there is no room for another
         self.assertTrue(any('BLOCKED' in n and 'already holds 6' in n for n in g.notes))
+
+    def test_a_held_destroy_mission_is_finished_before_a_new_one_is_taken(self):
+        g, (bot,) = self.crew('Cresh')
+        first, _, _ = self.take(g, bot, 'general', 'destroy', M.easiest(bot), 3)
+        again, _, _ = self.take(g, bot, 'general', 'destroy', M.easiest(bot), 3)
+        self.assertEqual(again['oid'], first['oid'])
+        self.assertEqual(len(M.held(bot)), 1)
+        self.assertTrue(any('finishes a held destroy mission' in n for n in g.notes))
+
+    def test_a_held_delivery_is_never_reused(self):
+        g, (bot,) = self.crew('Cresh')
+        first, _, _ = self.take(g, bot, 'general', 'deliver', M.in_town(bot), 3)
+        again, _, _ = self.take(g, bot, 'general', 'deliver', M.in_town(bot), 3)
+        self.assertNotEqual(again['oid'], first['oid'])
 
     def test_offers_reads_again_when_the_bag_still_holds_another_terminals_list(self):
         g, (bot,) = self.crew('Brask')
@@ -506,6 +527,23 @@ class Missions(Base):
         self.assertTrue(done['removed'])
         self.assertEqual(g.failed(), [])
         self.assertEqual(done['shares'], {'Ilsa': 0, 'Kor': 0, 'Cresh': mission['reward'] // 3})  # the fake pays the owner
+
+    def test_guarded_walk_fights_what_waits_on_the_route(self):
+        g, bots = self.crew('Cresh', 'Ilsa', 'Kor')
+        start = bots[0].x
+        self.galaxy.creature('kreetle', start + 500, bots[0].y + 5)  # on the second leg's end
+        bots[1].posture_now = 'incapacitated'
+        real_idle = bots[0].idle
+
+        def idle(seconds):  # Ilsa gets up after a while
+            bots[1].posture_now = 'upright'
+            return real_idle(seconds)
+        bots[0].idle = idle
+        trip = M.guarded_walk(g, bots, {'x': start + 900, 'y': bots[0].y}, 'test')
+        self.assertTrue(trip['arrived'])
+        self.assertEqual(trip['fights'], 1)
+        self.assertEqual(trip['downed'], ['Ilsa'])
+        self.assertFalse([o for o in self.galaxy.objects.values() if o.get('key') == 'kreetle'])
 
     def test_crafting_errand_crafts_the_quest_item(self):
         g, bots = self.crew('Besh', 'Dova', 'Pell', 'Varo')
@@ -611,14 +649,30 @@ class Missions(Base):
         self.assertFalse(done['removed'])
         self.assertIn('0 of 15', done['unfinished'])
 
-    def test_bounty_droids_waypoint_and_kill(self):
+    def test_level_one_bounty_goes_through_the_informant(self):
         g, bots = self.crew('Forn', 'Brask', 'Dask', 'Ressa', 'Mirren')
-        dask = bots[2]
-        terminal = self.galaxy.terminal('bounty', dask.x, dask.y)
-        done = M.bounty(g, dask, terminal, 'bounty/bounty', 5)
+        ressa = bots[3]
+        terminal = self.galaxy.terminal('bounty', ressa.x, ressa.y)
+        self.galaxy.creature('informant_npc_lvl_1', ressa.x - 50, ressa.y)
+        done = M.bounty(g, ressa, terminal, 'bounty/bounty', 5)
         self.assertEqual(g.failed(), [])
         self.assertEqual(done['paid'], 3000 // 5)
-        self.assertIn(('agentSkill', ' '.join(M.BOUNTY_BOXES)), dask.slashes)
+        self.assertIn(('agentSkill', 'combat_bountyhunter_novice'), ressa.slashes)
+        self.assertFalse([n for n, *_ in ressa.slashes if n == 'agentGear'])  # no droids at level 1
+
+    def test_bounty_without_an_informant_is_unfinished(self):
+        g, bots = self.crew('Forn', 'Brask', 'Dask', 'Ressa', 'Mirren')
+        terminal = self.galaxy.terminal('bounty', bots[3].x, bots[3].y)
+        done = M.bounty(g, bots[3], terminal, 'bounty/bounty', 5)
+        self.assertEqual(done['unfinished'], 'no level-1 informant')
+
+    def test_survey_classes_match_the_listed_types(self):
+        self.assertTrue(M.in_family('aluminum_agrinium', 'non-ferrous_metal'))
+        self.assertTrue(M.in_family('copper_diatium', 'non-ferrous_metal'))
+        self.assertFalse(M.in_family('iron_axidite', 'non-ferrous_metal'))
+        self.assertTrue(M.in_family('steel_kiirium', 'ferrous_metal'))
+        self.assertTrue(M.in_family('ore_siliclastic_crism', 'sedimentary_ore'))
+        self.assertTrue(M.in_family('iron_plumbum', 'iron'))  # not in the table: its own word
 
     def test_faction_terminal_prefers_an_in_town_delivery(self):
         g, bots = self.crew('Forn', 'Brask', 'Dask', 'Ressa', 'Mirren')
@@ -690,6 +744,7 @@ class Scenarios(Base):
             self.galaxy.terminal(ttype, bots[0].x + 20, bots[0].y)
         for i in range(20):
             self.galaxy.creature('worrt', bots[0].x + 200 + 5 * i, bots[0].y)
+        self.galaxy.creature('informant_npc_lvl_1', bots[0].x - 50, bots[0].y)
         load('forn-missions').run(g)
         self.assertEqual(g.failed(), [])
         self.assertEqual(g.results(), ['bounty/bounty', 'imperial/deliver', 'rebel/deliver', 'scout/hunting',
