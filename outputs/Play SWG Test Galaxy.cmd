@@ -34,7 +34,8 @@ if exist local_planets.tre echo Test content: Hoth (local_planets.tre and the MT
 
 echo Starting the client on the TEST galaxy (%WSLIP%:46453).
 echo Keep this window open: it switches the client back to the live galaxy when you quit.
-start "" /wait SWGEmu.exe
+rem Above normal priority: the client's main thread gets a core first (Claude, 16 Oct 2026).
+start "" /wait /abovenormal SWGEmu.exe
 move /y swgemu_login.live.cfg swgemu_login.cfg >nul
 echo Client closed; the login is back on the live galaxy.
 timeout /t 5 >nul

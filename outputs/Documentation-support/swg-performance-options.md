@@ -81,7 +81,10 @@ Not available in this client: the `[ClientLimits] SetFramesPerSecond` frame cap 
   - `[SharedNetwork] useNetworkThread=true`;
   - `[ClientSkeletalAnimation] lodManagerEnable=true`, `lodManagerHardSkinningCharacterCount=100`.
   - Undo: restore `user.cfg.bak`.
-- C1: `Start SWG (above normal).cmd` in `SWG-client/` starts the client at Above normal priority.
+- C1: the owner's own launchers, `Play SWG Test Galaxy.cmd` and `Play SWG.cmd`, now start the client at Above normal priority.
+  - A desktop shortcut, "SWG Test Galaxy", opens the test-galaxy one.
+  - 7:25 PM fix: the first launcher (`SWG-client/Start SWG (above normal).cmd`, now removed) started the client
+    directly, so it went to the stopped live login (44453) without the test archive. The owner could not log in.
 - The client archive is back on `6ff21312`, matching the server.
 - S1: the optimised `RelWithDebInfo` test build (`dev_build.py --release`) is building. The test galaxy picks it up at its next `--dev-server` start.
 - Not yet tested in game.
