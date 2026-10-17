@@ -12,7 +12,16 @@ Jobs:
   bot-gaps   Every BLOCKED, NO_EFFECT, FAIL or failed check in Bot-reports/*/*.json, de-duplicated (numbers and ids
              masked), with how often and when last seen. The model names the missing feature or bug behind each note,
              so the report lists gaps by feature instead of 381 raw lines.
-Both are drafts by an 8B model: Claude or ChatGPT checks an item before acting on it.
+  bot-chat   (17 Oct) Three short public-chat lines for each of about 40 situations a server bot meets (hunting, travel,
+             the cantina, crafting, dying, grouping), for BotPop's social play. Model: gemma4:12b.
+  npc-dialogue  (17 Oct) A greeting, three lines and a farewell for each NPC brief: DIR/briefs.txt ("<id>\t<brief>"
+             lines) if the topic folder has one, else the Ossus people roster (Fable-ossus/o7-build/people/README.md).
+             Model: the role-play model (owner's OK, 17 Oct); its instruction sets the content rules.
+  report-digest (17 Oct) The newest bot-run findings files (Bot-reports/launch-sim/findings-run*.md), one per chunk:
+             verdict counts, each FAIL and WATCH in one line, the biggest changes. Saves reading them on Claude.
+  era-check  (17 Oct) The proofread lines again, checked for text that doesn't fit 138-139 ABY. Model: qwen3.6:35b-a3b.
+All are drafts by a local model: Claude or ChatGPT checks an item before acting on it, and every dialogue or chat
+line is reviewed before it goes into the game.
 """
 import hashlib
 import json
@@ -50,7 +59,36 @@ behind it, in 3-8 words (for example "mission terminal not reachable", "bot cann
 - "unclear".
 Use the same words for the same problem so lines group together. Answer with JSON only:
 {"items": [{"id": "<id exactly as given>", "gap": "<3-8 words>", "kind": "body|server|scenario|staging|unclear"}]}.""",
+    'bot-chat': """You write short public-chat lines for computer-controlled players ("bots") on a Star Wars Galaxies game
+server set in 138-139 ABY. The bots should sound like ordinary players of the game. Each input line is
+"<id>\t<situation>". For each situation write three different lines a bot could say in public chat: under 12 words
+each, casual and friendly, in-universe or light player talk ("anyone up for a hunt?"). No real people's names, no
+real-world brands or places, no profanity, nothing sexual, and never talk about being an AI or a bot.
+Answer with JSON only: {"items": [{"id": "<id exactly as given>", "lines": ["...", "...", "..."]}]}.""",
+    'npc-dialogue': """You draft dialogue for non-player characters on a Star Wars Galaxies game server set in 138-139 ABY
+(the Legacy era). Each input line is "<id>\t<brief>": who the character is, where they stand and what they do. For
+each, write a greeting (1-2 sentences), three things they say about themselves, their place or their work (1-2
+sentences each), and a farewell. Stay in character and in the Star Wars setting. Content rules: fit for a teen-rated
+game; nothing sexual or graphic; no profanity or slurs; no real people's names and no real-world references. Don't
+invent rewards, items or missions beyond the brief.
+Answer with JSON only: {"items": [{"id": "<id exactly as given>", "greeting": "...", "lines": ["...", "...", "..."],
+"farewell": "..."}]}.""",
+    'report-digest': """You summarise reports from overnight bot test runs on a Star Wars Galaxies emulator test server.
+Each input is "<id>\t<report text>". For each report give: the run name; its verdict counts (FAIL, WATCH, PASS); each
+FAIL and WATCH item in one line of at most 15 words with its key number; and up to three numbers that changed most
+against the earlier run the report compares with. Copy numbers exactly; leave out anything that isn't in the text.
+Answer with JSON only: {"items": [{"id": "<id exactly as given>", "run": "...", "verdicts": "...", "fails": ["..."],
+"watch": ["..."], "changes": ["..."]}]}.""",
+    'era-check': """You check player-facing text for a Star Wars Galaxies game server set in 138-139 ABY (the Legacy era:
+after the Yuuzhan Vong war, the Sith-Imperial war of 127-130 ABY and Darth Krayt's death in 138). Each input line is
+"<id>\t<text>". Flag only lines that clearly don't fit that time: a character who would be dead or not yet born, an
+event placed at the wrong time, a faction or technology that doesn't exist then, or a real-world reference. Old
+places from 0-4 ABY are expected as ruins and history (Echo Base is a 3 ABY ruin); flag such text only when it speaks
+as if those days were the present. Don't flag spelling or style.
+Answer with JSON only: {"items": [{"id": "<id exactly as given>", "problem": "<short>", "why": "<one sentence>"}]}.
+If nothing is wrong: {"items": []}.""",
 }
+CHUNK = {'bot-chat': 8, 'npc-dialogue': 3, 'report-digest': 1}   # lines per chunk; the rest use PER_CHUNK
 
 
 def chunk_lines(lines, size=PER_CHUNK):
@@ -100,7 +138,8 @@ def archive_strings():
 
 
 LITERAL = re.compile(r'"((?:[^"\\]|\\.)*)"')   # every literal, in order, so short ones keep their quotes paired
-NOT_PLAYER_FACING = ('/src/client/', '/Agent')   # the bot client, and the test galaxy's agent-only staff commands
+NOT_PLAYER_FACING = ('/src/client/', '/Agent', '/botpop/')   # the bot client, the test galaxy's agent-only staff
+                                                           # commands, and the server bots' own log and reply text
 
 
 def server_strings():
@@ -168,12 +207,77 @@ def bot_notes(root=OUTPUTS / 'Bot-reports'):
     return [(f'g{n}', f'{e["group"]}\t{e["count"]}x\t{e["last"]}\t{e["text"]}') for n, e in enumerate(rows, 1)]
 
 
+# ------------------------------------------------------------------ bot chat, NPC dialogue, report digests
+
+SITUATIONS = [
+    'waiting in a cantina between hunts', 'watching a dancer in the cantina', 'asking who wants to group for a hunt',
+    'inviting a stranger into the group', 'accepting a group invitation', 'the group just killed a tough creature',
+    'killed a creature alone', 'health is low in a fight', 'just got back up after being incapacitated',
+    'just cloned after dying', 'buying a shuttle ticket at the starport', 'waiting for the shuttle to land',
+    'just arrived on a new planet', 'looking at the mission terminal', 'finished a mission and got paid',
+    'gave up on a mission that was too hard', 'a crafting attempt went well', 'a crafting attempt failed',
+    'selling something on the bazaar', 'looking for a doctor to buff them', 'thanking a medic for healing',
+    'tipping an entertainer', 'greeting another player who walked up', 'logging off for the night',
+    'lost in a big city looking for a trainer', 'just trained a new skill', 'found a rare resource while surveying',
+    'warning others about aggressive creatures nearby', 'riding a speeder into town', 'buying a speeder deed',
+    'on Nal Hutta among Hutt palaces', 'exploring the ruins on Ossus', 'freezing on Hoth near Echo Base\'s ruins',
+    'watching Imperial troopers patrol the town', 'asking for directions to a cloning facility',
+    'complaining that the shuttle is late', 'admiring a player\'s house', 'looking for crafting resources to buy',
+    'a guildmate came online', 'hearing a world boss was sighted',
+]
+
+
+def chat_situations():
+    return [(f's{n}', text) for n, text in enumerate(SITUATIONS, 1)]
+
+
+ROSTER = OUTPUTS / 'Fable-ossus' / 'o7-build' / 'people' / 'README.md'
+
+
+def npc_briefs(folder):
+    """[(id, brief)] from DIR/briefs.txt when the topic folder has one, else the named people of the Ossus roster."""
+    own = folder / 'briefs.txt'
+    if own.exists():
+        rows = [line.split('\t', 1) for line in own.read_text(encoding='utf-8').splitlines() if '\t' in line]
+        return [(i.strip(), ' '.join(b.split())) for i, b in rows]
+    briefs = []
+    for line in ROSTER.read_text(encoding='utf-8').splitlines() if ROSTER.exists() else []:
+        cells = [c.strip() for c in line.strip().strip('|').split('|')]
+        if len(cells) != 2 or not re.match(r'\d+ ', cells[0]):
+            continue
+        place = re.sub(r'^\d+\s+', '', cells[0])
+        for name, after in re.findall(r'\*\*([^*]+)\*\*([^*]*)', cells[1]):
+            # what follows the name, up to the next stock template (`...`) in the same cell
+            note = after.split('`')[0].strip().strip(',').rstrip(' ,0123456789').strip(' ,')[:180]
+            briefs.append((f'n{len(briefs) + 1}', f'{name} {note}'.strip() + f'; at {place} on Ossus, 138-139 ABY. '
+                           'Ossus: the Jedi academy fell in 130 ABY; an Imperial garrison holds the benchland.'))
+    return briefs
+
+
+def run_reports(root=OUTPUTS / 'Bot-reports' / 'launch-sim', newest=6, cap=7000):
+    """[(id, text)] for the newest bot-run findings files, one report per line, capped at cap characters."""
+    files = sorted(Path(root).glob('findings-run*.md'), key=lambda p: p.stat().st_mtime)[-newest:]
+    return [(p.stem.removeprefix('findings-'), p.read_text(encoding='utf-8', errors='replace')[:cap]) for p in files]
+
+
 # ------------------------------------------------------------------ prepare / report
+
+def lines_for(job, folder):
+    if job in ('proofread', 'era-check'):
+        return archive_strings() + server_strings()
+    if job == 'bot-chat':
+        return chat_situations()
+    if job == 'npc-dialogue':
+        return npc_briefs(folder)
+    if job == 'report-digest':
+        return run_reports()
+    return bot_notes()
+
 
 def prepare(job, folder):
     folder.mkdir(parents=True, exist_ok=True)
-    lines = archive_strings() + server_strings() if job == 'proofread' else bot_notes()
-    chunks = chunk_lines(lines)
+    lines = lines_for(job, folder)
+    chunks = chunk_lines(lines, CHUNK.get(job, PER_CHUNK))
     (folder / 'input.jsonl').write_text(''.join(json.dumps(c, ensure_ascii=False) + '\n' for c in chunks),
                                         encoding='utf-8')
     (folder / 'instruction.txt').write_text(INSTRUCTIONS[job] + '\n', encoding='utf-8')
@@ -209,8 +313,28 @@ def report(job, folder):
     lines = json.loads((folder / 'lines.json').read_text(encoding='utf-8'))
     items = [i for i in answers(folder) if i['id'] in lines]   # drop ids the model made up
     head = (f'# Local model: {job} (draft)\n\nWritten by the local model through `tools/agents/local/local_jobs.py`; '
-            f'{len(lines)} input lines. An 8B model\'s draft: check each item before acting on it.\n\n')
-    if job == 'proofread':
+            f'{len(lines)} input lines. A local model\'s draft: check each item before acting on it.\n\n')
+    if job == 'bot-chat':
+        body = '| Situation | Lines |\n|---|---|\n' + ''.join(
+            f'| {cell(lines[i["id"]], 70)} | {cell(" / ".join(map(str, i.get("lines") or [])), 260)} |\n'
+            for i in sorted(items, key=lambda i: int(i['id'][1:]) if i['id'][1:].isdigit() else 0))
+    elif job == 'npc-dialogue':
+        body = '**Not for the game until reviewed.**\n\n' + ''.join(
+            f'## {cell(lines[i["id"]].split(",")[0], 90)}\n\n- Greeting: {cell(i.get("greeting", ""), 300)}\n'
+            + ''.join(f'- {cell(t, 300)}\n' for t in (i.get('lines') or []))
+            + f'- Farewell: {cell(i.get("farewell", ""), 300)}\n\n' for i in items)
+    elif job == 'report-digest':
+        body = ''.join(
+            f'## {cell(i.get("run") or i["id"], 60)}\n\n{cell(i.get("verdicts", ""), 80)}\n\n'
+            + ''.join(f'- FAIL: {cell(t, 160)}\n' for t in (i.get('fails') or []))
+            + ''.join(f'- WATCH: {cell(t, 160)}\n' for t in (i.get('watch') or []))
+            + ''.join(f'- Change: {cell(t, 160)}\n' for t in (i.get('changes') or [])) + '\n'
+            for i in sorted(items, key=lambda i: i['id']))
+    elif job == 'era-check':
+        body = '| String | Text now | Problem | Why |\n|---|---|---|---|\n' + ''.join(
+            f'| `{i["id"]}` | {cell(lines[i["id"]], 140)} | {cell(i.get("problem", ""), 80)} | {cell(i.get("why", ""), 160)} |\n'
+            for i in sorted(items, key=lambda i: i['id']))
+    elif job == 'proofread':
         body = '| String | Text now | Problem | Suggested |\n|---|---|---|---|\n' + ''.join(
             f'| `{i["id"]}` | {cell(lines[i["id"]], 140)} | {cell(i.get("problem", ""), 80)} | {cell(i.get("fix", ""), 140)} |\n'
             for i in sorted(items, key=lambda i: i['id']) if str(i.get('fix', '')).strip() != lines[i['id']].strip())

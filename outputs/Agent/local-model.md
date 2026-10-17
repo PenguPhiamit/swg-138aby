@@ -30,9 +30,10 @@ until Claude or ChatGPT has checked it against the source.
 | Job | How | Model on the friend's PC |
 |---|---|---|
 | **Research topic:** explain a Core3 mechanic from the source, for a bot test | queue topic (no `kind`) | default `qwen3.6:35b-a3b`, up to 120,000 characters of source |
-| **Chunk job:** `proofread`, `bot-gaps` (local_jobs.py) | queue topic with `"kind": "map", "job": "..."` | add `"model": "qwen3.5:9b"`. Each chunk is small, and the big model would reload every 5 chunks. |
-| **Bot chat drafts** (social play, later) | a new local_jobs.py job, then a queue topic | `"model": "gemma4:12b"` |
-| **Role-play and NPC dialogue drafts** (owner's OK, 17 Oct) | a chunk job (`local_map.py` sends `think: false`, which this model needs) | `"model": "hf.co/hiwaifu-research/WaifuGemma4-26b-a4b-v1-i1-GGUF:IQ4_XS", "ctx": 8192`. Its card says 18+ only with no extra safety tuning, so the job's instruction sets the content rules. A drafter only: every line is reviewed before it goes into the game ([MODEL-LICENCES.md](../tools/agents/local/friend-pc/MODEL-LICENCES.md)). |
+| **Chunk job:** `proofread`, `bot-gaps`, `report-digest` (local_jobs.py; digests the newest bot-run findings) | queue topic with `"kind": "map", "job": "..."` | add `"model": "qwen3.5:9b"`. Each chunk is small, and the big model would reload every 5 chunks. |
+| **Bot chat drafts** (social play): job `bot-chat`, about 40 situations, three lines each | queue topic with `"kind": "map", "job": "bot-chat"` | `"model": "gemma4:12b"` |
+| **Role-play and NPC dialogue drafts** (owner's OK, 17 Oct): job `npc-dialogue`, briefs from DIR/briefs.txt or the Ossus roster | a chunk job (`local_map.py` sends `think: false`, which this model needs) | `"model": "hf.co/hiwaifu-research/WaifuGemma4-26b-a4b-v1-i1-GGUF:IQ4_XS", "ctx": 8192`. Its card says 18+ only with no extra safety tuning, so the job's instruction sets the content rules. A drafter only: every line is reviewed before it goes into the game ([MODEL-LICENCES.md](../tools/agents/local/friend-pc/MODEL-LICENCES.md)). |
+| **Era check:** job `era-check`, the proofread lines checked against 138-139 ABY | queue topic with `"kind": "map", "job": "era-check"` | `"model": "qwen3.6:35b-a3b"` (lore knowledge) |
 | **A quick one-off**: summarise a log, list files that mention X | run `local_map.py` or `local_agent.py` by hand (below) | any |
 
 Not for the friend's PC: decisions, reviews and sign-offs, anything that must be right the first time, credentials or
