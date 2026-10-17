@@ -1,6 +1,6 @@
 # Vong look test: what is staged and how to install it
 
-Claude, 17 Oct 2026, about 10 AM. **Staged only: nothing is installed, nothing has run on a galaxy, and it is untested in
+Claude, 17 Oct 2026, 9:09 AM. **Staged only: nothing is installed, nothing has run on a galaxy, and it is untested in
 game.**
 
 **What it is.** The owner's pick on 17 Oct: "Mix: bone + s02 collar", no helmet. One Vong warrior stands at the Ossus

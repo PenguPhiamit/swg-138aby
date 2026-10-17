@@ -5,7 +5,7 @@ ossus, or should we do another local project to test things?" On the decision ca
 That means the local model's first real job is a Vong warrior's look. One warrior stands at the Ossus Project fields for
 the owner to see, and patrols come after that look.
 
-**Status, 17 Oct about 10 AM: step 4 is staged. Nothing is installed; untested in game.** The owner on the mix
+**Status, 17 Oct 9:09 AM: step 4 is staged. Nothing is installed; untested in game.** The owner on the mix
 preview: "The mix is close enough. Go on to step 4".
 - **Client candidate** `work/vong-look/local_planets-vong-look.tre` (sha256 `185b3d7f...`), built on the installed
   `b01e9f44`: 131 new entries and the CRC table, with every other entry byte-identical. Checks are in
@@ -27,7 +27,7 @@ preview: "The mix is close enough. Go on to step 4".
 - **Core3 dresses an NPC** by creating each outfit item from its server template (`AiAgentImplementation.cpp`). That is
   why the wearables need server templates, not just client files.
 
-**Earlier status (9:30 AM):** the base shape became the mix; six DDS files were staged and checked, and a lit preview
+**Earlier status (8:58 AM):** the base shape became the mix; six DDS files were staged and checked, and a lit preview
 went to the owner.
 
 **Why the chitin version was dropped (owner, after its preview):** "that looks nothing like vong armor, no helmet".
@@ -63,10 +63,10 @@ went to the owner.
   3.6 does list the 5070 for CUDA and OptiX, so a GPU switch is possible; whether it works on the 50-series is
   untested.
 
-**The earlier chitin status (9:05 AM), kept for the record:** steps 1-3 were done on the chitin armour, with seven DDS
+**The earlier chitin status (8:46 AM), kept for the record:** steps 1-3 were done on the chitin armour, with seven DDS
 files staged and checked.
 
-**Step 3 results (8:58 to 9:05 AM, Blender 3.6.23 on the CPU).**
+**Step 3 results (about 8:40 to 8:46 AM, Blender 3.6.23 on the CPU).**
 - **What the armour shader does** (read from the client: `effect/h_color2_envmask_specmap.eft` and its pixel programs):
   - the colour texture's **alpha is the hue mask**: hue = lerp(colour 0 from `palette/white.pal`, colour 1 from
     `palette/wr_chitin_armor.pal`, alpha);
