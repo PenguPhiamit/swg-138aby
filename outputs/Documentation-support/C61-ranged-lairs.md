@@ -95,3 +95,82 @@ The main session reported 748 `skill points mismatch calculated: 985 found: 235`
 - Gameplay effect: none now. Back then the check reset each bot's points to the calculated value, so the 1:13 AM bots got the full 1,000. No real-player path is involved: creation sets the points from the same config key.
 - No fix2 patch is needed.
 - First run-18 signs of the fix: ranged lair_check rows with damage show 124, 524 and 1,095 (3 of 306 rows so far). Before, those values were 3-10.
+
+## Addendum 2, 17 Oct, 12:00 AM: why ranged bots still fail now that they damage lairs
+
+Claude (side session). Read-only on Core3-dev (HEAD `69f5c879`) and run 18's log (`botpop-launch.jsonl.2332.old`, 10:25-11:30 PM 16 Oct, dev `d4b9d9a1` with fe399424). **Untested in game.** The patch applies and compiles. The main session builds and runs it.
+
+### Answer
+
+The damage now lands. A carbine bot left alone takes **about 1,030 condition a minute** off a lair (14 quiet one-minute pairs). That is what certified 37-75 shots every 3.5 s should give, so the shot cadence, the 2 s enqueue and attack costs are fine. Three other things stop the missions:
+
+1. **Rifle and pistol bots never fight back.** BotPop notices an attacker only through `bot->getMainDefender()` (`launchHunt`, `BotPopLaunchBrain.h:1134-1155`). A creature's attack never puts the creature on the bot's defender list: `CombatManager::startCombat` (`CombatManager.cpp:110-113`) sets only the attacker's list and both combat states. The defender adds its attacker only through its own counterattack: `creoTargetCombatAction` case COUNTER, `:463-467`, which runs `attack` back at the attacker. Only some weapons can counter: `getWeaponDefendResult` (`CombatManager.h:282-295`) gives carbine and two-hand COUNTER, rifle and polearm BLOCK, pistol and one-hand DODGE, and unarmed a random one of the three. So the main defender is either nothing or the lair. That isn't a nearby creature, so BotPop calls `clearCombatState(true)` and the bot keeps shooting the lair while the creatures kill it. Run 18, by the bot's weapon:
+
+   | weapon (defence) | aggro rows | incaps | kills with `aggro: true` |
+   |---|---|---|---|
+   | rifle (block) | 0 | 649 | 0 of 1,643 |
+   | pistol (dodge) | 4 | 312 | 1 of 375 |
+   | carbine (counter) | 460 | 232 | 365 of 857 |
+   | unarmed (random) | 1,245 | 1,102 | 949 of 3,146 |
+   | two-hand (counter) / one-hand (dodge) / polearm (block) | | | 9 of 20 / 2 of 66 / 0 of 6 |
+
+   At mission lairs, carbine users fought the creatures in 90 of 92 missions. Rifle and pistol users fought them in 0 of 402, the same for hunters and samplers. Those 402 missions logged 801 incaps and 136 deaths. A median of 41 s passed between a lair check and the next incap. Then came 60 s down, a walk to town and up to 3 minutes' rest. While the bot was away, the lair's living creatures healed it back to 0 (for example 535 → 0 and 611 → 0 between visits; heal rule as above, `LairObserverImplementation.cpp:304-375`). Within the 20-minute abort, that left about three visits of 40 s each.
+
+2. **The clear also drops the shot.** `clearCombatState` calls `clearQueueActions(true)` (`CreatureObjectImplementation.cpp:906`). With the lair as main defender it runs every 1 s tick, so the next queued shot is often thrown away. Only 8 quiet minute pairs exist for rifles and pistols, with a median of 158 a minute against the carbine's 1,030. That's too few to be sure, but it fits.
+
+3. **Melee bots can't reach the lair at 6 m.** Core3-dev `a8ece12b` (16 Oct, 10:59 AM) moved every weapon from 20 m (ranged) or 4 m (melee) to 6 m from the lair's centre. A melee weapon reaches 5 m. In run 18, 94% of melee lair checks were beyond weapon range. Over 75 quiet minutes at 6 m, melee damage rose in 7, with a median of 0. Melee damages a lair only when a fight with its creatures happens to leave the bot closer. Brawlers fell from 46% of missions (run 13, at 4 m) to 14% (run 18).
+
+**Then mission level decides it.** Run 18 missions that reached a lair, by mission level minus bot level:
+
+| gap | melee | carbine | rifle/pistol |
+|---|---|---|---|
+| 0 or less | 61 of 95 (64%) | 3 of 11 | 7 of 56 (12%) |
+| 1-2 | 16 of 158 (10%) | 2 of 37 | 0 of 128 |
+| 3 or more | 0 of 156 | 0 of 39 | 0 of 192 |
+
+Scouts already fight back and still finish 4 of 83, mostly because they take missions 1-6 levels above themselves. Fixing 1-3 should bring marksmen up to the carbine and melee rows. It won't fix the 3-or-more rows. `launchMission` takes the easiest mission offered, up to level + 6 (the owner's 15 Oct rule). **Owner's decision:** a lower cap, such as level + 2, would turn most of the 0% missions into skipped ones. This patch doesn't change that rule.
+
+### Real-player impact
+
+None.
+
+- A real player who is attacked fights back by their own input; the client sends the attack. The defender-list behaviour is stock Core3, the same on live SWGEmu.
+- The lair heal and `clearQueueActions` are stock too.
+- The 6 m reach and the main-defender test are BotPop code (`a8ece12b`, `launchHunt`).
+- A real ranged player who stands at a lair and ignores its creatures fails the same way. That is pre-CU play: kill the creatures first.
+
+### Fix
+
+`C61-ranged-lairs/C61-fight-back.patch`, against Core3-dev `69f5c879`. Two files, 68 lines.
+
+- `launchHunt`: if the main defender isn't a nearby living creature, the bot asks its own threat map, `bot->getThreatMap()->getHighestThreatAttacker()`. Every creature that hits the bot is added there (`startCombat` `:115-120`, `inflictDamage`). That call locks the map and drops dead, incapacitated and out-of-range (128 m) entries. A nearby creature on it (same checks: alive, same zone, not given up on, under 80 m) is adopted with an `aggro` row, exactly as a counterattacking bot does today.
+- `launchHunt`: no `clearCombatState` while the main defender is the mission's lair and the bot is within 16 m of it, so the queued shot survives. Walking off to rest still clears.
+- `launchMission`: lair reach is 6 m for ranged weapons and 4 m (the old value) for melee.
+- `BotPopManager.h` includes `server/zone/objects/tangible/threat/ThreatMap.h`.
+- Side effects:
+  - The threat map can keep a creature that hit the bot and then lost interest. If it's still alive and within 80 m, the bot attacks it, as an annoyed player would.
+  - `getHighestThreatAttacker` keeps its pick for 24 s (`EVALUATIONCOOLDOWN`). It picks at random among the creatures that hit the bot, so a bot under several attackers fights them one at a time, not nearest first.
+  - The bot's own threat map isn't used for experience or loot (the creature's map is).
+
+Checks run (inside WSL, read-only):
+
+- `git apply --check` in `/opt/swg/Core3-dev` at `69f5c879`, botpop tree clean: OK.
+- Syntax-only compile of `ServerCore.cpp` (clang++ 19, flags from `build/dev/compile_commands.json`, patched headers first on the include path): exit 0.
+- A copy with an `#error` line failed, so the patched headers were the ones compiled.
+
+### How to verify (7 AM style report)
+
+Run as usual with the patch. Compare with run 18:
+
+1. **Aggro by weapon:** join each `aggro` row to the bot's weapon from its latest `kill` or `lair_check` row. Rifle aggro rows should go from 0 to hundreds, and pistol from 4. Rifle `kill` rows with `aggro: true` should go from 0 of 1,643 to a share like carbine's (about 40%).
+2. **At the lair:** rifle and pistol missions should show `aggro` and `kill` rows after the first `lair_check` in most missions (run 18: 0 of 402). The time from a lair check to the next incap should grow (run 18 median: 41 s).
+3. **Melee reach:** the findings line "Mission lairs (lair_check rows). melee" should show beyond weapon range near 0% (run 18: 94%) and median distance 4 m. Brawler missions should go back toward run 13's 46% (run 18: 14%).
+4. **Missions by role:** marksmen should pass 10% (run 18: 8 of 515, 2%). Read it by mission level gap: a gap of 0 or less should climb from 12% toward the melee 64%, while 3 or more stays near 0% until the mission cap changes.
+5. **Damage rate:** rifle and pistol quiet minute pairs (two `lair_check` rows within 80 s with nothing between them) should rise toward carbine's 1,030 a minute.
+
+Steps 1, 2 and 5 aren't in `botpop_findings.py` yet. The scripts used here are short Python over the `.jsonl` (missions split from `mission_take` to `mission_done`/`mission_abort` per bot).
+
+### Not done
+
+- No in-game or agent-client test, no build, no run. The galaxy stays the main session's.
+- The mission level cap is left alone. It's the owner's call (see above).

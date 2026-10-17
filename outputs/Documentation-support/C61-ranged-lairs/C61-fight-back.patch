@@ -1,0 +1,68 @@
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+index 1c27c42..62a229a 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+@@ -1132,13 +1132,35 @@ inline void BotPopManager::launchRest(BotState* state, CreatureObject* bot, Zone
+ // Brawler, Marksman, Scout: fight, deal with the corpse, rest when hurt, search, roam, move on.
+ inline void BotPopManager::launchHunt(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, uint64 now, float seconds) {
+ 	if (L->targetID == 0 && bot->isInCombat()) {
++		auto usable = [&](SceneObject* object) {
++			return object != nullptr && object->isAiAgent() && !object->asAiAgent()->isDead() && object->getZone() == zone &&
++				L->skip.count(object->getObjectID()) == 0 && object->getDistanceTo(bot) < 80.f;
++		};
++
+ 		ManagedReference<SceneObject*> defender = bot->getMainDefender();
+-		bool near = defender != nullptr && defender->isAiAgent() && !defender->asAiAgent()->isDead() &&
+-			defender->getZone() == zone && L->skip.count(defender->getObjectID()) == 0 && defender->getDistanceTo(bot) < 80.f;
++		bool near = usable(defender);
++
++		// A creature's attack doesn't put it on the bot's defender list (CombatManager::startCombat sets only the
++		// attacker's); only the bot's own counterattack does, and only carbines, two-handers and a third of unarmed
++		// defences counter (getWeaponDefendResult). Run 18: rifle and pistol bots logged 4 aggro rows in 961 incaps and
++		// never fought a lair's creatures. The bot's threat map holds every creature that hit it (inflictDamage).
++		if (!near) {
++			ThreatMap* threats = bot->getThreatMap();
++			ManagedReference<TangibleObject*> attacker = threats != nullptr ? threats->getHighestThreatAttacker() : nullptr;
++
++			if (usable(attacker)) {
++				defender = attacker.get();
++				near = true;
++			}
++		}
+ 
+ 		// Still "in combat" with something far away, dead or given up on (it fled, or we died and came back):
+ 		// leave combat as a player who ran off would, or the bot adopts it and gives up again every second.
+-		if (!near)
++		// Not while shooting the mission's lair from beside it: clearing combat also drops the queued shot
++		// (clearQueueActions), every second.
++		bool atLair = defender != nullptr && L->lairID != 0 && defender->getObjectID() == L->lairID && defender->getDistanceTo(bot) < 16.f;
++
++		if (!near && !atLair)
+ 			bot->clearCombatState(true);
+ 
+ 		if (near) {
+@@ -1948,8 +1970,10 @@ inline bool BotPopManager::launchMission(BotState* state, CreatureObject* bot, Z
+ 
+ 		// Every weapon closes to 6 m on a lair: in runs 4-12 no ranged bot ever destroyed one from 20 m (hunters took
+ 		// 1,117 missions in run 12, reached 1,062 lairs, finished none), while melee at 4 m did; line of sight to the
+-		// lair's centre through its own model is the suspect. Pistols and rifles fire at 6 m.
+-		float reach = 6.f;
++		// lair's centre through its own model is the suspect. Pistols and rifles fire at 6 m. Melee stays at 4 m: at 6 m
++		// it is past a melee weapon's 5 m reach (run 18: 75 quiet minutes at a lair, median damage 0).
++		ManagedReference<WeaponObject*> lairWeapon = bot->getWeapon();
++		float reach = lairWeapon != nullptr && lairWeapon->isRangedWeapon() ? 6.f : 4.f;
+ 
+ 		if (chaseToward(state, bot, zone, lair->getPositionX(), lair->getPositionY(), 5.f, seconds, reach) && now >= L->nextAttackMs) {
+ 			// Once a minute at the lair: what CombatQueueCommand's own checks say about this shot, and the lair's damage
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+index 62f6f8b..f8c61de 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+@@ -29,6 +29,7 @@
+ #include "server/zone/objects/creature/ai/CreatureTemplate.h"
+ #include "server/zone/objects/creature/variables/Skill.h"
+ #include "server/zone/objects/tangible/weapon/WeaponObject.h"
++#include "server/zone/objects/tangible/threat/ThreatMap.h"
+ #include "server/zone/CloseObjectsVector.h"
+ #include "terrain/manager/TerrainManager.h"
+ #include "server/zone/managers/mission/MissionManager.h"
