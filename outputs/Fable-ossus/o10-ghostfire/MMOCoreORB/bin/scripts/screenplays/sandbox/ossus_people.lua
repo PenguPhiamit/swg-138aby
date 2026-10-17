@@ -23,7 +23,7 @@ OssusPeople = ScreenPlay:new {
 	huntCleanup = 30 * 60,                -- seconds before an unfought hunt target is removed
 
 	-- the hidden Jedi: present for jediStay seconds, then away for jediAwayMin..jediAwayMax
-	jedi = { template = "ossus_hidden_jedi", x = -107.26, z = -83.19, y = -92.10, heading = 0, cell = 6900118 },
+	jedi = { template = "ossus_hidden_jedi", x = -100.0, z = -91.8, y = -90.0, heading = 153, cell = 6900118 },
 	jediFirst = { 10 * 60, 60 * 60 },
 	jediStay = 60 * 60,
 	jediAwayMin = 2 * 3600,

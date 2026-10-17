@@ -1,0 +1,62 @@
+diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_world.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_world.lua
+index 5b0e93e..1e6542f 100644
+--- a/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_world.lua
++++ b/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_world.lua
+@@ -120,31 +120,33 @@ OssusWorld = ScreenPlay:new {
+ 			} },
+ 	},
+ 
+-	-- the dungeon: cell id, template, x, z (height), y in the cell (floor-mesh points of the cave's pob), respawn
++	-- the dungeon: cell id, template, x, z (height), y in the cell, respawn. O11 (17 Oct): points re-read from each cell's
++	-- floor mesh as tools/navmap.py reads it (the first reader skipped the vertex count and put them off the floor):
++	-- centres of floor triangles with no wall edge, up to three per cell about 6 m apart
+ 	dungeon = {
+-		{ 6900003, "ossus_sith_acolyte", -0.50, 1.57, -10.94, 600 },
+-		{ 6900003, "ossus_sith_acolyte", 1.21, -0.69, -10.45, 600 },
+-		{ 6900004, "ossus_sith_acolyte", -31.88, -12.85, -30.23, 600 },
+-		{ 6900004, "ossus_sith_acolyte", -26.14, 3.40, -24.90, 600 },
+-		{ 6900005, "ossus_sith_acolyte", -67.66, -13.50, -41.04, 600 },
+-		{ 6900005, "ossus_sith_enforcer", -65.93, -2.40, -40.30, 600 },
+-		{ 6900006, "ossus_sith_acolyte", -78.66, 45.22, -47.86, 600 },
+-		{ 6900006, "ossus_sith_enforcer", -52.14, 38.99, -46.07, 600 },
+-		{ 6900007, "ossus_sith_enforcer", -146.16, 75.40, -52.46, 600 },
+-		{ 6900007, "ossus_sith_acolyte", -138.40, 39.80, -51.34, 600 },
+-		{ 6900008, "ossus_sith_enforcer", -181.99, 15.30, -64.34, 600 },
+-		{ 6900008, "ossus_sith_acolyte", -183.28, -0.16, -63.97, 600 },
+-		{ 6900009, "ossus_sith_enforcer", -231.57, -11.57, -64.75, 600 },
+-		{ 6900009, "ossus_sith_enforcer", -224.91, -15.18, -63.72, 600 },
+-		{ 6900010, "ossus_sith_enforcer", -153.70, -92.23, -73.61, 600 },
+-		{ 6900010, "ossus_sith_acolyte", -166.07, -88.17, -73.18, 600 },
+-		{ 6900011, "ossus_sith_enforcer", -97.03, -71.41, -69.60, 600 },
+-		{ 6900011, "ossus_sith_acolyte", -110.13, -67.59, -68.47, 600 },
+-		{ 6900012, "ossus_sith_enforcer", -141.17, -36.89, -80.73, 600 },
+-		{ 6900012, "ossus_sith_enforcer", -136.80, -23.78, -79.06, 600 },
+-		{ 6900013, "ossus_sith_enforcer", -97.78, -96.69, -100.82, 600 },
+-		{ 6900013, "ossus_sith_enforcer", -118.69, -102.78, -99.55, 600 },
+-		{ 6900013, "ossus_sith_keeper", -107.26, -83.19, -100.10, 1800 },
++		{ 6900003, "ossus_sith_acolyte", 2.99, -10.32, -0.54, 600 },
++		{ 6900003, "ossus_sith_acolyte", -2.72, -9.31, 1.23, 600 },
++		{ 6900004, "ossus_sith_acolyte", -3.33, -29.09, -30.26, 600 },
++		{ 6900004, "ossus_sith_acolyte", -1.56, -27.93, -24.67, 600 },
++		{ 6900005, "ossus_sith_acolyte", 6.94, -40.64, -68.30, 600 },
++		{ 6900005, "ossus_sith_enforcer", 1.46, -40.72, -70.78, 600 },
++		{ 6900006, "ossus_sith_acolyte", 43.46, -47.93, -78.31, 600 },
++		{ 6900006, "ossus_sith_enforcer", 37.75, -45.65, -76.60, 600 },
++		{ 6900007, "ossus_sith_enforcer", 38.07, -54.02, -147.21, 600 },
++		{ 6900007, "ossus_sith_acolyte", 40.56, -51.89, -141.74, 600 },
++		{ 6900008, "ossus_sith_enforcer", -11.06, -63.98, -183.56, 600 },
++		{ 6900008, "ossus_sith_acolyte", -9.47, -64.28, -177.79, 600 },
++		{ 6900009, "ossus_sith_enforcer", -13.15, -65.30, -232.24, 600 },
++		{ 6900009, "ossus_sith_enforcer", -9.27, -63.80, -227.59, 600 },
++		{ 6900010, "ossus_sith_enforcer", -88.27, -99.75, -152.51, 600 },
++		{ 6900010, "ossus_sith_acolyte", -91.32, -101.39, -147.43, 600 },
++		{ 6900011, "ossus_sith_enforcer", -44.64, -69.67, -96.53, 600 },
++		{ 6900011, "ossus_sith_acolyte", -39.55, -70.09, -99.80, 600 },
++		{ 6900012, "ossus_sith_enforcer", -35.94, -80.60, -141.98, 600 },
++		{ 6900012, "ossus_sith_enforcer", -40.78, -82.11, -138.36, 600 },
++		{ 6900013, "ossus_sith_enforcer", -91.28, -101.10, -107.70, 600 },
++		{ 6900013, "ossus_sith_enforcer", -86.93, -101.67, -111.70, 600 },
++		{ 6900013, "ossus_sith_keeper", -92.49, -101.36, -112.98, 1800 },
+ 	},
+ }
+ 

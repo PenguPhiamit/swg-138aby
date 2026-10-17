@@ -1,15 +1,16 @@
 """O11: open the three O7 flatland cave mouths (Claude, 17 Oct 2026; owner's report on run 28, 10:05 AM).
 
-The stock flatland caves (cave_06/07/08_flatland) are sinkholes: the r0 (outside) floor of each portal layout is a bowl
-that goes 30-44 m below the rim, so the stock art expects open ground there. SWG terrain has no holes, and the client
-draws the planet's ground over the bowl: the owner "can walk through the floor" at the vault mouth. The fix is a pit in
-the terrain only where the bowl's own floor covers it, so the floor hides the pit everywhere:
-  - each cave's r0 collision floor (from its .pob), placed in the world with its snapshot node;
-  - a 2 m world grid with nine samples per cell; a cell is cut when at least one sample lies over that floor and every
-    sample that does is more than SUNK m below the current ground. So the cut takes the bowl where the ground covers it,
-    plus one cell behind its deep rock walls (hidden by the walls), but never the shallow rim where floor meets ground;
-  - the counted cells, merged into rows of world-aligned rectangles (BREC, no feather), make one layer per cave
-    with one affector: the height set (AHCN op 0) to PIT_MARGIN m below that cave's lowest floor point.
+The stock flatland caves (cave_06/07/08_flatland) are a rock mound standing on flat ground: the r0 (outside) floor
+is the mound's surface (up to 29 m high), and the first cell (r1) starts at the mouth (portal 0, building space
+z = 18, floor at the ground) and goes down under the mound, 12-33 m below the ground. The planet's ground carries on
+inside the mound, so it cuts across that first tunnel: the owner sees grass in the opening and walks down "through"
+it. SWG terrain has no holes, so the fix is a pit in the terrain, only where the mound's shell covers it:
+  - each cave's r0 floor (the shell) and r1 floor (from its .pob), placed in the world with its snapshot node;
+  - a 1 m world grid; a cell is cut when the shell lies more than SHELL_ABOVE m above the current ground at every
+    sample of the cell grown by EDGE m (so the cut stays under the shell, clear of its sloping sides), and the whole
+    grown cell lies behind the mouth (building space z < MOUTH_Z - MOUTH_GAP), so nothing is cut in front of the portal;
+  - the cut cells, merged into rows of world-aligned rectangles (BREC, no feather), make one layer per cave
+    with one affector: the height set (AHCN op 0) to PIT_MARGIN m below the lowest point of that cave's r1 floor.
 The layers go after the O7 layers (tools/o7_terrain.py with this spec added), so nothing else in the terrain changes:
 the step checks that the three TGAs stay identical, that the height changes only inside the rectangles (whole-planet
 grid), and that no bowl floor point is left under the ground (survey_caves.py before and after).
@@ -51,16 +52,20 @@ DEFAULT_OUT = os.path.join(H, 'work', 'ossus-cave-mouths', 'local_planets-cave-m
 O7_TRN_SHA = '05c570f2f241d799e72bf162c844dc1d9fe00c27cc05f7cbb16e28bc9fc50f5c'
 TRN = 'terrain/ossus.trn'
 TGAS = ('terrain/ossus_academy.tga', 'terrain/ossus_canyon.tga', 'terrain/ossus_mesa.tga')
-CELL = 1.0          # m, world grid (2 m left deep floor covered where it meets the shallow rim in one cell)
-SUNK = 0.5          # m: the floor must be this far below the current ground for the cell to be cut
-PIT_MARGIN = 2.0    # m below the cave's lowest floor point
+CELL = 1.0          # m, world grid
+SHELL_ABOVE = 2.0   # m: the mound's surface must be this far above the ground for the cell to be cut
+EDGE = 0.75         # m: each cell is tested grown by this much on every side
+MOUTH_GAP = 0.5     # m: the grown cell must stay this far behind the mouth
+MOUTH_Z = 18.0      # building space z of portal 0 (the mouth); the cut stays behind it
+PIT_MARGIN = 2.0    # m below the lowest point of the first cell's floor
+SUNK = 0.5          # m: for the before/after survey of the first cell's floor
 PROP_CLEAR = 2.5    # m between a moved prop's origin and the nearest pit rectangle
 WS = 'snapshot/ossus.ws'
 NPCS = {'ossus_adit_foreman': (4590.0, -310.0), 'miner': (4596.0, -304.0)}   # screenplays/sandbox/ossus_people.lua
 
 
 def floor_lookup(template):
-    """A function (local x, local z) -> lowest r0 floor y there, or None, over the r0 collision floor triangles."""
+    """A function (local x, local z) -> the highest r0 floor y there (the mound's surface), or None."""
     _, _, verts, tris = sc.r0_floor(template)
     boxes = []
     for a, b, c in tris:
@@ -81,7 +86,7 @@ def floor_lookup(template):
             if min(l1, l2, l3) < -1e-6:
                 continue
             y = l1 * p[1] + l2 * q[1] + l3 * r[1]
-            best = y if best is None else min(best, y)
+            best = y if best is None else max(best, y)
         return best
     return at, min(v[1] for v in verts), verts
 
@@ -106,20 +111,17 @@ def cut_cells(o, terrain, at, verts):
     while gx < x1:
         gy = y0
         while gy < y1:
-            # nine samples per cell; a cell is cut when at least one lies over the floor and every one that does is sunk
-            # deeper than SUNK. A sample off the floor at a deep cell is behind the bowl's rock wall, where the cut is hidden.
-            covered, ok = 0, True
-            for fx in (0.0, 0.5, 1.0):
-                for fy in (0.0, 0.5, 1.0):
-                    px, py = gx + fx * CELL, gy + fy * CELL
+            ok = True
+            for fx in (-EDGE, CELL / 2, CELL + EDGE):
+                for fy in (-EDGE, CELL / 2, CELL + EDGE):
+                    px, py = gx + fx, gy + fy
                     lx, lz = to_local(o, px, py)
                     f = at(lx, lz)
-                    if f is None:
-                        continue
-                    covered += 1
-                    if o['z'] + f > terrain.h(px, py) - SUNK:
+                    if f is None or lz > MOUTH_Z - MOUTH_GAP or o['z'] + f < terrain.h(px, py) + SHELL_ABOVE:
                         ok = False
-            ok = ok and covered > 0
+                        break
+                if not ok:
+                    break
             if ok:
                 cells.add((round(gx, 3), round(gy, 3)))
             gy += CELL
@@ -207,9 +209,11 @@ def main(argv):
     layers, report = [], {}
     for nid, name in sc.CAVES.items():
         o = nodes[nid]
-        at, ymin, verts = floor_lookup(o['template'])
+        at, _, verts = floor_lookup(o['template'])
         cells = cut_cells(o, before, at, verts)
         rects = rows_to_rects(cells)
+        r1 = sc.cell_floor(o['template'], 1)
+        ymin = min(v[1] for v in r1)
         pit = round(o['z'] + ymin - PIT_MARGIN, 2)
         key = name.split(' ')[0]
         layers.append({'name': 'o11 %s mouth pit' % key,
@@ -217,7 +221,7 @@ def main(argv):
                                        'feather_type': 3, 'feather': 0.0} for i, r in enumerate(rects)],
                        'affectors': [{'type': 'AHCN', 'name': 'pit', 'op': 0, 'height': pit}]})
         report[name] = {'cells': len(cells), 'area_m2': len(cells) * CELL * CELL, 'rectangles': len(rects), 'pit_height_m': pit,
-                        'node_z': o['z'], 'lowest_floor_m': round(o['z'] + ymin, 2), 'rects': rects}
+                        'node_z': o['z'], 'r1_lowest_floor_m': round(o['z'] + ymin, 2), 'rects': rects}
 
     spec = jload(o7_terrain.TERRAIN_JSON)
     spec2 = copy.deepcopy(spec)
@@ -241,7 +245,9 @@ def main(argv):
     files = dict(base)
     files[TRN] = trn
     after, _ = sc.load_terrain(tre_write.pack(files))
-    files[WS], moved = move_props(base[WS], report, after)
+    ws, moved = move_props(base[WS], report, after)
+    if moved:
+        files[WS] = ws
     npcs = {}
     for tpl, (x, y) in NPCS.items():
         for name, v in report.items():
@@ -250,19 +256,24 @@ def main(argv):
                 npcs[tpl] = {'from': [x, y], 'to': [nx, ny], 'ground': round(after.h(nx, ny), 2), 'moved_m': t}
     out = tre_write.pack(files)
 
-    # 1. the bowls: no sunken floor point left under the ground
-    surv_before, surv_after = sc.survey(before, nodes), sc.survey(after, nodes)
+    # 1. the first cell's floor: how much of it the ground covers, before and after
     bowls = {}
-    for name in sc.CAVES.values():
-        sunk = [(pb, pa) for pb, pa in zip(surv_before[name]['under_points'], surv_before[name]['under_points'])]
-        pts_b = {tuple(p['world']): p for p in surv_before[name]['under_points']}
-        still = [p for p in surv_after[name]['under_points'] if tuple(p['world']) in pts_b and p['floor'] < pts_b[tuple(p['world'])]['ground'] - SUNK]
-        bowls[name] = {'floor_points_under_ground_before': surv_before[name]['floor_under_ground'],
-                       'floor_points_under_ground_after': surv_after[name]['floor_under_ground'],
-                       'sunken_points_still_covered_after': len(still),
-                       'worst_after_m': surv_after[name]['worst_ground_above_floor_m'],
-                       'still_covered_examples': still[:5]}
-        del sunk
+    for nid, name in sc.CAVES.items():
+        o = nodes[nid]
+        r1 = sc.cell_floor(o['template'], 1)
+        res = {}
+        for label, t in (('before', before), ('after', after)):
+            under = []
+            for vx, vy, vz in r1:
+                ex, ny = rot(vx, vz, o['yaw'])
+                wx, wy = o['x'] + ex, o['y'] + ny
+                g = t.h(wx, wy)
+                if g > o['z'] + vy + SUNK and vz < MOUTH_Z:
+                    under.append({'local': [round(vx, 2), round(vy, 2), round(vz, 2)], 'ground_above_floor_m': round(g - o['z'] - vy, 2)})
+            res[label] = under
+        bowls[name] = {'r1_floor_vertices': len(r1), 'under_ground_before': len(res['before']), 'under_ground_after': len(res['after']),
+                       'worst_after_m': max((u['ground_above_floor_m'] for u in res['after']), default=0.0),
+                       'still_under_examples': res['after'][:8]}
 
     # 2. nothing else moved: a whole-planet grid and a ring around each cave
     rects = [r for v in report.values() for r in v['rects']]
@@ -315,7 +326,7 @@ def main(argv):
         'out': {'path': os.path.relpath(args.out, H).replace(os.sep, '/'), 'bytes': len(out), 'sha256': out_sha, 'entries': len(ours)},
         'untouched_identical': len(base) - len(changed), 'changed': changed,
         'trn': {'before_sha256': sha(base[TRN]), 'after_sha256': sha(trn), 'bytes_before': len(base[TRN]), 'bytes_after': len(trn)},
-        'settings': {'cell_m': CELL, 'sunk_m': SUNK, 'pit_margin_m': PIT_MARGIN},
+        'settings': {'cell_m': CELL, 'shell_above_m': SHELL_ABOVE, 'edge_m': EDGE, 'mouth_z': MOUTH_Z, 'mouth_gap_m': MOUTH_GAP, 'pit_margin_m': PIT_MARGIN},
         'pits': {k: {kk: vv for kk, vv in v.items() if kk != 'rects'} for k, v in report.items()},
         'bowls': bowls,
         'planet_grid': {'step_m': step, 'samples': n, 'changed_inside_rects': changed_in, 'changed_outside_rects': changed_out,
@@ -327,12 +338,12 @@ def main(argv):
     with open(os.path.join(HERE, 'checks-cave-mouths.json'), 'w', encoding='utf-8') as f:
         json.dump(checks, f, indent=1)
     shutil.rmtree(tmp, ignore_errors=True)
-    assert changed == sorted([TRN, WS]), changed
+    assert changed == sorted([TRN] + ([WS] if moved else [])), changed
     print(json.dumps({k: checks[k] for k in ('out', 'untouched_identical', 'changed', 'pits', 'planet_grid', 'near_caves_1m_grid', 'npcs_to_move')}, indent=1))
     for m in moved:
         print('moved', m['id'], m['role'], m['from'], '->', m['to'], '%.2f m' % m['moved_m'])
     for k, v in bowls.items():
-        print(k, {kk: vv for kk, vv in v.items() if kk != 'still_covered_examples'})
+        print(k, {kk: vv for kk, vv in v.items() if kk != 'still_under_examples'})
     print('Cave mouths step: built (read the bowl and near-cave checks above)')
     return 0
 

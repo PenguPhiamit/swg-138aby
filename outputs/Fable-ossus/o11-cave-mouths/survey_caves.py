@@ -62,11 +62,22 @@ def r0_floor(template):
     flr = data[pos + 1:data.index(b'\0', pos + 1)].decode()
     fr = parse(client_file(flr))[0]
     vt, tr = find(fr, 'VERT'), find(fr, 'TRIS')
-    verts = [struct.unpack_from('<3f', vt.data, 12 * i) for i in range(len(vt.data) // 12)]
+    count = struct.unpack_from('<i', vt.data, 0)[0]   # VERT starts with its vertex count (as tools/navmap.py reads it)
+    verts = [struct.unpack_from('<3f', vt.data, 4 + 12 * i) for i in range(count)]
     nt = struct.unpack_from('<i', tr.data, 0)[0]
     size = (len(tr.data) - 4) // nt
     tris = [struct.unpack_from('<3i', tr.data, 4 + size * t) for t in range(nt)]
     return pob, flr, verts, tris
+
+
+def cell_floor(template, index):
+    """Vertices (building space) of cell index's collision floor, read as tools/navmap.py reads them."""
+    import navmap
+    d = client_file(template)
+    pob = re.findall(rb'appearance/[A-Za-z0-9_/\.]+\.pob', d)[0].decode()
+    flrs = re.findall(r'appearance/collision/[\w./-]+\.flr', client_file(pob).decode('latin1'))
+    verts, _ = navmap.floor_mesh(client_file(flrs[index]))
+    return verts
 
 
 def load_terrain(archive_bytes):
