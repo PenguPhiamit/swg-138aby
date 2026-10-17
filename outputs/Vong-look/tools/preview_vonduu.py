@@ -1,11 +1,14 @@
 """Render the male chitin armour set with our vonduun textures, front and three-quarter views (CPU, Cycles).
 
-    blender.exe -b --python preview_vonduu.py -- <folder with the male _l0 .mgn files> <folder with texture PNGs> <out.png>
+    blender.exe -b --python preview_vonduu.py -- <mesh folder> <folder with texture PNGs> <out.png> [spec.json]
 
 The texture PNGs are the staged DDS files decoded back (what the client will sample, before its lighting and hue).
+With a spec (spec_mix.json) the pieces and the stock shader -> our texture map come from it; any other shader on a piece
+(the visor, the marauder chainmail) gets a dark stand-in.
 Preview only: no armature, no skin underneath, flat studio light; the client's own lighting will differ.
 """
 import importlib
+import json
 import math
 import os
 import sys
@@ -22,6 +25,11 @@ PIECES = {   # mesh -> our texture for its armour shader
     'armor_chitin_s01_gloves_m_l0.mgn': 'armor_vonduu_gloves', 'armor_chitin_s01_helmet_m_l0.mgn': 'armor_vonduu_helmet',
     'armor_chitin_s01_leggings_m_l0.mgn': 'armor_vonduu_leggings',
 }
+SHADERS = None   # stock shader -> our texture, in spec mode
+if len(argv) > 3:
+    spec = json.load(open(argv[3]))
+    SHADERS = {s: t for t, v in spec['textures'].items() for s in v['shaders']}
+    PIECES = {p: None for p in spec['pieces']}
 import_mgn = importlib.import_module('io_scene_swg.import_mgn')
 for o in list(bpy.data.objects):
     bpy.data.objects.remove(o, do_unlink=True)
@@ -60,11 +68,15 @@ for mesh_file, tex in PIECES.items():
     before = set(bpy.data.objects)
     import_mgn.import_mgn(bpy.context, os.path.join(MESH_DIR, mesh_file), global_matrix=Matrix.Identity(4))
     (obj,) = set(bpy.data.objects) - before
-    if tex not in images:
-        images[tex] = bpy.data.images.load(os.path.join(TEX_DIR, tex + '.png'))
     for slot in obj.material_slots:
-        is_armour = slot.material and slot.material.name.startswith('armor_chitin') and 'has15' not in slot.material.name
-        slot.material = textured(tex, images[tex]) if is_armour else visor
+        name = slot.material.name if slot.material else ''
+        if SHADERS is not None:
+            ours = SHADERS.get(name)
+        else:
+            ours = tex if name.startswith('armor_chitin') and 'has15' not in name else None
+        if ours and ours not in images:
+            images[ours] = bpy.data.images.load(os.path.join(TEX_DIR, ours + '.png'))
+        slot.material = textured(ours, images[ours]) if ours else visor
     obj.matrix_world = Matrix.Rotation(math.radians(90), 4, 'X')   # SWG is Y-up, Blender Z-up
     objects.append(obj)
 
@@ -76,7 +88,7 @@ print('PREVIEW bounds', tuple(round(v, 2) for v in lo), tuple(round(v, 2) for v 
 
 sun = bpy.data.objects.new('key', bpy.data.lights.new('key', 'SUN'))
 sun.data.energy = 3.0
-sun.rotation_euler = (math.radians(50), 0, math.radians(30))
+sun.rotation_euler = (math.radians(50), 0, math.radians(210))   # lights the front (the +Y side, where the visor faces)
 scene.collection.objects.link(sun)
 cam = bpy.data.objects.new('cam', bpy.data.cameras.new('cam'))
 cam.data.type = 'ORTHO'

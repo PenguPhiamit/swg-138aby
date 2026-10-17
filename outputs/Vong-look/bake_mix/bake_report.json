@@ -1,0 +1,137 @@
+{
+ "swatch": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/gen/vonduun_12_seamless.png",
+ "scale": 1.5,
+ "textures": {
+  "armor_vong_bicep": {
+   "mesh": "bone_s01/armor_bone_s01_bicep_l_m_l0.mgn",
+   "shaders": [
+    "armor_bone_bicep_hcsb21"
+   ],
+   "size": [
+    256,
+    128
+   ],
+   "materials": [
+    "armor_bone_bicep_hcsb21"
+   ],
+   "triangles": 264,
+   "uv_layers": [
+    "UVMap-0"
+   ],
+   "files": {
+    "color": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake_mix\\armor_vong_bicep.png",
+    "mask": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake_mix\\armor_vong_bicep_mask.png"
+   }
+  },
+  "armor_vong_bracer": {
+   "mesh": "bone_s01/armor_bone_s01_bracer_l_m_l0.mgn",
+   "shaders": [
+    "armor_bone_bracer_hcsb21"
+   ],
+   "size": [
+    256,
+    128
+   ],
+   "materials": [
+    "armor_bone_bracer_hcsb21"
+   ],
+   "triangles": 219,
+   "uv_layers": [
+    "UVMap-0"
+   ],
+   "files": {
+    "color": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake_mix\\armor_vong_bracer.png",
+    "mask": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake_mix\\armor_vong_bracer_mask.png"
+   }
+  },
+  "armor_vong_boots": {
+   "mesh": "bone_s01/armor_bone_s01_boots_m_l0.mgn",
+   "shaders": [
+    "armor_bone_boots_hcsb21"
+   ],
+   "size": [
+    256,
+    128
+   ],
+   "materials": [
+    "armor_bone_boots_hcsb21"
+   ],
+   "triangles": 554,
+   "uv_layers": [
+    "UVMap-0"
+   ],
+   "files": {
+    "color": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake_mix\\armor_vong_boots.png",
+    "mask": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake_mix\\armor_vong_boots_mask.png"
+   }
+  },
+  "armor_vong_gloves": {
+   "mesh": "bone_s01/armor_bone_s01_gloves_m_l0.mgn",
+   "shaders": [
+    "armor_bone_gloves_hcsb21"
+   ],
+   "size": [
+    128,
+    64
+   ],
+   "materials": [
+    "armor_bone_gloves_hcsb21"
+   ],
+   "triangles": 588,
+   "uv_layers": [
+    "UVMap-0"
+   ],
+   "files": {
+    "color": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake_mix\\armor_vong_gloves.png",
+    "mask": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake_mix\\armor_vong_gloves_mask.png"
+   }
+  },
+  "armor_vong_leggings": {
+   "mesh": "bone_s01/armor_bone_s01_leggings_m_l0.mgn",
+   "shaders": [
+    "armor_bone_leggings_hcsb21",
+    "armor_bone_leggings_waist_hcsb21"
+   ],
+   "size": [
+    256,
+    256
+   ],
+   "materials": [
+    "armor_bone_leggings_hcsb21",
+    "armor_bone_leggings_waist_hcsb21"
+   ],
+   "triangles": 758,
+   "uv_layers": [
+    "UVMap-0"
+   ],
+   "files": {
+    "color": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake_mix\\armor_vong_leggings.png",
+    "mask": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake_mix\\armor_vong_leggings_mask.png"
+   }
+  },
+  "armor_vongcrab_chest_s02": {
+   "mesh": "marauder_s02/armor_marauder_s02_chest_plate_m_l0.mgn",
+   "shaders": [
+    "armor_marauder_chest_s02_hcsb21",
+    "armor_marauder_chest_s02_hue_hc8"
+   ],
+   "size": [
+    256,
+    256
+   ],
+   "materials": [
+    "armor_marauder_chain_s02_apb15",
+    "armor_marauder_chest_s02_hcsb21",
+    "armor_marauder_chest_s02_hue_hc8"
+   ],
+   "triangles": 750,
+   "uv_layers": [
+    "UVMap-0"
+   ],
+   "files": {
+    "color": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake_mix\\armor_vongcrab_chest_s02.png",
+    "mask": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake_mix\\armor_vongcrab_chest_s02_mask.png"
+   }
+  }
+ }
+}

@@ -2,7 +2,9 @@
 
 Run inside Blender 3.6 with NSG SWG Tools enabled (the portable install's own config; never --factory-startup):
 
-    blender.exe -b --python bake_vonduu.py -- <folder with the male _l0 .mgn files> <swatch.png> <out folder> [scale]
+    blender.exe -b --python bake_vonduu.py -- <folder with the male _l0 .mgn files> <swatch.png> <out folder> [scale] [spec.json]
+
+Without a spec it bakes the chitin set below; spec_mix.json gives the owner's bone + marauder s02 mix (17 Oct).
 
 For each texture the warrior needs, it imports one stock mesh with the add-on's importer, keeps only the mesh's own UVs,
 and paints it with our swatch by box (triplanar) projection in object space, darkened by ambient occlusion from the
@@ -32,6 +34,9 @@ TARGETS = {
     'armor_vonduu_helmet': ('armor_chitin_s01_helmet_m_l0.mgn', 'armor_chitin_visor_hces24', (256, 256)),
     'armor_vonduu_leggings': ('armor_chitin_s01_leggings_m_l0.mgn', 'armor_chitin_leggings_hces24', (128, 256)),
 }
+
+if len(argv) > 4:   # a spec file: texture -> mesh (relative to the mesh folder), the shaders it covers, size
+    TARGETS = {k: (v['mesh'], v['shaders'], tuple(v['size'])) for k, v in json.load(open(argv[4]))['textures'].items()}
 
 import_mgn = importlib.import_module('io_scene_swg.import_mgn')
 
@@ -105,16 +110,17 @@ def throwaway_material(name):
 
 report = {}
 for tex_name, (mesh_file, shader, (w, h)) in TARGETS.items():
+    shaders = [shader] if isinstance(shader, str) else list(shader)
     results = {}
     for mode in ('color', 'mask'):
         clear_scene()
         import_mgn.import_mgn(bpy.context, os.path.join(MESH_DIR, mesh_file), global_matrix=Matrix.Identity(4))
         obj = [o for o in bpy.data.objects if o.type == 'MESH'][0]
         stock = [s.material.name if s.material else None for s in obj.material_slots]
-        assert shader in stock, (mesh_file, stock)
+        assert all(s in stock for s in shaders), (mesh_file, stock)
         target = bpy.data.images.new('%s_%s' % (tex_name, mode), w, h, alpha=False)
         for i, slot in enumerate(obj.material_slots):
-            slot.material = our_material('ours_%d' % i, target, mode) if stock[i] == shader else \
+            slot.material = our_material('ours_%d' % i, target, mode) if stock[i] in shaders else \
                 throwaway_material('skip_%d' % i)
         bpy.ops.object.select_all(action='DESELECT')
         obj.select_set(True)
@@ -126,7 +132,7 @@ for tex_name, (mesh_file, shader, (w, h)) in TARGETS.items():
         target.file_format = 'PNG'
         target.save()
         results[mode] = path
-    report[tex_name] = {'mesh': mesh_file, 'shader': shader, 'size': [w, h], 'materials': stock,
+    report[tex_name] = {'mesh': mesh_file, 'shaders': shaders, 'size': [w, h], 'materials': stock,
                         'triangles': len(obj.data.polygons), 'uv_layers': [u.name for u in obj.data.uv_layers],
                         'files': results}
     print('BAKED', tex_name, w, h, stock, len(obj.data.polygons), flush=True)

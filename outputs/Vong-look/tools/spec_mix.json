@@ -1,0 +1,17 @@
+{
+ "note": "Owner's pick, 17 Oct: bone arms and legs + marauder s02 chest ('Mix: bone + s02 collar'). Texture names are same-length renames for the step 4 clone (bone->vong, marauder->vongcrab). Sizes are the stock ones [width, height]. Mesh paths are relative to the lineup folder.",
+ "textures": {
+  "armor_vong_bicep": {"mesh": "bone_s01/armor_bone_s01_bicep_l_m_l0.mgn", "shaders": ["armor_bone_bicep_hcsb21"], "size": [256, 128]},
+  "armor_vong_bracer": {"mesh": "bone_s01/armor_bone_s01_bracer_l_m_l0.mgn", "shaders": ["armor_bone_bracer_hcsb21"], "size": [256, 128]},
+  "armor_vong_boots": {"mesh": "bone_s01/armor_bone_s01_boots_m_l0.mgn", "shaders": ["armor_bone_boots_hcsb21"], "size": [256, 128]},
+  "armor_vong_gloves": {"mesh": "bone_s01/armor_bone_s01_gloves_m_l0.mgn", "shaders": ["armor_bone_gloves_hcsb21"], "size": [128, 64]},
+  "armor_vong_leggings": {"mesh": "bone_s01/armor_bone_s01_leggings_m_l0.mgn", "shaders": ["armor_bone_leggings_hcsb21", "armor_bone_leggings_waist_hcsb21"], "size": [256, 256]},
+  "armor_vongcrab_chest_s02": {"mesh": "marauder_s02/armor_marauder_s02_chest_plate_m_l0.mgn", "shaders": ["armor_marauder_chest_s02_hcsb21", "armor_marauder_chest_s02_hue_hc8"], "size": [256, 256]}
+ },
+ "pieces": [
+  "bone_s01/armor_bone_s01_bicep_l_m_l0.mgn", "bone_s01/armor_bone_s01_bicep_r_m_l0.mgn",
+  "bone_s01/armor_bone_s01_bracer_l_m_l0.mgn", "bone_s01/armor_bone_s01_bracer_r_m_l0.mgn",
+  "bone_s01/armor_bone_s01_boots_m_l0.mgn", "bone_s01/armor_bone_s01_gloves_m_l0.mgn",
+  "bone_s01/armor_bone_s01_leggings_m_l0.mgn", "marauder_s02/armor_marauder_s02_chest_plate_m_l0.mgn"
+ ]
+}

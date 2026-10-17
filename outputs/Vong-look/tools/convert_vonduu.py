@@ -1,8 +1,9 @@
 """Turn the baked vonduun PNGs into the client's DDS files (Vong look test, step 3 output).
 
-    <ComfyUI's python_embeded>\\python.exe -I convert_vonduu.py [gamma]     (needs Pillow and numpy)
+    <ComfyUI's python_embeded>\\python.exe -I convert_vonduu.py [gamma] [spec.json bake-folder]     (needs Pillow, numpy)
 
-For each bake in ../bake it:
+With a spec (spec_mix.json) the texture list, sizes and the bake folder come from the arguments; mip counts are the full
+chain (log2 of the long side + 1), as on the stock armour textures. For each bake it:
 - lifts the midtones with a gamma (default 0.7);
 - sets alpha to 0, because the armour shader reads the colour texture's alpha as its hue mask: 0 = no palette tint,
   so our colours show as they are (pixel_program/h_color2_envmask_specmap_*.psh: hue = lerp(colour0, colour1, alpha));
@@ -11,6 +12,7 @@ For each bake in ../bake it:
 Then it checks each DDS: DXT5, the stock size and mip count, alpha 0, and colour within a small tolerance of the source.
 The output goes to ../staged/client/texture/ (gitignored; rebuild it with this script).
 """
+import json
 import os
 import struct
 import subprocess
@@ -32,6 +34,11 @@ TEXTURES = {
     'armor_vonduu_gloves': ((128, 128), 8), 'armor_vonduu_helmet': ((256, 256), 9),
     'armor_vonduu_leggings': ((128, 256), 9),
 }
+
+if len(sys.argv) > 3:
+    TEXTURES = {k: (tuple(v['size']), max(v['size']).bit_length())
+                for k, v in json.load(open(sys.argv[2]))['textures'].items()}
+    BAKE = sys.argv[3]
 
 os.makedirs(OUT, exist_ok=True)
 ok = True

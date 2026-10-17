@@ -384,6 +384,16 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-17 9:30 AM Claude: Vong look: chitin dropped; the owner picked a bone + marauder s02 mix, no helmet
+
+- **The owner on the chitin preview:** "that looks nothing like vong armor, no helmet". The stock shape was the problem, not the texture.
+- **Lineup of six stock sets** in the same finish (`Vong-look/lineup/lineup_sheet.png`). Acklay chitin turned out to be the same mesh as chitin.
+- **The owner picked "Mix: bone + s02 collar"**, plus our own Vong body later (a TRELLIS.2 draft rigged to the human skeleton).
+- **Bone and marauder shaders work the same way:** the colour alpha is the hue mask, so the textures carry alpha 0. The leggings' waist strip and the marauder chest take colour 0 from metal and cloth palettes, so step 4 rebinds those to `white.pal`.
+- **Six mix textures** baked, converted and checked (`spec_mix.json`), and a lit preview went to the owner.
+- **GPU:** only image generation uses the 5070; Blender runs on the CPU by design. Blender 3.6 does list the 5070 for CUDA and OptiX (untested).
+- **Next:** the owner's view of the mix preview, then step 4 for the mix.
+
 ### 2026-10-17 9:05 AM Claude: Vong look test step 3: swatch 12 baked onto the chitin armour; seven DDS staged
 
 - **The stock chitin shader** (`h_color2_envmask_specmap`) reads the colour texture's alpha as its hue mask, so our textures carry alpha 0 (no tint) in DXT5. The stock `_spec` and env maps stay referenced.

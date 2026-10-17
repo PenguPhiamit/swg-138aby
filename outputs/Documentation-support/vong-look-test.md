@@ -5,10 +5,45 @@ ossus, or should we do another local project to test things?" On the decision ca
 That means the local model's first real job is a Vong warrior's look. One warrior stands at the Ossus Project fields for
 the owner to see, and patrols come after that look.
 
-**Status, 17 Oct about 9:05 AM: steps 1-3 done. Swatch 12 is baked onto the armour, and seven DDS files are staged and
-checked.** Next is step 4, the clone chain. Nothing has been built into an archive or installed in the game. The owner
-asked whether this uses their GPU or RAM: the image runs used the GPU (peak 11.5 of 12.2 GB); the bake and the preview
-run Blender on the CPU only (10-16 s, small RAM).
+**Status, 17 Oct about 9:30 AM: the base shape is now a mix, bone arms and legs plus the marauder s02 chest, with no
+helmet.** Six DDS files are staged and checked, and a lit preview went to the owner. Next is the owner's view of it,
+then step 4, the clone chain for the mix. Nothing has been built into an archive or installed in the game.
+
+**Why the chitin version was dropped (owner, after its preview):** "that looks nothing like vong armor, no helmet".
+- **The shape was the problem.** The stock chitin armour's squared plates, shoulder pads and visor helmet read as
+  sci-fi plate whatever the texture.
+- **Lineup** (`Vong-look/tools/lineup_vonduu.py`; `Vong-look/lineup/lineup_sheet.png`). There are 47 stock armour sets
+  in the client, almost all trooper or sci-fi plate. Six were rendered in the same swatch-12 finish with no helmets, at
+  the same scale: bone s01, marauder s01 (long coat), s02 (spiky collar), s03 (fanned shoulder spikes), acklay chitin
+  and chitin s01. **Acklay chitin is the same mesh as chitin s01**, just a different texture.
+- **Owner's pick: "Mix: bone + s02 collar".** Each armour piece is its own wearable, so a mix needs no mesh edits.
+  Owner, on the way forward: the lineup now, our own Vong body (TRELLIS.2 draft, rigged to the human skeleton) later.
+- **No helmet (owner):** the warrior is bare-headed. A bald human head in the palest stock skin tone comes first;
+  scars, tattoos and eye sacs are a later head texture.
+
+**The mix's shaders (read from the client).**
+- **Bone** uses `h_color2_specmap_bump`. **The marauder chest** uses `h_color2_specmap_bump_aniso`, plus a cut-out
+  chainmail part (`a_punchout_bump`, which keeps its stock texture).
+- **Both pixel programs work like chitin's:** the colour texture's alpha is the hue mask, and the normal map's
+  (`_n.dds`) alpha is the specular mask. So our textures carry alpha 0 again. The stock normal maps stay referenced:
+  the bone and marauder relief lights over our colour.
+- **Two parts take colour 0 from a palette other than `white.pal`:** the bone leggings' waist strip (`wr_metal.pal`)
+  and the marauder chest (`wr_metal.pal` and `wr_cloth_general.pal`). They will carry that palette's default tint until
+  step 4 rebinds colour 0 to `palette/white.pal` in our cloned shaders, as the ice rancor's builder did for its palette.
+- **The bake:** `bake_vonduu.py`, `convert_vonduu.py` and `preview_vonduu.py` now take a spec file (`spec_mix.json`).
+  Names are same-length renames for step 4: `armor_bone_*` -> `armor_vong_*` and `armor_marauder_*` ->
+  `armor_vongcrab_*`.
+  - Six textures: bicep, bracer and boots 256x128; gloves 128x64; leggings 256x256 (both leggings shaders); and the
+    chest 256x256 (both chest shaders).
+  - All pass: DXT5, the stock size, full mips (9, gloves 8), alpha 0, colour error 2.0-2.7.
+  - The orientation proof was not repeated for the mix: the same importer and bake code are used.
+- **GPU or CPU (owner, twice):** only the image runs use the RTX 5070, at about 4 s an image, so the spikes are short.
+  The bakes, previews and the lineup run Blender on the CPU by design (10-23 s each), to leave the card free. Blender
+  3.6 does list the 5070 for CUDA and OptiX, so a GPU switch is possible; whether it works on the 50-series is
+  untested.
+
+**The earlier chitin status (9:05 AM), kept for the record:** steps 1-3 were done on the chitin armour, with seven DDS
+files staged and checked.
 
 **Step 3 results (8:58 to 9:05 AM, Blender 3.6.23 on the CPU).**
 - **What the armour shader does** (read from the client: `effect/h_color2_envmask_specmap.eft` and its pixel programs):
