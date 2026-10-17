@@ -211,8 +211,30 @@ class PrecheckTests(unittest.TestCase):
             {'point': 'skill needed', 'old': '3', 'new': '5'}]}])
         self.assertIn('| skill needed | 3 | 5 |', body)
 
+    def test_test_index_takes_section_three_only(self):
+        (self.root / 'camps' / 'report.md').write_text('## 2. How it works\nnot this\n## 3. What a bot test should check\n'
+                                                       '- Place a camp kit; expect "camp placed".\n## 4. Likely reasons\nnot this\n')
+        lines = dict(local_jobs.precheck.test_index_lines(self.root))
+        self.assertEqual(lines, {'camps': '- Place a camp kit; expect "camp placed".'})
+        body = local_jobs.precheck.test_index_report(lines, [{'id': 'camps', 'checks': [
+            {'setup': 'scout with a kit', 'do': 'use the kit', 'expect': 'camp placed'}]}])
+        self.assertIn('| scout with a kit | use the kit | camp placed |', body)
+
+    def test_scenario_review_flags_unknown_commands_without_the_model(self):
+        folder = self.root / 'scenarios'
+        folder.mkdir()
+        (folder / 'a-test.py').write_text("def run(g):\n    bot.slash('agentGear', 'kit')\n    bot.slash('flyToTheMoon')\n")
+        lines, unknown = local_jobs.precheck.scenario_lines(folder, known={'agentgear'})
+        self.assertEqual(unknown, {'a-test.py': ['flyToTheMoon']})
+        self.assertEqual([i for i, _ in lines], ['a-test.py#1'])
+        self.assertIn("COMMANDS THE SERVER DOES NOT KNOW: flyToTheMoon CODE: def run(g): ¶     bot.slash('agentGear'", lines[0][1])
+        body = local_jobs.precheck.scenario_report(dict(lines), [{'id': 'a-test.py#1', 'findings': [
+            {'where': 'run', 'problem': 'no check after the command', 'why': 'the test always passes'}]}], unknown)
+        self.assertIn('- `a-test.py`: flyToTheMoon', body)
+        self.assertIn('| run | no check after the command | the test always passes |', body)
+
     def test_both_jobs_are_known_to_local_jobs(self):
-        for job in ('claim-check', 'report-diff'):
+        for job in ('claim-check', 'report-diff', 'test-index', 'scenario-review'):
             self.assertIn(job, local_jobs.INSTRUCTIONS)
             self.assertIn('JSON only', local_jobs.INSTRUCTIONS[job])
 

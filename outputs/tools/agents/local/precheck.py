@@ -27,7 +27,11 @@ CORE3 = Path('/opt/swg/Core3-dev/MMOCoreORB')
 CITE = re.compile(r'(?<![\w/.-])((?:[\w.-]+/)*[\w-]+\.(?:cpp|h|idl|lua|py))((?::\d+(?:-\d+)?)(?:,\s*\d+(?:-\d+)?)*)')
 NUMBERED = re.compile(r'^\s*(\d+)\| ?(.*)$')
 MAX_CLAIMS, MAX_LINES, CONTEXT = 40, 24, 2   # per report; cited lines shown per claim; lines around a single-line cite
-SKIP_TOPICS = {'report-precheck', 'report-diff'}
+SKIP_TOPICS = {'report-precheck', 'report-diff', 'test-index', 'scenario-review'}
+AUDIT = OUTPUTS / 'tools' / 'core3_audit' / 'command_audit.json'
+SLASH = re.compile(r"""\.slash\(\s*['"]([A-Za-z0-9_]+)""")
+SECTION3 = re.compile(r'^(#+)\s*(?:3[.)]?\s*)?what a (?:[\w-]+ )?test should check', re.I)
+SCENARIO_PART = 14000   # characters of a scenario per chunk
 
 INSTRUCTIONS = {
     'claim-check': """You check claims in research notes about a game server's source code (SWGEmu Core3: C++ and Lua).
@@ -45,8 +49,22 @@ saying something works that the other says doesn't. Ignore wording, order, and p
 10 per input. Answer with JSON only:
 {"items": [{"id": "<id exactly as given>", "disagreements": [{"point": "<what it is about>", "old": "<OLD says>",
 "new": "<NEW says>"}]}]}. If they agree: "disagreements": [].""",
+    'test-index': """You turn research notes into bot test steps for a Star Wars Galaxies emulator test server. Each input
+line is "<id>\t<the notes' section 'What a bot test should check'>", where " ¶ " marks a line break. Write each check as
+one step: the setup it needs, what the bot does, and what it should observe (a system message, a state, an item, a
+number). Keep numbers, command names and message ids exactly as written; leave out anything that is not a check. At
+most 8 per input. Answer with JSON only:
+{"items": [{"id": "<id exactly as given>", "checks": [{"setup": "...", "do": "...", "expect": "..."}]}]}""",
+    'scenario-review': """You review part of a Python test scenario that drives a bot on a Star Wars Galaxies emulator
+test server (SWGEmu Core3). Each input line is "<id>\tCOMMANDS THE SERVER DOES NOT KNOW: <list or none> CODE: <the
+code>", where " ¶ " marks a line break. bot.slash(name, ...) sends a server command; g.check(label, ok, detail) records
+a pass or fail. List real problems only: a command the server does not know, a check that can never fail or never
+pass, a wait with no timeout, a result read before it can arrive, a wrong comparison, a variable used before it is set,
+or a step that leaves the bot stuck for the next test. Ignore style. At most 6 per input. Answer with JSON only:
+{"items": [{"id": "<id exactly as given>", "findings": [{"where": "<function name or a short quote of the code>",
+"problem": "<what is wrong>", "why": "<what happens because of it>"}]}]}. If nothing is wrong: "findings": [].""",
 }
-CHUNK = {'claim-check': 4, 'report-diff': 1}
+CHUNK = {'claim-check': 4, 'report-diff': 1, 'test-index': 1, 'scenario-review': 1}
 
 
 def flat(text, cap):
@@ -217,6 +235,104 @@ def diff_report(lines, items):
                     f'| {cell(d.get("point", ""), 80)} | {cell(d.get("old", ""), 200)} | {cell(d.get("new", ""), 200)} |'
                     for d in rows), '']
     return '\n'.join(out) + '\n' if out else 'No topic has both an older and a newer report.\n'
+
+
+def test_index_lines(root=RESEARCH):
+    """[(topic, section 3 of its report)] for every research report that has that section."""
+    out = []
+    for tid, folder in topics(root):
+        rows, level = [], 0   # level: the heading's depth once inside section 3; a sub-heading stays in it
+        for row in (folder / 'report.md').read_text(encoding='utf-8', errors='replace').split('\n'):
+            m = SECTION3.match(row.strip())
+            if m and not level:
+                level = len(m.group(1))
+                continue
+            depth = len(row.strip()) - len(row.strip().lstrip('#'))
+            if level and depth and depth <= level:
+                break
+            inside = bool(level)
+            if inside and row.strip():
+                rows.append(row.strip())
+        if rows:
+            out.append((tid, flat(' ¶ '.join(rows), 5000)))
+    return out
+
+
+def known_commands(path=AUDIT):
+    try:
+        return {r['command'].lower() for r in json.loads(path.read_text(encoding='utf-8'))['rows']}
+    except (OSError, ValueError, KeyError):
+        return None   # without the audit, no command is called unknown
+
+
+def scenario_lines(folder=SCENARIOS / 'scenarios', known=None):
+    """([(file#part, chunk text)], {file: [commands the server doesn't know]}) for every bot scenario."""
+    known = known_commands() if known is None else known
+    lines, unknown = [], {}
+    for path in sorted(Path(folder).glob('*.py')):
+        code = path.read_text(encoding='utf-8', errors='replace')
+        missing = sorted({c for c in SLASH.findall(code) if known is not None and c.lower() not in known})
+        if missing:
+            unknown[path.name] = missing
+        # one line per chunk, but keep the indentation: Python's blocks are in it
+        text = ' ¶ '.join(line.rstrip().replace('\t', '    ') for line in code.split('\n'))
+        parts = [text[i:i + SCENARIO_PART] for i in range(0, len(text), SCENARIO_PART)] or ['']
+        for n, part in enumerate(parts, 1):
+            lines.append((f'{path.name}#{n}', f'COMMANDS THE SERVER DOES NOT KNOW: {", ".join(missing) or "none"} '
+                                              f'CODE: {part}'))
+    return lines, unknown
+
+
+def test_index_report(lines, items):
+    out = ['Steps drafted from section 3 of each research report. Check a step against its report before a '
+           'scenario uses it.', '']
+    for i in sorted((i for i in items if i['id'] in lines), key=lambda i: i['id']):
+        rows = [c for c in (i.get('checks') or []) if isinstance(c, dict)]
+        if rows:
+            out += [f'## {i["id"]}', '', '| Setup | Bot does | Expect |', '|---|---|---|']
+            out += [f'| {cell(c.get("setup", ""), 160)} | {cell(c.get("do", ""), 160)} | {cell(c.get("expect", ""), 200)} |'
+                    for c in rows]
+            out.append('')
+    return '\n'.join(out) + '\n'
+
+
+def scenario_report(lines, items, unknown):
+    out = ['A first pass over the bot scenarios. Each finding is a lead to check in the code, not a confirmed bug.', '']
+    if unknown:
+        out += ['## Commands the server does not know (found without the model)', '']
+        out += [f'- `{name}`: {", ".join(cmds)}' for name, cmds in sorted(unknown.items())] + ['']
+    for i in sorted((i for i in items if i['id'] in lines), key=lambda i: i['id']):
+        rows = [f for f in (i.get('findings') or []) if isinstance(f, dict)]
+        if rows:
+            out += [f'## {i["id"]}', '', '| Where | Problem | Why it matters |', '|---|---|---|']
+            out += [f'| {cell(f.get("where", ""), 100)} | {cell(f.get("problem", ""), 200)} | {cell(f.get("why", ""), 200)} |'
+                    for f in rows]
+            out.append('')
+    return '\n'.join(out) + '\n'
+
+
+def job_lines(job, folder):
+    """The (id, text) lines for one of this module's jobs; side files for the report go into folder."""
+    if job == 'claim-check':   # the citations that can't be resolved are listed without the model
+        lines, problems = claim_lines()
+        (folder / 'citation-problems.json').write_text(json.dumps(problems, indent=1, ensure_ascii=False), encoding='utf-8')
+        return lines
+    if job == 'scenario-review':
+        lines, unknown = scenario_lines()
+        (folder / 'unknown-commands.json').write_text(json.dumps(unknown, indent=1), encoding='utf-8')
+        return lines
+    return diff_lines() if job == 'report-diff' else test_index_lines()
+
+
+def job_report(job, folder, lines, items):
+    def side(name, default):
+        path = folder / name
+        return json.loads(path.read_text(encoding='utf-8')) if path.exists() else default
+    if job == 'claim-check':
+        return claim_report(lines, items, side('citation-problems.json', []))
+    if job == 'scenario-review':
+        return scenario_report(lines, items, side('unknown-commands.json', {}))
+    return diff_report(lines, items) if job == 'report-diff' else test_index_report(lines, items)
 
 
 if __name__ == '__main__':   # a dry run: how many claims and problems there would be, without the model

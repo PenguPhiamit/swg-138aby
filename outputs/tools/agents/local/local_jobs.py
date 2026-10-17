@@ -22,6 +22,9 @@ Jobs:
   era-check  (17 Oct) The proofread lines again, checked for text that doesn't fit 138-139 ABY. Model: qwen3.6:35b-a3b.
   claim-check, report-diff  (17 Oct) First-pass checks of the research reports themselves (precheck.py): each cited
              claim against its cited lines, and each rerun report against the one before it. Model: qwen3.5:9b.
+  test-index (17 Oct) Section 3 of every research report as setup / do / expect steps, for the test plan.
+  scenario-review  (17 Oct; ChatGPT is out until 22 Oct) A first pass over tools/bots/scenarios/*.py: commands the
+             server doesn't know (from the command audit, no model) and likely logic bugs. Model: qwen3.6:35b-a3b.
 All are drafts by a local model: Claude or ChatGPT checks an item before acting on it, and every dialogue or chat
 line is reviewed before it goes into the game.
 """
@@ -277,12 +280,8 @@ def lines_for(job, folder):
         return npc_briefs(folder)
     if job == 'report-digest':
         return run_reports()
-    if job == 'claim-check':   # the citations that can't be resolved are listed without the model
-        lines, problems = precheck.claim_lines()
-        (folder / 'citation-problems.json').write_text(json.dumps(problems, indent=1, ensure_ascii=False), encoding='utf-8')
-        return lines
-    if job == 'report-diff':
-        return precheck.diff_lines()
+    if job in precheck.INSTRUCTIONS:   # claim-check, report-diff, test-index, scenario-review
+        return precheck.job_lines(job, folder)
     return bot_notes()
 
 
@@ -342,11 +341,8 @@ def report(job, folder):
             + ''.join(f'- WATCH: {cell(t, 160)}\n' for t in (i.get('watch') or []))
             + ''.join(f'- Change: {cell(t, 160)}\n' for t in (i.get('changes') or [])) + '\n'
             for i in sorted(items, key=lambda i: i['id']))
-    elif job == 'claim-check':
-        problems = folder / 'citation-problems.json'
-        body = precheck.claim_report(lines, items, json.loads(problems.read_text(encoding='utf-8')) if problems.exists() else [])
-    elif job == 'report-diff':
-        body = precheck.diff_report(lines, items)
+    elif job in precheck.INSTRUCTIONS:
+        body = precheck.job_report(job, folder, lines, items)
     elif job == 'era-check':
         body = '| String | Text now | Problem | Why |\n|---|---|---|---|\n' + ''.join(
             f'| `{i["id"]}` | {cell(lines[i["id"]], 140)} | {cell(i.get("problem", ""), 80)} | {cell(i.get("why", ""), 160)} |\n'
