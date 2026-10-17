@@ -1,0 +1,123 @@
+Core3-dev 7be8837a, 17 Oct 2026 6:38 AM
+ok   mobile commoner_tatooine_patrol
+ok   mobile commoner_old_patrol
+ok   mobile commoner_fat_patrol
+ok   mobile commoner_technician_patrol
+ok   mobile explorer_patrol
+ok   mobile gambler_patrol
+ok   mobile commoner_tatooine
+ok   mobile commoner_old
+ok   mobile commoner_fat
+ok   mobile commoner_technician
+ok   mobile patron_nikto
+ok   mobile twilek_slave
+ok   mobile businessman
+ok   mobile criminal
+ok   mobile gambler
+ok   mobile info_broker
+ok   mobile mercenary
+ok   mobile pilot
+ok   mobile scavenger
+ok   mobile bounty_hunter
+ok   mobile noble
+ok   mobile smuggler_cargo_handler
+ok   mobile gamorrean_guard
+ok   mobile smuggler
+ok   mobile weequay_captain
+ok   mobile smuggler_guard
+ok   mobile spice_collective_sentry
+ok   mobile spice_collective_foreman
+ok   mobile aakuan_spice_guard
+ok   mobile spice_collective_heavy_guard
+ok   mobile spice_fiend
+ok   mobile hutt_expeditonary_force_member
+ok   mobile hutt_expeditonary_force_leader
+ok   mobile igbi_hutt_operative
+ok   mobile nurla_hutt_gangster
+ok   new mobile hutta_rodian_trader
+ok   no clash hutta_rodian_trader
+ok   new mobile hutta_old_weequay
+ok   no clash hutta_old_weequay
+ok   new mobile hutta_twilek_attendant
+ok   no clash hutta_twilek_attendant
+ok   new mobile hutta_swamp_beggar
+ok   no clash hutta_swamp_beggar
+ok   new mobile hutta_nikto_dockhand
+ok   no clash hutta_nikto_dockhand
+ok   new mobile hutta_hutt_noble_kessoth
+ok   no clash hutta_hutt_noble_kessoth
+ok   new mobile hutta_hutt_noble_dromuul
+ok   no clash hutta_hutt_noble_dromuul
+ok   new mobile hutta_kessoth_majordomo
+ok   no clash hutta_kessoth_majordomo
+ok   new mobile hutta_weequay_watch
+ok   no clash hutta_weequay_watch
+ok   new mobile hutta_cantina_dancer
+ok   no clash hutta_cantina_dancer
+ok   new mobile hutta_camp_boss
+ok   no clash hutta_camp_boss
+ok   new mobile hutta_spice_baron
+ok   no clash hutta_spice_baron
+ok   lair naboo_sharupat_pack_diseased_neutral_none
+ok   lair naboo_veermok_marauder_neutral_none
+ok   lair rori_borgle_pack_neutral_none
+ok   lair rori_leviasquall_pack_neutral_none
+ok   lair rori_midnight_vir_vur_pack_neutral_none
+ok   lair rori_swamp_tusk_cat_hunt_neutral_none
+ok   lair talus_fynock_pack_neutral_none
+ok   lair talus_guf_drolg_pack_neutral_none
+ok   lair talus_jungle_fynock_pack_neutral_none
+ok   lair talus_mutated_kahmurra_pack_neutral_none
+ok   lair talus_rot_mite_pack_neutral_none
+ok   lair talus_savage_guf_drolg_pack_neutral_none
+ok   template object/active_area.iff
+ok   template object/building/poi/naboo_ruins_medium_1.iff
+ok   template object/building/poi/naboo_swamp_rat_gang_camp_medium.iff
+ok   template object/building/poi/tatooine_hutt_assassin_camp_medium1.iff
+ok   template object/building/poi/tatooine_spicefiend_medium.iff
+ok   template object/mobile/dressed_binayre_scalawag_twk_male_01.iff
+ok   template object/mobile/dressed_blood_razor_pirate_captain_nikto_m.iff
+ok   template object/mobile/dressed_commoner_fat_twilek_male_01.iff
+ok   template object/mobile/dressed_commoner_naboo_twilek_female_01.iff
+ok   template object/mobile/dressed_commoner_old_twilek_male_01.iff
+ok   template object/mobile/dressed_commoner_tatooine_rodian_male_01.iff
+ok   template object/mobile/dressed_dancer_trainer_twk_female_01.iff
+ok   template object/mobile/dressed_patron_nikto_01.iff
+ok   template object/mobile/dressed_tatooine_weequay_thug.iff
+ok   template object/mobile/hutt_female.iff
+ok   template object/mobile/hutt_male.iff
+ok   template object/static/space/debris/cargo_destroyed_small_a.iff
+ok   template object/tangible/destructible/wreckage/wreck_starship_small_01.iff
+ok   template object/tangible/wearables/vest/vest_hutt_gang_s01.iff
+ok   loot thug_tier_1
+ok   loot weequay_tier_1
+ok   loot aakuans_tier_1
+ok   socialGroup thug
+ok   faction thug
+ok   weapon group rebel_weapons_heavy
+ok   mood themepark_oola (stock use)
+ok   conversation hutta_rodian_trader
+ok   conversation hutta_old_weequay
+ok   conversation hutta_twilek_attendant
+ok   conversation hutta_swamp_beggar
+ok   conversation hutta_nikto_dockhand
+ok   conversation hutta_hutt_noble
+ok   conversation hutta_kessoth_majordomo
+ok   lua global getWorldFloor
+ok   lua global spawnActiveArea
+ok   lua global readScreenPlayData
+ok   lua global writeScreenPlayData
+ok   lua global getSceneObject
+ok   method isInRangeWithObject
+ok   method isPlayerCreature
+ok   method getGroupSize
+ok   method getGroupMember
+ok   method isGrouped
+ok   method addCashCredits
+ok   method setCustomObjectName
+ok   method getSlottedObject
+ok   method isContainerFullRecursive
+ok   removeWaypointBySpecialType
+ok   BuildingObject getCell
+ok   WAYPOINTQUESTTASK constant (stock use)
+121 passed, 0 failed

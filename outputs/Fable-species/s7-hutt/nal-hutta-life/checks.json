@@ -1,0 +1,94 @@
+{
+ "base": {
+  "path": "work/chain-1017/local_planets-chain-1017.tre",
+  "bytes": 5308425,
+  "sha256": "f0191ab533911c7cd91df667d79a6b589fbab210e2982db456385a5610019808",
+  "entries": 201
+ },
+ "out": {
+  "path": "work/nal-hutta-life/local_planets-nalhutta-life.tre",
+  "bytes": 5308921,
+  "sha256": "b01e9f44aeba99f2ceb9878d1328792da0707a53dba3f30de4e657ea66e47f87",
+  "entries": 201
+ },
+ "untouched_identical": 200,
+ "changed": [
+  "datatables/resource/resource_tree.iff"
+ ],
+ "new": [],
+ "dropped": [],
+ "tree": {
+  "rows_before": 845,
+  "rows_after": 890,
+  "rori_leaves": 45,
+  "hutta_rows": 45,
+  "every_old_row_kept": true,
+  "merge": {
+   "action": "added",
+   "rows": 890,
+   "added": 45,
+   "first": [
+    [
+     "milk_domesticated_hutta",
+     "Nal Hutta Domesticated Milk"
+    ],
+    [
+     "milk_wild_hutta",
+     "Nal Hutta Wild Milk"
+    ],
+    [
+     "meat_domesticated_hutta",
+     "Nal Hutta Domesticated Meat"
+    ]
+   ],
+   "ancestors_bumped": 77
+  },
+  "hutta_names": {
+   "milk_domesticated_hutta": "Nal Hutta Domesticated Milk",
+   "milk_wild_hutta": "Nal Hutta Wild Milk",
+   "meat_domesticated_hutta": "Nal Hutta Domesticated Meat",
+   "meat_wild_hutta": "Nal Hutta Wild Meat",
+   "meat_herbivore_hutta": "Nal Hutta Herbivore Meat",
+   "meat_carnivore_hutta": "Nal Hutta Carnivore Meat",
+   "meat_reptilian_hutta": "Nal Hutta Reptillian Meat",
+   "meat_avian_hutta": "Nal Hutta Avian Meat",
+   "meat_egg_hutta": "Nal Hutta Egg",
+   "meat_insect_hutta": "Nal Hutta Insect Meat",
+   "seafood_fish_hutta": "Nal Hutta Fish Meat",
+   "seafood_crustacean_hutta": "Nal Hutta Crustacean Meat",
+   "seafood_mollusk_hutta": "Nal Hutta Mollusk Meat",
+   "bone_mammal_hutta": "Nal Hutta  Animal Bones",
+   "bone_avian_hutta": "Nal Hutta Avian Bones",
+   "bone_horn_hutta": "Nal Hutta Horn",
+   "hide_wooly_hutta": "Nal Hutta Wooly Hide",
+   "hide_bristley_hutta": "Nal Hutta Bristley Hide",
+   "hide_leathery_hutta": "Nal Hutta Leathery Hide",
+   "hide_scaley_hutta": "Nal Hutta Scaley Hide",
+   "corn_domesticated_hutta": "Nal Hutta Domesticated Corn",
+   "corn_wild_hutta": "Nal Hutta Wild Corn",
+   "rice_domesticated_hutta": "Nal Hutta Domesticated Rice",
+   "rice_wild_hutta": "Nal Hutta Wild Rice",
+   "oats_domesticated_hutta": "Nal Hutta Domesticated Oats",
+   "oats_wild_hutta": "Nal Hutta Wild Oats",
+   "wheat_domesticated_hutta": "Nal Hutta Domesticated Wheat",
+   "wheat_wild_hutta": "Nal Hutta Wild Wheat",
+   "vegetable_greens_hutta": "Nal Hutta Vegetable Greens",
+   "vegetable_beans_hutta": "Nal Hutta Vegetable Beans",
+   "vegetable_tubers_hutta": "Nal Hutta Vegetable Tubers",
+   "vegetable_fungi_hutta": "Nal Hutta Vegetable Fungus",
+   "fruit_fruits_hutta": "Nal Hutta Fruit",
+   "fruit_berries_hutta": "Nal Hutta Berry Fruit",
+   "fruit_flowers_hutta": "Nal Hutta Flower Fruit",
+   "wood_deciduous_hutta": "Nal Hutta Deciduous Wood",
+   "softwood_conifer_hutta": "Nal Hutta Conifer Wood",
+   "softwood_evergreen_hutta": "Nal Hutta Evergreen Wood",
+   "fiberplast_hutta": "Nal Hutta Fiberplast",
+   "water_vapor_hutta": "Nal Hutta Water Vapor",
+   "energy_renewable_site_limited_tidal_hutta": "Nal Hutta Tidal Renewable Energy",
+   "energy_renewable_site_limited_hydron3_hutta": "Nal Hutta Hydron-3 Renewable Energy",
+   "energy_renewable_site_limited_geothermal_hutta": "Nal Hutta Geothermal Renewable Energy",
+   "energy_renewable_unlimited_wind_hutta": "Nal Hutta Wind Renewable Energy",
+   "energy_renewable_unlimited_solar_hutta": "Nal Hutta Solar Renewable Energy"
+  }
+ }
+}

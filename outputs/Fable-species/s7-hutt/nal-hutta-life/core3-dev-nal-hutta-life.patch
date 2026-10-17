@@ -1,0 +1,1078 @@
+diff --git a/MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua b/MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua
+--- a/MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua
++++ b/MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua
+@@ -5,7 +5,9 @@
+ -- no-build circle keeps r 600.
+ -- PL-04 (17 Oct 2026; outputs/Fable-species/s7-hutt/nal-hutta-home.md): the swamp spawns. Three rings round the town,
+ -- habitat spawners only (no world fallback): the near swamp 650-1,600 m (levels 19-25), the lowlands 1,600-3,200 m
+--- (31-38) and the deep swamp 3,200-5,200 m (37-56). The inner edge stays 50 m outside the no-build circle. Lairs never
++-- (31-38) and the deep swamp 3,200-5,200 m (37-56).
++-- PL-06 (17 Oct 2026): the owner found the planet empty; each ring's spawn limit is doubled or nearly (48 -> 96,
++-- 64 -> 112, 64 -> 96) and its group gains four wandering packs. The inner edge stays 50 m outside the no-build circle. Lairs never
+ -- spawn in the 75 m water (PlanetManager::isSpawningPermittedAt), so only the dry ground of each ring fills.
+ hutta_regions = {
+ 	-- No Build Zones
+@@ -19,7 +21,7 @@
+ 	{"hutta_bilbousa_nobuild", -747, 1556, {CIRCLE, 600}, NOBUILDZONEAREA},
+ 
+ 	-- The swamp (PL-04)
+-	{"hutta_lowlands_near", -747, 1556, {RING, 650, 1600}, SPAWNAREA, {"hutta_lowlands_near"}, 48},
+-	{"hutta_lowlands_mid", -747, 1556, {RING, 1600, 3200}, SPAWNAREA, {"hutta_lowlands_mid"}, 64},
+-	{"hutta_deep_swamp", -747, 1556, {RING, 3200, 5200}, SPAWNAREA, {"hutta_deep_swamp"}, 64},
++	{"hutta_lowlands_near", -747, 1556, {RING, 650, 1600}, SPAWNAREA, {"hutta_lowlands_near"}, 96},
++	{"hutta_lowlands_mid", -747, 1556, {RING, 1600, 3200}, SPAWNAREA, {"hutta_lowlands_mid"}, 112},
++	{"hutta_deep_swamp", -747, 1556, {RING, 3200, 5200}, SPAWNAREA, {"hutta_deep_swamp"}, 96},
+ }
+diff --git a/MMOCoreORB/bin/scripts/managers/resource_manager.lua b/MMOCoreORB/bin/scripts/managers/resource_manager.lua
+--- a/MMOCoreORB/bin/scripts/managers/resource_manager.lua
++++ b/MMOCoreORB/bin/scripts/managers/resource_manager.lua
+@@ -48,7 +48,11 @@
+ -- resource_tree.iff in local_planets.tre (MTG's 50 + solar/wind cloned from Endor), so this needs that archive.
+ -- Sandbox Ossus (14 Oct 2026, Fable O5): ossus added; its 45 native types are in the merged resource_tree.iff of the
+ -- test-session local_planets.tre (stage_ossus, O4). Give it backfillZones = "hoth,ossus" for its first start (test_galaxy.py).
+-activeZones = "corellia,tatooine,lok,naboo,rori,endor,talus,yavin4,dathomir,dantooine,hoth,ossus"
++-- Nal Hutta (PL-06, 17 Oct 2026, Claude): hutta added. It was missing, so the planet had no resources at all and the
++-- test galaxy logged "backfillZones: hutta is not in activeZones, ignored". Its 45 planet types (water, flora,
++-- creature, energy: Rori's rows cloned, the planet was made from Rori) are in the merged resource_tree.iff of
++-- local_planets.tre (nal-hutta-life/build_nal_hutta_life.py); this needs that archive.
++activeZones = "corellia,tatooine,lok,naboo,rori,endor,talus,yavin4,dathomir,dantooine,hoth,ossus,hutta"
+ 
+ -- Zones (from activeZones) that take a fair share of the spawns already in shift when the server starts: a planet
+ -- added to activeZones otherwise waits for every galaxy-wide spawn to expire (6-11 days) before minerals, gas and
+diff --git a/MMOCoreORB/bin/scripts/screenplays/screenplays.lua b/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
+--- a/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
++++ b/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
+@@ -751,3 +751,5 @@
+ includeFile("sandbox/ossus_people.lua")
+ includeFile("sandbox/hutta_home_places.lua")
+ includeFile("sandbox/hutta_home.lua")
++includeFile("sandbox/hutta_life_places.lua")
++includeFile("sandbox/hutta_life.lua")
+diff --git a/MMOCoreORB/bin/scripts/mobile/serverobjects.lua b/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
+--- a/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
+@@ -61,3 +61,4 @@
+ includeFile("sandbox/ossus_people.lua")
+ -- Nal Hutta as the Hutt home (PL-04)
+ includeFile("sandbox/hutta_home.lua")
++includeFile("sandbox/hutta_life.lua")
+diff --git a/MMOCoreORB/bin/scripts/mobile/conversations.lua b/MMOCoreORB/bin/scripts/mobile/conversations.lua
+--- a/MMOCoreORB/bin/scripts/mobile/conversations.lua
++++ b/MMOCoreORB/bin/scripts/mobile/conversations.lua
+@@ -342,3 +342,4 @@
+ includeFile("conversations/sandbox/sandbox_big_game_hunter_conv.lua")
+ includeFile("conversations/sandbox/ossus_people_conv.lua")
+ includeFile("conversations/sandbox/hutta_home_conv.lua")
++includeFile("conversations/sandbox/hutta_life_conv.lua")
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_near.lua b/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_near.lua
+--- a/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_near.lua
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_near.lua
+@@ -58,6 +58,43 @@
+ 			weighting = 10,
+ 			size = 25,
+ 		},
++		-- PL-06 (17 Oct 2026): wandering packs, so the ring feels alive between the lairs
++		{
++			lairTemplateName = "rori_swamp_tusk_cat_hunt_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 20,
++			maxDifficulty = 26,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
++		{
++			lairTemplateName = "talus_rot_mite_pack_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 19,
++			maxDifficulty = 24,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
++		{
++			lairTemplateName = "rori_borgle_pack_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 19,
++			maxDifficulty = 24,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
++		{
++			lairTemplateName = "talus_fynock_pack_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 21,
++			maxDifficulty = 26,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
+ 	}
+ }
+ 
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_mid.lua b/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_mid.lua
+--- a/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_mid.lua
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_mid.lua
+@@ -66,6 +66,43 @@
+ 			weighting = 10,
+ 			size = 20,
+ 		},
++		-- PL-06 (17 Oct 2026): wandering packs, so the ring feels alive between the lairs
++		{
++			lairTemplateName = "talus_guf_drolg_pack_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 31,
++			maxDifficulty = 36,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
++		{
++			lairTemplateName = "rori_leviasquall_pack_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 32,
++			maxDifficulty = 37,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
++		{
++			lairTemplateName = "naboo_sharupat_pack_diseased_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 31,
++			maxDifficulty = 36,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
++		{
++			lairTemplateName = "talus_jungle_fynock_pack_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 33,
++			maxDifficulty = 38,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
+ 	}
+ }
+ 
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_deep_swamp.lua b/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_deep_swamp.lua
+--- a/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_deep_swamp.lua
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_deep_swamp.lua
+@@ -38,6 +38,43 @@
+ 			weighting = 25,
+ 			size = 25,
+ 		},
++		-- PL-06 (17 Oct 2026): wandering packs, so the ring feels alive between the lairs
++		{
++			lairTemplateName = "talus_savage_guf_drolg_pack_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 40,
++			maxDifficulty = 46,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
++		{
++			lairTemplateName = "rori_midnight_vir_vur_pack_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 42,
++			maxDifficulty = 48,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
++		{
++			lairTemplateName = "talus_mutated_kahmurra_pack_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 44,
++			maxDifficulty = 50,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
++		{
++			lairTemplateName = "naboo_veermok_marauder_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 45,
++			maxDifficulty = 52,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
+ 	}
+ }
+ 
+diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_life.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_life.lua
+new file mode 100644
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_life.lua
+@@ -0,0 +1,417 @@
++-- Nal Hutta life (PL-06; outputs/Fable-species/s7-hutt/nal-hutta-life.md). The owner, 17 Oct after run 25: "nal hutta
++-- works, better than expected. but also feels empty". This adds, on top of PL-04's people (hutta_home.lua):
++--  * townsfolk: commoners and NPCs walking five street routes and standing about (the stock CityScreenPlay patrol and
++--    stationary code, as in Mos Espa), a kajidic watch on three of the routes, five townsfolk who talk, two Hutt nobles
++--    with their retinues, and dancers and drinkers in the cantina;
++--  * five places out in the swamp: a smugglers' camp, a burned freighter, a spice den, old ruins and a rival kajidic's
++--    camp, each with stock POI art and hostile NPCs;
++--  * the Kessoth job, a four-step quest from the majordomo at the Kessoth door: the smugglers' camp (kill their chief),
++--    the wreck (find the manifest), the spice den (kill the spice baron), back to the majordomo for the reward.
++-- Positions are generated (hutta_life_places.lua). Stock templates and art; names and text are our own. Non-persistent
++-- spawns, made again at every server start.
++
++HuttaLifeScreenPlay = CityScreenPlay:new {
++	numberOfActs = 1,
++
++	screenplayName = "HuttaLifeScreenPlay",
++
++	planet = "hutta",
++
++	patrolNpcs = {"commoner_tatooine_patrol", "commoner_old_patrol", "commoner_fat_patrol", "commoner_technician_patrol", "explorer_patrol", "gambler_patrol"},
++	patrolPoints = HuttaLifePlaces.patrolPoints,
++	patrolMobiles = HuttaLifePlaces.patrolMobiles,
++
++	stationaryCommoners = {"commoner_tatooine", "commoner_old", "commoner_fat", "commoner_technician", "patron_nikto", "twilek_slave"},
++	stationaryNpcs = {"businessman", "criminal", "gambler", "info_broker", "mercenary", "pilot", "scavenger", "bounty_hunter", "noble", "smuggler_cargo_handler"},
++	stationaryMobiles = HuttaLifePlaces.stationaryMobiles,
++
++	-- the cantina (Darklight's snapshot node 390000018, a stock cantina_tatooine): cell 3 is the main hall, the same
++	-- cell and positions as the Mos Eisley cantina's (screenplays/cities/tatooine_mos_eisley.lua)
++	cantinaId = 390000018,
++	cantinaCell = 3,
++	cantinaMobiles = {
++		-- template, x, z, y, heading, mood
++		{"hutta_cantina_dancer", 9.4, 0, 3.9, 310, "themepark_oola"},
++		{"hutta_cantina_dancer", 7.2, 0, 2.6, 130, "themepark_oola"},
++		{"patron_nikto", 8.8, -0.9, -6, 208, "entertained"},
++		{"commoner_tatooine", 6.8, -0.9, -6.5, 230, "entertained"},
++		{"patron_nikto", 14.2, -0.9, -4.8, 67, "npc_sitting_chair"},
++		{"commoner_old", 16.5, -0.9, -4.8, 320, "npc_sitting_chair"},
++		{"commoner_fat", 2.11, -0.894992, 5.4, 180, "npc_standing_drinking"},
++		{"twilek_slave", 4.11, -0.894992, 5.4, 158, "npc_standing_drinking"},
++		{"commoner_tatooine", 1.99, -0.894992, -8.44, 325, "conversation"},
++		{"patron_nikto", 1.19, -0.894992, -7.63, 152, "conversation"},
++	},
++
++	-- the swamp: template, respawn (s), point index in the site's dry points (1 = centre), heading, custom name
++	siteMobiles = {
++		swamp_rat_camp = {
++			{"smuggler", 300, 3, 0, "a camp smuggler"}, {"smuggler", 300, 5, 90, "a camp smuggler"},
++			{"smuggler", 300, 7, 180, "a camp smuggler"}, {"weequay_captain", 300, 9, 270, "a camp enforcer"},
++			{"smuggler_guard", 300, 11, 45, ""}, {"smuggler_guard", 300, 13, 225, ""},
++		},
++		freighter_wreck = {
++			{"spice_collective_sentry", 300, 4, 0, "a wreck looter"}, {"spice_collective_sentry", 300, 8, 120, "a wreck looter"},
++			{"spice_collective_foreman", 300, 12, 240, "the looters' boss"},
++		},
++		spice_den = {
++			{"aakuan_spice_guard", 300, 3, 0, "a spice den guard"}, {"aakuan_spice_guard", 300, 6, 180, "a spice den guard"},
++			{"spice_collective_heavy_guard", 300, 8, 90, "a spice den bruiser"}, {"spice_collective_heavy_guard", 300, 10, 270, "a spice den bruiser"},
++			{"spice_collective_heavy_guard", 300, 12, 45, "a spice den bruiser"}, {"spice_fiend", 300, 13, 200, "a spice addict"},
++			{"spice_fiend", 300, 14, 20, "a spice addict"},
++		},
++		old_ruins = {
++			{"hutt_expeditonary_force_member", 300, 3, 0, "a kajidic digger"}, {"hutt_expeditonary_force_member", 300, 6, 120, "a kajidic digger"},
++			{"hutt_expeditonary_force_member", 300, 9, 240, "a kajidic digger"}, {"hutt_expeditonary_force_leader", 300, 1, 180, "the dig master"},
++		},
++		hit_squad_camp = {
++			{"igbi_hutt_operative", 300, 3, 0, "a Bessolo enforcer"}, {"igbi_hutt_operative", 300, 5, 90, "a Bessolo enforcer"},
++			{"nurla_hutt_gangster", 300, 8, 180, "a Bessolo gunman"}, {"nurla_hutt_gangster", 300, 11, 270, "a Bessolo gunman"},
++			{"weequay_captain", 300, 1, 0, "a Bessolo hit squad leader"},
++		},
++	},
++	-- props that are not a POI building: template, point index, heading
++	siteProps = {
++		freighter_wreck = {
++			{"object/tangible/destructible/wreckage/wreck_starship_small_01.iff", 1, 35},
++			{"object/static/space/debris/cargo_destroyed_small_a.iff", 6, 110},
++		},
++	},
++	-- the job's named foes: key = {site, template, point, heading, respawn seconds, quest step they end}
++	named = {
++		camp_boss = {"swamp_rat_camp", "hutta_camp_boss", 1, 180, 600, 1},
++		spice_baron = {"spice_den", "hutta_spice_baron", 1, 90, 900, 3},
++	},
++}
++
++registerScreenPlay("HuttaLifeScreenPlay", true)
++
++function HuttaLifeScreenPlay:start()
++	if not isZoneEnabled(self.planet) then
++		return
++	end
++
++	self:spawnPatrolMobiles()
++	self:spawnStationaryMobiles()
++	self:spawnTalkers()
++	self:spawnRetinues()
++	self:spawnCantina()
++	self:spawnQuestGiver()
++	self:spawnSites()
++end
++
++function HuttaLifeScreenPlay:talker(template, x, y, heading, mood)
++	local pMobile = spawnMobile(self.planet, template, 0, x, getWorldFloor(x, y, self.planet), y, heading, 0)
++
++	if pMobile == nil then
++		printLuaError("HuttaLifeScreenPlay: could not spawn " .. template .. " at " .. x .. ", " .. y)
++		return nil
++	end
++
++	if mood ~= nil and mood ~= "" then
++		self:setMoodString(pMobile, mood)
++	end
++
++	if AiAgent(pMobile) ~= nil then
++		AiAgent(pMobile):addObjectFlag(AI_STATIONARY)
++	end
++
++	return pMobile
++end
++
++function HuttaLifeScreenPlay:spawnTalkers()
++	for _, t in ipairs(HuttaLifePlaces.talkers) do
++		self:talker(t[1], t[2], t[3], t[4], t[5])
++	end
++end
++
++-- a Hutt noble facing south, two Gamorrean guards behind their shoulders, a Twi'lek attendant in front
++function HuttaLifeScreenPlay:spawnRetinues()
++	for _, r in ipairs(HuttaLifePlaces.retinues) do
++		local x, y, h = r[2], r[3], r[4]
++		self:talker(r[1], x, y, h, "calm")
++
++		local pGuard = self:talker("gamorrean_guard", x - 3, y + 1.5, h, "")
++		if pGuard ~= nil then CreatureObject(pGuard):setCustomObjectName("a retinue guard") end
++		pGuard = self:talker("gamorrean_guard", x + 3, y + 1.5, h, "")
++		if pGuard ~= nil then CreatureObject(pGuard):setCustomObjectName("a retinue guard") end
++
++		local pAttendant = self:talker("twilek_slave", x + 1.5, y - 2.5, h + 180, "conversation")
++		if pAttendant ~= nil then CreatureObject(pAttendant):setCustomObjectName("a Hutt's attendant") end
++	end
++end
++
++function HuttaLifeScreenPlay:spawnCantina()
++	local pCantina = getSceneObject(self.cantinaId)
++
++	if pCantina == nil or not SceneObject(pCantina):isBuildingObject() then
++		printLuaError("HuttaLifeScreenPlay: the Bilbousa cantina " .. self.cantinaId .. " is not loaded")
++		return
++	end
++
++	local pCell = BuildingObject(pCantina):getCell(self.cantinaCell)
++
++	if pCell == nil then
++		printLuaError("HuttaLifeScreenPlay: the cantina has no cell " .. self.cantinaCell)
++		return
++	end
++
++	local cellID = SceneObject(pCell):getObjectID()
++
++	for _, m in ipairs(self.cantinaMobiles) do
++		local pMobile = spawnMobile(self.planet, m[1], 300, m[2], m[3], m[4], m[5], cellID)
++
++		if pMobile ~= nil then
++			self:setMoodString(pMobile, m[6])
++			CreatureObject(pMobile):setPvpStatusBitmask(0)
++		end
++	end
++end
++
++function HuttaLifeScreenPlay:spawnQuestGiver()
++	local g = HuttaLifePlaces.questGiver
++	self:talker(g[1], g[2], g[3], g[4], "calm")
++end
++
++-- The swamp sites
++
++function HuttaLifeScreenPlay:sitePoint(key, index)
++	local s = HuttaLifePlaces.sites[key]
++	local p = s.points[index] or s.points[1]
++
++	return s.x + p[1], p[3], s.y + p[2]
++end
++
++function HuttaLifeScreenPlay:spawnSites()
++	for key, s in pairs(HuttaLifePlaces.sites) do
++		if s.building ~= "" then
++			if spawnSceneObject(self.planet, s.building, s.x, s.z, s.y, 0, 0) == nil then
++				printLuaError("HuttaLifeScreenPlay: could not place " .. s.building)
++			end
++		end
++
++		for _, p in ipairs(self.siteProps[key] or {}) do
++			local x, z, y = self:sitePoint(key, p[2])
++
++			if spawnSceneObject(self.planet, p[1], x, z, y, 0, math.rad(p[3])) == nil then
++				printLuaError("HuttaLifeScreenPlay: could not place " .. p[1])
++			end
++		end
++
++		for _, m in ipairs(self.siteMobiles[key] or {}) do
++			local x, z, y = self:sitePoint(key, m[3])
++			local pMobile = spawnMobile(self.planet, m[1], m[2], x, z, y, m[4], 0)
++
++			if pMobile == nil then
++				printLuaError("HuttaLifeScreenPlay: could not spawn " .. m[1] .. " at " .. key)
++			elseif m[5] ~= "" then
++				CreatureObject(pMobile):setCustomObjectName(m[5])
++			end
++		end
++	end
++
++	for key, _ in pairs(self.named) do
++		self:spawnNamed(key)
++	end
++
++	-- the wreck step: entering the wreck finds the manifest
++	local wx, wz, wy = self:sitePoint("freighter_wreck", 1)
++	local pArea = spawnActiveArea(self.planet, "object/active_area.iff", wx, wz, wy, 25, 0)
++
++	if pArea ~= nil then
++		createObserver(ENTEREDAREA, "HuttaLifeScreenPlay", "notifyEnteredWreck", pArea)
++	end
++end
++
++-- Named foes respawn through this screenplay (not the spawner) so the kill observer comes back with them.
++function HuttaLifeScreenPlay:spawnNamed(key)
++	local n = self.named[key]
++
++	if n == nil then
++		return
++	end
++
++	local x, z, y = self:sitePoint(n[1], n[3])
++	local pMobile = spawnMobile(self.planet, n[2], 0, x, z, y, n[4], 0)
++
++	if pMobile == nil then
++		printLuaError("HuttaLifeScreenPlay: could not spawn the named " .. n[2])
++		return
++	end
++
++	writeStringData(SceneObject(pMobile):getObjectID() .. ":hutta_life_named", key)
++	createObserver(OBJECTDESTRUCTION, "HuttaLifeScreenPlay", "notifyNamedKilled", pMobile)
++end
++
++function HuttaLifeScreenPlay:respawnNamed(pNil, key)
++	self:spawnNamed(key)
++end
++
++function HuttaLifeScreenPlay:notifyNamedKilled(pVictim, pAttacker)
++	if pVictim == nil then
++		return 1
++	end
++
++	local oid = SceneObject(pVictim):getObjectID()
++	local key = readStringData(oid .. ":hutta_life_named")
++	deleteStringData(oid .. ":hutta_life_named")
++
++	local n = self.named[key]
++
++	if n == nil then
++		return 1
++	end
++
++	HuttaKessothJob:creditKill(pVictim, pAttacker, n[6])
++	createEvent(n[5] * 1000, "HuttaLifeScreenPlay", "respawnNamed", nil, key)
++
++	return 1
++end
++
++function HuttaLifeScreenPlay:notifyEnteredWreck(pArea, pCreature)
++	if pCreature == nil or not SceneObject(pCreature):isPlayerCreature() then
++		return 0
++	end
++
++	HuttaKessothJob:advance(pCreature, 2)
++
++	return 0
++end
++
++-- The Kessoth job: step 0 none, 1 the smugglers' camp, 2 the wreck, 3 the spice den, 4 back to the majordomo, 5 done.
++
++HuttaKessothJob = {
++	name = "HuttaKessothJob",
++	rewardCredits = 6000,
++	rewardItem = "object/tangible/wearables/vest/vest_hutt_gang_s01.iff",
++	-- step -> site whose centre the waypoint marks, and the waypoint's name
++	waypoints = {
++		{"swamp_rat_camp", "Kessoth job: the smugglers' camp"},
++		{"freighter_wreck", "Kessoth job: the burned freighter"},
++		{"spice_den", "Kessoth job: Kreeg's spice den"},
++	},
++	messages = {
++		[2] = "Vekk Tano is dead. Among his papers: the smugglers never had the Kessoth spice. Search the wreck itself.",
++		[3] = "Under the burned crates you find the freighter's manifest. The spice was offloaded before the crash, to a Nikto called Kreeg, in the north-west swamp.",
++		[4] = "Kreeg is dead, and the Kessoth spice is stacked in his den. Return to Bezzik at the Kessoth door in Bilbousa.",
++	},
++}
++
++function HuttaKessothJob:getStep(pPlayer)
++	return tonumber(readScreenPlayData(pPlayer, self.name, "step")) or 0
++end
++
++function HuttaKessothJob:setStep(pPlayer, step)
++	writeScreenPlayData(pPlayer, self.name, "step", tostring(step))
++end
++
++-- One job waypoint at a time, of the stock quest-task type (as screenplays/quest_tasks/go_to_theater.lua does):
++-- addWaypoint returns no id, so the old one is removed by its type.
++function HuttaKessothJob:setWaypoint(pPlayer, step)
++	local pGhost = CreatureObject(pPlayer):getPlayerObject()
++
++	if pGhost == nil then
++		return
++	end
++
++	PlayerObject(pGhost):removeWaypointBySpecialType(WAYPOINTQUESTTASK)
++
++	if step >= 1 and step <= 3 then
++		local s = HuttaLifePlaces.sites[self.waypoints[step][1]]
++		PlayerObject(pGhost):addWaypoint("hutta", self.waypoints[step][2], "", s.x, s.z, s.y, WAYPOINT_YELLOW, true, true, WAYPOINTQUESTTASK)
++	elseif step == 4 then
++		local g = HuttaLifePlaces.questGiver
++		PlayerObject(pGhost):addWaypoint("hutta", "Kessoth job: Bezzik in Bilbousa", "", g[2], 80, g[3], WAYPOINT_YELLOW, true, true, WAYPOINTQUESTTASK)
++	end
++end
++
++-- Move a player from step (from) to the next one, with its message and waypoint.
++function HuttaKessothJob:advance(pPlayer, from)
++	if self:getStep(pPlayer) ~= from then
++		return
++	end
++
++	self:setStep(pPlayer, from + 1)
++	CreatureObject(pPlayer):sendSystemMessage(self.messages[from + 1])
++	self:setWaypoint(pPlayer, from + 1)
++end
++
++-- The killer and their group members within 128 m of the body who are on that step all get credit.
++function HuttaKessothJob:creditKill(pVictim, pAttacker, step)
++	if pAttacker == nil or not SceneObject(pAttacker):isPlayerCreature() then
++		return
++	end
++
++	local players = {pAttacker}
++
++	if CreatureObject(pAttacker):isGrouped() then
++		players = {}
++
++		for i = 0, CreatureObject(pAttacker):getGroupSize() - 1 do
++			local pMember = CreatureObject(pAttacker):getGroupMember(i)
++
++			if pMember ~= nil and SceneObject(pMember):isPlayerCreature() and SceneObject(pMember):isInRangeWithObject(pVictim, 128) then
++				table.insert(players, pMember)
++			end
++		end
++	end
++
++	for _, pPlayer in ipairs(players) do
++		self:advance(pPlayer, step)
++	end
++end
++
++function HuttaKessothJob:accept(pPlayer)
++	if self:getStep(pPlayer) == 0 then
++		self:setStep(pPlayer, 1)
++		self:setWaypoint(pPlayer, 1)
++	end
++end
++
++function HuttaKessothJob:reward(pPlayer)
++	if self:getStep(pPlayer) ~= 4 then
++		return
++	end
++
++	local pInventory = SceneObject(pPlayer):getSlottedObject("inventory")
++
++	if pInventory == nil or SceneObject(pInventory):isContainerFullRecursive() then
++		CreatureObject(pPlayer):sendSystemMessage("Your inventory is full. Make room, then speak to Bezzik again.")
++		return false
++	end
++
++	giveItem(pInventory, self.rewardItem, -1)
++	CreatureObject(pPlayer):addCashCredits(self.rewardCredits, true)
++	self:setStep(pPlayer, 5)
++	self:setWaypoint(pPlayer, 5)
++
++	return true
++end
++
++-- Conversation handlers
++
++HuttaTownsfolkConvoHandler = conv_handler:new {}
++
++HuttaKessothMajordomoConvoHandler = conv_handler:new {}
++
++function HuttaKessothMajordomoConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTemplate)
++	local convoTemplate = LuaConversationTemplate(pConvTemplate)
++	local step = HuttaKessothJob:getStep(pPlayer)
++	local screens = {[1] = "step1", [2] = "step2", [3] = "step3", [4] = "report", [5] = "done"}
++
++	return convoTemplate:getScreen(screens[step] or "greet")
++end
++
++function HuttaKessothMajordomoConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, selectedOption, pConvScreen)
++	local id = LuaConversationScreen(pConvScreen):getScreenID()
++
++	if id == "accept" then
++		HuttaKessothJob:accept(pPlayer)
++	elseif id == "reward" then
++		if HuttaKessothJob:reward(pPlayer) == false then
++			return LuaConversationTemplate(pConvTemplate):getScreen("full")
++		end
++	end
++
++	return pConvScreen
++end
+diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_life_places.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_life_places.lua
+new file mode 100644
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_life_places.lua
+@@ -0,0 +1,232 @@
++-- Nal Hutta life (PL-06): Bilbousa's townsfolk and the swamp sites. Generated by
++-- outputs/Fable-species/s7-hutt/nal-hutta-life/tools/make_life.py from life.json; edit there, not here.
++-- Town x, y on the 80 m shelf; headings in compass degrees. Site points are offsets from the site centre with
++-- their ground height (all dry, above the 75 m water).
++
++HuttaLifePlaces = {
++	-- patrol routes: { x, z, y, cell, wait here }
++	patrolPoints = {
++		avenue = {
++			{ -766, 80.00, 1696, 0, true },
++			{ -782, 80.00, 1682, 0, false },
++			{ -782, 80.00, 1648, 0, false },
++			{ -776, 80.00, 1644, 0, false },
++			{ -766, 80.00, 1640, 0, true },
++			{ -830, 80.00, 1560, 0, true },
++			{ -772, 80.00, 1484, 0, false },
++			{ -768, 80.00, 1470, 0, true },
++			{ -766, 80.00, 1436, 0, true },
++			{ -768, 80.00, 1470, 0, true },
++			{ -760, 80.00, 1486, 0, false },
++			{ -720, 80.00, 1550, 0, false },
++			{ -716, 80.00, 1560, 0, true },
++			{ -732, 80.00, 1594, 0, false },
++			{ -750, 80.00, 1622, 0, false },
++			{ -766, 80.00, 1640, 0, true },
++			{ -780, 80.00, 1646, 0, false },
++			{ -782, 80.00, 1648, 0, false },
++			{ -782, 80.00, 1682, 0, false },
++		},
++		cantina_run = {
++			{ -646, 80.00, 1526, 0, true },
++			{ -682, 80.00, 1514, 0, false },
++			{ -704, 80.00, 1514, 0, false },
++			{ -716, 80.00, 1560, 0, true },
++			{ -722, 80.00, 1616, 0, false },
++			{ -722, 80.00, 1636, 0, false },
++			{ -704, 80.00, 1638, 0, false },
++			{ -700, 80.00, 1638, 0, true },
++			{ -656, 80.00, 1634, 0, false },
++			{ -652, 80.00, 1632, 0, true },
++			{ -696, 80.00, 1638, 0, false },
++			{ -700, 80.00, 1638, 0, true },
++			{ -720, 80.00, 1638, 0, false },
++			{ -722, 80.00, 1618, 0, false },
++			{ -718, 80.00, 1562, 0, false },
++			{ -716, 80.00, 1560, 0, true },
++			{ -704, 80.00, 1514, 0, false },
++			{ -672, 80.00, 1514, 0, false },
++		},
++		west_seats = {
++			{ -874, 80.00, 1562, 0, true },
++			{ -830, 80.00, 1560, 0, true },
++			{ -766, 80.00, 1640, 0, true },
++			{ -832, 80.00, 1656, 0, false },
++			{ -850, 80.00, 1674, 0, false },
++			{ -840, 80.00, 1704, 0, false },
++			{ -890, 80.00, 1764, 0, true },
++			{ -974, 80.00, 1696, 0, false },
++			{ -1000, 80.00, 1690, 0, true },
++			{ -880, 80.00, 1656, 0, false },
++			{ -858, 80.00, 1664, 0, false },
++			{ -836, 80.00, 1646, 0, false },
++			{ -834, 80.00, 1644, 0, false },
++			{ -830, 80.00, 1610, 0, false },
++			{ -832, 80.00, 1600, 0, false },
++			{ -858, 80.00, 1572, 0, false },
++		},
++		east_seats = {
++			{ -588, 80.00, 1502, 0, true },
++			{ -646, 80.00, 1526, 0, true },
++			{ -592, 80.00, 1538, 0, false },
++			{ -590, 80.00, 1540, 0, false },
++			{ -588, 80.00, 1592, 0, false },
++			{ -590, 80.00, 1602, 0, false },
++			{ -606, 80.00, 1614, 0, false },
++			{ -652, 80.00, 1632, 0, true },
++			{ -696, 80.00, 1638, 0, false },
++			{ -700, 80.00, 1638, 0, true },
++			{ -714, 80.00, 1638, 0, false },
++			{ -752, 80.00, 1684, 0, false },
++			{ -766, 80.00, 1696, 0, true },
++			{ -750, 80.00, 1682, 0, false },
++			{ -716, 80.00, 1560, 0, true },
++			{ -704, 80.00, 1514, 0, false },
++		},
++		bazaar_loop = {
++			{ -774, 80.00, 1516, 0, true },
++			{ -770, 80.00, 1472, 0, false },
++			{ -768, 80.00, 1470, 0, true },
++			{ -766, 80.00, 1436, 0, true },
++			{ -768, 80.00, 1470, 0, true },
++			{ -774, 80.00, 1506, 0, false },
++		},
++	},
++	-- { route, template, x, z, y, heading, cell, mood, combat }
++	patrolMobiles = {
++		{ "avenue", "patrolNpc", -766, 80.00, 1696, 0, 0, "", false },
++		{ "avenue", "patrolNpc", -716, 80.00, 1560, 0, 0, "", false },
++		{ "cantina_run", "patrolNpc", -646, 80.00, 1526, 0, 0, "", false },
++		{ "cantina_run", "hutta_weequay_watch", -652, 80.00, 1632, 0, 0, "", false },
++		{ "west_seats", "hutta_weequay_watch", -874, 80.00, 1562, 0, 0, "", false },
++		{ "west_seats", "patrolNpc", -880, 80.00, 1656, 0, 0, "", false },
++		{ "east_seats", "patrolNpc", -588, 80.00, 1502, 0, 0, "", false },
++		{ "east_seats", "hutta_weequay_watch", -704, 80.00, 1514, 0, 0, "", false },
++		{ "bazaar_loop", "patrolNpc", -774, 80.00, 1516, 0, 0, "", false },
++		{ "bazaar_loop", "patrolNpc", -774, 80.00, 1506, 0, 0, "", false },
++	},
++	-- { respawn, x, z, y, heading, cell, mood }
++	stationaryMobiles = {
++		{ 300, -760, 80.00, 1698, 270, 0, "" },
++		{ 300, -774, 80.00, 1692, 225, 0, "bored" },
++		{ 300, -772, 80.00, 1696, 180, 0, "bored" },
++		{ 300, -756, 80.00, 1632, 0, 0, "bored" },
++		{ 300, -764, 80.00, 1630, 270, 0, "npc_standing_drinking" },
++		{ 300, -820, 80.00, 1562, 225, 0, "bored" },
++		{ 300, -828, 80.00, 1552, 315, 0, "conversation" },
++		{ 300, -830, 80.00, 1562, 45, 0, "calm" },
++		{ 300, -718, 80.00, 1572, 315, 0, "" },
++		{ 300, -706, 80.00, 1564, 45, 0, "" },
++		{ 300, -766, 80.00, 1472, 135, 0, "bored" },
++		{ 300, -772, 80.00, 1462, 90, 0, "" },
++		{ 300, -764, 80.00, 1464, 270, 0, "calm" },
++		{ 300, -768, 80.00, 1484, 45, 0, "conversation" },
++		{ 300, -762, 80.00, 1504, 315, 0, "bored" },
++		{ 300, -756, 80.00, 1508, 0, 0, "npc_standing_drinking" },
++		{ 300, -762, 80.00, 1434, 0, 0, "npc_standing_drinking" },
++		{ 300, -772, 80.00, 1442, 45, 0, "calm" },
++		{ 300, -648, 80.00, 1522, 180, 0, "calm" },
++		{ 300, -644, 80.00, 1528, 0, 0, "conversation" },
++		{ 300, -656, 80.00, 1536, 90, 0, "calm" },
++		{ 300, -718, 80.00, 1646, 315, 0, "" },
++		{ 300, -680, 80.00, 1634, 315, 0, "npc_standing_drinking" },
++		{ 300, -600, 80.00, 1504, 0, 0, "" },
++	},
++	-- { template, x, y, heading, mood }
++	talkers = {
++		{ "hutta_rodian_trader", -764, 1482, 180, "conversation" },
++		{ "hutta_old_weequay", -834, 1556, 180, "bored" },
++		{ "hutta_twilek_attendant", -754, 1440, 90, "calm" },
++		{ "hutta_swamp_beggar", -764, 1524, 180, "sad" },
++		{ "hutta_nikto_dockhand", -778, 1700, 270, "npc_standing_drinking" },
++	},
++	-- { Hutt template, x, y, heading }: the guards and the attendant stand round the Hutt
++	retinues = {
++		{ "hutta_hutt_noble_kessoth", -718, 1640, 180 },
++		{ "hutta_hutt_noble_dromuul", -830, 1572, 180 },
++	},
++	questGiver = { "hutta_kessoth_majordomo", -658.00, 1628.00, 180 },
++	-- swamp sites: centre, the POI building (if any) and dry spawn points { dx, dy, z }
++	sites = {
++		swamp_rat_camp = { x = -1267.0, y = 756.0, z = 78.43, building = "object/building/poi/naboo_swamp_rat_gang_camp_medium.iff", points = {
++			{ 0, 0, 78.43 },
++			{ 0.00, 9.00, 78.54 },
++			{ 8.60, 2.80, 78.11 },
++			{ 5.30, -7.30, 78.17 },
++			{ -5.30, -7.30, 78.31 },
++			{ -8.60, 2.80, 78.60 },
++			{ 0.00, 15.00, 78.35 },
++			{ 11.70, 9.40, 77.98 },
++			{ 14.70, -3.10, 77.75 },
++			{ 6.80, -13.40, 78.15 },
++			{ -6.10, -13.70, 78.03 },
++			{ -14.50, -3.90, 78.49 },
++			{ -12.10, 8.80, 78.46 },
++			{ -0.80, 15.00, 78.39 },
++		} },
++		freighter_wreck = { x = 493.0, y = 1956.0, z = 77.81, building = "", points = {
++			{ 0, 0, 77.81 },
++			{ 0.00, 9.00, 77.59 },
++			{ 8.60, 2.80, 77.25 },
++			{ 5.30, -7.30, 77.95 },
++			{ -5.30, -7.30, 77.98 },
++			{ -8.60, 2.80, 78.25 },
++			{ 0.00, 15.00, 77.46 },
++			{ 11.70, 9.40, 77.31 },
++			{ 14.70, -3.10, 77.41 },
++			{ 6.80, -13.40, 77.48 },
++			{ -6.10, -13.70, 77.60 },
++			{ -14.50, -3.90, 77.81 },
++			{ -12.10, 8.80, 77.73 },
++			{ -0.80, 15.00, 77.53 },
++		} },
++		spice_den = { x = -2747.0, y = 2556.0, z = 80.25, building = "object/building/poi/tatooine_spicefiend_medium.iff", points = {
++			{ 0, 0, 80.25 },
++			{ 0.00, 9.00, 80.14 },
++			{ 8.60, 2.80, 80.37 },
++			{ 5.30, -7.30, 80.34 },
++			{ -5.30, -7.30, 80.25 },
++			{ -8.60, 2.80, 80.28 },
++			{ 0.00, 15.00, 80.30 },
++			{ 11.70, 9.40, 80.14 },
++			{ 14.70, -3.10, 80.36 },
++			{ 6.80, -13.40, 80.36 },
++			{ -6.10, -13.70, 80.36 },
++			{ -14.50, -3.90, 80.16 },
++			{ -12.10, 8.80, 80.18 },
++			{ -0.80, 15.00, 80.34 },
++		} },
++		old_ruins = { x = 373.0, y = 36.0, z = 108.00, building = "object/building/poi/naboo_ruins_medium_1.iff", points = {
++			{ 0, 0, 108.00 },
++			{ 0.00, 9.00, 108.00 },
++			{ 8.60, 2.80, 108.00 },
++			{ 5.30, -7.30, 108.00 },
++			{ -5.30, -7.30, 108.00 },
++			{ -8.60, 2.80, 108.00 },
++			{ 0.00, 15.00, 108.00 },
++			{ 11.70, 9.40, 108.00 },
++			{ 14.70, -3.10, 108.00 },
++			{ 6.80, -13.40, 108.00 },
++			{ -6.10, -13.70, 108.00 },
++			{ -14.50, -3.90, 108.00 },
++			{ -12.10, 8.80, 108.00 },
++			{ -0.80, 15.00, 108.00 },
++		} },
++		hit_squad_camp = { x = -2467.0, y = -44.0, z = 78.41, building = "object/building/poi/tatooine_hutt_assassin_camp_medium1.iff", points = {
++			{ 0, 0, 78.41 },
++			{ 0.00, 9.00, 77.71 },
++			{ 8.60, 2.80, 78.30 },
++			{ 5.30, -7.30, 78.71 },
++			{ -5.30, -7.30, 78.52 },
++			{ -8.60, 2.80, 78.77 },
++			{ 0.00, 15.00, 77.90 },
++			{ 11.70, 9.40, 77.76 },
++			{ 14.70, -3.10, 78.30 },
++			{ 6.80, -13.40, 79.08 },
++			{ -6.10, -13.70, 78.42 },
++			{ -14.50, -3.90, 80.11 },
++			{ -12.10, 8.80, 77.32 },
++			{ -0.80, 15.00, 77.62 },
++		} },
++	},
++}
+diff --git a/MMOCoreORB/bin/scripts/mobile/sandbox/hutta_life.lua b/MMOCoreORB/bin/scripts/mobile/sandbox/hutta_life.lua
+new file mode 100644
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/sandbox/hutta_life.lua
+@@ -0,0 +1,114 @@
++-- Nal Hutta life (PL-06; outputs/Fable-species/s7-hutt/nal-hutta-life.md): the new Bilbousa townsfolk who talk, the
++-- city watch who walk the streets, the Kessoth majordomo who gives the kajidic job, and the job's two named foes.
++-- Placed by screenplays/sandbox/hutta_life.lua. Stock bodies, stock loot groups; names and text are our own.
++
++local function townsfolk(name, body, conversation, level)
++	return Creature:new {
++		objectName = "",
++		customName = name,
++		socialGroup = "",
++		mobType = MOB_NPC,
++		faction = "",
++		level = level or 20,
++		chanceHit = 0.33,
++		damageMin = 180,
++		damageMax = 190,
++		baseXp = 0,
++		baseHAM = 5000,
++		baseHAMmax = 6100,
++		armor = 0,
++		resists = {0,0,0,0,0,0,0,-1,-1},
++		meatType = "",
++		meatAmount = 0,
++		hideType = "",
++		hideAmount = 0,
++		boneType = "",
++		boneAmount = 0,
++		milk = 0,
++		tamingChance = 0,
++		ferocity = 0,
++		pvpBitmask = NONE,
++		creatureBitmask = NONE,
++		optionsBitmask = conversation ~= "" and (AIENABLED + INVULNERABLE + CONVERSABLE) or (AIENABLED + INVULNERABLE),
++		diet = HERBIVORE,
++		templates = {body},
++		lootGroups = {},
++		primaryWeapon = "unarmed",
++		secondaryWeapon = "none",
++		conversationTemplate = conversation,
++		primaryAttacks = {},
++		secondaryAttacks = {}
++	}
++end
++
++local people = {
++	-- key, name, body, conversation
++	{"hutta_rodian_trader", "Teeso, a Rodian trader", "object/mobile/dressed_commoner_tatooine_rodian_male_01.iff", "hutta_rodian_trader_convo_template"},
++	{"hutta_old_weequay", "an old Weequay", "object/mobile/dressed_tatooine_weequay_thug.iff", "hutta_old_weequay_convo_template"},
++	{"hutta_twilek_attendant", "Lyssa, a Twi'lek attendant", "object/mobile/dressed_commoner_naboo_twilek_female_01.iff", "hutta_twilek_attendant_convo_template"},
++	{"hutta_swamp_beggar", "a swamp beggar", "object/mobile/dressed_commoner_old_twilek_male_01.iff", "hutta_swamp_beggar_convo_template"},
++	{"hutta_nikto_dockhand", "a Nikto dockhand", "object/mobile/dressed_patron_nikto_01.iff", "hutta_nikto_dockhand_convo_template"},
++	{"hutta_hutt_noble_kessoth", "Orruba Kessoth", "object/mobile/hutt_female.iff", "hutta_hutt_noble_convo_template"},
++	{"hutta_hutt_noble_dromuul", "Gorga Dromuul", "object/mobile/hutt_male.iff", "hutta_hutt_noble_convo_template"},
++	{"hutta_kessoth_majordomo", "Bezzik, Kessoth majordomo", "object/mobile/dressed_commoner_fat_twilek_male_01.iff", "hutta_kessoth_majordomo_convo_template"},
++	-- the cantina's dancers (Oola's dance, in the main hall)
++	{"hutta_cantina_dancer", "a cantina dancer", "object/mobile/dressed_dancer_trainer_twk_female_01.iff", ""},
++	-- the city watch: walks the streets (a patrol), never fights
++	{"hutta_weequay_watch", "a kajidic watchman", "object/mobile/dressed_tatooine_weequay_thug.iff", ""},
++}
++
++for _, p in ipairs(people) do
++	CreatureTemplates:addCreatureTemplate(townsfolk(p[2], p[3], p[4]), p[1])
++end
++
++local function foe(name, body, level, ham, xp, loot)
++	local groups = {}
++
++	for _, g in ipairs(loot) do
++		table.insert(groups, { groups = { {group = g, chance = 10000000} } })
++	end
++
++	return Creature:new {
++		objectName = "",
++		customName = name,
++		socialGroup = "thug",
++		mobType = MOB_NPC,
++		faction = "thug",
++		level = level,
++		chanceHit = 0.4,
++		damageMin = 300,
++		damageMax = 310 + level,
++		baseXp = xp,
++		baseHAM = ham,
++		baseHAMmax = math.floor(ham * 1.2),
++		armor = 0,
++		resists = {30,30,10,10,10,-1,-1,-1,-1},
++		meatType = "",
++		meatAmount = 0,
++		hideType = "",
++		hideAmount = 0,
++		boneType = "",
++		boneAmount = 0,
++		milk = 0,
++		tamingChance = 0,
++		ferocity = 0,
++		pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++		creatureBitmask = PACK + KILLER,
++		optionsBitmask = AIENABLED,
++		diet = HERBIVORE,
++		templates = {body},
++		lootGroups = groups,
++		primaryWeapon = "rebel_weapons_heavy",
++		secondaryWeapon = "unarmed",
++		conversationTemplate = "",
++		reactionStf = "@npc_reaction/military",
++		primaryAttacks = merge(brawlermaster,marksmanmaster),
++		secondaryAttacks = { }
++	}
++end
++
++-- the kajidic job (screenplays/sandbox/hutta_life.lua): step 1 at the smugglers' camp, step 3 at the spice den
++CreatureTemplates:addCreatureTemplate(foe("Vekk Tano, smuggler chief", "object/mobile/dressed_binayre_scalawag_twk_male_01.iff",
++	24, 9500, 2600, {"thug_tier_1", "weequay_tier_1"}), "hutta_camp_boss")
++CreatureTemplates:addCreatureTemplate(foe("Kreeg, the Nikto spice baron", "object/mobile/dressed_blood_razor_pirate_captain_nikto_m.iff",
++	36, 22000, 5200, {"thug_tier_1", "weequay_tier_1", "aakuans_tier_1"}), "hutta_spice_baron")
+diff --git a/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/hutta_life_conv.lua b/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/hutta_life_conv.lua
+new file mode 100644
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/hutta_life_conv.lua
+@@ -0,0 +1,88 @@
++-- Nal Hutta life (PL-06): conversations for Bilbousa's townsfolk and the Kessoth job. Our own text; the handlers are
++-- in screenplays/sandbox/hutta_life.lua. Era 138-139 ABY: Krayt is dead on Coruscant, his Empire is breaking up, and
++-- the kajidics are richer than ever.
++
++local function screen(template, id, text, options, stop)
++	template:addScreen(ConvoScreen:new {
++		id = id,
++		customDialogText = text,
++		stopConversation = stop and "true" or "false",
++		options = options or {}
++	})
++end
++
++local function convo(handler)
++	return ConvoTemplate:new {
++		initialScreen = "greet",
++		templateType = "Lua",
++		luaClassHandler = handler,
++		screens = {}
++	}
++end
++
++-- townsfolk: a greeting, one thing to ask, a goodbye
++local function smallTalk(key, greet, question, answer, bye)
++	local t = convo("HuttaTownsfolkConvoHandler")
++	screen(t, "greet", greet, {{question, "answer"}, {"Goodbye.", "bye"}})
++	screen(t, "answer", answer, {{"Goodbye.", "bye"}})
++	screen(t, "bye", bye, {}, true)
++	addConversationTemplate(key, t)
++end
++
++smallTalk("hutta_rodian_trader_convo_template",
++	"Swamp eel leather, Ylesian glow-moss, Nar Shaddaa circuit boards. Everything here is honest, friend, except the prices.",
++	"How is trade?",
++	"Since the Sith emperor fell, the shipping lanes are wide open and half the Imperial customs posts stand empty. The kajidics have never been richer. Neither have I, almost.",
++	"Come back with more credits.")
++smallTalk("hutta_old_weequay_convo_template",
++	"Mind your feet. The street is dry, but the swamp starts at the edge of the shelf and it does not give things back.",
++	"What is out in the swamp?",
++	"Borgles and squills close in. Further out, fambaa herds and worse. People say smugglers camp to the south-west, and there is an old wreck to the east that nobody has finished picking clean.",
++	"Keep your blaster dry.")
++smallTalk("hutta_twilek_attendant_convo_template",
++	"I serve the house of the Hutt you see there. If you have business with them, speak softly and stand where they can see your hands.",
++	"Is it a good house to serve?",
++	"Better than some. The kajidics are at peace with each other this season, and peace means fewer poisoners in the kitchens.",
++	"May your business profit you.")
++smallTalk("hutta_swamp_beggar_convo_template",
++	"A credit for an old spacer? I flew for the Kessoth once, before the spice took my hands.",
++	"What happened to you?",
++	"A run went wrong. The cargo vanished, the crew blamed me, and the Hutts do not forgive a lost cargo. Ask Bezzik at the Kessoth door. He is still looking for that spice, I hear.",
++	"Bless you, whether you paid or not.")
++smallTalk("hutta_nikto_dockhand_convo_template",
++	"Ships in, ships out. The council takes its cut from every crate before it touches the ground.",
++	"Where do the ships go?",
++	"Tatooine and Corellia, mostly, on the scheduled shuttles. The rest fly from the private pads, and I do not see those.",
++	"Out of my way, I have crates to move.")
++
++local noble = convo("HuttaTownsfolkConvoHandler")
++screen(noble, "greet", "(The Hutt regards you with half-closed eyes. The attendant translates.) My master asks whether you have come to buy, to sell, or to waste their time.", {
++	{"I am only passing through.", "answer"},
++	{"Goodbye.", "bye"},
++})
++screen(noble, "answer", "My master says that everyone on Nal Hutta is only passing through, except the Hutts. They wish you a short stay.", {{"Goodbye.", "bye"}})
++screen(noble, "bye", "(The Hutt has already lost interest in you.)", {}, true)
++addConversationTemplate("hutta_hutt_noble_convo_template", noble)
++
++-- the Kessoth majordomo: the kajidic job (HuttaKessothJob in screenplays/sandbox/hutta_life.lua picks the first screen)
++local job = convo("HuttaKessothMajordomoConvoHandler")
++screen(job, "greet", "You stand at the door of the house of Kessoth. State your business, or move along.", {
++	{"I am looking for work.", "offer"},
++	{"Nothing. Goodbye.", "bye"},
++})
++screen(job, "offer", "Work. Very well. Three months ago a Kessoth freighter carrying spice went down in the swamp. The crew is dead, the spice is gone, and my master suspects the smugglers who camp to the south-west. Find out what they know. Persuade their chief, Vekk Tano, by whatever means you like.", {
++	{"I will do it.", "accept"},
++	{"Not now.", "bye"},
++})
++screen(job, "accept", "Good. I have marked the camp for you. Come back when Vekk Tano can no longer lie to anyone.", {}, true)
++screen(job, "step1", "Vekk Tano still breathes, and my master's spice is still missing. The camp is south-west of the city.", {}, true)
++screen(job, "step2", "So the smugglers did not take it. Then search the wreck itself, east of the city. A freighter does not lose its manifest.", {}, true)
++screen(job, "step3", "Kreeg. A Nikto who thinks he is a baron. His den is far out in the north-west swamp. Bring my master's spice back, or at least make sure he never sells it.", {}, true)
++screen(job, "report", "You are back. Well? Is it done?", {
++	{"Kreeg is dead. The spice is in his den, waiting for your crews.", "reward"},
++})
++screen(job, "full", "You cannot even carry a reward. Come back when your hands are free.", {}, true)
++screen(job, "reward", "Kreeg is dead and the spice is ours again. My master is pleased, which is rare. Take this, and wear Kessoth colours with pride.", {}, true)
++screen(job, "done", "The house of Kessoth remembers its friends. For now, there is no more work.", {}, true)
++screen(job, "bye", "Then do not block the door.", {}, true)
++addConversationTemplate("hutta_kessoth_majordomo_convo_template", job)
