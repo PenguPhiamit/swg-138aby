@@ -183,3 +183,17 @@ Next: Claude reviews the three source commits and stages the client corrections 
      - raise SWGEmu.exe to Above normal priority;
      - and/or cut the bots (`botpop despawn <n>`; throttled mode needs a full despawn first);
      - later, cap WSL's processors in `.wslconfig` (owner's decision; needs a WSL restart).
+7. **7:23 PM, the quiet-galaxy retest.**
+   - Setup:
+     - all BotPop bots despawned at 7:16 PM;
+     - the client has today's performance changes (LAA, DXVK 3.1.1 with a 60 fps cap, the user.cfg lines, Above normal priority);
+     - the full Hutt archive `6ff21312` is on both sides.
+   - Owner, in their own words (a tell to the test bot): "the animation is still kinda janky while moving the idle is better and moving looks good while prone".
+   - Universal Modder captures (scratchpad only, since they show the character name):
+     - the Hutt opens the character builder terminal's radial and its window;
+     - it goes prone and stands again;
+     - the client shows ping 35 ms, 0% packet loss, 30 fps.
+   - So the Hutt can be played. Interaction and movement work once the PC isn't starved. Only the walking animation is left.
+   - Next: the owner tries the A1 Deluxe Floater (`/object createitem object/tangible/deed/vehicle_deed/a1_deluxe_floater_deed.iff`, then call it from the datapad).
+     - The Hutt-only vehicle list (F4) is not built, so any vehicle works for now.
+     - There is no Hutt riding pose yet (README section 6).
