@@ -3,6 +3,28 @@
 Nothing is deployed. This is the plan the owner OKs or changes; GPT's C55 review decides
 which commits are fit, and the dress rehearsal (step 3) proves it before live is touched.
 
+## Owner's decision, 17 Oct ~5:45 AM: testers get the friends launch, with thin planets closed
+
+"friends launch but restrict ossus and any planets with little to no content". So the first testers get the
+whole-dev release (below: "Recommendation: deploy dev as a whole"), with C57's client patch, not the small release 1.
+
+| Planet | Launch | Why |
+|---|---|---|
+| The ten stock planets, the tutorial, the Corvette (`dungeon1`) | open | stock content |
+| Hoth | open | Echo Base ruins, caves and bosses, camps and vendors (hoth-release-gate.md applies) |
+| **Ossus** | **closed** | owner's call; O7 build and people installed on the test galaxy 16 Oct, untested in game |
+| **Nal Hutta** (`hutta`) | **closed** | one city and no creatures; the Hutt-home content (PL-04, `cd08be4`) is staged, not installed |
+| Space zones (10 in `SpaceZonesEnabled`) | **ask the owner** | enabled in the stock config; untested on this server |
+
+How a planet is closed (nothing new to build):
+- **Server:** the launch config enables the stock zones plus `hoth` only. The closed planets' screenplays and
+  templates load and stay dormant, as Hoth's do on live today. The server already refuses a ticket to a zone that
+  isn't running (`PurchaseTicketCommand.h:104-105`, `PlanetManagerImplementation.cpp:690-692`).
+- **Client:** the friends' archive is chained without the Ossus and Nal Hutta builder steps, so testers see no
+  shuttle routes or map entries for them. The Hutt stays playable; it starts on a stock planet like every species.
+- **Test galaxy:** keeps all three, for building and testing.
+- **To open one later:** add it to the launch config, ship its archive step in the client patch, restart.
+
 ## After C55 (4:45 PM): a small first release instead of all of dev
 
 GPT's C55 approves no whole-dev merge, and it is right on the facts that matter:
