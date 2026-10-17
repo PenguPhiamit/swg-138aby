@@ -1,0 +1,54 @@
+--- a/MMOCoreORB/src/server/zone/objects/region/SpawnAreaImplementation.cpp
++++ b/MMOCoreORB/src/server/zone/objects/region/SpawnAreaImplementation.cpp
+@@ -184,6 +184,28 @@
+ 	return 1;
+ }
+ 
++// The highest template level among a lair template's regular mobiles (0 if unknown). Lair and herd creatures spawn at
++// their template level whatever the row's difficulty; boss mobiles come only once the lair is attacked.
++static int highestLairCreatureLevel(uint32 lairHashCode) {
++	CreatureTemplateManager* templateManager = CreatureTemplateManager::instance();
++	LairTemplate* lairTemplate = templateManager->getLairTemplate(lairHashCode);
++
++	if (lairTemplate == nullptr)
++		return 0;
++
++	const VectorMap<String, int>* mobiles = lairTemplate->getMobiles();
++	int highest = 0;
++
++	for (int i = 0; i < mobiles->size(); ++i) {
++		CreatureTemplate* creatureTemplate = templateManager->getTemplate(mobiles->elementAt(i).getKey());
++
++		if (creatureTemplate != nullptr)
++			highest = Math::max(highest, creatureTemplate->getLevel());
++	}
++
++	return highest;
++}
++
+ void SpawnAreaImplementation::tryToSpawn(CreatureObject* player) {
+ 	if (player == nullptr)
+ 		return;
+@@ -302,9 +324,20 @@
+ 	// the krayt's (122+) never spawned for them. Both values are read once, at the first spawn (restart to change).
+ 	static const int levelGateBase = ConfigManager::instance()->getInt("Core3.SpawnArea.LevelGateBase", 10);
+ 	static const int levelGateMaxLevel = ConfigManager::instance()->getInt("Core3.SpawnArea.LevelGateMaxLevel", 10);
++	// Run 18 (16 Oct): the row minimum alone let level 12 to 31 creatures through for level 2 and 3 characters. Most
++	// rows near the towns start at 5 to 15 (tatooine_mos_eisley_se_hard, which covers Mos Eisley, Anchorhead and
++	// Bestine, starts at 15; Naboo's and Corellia's planet-wide tables at 5 and 10), while a lair's creatures keep
++	// their own template levels. So the gate also skips a row whose strongest regular creature is more than this many
++	// levels above the player. 0 turns this part off; read once, like the two above.
++	static const int levelGateCreatureMargin = ConfigManager::instance()->getInt("Core3.SpawnArea.LevelGateCreatureMargin", 7);
++
++	if (levelGateBase > 0 && playerLevel < levelGateMaxLevel) {
++		if (minDifficulty > levelGateBase + 3 * playerLevel)
++			return;
+ 
+-	if (levelGateBase > 0 && playerLevel < levelGateMaxLevel && minDifficulty > levelGateBase + 3 * playerLevel)
+-		return;
++		if (levelGateCreatureMargin > 0 && highestLairCreatureLevel(lairHashCode) > playerLevel + levelGateCreatureMargin)
++			return;
++	}
+ 
+ 	int lairRange = maxDifficulty - minDifficulty;
+ 

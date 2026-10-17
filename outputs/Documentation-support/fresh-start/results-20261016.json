@@ -1,0 +1,3619 @@
+[
+ {
+  "account": "forn1",
+  "name": "Rrowkah Taarv",
+  "race": "wookiee_male",
+  "profession": "combat_brawler",
+  "city": "moenia",
+  "tutorial": false,
+  "started": "11:04:41 PM",
+  "fail": "creation or login",
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 0,
+  "ended": "11:04:41 PM",
+  "batch": "results",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [ConnectToZone] Cleaning up login conn(0 s) [ZonePacketHandler] ERROR - Character creation FAILED\", \"(0 s) [CoreClient] ERROR - createCharacter failed: Character creation failed: name_declined_racially_inappropriate\", \"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/wookiee_male.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: true\", \"(0 s) [ZonePacketHandler] handleClientCreateCharacterFailed\"], \"first_scene\": []}",
+   "NOT CREATED; (0 s) [ConnectToZone] Cleaning up login conn(0 s) [ZonePacketHandler] ERROR - Character creation FAILED / (0 s) [ZonePacketHandler] ERROR -   Error code: name_declined_racially_inappropriate / (0 s) [CoreClient] ERROR - createCharacter failed: Character creation failed: name_declined_racially_inappropriate / (0 s) [ZonePacketHandler] handleClientCreateCharacterFailed"
+  ]
+ },
+ {
+  "account": "dorn1",
+  "name": "Selane Varrick",
+  "race": "human_female",
+  "profession": "social_entertainer",
+  "city": "bestine",
+  "tutorial": false,
+  "started": "11:04:17 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 27.903959274291992,
+   "y": -158.9053497314453,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 1100,
+   "health": 600,
+   "mind": 900
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 4294949865,
+   "expected": 4294949865,
+   "match": true,
+   "name": "Selane Varrick"
+  },
+  "first_room": [
+   "Kordo Haxtel",
+   "Imari Dossel",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:04:17 2026 [1792217057856 msec] (2369 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 7 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:21 2026 [1792217061913 msec] (2373 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 10 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:25 2026 [1792217065948 msec] (2377 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 16 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:29 2026 [1792217069960 msec] (2381 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 3 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:33 2026 [1792217073949 msec] (2385 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 8 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:37 2026 [1792217077967 msec] (2389 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 13 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:45 2026 [1792217085922 msec] (2397 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 22 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:49 2026 [1792217089914 msec] (2401 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 23 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:53 2026 [1792217093977 msec] (2405 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 24 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:58 2026 [1792217098006 msec] (2409 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 25 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:02 2026 [1792217102068 msec] (2413 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 11 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:06 2026 [1792217106118 msec] (2417 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 17 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 12,
+  "netstatus_noise": 69,
+  "ended": "11:05:11 PM",
+  "batch": "results",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/human_female.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: true\", \"(0 s) [ZonePacketHandler] Character creation SUCCESS - OID: 281475002570828\"], \"first_scene\": []}",
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "dorn2",
+  "name": "Kordo Haxtel",
+  "race": "zabrak_male",
+  "profession": "combat_brawler",
+  "city": "mos_espa",
+  "tutorial": false,
+  "started": "11:04:21 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 26.654577255249023,
+   "y": -157.9609375,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 1100,
+   "health": 1200,
+   "mind": 500
+  },
+  "level": 2,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 3791955286,
+   "expected": 3791955286,
+   "match": true,
+   "name": "Kordo Haxtel"
+  },
+  "first_room": [
+   "Imari Dossel",
+   "Pekko Rindalt",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:04:21 2026 [1792217061913 msec] (2373 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 10 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:25 2026 [1792217065948 msec] (2377 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 16 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:29 2026 [1792217069960 msec] (2381 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 3 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:33 2026 [1792217073949 msec] (2385 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 8 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:37 2026 [1792217077967 msec] (2389 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 13 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:45 2026 [1792217085922 msec] (2397 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 22 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:49 2026 [1792217089914 msec] (2401 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 23 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:53 2026 [1792217093977 msec] (2405 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 24 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:58 2026 [1792217098006 msec] (2409 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 25 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:02 2026 [1792217102068 msec] (2413 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 11 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:06 2026 [1792217106118 msec] (2417 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 17 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 11,
+  "netstatus_noise": 72,
+  "ended": "11:05:15 PM",
+  "batch": "results",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/zabrak_male.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: true\", \"(0 s) [ZonePacketHandler] Character creation SUCCESS - OID: 281475002571023\"], \"first_scene\": []}",
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "dorn3",
+  "name": "Imari Dossel",
+  "race": "twilek_female",
+  "profession": "science_medic",
+  "city": "coronet",
+  "tutorial": false,
+  "started": "11:04:25 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 23.982067108154297,
+   "y": -162.00608825683594,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 950,
+   "health": 600,
+   "mind": 1100
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 2224509660,
+   "expected": 2224509660,
+   "match": true,
+   "name": "Imari Dossel"
+  },
+  "first_room": [
+   "Pekko Rindalt",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:04:21 2026 [1792217061913 msec] (2373 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 10 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:25 2026 [1792217065948 msec] (2377 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 16 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:29 2026 [1792217069960 msec] (2381 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 3 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:33 2026 [1792217073949 msec] (2385 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 8 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:37 2026 [1792217077967 msec] (2389 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 13 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:45 2026 [1792217085922 msec] (2397 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 22 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:49 2026 [1792217089914 msec] (2401 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 23 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:53 2026 [1792217093977 msec] (2405 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 24 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:58 2026 [1792217098006 msec] (2409 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 25 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:02 2026 [1792217102068 msec] (2413 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 11 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:06 2026 [1792217106118 msec] (2417 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 17 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 11,
+  "netstatus_noise": 80,
+  "ended": "11:05:19 PM",
+  "batch": "results",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/twilek_female.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: true\", \"(0 s) [ZonePacketHandler] Character creation SUCCESS - OID: 281475002571182\"], \"first_scene\": []}",
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "esk3",
+  "name": "Halden Merrow",
+  "race": "human_male",
+  "profession": "combat_marksman",
+  "city": "mos_eisley",
+  "tutorial": true,
+  "started": "11:05:05 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 26.13774871826172,
+   "y": -162.42401123046875,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 900,
+   "health": 1100,
+   "mind": 700
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 2937962913,
+   "expected": 2937962913,
+   "match": true,
+   "name": "Halden Merrow"
+  },
+  "first_room": [
+   "Ommor Vashtel",
+   "Dabbi Sorrin",
+   "Varrin Okkaro",
+   "Travel Terminal",
+   "Telsa Brevin"
+  ],
+  "server_errors": [
+   "Fri Oct 16 23:05:06 2026 [1792217106118 msec] (2417 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 17 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 1,
+  "netstatus_noise": 33,
+  "ended": "11:05:19 PM",
+  "batch": "results",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/human_male.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: false\", \"(0 s) [ZonePacketHandler] Character creation SUCCESS - OID: 281475002573356\"], \"first_scene\": []}",
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "cresh1",
+  "name": "Pekko Rindalt",
+  "race": "rodian_male",
+  "profession": "combat_marksman",
+  "city": "tyrena",
+  "tutorial": false,
+  "started": "11:04:29 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 24.341657638549805,
+   "y": -162.4054412841797,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 1000,
+   "health": 1000,
+   "mind": 600
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 200920476,
+   "expected": 200920476,
+   "match": true,
+   "name": "Pekko Rindalt"
+  },
+  "first_room": [
+   "Travel Terminal",
+   "Grashuk Volnar",
+   "Neela Quorvin"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:04:29 2026 [1792217069960 msec] (2381 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 3 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:33 2026 [1792217073949 msec] (2385 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 8 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:37 2026 [1792217077967 msec] (2389 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 13 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:45 2026 [1792217085922 msec] (2397 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 22 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:49 2026 [1792217089914 msec] (2401 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 23 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:53 2026 [1792217093977 msec] (2405 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 24 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:58 2026 [1792217098006 msec] (2409 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 25 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:02 2026 [1792217102068 msec] (2413 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 11 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:06 2026 [1792217106118 msec] (2417 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 17 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 9,
+  "netstatus_noise": 78,
+  "ended": "11:05:23 PM",
+  "batch": "results",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/rodian_male.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: true\", \"(0 s) [ZonePacketHandler] Character creation SUCCESS - OID: 281475002571296\"], \"first_scene\": []}",
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "cresh2",
+  "name": "Grashuk Volnar",
+  "race": "trandoshan_male",
+  "profession": "outdoors_scout",
+  "city": "kor_vella",
+  "tutorial": false,
+  "started": "11:04:33 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 26.027864456176758,
+   "y": -154.94760131835938,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 800,
+   "health": 1050,
+   "mind": 700
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 1355045775,
+   "expected": 1355045775,
+   "match": true,
+   "name": "Grashuk Volnar"
+  },
+  "first_room": [
+   "Neela Quorvin",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:04:33 2026 [1792217073949 msec] (2385 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 8 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:37 2026 [1792217077967 msec] (2389 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 13 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:45 2026 [1792217085922 msec] (2397 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 22 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:49 2026 [1792217089914 msec] (2401 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 23 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:53 2026 [1792217093977 msec] (2405 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 24 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:58 2026 [1792217098006 msec] (2409 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 25 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:02 2026 [1792217102068 msec] (2413 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 11 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:06 2026 [1792217106118 msec] (2417 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 17 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 8,
+  "netstatus_noise": 86,
+  "ended": "11:05:27 PM",
+  "batch": "results",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/trandoshan_male.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: true\", \"(0 s) [ZonePacketHandler] Character creation SUCCESS - OID: 281475002571519\"], \"first_scene\": []}",
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "cresh3",
+  "name": "Neela Quorvin",
+  "race": "moncal_female",
+  "profession": "crafting_artisan",
+  "city": "theed",
+  "tutorial": false,
+  "started": "11:04:37 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 31.045459747314453,
+   "y": -156.42877197265625,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 800,
+   "health": 600,
+   "mind": 1200
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 2553266142,
+   "expected": 2553266142,
+   "match": true,
+   "name": "Neela Quorvin"
+  },
+  "first_room": [
+   "Telsa Brevin",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:04:37 2026 [1792217077967 msec] (2389 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 13 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:45 2026 [1792217085922 msec] (2397 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 22 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:49 2026 [1792217089914 msec] (2401 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 23 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:53 2026 [1792217093977 msec] (2405 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 24 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:58 2026 [1792217098006 msec] (2409 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 25 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:02 2026 [1792217102068 msec] (2413 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 11 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:06 2026 [1792217106118 msec] (2417 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 17 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 7,
+  "netstatus_noise": 83,
+  "ended": "11:05:31 PM",
+  "batch": "results",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/moncal_female.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: true\", \"(0 s) [ZonePacketHandler] Character creation SUCCESS - OID: 281475002571789\"], \"first_scene\": []}",
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn2",
+  "name": "Telsa Brevin",
+  "race": "bothan_female",
+  "profession": "combat_marksman",
+  "city": "keren",
+  "tutorial": false,
+  "started": "11:04:45 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 28.31049156188965,
+   "y": -156.83502197265625,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 1100,
+   "health": 1000,
+   "mind": 700
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 491942670,
+   "expected": 491942670,
+   "match": true,
+   "name": "Telsa Brevin"
+  },
+  "first_room": [
+   "Dabbi Sorrin",
+   "Ommor Vashtel",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:04:45 2026 [1792217085922 msec] (2397 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 22 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:49 2026 [1792217089914 msec] (2401 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 23 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:53 2026 [1792217093977 msec] (2405 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 24 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:58 2026 [1792217098006 msec] (2409 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 25 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:02 2026 [1792217102068 msec] (2413 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 11 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:06 2026 [1792217106118 msec] (2417 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 17 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 6,
+  "netstatus_noise": 86,
+  "ended": "11:05:39 PM",
+  "batch": "results",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/bothan_female.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: true\", \"(0 s) [ZonePacketHandler] Character creation SUCCESS - OID: 281475002572177\"], \"first_scene\": []}",
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn3",
+  "name": "Ommor Vashtel",
+  "race": "ithorian_male",
+  "profession": "science_medic",
+  "city": "narmle",
+  "tutorial": false,
+  "started": "11:04:49 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 25.3481502532959,
+   "y": -160.4726104736328,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 800,
+   "health": 1000,
+   "mind": 1200
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 951764932,
+   "expected": 951764932,
+   "match": true,
+   "name": "Ommor Vashtel"
+  },
+  "first_room": [
+   "Dabbi Sorrin",
+   "Varrin Okkaro",
+   "Telsa Brevin",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:04:49 2026 [1792217089914 msec] (2401 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 23 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:53 2026 [1792217093977 msec] (2405 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 24 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:58 2026 [1792217098006 msec] (2409 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 25 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:02 2026 [1792217102068 msec] (2413 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 11 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:06 2026 [1792217106118 msec] (2417 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 17 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 5,
+  "netstatus_noise": 80,
+  "ended": "11:05:43 PM",
+  "batch": "results",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/ithorian_male.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: true\", \"(0 s) [ZonePacketHandler] Character creation SUCCESS - OID: 281475002572477\"], \"first_scene\": []}",
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn4",
+  "name": "Dabbi Sorrin",
+  "race": "sullustan_female",
+  "profession": "social_entertainer",
+  "city": "restuss",
+  "tutorial": false,
+  "started": "11:04:53 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 28.751434326171875,
+   "y": -160.02699279785156,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 1250,
+   "health": 650,
+   "mind": 1000
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 359871514,
+   "expected": 359871514,
+   "match": true,
+   "name": "Dabbi Sorrin"
+  },
+  "first_room": [
+   "Borgo Tashuri",
+   "Telsa Brevin",
+   "Ommor Vashtel",
+   "Varrin Okkaro",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:04:53 2026 [1792217093977 msec] (2405 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 24 in onlineZoneClientMap",
+   "Fri Oct 16 23:04:58 2026 [1792217098006 msec] (2409 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 25 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:02 2026 [1792217102068 msec] (2413 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 11 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:06 2026 [1792217106118 msec] (2417 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 17 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 4,
+  "netstatus_noise": 80,
+  "ended": "11:05:47 PM",
+  "batch": "results",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/sullustan_female.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: true\", \"(0 s) [ZonePacketHandler] Character creation SUCCESS - OID: 281475002572798\"], \"first_scene\": []}",
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn5",
+  "name": "Varrin Okkaro",
+  "race": "chiss_male",
+  "profession": "outdoors_scout",
+  "city": "dearic",
+  "tutorial": false,
+  "started": "11:04:57 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 24.721282958984375,
+   "y": -157.07191467285156,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 900,
+   "health": 900,
+   "mind": 800
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 49680044,
+   "expected": 49680044,
+   "match": true,
+   "name": "Varrin Okkaro"
+  },
+  "first_room": [
+   "Borgo Tashuri",
+   "Ommor Vashtel",
+   "Telsa Brevin",
+   "Dabbi Sorrin",
+   "Halden Merrow",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:04:58 2026 [1792217098006 msec] (2409 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 25 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:02 2026 [1792217102068 msec] (2413 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 11 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:06 2026 [1792217106118 msec] (2417 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 17 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 3,
+  "netstatus_noise": 79,
+  "ended": "11:05:51 PM",
+  "batch": "results",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/chiss_male.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: true\", \"(0 s) [ZonePacketHandler] Character creation SUCCESS - OID: 281475002573005\"], \"first_scene\": []}",
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "esk2",
+  "name": "Borgo Tashuri",
+  "race": "hutt_male",
+  "profession": "crafting_artisan",
+  "city": "mos_eisley",
+  "tutorial": false,
+  "started": "11:05:01 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 26.340105056762695,
+   "y": -158.24887084960938,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 800,
+   "health": 700,
+   "mind": 900
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 2439267321,
+   "expected": 2439267321,
+   "match": true,
+   "name": "Borgo Tashuri"
+  },
+  "first_room": [
+   "Varrin Okkaro",
+   "Telsa Brevin",
+   "Ommor Vashtel",
+   "Dabbi Sorrin",
+   "Halden Merrow",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:05:02 2026 [1792217102068 msec] (2413 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 11 in onlineZoneClientMap",
+   "Fri Oct 16 23:05:06 2026 [1792217106118 msec] (2417 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 17 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 2,
+  "netstatus_noise": 73,
+  "ended": "11:05:55 PM",
+  "batch": "results",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/hutt_male.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: true\", \"(0 s) [ZonePacketHandler] Character creation SUCCESS - OID: 281475002573227\"], \"first_scene\": []}",
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "dorn1",
+  "name": "Selane Varrick",
+  "race": "human_female",
+  "profession": "social_entertainer",
+  "city": "bestine",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:07:00 PM",
+  "landed": {
+   "planet": "tatooine",
+   "x": -1290.0,
+   "y": -3590.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 1100,
+   "health": 600,
+   "mind": 900
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 4294949865,
+   "expected": 4294949865,
+   "match": true,
+   "name": "Selane Varrick"
+  },
+  "first_room": [
+   "R2-P4 (a helper R2 unit)",
+   "@npc_spawner_n:wlinc_tchrr",
+   "@npc_spawner_n:gert_talnin",
+   "RK-567 (a Stormtrooper Commando)",
+   "Stidofeo Flyingsun (an Imperial recruiter)",
+   "@terminal_name:terminal_character_builder",
+   "Stafe Cibi (a scavenger)",
+   "Pooslikoofa (a Scout trainer)",
+   "@crafting:space_station_name",
+   "Mebirgo Fanowwi (a commoner)",
+   "Gabock Naema (an Artisan trainer)"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:07:19 2026 [1792217239075 msec] (2550 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 21 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 1,
+  "netstatus_noise": 88,
+  "ended": "11:07:54 PM",
+  "batch": "results2",
+  "create_lines": [
+   "{\"login_s\": 10}"
+  ]
+ },
+ {
+  "account": "dorn2",
+  "name": "Kordo Haxtel",
+  "race": "zabrak_male",
+  "profession": "combat_brawler",
+  "city": "mos_espa",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:07:03 PM",
+  "landed": {
+   "planet": "tatooine",
+   "x": -2902.0,
+   "y": 2130.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 1100,
+   "health": 1200,
+   "mind": 500
+  },
+  "level": 2,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 3791955286,
+   "expected": 3791955286,
+   "match": true,
+   "name": "Kordo Haxtel"
+  },
+  "first_room": [
+   "R2-L4 (a helper R2 unit)",
+   "@npc_spawner_n:prost_roberts",
+   "@npc_spawner_n:rel_keteris",
+   "@npc_spawner_n:anim_kahn",
+   "@terminal_name:terminal_character_builder",
+   "Chroole (a commoner)",
+   "Popbot229",
+   "Popbot192",
+   "@mob/creature_names:cll8_binary_load_lifter",
+   "Wrono Trebeu (an Artisan trainer)",
+   "Stoso (a commoner)",
+   "Wrage Irou (a Scout trainer)"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:07:19 2026 [1792217239075 msec] (2550 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 21 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 1,
+  "netstatus_noise": 88,
+  "ended": "11:07:57 PM",
+  "batch": "results2",
+  "create_lines": [
+   "{\"login_s\": 10}"
+  ]
+ },
+ {
+  "account": "dorn3",
+  "name": "Imari Dossel",
+  "race": "twilek_female",
+  "profession": "science_medic",
+  "city": "coronet",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:07:06 PM",
+  "landed": {
+   "planet": "corellia",
+   "x": -137.0,
+   "y": -4723.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 950,
+   "health": 600,
+   "mind": 1100
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 2224509660,
+   "expected": 2224509660,
+   "match": true,
+   "name": "Imari Dossel"
+  },
+  "first_room": [
+   "R2-V8 (a helper R2 unit)",
+   "@npc_spawner_n:ral_mundi",
+   "@npc_spawner_n:tarth_jaxx",
+   "@npc_spawner_n:io_tsomcren",
+   "@obj_n:imperial_banner",
+   "@terminal_name:terminal_character_builder",
+   "@obj_n:imperial_banner",
+   "@terminal_name:terminal_character_builder",
+   "Geki Alo (a commoner)",
+   "Lahire Wewai (a Scout trainer)",
+   "Ma'A Vyaffa (an Architect trainer)",
+   "Kasko Vightia (a Marksman trainer)"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:07:19 2026 [1792217239075 msec] (2550 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 21 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 1,
+  "netstatus_noise": 99,
+  "ended": "11:08:00 PM",
+  "batch": "results2",
+  "create_lines": [
+   "{\"login_s\": 10}"
+  ]
+ },
+ {
+  "account": "cresh1",
+  "name": "Pekko Rindalt",
+  "race": "rodian_male",
+  "profession": "combat_marksman",
+  "city": "tyrena",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:07:09 PM",
+  "landed": {
+   "planet": "corellia",
+   "x": -5045.0,
+   "y": -2294.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 1000,
+   "health": 1000,
+   "mind": 600
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 200920476,
+   "expected": 200920476,
+   "match": true,
+   "name": "Pekko Rindalt"
+  },
+  "first_room": [
+   "R2-T1 (a helper R2 unit)",
+   "@npc_spawner_n:ulaire_roye",
+   "@npc_spawner_n:larek_tatham",
+   "Hafima Seihifa (a command security guard)",
+   "@obj_n:imperial_banner",
+   "@npc_spawner_n:cll_8",
+   "RK-58",
+   "@terminal_name:terminal_character_builder",
+   "Sseti Vide (an Entertainer trainer)",
+   "Sossouwa Drowra (a Musician trainer)",
+   "Wrutha (a Medic trainer)",
+   "@crafting:space_station_name"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:07:19 2026 [1792217239075 msec] (2550 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 21 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 1,
+  "netstatus_noise": 99,
+  "ended": "11:08:02 PM",
+  "batch": "results2",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "cresh2",
+  "name": "Grashuk Volnar",
+  "race": "trandoshan_male",
+  "profession": "outdoors_scout",
+  "city": "kor_vella",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:07:12 PM",
+  "landed": {
+   "planet": "corellia",
+   "x": -3138.0,
+   "y": 2808.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 800,
+   "health": 1050,
+   "mind": 700
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 1355045775,
+   "expected": 1355045775,
+   "match": true,
+   "name": "Grashuk Volnar"
+  },
+  "first_room": [
+   "R2-I0 (a helper R2 unit)",
+   "R5-N4",
+   "@npc_spawner_n:logro_elsin",
+   "@npc_spawner_n:dac_axfow",
+   "@npc_spawner_n:eryk_chinn",
+   "@mob/creature_names:spynet_operative",
+   "Ewo Ana (an Entertainer trainer)",
+   "Wewo Lidai (a Medic trainer)",
+   "Bewi Rhiepe (a Chef trainer)",
+   "Eomi Era (a Marksman trainer)",
+   "Rethme Koda (a commoner)",
+   "Eso Vika (a Brawler trainer)"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:07:19 2026 [1792217239075 msec] (2550 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 21 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 1,
+  "netstatus_noise": 108,
+  "ended": "11:08:06 PM",
+  "batch": "results2",
+  "create_lines": [
+   "{\"login_s\": 10}"
+  ]
+ },
+ {
+  "account": "cresh3",
+  "name": "Neela Quorvin",
+  "race": "moncal_female",
+  "profession": "crafting_artisan",
+  "city": "theed",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:07:15 PM",
+  "landed": {
+   "planet": "naboo",
+   "x": -4856.0,
+   "y": 4162.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 800,
+   "health": 600,
+   "mind": 1200
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 2553266142,
+   "expected": 2553266142,
+   "match": true,
+   "name": "Neela Quorvin"
+  },
+  "first_room": [
+   "R2-T1 (a helper R2 unit)",
+   "Popbot1340",
+   "@npc_spawner_n:kultin_woodle",
+   "@npc_spawner_n:j1_po",
+   "Popbot1270",
+   "Ehowoi Wharge (a Gungan hunter)",
+   "VK-450 (a Stormtrooper Rifleman)",
+   "LK-776",
+   "@obj_n:rebel_banner",
+   "RK-344 (an Imperial stormcaptain)",
+   "@obj_n:rebel_banner",
+   "Naosa Thezihe (a commoner)"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:07:19 2026 [1792217239075 msec] (2550 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 21 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 1,
+  "netstatus_noise": 108,
+  "ended": "11:08:08 PM",
+  "batch": "results2",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn2",
+  "name": "Telsa Brevin",
+  "race": "bothan_female",
+  "profession": "combat_marksman",
+  "city": "keren",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:07:21 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 28.31049156188965,
+   "y": -156.83502197265625,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 1100,
+   "health": 1000,
+   "mind": 700
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 491942670,
+   "expected": 491942670,
+   "match": true,
+   "name": "Telsa Brevin"
+  },
+  "first_room": [
+   "Dabbi Sorrin",
+   "Varrin Okkaro",
+   "Ommor Vashtel",
+   "Halden Merrow",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:08:13 2026 [1792217293665 msec] (2605 s) Thread 32 - [ZoneClientSession 192.168.1.210:48278] ERROR - bool "
+  ],
+  "server_errors_total": 1,
+  "netstatus_noise": 110,
+  "ended": "11:08:14 PM",
+  "batch": "results2",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn3",
+  "name": "Ommor Vashtel",
+  "race": "ithorian_male",
+  "profession": "science_medic",
+  "city": "narmle",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:07:24 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 25.3481502532959,
+   "y": -160.4726104736328,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 800,
+   "health": 1000,
+   "mind": 1200
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 951764932,
+   "expected": 951764932,
+   "match": true,
+   "name": "Ommor Vashtel"
+  },
+  "first_room": [
+   "Halden Merrow",
+   "Dabbi Sorrin",
+   "Varrin Okkaro",
+   "Telsa Brevin",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [
+   "Fri Oct 16 23:08:13 2026 [1792217293665 msec] (2605 s) Thread 32 - [ZoneClientSession 192.168.1.210:48278] ERROR - bool "
+  ],
+  "server_errors_total": 1,
+  "netstatus_noise": 106,
+  "ended": "11:08:17 PM",
+  "batch": "results2",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn4",
+  "name": "Dabbi Sorrin",
+  "race": "sullustan_female",
+  "profession": "social_entertainer",
+  "city": "restuss",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:07:27 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 28.751434326171875,
+   "y": -160.02699279785156,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 1250,
+   "health": 650,
+   "mind": 1000
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 359871514,
+   "expected": 359871514,
+   "match": true,
+   "name": "Dabbi Sorrin"
+  },
+  "first_room": [
+   "Telsa Brevin",
+   "Ommor Vashtel",
+   "Halden Merrow",
+   "Varrin Okkaro",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 115,
+  "ended": "11:08:20 PM",
+  "batch": "results2",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn5",
+  "name": "Varrin Okkaro",
+  "race": "chiss_male",
+  "profession": "outdoors_scout",
+  "city": "dearic",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:07:30 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 24.721282958984375,
+   "y": -157.07191467285156,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 900,
+   "health": 900,
+   "mind": 800
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 49680044,
+   "expected": 49680044,
+   "match": true,
+   "name": "Varrin Okkaro"
+  },
+  "first_room": [
+   "Ommor Vashtel",
+   "Telsa Brevin",
+   "Dabbi Sorrin",
+   "Halden Merrow",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 106,
+  "ended": "11:08:23 PM",
+  "batch": "results2",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "esk2",
+  "name": "Borgo Tashuri",
+  "race": "hutt_male",
+  "profession": "crafting_artisan",
+  "city": "mos_eisley",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:07:33 PM",
+  "landed": {
+   "planet": "tatooine",
+   "x": 3528.0,
+   "y": -4804.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 800,
+   "health": 700,
+   "mind": 900
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 2439267321,
+   "expected": 2439267321,
+   "match": true,
+   "name": "Borgo Tashuri"
+  },
+  "first_room": [
+   "R2-D7 (a helper R2 unit)",
+   "@npc_spawner_n:guillo_parootchie",
+   "@npc_spawner_n:vincie_kalhoon",
+   "@npc_spawner_n:mooch_davoney",
+   "@obj_n:imperial_banner",
+   "@terminal_name:terminal_character_builder",
+   "Lliki Fobora (a Mos Eisley police Sergeant)",
+   "@obj_n:imperial_banner",
+   "GK-783 (a Sand Trooper)",
+   "Moxo (a commoner)",
+   "Awe Geoge (a Scout trainer)",
+   "@crafting:space_station_name"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 100,
+  "ended": "11:08:27 PM",
+  "batch": "results2",
+  "create_lines": [
+   "{\"login_s\": 10}"
+  ]
+ },
+ {
+  "account": "esk3",
+  "name": "Halden Merrow",
+  "race": "human_male",
+  "profession": "combat_marksman",
+  "city": "mos_entha",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:07:36 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 26.13774871826172,
+   "y": -162.42401123046875,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 900,
+   "health": 1100,
+   "mind": 700
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 2937962913,
+   "expected": 2937962913,
+   "match": true,
+   "name": "Halden Merrow"
+  },
+  "first_room": [
+   "Ommor Vashtel",
+   "Dabbi Sorrin",
+   "Varrin Okkaro",
+   "Travel Terminal",
+   "Telsa Brevin"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 93,
+  "ended": "11:08:29 PM",
+  "batch": "results2",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn1",
+  "name": "Rrowkah",
+  "race": "wookiee_male",
+  "profession": "combat_brawler",
+  "city": "moenia",
+  "tutorial": false,
+  "existing": false,
+  "started": "11:07:18 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 27.960927963256836,
+   "y": -159.0062255859375,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 1000,
+   "health": 1350,
+   "mind": 600
+  },
+  "level": 2,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 90470685,
+   "expected": 90470685,
+   "match": true,
+   "name": "Rrowkah"
+  },
+  "first_room": [
+   "Dabbi Sorrin",
+   "Telsa Brevin",
+   "Ommor Vashtel",
+   "Varrin Okkaro",
+   "Halden Merrow",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "event": "scene_start",
+   "planet": "naboo",
+   "self": 281475002578721,
+   "x": 4800.0,
+   "y": -4700.0,
+   "z": 4.170000076293945
+  },
+  "in_city": {
+   "planet": "naboo",
+   "x": 4800.0,
+   "y": -4700.0,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-Z0 (a helper R2 unit)",
+   "menu_s": 10.31,
+   "menu": []
+  },
+  "trainer": {
+   "key": "trainer_scout",
+   "found": 1,
+   "name": "Wobik (a Scout trainer)",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_scout"
+   ],
+   "cash": [
+    10000,
+    10000
+   ],
+   "learned": false
+  },
+  "fight": {
+   "target": "@mob/creature_names:junk_dealer",
+   "level": 100,
+   "reply": {
+    "result": "timeout",
+    "attacks": 26,
+    "seconds": 61.459,
+    "ok": true
+   },
+   "after": {
+    "ham": {
+     "action": 1000,
+     "health": 1350,
+     "mind": 600
+    },
+    "posture": "upright"
+   },
+   "target_ham_end": {
+    "action": 27849,
+    "health": 25357,
+    "mind": 29275
+   },
+   "target_max_ham": {
+    "action": 27849,
+    "health": 25357,
+    "mind": 29275
+   }
+  },
+  "inventory": [
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:axe_heavy_duty",
+   "@weapon_name:knife_stone",
+   "@weapon_name:knife_survival",
+   "@weapon_name:lance_staff_wood_s1",
+   "@weapon_name:rifle_bowcaster"
+  ],
+  "server_errors": [
+   "Fri Oct 16 23:07:19 2026 [1792217239075 msec] (2550 s) Thread 32 - [PlayerManager] ERROR - decreaseOnlineCharCount missing account 21 in onlineZoneClientMap"
+  ],
+  "server_errors_total": 1,
+  "netstatus_noise": 128,
+  "ended": "11:09:14 PM",
+  "batch": "results2",
+  "create_lines": [
+   "{\"create_s\": 0, \"lines\": [\"(0 s) [CreateCharacter] Creating character:\", \"(0 s) [CreateCharacter]   Race: object/creature/player/wookiee_male.iff\", \"(0 s) [CreateCharacter]   Skip Tutorial: true\", \"(0 s) [ZonePacketHandler] Character creation SUCCESS - OID: 281475002578721\"], \"first_scene\": []}",
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn2",
+  "name": "Telsa Brevin",
+  "race": "bothan_female",
+  "profession": "combat_marksman",
+  "city": "keren",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:12:02 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 28.31049156188965,
+   "y": -156.83502197265625,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 1100,
+   "health": 1000,
+   "mind": 700
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 491942670,
+   "expected": 491942670,
+   "match": true,
+   "name": "Telsa Brevin"
+  },
+  "first_room": [
+   "Dabbi Sorrin",
+   "Varrin Okkaro",
+   "Ommor Vashtel",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 130,
+  "ended": "11:12:55 PM",
+  "batch": "results3",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn3",
+  "name": "Ommor Vashtel",
+  "race": "ithorian_male",
+  "profession": "science_medic",
+  "city": "narmle",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:12:05 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 25.3481502532959,
+   "y": -160.4726104736328,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 800,
+   "health": 1000,
+   "mind": 1200
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 951764932,
+   "expected": 951764932,
+   "match": true,
+   "name": "Ommor Vashtel"
+  },
+  "first_room": [
+   "Dabbi Sorrin",
+   "Varrin Okkaro",
+   "Telsa Brevin",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 122,
+  "ended": "11:12:58 PM",
+  "batch": "results3",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn4",
+  "name": "Dabbi Sorrin",
+  "race": "sullustan_female",
+  "profession": "social_entertainer",
+  "city": "restuss",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:12:08 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 28.751434326171875,
+   "y": -160.02699279785156,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 1250,
+   "health": 650,
+   "mind": 1000
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 359871514,
+   "expected": 359871514,
+   "match": true,
+   "name": "Dabbi Sorrin"
+  },
+  "first_room": [
+   "Telsa Brevin",
+   "Ommor Vashtel",
+   "Halden Merrow",
+   "Varrin Okkaro",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 130,
+  "ended": "11:13:01 PM",
+  "batch": "results3",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "cresh2",
+  "name": "Grashuk Volnar",
+  "race": "trandoshan_male",
+  "profession": "outdoors_scout",
+  "city": "kor_vella",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:11:53 PM",
+  "landed": {
+   "planet": "corellia",
+   "x": -3138.0,
+   "y": 2808.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 800,
+   "health": 1050,
+   "mind": 700
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 1355045775,
+   "expected": 1355045775,
+   "match": true,
+   "name": "Grashuk Volnar"
+  },
+  "first_room": [
+   "R2-I0 (a helper R2 unit)",
+   "Noewi Dhiosto (a commoner)",
+   "@npc_spawner_n:logro_elsin",
+   "@npc_spawner_n:dac_axfow",
+   "@npc_spawner_n:eryk_chinn",
+   "@mob/creature_names:spynet_operative",
+   "Ewo Ana (an Entertainer trainer)",
+   "Wewo Lidai (a Medic trainer)",
+   "Bewi Rhiepe (a Chef trainer)",
+   "Eomi Era (a Marksman trainer)",
+   "R3-A2",
+   "Rethme Koda (a commoner)"
+  ],
+  "city_move": "earlier run",
+  "in_city": {
+   "planet": "corellia",
+   "x": -3138.0,
+   "y": 2808.0,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-I0 (a helper R2 unit)",
+   "menu_s": 0.3,
+   "menu": [
+    "",
+    "@pet/pet_menu:droid_options",
+    "@pet/pet_menu:menu_store",
+    "@new_player:menu_space",
+    "@new_player:space_option_how_to_find_ship",
+    "@new_player:space_option_how_to_check_email",
+    "@new_player:space_option_how_to_travel",
+    "@new_player:space_option_how_to_make_money",
+    "@new_player:menu_quests",
+    "@new_player:submenu_scout",
+    "@new_player:menu_other",
+    "@new_player:submenu_cloning"
+   ],
+   "answer_s": 0.3,
+   "answer": [
+    "@new_player:space_info_how_to_travel"
+   ]
+  },
+  "trainer": {
+   "key": "trainer_brawler",
+   "found": 2,
+   "name": "Eso Vika (a Brawler trainer)",
+   "box": "@skl_n:combat_brawler_novice",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_brawler",
+    "@skill_teacher:msg2_1",
+    "@skill_teacher:prose_cost",
+    "@skill_teacher:prose_pay",
+    "@skill_teacher:prose_skill_learned",
+    "@skill_teacher:msg3_2"
+   ],
+   "cash": [
+    10000,
+    9975
+   ],
+   "learned": true
+  },
+  "fight": {
+   "target": "@mob/creature_names:corellian_butterfly_drone",
+   "level": 5,
+   "reply": {
+    "result": "target dead",
+    "attacks": 6,
+    "seconds": 41.268,
+    "ok": true
+   },
+   "after": {
+    "ham": {
+     "action": 726,
+     "health": 1019,
+     "mind": 700
+    },
+    "posture": "upright"
+   },
+   "target_ham_end": {
+    "action": 63,
+    "health": -70,
+    "mind": 130
+   },
+   "target_max_ham": {
+    "action": 157,
+    "health": 163,
+    "mind": 151
+   }
+  },
+  "inventory": [
+   "@crafting:generic_tool_name",
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:knife_survival",
+   "@wearables_name:pants_s21",
+   "@wearables_name:shirt_s16",
+   "@wearables_name:vest_s09"
+  ],
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 146,
+  "ended": "11:13:01 PM",
+  "batch": "results3",
+  "create_lines": [
+   "{\"login_s\": 10}"
+  ]
+ },
+ {
+  "account": "forn5",
+  "name": "Varrin Okkaro",
+  "race": "chiss_male",
+  "profession": "outdoors_scout",
+  "city": "dearic",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:12:11 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 24.721282958984375,
+   "y": -157.07191467285156,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 900,
+   "health": 900,
+   "mind": 800
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 49680044,
+   "expected": 49680044,
+   "match": true,
+   "name": "Varrin Okkaro"
+  },
+  "first_room": [
+   "Ommor Vashtel",
+   "Telsa Brevin",
+   "Dabbi Sorrin",
+   "Halden Merrow",
+   "Travel Terminal"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 124,
+  "ended": "11:13:04 PM",
+  "batch": "results3",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "esk3",
+  "name": "Halden Merrow",
+  "race": "human_male",
+  "profession": "combat_marksman",
+  "city": "mos_entha",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:12:17 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 26.13774871826172,
+   "y": -162.42401123046875,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 900,
+   "health": 1100,
+   "mind": 700
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 2937962913,
+   "expected": 2937962913,
+   "match": true,
+   "name": "Halden Merrow"
+  },
+  "first_room": [
+   "Ommor Vashtel",
+   "Dabbi Sorrin",
+   "Varrin Okkaro",
+   "Travel Terminal",
+   "Telsa Brevin"
+  ],
+  "city_move": {
+   "error": "no scene_start",
+   "system": []
+  },
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 129,
+  "ended": "11:13:10 PM",
+  "batch": "results3",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "dorn2",
+  "name": "Kordo Haxtel",
+  "race": "zabrak_male",
+  "profession": "combat_brawler",
+  "city": "mos_espa",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:11:44 PM",
+  "landed": {
+   "planet": "tatooine",
+   "x": -2902.0,
+   "y": 2130.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 1100,
+   "health": 1200,
+   "mind": 500
+  },
+  "level": 2,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 3791955286,
+   "expected": 3791955286,
+   "match": true,
+   "name": "Kordo Haxtel"
+  },
+  "first_room": [
+   "R2-L4 (a helper R2 unit)",
+   "@npc_spawner_n:prost_roberts",
+   "@npc_spawner_n:rel_keteris",
+   "@npc_spawner_n:anim_kahn",
+   "@terminal_name:terminal_character_builder",
+   "Popbot229",
+   "Wrono Trebeu (an Artisan trainer)",
+   "@mob/creature_names:cll8_binary_load_lifter",
+   "Kioponoa Doha'Lya (a thug)",
+   "Stoso (a commoner)",
+   "Wrage Irou (a Scout trainer)",
+   "Moolky Nafa (a noble)"
+  ],
+  "city_move": "earlier run",
+  "in_city": {
+   "planet": "tatooine",
+   "x": -2902.0,
+   "y": 2130.0,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-L4 (a helper R2 unit)",
+   "menu_s": 0.3,
+   "menu": [
+    "",
+    "@pet/pet_menu:droid_options",
+    "@pet/pet_menu:menu_store",
+    "@new_player:menu_space",
+    "@new_player:space_option_how_to_find_ship",
+    "@new_player:space_option_how_to_check_email",
+    "@new_player:space_option_how_to_travel",
+    "@new_player:space_option_how_to_make_money",
+    "@new_player:menu_quests",
+    "@new_player:submenu_brawler",
+    "@new_player:menu_other",
+    "@new_player:submenu_cloning"
+   ],
+   "answer_s": 0.3,
+   "answer": [
+    "@new_player:space_info_how_to_travel"
+   ]
+  },
+  "trainer": {
+   "key": "trainer_scout",
+   "found": 1,
+   "name": "Wrage Irou (a Scout trainer)",
+   "box": "@skl_n:outdoors_scout_novice",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_scout",
+    "@skill_teacher:msg2_1",
+    "@skill_teacher:prose_cost",
+    "@skill_teacher:prose_skill_learned",
+    "@skill_teacher:msg3_2",
+    "@skill_teacher:prose_pay"
+   ],
+   "cash": [
+    10000,
+    9975
+   ],
+   "learned": true
+  },
+  "fight": {
+   "target": "@mob/creature_names:cll8_binary_load_lifter",
+   "level": 4,
+   "reply": {
+    "result": "timeout",
+    "attacks": 18,
+    "seconds": 60.771,
+    "ok": true
+   },
+   "after": {
+    "ham": {
+     "action": 1100,
+     "health": 1200,
+     "mind": 500
+    },
+    "posture": "upright"
+   },
+   "target_ham_end": {
+    "action": 128,
+    "health": 132,
+    "mind": 119
+   },
+   "target_max_ham": {
+    "action": 128,
+    "health": 132,
+    "mind": 119
+   }
+  },
+  "inventory": [
+   "@crafting:generic_tool_name",
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:axe_heavy_duty",
+   "@weapon_name:knife_stone",
+   "@weapon_name:knife_survival",
+   "@weapon_name:lance_staff_wood_s1",
+   "@wearables_name:boots_s05",
+   "@wearables_name:jacket_s16",
+   "@wearables_name:pants_s14",
+   "@wearables_name:shirt_s14"
+  ],
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 170,
+  "ended": "11:13:12 PM",
+  "batch": "results3",
+  "create_lines": [
+   "{\"login_s\": 10}"
+  ]
+ },
+ {
+  "account": "dorn3",
+  "name": "Imari Dossel",
+  "race": "twilek_female",
+  "profession": "science_medic",
+  "city": "coronet",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:11:47 PM",
+  "landed": {
+   "planet": "corellia",
+   "x": -137.0,
+   "y": -4723.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 950,
+   "health": 600,
+   "mind": 1100
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 2224509660,
+   "expected": 2224509660,
+   "match": true,
+   "name": "Imari Dossel"
+  },
+  "first_room": [
+   "R2-V8 (a helper R2 unit)",
+   "@npc_spawner_n:ral_mundi",
+   "@npc_spawner_n:tarth_jaxx",
+   "@npc_spawner_n:io_tsomcren",
+   "@obj_n:imperial_banner",
+   "@terminal_name:terminal_character_builder",
+   "@obj_n:imperial_banner",
+   "@terminal_name:terminal_character_builder",
+   "Geki Alo (a commoner)",
+   "Lahire Wewai (a Scout trainer)",
+   "Ma'A Vyaffa (an Architect trainer)",
+   "Popbot504"
+  ],
+  "city_move": "earlier run",
+  "in_city": {
+   "planet": "corellia",
+   "x": -137.0,
+   "y": -4723.0,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-V8 (a helper R2 unit)",
+   "menu_s": 0.3,
+   "menu": [
+    "",
+    "@pet/pet_menu:droid_options",
+    "@pet/pet_menu:menu_store",
+    "@new_player:menu_space",
+    "@new_player:space_option_how_to_find_ship",
+    "@new_player:space_option_how_to_check_email",
+    "@new_player:space_option_how_to_travel",
+    "@new_player:space_option_how_to_make_money",
+    "@new_player:menu_quests",
+    "@new_player:submenu_medic",
+    "@new_player:menu_other",
+    "@new_player:submenu_cloning"
+   ],
+   "answer_s": 0.3,
+   "answer": [
+    "@new_player:space_info_how_to_travel"
+   ]
+  },
+  "trainer": {
+   "key": "trainer_scout",
+   "found": 1,
+   "name": "Lahire Wewai (a Scout trainer)",
+   "box": "@skl_n:outdoors_scout_novice",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_scout",
+    "@skill_teacher:msg2_1",
+    "@skill_teacher:prose_cost",
+    "@skill_teacher:prose_pay",
+    "@skill_teacher:prose_skill_learned",
+    "@skill_teacher:msg3_2"
+   ],
+   "cash": [
+    10000,
+    9975
+   ],
+   "learned": true
+  },
+  "fight": {
+   "target": "@mob/creature_names:cll8_binary_load_lifter",
+   "level": 4,
+   "reply": {
+    "result": "timeout",
+    "attacks": 15,
+    "seconds": 63.321,
+    "ok": true
+   },
+   "after": {
+    "ham": {
+     "action": 950,
+     "health": 600,
+     "mind": 1100
+    },
+    "posture": "upright"
+   },
+   "target_ham_end": {
+    "action": 117,
+    "health": 114,
+    "mind": 133
+   },
+   "target_max_ham": {
+    "action": 117,
+    "health": 114,
+    "mind": 133
+   }
+  },
+  "inventory": [
+   "@crafting:food_tool_name",
+   "@crafting:generic_tool_name",
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:knife_survival",
+   "@wearables_name:bodysuit_s13",
+   "@wearables_name:boots_s04"
+  ],
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 170,
+  "ended": "11:13:18 PM",
+  "batch": "results3",
+  "create_lines": [
+   "{\"login_s\": 10}"
+  ]
+ },
+ {
+  "account": "cresh3",
+  "name": "Neela Quorvin",
+  "race": "moncal_female",
+  "profession": "crafting_artisan",
+  "city": "theed",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:11:56 PM",
+  "landed": {
+   "planet": "naboo",
+   "x": -4856.0,
+   "y": 4162.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 800,
+   "health": 600,
+   "mind": 1200
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 2553266142,
+   "expected": 2553266142,
+   "match": true,
+   "name": "Neela Quorvin"
+  },
+  "first_room": [
+   "R2-T1 (a helper R2 unit)",
+   "Popbot1340",
+   "Popbot1296",
+   "@npc_spawner_n:kultin_woodle",
+   "@npc_spawner_n:j1_po",
+   "Popbot1270",
+   "Ehowoi Wharge (a Gungan hunter)",
+   "VK-450 (a Stormtrooper Rifleman)",
+   "LK-776",
+   "@obj_n:rebel_banner",
+   "RK-344 (an Imperial stormcaptain)",
+   "@obj_n:rebel_banner"
+  ],
+  "city_move": "earlier run",
+  "in_city": {
+   "planet": "naboo",
+   "x": -4856.0,
+   "y": 4162.0,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-T1 (a helper R2 unit)",
+   "menu_s": 0.3,
+   "menu": [
+    "",
+    "@pet/pet_menu:droid_options",
+    "@pet/pet_menu:menu_store",
+    "@new_player:menu_space",
+    "@new_player:space_option_how_to_find_ship",
+    "@new_player:space_option_how_to_check_email",
+    "@new_player:space_option_how_to_travel",
+    "@new_player:space_option_how_to_make_money",
+    "@new_player:menu_quests",
+    "@new_player:submenu_artisan",
+    "@new_player:menu_other",
+    "@new_player:submenu_cloning"
+   ],
+   "answer_s": 0.3,
+   "answer": [
+    "@new_player:space_info_how_to_travel"
+   ]
+  },
+  "trainer": {
+   "key": "trainer_scout",
+   "found": 2,
+   "name": "Beihopfi Norierdi (a Scout trainer)",
+   "box": "@skl_n:outdoors_scout_novice",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_scout",
+    "@skill_teacher:msg2_1",
+    "@skill_teacher:prose_cost",
+    "@skill_teacher:prose_pay",
+    "@skill_teacher:prose_skill_learned",
+    "@skill_teacher:msg3_2"
+   ],
+   "cash": [
+    10000,
+    9975
+   ],
+   "learned": true
+  },
+  "fight": {
+   "target": "@mob/creature_names:chuba",
+   "level": 5,
+   "reply": {
+    "result": "target dead",
+    "attacks": 8,
+    "seconds": 47.068,
+    "ok": true
+   },
+   "after": {
+    "ham": {
+     "action": 616,
+     "health": 509,
+     "mind": 1200
+    },
+    "posture": "upright"
+   },
+   "target_ham_end": {
+    "action": 48,
+    "health": -54,
+    "mind": 137
+   },
+   "target_max_ham": {
+    "action": 142,
+    "health": 135,
+    "mind": 155
+   }
+  },
+  "inventory": [
+   "@crafting:generic_tool_name",
+   "@crafting:generic_tool_name",
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@item_n:survey_tool_liquid",
+   "@item_n:survey_tool_mineral",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:knife_survival",
+   "@wearables_name:shirt_s12",
+   "@wearables_name:shoes_s07",
+   "@wearables_name:skirt_s10"
+  ],
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 222,
+  "ended": "11:14:10 PM",
+  "batch": "results3",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "dorn1",
+  "name": "Selane Varrick",
+  "race": "human_female",
+  "profession": "social_entertainer",
+  "city": "bestine",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:11:41 PM",
+  "landed": {
+   "planet": "tatooine",
+   "x": -1290.0,
+   "y": -3590.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 1100,
+   "health": 600,
+   "mind": 900
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 4294949865,
+   "expected": 4294949865,
+   "match": true,
+   "name": "Selane Varrick"
+  },
+  "first_room": [
+   "R2-P4 (a helper R2 unit)",
+   "@npc_spawner_n:wlinc_tchrr",
+   "@npc_spawner_n:gert_talnin",
+   "RK-567 (a Stormtrooper Commando)",
+   "Stidofeo Flyingsun (an Imperial recruiter)",
+   "Feso Goti (a gambler)",
+   "@terminal_name:terminal_character_builder",
+   "Stafe Cibi (a scavenger)",
+   "Pooslikoofa (a Scout trainer)",
+   "Mebirgo Fanowwi (a commoner)",
+   "@crafting:space_station_name",
+   "Gabock Naema (an Artisan trainer)"
+  ],
+  "city_move": "earlier run",
+  "in_city": {
+   "planet": "tatooine",
+   "x": -1290.0,
+   "y": -3590.0,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-P4 (a helper R2 unit)",
+   "menu_s": 0.3,
+   "menu": [
+    "",
+    "@pet/pet_menu:droid_options",
+    "@pet/pet_menu:menu_store",
+    "@new_player:menu_space",
+    "@new_player:space_option_how_to_find_ship",
+    "@new_player:space_option_how_to_check_email",
+    "@new_player:space_option_how_to_travel",
+    "@new_player:space_option_how_to_make_money",
+    "@new_player:menu_quests",
+    "@new_player:submenu_entertainer",
+    "@new_player:menu_other",
+    "@new_player:submenu_cloning"
+   ],
+   "answer_s": 0.3,
+   "answer": [
+    "@new_player:space_info_how_to_travel"
+   ]
+  },
+  "trainer": {
+   "key": "trainer_scout",
+   "found": 1,
+   "name": "Pooslikoofa (a Scout trainer)",
+   "box": "@skl_n:outdoors_scout_novice",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_scout",
+    "@skill_teacher:msg2_1",
+    "@skill_teacher:prose_cost",
+    "@skill_teacher:prose_pay",
+    "@skill_teacher:prose_skill_learned",
+    "@skill_teacher:msg3_2"
+   ],
+   "cash": [
+    10000,
+    9975
+   ],
+   "learned": true
+  },
+  "fight": {
+   "error": "no creature within 150 m on three legs"
+  },
+  "inventory": [
+   "@crafting:generic_tool_name",
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:obj_slitherhorn",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:knife_survival",
+   "@wearables_name:pants_s11",
+   "@wearables_name:shirt_s38",
+   "@wearables_name:shoes_s09"
+  ],
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 238,
+  "ended": "11:14:25 PM",
+  "batch": "results3",
+  "create_lines": [
+   "{\"login_s\": 10}"
+  ]
+ },
+ {
+  "account": "esk2",
+  "name": "Borgo Tashuri",
+  "race": "hutt_male",
+  "profession": "crafting_artisan",
+  "city": "mos_eisley",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:12:14 PM",
+  "landed": {
+   "planet": "tatooine",
+   "x": 3528.0,
+   "y": -4804.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 800,
+   "health": 700,
+   "mind": 900
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 2439267321,
+   "expected": 2439267321,
+   "match": true,
+   "name": "Borgo Tashuri"
+  },
+  "first_room": [
+   "R2-D7 (a helper R2 unit)",
+   "@npc_spawner_n:guillo_parootchie",
+   "@npc_spawner_n:vincie_kalhoon",
+   "@npc_spawner_n:mooch_davoney",
+   "@obj_n:imperial_banner",
+   "@terminal_name:terminal_character_builder",
+   "Lliki Fobora (a Mos Eisley police Sergeant)",
+   "@obj_n:imperial_banner",
+   "GK-783 (a Sand Trooper)",
+   "Moxo (a commoner)",
+   "Awe Geoge (a Scout trainer)",
+   "@crafting:space_station_name"
+  ],
+  "city_move": "earlier run",
+  "in_city": {
+   "planet": "tatooine",
+   "x": 3528.0,
+   "y": -4804.0,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-D7 (a helper R2 unit)",
+   "menu_s": 0.3,
+   "menu": [
+    "",
+    "@pet/pet_menu:droid_options",
+    "@pet/pet_menu:menu_store",
+    "@new_player:menu_space",
+    "@new_player:space_option_how_to_find_ship",
+    "@new_player:space_option_how_to_check_email",
+    "@new_player:space_option_how_to_travel",
+    "@new_player:space_option_how_to_make_money",
+    "@new_player:menu_quests",
+    "@new_player:submenu_artisan",
+    "@new_player:menu_other",
+    "@new_player:submenu_cloning"
+   ],
+   "answer_s": 0.3,
+   "answer": [
+    "@new_player:space_info_how_to_travel"
+   ]
+  },
+  "trainer": {
+   "key": "trainer_scout",
+   "found": 1,
+   "name": "Awe Geoge (a Scout trainer)",
+   "box": "@skl_n:outdoors_scout_novice",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_scout",
+    "@skill_teacher:msg2_1",
+    "@skill_teacher:prose_cost",
+    "@skill_teacher:prose_skill_learned",
+    "@skill_teacher:msg3_2",
+    "@skill_teacher:prose_pay"
+   ],
+   "cash": [
+    10000,
+    9975
+   ],
+   "learned": true
+  },
+  "fight": {
+   "target": "@mob/creature_names:rockmite",
+   "level": 8,
+   "reply": {
+    "result": "target dead",
+    "attacks": 18,
+    "seconds": 50.415,
+    "ok": true
+   },
+   "after": {
+    "ham": {
+     "action": 521,
+     "health": 31,
+     "mind": 816
+    },
+    "posture": "upright"
+   },
+   "target_ham_end": {
+    "action": 218,
+    "health": -42,
+    "mind": 409
+   },
+   "target_max_ham": {
+    "action": 464,
+    "health": 469,
+    "mind": 467
+   }
+  },
+  "inventory": [
+   "@crafting:generic_tool_name",
+   "@crafting:generic_tool_name",
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@item_n:survey_tool_liquid",
+   "@item_n:survey_tool_mineral",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:knife_survival"
+  ],
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 219,
+  "ended": "11:14:45 PM",
+  "batch": "results3",
+  "create_lines": [
+   "{\"login_s\": 11}"
+  ]
+ },
+ {
+  "account": "cresh1",
+  "name": "Pekko Rindalt",
+  "race": "rodian_male",
+  "profession": "combat_marksman",
+  "city": "tyrena",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:11:50 PM",
+  "landed": {
+   "planet": "corellia",
+   "x": -5045.0,
+   "y": -2294.0,
+   "cell": 0
+  },
+  "ham": {
+   "action": 1000,
+   "health": 1000,
+   "mind": 600
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 200920476,
+   "expected": 200920476,
+   "match": true,
+   "name": "Pekko Rindalt"
+  },
+  "first_room": [
+   "R2-T1 (a helper R2 unit)",
+   "@npc_spawner_n:ulaire_roye",
+   "@npc_spawner_n:larek_tatham",
+   "Hafima Seihifa (a command security guard)",
+   "@obj_n:imperial_banner",
+   "@npc_spawner_n:cll_8",
+   "RK-58",
+   "@terminal_name:terminal_character_builder",
+   "Sseti Vide (an Entertainer trainer)",
+   "Sossouwa Drowra (a Musician trainer)",
+   "Wrutha (a Medic trainer)",
+   "@crafting:space_station_name"
+  ],
+  "city_move": "earlier run",
+  "in_city": {
+   "planet": "corellia",
+   "x": -5045.0,
+   "y": -2294.0,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-T1 (a helper R2 unit)",
+   "menu_s": 0.3,
+   "menu": [
+    "",
+    "@pet/pet_menu:droid_options",
+    "@pet/pet_menu:menu_store",
+    "@new_player:menu_space",
+    "@new_player:space_option_how_to_find_ship",
+    "@new_player:space_option_how_to_check_email",
+    "@new_player:space_option_how_to_travel",
+    "@new_player:space_option_how_to_make_money",
+    "@new_player:menu_quests",
+    "@new_player:submenu_marksman",
+    "@new_player:menu_other",
+    "@new_player:submenu_cloning"
+   ],
+   "answer_s": 0.3,
+   "answer": [
+    "@new_player:space_info_how_to_travel"
+   ]
+  },
+  "trainer": {
+   "key": "trainer_scout",
+   "found": 1,
+   "name": "Vakiopo Ala (a Scout trainer)",
+   "box": "@skl_n:outdoors_scout_novice",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_scout",
+    "@skill_teacher:msg2_1",
+    "@skill_teacher:prose_cost",
+    "@skill_teacher:prose_pay",
+    "@skill_teacher:prose_skill_learned",
+    "@skill_teacher:msg3_2"
+   ],
+   "cash": [
+    10000,
+    9975
+   ],
+   "learned": true
+  },
+  "fight": {
+   "target": "@mob/creature_names:corellian_butterfly",
+   "level": 7,
+   "reply": {
+    "result": "timeout",
+    "attacks": 15,
+    "seconds": 61.078,
+    "ok": true
+   },
+   "after": {
+    "ham": {
+     "action": 765,
+     "health": 713,
+     "mind": 492
+    },
+    "posture": "upright"
+   },
+   "target_ham_end": {
+    "action": 100,
+    "health": 153,
+    "mind": 233
+   },
+   "target_max_ham": {
+    "action": 315,
+    "health": 276,
+    "mind": 303
+   }
+  },
+  "inventory": [
+   "@crafting:generic_tool_name",
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:carbine_cdef",
+   "@weapon_name:knife_survival",
+   "@weapon_name:pistol_cdef",
+   "@weapon_name:rifle_cdef",
+   "@wearables_name:boots_s21",
+   "@wearables_name:jacket_s05",
+   "@wearables_name:pants_s04",
+   "@wearables_name:shirt_s04"
+  ],
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 249,
+  "ended": "11:14:53 PM",
+  "batch": "results3",
+  "create_lines": [
+   "{\"login_s\": 10}"
+  ]
+ },
+ {
+  "account": "forn1",
+  "name": "Rrowkah",
+  "race": "wookiee_male",
+  "profession": "combat_brawler",
+  "city": "moenia",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:11:59 PM",
+  "landed": {
+   "planet": "naboo",
+   "x": 4811.26953125,
+   "y": -4664.62939453125,
+   "cell": 0
+  },
+  "ham": {
+   "action": 1000,
+   "health": 1350,
+   "mind": 600
+  },
+  "level": 2,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 90470685,
+   "expected": 90470685,
+   "match": true,
+   "name": "Rrowkah"
+  },
+  "first_room": [
+   "@mob/creature_names:junk_dealer",
+   "R2-Z0 (a helper R2 unit)",
+   "Popbot987",
+   "Wwuxu Kau'tvo (a commoner)",
+   "@crafting:space_station_name",
+   "Woiso Ooco (a SpecForce marine)",
+   "@npc_spawner_n:bertos_goodner",
+   "Rivirae Ice (a Rebel recruiter)",
+   "Acetoo Repi (an Entertainer trainer)",
+   "@mob/creature_names:spynet_operative",
+   "Popbot1463",
+   "Thithe Crestingdark (a SpecForce marine)"
+  ],
+  "city_move": "earlier run",
+  "in_city": {
+   "planet": "naboo",
+   "x": 4811.26953125,
+   "y": -4664.62939453125,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-Z0 (a helper R2 unit)",
+   "menu_s": 0.3,
+   "menu": [
+    "",
+    "@pet/pet_menu:droid_options",
+    "@pet/pet_menu:menu_store",
+    "@new_player:menu_space",
+    "@new_player:space_option_how_to_find_ship",
+    "@new_player:space_option_how_to_check_email",
+    "@new_player:space_option_how_to_travel",
+    "@new_player:space_option_how_to_make_money",
+    "@new_player:menu_quests",
+    "@new_player:submenu_brawler",
+    "@new_player:menu_other",
+    "@new_player:submenu_cloning"
+   ],
+   "answer_s": 0.3,
+   "answer": [
+    "@new_player:space_info_how_to_travel"
+   ]
+  },
+  "trainer": {
+   "key": "trainer_scout",
+   "found": 1,
+   "name": "Wobik (a Scout trainer)",
+   "box": "@skl_n:outdoors_scout_novice",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_scout",
+    "@skill_teacher:msg2_1",
+    "@skill_teacher:prose_cost",
+    "@skill_teacher:prose_pay",
+    "@skill_teacher:prose_skill_learned",
+    "@skill_teacher:msg3_2"
+   ],
+   "cash": [
+    10000,
+    9975
+   ],
+   "learned": true
+  },
+  "fight": {
+   "target": "@mob/creature_names:domestic_falumpaset",
+   "level": 10,
+   "reply": {
+    "result": "timeout",
+    "attacks": 21,
+    "seconds": 61.365,
+    "ok": true
+   },
+   "after": {
+    "ham": {
+     "action": 905,
+     "health": 1341,
+     "mind": 513
+    },
+    "posture": "upright"
+   },
+   "target_ham_end": {
+    "action": 1201,
+    "health": 1362,
+    "mind": 1292
+   },
+   "target_max_ham": {
+    "action": 1286,
+    "health": 1370,
+    "mind": 1300
+   }
+  },
+  "inventory": [
+   "@crafting:generic_tool_name",
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:axe_heavy_duty",
+   "@weapon_name:knife_stone",
+   "@weapon_name:knife_survival",
+   "@weapon_name:lance_staff_wood_s1",
+   "@weapon_name:rifle_bowcaster"
+  ],
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 256,
+  "ended": "11:15:25 PM",
+  "batch": "results3",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn3",
+  "name": "Ommor Vashtel",
+  "race": "ithorian_male",
+  "profession": "science_medic",
+  "city": "theed",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:17:43 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 25.3481502532959,
+   "y": -160.4726104736328,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 800,
+   "health": 1000,
+   "mind": 1200
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 951764932,
+   "expected": 951764932,
+   "match": true,
+   "name": "Ommor Vashtel"
+  },
+  "first_room": [
+   "Halden Merrow",
+   "Dabbi Sorrin",
+   "Varrin Okkaro",
+   "Travel Terminal"
+  ],
+  "city_move": [
+   {
+    "city": "theed",
+    "scene": {
+     "event": "scene_start",
+     "planet": "naboo",
+     "self": 281475002572477,
+     "x": -4856.0,
+     "y": 4162.0,
+     "z": 6.0
+    },
+    "system": []
+   }
+  ],
+  "in_city": {
+   "planet": "naboo",
+   "x": -4856.0,
+   "y": 4162.0,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-N2 (a helper R2 unit)",
+   "menu_s": 0.3,
+   "menu": [
+    "",
+    "@pet/pet_menu:droid_options",
+    "@pet/pet_menu:menu_store",
+    "@new_player:menu_space",
+    "@new_player:space_option_how_to_find_ship",
+    "@new_player:space_option_how_to_check_email",
+    "@new_player:space_option_how_to_travel",
+    "@new_player:space_option_how_to_make_money",
+    "@new_player:menu_quests",
+    "@new_player:submenu_medic",
+    "@new_player:menu_other",
+    "@new_player:submenu_cloning"
+   ],
+   "answer_s": 0.3,
+   "answer": [
+    "@new_player:space_info_how_to_travel"
+   ]
+  },
+  "trainer": {
+   "key": "trainer_scout",
+   "found": 2,
+   "name": "Beihopfi Norierdi (a Scout trainer)",
+   "box": "@skl_n:outdoors_scout_novice",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_scout",
+    "@skill_teacher:msg2_1",
+    "@skill_teacher:prose_cost",
+    "@skill_teacher:prose_pay",
+    "@skill_teacher:prose_skill_learned",
+    "@skill_teacher:msg3_2"
+   ],
+   "cash": [
+    10000,
+    9975
+   ],
+   "learned": true
+  },
+  "fight": {
+   "target": "@mob/creature_names:chuba",
+   "level": 5,
+   "reply": {
+    "result": "target dead",
+    "attacks": 9,
+    "seconds": 48.616,
+    "ok": true
+   },
+   "after": {
+    "ham": {
+     "action": 664,
+     "health": 827,
+     "mind": 1165
+    },
+    "posture": "upright"
+   },
+   "target_ham_end": {
+    "action": 126,
+    "health": -24,
+    "mind": 147
+   },
+   "target_max_ham": {
+    "action": 138,
+    "health": 164,
+    "mind": 159
+   }
+  },
+  "inventory": [
+   "@crafting:food_tool_name",
+   "@crafting:generic_tool_name",
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:knife_survival",
+   "@wearables_name:ith_jacket_s05",
+   "@wearables_name:ith_pants_s12",
+   "@wearables_name:ith_shirt_s05"
+  ],
+  "server_errors": [
+   "Fri Oct 16 23:20:01 2026 [1792218001475 msec] (3313 s) Thread 32 - [ZoneClientSession 192.168.1.210:47661] ERROR - bool engine::service::"
+  ],
+  "server_errors_total": 1,
+  "netstatus_noise": 132,
+  "ended": "11:20:05 PM",
+  "batch": "results4",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn2",
+  "name": "Telsa Brevin",
+  "race": "bothan_female",
+  "profession": "combat_marksman",
+  "city": "kaadara",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:17:40 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 28.31049156188965,
+   "y": -156.83502197265625,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 1100,
+   "health": 1000,
+   "mind": 700
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 491942670,
+   "expected": 491942670,
+   "match": true,
+   "name": "Telsa Brevin"
+  },
+  "first_room": [
+   "Dabbi Sorrin",
+   "Varrin Okkaro",
+   "Ommor Vashtel",
+   "Travel Terminal"
+  ],
+  "city_move": [
+   {
+    "city": "kaadara",
+    "scene": {
+     "event": "scene_start",
+     "planet": "naboo",
+     "self": 281475002572177,
+     "x": 5209.0,
+     "y": 6677.0,
+     "z": -192.0
+    },
+    "system": []
+   }
+  ],
+  "in_city": {
+   "planet": "naboo",
+   "x": 5209.0,
+   "y": 6677.0,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-E5 (a helper R2 unit)",
+   "menu_s": 0.3,
+   "menu": [
+    "",
+    "@pet/pet_menu:droid_options",
+    "@pet/pet_menu:menu_store",
+    "@new_player:menu_space",
+    "@new_player:space_option_how_to_find_ship",
+    "@new_player:space_option_how_to_check_email",
+    "@new_player:space_option_how_to_travel",
+    "@new_player:space_option_how_to_make_money",
+    "@new_player:menu_quests",
+    "@new_player:submenu_marksman",
+    "@new_player:menu_other",
+    "@new_player:submenu_cloning"
+   ],
+   "answer_s": 0.3,
+   "answer": [
+    "@new_player:space_info_how_to_travel"
+   ]
+  },
+  "trainer": {
+   "key": "trainer_scout",
+   "found": 1,
+   "name": "Codihno Ladi (a Scout trainer)",
+   "box": "@skl_n:outdoors_scout_novice",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_scout",
+    "@skill_teacher:msg2_1",
+    "@skill_teacher:prose_cost",
+    "@skill_teacher:prose_pay",
+    "@skill_teacher:msg3_2",
+    "@skill_teacher:prose_skill_learned"
+   ],
+   "cash": [
+    10000,
+    9975
+   ],
+   "learned": true
+  },
+  "fight": {
+   "error": "no creature within 150 m on three legs"
+  },
+  "inventory": [
+   "@crafting:generic_tool_name",
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:carbine_cdef",
+   "@weapon_name:knife_survival",
+   "@weapon_name:pistol_cdef",
+   "@weapon_name:rifle_cdef",
+   "@wearables_name:pants_s24",
+   "@wearables_name:shirt_s24",
+   "@wearables_name:shoes_s02",
+   "@wearables_name:vest_s10"
+  ],
+  "server_errors": [
+   "Fri Oct 16 23:20:17 2026 [1792218017469 msec] (3329 s) Thread 32 - [ZoneClientSession 192.168.1.210:47518] ERROR - bool engine::service::proto::BaseClient::handle"
+  ],
+  "server_errors_total": 1,
+  "netstatus_noise": 145,
+  "ended": "11:20:20 PM",
+  "batch": "results4",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "esk3",
+  "name": "Halden Merrow",
+  "race": "human_male",
+  "profession": "combat_marksman",
+  "city": "mos_eisley",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:17:52 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 26.13774871826172,
+   "y": -162.42401123046875,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 900,
+   "health": 1100,
+   "mind": 700
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 2937962913,
+   "expected": 2937962913,
+   "match": true,
+   "name": "Halden Merrow"
+  },
+  "first_room": [
+   "Travel Terminal"
+  ],
+  "city_move": [
+   {
+    "city": "mos_eisley",
+    "scene": {
+     "event": "scene_start",
+     "planet": "tatooine",
+     "self": 281475002573356,
+     "x": 3528.0,
+     "y": -4804.0,
+     "z": 5.0
+    },
+    "system": []
+   }
+  ],
+  "in_city": {
+   "planet": "tatooine",
+   "x": 3528.0,
+   "y": -4804.0,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-O3 (a helper R2 unit)",
+   "menu_s": 0.3,
+   "menu": [
+    "",
+    "@pet/pet_menu:droid_options",
+    "@pet/pet_menu:menu_store",
+    "@new_player:menu_space",
+    "@new_player:space_option_how_to_find_ship",
+    "@new_player:space_option_how_to_check_email",
+    "@new_player:space_option_how_to_travel",
+    "@new_player:space_option_how_to_make_money",
+    "@new_player:menu_quests",
+    "@new_player:submenu_marksman",
+    "@new_player:menu_other",
+    "@new_player:submenu_cloning"
+   ],
+   "answer_s": 0.3,
+   "answer": [
+    "@new_player:space_info_how_to_travel"
+   ]
+  },
+  "trainer": {
+   "key": "trainer_scout",
+   "found": 1,
+   "name": "Awe Geoge (a Scout trainer)",
+   "box": "@skl_n:outdoors_scout_novice",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_scout",
+    "@skill_teacher:msg2_1",
+    "@skill_teacher:prose_cost",
+    "@skill_teacher:prose_skill_learned",
+    "@skill_teacher:msg3_2",
+    "@skill_teacher:prose_pay"
+   ],
+   "cash": [
+    10000,
+    9975
+   ],
+   "learned": true
+  },
+  "fight": {
+   "target": "@mob/creature_names:rockmite",
+   "level": 8,
+   "reply": {
+    "result": "target dead",
+    "attacks": 20,
+    "seconds": 56.669,
+    "ok": true
+   },
+   "after": {
+    "ham": {
+     "action": 558,
+     "health": 519,
+     "mind": 487
+    },
+    "posture": "upright"
+   },
+   "target_ham_end": {
+    "action": 256,
+    "health": -4,
+    "mind": 446
+   },
+   "target_max_ham": {
+    "action": 461,
+    "health": 411,
+    "mind": 490
+   }
+  },
+  "inventory": [
+   "@crafting:generic_tool_name",
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:carbine_cdef",
+   "@weapon_name:knife_survival",
+   "@weapon_name:pistol_cdef",
+   "@weapon_name:rifle_cdef",
+   "@wearables_name:boots_s21",
+   "@wearables_name:jacket_s05",
+   "@wearables_name:pants_s04",
+   "@wearables_name:shirt_s04"
+  ],
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 151,
+  "ended": "11:20:34 PM",
+  "batch": "results4",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn4",
+  "name": "Dabbi Sorrin",
+  "race": "sullustan_female",
+  "profession": "social_entertainer",
+  "city": "bestine",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:17:46 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 28.751434326171875,
+   "y": -160.02699279785156,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 1250,
+   "health": 650,
+   "mind": 1000
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 359871514,
+   "expected": 359871514,
+   "match": true,
+   "name": "Dabbi Sorrin"
+  },
+  "first_room": [
+   "Halden Merrow",
+   "Varrin Okkaro",
+   "Travel Terminal"
+  ],
+  "city_move": [
+   {
+    "city": "bestine",
+    "scene": {
+     "event": "scene_start",
+     "planet": "tatooine",
+     "self": 281475002572798,
+     "x": -1290.0,
+     "y": -3590.0,
+     "z": 12.0
+    },
+    "system": []
+   }
+  ],
+  "in_city": {
+   "planet": "tatooine",
+   "x": -1290.0,
+   "y": -3590.0,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-V0 (a helper R2 unit)",
+   "menu_s": 0.3,
+   "menu": [
+    "",
+    "@pet/pet_menu:droid_options",
+    "@pet/pet_menu:menu_store",
+    "@new_player:menu_space",
+    "@new_player:space_option_how_to_find_ship",
+    "@new_player:space_option_how_to_check_email",
+    "@new_player:space_option_how_to_travel",
+    "@new_player:space_option_how_to_make_money",
+    "@new_player:menu_quests",
+    "@new_player:submenu_entertainer",
+    "@new_player:menu_other",
+    "@new_player:submenu_cloning"
+   ],
+   "answer_s": 0.3,
+   "answer": [
+    "@new_player:space_info_how_to_travel"
+   ]
+  },
+  "trainer": {
+   "key": "trainer_scout",
+   "found": 1,
+   "name": "Pooslikoofa (a Scout trainer)",
+   "box": "@skl_n:outdoors_scout_novice",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_scout",
+    "@skill_teacher:msg2_1",
+    "@skill_teacher:prose_cost",
+    "@skill_teacher:prose_pay",
+    "@skill_teacher:msg3_2",
+    "@skill_teacher:prose_skill_learned"
+   ],
+   "cash": [
+    10000,
+    9975
+   ],
+   "learned": true
+  },
+  "fight": {
+   "error": "no creature within 150 m on three legs"
+  },
+  "inventory": [
+   "@crafting:generic_tool_name",
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:obj_slitherhorn",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:knife_survival",
+   "@wearables_name:pants_s11",
+   "@wearables_name:shirt_s38",
+   "@wearables_name:shoes_s09"
+  ],
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 153,
+  "ended": "11:20:35 PM",
+  "batch": "results4",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ },
+ {
+  "account": "forn5",
+  "name": "Varrin Okkaro",
+  "race": "chiss_male",
+  "profession": "outdoors_scout",
+  "city": "tatooine_imp,mos_eisley",
+  "tutorial": false,
+  "existing": true,
+  "started": "11:17:49 PM",
+  "landed": {
+   "planet": "tutorial",
+   "x": 24.721282958984375,
+   "y": -157.07191467285156,
+   "cell": 281475002284446
+  },
+  "ham": {
+   "action": 900,
+   "health": 900,
+   "mind": 800
+  },
+  "level": 1,
+  "credits": {
+   "cash": 10000,
+   "bank": 100000
+  },
+  "species": {
+   "crc": 49680044,
+   "expected": 49680044,
+   "match": true,
+   "name": "Varrin Okkaro"
+  },
+  "first_room": [
+   "Halden Merrow",
+   "Travel Terminal"
+  ],
+  "city_move": [
+   {
+    "city": "tatooine_imp",
+    "scene": {
+     "event": "scene_start",
+     "planet": "tatooine",
+     "self": 281475002573005,
+     "x": -1290.0,
+     "y": -3590.0,
+     "z": 12.0
+    },
+    "system": []
+   }
+  ],
+  "in_city": {
+   "planet": "tatooine",
+   "x": -1290.0,
+   "y": -3590.0,
+   "cell": 0
+  },
+  "droid": {
+   "found_after_s": 0,
+   "name": "R2-F2 (a helper R2 unit)",
+   "menu_s": 0.3,
+   "menu": [
+    "",
+    "@pet/pet_menu:droid_options",
+    "@pet/pet_menu:menu_store",
+    "@new_player:menu_space",
+    "@new_player:space_option_how_to_find_ship",
+    "@new_player:space_option_how_to_check_email",
+    "@new_player:space_option_how_to_travel",
+    "@new_player:space_option_how_to_make_money",
+    "@new_player:menu_quests",
+    "@new_player:submenu_scout",
+    "@new_player:menu_other",
+    "@new_player:submenu_cloning"
+   ],
+   "answer_s": 0.3,
+   "answer": [
+    "@new_player:space_info_how_to_travel"
+   ]
+  },
+  "trainer": {
+   "key": "trainer_brawler",
+   "found": 1,
+   "name": "Kriesneghte Crestinglighter (a Brawler trainer)",
+   "box": "@skl_n:combat_brawler_novice",
+   "walk": true,
+   "steps": [
+    "@skill_teacher:trainer_brawler",
+    "@skill_teacher:msg2_1",
+    "@skill_teacher:prose_cost",
+    "@skill_teacher:prose_skill_learned",
+    "@skill_teacher:prose_pay",
+    "@skill_teacher:msg3_2"
+   ],
+   "cash": [
+    10000,
+    9975
+   ],
+   "learned": true
+  },
+  "fight": {
+   "error": "no creature within 150 m on three legs"
+  },
+  "inventory": [
+   "@crafting:generic_tool_name",
+   "@food_name:foraged_fruit_1",
+   "@item_n:bank",
+   "@item_n:datapad",
+   "@item_n:inventory",
+   "@item_n:mission_bag",
+   "@mob/creature_names:nhelper_droid",
+   "@obj_n:unknown_weapon",
+   "@pet_deed:landspeeder_x31",
+   "@weapon_name:knife_survival",
+   "@wearables_name:pants_s21",
+   "@wearables_name:shirt_s16",
+   "@wearables_name:shoes_s02",
+   "@wearables_name:vest_s09"
+  ],
+  "server_errors": [],
+  "server_errors_total": 0,
+  "netstatus_noise": 153,
+  "ended": "11:20:49 PM",
+  "batch": "results4",
+  "create_lines": [
+   "{\"login_s\": 9}"
+  ]
+ }
+]
