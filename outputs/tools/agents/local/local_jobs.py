@@ -25,6 +25,11 @@ Jobs:
   test-index (17 Oct) Section 3 of every research report as setup / do / expect steps, for the test plan.
   scenario-review  (17 Oct; ChatGPT is out until 22 Oct) A first pass over tools/bots/scenarios/*.py: commands the
              server doesn't know (from the command audit, no model) and likely logic bugs. Model: qwen3.6:35b-a3b.
+  item-check (17 Oct; owner: "make sure that all the items in the game are obtainable in the way they were
+             intended", local first, then Claude) The items tools/core3_audit/item_sources.py flags (no way to get
+             them, test tools only, or ways added or lost against stock SWGEmu), each with how a player gets it now
+             and in stock. The model sorts them: later era (fine to lack a source on pre-CU), pre-CU but missing, the
+             wrong way, not an item, unsure. Run item_sources.py first. Model: qwen3.6:35b-a3b.
 All are drafts by a local model: Claude or ChatGPT checks an item before acting on it, and every dialogue or chat
 line is reviewed before it goes into the game.
 """
@@ -94,8 +99,27 @@ places from 0-4 ABY are expected as ruins and history (Echo Base is a 3 ABY ruin
 as if those days were the present. Don't flag spelling or style.
 Answer with JSON only: {"items": [{"id": "<id exactly as given>", "problem": "<short>", "why": "<one sentence>"}]}.
 If nothing is wrong: {"items": []}.""",
+    'item-check': """You check items on a Star Wars Galaxies emulator server that keeps the pre-CU game: the rules of 2003 to
+early 2005, before the Combat Upgrade, with Jump to Lightspace. Each input line is
+"<id>\t<folder> | <flags> | now: <how a player gets it now> | stock: <how stock SWGEmu gave it>". The id is the item's
+server template path; its file name usually names the item. Flags: no-source (no way for a player to get it was
+found), test-only (only test tools give it: the character builder, staff), new (we added it), gained-X or lost-X (a
+way we added or lost against stock SWGEmu). Ways: drop (creature loot), scripted (loot that missions, treasure maps,
+foraging or fishing give), space (ship loot), craft (a schematic that a skill grants), script (quests, rewards,
+terminals), code, start (character creation kit), unspawned (drops only from creatures nothing spawns), ungranted
+(made by a schematic that nothing grants).
+Give every line one verdict:
+- later-era: the item comes from a later version of the game (Combat Upgrade, NGE, the trading card game "tcg",
+  collections, Mustafar, Galactic Moon, beta or event rewards), so having no way to get it is right here.
+- pre-cu-missing: pre-CU players could get it, but no way is found here. Say how they got it then.
+- wrong-way: it can be obtained, but not the way it was meant to be (say how it was meant to be).
+- not-an-item: a part, appearance or world object that players never hold.
+- fine: the way it is obtained now fits.
+- unsure: you don't know. Use this rather than guess.
+Answer with JSON only: {"items": [{"id": "<id exactly as given>", "verdict": "...", "intended": "<how players should
+get it, or empty>", "why": "<one sentence>"}]}.""",
 }
-CHUNK = {'bot-chat': 8, 'npc-dialogue': 3, 'report-digest': 1}   # lines per chunk; the rest use PER_CHUNK
+CHUNK = {'bot-chat': 8, 'npc-dialogue': 3, 'report-digest': 1, 'item-check': 20}   # lines per chunk; the rest use PER_CHUNK
 INSTRUCTIONS.update(precheck.INSTRUCTIONS)
 CHUNK.update(precheck.CHUNK)
 
@@ -269,6 +293,28 @@ def run_reports(root=OUTPUTS / 'Bot-reports' / 'launch-sim', newest=6, cap=7000)
     return [(p.stem.removeprefix('findings-'), p.read_text(encoding='utf-8', errors='replace')[:cap]) for p in files]
 
 
+ITEM_MAP = OUTPUTS / 'tools' / 'core3_audit' / 'item_sources.json'
+# Player gear first, so a run cut short has checked what players meet most.
+ITEM_FOLDERS = ['tangible/wearables', 'weapon/ranged', 'weapon/melee', 'tangible/component', 'tangible/medicine',
+                'tangible/food', 'tangible/loot', 'tangible/deed', 'tangible/furniture', 'tangible/crafting']
+
+
+def item_lines():
+    """[(template, text)] for the items item_sources.py flags, test-only and changed ones first."""
+    items = json.loads(ITEM_MAP.read_text(encoding='utf-8'))['items']
+
+    def ways(kinds):
+        return ' '.join('; '.join(f'{k} {v}' for k, v in kinds.items()).split())[:260] or 'none'
+
+    def rank(entry):
+        tpl, it = entry
+        first = 0 if 'test-only' in it['flags'] else 1 if any(f[:5] in ('lost-', 'gaine') for f in it['flags']) else 2
+        return (first, ITEM_FOLDERS.index(it['folder']) if it['folder'] in ITEM_FOLDERS else len(ITEM_FOLDERS), tpl)
+    flagged = sorted(((t, it) for t, it in items.items() if it['flags']), key=rank)
+    return [(t, f'{it["folder"]} | {", ".join(it["flags"])} | now: {ways(it["dev"])} | stock: {ways(it["stock"])}')
+            for t, it in flagged]
+
+
 # ------------------------------------------------------------------ prepare / report
 
 def lines_for(job, folder):
@@ -280,6 +326,8 @@ def lines_for(job, folder):
         return npc_briefs(folder)
     if job == 'report-digest':
         return run_reports()
+    if job == 'item-check':
+        return item_lines()
     if job in precheck.INSTRUCTIONS:   # claim-check, report-diff, test-index, scenario-review
         return precheck.job_lines(job, folder)
     return bot_notes()
@@ -343,6 +391,23 @@ def report(job, folder):
             for i in sorted(items, key=lambda i: i['id']))
     elif job in precheck.INSTRUCTIONS:
         body = precheck.job_report(job, folder, lines, items)
+    elif job == 'item-check':
+        verdicts = defaultdict(dict)
+        for i in items:
+            verdicts[str(i.get('verdict', 'unsure')).lower()][i['id']] = i
+        body = (', '.join(f'{v}: {len(rows)}' for v, rows in sorted(verdicts.items(), key=lambda kv: -len(kv[1])))
+                + f'; no answer yet: {len(set(lines) - {i["id"] for i in items})}.\n')
+        for v in ('pre-cu-missing', 'wrong-way', 'unsure', 'not-an-item', 'fine'):
+            if verdicts.get(v):
+                body += (f'\n## {v} ({len(verdicts[v])})\n\n| Item | Now | Intended | Why |\n|---|---|---|---|\n' + ''.join(
+                    f'| `{t}` | {cell(lines[t].split(" | ", 1)[1], 160)} | {cell(i.get("intended", ""), 120)} | '
+                    f'{cell(i.get("why", ""), 160)} |\n' for t, i in sorted(verdicts[v].items())))
+        later = defaultdict(list)
+        for t in verdicts.get('later-era', {}):
+            later[lines[t].split(' | ', 1)[0]].append(t.rsplit('/', 1)[-1][:-4])
+        if later:
+            body += f'\n## later-era ({len(verdicts["later-era"])}), by folder\n\n' + ''.join(
+                f'- {f} ({len(n)}): {cell(", ".join(sorted(n)), 600)}\n' for f, n in sorted(later.items()))
     elif job == 'era-check':
         body = '| String | Text now | Problem | Why |\n|---|---|---|---|\n' + ''.join(
             f'| `{i["id"]}` | {cell(lines[i["id"]], 140)} | {cell(i.get("problem", ""), 80)} | {cell(i.get("why", ""), 160)} |\n'
