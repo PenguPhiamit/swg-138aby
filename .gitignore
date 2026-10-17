@@ -53,6 +53,8 @@ work/*
 # ---- screenshots and images from the game ----
 *.png
 *.jpg
+# generated 3D models (TRELLIS.2 test props etc.; keep the manifests and inspect JSON instead)
+*.glb
 
 # ---- big generated inventories (rebuild them with their tools) ----
 outputs/Content-catalogue/published-source-paths.json

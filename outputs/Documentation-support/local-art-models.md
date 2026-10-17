@@ -99,14 +99,15 @@ record is at the end of this note.
 - **Not useful:** PBR map generators. Pre-CU shaders use a diffuse texture plus an optional normal map (`_asb13`). They
   have no roughness or metalness slots, and Blender already bakes normal maps.
 
-### 3. TRELLIS.2 in ComfyUI: image-to-3D drafts for static props (experimental)
+### 3. TRELLIS.2 in ComfyUI: image-to-3D drafts for static props (works on this card, measured 17 Oct; see the how-to below)
 
 - **Job.** A first shape and texture for a plant stage, a ruin piece or a crate, from a concept image made in pick 1.
 - **Licence.** MIT for code and weights (the repo says so; `Comfy-Org/TRELLIS.2` is tagged MIT). Background removal
   uses BiRefNet, also MIT.
-- **VRAM fit: unknown.** Microsoft's own code asks for 24 GB, is tested only on Linux, and needs compiled CUDA
-  extensions. ComfyUI 0.34.0 and later run it natively in PyTorch with an int8 checkpoint, which avoids the build
-  problems on Blackwell and Windows. Nobody publishes a 12 GB figure. Try the 512 preset first, then 1024_cascade.
+- **VRAM fit: it fits, measured 17 Oct.** Microsoft's own code asks for 24 GB, is tested only on Linux, and needs
+  compiled CUDA extensions. ComfyUI's native int8 version runs on the 12 GB RTX 5070 with upsample 1024 and remesh 512:
+  peak 10,021 MiB, about 2.5-3 minutes a prop. With the template's remesh 768 it ran out of memory. Details are in the
+  how-to below.
 - **Downloads:** `diffusion_models/trellis_2_int8_convrot.safetensors` 5.25 GB, `vae/trellis_2_shape_vae_bf16.safetensors`
   1.10 GB, `vae/trellis_2_texture_vae_bf16.safetensors` 0.95 GB and `clip_vision/dino_v3_vit_l.safetensors` 1.21 GB
   (all huggingface.co/Comfy-Org/TRELLIS.2), plus `background_removal/birefnet.safetensors` 0.44 GB
@@ -115,8 +116,9 @@ record is at the end of this note.
 - **Then by hand:** in Blender 3.6, decimate the mesh from up to a million faces to under 2,000 triangles. Bake its
   colour to one 256-512 texture, then follow the F86 path (`Fable-asset-pipeline/README.md`): NSG `.msh` export, `.apt`,
   a cloned `_as8` shader, texconv DDS and the CRC row. Collision stays `NULL`, as for the wall.
-- **Verified vs assumed.** Verified: licences, file sizes, that the nodes are native since 0.34.0, and Microsoft's
-  24 GB/Linux statement. Assumed: that it runs in 12 GB at all, and how much cleanup each mesh needs.
+- **Verified vs assumed.** Verified: licences, file sizes, that the nodes are native since 0.34.0, Microsoft's
+  24 GB/Linux statement, and on 17 Oct one crate end to end on this card (the how-to below). Still assumed: how much
+  cleanup each kind of mesh needs, and how a prop looks in the client (none has been exported to `.msh` yet).
 
 ### 4. Fallback for 3D shape only: Hunyuan3D 2.0 single view
 
@@ -143,6 +145,71 @@ record is at the end of this note.
   Hutt, whose gear must be weighted to `hutt.skt` and whose animations need an `.ans` exporter we do not have yet.
 - **Upscalers** (Real-ESRGAN and similar): only for our own images. An upscale of stock SWG or KOTOR art is a stock-file
   derivative and stays excluded (AGENTS.md, Ethics check 1).
+
+## How to: a 3D prop from an image, locally (TRELLIS.2 replaces fal's 3D; 17 Oct)
+
+The owner, about 9:40 AM: "can you have it use a different free 3d tool? i imagine you know how to do that". This route
+is free and local, uses Universal Modder's own `um comfy run`, and needs no fal key. It was proved once on 17 Oct with a
+crate.
+
+1. **No game client open** (`tasklist`: no SWGEmu or SwgClient). The models take up to about 10 GB of the 12 GB card.
+2. **Start ComfyUI** (offline: no paid nodes; local only):
+   `C:\Users\Pengw\Tools\ComfyUI_windows_portable\python_embeded\python.exe -s ComfyUI\main.py --windows-standalone-build --offline --disable-auto-launch --disable-pinned-memory`,
+   run from that folder. This is `advanced\run_nvidia_gpu_disable_api_nodes.bat` plus the two extra flags. Pinned
+   memory ran this PC out of Windows RAM once.
+3. **Make a concept image** of our own: one object, three-quarter view, a plain white background. Either use klein
+   (`um comfy run tools/comfy/flux2-klein-4b-t2i.json --set "74.text=..." --set "73.noise_seed:=7" --out <dir> --name <x>_concept`,
+   28 s cold, about 4 s warm), or draw one. Never use stock game art or other people's pictures as the input
+   (Rules, below).
+4. **Copy the image into `ComfyUI\input\`.** `um` does not upload files.
+5. **Run TRELLIS.2:**
+   `um comfy run tools/art/trellis2_image_to_3d_api.json --set "Concept image.image=<file in ComfyUI\input>" --out <dir> --name <x> --timeout 1800`.
+   - `um`'s generic `outputs()` downloads everything the run saves: seven preview images (`<x>.png` ... `<x>_7.png`:
+     base colour, metallic, roughness, normal, AO, the cut-out, the mask), then **the model as the last file,
+     `<x>_8.glb`**. The manifest goes in `comfy_manifest.jsonl`.
+   - No wrapper or plugin edit was needed.
+6. **Stop ComfyUI.** Idle, it holds the models on the card.
+7. **Check it in Blender 3.6 (CPU):** `blender.exe -b --python tools/art/inspect_glb.py -- <x>_8.glb <dir> 2000`. It
+   writes the triangle and vertex counts, UVs, materials and textures, the size, a collapse-decimate to 2,000
+   triangles, and two renders (`<x>_8_full.png`, `<x>_8_decimated.png`).
+8. **Then the existing SWG chain, by hand in Blender 3.6 with NSG SWG Tools:**
+   - Set the real size: TRELLIS.2 fits the object into about 1 m.
+   - Decimate or retopologise to the prop budget (under about 2,000 triangles).
+   - Bake the colour to one 256-512 texture (SWG's `_as8` shaders take one diffuse map, and `_asb13` a normal map
+     too; the GLB's metallic, roughness and AO maps have no place in pre-CU).
+   - Then export `.msh`, add the `.apt`, clone a shader, run texconv to DDS, add the CRC row and the archive. Follow
+     `Fable-asset-pipeline/README.md`; `Vong-look/tools/build_vong_client.py` is a worked example of the clone, rename
+     and archive checks.
+   - Collision stays `NULL` until someone authors it.
+9. **Rigging, later:** for anything worn or animated, weight it to the stock SWG skeleton with Blender's automatic
+   weights (import `all_b.skt` with the NSG add-on), not fal's auto-rig. The exporter writes `.mgn` and `.lmg`.
+
+**What this route doesn't cover:** the textures are PBR (base colour, metallic, roughness) and the normal map is 2048 px.
+Pre-CU uses diffuse plus an optional normal map, so step 8's bake is needed. The model's back side is invented. Fine
+detail (handles, rivets) crumples at 2,000 triangles and needs cleanup by hand for close-up props.
+
+### The 17 Oct test (crate)
+
+Files: `Local-art/trellis2-test/`. The images and the `.glb` are not in git; the manifest and the inspect JSON are.
+
+| Step | Measured |
+|---|---|
+| Concept (klein 4B, 1024 px, seed 7, "a single weathered metal cargo crate ... plain white background") | 28.5 s cold (loading included) |
+| TRELLIS.2, template remesh 768 | **out of video memory** in RemeshMesh after 151 s ("Requested 2.08 GiB", 8.28 GiB allocated, 11.91 GiB limit); peak 11,417 MiB. ComfyUI then unloads all models |
+| TRELLIS.2, remesh 512 (now the default) | **166 s wall**, all models reloaded; peak **10,021 MiB** of 12,227; Windows free RAM at least 4.96 GB |
+| The GLB | 5.95 MB: 1 object, **19,956 triangles**, 14,131 vertices, 1 UV map, 1 material (base colour, metal/rough and AO at 1024 px; normal map at 2048 px); 0.87 x 1.00 x 0.73 m |
+| Blender 3.6 import and decimate | imports cleanly; collapse to **1,999 triangles** keeps the shape and UVs. The handles crumple and the edges go wavy; the texture still carries the rust and rivets (`crate_compare.png`: concept, full mesh, decimated) |
+
+**How the workflow was made** (`tools/art/make_trellis2_api.py`):
+- **The template:** ComfyUI's "Pixal3D & TRELLIS.2: Image to Model", loaded in the browser pane.
+- **The conversion:** the page's own `app.graphToPrompt()` turned it into API form. That is the same conversion as
+  Export (API), and it writes the template's "dynamic combo" sub-inputs correctly. It was saved through ComfyUI's
+  user-data store (`ComfyUI/user/default/trellis2_template_api.json`, sha256 `98dde0cd...`), with no browser download.
+- **The script then:**
+  - resolves the switches to TRELLIS.2 with background removal on;
+  - keeps the 45 of 63 nodes that the save node needs, which drops Pixal3D and the MoGe model we didn't download;
+  - points DINOv3 at `dino_v3_vit_l.safetensors`;
+  - sets upsample 1024, remesh 512, texture 1024 and decimate to 20,000 faces.
 
 ## What a local model cannot do for SWG's formats
 

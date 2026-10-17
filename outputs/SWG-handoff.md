@@ -384,6 +384,19 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-17 9:43 AM Claude: local 3D in place of fal: TRELLIS.2 through um comfy run, proved with one crate
+
+- **The request** came from the main session, in the owner's words: "can you have it use a different free 3d tool? i imagine you know how to do that".
+- **Done:** `tools/art/trellis2_image_to_3d_api.json`, made by `tools/art/make_trellis2_api.py` from ComfyUI's own TRELLIS.2 template (converted by the frontend's `graphToPrompt`, then TRELLIS.2 only, 45 of 63 nodes).
+  - `um comfy run ... --set "Concept image.image=<file>"` downloads the `.glb` as is; `um`'s `outputs()` is generic. No wrapper and no plugin edit.
+  - `tools/art/inspect_glb.py` checks the model in Blender 3.6.
+- **The crate test** (no game client open, from 9:31 AM):
+  - The template's remesh 768 ran **out of video memory**. Remesh 512 (now the default) worked: 166 s, peak 10,021 MiB of 12,227, at least 4.96 GB of Windows RAM free.
+  - The GLB has 19,956 triangles and a 1024 PBR texture set. It decimates to 1,999 triangles in Blender, where the handles crumple a little.
+  - ComfyUI was stopped afterwards (the card is back to about 650 MiB).
+- **How-to:** `Documentation-support/local-art-models.md`, "How to: a 3D prop from an image, locally". `*.glb` is now gitignored.
+- **Not done:** no `.msh` export or client test of a generated prop yet. Nothing was installed or downloaded.
+
 ### 2026-10-17 9:09 AM Claude: Vong look step 4 staged: client archive candidate + server patch, ready for the lock holder
 
 - **The owner:** "The mix is close enough. Go on to step 4".

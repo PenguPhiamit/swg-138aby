@@ -1,0 +1,95 @@
+{
+ "glb": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Local-art/trellis2-test/crate_trellis2_8.glb",
+ "bytes": 5953480,
+ "imported": {
+  "objects": 1,
+  "triangles": 19956,
+  "vertices": 14131,
+  "uv_layers": [
+   "UVMap"
+  ],
+  "size_m": [
+   0.871,
+   1.002,
+   0.728
+  ],
+  "materials": {
+   "Material_0": [
+    [
+     "Image_0",
+     [
+      1024,
+      1024
+     ]
+    ],
+    [
+     "Image_1",
+     [
+      1024,
+      1024
+     ]
+    ],
+    [
+     "Image_2",
+     [
+      2048,
+      2048
+     ]
+    ],
+    [
+     "Image_1",
+     [
+      1024,
+      1024
+     ]
+    ]
+   ]
+  }
+ },
+ "decimated": {
+  "objects": 1,
+  "triangles": 1999,
+  "vertices": 2586,
+  "uv_layers": [
+   "UVMap"
+  ],
+  "size_m": [
+   0.869,
+   1.001,
+   0.736
+  ],
+  "materials": {
+   "Material_0": [
+    [
+     "Image_0",
+     [
+      1024,
+      1024
+     ]
+    ],
+    [
+     "Image_1",
+     [
+      1024,
+      1024
+     ]
+    ],
+    [
+     "Image_2",
+     [
+      2048,
+      2048
+     ]
+    ],
+    [
+     "Image_1",
+     [
+      1024,
+      1024
+     ]
+    ]
+   ]
+  }
+ },
+ "decimate_target": 2000
+}
