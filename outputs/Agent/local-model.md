@@ -114,6 +114,8 @@ are Core3-dev paths relative to `MMOCoreORB` (optional `:START-END`), or `h:` pa
 
 ## The friend's PC
 
+**Measured 17 Oct, 5:03 AM** (one short question each, from Miniverse; set up by hand that night, the firewall rule narrowed to Miniverse): `qwen3.6:35b-a3b` at 64K loads in 40 s and writes about 11 tokens/s with 36% of its 22.8 GB on the graphics card; `qwen3.5:9b` 65 tokens/s and `gemma4:12b` 90 tokens/s, both wholly on the card. `qwen3:8b` at 32K ran the first five research topics in 1-2 minutes each, but read too little (it skipped StructureManager.cpp at the 60,000-character budget) and once wrote no report; they were queued again for `qwen3.6:35b-a3b`.
+
 - The friend agreed (owner, 17 Oct) to Ollama, to our jobs using their graphics card while Ollama is idle on our side,
   and to the job text (server source, bot notes, our game text) crossing the home network. It goes as plain `http`
   between the two PCs only. A firewall rule there admits Miniverse alone, and port 11434 is never forwarded on
