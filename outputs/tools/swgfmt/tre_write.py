@@ -91,8 +91,10 @@ def pack_dir(folder, out_path=None, md5_of='stored'):
     return data, sorted(files)
 
 
-def read(data):
-    """{path: bytes} plus the header fields, reading the layout above (self-test use)."""
+def read(data, strict=True):
+    """{path: bytes} plus the header fields, reading the layout above (self-test use).
+    strict=False reads SOE's own patch_*.tre, where one record's checksum does not match: such records are still
+    returned when their size and name CRC check (16 Oct: the strict reader rejected most stock patches)."""
     magic, ver, n, rec_off, rec_comp, rec_csize, name_comp, name_csize, name_usize = struct.unpack_from(HEADER, data, 0)
     if magic != b'EERT':
         raise ValueError('not a TRE archive')
@@ -108,7 +110,8 @@ def read(data):
         blob = data[off:off + (csize if comp else size)]
         raw = zlib.decompress(blob) if comp == ZLIB else blob
         tag = md5s[16 * i:16 * i + 16]
-        if len(raw) != size or soe_crc(name) != crc or tag not in (hashlib.md5(blob).digest(), hashlib.md5(raw).digest()):
+        md5_ok = tag in (hashlib.md5(blob).digest(), hashlib.md5(raw).digest())
+        if len(raw) != size or soe_crc(name) != crc or (strict and not md5_ok):
             raise ValueError('record %d (%s) does not check' % (i, name))
         files[name] = raw
         meta.append({'name': name, 'crc': crc, 'size': size, 'offset': off, 'comp': comp, 'csize': csize, 'name_offset': noff})

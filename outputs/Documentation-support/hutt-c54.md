@@ -160,7 +160,7 @@ Next: Claude reviews the three source commits and stages the client corrections 
      - **4:20 PM creation fix:** palette_columns and the eight creation tables.
    - Checked and ruled out:
      - Every overridden datatable is the client's real winning copy plus our rows, with nothing dropped.
-       - The earlier "schematic_group is MTG's" claim was wrong: `swgfmt.tre_write.read` cannot open most stock `patch_*.tre` (one record fails its checksum), so `trn_iff.client_file` silently picked older or MTG copies. The real winner is `patch_12_00`, identical to MTG's.
+       - The earlier "schematic_group is MTG's" claim was wrong. Claude's ad-hoc check used `swgfmt.tre_write.read`, which rejects most stock `patch_*.tre` (one record fails its checksum). The builders use `trn_iff.client_file`, whose lenient index resolves correctly; the winner is `patch_12_00`, identical to MTG's.
      - The UI loaded the same element counts on both archives.
    - Next: bisect the three groups with the owner's Chiss, one client restart each.
 5. **6:45-7:00 PM, the bisect was invalid.**
