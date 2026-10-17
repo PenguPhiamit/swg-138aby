@@ -261,7 +261,7 @@ Ranked by what breaks a new player's first hour, first.
 
 ## 4. Owner checklist: one in-game session
 
-About 90 minutes on the test galaxy. Answer in your own words; a sentence or two each is plenty. Note where you were (`/loc`) when something looks wrong, and take a screenshot if it is visual. Start the client with `Start SWG (above normal).cmd` in `SWG-client/`. Ask the main session to cut the bots down first, so the PC is not starved.
+About 90 minutes on the test galaxy. Answer in your own words; a sentence or two each is plenty. Note where you were (`/loc`) when something looks wrong, and take a screenshot if it is visual. Start the client with the "SWG Test Galaxy" desktop shortcut (`Play SWG Test Galaxy.cmd`). Ask the main session to cut the bots down first, so the PC is not starved.
 
 **The client changes installed today**
 1. With DXVK 3.1.1 and the 60 fps cap, how smooth does the game feel in Mos Eisley, in the countryside and in a busy cantina? Where, if anywhere, does it stutter or tear?
