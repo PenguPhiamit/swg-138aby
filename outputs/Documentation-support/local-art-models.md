@@ -209,11 +209,22 @@ about 100 MB/s, roughly 7.5 minutes in all.
 - **Installed:** the ComfyUI folder is 25.83 GB with the models, and C: has 63.5 GB free. `comfyui_version.py` reads
   0.41.0. No custom nodes were added: `custom_nodes` holds only the two stock examples. No system install, no
   registry entry, no service.
-- **Not done yet: the first run.** Two SWGEmu clients were open at 8:00 AM (started 6:52 and 7:00 AM), so ComfyUI has
-  not been started even once. Nothing is verified on the card yet: not that it starts on Blackwell, not VRAM, not speed.
-- **The first test, when the owner is not playing:** start `advanced\run_nvidia_gpu_disable_api_nodes.bat`, then run
-  `um comfy status`. Make one klein 4B image at 1024 px and record seconds, peak VRAM and free RAM here. Then try one
-  TRELLIS.2 run at the 512 preset from a CC0 or generated image of a crate. Close Opera first: free Windows RAM was
-  5.2 GB at 8:00 AM.
+- **First run, 17 Oct 8:23 to 8:26 AM (the owner was out of the game: "im out, run it").** This is measured on this PC.
+  - **Startup.** The same command as the `--offline` script (plus `--disable-auto-launch`) answered on 127.0.0.1:8188
+    after about 27 s. ComfyUI 0.41.0 reported PyTorch 2.14.0+cu130 on "cuda:0 NVIDIA GeForce RTX 5070 :
+    cudaMallocAsync", NORMAL_VRAM. So Blackwell works.
+  - **FLUX.2 [klein] 4B fp8, 1024x1024, 4 steps** (`tools/comfy/flux2-klein-4b-t2i.json`): the first image took
+    **34.99 s**, cold, including staging the text encoder (7,671 MB, loaded as bf16) and the model (3,882 MB). The next
+    three took **4.57 s, 3.67 s and 3.92 s**.
+  - **Peak card memory 11,563 MiB of 12,227**, with the desktop's ~1,000 MiB included. Free Windows RAM never fell
+    below 8.56 GB (it was 10.4 GB before; Opera was open). One of 52 one-second `nvidia-smi` samples failed with
+    "couldn't communicate with the NVIDIA driver" at 8:24:15, during model loading. The driver answered normally before
+    and after.
+  - **Idle, ComfyUI keeps the models on the card** (8,622 MiB used). It must be stopped before the owner plays. Stopping
+    it brought the card back to 927 MiB.
+  - **The images:** four for the Vong look test (`vong-look-test.md`). The tiling prompts did **not** tile by
+    themselves: edge jumps were 2-10 times the inside differences. `um sprite seamless` fixed all three, leaving some
+    doubled ridge lines from the cross-blend.
+- **Not run yet: TRELLIS.2.** Its template uses subgraphs and still has to be put into API form. It is the next test.
 - **To remove it all:** delete `C:\Users\Pengw\Tools\ComfyUI_windows_portable` and `C:\Users\Pengw\Tools\downloads`.
   Nothing else on the PC was changed.

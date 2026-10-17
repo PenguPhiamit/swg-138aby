@@ -5,8 +5,21 @@ ossus, or should we do another local project to test things?" On the decision ca
 That means the local model's first real job is a Vong warrior's look. One warrior stands at the Ossus Project fields for
 the owner to see, and patrols come after that look.
 
-**Status: queued. Nothing has been generated, built or installed.** The ComfyUI run waits until the owner is out of the
-game (two SWGEmu clients were open at 8:00 AM). The server lock belongs to the main session (run 27, the pet check), so
+**Status, 17 Oct 8:30 AM: step 1 done. The owner picks the swatch (step 2).** Nothing has been built or installed in
+the game.
+
+**Step 1 results** (8:24 to 8:26 AM; the timings and memory figures are in `local-art-models.md`). The images are in
+`outputs/Vong-look/gen/`; the PNGs are gitignored, and `comfy_manifest.jsonl` holds each prompt, seed and workflow.
+
+| # | File | What came out |
+|---|---|---|
+| 1 | `vonduun_1.png`, `_seamless`, `_tiled2x2` | dark oxblood and black shell plates in a diamond pattern, bone-white ridged seams with thorns. Closest to the brief, but quite regular. |
+| 2 | `vonduun_2…` | maroon scales with grey coral crust and dark red cracks. Rougher, more "living coral". |
+| 3 | `vonduun_3…` | glossy black tile-like plates with thin crimson seams and small barbs. Reads as beetle chitin. |
+| 4 | `vonduun_4.png` | concept sheet: a grey-skinned scarred warrior in red and black segmented armour with bone shoulder spurs, staff upright, front and side. Reference only. |
+
+None tiled straight from the model. `um sprite seamless` made all three tile (2x2 previews), and its cross-blend
+leaves some doubled lines on the ridges. The server lock belongs to the main session (run 27, the pet check), so
 the server side of step 5 is staged as a patch for the lock holder. This session does not touch `/opt/swg`.
 
 ## What the files say (read today from the client archives)

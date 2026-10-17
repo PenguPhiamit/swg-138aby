@@ -384,6 +384,15 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-17 8:30 AM Claude: first ComfyUI run on this PC; Vong look test step 1 done
+
+- **Run with the owner out of the game** ("im out, run it"), from 8:23 to 8:26 AM. ComfyUI 0.41.0 started on PyTorch 2.14.0+cu130 and saw the RTX 5070, so Blackwell works. It ran `--offline`, local only.
+- **FLUX.2 [klein] 4B fp8, 1024 px:** 35.0 s cold (loading included), then 3.7-4.6 s an image. Card peak 11,563 of 12,227 MiB; free Windows RAM stayed at or above 8.56 GB.
+- **Idle ComfyUI keeps 8.6 GB on the card.** I stopped it at 8:27 AM (back to 927 MiB). Always stop it before the owner plays.
+- **Four Vong images** (three armour textures, one concept sheet) are in `Vong-look/gen/` (PNGs gitignored; prompts and seeds in `comfy_manifest.jsonl`). The tiling prompts did not tile on their own; `um sprite seamless` fixed them. Details: `Documentation-support/vong-look-test.md`, `local-art-models.md`.
+- **Untested:** TRELLIS.2 (its template still has to be put into API form), and everything in the game.
+- **Next:** the owner picks a swatch, then step 3 (the bake in Blender) and step 4 (the clone).
+
 ### 2026-10-17 7:50 AM Claude: local AI models for art and planet work (research only)
 
 - **The owner asked** whether a local model on this PC can do some of the art or planet work. The answer is in `Documentation-support/local-art-models.md`. Nothing was downloaded, installed or run.
