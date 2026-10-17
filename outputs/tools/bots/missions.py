@@ -522,7 +522,7 @@ def survey(g, bot, mission, before, divisor, label, guard=None, spots=4):
     """Walk out past 1024 m from the mission's start, survey the named class, sample where the density reaches the
     mission's level. guard (another bot) walks along."""
     began, since = time.time(), mark(bot)
-    family = str(mission.get('target') or '').lower()
+    family = str(mission.get('target') or '').lower().replace(' ', '_')
     level = mission.get('difficulty') or 50
     start = mission.get('start') or where(mission)
     if not family or not start:
@@ -547,6 +547,9 @@ def survey(g, bot, mission, before, divisor, label, guard=None, spots=4):
             listed = survey_list(bot, tool)
             names = [r['name'] for r in listed.get('resources', []) if family in str(r.get('type', '')).lower()
                      or family in str(r.get('name', '')).lower()]
+            if not names and n == 0:  # the class is the resource's third class from the end; types are the last one
+                g.note(f"{label}: {tool.get('name')} lists no {family}; types: "
+                       + ', '.join(sorted({str(r.get('type')) for r in listed.get('resources', [])}))[:300])
             for name in names[:3]:
                 bot.slash('requestSurvey', name, wait=0)
                 top = (bot.wait_for('"survey_results"', 12) or {}).get('best') or {}
@@ -575,7 +578,7 @@ def survey(g, bot, mission, before, divisor, label, guard=None, spots=4):
 
 
 # ---- entertainer ----
-INDOOR_HINTS = ('furniture', 'terminal', 'chair')
+INDOOR_HINTS = ('furniture', 'terminal', 'mobile')  # 'mobile': NPCs standing inside (object/mobile/...)
 
 
 def go_inside(g, bot, point, label):
@@ -593,6 +596,22 @@ def go_inside(g, bot, point, label):
     return None
 
 
+def hold(bot, thing):
+    """Put thing into the hands, as class-check.py's equip does: weapons and instruments share the hold slot and the
+    server's own swap fails for an instrument (15 Oct), so whatever is held goes back to the inventory first
+    (transferItemMisc, containment -1), then transferItemWeapon into slot 4. True when its parent is the bot."""
+    stock = bot.inventory().get('items', [])
+    if any(i.get('oid') == thing['oid'] and i.get('parent') == bot.oid for i in stock):
+        return True
+    box = next((i for i in stock if i.get('name') == '@item_n:inventory' and i.get('parent') == bot.oid), None)
+    for i in stock:
+        if box and i.get('parent') == bot.oid and 'unknown_weapon' not in str(i.get('name')) \
+                and (i.get('type') == 'WEAO' or str(i.get('name')).startswith('@obj_n:obj_')):
+            bot.slash('transferItemMisc', f"{box['oid']} -1 0 0 0", target=i['oid'], wait=1)
+    bot.slash('transferItemWeapon', f'{bot.oid} 4 0 0 0', target=thing['oid'], wait=1)
+    return any(i.get('oid') == thing['oid'] and i.get('parent') == bot.oid for i in bot.inventory().get('items', []))
+
+
 def perform(g, bot, mission, before, divisor, label, minutes=12):
     """Dancer or musician: inside the mission's building, perform until the mission completes (10 minutes)."""
     began, since = time.time(), mark(bot)
@@ -605,9 +624,8 @@ def perform(g, bot, mission, before, divisor, label, minutes=12):
         if horn is None:
             agentgear(bot, 'instruments')
             horn = (items(bot, 'slitherhorn') or [None])[0]
-        if not g.check(f'{label}: a slitherhorn', horn):
-            return unfinished(g, label, mission, 'no instrument', began)
-        bot.slash('transferitemmisc', f'{bot.oid} 4 0 0 0', target=horn['oid'], wait=2)  # into the hand slot
+        if not g.check(f'{label}: a slitherhorn in hand', horn and hold(bot, horn), horn and horn.get('name')):
+            return unfinished(g, label, mission, 'no instrument in hand', began)
     start = mark(bot)
     bot.slash('startmusic' if music else 'startdance', 'starwars1' if music else 'basic', wait=4)
     begun = said(bot, 'music_start_self' if music else 'dance_start_self', start)

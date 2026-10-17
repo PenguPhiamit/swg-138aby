@@ -331,10 +331,15 @@ class Bot:
             if kind == 'dancer' or any('slitherhorn' in i['name'] and i.get('held') for i in self.items):
                 self.performing = (kind, self.galaxy.clock.now)
                 self.hear(f'@performance:{"dance" if kind == "dancer" else "music"}_start_self')
-        elif name == 'transferitemmisc':
+        elif name == 'transferItemMisc':
+            box = next(i for i in self.items if i['name'] == '@item_n:inventory')
             for i in self.items:
                 if i['oid'] == target:
-                    i['held'] = True
+                    i['held'], i['parent'] = False, box['oid']
+        elif name == 'transferItemWeapon':
+            for i in self.items:
+                if i['oid'] == target:
+                    i['held'], i['parent'] = True, self.oid
         elif name in ('stopdance', 'stopmusic'):
             self.performing = None
         elif name == 'requestSurvey':
@@ -532,6 +537,16 @@ class Missions(Base):
             self.assertTrue(done['removed'], kind)
             self.assertGreaterEqual(self.clock.now - started, 600)
         self.assertEqual(g.failed(), [])
+
+    def test_the_held_weapon_goes_away_before_the_instrument(self):
+        g, (nima,) = self.crew('Nima')
+        box = {'oid': 1, 'name': '@item_n:inventory', 'type': 'TANO', 'parent': nima.oid}
+        pistol = {'oid': 2, 'name': '@weapon_name:pistol_cdef', 'type': 'WEAO', 'parent': nima.oid}
+        horn = {'oid': 3, 'name': '@obj_n:obj_slitherhorn', 'type': 'TANO', 'parent': 1}
+        nima.items += [box, pistol, horn]
+        self.assertTrue(M.hold(nima, horn))
+        self.assertEqual(nima.slashes[:2], [('transferItemMisc', '1 -1 0 0 0'), ('transferItemWeapon', f'{nima.oid} 4 0 0 0')])
+        self.assertEqual(pistol['parent'], 1)
 
     def test_recon_is_paid_on_entering_the_area(self):
         g, bots = self.crew('Forn', 'Brask', 'Dask', 'Ressa', 'Mirren')
