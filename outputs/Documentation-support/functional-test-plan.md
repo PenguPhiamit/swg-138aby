@@ -91,7 +91,8 @@ Sources read: `Bot-reports/GATE.md` (gate of 15 Oct, 4:31 PM: FAIL, 22 of 35), `
 - **Check:** incapacitation and recovery, death, the clone window, cloning at the chosen facility, wounds and battle fatigue, item decay, insurance at the terminal.
 - **Who:** Squad, BotPop, Owner (clone window).
 - **Coverage:** every Squad run does `recover()` first (waits out incap, clones if dead). `esk-recovery-proof.py`. BotPop: about one death per bot per hour, all cloned.
-- **Gaps:** **no insurance check at all.** No check of clone-location binding, wounds after cloning or item decay.
+- **Coverage (17 Oct, 3:37 AM, 11 of 11 PASS; the 3:32 AM run also checked the 1,000-credit bind):** `besh-death-insurance.py` (Dova, Mos Eisley). Binds at one cloner (terminal radial 20, confirm window, 1,000 credits); `/insure` at the insurance terminal in the same room (list of insurable items, first row, 100 credits, `prose_insure_success`); dies at the other cloner, 447 m away, from three incapacitations in a row (`/agentgear afflict incap`); the clone window offers `revive_closest` and `revive_bind`; picking the bind clones it 18 m from the bound cloner (the spawn point is outdoors); the decay report shows the insured item lost 1% and every other item 5% (98% against 90% after two deaths); all 53 items kept.
+- **Gaps:** wounds and battle fatigue after cloning (the body does not track wounds); the new-player cloning coupon; insure-all; a second planet's cloner (off-planet binds show as unavailable). Walking straight into a building's cell from 270 m away failed with "the server keeps putting us back"; two legs (outdoors to the building, then in) work.
 - **Pass:** a new scenario insures one item (cash down by the fee, the item shows insured), dies, clones at the bound facility (planet and position match), and the item is still in inventory.
 
 #### 10. Spawns and danger near the starting cities
@@ -247,7 +248,7 @@ Ranked by what breaks a new player's first hour, first.
 | 4 | Missions through the terminal | The only real income for a new character (FINDINGS section 3); Squad mission check is down | GPT after rank 2 | Pass line of section 11 |
 | 5 | ~~Crafting session~~ **done 17 Oct** (section 15: 21 of 21) | An Artisan's whole first hour; zero coverage | GPT (body API proposal), main session (C++ body) | Pass line of section 15 |
 | 6 | Doctor and entertainer buffs | Four doctor and two dance regressions; town social play | GPT (check logic: "re-apply" receipts on already-buffed fighters) | Pass lines of sections 22 and 23 |
-| 7 | Death, cloning and insurance | About one death per hour for new characters; insurance has no check | GPT (new scenario) | Pass line of section 9 |
+| 7 | Death, cloning and insurance — **done 17 Oct** (section 9: 11 of 11) | About one death per hour for new characters; insurance has no check | GPT (new scenario) | Pass line of section 9 |
 | 8 | Spawn danger near cities and the F2 spawn fix — **fixed 16 Oct:** deaths to killers 8+ levels up 25.6% → 5.0% with the creature-level gate (dev `69f5c879`, run 19). | Deaths far from home in the first hour on Naboo, Rori and Talus | BotPop run on `c5d713b8`, owner's T1/T2 choices | Pass line of section 10 |
 | 9 | Ticket purchase failures and the untested travel graph — **passed at scale 16 Oct:** BotPop real travel, 66 of 73 shuttle trips (`1fd17e4`). | A failed ticket strands a new player | Squad sweep | Pass line of section 17 |
 | 10 | Gas, moisture and wind surveys | Surveying is an Artisan's first task | GPT (body or server) | Pass line of section 13 |
