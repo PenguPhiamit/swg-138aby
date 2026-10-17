@@ -94,6 +94,21 @@ CLASS_CHECK_PHASE=P1 CLASS_CHECK_PROFESSIONS=combat_marksman \
 
 `CLASS_CHECK_PHASE=P0` (default) runs only the controls. `CLASS_CHECK_TESTER` names the group member (default: the member who started as that profession, else the leader); `CLASS_CHECK_MINUTES` caps the slice (default and maximum 23). Verdicts: WORKS, RAN, NOT_GRANTED (error 2 after a verified grant, a FAIL), NO_EFFECT (a FAIL), BLOCKED (a note, never a FAIL). A BLOCKED result carries `gate_passed` when the command was sent and no error 2 came back: the server checks the ability first, so the profession holds it. Per-profession JSON goes to `Bot-reports/<Group>/class-check-<profession>.json`; at the end the tester is cleared and every member's starting boxes (`groups.json` training) are granted again. Attacks need live wildlife: the scenario walks to the sevorrt plateau and uses only passive animals (dwarf eopie, worrt, rill, eopie); the server's `locate` cannot see live spawns. Offline tests: `python -I tools/bots/test_class_check.py`.
 
+## Creation sweep (test plan section 2, 17 October)
+
+`creation-sweep.py` creates one character for every species and gender the server offers (24: 12 species × 2), logs each in, reads `status()` and deletes them again. It runs **standalone as root**, because it picks accounts and cleans up through the test galaxy's database; the client bodies themselves run as swgemu:
+
+```
+wsl -d Debian -u root -- python3 /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/tools/bots/scenarios/creation-sweep.py
+```
+
+- **Data checks** (no galaxy needed; `--data-only` runs only these, from any user or Windows): 12 species with both genders; the Hutt's racial row and limits are S7's (C54 F2); its creation text is S7's with the approved numbers (C54 F3); every description's attribute block matches its racial row (the Chiss and Hutt apart from the ten stock texts); the Hutt skill labels; the server's and client's `local_planets.tre` are the same file.
+- **Name filter in game.** Eight refusals that make no character (Admin, Dev, Captain, `… Bank`, a Wookiee surname, a 3-letter Hutt name, digits, a name in use). The acceptances ride on the 24 creations: old substring traps (Rebecca, Victor, Devon, Sigmund, Modesto, Christopher, Cassandra), the canon surnames stock refused (Skywalker, Solo, Fett, Vader), a canon first name, and a Hutt with a kajidic surname.
+- **Each character:** created with the client's JSON create action, logged in by first name. The object CRC, shown name and database template must match; all nine attributes must equal `profession_mods` + `racial_mods`, with current equal to maximum. For the Hutts, attributes minus the profession row must be S7's row.
+- **Cleanup:** the login server's own two statements (`deleted_characters`), only for characters this run made. The zone purges the objects on its next delete pass. `--keep` skips the cleanup.
+- **Accounts:** the load-fleet bots (`load-groups.json`; no squad uses them), taking only those with no creation in the last 65 minutes. Core3 allows one creation per account per hour and checks it in the database, so a restart doesn't reset it. A second run within the hour is BLOCKED with the wait in minutes. First names are unique per galaxy, deleted ones included, so names are chosen against the database each run.
+- **Output:** `Bot-reports/Creation/` (report, LOG.md and `<time>-creation-sweep-rows.json` with every row). Options: `--parallel N` (default 8), `--accounts a,b,…`. Offline tests: `python -I tools/bots/test_creation_sweep.py`.
+
 ## Fallback scheduling (C16, 14 October)
 
 Repeated `squad.py run` rounds now use `../fallback-plan.json`. After two consecutive all-PASS rounds, or the same FAIL/BLOCKED/ERROR twice, the group switches to the next available fallback. Empty-check scenarios count as blocked. Round timeouts count as repeated blockage; an owner halt never starts fallback work. The main scenario is retried after three fallback rounds or when its contents change. State is kept in `Bot-reports/runs/fallback-state.json`, independently per group.
