@@ -1,0 +1,30 @@
+diff --git a/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua b/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua
+index 4869af1..9dd68c6 100644
+--- a/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua
++++ b/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua
+@@ -16,10 +16,24 @@ ossus_regions = {
+ 	{"ossus_knossa_nobuild", 0, -3600, {CIRCLE, 320}, NOBUILDZONEAREA},
+ 
+ 	-- The academy ruins and the three cave mouths
+-	{"ossus_academy_ruins_nobuild", 2016, 2848, {CIRCLE, 260}, NOSPAWNAREA + NOBUILDZONEAREA},
++	-- O7 (PL-01): 270 m so the garrison's outer wall (5-6 m past 260) is inside it too
++	{"ossus_academy_ruins_nobuild", 2016, 2848, {CIRCLE, 270}, NOSPAWNAREA + NOBUILDZONEAREA},
+ 	{"ossus_cave_foothills_west_nobuild", -2976, -4960, {CIRCLE, 120}, NOBUILDZONEAREA},
+ 	{"ossus_cave_foothills_east_nobuild", 4896, -4960, {CIRCLE, 120}, NOBUILDZONEAREA},
+ 	{"ossus_cave_north_nobuild", 1376, 5920, {CIRCLE, 120}, NOBUILDZONEAREA},
++	-- O7 places with people (PL-01/PL-02; Fable-ossus/o7-build): no herds in the camps, no structures on the props.
++	-- None of the six Ossus creatures is aggressive (census of 16 Oct); the circles keep spawns off the NPCs.
++	{"ossus_library_vaults_nobuild", 2300, 1960, {CIRCLE, 80}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_ysanna_camp_nobuild", -1325, -4950, {CIRCLE, 80}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_ysanna_circle_nobuild", -980, -5610, {CIRCLE, 60}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_adega_hamlet_nobuild", -3050, 1100, {CIRCLE, 150}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_kathracite_adit_nobuild", 4600, -321, {CIRCLE, 80}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_imhar_crossing_nobuild", 4470, -530, {CIRCLE, 180}, NOBUILDZONEAREA},
++	{"ossus_eocho_watch_nobuild", 290, -6400, {CIRCLE, 50}, NOBUILDZONEAREA},
++	-- in the middle of the north open ground: the hole keeps the kirruk packs off the pilot's camp
++	{"ossus_crashed_fighter_nobuild", -1500, 5200, {CIRCLE, 90}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_sky_burial_nobuild", 5233, 786, {CIRCLE, 60}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_hutt_field_nobuild", 3400, -2300, {CIRCLE, 90}, NOSPAWNAREA + NOBUILDZONEAREA},
+ 	-- Habitat spawners only: no world fallback spilling fauna into other biomes.
+ 	-- The inner ring keeps herd centres out of Adega Lake's sunken basin.
+ 	{"ossus_adega_wetlands", -3600, 1200, {RING, 650, 1050}, SPAWNAREA, {"ossus_wetlands"}, 24},

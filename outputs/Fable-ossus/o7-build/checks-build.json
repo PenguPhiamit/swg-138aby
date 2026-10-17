@@ -1,0 +1,144 @@
+{
+ "base": {
+  "path": "work/c59-walk-on-0e4fe92d/local_planets-c59-walk.tre",
+  "bytes": 4691998,
+  "sha256": "9ce108a03b027ff9e344f02866aadb796cec2c817064d774a30f4e1614f9745b",
+  "entries": 183
+ },
+ "out": {
+  "path": "work/ossus-o7/local_planets-ossus-o7.tre",
+  "bytes": 4700364,
+  "sha256": "efeff508409964b43380a172bd34324d6778d9058db66448740629573bb264a9",
+  "entries": 183
+ },
+ "untouched_identical": 179,
+ "changed": [
+  "datatables/clientregion/ossus.iff",
+  "snapshot/ossus.ws",
+  "string/en/ossus_region_names.stf",
+  "terrain/ossus.trn"
+ ],
+ "new": [],
+ "dropped": [],
+ "entries_sha256": {
+  "datatables/clientregion/ossus.iff": "52775cb7220c7da1bab03fc3898c9b56dd7f6d0ed83403fcfece5c069c630bbe",
+  "snapshot/ossus.ws": "021b15d5434fd9543512ec57b799c6b100c560c913ce7e07c4ac9a0499d8f206",
+  "string/en/ossus_region_names.stf": "18c94899ba918e7121a42af2feb8a6077e1d41e4609edb5d507d722fa630ac53",
+  "terrain/ossus.trn": "05c570f2f241d799e72bf162c844dc1d9fe00c27cc05f7cbb16e28bc9fc50f5c"
+ },
+ "report": {
+  "terrain": {
+   "bytes": 42834,
+   "sha256": "05c570f2f241d799e72bf162c844dc1d9fe00c27cc05f7cbb16e28bc9fc50f5c",
+   "tgas_identical_to_base": {
+    "terrain/ossus_academy.tga": true,
+    "terrain/ossus_canyon.tga": true,
+    "terrain/ossus_mesa.tga": true
+   },
+   "verdict": "PASS"
+  },
+  "snapshot": {
+   "bytes": 45291,
+   "nodes": 462,
+   "world_level": 330,
+   "templates": 100,
+   "round_trip_identical": true,
+   "ids": [
+    6900000,
+    6900461
+   ],
+   "ids_clash_with_client_snapshots": [],
+   "templates_missing_in_client": [],
+   "templates_missing_in_merged_crc": [],
+   "base_nodes": 87,
+   "dropped_o7_nodes": 0,
+   "new_top_nodes": 295
+  },
+  "regions": {
+   "rows": [
+    [
+     "@ossus_region_names:knossa",
+     0.0,
+     -3600.0,
+     300.0
+    ],
+    [
+     "@ossus_region_names:academy_benchland",
+     1600.0,
+     2600.0,
+     1300.0
+    ],
+    [
+     "@ossus_region_names:imhar_canyon",
+     5150.0,
+     100.0,
+     1400.0
+    ],
+    [
+     "@ossus_region_names:eocho_mountains",
+     0.0,
+     -6600.0,
+     3200.0
+    ],
+    [
+     "@ossus_region_names:adega_lake",
+     -3600.0,
+     1200.0,
+     700.0
+    ],
+    [
+     "@ossus_region_names:westmarch",
+     -5344.0,
+     96.0,
+     400.0
+    ],
+    [
+     "@ossus_region_names:knossa_fields",
+     1500.0,
+     -3300.0,
+     450.0
+    ],
+    [
+     "@ossus_region_names:ossus",
+     0.0,
+     0.0,
+     9000.0
+    ]
+   ],
+   "names": [
+    [
+     "knossa",
+     "Knossa"
+    ],
+    [
+     "academy_benchland",
+     "the Academy Benchland"
+    ],
+    [
+     "imhar_canyon",
+     "Imhar Canyon"
+    ],
+    [
+     "eocho_mountains",
+     "the Eocho Mountains"
+    ],
+    [
+     "adega_lake",
+     "Adega Lake"
+    ],
+    [
+     "ossus",
+     "Ossus"
+    ],
+    [
+     "westmarch",
+     "Westmarch"
+    ],
+    [
+     "knossa_fields",
+     "Knossa Fields"
+    ]
+   ]
+  }
+ }
+}
