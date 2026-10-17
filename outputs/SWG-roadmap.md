@@ -1,6 +1,6 @@
 # SWG sandbox roadmap
 
-Private, single-owner pre-CU galaxy (SWGEmu Core3 on WSL Debian). Last updated 13 October 2026, 15:10 PDT, by Claude. Whoever picks this up (you, Claude or ChatGPT) should update the checkboxes as work lands.
+Private, single-owner pre-CU galaxy (SWGEmu Core3 on WSL Debian). Last updated 17 October 2026, 12:50 PM PDT, by Claude ("Where we are, 17 Oct" below the route). Whoever picks this up (you, Claude or ChatGPT) should update the checkboxes as work lands.
 
 **Who does what:** see "Work split" in `../AGENTS.md`. In short, Claude does the engineering inside `/opt/swg` (bot body, server helpers, test galaxy, deploys). ChatGPT, using Codex and Universal Modder, does review, tools outside `/opt/swg`, play-testing through MCP, real-client checks with `um win`, research and file formats. Current tasks are on the board in `SWG-handoff.md` (ChatGPT's tasks are C1–C5 there).
 
@@ -28,6 +28,38 @@ Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heav
 - The board is 150 KB and both agents read all of it every session (the house rule says about 25 KB). Archive finished rows and old log entries to `SWG-handoff-archive.md`.
 - Park research tracks that feed nothing this month (owner's call): the Storyteller weapon, the Prophecy archive, the Darksaber trail, KOTOR authors and farming art. Keep their records; they come back as tracks.
 - Every owner question carries a default and a date ("Claude does X unless you object by …"), so a missing answer never stalls a lane.
+
+**Where we are, 17 Oct 12:50 PM (Claude; owner: "update the roadmap before restart"):**
+- **Scope.** The first friends' launch (owner, 17 Oct): Hoth open; Ossus and Nal Hutta closed until their content is ready. Owner, 16 Oct: test end to end before more content.
+- **Usage.** Claude's weekly limit was 56% used at 9 AM (it resets 22 Oct about 10 PM). GPT is out until 22 Oct 1:13 AM, so cross-reviews for live wait for it. Local models take the bulk drafting: the friend's PC (qwen3.6 35B) and this PC (qwen3:8b; the owner limited the queue to this PC at 11:40 AM).
+- **Gate and base game.**
+  - The regression gate passed 39/46 (17 Oct 2:25 AM).
+  - Done:
+    - creation for all 24 species and genders;
+    - the push-back fix;
+    - crafting, 21/21;
+    - death, cloning and insurance, 11/11;
+    - spawn danger, deaths to much stronger creatures 25.6% → 5.0%;
+    - real shuttle travel, 66 of 73 trips;
+    - pets: Kimogila store and repair, and "Teach every command" (owner-confirmed 17 Oct).
+  - Still open (test plan section 3): missions through the terminal (run 2 running today), trainers, vehicles and mounts, doctor and entertainer buffs, gas/moisture/wind surveys, groups/mail/guilds, bazaar/vendors/trade, housing/harvesters/cities/factions, and last a dress rehearsal on live rules.
+- **On the test galaxy (run 29, dev `4906d2eb`):**
+  - Nal Hutta home and life (PL-04, PL-06);
+  - the Hoth leftovers (PL-05) and the Hoth fill (townsfolk, six places, Echo Base people, three jobs, level 60+ wildlife);
+  - Ossus O7–O11: people, world and dungeon, the gold sky, the ghostfire quest with the spirit of Ood Bnar, and the cave mouths;
+  - the Vong look test;
+  - the vehicle call fix;
+  - creation fixes B1/B2;
+  - the SPRT log fix.
+- **On dev for the next restart:**
+  - the Vong body fix;
+  - the character-builder cleanup (25 vehicle deeds that can't work);
+  - three broken Hoth vehicle rewards swapped for working ones (owner's choice);
+  - staged: the Light Bending BARC body (archive).
+  - The Ossus session is still fixing water in the vault and adit pits, the tree in the sanctuary mouth, the One Sith entrance (a gap and a floor across the doorway) and One Sith mobs that never leash.
+- **Audits.** Item sources (`Documentation-support/item-sources-audit.md`): 12,062 item templates, of which 3,769 have a way to be obtained, 1,650 have none, 399 come only from test tools and 6,176 are imported but unused. The local model is sorting the 2,117 flagged items, then the 3,769 ok ones, for Opus to check. Vehicles (`Documentation-support/vehicles-render-17oct.md`): a vehicle's body is its saddle appearance; most MTG vehicles should draw; 25 builder deeds could not work.
+- **Art.** Images and 3D are made locally with ComfyUI (FLUX.2 klein 4B, TRELLIS.2) through Universal Modder's `um comfy`, then Blender: fal is not needed. A crate took 166 s on this PC. A setup prompt for the friend's PC is ready (`tools/agents/local/friend-pc/COMFYUI-SETUP.md`).
+- **Before friends play:** close the base-game gaps above, the client patch for friends, and the GitHub push gate (owner's OK). Ossus and Nal Hutta stay closed.
 
 **Week 1, close the loops (to 21 Oct):**
 - Empty the integration queue:
