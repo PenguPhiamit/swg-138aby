@@ -15,14 +15,16 @@ What it changes on this PC (and -Remove undoes):
   3. One inbound Windows Firewall rule, "SWG-Ollama-OwnerPC" (Windows asks for an administrator once): TCP port
      11434, for ollama.exe only, from Miniverse address only, on Private networks only.
   4. Optional (asks first): no sleep while plugged in, so jobs can run while nobody is at the PC.
-  5. Downloads the models (about 39 GB for the default three) and tests each one.
+  5. Downloads the models (about 58 GB for the default six: the five below and gpt-oss-20b-64k, which is
+     built here from gpt-oss:20b and needs no download of its own) and tests each one. When the disk is short,
+     it takes them in this order and says which it left out.
 
 Ollama has no password. Never forward port 11434 on the router.
 #>
 [CmdletBinding()]
 param(
     [string]$OwnerPC,
-    [string[]]$Models = @('qwen3.6:35b-a3b', 'qwen3.5:9b', 'gemma4:12b'),
+    [string[]]$Models = @('qwen3.6:35b-a3b', 'qwen3.5:9b', 'gemma4:12b', 'qwen3:8b', 'gpt-oss:20b', 'gpt-oss-20b-64k'),
     [switch]$CheckOnly,
     [switch]$SkipPull,
     [switch]$Remove
@@ -42,8 +44,12 @@ $StateFile = Join-Path $StateDir 'state.json'
 $Setup = 'https://ollama.com/download/OllamaSetup.exe'
 $Vars = [ordered]@{ OLLAMA_HOST = "0.0.0.0:$Port"; OLLAMA_MAX_LOADED_MODELS = '1'; OLLAMA_NUM_PARALLEL = '1' }
 # Sizes on disk from the Ollama library pages (GB); the test context is the window our jobs will ask for.
-$SizeGB = @{ 'qwen3.6:35b-a3b' = 24; 'qwen3.5:9b' = 7.6; 'gemma4:12b' = 8.0; 'qwen3:8b' = 5.2 }
-$TestCtx = @{ 'qwen3.6:35b-a3b' = 65536; 'qwen3.5:9b' = 32768 }
+$SizeGB = @{ 'qwen3.6:35b-a3b' = 24; 'qwen3.5:9b' = 7.6; 'gemma4:12b' = 8.0; 'qwen3:8b' = 5.2; 'gpt-oss:20b' = 14
+            'gpt-oss-20b-64k' = 0 }
+$TestCtx = @{ 'qwen3.6:35b-a3b' = 65536; 'qwen3.5:9b' = 32768; 'qwen3:8b' = 32768; 'gpt-oss:20b' = 65536
+             'gpt-oss-20b-64k' = 65536 }
+# Models built here from a Modelfile instead of downloaded (Miniverse has the same file in tools/agents/local).
+$Built = @{ 'gpt-oss-20b-64k' = @{ From = 'gpt-oss:20b'; Text = "FROM gpt-oss:20b`nPARAMETER num_ctx 65536`n" } }
 
 $script:Problems = New-Object System.Collections.ArrayList
 $script:Result = New-Object System.Collections.ArrayList
@@ -115,6 +121,11 @@ function Find-Ollama {
     $cmd = Get-Command ollama.exe -ErrorAction SilentlyContinue
     if ($cmd) { return $cmd.Source }
     return $null
+}
+
+function Test-Have($Have, [string]$Model) {
+    # /api/tags spells a model without a tag as name:latest
+    return ($Have -contains $Model -or ($Model -notmatch ':' -and $Have -contains "${Model}:latest"))
 }
 
 function Test-Signed([string]$Path) {
@@ -285,9 +296,22 @@ $modelDir = [Environment]::GetEnvironmentVariable('OLLAMA_MODELS', 'User')
 if (-not $modelDir) { $modelDir = Join-Path $env:USERPROFILE '.ollama\models' }
 $drive = (Split-Path -Qualifier $modelDir).TrimEnd(':')
 $diskFree = [math]::Round((Get-PSDrive $drive).Free / 1GB, 1)
+$present = @()
+$tagsNow = Get-Api '/api/tags'
+if ($tagsNow) { $present = @($tagsNow.models | ForEach-Object { $_.name }) }
 $need = 0
-foreach ($m in $Models) { if ($SizeGB.ContainsKey($m)) { $need += $SizeGB[$m] } else { $need += 10 } }
-Good "models go to $modelDir ($diskFree GB free on ${drive}:; the models need about $need GB)"
+$fits = New-Object System.Collections.ArrayList
+$left = New-Object System.Collections.ArrayList
+foreach ($m in $Models) {
+    $size = 0
+    if (-not (Test-Have $present $m)) { $size = if ($SizeGB.ContainsKey($m)) { $SizeGB[$m] } else { 10 } }
+    if ($need + $size -le $diskFree - 5 -or $SkipPull) { $need += $size; [void]$fits.Add($m) } else { [void]$left.Add($m) }
+}
+Good "models go to $modelDir ($diskFree GB free on ${drive}:; the ones not here yet need about $need GB)"
+if ($left.Count) {
+    Warn "not enough disk for $($left -join ', ') (keeping 5 GB spare); free some space and run the script again to add them"
+    $Models = @($fits)
+}
 
 $exe = Find-Ollama
 $keep = [Environment]::GetEnvironmentVariable('OLLAMA_KEEP_ALIVE', 'User')
@@ -322,16 +346,12 @@ if ($CheckOnly) {
     $tags = Get-Api '/api/tags'
     if ($tags) {
         $have = @($tags.models | ForEach-Object { $_.name })
-        foreach ($m in $Models) { if ($have -contains $m) { Good "model $m is here" } else { Warn "model $m is missing" } }
+        foreach ($m in $Models) { if (Test-Have $have $m) { Good "model $m is here" } else { Warn "model $m is missing" } }
     }
     $sleep = Get-SleepAC
     if ($null -ne $sleep) { Say "   sleep on mains power after: $(if ($sleep -eq 0) { 'never' } else { "$sleep min" })" }
     Step "$($script:Problems.Count) thing(s) to check"
     exit $(if ($script:Problems.Count) { 1 } else { 0 })
-}
-
-if ($diskFree -lt ($need + 5) -and -not $SkipPull) {
-    Stop-Here "only $diskFree GB free on ${drive}: and the models need about $need GB plus 5 GB spare. Free some space, or run with -Models qwen3.5:9b,gemma4:12b"
 }
 
 # ------------------------------------------------------------------------------------------------------- 1 install
@@ -425,10 +445,25 @@ Step '5. Models'
 $env:OLLAMA_HOST = "127.0.0.1:$Port"   # for the ollama command in this window only; the server keeps 0.0.0.0
 if (-not $SkipPull) {
     foreach ($m in $Models) {
+        if ($Built.ContainsKey($m)) { continue }
         Say "   ollama pull $m"
         & $exe pull $m
-        if ($LASTEXITCODE -ne 0) { Warn "ollama pull $m failed (run the script again; finished downloads are kept)" }
+        if ($LASTEXITCODE -ne 0) {
+            Warn "ollama pull $m failed. Run the script again (finished downloads are kept). If it said the model needs a newer Ollama: tray icon, Restart to update (or reinstall from ollama.com), then run it again"
+        }
     }
+}
+$tags = Get-Api '/api/tags' 10
+$have = @(); if ($tags) { $have = @($tags.models | ForEach-Object { $_.name }) }
+foreach ($m in $Models) {
+    if (-not $Built.ContainsKey($m) -or (Test-Have $have $m)) { continue }
+    $spec = $Built[$m]
+    if (-not (Test-Have $have $spec.From)) { Warn "$m not built: it is made from $($spec.From), which is not here"; continue }
+    $file = Join-Path $StateDir "Modelfile.$m"
+    Set-Content -Encoding ASCII $file $spec.Text
+    Say "   ollama create $m (from $($spec.From); no download)"
+    & $exe create $m -f $file
+    if ($LASTEXITCODE -ne 0) { Warn "ollama create $m failed" }
 }
 $tags = Get-Api '/api/tags' 10
 $have = @(); if ($tags) { $have = @($tags.models | ForEach-Object { $_.name }) }
@@ -436,7 +471,7 @@ $have = @(); if ($tags) { $have = @($tags.models | ForEach-Object { $_.name }) }
 # ------------------------------------------------------------------------------------------------------- 6 test
 Step '6. Self-test (each model answers once; speed and the GPU share are printed)'
 foreach ($m in $Models) {
-    if ($have -notcontains $m) { Warn "model $m is not here, not tested"; continue }
+    if (-not (Test-Have $have $m)) { Warn "model $m is not here, not tested"; continue }
     $ctx = if ($TestCtx.ContainsKey($m)) { $TestCtx[$m] } else { 8192 }
     $free = [math]::Round((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1MB, 1)
     $size = if ($SizeGB.ContainsKey($m)) { $SizeGB[$m] } else { 10 }

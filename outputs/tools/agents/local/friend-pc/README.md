@@ -1,13 +1,13 @@
 # Ollama on the friend's PC: how-to
 
 For the owner, at the friend's PC (Claude, 17 Oct 2026). The friend has agreed to all of it (owner, 17 Oct). One
-script installs Ollama, downloads three models, lets **only Miniverse** use them over the home network, and tests
+script installs Ollama, downloads the project's models, lets **only Miniverse** use them over the home network, and tests
 them. Miniverse then sends its local-model jobs there, and uses its own model whenever this PC is off.
 How the two agents use it: [Agent/local-model.md](../../../../Agent/local-model.md).
 
 ## What the friend agreed to
 
-- **Ollama** (ollama.com's official installer) is installed for their Windows user, with about 40 GB of models.
+- **Ollama** (ollama.com's official installer) is installed for their Windows user, with about 60 GB of models.
 - **Their graphics card runs our jobs** while Ollama is idle on the owner's side: research topics, proofreading,
   sorting bot notes, and later drafting bot chat lines. The biggest model also uses about 15 GB of their RAM while it
   is loaded.
@@ -19,11 +19,12 @@ How the two agents use it: [Agent/local-model.md](../../../../Agent/local-model.
 
 ## Before you start
 
-- About **45 GB free** on drive C: (the script checks).
+- About **65 GB free** on drive C: for all six models. With less, the script takes them in the order below and says
+  which it left out.
 - The **Miniverse address**: on Miniverse, `ipconfig` shows it as "IPv4 Address" (192.168.1.something).
 - The friend's Windows account, signed in. It needs to be an administrator account, or you need one for the firewall
   prompt.
-- Time: the downloads are about 40 GB.
+- Time: the downloads are about 60 GB (less if some models are already there).
 
 ## Run it
 
@@ -46,8 +47,10 @@ How the two agents use it: [Agent/local-model.md](../../../../Agent/local-model.
    - **3. Firewall:** Windows asks for an administrator once. Click Yes.
    - **4. Sleep:** it asks whether to stop the PC sleeping while plugged in, so jobs can run while the friend is
      away. Say yes for the week away. The screen still turns off and the PC still locks.
-   - **5. Models:** `qwen3.6:35b-a3b` (24 GB, the research model), `qwen3.5:9b` (7 GB, fast jobs) and
-     `gemma4:12b` (8 GB, bot chat). The progress shows in the window.
+   - **5. Models**, in this order: `qwen3.6:35b-a3b` (24 GB, the research model), `qwen3.5:9b` (7 GB, fast
+     jobs), `gemma4:12b` (8 GB, bot chat), `qwen3:8b` (5 GB, the same model as Miniverse), `gpt-oss:20b`
+     (14 GB, the older research default), and `gpt-oss-20b-64k`, built from gpt-oss:20b with a 64K window (no
+     download). The progress shows in the window. Models already there are not downloaded again.
    - **6. Self-test:** each model answers one short question. The script prints its speed and how much of it ran on
      the graphics card.
 4. At the end it prints **"Tell Claude on Miniverse this address: http://192.168.1.y:11434"**. Give that line
@@ -67,6 +70,20 @@ It then offers to switch off the extra rule Windows made.
 - **Undo:** the same command with `-Remove` (no `-OwnerPC` needed). It removes the firewall rule and the three
   variables, puts the sleep setting back and restarts Ollama for this PC only. Ollama and the models stay. To remove
   them as well: Settings, Apps, Ollama, Uninstall, then delete the folder `%USERPROFILE%\.ollama`.
+
+## Will the models fit?
+
+The friend's PC has a 12 GB graphics card and 32 GB of RAM. Ollama keeps one model in memory at a time, so they never
+add up. These are estimates from the model sizes until the self-test prints the real GPU share:
+
+| Model | Size | On the graphics card | In RAM while loaded |
+|---|---|---|---|
+| `qwen3.5:9b`, `gemma4:12b`, `qwen3:8b` | 5-8 GB | all of it | about 1 GB |
+| `gpt-oss:20b` and `gpt-oss-20b-64k` at 64K | 14 GB + about 1.6 GB context | about 11 GB | about 4-5 GB |
+| `qwen3.6:35b-a3b` at 64K | 24 GB + about 1.3 GB context | about 11 GB | about 14-15 GB |
+
+All of them fit in 32 GB of RAM, provided games and big programs are closed while a job runs. The models that spill
+into RAM are slower. The self-test skips a big model when less RAM is free than it needs.
 
 ## If something goes wrong
 
