@@ -64,6 +64,32 @@ Data used: `Bot-reports/launch-sim/ossus-census.md/.csv` (800 explorers, 10:11 P
    snapshot from it too), then restart the test galaxy under the standing OK (no owner client running, no squad round).
 4. PL-02's patch (below) comes after step 2. It needs this archive's snapshot because its spawns stand on the O7 ground and inside the O7 caves.
 
+## PL-02: Ossus people (details in `people/README.md`)
+
+- **Server:** `server/core3-dev-ossus-people.patch` adds three new files: `mobile/sandbox/ossus_people.lua` (8 templates for the people who talk),
+  `mobile/conversations/sandbox/ossus_people_conv.lua` and `screenplays/sandbox/ossus_people.lua` (33 spawns, the hidden Jedi's visits, three missions).
+  It also adds one include line each to `mobile/serverobjects.lua`, `mobile/conversations.lua` and `screenplays/screenplays.lua`.
+  It applies on dev `d4b9d9a1` alone or after the regions patch, and `luac -p` is clean.
+- **Client and server archive:** `build_ossus_people.py --base <PL-01's output>` adds `datatables/badge/badge_map.iff`: the stock table
+  plus row 140, `bdg_exp_oss_memorial_road`. It also adds the badge's name and description to `string/en/badge_n.stf` and `badge_d.stf`.
+  The server reads the badge list from this archive too. The step stops if another step already used index 140.
+  Candidate on PL-01's output: **`work/ossus-o7/local_planets-ossus-people.tre`**, 4,702,331 bytes, 184 entries,
+  **sha256 `0084def40f8bdfa49dedbb8c874b0c51680ea52bfc18ad9d9d596fbc2c374b66`** (two builds, same hash). Details: `checks-people.json`.
+
+Full order: PL-01 client step → PL-02 client step (on any chain, as long as both run) → both server patches (regions first) → install the archive
+in both places → restart the test galaxy.
+
+## PL-02: questions for the owner's visit
+
+1. Talk to Elder Iravi at the Ysanna camp (-1326 -4932) and do the hunt. What happened with the waypoint, the kirruk and the pay?
+2. Fetch Lieutenant Moll's coupling (-1476 5194 → the adit at 4590 -310 → back). Did each step say what you expected?
+3. Walk the memorial road: the first stone (116 -3012), the middle stone (892 -31) and the ring (1960 2780). Did the badge appear, and what does
+   the badge window show for it? Then see Archivist Oduro (2302 1987).
+4. The garrison (2171 3041): what did the troopers and the major do when you came near?
+5. Did you find the robed stranger in the sanctuary's deepest chamber? (They are there one hour in three to five.) Where were they standing,
+   on the floor or somewhere odd?
+6. Which of the people felt wrong for Ossus in 138-139 ABY, by look or by word?
+
 ## PL-01: questions for the owner's visit
 
 Use `/teleport x y ossus`. Please tell me what you see at each place in your own words:

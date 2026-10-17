@@ -1,0 +1,47 @@
+{
+ "base": {
+  "path": "work/ossus-o7/local_planets-ossus-o7.tre",
+  "bytes": 4700364,
+  "sha256": "efeff508409964b43380a172bd34324d6778d9058db66448740629573bb264a9",
+  "entries": 183
+ },
+ "out": {
+  "path": "work/ossus-o7/local_planets-ossus-people.tre",
+  "bytes": 4702331,
+  "sha256": "0084def40f8bdfa49dedbb8c874b0c51680ea52bfc18ad9d9d596fbc2c374b66",
+  "entries": 184
+ },
+ "untouched_identical": 181,
+ "changed": [
+  "string/en/badge_d.stf",
+  "string/en/badge_n.stf"
+ ],
+ "new": [
+  "datatables/badge/badge_map.iff"
+ ],
+ "dropped": [],
+ "report": {
+  "badge_map": {
+   "rows": 141,
+   "added": [
+    140,
+    "bdg_exp_oss_memorial_road",
+    "sound/music_acq_miner.snd",
+    2,
+    1,
+    "exploration_jedi"
+   ],
+   "from": "patch_12_00.tre"
+  },
+  "string/en/badge_n.stf": {
+   "keys": 172,
+   "bdg_exp_oss_memorial_road": "Location: The Memorial Road of Ossus",
+   "from": "base"
+  },
+  "string/en/badge_d.stf": {
+   "keys": 162,
+   "bdg_exp_oss_memorial_road": "...has walked the pilgrims' road from Knossa to the ruined Jedi academy on Ossus.",
+   "from": "base"
+  }
+ }
+}
