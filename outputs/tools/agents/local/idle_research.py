@@ -4,6 +4,7 @@ start researching game mechanics (taking over for gpt) that will help our testin
 Inside Debian as swgemu; swg-idle-research.timer runs `check` every 5 minutes:
 
     python3 idle_research.py check     # start the next open topic if the model has been idle 10+ minutes
+    python3 idle_research.py check --now   # start it now, without the idle wait (when the owner asks; STOP still holds)
     python3 idle_research.py status    # say why it would or wouldn't start now
 
 Idle means all of: no /api/chat or /api/generate request in Ollama's log for 10 minutes (this runner's own last topic
@@ -484,7 +485,10 @@ def main():
                 topic = t
         if topic:
             server = with_topic(server, topic)
+    # check --now (owner's request, 17 Oct): start the next topic without waiting for the quiet minutes; STOP still holds
+    now_asked = sys.argv[1] == 'check' and '--now' in sys.argv[2:]
     why = ([] if not STOP.exists() else ['Agent/local-research/STOP exists']) + [problem] if problem else \
+        (['Agent/local-research/STOP exists'] if STOP.exists() else []) if now_asked else \
         blockers(record=sys.argv[1] == 'check', server=server)
     remote = remote_base(server) if server else None
     where = ', '.join(skipped) + ' not answering, so ' if skipped else ''
