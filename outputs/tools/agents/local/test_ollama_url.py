@@ -645,6 +645,14 @@ class IdleResearchTests(unittest.TestCase):
         self.assertEqual(ir.load(ir.QUEUE, {})['topics'][0]['status'], 'open')
         self.assertIn('stopped answering', (self.root / 'LOG.md').read_text())
 
+    def test_a_rerun_keeps_the_last_report_as_report_previous(self):
+        (self.root / 't1').mkdir()
+        (self.root / 't1' / 'report.md').write_text('the 15 Oct report')
+        self.stub_agent('(ws / "report.md").write_text("r" * 400)\n')
+        self.assertTrue(ir.run(self.topic()))
+        self.assertEqual((self.root / 't1' / 'report.previous.md').read_text(), 'the 15 Oct report')
+        self.assertEqual((self.root / 't1' / 'report.md').read_text(), 'r' * 400)
+
     def test_a_failed_run_on_a_live_server_is_failed(self):
         self.as_other_pc()
         self.stub_agent('sys.exit(1)\n')

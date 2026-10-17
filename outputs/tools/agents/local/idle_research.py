@@ -404,7 +404,10 @@ def run(topic, server=None, limit=RUN_LIMIT_S):
     ws = BASE / topic['id']
     src = ws / 'src'
     shutil.rmtree(src, ignore_errors=True)
-    for old in ('report.md', 'TASK.md', 'agent-log.jsonl'):
+    report = ws / 'report.md'
+    if report.exists() and report.stat().st_size:   # a rerun keeps the last report for comparison (17 Oct: reruns
+        report.replace(ws / 'report.previous.md')   # had replaced the 15 Oct reports, which survived only in git)
+    for old in ('TASK.md', 'agent-log.jsonl'):
         (ws / old).unlink(missing_ok=True)
     src.mkdir(parents=True)
     model, ctx = server.model, server.ctx   # blockers() has checked them; local_agent.py gets them as flags
