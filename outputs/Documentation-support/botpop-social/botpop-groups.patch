@@ -1,0 +1,894 @@
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopGroups.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopGroups.h
+new file mode 100644
+--- /dev/null
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopGroups.h
+@@ -0,0 +1,601 @@
++/*
++				Copyright <SWGEmu>
++		See file COPYING for copying conditions.*/
++
++#ifndef BOTPOPGROUPS_H_
++#define BOTPOPGROUPS_H_
++
++/*
++ * Sandbox, test galaxy only (Claude, 17 Oct 2026; owner, 17 Oct: "in the old days we would do faction missions and join
++ * large groups to get better missions ... are they working together like the game needs?"). Stage 1 of
++ * outputs/Documentation-support/botpop-social/README.md.
++ *
++ * Hunters who reach their city's mission terminal while others wait there form a group of 2 to Core3.BotPopGroupMax, the
++ * way players do: the one who has waited longest invites (the stock /invite) and the others accept (/join). The leader
++ * then takes a destroy mission, which Core3 makes at the group's level, and the members follow it, take on what it
++ * fights, and shoot its lair with it. After Core3.BotPopGroupMissions missions the leader disbands the group.
++ *
++ * Locks. Every change to a Core3 group goes through the stock commands (invite, join, disband, leavegroup) on the bot's
++ * own command queue, so GroupManager runs with exactly the locks it takes for a player. A step never locks a group or
++ * another creature. It reads its own bot's group fields (isGrouped, getGroupInviterID) under the bot's lock, other
++ * bots' positions unlocked (as the medics' patient search does), and the plans in BotPopManager under launchShared,
++ * which a step takes after its bot's lock and never holds while locking anything else.
++ */
++namespace botpop {
++
++inline int BotPopManager::groupShare() {
++	static const int share = Math::max(0, Math::min(100, configInt("Core3.BotPopGroups", 0)));
++	return share;
++}
++
++// The group's level as Core3 works it out (GroupObject::calculateGroupLevel): the highest member's level plus a fifth
++// of each other member's. From the members' combat levels in the plan (Core3 reads CreatureObject::getLevel; the
++// mission_take row's core_lvl is what it actually used).
++inline int BotPopManager::launchGroupLevel(LaunchState* L, int own) {
++	std::vector<int> levels;
++
++	{
++		Locker locker(&launchShared);
++		auto it = groupPlans.find(L->groupLeaderID);
++
++		if (it != groupPlans.end()) {
++			for (const auto& member : it->second.members)
++				levels.push_back(member.second.level);
++		}
++	}
++
++	if (levels.empty())
++		return own;
++
++	std::sort(levels.begin(), levels.end(), std::greater<int>());
++	float level = levels[0];
++
++	for (size_t i = 1; i < levels.size(); ++i)
++		level += levels[i] / 5.f;
++
++	return (int)std::round(level);
++}
++
++// gid (the leader), grole and gsize on a row, for a bot in a group.
++inline void BotPopManager::launchGroupFields(JSONSerializationType& row, LaunchState* L) {
++	if (L->groupRole != LaunchState::GROUP_LEADER && L->groupRole != LaunchState::GROUP_MEMBER)
++		return;
++
++	int size = 0;
++
++	{
++		Locker locker(&launchShared);
++		auto it = groupPlans.find(L->groupLeaderID);
++
++		if (it != groupPlans.end())
++			size = (int)it->second.members.size();
++	}
++
++	row["gid"] = L->groupLeaderID;
++	row["grole"] = L->groupRole == LaunchState::GROUP_LEADER ? "leader" : "member";
++	row["gsize"] = size;
++}
++
++// At the terminal, before the mission list. True while the bot is busy with a group here (waiting, inviting, or
++// waiting for its invites to be answered); false when it should go on and take a mission (alone, or as a leader whose
++// group is in).
++inline bool BotPopManager::launchGroupAtTerminal(CreatureObject* bot, LaunchState* L, SceneObject* terminal, uint64 now) {
++	if (!L->wantsGroup || now < L->nextGroupTryMs || terminal == nullptr)
++		return false;
++
++	static const int maxSize = Math::max(2, Math::min(5, configInt("Core3.BotPopGroupMax", 5)));
++	static const uint64 waitMs = 1000ULL * Math::max(20, configInt("Core3.BotPopGroupWait", 90));
++	uint64 me = bot->getObjectID();
++
++	if (L->groupRole == LaunchState::GROUP_LEADER) {
++		if (L->groupReady)
++			return false; // the group's next mission
++
++		size_t joined = 0, invited = 0;
++		bool found = false;
++
++		{
++			Locker locker(&launchShared);
++			auto it = groupPlans.find(me);
++
++			if (it != groupPlans.end()) {
++				found = true;
++				joined = it->second.members.size(); // the leader too, once grouped
++				invited = it->second.invited.size();
++			}
++		}
++
++		if (!found) {
++			launchGroupEnd(bot, L, "plan gone", now);
++			return false;
++		}
++
++		// Everyone in, or a minute gone: go with whoever came. Nobody: alone after all.
++		if (joined < invited + 1 && now - L->groupSinceMs < 60000)
++			return true;
++
++		if (!bot->isGrouped()) {
++			launchGroupEnd(bot, L, "nobody joined", now);
++			return false;
++		}
++
++		L->groupReady = true;
++
++		JSONSerializationType row = launchRow("group_ready", bot, L);
++		row["invited"] = (int)invited;
++		row["joined"] = (int)joined - 1;
++		row["secs"] = (int)((now - L->groupSinceMs) / 1000);
++		row["glvl"] = launchGroupLevel(L, combatLevel(bot));
++		launchGroupFields(row, L);
++		SimLog::instance()->write(row);
++		return false;
++	}
++
++	if (L->groupRole == LaunchState::GROUP_MEMBER)
++		return false; // launchGroupFollow has its step; nothing to do here
++
++	int level = combatLevel(bot);
++	std::vector<uint64> invite;
++	std::vector<int> levels;
++	int seekers = 0;
++	bool alone = false;
++
++	{
++		Locker locker(&launchShared);
++
++		// Picked by a leader here: wait for its invite (launchGroupFollow accepts it).
++		auto picked = groupMemberOf.find(me);
++
++		if (picked != groupMemberOf.end()) {
++			L->groupRole = LaunchState::GROUP_MEMBER;
++			L->groupLeaderID = picked->second;
++			L->groupSinceMs = now;
++			L->groupJoined = false;
++			return true;
++		}
++
++		uint64 terminalID = terminal->getObjectID();
++		std::vector<GroupSeeker>& queue = groupSeeking[terminalID];
++
++		// Seekers gone for more than twice the wait (logged out, travelled, fighting far away) leave the queue.
++		for (size_t i = 0; i < queue.size();) {
++			if (queue[i].bot != me && now - queue[i].sinceMs > 2 * waitMs)
++				queue.erase(queue.begin() + i);
++			else
++				++i;
++		}
++
++		size_t self = queue.size();
++
++		for (size_t i = 0; i < queue.size(); ++i) {
++			if (queue[i].bot == me)
++				self = i;
++		}
++
++		if (self == queue.size()) {
++			queue.push_back({me, now, level});
++			L->groupRole = LaunchState::GROUP_SEEKING;
++			L->groupTerminalID = terminalID;
++			L->groupSinceMs = now;
++		}
++
++		seekers = (int)queue.size();
++
++		// The one who came first leads: when the group would be full, or after a third of the wait with anyone else
++		// here within 10 levels of it (players group across levels, but not a level 2 with a level 20).
++		if (self == 0 && queue.size() >= 2 && (queue.size() >= (size_t)maxSize || now - L->groupSinceMs >= waitMs / 3)) {
++			for (size_t i = 1; i < queue.size() && (int)invite.size() < maxSize - 1;) {
++				if (std::abs(queue[i].level - level) <= 10) {
++					invite.push_back(queue[i].bot);
++					levels.push_back(queue[i].level);
++					groupMemberOf[queue[i].bot] = me;
++					queue.erase(queue.begin() + i);
++				} else {
++					++i;
++				}
++			}
++
++			if (!invite.empty()) {
++				queue.erase(queue.begin());
++
++				GroupPlan& plan = groupPlans[me];
++				plan = GroupPlan();
++				plan.terminalID = terminalID;
++				plan.formedMs = now;
++				plan.invited = invite;
++			}
++		}
++
++		if (invite.empty() && now - L->groupSinceMs > waitMs) {
++			for (size_t i = 0; i < queue.size(); ++i) {
++				if (queue[i].bot == me) {
++					queue.erase(queue.begin() + i);
++					break;
++				}
++			}
++
++			alone = true;
++		}
++	}
++
++	if (alone) {
++		JSONSerializationType row = launchRow("group_alone", bot, L);
++		row["secs"] = (int)((now - L->groupSinceMs) / 1000);
++		row["seekers"] = seekers;
++		row["lvl"] = level;
++		SimLog::instance()->write(row);
++
++		L->groupRole = LaunchState::GROUP_NONE;
++		L->nextGroupTryMs = now + 1800000;
++		return false;
++	}
++
++	if (invite.empty())
++		return true; // waiting here for others
++
++	// Leader: one /invite each, as a player types them.
++	for (uint64 id : invite)
++		bot->enqueueCommand(STRING_HASHCODE("invite"), 0, id, "");
++
++	L->groupRole = LaunchState::GROUP_LEADER;
++	L->groupLeaderID = me;
++	L->groupSinceMs = now;
++	L->groupReady = false;
++	++launchGroups;
++
++	JSONSerializationType row = launchRow("group_form", bot, L);
++	row["invited"] = (int)invite.size();
++	row["lvl"] = level;
++	row["lvls"] = levels;
++	row["seekers"] = seekers;
++	row["gid"] = me;
++	SimLog::instance()->write(row);
++	return true;
++}
++
++// A member's step, when there is no target, corpse or rest: accept the invite, then the leader's lair, the leader's
++// target, or the leader's heels. False when the bot is out of the group and plays on alone.
++inline bool BotPopManager::launchGroupFollow(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, uint64 now, float seconds) {
++	GroupPlan plan;
++	bool found = false;
++
++	{
++		Locker locker(&launchShared);
++		auto it = groupPlans.find(L->groupLeaderID);
++
++		if (it != groupPlans.end()) {
++			plan = it->second;
++			found = true;
++		}
++	}
++
++	if (!found) {
++		launchGroupEnd(bot, L, "plan gone", now);
++		return false;
++	}
++
++	if (!bot->isGrouped()) {
++		if (L->groupJoined) {
++			launchGroupEnd(bot, L, "group broke up", now);
++			return false;
++		}
++
++		if (now - L->groupSinceMs > 60000) {
++			launchGroupEnd(bot, L, "never joined", now);
++			return false;
++		}
++
++		// The invite has reached us: accept it (the stock /join runs GroupManager::joinGroup with no locks held).
++		if (bot->getGroupInviterID() == L->groupLeaderID && now >= L->nextGroupCommandMs) {
++			bot->enqueueCommand(STRING_HASHCODE("join"), 0, 0, "");
++			L->nextGroupCommandMs = now + 5000;
++		}
++
++		return true; // waiting at the terminal
++	}
++
++	if (!L->groupJoined) {
++		L->groupJoined = true;
++		L->groupTakenSeen = plan.taken;
++		L->groupDoneSeen = plan.done;
++		L->groupBankBefore = bot->getBankCredits();
++		L->groupSpentBefore = L->bankSpent;
++
++		JSONSerializationType row = launchRow("group_join", bot, L);
++		row["secs"] = (int)((now - L->groupSinceMs) / 1000);
++		row["lvl"] = combatLevel(bot);
++		launchGroupFields(row, L);
++		SimLog::instance()->write(row);
++	}
++
++	// The leader's mission paid out: what reached this member's bank (Core3 pays members within 128 m of the lair).
++	if (plan.done != L->groupDoneSeen) {
++		JSONSerializationType row = launchRow("group_share", bot, L);
++		row["paid"] = bot->getBankCredits() - L->groupBankBefore + (L->bankSpent - L->groupSpentBefore);
++		row["reward"] = plan.reward;
++		row["mlvl"] = plan.mlvl;
++		int dx = (int)(bot->getPositionX() - plan.missionX), dy = (int)(bot->getPositionY() - plan.missionY);
++		row["dist"] = (int)std::sqrt((float)(dx * dx + dy * dy));
++		launchGroupFields(row, L);
++		SimLog::instance()->write(row);
++
++		L->groupDoneSeen = plan.done;
++	}
++
++	if (plan.taken != L->groupTakenSeen) { // a new mission: count its payout from here
++		L->groupTakenSeen = plan.taken;
++		L->groupBankBefore = bot->getBankCredits();
++		L->groupSpentBefore = L->bankSpent;
++	}
++
++	ZoneServer* zoneServer = bot->getZoneServer();
++
++	// The leader's lair. lairID also tells launchHunt not to drop combat with it (the "atLair" check).
++	ManagedReference<SceneObject*> lair;
++
++	if (plan.lairID != 0)
++		lair = zoneServer->getObject(plan.lairID);
++
++	if (lair != nullptr && lair->getZone() == zone && lair->isLairObject()) {
++		L->lairID = plan.lairID;
++		ManagedReference<WeaponObject*> weapon = bot->getWeapon();
++		float reach = weapon != nullptr && weapon->isRangedWeapon() ? 6.f : 4.f; // as launchMission
++
++		if (state->mode == BotState::WALKING) {
++			state->path.clear();
++			state->mode = BotState::IDLE;
++		}
++
++		if (chaseToward(state, bot, zone, lair->getPositionX(), lair->getPositionY(), 5.5f, seconds, reach) && now >= L->nextAttackMs) {
++			bot->setTargetID(plan.lairID, false);
++			bot->enqueueCommand(STRING_HASHCODE("attack"), 0, plan.lairID, "");
++			L->nextAttackMs = now + 2000;
++		}
++
++		return true;
++	}
++
++	L->lairID = 0;
++
++	// What the leader is fighting, if it is near.
++	if (plan.targetID != 0 && L->skip.count(plan.targetID) == 0) {
++		ManagedReference<SceneObject*> object = zoneServer->getObject(plan.targetID);
++
++		if (object != nullptr && object->isAiAgent() && !object->asAiAgent()->isDead() && object->getZone() == zone && object->getDistanceTo(bot) < 80.f) {
++			launchAdopt(L, object->asAiAgent(), now);
++
++			if (state->mode == BotState::WALKING) {
++				state->path.clear();
++				state->mode = BotState::IDLE;
++			}
++
++			return true;
++		}
++	}
++
++	// Otherwise at the leader's heels, a few metres apart.
++	ManagedReference<SceneObject*> leader = zoneServer->getObject(L->groupLeaderID);
++
++	if (leader == nullptr || leader->getZone() != zone) {
++		launchGroupEnd(bot, L, "leader gone", now);
++		return false;
++	}
++
++	float dx = leader->getPositionX() - bot->getPositionX(), dy = leader->getPositionY() - bot->getPositionY();
++
++	if (dx * dx + dy * dy > 12.f * 12.f) {
++		if (state->mode == BotState::WALKING) {
++			state->path.clear();
++			state->mode = BotState::IDLE;
++		}
++
++		chaseToward(state, bot, zone, leader->getPositionX(), leader->getPositionY(), 5.5f, seconds, 6.f + spacingOf(bot, 1.f, 4));
++	}
++
++	return true;
++}
++
++// Every step of a grouped bot (end of launchStep): its own entry in the plan, and for the leader the group's mission,
++// lair and target; then the leader's reasons to break the group up.
++inline void BotPopManager::launchGroupPublish(CreatureObject* bot, LaunchState* L, uint64 now) {
++	if (L->groupRole != LaunchState::GROUP_LEADER && L->groupRole != LaunchState::GROUP_MEMBER)
++		return;
++
++	bool leader = L->groupRole == LaunchState::GROUP_LEADER;
++
++	if (!bot->isGrouped()) {
++		// The leader's group broke up under it (its members left); a member's case is launchGroupFollow's.
++		if (leader && L->groupReady)
++			launchGroupEnd(bot, L, "group broke up", now);
++
++		return;
++	}
++
++	static const int missionsWanted = Math::max(1, configInt("Core3.BotPopGroupMissions", 3));
++	uint64 me = bot->getObjectID();
++	GroupMember entry = {combatLevel(bot), bot->getPositionX(), bot->getPositionY()};
++	int done = 0;
++	bool found = false;
++
++	{
++		Locker locker(&launchShared);
++		auto it = groupPlans.find(L->groupLeaderID);
++
++		if (it != groupPlans.end()) {
++			found = true;
++			GroupPlan& plan = it->second;
++			plan.members[me] = entry;
++
++			if (leader) {
++				if (L->missionID != 0 && plan.missionID != L->missionID) {
++					++plan.taken;
++					plan.reward = L->missionReward;
++					plan.mlvl = L->missionLevel;
++				}
++
++				plan.missionID = L->missionID;
++				plan.lairID = L->lairID;
++				plan.targetID = L->targetID;
++				plan.missionX = L->missionX;
++				plan.missionY = L->missionY;
++				done = plan.done;
++			}
++		}
++	}
++
++	if (!found || !leader || L->missionID != 0)
++		return;
++
++	if (done >= missionsWanted)
++		launchGroupEnd(bot, L, "missions done", now);
++	else if (now - L->groupSinceMs > 2700000)
++		launchGroupEnd(bot, L, "45 minutes", now);
++}
++
++// The leader's mission left its datapad (launchMission's mission_done or mission_gone). Returns how many members were
++// within 128 m of the mission spot by their last steps.
++inline int BotPopManager::launchGroupMissionDone(LaunchState* L, bool paid) {
++	int near = 0;
++
++	Locker locker(&launchShared);
++	auto it = groupPlans.find(L->groupLeaderID);
++
++	if (it == groupPlans.end())
++		return 0;
++
++	GroupPlan& plan = it->second;
++
++	for (const auto& member : plan.members) {
++		float dx = member.second.x - L->missionX, dy = member.second.y - L->missionY;
++
++		if (dx * dx + dy * dy < 128.f * 128.f)
++			++near;
++	}
++
++	if (paid) {
++		++plan.done;
++		++launchGroupMissions;
++	}
++
++	plan.missionID = plan.lairID = 0;
++	return near;
++}
++
++// Out of the group (or the queue at the terminal): the leader disbands it, a member leaves it, both with the stock
++// command; the shared plan goes with the leader.
++inline void BotPopManager::launchGroupEnd(CreatureObject* bot, LaunchState* L, const char* reason, uint64 now) {
++	uint64 me = bot->getObjectID();
++	bool leader = L->groupRole == LaunchState::GROUP_LEADER;
++	int size = 0, done = 0;
++
++	{
++		Locker locker(&launchShared);
++
++		if (leader) {
++			auto it = groupPlans.find(me);
++
++			if (it != groupPlans.end()) {
++				size = (int)it->second.members.size();
++				done = it->second.done;
++
++				for (uint64 id : it->second.invited) {
++					auto member = groupMemberOf.find(id);
++
++					if (member != groupMemberOf.end() && member->second == me)
++						groupMemberOf.erase(member);
++				}
++
++				groupPlans.erase(it);
++			}
++		} else if (L->groupRole == LaunchState::GROUP_MEMBER) {
++			auto member = groupMemberOf.find(me);
++
++			if (member != groupMemberOf.end() && member->second == L->groupLeaderID)
++				groupMemberOf.erase(member);
++
++			auto it = groupPlans.find(L->groupLeaderID);
++
++			if (it != groupPlans.end()) {
++				size = (int)it->second.members.size();
++				done = it->second.done;
++				it->second.members.erase(me);
++			}
++		}
++
++		auto queue = groupSeeking.find(L->groupTerminalID);
++
++		if (queue != groupSeeking.end()) {
++			for (size_t i = 0; i < queue->second.size(); ++i) {
++				if (queue->second[i].bot == me) {
++					queue->second.erase(queue->second.begin() + i);
++					break;
++				}
++			}
++		}
++	}
++
++	if (bot->isGrouped())
++		bot->enqueueCommand(leader ? STRING_HASHCODE("disband") : STRING_HASHCODE("leavegroup"), 0, 0, "");
++
++	if (L->groupRole != LaunchState::GROUP_SEEKING) {
++		JSONSerializationType row = launchRow("group_end", bot, L);
++		row["grole"] = leader ? "leader" : "member";
++		row["gid"] = L->groupLeaderID;
++		row["reason"] = reason;
++		row["gsize"] = size;
++		row["done"] = done;
++		row["mins"] = (int)((now - L->groupSinceMs) / 60000);
++		SimLog::instance()->write(row);
++	}
++
++	if (L->groupRole == LaunchState::GROUP_MEMBER && L->missionID == 0)
++		L->lairID = 0; // the leader's lair, not ours
++
++	L->groupRole = LaunchState::GROUP_NONE;
++	L->groupLeaderID = 0;
++	L->groupReady = L->groupJoined = false;
++	L->nextGroupTryMs = now + 600000;
++}
++
++// A bot logged out (BotPopManager::logOut, no creature locked): out of every shared group map. Its members find the
++// plan gone at their next step and leave the Core3 group, which PlayerObject::unload already took the bot out of.
++inline void BotPopManager::launchGroupForget(uint64 botID) {
++	Locker locker(&launchShared);
++
++	auto it = groupPlans.find(botID);
++
++	if (it != groupPlans.end()) {
++		for (uint64 id : it->second.invited) {
++			auto member = groupMemberOf.find(id);
++
++			if (member != groupMemberOf.end() && member->second == botID)
++				groupMemberOf.erase(member);
++		}
++
++		groupPlans.erase(it);
++	}
++
++	auto member = groupMemberOf.find(botID);
++
++	if (member != groupMemberOf.end()) {
++		auto plan = groupPlans.find(member->second);
++
++		if (plan != groupPlans.end())
++			plan->second.members.erase(botID);
++
++		groupMemberOf.erase(member);
++	}
++
++	for (auto& queue : groupSeeking) {
++		for (size_t i = 0; i < queue.second.size(); ++i) {
++			if (queue.second[i].bot == botID) {
++				queue.second.erase(queue.second.begin() + i);
++				break;
++			}
++		}
++	}
++}
++
++} // namespace botpop
++
++#endif // BOTPOPGROUPS_H_
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+@@ -619,6 +619,7 @@
+ 	L->nextSearchMs = now + 2000 + System::random(5000);
+ 	L->nextTierCheckMs = now + 600000;
+ 	L->nextMissionTryMs = now + 120000 + System::random(240000); // a few kills first, then the terminal
++	L->wantsGroup = L->role <= LaunchState::SCOUT && (int)System::random(99) < groupShare(); // hunters only (BotPopGroups.h)
+ 	L->nextTripMs = now + tripInterval();
+ 	L->tier = cityIndex < STARTER_CITY_COUNT ? 0 : DESTINATIONS[cityIndex - STARTER_CITY_COUNT].tier;
+ 
+@@ -1015,6 +1016,12 @@
+ 			ManagedReference<WeaponObject*> weapon = bot->getWeapon();
+ 			row["weapon"] = weapon != nullptr ? weapon->getWeaponType().toCharArray() : "";
+ 			row["aggro"] = L->aggro;
++			// The creature and this bot's combat_general since its first shot: Core3 shares a kill's experience by
++			// damage and adds 20% for a grouped attacker (PlayerManager::disseminateExperience, groupExpMultiplier).
++			PlayerObject* ghost = bot->getPlayerObject();
++			row["tid"] = L->targetID;
++			row["xp"] = ghost != nullptr ? ghost->getExperience("combat_general") - L->xpBefore : 0;
++			launchGroupFields(row, L);
+ 			SimLog::instance()->write(row);
+ 
+ 			L->corpseID = L->targetID;
+@@ -1062,6 +1069,11 @@
+ 		return;
+ 
+ 	if (now >= L->nextAttackMs) {
++		if (!L->attacked) {
++			PlayerObject* ghost = bot->getPlayerObject();
++			L->xpBefore = ghost != nullptr ? ghost->getExperience("combat_general") : 0;
++		}
++
+ 		bot->setTargetID(L->targetID, false);
+ 		bot->enqueueCommand(STRING_HASHCODE("attack"), 0, L->targetID, "");
+ 		L->attacked = true;
+@@ -1290,6 +1302,10 @@
+ 		return;
+ 	}
+ 
++	// In a group as a member: the leader's mission, lair and fights, and the leader's heels in between (BotPopGroups.h).
++	if (L->groupRole == LaunchState::GROUP_MEMBER && launchGroupFollow(state, bot, zone, L, now, seconds))
++		return;
++
+ 	if (launchMission(state, bot, zone, L, now, seconds))
+ 		return;
+ 
+@@ -1532,9 +1548,12 @@
+ // most one trip every 20-30 minutes unless forced; "teleport" keeps the old jump below.
+ inline void BotPopManager::launchTravel(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, int level, uint64 now, const char* reason) {
+ 	if (travelByTicket()) {
+-		if (L->trip == LaunchState::TRIP_NONE && (now >= L->nextTripMs || strcmp(reason, "forced") == 0))
++		if (L->trip == LaunchState::TRIP_NONE && (now >= L->nextTripMs || strcmp(reason, "forced") == 0)) {
++			if (L->groupRole != LaunchState::GROUP_NONE)
++				launchGroupEnd(bot, L, reason, now); // a player who moves on leaves the group first
++
+ 			tripStart(state, bot, zone, L, level, now, reason);
+-		else
++		} else
+ 			L->noTargetSinceMs = now; // not yet: asked again when the reason comes round again
+ 
+ 		return;
+@@ -1551,6 +1570,9 @@
+ 
+ 	const City& to = options[System::random(options.size() - 1)];
+ 
++	if (L->groupRole != LaunchState::GROUP_NONE)
++		launchGroupEnd(bot, L, reason, now);
++
+ 	JSONSerializationType row = launchRow("travel", bot, L);
+ 	row["to_planet"] = to.planet;
+ 	row["to_city"] = to.name;
+@@ -1689,6 +1711,7 @@
+ 	}
+ 
+ 	row["xp"] = xp;
++	launchGroupFields(row, L);
+ 	SimLog::instance()->write(row);
+ }
+ 
+@@ -1779,9 +1802,10 @@
+ 	}
+ 
+ 	// On a trip by ticket (BotPopTravel.h): the trip has the step. A trip of its own every 20-30 minutes, when the bot
+-	// is between things (no target, corpse, mission, rest or dance).
++	// is between things (no target, corpse, mission, rest, dance or group).
+ 	if (L->trip == LaunchState::TRIP_NONE && now >= L->nextTripMs && L->role != LaunchState::EXPLORER && L->targetID == 0
+-			&& L->corpseID == 0 && L->missionID == 0 && !L->resting && !L->dancing && !bot->isInCombat() && tripsWanted())
++			&& L->corpseID == 0 && L->missionID == 0 && !L->resting && !L->dancing && !bot->isInCombat() && tripsWanted()
++			&& L->groupRole == LaunchState::GROUP_NONE)
+ 		launchTravel(state, bot, zone, L, combatLevel(bot), now, L->tripOnwardSet ? "onward" : "trip");
+ 
+ 	if (L->trip != LaunchState::TRIP_NONE) {
+@@ -1807,6 +1831,8 @@
+ 		launchHunt(state, bot, zone, L, now, seconds);
+ 		break;
+ 	}
++
++	launchGroupPublish(bot, L, now);
+ }
+ 
+ // Every bot's place, for the live map (tools/live_map.py): log/botpop-positions.json, rewritten every 10 s by the
+@@ -1954,6 +1980,14 @@
+ 			row["mlvl"] = L->missionLevel;
+ 			row["secs"] = (int)((now - L->missionSinceMs) / 1000);
+ 			row["lvl"] = combatLevel(bot);
++
++			// A group's leader: how many of its members were within the 128 m that Core3 pays out to
++			// (MissionObjective::awardReward, which divides the reward by the group's player count).
++			if (L->groupRole == LaunchState::GROUP_LEADER) {
++				row["near"] = launchGroupMissionDone(L, paid);
++				launchGroupFields(row, L);
++			}
++
+ 			SimLog::instance()->write(row);
+ 
+ 			if (paid) {
+@@ -2118,14 +2152,21 @@
+ 	if (!chaseToward(state, bot, zone, terminal->getPositionX(), terminal->getPositionY(), 5.f, seconds, 3.f + spacingOf(bot, 1.f, 3)))
+ 		return true;
+ 
++	// Groups (BotPopGroups.h): look for one here first. A leader asks for missions once its invites are answered, so
++	// Core3 makes them at the group's level (MissionManager::getRandomLairSpawn uses GroupObject::getGroupLevel).
++	if (launchGroupAtTerminal(bot, L, terminal.get(), now))
++		return true;
++
+ 	missions->handleMissionListRequest(terminal, bot, ++L->missionsTaken + 1000);
+ 
+ 	// A destroy mission near the bot's level: the easiest on offer up to level + Core3.BotPopMissionAbove, then the better paid.
+ 	// The owner set + 6 on 15 Oct and + 2 on 17 Oct: in run 18 no bot finished a mission 3 or more levels above it (0 of 387).
++	// A group's leader counts the group's level instead, worked out as Core3 does from the members' combat levels.
+ 	static const int missionAbove = ConfigManager::instance()->getInt("Core3.BotPopMissionAbove", 2);
+ 	ManagedReference<SceneObject*> bag = bot->getSlottedObject("mission_bag");
+ 	MissionObject* best = nullptr;
+-	int level = combatLevel(bot), offered = 0;
++	int ownLevel = combatLevel(bot), offered = 0;
++	int level = L->groupRole == LaunchState::GROUP_LEADER && bot->isGrouped() ? launchGroupLevel(L, ownLevel) : ownLevel;
+ 
+ 	for (int i = 0; bag != nullptr && i < bag->getContainerObjectsSize(); ++i) {
+ 		MissionObject* mission = cast<MissionObject*>(bag->getContainerObject(i).get());
+@@ -2150,6 +2191,8 @@
+ 		JSONSerializationType row = launchRow("mission_none", bot, L);
+ 		row["offered"] = offered;
+ 		row["lvl"] = level;
++		row["own_lvl"] = ownLevel;
++		launchGroupFields(row, L);
+ 		SimLog::instance()->write(row);
+ 		return false;
+ 	}
+@@ -2162,6 +2205,9 @@
+ 	L->missionX = best->getStartPositionX();
+ 	L->missionY = best->getStartPositionY();
+ 	uint64 id = best->getObjectID();
++	// The level Core3 added to the lair's for the display: the group's (or the player's) level it made the mission for
++	// (randomizeGenericDestroyMission; a lair under level 5 shows as 4 plus that).
++	int coreLevel = best->getDifficultyDisplay() - Math::max(4, best->getDifficultyLevel());
+ 
+ 	{
+ 		Locker clocker(best, bot); // as MissionAcceptCallback; setMissionObjective asserts the mission is locked
+@@ -2184,6 +2230,9 @@
+ 	row["reward"] = L->missionReward;
+ 	row["mlvl"] = L->missionLevel;
+ 	row["lvl"] = level;
++	row["own_lvl"] = ownLevel;
++	row["core_lvl"] = coreLevel;
++	launchGroupFields(row, L);
+ 	row["offered"] = offered;
+ 	row["tx"] = (int)L->missionX;
+ 	row["ty"] = (int)L->missionY;
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h
+@@ -201,6 +201,17 @@
+ 	uint64 exitTerminalID = 0, exitSinceMs = 0; // just landed at a starport: out through its terminal hall (tripExit)
+ 	bool exitInHall = false;
+ 	bool tripOnwardSet = false;
++
++	// Groups (BotPopGroups.h): whether this hunter looks for a group at the mission terminal, its part in one, and its
++	// group's leader (the plan's key in BotPopManager::groupPlans).
++	enum GroupRole { GROUP_NONE, GROUP_SEEKING, GROUP_LEADER, GROUP_MEMBER };
++	bool wantsGroup = false;
++	int groupRole = GROUP_NONE;
++	bool groupReady = false;  // leader: the invites are answered (or timed out) and missions are taken at the group's level
++	bool groupJoined = false; // member: has been in the group (not grouped any more then means it broke up)
++	uint64 groupLeaderID = 0, groupTerminalID = 0, groupSinceMs = 0, nextGroupTryMs = 0, nextGroupCommandMs = 0;
++	int groupTakenSeen = 0, groupDoneSeen = 0, groupBankBefore = 0, groupSpentBefore = 0; // member: the share check
++	int xpBefore = 0; // combat_general when the bot first hit its current target (the kill row's "xp")
+ };
+ 
+ // Real players multiclass (owner, 16 Oct; Documentation-support/precu-player-builds.md). Role -1: the sampler
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+@@ -96,6 +96,11 @@
+  *   Core3.BotPopTravelTrips = true     ticket: a trip of their own every 20-30 minutes, not only when outgrown
+  *   Core3.BotPopTravelMinutes = 20     ticket: the shortest time between two trips of one bot (plus 0-10 minutes)
+  *   Core3.BotPopTravelTopUp = true     ticket: a bot short of the fare gets the difference in the bank first
++ *   Core3.BotPopGroups = 0             percent of launch hunters that look for a group at the mission terminal
++ *                                      (BotPopGroups.h); 0, the default, is off
++ *   Core3.BotPopGroupMax = 5           most bots in one group (2-5)
++ *   Core3.BotPopGroupWait = 90         seconds a hunter waits at the terminal for a group before it goes alone
++ *   Core3.BotPopGroupMissions = 3      missions a group finishes before it breaks up
+  */
+ namespace botpop {
+ 
+@@ -175,12 +180,37 @@
+ 	uint64 nextPositionsMs = 0; // the tick writes log/botpop-positions.json every 10 s (the live map)
+ 	std::atomic<int> launchMissions{0}, launchMissionsDone{0};
+ 	std::atomic<int> launchTravelTries{0}, launchTravelFails{0}; // by ticket; launchTravels counts the arrivals
+-	Mutex launchShared; // the four maps below, shared by every step
++	Mutex launchShared; // the maps below, shared by every step; never held while a creature is being locked
+ 	std::map<std::string, uint64> terminalByCity;              // a city's general mission terminal (0: none outdoors)
+ 	std::map<std::string, std::vector<int>> exploreVisits;     // per planet: 32 x 32 squares of 512 m, times chosen
+ 	std::set<std::string> censusSeen;                          // planet|name|256 m square already recorded
+ 	std::map<std::string, uint64> objectByPoint;               // planet|travel point|type: its travel terminal or collector
+ 
++	// Groups (BotPopGroups.h). A plan is what a group's bots tell each other: each member's step writes its own entry,
++	// the leader's step writes the rest. Core3's GroupObject is never read for this (that would need its lock).
++	struct GroupMember {
++		int level;
++		float x, y;
++	};
++
++	struct GroupPlan {
++		uint64 terminalID = 0, formedMs = 0, missionID = 0, lairID = 0, targetID = 0;
++		std::vector<uint64> invited;
++		std::map<uint64, GroupMember> members; // in the group (the leader too), by bot
++		float missionX = 0, missionY = 0;
++		int reward = 0, mlvl = 0, taken = 0, done = 0;
++	};
++
++	struct GroupSeeker {
++		uint64 bot, sinceMs;
++		int level;
++	};
++
++	std::map<uint64, GroupPlan> groupPlans;                    // by leader
++	std::map<uint64, std::vector<GroupSeeker>> groupSeeking;   // by mission terminal, in the order they came
++	std::map<uint64, uint64> groupMemberOf;                    // invited (or joined) bot: its leader
++	std::atomic<int> launchGroups{0}, launchGroupMissions{0};
++
+ 	// Stats: the last pass (for /botpop status) and the current minute (for the log line).
+ 	int lastActive = 0, lastNear = 0, lastRotating = 0, lastBusy = 0, lastRealPlayers = 0;
+ 	float lastPassMs = 0;
+@@ -380,6 +410,17 @@
+ 	void launchSnapshot(BotState* state, CreatureObject* bot, LaunchState* L, uint64 now);
+ 	void launchStep(BotState* state, CreatureObject* bot, Zone* zone, uint64 now, float seconds);
+ 
++	// Groups (BotPopGroups.h).
++	static int groupShare();
++	bool launchGroupAtTerminal(CreatureObject* bot, LaunchState* L, SceneObject* terminal, uint64 now);
++	bool launchGroupFollow(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, uint64 now, float seconds);
++	void launchGroupPublish(CreatureObject* bot, LaunchState* L, uint64 now);
++	void launchGroupEnd(CreatureObject* bot, LaunchState* L, const char* reason, uint64 now);
++	int launchGroupLevel(LaunchState* L, int own);
++	int launchGroupMissionDone(LaunchState* L, bool paid);
++	void launchGroupFields(JSONSerializationType& row, LaunchState* L);
++	void launchGroupForget(uint64 botID);
++
+ 	// Travel by ticket and shuttle (BotPopTravel.h).
+ 	static bool travelByTicket();
+ 	static bool tripsWanted();
+@@ -449,6 +490,8 @@
+ 			error() << "logout of " << state->objectID << " failed: " << e.getMessage();
+ 		}
+ 
++		launchGroupForget(state->objectID); // the unload took it out of its Core3 group (PlayerObject::unload)
++
+ 		Locker locker(&mutex);
+ 		leaving.push_back({bot, now + RELEASE_AFTER_MS});
+ 		++loggedOutTotal;
+@@ -802,7 +845,8 @@
+ 				{"tick_ms_avg", statPasses > 0 ? std::round(statPassMsTotal / statPasses * 100) / 100 : 0},
+ 				{"tick_ms_max", std::round(statPassMsMax * 100) / 100}, {"skipped", statSkipped},
+ 				{"kills", launchKills.load()}, {"deaths", launchDeaths.load()}, {"boxes", launchBoxes.load()},
+-				{"travels", launchTravels.load()}, {"missions", launchMissions.load()}, {"missions_done", launchMissionsDone.load()}};
++				{"travels", launchTravels.load()}, {"missions", launchMissions.load()}, {"missions_done", launchMissionsDone.load()},
++				{"groups", launchGroups.load()}, {"group_missions_done", launchGroupMissions.load()}};
+ 
+ 			long pages = 0, resident = 0; // the server's own memory, from /proc/self/statm
+ 			FILE* statm = fopen("/proc/self/statm", "r");
+@@ -1074,5 +1118,6 @@
+ 
+ #include "server/zone/managers/botpop/BotPopLaunchBrain.h"
+ #include "server/zone/managers/botpop/BotPopTravel.h"
++#include "server/zone/managers/botpop/BotPopGroups.h"
+ 
+ #endif // BOTPOPMANAGER_H_
