@@ -48,6 +48,9 @@ $SizeGB = @{ 'qwen3.6:35b-a3b' = 24; 'qwen3.5:9b' = 7.6; 'gemma4:12b' = 8.0; 'qw
             'gpt-oss-20b-64k' = 0 }
 $TestCtx = @{ 'qwen3.6:35b-a3b' = 65536; 'qwen3.5:9b' = 32768; 'qwen3:8b' = 32768; 'gpt-oss:20b' = 65536
              'gpt-oss-20b-64k' = 65536 }
+# Licences, checked 17 Oct 2026 (MODEL-LICENCES.md next to this script); printed with each download.
+$Licence = @{ 'qwen3.6:35b-a3b' = 'Apache 2.0 (Qwen)'; 'qwen3.5:9b' = 'Apache 2.0 (Qwen)'; 'qwen3:8b' = 'Apache 2.0 (Qwen)'
+              'gpt-oss:20b' = 'Apache 2.0 (OpenAI)'; 'gemma4:12b' = 'Apache 2.0 (Google, Gemma 4 licence)' }
 # Models built here from a Modelfile instead of downloaded (Miniverse has the same file in tools/agents/local).
 $Built = @{ 'gpt-oss-20b-64k' = @{ From = 'gpt-oss:20b'; Text = "FROM gpt-oss:20b`nPARAMETER num_ctx 65536`n" } }
 
@@ -446,7 +449,8 @@ $env:OLLAMA_HOST = "127.0.0.1:$Port"   # for the ollama command in this window o
 if (-not $SkipPull) {
     foreach ($m in $Models) {
         if ($Built.ContainsKey($m)) { continue }
-        Say "   ollama pull $m"
+        $lic = if ($Licence.ContainsKey($m)) { $Licence[$m] } else { 'licence not checked: see the model page on ollama.com' }
+        Say "   ollama pull $m   (licence: $lic)"
         & $exe pull $m
         if ($LASTEXITCODE -ne 0) {
             Warn "ollama pull $m failed. Run the script again (finished downloads are kept). If it said the model needs a newer Ollama: tray icon, Restart to update (or reinstall from ollama.com), then run it again"
@@ -514,7 +518,8 @@ Say '    If the owner''s address changes, run this script again with the new -Ow
 Say '  - Before gaming, quit Ollama (tray icon, Quit Ollama). Start it again from the Start menu afterwards.'
 Say '  - To close it again: the same command with -Remove.'
 $report = @("SWG Ollama setup, $(Get-Date -Format 'yyyy-MM-dd HH:mm')", "address: $line", "Miniverse: $OwnerPC",
-            "Ollama: $($v.version)", "models: $($have -join ', ')") + $script:Result + ($script:Problems | ForEach-Object { "CHECK: $_" })
+            "Ollama: $($v.version)", "models: $($have -join ', ')",
+            "licences: $(($Models | Where-Object { $Licence.ContainsKey($_) } | ForEach-Object { "$_ $($Licence[$_])" }) -join '; ')") + $script:Result + ($script:Problems | ForEach-Object { "CHECK: $_" })
 Set-Content -Encoding UTF8 (Join-Path $StateDir 'last-run.txt') $report
 Say "  - This summary is saved in $StateDir\last-run.txt"
 if ($script:Problems.Count) {

@@ -73,17 +73,22 @@ It then offers to switch off the extra rule Windows made.
 
 ## Will the models fit?
 
-The friend's PC has a 12 GB graphics card and 32 GB of RAM. Ollama keeps one model in memory at a time, so they never
-add up. These are estimates from the model sizes until the self-test prints the real GPU share:
+The friend's PC has an RTX 4070 Super (12 GB) and 32 GB of RAM, the same card size as the owner's RTX 5070, so the
+memory table in `Documentation-support/ollama-model-options.md` (section 2) applies. Ollama keeps one model in memory
+at a time, so they never add up. These are estimates until the self-test prints the real GPU share:
 
-| Model | Size | On the graphics card | In RAM while loaded |
+| Model | Window | Graphics card (about 11 GB usable) | RAM while loaded |
 |---|---|---|---|
-| `qwen3.5:9b`, `gemma4:12b`, `qwen3:8b` | 5-8 GB | all of it | about 1 GB |
-| `gpt-oss:20b` and `gpt-oss-20b-64k` at 64K | 14 GB + about 1.6 GB context | about 11 GB | about 4-5 GB |
-| `qwen3.6:35b-a3b` at 64K | 24 GB + about 1.3 GB context | about 11 GB | about 14-15 GB |
+| `qwen3:8b` | 16K / 32K / 64K | fits (8.6 GB) / borderline (11 GB) / no, about 5 GB spills | about 1 GB / 1-2 GB / about 6 GB |
+| `qwen3.5:9b` | 32K / 64K | fits (8.7-9.7 GB) / fits, tight (9.7-10.7 GB) | about 1 GB |
+| `gemma4:12b` | 32K / 64K | fits (9.6-9.9 GB) / tight (10.1-10.4 GB), if Ollama keeps its sliding-window layers short | about 1 GB |
+| `gpt-oss:20b`, `gpt-oss-20b-64k` | 32K / 64K | **does not fit** (15 / 16 GB) | 4-5 GB spills to RAM: works, slower |
+| `qwen3.6:35b-a3b` | 64K | **does not fit** (25-26 GB) | about 14 GB in RAM: works while games are closed |
 
-All of them fit in 32 GB of RAM, provided games and big programs are closed while a job runs. The models that spill
-into RAM are slower. The self-test skips a big model when less RAM is free than it needs.
+So: qwen3.5:9b, gemma4:12b and qwen3:8b (up to 32K) run entirely on the card. gpt-oss:20b and qwen3.6:35b-a3b run
+split between the card and the 32 GB of RAM, which has room for either one, but they are slower. The self-test skips a
+big model when less RAM is free than it needs. The licences are in [MODEL-LICENCES.md](MODEL-LICENCES.md): all
+Apache 2.0.
 
 ## If something goes wrong
 
