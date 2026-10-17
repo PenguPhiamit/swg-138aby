@@ -1,0 +1,11 @@
+MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua
+MMOCoreORB/bin/scripts/mobile/hoth/serverobjects.lua
+MMOCoreORB/bin/scripts/mobile/hoth/hoth_glacial_rancor.lua
+MMOCoreORB/bin/scripts/screenplays/poi/hoth_glacial_rancor_den.lua
+MMOCoreORB/bin/scripts/screenplays/poi/hoth_echo_base.lua
+MMOCoreORB/bin/scripts/mobile/serverobjects.lua
+MMOCoreORB/bin/scripts/mobile/conversations.lua
+MMOCoreORB/bin/scripts/screenplays/screenplays.lua
+MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/serverobjects.lua
+MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua
+MMOCoreORB/bin/scripts/mobile/spawn/hoth/hoth_world.lua
