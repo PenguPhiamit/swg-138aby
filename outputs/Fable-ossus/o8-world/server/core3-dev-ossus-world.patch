@@ -1,0 +1,690 @@
+diff --git a/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua b/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua
+index 9dd68c6..9ebd931 100644
+--- a/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua
++++ b/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua
+@@ -34,11 +34,24 @@ ossus_regions = {
+ 	{"ossus_crashed_fighter_nobuild", -1500, 5200, {CIRCLE, 90}, NOSPAWNAREA + NOBUILDZONEAREA},
+ 	{"ossus_sky_burial_nobuild", 5233, 786, {CIRCLE, 60}, NOSPAWNAREA + NOBUILDZONEAREA},
+ 	{"ossus_hutt_field_nobuild", 3400, -2300, {CIRCLE, 90}, NOSPAWNAREA + NOBUILDZONEAREA},
++	-- O8 places to find (screenplays/sandbox/ossus_world.lua): the camps keep their own people
++	{"ossus_scavenger_site_nobuild", 1408, -640, {CIRCLE, 60}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_poacher_camp_nobuild", 2944, -1408, {CIRCLE, 60}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_smuggler_drop_nobuild", 4480, -1152, {CIRCLE, 60}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_deserter_camp_nobuild", -640, -384, {CIRCLE, 60}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_pilgrims_rest_nobuild", 520, -1480, {CIRCLE, 40}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_hermit_hollow_nobuild", -1408, 2432, {CIRCLE, 40}, NOSPAWNAREA + NOBUILDZONEAREA},
+ 	-- Habitat spawners only: no world fallback spilling fauna into other biomes.
+ 	-- The inner ring keeps herd centres out of Adega Lake's sunken basin.
+-	{"ossus_adega_wetlands", -3600, 1200, {RING, 650, 1050}, SPAWNAREA, {"ossus_wetlands"}, 24},
+-	{"ossus_forest_east", 1200, 5400, {CIRCLE, 1200}, SPAWNAREA, {"ossus_forest"}, 32},
+-	{"ossus_forest_southwest", -3200, -3400, {CIRCLE, 900}, SPAWNAREA, {"ossus_forest"}, 24},
+-	{"ossus_open_ground_west", -4400, -1200, {CIRCLE, 1200}, SPAWNAREA, {"ossus_open_ground"}, 24},
+-	{"ossus_open_ground_north", -1500, 5200, {CIRCLE, 1000}, SPAWNAREA, {"ossus_open_ground"}, 24},
++	{"ossus_adega_wetlands", -3600, 1200, {RING, 650, 1050}, SPAWNAREA, {"ossus_wetlands"}, 30},
++	{"ossus_forest_east", 1200, 5400, {CIRCLE, 1200}, SPAWNAREA, {"ossus_forest"}, 40},
++	{"ossus_forest_southwest", -3200, -3400, {CIRCLE, 900}, SPAWNAREA, {"ossus_forest"}, 32},
++	{"ossus_open_ground_west", -4400, -1200, {CIRCLE, 1200}, SPAWNAREA, {"ossus_open_ground"}, 32},
++	{"ossus_open_ground_north", -1500, 5200, {CIRCLE, 1000}, SPAWNAREA, {"ossus_open_ground"}, 32},
++	-- O8 (17 Oct): the census found no creature east of x 2,341; these fill the east, the benchland and the south
++	{"ossus_mesa_east", 3300, -1500, {CIRCLE, 1300}, SPAWNAREA, {"ossus_mesa"}, 40},
++	{"ossus_imhar_canyon", 5150, 100, {CIRCLE, 1300}, SPAWNAREA, {"ossus_canyon"}, 30},
++	{"ossus_benchland_rim", 2016, 2848, {RING, 400, 1400}, SPAWNAREA, {"ossus_forest"}, 32},
++	{"ossus_eocho_foothills", 0, -5800, {CIRCLE, 1600}, SPAWNAREA, {"ossus_highlands"}, 28},
++	{"ossus_south_plains", 1800, -2600, {CIRCLE, 1000}, SPAWNAREA, {"ossus_forest"}, 24},
+ }
+diff --git a/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_world_conv.lua b/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_world_conv.lua
+new file mode 100644
+index 0000000..7b1475c
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_world_conv.lua
+@@ -0,0 +1,59 @@
++-- Ossus world (O8): conversations of four townsfolk. Our own text; no state, so one plain handler serves them all.
++
++local function convo()
++	return ConvoTemplate:new {
++		initialScreen = "greet",
++		templateType = "Lua",
++		luaClassHandler = "OssusWorldConvoHandler",
++		screens = {}
++	}
++end
++
++local function screen(template, id, text, options, stop)
++	template:addScreen(ConvoScreen:new {
++		id = id,
++		customDialogText = text,
++		stopConversation = stop and "true" or "false",
++		options = options or {}
++	})
++end
++
++-- Knossa: Sister Anwe, a pilgrim
++local pilgrim = convo()
++screen(pilgrim, "greet", "I came to walk the road to the academy, as my teacher did before the Sith burned it. The stones are still standing. That is something.", {
++	{"Where does the road start?", "road"},
++	{"Goodbye.", "bye"},
++})
++screen(pilgrim, "road", "Just north of the landing field. Follow the stones to the benchland. The archivist at the vault dig knows more than I do, and the garrison lets pilgrims pass if they keep their eyes down.", {}, true)
++screen(pilgrim, "bye", "Walk in peace.", {}, true)
++addConversationTemplate("ossus_knossa_pilgrim_convo_template", pilgrim)
++
++-- Knossa: Rab Okkon, a settler
++local settler = convo()
++screen(settler, "greet", "We came out after the fighting stopped. Good soil in the fields east of town, if you can keep the tribis off the crops. Nobody else wanted the land, so now it's ours.", {
++	{"Is it safe out there?", "safe"},
++	{"Goodbye.", "bye"},
++})
++screen(settler, "safe", "Safer than it was. The beasts mostly leave you alone. It's the people you watch: scavengers picking over the old battle sites, poachers on the mesa, and something in the west foothill cave that the garrison won't talk about.", {}, true)
++screen(settler, "bye", "Mind how you go.", {}, true)
++addConversationTemplate("ossus_knossa_settler_convo_template", settler)
++
++-- the hermit's hollow
++local hermit = convo()
++screen(hermit, "greet", "Visitors. Twice in one year. The galaxy must be getting smaller.", {
++	{"Why do you live out here?", "why"},
++	{"Goodbye.", "bye"},
++})
++screen(hermit, "why", "I kept the academy's gardens, long ago. When the ships came I ran, and I kept running until the noise stopped. Some of the others went underground. I hear them sometimes, in the quiet. Don't go looking for them. They will find you if they want to.", {}, true)
++screen(hermit, "bye", "Go on, then.", {}, true)
++addConversationTemplate("ossus_hollow_hermit_convo_template", hermit)
++
++-- the deserters' camp
++local deserter = convo()
++screen(deserter, "greet", "Keep your voice down. If the major's patrols find this camp, we're all shot. We walked out of the garrison when word came that Krayt was dead. Nobody gives orders for a dead Emperor.", {
++	{"What is in the west foothill cave?", "cave"},
++	{"Goodbye.", "bye"},
++})
++screen(deserter, "cave", "The old interrogation post. We used to run prisoners through it. Now there are people in black robes down there, guarding things they took from the academy. Their leader calls himself the Keeper. Go armed, and go with friends.", {}, true)
++screen(deserter, "bye", "You never saw us.", {}, true)
++addConversationTemplate("ossus_deserter_convo_template", deserter)
+diff --git a/MMOCoreORB/bin/scripts/mobile/conversations.lua b/MMOCoreORB/bin/scripts/mobile/conversations.lua
+index 71e01d7..e1bf8b1 100644
+--- a/MMOCoreORB/bin/scripts/mobile/conversations.lua
++++ b/MMOCoreORB/bin/scripts/mobile/conversations.lua
+@@ -341,4 +341,5 @@ includeFile("custom_content/conversations.lua")
+ includeFile("conversations/sandbox/sandbox_mercenary_broker_conv.lua")
+ includeFile("conversations/sandbox/sandbox_big_game_hunter_conv.lua")
+ includeFile("conversations/sandbox/ossus_people_conv.lua")
++includeFile("conversations/sandbox/ossus_world_conv.lua")
+ includeFile("conversations/sandbox/hutta_home_conv.lua")
+diff --git a/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_world.lua b/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_world.lua
+new file mode 100644
+index 0000000..02ac164
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_world.lua
+@@ -0,0 +1,157 @@
++-- Ossus world (O8; outputs/Fable-ossus/o8-world/README.md): the named fighters of the six places to find and the
++-- dungeon under the foothills, and four townsfolk who talk. Placed by screenplays/sandbox/ossus_world.lua.
++-- Stock bodies and stock loot groups; names and text are our own. Era 138-139 ABY.
++
++local function fighter(name, level, body, loot, social, weapon, attacks)
++	return Creature:new {
++		objectName = "",
++		customName = name,
++		socialGroup = social,
++		mobType = MOB_NPC,
++		faction = "",
++		level = level,
++		chanceHit = 0.25 + level * 0.005,
++		damageMin = 10 * level,
++		damageMax = 10 * level + 10,
++		baseXp = 75 * level,
++		baseHAM = 200 * level,
++		baseHAMmax = 250 * level,
++		armor = 0,
++		resists = {10,10,10,10,10,10,10,-1,-1},
++		meatType = "",
++		meatAmount = 0,
++		hideType = "",
++		hideAmount = 0,
++		boneType = "",
++		boneAmount = 0,
++		milk = 0,
++		tamingChance = 0,
++		ferocity = 0,
++		pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
++		creatureBitmask = PACK + KILLER,
++		optionsBitmask = AIENABLED,
++		diet = HERBIVORE,
++		templates = {body},
++		lootGroups = loot,
++		primaryWeapon = weapon,
++		secondaryWeapon = "unarmed",
++		conversationTemplate = "",
++		primaryAttacks = attacks,
++		secondaryAttacks = {}
++	}
++end
++
++local function talker(name, body, conversation)
++	return Creature:new {
++		objectName = "",
++		customName = name,
++		socialGroup = "townsperson",
++		mobType = MOB_NPC,
++		faction = "",
++		level = 10,
++		chanceHit = 0.3,
++		damageMin = 90,
++		damageMax = 100,
++		baseXp = 0,
++		baseHAM = 2000,
++		baseHAMmax = 2400,
++		armor = 0,
++		resists = {0,0,0,0,0,0,0,-1,-1},
++		meatType = "",
++		meatAmount = 0,
++		hideType = "",
++		hideAmount = 0,
++		boneType = "",
++		boneAmount = 0,
++		milk = 0,
++		tamingChance = 0,
++		ferocity = 0,
++		pvpBitmask = NONE,
++		creatureBitmask = NONE,
++		optionsBitmask = AIENABLED + INVULNERABLE + CONVERSABLE,
++		diet = HERBIVORE,
++		templates = {body},
++		lootGroups = {},
++		primaryWeapon = "unarmed",
++		secondaryWeapon = "none",
++		conversationTemplate = conversation,
++		primaryAttacks = {},
++		secondaryAttacks = {}
++	}
++end
++
++local common = {
++	{
++		groups = {
++			{group = "junk", chance = 4500000},
++			{group = "loot_kit_parts", chance = 2000000},
++			{group = "wearables_common", chance = 2000000},
++			{group = "tailor_components", chance = 1500000},
++		},
++		lootChance = 8000000
++	},
++}
++
++local leader = {
++	{
++		groups = {
++			{group = "junk", chance = 3000000},
++			{group = "loot_kit_parts", chance = 2500000},
++			{group = "wearables_common", chance = 2000000},
++			{group = "clothing_attachments", chance = 1250000},
++			{group = "armor_attachments", chance = 1250000},
++		},
++	},
++	{
++		groups = {
++			{group = "pistols", chance = 5000000},
++			{group = "rifles", chance = 5000000},
++		},
++		lootChance = 3000000
++	},
++}
++
++local keeper = {
++	{
++		groups = {
++			{group = "color_crystals", chance = 4000000},
++			{group = "armor_attachments", chance = 2000000},
++			{group = "clothing_attachments", chance = 2000000},
++			{group = "melee_weapons", chance = 2000000},
++		},
++	},
++	{
++		groups = {
++			{group = "junk", chance = 5000000},
++			{group = "loot_kit_parts", chance = 5000000},
++		},
++	},
++}
++
++local ranged = merge(brawlermaster, marksmanmaster)
++
++local templates = {
++	-- the dungeon: the One Sith cell in the foothill cave (POI 14)
++	ossus_sith_acolyte = fighter("a One Sith acolyte", 18, "object/mobile/dressed_dark_jedi_human_male_01.iff", common, "sith_shadow", "pirate_weapons_heavy", ranged),
++	ossus_sith_enforcer = fighter("a One Sith enforcer", 26, "object/mobile/dressed_dark_jedi_human_female_01.iff", common, "sith_shadow", "pirate_weapons_heavy", ranged),
++	ossus_sith_keeper = fighter("Keeper Raskal Vonn", 38, "object/mobile/dressed_dark_jedi_human_male_01.iff", keeper, "sith_shadow", "pirate_weapons_heavy", merge(brawlermaster, marksmanmaster, pistoleermaster)),
++	-- the places to find
++	ossus_scavenger_boss = fighter("Mother Gessa, scavenger boss", 14, "object/mobile/dressed_criminal_slicer_human_male_01.iff", leader, "thug", "pirate_weapons_heavy", ranged),
++	ossus_poacher_chief = fighter("Harl Dennick, poacher chief", 21, "object/mobile/dressed_mand_miner_hum_02.iff", leader, "poacher", "pirate_weapons_heavy", ranged),
++	ossus_smuggler_captain = fighter("Captain Sava Rook, smuggler", 19, "object/mobile/dressed_criminal_slicer_human_male_01.iff", leader, "thug", "pirate_weapons_heavy", ranged),
++}
++
++for name, t in pairs(templates) do
++	CreatureTemplates:addCreatureTemplate(t, name)
++end
++
++local talkers = {
++	{"ossus_knossa_pilgrim", "Sister Anwe, a pilgrim", "object/mobile/dressed_tatooine_hermit.iff", "ossus_knossa_pilgrim_convo_template"},
++	{"ossus_knossa_settler", "Rab Okkon, a settler", "object/mobile/dressed_quest_farmer.iff", "ossus_knossa_settler_convo_template"},
++	{"ossus_hollow_hermit", "the hermit of the hollow", "object/mobile/dressed_tatooine_hermit.iff", "ossus_hollow_hermit_convo_template"},
++	{"ossus_deserter", "Lieutenant Iden Sarr, a deserter", "object/mobile/dressed_imperial_major_m.iff", "ossus_deserter_convo_template"},
++}
++
++for _, t in ipairs(talkers) do
++	CreatureTemplates:addCreatureTemplate(talker(t[2], t[3], t[4]), t[1])
++end
+diff --git a/MMOCoreORB/bin/scripts/mobile/serverobjects.lua b/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
+index 12113e8..c47f998 100644
+--- a/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
+@@ -59,5 +59,6 @@ includeFile("sandbox/sandbox_mercenaries.lua")
+ includeFile("sandbox/sandbox_world_bosses.lua")
+ -- Ossus people (PL-02)
+ includeFile("sandbox/ossus_people.lua")
++includeFile("sandbox/ossus_world.lua")
+ -- Nal Hutta as the Hutt home (PL-04)
+ includeFile("sandbox/hutta_home.lua")
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_canyon.lua b/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_canyon.lua
+new file mode 100644
+index 0000000..0938830
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_canyon.lua
+@@ -0,0 +1,26 @@
++-- Imhar Canyon: kaddyr bug swarms and tree frogs on the floor and the rims.
++-- Dynamic encounters keep creature base levels (O8, 17 Oct: more wildlife where the census found none).
++ossus_canyon = {
++	lairSpawns = {
++		{
++			lairTemplateName = "ossus_kaddyr_bug_swarm_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 2,
++			maxDifficulty = 2,
++			numberToSpawn = 5,
++			weighting = 55,
++			size = 20,
++		},
++		{
++			lairTemplateName = "ossus_tree_frog_solitary_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 2,
++			maxDifficulty = 2,
++			numberToSpawn = 1,
++			weighting = 45,
++			size = 20,
++		},
++	}
++}
++
++addSpawnGroup("ossus_canyon", ossus_canyon);
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_highlands.lua b/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_highlands.lua
+new file mode 100644
+index 0000000..7b92548
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_highlands.lua
+@@ -0,0 +1,26 @@
++-- The Eocho foothills and the benchland rim: kirruk packs and gokob herds.
++-- Dynamic encounters keep creature base levels (O8, 17 Oct: more wildlife where the census found none).
++ossus_highlands = {
++	lairSpawns = {
++		{
++			lairTemplateName = "ossus_kirruk_pack_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 2,
++			maxDifficulty = 2,
++			numberToSpawn = 3,
++			weighting = 50,
++			size = 20,
++		},
++		{
++			lairTemplateName = "ossus_gokob_herd_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 2,
++			maxDifficulty = 2,
++			numberToSpawn = 4,
++			weighting = 50,
++			size = 20,
++		},
++	}
++}
++
++addSpawnGroup("ossus_highlands", ossus_highlands);
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_mesa.lua b/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_mesa.lua
+new file mode 100644
+index 0000000..a4dbe14
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_mesa.lua
+@@ -0,0 +1,35 @@
++-- The 104 m mesa east of Knossa: herds of tribis and gokob, a few kirruk packs.
++-- Dynamic encounters keep creature base levels (O8, 17 Oct: more wildlife where the census found none).
++ossus_mesa = {
++	lairSpawns = {
++		{
++			lairTemplateName = "ossus_tribis_herd_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 2,
++			maxDifficulty = 2,
++			numberToSpawn = 4,
++			weighting = 40,
++			size = 20,
++		},
++		{
++			lairTemplateName = "ossus_gokob_herd_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 2,
++			maxDifficulty = 2,
++			numberToSpawn = 4,
++			weighting = 35,
++			size = 20,
++		},
++		{
++			lairTemplateName = "ossus_kirruk_pack_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 2,
++			maxDifficulty = 2,
++			numberToSpawn = 3,
++			weighting = 25,
++			size = 20,
++		},
++	}
++}
++
++addSpawnGroup("ossus_mesa", ossus_mesa);
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua b/MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua
+index c68f76d..035fbea 100644
+--- a/MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua
+@@ -519,6 +519,9 @@ includeFile("spawn/hoth/hoth_scavenger_zone.lua")
+ includeFile("spawn/ossus/ossus_forest.lua")
+ includeFile("spawn/ossus/ossus_open_ground.lua")
+ includeFile("spawn/ossus/ossus_wetlands.lua")
++includeFile("spawn/ossus/ossus_mesa.lua")
++includeFile("spawn/ossus/ossus_canyon.lua")
++includeFile("spawn/ossus/ossus_highlands.lua")
+ 
+ -- Nal Hutta swamp spawns (PL-04)
+ includeFile("spawn/hutta/hutta_lowlands_near.lua")
+diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_world.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_world.lua
+new file mode 100644
+index 0000000..5b0e93e
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_world.lua
+@@ -0,0 +1,271 @@
++-- Ossus world (O8; outputs/Fable-ossus/o8-world/README.md): the owner found Ossus empty (17 Oct). This adds
++--   townsfolk at Knossa and the settlements, and an Imperial patrol on the memorial road below the garrison;
++--   six places to find outside the settlements (camps with props from the stock art, fighters with loot, two who talk);
++--   the dungeon: a One Sith cell in the west foothill cave (POI 14, snapshot node 6900002, cells 6900003-6900013),
++--   with spawns in every cell and Keeper Raskal Vonn in the deepest chamber.
++-- Server objects only: no client data, no terrain change. Our own code and text; era 138-139 ABY.
++
++OssusWorld = ScreenPlay:new {
++	planet = "ossus",
++
++	-- template, x, y, heading, display name (nil: the template's), respawn seconds
++	townsfolk = {
++		-- Knossa (the starport footprint and the old-town statics stay clear)
++		{ "ossus_knossa_pilgrim", 12, -3570, 200 },
++		{ "ossus_knossa_settler", -40, -3640, 90 },
++		{ "commoner", 40, -3575, 250, "a settler", 300 },
++		{ "commoner_naboo", -95, -3585, 120, "a settler", 300 },
++		{ "nomad", 60, -3650, 300, "a scavenger", 300 },
++		{ "commoner", -110, -3630, 45, "a pilgrim", 300 },
++		{ "commoner_naboo", -15, -3690, 0, "a pilgrim", 300 },
++		{ "artisan", -54, -3652, 0, "a trader", 300 },
++		{ "artisan", 2, -3652, 0, "a trader", 300 },
++		{ "nomad", 95, -3600, 270, "a traveller", 300 },
++		-- the Adega hamlet, the Ysanna camp, the Hutt field
++		{ "farmer", -3040, 1090, 200, "a fisher", 300 },
++		{ "commoner_old", -3055, 1110, 30, "a net mender", 300 },
++		{ "nomad", -1318, -4940, 270, "an Ysanna tracker", 300 },
++		{ "mercenary", 3392, -2290, 180, "a Hutt guard", 300 },
++		{ "mercenary", 3410, -2290, 180, "a Hutt guard", 300 },
++		{ "thief", 3415, -2310, 90, "a cargo handler", 300 },
++	},
++
++	-- the patrol walks the road between the last two memorial stones and back (stone 14 stands on the 33 degree climb)
++	patrol = {
++		templates = { "imperial_trooper", "imperial_trooper", "imperial_first_lieutenant" },
++		points = { { 1740.2, 2304.6 }, { 1860.0, 2500.0 }, { 1983.0, 2694.1 }, { 1860.0, 2500.0 } },
++		pause = 20,
++	},
++
++	-- the places to find: centre, props (server template, dx, dy, heading in degrees), people (template, dx, dy, name, respawn)
++	places = {
++		{ name = "the scavengers' battle site", x = 1408, y = -640,
++			props = {
++				{ "object/static/structure/corellia/corl_tent_med.iff", -8, 6, 160 },
++				{ "object/static/structure/corellia/corl_tent_med.iff", 9, 7, 200 },
++				{ "object/static/structure/general/campfire_burnt.iff", 0, 0, 0 },
++				{ "object/static/structure/general/poi_all_construction_metal_pile.iff", 14, -10, 40 },
++				{ "object/static/structure/general/atst_debris_01.iff", -22, -18, 110 },
++				{ "object/static/structure/military/bunker_crate_style_01.iff", 4, -8, 10 },
++				{ "object/static/structure/military/bunker_crate_style_01.iff", 6, -9, 80 },
++			},
++			people = {
++				{ "ossus_scavenger_boss", 0, 4, nil, 900 },
++				{ "scavenger", -6, -4, "a scavenger", 300 },
++				{ "scavenger", 7, -3, "a scavenger", 300 },
++				{ "scavenger", -12, 2, "a scavenger", 300 },
++				{ "scavenger", 12, 12, "a scavenger", 300 },
++			} },
++		{ name = "the poachers' camp", x = 2944, y = -1408,
++			props = {
++				{ "object/static/structure/corellia/corl_tent_med.iff", -7, 8, 180 },
++				{ "object/static/structure/dantooine/dant_hide_tanning_s01.iff", 8, 6, 220 },
++				{ "object/static/structure/dantooine/dant_rack_spears.iff", 10, -4, 270 },
++				{ "object/static/structure/dantooine/dant_fire_pit.iff", 0, 0, 0 },
++				{ "object/static/structure/dantooine/dant_skull_thune.iff", -10, -6, 30 },
++			},
++			people = {
++				{ "ossus_poacher_chief", 2, 4, nil, 900 },
++				{ "poacher", -5, -3, "a poacher", 300 },
++				{ "poacher", 6, -5, "a poacher", 300 },
++				{ "poacher", -9, 5, "a poacher", 300 },
++			} },
++		{ name = "the smugglers' drop", x = 4480, y = -1152,
++			props = {
++				{ "object/static/structure/corellia/corl_tent_hut_s01.iff", -8, 6, 170 },
++				{ "object/static/item/item_crate_spice.iff", 4, 2, 0 },
++				{ "object/static/item/item_crate_spice.iff", 5, 3, 40 },
++				{ "object/static/item/item_crate_spice.iff", 3, 4, 80 },
++				{ "object/static/structure/general/palette_supply_02.iff", 8, -4, 90 },
++				{ "object/static/structure/general/campfire_burnt.iff", -2, -2, 0 },
++			},
++			people = {
++				{ "ossus_smuggler_captain", 0, 3, nil, 900 },
++				{ "thief", -5, -4, "a smuggler", 300 },
++				{ "thief", 6, -2, "a smuggler", 300 },
++				{ "thief", 9, 6, "a smuggler", 300 },
++			} },
++		{ name = "the deserters' camp", x = -640, y = -384,
++			props = {
++				{ "object/static/structure/corellia/corl_tent_med.iff", 0, 8, 180 },
++				{ "object/static/structure/general/campfire_burnt.iff", 0, 0, 0 },
++				{ "object/static/structure/military/bunker_crate_style_01.iff", 6, 4, 30 },
++				{ "object/static/structure/general/banner_imperial_style_01.iff", -8, 6, 160 },
++			},
++			people = {
++				{ "ossus_deserter", 2, 2 },
++				{ "mercenary", -4, -3, "a deserter", 300 },
++				{ "mercenary", 5, -4, "a deserter", 300 },
++			} },
++		{ name = "the pilgrims' rest", x = 520, y = -1480,
++			props = {
++				{ "object/static/structure/dantooine/dant_fire_pit.iff", 0, 0, 0 },
++				{ "object/static/structure/dantooine/dant_cooking_stone.iff", 3, 2, 20 },
++				{ "object/static/item/item_basket_closed.iff", -3, 2, 0 },
++			},
++			people = {
++				{ "commoner_naboo", -3, -2, "a resting pilgrim", 300 },
++				{ "commoner", 3, -3, "a resting pilgrim", 300 },
++				{ "commoner_old", 0, 4, "an old pilgrim", 300 },
++			} },
++		{ name = "the hermit's hollow", x = -1408, y = 2432,
++			props = {
++				{ "object/static/structure/dantooine/dant_small_mudhut.iff", 0, 9, 180 },
++				{ "object/static/structure/dantooine/dant_fire_pit.iff", 0, 0, 0 },
++				{ "object/static/structure/dantooine/dant_cooking_stone.iff", 3, 1, 50 },
++				{ "object/static/structure/dantooine/dant_jedi_temple_pillar_sm.iff", -9, -6, 15 },
++			},
++			people = {
++				{ "ossus_hollow_hermit", 1, 3 },
++			} },
++	},
++
++	-- the dungeon: cell id, template, x, z (height), y in the cell (floor-mesh points of the cave's pob), respawn
++	dungeon = {
++		{ 6900003, "ossus_sith_acolyte", -0.50, 1.57, -10.94, 600 },
++		{ 6900003, "ossus_sith_acolyte", 1.21, -0.69, -10.45, 600 },
++		{ 6900004, "ossus_sith_acolyte", -31.88, -12.85, -30.23, 600 },
++		{ 6900004, "ossus_sith_acolyte", -26.14, 3.40, -24.90, 600 },
++		{ 6900005, "ossus_sith_acolyte", -67.66, -13.50, -41.04, 600 },
++		{ 6900005, "ossus_sith_enforcer", -65.93, -2.40, -40.30, 600 },
++		{ 6900006, "ossus_sith_acolyte", -78.66, 45.22, -47.86, 600 },
++		{ 6900006, "ossus_sith_enforcer", -52.14, 38.99, -46.07, 600 },
++		{ 6900007, "ossus_sith_enforcer", -146.16, 75.40, -52.46, 600 },
++		{ 6900007, "ossus_sith_acolyte", -138.40, 39.80, -51.34, 600 },
++		{ 6900008, "ossus_sith_enforcer", -181.99, 15.30, -64.34, 600 },
++		{ 6900008, "ossus_sith_acolyte", -183.28, -0.16, -63.97, 600 },
++		{ 6900009, "ossus_sith_enforcer", -231.57, -11.57, -64.75, 600 },
++		{ 6900009, "ossus_sith_enforcer", -224.91, -15.18, -63.72, 600 },
++		{ 6900010, "ossus_sith_enforcer", -153.70, -92.23, -73.61, 600 },
++		{ 6900010, "ossus_sith_acolyte", -166.07, -88.17, -73.18, 600 },
++		{ 6900011, "ossus_sith_enforcer", -97.03, -71.41, -69.60, 600 },
++		{ 6900011, "ossus_sith_acolyte", -110.13, -67.59, -68.47, 600 },
++		{ 6900012, "ossus_sith_enforcer", -141.17, -36.89, -80.73, 600 },
++		{ 6900012, "ossus_sith_enforcer", -136.80, -23.78, -79.06, 600 },
++		{ 6900013, "ossus_sith_enforcer", -97.78, -96.69, -100.82, 600 },
++		{ 6900013, "ossus_sith_enforcer", -118.69, -102.78, -99.55, 600 },
++		{ 6900013, "ossus_sith_keeper", -107.26, -83.19, -100.10, 1800 },
++	},
++}
++
++registerScreenPlay("OssusWorld", true)
++
++local SP = "OssusWorld"
++
++function OssusWorld:start()
++	if not isZoneEnabled(self.planet) then
++		return
++	end
++
++	for _, p in ipairs(self.townsfolk) do
++		self:spawnAt(p[1], p[2], p[3], p[4], p[5], p[6], 0, true)
++	end
++
++	for _, place in ipairs(self.places) do
++		self:spawnPlace(place)
++	end
++
++	self:spawnPatrol()
++
++	for _, d in ipairs(self.dungeon) do
++		local pMobile = spawnMobile(self.planet, d[2], d[6], d[3], d[4], d[5], getRandomNumber(0, 359), d[1])
++
++		if pMobile == nil then
++			printLuaError("OssusWorld: could not spawn " .. d[2] .. " in cell " .. d[1])
++		end
++	end
++end
++
++function OssusWorld:spawnAt(template, x, y, heading, name, respawn, cell, stationary)
++	local pMobile = spawnMobile(self.planet, template, respawn or 0, x, getWorldFloor(x, y, self.planet), y, heading, cell or 0)
++
++	if pMobile == nil then
++		printLuaError("OssusWorld: could not spawn " .. template .. " at " .. x .. ", " .. y)
++		return nil
++	end
++
++	if name ~= nil then
++		CreatureObject(pMobile):setCustomObjectName(name)
++	end
++
++	if stationary then
++		AiAgent(pMobile):addObjectFlag(AI_STATIONARY)
++	end
++
++	return pMobile
++end
++
++function OssusWorld:spawnPlace(place)
++	for _, prop in ipairs(place.props) do
++		local x, y = place.x + prop[2], place.y + prop[3]
++		spawnSceneObject(self.planet, prop[1], x, getWorldFloor(x, y, self.planet), y, 0, math.rad(prop[4]))
++	end
++
++	for _, p in ipairs(place.people) do
++		self:spawnAt(p[1], place.x + p[2], place.y + p[3], getRandomNumber(0, 359), p[4], p[5], 0, true)
++	end
++end
++
++-- The patrol: each trooper keeps its own place in the loop
++
++function OssusWorld:spawnPatrol()
++	for i = 1, #self.patrol.templates do
++		self:spawnPatroller(nil, tostring(i))
++	end
++end
++
++-- No engine respawn for the patrol: a killed trooper comes back after five minutes with its patrol set up again.
++function OssusWorld:spawnPatroller(pNil, args)
++	local i = tonumber(args)
++	local start = self.patrol.points[1]
++	local pMobile = self:spawnAt(self.patrol.templates[i], start[1] + i * 2, start[2], 30, nil, 0, 0, false)
++
++	if pMobile == nil then
++		return
++	end
++
++	local id = SceneObject(pMobile):getObjectID()
++	writeData(id .. ":ossusPatrolPoint", 1)
++	writeData(id .. ":ossusPatrolSlot", i)
++	createObserver(DESTINATIONREACHED, SP, "onPatrolReached", pMobile)
++	createObserver(OBJECTDESTRUCTION, SP, "onPatrollerKilled", pMobile)
++	AiAgent(pMobile):setMovementState(AI_PATROLLING)
++	createEvent(getRandomNumber(10, 20) * 1000, SP, "patrolNext", pMobile, "")
++end
++
++function OssusWorld:onPatrollerKilled(pMobile, pKiller)
++	if pMobile ~= nil then
++		local id = SceneObject(pMobile):getObjectID()
++		createEvent(5 * 60 * 1000, SP, "spawnPatroller", nil, tostring(readData(id .. ":ossusPatrolSlot")))
++		deleteData(id .. ":ossusPatrolPoint")
++		deleteData(id .. ":ossusPatrolSlot")
++	end
++
++	return 1
++end
++
++function OssusWorld:patrolNext(pMobile)
++	if pMobile == nil or CreatureObject(pMobile):isDead() or AiAgent(pMobile):isInCombat() then
++		return
++	end
++
++	local id = SceneObject(pMobile):getObjectID()
++	local n = readData(id .. ":ossusPatrolPoint") % #self.patrol.points + 1
++	writeData(id .. ":ossusPatrolPoint", n)
++	local p = self.patrol.points[n]
++
++	AiAgent(pMobile):stopWaiting()
++	AiAgent(pMobile):setNextPosition(p[1], getWorldFloor(p[1], p[2], self.planet), p[2], 0)
++	AiAgent(pMobile):executeBehavior()
++end
++
++function OssusWorld:onPatrolReached(pMobile)
++	if pMobile == nil or CreatureObject(pMobile):isDead() then
++		return 1
++	end
++
++	createEvent(self.patrol.pause * 1000, SP, "patrolNext", pMobile, "")
++	return 0
++end
++
++OssusWorldConvoHandler = conv_handler:new {}
+diff --git a/MMOCoreORB/bin/scripts/screenplays/screenplays.lua b/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
+index a2de230..a214d0e 100644
+--- a/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
++++ b/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
+@@ -749,5 +749,6 @@ includeFile("sandbox/sandbox_world_bosses.lua")
+ includeFile("sandbox/sandbox_creatures.lua")
+ includeFile("sandbox/sandbox_tools_datapad.lua")
+ includeFile("sandbox/ossus_people.lua")
++includeFile("sandbox/ossus_world.lua")
+ includeFile("sandbox/hutta_home_places.lua")
+ includeFile("sandbox/hutta_home.lua")
