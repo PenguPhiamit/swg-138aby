@@ -23,9 +23,10 @@ def run(g):
     for bot in g.bots:
         bot.recover()
     divisor = M.group_size(g, forn)
+    points = {b.first: M.search_point(g, b) for b in g.bots}  # before the parallel jobs: it asks teammates
 
     def scout(bot, slot, mtype):
-        terminal = M.at_terminal(g, bot, 'scout', slot)
+        terminal = M.at_terminal(g, bot, 'scout', slot, at=points[bot.first])
         if not terminal:
             return None
         choose = M.hunting_choice(bot) if mtype == 'hunting' else M.nearest(bot, limit=4500)
@@ -37,11 +38,11 @@ def run(g):
         return M.recon(g, bot, mission, before, divisor, 'scout/recon')
 
     def hunter(bot):  # M.bounty grants the bounty hunter boxes before it lists (the terminal needs the novice box)
-        terminal = M.at_terminal(g, bot, 'bounty')
+        terminal = M.at_terminal(g, bot, 'bounty', at=points[bot.first])
         return terminal and M.bounty(g, bot, terminal, 'bounty/bounty', divisor)
 
     def side(bot, ttype):
-        terminal = M.at_terminal(g, bot, ttype)
+        terminal = M.at_terminal(g, bot, ttype, at=points[bot.first])
         return terminal and M.faction(g, bot, terminal, ttype, divisor)
 
     g.parallel(lambda: scout(forn, 0, 'hunting'), lambda: scout(mirren, 1, 'recon'), lambda: hunter(ressa),

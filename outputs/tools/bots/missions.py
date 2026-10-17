@@ -228,12 +228,30 @@ def blocked(g, line, why, **fields):
 
 
 # ---- terminals ----
-def find_terminals(bot, radius=3000):
+def search_point(g, bot):
+    """Where to centre the server's object search for bot: None (its own spot) outdoors; indoors an outdoor teammate's
+    x and y. The body's find sends its own x and y, which are cell-local inside a building (AgentControl.cpp find:
+    selfX, selfY), so 17 Oct 11:56 AM Cresh, just cloned inside the cloning facility at -17, -10, found no terminal
+    within 3 km. Read before parallel jobs: it asks the teammates."""
+    if not bot.status().get('cell'):
+        return None
+    for other in g.bots:
+        here = other.status()
+        if other is not bot and not here.get('cell') and isinstance(here.get('x'), (int, float)):
+            return {'x': here['x'], 'y': here['y']}
+    return None
+
+
+def locate_from(bot, text, radius, at=None):
+    return bot.locate(text, radius=radius, x=at['x'], y=at['y']) if at else bot.locate(text, radius=radius)
+
+
+def find_terminals(bot, radius=3000, at=None):
     """{terminal type: [terminals, nearest first]}. The server's search returns the 30 nearest matches and Mos Eisley
-    alone has 54 mission terminals, so each type is searched by its own template name."""
+    alone has 54 mission terminals, so each type is searched by its own template name. at: see search_point."""
     found = {}
     for template, ttype in TYPES.items():
-        hits = [o for o in bot.locate(template[:-4], radius=radius) if kind(o.get('template')) == ttype]
+        hits = [o for o in locate_from(bot, template[:-4], radius, at) if kind(o.get('template')) == ttype]
         if hits:
             found[ttype] = sorted(hits, key=lambda o: o.get('distance', 0))
     return found
@@ -245,15 +263,15 @@ def whereabouts(bot):
     return {k: here.get(k) for k in ('planet', 'x', 'y', 'cell', 'connected', 'error')}
 
 
-def nearest_terminal(bot, ttype, radius=3000):
+def nearest_terminal(bot, ttype, radius=3000, at=None):
     template = next(t for t, k in TYPES.items() if k == ttype)
-    hits = [o for o in bot.locate(template[:-4], radius=radius) if kind(o.get('template')) == ttype]
+    hits = [o for o in locate_from(bot, template[:-4], radius, at) if kind(o.get('template')) == ttype]
     return min(hits, key=lambda o: o.get('distance', 0)) if hits else None
 
 
-def at_terminal(g, bot, ttype, slot=0, radius=3000):
+def at_terminal(g, bot, ttype, slot=0, radius=3000, at=None):
     """Find the nearest terminal of ttype and walk to it. Returns it, or None after a failed check."""
-    spot = nearest_terminal(bot, ttype, radius)
+    spot = nearest_terminal(bot, ttype, radius, at)
     if not g.check(f'{ttype}: a terminal within {radius} m of {bot.first}', spot,
                    {k: spot.get(k) for k in ('distance', 'cell', 'building')} if spot else whereabouts(bot)):
         return None

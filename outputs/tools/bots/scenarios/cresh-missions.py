@@ -30,7 +30,7 @@ def run(g):
         if not any('combat_marksman_master' in str(s) for s in bot.profession('list').get('skills', [])):
             g.note(f'{bot.first} marksman: ' + str(bot.profession('combat_marksman'))[:120])
     divisor = M.group_size(g, cresh)
-    found = M.find_terminals(cresh)
+    found = M.find_terminals(cresh, at=M.search_point(g, cresh))
     g.note('TERMINALS within 3 km (the search returns 30 at most per type): ' + json.dumps(
         {t: {'count': len(v), 'nearest_m': round(v[0].get('distance', 0))} for t, v in sorted(found.items())}))
     general = (found.get('general') or [None])[0]

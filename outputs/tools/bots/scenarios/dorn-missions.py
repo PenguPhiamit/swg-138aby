@@ -20,7 +20,8 @@ def run(g):
     if not any('social_entertainer_novice' in str(s) for s in rusk.profession('list').get('skills', [])):
         g.note('Rusk: ' + M.agentskill(rusk, 'social_entertainer_novice')[:160])
     divisor = M.group_size(g, dorn)
-    spot = M.nearest_terminal(dorn, 'entertainer')
+    spot = M.nearest_terminal(dorn, 'entertainer', at=M.search_point(g, dorn))
+    rusk_at = M.search_point(g, rusk)
     if not g.check('entertainer: a terminal within 3000 m', spot, spot.get('distance') if spot else M.whereabouts(dorn)):
         return
     trips = g.parallel(lambda: M.approach(dorn, spot, 0), lambda: M.approach(rusk, spot, 1))
@@ -38,7 +39,7 @@ def run(g):
 
     def musician():
         mission, before = take(rusk, trips[1], 'musician')
-        general = M.at_terminal(g, rusk, 'general')
+        general = M.at_terminal(g, rusk, 'general', at=rusk_at if rusk.status().get('cell') else None)
         if general:
             parcel, p_before, _ = M.take(g, rusk, general, 'general', [('deliver', M.in_town(rusk))],
                                          'general/deliver', divisor)

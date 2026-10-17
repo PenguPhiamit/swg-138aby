@@ -439,6 +439,17 @@ class Readers(Base):
         self.assertEqual(M.template_crc(path), crafting.template_crc(path))
         self.assertEqual(sorted(M.QUEST_SCHEMATICS.values()), sorted(M.QUEST_ITEMS))
 
+    def test_an_indoor_bot_searches_from_an_outdoor_teammate(self):
+        g, bots = self.crew('Cresh', 'Ilsa', 'Kor')
+        bots[0].cell, bots[0].x, bots[0].y = 1105883, -16.7, -10.5  # cell-local, inside the cloning facility
+        at = M.search_point(g, bots[0])
+        self.assertEqual((at['x'], at['y']), (bots[1].x, bots[1].y))
+        self.galaxy.terminal('general', bots[1].x + 40, bots[1].y)
+        self.assertEqual(M.find_terminals(bots[0]), {})  # from -17, -10 nothing is in reach
+        self.assertIn('general', M.find_terminals(bots[0], at=at))
+        bots[0].cell = 0
+        self.assertIsNone(M.search_point(g, bots[0]))
+
     def test_choosers(self):
         g, (bot,) = self.crew('Cresh')
         here = {'planet': 'tatooine', 'x': bot.x, 'y': bot.y}
