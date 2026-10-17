@@ -740,7 +740,11 @@ def survey(g, bot, mission, before, divisor, label, guard=None, spots=4):
                        + ', '.join(sorted({str(r.get('type')) for r in listed.get('resources', [])}))[:300])
             for name in names[:3]:
                 bot.slash('requestSurvey', name, wait=0)
-                top = (bot.wait_for('"survey_results"', 12) or {}).get('best') or {}
+                top = dict((bot.wait_for('"survey_results"', 12) or {}).get('best') or {})
+                # The body reports the density as a fraction (17 Oct 12:28 PM: 0.811 for Vesoide, 81%), the mission
+                # its level in percent (50-95).
+                if isinstance(top.get('percent'), (int, float)) and top['percent'] <= 1.0:
+                    top['percent'] = round(top['percent'] * 100, 1)
                 if (top.get('percent') or 0) > (best.get('percent') or 0):
                     best = dict(top, name=name)
                 bot.idle(4)  # survey cooldown

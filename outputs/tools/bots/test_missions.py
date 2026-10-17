@@ -359,7 +359,7 @@ class Bot:
         elif name in ('stopdance', 'stopmusic'):
             self.performing = None
         elif name == 'requestSurvey':
-            self.pending.append({'event': 'survey_results', 'best': {'x': self.x + 10, 'y': self.y, 'percent': 70}})
+            self.pending.append({'event': 'survey_results', 'best': {'x': self.x + 10, 'y': self.y, 'percent': 0.7}})
         elif name == 'requestCoreSample':
             for record in [r for r in self.records.values() if 'datapad' in r['container_name']]:
                 if record['type'] == 'survey' and math.hypot(record['start']['x'] - self.x,
@@ -615,6 +615,7 @@ class Missions(Base):
         done = M.survey(g, dova, mission, before, divisor, 'artisan/survey', guard=varo)
         self.assertEqual(g.failed(), [])
         self.assertTrue(done['removed'])
+        self.assertEqual(done['density'], 70.0)  # the body's 0.7 read as 70%
         self.assertGreater(math.hypot(dova.x - mission['start']['x'], dova.y - mission['start']['y']), 1024)
 
     def test_dancer_and_musician_perform_inside_for_ten_minutes(self):
