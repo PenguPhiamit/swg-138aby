@@ -1,0 +1,1340 @@
+planet,kind,template,level_min,level_max,square_x_km,square_y_km,events,sources
+tatooine,creature,bantha,1,1,-4,0,3,given up on=3;incapacitated a bot=2
+tatooine,creature,bantha,1,1,-4,2,2,given up on=3;incapacitated a bot=2
+tatooine,creature,bull_bantha,2,2,-5,3,1,given up on=5;incapacitated a bot=10;killed=2;killed a bot=2
+tatooine,creature,bull_bantha,2,2,-3,1,5,given up on=5;incapacitated a bot=10;killed=2;killed a bot=2
+tatooine,creature,bull_bantha,2,2,-3,2,2,given up on=5;incapacitated a bot=10;killed=2;killed a bot=2
+tatooine,creature,bull_bantha,2,2,-3,3,4,given up on=5;incapacitated a bot=10;killed=2;killed a bot=2
+tatooine,creature,bull_bantha,2,2,-2,-7,1,given up on=5;incapacitated a bot=10;killed=2;killed a bot=2
+tatooine,creature,bull_bantha,2,2,-2,-5,3,given up on=5;incapacitated a bot=10;killed=2;killed a bot=2
+tatooine,creature,bull_bantha,2,2,1,-6,3,given up on=5;incapacitated a bot=10;killed=2;killed a bot=2
+tatooine,creature,cu_pa,1,1,-1,-5,1,incapacitated a bot=2;killed=6;killed a bot=1
+tatooine,creature,cu_pa,1,1,3,-6,1,incapacitated a bot=2;killed=6;killed a bot=1
+tatooine,creature,cu_pa,1,1,3,-5,5,incapacitated a bot=2;killed=6;killed a bot=1
+tatooine,creature,cu_pa,1,1,4,-6,1,incapacitated a bot=2;killed=6;killed a bot=1
+tatooine,creature,cu_pa,1,1,4,-5,1,incapacitated a bot=2;killed=6;killed a bot=1
+tatooine,creature,death_kreetle,9,9,1,4,2,attacked first=1;killed=1
+tatooine,creature,diseased_bocatt,8,8,-3,0,2,attacked first=6;given up on=1;incapacitated a bot=6;killed=12
+tatooine,creature,diseased_bocatt,8,8,-2,-2,6,attacked first=6;given up on=1;incapacitated a bot=6;killed=12
+tatooine,creature,diseased_bocatt,8,8,-2,3,4,attacked first=6;given up on=1;incapacitated a bot=6;killed=12
+tatooine,creature,diseased_bocatt,8,8,0,-4,4,attacked first=6;given up on=1;incapacitated a bot=6;killed=12
+tatooine,creature,diseased_bocatt,8,8,0,2,4,attacked first=6;given up on=1;incapacitated a bot=6;killed=12
+tatooine,creature,diseased_bocatt,8,8,1,-6,3,attacked first=6;given up on=1;incapacitated a bot=6;killed=12
+tatooine,creature,diseased_bocatt,8,8,1,3,2,attacked first=6;given up on=1;incapacitated a bot=6;killed=12
+tatooine,creature,domestic_eopie,4,4,-3,0,1,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,-2,-6,1,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,-2,-3,1,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,-2,1,2,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,-1,-7,5,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,-1,-6,16,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,-1,-4,1,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,-1,-3,1,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,-1,3,1,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,0,-6,1,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,0,-5,3,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,0,2,1,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,1,-5,1,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,2,-6,1,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,3,-6,1,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,3,-5,1,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,4,-6,5,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,domestic_eopie,4,4,4,-5,2,given up on=6;incapacitated a bot=3;killed=35;killed a bot=1
+tatooine,creature,drooling_nuna,6,6,-4,1,1,attacked first=1;killed=7
+tatooine,creature,drooling_nuna,6,6,-4,3,3,attacked first=1;killed=7
+tatooine,creature,drooling_nuna,6,6,-2,2,1,attacked first=1;killed=7
+tatooine,creature,drooling_nuna,6,6,1,-6,1,attacked first=1;killed=7
+tatooine,creature,drooling_nuna,6,6,2,1,2,attacked first=1;killed=7
+tatooine,creature,dune_lizard,1,1,0,4,3,given up on=1;incapacitated a bot=2
+tatooine,creature,dwarf_eopie,3,3,2,-5,4,attacked first=3;killed=124
+tatooine,creature,dwarf_eopie,3,3,3,-5,123,attacked first=3;killed=124
+tatooine,creature,dwarf_nuna,1,5,-5,0,11,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-5,1,5,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-5,2,17,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-4,-4,9,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-4,-3,3,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-4,0,6,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-4,1,25,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-4,2,8,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-4,3,13,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-3,-5,18,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-3,-4,16,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-3,-3,8,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-3,0,6,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-3,1,17,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-3,2,50,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-3,3,12,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-2,-7,6,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-2,-6,7,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-2,-5,19,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-2,-4,9,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-2,-3,7,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-2,0,3,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-2,1,28,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-2,2,3,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-2,3,7,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-1,-8,6,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-1,-7,6,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-1,-6,55,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-1,-5,43,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-1,-4,35,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-1,-3,5,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-1,-2,3,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-1,2,3,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,-1,3,7,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,0,-7,19,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,0,-6,185,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,0,-5,19,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,0,-4,7,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,0,-3,3,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,0,1,9,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,0,2,4,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,0,3,12,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,0,4,13,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,1,-7,7,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,1,-6,22,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,1,-5,7,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,1,-4,4,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,1,1,13,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,1,2,69,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,1,3,36,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,1,4,10,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,1,5,3,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,2,-7,2,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,2,-6,9,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,2,-5,5,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,2,-4,6,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,2,1,10,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,2,2,27,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,2,3,15,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,2,4,5,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,2,5,4,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,3,-7,13,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,3,-6,10,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,3,-5,11,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,3,-4,7,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,3,2,10,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,4,-7,19,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,4,-6,9,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,4,-5,9,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,4,-4,20,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,5,-6,10,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,5,-5,3,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,dwarf_nuna,1,5,5,-4,10,attacked first=49;given up on=125;incapacitated a bot=27;killed=923;killed a bot=8
+tatooine,creature,eopie,1,7,-5,1,2,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,-5,2,3,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,-4,0,4,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,-4,3,2,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,-3,0,12,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,-3,1,5,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,-2,-5,6,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,-2,0,2,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,-1,-7,7,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,-1,-5,3,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,-1,2,8,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,-1,3,2,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,0,-8,2,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,0,-7,8,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,0,-5,3,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,0,-4,5,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,0,-3,7,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,0,4,2,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,1,-5,2,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,1,1,3,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,2,-6,2,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,2,-5,1,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,2,1,4,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,2,3,3,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,2,5,8,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,3,-5,8,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,3,-4,3,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,3,-3,8,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,3,2,10,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,4,-7,1,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,eopie,1,7,4,-6,2,attacked first=24;given up on=18;incapacitated a bot=11;killed=81;killed a bot=4
+tatooine,creature,evil_hermit,6,6,-5,1,1,given up on=9;killed=19
+tatooine,creature,evil_hermit,6,6,-3,-5,1,given up on=9;killed=19
+tatooine,creature,evil_hermit,6,6,-2,-7,1,given up on=9;killed=19
+tatooine,creature,evil_hermit,6,6,-2,-6,1,given up on=9;killed=19
+tatooine,creature,evil_hermit,6,6,-1,-7,3,given up on=9;killed=19
+tatooine,creature,evil_hermit,6,6,-1,-6,3,given up on=9;killed=19
+tatooine,creature,evil_hermit,6,6,0,-6,10,given up on=9;killed=19
+tatooine,creature,evil_hermit,6,6,0,-5,3,given up on=9;killed=19
+tatooine,creature,evil_hermit,6,6,1,-5,3,given up on=9;killed=19
+tatooine,creature,evil_hermit,6,6,3,-5,1,given up on=9;killed=19
+tatooine,creature,evil_hermit,6,6,3,-4,1,given up on=9;killed=19
+tatooine,creature,evil_settler,5,5,-3,-4,5,attacked first=2;given up on=7;incapacitated a bot=4;killed=14;killed a bot=1
+tatooine,creature,evil_settler,5,5,-2,-7,2,attacked first=2;given up on=7;incapacitated a bot=4;killed=14;killed a bot=1
+tatooine,creature,evil_settler,5,5,-2,-3,1,attacked first=2;given up on=7;incapacitated a bot=4;killed=14;killed a bot=1
+tatooine,creature,evil_settler,5,5,-2,0,7,attacked first=2;given up on=7;incapacitated a bot=4;killed=14;killed a bot=1
+tatooine,creature,evil_settler,5,5,0,-6,1,attacked first=2;given up on=7;incapacitated a bot=4;killed=14;killed a bot=1
+tatooine,creature,evil_settler,5,5,2,-6,4,attacked first=2;given up on=7;incapacitated a bot=4;killed=14;killed a bot=1
+tatooine,creature,evil_settler,5,5,2,-4,1,attacked first=2;given up on=7;incapacitated a bot=4;killed=14;killed a bot=1
+tatooine,creature,evil_settler,5,5,3,-6,4,attacked first=2;given up on=7;incapacitated a bot=4;killed=14;killed a bot=1
+tatooine,creature,evil_settler,5,5,3,-4,2,attacked first=2;given up on=7;incapacitated a bot=4;killed=14;killed a bot=1
+tatooine,creature,evil_settler,5,5,4,-7,1,attacked first=2;given up on=7;incapacitated a bot=4;killed=14;killed a bot=1
+tatooine,creature,feral_bantha,1,1,-5,3,1,given up on=2;incapacitated a bot=2;killed=7
+tatooine,creature,feral_bantha,1,1,-4,2,5,given up on=2;incapacitated a bot=2;killed=7
+tatooine,creature,feral_bantha,1,1,-3,0,1,given up on=2;incapacitated a bot=2;killed=7
+tatooine,creature,feral_bantha,1,1,-2,0,1,given up on=2;incapacitated a bot=2;killed=7
+tatooine,creature,feral_bantha,1,1,3,-6,2,given up on=2;incapacitated a bot=2;killed=7
+tatooine,creature,feral_bantha,1,1,4,-4,1,given up on=2;incapacitated a bot=2;killed=7
+tatooine,creature,giant_worrt,1,1,-3,-4,1,incapacitated a bot=4;killed=2;killed a bot=2
+tatooine,creature,giant_worrt,1,1,-1,-5,6,incapacitated a bot=4;killed=2;killed a bot=2
+tatooine,creature,giant_worrt,1,1,0,-4,1,incapacitated a bot=4;killed=2;killed a bot=2
+tatooine,creature,gorg,6,6,-5,0,6,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-5,1,7,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-5,2,4,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-5,3,3,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-4,1,3,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-4,2,19,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-4,3,17,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-3,-4,19,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-3,-3,8,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-3,0,6,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-3,1,38,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-3,2,96,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-3,3,1,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-3,4,2,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-2,-7,5,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-2,-6,13,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-2,-5,43,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-2,-4,67,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-2,-3,6,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-2,-2,5,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-2,1,4,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-2,2,7,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-2,3,3,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-1,-8,2,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-1,-7,4,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-1,-6,8,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-1,-5,10,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-1,-4,138,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-1,-3,9,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-1,2,8,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-1,3,3,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,-1,4,3,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,0,-7,7,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,0,-6,44,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,0,-5,5,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,0,-4,10,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,0,-3,4,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,0,1,9,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,0,2,11,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,0,3,5,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,0,4,3,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,1,-7,4,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,1,-6,6,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,1,-5,16,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,1,-4,3,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,1,1,3,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,1,2,134,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,1,3,105,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,1,4,10,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,1,5,3,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,2,-7,2,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,2,-6,10,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,2,-5,10,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,2,-4,3,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,2,1,5,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,2,2,7,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,2,3,7,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,3,-7,8,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,3,-6,51,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,3,-5,1,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,3,-4,3,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,3,-3,3,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,3,2,8,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,3,4,7,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,4,-7,5,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,4,-6,40,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,4,-5,12,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,4,-4,5,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg,6,6,5,-6,9,attacked first=22;given up on=321;incapacitated a bot=18;killed=777;killed a bot=7
+tatooine,creature,gorg_glutton,7,7,-4,1,42,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,-4,2,21,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,-4,3,3,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,-3,-5,4,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,-3,1,20,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,-3,2,2,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,-3,3,14,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,-2,-5,9,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,-2,-4,263,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,-2,1,3,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,-2,2,1,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,-1,-6,22,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,-1,-4,59,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,0,1,3,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,0,2,8,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,0,3,8,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,0,4,1,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,1,1,1,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,1,2,74,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,1,3,18,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,2,-6,1,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,2,-5,1,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,2,2,2,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,2,3,3,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,3,-6,14,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,3,-4,14,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,gorg_glutton,7,7,4,-6,3,given up on=303;incapacitated a bot=2;killed=308;killed a bot=1
+tatooine,creature,greater_desert_womp_rat,2,22,-3,-3,2,attacked first=1;given up on=5;incapacitated a bot=9;killed=1;killed a bot=1
+tatooine,creature,greater_desert_womp_rat,2,22,-2,-7,1,attacked first=1;given up on=5;incapacitated a bot=9;killed=1;killed a bot=1
+tatooine,creature,greater_desert_womp_rat,2,22,-1,-6,7,attacked first=1;given up on=5;incapacitated a bot=9;killed=1;killed a bot=1
+tatooine,creature,greater_desert_womp_rat,2,22,3,-6,7,attacked first=1;given up on=5;incapacitated a bot=9;killed=1;killed a bot=1
+tatooine,creature,highwayman,10,10,2,-6,1,attacked first=1;given up on=6;incapacitated a bot=1;killed=3;killed a bot=1
+tatooine,creature,highwayman,10,10,2,-5,1,attacked first=1;given up on=6;incapacitated a bot=1;killed=3;killed a bot=1
+tatooine,creature,highwayman,10,10,3,-7,2,attacked first=1;given up on=6;incapacitated a bot=1;killed=3;killed a bot=1
+tatooine,creature,highwayman,10,10,4,-6,3,attacked first=1;given up on=6;incapacitated a bot=1;killed=3;killed a bot=1
+tatooine,creature,highwayman,10,10,4,-4,5,attacked first=1;given up on=6;incapacitated a bot=1;killed=3;killed a bot=1
+tatooine,creature,jawa_engineer,10,10,1,-7,3,attacked first=1;incapacitated a bot=1;killed=1
+tatooine,creature,kreetle,1,3,-5,0,12,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-5,1,65,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-5,2,117,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-5,3,27,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-4,-4,9,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-4,-3,25,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-4,0,31,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-4,1,38,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-4,2,69,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-4,3,67,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-4,4,13,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-3,-6,7,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-3,-5,56,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-3,-4,63,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-3,-3,77,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-3,-2,4,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-3,0,31,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-3,1,40,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-3,2,52,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-3,3,85,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-3,4,4,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-2,-7,53,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-2,-6,117,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-2,-5,108,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-2,-4,7,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-2,-3,55,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-2,-2,31,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-2,0,4,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-2,1,73,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-2,2,56,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-2,3,31,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-1,-8,11,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-1,-7,92,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-1,-6,256,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-1,-5,140,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-1,-4,91,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-1,-3,92,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-1,-2,19,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-1,2,50,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-1,3,58,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,-1,4,9,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,0,-8,11,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,0,-7,87,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,0,-6,17,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,0,-5,84,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,0,-4,63,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,0,-3,10,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,0,1,46,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,0,2,51,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,0,3,54,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,0,4,33,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,1,-7,59,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,1,-6,74,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,1,-5,102,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,1,-4,4,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,1,1,86,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,1,2,101,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,1,3,123,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,1,4,107,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,1,5,7,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,2,-7,19,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,2,-6,74,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,2,-5,53,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,2,-4,51,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,2,1,29,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,2,2,87,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,2,3,73,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,2,4,5,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,3,-7,56,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,3,-6,12,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,3,-4,55,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,3,-3,7,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,3,2,7,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,3,3,31,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,4,-7,23,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,4,-6,50,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,4,-5,46,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,4,-4,21,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,5,-6,35,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,5,-5,32,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle,1,3,5,-4,16,attacked first=382;given up on=110;incapacitated a bot=141;killed=3462;killed a bot=51
+tatooine,creature,kreetle_swarmling,6,6,-4,0,4,attacked first=1;given up on=9;incapacitated a bot=8;killed=8;killed a bot=1
+tatooine,creature,kreetle_swarmling,6,6,-2,-6,3,attacked first=1;given up on=9;incapacitated a bot=8;killed=8;killed a bot=1
+tatooine,creature,kreetle_swarmling,6,6,-1,-7,2,attacked first=1;given up on=9;incapacitated a bot=8;killed=8;killed a bot=1
+tatooine,creature,kreetle_swarmling,6,6,-1,3,2,attacked first=1;given up on=9;incapacitated a bot=8;killed=8;killed a bot=1
+tatooine,creature,kreetle_swarmling,6,6,0,4,4,attacked first=1;given up on=9;incapacitated a bot=8;killed=8;killed a bot=1
+tatooine,creature,kreetle_swarmling,6,6,4,-7,2,attacked first=1;given up on=9;incapacitated a bot=8;killed=8;killed a bot=1
+tatooine,creature,kreetle_swarmling,6,6,4,-5,9,attacked first=1;given up on=9;incapacitated a bot=8;killed=8;killed a bot=1
+tatooine,creature,kreetle_swarmling,6,6,5,-7,1,attacked first=1;given up on=9;incapacitated a bot=8;killed=8;killed a bot=1
+tatooine,creature,lesser_desert_womp_rat,1,5,-5,1,3,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,-4,1,23,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,-3,-5,6,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,-1,-5,3,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,0,-7,6,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,0,-5,11,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,0,4,1,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,1,-6,1,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,1,-5,1,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,1,4,1,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,2,-6,2,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,2,-5,2,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,3,-6,6,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,3,-5,56,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,3,3,3,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,4,-5,4,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_desert_womp_rat,1,5,4,-4,2,given up on=17;incapacitated a bot=24;killed=86;killed a bot=4
+tatooine,creature,lesser_dewback,1,9,-2,-7,1,attacked first=1;killed=12
+tatooine,creature,lesser_dewback,1,9,-2,-6,10,attacked first=1;killed=12
+tatooine,creature,lesser_dewback,1,9,2,-6,2,attacked first=1;killed=12
+tatooine,creature,minor_worrt,5,5,-4,2,1,given up on=12;incapacitated a bot=1;killed=169;killed a bot=1
+tatooine,creature,minor_worrt,5,5,-2,-7,1,given up on=12;incapacitated a bot=1;killed=169;killed a bot=1
+tatooine,creature,minor_worrt,5,5,-1,-4,4,given up on=12;incapacitated a bot=1;killed=169;killed a bot=1
+tatooine,creature,minor_worrt,5,5,0,-7,3,given up on=12;incapacitated a bot=1;killed=169;killed a bot=1
+tatooine,creature,minor_worrt,5,5,0,-4,2,given up on=12;incapacitated a bot=1;killed=169;killed a bot=1
+tatooine,creature,minor_worrt,5,5,0,3,3,given up on=12;incapacitated a bot=1;killed=169;killed a bot=1
+tatooine,creature,minor_worrt,5,5,2,-5,10,given up on=12;incapacitated a bot=1;killed=169;killed a bot=1
+tatooine,creature,minor_worrt,5,5,3,-5,158,given up on=12;incapacitated a bot=1;killed=169;killed a bot=1
+tatooine,creature,minor_worrt,5,5,3,-4,1,given up on=12;incapacitated a bot=1;killed=169;killed a bot=1
+tatooine,creature,mound_mite,1,9,0,4,1,killed=4
+tatooine,creature,mound_mite,1,9,3,-6,3,killed=4
+tatooine,creature,mutant_womp_rat,1,13,-2,-6,4,attacked first=2;given up on=1;incapacitated a bot=3;killed=2;killed a bot=1
+tatooine,creature,mutant_womp_rat,1,13,-2,-4,1,attacked first=2;given up on=1;incapacitated a bot=3;killed=2;killed a bot=1
+tatooine,creature,mutant_womp_rat,1,13,1,-6,1,attacked first=2;given up on=1;incapacitated a bot=3;killed=2;killed a bot=1
+tatooine,creature,mutant_womp_rat,1,13,4,-6,3,attacked first=2;given up on=1;incapacitated a bot=3;killed=2;killed a bot=1
+tatooine,creature,rill,1,6,-5,1,2,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-5,2,2,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-4,-5,2,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-4,1,11,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-4,2,10,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-4,3,3,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-3,-5,2,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-3,-3,2,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-3,0,6,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-3,1,4,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-3,3,4,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-2,-6,2,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-2,-5,7,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-2,-4,13,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-2,1,14,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-2,2,3,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-1,-7,6,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-1,-6,2,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-1,-5,8,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,-1,-4,45,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,0,-7,2,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,0,-6,108,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,0,-5,13,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,0,-3,3,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,0,1,1,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,0,2,4,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,0,3,22,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,0,4,4,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,1,-6,3,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,1,4,9,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,2,-5,5,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,2,-4,4,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,2,3,3,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,3,-7,6,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,3,-6,17,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,3,-5,4,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,3,-4,10,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,4,-7,1,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,4,-6,6,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,4,-5,13,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rill,1,6,4,-4,1,given up on=192;incapacitated a bot=6;killed=187;killed a bot=2
+tatooine,creature,rock_beetle,1,1,0,1,1,given up on=1
+tatooine,creature,rockmite,1,8,-3,-4,3,attacked first=9;given up on=2;incapacitated a bot=1;killed=31
+tatooine,creature,rockmite,1,8,-3,3,3,attacked first=9;given up on=2;incapacitated a bot=1;killed=31
+tatooine,creature,rockmite,1,8,-3,4,2,attacked first=9;given up on=2;incapacitated a bot=1;killed=31
+tatooine,creature,rockmite,1,8,-2,-5,2,attacked first=9;given up on=2;incapacitated a bot=1;killed=31
+tatooine,creature,rockmite,1,8,-1,-5,6,attacked first=9;given up on=2;incapacitated a bot=1;killed=31
+tatooine,creature,rockmite,1,8,1,-7,4,attacked first=9;given up on=2;incapacitated a bot=1;killed=31
+tatooine,creature,rockmite,1,8,1,-5,1,attacked first=9;given up on=2;incapacitated a bot=1;killed=31
+tatooine,creature,rockmite,1,8,1,4,2,attacked first=9;given up on=2;incapacitated a bot=1;killed=31
+tatooine,creature,rockmite,1,8,2,-6,1,attacked first=9;given up on=2;incapacitated a bot=1;killed=31
+tatooine,creature,rockmite,1,8,2,2,1,attacked first=9;given up on=2;incapacitated a bot=1;killed=31
+tatooine,creature,rockmite,1,8,2,3,7,attacked first=9;given up on=2;incapacitated a bot=1;killed=31
+tatooine,creature,rockmite,1,8,3,-7,11,attacked first=9;given up on=2;incapacitated a bot=1;killed=31
+tatooine,creature,scyk,1,12,-1,-6,3,attacked first=1;given up on=1;incapacitated a bot=3;killed=2;killed a bot=2
+tatooine,creature,scyk,1,12,-1,4,1,attacked first=1;given up on=1;incapacitated a bot=3;killed=2;killed a bot=2
+tatooine,creature,scyk,1,12,0,-5,1,attacked first=1;given up on=1;incapacitated a bot=3;killed=2;killed a bot=2
+tatooine,creature,scyk,1,12,1,-6,4,attacked first=1;given up on=1;incapacitated a bot=3;killed=2;killed a bot=2
+tatooine,creature,sevorrt,1,7,-5,2,14,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-4,1,11,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-4,3,7,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-3,-5,8,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-3,-4,12,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-3,1,2,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-2,-6,2,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-2,-5,6,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-2,-4,6,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-2,-3,15,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-2,1,5,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-2,2,1,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-2,3,3,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-1,-8,1,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-1,-5,8,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-1,-4,12,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-1,-3,2,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,-1,2,2,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,0,-8,8,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,0,-7,6,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,0,-5,8,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,0,-4,2,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,0,-3,2,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,0,2,4,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,1,-7,1,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,1,-6,6,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,1,-5,5,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,1,1,1,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,1,4,5,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,2,-6,11,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,2,-5,8,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,2,-4,3,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,2,3,10,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,3,-7,9,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,3,2,2,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,4,-7,5,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,4,-6,3,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,4,-5,7,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,sevorrt,1,7,5,-6,3,attacked first=27;given up on=25;incapacitated a bot=33;killed=132;killed a bot=9
+tatooine,creature,spice_fiend,8,8,-2,-5,4,attacked first=4;given up on=1;killed=3
+tatooine,creature,spice_fiend,8,8,2,-5,2,attacked first=4;given up on=1;killed=3
+tatooine,creature,spice_fiend,8,8,5,-7,2,attacked first=4;given up on=1;killed=3
+tatooine,creature,tatooine_mynock,1,3,-5,0,25,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-5,1,25,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-5,2,20,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-5,3,14,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-4,-5,9,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-4,-4,4,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-4,0,39,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-4,1,31,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-4,2,23,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-4,3,41,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-4,4,5,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-3,-5,18,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-3,-4,13,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-3,-3,26,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-3,0,6,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-3,1,8,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-3,2,21,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-3,3,30,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-3,4,6,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-2,-7,30,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-2,-6,94,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-2,-5,23,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-2,-3,29,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-2,-2,12,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-2,0,8,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-2,1,77,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-2,2,29,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-2,3,22,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-1,-8,6,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-1,-7,12,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-1,-6,17,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-1,-5,61,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-1,-4,48,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-1,-3,20,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-1,2,25,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-1,3,45,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,-1,4,8,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,0,-8,9,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,0,-7,8,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,0,-5,21,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,0,-4,71,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,0,-3,2,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,0,1,12,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,0,2,29,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,0,3,10,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,0,4,12,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,1,-7,36,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,1,-6,52,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,1,-5,48,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,1,-4,3,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,1,1,9,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,1,2,21,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,1,3,1,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,1,4,83,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,1,5,4,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,2,-7,5,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,2,-6,31,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,2,-5,21,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,2,-4,28,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,2,-3,4,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,2,1,12,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,2,2,21,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,2,3,60,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,2,4,9,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,2,5,8,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,3,-7,15,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,3,-6,43,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,3,-5,7,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,3,-4,24,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,3,-3,14,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,3,2,3,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,3,3,30,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,3,4,4,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,4,-7,14,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,4,-6,31,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,4,-5,18,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,4,-4,75,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,5,-6,47,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,5,-5,25,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,tatooine_mynock,1,3,5,-4,17,attacked first=226;given up on=87;incapacitated a bot=40;killed=1562;killed a bot=12
+tatooine,creature,trandosian_slavemaster,7,7,-4,3,3,attacked first=16;given up on=8;incapacitated a bot=4;killed=8
+tatooine,creature,trandosian_slavemaster,7,7,-4,4,2,attacked first=16;given up on=8;incapacitated a bot=4;killed=8
+tatooine,creature,trandosian_slavemaster,7,7,-3,-5,2,attacked first=16;given up on=8;incapacitated a bot=4;killed=8
+tatooine,creature,trandosian_slavemaster,7,7,-2,-6,2,attacked first=16;given up on=8;incapacitated a bot=4;killed=8
+tatooine,creature,trandosian_slavemaster,7,7,-1,2,2,attacked first=16;given up on=8;incapacitated a bot=4;killed=8
+tatooine,creature,trandosian_slavemaster,7,7,-1,3,2,attacked first=16;given up on=8;incapacitated a bot=4;killed=8
+tatooine,creature,trandosian_slavemaster,7,7,0,-7,6,attacked first=16;given up on=8;incapacitated a bot=4;killed=8
+tatooine,creature,trandosian_slavemaster,7,7,0,1,4,attacked first=16;given up on=8;incapacitated a bot=4;killed=8
+tatooine,creature,trandosian_slavemaster,7,7,1,-6,2,attacked first=16;given up on=8;incapacitated a bot=4;killed=8
+tatooine,creature,trandosian_slavemaster,7,7,3,-7,3,attacked first=16;given up on=8;incapacitated a bot=4;killed=8
+tatooine,creature,trandosian_slavemaster,7,7,4,-6,8,attacked first=16;given up on=8;incapacitated a bot=4;killed=8
+tatooine,creature,trandosian_slaver,5,5,-4,-4,2,attacked first=17;given up on=3;incapacitated a bot=7;killed=10;killed a bot=4
+tatooine,creature,trandosian_slaver,5,5,-4,3,5,attacked first=17;given up on=3;incapacitated a bot=7;killed=10;killed a bot=4
+tatooine,creature,trandosian_slaver,5,5,-3,3,4,attacked first=17;given up on=3;incapacitated a bot=7;killed=10;killed a bot=4
+tatooine,creature,trandosian_slaver,5,5,-2,-5,2,attacked first=17;given up on=3;incapacitated a bot=7;killed=10;killed a bot=4
+tatooine,creature,trandosian_slaver,5,5,-1,-7,2,attacked first=17;given up on=3;incapacitated a bot=7;killed=10;killed a bot=4
+tatooine,creature,trandosian_slaver,5,5,-1,2,4,attacked first=17;given up on=3;incapacitated a bot=7;killed=10;killed a bot=4
+tatooine,creature,trandosian_slaver,5,5,0,-7,6,attacked first=17;given up on=3;incapacitated a bot=7;killed=10;killed a bot=4
+tatooine,creature,trandosian_slaver,5,5,0,1,2,attacked first=17;given up on=3;incapacitated a bot=7;killed=10;killed a bot=4
+tatooine,creature,trandosian_slaver,5,5,0,4,2,attacked first=17;given up on=3;incapacitated a bot=7;killed=10;killed a bot=4
+tatooine,creature,trandosian_slaver,5,5,2,-5,6,attacked first=17;given up on=3;incapacitated a bot=7;killed=10;killed a bot=4
+tatooine,creature,trandosian_slaver,5,5,4,-6,6,attacked first=17;given up on=3;incapacitated a bot=7;killed=10;killed a bot=4
+tatooine,creature,variegated_womp_rat,1,1,-3,-3,1,given up on=1;killed=1
+tatooine,creature,variegated_womp_rat,1,1,-2,-4,1,given up on=1;killed=1
+tatooine,creature,womp_rat,1,10,-5,1,3,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-5,2,16,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-5,3,9,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-4,-4,6,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-4,0,4,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-4,1,1,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-4,2,4,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-4,3,9,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-4,4,2,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-3,-6,5,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-3,-5,15,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-3,-4,30,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-3,-3,12,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-3,0,8,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-3,1,15,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-3,3,18,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-3,4,5,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-2,-7,4,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-2,-6,8,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-2,-5,32,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-2,-4,5,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-2,-3,15,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-2,0,8,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-2,1,16,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-2,2,3,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-2,3,19,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-1,-8,3,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-1,-7,16,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-1,-6,11,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-1,-5,16,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-1,-4,22,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-1,-3,29,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-1,1,1,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-1,2,8,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-1,3,3,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,-1,4,4,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,0,-8,7,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,0,-7,14,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,0,-5,34,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,0,-4,27,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,0,-3,2,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,0,1,3,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,0,2,14,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,0,3,18,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,0,4,3,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,1,-7,5,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,1,-6,15,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,1,-5,17,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,1,1,17,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,1,2,8,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,1,3,2,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,1,4,17,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,2,-7,14,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,2,-6,14,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,2,-5,9,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,2,-4,15,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,2,1,3,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,2,2,24,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,2,3,20,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,2,5,5,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,3,-7,11,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,3,-6,2,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,3,-5,1,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,3,-4,33,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,3,-3,2,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,3,2,1,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,3,3,5,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,3,4,1,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,4,-7,3,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,4,-6,4,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,4,-5,6,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,4,-4,11,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,4,-3,1,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,5,-6,5,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,5,-5,17,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,womp_rat,1,10,5,-4,3,attacked first=83;given up on=53;incapacitated a bot=304;killed=230;killed a bot=128
+tatooine,creature,worrt,1,6,-4,-4,4,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,-3,-4,1,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,-3,1,2,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,-3,2,4,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,-2,-6,6,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,-2,-5,3,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,-2,-3,1,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,-1,-7,7,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,-1,-6,5,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,-1,-5,1,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,-1,-4,3,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,0,-6,103,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,0,-4,7,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,0,2,4,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,0,3,4,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,1,-6,2,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,3,-5,3,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,3,-4,1,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,4,-5,3,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,4,-4,10,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,worrt,1,6,5,-6,6,given up on=82;incapacitated a bot=4;killed=92;killed a bot=2
+tatooine,creature,zucca_boar,1,10,-2,-5,1,given up on=2;incapacitated a bot=1;killed=8
+tatooine,creature,zucca_boar,1,10,0,-4,2,given up on=2;incapacitated a bot=1;killed=8
+tatooine,creature,zucca_boar,1,10,1,-7,1,given up on=2;incapacitated a bot=1;killed=8
+tatooine,creature,zucca_boar,1,10,3,-5,5,given up on=2;incapacitated a bot=1;killed=8
+tatooine,creature,zucca_boar,1,10,3,-4,1,given up on=2;incapacitated a bot=1;killed=8
+tatooine,creature,zucca_boar,1,10,4,-5,1,given up on=2;incapacitated a bot=1;killed=8
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,-5,2,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,-4,1,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,-3,0,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,-2,-2,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,-2,3,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,-1,-8,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,-1,-7,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,-1,-6,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,-1,-5,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,0,-4,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,0,2,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,1,-6,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,1,-5,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,1,3,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,1,4,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,3,-4,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,3,3,1,mission lair found=18
+tatooine,lair,tatooine_diseased_bocatt_lair_neutral_medium,,,5,-4,1,mission lair found=18
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-5,0,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-5,1,4,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-5,2,5,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-4,-5,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-4,-4,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-4,0,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-4,1,4,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-4,2,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-4,3,5,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-3,-5,4,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-3,-4,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-3,-3,4,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-3,0,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-3,1,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-3,2,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-3,3,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-2,-6,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-2,-5,4,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-2,-3,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-2,-2,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-2,0,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-2,1,7,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-2,2,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-2,3,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-1,-8,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-1,-7,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-1,-6,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-1,-5,9,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-1,-4,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-1,-3,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-1,-2,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-1,2,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-1,3,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,-1,4,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,0,-8,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,0,-7,7,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,0,-5,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,0,-4,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,0,-3,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,0,1,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,0,3,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,0,4,7,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,1,-7,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,1,-6,7,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,1,-5,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,1,-4,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,1,1,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,1,2,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,1,3,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,1,4,5,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,1,5,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,2,-7,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,2,-6,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,2,-5,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,2,-4,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,2,1,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,2,2,4,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,2,3,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,2,4,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,2,5,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,3,-7,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,3,-6,1,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,3,-4,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,4,-7,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,4,-6,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,4,-5,3,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,4,-4,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,5,-6,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,5,-5,2,mission lair found=184
+tatooine,lair,tatooine_dwarf_nuna_nuna_neutral_medium_boss_01,,,5,-4,3,mission lair found=184
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-5,1,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-5,2,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-4,0,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-4,3,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-3,-5,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-3,0,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-3,1,3,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-2,-5,3,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-2,0,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-2,3,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-1,-7,2,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-1,-5,2,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-1,2,2,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,-1,3,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,0,-8,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,0,-7,2,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,0,-5,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,0,-4,2,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,0,-3,2,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,0,4,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,1,-7,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,1,-5,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,1,1,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,2,-6,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,2,1,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,2,2,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,2,3,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,2,4,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,2,5,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,3,-4,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,3,-3,2,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,4,-7,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,4,-6,1,mission lair found=45
+tatooine,lair,tatooine_eopie_lair_neutral_small,,,5,-6,1,mission lair found=45
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-5,0,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-5,1,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-5,2,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-5,3,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-4,3,4,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-3,-4,3,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-3,-3,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-3,0,3,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-3,2,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-3,4,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-2,-7,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-2,-6,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-2,-5,3,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-2,-3,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-2,-2,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-2,1,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-2,2,3,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-2,3,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-1,-8,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-1,-7,3,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-1,-6,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-1,-5,4,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-1,-4,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-1,-3,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-1,-2,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-1,1,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-1,2,3,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-1,3,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,-1,4,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,0,-7,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,0,-4,5,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,0,-3,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,0,1,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,0,2,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,0,3,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,0,4,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,1,-7,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,1,-6,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,1,-5,6,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,1,-4,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,1,1,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,1,4,5,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,1,5,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,2,-6,3,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,2,-5,3,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,2,-4,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,2,1,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,2,2,4,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,2,3,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,3,-7,5,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,3,-4,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,3,-3,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,3,2,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,3,4,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,4,-7,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,4,-6,1,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,4,-4,2,mission lair found=116
+tatooine,lair,tatooine_gorg_lair_neutral_small,,,5,-6,3,mission lair found=116
+tatooine,lair,tatooine_jawa_outpost_neutral_medium_theater,,,0,-5,1,mission lair found=4
+tatooine,lair,tatooine_jawa_outpost_neutral_medium_theater,,,0,4,1,mission lair found=4
+tatooine,lair,tatooine_jawa_outpost_neutral_medium_theater,,,1,-7,1,mission lair found=4
+tatooine,lair,tatooine_jawa_outpost_neutral_medium_theater,,,4,-5,1,mission lair found=4
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-5,0,2,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-5,1,11,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-5,2,9,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-5,3,5,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-4,-5,1,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-4,-4,4,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-4,-3,2,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-4,0,3,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-4,1,3,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-4,2,3,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-4,3,7,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-4,4,2,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-3,-5,13,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-3,-4,9,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-3,-3,12,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-3,0,8,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-3,1,2,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-3,2,2,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-3,3,12,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-3,4,1,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-2,-7,9,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-2,-6,18,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-2,-5,10,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-2,-3,6,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-2,-2,2,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-2,0,3,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-2,1,6,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-2,2,11,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-2,3,3,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-1,-8,2,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-1,-7,13,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-1,-6,9,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-1,-5,21,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-1,-4,9,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-1,-3,10,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-1,-2,1,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-1,1,1,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-1,2,9,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-1,3,5,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,-1,4,1,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,0,-8,2,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,0,-7,10,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,0,-6,1,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,0,-5,15,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,0,-4,17,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,0,-3,4,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,0,1,4,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,0,2,5,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,0,3,4,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,0,4,5,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,1,-7,9,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,1,-6,9,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,1,-5,19,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,1,1,7,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,1,2,2,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,1,3,3,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,1,4,6,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,1,5,1,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,2,-7,6,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,2,-6,13,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,2,-5,8,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,2,-4,9,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,2,1,7,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,2,2,10,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,2,3,10,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,2,4,2,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,3,-7,5,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,3,-6,2,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,3,-4,6,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,3,-3,2,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,3,2,3,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,4,-7,4,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,4,-6,7,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,4,-5,4,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,4,-4,6,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,5,-6,7,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,5,-5,8,mission lair found=504
+tatooine,lair,tatooine_kreetle_lair_neutral_small,,,5,-4,2,mission lair found=504
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-5,0,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-5,1,9,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-5,2,8,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-5,3,2,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-4,-5,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-4,-4,2,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-4,-3,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-4,0,10,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-4,1,8,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-4,2,6,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-4,3,9,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-3,-6,2,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-3,-5,9,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-3,-4,10,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-3,-3,9,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-3,-2,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-3,0,8,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-3,1,3,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-3,3,11,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-3,4,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-2,-7,5,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-2,-6,10,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-2,-5,18,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-2,-3,10,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-2,-2,5,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-2,0,2,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-2,1,7,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-2,2,7,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-2,3,6,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-1,-7,9,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-1,-6,9,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-1,-5,17,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-1,-4,12,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-1,-3,16,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-1,-2,4,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-1,1,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-1,2,4,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-1,3,11,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,-1,4,4,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,0,-7,14,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,0,-6,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,0,-5,6,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,0,-4,8,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,0,-3,2,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,0,1,9,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,0,2,7,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,0,3,8,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,0,4,7,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,1,-7,5,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,1,-6,10,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,1,-5,13,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,1,-4,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,1,1,8,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,1,2,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,1,3,2,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,1,4,17,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,1,5,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,2,-7,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,2,-6,10,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,2,-5,6,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,2,-4,7,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,2,1,3,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,2,2,13,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,2,3,3,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,3,-7,10,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,3,-6,4,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,3,-4,12,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,3,-3,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,3,2,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,3,3,4,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,4,-7,3,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,4,-6,13,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,4,-5,5,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,4,-4,6,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,4,-3,1,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,5,-6,5,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,5,-5,7,mission lair found=505
+tatooine,lair,tatooine_kreetle_over_death_neutral_medium_boss_01,,,5,-4,2,mission lair found=505
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,-4,-4,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,-3,-4,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,-3,3,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,-3,4,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,-2,-5,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,-1,-7,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,-1,-5,3,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,-1,-3,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,0,-4,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,0,1,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,0,2,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,1,-7,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,1,-6,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,1,-5,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,1,4,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,2,-6,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,2,1,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,2,2,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,2,3,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,2,5,1,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,3,-7,2,mission lair found=25
+tatooine,lair,tatooine_rockmite_click_neutral_small,,,5,-5,1,mission lair found=25
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-5,2,3,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-4,1,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-4,3,2,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-3,-5,3,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-3,-4,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-3,1,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-2,-6,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-2,-5,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-2,-3,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-2,-2,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-2,1,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-2,2,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-2,3,2,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-1,-8,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-1,-5,3,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-1,-4,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-1,-3,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-1,2,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,-1,4,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,0,-8,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,0,-7,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,0,-4,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,1,-6,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,1,-5,2,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,1,-4,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,1,1,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,1,4,3,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,2,-6,3,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,2,-5,2,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,2,-4,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,2,1,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,2,3,2,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,3,-7,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,3,-4,2,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,3,2,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,4,-7,2,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,4,-6,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,4,-5,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,4,-4,1,mission lair found=57
+tatooine,lair,tatooine_sevorrt_lair_neutral_medium,,,5,-6,1,mission lair found=57
+tatooine,lair,tatooine_spice_fiend_neutral_small_theater,,,-5,3,1,mission lair found=12
+tatooine,lair,tatooine_spice_fiend_neutral_small_theater,,,-2,-5,1,mission lair found=12
+tatooine,lair,tatooine_spice_fiend_neutral_small_theater,,,-2,1,1,mission lair found=12
+tatooine,lair,tatooine_spice_fiend_neutral_small_theater,,,-2,3,1,mission lair found=12
+tatooine,lair,tatooine_spice_fiend_neutral_small_theater,,,-1,-6,1,mission lair found=12
+tatooine,lair,tatooine_spice_fiend_neutral_small_theater,,,-1,-5,1,mission lair found=12
+tatooine,lair,tatooine_spice_fiend_neutral_small_theater,,,-1,-4,1,mission lair found=12
+tatooine,lair,tatooine_spice_fiend_neutral_small_theater,,,0,-4,1,mission lair found=12
+tatooine,lair,tatooine_spice_fiend_neutral_small_theater,,,1,2,1,mission lair found=12
+tatooine,lair,tatooine_spice_fiend_neutral_small_theater,,,2,-5,1,mission lair found=12
+tatooine,lair,tatooine_spice_fiend_neutral_small_theater,,,3,3,1,mission lair found=12
+tatooine,lair,tatooine_spice_fiend_neutral_small_theater,,,5,-7,1,mission lair found=12
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-5,0,7,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-5,1,5,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-5,2,6,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-5,3,3,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-4,-5,2,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-4,-4,2,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-4,-3,1,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-4,0,9,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-4,1,5,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-4,2,3,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-4,3,8,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-4,4,1,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-3,-6,2,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-3,-5,10,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-3,-4,4,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-3,-3,11,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-3,0,3,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-3,1,1,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-3,2,4,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-3,3,11,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-3,4,1,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-2,-7,7,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-2,-6,18,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-2,-5,12,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-2,-3,7,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-2,-2,3,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-2,0,2,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-2,1,9,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-2,2,9,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-2,3,5,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-1,-8,1,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-1,-7,4,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-1,-6,4,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-1,-5,20,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-1,-4,12,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-1,-3,8,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-1,2,8,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-1,3,6,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,-1,4,3,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,0,-8,4,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,0,-7,6,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,0,-5,11,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,0,-4,18,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,0,-3,1,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,0,1,5,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,0,2,6,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,0,3,3,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,0,4,4,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,1,-7,11,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,1,-6,10,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,1,-5,9,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,1,-4,2,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,1,1,4,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,1,2,4,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,1,3,2,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,1,4,16,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,1,5,2,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,2,-7,2,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,2,-6,11,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,2,-5,10,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,2,-4,8,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,2,1,3,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,2,2,6,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,2,3,14,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,2,4,3,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,2,5,1,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,3,-7,6,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,3,-6,5,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,3,-4,8,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,3,-3,3,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,3,2,1,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,3,3,3,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,3,4,1,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,3,5,1,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,4,-7,8,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,4,-6,11,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,4,-5,6,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,4,-4,20,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,5,-6,10,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,5,-5,7,mission lair found=508
+tatooine,lair,tatooine_tatooine_mynock_lair_neutral_small,,,5,-4,5,mission lair found=508
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-5,0,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-5,1,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-5,2,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-5,3,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-4,-4,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-4,0,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-4,3,4,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-4,4,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-3,-5,4,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-3,-4,3,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-3,-3,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-3,1,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-3,2,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-3,3,3,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-2,-7,3,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-2,-6,4,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-2,-5,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-2,-3,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-2,0,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-2,1,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-1,-7,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-1,-5,4,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-1,-4,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-1,2,3,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-1,3,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,-1,4,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,0,-8,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,0,-7,5,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,0,-5,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,0,1,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,0,2,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,0,3,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,0,4,3,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,1,-7,5,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,1,-6,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,1,1,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,1,4,4,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,2,-6,3,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,2,-5,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,2,3,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,3,-7,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,3,-4,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,4,-6,4,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,4,-4,2,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,5,-6,1,mission lair found=98
+tatooine,lair,tatooine_trandosian_slaver_neutral_medium_theater,,,5,-4,1,mission lair found=98
+tatooine,lair,tatooine_weequay_outpost_neutral_large_theater,,,-1,2,1,mission lair found=1
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-5,1,10,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-5,2,10,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-5,3,6,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-4,-5,1,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-4,-4,5,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-4,0,5,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-4,1,5,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-4,2,4,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-4,3,12,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-3,-6,4,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-3,-5,12,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-3,-4,15,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-3,-3,12,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-3,0,6,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-3,1,10,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-3,2,1,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-3,3,11,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-3,4,2,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-2,-7,5,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-2,-6,13,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-2,-5,14,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-2,-3,10,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-2,-2,2,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-2,0,4,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-2,1,10,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-2,2,8,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-2,3,7,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-1,-8,1,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-1,-7,8,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-1,-6,7,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-1,-5,15,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-1,-4,8,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-1,-3,10,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-1,-2,1,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-1,1,1,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-1,2,8,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-1,3,7,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,-1,4,2,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,0,-8,3,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,0,-7,13,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,0,-5,10,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,0,-4,17,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,0,-3,1,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,0,1,7,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,0,2,11,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,0,3,5,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,0,4,7,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,1,-7,8,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,1,-6,8,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,1,-5,18,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,1,1,12,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,1,2,1,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,1,3,6,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,1,4,11,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,1,5,1,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,2,-7,4,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,2,-6,9,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,2,-5,7,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,2,-4,9,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,2,1,3,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,2,2,10,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,2,3,9,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,2,4,1,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,3,-7,6,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,3,-6,3,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,3,-4,21,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,3,-3,3,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,3,2,2,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,3,3,7,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,3,4,2,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,4,-7,4,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,4,-6,6,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,4,-5,5,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,4,-4,10,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,4,-3,1,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,5,-6,3,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,5,-5,8,mission lair found=549
+tatooine,lair,tatooine_womprat_womprat_neutral_medium_boss_01,,,5,-4,5,mission lair found=549
