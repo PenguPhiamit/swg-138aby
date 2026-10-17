@@ -1,0 +1,78 @@
+diff --git a/MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua b/MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua
+--- a/MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua
++++ b/MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua
+@@ -643,6 +643,31 @@
+ 	}
+ }
+ 
++hutta = {
++	-- Sandbox: Nal Hutta first look (PL-03, 16 Oct 2026; outputs/Fable-species/s7-hutt/nal-hutta-first-look.md).
++	-- Darklight's planet from Mod the Galaxy (terrain/hutta.trn, snapshot/hutta.ws; credit in
++	-- Community-content/CREDITS-and-sources.txt): one town, Bilbousa, on a flat shelf at 80 m above the 75 m swamp.
++	-- Reached from Tatooine (datatables/travel/travel.iff in local_planets.tre; placeholder fares). No GCW yet.
++	weatherEnabled = 1,
++	gcwEnabled = 0,
++
++	planetTravelPoints = {
++		-- the Tatooine starport (snapshot node 390000001 at -767 1795, yaw 180): the landing pad sits at the same
++		-- offset from the building as at Mos Eisley, Bestine, Mos Espa and Mos Entha (21.0, 18.7 in building space)
++		{name = "Bilbousa Starport", x = -788.0, z = 80, y = 1776.3, interplanetaryTravelAllowed = 1, incomingTravelAllowed = 1, landingRange = 6},
++	},
++
++	badgeAreas = {
++	},
++
++	navAreas = {
++		{"hutta_bilbousa", -747, 1556, 400},
++	},
++
++	planetObjects = {
++	}
++}
++
+ tutorial = {
+ 	weatherEnabled = 0,
+ 	gcwEnabled = 0,
+diff --git a/MMOCoreORB/bin/scripts/managers/weather_manager.lua b/MMOCoreORB/bin/scripts/managers/weather_manager.lua
+--- a/MMOCoreORB/bin/scripts/managers/weather_manager.lua
++++ b/MMOCoreORB/bin/scripts/managers/weather_manager.lua
+@@ -256,6 +256,18 @@
+ 	weatherStability = 75, -- Range 0 - 100, Higher = Less weather changes, Overall better weather. Ossus: regrown forests, rain
+ }
+ 
++-----------------
++--   Nal Hutta
++-----------------
++hutta = {
++
++	defaultWeather = 1, -- Light rain
++
++	averageWeatherDuration = 2400, -- In seconds
++
++	weatherStability = 55, -- Range 0 - 100, Higher = Less weather changes, Overall better weather. Nal Hutta: humid swamp, frequent rain
++}
++
+ 
+ 
+ 
+diff --git a/MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua b/MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua
+new file mode 100644
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua
+@@ -0,0 +1,16 @@
++require("scripts.managers.planet.regions")
++
++-- Nal Hutta first look (PL-03, 16 Oct 2026). Darklight's Bilbousa: the snapshot's town fills a 480 x 600 m box
++-- (x -989..-505, y 1260..1853); the city region is centred on that box, so its r 400 reaches every corner, and the
++-- no-build circle keeps r 600. No spawn areas anywhere yet: nothing spawns on Nal Hutta until its fauna pass.
++hutta_regions = {
++	-- No Build Zones
++	{"northedge_hutta_nobuild", -8000, 7640, {RECTANGLE, 8000, 8000}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"westedge_hutta_nobuild", -8000, -7640, {RECTANGLE, -7640, 7640}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"southedge_hutta_nobuild", -8000, -8000, {RECTANGLE, 8000, -7640}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"eastedge_hutta_nobuild", 7640, -7640, {RECTANGLE, 7999, 7640}, NOSPAWNAREA + NOBUILDZONEAREA},
++
++	-- Bilbousa, the capital (the client names it from datatables/clientregion/hutta.iff: -746 1645, r 300)
++	{"@hutta_region_names:bilbousa", -747, 1556, {CIRCLE, 400}, CITY + NOSPAWNAREA},
++	{"hutta_bilbousa_nobuild", -747, 1556, {CIRCLE, 600}, NOBUILDZONEAREA},
++}

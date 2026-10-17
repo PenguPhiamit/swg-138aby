@@ -1,0 +1,14 @@
+diff --git a/outputs/tools/test_galaxy.py b/outputs/tools/test_galaxy.py
+--- a/outputs/tools/test_galaxy.py
++++ b/outputs/tools/test_galaxy.py
+@@ -25,7 +25,9 @@
+ DEV_SCRIPTS = Path('/opt/swg/Core3-dev/MMOCoreORB/bin/scripts')
+ DEV_CORE3 = Path('/opt/swg/Core3-dev/MMOCoreORB/bin/core3')
+ LOCAL_TRE = Path('/opt/swg/tre/local_planets.tre')  # test-only archive; live's config doesn't list it
+-TEST_ZONES = ['hoth', 'ossus']  # zones whose client data ships in LOCAL_TRE (added only when it exists)
++TEST_ZONES = ['hoth', 'ossus', 'hutta']  # zones whose client data ships in LOCAL_TRE (added only when it exists)
++# hutta (Nal Hutta, PL-03) has no resources yet: it is not in resource_manager.lua activeZones, so the backfill line below
++# names it and the server logs one harmless 'backfillZones: hutta is not in activeZones, ignored' warning.
+ # MTG's archives, in the client's priority order (SWG-client/swgemu_live.cfg). The live config-local.lua already appends
+ # them after stock (checked 15 Oct 03:30; an earlier check that said otherwise was a shell-quoting mistake), so start()
+ # only adds any it lacks.

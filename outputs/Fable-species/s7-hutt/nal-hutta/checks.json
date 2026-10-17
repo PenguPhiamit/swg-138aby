@@ -1,0 +1,212 @@
+{
+ "base": {
+  "path": "work/nal-hutta/base-6ff21312.tre",
+  "bytes": 4662363,
+  "sha256": "6ff2131229b3e917b8a274f334013f1534fa1a555d18080f1c595bb23141564f",
+  "entries": 176
+ },
+ "out": {
+  "path": "work/nal-hutta/local_planets-nalhutta.tre",
+  "bytes": 4663448,
+  "sha256": "d804d98ab7d367932a2c8dc459e82e80a578df314b5670611c619a3d42a7a68d",
+  "entries": 180
+ },
+ "untouched_identical": 171,
+ "changed": [
+  "datatables/player/waypoint_planets.iff",
+  "datatables/travel/travel.iff",
+  "string/en/planet_n.stf",
+  "ui/ui_planet_map.inc",
+  "ui/ui_ticketpurchase.inc"
+ ],
+ "new": [
+  "datatables/loading/hutta.iff",
+  "string/en/hutta_region_names.stf",
+  "string/en/loading/hutta.stf",
+  "string/en/loading/hutta_n.stf"
+ ],
+ "dropped": [],
+ "client_already_has": {
+  "terrain/hutta.trn": "mtg_planets.tre",
+  "snapshot/hutta.ws": "mtg_patch_022.tre",
+  "terrain/environment/hutta.iff": "mtg_patch_022.tre",
+  "terrain/environment/nalhutta.iff": "mtg_patch_022.tre",
+  "datatables/environment/hutta.iff": "mtg_planets.tre",
+  "texture/ui_map_nalhutta.dds": "mtg_patch_022.tre",
+  "texture/ui_planet_sel_nalhutta.dds": "mtg_patch_022.tre",
+  "appearance/ui_planet_sel_nalhutta.apt": null,
+  "appearance/ui_planet_sel_rori.apt": "data_other_00.tre",
+  "texture/loading/generic/generic_swg.dds": "data_texture_03.tre",
+  "clientregion_rows": [
+   [
+    "@hutta_region_names:bilbousa",
+    -746.0,
+    1645.0,
+    300.0
+   ]
+  ],
+  "planet_crc_has": [
+   "hutta",
+   "nalhutta"
+  ],
+  "hutta_strings_in_client": []
+ },
+ "placeholders": {
+  "tatooine_to_hutta_fare": 3000,
+  "hutta_to_tatooine_fare": 1750,
+  "hutta_to_hutta_fare": 100,
+  "galaxy_map_spot": [
+   425,
+   355
+  ],
+  "globe": "ui_planet_sel_rori.apt"
+ },
+ "report": {
+  "travel": {
+   "columns": [
+    "Planet",
+    "corellia",
+    "dantooine",
+    "dathomir",
+    "endor",
+    "lok",
+    "naboo",
+    "rori",
+    "talus",
+    "tatooine",
+    "yavin4",
+    "hoth",
+    "ossus",
+    "hutta"
+   ],
+   "hutta_row": {
+    "Planet": "hutta",
+    "tatooine": 1750,
+    "hutta": 100
+   },
+   "into_hutta": {
+    "tatooine": 3000,
+    "hutta": 100
+   }
+  },
+  "planet_n": {
+   "hutta": "Nal Hutta",
+   "keys": 65
+  },
+  "waypoint_planets": {
+   "rows": [
+    "corellia",
+    "dantooine",
+    "dathomir",
+    "default",
+    "endor",
+    "lok",
+    "naboo",
+    "rori",
+    "talus",
+    "tatooine",
+    "yavin4",
+    "hoth",
+    "ossus",
+    "hutta",
+    "space_corellia",
+    "space_dantooine",
+    "space_dathomir",
+    "space_endor",
+    "space_lok",
+    "space_naboo",
+    "space_tatooine",
+    "space_yavin4",
+    "space_tatooine_2",
+    "space_corellia_2",
+    "space_naboo_2",
+    "space_light1",
+    "space_heavy1"
+   ],
+   "globe": "ui_planet_sel_rori.apt"
+  },
+  "ui": {
+   "inserted": {
+    "DataSource": 8,
+    "Button": 11,
+    "CuiWidget3dObjectListViewer": 20,
+    "Page": 20,
+    "Text": 19,
+    "Data line": 1
+   },
+   "ticket_lines_added": 79,
+   "planet_map_lines_added": 22,
+   "after": "Ossus",
+   "bytes_kept": true,
+   "bare_cr_unchanged": true,
+   "planets": [
+    "Corellia",
+    "Dantooine",
+    "Dathomir",
+    "Endor",
+    "Hoth",
+    "Ossus",
+    "Hutta",
+    "Lok",
+    "Naboo",
+    "Rori",
+    "Talus",
+    "Tatooine",
+    "Yavin4"
+   ]
+  }
+ },
+ "new_texts": {
+  "string/en/hutta_region_names.stf": [
+   [
+    "bilbousa",
+    "Bilbousa"
+   ]
+  ],
+  "string/en/loading/hutta.stf": [
+   [
+    "hutta",
+    "Nal Hutta, in the Y'Toub system, is the throne world of the Hutt kajidics. Centuries of industry and neglect have left it a warm, stinking swamp under a yellow haze, with Nar Shaddaa hanging in its sky."
+   ],
+   [
+    "bilbousa",
+    "The capital squats on a shelf of firm ground above the brown water. Every kajidic of note keeps a tower here, and every visitor pays someone for the privilege of leaving."
+   ],
+   [
+    "swamps",
+    "Beyond the city the land sinks into brown, warm water and rotting reeds. Little that lives out there is friendly, and none of it is clean."
+   ]
+  ],
+  "string/en/loading/hutta_n.stf": [
+   [
+    "hutta",
+    "Nal Hutta"
+   ],
+   [
+    "bilbousa",
+    "Bilbousa"
+   ],
+   [
+    "swamps",
+    "The Hutta Lowlands"
+   ]
+  ]
+ },
+ "loading_rows": [
+  [
+   "@loading/hutta:hutta",
+   "loading/generic/generic_swg",
+   "@loading/hutta_n:hutta"
+  ],
+  [
+   "@loading/hutta:bilbousa",
+   "loading/generic/generic_swg",
+   "@loading/hutta_n:bilbousa"
+  ],
+  [
+   "@loading/hutta:swamps",
+   "loading/generic/generic_swg",
+   "@loading/hutta_n:swamps"
+  ]
+ ]
+}
