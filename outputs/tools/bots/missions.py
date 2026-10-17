@@ -280,12 +280,16 @@ def nearest_terminal(bot, ttype, radius=3000, at=None):
     return min(hits, key=lambda o: o.get('distance', 0)) if hits else None
 
 
-def at_terminal(g, bot, ttype, slot=0, radius=3000, at=None):
-    """Find the nearest terminal of ttype and walk to it. Returns it, or None after a failed check."""
+def at_terminal(g, bot, ttype, slot=0, radius=3000, at=None, team=None):
+    """Find the nearest terminal of ttype and walk to it; from over 300 m away a guarded walk first, with team (bot
+    and its guards) when given (17 Oct 12:36 PM: Dova, 1 km out after a survey, was incapacitated walking back).
+    Returns it, or None after a failed check."""
     spot = nearest_terminal(bot, ttype, radius, at)
     if not g.check(f'{ttype}: a terminal within {radius} m of {bot.first}', spot,
                    {k: spot.get(k) for k in ('distance', 'cell', 'building')} if spot else whereabouts(bot)):
         return None
+    if (spot.get('distance') or 0) > 300:
+        guarded_walk(g, team or [bot], {'x': spot['x'], 'y': spot['y'] - 8}, f'{ttype}: to the terminal')
     trip = approach(bot, spot, slot)
     if not g.check(f'{ttype}: {bot.first} reaches the terminal', arrived(trip),
                    {k: trip.get(k) for k in ('arrived', 'error', 'seconds')} if isinstance(trip, dict) else trip):

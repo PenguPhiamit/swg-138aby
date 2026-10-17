@@ -21,7 +21,7 @@ def run(g):
         g.note('Dova profession: ' + str(dova.profession('crafting_artisan'))[:160])
     g.note('Varo gear: ' + str(varo.gear('basic'))[:120])
     divisor = M.group_size(g, dova)
-    terminal = M.at_terminal(g, dova, 'artisan', at=M.search_point(g, dova))  # Varo joins her for the survey walk
+    terminal = M.at_terminal(g, dova, 'artisan', at=M.search_point(g, dova), team=[dova, varo])  # Varo guards her
     if not terminal:
         return
     listed = M.offers(dova, terminal, 'artisan')
