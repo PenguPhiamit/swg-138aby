@@ -190,4 +190,4 @@ address order, the idle rules for this PC and for another PC, a skewed clock on 
 wsl -d Debian -u swgemu -- python3 /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/tools/agents/local/test_ollama_url.py
 ```
 
-Not tested: a real second PC (it wasn't set up when this was written).
+A real second PC, 17 Oct 2026, about 4:20 AM: the friend's PC with Ollama 0.40.5 (installed with Ollama's own `install.ps1`, which checks the installer's Ollama Inc. signature) and `qwen3:8b`. Steps 1-6 as above; the firewall rule needs an administrator PowerShell ("Access is denied" otherwise). `/api/tags` answered from Windows and from WSL, `ollama_url.py` reports "another PC", and `idle_research.py status` counts the quiet minutes. `ollama-ctx.txt` went from 16384 to 32768 for the 12 GB card. The first topic's report is the speed test.
