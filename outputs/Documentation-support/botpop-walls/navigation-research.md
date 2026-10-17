@@ -144,3 +144,26 @@ Bots are player creatures (`PlayerObject` ghosts), not `AiAgent`s. AiAgent movem
    - the centre: medics and entertainers should be spread over a 30-38 m ring.
 3. Check the log for mission requests failing with "too far away". There should be none.
 4. The stats line (`steps … ms per second`) should not change.
+
+## Option 2 drafted: `botpop-crossings.patch` (16 Oct, about 9 PM)
+
+The patch is against Core3-dev HEAD `b6059d7a` and changes `BotPopLaunchBrain.h` only, inside `planRoute`. It passes `git apply --check` and the same syntax-only clang compile as before. It is **untested in game**.
+
+**How it works:**
+- `planRoute` takes the open stretch of each route: from the start's mesh edge, or the start, to the goal's mesh edge, or the goal.
+- It samples that stretch every 25 m with `getInRangeNavMeshes`.
+- For each other mesh the line enters, it finds the entry and exit points 2 m inside the edge, using the same 12-halving `edge` search the end legs use, and adds a `findPath` leg between them. The ground between meshes stays straight.
+- It handles at most 4 crossings per route.
+- **Budget:** a route spends one unit of `ROUTES_PER_PASS` for its ends and one per crossing. If there aren't enough units left, it spends none and is deferred, as before.
+
+**CPU estimate (not measured):**
+- At run 14's rate of about 19 routes a second, plus straight calls (hunter legs, and outdoor chases every 2 s), I expect a few thousand point queries a second.
+  - A 3 km hunter leg is 120 samples; an 8 km explorer leg is up to 320.
+  - Each query is a zone read lock plus a quadtree lookup, a few µs.
+- Total: about 5-10 ms of CPU per second. That is about 1% of run 14's 0.76 s per second for bot steps.
+- Each crossing adds one `findPath`, under the budget. Watch `routes N (M deferred)`: a rise in `deferred` means the cap of 200 units is binding.
+
+**What a player should see:**
+- Hunters and explorers crossing a POI that has a mesh, or another town, on their way out should go round its buildings and walls, not through them.
+- Examples: a Tatooine camp from the `navAreas` list, or a hunter from Mos Eisley crossing Bestine's edge.
+- Nothing changes in open country, or for POIs without a mesh. Option 4 (more POI meshes) is what widens the coverage.

@@ -1,0 +1,148 @@
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+index 1850c27..8071c68 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+@@ -62,9 +62,11 @@ inline bool BotPopManager::stepToward(CreatureObject* bot, Zone* zone, float tx,
+ // The route from `from` to (gx, gy), round the buildings and walls of a city at either end, into `out` (the points
+ // after `from`, the goal last). PathFinderManager::findPath looks for navmeshes only at a leg's midpoint
+ // (findPathFromWorldToWorld), so a long leg out of a city or into one finds none and comes back as the straight line;
+-// here each end that lies in a navmesh gets its own leg, between that end and the mesh's edge, and the open ground
+-// between stays straight. Returns 1 for a navmesh route, 0 for the straight line (no navmesh at either end: two area
+-// lookups, nothing else), -1 when this pass's ROUTES_PER_PASS are spent (`out` empty: try again next step).
++// here each end that lies in a navmesh gets its own leg, between that end and the mesh's edge. The open ground between
++// is sampled every 25 m for the meshes it crosses (a POI, another town), and each of those gets a leg from where the
++// line enters it to where it leaves; the rest stays straight. Returns 1 for a navmesh route, 0 for the straight line
++// (no navmesh on the way: area lookups, nothing else), -1 when this pass's ROUTES_PER_PASS are spent (`out` empty: try
++// again next step). A route costs one unit of the budget for its ends and one for each mesh crossed.
+ inline int BotPopManager::planRoute(Zone* zone, const Vector3& from, float gx, float gy, std::vector<Vector3>& out) {
+ 	out.clear();
+ 
+@@ -74,18 +76,6 @@ inline int BotPopManager::planRoute(Zone* zone, const Vector3& from, float gx, f
+ 
+ 	Vector3 goal(gx, gy, floorNear(zone, gx, gy, std::nanf("")));
+ 
+-	if (atStart.size() == 0 && atGoal.size() == 0) {
+-		out.push_back(goal);
+-		return 0;
+-	}
+-
+-	if (routeBudget.fetch_sub(1) <= 0) {
+-		++routesDeferred;
+-		return -1;
+-	}
+-
+-	++routesPlanned;
+-
+ 	// findPath from a to b, without a (the world -> world path is world points only).
+ 	auto leg = [&](const Vector3& a, const Vector3& b) {
+ 		WorldCoordinates start(a, nullptr);
+@@ -126,25 +116,100 @@ inline int BotPopManager::planRoute(Zone* zone, const Vector3& from, float gx, f
+ 		return Vector3(x, y, floorNear(zone, x, y, std::nanf("")));
+ 	};
+ 
++	// Spends `units` of this pass's budget, or none and false when there aren't that many left.
++	auto spend = [&](int units) {
++		if (routeBudget.fetch_sub(units) < units) {
++			routeBudget += units;
++			++routesDeferred;
++			return false;
++		}
++
++		++routesPlanned;
++		return true;
++	};
++
+ 	for (int i = 0; i < atStart.size(); ++i) {
+ 		if (atStart.get(i)->containsPoint(gx, gy)) { // both ends in one city: the midpoint is in it too
++			if (!spend(1))
++				return -1;
++
+ 			leg(from, goal);
+ 			return 1;
+ 		}
+ 	}
+ 
+-	Vector3 position = from;
++	NavArea* startArea = atStart.size() > 0 ? atStart.get(0).get() : nullptr;
++	NavArea* goalArea = atGoal.size() > 0 ? atGoal.get(0).get() : nullptr;
++
++	// The open ground: from the start's mesh edge (or the start) to the goal's mesh edge (or the goal).
++	Vector3 open0 = startArea != nullptr ? edge(startArea, from, goal) : from;
++	Vector3 open1 = goalArea != nullptr ? edge(goalArea, goal, open0) : goal;
++
++	// The meshes it crosses, at most MAX_CROSSINGS, each as (entry, exit) 2 m inside its edge.
++	static const constexpr float SAMPLE_M = 25.f;
++	static const constexpr int MAX_CROSSINGS = 4;
++	std::vector<std::pair<Vector3, Vector3>> crossings;
++	float sx = open1.getX() - open0.getX(), sy = open1.getY() - open0.getY();
++	float length = std::sqrt(sx * sx + sy * sy);
++	int samples = (int)(length / SAMPLE_M);
++	NavArea* inside = nullptr;
++	Vector3 entry, last = open0;
++
++	for (int i = 1; i <= samples && (int)crossings.size() < MAX_CROSSINGS; ++i) {
++		Vector3 sample(open0.getX() + sx * (i * SAMPLE_M / length), open0.getY() + sy * (i * SAMPLE_M / length), 0);
++		SortedVector<ManagedReference<NavArea*>> here;
++		zone->getInRangeNavMeshes(sample.getX(), sample.getY(), &here, true);
++		NavArea* area = nullptr;
++
++		for (int j = 0; j < here.size(); ++j) { // the mesh it is already in, if it is still in it
++			NavArea* candidate = here.get(j).get();
++
++			if (candidate == startArea || candidate == goalArea)
++				continue;
++
++			if (candidate == inside) {
++				area = inside;
++				break;
++			}
++
++			if (area == nullptr)
++				area = candidate;
++		}
++
++		if (inside != nullptr && area != inside) { // out of it: into the open, or straight into the next mesh
++			last = edge(inside, entry, sample);
++			crossings.push_back(std::make_pair(entry, last));
++			inside = nullptr;
++		}
++
++		if (inside == nullptr && area != nullptr && (int)crossings.size() < MAX_CROSSINGS) {
++			inside = area;
++			entry = edge(area, sample, last);
++		}
++	}
++
++	if (inside != nullptr)
++		crossings.push_back(std::make_pair(entry, edge(inside, entry, open1)));
++
++	if (startArea == nullptr && goalArea == nullptr && crossings.empty()) {
++		out.push_back(goal);
++		return 0;
++	}
++
++	if (!spend((startArea != nullptr || goalArea != nullptr ? 1 : 0) + (int)crossings.size()))
++		return -1;
++
++	if (startArea != nullptr)
++		leg(from, open0);
+ 
+-	if (atStart.size() > 0) {
+-		Vector3 exit = edge(atStart.get(0).get(), from, goal);
+-		leg(from, exit);
+-		position = exit;
++	for (const auto& crossing : crossings) {
++		out.push_back(crossing.first);
++		leg(crossing.first, crossing.second);
+ 	}
+ 
+-	if (atGoal.size() > 0) {
+-		Vector3 entry = edge(atGoal.get(0).get(), goal, position);
+-		out.push_back(entry);
+-		leg(entry, goal);
++	if (goalArea != nullptr) {
++		out.push_back(open1);
++		leg(open1, goal);
+ 	} else {
+ 		out.push_back(goal);
+ 	}
