@@ -1,0 +1,87 @@
+diff --git a/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua b/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua
+index 9ebd931..284fd08 100644
+--- a/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua
++++ b/MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua
+@@ -23,11 +23,11 @@ ossus_regions = {
+ 	{"ossus_cave_north_nobuild", 1376, 5920, {CIRCLE, 120}, NOBUILDZONEAREA},
+ 	-- O7 places with people (PL-01/PL-02; Fable-ossus/o7-build): no herds in the camps, no structures on the props.
+ 	-- None of the six Ossus creatures is aggressive (census of 16 Oct); the circles keep spawns off the NPCs.
+-	{"ossus_library_vaults_nobuild", 2300, 1960, {CIRCLE, 80}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_library_vaults_nobuild", 1940, 2290, {CIRCLE, 80}, NOSPAWNAREA + NOBUILDZONEAREA},
+ 	{"ossus_ysanna_camp_nobuild", -1325, -4950, {CIRCLE, 80}, NOSPAWNAREA + NOBUILDZONEAREA},
+ 	{"ossus_ysanna_circle_nobuild", -980, -5610, {CIRCLE, 60}, NOSPAWNAREA + NOBUILDZONEAREA},
+ 	{"ossus_adega_hamlet_nobuild", -3050, 1100, {CIRCLE, 150}, NOSPAWNAREA + NOBUILDZONEAREA},
+-	{"ossus_kathracite_adit_nobuild", 4600, -321, {CIRCLE, 80}, NOSPAWNAREA + NOBUILDZONEAREA},
++	{"ossus_kathracite_adit_nobuild", 4465, -183, {CIRCLE, 80}, NOSPAWNAREA + NOBUILDZONEAREA},
+ 	{"ossus_imhar_crossing_nobuild", 4470, -530, {CIRCLE, 180}, NOBUILDZONEAREA},
+ 	{"ossus_eocho_watch_nobuild", 290, -6400, {CIRCLE, 50}, NOBUILDZONEAREA},
+ 	-- in the middle of the north open ground: the hole keeps the kirruk packs off the pilot's camp
+diff --git a/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua b/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua
+index 13d2895..2d32e3f 100644
+--- a/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua
++++ b/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua
+@@ -51,12 +51,12 @@ screen(pilot, "who", "Dera Moll. I flew patrols out of a hidden base until Krayt
+ 	{"What do you need?", "part_offer"},
+ 	{"Goodbye.", "bye"},
+ })
+-screen(pilot, "part_offer", "A power coupling. Mine cracked on landing. The foreman at the kathracite adit in Imhar Canyon, Teel, runs heavy haulers, and he'll have a spare that fits. I can't leave the fighter. Will you fetch it?", {
++screen(pilot, "part_offer", "A power coupling. Mine cracked on landing. The foreman at the kathracite adit on the rim of Imhar Canyon, Teel, runs heavy haulers, and he'll have a spare that fits. I can't leave the fighter. Will you fetch it?", {
+ 	{"I'll get it.", "part_accept"},
+ 	{"Not now.", "bye"},
+ })
+-screen(pilot, "part_accept", "Thanks. The adit is east, in the canyon. I've marked it for you. Tell Teel it's for Moll.", {}, true)
+-screen(pilot, "part_waiting", "Teel's at the kathracite adit, in Imhar Canyon. Tell him it's for Moll.", {}, true)
++screen(pilot, "part_accept", "Thanks. The adit is east, up on the canyon rim. I've marked it for you. Tell Teel it's for Moll.", {}, true)
++screen(pilot, "part_waiting", "Teel's at the kathracite adit, on the rim of Imhar Canyon. Tell him it's for Moll.", {}, true)
+ screen(pilot, "part_reward", "That's the one. A day's work and she'll fly. Here, it isn't much, but it's honest pay.", {}, true)
+ screen(pilot, "greet_done", "Nearly ready to fly. When I go, I'll put in a word for you, wherever the Alliance has its people these days.", {}, true)
+ screen(pilot, "bye", "Mind the kirruk out here.", {}, true)
+diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua
+index 95fcbd7..a557b9c 100644
+--- a/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua
++++ b/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua
+@@ -46,7 +46,8 @@ OssusPeople = ScreenPlay:new {
+ 		{ "commoner_technician", 2137.5, 2998.1, 216, "a dig worker", 300 },
+ 		{ "commoner_technician", 2120.7, 3009.0, 306, "a dig worker", 300 },
+ 		-- POI 4 the Great Library vault dig
+-		{ "ossus_vault_archivist", 2302.0, 1987.0, 180 },
++		-- O11b (17 Oct): the vault and the adit moved above the water table with their camps (Fable-ossus/o11-cave-mouths)
++		{ "ossus_vault_archivist", 1942.3, 2317.0, 180 },
+ 		-- POI 5 the Ysanna hunting camp, POI 6 the stone circle
+ 		{ "ossus_ysanna_shaman", -1326.0, -4932.0, 180 },
+ 		{ "hermit", -1321.0, -4953.0, 0, "an Ysanna hunter", 300 },
+@@ -57,8 +58,8 @@ OssusPeople = ScreenPlay:new {
+ 		{ "ossus_hamlet_fisher", -3047.0, 1104.0, 280 },
+ 		{ "farmer", -3060.0, 1094.0, 100, "a fisher", 300 },
+ 		-- POI 9 the kathracite adit
+-		{ "ossus_adit_foreman", 4590.0, -310.0, 138 },
+-		{ "miner", 4596.0, -304.0, 228, "a kathracite miner", 300 },
++		{ "ossus_adit_foreman", 4475.4, -193.1, 315 },
++		{ "miner", 4469.7, -199.4, 45, "a kathracite miner", 300 },
+ 		-- POI 10 the canyon floor under the bridge
+ 		{ "brigand", 4462.0, -536.0, 0, "a canyon raider", 600 },
+ 		{ "brigand", 4476.0, -524.0, 120, "a canyon raider", 600 },
+@@ -88,7 +89,7 @@ OssusPeople = ScreenPlay:new {
+ 	-- the ghostfire quest (owner 17 Oct; outputs/Fable-ossus/o10-ghostfire/README.md). The sites count only after the lead.
+ 	ghostfire = {
+ 		sites = {
+-			{ key = "gfVault", x = 2300.0, y = 1925.0, radius = 20, text = "The mouth of the Great Library vault. Something old is still breathing in the stone." },
++			{ key = "gfVault", x = 1940.3, y = 2255.0, radius = 20, text = "The mouth of the Great Library vault. Something old is still breathing in the stone." },
+ 			{ key = "gfWatch", x = 290.0, y = -6400.0, radius = 25, text = "The Eocho watch ruin. From here the masters could see the whole valley." },
+ 			{ key = "gfCircle", x = -980.0, y = -5610.0, radius = 25, text = "The Ysanna stone circle. The stones hum faintly when the wind drops." },
+ 		},
+@@ -100,12 +101,12 @@ OssusPeople = ScreenPlay:new {
+ 
+ 	waypoints = {
+ 		hunt = { -980, -5555, "Kirruk by the stone circle" },
+-		adit = { 4590, -310, "Kathracite adit (Teel)" },
++		adit = { 4475, -193, "Kathracite adit (Teel)" },
+ 		pilot = { -1476, 5194, "Lieutenant Moll's fighter" },
+ 		roadStart = { 116, -3012, "Memorial road: first stone" },
+ 		roadMiddle = { 892, -31, "Memorial road: middle stone" },
+ 		roadRing = { 1960, 2780, "Memorial road: the ring" },
+-		gfVault = { 2300, 1925, "Old Jedi site: the vault mouth" },
++		gfVault = { 1940, 2255, "Old Jedi site: the vault mouth" },
+ 		gfWatch = { 290, -6400, "Old Jedi site: the Eocho watch ruin" },
+ 		gfCircle = { -980, -5610, "Old Jedi site: the Ysanna stone circle" },
+ 	},

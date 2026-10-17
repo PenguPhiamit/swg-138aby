@@ -51,12 +51,12 @@ screen(pilot, "who", "Dera Moll. I flew patrols out of a hidden base until Krayt
 	{"What do you need?", "part_offer"},
 	{"Goodbye.", "bye"},
 })
-screen(pilot, "part_offer", "A power coupling. Mine cracked on landing. The foreman at the kathracite adit in Imhar Canyon, Teel, runs heavy haulers, and he'll have a spare that fits. I can't leave the fighter. Will you fetch it?", {
+screen(pilot, "part_offer", "A power coupling. Mine cracked on landing. The foreman at the kathracite adit on the rim of Imhar Canyon, Teel, runs heavy haulers, and he'll have a spare that fits. I can't leave the fighter. Will you fetch it?", {
 	{"I'll get it.", "part_accept"},
 	{"Not now.", "bye"},
 })
-screen(pilot, "part_accept", "Thanks. The adit is east, in the canyon. I've marked it for you. Tell Teel it's for Moll.", {}, true)
-screen(pilot, "part_waiting", "Teel's at the kathracite adit, in Imhar Canyon. Tell him it's for Moll.", {}, true)
+screen(pilot, "part_accept", "Thanks. The adit is east, up on the canyon rim. I've marked it for you. Tell Teel it's for Moll.", {}, true)
+screen(pilot, "part_waiting", "Teel's at the kathracite adit, on the rim of Imhar Canyon. Tell him it's for Moll.", {}, true)
 screen(pilot, "part_reward", "That's the one. A day's work and she'll fly. Here, it isn't much, but it's honest pay.", {}, true)
 screen(pilot, "greet_done", "Nearly ready to fly. When I go, I'll put in a word for you, wherever the Alliance has its people these days.", {}, true)
 screen(pilot, "bye", "Mind the kirruk out here.", {}, true)

@@ -42,7 +42,8 @@ OssusPeople = ScreenPlay:new {
 		{ "commoner_technician", 2137.5, 2998.1, 216, "a dig worker", 300 },
 		{ "commoner_technician", 2120.7, 3009.0, 306, "a dig worker", 300 },
 		-- POI 4 the Great Library vault dig
-		{ "ossus_vault_archivist", 2302.0, 1987.0, 180 },
+		-- O11b (17 Oct): the vault and the adit moved above the water table with their camps (Fable-ossus/o11-cave-mouths)
+		{ "ossus_vault_archivist", 1942.3, 2317.0, 180 },
 		-- POI 5 the Ysanna hunting camp, POI 6 the stone circle
 		{ "ossus_ysanna_shaman", -1326.0, -4932.0, 180 },
 		{ "hermit", -1321.0, -4953.0, 0, "an Ysanna hunter", 300 },
@@ -53,8 +54,8 @@ OssusPeople = ScreenPlay:new {
 		{ "ossus_hamlet_fisher", -3047.0, 1104.0, 280 },
 		{ "farmer", -3060.0, 1094.0, 100, "a fisher", 300 },
 		-- POI 9 the kathracite adit
-		{ "ossus_adit_foreman", 4590.0, -310.0, 138 },
-		{ "miner", 4596.0, -304.0, 228, "a kathracite miner", 300 },
+		{ "ossus_adit_foreman", 4475.4, -193.1, 315 },
+		{ "miner", 4469.7, -199.4, 45, "a kathracite miner", 300 },
 		-- POI 10 the canyon floor under the bridge
 		{ "brigand", 4462.0, -536.0, 0, "a canyon raider", 600 },
 		{ "brigand", 4476.0, -524.0, 120, "a canyon raider", 600 },
@@ -83,7 +84,7 @@ OssusPeople = ScreenPlay:new {
 
 	waypoints = {
 		hunt = { -980, -5555, "Kirruk by the stone circle" },
-		adit = { 4590, -310, "Kathracite adit (Teel)" },
+		adit = { 4475, -193, "Kathracite adit (Teel)" },
 		pilot = { -1476, 5194, "Lieutenant Moll's fighter" },
 		roadStart = { 116, -3012, "Memorial road: first stone" },
 		roadMiddle = { 892, -31, "Memorial road: middle stone" },

@@ -73,3 +73,45 @@ session's, so I left it alone.
 2. The same at the sanctuary (2057 2735) and the adit (4590 -310).
 3. Around and on top of each mound: is there any gap where you can see through the world, or grass poking through the rock?
 4. In the west foothill cave (-2976 -4978): are the acolytes and enforcers standing on the floor in each chamber, and is the Keeper in the deepest one?
+
+## O11b: the water in the vault (run 29) and moving two caves above it
+
+The owner, on run 29 at about 12:00 PM, at the vault: "theres water there now, but i can still traverse". The pits opened the tunnels, but
+Ossus's **global water table is 38.5 m**. The vault's first tunnel bottoms out at 5.8 m and the adit's at 23.2 m, so both pits filled with water. The
+sanctuary (tunnel bottom 154.8 m) was never affected.
+
+**The options and what they cost**
+
+| Option | What it would take | Verdict |
+|---|---|---|
+| Lower the global water table | The vault's tunnel needs the water under about 4 m. 5.4 % of the planet lies under 38.5 m (96 m grid): Adega Lake, the west lowlands, the hamlet's pier over the lake. Lowering it that far would drain them all, against the Legends "two-thirds water". | No. It is a global change, and it would need your OK. |
+| Keep water out of the pits only | SWG terrain can add local water bodies, but nothing removes the global water plane in one spot. A pit kept above the water would cross the tunnel again 4 m inside the vault's mouth. | Not possible as asked. |
+| Raise the caves in place | The vault's mouth must be at 77.3 m or higher (it is at 42.6 m) and the adit's at 62.4 m (45.1 m): hills 35 m and 17 m high, about 100 m across, raised out of the plain and out of the canyon floor. | Possible, but a big change to the landscape. |
+| **Move the two caves to high ground nearby** (done) | A grid search found flat ground above the need. The vault goes 470 m north onto the Academy Benchland (171 m, relief 1.2 m over r 45 m), nearer the ruins where the Great Library stood. The adit goes 130 m onto the mesa rim above Imhar Canyon (104 m, relief 0.8 m). Each moves with its camp. | Chosen: local, and both places keep their story. |
+
+**What `build_cave_moves.py` changes** (on the installed run-29 archive `beb06d28…`; the O7 terrain without pits comes from `b103e36f…`):
+- **Snapshot:** the vault and its camp (20 objects) move from (2299.7, 1907.0) to (1940.0, 2237.0), heading unchanged, cave mouth to the north.
+  The adit and its camp (17 objects) move from (4578.1, -296.5) to (4488.0, -206.0), turned 177° so the mouth faces away from the canyon edge
+  (yaw 315°, the flattest of 24 headings). Each object keeps its height above the ground; the cave node is set to the ground at its mouth - 3.85 m.
+  The ground under each group varies by 0.38 m and 0.07 m.
+- **Terrain:** the pits are cut afresh with the same rules at the new places (the sanctuary's is unchanged): vault 1,553 m² at 132.8 m,
+  adit 1,532 m² at 80.65 m. That is 94 m and 42 m above the water. The old vault and adit sites are back to their natural ground (0.0 m change within 60 m),
+  and the whole-planet grid shows 0 changes outside the pits. No first-tunnel floor point less than 10 m under ground is left at any cave (the vault
+  has 75 deeper ones past its mound, the adit 3). No ground over any tunnel is below the water. No moved prop or NPC stands over a pit.
+- **Archive:** **`work/ossus-cave-moves/local_planets-cave-moves.tre`, sha256 `cc6f4ebbaa7e1bd0f4a963117ac580d94395d98f12ba0e772ac687b82a68485e`**
+  (two builds, same hash). It has 337 entries; `terrain/ossus.trn` and `snapshot/ossus.ws` change and the other 335 stay byte for byte. Details: `checks-cave-moves.json`.
+- **Server: `server/core3-dev-ossus-cave-moves.patch`** against Core3-dev `4906d2eb` (`git apply --check` and `luac -p` clean). It moves, by the same transform:
+  - the archivist → (1942.3, 2317.0), and the ghostfire vault site and its waypoint → (1940.3, 2255.0);
+  - the foreman → (4475.4, -193.1) and the miner → (4469.7, -199.4), and Moll's adit waypoint → (4475, -193);
+  - the two no-spawn circles → (1940, 2290) and (4465, -183), r 80.
+
+  Three of Moll's lines now say the adit is "on the rim of Imhar Canyon". My staged copies in `o10-ghostfire` and `o7-build/people` have the same changes.
+
+**Install:** use this archive (it replaces `beb06d28`; the step refuses other bases unless given `--base`), apply the patch, run `check_lua.py`,
+restart the test galaxy.
+
+**Questions for the owner's visit (in your own words)**
+1. The vault, now at 1940 2255 on the benchland: is there water or grass in the opening? Can you walk down? Does the dig camp look right around it?
+2. The adit, now on the canyon rim at 4475 -193: same questions. Can you see the canyon from the camp?
+3. The old places (2300 1925 and 4590 -310): is the ground whole again?
+4. Do the ghostfire waypoint (the vault mouth) and Moll's adit waypoint lead to the new places?
