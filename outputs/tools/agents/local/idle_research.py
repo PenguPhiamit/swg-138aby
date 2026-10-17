@@ -32,6 +32,10 @@ first that answers (ollama_url.pick) and hands that one address, model and conte
 fields: "model" runs the topic with that model (it waits while the server in use doesn't have it), "ctx" with that
 context size, and "local_only": true keeps it on this PC (for text with real people's names). Agent/local-model.md is
 the workflow.
+
+Chaining (owner, 17 Oct): while the server in use is another PC, `check` starts the next topic as soon as one finishes,
+after the same checks, instead of waiting for the next timer run. It stays inside the service's 4 hours (a chained
+topic that reaches the end goes back to open) and stops after 3 failures in a row. This PC keeps one topic per run.
 """
 import fcntl
 import hashlib
@@ -67,6 +71,9 @@ REMOTE_SLACK_S, REMOTE_GAP_S, OVERDUE_S = 30, 8 * 60, 20
 EXPIRES = re.compile(r'(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)(?:\.(\d+))?(Z|[+-]\d\d:\d\d)')
 SOURCE_CAP = 120_000  # characters per topic at a 64K-token window (scaled by source_cap()): the brief, files and notes share it
 MAX_STEPS, RUN_LIMIT_S = 40, 3 * 3600
+# Chaining topics on the friend's PC: swg-idle-research.service may run 4 h (TimeoutStartSec) less a margin; a topic is
+# chained only with at least CHAIN_MIN_S of that left, and chaining stops after MAX_CHAIN_FAILS failures in a row.
+SERVICE_S, CHAIN_MIN_S, MAX_CHAIN_FAILS = 4 * 3600 - 10 * 60, 30 * 60, 3
 GIN = re.compile(r'\[GIN\] (\d{4}/\d\d/\d\d - \d\d:\d\d:\d\d) \|.*POST +"/api/(?:chat|generate)"')
 
 BRIEF = """# Research topic: {title}
@@ -326,7 +333,7 @@ def copy_sources(topic, src, cap=SOURCE_CAP):
     return copied, skipped
 
 
-def run_map(topic, server):
+def run_map(topic, server, limit=RUN_LIMIT_S):
     """A chunk job: local_jobs.py prepares the input, local_map.py asks the model chunk by chunk, local_jobs.py writes
     report.md. A run paused by the owner's client or low memory leaves the topic open; it resumes where it stopped."""
     ws = BASE / topic['id']
@@ -342,12 +349,12 @@ def run_map(topic, server):
             mapped = subprocess.run([sys.executable, str(MAP), '--input', str(ws / 'input.jsonl'), '--instruction',
                                      str(ws / 'instruction.txt'), '--out', str(ws), '--yield-to-owner',
                                      '--model', server.model, '--ctx', str(min(server.ctx, 16384))],
-                                    capture_output=True, text=True, errors='replace', timeout=RUN_LIMIT_S, env=env)
+                                    capture_output=True, text=True, errors='replace', timeout=limit, env=env)
             steps.append(mapped.stdout + mapped.stderr)
             code = mapped.returncode
     except subprocess.TimeoutExpired:
         code = 3
-        steps.append(f'stopped after {RUN_LIMIT_S} s; resumes next time')
+        steps.append(f'stopped after {int(limit)} s; resumes next time')
     output = '\n'.join(s.strip() for s in steps if s.strip())
     tries = topic.get('tries', 0) + 1
     # a few chunks that fail every time shouldn't hold the report back for ever
@@ -388,12 +395,12 @@ def run_map(topic, server):
     return status != 'failed'
 
 
-def run(topic, server=None):
+def run(topic, server=None, limit=RUN_LIMIT_S):
     """Run one topic on server (default: the one choose() picks, with the topic's own model and ctx if it names them)."""
     if server is None:
         server = with_topic(choose()[0], topic)
     if topic.get('kind') == 'map':
-        return run_map(topic, server)
+        return run_map(topic, server, limit)
     ws = BASE / topic['id']
     src = ws / 'src'
     shutil.rmtree(src, ignore_errors=True)
@@ -413,10 +420,10 @@ def run(topic, server=None):
     try:
         out = subprocess.run([sys.executable, str(AGENT), '--workspace', str(ws), '--max-steps', str(MAX_STEPS),
                               '--model', model, '--ctx', str(ctx), '--task', 'Read TASK.md, then the files it lists, then write report.md as TASK.md asks.'],
-                             capture_output=True, text=True, errors='replace', timeout=RUN_LIMIT_S, env=env)
+                             capture_output=True, text=True, errors='replace', timeout=limit, env=env)
         output = out.stdout + out.stderr
-    except subprocess.TimeoutExpired:
-        output = f'stopped after {RUN_LIMIT_S} s'
+    except subprocess.TimeoutExpired:   # a chained topic that ran out of the service's time is not a failure
+        output = f'stopped after {int(limit)} s' + ('' if limit >= RUN_LIMIT_S else ': the end of a chained run; starts again')
     if base:   # agent-output.txt is tracked in git; the LAN address is not
         output = output.replace(base, '<ollama-url>').replace(ollama_url.describe(base).rsplit(':', 1)[0], '<ollama-host>')
     (ws / 'agent-output.txt').write_text(output, encoding='utf-8')
@@ -424,6 +431,7 @@ def run(topic, server=None):
     ok = report.exists() and report.stat().st_size > 300
     minutes = round((time.time() - started) / 60)
     state = load(STATE, {})
+    cut = limit < RUN_LIMIT_S and output.startswith('stopped after')   # a chained run's time ran out: not a failure
     gone = False
     if base:   # our own use doesn't count against the idle window (as with the local log); a vanished server does
         try:
@@ -439,7 +447,7 @@ def run(topic, server=None):
     queue = load(QUEUE, {'topics': []})   # re-read: someone may have added topics meanwhile
     for t in queue['topics']:
         if t['id'] == topic['id']:
-            t.update(status='review' if ok else 'open' if gone else 'failed', finished=now(), minutes=minutes,
+            t.update(status='review' if ok else 'open' if gone or cut else 'failed', finished=now(), minutes=minutes,
                      skipped=skipped or None)
     save(QUEUE, queue)
     state.update(last_finish=time.time(), last_topic=topic['id'])
@@ -447,6 +455,7 @@ def run(topic, server=None):
     with LOG.open('a', encoding='utf-8', newline='') as f:
         f.write(f'- {now()} {topic["id"]}: ' + (f'report written ({report.stat().st_size} bytes)' if ok else
                 'no report: remote Ollama stopped answering, topic left open' if gone else
+                'no report: the chained run reached its time limit, topic left open' if cut else
                 f'no report ({output.strip().splitlines()[-1][:120] if output.strip() else "no output"})')
                 + f', {minutes} min, {len(copied)} files' + (f'; skipped {", ".join(skipped)}' if skipped else '')
                 + '\n')
@@ -469,6 +478,26 @@ def main():
             if t.get('status') == 'running':
                 t['status'] = 'open'
         save(QUEUE, queue)
+    # check --now (owner's request, 17 Oct): start the next topic without waiting for the quiet minutes; STOP still holds
+    now_asked = sys.argv[1] == 'check' and '--now' in sys.argv[2:]
+    started, fails, code = time.time(), 0, 0
+    while True:
+        # Chained topics (owner, 17 Oct: "start the next topic right after one finishes, while the friend's PC is the
+        # server") get only what is left of the service's time, so the service is never killed mid-topic.
+        result, remote = one_round(sys.argv[1], now_asked, min(RUN_LIMIT_S, SERVICE_S - (time.time() - started)))
+        if result is None:
+            return code
+        code = code or (0 if result else 1)
+        fails = 0 if result else fails + 1
+        now_asked = False
+        if not remote or fails >= MAX_CHAIN_FAILS or SERVICE_S - (time.time() - started) < CHAIN_MIN_S:
+            return code
+
+
+def one_round(command, now_asked, limit):
+    """One look at the queue and the server; starts the next topic if it may. Returns (None if nothing started, else
+    whether the topic went well; whether the server is another PC)."""
+    queue = load(QUEUE, {'topics': []})
     todo = [t for t in queue['topics'] if t.get('status') == 'open']
     server, skipped, problem = choose()
     held, topic = {}, None
@@ -485,11 +514,9 @@ def main():
                 topic = t
         if topic:
             server = with_topic(server, topic)
-    # check --now (owner's request, 17 Oct): start the next topic without waiting for the quiet minutes; STOP still holds
-    now_asked = sys.argv[1] == 'check' and '--now' in sys.argv[2:]
     why = ([] if not STOP.exists() else ['Agent/local-research/STOP exists']) + [problem] if problem else \
         (['Agent/local-research/STOP exists'] if STOP.exists() else []) if now_asked else \
-        blockers(record=sys.argv[1] == 'check', server=server)
+        blockers(record=command == 'check', server=server)
     remote = remote_base(server) if server else None
     where = ', '.join(skipped) + ' not answering, so ' if skipped else ''
     print((f'[{where}remote Ollama {ollama_url.describe(remote)}] ' if remote else
@@ -498,13 +525,13 @@ def main():
                                             if held else '') + '; '
           + ('idle: would start ' + topic['id'] if not why and topic else
              'not starting: ' + ('; '.join(why) if why else 'queue empty' if not todo else 'every open topic is held')))
-    if sys.argv[1] == 'status' or why or not topic:
-        return 0
+    if command == 'status' or why or not topic:
+        return None, bool(remote)
     for t in queue['topics']:
         if t['id'] == topic['id']:
             t.update(status='running', started=now())
     save(QUEUE, queue)
-    return 0 if run(topic, server) else 1
+    return run(topic, server, limit), bool(remote)
 
 
 def with_topic(server, topic):

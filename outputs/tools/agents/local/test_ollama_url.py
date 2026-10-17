@@ -750,6 +750,57 @@ class IdleResearchTests(unittest.TestCase):
         self.assertIn('1 held (bad: bad ctx (', out)
         self.assertIn('--model hf.co/u/rp-GGUF:IQ4_XS --ctx 8192', (self.root / 'rp' / 'agent-output.txt').read_text())
 
+    # ---- chaining topics on another PC (owner, 17 Oct) ----
+    def statuses(self):
+        return {t['id']: t['status'] for t in ir.load(ir.QUEUE, {})['topics']}
+
+    def check_now(self):
+        out = io.StringIO()
+        with mock.patch.object(sys, 'argv', ['idle_research.py', 'check', '--now']), contextlib.redirect_stdout(out):
+            return ir.main(), out.getvalue()
+
+    def test_topics_follow_each_other_on_another_pc(self):
+        self.as_other_pc()
+        self.open_topics({'id': 'a'}, {'id': 'b'}, {'id': 'c'})
+        self.stub_agent('(ws / "report.md").write_text("r" * 400)\n')
+        code, out = self.check_now()
+        self.assertEqual((code, self.statuses()), (0, {'a': 'review', 'b': 'review', 'c': 'review'}), out)
+        self.assertEqual(out.count('idle: would start'), 3)
+        self.assertIn('queue empty', out.splitlines()[-1])
+
+    def test_this_pc_still_runs_one_topic_per_check(self):
+        self.local_checks()
+        self.log_request(3600)
+        self.open_topics({'id': 'a'}, {'id': 'b'})
+        self.stub_agent('(ws / "report.md").write_text("r" * 400)\n')
+        self.assertEqual(self.main('check')[0], 0)
+        self.assertEqual(self.statuses(), {'a': 'review', 'b': 'open'})
+
+    def test_no_chaining_with_too_little_service_time_left(self):
+        self.as_other_pc()
+        self.open_topics({'id': 'a'}, {'id': 'b'})
+        self.stub_agent('(ws / "report.md").write_text("r" * 400)\n')
+        with mock.patch.object(ir, 'SERVICE_S', ir.CHAIN_MIN_S - 1):   # under half an hour left after the first
+            self.check_now()
+        self.assertEqual(self.statuses(), {'a': 'review', 'b': 'open'})
+
+    def test_a_chained_topic_that_runs_out_of_time_goes_back_to_open(self):
+        self.as_other_pc()
+        self.open_topics({'id': 'a'}, {'id': 'b'})
+        self.stub_agent('import time\ntime.sleep(10)\n')
+        with mock.patch.object(ir, 'SERVICE_S', 2), mock.patch.object(ir, 'CHAIN_MIN_S', 0):
+            self.check_now()
+        self.assertEqual(self.statuses(), {'a': 'open', 'b': 'open'})
+        self.assertIn('reached its time limit, topic left open', (self.root / 'LOG.md').read_text())
+
+    def test_chaining_stops_after_three_failures_in_a_row(self):
+        self.as_other_pc()
+        self.open_topics(*({'id': f't{n}'} for n in range(5)))
+        self.stub_agent('sys.exit(1)\n')
+        code, out = self.check_now()
+        self.assertEqual(code, 1)
+        self.assertEqual(list(self.statuses().values()), ['failed', 'failed', 'failed', 'open', 'open'])
+
     def test_a_chunk_job_gets_the_servers_model_and_at_most_16k(self):
         self.servers(f'{self.fake.base} big:1 65536\n')
         stub = self.root / 'stub_step.py'
