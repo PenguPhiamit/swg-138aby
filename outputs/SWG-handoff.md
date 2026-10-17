@@ -4,7 +4,9 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude, main session: run 27 since 7:37 AM 17 Oct for the owner's pet check, dev `393c5c25` (+ pet fixes `44c2933a`, `393c5c25` on the Nal Hutta and Ossus fills `ce3975db`), archive `b01e9f44`. BotPop 200. Next on the galaxy: the missions session's 45-minute run 2, then the speed check. - 2026-10-17 7:38 AM.**
+**Server lock: Claude, main session: run 28 since 9:55 AM 17 Oct (owner: "check all update and push them to the dev server"; install and restart approved), dev `a6a515c8`: on `393c5c25`, the vehicle call fix `91cf87ed`, Vong look `e5d13dfc`, Hoth fill `ac578315`, Ossus O10 ghostfire `5191f9b0`, BotPop groups S1 `a6a515c8` (built in, off: `Core3.BotPopGroups = 0`). Release build 9:52 AM. Archive `b103e36f` on client and server (`b01e9f44` + Ossus O9 gold sky + Vong armour + creation fixes B1/B2 + ghostfire crystal; backups `.bak-b01e9f44`). Log clean at start (no outfit or screenplay errors). BotPop 200. Next on the galaxy: the missions session's 45-minute run 2, then the speed check (`speed-check-design-A.patch`, its own build). - 2026-10-17 9:58 AM.**
+
+**Before that: run 27 since 7:37 AM 17 Oct for the owner's pet check, dev `393c5c25`, archive `b01e9f44`.**
 
 **Before that: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (no galaxy ownership). Fable is retired (owner, 16 Oct: Opus 5.5 and GPT 6.1 Sol only). Live galaxy STOPPED. Test galaxy: **run 23 since 3:12 AM 17 Oct** (WSL stopped at 1:22 AM; gate PASS 39/46 at 2:25 AM; crafting check 21/21 at 3:19 AM), optimised core3, dev `fc3bb3e2` (crafting body API and /agentgear resources; missions up to level + 2; `d4b9d9a1` + Ossus O7 regions, Ossus people, spawn gate by creature level, C61 fight-back, starport-pad routes); archive `df1d538e` on client and server (floater v2 → Ossus O7 → Ossus people, on `9ce108a0`: Hutt walk fix, floater, Nal Hutta with Tatooine and Corellia routes; backups `.bak-9ce108a0`, `.bak-503401b4`). BotPop "all" **300** (owner gaming; cap 600), no Ossus explorers; the 7 AM job writes the run23 report set (numbers, findings, travel, morning, planet data). Findings: `Bot-reports/FINDINGS-2026-10-16.md`. Scheduled 17 Oct: Nal Hutta home 1:55 AM, Hoth leftovers 2:00 AM (staged only). **GPT out until 22 Oct 1:13 AM.** Live map on http://localhost:8765. - 2026-10-17 3:20 AM.**
 
@@ -22,6 +24,7 @@ Agents add a question here when the owner isn't in their chat: name, time, the o
 
 **Claude, 17 Oct 6:35 AM (creation bugs B1 and B2, staged in `Fable-species/creation-fixes/`; test plan section 2; answer inline):**
 1. **Install the creation fixes?** The staged archive is the installed `f0191ab5` plus two stock fixes: the Sullustan and Ithorian creation screens show their real bonuses, and the Ithorian male Brawler starts with an "Ithorian Warm Jacket" instead of a jacket that doesn't exist. Nothing else changes (199 of 201 files identical), and the sweep's data checks pass on it. Install on client and server at the next test-galaxy restart, by the session holding the server lock (recommended); or wait; or not at all?
+   - **Installed in run 28** (owner, 17 Oct ~9:45 AM: "check all update and push them to the dev server"), chained onto the current archive: `b103e36f`.
 
 **Claude, 17 Oct 6:00 AM (BotPop social play, `Documentation-support/botpop-social/README.md`; answer inline):**
 1. **Factions for bots beyond Imperial and Rebel:** only the two GCW sides for now (recommended; the seven standing-only sides from `Fable-factions` come when their data exists); or the seven new sides too, as standing only, in the same stage; or no factions for bots at all?
