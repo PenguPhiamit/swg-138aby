@@ -78,6 +78,10 @@ wsl -d Debian -u root --exec mariadb swgemu_test --execute "UPDATE galaxy SET ad
   re-patch, uninstall restoring the friend's own files, and a real probe of the test login port
   (192.168.1.210:46453 answered).
 - `build.ps1 -DryRun` and `owner-setup.ps1 -DryRun -ShowAcl -Firewall` run clean.
+- Inno Setup 6.7.3 installed (owner's OK, 17 Oct; winget, per-user in `%LOCALAPPDATA%\Programs\Inno Setup 6`). `build.ps1`
+  compiled a 6.5 MB `SWG-Friends-Setup-2026.10.16.1.exe` with a **placeholder address (100.100.100.100)**: don't
+  send that one. Rebuild after step 4.
 - **Not tested**: the Tailscale download, install and `tailscale up` (needs a real key), the firewall rules, the
   ACL in the admin console, a friend logging in over Tailscale, the uninstaller's Tailscale choices, and the
-  compiled installer's pages on a second PC.
+  compiled installer's pages (running it needs administrator rights and would install Tailscale, so it has not been
+  run on this PC).

@@ -92,7 +92,7 @@ begin
   end;
 end;
 
-{ Helper, settings and kit in {tmp}, for the checks and the install steps that run before files are copied. }
+// Helper, settings and kit in the temp folder, for the checks and the install steps that run before files are copied.
 procedure ExtractAll;
 begin
   ExtractTemporaryFile('friend-setup.ps1');
