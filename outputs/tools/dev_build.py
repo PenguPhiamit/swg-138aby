@@ -7,7 +7,7 @@ This uses a separate git worktree instead:
   /opt/swg/Core3-dev   branch `dev` (starts from `sandbox`), own engine3 copy,
                        build dir MMOCoreORB/build/dev (Debug, ENABLE_BUILD_CLIENT=ON)
 
-Inside Debian, as root:  python3 dev_build.py [-jN]
+Inside Debian, as root:  python3 dev_build.py [-jN] [--release]
 Merge finished dev work back with: git -C /opt/swg/Core3 merge dev   (as swgemu, on sandbox)
 """
 from pathlib import Path
@@ -42,21 +42,31 @@ if not (DEV/ENGINE/'.git').exists():
     swgemu('git','clone','--quiet','--no-checkout',str(LIVE/ENGINE),str(DEV/ENGINE))
     swgemu('git','-C',str(DEV/ENGINE),'checkout','--quiet',pinned)
 
+# --release (Claude, 16 Oct 2026): an optimised RelWithDebInfo core3 in build/devrel, for the test galaxy's load runs
+# (the Debug core3 starved the owner's client at 1,700 bots: Documentation-support/swg-performance-options.md, S1).
+# Symbols stay, so gdb thread dumps still work. No core3client (the Debug build keeps it). Both builds copy their core3
+# into Core3-dev's bin/, which test_galaxy.py --dev-server takes at start: the LAST build run is the one that starts.
+RELEASE = '--release' in sys.argv
+if RELEASE:
+    BUILD = DEV/'MMOCoreORB/build/devrel'
+    LOG = Path('/opt/swg/dev-build-release.log')
+KIND = 'RelWithDebInfo' if RELEASE else 'Debug'
+
 if not (BUILD/'CMakeCache.txt').exists():
-    print('Configuring the Debug build...', flush=True)
+    print(f'Configuring the {KIND} build...', flush=True)
     swgemu('cmake','-S',str(DEV/'MMOCoreORB'),'-B',str(BUILD),'-G','Ninja',
-           '-DCMAKE_BUILD_TYPE=Debug','-DENABLE_BUILD_CLIENT=ON','-DENABLE_ERROR_ON_WARNINGS=OFF',
+           f'-DCMAKE_BUILD_TYPE={KIND}',f'-DENABLE_BUILD_CLIENT={"OFF" if RELEASE else "ON"}','-DENABLE_ERROR_ON_WARNINGS=OFF',
            '-DCMAKE_C_COMPILER=/usr/lib/llvm-19/bin/clang','-DCMAKE_CXX_COMPILER=/usr/lib/llvm-19/bin/clang++',
            stdout=subprocess.DEVNULL)
 
-print(f'Building Debug core3 + core3client ({jobs}). Progress: {LOG}', flush=True)
+print(f'Building {KIND} core3{"" if RELEASE else " + core3client"} ({jobs}). Progress: {LOG}', flush=True)
 with LOG.open('w') as log:
     result = subprocess.run(['runuser','-u','swgemu','--','cmake','--build',str(BUILD),jobs],
                             stdout=log, stderr=subprocess.STDOUT, env=ENV)
 if result.returncode:
     print('\n'.join(LOG.read_text(errors='replace').splitlines()[-40:]))
     raise SystemExit('Dev build FAILED (live galaxy unaffected).')
-for name in ('src/core3', 'src/client/core3client'):
+for name in ('src/core3',) if RELEASE else ('src/core3', 'src/client/core3client'):
     path = BUILD/name
     print(f'{name}: {"built" if path.exists() else "MISSING"}')
 print('Dev build finished. The live executable was not touched.')
