@@ -161,5 +161,61 @@ class LocalJobsTests(unittest.TestCase):
         self.assertEqual(counts, {'BLOCKED': '3x', 'FAIL': '2x'})   # the note is in all three, the check failed twice
 
 
+class PrecheckTests(unittest.TestCase):
+    """precheck.py (17 Oct): claims against their cited lines, and older against newer reports."""
+
+    def setUp(self):
+        self.dir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.dir.cleanup)
+        self.root = Path(self.dir.name)
+        (self.root / 'queue.json').write_text(json.dumps({'topics': [{'id': 'camps'}, {'id': 'gaps', 'kind': 'map'}]}))
+        camp = self.root / 'camps'
+        (camp / 'src' / 'src' / 'server').mkdir(parents=True)
+        (camp / 'src' / 'src' / 'server' / 'Camp.cpp.lines-10-14').write_text(
+            ''.join(f'{n:6d}| line {n} of the camp code\n' for n in range(10, 15)))
+        (camp / 'report.md').write_text('# Camps\n\n- Placing needs skill 5 (Camp.cpp:12).\n'
+                                        '- Abandoned after 30 s (`src/.../Camp.cpp:13-14`); see also Gone.h:4.\n'
+                                        '- Past the copy: Camp.cpp:900\n')
+        (camp / 'report.previous.md').write_text('Old: skill 3.\n')
+        (self.root / 'gaps').mkdir()
+        (self.root / 'gaps' / 'report.md').write_text('a chunk job, not checked: Camp.cpp:12\n')
+
+    def test_claims_carry_the_cited_lines_from_the_topics_own_copy(self):
+        lines, problems = local_jobs.precheck.claim_lines(self.root, index={})
+        self.assertEqual([i for i, _ in lines], ['camps#1', 'camps#2'])
+        text = dict(lines)
+        self.assertIn('Placing needs skill 5', text['camps#1'])
+        self.assertIn('CODE: 10: line 10 of the camp code ¶ 11:', text['camps#1'])   # a single line gets 2 around it
+        self.assertIn('14: line 14', text['camps#2'])
+        self.assertNotIn('\t', ''.join(text.values()) + ''.join(t for _, t in lines))
+        self.assertEqual(sorted(p['cite'] for p in problems), ['Camp.cpp:900', 'Gone.h:4'])
+        self.assertIn('no file with that name', next(p['problem'] for p in problems if p['cite'] == 'Gone.h:4'))
+
+    def test_claim_report_lists_the_doubtful_claims_first(self):
+        lines, problems = local_jobs.precheck.claim_lines(self.root, index={})
+        body = local_jobs.precheck.claim_report(dict(lines), [
+            {'id': 'camps#1', 'verdict': 'contradicted', 'why': 'line 12 says nothing about skill'},
+            {'id': 'camps#2', 'verdict': 'supported', 'why': 'ok'}, {'id': 'made#up', 'verdict': 'supported'}], problems)
+        self.assertIn('2 cited claims in 1 reports', body)
+        self.assertIn('| camps | 2 | 1 | 0 | 2 |', body)
+        self.assertIn('## Contradicted by the cited lines (check these first)', body)
+        self.assertIn('line 12 says nothing about skill', body)
+        self.assertIn('`Gone.h:4`', body)
+        self.assertNotIn('made#up', body)
+
+    def test_report_diff_pairs_old_and_new_reports_only(self):
+        pairs = dict(local_jobs.precheck.diff_lines(self.root))
+        self.assertEqual(list(pairs), ['camps'])
+        self.assertTrue(pairs['camps'].startswith('OLD: Old: skill 3. NEW: # Camps ¶'))
+        body = local_jobs.precheck.diff_report(pairs, [{'id': 'camps', 'disagreements': [
+            {'point': 'skill needed', 'old': '3', 'new': '5'}]}])
+        self.assertIn('| skill needed | 3 | 5 |', body)
+
+    def test_both_jobs_are_known_to_local_jobs(self):
+        for job in ('claim-check', 'report-diff'):
+            self.assertIn(job, local_jobs.INSTRUCTIONS)
+            self.assertIn('JSON only', local_jobs.INSTRUCTIONS[job])
+
+
 if __name__ == '__main__':
     unittest.main()
