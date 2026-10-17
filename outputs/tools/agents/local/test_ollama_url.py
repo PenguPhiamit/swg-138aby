@@ -247,6 +247,83 @@ class AddressTests(unittest.TestCase):
             self.assertIsNone(ollama_url.model_missing(unreadable, 'qwen3:8b'), unreadable)
 
 
+class ServerListTests(unittest.TestCase):
+    """17 Oct: ollama-url.txt may list several servers (the friend's PC, then this PC), each with its model and size."""
+    S = ollama_url.Server
+
+    def setUp(self):
+        self.dir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.dir.cleanup)
+        isolate(self, self.dir.name)
+
+    def servers(self, text, env=None):
+        ollama_url.URL_FILE.write_text(text, encoding='utf-8')
+        return ollama_url.servers(environ=env or {})
+
+    def test_one_line_files_mean_what_they_did(self):
+        self.assertEqual(self.servers('http://192.168.7.8:11434\n'), [self.S('http://192.168.7.8:11434', 'gpt-oss:20b', 65536)])
+        ollama_url.MODEL_FILE.write_text('qwen3:8b')
+        ollama_url.CTX_FILE.write_text('16384')
+        self.assertEqual(self.servers('192.168.7.8'), [self.S('http://192.168.7.8:11434', 'qwen3:8b', 16384)])
+        ollama_url.URL_FILE.unlink()
+        self.assertEqual(ollama_url.servers(environ={}), [self.S(ollama_url.DEFAULT, 'qwen3:8b', 16384)])
+
+    def test_each_line_may_name_its_model_and_context(self):
+        listed = self.servers('# the friend first\nhttp://192.168.7.8:11434  qwen3.6:35b-a3b  65536   # friend\n'
+                              '127.0.0.1 16384 qwen3:8b\n\nlocalhost:5000\n')
+        self.assertEqual(listed, [self.S('http://192.168.7.8:11434', 'qwen3.6:35b-a3b', 65536),
+                                  self.S('http://127.0.0.1:11434', 'qwen3:8b', 16384),
+                                  self.S('http://localhost:5000', 'gpt-oss:20b', 65536)])
+        self.assertEqual(ollama_url.base_url(environ={}), 'http://192.168.7.8:11434')
+
+    def test_variables_beat_every_line_and_OLLAMA_URL_means_one_server(self):
+        text = 'http://192.168.7.8:11434 qwen3.6:35b-a3b 65536\n127.0.0.1 qwen3:8b 16384\n'
+        listed = self.servers(text, {'OLLAMA_MODEL': 'tiny:1b', 'OLLAMA_CTX': '4096'})
+        self.assertEqual({(s.model, s.ctx) for s in listed}, {('tiny:1b', 4096)})
+        self.assertEqual(self.servers(text, {'OLLAMA_URL': '10.0.0.9'}), [self.S('http://10.0.0.9:11434', 'gpt-oss:20b', 65536)])
+
+    def test_a_bad_line_fails_loudly_and_names_it(self):
+        for text, kind, words in (('192.168.7.8\nftp://x\n', ollama_url.OllamaUrlError, 'line 2'),
+                                  ('192.168.7.8 qwen3 8b\n', ollama_url.OllamaSettingError, 'two model names'),
+                                  ('192.168.7.8 32768 16384\n', ollama_url.OllamaSettingError, 'two context sizes'),
+                                  ('192.168.7.8 1024\n', ollama_url.OllamaSettingError, 'outside'),
+                                  ('192.168.7.8 a:1 4096 x\n', ollama_url.OllamaSettingError, 'more than')):
+            with self.assertRaisesRegex(kind, words, msg=text):
+                self.servers(text)
+
+    def test_pick_takes_the_first_that_answers_and_never_probes_the_fallback(self):
+        self.servers('http://192.168.7.8:11434 big:1\n192.168.7.9 mid:1\n127.0.0.1 small:1\n')
+        asked = []
+
+        def probe(up):
+            def answers(base):
+                asked.append(base)
+                return base in up
+            return answers
+        self.assertEqual(ollama_url.pick(environ={}, probe=probe({'http://192.168.7.8:11434'})),
+                         (self.S('http://192.168.7.8:11434', 'big:1', 65536), []))
+        self.assertEqual(ollama_url.pick(environ={}, probe=probe({'http://192.168.7.9:11434'}))[1], ['192.168.7.8:11434'])
+        asked.clear()
+        server, skipped = ollama_url.pick(environ={}, probe=probe(set()))
+        self.assertEqual((server.model, skipped), ('small:1', ['192.168.7.8:11434', '192.168.7.9:11434']))
+        self.assertNotIn('http://127.0.0.1:11434', asked)
+
+    def test_a_single_server_is_never_probed(self):
+        never = mock.Mock(side_effect=AssertionError('probed'))
+        self.servers('http://192.168.7.8:11434\n')
+        self.assertEqual(ollama_url.pick(environ={}, probe=never)[1], [])
+        self.assertEqual(ollama_url.pick(environ={'OLLAMA_URL': '10.0.0.9'}, probe=never)[0].base, 'http://10.0.0.9:11434')
+
+    def test_answers_asks_api_tags_briefly(self):
+        fake = FakeOllama()
+        self.addCleanup(fake.stop)
+        self.assertTrue(ollama_url.answers(fake.base))
+        self.assertEqual(fake.requests, [('GET', '/api/tags', None)])
+        fake.stop()
+        self.assertFalse(ollama_url.answers(fake.base))
+        self.assertLessEqual(ollama_url.PROBE_S, 5)
+
+
 @unittest.skipIf(ir is None, 'idle_research.py needs fcntl (run in WSL)')
 class ExpiryTests(unittest.TestCase):
     NOW = 1_800_000_000.0
@@ -604,6 +681,77 @@ class IdleResearchTests(unittest.TestCase):
         self.assertEqual(len(why), 1, why)
         self.assertIn('is not answering', why[0])
 
+    # ---- several servers, held topics and a topic's own model (17 Oct) ----
+    DEAD = 'http://127.0.0.1:9'   # nothing listens there: the friend's PC, switched off
+
+    def servers(self, text):
+        os.environ.pop('OLLAMA_URL')
+        ollama_url.URL_FILE.write_text(text, encoding='utf-8')
+
+    def main(self, command='status'):
+        out = io.StringIO()
+        with mock.patch.object(sys, 'argv', ['idle_research.py', command]), contextlib.redirect_stdout(out):
+            code = ir.main()
+        return code, out.getvalue()
+
+    def open_topics(self, *topics):
+        ir.save(ir.QUEUE, {'topics': [dict({'status': 'open', 'title': 'x', 'question': 'y', 'sources': []}, **t)
+                                      for t in topics]})
+
+    def test_falls_back_to_this_pc_when_the_other_pc_is_off(self):
+        self.servers(f'{self.DEAD} big:1 65536\n{self.fake.base} small:1 16384\n')
+        self.fake.tags = ['small:1']
+        self.local_checks()
+        self.log_request(3600)
+        self.open_topics({'id': 't1'})
+        self.assertEqual(self.main()[1], '[127.0.0.1:9 not answering, so this PC] 1 open topic(s); idle: would start t1\n')
+
+    def test_a_run_uses_the_server_it_was_decided_on(self):
+        self.servers(f'{self.DEAD} big:1 65536\n{self.fake.base} small:1 16384\n')
+        self.stub_agent('print("args", " ".join(sys.argv[1:]), "url", os.environ["OLLAMA_URL"])\n'
+                        '(ws / "report.md").write_text("r" * 400)\n')
+        self.assertTrue(ir.run(self.topic()))
+        output = (self.root / 't1' / 'agent-output.txt').read_text()
+        self.assertIn('--model small:1 --ctx 16384', output)
+        self.assertIn(f'url {self.fake.base}', output)
+
+    def test_local_only_topics_wait_while_the_server_is_another_pc(self):
+        self.open_topics({'id': 'names', 'local_only': True}, {'id': 't2'})
+        self.as_other_pc()
+        with mock.patch.object(ir, 'blockers', return_value=[]):
+            self.assertEqual(self.main()[1], f'[remote Ollama {ollama_url.describe(self.fake.base)}] 2 open topic(s), '
+                                             '1 held (names: local_only, waits for this PC); idle: would start t2\n')
+        self.open_topics({'id': 'names', 'local_only': True})
+        with mock.patch.object(ir, 'blockers', return_value=[]):
+            self.assertIn('not starting: every open topic is held', self.main()[1])
+
+    def test_local_only_topics_run_on_this_pc(self):
+        self.assertIsNone(ir.hold_reason({'local_only': True}, ollama_url.Server('http://127.0.0.1:11434', 'm', 4096), None))
+
+    def test_a_topic_may_name_its_model(self):
+        self.local_checks()
+        self.log_request(3600)
+        self.fake.tags = ['gpt-oss:20b', 'gemma4:12b']
+        self.open_topics({'id': 'chat', 'model': 'nothere:1'}, {'id': 'lines', 'model': 'gemma4:12b'})
+        self.stub_agent('print("args", " ".join(sys.argv[1:]))\n(ws / "report.md").write_text("r" * 400)\n')
+        code, out = self.main('check')
+        self.assertEqual(code, 0, out)
+        self.assertIn('2 open topic(s), 1 held (chat: needs nothere:1, not on this server); idle: would start lines', out)
+        self.assertIn('--model gemma4:12b --ctx 65536', (self.root / 'lines' / 'agent-output.txt').read_text())
+        self.assertEqual({t['id']: t['status'] for t in ir.load(ir.QUEUE, {})['topics']}, {'chat': 'open', 'lines': 'review'})
+
+    def test_a_chunk_job_gets_the_servers_model_and_at_most_16k(self):
+        self.servers(f'{self.fake.base} big:1 65536\n')
+        stub = self.root / 'stub_step.py'
+        stub.write_text('import os, sys\nprint("args", " ".join(sys.argv[1:]), "url", os.environ.get("OLLAMA_URL"))\n')
+        topic = {'id': 'm1', 'status': 'running', 'kind': 'map', 'job': 'bot-gaps'}
+        ir.save(ir.QUEUE, {'topics': [topic]})
+        with mock.patch.object(ir, 'JOBS', stub), mock.patch.object(ir, 'MAP', stub):
+            self.assertTrue(ir.run(topic))
+        output = (self.root / 'm1' / 'map-output.txt').read_text()
+        self.assertIn('--model big:1 --ctx 16384', output)
+        self.assertIn(f'url {self.fake.base}', output)
+
 
 class LocalAgentTests(unittest.TestCase):
     def setUp(self):
@@ -676,6 +824,23 @@ class LocalAgentTests(unittest.TestCase):
             self.run_main('--ollama-url', 'ftp://host')
         self.assertIn('bad Ollama address', err.getvalue())
         self.assertEqual(self.fake.requests, [])
+
+    def test_without_a_flag_it_uses_the_first_server_that_answers(self):
+        ollama_url.URL_FILE.write_text(f'http://127.0.0.1:9 big:1\n{self.fake.base} small:1 4096\n')
+        code, out = self.run_main()
+        self.assertEqual(code, 0)
+        self.assertIn('127.0.0.1:9 not answering', out)
+        self.assertEqual((self.sent()['model'], self.sent()['options']['num_ctx']), ('small:1', 4096))
+
+    def test_another_pc_is_unloaded_every_five_steps_and_at_the_end(self):
+        # 17 Oct: its prompt cache grows in that PC's RAM; its memory can't be read from here, so no headroom check
+        self.fake.chat_reply = {'message': {'role': 'assistant', 'content': '',
+                                            'tool_calls': [{'function': {'name': 'list_dir', 'arguments': {'path': '.'}}}]}}
+        with mock.patch.object(local_agent.ollama_url, 'is_local', return_value=False), \
+                mock.patch.object(local_agent.memguard, 'commit_headroom_gb', side_effect=AssertionError('this PC')):
+            code, out = self.run_main('--max-steps', '11', env={'OLLAMA_URL': self.fake.base})
+        unloads = [r for r in self.fake.requests if r[2]['messages'] == []]
+        self.assertEqual((code, len(unloads)), (1, 3))   # before steps 6 and 11, and once at the end
 
 
 if __name__ == '__main__':

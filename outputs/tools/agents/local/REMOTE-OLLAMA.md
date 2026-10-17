@@ -5,6 +5,11 @@ For the owner and the friend (Claude, 15 Oct 2026). The project's local-model sc
 on the same home network, which frees about 5 GB of RAM and the CPU on Miniverse and keeps its GPU free for the
 game client. Nothing changes until the owner creates `ollama-url.txt` (step 4); delete that file to go back.
 
+**17 Oct update:** the friend's PC is set up by one script, [friend-pc/install-ollama-lan.ps1](friend-pc/install-ollama-lan.ps1)
+(how-to: [friend-pc/README.md](friend-pc/README.md)). It replaces the manual steps in section 1 and admits **only Miniverse** (not the whole subnet). `ollama-url.txt` can now list several servers with a fallback (section 3,
+"Several servers"). The workflow for both agents is [Agent/local-model.md](../../../Agent/local-model.md). Models
+there: `qwen3.6:35b-a3b`, `qwen3.5:9b`, `gemma4:12b` (owner's choice, 17 Oct, after `Documentation-support/ollama-model-options.md`).
+
 ## Before you start: the owner's call
 
 - **What crosses the network:** every request the scripts send, which means the research brief **and the project text
@@ -21,6 +26,10 @@ game client. Nothing changes until the owner creates `ollama-url.txt` (step 4); 
   CPU there too (as on Miniverse); the friend's better CPU is what should help.
 
 ## 1. On the friend's PC
+
+**Superseded (17 Oct): run [friend-pc/install-ollama-lan.ps1](friend-pc/install-ollama-lan.ps1) instead.** It does
+these steps with a firewall rule for the owner's address only (the rule below admits the whole subnet), checks the
+Ollama signature, and tests each model. The manual steps stay here for reference.
 
 1. Install Ollama for Windows from ollama.com/download (it runs as a tray icon).
 2. Open a terminal and pull the model (about 14 GB; keep 20 GB of disk free):
@@ -130,6 +139,29 @@ If `outputs/Agent/local-research/STOP` exists (the owner paused research while O
 delete it to let research run.
 
 **To go back to Ollama on this PC:** delete `ollama-url.txt` (and unset `OLLAMA_URL`). Nothing else changes.
+
+### Several servers, with a fallback (17 Oct)
+
+`ollama-url.txt` may list one server per line, in order of preference, each optionally followed by its model and
+context size ([ollama-url.example.txt](ollama-url.example.txt)):
+
+```
+http://192.168.1.y:11434   qwen3.6:35b-a3b   65536
+127.0.0.1                  qwen3:8b          16384
+```
+
+- Every script asks `ollama_url.pick()`: the first server that answers `/api/tags` within 3 seconds, else the last
+  line (not probed). A one-line file works as before. `ollama_url.py` marks the one in use with `use` and the ones
+  that didn't answer with `off`.
+- `idle_research.py` picks once per timer run, applies that server's checks (another PC: the `/api/ps` idle rule; this
+  PC: log, GPU, client and memory), and hands the same address, model and size to the job (`OLLAMA_URL` plus
+  `--model`/`--ctx`), so a job never lands on a server it wasn't checked against. `status` starts with
+  `[192.168.1.y:11434 not answering, so this PC]` when it fell back.
+- Topic fields: `"model"` (that model, or the topic waits while the server in use lacks it) and `"local_only": true`
+  (waits for this PC). Both show as "held" in `status`.
+- `OLLAMA_MODEL` and `OLLAMA_CTX` still beat every line. `OLLAMA_URL` means exactly one server, with no fallback.
+- The unload every 5 requests now applies to every server (the prompt cache grows in the other PC's RAM too); the
+  commit-headroom checks stay for this PC only.
 
 ## How "idle" works with a server on another PC
 

@@ -84,11 +84,12 @@ class LocalMapTests(unittest.TestCase):
         self.assertEqual((code, model.seen), (3, []))
         self.assertIn("owner's SWG client", summary)
 
-    def test_a_remote_server_gets_no_memory_checks_or_unloads(self):
+    def test_a_remote_server_gets_no_memory_checks_but_the_same_unloads(self):
+        # 17 Oct: the prompt cache grows in the other PC's RAM too, so it is emptied there on the same schedule
         with mock.patch.object(local_map.ollama_url, 'is_local', return_value=False):
             code, _, unloads = run(self.out, self.chunks, Model(),
                                    headroom=mock.Mock(side_effect=AssertionError('this PC')))
-        self.assertEqual((code, unloads), (0, []))
+        self.assertEqual((code, len(unloads)), (0, 3))
 
 
 class LocalJobsTests(unittest.TestCase):

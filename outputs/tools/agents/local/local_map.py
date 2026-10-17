@@ -9,11 +9,12 @@ IN.jsonl has one chunk per line: {"id": "...", "text": "..."}. FILE is the syste
 with JSON. Each answer goes to DIR/results.jsonl as {"id", "answer"}; a chunk that fails goes to DIR/errors.jsonl and
 is tried again on the next run, and chunks already in results.jsonl are skipped, so a run can stop and resume.
 
-Memory (memguard.py): with Ollama on this PC, the model is unloaded every --reload-every chunks (that empties its
-prompt cache) and the run pauses when Windows' commit headroom stays under --min-headroom GB. --yield-to-owner pauses
-when one of the owner's SWG clients starts (checked every 10 chunks). Exit codes: 0 all chunks done, 3 paused
-(memory or the owner; rerun to resume), 1 broken input or Ollama missing. Nothing leaves the PC except to the Ollama
-address from ollama_url.py.
+Memory (memguard.py): the model is unloaded every --reload-every chunks and at the end (that empties its prompt cache,
+which grows in the RAM of whichever PC runs Ollama), and with Ollama on this PC the run pauses when Windows' commit
+headroom stays under --min-headroom GB. --yield-to-owner pauses when one of the owner's SWG clients starts (checked
+every 10 chunks). Exit codes: 0 all chunks done, 3 paused (memory or the owner; rerun to resume), 1 broken input or
+Ollama missing. Nothing leaves the PC except to the Ollama server from ollama_url.pick() (OLLAMA_URL, else the first
+server in ollama-url.txt that answers), whose model and context size (at most 16384) are used unless --model/--ctx say.
 """
 import argparse
 import json
@@ -76,9 +77,9 @@ def run(chunks, instruction, out, base, model, ctx, limit=None, min_headroom=mem
             if yield_to_owner and n % 10 == 1 and client():
                 code, why = 3, "paused: an owner's SWG client is running"
                 break
+            if n > 1 and (n - 1) % reload_every == 0:
+                unload(base, model)
             if local:
-                if n > 1 and (n - 1) % reload_every == 0:
-                    unload(base, model)
                 room = headroom()
                 if room is not None and room < min_headroom:
                     unload(base, model)
@@ -101,8 +102,7 @@ def run(chunks, instruction, out, base, model, ctx, limit=None, min_headroom=mem
             sink.flush()
             if n % 50 == 0:
                 log(f'{n}/{len(todo)} chunks, {(time.time() - started) / n:.1f} s each, {errors} errors')
-    if local:
-        unload(base, model)
+    unload(base, model)
     if code == 0 and errors:
         code, why = 3, f'{errors} chunk(s) failed; rerun to retry them'
     summary = (f'{attempted} of {len(todo)} chunks asked ({len(done)} done before), {errors} errors, '
@@ -124,12 +124,15 @@ def main():
     parser.add_argument('--yield-to-owner', action='store_true')
     args = parser.parse_args()
     try:
-        base = ollama_url.base_url()
-        model = ollama_url.parse_model(args.model) if args.model else ollama_url.model()
-        ctx = ollama_url.parse_ctx(args.ctx) if args.ctx else min(ollama_url.ctx(), 16384)
-    except (ollama_url.OllamaUrlError, ollama_url.OllamaSettingError) as error:
+        server, skipped = ollama_url.pick()
+        model = ollama_url.parse_model(args.model) if args.model else server.model
+        ctx = ollama_url.parse_ctx(args.ctx) if args.ctx else min(server.ctx, 16384)
+    except ollama_url.OllamaSettingError as error:
         print(f'bad Ollama setting: {error}')
         return 1
+    base = server.base
+    if skipped:
+        print(f'{", ".join(skipped)} not answering; using {ollama_url.describe(base)}')
     try:
         chunks = [json.loads(line) for line in pathlib.Path(args.input).read_text(encoding='utf-8').splitlines()
                   if line.strip()]

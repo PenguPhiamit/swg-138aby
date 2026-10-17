@@ -7,10 +7,11 @@ paths outside the workspace, so it can't touch /opt/swg, the board or the bots. 
 
     python -I local_agent.py --workspace DIR --task "..." [--model M] [--ctx N] [--max-steps 25] [--ollama-url URL]
 
-Writes DIR/agent-log.jsonl (every request and reply) and prints the final answer. The Ollama address comes from
-ollama_url.py (OLLAMA_URL, then ollama-url.txt, then this PC); --ollama-url overrides it for one run. The model
-(default gpt-oss:20b) and the context size in tokens (default 65536) come the same way from OLLAMA_MODEL / ollama-model.txt
-and OLLAMA_CTX / ollama-ctx.txt; --model and --ctx override them.
+Writes DIR/agent-log.jsonl (every request and reply) and prints the final answer. The Ollama server comes from
+ollama_url.pick() (OLLAMA_URL, else the first server in ollama-url.txt that answers, else this PC), with that server's
+model and context size; --ollama-url, --model and --ctx override them for one run. Every 5 steps, and at the end, the
+model is unloaded on whichever PC runs it, because its prompt cache grows in that PC's RAM (memguard.py); the commit
+headroom check is for this PC only.
 """
 import argparse, json, pathlib, sys, time, urllib.request
 
@@ -95,15 +96,24 @@ def main():
     parser.add_argument('--max-steps', type=int, default=25)
     parser.add_argument('--ollama-url', help='Ollama server address; default: OLLAMA_URL, ollama-url.txt or this PC')
     args = parser.parse_args()
+    skipped = []
     try:
-        base = ollama_url.normalize(args.ollama_url) if args.ollama_url else ollama_url.base_url()
+        if args.ollama_url:
+            server = ollama_url.Server(ollama_url.normalize(args.ollama_url), None, None)
+        else:
+            server, skipped = ollama_url.pick()
     except ollama_url.OllamaUrlError as error:
         parser.error(f'bad Ollama address: {error}')
-    try:
-        model = ollama_url.parse_model(args.model) if args.model else ollama_url.model()
-        ctx = ollama_url.parse_ctx(args.ctx) if args.ctx else ollama_url.ctx()
     except ollama_url.OllamaSettingError as error:
         parser.error(f'bad Ollama setting: {error}')
+    base = server.base
+    try:
+        model = ollama_url.parse_model(args.model) if args.model else server.model or ollama_url.model()
+        ctx = ollama_url.parse_ctx(args.ctx) if args.ctx else server.ctx or ollama_url.ctx()
+    except ollama_url.OllamaSettingError as error:
+        parser.error(f'bad Ollama setting: {error}')
+    if skipped:
+        print(f'{", ".join(skipped)} not answering; using {ollama_url.describe(base)}')
 
     root = pathlib.Path(args.workspace).resolve()
     protected = {p.resolve() for p in root.rglob('*') if p.is_file()}  # files present at the start are inputs
@@ -113,16 +123,15 @@ def main():
     try:
         return loop(args, root, protected, log, messages, model, ctx, base, started)
     finally:
-        if ollama_url.is_local(base):
-            memguard.unload(base, model)   # frees the model and its prompt cache for whoever needs the PC next
+        memguard.unload(base, model)   # frees the model and its prompt cache for whoever needs that PC next
 
 
 def loop(args, root, protected, log, messages, model, ctx, base, started):
     local = ollama_url.is_local(base)
     for step in range(1, args.max_steps + 1):
-        if local:   # memguard.py: the prompt cache grows with every request; unloading empties it
-            if step > 1 and (step - 1) % 5 == 0:
-                memguard.unload(base, model)
+        if step > 1 and (step - 1) % 5 == 0:   # memguard.py: the prompt cache grows with every request, on any PC
+            memguard.unload(base, model)
+        if local:   # this PC's commit headroom; another PC's memory can't be read from here
             room = memguard.commit_headroom_gb()
             if room is not None and room < memguard.MIN_HEADROOM_GB:
                 memguard.unload(base, model)

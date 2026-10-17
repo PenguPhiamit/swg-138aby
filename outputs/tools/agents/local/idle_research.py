@@ -25,6 +25,11 @@ Nothing here touches the server, the bots or the board. Anyone may add an "open"
 A topic with "kind": "map" and "job": <name> is a chunk job instead (local_jobs.py names them: proofread, bot-gaps):
 local_jobs.py prepares <id>/input.jsonl, local_map.py asks the model about one chunk at a time (yielding to the owner's
 client and to low memory; a paused topic stays open and resumes), and local_jobs.py writes <id>/report.md.
+
+Fallback (17 Oct): ollama-url.txt may list several servers (the friend's PC, then this PC); each timer run uses the
+first that answers (ollama_url.pick) and hands that one address, model and context size to the job. Two optional topic
+fields: "model" runs the topic with that model (it waits while the server in use doesn't have it), and
+"local_only": true keeps it on this PC (for text with real people's names). Agent/local-model.md is the workflow.
 """
 import fcntl
 import hashlib
@@ -223,38 +228,50 @@ def remote_blockers(base, record=False, now=None):
     return why
 
 
-def remote_base():
-    """The other PC's address, or None when Ollama is on this PC (or the address is unusable: blockers() says so)."""
+def choose():
+    """(server, skipped, problem): the Server this run uses (the first in ollama-url.txt that answers), the host:port of
+    the ones before it that didn't answer, and instead of a server, why the settings are unusable."""
     try:
-        base = ollama_url.base_url()
-    except ollama_url.OllamaUrlError:
+        server, skipped = ollama_url.pick()
+    except ollama_url.OllamaUrlError as error:
+        return None, [], f'bad Ollama address ({error})'
+    except ollama_url.OllamaSettingError as error:
+        return None, [], f'bad Ollama setting ({error})'
+    return server, skipped, None
+
+
+def remote_base(server=None):
+    """The other PC's address, or None when Ollama is on this PC (or the settings are unusable: blockers() says so)."""
+    server = choose()[0] if server is None else server
+    return None if server is None or ollama_url.is_local(server.base) else server.base
+
+
+def tags_of(base):
+    """The body of the server's /api/tags answer, or None when it doesn't answer."""
+    try:
+        return urllib.request.urlopen(ollama_url.api('/api/tags', base), timeout=5).read()
+    except OSError:
         return None
-    return None if ollama_url.is_local(base) else base
 
 
-def blockers(record=False):
-    """Reasons not to start now; an empty list means idle."""
+def blockers(record=False, server=None):
+    """Reasons not to start now on server (default: the one choose() picks); an empty list means idle."""
     why = []
     if STOP.exists():
         why.append('Agent/local-research/STOP exists')
-    try:
-        base = ollama_url.base_url()
-    except ollama_url.OllamaUrlError as error:
-        return why + [f'bad Ollama address ({error})']
-    try:
-        model, _ = ollama_url.model(), ollama_url.ctx()
-    except ollama_url.OllamaSettingError as error:
-        return why + [f'bad Ollama setting ({error})']
+    if server is None:
+        server, _, problem = choose()
+        if problem:
+            return why + [problem]
+    base, model = server.base, server.model
     remote = not ollama_url.is_local(base)
     if remote:
         why += remote_blockers(base, record)
     tags = None
     if not any('not answering' in reason for reason in why):   # (a remote server that is down has said so already)
-        try:
-            tags = urllib.request.urlopen(ollama_url.api('/api/tags', base), timeout=5).read()
-        except OSError:
-            if not remote:
-                why.append('Ollama is not answering')
+        tags = tags_of(base)
+        if tags is None and not remote:
+            why.append('Ollama is not answering')
     absent = ollama_url.model_missing(tags, model) if tags is not None else None   # else every topic would fail
     if absent:
         why.append(absent)
@@ -307,21 +324,22 @@ def copy_sources(topic, src, cap=SOURCE_CAP):
     return copied, skipped
 
 
-def run_map(topic):
+def run_map(topic, server):
     """A chunk job: local_jobs.py prepares the input, local_map.py asks the model chunk by chunk, local_jobs.py writes
     report.md. A run paused by the owner's client or low memory leaves the topic open; it resumes where it stopped."""
     ws = BASE / topic['id']
     ws.mkdir(parents=True, exist_ok=True)
     job, started, steps, code = topic.get('job', ''), time.time(), [], 1
-    base = remote_base()
-    env = dict(os.environ, OLLAMA_URL=base) if base else None
+    base = remote_base(server)
+    env = dict(os.environ, OLLAMA_URL=server.base)   # the very server this run was decided on, no second pick
     try:
         prep = subprocess.run([sys.executable, str(JOBS), 'prepare', job, str(ws)], capture_output=True, text=True,
                               errors='replace', timeout=1800)
         steps.append(prep.stdout + prep.stderr)
         if prep.returncode == 0:
             mapped = subprocess.run([sys.executable, str(MAP), '--input', str(ws / 'input.jsonl'), '--instruction',
-                                     str(ws / 'instruction.txt'), '--out', str(ws), '--yield-to-owner'],
+                                     str(ws / 'instruction.txt'), '--out', str(ws), '--yield-to-owner',
+                                     '--model', server.model, '--ctx', str(min(server.ctx, 16384))],
                                     capture_output=True, text=True, errors='replace', timeout=RUN_LIMIT_S, env=env)
             steps.append(mapped.stdout + mapped.stderr)
             code = mapped.returncode
@@ -368,16 +386,21 @@ def run_map(topic):
     return status != 'failed'
 
 
-def run(topic):
+def run(topic, server=None):
+    """Run one topic on server (default: the one choose() picks, with the topic's own model if it names one)."""
+    if server is None:
+        server = choose()[0]
+        if topic.get('model'):
+            server = server._replace(model=ollama_url.parse_model(topic['model']))
     if topic.get('kind') == 'map':
-        return run_map(topic)
+        return run_map(topic, server)
     ws = BASE / topic['id']
     src = ws / 'src'
     shutil.rmtree(src, ignore_errors=True)
     for old in ('report.md', 'TASK.md', 'agent-log.jsonl'):
         (ws / old).unlink(missing_ok=True)
     src.mkdir(parents=True)
-    model, ctx = ollama_url.model(), ollama_url.ctx()   # blockers() has checked them; local_agent.py gets them as flags
+    model, ctx = server.model, server.ctx   # blockers() has checked them; local_agent.py gets them as flags
     copied, skipped = copy_sources(topic, src, source_cap(ctx))
     scenario = any('/scenarios/' in c for c in copied)
     (ws / 'TASK.md').write_text(BRIEF.format(
@@ -385,8 +408,8 @@ def run(topic):
         scenario_note=' and, where its path says scenarios/, of the bot test scenario' if scenario else '')
         + '\nFiles:\n' + ''.join(f'- {c}\n' for c in copied), encoding='utf-8')
     started = time.time()
-    base = remote_base()   # a server on another PC: hand local_agent.py the very address this run was decided on
-    env = dict(os.environ, OLLAMA_URL=base) if base else None
+    base = remote_base(server)
+    env = dict(os.environ, OLLAMA_URL=server.base)   # hand local_agent.py the very address this run was decided on
     try:
         out = subprocess.run([sys.executable, str(AGENT), '--workspace', str(ws), '--max-steps', str(MAX_STEPS),
                               '--model', model, '--ctx', str(ctx), '--task', 'Read TASK.md, then the files it lists, then write report.md as TASK.md asks.'],
@@ -447,19 +470,54 @@ def main():
                 t['status'] = 'open'
         save(QUEUE, queue)
     todo = [t for t in queue['topics'] if t.get('status') == 'open']
-    why = blockers(record=sys.argv[1] == 'check')
-    remote = remote_base()
-    print((f'[remote Ollama {ollama_url.describe(remote)}] ' if remote else '')
-          + f'{len(todo)} open topic(s); ' + ('idle: would start ' + todo[0]['id'] if not why and todo else
-                                              'not starting: ' + ('; '.join(why) if why else 'queue empty')))
-    if sys.argv[1] == 'status' or why or not todo:
+    server, skipped, problem = choose()
+    held, topic = {}, None
+    if server:
+        tags = None
+        for t in todo:
+            reason = hold_reason(t, server, tags)
+            if reason == 'tags?':   # fetch the model list only when a topic names a model
+                tags = tags_of(server.base) or b''
+                reason = hold_reason(t, server, tags)
+            if reason:
+                held[t['id']] = reason
+            elif topic is None:
+                topic = t
+        if topic and topic.get('model'):
+            server = server._replace(model=topic['model'])
+    why = ([] if not STOP.exists() else ['Agent/local-research/STOP exists']) + [problem] if problem else \
+        blockers(record=sys.argv[1] == 'check', server=server)
+    remote = remote_base(server) if server else None
+    where = ', '.join(skipped) + ' not answering, so ' if skipped else ''
+    print((f'[{where}remote Ollama {ollama_url.describe(remote)}] ' if remote else
+           f'[{where}this PC] ' if skipped else '')
+          + f'{len(todo)} open topic(s)' + (f', {len(held)} held ({"; ".join(f"{k}: {v}" for k, v in held.items())})'
+                                            if held else '') + '; '
+          + ('idle: would start ' + topic['id'] if not why and topic else
+             'not starting: ' + ('; '.join(why) if why else 'queue empty' if not todo else 'every open topic is held')))
+    if sys.argv[1] == 'status' or why or not topic:
         return 0
-    topic = todo[0]
     for t in queue['topics']:
         if t['id'] == topic['id']:
             t.update(status='running', started=now())
     save(QUEUE, queue)
-    return 0 if run(topic) else 1
+    return 0 if run(topic, server) else 1
+
+
+def hold_reason(topic, server, tags):
+    """Why topic can't run on server now (None: it can). 'tags?' asks the caller for the server's model list."""
+    if topic.get('local_only') and not ollama_url.is_local(server.base):
+        return 'local_only, waits for this PC'
+    name = topic.get('model')
+    if not name:
+        return None
+    try:
+        ollama_url.parse_model(name)
+    except ollama_url.OllamaSettingError as error:
+        return f'bad model ({error})'
+    if tags is None:
+        return 'tags?'
+    return f'needs {name}, not on this server' if ollama_url.model_missing(tags, name) else None
 
 
 if __name__ == '__main__':

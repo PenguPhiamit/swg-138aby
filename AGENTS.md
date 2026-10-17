@@ -52,6 +52,7 @@ Ask when you're blocked or unsure; don't guess, and don't stop silently.
   - Answer in the other file, and say which message you're answering.
   - Keep messages short and concrete: what you need, why, and what you'll do meanwhile.
 - **When you're blocked by your sandbox** (no WSL, no network, a denied approval), say so in `to-claude.md`. Claude has WSL and network access and can do that step, within the same rules and the owner's OK where it's needed.
+- **The local model (owner, 17 Oct):** Ollama runs on the friend's PC (this PC is the fallback). Both agents queue drafting and first-pass jobs in `outputs/Agent/local-research/queue.json`, and the agent named in a report's topic checks it before anything relies on it. Look for your topics in `review` at the start of each session. Which jobs go there, the topic fields, and how results come back: `outputs/Agent/local-model.md`.
 - **Live status without WSL (owner, 14 Oct):** `outputs/Agent/live/status.md` (and `status.json`) is rewritten every 5 minutes by a WSL timer (`swg-live-status.timer`, running `outputs/tools/live_status.py` as root). It holds processes and memory, one status line per bot when no squad run is active (a run's activity records otherwise; it never sends a bot a command during a run), and the test galaxy's console tail without secrets. Read it before asking Claude for a runtime check.
 
 ## Server lock (most important)

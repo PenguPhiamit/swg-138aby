@@ -1,0 +1,8 @@
+# Copy to ollama-url.txt (gitignored: a home-network address stays off git) and put the friend's address in.
+# One Ollama server per line, in order of preference: the first that answers within 3 seconds is used, so when the
+# friend's PC is off (or asleep, or Ollama is quit) the jobs run on this PC instead. After the address, optionally the
+# model and the context size (tokens) to use on that server. ollama_url.py has the rules; Agent/local-model.md the workflow.
+#
+# address                    model              context
+http://192.168.1.x:11434     qwen3.6:35b-a3b    65536
+127.0.0.1                    qwen3:8b           16384

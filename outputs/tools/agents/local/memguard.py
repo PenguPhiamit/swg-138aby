@@ -10,7 +10,8 @@ before each request and unload the model every few requests.
     unload(base, model)         ask Ollama at base to unload model now (errors ignored)
     MIN_HEADROOM_GB             below this, stop or don't start (the GPT relay's own guard is 6 GB too)
 
-Only meaningful when Ollama runs on this PC; for a server on another PC (REMOTE-OLLAMA.md) the callers skip it.
+commit_headroom_gb() is about this PC only, so the callers skip it for a server on another PC (REMOTE-OLLAMA.md). The
+regular unload applies to every server (17 Oct): the prompt cache grows the same way in the other PC's RAM.
 """
 import json
 import subprocess
