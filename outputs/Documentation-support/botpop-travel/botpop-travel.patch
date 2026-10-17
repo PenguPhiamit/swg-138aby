@@ -1,0 +1,1136 @@
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h
+index 256e749..f0db85b 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h
+@@ -68,6 +68,10 @@ static const Destination DESTINATIONS[] = {
+ };
+ static const int DESTINATION_COUNT = sizeof(DESTINATIONS) / sizeof(DESTINATIONS[0]);
+ 
++// Bilbousa on Nal Hutta (PL-03, test galaxy only): reached from Tatooine only, so it is neither a launch city nor a tier
++// destination; bots go there by ticket (BotPopTravel.h). Centre and radius from the hutta_bilbousa navmesh.
++static const City HUTTA_CITY = {"hutta", "Bilbousa", -747, 1556, 400};
++
+ // Launch spots: the starting cities first, then the destinations (botpop explore starts at those too).
+ inline const City& launchCityAt(int index) {
+ 	return index < STARTER_CITY_COUNT ? STARTER_CITIES[index] : DESTINATIONS[index - STARTER_CITY_COUNT].city;
+@@ -178,6 +182,19 @@ public:
+ 	int style = -1, styleSp = 0;
+ 	std::vector<String> trees;
+ 	uint64 supportMedicUntilMs = 0;
++
++	// Travel by ticket (BotPopTravel.h): the trip under way, step by step, and the earliest time of the next one.
++	enum Trip { TRIP_NONE, TRIP_TERMINAL, TRIP_COLLECTOR, TRIP_SHUTTLE };
++	int trip = TRIP_NONE;
++	String tripReason, tripFromPlanet, tripFromPoint, tripToPlanet, tripToPoint;
++	City tripCity = {"", "", 0, 0, 0}; // where the bot lives after the trip (names point into the static tables)
++	int tripTier = 0, tripFare = 0, tripTopUp = 0, tripSnaps = 0;
++	bool tripConnecting = false; // a shuttle to the planet's starport first: the next trip leaves at once
++	uint64 tripTerminalID = 0, tripCollectorID = 0, tripTicketID = 0, tripPathFor = 0;
++	uint64 tripStartMs = 0, tripStepMs = 0, tripBoughtMs = 0, tripCheckMs = 0, nextTripMs = 0;
++	std::vector<WorldCoordinates> tripPath; // findPath's points into or out of a building (each with its cell)
++	size_t tripNext = 0;
++	Vector3 tripDoor; // the last outdoor spot before the bot stepped into a cell
+ };
+ 
+ // Real players multiclass (owner, 16 Oct; Documentation-support/precu-player-builds.md). Role -1: the sampler
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+index fb45800..07a4986 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+@@ -520,6 +520,7 @@ inline void BotPopManager::setupLaunch(ZoneServer* zoneServer, CreatureObject* b
+ 	L->nextSearchMs = now + 2000 + System::random(5000);
+ 	L->nextTierCheckMs = now + 600000;
+ 	L->nextMissionTryMs = now + 120000 + System::random(240000); // a few kills first, then the terminal
++	L->nextTripMs = now + tripInterval();
+ 	L->tier = cityIndex < STARTER_CITY_COUNT ? 0 : DESTINATIONS[cityIndex - STARTER_CITY_COUNT].tier;
+ 
+ 	state->launch = L;
+@@ -1390,28 +1391,23 @@ inline void BotPopManager::launchEntertain(BotState* state, CreatureObject* bot,
+ 	}
+ }
+ 
+-// Moves on: another starting planet's city at combat level 1-6, a tier-1 outpost at 7-14, tier 2 from 15.
++// Moves on: another starting planet's city at combat level 1-6, a tier-1 outpost at 7-14, tier 2 from 15. By ticket
++// (Core3.BotPopTravel, the default) the bot walks to the terminal and rides the shuttle there (BotPopTravel.h), at
++// most one trip every 20-30 minutes unless forced; "teleport" keeps the old jump below.
+ inline void BotPopManager::launchTravel(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, int level, uint64 now, const char* reason) {
+-	ZoneServer* zoneServer = bot->getZoneServer();
+-	int tier = level >= 15 ? 2 : level >= 7 ? 1 : 0;
+-	std::vector<City> options;
+-
+-	for (int t = tier; t >= 0 && options.empty(); --t) {
+-		if (t == 0) {
+-			for (int i = 0; i < STARTER_CITY_COUNT; ++i) {
+-				if (L->planet != STARTER_CITIES[i].planet && zoneServer->getZone(STARTER_CITIES[i].planet) != nullptr)
+-					options.push_back(STARTER_CITIES[i]);
+-			}
+-		} else {
+-			for (int i = 0; i < DESTINATION_COUNT; ++i) {
+-				const City& city = DESTINATIONS[i].city;
++	if (travelByTicket()) {
++		if (L->trip == LaunchState::TRIP_NONE && (now >= L->nextTripMs || strcmp(reason, "forced") == 0))
++			tripStart(state, bot, zone, L, level, now, reason);
++		else
++			L->noTargetSinceMs = now; // not yet: asked again when the reason comes round again
+ 
+-				if (DESTINATIONS[i].tier == t && L->planet != city.planet && zoneServer->getZone(city.planet) != nullptr)
+-					options.push_back(city);
+-			}
+-		}
++		return;
+ 	}
+ 
++	ZoneServer* zoneServer = bot->getZoneServer();
++	int tier = level >= 15 ? 2 : level >= 7 ? 1 : 0;
++	std::vector<City> options = travelOptions(zoneServer, L, tier, reason);
++
+ 	if (options.empty()) {
+ 		L->noTargetSinceMs = now;
+ 		return;
+@@ -1580,6 +1576,9 @@ inline void BotPopManager::launchStep(BotState* state, CreatureObject* bot, Zone
+ 			row["lvl"] = combatLevel(bot);
+ 			row["kills"] = L->kills;
+ 			SimLog::instance()->write(row);
++
++			if (L->trip != LaunchState::TRIP_NONE)
++				tripEnd(state, bot, L, "died", "killed on the way", now);
+ 		} else if (now - L->deadSinceMs > 20000) {
+ 			launchRevive(state, bot, zone, L, now);
+ 		}
+@@ -1636,6 +1635,17 @@ inline void BotPopManager::launchStep(BotState* state, CreatureObject* bot, Zone
+ 	if (L->style >= 0 && L->role != LaunchState::MEDIC && L->role != LaunchState::ENTERTAINER)
+ 		launchSideHeal(bot, L, now);
+ 
++	// On a trip by ticket (BotPopTravel.h): the trip has the step. A trip of its own every 20-30 minutes, when the bot
++	// is between things (no target, corpse, mission, rest or dance).
++	if (L->trip == LaunchState::TRIP_NONE && now >= L->nextTripMs && L->role != LaunchState::EXPLORER && L->targetID == 0
++			&& L->corpseID == 0 && L->missionID == 0 && !L->resting && !L->dancing && !bot->isInCombat() && tripsWanted())
++		launchTravel(state, bot, zone, L, combatLevel(bot), now, "trip");
++
++	if (L->trip != LaunchState::TRIP_NONE) {
++		tripStep(state, bot, zone, L, now, seconds);
++		return;
++	}
++
+ 	switch (L->role) {
+ 	case LaunchState::EXPLORER:
+ 		launchExplore(state, bot, zone, L, now, seconds);
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+index 2b9c7b9..55c5d4e 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+@@ -34,6 +34,14 @@
+ #include "server/zone/objects/mission/MissionObject.h"
+ #include "server/zone/objects/mission/MissionTypes.h"
+ #include "server/zone/objects/tangible/terminal/mission/MissionTerminal.h"
++#include "server/zone/managers/planet/PlanetTravelPoint.h"
++#include "server/zone/managers/objectcontroller/ObjectController.h"
++#include "server/zone/objects/creature/commands/QueueCommand.h"
++#include "server/zone/objects/tangible/terminal/travel/TravelTerminal.h"
++#include "server/zone/objects/tangible/ticket/TicketObject.h"
++#include "server/zone/objects/building/BuildingObject.h"
++#include "server/zone/objects/cell/CellObject.h"
++#include "server/zone/objects/region/CityRegion.h"
+ #include <map>
+ #include "templates/params/creature/CreaturePosture.h"
+ 
+@@ -78,6 +86,11 @@
+  *   Core3.BotPopActiveNear = 150       throttled: most bots acting because a real player is near
+  *   Core3.BotPopActiveRadius = 128     throttled: metres from a real player
+  *   Core3.BotPopActiveRotating = 50    throttled: the rotating set
++ *   Core3.BotPopTravel = "ticket"      launch bots travel by ticket and shuttle (BotPopTravel.h); "teleport": the
++ *                                      old switchZone jump
++ *   Core3.BotPopTravelTrips = true     ticket: a trip of their own every 20-30 minutes, not only when outgrown
++ *   Core3.BotPopTravelMinutes = 20     ticket: the shortest time between two trips of one bot (plus 0-10 minutes)
++ *   Core3.BotPopTravelTopUp = true     ticket: a bot short of the fare gets the difference in the bank first
+  */
+ namespace botpop {
+ 
+@@ -155,10 +168,12 @@ private:
+ 	std::atomic<int> launchBots{0}, launchKills{0}, launchDeaths{0}, launchBoxes{0}, launchTravels{0};
+ 	uint64 nextPositionsMs = 0; // the tick writes log/botpop-positions.json every 10 s (the live map)
+ 	std::atomic<int> launchMissions{0}, launchMissionsDone{0};
+-	Mutex launchShared; // the three maps below, shared by every step
++	std::atomic<int> launchTravelTries{0}, launchTravelFails{0}; // by ticket; launchTravels counts the arrivals
++	Mutex launchShared; // the four maps below, shared by every step
+ 	std::map<std::string, uint64> terminalByCity;              // a city's general mission terminal (0: none outdoors)
+ 	std::map<std::string, std::vector<int>> exploreVisits;     // per planet: 32 x 32 squares of 512 m, times chosen
+ 	std::set<std::string> censusSeen;                          // planet|name|256 m square already recorded
++	std::map<std::string, uint64> objectByPoint;               // planet|travel point|type: its travel terminal or collector
+ 
+ 	// Stats: the last pass (for /botpop status) and the current minute (for the log line).
+ 	int lastActive = 0, lastNear = 0, lastRotating = 0, lastBusy = 0, lastRealPlayers = 0;
+@@ -277,7 +292,8 @@ public:
+ 		if (launchBots.load() > 0)
+ 			reply["launch"] = {{"spawned", launchBots.load()}, {"kills", launchKills.load()}, {"deaths", launchDeaths.load()},
+ 				{"boxes", launchBoxes.load()}, {"travels", launchTravels.load()}, {"missions", launchMissions.load()},
+-				{"missions_done", launchMissionsDone.load()}};
++				{"missions_done", launchMissionsDone.load()}, {"travel_tries", launchTravelTries.load()},
++				{"travel_fails", launchTravelFails.load()}};
+ 
+ 		return reply;
+ 	}
+@@ -358,6 +374,28 @@ private:
+ 	void launchSnapshot(BotState* state, CreatureObject* bot, LaunchState* L, uint64 now);
+ 	void launchStep(BotState* state, CreatureObject* bot, Zone* zone, uint64 now, float seconds);
+ 
++	// Travel by ticket and shuttle (BotPopTravel.h).
++	static bool travelByTicket();
++	static bool tripsWanted();
++	static uint64 tripInterval();
++	static bool cityNear(const String& planet, float x, float y, City& out);
++	std::vector<City> travelOptions(ZoneServer* zoneServer, LaunchState* L, int tier, const char* reason);
++	void tripStart(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, int level, uint64 now, const char* reason);
++	void tripStep(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, uint64 now, float seconds);
++	void tripBoard(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, uint64 now, float seconds);
++	void tripArrived(BotState* state, CreatureObject* bot, LaunchState* L, uint64 now);
++	void tripEnd(BotState* state, CreatureObject* bot, LaunchState* L, const char* step, const String& why, uint64 now);
++	int tripWalk(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, SceneObject* target, float stopAt, float seconds);
++	static void tripPlace(CreatureObject* bot, Zone* zone, Vector3 position, CellObject* cell, float speed, float dx, float dy);
++	void tripLeaveCell(CreatureObject* bot, LaunchState* L);
++	uint64 tripFindNear(Zone* zone, PlanetTravelPoint* point, int type, float range);
++	JSONSerializationType tripRow(const char* event, CreatureObject* bot, LaunchState* L, uint64 now);
++	static int tripCommand(CreatureObject* bot, uint32 crc, uint64 target, const String& args);
++	static uint64 tripTicket(CreatureObject* bot, LaunchState* L, int* count);
++	static int tripFare(CreatureObject* bot, LaunchState* L);
++	static bool tripWhyNotBuy(CreatureObject* bot, LaunchState* L, SceneObject* terminal, int fare, String& step, String& why);
++	static bool tripWhyNotBoard(CreatureObject* bot, LaunchState* L, uint64 ticketID, String& step, String& why);
++
+ 	void setError(const String& message) { // status() reads it from the command's thread
+ 		Locker locker(&mutex);
+ 		lastError = message;
+@@ -1026,5 +1064,6 @@ inline bool BotPopManager::tick() {
+ } // namespace botpop
+ 
+ #include "server/zone/managers/botpop/BotPopLaunchBrain.h"
++#include "server/zone/managers/botpop/BotPopTravel.h"
+ 
+ #endif // BOTPOPMANAGER_H_
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopTravel.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopTravel.h
+new file mode 100644
+index 0000000..db5414b
+--- /dev/null
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopTravel.h
+@@ -0,0 +1,922 @@
++/*
++				Copyright <SWGEmu>
++		See file COPYING for copying conditions.*/
++
++#ifndef BOTPOPTRAVEL_H_
++#define BOTPOPTRAVEL_H_
++
++#include <cstring>
++
++/*
++ * Included at the end of BotPopManager.h: launch bots travel by ticket and shuttle (Claude, 16 Oct 2026; gap 9 of
++ * outputs/Documentation-support/functional-test-plan.md, notes in outputs/Documentation-support/botpop-travel/).
++ *
++ * A bot that moves on walks to its town's travel terminal (into the starport building if the terminal is inside),
++ * buys a ticket with the purchaseTicket command (what the client's ticket purchase window sends), walks to the ticket
++ * collector, waits for the shuttle to land and boards with the boardShuttle command (what the collector's radial
++ * runs), which moves it to the destination. One "travel_try" row per trip, then "travel_done" or one "travel_fail"
++ * with the step and the server's reason. The commands' own messages go to a client the bot does not have, so the
++ * reason is found by the same checks the command makes, in its order, just before it runs (tripWhyNotBuy,
++ * tripWhyNotBoard); a refusal those checks did not predict is logged with the command's return code.
++ *
++ * Locking: everything here runs in the bot's step, with the bot locked and nothing else held. The commands take their
++ * own cross-locks against the bot (inventory, ticket, city), as when a player runs them. Steps into and out of a cell
++ * go through updateZoneWithParent / updateZone as AiAgent::updateCurrentPosition does (the zone's lock inside, then the
++ * cell's transfer). No BotPop lock (mutex, launchShared) is held across any object call: a cross-lock gives the bot's
++ * lock back while it waits, and a lock held over it closes a cycle (C55 F1, the helper droid).
++ */
++namespace botpop {
++
++inline bool BotPopManager::travelByTicket() {
++	static const bool ticket = ConfigManager::instance()->getString("Core3.BotPopTravel", "ticket") != "teleport";
++	return ticket;
++}
++
++inline bool BotPopManager::tripsWanted() {
++	static const bool wanted = travelByTicket() && ConfigManager::instance()->getBool("Core3.BotPopTravelTrips", true);
++	return wanted;
++}
++
++// 20-30 minutes (Core3.BotPopTravelMinutes plus up to 10), in ms.
++inline uint64 BotPopManager::tripInterval() {
++	static const int minutes = Math::max(1, configInt("Core3.BotPopTravelMinutes", 20));
++	return (uint64)minutes * 60000 + System::random(600000);
++}
++
++// The launch city (or Bilbousa) on `planet` whose centre is nearest (x, y), within its radius plus 500 m.
++inline bool BotPopManager::cityNear(const String& planet, float x, float y, City& out) {
++	float best = 1e12f;
++	bool found = false;
++
++	auto consider = [&](const City& city) {
++		if (planet != city.planet)
++			return;
++
++		float dx = city.x - x, dy = city.y - y, reach = city.radius + 500.f, distance = dx * dx + dy * dy;
++
++		if (distance < reach * reach && distance < best) {
++			best = distance;
++			out = city;
++			found = true;
++		}
++	};
++
++	for (int i = 0; i < LAUNCH_CITY_COUNT; ++i)
++		consider(launchCityAt(i));
++
++	consider(HUTTA_CITY);
++	return found;
++}
++
++// Where a bot that moves on may go: another starting planet's city at combat level 1-6, a tier-1 outpost at 7-14,
++// tier 2 from 15 (lower tiers when none is loaded). By ticket also: Nal Hutta from Tatooine one trip in four (the only
++// route there) and Tatooine from Nal Hutta, and on a trip of its own ("trip") one time in three another city on the
++// same planet (the planet's shuttles).
++inline std::vector<City> BotPopManager::travelOptions(ZoneServer* zoneServer, LaunchState* L, int tier, const char* reason) {
++	std::vector<City> options;
++
++	if (travelByTicket()) {
++		bool here = L->planet == HUTTA_CITY.planet;
++
++		if (here || (L->planet == "tatooine" && zoneServer->getZone(HUTTA_CITY.planet) != nullptr && System::random(3) == 0)) {
++			for (int i = 0; here && i < STARTER_CITY_COUNT; ++i) {
++				if (strcmp(STARTER_CITIES[i].planet, "tatooine") == 0)
++					options.push_back(STARTER_CITIES[i]);
++			}
++
++			if (!here)
++				options.push_back(HUTTA_CITY);
++
++			return options;
++		}
++
++		if (strcmp(reason, "trip") == 0 && System::random(2) == 0) {
++			for (int i = 0; i < STARTER_CITY_COUNT; ++i) {
++				if (L->planet == STARTER_CITIES[i].planet && L->cityName != STARTER_CITIES[i].name)
++					options.push_back(STARTER_CITIES[i]);
++			}
++
++			if (!options.empty())
++				return options;
++		}
++	}
++
++	for (int t = tier; t >= 0 && options.empty(); --t) {
++		if (t == 0) {
++			for (int i = 0; i < STARTER_CITY_COUNT; ++i) {
++				if (L->planet != STARTER_CITIES[i].planet && zoneServer->getZone(STARTER_CITIES[i].planet) != nullptr)
++					options.push_back(STARTER_CITIES[i]);
++			}
++		} else {
++			for (int i = 0; i < DESTINATION_COUNT; ++i) {
++				const City& city = DESTINATIONS[i].city;
++
++				if (DESTINATIONS[i].tier == t && L->planet != city.planet && zoneServer->getZone(city.planet) != nullptr)
++					options.push_back(city);
++			}
++		}
++	}
++
++	return options;
++}
++
++inline JSONSerializationType BotPopManager::tripRow(const char* event, CreatureObject* bot, LaunchState* L, uint64 now) {
++	JSONSerializationType row = launchRow(event, bot, L);
++	row["from_planet"] = L->tripFromPlanet.toCharArray();
++	row["from_point"] = L->tripFromPoint.toCharArray();
++	row["to_planet"] = L->tripToPlanet.toCharArray();
++	row["to_point"] = L->tripToPoint.toCharArray();
++	row["to_city"] = L->tripCity.name;
++	row["reason"] = L->tripReason.toCharArray();
++	row["secs"] = L->tripStartMs > 0 ? (int)((now - L->tripStartMs) / 1000) : 0;
++	return row;
++}
++
++// The travel terminal (type TRAVELTERMINAL, whose own travel point is `point`) or ticket collector (TICKETCOLLECTOR)
++// of a travel point: the nearest to the point's shuttle within `range`, outdoors first, else in a building near it
++// (starport terminals stand in the terminal hall). Looked up once per point and type; 0 when there is none.
++inline uint64 BotPopManager::tripFindNear(Zone* zone, PlanetTravelPoint* point, int type, float range) {
++	std::string key = std::string(point->getPointZone().toCharArray()) + "|" + point->getPointName().toCharArray() + "|" + std::to_string(type);
++
++	{
++		Locker locker(&launchShared);
++		auto it = objectByPoint.find(key);
++
++		if (it != objectByPoint.end())
++			return it->second;
++	}
++
++	Vector3 at = point->getDeparturePosition();
++	PlanetManager* planetManager = zone->getPlanetManager();
++	uint64 found = 0;
++	float best = 1e12f;
++
++	auto consider = [&](SceneObject* object) {
++		if (object == nullptr || object->getGameObjectType() != type)
++			return;
++
++		if (type == SceneObjectType::TRAVELTERMINAL) {
++			TravelTerminal* terminal = cast<TravelTerminal*>(object);
++			Reference<PlanetTravelPoint*> own = terminal != nullptr ? terminal->getPlanetTravelPoint() : nullptr;
++
++			if (own == nullptr || !own->isPoint(point->getPointZone(), point->getPointName()))
++				return;
++		} else {
++			Reference<PlanetTravelPoint*> own = planetManager->getNearestPlanetTravelPoint(object, 64.f); // as TicketCollector
++
++			if (own == nullptr || !own->isPoint(point->getPointZone(), point->getPointName()))
++				return;
++		}
++
++		Vector3 position = object->getWorldPosition();
++		float dx = position.getX() - at.getX(), dy = position.getY() - at.getY();
++		float score = dx * dx + dy * dy + (object->getParentID() != 0 ? 1e6f : 0.f); // outdoors first
++
++		if (dx * dx + dy * dy <= range * range && score < best) {
++			best = score;
++			found = object->getObjectID();
++		}
++	};
++
++	SortedVector<ManagedReference<TreeEntry*>> objects;
++	zone->getInRangeObjects(at.getX(), 0, at.getY(), range, &objects, true, false);
++
++	for (int i = 0; i < objects.size(); ++i) {
++		SceneObject* object = static_cast<SceneObject*>(objects.get(i).get());
++		consider(object);
++
++		if (object == nullptr || !object->isBuildingObject())
++			continue;
++
++		// What stands in the building's cells (read only; terminals and collectors don't move).
++		BuildingObject* building = cast<BuildingObject*>(object);
++
++		for (int c = 1; building != nullptr && c <= building->getTotalCellNumber(); ++c) {
++			ManagedReference<CellObject*> cell = building->getCell(c);
++
++			for (int j = 0; cell != nullptr && j < cell->getContainerObjectsSize(); ++j) {
++				ManagedReference<SceneObject*> child = cell->getContainerObject(j);
++				consider(child.get());
++			}
++		}
++	}
++
++	Locker locker(&launchShared);
++	objectByPoint[key] = found;
++	return found;
++}
++
++// A command as ObjectController::activateCommand runs it for a player (the queue command's own doQueueCommand), with
++// its return code (QueueCommand::SUCCESS, GENERALERROR, ...); -1 when it is not registered.
++inline int BotPopManager::tripCommand(CreatureObject* bot, uint32 crc, uint64 target, const String& args) {
++	ZoneServer* zoneServer = bot->getZoneServer();
++	ObjectController* controller = zoneServer != nullptr ? zoneServer->getObjectController() : nullptr;
++	const QueueCommand* command = controller != nullptr ? controller->getQueueCommand(crc) : nullptr;
++
++	if (command == nullptr)
++		return -1;
++
++	return command->doQueueCommand(bot, target, UnicodeString(args));
++}
++
++// The bot's ticket for this trip's route (the last one in its inventory), and how many it holds.
++inline uint64 BotPopManager::tripTicket(CreatureObject* bot, LaunchState* L, int* count) {
++	ManagedReference<SceneObject*> inventory = bot->getSlottedObject("inventory");
++	uint64 found = 0;
++	int n = 0;
++
++	for (int i = 0; inventory != nullptr && i < inventory->getContainerObjectsSize(); ++i) {
++		ManagedReference<SceneObject*> object = inventory->getContainerObject(i);
++
++		if (object == nullptr || !object->isTangibleObject() || !cast<TangibleObject*>(object.get())->isTicketObject())
++			continue;
++
++		TicketObject* ticket = cast<TicketObject*>(object.get());
++
++		if (ticket->getDeparturePlanet() == L->tripFromPlanet && ticket->getDeparturePoint() == L->tripFromPoint
++				&& ticket->getArrivalPlanet() == L->tripToPlanet && ticket->getArrivalPoint() == L->tripToPoint) {
++			found = object->getObjectID();
++			++n;
++		}
++	}
++
++	if (count != nullptr)
++		*count = n;
++
++	return found;
++}
++
++// What purchaseTicket charges for this trip, one way: the fare table's fare plus the town's travel tax (0: no fare).
++inline int BotPopManager::tripFare(CreatureObject* bot, LaunchState* L) {
++	Zone* zone = bot->getZone();
++
++	if (zone == nullptr)
++		return 0;
++
++	int fare = zone->getPlanetManager()->getTravelFare(L->tripFromPlanet, L->tripToPlanet);
++	ManagedReference<CityRegion*> city = bot->getCityRegion().get();
++
++	if (fare > 0 && city != nullptr && !city->isClientRegion())
++		fare += city->getTravelTax();
++
++	return fare;
++}
++
++// What purchaseTicket would refuse, in its own order (PurchaseTicketCommand.h), as the step and the reason. True when
++// it should sell the ticket.
++inline bool BotPopManager::tripWhyNotBuy(CreatureObject* bot, LaunchState* L, SceneObject* terminal, int fare, String& step, String& why) {
++	auto refuse = [&](const char* s, const String& w) {
++		step = s;
++		why = w;
++		return false;
++	};
++
++	float gap = bot->getWorldPosition().distanceTo(terminal->getWorldPosition()) - bot->getTemplateRadius() - terminal->getTemplateRadius();
++
++	if (gap > 8.f)
++		return refuse("terminal", "too far from the terminal (" + String::valueOf((int)gap) + " m)");
++
++	ManagedReference<CityRegion*> city = bot->getCityRegion().get();
++
++	if (city != nullptr && city->isBanned(bot->getObjectID()))
++		return refuse("purchase", "banned from this city");
++
++	ZoneServer* zoneServer = bot->getZoneServer();
++	Zone* from = bot->getZone();
++	Zone* to = zoneServer->getZone(L->tripToPlanet);
++
++	if (from == nullptr || to == nullptr)
++		return refuse("offer", "planet not loaded");
++
++	PlanetManager* fromManager = from->getPlanetManager();
++	PlanetManager* toManager = to->getPlanetManager();
++
++	if (!toManager->isExistingPlanetTravelPoint(L->tripToPoint))
++		return refuse("offer", "no such destination");
++
++	if (!fromManager->isExistingPlanetTravelPoint(L->tripFromPoint))
++		return refuse("offer", "no such departure point");
++
++	Reference<PlanetTravelPoint*> departure = fromManager->getPlanetTravelPoint(L->tripFromPoint);
++
++	if (departure == nullptr || departure->getShuttle() == nullptr)
++		return refuse("shuttle", "no shuttle at the departure point");
++
++	Reference<PlanetTravelPoint*> arrival = toManager->getPlanetTravelPoint(L->tripToPoint);
++
++	if (arrival == nullptr)
++		return refuse("offer", "no such destination");
++
++	ManagedReference<CreatureObject*> arrivalShuttle = arrival->getShuttle();
++
++	if (arrivalShuttle == nullptr)
++		return refuse("shuttle", "no shuttle at the destination");
++
++	ManagedReference<CityRegion*> there = arrivalShuttle->getCityRegion().get();
++
++	if (there != nullptr && there->isBanned(bot->getObjectID()))
++		return refuse("purchase", "banned from the destination city");
++
++	if (!fromManager->isTravelToLocationPermitted(L->tripFromPoint, L->tripToPlanet, L->tripToPoint))
++		return refuse("offer", "route not permitted");
++
++	if (fromManager->getTravelFare(L->tripFromPlanet, L->tripToPlanet) == 0)
++		return refuse("offer", "no fare for this route");
++
++	ManagedReference<SceneObject*> inventory = bot->getInventory();
++
++	if (inventory == nullptr)
++		return refuse("purchase", "no inventory");
++
++	if (inventory->getCountableObjectsRecursive() + 1 > (int)inventory->getContainerVolumeLimit())
++		return refuse("purchase", "inventory full");
++
++	static const uint32 COUPON = STRING_HASHCODE("object/tangible/item/new_player/new_player_travel_coupon.iff");
++
++	for (int i = 0; i < inventory->getContainerObjectsSize(); ++i) {
++		ManagedReference<SceneObject*> object = inventory->getContainerObject(i);
++
++		if (object != nullptr && object->getServerObjectCRC() == COUPON)
++			return refuse("purchase", "travel coupon window (single tickets open a window first)");
++	}
++
++	if (bot->getBankCredits() + bot->getCashCredits() < fare)
++		return refuse("purchase", "short of funds (" + String::valueOf(fare) + " credits)");
++
++	return true;
++}
++
++// What boardShuttle would refuse, in its own order (BoardShuttleCommand.h), shuttle status apart (tripBoard waits for
++// it). True when it should board.
++inline bool BotPopManager::tripWhyNotBoard(CreatureObject* bot, LaunchState* L, uint64 ticketID, String& step, String& why) {
++	auto refuse = [&](const char* s, const String& w) {
++		step = s;
++		why = w;
++		return false;
++	};
++
++	Zone* zone = bot->getZone();
++
++	if (zone == nullptr)
++		return refuse("board", "not in a zone");
++
++	Reference<PlanetTravelPoint*> nearest = zone->getPlanetManager()->getNearestPlanetTravelPoint(bot, 128.f);
++
++	if (nearest == nullptr)
++		return refuse("shuttle", "no travel point within 128 m");
++
++	if (!nearest->isPoint(L->tripFromPlanet, L->tripFromPoint))
++		return refuse("board", "the nearest travel point is " + nearest->getPointName());
++
++	ManagedReference<CreatureObject*> shuttle = nearest->getShuttle();
++
++	if (shuttle == nullptr)
++		return refuse("shuttle", "no shuttle object at the point");
++
++	if (!shuttle->isInRange(bot, 25.f))
++		return refuse("board", "too far from the shuttle");
++
++	if (ticketID == 0)
++		return refuse("board", "no ticket for this shuttle");
++
++	Zone* there = bot->getZoneServer()->getZone(L->tripToPlanet);
++
++	if (there == nullptr)
++		return refuse("board", "route no longer available");
++
++	Reference<PlanetTravelPoint*> arrival = there->getPlanetManager()->getPlanetTravelPoint(L->tripToPoint);
++
++	if (arrival == nullptr || !nearest->canTravelTo(arrival))
++		return refuse("board", "ticket not valid for this shuttle");
++
++	ManagedReference<CreatureObject*> arrivalShuttle = arrival->getShuttle();
++	ManagedReference<CityRegion*> thereCity = arrivalShuttle != nullptr ? arrivalShuttle->getCityRegion().get() : nullptr;
++	ManagedReference<CityRegion*> hereCity = shuttle->getCityRegion().get();
++
++	if ((thereCity != nullptr && thereCity->isBanned(bot->getObjectID())) || (hereCity != nullptr && hereCity->isBanned(bot->getObjectID())))
++		return refuse("board", "banned from a city on the route");
++
++	return true;
++}
++
++// Plans a trip and starts the walk to the terminal; a "travel_try" row, or a "travel_fail" at step "plan".
++inline void BotPopManager::tripStart(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, int level, uint64 now, const char* reason) {
++	ZoneServer* zoneServer = bot->getZoneServer();
++	int tier = level >= 15 ? 2 : level >= 7 ? 1 : 0;
++	std::vector<City> options = travelOptions(zoneServer, L, tier, reason);
++
++	if (options.empty()) {
++		L->noTargetSinceMs = now;
++		L->nextTripMs = now + tripInterval();
++		return;
++	}
++
++	City to = options[System::random(options.size() - 1)];
++	PlanetManager* here = zone->getPlanetManager();
++	bool cross = L->planet != to.planet;
++
++	L->tripReason = reason;
++	L->tripFromPlanet = zone->getZoneName();
++	L->tripFromPoint = L->tripToPoint = "";
++	L->tripToPlanet = to.planet;
++	L->tripCity = to;
++	L->tripTier = cross ? tier : L->tier;
++	L->tripConnecting = false;
++	L->tripStartMs = now;
++	L->tripFare = L->tripTopUp = L->tripSnaps = 0;
++	L->tripTicketID = L->tripPathFor = 0;
++	L->tripPath.clear();
++	L->trip = LaunchState::TRIP_TERMINAL; // tripEnd resets it, also for a trip that fails here
++
++	++launchTravelTries;
++	Reference<PlanetTravelPoint*> from = here->getNearestPlanetTravelPoint(L->center, L->cityRadius + 300.f, cross);
++
++	// No starport in this town: first the shuttle to the planet's starport nearest it, then on from there (a player
++	// from Anchorhead flies out of Mos Eisley).
++	if (from == nullptr && cross) {
++		Reference<PlanetTravelPoint*> port = here->getNearestPlanetTravelPoint(L->center, 16000.f, true);
++		City hub = {"", "", 0, 0, 0};
++
++		if (port != nullptr && cityNear(L->planet, port->getArrivalPositionX(), port->getArrivalPositionY(), hub) && !(L->cityName == hub.name)) {
++			to = hub;
++			cross = false;
++			L->tripToPlanet = to.planet;
++			L->tripCity = to;
++			L->tripTier = L->tier;
++			L->tripConnecting = true;
++			from = here->getNearestPlanetTravelPoint(L->center, L->cityRadius + 300.f, false);
++		}
++	}
++
++	Zone* there = zoneServer->getZone(to.planet);
++	Reference<PlanetTravelPoint*> arrival = there != nullptr
++		? there->getPlanetManager()->getNearestPlanetTravelPoint(Vector3(to.x, to.y, 0), to.radius + 300.f, cross) : nullptr;
++
++	if (from != nullptr)
++		L->tripFromPoint = from->getPointName();
++
++	if (arrival != nullptr)
++		L->tripToPoint = arrival->getPointName();
++
++	JSONSerializationType row = tripRow("travel_try", bot, L, now);
++	row["lvl"] = level;
++	row["connecting"] = L->tripConnecting;
++	SimLog::instance()->write(row);
++
++	if (from == nullptr) {
++		tripEnd(state, bot, L, "plan", cross ? "no starport in or near this town" : "no shuttleport in this town", now);
++		return;
++	}
++
++	if (arrival == nullptr) {
++		tripEnd(state, bot, L, "plan", "no travel point at the destination", now);
++		return;
++	}
++
++	if (from->isPoint(arrival->getPointZone(), arrival->getPointName())) {
++		tripEnd(state, bot, L, "plan", "the destination's travel point is this town's", now);
++		return;
++	}
++
++	L->tripTerminalID = tripFindNear(zone, from, SceneObjectType::TRAVELTERMINAL, 150.f);
++	L->tripCollectorID = tripFindNear(zone, from, SceneObjectType::TICKETCOLLECTOR, 64.f);
++
++	if (L->tripTerminalID == 0) {
++		tripEnd(state, bot, L, "terminal", "no travel terminal for " + L->tripFromPoint, now);
++		return;
++	}
++
++	if (L->tripCollectorID == 0) {
++		tripEnd(state, bot, L, "shuttle", "no ticket collector at " + L->tripFromPoint, now);
++		return;
++	}
++
++	if (bot->getPosture() != CreaturePosture::UPRIGHT)
++		bot->setPosture(CreaturePosture::UPRIGHT, true, true);
++
++	state->path.clear();
++	state->mode = BotState::IDLE;
++	state->chase.clear();
++	state->chaseNext = 0;
++	L->tripStepMs = now;
++}
++
++// One step of the trip under way. A bot attacked on the way fights back first.
++inline void BotPopManager::tripStep(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, uint64 now, float seconds) {
++	if (bot->isInCombat()) {
++		fightBack(state, bot, now);
++		return;
++	}
++
++	ZoneServer* zoneServer = bot->getZoneServer();
++
++	if (L->trip == LaunchState::TRIP_TERMINAL) {
++		ManagedReference<SceneObject*> terminal = zoneServer->getObject(L->tripTerminalID);
++
++		if (terminal == nullptr || terminal->getZone() != zone) {
++			tripEnd(state, bot, L, "terminal", "the travel terminal is gone", now);
++			return;
++		}
++
++		if (now - L->tripStepMs > 300000) {
++			tripEnd(state, bot, L, "terminal", "not at the terminal after 5 minutes", now);
++			return;
++		}
++
++		int walked = tripWalk(state, bot, zone, L, terminal, 3.f, seconds);
++
++		if (walked < 0) {
++			tripEnd(state, bot, L, "terminal", "no path to the terminal", now);
++			return;
++		}
++
++		if (walked == 0)
++			return;
++
++		// At the terminal: what the purchase window offers, then the purchase it sends. A bot short of the fare gets
++		// the difference first (Core3.BotPopTravelTopUp), so the run tests the routes rather than the bots' savings.
++		int fare = tripFare(bot, L);
++		int have = bot->getBankCredits() + bot->getCashCredits();
++
++		if (fare > have && ConfigManager::instance()->getBool("Core3.BotPopTravelTopUp", true)) {
++			bot->addBankCredits(fare - have, false);
++			L->tripTopUp = fare - have;
++		}
++
++		String step, why;
++
++		if (!tripWhyNotBuy(bot, L, terminal, fare, step, why)) {
++			tripEnd(state, bot, L, step.toCharArray(), why, now);
++			return;
++		}
++
++		int before = 0, after = 0;
++		tripTicket(bot, L, &before);
++		String args = L->tripFromPlanet.replaceAll(" ", "_") + " " + L->tripFromPoint.replaceAll(" ", "_") + " " +
++			L->tripToPlanet.replaceAll(" ", "_") + " " + L->tripToPoint.replaceAll(" ", "_") + " single";
++		int result = tripCommand(bot, STRING_HASHCODE("purchaseticket"), 0, args);
++		uint64 ticket = tripTicket(bot, L, &after);
++
++		if (result != 0 || after <= before || ticket == 0) {
++			tripEnd(state, bot, L, "purchase", "purchaseTicket refused (code " + String::valueOf(result) + ", tickets " +
++				String::valueOf(before) + " -> " + String::valueOf(after) + ")", now);
++			return;
++		}
++
++		L->tripFare = fare;
++		L->tripTicketID = ticket;
++		L->tripBoughtMs = now;
++		L->trip = LaunchState::TRIP_COLLECTOR;
++		L->tripStepMs = now;
++		L->tripPath.clear();
++		return;
++	}
++
++	if (L->trip == LaunchState::TRIP_COLLECTOR) {
++		ManagedReference<SceneObject*> collector = zoneServer->getObject(L->tripCollectorID);
++
++		if (collector == nullptr || collector->getZone() != zone) {
++			tripEnd(state, bot, L, "shuttle", "the ticket collector is gone", now);
++			return;
++		}
++
++		if (now - L->tripStepMs > 300000) {
++			tripEnd(state, bot, L, "shuttle", "not at the collector after 5 minutes", now);
++			return;
++		}
++
++		int walked = tripWalk(state, bot, zone, L, collector, 4.f, seconds);
++
++		if (walked < 0) {
++			tripEnd(state, bot, L, "shuttle", "no path to the ticket collector", now);
++			return;
++		}
++
++		if (walked > 0) {
++			L->trip = LaunchState::TRIP_SHUTTLE;
++			L->tripStepMs = L->tripCheckMs = now;
++		}
++
++		return;
++	}
++
++	tripBoard(state, bot, zone, L, now, seconds);
++}
++
++// At the collector: wait for the shuttle (checked every 5 s), step up to it if it landed out of reach, then board as
++// the collector's radial does (boardShuttle with the ticket) and check where the bot came down.
++inline void BotPopManager::tripBoard(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, uint64 now, float seconds) {
++	PlanetManager* planetManager = zone->getPlanetManager();
++	Reference<PlanetTravelPoint*> departure = planetManager->getPlanetTravelPoint(L->tripFromPoint);
++	ManagedReference<CreatureObject*> shuttle = departure != nullptr ? departure->getShuttle() : nullptr;
++
++	if (shuttle == nullptr) {
++		tripEnd(state, bot, L, "shuttle", "no shuttle object at the point", now);
++		return;
++	}
++
++	ManagedReference<SceneObject*> parent = bot->getParent().get();
++
++	if (!shuttle->isInRange(bot, 25.f) && shuttle->isStanding() && (parent == nullptr || !parent->isCellObject())) {
++		chaseToward(state, bot, zone, shuttle->getPositionX(), shuttle->getPositionY(), 4.f, seconds, 15.f);
++
++		if (!shuttle->isInRange(bot, 25.f))
++			return;
++	}
++
++	if (now < L->tripCheckMs)
++		return;
++
++	L->tripCheckMs = now + 5000;
++
++	// A shuttle cycle is at most 7 minutes (ShuttleDepartureTask: 300 s away, 131 s down).
++	if (now - L->tripStepMs > 600000) {
++		tripEnd(state, bot, L, "shuttle", shuttle->isStanding() ? "landed but never boardable in 10 minutes" : "never landed in 10 minutes", now);
++		return;
++	}
++
++	if (!shuttle->isStanding()) // away; it lands within the cycle
++		return;
++
++	// Theed Spaceport is always open (BoardShuttleCommand); elsewhere not while the shuttle is still landing.
++	if (!departure->isPoint("naboo", "Theed Spaceport") && !planetManager->checkShuttleStatus(bot, shuttle))
++		return;
++
++	uint64 ticket = tripTicket(bot, L, nullptr);
++	String step, why;
++
++	if (!tripWhyNotBoard(bot, L, ticket, step, why)) {
++		tripEnd(state, bot, L, step.toCharArray(), why, now);
++		return;
++	}
++
++	int waited = (int)((now - L->tripStepMs) / 1000);
++	int result = tripCommand(bot, STRING_HASHCODE("boardshuttle"), ticket, "");
++
++	if (result != 0) {
++		tripEnd(state, bot, L, "board", "boardShuttle refused (code " + String::valueOf(result) + ")", now);
++		return;
++	}
++
++	// On the other side now (switchZone for another planet, the same zone otherwise). No client will acknowledge the
++	// jump, as in the teleport below; the old Zone* is not used again.
++	PlayerObject* ghost = bot->getPlayerObject();
++
++	if (ghost != nullptr)
++		ghost->setTeleporting(false);
++
++	Zone* arrivedIn = bot->getZone();
++	Reference<PlanetTravelPoint*> arrival = arrivedIn != nullptr ? arrivedIn->getPlanetManager()->getPlanetTravelPoint(L->tripToPoint) : nullptr;
++
++	if (arrivedIn == nullptr || arrivedIn->getZoneName() != L->tripToPlanet || arrival == nullptr) {
++		String where = arrivedIn != nullptr ? arrivedIn->getZoneName() : String("no zone");
++		tripEnd(state, bot, L, "landing", "boarded but came down on " + where, now);
++
++		// Off the map of this bot's plans: back to where it left, by the old jump, so it is not stranded.
++		Zone* home = bot->getZoneServer()->getZone(L->tripFromPlanet);
++
++		if (home != nullptr) {
++			bot->switchZone(L->tripFromPlanet, L->center.getX(), 0, L->center.getY(), 0);
++			L->fixZ = true;
++
++			if (ghost != nullptr)
++				ghost->setTeleporting(false);
++		}
++
++		return;
++	}
++
++	Vector3 landed = bot->getWorldPosition(), expected = arrival->getArrivalPosition();
++	float dx = landed.getX() - expected.getX(), dy = landed.getY() - expected.getY();
++	float off = std::sqrt(dx * dx + dy * dy);
++
++	if (off > arrival->getLandingRange() + 30.f) {
++		tripEnd(state, bot, L, "landing", "came down " + String::valueOf((int)off) + " m from " + L->tripToPoint, now);
++		tripArrived(state, bot, L, now); // it is on the right planet: it lives there now
++		return;
++	}
++
++	JSONSerializationType row = tripRow("travel_done", bot, L, now);
++	row["fare"] = L->tripFare;
++	row["topup"] = L->tripTopUp;
++	row["waited"] = waited;
++	row["snaps"] = L->tripSnaps;
++	row["z"] = (int)bot->getPositionZ();
++	SimLog::instance()->write(row);
++
++	tripArrived(state, bot, L, now);
++}
++
++// Lives at the trip's city from now on (what the old jump did to the bot's plans), and the trip is over.
++inline void BotPopManager::tripArrived(BotState* state, CreatureObject* bot, LaunchState* L, uint64 now) {
++	const City& to = L->tripCity;
++
++	L->planet = to.planet;
++	L->cityName = to.name;
++	L->center = Vector3(to.x, to.y, 0);
++	L->cityRadius = to.radius;
++	L->huntRadius = 400.f;
++	L->tier = L->tripTier;
++	L->arrivedMs = now;
++	L->noTargetSinceMs = 0;
++	L->targetID = L->corpseID = 0;
++	L->resting = false;
++	L->skip.clear();
++	launchDropMissions(bot); // C44 F5: no chasing the old planet's mission
++	L->missionID = L->lairID = 0;
++	++L->travels;
++	++launchTravels;
++
++	state->home = L->center;
++	state->radius = to.radius * 0.4f;
++	state->path.clear();
++	state->chase.clear();
++	state->chaseNext = 0;
++	state->mode = BotState::IDLE;
++
++	bool connecting = L->tripConnecting;
++	L->trip = LaunchState::TRIP_NONE;
++	L->tripPath.clear();
++	L->tripConnecting = false;
++	L->nextTripMs = now + (connecting ? 30000 : tripInterval()); // a connection: on to another planet at once
++}
++
++// The trip failed at `step`: a "travel_fail" row, out of any building (where the bot walked in), and the next trip
++// not before 20-30 minutes. The ticket, if bought, stays in the inventory as a player's would.
++inline void BotPopManager::tripEnd(BotState* state, CreatureObject* bot, LaunchState* L, const char* step, const String& why, uint64 now) {
++	JSONSerializationType row = tripRow("travel_fail", bot, L, now);
++	row["step"] = step;
++	row["why"] = why.toCharArray();
++	row["bought"] = L->tripTicketID != 0;
++	row["topup"] = L->tripTopUp;
++	SimLog::instance()->write(row);
++	++launchTravelFails;
++
++	if (!bot->isDead())
++		tripLeaveCell(bot, L);
++
++	L->trip = LaunchState::TRIP_NONE;
++	L->tripPath.clear();
++	L->tripConnecting = false;
++	L->noTargetSinceMs = now;
++	L->nextTripMs = now + tripInterval();
++	state->path.clear();
++	state->chase.clear();
++	state->chaseNext = 0;
++	state->mode = BotState::IDLE;
++}
++
++// A bot left in a cell when its trip ends goes back to the spot it walked in from (updateZone takes it out of the cell).
++inline void BotPopManager::tripLeaveCell(CreatureObject* bot, LaunchState* L) {
++	ManagedReference<SceneObject*> parent = bot->getParent().get();
++
++	if (parent == nullptr || !parent->isCellObject())
++		return;
++
++	Zone* zone = bot->getZone();
++
++	if (zone == nullptr)
++		return;
++
++	Vector3 door = L->tripDoor;
++
++	if (door.getX() == 0 && door.getY() == 0)
++		door = bot->getWorldPosition();
++
++	move(bot, Vector3(door.getX(), door.getY(), floorNear(zone, door.getX(), door.getY(), std::nanf(""))), 0, 0, 0);
++	++L->tripSnaps;
++}
++
++// A step of a walk in a cell (cell-local position) or outdoors (world position, on the floor).
++inline void BotPopManager::tripPlace(CreatureObject* bot, Zone* zone, Vector3 position, CellObject* cell, float speed, float dx, float dy) {
++	if (cell == nullptr) {
++		position.setZ(floorNear(zone, position.getX(), position.getY(), position.getZ()));
++		move(bot, position, speed, dx, dy); // from a cell too: updateZone transfers the bot to the zone
++		return;
++	}
++
++	// As AiAgent::updateCurrentPosition: the cell-local position, then updateZoneWithParent (the zone's lock, then the
++	// cell's transferObject), with only the bot locked.
++	bot->setPosition(position.getX(), position.getZ(), position.getY());
++
++	if (dx != 0 || dy != 0)
++		bot->setDirection(heading(dx, dy));
++
++	bot->setCurrentSpeed(speed);
++	bot->incrementMovementCounter();
++	bot->updateLocomotion();
++	bot->updateZoneWithParent(cell, false, true);
++
++	PlayerObject* ghost = bot->getPlayerObject();
++
++	if (ghost != nullptr)
++		ghost->updateLastValidatedPosition();
++}
++
++// Walks toward `target` as a player would: outdoors along chaseToward's routes; to a target in a building, the last
++// 60 m along findPath, whose points carry their cell (in through the door, from cell to cell through the portals), and
++// out the same way. 1 once within stopAt of the target (world distance), 0 on the way, -1 when there is no way there.
++inline int BotPopManager::tripWalk(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, SceneObject* target, float stopAt, float seconds) {
++	Vector3 goal = target->getWorldPosition(), here = bot->getWorldPosition();
++	float gx = goal.getX() - here.getX(), gy = goal.getY() - here.getY();
++	float distance = std::sqrt(gx * gx + gy * gy);
++	ManagedReference<SceneObject*> parent = bot->getParent().get();
++	CellObject* frame = parent != nullptr && parent->isCellObject() ? cast<CellObject*>(parent.get()) : nullptr;
++	bool targetInside = target->getParentID() != 0;
++
++	if (distance <= stopAt) {
++		L->tripPath.clear();
++		L->tripPathFor = 0;
++
++		if (bot->getCurrentSpeed() != 0)
++			tripPlace(bot, zone, bot->getPosition(), frame, 0, gx, gy);
++
++		return 1;
++	}
++
++	if (frame == nullptr && (!targetInside || distance > 60.f)) {
++		L->tripPath.clear();
++		L->tripPathFor = 0;
++
++		bool there = chaseToward(state, bot, zone, goal.getX(), goal.getY(), 5.f, seconds, targetInside ? 55.f : stopAt);
++		return there && !targetInside ? 1 : 0;
++	}
++
++	if (L->tripPathFor != target->getObjectID()) {
++		WorldCoordinates from(bot), to(target);
++		std::unique_ptr<Vector<WorldCoordinates>> route(PathFinderManager::instance()->findPath(from, to, zone));
++
++		if (route == nullptr || route->size() < 2)
++			return -1;
++
++		L->tripPath.clear();
++
++		for (int i = 1; i < route->size(); ++i)
++			L->tripPath.push_back(route->get(i));
++
++		L->tripNext = 0;
++		L->tripPathFor = target->getObjectID();
++	}
++
++	if (L->tripNext >= L->tripPath.size()) { // the path ended short of the target
++		L->tripPath.clear();
++		L->tripPathFor = 0;
++		return -1;
++	}
++
++	float speed = 3.f, budget = speed * seconds, dx = 0, dy = 0;
++	Vector3 position = bot->getPosition(); // cell-local in a cell
++	bool moved = false;
++
++	while (budget > 0.01f && L->tripNext < L->tripPath.size()) {
++		const WorldCoordinates& point = L->tripPath[L->tripNext];
++		const Vector3& p = point.getPoint();
++		CellObject* cell = point.getCell();
++
++		if (cell != frame) { // through a door or a portal: on to the point, in its own cell or outdoors (next step)
++			if (moved)
++				break;
++
++			if (cell != nullptr && cell->getParent().get() == nullptr)
++				return -1;
++
++			if (frame == nullptr)
++				L->tripDoor = bot->getWorldPosition();
++
++			position = p;
++			frame = cell;
++			moved = true;
++			++L->tripNext;
++			break;
++		}
++
++		float tx = p.getX() - position.getX(), ty = p.getY() - position.getY();
++		float length = std::sqrt(tx * tx + ty * ty);
++
++		if (length > 0.01f) {
++			dx = tx;
++			dy = ty;
++		}
++
++		if (length <= budget) {
++			position = p;
++			budget -= length;
++			++L->tripNext;
++		} else {
++			float part = budget / length;
++			position = Vector3(position.getX() + tx * part, position.getY() + ty * part, position.getZ() + (p.getZ() - position.getZ()) * part);
++			budget = 0;
++		}
++
++		moved = true;
++	}
++
++	if (moved)
++		tripPlace(bot, zone, position, frame, speed, dx, dy);
++
++	return 0;
++}
++
++} // namespace botpop
++
++#endif // BOTPOPTRAVEL_H_
