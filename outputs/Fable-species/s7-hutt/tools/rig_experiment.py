@@ -9,7 +9,8 @@ attached at "head"; hutt.skt has none of that. This adds, to a copy of the C54 a
   2. appearance/hutt_m.sat / hutt_f.sat: the human face skeleton (hum_m_face / hum_f_face) attached at "head" with
      hum_m_face.lat, exactly as hum_m.sat and hum_f.sat do.
 NPC Hutts use the same files; the extra bones carry no vertices. Not installed by this script.
-    C:/Users/Pengw/miniconda3/python.exe -I rig_experiment.py
+    C:/Users/Pengw/miniconda3/python.exe -I rig_experiment.py [--bones-only]
+Variant 1 (both) crashed the client at character select, 16 Oct 5:47 PM, with no crash dump.
 """
 import hashlib
 import os
@@ -24,6 +25,10 @@ from swgfmt import tre_write, trn_iff as iff  # noqa: E402
 CLIENT = os.path.join(OUTPUTS, 'SWG-client')
 BASE = os.path.join(os.path.dirname(OUTPUTS), 'work', 'c54-crafting', 'local_planets-c54.tre')
 OUT = os.path.join(os.path.dirname(OUTPUTS), 'work', 'c54-crafting', 'local_planets-c54-rig.tre')
+# Variant 2 (owner, 16 Oct 5:55 PM, after variant 1 crashed the client at character select): the bones only.
+BONES_ONLY = '--bones-only' in sys.argv
+if BONES_ONLY:
+    OUT = OUT.replace('-rig.tre', '-bones.tre')
 SKT, SAT_M, SAT_F = 'appearance/skeleton/hutt.skt', 'appearance/hutt_m.sat', 'appearance/hutt_f.sat'
 
 ALL_B = ['root', 'lThigh', 'lShin', 'lAnkle', 'lToe', 'rThigh', 'rShin', 'rAnkle', 'rToe', 'spine1', 'spine2', 'spine3',
@@ -134,11 +139,12 @@ def main():
         print('LOD: %d -> %d bones, added %s' % (before, after, ','.join(added)))
     out = dict(base)
     out[SKT] = skt
-    out[SAT_M] = edit_sat(client_file(SAT_M), b'appearance/skeleton/hum_m_face.skt')
-    out[SAT_F] = edit_sat(client_file(SAT_F), b'appearance/skeleton/hum_f_face.skt')
+    if not BONES_ONLY:
+        out[SAT_M] = edit_sat(client_file(SAT_M), b'appearance/skeleton/hum_m_face.skt')
+        out[SAT_F] = edit_sat(client_file(SAT_F), b'appearance/skeleton/hum_f_face.skt')
     data = tre_write.pack(out)
     assert tre_write.read(data)[0] == out
-    for name in (SKT, SAT_M, SAT_F):
+    for name in (SKT,) if BONES_ONLY else (SKT, SAT_M, SAT_F):
         assert iff.build(iff.parse(out[name])) == out[name]
     open(OUT, 'wb').write(data)
     print(OUT, len(out), 'entries', hashlib.sha256(data).hexdigest()[:8])
