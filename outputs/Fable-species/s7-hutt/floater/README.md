@@ -1,8 +1,9 @@
 # The player Hutt on the A1 Deluxe Floater: a lower riding pose
 
 Claude, 16 Oct 2026, from the owner's 7:45 PM floater test (test galaxy, archive `6ff21312` on client and server).
-Status: **candidate built, untested in game.** Nothing is installed. Only the Hutt changes; the floater, the mount
-tables and every other species are left as they are.
+Status: **v1 installed at 10:05 PM (inside `9ce108a0`) and tested by the owner: "the floater was fixed with just a
+little bit of clipping remaining". v2 (section 6) built on top of it, untested in game, not installed.** Only the Hutt
+changes; the floater, the mount tables and every other species are left as they are.
 
 ## 1. What is wrong (from the close-up and the 8-second clip)
 
@@ -117,3 +118,66 @@ it, then look at it from behind, from the side and from the front (zoom in), sta
 
 If the head still pokes out, rebuild with `--drop 0.9`. If the Hutt is hidden in the hull, rebuild with `--drop 0.5`.
 Each needs one more install and restart.
+
+## 6. v2: the spikes left after v1 (owner, 10:35 PM)
+
+**What the owner saw on v1:** "the floater was fixed with just a little bit of clipping remaining", "clipping like
+spikes of his model poking up when in the cockpit".
+
+**Cause.** The client keeps the rider's `root` bone on the seat hardpoint, so v1 lowers root's three children
+(`belly`, `tail01`, `spine`) by 0.70 m and leaves `root` itself where it was. In `hutt_m_l0.mgn` and `hutt_f_l0.mgn`,
+**197 of the 1,350 vertices carry some `root` weight**: the upper chest, neck and chin (bind height 0.97–1.37 m, plus
+some near the tail base). Most have weights of 0.01–0.5, and 7 are fully on `root`. When the rest of the body sinks
+0.70 m, each of these vertices sinks only 0.70 × (1 − its root weight). A vertex with half its weight on root stays
+0.35 m above its neighbours, and a fully rooted one stays 0.70 m above. Those vertices are the spikes.
+
+What this rules out:
+
+- **Lowering the pose further** only makes the spikes longer.
+- **Moving `root` in the animation** has no effect, because the client places `root` on the hardpoint regardless (section 2).
+- **Scaling the floater** would need a server change, because the floater's Lua template has no scale. It would also change the floater for every species, and the stretch would remain.
+
+A bind-pose check of every vertex against the floater's real triangles agrees. Vertex by vertex, v1 puts no
+non-root vertex above the canopy for any Hutt scale from 0.89 to 1.11. The only defect left is the skin stretching.
+
+**The change (built).** In the two LOD 0 Hutt meshes, each vertex's `root` weight moves to the nearest child of root
+by bind-pose distance, and is added to any weight the vertex already has on that bone. The split is 100 vertices to
+`spine`, 66 to `belly` and 31 to `tail01`. Each vertex's weights still sum to what they did, and the TWDT count goes
+from 2,018 to 1,884 entries. Positions, normals, triangles, shaders and blend targets stay byte-identical (the builder
+checks), and the floater, `hutt.lat` and the v1 animation are untouched. In the same check, every vertex of the
+reweighted mesh sinks the full 0.70 m: the head top is at 1.94–2.06 m and nothing reaches the 2.34 m canopy.
+
+| | |
+|---|---|
+| Builder | `tools/build_hutt_c54_floater_v2.py` (imports the v1 builder; requires v1 in the base) |
+| Archive | `work/c54-floater-v2/local_planets-c54-floater-v2.tre` (not in the repo) |
+| **sha256** | **`5ee3f914a6d0ba06fc6c545ea43f7d3e46be24a50b972d3d58c4a116151c07d6`** |
+| Base | `work/c59-walk-on-0e4fe92d/local_planets-c59-walk.tre`, `9ce108a03b027ff9e344f02866aadb796cec2c817064d774a30f4e1614f9745b` (v1 → Nal Hutta → C59 walk). The builder refuses any other base unless `--any-base` is given, and then still requires v1 in it |
+| Entries | 185: all 183 entries of `9ce108a0` byte-identical, plus 2 new: `appearance/mesh/hutt_m_l0.mgn` (`d22e5339…`) and `hutt_f_l0.mgn` (`ab49f429…`) |
+| Checks | `work/c54-floater-v2/checks.json`; staged meshes in `work/c54-floater-v2/stage/` |
+
+**Side effects and limits (honest list).**
+
+- **Outside the riding pose**, those 197 vertices now follow `spine`, `belly` or `tail01` fully instead of partly.
+  - `belly` never rotates in any of the 127 stock Hutt animations; it only bobs up and down, by up to 0.15 m in walk, run and get-hit.
+  - `spine` and `tail01` sway.
+  - So the chest and neck may bob or sway slightly more with the body in the walk, the run and emotes. The idle should look the same.
+  - NPC Hutts (`object/mobile/hutt_*`) use the same meshes and get the same small change.
+- **LODs 1–3 keep their weights.** Those meshes have no `belly` or `spine` (only `tail01`, which sways with the tail),
+  so their root vertices (84, 35 and 10, including the belly) cannot be moved without adding a bone to the mesh. These
+  meshes only show from a distance. A distant riding Hutt may still look a little spiky, but inside the glass.
+- Not checked in game: the actual animated pose, rather than the bind pose. The arms and head move a little in the idle.
+
+**Install** exactly as in section 5, with this archive and hash in place of v1's. Back up the current `9ce108a0` on
+both sides as `local_planets.tre.bak-9ce108a0`. Rollback: put `9ce108a0` back.
+
+**What the owner should look for** (open questions):
+
+- Mounted on the floater, close up from behind, the side and the front: are any spikes or stretched bits still
+  sticking up in the cockpit? Does anything come through the glass?
+- Off the floater: do the idle, the walk and a couple of emotes look the same as before, especially the chest and neck?
+- Optional, from 30 m or more away: does a riding Hutt look spiky (the LOD 1–3 limit above)?
+
+**If something still pokes out close up**, it comes from the animated pose (arms or head moving in the idle), not
+the skin. Send a close-up and say where it pokes; rebuilding v1 with a deeper `--drop` and then this builder on top
+handles that. **If the walk or emotes look worse**, roll back to `9ce108a0` and say what changed.
