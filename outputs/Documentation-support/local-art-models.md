@@ -20,6 +20,13 @@ Hugging Face and GitHub APIs today.
   would not match the terrain the server computes. No model makes `.ans` animations for the Hutt skeleton, and none
   weights a mesh to `hutt.skt`.
 
+## The owner's pick (17 Oct, about 7:55 AM)
+
+**"2D art + 3D test"**, chosen on the decision card: picks 1 and 3, nine files and 23.42 GB, each listed on the card with
+its source and size. Not chosen: Hunyuan3D 2.0 and SDXL. Each file goes into its own folder under
+`C:\Users\Pengw\Tools\downloads` and is checked against the size and SHA-256 that its host publishes. The install
+record is at the end of this note.
+
 ## This PC (measured 7:39 AM)
 
 | Part | Measured | What it means |
@@ -68,8 +75,9 @@ Hugging Face and GitHub APIs today.
   1. Download the four files. Check the 7z's SHA-256 against the release page.
   2. Extract the 7z to `C:\Users\Pengw\Tools\ComfyUI_windows_portable` (Windows 11 opens .7z itself).
   3. Put the model files in `ComfyUI\models\diffusion_models`, `text_encoders` and `vae`.
-  4. Start it with `run_nvidia_gpu.bat`. It listens on 127.0.0.1:8188 only. Never add `--listen`. Install no custom
-     nodes and no ComfyUI-Manager extras without a separate OK.
+  4. Start it with `advanced\run_nvidia_gpu_disable_api_nodes.bat`. That script passes `--offline`, which turns off
+     the paid API and partner nodes. It listens on 127.0.0.1:8188 only (the default in `cli_args.py`); never add
+     `--listen`. Install no custom nodes and no ComfyUI-Manager extras without a separate OK.
   5. Run `um comfy status`. Load the klein 4B template from ComfyUI's template browser and export it as API JSON to
      `outputs/tools/comfy/flux2-klein-4b.json`. Run it with `um comfy run`, which logs the workflow, seed and files to
      `comfy_manifest.jsonl`.
@@ -179,3 +187,33 @@ This note is Claude's response to `asset-workflow-review-for-Claude-2026-10-13.m
 - ComfyUI: [repository and portable build](https://github.com/Comfy-Org/ComfyUI) (GPL-3.0, cu130, "20 series and above"); release v0.41.0 assets via the GitHub API; [FLUX.2 klein guide](https://docs.comfy.org/tutorials/flux/flux-2-klein); [TRELLIS.2 workflow](https://docs.comfy.org/tutorials/3d/trellis2); [native TRELLIS.2 and Pixal3D](https://blog.comfy.org/p/trellis2-and-pixal3d-are-now-native) (31 Aug 2026); [Hunyuan3D-2 guide](https://docs.comfy.org/tutorials/3d/hunyuan3D-2); [Z-Image Turbo guide](https://docs.comfy.org/tutorials/image/z-image/z-image-turbo).
 - Models: [FLUX.2-klein-4B](https://huggingface.co/black-forest-labs/FLUX.2-klein-4B); [microsoft/TRELLIS.2](https://github.com/microsoft/TRELLIS.2); [Hunyuan3D 2.0 licence](https://huggingface.co/tencent/Hunyuan3D-2/blob/main/LICENSE); [Stable Fast 3D](https://huggingface.co/stabilityai/stable-fast-3d); [SDXL base 1.0](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0); [Z-Image-Turbo](https://huggingface.co/Tongyi-MAI/Z-Image-Turbo); [Terrain Diffusion](https://github.com/xandergos/terrain-diffusion). File sizes, licence tags and gating came from the Hugging Face API for each repo named above.
 - This PC: `nvidia-smi`, Windows CIM queries, `free -m` in Debian, `.wslconfig`, `Agent/live/status.md` (7:35 AM). Client texture sizes came from the DDS headers in the client archives, read with `tools/swgfmt` (nothing extracted).
+
+## Install record (17 Oct 2026, 7:55 to 8:05 AM)
+
+Done with the owner's card answer, "2D art + 3D test". Every file was checked against the size and SHA-256 its host
+publishes (the Hugging Face LFS object id; the digest on the GitHub release asset). All nine match. They downloaded at
+about 100 MB/s, roughly 7.5 minutes in all.
+
+| File | Placed in `C:\Users\Pengw\Tools\ComfyUI_windows_portable\ComfyUI\models\` | SHA-256 starts |
+|---|---|---|
+| `ComfyUI_windows_portable_nvidia.7z` (v0.41.0) | unpacked to `C:\Users\Pengw\Tools\ComfyUI_windows_portable` with Windows' own `tar` (7 minutes); the 7z stays in `Tools\downloads` | `7ff446d6904a9eec` |
+| `flux-2-klein-4b-fp8.safetensors` | `diffusion_models` | `97ed34fe0567e436` |
+| `qwen_3_4b.safetensors` | `text_encoders` | `6c671498573ac2f7` |
+| `flux2-vae.safetensors` | `vae` | `868fe7b343cc8f3a` |
+| `trellis_2_int8_convrot.safetensors` | `diffusion_models` | `d01952ad137213f6` |
+| `trellis_2_shape_vae_bf16.safetensors` | `vae` | `de0cb4949a76c59e` |
+| `trellis_2_texture_vae_bf16.safetensors` | `vae` | `714e5ebf094a610e` |
+| `dino_v3_vit_l.safetensors` | `clip_vision` | `5cb785e458de7c46` |
+| `birefnet.safetensors` | `background_removal` | `9ab37426bf4de056` |
+
+- **Installed:** the ComfyUI folder is 25.83 GB with the models, and C: has 63.5 GB free. `comfyui_version.py` reads
+  0.41.0. No custom nodes were added: `custom_nodes` holds only the two stock examples. No system install, no
+  registry entry, no service.
+- **Not done yet: the first run.** Two SWGEmu clients were open at 8:00 AM (started 6:52 and 7:00 AM), so ComfyUI has
+  not been started even once. Nothing is verified on the card yet: not that it starts on Blackwell, not VRAM, not speed.
+- **The first test, when the owner is not playing:** start `advanced\run_nvidia_gpu_disable_api_nodes.bat`, then run
+  `um comfy status`. Make one klein 4B image at 1024 px and record seconds, peak VRAM and free RAM here. Then try one
+  TRELLIS.2 run at the 512 preset from a CC0 or generated image of a crate. Close Opera first: free Windows RAM was
+  5.2 GB at 8:00 AM.
+- **To remove it all:** delete `C:\Users\Pengw\Tools\ComfyUI_windows_portable` and `C:\Users\Pengw\Tools\downloads`.
+  Nothing else on the PC was changed.

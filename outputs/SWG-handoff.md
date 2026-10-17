@@ -396,7 +396,11 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 - **Also answers** the 13 Oct asset-workflow review; the board row is updated and the note links here.
 - **Verified:** hardware, licence tags, file sizes and gating, and client texture sizes (loading screens 512 DXT1, globes 256 DXT1 with 9 mips, maps 1024 DXT1).
 - **Untested:** every speed and VRAM figure on this card.
-- **Next:** the owner's pick of what to install (decision card in Claude's chat). One download OK per item.
+- **Owner's pick (about 7:55 AM): "2D art + 3D test"** (picks 1 and 3).
+  - All nine files are downloaded and SHA-256 checked (23.42 GB). ComfyUI 0.41.0 portable is unpacked at `C:\Users\Pengw\Tools\ComfyUI_windows_portable` with the models in place: 25.83 GB, and 63.5 GB is still free on C:.
+  - No custom nodes and no system install. The install record is at the end of the note.
+- **Not started yet:** two SWGEmu clients were open at 8:00 AM, so ComfyUI has never been run. It is untested on this card.
+- **Next:** the first test (one klein image, one TRELLIS.2 run at 512) when the owner is not playing. Start it with `advanced\run_nvidia_gpu_disable_api_nodes.bat`, which runs with `--offline`, so no paid nodes.
 
 ### 2026-10-17 6:40 AM Claude: creation sweep: every species and gender created, read back and deleted (test plan section 2)
 
