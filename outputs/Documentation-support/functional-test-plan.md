@@ -130,9 +130,55 @@ Sources read: `Bot-reports/GATE.md` (gate of 15 Oct, 4:31 PM: FAIL, 22 of 35), `
 #### 11. Missions (all terminal types)
 - **Check:** destroy, deliver, crafting, survey, entertainer and musician, bounty hunter, scout/recon, and faction missions; list, accept, waypoint, complete, reward into the bank; the 2-mission cap on live, 6 on test; a full datapad refuses cleanly (C56).
 - **Who:** Squad, BotPop, GPT (C56 gate).
-- **Coverage:** `cresh-missions.py` (destroy only); BotPop run 8: 2,358 completed missions, 3,218,196 credits paid. `review-C44/F1-fix.md` lists the crafting-mission checks.
-- **Gaps:** **`cresh-missions.py` regressed** ("reach the mission terminal" FAIL, then two checks did not run) because of the movement gap. Only destroy missions have a Squad check. Crafting missions (`db5952f5`, `74fa3e8c`) need an in-game test. The full-datapad gate (C56) is not run. Bounty, faction and recon have no check at all.
-- **Pass:** `cresh-missions.py` checks "the mission completes" and "the reward reaches the bank" PASS; one PASS each for deliver and crafting missions in new scenarios; the seventh mission on test is refused with the exact message.
+- **Coverage (17 Oct):** four scenarios with a shared helper, `tools/bots/missions.py`:
+  - `cresh-missions.py`: general terminal, destroy, deliver, the 6-mission cap, newbie and statue terminals;
+  - `besh-missions.py`: artisan terminal, crafting and survey;
+  - `dorn-missions.py`: entertainer terminal, dancer and musician, plus a general deliver;
+  - `forn-missions.py`: scout terminal (hunting, recon), bounty terminal, imperial and rebel terminals.
+
+  Each mission is checked from the terminal to the end: listed, accepted into the datapad, travelled to, done, gone from the datapad, and the share in the bank. The share is reward // group size: the server divides the reward by the group, so a grouped bot never gets the whole reward. 41 offline tests: `python -I tools/bots/test_missions.py`. Also BotPop run 8: 2,358 completed missions, 3,218,196 credits paid. `review-C44/F1-fix.md` lists the crafting-mission checks.
+- **Results (17 Oct, test galaxy runs 24 to 29, Mos Eisley).** Runs at 5:38 AM (the gate), 6:25 AM, 11:56 AM and 12:35 PM; reports in `Bot-reports/<Group>/20261017-*-missions.json`. Every share below is exact.
+
+  | Terminal | Mission | Result | Reward → share paid (group size), time |
+  |---|---|---|---|
+  | general | destroy | **PASS** (12:41 PM): lair destroyed, mission removed, owner paid; the two helpers were not (bug 1) | 774 → 258 (3), 344 s |
+  | general | deliver | **PASS** twice (Rusk; Cresh's group all have full inventories) | 62 → 20 (3), 80 s; 64 → 21 (3), 85 s |
+  | general | the cap | **PASS** three times: Ilsa holds 6, and a 7th stays in the mission bag | the message arrives only as `@mission:mission_generic` (bug 4) |
+  | artisan | crafting | **PASS** twice: the NPC's schematic and parts, the generic tool, the hand-over | 64 → 16 (4), 83 s; 102 s |
+  | artisan | survey | **not completed** (see Gaps) | 427 |
+  | entertainer | dancer | **PASS** twice: 10 minutes dancing inside the mission's building | 133 → 44 (3), 667 s; 169 → 56 (3), 706 s |
+  | entertainer | musician | **PASS** twice: slitherhorn, same building; the bank also gets the dancer's share | 157 → 52 (+44), 701 s; 205 → 68 (+56), 709 s |
+  | scout | hunting | **PASS** (12:35 PM): 15 kills counted by the server | 1038 → 207 (5), 817 s. 11:56 AM: completed, hunter paid 0 (bug 1) |
+  | scout | recon | **not completed**: Mirren died walking alone; Forn's walk stalled. The same recon flow passes at the rebel terminal | 361, 454 |
+  | bounty | bounty | **not completed**: listing (Novice Bounty Hunter) and accepting work | 5400 to 10584 |
+  | imperial | recon | **not completed**: accepted twice, walk stalled or Dask downed; Mos Eisley's imperial and rebel terminals offer no deliver missions | 573 |
+  | rebel | recon | **PASS** twice | 314 → 62 (5), 328 s; 385 → 77 (5), 471 s |
+  | newbie, statue | list | none stands within 3 km of Mos Eisley | — |
+
+  Terminals within 3 km of Mos Eisley, by the server's search: general at least 11, entertainer 10, scout 10, artisan 8, bounty 6, imperial 2, rebel 2.
+- **Bugs found (17 Oct; evidence in the reports named):**
+  1. **Group pay is judged from the mission's end point only** (server). A destroy mission's end stays at its first spot when the lair spawns up to 256 m away; a hunting mission's end is where it was listed.
+     - 5:38 AM: Cresh and Kor at the lair were unpaid; Ilsa, dead at the first waypoint, was paid.
+     - 12:22 PM: Forn's hunting mission completed and he was paid 0.
+     - 12:41 PM: Ilsa and Kor at the lair were paid 0.
+     - **Staged fix:** `mission-group-pay.patch` with `mission-group-pay.md` (unbuilt). Check: "general/destroy: everyone who fought at the lair is paid".
+  2. **A deliver pickup into a full inventory leaves the mission stuck** (server). `DeliverMissionObjectiveImplementation::updateMissionStatus` aborts the objective when the datadisk can't be added, but leaves the mission in the datapad with no message. The NPC still says the pickup line (`m3p`). Cresh, 5:38 AM: inventory 80 of 80, no datadisk, waypoint unchanged; the mission is still held. Crafting pickups have the same pattern. Proposed, not fixed.
+  3. **A bank terminal's Deposit/Withdraw window opens at any range** (server). Kor, dead and 2 km from the nearest terminal, opened it about 6 AM. The scenarios use it, read only and cancelled, to read the balance. Proposed, not fixed.
+  4. **Bot body:**
+     - string-id messages from `mission/mission_generic` lose their key (`AgentControl::onStringIdSystemMessage` splits at the `/`), so the exact refusal message can't be confirmed;
+     - the body forgets the bank balance at the first character delta it can't parse;
+     - `find` from inside a building searches around cell-local x and y (Cresh, cloned indoors, found nothing at 11:56 AM);
+     - there is no mission abort.
+
+     The scenarios work around all four.
+  5. **Squad bots:** 10 of 24 have full inventories (80 items), mostly spare `/agentgear` kits (Cresh, Ilsa, Kor, Dorn, Nima, Mirren, Aurek, Sela, Oren, Besh), so they can't take deliver, crafting or survey missions.
+- **Gaps:**
+  - **Survey** isn't completed: the resource class had to be matched to the listed types, the density is a fraction, and Dova was downed walking back. All three are fixed in the scenario since; not rerun.
+  - **Scout and imperial recon** aren't completed: recon areas are 1 to 4 km out, and walks there were downed or stalled. Recon itself passes at the rebel terminal.
+  - **Bounty** isn't completed. Level-1 targets spawn anywhere on the planet: none of 10 offers was within 4 km. The informant step (a Mos Eisley `spynet_operative`) is written and offline tested only.
+  - **The full-datapad gate (C56)** is not run.
+  - **The 2-mission cap on live** is not checked (live's config).
+- **Pass:** met except the exact refusal message. `cresh-missions.py` "the mission leaves the datapad" and "the share reaches the bank" PASS (general/destroy, 12:41 PM). Deliver and crafting PASS in new scenarios. The seventh mission is refused, but the message reaches the body only as `@mission:mission_generic` (bug 4), so "with the exact message" waits for the body fix.
 
 #### 12. Loot and items
 - **Check:** creature and NPC drops have real names; looting works; items stack and split; the junk dealer buys.
@@ -268,7 +314,7 @@ Ranked by what breaks a new player's first hour, first.
 | 1 | Fresh start: creation of every species, starting city, helper droid on a build with `c5d713b8` — **done 16 Oct:** all 12 species created and through the first minutes (`fresh-start-test.md`, `4a6b431`); **`creation-sweep` 17 Oct:** 24 of 24 species and genders, attributes and the Hutt's S7 row in game, name filter 21 of 21 (section 2). | Every new player passes through it in the first ten minutes; the droid deadlock reached real new players | Main session (build and restart), GPT (`creation-sweep` scenario) | Pass lines of sections 2 and 3 |
 | 2 | "The server keeps putting us back" — **done 17 Oct:** section 4's pass line met on run 24, gate PASS with 0 regressions (`movement-pushback.md`, dev `b034d15f`, `7c2f2605`). | Three gate regressions; it hides the mission, harvest and route checks behind it; a real player may see the same rubber-band | Main session (server log at the moment of the push-back), GPT (body vs server source) | Pass line of section 4 and a re-run gate with 0 regressions from it |
 | 3 | Training at a real trainer, and the class check for the other five starters | Every profession trains in the first hour; the bots only ever get boxes by command | GPT (`trainer-buy` scenario), main session (class-check slices) | Pass line of section 7 |
-| 4 | Missions through the terminal | The only real income for a new character (FINDINGS section 3); Squad mission check is down | GPT after rank 2 | Pass line of section 11 |
+| 4 | Missions through the terminal — **mostly done 17 Oct:** 7 of 11 terminal missions complete with exact pay, and the 7th mission is refused (section 11); survey, two recons and bounty left; group-pay fix staged | The only real income for a new character (FINDINGS section 3); Squad mission check is down | GPT after rank 2 | Pass line of section 11 |
 | 5 | ~~Crafting session~~ **done 17 Oct** (section 15: 21 of 21) | An Artisan's whole first hour; zero coverage | GPT (body API proposal), main session (C++ body) | Pass line of section 15 |
 | 6 | Doctor and entertainer buffs | Four doctor and two dance regressions; town social play | GPT (check logic: "re-apply" receipts on already-buffed fighters) | Pass lines of sections 22 and 23 |
 | 7 | Death, cloning and insurance — **done 17 Oct** (section 9: 11 of 11) | About one death per hour for new characters; insurance has no check | GPT (new scenario) | Pass line of section 9 |

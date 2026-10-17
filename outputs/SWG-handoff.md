@@ -157,6 +157,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) �
 
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
+| **Test plan section 11: missions at every terminal type** | Claude (missions side session) | **mostly done 17 Oct 12:56 PM; galaxy released**: 7 of 11 terminal missions PASS with exact pay, the 7th mission refused; survey, scout and imperial recon, and bounty not completed | Scenarios `cresh-`, `besh-`, `dorn-`, `forn-missions.py` with `tools/bots/missions.py` (b22a975 … 4d82009, 41 offline tests). Results per terminal and five bugs: `Documentation-support/functional-test-plan.md` section 11 and the 1:00 PM log entry. Group-pay fix staged: `Documentation-support/mission-group-pay.patch` (unbuilt) |
 | **Vong look test: the first ComfyUI job (CR-02 / Ossus POI 7, first step)** | Claude (local-art side session) | **staged 17 Oct 9:09 AM; owner's OK to install at 9:10 AM, passed to the main session (the lock holder)**; untested in game | Install: `Vong-look/INSTALL.md`. Client candidate `work/vong-look/local_planets-vong-look.tre` (sha256 `185b3d7f...`, on `b01e9f44`); server `Vong-look/vong-look.patch` (Core3-dev `91cf87ed`, Lua only). The owner's mix (bone s01 + marauder s02 chest, swatch 12, no helmet) as 8 new wearables; one bare-headed warrior at Ossus POI 7 (1400, 4900). Plan and history: `Documentation-support/vong-look-test.md`. Lifts the 15 Oct POI 7 hold (owner's card answer) |
 | **C55: first-release independent non-bot dev review** | ChatGPT, High | complete; changes requested 2026-10-16 16:08 | `fbee3aa`: [report](Documentation-support/review-C55/C55-review.md); open inherited helper P1 + global spawn-gate P2; XP/delivery/city-guard source shortlist; 74 Lua checks pass; gameplay untested; no galaxy actions |
 | **C54: review playable Hutt; Artisan floater and Hutt names** | ChatGPT, High review / Medium source | review/source complete; Claude integration pending | `82e52303`, `deb3319e`, `8ebace32` on gpt/c54-hutt-floater (base 26b54813); report/tool `a07d346`, Documentation-support/hutt-c54.md; 1 P1 + 5 P2; client stats/text/builder fixes open; full build/gameplay untested; run 10 untouched; **17 Oct 6:17 AM: F1-F3 verified in game by `creation-sweep.py`** (Hutt attributes = profession + S7 row, text and skill labels as approved, Hutt name rules; test plan section 2) |
@@ -388,6 +389,46 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests and early run 6 sample only. Claude retains all server/runtime ownership; no restarts or bot commands.
 
 ## Log
+
+### 2026-10-17 1:00 PM Claude: missions at every terminal type (test plan section 11): 7 of 11 PASS with exact pay; group-pay fix staged
+
+- **Runs (all mine, on the test galaxy, no restarts by me):**
+
+  | Time | Galaxy run | Groups | Notes |
+  |---|---|---|---|
+  | 5:38 AM | run 24 | Cresh | the gate ran `cresh-missions.py` |
+  | 6:02 to 6:05 AM | run 25 | all four | void: cut by the restart, halted by me |
+  | 6:25 to 6:36 AM | run 25 | all four | |
+  | 11:56 AM to 12:28 PM | run 29 | all four | |
+  | 12:35 to 12:56 PM | run 29 | all four | alongside BotPop at 600 |
+
+  The groups were Cresh, Besh (Dova, Varo), Dorn (Dorn, Rusk) and Forn. Reports: `Bot-reports/<Group>/20261017-*-missions.json`.
+- **PASS** (mission removed from the datapad, and the bank rose by exactly reward // group size):
+
+  | Terminal and mission | Reward → share paid (group size) |
+  |---|---|
+  | general/destroy | 774 → 258 (3) |
+  | general/deliver | 62 → 20, 64 → 21 (3) |
+  | artisan/crafting | 64 → 16 (4), twice |
+  | entertainer/dancer | 133 → 44, 169 → 56 (3) |
+  | entertainer/musician | 157 → 52, 205 → 68 (3) |
+  | scout/hunting | 15 kills, 1038 → 207 (5) |
+  | rebel/recon | 314 → 62, 385 → 77 (5) |
+
+  The 7th mission was refused three times (Ilsa holds 6).
+- **Not completed:** artisan/survey, scout/recon, imperial/recon and bounty. Reasons are in the plan; the scenario fixes are committed, not rerun. Mos Eisley has no newbie or statue terminal, and its faction terminals offer no deliver missions.
+- **Bugs, with evidence in test plan section 11:**
+  1. Group pay is judged from the mission's end point only. A grouped player who destroys a lair that spawned away from the first spot, or hunts away from where the mission was listed, gets nothing. **Fix staged** as asked by the main session: `Documentation-support/mission-group-pay.patch` and `.md`, against Core3-dev `25344120`; `git apply --check` is clean; unbuilt, not installed.
+  2. A deliver pickup into a full inventory leaves the mission stuck in the datapad.
+  3. A bank terminal's window opens at any range.
+  4. Bot body: mission string-ids lose their key; the bank balance is forgotten; indoor `find` uses cell-local coordinates; no mission abort.
+  5. 10 of 24 squad bots have full inventories from spare `/agentgear` kits.
+- **Bots changed for this (test galaxy only):**
+  - Cresh, Ilsa and Kor have the Marksman profession.
+  - Rusk has Novice Entertainer.
+  - Dask has Novice Bounty Hunter and Investigation I; Ressa has Novice Bounty Hunter.
+  - Ilsa keeps 6 destroy missions, Cresh one stuck delivery, and Mirren, Dask and Dova unfinished recon or survey missions. All expire within 48 h; there's no abort.
+- **Not done:** the full-datapad gate (C56) and live's 2-mission cap. `check_c9_offline.py` still fails on its Aurek fixture (stale, not mine).
 
 ### 2026-10-17 9:43 AM Claude: local 3D in place of fal: TRELLIS.2 through um comfy run, proved with one crate
 
