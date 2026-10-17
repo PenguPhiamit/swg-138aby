@@ -8,6 +8,31 @@ This folder holds `botpop-travel.patch` against `/opt/swg/Core3-dev` HEAD `8edfd
 - `check_patch.sh` passes: `git apply --check` against HEAD, and a syntax-only clang 19 compile of `CommandConfigManager.cpp` (the file that includes BotPop) with the dev build's flags from `build/dev/compile_commands.json`, the patched headers in a `/tmp` overlay. 0 errors, 0 BotPop warnings; all 8 BotPop headers came from the overlay.
 - Nothing under `/opt/swg` was edited, and the galaxy and bots were not touched.
 
+## Run 17 findings and `botpop-travel-fix.patch`
+
+The first patch went live as dev `86cc85a1` in run 17 (1,700 bots, from 10:05 PM). Run 17's log at the time of reading had 60+ tries, 0 arrivals and every failure at Mos Eisley Starport. The fix patch is against `86cc85a1` and passes `check_patch.sh botpop-travel-fix.patch` (apply check and clang, 0 errors). **Untested in game.**
+
+1. **Bots never reached the terminal, or the collector after buying.**
+   - About 20 failed with `terminal: not at the terminal after 5 minutes`. They all stood in a line at y -4749, x 3598-3608, which is the north side of the starport compound (the building is at 3619, -4801).
+   - About 24 bots got in and bought a ticket, then failed with `shuttle: not at the collector after 5 minutes`. They all stood at about 3648, -4776, on the compound's east side.
+   - **Cause:** the starport compound is cut out of the town navmesh. The outdoor chase (planRoute, with the 8edfd13f no-fallback) stops at its edge. That stop was more than 60 m from the indoor terminal, so the walk never switched to `findPath`, and it waited until the timeout.
+   - After buying, the walk followed `findPath` out of the hall, but dropped back to the outdoor chase as soon as the bot left the cell. That chase then stopped at the compound's edge in the same way.
+   - **Fix (`tripWalk`):**
+     - A chase that gains less than 1 m in 8 s counts as stalled. The walk then switches to `findPath`, which goes through the building's exterior path graph and portals; it also switches within 80 m of an indoor target.
+     - A planned path is followed to its end, outdoors too.
+     - If the path ends within 20 m of an outdoor target, the bot walks the rest straight. It never walks straight into a building.
+2. **`offer: no fare for this route` (Tatooine to Talus, Rori).** This is correct game data: the travel table has no such fare.
+   - **Fix:** a destination with no fare from here is reached through a hub, a loaded planet with a fare both ways (`tripHub`, for example Corellia).
+   - The bot flies to the hub. 30 s after landing it leaves on the "onward" leg to its destination.
+   - Nal Hutta is now offered from any planet with a fare to it (Tatooine and Corellia in the installed table), and bots fly back from there to a starting planet with a fare.
+   - The `travel_try` row has `connecting` and `onward`. A destination with no route even through a hub gives `plan: no fare to X, directly or through a hub`.
+3. **`plan: no travel point at the destination` (Bela Vistal, `to_point` "").** Bela Vistal has only a shuttleport, and the plan asked for a starport within the town's radius + 300 m.
+   - **Fix:** for another planet, if the destination town has no starport, the bot flies to that planet's starport nearest the town, then takes the shuttle on (the "onward" leg). Towns with no starport of their own already worked this way when departing.
+
+**To check after the restart:** run `botpop travel 60` from Tatooine again, then `travel_map.py`.
+- Expect `travel_done` rows for Mos Eisley routes, and `connecting: true` tries for Talus, Rori and Bela Vistal followed by an onward try.
+- If bots still stall at the compound, the row's x/y says where. `findPath` failing there would show as `terminal: no path to the terminal`.
+
 ## What a bot does now
 
 Launch bots (hunters, medics, entertainers; explorers only when forced) travel the way a player does.

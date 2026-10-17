@@ -1,0 +1,315 @@
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h
+index f0db85b..f845509 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h
+@@ -195,6 +195,10 @@ public:
+ 	std::vector<WorldCoordinates> tripPath; // findPath's points into or out of a building (each with its cell)
+ 	size_t tripNext = 0;
+ 	Vector3 tripDoor; // the last outdoor spot before the bot stepped into a cell
++	float tripBest = 0;              // the nearest the bot has come to its current walk target...
++	uint64 tripBestMs = 0, tripBestFor = 0; // ...when, and which target (tripWalk's stall check)
++	City tripOnward = {"", "", 0, 0, 0};     // the destination after this leg (via a hub, a starport or a shuttle)
++	bool tripOnwardSet = false;
+ };
+ 
+ // Real players multiclass (owner, 16 Oct; Documentation-support/precu-player-builds.md). Role -1: the sampler
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+index 359b2ba..1c27c42 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+@@ -1660,7 +1660,7 @@ inline void BotPopManager::launchStep(BotState* state, CreatureObject* bot, Zone
+ 	// is between things (no target, corpse, mission, rest or dance).
+ 	if (L->trip == LaunchState::TRIP_NONE && now >= L->nextTripMs && L->role != LaunchState::EXPLORER && L->targetID == 0
+ 			&& L->corpseID == 0 && L->missionID == 0 && !L->resting && !L->dancing && !bot->isInCombat() && tripsWanted())
+-		launchTravel(state, bot, zone, L, combatLevel(bot), now, "trip");
++		launchTravel(state, bot, zone, L, combatLevel(bot), now, L->tripOnwardSet ? "onward" : "trip");
+ 
+ 	if (L->trip != LaunchState::TRIP_NONE) {
+ 		tripStep(state, bot, zone, L, now, seconds);
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+index 7b0bd01..62f6f8b 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+@@ -380,6 +380,8 @@ private:
+ 	static bool tripsWanted();
+ 	static uint64 tripInterval();
+ 	static bool cityNear(const String& planet, float x, float y, City& out);
++	static int tripFareBetween(ZoneServer* zoneServer, const String& from, const String& to);
++	static bool tripHub(ZoneServer* zoneServer, const String& from, const String& to, City& out);
+ 	std::vector<City> travelOptions(ZoneServer* zoneServer, LaunchState* L, int tier, const char* reason);
+ 	void tripStart(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, int level, uint64 now, const char* reason);
+ 	void tripStep(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, uint64 now, float seconds);
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopTravel.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopTravel.h
+index db5414b..a0b81c1 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopTravel.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopTravel.h
+@@ -68,25 +68,71 @@ inline bool BotPopManager::cityNear(const String& planet, float x, float y, City
+ 	return found;
+ }
+ 
++// The fare from planet `from` to planet `to` in the travel table (datatables/travel/travel.iff, what purchaseTicket
++// charges and the purchase window lists); 0: no route.
++inline int BotPopManager::tripFareBetween(ZoneServer* zoneServer, const String& from, const String& to) {
++	Zone* zone = zoneServer->getZone(from);
++	return zone != nullptr ? zone->getPlanetManager()->getTravelFare(from, to) : 0;
++}
++
++// A city on a loaded planet with a fare from `from` and a fare on to `to` (a hub, such as Corellia between Tatooine
++// and Talus): the starting cities of such planets, else their outposts, one at random. False when there is none.
++inline bool BotPopManager::tripHub(ZoneServer* zoneServer, const String& from, const String& to, City& out) {
++	std::vector<City> starters, outposts;
++
++	auto consider = [&](const City& city, std::vector<City>& list) {
++		if (from == city.planet || to == city.planet || zoneServer->getZone(city.planet) == nullptr)
++			return;
++
++		if (tripFareBetween(zoneServer, from, city.planet) > 0 && tripFareBetween(zoneServer, city.planet, to) > 0)
++			list.push_back(city);
++	};
++
++	for (int i = 0; i < STARTER_CITY_COUNT; ++i)
++		consider(STARTER_CITIES[i], starters);
++
++	for (int i = 0; i < DESTINATION_COUNT; ++i)
++		consider(DESTINATIONS[i].city, outposts);
++
++	consider(HUTTA_CITY, outposts);
++
++	std::vector<City>& list = starters.empty() ? outposts : starters;
++
++	if (list.empty())
++		return false;
++
++	out = list[System::random(list.size() - 1)];
++	return true;
++}
++
+ // Where a bot that moves on may go: another starting planet's city at combat level 1-6, a tier-1 outpost at 7-14,
+-// tier 2 from 15 (lower tiers when none is loaded). By ticket also: Nal Hutta from Tatooine one trip in four (the only
+-// route there) and Tatooine from Nal Hutta, and on a trip of its own ("trip") one time in three another city on the
+-// same planet (the planet's shuttles).
++// tier 2 from 15 (lower tiers when none is loaded). By ticket also: Nal Hutta one trip in four from a planet with a
++// fare to it (Tatooine and Corellia in the installed travel table) and a starting planet with a fare from there; on a
++// trip of its own ("trip") one time in three another city on the same planet (the planet's shuttles); and after a
++// connecting leg ("onward") the destination it was heading for. A destination with no fare from here is reached
++// through a hub (tripStart).
+ inline std::vector<City> BotPopManager::travelOptions(ZoneServer* zoneServer, LaunchState* L, int tier, const char* reason) {
+ 	std::vector<City> options;
+ 
+ 	if (travelByTicket()) {
++		if (strcmp(reason, "onward") == 0 && L->tripOnwardSet) {
++			options.push_back(L->tripOnward);
++			return options;
++		}
++
+ 		bool here = L->planet == HUTTA_CITY.planet;
+ 
+-		if (here || (L->planet == "tatooine" && zoneServer->getZone(HUTTA_CITY.planet) != nullptr && System::random(3) == 0)) {
+-			for (int i = 0; here && i < STARTER_CITY_COUNT; ++i) {
+-				if (strcmp(STARTER_CITIES[i].planet, "tatooine") == 0)
++		if (here) {
++			for (int i = 0; i < STARTER_CITY_COUNT; ++i) {
++				if (tripFareBetween(zoneServer, L->planet, STARTER_CITIES[i].planet) > 0)
+ 					options.push_back(STARTER_CITIES[i]);
+ 			}
+ 
+-			if (!here)
+-				options.push_back(HUTTA_CITY);
+-
++			if (!options.empty())
++				return options;
++		} else if (zoneServer->getZone(HUTTA_CITY.planet) != nullptr && tripFareBetween(zoneServer, L->planet, HUTTA_CITY.planet) > 0
++				&& System::random(3) == 0) {
++			options.push_back(HUTTA_CITY);
+ 			return options;
+ 		}
+ 
+@@ -414,36 +460,53 @@ inline void BotPopManager::tripStart(BotState* state, CreatureObject* bot, Zone*
+ 	City to = options[System::random(options.size() - 1)];
+ 	PlanetManager* here = zone->getPlanetManager();
+ 	bool cross = L->planet != to.planet;
++	String why; // why there is no plan, when there is none
+ 
+ 	L->tripReason = reason;
+ 	L->tripFromPlanet = zone->getZoneName();
+ 	L->tripFromPoint = L->tripToPoint = "";
+-	L->tripToPlanet = to.planet;
+-	L->tripCity = to;
+ 	L->tripTier = cross ? tier : L->tier;
+ 	L->tripConnecting = false;
++	L->tripOnwardSet = false;
+ 	L->tripStartMs = now;
+ 	L->tripFare = L->tripTopUp = L->tripSnaps = 0;
+-	L->tripTicketID = L->tripPathFor = 0;
++	L->tripTicketID = L->tripPathFor = L->tripBestFor = 0;
+ 	L->tripPath.clear();
+ 	L->trip = LaunchState::TRIP_TERMINAL; // tripEnd resets it, also for a trip that fails here
+ 
+-	++launchTravelTries;
++	// This leg goes to `leg` instead; the trip's destination comes after it ("onward", 30 s after landing).
++	auto connect = [&](const City& leg) {
++		if (!L->tripOnwardSet) {
++			L->tripOnward = to;
++			L->tripOnwardSet = true;
++		}
++
++		to = leg;
++		cross = L->planet != to.planet;
++		L->tripConnecting = true;
++	};
++
++	// No fare from here to that planet (the travel table, as the purchase window): through a hub planet with a fare
++	// both ways, as a player flies Tatooine - Corellia - Talus (run 17: 7 "no fare" Tatooine to Talus).
++	if (cross && tripFareBetween(zoneServer, L->planet, to.planet) == 0) {
++		City hub = {"", "", 0, 0, 0};
++
++		if (tripHub(zoneServer, L->planet, to.planet, hub))
++			connect(hub);
++		else
++			why = "no fare to " + String(to.planet) + ", directly or through a hub";
++	}
++
+ 	Reference<PlanetTravelPoint*> from = here->getNearestPlanetTravelPoint(L->center, L->cityRadius + 300.f, cross);
+ 
+ 	// No starport in this town: first the shuttle to the planet's starport nearest it, then on from there (a player
+ 	// from Anchorhead flies out of Mos Eisley).
+-	if (from == nullptr && cross) {
++	if (from == nullptr && cross && why.isEmpty()) {
+ 		Reference<PlanetTravelPoint*> port = here->getNearestPlanetTravelPoint(L->center, 16000.f, true);
+ 		City hub = {"", "", 0, 0, 0};
+ 
+ 		if (port != nullptr && cityNear(L->planet, port->getArrivalPositionX(), port->getArrivalPositionY(), hub) && !(L->cityName == hub.name)) {
+-			to = hub;
+-			cross = false;
+-			L->tripToPlanet = to.planet;
+-			L->tripCity = to;
+-			L->tripTier = L->tier;
+-			L->tripConnecting = true;
++			connect(hub);
+ 			from = here->getNearestPlanetTravelPoint(L->center, L->cityRadius + 300.f, false);
+ 		}
+ 	}
+@@ -452,6 +515,23 @@ inline void BotPopManager::tripStart(BotState* state, CreatureObject* bot, Zone*
+ 	Reference<PlanetTravelPoint*> arrival = there != nullptr
+ 		? there->getPlanetManager()->getNearestPlanetTravelPoint(Vector3(to.x, to.y, 0), to.radius + 300.f, cross) : nullptr;
+ 
++	// No starport in the destination town (run 17: Bela Vistal has only a shuttleport): the planet's starport nearest
++	// it, then the shuttle on.
++	if (arrival == nullptr && cross && there != nullptr && why.isEmpty()) {
++		Reference<PlanetTravelPoint*> port = there->getPlanetManager()->getNearestPlanetTravelPoint(Vector3(to.x, to.y, 0), 16000.f, true);
++		City hub = {"", "", 0, 0, 0};
++
++		if (port != nullptr && cityNear(to.planet, port->getArrivalPositionX(), port->getArrivalPositionY(), hub)) {
++			if (strcmp(hub.name, to.name) != 0)
++				connect(hub);
++
++			arrival = port;
++		}
++	}
++
++	L->tripToPlanet = to.planet;
++	L->tripCity = to;
++
+ 	if (from != nullptr)
+ 		L->tripFromPoint = from->getPointName();
+ 
+@@ -461,8 +541,17 @@ inline void BotPopManager::tripStart(BotState* state, CreatureObject* bot, Zone*
+ 	JSONSerializationType row = tripRow("travel_try", bot, L, now);
+ 	row["lvl"] = level;
+ 	row["connecting"] = L->tripConnecting;
++
++	if (L->tripOnwardSet)
++		row["onward"] = std::string(L->tripOnward.planet) + ": " + L->tripOnward.name;
++
+ 	SimLog::instance()->write(row);
+ 
++	if (!why.isEmpty()) {
++		tripEnd(state, bot, L, "plan", why, now);
++		return;
++	}
++
+ 	if (from == nullptr) {
+ 		tripEnd(state, bot, L, "plan", cross ? "no starport in or near this town" : "no shuttleport in this town", now);
+ 		return;
+@@ -758,6 +847,7 @@ inline void BotPopManager::tripEnd(BotState* state, CreatureObject* bot, LaunchS
+ 	L->trip = LaunchState::TRIP_NONE;
+ 	L->tripPath.clear();
+ 	L->tripConnecting = false;
++	L->tripOnwardSet = false;
+ 	L->noTargetSinceMs = now;
+ 	L->nextTripMs = now + tripInterval();
+ 	state->path.clear();
+@@ -834,15 +924,26 @@ inline int BotPopManager::tripWalk(BotState* state, CreatureObject* bot, Zone* z
+ 		return 1;
+ 	}
+ 
+-	if (frame == nullptr && (!targetInside || distance > 60.f)) {
+-		L->tripPath.clear();
+-		L->tripPathFor = 0;
++	uint64 now = state->lastStepMs, targetID = target->getObjectID();
++	bool planned = L->tripPathFor == targetID;
+ 
+-		bool there = chaseToward(state, bot, zone, goal.getX(), goal.getY(), 5.f, seconds, targetInside ? 55.f : stopAt);
++	// Progress toward this target: a chase that has not gained a metre in 8 s has stopped where the town's navmesh
++	// stops. Starports are cut out of it (run 17: Mos Eisley bots stood at the compound's north wall, y -4749, and
++	// at its east side, 3648 -4776), so the way in is the building's own path graph, through findPath.
++	if (L->tripBestFor != targetID || distance < L->tripBest - 1.f) {
++		L->tripBestFor = targetID;
++		L->tripBest = distance;
++		L->tripBestMs = now;
++	}
++
++	bool stalled = now > L->tripBestMs + 8000;
++
++	if (!planned && frame == nullptr && !stalled && (!targetInside || distance > 80.f)) {
++		bool there = chaseToward(state, bot, zone, goal.getX(), goal.getY(), 5.f, seconds, targetInside ? 80.f : stopAt);
+ 		return there && !targetInside ? 1 : 0;
+ 	}
+ 
+-	if (L->tripPathFor != target->getObjectID()) {
++	if (!planned) {
+ 		WorldCoordinates from(bot), to(target);
+ 		std::unique_ptr<Vector<WorldCoordinates>> route(PathFinderManager::instance()->findPath(from, to, zone));
+ 
+@@ -855,13 +956,36 @@ inline int BotPopManager::tripWalk(BotState* state, CreatureObject* bot, Zone* z
+ 			L->tripPath.push_back(route->get(i));
+ 
+ 		L->tripNext = 0;
+-		L->tripPathFor = target->getObjectID();
++		L->tripPathFor = targetID;
++		L->tripBestMs = now;
+ 	}
+ 
+-	if (L->tripNext >= L->tripPath.size()) { // the path ended short of the target
+-		L->tripPath.clear();
+-		L->tripPathFor = 0;
+-		return -1;
++	// The path (followed to its end, outdoors too: out of the terminal hall it runs over the compound's own graph to
++	// the node nearest the collector) ended short of the target. The last 20 m straight, in the bot's own frame, as
++	// chaseToward finishes a short route (98a74806); further than that is no way there.
++	if (L->tripNext >= L->tripPath.size()) {
++		if (distance > 20.f || now > L->tripBestMs + 30000)
++			return -1;
++
++		ManagedReference<SceneObject*> targetParent = target->getParent().get();
++
++		if (frame == nullptr && targetInside) // never through a wall into a building
++			return -1;
++
++		if (frame == nullptr)
++			return stepToward(bot, zone, goal.getX(), goal.getY(), 3.f, seconds, stopAt) ? 1 : 0;
++
++		if (targetParent != frame)
++			return -1;
++
++		Vector3 position = bot->getPosition(), local = target->getPosition();
++		float lx = local.getX() - position.getX(), ly = local.getY() - position.getY();
++		float length = std::sqrt(lx * lx + ly * ly), step = Math::min(length, 3.f * seconds);
++
++		if (length > 0.01f)
++			tripPlace(bot, zone, Vector3(position.getX() + lx / length * step, position.getY() + ly / length * step, position.getZ()), frame, 3.f, lx, ly);
++
++		return 0;
+ 	}
+ 
+ 	float speed = 3.f, budget = speed * seconds, dx = 0, dy = 0;

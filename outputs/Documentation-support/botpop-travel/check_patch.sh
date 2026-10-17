@@ -1,12 +1,12 @@
 #!/bin/bash
-# Checks botpop-travel.patch against /opt/swg/Core3-dev HEAD without touching /opt/swg:
+# Checks botpop-travel.patch (or the patch given as the argument) against /opt/swg/Core3-dev HEAD without touching /opt/swg:
 #  1. git apply --check in the dev tree (read-only);
 #  2. a syntax-only clang compile of CommandConfigManager.cpp (the file that includes BotPop) with the dev build's own
 #     flags from build/dev/compile_commands.json and the patched BotPop headers in a /tmp overlay in front.
 # Run as swgemu:  wsl -d Debian -u swgemu -- bash <this folder>/check_patch.sh
 set -u
 HERE="$(cd "$(dirname "$0")" && pwd)"
-PATCH="$HERE/botpop-travel.patch"
+PATCH="${1:-$HERE/botpop-travel.patch}" # or the patch given, e.g. botpop-travel-fix.patch
 DEV=/opt/swg/Core3-dev
 WORK=$(mktemp -d /tmp/botpop-travel-check.XXXXXX)
 trap 'rm -rf "$WORK"' EXIT
