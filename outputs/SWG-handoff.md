@@ -372,6 +372,23 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-17 4:04 AM Claude: going-public check, assets clear; licence, credits and the checklist
+
+- **Assets (whole history, which is what the export publishes):** no image, model, texture, sound, archive or SWG client file was ever committed.
+  - The only asset files are ours: the Ossus `.tga` bitmaps and `.ws` snapshots from `tools/ossus_terrain.py`, and `SpeciesColorLock.fx`.
+  - Kenney (CC0): only receipts and notices are in git; the Quaternius art (CC0) isn't in git. TortoiseBots: with permission, credited. EiF: reference indexes only.
+- **Owner's decisions (17 Oct):**
+  - **AGPL-3.0 for the whole repo** (`LICENSE`), with credits in `NOTICE.md` (`01fb0de`).
+  - The **SWG×SW5E books and the material extracted from them stay out** of the public copy (export drop list).
+  - **MTG: credited and published now**, removed if an author objects.
+  - Names: keep credits, whole source links, brother mentions with no name, and the characters Benny and Tulde Dedra. "Bill" (a first name in a quoted comment) is reworded in the export. Decisions are in `work/names-sweep/decisions-2026-10-17.json` (local).
+- **Test export build** (local, no push): 347 commits, no dropped paths, no handles or e-mail, messages clean, the SW5E files in no version, LICENSE and NOTICE at the top.
+- **Before going public (checklist):**
+  1. **Names delta sweep:** the 324 files changed since 15 Oct 11:40 AM. It waits for the local model on the friend's PC (owner: "save it for the local model we are setting up"); Claude or GPT reviews its list.
+  2. The owner makes a **fresh public repo** and runs `github_export.py push <new url>`. Then check it on GitHub.
+  3. **Purge the old repo** (owner, 17 Oct: "dont forget we need to purge the old github"): after the new one checks out, the owner deletes the old private repo (Settings, Danger Zone, Delete this repository). It may still hold early commits by hash. Check it has no forks first. Claude doesn't delete repositories.
+  4. Then the TortoiseBots fork (`Documentation-support/tortoisebots-fork-plan.md`).
+
 ### 2026-10-17 2:30 AM Claude: PL-05 Hoth leftovers staged (scheduled run; nothing installed)
 
 Built only what the owner answered (15 Oct Q4; 14 Oct question 9). Folder `Hoth-leftovers/`: `hoth-leftovers.patch` (13 Lua files against Core3-dev `07d9f61e`; `git apply --check` and `luac -p` pass, read-only), `build_hoth_leftovers.py` (chains on the installed `df1d538e`; candidate `work/hoth-leftovers/local_planets-hoth-leftovers.tre`, sha256 `108d4234...`, 178 entries byte-identical, 8 changed, 13 new) and `LEFTOVERS-INSTALL.md` (install order: archive on both sides first, then the patch). Adds: the mynock ice cave with Fable's flatten layer; Hoarfang in a fixed spot with a 30-minute respawn, blue through a `rancor_ice` chain on the Chiss skin palette; badge 141 and a rare-decor roll at the end of Vell's chain; artisan and entertainer terminals plus both recruiters at the starport (recruiters off the camps); deliveries to three camps; map names for the two dens. Density, area and camp names and the camp junk dealer were already in dev. Untested; three owner questions at the top. Tauntaun riding stays its own batch.
