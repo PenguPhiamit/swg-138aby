@@ -48,7 +48,8 @@ Install, one step at a time, with my yes for each download:
 6. Two scripts in the ComfyUI_windows_portable folder, plus desktop shortcuts to them named "SWG art server - start"
    and "SWG art server - stop":
    - start-swg-art.bat: the same command and flags as advanced\run_nvidia_gpu_disable_api_nodes.bat (it uses
-     --offline, which turns off paid API nodes), plus --listen 0.0.0.0 --port 8188 --disable-auto-launch.
+     --offline, which turns off paid API nodes), plus --listen 0.0.0.0 --port 8188 --disable-auto-launch
+     --disable-pinned-memory (pinned memory caused a RAM failure on the owner's 12 GB setup).
    - stop-swg-art.bat: ends only the python process running ComfyUI\main.py.
    Don't make it start at logon unless I say so.
 7. One inbound firewall rule named SWG-ComfyUI-OwnerPC: TCP port 8188, program = the full path of
@@ -64,8 +65,10 @@ Test:
    - Check that curl.exe http://127.0.0.1:8188/system_stats shows the GPU.
    - In the browser at http://127.0.0.1:8188, load the FLUX.2 klein 4B text-to-image template. Make one 1024 px image
      of "a weathered stone shrine on a forest hill, concept art". Note the seconds and the peak VRAM from nvidia-smi.
-   - Load the TRELLIS.2 image-to-3D template with its switch on TRELLIS.2, not Pixal3D. Run it on that image at the
-     512 preset. Note the seconds, the peak VRAM, whether it finishes, and where the .glb lands.
+   - Load the "Pixal3D & TRELLIS.2: Image to Model" template with its switch on TRELLIS.2, not Pixal3D, and set
+     the remesh resolution to 512: the default 768 ran out of video memory on a 12 GB card. Run it on that image.
+     Note the seconds, the peak VRAM, whether it finishes, and where the .glb lands. On the owner's 12 GB card a
+     crate took 166 s with a peak of about 10 GB.
    - Then free the memory:
      curl.exe -X POST http://127.0.0.1:8188/free -H "Content-Type: application/json" -d "{\"unload_models\":true,\"free_memory\":true}"
 10. Print a summary for the Claude on my PC:
@@ -92,3 +95,5 @@ Rules:
   so Ollama unloads. After it: POST `/free` to ComfyUI, then delete STOP.
 - Input images (TRELLIS.2 needs one) are uploaded with ComfyUI's `/upload/image` before the run, because the friend's
   ComfyUI can't see this PC's files.
+- The 3D workflow is `tools/art/trellis2_image_to_3d_api.json` (art session, 6c9a25d; remesh 512). `um comfy run` doesn't
+  upload, so a small upload step is needed for the friend's PC (on this PC the image is copied into ComfyUI\input).
