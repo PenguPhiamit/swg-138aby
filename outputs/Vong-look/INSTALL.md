@@ -8,6 +8,43 @@ Project fields (POI 7) for the owner to look at. Patrols come after that look.
 
 The plan and history are in `Documentation-support/vong-look-test.md`.
 
+## Fix 1 (17 Oct, after the owner's first look): the warrior's body. `vong-look-body-fix.patch`
+
+**What the owner saw** (run 29, client and server archive `beb06d28`): "the vong is just a fat human".
+
+**Cause, found in the client's data files** (Claude, about 12:35 PM): the warrior's body,
+`object/mobile/human_male.iff`, names the client data file
+`clientdata/npc/client_shared_npc_dressed_commoner_fat_human_male_02.cdf`. From that file the client itself builds a
+fat commoner:
+- `MESH` hair `hum_m_hair_s18`, `jacket_s11_m`, `pants_s13_m` and `shoes_s01_m`;
+- body blends including `/shared_owner/blend_fat` 204 of 255;
+- skin index 41.
+
+The server's shared template also scales that body randomly from 1 to 1.12, on top of our 1.15.
+
+The Mos Taike guards wear a full stock armour outfit (padded) on `object/mobile/mos_taike_guard_old.iff`. That body
+uses the generic `client_shared_npc_human_m.cdf`, which has only sounds and footstep effects: no clothes, no hair, no
+blends. The guards' hair comes from their outfit (`hair_human_male_s23`), so the body itself is bald.
+
+**Ruled out first:**
+- the slots (`human_male` has the same `abstract/slot/descriptor/player.iff` as the guards, and our pieces use the
+  stock arrangements such as `wearables/bicep_l.iff`);
+- `playerRaces` (Core3 checks it only for players, in `PlayerContainerComponent`);
+- the client chain: its CRC table comes from `local_planets.tre` `beb06d28` with our 8 rows, and every Vong template,
+  appearance, shader and texture resolves there;
+- server errors: none in `/opt/swg/testgalaxy/console.log` about vong, outfits or templates.
+
+**The fix:** in `mobile/sandbox/ossus_vong.lua`, `templates = {"object/mobile/mos_taike_guard_old.iff"}`. That is one
+line plus a comment, Lua only, and needs no client change. `git apply --check` passes on Core3-dev `4906d2eb` (read
+only), and `luac5.3 -p` passes. `tools/stage_server.py` now writes the same body.
+
+**Install (lock holder):** apply the patch on dev, commit, run `check_lua.py`, and restart the test galaxy.
+
+**Then ask the owner openly** what they see. **Still untested:** whether our armour pieces draw. This is the most
+likely cause, not a proven one. If the armour is still missing on the new body, the next check is a bot next to the
+warrior, listing the objects contained in it (`AgentControl::onContainment`), to see whether the server equips the
+eight pieces at all.
+
 ## Client: `tools/build_vong_client.py`
 
 It chains on the installed archive `work/nal-hutta-life/local_planets-nalhutta-life.tre` (sha256 `b01e9f44...`, the one

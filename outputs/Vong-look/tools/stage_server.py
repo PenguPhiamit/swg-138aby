@@ -8,7 +8,8 @@ What it adds (the owner's pick, 17 Oct: "Mix: bone + s02 collar", no helmet; one
   .../armor/vongcrab/armor_vongcrab_s02_chest_plate. Stats are the stock ones; item names and descriptions still use
   the stock strings (our own strings come later);
 - the outfit vong_fanatic_warrior_outfit (no customization: the cloned shaders' colour 0 is palette/white.pal);
-- the mobile vong_fanatic_warrior_look: the plain human male body, our outfit, no helmet, scale 1.15, not attackable,
+- the mobile vong_fanatic_warrior_look: the generic human male body of the Mos Taike guards (mos_taike_guard_old.iff;
+  fix of 17 Oct, see vong-look-body-fix.patch), our outfit, no helmet, scale 1.15, not attackable,
   no faction yet (the vong_fanatic side comes with the patrols);
 - the screenplay OssusVongLookScreenPlay: one warrior at the Ossus Project fields, POI 7 (1400, 4900), on the ground.
 
@@ -121,7 +122,8 @@ edit('mobile/outfits/serverobjects.lua', [
     ('includeFile("outfits/vardias_tyne_outfit.lua")',
      'includeFile("outfits/vardias_tyne_outfit.lua")\nincludeFile("outfits/vong_fanatic_warrior_outfit.lua") -- Sandbox: Vong look test')])
 
-# 3. the warrior: the plain human male body (as mobile/thug/brigand.lua), bare-headed (owner: "no helmet"), taller
+# 3. the warrior: the Mos Taike guards' generic human male body (it wears stock armour outfits; human_male.iff draws a fat
+#    commoner, see the comment in the template), bare-headed (owner: "no helmet"), taller
 #    (Wookieepedia: much taller and heavier than humans). Not attackable and no faction for the look.
 new('mobile/sandbox/ossus_vong.lua', HEAD % ('One warrior for the owner\'s look at the Ossus Project fields.') + '''vong_fanatic_warrior_look = Creature:new {
 	objectName = "",
@@ -152,7 +154,11 @@ new('mobile/sandbox/ossus_vong.lua', HEAD % ('One warrior for the owner\'s look 
 	optionsBitmask = AIENABLED + INVULNERABLE,
 	diet = HERBIVORE,
 	scale = 1.15,
-	templates = {"object/mobile/human_male.iff"},
+	-- A body with the generic client data (client_shared_npc_human_m.cdf), as the Mos Taike guards that wear stock
+	-- armour outfits. object/mobile/human_male.iff uses client_shared_npc_dressed_commoner_fat_human_male_02.cdf,
+	-- which makes the client draw a fat commoner (blend_fat 204, jacket, pants, shoes, hair) instead of our armour
+	-- (owner, 17 Oct: "the vong is just a fat human"). This body has no hair of its own: the warrior is bald.
+	templates = {"object/mobile/mos_taike_guard_old.iff"},
 	lootGroups = {},
 	primaryWeapon = "unarmed",
 	secondaryWeapon = "none",

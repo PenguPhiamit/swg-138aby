@@ -5,6 +5,15 @@ ossus, or should we do another local project to test things?" On the decision ca
 That means the local model's first real job is a Vong warrior's look. One warrior stands at the Ossus Project fields for
 the owner to see, and patrols come after that look.
 
+**Status, 17 Oct about 12:35 PM: installed by the main session (run 29, archive `beb06d28`).** The owner's first look:
+"the vong is just a fat human".
+- **Cause found:** the warrior's body `object/mobile/human_male.iff` makes the client draw a fat commoner from its
+  client data file (`client_shared_npc_dressed_commoner_fat_human_male_02.cdf`: jacket, pants, shoes, hair,
+  `blend_fat` 204).
+- **Fix staged, not installed:** `Vong-look/vong-look-body-fix.patch` switches to the Mos Taike guards' generic,
+  hairless body. Details: `Vong-look/INSTALL.md`, "Fix 1".
+- **Still untested in game:** whether the armour draws on the new body.
+
 **Status, 17 Oct 9:09 AM: step 4 is staged. Nothing is installed; untested in game.** The owner on the mix
 preview: "The mix is close enough. Go on to step 4".
 - **Client candidate** `work/vong-look/local_planets-vong-look.tre` (sha256 `185b3d7f...`), built on the installed

@@ -1,0 +1,17 @@
+diff --git a/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_vong.lua b/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_vong.lua
+index ba5679f..414dde3 100644
+--- a/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_vong.lua
++++ b/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_vong.lua
+@@ -30,7 +30,11 @@ vong_fanatic_warrior_look = Creature:new {
+ 	optionsBitmask = AIENABLED + INVULNERABLE,
+ 	diet = HERBIVORE,
+ 	scale = 1.15,
+-	templates = {"object/mobile/human_male.iff"},
++	-- A body with the generic client data (client_shared_npc_human_m.cdf), as the Mos Taike guards that wear stock
++	-- armour outfits. object/mobile/human_male.iff uses client_shared_npc_dressed_commoner_fat_human_male_02.cdf,
++	-- which makes the client draw a fat commoner (blend_fat 204, jacket, pants, shoes, hair) instead of our armour
++	-- (owner, 17 Oct: "the vong is just a fat human"). This body has no hair of its own: the warrior is bald.
++	templates = {"object/mobile/mos_taike_guard_old.iff"},
+ 	lootGroups = {},
+ 	primaryWeapon = "unarmed",
+ 	secondaryWeapon = "none",
