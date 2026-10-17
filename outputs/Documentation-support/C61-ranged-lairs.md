@@ -82,3 +82,16 @@ Checks run (inside WSL, read-only):
 
 - No in-game test and no agent-client test (overrides for this task).
 - A spot-check of one bot's skills wasn't possible without touching the galaxy.
+
+## Addendum, 10:45 PM: the "skill points mismatch" errors aren't from this patch
+
+The main session reported 748 `skill points mismatch calculated: 985 found: 235` errors in the test galaxy's `core3.log` after fe399424 went live (run 18, from 10:25 PM).
+
+- The file starts 15 Oct, 11:31 PM, and holds several runs.
+- All 748 errors are at lines 16893-17886, from **16 Oct, 1:13-1:14 AM**: 429 at 1:13 and 319 at 1:14. That is 21 hours before fe399424.
+- Every one is the same pair: calculated 985, found 235, a difference of 750. That is a 1,000-point budget (`config-local.lua` `SkillPoints = 1000`) against bots that were given 250. So it was a config change at that start, not a skill.
+- Since 10:25 PM, `core3.log` has no such error. It has two error lines in total: an `unknown appearance type SPRT` and one Lua line.
+- The check is `SkillManager.cpp:427-438` (awardSkill) and `:633-644` (surrenderSkill). It subtracts each skill's `POINTS_REQUIRED` from `Core3.Sandbox.SkillPoints`. The species skills cost 0 points (`skills.iff` `POINTS_REQUIRED` is empty for every `species_*` row), so awarding them can't change the sum.
+- Gameplay effect: none now. Back then the check reset each bot's points to the calculated value, so the 1:13 AM bots got the full 1,000. No real-player path is involved: creation sets the points from the same config key.
+- No fix2 patch is needed.
+- First run-18 signs of the fix: ranged lair_check rows with damage show 124, 524 and 1,095 (3 of 306 rows so far). Before, those values were 3-10.
