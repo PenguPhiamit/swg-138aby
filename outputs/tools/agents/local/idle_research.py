@@ -75,8 +75,9 @@ SOURCE_CAP = 120_000  # characters per topic at a 64K-token window (scaled by so
 MAX_STEPS, RUN_LIMIT_S = 40, 3 * 3600
 # Chaining topics on the friend's PC: swg-idle-research.service may run 4 h (TimeoutStartSec) less a margin; a topic is
 # chained only with at least CHAIN_MIN_S of that left, and chaining stops after MAX_CHAIN_FAILS failures in a row.
-# CHAIN_GAP_S between chained topics (owner, 17 Oct 8:20 AM: "pause 5 mins in between").
-SERVICE_S, CHAIN_MIN_S, MAX_CHAIN_FAILS, CHAIN_GAP_S = 4 * 3600 - 10 * 60, 30 * 60, 3, 5 * 60
+# CHAIN_GAP_S between chained topics (owner, 17 Oct: "pause 5 mins in between" at 8:20 AM; "shorten timer to 2 mins
+# between" in the afternoon).
+SERVICE_S, CHAIN_MIN_S, MAX_CHAIN_FAILS, CHAIN_GAP_S = 4 * 3600 - 10 * 60, 30 * 60, 3, 2 * 60
 GIN = re.compile(r'\[GIN\] (\d{4}/\d\d/\d\d - \d\d:\d\d:\d\d) \|.*POST +"/api/(?:chat|generate)"')
 
 BRIEF = """# Research topic: {title}

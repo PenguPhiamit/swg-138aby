@@ -28,8 +28,8 @@ until Claude or ChatGPT has checked it against the source.
   it pause"). When a timer run finds nothing open that the friend's PC can run, it writes STOP with the time and the
   topics still waiting (for example a model that isn't pulled), and adds a line to `LOG.md`. Nothing more runs, on
   either PC, until someone deletes STOP. New topics added while it is paused just wait.
-- **One after another on the friend's PC:** while it is the server, the next topic starts 5 minutes after one
-  finishes (owner, 17 Oct: "pause 5 mins in between"). Each timer run stays within its 4 hours, and chaining stops
+- **One after another on the friend's PC:** while it is the server, the next topic starts 2 minutes after one
+  finishes (owner, 17 Oct: 5 minutes in the morning, then "shorten timer to 2 mins between"). Each timer run stays within its 4 hours, and chaining stops
   after 3 failures in a row. This PC runs one topic per timer run. A rerun keeps the previous report as
   `report.previous.md`.
 
