@@ -8,6 +8,10 @@ which commits are fit, and the dress rehearsal (step 3) proves it before live is
 "friends launch but restrict ossus and any planets with little to no content". So the first testers get the
 whole-dev release (below: "Recommendation: deploy dev as a whole"), with C57's client patch, not the small release 1.
 
+**Provisional (owner, a few minutes later):** "i was mainly asking, i figure we have some time to finish some more."
+The table below is where things stand today, not a final cut: each planet is judged again at launch, and one that has
+its content installed and tested by then opens.
+
 | Planet | Launch | Why |
 |---|---|---|
 | The ten stock planets, the tutorial, the Corvette (`dungeon1`) | open | stock content |
