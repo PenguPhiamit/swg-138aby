@@ -28,9 +28,10 @@ until Claude or ChatGPT has checked it against the source.
   it pause"). When a timer run finds nothing open that the friend's PC can run, it writes STOP with the time and the
   topics still waiting (for example a model that isn't pulled), and adds a line to `LOG.md`. Nothing more runs, on
   either PC, until someone deletes STOP. New topics added while it is paused just wait.
-- **Back to back on the friend's PC:** while it is the server, the next topic starts as soon as one finishes. Each
-  timer run stays within its 4 hours, and chaining stops after 3 failures in a row. This PC runs one topic per timer
-  run. A rerun keeps the previous report as `report.previous.md`.
+- **One after another on the friend's PC:** while it is the server, the next topic starts 5 minutes after one
+  finishes (owner, 17 Oct: "pause 5 mins in between"). Each timer run stays within its 4 hours, and chaining stops
+  after 3 failures in a row. This PC runs one topic per timer run. A rerun keeps the previous report as
+  `report.previous.md`.
 
 ## Which jobs go to it
 
@@ -41,6 +42,7 @@ until Claude or ChatGPT has checked it against the source.
 | **Bot chat drafts** (social play): job `bot-chat`, about 40 situations, three lines each | queue topic with `"kind": "map", "job": "bot-chat"` | `"model": "gemma4:12b"` |
 | **Role-play and NPC dialogue drafts** (owner's OK, 17 Oct): job `npc-dialogue`, briefs from DIR/briefs.txt or the Ossus roster | a chunk job (`local_map.py` sends `think: false`, which this model needs) | `"model": "hf.co/hiwaifu-research/WaifuGemma4-26b-a4b-v1-i1-GGUF:IQ4_XS", "ctx": 8192`. Its card says 18+ only with no extra safety tuning, so the job's instruction sets the content rules. A drafter only: every line is reviewed before it goes into the game ([MODEL-LICENCES.md](../tools/agents/local/friend-pc/MODEL-LICENCES.md)). |
 | **Era check:** job `era-check`, the proofread lines checked against 138-139 ABY | queue topic with `"kind": "map", "job": "era-check"` | `"model": "qwen3.6:35b-a3b"` (lore knowledge) |
+| **Pre-check of the research reports** (17 Oct): every cited claim against its cited lines, and each rerun against the previous report | queue topics with `"kind": "map", "job": "claim-check"` or `"job": "report-diff"` (precheck.py) | `"model": "qwen3.5:9b"`. Citations that don't resolve are listed without the model. The reviewer starts with the "contradicted" and "not shown" claims, and still checks the rest. |
 | **A quick one-off**: summarise a log, list files that mention X | run `local_map.py` or `local_agent.py` by hand (below) | any |
 
 Not for the friend's PC: decisions, reviews and sign-offs, anything that must be right the first time, credentials or
