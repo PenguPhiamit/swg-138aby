@@ -1,0 +1,32 @@
+--- a/MMOCoreORB/src/server/zone/objects/mission/MissionObjectiveImplementation.cpp
++++ b/MMOCoreORB/src/server/zone/objects/mission/MissionObjectiveImplementation.cpp
+@@ -204,6 +204,16 @@
+ 
+ 	auto ownerZone = owner->getZone();
+ 
++	// Sandbox (Claude, 17 Oct 2026; functional-test-plan.md section 11): a group member "in the immediate area" is
++	// within 128 m of the mission's end point OR of the owner where the mission is finished. The end point alone
++	// misses the players who did the work: a destroy mission's end stays at its first waypoint when the lair spawns up
++	// to 256 m away (DestroyMissionObjectiveImplementation moves only the start and the waypoint), and a hunting
++	// mission's end is where its list was made. Test galaxy, 17 Oct: the owner and a helper who destroyed a lair about
++	// 250 m from the first waypoint got group_too_far and nothing, while a dead groupmate left at that waypoint was
++	// paid; a hunter killing his last two rills out of town was paid nothing.
++	Vector3 ownerPoint = owner->getWorldPosition();
++	ownerPoint.setZ(0);
++
+ 	TransactionLog trx(owner, TrxCode::MISSIONCOMPLETE, mission, false);
+ 	trx.addWorldPosition("src", owner);
+ 	trx.addState("missionID", mission->getObjectID());
+@@ -270,7 +280,11 @@
+ 					memberPosition.setZ(0);
+ 				}
+ 
+-				if (memberPosition.distanceTo(missionEndPoint) < 128) {
++				Vector3 memberFlat = groupMember->getWorldPosition();
++				memberFlat.setZ(0);
++				bool nearOwner = groupMember->getZone() == ownerZone && memberFlat.distanceTo(ownerPoint) < 128;
++
++				if (memberPosition.distanceTo(missionEndPoint) < 128 || nearOwner) {
+ 					players.add(groupMember);
+ 				}
+ 			} else if(groupMember->isPet()) {

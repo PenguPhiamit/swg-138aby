@@ -29,6 +29,8 @@ class Galaxy:
         self.allow_seventh = False   # a server that forgets the cap
         self.disabled_message = True
         self.lair_hits = 3
+        self.lair_offset = 40        # how far from the first waypoint the lair spawns (the server: up to 256 m)
+        self.patched_pay = False     # Documentation-support/mission-group-pay.patch: near the owner counts too
 
     def oid(self):
         self.next_oid += 1
@@ -84,8 +86,21 @@ class Galaxy:
 
     def complete(self, bot, record):
         del bot.records[record['oid']]
-        bot.bank_credits += record['reward'] // len(self.bots)
-        bot.hear('@mission:mission_generic')
+        share = record['reward'] // len(self.bots)
+        if record['type'] != 'destroy':
+            bot.bank_credits += share
+            bot.hear('@mission:mission_generic')
+            return
+        # MissionObjectiveImplementation::awardReward: members within 128 m of the END point (the first waypoint),
+        # the owner alone if none is; patched, members within 128 m of the owner count too.
+        end = record['end']
+        near = lambda a, x, y: math.hypot(a.x - x, a.y - y) < 128
+        paid = [b for b in self.bots if near(b, end['x'], end['y']) or (self.patched_pay and near(b, bot.x, bot.y))]
+        if len(paid) < len(self.bots):
+            bot.hear('@mission/mission_generic:group_too_far')
+        for b in paid or [bot]:
+            b.bank_credits += share
+            b.hear('@mission:mission_generic')
 
     def talk(self, bot, target):
         npc = self.objects[target]
@@ -121,9 +136,9 @@ class Galaxy:
             if record['type'] == 'destroy' and not record.get('lair') and near < 128:
                 oid = self.oid()
                 record['lair'] = oid
-                record['waypoint'] = dict(spot, x=spot['x'] + 40)
+                record['waypoint'] = dict(spot, x=spot['x'] + self.lair_offset)
                 self.objects[oid] = {'oid': oid, 'type': 'TANO', 'name': '@lair_n:tatooine_kreetle_neutral_small',
-                                     'x': spot['x'] + 40, 'y': spot['y'], 'mission': record['oid']}
+                                     'x': spot['x'] + self.lair_offset, 'y': spot['y'], 'mission': record['oid']}
                 bot.hear('Transmission Received: ' + M.LOCATED + '.  Mission waypoint has been updated')
             if record['type'] == 'recon' and near < 32:
                 self.complete(bot, record)
@@ -558,7 +573,18 @@ class Missions(Base):
         done = M.destroy(g, bots, mission, M.bank(bots[0]), divisor, 'general/destroy')
         self.assertTrue(done['removed'])
         self.assertEqual(g.failed(), [])
-        self.assertEqual(done['shares'], {'Ilsa': 0, 'Kor': 0, 'Cresh': mission['reward'] // 3})  # the fake pays the owner
+        self.assertEqual(done['shares'], {b.first: mission['reward'] // 3 for b in bots})  # all at the lair, 40 m out
+
+    def test_a_lair_far_from_the_first_waypoint_shows_the_group_pay_bug(self):
+        for patched, unpaid in ((False, ['Ilsa', 'Kor']), (True, [])):
+            self.setUp()
+            self.galaxy.lair_offset, self.galaxy.patched_pay = 200, patched
+            g, bots = self.crew('Cresh', 'Ilsa', 'Kor')
+            mission, _, divisor = self.take(g, bots[0], 'general', 'destroy', M.easiest(bots[0]), 3)
+            M.destroy(g, bots, mission, M.bank(bots[0]), divisor, 'general/destroy')
+            detail = next(d for l, ok, d in g.checks if l == 'general/destroy: everyone who fought at the lair is paid')
+            self.assertEqual(detail['unpaid'], unpaid, patched)
+            self.assertEqual(detail['lair_from_first_waypoint_m'], 200)
 
     def test_guarded_walk_fights_what_waits_on_the_route(self):
         g, bots = self.crew('Cresh', 'Ilsa', 'Kor')

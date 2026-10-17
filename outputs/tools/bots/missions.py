@@ -584,6 +584,14 @@ def destroy(g, team, mission, before, divisor, label):
     shares[owner.first] = done.get('paid')
     g.note(f'{label}: shares paid {shares} (each member within 128 m of the end point gets reward // {divisor})')
     done['shares'] = shares
+    # The group-pay check (Documentation-support/mission-group-pay.md): everyone standing who fought at the lair
+    # should get a share. Unpatched, pay is judged from the first waypoint only, so this fails whenever the lair
+    # spawned over 128 m from it; with the patch, the owner's surroundings count too.
+    fighters = [b.first for b in team if b.posture() != 'dead']
+    unpaid = [n for n in fighters if not shares.get(n)]
+    moved = done.get('lair_from_first_waypoint')
+    g.check(f'{label}: everyone who fought at the lair is paid', not unpaid,
+            {'unpaid': unpaid, 'lair_from_first_waypoint_m': moved, 'shares': shares})
     return done
 
 
