@@ -150,7 +150,7 @@ http://192.168.1.y:11434   qwen3.6:35b-a3b   65536
 127.0.0.1                  qwen3:8b          16384
 ```
 
-- Every script asks `ollama_url.pick()`: the first server that answers `/api/tags` within 3 seconds, else the last
+- Every script asks `ollama_url.pick()`: the first server that answers `/api/tags` within 10 seconds, else the last
   line (not probed). A one-line file works as before. `ollama_url.py` marks the one in use with `use` and the ones
   that didn't answer with `off`.
 - `idle_research.py` picks once per timer run, applies that server's checks (another PC: the `/api/ps` idle rule; this

@@ -13,7 +13,7 @@ until Claude or ChatGPT has checked it against the source.
 
 - **The list is one file:** `outputs/tools/agents/local/ollama-url.txt` (gitignored, because it holds a home-network
   address). It has one server per line, in order, each with its model and context size. Copy
-  `ollama-url.example.txt` to start one. Every script uses the first server that answers within 3 seconds.
+  `ollama-url.example.txt` to start one. Every script uses the first server that answers within 10 seconds.
 - **What is in use now:** in WSL, run
   `python3 /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/tools/agents/local/ollama_url.py`, and
   `idle_research.py status` in the same folder.

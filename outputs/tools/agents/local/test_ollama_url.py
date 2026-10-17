@@ -321,7 +321,7 @@ class ServerListTests(unittest.TestCase):
         self.assertEqual(fake.requests, [('GET', '/api/tags', None)])
         fake.stop()
         self.assertFalse(ollama_url.answers(fake.base))
-        self.assertLessEqual(ollama_url.PROBE_S, 5)
+        self.assertLessEqual(ollama_url.PROBE_S, 15)   # one timer run waits this long at most for an off PC
 
 
 @unittest.skipIf(ir is None, 'idle_research.py needs fcntl (run in WSL)')

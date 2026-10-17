@@ -39,7 +39,8 @@ ENV_CTX, CTX_FILE, DEFAULT_CTX = 'OLLAMA_CTX', HERE / 'ollama-ctx.txt', 65536
 PORT = 11434
 CTX_RANGE = (2048, 2_097_152)
 MODEL_NAME = re.compile(r'[A-Za-z0-9][A-Za-z0-9._:/@+-]*')
-PROBE_S = 3   # a server on the home network answers /api/tags in milliseconds; an off PC never does
+PROBE_S = 10   # an idle server answers /api/tags in milliseconds, but the friend's PC took over 3 s while it was
+               # downloading models (17 Oct 5:18 and 5:22 AM: two topics fell back to this PC); an off PC never does
 
 Server = namedtuple('Server', 'base model ctx')
 
