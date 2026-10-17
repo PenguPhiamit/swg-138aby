@@ -145,3 +145,21 @@ Next: Claude reviews the three source commits and stages the client corrections 
    - Result: the client crashed on character select, before the Hutt logged in, and left no crash dump.
    - The client is back on `6ff21312` (5:54 PM), matching the server.
    - Untested: bones only (no face skeleton), and the reverse.
+4. **6:00-6:45 PM, narrowing it down.**
+   - Bones only (`12e035e4`): no crash, but the animation is broken and the Hutt still can't interact.
+   - The Wookiee appearance on the Hutt templates (`1e39dbbe`): still no interaction, so the rig is not the cause.
+   - The owner's **Chiss** could not interact either on that archive, so the problem is not the Hutt at all.
+   - Server side is fine:
+     - a gdb dump at 6:10 PM shows no stuck locks;
+     - an agent-client Hutt opened the character builder and navigated it (Character Options returned its page).
+   - The builder has not handed out an item on run 13 today ("[CharacterBuilder] gave player" never logged).
+   - **On the pre-Hutt archive (`f1046025`, this morning's backup) the owner's characters work again** (6:42 PM).
+   - So one of today's archive changes breaks interaction in the real client for every character:
+     - **S7 tables:** racial_mods, attribute_limits, allow_bald, customization_data/group_instance, skills, skl_n, skl_d, player_species, ui_avatardata.inc, hutt.lat;
+     - **C54:** schematic_group, pet_deed.stf, the floater schematic;
+     - **4:20 PM creation fix:** palette_columns and the eight creation tables.
+   - Checked and ruled out:
+     - Every overridden datatable is the client's real winning copy plus our rows, with nothing dropped.
+       - The earlier "schematic_group is MTG's" claim was wrong: `swgfmt.tre_write.read` cannot open most stock `patch_*.tre` (one record fails its checksum), so `trn_iff.client_file` silently picked older or MTG copies. The real winner is `patch_12_00`, identical to MTG's.
+     - The UI loaded the same element counts on both archives.
+   - Next: bisect the three groups with the owner's Chiss, one client restart each.
