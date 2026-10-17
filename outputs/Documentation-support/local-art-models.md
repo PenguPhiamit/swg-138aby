@@ -225,6 +225,14 @@ about 100 MB/s, roughly 7.5 minutes in all.
   - **The images:** four for the Vong look test (`vong-look-test.md`). The tiling prompts did **not** tile by
     themselves: edge jumps were 2-10 times the inside differences. `um sprite seamless` fixed all three, leaving some
     doubled ridge lines from the cross-blend.
+- **Second and third runs (8:31 to 8:40 AM).**
+  - **Run 2:** one prompt of five failed with a `MemoryError` in the worker that streams weights from disk
+    (`hostbuf_file_reader_read failed`). It happened while the 8 GB text encoder was reloading, with about 9 GB of
+    Windows RAM free and ComfyUI pinning up to 13 GB. The retry worked.
+  - **Run 3, with `--disable-pinned-memory`:** no errors, 24.5 s cold and 2.1-3.5 s an image, with the files probably
+    in Windows' cache by then.
+  - **Use `--disable-pinned-memory` on this PC** until a lower-RAM text encoder is tested. The 3.85 GB fp4 file in the
+    same repo was not downloaded.
 - **Not run yet: TRELLIS.2.** Its template uses subgraphs and still has to be put into API form. It is the next test.
 - **To remove it all:** delete `C:\Users\Pengw\Tools\ComfyUI_windows_portable` and `C:\Users\Pengw\Tools\downloads`.
   Nothing else on the PC was changed.

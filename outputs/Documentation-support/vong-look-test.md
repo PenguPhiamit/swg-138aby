@@ -5,8 +5,59 @@ ossus, or should we do another local project to test things?" On the decision ca
 That means the local model's first real job is a Vong warrior's look. One warrior stands at the Ossus Project fields for
 the owner to see, and patrols come after that look.
 
-**Status, 17 Oct 8:30 AM: step 1 done. The owner picks the swatch (step 2).** Nothing has been built or installed in
-the game.
+**Status, 17 Oct about 8:50 AM: steps 1 and 2 done. The owner picked swatch 12** (`Vong-look/gen/vonduun_12_seamless.png`,
+seed 12). Next is step 3, the bake. Nothing has been built or installed in the game.
+
+**Rounds 2 and 3** (owner: "Another round", with a screenshot of an image search for the species as the look they
+want). The screenshot was used only as a description by eye. It was not fed to the model, because those pictures are
+other artists' Star Wars art.
+- **What I took from it:** a crustacean or insect exoskeleton rather than tiles, irregular ribbed segments with spines
+  and horn-like spurs, and charcoal, slate blue-grey and olive-bronze colours with much less red.
+- **Round 2 (5-8):** the colours were right, but the model drew whole shells on a grey background. Once mirrored by
+  `um sprite seamless`, that background would show as stripes, so round 2 is superseded. Concept sheet 8 has the right
+  armour but a reptilian head.
+- **Round 3 (9-12):** the same looks, with prompts that begin "Close-up of a surface completely covered edge to edge
+  by ..." and say "fill the entire frame with no background and no gaps". All four fill the frame and tile after the
+  seamless pass, with faint doubled plates from the cross-blend.
+- **The owner chose 12:** rough, irregular dark crab shell with bumps, spurs and a deep red tint in the crevices.
+- **The RAM error and the fix.** Round 2's second image failed with a `MemoryError` while ComfyUI streamed the 8 GB
+  text encoder (`hostbuf_file_reader_read failed`); about 9 GB of Windows RAM was free. A retry worked. Round 3 ran
+  with `--disable-pinned-memory`: no errors, 24.5 s cold, 2.1-3.5 s an image.
+
+## The look in game (Wookieepedia, Legends, "Biology and appearance", read 17 Oct in the browser pane)
+
+The owner asked whether the Vong are paler white or green and a little more humanlike. The article, in our words:
+- **Body:** humanoid and humanlike, but much taller and heavier than humans.
+- **Head:** sloping, ridge-like foreheads; short stub noses, so the faces look skull-like; pointed ears on some.
+  Little hair: black, often long, or completely bald.
+- **Skin:** grey is the most common tone, and yellow the second. Pale greys fit; green is not listed.
+- **Other sources (owner: "you can check other sources too").**
+  - The Alien Species wiki and the Archivum mirror give the same grey-then-yellow ranking.
+  - A toy review calls them pale grey (an opinion, not canon).
+  - Slayers have black skin that is really bonded armour.
+  - Wikipedia gives no colour.
+  - Wookieepedia's character infoboxes, read through its API in the browser pane: many leave skin blank. The ones that
+    give it:
+
+    | Character | Skin |
+    |---|---|
+    | **Nei Rin**, the Ossus Project's Master Shaper | "White with purple tattoos" |
+    | **Zenoc Quah**, the fanatic shaper who helped the One Sith sabotage the project | "Light gray with black tattoos" |
+    | Khalee Lah | "Gray" |
+    | the Vong spy at Coruscant's Leafy Green tapcafe | "Pale" |
+
+  - **No source gives green;** it shows up only as a tint in some art. For our Ossus Vong, Zenoc Quah's kind (the
+    `vong_fanatic` patrols) are **light grey to white with black tattoos**, and Nei Rin's Shapers are white with
+    purple tattoos.
+- **Other marks:** small blue sacs under the eyes that swell with mood; black blood; heavy ritual scars and tattoos.
+
+What that means for us:
+- **Height and build.** The human male body already gives the humanlike shape. The mobile template's scale (about
+  1.15) gives the height.
+- **The first look keeps the chitin helmet on.** No skin shows, so the armour is the whole test.
+- **A bare-headed Vong is a later job.** Grey or yellow skin, eye sacs, scars and tattoos need a head texture of our own
+  on a cloned human head chain. Alternatively, a stock skin palette rebound the way the ice rancor's was, which would
+  give the colour but no scars. Stock human skin tones are natural colours (to be checked for a pale grey).
 
 **Step 1 results** (8:24 to 8:26 AM; the timings and memory figures are in `local-art-models.md`). The images are in
 `outputs/Vong-look/gen/`; the PNGs are gitignored, and `comfy_manifest.jsonl` holds each prompt, seed and workflow.

@@ -384,6 +384,16 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-17 8:55 AM Claude: Vong look test: swatch 12 picked; skin colour checked
+
+- **Rounds 2 and 3** followed the owner's reference screenshot, used by eye only and not fed to the model. The owner picked **swatch 12**: rough dark crab shell with a red tint in the crevices.
+- **Round 2 drew shells on a background,** so it is superseded. Round 3's prompts ("completely covered edge to edge, no background") fill the frame and tile.
+- **A RAM failure in ComfyUI:** a `MemoryError` while it streamed the 8 GB text encoder, with about 9 GB free in Windows. A retry worked. `--disable-pinned-memory` then ran clean, at 2.1-3.5 s an image.
+- **Skin colour** (Wookieepedia Legends and other sources): grey is most common, then yellow. Nei Rin is white with purple tattoos; Zenoc Quah light grey with black tattoos. No source gives green.
+- **For the first look:** the warriors keep the chitin helmet on. A bare head with pale skin, eye sacs and tattoos is a later texture job.
+- **Details:** `Documentation-support/vong-look-test.md`.
+- **Next:** step 3, the Blender bake of swatch 12 onto the chitin armour's UVs.
+
 ### 2026-10-17 8:30 AM Claude: first ComfyUI run on this PC; Vong look test step 1 done
 
 - **Run with the owner out of the game** ("im out, run it"), from 8:23 to 8:26 AM. ComfyUI 0.41.0 started on PyTorch 2.14.0+cu130 and saw the RTX 5070, so Blackwell works. It ran `--offline`, local only.
