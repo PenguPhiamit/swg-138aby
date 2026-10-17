@@ -372,6 +372,25 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-17 4:25 AM Claude: local model on the friend's PC: installer, fallback to this PC, shared workflow
+
+- **Commits:** `cb6c487` (installer, server list with fallback, workflow), `f2b63e1` (names delta sweep in the workflow), `54391cd` (the installer pulls every model we use). Another session set up the friend's PC itself at about 4:20 AM with the older manual steps (`c97a500`): Ollama 0.40.5 and qwen3:8b only, plus a firewall rule for the whole subnet.
+- **Installer:** `tools/agents/local/friend-pc/install-ollama-lan.ps1` (how-to in `README.md` there, and a private page for the owner to open at the friend's PC). It admits only Miniverse (Private profile, ollama.exe only), offers to switch off the older subnet rule, pulls qwen3.6:35b-a3b, qwen3.5:9b, gemma4:12b, qwen3:8b and gpt-oss:20b, builds gpt-oss-20b-64k, and self-tests each one. `-CheckOnly` and `-Remove` are there too. **It has not been run at the friend's PC yet.**
+- **Fallback:** `ollama-url.txt` (gitignored) now lists the friend's PC (qwen3:8b, 32K) and then this PC (qwen3:8b, 16K, with the memory guard). The 32768 in `ollama-ctx.txt` is only a default now, since each line sets its own size. The model is unloaded every 5 requests on the friend's PC too.
+- **Workflow:** `Agent/local-model.md`, linked from AGENTS.md: which jobs go there, how both agents queue them (topic fields `model`, `local_only`, `review_by`), and how reports are reviewed.
+- **Verified:**
+  - 76 offline tests in WSL and 10 chunk-job tests.
+  - A real 2-chunk job on the friend's PC: 44 s including the model load. As a draft, qwen3:8b caught a doubled word, missed a misspelling, and flagged one correct line.
+  - Over the real network, a server that doesn't answer is skipped after 3.0 s.
+  - `idle_research.py status` counts the friend's quiet minutes. The timer starts the first of the 5 open topics there after 10.
+- **Not verified:**
+  - The installer run (firewall tightening, the downloads, whether Ollama 0.40.5 can pull the qwen3.6, qwen3.5 and gemma4 tags, speed and GPU share).
+  - A real fallback with the friend's PC off.
+  - A research topic run there.
+  - The friend's RAM under long runs. It can't be read from here; the unloads are the only guard.
+- **Next (owner):** at the friend's PC, run the installer from the page, and answer yes to switching off "Ollama LAN 11434". After its self-test, Claude switches the friend's line to qwen3.6:35b-a3b at 65536.
+- **Owner's call:** the names delta sweep. The checklist below sends it to the friend's PC. The workflow keeps it on this PC, because real names don't leave this PC and the friend agreed to source, bot notes and game text. Nothing is queued until a `names-delta` job exists in `local_jobs.py`.
+
 ### 2026-10-17 4:04 AM Claude: going-public check, assets clear; licence, credits and the checklist
 
 - **Assets (whole history, which is what the export publishes):** no image, model, texture, sound, archive or SWG client file was ever committed.
