@@ -51,9 +51,9 @@ local people = {
 	{"ossus_adit_foreman", "Brannock Teel, adit foreman", "object/mobile/dressed_mand_miner_hum_01.iff", "ossus_adit_foreman_convo_template"},
 	-- POI 4, the Great Library vault dig: the memorial road
 	{"ossus_vault_archivist", "Archivist Senn Oduro", "object/mobile/dressed_brigade_technician_human_female_01.iff", "ossus_vault_archivist_convo_template"},
-	-- POI 2, inside the sanctuary (rare: present about one hour in three to five). A young Neti (Ood Bnar's sapling,
-	-- grown; owner 17 Oct); the client has no Neti body, so a robed stand-in until there is Neti art
-	{"ossus_hidden_jedi", "a young Neti", "object/mobile/dressed_jedi_trainer_old_human_male_01.iff", "ossus_hidden_jedi_convo_template"},
+	-- POI 2, inside the sanctuary (rare: present about one hour in three to five). The Force spirit of Ood Bnar, the Neti
+	-- master of Ossus (owner 17 Oct); the client has no Neti body, so a robed stand-in until there is Neti art
+	{"ossus_hidden_jedi", "the spirit of Ood Bnar", "object/mobile/dressed_jedi_trainer_old_human_male_01.iff", "ossus_hidden_jedi_convo_template"},
 	-- POI 18, the Hutt landing field
 	{"ossus_hutt_broker", "Ondrubba the Hutt", "object/mobile/hutt_male.iff", "ossus_hutt_broker_convo_template"},
 	-- POI 3, the garrison over the ruins (Krayt's Empire, GCW faction imperial)

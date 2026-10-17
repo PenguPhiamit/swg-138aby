@@ -14,13 +14,13 @@ and nothing goes live without the owner's OK.
   He became a tree to guard a trove of ancient lightsabers, and the Ysanna revered him for 4,000 years. He died on Ossus in 10 ABY, leaving
   **a sapling that grew where he fell**.
 - **T'ra Saa** was a Neti Jedi Master on Krayt-era Jedi councils. She died at the Hidden Temple in 138 ABY, so she cannot appear in 138-139.
-- **The keeper, alive (owner, 17 Oct: a Neti, "someone alive preferred"):** Ood Bnar's sapling, grown, now about 128 years old, a young age for a Neti.
-  **Our invention, not canon:** T'ra Saa found the seedling and taught it. She found the ghostfire crystal during the Yuuzhan Vong War, and when
-  Krayt's Sith came for the academy (130 ABY) she left it in the young Neti's keeping. The keeper appears as "a young Neti" in the sanctuary's
-  deepest chamber (cave cell 11), about one hour in three to five, as before.
-- **Look (owner, 17 Oct):** a robed stand-in body until there is Neti art. The client has no Neti body.
-- The other option the owner named was a plausible Force ghost. Ood Bnar's own spirit would be the obvious one: he died on Ossus and is "one with the Force".
-  It is not built; the alive keeper was preferred.
+- **The keeper (owner, 17 Oct: "this is better"): the Force spirit of Ood Bnar.** He died on Ossus and is "one with the Force".
+  **Our invention, not canon:** his spirit lingers on Ossus. T'ra Saa found the ghostfire crystal during the Yuuzhan Vong War, and when Krayt's Sith
+  came for the academy (130 ABY) she hid it under Ossus in his keeping. The spirit appears as "the spirit of Ood Bnar" in the sanctuary's deepest
+  chamber (cave cell 11), about one hour in three to five, as before. It speaks to anyone but Imperials, and cannot be attacked.
+- **Look (owner, 17 Oct):** a robed stand-in body until there is Neti art. The client has no Neti body, and nothing yet makes it look like a ghost.
+  The text describes it as pale, "more light than body".
+- The option dropped on 17 Oct was a living keeper: Ood Bnar's sapling, grown.
 
 ## The quest
 
@@ -30,7 +30,7 @@ and nothing goes live without the owner's OK.
    and the Ysanna stone circle (-980 -5610). Each one says so in the chat: "Old Jedi sites walked: 2 of 3". The **badges** are Ossus's memorial road
    badge (140, from PL-02) plus **any one** stock Jedi exploration badge: Dantooine's ruined Jedi temple (30), Exar Kun's temple on Yavin 4 (23),
    or Ben Kenobi's old home on Tatooine (12).
-3. **The keeper (a young Neti).** Until you are ready, the keeper says exactly what you still lack. The keeper will not speak to Imperials.
+3. **The keeper (the spirit of Ood Bnar).** Until you are ready, the keeper says exactly what you still lack. The keeper will not speak to Imperials.
 4. **The record and the test.** The keeper plays T'ra Saa's record, in our own words, then asks one question. "Keep it safe, and let it shine as it will"
    passes. "Use it against my enemies" or "Keep its power for myself" fails, and the keeper waits an hour before asking again.
 5. **The reward.** The **Ghostfire Crystal** (a colour crystal, colour 32, no stats), once per character. A full inventory gets "make room and come back".
@@ -46,7 +46,7 @@ A stubbed walk through ten quest states also passes: fresh, the lead, sites refu
 retry wait, a full pack, the reward given once, the farewell, and an Imperial refused.
 - `screenplays/sandbox/ossus_people.lua`: the three site areas, the keeper's quest logic, and the archivist's lead.
 - `mobile/conversations/sandbox/ossus_people_conv.lua`: the keeper's 14 screens, which replace the stranger's 5, and the archivist's new screen.
-- `mobile/sandbox/ossus_people.lua`: the keeper's name, "a young Neti", which was "a robed stranger".
+- `mobile/sandbox/ossus_people.lua`: the keeper's name, "the spirit of Ood Bnar", which was "a robed stranger".
 - `loot/items/ossus/ossus_ghostfire_crystal.lua` and `loot/groups/ossus/ossus_ghostfire_crystal.lua` (new), with an include line in `loot/items.lua` and `groups.lua`.
 - **C++, one line:** `LightsaberCrystalComponentImplementation::updateCraftingValues` clamps every colour crystal to 0-11. It now lets exactly 32 through
   when the item asks for 32. **Needs a dev build**, and only compiles there.
