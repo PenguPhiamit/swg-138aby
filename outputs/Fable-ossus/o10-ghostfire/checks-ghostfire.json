@@ -1,0 +1,31 @@
+{
+ "base": {
+  "path": "work/nal-hutta-life/local_planets-nalhutta-life.tre",
+  "sha256": "b01e9f44aeba99f2ceb9878d1328792da0707a53dba3f30de4e657ea66e47f87",
+  "entries": 201
+ },
+ "out": {
+  "path": "work/ossus-ghostfire/local_planets-ghostfire.tre",
+  "bytes": 5316229,
+  "sha256": "b74267cf58f0aa40e6cd33d2e345ac115717117491ef30790ec9099dfefa5914",
+  "entries": 203
+ },
+ "untouched_identical": 201,
+ "changed": [],
+ "new": [
+  "palette/wp_lightsaber.pal",
+  "string/en/jedi_spam.stf"
+ ],
+ "dropped": [],
+ "palette": {
+  "from": "patch_09.tre",
+  "entries_before": 32,
+  "entries_after": 33,
+  "entry_31": "f2f2f2",
+  "entry_32": "c4c0d4"
+ },
+ "colour_name": {
+  "from": "patch_12_00.tre",
+  "saber_color_32": "Saa's Ghostfire"
+ }
+}

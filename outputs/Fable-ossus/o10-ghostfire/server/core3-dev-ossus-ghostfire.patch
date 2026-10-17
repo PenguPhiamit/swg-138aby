@@ -1,0 +1,348 @@
+diff --git a/MMOCoreORB/bin/scripts/loot/groups/ossus/ossus_ghostfire_crystal.lua b/MMOCoreORB/bin/scripts/loot/groups/ossus/ossus_ghostfire_crystal.lua
+new file mode 100644
+index 0000000..f0051b0
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/loot/groups/ossus/ossus_ghostfire_crystal.lua
+@@ -0,0 +1,12 @@
++-- One item, so createLoot() hands over exactly the ghostfire crystal (Ossus ghostfire quest, 17 Oct 2026).
++
++ossus_ghostfire_crystal = {
++	description = "",
++	minimumLevel = 0,
++	maximumLevel = 0,
++	lootItems = {
++		{itemTemplate = "ossus_ghostfire_crystal", weight = 10000000}
++	}
++}
++
++addLootGroupTemplate("ossus_ghostfire_crystal", ossus_ghostfire_crystal)
+diff --git a/MMOCoreORB/bin/scripts/loot/groups.lua b/MMOCoreORB/bin/scripts/loot/groups.lua
+index 5ff7e74..646ce80 100644
+--- a/MMOCoreORB/bin/scripts/loot/groups.lua
++++ b/MMOCoreORB/bin/scripts/loot/groups.lua
+@@ -733,3 +733,5 @@ includeFile("groups/wearables/wearables_uncommon.lua")
+ includeFile("groups/hoth/hoth_decor_common.lua")
+ includeFile("groups/hoth/hoth_decor_rare.lua")
+ includeFile("groups/hoth/hoth_vehicle_deeds.lua")
++--ossus sub-folder (the Ossus ghostfire quest, 17 Oct 2026)
++includeFile("groups/ossus/ossus_ghostfire_crystal.lua")
+diff --git a/MMOCoreORB/bin/scripts/loot/items/ossus/ossus_ghostfire_crystal.lua b/MMOCoreORB/bin/scripts/loot/items/ossus/ossus_ghostfire_crystal.lua
+new file mode 100644
+index 0000000..e9212af
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/loot/items/ossus/ossus_ghostfire_crystal.lua
+@@ -0,0 +1,17 @@
++-- The ghostfire colour crystal (Ossus ghostfire quest, 17 Oct 2026): given once per character by T'ra Saa's keeper
++-- (screenplays/sandbox/ossus_people.lua). Colour 32 is palette entry 32 of palette/wp_lightsaber.pal in our client patch;
++-- LightsaberCrystalComponentImplementation lets exactly 32 through. A colour crystal only: no stats.
++
++ossus_ghostfire_crystal = {
++	minimumLevel = 0,
++	maximumLevel = -1,
++	customObjectName = "Ghostfire Crystal",
++	directObjectTemplate = "object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff",
++	craftingValues = {
++		{"color",32,32,0},
++	},
++	customizationStringNames = {},
++	customizationValues = {}
++}
++
++addLootItemTemplate("ossus_ghostfire_crystal", ossus_ghostfire_crystal)
+diff --git a/MMOCoreORB/bin/scripts/loot/items.lua b/MMOCoreORB/bin/scripts/loot/items.lua
+index 88cf8a5..533e69b 100644
+--- a/MMOCoreORB/bin/scripts/loot/items.lua
++++ b/MMOCoreORB/bin/scripts/loot/items.lua
+@@ -2308,3 +2308,5 @@ includeFile("items/hoth/hoth_vehicle_stap_speeder_deed.lua")
+ includeFile("items/hoth/hoth_vehicle_swamp_speeder_deed.lua")
+ includeFile("items/hoth/hoth_vehicle_tcg_8_single_pod_airspeeder_deed.lua")
+ includeFile("items/hoth/hoth_vehicle_tcg_military_transport_deed.lua")
++--ossus sub-folder (the Ossus ghostfire quest, 17 Oct 2026)
++includeFile("items/ossus/ossus_ghostfire_crystal.lua")
+diff --git a/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua b/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua
+index a92c06a..5888bd3 100644
+--- a/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua
++++ b/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua
+@@ -79,8 +79,10 @@ addConversationTemplate("ossus_adit_foreman_convo_template", foreman)
+ local archivist = convo("ossus_vault_archivist_convo_template", "OssusVaultArchivistConvoHandler")
+ screen(archivist, "greet", "Mind the trench. We are opening what the Great Library left below ground. Most of it burned long ago, but stone keeps better than flimsiplast.", {
+ 	{"Tell me about the road.", "road"},
++	{"Did any Jedi light survive here?", "ghostfire_lead"},
+ 	{"Goodbye.", "bye"},
+ })
++screen(archivist, "ghostfire_lead", "You have heard the pilgrims' stories, then. The old records speak of one light that was carried away before the Sith came, and kept. If anyone still keeps it, they will want to know you have walked where the masters walked: the vault mouth here, the watch ruin in the Eocho heights, the Ysanna stone circle, and the memorial road. And that you have stood in at least one of the old temples elsewhere. I have marked the three sites on Ossus.", {}, true)
+ screen(archivist, "road", "Pilgrims raised stones along the road from Knossa to the academy, one for every group of students who died there in the year 130. Walk it from the first stone above Knossa, past the middle stone, to the ring by the craters, and you will have seen what the ruins mean.", {
+ 	{"I'll walk it.", "road_accept"},
+ 	{"Maybe later.", "bye"},
+@@ -91,18 +93,38 @@ screen(archivist, "greet_done", "Thank you again for walking the road. Few do.",
+ screen(archivist, "bye", "Mind the trench on your way out.", {}, true)
+ addConversationTemplate("ossus_vault_archivist_convo_template", archivist)
+ 
+--- POI 2: the robed stranger (a hidden Jedi; owner 15 Oct: rare, met in the sanctuary)
++-- POI 2: T'ra Saa's keeper (owner 17 Oct: the ghostfire quest; never gives a name). T'ra Saa died in 138 ABY at the
++-- Hidden Temple; that she found a ghostfire crystal in the Yuuzhan Vong War and hid it on Ossus is our own invention.
+ local jedi = convo("ossus_hidden_jedi_convo_template", "OssusHiddenJediConvoHandler")
+ screen(jedi, "greet", "You found this place. Few do, and fewer by accident. Sit, if you like. Speak softly. The garrison is close.", {
+ 	{"Who are you?", "who"},
+ 	{"I won't tell anyone you're here.", "promise"},
+ 	{"I'll go.", "bye"},
+ })
+-screen(jedi, "who", "Someone who studied here once, when the academy stood. When the Sith came, some of us went into the ground and stayed there. Krayt is dead, they say. I will believe the war is over when the troopers above us go home.", {
++screen(jedi, "who", "A keeper. Nothing more. I wait here for someone, as I was asked to, by someone who is gone now.", {
+ 	{"I won't tell anyone you're here.", "promise"},
+ 	{"I'll go.", "bye"},
+ })
+-screen(jedi, "promise", "Then you have done more for us than you know. Go carefully. And if you hear the Ysanna sing at night, listen. They remember more than the archives do.", {}, true)
++screen(jedi, "promise", "Then you have done more for us than you know. Go carefully. If you want to understand this place, walk where the old masters walked. The archivist at the vault dig can tell you where.", {}, true)
++screen(jedi, "not_ready", "(filled in by the screenplay: what the player still lacks)", {}, true)
++screen(jedi, "ready", "You have walked the old paths. I can feel it on you, like dust from the road. Then it is time you heard why I am here.", {
++	{"Tell me.", "record"},
++	{"Not yet.", "bye"},
++})
++screen(jedi, "record", "Master T'ra Saa left a record with me. In her words: \"A life is a small thing, and worth more than any war. In the years the Vong burned worlds I found a light no one else wanted, pale and quiet, and I kept it. Now the Sith come for the academy, and I have hidden it here, under Ossus, where only patience will find it. Do not take it for power. Take it to keep something gentle alive.\" She was a Neti, older than the Republic's last wars. She fell last year, holding a door open for others.", {
++	{"What do you ask of me?", "test"},
++})
++screen(jedi, "test", "One question. A flame can warm a hearth, or burn a forest to the ground. What will you do with a light like this?", {
++	{"Keep it safe, and let it shine as it will.", "pass"},
++	{"Use it against my enemies.", "fail_force"},
++	{"Keep its power for myself.", "fail_greed"},
++})
++screen(jedi, "pass", "Then you understand that strength is knowing when to hold back. Take it: the ghostfire she carried out of the Vong war. Its glow is dim. That is the point. Carry it with care.", {}, true)
++screen(jedi, "pass_full", "Your pack is too full to take it. Make room, and come back to me.", {}, true)
++screen(jedi, "fail_force", "Then you would make it a weapon, and it would only be one more. Think on it. Come back another day, if you still want to.", {}, true)
++screen(jedi, "fail_greed", "It has no power to give you. It is only a light. Come back another day, when you want it for what it is.", {}, true)
++screen(jedi, "not_again_yet", "Not yet. Sit with the question a while longer, then come back.", {}, true)
++screen(jedi, "after", "The light has a new keeper now, and so do I: none. Go well. The forest will remember you.", {}, true)
+ screen(jedi, "refuse", "The stranger keeps their head bowed and says nothing.", {}, true)
+ screen(jedi, "bye", "May the Force be with you.", {}, true)
+ addConversationTemplate("ossus_hidden_jedi_convo_template", jedi)
+diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua
+index 55dfb1d..942bdce 100644
+--- a/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua
++++ b/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua
+@@ -5,6 +5,8 @@
+ --   the highland hunt   Elder Iravi (Ysanna camp) -> three kirruk by the stone circle -> back: 1,500 credits
+ --   the pilot's part    Lieutenant Moll (crashed fighter) -> foreman Teel (kathracite adit) -> back: 1,000 credits
+ --   the memorial road   first stone above Knossa -> middle stone -> memorial ring: badge 140; Archivist Oduro: 500 credits
++--   the ghostfire       Archivist Oduro's lead -> three Jedi sites on Ossus + badge 140 + one stock Jedi temple badge ->
++--                       T'ra Saa's keeper in the sanctuary: one question -> the ghostfire colour crystal, once per character
+ -- Progress is per player in screenplay data ("OssusPeople"), so it survives logouts and restarts. Our own code and text.
+ 
+ OssusPeople = ScreenPlay:new {
+@@ -81,6 +83,19 @@ OssusPeople = ScreenPlay:new {
+ 		{ 3, 1960.0, 2780.0, 20, "You reach the memorial ring beside the craters, at the end of the pilgrims' road." },
+ 	},
+ 
++	-- the ghostfire quest (owner 17 Oct; outputs/Fable-ossus/o10-ghostfire/README.md). The sites count only after the lead.
++	ghostfire = {
++		sites = {
++			{ key = "gfVault", x = 2300.0, y = 1925.0, radius = 20, text = "The mouth of the Great Library vault. Something old is still breathing in the stone." },
++			{ key = "gfWatch", x = 290.0, y = -6400.0, radius = 25, text = "The Eocho watch ruin. From here the masters could see the whole valley." },
++			{ key = "gfCircle", x = -980.0, y = -5610.0, radius = 25, text = "The Ysanna stone circle. The stones hum faintly when the wind drops." },
++		},
++		badge = 140,                -- the memorial road (PL-02)
++		templeBadges = { 12, 23, 30 },  -- stock exploration_jedi: Ben Kenobi's old home, Exar Kun's temple, Dantooine's Jedi temple
++		retry = 60 * 60,            -- seconds before a player who answered wrongly may answer again
++		lootGroup = "ossus_ghostfire_crystal",
++	},
++
+ 	waypoints = {
+ 		hunt = { -980, -5555, "Kirruk by the stone circle" },
+ 		adit = { 4590, -310, "Kathracite adit (Teel)" },
+@@ -88,6 +103,9 @@ OssusPeople = ScreenPlay:new {
+ 		roadStart = { 116, -3012, "Memorial road: first stone" },
+ 		roadMiddle = { 892, -31, "Memorial road: middle stone" },
+ 		roadRing = { 1960, 2780, "Memorial road: the ring" },
++		gfVault = { 2300, 1925, "Old Jedi site: the vault mouth" },
++		gfWatch = { 290, -6400, "Old Jedi site: the Eocho watch ruin" },
++		gfCircle = { -980, -5610, "Old Jedi site: the Ysanna stone circle" },
+ 	},
+ }
+ 
+@@ -114,6 +132,7 @@ function OssusPeople:start()
+ 
+ 	self:spawnPeople()
+ 	self:spawnRoad()
++	self:spawnGhostfireSites()
+ 
+ 	local first = getRandomNumber(self.jediFirst[1], self.jediFirst[2])
+ 	createEvent(first * 1000, SP, "jediAppear", nil, "")
+@@ -294,6 +313,110 @@ function OssusPeople:onRoadArea(pArea, pPlayer)
+ 	return 0
+ end
+ 
++-- The ghostfire quest
++
++function OssusPeople:spawnGhostfireSites()
++	for i, site in ipairs(self.ghostfire.sites) do
++		local pArea = spawnActiveArea(self.planet, "object/active_area.iff", site.x, getWorldFloor(site.x, site.y, self.planet), site.y, site.radius, 0)
++
++		if pArea == nil then
++			printLuaError("OssusPeople: could not create the ghostfire site " .. site.key)
++		else
++			writeData(SceneObject(pArea):getObjectID() .. ":ossusGhostfireSite", i)
++			createObserver(ENTEREDAREA, SP, "onGhostfireSite", pArea)
++		end
++	end
++end
++
++function OssusPeople:onGhostfireSite(pArea, pPlayer)
++	if pArea == nil then
++		return 1
++	end
++
++	if pPlayer == nil or not SceneObject(pPlayer):isPlayerCreature() or getState(pPlayer, "ghostfire") ~= "lead" then
++		return 0
++	end
++
++	local site = self.ghostfire.sites[readData(SceneObject(pArea):getObjectID() .. ":ossusGhostfireSite")]
++
++	if site ~= nil and getState(pPlayer, site.key) ~= "1" then
++		setState(pPlayer, site.key, "1")
++		CreatureObject(pPlayer):sendSystemMessage(site.text)
++		CreatureObject(pPlayer):sendSystemMessage("Old Jedi sites walked: " .. self:ghostfireSitesDone(pPlayer) .. " of " .. #self.ghostfire.sites .. ".")
++	end
++
++	return 0
++end
++
++function OssusPeople:ghostfireSitesDone(pPlayer)
++	local n = 0
++
++	for _, site in ipairs(self.ghostfire.sites) do
++		if getState(pPlayer, site.key) == "1" then
++			n = n + 1
++		end
++	end
++
++	return n
++end
++
++-- What the player still lacks, as the keeper says it; nil when ready.
++function OssusPeople:ghostfireMissing(pPlayer)
++	local g = self.ghostfire
++	local pGhost = CreatureObject(pPlayer):getPlayerObject()
++
++	if pGhost == nil then
++		return "..."
++	end
++
++	if getState(pPlayer, "ghostfire") ~= "lead" then
++		return "You do not know yet what you are looking for. The archivist at the vault dig remembers more than she says. Ask her about the Jedi light."
++	end
++
++	local missing = {}
++
++	for _, site in ipairs(g.sites) do
++		if getState(pPlayer, site.key) ~= "1" then
++			table.insert(missing, (self.waypoints[site.key][3]:gsub("^Old Jedi site: ", "")))
++		end
++	end
++
++	if not PlayerObject(pGhost):hasBadge(g.badge) then
++		table.insert(missing, "the memorial road, walked from the first stone to the ring")
++	end
++
++	local temple = false
++
++	for _, b in ipairs(g.templeBadges) do
++		if PlayerObject(pGhost):hasBadge(b) then
++			temple = true
++		end
++	end
++
++	if not temple then
++		table.insert(missing, "one of the old temples beyond Ossus: Dantooine's ruined temple, Exar Kun's temple on Yavin 4, or the old hermit's home on Tatooine")
++	end
++
++	if #missing == 0 then
++		return nil
++	end
++
++	return "Not yet. The old paths are still quiet around you. You have not yet walked: " .. table.concat(missing, "; ") .. "."
++end
++
++function OssusPeople:giveGhostfire(pPlayer)
++	local pInventory = CreatureObject(pPlayer):getSlottedObject("inventory")
++
++	if pInventory == nil or SceneObject(pInventory):isContainerFullRecursive() then
++		return false
++	end
++
++	createLoot(pInventory, self.ghostfire.lootGroup, 1, true)
++	setState(pPlayer, "ghostfire", "done")
++	CreatureObject(pPlayer):sendSystemMessage("You receive the ghostfire crystal.")
++	return true
++end
++
+ -- The rare hidden Jedi in the sanctuary
+ 
+ function OssusPeople:jediAppear(pNil, args)
+@@ -438,6 +561,11 @@ function OssusVaultArchivistConvoHandler:runScreenHandlers(pConvTemplate, pPlaye
+ 		OssusPeople:addWaypoint(pPlayer, "roadStart")
+ 		OssusPeople:addWaypoint(pPlayer, "roadMiddle")
+ 		OssusPeople:addWaypoint(pPlayer, "roadRing")
++	elseif id == "ghostfire_lead" and getState(pPlayer, "ghostfire") == "" then
++		setState(pPlayer, "ghostfire", "lead")
++		OssusPeople:addWaypoint(pPlayer, "gfVault")
++		OssusPeople:addWaypoint(pPlayer, "gfWatch")
++		OssusPeople:addWaypoint(pPlayer, "gfCircle")
+ 	elseif id == "road_reward" and getState(pPlayer, "roadPaid") ~= "1" and getNumber(pPlayer, "roadStep") >= #OssusPeople.road then
+ 		setState(pPlayer, "roadPaid", "1")
+ 		CreatureObject(pPlayer):addBankCredits(OssusPeople.roadReward, true)
+@@ -453,13 +581,37 @@ function OssusHiddenJediConvoHandler:getInitialScreen(pPlayer, pNpc, pConvTempla
+ 		return screenOf(pConvTemplate, "refuse")
+ 	end
+ 
+-	return screenOf(pConvTemplate, "greet")
++	local state = getState(pPlayer, "ghostfire")
++
++	if state == "done" then
++		return screenOf(pConvTemplate, "after")
++	elseif state == "" then
++		return screenOf(pConvTemplate, "greet")
++	elseif OssusPeople:ghostfireMissing(pPlayer) ~= nil then
++		return screenOf(pConvTemplate, "not_ready")
++	elseif (tonumber(getState(pPlayer, "gfRetry")) or 0) > os.time() then
++		return screenOf(pConvTemplate, "not_again_yet")
++	end
++
++	return screenOf(pConvTemplate, "ready")
+ end
+ 
+ function OssusHiddenJediConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, selectedOption, pConvScreen)
+-	if screenID(pConvScreen) == "promise" and getState(pPlayer, "metJedi") ~= "1" then
+-		-- owner, 16 Oct: talk only for now; the meeting is remembered and gives nothing else
++	local id = screenID(pConvScreen)
++
++	if id == "promise" and getState(pPlayer, "metJedi") ~= "1" then
++		-- owner, 16 Oct: talk only; the meeting is remembered
+ 		setState(pPlayer, "metJedi", "1")
++	elseif id == "not_ready" then
++		local pClone = LuaConversationScreen(pConvScreen):cloneScreen()
++		LuaConversationScreen(pClone):setCustomDialogText(OssusPeople:ghostfireMissing(pPlayer) or "...")
++		return pClone
++	elseif id == "pass" and getState(pPlayer, "ghostfire") == "lead" and OssusPeople:ghostfireMissing(pPlayer) == nil then
++		if not OssusPeople:giveGhostfire(pPlayer) then
++			return screenOf(pConvTemplate, "pass_full")
++		end
++	elseif id == "fail_force" or id == "fail_greed" then
++		setState(pPlayer, "gfRetry", os.time() + OssusPeople.ghostfire.retry)
+ 	end
+ 
+ 	return pConvScreen
+diff --git a/MMOCoreORB/src/server/zone/objects/tangible/component/lightsaber/LightsaberCrystalComponentImplementation.cpp b/MMOCoreORB/src/server/zone/objects/tangible/component/lightsaber/LightsaberCrystalComponentImplementation.cpp
+index 70ab56a..44c8e60 100644
+--- a/MMOCoreORB/src/server/zone/objects/tangible/component/lightsaber/LightsaberCrystalComponentImplementation.cpp
++++ b/MMOCoreORB/src/server/zone/objects/tangible/component/lightsaber/LightsaberCrystalComponentImplementation.cpp
+@@ -453,7 +453,9 @@ void LightsaberCrystalComponentImplementation::updateCraftingValues(CraftingValu
+ 	int color = values->getCurrentValue("color");
+ 
+ 	if (colorMax != 31) {
+-		int finalColor = Math::min(color, 11);
++		// Sandbox (Ossus ghostfire quest, 17 Oct 2026): colour 32 is the quest-only ghostfire crystal (palette entry 32 in
++		// the client patch); every other colour crystal stays within the stock 0-11.
++		int finalColor = (color == 32 && colorMax == 32) ? 32 : Math::min(color, 11);
+ 		setColor(finalColor);
+ 		updateCrystal(finalColor);
+ 	} else {
