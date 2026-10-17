@@ -8,7 +8,7 @@
  "out": {
   "path": "work/nal-hutta/local_planets-nalhutta-floater.tre",
   "bytes": 4670862,
-  "sha256": "503401b49a0c46110a2f36cb332aaa51042b960758925e21a8f9f10d788a8d17",
+  "sha256": "0e4fe92d78c6a75a65f212f46ec199b4aee0ae46986e14968366a4f3f0152536",
   "entries": 181
  },
  "untouched_identical": 172,
@@ -52,8 +52,14 @@
   "hutta_strings_in_client": []
  },
  "placeholders": {
-  "tatooine_to_hutta_fare": 3000,
-  "hutta_to_tatooine_fare": 1750,
+  "to_hutta_fares": {
+   "tatooine": 3000,
+   "corellia": 3000
+  },
+  "from_hutta_fares": {
+   "tatooine": 1750,
+   "corellia": 1750
+  },
   "hutta_to_hutta_fare": 100,
   "galaxy_map_spot": [
    425,
@@ -81,10 +87,12 @@
    ],
    "hutta_row": {
     "Planet": "hutta",
+    "corellia": 1750,
     "tatooine": 1750,
     "hutta": 100
    },
    "into_hutta": {
+    "corellia": 3000,
     "tatooine": 3000,
     "hutta": 100
    }

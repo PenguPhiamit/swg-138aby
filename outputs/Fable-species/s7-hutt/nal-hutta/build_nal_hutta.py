@@ -5,7 +5,7 @@ mtg_patch_022.tre, datatables/clientregion/hutta.iff with the one Bilbousa row) 
 table already lists hutta. What the client still lacks, and this step adds on top of the base archive:
   string/en/hutta_region_names.stf      new: bilbousa "Bilbousa" (the key MTG's clientregion row points at)
   string/en/planet_n.stf                + hutta "Nal Hutta"
-  datatables/travel/travel.iff          + column and row; Tatooine -> Nal Hutta 3000, Nal Hutta -> Tatooine 1750,
+  datatables/travel/travel.iff          + column and row; Tatooine and Corellia -> Nal Hutta 3000, Nal Hutta -> each 1750,
                                           Nal Hutta -> Nal Hutta 100 (the Corellia/Ossus pattern; placeholders)
   datatables/player/waypoint_planets.iff + hutta / ui_planet_sel_rori.apt (MTG ships ui_planet_sel_nalhutta.dds but no .apt)
   ui/ui_ticketpurchase.inc, ui/ui_planet_map.inc   Endor's blocks cloned for Nal Hutta after Ossus's (swgfmt/ui_inc.py);
@@ -49,7 +49,10 @@ FLOATER_OUT = os.path.join(WORK, 'local_planets-nalhutta-floater.tre')
 GLOBE = 'ui_planet_sel_rori.apt'        # placeholder: no appearance/ui_planet_sel_nalhutta.apt in any client archive
 MAP_TEXTURE = 'ui_map_nalhutta'         # MTG 022's planetary map image (texture/ui_map_nalhutta.dds)
 PLACEHOLDERS = {
-    'tatooine_to_hutta_fare': 3000, 'hutta_to_tatooine_fare': 1750, 'hutta_to_hutta_fare': 100,
+    # Corellia is the hub that reaches every planet (Hoth and Ossus too); the owner found Nal Hutta unreachable from
+    # it (16 Oct, run 15), so it gets the Hoth/Ossus fares. The server mirrors each row's fares onto the reverse route.
+    'to_hutta_fares': {'tatooine': 3000, 'corellia': 3000}, 'from_hutta_fares': {'tatooine': 1750, 'corellia': 1750},
+    'hutta_to_hutta_fare': 100,
     # below Ossus's provisional (425, 290) on the 498x481 galaxy map (button 61x59); lore: Y'Toub system, Hutt Space
     'galaxy_map_spot': (425, 355),
     'globe': GLOBE,
@@ -80,9 +83,10 @@ def merge_travel(data):
     assert PLANET not in cols, 'travel.iff already has hutta'
     cols.append(PLANET)
     types = t['types'] + [t['types'][-1]]
-    rows = [r + [PLACEHOLDERS['tatooine_to_hutta_fare'] if r[0] == 'tatooine' else 0] for r in t['rows']]
+    rows = [r + [PLACEHOLDERS['to_hutta_fares'].get(r[0], 0)] for r in t['rows']]
     row = [PLANET] + [0] * (len(cols) - 1)
-    row[cols.index('tatooine')] = PLACEHOLDERS['hutta_to_tatooine_fare']
+    for planet, fare in PLACEHOLDERS['from_hutta_fares'].items():
+        row[cols.index(planet)] = fare
     row[cols.index(PLANET)] = PLACEHOLDERS['hutta_to_hutta_fare']
     rows.append(row)
     out = st.write_dtii({'version': t['version'], 'columns': cols, 'types': types, 'rows': rows})

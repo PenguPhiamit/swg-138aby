@@ -28,7 +28,9 @@ then logs one harmless warning: `backfillZones: hutta is not in activeZones, ign
 - **Base:** the floater candidate, `work/c54-floater/local_planets-c54-floater.tre`, sha256 `1ca2a091…`, 176 entries.
   The builder checks that sha.
 - **The archive to install:** `work/nal-hutta/local_planets-nalhutta-floater.tre`, 4,670,862 B, 181 entries.
-  - sha256 `503401b49a0c46110a2f36cb332aaa51042b960758925e21a8f9f10d788a8d17` (also in the `.sha256` file beside it).
+  - sha256 `0e4fe92d78c6a75a65f212f46ec199b4aee0ae46986e14968366a4f3f0152536` (also in the `.sha256` file beside it).
+  - It replaces `503401b4…`, the archive installed for run 15 (8:14 PM). The only difference is `travel.iff`, which
+    adds the Corellia route; see "Route fix" below.
   - The full report is in `nal-hutta/checks-floater.json`.
 - **What was checked:**
   - 172 of the floater's 176 entries are byte-identical. The other 5 are this step's tables below, which the floater
@@ -36,14 +38,14 @@ then logs one harmless warning: `backfillZones: hutta is not in activeZones, ign
   - The floater's own changes are there byte for byte: `hutt_mnt_ride_floater.ans` and `hutt.lat`.
   - The 9 Nal Hutta entries are byte-identical to the earlier build on `6ff21312`.
   - The archive is exactly the floater's entries plus ours, nothing else. The builder fails if anything else differs.
-- **Superseded:** the earlier build on `6ff21312` (`work/nal-hutta/local_planets-nalhutta.tre`, `d804d98a…`, 180
+- **Superseded:** the earlier build on `6ff21312` (`work/nal-hutta/local_planets-nalhutta.tre`, now `a38b33b3…`, 180
   entries; `checks.json`) lacks the floater pose. Don't install it.
 
 | Entry | Change |
 |---|---|
 | `string/en/hutta_region_names.stf` | new: `bilbousa` "Bilbousa" (the key MTG's `datatables/clientregion/hutta.iff` row points at) |
 | `string/en/planet_n.stf` | + `hutta` "Nal Hutta" |
-| `datatables/travel/travel.iff` | + hutta column and row: Tatooine -> Nal Hutta 3000, Nal Hutta -> Tatooine 1750, Nal Hutta -> Nal Hutta 100 (placeholders, the Corellia/Ossus pattern) |
+| `datatables/travel/travel.iff` | + hutta column and row: Tatooine and Corellia -> Nal Hutta 3000, Nal Hutta -> each 1750, Nal Hutta -> Nal Hutta 100 (placeholders, the Hoth/Ossus pattern; the server mirrors each row's fare onto the reverse route, so both directions cost 3000 in game) |
 | `datatables/player/waypoint_planets.iff` | + `hutta` / `ui_planet_sel_rori.apt`, after ossus |
 | `ui/ui_ticketpurchase.inc`, `ui/ui_planet_map.inc` | Endor's blocks cloned for Nal Hutta after Ossus's (`swgfmt/ui_inc.py`): the galaxy-map button at (425, 355), below Ossus's (placeholder); the label reads "Nal Hutta"; the planetary map uses MTG's `texture/ui_map_nalhutta.dds` |
 | `datatables/loading/hutta.iff`, `string/en/loading/hutta.stf`, `hutta_n.stf` | new: three loading screens with our own text (Nal Hutta, Bilbousa, the Hutta Lowlands) on the stock generic tile |
@@ -74,6 +76,34 @@ the commit. Tracking the credits file is the owner's call.
   (-746, 1645). With r 400 it then covers every corner of the town, including Jabba's palace at the south end. The client
   name point is MTG's and stays as it is.
 
+## Route fix (16 Oct, 9:50 PM)
+
+**Problem.** On run 15 the owner couldn't reach Nal Hutta from Corellia. The first look only had a Tatooine route:
+Corellia's row in `travel.iff` had a Nal Hutta fare of 0. Corellia is the hub that reaches every other planet, Hoth and
+Ossus included.
+
+**What was checked on the running galaxy:** nothing else is wrong on the server.
+- Run 15's log (9:33 PM start) shows that `hutta` deployed with its terrain and 5 regions, and that weather was enabled.
+- The snapshot loaded: 163 world objects, the same as the file. On a resumed copy the children come from the database,
+  as on every stock planet.
+- The fares to 13 planets loaded, and the Bilbousa nav area loaded.
+- No shuttle errors were logged.
+
+**Fix.** Corellia -> Nal Hutta 3000 and Nal Hutta -> Corellia 1750, the same as Hoth and Ossus. The Tatooine route stays.
+The new archive `0e4fe92d…` differs from the installed `503401b4…` in `datatables/travel/travel.iff` only.
+
+**Install.** The server reads `travel.iff` at start, so this needs the archive on both sides and a restart:
+1. **Check first.** You hold the server lock, no owner client is running, no squad round is running, and the owner has
+   OKed the restart.
+2. **Back up.** On each side, back up the current file as `.bak-503401b4`.
+3. **Copy.** Copy `work/nal-hutta/local_planets-nalhutta-floater.tre` over `/opt/swg/tre/local_planets.tre` and
+   `SWG-client/local_planets.tre`, then check the sha256 on both sides.
+4. **Restart** the test galaxy.
+
+No script or patch changes are needed.
+
+**Still untested:** a real ticket bought on either route. The checklist below still applies.
+
 ## How the main session installs it
 
 1. **Check first.**
@@ -81,7 +111,7 @@ the commit. Tracking the credits file is the owner's call.
    - No owner client is running.
    - No squad round is running (`pgrep -f "squad.py run"`).
    - The owner has OKed this restart.
-2. **One archive for both.** `work/nal-hutta/local_planets-nalhutta-floater.tre` (sha256 `503401b4…`) carries the floater
+2. **One archive for both.** `work/nal-hutta/local_planets-nalhutta-floater.tre` (sha256 `0e4fe92d…`) carries the floater
    pose and Nal Hutta. Install it instead of the floater's own candidate. If the floater candidate is rebuilt, rebuild this
    with `C:/Users/Pengw/miniconda3/python.exe -I outputs/Fable-species/s7-hutt/nal-hutta/build_nal_hutta.py --floater`
    (update `FLOATER_SHA_PREFIX` first).
@@ -101,7 +131,7 @@ the commit. Tracking the credits file is the owner's call.
    - check that the console log loads `hutta` without region or terrain errors;
    - check for the one backfill warning above;
    - run `server_status.py`.
-7. **Getting there.** The owner flies from any Tatooine starport.
+7. **Getting there.** The owner flies from any Corellia or Tatooine starport.
    - Wait for the shuttle boot delay first (30 s on the test galaxy).
    - If the ticket screen fails, a staff teleport to `hutta -788 1776` gets them there and is a finding in itself.
 
