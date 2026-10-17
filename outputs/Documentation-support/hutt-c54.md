@@ -125,3 +125,17 @@ Do these after run 10 is released by the owner and Claude has reviewed/cherry-pi
 7. Click a chair: expect the chair refusal, no teleport/chair state, and ground-sit posture at the same position after cooldown. Check ordinary `/sit`, stand, kneel, prone, sneak, dance, survey and craft; record remaining Level 1 visual limitations separately from functional failures.
 
 Next: Claude reviews the three source commits and stages the client corrections F2/F3/F6, completes the explicit creation/customization checks, then compiles gently and arranges the owner's client visit. No live merge or deploy is authorized by this report.
+
+## Owner's in-client test, 16 Oct (Claude)
+
+1. **4:12 PM, client crash at creation** (integer divide by zero, customization screen).
+   - Cause: no `palette_columns` row for the Hutt skin palette `npc_species_hutts.pal` (32 colours, 0 columns), and no Hutt blocks in `default_pc_equipment`, `default_pc_hairstyles` and the six `profession_defaults` tables (the client used the human-male clothes).
+   - Fixed in the S7 builder (`a07b46e`) and installed on client and server (`6ff21312`). Creation now works.
+2. **4:35 PM, the created Hutt cannot be played.** The camera and UI respond, but W moves nothing, even locally. Chat, `/kneel` and right-click menus do nothing, and the server receives nothing.
+   - The server side is fine: an agent-client Hutt (`huttcheck`) chatted, knelt (posture changed), took the starting-city command and got its helper droid. Its health/action/mind and posture were normal.
+   - An A/B archive without our generated `hutt.lat` (`dc79c11a`) made no difference, so Level 1's animation table is not the cause.
+   - Likely cause: the client cannot control the Hutt rig as a player.
+     - Every playable species, the Ithorian included, uses a body skeleton with the human bone names (`Head`, `neck`, `hold_l`, `hold_r`, `lArm`...), a separate face skeleton, and the shared `all_m.lat`.
+     - `hutt.skt` has `head` (lowercase), no `neck`, no `hold_l`, its face bones inside the body skeleton, and no face skeleton.
+     - MTG's player Hutt templates come from a later client whose code knows Hutts; our pre-CU client does not.
+   - Not proven: the client's code is closed, so this is the best structural explanation, not a traced one.

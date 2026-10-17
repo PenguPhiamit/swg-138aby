@@ -4,13 +4,13 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 ## Server lock
 
-**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (no galaxy ownership). Fable is retired (owner, 16 Oct: Opus 5.5 and GPT 6.1 Sol only). Live galaxy STOPPED. Test galaxy: run 13 since 4:02 PM, dev `a8ece12b` (archive now `6ff21312`), BotPop "all" 1,500 multiclass new players + 200 Ossus explorers; the owner is on it testing the Hutt. Live map on http://localhost:8765. - 2026-10-16 5:00 PM.**
+**Server lock: Claude: test galaxy, bots and dev tree `/opt/swg/Core3-dev`. ChatGPT owns `/opt/swg/Core3-gpt` (no galaxy ownership). Fable is retired (owner, 16 Oct: Opus 5.5 and GPT 6.1 Sol only). Live galaxy STOPPED. Test galaxy: run 13 since 4:02 PM, dev `a8ece12b` (archive now `6ff21312`), BotPop "all" 1,500 multiclass new players + 200 Ossus explorers; the owner is on it testing the Hutt. Live map on http://localhost:8765. - 2026-10-16 4:40 PM.**
 
 **Overnight 16 Oct (owner, 02:15): the bots are handed to GPT and the local model.** Claude's 5-hour usage is spent until 05:30. GPT (usage back at 03:45) runs C46 (Discord feed and public map, staging only) and then C48 (overnight analysis and the owner's morning sheet). The local model (Ollama qwen3:8b, `tools/agents/local/idle_research.py`, every 5 minutes when idle) keeps researching `Agent/local-research/queue.json`. **Rule: when no agent has usage, the local model researches until usage resumes; anyone may add open topics to its queue.** The test galaxy (run 8: 1,500 multiclass new players + 200 Ossus explorers, dev `8b48a044`) runs unattended; the memory watchdog despawns the bots if WSL memory falls below 2 GB; no restarts until the owner or Claude is back. Fable is paused (owner, 00:05).
 
 **Owner back 16 Oct (afternoon): release track first (Claude); GPT does C55 (done), C56 full-datapad gate, C57 client patch for friends, then C58 (re-review of the C55 fixes); GPT is out of usage until it resets, and `gpt_chain5.sh` retries every 10 minutes.** Run 13 is healthy (1,700 online, ticks ~6 ms). Release plan: `Documentation-support/live-release-1.md` (after C55: a small first release cut from live `920203d8`, not all of dev; owner decides). C55 F1 (helper droid lock order, reached real new players) and F2 (spawn gate removed krayts for solo masters) are fixed in dev `c5d713b8` (built 4:30 PM, not on run 13). C46 reviewed and fixed (`ccf9519`): fit to start; waits for the owner's webhook file and OK.
 
-**Hutt (16 Oct 4:12 PM): the owner's client crashed at creation (integer divide by zero, customization screen).** Cause: no `palette_columns` row for the Hutt skin palette `npc_species_hutts.pal` (0 columns) and no Hutt blocks in the clothing and hair tables (the client used the human-male clothes). Fixed in the builder (`a07b46e`) and installed on client and server (`6ff21312`; backups `.bak-c54-3a61527d`). The server needed no restart (it tolerates the missing rows). **Owner's retry not confirmed yet**; checklist in `Documentation-support/hutt-c54.md`.
+**Hutt (16 Oct): creation fixed (4:12 PM crash: missing skin palette row and clothing/hair blocks; archive `6ff21312` on client and server). The created Hutt cannot be played** (no movement even locally, no chat, commands or menus; the server is fine, checked with an agent-client Hutt). Our animation table is not the cause (A/B). Likely: the pre-CU client cannot control the Hutt rig as a player (no human bone names, no `hold_l`, no face skeleton). Details: `Documentation-support/hutt-c54.md`, last section. Owner decides next.
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -367,7 +367,7 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
-### 2026-10-16 17:00 Claude: Hutt crash fixed, C55 answered, release plan, C46 reviewed
+### 2026-10-16 16:40 Claude: Hutt crash fixed, C55 answered, release plan, C46 reviewed
 
 - Hutt creation crash fixed and installed (above). C55 F1/F2 fixed in dev `c5d713b8`; C58 re-review queued for GPT. `live-release-1.md` revised to GPT's verdicts (small first release from live; T1/T2/S1-S5 and BotPop stay on test; missions held). C46 (`ccf9519`): a failed minute PATCH retries, previews overwrite, success spacing fixed, no version banner; 56 tests pass. Opus took Fable's content job (`7a99802`): 16 owner questions to bring as cards.
 
