@@ -1,0 +1,98 @@
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+index 4e4a50f..fa337ec 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+@@ -291,6 +291,28 @@ private:
+ 	static float floorNear(Zone* zone, float x, float y, float referenceZ, float stepUp = 1.5f);
+ 	// How far up a step of `length` metres may climb: about a 30-degree ramp, at least a kerb, never a storey.
+ 	static float stepUpFor(float length) { return Math::max(1.2f, Math::min(2.5f, 0.6f * length)); }
++
++	// A bot's own lane, -0.4 to 0.4 m, and spacing, fixed by its object ID. Bots that share a navmesh route walk side
++	// by side instead of inside each other, and queue at a terminal instead of standing on one spot. 0.4 m keeps the
++	// body clear of walls: the meshes keep 0.5 m from them (RecastSettings m_agentRadius).
++	static float laneOf(CreatureObject* bot) {
++		return ((int)(((uint64)bot->getObjectID() * 2654435761ULL >> 20) % 9) - 4) * 0.1f;
++	}
++
++	static float spacingOf(CreatureObject* bot, float step, int slots) {
++		return (float)(((uint64)bot->getObjectID() * 40503ULL >> 12) % slots) * step;
++	}
++
++	// `point` moved `lane` metres to the right of the line from `from` to it.
++	static Vector3 inLane(const Vector3& from, const Vector3& point, float lane) {
++		float sx = point.getX() - from.getX(), sy = point.getY() - from.getY();
++		float length = std::sqrt(sx * sx + sy * sy);
++
++		if (length < 0.01f)
++			return point;
++
++		return Vector3(point.getX() + sy / length * lane, point.getY() - sx / length * lane, point.getZ());
++	}
+ 	static bool stepToward(CreatureObject* bot, Zone* zone, float tx, float ty, float speed, float seconds, float stopAt);
+ 	int planRoute(Zone* zone, const Vector3& from, float gx, float gy, std::vector<Vector3>& out);
+ 	bool startRoute(BotState* state, CreatureObject* bot, Zone* zone, float gx, float gy, float speed);
+@@ -554,10 +576,11 @@ private:
+ 
+ 	static void walk(BotState* state, CreatureObject* bot, Zone* zone, float seconds, uint64 now) {
+ 		Vector3 position = bot->getPosition();
+-		float budget = state->speed * seconds, dx = 0, dy = 0;
++		float budget = state->speed * seconds, dx = 0, dy = 0, lane = laneOf(bot);
+ 
+ 		while (budget > 0.01f && state->next < state->path.size()) {
+-			const Vector3& target = state->path[state->next];
++			// In the bot's lane from the second waypoint on (the first leg has no line to offset from).
++			const Vector3 target = state->next > 0 ? inLane(state->path[state->next - 1], state->path[state->next], lane) : state->path[state->next];
+ 			float tx = target.getX() - position.getX(), ty = target.getY() - position.getY();
+ 			float distance = std::sqrt(tx * tx + ty * ty);
+ 
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+index ecfe47a..1850c27 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+@@ -190,7 +190,8 @@ inline bool BotPopManager::chaseToward(BotState* state, CreatureObject* bot, Zon
+ 
+ 		// Each waypoint but the last; the last is the target itself, wherever it is now.
+ 		while (state->chaseNext + 1 < state->chase.size()) {
+-			const Vector3& point = state->chase[state->chaseNext];
++			const Vector3 point = state->chaseNext > 0 ? inLane(state->chase[state->chaseNext - 1], state->chase[state->chaseNext], laneOf(bot))
++					: state->chase[state->chaseNext];
+ 			float px = point.getX() - position.getX(), py = point.getY() - position.getY();
+ 
+ 			if (px * px + py * py > 1.f) {
+@@ -803,7 +804,7 @@ inline void BotPopManager::launchRest(BotState* state, CreatureObject* bot, Zone
+ 		if (dx * dx + dy * dy > 40.f * 40.f) { // the middle of town, where the dancers and medics are
+ 			// No jitter on the target: a new one every step would re-plan the route every 2 s. They still stop 25 m
+ 			// out, spread round the side each came from.
+-			chaseToward(state, bot, zone, L->center.getX(), L->center.getY(), 5.f, seconds, 25.f);
++			chaseToward(state, bot, zone, L->center.getX(), L->center.getY(), 5.f, seconds, 25.f + spacingOf(bot, 2.f, 5));
+ 			return;
+ 		}
+ 
+@@ -981,7 +982,7 @@ inline void BotPopManager::launchMedic(BotState* state, CreatureObject* bot, Zon
+ 	float dx = bot->getPositionX() - L->center.getX(), dy = bot->getPositionY() - L->center.getY();
+ 
+ 	if (dx * dx + dy * dy > 60.f * 60.f) {
+-		chaseToward(state, bot, zone, L->center.getX(), L->center.getY(), 4.f, seconds, 30.f);
++		chaseToward(state, bot, zone, L->center.getX(), L->center.getY(), 4.f, seconds, 30.f + spacingOf(bot, 2.f, 5));
+ 		return;
+ 	}
+ 
+@@ -1114,7 +1115,7 @@ inline void BotPopManager::launchEntertain(BotState* state, CreatureObject* bot,
+ 		float dx = bot->getPositionX() - L->center.getX(), dy = bot->getPositionY() - L->center.getY();
+ 
+ 		if (dx * dx + dy * dy > 45.f * 45.f) {
+-			chaseToward(state, bot, zone, L->center.getX(), L->center.getY(), 3.f, seconds, 30.f);
++			chaseToward(state, bot, zone, L->center.getX(), L->center.getY(), 3.f, seconds, 30.f + spacingOf(bot, 2.f, 5));
+ 			return;
+ 		}
+ 
+@@ -1695,7 +1696,8 @@ inline bool BotPopManager::launchMission(BotState* state, CreatureObject* bot, Z
+ 		return false;
+ 	}
+ 
+-	if (!chaseToward(state, bot, zone, terminal->getPositionX(), terminal->getPositionY(), 5.f, seconds, 3.f))
++	// 3 to 5 m out by the bot's spacing: a queue at the terminal, not a stack (handleMissionListRequest allows 6 m).
++	if (!chaseToward(state, bot, zone, terminal->getPositionX(), terminal->getPositionY(), 5.f, seconds, 3.f + spacingOf(bot, 1.f, 3)))
+ 		return true;
+ 
+ 	missions->handleMissionListRequest(terminal, bot, ++L->missionsTaken + 1000);
