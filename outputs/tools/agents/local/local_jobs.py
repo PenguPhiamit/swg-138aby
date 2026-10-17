@@ -30,6 +30,8 @@ Jobs:
              them, test tools only, or ways added or lost against stock SWGEmu), each with how a player gets it now
              and in stock. The model sorts them: later era (fine to lack a source on pre-CU), pre-CU but missing, the
              wrong way, not an item, unsure. Run item_sources.py first. Model: qwen3.6:35b-a3b.
+  item-check-ok (17 Oct; owner: a second pass after the flagged ones) The same for the items that do have a way
+             (flag "ok"): is that way the one that was meant?
 All are drafts by a local model: Claude or ChatGPT checks an item before acting on it, and every dialogue or chat
 line is reviewed before it goes into the game.
 """
@@ -119,7 +121,8 @@ Give every line one verdict:
 Answer with JSON only: {"items": [{"id": "<id exactly as given>", "verdict": "...", "intended": "<how players should
 get it, or empty>", "why": "<one sentence>"}]}.""",
 }
-CHUNK = {'bot-chat': 8, 'npc-dialogue': 3, 'report-digest': 1, 'item-check': 20}   # lines per chunk; the rest use PER_CHUNK
+INSTRUCTIONS['item-check-ok'] = INSTRUCTIONS['item-check']
+CHUNK = {'bot-chat': 8, 'npc-dialogue': 3, 'report-digest': 1, 'item-check': 20, 'item-check-ok': 20}   # lines per chunk; the rest use PER_CHUNK
 INSTRUCTIONS.update(precheck.INSTRUCTIONS)
 CHUNK.update(precheck.CHUNK)
 
@@ -299,8 +302,9 @@ ITEM_FOLDERS = ['tangible/wearables', 'weapon/ranged', 'weapon/melee', 'tangible
                 'tangible/food', 'tangible/loot', 'tangible/deed', 'tangible/furniture', 'tangible/crafting']
 
 
-def item_lines():
-    """[(template, text)] for the items item_sources.py flags, test-only and changed ones first."""
+def item_lines(flagged_only=True):
+    """[(template, text)] for the items item_sources.py flags, test-only and changed ones first; with
+    flagged_only=False, the items it found a way for instead (item-check-ok: is that way the intended one?)."""
     items = json.loads(ITEM_MAP.read_text(encoding='utf-8'))['items']
 
     def ways(kinds):
@@ -310,9 +314,9 @@ def item_lines():
         tpl, it = entry
         first = 0 if 'test-only' in it['flags'] else 1 if any(f[:5] in ('lost-', 'gaine') for f in it['flags']) else 2
         return (first, ITEM_FOLDERS.index(it['folder']) if it['folder'] in ITEM_FOLDERS else len(ITEM_FOLDERS), tpl)
-    flagged = sorted(((t, it) for t, it in items.items() if it['flags']), key=rank)
-    return [(t, f'{it["folder"]} | {", ".join(it["flags"])} | now: {ways(it["dev"])} | stock: {ways(it["stock"])}')
-            for t, it in flagged]
+    flagged = sorted(((t, it) for t, it in items.items() if bool(it['flags']) == flagged_only), key=rank)
+    return [(t, f'{it["folder"]} | {", ".join(it["flags"]) or "ok"} | now: {ways(it["dev"])} | stock: '
+                + ('the same' if it['stock'] == it['dev'] else ways(it['stock']))) for t, it in flagged]
 
 
 # ------------------------------------------------------------------ prepare / report
@@ -326,8 +330,8 @@ def lines_for(job, folder):
         return npc_briefs(folder)
     if job == 'report-digest':
         return run_reports()
-    if job == 'item-check':
-        return item_lines()
+    if job in ('item-check', 'item-check-ok'):
+        return item_lines(job == 'item-check')
     if job in precheck.INSTRUCTIONS:   # claim-check, report-diff, test-index, scenario-review
         return precheck.job_lines(job, folder)
     return bot_notes()
@@ -391,7 +395,7 @@ def report(job, folder):
             for i in sorted(items, key=lambda i: i['id']))
     elif job in precheck.INSTRUCTIONS:
         body = precheck.job_report(job, folder, lines, items)
-    elif job == 'item-check':
+    elif job in ('item-check', 'item-check-ok'):
         verdicts = defaultdict(dict)
         for i in items:
             verdicts[str(i.get('verdict', 'unsure')).lower()][i['id']] = i
