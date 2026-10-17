@@ -8,7 +8,8 @@ bodies themselves run as swgemu:
   wsl -d Debian -u root -- python3 /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/tools/bots/scenarios/creation-sweep.py
       [--data-only] [--keep] [--parallel N] [--accounts a,b,...]
 --data-only runs the data checks and prints the plan without touching the galaxy (any user, Windows too). --keep leaves
-the new characters in place. The report goes to Bot-reports/Creation/ like a squad run: a group with no members, kept
+the new characters in place. `creation-sweep.py cleanup Bot-reports/Creation/<time>-creation-sweep-rows.json` deletes
+what an earlier run left behind. The report goes to Bot-reports/Creation/ like a squad run: a group with no members, kept
 out of groups.json. Through squad.py (`run creation-sweep.py --group <any>`) only the data checks run unless squad runs
 as root; options then come from CREATION_SWEEP_DATA_ONLY, _KEEP, _PARALLEL and _ACCOUNTS.
 
@@ -17,7 +18,7 @@ What it checks:
            both genders; the Hutt's racial row and limits are S7's (C54 F2); its description is S7's text, and each
            description's attribute block shows the species' real racial row (C54 F3; the Chiss and the Hutt apart
            from the ten stock texts); the Hutt skill labels; the server's and the client's local_planets.tre are the
-           same file.
+           same file; every starting item in the creation tables has a server template.
   names    refusals in game, which make no character: Admin, Dev, Captain, a reserved surname, a Wookiee surname, a
            3-letter Hutt name, digits, a name in use. Acceptances ride on the creations: names holding stock's old
            substring traps (Rebecca, Victor, Devon...), canon surnames stock refused (Skywalker, Solo, Fett, Vader), a
@@ -29,7 +30,9 @@ What it checks:
            to maximum. The Hutts' attributes minus the profession row must be S7's row.
   clean    each new character is deleted with the login server's own two statements (LoginPacketHandler.cpp,
            handleDeleteCharacterMessage; the agent client has no delete action): its row moves to deleted_characters,
-           and the zone purges the object on its next delete pass.
+           and the zone purges the object on its next delete pass. Those statements only see the characters table,
+           and a new character stays in characters_dirty until the zone's next save (about every 10 minutes), so
+           the cleanup waits for that save; no body is logged in meanwhile.
   console  core3.log ERROR lines during the run that concern creation; the known harmless lines are counted apart.
 """
 import hashlib
@@ -64,6 +67,7 @@ CORE3_LOG = TESTGALAXY_BIN / 'log' / 'core3.log'
 CONFIG_LOCAL = TESTGALAXY_BIN / 'conf' / 'config-local.lua'
 ROOT = Path('/var/tmp/swg-creation-sweep')  # run folders: options files and body logs (never under /opt/swg)
 DB, GALAXY, LOGIN_PORT, RUN_AS = 'swgemu_test', 2, '46453', 'swgemu'
+CLEANUP_WAIT = 17 * 60  # the zone saves about 15.5 minutes after a start, then every 10 (core3.log, 17 Oct)
 LOAD_GROUPS = BOTS_DIR / 'load-groups.json'  # default accounts: the plain load-test bots, which no squad uses
 
 SPECIES = ['human', 'zabrak', 'twilek', 'rodian', 'trandoshan', 'moncal', 'wookiee', 'bothan', 'ithorian', 'sullustan',
@@ -75,6 +79,7 @@ ATTRIBUTES = ['health', 'strength', 'constitution', 'action', 'quickness', 'stam
 TABLES = {'racial': 'datatables/creation/racial_mods.iff', 'limits': 'datatables/creation/attribute_limits.iff',
           'professions': 'datatables/creation/profession_mods.iff', 'species_text': 'string/en/player_species.stf',
           'skl_n': 'string/en/skl_n.stf', 'skl_d': 'string/en/skl_d.stf'}
+CREATION_ITEMS = ['creation/default_pc_equipment.iff'] + [f'creation/profession_defaults_{p}.iff' for p in PROFESSIONS]
 
 # Fable S7 README 5.2 (approved), checked here independently of the archive builder: the Hutt's racial row, and its
 # limits as the stock non-human rows derive them (min = 300 + mod, fixed ranges, total = the minimums + 1,800).
@@ -223,6 +228,34 @@ def data_checks(tables):
     return out
 
 
+def starting_items(data):
+    """[(player template, item template)] from a creation table of PTMP blocks (default_pc_equipment,
+    profession_defaults_*), item paths as the server names them (no shared_)."""
+    out = []
+    for block in (c for c in iff.parse(data)[0].children[0].children if c.is_form and c.form == 'PTMP'):
+        who = block.children[0].data.rstrip(b'\0').decode('latin-1').rsplit('/', 1)[-1]
+        for chunk in block.children[1:]:
+            found = re.search(rb'object/[a-z0-9_/]+\.iff', chunk.data)
+            if found:
+                out.append((who.replace('shared_', '').replace('.iff', ''), found.group(0).decode().replace('shared_', '')))
+    return out
+
+
+def starting_item_check(read=read_table, scripts=TESTGALAXY_BIN / 'scripts'):
+    """Every item the creation tables hand out has a server template (else the server logs 'unknown template key'
+    and the character goes without it)."""
+    label = 'data: every starting item has a server template'
+    if not scripts.exists():
+        return label, None, 'the server scripts are not visible from here'
+    missing, count = [], 0
+    for rel in CREATION_ITEMS:
+        for who, item in starting_items(read(rel)[0]):
+            count += 1
+            if not (scripts / item.replace('.iff', '.lua')).exists():
+                missing.append(f"{Path(rel).stem.replace('profession_defaults_', '')} {who}: {item}")
+    return label, not missing, '; '.join(missing) or f'{count} items in {len(CREATION_ITEMS)} tables'
+
+
 def archive_check():
     """(label, ok or None when it can't be checked here, detail)."""
     label = "data: server and client local_planets.tre are the same file"
@@ -367,7 +400,9 @@ def judge(row, tables):
         problems.append(f"object CRC {row.get('crc')}, expected {want}")
     if row.get('shown_name') != row['name']:
         problems.append(f"shown name {row.get('shown_name')!r}")
-    if 'db_template' in row and row['db_template'] != f"object/creature/player/{row['template']}.iff":
+    if 'db_template' in row and row['db_template'] is None:
+        problems.append('no database row (characters or characters_dirty)')
+    elif 'db_template' in row and row['db_template'] != f"object/creature/player/{row['template']}.iff":
         problems.append(f"database template {row['db_template']!r}")
     expected = expected_attributes(tables, row['template'], row['profession']) if tables else None
     return problems + attribute_problems(row.get('status') or {}, expected)
@@ -384,18 +419,27 @@ def hutt_s7_problems(row, tables):
 
 
 def console_findings(lines, names, oids):
-    """(creation-related ERROR lines, harmless known lines, other ERROR lines) from core3.log lines."""
+    """(creation-related ERROR lines, harmless known lines, other ERROR lines) from core3.log lines. An ERROR is ours
+    when it names a creation step, one of our characters or OIDs, or follows one of those on the same server thread
+    (e.g. a starting item that fails to create right after "Player <oid> logged in")."""
     ours, noise, other = [], 0, 0
     marks = list(CONSOLE_CREATION) + [n for n in names if n] + [str(o) for o in oids]
+    last = {}  # server thread -> whether its previous line was about us
     for line in lines:
-        if 'ERROR' not in line:
-            continue
-        if any(n in line for n in CONSOLE_NOISE):
-            noise += 1
-        elif any(m in line for m in marks):
-            ours.append(line[:260])
-        else:
-            other += 1
+        thread = re.search(r'\) Thread (\d+) - ', line)
+        thread = thread.group(1) if thread else None
+        about_us = any(m in line for m in marks)
+        if 'ERROR' in line:
+            if any(n in line for n in CONSOLE_NOISE):
+                noise += 1
+                about_us = False
+            elif about_us or last.get(thread):
+                ours.append(line[:260])
+                about_us = True
+            else:
+                other += 1
+        if thread:
+            last[thread] = about_us
     return ours, noise, other
 
 
@@ -421,19 +465,65 @@ def sql_rows(query):
 
 
 def account_rows(names):
+    """(username, account_id, characters, newest creation) per account. A new character sits in characters_dirty
+    until the zone's next save moves it into characters (ObjectManager::onCommitData), so all three tables count."""
     names = [n for n in names if re.fullmatch(r'[a-z0-9_]+', n)]
     if not names:
         return [], 0
+    newest = ', '.join(f'COALESCE((SELECT UNIX_TIMESTAMP(max(t.creation_date)) FROM {table} t WHERE t.account_id = '
+                       f'a.account_id AND t.galaxy_id = {GALAXY}), 0)'
+                       for table in ('characters', 'characters_dirty', 'deleted_characters'))
     rows = sql_rows(
         'SELECT a.username, a.account_id, '
-        f'(SELECT count(*) FROM characters c WHERE c.account_id = a.account_id AND c.galaxy_id = {GALAXY}), '
-        f'GREATEST(COALESCE((SELECT UNIX_TIMESTAMP(max(c.creation_date)) FROM characters c WHERE c.account_id = '
-        f'a.account_id AND c.galaxy_id = {GALAXY}), 0), COALESCE((SELECT UNIX_TIMESTAMP(max(d.creation_date)) FROM '
-        f'deleted_characters d WHERE d.account_id = a.account_id AND d.galaxy_id = {GALAXY}), 0)) '
+        f'(SELECT count(*) FROM (SELECT character_oid, account_id, galaxy_id FROM characters UNION SELECT '
+        f'character_oid, account_id, galaxy_id FROM characters_dirty) c WHERE c.account_id = a.account_id AND '
+        f'c.galaxy_id = {GALAXY}), GREATEST({newest}) '
         'FROM accounts a WHERE a.username IN (' + ', '.join(f"'{n}'" for n in names) + ')')
     order = {n: i for i, n in enumerate(names)}
     now = int(float(sql('SELECT UNIX_TIMESTAMP()').strip()))
     return sorted(rows, key=lambda r: order.get(r[0], 1e9)), now
+
+
+def db_rows(oids):
+    """{oid: (account_id, firstname, template, table)}: the characters row, or characters_dirty before the save."""
+    if not oids:
+        return {}
+    listed, out = ','.join(str(int(o)) for o in oids), {}
+    for table in ('characters_dirty', 'characters'):  # characters wins during the moment a save holds both
+        for r in sql_rows(f'SELECT character_oid, account_id, firstname, template FROM {table} '
+                          f'WHERE character_oid IN ({listed})'):
+            out[int(r[0])] = (int(r[1]), r[2], r[3], table)
+    return out
+
+
+def delete_characters(created, ids, wait_s=CLEANUP_WAIT, rows=db_rows, run=sql, sleep=time.sleep):
+    """Deletes this run's characters with the login server's two statements. Those only see the characters table, so
+    a character is deletable once the zone's save has moved it there from characters_dirty (as for a player, who
+    can't delete a new character before then either); this waits up to wait_s for that. Returns [(oid, state)]."""
+    pending, states = {r['oid']: r for r in created}, {}
+    deadline = time.time() + wait_s
+    while pending:
+        found = rows(list(pending))
+        for oid, row in list(pending.items()):
+            info = found.get(oid)
+            if not info or info[0] != ids.get(row['account']) or info[1].lower() != row['name'].split()[0].lower():
+                states[oid] = f'skipped: row {info} does not match the run'
+            elif info[3] != 'characters':
+                continue
+            else:
+                for statement in cleanup_statements(oid, info[0]):
+                    run(statement)
+                where = cleanup_where(oid, info[0])
+                moved = int(run(f'SELECT count(*) FROM deleted_characters WHERE {where}').strip())
+                left = int(run(f'SELECT count(*) FROM characters WHERE {where}').strip())
+                states[oid] = 'deleted' if moved == 1 and left == 0 else f'moved {moved}, left {left}'
+            del pending[oid]
+        if not pending or time.time() >= deadline:
+            break
+        sleep(15)
+    for oid in pending:
+        states[oid] = f'still in characters_dirty after {wait_s} s: no save ran'
+    return [(r['oid'], states[r['oid']]) for r in created]
 
 
 def max_characters():
@@ -649,11 +739,16 @@ def run(g):
             g.check(label, ok, detail)
     except Exception as exc:
         g.note(f'ERROR: creation tables unreadable: {exc!r}')
-    label, ok, detail = archive_check()
-    if ok is None:
-        g.note(f'{label}: not checked ({detail})')
-    else:
-        g.check(label, ok, detail)
+    for check in (archive_check, starting_item_check):
+        try:
+            label, ok, detail = check()
+        except Exception as exc:
+            g.note(f'ERROR: {check.__name__}: {exc!r}')
+            continue
+        if ok is None:
+            g.note(f'{label}: not checked ({detail})')
+        else:
+            g.check(label, ok, detail)
     if tables is None:
         return
     if opts['data_only']:
@@ -679,10 +774,11 @@ def run(g):
         g.note(f'BLOCKED: {len(free)} of {needed} accounts are free (one creation per account per hour); '
                f'the next is free in {minutes_to_wait(rows, now)} min')
         return
-    taken = {r[0] for r in sql_rows('SELECT lower(firstname) FROM characters UNION '
-                                    'SELECT lower(firstname) FROM deleted_characters')}
-    in_use = next(iter(r[0] for r in sql_rows(f'SELECT firstname FROM characters WHERE galaxy_id = {GALAXY} '
-                                              'ORDER BY character_oid LIMIT 1')), None)
+    taken = {r[0] for r in sql_rows('SELECT lower(firstname) FROM characters UNION SELECT lower(firstname) FROM '
+                                    'characters_dirty UNION SELECT lower(firstname) FROM deleted_characters')}
+    # The name in use is a sweep account's own bot character, never a player's.
+    in_use = next(iter(r[0] for r in sql_rows(f'SELECT firstname FROM characters WHERE galaxy_id = {GALAXY} AND '
+                                              f'account_id = {int(free[0][1])} ORDER BY character_oid LIMIT 1')), None)
     rng = random.Random(stamp)
     accounts = [r[0] for r in free]
     chars, unplaced = plan_characters(tables['pairs'], accounts, taken, rng)
@@ -709,12 +805,9 @@ def run(g):
     # The database rows of everything created (an unexpected acceptance included).
     created = [r for r in made + refused if r.get('created') and r.get('oid')]
     ids = {name: info['id'] for name, info in record['accounts'].items()}
-    db = {int(r[0]): r for r in sql_rows('SELECT character_oid, account_id, firstname, template FROM characters WHERE '
-                                         'character_oid IN (' + ','.join(str(int(r['oid'])) for r in created) + ')')
-          } if created else {}
+    db = db_rows([r['oid'] for r in created])
     for row in created:
-        if row['oid'] in db:
-            row['db_template'] = db[row['oid']][3]
+        row['db_template'] = db[row['oid']][2] if row['oid'] in db else None
 
     for row in refused:
         got = 'created' if row.get('created') else row.get('code')
@@ -735,25 +828,19 @@ def run(g):
             g.check(f"Hutt S7 row in game: {row['template']}", not problems, '; '.join(problems) or
                     f"{seen} = {row['profession']} + {HUTT_RACIAL}")
 
-    # Cleanup: the login server's own statements, only for characters this run made, row checked first.
-    deleted = []
+    # Cleanup: the login server's own statements, only for characters this run made, row checked first; it waits
+    # for the zone's save to move the new rows into characters (no bodies are logged in meanwhile).
     if created and not opts['keep']:
-        time.sleep(5)  # the bodies have quit; give the zone a moment to save their logout
-        for row in created:
-            info = db.get(row['oid'])
-            if not info or int(info[1]) != ids.get(row['account']) or info[2].lower() != row['name'].split()[0].lower():
-                deleted.append((row['oid'], f'skipped: row {info} does not match the run'))
-                continue
-            for statement in cleanup_statements(row['oid'], info[1]):
-                sql(statement)
-            where = cleanup_where(row['oid'], info[1])
-            moved = int(sql(f'SELECT count(*) FROM deleted_characters WHERE {where}').strip())
-            left = int(sql(f'SELECT count(*) FROM characters WHERE {where}').strip())
-            deleted.append((row['oid'], 'deleted' if moved == 1 and left == 0 else f'moved {moved}, left {left}'))
+        waited = time.time()
+        if getattr(g, 'control', None):
+            g.control.publish('running', 'bodies done; cleanup waits for the zone save')
+        deleted = delete_characters(created, ids)
         record['cleanup'] = deleted
+        record['cleanup_wait_s'] = round(time.time() - waited)
         good = [oid for oid, state in deleted if state == 'deleted']
         g.check('cleanup: every new character moved to deleted_characters', len(good) == len(created),
-                f'{len(good)} of {len(created)}; the zone purges them on its next delete pass' +
+                f"{len(good)} of {len(created)} after {record['cleanup_wait_s']} s waiting for the save; the zone "
+                'purges them on its next delete pass' +
                 ('; ' + '; '.join(f'{o}: {s}' for o, s in deleted if s != 'deleted') if len(good) < len(created) else ''))
     elif created:
         g.note(f'--keep: {len(created)} characters left in place: ' + ', '.join(r['name'] for r in created))
@@ -776,8 +863,28 @@ def run(g):
            f"{record['sweep_s']} s with {opts['parallel']} at a time")
 
 
+def cleanup_command(path):
+    """creation-sweep.py cleanup ROWS.json (root): delete what an earlier run left (e.g. it stopped before the save)."""
+    path = Path(path)
+    record = json.loads(path.read_text(encoding='utf-8'))
+    created = [r for r in record.get('characters', []) + record.get('refusals', []) if r.get('created') and r.get('oid')]
+    ids = {name: info['id'] for name, info in record['accounts'].items()}
+    began = time.time()
+    deleted = delete_characters(created, ids)
+    record['cleanup_later'] = {'at': time.strftime('%Y-%m-%d %I:%M %p'), 'waited_s': round(time.time() - began),
+                               'states': deleted}
+    path.write_text(json.dumps(record, indent=1, default=str), encoding='utf-8')
+    good = sum(state == 'deleted' for _, state in deleted)
+    print(f'cleanup: {good} of {len(created)} moved to deleted_characters after {round(time.time() - began)} s')
+    for oid, state in deleted:
+        if state != 'deleted':
+            print(f'  {oid}: {state}')
+
+
 if __name__ == '__main__':
     argv = sys.argv[1:]
+    if argv[:1] == ['cleanup']:
+        sys.exit(cleanup_command(argv[1]))
     for flag, key in (('--data-only', 'CREATION_SWEEP_DATA_ONLY'), ('--keep', 'CREATION_SWEEP_KEEP')):
         if flag in argv:
             os.environ[key] = '1'

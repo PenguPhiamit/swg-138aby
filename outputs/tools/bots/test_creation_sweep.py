@@ -133,6 +133,36 @@ class Data(unittest.TestCase):
         self.assertIsNone(cs.expected_attributes(t, 'human_male', 'jedi'))
 
 
+def creation_table(blocks):
+    """A profession_defaults-shaped IFF: a skill form, then one PTMP block per player template."""
+    iff = cs.iff
+    ptmps = [iff.form('PTMP', iff.chunk('NAME', f'object/creature/player/shared_{who}.iff'.encode() + b'\0'),
+                      *[iff.chunk('ITEM', b'\0\0\0\0' + item.encode() + b'\0') for item in items])
+             for who, items in blocks.items()]
+    return iff.build([iff.form('PRFI', iff.form('0000', iff.form('SKLS', iff.chunk('SKIL', b'x\0')), *ptmps))])
+
+
+class StartingItems(unittest.TestCase):
+    def test_items_and_missing_templates(self):
+        import tempfile
+        data = creation_table({'ithorian_male': ['object/tangible/wearables/ithorian/shared_ith_jacket_s16.iff',
+                                                 'object/tangible/wearables/ithorian/shared_ith_pants_s01.iff'],
+                               'hutt_male': []})
+        self.assertEqual(cs.starting_items(data), [
+            ('ithorian_male', 'object/tangible/wearables/ithorian/ith_jacket_s16.iff'),
+            ('ithorian_male', 'object/tangible/wearables/ithorian/ith_pants_s01.iff')])
+        with tempfile.TemporaryDirectory() as scripts:
+            lua = Path(scripts, 'object/tangible/wearables/ithorian/ith_pants_s01.lua')
+            lua.parent.mkdir(parents=True)
+            lua.write_text('-- template')
+            label, ok, detail = cs.starting_item_check(read=lambda rel: (data, 'x'), scripts=Path(scripts))
+        self.assertFalse(ok)
+        self.assertEqual(detail.split('; ')[0],
+                         'default_pc_equipment ithorian_male: object/tangible/wearables/ithorian/ith_jacket_s16.iff')
+        self.assertIn('combat_brawler ithorian_male', detail)
+        self.assertEqual(cs.starting_item_check(scripts=Path('/no/such/folder'))[1], None)
+
+
 class Plan(unittest.TestCase):
     def plan(self, taken=(), accounts=24, seed='s'):
         return cs.plan_characters(tables()['pairs'], [f'a{i}' for i in range(accounts)], set(taken), random.Random(seed))
@@ -296,6 +326,25 @@ class Results(unittest.TestCase):
         self.assertEqual(len(ours), 3)
         self.assertEqual((noise, other), (2, 1))
 
+    def test_console_error_after_our_login_on_the_same_thread(self):
+        # 17 Oct, 6:17:55 AM: the Ithorian Brawler's starting jacket has no server template.
+        t = 'Sat Oct 17 06:17:55 2026 [1792243075091 msec] (1110 s) Thread %s - '
+        lines = [t % 27 + '[ZoneClientSession 192.168.1.210:46489] INFO - Player 281475004100675 logged in.',
+                 t % 32 + '[ZoneClientSession 192.168.1.210:47983] INFO - Deleted Session',
+                 t % 27 + '[ObjectManager] ERROR - Failed to create object with unknown CRC: 0xf940567d',
+                 t % 27 + '[ObjectManager] ERROR - could not create object CRC = 0xf940567d template:',
+                 t % 32 + '[AiAgent] ERROR - path failed',
+                 t % 27 + '[ZoneClientSession 192.168.1.210:46489] INFO - CheckupTime = 2000',
+                 t % 27 + '[AiAgent] ERROR - path failed']
+        ours, noise, other = cs.console_findings(lines, ['Drais'], [281475004100675])
+        self.assertEqual(len(ours), 2)
+        self.assertIn('0xf940567d', ours[0])
+        self.assertEqual((noise, other), (0, 2))
+
+    def test_no_database_row(self):
+        row, t = self.row(db_template=None)
+        self.assertIn('no database row (characters or characters_dirty)', cs.judge(row, t))
+
     def test_cleanup_statements_are_the_login_servers(self):
         self.assertEqual(cs.cleanup_statements(281475002573227, 11), [
             'INSERT INTO deleted_characters SELECT *, 0 as db_deleted FROM characters WHERE character_oid = '
@@ -303,6 +352,65 @@ class Results(unittest.TestCase):
             'DELETE FROM characters WHERE character_oid = 281475002573227 AND account_id = 11 AND galaxy_id = 2;'])
         with self.assertRaises(ValueError):
             cs.cleanup_statements('1 OR 1=1', 11)
+
+
+class Cleanup(unittest.TestCase):
+    """delete_characters against a fake database: rows wait in characters_dirty until a save moves them."""
+
+    def setUp(self):
+        self.tables = {'characters_dirty': {1: (11, 'Rebecca', 'x'), 2: (12, 'Victor', 'x'), 3: (13, 'Other', 'x')},
+                       'characters': {}, 'deleted_characters': {}}
+        self.statements, self.polls = [], 0
+
+    def rows(self, oids):
+        self.polls += 1
+        if self.polls == 3:  # the zone's save, between the second and third poll
+            self.tables['characters'].update(self.tables['characters_dirty'])
+            self.tables['characters_dirty'].clear()
+        out = {}
+        for table in ('characters_dirty', 'characters'):
+            for oid in oids:
+                if oid in self.tables[table]:
+                    out[oid] = self.tables[table][oid] + (table,)
+        return out
+
+    def run_sql(self, statement):
+        self.statements.append(statement)
+        oid = int(re.search(r'character_oid = (\d+)', statement).group(1))
+        if statement.startswith('INSERT'):
+            self.tables['deleted_characters'][oid] = self.tables['characters'][oid]
+        elif statement.startswith('DELETE'):
+            del self.tables['characters'][oid]
+        elif 'FROM deleted_characters' in statement:
+            return f"{int(oid in self.tables['deleted_characters'])}\n"
+        elif 'FROM characters' in statement:
+            return f"{int(oid in self.tables['characters'])}\n"
+        return ''
+
+    def created(self):
+        return [{'oid': 1, 'account': 'grek1', 'name': 'Rebecca Quel'}, {'oid': 2, 'account': 'grek2', 'name': 'Victor A'},
+                {'oid': 3, 'account': 'grek3', 'name': 'Wrong Name'}, {'oid': 4, 'account': 'grek4', 'name': 'Gone'}]
+
+    def test_waits_for_the_save_then_deletes_only_matching_rows(self):
+        ids = {'grek1': 11, 'grek2': 12, 'grek3': 13, 'grek4': 14}
+        sleeps = []
+        states = dict(cs.delete_characters(self.created(), ids, wait_s=600, rows=self.rows, run=self.run_sql,
+                                           sleep=sleeps.append))
+        self.assertEqual(states[1], 'deleted')
+        self.assertEqual(states[2], 'deleted')
+        self.assertTrue(states[3].startswith('skipped'))  # first name differs: never touched
+        self.assertTrue(states[4].startswith('skipped'))  # no row anywhere
+        self.assertEqual(sleeps, [15, 15])
+        self.assertEqual(set(self.tables['deleted_characters']), {1, 2})
+        self.assertEqual(set(self.tables['characters']), {3})
+        self.assertFalse(any('character_oid = 3' in s for s in self.statements))
+
+    def test_no_save_in_time(self):
+        self.polls = -100  # the save never comes
+        states = dict(cs.delete_characters(self.created()[:1], {'grek1': 11}, wait_s=0, rows=self.rows,
+                                           run=self.run_sql, sleep=lambda s: None))
+        self.assertEqual(states[1], 'still in characters_dirty after 0 s: no save ran')
+        self.assertEqual(self.statements, [])
 
 
 class FakeGroup:
@@ -326,7 +434,8 @@ class Run(unittest.TestCase):
         with patch.object(cs, 'load_tables', return_value=tables()), \
                 patch.dict(os.environ, {'CREATION_SWEEP_DATA_ONLY': '1'}), patch('builtins.print') as shown:
             cs.run(g)
-        self.assertEqual(len(g.checks), 7 + (cs.archive_check()[1] is not None))
+        self.assertEqual(len(g.checks), 7 + sum(check()[1] is not None for check in (cs.archive_check,
+                                                                                    cs.starting_item_check)))
         self.assertIn('data only: no character created', g.notes)
         self.assertIn('hutt_female', shown.call_args[0][0])
 

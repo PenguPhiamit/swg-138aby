@@ -150,7 +150,7 @@ Shared proposal reference: [SWG-feature-register.md](SWG-feature-register.md) â€
 | Task (from SWG-roadmap.md) | Owner | Status | Notes |
 |---|---|---|---|
 | **C55: first-release independent non-bot dev review** | ChatGPT, High | complete; changes requested 2026-10-16 16:08 | `fbee3aa`: [report](Documentation-support/review-C55/C55-review.md); open inherited helper P1 + global spawn-gate P2; XP/delivery/city-guard source shortlist; 74 Lua checks pass; gameplay untested; no galaxy actions |
-| **C54: review playable Hutt; Artisan floater and Hutt names** | ChatGPT, High review / Medium source | review/source complete; Claude integration pending | `82e52303`, `deb3319e`, `8ebace32` on gpt/c54-hutt-floater (base 26b54813); report/tool `a07d346`, Documentation-support/hutt-c54.md; 1 P1 + 5 P2; client stats/text/builder fixes open; full build/gameplay untested; run 10 untouched |
+| **C54: review playable Hutt; Artisan floater and Hutt names** | ChatGPT, High review / Medium source | review/source complete; Claude integration pending | `82e52303`, `deb3319e`, `8ebace32` on gpt/c54-hutt-floater (base 26b54813); report/tool `a07d346`, Documentation-support/hutt-c54.md; 1 P1 + 5 P2; client stats/text/builder fixes open; full build/gameplay untested; run 10 untouched; **17 Oct 6:17 AM: F1-F3 verified in game by `creation-sweep.py`** (Hutt attributes = profession + S7 row, text and skill labels as approved, Hutt name rules; test plan section 2) |
 | **C53: apply accepted Ossus o7 decisions** | ChatGPT, Medium | staging complete 2026-10-16 | `3f64720`; POI 17 (2200, -4725), accepted settings retained; run_all ALL CHECKS PASS (119 s), 90 server references pass; client untested; nothing packed or deployed |
 | **C52: owner city answers, source cleanup and M1 probe plan** | ChatGPT, Medium | complete 2026-10-16 | `dc469f8`; excluded citations/sole-source claims removed, Q1-Q13 recorded, ordered M1 plan; documentation checks pass; implementation/runtime untested |
 | **C51: approved checkout housekeeping (morning sheet 1-3)** | ChatGPT, Low | complete 2026-10-16 | `a5b7604`; targeted ignores, 45 cached-only removals, author inventory; queues/history/local files kept; 23 ignore checks pass |
@@ -379,6 +379,21 @@ Claimed ChatGPT 2026-10-15 12:49: owned gpt/work source and offline packet test 
 Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests and early run 6 sample only. Claude retains all server/runtime ownership; no restarts or bot commands.
 
 ## Log
+
+### 2026-10-17 6:40 AM Claude: creation sweep: every species and gender created, read back and deleted (test plan section 2)
+
+- **Commits:** `b244f27` (the scenario `tools/bots/scenarios/creation-sweep.py` with its README section and offline tests), then this commit (the fixes the run turned up, 33 offline tests, results in the test plan).
+- **Run 25, 6:17 AM** (dev `7be8837a`, archive `f0191ab5`), after the main session's go. No restart and no squad or botpop commands. Report `Bot-reports/Creation/20261017-061803-creation-sweep.json`, 55 of 57 checks.
+  - **24 of 24 created and logged in**, 8 at a time: 0.3 to 1.3 s per creation, 1.3 s per login.
+  - For every one, the object CRC, the shown name and all nine starting attributes match (profession_mods + racial_mods, current equal to maximum).
+  - Name filter 21 of 21: 8 refusals with the right code, and 13 acceptances (the old substring traps, canon names stock refused, a Hutt kajidic surname).
+- **Hutt C54 F1 to F3 verified in game:** the male Medic and female Entertainer each have their profession row plus S7's 100/150/300/0/0/50/0/0/300. The limits, `desc_hutt` and the skill labels are as approved, and creation applies the Hutt's own name rules.
+- **Cleanup:** 24 of 24 moved to `deleted_characters` at 6:23 AM with the login server's statements. The run's own cleanup at 6:18 AM found no rows and touched nothing: new characters wait in `characters_dirty` until the zone's next save (about every 10 minutes). The scenario now waits for that save; so far that wait has run live only through `creation-sweep.py cleanup`.
+- **Bugs, proposed and not fixed** (each needs our archive changed and installed on client and server):
+  - **B1, stock creation text:** the Sullustan description shows the Zabrak's bonuses and the Ithorian description the Mon Calamari's (`patch_12_00`, copied unchanged into our archive).
+  - **B2, stock data gap:** the Ithorian male Brawler's starting jacket `ith_jacket_s16` has no template on the server or in the client. Each such creation logs 3 ERROR lines, and the character starts without the jacket. The sweep now checks every starting item for a server template; this is the only one missing.
+- **Also changed after the run:** account choice, the name check and the template check now read `characters_dirty`. Console errors that follow our character's login on the same server thread count as ours (that is how B2 slipped past). The "name in use" case now borrows a bot's name, not a player's.
+- **Next:** the owner decides on B1 and B2. The sweep can run again at any time on the other load-fleet accounts (53 are free).
 
 ### 2026-10-17 6:00 AM Claude: "the server keeps putting us back" fixed; test plan section 4 passes
 
