@@ -36,6 +36,8 @@ the workflow.
 Chaining (owner, 17 Oct): while the server in use is another PC, `check` starts the next topic as soon as one finishes,
 after the same checks, instead of waiting for the next timer run. It stays inside the service's 4 hours (a chained
 topic that reaches the end goes back to open) and stops after 3 failures in a row. This PC keeps one topic per run.
+When nothing open can run on the friend's PC any more, the runner writes STOP itself (owner, 17 Oct): delete it to
+resume.
 """
 import fcntl
 import hashlib
@@ -497,6 +499,37 @@ def main():
             return code
 
 
+def sort_topics(todo, server):
+    """({topic id: why it waits}, [topics that may run on server, in queue order])."""
+    held, ready, tags = {}, [], None
+    for t in todo:
+        reason = hold_reason(t, server, tags)
+        if reason == 'tags?':   # fetch the model list only when a topic names a model
+            tags = tags_of(server.base) or b''
+            reason = hold_reason(t, server, tags)
+        if reason:
+            held[t['id']] = reason
+        else:
+            ready.append(t)
+    return held, ready
+
+
+def pause(held):
+    """Owner, 17 Oct: "when the que finishes on their PC please have it pause". Called by a `check` that finds nothing
+    open it can run on the friend's PC: writes STOP (which holds every server, this PC too) and says why. Delete STOP
+    to resume."""
+    waiting = ''.join(f'- {k}: {v}\n' for k, v in held.items())
+    STOP.write_text(f"Paused by idle_research.py at {now()}: the queue finished on the friend's PC (owner, 17 Oct: "
+                    '"when the que finishes on their PC please have it pause"). No topic starts, on either PC, until '
+                    'this file is deleted.\n'
+                    + (f'\nStill open, waiting for something the server lacks:\n{waiting}' if waiting else ''),
+                    encoding='utf-8')
+    with LOG.open('a', encoding='utf-8', newline='') as f:
+        f.write(f"- {now()} queue finished on the friend's PC: paused (Agent/local-research/STOP)"
+                + (f'; {len(held)} still waiting: {", ".join(held)}' if held else '') + '\n')
+    print("queue finished on the friend's PC: paused (Agent/local-research/STOP)")
+
+
 def one_round(command, now_asked, limit):
     """One look at the queue and the server; starts the next topic if it may. Returns (None if nothing started, else
     whether the topic went well; whether the server is another PC)."""
@@ -505,18 +538,12 @@ def one_round(command, now_asked, limit):
     server, skipped, problem = choose()
     held, topic = {}, None
     if server:
-        tags = None
-        for t in todo:
-            reason = hold_reason(t, server, tags)
-            if reason == 'tags?':   # fetch the model list only when a topic names a model
-                tags = tags_of(server.base) or b''
-                reason = hold_reason(t, server, tags)
-            if reason:
-                held[t['id']] = reason
-            elif topic is None:
-                topic = t
+        held, ready = sort_topics(todo, server)
+        topic = ready[0] if ready else None
         if topic:
             server = with_topic(server, topic)
+        elif command == 'check' and not ollama_url.is_local(server.base) and not STOP.exists():
+            pause(held)
     why = ([] if not STOP.exists() else ['Agent/local-research/STOP exists']) + [problem] if problem else \
         (['Agent/local-research/STOP exists'] if STOP.exists() else []) if now_asked else \
         blockers(record=command == 'check', server=server)

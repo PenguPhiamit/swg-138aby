@@ -774,7 +774,50 @@ class IdleResearchTests(unittest.TestCase):
         code, out = self.check_now()
         self.assertEqual((code, self.statuses()), (0, {'a': 'review', 'b': 'review', 'c': 'review'}), out)
         self.assertEqual(out.count('idle: would start'), 3)
-        self.assertIn('queue empty', out.splitlines()[-1])
+        self.assertIn("queue finished on the friend's PC: paused", out)   # and then it pauses itself (below)
+        self.assertIn('STOP exists', out.splitlines()[-1])
+
+    def test_the_runner_pauses_itself_when_the_friends_queue_finishes(self):
+        self.as_other_pc()
+        self.fake.tags = ['gpt-oss:20b']
+        self.open_topics({'id': 'a'}, {'id': 'rp', 'model': 'nothere:1'})
+        self.stub_agent('(ws / "report.md").write_text("r" * 400)\n')
+        self.check_now()
+        self.assertEqual(self.statuses(), {'a': 'review', 'rp': 'open'})
+        stop = (self.root / 'STOP').read_text()
+        self.assertIn("the queue finished on the friend's PC", stop)
+        self.assertIn('- rp: needs nothere:1, not on this server', stop)
+        self.assertIn('queue finished on the friend\'s PC: paused (Agent/local-research/STOP); 1 still waiting: rp',
+                      (self.root / 'LOG.md').read_text())
+        self.open_topics({'id': 'later'})
+        self.assertIn('STOP exists', self.check_now()[1])                      # nothing starts until it is deleted
+        self.assertEqual(self.statuses(), {'later': 'open'})
+
+    def test_no_pause_while_something_can_still_run(self):
+        self.as_other_pc()
+        self.open_topics({'id': 'a'}, {'id': 'b'})
+        self.stub_agent('(ws / "report.md").write_text("r" * 400)\n')
+        with mock.patch.object(ir, 'SERVICE_S', ir.CHAIN_MIN_S - 1):   # the chain ends after a, with b still open
+            self.check_now()
+        self.assertFalse((self.root / 'STOP').exists())
+
+    def test_a_check_that_finds_the_friends_queue_already_done_pauses_too(self):
+        # the chain that ran the last topic may have been started by older code; the next check still pauses
+        self.as_other_pc()
+        self.open_topics({'id': 'a', 'status': 'review'})
+        self.assertIn('STOP exists', self.main('check')[1])
+        self.assertTrue((self.root / 'STOP').exists())
+        self.assertFalse((self.root / 'STOP').unlink() or self.main('status')[1].count('paused'))   # status only reads
+        self.assertFalse((self.root / 'STOP').exists())
+
+    def test_this_pc_never_pauses_itself(self):
+        self.local_checks()
+        self.log_request(3600)
+        self.open_topics({'id': 'a'})
+        self.stub_agent('(ws / "report.md").write_text("r" * 400)\n')
+        self.main('check')
+        self.assertEqual(self.statuses(), {'a': 'review'})
+        self.assertFalse((self.root / 'STOP').exists())
 
     def test_this_pc_still_runs_one_topic_per_check(self):
         self.local_checks()

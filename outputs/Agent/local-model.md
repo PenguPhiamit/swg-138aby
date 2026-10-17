@@ -24,6 +24,13 @@ until Claude or ChatGPT has checked it against the source.
   prompt cache grows in that PC's RAM (it took this PC down on 15 Oct). On this PC the jobs also stop below 6 GB of
   commit headroom, start only above 8 GB, and wait while the owner's SWG client runs.
 - **Owner pause:** creating `Agent/local-research/STOP` stops new topics on every server.
+- **It pauses itself when the friend's queue finishes** (owner, 17 Oct: "when the que finishes on their PC please have
+  it pause"). When a timer run finds nothing open that the friend's PC can run, it writes STOP with the time and the
+  topics still waiting (for example a model that isn't pulled), and adds a line to `LOG.md`. Nothing more runs, on
+  either PC, until someone deletes STOP. New topics added while it is paused just wait.
+- **Back to back on the friend's PC:** while it is the server, the next topic starts as soon as one finishes. Each
+  timer run stays within its 4 hours, and chaining stops after 3 failures in a row. This PC runs one topic per timer
+  run. A rerun keeps the previous report as `report.previous.md`.
 
 ## Which jobs go to it
 
