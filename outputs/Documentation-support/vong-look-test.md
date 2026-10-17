@@ -5,8 +5,50 @@ ossus, or should we do another local project to test things?" On the decision ca
 That means the local model's first real job is a Vong warrior's look. One warrior stands at the Ossus Project fields for
 the owner to see, and patrols come after that look.
 
-**Status, 17 Oct about 8:50 AM: steps 1 and 2 done. The owner picked swatch 12** (`Vong-look/gen/vonduun_12_seamless.png`,
-seed 12). Next is step 3, the bake. Nothing has been built or installed in the game.
+**Status, 17 Oct about 9:05 AM: steps 1-3 done. Swatch 12 is baked onto the armour, and seven DDS files are staged and
+checked.** Next is step 4, the clone chain. Nothing has been built into an archive or installed in the game. The owner
+asked whether this uses their GPU or RAM: the image runs used the GPU (peak 11.5 of 12.2 GB); the bake and the preview
+run Blender on the CPU only (10-16 s, small RAM).
+
+**Step 3 results (8:58 to 9:05 AM, Blender 3.6.23 on the CPU).**
+- **What the armour shader does** (read from the client: `effect/h_color2_envmask_specmap.eft` and its pixel programs):
+  - the colour texture's **alpha is the hue mask**: hue = lerp(colour 0 from `palette/white.pal`, colour 1 from
+    `palette/wr_chitin_armor.pal`, alpha);
+  - the `_spec` texture is the specular mask, and its alpha masks the environment reflection
+    (`texture/env_pseudo_irid.dds`);
+  - so our colour textures carry **alpha 0**: no palette tint, our colours exactly. That has to be DXT5; DXT1 would
+    read as alpha 1, full tint. No palette rebinding is needed (unlike the ice rancor). The stock `_spec` and env maps
+    stay referenced by name.
+- **`Vong-look/tools/bake_vonduu.py`** imports each stock male `_l0` mesh with the add-on's own importer (identity
+  matrix) and paints it with swatch 12 by box projection in object space (1.5 repeats a metre, blend 0.3), darkened by
+  ambient occlusion (0.05 m, mapped to 0.55-1). It then bakes the colour (an EMIT bake, 64 samples, 8 px margin) into
+  each piece's own UV layout at the stock size:
+
+  | Texture | Size |
+  |---|---|
+  | bicep, bracer, boots, leggings | 128x256 |
+  | chest plate, helmet | 256x256 |
+  | gloves | 128x128 |
+
+  Bicep and bracer bake from the left piece; left and right share one texture. The helmet's visor faces (`_has15`)
+  bake into a throwaway image, so the visor keeps its stock texture. All seven take 10 s. `bake_report.json` lists the
+  meshes, materials and triangle counts.
+- **Orientation, proved without stock art:** the raw UV triangles read from each `.mgn` and drawn with row 0 at the
+  top match the bake masks at 96-99% overlap, against 66-96% when flipped either way. (A first test that compared
+  stock texture detail was inconclusive, because stock textures are painted past their islands.) The one assumption
+  left is the Direct3D rule that DDS row 0 is the top of the texture; the in-game look confirms it.
+- **Brightness:** the bakes average a luminance of about 30 of 255, as dark as the swatch, and the client lights the
+  colour without a hue. `Vong-look/tools/convert_vonduu.py` therefore lifts the midtones (gamma 0.7, to about 57), sets
+  alpha 0, and writes BC3 with full mips through texconv.
+  - It checks each file: DXT5, the stock size, the stock mip count (9, gloves 8), alpha 0, and a mean colour error of
+    1.8-2.9 out of 255. All seven pass.
+  - Output: `Vong-look/staged/client/texture/armor_vonduu_*.dds` (gitignored; rebuilt by the script). The untouched
+    bakes stay in `Vong-look/bake/`.
+- **`Vong-look/tools/preview_vonduu.py`** renders the nine male pieces with the staged textures (back, back
+  three-quarter, front; `Vong-look/bake/preview_sheet.png`).
+  - It reads as dark grey crab-shell plating. Swatch 12's red crevices mostly wash out at this size, and the seamless
+    cross-blend shows as a few mirrored V shapes on the chest.
+  - It is a preview with flat studio light, no body underneath and no client lighting.
 
 **Rounds 2 and 3** (owner: "Another round", with a screenshot of an image search for the species as the look they
 want). The screenshot was used only as a description by eye. It was not fed to the model, because those pictures are

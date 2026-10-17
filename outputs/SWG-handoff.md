@@ -384,6 +384,16 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-17 9:05 AM Claude: Vong look test step 3: swatch 12 baked onto the chitin armour; seven DDS staged
+
+- **The stock chitin shader** (`h_color2_envmask_specmap`) reads the colour texture's alpha as its hue mask, so our textures carry alpha 0 (no tint) in DXT5. The stock `_spec` and env maps stay referenced.
+- **The bake:** `Vong-look/tools/bake_vonduu.py` (Blender, CPU) box-projects swatch 12 with ambient occlusion and bakes it into each male piece's own UVs at the stock sizes. All seven take 10 s. No stock pixel is used.
+- **Orientation proved** against the meshes' raw UVs (96-99% overlap; 66-96% if flipped).
+- **The DDS files:** `convert_vonduu.py` applies gamma 0.7 (the bake is very dark), sets alpha 0 and writes BC3 with full mips. Stock sizes and mip counts are checked, and all pass. Output: `Vong-look/staged/client/texture/` (gitignored).
+- **A Blender preview was sent to the owner.** It reads as dark grey crab plating; the red crevices mostly wash out.
+- **Nothing is in an archive or the client yet.** The GPU was not used for any of this.
+- **Next:** the owner's view of the preview, then step 4 (the `armor_chitin` -> `armor_vonduu` clone chain and the CRC rows).
+
 ### 2026-10-17 8:55 AM Claude: Vong look test: swatch 12 picked; skin colour checked
 
 - **Rounds 2 and 3** followed the owner's reference screenshot, used by eye only and not fed to the model. The owner picked **swatch 12**: rough dark crab shell with a red tint in the crevices.

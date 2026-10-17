@@ -1,0 +1,140 @@
+{
+ "swatch": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/gen/vonduun_12_seamless.png",
+ "scale": 1.5,
+ "textures": {
+  "armor_vonduu_bicep": {
+   "mesh": "armor_chitin_s01_bicep_l_m_l0.mgn",
+   "shader": "armor_chitin_bicep_hces24",
+   "size": [
+    128,
+    256
+   ],
+   "materials": [
+    "armor_chitin_bicep_hces24"
+   ],
+   "triangles": 298,
+   "uv_layers": [
+    "UVMap-0"
+   ],
+   "files": {
+    "color": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_bicep.png",
+    "mask": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_bicep_mask.png"
+   }
+  },
+  "armor_vonduu_bracer": {
+   "mesh": "armor_chitin_s01_bracer_l_m_l0.mgn",
+   "shader": "armor_chitin_bracer_hces24",
+   "size": [
+    128,
+    256
+   ],
+   "materials": [
+    "armor_chitin_bracer_hces24"
+   ],
+   "triangles": 113,
+   "uv_layers": [
+    "UVMap-0"
+   ],
+   "files": {
+    "color": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_bracer.png",
+    "mask": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_bracer_mask.png"
+   }
+  },
+  "armor_vonduu_boots": {
+   "mesh": "armor_chitin_s01_boots_m_l0.mgn",
+   "shader": "armor_chitin_boots_hces24",
+   "size": [
+    128,
+    256
+   ],
+   "materials": [
+    "armor_chitin_boots_hces24"
+   ],
+   "triangles": 350,
+   "uv_layers": [
+    "UVMap-0"
+   ],
+   "files": {
+    "color": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_boots.png",
+    "mask": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_boots_mask.png"
+   }
+  },
+  "armor_vonduu_chest_plate": {
+   "mesh": "armor_chitin_s01_chest_plate_m_l0.mgn",
+   "shader": "armor_chitin_chest_plate_hces24",
+   "size": [
+    256,
+    256
+   ],
+   "materials": [
+    "armor_chitin_chest_plate_hces24"
+   ],
+   "triangles": 560,
+   "uv_layers": [
+    "UVMap-0"
+   ],
+   "files": {
+    "color": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_chest_plate.png",
+    "mask": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_chest_plate_mask.png"
+   }
+  },
+  "armor_vonduu_gloves": {
+   "mesh": "armor_chitin_s01_gloves_m_l0.mgn",
+   "shader": "armor_chitin_gloves_hces24",
+   "size": [
+    128,
+    128
+   ],
+   "materials": [
+    "armor_chitin_gloves_hces24"
+   ],
+   "triangles": 456,
+   "uv_layers": [
+    "UVMap-0"
+   ],
+   "files": {
+    "color": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_gloves.png",
+    "mask": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_gloves_mask.png"
+   }
+  },
+  "armor_vonduu_helmet": {
+   "mesh": "armor_chitin_s01_helmet_m_l0.mgn",
+   "shader": "armor_chitin_visor_hces24",
+   "size": [
+    256,
+    256
+   ],
+   "materials": [
+    "armor_chitin_visor_hces24",
+    "armor_chitin_visor_has15"
+   ],
+   "triangles": 308,
+   "uv_layers": [
+    "UVMap-0"
+   ],
+   "files": {
+    "color": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_helmet.png",
+    "mask": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_helmet_mask.png"
+   }
+  },
+  "armor_vonduu_leggings": {
+   "mesh": "armor_chitin_s01_leggings_m_l0.mgn",
+   "shader": "armor_chitin_leggings_hces24",
+   "size": [
+    128,
+    256
+   ],
+   "materials": [
+    "armor_chitin_leggings_hces24"
+   ],
+   "triangles": 544,
+   "uv_layers": [
+    "UVMap-0"
+   ],
+   "files": {
+    "color": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_leggings.png",
+    "mask": "C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Vong-look/bake\\armor_vonduu_leggings_mask.png"
+   }
+  }
+ }
+}
