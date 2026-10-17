@@ -36,6 +36,8 @@ local function fighter(name, level, body, loot, social, weapon, attacks)
 		primaryWeapon = weapon,
 		secondaryWeapon = "unarmed",
 		conversationTemplate = "",
+		-- an 80 m leash instead of the stock 256 m (ai/ossus.lua; the owner was chased out of the One Sith cave, 17 Oct)
+		customAiMap = "ossusShortLeash",
 		primaryAttacks = attacks,
 		secondaryAttacks = {}
 	}

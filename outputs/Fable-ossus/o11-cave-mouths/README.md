@@ -115,3 +115,57 @@ restart the test galaxy.
 2. The adit, now on the canyon rim at 4475 -193: same questions. Can you see the canyon from the camp?
 3. The old places (2300 1925 and 4590 -310): is the ground whole again?
 4. Do the ghostfire waypoint (the vault mouth) and Moll's adit waypoint lead to the new places?
+
+## O11c: one step for all six caves, plus the One Sith leash (run 29 reports, 12:00-12:30 PM)
+
+The owner's reports, in their words, and what each one turned out to be:
+
+| Report | Cause | Fix |
+|---|---|---|
+| Vault: "theres water there now, but i can still traverse"; adit: "adit has waTER TOO" (seen at the old places) | The pits went below the 38.5 m global water table | The O11b move (above), now in this step |
+| "Sanctuary has a tree in the mouth" | Terrain flora. No snapshot object or screenplay prop stands within 8 m of the mouth; the rubble apron's boulders and the plains' trees reach it. | A 50 m flora-off circle at every cave: trees, bushes, grass, far trees and boulders |
+| One Sith cave: "a big gap in the terrain you can fall through at the entrance" | O2 cut a real terrain hole (`AEXC`, 9 m) centred on each doorway of its three hillside caves, so half of it was in front of the door, where there is no cave floor | O2's three hole layers are left out of the build |
+| One Sith cave: "it also has a floor in the doorway" | These are hillside caves: the tunnel runs into a hill, and O2's 30 m apron, levelled to the door's floor height, took the hill away, so the ground crossed the tunnel | The hill is rebuilt behind each door (below) |
+| "one sith never de aggro" (chased a couple of hundred metres, attacking all the way) | Stock Core3: a mob goes home only when its target is more than **256 m** from the mob's home (`CheckRetreat 256` in `ai/default.lua` `moveDefault`). The home check uses world positions, so a mob spawned in a cave cell is measured correctly. Not a cell bug, and no C++ needed. | Our fighters get an 80 m leash (below) |
+
+**Terrain and snapshot: `build_cave_fix.py`** (on the installed run-29 archive `beb06d28…`; it contains O11b's move):
+- **Flatland caves** (sanctuary, vault, adit): the pits as before, at the moved places for the vault and the adit.
+- **Hillside caves** (the One Sith cell `cave_01` at (-2976, -4978), the east foothill cave `cave_03`, the north cave `cave_02`): no holes. Behind each door,
+  the ground is raised to 1.5 m over the roof of the first three tunnel cells (floor + 9.25 m, the door's height), and falls away from them at 0.6 m per
+  metre (about 31°) to the natural ground, in 1 m cells and 0.5 m terraces. It is raised only behind the door's own plane, where the cave's rock face
+  covers the step; the apron in front of the door is untouched. These layers go at the end of the layer list, after O2's apron, which would otherwise
+  flatten them again.
+
+  | Cave | Hill area | Hill heights | Ground inside the first three tunnel cells, before → after |
+  |---|---|---|---|
+  | One Sith cell (west) | 1,067 m² | 49.0-63.5 m | 32 → 0 floor points |
+  | East foothill cave | 881 m² | 60.0-70.0 m | 46 → 0 |
+  | North cave | 966 m² | 46.5-57.0 m | 38 → 0 |
+
+- **Checks** (`checks-cave-fix.json`): no tunnel at any of the six caves has ground less than 10 m over its first cell. The planet's height changes only inside the
+  pits and hills (the whole-planet grid shows 0 changes outside them). No snapshot object stands in a pit or a hill. The terrain has no `terrain hole`
+  affector left (3 before). The three terrain images stay byte-identical.
+- **Archive:** **`work/ossus-cave-fix/local_planets-cave-fix.tre`, sha256 `1f441e01870253f94231b13ae4b2aef93fc75558eac28d6ae6272deb5d168f91`**
+  (6,851,817 bytes, 337 entries; `terrain/ossus.trn` and `snapshot/ossus.ws` change and the other 335 stay byte for byte). It replaces `cc6f4ebb` and
+  `beb06d28`, and takes about 15 minutes to build.
+
+**Server: three patches, all against Core3-dev `25344120`** (each and both together pass `git apply --check`; `luac -p` clean):
+1. `core3-dev-ossus-dungeon-floor.patch`: already applied in dev (`4906d2eb`). Skip it.
+2. `core3-dev-ossus-cave-moves.patch`: the archivist, the foreman, the miner, the vault's ghostfire site, two waypoints and two no-spawn circles move with the caves.
+3. `core3-dev-ossus-short-leash.patch`:
+   - a new file, `ai/ossus.lua`: a copy of the stock `moveDefault` with the leash at 80 m (node ids prefixed "ossus", so the copy shares no id with the stock tree);
+   - `ai/templates.lua`: includes it and adds a custom AI map `ossusShortLeash` that overrides only the MOVE tree;
+   - `mobile/sandbox/ossus_world.lua`: the six O8 fighters (the One Sith acolytes, enforcers and Keeper, and the three camp leaders) use that map.
+
+   A stubbed load of `default.lua` + `ossus.lua` gives 18 of 18 nodes, unique ids, every parent present, and the leash at 80. Stock mobs keep 256 m.
+   Not tested on a server: the bot test with the Forn dungeon crew was not run (the board claim would be the main session's).
+
+**The bot route** in the sanctuary (cell 1 to cell 11 in one "doorway step") is still the route builder's, as reported above; nothing here changes it.
+
+**Install (the main session):** this archive in both places; patches 2 and 3 on Core3-dev; `check_lua.py`; restart the test galaxy.
+
+**Questions for the owner's visit (in your own words)**
+1. The One Sith cave (-2976 -4960): any gap you can fall through, or a floor in the doorway? How does the hill behind the cave face look from the sides and from above?
+2. The east foothill cave (4896 -4960) and the north cave (1376 5920): the same questions.
+3. The sanctuary mouth: any tree or boulder left in it?
+4. Pull a One Sith out of the cave and run: how far do they follow you before they turn back?

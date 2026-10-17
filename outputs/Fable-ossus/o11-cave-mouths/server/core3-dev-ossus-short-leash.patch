@@ -1,0 +1,66 @@
+diff --git a/MMOCoreORB/bin/scripts/ai/ossus.lua b/MMOCoreORB/bin/scripts/ai/ossus.lua
+new file mode 100644
+index 0000000..5d490d5
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/ai/ossus.lua
+@@ -0,0 +1,23 @@
++-- Ossus fighters (O8 camps and the One Sith cell; O11, 17 Oct 2026): the stock move tree with a shorter leash.
++-- Stock moveDefault sends a mob home when its target is more than 256 m from the mob's home (CheckRetreat 256); the
++-- owner was chased "a couple hundred meters" out of the One Sith cave. This copy leashes at OSSUS_LEASH m instead.
++-- Node ids get an "ossus" prefix so the copy never shares an id with the stock tree.
++
++local OSSUS_LEASH = 80
++
++moveOssusShortLeash = {}
++for i, node in ipairs(moveDefault) do
++	local copy = { id = "ossus" .. node.id, name = node.name, pid = node.pid == "none" and "none" or ("ossus" .. node.pid) }
++	if node.args ~= nil then
++		copy.args = {}
++		for k, v in pairs(node.args) do
++			copy.args[k] = v
++		end
++		if node.name == "CheckRetreat" then
++			copy.args.condition = OSSUS_LEASH
++		end
++	end
++	moveOssusShortLeash[i] = copy
++end
++
++addAiTemplate("moveOssusShortLeash", moveOssusShortLeash)
+diff --git a/MMOCoreORB/bin/scripts/ai/templates.lua b/MMOCoreORB/bin/scripts/ai/templates.lua
+index 9b47e83..2fe53da 100644
+--- a/MMOCoreORB/bin/scripts/ai/templates.lua
++++ b/MMOCoreORB/bin/scripts/ai/templates.lua
+@@ -9,6 +9,7 @@ includeFile("herd.lua")
+ includeFile("pet.lua")
+ includeFile("static.lua")
+ includeFile("villageRaider.lua")
++includeFile("ossus.lua")
+ 
+ customMap = {
+ 	{ "crackdown", {
+@@ -34,6 +35,11 @@ customMap = {
+ 		{ROOT, "rootCitypatrol"},
+ 		{IDLE, "idleCitypatrol"}
+ 	}},
++
++	-- Ossus fighters: an 80 m leash (ai/ossus.lua)
++	{ "ossusShortLeash", {
++		{MOVE, "moveOssusShortLeash"}
++	}},
+ }
+ 
+ bitmaskLookup = {
+diff --git a/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_world.lua b/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_world.lua
+index 02ac164..da54b7d 100644
+--- a/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_world.lua
++++ b/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_world.lua
+@@ -36,6 +36,8 @@ local function fighter(name, level, body, loot, social, weapon, attacks)
+ 		primaryWeapon = weapon,
+ 		secondaryWeapon = "unarmed",
+ 		conversationTemplate = "",
++		-- an 80 m leash instead of the stock 256 m (ai/ossus.lua; the owner was chased out of the One Sith cave, 17 Oct)
++		customAiMap = "ossusShortLeash",
+ 		primaryAttacks = attacks,
+ 		secondaryAttacks = {}
+ 	}

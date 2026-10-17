@@ -1,0 +1,238 @@
+{
+ "base": {
+  "path": "work/ossus-cave-mouths/local_planets-cave-mouths.tre",
+  "sha256": "beb06d28108ace018468de351420412705dcdcbad0a7d55a64258a7f3b871afa",
+  "entries": 337
+ },
+ "out": {
+  "path": "work/ossus-cave-fix/local_planets-cave-fix.tre",
+  "bytes": 6851817,
+  "sha256": "1f441e01870253f94231b13ae4b2aef93fc75558eac28d6ae6272deb5d168f91",
+  "entries": 337
+ },
+ "untouched_identical": 335,
+ "changed": [
+  "snapshot/ossus.ws",
+  "terrain/ossus.trn"
+ ],
+ "trn_sha256": "5025ccedb20c83333502f4a39a7e21369109fbfcca60e4fbd4133aeaec44d85e",
+ "o2_doorway_holes": {
+  "layers_left_out": 3,
+  "terrain_hole_affectors_before": 3,
+  "after": 0
+ },
+ "caves": {
+  "6900107": {
+   "name": "sanctuary (cave_06_flatland_s01_damprock)",
+   "node": [
+    2063.0,
+    2718.2,
+    167.01,
+    340.0
+   ],
+   "first_tunnel_bottom_m": 154.84,
+   "flora_off_radius_m": 50.0,
+   "fix": "pit under the mound behind the door",
+   "pit_height_m": 152.84,
+   "pit_area_m2": 1543.0,
+   "rectangles": 46
+  },
+  "6900193": {
+   "name": "vault (cave_07_flatland_s02)",
+   "node": [
+    1940.0,
+    2237.0,
+    167.7,
+    0.0
+   ],
+   "first_tunnel_bottom_m": 134.8,
+   "flora_off_radius_m": 50.0,
+   "fix": "pit under the mound behind the door",
+   "pit_height_m": 132.8,
+   "pit_area_m2": 1553.0,
+   "rectangles": 40
+  },
+  "6900295": {
+   "name": "adit (cave_08_flatland_s03)",
+   "node": [
+    4488.0,
+    -206.0,
+    100.73,
+    315.0
+   ],
+   "first_tunnel_bottom_m": 82.65,
+   "flora_off_radius_m": 50.0,
+   "fix": "pit under the mound behind the door",
+   "pit_height_m": 80.65,
+   "pit_area_m2": 1532.0,
+   "rectangles": 50
+  },
+  "6900002": {
+   "name": "west foothill cave, the One Sith cell (cave_01)",
+   "node": [
+    -2976.3,
+    -4978.0,
+    56.1,
+    0.0
+   ],
+   "first_tunnel_bottom_m": 35.93,
+   "flora_off_radius_m": 50.0,
+   "fix": "the hill rebuilt over the tunnel behind the door",
+   "hill_area_m2": 1067.0,
+   "hill_heights_m": [
+    49.0,
+    63.5
+   ],
+   "hill_layers": 30,
+   "rectangles": 701
+  },
+  "6900014": {
+   "name": "east foothill cave (cave_03)",
+   "node": [
+    4895.7,
+    -4978.0,
+    62.6,
+    0.0
+   ],
+   "first_tunnel_bottom_m": 36.52,
+   "flora_off_radius_m": 50.0,
+   "fix": "the hill rebuilt over the tunnel behind the door",
+   "hill_area_m2": 881.0,
+   "hill_heights_m": [
+    60.0,
+    70.0
+   ],
+   "hill_layers": 21,
+   "rectangles": 518
+  },
+  "6900044": {
+   "name": "north cave (cave_02)",
+   "node": [
+    1393.4,
+    5915.1,
+    46.1,
+    0.0
+   ],
+   "first_tunnel_bottom_m": 8.93,
+   "flora_off_radius_m": 50.0,
+   "fix": "the hill rebuilt over the tunnel behind the door",
+   "hill_area_m2": 966.0,
+   "hill_heights_m": [
+    46.5,
+    57.0
+   ],
+   "hill_layers": 22,
+   "rectangles": 586
+  }
+ },
+ "tunnels_after": {
+  "sanctuary (cave_06_flatland_s01_damprock)": {
+   "r1_floor_vertices": 98,
+   "under_ground": 0,
+   "under_ground_less_than_10m": 0,
+   "ground_below_water_over_tunnel": 0,
+   "shallow_points": []
+  },
+  "vault (cave_07_flatland_s02)": {
+   "r1_floor_vertices": 149,
+   "under_ground": 75,
+   "under_ground_less_than_10m": 0,
+   "ground_below_water_over_tunnel": 0,
+   "shallow_points": []
+  },
+  "adit (cave_08_flatland_s03)": {
+   "r1_floor_vertices": 149,
+   "under_ground": 3,
+   "under_ground_less_than_10m": 0,
+   "ground_below_water_over_tunnel": 0,
+   "shallow_points": []
+  },
+  "west foothill cave, the One Sith cell (cave_01)": {
+   "r1_floor_vertices": 98,
+   "under_ground": 90,
+   "under_ground_less_than_10m": 0,
+   "ground_below_water_over_tunnel": 0,
+   "shallow_points": []
+  },
+  "east foothill cave (cave_03)": {
+   "r1_floor_vertices": 149,
+   "under_ground": 135,
+   "under_ground_less_than_10m": 0,
+   "ground_below_water_over_tunnel": 0,
+   "shallow_points": []
+  },
+  "north cave (cave_02)": {
+   "r1_floor_vertices": 149,
+   "under_ground": 140,
+   "under_ground_less_than_10m": 0,
+   "ground_below_water_over_tunnel": 0,
+   "shallow_points": []
+  }
+ },
+ "hillside_ground_inside_tunnels": {
+  "west foothill cave, the One Sith cell (cave_01)": {
+   "ground_inside_tunnel_cells_1_3_before": 32,
+   "after": 0,
+   "after_examples": []
+  },
+  "east foothill cave (cave_03)": {
+   "ground_inside_tunnel_cells_1_3_before": 46,
+   "after": 0,
+   "after_examples": []
+  },
+  "north cave (cave_02)": {
+   "ground_inside_tunnel_cells_1_3_before": 38,
+   "after": 0,
+   "after_examples": []
+  }
+ },
+ "planet_grid_vs_natural_outside_pits": {
+  "samples": 29241,
+  "changed": 0,
+  "worst_m": 0.0,
+  "note": "flora and the removed holes do not change heights"
+ },
+ "props_in_pits": [],
+ "moved_groups": {
+  "vault": {
+   "yaw": 0.0,
+   "ground_spread_m": 0.38
+  },
+  "adit": {
+   "yaw": 315.0,
+   "ground_spread_m": 0.07
+  }
+ },
+ "flora_off_circles": [
+  [
+   2063.0,
+   2718.199951171875,
+   50.0
+  ],
+  [
+   1940.0,
+   2237.0,
+   50.0
+  ],
+  [
+   4488.0,
+   -206.0,
+   50.0
+  ],
+  [
+   -2976.300048828125,
+   -4978.0,
+   50.0
+  ],
+  [
+   4895.7001953125,
+   -4978.0,
+   50.0
+  ],
+  [
+   1393.4000244140625,
+   5915.10009765625,
+   50.0
+  ]
+ ]
+}
