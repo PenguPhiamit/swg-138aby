@@ -89,7 +89,7 @@ class Galaxy:
 
     def talk(self, bot, target):
         npc = self.objects[target]
-        if npc.get('key') == 'informant_npc_lvl_1':
+        if npc.get('key') == 'spynet_operative':
             for record in bot.records.values():
                 if record['type'] == 'bounty' and 'datapad' in record['container_name']:
                     record['waypoint'] = dict(record['end'])
@@ -577,6 +577,15 @@ class Missions(Base):
         self.assertEqual(trip['downed'], ['Ilsa'])
         self.assertFalse([o for o in self.galaxy.objects.values() if o.get('key') == 'kreetle'])
 
+    def test_guarded_walk_gives_up_when_the_bot_does_not_move(self):
+        g, (dask,) = self.crew('Dask')
+        dask.walk = lambda x, y, z=None, cell=None, tries=3: {'ok': False, 'error': 'destination more than 2 km away'}
+        started = self.clock.now
+        trip = M.guarded_walk(g, [dask], {'x': dask.x + 3300, 'y': dask.y}, 'imperial/recon')
+        self.assertFalse(trip['arrived'])
+        self.assertLess(self.clock.now - started, 60)  # three stalled legs, not 15 minutes
+        self.assertTrue(any('stopped' in n for n in g.notes))
+
     def test_crafting_errand_crafts_the_quest_item(self):
         g, bots = self.crew('Besh', 'Dova', 'Pell', 'Varo')
         dova = bots[1]
@@ -685,7 +694,7 @@ class Missions(Base):
         g, bots = self.crew('Forn', 'Brask', 'Dask', 'Ressa', 'Mirren')
         ressa = bots[3]
         terminal = self.galaxy.terminal('bounty', ressa.x, ressa.y)
-        self.galaxy.creature('informant_npc_lvl_1', ressa.x - 50, ressa.y)
+        self.galaxy.creature('spynet_operative', ressa.x - 50, ressa.y)
         done = M.bounty(g, ressa, terminal, 'bounty/bounty', 5)
         self.assertEqual(g.failed(), [])
         self.assertEqual(done['paid'], 3000 // 5)
@@ -776,7 +785,7 @@ class Scenarios(Base):
             self.galaxy.terminal(ttype, bots[0].x + 20, bots[0].y)
         for i in range(20):
             self.galaxy.creature('worrt', bots[0].x + 200 + 5 * i, bots[0].y)
-        self.galaxy.creature('informant_npc_lvl_1', bots[0].x - 50, bots[0].y)
+        self.galaxy.creature('spynet_operative', bots[0].x - 50, bots[0].y)
         load('forn-missions').run(g)
         self.assertEqual(g.failed(), [])
         self.assertEqual(g.results(), ['bounty/bounty', 'imperial/deliver', 'rebel/deliver', 'scout/hunting',

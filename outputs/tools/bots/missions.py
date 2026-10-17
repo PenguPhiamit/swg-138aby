@@ -484,17 +484,24 @@ def guarded_walk(g, team, point, label, leg=250, minutes=15):
     began, fights, downed = time.time(), 0, set()
     deadline = began + minutes * 60
     team = list(team)
+    stalls, last = 0, None
     while time.time() < deadline:
-        here = team[0].status()
-        if (here.get('me') or {}).get('posture') == 'dead':
+        status = team[0].status()
+        if (status.get('me') or {}).get('posture') == 'dead':
+            break
+        here = origin(team[0])  # world coordinates, also indoors (the terminal's position)
+        spot = (round(status.get('x') or 0), round(status.get('y') or 0), status.get('cell'))
+        stalls = stalls + 1 if spot == last else 0
+        last = spot
+        if stalls >= 3:  # three legs without moving (17 Oct 12:22 PM: Dask retried a 3.3 km leg for 25 minutes)
             break
         left = far(here, point)
         if left <= 20:
             return {'arrived': True, 'seconds': round(time.time() - began, 1), 'fights': fights, 'downed': sorted(downed)}
         share = min(1.0, leg / left) if left != math.inf else 1.0
         step = {'x': here['x'] + (point['x'] - here['x']) * share, 'y': here['y'] + (point['y'] - here['y']) * share}
-        if here.get('cell'):  # cell-local x and y: head straight for the point; the body routes out of the building
-            step = dict(point)
+        if status.get('cell') and not team[0].__dict__.get('mission_origin'):
+            step = dict(point)  # no world position known: head for the point; the body routes out of the building
         g.parallel(*[lambda b=b, i=i: b.walk(step['x'] + 3 * i, step['y'], tries=2) for i, b in enumerate(team)])
         for _ in range(4):  # clear what is next to us before the next leg
             standing = [b for b in team if b.posture() not in DOWN]
@@ -903,8 +910,10 @@ def bounty(g, bot, terminal, label, divisor, limit=4000):
     since = mark(bot)
     old = where(mission_now(bot, mission['oid']) or {})
     squad = {b.oid for b in g.bots}
-    helpers = sorted((o for o in bot.locate(f'informant_npc_lvl_{level}', radius=3000) if not o.get('cell')),
-                     key=lambda o: o.get('distance', 0))
+    # Every informant is a "spynet_operative" (mobile/mission/informant_npc.lua); only its conversation names the
+    # level. Mos Eisley's three outdoor ones are level 1, its one indoors level 3 (screenplays/cities).
+    helpers = sorted((o for o in locate_from(bot, 'spynet_operative', 3000, origin(bot) if bot.status().get('cell') else None)
+                      if not o.get('cell') or level > 1), key=lambda o: o.get('distance', 0))
     if not g.check(f'{label}: an outdoor level-{level} informant within 3 km', helpers,
                    helpers and {k: helpers[0].get(k) for k in ('name', 'distance')}):
         return unfinished(g, label, mission, f'no level-{level} informant', began, level=level)

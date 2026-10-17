@@ -4,8 +4,8 @@
 All at once, each bot on its own mission:
   * Forn: an easy hunting mission at the scout terminal (15 kills of the creature found most often nearby, alone,
     since the server counts the owner's kills);
-  * Mirren: the nearest recon mission at the scout terminal (walk into the area 1-4 km out; her inventory was full
-    on 17 Oct, and a recon puts nothing in it);
+  * then Forn: the nearest recon mission at the scout terminal (walk into the area 1-4 km out; Mirren, the crew's
+    Doctor, died walking there alone on 17 Oct);
   * Ressa: an NPC bounty at the bounty terminal. She gets Novice Bounty Hunter only on the test galaxy (level-1
     missions: a Mos Eisley informant gives the target's waypoint, no droids), then walks there and kills the target.
     Dask got Investigation I on 17 Oct, which makes his missions level 2 (informants in Mos Espa and Wayfar, droids);
@@ -34,7 +34,8 @@ def run(g):
         if mission is None:
             return None
         if mtype == 'hunting':
-            return M.hunt(g, bot, mission, before, divisor, 'scout/hunting')
+            M.hunt(g, bot, mission, before, divisor, 'scout/hunting')
+            return scout(bot, slot, 'recon') if bot.posture() not in M.DOWN else None  # then a recon, armed
         return M.recon(g, bot, mission, before, divisor, 'scout/recon')
 
     def hunter(bot):  # M.bounty grants the bounty hunter boxes before it lists (the terminal needs the novice box)
@@ -45,7 +46,8 @@ def run(g):
         terminal = M.at_terminal(g, bot, ttype, at=points[bot.first])
         return terminal and M.faction(g, bot, terminal, ttype, divisor)
 
-    g.parallel(lambda: scout(forn, 0, 'hunting'), lambda: scout(mirren, 1, 'recon'), lambda: hunter(ressa),
+    # Mirren (Doctor) died walking alone to a recon area on 17 Oct 12:28 PM, so Forn does the recon after his hunt.
+    g.parallel(lambda: scout(forn, 0, 'hunting'), lambda: hunter(ressa),
                lambda: side(dask, 'imperial'), lambda: side(brask, 'rebel'))
     M.summary(g)
     for bot in g.bots:
