@@ -1,0 +1,1045 @@
+{
+ "schema": "hutta-home-1",
+ "units": "x east, y north, z up (m); yaw/heading = compass degrees (0 north, 90 east)",
+ "first_id": 7170001,
+ "last_id": 7170029,
+ "seats": [
+  {
+   "kajidic": "Kessoth",
+   "tower_id": 390000058,
+   "centre": [
+    -652.0,
+    1680.0
+   ],
+   "entrance_face": 180,
+   "entrance": [
+    -652.0,
+    1639.0
+   ],
+   "marked_by_lamp": 390000225
+  },
+  {
+   "kajidic": "Vollaka",
+   "tower_id": 390000059,
+   "centre": [
+    -984.0,
+    1562.0
+   ],
+   "entrance_face": 90,
+   "entrance": [
+    -934.0,
+    1562.0
+   ],
+   "marked_by_lamp": 390000221
+  },
+  {
+   "kajidic": "Dromuul",
+   "tower_id": 390000091,
+   "centre": [
+    -889.0,
+    1812.0
+   ],
+   "entrance_face": 180,
+   "entrance": [
+    -889.0,
+    1771.0
+   ],
+   "marked_by_lamp": 390000278
+  },
+  {
+   "kajidic": "Narissik",
+   "tower_id": 390000092,
+   "centre": [
+    -540.0,
+    1501.0
+   ],
+   "entrance_face": 270,
+   "entrance": [
+    -581.0,
+    1501.0
+   ],
+   "marked_by_lamp": 390000270
+  },
+  {
+   "kajidic": "Tashuga",
+   "tower_id": null,
+   "centre": [
+    -750.0,
+    1920.0
+   ],
+   "entrance_face": 180,
+   "entrance": [
+    -750.0,
+    1879.0
+   ],
+   "marked_by_lamp": null
+  },
+  {
+   "kajidic": "Bessolo",
+   "tower_id": null,
+   "centre": [
+    -1050.0,
+    1690.0
+   ],
+   "entrance_face": 90,
+   "entrance": [
+    -1009.0,
+    1690.0
+   ],
+   "marked_by_lamp": null
+  }
+ ],
+ "statics": [
+  {
+   "id": 7170001,
+   "template": "object/static/structure/general/shared_all_banner_generic_s01.iff",
+   "x": -642.0,
+   "y": 1638.0,
+   "z": 80.0,
+   "yaw": 180,
+   "why": "Kessoth seat: banner",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170002,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -638.0,
+   "y": 1638.0,
+   "z": 80.0,
+   "yaw": 180,
+   "why": "Kessoth seat: amber lamp",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170003,
+   "template": "object/static/structure/general/shared_all_banner_generic_s01.iff",
+   "x": -662.0,
+   "y": 1638.0,
+   "z": 80.0,
+   "yaw": 180,
+   "why": "Kessoth seat: banner",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170004,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -666.0,
+   "y": 1638.0,
+   "z": 80.0,
+   "yaw": 180,
+   "why": "Kessoth seat: amber lamp",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170005,
+   "template": "object/static/structure/general/shared_all_banner_generic_s01.iff",
+   "x": -933.0,
+   "y": 1572.0,
+   "z": 80.0,
+   "yaw": 90,
+   "why": "Vollaka seat: banner",
+   "allowed_box_overlaps": [
+    390000035
+   ],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170006,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -933.0,
+   "y": 1576.0,
+   "z": 80.0,
+   "yaw": 90,
+   "why": "Vollaka seat: amber lamp",
+   "allowed_box_overlaps": [
+    390000035
+   ],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170007,
+   "template": "object/static/structure/general/shared_all_banner_generic_s01.iff",
+   "x": -933.0,
+   "y": 1552.0,
+   "z": 80.0,
+   "yaw": 90,
+   "why": "Vollaka seat: banner",
+   "allowed_box_overlaps": [
+    390000035
+   ],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170008,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -933.0,
+   "y": 1548.0,
+   "z": 80.0,
+   "yaw": 90,
+   "why": "Vollaka seat: amber lamp",
+   "allowed_box_overlaps": [
+    390000035
+   ],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170009,
+   "template": "object/static/structure/general/shared_all_banner_generic_s01.iff",
+   "x": -879.0,
+   "y": 1770.0,
+   "z": 80.0,
+   "yaw": 180,
+   "why": "Dromuul seat: banner",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170010,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -875.0,
+   "y": 1770.0,
+   "z": 80.0,
+   "yaw": 180,
+   "why": "Dromuul seat: amber lamp",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170011,
+   "template": "object/static/structure/general/shared_all_banner_generic_s01.iff",
+   "x": -899.0,
+   "y": 1770.0,
+   "z": 80.0,
+   "yaw": 180,
+   "why": "Dromuul seat: banner",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170012,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -903.0,
+   "y": 1770.0,
+   "z": 80.0,
+   "yaw": 180,
+   "why": "Dromuul seat: amber lamp",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170013,
+   "template": "object/static/structure/general/shared_all_banner_generic_s01.iff",
+   "x": -582.0,
+   "y": 1491.0,
+   "z": 80.0,
+   "yaw": 270,
+   "why": "Narissik seat: banner",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170014,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -582.0,
+   "y": 1487.0,
+   "z": 80.0,
+   "yaw": 270,
+   "why": "Narissik seat: amber lamp",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170015,
+   "template": "object/static/structure/general/shared_all_banner_generic_s01.iff",
+   "x": -582.0,
+   "y": 1511.0,
+   "z": 80.0,
+   "yaw": 270,
+   "why": "Narissik seat: banner",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170016,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -582.0,
+   "y": 1515.0,
+   "z": 80.0,
+   "yaw": 270,
+   "why": "Narissik seat: amber lamp",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170017,
+   "template": "object/building/tatooine/shared_tower_jabbas_palace.iff",
+   "x": -750.0,
+   "y": 1920.0,
+   "z": 80.09,
+   "yaw": 0,
+   "why": "Tashuga seat: new tower",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.41
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170018,
+   "template": "object/static/structure/general/shared_all_banner_generic_s01.iff",
+   "x": -740.0,
+   "y": 1878.0,
+   "z": 80.0,
+   "yaw": 180,
+   "why": "Tashuga seat: banner",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170019,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -736.0,
+   "y": 1878.0,
+   "z": 80.0,
+   "yaw": 180,
+   "why": "Tashuga seat: amber lamp",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170020,
+   "template": "object/static/structure/general/shared_all_banner_generic_s01.iff",
+   "x": -760.0,
+   "y": 1878.0,
+   "z": 80.0,
+   "yaw": 180,
+   "why": "Tashuga seat: banner",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170021,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -764.0,
+   "y": 1878.0,
+   "z": 80.0,
+   "yaw": 180,
+   "why": "Tashuga seat: amber lamp",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170022,
+   "template": "object/building/tatooine/shared_tower_jabbas_palace.iff",
+   "x": -1050.0,
+   "y": 1690.0,
+   "z": 80.02,
+   "yaw": 0,
+   "why": "Bessolo seat: new tower",
+   "allowed_box_overlaps": [],
+   "ground": [
+    79.74,
+    81.45
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170023,
+   "template": "object/static/structure/general/shared_all_banner_generic_s01.iff",
+   "x": -1008.0,
+   "y": 1700.0,
+   "z": 80.02,
+   "yaw": 90,
+   "why": "Bessolo seat: banner",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.01,
+    80.03
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170024,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -1008.0,
+   "y": 1704.0,
+   "z": 80.01,
+   "yaw": 90,
+   "why": "Bessolo seat: amber lamp",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.02
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170025,
+   "template": "object/static/structure/general/shared_all_banner_generic_s01.iff",
+   "x": -1008.0,
+   "y": 1680.0,
+   "z": 80.0,
+   "yaw": 90,
+   "why": "Bessolo seat: banner",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.01
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170026,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -1008.0,
+   "y": 1676.0,
+   "z": 80.0,
+   "yaw": 90,
+   "why": "Bessolo seat: amber lamp",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.01
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170027,
+   "template": "object/static/structure/corellia/shared_corl_fountain_circle_s01.iff",
+   "x": -767.0,
+   "y": 1515.0,
+   "z": 80.0,
+   "yaw": 0,
+   "why": "council palace approach: fountain",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170028,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -776.0,
+   "y": 1520.0,
+   "z": 80.0,
+   "yaw": 0,
+   "why": "council palace approach: amber lamp",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  },
+  {
+   "id": 7170029,
+   "template": "object/static/structure/general/shared_streetlamp_medium_style_02_on.iff",
+   "x": -758.0,
+   "y": 1520.0,
+   "z": 80.0,
+   "yaw": 0,
+   "why": "council palace approach: amber lamp",
+   "allowed_box_overlaps": [],
+   "ground": [
+    80.0,
+    80.0
+   ],
+   "overlaps_existing": [],
+   "overlaps_new": [],
+   "stock_template": true,
+   "ok": true
+  }
+ ],
+ "people": [
+  {
+   "kind": "npc",
+   "key": "hutta_kessoth_outfitter",
+   "x": -798.5,
+   "y": 1489.0,
+   "heading": 90,
+   "note": "Kessoth outfitter, in front of the tent at -808 1489",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "hutta_vollaka_broker",
+   "x": -739.5,
+   "y": 1469.0,
+   "heading": 270,
+   "note": "Vollaka broker, in front of the tent at -730 1469",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "hutta_council_herald",
+   "x": -766.0,
+   "y": 1700.0,
+   "heading": 0,
+   "note": "the council herald, facing arrivals from the starport",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "terminal",
+   "key": "kajidic_contracts",
+   "x": -782.0,
+   "y": 1692.0,
+   "heading": 90,
+   "note": "mission terminal, west side of the avenue",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "terminal",
+   "key": "kajidic_contracts",
+   "x": -749.0,
+   "y": 1692.0,
+   "heading": 270,
+   "note": "mission terminal, east side of the avenue",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "patron_nikto",
+   "x": -790.0,
+   "y": 1700.0,
+   "heading": 135,
+   "note": "a cargo runner",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "patron_nikto",
+   "x": -744.0,
+   "y": 1702.0,
+   "heading": 225,
+   "note": "a cargo runner",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "terminal",
+   "key": "smuggling_runs",
+   "x": -662.0,
+   "y": 1533.0,
+   "heading": 180,
+   "note": "mission terminal, west of the cantina door",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "terminal",
+   "key": "smuggling_runs",
+   "x": -628.0,
+   "y": 1533.0,
+   "heading": 180,
+   "note": "mission terminal, east of the cantina door",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "trainer_smuggler",
+   "x": -650.0,
+   "y": 1531.0,
+   "heading": 180,
+   "note": "the stock smuggler trainer, at the cantina door",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "patron_nikto",
+   "x": -770.0,
+   "y": 1497.0,
+   "heading": 200,
+   "note": "a bazaar idler",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "patron_nikto",
+   "x": -760.0,
+   "y": 1445.0,
+   "heading": 20,
+   "note": "a bazaar idler",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "patron_nikto",
+   "x": -785.0,
+   "y": 1462.0,
+   "heading": 110,
+   "note": "a bazaar idler",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "gamorrean_guard",
+   "x": -646.0,
+   "y": 1639.0,
+   "heading": 180,
+   "note": "a Kessoth guard",
+   "seat": "Kessoth",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "gamorrean_guard",
+   "x": -658.0,
+   "y": 1639.0,
+   "heading": 180,
+   "note": "a Kessoth guard",
+   "seat": "Kessoth",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "gamorrean_guard",
+   "x": -934.0,
+   "y": 1568.0,
+   "heading": 90,
+   "note": "a Vollaka guard",
+   "seat": "Vollaka",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [
+    390000035
+   ],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "gamorrean_guard",
+   "x": -934.0,
+   "y": 1556.0,
+   "heading": 90,
+   "note": "a Vollaka guard",
+   "seat": "Vollaka",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [
+    390000035
+   ],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "gamorrean_guard",
+   "x": -883.0,
+   "y": 1771.0,
+   "heading": 180,
+   "note": "a Dromuul guard",
+   "seat": "Dromuul",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "gamorrean_guard",
+   "x": -895.0,
+   "y": 1771.0,
+   "heading": 180,
+   "note": "a Dromuul guard",
+   "seat": "Dromuul",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "gamorrean_guard",
+   "x": -581.0,
+   "y": 1495.0,
+   "heading": 270,
+   "note": "a Narissik guard",
+   "seat": "Narissik",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "gamorrean_guard",
+   "x": -581.0,
+   "y": 1507.0,
+   "heading": 270,
+   "note": "a Narissik guard",
+   "seat": "Narissik",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "gamorrean_guard",
+   "x": -744.0,
+   "y": 1879.0,
+   "heading": 180,
+   "note": "a Tashuga guard",
+   "seat": "Tashuga",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "gamorrean_guard",
+   "x": -756.0,
+   "y": 1879.0,
+   "heading": 180,
+   "note": "a Tashuga guard",
+   "seat": "Tashuga",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "gamorrean_guard",
+   "x": -1009.0,
+   "y": 1696.0,
+   "heading": 90,
+   "note": "a Bessolo guard",
+   "seat": "Bessolo",
+   "ground": 80.03,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "kind": "npc",
+   "key": "gamorrean_guard",
+   "x": -1009.0,
+   "y": 1684.0,
+   "heading": 90,
+   "note": "a Bessolo guard",
+   "seat": "Bessolo",
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  }
+ ],
+ "npc_points": [
+  {
+   "from_lamp": 390000216,
+   "x": -719.0,
+   "y": 1624.0,
+   "heading": 0,
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "from_lamp": 390000217,
+   "x": -697.0,
+   "y": 1572.0,
+   "heading": 0,
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [
+    390000018
+   ],
+   "ok": true
+  },
+  {
+   "from_lamp": 390000218,
+   "x": -696.0,
+   "y": 1496.0,
+   "heading": 0,
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [
+    390000060
+   ],
+   "ok": true
+  },
+  {
+   "from_lamp": 390000219,
+   "x": -834.0,
+   "y": 1489.0,
+   "heading": 180,
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "from_lamp": 390000229,
+   "x": -834.0,
+   "y": 1606.0,
+   "heading": 180,
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "from_lamp": 390000246,
+   "x": -818.0,
+   "y": 1673.0,
+   "heading": 180,
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [
+    390000046
+   ],
+   "ok": true
+  },
+  {
+   "from_lamp": 390000260,
+   "x": -598.0,
+   "y": 1744.0,
+   "heading": 0,
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [],
+   "ok": true
+  },
+  {
+   "from_lamp": 390000263,
+   "x": -561.0,
+   "y": 1658.0,
+   "heading": 90,
+   "ground": 80.0,
+   "touches_props": [],
+   "inside_building_box": [
+    390000096
+   ],
+   "ok": true
+  }
+ ],
+ "trade_yard": {
+  "template": "object/building/poi/tatooine_hutt_businessmen_camp_large1.iff",
+  "x": -440.0,
+  "y": 1530.0,
+  "ground": [
+   79.48,
+   81.15
+  ],
+  "overlaps": [],
+  "ok": true
+ },
+ "farthest_static_from_town_centre_m": 364,
+ "problems": []
+}

@@ -1,0 +1,779 @@
+diff --git a/MMOCoreORB/bin/scripts/managers/mission/mission_cities.lua b/MMOCoreORB/bin/scripts/managers/mission/mission_cities.lua
+index 057bdb9..58c8f66 100644
+--- a/MMOCoreORB/bin/scripts/managers/mission/mission_cities.lua
++++ b/MMOCoreORB/bin/scripts/managers/mission/mission_cities.lua
+@@ -34,5 +34,6 @@ cities = {
+ 	{ "tatooine", "Wayfar", -5176, -6574, 165 },
+ 	{ "yavin4", "Yavin IV Mining Outpost", -312, 4865, 100 },
+ 	{ "hoth", "Scavenger Starport", 0, -2000, 150 },
++	{ "hutta", "Bilbousa", -747, 1556, 400 },
+ 	{ "yavin4", "Yavin IV Labor Outpost", -6925, -5707, 130 }
+ }
+diff --git a/MMOCoreORB/bin/scripts/managers/mission/mission_npc_spawn_points.lua b/MMOCoreORB/bin/scripts/managers/mission/mission_npc_spawn_points.lua
+index 93470fa..19b3e99 100644
+--- a/MMOCoreORB/bin/scripts/managers/mission/mission_npc_spawn_points.lua
++++ b/MMOCoreORB/bin/scripts/managers/mission/mission_npc_spawn_points.lua
+@@ -4161,3 +4161,23 @@ planet_hoth = PlanetSpawnMap:new {
+ }
+ 
+ universe:addPlanet(planet_hoth);
++
++
++-- Sandbox: Nal Hutta (PL-04): mission NPC spawn points for deliver missions in Bilbousa, 3 m off Darklight's street
++-- lamps along the avenue and the side streets (home.json, npc_points). Same shape as Hoth's: x, y, heading in radians,
++-- spawn type 2 = NEUTRALSPAWN.
++planet_hutta = PlanetSpawnMap:new {
++	name = "hutta",
++	npcs = {
++		{ -719.0, 1624.0, 0.00, 2 },
++		{ -697.0, 1572.0, 0.00, 2 },
++		{ -696.0, 1496.0, 0.00, 2 },
++		{ -834.0, 1489.0, 3.14, 2 },
++		{ -834.0, 1606.0, 3.14, 2 },
++		{ -818.0, 1673.0, 3.14, 2 },
++		{ -598.0, 1744.0, 0.00, 2 },
++		{ -561.0, 1658.0, 1.57, 2 }
++	}
++}
++
++universe:addPlanet(planet_hutta);
+diff --git a/MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua b/MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua
+index c888fab..09b027d 100644
+--- a/MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua
++++ b/MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua
+@@ -2,7 +2,11 @@ require("scripts.managers.planet.regions")
+ 
+ -- Nal Hutta first look (PL-03, 16 Oct 2026). Darklight's Bilbousa: the snapshot's town fills a 480 x 600 m box
+ -- (x -989..-505, y 1260..1853); the city region is centred on that box, so its r 400 reaches every corner, and the
+--- no-build circle keeps r 600. No spawn areas anywhere yet: nothing spawns on Nal Hutta until its fauna pass.
++-- no-build circle keeps r 600.
++-- PL-04 (17 Oct 2026; outputs/Fable-species/s7-hutt/nal-hutta-home.md): the swamp spawns. Three rings round the town,
++-- habitat spawners only (no world fallback): the near swamp 650-1,600 m (levels 19-25), the lowlands 1,600-3,200 m
++-- (31-38) and the deep swamp 3,200-5,200 m (37-56). The inner edge stays 50 m outside the no-build circle. Lairs never
++-- spawn in the 75 m water (PlanetManager::isSpawningPermittedAt), so only the dry ground of each ring fills.
+ hutta_regions = {
+ 	-- No Build Zones
+ 	{"northedge_hutta_nobuild", -8000, 7640, {RECTANGLE, 8000, 8000}, NOSPAWNAREA + NOBUILDZONEAREA},
+@@ -13,4 +17,9 @@ hutta_regions = {
+ 	-- Bilbousa, the capital (the client names it from datatables/clientregion/hutta.iff: -746 1645, r 300)
+ 	{"@hutta_region_names:bilbousa", -747, 1556, {CIRCLE, 400}, CITY + NOSPAWNAREA},
+ 	{"hutta_bilbousa_nobuild", -747, 1556, {CIRCLE, 600}, NOBUILDZONEAREA},
++
++	-- The swamp (PL-04)
++	{"hutta_lowlands_near", -747, 1556, {RING, 650, 1600}, SPAWNAREA, {"hutta_lowlands_near"}, 48},
++	{"hutta_lowlands_mid", -747, 1556, {RING, 1600, 3200}, SPAWNAREA, {"hutta_lowlands_mid"}, 64},
++	{"hutta_deep_swamp", -747, 1556, {RING, 3200, 5200}, SPAWNAREA, {"hutta_deep_swamp"}, 64},
+ }
+diff --git a/MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua b/MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua
+index 12f66d5..ce7879f 100644
+--- a/MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua
++++ b/MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua
+@@ -660,8 +660,12 @@ hutta = {
+ 	badgeAreas = {
+ 	},
+ 
++	-- PL-04: no entry here. Core3 does not read navAreas from this file (PlanetManagerImplementation builds nav
++	-- areas only from regions flagged NAVAREA and from city regions), so the first look's hutta_bilbousa line did
++	-- nothing. Bilbousa's mesh is the city region's own, hutta_city_bilbousa (CityRegion::createNavMesh), built at
++	-- the first start and read back from navareas.db afterwards: "0 nav areas loaded" on the first look's fresh
++	-- copy, "1 nav areas loaded for hutta" on every start since.
+ 	navAreas = {
+-		{"hutta_bilbousa", -747, 1556, 400},
+ 	},
+ 
+ 	planetObjects = {
+diff --git a/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/hutta_home_conv.lua b/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/hutta_home_conv.lua
+new file mode 100644
+index 0000000..1051d2a
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/hutta_home_conv.lua
+@@ -0,0 +1,66 @@
++-- Nal Hutta as the Hutt home (PL-04): conversations. Our own text; the handlers are in screenplays/sandbox/hutta_home.lua.
++-- Era 138-139 ABY: Krayt is dead on Coruscant and his Empire is breaking up; the kajidics never stopped trading.
++
++local function screen(template, id, text, options, stop)
++	template:addScreen(ConvoScreen:new {
++		id = id,
++		customDialogText = text,
++		stopConversation = stop and "true" or "false",
++		options = options or {}
++	})
++end
++
++local function convo(handler)
++	return ConvoTemplate:new {
++		initialScreen = "greet",
++		templateType = "Lua",
++		luaClassHandler = handler,
++		screens = {}
++	}
++end
++
++-- the council herald, at the starport end of the avenue
++local herald = convo("HuttaCouncilHeraldConvoHandler")
++screen(herald, "greet", "Welcome to Bilbousa, seat of the kajidic council of Nal Hutta. Kindly keep your weapons holstered. The council's peace holds inside the city, and the Gamorreans keep it.", {
++	{"What is this place?", "about"},
++	{"Who runs the city?", "kajidics"},
++	{"Where can I find work?", "work"},
++	{"Goodbye.", "bye"},
++})
++screen(herald, "about", "Nal Hutta is the Hutts' world, and Bilbousa is its capital. The council sits in the great palace at the south end of this avenue. Since the Sith emperor died on Coruscant, the council has had a great deal of new business. Beyond the town shelf the swamp begins. The lowlands breed borgles, squills and worse, and the deep swamp is worse still.", {
++	{"Who runs the city?", "kajidics"},
++	{"Where can I find work?", "work"},
++	{"Goodbye.", "bye"},
++})
++screen(herald, "kajidics", "Six kajidics keep seats in Bilbousa. Kessoth, Vollaka, Dromuul and Narissik hold the old towers; Tashuga and Bessolo built on the new ground to the north and west. Lamps and banners mark each tower's door, and its guards stand there. The clans trade with everyone and trust no one.", {
++	{"What is this place?", "about"},
++	{"Where can I find work?", "work"},
++	{"Goodbye.", "bye"},
++})
++screen(herald, "work", "Contract terminals stand on both sides of this avenue. There are more by the cantina door, for those who prefer quieter runs, and the smugglers' trainer drinks there too. In the bazaar, by the council palace, the Kessoth outfitter and the Vollaka broker keep stalls.", {
++	{"What is this place?", "about"},
++	{"Who runs the city?", "kajidics"},
++	{"Goodbye.", "bye"},
++})
++screen(herald, "bye", "May your dealings profit you, and the council.", {}, true)
++addConversationTemplate("hutta_council_herald_convo_template", herald)
++
++-- the Kessoth outfitter, in the bazaar
++local outfitter = convo("HuttaKessothOutfitterConvoHandler")
++screen(outfitter, "greet", "A customer. Kessoth dresses its crews in its own colours, and for a fair price, so can you. No Hutt wears anything so small, of course.", {
++	{"Show me what you sell.", "sale"},
++	{"Goodbye.", "bye"},
++})
++screen(outfitter, "sale", "Take your time. Kessoth is patient with paying customers.", {}, true)
++screen(outfitter, "bye", "Come back when you have credits.", {}, true)
++addConversationTemplate("hutta_kessoth_outfitter_convo_template", outfitter)
++
++-- the Vollaka broker, in the bazaar
++local broker = convo("HuttaVollakaBrokerConvoHandler")
++screen(broker, "greet", "Spice jars, lamps, small comforts for a Hutt's hall. Vollaka goods, honestly come by. Mostly.", {
++	{"Show me your goods.", "sale"},
++	{"Goodbye.", "bye"},
++})
++screen(broker, "sale", "Look all you like. Touching is extra.", {}, true)
++screen(broker, "bye", "Vollaka remembers its customers.", {}, true)
++addConversationTemplate("hutta_vollaka_broker_convo_template", broker)
+diff --git a/MMOCoreORB/bin/scripts/mobile/conversations.lua b/MMOCoreORB/bin/scripts/mobile/conversations.lua
+index 1c078a2..71e01d7 100644
+--- a/MMOCoreORB/bin/scripts/mobile/conversations.lua
++++ b/MMOCoreORB/bin/scripts/mobile/conversations.lua
+@@ -341,3 +341,4 @@ includeFile("custom_content/conversations.lua")
+ includeFile("conversations/sandbox/sandbox_mercenary_broker_conv.lua")
+ includeFile("conversations/sandbox/sandbox_big_game_hunter_conv.lua")
+ includeFile("conversations/sandbox/ossus_people_conv.lua")
++includeFile("conversations/sandbox/hutta_home_conv.lua")
+diff --git a/MMOCoreORB/bin/scripts/mobile/sandbox/hutta_home.lua b/MMOCoreORB/bin/scripts/mobile/sandbox/hutta_home.lua
+new file mode 100644
+index 0000000..05e3856
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/sandbox/hutta_home.lua
+@@ -0,0 +1,54 @@
++-- Nal Hutta as the Hutt home (PL-04; outputs/Fable-species/s7-hutt/nal-hutta-home.md): the Bilbousa NPCs who talk.
++-- Placed by screenplays/sandbox/hutta_home.lua. Stock bodies only; names and text are our own (the kajidic names are
++-- the S7 README's inventions, section 5.5, not Legends clans). Guards, idlers and the trainer reuse stock templates.
++
++local function huttaNpc(name, body, conversation)
++	return Creature:new {
++		objectName = "",
++		customName = name,
++		socialGroup = "",
++		mobType = MOB_NPC,
++		faction = "",
++		level = 30,
++		chanceHit = 0.39,
++		damageMin = 290,
++		damageMax = 300,
++		baseXp = 0,
++		baseHAM = 8400,
++		baseHAMmax = 10200,
++		armor = 0,
++		resists = {0,0,0,0,0,0,0,-1,-1},
++		meatType = "",
++		meatAmount = 0,
++		hideType = "",
++		hideAmount = 0,
++		boneType = "",
++		boneAmount = 0,
++		milk = 0,
++		tamingChance = 0,
++		ferocity = 0,
++		pvpBitmask = NONE,
++		creatureBitmask = NONE,
++		optionsBitmask = AIENABLED + INVULNERABLE + CONVERSABLE,
++		diet = HERBIVORE,
++		templates = {body},
++		lootGroups = {},
++		primaryWeapon = "unarmed",
++		secondaryWeapon = "none",
++		conversationTemplate = conversation,
++		primaryAttacks = {},
++		secondaryAttacks = {}
++	}
++end
++
++local people = {
++	-- the bazaar, in front of the tents
++	{"hutta_kessoth_outfitter", "Dessuk Kessoth, outfitter", "object/mobile/hutt_male.iff", "hutta_kessoth_outfitter_convo_template"},
++	{"hutta_vollaka_broker", "Garulla Vollaka, broker", "object/mobile/hutt_female.iff", "hutta_vollaka_broker_convo_template"},
++	-- the starport end of the avenue
++	{"hutta_council_herald", "a council protocol droid", "object/mobile/3po_protocol_droid_silver.iff", "hutta_council_herald_convo_template"},
++}
++
++for _, p in ipairs(people) do
++	CreatureTemplates:addCreatureTemplate(huttaNpc(p[2], p[3], p[4]), p[1])
++end
+diff --git a/MMOCoreORB/bin/scripts/mobile/serverobjects.lua b/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
+index 92bf6fd..12113e8 100644
+--- a/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/mobile/serverobjects.lua
+@@ -59,3 +59,5 @@ includeFile("sandbox/sandbox_mercenaries.lua")
+ includeFile("sandbox/sandbox_world_bosses.lua")
+ -- Ossus people (PL-02)
+ includeFile("sandbox/ossus_people.lua")
++-- Nal Hutta as the Hutt home (PL-04)
++includeFile("sandbox/hutta_home.lua")
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/destroy_mission/hutta_destroy_missions.lua b/MMOCoreORB/bin/scripts/mobile/spawn/destroy_mission/hutta_destroy_missions.lua
+new file mode 100644
+index 0000000..d96c2b5
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/destroy_mission/hutta_destroy_missions.lua
+@@ -0,0 +1,59 @@
++-- Nal Hutta destroy-mission lairs for the mission terminals in Bilbousa (PL-04). Same shape as
++-- hoth_destroy_missions.lua: MissionManagerImplementation::getRandomLairSpawn reads <zone>_destroy_missions and takes a
++-- lair with minDifficulty <= player level + 5 and maxDifficulty >= min(player level - 5, minLevelCeiling). Only lairs
++-- with a building can be mission targets. The rows are the lowland lairs of spawn/hutta (levels 19 to 34).
++hutta_destroy_missions = {
++	minLevelCeiling = 30,
++	lairSpawns = {
++		{
++			lairTemplateName = "endor_borgle_putrid_neutral_small",
++			minDifficulty = 19,
++			maxDifficulty = 25,
++			size = 25,
++		},
++		{
++			lairTemplateName = "endor_squill_noxious_neutral_small",
++			minDifficulty = 19,
++			maxDifficulty = 25,
++			size = 25,
++		},
++		{
++			lairTemplateName = "talus_famished_sludge_panther_lair_neutral_mdium",
++			minDifficulty = 20,
++			maxDifficulty = 26,
++			size = 25,
++		},
++		{
++			lairTemplateName = "endor_borgle_life_sapper_neutral_small",
++			minDifficulty = 25,
++			maxDifficulty = 30,
++			size = 25,
++		},
++		{
++			lairTemplateName = "talus_greater_sludge_panther_lair_neutral_medium",
++			minDifficulty = 25,
++			maxDifficulty = 30,
++			size = 25,
++		},
++		{
++			lairTemplateName = "endor_squill_festering_neural_small",
++			minDifficulty = 31,
++			maxDifficulty = 36,
++			size = 25,
++		},
++		{
++			lairTemplateName = "endor_borgle_fierce_neutral_small",
++			minDifficulty = 32,
++			maxDifficulty = 37,
++			size = 25,
++		},
++		{
++			lairTemplateName = "naboo_fambaa_lair_neutral_large",
++			minDifficulty = 34,
++			maxDifficulty = 39,
++			size = 30,
++		},
++	}
++}
++
++addDestroyMissionGroup("hutta_destroy_missions", hutta_destroy_missions);
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_deep_swamp.lua b/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_deep_swamp.lua
+new file mode 100644
+index 0000000..b1403f6
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_deep_swamp.lua
+@@ -0,0 +1,44 @@
++-- Nal Hutta (PL-04): the deep swamp, 3,200 to 5,200 m from Bilbousa. Levels 37 to 56: the lowland hunters thin out
++-- and mire marauders (56) hunt in packs. No lair building here yet, so no destroy missions this far out.
++hutta_deep_swamp = {
++	lairSpawns = {
++		{
++			lairTemplateName = "naboo_rogue_fambaa_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 37,
++			maxDifficulty = 42,
++			numberToSpawn = 15,
++			weighting = 20,
++			size = 20,
++		},
++		{
++			lairTemplateName = "rori_dreaded_vir_vur_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 38,
++			maxDifficulty = 43,
++			numberToSpawn = 15,
++			weighting = 20,
++			size = 20,
++		},
++		{
++			lairTemplateName = "endor_blurrg_diseased_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 37,
++			maxDifficulty = 42,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
++		{
++			lairTemplateName = "talus_mire_marauder_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 55,
++			maxDifficulty = 60,
++			numberToSpawn = 15,
++			weighting = 25,
++			size = 25,
++		},
++	}
++}
++
++addSpawnGroup("hutta_deep_swamp", hutta_deep_swamp);
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_mid.lua b/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_mid.lua
+new file mode 100644
+index 0000000..90dc4c0
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_mid.lua
+@@ -0,0 +1,72 @@
++-- Nal Hutta (PL-04): the Hutta lowlands, 1,600 to 3,200 m from Bilbousa. Levels 31 to 38: fambaa herds in the
++-- open marsh, festering squills, fierce borgles and the hunters that follow them (swamp tusk cat stalkers, diseased
++-- blurrgs, rogue fambaa, dreaded vir vurs).
++hutta_lowlands_mid = {
++	lairSpawns = {
++		{
++			lairTemplateName = "endor_squill_festering_neural_small",
++			spawnLimit = -1,
++			minDifficulty = 31,
++			maxDifficulty = 36,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 25,
++		},
++		{
++			lairTemplateName = "endor_borgle_fierce_neutral_small",
++			spawnLimit = -1,
++			minDifficulty = 32,
++			maxDifficulty = 37,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 25,
++		},
++		{
++			lairTemplateName = "naboo_swamp_tusk_cat_stalker_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 32,
++			maxDifficulty = 37,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
++		{
++			lairTemplateName = "naboo_fambaa_lair_neutral_large",
++			spawnLimit = -1,
++			minDifficulty = 34,
++			maxDifficulty = 39,
++			numberToSpawn = 15,
++			weighting = 20,
++			size = 30,
++		},
++		{
++			lairTemplateName = "naboo_fambaa_herd_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 34,
++			maxDifficulty = 39,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 25,
++		},
++		{
++			lairTemplateName = "endor_blurrg_diseased_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 37,
++			maxDifficulty = 42,
++			numberToSpawn = 15,
++			weighting = 10,
++			size = 20,
++		},
++		{
++			lairTemplateName = "naboo_rogue_fambaa_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 37,
++			maxDifficulty = 42,
++			numberToSpawn = 15,
++			weighting = 10,
++			size = 20,
++		},
++	}
++}
++
++addSpawnGroup("hutta_lowlands_mid", hutta_lowlands_mid);
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_near.lua b/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_near.lua
+new file mode 100644
+index 0000000..b1ac0ba
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_near.lua
+@@ -0,0 +1,64 @@
++-- Nal Hutta (PL-04): the swamp ring round Bilbousa, 650 to 1,600 m from the town centre (hutta_regions.lua).
++-- Stock creatures of rot and fouled water, levels 19 to 25: players come here after the starter worlds. The five with a
++-- lair building are also the planet's destroy-mission targets (spawn/destroy_mission/hutta_destroy_missions.lua).
++-- Difficulty bands follow the creature levels, as the stock tables do; creatures keep their template levels.
++hutta_lowlands_near = {
++	lairSpawns = {
++		{
++			lairTemplateName = "endor_borgle_putrid_neutral_small",
++			spawnLimit = -1,
++			minDifficulty = 19,
++			maxDifficulty = 25,
++			numberToSpawn = 15,
++			weighting = 20,
++			size = 25,
++		},
++		{
++			lairTemplateName = "endor_squill_noxious_neutral_small",
++			spawnLimit = -1,
++			minDifficulty = 19,
++			maxDifficulty = 25,
++			numberToSpawn = 15,
++			weighting = 20,
++			size = 25,
++		},
++		{
++			lairTemplateName = "talus_famished_sludge_panther_lair_neutral_mdium",
++			spawnLimit = -1,
++			minDifficulty = 20,
++			maxDifficulty = 26,
++			numberToSpawn = 15,
++			weighting = 20,
++			size = 25,
++		},
++		{
++			lairTemplateName = "talus_greater_sludge_panther_pack_neutral_none",
++			spawnLimit = -1,
++			minDifficulty = 25,
++			maxDifficulty = 30,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 20,
++		},
++		{
++			lairTemplateName = "endor_borgle_life_sapper_neutral_small",
++			spawnLimit = -1,
++			minDifficulty = 25,
++			maxDifficulty = 30,
++			numberToSpawn = 15,
++			weighting = 15,
++			size = 25,
++		},
++		{
++			lairTemplateName = "talus_greater_sludge_panther_lair_neutral_medium",
++			spawnLimit = -1,
++			minDifficulty = 25,
++			maxDifficulty = 30,
++			numberToSpawn = 15,
++			weighting = 10,
++			size = 25,
++		},
++	}
++}
++
++addSpawnGroup("hutta_lowlands_near", hutta_lowlands_near);
+diff --git a/MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua b/MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua
+index 205b619..c68f76d 100644
+--- a/MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua
+@@ -504,6 +504,7 @@ includeFile("spawn/destroy_mission/factional_imperial_destroy_missions.lua")
+ includeFile("spawn/destroy_mission/factional_neutral_destroy_missions.lua")
+ includeFile("spawn/destroy_mission/factional_rebel_destroy_missions.lua")
+ includeFile("spawn/destroy_mission/hoth_destroy_missions.lua") -- Sandbox: Hoth terminal missions (Fable batch C)
++includeFile("spawn/destroy_mission/hutta_destroy_missions.lua") -- Sandbox: Nal Hutta terminal missions (PL-04)
+ 
+ -- Sandbox: Hoth world spawns (Bellum Gero, AGPL-3.0)
+ includeFile("spawn/hoth/hoth_world.lua")
+@@ -518,3 +519,8 @@ includeFile("spawn/hoth/hoth_scavenger_zone.lua")
+ includeFile("spawn/ossus/ossus_forest.lua")
+ includeFile("spawn/ossus/ossus_open_ground.lua")
+ includeFile("spawn/ossus/ossus_wetlands.lua")
++
++-- Nal Hutta swamp spawns (PL-04)
++includeFile("spawn/hutta/hutta_lowlands_near.lua")
++includeFile("spawn/hutta/hutta_lowlands_mid.lua")
++includeFile("spawn/hutta/hutta_deep_swamp.lua")
+diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_home.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_home.lua
+new file mode 100644
+index 0000000..46b2910
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_home.lua
+@@ -0,0 +1,202 @@
++-- Nal Hutta as the Hutt home (PL-04; outputs/Fable-species/s7-hutt/nal-hutta-home.md).
++--
++-- Spawns Bilbousa's people (positions in hutta_home_places.lua, generated from home.json): the council herald at the
++-- starport end of the avenue, the Kessoth outfitter and the Vollaka broker in the bazaar, two Gamorrean guards at each
++-- of the six kajidic seats, the stock smuggler trainer at the cantina door and a few idlers. It also places four general
++-- mission terminals (two "Kajidic contracts" on the avenue, two "Smuggling runs" by the cantina) and one Hutt
++-- businessmen camp as the east trade yard. Pre-CU has no smuggler mission type: the terminals give the general
++-- destroy and deliver missions, with the lowland lairs of hutta_destroy_missions as targets.
++-- The vendors sell stock items for credits through a list box (the event promoter's pattern). Hutt players pay the
++-- kin price. Our own code and text. Non-persistent spawns: they are made again at every server start.
++
++HuttaHome = ScreenPlay:new {
++	planet = "hutta",
++
++	huttSpecies = 234,          -- CreatureObject.idl HUTT = 0xEA (S7)
++	kinPrice = 0.9,             -- Hutt players pay 90 percent
++
++	terminalTemplate = "object/tangible/terminal/terminal_mission.iff",
++	terminalNames = {
++		kajidic_contracts = "Kajidic contracts",
++		smuggling_runs = "Smuggling runs",
++	},
++
++	-- name, template, price in credits
++	wares = {
++		outfitter = {
++			{ "Kessoth crew vest, first style", "object/tangible/wearables/vest/vest_hutt_gang_s01.iff", 2500 },
++			{ "Kessoth crew vest, second style", "object/tangible/wearables/vest/vest_hutt_gang_s02.iff", 2500 },
++			{ "Kessoth crew vest, third style", "object/tangible/wearables/vest/vest_hutt_gang_s03.iff", 2500 },
++		},
++		broker = {
++			{ "Spice jar, first style", "object/tangible/container/jar/jar_spice_s01.iff", 600 },
++			{ "Spice jar, second style", "object/tangible/container/jar/jar_spice_s02.iff", 600 },
++			{ "Spice jar, third style", "object/tangible/container/jar/jar_spice_s03.iff", 600 },
++			{ "Standing candlestick lamp", "object/tangible/furniture/all/frn_all_lamp_candlestick_free_s01_lit.iff", 900 },
++			{ "Standing candlestick lamp, second style", "object/tangible/furniture/all/frn_all_lamp_candlestick_free_s02_lit.iff", 900 },
++			{ "Desert hall lamp", "object/tangible/furniture/all/frn_all_lamp_tatt_s01_lit.iff", 750 },
++		},
++	},
++}
++
++registerScreenPlay("HuttaHome", true)
++
++function HuttaHome:start()
++	if not isZoneEnabled(self.planet) then
++		return
++	end
++
++	self:spawnPeople()
++	self:spawnTradeYard()
++end
++
++function HuttaHome:spawnPeople()
++	for _, p in ipairs(HuttaHomePlaces.people) do
++		local kind, key, x, y, heading, label = p[1], p[2], p[3], p[4], p[5], p[6]
++		local z = getWorldFloor(x, y, self.planet)
++
++		if kind == "terminal" then
++			local pTerminal = spawnSceneObject(self.planet, self.terminalTemplate, x, z, y, 0, math.rad(heading))
++
++			if pTerminal == nil then
++				printLuaError("HuttaHome: could not place a terminal at " .. x .. ", " .. y)
++			else
++				SceneObject(pTerminal):setCustomObjectName(self.terminalNames[key])
++			end
++		else
++			local pMobile = spawnMobile(self.planet, key, 0, x, z, y, heading, 0)
++
++			if pMobile == nil then
++				printLuaError("HuttaHome: could not spawn " .. key .. " at " .. x .. ", " .. y)
++			else
++				if label ~= nil and label ~= "" then
++					CreatureObject(pMobile):setCustomObjectName(label)
++				end
++
++				if AiAgent(pMobile) ~= nil then
++					AiAgent(pMobile):addObjectFlag(AI_STATIONARY)
++				end
++			end
++		end
++	end
++end
++
++function HuttaHome:spawnTradeYard()
++	local t = HuttaHomePlaces.tradeYard
++	local pYard = spawnSceneObject(self.planet, t[1], t[2], getWorldFloor(t[2], t[3], self.planet), t[3], 0, math.rad(t[4]))
++
++	if pYard == nil then
++		printLuaError("HuttaHome: could not place the trade yard " .. t[1])
++	end
++end
++
++-- The vendors
++
++function HuttaHome:price(pPlayer, base)
++	if CreatureObject(pPlayer):getSpecies() == self.huttSpecies then
++		return math.floor(base * self.kinPrice)
++	end
++
++	return base
++end
++
++function HuttaHome:sendSale(pNpc, pPlayer, stall)
++	local wares = self.wares[stall]
++
++	if wares == nil then
++		return
++	end
++
++	writeStringData(SceneObject(pPlayer):getObjectID() .. ":hutta_home_stall", stall)
++
++	local options = {}
++
++	for i = 1, #wares do
++		table.insert(options, { wares[i][1] .. " (" .. self:price(pPlayer, wares[i][3]) .. " credits)", 0 })
++	end
++
++	local prompt = "Choose an item and press OK to buy it with cash."
++
++	if CreatureObject(pPlayer):getSpecies() == self.huttSpecies then
++		prompt = prompt .. " One of the blood pays the kin price."
++	end
++
++	local suiManager = LuaSuiManager()
++	suiManager:sendListBox(pNpc, pPlayer, "Kajidic goods", prompt, 2, "@cancel", "", "@ok", "HuttaHome", "handleSale", 32, options)
++end
++
++function HuttaHome:handleSale(pPlayer, pSui, eventIndex, arg0)
++	if pPlayer == nil then
++		return
++	end
++
++	local playerID = SceneObject(pPlayer):getObjectID()
++	local stall = readStringData(playerID .. ":hutta_home_stall")
++	deleteStringData(playerID .. ":hutta_home_stall")
++
++	if eventIndex == 1 then
++		return
++	end
++
++	local wares = self.wares[stall]
++	local index = arg0 + 1
++
++	if wares == nil or index < 1 or index > #wares then
++		return
++	end
++
++	local item = wares[index]
++	local cost = self:price(pPlayer, item[3])
++	local pInventory = SceneObject(pPlayer):getSlottedObject("inventory")
++
++	if pInventory == nil then
++		return
++	end
++
++	if CreatureObject(pPlayer):getCashCredits() < cost then
++		CreatureObject(pPlayer):sendSystemMessage("You do not have enough cash for that.")
++		return
++	elseif SceneObject(pInventory):isContainerFullRecursive() then
++		CreatureObject(pPlayer):sendSystemMessage("Your inventory is full.")
++		return
++	end
++
++	local pItem = giveItem(pInventory, item[2], -1)
++
++	if pItem == nil then
++		CreatureObject(pPlayer):sendSystemMessage("The stall has none left today.")
++		printLuaError("HuttaHome: giveItem failed for " .. item[2])
++		return
++	end
++
++	CreatureObject(pPlayer):subtractCashCredits(cost)
++	CreatureObject(pPlayer):sendSystemMessage("You buy " .. item[1] .. " for " .. cost .. " credits.")
++end
++
++-- Conversation handlers
++
++local function screenID(pConvScreen)
++	return LuaConversationScreen(pConvScreen):getScreenID()
++end
++
++HuttaCouncilHeraldConvoHandler = conv_handler:new {}
++
++HuttaKessothOutfitterConvoHandler = conv_handler:new {}
++
++function HuttaKessothOutfitterConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, selectedOption, pConvScreen)
++	if screenID(pConvScreen) == "sale" then
++		HuttaHome:sendSale(pNpc, pPlayer, "outfitter")
++	end
++
++	return pConvScreen
++end
++
++HuttaVollakaBrokerConvoHandler = conv_handler:new {}
++
++function HuttaVollakaBrokerConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, selectedOption, pConvScreen)
++	if screenID(pConvScreen) == "sale" then
++		HuttaHome:sendSale(pNpc, pPlayer, "broker")
++	end
++
++	return pConvScreen
++end
+diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_home_places.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_home_places.lua
+new file mode 100644
+index 0000000..612fb01
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_home_places.lua
+@@ -0,0 +1,36 @@
++-- Nal Hutta as the Hutt home (PL-04): placements in Bilbousa. Generated by
++-- outputs/Fable-species/s7-hutt/nal-hutta-home/tools/make_home.py from home.json; edit there, not here.
++-- x, y, heading (compass degrees: 0 north, 90 east); z comes from getWorldFloor when spawned.
++
++HuttaHomePlaces = {
++	-- kind, template or terminal role, x, y, heading, label
++	people = {
++		{ "npc", "hutta_kessoth_outfitter", -798.50, 1489.00, 90, "" },
++		{ "npc", "hutta_vollaka_broker", -739.50, 1469.00, 270, "" },
++		{ "npc", "hutta_council_herald", -766.00, 1700.00, 0, "" },
++		{ "terminal", "kajidic_contracts", -782.00, 1692.00, 90, "" },
++		{ "terminal", "kajidic_contracts", -749.00, 1692.00, 270, "" },
++		{ "npc", "patron_nikto", -790.00, 1700.00, 135, "a cargo runner" },
++		{ "npc", "patron_nikto", -744.00, 1702.00, 225, "a cargo runner" },
++		{ "terminal", "smuggling_runs", -662.00, 1533.00, 180, "" },
++		{ "terminal", "smuggling_runs", -628.00, 1533.00, 180, "" },
++		{ "npc", "trainer_smuggler", -650.00, 1531.00, 180, "" },
++		{ "npc", "patron_nikto", -770.00, 1497.00, 200, "a bazaar idler" },
++		{ "npc", "patron_nikto", -760.00, 1445.00, 20, "a bazaar idler" },
++		{ "npc", "patron_nikto", -785.00, 1462.00, 110, "a bazaar idler" },
++		{ "npc", "gamorrean_guard", -646.00, 1639.00, 180, "a Kessoth guard" },
++		{ "npc", "gamorrean_guard", -658.00, 1639.00, 180, "a Kessoth guard" },
++		{ "npc", "gamorrean_guard", -934.00, 1568.00, 90, "a Vollaka guard" },
++		{ "npc", "gamorrean_guard", -934.00, 1556.00, 90, "a Vollaka guard" },
++		{ "npc", "gamorrean_guard", -883.00, 1771.00, 180, "a Dromuul guard" },
++		{ "npc", "gamorrean_guard", -895.00, 1771.00, 180, "a Dromuul guard" },
++		{ "npc", "gamorrean_guard", -581.00, 1495.00, 270, "a Narissik guard" },
++		{ "npc", "gamorrean_guard", -581.00, 1507.00, 270, "a Narissik guard" },
++		{ "npc", "gamorrean_guard", -744.00, 1879.00, 180, "a Tashuga guard" },
++		{ "npc", "gamorrean_guard", -756.00, 1879.00, 180, "a Tashuga guard" },
++		{ "npc", "gamorrean_guard", -1009.00, 1696.00, 90, "a Bessolo guard" },
++		{ "npc", "gamorrean_guard", -1009.00, 1684.00, 90, "a Bessolo guard" },
++	},
++	-- the Hutt businessmen camp from Tatooine (stock POI; its tents and crates are its child objects)
++	tradeYard = { "object/building/poi/tatooine_hutt_businessmen_camp_large1.iff", -440.0, 1530.0, 0 },
++}
+diff --git a/MMOCoreORB/bin/scripts/screenplays/screenplays.lua b/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
+index 7110f26..317650f 100644
+--- a/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
++++ b/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
+@@ -747,3 +747,5 @@ includeFile("sandbox/sandbox_world_bosses.lua")
+ includeFile("sandbox/sandbox_creatures.lua")
+ includeFile("sandbox/sandbox_tools_datapad.lua")
+ includeFile("sandbox/ossus_people.lua")
++includeFile("sandbox/hutta_home_places.lua")
++includeFile("sandbox/hutta_home.lua")

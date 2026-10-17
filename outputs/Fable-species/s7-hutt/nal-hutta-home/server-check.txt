@@ -1,0 +1,80 @@
+# PL-04 server checks on 17 Oct 2026 02:47 AM; dev HEAD 07d9f61e
+## git apply --check (dev working tree, read-only)
+ok apply --check on HEAD
+files the patch changes, 69f5c879..HEAD: identical
+## luac -p on the patched files
+ok luac MMOCoreORB/bin/scripts/managers/mission/mission_cities.lua
+ok luac MMOCoreORB/bin/scripts/managers/mission/mission_npc_spawn_points.lua
+ok luac MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua
+ok luac MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua
+ok luac MMOCoreORB/bin/scripts/mobile/conversations/sandbox/hutta_home_conv.lua
+ok luac MMOCoreORB/bin/scripts/mobile/conversations.lua
+ok luac MMOCoreORB/bin/scripts/mobile/sandbox/hutta_home.lua
+ok luac MMOCoreORB/bin/scripts/mobile/serverobjects.lua
+ok luac MMOCoreORB/bin/scripts/mobile/spawn/destroy_mission/hutta_destroy_missions.lua
+ok luac MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_deep_swamp.lua
+ok luac MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_mid.lua
+ok luac MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_near.lua
+ok luac MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua
+ok luac MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_home.lua
+ok luac MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_home_places.lua
+ok luac MMOCoreORB/bin/scripts/screenplays/screenplays.lua
+## referenced templates exist in dev
+ok lair endor_blurrg_diseased_neutral_none
+ok lair endor_borgle_fierce_neutral_small
+ok lair endor_borgle_life_sapper_neutral_small
+ok lair endor_borgle_putrid_neutral_small
+ok lair endor_squill_festering_neural_small
+ok lair endor_squill_noxious_neutral_small
+ok lair naboo_fambaa_herd_neutral_none
+ok lair naboo_fambaa_lair_neutral_large
+ok lair naboo_rogue_fambaa_neutral_none
+ok lair naboo_swamp_tusk_cat_stalker_neutral_none
+ok lair rori_dreaded_vir_vur_neutral_none
+ok lair talus_famished_sludge_panther_lair_neutral_mdium
+ok lair talus_greater_sludge_panther_lair_neutral_medium
+ok lair talus_greater_sludge_panther_pack_neutral_none
+ok lair talus_mire_marauder_neutral_none
+   endor_blurrg_diseased_neutral_none: diseased_blurrg level 37
+   endor_borgle_fierce_neutral_small: fierce_borgle level 32
+   endor_borgle_life_sapper_neutral_small: borgle_life_sapper level 25
+   endor_borgle_putrid_neutral_small: putrid_borgle level 19
+   endor_squill_festering_neural_small: festering_squill level 31
+   endor_squill_noxious_neutral_small: noxious_squill level 19
+   naboo_fambaa_herd_neutral_none: fambaa level 34
+   naboo_fambaa_lair_neutral_large: fambaa level 34
+   naboo_rogue_fambaa_neutral_none: rogue_fambaa level 37
+   naboo_swamp_tusk_cat_stalker_neutral_none: swamp_stalker level 32
+   rori_dreaded_vir_vur_neutral_none: dreaded_vir_vur level 38
+   talus_famished_sludge_panther_lair_neutral_mdium: famished_sludge_panther level 20
+   talus_greater_sludge_panther_lair_neutral_medium: greater_sludge_panther level 25
+   talus_greater_sludge_panther_pack_neutral_none: greater_sludge_panther level 25
+   talus_mire_marauder_neutral_none: mire_marauder level 56
+ok mobile gamorrean_guard
+ok mobile patron_nikto
+ok mobile trainer_smuggler
+ok template object/building/poi/tatooine_hutt_businessmen_camp_large1.iff
+ok template object/mobile/3po_protocol_droid_silver.iff
+ok template object/mobile/hutt_female.iff
+ok template object/mobile/hutt_male.iff
+ok template object/tangible/container/jar/jar_spice_s01.iff
+ok template object/tangible/container/jar/jar_spice_s02.iff
+ok template object/tangible/container/jar/jar_spice_s03.iff
+ok template object/tangible/furniture/all/frn_all_lamp_candlestick_free_s01_lit.iff
+ok template object/tangible/furniture/all/frn_all_lamp_candlestick_free_s02_lit.iff
+ok template object/tangible/furniture/all/frn_all_lamp_tatt_s01_lit.iff
+ok template object/tangible/terminal/terminal_mission.iff
+ok template object/tangible/wearables/vest/vest_hutt_gang_s01.iff
+ok template object/tangible/wearables/vest/vest_hutt_gang_s02.iff
+ok template object/tangible/wearables/vest/vest_hutt_gang_s03.iff
+ok snapshot template object/building/tatooine/shared_tower_jabbas_palace.iff
+ok snapshot template object/static/structure/corellia/shared_corl_fountain_circle_s01.iff
+ok snapshot template object/static/structure/general/shared_all_banner_generic_s01.iff
+ok snapshot template object/static/structure/general/shared_streetlamp_medium_style_02_on.iff
+ok conversation "hutta_council_herald_convo_template"
+ok conversation "hutta_kessoth_outfitter_convo_template"
+ok conversation "hutta_vollaka_broker_convo_template"
+ok handler HuttaCouncilHeraldConvoHandler
+ok handler HuttaKessothOutfitterConvoHandler
+ok handler HuttaVollakaBrokerConvoHandler
+## result: PASS

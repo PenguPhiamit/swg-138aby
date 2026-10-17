@@ -1,0 +1,63 @@
+{
+ "sources": {
+  "snapshot/hutta.ws": {
+   "archive": "mtg_patch_022.tre",
+   "bytes": 25795,
+   "sha256": "33f89b3b3bc4067dc56a32e98782516644fef4e2afd6f079f5f27948fe23fcf6"
+  },
+  "datatables/clientregion/hutta.iff": {
+   "archive": "mtg_planets.tre",
+   "bytes": 121,
+   "sha256": "e1f25f128a82bb2d32d7debc86ebd825a6ba8a7dea75668eb2eeaf0ac901acc5"
+  }
+ },
+ "snapshot": {
+  "base_nodes": 281,
+  "new_nodes": 29,
+  "templates": 36,
+  "bytes": 28439,
+  "nodes": 310,
+  "world_level": 192,
+  "darklight_nodes_unchanged": 281,
+  "ids_clash_with_client_snapshots": [],
+  "new_ids": [
+   7170001,
+   7170029
+  ]
+ },
+ "regions": {
+  "before": [
+   "@hutta_region_names:bilbousa",
+   -746.0,
+   1645.0,
+   300.0
+  ],
+  "after": [
+   "@hutta_region_names:bilbousa",
+   -747.0,
+   1590.0,
+   400.0
+  ]
+ },
+ "base": {
+  "path": "work/chain-1016/local_planets-chain-1016.tre",
+  "bytes": 4841629,
+  "sha256": "df1d538e0e23488683406e81b550f4355330865f75e75ec40ec7d36cc4d2ba88",
+  "entries": 186
+ },
+ "out": {
+  "path": "work/nal-hutta-home/local_planets-nalhutta-home.tre",
+  "bytes": 4845095,
+  "sha256": "5e43386dc604937570f9c85ee9337bb79c24a0f4fb271b4b5fd5f2e5f52d766c",
+  "entries": 188
+ },
+ "base_entries_byte_identical": 186,
+ "new_entries": [
+  "datatables/clientregion/hutta.iff",
+  "snapshot/hutta.ws"
+ ],
+ "entries_sha256": {
+  "datatables/clientregion/hutta.iff": "63866130fd8122813feb80182a8ff12f94c05b0d462f14fa7be63baa8c9feafa",
+  "snapshot/hutta.ws": "7fb5c1b33ec67abeb6efcc9ca6b405749b3a1030efe591d46042cb06af4b8cb7"
+ }
+}
