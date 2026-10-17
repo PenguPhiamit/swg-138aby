@@ -1,0 +1,243 @@
+wrote /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Bot-reports/launch-sim/numbers-run18.md (19390 chars)
+/mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Bot-reports/launch-sim/findings-run18.md: 4 FAIL, 2 WATCH, 6 PASS
+| From | To | Tries | Arrived | Failed | Median trip (s) | Failures (step: reason x n) |
+|---|---|---:|---:|---:|---:|---|
+| tatooine: Bestine Shuttleport | tatooine: Anchorhead Shuttleport | 92 | 21 | 70 | 95 | MIXED - terminal: no path to the terminal x70 |
+| corellia: Coronet Shuttle A | corellia: Bela Vistal Shuttleport B | 84 | 46 | 36 | 108 | MIXED - terminal: no path to the terminal x36 |
+| talus: Nashal Starport | rori: Narmle Starport | 13 | 0 | 13 |  | FAIL - plan: no fare to rori, directly or through a hub x13 |
+| corellia: Bela Vistal Shuttleport B | corellia: Coronet Shuttle A | 98 | 84 | 12 | 72 | MIXED - terminal: not at the terminal after 5 minutes x6; terminal: no path to the terminal x5; died: killed on the way x1 |
+| rori: Narmle Shuttleport | rori: Restuss Starport | 46 | 34 | 12 | 53 | MIXED - terminal: no path to the terminal x10; terminal: not at the terminal after 5 minutes x2 |
+| talus: Dearic Starport | rori: Restuss Starport | 11 | 0 | 11 |  | FAIL - plan: no fare to rori, directly or through a hub x11 |
+| corellia: Doaba Guerfel Starport | hutta: Bilbousa Starport | 38 | 29 | 8 | 124 | MIXED - shuttle: no path to the ticket collector x7; terminal: not at the terminal after 5 minutes x1 |
+| rori: Narmle Starport | talus: Nashal Starport | 8 | 0 | 8 |  | FAIL - plan: no fare to talus, directly or through a hub x8 |
+| corellia: Tyrena Shuttle A | corellia: Bela Vistal Shuttleport B | 7 | 0 | 7 |  | FAIL - terminal: no path to the terminal x7 |
+| corellia: Tyrena Shuttle A | corellia: Doaba Guerfel Starport | 12 | 5 | 7 | 86 | MIXED - terminal: no path to the terminal x7 |
+| rori: Restuss Starport | talus: Dearic Starport | 7 | 0 | 7 |  | FAIL - plan: no fare to talus, directly or through a hub x7 |
+| corellia: Tyrena Shuttle A | corellia: Coronet Shuttle A | 9 | 3 | 6 | 86 | MIXED - terminal: no path to the terminal x6 |
+| naboo: Keren Shuttleport South | naboo: Kaadara Starport | 19 | 12 | 6 | 77 | MIXED - terminal: no path to the terminal x5; died: killed on the way x1 |
+| tatooine: Bestine Shuttleport | tatooine: Mos Entha Starport | 9 | 3 | 6 | 95 | MIXED - terminal: no path to the terminal x6 |
+| tatooine: Mos Espa Shuttleport East | tatooine: Anchorhead Shuttleport | 13 | 7 | 6 | 78 | MIXED - terminal: no path to the terminal x5; terminal: not at the terminal after 5 minutes x1 |
+| rori: Restuss Starport | talus: Nashal Starport | 5 | 0 | 5 |  | FAIL - plan: no fare to talus, directly or through a hub x5 |
+| talus: Dearic Starport | rori: Narmle Starport | 5 | 0 | 5 |  | FAIL - plan: no fare to rori, directly or through a hub x5 |
+| talus: Dearic Starport | talus: Nashal Starport | 62 | 55 | 5 | 118 | MIXED - terminal: not at the terminal after 5 minutes x5 |
+| tatooine: Anchorhead Shuttleport | tatooine: Bestine Shuttleport | 84 | 78 | 5 | 17 | MIXED - terminal: no path to the terminal x3; terminal: not at the terminal after 5 minutes x1; purchase: purchaseTicket refused (code 3, tickets 0 -> 0) x1 |
+| tatooine: Bestine Shuttleport | tatooine: Mos Espa Shuttleport East | 7 | 2 | 5 | 61 | MIXED - terminal: no path to the terminal x5 |
+| tatooine: Mos Espa Shuttleport East | tatooine: Mos Eisley Starport | 11 | 6 | 5 | 77 | MIXED - terminal: no path to the terminal x4; terminal: not at the terminal after 5 minutes x1 |
+| corellia: Coronet Shuttle A | corellia: Tyrena Shuttle A | 12 | 7 | 4 | 50 | MIXED - terminal: no path to the terminal x3; terminal: not at the terminal after 5 minutes x1 |
+| naboo: Theed Spaceport | corellia: Coronet Starport | 32 | 27 | 4 | 181 | MIXED - terminal: not at the terminal after 5 minutes x3; died: killed on the way x1 |
+| rori: Narmle Starport | talus: Dearic Starport | 4 | 0 | 4 |  | FAIL - plan: no fare to talus, directly or through a hub x4 |
+| talus: Nashal Starport | rori: Restuss Starport | 4 | 0 | 4 |  | FAIL - plan: no fare to rori, directly or through a hub x4 |
+| tatooine: Bestine Shuttleport | tatooine: Mos Eisley Starport | 7 | 3 | 4 | 62 | MIXED - terminal: no path to the terminal x4 |
+| corellia: Coronet Shuttle A | corellia: Doaba Guerfel Starport | 13 | 10 | 3 | 57 | MIXED - terminal: no path to the terminal x3 |
+| corellia: Doaba Guerfel Starport | corellia: Kor Vella Shuttleport | 7 | 4 | 3 | 140 | MIXED - shuttle: no path to the ticket collector x3 |
+| corellia: Doaba Guerfel Starport | naboo: Kaadara Starport | 15 | 12 | 3 | 120 | MIXED - shuttle: no path to the ticket collector x3 |
+| corellia: Doaba Guerfel Starport | naboo: Keren Starport | 11 | 8 | 3 | 126 | MIXED - shuttle: no path to the ticket collector x2; terminal: not at the terminal after 5 minutes x1 |
+| corellia: Doaba Guerfel Starport | naboo: Theed Spaceport | 9 | 6 | 3 | 118 | MIXED - shuttle: no path to the ticket collector x3 |
+| corellia: Doaba Guerfel Starport | talus: Nashal Starport | 20 | 17 | 3 | 113 | MIXED - shuttle: no path to the ticket collector x3 |
+| corellia: Doaba Guerfel Starport | tatooine: Bestine Starport | 15 | 10 | 3 | 118 | MIXED - shuttle: no path to the ticket collector x3 |
+| corellia: Kor Vella Shuttleport | corellia: Coronet Shuttle A | 10 | 6 | 3 | 113 | MIXED - terminal: no path to the terminal x3 |
+| corellia: Kor Vella Shuttleport | corellia: Tyrena Shuttle A | 9 | 5 | 3 | 159 | MIXED - terminal: no path to the terminal x3 |
+| corellia: Kor Vella Starport | tatooine: Bestine Starport | 12 | 9 | 3 | 186 | MIXED - terminal: not at the terminal after 5 minutes x3 |
+| corellia: Tyrena Shuttle A | corellia: Kor Vella Shuttleport | 6 | 2 | 3 | 137 | MIXED - terminal: no path to the terminal x3 |
+| naboo: Theed Shuttle C | naboo: Kaadara Starport | 16 | 13 | 3 | 83 | MIXED - terminal: no path to the terminal x3 |
+| naboo: Theed Shuttle C | naboo: Keren Shuttleport South | 12 | 8 | 3 | 82 | MIXED - terminal: not at the terminal after 5 minutes x2; terminal: no path to the terminal x1 |
+| naboo: Theed Shuttle C | naboo: Moenia | 15 | 11 | 3 | 98 | MIXED - terminal: not at the terminal after 5 minutes x2; terminal: no path to the terminal x1 |
+| naboo: Theed Spaceport | corellia: Kor Vella Starport | 15 | 11 | 3 | 187 | MIXED - terminal: not at the terminal after 5 minutes x2; died: killed on the way x1 |
+| naboo: Theed Spaceport | tatooine: Bestine Starport | 16 | 12 | 3 | 158 | MIXED - terminal: not at the terminal after 5 minutes x2; died: killed on the way x1 |
+| rori: Narmle Starport | naboo: Keren Starport | 18 | 14 | 3 | 113 | MIXED - terminal: not at the terminal after 5 minutes x3 |
+| talus: Nashal Starport | corellia: Kor Vella Starport | 24 | 21 | 3 | 116 | MIXED - terminal: not at the terminal after 5 minutes x2; died: killed on the way x1 |
+| talus: Nashal Starport | talus: Dearic Starport | 62 | 55 | 3 | 122 | MIXED - terminal: not at the terminal after 5 minutes x3 |
+| tatooine: Bestine Starport | hutta: Bilbousa Starport | 65 | 61 | 3 | 126 | MIXED - shuttle: no path to the ticket collector x3 |
+| tatooine: Mos Espa Starport | naboo: Keren Starport | 9 | 6 | 3 | 124 | MIXED - terminal: not at the terminal after 5 minutes x3 |
+| corellia: Bela Vistal Shuttleport B | corellia: Doaba Guerfel Starport | 9 | 7 | 2 | 60 | MIXED - terminal: not at the terminal after 5 minutes x1; terminal: no path to the terminal x1 |
+| corellia: Bela Vistal Shuttleport B | corellia: Tyrena Shuttle A | 6 | 4 | 2 | 125 | MIXED - terminal: not at the terminal after 5 minutes x1; terminal: no path to the terminal x1 |
+| corellia: Coronet Starport | hutta: Bilbousa Starport | 67 | 63 | 2 | 161 | MIXED - terminal: not at the terminal after 5 minutes x2 |
+| corellia: Doaba Guerfel Starport | corellia: Bela Vistal Shuttleport B | 10 | 8 | 2 | 138 | MIXED - shuttle: no path to the ticket collector x2 |
+| corellia: Doaba Guerfel Starport | corellia: Coronet Shuttle A | 8 | 6 | 2 | 136 | MIXED - terminal: not at the terminal after 5 minutes x1; shuttle: no path to the ticket collector x1 |
+| corellia: Doaba Guerfel Starport | corellia: Tyrena Shuttle A | 8 | 6 | 2 | 129 | MIXED - died: killed on the way x1; shuttle: no path to the ticket collector x1 |
+| corellia: Doaba Guerfel Starport | talus: Dearic Starport | 16 | 14 | 2 | 114 | MIXED - shuttle: no path to the ticket collector x2 |
+| corellia: Doaba Guerfel Starport | tatooine: Mos Eisley Starport | 9 | 6 | 2 | 123 | MIXED - shuttle: no path to the ticket collector x2 |
+| naboo: Kaadara Starport | corellia: Coronet Starport | 18 | 16 | 2 | 115 | MIXED - terminal: not at the terminal after 5 minutes x1; shuttle: no path to the ticket collector x1 |
+| naboo: Kaadara Starport | corellia: Doaba Guerfel Starport | 16 | 13 | 2 | 114 | MIXED - terminal: not at the terminal after 5 minutes x1; shuttle: no path to the ticket collector x1 |
+| naboo: Kaadara Starport | naboo: Theed Shuttle C | 28 | 25 | 2 | 103 | MIXED - terminal: not at the terminal after 5 minutes x1; shuttle: no path to the ticket collector x1 |
+| naboo: Kaadara Starport | rori: Restuss Starport | 24 | 22 | 2 | 94 | MIXED - terminal: not at the terminal after 5 minutes x1; shuttle: no path to the ticket collector x1 |
+| naboo: Kaadara Starport | tatooine: Mos Eisley Starport | 6 | 4 | 2 | 112 | MIXED - terminal: not at the terminal after 5 minutes x1; shuttle: no path to the ticket collector x1 |
+| naboo: Keren Shuttleport South | naboo: Moenia | 15 | 13 | 2 | 48 | MIXED - terminal: no path to the terminal x2 |
+| naboo: Keren Shuttleport South | naboo: Theed Shuttle C | 15 | 12 | 2 | 72 | MIXED - terminal: no path to the terminal x2 |
+| naboo: Keren Starport | corellia: Doaba Guerfel Starport | 14 | 12 | 2 | 114 | MIXED - terminal: not at the terminal after 5 minutes x2 |
+| naboo: Keren Starport | corellia: Kor Vella Starport | 13 | 11 | 2 | 142 | MIXED - terminal: not at the terminal after 5 minutes x2 |
+| rori: Restuss Starport | naboo: Moenia | 14 | 12 | 2 | 106 | MIXED - terminal: not at the terminal after 5 minutes x2 |
+| rori: Restuss Starport | rori: Narmle Shuttleport | 51 | 47 | 2 | 106 | MIXED - terminal: not at the terminal after 5 minutes x2 |
+| talus: Dearic Starport | corellia: Coronet Starport | 38 | 35 | 2 | 118 | MIXED - terminal: not at the terminal after 5 minutes x2 |
+| tatooine: Anchorhead Shuttleport | tatooine: Mos Eisley Starport | 8 | 6 | 2 | 24 | MIXED - died: killed on the way x1; terminal: no path to the terminal x1 |
+| tatooine: Mos Entha Starport | hutta: Bilbousa Starport | 27 | 25 | 2 | 122 | MIXED - terminal: not at the terminal after 5 minutes x2 |
+| tatooine: Mos Entha Starport | naboo: Moenia | 10 | 8 | 2 | 127 | MIXED - terminal: not at the terminal after 5 minutes x2 |
+| tatooine: Mos Entha Starport | naboo: Theed Spaceport | 8 | 6 | 2 | 96 | MIXED - terminal: not at the terminal after 5 minutes x1; died: killed on the way x1 |
+| tatooine: Mos Entha Starport | tatooine: Anchorhead Shuttleport | 13 | 10 | 2 | 136 | MIXED - terminal: not at the terminal after 5 minutes x2 |
+| tatooine: Mos Entha Starport | tatooine: Bestine Shuttleport | 7 | 5 | 2 | 119 | MIXED - terminal: not at the terminal after 5 minutes x2 |
+| tatooine: Mos Espa Shuttleport East | tatooine: Bestine Shuttleport | 9 | 7 | 2 | 69 | MIXED - terminal: no path to the terminal x2 |
+| corellia: Coronet Shuttle A | corellia: Kor Vella Shuttleport | 9 | 8 | 1 | 57 | MIXED - terminal: no path to the terminal x1 |
+| corellia: Coronet Starport | talus: Dearic Starport | 26 | 25 | 1 | 119 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| corellia: Coronet Starport | tatooine: Mos Entha Starport | 13 | 11 | 1 | 159 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| corellia: Doaba Guerfel Starport | naboo: Moenia | 6 | 5 | 1 | 135 | MIXED - shuttle: no path to the ticket collector x1 |
+| corellia: Doaba Guerfel Starport | tatooine: Mos Entha Starport | 8 | 7 | 1 | 113 | MIXED - shuttle: no path to the ticket collector x1 |
+| corellia: Doaba Guerfel Starport | tatooine: Mos Espa Starport | 9 | 8 | 1 | 131 | MIXED - shuttle: no path to the ticket collector x1 |
+| corellia: Kor Vella Shuttleport | corellia: Doaba Guerfel Starport | 13 | 12 | 1 | 98 | MIXED - terminal: no path to the terminal x1 |
+| corellia: Kor Vella Starport | hutta: Bilbousa Starport | 39 | 38 | 1 | 189 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| corellia: Kor Vella Starport | naboo: Keren Starport | 8 | 7 | 1 | 196 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| corellia: Kor Vella Starport | naboo: Moenia | 6 | 5 | 1 | 122 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| hutta: Bilbousa Starport | corellia: Coronet Starport | 40 | 38 | 1 | 111 | MIXED - shuttle: no path to the ticket collector x1 |
+| naboo: Kaadara Starport | corellia: Tyrena Starport | 9 | 7 | 1 | 94 | MIXED - shuttle: no path to the ticket collector x1 |
+| naboo: Kaadara Starport | naboo: Keren Shuttleport South | 16 | 15 | 1 | 98 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Kaadara Starport | rori: Narmle Starport | 22 | 21 | 1 | 114 | MIXED - shuttle: no path to the ticket collector x1 |
+| naboo: Kaadara Starport | tatooine: Bestine Starport | 17 | 16 | 1 | 115 | MIXED - died: killed on the way x1 |
+| naboo: Kaadara Starport | tatooine: Mos Entha Starport | 14 | 13 | 1 | 114 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Keren Starport | corellia: Tyrena Starport | 15 | 14 | 1 | 115 | MIXED - died: killed on the way x1 |
+| naboo: Keren Starport | rori: Restuss Starport | 12 | 11 | 1 | 137 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Keren Starport | tatooine: Bestine Starport | 22 | 21 | 1 | 116 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Moenia | corellia: Coronet Starport | 18 | 17 | 1 | 103 | MIXED - died: killed on the way x1 |
+| naboo: Moenia | rori: Restuss Starport | 14 | 13 | 1 | 97 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Moenia | tatooine: Bestine Starport | 18 | 17 | 1 | 95 | MIXED - died: killed on the way x1 |
+| naboo: Theed Spaceport | corellia: Tyrena Starport | 10 | 9 | 1 | 180 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Theed Spaceport | tatooine: Mos Eisley Starport | 14 | 11 | 1 | 160 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Theed Spaceport | tatooine: Mos Espa Starport | 11 | 10 | 1 | 158 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| rori: Narmle Starport | naboo: Kaadara Starport | 24 | 23 | 1 | 101 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| rori: Narmle Starport | naboo: Moenia | 33 | 30 | 1 | 111 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| rori: Narmle Starport | naboo: Theed Spaceport | 19 | 18 | 1 | 111 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| rori: Restuss Starport | naboo: Keren Starport | 24 | 22 | 1 | 115 | MIXED - died: killed on the way x1 |
+| talus: Dearic Starport | corellia: Kor Vella Starport | 18 | 16 | 1 | 123 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| talus: Dearic Starport | corellia: Tyrena Starport | 11 | 10 | 1 | 118 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| talus: Nashal Starport | corellia: Coronet Starport | 32 | 30 | 1 | 123 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| talus: Nashal Starport | corellia: Doaba Guerfel Starport | 21 | 20 | 1 | 109 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Anchorhead Shuttleport | tatooine: Mos Espa Shuttleport East | 3 | 2 | 1 | 20 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Bestine Starport | corellia: Coronet Starport | 38 | 34 | 1 | 126 | MIXED - shuttle: no path to the ticket collector x1 |
+| tatooine: Bestine Starport | naboo: Kaadara Starport | 15 | 14 | 1 | 126 | MIXED - shuttle: no path to the ticket collector x1 |
+| tatooine: Mos Eisley Starport | corellia: Coronet Starport | 14 | 12 | 1 | 130 | MIXED - died: killed on the way x1 |
+| tatooine: Mos Eisley Starport | naboo: Keren Starport | 11 | 10 | 1 | 157 | MIXED - died: killed on the way x1 |
+| tatooine: Mos Entha Starport | corellia: Coronet Starport | 11 | 9 | 1 | 119 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Mos Entha Starport | corellia: Kor Vella Starport | 14 | 13 | 1 | 118 | MIXED - died: killed on the way x1 |
+| tatooine: Mos Entha Starport | corellia: Tyrena Starport | 11 | 10 | 1 | 134 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Mos Entha Starport | naboo: Kaadara Starport | 8 | 7 | 1 | 119 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Mos Espa Shuttleport East | tatooine: Mos Entha Starport | 7 | 6 | 1 | 78 | MIXED - terminal: no path to the terminal x1 |
+| tatooine: Mos Espa Starport | corellia: Kor Vella Starport | 10 | 8 | 1 | 116 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| corellia: Bela Vistal Shuttleport B | corellia: Kor Vella Shuttleport | 10 | 10 | 0 | 123 | PASS |
+| corellia: Coronet Starport | naboo: Kaadara Starport | 17 | 17 | 0 | 117 | PASS |
+| corellia: Coronet Starport | naboo: Keren Starport | 16 | 16 | 0 | 159 | PASS |
+| corellia: Coronet Starport | naboo: Moenia | 13 | 13 | 0 | 114 | PASS |
+| corellia: Coronet Starport | naboo: Theed Spaceport | 12 | 12 | 0 | 150 | PASS |
+| corellia: Coronet Starport | talus: Nashal Starport | 40 | 38 | 0 | 113 | PASS |
+| corellia: Coronet Starport | tatooine: Bestine Starport | 29 | 28 | 0 | 115 | PASS |
+| corellia: Coronet Starport | tatooine: Mos Eisley Starport | 12 | 11 | 0 | 129 | PASS |
+| corellia: Coronet Starport | tatooine: Mos Espa Starport | 11 | 11 | 0 | 161 | PASS |
+| corellia: Kor Vella Shuttleport | corellia: Bela Vistal Shuttleport B | 8 | 8 | 0 | 170 | PASS |
+| corellia: Kor Vella Starport | naboo: Kaadara Starport | 11 | 11 | 0 | 130 | PASS |
+| corellia: Kor Vella Starport | naboo: Theed Spaceport | 10 | 10 | 0 | 122 | PASS |
+| corellia: Kor Vella Starport | talus: Dearic Starport | 21 | 21 | 0 | 121 | PASS |
+| corellia: Kor Vella Starport | talus: Nashal Starport | 16 | 15 | 0 | 121 | PASS |
+| corellia: Kor Vella Starport | tatooine: Mos Eisley Starport | 9 | 8 | 0 | 197 | PASS |
+| corellia: Kor Vella Starport | tatooine: Mos Entha Starport | 10 | 10 | 0 | 130 | PASS |
+| corellia: Kor Vella Starport | tatooine: Mos Espa Starport | 8 | 7 | 0 | 121 | PASS |
+| corellia: Tyrena Starport | hutta: Bilbousa Starport | 39 | 37 | 0 | 171 | PASS |
+| corellia: Tyrena Starport | naboo: Kaadara Starport | 11 | 11 | 0 | 116 | PASS |
+| corellia: Tyrena Starport | naboo: Keren Starport | 15 | 14 | 0 | 171 | PASS |
+| corellia: Tyrena Starport | naboo: Moenia | 8 | 6 | 0 | 126 | PASS |
+| corellia: Tyrena Starport | naboo: Theed Spaceport | 9 | 8 | 0 | 171 | PASS |
+| corellia: Tyrena Starport | talus: Dearic Starport | 14 | 13 | 0 | 95 | PASS |
+| corellia: Tyrena Starport | talus: Nashal Starport | 20 | 19 | 0 | 95 | PASS |
+| corellia: Tyrena Starport | tatooine: Bestine Starport | 12 | 10 | 0 | 171 | PASS |
+| corellia: Tyrena Starport | tatooine: Mos Eisley Starport | 8 | 8 | 0 | 171 | PASS |
+| corellia: Tyrena Starport | tatooine: Mos Entha Starport | 4 | 4 | 0 | 171 | PASS |
+| corellia: Tyrena Starport | tatooine: Mos Espa Starport | 12 | 12 | 0 | 171 | PASS |
+| hutta: Bilbousa Starport | corellia: Doaba Guerfel Starport | 14 | 13 | 0 | 113 | PASS |
+| hutta: Bilbousa Starport | corellia: Kor Vella Starport | 22 | 22 | 0 | 112 | PASS |
+| hutta: Bilbousa Starport | corellia: Tyrena Starport | 22 | 21 | 0 | 111 | PASS |
+| hutta: Bilbousa Starport | tatooine: Bestine Starport | 32 | 31 | 0 | 111 | PASS |
+| hutta: Bilbousa Starport | tatooine: Mos Eisley Starport | 21 | 20 | 0 | 112 | PASS |
+| hutta: Bilbousa Starport | tatooine: Mos Entha Starport | 16 | 15 | 0 | 105 | PASS |
+| hutta: Bilbousa Starport | tatooine: Mos Espa Starport | 13 | 13 | 0 | 111 | PASS |
+| naboo: Kaadara Starport | corellia: Kor Vella Starport | 8 | 8 | 0 | 118 | PASS |
+| naboo: Kaadara Starport | naboo: Moenia | 17 | 17 | 0 | 102 | PASS |
+| naboo: Kaadara Starport | tatooine: Mos Espa Starport | 9 | 9 | 0 | 117 | PASS |
+| naboo: Keren Starport | corellia: Coronet Starport | 19 | 18 | 0 | 148 | PASS |
+| naboo: Keren Starport | rori: Narmle Starport | 21 | 20 | 0 | 94 | PASS |
+| naboo: Keren Starport | tatooine: Mos Eisley Starport | 9 | 9 | 0 | 150 | PASS |
+| naboo: Keren Starport | tatooine: Mos Entha Starport | 12 | 12 | 0 | 116 | PASS |
+| naboo: Keren Starport | tatooine: Mos Espa Starport | 4 | 4 | 0 | 125 | PASS |
+| naboo: Moenia | corellia: Doaba Guerfel Starport | 11 | 11 | 0 | 96 | PASS |
+| naboo: Moenia | corellia: Kor Vella Starport | 13 | 13 | 0 | 101 | PASS |
+| naboo: Moenia | corellia: Tyrena Starport | 14 | 14 | 0 | 112 | PASS |
+| naboo: Moenia | naboo: Kaadara Starport | 17 | 16 | 0 | 96 | PASS |
+| naboo: Moenia | naboo: Keren Shuttleport South | 15 | 15 | 0 | 96 | PASS |
+| naboo: Moenia | naboo: Theed Shuttle C | 23 | 23 | 0 | 102 | PASS |
+| naboo: Moenia | rori: Narmle Starport | 16 | 15 | 0 | 97 | PASS |
+| naboo: Moenia | tatooine: Mos Eisley Starport | 8 | 7 | 0 | 113 | PASS |
+| naboo: Moenia | tatooine: Mos Entha Starport | 6 | 5 | 0 | 102 | PASS |
+| naboo: Moenia | tatooine: Mos Espa Starport | 4 | 4 | 0 | 95 | PASS |
+| naboo: Theed Spaceport | corellia: Doaba Guerfel Starport | 12 | 12 | 0 | 159 | PASS |
+| naboo: Theed Spaceport | rori: Narmle Starport | 22 | 20 | 0 | 97 | PASS |
+| naboo: Theed Spaceport | rori: Restuss Starport | 12 | 12 | 0 | 160 | PASS |
+| naboo: Theed Spaceport | tatooine: Mos Entha Starport | 6 | 4 | 0 | 159 | PASS |
+| rori: Restuss Starport | naboo: Kaadara Starport | 15 | 14 | 0 | 118 | PASS |
+| rori: Restuss Starport | naboo: Theed Spaceport | 13 | 13 | 0 | 106 | PASS |
+| talus: Dearic Starport | corellia: Doaba Guerfel Starport | 18 | 18 | 0 | 97 | PASS |
+| talus: Nashal Starport | corellia: Tyrena Starport | 14 | 13 | 0 | 138 | PASS |
+| tatooine: Anchorhead Shuttleport | tatooine: Mos Entha Starport | 7 | 7 | 0 | 23 | PASS |
+| tatooine: Bestine Starport | corellia: Doaba Guerfel Starport | 10 | 10 | 0 | 126 | PASS |
+| tatooine: Bestine Starport | corellia: Kor Vella Starport | 14 | 13 | 0 | 134 | PASS |
+| tatooine: Bestine Starport | corellia: Tyrena Starport | 13 | 12 | 0 | 126 | PASS |
+| tatooine: Bestine Starport | naboo: Keren Starport | 15 | 15 | 0 | 129 | PASS |
+| tatooine: Bestine Starport | naboo: Moenia | 9 | 7 | 0 | 126 | PASS |
+| tatooine: Bestine Starport | naboo: Theed Spaceport | 18 | 17 | 0 | 126 | PASS |
+| tatooine: Mos Eisley Starport | corellia: Doaba Guerfel Starport | 7 | 7 | 0 | 140 | PASS |
+| tatooine: Mos Eisley Starport | corellia: Kor Vella Starport | 14 | 14 | 0 | 143 | PASS |
+| tatooine: Mos Eisley Starport | corellia: Tyrena Starport | 11 | 11 | 0 | 160 | PASS |
+| tatooine: Mos Eisley Starport | hutta: Bilbousa Starport | 30 | 30 | 0 | 140 | PASS |
+| tatooine: Mos Eisley Starport | naboo: Kaadara Starport | 10 | 10 | 0 | 137 | PASS |
+| tatooine: Mos Eisley Starport | naboo: Moenia | 8 | 8 | 0 | 132 | PASS |
+| tatooine: Mos Eisley Starport | naboo: Theed Spaceport | 11 | 11 | 0 | 167 | PASS |
+| tatooine: Mos Eisley Starport | tatooine: Anchorhead Shuttleport | 8 | 7 | 0 | 122 | PASS |
+| tatooine: Mos Eisley Starport | tatooine: Bestine Shuttleport | 4 | 4 | 0 | 122 | PASS |
+| tatooine: Mos Eisley Starport | tatooine: Mos Entha Starport | 8 | 7 | 0 | 122 | PASS |
+| tatooine: Mos Eisley Starport | tatooine: Mos Espa Shuttleport East | 2 | 2 | 0 | 125 | PASS |
+| tatooine: Mos Entha Starport | corellia: Doaba Guerfel Starport | 5 | 5 | 0 | 96 | PASS |
+| tatooine: Mos Entha Starport | naboo: Keren Starport | 6 | 6 | 0 | 100 | PASS |
+| tatooine: Mos Entha Starport | tatooine: Mos Eisley Starport | 9 | 9 | 0 | 134 | PASS |
+| tatooine: Mos Entha Starport | tatooine: Mos Espa Shuttleport East | 7 | 7 | 0 | 96 | PASS |
+| tatooine: Mos Espa Starport | corellia: Coronet Starport | 12 | 10 | 0 | 124 | PASS |
+| tatooine: Mos Espa Starport | corellia: Doaba Guerfel Starport | 8 | 7 | 0 | 117 | PASS |
+| tatooine: Mos Espa Starport | corellia: Tyrena Starport | 7 | 6 | 0 | 153 | PASS |
+| tatooine: Mos Espa Starport | hutta: Bilbousa Starport | 30 | 29 | 0 | 124 | PASS |
+| tatooine: Mos Espa Starport | naboo: Kaadara Starport | 7 | 7 | 0 | 132 | PASS |
+| tatooine: Mos Espa Starport | naboo: Moenia | 5 | 5 | 0 | 130 | PASS |
+| tatooine: Mos Espa Starport | naboo: Theed Spaceport | 11 | 9 | 0 | 124 | PASS |
+
+Routes 208, tries 3447, arrived 2920, failed 426, still under way at the end of the log 101.
+
+| Step | Failures |
+|---|---:|
+| terminal | 303 |
+| plan | 57 |
+| shuttle | 48 |
+| died | 17 |
+| purchase | 1 |
+corellia: 925 bots, 0 explorers, 72 squares, 58 templates
+naboo: 703 bots, 0 explorers, 67 squares, 55 templates
+ossus: 200 bots, 200 explorers, 255 squares, 10 templates
+rori: 294 bots, 0 explorers, 38 squares, 36 templates
+talus: 324 bots, 0 explorers, 40 squares, 33 templates
+tatooine: 745 bots, 0 explorers, 69 squares, 43 templates
+check 16 Oct 11:30 PM: core3 up, load 3.48 2.77 3.41, free 8429 MB
+== last BotPop stats line (routes, legs stopped)
+mode all, online 1700, active avg 1700 max 1700 (last pass: near 0, rotating 0, busy 0), tick avg 1.12 ms max 3 ms over 60 passes (0 skipped: steps still running), steps 713.88 ms per second across workers, slowest chunk 141.51 ms, real players 0, spawned 1700, logged out 0, failed 0, no path 0, routes 12000 (36739 deferred, 4929 none), legs stopped: no start 522, no end 30, no path 0, partial 11374, unloaded mesh 0, snapped 440
+== lair_check rows: ranged with damage
+1751 rows, 881 ranged, 299 ranged with damage
+== errors in core3.log during this run (top 8)
+16 error lines since the run started
+      1 Fri Oct 16 22:25:07 2026 [1792214707213 msec] (19 s) Thread 2 - [Lua] INFO - file:scripts/
+      1 unknown appearance type SPRT
+      1 decreaseOnlineCharCount missing account 4 in onlineZoneClientMap
+      1 decreaseOnlineCharCount missing account 7 in onlineZoneClientMap
+      1 decreaseOnlineCharCount missing account 10 in onlineZoneClientMap
+      1 decreaseOnlineCharCount missing account 16 in onlineZoneClientMap
+      1 decreaseOnlineCharCount missing account 3 in onlineZoneClientMap
+      1 decreaseOnlineCharCount missing account 8 in onlineZoneClientMap

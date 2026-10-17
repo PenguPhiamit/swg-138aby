@@ -1,540 +1,233 @@
 planet,kind,template,level_min,level_max,square_x_km,square_y_km,events,sources
-rori,creature,capper_spineflap,1,6,-8,-3,1,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-8,-2,14,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-7,-4,18,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-7,-3,43,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-7,-2,7,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-6,-4,35,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-6,-3,39,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-6,-2,72,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-6,-1,6,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-5,-4,23,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-5,-3,75,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-5,-2,40,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-5,-1,28,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-4,-4,28,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-4,-3,33,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-4,-2,7,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,-4,-1,1,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,3,4,5,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,3,5,26,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,3,6,11,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,4,4,34,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,4,5,11,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,4,6,22,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,4,7,7,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,5,3,16,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,5,4,31,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,5,5,32,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,5,6,86,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,5,7,4,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,6,4,50,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,6,5,28,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,6,6,12,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,6,7,1,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap,1,6,7,5,5,attacked first=124;given up on=186;incapacitated a bot=230;killed=220;killed a bot=91
-rori,creature,capper_spineflap_drone,6,6,-8,-3,1,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,-7,-4,2,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,-7,-3,3,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,-7,-2,1,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,-7,-1,3,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,-6,-3,20,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,-6,-2,13,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,-5,-4,2,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,-5,-3,13,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,-5,-2,14,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,-5,-1,2,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,-4,-4,1,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,-4,-3,1,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,3,4,1,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,3,5,1,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,4,4,3,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,4,5,3,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,4,7,3,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,5,3,2,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,5,4,4,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,5,5,6,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,5,6,9,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,capper_spineflap_drone,6,6,6,5,2,attacked first=1;given up on=36;incapacitated a bot=29;killed=33;killed a bot=11
-rori,creature,female_squall,1,10,-7,-3,1,given up on=2
-rori,creature,female_squall,1,10,-6,-3,1,given up on=2
-rori,creature,first_brigade_scout,7,7,-7,-3,8,attacked first=18;given up on=1;incapacitated a bot=20;killed=5;killed a bot=12
-rori,creature,first_brigade_scout,7,7,-6,-4,6,attacked first=18;given up on=1;incapacitated a bot=20;killed=5;killed a bot=12
-rori,creature,first_brigade_scout,7,7,-5,-5,10,attacked first=18;given up on=1;incapacitated a bot=20;killed=5;killed a bot=12
-rori,creature,first_brigade_scout,7,7,-5,-4,8,attacked first=18;given up on=1;incapacitated a bot=20;killed=5;killed a bot=12
-rori,creature,first_brigade_scout,7,7,-4,-3,4,attacked first=18;given up on=1;incapacitated a bot=20;killed=5;killed a bot=12
-rori,creature,first_brigade_scout,7,7,3,5,7,attacked first=18;given up on=1;incapacitated a bot=20;killed=5;killed a bot=12
-rori,creature,first_brigade_scout,7,7,5,4,11,attacked first=18;given up on=1;incapacitated a bot=20;killed=5;killed a bot=12
-rori,creature,first_brigade_scout,7,7,6,4,2,attacked first=18;given up on=1;incapacitated a bot=20;killed=5;killed a bot=12
-rori,creature,first_brigade_trooper,6,6,-7,-3,6,attacked first=17;incapacitated a bot=20;killed=4;killed a bot=11
-rori,creature,first_brigade_trooper,6,6,-6,-4,6,attacked first=17;incapacitated a bot=20;killed=4;killed a bot=11
-rori,creature,first_brigade_trooper,6,6,-5,-4,11,attacked first=17;incapacitated a bot=20;killed=4;killed a bot=11
-rori,creature,first_brigade_trooper,6,6,-4,-3,4,attacked first=17;incapacitated a bot=20;killed=4;killed a bot=11
-rori,creature,first_brigade_trooper,6,6,-4,-2,2,attacked first=17;incapacitated a bot=20;killed=4;killed a bot=11
-rori,creature,first_brigade_trooper,6,6,3,5,1,attacked first=17;incapacitated a bot=20;killed=4;killed a bot=11
-rori,creature,first_brigade_trooper,6,6,4,4,6,attacked first=17;incapacitated a bot=20;killed=4;killed a bot=11
-rori,creature,first_brigade_trooper,6,6,5,4,5,attacked first=17;incapacitated a bot=20;killed=4;killed a bot=11
-rori,creature,first_brigade_trooper,6,6,6,4,6,attacked first=17;incapacitated a bot=20;killed=4;killed a bot=11
-rori,creature,first_brigade_trooper,6,6,6,6,5,attacked first=17;incapacitated a bot=20;killed=4;killed a bot=11
-rori,creature,frail_squall,6,6,-6,-3,54,given up on=26;incapacitated a bot=17;killed=123;killed a bot=4
-rori,creature,frail_squall,6,6,-5,-4,2,given up on=26;incapacitated a bot=17;killed=123;killed a bot=4
-rori,creature,frail_squall,6,6,3,6,3,given up on=26;incapacitated a bot=17;killed=123;killed a bot=4
-rori,creature,frail_squall,6,6,4,4,1,given up on=26;incapacitated a bot=17;killed=123;killed a bot=4
-rori,creature,frail_squall,6,6,4,6,2,given up on=26;incapacitated a bot=17;killed=123;killed a bot=4
-rori,creature,frail_squall,6,6,5,5,107,given up on=26;incapacitated a bot=17;killed=123;killed a bot=4
-rori,creature,frail_squall,6,6,6,5,1,given up on=26;incapacitated a bot=17;killed=123;killed a bot=4
-rori,creature,frightened_borgle,8,8,-5,-3,4,given up on=2;killed=6
-rori,creature,frightened_borgle,8,8,5,5,4,given up on=2;killed=6
-rori,creature,garyns_prowler,11,11,-7,-2,8,attacked first=3;given up on=1;incapacitated a bot=16;killed a bot=2
-rori,creature,garyns_prowler,11,11,5,5,14,attacked first=3;given up on=1;incapacitated a bot=16;killed a bot=2
-rori,creature,garyns_thief,15,15,-7,-2,6,attacked first=2;incapacitated a bot=2;killed a bot=2
-rori,creature,gundark_crook,5,5,-7,-4,4,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_crook,5,5,-6,-4,8,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_crook,5,5,-6,-2,2,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_crook,5,5,-6,-1,2,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_crook,5,5,-5,-4,5,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_crook,5,5,-5,-3,1,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_crook,5,5,-4,-3,4,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_crook,5,5,3,7,4,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_crook,5,5,4,4,2,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_crook,5,5,4,5,4,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_crook,5,5,4,6,1,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_crook,5,5,4,7,2,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_crook,5,5,5,4,6,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_crook,5,5,5,6,2,attacked first=19;incapacitated a bot=9;killed=13;killed a bot=6
-rori,creature,gundark_desperado,8,8,-8,-3,4,attacked first=1;incapacitated a bot=2;killed a bot=1
-rori,creature,gundark_hooligan,6,6,-7,-4,2,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_hooligan,6,6,-7,-3,2,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_hooligan,6,6,-6,-4,2,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_hooligan,6,6,-5,-4,5,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_hooligan,6,6,-5,-3,2,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_hooligan,6,6,-5,-1,11,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_hooligan,6,6,-4,-3,3,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_hooligan,6,6,4,4,4,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_hooligan,6,6,4,5,4,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_hooligan,6,6,4,7,4,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_hooligan,6,6,5,4,3,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_hooligan,6,6,5,6,8,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_hooligan,6,6,5,7,3,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_hooligan,6,6,6,5,2,attacked first=17;incapacitated a bot=20;killed=9;killed a bot=9
-rori,creature,gundark_raider,9,9,-7,-4,2,attacked first=1;killed=1
-rori,creature,gundark_rogue,7,7,-7,-4,5,attacked first=21;given up on=1;incapacitated a bot=31;killed=6;killed a bot=13
-rori,creature,gundark_rogue,7,7,-6,-4,16,attacked first=21;given up on=1;incapacitated a bot=31;killed=6;killed a bot=13
-rori,creature,gundark_rogue,7,7,-6,-2,2,attacked first=21;given up on=1;incapacitated a bot=31;killed=6;killed a bot=13
-rori,creature,gundark_rogue,7,7,-5,-4,4,attacked first=21;given up on=1;incapacitated a bot=31;killed=6;killed a bot=13
-rori,creature,gundark_rogue,7,7,-5,-1,3,attacked first=21;given up on=1;incapacitated a bot=31;killed=6;killed a bot=13
-rori,creature,gundark_rogue,7,7,-4,-3,5,attacked first=21;given up on=1;incapacitated a bot=31;killed=6;killed a bot=13
-rori,creature,gundark_rogue,7,7,3,7,4,attacked first=21;given up on=1;incapacitated a bot=31;killed=6;killed a bot=13
-rori,creature,gundark_rogue,7,7,4,7,6,attacked first=21;given up on=1;incapacitated a bot=31;killed=6;killed a bot=13
-rori,creature,gundark_rogue,7,7,5,4,7,attacked first=21;given up on=1;incapacitated a bot=31;killed=6;killed a bot=13
-rori,creature,gundark_rogue,7,7,5,5,6,attacked first=21;given up on=1;incapacitated a bot=31;killed=6;killed a bot=13
-rori,creature,gundark_rogue,7,7,5,6,2,attacked first=21;given up on=1;incapacitated a bot=31;killed=6;killed a bot=13
-rori,creature,gundark_rogue,7,7,5,7,8,attacked first=21;given up on=1;incapacitated a bot=31;killed=6;killed a bot=13
-rori,creature,gundark_rogue,7,7,6,5,4,attacked first=21;given up on=1;incapacitated a bot=31;killed=6;killed a bot=13
-rori,creature,hermit_spider,1,7,-8,-2,1,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,-7,-3,3,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,-6,-4,6,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,-6,-3,13,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,-6,-2,5,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,-5,-3,11,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,-5,-2,5,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,-4,-3,1,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,3,4,3,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,4,5,1,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,4,6,5,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,5,4,1,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,5,6,4,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,5,7,3,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,6,5,2,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,hermit_spider,1,7,6,7,1,given up on=38;incapacitated a bot=16;killed=10;killed a bot=1
-rori,creature,ikopi,1,7,-8,-2,5,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-7,-4,12,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-7,-3,18,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-7,-2,3,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-7,-1,6,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-6,-5,4,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-6,-4,10,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-6,-3,75,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-6,-2,33,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-6,-1,8,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-5,-4,3,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-5,-3,36,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-5,-2,10,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-5,-1,8,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-4,-3,17,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,-4,-2,20,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,3,4,8,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,3,5,1,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,3,6,11,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,4,4,9,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,4,5,4,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,4,6,25,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,4,7,9,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,5,3,9,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,5,4,12,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,5,5,112,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,5,6,40,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,5,7,6,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,6,4,13,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,6,5,17,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,ikopi,1,7,6,6,12,attacked first=21;given up on=227;incapacitated a bot=116;killed=161;killed a bot=31
-rori,creature,insane_miner,9,9,6,6,2,incapacitated a bot=1;killed a bot=1
-rori,creature,kobola_miner,8,8,6,5,3,attacked first=1;incapacitated a bot=1;killed=1
-rori,creature,kobola_thief,9,9,-4,-3,4,attacked first=2;incapacitated a bot=2;killed=1;killed a bot=1
-rori,creature,kobola_thief,9,9,5,7,2,attacked first=2;incapacitated a bot=2;killed=1;killed a bot=1
-rori,creature,male_squall,1,1,-7,-3,1,given up on=2
-rori,creature,male_squall,1,1,-6,-3,1,given up on=2
-rori,creature,meek_avenging_squall,6,6,-7,-3,2,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,-6,-3,28,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,-6,-2,100,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,-6,-1,1,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,-5,-4,1,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,-5,-3,9,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,-5,-2,7,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,3,5,4,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,4,5,10,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,4,6,5,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,5,4,16,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,5,5,1,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,5,6,3,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,6,4,1,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,6,5,3,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,meek_avenging_squall,6,6,6,6,4,given up on=41;incapacitated a bot=14;killed=138;killed a bot=2
-rori,creature,narmle_militia_grenadier,11,11,5,3,5,attacked first=1;incapacitated a bot=3;killed a bot=1
-rori,creature,nightspider,7,7,-8,-3,4,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-8,-2,3,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-7,-3,28,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-7,-2,27,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-7,-1,8,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-6,-4,13,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-6,-3,176,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-6,-2,8,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-6,-1,7,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-5,-4,8,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-5,-3,49,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-5,-2,16,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-5,-1,4,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-4,-4,3,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-4,-3,11,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-4,-2,19,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,-4,-1,8,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,3,4,4,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,3,5,7,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,3,6,9,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,3,7,3,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,4,3,3,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,4,4,8,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,4,5,55,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,4,6,26,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,4,7,9,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,5,3,3,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,5,4,7,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,5,5,29,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,5,6,12,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,5,7,17,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,6,4,17,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,6,5,40,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider,7,7,6,6,13,attacked first=27;given up on=224;incapacitated a bot=217;killed=130;killed a bot=56
-rori,creature,nightspider_poison_spitter,11,11,-7,-2,4,attacked first=1;incapacitated a bot=2;killed a bot=1
-rori,creature,pigmy_pugoriss,8,8,5,5,13,given up on=2;incapacitated a bot=2;killed=11
-rori,creature,pigmy_pugoriss,8,8,6,7,2,given up on=2;incapacitated a bot=2;killed=11
-rori,creature,scorched_krevol,8,8,-7,-2,1,attacked first=4;given up on=3;incapacitated a bot=15;killed=9;killed a bot=9
-rori,creature,scorched_krevol,8,8,-6,-2,24,attacked first=4;given up on=3;incapacitated a bot=15;killed=9;killed a bot=9
-rori,creature,scorched_krevol,8,8,5,5,15,attacked first=4;given up on=3;incapacitated a bot=15;killed=9;killed a bot=9
-rori,creature,sickle_rasp,8,8,-8,-2,4,attacked first=14;given up on=9;incapacitated a bot=25;killed=6;killed a bot=11
-rori,creature,sickle_rasp,8,8,-7,-4,5,attacked first=14;given up on=9;incapacitated a bot=25;killed=6;killed a bot=11
-rori,creature,sickle_rasp,8,8,-7,-2,9,attacked first=14;given up on=9;incapacitated a bot=25;killed=6;killed a bot=11
-rori,creature,sickle_rasp,8,8,-6,-4,1,attacked first=14;given up on=9;incapacitated a bot=25;killed=6;killed a bot=11
-rori,creature,sickle_rasp,8,8,-4,-3,8,attacked first=14;given up on=9;incapacitated a bot=25;killed=6;killed a bot=11
-rori,creature,sickle_rasp,8,8,3,5,3,attacked first=14;given up on=9;incapacitated a bot=25;killed=6;killed a bot=11
-rori,creature,sickle_rasp,8,8,4,7,3,attacked first=14;given up on=9;incapacitated a bot=25;killed=6;killed a bot=11
-rori,creature,sickle_rasp,8,8,5,4,12,attacked first=14;given up on=9;incapacitated a bot=25;killed=6;killed a bot=11
-rori,creature,sickle_rasp,8,8,6,4,2,attacked first=14;given up on=9;incapacitated a bot=25;killed=6;killed a bot=11
-rori,creature,sickle_rasp,8,8,6,5,6,attacked first=14;given up on=9;incapacitated a bot=25;killed=6;killed a bot=11
-rori,creature,sickle_rasp,8,8,6,6,12,attacked first=14;given up on=9;incapacitated a bot=25;killed=6;killed a bot=11
-rori,creature,swamp_rat,10,10,4,5,3,attacked first=3;incapacitated a bot=2;killed a bot=3
-rori,creature,swamp_rat,10,10,5,5,5,attacked first=3;incapacitated a bot=2;killed a bot=3
-rori,creature,timid_vir_vur,8,8,-6,-3,12,given up on=5;incapacitated a bot=2;killed=20
-rori,creature,timid_vir_vur,8,8,5,5,15,given up on=5;incapacitated a bot=2;killed=20
-rori,creature,vicious_squall,1,12,-6,-3,18,attacked first=10;given up on=1;incapacitated a bot=22;killed=4;killed a bot=10
-rori,creature,vicious_squall,1,12,-6,-2,11,attacked first=10;given up on=1;incapacitated a bot=22;killed=4;killed a bot=10
-rori,creature,vicious_squall,1,12,-5,-2,8,attacked first=10;given up on=1;incapacitated a bot=22;killed=4;killed a bot=10
-rori,creature,vicious_squall,1,12,4,5,4,attacked first=10;given up on=1;incapacitated a bot=22;killed=4;killed a bot=10
-rori,creature,vicious_squall,1,12,4,6,2,attacked first=10;given up on=1;incapacitated a bot=22;killed=4;killed a bot=10
-rori,creature,vicious_squall,1,12,5,7,4,attacked first=10;given up on=1;incapacitated a bot=22;killed=4;killed a bot=10
-rori,creature,vrobalet,8,8,-7,-2,1,attacked first=3;incapacitated a bot=16;killed=5;killed a bot=9
-rori,creature,vrobalet,8,8,-6,-3,24,attacked first=3;incapacitated a bot=16;killed=5;killed a bot=9
-rori,creature,vrobalet,8,8,4,5,5,attacked first=3;incapacitated a bot=16;killed=5;killed a bot=9
-rori,creature,vrobalet,8,8,5,5,3,attacked first=3;incapacitated a bot=16;killed=5;killed a bot=9
-rori,creature,young_borgle,6,6,-8,-3,13,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-8,-2,11,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-7,-4,26,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-7,-3,40,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-7,-2,18,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-7,-1,15,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-6,-4,14,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-6,-2,13,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-6,-1,11,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-5,-4,38,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-5,-3,18,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-5,-2,11,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-5,-1,6,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-4,-4,3,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-4,-3,3,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,-4,-2,12,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,3,5,34,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,3,6,16,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,3,7,3,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,4,3,8,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,4,4,26,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,4,5,19,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,4,6,9,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,4,7,6,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,5,4,26,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,5,6,5,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,5,7,34,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,6,4,14,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,6,5,34,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle,6,6,6,6,21,attacked first=90;given up on=151;incapacitated a bot=158;killed=42;killed a bot=66
-rori,creature,young_borgle_gruntling,6,6,-7,-3,1,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,-6,-4,4,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,-6,-3,41,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,-6,-2,6,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,-5,-4,4,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,-5,-2,4,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,-5,-1,1,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,-4,-3,3,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,-4,-2,5,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,3,4,3,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,4,5,3,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,5,5,10,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,6,4,3,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,6,5,19,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,creature,young_borgle_gruntling,6,6,7,5,2,attacked first=3;given up on=32;incapacitated a bot=28;killed=39;killed a bot=7
-rori,lair,rori_borgal_young_lair_neutral_small,,,-8,-3,6,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-8,-2,3,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-7,-5,1,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-7,-4,5,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-7,-3,11,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-7,-2,9,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-7,-1,7,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-6,-4,7,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-6,-2,4,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-6,-1,3,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-5,-5,1,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-5,-4,7,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-5,-3,4,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-5,-2,7,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-5,-1,5,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-4,-3,2,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-4,-2,6,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,-4,-1,1,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,3,4,2,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,3,5,8,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,3,6,4,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,3,7,1,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,4,3,1,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,4,4,8,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,4,5,2,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,4,6,6,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,4,7,3,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,5,4,6,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,5,6,5,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,5,7,8,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,6,4,3,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,6,5,5,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,6,6,7,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,6,7,1,mission lair found=160
-rori,lair,rori_borgal_young_lair_neutral_small,,,7,5,1,mission lair found=160
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-8,-3,1,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-8,-2,1,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-7,-4,3,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-7,-3,3,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-7,-2,1,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-7,-1,2,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-6,-4,6,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-6,-1,3,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-5,-5,2,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-5,-4,4,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-5,-2,1,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-5,-1,1,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-4,-4,1,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-4,-3,2,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-4,-2,3,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-4,-1,1,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,3,4,1,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,3,5,4,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,3,6,1,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,4,4,3,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,4,6,1,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,4,7,2,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,5,3,1,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,5,4,2,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,5,6,2,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,5,7,1,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,6,4,2,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,6,5,1,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,6,6,4,mission lair found=61
-rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,7,5,1,mission lair found=61
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-8,-2,3,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-7,-5,1,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-7,-4,4,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-7,-3,8,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-7,-2,1,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-7,-1,1,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-6,-5,2,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-6,-4,10,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-6,-2,6,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-6,-1,2,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-5,-4,9,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-5,-3,4,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-5,-2,7,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-5,-1,6,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-4,-4,5,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-4,-3,4,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,-4,-2,4,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,3,4,3,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,3,5,3,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,3,6,3,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,4,4,10,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,4,5,4,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,4,6,3,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,4,7,4,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,5,3,2,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,5,4,10,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,5,6,3,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,5,7,1,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,6,4,7,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,6,5,9,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,6,6,5,mission lair found=145
-rori,lair,rori_capper_spineflap_hive_neutral_large,,,6,7,1,mission lair found=145
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-8,-3,2,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-8,-2,1,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-7,-4,4,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-7,-3,9,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-7,-2,11,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-7,-1,1,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-6,-4,10,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-6,-2,5,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-6,-1,3,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-5,-4,8,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-5,-3,7,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-5,-2,6,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-5,-1,3,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-4,-3,4,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-4,-2,2,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,3,4,4,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,3,5,3,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,3,6,3,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,3,7,1,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,4,3,1,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,4,4,3,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,4,5,4,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,4,6,6,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,4,7,4,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,5,4,7,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,5,5,1,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,5,6,9,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,5,7,8,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,6,3,1,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,6,4,4,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,6,5,10,mission lair found=150
-rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,6,6,5,mission lair found=150
-rori,lair,rori_gundark_raider_camp_neutral_medium_theater,,,-8,-3,1,mission lair found=7
-rori,lair,rori_gundark_raider_camp_neutral_medium_theater,,,-7,-4,1,mission lair found=7
-rori,lair,rori_gundark_raider_camp_neutral_medium_theater,,,-7,-3,1,mission lair found=7
-rori,lair,rori_gundark_raider_camp_neutral_medium_theater,,,-7,-1,1,mission lair found=7
-rori,lair,rori_gundark_raider_camp_neutral_medium_theater,,,-6,-4,1,mission lair found=7
-rori,lair,rori_gundark_raider_camp_neutral_medium_theater,,,-5,-4,1,mission lair found=7
-rori,lair,rori_gundark_raider_camp_neutral_medium_theater,,,-4,-3,1,mission lair found=7
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-8,-2,1,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-7,-4,1,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-7,-3,5,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-7,-2,3,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-7,-1,2,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-6,-5,2,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-6,-4,6,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-6,-2,3,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-6,-1,2,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-5,-4,2,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-5,-3,1,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-5,-2,3,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-5,-1,3,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-4,-3,5,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-4,-2,2,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,3,4,1,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,3,5,1,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,3,6,6,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,4,4,2,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,4,5,2,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,4,6,3,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,4,7,3,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,5,3,4,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,5,4,2,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,5,6,1,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,5,7,2,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,6,4,4,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,6,5,4,mission lair found=77
-rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,6,6,1,mission lair found=77
-rori,lair,rori_kobola_miner_base_neutral_large_theater,,,-7,-4,1,mission lair found=8
-rori,lair,rori_kobola_miner_base_neutral_large_theater,,,-6,-4,1,mission lair found=8
-rori,lair,rori_kobola_miner_base_neutral_large_theater,,,-4,-3,1,mission lair found=8
-rori,lair,rori_kobola_miner_base_neutral_large_theater,,,3,4,1,mission lair found=8
-rori,lair,rori_kobola_miner_base_neutral_large_theater,,,3,5,1,mission lair found=8
-rori,lair,rori_kobola_miner_base_neutral_large_theater,,,4,6,1,mission lair found=8
-rori,lair,rori_kobola_miner_base_neutral_large_theater,,,5,7,1,mission lair found=8
-rori,lair,rori_kobola_miner_base_neutral_large_theater,,,6,5,1,mission lair found=8
-rori,lair,rori_narmle_camp_neutral_large_theater,,,-6,-2,1,mission lair found=3
-rori,lair,rori_narmle_camp_neutral_large_theater,,,-4,-2,1,mission lair found=3
-rori,lair,rori_narmle_camp_neutral_large_theater,,,5,3,1,mission lair found=3
-rori,lair,rori_nightspider_lair_neutral_small,,,-8,-3,1,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,-7,-3,3,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,-7,-2,5,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,-7,-1,2,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,-6,-4,1,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,-6,-2,1,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,-6,-1,2,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,-5,-4,3,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,-5,-3,3,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,-5,-2,4,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,-4,-4,1,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,-4,-3,3,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,-4,-2,4,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,-4,-1,2,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,3,4,1,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,3,5,2,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,3,6,4,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,3,7,1,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,4,4,3,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,4,5,1,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,4,6,6,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,4,7,4,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,5,3,1,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,5,4,3,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,5,6,3,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,5,7,3,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,6,4,4,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,6,5,6,mission lair found=78
-rori,lair,rori_nightspider_lair_neutral_small,,,6,6,1,mission lair found=78
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-8,-2,1,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-7,-4,1,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-7,-3,1,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-7,-2,1,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-7,-1,1,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-6,-5,1,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-6,-4,1,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-6,-2,1,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-5,-4,1,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-4,-4,1,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-4,-3,2,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-4,-2,3,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,3,5,1,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,3,6,2,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,4,4,1,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,4,7,1,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,5,4,2,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,5,7,3,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,6,4,2,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,6,5,2,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,6,6,2,mission lair found=32
-rori,lair,rori_sickle_rasp_nest_neutral_medium,,,6,7,1,mission lair found=32
+rori,creature,capper_spineflap,1,6,-7,-3,20,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,-6,-4,4,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,-6,-3,60,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,-6,-2,19,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,-6,-1,5,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,-5,-4,1,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,-5,-2,6,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,-4,-3,1,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,3,6,9,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,4,4,22,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,4,5,4,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,4,6,2,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,5,4,14,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,5,5,10,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,5,6,41,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap,1,6,6,6,2,attacked first=32;given up on=1;incapacitated a bot=41;killed=137;killed a bot=9
+rori,creature,capper_spineflap_drone,1,6,-7,-4,4,given up on=3;incapacitated a bot=16;killed=52;killed a bot=1
+rori,creature,capper_spineflap_drone,1,6,-7,-3,2,given up on=3;incapacitated a bot=16;killed=52;killed a bot=1
+rori,creature,capper_spineflap_drone,1,6,-6,-2,30,given up on=3;incapacitated a bot=16;killed=52;killed a bot=1
+rori,creature,capper_spineflap_drone,1,6,-5,-4,3,given up on=3;incapacitated a bot=16;killed=52;killed a bot=1
+rori,creature,capper_spineflap_drone,1,6,-5,-3,22,given up on=3;incapacitated a bot=16;killed=52;killed a bot=1
+rori,creature,capper_spineflap_drone,1,6,-5,-2,1,given up on=3;incapacitated a bot=16;killed=52;killed a bot=1
+rori,creature,capper_spineflap_drone,1,6,-5,-1,1,given up on=3;incapacitated a bot=16;killed=52;killed a bot=1
+rori,creature,capper_spineflap_drone,1,6,-4,-3,2,given up on=3;incapacitated a bot=16;killed=52;killed a bot=1
+rori,creature,capper_spineflap_drone,1,6,4,5,3,given up on=3;incapacitated a bot=16;killed=52;killed a bot=1
+rori,creature,capper_spineflap_drone,1,6,5,6,2,given up on=3;incapacitated a bot=16;killed=52;killed a bot=1
+rori,creature,capper_spineflap_drone,1,6,6,4,2,given up on=3;incapacitated a bot=16;killed=52;killed a bot=1
+rori,creature,chuba,5,5,-5,-2,1,incapacitated a bot=1
+rori,creature,first_brigade_scout,7,7,-7,-3,4,attacked first=5;incapacitated a bot=9;killed=3;killed a bot=2
+rori,creature,first_brigade_scout,7,7,-6,-1,4,attacked first=5;incapacitated a bot=9;killed=3;killed a bot=2
+rori,creature,first_brigade_scout,7,7,-5,-3,7,attacked first=5;incapacitated a bot=9;killed=3;killed a bot=2
+rori,creature,first_brigade_scout,7,7,5,5,4,attacked first=5;incapacitated a bot=9;killed=3;killed a bot=2
+rori,creature,first_brigade_trooper,6,6,-7,-4,3,attacked first=1;incapacitated a bot=3;killed=1
+rori,creature,first_brigade_trooper,6,6,-7,-3,2,attacked first=1;incapacitated a bot=3;killed=1
+rori,creature,frail_squall,6,6,-7,-2,2,given up on=6;incapacitated a bot=9;killed=25;killed a bot=1
+rori,creature,frail_squall,6,6,-6,-3,13,given up on=6;incapacitated a bot=9;killed=25;killed a bot=1
+rori,creature,frail_squall,6,6,-4,-3,1,given up on=6;incapacitated a bot=9;killed=25;killed a bot=1
+rori,creature,frail_squall,6,6,4,5,2,given up on=6;incapacitated a bot=9;killed=25;killed a bot=1
+rori,creature,frail_squall,6,6,5,5,21,given up on=6;incapacitated a bot=9;killed=25;killed a bot=1
+rori,creature,frail_squall,6,6,6,6,2,given up on=6;incapacitated a bot=9;killed=25;killed a bot=1
+rori,creature,frightened_borgle,8,8,-5,-3,1,killed=2;killed a bot=1
+rori,creature,frightened_borgle,8,8,5,5,2,killed=2;killed a bot=1
+rori,creature,garyns_prowler,11,11,-6,-2,1,attacked first=3;incapacitated a bot=8;killed a bot=2
+rori,creature,garyns_prowler,11,11,5,5,12,attacked first=3;incapacitated a bot=8;killed a bot=2
+rori,creature,garyns_thief,15,15,-6,-2,2,incapacitated a bot=1;killed a bot=1
+rori,creature,gundark_crook,5,5,-7,-3,2,attacked first=8;incapacitated a bot=7;killed=7;killed a bot=2
+rori,creature,gundark_crook,5,5,3,6,10,attacked first=8;incapacitated a bot=7;killed=7;killed a bot=2
+rori,creature,gundark_crook,5,5,4,5,2,attacked first=8;incapacitated a bot=7;killed=7;killed a bot=2
+rori,creature,gundark_crook,5,5,5,4,2,attacked first=8;incapacitated a bot=7;killed=7;killed a bot=2
+rori,creature,gundark_crook,5,5,6,5,4,attacked first=8;incapacitated a bot=7;killed=7;killed a bot=2
+rori,creature,gundark_crook,5,5,7,5,4,attacked first=8;incapacitated a bot=7;killed=7;killed a bot=2
+rori,creature,gundark_desperado,8,8,-6,-4,6,attacked first=4;incapacitated a bot=2;killed=3;killed a bot=1
+rori,creature,gundark_desperado,8,8,-5,-2,4,attacked first=4;incapacitated a bot=2;killed=3;killed a bot=1
+rori,creature,gundark_hooligan,6,6,-7,-4,5,attacked first=7;incapacitated a bot=6;killed=5;killed a bot=2
+rori,creature,gundark_hooligan,6,6,-7,-3,6,attacked first=7;incapacitated a bot=6;killed=5;killed a bot=2
+rori,creature,gundark_hooligan,6,6,-6,-2,5,attacked first=7;incapacitated a bot=6;killed=5;killed a bot=2
+rori,creature,gundark_hooligan,6,6,6,5,4,attacked first=7;incapacitated a bot=6;killed=5;killed a bot=2
+rori,creature,gundark_rogue,7,7,-7,-3,3,attacked first=6;incapacitated a bot=8;killed=3;killed a bot=3
+rori,creature,gundark_rogue,7,7,-6,-5,5,attacked first=6;incapacitated a bot=8;killed=3;killed a bot=3
+rori,creature,gundark_rogue,7,7,-6,-2,7,attacked first=6;incapacitated a bot=8;killed=3;killed a bot=3
+rori,creature,gundark_rogue,7,7,-5,-4,5,attacked first=6;incapacitated a bot=8;killed=3;killed a bot=3
+rori,creature,hermit_spider,7,7,-5,-3,3,killed=3
+rori,creature,ikopi,1,7,-7,-4,11,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,-7,-3,3,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,-7,-2,3,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,-6,-4,1,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,-6,-3,43,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,-6,-2,6,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,-5,-3,21,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,-5,-2,7,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,4,3,1,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,4,5,2,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,4,6,24,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,5,4,8,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,5,5,60,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,5,6,4,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,ikopi,1,7,6,4,4,attacked first=10;incapacitated a bot=38;killed=144;killed a bot=6
+rori,creature,kobola_thief,9,9,4,4,5,attacked first=1;incapacitated a bot=3;killed a bot=1
+rori,creature,meek_avenging_squall,6,6,-7,-3,4,incapacitated a bot=20;killed=37;killed a bot=3
+rori,creature,meek_avenging_squall,6,6,-7,-2,2,incapacitated a bot=20;killed=37;killed a bot=3
+rori,creature,meek_avenging_squall,6,6,-6,-3,16,incapacitated a bot=20;killed=37;killed a bot=3
+rori,creature,meek_avenging_squall,6,6,-6,-2,5,incapacitated a bot=20;killed=37;killed a bot=3
+rori,creature,meek_avenging_squall,6,6,-6,-1,2,incapacitated a bot=20;killed=37;killed a bot=3
+rori,creature,meek_avenging_squall,6,6,-5,-4,2,incapacitated a bot=20;killed=37;killed a bot=3
+rori,creature,meek_avenging_squall,6,6,-5,-3,2,incapacitated a bot=20;killed=37;killed a bot=3
+rori,creature,meek_avenging_squall,6,6,-5,-1,3,incapacitated a bot=20;killed=37;killed a bot=3
+rori,creature,meek_avenging_squall,6,6,3,6,1,incapacitated a bot=20;killed=37;killed a bot=3
+rori,creature,meek_avenging_squall,6,6,4,4,1,incapacitated a bot=20;killed=37;killed a bot=3
+rori,creature,meek_avenging_squall,6,6,4,5,4,incapacitated a bot=20;killed=37;killed a bot=3
+rori,creature,meek_avenging_squall,6,6,5,5,16,incapacitated a bot=20;killed=37;killed a bot=3
+rori,creature,meek_avenging_squall,6,6,5,6,2,incapacitated a bot=20;killed=37;killed a bot=3
+rori,creature,nightspider,7,7,-7,-4,6,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,-7,-3,2,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,-7,-1,2,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,-6,-4,4,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,-6,-3,28,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,-6,-2,4,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,-6,-1,1,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,-5,-3,17,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,-5,-2,18,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,-5,-1,5,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,-4,-4,2,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,-4,-3,1,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,-4,-1,8,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,4,4,2,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,4,5,26,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,4,6,8,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,4,7,2,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,5,5,3,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,nightspider,7,7,6,5,2,attacked first=11;given up on=9;incapacitated a bot=40;killed=70;killed a bot=11
+rori,creature,pigmy_pugoriss,8,8,5,5,20,killed=20
+rori,creature,scorched_krevol,8,8,-6,-2,5,attacked first=1;incapacitated a bot=4;killed=2;killed a bot=1
+rori,creature,scorched_krevol,8,8,5,5,3,attacked first=1;incapacitated a bot=4;killed=2;killed a bot=1
+rori,creature,sickle_rasp,8,8,-7,-3,12,attacked first=4;incapacitated a bot=7;killed=2;killed a bot=2
+rori,creature,sickle_rasp,8,8,-6,-4,3,attacked first=4;incapacitated a bot=7;killed=2;killed a bot=2
+rori,creature,swamp_rat,10,10,4,5,7,attacked first=9;given up on=1;incapacitated a bot=2;killed=1;killed a bot=9
+rori,creature,swamp_rat,10,10,5,5,15,attacked first=9;given up on=1;incapacitated a bot=2;killed=1;killed a bot=9
+rori,creature,timid_vir_vur,8,8,5,5,2,killed=2
+rori,creature,vicious_squall,12,12,-6,-3,4,attacked first=2;incapacitated a bot=3;killed a bot=2
+rori,creature,vicious_squall,12,12,-6,-2,3,attacked first=2;incapacitated a bot=3;killed a bot=2
+rori,creature,vrobalet,8,8,-6,-3,3,incapacitated a bot=4;killed a bot=1
+rori,creature,vrobalet,8,8,-6,-2,2,incapacitated a bot=4;killed a bot=1
+rori,creature,young_borgle,6,6,-8,-3,4,attacked first=17;given up on=3;incapacitated a bot=16;killed=14;killed a bot=6
+rori,creature,young_borgle,6,6,-8,-2,9,attacked first=17;given up on=3;incapacitated a bot=16;killed=14;killed a bot=6
+rori,creature,young_borgle,6,6,-7,-4,1,attacked first=17;given up on=3;incapacitated a bot=16;killed=14;killed a bot=6
+rori,creature,young_borgle,6,6,-7,-3,3,attacked first=17;given up on=3;incapacitated a bot=16;killed=14;killed a bot=6
+rori,creature,young_borgle,6,6,-7,-2,3,attacked first=17;given up on=3;incapacitated a bot=16;killed=14;killed a bot=6
+rori,creature,young_borgle,6,6,-6,-1,5,attacked first=17;given up on=3;incapacitated a bot=16;killed=14;killed a bot=6
+rori,creature,young_borgle,6,6,-5,-4,9,attacked first=17;given up on=3;incapacitated a bot=16;killed=14;killed a bot=6
+rori,creature,young_borgle,6,6,4,4,16,attacked first=17;given up on=3;incapacitated a bot=16;killed=14;killed a bot=6
+rori,creature,young_borgle,6,6,5,7,3,attacked first=17;given up on=3;incapacitated a bot=16;killed=14;killed a bot=6
+rori,creature,young_borgle,6,6,6,5,3,attacked first=17;given up on=3;incapacitated a bot=16;killed=14;killed a bot=6
+rori,creature,young_borgle_gruntling,6,6,-7,-3,4,attacked first=2;given up on=1;incapacitated a bot=25;killed=39;killed a bot=4
+rori,creature,young_borgle_gruntling,6,6,-7,-2,8,attacked first=2;given up on=1;incapacitated a bot=25;killed=39;killed a bot=4
+rori,creature,young_borgle_gruntling,6,6,-6,-4,3,attacked first=2;given up on=1;incapacitated a bot=25;killed=39;killed a bot=4
+rori,creature,young_borgle_gruntling,6,6,-6,-3,6,attacked first=2;given up on=1;incapacitated a bot=25;killed=39;killed a bot=4
+rori,creature,young_borgle_gruntling,6,6,-6,-2,25,attacked first=2;given up on=1;incapacitated a bot=25;killed=39;killed a bot=4
+rori,creature,young_borgle_gruntling,6,6,-5,-2,6,attacked first=2;given up on=1;incapacitated a bot=25;killed=39;killed a bot=4
+rori,creature,young_borgle_gruntling,6,6,-5,-1,2,attacked first=2;given up on=1;incapacitated a bot=25;killed=39;killed a bot=4
+rori,creature,young_borgle_gruntling,6,6,4,5,6,attacked first=2;given up on=1;incapacitated a bot=25;killed=39;killed a bot=4
+rori,creature,young_borgle_gruntling,6,6,5,5,2,attacked first=2;given up on=1;incapacitated a bot=25;killed=39;killed a bot=4
+rori,creature,young_borgle_gruntling,6,6,5,6,9,attacked first=2;given up on=1;incapacitated a bot=25;killed=39;killed a bot=4
+rori,lair,rori_borgal_young_lair_neutral_small,,,-8,-3,3,mission lair fought=62;mission lair found=17
+rori,lair,rori_borgal_young_lair_neutral_small,,,-8,-2,3,mission lair fought=62;mission lair found=17
+rori,lair,rori_borgal_young_lair_neutral_small,,,-7,-4,15,mission lair fought=62;mission lair found=17
+rori,lair,rori_borgal_young_lair_neutral_small,,,-7,-3,3,mission lair fought=62;mission lair found=17
+rori,lair,rori_borgal_young_lair_neutral_small,,,-6,-4,9,mission lair fought=62;mission lair found=17
+rori,lair,rori_borgal_young_lair_neutral_small,,,-6,-2,8,mission lair fought=62;mission lair found=17
+rori,lair,rori_borgal_young_lair_neutral_small,,,-6,-1,21,mission lair fought=62;mission lair found=17
+rori,lair,rori_borgal_young_lair_neutral_small,,,-5,-4,3,mission lair fought=62;mission lair found=17
+rori,lair,rori_borgal_young_lair_neutral_small,,,4,4,6,mission lair fought=62;mission lair found=17
+rori,lair,rori_borgal_young_lair_neutral_small,,,5,5,4,mission lair fought=62;mission lair found=17
+rori,lair,rori_borgal_young_lair_neutral_small,,,5,7,2,mission lair fought=62;mission lair found=17
+rori,lair,rori_borgal_young_lair_neutral_small,,,6,5,2,mission lair fought=62;mission lair found=17
+rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-7,-4,3,mission lair fought=25;mission lair found=12
+rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-7,-3,3,mission lair fought=25;mission lair found=12
+rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-6,-4,3,mission lair fought=25;mission lair found=12
+rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-6,-2,4,mission lair fought=25;mission lair found=12
+rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-6,-1,3,mission lair fought=25;mission lair found=12
+rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-5,-3,7,mission lair fought=25;mission lair found=12
+rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-4,-4,3,mission lair fought=25;mission lair found=12
+rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,-4,-2,2,mission lair fought=25;mission lair found=12
+rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,5,5,4,mission lair fought=25;mission lair found=12
+rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,6,5,2,mission lair fought=25;mission lair found=12
+rori,lair,rori_brigade_scout_camp_neutral_medium_theater,,,6,6,3,mission lair fought=25;mission lair found=12
+rori,lair,rori_capper_spineflap_hive_neutral_large,,,-7,-4,3,mission lair fought=36;mission lair found=20
+rori,lair,rori_capper_spineflap_hive_neutral_large,,,-7,-3,8,mission lair fought=36;mission lair found=20
+rori,lair,rori_capper_spineflap_hive_neutral_large,,,-7,-2,7,mission lair fought=36;mission lair found=20
+rori,lair,rori_capper_spineflap_hive_neutral_large,,,-6,-1,2,mission lair fought=36;mission lair found=20
+rori,lair,rori_capper_spineflap_hive_neutral_large,,,-5,-2,3,mission lair fought=36;mission lair found=20
+rori,lair,rori_capper_spineflap_hive_neutral_large,,,-4,-3,2,mission lair fought=36;mission lair found=20
+rori,lair,rori_capper_spineflap_hive_neutral_large,,,3,6,3,mission lair fought=36;mission lair found=20
+rori,lair,rori_capper_spineflap_hive_neutral_large,,,4,4,12,mission lair fought=36;mission lair found=20
+rori,lair,rori_capper_spineflap_hive_neutral_large,,,5,4,6,mission lair fought=36;mission lair found=20
+rori,lair,rori_capper_spineflap_hive_neutral_large,,,5,6,4,mission lair fought=36;mission lair found=20
+rori,lair,rori_capper_spineflap_hive_neutral_large,,,6,4,6,mission lair fought=36;mission lair found=20
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-7,-5,2,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-7,-4,9,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-7,-3,7,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-7,-2,5,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-6,-5,3,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-6,-4,3,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-6,-2,15,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-6,-1,2,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,-5,-4,3,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,3,6,3,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,4,5,16,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,4,6,3,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,4,7,2,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,5,4,2,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,5,6,3,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,6,4,3,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,6,5,3,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,6,6,3,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_hooligan_camp_neutral_medium_theater,,,7,5,2,mission lair fought=63;mission lair found=26
+rori,lair,rori_gundark_raider_camp_neutral_medium_theater,,,-7,-3,3,mission lair fought=11;mission lair found=4
+rori,lair,rori_gundark_raider_camp_neutral_medium_theater,,,-6,-4,7,mission lair fought=11;mission lair found=4
+rori,lair,rori_gundark_raider_camp_neutral_medium_theater,,,-5,-4,2,mission lair fought=11;mission lair found=4
+rori,lair,rori_gundark_raider_camp_neutral_medium_theater,,,-5,-2,3,mission lair fought=11;mission lair found=4
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-7,-4,2,mission lair fought=27;mission lair found=15
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-7,-3,2,mission lair fought=27;mission lair found=15
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-7,-2,3,mission lair fought=27;mission lair found=15
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-7,-1,3,mission lair fought=27;mission lair found=15
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-6,-4,3,mission lair fought=27;mission lair found=15
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-6,-1,2,mission lair fought=27;mission lair found=15
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-5,-5,2,mission lair fought=27;mission lair found=15
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-5,-4,3,mission lair fought=27;mission lair found=15
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-5,-1,3,mission lair fought=27;mission lair found=15
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-4,-3,3,mission lair fought=27;mission lair found=15
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,-4,-1,2,mission lair fought=27;mission lair found=15
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,4,4,6,mission lair fought=27;mission lair found=15
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,4,6,5,mission lair fought=27;mission lair found=15
+rori,lair,rori_ikopi_lair_neutral_medium_boss_01,,,5,4,3,mission lair fought=27;mission lair found=15
+rori,lair,rori_kobola_miner_base_neutral_large_theater,,,4,4,3,mission lair fought=2;mission lair found=1
+rori,lair,rori_nightspider_lair_neutral_small,,,-7,-3,3,mission lair fought=27;mission lair found=14
+rori,lair,rori_nightspider_lair_neutral_small,,,-6,-1,8,mission lair fought=27;mission lair found=14
+rori,lair,rori_nightspider_lair_neutral_small,,,-5,-4,3,mission lair fought=27;mission lair found=14
+rori,lair,rori_nightspider_lair_neutral_small,,,-5,-2,5,mission lair fought=27;mission lair found=14
+rori,lair,rori_nightspider_lair_neutral_small,,,-5,-1,5,mission lair fought=27;mission lair found=14
+rori,lair,rori_nightspider_lair_neutral_small,,,-4,-4,2,mission lair fought=27;mission lair found=14
+rori,lair,rori_nightspider_lair_neutral_small,,,-4,-3,3,mission lair fought=27;mission lair found=14
+rori,lair,rori_nightspider_lair_neutral_small,,,-4,-1,3,mission lair fought=27;mission lair found=14
+rori,lair,rori_nightspider_lair_neutral_small,,,3,6,2,mission lair fought=27;mission lair found=14
+rori,lair,rori_nightspider_lair_neutral_small,,,4,3,2,mission lair fought=27;mission lair found=14
+rori,lair,rori_nightspider_lair_neutral_small,,,4,6,2,mission lair fought=27;mission lair found=14
+rori,lair,rori_nightspider_lair_neutral_small,,,6,4,3,mission lair fought=27;mission lair found=14
+rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-7,-3,4,mission lair fought=12;mission lair found=6
+rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-6,-4,3,mission lair fought=12;mission lair found=6
+rori,lair,rori_sickle_rasp_nest_neutral_medium,,,-5,-1,2,mission lair fought=12;mission lair found=6
+rori,lair,rori_sickle_rasp_nest_neutral_medium,,,4,4,3,mission lair fought=12;mission lair found=6
+rori,lair,rori_sickle_rasp_nest_neutral_medium,,,4,6,3,mission lair fought=12;mission lair found=6
+rori,lair,rori_sickle_rasp_nest_neutral_medium,,,5,6,3,mission lair fought=12;mission lair found=6

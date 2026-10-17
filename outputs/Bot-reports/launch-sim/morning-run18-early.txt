@@ -1,0 +1,53 @@
+Correction (16 Oct 11:50 PM): the error counts at the end of this file cover the whole core3.log, not run 18. The 748 'skill points mismatch' lines are from 16 Oct 1:13-1:14 AM (C61-ranged-lairs.md addendum). Run 18 had 16 error lines in all: see morning-run18.txt.
+
+wrote /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Bot-reports/launch-sim/numbers-run18-early.md (18153 chars)
+/mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Bot-reports/launch-sim/findings-run18-early.md: 5 FAIL, 1 WATCH, 6 PASS
+| From | To | Tries | Arrived | Failed | Median trip (s) | Failures (step: reason x n) |
+|---|---|---:|---:|---:|---:|---|
+| tatooine: Mos Eisley Starport | corellia: Coronet Starport | 8 | 7 | 1 | 206 | MIXED - died: killed on the way x1 |
+| tatooine: Mos Eisley Starport | naboo: Keren Starport | 7 | 6 | 1 | 157 | MIXED - died: killed on the way x1 |
+| corellia: Coronet Shuttle A | corellia: Bela Vistal Shuttleport B | 2 | 1 | 0 | 108 | PASS |
+| corellia: Coronet Starport | talus: Nashal Starport | 3 | 3 | 0 | 105 | PASS |
+| corellia: Doaba Guerfel Starport | talus: Nashal Starport | 1 | 1 | 0 | 12 | PASS |
+| corellia: Kor Vella Starport | talus: Dearic Starport | 1 | 1 | 0 | 122 | PASS |
+| corellia: Kor Vella Starport | talus: Nashal Starport | 1 | 1 | 0 | 122 | PASS |
+| corellia: Tyrena Starport | talus: Nashal Starport | 2 | 2 | 0 | 95 | PASS |
+| naboo: Kaadara Starport | rori: Restuss Starport | 2 | 2 | 0 | 94 | PASS |
+| naboo: Keren Starport | rori: Narmle Starport | 2 | 1 | 0 | 94 | PASS |
+| naboo: Moenia | rori: Narmle Starport | 1 | 1 | 0 | 13 | PASS |
+| naboo: Theed Spaceport | rori: Narmle Starport | 1 | 1 | 0 | 97 | PASS |
+| tatooine: Mos Eisley Starport | corellia: Doaba Guerfel Starport | 3 | 3 | 0 | 228 | PASS |
+| tatooine: Mos Eisley Starport | corellia: Kor Vella Starport | 7 | 7 | 0 | 157 | PASS |
+| tatooine: Mos Eisley Starport | corellia: Tyrena Starport | 7 | 7 | 0 | 239 | PASS |
+| tatooine: Mos Eisley Starport | hutta: Bilbousa Starport | 14 | 14 | 0 | 196 | PASS |
+| tatooine: Mos Eisley Starport | naboo: Kaadara Starport | 4 | 4 | 0 | 144 | PASS |
+| tatooine: Mos Eisley Starport | naboo: Moenia | 4 | 4 | 0 | 224 | PASS |
+| tatooine: Mos Eisley Starport | naboo: Theed Spaceport | 6 | 6 | 0 | 212 | PASS |
+
+Routes 19, tries 76, arrived 72, failed 2, still under way at the end of the log 2.
+
+| Step | Failures |
+|---|---:|
+| died | 2 |
+corellia: 440 bots, 0 explorers, 60 squares, 43 templates
+naboo: 352 bots, 0 explorers, 54 squares, 40 templates
+ossus: 200 bots, 200 explorers, 73 squares, 9 templates
+rori: 171 bots, 0 explorers, 27 squares, 29 templates
+talus: 174 bots, 0 explorers, 30 squares, 21 templates
+tatooine: 420 bots, 0 explorers, 57 squares, 34 templates
+7 AM check 16 Oct 10:39 PM: core3 up, load 4.53 3.17 3.34, free 8606 MB
+== last BotPop stats line (routes, legs stopped)
+mode all, online 1700, active avg 1700 max 1700 (last pass: near 0, rotating 0, busy 0), tick avg 1.02 ms max 3 ms over 60 passes (0 skipped: steps still running), steps 1103.17 ms per second across workers, slowest chunk 229.21 ms, real players 0, spawned 1700, logged out 0, failed 0, no path 0, routes 6205 (0 deferred, 3061 none), legs stopped: no start 488, no end 120, no path 0, partial 5363, unloaded mesh 0, snapped 501
+== lair_check summary (why ranged bots fail lairs)
+495 lair_check rows
+ranged 262 (los, attackable, posture): {(True, True, 0): 252, (True, True, 1): 10} {'damage=0': 260, 'damage>0': 2} weapons: {'rifle_cdef': 169, 'pistol_cdef': 55, 'carbine_cdef': 38} dist median: 6
+melee 233 (los, attackable, posture): {(True, True, 0): 225, (True, True, 2): 4, (True, True, 1): 4} {'damage=0': 230, 'damage>0': 3} weapons: {'unknown_weapon': 217, 'knife_survival': 14, 'axe_heavy_duty': 2} dist median: 6
+== errors in core3.log (count by message, top 8)
+    748 skill points mismatch calculated: 985 found: 235
+     11 unknown appearance type SPRT
+      8 Fri Oct 16 22:24:54 2026 [1792214694580 msec] (6 s) Thread 2 - [Lua] INFO - file:scripts/o
+      8 Fri Oct 16 22:24:54 2026 [1792214694577 msec] (6 s) Thread 2 - [Lua] INFO - file:scripts/o
+      8 Fri Oct 16 22:24:54 2026 [1792214694563 msec] (6 s) Thread 2 - [Lua] INFO - file:scripts/o
+      8 Fri Oct 16 22:05:06 2026 [1792213506575 msec] (6 s) Thread 2 - [Lua] INFO - file:scripts/o
+      8 Fri Oct 16 22:05:06 2026 [1792213506568 msec] (6 s) Thread 2 - [Lua] INFO - file:scripts/o
+      8 Fri Oct 16 22:05:06 2026 [1792213506565 msec] (6 s) Thread 2 - [Lua] INFO - file:scripts/o
