@@ -242,6 +242,17 @@ def search_point(g, bot):
     return None
 
 
+def origin(bot):
+    """The bot's position in world coordinates for distance rules. Indoors status() gives cell-local x and y, so the
+    world position of the terminal it stands at (recorded by take()) stands in. 17 Oct 12:09 PM: Rusk at an indoor
+    general terminal found no in-town delivery among six, every distance being measured from cell-local 0, 0."""
+    here = bot.status()
+    spot = bot.__dict__.get('mission_origin')
+    if here.get('cell') and spot:
+        return {'planet': here.get('planet'), 'x': spot['x'], 'y': spot['y']}
+    return here
+
+
 def locate_from(bot, text, radius, at=None):
     return bot.locate(text, radius=radius, x=at['x'], y=at['y']) if at else bot.locate(text, radius=radius)
 
@@ -326,6 +337,8 @@ def take(g, bot, terminal, ttype, choices, label, divisor, listed=None):
     """List at terminal (unless listed is given), pick with the first (mission type, chooser) that finds one, accept.
     divisor is the bot's group size (group_size, read before any parallel jobs). Returns (mission, bank before,
     divisor), or (None, None, None) after a BLOCKED result."""
+    if isinstance(terminal.get('x'), (int, float)):
+        bot.__dict__['mission_origin'] = {'x': terminal['x'], 'y': terminal['y']}  # world coordinates (locate)
     for mtype, choose in choices:  # finish a mission an earlier run left (there is no abort; the cap is 6)
         old = choose([m for m in held(bot) if m.get('type') == mtype]) if mtype in REUSE else None
         if old:
@@ -384,9 +397,14 @@ def paid(g, bot, mission, before, divisor, label, since, seconds=30, began=None,
         extra['group_too_far'] = True
     g.check(f'{label}: the mission leaves the datapad', removed, {'success message': bool(message),
                                                                    'group_too_far': bool(far_away)})
-    g.check(f'{label}: the share reaches the bank', removed and gained is not None and gained == expected,
-            {'reward': reward, 'divisor': divisor, 'expected': expected, 'paid': gained,
-             'bank_before': before, 'bank_after': after})
+    # A teammate's mission that ends within 128 m in the same window pays this bot a share too (17 Oct 12:09 PM:
+    # Rusk's musician share 52 plus Dorn's dancer share 44, same building): then more than one success message came.
+    others = gained - expected if gained is not None and expected is not None and gained > expected         and len(message) > 1 else 0
+    if others:
+        extra['other_shares'] = others
+    g.check(f'{label}: the share reaches the bank', removed and gained is not None and gained - others == expected,
+            {'reward': reward, 'divisor': divisor, 'expected': expected, 'paid': gained, 'other_shares': others,
+             'success_messages': len(message), 'bank_before': before, 'bank_after': after})
     return result(g, label, type=mission.get('type'), title=mission.get('title'), reward=reward, divisor=divisor,
                   expected=expected, paid=gained, bank_before=before, bank_after=after, removed=removed,
                   message=bool(message), seconds=round(time.time() - began, 1) if began else None, **extra)
@@ -475,6 +493,8 @@ def guarded_walk(g, team, point, label, leg=250, minutes=15):
             return {'arrived': True, 'seconds': round(time.time() - began, 1), 'fights': fights, 'downed': sorted(downed)}
         share = min(1.0, leg / left) if left != math.inf else 1.0
         step = {'x': here['x'] + (point['x'] - here['x']) * share, 'y': here['y'] + (point['y'] - here['y']) * share}
+        if here.get('cell'):  # cell-local x and y: head straight for the point; the body routes out of the building
+            step = dict(point)
         g.parallel(*[lambda b=b, i=i: b.walk(step['x'] + 3 * i, step['y'], tries=2) for i, b in enumerate(team)])
         for _ in range(4):  # clear what is next to us before the next leg
             standing = [b for b in team if b.posture() not in DOWN]
@@ -862,9 +882,8 @@ def bounty_level(bot):
 
 def npc_bounty(bot, limit):
     """NPC bounties (a player bounty has no end point) whose target starts within limit m, nearest first."""
-    here = bot.status()
-
     def choose(listed):
+        here = origin(bot)
         ok = [m for m in listed if far(here, m.get('end')) <= limit]
         return min(ok, key=lambda m: far(here, m.get('end'))) if ok else None
     return choose
@@ -993,9 +1012,8 @@ def disabled(g, bot, terminal, ttype):
 
 # ---- choosing ----
 def nearest(bot, fits=lambda m: True, limit=math.inf):
-    here = bot.status()
-
     def choose(listed):
+        here = origin(bot)
         ok = [m for m in listed if fits(m) and far(here, where(m)) <= limit]
         return min(ok, key=lambda m: far(here, where(m))) if ok else None
     return choose
@@ -1003,9 +1021,8 @@ def nearest(bot, fits=lambda m: True, limit=math.inf):
 
 def in_town(bot):
     """Deliver and crafting missions whose start and end are both in this city, shortest route first."""
-    here = bot.status()
-
     def choose(listed):
+        here = origin(bot)
         ok = [m for m in listed if far(here, where(m)) <= 400 and far(here, m.get('end')) <= IN_TOWN]
         return min(ok, key=lambda m: far(here, where(m)) + far(where(m), m.get('end'))) if ok else None
     return choose
@@ -1014,9 +1031,8 @@ def in_town(bot):
 def easiest(bot, limit=2300):
     """The lowest-difficulty destroy mission within limit m (1000-2000 m placement plus the lair's offset), avoiding
     boss lairs on a tie."""
-    here = bot.status()
-
     def choose(listed):
+        here = origin(bot)
         ok = [m for m in listed if far(here, where(m)) <= limit]
         return min(ok, key=lambda m: (m.get('difficulty') or 99, 'boss' in str(m.get('target')),
                                       far(here, where(m)))) if ok else None

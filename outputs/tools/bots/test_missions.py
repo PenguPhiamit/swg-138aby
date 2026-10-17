@@ -450,6 +450,27 @@ class Readers(Base):
         bots[0].cell = 0
         self.assertIsNone(M.search_point(g, bots[0]))
 
+    def test_an_indoor_terminal_measures_from_its_world_position(self):
+        g, (bot,) = self.crew('Rusk')
+        terminal = self.galaxy.terminal('general', bot.x, bot.y)
+        bot.mission_list(terminal['oid'])  # offers around the terminal, in world coordinates
+        bot.cell, bot.x, bot.y = 1082874, 2.0, -3.0  # then the body reports cell-local x and y
+        mission, _, _ = M.take(g, bot, terminal, 'general', [('deliver', M.in_town(bot))], 'general/deliver', 3,
+                               listed=[m for m in bot.missions() if M.in_bag(m)])
+        self.assertEqual(mission and mission['type'], 'deliver')
+
+    def test_a_teammates_share_in_the_same_window_still_passes(self):
+        g, bots = self.crew('Dorn', 'Nima', 'Rusk')
+        rusk = bots[2]
+        mission = {'oid': 9, 'type': 'musician', 'reward': 157}
+        since = M.mark(rusk)
+        rusk.hear('@mission:mission_generic')  # Dorn's dancer share
+        rusk.hear('@mission:mission_generic')  # his own
+        rusk.bank_credits += 96
+        done = M.paid(g, rusk, mission, rusk.bank_credits - 96, 3, 'entertainer/musician', since)
+        self.assertEqual((done['paid'], done['expected'], done['other_shares']), (96, 52, 44))
+        self.assertEqual(g.failed(), [])
+
     def test_choosers(self):
         g, (bot,) = self.crew('Cresh')
         here = {'planet': 'tatooine', 'x': bot.x, 'y': bot.y}
