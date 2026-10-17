@@ -172,3 +172,14 @@ Next: Claude reviews the three source commits and stages the client corrections 
      - all characters: the intermittent interaction loss.
    - Separate owner report: server bots run through walls.
      - Cause: BotPop moves bots by position along straight legs, with no building collision.
+6. **7:00 PM, the cause of the interaction loss: CPU starvation on Miniverse, not the server or the archives.**
+   - Windows CPU 97%; WSL load average 9.7 of 12 threads, from run 13's 1,700 active bots (~3 CPU-seconds per second of bot steps alone).
+   - The single-threaded SWG client starves, so radials, SUI windows, chat and movement stall, and they recover when load dips.
+   - The server's own response stayed 0.05-0.25 s throughout (latency probe).
+   - The heartbeat timeouts in core3.log only happen as the client closes, so they are not evidence.
+   - Earlier Hutt observations ("barely moves", "can't interact") were probably the same starvation.
+   - The Hutt still needs a clean retest on a quiet galaxy for its own problems: animation, and any movement issue that remains.
+   - For any real-client test:
+     - raise SWGEmu.exe to Above normal priority;
+     - and/or cut the bots (`botpop despawn <n>`; throttled mode needs a full despawn first);
+     - later, cap WSL's processors in `.wslconfig` (owner's decision; needs a WSL restart).
