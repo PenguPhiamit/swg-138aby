@@ -68,3 +68,20 @@ Not available in this client: the `[ClientLimits] SetFramesPerSecond` frame cap 
 - [user.cfg tweaks (Sentinels Republic forum)](https://forum.swgsremu.com/viewtopic.php?t=66): frame cap and camera zoom notes; their frame-cap key is not in our client.
 - [DXVK 1.6: D3D9 performance work (Phoronix)](https://www.phoronix.com/news/DXVK-1.6-Released) and [DXVK 1.10.2 game fixes (Phoronix)](https://www.phoronix.com/news/DXVK-1.10.2-Released): DXVK's D3D9 path.
 - [4GB Patch (TechPowerUp forum)](https://techpowerup.com/forums/goto/post?id=3484635): large address aware for 32-bit programs on 64-bit Windows.
+
+## Installed on the owner's client (16 Oct 2026, 7:10 PM, owner's OK)
+
+- C5: `SWGEmu.exe` is large address aware. The original is `SWGEmu.exe.bak`.
+- C6: DXVK 3.1.1 from the official release (`dxvk-3.1.1.tar.gz`, sha256 `40565b4a...` matched GitHub's digest).
+  - Its 32-bit `d3d9.dll` is in `SWG-client/`.
+  - `dxvk.conf` caps the frame rate at 60 (`d3d9.maxFrameRate = 60`).
+  - Undo: delete `d3d9.dll`.
+- C2/C3/C7 in `user.cfg`:
+  - `debugExamine=0`;
+  - `[SharedNetwork] useNetworkThread=true`;
+  - `[ClientSkeletalAnimation] lodManagerEnable=true`, `lodManagerHardSkinningCharacterCount=100`.
+  - Undo: restore `user.cfg.bak`.
+- C1: `Start SWG (above normal).cmd` in `SWG-client/` starts the client at Above normal priority.
+- The client archive is back on `6ff21312`, matching the server.
+- S1: the optimised `RelWithDebInfo` test build (`dev_build.py --release`) is building. The test galaxy picks it up at its next `--dev-server` start.
+- Not yet tested in game.
