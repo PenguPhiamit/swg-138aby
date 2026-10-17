@@ -1,0 +1,280 @@
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunch.h
+@@ -198,6 +198,8 @@
+ 	float tripBest = 0;              // the nearest the bot has come to its current walk target...
+ 	uint64 tripBestMs = 0, tripBestFor = 0; // ...when, and which target (tripWalk's stall check)
+ 	City tripOnward = {"", "", 0, 0, 0};     // the destination after this leg (via a hub, a starport or a shuttle)
++	uint64 exitTerminalID = 0, exitSinceMs = 0; // just landed at a starport: out through its terminal hall (tripExit)
++	bool exitInHall = false;
+ 	bool tripOnwardSet = false;
+ };
+ 
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+@@ -19,6 +19,9 @@
+ #include "server/zone/managers/collision/CollisionManager.h"
+ #include "server/zone/managers/collision/PathFinderManager.h"
+ #include "pathfinding/RecastPolygon.h"
++#include "pathfinding/recast/DetourNode.h"
++#include "pathfinding/recast/DetourCommon.h"
++#include <algorithm>
+ #include "server/zone/managers/botpop/BotPopRegistry.h"
+ #include "server/zone/managers/botpop/ClientlessLogin.h"
+ #include "server/zone/managers/botpop/BotPopLaunch.h"
+@@ -166,6 +169,7 @@
+ 	std::atomic<int> routeBudget{ROUTES_PER_PASS}, routesPlanned{0}, routesDeferred{0};
+ 	// Navmesh legs that could not be walked as asked (meshPath): the bot stops or waits instead of crossing the mesh straight.
+ 	std::atomic<int> legNoStart{0}, legNoEnd{0}, legNoPath{0}, legPartial{0}, legNoMesh{0}, legSnapped{0}, routesNone{0};
++	std::atomic<int> legPocket{0}; // leg ends moved off a small cut-off piece of the mesh (meshOutOfPocket)
+ 	std::atomic<int> launchBots{0}, launchKills{0}, launchDeaths{0}, launchBoxes{0}, launchTravels{0};
+ 	uint64 nextPositionsMs = 0; // the tick writes log/botpop-positions.json every 10 s (the live map)
+ 	std::atomic<int> launchMissions{0}, launchMissionsDone{0};
+@@ -387,6 +391,7 @@
+ 	void tripStep(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, uint64 now, float seconds);
+ 	void tripBoard(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, uint64 now, float seconds);
+ 	void tripArrived(BotState* state, CreatureObject* bot, LaunchState* L, uint64 now);
++	void tripExit(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, uint64 now, float seconds);
+ 	void tripEnd(BotState* state, CreatureObject* bot, LaunchState* L, const char* step, const String& why, uint64 now);
+ 	int tripWalk(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, SceneObject* target, float stopAt, float seconds);
+ 	static void tripPlace(CreatureObject* bot, Zone* zone, Vector3 position, CellObject* cell, float speed, float dx, float dy);
+@@ -786,7 +791,7 @@
+ 			 << ", failed " << failedTotal << ", no path " << failedPaths.exchange(0) << ", routes " << routesPlanned.exchange(0)
+ 			 << " (" << routesDeferred.exchange(0) << " deferred, " << routesNone.exchange(0) << " none), legs stopped: no start "
+ 			 << legNoStart.exchange(0) << ", no end " << legNoEnd.exchange(0) << ", no path " << legNoPath.exchange(0) << ", partial "
+-			 << legPartial.exchange(0) << ", unloaded mesh " << legNoMesh.exchange(0) << ", snapped " << legSnapped.exchange(0) << (final ? " (stopped: no bots)" : "");
++			 << legPartial.exchange(0) << ", unloaded mesh " << legNoMesh.exchange(0) << ", snapped " << legSnapped.exchange(0) << ", pocket hops " << legPocket.exchange(0) << (final ? " (stopped: no bots)" : "");
+ 
+ 		info(true) << line.toString();
+ 
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+@@ -93,6 +93,85 @@
+ 	return (query->findNearestPoly(centre, extents, &meshFilter(), &ref, nearest) & DT_SUCCESS) && ref != 0;
+ }
+ 
++// A search of POCKET_NODES polygons that runs out of mesh before it runs out of nodes: the piece `ref` lies on is
++// smaller than that and doesn't hold `other`. A town's own piece runs to thousands (1,391 polygons in Anchorhead, up to
++// 25,239); the cut-off pieces run 19's bots stood on had 2 to 207.
++static const constexpr int POCKET_NODES = 512;
++
++inline dtNavMeshQuery* pocketQuery() {
++	static thread_local dtNavMeshQuery* query = dtAllocNavMeshQuery();
++	return query;
++}
++
++inline bool meshCutOff(dtNavMeshQuery* probe, dtPolyRef ref, const float* pos, dtPolyRef other, const float* otherPos) {
++	dtPolyRef polys[POCKET_NODES];
++	int count = 0;
++	dtStatus status = probe->findPath(ref, other, pos, otherPos, &meshFilter(), polys, &count, POCKET_NODES);
++
++	return (status & DT_SUCCESS) && (status & DT_PARTIAL_RESULT) && !(status & DT_OUT_OF_NODES);
++}
++
++// True, with (ref, pos) moved, when `ref` is on such a pocket: to the nearest polygon within 15 m across and 4 m up or
++// down that is on a piece joined to more than POCKET_NODES polygons or to `other`, trying the 4 nearest other pieces.
++// Off-line replay of run 19's bot positions on its navmeshes (partial-routes.md): Bestine's launch centre is on 55
++// polygons 4 m from the town's mesh and Tyrena's on 85, 12 m away, and every route from either stopped at its edge.
++inline bool meshOutOfPocket(dtNavMeshQuery* probe, dtPolyRef& ref, float* pos, dtPolyRef other, const float* otherPos) {
++	if (!meshCutOff(probe, ref, pos, other, otherPos))
++		return false;
++
++	dtNodePool* pool = probe->getNodePool();
++	const float extents[3] = {15.f, 4.f, 15.f};
++	dtPolyRef near[128];
++	int n = 0;
++	probe->queryPolygons(pos, extents, &meshFilter(), near, &n, 128);
++
++	struct Candidate {
++		float distance;
++		dtPolyRef ref;
++		float pos[3];
++	};
++
++	std::vector<Candidate> candidates;
++
++	for (int i = 0; i < n; ++i) {
++		if (pool->findNode(near[i], 0) != nullptr) // on the pocket itself
++			continue;
++
++		Candidate candidate;
++		candidate.ref = near[i];
++
++		if (!(probe->closestPointOnPoly(near[i], pos, candidate.pos, nullptr) & DT_SUCCESS))
++			continue;
++
++		candidate.distance = dtVdistSqr(candidate.pos, pos);
++		candidates.push_back(candidate);
++	}
++
++	std::sort(candidates.begin(), candidates.end(), [](const Candidate& x, const Candidate& y) { return x.distance < y.distance; });
++
++	std::vector<dtPolyRef> tried; // the polygons of other pockets already probed
++	int probes = 0;
++
++	for (const auto& candidate : candidates) {
++		if (std::find(tried.begin(), tried.end(), candidate.ref) != tried.end())
++			continue;
++
++		if (++probes > 4)
++			break;
++
++		if (!meshCutOff(probe, candidate.ref, candidate.pos, other, otherPos)) {
++			ref = candidate.ref;
++			dtVcopy(pos, candidate.pos);
++			return true;
++		}
++
++		for (int i = 0; i < pool->getNodeCount(); ++i)
++			tried.push_back(pool->getNodeAtIdx(i + 1)->id);
++	}
++
++	return false;
++}
++
+ // The navmesh path from a to b on `area`, appended to `out` without a. MESH_OK, or MESH_PARTIAL when b can't be reached
+ // (`out` then ends at the reachable point nearest it), or a failure with `out` unchanged. A start off the mesh (a bot
+ // left in a building's footprint) is taken from the nearest polygon within 10 m, the hop to it first in `out`; an end
+@@ -134,6 +213,20 @@
+ 	if (hop || endX * endX + endY * endY > 2.25f)
+ 		++legSnapped;
+ 
++	// An end on a small cut-off piece (a bot stepped onto it by a straight last few metres, or put there): off it first,
++	// the hop to it straight, instead of a route to the piece's edge planned again at every step (meshOutOfPocket).
++	dtNavMeshQuery* probe = pocketQuery();
++
++	if (probe != nullptr && (probe->init(navMesh, POCKET_NODES) & DT_SUCCESS)) {
++		if (meshOutOfPocket(probe, startRef, startPos, endRef, endPos)) {
++			++legPocket;
++			hop = true;
++		}
++
++		if (meshOutOfPocket(probe, endRef, endPos, startRef, startPos))
++			++legPocket;
++	}
++
+ 	dtPolyRef polys[MESH_POLYS];
+ 	int count = 0;
+ 	dtStatus status = query->findPath(startRef, endRef, startPos, endPos, &meshFilter(), polys, &count, MESH_POLYS);
+@@ -1498,6 +1591,7 @@
+ 
+ 	L->deadSinceMs = 0;
+ 	L->targetID = L->corpseID = 0;
++	L->exitTerminalID = 0; // back in town: no starport to leave
+ 	L->resting = L->dancing = false;
+ 	L->watchingID = 0;
+ 	state->path.clear();
+@@ -1656,6 +1750,12 @@
+ 	if (L->style >= 0 && L->role != LaunchState::MEDIC && L->role != LaunchState::ENTERTAINER)
+ 		launchSideHeal(bot, L, now);
+ 
++	// Just landed at a starport: out through its terminal hall before anything else (tripExit).
++	if (L->exitTerminalID != 0) {
++		tripExit(state, bot, zone, L, now, seconds);
++		return;
++	}
++
+ 	// On a trip by ticket (BotPopTravel.h): the trip has the step. A trip of its own every 20-30 minutes, when the bot
+ 	// is between things (no target, corpse, mission, rest or dance).
+ 	if (L->trip == LaunchState::TRIP_NONE && now >= L->nextTripMs && L->role != LaunchState::EXPLORER && L->targetID == 0
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopTravel.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopTravel.h
+@@ -828,6 +828,99 @@
+ 	L->tripPath.clear();
+ 	L->tripConnecting = false;
+ 	L->nextTripMs = now + (connecting ? 30000 : tripInterval()); // a connection: on to another planet at once
++
++	// A starport (its travel terminal in the building's hall) lands the bot on a walled pad that the town's navmesh
++	// doesn't join; a staying bot leaves through the hall first (tripExit). A connection boards again from the pad.
++	Zone* zone = bot->getZone();
++	Reference<PlanetTravelPoint*> point = zone != nullptr ? zone->getPlanetManager()->getPlanetTravelPoint(L->tripToPoint) : nullptr;
++	uint64 terminalID = connecting || point == nullptr ? 0 : tripFindNear(zone, point, SceneObjectType::TRAVELTERMINAL, 150.f);
++	ManagedReference<SceneObject*> terminal = terminalID != 0 ? bot->getZoneServer()->getObject(terminalID) : nullptr;
++
++	if (terminal != nullptr && terminal->getParentID() != 0) {
++		L->exitTerminalID = terminalID;
++		L->exitSinceMs = now;
++		L->exitInHall = false;
++		L->tripPathFor = L->tripBestFor = 0;
++	}
++}
++
++// Out of a starport after landing, as a player leaves it: into the terminal hall along the building's own path graph
++// (tripWalk to the travel terminal, the way an onward trip goes from the pad), then out of the hall's front door toward
++// the town's mission terminal. Done on stepping outdoors from the hall, or given up after 3 minutes; an "exit" row
++// either way. Run 19 (partial-routes.md): the pad is a piece of 79 to 156 navmesh polygons 32 to 43 m from the town's
++// at 15 of the 18 starports bots landed at, every route from it stopped at the pad's edge, and 691 of the 723 bots that
++// came down on one were still within 100 m of it 10 minutes or more later.
++inline void BotPopManager::tripExit(BotState* state, CreatureObject* bot, Zone* zone, LaunchState* L, uint64 now, float seconds) {
++	if (bot->isInCombat()) {
++		fightBack(state, bot, now);
++		return;
++	}
++
++	ManagedReference<SceneObject*> parent = bot->getParent().get();
++	bool inCell = parent != nullptr && parent->isCellObject();
++
++	auto finish = [&](const char* how) {
++		if (strcmp(how, "out") != 0)
++			tripLeaveCell(bot, L); // given up inside: out by the door it came in, as a failed trip
++
++		JSONSerializationType row = launchRow("exit", bot, L);
++		row["how"] = how;
++		row["secs"] = (int)((now - L->exitSinceMs) / 1000);
++		row["z"] = (int)bot->getPositionZ();
++		SimLog::instance()->write(row);
++
++		L->exitTerminalID = 0;
++		L->tripPath.clear();
++		L->tripPathFor = L->tripBestFor = 0;
++		state->path.clear();
++		state->chase.clear();
++		state->chaseNext = 0;
++		state->mode = BotState::IDLE;
++	};
++
++	if (now - L->exitSinceMs > 180000) {
++		finish("timeout");
++		return;
++	}
++
++	if (!L->exitInHall) {
++		ManagedReference<SceneObject*> terminal = bot->getZoneServer()->getObject(L->exitTerminalID);
++
++		if (terminal == nullptr || terminal->getZone() != zone) {
++			finish("no terminal");
++			return;
++		}
++
++		int walked = inCell ? 1 : tripWalk(state, bot, zone, L, terminal, 3.f, seconds);
++
++		if (walked < 0) {
++			finish("no path into the hall");
++			return;
++		}
++
++		if (walked > 0) { // in the hall (or at its terminal): a new path, out of the front door
++			L->exitInHall = true;
++			L->tripPath.clear();
++			L->tripPathFor = L->tripBestFor = 0;
++		}
++
++		return;
++	}
++
++	if (!inCell) {
++		finish("out");
++		return;
++	}
++
++	ManagedReference<MissionTerminal*> outside = launchFindTerminal(bot, zone, L);
++
++	if (outside == nullptr) {
++		finish("no town terminal");
++		return;
++	}
++
++	if (tripWalk(state, bot, zone, L, outside.get(), 3.f, seconds) < 0)
++		finish("no way out");
+ }
+ 
+ // The trip failed at `step`: a "travel_fail" row, out of any building (where the bot walked in), and the next trip
