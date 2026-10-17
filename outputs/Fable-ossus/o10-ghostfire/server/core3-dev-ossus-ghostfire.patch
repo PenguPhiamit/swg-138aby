@@ -60,7 +60,7 @@ index 88cf8a5..533e69b 100644
 +--ossus sub-folder (the Ossus ghostfire quest, 17 Oct 2026)
 +includeFile("items/ossus/ossus_ghostfire_crystal.lua")
 diff --git a/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua b/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua
-index a92c06a..5888bd3 100644
+index a92c06a..df182be 100644
 --- a/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua
 +++ b/MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua
 @@ -79,8 +79,10 @@ addConversationTemplate("ossus_adit_foreman_convo_template", foreman)
@@ -74,13 +74,15 @@ index a92c06a..5888bd3 100644
  screen(archivist, "road", "Pilgrims raised stones along the road from Knossa to the academy, one for every group of students who died there in the year 130. Walk it from the first stone above Knossa, past the middle stone, to the ring by the craters, and you will have seen what the ruins mean.", {
  	{"I'll walk it.", "road_accept"},
  	{"Maybe later.", "bye"},
-@@ -91,18 +93,38 @@ screen(archivist, "greet_done", "Thank you again for walking the road. Few do.",
+@@ -91,19 +93,41 @@ screen(archivist, "greet_done", "Thank you again for walking the road. Few do.",
  screen(archivist, "bye", "Mind the trench on your way out.", {}, true)
  addConversationTemplate("ossus_vault_archivist_convo_template", archivist)
  
 --- POI 2: the robed stranger (a hidden Jedi; owner 15 Oct: rare, met in the sanctuary)
-+-- POI 2: T'ra Saa's keeper (owner 17 Oct: the ghostfire quest; never gives a name). T'ra Saa died in 138 ABY at the
-+-- Hidden Temple; that she found a ghostfire crystal in the Yuuzhan Vong War and hid it on Ossus is our own invention.
++-- POI 2: the keeper, a young Neti (owner 17 Oct: a Neti, alive). Legends: Ood Bnar, the Neti master of the Great Jedi
++-- Library, died on Ossus in 10 ABY and left a sapling that grew where he fell; T'ra Saa, also Neti, died in 138 ABY.
++-- Our own invention: the sapling grew into this keeper, T'ra Saa taught it, found the ghostfire crystal in the Yuuzhan
++-- Vong War, and left it in the keeper's care when Krayt's Sith came for the academy.
  local jedi = convo("ossus_hidden_jedi_convo_template", "OssusHiddenJediConvoHandler")
  screen(jedi, "greet", "You found this place. Few do, and fewer by accident. Sit, if you like. Speak softly. The garrison is close.", {
  	{"Who are you?", "who"},
@@ -88,18 +90,19 @@ index a92c06a..5888bd3 100644
  	{"I'll go.", "bye"},
  })
 -screen(jedi, "who", "Someone who studied here once, when the academy stood. When the Sith came, some of us went into the ground and stayed there. Krayt is dead, they say. I will believe the war is over when the troopers above us go home.", {
-+screen(jedi, "who", "A keeper. Nothing more. I wait here for someone, as I was asked to, by someone who is gone now.", {
++screen(jedi, "who", "I am what grew where Master Ood Bnar fell, a little more than a hundred years ago. Master T'ra Saa was Neti, as I am; she found me as a seedling and taught me. When the Sith came for the academy she left something in my keeping and asked me to wait. So I wait. My kind is good at waiting.", {
  	{"I won't tell anyone you're here.", "promise"},
  	{"I'll go.", "bye"},
  })
 -screen(jedi, "promise", "Then you have done more for us than you know. Go carefully. And if you hear the Ysanna sing at night, listen. They remember more than the archives do.", {}, true)
+-screen(jedi, "refuse", "The stranger keeps their head bowed and says nothing.", {}, true)
 +screen(jedi, "promise", "Then you have done more for us than you know. Go carefully. If you want to understand this place, walk where the old masters walked. The archivist at the vault dig can tell you where.", {}, true)
 +screen(jedi, "not_ready", "(filled in by the screenplay: what the player still lacks)", {}, true)
 +screen(jedi, "ready", "You have walked the old paths. I can feel it on you, like dust from the road. Then it is time you heard why I am here.", {
 +	{"Tell me.", "record"},
 +	{"Not yet.", "bye"},
 +})
-+screen(jedi, "record", "Master T'ra Saa left a record with me. In her words: \"A life is a small thing, and worth more than any war. In the years the Vong burned worlds I found a light no one else wanted, pale and quiet, and I kept it. Now the Sith come for the academy, and I have hidden it here, under Ossus, where only patience will find it. Do not take it for power. Take it to keep something gentle alive.\" She was a Neti, older than the Republic's last wars. She fell last year, holding a door open for others.", {
++screen(jedi, "record", "Master T'ra Saa left a record with me. In her words: \"A life is a small thing, and worth more than any war. In the years the Vong burned worlds I found a light no one else wanted, pale and quiet, and I kept it. Now the Sith come for the academy, and I have hidden it here, under Ossus, where only patience will find it. Do not take it for power. Take it to keep something gentle alive.\" She was older than the Republic's last wars. She fell last year, holding a door open for others, and I felt her go.", {
 +	{"What do you ask of me?", "test"},
 +})
 +screen(jedi, "test", "One question. A flame can warm a hearth, or burn a forest to the ground. What will you do with a light like this?", {
@@ -113,9 +116,26 @@ index a92c06a..5888bd3 100644
 +screen(jedi, "fail_greed", "It has no power to give you. It is only a light. Come back another day, when you want it for what it is.", {}, true)
 +screen(jedi, "not_again_yet", "Not yet. Sit with the question a while longer, then come back.", {}, true)
 +screen(jedi, "after", "The light has a new keeper now, and so do I: none. Go well. The forest will remember you.", {}, true)
- screen(jedi, "refuse", "The stranger keeps their head bowed and says nothing.", {}, true)
++screen(jedi, "refuse", "The robed figure keeps their head bowed and says nothing. For a moment they are as still as a tree.", {}, true)
  screen(jedi, "bye", "May the Force be with you.", {}, true)
  addConversationTemplate("ossus_hidden_jedi_convo_template", jedi)
+ 
+diff --git a/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_people.lua b/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_people.lua
+index 56f1523..2c4c5b4 100644
+--- a/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_people.lua
++++ b/MMOCoreORB/bin/scripts/mobile/sandbox/ossus_people.lua
+@@ -51,8 +51,9 @@ local people = {
+ 	{"ossus_adit_foreman", "Brannock Teel, adit foreman", "object/mobile/dressed_mand_miner_hum_01.iff", "ossus_adit_foreman_convo_template"},
+ 	-- POI 4, the Great Library vault dig: the memorial road
+ 	{"ossus_vault_archivist", "Archivist Senn Oduro", "object/mobile/dressed_brigade_technician_human_female_01.iff", "ossus_vault_archivist_convo_template"},
+-	-- POI 2, inside the sanctuary (rare: present about one hour in three to five)
+-	{"ossus_hidden_jedi", "a robed stranger", "object/mobile/dressed_jedi_trainer_old_human_male_01.iff", "ossus_hidden_jedi_convo_template"},
++	-- POI 2, inside the sanctuary (rare: present about one hour in three to five). A young Neti (Ood Bnar's sapling,
++	-- grown; owner 17 Oct); the client has no Neti body, so a robed stand-in until there is Neti art
++	{"ossus_hidden_jedi", "a young Neti", "object/mobile/dressed_jedi_trainer_old_human_male_01.iff", "ossus_hidden_jedi_convo_template"},
+ 	-- POI 18, the Hutt landing field
+ 	{"ossus_hutt_broker", "Ondrubba the Hutt", "object/mobile/hutt_male.iff", "ossus_hutt_broker_convo_template"},
+ 	-- POI 3, the garrison over the ruins (Krayt's Empire, GCW faction imperial)
 diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua
 index 55dfb1d..942bdce 100644
 --- a/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua

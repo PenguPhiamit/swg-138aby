@@ -93,15 +93,17 @@ screen(archivist, "greet_done", "Thank you again for walking the road. Few do.",
 screen(archivist, "bye", "Mind the trench on your way out.", {}, true)
 addConversationTemplate("ossus_vault_archivist_convo_template", archivist)
 
--- POI 2: T'ra Saa's keeper (owner 17 Oct: the ghostfire quest; never gives a name). T'ra Saa died in 138 ABY at the
--- Hidden Temple; that she found a ghostfire crystal in the Yuuzhan Vong War and hid it on Ossus is our own invention.
+-- POI 2: the keeper, a young Neti (owner 17 Oct: a Neti, alive). Legends: Ood Bnar, the Neti master of the Great Jedi
+-- Library, died on Ossus in 10 ABY and left a sapling that grew where he fell; T'ra Saa, also Neti, died in 138 ABY.
+-- Our own invention: the sapling grew into this keeper, T'ra Saa taught it, found the ghostfire crystal in the Yuuzhan
+-- Vong War, and left it in the keeper's care when Krayt's Sith came for the academy.
 local jedi = convo("ossus_hidden_jedi_convo_template", "OssusHiddenJediConvoHandler")
 screen(jedi, "greet", "You found this place. Few do, and fewer by accident. Sit, if you like. Speak softly. The garrison is close.", {
 	{"Who are you?", "who"},
 	{"I won't tell anyone you're here.", "promise"},
 	{"I'll go.", "bye"},
 })
-screen(jedi, "who", "A keeper. Nothing more. I wait here for someone, as I was asked to, by someone who is gone now.", {
+screen(jedi, "who", "I am what grew where Master Ood Bnar fell, a little more than a hundred years ago. Master T'ra Saa was Neti, as I am; she found me as a seedling and taught me. When the Sith came for the academy she left something in my keeping and asked me to wait. So I wait. My kind is good at waiting.", {
 	{"I won't tell anyone you're here.", "promise"},
 	{"I'll go.", "bye"},
 })
@@ -111,7 +113,7 @@ screen(jedi, "ready", "You have walked the old paths. I can feel it on you, like
 	{"Tell me.", "record"},
 	{"Not yet.", "bye"},
 })
-screen(jedi, "record", "Master T'ra Saa left a record with me. In her words: \"A life is a small thing, and worth more than any war. In the years the Vong burned worlds I found a light no one else wanted, pale and quiet, and I kept it. Now the Sith come for the academy, and I have hidden it here, under Ossus, where only patience will find it. Do not take it for power. Take it to keep something gentle alive.\" She was a Neti, older than the Republic's last wars. She fell last year, holding a door open for others.", {
+screen(jedi, "record", "Master T'ra Saa left a record with me. In her words: \"A life is a small thing, and worth more than any war. In the years the Vong burned worlds I found a light no one else wanted, pale and quiet, and I kept it. Now the Sith come for the academy, and I have hidden it here, under Ossus, where only patience will find it. Do not take it for power. Take it to keep something gentle alive.\" She was older than the Republic's last wars. She fell last year, holding a door open for others, and I felt her go.", {
 	{"What do you ask of me?", "test"},
 })
 screen(jedi, "test", "One question. A flame can warm a hearth, or burn a forest to the ground. What will you do with a light like this?", {
@@ -125,7 +127,7 @@ screen(jedi, "fail_force", "Then you would make it a weapon, and it would only b
 screen(jedi, "fail_greed", "It has no power to give you. It is only a light. Come back another day, when you want it for what it is.", {}, true)
 screen(jedi, "not_again_yet", "Not yet. Sit with the question a while longer, then come back.", {}, true)
 screen(jedi, "after", "The light has a new keeper now, and so do I: none. Go well. The forest will remember you.", {}, true)
-screen(jedi, "refuse", "The stranger keeps their head bowed and says nothing.", {}, true)
+screen(jedi, "refuse", "The robed figure keeps their head bowed and says nothing. For a moment they are as still as a tree.", {}, true)
 screen(jedi, "bye", "May the Force be with you.", {}, true)
 addConversationTemplate("ossus_hidden_jedi_convo_template", jedi)
 
