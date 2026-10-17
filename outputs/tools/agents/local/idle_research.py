@@ -27,9 +27,10 @@ local_jobs.py prepares <id>/input.jsonl, local_map.py asks the model about one c
 client and to low memory; a paused topic stays open and resumes), and local_jobs.py writes <id>/report.md.
 
 Fallback (17 Oct): ollama-url.txt may list several servers (the friend's PC, then this PC); each timer run uses the
-first that answers (ollama_url.pick) and hands that one address, model and context size to the job. Two optional topic
-fields: "model" runs the topic with that model (it waits while the server in use doesn't have it), and
-"local_only": true keeps it on this PC (for text with real people's names). Agent/local-model.md is the workflow.
+first that answers (ollama_url.pick) and hands that one address, model and context size to the job. Optional topic
+fields: "model" runs the topic with that model (it waits while the server in use doesn't have it), "ctx" with that
+context size, and "local_only": true keeps it on this PC (for text with real people's names). Agent/local-model.md is
+the workflow.
 """
 import fcntl
 import hashlib
@@ -387,11 +388,9 @@ def run_map(topic, server):
 
 
 def run(topic, server=None):
-    """Run one topic on server (default: the one choose() picks, with the topic's own model if it names one)."""
+    """Run one topic on server (default: the one choose() picks, with the topic's own model and ctx if it names them)."""
     if server is None:
-        server = choose()[0]
-        if topic.get('model'):
-            server = server._replace(model=ollama_url.parse_model(topic['model']))
+        server = with_topic(choose()[0], topic)
     if topic.get('kind') == 'map':
         return run_map(topic, server)
     ws = BASE / topic['id']
@@ -483,8 +482,8 @@ def main():
                 held[t['id']] = reason
             elif topic is None:
                 topic = t
-        if topic and topic.get('model'):
-            server = server._replace(model=topic['model'])
+        if topic:
+            server = with_topic(server, topic)
     why = ([] if not STOP.exists() else ['Agent/local-research/STOP exists']) + [problem] if problem else \
         blockers(record=sys.argv[1] == 'check', server=server)
     remote = remote_base(server) if server else None
@@ -504,10 +503,21 @@ def main():
     return 0 if run(topic, server) else 1
 
 
+def with_topic(server, topic):
+    """server with the topic's own "model" and "ctx" (context size in tokens), where it names them."""
+    return server._replace(model=ollama_url.parse_model(topic['model']) if topic.get('model') else server.model,
+                           ctx=ollama_url.parse_ctx(topic['ctx']) if topic.get('ctx') else server.ctx)
+
+
 def hold_reason(topic, server, tags):
     """Why topic can't run on server now (None: it can). 'tags?' asks the caller for the server's model list."""
     if topic.get('local_only') and not ollama_url.is_local(server.base):
         return 'local_only, waits for this PC'
+    if topic.get('ctx'):
+        try:
+            ollama_url.parse_ctx(topic['ctx'])
+        except ollama_url.OllamaSettingError as error:
+            return f'bad ctx ({error})'
     name = topic.get('model')
     if not name:
         return None

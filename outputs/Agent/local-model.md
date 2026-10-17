@@ -8,7 +8,7 @@ until Claude or ChatGPT has checked it against the source.
 
 | Server | Models | Used when |
 |---|---|---|
-| The friend's PC (RTX 4070 Super 12 GB, 32 GB RAM), on the home network | `qwen3.6:35b-a3b` (default, research), `qwen3.5:9b` (fast jobs), `gemma4:12b` (bot chat) | whenever it answers |
+| The friend's PC (RTX 4070 Super 12 GB, 32 GB RAM), on the home network | `qwen3.6:35b-a3b` (research), `qwen3.5:9b` (fast jobs), `gemma4:12b` (bot chat), `qwen3:8b`, `gpt-oss:20b` and `gpt-oss-20b-64k` (the older defaults, for comparisons), WaifuGemma4 26B-A4B (role-play drafts) | whenever it answers |
 | This PC | `qwen3:8b` at 16K | fallback, when the friend's PC is off, asleep or Ollama is quit |
 
 - **The list is one file:** `outputs/tools/agents/local/ollama-url.txt` (gitignored, because it holds a home-network
@@ -32,6 +32,7 @@ until Claude or ChatGPT has checked it against the source.
 | **Research topic:** explain a Core3 mechanic from the source, for a bot test | queue topic (no `kind`) | default `qwen3.6:35b-a3b`, up to 120,000 characters of source |
 | **Chunk job:** `proofread`, `bot-gaps` (local_jobs.py) | queue topic with `"kind": "map", "job": "..."` | add `"model": "qwen3.5:9b"`. Each chunk is small, and the big model would reload every 5 chunks. |
 | **Bot chat drafts** (social play, later) | a new local_jobs.py job, then a queue topic | `"model": "gemma4:12b"` |
+| **Role-play and NPC dialogue drafts** (owner's OK, 17 Oct) | a chunk job (`local_map.py` sends `think: false`, which this model needs) | `"model": "hf.co/hiwaifu-research/WaifuGemma4-26b-a4b-v1-i1-GGUF:IQ4_XS", "ctx": 8192`. Its card says 18+ only with no extra safety tuning, so the job's instruction sets the content rules. A drafter only: every line is reviewed before it goes into the game ([MODEL-LICENCES.md](../tools/agents/local/friend-pc/MODEL-LICENCES.md)). |
 | **A quick one-off**: summarise a log, list files that mention X | run `local_map.py` or `local_agent.py` by hand (below) | any |
 
 Not for the friend's PC: decisions, reviews and sign-offs, anything that must be right the first time, credentials or
@@ -80,11 +81,12 @@ while a topic runs is safe.
   "question": "The question, with what the test saw (for example the bot note).",
   "sources": ["src/server/zone/.../File.cpp:100-400", "h:outputs/tools/bots/scenarios/x.py"],
   "model": "qwen3.5:9b",
+  "ctx": 32768,
   "local_only": false
 }
 ```
 
-`model`, `local_only` and `review_by` are optional. Without `review_by`, the agent in `added_by` reviews it. Sources
+`model`, `ctx` (context size in tokens), `local_only` and `review_by` are optional. Without `review_by`, the agent in `added_by` reviews it. Sources
 are Core3-dev paths relative to `MMOCoreORB` (optional `:START-END`), or `h:` paths in the project.
 
 - **ChatGPT** edits `queue.json` directly (it has WSL with full access since 14 Oct). If its sandbox can't reach WSL,

@@ -740,6 +740,16 @@ class IdleResearchTests(unittest.TestCase):
         self.assertIn('--model gemma4:12b --ctx 65536', (self.root / 'lines' / 'agent-output.txt').read_text())
         self.assertEqual({t['id']: t['status'] for t in ir.load(ir.QUEUE, {})['topics']}, {'chat': 'open', 'lines': 'review'})
 
+    def test_a_topic_may_name_its_context_size(self):
+        self.local_checks()
+        self.log_request(3600)
+        self.fake.tags = ['gpt-oss:20b', 'hf.co/u/rp-GGUF:IQ4_XS']
+        self.open_topics({'id': 'bad', 'ctx': 'lots'}, {'id': 'rp', 'model': 'hf.co/u/rp-GGUF:IQ4_XS', 'ctx': 8192})
+        self.stub_agent('print("args", " ".join(sys.argv[1:]))\n(ws / "report.md").write_text("r" * 400)\n')
+        code, out = self.main('check')
+        self.assertIn('1 held (bad: bad ctx (', out)
+        self.assertIn('--model hf.co/u/rp-GGUF:IQ4_XS --ctx 8192', (self.root / 'rp' / 'agent-output.txt').read_text())
+
     def test_a_chunk_job_gets_the_servers_model_and_at_most_16k(self):
         self.servers(f'{self.fake.base} big:1 65536\n')
         stub = self.root / 'stub_step.py'

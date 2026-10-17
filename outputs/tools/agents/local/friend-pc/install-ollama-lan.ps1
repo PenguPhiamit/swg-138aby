@@ -15,16 +15,17 @@ What it changes on this PC (and -Remove undoes):
   3. One inbound Windows Firewall rule, "SWG-Ollama-OwnerPC" (Windows asks for an administrator once): TCP port
      11434, for ollama.exe only, from Miniverse address only, on Private networks only.
   4. Optional (asks first): no sleep while plugged in, so jobs can run while nobody is at the PC.
-  5. Downloads the models (about 58 GB for the default six: the five below and gpt-oss-20b-64k, which is
-     built here from gpt-oss:20b and needs no download of its own) and tests each one. When the disk is short,
-     it takes them in this order and says which it left out.
+  5. Downloads the models (about 73 GB for the default seven; gpt-oss-20b-64k is built here from gpt-oss:20b
+     and needs no download of its own) and tests each one. When the disk is short, it takes them in the order of
+     -Models and says which it left out.
 
 Ollama has no password. Never forward port 11434 on the router.
 #>
 [CmdletBinding()]
 param(
     [string]$OwnerPC,
-    [string[]]$Models = @('qwen3.6:35b-a3b', 'qwen3.5:9b', 'gemma4:12b', 'qwen3:8b', 'gpt-oss:20b', 'gpt-oss-20b-64k'),
+    [string[]]$Models = @('qwen3.6:35b-a3b', 'qwen3.5:9b', 'gemma4:12b', 'qwen3:8b', 'gpt-oss:20b', 'gpt-oss-20b-64k',
+                          'hf.co/hiwaifu-research/WaifuGemma4-26b-a4b-v1-i1-GGUF:IQ4_XS'),
     [switch]$CheckOnly,
     [switch]$SkipPull,
     [switch]$Remove
@@ -45,12 +46,13 @@ $Setup = 'https://ollama.com/download/OllamaSetup.exe'
 $Vars = [ordered]@{ OLLAMA_HOST = "0.0.0.0:$Port"; OLLAMA_MAX_LOADED_MODELS = '1'; OLLAMA_NUM_PARALLEL = '1' }
 # Sizes on disk from the Ollama library pages (GB); the test context is the window our jobs will ask for.
 $SizeGB = @{ 'qwen3.6:35b-a3b' = 24; 'qwen3.5:9b' = 7.6; 'gemma4:12b' = 8.0; 'qwen3:8b' = 5.2; 'gpt-oss:20b' = 14
-            'gpt-oss-20b-64k' = 0 }
+            'gpt-oss-20b-64k' = 0; 'hf.co/hiwaifu-research/WaifuGemma4-26b-a4b-v1-i1-GGUF:IQ4_XS' = 13.9 }
 $TestCtx = @{ 'qwen3.6:35b-a3b' = 65536; 'qwen3.5:9b' = 32768; 'qwen3:8b' = 32768; 'gpt-oss:20b' = 65536
-             'gpt-oss-20b-64k' = 65536 }
+             'gpt-oss-20b-64k' = 65536; 'hf.co/hiwaifu-research/WaifuGemma4-26b-a4b-v1-i1-GGUF:IQ4_XS' = 8192 }   # trained on 8K chats
 # Licences, checked 17 Oct 2026 (MODEL-LICENCES.md next to this script); printed with each download.
 $Licence = @{ 'qwen3.6:35b-a3b' = 'Apache 2.0 (Qwen)'; 'qwen3.5:9b' = 'Apache 2.0 (Qwen)'; 'qwen3:8b' = 'Apache 2.0 (Qwen)'
-              'gpt-oss:20b' = 'Apache 2.0 (OpenAI)'; 'gemma4:12b' = 'Apache 2.0 (Google, Gemma 4 licence)' }
+              'gpt-oss:20b' = 'Apache 2.0 (OpenAI)'; 'gemma4:12b' = 'Apache 2.0 (Google, Gemma 4 licence)'
+              'hf.co/hiwaifu-research/WaifuGemma4-26b-a4b-v1-i1-GGUF:IQ4_XS' = 'Apache 2.0 (inherited from Gemma 4); its card: 18+ use only, no extra safety tuning' }
 # Models built here from a Modelfile instead of downloaded (Miniverse has the same file in tools/agents/local).
 $Built = @{ 'gpt-oss-20b-64k' = @{ From = 'gpt-oss:20b'; Text = "FROM gpt-oss:20b`nPARAMETER num_ctx 65536`n" } }
 

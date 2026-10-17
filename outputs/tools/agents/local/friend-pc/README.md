@@ -7,7 +7,7 @@ How the two agents use it: [Agent/local-model.md](../../../../Agent/local-model.
 
 ## What the friend agreed to
 
-- **Ollama** (ollama.com's official installer) is installed for their Windows user, with about 60 GB of models.
+- **Ollama** (ollama.com's official installer) is installed for their Windows user, with about 73 GB of models.
 - **Their graphics card runs our jobs** while Ollama is idle on the owner's side: research topics, proofreading,
   sorting bot notes, and later drafting bot chat lines. The biggest model also uses about 15 GB of their RAM while it
   is loaded.
@@ -19,12 +19,12 @@ How the two agents use it: [Agent/local-model.md](../../../../Agent/local-model.
 
 ## Before you start
 
-- About **65 GB free** on drive C: for all six models. With less, the script takes them in the order below and says
+- About **80 GB free** on drive C: for all seven models. With less, the script takes them in the order below and says
   which it left out.
 - The **Miniverse address**: on Miniverse, `ipconfig` shows it as "IPv4 Address" (192.168.1.something).
 - The friend's Windows account, signed in. It needs to be an administrator account, or you need one for the firewall
   prompt.
-- Time: the downloads are about 60 GB (less if some models are already there).
+- Time: the downloads are about 73 GB (less if some models are already there).
 
 ## Run it
 
@@ -49,8 +49,9 @@ How the two agents use it: [Agent/local-model.md](../../../../Agent/local-model.
      away. Say yes for the week away. The screen still turns off and the PC still locks.
    - **5. Models**, in this order: `qwen3.6:35b-a3b` (24 GB, the research model), `qwen3.5:9b` (7 GB, fast
      jobs), `gemma4:12b` (8 GB, bot chat), `qwen3:8b` (5 GB, the same model as Miniverse), `gpt-oss:20b`
-     (14 GB, the older research default), and `gpt-oss-20b-64k`, built from gpt-oss:20b with a 64K window (no
-     download). The progress shows in the window. Models already there are not downloaded again.
+     (14 GB, the older research default), `gpt-oss-20b-64k`, built from gpt-oss:20b with a 64K window (no
+     download), and WaifuGemma4 26B-A4B (13.9 GB, from Hugging Face; role-play and NPC dialogue drafts; its card
+     says 18+ only). The progress shows in the window. Models already there are not downloaded again.
    - **6. Self-test:** each model answers one short question. The script prints its speed and how much of it ran on
      the graphics card.
 4. At the end it prints **"Tell Claude on Miniverse this address: http://192.168.1.y:11434"**. Give that line
@@ -83,10 +84,11 @@ at a time, so they never add up. These are estimates until the self-test prints 
 | `qwen3.5:9b` | 32K / 64K | fits (8.7-9.7 GB) / fits, tight (9.7-10.7 GB) | about 1 GB |
 | `gemma4:12b` | 32K / 64K | fits (9.6-9.9 GB) / tight (10.1-10.4 GB), if Ollama keeps its sliding-window layers short | about 1 GB |
 | `gpt-oss:20b`, `gpt-oss-20b-64k` | 32K / 64K | **does not fit** (15 / 16 GB) | 4-5 GB spills to RAM: works, slower |
+| WaifuGemma4 26B-A4B (IQ4_XS) | 8K | **does not fit** (13.9 GB + a small 8K context) | 3-4 GB spills to RAM: works, only 3.8B of it active per word |
 | `qwen3.6:35b-a3b` | 64K | **does not fit** (25-26 GB) | about 14 GB in RAM: works while games are closed |
 
-So: qwen3.5:9b, gemma4:12b and qwen3:8b (up to 32K) run entirely on the card. gpt-oss:20b and qwen3.6:35b-a3b run
-split between the card and the 32 GB of RAM, which has room for either one, but they are slower. The self-test skips a
+So: qwen3.5:9b, gemma4:12b and qwen3:8b (up to 32K) run entirely on the card. gpt-oss:20b, WaifuGemma4 and qwen3.6:35b-a3b run
+split between the card and the 32 GB of RAM, which has room for any one of them, but they are slower. The self-test skips a
 big model when less RAM is free than it needs. The licences are in [MODEL-LICENCES.md](MODEL-LICENCES.md): all
 Apache 2.0.
 

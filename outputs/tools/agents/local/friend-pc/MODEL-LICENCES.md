@@ -10,6 +10,7 @@ Claude or ChatGPT checks.
 | `qwen3.5:9b` | Qwen (Alibaba) | Apache 2.0 | https://huggingface.co/Qwen/Qwen3.5-9B (Documentation-support/ollama-model-options.md, 15 Oct) |
 | `qwen3:8b` | Qwen (Alibaba) | Apache 2.0 | https://huggingface.co/Qwen/Qwen3-8B |
 | `gpt-oss:20b`, and `gpt-oss-20b-64k` built from it | OpenAI | Apache 2.0 | https://huggingface.co/openai/gpt-oss-20b |
+| `hf.co/hiwaifu-research/WaifuGemma4-26b-a4b-v1-i1-GGUF:IQ4_XS` (WaifuGemma4 26B-A4B v1, imatrix IQ4_XS, 13.9 GB) | hiwaifu-research, a role-play fine-tune of Google's Gemma 4 26B-A4B-it | Apache 2.0, "as inherited from the base model" | https://huggingface.co/hiwaifu-research/WaifuGemma4-26b-a4b-v1-i1-GGUF (read 17 Oct; licence field `apache-2.0`; not gated) |
 | `gemma4:12b` | Google | Apache 2.0 | https://huggingface.co/google/gemma-4-12b (licence field `apache-2.0`) and https://ai.google.dev/gemma/docs/gemma_4_license (the "Gemma 4 license" page, last updated 2026-04-01, is the Apache License 2.0) |
 
 ## Gemma (the options doc said to read its terms first)
@@ -23,6 +24,17 @@ Claude or ChatGPT checks.
 - **What Apache 2.0 asks:** keep the licence and notices **if we redistribute** the weights or a modified copy. We
   don't: the weights stay on the friend's PC, and `ollama-url.txt` points at them over the home network. The licence
   sets no conditions on output. The older Gemma terms also say Google "claims no rights in Outputs".
+
+## WaifuGemma4 (owner's OK, 17 Oct, after reading its card; the friend knows)
+
+- Its card: a role-play model trained on arena votes. "No safety tuning beyond base Gemma 4; 18+ use only." Mature
+  content "follows your system prompt", so every job that uses it sets the content rules in its system prompt (game
+  text for a private server, no explicit content).
+- Settings from the card: non-thinking (reasoning budget 0, which is `think: false` in Ollama), trained on 8K-token
+  chats, so topics give it `"ctx": 8192`; temperature 0.8-1.0; replies run 400-500 tokens unless the prompt asks
+  for less.
+- Its only job is drafting role-play and NPC dialogue. It never checks anything, and Claude or ChatGPT reviews every
+  line before it goes into the game.
 
 ## gpt-oss-20b-64k
 
