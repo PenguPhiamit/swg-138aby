@@ -1,0 +1,83 @@
+{
+ "installed": {
+  "path": "SWG-client/local_planets.tre",
+  "bytes": 5308425,
+  "sha256": "f0191ab533911c7cd91df667d79a6b589fbab210e2982db456385a5610019808",
+  "entries": 201
+ },
+ "out": {
+  "path": "Fable-species/creation-fixes/local_planets-creation-fixes.tre",
+  "bytes": 5308443,
+  "sha256": "150909f0644b25c0ed27cdb0026d2445a5053f4a7e7a1b19c369407c1167e335",
+  "entries": 201
+ },
+ "untouched_identical": 199,
+ "changed": [
+  "creation/profession_defaults_combat_brawler.iff",
+  "string/en/player_species.stf"
+ ],
+ "new": [],
+ "dropped": [],
+ "B1": {
+  "desc_sullustan": {
+   "was": [
+    200,
+    0,
+    0,
+    300,
+    0,
+    0,
+    0,
+    0,
+    400
+   ],
+   "now": [
+    150,
+    0,
+    0,
+    250,
+    50,
+    50,
+    200,
+    100,
+    100
+   ]
+  },
+  "desc_ithorian": {
+   "was": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    150,
+    300,
+    300,
+    150
+   ],
+   "now": [
+    400,
+    100,
+    100,
+    100,
+    0,
+    0,
+    200,
+    0,
+    0
+   ]
+  }
+ },
+ "B2": {
+  "ithorian_male_brawler_was": [
+   "object/tangible/wearables/ithorian/shared_ith_shirt_s02.iff",
+   "object/tangible/wearables/ithorian/shared_ith_jacket_s16.iff",
+   "object/tangible/wearables/ithorian/shared_ith_pants_s04.iff"
+  ],
+  "ithorian_male_brawler_now": [
+   "object/tangible/wearables/ithorian/shared_ith_shirt_s02.iff",
+   "object/tangible/wearables/ithorian/shared_ith_jacket_s12.iff",
+   "object/tangible/wearables/ithorian/shared_ith_pants_s04.iff"
+  ]
+ }
+}
