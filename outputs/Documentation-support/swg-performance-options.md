@@ -88,3 +88,25 @@ Not available in this client: the `[ClientLimits] SetFramesPerSecond` frame cap 
 - The client archive is back on `6ff21312`, matching the server.
 - S1: the optimised `RelWithDebInfo` test build (`dev_build.py --release`) is building. The test galaxy picks it up at its next `--dev-server` start.
 - Not yet tested in game.
+
+## Result: the optimised build at 1,700 bots (16 Oct 2026, 7:58 PM)
+
+Run 14: the `RelWithDebInfo` core3 (dev `724809fa`, which also has the walls fix), with the same population as run 13 (1,500 multiclass + 200 Ossus explorers, "all" mode). The owner's client was running in both measurements.
+
+| At 1,700 bots | Debug (run 13, 7:15 PM) | Optimised (run 14, 7:58 PM) |
+|---|---|---|
+| core3 CPU | 7.07 cores | **2.38 cores** |
+| WSL load average | 18.6 (a build was also running) / 9.7 earlier | **1.96** |
+| Windows CPU, whole PC | 97% (earlier, client running) | **36%** (client running) |
+| BotPop pass | 8 ms | 3 ms |
+| Bot steps | ~3 CPU-seconds per second | 0.76 CPU-seconds per second, including 1,158 navmesh routes a minute (0 deferred) |
+| core3 memory | 8.6 GB | 5.2 GB |
+
+- So S1 alone took about two-thirds off the server's CPU.
+  - The walls fix's route planning fits easily: 1,158 routes a minute is about 19 a second, against a cap of 200 a pass.
+  - The memory figures aren't strictly comparable: run 13 had been running for 4 hours, run 14 for 3 minutes.
+- **The priority launcher doesn't take effect.** The client showed `Normal` priority even when started from `Play SWG Test Galaxy.cmd` with `/abovenormal`.
+  - Likely cause: the client asks for administrator rights, and the elevated process doesn't inherit the launcher's priority class.
+  - With the PC at 36%, this matters less now.
+  - The fix would be a per-program setting in Windows, which is the owner's change to make, or the client's own `processPriority` key (untested).
+- Next: the owner's experience at full load, in their own words. Then about 200 bots while the owner plays. Then decide S3 (`.wslconfig`), which this result makes less urgent.
