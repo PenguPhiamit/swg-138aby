@@ -1,0 +1,28 @@
+wrote /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Bot-reports/launch-sim/numbers-run21.md (18326 chars)
+/mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Bot-reports/launch-sim/findings-run21.md: 5 FAIL, 2 WATCH, 5 PASS
+| From | To | Tries | Arrived | Failed | Median trip (s) | Failures (step: reason x n) |
+|---|---|---:|---:|---:|---:|---|
+
+Routes 0, tries 0, arrived 0, failed 0, still under way at the end of the log 0.
+
+| Step | Failures |
+|---|---:|
+corellia: 416 bots, 0 explorers, 61 squares, 22 templates
+naboo: 332 bots, 0 explorers, 58 squares, 21 templates
+ossus: 200 bots, 200 explorers, 137 squares, 25 templates
+rori: 166 bots, 0 explorers, 29 squares, 24 templates
+talus: 166 bots, 0 explorers, 27 squares, 17 templates
+tatooine: 420 bots, 0 explorers, 75 squares, 33 templates
+check 17 Oct 02:15 AM: core3 DOWN, load 0.21 0.14 0.05, free 15127 MB
+== last BotPop stats line (routes, legs stopped)
+mode all, online 1700, active avg 1700 max 1700 (last pass: near 0, rotating 0, busy 0), tick avg 1.05 ms max 3 ms over 60 passes (0 skipped: steps still running), steps 1243.21 ms per second across workers, slowest chunk 272.14 ms, real players 0, spawned 1700, logged out 0, failed 0, no path 0, routes 4336 (0 deferred, 2344 none), legs stopped: no start 1780, no end 185, no path 0, partial 947, unloaded mesh 0, snapped 757, pocket hops 63
+== lair_check rows: ranged with damage
+784 rows, 395 ranged, 100 ranged with damage
+== errors in core3.log during this run (top 8)
+6 error lines since the run started, plus 2439 startup 'cannot open scripts/object' lines
+      1 Sat Oct 17 01:02:08 2026 [1792224128714 msec] (0 s) Thread 2 - [Lua] INFO - file:conf/engi
+      1 Sat Oct 17 01:02:08 2026 [1792224128715 msec] (0 s) Thread 2 - [Lua] INFO - file:engine3.l
+      1 Sat Oct 17 01:02:08 2026 [1792224128715 msec] (0 s) Thread 2 - [Lua] INFO - file:conf/core
+      1 Sat Oct 17 01:02:17 2026 [1792224137346 msec] (8 s) Thread 2 - [SchematicMap] INFO - file:
+      1 Sat Oct 17 01:02:28 2026 [1792224148572 msec] (19 s) Thread 2 - [Lua] INFO - file:scripts/
+      1 unknown appearance type SPRT

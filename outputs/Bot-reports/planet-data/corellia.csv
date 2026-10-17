@@ -1,572 +1,257 @@
 planet,kind,template,level_min,level_max,square_x_km,square_y_km,events,sources
-corellia,creature,bageraset,10,10,-4,1,4,attacked first=2;killed=2
-corellia,creature,bloated_gubbur,6,6,-6,-2,21,killed=103
-corellia,creature,bloated_gubbur,6,6,-5,-3,3,killed=103
-corellia,creature,bloated_gubbur,6,6,-1,-5,28,killed=103
-corellia,creature,bloated_gubbur,6,6,-1,-4,8,killed=103
-corellia,creature,bloated_gubbur,6,6,2,5,10,killed=103
-corellia,creature,bloated_gubbur,6,6,3,4,13,killed=103
-corellia,creature,bloated_gubbur,6,6,6,-6,19,killed=103
-corellia,creature,bloated_gubbur,6,6,7,-6,1,killed=103
-corellia,creature,canoid,10,10,-3,4,12,attacked first=3;incapacitated a bot=6;killed a bot=3
-corellia,creature,corellian_butterfly,1,7,-6,-3,22,killed=138
-corellia,creature,corellian_butterfly,1,7,-6,-2,5,killed=138
-corellia,creature,corellian_butterfly,1,7,-5,-2,1,killed=138
-corellia,creature,corellian_butterfly,1,7,-4,1,2,killed=138
-corellia,creature,corellian_butterfly,1,7,-3,3,6,killed=138
-corellia,creature,corellian_butterfly,1,7,-2,-6,2,killed=138
-corellia,creature,corellian_butterfly,1,7,-1,-6,7,killed=138
-corellia,creature,corellian_butterfly,1,7,2,4,43,killed=138
-corellia,creature,corellian_butterfly,1,7,3,4,1,killed=138
-corellia,creature,corellian_butterfly,1,7,6,-8,3,killed=138
-corellia,creature,corellian_butterfly,1,7,6,-7,2,killed=138
-corellia,creature,corellian_butterfly,1,7,6,-6,13,killed=138
-corellia,creature,corellian_butterfly,1,7,6,-5,1,killed=138
-corellia,creature,corellian_butterfly,1,7,7,-7,12,killed=138
-corellia,creature,corellian_butterfly,1,7,7,-6,18,killed=138
-corellia,creature,corellian_butterfly_drone,5,5,-5,-3,2,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,-5,-2,2,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,-4,2,40,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,-4,3,62,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,-3,2,6,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,-2,-5,3,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,-1,-6,15,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,-1,-5,5,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,-1,-4,12,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,0,-5,23,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,3,4,23,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,3,5,6,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,6,-7,2,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,6,-6,6,killed=215
-corellia,creature,corellian_butterfly_drone,5,5,7,-6,8,killed=215
-corellia,creature,corellian_butterfly_worker,1,9,-4,-2,8,attacked first=16;incapacitated a bot=29;killed=2;killed a bot=14
-corellia,creature,corellian_butterfly_worker,1,9,-4,1,8,attacked first=16;incapacitated a bot=29;killed=2;killed a bot=14
-corellia,creature,corellian_butterfly_worker,1,9,0,-3,7,attacked first=16;incapacitated a bot=29;killed=2;killed a bot=14
-corellia,creature,corellian_butterfly_worker,1,9,1,3,8,attacked first=16;incapacitated a bot=29;killed=2;killed a bot=14
-corellia,creature,corellian_butterfly_worker,1,9,1,4,12,attacked first=16;incapacitated a bot=29;killed=2;killed a bot=14
-corellia,creature,corellian_butterfly_worker,1,9,6,-8,8,attacked first=16;incapacitated a bot=29;killed=2;killed a bot=14
-corellia,creature,corellian_butterfly_worker,1,9,6,-5,10,attacked first=16;incapacitated a bot=29;killed=2;killed a bot=14
-corellia,creature,crazed_durni,10,10,-3,4,4,attacked first=3;incapacitated a bot=6;killed a bot=3
-corellia,creature,crazed_durni,10,10,-2,-4,3,attacked first=3;incapacitated a bot=6;killed a bot=3
-corellia,creature,crazed_durni,10,10,0,-4,5,attacked first=3;incapacitated a bot=6;killed a bot=3
-corellia,creature,dalyrake,9,9,0,-3,8,attacked first=9;incapacitated a bot=18;killed a bot=9
-corellia,creature,dalyrake,9,9,1,-5,4,attacked first=9;incapacitated a bot=18;killed a bot=9
-corellia,creature,dalyrake,9,9,5,-8,8,attacked first=9;incapacitated a bot=18;killed a bot=9
-corellia,creature,dalyrake,9,9,6,-7,10,attacked first=9;incapacitated a bot=18;killed a bot=9
-corellia,creature,dalyrake,9,9,7,-7,6,attacked first=9;incapacitated a bot=18;killed a bot=9
-corellia,creature,diseased_vrelt,1,8,-3,5,8,attacked first=40;incapacitated a bot=54;killed=14;killed a bot=27
-corellia,creature,diseased_vrelt,1,8,2,6,30,attacked first=40;incapacitated a bot=54;killed=14;killed a bot=27
-corellia,creature,diseased_vrelt,1,8,3,6,10,attacked first=40;incapacitated a bot=54;killed=14;killed a bot=27
-corellia,creature,diseased_vrelt,1,8,4,4,14,attacked first=40;incapacitated a bot=54;killed=14;killed a bot=27
-corellia,creature,diseased_vrelt,1,8,4,5,34,attacked first=40;incapacitated a bot=54;killed=14;killed a bot=27
-corellia,creature,diseased_vrelt,1,8,4,6,12,attacked first=40;incapacitated a bot=54;killed=14;killed a bot=27
-corellia,creature,diseased_vrelt,1,8,5,-6,12,attacked first=40;incapacitated a bot=54;killed=14;killed a bot=27
-corellia,creature,diseased_vrelt,1,8,6,-7,14,attacked first=40;incapacitated a bot=54;killed=14;killed a bot=27
-corellia,creature,diseased_vrelt,1,8,6,-6,1,attacked first=40;incapacitated a bot=54;killed=14;killed a bot=27
-corellia,creature,drall_patriot,11,11,-3,2,8,attacked first=2;incapacitated a bot=4;killed a bot=2
-corellia,creature,durni,1,7,-7,-3,12,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,-7,-2,8,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,-6,-3,2,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,-5,-3,22,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,-5,3,1,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,-4,1,15,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,-4,3,110,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,-3,2,34,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,-3,3,1,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,-2,3,12,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,-1,-6,1,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,-1,-5,1,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,-1,-4,2,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,0,-6,1,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,0,-5,8,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,0,-4,9,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,1,-4,7,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,1,5,26,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,2,5,22,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,3,3,12,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,3,5,25,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,3,6,14,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,4,3,6,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,4,5,42,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,5,-8,12,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,5,-7,38,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,5,-6,22,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,6,-7,16,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,6,-6,11,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,7,-8,8,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,7,-7,6,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,durni,1,7,7,-6,1,attacked first=97;incapacitated a bot=86;killed=293;killed a bot=31
-corellia,creature,female_slice_hound,8,8,-5,4,4,attacked first=1;incapacitated a bot=2;killed a bot=1
-corellia,creature,flail_enforcer,19,19,-5,-2,6,attacked first=2;incapacitated a bot=2;killed a bot=2
-corellia,creature,flail_executioner,25,25,-5,-2,4,attacked first=1;incapacitated a bot=2;killed a bot=1
-corellia,creature,giant_gubbur,9,9,-6,2,8,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,-5,-3,22,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,-5,-2,18,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,-4,-2,3,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,-4,1,12,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,-4,4,2,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,-3,2,6,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,-3,3,18,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,-3,4,5,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,-1,-4,16,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,0,-6,2,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,0,-5,23,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,0,-4,20,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,1,-5,12,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,2,4,3,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,2,5,2,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,2,6,26,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,3,4,9,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,4,6,9,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,5,-6,2,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,5,-5,3,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,6,-8,12,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,6,-7,2,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,6,-5,10,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,giant_gubbur,9,9,7,-7,2,attacked first=83;incapacitated a bot=83;killed=37;killed a bot=44
-corellia,creature,gubbur,1,6,-8,-3,24,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-8,-2,8,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-7,-3,16,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-7,-2,15,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-7,-1,6,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-6,-4,17,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-6,-3,3,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-6,-2,22,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-6,-1,6,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-6,3,13,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-5,-3,3,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-5,-2,37,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-5,1,18,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-5,2,18,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-5,3,52,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-5,4,13,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-4,1,20,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-4,4,40,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-3,2,11,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-3,3,10,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-3,4,6,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-2,-3,26,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-2,3,27,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-1,-6,3,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-1,-4,10,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,-1,-3,6,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,0,-7,20,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,0,-5,4,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,0,-4,11,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,1,-5,7,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,1,3,9,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,2,5,12,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,2,6,12,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,3,5,14,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,3,6,5,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,3,7,16,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,4,-6,9,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,4,4,41,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,4,5,1,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,5,-7,14,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,5,-5,32,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,6,-7,3,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,6,-5,15,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,6,-4,24,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,7,-7,15,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,7,-6,37,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,gubbur,1,6,7,-5,21,attacked first=277;given up on=1;incapacitated a bot=94;killed=348;killed a bot=32
-corellia,creature,howling_plumed_rasp,4,4,-7,-3,16,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,-6,-2,12,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,-5,-2,39,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,-5,2,24,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,-3,2,16,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,-3,3,34,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,-3,4,6,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,-1,-6,10,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,-1,-4,87,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,-1,-3,6,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,0,-6,30,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,0,-5,28,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,0,-4,25,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,3,4,25,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,5,-5,12,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,6,-7,4,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,6,-6,24,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,howling_plumed_rasp,4,4,7,-6,18,attacked first=178;incapacitated a bot=2;killed=234;killed a bot=2
-corellia,creature,krahbu,10,10,-4,-2,4,attacked first=8;incapacitated a bot=16;killed a bot=8
-corellia,creature,krahbu,10,10,2,5,16,attacked first=8;incapacitated a bot=16;killed a bot=8
-corellia,creature,krahbu,10,10,7,-7,12,attacked first=8;incapacitated a bot=16;killed a bot=8
-corellia,creature,meatlump_buffoon,5,5,-7,-3,11,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,-6,-2,2,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,-5,-2,6,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,-4,2,5,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,-3,4,5,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,-2,-6,4,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,-1,-3,4,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,0,-5,3,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,1,-5,12,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,1,4,6,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,2,6,12,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,5,-5,4,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,6,-5,2,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,7,-7,8,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_buffoon,5,5,7,-5,13,attacked first=43;incapacitated a bot=11;killed=40;killed a bot=3
-corellia,creature,meatlump_clod,8,8,-5,-2,4,attacked first=5;incapacitated a bot=10;killed a bot=5
-corellia,creature,meatlump_clod,8,8,4,5,16,attacked first=5;incapacitated a bot=10;killed a bot=5
-corellia,creature,meatlump_cretin,9,9,6,-5,12,attacked first=3;incapacitated a bot=6;killed a bot=3
-corellia,creature,meatlump_fool,6,6,-8,-3,8,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,-7,-3,9,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,-6,-2,4,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,-6,3,4,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,-5,-2,3,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,-4,-2,3,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,-4,2,6,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,-3,4,2,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,-2,3,6,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,-1,-3,2,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,0,-5,13,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,1,-5,12,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,1,4,4,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,2,4,8,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,2,6,6,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,5,-5,6,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_fool,6,6,7,-5,13,attacked first=43;incapacitated a bot=23;killed=36;killed a bot=7
-corellia,creature,meatlump_loon,10,10,-5,4,8,attacked first=4;incapacitated a bot=8;killed a bot=4
-corellia,creature,meatlump_loon,10,10,4,3,8,attacked first=4;incapacitated a bot=8;killed a bot=4
-corellia,creature,meatlump_oaf,9,9,-4,-2,8,attacked first=3;incapacitated a bot=4;killed=1;killed a bot=2
-corellia,creature,meatlump_oaf,9,9,-3,1,2,attacked first=3;incapacitated a bot=4;killed=1;killed a bot=2
-corellia,creature,meatlump_stooge,7,7,-7,-3,2,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,-6,3,5,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,-5,-2,12,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,-5,-1,2,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,-5,4,16,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,-4,-2,4,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,-4,2,6,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,-4,5,3,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,-3,3,11,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,-3,4,8,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,-2,-6,4,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,-2,3,14,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,-1,-4,10,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,0,-5,5,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,0,-4,8,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,1,-5,7,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,1,5,6,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,2,4,8,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,2,6,4,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,4,6,8,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,5,-7,12,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,5,-5,2,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,6,-5,6,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,meatlump_stooge,7,7,7,-5,4,attacked first=56;incapacitated a bot=56;killed=29;killed a bot=26
-corellia,creature,minor_gubbur,4,4,-6,-2,1,killed=157
-corellia,creature,minor_gubbur,4,4,-5,-2,5,killed=157
-corellia,creature,minor_gubbur,4,4,-5,3,20,killed=157
-corellia,creature,minor_gubbur,4,4,-4,2,20,killed=157
-corellia,creature,minor_gubbur,4,4,-4,3,43,killed=157
-corellia,creature,minor_gubbur,4,4,-3,2,4,killed=157
-corellia,creature,minor_gubbur,4,4,-3,3,3,killed=157
-corellia,creature,minor_gubbur,4,4,-1,-6,11,killed=157
-corellia,creature,minor_gubbur,4,4,-1,-5,4,killed=157
-corellia,creature,minor_gubbur,4,4,-1,-4,6,killed=157
-corellia,creature,minor_gubbur,4,4,2,5,13,killed=157
-corellia,creature,minor_gubbur,4,4,3,5,4,killed=157
-corellia,creature,minor_gubbur,4,4,3,6,11,killed=157
-corellia,creature,minor_gubbur,4,4,6,-7,4,killed=157
-corellia,creature,minor_gubbur,4,4,7,-7,6,killed=157
-corellia,creature,minor_gubbur,4,4,7,-6,2,killed=157
-corellia,creature,paralope,1,6,-8,-3,6,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-7,-4,1,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-7,-2,28,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-6,-4,17,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-6,-2,12,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-5,-2,50,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-5,2,33,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-5,3,51,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-5,4,10,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-4,2,38,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-4,3,52,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-4,5,14,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-3,-5,14,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-3,-2,7,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-3,4,4,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-2,-6,13,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-2,-4,8,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-2,-3,12,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,-1,-6,23,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,0,-6,8,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,0,-5,1,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,1,-6,14,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,1,5,9,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,2,6,44,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,3,4,33,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,3,6,18,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,4,4,7,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,4,5,14,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,4,6,6,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,5,-7,41,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,5,-6,17,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,5,-5,14,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,6,-7,16,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,6,-5,16,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,6,-4,18,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,7,-7,10,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,paralope,1,6,7,-5,15,attacked first=244;incapacitated a bot=90;killed=326;killed a bot=34
-corellia,creature,plumed_rasp,1,7,-7,-3,11,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,-7,-1,9,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,-6,2,8,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,-5,-3,11,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,-5,-2,30,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,-5,-1,4,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,-5,2,15,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,-4,1,9,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,-3,3,18,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,-2,-4,5,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,-2,2,8,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,0,-7,6,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,1,-4,25,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,2,4,19,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,2,5,18,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,2,6,18,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,3,7,6,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,4,5,14,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,4,6,7,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,5,-8,2,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,5,-7,14,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,5,-6,16,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,6,-8,5,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,6,-7,19,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,plumed_rasp,1,7,6,-6,1,attacked first=121;incapacitated a bot=45;killed=120;killed a bot=12
-corellia,creature,ragtag_kook,5,5,-4,3,2,attacked first=1;killed=1
-corellia,creature,rogue_corsec_trooper,7,7,-6,-3,12,attacked first=6;incapacitated a bot=1;killed=38;killed a bot=1
-corellia,creature,rogue_corsec_trooper,7,7,-4,3,34,attacked first=6;incapacitated a bot=1;killed=38;killed a bot=1
-corellia,creature,scavenger_rat,8,8,-7,-4,1,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,-7,-3,9,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,-6,-2,15,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,-5,-2,2,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,-5,-1,10,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,-4,2,2,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,-3,2,30,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,-3,4,12,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,-2,-4,14,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,-1,-4,5,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,0,-6,14,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,0,-3,8,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,1,-5,13,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,2,4,10,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,4,4,12,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,5,-7,11,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,6,-7,16,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,7,-6,12,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,scavenger_rat,8,8,7,-4,10,attacked first=56;incapacitated a bot=87;killed=25;killed a bot=38
-corellia,creature,slice_hound,9,9,-5,4,7,attacked first=7;incapacitated a bot=14;killed a bot=6
-corellia,creature,slice_hound,9,9,-3,2,8,attacked first=7;incapacitated a bot=14;killed a bot=6
-corellia,creature,slice_hound,9,9,1,-5,4,attacked first=7;incapacitated a bot=14;killed a bot=6
-corellia,creature,slice_hound,9,9,4,6,8,attacked first=7;incapacitated a bot=14;killed a bot=6
-corellia,creature,vrelt,6,6,-5,-2,7,killed=78
-corellia,creature,vrelt,6,6,-4,2,28,killed=78
-corellia,creature,vrelt,6,6,-4,3,40,killed=78
-corellia,creature,vrelt,6,6,0,-4,3,killed=78
-corellia,creature,vynock,1,9,-4,-2,8,attacked first=5;incapacitated a bot=8;killed=5;killed a bot=4
-corellia,creature,vynock,1,9,-4,2,1,attacked first=5;incapacitated a bot=8;killed=5;killed a bot=4
-corellia,creature,vynock,1,9,-3,1,1,attacked first=5;incapacitated a bot=8;killed=5;killed a bot=4
-corellia,creature,vynock,1,9,1,4,10,attacked first=5;incapacitated a bot=8;killed=5;killed a bot=4
-corellia,creature,vynock,1,9,6,-6,2,attacked first=5;incapacitated a bot=8;killed=5;killed a bot=4
-corellia,lair,corellia_bageraset_lair_neutral_medium_boss_01,,,-4,1,3,mission lair fought=2;mission lair found=1
-corellia,lair,corellia_canoid_lair_neutral_medium,,,-3,4,4,mission lair fought=3;mission lair found=1
-corellia,lair,corellia_corellian_butterfly_pod_neutral_small,,,-4,-2,3,mission lair fought=16;mission lair found=7
-corellia,lair,corellia_corellian_butterfly_pod_neutral_small,,,-4,1,3,mission lair fought=16;mission lair found=7
-corellia,lair,corellia_corellian_butterfly_pod_neutral_small,,,0,-4,1,mission lair fought=16;mission lair found=7
-corellia,lair,corellia_corellian_butterfly_pod_neutral_small,,,0,-3,2,mission lair fought=16;mission lair found=7
-corellia,lair,corellia_corellian_butterfly_pod_neutral_small,,,1,3,3,mission lair fought=16;mission lair found=7
-corellia,lair,corellia_corellian_butterfly_pod_neutral_small,,,1,4,4,mission lair fought=16;mission lair found=7
-corellia,lair,corellia_corellian_butterfly_pod_neutral_small,,,6,-8,3,mission lair fought=16;mission lair found=7
-corellia,lair,corellia_corellian_butterfly_pod_neutral_small,,,6,-5,4,mission lair fought=16;mission lair found=7
-corellia,lair,corellia_dalyrake_lair_neutral_medium,,,0,-3,3,mission lair fought=9;mission lair found=4
-corellia,lair,corellia_dalyrake_lair_neutral_medium,,,1,-5,2,mission lair fought=9;mission lair found=4
-corellia,lair,corellia_dalyrake_lair_neutral_medium,,,5,-8,3,mission lair fought=9;mission lair found=4
-corellia,lair,corellia_dalyrake_lair_neutral_medium,,,6,-7,5,mission lair fought=9;mission lair found=4
-corellia,lair,corellia_diseased_vrelt_lair_neutral_boss_02,,,2,6,3,mission lair fought=6;mission lair found=9
-corellia,lair,corellia_diseased_vrelt_lair_neutral_boss_02,,,3,6,1,mission lair fought=6;mission lair found=9
-corellia,lair,corellia_diseased_vrelt_lair_neutral_boss_02,,,4,4,2,mission lair fought=6;mission lair found=9
-corellia,lair,corellia_diseased_vrelt_lair_neutral_boss_02,,,4,5,3,mission lair fought=6;mission lair found=9
-corellia,lair,corellia_diseased_vrelt_lair_neutral_boss_02,,,4,6,2,mission lair fought=6;mission lair found=9
-corellia,lair,corellia_diseased_vrelt_lair_neutral_boss_02,,,5,-6,2,mission lair fought=6;mission lair found=9
-corellia,lair,corellia_diseased_vrelt_lair_neutral_boss_02,,,6,-7,2,mission lair fought=6;mission lair found=9
-corellia,lair,corellia_drall_patriot_camp_neutral_medium_theater,,,-3,2,3,mission lair fought=2;mission lair found=1
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,-7,-3,4,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,-7,-2,2,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,-4,1,5,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,-3,2,9,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,-2,3,5,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,0,-4,3,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,1,-4,3,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,1,5,7,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,3,3,3,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,3,6,4,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,4,3,2,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,4,5,15,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,5,-8,3,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,5,-7,10,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,5,-6,6,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,7,-8,3,mission lair fought=60;mission lair found=24
-corellia,lair,corellia_giant_gubbur_lair_neutral_medium,,,-6,2,2,mission lair fought=7;mission lair found=6
-corellia,lair,corellia_giant_gubbur_lair_neutral_medium,,,-5,-3,3,mission lair fought=7;mission lair found=6
-corellia,lair,corellia_giant_gubbur_lair_neutral_medium,,,0,-5,2,mission lair fought=7;mission lair found=6
-corellia,lair,corellia_giant_gubbur_lair_neutral_medium,,,0,-4,2,mission lair fought=7;mission lair found=6
-corellia,lair,corellia_giant_gubbur_lair_neutral_medium,,,2,6,2,mission lair fought=7;mission lair found=6
-corellia,lair,corellia_giant_gubbur_lair_neutral_medium,,,6,-8,2,mission lair fought=7;mission lair found=6
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-8,-3,7,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-8,-2,2,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-7,-3,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-7,-2,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-7,-1,2,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-6,-4,4,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-6,-2,5,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-6,-1,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-6,3,5,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-5,-2,5,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-5,1,6,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-5,2,5,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-5,3,8,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-5,4,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-4,1,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-4,2,1,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-4,4,8,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-3,2,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-3,3,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-3,4,2,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-2,-3,7,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-2,3,6,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-1,-4,4,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,-1,-3,2,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,0,-7,4,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,0,-4,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,1,-5,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,1,3,2,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,2,6,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,3,7,4,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,4,-6,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,4,4,8,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,5,-7,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,5,-5,7,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,6,-5,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,6,-4,6,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,7,-7,3,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,7,-6,11,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_gubbur_lair_neutral_small,,,7,-5,6,mission lair fought=120;mission lair found=49
-corellia,lair,corellia_krahbu_lair_neutral_medium,,,-4,-2,2,mission lair fought=8;mission lair found=3
-corellia,lair,corellia_krahbu_lair_neutral_medium,,,2,5,5,mission lair fought=8;mission lair found=3
-corellia,lair,corellia_krahbu_lair_neutral_medium,,,7,-7,4,mission lair fought=8;mission lair found=3
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-8,-3,3,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-7,-3,7,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-6,-2,2,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-6,3,3,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-5,-2,8,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-5,4,5,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-4,-2,3,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-4,2,6,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-4,5,2,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-3,3,5,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-3,4,6,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-2,-6,4,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-2,3,7,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-1,-4,4,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-1,-3,2,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,0,-5,6,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,0,-4,3,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,1,-5,8,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,1,4,3,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,1,5,2,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,2,4,4,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,2,6,8,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,4,6,3,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,5,-7,4,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,5,-5,3,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,6,-5,4,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,7,-7,6,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,7,-5,16,mission lair fought=98;mission lair found=39
-corellia,lair,corellia_meatlump_outpost_neutral_medium_theater,,,-5,-2,2,mission lair fought=15;mission lair found=7
-corellia,lair,corellia_meatlump_outpost_neutral_medium_theater,,,-5,4,3,mission lair fought=15;mission lair found=7
-corellia,lair,corellia_meatlump_outpost_neutral_medium_theater,,,-4,-2,3,mission lair fought=15;mission lair found=7
-corellia,lair,corellia_meatlump_outpost_neutral_medium_theater,,,-3,1,2,mission lair fought=15;mission lair found=7
-corellia,lair,corellia_meatlump_outpost_neutral_medium_theater,,,4,3,3,mission lair fought=15;mission lair found=7
-corellia,lair,corellia_meatlump_outpost_neutral_medium_theater,,,4,5,5,mission lair fought=15;mission lair found=7
-corellia,lair,corellia_meatlump_outpost_neutral_medium_theater,,,6,-5,4,mission lair fought=15;mission lair found=7
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-8,-3,2,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-7,-2,7,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-6,-4,4,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-6,-2,2,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-5,-2,16,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-5,1,1,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-5,2,5,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-5,3,10,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-5,4,3,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-4,5,2,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-3,-5,2,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-3,-2,2,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-3,4,3,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-2,-6,3,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-2,-4,3,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-2,-3,3,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,-1,-6,5,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,1,-6,3,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,1,5,3,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,2,6,10,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,3,3,1,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,3,4,10,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,3,6,4,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,4,4,3,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,4,5,3,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,4,6,2,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,5,-7,10,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,5,-6,3,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,5,-5,3,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,6,-7,4,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,6,-5,4,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,6,-4,5,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,7,-7,3,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_paralope_lair_neutral_medium,,,7,-5,3,mission lair fought=101;mission lair found=46
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,-7,-3,3,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,-7,-1,3,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,-6,2,2,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,-5,-3,3,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,-5,-2,8,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,-5,-1,2,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,-5,2,3,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,-4,1,3,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,-3,3,4,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,-2,-4,2,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,-2,2,3,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,0,-7,2,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,1,-4,7,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,2,4,5,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,2,5,4,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,2,6,4,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,3,7,2,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,4,5,4,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,4,6,2,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,5,-7,4,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,5,-6,6,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,6,-8,3,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,6,-7,8,mission lair fought=61;mission lair found=26
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,-7,-4,1,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,-7,-3,2,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,-6,-2,4,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,-5,-1,3,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,-3,2,8,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,-3,3,1,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,-3,4,4,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,-2,-4,5,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,-1,-4,1,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,0,-6,4,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,0,-3,3,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,1,-5,5,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,2,4,4,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,4,4,4,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,5,-7,4,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,6,-7,5,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,7,-6,4,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_scavenger_rat_lair_neutral_small,,,7,-4,3,mission lair fought=47;mission lair found=18
-corellia,lair,corellia_slice_hound_lair_neutral_medium,,,-5,4,4,mission lair fought=8;mission lair found=4
-corellia,lair,corellia_slice_hound_lair_neutral_medium,,,-3,2,3,mission lair fought=8;mission lair found=4
-corellia,lair,corellia_slice_hound_lair_neutral_medium,,,1,-5,2,mission lair fought=8;mission lair found=4
-corellia,lair,corellia_slice_hound_lair_neutral_medium,,,4,6,3,mission lair fought=8;mission lair found=4
-corellia,lair,corellia_vynock_lair_neutral_small,,,-4,-2,3,mission lair fought=4;mission lair found=2
-corellia,lair,corellia_vynock_lair_neutral_small,,,1,4,3,mission lair fought=4;mission lair found=2
+corellia,creature,bloated_gubbur,6,6,-6,-3,29,killed=191
+corellia,creature,bloated_gubbur,6,6,-5,2,8,killed=191
+corellia,creature,bloated_gubbur,6,6,-1,-6,13,killed=191
+corellia,creature,bloated_gubbur,6,6,-1,-4,10,killed=191
+corellia,creature,bloated_gubbur,6,6,2,5,12,killed=191
+corellia,creature,bloated_gubbur,6,6,2,6,8,killed=191
+corellia,creature,bloated_gubbur,6,6,3,4,30,killed=191
+corellia,creature,bloated_gubbur,6,6,3,5,10,killed=191
+corellia,creature,bloated_gubbur,6,6,4,5,2,killed=191
+corellia,creature,bloated_gubbur,6,6,6,-7,69,killed=191
+corellia,creature,corellian_butterfly,1,7,-7,-3,5,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,-6,-4,1,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,-6,-3,38,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,-5,-3,6,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,-3,3,3,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,-1,-6,20,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,-1,-4,7,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,0,-4,14,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,2,4,19,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,2,5,1,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,3,4,20,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,6,-7,69,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,6,-6,23,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,7,-7,26,attacked first=1;killed=257
+corellia,creature,corellian_butterfly,1,7,7,-6,6,attacked first=1;killed=257
+corellia,creature,corellian_butterfly_drone,5,5,-6,-3,10,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,-6,-2,24,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,-5,-3,64,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,-5,-2,17,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,-4,2,47,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,-4,3,103,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,-3,2,27,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,-3,3,12,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,-2,-5,1,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,-1,-5,4,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,-1,-4,8,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,0,-5,32,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,0,-4,6,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,2,5,42,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,2,6,1,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,4,5,2,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,6,-5,1,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,7,-6,85,attacked first=2;given up on=4;killed=485
+corellia,creature,corellian_butterfly_drone,5,5,7,-5,5,attacked first=2;given up on=4;killed=485
+corellia,creature,durni,1,7,-7,-3,3,attacked first=9;killed=486
+corellia,creature,durni,1,7,-6,-2,48,attacked first=9;killed=486
+corellia,creature,durni,1,7,-5,2,2,attacked first=9;killed=486
+corellia,creature,durni,1,7,-5,3,5,attacked first=9;killed=486
+corellia,creature,durni,1,7,-4,2,31,attacked first=9;killed=486
+corellia,creature,durni,1,7,-4,3,114,attacked first=9;killed=486
+corellia,creature,durni,1,7,-4,4,3,attacked first=9;killed=486
+corellia,creature,durni,1,7,-3,3,7,attacked first=9;killed=486
+corellia,creature,durni,1,7,-1,-6,10,attacked first=9;killed=486
+corellia,creature,durni,1,7,-1,-5,42,attacked first=9;killed=486
+corellia,creature,durni,1,7,-1,-4,28,attacked first=9;killed=486
+corellia,creature,durni,1,7,0,-5,21,attacked first=9;killed=486
+corellia,creature,durni,1,7,2,4,29,attacked first=9;killed=486
+corellia,creature,durni,1,7,3,4,9,attacked first=9;killed=486
+corellia,creature,durni,1,7,3,5,56,attacked first=9;killed=486
+corellia,creature,durni,1,7,3,6,6,attacked first=9;killed=486
+corellia,creature,durni,1,7,4,4,8,attacked first=9;killed=486
+corellia,creature,durni,1,7,4,5,2,attacked first=9;killed=486
+corellia,creature,durni,1,7,6,-7,51,attacked first=9;killed=486
+corellia,creature,durni,1,7,6,-6,20,attacked first=9;killed=486
+corellia,creature,giant_gubbur,9,9,-5,-2,5,attacked first=11;incapacitated a bot=3;killed=8;killed a bot=2
+corellia,creature,giant_gubbur,9,9,-4,1,2,attacked first=11;incapacitated a bot=3;killed=8;killed a bot=2
+corellia,creature,giant_gubbur,9,9,-4,4,2,attacked first=11;incapacitated a bot=3;killed=8;killed a bot=2
+corellia,creature,giant_gubbur,9,9,-3,4,2,attacked first=11;incapacitated a bot=3;killed=8;killed a bot=2
+corellia,creature,giant_gubbur,9,9,-1,-4,2,attacked first=11;incapacitated a bot=3;killed=8;killed a bot=2
+corellia,creature,giant_gubbur,9,9,0,-5,3,attacked first=11;incapacitated a bot=3;killed=8;killed a bot=2
+corellia,creature,giant_gubbur,9,9,5,-7,4,attacked first=11;incapacitated a bot=3;killed=8;killed a bot=2
+corellia,creature,giant_gubbur,9,9,5,-6,2,attacked first=11;incapacitated a bot=3;killed=8;killed a bot=2
+corellia,creature,giant_gubbur,9,9,6,-7,2,attacked first=11;incapacitated a bot=3;killed=8;killed a bot=2
+corellia,creature,gubbur,1,6,-7,-3,31,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,-7,-1,5,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,-6,-4,2,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,-6,-3,21,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,-6,-2,26,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,-5,-3,18,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,-5,-2,21,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,-5,2,23,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,-4,2,24,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,-3,3,15,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,-1,-4,2,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,0,-6,2,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,0,-5,11,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,0,-4,5,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,1,-4,10,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,1,5,12,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,2,5,26,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,2,6,12,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,3,4,14,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,3,5,34,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,3,6,34,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,4,4,13,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,5,-6,9,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,5,-5,3,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,6,-6,33,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,7,-8,9,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,gubbur,1,6,7,-6,7,attacked first=60;incapacitated a bot=29;killed=323;killed a bot=10
+corellia,creature,howling_plumed_rasp,4,4,-5,-3,42,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,-5,2,8,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,-5,3,13,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,-4,3,6,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,-3,2,4,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,-3,3,11,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,-1,-5,43,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,-1,-4,42,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,0,-5,34,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,2,5,19,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,5,-6,13,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,6,-7,42,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,6,-6,55,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,7,-6,49,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,howling_plumed_rasp,4,4,7,-5,6,attacked first=107;incapacitated a bot=7;killed=271;killed a bot=2
+corellia,creature,meatlump_buffoon,5,5,-7,-2,2,attacked first=6;incapacitated a bot=1;killed=5
+corellia,creature,meatlump_buffoon,5,5,-4,1,4,attacked first=6;incapacitated a bot=1;killed=5
+corellia,creature,meatlump_buffoon,5,5,-3,2,2,attacked first=6;incapacitated a bot=1;killed=5
+corellia,creature,meatlump_buffoon,5,5,4,5,2,attacked first=6;incapacitated a bot=1;killed=5
+corellia,creature,meatlump_buffoon,5,5,5,-5,2,attacked first=6;incapacitated a bot=1;killed=5
+corellia,creature,meatlump_fool,6,6,-7,-2,6,attacked first=21;incapacitated a bot=17;killed=14;killed a bot=7
+corellia,creature,meatlump_fool,6,6,-5,2,3,attacked first=21;incapacitated a bot=17;killed=14;killed a bot=7
+corellia,creature,meatlump_fool,6,6,-4,-2,6,attacked first=21;incapacitated a bot=17;killed=14;killed a bot=7
+corellia,creature,meatlump_fool,6,6,-4,4,2,attacked first=21;incapacitated a bot=17;killed=14;killed a bot=7
+corellia,creature,meatlump_fool,6,6,-3,2,14,attacked first=21;incapacitated a bot=17;killed=14;killed a bot=7
+corellia,creature,meatlump_fool,6,6,1,-5,3,attacked first=21;incapacitated a bot=17;killed=14;killed a bot=7
+corellia,creature,meatlump_fool,6,6,3,7,10,attacked first=21;incapacitated a bot=17;killed=14;killed a bot=7
+corellia,creature,meatlump_fool,6,6,5,-6,6,attacked first=21;incapacitated a bot=17;killed=14;killed a bot=7
+corellia,creature,meatlump_fool,6,6,5,-5,5,attacked first=21;incapacitated a bot=17;killed=14;killed a bot=7
+corellia,creature,meatlump_fool,6,6,5,4,4,attacked first=21;incapacitated a bot=17;killed=14;killed a bot=7
+corellia,creature,meatlump_stooge,7,7,-7,-2,6,attacked first=20;incapacitated a bot=21;killed=11;killed a bot=8
+corellia,creature,meatlump_stooge,7,7,-6,-2,8,attacked first=20;incapacitated a bot=21;killed=11;killed a bot=8
+corellia,creature,meatlump_stooge,7,7,-5,2,7,attacked first=20;incapacitated a bot=21;killed=11;killed a bot=8
+corellia,creature,meatlump_stooge,7,7,-5,3,2,attacked first=20;incapacitated a bot=21;killed=11;killed a bot=8
+corellia,creature,meatlump_stooge,7,7,-5,4,6,attacked first=20;incapacitated a bot=21;killed=11;killed a bot=8
+corellia,creature,meatlump_stooge,7,7,-4,1,8,attacked first=20;incapacitated a bot=21;killed=11;killed a bot=8
+corellia,creature,meatlump_stooge,7,7,-4,4,9,attacked first=20;incapacitated a bot=21;killed=11;killed a bot=8
+corellia,creature,meatlump_stooge,7,7,-3,2,4,attacked first=20;incapacitated a bot=21;killed=11;killed a bot=8
+corellia,creature,meatlump_stooge,7,7,1,-5,1,attacked first=20;incapacitated a bot=21;killed=11;killed a bot=8
+corellia,creature,meatlump_stooge,7,7,3,7,2,attacked first=20;incapacitated a bot=21;killed=11;killed a bot=8
+corellia,creature,meatlump_stooge,7,7,4,5,2,attacked first=20;incapacitated a bot=21;killed=11;killed a bot=8
+corellia,creature,meatlump_stooge,7,7,5,-7,3,attacked first=20;incapacitated a bot=21;killed=11;killed a bot=8
+corellia,creature,meatlump_stooge,7,7,6,-8,2,attacked first=20;incapacitated a bot=21;killed=11;killed a bot=8
+corellia,creature,minor_gubbur,4,4,-7,-3,3,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,-6,-3,5,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,-6,-2,20,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,-5,-3,1,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,-5,-2,19,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,-4,2,79,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,-4,3,68,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,-3,2,7,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,-3,3,4,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,-1,-6,2,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,-1,-5,5,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,0,-6,5,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,0,-5,2,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,2,5,6,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,3,6,33,attacked first=1;killed=269
+corellia,creature,minor_gubbur,4,4,6,-6,11,attacked first=1;killed=269
+corellia,creature,paralope,1,6,-7,-4,5,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,-7,-3,12,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,-7,-2,1,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,-7,-1,15,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,-6,-3,1,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,-5,-2,10,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,-4,2,55,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,-4,3,96,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,-3,-5,12,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,-1,-6,3,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,-1,-3,14,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,0,-6,17,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,1,4,6,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,1,5,31,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,1,6,10,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,2,3,16,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,2,4,4,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,3,3,5,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,4,5,1,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,4,6,12,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,5,-5,6,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,6,-8,6,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,paralope,1,6,7,-7,16,attacked first=83;incapacitated a bot=23;killed=239;killed a bot=9
+corellia,creature,plumed_rasp,7,7,6,-5,12,attacked first=4;incapacitated a bot=4;killed=3;killed a bot=1
+corellia,creature,rogue_corsec_trooper,7,7,-6,-3,13,attacked first=4;killed=46
+corellia,creature,rogue_corsec_trooper,7,7,-4,3,37,attacked first=4;killed=46
+corellia,creature,scavenger_rat,8,8,-6,-4,15,attacked first=2;given up on=5;killed=119
+corellia,creature,scavenger_rat,8,8,-6,-3,3,attacked first=2;given up on=5;killed=119
+corellia,creature,scavenger_rat,8,8,-5,-3,10,attacked first=2;given up on=5;killed=119
+corellia,creature,scavenger_rat,8,8,-5,3,1,attacked first=2;given up on=5;killed=119
+corellia,creature,scavenger_rat,8,8,-4,2,6,attacked first=2;given up on=5;killed=119
+corellia,creature,scavenger_rat,8,8,-3,2,1,attacked first=2;given up on=5;killed=119
+corellia,creature,scavenger_rat,8,8,-3,3,6,attacked first=2;given up on=5;killed=119
+corellia,creature,scavenger_rat,8,8,-1,-4,19,attacked first=2;given up on=5;killed=119
+corellia,creature,scavenger_rat,8,8,0,-5,7,attacked first=2;given up on=5;killed=119
+corellia,creature,scavenger_rat,8,8,3,4,33,attacked first=2;given up on=5;killed=119
+corellia,creature,scavenger_rat,8,8,3,5,1,attacked first=2;given up on=5;killed=119
+corellia,creature,scavenger_rat,8,8,6,-6,24,attacked first=2;given up on=5;killed=119
+corellia,creature,vrelt,6,6,-4,2,45,attacked first=1;killed=146
+corellia,creature,vrelt,6,6,-4,3,85,attacked first=1;killed=146
+corellia,creature,vrelt,6,6,0,-4,17,attacked first=1;killed=146
+corellia,creature,vynock,1,1,-5,-3,1,killed=6
+corellia,creature,vynock,1,1,-4,2,2,killed=6
+corellia,creature,vynock,1,1,5,-6,1,killed=6
+corellia,creature,vynock,1,1,6,-6,2,killed=6
+corellia,lair,corellia_durni_warren_neutral_small_boss_01,,,4,4,2,mission lair fought=1;mission lair found=1
+corellia,lair,corellia_gubbur_lair_neutral_small,,,-7,-3,9,mission lair fought=25;mission lair found=15
+corellia,lair,corellia_gubbur_lair_neutral_small,,,-7,-1,2,mission lair fought=25;mission lair found=15
+corellia,lair,corellia_gubbur_lair_neutral_small,,,-6,-2,2,mission lair fought=25;mission lair found=15
+corellia,lair,corellia_gubbur_lair_neutral_small,,,-5,2,5,mission lair fought=25;mission lair found=15
+corellia,lair,corellia_gubbur_lair_neutral_small,,,-4,2,2,mission lair fought=25;mission lair found=15
+corellia,lair,corellia_gubbur_lair_neutral_small,,,1,-4,2,mission lair fought=25;mission lair found=15
+corellia,lair,corellia_gubbur_lair_neutral_small,,,1,5,3,mission lair fought=25;mission lair found=15
+corellia,lair,corellia_gubbur_lair_neutral_small,,,2,6,3,mission lair fought=25;mission lair found=15
+corellia,lair,corellia_gubbur_lair_neutral_small,,,3,6,2,mission lair fought=25;mission lair found=15
+corellia,lair,corellia_gubbur_lair_neutral_small,,,4,4,3,mission lair fought=25;mission lair found=15
+corellia,lair,corellia_gubbur_lair_neutral_small,,,5,-6,3,mission lair fought=25;mission lair found=15
+corellia,lair,corellia_gubbur_lair_neutral_small,,,5,-5,2,mission lair fought=25;mission lair found=15
+corellia,lair,corellia_gubbur_lair_neutral_small,,,7,-8,2,mission lair fought=25;mission lair found=15
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-7,-2,6,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-6,-2,3,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-5,2,4,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-5,3,1,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-5,4,2,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-4,-2,2,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-4,1,6,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-4,2,1,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-4,4,4,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,-3,2,8,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,1,-5,3,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,3,7,3,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,4,5,2,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,5,-7,2,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,5,-6,2,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,5,-5,2,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,5,4,2,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,6,-8,1,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_meatlump_camp_neutral_medium_theater,,,6,-7,1,mission lair fought=34;mission lair found=21
+corellia,lair,corellia_paralope_lair_neutral_medium,,,-7,-3,5,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,-7,-2,2,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,-7,-1,2,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,-5,-2,3,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,-4,2,2,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,-3,-5,3,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,-1,-3,4,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,1,4,2,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,1,5,7,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,1,6,2,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,2,3,3,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,2,4,2,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,3,3,3,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,4,6,2,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,5,-5,2,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,6,-8,1,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,6,-7,1,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_paralope_lair_neutral_medium,,,7,-7,4,mission lair fought=31;mission lair found=19
+corellia,lair,corellia_plumed_rasp_nest_neutral_small,,,6,-5,3,mission lair fought=2;mission lair found=1
