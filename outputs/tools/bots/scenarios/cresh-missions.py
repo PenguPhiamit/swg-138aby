@@ -34,7 +34,7 @@ def run(g):
     g.note('TERMINALS within 3 km (the search returns 30 at most per type): ' + json.dumps(
         {t: {'count': len(v), 'nearest_m': round(v[0].get('distance', 0))} for t, v in sorted(found.items())}))
     general = (found.get('general') or [None])[0]
-    if not g.check('a general mission terminal within 3 km', general, general and general.get('distance')):
+    if not g.check('a general mission terminal within 3 km', general, general.get('distance') if general else M.whereabouts(cresh)):
         return
     trips = g.parallel(*[lambda b=b, i=i: M.approach(b, general, i) for i, b in enumerate(g.bots)])
     g.check('Cresh reaches the general terminal', M.arrived(trips[0]),

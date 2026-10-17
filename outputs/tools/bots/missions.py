@@ -236,6 +236,12 @@ def find_terminals(bot, radius=3000):
     return found
 
 
+def whereabouts(bot):
+    """Where the bot stands and whether its body answers: the detail of a failed search."""
+    here = bot.status()
+    return {k: here.get(k) for k in ('planet', 'x', 'y', 'cell', 'connected', 'error')}
+
+
 def nearest_terminal(bot, ttype, radius=3000):
     template = next(t for t, k in TYPES.items() if k == ttype)
     hits = [o for o in bot.locate(template[:-4], radius=radius) if kind(o.get('template')) == ttype]
@@ -246,7 +252,7 @@ def at_terminal(g, bot, ttype, slot=0, radius=3000):
     """Find the nearest terminal of ttype and walk to it. Returns it, or None after a failed check."""
     spot = nearest_terminal(bot, ttype, radius)
     if not g.check(f'{ttype}: a terminal within {radius} m of {bot.first}', spot,
-                   spot and {k: spot.get(k) for k in ('distance', 'cell', 'building')}):
+                   {k: spot.get(k) for k in ('distance', 'cell', 'building')} if spot else whereabouts(bot)):
         return None
     trip = approach(bot, spot, slot)
     if not g.check(f'{ttype}: {bot.first} reaches the terminal', arrived(trip),

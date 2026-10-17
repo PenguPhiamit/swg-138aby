@@ -21,7 +21,7 @@ def run(g):
         g.note('Rusk: ' + M.agentskill(rusk, 'social_entertainer_novice')[:160])
     divisor = M.group_size(g, dorn)
     spot = M.nearest_terminal(dorn, 'entertainer')
-    if not g.check('entertainer: a terminal within 3000 m', spot, spot and spot.get('distance')):
+    if not g.check('entertainer: a terminal within 3000 m', spot, spot.get('distance') if spot else M.whereabouts(dorn)):
         return
     trips = g.parallel(lambda: M.approach(dorn, spot, 0), lambda: M.approach(rusk, spot, 1))
 
