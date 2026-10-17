@@ -1,235 +1,146 @@
 planet,kind,template,level_min,level_max,square_x_km,square_y_km,events,sources
-naboo,creature,capper_spineflap,1,6,-7,3,4,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,-7,4,18,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,-6,3,65,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,-6,5,4,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,-5,3,18,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,-5,4,15,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,-4,3,8,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,-1,2,5,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,2,3,38,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,3,-6,10,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,3,-5,3,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,3,6,4,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,4,-6,29,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,4,-5,48,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,4,6,42,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,5,-6,8,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,5,-5,68,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap,1,6,5,6,87,attacked first=77;given up on=26;incapacitated a bot=19;killed=350;killed a bot=2
-naboo,creature,capper_spineflap_drone,1,6,-5,4,65,attacked first=19;given up on=2;incapacitated a bot=1;killed=256
-naboo,creature,capper_spineflap_drone,1,6,1,3,10,attacked first=19;given up on=2;incapacitated a bot=1;killed=256
-naboo,creature,capper_spineflap_drone,1,6,2,3,3,attacked first=19;given up on=2;incapacitated a bot=1;killed=256
-naboo,creature,capper_spineflap_drone,1,6,4,6,44,attacked first=19;given up on=2;incapacitated a bot=1;killed=256
-naboo,creature,capper_spineflap_drone,1,6,5,-5,113,attacked first=19;given up on=2;incapacitated a bot=1;killed=256
-naboo,creature,capper_spineflap_drone,1,6,5,6,43,attacked first=19;given up on=2;incapacitated a bot=1;killed=256
-naboo,creature,chuba,1,5,-7,3,14,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,-7,4,19,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,-6,3,17,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,-6,4,6,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,-5,4,14,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,-1,2,5,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,0,1,5,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,1,0,8,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,1,1,2,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,1,3,29,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,1,4,12,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,2,2,22,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,2,3,31,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,2,4,8,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,3,-5,9,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,3,3,3,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,3,4,12,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,3,5,8,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,4,-5,40,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,4,-4,8,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,4,5,13,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,4,6,34,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,5,-5,6,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,5,-4,35,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,5,4,16,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,5,6,24,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,chuba,1,5,6,5,28,attacked first=90;given up on=7;incapacitated a bot=20;killed=305;killed a bot=6
-naboo,creature,diseased_nuna,6,6,-8,4,7,attacked first=40;incapacitated a bot=15;killed=34;killed a bot=5
-naboo,creature,diseased_nuna,6,6,-7,5,7,attacked first=40;incapacitated a bot=15;killed=34;killed a bot=5
-naboo,creature,diseased_nuna,6,6,-6,2,8,attacked first=40;incapacitated a bot=15;killed=34;killed a bot=5
-naboo,creature,diseased_nuna,6,6,-5,3,16,attacked first=40;incapacitated a bot=15;killed=34;killed a bot=5
-naboo,creature,diseased_nuna,6,6,-4,4,4,attacked first=40;incapacitated a bot=15;killed=34;killed a bot=5
-naboo,creature,diseased_nuna,6,6,1,4,5,attacked first=40;incapacitated a bot=15;killed=34;killed a bot=5
-naboo,creature,diseased_nuna,6,6,3,-5,10,attacked first=40;incapacitated a bot=15;killed=34;killed a bot=5
-naboo,creature,diseased_nuna,6,6,4,5,13,attacked first=40;incapacitated a bot=15;killed=34;killed a bot=5
-naboo,creature,diseased_nuna,6,6,6,5,10,attacked first=40;incapacitated a bot=15;killed=34;killed a bot=5
-naboo,creature,diseased_nuna,6,6,7,5,8,attacked first=40;incapacitated a bot=15;killed=34;killed a bot=5
-naboo,creature,diseased_nuna,6,6,7,6,6,attacked first=40;incapacitated a bot=15;killed=34;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,-7,4,22,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,-6,4,64,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,-6,5,7,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,-5,4,5,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,-1,2,10,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,0,2,14,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,2,1,7,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,2,2,2,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,2,3,8,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,3,-6,6,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,3,-5,6,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,4,-5,36,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,4,5,10,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,5,-6,11,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,5,-5,12,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,5,5,7,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,5,6,24,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flesh_eating_chuba,1,6,6,6,8,attacked first=44;given up on=5;incapacitated a bot=15;killed=190;killed a bot=5
-naboo,creature,flewt,1,7,-6,3,17,attacked first=1;given up on=17;incapacitated a bot=1;killed=88
-naboo,creature,flewt,1,7,-6,4,2,attacked first=1;given up on=17;incapacitated a bot=1;killed=88
-naboo,creature,flewt,1,7,-5,4,2,attacked first=1;given up on=17;incapacitated a bot=1;killed=88
-naboo,creature,flewt,1,7,1,2,5,attacked first=1;given up on=17;incapacitated a bot=1;killed=88
-naboo,creature,flewt,1,7,3,5,3,attacked first=1;given up on=17;incapacitated a bot=1;killed=88
-naboo,creature,flewt,1,7,4,-6,5,attacked first=1;given up on=17;incapacitated a bot=1;killed=88
-naboo,creature,flewt,1,7,4,-5,15,attacked first=1;given up on=17;incapacitated a bot=1;killed=88
-naboo,creature,flewt,1,7,5,-5,18,attacked first=1;given up on=17;incapacitated a bot=1;killed=88
-naboo,creature,flewt,1,7,5,6,40,attacked first=1;given up on=17;incapacitated a bot=1;killed=88
-naboo,creature,gnort,1,4,-8,3,12,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,-7,2,11,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,-6,2,10,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,-6,3,10,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,-6,4,10,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,-5,2,16,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,-5,3,12,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,-5,4,43,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,-4,4,8,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,0,2,49,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,0,3,49,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,0,4,6,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,1,1,2,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,1,3,29,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,1,4,12,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,2,1,33,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,2,2,68,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,2,3,30,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,3,-6,22,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,3,-5,34,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,3,-4,14,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,3,3,6,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,3,4,5,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,3,5,10,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,4,-5,27,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,4,-4,35,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,4,4,13,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,4,5,42,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,4,6,14,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,5,-7,19,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,5,-4,8,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,5,5,39,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,5,6,35,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,6,-4,8,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,gnort,1,4,6,6,60,attacked first=249;given up on=4;incapacitated a bot=31;killed=510;killed a bot=7
-naboo,creature,hermit_spider,1,7,-6,5,3,attacked first=5;incapacitated a bot=1;killed=7;killed a bot=1
-naboo,creature,hermit_spider,1,7,2,1,1,attacked first=5;incapacitated a bot=1;killed=7;killed a bot=1
-naboo,creature,hermit_spider,1,7,4,5,10,attacked first=5;incapacitated a bot=1;killed=7;killed a bot=1
-naboo,creature,ikopi,7,7,5,5,2,killed=14
-naboo,creature,ikopi,7,7,5,6,12,killed=14
-naboo,creature,large_chuba,1,5,-7,4,9,given up on=4;killed=98
-naboo,creature,large_chuba,1,5,-6,3,17,given up on=4;killed=98
-naboo,creature,large_chuba,1,5,-6,4,25,given up on=4;killed=98
-naboo,creature,large_chuba,1,5,1,3,35,given up on=4;killed=98
-naboo,creature,large_chuba,1,5,4,6,4,given up on=4;killed=98
-naboo,creature,large_chuba,1,5,5,5,4,given up on=4;killed=98
-naboo,creature,large_chuba,1,5,5,6,8,given up on=4;killed=98
-naboo,creature,massive_gnort,4,4,-6,3,98,attacked first=3;given up on=3;killed=309
-naboo,creature,massive_gnort,4,4,-6,4,22,attacked first=3;given up on=3;killed=309
-naboo,creature,massive_gnort,4,4,-5,3,47,attacked first=3;given up on=3;killed=309
-naboo,creature,massive_gnort,4,4,-5,4,3,attacked first=3;given up on=3;killed=309
-naboo,creature,massive_gnort,4,4,-5,5,3,attacked first=3;given up on=3;killed=309
-naboo,creature,massive_gnort,4,4,1,3,15,attacked first=3;given up on=3;killed=309
-naboo,creature,massive_gnort,4,4,5,-5,87,attacked first=3;given up on=3;killed=309
-naboo,creature,massive_gnort,4,4,5,6,40,attacked first=3;given up on=3;killed=309
-naboo,creature,mott_calf,4,4,5,5,1,attacked first=2;killed=13
-naboo,creature,mott_calf,4,4,5,6,14,attacked first=2;killed=13
-naboo,creature,nightspider,7,7,-6,3,10,attacked first=1;given up on=7;incapacitated a bot=9;killed=164;killed a bot=2
-naboo,creature,nightspider,7,7,1,2,51,attacked first=1;given up on=7;incapacitated a bot=9;killed=164;killed a bot=2
-naboo,creature,nightspider,7,7,1,3,7,attacked first=1;given up on=7;incapacitated a bot=9;killed=164;killed a bot=2
-naboo,creature,nightspider,7,7,2,2,4,attacked first=1;given up on=7;incapacitated a bot=9;killed=164;killed a bot=2
-naboo,creature,nightspider,7,7,2,3,7,attacked first=1;given up on=7;incapacitated a bot=9;killed=164;killed a bot=2
-naboo,creature,nightspider,7,7,4,-5,58,attacked first=1;given up on=7;incapacitated a bot=9;killed=164;killed a bot=2
-naboo,creature,nightspider,7,7,4,6,35,attacked first=1;given up on=7;incapacitated a bot=9;killed=164;killed a bot=2
-naboo,creature,nightspider,7,7,5,-7,1,attacked first=1;given up on=7;incapacitated a bot=9;killed=164;killed a bot=2
-naboo,creature,nightspider,7,7,5,-5,1,attacked first=1;given up on=7;incapacitated a bot=9;killed=164;killed a bot=2
-naboo,creature,nightspider,7,7,5,5,1,attacked first=1;given up on=7;incapacitated a bot=9;killed=164;killed a bot=2
-naboo,creature,nightspider,7,7,5,6,8,attacked first=1;given up on=7;incapacitated a bot=9;killed=164;killed a bot=2
-naboo,creature,spiked_krevol,1,1,0,2,1,killed=1
-naboo,lair,naboo_capper_spineflap_pod_neutral_small,,,-6,5,2,mission lair fought=10;mission lair found=8
-naboo,lair,naboo_capper_spineflap_pod_neutral_small,,,-4,3,3,mission lair fought=10;mission lair found=8
-naboo,lair,naboo_capper_spineflap_pod_neutral_small,,,-1,2,2,mission lair fought=10;mission lair found=8
-naboo,lair,naboo_capper_spineflap_pod_neutral_small,,,2,3,3,mission lair fought=10;mission lair found=8
-naboo,lair,naboo_capper_spineflap_pod_neutral_small,,,3,-6,2,mission lair fought=10;mission lair found=8
-naboo,lair,naboo_capper_spineflap_pod_neutral_small,,,3,-5,2,mission lair fought=10;mission lair found=8
-naboo,lair,naboo_capper_spineflap_pod_neutral_small,,,3,6,2,mission lair fought=10;mission lair found=8
-naboo,lair,naboo_capper_spineflap_pod_neutral_small,,,5,-6,2,mission lair fought=10;mission lair found=8
-naboo,lair,naboo_chuba_lair_neutral_small,,,-7,3,3,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,-1,2,2,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,0,1,2,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,1,0,2,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,1,4,2,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,2,3,7,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,2,4,2,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,3,-5,3,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,3,4,3,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,3,5,2,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,4,-4,2,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,4,5,3,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,5,-5,9,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,5,-4,8,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,5,4,3,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_chuba_lair_neutral_small,,,6,5,5,mission lair fought=38;mission lair found=20
-naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,-8,4,2,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,-7,5,2,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,-6,2,2,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,-5,3,5,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,-4,4,2,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,1,4,2,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,3,-5,3,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,4,5,3,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,6,5,2,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,7,5,3,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,7,6,2,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,-7,4,4,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,-6,5,3,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,-1,2,2,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,0,2,3,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,3,-6,2,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,3,-5,2,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,4,5,4,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,5,-6,3,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,5,5,3,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,6,6,2,mission lair fought=16;mission lair found=12
-naboo,lair,naboo_flewt_lair_neutral_boss_02,,,3,5,1,mission lair fought=1;mission lair found=1
-naboo,lair,naboo_flewt_lair_neutral_boss_02,,,3,6,1,mission lair fought=1;mission lair found=1
-naboo,lair,naboo_gnort_lair_neutral_small,,,-8,3,2,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,-7,2,3,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,-6,2,2,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,-6,3,2,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,-5,2,4,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,-4,4,2,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,0,2,3,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,0,3,8,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,0,4,2,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,1,3,5,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,1,4,2,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,2,1,6,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,2,2,2,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,2,3,8,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,3,-6,5,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,3,-5,6,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,3,-4,3,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,3,3,2,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,3,4,2,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,3,5,3,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,4,-4,9,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,4,4,3,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,4,5,8,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,5,-7,3,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,5,-4,2,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,5,5,7,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,6,-4,2,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_gnort_lair_neutral_small,,,6,6,15,mission lair fought=78;mission lair found=43
-naboo,lair,naboo_hermit_spider_lair_neutral_boss_01,,,4,5,3,mission lair fought=2;mission lair found=1
+naboo,creature,capper_spineflap,1,6,-7,3,4,attacked first=34;incapacitated a bot=14;killed=81;killed a bot=6
+naboo,creature,capper_spineflap,1,6,-6,3,4,attacked first=34;incapacitated a bot=14;killed=81;killed a bot=6
+naboo,creature,capper_spineflap,1,6,-5,3,6,attacked first=34;incapacitated a bot=14;killed=81;killed a bot=6
+naboo,creature,capper_spineflap,1,6,0,1,11,attacked first=34;incapacitated a bot=14;killed=81;killed a bot=6
+naboo,creature,capper_spineflap,1,6,1,3,8,attacked first=34;incapacitated a bot=14;killed=81;killed a bot=6
+naboo,creature,capper_spineflap,1,6,2,2,11,attacked first=34;incapacitated a bot=14;killed=81;killed a bot=6
+naboo,creature,capper_spineflap,1,6,2,3,14,attacked first=34;incapacitated a bot=14;killed=81;killed a bot=6
+naboo,creature,capper_spineflap,1,6,4,4,12,attacked first=34;incapacitated a bot=14;killed=81;killed a bot=6
+naboo,creature,capper_spineflap,1,6,5,-5,24,attacked first=34;incapacitated a bot=14;killed=81;killed a bot=6
+naboo,creature,capper_spineflap,1,6,5,5,23,attacked first=34;incapacitated a bot=14;killed=81;killed a bot=6
+naboo,creature,capper_spineflap,1,6,5,6,12,attacked first=34;incapacitated a bot=14;killed=81;killed a bot=6
+naboo,creature,capper_spineflap,1,6,6,-6,6,attacked first=34;incapacitated a bot=14;killed=81;killed a bot=6
+naboo,creature,capper_spineflap_drone,1,6,-6,3,11,attacked first=9;given up on=1;killed=42
+naboo,creature,capper_spineflap_drone,1,6,-6,5,3,attacked first=9;given up on=1;killed=42
+naboo,creature,capper_spineflap_drone,1,6,-5,4,9,attacked first=9;given up on=1;killed=42
+naboo,creature,capper_spineflap_drone,1,6,4,-6,1,attacked first=9;given up on=1;killed=42
+naboo,creature,capper_spineflap_drone,1,6,5,-5,8,attacked first=9;given up on=1;killed=42
+naboo,creature,capper_spineflap_drone,1,6,5,6,19,attacked first=9;given up on=1;killed=42
+naboo,creature,capper_spineflap_drone,1,6,6,-4,1,attacked first=9;given up on=1;killed=42
+naboo,creature,chuba,1,5,-6,2,18,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,chuba,1,5,-6,3,5,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,chuba,1,5,-6,4,27,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,chuba,1,5,0,2,2,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,chuba,1,5,1,1,21,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,chuba,1,5,1,3,6,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,chuba,1,5,1,4,1,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,chuba,1,5,4,-5,21,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,chuba,1,5,5,-6,19,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,chuba,1,5,5,-5,5,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,chuba,1,5,5,-4,21,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,chuba,1,5,5,6,3,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,chuba,1,5,6,5,7,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,chuba,1,5,6,6,21,attacked first=46;given up on=3;incapacitated a bot=6;killed=121;killed a bot=1
+naboo,creature,diseased_nuna,6,6,-7,2,5,attacked first=12;incapacitated a bot=4;killed=10;killed a bot=1
+naboo,creature,diseased_nuna,6,6,0,1,15,attacked first=12;incapacitated a bot=4;killed=10;killed a bot=1
+naboo,creature,diseased_nuna,6,6,3,-5,4,attacked first=12;incapacitated a bot=4;killed=10;killed a bot=1
+naboo,creature,diseased_nuna,6,6,7,6,3,attacked first=12;incapacitated a bot=4;killed=10;killed a bot=1
+naboo,creature,flesh_eating_chuba,1,6,-8,4,6,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flesh_eating_chuba,1,6,-7,4,17,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flesh_eating_chuba,1,6,-6,3,7,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flesh_eating_chuba,1,6,-6,5,8,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flesh_eating_chuba,1,6,-5,4,5,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flesh_eating_chuba,1,6,1,3,5,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flesh_eating_chuba,1,6,2,2,6,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flesh_eating_chuba,1,6,3,-5,10,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flesh_eating_chuba,1,6,4,-5,5,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flesh_eating_chuba,1,6,4,4,7,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flesh_eating_chuba,1,6,5,-5,17,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flesh_eating_chuba,1,6,5,-4,4,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flesh_eating_chuba,1,6,5,6,38,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flesh_eating_chuba,1,6,6,6,19,attacked first=37;incapacitated a bot=2;killed=115
+naboo,creature,flewt,1,7,-7,3,1,killed=20
+naboo,creature,flewt,1,7,-6,4,2,killed=20
+naboo,creature,flewt,1,7,4,-5,5,killed=20
+naboo,creature,flewt,1,7,4,6,8,killed=20
+naboo,creature,flewt,1,7,5,6,4,killed=20
+naboo,creature,gnort,1,4,-8,4,20,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,-6,2,25,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,-6,3,27,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,-5,3,1,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,0,1,12,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,1,1,60,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,1,4,22,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,2,2,6,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,2,3,17,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,3,-6,16,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,3,-5,23,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,3,6,1,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,4,5,2,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,4,6,8,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,5,-5,5,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,5,-4,25,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,5,5,10,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,5,6,23,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,6,-4,12,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,gnort,1,4,6,5,7,attacked first=112;incapacitated a bot=9;killed=199;killed a bot=2
+naboo,creature,hermit_spider,7,7,1,3,1,attacked first=2;incapacitated a bot=1;killed=4;killed a bot=1
+naboo,creature,hermit_spider,7,7,4,4,5,attacked first=2;incapacitated a bot=1;killed=4;killed a bot=1
+naboo,creature,hermit_spider,7,7,4,5,2,attacked first=2;incapacitated a bot=1;killed=4;killed a bot=1
+naboo,creature,ikopi,7,7,4,5,8,attacked first=5;incapacitated a bot=6;killed=2;killed a bot=3
+naboo,creature,ikopi,7,7,6,6,8,attacked first=5;incapacitated a bot=6;killed=2;killed a bot=3
+naboo,creature,large_chuba,5,5,-6,3,6,killed=24
+naboo,creature,large_chuba,5,5,1,3,17,killed=24
+naboo,creature,large_chuba,5,5,5,-5,1,killed=24
+naboo,creature,massive_gnort,4,4,-6,3,30,given up on=1;killed=36
+naboo,creature,massive_gnort,4,4,1,2,5,given up on=1;killed=36
+naboo,creature,massive_gnort,4,4,4,-5,2,given up on=1;killed=36
+naboo,creature,nightspider,7,7,-6,3,8,attacked first=4;given up on=7;incapacitated a bot=8;killed=47;killed a bot=3
+naboo,creature,nightspider,7,7,-6,4,1,attacked first=4;given up on=7;incapacitated a bot=8;killed=47;killed a bot=3
+naboo,creature,nightspider,7,7,1,3,2,attacked first=4;given up on=7;incapacitated a bot=8;killed=47;killed a bot=3
+naboo,creature,nightspider,7,7,4,-5,19,attacked first=4;given up on=7;incapacitated a bot=8;killed=47;killed a bot=3
+naboo,creature,nightspider,7,7,4,-4,10,attacked first=4;given up on=7;incapacitated a bot=8;killed=47;killed a bot=3
+naboo,creature,nightspider,7,7,4,6,23,attacked first=4;given up on=7;incapacitated a bot=8;killed=47;killed a bot=3
+naboo,creature,nightspider,7,7,5,-5,2,attacked first=4;given up on=7;incapacitated a bot=8;killed=47;killed a bot=3
+naboo,creature,nightspider,7,7,5,6,4,attacked first=4;given up on=7;incapacitated a bot=8;killed=47;killed a bot=3
+naboo,creature,sentry_hermit_spider,10,10,-6,5,4,attacked first=10;incapacitated a bot=6;killed=3;killed a bot=6
+naboo,creature,sentry_hermit_spider,10,10,4,-5,7,attacked first=10;incapacitated a bot=6;killed=3;killed a bot=6
+naboo,creature,sentry_hermit_spider,10,10,4,5,7,attacked first=10;incapacitated a bot=6;killed=3;killed a bot=6
+naboo,creature,sentry_hermit_spider,10,10,5,-5,4,attacked first=10;incapacitated a bot=6;killed=3;killed a bot=6
+naboo,creature,sentry_hermit_spider,10,10,5,-4,3,attacked first=10;incapacitated a bot=6;killed=3;killed a bot=6
+naboo,lair,naboo_capper_spineflap_pod_neutral_small,,,2,3,3,mission lair fought=8;mission lair found=4
+naboo,lair,naboo_capper_spineflap_pod_neutral_small,,,4,4,3,mission lair fought=8;mission lair found=4
+naboo,lair,naboo_capper_spineflap_pod_neutral_small,,,5,5,4,mission lair fought=8;mission lair found=4
+naboo,lair,naboo_capper_spineflap_pod_neutral_small,,,6,-6,2,mission lair fought=8;mission lair found=4
+naboo,lair,naboo_chuba_lair_neutral_small,,,-6,2,3,mission lair fought=15;mission lair found=9
+naboo,lair,naboo_chuba_lair_neutral_small,,,1,1,4,mission lair fought=15;mission lair found=9
+naboo,lair,naboo_chuba_lair_neutral_small,,,1,3,2,mission lair fought=15;mission lair found=9
+naboo,lair,naboo_chuba_lair_neutral_small,,,1,4,2,mission lair fought=15;mission lair found=9
+naboo,lair,naboo_chuba_lair_neutral_small,,,5,-6,2,mission lair fought=15;mission lair found=9
+naboo,lair,naboo_chuba_lair_neutral_small,,,5,-4,4,mission lair fought=15;mission lair found=9
+naboo,lair,naboo_chuba_lair_neutral_small,,,6,5,2,mission lair fought=15;mission lair found=9
+naboo,lair,naboo_chuba_lair_neutral_small,,,6,6,5,mission lair fought=15;mission lair found=9
+naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,-7,2,2,mission lair fought=6;mission lair found=4
+naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,0,1,4,mission lair fought=6;mission lair found=4
+naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,3,-5,2,mission lair fought=6;mission lair found=4
+naboo,lair,naboo_diseased_nuna_lair_neutral_small,,,7,6,2,mission lair fought=6;mission lair found=4
+naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,-8,4,1,mission lair fought=13;mission lair found=8
+naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,-7,4,7,mission lair fought=13;mission lair found=8
+naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,-6,5,2,mission lair fought=13;mission lair found=8
+naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,3,-5,2,mission lair fought=13;mission lair found=8
+naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,4,4,2,mission lair fought=13;mission lair found=8
+naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,5,-5,3,mission lair fought=13;mission lair found=8
+naboo,lair,naboo_flesh_eating_chuba_lair_neutral_small,,,6,6,4,mission lair fought=13;mission lair found=8
+naboo,lair,naboo_flewt_lair_neutral_boss_02,,,-7,5,1,mission lair found=1
+naboo,lair,naboo_gnort_lair_neutral_small,,,-8,4,3,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,-6,2,6,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,-6,3,2,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,1,1,13,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,1,4,5,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,2,3,5,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,3,-6,4,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,3,-5,4,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,3,6,2,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,4,-5,2,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,4,5,2,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,5,-5,2,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,5,-4,7,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,5,5,2,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,6,-4,2,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,6,5,3,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_gnort_lair_neutral_small,,,7,5,1,mission lair fought=45;mission lair found=20
+naboo,lair,naboo_hermit_spider_lair_neutral_boss_01,,,4,4,2,mission lair fought=1;mission lair found=1
+naboo,lair,naboo_ikopi_lair_neutral_medium,,,4,5,3,mission lair fought=3;mission lair found=2
+naboo,lair,naboo_ikopi_lair_neutral_medium,,,6,6,2,mission lair fought=3;mission lair found=2
+naboo,lair,naboo_nightspider_lair_neutral_boss_01,,,4,-4,3,mission lair fought=2;mission lair found=1

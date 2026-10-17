@@ -1,0 +1,159 @@
+# Shuttle routes from the BotPop run
+
+| From | To | Tries | Arrived | Failed | Median trip (s) | Failures (step: reason x n) |
+|---|---|---:|---:|---:|---:|---|
+| tatooine: Bestine Shuttleport | tatooine: Anchorhead Shuttleport | 6 | 1 | 3 | 95 | MIXED - terminal: no path to the terminal x3 |
+| rori: Narmle Starport | talus: Nashal Starport | 2 | 0 | 2 |  | FAIL - plan: no fare to talus, directly or through a hub x2 |
+| talus: Dearic Starport | talus: Nashal Starport | 7 | 5 | 2 | 109 | MIXED - terminal: not at the terminal after 5 minutes x2 |
+| tatooine: Anchorhead Shuttleport | tatooine: Bestine Shuttleport | 8 | 6 | 2 | 12 | MIXED - terminal: not at the terminal after 5 minutes x2 |
+| corellia: Bela Vistal Shuttleport B | corellia: Coronet Shuttle A | 12 | 11 | 1 | 65 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| corellia: Tyrena Starport | naboo: Keren Starport | 1 | 0 | 1 |  | FAIL - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Kaadara Starport | corellia: Coronet Starport | 4 | 3 | 1 | 96 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Kaadara Starport | naboo: Moenia | 5 | 4 | 1 | 125 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Keren Starport | corellia: Coronet Starport | 1 | 0 | 1 |  | FAIL - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Keren Starport | corellia: Kor Vella Starport | 1 | 0 | 1 |  | FAIL - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Moenia | naboo: Theed Shuttle C | 1 | 0 | 1 |  | FAIL - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Moenia | rori: Restuss Starport | 3 | 2 | 1 | 211 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Theed Spaceport | corellia: Doaba Guerfel Starport | 1 | 0 | 1 |  | FAIL - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Theed Spaceport | rori: Restuss Starport | 2 | 1 | 1 | 91 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| naboo: Theed Spaceport | tatooine: Bestine Starport | 1 | 0 | 1 |  | FAIL - died: killed on the way x1 |
+| talus: Nashal Starport | rori: Narmle Starport | 1 | 0 | 1 |  | FAIL - plan: no fare to rori, directly or through a hub x1 |
+| talus: Nashal Starport | rori: Restuss Starport | 1 | 0 | 1 |  | FAIL - plan: no fare to rori, directly or through a hub x1 |
+| talus: Nashal Starport | talus: Dearic Starport | 5 | 4 | 1 | 170 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Bestine Starport | corellia: Doaba Guerfel Starport | 4 | 3 | 1 | 108 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Bestine Starport | hutta: Bilbousa Starport | 5 | 4 | 1 | 131 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Mos Eisley Starport | corellia: Coronet Starport | 1 | 0 | 1 |  | FAIL - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Mos Eisley Starport | tatooine: Mos Espa Shuttleport East | 1 | 0 | 1 |  | FAIL - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Mos Entha Starport | naboo: Moenia | 1 | 0 | 1 |  | FAIL - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Mos Espa Starport | corellia: Coronet Starport | 3 | 2 | 1 | 149 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Mos Espa Starport | corellia: Tyrena Starport | 1 | 0 | 1 |  | FAIL - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Mos Espa Starport | hutta: Bilbousa Starport | 4 | 3 | 1 | 124 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| tatooine: Mos Espa Starport | naboo: Theed Spaceport | 2 | 1 | 1 | 251 | MIXED - terminal: not at the terminal after 5 minutes x1 |
+| corellia: Bela Vistal Shuttleport B | corellia: Kor Vella Shuttleport | 2 | 2 | 0 | 65 | PASS |
+| corellia: Bela Vistal Shuttleport B | corellia: Tyrena Shuttle A | 2 | 0 | 0 |  | FAIL |
+| corellia: Coronet Shuttle A | corellia: Bela Vistal Shuttleport B | 9 | 9 | 0 | 59 | PASS |
+| corellia: Coronet Shuttle A | corellia: Doaba Guerfel Starport | 2 | 2 | 0 | 149 | PASS |
+| corellia: Coronet Shuttle A | corellia: Tyrena Shuttle A | 1 | 1 | 0 | 54 | PASS |
+| corellia: Coronet Starport | hutta: Bilbousa Starport | 6 | 6 | 0 | 161 | PASS |
+| corellia: Coronet Starport | naboo: Kaadara Starport | 4 | 4 | 0 | 189 | PASS |
+| corellia: Coronet Starport | naboo: Keren Starport | 3 | 3 | 0 | 127 | PASS |
+| corellia: Coronet Starport | naboo: Moenia | 3 | 3 | 0 | 174 | PASS |
+| corellia: Coronet Starport | naboo: Theed Spaceport | 1 | 1 | 0 | 161 | PASS |
+| corellia: Coronet Starport | talus: Dearic Starport | 2 | 2 | 0 | 181 | PASS |
+| corellia: Coronet Starport | talus: Nashal Starport | 2 | 2 | 0 | 331 | PASS |
+| corellia: Coronet Starport | tatooine: Bestine Starport | 2 | 2 | 0 | 160 | PASS |
+| corellia: Coronet Starport | tatooine: Mos Eisley Starport | 1 | 1 | 0 | 129 | PASS |
+| corellia: Coronet Starport | tatooine: Mos Entha Starport | 3 | 3 | 0 | 131 | PASS |
+| corellia: Coronet Starport | tatooine: Mos Espa Starport | 1 | 1 | 0 | 161 | PASS |
+| corellia: Doaba Guerfel Starport | corellia: Bela Vistal Shuttleport B | 1 | 1 | 0 | 151 | PASS |
+| corellia: Doaba Guerfel Starport | corellia: Coronet Shuttle A | 1 | 1 | 0 | 127 | PASS |
+| corellia: Doaba Guerfel Starport | corellia: Kor Vella Shuttleport | 1 | 1 | 0 | 224 | PASS |
+| corellia: Doaba Guerfel Starport | hutta: Bilbousa Starport | 3 | 3 | 0 | 134 | PASS |
+| corellia: Doaba Guerfel Starport | naboo: Kaadara Starport | 1 | 1 | 0 | 128 | PASS |
+| corellia: Doaba Guerfel Starport | naboo: Keren Starport | 1 | 1 | 0 | 209 | PASS |
+| corellia: Doaba Guerfel Starport | naboo: Moenia | 1 | 1 | 0 | 128 | PASS |
+| corellia: Doaba Guerfel Starport | naboo: Theed Spaceport | 1 | 1 | 0 | 137 | PASS |
+| corellia: Doaba Guerfel Starport | talus: Nashal Starport | 2 | 2 | 0 | 136 | PASS |
+| corellia: Doaba Guerfel Starport | tatooine: Mos Eisley Starport | 2 | 2 | 0 | 120 | PASS |
+| corellia: Doaba Guerfel Starport | tatooine: Mos Entha Starport | 1 | 1 | 0 | 124 | PASS |
+| corellia: Doaba Guerfel Starport | tatooine: Mos Espa Starport | 1 | 1 | 0 | 124 | PASS |
+| corellia: Kor Vella Shuttleport | corellia: Bela Vistal Shuttleport B | 1 | 1 | 0 | 99 | PASS |
+| corellia: Kor Vella Shuttleport | corellia: Doaba Guerfel Starport | 1 | 1 | 0 | 94 | PASS |
+| corellia: Kor Vella Shuttleport | corellia: Tyrena Shuttle A | 2 | 2 | 0 | 98 | PASS |
+| corellia: Kor Vella Starport | naboo: Kaadara Starport | 4 | 4 | 0 | 192 | PASS |
+| corellia: Kor Vella Starport | naboo: Keren Starport | 1 | 1 | 0 | 192 | PASS |
+| corellia: Kor Vella Starport | naboo: Theed Spaceport | 1 | 1 | 0 | 260 | PASS |
+| corellia: Kor Vella Starport | talus: Nashal Starport | 2 | 2 | 0 | 120 | PASS |
+| corellia: Kor Vella Starport | tatooine: Bestine Starport | 3 | 1 | 0 | 225 | PASS |
+| corellia: Kor Vella Starport | tatooine: Mos Entha Starport | 2 | 2 | 0 | 210 | PASS |
+| corellia: Kor Vella Starport | tatooine: Mos Espa Starport | 2 | 2 | 0 | 200 | PASS |
+| corellia: Tyrena Shuttle A | corellia: Bela Vistal Shuttleport B | 2 | 2 | 0 | 208 | PASS |
+| corellia: Tyrena Shuttle A | corellia: Coronet Shuttle A | 1 | 1 | 0 | 134 | PASS |
+| corellia: Tyrena Starport | hutta: Bilbousa Starport | 4 | 2 | 0 | 186 | PASS |
+| corellia: Tyrena Starport | naboo: Kaadara Starport | 1 | 1 | 0 | 189 | PASS |
+| corellia: Tyrena Starport | naboo: Moenia | 1 | 1 | 0 | 150 | PASS |
+| corellia: Tyrena Starport | talus: Dearic Starport | 1 | 1 | 0 | 319 | PASS |
+| corellia: Tyrena Starport | tatooine: Bestine Starport | 1 | 1 | 0 | 151 | PASS |
+| corellia: Tyrena Starport | tatooine: Mos Eisley Starport | 1 | 1 | 0 | 298 | PASS |
+| naboo: Kaadara Starport | corellia: Tyrena Starport | 1 | 1 | 0 | 120 | PASS |
+| naboo: Kaadara Starport | naboo: Theed Shuttle C | 1 | 0 | 0 |  | FAIL |
+| naboo: Kaadara Starport | rori: Narmle Starport | 2 | 2 | 0 | 94 | PASS |
+| naboo: Kaadara Starport | rori: Restuss Starport | 4 | 4 | 0 | 98 | PASS |
+| naboo: Kaadara Starport | tatooine: Mos Eisley Starport | 2 | 2 | 0 | 215 | PASS |
+| naboo: Keren Shuttleport South | naboo: Kaadara Starport | 1 | 1 | 0 | 48 | PASS |
+| naboo: Keren Shuttleport South | naboo: Moenia | 2 | 2 | 0 | 234 | PASS |
+| naboo: Keren Shuttleport South | naboo: Theed Shuttle C | 1 | 1 | 0 | 280 | PASS |
+| naboo: Keren Starport | corellia: Doaba Guerfel Starport | 2 | 2 | 0 | 94 | PASS |
+| naboo: Keren Starport | corellia: Tyrena Starport | 1 | 1 | 0 | 172 | PASS |
+| naboo: Keren Starport | rori: Narmle Starport | 1 | 1 | 0 | 13 | PASS |
+| naboo: Keren Starport | rori: Restuss Starport | 2 | 2 | 0 | 130 | PASS |
+| naboo: Keren Starport | tatooine: Bestine Starport | 2 | 2 | 0 | 307 | PASS |
+| naboo: Keren Starport | tatooine: Mos Eisley Starport | 1 | 1 | 0 | 137 | PASS |
+| naboo: Keren Starport | tatooine: Mos Entha Starport | 3 | 2 | 0 | 313 | PASS |
+| naboo: Moenia | corellia: Coronet Starport | 1 | 1 | 0 | 92 | PASS |
+| naboo: Moenia | corellia: Doaba Guerfel Starport | 1 | 1 | 0 | 88 | PASS |
+| naboo: Moenia | corellia: Tyrena Starport | 1 | 1 | 0 | 93 | PASS |
+| naboo: Moenia | naboo: Kaadara Starport | 3 | 3 | 0 | 145 | PASS |
+| naboo: Moenia | naboo: Keren Shuttleport South | 3 | 3 | 0 | 224 | PASS |
+| naboo: Moenia | rori: Narmle Starport | 3 | 2 | 0 | 141 | PASS |
+| naboo: Moenia | tatooine: Mos Eisley Starport | 1 | 1 | 0 | 13 | PASS |
+| naboo: Moenia | tatooine: Mos Entha Starport | 3 | 3 | 0 | 141 | PASS |
+| naboo: Theed Shuttle C | naboo: Kaadara Starport | 2 | 2 | 0 | 185 | PASS |
+| naboo: Theed Shuttle C | naboo: Keren Shuttleport South | 1 | 1 | 0 | 47 | PASS |
+| naboo: Theed Shuttle C | naboo: Moenia | 1 | 1 | 0 | 42 | PASS |
+| naboo: Theed Spaceport | corellia: Coronet Starport | 2 | 1 | 0 | 151 | PASS |
+| naboo: Theed Spaceport | corellia: Kor Vella Starport | 1 | 0 | 0 |  | FAIL |
+| naboo: Theed Spaceport | tatooine: Mos Eisley Starport | 2 | 2 | 0 | 151 | PASS |
+| naboo: Theed Spaceport | tatooine: Mos Espa Starport | 1 | 1 | 0 | 150 | PASS |
+| rori: Narmle Shuttleport | rori: Restuss Starport | 4 | 4 | 0 | 71 | PASS |
+| rori: Narmle Starport | naboo: Keren Starport | 4 | 3 | 0 | 111 | PASS |
+| rori: Narmle Starport | naboo: Moenia | 2 | 1 | 0 | 209 | PASS |
+| rori: Narmle Starport | naboo: Theed Spaceport | 3 | 2 | 0 | 112 | PASS |
+| rori: Restuss Starport | naboo: Kaadara Starport | 1 | 1 | 0 | 233 | PASS |
+| rori: Restuss Starport | naboo: Keren Starport | 1 | 0 | 0 |  | FAIL |
+| rori: Restuss Starport | naboo: Moenia | 3 | 3 | 0 | 130 | PASS |
+| rori: Restuss Starport | naboo: Theed Spaceport | 2 | 2 | 0 | 154 | PASS |
+| rori: Restuss Starport | rori: Narmle Shuttleport | 4 | 4 | 0 | 127 | PASS |
+| talus: Dearic Starport | corellia: Coronet Starport | 6 | 6 | 0 | 183 | PASS |
+| talus: Dearic Starport | corellia: Doaba Guerfel Starport | 1 | 1 | 0 | 121 | PASS |
+| talus: Dearic Starport | corellia: Kor Vella Starport | 2 | 2 | 0 | 202 | PASS |
+| talus: Nashal Starport | corellia: Coronet Starport | 3 | 3 | 0 | 171 | PASS |
+| talus: Nashal Starport | corellia: Doaba Guerfel Starport | 2 | 1 | 0 | 194 | PASS |
+| talus: Nashal Starport | corellia: Kor Vella Starport | 1 | 1 | 0 | 133 | PASS |
+| talus: Nashal Starport | corellia: Tyrena Starport | 1 | 0 | 0 |  | FAIL |
+| tatooine: Anchorhead Shuttleport | tatooine: Mos Eisley Starport | 1 | 1 | 0 | 47 | PASS |
+| tatooine: Anchorhead Shuttleport | tatooine: Mos Entha Starport | 2 | 2 | 0 | 32 | PASS |
+| tatooine: Anchorhead Shuttleport | tatooine: Mos Espa Shuttleport East | 1 | 0 | 0 |  | FAIL |
+| tatooine: Bestine Starport | corellia: Coronet Starport | 1 | 1 | 0 | 133 | PASS |
+| tatooine: Bestine Starport | corellia: Kor Vella Starport | 4 | 4 | 0 | 129 | PASS |
+| tatooine: Bestine Starport | corellia: Tyrena Starport | 3 | 2 | 0 | 220 | PASS |
+| tatooine: Bestine Starport | naboo: Kaadara Starport | 3 | 3 | 0 | 149 | PASS |
+| tatooine: Bestine Starport | naboo: Theed Spaceport | 1 | 1 | 0 | 126 | PASS |
+| tatooine: Mos Eisley Starport | corellia: Kor Vella Starport | 1 | 0 | 0 |  | FAIL |
+| tatooine: Mos Eisley Starport | corellia: Tyrena Starport | 1 | 1 | 0 | 276 | PASS |
+| tatooine: Mos Eisley Starport | hutta: Bilbousa Starport | 4 | 4 | 0 | 147 | PASS |
+| tatooine: Mos Eisley Starport | naboo: Kaadara Starport | 1 | 1 | 0 | 255 | PASS |
+| tatooine: Mos Eisley Starport | naboo: Keren Starport | 1 | 0 | 0 |  | FAIL |
+| tatooine: Mos Eisley Starport | naboo: Moenia | 3 | 3 | 0 | 160 | PASS |
+| tatooine: Mos Eisley Starport | naboo: Theed Spaceport | 1 | 1 | 0 | 153 | PASS |
+| tatooine: Mos Eisley Starport | tatooine: Bestine Shuttleport | 1 | 1 | 0 | 264 | PASS |
+| tatooine: Mos Eisley Starport | tatooine: Mos Entha Starport | 1 | 1 | 0 | 197 | PASS |
+| tatooine: Mos Entha Starport | corellia: Doaba Guerfel Starport | 1 | 0 | 0 |  | FAIL |
+| tatooine: Mos Entha Starport | corellia: Kor Vella Starport | 1 | 1 | 0 | 333 | PASS |
+| tatooine: Mos Entha Starport | hutta: Bilbousa Starport | 2 | 2 | 0 | 212 | PASS |
+| tatooine: Mos Entha Starport | naboo: Keren Starport | 3 | 3 | 0 | 119 | PASS |
+| tatooine: Mos Entha Starport | tatooine: Bestine Shuttleport | 2 | 1 | 0 | 93 | PASS |
+| tatooine: Mos Entha Starport | tatooine: Mos Eisley Starport | 1 | 1 | 0 | 119 | PASS |
+| tatooine: Mos Espa Shuttleport East | tatooine: Bestine Shuttleport | 1 | 1 | 0 | 206 | PASS |
+| tatooine: Mos Espa Shuttleport East | tatooine: Mos Eisley Starport | 2 | 2 | 0 | 78 | PASS |
+| tatooine: Mos Espa Shuttleport East | tatooine: Mos Entha Starport | 1 | 1 | 0 | 294 | PASS |
+| tatooine: Mos Espa Starport | corellia: Doaba Guerfel Starport | 1 | 1 | 0 | 199 | PASS |
+| tatooine: Mos Espa Starport | naboo: Kaadara Starport | 1 | 1 | 0 | 225 | PASS |
+
+Routes 147, tries 313, arrived 256, failed 32, still under way at the end of the log 25.
+
+| Step | Failures |
+|---|---:|
+| terminal | 27 |
+| plan | 4 |
+| died | 1 |

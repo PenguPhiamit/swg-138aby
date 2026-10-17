@@ -136,8 +136,8 @@ Sources read: `Bot-reports/GATE.md` (gate of 15 Oct, 4:31 PM: FAIL, 22 of 35), `
 #### 15. Crafting, experimentation and factories
 - **Check:** the crafting window, schematic list, ingredient slots, assembly, experimentation, the finished item; tools and stations; factories and schematics; Artisan XP. **[live rules]** for `CraftSeconds` and factory time.
 - **Who:** GPT (new body API and scenario), Squad, Owner (crafting window feel).
-- **Coverage:** `besh-fallback-crafting.py` reports BLOCKED by design: the body has no crafting session API.
-- **Gaps:** **no crafting check exists at all.** Artisan is a starting profession, so this is a crafter's whole first hour. BotPop leaves Artisans out.
+- **Coverage (17 Oct, 3:19 AM, 21 of 21 PASS):** `besh-crafting.py` (Dova). The body now speaks crafting (dev `fc3bb3e2`: `craft_add`, `craft_experiment`, `crafting`; events `craft_schematics`, `craft_slots`, `craft_result`), and `/agentgear resources` gives metal, mineral and chemical. A Mineral Survey Device made twice: with the generic tool (schematic list, slots after `synchronizeduilisten`, four slots filled, assembly, `prototype_transferred`, the device in the inventory, XP), and with the weapon tool at Mos Eisley's public weapon station (3497, -4757) with one experimentation point (result 1, great success).
+- **Gaps:** factories and manufacture schematics; component slots (only resource slots tested); whether experimentation changes the item's stats (only the result code is checked); the item's stats; the live `CraftSeconds`. Besh's own inventory is full on the server although his client lists about ten items: every kit item failed for him on 17 Oct (a body or server question to look at). BotPop still leaves Artisans out.
 - **Pass:** a new crafting scenario makes one survey tool from sampled resources, the item lands in inventory with stats, and Artisan XP rises by the message's amount.
 
 #### 16. Harvesters and installations
@@ -241,15 +241,15 @@ Ranked by what breaks a new player's first hour, first.
 
 | Rank | Gap | Why first | Who | Done when |
 |---|---|---|---|---|
-| 1 | Fresh start: creation of every species, starting city, helper droid on a build with `c5d713b8` | Every new player passes through it in the first ten minutes; the droid deadlock reached real new players | Main session (build and restart), GPT (`creation-sweep` scenario) | Pass lines of sections 2 and 3 |
+| 1 | Fresh start: creation of every species, starting city, helper droid on a build with `c5d713b8` — **done 16 Oct:** all 12 species created and through the first minutes (`fresh-start-test.md`, `4a6b431`). | Every new player passes through it in the first ten minutes; the droid deadlock reached real new players | Main session (build and restart), GPT (`creation-sweep` scenario) | Pass lines of sections 2 and 3 |
 | 2 | "The server keeps putting us back" | Three gate regressions; it hides the mission, harvest and route checks behind it; a real player may see the same rubber-band | Main session (server log at the moment of the push-back), GPT (body vs server source) | Pass line of section 4 and a re-run gate with 0 regressions from it |
 | 3 | Training at a real trainer, and the class check for the other five starters | Every profession trains in the first hour; the bots only ever get boxes by command | GPT (`trainer-buy` scenario), main session (class-check slices) | Pass line of section 7 |
 | 4 | Missions through the terminal | The only real income for a new character (FINDINGS section 3); Squad mission check is down | GPT after rank 2 | Pass line of section 11 |
-| 5 | Crafting session | An Artisan's whole first hour; zero coverage | GPT (body API proposal), main session (C++ body) | Pass line of section 15 |
+| 5 | ~~Crafting session~~ **done 17 Oct** (section 15: 21 of 21) | An Artisan's whole first hour; zero coverage | GPT (body API proposal), main session (C++ body) | Pass line of section 15 |
 | 6 | Doctor and entertainer buffs | Four doctor and two dance regressions; town social play | GPT (check logic: "re-apply" receipts on already-buffed fighters) | Pass lines of sections 22 and 23 |
 | 7 | Death, cloning and insurance | About one death per hour for new characters; insurance has no check | GPT (new scenario) | Pass line of section 9 |
-| 8 | Spawn danger near cities and the F2 spawn fix | Deaths far from home in the first hour on Naboo, Rori and Talus | BotPop run on `c5d713b8`, owner's T1/T2 choices | Pass line of section 10 |
-| 9 | Ticket purchase failures and the untested travel graph | A failed ticket strands a new player | Squad sweep | Pass line of section 17 |
+| 8 | Spawn danger near cities and the F2 spawn fix — **fixed 16 Oct:** deaths to killers 8+ levels up 25.6% → 5.0% with the creature-level gate (dev `69f5c879`, run 19). | Deaths far from home in the first hour on Naboo, Rori and Talus | BotPop run on `c5d713b8`, owner's T1/T2 choices | Pass line of section 10 |
+| 9 | Ticket purchase failures and the untested travel graph — **passed at scale 16 Oct:** BotPop real travel, 66 of 73 shuttle trips (`1fd17e4`). | A failed ticket strands a new player | Squad sweep | Pass line of section 17 |
 | 10 | Gas, moisture and wind surveys | Surveying is an Artisan's first task | GPT (body or server) | Pass line of section 13 |
 | 11 | Live-rules checks in the dress rehearsal | `MedicalAnywhere`, `TameAnything`, skill points and training cost mask live behaviour | Main session (dress rehearsal) | Each [live rules] pass line seen there |
 | 12 | Groups (XP split), mail, guilds, friends | Social play in the first evening | Squad | Pass line of section 21 |
