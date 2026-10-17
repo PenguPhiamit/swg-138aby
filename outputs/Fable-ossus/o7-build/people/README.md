@@ -38,7 +38,7 @@ and `imperial_inquisitor` is level 120, so the dig overseer is a sergeant and th
 
 - **Standing gates and the new faction strings** wait for FW-01. For now the garrison is GCW `imperial`, so its troopers fight overt rebels.
   The commander turns rebels away, and the stranger will not speak to Imperials.
-- **What meeting the hidden Jedi gives** is the owner's open question: for now the meeting is only remembered (`metJedi`). The stranger cannot be attacked.
+- **What meeting the hidden Jedi gives** (owner, 16 Oct, about midnight): only the talk for now. The meeting is remembered (`metJedi`) and gives nothing else. The stranger cannot be attacked.
 - No interiors are dressed: the vault, the adit, the Sith post and the garrison buildings. The singers have no night loop, the rim patrol stands still,
   and the Hutt does not trade. The troopers are not hued as Sith troopers.
 - Not run on any galaxy. Checked offline: `git apply --check` on dev `d4b9d9a1` (with the O7 regions patch too); `luac -p` on all six files;

@@ -458,7 +458,7 @@ end
 
 function OssusHiddenJediConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, pNpc, selectedOption, pConvScreen)
 	if screenID(pConvScreen) == "promise" and getState(pPlayer, "metJedi") ~= "1" then
-		-- what meeting the stranger gives a player is the owner's decision (open); for now it is only remembered
+		-- owner, 16 Oct: talk only for now; the meeting is remembered and gives nothing else
 		setState(pPlayer, "metJedi", "1")
 	end
 
