@@ -1,0 +1,329 @@
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+index e479b65..12ac1af 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+@@ -93,6 +93,10 @@ public:
+ 	int mode = IDLE;
+ 	std::vector<Vector3> path;
+ 	size_t next = 0;
++	std::vector<Vector3> chase; // chaseToward's route to a moving target (BotPopLaunchBrain.h), empty: straight
++	size_t chaseNext = 0;
++	float chaseX = 0, chaseY = 0; // where the target was when the route was planned
++	uint64 chasePlannedMs = 0;
+ 	uint64 lastStepMs = 0, nextActionMs = 0, nextAttackMs = 0, deadSinceMs = 0;
+ 	std::atomic<bool> replace{false}; // dead too long: log out and spawn a fresh one at home (set by a step, read by the tick)
+ 	std::atomic<bool> travelNow{false}; // "botpop travel": a launch bot moves on at its next step
+@@ -120,6 +124,7 @@ public:
+ 	static const int CHUNK = 64;              // bots per worker task
+ 	static const int RELEASE_AFTER_MS = 15000; // a logged-out bot stays registered this long (see BotPopRegistry.h)
+ 	static const int REPLACE_DEAD_MS = 30000;
++	static const int ROUTES_PER_PASS = 200;   // navmesh routes planned per pass, across all workers (planRoute)
+ 
+ private:
+ 	Mutex mutex; // the lists and counters below; never held while a creature is locked
+@@ -141,6 +146,7 @@ private:
+ 	std::atomic<int> outstanding{0};
+ 	std::atomic<uint64> stepMicros{0}, chunkMicrosMax{0};
+ 	std::atomic<int> failedPaths{0};
++	std::atomic<int> routeBudget{ROUTES_PER_PASS}, routesPlanned{0}, routesDeferred{0};
+ 	std::atomic<int> launchBots{0}, launchKills{0}, launchDeaths{0}, launchBoxes{0}, launchTravels{0};
+ 	uint64 nextPositionsMs = 0; // the tick writes log/botpop-positions.json every 10 s (the live map)
+ 	std::atomic<int> launchMissions{0}, launchMissionsDone{0};
+@@ -284,6 +290,9 @@ private:
+ 
+ 	static float floorNear(Zone* zone, float x, float y, float referenceZ);
+ 	static bool stepToward(CreatureObject* bot, Zone* zone, float tx, float ty, float speed, float seconds, float stopAt);
++	int planRoute(Zone* zone, const Vector3& from, float gx, float gy, std::vector<Vector3>& out);
++	bool startRoute(BotState* state, CreatureObject* bot, Zone* zone, float gx, float gy, float speed);
++	bool chaseToward(BotState* state, CreatureObject* bot, Zone* zone, float tx, float ty, float speed, float seconds, float stopAt);
+ 	static int combatLevel(CreatureObject* bot);
+ 	static String creatureName(CreatureObject* creature);
+ 	static bool launchHurt(CreatureObject* bot);
+@@ -716,7 +725,8 @@ private:
+ 			 << " skipped: steps still running), steps " << std::round(stepMicros.exchange(0) / 10.0 / seconds) / 100
+ 			 << " ms per second across workers, slowest chunk " << std::round(chunkMicrosMax.exchange(0) / 10.0) / 100
+ 			 << " ms, real players " << lastRealPlayers << ", spawned " << spawnedTotal << ", logged out " << loggedOutTotal
+-			 << ", failed " << failedTotal << ", no path " << failedPaths.exchange(0) << (final ? " (stopped: no bots)" : "");
++			 << ", failed " << failedTotal << ", no path " << failedPaths.exchange(0) << ", routes " << routesPlanned.exchange(0)
++			 << " (" << routesDeferred.exchange(0) << " deferred)" << (final ? " (stopped: no bots)" : "");
+ 
+ 		info(true) << line.toString();
+ 
+@@ -951,6 +961,8 @@ inline bool BotPopManager::tick() {
+ 
+ 	// The acting bots go to the server's worker threads, CHUNK at a time, as players' own commands do.
+ 	if (!skipped) {
++		routeBudget = ROUTES_PER_PASS;
++
+ 		for (size_t from = 0; from < active.size(); from += CHUNK) {
+ 			std::vector<Reference<BotState*>> chunk(active.begin() + from, active.begin() + Math::min(active.size(), from + CHUNK));
+ 			++outstanding;
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+index c62cb7f..ab080b7 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+@@ -59,6 +59,152 @@ inline bool BotPopManager::stepToward(CreatureObject* bot, Zone* zone, float tx,
+ 	return there;
+ }
+ 
++// The route from `from` to (gx, gy), round the buildings and walls of a city at either end, into `out` (the points
++// after `from`, the goal last). PathFinderManager::findPath looks for navmeshes only at a leg's midpoint
++// (findPathFromWorldToWorld), so a long leg out of a city or into one finds none and comes back as the straight line;
++// here each end that lies in a navmesh gets its own leg, between that end and the mesh's edge, and the open ground
++// between stays straight. Returns 1 for a navmesh route, 0 for the straight line (no navmesh at either end: two area
++// lookups, nothing else), -1 when this pass's ROUTES_PER_PASS are spent (`out` empty: try again next step).
++inline int BotPopManager::planRoute(Zone* zone, const Vector3& from, float gx, float gy, std::vector<Vector3>& out) {
++	out.clear();
++
++	SortedVector<ManagedReference<NavArea*>> atStart, atGoal;
++	zone->getInRangeNavMeshes(from.getX(), from.getY(), &atStart, true);
++	zone->getInRangeNavMeshes(gx, gy, &atGoal, true);
++
++	Vector3 goal(gx, gy, floorNear(zone, gx, gy, std::nanf("")));
++
++	if (atStart.size() == 0 && atGoal.size() == 0) {
++		out.push_back(goal);
++		return 0;
++	}
++
++	if (routeBudget.fetch_sub(1) <= 0) {
++		++routesDeferred;
++		return -1;
++	}
++
++	++routesPlanned;
++
++	// findPath from a to b, without a (the world -> world path is world points only).
++	auto leg = [&](const Vector3& a, const Vector3& b) {
++		WorldCoordinates start(a, nullptr);
++		WorldCoordinates end(b, nullptr);
++		std::unique_ptr<Vector<WorldCoordinates>> route(PathFinderManager::instance()->findPath(start, end, zone));
++
++		if (route == nullptr || route->size() < 2) {
++			out.push_back(b);
++			return;
++		}
++
++		for (int i = 1; i < route->size(); ++i) {
++			const WorldCoordinates& point = route->get(i);
++
++			if (point.getCell() == nullptr)
++				out.push_back(Vector3(point.getX(), point.getY(), point.getZ()));
++		}
++	};
++
++	// The last point of the line inside->outside that is still in the area, 2 m back inside (12 halvings: within 2 m
++	// on the longest legs), so findPath finds the mesh at the midpoint of its leg.
++	auto edge = [&](NavArea* area, const Vector3& inside, const Vector3& outside) {
++		float lo = 0, hi = 1, dx = outside.getX() - inside.getX(), dy = outside.getY() - inside.getY();
++
++		for (int i = 0; i < 12; ++i) {
++			float mid = (lo + hi) * 0.5f;
++
++			if (area->containsPoint(inside.getX() + dx * mid, inside.getY() + dy * mid))
++				lo = mid;
++			else
++				hi = mid;
++		}
++
++		float length = std::sqrt(dx * dx + dy * dy);
++		float t = length > 0.01f ? Math::max(0.f, lo - 2.f / length) : 0.f;
++		float x = inside.getX() + dx * t, y = inside.getY() + dy * t;
++
++		return Vector3(x, y, floorNear(zone, x, y, std::nanf("")));
++	};
++
++	for (int i = 0; i < atStart.size(); ++i) {
++		if (atStart.get(i)->containsPoint(gx, gy)) { // both ends in one city: the midpoint is in it too
++			leg(from, goal);
++			return 1;
++		}
++	}
++
++	Vector3 position = from;
++
++	if (atStart.size() > 0) {
++		Vector3 exit = edge(atStart.get(0).get(), from, goal);
++		leg(from, exit);
++		position = exit;
++	}
++
++	if (atGoal.size() > 0) {
++		Vector3 entry = edge(atGoal.get(0).get(), goal, position);
++		out.push_back(entry);
++		leg(entry, goal);
++	} else {
++		out.push_back(goal);
++	}
++
++	return 1;
++}
++
++// A walk to (gx, gy) along planRoute; false (and still not walking) when this pass's routes are spent.
++inline bool BotPopManager::startRoute(BotState* state, CreatureObject* bot, Zone* zone, float gx, float gy, float speed) {
++	if (planRoute(zone, bot->getPosition(), gx, gy, state->path) < 0)
++		return false;
++
++	state->next = 0;
++	state->mode = BotState::WALKING;
++	state->speed = speed;
++
++	return true;
++}
++
++// stepToward round the buildings: the same contract (true once within stopAt of the target), along a planRoute route
++// that is planned again only when the target has moved 4 m or a quarter of the distance (AiAgent re-plans a follow at
++// 4 m: findNextPosition), and at most every 2 s unless it jumped 30 m. Away from the navmeshes the route is the
++// straight line and this is stepToward plus two area lookups every 2 s.
++inline bool BotPopManager::chaseToward(BotState* state, CreatureObject* bot, Zone* zone, float tx, float ty, float speed, float seconds, float stopAt) {
++	Vector3 position = bot->getPosition();
++	float dx = tx - position.getX(), dy = ty - position.getY();
++	float distance = std::sqrt(dx * dx + dy * dy);
++
++	if (distance > stopAt) {
++		float mx = tx - state->chaseX, my = ty - state->chaseY;
++		float moved = std::sqrt(mx * mx + my * my);
++		bool stale = state->chaseNext >= state->chase.size() || moved > Math::max(4.f, distance * 0.25f);
++
++		if (stale && (state->lastStepMs >= state->chasePlannedMs + 2000 || moved > 30.f)) {
++			if (planRoute(zone, position, tx, ty, state->chase) < 1)
++				state->chase.clear(); // straight, or over budget: straight this time
++
++			state->chaseNext = 0;
++			state->chaseX = tx;
++			state->chaseY = ty;
++			state->chasePlannedMs = state->lastStepMs;
++		}
++
++		// Each waypoint but the last; the last is the target itself, wherever it is now.
++		while (state->chaseNext + 1 < state->chase.size()) {
++			const Vector3& point = state->chase[state->chaseNext];
++			float px = point.getX() - position.getX(), py = point.getY() - position.getY();
++
++			if (px * px + py * py > 1.f) {
++				stepToward(bot, zone, point.getX(), point.getY(), speed, seconds, 0.f);
++				return false;
++			}
++
++			++state->chaseNext;
++		}
++	}
++
++	return stepToward(bot, zone, tx, ty, speed, seconds, stopAt);
++}
++
+ inline JSONSerializationType BotPopManager::launchRow(const char* event, CreatureObject* bot, LaunchState* L) {
+ 	static const char* const ROLE[] = {"brawler", "marksman", "scout", "medic", "entertainer", "explorer"};
+ 
+@@ -553,7 +699,7 @@ inline void BotPopManager::launchFight(BotState* state, CreatureObject* bot, Zon
+ 		state->mode = BotState::IDLE;
+ 	}
+ 
+-	if (!stepToward(bot, zone, agent->getPositionX(), agent->getPositionY(), 5.5f, seconds, reach))
++	if (!chaseToward(state, bot, zone, agent->getPositionX(), agent->getPositionY(), 5.5f, seconds, reach))
+ 		return;
+ 
+ 	if (now >= L->nextAttackMs) {
+@@ -572,7 +718,7 @@ inline void BotPopManager::launchCorpse(BotState* state, CreatureObject* bot, Zo
+ 		return;
+ 	}
+ 
+-	if (!stepToward(bot, zone, corpse->getPositionX(), corpse->getPositionY(), 5.f, seconds, 2.5f))
++	if (!chaseToward(state, bot, zone, corpse->getPositionX(), corpse->getPositionY(), 5.f, seconds, 2.5f))
+ 		return;
+ 
+ 	if (!L->harvested && (L->role == LaunchState::SCOUT || bot->hasSkill("outdoors_scout_novice"))) {
+@@ -655,7 +801,9 @@ inline void BotPopManager::launchRest(BotState* state, CreatureObject* bot, Zone
+ 		float dx = bot->getPositionX() - L->center.getX(), dy = bot->getPositionY() - L->center.getY();
+ 
+ 		if (dx * dx + dy * dy > 40.f * 40.f) { // the middle of town, where the dancers and medics are
+-			stepToward(bot, zone, L->center.getX() + frand() * 10.f, L->center.getY() + frand() * 10.f, 5.f, seconds, 25.f);
++			// No jitter on the target: a new one every step would re-plan the route every 2 s. They still stop 25 m
++			// out, spread round the side each came from.
++			chaseToward(state, bot, zone, L->center.getX(), L->center.getY(), 5.f, seconds, 25.f);
+ 			return;
+ 		}
+ 
+@@ -815,11 +963,9 @@ inline void BotPopManager::launchHunt(BotState* state, CreatureObject* bot, Zone
+ 		float gx = Math::max(-7600.f, Math::min(7600.f, L->center.getX() + std::cos(angle) * reach));
+ 		float gy = Math::max(-7600.f, Math::min(7600.f, L->center.getY() + std::sin(angle) * reach));
+ 
+-		state->path.clear();
+-		state->path.push_back(Vector3(gx, gy, 0));
+-		state->next = 0;
+-		state->mode = BotState::WALKING;
+-		state->speed = 5.f;
++		// Round the town's buildings and walls on the way out (planRoute), not through them.
++		if (!startRoute(state, bot, zone, gx, gy, 5.f))
++			return;
+ 	}
+ 
+ 	walk(state, bot, zone, seconds, now);
+@@ -835,7 +981,7 @@ inline void BotPopManager::launchMedic(BotState* state, CreatureObject* bot, Zon
+ 	float dx = bot->getPositionX() - L->center.getX(), dy = bot->getPositionY() - L->center.getY();
+ 
+ 	if (dx * dx + dy * dy > 60.f * 60.f) {
+-		stepToward(bot, zone, L->center.getX(), L->center.getY(), 4.f, seconds, 30.f);
++		chaseToward(state, bot, zone, L->center.getX(), L->center.getY(), 4.f, seconds, 30.f);
+ 		return;
+ 	}
+ 
+@@ -874,7 +1020,7 @@ inline void BotPopManager::launchMedic(BotState* state, CreatureObject* bot, Zon
+ 				state->mode = BotState::IDLE;
+ 			}
+ 
+-			if (stepToward(bot, zone, patient->getPositionX(), patient->getPositionY(), 4.f, seconds, 4.f)) {
++			if (chaseToward(state, bot, zone, patient->getPositionX(), patient->getPositionY(), 4.f, seconds, 4.f)) {
+ 				bot->setTargetID(patient->getObjectID(), false);
+ 				bot->enqueueCommand(STRING_HASHCODE("healdamage"), 0, patient->getObjectID(), "");
+ 				++L->heals;
+@@ -968,7 +1114,7 @@ inline void BotPopManager::launchEntertain(BotState* state, CreatureObject* bot,
+ 		float dx = bot->getPositionX() - L->center.getX(), dy = bot->getPositionY() - L->center.getY();
+ 
+ 		if (dx * dx + dy * dy > 45.f * 45.f) {
+-			stepToward(bot, zone, L->center.getX(), L->center.getY(), 3.f, seconds, 30.f);
++			chaseToward(state, bot, zone, L->center.getX(), L->center.getY(), 3.f, seconds, 30.f);
+ 			return;
+ 		}
+ 
+@@ -1476,7 +1622,7 @@ inline bool BotPopManager::launchMission(BotState* state, CreatureObject* bot, Z
+ 					state->mode = BotState::IDLE;
+ 				}
+ 
+-				stepToward(bot, zone, L->missionX, L->missionY, 5.f, seconds, 20.f);
++				chaseToward(state, bot, zone, L->missionX, L->missionY, 5.f, seconds, 20.f);
+ 				return true;
+ 			}
+ 
+@@ -1530,7 +1676,7 @@ inline bool BotPopManager::launchMission(BotState* state, CreatureObject* bot, Z
+ 		// lair's centre through its own model is the suspect. Pistols and rifles fire at 6 m.
+ 		float reach = 6.f;
+ 
+-		if (stepToward(bot, zone, lair->getPositionX(), lair->getPositionY(), 5.f, seconds, reach) && now >= L->nextAttackMs) {
++		if (chaseToward(state, bot, zone, lair->getPositionX(), lair->getPositionY(), 5.f, seconds, reach) && now >= L->nextAttackMs) {
+ 			bot->setTargetID(L->lairID, false);
+ 			bot->enqueueCommand(STRING_HASHCODE("attack"), 0, L->lairID, "");
+ 			L->nextAttackMs = now + 2000;
+@@ -1549,7 +1695,7 @@ inline bool BotPopManager::launchMission(BotState* state, CreatureObject* bot, Z
+ 		return false;
+ 	}
+ 
+-	if (!stepToward(bot, zone, terminal->getPositionX(), terminal->getPositionY(), 5.f, seconds, 3.f))
++	if (!chaseToward(state, bot, zone, terminal->getPositionX(), terminal->getPositionY(), 5.f, seconds, 3.f))
+ 		return true;
+ 
+ 	missions->handleMissionListRequest(terminal, bot, ++L->missionsTaken + 1000);
+@@ -1702,11 +1848,8 @@ inline void BotPopManager::launchExplore(BotState* state, CreatureObject* bot, Z
+ 		float gx = -8192.f + (pick % 32) * 512.f + 30.f + frand() * 452.f;
+ 		float gy = -8192.f + (pick / 32) * 512.f + 30.f + frand() * 452.f;
+ 
+-		state->path.clear();
+-		state->path.push_back(Vector3(Math::max(-7900.f, Math::min(7900.f, gx)), Math::max(-7900.f, Math::min(7900.f, gy)), 0));
+-		state->next = 0;
+-		state->mode = BotState::WALKING;
+-		state->speed = 6.f;
++		if (!startRoute(state, bot, zone, Math::max(-7900.f, Math::min(7900.f, gx)), Math::max(-7900.f, Math::min(7900.f, gy)), 6.f))
++			return;
+ 	}
+ 
+ 	walk(state, bot, zone, seconds, now);
