@@ -1,4 +1,4 @@
-Correction (16 Oct 11:50 PM): the error counts at the end of this file cover the whole core3.log, not run 18. The 748 'skill points mismatch' lines are from 16 Oct 1:13-1:14 AM (C61-ranged-lairs.md addendum). Run 18 had 16 error lines in all: see morning-run18.txt.
+Correction (16 Oct 11:30 PM): the error counts at the end of this file cover the whole core3.log, not run 18. The 748 'skill points mismatch' lines are from 16 Oct 1:13-1:14 AM (C61-ranged-lairs.md addendum). Run 18 had 16 error lines in all: see morning-run18.txt.
 
 wrote /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Bot-reports/launch-sim/numbers-run18-early.md (18153 chars)
 /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Bot-reports/launch-sim/findings-run18-early.md: 5 FAIL, 1 WATCH, 6 PASS

@@ -1,5 +1,7 @@
 # Fresh start and spawn danger (test plan gaps 1 and 8)
 
+Update 16 Oct 11:32 PM: **the gate patch is in dev `69f5c879` and running on the test galaxy (run 19)**; the 7 AM report (`findings-run19.md`) shows its effect on deaths to killers 8+ levels up.
+
 Claude (side session), 16 Oct, 10:45 PM to 11:30 PM, on the test galaxy during run 18 (dev `d4b9d9a1`, optimised
 build, 1,700 BotPop bots online). Nothing under `/opt/swg` was changed and no console or botpop command was sent.
 

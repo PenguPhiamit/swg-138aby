@@ -1,5 +1,7 @@
 # Ossus O7: install notes (Claude, 16 Oct 2026)
 
+Update 16 Oct 11:32 PM: **installed on the test galaxy (run 19)**. Archive `df1d538e` (floater v2 → PL-01 → PL-02) on client and server; dev `ad7b5a9d` (regions) and `742ace54` (people). Untested in game until the owner's visit.
+
 Ready to install and **not installed**. Nothing under `/opt/swg`, `SWG-client/`, the galaxy or the bots was touched. All of it is
 untested in game until the owner's visit.
 

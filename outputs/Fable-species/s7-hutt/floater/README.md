@@ -1,5 +1,7 @@
 # The player Hutt on the A1 Deluxe Floater: a lower riding pose
 
+Update 16 Oct 11:32 PM: **v2 installed on the test galaxy (run 19)** as the first step of archive `df1d538e` (then Ossus O7 and Ossus people) on client and server. Untested in game.
+
 Claude, 16 Oct 2026, from the owner's 7:45 PM floater test (test galaxy, archive `6ff21312` on client and server).
 Status: **v1 installed at 10:05 PM (inside `9ce108a0`) and tested by the owner: "the floater was fixed with just a
 little bit of clipping remaining". v2 (section 6) built on top of it, untested in game, not installed.** Only the Hutt
