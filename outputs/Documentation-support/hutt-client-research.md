@@ -79,12 +79,14 @@ reads as a glide, not as sliding. If the run looks too lazy, `--run-rate 1.5` pl
 Rebuild:
 
 ```bash
-C:/Users/Pengw/miniconda3/python.exe -I tools/build_hutt_c59_walk.py
+C:/Users/Pengw/miniconda3/python.exe -I tools/build_hutt_c59_walk.py --base ../work/c59-hutt-walk/base-503401b4.tre
 ```
 
 **Moving base.** At 9:48 PM the Nal Hutta session rebuilt `work/nal-hutta/local_planets-nalhutta-floater.tre` (now
 `0e4fe92d…`, `datatables/travel/travel.iff` changed, not yet committed). The builder refuses that file by default.
-Its `hutt.lat` is the same (`985385fc…`), so `--any-base` gives the same new `hutt.lat` (`d865da6d…`) and the two
+A copy of 503401b4, rebuilt byte for byte from the committed `build_nal_hutta.py` (582f4eb) in a scratch folder, is
+kept as `work/c59-hutt-walk/base-503401b4.tre`; `--base` on it gives `fe62b478…` again. The new file's `hutt.lat` is
+the same (`985385fc…`), so `--any-base` gives the same new `hutt.lat` (`d865da6d…`) and the two
 `.ans` on it (output `9ce108a0…` on 0e4fe92d, reproduced twice). Whichever Nal Hutta archive is installed next, run
 this builder on it last, with `--any-base` when it is not 503401b4.
 
