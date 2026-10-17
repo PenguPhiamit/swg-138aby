@@ -51,7 +51,8 @@ _FACTION = {'destroy', 'deliver', 'crafting', 'recon', 'dancer', 'musician'}
 OFFERS = {'general': {'destroy', 'deliver'}, 'artisan': {'survey', 'crafting'}, 'entertainer': {'dancer', 'musician'},
           'scout': {'recon', 'hunting'}, 'bounty': {'bounty'}, 'imperial': _FACTION, 'rebel': _FACTION}
 DISABLED = '@skill_teacher:skill_terminal_disabled'
-GENERIC = 'mission_generic'   # how success_w_amount and too_many_missions reach the body (see above)
+GENERIC = '@mission:mission_generic'  # how success_w_amount and too_many_missions reach the body (see above)
+CARRY = ('deliver', 'crafting', 'survey')  # missions that put something in the inventory
 LOCATED = 'Mission Target has been located'
 CAP = 6
 LIST_COOLDOWN = 1.6            # s between list requests (the server's 1.4 s and a margin)
@@ -106,9 +107,49 @@ def mission_now(bot, oid):
     return next((m for m in bot.missions() if m.get('oid') == oid), None)
 
 
+_BANK_TERMINALS = {}  # bot first name -> the bank terminal whose window it reads
+
+
 def bank(bot):
+    """The bank balance: from status() when the body knows it, else from a bank terminal's window."""
     value = bot.status().get('bank_credits')
-    return value if isinstance(value, int) else None
+    return value if isinstance(value, int) else bank_window(bot)
+
+
+def bank_window(bot):
+    """The balance from a bank terminal's Deposit/Withdraw window (radial 68, Script.transfer, lblStartingTo), closed
+    at once with cancel, so nothing moves. Needed because the body forgets the balance at the first character delta it
+    cannot parse (AgentControl.cpp, CREO1 deltas; 17 Oct: unknown for every bot). The server opens this window at any
+    range (17 Oct: Kor, dead, 2 km from the nearest terminal), so the terminal found first is reused. None if no
+    window came."""
+    terminal = _BANK_TERMINALS.get(bot.first)
+    if terminal is None:
+        found = sorted(bot.locate('terminal_bank', radius=3000), key=lambda o: o.get('distance', 0))
+        if not found:
+            return None
+        terminal = _BANK_TERMINALS[bot.first] = found[0]['oid']
+    bot.select(terminal, 68, wait=2)
+    value = None
+    for page in [p for p in bot.sui_pages().get('pages', []) if p.get('script') == 'Script.transfer']:
+        for command in page.get('commands', []):
+            if command.get('narrow', [])[:1] == ['transaction.lblStartingTo'] and command.get('wide'):
+                try:
+                    value = int(command['wide'][0])
+                except (TypeError, ValueError):
+                    pass
+        bot.sui_respond(page['page_id'], 1, [], wait=1)  # cancel
+    return value
+
+
+INVENTORY_LIMIT = 80  # 17 Oct: ten squad bots stopped at 80 items, mostly spare /agentgear kits
+
+
+def room(bot):
+    """Free inventory slots. A deliver pickup into a full inventory aborts the objective but leaves the mission in the
+    datapad, stuck (DeliverMissionObjectiveImplementation.cpp updateMissionStatus; Cresh, 17 Oct 5:38 AM)."""
+    stock = bot.inventory().get('items', [])
+    box = next((i.get('oid') for i in stock if i.get('name') == '@item_n:inventory'), None)
+    return INVENTORY_LIMIT - sum(1 for i in stock if box is not None and i.get('parent') == box)
 
 
 def mark(bot):
@@ -119,6 +160,13 @@ def mark(bot):
 
 def said(bot, text, since):
     return [e.get('text') for e in bot.history if e.get('t', 0) >= since and text in str(e.get('text', ''))]
+
+
+def success(bot, since):
+    """success_w_amount since a mark: the truncated "@mission:mission_generic" exactly (other mission_generic messages
+    such as group_too_far arrive whole, as plain text), or the whole key once the body parser is fixed."""
+    return [e.get('text') for e in bot.history if e.get('t', 0) >= since
+            and (e.get('text') == GENERIC or 'success_w_amount' in str(e.get('text', '')))]
 
 
 def tries_for(metres):
@@ -177,7 +225,7 @@ def blocked(g, line, why, **fields):
 
 
 # ---- terminals ----
-def find_terminals(bot, radius=2000):
+def find_terminals(bot, radius=3000):
     """{terminal type: [terminals, nearest first]}. The server's search returns the 30 nearest matches and Mos Eisley
     alone has 54 mission terminals, so each type is searched by its own template name."""
     found = {}
@@ -188,13 +236,13 @@ def find_terminals(bot, radius=2000):
     return found
 
 
-def nearest_terminal(bot, ttype, radius=2500):
+def nearest_terminal(bot, ttype, radius=3000):
     template = next(t for t, k in TYPES.items() if k == ttype)
     hits = [o for o in bot.locate(template[:-4], radius=radius) if kind(o.get('template')) == ttype]
     return min(hits, key=lambda o: o.get('distance', 0)) if hits else None
 
 
-def at_terminal(g, bot, ttype, slot=0, radius=2500):
+def at_terminal(g, bot, ttype, slot=0, radius=3000):
     """Find the nearest terminal of ttype and walk to it. Returns it, or None after a failed check."""
     spot = nearest_terminal(bot, ttype, radius)
     if not g.check(f'{ttype}: a terminal within {radius} m of {bot.first}', spot,
@@ -266,6 +314,10 @@ def take(g, bot, terminal, ttype, choices, label, divisor, listed=None):
     if pick is None:
         blocked(g, label, f'no {" or ".join(wanted)} mission fits', offers=counts(listed))
         return None, None, None
+    if pick.get('type') in CARRY and room(bot) < 3:
+        blocked(g, label, f'{bot.first}\'s inventory is full ({INVENTORY_LIMIT - room(bot)} of {INVENTORY_LIMIT}); '
+                          f'not taken, since a full pickup leaves the mission stuck')
+        return None, None, None
     before = bank(bot)
     taken = accept(bot, pick, terminal)
     if not g.check(f'{label}: accepted into the datapad', taken,
@@ -293,8 +345,12 @@ def paid(g, bot, mission, before, divisor, label, since, seconds=30, began=None,
     reward = mission.get('reward')
     expected = reward // max(divisor or 1, 1) if isinstance(reward, int) else None
     gained = after - before if isinstance(after, int) and isinstance(before, int) else None
-    message = said(bot, GENERIC, since)
-    g.check(f'{label}: the mission leaves the datapad', removed, {'mission_generic message': bool(message)})
+    message = success(bot, since)
+    far_away = said(bot, 'group_too_far', since)
+    if far_away:
+        extra['group_too_far'] = True
+    g.check(f'{label}: the mission leaves the datapad', removed, {'success message': bool(message),
+                                                                   'group_too_far': bool(far_away)})
     g.check(f'{label}: the share reaches the bank', removed and gained is not None and gained == expected,
             {'reward': reward, 'divisor': divisor, 'expected': expected, 'paid': gained,
              'bank_before': before, 'bank_after': after})
@@ -394,8 +450,13 @@ def destroy_lair(g, team, lair, minutes=6):
 
 
 def destroy(g, team, mission, before, divisor, label):
-    """Walk the team to the waypoint (the owner, team[0], first: only the owner spawns the lair), destroy the lair."""
+    """Walk the team to the waypoint (the owner, team[0], first: only the owner spawns the lair), destroy the lair.
+    Every member's bank is read before and after: the server pays the members within 128 m of the mission's END point,
+    which stays at the first waypoint when the lair spawns elsewhere (DestroyMissionObjectiveImplementation.cpp:175
+    moves only the start and the waypoint). 17 Oct 5:38 AM: Ilsa, dead at the first waypoint, was paid; Cresh and Kor
+    at the lair were not (group_too_far)."""
     owner, began, since = team[0], time.time(), mark(team[0])
+    banks = {b.first: bank(b) for b in team[1:]}
     target = where(mission)
     here = owner.status()
     trips = g.parallel(*[lambda b=b, i=i: b.walk(target['x'] + 3 * i, target['y'] - 12, tries=tries_for(far(here, target)))
@@ -416,7 +477,17 @@ def destroy(g, team, mission, before, divisor, label):
     g.check(f'{label}: the lair is destroyed', gone, [(b.first, b.posture()) for b in team])
     if not gone:
         return unfinished(g, label, mission, 'lair not destroyed', began, lair=lair.get('name'))
-    return paid(g, owner, mission, before, divisor, label, since, began=began, lair=lair.get('name'))
+    lair_spot = {'x': lair.get('x'), 'y': lair.get('y')}
+    done = paid(g, owner, mission, before, divisor, label, since, began=began, lair=lair.get('name'),
+                lair_from_first_waypoint=round(far(lair_spot, target)) if far(lair_spot, target) != math.inf else None)
+    shares = {}
+    for b in team[1:]:
+        after = bank(b)
+        shares[b.first] = after - banks[b.first] if isinstance(after, int) and isinstance(banks[b.first], int) else None
+    shares[owner.first] = done.get('paid')
+    g.note(f'{label}: shares paid {shares} (each member within 128 m of the end point gets reward // {divisor})')
+    done['shares'] = shares
+    return done
 
 
 # ---- crafting the quest item ----
@@ -782,7 +853,7 @@ def cap(g, bot, terminal):
     bot.idle(2)
     now = mission_now(bot, seventh['oid'])
     count = len(held(bot))
-    message = said(bot, GENERIC, since)
+    message = [t for t in said(bot, '', since) if t == GENERIC or 'too_many_missions' in str(t)]
     refused = not in_datapad(now) and count == CAP
     g.check(f'{label}: the 7th mission is refused', refused,
             {'seventh_in': (now or {}).get('container_name'), 'held': count})

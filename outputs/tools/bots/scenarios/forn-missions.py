@@ -4,10 +4,11 @@
 All at once, each bot on its own mission:
   * Forn: an easy hunting mission at the scout terminal (15 kills of the creature found most often nearby, alone,
     since the server counts the owner's kills);
-  * Brask: the nearest recon mission at the scout terminal (walk into the area 1-4 km out);
+  * Mirren: the nearest recon mission at the scout terminal (walk into the area 1-4 km out; her inventory was full
+    on 17 Oct, and a recon puts nothing in it);
   * Dask: an NPC bounty at the bounty terminal. He gets Novice Bounty Hunter and Investigation I on the test galaxy
     (level-2 missions, so the droids work) and the droid kit: probe droid, seeker droid, walk, kill;
-  * Ressa at the imperial terminal and Mirren at the rebel one: an in-town deliver mission, else the nearest recon.
+  * Ressa at the imperial terminal and Brask at the rebel one: an in-town deliver mission, else the nearest recon.
 Each is done when it leaves the owner's datapad and the share (reward // group size, 5 here) reaches the bank.
 """
 import missions as M
@@ -41,8 +42,8 @@ def run(g):
         terminal = M.at_terminal(g, bot, ttype)
         return terminal and M.faction(g, bot, terminal, ttype, divisor)
 
-    g.parallel(lambda: scout(forn, 0, 'hunting'), lambda: scout(brask, 1, 'recon'), lambda: hunter(dask),
-               lambda: side(ressa, 'imperial'), lambda: side(mirren, 'rebel'))
+    g.parallel(lambda: scout(forn, 0, 'hunting'), lambda: scout(mirren, 1, 'recon'), lambda: hunter(dask),
+               lambda: side(ressa, 'imperial'), lambda: side(brask, 'rebel'))
     M.summary(g)
     for bot in g.bots:
         g.note(f'{bot.first} after: {bot.posture()}')

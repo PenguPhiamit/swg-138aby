@@ -3,7 +3,8 @@ server rules they follow are in ../missions.py.
 
 1. Census: the nearest terminal of every mission type within 2 km of Cresh (a TERMINALS note).
 2. At the nearest general terminal (terminal_mission.iff), at the same time:
-   * Cresh takes an in-town deliver mission and the easiest destroy mission, and does the delivery;
+   * Cresh takes the easiest destroy mission; Cresh or Kor (whoever has inventory room) an in-town deliver mission,
+     and does the delivery;
    * Ilsa fills her datapad to 6 with destroy missions, and a 7th must be refused;
    * Kor lists at a newbie and a statue terminal if one stands within 2 km (both must refuse).
 3. All three walk to the destroy waypoint (Cresh first: only the owner spawns the lair) and destroy the lair.
@@ -30,10 +31,10 @@ def run(g):
             g.note(f'{bot.first} marksman: ' + str(bot.profession('combat_marksman'))[:120])
     divisor = M.group_size(g, cresh)
     found = M.find_terminals(cresh)
-    g.note('TERMINALS within 2 km (the search returns 30 at most per type): ' + json.dumps(
+    g.note('TERMINALS within 3 km (the search returns 30 at most per type): ' + json.dumps(
         {t: {'count': len(v), 'nearest_m': round(v[0].get('distance', 0))} for t, v in sorted(found.items())}))
     general = (found.get('general') or [None])[0]
-    if not g.check('a general mission terminal within 2 km', general, general and general.get('distance')):
+    if not g.check('a general mission terminal within 3 km', general, general and general.get('distance')):
         return
     trips = g.parallel(*[lambda b=b, i=i: M.approach(b, general, i) for i, b in enumerate(g.bots)])
     g.check('Cresh reaches the general terminal', M.arrived(trips[0]),
@@ -42,19 +43,22 @@ def run(g):
         return
 
     listed = M.offers(cresh, general, 'general')
-    deliver, d_before, _ = M.take(g, cresh, general, 'general', [('deliver', M.in_town(cresh))],
-                                  'general/deliver', divisor, listed)
     destroy, _, _ = M.take(g, cresh, general, 'general', [('destroy', M.easiest(cresh))],
                            'general/destroy', divisor, listed)
+    # The deliver goes to whoever has room (a pickup into a full inventory leaves the mission stuck); on 17 Oct all
+    # three were full, so dorn-missions.py's Rusk takes one too.
+    carrier = max((cresh, kor), key=M.room)
+    deliver, d_before, _ = M.take(g, carrier, general, 'general', [('deliver', M.in_town(carrier))],
+                                  'general/deliver', divisor, None if carrier is not cresh else listed)
 
     jobs = [lambda: M.cap(g, ilsa, general) if M.arrived(trips[1]) else M.blocked(g, 'general/cap', 'Ilsa not at the terminal')]
     if deliver:
-        jobs.append(lambda: M.errand(g, cresh, deliver, d_before, divisor, 'general/deliver'))
+        jobs.append(lambda: M.errand(g, carrier, deliver, d_before, divisor, 'general/deliver'))
     shut = [(t, found[t][0]) for t in ('newbie', 'statue') if t in found]
-    if shut:
+    if shut and not (deliver and carrier is kor):
         jobs.append(lambda: [M.disabled(g, kor, spot, t) for t, spot in shut])
     else:
-        g.note('no newbie or statue mission terminal within 2 km; nothing to list there')
+        g.note('no newbie or statue mission terminal within 3 km; nothing to list there')
     g.parallel(*jobs)
 
     if destroy:

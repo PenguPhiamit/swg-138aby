@@ -164,7 +164,7 @@ class Bot:
         self.started = galaxy.clock.now
         self.history, self.pending, self.items, self.records = [], [], [], {}
         self.bank_credits, self.cell, self.posture_now, self.performing = 1000, 0, 'upright', None
-        self.slashes = []
+        self.slashes, self.pages, self.bank_known = [], [], True
 
     def hear(self, text):
         self.history.append({'event': 'system', 'text': text, 't': round(self.galaxy.clock.now - self.started, 1)})
@@ -174,8 +174,11 @@ class Bot:
 
     def status(self):
         self.tick(0.5)  # a body request's round trip
-        return {'planet': 'tatooine', 'x': self.x, 'y': self.y, 'cell': self.cell, 'bank_credits': self.bank_credits,
-                'me': {'group': self.group_id, 'posture': self.posture_now}, 'self': self.oid}
+        reply = {'planet': 'tatooine', 'x': self.x, 'y': self.y, 'cell': self.cell, 'bank_credits': self.bank_credits,
+                 'me': {'group': self.group_id, 'posture': self.posture_now}, 'self': self.oid}
+        if not self.bank_known:
+            del reply['bank_credits']
+        return reply
 
     def posture(self):
         return self.posture_now
@@ -272,14 +275,20 @@ class Bot:
         return {'skills': ['combat_marksman_master', 'crafting_artisan_novice', 'social_entertainer_novice']}
 
     def sui_pages(self):
-        return {'pages': []}
+        return {'pages': list(self.pages)}
 
     def sui_respond(self, page_id, event=0, args=None, wait=2.0):
+        self.slashes.append(('sui_respond', page_id, event))
+        self.pages = [p for p in self.pages if p['page_id'] != page_id]
         return []
 
     def select(self, target, radial_id, wait=2.0):
         item = next((i for i in self.items if i['oid'] == target), None)
         name = (item or self.galaxy.objects.get(target) or {}).get('name', '')
+        if radial_id == 68 and any(t['oid'] == target and 'terminal_bank' in t['template'] for t in self.galaxy.terminals):
+            self.pages.append({'page_id': 900, 'script': 'Script.transfer', 'commands': [
+                {'kind': 3, 'narrow': ['transaction.lblStartingFrom', 'Text'], 'wide': ['10000']},
+                {'kind': 3, 'narrow': ['transaction.lblStartingTo', 'Text'], 'wide': [str(self.bank_credits)]}]})
         if 'survey_tool' in name:
             self.pending.append({'event': 'survey_resources', 'resources': [{'name': 'Ferrox', 'type': 'iron_smelted'}]})
         elif 'probot' in name and radial_id == 138:
@@ -496,6 +505,7 @@ class Missions(Base):
         done = M.destroy(g, bots, mission, M.bank(bots[0]), divisor, 'general/destroy')
         self.assertTrue(done['removed'])
         self.assertEqual(g.failed(), [])
+        self.assertEqual(done['shares'], {'Ilsa': 0, 'Kor': 0, 'Cresh': mission['reward'] // 3})  # the fake pays the owner
 
     def test_crafting_errand_crafts_the_quest_item(self):
         g, bots = self.crew('Besh', 'Dova', 'Pell', 'Varo')
@@ -547,6 +557,34 @@ class Missions(Base):
         self.assertTrue(M.hold(nima, horn))
         self.assertEqual(nima.slashes[:2], [('transferItemMisc', '1 -1 0 0 0'), ('transferItemWeapon', f'{nima.oid} 4 0 0 0')])
         self.assertEqual(pistol['parent'], 1)
+
+    def test_the_bank_comes_from_the_terminal_window_when_the_body_lost_it(self):
+        g, (bot,) = self.crew('Kor')
+        bank = {'oid': 77, 'template': 'object/tangible/terminal/terminal_bank.iff', 'x': bot.x + 2000, 'y': bot.y}
+        self.galaxy.terminals.append(bank)
+        bot.bank_known, bot.bank_credits = False, 100000
+        self.assertEqual(M.bank(bot), 100000)
+        self.assertIn(('sui_respond', 900, 1), bot.slashes)  # cancelled: nothing moves
+        self.assertEqual(bot.pages, [])
+
+    def test_a_full_inventory_takes_no_delivery(self):
+        g, (bot,) = self.crew('Cresh')
+        bot.items = [{'oid': 1, 'name': '@item_n:inventory', 'type': 'TANO', 'parent': bot.oid}] + [
+            {'oid': 10 + i, 'name': '@medicine_name:stimpack_sm_s1_a', 'type': 'TANO', 'parent': 1} for i in range(80)]
+        self.assertEqual(M.room(bot), 0)
+        mission, _, _ = self.take(g, bot, 'general', 'deliver', M.in_town(bot), 3)
+        self.assertIsNone(mission)
+        self.assertFalse(M.held(bot))
+        self.assertTrue(any('inventory is full (80 of 80)' in n for n in g.notes))
+
+    def test_only_the_truncated_success_counts(self):
+        g, (bot,) = self.crew('Cresh')
+        since = M.mark(bot)
+        bot.hear('@mission/mission_generic:group_too_far')
+        bot.hear('@mission/mission_generic:group_success')
+        self.assertEqual(M.success(bot, since), [])
+        bot.hear('@mission:mission_generic')
+        self.assertEqual(M.success(bot, since), ['@mission:mission_generic'])
 
     def test_recon_is_paid_on_entering_the_area(self):
         g, bots = self.crew('Forn', 'Brask', 'Dask', 'Ressa', 'Mirren')
@@ -641,9 +679,10 @@ class Scenarios(Base):
     def test_dorn_missions(self):
         g, bots = self.crew('Dorn', 'Nima', 'Rusk')
         self.galaxy.terminal('entertainer', bots[0].x + 20, bots[0].y)
+        self.galaxy.terminal('general', bots[0].x + 60, bots[0].y)
         load('dorn-missions').run(g)
         self.assertEqual(g.failed(), [])
-        self.assertEqual(g.results(), ['entertainer/dancer', 'entertainer/musician'])
+        self.assertEqual(g.results(), ['entertainer/dancer', 'entertainer/musician', 'general/deliver'])
 
     def test_forn_missions(self):
         g, bots = self.crew('Forn', 'Brask', 'Dask', 'Ressa', 'Mirren')
