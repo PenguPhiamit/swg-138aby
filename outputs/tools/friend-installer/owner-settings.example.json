@@ -1,0 +1,7 @@
+{
+  "ServerAddress": "<this PC's Tailscale IPv4, 100.x.y.z (owner-setup.ps1 -WriteSettings fills it in)>",
+  "LoginPort": 46453,
+  "KitDir": "../../../work/client-patch/2026.10.16.1",
+  "MtgHelpUrl": "<where friends get the MTG archives: a page you choose>",
+  "ClientHelpUrl": "https://www.swgemu.com/"
+}

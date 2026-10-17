@@ -142,3 +142,8 @@ outputs/**/work/*
 # Generated views; their source tools, prompts and authored reports stay visible.
 outputs/SWG-roadmap-*.html
 outputs/Agent/notes/roadmap-digest.md
+
+# Friend installer (outputs/tools/friend-installer): the built Setup.exe, its generated settings, and the owner's
+# settings file (tailnet address). Never commit them.
+outputs/tools/friend-installer/build/
+outputs/tools/friend-installer/owner-settings.json
