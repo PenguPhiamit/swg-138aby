@@ -163,3 +163,12 @@ Next: Claude reviews the three source commits and stages the client corrections 
        - The earlier "schematic_group is MTG's" claim was wrong: `swgfmt.tre_write.read` cannot open most stock `patch_*.tre` (one record fails its checksum), so `trn_iff.client_file` silently picked older or MTG copies. The real winner is `patch_12_00`, identical to MTG's.
      - The UI loaded the same element counts on both archives.
    - Next: bisect the three groups with the owner's Chiss, one client restart each.
+5. **6:45-7:00 PM, the bisect was invalid.**
+   - Round 1 (pre-Hutt archive plus the 11 species tables, `76ea1fe8`) first failed for the Chiss, then worked minutes later with no change. So the failure is intermittent, and the archive tests above prove nothing either way.
+   - Server radial round trips measured with the agent client: 12/12 answered, median 0.05 s, worst 0.10 s (6:56 PM).
+   - A probe logs one every 15 s until about 9 PM (`/var/tmp/swg-bots/radial-latency.txt`), so the next failure can be matched against server latency.
+   - Still to explain:
+     - Hutt: the slow or no movement, and the animation (bones-only: "buggy as hell");
+     - all characters: the intermittent interaction loss.
+   - Separate owner report: server bots run through walls.
+     - Cause: BotPop moves bots by position along straight legs, with no building collision.
