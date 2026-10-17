@@ -102,7 +102,7 @@ def creation_items():
 def definitions(root):
     S = f'{root}/bin/scripts'
     d = {'loot': {}, 'groups': {}, 'mobiles': {}, 'lairs': {}, 'schematics': {}, 'loot_schematics': {}, 'items': {},
-         'objects': set(), 'ships': {}}
+         'objects': set(), 'ships': {}, 'custom': set()}
     for f in luas(root, 'ship_mobile'):
         t = read(f)
         lt = re.search(r'lootTable\s*=\s*"([^"]+)"', t)
@@ -133,26 +133,32 @@ def definitions(root):
         if n:
             lv = re.search(r'\blevel\s*=\s*(\d+)', t)
             d['mobiles'][n[1]] = (int(lv[1]) if lv else 0, set(re.findall(r'\{\s*group\s*=\s*"([^"]+)"', t)))
+    # The server knows each object by the path in its ObjectTemplates:addTemplate line, not by its file path: the
+    # 14,000 files under object/custom_content register object/tangible/... paths (the Hoth session, 17 Oct).
     for f in luas(root, 'object'):
         rel = os.path.relpath(f, S)
         if os.path.basename(f) in ('serverobjects.lua', 'objects.lua'):
             continue
-        path = rel[:-4] + '.iff'
-        d['objects'].add(path)
-        parts = rel.split('/')
-        if rel.startswith('object/draft_schematic/'):
-            t = read(f)
-            tt = re.search(r'targetTemplate\s*=\s*"([^"]+)"', t)
-            extra = re.search(r'additionalTemplates\s*=\s*\{([^}]*)\}', t)   # variants the schematic can also make
-            if tt:
-                d['schematics'][path] = [x.replace('/shared_', '/') for x in
-                                         [tt[1]] + (re.findall(r'"([^"]+\.iff)"', extra[1]) if extra else [])]
-        elif parts[1] in ('tangible', 'weapon') and len(parts) > 3 and parts[2] not in NOT_ITEMS | {'hair'}:
-            d['items'][path] = '/'.join(parts[1:3])
-            if rel.startswith('object/tangible/loot/loot_schematic/'):
-                ts = re.search(r'targetDraftSchematic\s*=\s*"([^"]+)"', read(f))
-                if ts:
-                    d['loot_schematics'][path] = ts[1]
+        t = read(f)
+        custom = rel.startswith('object/custom_content/')
+        for path in re.findall(r'ObjectTemplates:addTemplate\(\s*[A-Za-z0-9_]+\s*,\s*"([^"]+)"', t) or [rel[:-4] + '.iff']:
+            d['objects'].add(path)
+            parts = path.split('/')
+            if path.startswith('object/draft_schematic/'):
+                tt = re.search(r'targetTemplate\s*=\s*"([^"]+)"', t)
+                extra = re.search(r'additionalTemplates\s*=\s*\{([^}]*)\}', t)   # variants the schematic can also make
+                if tt:
+                    d['schematics'][path] = [x.replace('/shared_', '/') for x in
+                                             [tt[1]] + (re.findall(r'"([^"]+\.iff)"', extra[1]) if extra else [])]
+            elif parts[1] in ('tangible', 'weapon') and len(parts) > 3 and parts[2] not in NOT_ITEMS | {'hair'}:
+                if custom and path in d['items']:
+                    continue   # a stock file and a custom copy: keep the stock one
+                d['items'][path] = '/'.join(parts[1:3])
+                (d['custom'].add if custom else d['custom'].discard)(path)
+                if path.startswith('object/tangible/loot/loot_schematic/'):
+                    ts = re.search(r'targetDraftSchematic\s*=\s*"([^"]+)"', t)
+                    if ts:
+                        d['loot_schematics'][path] = ts[1]
     return d
 
 
@@ -262,7 +268,7 @@ def source_map(root, granted, starting):
         'schematic -> missing object': sorted(f'{s} -> {t}' for s, ts in d['schematics'].items() for t in ts if t not in d['objects']),
         'lair -> missing creature': sorted(f'{l} -> {m}' for l, ms in d['lairs'].items() for m in ms if m not in d['mobiles']),
     }
-    return d['items'], src, errors
+    return d['items'], src, errors, d['custom']
 
 
 def summary(kinds):
@@ -281,8 +287,8 @@ def summary(kinds):
 
 def main():
     granted, starting = grants(), creation_items()
-    dev_items, dev_src, dev_err = source_map(DEV, granted, starting)
-    stock_items, stock_src, stock_err = source_map(stock_tree(), granted, starting)
+    dev_items, dev_src, dev_err, custom = source_map(DEV, granted, starting)
+    stock_items, stock_src, stock_err, _ = source_map(stock_tree(), granted, starting)
     items, counts = {}, collections.Counter()
     for tpl, folder in sorted(dev_items.items()):
         dev, stock = dev_src.get(tpl, {}), stock_src.get(tpl, {})
@@ -292,10 +298,11 @@ def main():
         if tpl not in stock_items:
             flags.append('new')
         if not have:
-            flags.append('test-only' if dev.get('test') else 'no-source')
+            # an imported template (object/custom_content) that nothing uses is not an item the game offers
+            flags.append('test-only' if dev.get('test') else 'imported-unused' if tpl in custom else 'no-source')
         flags += [f'lost-{k}' for k in sorted(had - have)] + [f'gained-{k}' for k in sorted(have - had) if tpl in stock_items]
         counts.update(flags or ['ok'])
-        items[tpl] = {'folder': folder, 'flags': flags, 'dev': summary(dev), 'stock': summary(stock) if tpl in stock_items else {}}
+        items[tpl] = {'folder': folder, 'custom': tpl in custom, 'flags': flags, 'dev': summary(dev), 'stock': summary(stock) if tpl in stock_items else {}}
     dev_rev = subprocess.run(['git', '-c', 'safe.directory=*', '-C', os.path.dirname(DEV), 'rev-parse', '--short=8', 'HEAD'],
                              capture_output=True, text=True).stdout.strip()
     with open(OUT_JSON, 'w', encoding='utf-8', newline='\n') as f:
@@ -313,12 +320,14 @@ def main():
     for k, v in dev_err.items():
         md.append(f'- {k}: {len(v)} ({stock_err[k] if isinstance(stock_err[k], int) else len(stock_err[k])})'
                   + (': ' + '; '.join(v[:6]) + (' ...' if len(v) > 6 else '') if v else ''))
-    md.append('\n## Flags by folder\n\n| Folder | Items | ok | no-source | test-only | new | lost | gained |\n|---|---|---|---|---|---|---|---|')
+    md.append('\n## Flags by folder\n\nImported-unused: templates under object/custom_content that nothing gives out; the local '
+              'check leaves them out.\n\n| Folder | Items | ok | no-source | test-only | imported-unused | new | lost | gained |\n'
+              '|---|---|---|---|---|---|---|---|---|')
     for folder, c in sorted(folders.items(), key=lambda kv: -sum(kv[1].values())):
         lost = sum(v for k, v in c.items() if k.startswith('lost-'))
         gained = sum(v for k, v in c.items() if k.startswith('gained-'))
         md.append(f'| {folder} | {sum(1 for it in items.values() if it["folder"] == folder)} | {c["ok"]} | {c["no-source"]} | '
-                  f'{c["test-only"]} | {c["new"]} | {lost} | {gained} |')
+                  f'{c["test-only"]} | {c["imported-unused"]} | {c["new"]} | {lost} | {gained} |')
     lost = [t for t, it in items.items() if any(f.startswith('lost-') for f in it['flags'])]
     md.append(f'\n## Items that lost a way of getting them against stock ({len(lost)})\n')
     md += [f'- `{t}`: {", ".join(f for f in items[t]["flags"] if f.startswith("lost-"))}' for t in lost[:80]]

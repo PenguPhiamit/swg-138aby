@@ -314,7 +314,8 @@ def item_lines(flagged_only=True):
         tpl, it = entry
         first = 0 if 'test-only' in it['flags'] else 1 if any(f[:5] in ('lost-', 'gaine') for f in it['flags']) else 2
         return (first, ITEM_FOLDERS.index(it['folder']) if it['folder'] in ITEM_FOLDERS else len(ITEM_FOLDERS), tpl)
-    flagged = sorted(((t, it) for t, it in items.items() if bool(it['flags']) == flagged_only), key=rank)
+    flagged = sorted(((t, it) for t, it in items.items() if bool(it['flags']) == flagged_only
+                      and 'imported-unused' not in it['flags']), key=rank)   # unused imports: counted, not judged
     return [(t, f'{it["folder"]} | {", ".join(it["flags"]) or "ok"} | now: {ways(it["dev"])} | stock: '
                 + ('the same' if it['stock'] == it['dev'] else ways(it['stock']))) for t, it in flagged]
 
