@@ -1,0 +1,87 @@
+From 5bf55669f4842a93c4e11b6414bca6ca37c5376e Mon Sep 17 00:00:00 2001
+From: SWG Local Dev <swg@localhost>
+Date: Fri, 16 Oct 2026 20:01:57 -0700
+Subject: [PATCH] BotPop: step up onto raised floors (the highest floor within
+ a step), not the floor nearest the current height
+
+The nearest-floor rule kept a bot on the ground under a raised plaza or platform, sunk to the waist (owner, run 14,
+16 Oct). A step may climb 0.6 x its length, 1.2 to 2.5 m: ramps and kerbs yes, roofs and upper storeys no.
+
+Agent: Claude
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../zone/managers/botpop/BotPopLaunchBrain.h       | 14 +++++++-------
+ .../server/zone/managers/botpop/BotPopManager.h    |  7 +++++--
+ 2 files changed, 12 insertions(+), 9 deletions(-)
+
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+index ab080b7d..ecfe47aa 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopLaunchBrain.h
+@@ -11,23 +11,23 @@
+  */
+ namespace botpop {
+ 
+-inline float BotPopManager::floorNear(Zone* zone, float x, float y, float referenceZ) {
++inline float BotPopManager::floorNear(Zone* zone, float x, float y, float referenceZ, float stepUp) {
+ 	float terrain = zone->getPlanetManager()->getTerrainManager()->getHeight(x, y);
+ 
+ 	if (!std::isfinite(referenceZ))
+ 		referenceZ = terrain;
+ 
+-	float best = terrain;
++	// The highest floor a walker can step up onto from referenceZ: a raised plaza, a platform, a ramp or stairs, but not a
++	// roof or an upper storey (more than stepUp above); the terrain when nothing qualifies. Until 16 Oct this took the
++	// floor nearest referenceZ, which kept a bot on the ground under a raised floor, sunk to the waist (owner, run 14).
++	float best = terrain, limit = referenceZ + stepUp;
+ 	SortedVector<IntersectionResult> hits;
+ 	CollisionManager::getWorldFloorCollisions(x, y, zone, &hits);
+ 
+ 	for (int i = 0; i < hits.size(); ++i) {
+ 		float height = 16384.f - hits.get(i).getIntersectionDistance();
+ 
+-		if (!std::isfinite(height) || height < terrain)
+-			continue;
+-
+-		if (std::fabs(height - referenceZ) < std::fabs(best - referenceZ))
++		if (std::isfinite(height) && height > best && height <= limit)
+ 			best = height;
+ 	}
+ 
+@@ -51,7 +51,7 @@ inline bool BotPopManager::stepToward(CreatureObject* bot, Zone* zone, float tx,
+ 	float length = Math::min(distance - stopAt, speed * seconds);
+ 	position.setX(position.getX() + dx / distance * length);
+ 	position.setY(position.getY() + dy / distance * length);
+-	position.setZ(floorNear(zone, position.getX(), position.getY(), bot->getPositionZ()));
++	position.setZ(floorNear(zone, position.getX(), position.getY(), bot->getPositionZ(), stepUpFor(length)));
+ 
+ 	bool there = distance - length <= stopAt + 0.01f;
+ 	move(bot, position, there ? 0 : speed, dx, dy);
+diff --git a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+index 12ac1afd..4e4a50f2 100644
+--- a/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
++++ b/MMOCoreORB/src/server/zone/managers/botpop/BotPopManager.h
+@@ -288,7 +288,9 @@ public:
+ private:
+ 	void startLocked();
+ 
+-	static float floorNear(Zone* zone, float x, float y, float referenceZ);
++	static float floorNear(Zone* zone, float x, float y, float referenceZ, float stepUp = 1.5f);
++	// How far up a step of `length` metres may climb: about a 30-degree ramp, at least a kerb, never a storey.
++	static float stepUpFor(float length) { return Math::max(1.2f, Math::min(2.5f, 0.6f * length)); }
+ 	static bool stepToward(CreatureObject* bot, Zone* zone, float tx, float ty, float speed, float seconds, float stopAt);
+ 	int planRoute(Zone* zone, const Vector3& from, float gx, float gy, std::vector<Vector3>& out);
+ 	bool startRoute(BotState* state, CreatureObject* bot, Zone* zone, float gx, float gy, float speed);
+@@ -575,7 +577,8 @@ private:
+ 			}
+ 		}
+ 
+-		position.setZ(floorNear(zone, position.getX(), position.getY(), bot->getPositionZ())); // not the roof above
++		float moved = state->speed * seconds - budget;
++		position.setZ(floorNear(zone, position.getX(), position.getY(), bot->getPositionZ(), stepUpFor(moved))); // up a step, not onto the roof
+ 
+ 		bool arrived = state->next >= state->path.size();
+ 		move(bot, position, arrived ? 0 : state->speed, dx, dy);
+-- 
+2.47.3
+

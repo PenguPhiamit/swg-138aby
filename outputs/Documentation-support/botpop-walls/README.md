@@ -79,3 +79,17 @@ Unchanged: the wander (`startWalk`), travel and teleports, and the movement of t
 - **Explorers count a square as visited** (`exploreVisits`) even when the route is deferred and they pick again the next step. This only matters while the cap binds, and it skews the census slightly.
 - **Thread safety.** `findPath` already runs from many AI threads; the Recast query object is thread-local (`PathFinderManager::getNavQuery`). `planRoute` runs inside the bot's step with only the bot locked, as AI pathing does.
 - **Untested in game.** A walk-through in the client (step 2) is the real check.
+
+## Follow-up: bots sunk to the waist under raised floors (Claude, 16 Oct 2026, 8:05 PM)
+
+- **Owner, run 14, 7:59 PM** (a tell to the test bot): "I JUST SAW BOT RUN THROUGH THE FLOOR AT WAIST HEIGHT".
+  - The owner had just been round the Mos Eisley starport and taken the shuttle to Bestine.
+- **Cause.** `floorNear` set a walking bot's height to the floor **nearest its current height**. A bot on the ground that walks under a raised plaza or platform stays on the ground, because the terrain is nearer than the platform. Its body then shows through the platform surface, from the waist up.
+  - This predates the walls fix: `walk()` and `stepToward` both had it.
+  - The walls fix sends more bots along streets and plazas, so the owner may simply see it more often.
+- **Fix** (dev `5bf55669`; copy: `botpop-stepup.patch`):
+  - `floorNear` now takes the **highest floor at most `stepUp` above** the current height, and the terrain when none qualifies.
+  - `stepUpFor(length)` is 0.6 × the step's length, kept between 1.2 and 2.5 m. That climbs kerbs, plazas, ramps and stairs, but not roofs or upper storeys.
+  - Walking off an edge still drops the bot to the next floor or the terrain.
+- **Risk:** a low roof that has floor collision, less than 2.5 m above a bot taking a long step, could be climbed. That is rare: canopies and tents are usually higher, and usually have no floor mesh.
+- **Status:** built into the optimised core3; it starts at the next test-galaxy restart. Check: watch bots cross the Mos Eisley starport plaza and the Bestine shuttleport.
