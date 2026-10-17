@@ -155,7 +155,11 @@ if ($Dispatch) {
     if (-not $probe.WaitForExit(180000)) { $probe.Kill(); Note 'not ready: probe timed out'; exit 0 }
     $said = ((Get-Content $probeOut -Raw -ErrorAction SilentlyContinue) + '')
     if ($said -notmatch 'READY') {
-        $why = ((Get-Content "$probeOut.err" -Tail 3 -ErrorAction SilentlyContinue) -join ' ').Trim()
+        # The usage-limit line first: MCP start-up errors (fal without a key) also land in stderr and hid it all evening
+        # on 16 Oct, when the real cause was GPT's weekly limit.
+        $err = @(Get-Content "$probeOut.err" -ErrorAction SilentlyContinue)
+        $real = @($err | Where-Object { $_ -match 'usage limit|^ERROR:' -and $_ -notmatch 'rmcp::' } | Select-Object -Last 1)
+        $why = $(if ($real.Count -gt 0) { $real[0] } else { ($err | Select-Object -Last 3) -join ' ' }).Trim()
         if ($why.Length -gt 300) { $why = $why.Substring(0, 300) }
         Note "not ready: $why"
         exit 0
