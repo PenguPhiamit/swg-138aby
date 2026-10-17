@@ -1,10 +1,10 @@
-# Rori: planet data (run18)
+# Rori: planet data (run19)
 
-From `botpop-launch.jsonl`, 16 Oct 10:26 PM to 11:30 PM. Written by `tools/bots/planet_census.py`; every row with its squares is in `rori.csv`.
+From `botpop-launch.jsonl`, 16 Oct 11:33 PM to 12:31 AM. Written by `tools/bots/planet_census.py`; every row with its squares is in `rori.csv`.
 
-- Bots here: 294 (0 explorers, 103 that killed something).
-- Coverage: 38 of 256 squares of 1 km had a bot or a sighting in them (15%); explorers stood in 0.
-- Templates: 27 creatures, 9 lairs, 0 buildings, 0 named statics, no unnamed statics.
+- Bots here: 268 (0 explorers, 96 that killed something).
+- Coverage: 37 of 256 squares of 1 km had a bot or a sighting in them (14%); explorers stood in 0.
+- Templates: 23 creatures, 8 lairs, 0 buildings, 0 named statics, no unnamed statics.
 - **No explorers here**, so buildings, statics and creatures nobody fought are missing. To send some: `botpop explore 50 rori` in the test galaxy console (the galaxy owner runs it).
 
 Squares are `x,y` in km from the planet centre, south-west corner: `3,-5` is x 3,000 to 3,999 m, y -5,000 to -4,001 m. Counts in brackets are events in that square (sightings, kills, deaths and so on).
@@ -13,45 +13,40 @@ Squares are `x,y` in km from the planet centre, south-west corner: `3,-5` is x 3
 
 | template | level | killed | killed a bot | attacked first | seen (256 m squares) | 1 km squares | most met in |
 |---|---|---|---|---|---|---|---|
-| capper_spineflap | 1-6 | 137 | 9 | 32 |  | 16 | -6,-3 (60); 5,6 (41); 4,4 (22); -7,-3 (20); -6,-2 (19) |
-| ikopi | 1-7 | 144 | 6 | 10 |  | 15 | 5,5 (60); -6,-3 (43); 4,6 (24); -5,-3 (21); -7,-4 (11) |
-| nightspider | 7 | 70 | 11 | 11 |  | 19 | -6,-3 (28); 4,5 (26); -5,-2 (18); -5,-3 (17); 4,6 (8) |
-| capper_spineflap_drone | 1-6 | 52 | 1 |  |  | 11 | -6,-2 (30); -5,-3 (22); -7,-4 (4); 4,5 (3); -5,-4 (3) |
-| young_borgle_gruntling | 6 | 39 | 4 | 2 |  | 10 | -6,-2 (25); 5,6 (9); -7,-2 (8); -6,-3 (6); -5,-2 (6) |
-| meek_avenging_squall | 6 | 37 | 3 |  |  | 13 | -6,-3 (16); 5,5 (16); -6,-2 (5); 4,5 (4); -7,-3 (4) |
-| young_borgle | 6 | 14 | 6 | 17 |  | 10 | 4,4 (16); -8,-2 (9); -5,-4 (9); -6,-1 (5); -8,-3 (4) |
-| frail_squall | 6 | 25 | 1 |  |  | 6 | 5,5 (21); -6,-3 (13); 4,5 (2); -7,-2 (2); 6,6 (2) |
-| gundark_crook | 5 | 7 | 2 | 8 |  | 6 | 3,6 (10); 7,5 (4); 6,5 (4); 5,4 (2); -7,-3 (2) |
-| swamp_rat | 10 | 1 | 9 | 9 |  | 2 | 5,5 (15); 4,5 (7) |
-| pigmy_pugoriss | 8 | 20 |  |  |  | 1 | 5,5 (20) |
-| gundark_hooligan | 6 | 5 | 2 | 7 |  | 4 | -7,-3 (6); -6,-2 (5); -7,-4 (5); 6,5 (4) |
-| gundark_rogue | 7 | 3 | 3 | 6 |  | 4 | -6,-2 (7); -5,-4 (5); -6,-5 (5); -7,-3 (3) |
-| first_brigade_scout | 7 | 3 | 2 | 5 |  | 4 | -5,-3 (7); 5,5 (4); -7,-3 (4); -6,-1 (4) |
-| sickle_rasp | 8 | 2 | 2 | 4 |  | 2 | -7,-3 (12); -6,-4 (3) |
-| garyns_prowler | 11 |  | 2 | 3 |  | 2 | 5,5 (12); -6,-2 (1) |
-| gundark_desperado | 8 | 3 | 1 | 4 |  | 2 | -6,-4 (6); -5,-2 (4) |
-| scorched_krevol | 8 | 2 | 1 | 1 |  | 2 | -6,-2 (5); 5,5 (3) |
-| vicious_squall | 12 |  | 2 | 2 |  | 2 | -6,-3 (4); -6,-2 (3) |
-| kobola_thief | 9 |  | 1 | 1 |  | 1 | 4,4 (5) |
-| first_brigade_trooper | 6 | 1 |  | 1 |  | 2 | -7,-4 (3); -7,-3 (2) |
-| vrobalet | 8 |  | 1 |  |  | 2 | -6,-3 (3); -6,-2 (2) |
-| frightened_borgle | 8 | 2 | 1 |  |  | 2 | 5,5 (2); -5,-3 (1) |
-| hermit_spider | 7 | 3 |  |  |  | 1 | -5,-3 (3) |
-| timid_vir_vur | 8 | 2 |  |  |  | 1 | 5,5 (2) |
-| garyns_thief | 15 |  | 1 |  |  | 1 | -6,-2 (2) |
-| chuba | 5 |  |  |  |  | 1 | -5,-2 (1) |
+| ikopi | 1-7 | 151 | 4 | 3 |  | 18 | 5,5 (74); -6,-3 (55); 6,5 (12); -5,-3 (11); 4,6 (7) |
+| capper_spineflap | 1-6 | 75 | 7 | 46 |  | 21 | -6,-2 (27); 4,6 (26); -7,-4 (19); -5,-3 (16); 5,6 (14) |
+| nightspider | 7 | 68 | 8 | 12 |  | 16 | -6,-3 (17); 4,5 (15); -5,-3 (12); 5,5 (11); -6,-4 (10) |
+| capper_spineflap_drone | 1-6 | 72 |  |  |  | 14 | -6,-3 (27); -6,-2 (18); -5,-2 (11); 4,6 (6); -5,-3 (5) |
+| meek_avenging_squall | 6 | 60 | 2 |  |  | 11 | -6,-2 (29); -6,-3 (13); 5,6 (13); 5,5 (8); -4,-3 (6) |
+| frail_squall | 6 | 43 | 1 |  |  | 8 | 5,5 (48); -6,-3 (8); 6,4 (6); 6,6 (4); -6,-4 (4) |
+| young_borgle | 6 | 26 | 6 | 17 |  | 11 | -4,-3 (19); 5,6 (10); -6,-4 (9); -8,-3 (9); 6,6 (8) |
+| hermit_spider | 1-7 | 56 | 1 |  |  | 10 | -6,-3 (30); 6,5 (16); -6,-2 (7); 5,5 (5); 4,5 (4) |
+| gundark_crook | 5 | 11 | 2 | 12 |  | 7 | -5,-1 (9); -5,-3 (7); 5,5 (4); 3,6 (4); 6,5 (2) |
+| garyns_prowler | 11 |  | 6 | 5 |  | 3 | -6,-2 (13); 5,5 (10); -7,-2 (3) |
+| gundark_hooligan | 6 | 8 |  | 8 |  | 7 | -7,-3 (7); -6,-1 (4); -5,-3 (3); -5,-1 (2); 5,7 (2) |
+| gundark_rogue | 7 | 4 | 2 | 6 |  | 5 | -6,-1 (5); -7,-3 (5); -7,-1 (3); -5,-1 (2); 3,6 (2) |
+| sickle_rasp | 8 |  | 3 | 2 |  | 4 | 6,5 (9); 4,7 (1); 3,7 (1); 4,6 (1) |
+| swamp_rat | 10 |  | 5 | 4 |  | 2 | 5,5 (7); 4,5 (3) |
+| scorched_krevol | 8 | 4 | 2 |  |  | 2 | -6,-2 (7); 5,5 (2) |
+| narmle_militia_grenadier | 11 |  | 2 | 2 |  | 2 | 5,7 (4); 5,6 (4) |
+| timid_vir_vur | 8 | 7 |  |  |  | 1 | 5,5 (7) |
+| first_brigade_trooper | 6 | 1 | 2 | 2 |  | 2 | 3,5 (6); 4,5 (1) |
+| frightened_borgle | 8 | 3 |  |  |  | 4 | -5,-3 (2); -7,-2 (2); 5,5 (1); -6,-2 (1) |
+| young_borgle_gruntling | 6 | 1 | 1 |  |  | 1 | -5,-2 (4) |
+| narmle_militia_lieutenant | 9 |  | 1 | 1 |  | 2 | 5,7 (3); 5,6 (1) |
+| first_brigade_scout | 7 | 1 |  | 1 |  | 1 | 5,3 (3) |
+| vrobalet | 8 |  | 1 |  |  | 1 | 4,5 (3) |
 
 ## Lairs
 
 | template | level | mission finds | fought (checks) | seen (256 m squares) | 1 km squares | most met in |
 |---|---|---|---|---|---|---|
-| rori_gundark_hooligan_camp_neutral_medium_theater | ? | 26 | 63 |  | 19 | 4,5 (16); -6,-2 (15); -7,-4 (9); -7,-3 (7); -7,-2 (5) |
-| rori_borgal_young_lair_neutral_small | ? | 17 | 62 |  | 12 | -6,-1 (21); -7,-4 (15); -6,-4 (9); -6,-2 (8); 4,4 (6) |
-| rori_capper_spineflap_hive_neutral_large | ? | 20 | 36 |  | 11 | 4,4 (12); -7,-3 (8); -7,-2 (7); 5,4 (6); 6,4 (6) |
-| rori_ikopi_lair_neutral_medium_boss_01 | ? | 15 | 27 |  | 14 | 4,4 (6); 4,6 (5); 5,4 (3); -7,-1 (3); -4,-3 (3) |
-| rori_nightspider_lair_neutral_small | ? | 14 | 27 |  | 12 | -6,-1 (8); -5,-2 (5); -5,-1 (5); -7,-3 (3); -4,-3 (3) |
-| rori_brigade_scout_camp_neutral_medium_theater | ? | 12 | 25 |  | 11 | -5,-3 (7); 5,5 (4); -6,-2 (4); -7,-3 (3); -7,-4 (3) |
-| rori_sickle_rasp_nest_neutral_medium | ? | 6 | 12 |  | 6 | -7,-3 (4); -6,-4 (3); 4,4 (3); 5,6 (3); 4,6 (3) |
-| rori_gundark_raider_camp_neutral_medium_theater | ? | 4 | 11 |  | 4 | -6,-4 (7); -5,-2 (3); -7,-3 (3); -5,-4 (2) |
-| rori_kobola_miner_base_neutral_large_theater | ? | 1 | 2 |  | 1 | 4,4 (3) |
+| rori_capper_spineflap_hive_neutral_large | ? | 30 | 54 |  | 19 | -6,-1 (9); -6,-2 (8); -7,-2 (8); 4,6 (7); 3,5 (7) |
+| rori_gundark_hooligan_camp_neutral_medium_theater | ? | 22 | 47 |  | 17 | -7,-3 (8); -5,-1 (7); 6,4 (6); -6,-4 (6); 3,6 (5) |
+| rori_borgal_young_lair_neutral_small | ? | 21 | 41 |  | 15 | -4,-3 (11); 5,6 (6); -7,-2 (6); -7,-4 (6); 3,5 (4) |
+| rori_nightspider_lair_neutral_small | ? | 14 | 37 |  | 12 | 3,4 (16); 5,7 (5); -6,-1 (5); -7,-2 (3); 4,5 (3) |
+| rori_ikopi_lair_neutral_medium_boss_01 | ? | 11 | 20 |  | 7 | 6,6 (6); 6,5 (6); -7,-3 (6); 4,6 (5); 6,4 (3) |
+| rori_brigade_scout_camp_neutral_medium_theater | ? | 8 | 15 |  | 9 | 6,4 (4); -5,-4 (4); 6,5 (3); 3,5 (3); 4,6 (2) |
+| rori_sickle_rasp_nest_neutral_medium | ? | 5 | 10 |  | 6 | 6,5 (4); -6,-4 (3); -4,-3 (3); -7,-2 (3); 4,7 (1) |
+| rori_narmle_camp_neutral_large_theater | ? | 1 | 3 |  | 2 | 5,6 (3); 5,7 (1) |
 
