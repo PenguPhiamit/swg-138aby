@@ -584,7 +584,7 @@ class Missions(Base):
             M.destroy(g, bots, mission, M.bank(bots[0]), divisor, 'general/destroy')
             detail = next(d for l, ok, d in g.checks if l == 'general/destroy: everyone who fought at the lair is paid')
             self.assertEqual(detail['unpaid'], unpaid, patched)
-            self.assertEqual(detail['lair_from_first_waypoint_m'], 200)
+            self.assertEqual(detail['lair_from_end_point_m'], 200)
 
     def test_guarded_walk_fights_what_waits_on_the_route(self):
         g, bots = self.crew('Cresh', 'Ilsa', 'Kor')

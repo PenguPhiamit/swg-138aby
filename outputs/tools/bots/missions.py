@@ -579,8 +579,9 @@ def destroy(g, team, mission, before, divisor, label):
     if not gone:
         return unfinished(g, label, mission, 'lair not destroyed', began, lair=lair.get('name'))
     lair_spot = {'x': lair.get('x'), 'y': lair.get('y')}
+    end = mission.get('end') or target  # pay is judged from here; it stays at the first spot the generator picked
     done = paid(g, owner, mission, before, divisor, label, since, began=began, lair=lair.get('name'),
-                lair_from_first_waypoint=round(far(lair_spot, target)) if far(lair_spot, target) != math.inf else None)
+                lair_from_end_point=round(far(lair_spot, end)) if far(lair_spot, end) != math.inf else None)
     shares = {}
     for b in team[1:]:
         after = bank(b)
@@ -589,13 +590,13 @@ def destroy(g, team, mission, before, divisor, label):
     g.note(f'{label}: shares paid {shares} (each member within 128 m of the end point gets reward // {divisor})')
     done['shares'] = shares
     # The group-pay check (Documentation-support/mission-group-pay.md): everyone standing who fought at the lair
-    # should get a share. Unpatched, pay is judged from the first waypoint only, so this fails whenever the lair
-    # spawned over 128 m from it; with the patch, the owner's surroundings count too.
+    # should get a share. Unpatched, pay is judged from the mission's end point only (the generator's first spot), so
+    # this fails whenever the lair is over 128 m from it; with the patch, the owner's surroundings count too.
     fighters = [b.first for b in team if b.posture() != 'dead']
     unpaid = [n for n in fighters if not shares.get(n)]
-    moved = done.get('lair_from_first_waypoint')
+    moved = done.get('lair_from_end_point')
     g.check(f'{label}: everyone who fought at the lair is paid', not unpaid,
-            {'unpaid': unpaid, 'lair_from_first_waypoint_m': moved, 'shares': shares})
+            {'unpaid': unpaid, 'lair_from_end_point_m': moved, 'shares': shares})
     return done
 
 

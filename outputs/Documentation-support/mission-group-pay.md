@@ -21,7 +21,8 @@ In both cases the share of whoever stands near the end point is paid, and the sh
    - The first waypoint was at about (3155, -3005). The lair (`tatooine_kreetle_over_death_neutral_medium_boss_01`) spawned at about (3386, -2917), roughly 247 m away.
    - Cresh (the owner) and Kor destroyed it there. Ilsa had been incapacitated, then killed, near the first waypoint.
    - At t = 538.6 s, Cresh got `@mission/mission_generic:group_too_far` and `group_success`, but no `success_w_amount`. Kor got no mission message. Ilsa got `@mission:mission_generic`, the body's truncated `success_w_amount`, at t = 540.6 s, while dead.
-2. **Hunting, 17 Oct 12:22 PM** (`forn-missions.py`, report `Bot-reports/Forn/20261017-122209-forn-missions.json`).
+2. **Destroy again, 17 Oct 12:41 PM** (`Bot-reports/Cresh/20261017-124136-cresh-missions.json`). Cresh finished a destroy mission held since 2:25 AM, whose lair had spawned about 340 m from its end point in that earlier run (listed then with start (3503, -3455) and end (3694, -3735)). Reward 774, a group of 3, so a share is 258. Cresh, Ilsa and Kor all destroyed the lair. Nobody was within 128 m of the end point, so only the owner was paid: Cresh +258 with `group_too_far`, Ilsa +0, Kor +0.
+3. **Hunting, 17 Oct 12:22 PM** (`forn-missions.py`, report `Bot-reports/Forn/20261017-122209-forn-missions.json`).
    - Forn finished a hunting mission ("@mission/mission_npc_hunting_neutral_easy:m7t", reward 1010, a group of 5, so a share is 202) by killing rills out of town. The mission left his datapad.
    - His bank stayed at 100000 → 100000, and he got `group_too_far`. The groupmate near the scout terminal who was presumably paid instead was not measured.
 
@@ -39,7 +40,7 @@ An alternative is to move the destroy end point with the lair (one line at `Dest
 ## How to check it after the build
 
 - **Destroy.** Run `squad.py run scenarios/cresh-missions.py --round-minutes 40`.
-  - Unpatched, "general/destroy: everyone who fought at the lair is paid" fails whenever `lair_from_first_waypoint_m` is over 128. The RESULT and the shares note give the numbers.
+  - Unpatched, "general/destroy: everyone who fought at the lair is paid" fails whenever `lair_from_end_point_m` is over 128. The RESULT and the shares note give the numbers.
   - Patched, it passes at any distance.
 - **Hunting.** In `forn-missions.py`, "scout/hunting: the share reaches the bank" passes with the patch even when a groupmate stands at the scout terminal.
 - **Offline.** `python -I tools/bots/test_missions.py` runs the fake galaxy both ways. Unpatched, Ilsa and Kor are unpaid when the lair lands 200 m away; patched, nobody is.
