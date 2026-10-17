@@ -75,7 +75,8 @@ SOURCE_CAP = 120_000  # characters per topic at a 64K-token window (scaled by so
 MAX_STEPS, RUN_LIMIT_S = 40, 3 * 3600
 # Chaining topics on the friend's PC: swg-idle-research.service may run 4 h (TimeoutStartSec) less a margin; a topic is
 # chained only with at least CHAIN_MIN_S of that left, and chaining stops after MAX_CHAIN_FAILS failures in a row.
-SERVICE_S, CHAIN_MIN_S, MAX_CHAIN_FAILS = 4 * 3600 - 10 * 60, 30 * 60, 3
+# CHAIN_GAP_S between chained topics (owner, 17 Oct 8:20 AM: "pause 5 mins in between").
+SERVICE_S, CHAIN_MIN_S, MAX_CHAIN_FAILS, CHAIN_GAP_S = 4 * 3600 - 10 * 60, 30 * 60, 3, 5 * 60
 GIN = re.compile(r'\[GIN\] (\d{4}/\d\d/\d\d - \d\d:\d\d:\d\d) \|.*POST +"/api/(?:chat|generate)"')
 
 BRIEF = """# Research topic: {title}
@@ -495,8 +496,9 @@ def main():
         code = code or (0 if result else 1)
         fails = 0 if result else fails + 1
         now_asked = False
-        if not remote or fails >= MAX_CHAIN_FAILS or SERVICE_S - (time.time() - started) < CHAIN_MIN_S:
+        if not remote or fails >= MAX_CHAIN_FAILS or SERVICE_S - (time.time() - started) - CHAIN_GAP_S < CHAIN_MIN_S:
             return code
+        time.sleep(CHAIN_GAP_S)   # someone using the friend's Ollama meanwhile shows in the next round's checks
 
 
 def sort_topics(todo, server):

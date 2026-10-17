@@ -421,6 +421,9 @@ class IdleResearchTests(unittest.TestCase):
         patcher = mock.patch.object(ir.memguard, 'commit_headroom_gb', return_value=None)   # never this PC's memory
         patcher.start()
         self.addCleanup(patcher.stop)
+        patcher = mock.patch.object(ir, 'CHAIN_GAP_S', 0)   # the 5-minute pause between chained topics (own test below)
+        patcher.start()
+        self.addCleanup(patcher.stop)
 
     def as_other_pc(self):
         """Treat the fake (which is on 127.0.0.1) as a server on another PC, and fail if a local check runs."""
@@ -818,6 +821,15 @@ class IdleResearchTests(unittest.TestCase):
         self.main('check')
         self.assertEqual(self.statuses(), {'a': 'review'})
         self.assertFalse((self.root / 'STOP').exists())
+
+    def test_chained_topics_wait_five_minutes_between_them(self):
+        self.as_other_pc()
+        self.open_topics({'id': 'a'}, {'id': 'b'})
+        self.stub_agent('(ws / "report.md").write_text("r" * 400)\n')
+        with mock.patch.object(ir, 'CHAIN_GAP_S', 300), mock.patch.object(ir.time, 'sleep') as sleep:
+            self.check_now()
+        self.assertEqual(self.statuses(), {'a': 'review', 'b': 'review'})
+        self.assertEqual([c.args[0] for c in sleep.call_args_list], [300, 300])   # after a, and after b before pausing
 
     def test_this_pc_still_runs_one_topic_per_check(self):
         self.local_checks()
