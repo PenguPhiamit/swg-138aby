@@ -41,13 +41,8 @@ def mission(oid,x,planet='tatooine'):
     return {'oid':oid,'type':'destroy','difficulty':1,'container_name':'mission_bag',
             'waypoint':{'x':x,'y':0,'planet':planet}}
 
-g=Group(['Cresh','Ilsa','Kor'],[mission(11,2000),mission(12,500),mission(13,100),mission(14,1,'naboo')])
-load('cresh-missions').run(g)
-assert g['Cresh'].accepted==[13],g['Cresh'].accepted
-
-g=Group(['Cresh','Ilsa','Kor'],[mission(11,2000)])
-load('cresh-missions').run(g)
-assert not g['Cresh'].accepted and any('within 600' in n for n in g.notes)
+# cresh-missions.py: the 600 m rule went on 15 Oct (targets are 1000-2000 m out) and the scenario was rewritten on
+# 17 Oct for every mission terminal type; its offline tests are bots/test_missions.py (Claude).
 
 g=Group(['Aurek','Jesh','Tamsin'])
 load('aurek-doctor-buffs').run(g)
@@ -56,4 +51,4 @@ assert not any(b.walks for b in g.bots) and any('interior treatment anchor' in n
 g=Group(['Besh','Dova','Pell','Varo'])
 load('besh-harvest').run(g)
 assert any('above 5' in n for n in g.notes)
-print('PASS: nearest mission, far-mission rejection, missing hospital cell, strong-prey refusal (offline)')
+print('PASS: missing hospital cell, strong-prey refusal (offline); missions: bots/test_missions.py')

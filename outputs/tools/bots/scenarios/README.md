@@ -109,6 +109,23 @@ wsl -d Debian -u root -- python3 /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h
 - **Accounts:** the load-fleet bots (`load-groups.json`; no squad uses them), taking only those with no creation in the last 65 minutes. Core3 allows one creation per account per hour and checks it in the database, so a restart doesn't reset it. A second run within the hour is BLOCKED with the wait in minutes. First names are unique per galaxy, deleted ones included, so names are chosen against the database each run.
 - **Output:** `Bot-reports/Creation/` (report, LOG.md and `<time>-creation-sweep-rows.json` with every row). Options: `--parallel N` (default 8), `--accounts a,b,…`. Offline tests: `python -I tools/bots/test_creation_sweep.py`.
 
+## Missions (test plan section 11, 17 October)
+
+Four scenarios take one whole mission from every mission terminal type and finish it: take it, travel, do the work, see it leave the datapad and the share reach the bank. Helpers and the server rules they follow: `../missions.py`.
+
+| Scenario | Terminal | Missions |
+|---|---|---|
+| `cresh-missions.py` | general | Cresh: in-town deliver, then the easiest destroy with all three. Ilsa: 6 held, the 7th must be refused. Kor: newbie and statue terminals must refuse a list (if one is within 2 km). Every member gets Marksman first. |
+| `besh-missions.py` | artisan | Dova: in-town crafting (the NPC's schematic and parts, the generic tool, the hand-over), then survey (over 1024 m out with Varo, sample at the mission's density). |
+| `dorn-missions.py` | entertainer | Dorn dancer and Nima musician (given Novice Entertainer), 10 minutes inside the mission's building, at the same time. |
+| `forn-missions.py` | scout, bounty, imperial, rebel | Forn hunting (15 kills), Brask recon, Dask an NPC bounty (given the two bounty hunter boxes and the droids), Ressa and Mirren a faction deliver or recon; all at once. |
+
+```
+wsl -d Debian -u swgemu -- python3 /mnt/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/tools/bots/squad.py run cresh-missions.py besh-missions.py dorn-missions.py forn-missions.py
+```
+
+Each mission writes a `RESULT <terminal>/<type>` note (reward, group divisor, expected share, paid, bank before and after, removed, seconds); a `RESULTS` note sums them up. The share is reward // group size (the server divides by the group), so a grouped bot is never paid the whole reward. Two body limits: string-id messages from `mission/mission_generic` arrive as `@mission:mission_generic` without their key, so the checks read the bank and the datapad; and there is no mission abort, so an unfinished mission stays in the datapad until it expires (48 h). Offline tests: `python -I tools/bots/test_missions.py`.
+
 ## Fallback scheduling (C16, 14 October)
 
 Repeated `squad.py run` rounds now use `../fallback-plan.json`. After two consecutive all-PASS rounds, or the same FAIL/BLOCKED/ERROR twice, the group switches to the next available fallback. Empty-check scenarios count as blocked. Round timeouts count as repeated blockage; an owner halt never starts fallback work. The main scenario is retried after three fallback rounds or when its contents change. State is kept in `Bot-reports/runs/fallback-state.json`, independently per group.
