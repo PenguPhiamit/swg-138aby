@@ -1,35 +1,46 @@
 <#
 .SYNOPSIS
-  Offline test of friend-setup.ps1 on a dummy client folder with a dummy kit. Downloads nothing, installs nothing.
+  Offline test of friend-setup.ps1 and mtg-share.py on a dummy client folder with a dummy kit. Downloads nothing
+  from outside this PC, installs nothing.
     powershell -NoProfile -ExecutionPolicy Bypass -File test-friend-setup.ps1 [-ProbeAddress 192.168.1.210]
   -ProbeAddress also sends one UDP session request to that address's login port (read-only).
+  mtg-share.py runs on 127.0.0.1:43499 for a few seconds (needs python on PATH).
 #>
-param([string]$ProbeAddress)
+param([string]$ProbeAddress, [switch]$Keep)   # -Keep leaves the dummy folders in %TEMP% for a look
 $ErrorActionPreference = 'Stop'
 $here = $PSScriptRoot
 $root = Join-Path $env:TEMP ('friend-setup-test-' + [guid]::NewGuid().ToString('N'))
-$kit = Join-Path $root 'kit'; $client = Join-Path $root 'client'; $app = Join-Path $root 'app'
-New-Item -ItemType Directory -Force -Path $kit, $client, $app | Out-Null
+$kit = Join-Path $root 'kit'; $client = Join-Path $root 'client'; $app = Join-Path $root 'app'; $share = Join-Path $root 'share'; $dl = Join-Path $root 'dl'
+New-Item -ItemType Directory -Force -Path $kit, $client, $app, $share, $dl | Out-Null
 $ps = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
+$port = 43499
 $script:fails = 0
+$plain = Join-Path $root 'settings.json'; $withMtg = Join-Path $root 'settings-mtg.json'
+$script:settings = $plain
 function Check($name, $ok) { if ($ok) { Write-Host "PASS $name" } else { Write-Host "FAIL $name" -ForegroundColor Red; $script:fails++ } }
 function Run([string[]]$a) {
     $res = Join-Path $root 'result.txt'; Remove-Item -LiteralPath $res -ErrorAction SilentlyContinue
-    $out = & $ps -NoProfile -ExecutionPolicy Bypass -File (Join-Path $here 'friend-setup.ps1') @a -SettingsFile (Join-Path $root 'settings.json') -KitDir $kit -StateFile (Join-Path $app 'state.json') -ResultFile $res 2>&1 | Out-String
+    $out = & $ps -NoProfile -ExecutionPolicy Bypass -File (Join-Path $here 'friend-setup.ps1') @a -SettingsFile $script:settings -KitDir $kit -StateFile (Join-Path $app 'state.json') -ResultFile $res 2>&1 | Out-String
     $text = ''; if (Test-Path -LiteralPath $res) { $text = [IO.File]::ReadAllText($res) }
     return [pscustomobject]@{ Code = $LASTEXITCODE; Out = $out; Result = $text }
 }
 function Sha($p) { (Get-FileHash -Algorithm SHA256 -LiteralPath $p).Hash.ToLower() }
+function Snapshot($dir) { Get-ChildItem -LiteralPath $dir -Recurse | ForEach-Object { "$($_.FullName)|$($_.Length)" } }
+function Len($p) { if (Test-Path -LiteralPath $p) { (Get-Item -LiteralPath $p).Length } else { -1 } }
 try {
-    # A dummy kit: the real installer scripts, a fake archive, two fake MTG requirements.
+    # A dummy kit: the real installer scripts, a fake archive, two fake MTG requirements (the owner's share has both).
     Copy-Item (Join-Path $here '..\client_patch\Install-ClientPatch.ps1'), (Join-Path $here '..\client_patch\Uninstall-ClientPatch.ps1') $kit
     [IO.File]::WriteAllBytes((Join-Path $kit 'local_planets.tre'), [byte[]](1..200 | ForEach-Object { $_ % 256 }))
+    [IO.File]::WriteAllBytes((Join-Path $share 'mtg_patch_001.tre'), [byte[]](1..10))
+    [IO.File]::WriteAllBytes((Join-Path $share 'mtg_planets.tre'), [byte[]](1..20))
     $m = [ordered]@{ format = 1; name = 'local_planets'; version = '2026.10.17.1'
         archive = [ordered]@{ file = 'local_planets.tre'; size = 200; sha256 = (Sha (Join-Path $kit 'local_planets.tre')); priority = 49 }
-        requires = @([ordered]@{ file = 'mtg_patch_001.tre'; priority = 1; size = 10; sha256 = '' }, [ordered]@{ file = 'mtg_planets.tre'; priority = 21; size = 20; sha256 = '' }) }
+        requires = @([ordered]@{ file = 'mtg_patch_001.tre'; priority = 1; size = 10; sha256 = (Sha (Join-Path $share 'mtg_patch_001.tre')) },
+                     [ordered]@{ file = 'mtg_planets.tre'; priority = 21; size = 20; sha256 = (Sha (Join-Path $share 'mtg_planets.tre')) }) }
     [IO.File]::WriteAllText((Join-Path $kit 'manifest.json'), ($m | ConvertTo-Json -Depth 5))
     $addr = if ($ProbeAddress) { $ProbeAddress } else { '192.0.2.1' }
-    [IO.File]::WriteAllText((Join-Path $root 'settings.json'), (@{ ServerAddress = $addr; LoginPort = 46453; MtgHelpUrl = 'https://example.invalid/mtg'; ClientHelpUrl = 'https://www.swgemu.com/' } | ConvertTo-Json))
+    [IO.File]::WriteAllText($plain, (@{ ServerAddress = $addr; LoginPort = 46453; MtgHelpUrl = 'https://example.invalid/mtg'; ClientHelpUrl = 'https://www.swgemu.com/' } | ConvertTo-Json))
+    [IO.File]::WriteAllText($withMtg, (@{ ServerAddress = $addr; LoginPort = 46453; MtgBaseUrl = "http://127.0.0.1:$port/"; ClientHelpUrl = 'https://www.swgemu.com/' } | ConvertTo-Json))
 
     # A dummy client: the shape the kit wants, the user's own login file, one MTG archive missing.
     foreach ($f in 'SWGEmu.exe', 'bottom.tre', 'data_other_00.tre', 'patch_14_00.tre', 'swgemu_live.cfg') { Set-Content -LiteralPath (Join-Path $client $f) -Value 'x' }
@@ -38,15 +49,41 @@ try {
     [IO.File]::WriteAllBytes((Join-Path $client 'mtg_patch_001.tre'), (New-Object byte[] 10))
 
     $r = Run @('-Action', 'Check', '-ClientDir', $root); Check 'Check refuses a folder without SWGEmu.exe' ($r.Code -eq 2 -and $r.Result -match 'swgemu.com')
-    $r = Run @('-Action', 'Check', '-ClientDir', $client); Check 'Check names the missing MTG archive and the link' ($r.Code -eq 3 -and $r.Result -match 'mtg_planets.tre \(missing\)' -and $r.Result -match 'example.invalid/mtg')
+    $r = Run @('-Action', 'Check', '-ClientDir', $client); Check 'Check without MtgBaseUrl names the missing MTG archive and the link' ($r.Code -eq 3 -and $r.Result -match 'mtg_planets.tre \(missing\)' -and $r.Result -match 'example.invalid/mtg')
     [IO.File]::WriteAllBytes((Join-Path $client 'mtg_planets.tre'), (New-Object byte[] 5))
     $r = Run @('-Action', 'Check', '-ClientDir', $client); Check 'Check notices a wrong-size archive' ($r.Code -eq 3 -and $r.Result -match 'different version')
     [IO.File]::WriteAllBytes((Join-Path $client 'mtg_planets.tre'), (New-Object byte[] 20))
     $r = Run @('-Action', 'Check', '-ClientDir', $client); Check 'Check passes a complete client' ($r.Code -eq 0)
 
-    $before = Get-ChildItem -LiteralPath $client -Recurse | ForEach-Object { "$($_.FullName)|$($_.Length)" }
-    $r = Run @('-Action', 'Patch', '-ClientDir', $client, '-DryRun'); $after = Get-ChildItem -LiteralPath $client -Recurse | ForEach-Object { "$($_.FullName)|$($_.Length)" }
-    Check 'Patch -DryRun changes nothing' ($r.Code -eq 0 -and (Compare-Object @($before) @($after)) -eq $null -and -not (Test-Path (Join-Path $app 'state.json')))
+    # The MTG download: the friend has another version of one archive and lacks the other.
+    [IO.File]::WriteAllBytes((Join-Path $client 'mtg_patch_001.tre'), [byte[]](1..7))
+    Remove-Item -LiteralPath (Join-Path $client 'mtg_planets.tre')
+    $script:settings = $withMtg
+    $list = Join-Path $root 'mtg-needed.txt'
+    $r = Run @('-Action', 'Check', '-ClientDir', $client, '-MtgListFile', $list)
+    $lines = @(Get-Content -LiteralPath $list -ErrorAction SilentlyContinue)
+    $want0 = "http://127.0.0.1:$port/mtg_patch_001.tre`tmtg_patch_001.tre`t$($m.requires[0].sha256)"
+    Check 'Check with MtgBaseUrl lists both archives with link and sha256 (exit 4)' ($r.Code -eq 4 -and $lines.Count -eq 2 -and $lines[0] -eq $want0 -and $lines[1] -match '/mtg_planets\.tre\tmtg_planets\.tre\t[0-9a-f]{64}$' -and $r.Result -match 'kept in')
+    Copy-Item (Join-Path $share '*.tre') $dl
+    $before = Snapshot $client
+    $r = Run @('-Action', 'PlaceMtg', '-ClientDir', $client, '-From', $dl, '-DryRun')
+    Check 'PlaceMtg -DryRun changes nothing' ($r.Code -eq 0 -and (Compare-Object @($before) @(Snapshot $client)) -eq $null -and (Len (Join-Path $dl 'mtg_planets.tre')) -eq 20)
+    Remove-Item -LiteralPath (Join-Path $dl 'mtg_planets.tre')
+    $r = Run @('-Action', 'PlaceMtg', '-ClientDir', $client, '-From', $dl)
+    Check 'PlaceMtg stops on an incomplete download and changes nothing' ($r.Code -eq 1 -and $r.Result -match 'mtg_planets.tre' -and (Compare-Object @($before) @(Snapshot $client)) -eq $null)
+    Copy-Item (Join-Path $share 'mtg_planets.tre') $dl
+    $r = Run @('-Action', 'PlaceMtg', '-ClientDir', $client, '-From', $dl)
+    $st = Get-Content -Raw (Join-Path $app 'state.json') | ConvertFrom-Json
+    $bk = Join-Path $client 'local_planets-patch\backup\friends-installer\mtg'
+    if ($Keep) { Write-Host "  PlaceMtg: code $($r.Code); $($r.Result -replace "`r`n", ' / '); client 001=$(Len (Join-Path $client 'mtg_patch_001.tre')) planets=$(Len (Join-Path $client 'mtg_planets.tre')); backup 001=$(Len (Join-Path $bk 'mtg_patch_001.tre')); added=$($st.MtgAdded -join ','); replaced=$($st.MtgReplaced -join ',')" }
+    Check 'PlaceMtg moves the downloads in and keeps the friend''s own version' ($r.Code -eq 0 -and (Len (Join-Path $client 'mtg_patch_001.tre')) -eq 10 -and (Len (Join-Path $client 'mtg_planets.tre')) -eq 20 -and
+        (Len (Join-Path $bk 'mtg_patch_001.tre')) -eq 7 -and @($st.MtgAdded) -contains 'mtg_planets.tre' -and @($st.MtgReplaced) -contains 'mtg_patch_001.tre' -and -not (Test-Path (Join-Path $dl 'mtg_planets.tre')))
+    $r = Run @('-Action', 'Check', '-ClientDir', $client, '-MtgListFile', $list); Check 'Check passes after the download' ($r.Code -eq 0)
+    $script:settings = $plain
+
+    $before = Snapshot $client; $stBefore = Get-Content -Raw (Join-Path $app 'state.json')
+    $r = Run @('-Action', 'Patch', '-ClientDir', $client, '-DryRun')
+    Check 'Patch -DryRun changes nothing' ($r.Code -eq 0 -and (Compare-Object @($before) @(Snapshot $client)) -eq $null -and (Get-Content -Raw (Join-Path $app 'state.json')) -eq $stBefore)
 
     $key = Join-Path $root 'invite.txt'; Set-Content -LiteralPath $key -Value 'tskey-auth-TESTONLY0000-notarealkey' -NoNewline
     $r = Run @('-Action', 'Tailscale', '-KeyFile', $key, '-DryRun')
@@ -59,18 +96,48 @@ try {
     Check 'Patch installs the kit and points the login at the server' ($r.Code -eq 0 -and (Test-Path (Join-Path $client 'local_planets.tre')) -and $login -match "loginServerAddress0=$([regex]::Escape($addr))" -and $login -match 'loginServerPort0=46453')
     Check 'Patch keeps the friend''s own login file' ((Get-Content -Raw (Join-Path $client 'local_planets-patch\backup\friends-installer\swgemu_login.cfg')) -match 'login.swgemu.com')
     $r = Run @('-Action', 'Patch', '-ClientDir', $client); Check 'Patch again is harmless' ($r.Code -eq 0)
-    Check 'state.json records the client folder' ((Get-Content -Raw (Join-Path $app 'state.json') | ConvertFrom-Json).ClientDir -eq $client)
+    $st = Get-Content -Raw (Join-Path $app 'state.json') | ConvertFrom-Json
+    Check 'state.json records the client folder and keeps the MTG record' ($st.ClientDir -eq $client -and @($st.MtgAdded) -contains 'mtg_planets.tre')
 
     $r = Run @('-Action', 'Uninstall')   # client folder from state.json
     $login = [IO.File]::ReadAllText((Join-Path $client 'swgemu_login.cfg'))
     $main = [IO.File]::ReadAllText((Join-Path $client 'swgemu.cfg'))
     Check 'Uninstall restores the login file and the cfg, removes the archive' ($r.Code -eq 0 -and $login -match 'login.swgemu.com' -and $main -notmatch 'local_planets' -and -not (Test-Path (Join-Path $client 'local_planets.tre')))
+    Check 'Uninstall removes the downloaded MTG archive and puts the friend''s own version back' (-not (Test-Path (Join-Path $client 'mtg_planets.tre')) -and (Len (Join-Path $client 'mtg_patch_001.tre')) -eq 7 -and -not (Test-Path (Join-Path $bk 'mtg_patch_001.tre')))
 
     $r = Run @('-Action', 'Detect'); Check "Detect runs ($(($r.Result -split "`r`n")[1]))" ($r.Code -eq 0 -or $r.Code -eq 2)
     if ($ProbeAddress) { $r = Run @('-Action', 'Probe'); Check "Probe $ProbeAddress`:46453 ($(($r.Result -split "`r`n")[1]))" ($r.Code -eq 0) }
     else { $r = Run @('-Action', 'Probe'); Check 'Probe reports no answer from 192.0.2.1 (TEST-NET) without hanging' ($r.Code -eq 7) }
+
+    # mtg-share.py: serves the listed archives and nothing else; refuses to start on a share that doesn't match.
+    $py = (Get-Command python -ErrorAction SilentlyContinue).Source
+    if (-not $py) { Check 'mtg-share.py: python on PATH' $false }
+    else {
+        $shareArgs = @('-I', "`"$(Join-Path $here 'mtg-share.py')`"", '--bind', '127.0.0.1', '--port', $port, '--dir', "`"$share`"", '--manifest', "`"$(Join-Path $kit 'manifest.json')`"")
+        $srv = Start-Process -FilePath $py -ArgumentList $shareArgs -PassThru -NoNewWindow -RedirectStandardOutput (Join-Path $root 'share-out.txt') -RedirectStandardError (Join-Path $root 'share-err.txt')
+        try {
+            $up = $false
+            for ($i = 0; $i -lt 40 -and -not $up; $i++) {
+                try { $c = New-Object Net.Sockets.TcpClient('127.0.0.1', $port); $c.Close(); $up = $true } catch { Start-Sleep -Milliseconds 250 }
+            }
+            Check 'mtg-share.py starts on loopback' $up
+            $got = Join-Path $root 'got.tre'
+            Invoke-WebRequest -Uri "http://127.0.0.1:$port/mtg_planets.tre" -OutFile $got -UseBasicParsing
+            Check 'mtg-share.py serves a listed archive byte for byte' ((Sha $got) -eq $m.requires[1].sha256)
+            $codes = foreach ($p in @('manifest.json', '..%2Fkit%2Fmanifest.json', 'MTG_PLANETS.TRE', '')) {
+                try { (Invoke-WebRequest -Uri "http://127.0.0.1:$port/$p" -UseBasicParsing).StatusCode } catch { [int]$_.Exception.Response.StatusCode }
+            }
+            Check "mtg-share.py refuses everything not on the list ($($codes -join ', '))" (@($codes | Where-Object { $_ -ne 404 }).Count -eq 0)
+        } finally { Stop-Process -Id $srv.Id -Force -ErrorAction SilentlyContinue }
+        [IO.File]::WriteAllBytes((Join-Path $share 'mtg_planets.tre'), [byte[]](1..19))
+        $ErrorActionPreference = 'Continue'   # python's message on stderr is the expected result here
+        $out = & $py -I (Join-Path $here 'mtg-share.py') --bind 127.0.0.1 --port $port --dir $share --manifest (Join-Path $kit 'manifest.json') 2>&1 | Out-String
+        $code = $LASTEXITCODE
+        $ErrorActionPreference = 'Stop'
+        Check 'mtg-share.py refuses to start when a file does not match the kit' ($code -ne 0 -and $out -match 'mtg_planets.tre \(size 19')
+    }
 } finally {
-    Remove-Item -LiteralPath $root -Recurse -Force -ErrorAction SilentlyContinue
+    if ($Keep) { Write-Host "Kept $root" } else { Remove-Item -LiteralPath $root -Recurse -Force -ErrorAction SilentlyContinue }
 }
 if ($script:fails) { Write-Host "$script:fails failed"; exit 1 }
 Write-Host 'all passed'

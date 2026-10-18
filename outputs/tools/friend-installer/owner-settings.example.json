@@ -2,6 +2,7 @@
   "ServerAddress": "<this PC's Tailscale IPv4, 100.x.y.z (owner-setup.ps1 -WriteSettings fills it in)>",
   "LoginPort": 46453,
   "KitDir": "../../../work/client-patch/2026.10.16.1",
-  "MtgHelpUrl": "<where friends get the MTG archives: a page you choose>",
+  "MtgBaseUrl": "<http://100.x.y.z:43480/ for mtg-share.py on this PC (-WriteSettings fills it in), or an https link where the 23 files sit side by side>",
+  "MtgHelpUrl": "<optional: a page about the MTG archives; used only when MtgBaseUrl is empty>",
   "ClientHelpUrl": "https://www.swgemu.com/"
 }

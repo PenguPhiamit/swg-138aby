@@ -1,0 +1,18 @@
+MOD THE GALAXY: CREDITS
+
+The server is built on the Mod The Galaxy (MTG) archives: mtg_patch_001 to mtg_patch_023 and mtg_planets.tre.
+Setup downloads the ones your client is missing from the server Miniverse. They are not our work.
+
+Mod the Galaxy and its community made them: https://modthegalaxy.com
+MTG's server content: https://github.com/ModTheGalaxy/mtgserver
+MTG asks every server that uses its content to give full credit to the creators and not to claim the work as
+its own: https://github.com/ModTheGalaxy/mtgserver/wiki
+
+Contributors and tools credited by the MTG project and community include Lasko, Timbab, Sytner and the SWGEmu
+team, along with everyone who submitted work to MTG.
+
+Nal Hutta (the planet terrain and the Bilbousa layout in these archives) is the Levarrishawk/Darklight public
+version, as shipped by Mod the Galaxy: https://github.com/Levarrishawk/DLSWG5
+
+SWGEmu: https://www.swgemu.com
+Original Star Wars Galaxies game assets belong to their respective rights holders.

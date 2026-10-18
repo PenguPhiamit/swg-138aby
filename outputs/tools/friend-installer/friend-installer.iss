@@ -3,8 +3,9 @@
 ; with a settings file you have not checked: the address in it goes into every copy you hand out.
 ;
 ; What it contains: our own files only (friend-setup.ps1, the client patch kit with local_planets.tre, the
-; server address). No SOE client files, no MTG archives, no Tailscale key, no Tailscale installer (downloaded and
-; signature-checked at install time).
+; server address, MTG-CREDITS.txt). No SOE client files, no Tailscale key, no Tailscale installer (downloaded and
+; signature-checked at install time), no MTG archives: the ones a friend lacks are downloaded from MtgBaseUrl
+; (mtg-share.py on Miniverse, over Tailscale) and checked against the kit manifest's sha256.
 
 #include "build\settings.iss"
 
@@ -31,13 +32,14 @@ SetupLogging=no
 CloseApplications=no
 
 [Messages]
-WelcomeLabel2=This sets up your PC to play on the owner's Star Wars Galaxies test server:%n%n- checks your SWGEmu client and its Mod The Galaxy archives%n- installs Tailscale (a free private network) and joins the owner's network with your invite key%n- adds the server's new planets and the Hutt to your client%n- points your client at the server and adds a desktop shortcut%n%nClose the game before you continue. Nothing from SOE or MTG is inside this installer.
+WelcomeLabel2=This sets up your PC to play on the owner's Star Wars Galaxies test server:%n%n- checks your SWGEmu client%n- installs Tailscale (a free private network) and joins the owner's network with your invite key%n- downloads any Mod The Galaxy archives your client is missing from Miniverse%n- adds the server's new planets and the Hutt to your client%n- points your client at the server and adds a desktop shortcut%n%nClose the game before you continue. The Mod The Galaxy archives are the MTG community's work: see MTG-CREDITS.txt.
 FinishedLabel=Setup has finished.
 
 [Files]
 Source: "friend-setup.ps1"; DestDir: "{app}"; Flags: ignoreversion
 Source: "build\settings.json"; DestDir: "{app}"; Flags: ignoreversion
 Source: "FRIENDS-README.md"; DestDir: "{app}"; DestName: "README.txt"; Flags: ignoreversion isreadme
+Source: "MTG-CREDITS.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#KitDir}\local_planets.tre"; DestDir: "{app}\kit"; Flags: ignoreversion
 Source: "{#KitDir}\manifest.json"; DestDir: "{app}\kit"; Flags: ignoreversion
 Source: "{#KitDir}\Install-ClientPatch.ps1"; DestDir: "{app}\kit"; Flags: ignoreversion
@@ -55,7 +57,9 @@ Type: dirifempty; Name: "{app}"
 var
   ClientPage: TInputDirWizardPage;
   KeyPage: TInputQueryWizardPage;
+  DownloadPage: TDownloadWizardPage;
   ProbeText: String;
+  MtgNeeded: Boolean;
 
 function PowerShell: String;
 begin
@@ -113,6 +117,82 @@ begin
   Result := RemoveBackslashUnlessRoot(ClientPage.Values[0]);
 end;
 
+{ The MTG archives to download, one per line: url, file name, sha256 (tab-separated), written by -Action Check. }
+function MtgListFile: String;
+begin
+  Result := ExpandConstant('{tmp}\mtg-needed.txt');
+end;
+
+{ Cuts S at the first tab: returns the part before it and leaves the rest in S. }
+function NextField(var S: String): String;
+var
+  P: Integer;
+begin
+  P := Pos(#9, S);
+  if P = 0 then
+  begin
+    Result := S;
+    S := '';
+  end
+  else
+  begin
+    Result := Copy(S, 1, P - 1);
+    Delete(S, 1, P);
+  end;
+end;
+
+{ On Install: join the owner's network (Tailscale), then download the MTG archives the client lacks into Setup's temp folder. }
+function JoinAndDownload: Boolean;
+var
+  Kind, Msg, KeyFile, Line, Url, Name: String;
+  Lines: TArrayOfString;
+  I: Integer;
+begin
+  Result := False;
+  DownloadPage.Show;
+  try
+    { The key goes to a file in Setup's private temp folder; the helper reads and deletes it. }
+    DownloadPage.SetText('Installing Tailscale and joining the owner''s network...', 'This can take a minute.');
+    KeyFile := ExpandConstant('{tmp}\invite.txt');
+    if Trim(KeyPage.Values[0]) <> '' then
+      SaveStringToFile(KeyFile, Trim(KeyPage.Values[0]), False);
+    KeyPage.Values[0] := '';
+    if RunHelper(ExpandConstant('{tmp}'), '-Action Tailscale -KeyFile "' + KeyFile + '" ' + TmpArgs, Kind, Msg) <> 0 then
+    begin
+      DeleteFile(KeyFile);
+      MsgBox(Msg, mbError, MB_OK);
+      exit;
+    end;
+    DeleteFile(KeyFile);
+
+    if MtgNeeded and LoadStringsFromFile(MtgListFile, Lines) then
+    begin
+      DownloadPage.Clear;
+      for I := 0 to GetArrayLength(Lines) - 1 do
+      begin
+        Line := Lines[I];
+        Url := NextField(Line);
+        Name := NextField(Line);
+        if (Url <> '') and (Name <> '') then
+          DownloadPage.Add(Url, Name, Trim(Line));
+      end;
+      try
+        DownloadPage.Download;
+      except
+        if DownloadPage.AbortedByUser then
+          MsgBox('Download stopped. Click Install to start it again.', mbInformation, MB_OK)
+        else
+          MsgBox('Downloading ' + DownloadPage.LastBaseNameOrUrl + ' failed: ' + GetExceptionMessage + #13#10#13#10 +
+            'The owner''s PC must be on and sharing the MTG archives. Click Install to try again, or message the owner.', mbError, MB_OK);
+        exit;
+      end;
+    end;
+    Result := True;
+  finally
+    DownloadPage.Hide;
+  end;
+end;
+
 procedure InitializeWizard;
 var
   Kind, Msg: String;
@@ -122,7 +202,8 @@ begin
   ClientPage := CreateInputDirPage(wpWelcome, 'Your SWGEmu client',
     'Where is the folder with SWGEmu.exe in it?',
     'Setup looked for your SWGEmu client. Check the folder below, or click Browse and pick the one that holds SWGEmu.exe.' + #13#10#13#10 +
-    'It must also have the Mod The Galaxy archives (mtg_patch_001 to mtg_patch_023 and mtg_planets.tre). Setup checks them on Next.',
+    'The server also needs the Mod The Galaxy archives (mtg_patch_001 to mtg_patch_023 and mtg_planets.tre) in it. Setup checks them on Next ' +
+    'and downloads any that are missing from the owner''s PC.',
     False, '');
   ClientPage.Add('');
   ClientPage.Values[0] := 'C:\SWGEmu';
@@ -138,18 +219,29 @@ begin
     'The key lets this PC join the owner''s private Tailscale network, the only way to reach the server. It starts with tskey- and works once.' + #13#10#13#10 +
     'Setup uses it once and does not keep it. If this PC is already on the owner''s network, leave it empty.');
   KeyPage.Add('Invite key:', True);
+
+  DownloadPage := CreateDownloadPage('Joining the owner''s network',
+    'Setup joins the owner''s private network, then downloads the Mod The Galaxy archives your client is missing from the owner''s PC.', nil);
+  DownloadPage.ShowBaseNameInsteadOfUrl := True;
 end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;
 var
   Kind, Msg, Key: String;
+  Code: Integer;
 begin
   Result := True;
   if CurPageID = ClientPage.ID then
   begin
     WizardForm.NextButton.Enabled := False;
     try
-      if RunHelper(ExpandConstant('{tmp}'), '-Action Check -ClientDir "' + GetClientDir('') + '" ' + TmpArgs, Kind, Msg) <> 0 then
+      DeleteFile(MtgListFile);
+      Code := RunHelper(ExpandConstant('{tmp}'), '-Action Check -ClientDir "' + GetClientDir('') + '" -MtgListFile "' + MtgListFile + '" ' + TmpArgs, Kind, Msg);
+      { 4: archives to download after joining the network; the helper wrote the list. }
+      MtgNeeded := Code = 4;
+      if Code = 4 then
+        MsgBox(Msg, mbInformation, MB_OK)
+      else if Code <> 0 then
       begin
         MsgBox(Msg, mbError, MB_OK);
         Result := False;
@@ -158,6 +250,8 @@ begin
       WizardForm.NextButton.Enabled := True;
     end;
   end
+  else if CurPageID = wpReady then
+    Result := JoinAndDownload
   else if CurPageID = KeyPage.ID then
   begin
     Key := Trim(KeyPage.Values[0]);
@@ -179,22 +273,19 @@ end;
 
 function PrepareToInstall(var NeedsRestart: Boolean): String;
 var
-  Kind, Msg, KeyFile: String;
+  Kind, Msg: String;
 begin
   Result := '';
-  { Tailscale first: the key goes to a file in Setup's private temp folder; the helper reads and deletes it. }
-  WizardForm.PreparingLabel.Caption := 'Installing Tailscale and joining the owner''s network...';
-  KeyFile := ExpandConstant('{tmp}\invite.txt');
-  if Trim(KeyPage.Values[0]) <> '' then
-    SaveStringToFile(KeyFile, Trim(KeyPage.Values[0]), False);
-  KeyPage.Values[0] := '';
-  if RunHelper(ExpandConstant('{tmp}'), '-Action Tailscale -KeyFile "' + KeyFile + '" ' + TmpArgs, Kind, Msg) <> 0 then
+  { Tailscale and the MTG download already ran on the Ready page (JoinAndDownload). }
+  if MtgNeeded then
   begin
-    DeleteFile(KeyFile);
-    Result := Msg;
-    exit;
+    WizardForm.PreparingLabel.Caption := 'Moving the Mod The Galaxy archives into your client...';
+    if RunHelper(ExpandConstant('{tmp}'), '-Action PlaceMtg -ClientDir "' + GetClientDir('') + '" -From "' + ExpandConstant('{tmp}') + '" ' + TmpArgs, Kind, Msg) <> 0 then
+    begin
+      Result := Msg;
+      exit;
+    end;
   end;
-  DeleteFile(KeyFile);
 
   ExtractTemporaryFile('local_planets.tre');
   WizardForm.PreparingLabel.Caption := 'Adding the server''s planets to your client...';
@@ -232,7 +323,7 @@ begin
   { Put the client back first; stop if the game is running, so nothing is half removed. }
   Result := True;
   App := ExpandConstant('{app}');
-  Exec(PowerShell, '-NoProfile -ExecutionPolicy Bypass -File "' + App + 'riend-setup.ps1" -Action Uninstall', App, SW_HIDE, ewWaitUntilTerminated, Code);
+  Exec(PowerShell, '-NoProfile -ExecutionPolicy Bypass -File "' + App + '\friend-setup.ps1" -Action Uninstall', App, SW_HIDE, ewWaitUntilTerminated, Code);
   if Code = 5 then
   begin
     MsgBox('The game is running. Close it, then uninstall again.', mbError, MB_OK);
@@ -249,7 +340,7 @@ var
 begin
   if (CurUninstallStep <> usUninstall) or UninstallSilent then exit;
   App := ExpandConstant('{app}');
-  Args := '-NoProfile -ExecutionPolicy Bypass -File "' + App + 'riend-setup.ps1" ';
+  Args := '-NoProfile -ExecutionPolicy Bypass -File "' + App + '\friend-setup.ps1" ';
   Choice := TaskDialogMsgBox('Tailscale',
     'Setup installed or used Tailscale to reach the owner''s server. What should happen to it?',
     mbConfirmation, MB_YESNOCANCEL, ['Keep Tailscale as it is', 'Log out of the owner''s network', 'Remove Tailscale from this PC'], 0);

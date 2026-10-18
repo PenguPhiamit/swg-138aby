@@ -1,40 +1,45 @@
 # Friends installer: the owner's guide
 
 `SWG-Friends-Setup-<version>.exe` lets 2-3 trusted friends play on the **test galaxy** over Tailscale (a free
-private network), with no port forwarding. It carries only our files (the client patch kit, our scripts and the
-server address). No SOE client files, no MTG archives, no Tailscale key, no Tailscale installer: the friend's PC
-downloads Tailscale from `pkgs.tailscale.com` and checks it is signed by Tailscale Inc. before installing it.
+private network), with no port forwarding. It carries only our files (the client patch kit, our scripts, the
+server address and MTG-CREDITS.txt). No SOE client files, no Tailscale key, no Tailscale installer: the friend's
+PC downloads Tailscale from `pkgs.tailscale.com` and checks it is signed by Tailscale Inc. before installing it.
+No MTG archives either: Setup downloads the ones a friend lacks from `MtgBaseUrl` (for now `mtg-share.py` on this
+PC, over Tailscale) and checks each against the kit manifest's sha256.
 
 | File | What it is |
 | --- | --- |
-| `friend-installer.iss` | Inno Setup script: pages, uninstaller, shortcut |
-| `friend-setup.ps1` | the worker the installer runs (checks, Tailscale, patch, login, probe, uninstall); `-DryRun` |
+| `friend-installer.iss` | Inno Setup script: pages, the download page, uninstaller, shortcut |
+| `friend-setup.ps1` | the worker the installer runs (checks, Tailscale, MTG placing, patch, login, probe, uninstall); `-DryRun` |
 | `build.ps1` | checks the kit and settings, writes `build\`, compiles; `-DryRun` skips the compile |
 | `owner-setup.ps1` | your side: Tailscale on this PC, firewall rules, the ACL, `owner-settings.json`; `-DryRun` |
-| `test-friend-setup.ps1` | offline test on a dummy client (`-ProbeAddress 192.168.1.210` also pings the login port) |
+| `mtg-share.py`, `Share MTG files.cmd` | shares the 23 MTG archives with friends' Setup, Tailscale addresses only, port 43480 |
+| `MTG-CREDITS.txt` | credits for the MTG archives; installed next to the friend's README |
+| `test-friend-setup.ps1` | offline test on a dummy client and a loopback share (`-ProbeAddress <ip>` also pings the login port) |
 | `owner-settings.example.json` | copy to `owner-settings.json` (gitignored) |
 | `FRIENDS-README.md` | the friends' one page (also installed as `README.txt`) |
 
 ## Your one-time steps
 
-1. **Tailscale on this PC.** PowerShell as administrator, in this folder:
-   `.\owner-setup.ps1 -InstallTailscale`, then sign in with your own account in the browser.
-   In the admin console (https://login.tailscale.com/admin/machines) open this PC and **disable key expiry**,
-   otherwise friends lose the server when this PC's key expires.
-2. **Firewall.** `.\owner-setup.ps1 -Firewall` (administrator). It allows UDP 46453, 46462, 46463 in, only from
-   Tailscale addresses (100.64.0.0/10), in both the WSL Hyper-V firewall and Windows Defender.
+1. **Tailscale on this PC.** Done 18 Oct: this PC is `[tailnet address removed]`, key expiry off.
+   (PowerShell as administrator, in this folder: `.\owner-setup.ps1 -InstallTailscale`, then sign in; then in the
+   admin console, https://login.tailscale.com/admin/machines, disable key expiry for this PC.)
+2. **Firewall.** `.\owner-setup.ps1 -Firewall` (administrator). It allows UDP 46453, 46462, 46463 (the test
+   galaxy, in both the WSL Hyper-V firewall and Windows Defender) and TCP 43480 (the MTG share, Windows Defender)
+   in, only from Tailscale addresses (100.64.0.0/10). Run it again after an update: it replaces its own rules.
    `-RemoveFirewall` takes them out.
 3. **ACL.** `.\owner-setup.ps1 -ShowAcl` prints a policy with this PC's address filled in. Paste it at
-   https://login.tailscale.com/admin/acls (save a copy of the old policy first). Friends tagged `tag:swg-friend`
-   reach only the test galaxy's login (46453), ping (46462) and zone (46463) ports, UDP. Not Ollama (11434), the
-   live map (8765), ComfyUI (8188), ORB (46419), status (46455), MariaDB or SSH; the policy's `tests` block fails
-   the save if any of those opens. Your own devices keep reaching each other.
-4. **Settings.** `.\owner-setup.ps1 -WriteSettings` writes `owner-settings.json` with this PC's tailnet IPv4.
-   Open it and set `MtgHelpUrl` to the page you want friends sent to for the MTG archives (check MTG's terms).
-   Using the IP rather than the MagicDNS name keeps the tailnet name out of the installer.
-5. **Inno Setup 6** (free, https://jrsoftware.org/isdl.php), then `.\build.ps1`. The result is
-   `build\out\SWG-Friends-Setup-<version>.exe` (gitignored). Before sending it, check the server's
-   `local_planets.tre` matches the kit (`client-patch-for-friends.md`, check-server).
+   https://login.tailscale.com/admin/acls (JSON editor; delete the comment lines at the top if the paste splits
+   one). Friends tagged `tag:swg-friend` reach only the test galaxy's login (46453), ping (46462) and zone (46463)
+   ports over UDP, and the MTG share (43480) over TCP. Not Ollama (11434), the live map (8765), ComfyUI (8188),
+   ORB (46419), status (46455), MariaDB or SSH; the policy's `tests` block fails the save if any of those opens.
+   Your own devices keep reaching each other.
+4. **Settings.** `.\owner-setup.ps1 -WriteSettings` writes `owner-settings.json` with this PC's tailnet IPv4 and
+   `MtgBaseUrl` `http://<that IPv4>:43480/`. Using the IP rather than the MagicDNS name keeps the tailnet name out
+   of the installer.
+5. **Build.** `.\build.ps1` (Inno Setup 6 is installed). The result is `build\out\SWG-Friends-Setup-<version>.exe`
+   (gitignored). Before sending it, check the server's `local_planets.tre` matches the kit
+   (`client-patch-for-friends.md`, check-server).
 6. **The galaxy address** (the lock holder does this, see below). Without it a friend logs in and then hangs at
    the galaxy list or the zone connection.
 7. **Run `.\owner-setup.ps1`** (no switches). Every line should say ok.
@@ -45,11 +50,33 @@ downloads Tailscale from `pkgs.tailscale.com` and checks it is signed by Tailsca
    **Reusable off** (one-time), **Ephemeral off** (the friend keeps the device), **Pre-approved on** (if device
    approval is on), **Tags: `tag:swg-friend`**, expiry 1-7 days. Send the key in a private message, separately
    from the installer, and don't paste it anywhere else. A tagged device has no key expiry of its own.
-2. Send them `SWG-Friends-Setup-<version>.exe` and tell them where to get the MTG archives.
-3. Their account: they log in once with a username they choose (AutoReg makes it at level 0). Staff rights, if
+2. **Share the MTG archives while they install**: double-click `Share MTG files.cmd` and leave its window open.
+   It checks the 23 files against the kit, then lists each download as it finishes. A friend with no MTG
+   archives pulls 4.7 GB from your upload: about 35 minutes at 20 Mbps up, 70 at 10. Close the window afterwards.
+3. Send them `SWG-Friends-Setup-<version>.exe`.
+4. Their account: they log in once with a username they choose (AutoReg makes it at level 0). Staff rights, if
    any, follow `Documentation-support/remote-access-and-second-owner.md` section 5.2.
-4. **Removing a friend**: delete their device in the Tailscale admin console. The installer cannot reach anything
+5. **Removing a friend**: delete their device in the Tailscale admin console. The installer cannot reach anything
    after that.
+
+## The MTG archives: where they come from, and moving them later
+
+- The share serves `outputs/Community-content/MTG-assets` (gitignored): Mod the Galaxy's 23 archives, downloaded
+  13 Oct from a public Google Drive folder recorded as MTG's (`work/download_mtg_assets.py`). They match the kit
+  manifest byte for byte (`mtg-share.py --verify`, 18 Oct).
+- **Terms (checked 18 Oct):** MTG's site terms say nothing on re-hosting or bundling. MTG's one stated condition
+  for using its content is full credit to the creators and not claiming the work
+  (https://github.com/ModTheGalaxy/mtgserver/wiki). Precedent: Infinity's launcher downloaded 22 MTG archives from
+  Dropbox links, Flurry hosts them on its own site, and MTG's own Relics of Corbantis launcher downloads the whole
+  SWGEmu client. No public server fork hosts the .tre files on GitHub itself. Not checked: MTG's login-only forum
+  threads and Discord. Keep `MTG-CREDITS.txt` with every build.
+- **Moving to Cloudflare R2 later** (free: 10 GB storage a month, downloads free; it charges only past 10 GB
+  stored or millions of requests; the r2.dev link is rate-limited and meant for development, so connect a domain
+  if many friends join): upload the 23 files side by side into a bucket, put its https link in `MtgBaseUrl`, rebuild.
+  The TCP 43480 ACL line and firewall rule can then go. Backblaze B2 also works (10 GB free; downloads free up to
+  3x what is stored, about 3 full friend installs a month, then $0.01/GB).
+- Why 43480: in mirrored mode WSL reserves 44620-48715 for Linux's own outgoing ports, and Windows cannot listen
+  inside that range.
 
 ## For the lock holder: the galaxy address (not applied)
 
@@ -64,24 +91,24 @@ wsl -d Debian -u root --exec mariadb swgemu_test --execute "UPDATE galaxy SET ad
   start** (`hostname -I`), so it has to be redone after each start, or test_galaxy.py gets a private override
   file (for example `/opt/swg/agent/galaxy-address`, outside git) that a reviewed change reads.
 - **Everyone else is then told to use the tailnet address too**: the owner's client and the bots (core3client
-  follows the row). Windows reaches its own tailnet address locally while Tailscale runs; whether WSL's bots do
-  under mirrored networking is untested (`owner-setup.ps1` shows whether WSL lists the address). Test before a
-  friend's window: one bot login and one owner login after the UPDATE. If bots fail, put `192.168.1.210` back
-  between windows.
+  follows the row). WSL lists the tailnet address under mirrored networking (`owner-setup.ps1`, 18 Oct), but
+  nobody has logged in through it yet. Test before a friend's window: one bot login and one owner login after the
+  UPDATE. If bots fail, put `192.168.1.210` back between windows.
 - If Tailscale stops on this PC, nobody gets past the galaxy list until it is back or the row is changed back.
 - Live (44453/44463) stays LAN-only. Opening it means new firewall ports, a new ACL line and the owner's OK.
 
-## What was tested (17 Oct)
+## What was tested
 
-- `test-friend-setup.ps1`: all 14 checks pass on a dummy client with the real kit scripts: wrong folder, missing
-  and wrong-size MTG archive, dry runs change nothing, the key file is deleted and the key never printed, patch,
-  re-patch, uninstall restoring the friend's own files, and a real probe of the test login port
-  (192.168.1.210:46453 answered).
-- `build.ps1 -DryRun` and `owner-setup.ps1 -DryRun -ShowAcl -Firewall` run clean.
-- Inno Setup 6.7.3 installed (owner's OK, 17 Oct; winget, per-user in `%LOCALAPPDATA%\Programs\Inno Setup 6`). `build.ps1`
-  compiled a 6.5 MB `SWG-Friends-Setup-2026.10.16.1.exe` with a **placeholder address (100.100.100.100)**: don't
-  send that one. Rebuild after step 4.
-- **Not tested**: the Tailscale download, install and `tailscale up` (needs a real key), the firewall rules, the
-  ACL in the admin console, a friend logging in over Tailscale, the uninstaller's Tailscale choices, and the
-  compiled installer's pages (running it needs administrator rights and would install Tailscale, so it has not been
-  run on this PC).
+- 17 Oct: `test-friend-setup.ps1` (14 checks then), `build.ps1 -DryRun`, `owner-setup.ps1 -DryRun -ShowAcl
+  -Firewall`; Inno Setup 6.7.3 installed (owner's OK; winget, per-user in `%LOCALAPPDATA%\Programs\Inno Setup 6`).
+- 18 Oct: Tailscale installed and signed in on this PC, and the UDP firewall rules added (owner, as
+  administrator). `test-friend-setup.ps1`: all 24 checks pass, including the MTG list (links and sha256),
+  placing downloads with the friend's own version kept, an incomplete download changing nothing, uninstall
+  removing what Setup added and restoring the friend's files, and `mtg-share.py` on loopback (serves listed files
+  byte for byte, 404 for anything else, refuses to start on a mismatched file). `mtg-share.py --verify` on the
+  real archives, then `mtg_patch_021.tre` fetched from `http://[tailnet address removed]:43480/` on this PC (sha256 matches)
+  and `manifest.json` refused (404). `build.ps1` compiled `SWG-Friends-Setup-2026.10.16.1.exe` (6.5 MB) with the
+  real address and the download step.
+- **Not tested**: Setup.exe's pages and download page on a real friend PC; the TCP 43480 firewall rule and the new
+  ACL from another device; a friend joining with a real key; a login over Tailscale (the test galaxy was off on
+  18 Oct morning); the uninstaller's Tailscale choices.

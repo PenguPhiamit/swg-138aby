@@ -6,25 +6,33 @@
   One action per run:
     Detect           print SWGEmu client folders found on this PC, best first
     Check            is -ClientDir a SWGEmu client with every MTG archive the server needs? (changes nothing)
+                     With MtgBaseUrl in settings.json, missing archives are listed in -MtgListFile for Setup to
+                     download (exit 4) instead of stopping Setup.
+    PlaceMtg         move the archives Setup downloaded (in -From) into the client; a friend's own different
+                     version goes to local_planets-patch\backup\friends-installer\mtg first
     Tailscale        install Tailscale if missing (signed download from pkgs.tailscale.com) and join the owner's
                      network with the invite key in -KeyFile (the file is deleted as soon as it is read)
     Patch            install the client patch (the C57 kit's Install-ClientPatch.ps1) and point the login at the server
     Probe            does the server's login port answer? (one UDP session request, read-only)
     Play             put the login and patch lines back if the SWGEmu launcher reset them, then start the game
-    Uninstall        take the patch and the login change out again and restore the friend's own files
+    Uninstall        take the patch, the login change and the MTG archives Setup added out again, and restore
+                     the friend's own files
     TailscaleLogout  log this PC out of Tailscale
     TailscaleRemove  uninstall Tailscale
   -DryRun prints what would change and changes nothing (no download, no install, no file written in the client).
   -ResultFile gets "OK", "WARN" or "ERR" on the first line and a message for the friend after it.
   The invite key is never printed, logged, kept or written anywhere except the -KeyFile the installer made.
-  Exit codes: 0 done, 1 error, 2 not a client folder, 3 missing archives, 5 client running, 7 no answer.
+  Exit codes: 0 done, 1 error, 2 not a client folder, 3 missing archives, 4 archives to download, 5 client running,
+  6 not enough disk space, 7 no answer.
 #>
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('Detect', 'Check', 'Tailscale', 'Patch', 'Probe', 'Play', 'Uninstall', 'TailscaleLogout', 'TailscaleRemove')]
+    [ValidateSet('Detect', 'Check', 'Tailscale', 'PlaceMtg', 'Patch', 'Probe', 'Play', 'Uninstall', 'TailscaleLogout', 'TailscaleRemove')]
     [string]$Action,
     [string]$ClientDir,
     [string]$KeyFile,
+    [string]$MtgListFile,
+    [string]$From,
     [string]$SettingsFile = (Join-Path $PSScriptRoot 'settings.json'),
     [string]$KitDir = (Join-Path $PSScriptRoot 'kit'),
     [string]$StateFile = (Join-Path $PSScriptRoot 'state.json'),
@@ -118,15 +126,38 @@ function Find-Clients {
     # Best first: a folder that already has every file the checks need.
     return @($seen | Sort-Object { (Test-ClientShape $_).Count })
 }
-function Get-MissingArchives($dir) {
+function Get-MtgNeeds($dir) {
+    # The MTG archives the kit requires that the client lacks, or has in another size (another version).
     $m = Read-Json (Join-Path $KitDir 'manifest.json')
-    $bad = @()
+    $need = @()
     foreach ($r in $m.requires) {
         $p = Join-Path $dir $r.file
-        if (-not (Test-Path -LiteralPath $p)) { $bad += "$($r.file) (missing)"; continue }
-        if ((Get-Item -LiteralPath $p).Length -ne [long]$r.size) { $bad += "$($r.file) (a different version)" }
+        $why = $null
+        if (-not (Test-Path -LiteralPath $p)) { $why = 'missing' }
+        elseif ((Get-Item -LiteralPath $p).Length -ne [long]$r.size) { $why = 'a different version' }
+        if ($why) { $need += [pscustomobject]@{ File = [string]$r.file; Size = [long]$r.size; Sha256 = [string]$r.sha256; Why = $why } }
     }
-    return $bad
+    return $need
+}
+function Get-MtgSizes {
+    $sizes = @{}
+    foreach ($r in (Read-Json (Join-Path $KitDir 'manifest.json')).requires) { $sizes[[string]$r.file] = [long]$r.size }
+    return $sizes
+}
+function Format-GB([long]$bytes) { return '{0:N1} GB' -f ($bytes / 1GB) }
+function Test-Room([long]$bytes) {
+    # Setup downloads into its temp folder, then moves the files into the client: across drives that is a copy.
+    $need = @{}
+    $tmpRoot = [IO.Path]::GetPathRoot([IO.Path]::GetFullPath($env:TEMP))
+    $need[$tmpRoot] = $bytes
+    $cliRoot = [IO.Path]::GetPathRoot($ClientDir)
+    if ($cliRoot -ne $tmpRoot) { $need[$cliRoot] = $bytes }
+    foreach ($root in $need.Keys) {
+        try { $free = (New-Object IO.DriveInfo($root)).AvailableFreeSpace } catch { continue }
+        $want = $need[$root] + 1GB
+        if ($free -lt $want) { return "Not enough free space on $root for the MTG download: it needs $(Format-GB $want), and $(Format-GB $free) is free." }
+    }
+    return $null
 }
 function Invoke-Check {
     Resolve-ClientDir
@@ -136,13 +167,76 @@ function Invoke-Check {
         Finish 'ERR' ("$ClientDir is not a SWGEmu client folder (missing: $($missing -join ', ')).`r`n`r`n" +
             "Pick the folder that holds SWGEmu.exe. If you don't have SWGEmu yet, install it first: $($s.ClientHelpUrl)") 2
     }
-    $bad = Get-MissingArchives $ClientDir
-    if ($bad.Count -gt 0) {
-        Finish 'ERR' ("Your client is missing the Mod The Galaxy (MTG) archives our server is built on:`r`n  " + ($bad -join "`r`n  ") +
-            "`r`n`r`nThey are not part of this installer. Get them here: $($s.MtgHelpUrl)`r`nCopy them into $ClientDir and run Setup again.") 3
-    }
     if (Test-ClientRunning $ClientDir) { Finish 'ERR' 'The game (or its launcher) is running. Close it and click Next again.' 5 }
+    $need = @(Get-MtgNeeds $ClientDir)
+    if ($need.Count -gt 0) {
+        $list = ($need | ForEach-Object { "$($_.File) ($($_.Why))" }) -join "`r`n  "
+        if (-not $s.MtgBaseUrl) {
+            Finish 'ERR' ("Your client is missing the Mod The Galaxy (MTG) archives our server is built on:`r`n  " + $list +
+                "`r`n`r`nGet them here: $($s.MtgHelpUrl)`r`nCopy them into $ClientDir and run Setup again.") 3
+        }
+        $bytes = [long]($need | Measure-Object -Property Size -Sum).Sum
+        $short = Test-Room $bytes
+        if ($short) { Finish 'ERR' $short 6 }
+        if ($MtgListFile) {
+            # One line per file for Setup's download page: url, file name, sha256 (Setup checks it), tab-separated.
+            $base = ([string]$s.MtgBaseUrl).TrimEnd('/')
+            $lines = $need | ForEach-Object { "$base/$([Uri]::EscapeDataString($_.File))`t$($_.File)`t$($_.Sha256)" }
+            [IO.File]::WriteAllText($MtgListFile, (($lines -join "`r`n") + "`r`n"), [Text.Encoding]::ASCII)
+        }
+        $own = ''
+        if (@($need | Where-Object { $_.Why -ne 'missing' }).Count -gt 0) {
+            $own = "`r`n`r`nYour own copies of the files marked 'a different version' are kept in $ClientDir\local_planets-patch\backup and go back when you uninstall."
+        }
+        Finish 'WARN' ("Your client needs $($need.Count) of the Mod The Galaxy (MTG) archives the server is built on ($(Format-GB $bytes)):`r`n  " + $list +
+            "`r`n`r`nSetup downloads them from Miniverse after it joins the owner's network. Miniverse must be on and sharing them; " +
+            "depending on the owner's upload speed this can take up to an hour or two." + $own) 4
+    }
     Finish 'OK' "$ClientDir has everything the server needs." 0
+}
+function Invoke-PlaceMtg {
+    Resolve-ClientDir
+    if (Test-ClientRunning $ClientDir) { Finish 'ERR' 'The game (or its launcher) is running. Close it, then click Install again.' 5 }
+    if (-not $From -or -not (Test-Path -LiteralPath $From -PathType Container)) { Finish 'ERR' 'No download folder given.' 1 }
+    $state = Get-State
+    $added = @($state.MtgAdded | Where-Object { $_ })
+    $replaced = @($state.MtgReplaced | Where-Object { $_ })
+    $backup = Join-Path $ClientDir 'local_planets-patch\backup\friends-installer\mtg'
+    $need = @(Get-MtgNeeds $ClientDir)
+    # Every download first, so a missing one changes nothing in the client.
+    foreach ($n in $need) {
+        $src = Join-Path $From $n.File
+        if (-not (Test-Path -LiteralPath $src) -or (Get-Item -LiteralPath $src).Length -ne $n.Size) {
+            Finish 'ERR' "The download of $($n.File) is missing or incomplete. Run Setup again." 1
+        }
+    }
+    if ($DryRun) {
+        foreach ($n in $need) { Would "move the downloaded $($n.File) into $ClientDir$(if ($n.Why -ne 'missing') { ', after saving your own copy to ' + $backup })" }
+        Finish 'OK' 'Dry run: MTG archives checked.' 0
+    }
+    $placed = 0
+    try {
+        foreach ($n in $need) {
+            $dest = Join-Path $ClientDir $n.File
+            if (Test-Path -LiteralPath $dest) {
+                # The friend's own, different version: keep it for the uninstaller (once; a later copy is not theirs).
+                New-Item -ItemType Directory -Force -Path $backup | Out-Null
+                $saved = Join-Path $backup $n.File
+                if (Test-Path -LiteralPath $saved) { Remove-Item -LiteralPath $dest -Force }
+                else { Move-Item -LiteralPath $dest -Destination $saved }
+                if ($replaced -notcontains $n.File) { $replaced += $n.File }
+            } elseif ($added -notcontains $n.File -and $replaced -notcontains $n.File) { $added += $n.File }
+            Move-Item -LiteralPath (Join-Path $From $n.File) -Destination $dest
+            $placed++
+        }
+    } finally {
+        # Recorded even if a move fails part way, so the uninstaller still knows what to undo.
+        Set-StateValue $state 'ClientDir' $ClientDir
+        Set-StateValue $state 'MtgAdded' ([string[]]$added)
+        Set-StateValue $state 'MtgReplaced' ([string[]]$replaced)
+        Save-State $state
+    }
+    Finish 'OK' "Placed $placed MTG archives in $ClientDir." 0
 }
 
 # --- Tailscale -----------------------------------------------------------------------------------------
@@ -347,6 +441,26 @@ function Invoke-Uninstall {
         elseif (Test-Path -LiteralPath $saved) { Copy-Item -LiteralPath $saved -Destination $path -Force; $msgs += 'Restored your own swgemu_login.cfg.' }
         else { Remove-Item -LiteralPath $path; $msgs += 'Removed the login file the installer wrote (there was none before).' }
     }
+    # MTG archives: remove the ones Setup added (only if still the size it downloaded), put the friend's own back.
+    $sizes = Get-MtgSizes
+    $gone = 0; $back = 0
+    foreach ($f in @($state.MtgAdded | Where-Object { $_ })) {
+        $p = Join-Path $ClientDir $f
+        if ((Test-Path -LiteralPath $p) -and (Get-Item -LiteralPath $p).Length -eq $sizes[$f]) {
+            if ($DryRun) { Would "remove $f (Setup downloaded it)" } else { Remove-Item -LiteralPath $p -Force }
+            $gone++
+        }
+    }
+    $backup = Join-Path $ClientDir 'local_planets-patch\backup\friends-installer\mtg'
+    foreach ($f in @($state.MtgReplaced | Where-Object { $_ })) {
+        $saved = Join-Path $backup $f
+        if (Test-Path -LiteralPath $saved) {
+            if ($DryRun) { Would "put back your own $f" } else { Move-Item -LiteralPath $saved -Destination (Join-Path $ClientDir $f) -Force }
+            $back++
+        }
+    }
+    if ($gone) { $msgs += "Removed $gone MTG archives Setup had downloaded." }
+    if ($back) { $msgs += "Put back your own copies of $back MTG archives." }
     Finish 'OK' ($msgs -join "`r`n") 0
 }
 function Invoke-Play {
@@ -377,6 +491,7 @@ switch ($Action) {
     }
     'Check' { Invoke-Check }
     'Tailscale' { Invoke-Tailscale }
+    'PlaceMtg' { Invoke-PlaceMtg }
     'Patch' { Invoke-Patch }
     'Probe' { Invoke-Probe }
     'Play' { Invoke-Play }
