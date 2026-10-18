@@ -44,7 +44,8 @@ def owner_client():
 
 def ask(base, model, ctx, instruction, text, timeout=180):
     body = {'model': model, 'stream': False, 'format': 'json', 'think': False, 'keep_alive': '10m',
-            'options': {'temperature': 0, 'num_ctx': ctx, 'num_predict': 1536},
+            # 4096 (was 1536) since 18 Oct: a 20-item item-check answer ran past 1536 tokens and was cut off mid-JSON
+            'options': {'temperature': 0, 'num_ctx': ctx, 'num_predict': 4096},
             'messages': [{'role': 'system', 'content': instruction}, {'role': 'user', 'content': text}]}
     request = urllib.request.Request(ollama_url.api('/api/chat', base), json.dumps(body).encode(),
                                      {'Content-Type': 'application/json'})
