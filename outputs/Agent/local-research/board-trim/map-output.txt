@@ -1,0 +1,3 @@
+board-trim: 0 lines in 0 chunks
+0 of 0 chunks asked (0 done before), 0 errors, 0.0 min
+board-trim: 0 items in report.md

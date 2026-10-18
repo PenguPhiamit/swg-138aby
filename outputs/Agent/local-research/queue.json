@@ -1463,6 +1463,50 @@
    "model_before_here": "qwen3.6:35b-a3b",
    "tries": 2,
    "reviewed": "Claude, 18 Oct 2:53 AM: the 29 wrong-way/pre-cu-missing flags all have a way in their own input (theme-park, Bestine, faction perks, space loot, Dim-U); Saluki's 540 \"fine\" fit the sample; the later-era group was not checked"
+  },
+  {
+   "id": "board-trim",
+   "title": "Board trim: one line per log entry older than two days",
+   "kind": "map",
+   "job": "board-trim",
+   "model": "saluki",
+   "status": "done",
+   "added_by": "Claude, 18 Oct 8:50 AM (owner: \"start a job list for each model\"; housekeeping)",
+   "review_by": "Claude",
+   "note_here": "This PC with saluki: Claude checks the lines, then moves the entries to SWG-handoff-archive.md.",
+   "started": "2026-10-18 08:31",
+   "minutes": 0,
+   "tries": 1,
+   "finished": "2026-10-18 08:31",
+   "reviewed": "Claude, 18 Oct 9:10 AM: nothing to trim (GPT moved the log entries older than two days at 7:32 AM); Claude moved the answered questions, finished task rows and 13-14 Oct instructions to the archive by hand (board 80 KB -> 25 KB)."
+  },
+  {
+   "id": "log-triage",
+   "title": "Log triage: the test galaxy since its 6 AM start",
+   "kind": "map",
+   "job": "log-triage",
+   "log": "test",
+   "model": "saluki",
+   "status": "done",
+   "added_by": "Claude, 18 Oct 8:50 AM (owner: \"start a job list for each model\"; housekeeping)",
+   "review_by": "Claude",
+   "note_here": "This PC with saluki; the galaxy the owner played on 18 Oct from 7:30 AM (Hoth H1-H4 on the board).",
+   "started": "2026-10-18 08:31",
+   "minutes": 3,
+   "tries": 1,
+   "finished": "2026-10-18 08:34",
+   "reviewed": "Claude, 18 Oct 9:10 AM: the one crash-risk row (handleNetStatusRequest, 11x) is the bots' known net-status packet, caught by the server; the six new rows are stock template-type warnings and optional custom_scripts files. The 200 known rows were not read one by one. No spawn errors, so nothing explains H1 (Echo Base). The five confirmed patterns went into tools/agents/local/log-known.txt."
+  },
+  {
+   "id": "scenario-draft",
+   "title": "First-draft bot scenarios for the open areas of test plan section 3",
+   "kind": "map",
+   "job": "scenario-draft",
+   "model": "qwen3.6:35b-a3b",
+   "status": "open",
+   "added_by": "Claude, 18 Oct 8:50 AM (owner: \"start a job list for each model\"; housekeeping)",
+   "review_by": "Claude",
+   "note": "For Microverse; nothing starts while Agent/local-research/STOP exists, and the owner starts runs there. Drafts go to drafts/, never into tools/bots/scenarios."
   }
  ]
 }

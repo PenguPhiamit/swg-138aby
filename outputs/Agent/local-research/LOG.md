@@ -112,3 +112,5 @@
 - 2026-10-18 03:11 queue finished on the friend's PC: paused (Agent/local-research/STOP)
 - 2026-10-18 06:25 bounty-offers-saluki (run 2, friend's PC, saluki 32K, by hand): report written (23409 bytes), 22 min, 7 files; one 16K-token thinking reply, then the reminder with thinking off wrote it. Right answer (out of the 6 m range) from the code alone; qwen3.6 wrote nothing on the same question
 - 2026-10-18 06:40 local_agent.py: replies stream and thinking is cut at 20,000 characters (owner: "make sure saluki doesnt keep looping again"); a report given as plain text is saved as report.md. Tested on this PC with the cap forced to 300: cut, reminded, report written in 25 s
+- 2026-10-18 08:31 board-trim (board-trim): report written (board-trim: 0 items in report.md), 0 min
+- 2026-10-18 08:34 log-triage (log-triage): report written (log-triage: 207 items in report.md), 3 min

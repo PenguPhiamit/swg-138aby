@@ -1,0 +1,5 @@
+handleNetStatusRequest	the core3client bots send net-status packets the server can't parse; the server catches the exception (C41, dropped 18 Oct; the session watch filters it too)
+could not open lua derv:	stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)
+ERROR cannot open scripts/object/	stock: the missing Lua base scripts behind the line above
+expecting SHOT got	stock: a client file of another template type (ship, static, resource container) read as a shared object template
+scripts/custom_scripts/	optional local override scripts Core3 looks for; this project has none

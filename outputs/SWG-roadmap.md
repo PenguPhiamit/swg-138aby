@@ -1,6 +1,6 @@
 # SWG sandbox roadmap
 
-Private, single-owner pre-CU galaxy (SWGEmu Core3 on WSL Debian). Last updated 18 October 2026, 2:00 AM PDT, by Claude ("Where we are, 18 Oct" below the route). Whoever picks this up (you, Claude or ChatGPT) should update the checkboxes as work lands.
+Private, single-owner pre-CU galaxy (SWGEmu Core3 on WSL Debian). Last updated 18 October 2026, 9:00 AM PDT, by Claude ("Where we are, 18 Oct" below the route; the job list for each worker is `Agent/job-lists.md`). Whoever picks this up (you, Claude or ChatGPT) should update the checkboxes as work lands.
 
 **Who does what:** see "Work split" in `../AGENTS.md`. In short, Claude does the engineering inside `/opt/swg` (bot body, server helpers, test galaxy, deploys). ChatGPT, using Codex and Universal Modder, does review, tools outside `/opt/swg`, play-testing through MCP, real-client checks with `um win`, research and file formats. Current tasks are on the board in `SWG-handoff.md` (ChatGPT's tasks are C1–C5 there).
 
@@ -29,16 +29,17 @@ Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heav
 - Park research tracks that feed nothing this month (owner's call): the Storyteller weapon, the Prophecy archive, the Darksaber trail, KOTOR authors and farming art. Keep their records; they come back as tracks.
 - Every owner question carries a default and a date ("Claude does X unless you object by …"), so a missing answer never stalls a lane.
 
-**Where we are, 18 Oct 2:00 AM (Claude; owner: "update the roadmaps"):**
+**Where we are, 18 Oct (Claude; 2:00 AM, updated 9:00 AM in the housekeeping pass):**
+- **New since 2 AM.**
+  - GPT's C62 cross-review of dev (47 commits, `Documentation-support/review-C62/C62-review.md`) found 7 problems. 5 commits need a fix before their content opens: Hoth bosses healed by heat and electricity, Ossus's ghostfire lead lost, no job credit for pet kills, group pay to a member on another planet, jobs erasing each other's waypoints, and the bank window alive check. It recommends a release 1 of the stock worlds first, with Hoth held until its fixes and gate (owner to decide).
+  - The owner played Hoth on the test galaxy from 7:30 AM: the Echo Base building doesn't draw (H1), the north-west looks unfinished (H2), plus weather, resources and structures (H3 to H5 on the board).
+  - Housekeeping: the board went from 80 KB to 25 KB (answered questions and finished rows moved to the archive), GPT's queue was tidied, and every session's finished work was committed.
 - **Scope.** The first friends' launch (owner, 17 Oct): Hoth open; Ossus and Nal Hutta closed until their content is ready. Owner, 16 Oct: test end to end before more content.
-- **Usage.** Claude's weekly limit is 73% used (18 Oct 1:50 AM) and resets 22 Oct about 10 PM: about a quarter is left for 4.8 days. GPT is out until 22 Oct 1:13 AM, so cross-reviews for live wait for it. Every job a local model can draft goes to one (see "Local models" below and `Agent/local-model.md`).
+- **Usage.** Claude's weekly limit is 79% used (18 Oct 8:30 AM) and resets 22 Oct about 10 PM. GPT's weekly limit was reset on 18 Oct; its 5-hour limit is back at 12:24 PM, when C63b, C63c and C64 run. Every job a local model can draft goes to one (see "Local models" below and `Agent/local-model.md`).
 - **Which galaxy is up.**
-  - Since 1:20 AM 18 Oct the **live** galaxy (`/opt/swg/Core3`, the 13 Oct build) has been running.
-    - The "Local models task planning" session started it after the owner said "run the server here".
-    - The live galaxy has none of the work below.
-  - Run 30 on the test galaxy (dev `4b113bb7`, archive `e126125c`) ran from 9:47 PM to about 1 AM. It had 1,500 multiclass bots plus 200 Ossus explorers.
-    - It stopped when WSL was shut down so a model could run on this PC.
-    - The 7 AM report (`morning30`) therefore covers about three hours.
+  - Live is stopped (owner, 18 Oct: "stop the live galaxy no need for it to be on").
+  - The test galaxy has been up since 6:05 AM on run 30's build (dev `4b113bb7`, archive `e126125c`) with BotPop 200. Its galaxy row hands out this PC's Tailscale address, so friends can reach it.
+  - Run 30 itself ran 9:47 PM to about 1 AM with 1,500 multiclass bots plus 200 Ossus explorers. Its 7 AM report was not made: the run had stopped after three hours.
 - **Gate and base game.**
   - The regression gate passed 39/46 (17 Oct 2:25 AM).
   - Done:
@@ -81,7 +82,7 @@ Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heav
   - **This PC (since 2:10 AM):** Saluki too, with its vision add-on, at 50 tokens/s entirely on the card. It is the fallback, and it runs the chunk jobs (the claim pass, the item checks) while Microverse does research.
     - With vision it was the only model that saw the crumpled handles, so art checks run here.
     - wen-turbo (27B Q4) loads only with WSL off and runs at about 4.5 tokens/s, so it's not worth keeping.
-  - **Backlog:** 4 topics are open on Microverse (both item checks, the scenario first pass and the test index). The research reports in "review" wait for a Saluki claim pass, then Claude.
+  - **Backlog:** the queue on Microverse is paused (`Agent/local-research/STOP`) with `scenario-draft` waiting; the owner starts runs there. 45 research reports in "review" wait for GPT's C63b and C63c. On this PC Saluki did the log triage after the 6 AM start (clean).
 - **Audits.**
   - Item sources (`Documentation-support/item-sources-audit.md`): 12,062 item templates, of which 3,769 have a way to be obtained, 1,650 have none, 399 come only from test tools and 6,176 are imported but unused. The local model is sorting the flagged and the ok items for Opus to check.
   - Vehicles (`Documentation-support/vehicles-render-17oct.md`): a vehicle's body is its saddle appearance.
@@ -403,6 +404,7 @@ Files that grow without limit get slow to read, for us and for the game tools. R
 
 ## Backlog / known issues
 
+- [ ] **Hoth: add props and more detail (owner, 18 Oct).** Start with the north-west plateau around (-4544, 6045) and other flat stretches outside the main 6,200 m disc, which have no props, spawn areas or named places. Ideas to design with the owner: camps, wrecks and ruins placed by screenplay (the Generator Field and the salvagers' camp are the pattern), extra terrain detail beyond the disc, and the 15 `pr_hoth_*` Storyteller props, which exist as templates (I didn't check whether anything places them). Echo Base itself is board task H1.
 - Bot body: out-of-range `talk` gives no failure event; Chewbacca silent; vehicle mount unverified. (Fixed on dev: cell → world paths `5c39f411`/`697f2002`, indoor `look` `3797430a`.)
 - Client `/follow` is straight-line steering the server never sees; it sticks on corners (God Mode on the leader makes it worse). Server-side `/leash` is the stopgap (Phase 2).
 - 33 unresolved asset paths, mostly JTL ship chassis. Revisit with the JTL acceptance tests.

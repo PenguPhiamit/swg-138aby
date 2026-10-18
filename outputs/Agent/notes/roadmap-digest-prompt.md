@@ -9,7 +9,7 @@ read it in smaller pieces), both files completely:
 
 1. `C:\Users\Pengw\Documents\Codex\2026-10-13\h\outputs\SWG-roadmap.md`
 2. `C:\Users\Pengw\Documents\Codex\2026-10-13\h\outputs\SWG-handoff.md` (the task board: Server lock, Questions for the owner, Task board,
-   Instructions for ChatGPT's open tasks, Log)
+   Task instructions, Log)
 
 Use no other tool for reading, open no other file, touch nothing under /opt/swg. Write exactly ONE file with the Write tool:
 `C:\Users\Pengw\Documents\Codex\2026-10-13\h\outputs\Agent\notes\roadmap-digest.md` (plain Markdown, at most 12 KB).
