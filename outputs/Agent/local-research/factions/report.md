@@ -112,3 +112,23 @@ Three statuses exist: covert (1), overt (2), on-leave (0).
 - **Faction point earning activities:** These files only show bribe-based earning. Missing documentation on combat, objectives, or other activities that grant points.
 - **`handleGoCovert`, `handleGoOvert`, `handleResign`, `handleGoOnLeave`:** Event handlers called by timers but not shown in provided snippets; need to verify they correctly apply status changes.
 - **PVP broadcast channel:** Behavior depends on server config `isPvpBroadcastChannelEnabled()`; unclear default behavior (`TangibleObjectImplementation.cpp.lines-176-311:227`).
+
+
+## ChatGPT's review (2026-10-18 02:27)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) and available `src/` snapshots; no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** faction hashes/statuses, 200 standing, immediate covert join, 30 s overt and 5 min legacy transitions, separate 15 min configurable resignation, Jedi restrictions, base caps and 20k/100k CASH bribes for 250/1250 hold (recruiterConvoHandler.lua:35-111,125-169; recruiterScreenplay.lua:4-10,75-89; TangibleObjectImplementation.cpp:176-251; PlayerObjectImplementation.cpp:2174-2184). Stored C++ slices and recruiter Lua match current source apart from trailing blank lines.
+
+**Saluki flags:** the bribe prerequisite/value claim IS shown at recruiterConvoHandler.lua:101-111 (the grant helper alone lacks these gates). Its rank objection confuses local variable meaning: accepted_promotion first sets local rank=current+1 then calls getRankCost(rank) (83-84); the menu uses current rank and getRankCost(rank+1) (352-361). Both charge the NEXT rank. The report's expression is correct only with rank explicitly meaning the old rank; it must not be applied to the already-incremented local.
+
+**Corrections/qualifications:**
+- Having enough for the cost alone is insufficient: promotion keeps minimum standing 200 after payment (86,97-98,361). The promotion menu also requires sufficient standing, not merely rank<max (354-365).
+- Bribes require enough room for the whole award under the rank cap (102,106,110); credits and skill alone do not guarantee the option. Funds are cash, not combined cash/bank (105-111).
+- On-leave is not necessarily resignation. handleGoOnLeave retains faction and sets status 0 (recruiterScreenplay.lua:769-780). handleResign additionally clears affiliation/rank in the covert/overt branch (802-827). Their dialogs depend on useCovertOvert.
+- A cooldown is created only when OVERT was absent (TangibleObjectImplementation.cpp:204-217); that code by itself does not prove which later transition is blocked.
+- Delayed handlers are present in the same recruiterScreenplay at 769-827; they were not absent source. Joining/status text may be raw or a string ID depending on config, so no single English message is universal.
+
+**Limit:** no faction action, bribe or timer test was run.
+
+**Verdict:** Most numeric claims hold; Saluki rank/bribe objections are misleading, but qualify promotion reserve, bribe cap room, cash and on-leave versus resignation.

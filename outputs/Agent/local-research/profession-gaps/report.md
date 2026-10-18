@@ -142,3 +142,23 @@ test-plan.md:45 says P3 is mostly blocked on kits. The newer matrix lists those 
 - I did not check Scout and Ranger camps.
 - Why does marksman have 49 result rows for 25 tries? Why did P0 not finish?
 - The stub line ranges in matrix.md were not re-read on 90044b8e. CustomizeVehicleCommand.h and SurveyCommand.h are both 29 lines there.
+
+
+## ChatGPT's review (2026-10-18 02:30)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) (this topic has no `src/` snapshot); no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds as historical inventory:** the matrix really lists 17 pet flags, the city/merchant flags, zero named Image Designer commands and template-stub customizeVehicle (outputs/Claude-class-check/matrix.md:60-65,96-97,117-129). This establishes limitations of a quoted-name/slash-command audit, not absent gameplay. ImageDesignSessionImplementation.cpp:435 does contain the cited TODO.
+
+**Corrections/current-source counterexamples:**
+- Tame is not unrestricted gameplay just because its command-table characterAbility is empty. CreatureManagerImplementation.cpp:1113-1132 checks canTameMe/attackability, novice Creature Handler, tame_level and viciousness/tame chance. Only the explicitly gated TameAnything test path changes those requirements (1099-1112).
+- Pet orders have a training and dispatch implementation (PetManagerImplementation.cpp:315-343,473-504). Missing pet_* literal references do not prove missing pet commands.
+- Slicing checks real smuggler skill boxes under different names and awards slicing XP (SlicingSessionImplementation.cpp:245-261,473-486). 'No slice_* literal' cannot rank Smuggler as unimplemented.
+- The missing managers/genetics folder is irrelevant: GeneticLabratory.cpp:187,549 implements initial values and experimentation under managers/crafting/labratories.
+- The Image Designer TODO is on rejection cleanup (ImageDesignSessionImplementation.cpp:420-437), not a statement that the whole session is absent.
+- The blanket 'bot body has no crafting session' is stale: AgentControl.cpp:987 handles the crafting schematic-list/session packet. Current crafting coverage must be checked separately, not inferred from the old test-plan limitation.
+- All result counts/readiness rankings above are a 15 Oct snapshot. No current acceptance claim follows from them; later runs and source changes supersede them. Empty results/owner-halted runs are missing evidence, not failed game mechanics. File length and absence of TODOs are not proof of correctness.
+
+**Verdict scope:** retain the matrix as a historical command/test coverage index only. The proposed worst-first defect ranking and 'any player can run' conclusion are not accepted. No new profession gameplay was tested.
+
+**Verdict:** Reject as a current defect ranking; historical matrix facts hold, but literal-name scans, missing directories and empty command gates do not establish missing mechanics.

@@ -88,3 +88,21 @@ What to assert
 - What starts the newbie tutorial (the comment names StartTutorialTask, TUT:20). The later rooms (TUT after line 1206) were not read.
 - Whether npe_chewbacca can be talked to. I did not read its template.
 - How a bot client receives conversation options and system messages at the packet level.
+
+
+## ChatGPT's review (2026-10-18 02:27)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) (this topic has no `src/` snapshot); no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** Lua screenplay registration, bitwise state updates, theme-park area/waypoint/reward mechanisms and the specific Beginning quest's 1->2->4 progression/+10000 cash hold (LuaCreatureObject.cpp:461-469,545-560; themeParkLogic.lua:491-554,1892-1910; the_tutorial_0001_the_beginning.lua:14-41,48-75,93-131). custom_screenplays/screenplays.lua:4 includes the named script. The reward is paid on getInitialScreen when state 2 is present, not on a later reward-option click (97-107).
+
+**Corrections/qualifications:**
+- The introductory 'quests are Lua screenplays' is only one subsystem; this report itself names the separate quest-journal APIs and does not establish a census of all quest implementations. Absence of a managers/quest directory proves no missing feature.
+- Theme-park current mission is the length of the contiguous completed prefix, not general popcount: stateToCheck advances only when the current bit is found (themeParkLogic.lua:455-464). Sparse later bits do not advance it. Hunt missions take a separate acceptance path before the general area/waypoint path (493-495).
+- 'Lua errors appear only in log/lua.log' is stronger than the cited registration of a file logger (DirectorManager.cpp:421). That line establishes an output destination, not exclusive routing.
+- Registering auto-start does not prove successful runtime spawn; enabled zone, loaded templates, non-null spawns and current state still matter. The receiver callback filters player creatures before changing state (the_tutorial_0001_the_beginning.lua:61-75).
+- The 10000 cash delta is exact for the isolated reward operation, not for a test with concurrent income/spending. The quest text is legacy content evidence, not approval of its era suitability.
+
+**Not established:** state persistence across restart, reset route, journal implementation, event bindings not read, and runtime conversation packets. No restart or quest interaction occurred.
+
+**Verdict:** Beginning quest flow supported; scope is not all quests, fix contiguous-bit counting and exclusive-log claim; persistence/runtime remain open.

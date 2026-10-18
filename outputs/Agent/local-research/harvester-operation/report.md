@@ -110,3 +110,24 @@ Resource quantity in hopper increases over time at expected rate
 5. **Skill modifiers**: No evidence of skill-based extraction rate or capacity modifiers in these files. It's unclear if skills like "Resourcefulness" or "Harvester Operation" affect rates.
 6. **Maintenance credit deduction mechanism**: The code deducts from `surplusMaintenance` (`InstallationObjectImplementation.cpp:301`) but doesn't show how credits are initially deposited into this surplus or the conversion rate from credits to maintenance units.
 7. **Synchronized UI task details**: `SyncrhonizedUiListenInstallationTask` is scheduled after 5 seconds (`InstallationObjectImplementation.cpp:642`) but its implementation is not in these files. We don't know what it does or if it's required for operation.
+
+
+## ChatGPT's review (2026-10-18 02:30)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) and available `src/` snapshots; no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** operator/admin checks, menu selection 78, activation density/power/maintenance gates, resource selection/type-list validation, per-minute extraction formula, remainder and shutdown logic hold (HarvesterObjectImplementation.cpp:14-77; InstallationObjectImplementation.cpp:76-147,264-433,505-610). Stored installation/harvester source matches current Core3-dev apart from final blank lines.
+
+**Saluki flags checked:** setActive DOES set active=value, clear remainder, update timestamp when true and broadcast state (111-147); short citation spans caused some 'not shown' flags. newSpawn->inShift is checked at 525-527. Null checks in updateHopper are distinct from inShift at 365 and 374; neither should be collapsed into one claimed condition.
+
+**Corrections:**
+- addRadialMenuItemToRadialID(118,78,...) attaches selection/item 78 under parent radial 118 (HarvesterObjectImplementation.cpp:20,64). The report alternates which ID is actionable; the handler accepts 78.
+- ResourceHarvesterActivatePageMessage is a dedicated packet containing CRC 0xBD18C679 and object ID, not a SuiListBox/SUI callback (packets/harvester/ResourceHarvesterActivatePageMessage.h:11-16). Operation and synchronized UI must be tested through their actual protocol. Selecting 78 sends that page; synchronizedUIListen separately adds an operator (HarvesterObjectImplementation.cpp:23-44,64-66).
+- Activation SETS ACTIVATED (InstallationObjectImplementation.cpp:114-119), not unsets it. Stopping does not clear resourceHopperTimestamp; only activation updates it (139-141). General state deltas use broadcastMessages (137), while extraction-rate delta goes to operators (147).
+- An out-of-shift selected spawn logs and returns at 525-527; the depleted broadcast is the separate not-found-in-compatible-list branch at 551-558. Missing currentSpawn uses harvester_no_resource (369-378), not depleted.
+- Running out of fuel/maintenance sets shutdownWork in updateMaintenance (287-318); the activation failure strings at 92-105 are not guaranteed depletion notifications. Full hopper alone does not set harvester_resource_depleted (420-433).
+- Maintenance accrues even inactive; power only while active (282-305). Capacity clamps before remainder addition (392-402). Power deposits consume inventory energy resources through a separate transfer flow, not credits for power (201-229); credits fund maintenance. Density is sampled at the installation coordinates, not distance to a point node (585).
+
+**Not established:** client UI automation, actual extraction/capacity template values and runtime accounting; no harvester was operated.
+
+**Verdict:** Core extraction supported; correct radial IDs, dedicated-page protocol, activation bit/timestamp, depletion messages and power-versus-maintenance setup.

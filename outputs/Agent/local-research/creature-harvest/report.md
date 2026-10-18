@@ -78,3 +78,23 @@ Harvesting a dead creature requires the player to be within 7 meters of the corp
 - **Density calculation**: How `ResourceSpawn::getDensityAt()` computes density from corpse health is not visible in this file.
 - **`addAlreadyHarvested()` implementation**: The mechanism that tracks which players have harvested a corpse is not shown; it may use a set or flag on the Creature object.
 - **String table files**: The `skl_use` and `group` string tables referenced in system messages are not included in the provided files, so exact message text cannot be confirmed.
+
+
+## ChatGPT's review (2026-10-18 02:26)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) and available `src/` snapshots; no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** seven-meter harvest check, initial minimum 3 before density scaling, group multipliers, per-player harvest marker, base scout XP level*5+19, resource messages and conditional one-second despawn rescheduling hold (CreatureManagerImplementation.cpp:920-1068). Low-level prey and 80% HAM are scenario safety policies, not server harvesting requirements.
+
+**Corrections:**
+- 'Density (health condition)' is wrong. Density is the resource spawn's map at the player's x/y (CreatureManagerImplementation.cpp:987-1002; ResourceSpawnImplementation.cpp:191-200). Damage before the kill does not directly reduce yield; quality strings are labels for spatial density.
+- Missing prerequisites are material: novice scout, creature_harvesting>=1, not in combat/dead/incapacitated, non-pet target with organics, not previously harvested, and ownership by player or their group (src/server/zone/objects/creature/ai/CreatureImplementation.cpp:232-257). A previously injured target is not automatically disqualified; loot-owner rights decide.
+- Random selection uses fallback through available types (CreatureManagerImplementation.cpp:937-959). It is equal probability only when all three types exist, not generally.
+- The parent!=nullptr forced-one-unit branch (1014-1015) does not mean tamed pets can be harvested: canHarvestMe rejects isPet first (CreatureImplementation.cpp:235).
+- Group yield defaults to 1.2; another player with novice ranger within 64 m raises it to 1.3 and master ranger to 1.4 (GroupObjectImplementation.cpp:529-559). The harvester's own ranger box is skipped.
+- Initial minimum 3 is not a final minimum: skinny scaling truncates 3 to 1 (977-1002). One-second despawn needs an existing despawn task plus all listed no-loot/no-credits/no-eligible-group checks (1061-1068).
+- Existing stack quantity is not inherently unavailable: current body work includes resource quantities; the old scenario's BLOCKED comment is not a server limitation. A new object alone misses successful stacking.
+
+**Not established:** exact rendered example strings, current safe prey availability, and why any old scenario failed.
+
+**Verdict:** Correct yield skeleton, but fix spatial-density interpretation, rights/skill prerequisites, pet assumption, random fallback and stale stack-visibility claim.

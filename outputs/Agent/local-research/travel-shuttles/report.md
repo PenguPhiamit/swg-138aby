@@ -66,3 +66,21 @@ A player within 8 m of a travel terminal sends /purchaseTicket with departure pl
 - What the real client UI sends as /purchaseTicket arguments; the client-side text of the "@travel:..." strings.
 - Not read: TravelCouponUseSuiCallback.h, and the radial-menu range of the collector and terminal.
 - The landing-window arithmetic is not verified live.
+
+
+## ChatGPT's review (2026-10-18 02:26)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) (this topic has no `src/` snapshot); no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** purchase argument parsing, 8 m terminal check, fare charged bank-first, coupon branch, availability messages, 612-second cycle components (600+2 landed/10 away), 128 m travel-point and 25 m shuttle checks, direct inventory ticket scan and zone-switch/ticket destruction hold (PurchaseTicketCommand.h:34-96,105-178,224-323; BoardShuttleCommand.h:53-171,232-283; planet_manager.lua:44-53). The old timing comments must not override Lua values.
+
+**Corrections/qualifications:**
+- The short answer says boarding during initial linking fails without any message; no linked shuttle actually sends 'Travel from this location is unavailable at this time' (BoardShuttleCommand.h:62-70). A linked shuttle without its departure task is the separate silent checkShuttleStatus path.
+- Round-trip cost is 2*(baseFare+departureTax), not two base fares plus a single tax (PurchaseTicketCommand.h:178,224-225,308-315). Pay-success reports base fares only (274-276); tax is a separate message.
+- Inventory scanning only finds loose tickets, but explicit chosen-ticket validation uses isASubChildOf(creature), not direct-parent equality (BoardShuttleCommand.h:114-126). A blanket claim that every nested ticket is always rejected is too strong.
+- Landing duration arithmetic in ShuttleDepartureTask.h:62-109,116-125 supports the draft's roughly five-second landing exclusion under 600/2; this is source timing, not a measured service guarantee. Randomized arrival can fall back to the raw arrival point (BoardShuttleCommand.h:196-218).
+- The BootDelay override's source is outputs/tools/test_galaxy.py (SHUTTLE_BOOT_DELAY_MS and the generated Core3.ShuttleZoneComponent config). Its absence from tracked bin/conf does not imply it is absent at runtime.
+
+**Not established:** the running config, actual coupon/UI behavior, exact client text and current scenario coverage. Purchase text alone is insufficient: require ticket receipt and actual credit delta.
+
+**Verdict:** Mostly supported; correct initial-boarding message, doubled tax, explicit ticket qualification and generated BootDelay configuration; runtime untested.

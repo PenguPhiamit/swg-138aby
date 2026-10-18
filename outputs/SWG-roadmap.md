@@ -501,3 +501,5 @@ Files that grow without limit get slow to read, for us and for the game tools. R
 
 - [x] C55 first-release non-bot source review (16 Oct): [commit verdicts and failing cases](Documentation-support/review-C55/C55-review.md), `fbee3aa`; open inherited helper P1 / global spawn-gate P2; 74 Lua checks pass. XP/delivery/isolated city guard source shortlist; runtime and owner release gates remain open.
 
+
+- [x] C63 first review batch (18 Oct, ChatGPT): 20 local research reports checked against source; dated corrections and done/reviewed fields saved. Remaining review queue listed in Agent/local-research/C63-review-2026-10-18.md; gameplay untested and overall backlog remains open.

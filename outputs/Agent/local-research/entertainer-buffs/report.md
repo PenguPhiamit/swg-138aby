@@ -77,3 +77,22 @@ Dancing and playing music give buffs to audience members (patrons) who are group
 3. **What are the exact values of `performance->getHealMindWound()` and `performance->getHealShockWound()`?** These come from the `performance.iff` datatable (loaded at `PerformanceManager.cpp:42-64`) and vary by performance type. The specific values for "basic" dance are not in the provided source files.
 4. **What is the loop duration for dancing vs. music?** The code references `performance->getLoopDuration()` at line 679 to calculate flourish XP cap (dance = 10s, music = 5s inferred), but the exact values per performance are in the datatable.
 5. **How does `/setPerform target` work?** The code checks `entPlayer->getPerformanceBuffTarget()` (lines 859, 989) as an alternative to grouping, but the command implementation and its effect on buff targeting is not shown in these files.
+
+
+## ChatGPT's review (2026-10-18 02:25)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) and available `src/` snapshots; no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** private_buff_mind, group-or-setPerform eligibility, deny-service exclusion, 60-second minimum watch/listen, zero-strength rejection and buff application on stopping are supported (EntertainingSessionImplementation.cpp:608-612,848-923,983-998; PlayerManagerImplementation.cpp:3423,3510). Mind versus focus/willpower buff identities hold.
+
+**Corrections:**
+- The 125% clamp is applied BEFORE the registered, overt, same-faction building perk (EntertainingSessionImplementation.cpp:715-735); it is not an absolute maximum.
+- Duration is accumulated in minutes, converted to seconds at application (869-873,901-918). The integer accumulator (694-702,760-769) truncates the nominal 120 minutes 10 seconds cap to 120 minutes. Acceleration fractions are also truncated when added.
+- Contrary to Saluki's objection, 2*acceleration does occur on each ordinary 10-second tick (102-104,220-236,995-998). It ALSO occurs for each of the first five counted flourishes, through 674-687 and 614-622. The draft misses that extra duration. Flourishes add fixed strength increments; (flourishCount+1) multiplies wound healing, not buff strength (82-85,997-998).
+- CRC names at 896-918 construct buffs; they do not send success system text. Test buff presence/stat changes, not a chat substring containing performance_enhance_dance_mind.
+- HEAL_RANGE is 60 m (PerformanceManager.h:28). Healing needs private_buff_mind and deny-list clearance (145-156), but unlike buff accumulation it has no group/setPerform gate. The faction healing perk is added to wound/shock skills under its own registered-building/overt checks (70-79).
+- '/group' is not established as the grouping command by this source; create the group through the actual invite/join API. The loop-duration XP cap is calculated from data (679-684); 1/2 are comment examples, not universal values.
+
+**Not established:** why the named bots failed. No run/skill inventory was checked; 'most likely' remains a hypothesis.
+
+**Verdict:** Substantial corrections required: duration units/truncation, flourish duration, faction cap, success signal and healing eligibility; runtime untested.

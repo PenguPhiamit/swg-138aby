@@ -86,3 +86,21 @@ Written by the local model through `tools/agents/local/local_jobs.py`; 1559 inpu
 | `static_npc/hoth/scavenger_quartermaster.stf:npc_reward_1` | That's the one. Baxx made it back ahead of you, by the way. Here's your fifteen hundred. | Inconsistent name spelling: 'Baxx' vs 'Ria Baxx'. The waypoint says 'Ria Baxx',  | That's the one. Ria Baxx made it back ahead of you, by the way. |
 | `static_npc/hoth/scavenger_quartermaster.stf:npc_smuggle_1` | You're from Vell? Take it, the regulator's yours. I'm heading back as soon as my hands thaw. | Inconsistent name spelling: 'Vell' vs 'Quartermaster Vell'. The waypoint says 'Q |  |
 | `static_npc/hoth/scavenger_quartermaster.stf:npc_smuggle_1` | You're from Vell? Take it, the regulator's yours. I'm heading back as soon as my hands thaw. | Grammar: 'the regulator's yours' is fine. 'my hands thaw' is fine. |  |
+
+
+## ChatGPT's review (2026-10-18 02:30)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) (this topic has no `src/` snapshot); no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Provenance:** the saved input has 1559 strings; filtering current input hashes yields 131 returned items and 82 displayed proposals (39 old chunks ignored). The numeric suffix on a Lua/C++ string ID is an extracted-string ordinal, NOT the source line (outputs/tools/agents/local/local_jobs.py:252). For example the draft's LeashCommand.h:1337 is currently LeashCommand.h:424. Treat these as lookup keys. This topic has no src/ snapshot; checked lines.json/instruction.txt plus current source.
+
+**Reject wholesale as an edit batch:**
+- The instruction explicitly protects invented/Star Wars names and forbids stylistic rewrites (instruction.txt:3-6). Proposed 'tortured bull', 'kreet', 'worrat', 'mare', 'vespa', 'squali', lowercased Jedi/Ysanna/Teel and random capitalizations are unsupported replacements, often a different creature or different input row. Current sandbox_creatures.lua:929,972 still pairs tortur_bull and giant_canyon_krayt_dragon with their actual labels.
+- Do not add tameable based on nearby labels. That is a game/template property, not grammar; several proposed replacements claim a tag missing when Text now already has it.
+- Bracketed template IDs distinguish duplicate display names; removing them is not proofreading. Mynock Den is valid compound naming and does not require a possessive apostrophe. Ice mynocks is not a misspelling of Icy mynocks.
+- The leash replacement invents behavior and removes valid usage instructions (LeashCommand.h:424). The world-boss replacement removes the client's color escape rather than fixing it (sandbox_world_bosses.lua:143,172,210).
+- Diagnostic OssusPeople prefixes, comments and identifiers are not automatically player-facing prose errors. The placeholder '(filled in by the screenplay)' alone does not prove the runtime dialog exposes a placeholder; handler substitution must be traced before accepting it. Empty/no-op suggestions and mismatched old/new creatures are rejected.
+
+**Narrow supported leads only:** current display labels contain 'perlek scavanger' and 'vesp scavanger' at bin/scripts/screenplays/sandbox/sandbox_creatures.lua:532,552, and 'kaadu aggrivated trampler' at 610. Display-only 'scavenger'/'aggravated' spelling corrections are reasonable; template keys such as aggrivated_kaadu_trampler must remain valid. No edits were made. All other proposals are rejected or unestablished, not approved for automatic application.
+
+**Verdict:** Reject automatic proofreading batch; only three display-spelling leads retained, with actual source lines; no text/name/template changes authorized or applied.

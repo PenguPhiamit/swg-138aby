@@ -140,3 +140,23 @@ Before populating, the system ensures the player's mission bag has enough empty 
 5. **Survey mission completion**: How does the survey tool interact with the `SurveyMissionObjective` to complete the mission? What efficiency threshold is needed?
 6. **Entertainer mission performance requirements**: What specific performance actions or skill checks complete an entertainer mission?
 7. **Crafting mission item selection**: The code picks a random crafting item from `craftingMissionItems` (line 382), but what items are in that list and how is the target item determined for the player to craft?
+
+
+## ChatGPT's review (2026-10-18 02:26)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) and available `src/` snapshots; no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** terminal dispatch and slot allocations, 6 m list range, novice bounty gate, 1400 ms default list cooldown, configured default six active missions, single bounty cap and full-datapad rejection hold (MissionManagerImplementation.cpp:163-285,619-832). Destroy distance/reward formulas use difficultyLevel (902-903,951-955); slicer and city modifiers hold.
+
+**Corrections:**
+- Display difficulty is max(4,lairDifficultyLevel) PLUS player/group level, even when the lair level is below 5 (MissionManagerImplementation.cpp:864-876). It is not raw difficultyLevel for low levels.
+- The entertainer generator actually uses random(difficulty-1)+1 with difficulty=2 (1487-1489), not the printed random(2)+1. Its 5/10 conclusion follows from the real expression.
+- 'Crafting the required item' alone does not complete a crafting mission. Pickup grants the mission schematic/components; the later NPC delivery path finds a matching item, destroys it and completes (CraftingMissionObjectiveImplementation.cpp:73-104,106-121).
+- Survey completion requires matching spawn family, density>=efficiency AND distance strictly greater than 1024 m from mission start (SurveyMissionObjectiveImplementation.cpp:51-80). Generic 'survey tool use' misses essential preconditions.
+- Terminal discovery within 2 km is a scenario search policy; commands require 6 m. Master Marksman is the test loadout, not a universal mission prerequisite (MissionManagerImplementation.cpp:170-182).
+- The out-of-range string is @ui:radial_out_of_range_prose with terminal/action parameters (171-174), not ui_radial_out_of_range_prose.
+- Mission expiry and group payout are not proven by comments in cresh-missions.py. Activation schedules a failure task using MISSIONDURATION, with a bounty override (MissionObjectiveImplementation.cpp:46-69). Exact payout recipients/divisor need the completion task's rules; do not use all group members unconditionally.
+
+**Not signed off:** detailed bounty reward cases, objective-specific hunting/recon/performance prerequisites and old scenario assertions beyond this source scope. No mission was run; the draft's open questions remain open unless corrected above.
+
+**Verdict:** Generation/acceptance overview useful; fix low-level display difficulty, survey distance, crafting delivery and scenario-as-requirement claims; payout/runtime unverified.

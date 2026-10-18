@@ -117,3 +117,22 @@ In Core3, scouts earn **harvesting XP** by harvesting corpses for meat (type 234
 4. **Harvesting random selection:** When no argument given, HarvestCorpseCommand.h randomly selects from available types (lines 81-82), but the bot may need to specify a type explicitly for reliable testing.
 
 5. **Group harvesting XP:** The code shows group modifiers for quantity (lines 1008-1012) but does not show whether XP is shared or awarded individually per harvester.
+
+
+## ChatGPT's review (2026-10-18 02:30)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) and available `src/` snapshots; no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** harvest type IDs 234/235/236, dead/DNADEATH gates, per-player harvest marker and base scout XP level*5+19 hold (HarvestCorpseCommand.h:58-103; CreatureManagerImplementation.cpp:920-1068). DeployTrapCommand.h is a guards-and-success stub; ThrowTrapCommand.h:124-130 schedules an actual throw task after 2000 ms. Snapshot command/manager text matches current source apart from final blank lines.
+
+**Material errors:**
+- 'ThrowTrapTask.h and ForageManager are missing from the repository' is false. The throw header is exactly at the include path in ThrowTrapCommand.h:8: src/server/zone/objects/creature/events/ThrowTrapTask.h. Forage is src/server/zone/managers/minigames/ForageManagerImplementation.cpp:16,117. Absence from the model's input is not absence from Core3.
+- ThrowTrapTask.h:190-230 awards base level*15 for each eligible non-event target successfully given a new trap buff; targets already carrying the state/buff skip that addition (195-197). The total is awarded as trapping when >0 (270-275), after charge/HAM costs (254-268). Missing XP can be a miss/existing state/event target; the file's supposed absence is not a cause.
+- Forage completion checks location (no more than 2 m change on either axis and same zone), combat and area cooldown before item resolution (ForageManagerImplementation.cpp:129-161). The source is present. This inspected manager has no direct awardExperience call; do not invent foraging XP.
+- Harvest's initial minimum 3 can be reduced below 3 by later density truncation (CreatureManagerImplementation.cpp:977-1002); density comes from the resource map at the player's location (987), not corpse health.
+- canHarvestMe adds novice scout/skill, noncombat, alive/non-incap, non-pet, organics and loot-owner/group requirements (src/server/zone/objects/creature/ai/CreatureImplementation.cpp:232-257). An already-harvested corpse can silently return success from HarvestCorpseCommand.h:90-107; a specific 'no resources' message is not guaranteed.
+- Empty /harvestCorpse chooses uniformly among nonempty resource types (69-82), distinct from the manager radial-ID-112 fallback. XP is a per-harvester base request, not proportional to units/group yield.
+
+**Limit:** foraging item internals/other XP observers and runtime XP multipliers remain unverified.
+
+**Verdict:** Harvest baseline supported; reject missing-repository diagnosis and add actual trapping XP/gates, forage location checks and harvest prerequisites.

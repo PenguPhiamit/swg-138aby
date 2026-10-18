@@ -94,3 +94,22 @@ Power from the player's inventory = sum of `qty * max(1, PE/500)` over energy an
 - Whether `System::random(n)` includes n was not checked.
 - The GM command names that call `listResourcesForPlanetOnScreen`, `despawnResource` and `healthCheck` were not traced.
 - The script-loaded spawns from `resource_manager_spawns.lua` are created already expired (ResourceSpawner.cpp:377); their purpose was not confirmed.
+
+
+## ChatGPT's review (2026-10-18 02:27)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) (this topic has no `src/` snapshot); no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** pool/shift design, 6-22/13-22/6-11 day base lifetimes, throttling==90 uniform path, deterministic map density, 999999 default stack maximum and harvester minutes*density*rate basis hold (ResourceSpawner.cpp:696-738; ResourceSpawnImplementation.cpp:144-200; SpawnDensityMap.h:106-148; ResourceContainerImplementation.cpp:41-91; InstallationObjectImplementation.cpp:272-433).
+
+**Corrections/current changes:**
+- Current activeZones has 13 zones including hutta, not 12 (resource_manager.lua:51-55). Old line references have shifted; the configuration values at 70-93 still support scale 10, 2 h shift, one-day unit, throttling 90 and gate 1000.
+- Survey tools expose 3x3, 4x4 or 5x5 grids, not 'up to 6x6' (SurveyToolImplementation.cpp:150-159).
+- Sampling units include staged integer truncation, samplingMultiplier and city samplesize; gamble success is a one-in-three random(2)==1, not a guaranteed fivefold bonus (ResourceSpawner.cpp:1094-1122).
+- Density is refreshed on activation as well as selection (InstallationObjectImplementation.cpp:82-88). Maintenance is charged even while inactive; only power has the isActive gate (282-305). Hopper capacity is clamped BEFORE extractionRemainder is added (392-402); the draft's floor-then-cap formula is an approximation near capacity.
+- Stack overflow is not guaranteed to be preserved: ignoreMax bypasses the split, no parent cannot receive excess, and failed transfer destroys the new overflow object (ResourceContainerImplementation.cpp:57-78). Test quantity conservation, not merely presence of a second stack.
+- Peak-density numbers are map amplitude bounds, not a guarantee a sampled coordinate achieves that peak (SpawnDensityMap.h:106-114,136-148). Resource quantity extraction does not by itself end the time shift.
+
+**Not established:** installed archive data, currently active spawn counts and current hopper/runtime accounting. The draft's destructive shift/config test suggestions were not executed.
+
+**Verdict:** Useful source overview with corrections to current zones, grid size, sampling, maintenance, hopper rounding and overflow guarantees; runtime untested.

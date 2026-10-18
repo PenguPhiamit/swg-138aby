@@ -81,3 +81,22 @@ besh-harvest.py covers corpse harvesting only, not surveying.
 - The POSTURECHANGED handler registered at src/server/zone/managers/resource/ResourceManagerImplementation.cpp:242 was not read, so exactly how standing cancels sampling is unknown.
 - Whether random(3) gives 0-3 or 0-2, and the shape of SpawnDensityMap (not read).
 - What the bot harness's "survey_resources" and "survey_results" events carry (not read).
+
+
+## ChatGPT's review (2026-10-18 02:26)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) (this topic has no `src/` snapshot); no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** organic tool type 0 matches no assigned resource-tree survey type (survey_tool_organic.lua:46; ResourceTree.cpp:169-201). Range thresholds and 3/4/5 point grids hold (SurveyToolImplementation.cpp:90-159), as do in-shift filtering (ResourceSpawner.cpp:876-894), focus/quickness costs, three-second results and 25-second resampling (SurveySessionImplementation.cpp:195-221,367-394). Tool lists and actual sample receipts must be distinguished from start messages.
+
+**Corrections:**
+- The gamble is System::random(2)==1 (ResourceSpawner.cpp:1101-1109), a one-in-three success on the inclusive engine random convention, not 50%.
+- sample_failed also requires !tryGamble AND richSampleLocation==nullptr (1081-1086). It does not follow from a low sampleRate alone. SurveySession.idl:29,99-104 stores a Coordinate member, so the draft correctly raises a reachability concern; do not predict this branch without checking generated pointer behavior.
+- Units have two integer truncations: density*(25+random(3)) first becomes int, then skill/multiplier/city scaling becomes int (1094-1098). samplingMultiplier and private_spec_samplesize must remain in the expected formula.
+- xpcap=40/50 is a multiplier, not a maximum. XP=(units/maxUnits)*xpcap (1148-1153), so skill, city, samplingMultiplier and fivefold node/gamble units can exceed it.
+- A node pop-up is only eligible with no gamble and zero rich-sample location (SurveySessionImplementation.cpp:231); 1/51 is conditional, not unconditional on all attempts. At low skill, 10% density alone is insufficient (ResourceSpawner.cpp:1070-1077).
+- ResourceSpawnImplementation.cpp:191-200 reads a spatial resource map; current empty lists and old [null,0] events cannot be diagnosed without those events and active data. The report's two-cause list is not exhaustive.
+
+**Limit:** current planet resources, tree archive, harness events and runtime sample cancellation were not exercised.
+
+**Verdict:** Useful after correcting gamble probability, sample-failure prerequisites, integer units and non-capped XP; empty-list diagnosis remains unproven.

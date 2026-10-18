@@ -109,3 +109,22 @@ A bot or log can confirm success by checking for the absence of error messages p
 2. **Credit refund on failure**: The code destroys the deed before calling constructStructure (StructureManager.cpp:473), so no credits are refunded if construction fails. However, it is unclear whether credits are charged during `constructStructure()` or beforehand, since that logic is in the missing PlaceStructureSession file.
 3. **Lot consumption timing**: It is inferred that lots are consumed when the session is created (StructureManager.cpp:466-470), but the exact mechanism is not visible in the provided files.
 4. **PlaceStructureSession header**: The file `server/zone/objects/player/sessions/PlaceStructureSession.h` (or .cpp) referenced at StructureManager.cpp:23 and 466 is not available in the provided source copy, so its full API and behavior are unknown.
+
+
+## ChatGPT's review (2026-10-18 02:30)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) and available `src/` snapshots; no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** deed arguments, mounted/interior/no-build/range checks, faction/planet/footprint/zoning/ability/lot admission and ownership on creation hold (PlaceStructureCommand.h:23-131; StructureManager.cpp:270-477,478-570). The snapshot command/manager files match current source apart from final blank lines.
+
+**Corrections:**
+- The draft contradicts source order: constructStructure is called at StructureManager.cpp:470 BEFORE destroyObjectFromWorld at 473. World removal is not database destruction of the deed. A conclusion of permanent deed loss/no refund cannot follow from this.
+- The session implementation exists: src/server/zone/objects/player/sessions/PlaceStructureSessionImplementation.cpp:26-86 schedules construction; completeSession:150-163 attempts final placement and transfers the deed back to inventory if creation returns nullptr. That explicitly contradicts the blanket no-refund/deed-consumed claim. It does not guarantee recovery if inventory transfer itself fails.
+- Placement is asynchronous: 100 ms fallback, or lotSize*3000 ms when a barricade is created; faction_perk can use a GCW delay (49-84). The structure need not appear in the same command call. Completion also creates a waypoint and construction-complete mail (176-201), so world appearance is not the only success signal.
+- Rotation input rejects angle>3, but the cited command does not reject negative angles (PlaceStructureCommand.h:60-63). Do not claim full 0-3 validation. Height check is signed playerZ-placementZ>10, not abs height difference (73-77); the 100 m distance is 3D.
+- The rank requirement compares CITY rank, not the player's personal profession/rank (StructureManager.cpp:401-419).
+- Lots are checked at admission, but owned-structure registration occurs on actual creation (StructureManager.cpp:544-547); the report's lot consumption at session creation is unsupported. Final z may use highest terrain over footprint when appropriate (491-515), not always one floor point.
+
+**Not established:** ordinary placement credit charging, exact lot accounting and cancellation edge cases. No structure was placed and no galaxy touched.
+
+**Verdict:** Admission/ownership overview holds; reject deed-loss/no-refund claim, correct asynchronous placement, signed height/city rank and unproven lot timing.

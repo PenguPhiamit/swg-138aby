@@ -56,3 +56,20 @@ Changes to aurek-doctor-buffs.py:
 - What do `private_med_wound_health` and `private_med_wound_action` do (hospital_tatooine.lua:46-47)? What ratings do camps give?
 - The actual client texts of the string IDs: only the code comments were read.
 - Does the bot harness's `error` field equal the server's QueueCommand codes?
+
+
+## ChatGPT's review (2026-10-18 02:25)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) (this topic has no `src/` snapshot); no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** stock location rating checks, 7 m enhancement/6 m wound range, focus-adjusted mind, shared woundTreatment cooldown, skill-filtered packs, combat/LOS restrictions and re-apply semantics are supported (HealEnhanceCommand.h:24-48,54-68,78-137,368-425; HealWoundCommand.h:104-163,310-357). Enhancement multiplies by rating/100; wound healing uses 1+rating/100 (EnhancePackImplementation.cpp:42-45; WoundPackImplementation.cpp:50-52). The test must accept a re-apply without a max-HAM increase.
+
+**Corrections/current-source changes:**
+- 'Must be above 0' is no longer unconditional. Both commands allow medicalAnywhere for an eligible test player (HealEnhanceCommand.h:92-107; HealWoundCommand.h:115-129). SandboxTestGalaxy.h:18-32,45-49 requires a _test DB, god mode or an allowlisted account, and Core3.MedicalAnywhere. It is not permission to use this on live.
+- When no structure/droid rating exists, that switch supplies rating 100 while retaining the city bonus (EnhancePackImplementation.cpp:26-27; WoundPackImplementation.cpp:34-35). Outdoors is therefore not always a negative test.
+- Auto enhancement also tries already-buffed attributes ordered by duration when no unbuffed candidate has a pack (HealEnhanceCommand.h:334-362); it does not stop with only the first unbuffed-attribute pass.
+- The named scenario and original line numbers describe an earlier harness. Current behavior must be read before applying its proposed edits; no scenario edits or runtime sign-off were done here.
+
+**Limit:** source formulas and messages are verified; actual carried pack values, client display and hospital entry remain untested.
+
+**Verdict:** Stock mechanics mostly hold; qualify current MedicalAnywhere test-only behavior and auto-refresh selection; gameplay untested.

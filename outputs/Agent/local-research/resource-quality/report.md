@@ -91,3 +91,22 @@ Each experimental line on an item (for example min damage) has a list of resourc
 - Rounding or precision in the values shown to the player.
 - Whether a bot can create resources with chosen values other than 1000.
 - Stimpack (genetic or other labs) and factory runs were not checked.
+
+
+## ChatGPT's review (2026-10-18 02:27)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) (this topic has no `src/` snapshot); no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** nonzero quantity-weighted per-stat averages, CustomIngredient participation, single spawn per resource slot, weightedSum/1000 ceiling, curved initial percentage, 0.4-1.05 reachable assembly factors and row experiment steps hold (SharedLabratory.cpp:21-141; ResourceLabratory.cpp:59-101,127-152; ResourceSlot.h:43-61; CraftingValues.cpp:86-98). The report's 500/750/1000 arithmetic and 656.25 mixed-slot example are consistent with those formulas before components/display rounding.
+
+**Corrections:**
+- 'A roll above 95 is amazing' wrongly suggests the final tool/skill-modified assemblyRoll. The early test is luckRoll=random(100)+cityBonus >95-craftbonus, BEFORE low-roll adjustment, luck/force_luck, toolModifier and assembly-skill contribution (SharedLabratory.cpp:164-187). Force assembly is included in assemblySkill (148-151).
+- Low luck can subtract random(100); failMitigate depends on assembly skill, city bonus and force_failure_reduction (152-180). Do not use the draft's shortened equation for distribution assertions.
+- Exp-roll amazing is also an early luck threshold; ordinary rolls include city, force, food multiplier and low-luck penalty (CraftingManagerImplementation.cpp:66-111). Increasing MA improves ordinary rolls through effectiveness, but does not change that early amazing threshold.
+- On an overspent-points branch, CriticalFailure is assigned and the session returns after cancel BEFORE experimentRow (CraftingSessionImplementation.cpp:1115-1121). That is not a reachable -8% applied row outcome on this path.
+- Tool force-amazing counters can override outcomes (CraftingSessionImplementation.cpp:777-780,1108-1114); comparisons must control them too. Total points are int(experimentation skill/10) at 764.
+- Component contributions can change final attributes after resource percentages; the advertised ceiling applies to the resource-based component, not an unconditional final-item bound. Ordinary blank-group attributes use fixed endpoints (CraftingValues.cpp:86-90).
+
+**Not established:** displayed rounding, all specialty labs, concrete DL44 template data against client archives, or in-game behavior. No staff resource command was used.
+
+**Verdict:** Weighted-quality model and arithmetic hold; fix amazing-roll semantics, omitted roll branches, critical cancellation and unconditional final-item ceilings.

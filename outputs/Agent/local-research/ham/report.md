@@ -98,3 +98,22 @@ setHAM does not clamp the value (COI:1162-1174).
 - The medic and doctor wound-heal commands, and any admin command to set wounds or shock for tests, were not read.
 - What strength, quickness and focus affect outside regen is unknown.
 - Whether the bot's "max" is the raw max or max minus wounds depends on the bot code, which was not read here.
+
+
+## ChatGPT's review (2026-10-18 02:27)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) (this topic has no `src/` snapshot); no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** current versus max/wounds distinction, nine-pool ordering, constitution/stamina/willpower regeneration, posture factors, primary damage floor rules, base-1 wound cap and third-incap death are supported (CreatureObjectImplementation.cpp:1195-1215,1273-1292,1374-1400,3198-3274; PlayerManagerImplementation.cpp:1208-1233). Armor lowers secondaries rather than primary max.
+
+**Corrections:**
+- The claimed 5-second MINIMUM incap formula is false. Current calculateIncapacitationTimer returns 5 only for |condition|<5; otherwise integer |condition|/5, capped at 60 (PlayerManagerImplementation.cpp:1159-1189). Thus -5 gives 1 s, -10 gives 2 s, -25 gives 5 s before food. No max(5,...) is enforced. This follows executable code, not its comments.
+- The constitution-1000, one-second worked example is 7 standing, 8 kneeling, 11 sitting (ceil(1000*13/2100*1.25)=8), not 9 kneeling (CreatureObjectImplementation.cpp:3205-3227).
+- At private_med_wound_* skill 100 each tick adds 20 to an accumulator, healing 1 wound per pool once that accumulator reaches 100, normally every five ticks from zero (3236-3272). It does not heal every tick merely because skill=100.
+- Shock addition is controlled by doShockWounds and is one per addWounds call, not per wound point. It can occur even when clamped wounds do not rise (1404-1439); agent staging can explicitly disable it. 'Each wound adds 1 shock' is too broad.
+- healDamage can stand an incapacitated/dead creature up even if computed newValue was still <=0, forcing 1 (1284-1292); 'healing from <=0' is not proof of an ordinary legal revive command.
+- Negative/over-cap telemetry possibilities are source edge cases, not observed gameplay defects. Downstream callers and observer rules must be checked before inferring an exploit or successful resurrection.
+
+**Limit:** live latency, actual timers, equip/buff removal, client baselines and negative-HAM runtime were not exercised.
+
+**Verdict:** Core HAM model supported; correct incap minimum, kneeling arithmetic, passive-wound cadence and per-call shock semantics; runtime untested.

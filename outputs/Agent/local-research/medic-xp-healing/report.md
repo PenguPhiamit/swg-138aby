@@ -106,3 +106,24 @@ The bots currently heal themselves first (earning zero XP). To earn medical XP b
 - **`medicalAnywhere` function**: HealWound references `medicalAnywhere(creature)` at line 116 to bypass the hospital/droid requirement, but its implementation is not in this file. Where is it defined?
 - **Battle fatigue messages**: The code calls `playerManager->sendBattleFatigueMessage()` (HealDamageCommand.h:298, HealWoundCommand.h:336, HealStateCommand.h:261), but the battle fatigue system's rules are not described in these files. Does healing reduce or increase battle fatigue?
 - **Stim pack power calculation**: `stimPack->calculatePower(creature, targetCreature)` is called but its formula (which skill mods and stats it uses) is not visible here. The StimPack class definition would be needed.
+
+
+## ChatGPT's review (2026-10-18 02:30)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) and available `src/` snapshots; no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** base medical award requests are round((actual health+action healed)*0.25), round(actual wounds healed*2.5) and 50 for HealState, excluding self/pet at the award sites (HealDamageCommand.h:245-257,462-497; HealWoundCommand.h:61-74,328-349; HealStateCommand.h:56-68,302-303). Current snapshots match these command sources apart from trailing blank lines. Wound healing checks BOTH healer and patient combat status (HealWoundCommand.h:131-139).
+
+**Saluki corrections:** power*1 in HealStateCommand.h:62 does not contradict 50: its caller passes literal 50 (303). The damage formula's power is the sum of returned health/action amounts (497), not stim base potency; CreatureObjectImplementation.cpp:1273-1282 clamps the returned amount to missing usable HAM. Its combat objection is also false: both wound participants are checked.
+
+**Draft corrections/qualifications:**
+- All numeric formulas above are rounded base award requests; global XP adjustments/caps in awardExperience can alter the actual gain. Do not assert unrounded quarter XP. Mind healed is excluded even when a ranged pack heals mind (HealDamageCommand.h:476-497).
+- Ranged stim cooldown uses healing_range_speed; ordinary stim uses healing_injury_speed (HealDamageCommand.h:30-38). The cooldown table omits this branch.
+- HealWound needs positive non-city medical rating OR the gated medicalAnywhere test exception, not a bare 'hospital/droid or rating' alternative (HealWoundCommand.h:115-129; SandboxTestGalaxy.h:18-32,45-49).
+- Auto ranged selection uses combat_healing_ability rather than requiring both medicine skills (HealDamageCommand.h:88-112). The table's 'minimum medicineUseRequired' wording reverses the inequality: the player's skill must meet/exceed the pack requirement.
+- Insufficient mind is checked on the HEALER, not the target (HealDamageCommand.h:149; HealWoundCommand.h:151; HealStateCommand.h:125).
+- These three headers do not establish that ALL medical XP in the game is only from another player. Their award conditions exclude self/pet but are not a general census of all medical commands. Actual multiclass bot behavior is not shown by these headers.
+
+**Not established:** observed XP, a patient's current state and any old test's causal diagnosis. No bot was driven.
+
+**Verdict:** Core XP formulas hold with rounding/downstream modifiers; Saluki's 50-XP and combat objections are false; fix ranged cooldown, healer-mind and environment details.

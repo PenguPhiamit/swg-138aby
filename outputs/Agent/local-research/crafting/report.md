@@ -100,3 +100,23 @@ System messages appear only on errors and on completion. With the player's debug
 - The tool and station complexity values (they come from templates).
 - RCS:128-129: initializeSession returns 1 even when validation fails. The failure message uses "@ui_craft@err_no_crafting_tool" (an '@' where ':' is expected), so a failed start may show raw text or no error (inferred).
 - Factory production runs (manufacturing) were not covered.
+
+
+## ChatGPT's review (2026-10-18 02:27)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) (this topic has no `src/` snapshot); no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** station-enabled experimentation and 7 m validation, skill/10 point budget, weighted nonzero-resource averages, assembly curve and cap, experiment steps/clamping, practice +5% base XP and no retained item, prototype receipt and factory-schematic path hold (CraftingSessionImplementation.cpp:90-177,757-785,1377-1453; SharedLabratory.cpp:21-207; ResourceLabratory.cpp:39-158; CreateObjectTask.h:42-90). The cited resource-lab critical return is commented out.
+
+**Corrections/qualifications:**
+- Assembly has eight reachable tiers 0-7, while enum 0-8 has nine values including critical (CraftingManager.idl:37-45). Do not conflate these counts.
+- Food affects BOTH the early amazing threshold and toolModifier multiplicatively (SharedLabratory.cpp:164-180; CraftingManagerImplementation.cpp:85-103); low luck can also subtract random(100), mitigated by skill/city/force_failure_reduction. The draft's short roll equations omit these branches.
+- Practice XP is awarded when createPrototype schedules work (CraftingSessionImplementation.cpp:1396-1409), before timer completion. An XP delta alone does not prove receipt. awardExperience applies downstream modifiers; xpAmount/1.05 is the base request, not guaranteed final XP.
+- The prototype timer override is an unconditional positive config lookup at CraftingSessionImplementation.cpp:1422-1424; the name Sandbox does not itself enforce a _test/allowlist gate. No config was changed here.
+- Current CreateObjectTask.h:50-65 cleans persistent practice descendants and emits PROTOTYPECREATED with arg 1 for practice; the event alone is not proof of an inventory item (real transfer uses arg 0 at 79-82).
+- Serial generation uses random(34), digits 0-8 and letters a-z (CraftingManagerImplementation.cpp:142-150), not every decimal digit.
+- The short answer can sound like all available experiment points are spent per click; they form a budget, and pointsAttempted is per requested row (CraftingSessionImplementation.cpp:1100-1121).
+
+**Not established:** genetic/droid lab formulas, rendered precision, tool template values and actual client flow remain outside this resource-lab review.
+
+**Verdict:** Resource-lab formulas largely supported; qualify food/low-luck branches, base XP timing, practice observer and ungated timer override; runtime untested.

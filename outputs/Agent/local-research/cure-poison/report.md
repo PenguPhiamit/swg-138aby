@@ -96,3 +96,20 @@ Written by Claude Haiku, 15 Oct 2026, from Core3-dev 90044b8e.
 - I did not check which gear-kit name hands out the cure pack, or what happens to it when the inventory is full (AgentGearCommand.h:95-110 not fully read).
 - I did not read the rest of `playerEntryCheck` (QueueCommand.cpp:104 onward).
 - The log of the run that reported NO_EFFECT was not examined. It would show the distance, cell and wait window.
+
+
+## ChatGPT's review (2026-10-18 02:25)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) (this topic has no `src/` snapshot); no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** auto-selection filters direct inventory children by poison state and healing ability (CurePackCommand.h:54-77); range, state, cooldown, LOS, consumption, adjusted mind cost and 50 base medical XP for another non-pet patient hold (394-429). AgentGearCommand.h:202-204 still stages strength 30 for 120 seconds with negative potency.
+
+**Corrections:**
+- The cure power is a shared budget across active matching DoTs, not full power applied separately to each: DamageOverTimeList.cpp:273-289 passes the remainder to the next DoT. DamageOverTime.cpp:503-516 expires an individual tick only when the remainder is strictly positive; the list clears the state when its budget never goes negative (293-300). A single strength-30 staging DoT is not proof for stacked poison.
+- The 20-second upper cooldown assumes nonnegative healing_injury_speed and ordinary food values; only the 4-second minimum is enforced (CurePackCommand.h:125-143).
+- QueueCommand.h:63-66 defines INVALIDTARGET=4 and TOOFAR=6, not the report's final 3/4. playerEntryCheck does not reject different cells automatically: it checks building admission and locked-cell permission (QueueCommand.cpp:75-111).
+- Saluki's class-check flags are stale line citations. Current HEAL_TEXT is outputs/tools/bots/scenarios/class-check.py:93-94, poison staging validation 715-719, stage_partner 769-818 and command wait 515. These support message/staging intent, not the old line numbers or a diagnosis of an unexamined run. Explicit object-ID pack selection (CurePackCommand.h:386-391) does not repeat the auto-search state/skill filters; the blanket pack requirement needs that qualification.
+
+**Not established:** the old NO_EFFECT cause, actual inventory or lost messages. No runtime was examined.
+
+**Verdict:** Usable with corrections to DoT budgeting, error codes, explicit-pack validation and stale scenario citations; runtime cause unproven.

@@ -161,3 +161,22 @@ Written by the local model through `tools/agents/local/local_jobs.py`; 237 input
 | tendwound needs wound affliction staging | 1 | 1x | 10/15 06:25 | BLOCKED: tendWound: needs_staging: affliction:wounds |
 | ally out of healing range | 1 | 1x | 10/15 05:07 | BLOCKED: rescue: ally out of healing range |
 | resource point missing for staging test | 1 | 1x | 10/15 04:45 | BLOCKED: sample: needs_staging: resource_point |
+
+
+## ChatGPT's review (2026-10-18 02:30)
+
+Checked the report against Core3-dev `aa52cc647a2129096011eb122fe98c7794db4c2b` (read only, paths relative to MMOCoreORB/) (this topic has no `src/` snapshot); no in-game checks. The original draft remains above; corrections below take precedence.
+
+**Holds:** the saved lines.json contains 237 input notes. Recomputed current-input-hash filtering over results.jsonl gives 237 assignments, 237 unique input IDs, 139 category/label groups and no duplicate assignments; five older result chunks are correctly ignored by local_jobs.py:768-783. The 24-note/24-seen recovery group reproduces. These are counts of collected notes/checks, not independent failures or affected players (local_jobs.py:267-290,847-864).
+
+**Reject the causal categories as findings:**
+- Many 'body cannot execute' entries explicitly say RunStopped: owner requested halt. Those are intentional interruption/incomplete tests, not missing body commands. Recovery-threshold notes establish failed setup, not broken combat handlers.
+- 'health/action enhancement not applied' examples include exact re-apply receipts with unchanged max HAM. That is supported successful refresh behavior (HealEnhanceCommand.h:177-201); current outputs/tools/bots/scenarios/aurek-doctor-buffs.py:17-26 accepts the receipt. Reclassify these historical assertions as scenario false negatives unless contradictory buff evidence exists.
+- A missing performance_enhance message does not prove absent entertainer buffs: the CRCs construct buffs, without sending that text (EntertainingSessionImplementation.cpp:896-921). LOS failure is evidence of a rejected watch, not absent body vision.
+- 'hospital lacks treatment anchor' is a staging/discovery limitation; the command checks medical rating, not a named room/anchor (HealEnhanceCommand.h:92-107).
+- Null bank/quantity telemetry or a locally unreachable terminal cannot establish wrong server reward or a missing world terminal. Missing numeric resource units and crafting API are dated harness observations; current body handles crafting session packets (AgentControl.cpp:987) and the project has later telemetry changes.
+- The same run can contribute a scenario note and gate summary; counts are not deduplicated by incident. Similar problems are split across many labels. No reliable cross-category severity or root-cause ranking follows.
+
+**Disposition:** reject the whole table as a server/body bug list; keep it only as a historical symptom index with raw notes as evidence. Every unconfirmed cause stays unverified; no source or scenario fixes were applied from it.
+
+**Verdict:** Counts/provenance reproduce, but reject body/server diagnoses and incident totals; historical symptoms require per-run triage before action.
