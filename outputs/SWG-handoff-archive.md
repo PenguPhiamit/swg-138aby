@@ -2081,3 +2081,16 @@ Claude uses the grid squares to place new planets on the ticket-purchase galaxy 
 - C49 source/report b5cdbb6: escort combat checks observed 3D range after approach, defers target openers, preserves target cell and resolves ID-matched leader 'me'; doctor gate accepts exact patient/attribute refresh receipts. 21 offline checks pass; all four saved false buff failures explained. No runtime acceptance claimed.
 - Saved movement summary: 22 position events, 6 generic move failures and 3 timeouts across three reports; no posture events or rejection reasons. At gate pin 80895f63 the specific line-340 outdoor collision check is commented out; other causes remain unproven. Claude owns proposed bounded rejection telemetry and runtime reruns; no server/bot actions here.
 - Owner says continue idle tasks while Claude lacks usage: claimed C50 to verify medic/scout/entertainer XP reports against source; no new downloads, services or server edits.
+
+## Moved 2026-10-18 12:32 PM (C66; keep newest four Log entries)
+
+### 2026-10-18 8:48 AM Claude: C62 fixes F1-F6 in dev `35e7dbe6`; housekeeping; Nal Hutta gap audit queued (C66)
+
+- **C62 fixes** (owner: "start the C62 fixes on dev (F1 to F6). No restart until I say I'm off the game"): dev `35e7dbe6`, not built. F1 hit nine Hoth creatures, not two: the six named cave bosses (220) and the elder wampa (210) from the 14 Oct port had it too. Heat and electricity are now 180 to 195, and `CombatManager::getArmorNpcReduction` caps an NPC at 100%. F2: the archivist offers the ghostfire lead after the road. F3: pet kills credit the owner. F5: each job keeps its own waypoint, by id. F4: the end point counts only on the owner's planet, and not for destroy or hunting. F6: the bank window checks alive on submit. GPT's failing cases, rerun against the fixes, all pass (`Documentation-support/review-C62/check_c62_fixes.py`); g++ -fsyntax-only passes for the three C++ files. GPT re-reviews as C65 (ultra).
+- **Housekeeping, 8:36 AM** (`0cf496c`): job lists in `Agent/job-lists.md`; board 80 KB to 25 KB; GPT queue tidied; Saluki's log triage of the test galaxy is clean.
+- **Nal Hutta** (owner: "we should also figure out how much is missing from nal hutta"): GPT's C66, first in its queue when its limit resets at 12:24 PM.
+- **Next for Claude:** H1 (Echo Base doesn't draw) and the next build and restart, both once the owner is off the game.
+
+### 2026-10-18 07:32 ChatGPT: C62 release-track cross-review
+
+- Reviewed by ChatGPT: dev `a8ece12b..aa52cc64`, all 47 commits; 21 fit in source, 5 need fixes, 21 test-only. Seven ranked P2 failing cases and release-1 scope: `Documentation-support/review-C62/C62-review.md`. 199 Lua syntax checks and offline counterexamples pass; gameplay/build/rehearsal untested. No server writes or galaxy actions; Claude keeps lock. Next: Claude fixes, exact candidate review and acceptance before owner deploy OK. Older entries archived; newest four retained.
