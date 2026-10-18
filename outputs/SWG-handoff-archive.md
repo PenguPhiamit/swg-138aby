@@ -2,6 +2,232 @@
 
 Finished task rows and older log entries moved out of `SWG-handoff.md` to keep the board short (it is read every session). Newest first within each move.
 
+## Moved 2026-10-18 02:31 (ChatGPT, C63 newest-four log trim)
+
+### 2026-10-17 1:00 PM Claude: missions at every terminal type (test plan section 11): 7 of 11 PASS with exact pay; group-pay fix staged
+
+- **Runs (all mine, on the test galaxy, no restarts by me):**
+
+  | Time | Galaxy run | Groups | Notes |
+  |---|---|---|---|
+  | 5:38 AM | run 24 | Cresh | the gate ran `cresh-missions.py` |
+  | 6:02 to 6:05 AM | run 25 | all four | void: cut by the restart, halted by me |
+  | 6:25 to 6:36 AM | run 25 | all four | |
+  | 11:56 AM to 12:28 PM | run 29 | all four | |
+  | 12:35 to 12:56 PM | run 29 | all four | alongside BotPop at 600 |
+
+  The groups were Cresh, Besh (Dova, Varo), Dorn (Dorn, Rusk) and Forn. Reports: `Bot-reports/<Group>/20261017-*-missions.json`.
+- **PASS** (mission removed from the datapad, and the bank rose by exactly reward // group size):
+
+  | Terminal and mission | Reward → share paid (group size) |
+  |---|---|
+  | general/destroy | 774 → 258 (3) |
+  | general/deliver | 62 → 20, 64 → 21 (3) |
+  | artisan/crafting | 64 → 16 (4), twice |
+  | entertainer/dancer | 133 → 44, 169 → 56 (3) |
+  | entertainer/musician | 157 → 52, 205 → 68 (3) |
+  | scout/hunting | 15 kills, 1038 → 207 (5) |
+  | rebel/recon | 314 → 62, 385 → 77 (5) |
+
+  The 7th mission was refused three times (Ilsa holds 6).
+- **Not completed:** artisan/survey, scout/recon, imperial/recon and bounty. Reasons are in the plan; the scenario fixes are committed, not rerun. Mos Eisley has no newbie or statue terminal, and its faction terminals offer no deliver missions.
+- **Bugs, with evidence in test plan section 11:**
+  1. Group pay is judged from the mission's end point only. A grouped player who destroys a lair that spawned away from the first spot, or hunts away from where the mission was listed, gets nothing. **Fix staged** as asked by the main session: `Documentation-support/mission-group-pay.patch` and `.md`, against Core3-dev `25344120`; `git apply --check` is clean; unbuilt, not installed.
+  2. A deliver pickup into a full inventory leaves the mission stuck in the datapad.
+  3. A bank terminal's window opens at any range.
+  4. Bot body: mission string-ids lose their key; the bank balance is forgotten; indoor `find` uses cell-local coordinates; no mission abort.
+  5. 10 of 24 squad bots have full inventories from spare `/agentgear` kits.
+- **Bots changed for this (test galaxy only):**
+  - Cresh, Ilsa and Kor have the Marksman profession.
+  - Rusk has Novice Entertainer.
+  - Dask has Novice Bounty Hunter and Investigation I; Ressa has Novice Bounty Hunter.
+  - Ilsa keeps 6 destroy missions, Cresh one stuck delivery, and Mirren, Dask and Dova unfinished recon or survey missions. All expire within 48 h; there's no abort.
+- **Not done:** the full-datapad gate (C56) and live's 2-mission cap. `check_c9_offline.py` still fails on its Aurek fixture (stale, not mine).
+
+### 2026-10-17 12:35 PM Claude: overnight simulated population on run 29; knowledge docs read
+
+- **Owner, 17 Oct afternoon:** "im going to close client, id like you to read all the knowledge docs as efficiently as you can while we run the server bots on the simulated population mode while i sleep."
+- **BotPop overnight:** started at **12:33 PM** on run 29 by the main session, which holds the lock and watches it. Console reply `{"cities":18,"max_online":600,"mode":"all","ok":true,"queued":400}`: 200 already online plus 400 queued, so the run's cap of 600 online at once (`BotPopMax=600`) is full. The 200 Ossus explorers did not queue (`{"from":"Knossa","ok":false,"queued":0}`) because the cap was full. WSL had 9 GB free; the memory watchdog despawns bots below 2 GB.
+- **Reports:** the 7 AM job `morning29.sh` writes `Bot-reports/launch-sim/numbers-run29.md`, `findings-run29.md`/`.json`, `travel-run29.md`, `morning-run29.txt` and the planet data.
+- **Possible restart tonight:** if the Ossus, leash and vehicle fixes all land, the main session may restart onto run 30 (no owner client open, standing OK) with `BotPopMax` 1500, relaunching 1,500 plus 200 Ossus explorers; the morning set then becomes run 30's. The main session logs that restart.
+- **Stopped early, about 1:15 PM** (owner: "stop server, shutdown everything i would like to game a bit"). The main session stopped the test galaxy and BotPop and shut down WSL; the overnight population ran 12:33 to about 1:15 PM. Its message said about 1:40 PM, but run 29's report ends at 13:15 and was written before 1:18 PM. The 7 AM job is cancelled; run 29's set was written early (`report.sh run29`, all five files above, 11:05 AM to 1:15 PM). The overnight simulation restarts when the owner says the PC is free; the main session starts it and logs it. Nothing else runs on this PC meanwhile.
+- **Squad groups:** the missions session's Besh, Cresh, Dorn and Forn run was left alone; no squad runs or restarts from this session.
+- **Knowledge docs ("All of them", owner's card):** 67 mechanics reports in `Agent/local-research/`, 126 docs in `Documentation-support/`, `Agent/notes/`, `Agent/knowledge-sources.md` and Claude's memory. Skimmed (short answers and openings), no agents. Index and key facts: `knowledge-docs-index.md` in the side-session notes folder (`%APPDATA%\Claude\side-session-notes\local_c98a40c3-fc4d-4196-a226-b4493c0df564\`). Caveat: the local claim check found 28 of 941 cited claims contradicted and 102 not shown; four topics have no report yet (entertainer-xp-sources, jedi-unlock, ghostfire-quest, test-index).
+
+### 2026-10-17 9:43 AM Claude: local 3D in place of fal: TRELLIS.2 through um comfy run, proved with one crate
+
+- **The request** came from the main session, in the owner's words: "can you have it use a different free 3d tool? i imagine you know how to do that".
+- **Done:** `tools/art/trellis2_image_to_3d_api.json`, made by `tools/art/make_trellis2_api.py` from ComfyUI's own TRELLIS.2 template (converted by the frontend's `graphToPrompt`, then TRELLIS.2 only, 45 of 63 nodes).
+  - `um comfy run ... --set "Concept image.image=<file>"` downloads the `.glb` as is; `um`'s `outputs()` is generic. No wrapper and no plugin edit.
+  - `tools/art/inspect_glb.py` checks the model in Blender 3.6.
+- **The crate test** (no game client open, from 9:31 AM):
+  - The template's remesh 768 ran **out of video memory**. Remesh 512 (now the default) worked: 166 s, peak 10,021 MiB of 12,227, at least 4.96 GB of Windows RAM free.
+  - The GLB has 19,956 triangles and a 1024 PBR texture set. It decimates to 1,999 triangles in Blender, where the handles crumple a little.
+  - ComfyUI was stopped afterwards (the card is back to about 650 MiB).
+- **How-to:** `Documentation-support/local-art-models.md`, "How to: a 3D prop from an image, locally". `*.glb` is now gitignored.
+- **Not done:** no `.msh` export or client test of a generated prop yet. Nothing was installed or downloaded.
+
+### 2026-10-17 9:09 AM Claude: Vong look step 4 staged: client archive candidate + server patch, ready for the lock holder
+
+- **The owner:** "The mix is close enough. Go on to step 4".
+- **Client** (`Vong-look/tools/build_vong_client.py`, on the installed `b01e9f44`): candidate `work/vong-look/local_planets-vong-look.tre`, sha256 `185b3d7f...`, 332 entries. It adds 8 wearable templates, 16 `.sat`, 16 `.lmg`, 64 `.mgn`, 15 shaders and 12 textures, plus 8 CRC rows. The other 200 entries are byte-identical, and two runs give the same bytes.
+  - 114 files are same-length swaps, with counts asserted and differing bytes counted.
+  - 5 shaders get colour 0 rebound to `white.pal`: the chest's stock default was an olive brown.
+  - Every reference resolves.
+- **Server** `Vong-look/vong-look.patch` (20 files, Lua only): the 8 server templates, `vong_fanatic_warrior_outfit`, mobile `vong_fanatic_warrior_look` (human male body, scale 1.15, not attackable, no faction) and `OssusVongLookScreenPlay` at POI 7. `git apply --check` passes on Core3-dev `91cf87ed` (read-only), and `luac5.3 -p` passes on all 20.
+- **Nothing was installed, and `/opt/swg` was not written.**
+- **Owner's OK at 9:10 AM:** "Yes: OK to install the Vong look client archive and server patch on the test galaxy, per Vong-look/INSTALL.md. Pass it to the session holding the server lock." Forwarded verbatim to the main session (the lock holder) at 9:11 AM; delivered, not yet confirmed read.
+- **Next:** the main session installs per `Vong-look/INSTALL.md` and restarts the test galaxy; then the owner's look in game (an open question, no prefilled answers); then patrols.
+- **Times corrected 9:11 AM:** this entry and the three below first carried estimated times. The real ones, from the commits, are 8:38, 8:46, 8:58 and 9:09 AM.
+
+### 2026-10-17 8:58 AM Claude: Vong look: chitin dropped; the owner picked a bone + marauder s02 mix, no helmet
+
+- **The owner on the chitin preview:** "that looks nothing like vong armor, no helmet". The stock shape was the problem, not the texture.
+- **Lineup of six stock sets** in the same finish (`Vong-look/lineup/lineup_sheet.png`). Acklay chitin turned out to be the same mesh as chitin.
+- **The owner picked "Mix: bone + s02 collar"**, plus our own Vong body later (a TRELLIS.2 draft rigged to the human skeleton).
+- **Bone and marauder shaders work the same way:** the colour alpha is the hue mask, so the textures carry alpha 0. The leggings' waist strip and the marauder chest take colour 0 from metal and cloth palettes, so step 4 rebinds those to `white.pal`.
+- **Six mix textures** baked, converted and checked (`spec_mix.json`), and a lit preview went to the owner.
+- **GPU:** only image generation uses the 5070; Blender runs on the CPU by design. Blender 3.6 does list the 5070 for CUDA and OptiX (untested).
+- **Next:** the owner's view of the mix preview, then step 4 for the mix.
+
+### 2026-10-17 8:46 AM Claude: Vong look test step 3: swatch 12 baked onto the chitin armour; seven DDS staged
+
+- **The stock chitin shader** (`h_color2_envmask_specmap`) reads the colour texture's alpha as its hue mask, so our textures carry alpha 0 (no tint) in DXT5. The stock `_spec` and env maps stay referenced.
+- **The bake:** `Vong-look/tools/bake_vonduu.py` (Blender, CPU) box-projects swatch 12 with ambient occlusion and bakes it into each male piece's own UVs at the stock sizes. All seven take 10 s. No stock pixel is used.
+- **Orientation proved** against the meshes' raw UVs (96-99% overlap; 66-96% if flipped).
+- **The DDS files:** `convert_vonduu.py` applies gamma 0.7 (the bake is very dark), sets alpha 0 and writes BC3 with full mips. Stock sizes and mip counts are checked, and all pass. Output: `Vong-look/staged/client/texture/` (gitignored).
+- **A Blender preview was sent to the owner.** It reads as dark grey crab plating; the red crevices mostly wash out.
+- **Nothing is in an archive or the client yet.** The GPU was not used for any of this.
+- **Next:** the owner's view of the preview, then step 4 (the `armor_chitin` -> `armor_vonduu` clone chain and the CRC rows).
+
+### 2026-10-17 8:38 AM Claude: Vong look test: swatch 12 picked; skin colour checked
+
+- **Rounds 2 and 3** followed the owner's reference screenshot, used by eye only and not fed to the model. The owner picked **swatch 12**: rough dark crab shell with a red tint in the crevices.
+- **Round 2 drew shells on a background,** so it is superseded. Round 3's prompts ("completely covered edge to edge, no background") fill the frame and tile.
+- **A RAM failure in ComfyUI:** a `MemoryError` while it streamed the 8 GB text encoder, with about 9 GB free in Windows. A retry worked. `--disable-pinned-memory` then ran clean, at 2.1-3.5 s an image.
+- **Skin colour** (Wookieepedia Legends and other sources): grey is most common, then yellow. Nei Rin is white with purple tattoos; Zenoc Quah light grey with black tattoos. No source gives green.
+- **For the first look:** the warriors keep the chitin helmet on. A bare head with pale skin, eye sacs and tattoos is a later texture job.
+- **Details:** `Documentation-support/vong-look-test.md`.
+- **Next:** step 3, the Blender bake of swatch 12 onto the chitin armour's UVs.
+
+### 2026-10-17 8:30 AM Claude: first ComfyUI run on this PC; Vong look test step 1 done
+
+- **Run with the owner out of the game** ("im out, run it"), from 8:23 to 8:26 AM. ComfyUI 0.41.0 started on PyTorch 2.14.0+cu130 and saw the RTX 5070, so Blackwell works. It ran `--offline`, local only.
+- **FLUX.2 [klein] 4B fp8, 1024 px:** 35.0 s cold (loading included), then 3.7-4.6 s an image. Card peak 11,563 of 12,227 MiB; free Windows RAM stayed at or above 8.56 GB.
+- **Idle ComfyUI keeps 8.6 GB on the card.** I stopped it at 8:27 AM (back to 927 MiB). Always stop it before the owner plays.
+- **Four Vong images** (three armour textures, one concept sheet) are in `Vong-look/gen/` (PNGs gitignored; prompts and seeds in `comfy_manifest.jsonl`). The tiling prompts did not tile on their own; `um sprite seamless` fixed them. Details: `Documentation-support/vong-look-test.md`, `local-art-models.md`.
+- **Untested:** TRELLIS.2 (its template still has to be put into API form), and everything in the game.
+- **Next:** the owner picks a swatch, then step 3 (the bake in Blender) and step 4 (the clone).
+
+### 2026-10-17 7:50 AM Claude: local AI models for art and planet work (research only)
+
+- **The owner asked** whether a local model on this PC can do some of the art or planet work. The answer is in `Documentation-support/local-art-models.md`. Nothing was downloaded, installed or run.
+- **This PC:** RTX 5070 with 12 GB (9.8 GB free with two clients open), 32 GB RAM (6.4 GB free in Windows; WSL 10.8 GB), and 90 GB free on C:. The driver supports CUDA 13.4.
+- **Ranked picks:**
+  1. ComfyUI portable (cu130) + FLUX.2 [klein] 4B fp8 (Apache 2.0, about 8.4 GB VRAM by ComfyUI's figure), for kajidic seals and banners, the Hutt sash decal, Nal Hutta loading screens, concept sheets and texture sources. 14.5 GB of downloads.
+  2. `um sprite seamless` for tiling (already installed); SDXL only if seams show.
+  3. TRELLIS.2 native in ComfyUI (MIT, int8, 8.95 GB) for static prop drafts. Experimental: Microsoft asks for 24 GB.
+  4. Hunyuan3D 2.0 shape only, as a fallback. Its licence excludes the EU, the UK and South Korea.
+- **No model helps** with `.trn` terrain (scripted, and the maps and globes come from it), `.mgn` weighting to `hutt.skt`, or `.ans` animation.
+- **Also answers** the 13 Oct asset-workflow review; the board row is updated and the note links here.
+- **Verified:** hardware, licence tags, file sizes and gating, and client texture sizes (loading screens 512 DXT1, globes 256 DXT1 with 9 mips, maps 1024 DXT1).
+- **Untested:** every speed and VRAM figure on this card.
+- **Owner's pick (about 7:55 AM): "2D art + 3D test"** (picks 1 and 3).
+  - All nine files are downloaded and SHA-256 checked (23.42 GB). ComfyUI 0.41.0 portable is unpacked at `C:\Users\Pengw\Tools\ComfyUI_windows_portable` with the models in place: 25.83 GB, and 63.5 GB is still free on C:.
+  - No custom nodes and no system install. The install record is at the end of the note.
+- **Not started yet:** two SWGEmu clients were open at 8:00 AM, so ComfyUI has never been run. It is untested on this card.
+- **Next:** the first test (one klein image, one TRELLIS.2 run at 512) when the owner is not playing. Start it with `advanced\run_nvidia_gpu_disable_api_nodes.bat`, which runs with `--offline`, so no paid nodes.
+
+### 2026-10-17 6:40 AM Claude: creation sweep: every species and gender created, read back and deleted (test plan section 2)
+
+- **Commits:** `b244f27` (the scenario `tools/bots/scenarios/creation-sweep.py` with its README section and offline tests), then this commit (the fixes the run turned up, 33 offline tests, results in the test plan).
+- **Run 25, 6:17 AM** (dev `7be8837a`, archive `f0191ab5`), after the main session's go. No restart and no squad or botpop commands. Report `Bot-reports/Creation/20261017-061803-creation-sweep.json`, 55 of 57 checks.
+  - **24 of 24 created and logged in**, 8 at a time: 0.3 to 1.3 s per creation, 1.3 s per login.
+  - For every one, the object CRC, the shown name and all nine starting attributes match (profession_mods + racial_mods, current equal to maximum).
+  - Name filter 21 of 21: 8 refusals with the right code, and 13 acceptances (the old substring traps, canon names stock refused, a Hutt kajidic surname).
+- **Hutt C54 F1 to F3 verified in game:** the male Medic and female Entertainer each have their profession row plus S7's 100/150/300/0/0/50/0/0/300. The limits, `desc_hutt` and the skill labels are as approved, and creation applies the Hutt's own name rules.
+- **Cleanup:** 24 of 24 moved to `deleted_characters` at 6:23 AM with the login server's statements. The run's own cleanup at 6:18 AM found no rows and touched nothing: new characters wait in `characters_dirty` until the zone's next save (about every 10 minutes). The scenario now waits for that save; so far that wait has run live only through `creation-sweep.py cleanup`.
+- **Bugs, proposed and not fixed** (each needs our archive changed and installed on client and server):
+  - **B1, stock creation text:** the Sullustan description shows the Zabrak's bonuses and the Ithorian description the Mon Calamari's (`patch_12_00`, copied unchanged into our archive).
+  - **B2, stock data gap:** the Ithorian male Brawler's starting jacket `ith_jacket_s16` has no template on the server or in the client. Each such creation logs 3 ERROR lines, and the character starts without the jacket. The sweep now checks every starting item for a server template; this is the only one missing.
+- **Also changed after the run:** account choice, the name check and the template check now read `characters_dirty`. Console errors that follow our character's login on the same server thread count as ours (that is how B2 slipped past). The "name in use" case now borrows a bot's name, not a player's.
+- **Next:** the owner decides on B1 and B2. The sweep can run again at any time on the other load-fleet accounts (53 are free).
+
+### 2026-10-17 6:00 AM Claude: "the server keeps putting us back" fixed; test plan section 4 passes
+
+- **Cause** (`Documentation-support/movement-pushback.md`): the server bounces a walker when its packets arrive bunched after a stall (the speed check divides client distance by server time). On run 24 one stall while BotPop's 300 bots logged in bounced five bots in the same second, 6.2 to 9.3 m/s measured against 5.68 allowed. The body then gave up after three bounces per move however long the walk, and counted the server's resync echo as a bounce too. Crouched or sitting bots were bounced every step.
+- **Fix, dev `7c2f2605`** (agent body): a bounce ends the leg and the walk re-plans from where the server put the bot; it gives up only on three bounces within 10 m (or eight per move); the walk speed follows the server's limit for the bot's posture; `move` stands up first. **Dev `b034d15f`** (server): every bounce writes a `[Movement]` line with its check, and a failed speed check writes the measured speed. This logs real players too.
+- **Results, run 24** (5:24 AM restart): gate **PASS** 47 of 56 at 5:38 AM, no regressions. The three 15 Oct failures pass: Besh hide patrol, Cresh at the mission terminal and the mission area, and Tovan on the plateau (`esk-routes.py` 5 of 5 at 5:33 and 5:50 AM). Dova's 268 m walk into the cloning cell, which failed at 3:26 AM, arrives with 0 corrections, and a kneeling bot stands up and walks. Across 8 reports and 78 moves: 0 "putting us back" errors and 5 bounces, all absorbed. The test plan's section 4 and gap 2 are updated.
+- **Not done / open:** the server's speed check still misfires during stalls, so a real player can rubber-band. Changing it touches the stock anti-cheat (owner's call, then a review). The `[Movement]` lines give the numbers. Not tested: `/sit` before a walk, and a rooted or overloaded bot. The 7 start errors on run 24 are "Failed to rename log/who.json.next" (live map file, first 83 s).
+- **Galaxy:** free for the species, missions and real-client sessions' checks since 5:55 AM. This session keeps the lock for the test pass, so restarts and BotPop changes go through it. BotPop is at 300 in "all" mode.
+
+### 2026-10-17 5:56 AM Claude: real-client session for the interaction loss: no stall at 300 bots
+
+- **Session:** the owner played [name removed] on run 24 from 5:32:44 to 5:48:08 AM (about 15 minutes; part of the new checklist, `Documentation-support/functional-test-plan.md` section 5). BotPop was at 300, and the gate and a squad round were running. Monitors (read-only): Windows CPU and "responding" every 2 s, WSL load and core3 CPU, the console with wall-clock times, per-second zone packets for the owner's port, `core3.log`, and the input listener (owner's OK).
+- **Result:** no sign of the interaction loss. The client responded in 602 of 602 samples; total CPU median 21%, max 70%; WSL load at most 2. Traffic both ways in 903 of 925 seconds, and never client-only. Clean logout (`hasError = false`). No Insert (stuck) presses, no `[Movement]` bounce for [name removed], no new crash dump. This fits the 16 Oct starvation explanation without proving it. **The owner's own account is still to come**, and goes into section 5 when they answer.
+- **Owner's tell to Esk** (BotPop): the lanes are right, but the bots don't look like a real population, and don't progress, form guilds, build cities or work together. Passed to the BotPop social-play session at their request.
+- **Follow-ups, proposed:** a repeat at 1,000 to 1,700 bots with the same monitors; the rest of the 40-minute list. Unrelated: `Play SWG.cmd` (live) keeps the old WSL address `172.23.208.109:44453` in `swgemu_login.cfg`, but WSL is now mirrored (`192.168.1.210`), so the live launcher probably can't connect until it writes the current address the way the test launcher does. No galaxy, `/opt/swg` or BotPop changes by this session.
+
+### 2026-10-17 5:24 AM Claude: test galaxy restart (run 24) for the movement fix
+
+- **Restart 5:24 AM** (no squad run, no SWG client running, login config on the live port): run 24, resumed copy, dev build with the movement fix (committed after the rerun as `b034d15f` and `7c2f2605`; `Documentation-support/movement-pushback.md`), same configs as run 23. All 24 squad bots logged in afresh on the new body; BotPop back to 300 in "all" mode. Results in the 6:00 AM entry.
+
+### 2026-10-17 4:25 AM Claude: local model on the friend's PC: installer, fallback to this PC, shared workflow
+
+- **Commits:** `cb6c487` (installer, server list with fallback, workflow), `f2b63e1` (names delta sweep in the workflow), `54391cd` (the installer pulls every model we use). Another session set up the friend's PC itself at about 4:20 AM with the older manual steps (`c97a500`): Ollama 0.40.5 and qwen3:8b only, plus a firewall rule for the whole subnet.
+- **Installer:** `tools/agents/local/friend-pc/install-ollama-lan.ps1` (how-to in `README.md` there, and a private page for the owner to open at the friend's PC). It admits only Miniverse (Private profile, ollama.exe only), offers to switch off the older subnet rule, pulls qwen3.6:35b-a3b, qwen3.5:9b, gemma4:12b, qwen3:8b and gpt-oss:20b, builds gpt-oss-20b-64k, and self-tests each one. `-CheckOnly` and `-Remove` are there too. **It has not been run at the friend's PC yet.**
+- **Fallback:** `ollama-url.txt` (gitignored) now lists the friend's PC (qwen3:8b, 32K) and then this PC (qwen3:8b, 16K, with the memory guard). The 32768 in `ollama-ctx.txt` is only a default now, since each line sets its own size. The model is unloaded every 5 requests on the friend's PC too.
+- **Workflow:** `Agent/local-model.md`, linked from AGENTS.md: which jobs go there, how both agents queue them (topic fields `model`, `local_only`, `review_by`), and how reports are reviewed.
+- **Verified:**
+  - 76 offline tests in WSL and 10 chunk-job tests.
+  - A real 2-chunk job on the friend's PC: 44 s including the model load. As a draft, qwen3:8b caught a doubled word, missed a misspelling, and flagged one correct line.
+  - Over the real network, a server that doesn't answer is skipped after 3.0 s.
+  - `idle_research.py status` counts the friend's quiet minutes. The timer starts the first of the 5 open topics there after 10.
+- **Not verified:**
+  - The installer run (firewall tightening, the downloads, whether Ollama 0.40.5 can pull the qwen3.6, qwen3.5 and gemma4 tags, speed and GPU share).
+  - A real fallback with the friend's PC off.
+  - A research topic run there.
+  - The friend's RAM under long runs. It can't be read from here; the unloads are the only guard.
+- **Next (owner):** at the friend's PC, run the installer from the page, and answer yes to switching off "Ollama LAN 11434". After its self-test, Claude switches the friend's line to qwen3.6:35b-a3b at 65536.
+- **Owner's call:** the names delta sweep. The checklist below sends it to the friend's PC. The workflow keeps it on this PC, because real names don't leave this PC and the friend agreed to source, bot notes and game text. Nothing is queued until a `names-delta` job exists in `local_jobs.py`.
+
+### 2026-10-17 4:04 AM Claude: going-public check, assets clear; licence, credits and the checklist
+
+- **Assets (whole history, which is what the export publishes):** no image, model, texture, sound, archive or SWG client file was ever committed.
+  - The only asset files are ours: the Ossus `.tga` bitmaps and `.ws` snapshots from `tools/ossus_terrain.py`, and `SpeciesColorLock.fx`.
+  - Kenney (CC0): only receipts and notices are in git; the Quaternius art (CC0) isn't in git. TortoiseBots: with permission, credited. EiF: reference indexes only.
+- **Owner's decisions (17 Oct):**
+  - **AGPL-3.0 for the whole repo** (`LICENSE`), with credits in `NOTICE.md` (`01fb0de`).
+  - The **SWG×SW5E books and the material extracted from them stay out** of the public copy (export drop list).
+  - **MTG: credited and published now**, removed if an author objects.
+  - Names: keep credits, whole source links, brother mentions with no name, and the characters Benny and Tulde Dedra. "Bill" (a first name in a quoted comment) is reworded in the export. Decisions are in `work/names-sweep/decisions-2026-10-17.json` (local).
+- **Test export build** (local, no push): 347 commits, no dropped paths, no handles or e-mail, messages clean, the SW5E files in no version, LICENSE and NOTICE at the top.
+- **Before going public (checklist):**
+  1. **Names delta sweep:** the 324 files changed since 15 Oct 11:40 AM. It waits for the local model on the friend's PC (owner: "save it for the local model we are setting up"); Claude or GPT reviews its list.
+  2. The owner makes a **fresh public repo** and runs `github_export.py push <new url>`. Then check it on GitHub.
+  3. **Purge the old repo** (owner, 17 Oct: "dont forget we need to purge the old github"): after the new one checks out, the owner deletes the old private repo (Settings, Danger Zone, Delete this repository). It may still hold early commits by hash. Check it has no forks first. Claude doesn't delete repositories.
+  4. Then the TortoiseBots fork (`Documentation-support/tortoisebots-fork-plan.md`).
+
+### 2026-10-17 2:30 AM Claude: PL-05 Hoth leftovers staged (scheduled run; nothing installed)
+
+Built only what the owner answered (15 Oct Q4; 14 Oct question 9). Folder `Hoth-leftovers/`: `hoth-leftovers.patch` (13 Lua files against Core3-dev `07d9f61e`; `git apply --check` and `luac -p` pass, read-only), `build_hoth_leftovers.py` (chains on the installed `df1d538e`; candidate `work/hoth-leftovers/local_planets-hoth-leftovers.tre`, sha256 `108d4234...`, 178 entries byte-identical, 8 changed, 13 new) and `LEFTOVERS-INSTALL.md` (install order: archive on both sides first, then the patch). Adds: the mynock ice cave with Fable's flatten layer; Hoarfang in a fixed spot with a 30-minute respawn, blue through a `rancor_ice` chain on the Chiss skin palette; badge 141 and a rare-decor roll at the end of Vell's chain; artisan and entertainer terminals plus both recruiters at the starport (recruiters off the camps); deliveries to three camps; map names for the two dens. Density, area and camp names and the camp junk dealer were already in dev. Untested; three owner questions at the top. Tauntaun riding stays its own batch.
+
+### 2026-10-16 16:40 Claude: Hutt crash fixed, C55 answered, release plan, C46 reviewed
+
+- Hutt creation crash fixed and installed (above). C55 F1/F2 fixed in dev `c5d713b8`; C58 re-review queued for GPT. `live-release-1.md` revised to GPT's verdicts (small first release from live; T1/T2/S1-S5 and BotPop stay on test; missions held). C46 (`ccf9519`): a failed minute PATCH retries, previews overwrite, success spacing fixed, no version banner; 56 tests pass. Opus took Fable's content job (`7a99802`): 16 owner questions to bring as cards.
+
+### 2026-10-16 16:28 Claude: Fable's content-design job: ranked backlog and faction plan
+
+- `Fable-backlog/README.md` + `backlog.json`: 73 cut and custom items by theme (71 ranked, Hutt and world boss in flight), client archives surveyed with swgfmt. Top 5: Ossus O7 build, Hoth leftovers, Nal Hutta first look, faction foundation, Ossus people; next to design: faction data, Ossus people, Nautolan/Togruta/Chiss names and profiles. `Fable-factions/README.md`: the 138-139 ABY sides checked on Wookieepedia (Legends), Core3 faction code read-only (dev `a8ece12b`), options A/B/C, recommends A (two GCW sides as Triumvirate and Krayt's holdouts, seven NPC standing sides), 13 owner questions with defaults. Design only; nothing built, run or written under /opt/swg. Board commit includes ChatGPT's finished C55 row and entry (report `fbee3aa`). Oldest Log entry archived.
+
+### 2026-10-16 16:08 ChatGPT: C55 release review complete
+
+- Reviewed by ChatGPT: seven requested non-bot commits; report/evidence `fbee3aa`, `Documentation-support/review-C55/C55-review.md`. Open inherited helper lock P1 and global spawn-gate P2; original Hutt defects already corrected by excluded C54 source. XP, delivery-on-C45 and isolated city guard fit in source; spawn experiments/bot workaround stay on test. 74 Lua checks pass; gameplay/mission/Hutt gates remain untested here. No server writes or galaxy commands. Next: Claude fixes/splits, acceptance, exact release cross-review and owner OK. Oldest Log entry archived.
+
+### 2026-10-16 09:12 ChatGPT: C54 Hutt review and source complete
+
+- Reviewed by ChatGPT: 26b54813/S7, 1 P1 + 5 P2 with failing cases; `82e52303` species/refusals, `deb3319e` Artisan floater, `8ebace32` Hutt names on gpt/c54-hutt-floater; report/client staging `a07d346`. 17 changed/new Lua pass; all 47,406 checked (one unchanged legacy migration error); race-header/LAT/link/archive checks pass. No configured build; full server/gameplay untested. Next: Claude review/cherry-pick, fix client profile/text/builder gates, owner floater visit. Run 10/dev/galaxy untouched; oldest log entry archived.
+
 ## Moved 2026-10-16 17:00 (Claude, Hutt crash)
 
 ### 2026-10-16 09:01 ChatGPT: C53 Ossus o7 staging complete
