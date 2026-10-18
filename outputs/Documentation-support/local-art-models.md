@@ -303,3 +303,16 @@ about 100 MB/s, roughly 7.5 minutes in all.
 - **Not run yet: TRELLIS.2.** Its template uses subgraphs and still has to be put into API form. It is the next test.
 - **To remove it all:** delete `C:\Users\Pengw\Tools\ComfyUI_windows_portable` and `C:\Users\Pengw\Tools\downloads`.
   Nothing else on the PC was changed.
+
+## FLUX.1 schnell (18 Oct 2026, owner's OK), and Z-Image removed
+
+- The owner, about 1:20 PM: "try this, delete zimage" (link: black-forest-labs/FLUX.1-schnell). BFL's repo needs a
+  Hugging Face login to accept its terms, so with the owner's card answer the ungated official ComfyUI repack was used:
+  `flux1-schnell-fp8.safetensors` from `Comfy-Org/flux1-schnell` (Apache 2.0), 17,236,328,572 bytes, SHA-256
+  `ead426278b49030e…`, matching the Hugging Face LFS id. One file: the model, CLIP-L, T5-XXL fp8 and the VAE. It sits
+  in `models\checkpoints`. Workflow: `tools/comfy/flux1-schnell-t2i.json` (4 steps, cfg 1, euler/simple; schnell
+  ignores a negative prompt). `models\vae\ae.safetensors` is the same file as schnell's VAE (`afc8e28272cd15db`) and stays.
+- Z-Image Turbo int8, the Z-Image-Engineer gguf, the `ComfyUI-Z-Engineer` custom node and its workflow went to the
+  Recycle Bin, and the owner emptied it.
+- Banner tests (launcher): klein 4B follows "living coral" best; Z-Image and schnell draw photoreal scenes but
+  turn "worldships" into metal saucers unless the prompt leads with coral, rock and flesh.
