@@ -3,6 +3,7 @@ these for queue topics of kind "map"; each can also be run by hand:
 
     python3 local_jobs.py prepare JOB DIR    # writes DIR/input.jsonl and DIR/instruction.txt
     python3 local_jobs.py report JOB DIR     # turns DIR/results.jsonl into DIR/report.md
+    python3 local_jobs.py prepare log-triage DIR [test|live|PATH]   # which core3.log (default: the topic's "log", else test)
 
 Jobs:
   proofread  Player-facing text that is ours: every string in the test client archive (SWG-client/local_planets.tre)
@@ -32,16 +33,28 @@ Jobs:
              wrong way, not an item, unsure. Run item_sources.py first. Model: qwen3.6:35b-a3b.
   item-check-ok (17 Oct; owner: a second pass after the flagged ones) The same for the items that do have a way
              (flag "ok"): is that way the one that was meant?
+  log-triage (18 Oct) The ERROR and WARNING lines of a galaxy's core3.log since its last start, collapsed by pattern
+             (numbers, addresses and object names masked) with counts and the first time seen. Patterns listed in
+             log-known.txt next to this file are reported as known without the model; the model sorts the rest into
+             known and harmless, new, or crash risk. Saves Claude reading the log after a restart. Model: saluki.
+  board-trim (18 Oct) Each "### date time" log entry on SWG-handoff.md older than two days, as a proposed one-line
+             summary that keeps commit hashes, run numbers and owner quotes (the report names any it dropped). The job
+             changes nothing: Claude checks the lines, then moves the entries to SWG-handoff-archive.md. Model: saluki.
+  scenario-draft (18 Oct) One first-draft bot scenario per area that test plan section 3 still lists as open, from
+             section 3 of the area's research reports, the test plan's gaps and pass lines, squad.py's Bot API and one
+             finished scenario. Drafts go to DIR/drafts/<area>.py, never into tools/bots/scenarios; the report checks
+             their syntax, slash commands and Bot calls without the model. Model: qwen3.6:35b-a3b.
 All are drafts by a local model: Claude or ChatGPT checks an item before acting on it, and every dialogue or chat
 line is reviewed before it goes into the game.
 """
+import ast
 import hashlib
 import json
 import re
 import subprocess
 import sys
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -120,9 +133,43 @@ Give every line one verdict:
 - unsure: you don't know. Use this rather than guess.
 Answer with JSON only: {"items": [{"id": "<id exactly as given>", "verdict": "...", "intended": "<how players should
 get it, or empty>", "why": "<one sentence>"}]}.""",
+    'log-triage': """You triage the server log of a Star Wars Galaxies emulator (SWGEmu Core3: a C++ server with Lua scripts)
+since its last start. Each input line is "<id>\t<level>\t<count>x\t<first seen>\t<pattern>": one kind of ERROR or WARNING
+line, with numbers, addresses and object names replaced by # or <ip>, and "[Tag]" naming the part of the server that
+logged it. Level RAW is a line without the log's header (a crash message or a backtrace). Sort every line:
+- "known": routine and harmless. Stock SWGEmu prints many of these: templates or client data files the server doesn't
+  use (later-era content, space data), a missing optional Lua base script, a bad packet from one client.
+- "crash-risk": could crash or hang the server or lose data: a null or invalid object, an assertion, an exception in
+  the server's own code, a lock or deadlock, a database or save error, running out of memory, a crash message.
+- "new": anything else a person should look at: a game system failing, data that doesn't match, an error in a script.
+If unsure between "known" and "new", say "new". Give one line of why: at most 15 words on what the message means.
+Answer with JSON only: {"items": [{"id": "<id exactly as given>", "verdict": "known|new|crash-risk", "why": "..."}]}.""",
+    'board-trim': """You shorten old log entries from the work board of a Star Wars Galaxies emulator server project. Each
+input line is "<id>\t<entry>": the entry's heading (date, time, author: title), then its text, with " ¶ " marking a
+line break. For each entry write one line of at most 40 words: what was done or found, and where it stands. Copy
+exactly, character for character, every commit hash (hex like 1be13676 or 3a4414e), every run number ("run 30") and
+every quote of the owner (text in quotation marks after "owner"); these may go past the 40 words. Leave out file
+lists, steps and timings unless they are the result. Don't repeat the heading's date and author, and add nothing that
+is not in the entry. Answer with JSON only: {"items": [{"id": "<id exactly as given>", "line": "..."}]}.""",
+    'scenario-draft': """You draft bot test scenarios for a Star Wars Galaxies emulator test server (SWGEmu Core3, pre-CU).
+A scenario is a Python file that tools/bots/squad.py runs: it sets GROUP = '<group name>' and defines run(g), where g
+is the bot group (g['First name'] or g.bots gives a Bot; g.check(label, ok, detail) records a pass or a fail; g.note(text)
+records a note). The Bot API and a finished scenario follow below. Each input line is "<id>\t<area>. TEST PLAN: <the
+plan's gaps and pass lines> NOTES: <what research notes on the server's source say a test should check>", where " ¶ "
+marks a line break. For each input write one scenario that does what the pass line and the notes ask:
+- use only the Bot and group methods listed below, and slash commands the notes or the example name;
+- keep command names, message ids and numbers exactly as the notes give them;
+- one g.check per expected result, with a short label;
+- where a step can't be done with this API, write g.note('TODO: <what is missing>') and go on; never invent a method;
+- set GROUP = 'TODO' (the reviewer picks the group); start with a docstring naming the area and what it checks;
+- at most 80 lines of code, plain Python 3, no imports beyond json, math, re and time.
+Answer with JSON only: {"items": [{"id": "<id exactly as given>", "code": "<the whole Python file>", "gaps": ["<a step
+the API can't do yet>"]}]}.""",
 }
 INSTRUCTIONS['item-check-ok'] = INSTRUCTIONS['item-check']
-CHUNK = {'bot-chat': 8, 'npc-dialogue': 3, 'report-digest': 1, 'item-check': 20, 'item-check-ok': 20}   # lines per chunk; the rest use PER_CHUNK
+CHUNK = {'bot-chat': 8, 'npc-dialogue': 3, 'report-digest': 1, 'item-check': 20, 'item-check-ok': 20,   # lines per chunk;
+         'log-triage': 20, 'board-trim': 2, 'scenario-draft': 1}                                       # the rest: PER_CHUNK
+# An answer is cut at 1536 tokens (local_map.ask), so a chunk holds what fits: 20 verdicts, two board lines, one draft.
 INSTRUCTIONS.update(precheck.INSTRUCTIONS)
 CHUNK.update(precheck.CHUNK)
 
@@ -320,9 +367,370 @@ def item_lines(flagged_only=True):
                 + ('the same' if it['stock'] == it['dev'] else ways(it['stock']))) for t, it in flagged]
 
 
+def side_file(folder, name, default):
+    """A side file prepare wrote for the report (JSON), or default."""
+    path = folder / name
+    return json.loads(path.read_text(encoding='utf-8')) if path.exists() else default
+
+
+def topic_field(folder, name):
+    """A field of the queue topic whose id is the folder's name (idle_research.py runs topic X in folder X), or None."""
+    try:
+        topics = json.loads((precheck.RESEARCH / 'queue.json').read_text(encoding='utf-8'))['topics']
+    except (OSError, ValueError, KeyError):
+        return None
+    return next((t.get(name) for t in topics if t.get('id') == Path(folder).name), None)
+
+
+# ------------------------------------------------------------------ log triage (18 Oct)
+
+LOGS = {'test': '/opt/swg/testgalaxy/Core3/MMOCoreORB/bin/log/core3.log',
+        'live': '/opt/swg/Core3/MMOCoreORB/bin/log/core3.log'}
+LOG_KNOWN = HERE / 'log-known.txt'   # "<pattern or part of one>\t<why>" lines: reported as known without the model
+LOG_LINE = re.compile(r'^(\w{3} \w{3} +\d+ \d\d:\d\d:\d\d \d{4}) \[\d+ msec\] \((\d+) s\) Thread \d+ - '
+                      r'(?:\[([^\]]*)\] )?([A-Z]+) - (.*)$')
+LOG_LEVELS = ('ERROR', 'WARNING', 'FATAL', 'CRITICAL')
+LOG_IP = re.compile(r'\b\d{1,3}(?:\.\d{1,3}){3}(?::\d+)?\b')
+LOG_NUMBER = re.compile(r'0x[0-9a-f]+|\d+(?:\.\d+)?', re.I)
+LOG_RAW = re.compile(r'(?i)\b(?:error|exception|assert\w*|segmentation|fault|abort\w*|terminate\w*|backtrace)\b')
+LOG_ORDER = ('crash-risk', 'new', 'unclear', 'known', 'no answer')
+
+
+def log_path(folder, given=None):
+    """The core3.log to triage: given on the command line, else the topic's "log" field, else the test galaxy's.
+    "test" and "live" name the galaxies' logs; a folder means the core3.log in it."""
+    choice = str(given or topic_field(folder, 'log') or 'test')
+    path = LOGS.get(choice, choice)
+    return path if path.endswith('.log') else path.rstrip('/') + '/core3.log'
+
+
+def read_log(path):
+    """The log's text, read only; on Windows a /opt/swg path is read through WSL."""
+    if sys.platform == 'win32' and path.startswith('/'):
+        done = subprocess.run(['wsl', '-d', 'Debian', '-u', 'swgemu', '--exec', 'cat', path], capture_output=True,
+                              timeout=600)
+        if done.returncode:
+            raise OSError(done.stderr.decode('utf-8', 'replace').strip() or f'cat exited {done.returncode}')
+        return done.stdout.decode('utf-8', 'replace')
+    return Path(path).read_text(encoding='utf-8', errors='replace')
+
+
+def clock(stamp):
+    """'Sun Oct 18 00:29:58 2026' -> '10/18 12:29 AM' (the owner reads 12-hour times)."""
+    try:
+        d = datetime.strptime(stamp, '%a %b %d %H:%M:%S %Y')
+    except (TypeError, ValueError):
+        return stamp or '?'
+    return f'{d:%m/%d} {d.hour % 12 or 12}:{d:%M} {"AM" if d.hour < 12 else "PM"}'
+
+
+def log_patterns(text, known=None):
+    """([(id, line)] for the model, {since, matched, patterns, known}) from a core3.log's text. Only what follows the
+    server's last start counts: "[Core] initializing context", or the uptime "(N s)" dropping back under 2 minutes.
+    Lines are collapsed by pattern: the tag's object name dropped, addresses -> <ip>, numbers and hex ids -> #.
+    Patterns containing a key of `known` ({part of a pattern: why}) are returned under "known", not for the model."""
+    rows, start, last = text.split('\n'), 0, None
+    for n, row in enumerate(rows):
+        m = LOG_LINE.match(row)
+        if m:
+            up = int(m.group(2))
+            if (last is not None and up + 1 < last and up < 120) or (
+                    m.group(3) == 'Core' and m.group(5).startswith('initializing context')):
+                start = n
+            last = up
+    seen, since, when = {}, None, None
+    for row in rows[start:]:
+        m = LOG_LINE.match(row)
+        if m:
+            when = m.group(1)
+            since = since or when
+            level, tag, message = m.group(4), (m.group(3) or '').split(' ')[0], m.group(5)
+            if level not in LOG_LEVELS and not re.search(r'\bERROR\b', message):   # Lua errors are logged as INFO
+                continue
+        elif LOG_RAW.search(row):   # no header: a crash message or a backtrace line
+            level, tag, message = 'RAW', '', row
+        else:
+            continue
+        pattern = LOG_NUMBER.sub('#', LOG_IP.sub('<ip>', (f'[{tag}] ' if tag else '') + message))
+        pattern = ' '.join(pattern.replace('`', "'").split())[:300]
+        entry = seen.setdefault((level, pattern), {'level': level, 'pattern': pattern, 'count': 0, 'first': clock(when)})
+        entry['count'] += 1
+    asked, listed = [], []
+    for e in sorted(seen.values(), key=lambda e: -e['count']):
+        why = next((w for k, w in (known or {}).items() if k in e['pattern']), None)
+        (asked if why is None else listed).append(e if why is None else dict(e, why=why))
+    lines = [(f'p{n}', f'{e["level"]}\t{e["count"]}x\t{e["first"]}\t{e["pattern"]}') for n, e in enumerate(asked, 1)]
+    return lines, {'since': clock(since) if since else '?', 'matched': sum(e['count'] for e in seen.values()),
+                   'patterns': len(seen), 'known': listed}
+
+
+def log_lines(folder, given=None):
+    path = log_path(folder, given)
+    known = {}
+    for row in LOG_KNOWN.read_text(encoding='utf-8').splitlines() if LOG_KNOWN.exists() else []:
+        part, _, why = row.partition('\t')
+        if part.strip() and not part.startswith('#'):
+            known[part.strip()] = why.strip() or 'listed'
+    try:
+        text = read_log(path)
+    except (OSError, subprocess.SubprocessError) as error:
+        raise SystemExit(f'log-triage: cannot read {path}: {error}')
+    lines, meta = log_patterns(text, known)
+    (folder / 'log-meta.json').write_text(json.dumps(dict(meta, log=path), indent=1, ensure_ascii=False),
+                                          encoding='utf-8')
+    return lines
+
+
+def log_verdict(text):
+    v = str(text or '').lower().strip()
+    return ('crash-risk' if v.startswith('crash') else 'known' if v.startswith('known') or 'harmless' in v
+            else 'new' if v.startswith('new') else 'unclear')
+
+
+def log_report(lines, items, meta):
+    """One table, crash risks first, then new, unclear, known; the biggest counts first within each."""
+    answer = {i['id']: i for i in items}
+    rows = []
+    for pid, text in lines.items():
+        level, count, first, pattern = text.split('\t', 3)
+        i = answer.get(pid)
+        rows.append((log_verdict(i.get('verdict')) if i else 'no answer', level, int(count.rstrip('x')), first, pattern,
+                     i.get('why', '') if i else ''))
+    rows += [('known', e['level'], e['count'], e['first'], e['pattern'], f'log-known.txt: {e["why"]}')
+             for e in meta.get('known', [])]
+    rows.sort(key=lambda r: (LOG_ORDER.index(r[0]), -r[2]))
+    tally = defaultdict(int)
+    for r in rows:
+        tally[r[0]] += 1
+    head = (f'Log: `{meta.get("log", "?")}` since the server started at {meta.get("since", "?")}: '
+            f'{meta.get("matched", 0)} error and warning lines in {meta.get("patterns", 0)} patterns, '
+            f'{len(meta.get("known", []))} of them known from log-known.txt (not asked). '
+            + ', '.join(f'{k}: {tally[k]}' for k in LOG_ORDER if tally[k]) + '.\n\n')
+    if not rows:
+        return head + 'No error or warning lines since the start.\n'
+    return head + '| Verdict | Level | Count | First seen | Pattern | Why |\n|---|---|---|---|---|---|\n' + ''.join(
+        f'| {v} | {level} | {count} | {first} | `{cell(pattern, 220)}` | {cell(why, 160)} |\n'
+        for v, level, count, first, pattern, why in rows)
+
+
+# ------------------------------------------------------------------ board trim (18 Oct)
+
+BOARD = OUTPUTS / 'SWG-handoff.md'
+BOARD_ENTRY = re.compile(r'^### (\d{4}-\d{2}-\d{2}) (\d{1,2}:\d{2}(?: ?[AP]M)?)\b', re.I)
+BOARD_CAP = 8000   # characters of one entry (the longest on 18 Oct was about 6,000)
+HASH = re.compile(r'(?<![\w/.-])(?=[0-9a-f]*[0-9])(?=[0-9a-f]*[a-f])[0-9a-f]{7,40}(?![\w-])')
+RUN_NUMBER = re.compile(r'\bruns? \d+\b', re.I)
+OWNER_QUOTE = re.compile(r'\b[Oo]wner\b[^"“\n¶]{0,60}?["“]([^"”]{3,}?)["”]')
+
+
+def board_time(day, time_text):
+    for form in ('%Y-%m-%d %I:%M %p', '%Y-%m-%d %I:%M%p', '%Y-%m-%d %H:%M'):
+        try:
+            return datetime.strptime(f'{day} {time_text.upper()}', form)
+        except ValueError:
+            continue
+    return None
+
+
+def board_entries(path, now=None, days=2):
+    """([(id, entry)], cutoff) for the "### date time" entries under the board's "## Log" older than `days` days, in
+    board order; an entry is its heading and text on one line, " ¶ " for each line break."""
+    cutoff = (now or datetime.now()) - timedelta(days=days)
+    entries, inside, current = [], False, None
+    for row in Path(path).read_text(encoding='utf-8').split('\n'):
+        if row.startswith('## '):
+            inside, current = row.strip() == '## Log', None
+            continue
+        m = BOARD_ENTRY.match(row) if inside else None
+        if m:
+            current = {'when': board_time(m.group(1), m.group(2)), 'rows': [row[4:].strip()]}
+            entries.append(current)
+        elif row.startswith('### '):
+            current = None
+        elif current is not None and row.strip():
+            current['rows'].append(row.strip())
+    old = [e for e in entries if e['when'] and e['when'] < cutoff]
+    return [(f'b{n}', precheck.flat(' ¶ '.join(e['rows']), BOARD_CAP)) for n, e in enumerate(old, 1)], cutoff
+
+
+def board_lines(folder):
+    lines, cutoff = board_entries(BOARD)
+    (folder / 'board-meta.json').write_text(json.dumps({'board': BOARD.name, 'cutoff': f'{cutoff:%Y-%m-%d %H:%M}'}),
+                                            encoding='utf-8')
+    return lines
+
+
+def board_facts(entry):
+    """What a one-line version must keep: commit hashes, run numbers and the owner's quotes, each once."""
+    found = HASH.findall(entry) + [r.lower() for r in RUN_NUMBER.findall(entry)] + OWNER_QUOTE.findall(entry)
+    return list(dict.fromkeys(found))
+
+
+def board_report(lines, items, meta):
+    answer = {i['id']: ' '.join(str(i.get('line', '')).split()) for i in items}
+    out = [f'{len(lines)} log entries on {meta.get("board", "SWG-handoff.md")} from before {meta.get("cutoff", "?")}, '
+           'each with a proposed one-line version. This job changes nothing: after checking a line, put it on the board '
+           'in place of its entry and move the full entry to SWG-handoff-archive.md.', '']
+    for bid in sorted(lines, key=lambda b: int(b[1:])):
+        heading = lines[bid].split(' ¶ ')[0]
+        line = answer.get(bid, '')
+        out += [f'### {heading}', '']
+        if not line:
+            out += ['- No answer yet.', '']
+            continue
+        missing = [f for f in board_facts(lines[bid]) if f.lower() not in line.lower()]
+        out.append(f'- {heading.split(": ", 1)[0]}: {line}')
+        if missing:
+            out.append('- **Dropped from the line:** ' + ', '.join(f'"{f}"' if ' ' in f and not f.startswith('run')
+                                                                   else f'`{f}`' for f in missing))
+        out.append('')
+    return '\n'.join(out) + '\n'
+
+
+# ------------------------------------------------------------------ scenario drafts (18 Oct)
+
+TEST_PLAN = OUTPUTS / 'Documentation-support' / 'functional-test-plan.md'
+SQUAD = OUTPUTS / 'tools' / 'bots' / 'squad.py'
+EXAMPLE_SCENARIO = OUTPUTS / 'tools' / 'bots' / 'scenarios' / 'aurek-hunt.py'
+# Open areas of test plan section 3 (18 Oct): (id, the words of its row there, its test plan sections, the research
+# topics whose section 3 it is drafted from). An area whose row is marked done there is skipped.
+SCENARIO_AREAS = [
+    ('trainers', 'Training at a real trainer', (7,), ('skills-training',)),
+    ('vehicles', 'Vehicles and mounts', (18,), ('vehicle-mount',)),
+    ('buffs', 'Doctor and entertainer buffs', (22, 23), ('entertainer-buffs', 'doctor-enhance-wounds')),
+    ('surveys', 'Gas, moisture and wind surveys', (13,), ('survey-sample', 'resources')),
+    ('groups-mail-guilds', 'Groups (XP split), mail, guilds, friends', (21,),
+     ('groups', 'group-loot', 'mail-friends-tells', 'guilds')),
+    ('bazaar-vendors-trade', 'Bazaar, vendors and secure trade', (25,), ('bazaar-flow', 'player-vendors', 'secure-trade')),
+    ('housing-harvesters-cities-factions', 'Housing, harvesters, cities, factions', (16, 19, 20, 24),
+     ('structure-placement', 'structure-upkeep', 'harvester-operation', 'player-cities', 'factions')),
+]
+NOTES_CAP = 12000   # characters of research notes per area, shared between its topics
+API_SKIP = {'start', 'stop', 'pid', 'running', 'stale', 'creds', 'describe', 'label_of', 'checkpoint', 'step'}
+DRAFT_HEAD = ('# DRAFT by a local model (local_jobs.py scenario-draft, area "{area}"): not reviewed, never run.\n'
+              '# Claude reviews and fixes it, then moves it to tools/bots/scenarios/ before any run.\n')
+PLAIN_CALLS = set(dir(str)) | set(dir(list)) | set(dir(dict)) | set(dir(set))
+MODULES = {'json', 'math', 're', 'time'}
+
+
+def plan_parts(path):
+    """({section number: its Gaps and Pass lines}, [rows of the "Gaps to close first" table]) from the test plan."""
+    sections, rows, number, table = defaultdict(list), [], None, False
+    for row in Path(path).read_text(encoding='utf-8').split('\n'):
+        m = re.match(r'#### (\d+)\.', row)
+        if m:
+            number = int(m.group(1))
+        elif row.startswith('## '):
+            number, table = None, row.startswith('## 3.')
+        elif number and re.match(r'- \*\*(Gaps|Pass):\*\*', row):
+            sections[number].append(row[2:].replace('**', ''))
+        elif table and row.startswith('|'):
+            rows.append(row)
+    return sections, rows
+
+
+def area_open(words, rows):
+    """True while "Gaps to close first" has the area's row and it is neither struck through nor marked **done**."""
+    row = next((r for r in rows if words.lower() in r.lower()), None)
+    gap = row.split('|')[2] if row and row.count('|') > 2 else ''
+    return bool(gap) and not re.search(r'\*\*done\b|^\s*~~', gap)
+
+
+def scenario_areas(folder):
+    """[(area id, text)]: the area, the test plan's gaps and pass lines for it, and section 3 of its research reports.
+    The areas left out (done, or no longer in the table) go to DIR/skipped-areas.json for the report."""
+    sections, rows = plan_parts(TEST_PLAN)
+    notes = dict(precheck.test_index_lines(precheck.RESEARCH))
+    lines, skipped = [], []
+    for aid, words, numbers, topic_ids in SCENARIO_AREAS:
+        if not area_open(words, rows):
+            skipped.append(aid)
+            continue
+        have = [t for t in topic_ids if t in notes]
+        share = NOTES_CAP // max(1, len(have))
+        plan = ' ¶ '.join(f'section {n}: {p}' for n in numbers for p in sections.get(n, [])) or 'none'
+        text = ' ¶ '.join(f'[{t}] {notes[t][:share]}' for t in have) or 'none'
+        lines.append((aid, precheck.flat(f'{words}. TEST PLAN: {plan} NOTES: {text}', NOTES_CAP + 6000)))
+    (folder / 'skipped-areas.json').write_text(json.dumps(skipped), encoding='utf-8')
+    return lines
+
+
+def bot_api(path=None):
+    """squad.py's Bot and Group methods a scenario uses, one line each: the call and its docstring's first sentence."""
+    tree = ast.parse(Path(path or SQUAD).read_text(encoding='utf-8'))
+    out = []
+    for cls in tree.body:
+        if not (isinstance(cls, ast.ClassDef) and cls.name in ('Bot', 'Group')):
+            continue
+        out.append(f'class {cls.name}:')
+        for f in cls.body:
+            if not isinstance(f, ast.FunctionDef) or f.name.startswith('_') or f.name in API_SKIP:
+                continue
+            f.args.args = f.args.args[1:]   # self
+            doc = re.split(r'(?<=\.)\s+(?=[A-Z])', ' '.join((ast.get_docstring(f) or '').split('\n\n')[0].split()))[0][:220]
+            prop = any(isinstance(d, ast.Name) and d.id == 'property' for d in f.decorator_list)
+            out.append(f'    {f.name if prop else f"{f.name}({ast.unparse(f.args)})"}' + (f'  # {doc}' if doc else ''))
+    return '\n'.join(out)
+
+
+def instruction_for(job):
+    """The model's instruction; scenario-draft's carries the Bot API and the example scenario as they are now."""
+    if job != 'scenario-draft':
+        return INSTRUCTIONS[job]
+    return (f'{INSTRUCTIONS[job]}\n\nBOT API (tools/bots/squad.py):\n{bot_api()}\n\nA FINISHED SCENARIO '
+            f'(tools/bots/scenarios/{EXAMPLE_SCENARIO.name}):\n{EXAMPLE_SCENARIO.read_text(encoding="utf-8")}')
+
+
+def draft_checks(code, api, known):
+    """(syntax problem or '', [slash commands the server doesn't know], [method calls in neither the Bot API nor
+    Python's str, list, dict and set]): found without the model, leads for the review."""
+    commands = sorted({c for c in precheck.SLASH.findall(code) if known is not None and c.lower() not in known})
+    try:
+        tree = ast.parse(code)
+    except SyntaxError as error:
+        return f'line {error.lineno}: {error.msg}', commands, []
+    problem = '' if re.search(r'^def run\(', code, re.M) else 'no run(g)'
+    calls = sorted({n.func.attr for n in ast.walk(tree) if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute)
+                    and not (isinstance(n.func.value, ast.Name) and n.func.value.id in MODULES)
+                    and n.func.attr not in api and n.func.attr not in PLAIN_CALLS})
+    return problem, commands, calls
+
+
+def drafts_report(folder, lines, items):
+    """Writes each answer's code to DIR/drafts/<area>.py (never tools/bots/scenarios) and tables the checks."""
+    drafts = folder / 'drafts'
+    drafts.mkdir(exist_ok=True)
+    for old in drafts.glob('*.py'):
+        old.unlink()
+    api = set(re.findall(r'^    (\w+)', bot_api(), re.M))
+    known = precheck.known_commands()
+    skipped = side_file(folder, 'skipped-areas.json', [])
+    answer = {i['id']: i for i in items}
+    out = ['First drafts by a local model, one per open area of test plan section 3. They are in `drafts/` here, '
+           'never in `tools/bots/scenarios/`: Claude reviews and fixes each before it runs. The checks are made '
+           'without the model.' + ('' if known is not None else ' No command audit was found, so commands are not checked.')
+           + (f' Left out as done or no longer listed open: {", ".join(skipped)}.' if skipped else ''),
+           '', '| Area | Draft | Syntax | Commands the server does not know | Calls not in the Bot API | Steps the model '
+           'could not do |', '|---|---|---|---|---|---|']
+    for aid in lines:
+        i = answer.get(aid) or {}
+        code = str(i.get('code') or '')
+        if not code.strip():
+            out.append(f'| {aid} | no draft | | | | |')
+            continue
+        code = code.rstrip() + '\n'
+        (drafts / f'{aid}.py').write_text(DRAFT_HEAD.format(area=aid) + code, encoding='utf-8', newline='\n')
+        problem, commands, calls = draft_checks(code, api, known)
+        gaps = [str(g) for g in i['gaps'] if str(g).strip()] if isinstance(i.get('gaps'), list) else []
+        out.append(f'| {aid} | `drafts/{aid}.py`, {code.count(chr(10))} lines | {cell(problem or "ok", 80)} | '
+                   f'{cell(", ".join(commands) or "none", 120)} | {cell(", ".join(calls) or "none", 160)} | '
+                   f'{cell("; ".join(gaps) or "none", 300)} |')
+    return '\n'.join(out) + '\n'
+
+
 # ------------------------------------------------------------------ prepare / report
 
-def lines_for(job, folder):
+def lines_for(job, folder, source=None):
     if job in ('proofread', 'era-check'):
         return archive_strings() + server_strings()
     if job == 'bot-chat':
@@ -335,16 +743,23 @@ def lines_for(job, folder):
         return item_lines(job == 'item-check')
     if job in precheck.INSTRUCTIONS:   # claim-check, report-diff, test-index, scenario-review
         return precheck.job_lines(job, folder)
+    if job == 'log-triage':
+        return log_lines(folder, source)
+    if job == 'board-trim':
+        return board_lines(folder)
+    if job == 'scenario-draft':
+        return scenario_areas(folder)
     return bot_notes()
 
 
-def prepare(job, folder):
+def prepare(job, folder, source=None):
+    """source: which log log-triage reads (test, live or a path); the other jobs take none."""
     folder.mkdir(parents=True, exist_ok=True)
-    lines = lines_for(job, folder)
+    lines = lines_for(job, folder, source)
     chunks = chunk_lines(lines, CHUNK.get(job, PER_CHUNK))
     (folder / 'input.jsonl').write_text(''.join(json.dumps(c, ensure_ascii=False) + '\n' for c in chunks),
                                         encoding='utf-8')
-    (folder / 'instruction.txt').write_text(INSTRUCTIONS[job] + '\n', encoding='utf-8')
+    (folder / 'instruction.txt').write_text(instruction_for(job) + '\n', encoding='utf-8')
     (folder / 'lines.json').write_text(json.dumps(dict(lines), indent=1, ensure_ascii=False), encoding='utf-8')
     return len(lines), len(chunks)
 
@@ -413,6 +828,12 @@ def report(job, folder):
         if later:
             body += f'\n## later-era ({len(verdicts["later-era"])}), by folder\n\n' + ''.join(
                 f'- {f} ({len(n)}): {cell(", ".join(sorted(n)), 600)}\n' for f, n in sorted(later.items()))
+    elif job == 'log-triage':
+        body = log_report(lines, items, side_file(folder, 'log-meta.json', {}))
+    elif job == 'board-trim':
+        body = board_report(lines, items, side_file(folder, 'board-meta.json', {}))
+    elif job == 'scenario-draft':
+        body = drafts_report(folder, lines, items)
     elif job == 'era-check':
         body = '| String | Text now | Problem | Why |\n|---|---|---|---|\n' + ''.join(
             f'| `{i["id"]}` | {cell(lines[i["id"]], 140)} | {cell(i.get("problem", ""), 80)} | {cell(i.get("why", ""), 160)} |\n'
@@ -441,12 +862,13 @@ def report(job, folder):
 
 
 def main():
-    if len(sys.argv) != 4 or sys.argv[1] not in ('prepare', 'report') or sys.argv[2] not in INSTRUCTIONS:
+    log_given = len(sys.argv) == 5 and sys.argv[1:3] == ['prepare', 'log-triage']
+    if (len(sys.argv) != 4 and not log_given) or sys.argv[1] not in ('prepare', 'report') or sys.argv[2] not in INSTRUCTIONS:
         print(__doc__)
         return 2
     folder = Path(sys.argv[3])
     if sys.argv[1] == 'prepare':
-        lines, chunks = prepare(sys.argv[2], folder)
+        lines, chunks = prepare(sys.argv[2], folder, sys.argv[4] if log_given else None)
         print(f'{sys.argv[2]}: {lines} lines in {chunks} chunks')
     else:
         print(f'{sys.argv[2]}: {report(sys.argv[2], folder)} items in report.md')
