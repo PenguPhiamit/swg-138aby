@@ -5,13 +5,17 @@
 //   - the owner's update server (mtg-share.py, over Tailscale): update.json lists the local_planets.tre the server
 //     loads right now, the MTG archives, the newest launcher and a news line;
 //   - the client: local_planets.tre against the server's sha256, the MTG archives by size, the .include line in
-//     swgemu.cfg and the login lines in swgemu_login.cfg.
+//     swgemu.cfg, the login lines in swgemu_login.cfg and the archive cap (maxSearchPriority) the cfg files set.
 // Then it brings the client in line: every download goes to a .part file and is checked against its sha256 before
 // it replaces anything; the old local_planets.tre is kept in local_planets-patch\backup\<version>. MTG archives
 // go through friend-setup.ps1 -Action PlaceMtg, so the uninstaller knows what to undo. A newer launcher replaces
-// this exe (renamed to .old) and restarts. Play stays off while the client's patch differs from the server's.
+// this exe (renamed to .old) and restarts. Play stays off while the client's patch differs from the server's or
+// the client would not load it.
+//   FracturedGalaxy.exe --repair   the cfg checks and fixes only, no window; exit 0 when the client loads our files
+//                                  (test-friend-setup.ps1 runs it on a dummy client)
 //
-// Built by build.ps1 with the C# compiler that ships with Windows (.NET Framework 4, C# 5): no downloads.
+// Built by build.ps1 with the C# compiler that ships with Windows (.NET Framework 4, C# 5): no downloads. The client
+// patch kit's Install-ClientPatch.ps1 is built in as a resource, so a friend's older kit folder doesn't matter.
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,19 +33,21 @@ using System.Windows.Forms;
 
 [assembly: AssemblyTitle("SWG: Fractured Galaxy")]
 [assembly: AssemblyProduct("SWG: Fractured Galaxy launcher")]
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.1.0")]
 
 namespace FracturedGalaxy
 {
     static class Program
     {
         [STAThread]
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            if (Array.IndexOf(args, "--repair") >= 0) return new LauncherForm(args).RepairOnly();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             Application.Run(new LauncherForm(args));
+            return 0;
         }
     }
 
@@ -152,15 +158,28 @@ namespace FracturedGalaxy
         }
 
         // --- the check ----------------------------------------------------------------------------------------
-        void Check(bool deep)
+        bool LoadSetup()
         {
             settings = ReadJson(Path.Combine(appDir, "settings.json"));
-            var state = ReadJson(Path.Combine(appDir, "state.json"));
-            clientDir = Str(state, "ClientDir");
-            if (settings == null || clientDir == null || !File.Exists(Path.Combine(clientDir, "SWGEmu.exe")))
+            clientDir = Str(ReadJson(Path.Combine(appDir, "state.json")), "ClientDir");
+            if (settings != null && clientDir != null && File.Exists(Path.Combine(clientDir, "SWGEmu.exe"))) return true;
+            clientDir = null;
+            return false;
+        }
+
+        public int RepairOnly()
+        {
+            if (!LoadSetup()) { Console.WriteLine("ERR: the game folder is not set up."); return 2; }
+            string problem = Repair();
+            Console.WriteLine(problem == null ? "OK: the client loads the server's files." : "ERR: " + problem);
+            return problem == null ? 0 : 1;
+        }
+
+        void Check(bool deep)
+        {
+            if (!LoadSetup())
             {
                 SetLabel(filesLabel, "Your files: the game folder is not set up. Run SWG-Friends-Setup again.", CWarn);
-                clientDir = null;
                 return;
             }
             TryDelete(Assembly.GetExecutingAssembly().Location + ".old");
@@ -181,9 +200,10 @@ namespace FracturedGalaxy
             if (info == null)
             {
                 // No update server: play with what is installed.
-                filesReady = File.Exists(Path.Combine(clientDir, "local_planets.tre"));
-                SetLabel(filesLabel, "Your files: can't check for updates (Miniverse isn't sharing them right now). You can still play.", CWarn);
-                Repair();
+                string broken = Repair();
+                filesReady = File.Exists(Path.Combine(clientDir, "local_planets.tre")) && broken == null;
+                SetLabel(filesLabel, broken != null ? "Your files: " + broken
+                    : "Your files: can't check for updates (Miniverse isn't sharing them right now). You can still play.", CWarn);
                 Step("");
                 return;
             }
@@ -208,10 +228,12 @@ namespace FracturedGalaxy
             }
             if (patchOld) UpdatePatch(baseUrl, patch);
             if (mtg.Count > 0) UpdateMtg(baseUrl, mtg);
-            Repair();
+            string problem = Repair();
             filesReady = patch == null || Sha256(tre) == Str(patch, "sha256");
+            if (problem == null && !filesReady) problem = "the update did not finish. Click Check all files to try again.";
+            filesReady = problem == null;
             SetLabel(filesLabel, filesReady ? "Your files: up to date (server patch " + (patch != null ? Str(patch, "version") : "?") + ")"
-                : "Your files: the update did not finish. Click Check all files to try again.", filesReady ? CGood : CWarn);
+                : "Your files: " + problem, filesReady ? CGood : CWarn);
             Step(plan.Count > 0 ? "Updated " + string.Join(" and ", plan.ToArray()) + "." : "");
             Progress(0, 0);
         }
@@ -287,18 +309,103 @@ namespace FracturedGalaxy
             // only through PlaceMtg, which keeps the friend's copy for the uninstaller.
             Step("Placing the MTG archives...");
             if (dryRun) { Step("DRY RUN: would place " + need.Count + " MTG archive(s)"); return; }
-            string ps = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "WindowsPowerShell\\v1.0\\powershell.exe");
-            var p = Process.Start(new ProcessStartInfo(ps, "-NoProfile -ExecutionPolicy Bypass -File \"" + Path.Combine(appDir, "friend-setup.ps1") +
-                "\" -Action PlaceMtg -ClientDir \"" + clientDir + "\" -From \"" + tmp + "\"") { CreateNoWindow = true, UseShellExecute = false });
-            p.WaitForExit();
-            if (p.ExitCode == 0) { try { Directory.Delete(tmp, true); } catch { } }
-            else Step("The MTG archives were downloaded but could not be placed (code " + p.ExitCode + "). Close the game and try again.");
+            string output;
+            int code = RunPowerShell("-File \"" + Path.Combine(appDir, "friend-setup.ps1") + "\" -Action PlaceMtg -ClientDir \"" + clientDir + "\" -From \"" + tmp + "\"", out output);
+            if (code == 0) { try { Directory.Delete(tmp, true); } catch { } }
+            else Step("The MTG archives were downloaded but could not be placed (code " + code + "). Close the game and try again.");
         }
 
-        // The SWGEmu launcher may reset swgemu.cfg or swgemu_login.cfg: put our two lines back.
-        void Repair()
+        // Windows PowerShell 5.1, no window; returns the exit code, with stdout and stderr in `output`.
+        static int RunPowerShell(string args, out string output)
         {
-            if (dryRun) return;
+            string ps = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "WindowsPowerShell\\v1.0\\powershell.exe");
+            var err = new StringBuilder();
+            using (var p = new Process())
+            {
+                p.StartInfo = new ProcessStartInfo(ps, "-NoProfile -ExecutionPolicy Bypass " + args) { CreateNoWindow = true, UseShellExecute = false,
+                    RedirectStandardOutput = true, RedirectStandardError = true };
+                p.ErrorDataReceived += (s, e) => { if (e.Data != null) lock (err) err.AppendLine(e.Data); };
+                p.Start();
+                p.BeginErrorReadLine();
+                output = p.StandardOutput.ReadToEnd();
+                p.WaitForExit();
+                lock (err) output += err.ToString();
+                return p.ExitCode;
+            }
+        }
+
+        // The SWGEmu launcher may reset the client's cfg files: put our lines and the archive layout back. Returns null
+        // when the client will load our files, else what is wrong (for "Your files: ..."; Play stays off).
+        string Repair()
+        {
+            if (!dryRun) RepairLines();
+            return RepairLayout();
+        }
+
+        // After a file scan the SWGEmu launcher may also put its own swgemu_live.cfg back. Its archive cap
+        // (maxSearchPriority=26) is below our local_planets.tre at 49, so the client quietly stops loading it. The kit
+        // built into this exe moves the stock archives up again with -LayoutOnly, which never touches local_planets.tre
+        // (the kit's -AllowDowngrade would put its own, maybe older, archive back).
+        string RepairLayout()
+        {
+            var kitState = ReadJson(Path.Combine(clientDir, "local_planets-patch\\state.json"));
+            if (kitState == null) return null;      // the kit installed nothing here
+            int want = kitState.ContainsKey("live_cfg_top") && kitState["live_cfg_top"] != null ? Convert.ToInt32(kitState["live_cfg_top"]) : 50;
+            int top = SearchTop();
+            if (top >= want) return null;
+            string what = "the SWGEmu launcher reset swgemu_live.cfg (archive cap " + top + ", the server's files need " + want + ")";
+            if (dryRun) { Step("DRY RUN: would put the archive layout back"); return what + "; dry run, not fixed."; }
+            if (Running()) return what + ". Close the game so the launcher can put it back.";
+            string manifest = Path.Combine(appDir, "kit\\manifest.json");
+            if (!File.Exists(manifest)) return what + ", and kit\\manifest.json is missing. Run SWG-Friends-Setup again.";
+            Step("Putting the archive layout back (" + what + ")...");
+            string kit = Path.Combine(Path.GetTempPath(), "fractured-galaxy-kit");
+            string output;
+            int code;
+            try
+            {
+                Directory.CreateDirectory(kit);
+                File.Copy(manifest, Path.Combine(kit, "manifest.json"), true);
+                using (var s = Assembly.GetExecutingAssembly().GetManifestResourceStream("Install-ClientPatch.ps1"))
+                using (var f = File.Create(Path.Combine(kit, "Install-ClientPatch.ps1"))) s.CopyTo(f);
+                code = RunPowerShell("-File \"" + Path.Combine(kit, "Install-ClientPatch.ps1") + "\" -ClientDir \"" + clientDir + "\" -LayoutOnly", out output);
+            }
+            catch (Exception e) { return what + ", and putting it back failed (" + e.Message + "). Tell the owner."; }
+            finally { try { Directory.Delete(kit, true); } catch { } }
+            if (code == 0 && SearchTop() >= want) { Step("Put the archive layout back: " + what + "."); return null; }
+            string last = "";
+            foreach (string l in output.Split('\n')) if (l.Trim() != "") last = l.Trim();
+            return what + ", and putting it back failed (code " + code + ": " + last + "). Tell the owner.";
+        }
+
+        // The highest [SharedFile] maxSearchPriority in swgemu.cfg and the files it includes, read the way the kit's
+        // Read-CfgChain reads them (0 when there is none).
+        int SearchTop() { return SearchTop("swgemu.cfg", 0); }
+        int SearchTop(string name, int depth)
+        {
+            string path = Path.Combine(clientDir, name);
+            if (depth > 8 || !File.Exists(path)) return 0;
+            int top = 0, n;
+            string section = null;
+            foreach (string raw in File.ReadAllLines(path, Latin1))
+            {
+                string line = raw.Split(';')[0].Trim();
+                if (line == "" || line.StartsWith("#")) continue;
+                var inc = System.Text.RegularExpressions.Regex.Match(line, "^\\.include\\s+\"([^\"]+)\"", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                if (inc.Success) top = Math.Max(top, SearchTop(inc.Groups[1].Value, depth + 1));
+                else if (line.StartsWith("[") && line.EndsWith("]")) section = line.Substring(1, line.Length - 2).Trim();
+                else if (string.Equals(section, "SharedFile", StringComparison.OrdinalIgnoreCase) && line.Contains("="))
+                {
+                    string[] kv = line.Split(new[] { '=' }, 2);
+                    if (string.Equals(kv[0].Trim(), "maxSearchPriority", StringComparison.OrdinalIgnoreCase) && int.TryParse(kv[1].Trim(), out n)) top = Math.Max(top, n);
+                }
+            }
+            return top;
+        }
+
+        // The .include line in swgemu.cfg and the login file.
+        void RepairLines()
+        {
             string main = Path.Combine(clientDir, "swgemu.cfg");
             if (File.Exists(main) && File.Exists(Path.Combine(clientDir, "local_planets.cfg")))
             {
@@ -351,7 +458,15 @@ namespace FracturedGalaxy
             if (Running()) { MessageBox.Show(this, "The game is already running.", Text); return; }
             if (!serverUp && MessageBox.Show(this, "The server is not answering. It may be off, or Tailscale is not connected (its icon by the clock).\r\n\r\nStart the game anyway?",
                 Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
-            Repair();
+            string problem = Repair();
+            if (problem != null)
+            {
+                filesReady = false;
+                SetLabel(filesLabel, "Your files: " + problem, CWarn);
+                UpdatePlay();
+                MessageBox.Show(this, "The game would not load the server's files: " + problem, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (dryRun) { MessageBox.Show(this, "DRY RUN: would start " + Path.Combine(clientDir, "SWGEmu.exe"), Text); return; }
             Process.Start(new ProcessStartInfo(Path.Combine(clientDir, "SWGEmu.exe")) { WorkingDirectory = clientDir, UseShellExecute = true });
             WindowState = FormWindowState.Minimized;

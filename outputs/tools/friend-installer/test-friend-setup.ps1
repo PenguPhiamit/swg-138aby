@@ -99,6 +99,64 @@ try {
     $st = Get-Content -Raw (Join-Path $app 'state.json') | ConvertFrom-Json
     Check 'state.json records the client folder and keeps the MTG record' ($st.ClientDir -eq $client -and @($st.MtgAdded) -contains 'mtg_planets.tre')
 
+    # The SWGEmu launcher puts its stock cfg files back (archive cap 26) after the Fractured Galaxy launcher installed
+    # a newer local_planets.tre than the kit's. -LayoutOnly (what the launcher runs) must move the layout up again and
+    # leave the newer archive and its version alone.
+    $tre = Join-Path $client 'local_planets.tre'; $kitStateFile = Join-Path $client 'local_planets-patch\state.json'
+    [IO.File]::WriteAllBytes($tre, [byte[]](1..300 | ForEach-Object { ($_ * 7) % 256 }))
+    $newer = Sha $tre
+    $ks = Get-Content -Raw $kitStateFile | ConvertFrom-Json
+    $ks.version = '2026.10.18.5'; $ks.sha256 = $newer
+    [IO.File]::WriteAllText($kitStateFile, ($ks | ConvertTo-Json))
+    function Reset-Cfg {
+        Set-Content -LiteralPath (Join-Path $client 'swgemu.cfg') -Value ".include `"swgemu_login.cfg`"`r`n.include `"swgemu_live.cfg`"`r`n" -NoNewline
+        Set-Content -LiteralPath (Join-Path $client 'swgemu_live.cfg') -NoNewline -Value ("[SharedFile]`r`n`tmaxSearchPriority=26`r`n`tsearchTree_00_25=patch_14_00.tre`r`n" +
+            "`tsearchTree_00_2=data_other_00.tre`r`n`tsearchTree_00_0=bottom.tre`r`n")
+    }
+    function Test-Layout {
+        $live = [IO.File]::ReadAllText((Join-Path $client 'swgemu_live.cfg')); $main = [IO.File]::ReadAllText((Join-Path $client 'swgemu.cfg'))
+        $k = Get-Content -Raw $kitStateFile | ConvertFrom-Json
+        return ($live -match 'maxSearchPriority=50' -and $live -match 'searchTree_00_49=patch_14_00\.tre' -and $live -match 'searchTree_00_24=bottom\.tre' -and
+            $main -match '(?m)^\.include "local_planets\.cfg"' -and (Sha $tre) -eq $newer -and $k.version -eq '2026.10.18.5' -and $k.sha256 -eq $newer -and $k.live_cfg_moved)
+    }
+    Reset-Cfg
+    $plainKit = Join-Path $root 'kit-plain'; New-Item -ItemType Directory -Force -Path $plainKit | Out-Null
+    Copy-Item (Join-Path $here '..\client_patch\Install-ClientPatch.ps1'), (Join-Path $kit 'manifest.json') $plainKit    # no archive, as the launcher runs it
+    $out = & $ps -NoProfile -ExecutionPolicy Bypass -File (Join-Path $plainKit 'Install-ClientPatch.ps1') -ClientDir $client 2>&1 | Out-String
+    Check 'a plain kit run on the reset client stops (kit older than the archive) and changes nothing' ($LASTEXITCODE -ne 0 -and ([IO.File]::ReadAllText((Join-Path $client 'swgemu_live.cfg'))) -match 'maxSearchPriority=26' -and (Sha $tre) -eq $newer)
+    $out = & $ps -NoProfile -ExecutionPolicy Bypass -File (Join-Path $plainKit 'Install-ClientPatch.ps1') -ClientDir $client -LayoutOnly 2>&1 | Out-String
+    if ($Keep) { Write-Host "  LayoutOnly: code $LASTEXITCODE; $($out.Trim() -replace "`r?`n", ' / ')" }
+    Check 'kit -LayoutOnly moves the reset layout up again and keeps the newer archive and its version' ($LASTEXITCODE -eq 0 -and (Test-Layout))
+    $out = & $ps -NoProfile -ExecutionPolicy Bypass -File (Join-Path $plainKit 'Install-ClientPatch.ps1') -ClientDir $client -LayoutOnly 2>&1 | Out-String
+    Check 'kit -LayoutOnly again is harmless' ($LASTEXITCODE -eq 0 -and (Test-Layout))
+
+    # The built launcher, headless: the same reset, fixed by FracturedGalaxy.exe --repair (as on its start and Play).
+    $exe = Join-Path $here 'build\out\FracturedGalaxy.exe'
+    if (-not (Test-Path -LiteralPath $exe)) { Write-Host 'SKIP launcher --repair: no build\out\FracturedGalaxy.exe (run build.ps1 first)' -ForegroundColor Yellow }
+    else {
+        Copy-Item $exe $app; Copy-Item $plain (Join-Path $app 'settings.json')
+        New-Item -ItemType Directory -Force -Path (Join-Path $app 'kit') | Out-Null; Copy-Item (Join-Path $kit 'manifest.json') (Join-Path $app 'kit')
+        function Repair-Launcher {
+            $o = Join-Path $root 'repair-out.txt'
+            $p = Start-Process -FilePath (Join-Path $app 'FracturedGalaxy.exe') -ArgumentList '--repair' -Wait -PassThru -RedirectStandardOutput $o
+            return [pscustomobject]@{ Code = $p.ExitCode; Out = [IO.File]::ReadAllText($o).Trim() }
+        }
+        Reset-Cfg
+        Set-Content -LiteralPath (Join-Path $client 'swgemu_login.cfg') -Value "[ClientGame]`r`nloginServerAddress0=login.swgemu.com`r`n" -NoNewline
+        $r = Repair-Launcher
+        if ($Keep) { Write-Host "  --repair: code $($r.Code); $($r.Out)" }
+        Check "launcher --repair puts the layout, the .include line and the login back on a reset client ($($r.Out))" ($r.Code -eq 0 -and (Test-Layout) -and
+            ([IO.File]::ReadAllText((Join-Path $client 'swgemu_login.cfg'))) -match "loginServerAddress0=$([regex]::Escape($addr))")
+        $before = Snapshot $client; $r = Repair-Launcher
+        Check 'launcher --repair on a client that loads our files changes nothing' ($r.Code -eq 0 -and (Compare-Object @($before) @(Snapshot $client)) -eq $null)
+        Reset-Cfg
+        Remove-Item -LiteralPath (Join-Path $app 'kit\manifest.json')
+        $r = Repair-Launcher
+        Check "launcher --repair reports a layout it could not put back (exit 1: $($r.Out))" ($r.Code -eq 1 -and $r.Out -match 'archive cap 26')
+        Copy-Item (Join-Path $kit 'manifest.json') (Join-Path $app 'kit'); $r = Repair-Launcher
+        Check 'launcher --repair fixes it once the kit manifest is back' ($r.Code -eq 0 -and (Test-Layout))
+    }
+
     $r = Run @('-Action', 'Uninstall')   # client folder from state.json
     $login = [IO.File]::ReadAllText((Join-Path $client 'swgemu_login.cfg'))
     $main = [IO.File]::ReadAllText((Join-Path $client 'swgemu.cfg'))

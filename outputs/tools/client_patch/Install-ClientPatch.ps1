@@ -9,12 +9,16 @@
   and (without -AllowDowngrade) an older version than the one installed.
   On a stock client (maxSearchPriority=26) it also moves swgemu_live.cfg's stock archives up to the server's layout.
   Whatever it replaces goes to <client>\local_planets-patch\backup\ first. Uninstall-ClientPatch.ps1 undoes it.
+  -LayoutOnly puts the cfg side back (the swgemu_live.cfg move, local_planets.cfg, the .include line) after the SWGEmu
+  launcher rewrote them, and leaves local_planets.tre and the recorded version alone: the Fractured Galaxy launcher
+  may have installed a newer archive than this kit's. It needs only manifest.json in the kit folder.
   Exit codes: 0 done, 1 error, 2 not a client folder, 3 requirements, 4 kit damaged, 5 client running, 6 downgrade.
 #>
 param(
     [Parameter(Mandatory = $true)][string]$ClientDir,
     [switch]$DeepCheck,          # also hash every MTG archive (slow: about 5 GB)
     [switch]$AllowDowngrade,
+    [switch]$LayoutOnly,
     [switch]$Status              # only report what is installed
 )
 $ErrorActionPreference = 'Stop'
@@ -121,7 +125,9 @@ if ($Status) {
 
 $Manifest = Get-Content -LiteralPath (Join-Path $Kit 'manifest.json') -Raw | ConvertFrom-Json
 $Source = Join-Path $Kit $Manifest.archive.file
-if (-not (Test-Path -LiteralPath $Source) -or (Hash $Source) -ne $Manifest.archive.sha256) {
+if ($LayoutOnly) {
+    if ($State -eq $null) { Fail 1 'nothing to put back: this kit has not installed anything here.' }
+} elseif (-not (Test-Path -LiteralPath $Source) -or (Hash $Source) -ne $Manifest.archive.sha256) {
     Fail 4 'the kit is damaged: local_planets.tre does not match manifest.json. Get the kit again.'
 }
 
@@ -138,7 +144,7 @@ foreach ($r in $Manifest.requires) {
 if ($bad.Count -gt 0) { Fail 3 ("these MTG archives must be in the client folder first: " + ($bad -join ', ')) }
 
 $new = [version]$Manifest.version
-if ($State -ne $null -and -not $AllowDowngrade -and $new -lt [version]$State.version) {
+if ($State -ne $null -and -not $AllowDowngrade -and -not $LayoutOnly -and $new -lt [version]$State.version) {
     Fail 6 "version $($State.version) is installed, newer than this kit ($($Manifest.version)). Use -AllowDowngrade to go back."
 }
 
@@ -174,7 +180,7 @@ function Save-Backup($file, $folder) {
     if (-not (Test-Path -LiteralPath $dst)) { Copy-Item -LiteralPath $src -Destination $dst }
 }
 
-$same = (Test-Path -LiteralPath $Target) -and ((Hash $Target) -eq $Manifest.archive.sha256)
+$same = $LayoutOnly -or ((Test-Path -LiteralPath $Target) -and ((Hash $Target) -eq $Manifest.archive.sha256))
 if (-not $same) {
     if ($firstRun) { Save-Backup 'local_planets.tre' $Original }
     else { Save-Backup 'local_planets.tre' (Join-Path $PatchDir ('backup\' + $State.version)) }
@@ -230,6 +236,11 @@ $stateObj = [ordered]@{
     include_added = $includeAdded; mtg_lines_added = $added; previous = $(if ($State -ne $null) { $State.version } else { $null })
     live_cfg_moved = $liveMoved; live_cfg_top = $want
 }
+if ($LayoutOnly) {
+    # The archive is whatever was installed last (maybe by the launcher): keep its record.
+    foreach ($k in @('version', 'sha256', 'installed', 'previous')) { $stateObj[$k] = $State.$k }
+    $stateObj['layout_restored'] = (Get-Date).ToString('yyyy-MM-dd h:mm tt')
+}
 Write-Ascii $StateFile (($stateObj | ConvertTo-Json) + "`r`n")
 
 # --- verify -------------------------------------------------------------------------------------------
@@ -240,7 +251,8 @@ if ($after['local_planets.tre'] -ne [int]$Manifest.archive.priority) {
 $notLoaded = @($Manifest.requires | Where-Object { -not $after.ContainsKey($_.file.ToLower()) } | ForEach-Object { $_.file })
 if ($notLoaded.Count -gt 0) { Fail 1 ("still not loaded: " + ($notLoaded -join ', ')) }
 
-Write-Host "Installed local_planets version $($Manifest.version) (sha256 $($Manifest.archive.sha256.Substring(0, 12))...)."
+if ($LayoutOnly) { Write-Host "Put the archive layout back; local_planets.tre (version $($State.version)) is unchanged." }
+else { Write-Host "Installed local_planets version $($Manifest.version) (sha256 $($Manifest.archive.sha256.Substring(0, 12))...)." }
 if ($added.Count -gt 0) { Write-Host "Also told the client to load: $($added -join ', ')" }
 if ($LiveMove) { Write-Host "Moved the stock archives in swgemu_live.cfg up $shift levels (maxSearchPriority $want), as on the server's own client." }
 Write-Host "Backups: $PatchDir\backup"

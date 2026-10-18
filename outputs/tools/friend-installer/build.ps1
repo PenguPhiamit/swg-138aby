@@ -58,16 +58,21 @@ $iss = "; Written by build.ps1 from owner-settings.json. Not in git.`r`n#define 
 [IO.File]::WriteAllText((Join-Path $build 'settings.iss'), $iss, [Text.Encoding]::ASCII)
 Write-Host "Wrote $build\settings.json and settings.iss."
 
-# The launcher: compiled with the C# compiler that ships with Windows; the banner is built into the exe.
+# The launcher: compiled with the C# compiler that ships with Windows; the banner and the kit's installer (for
+# Install-ClientPatch.ps1 -LayoutOnly, whatever kit a friend has) are built into the exe.
 $csc = Join-Path $env:SystemRoot 'Microsoft.NET\Framework64\v4.0.30319\csc.exe'
 $banner = Join-Path $PSScriptRoot 'launcher\banner.png'
 if (-not (Test-Path -LiteralPath $banner)) { Fail "no launcher\banner.png (not in git; make one with launcher\make-banner.py, see OWNER-README)." }
+$kitScript = Join-Path $PSScriptRoot '..\client_patch\Install-ClientPatch.ps1'
+if ((Get-FileHash -LiteralPath $kitScript).Hash -ne (Get-FileHash -LiteralPath (Join-Path $kit 'Install-ClientPatch.ps1')).Hash) {
+    Write-Host "Note: the kit's Install-ClientPatch.ps1 differs from tools\client_patch's; Setup carries the kit's, the launcher the other." -ForegroundColor Yellow
+}
 $out = Join-Path $build 'out'
 New-Item -ItemType Directory -Force -Path $out | Out-Null
 $launcher = Join-Path $out 'FracturedGalaxy.exe'
 if ($DryRun) { Write-Host "DRY RUN: would compile the launcher to $launcher." }
 else {
-    & $csc -nologo -target:winexe "-out:$launcher" "-resource:$banner,banner.png" -r:System.Web.Extensions.dll -r:System.Windows.Forms.dll -r:System.Drawing.dll (Join-Path $PSScriptRoot 'launcher\Launcher.cs')
+    & $csc -nologo -target:winexe "-out:$launcher" "-resource:$banner,banner.png" "-resource:$kitScript,Install-ClientPatch.ps1" -r:System.Web.Extensions.dll -r:System.Windows.Forms.dll -r:System.Drawing.dll (Join-Path $PSScriptRoot 'launcher\Launcher.cs')
     if ($LASTEXITCODE -ne 0) { Fail "the launcher did not compile (csc code $LASTEXITCODE)." }
     $lv = [Reflection.AssemblyName]::GetAssemblyName($launcher).Version.ToString()
     [IO.File]::WriteAllText((Join-Path $out 'FracturedGalaxy.version'), $lv, [Text.Encoding]::ASCII)
