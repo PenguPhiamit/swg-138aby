@@ -25,7 +25,12 @@ READ_CAP = 20000  # characters per read_file call; the model pages with offset
 # asked, at most twice, to write it from what it has read.
 # The same night Saluki thought through three capped replies after the reminders, so a reminded run now also has
 # thinking switched off.
+# 18 Oct 6:30 AM (owner: "make sure saluki doesnt keep looping again"): Saluki's own chat template asks for xhigh
+# reasoning, so one reply could think for 16,384 tokens (about 55,000 characters, several minutes) before the reminder.
+# Replies now stream, and thinking past THINK_CAP characters is cut off there and counted as a reply without the report;
+# a final reply that holds the report as plain text instead of a write_file call is saved as report.md.
 MAX_REPLY = 16384  # tokens per reply
+THINK_CAP = 20000  # characters of thinking per reply, about 6,000 tokens
 NUDGES = 2
 NUDGE = ('You have not written report.md yet. Write it now with write_file, from what you have already read. '
          'Keep any further thinking short.')
@@ -89,14 +94,35 @@ def run_tool(root, name, args, protected):
 
 
 def chat(model, messages, ctx, base=None, think=None):
-    body = {'model': model, 'messages': messages, 'tools': TOOLS, 'stream': False,
+    body = {'model': model, 'messages': messages, 'tools': TOOLS, 'stream': True,
             'options': {'num_ctx': ctx, 'temperature': 0.2, 'num_predict': MAX_REPLY}}
     if think is not None:   # after a reminder: thinking off, so the reply is the report itself (18 Oct, see NUDGE)
         body['think'] = think
     body = json.dumps(body).encode()
     request = urllib.request.Request(ollama_url.api('/api/chat', base), body, {'Content-Type': 'application/json'})
+    message = {'role': 'assistant', 'content': '', 'thinking': ''}
+    reply = {'message': message}
     with urllib.request.urlopen(request, timeout=900) as response:
-        return json.load(response)
+        for line in response:   # closing the stream early makes Ollama stop generating
+            if not line.strip():
+                continue
+            part = json.loads(line)
+            if part.get('error'):
+                raise RuntimeError(f'Ollama: {part["error"]}')
+            piece = part.get('message', {})
+            message['content'] += piece.get('content') or ''
+            message['thinking'] += piece.get('thinking') or ''
+            if piece.get('tool_calls'):
+                message.setdefault('tool_calls', []).extend(piece['tool_calls'])
+            if part.get('done'):
+                reply.update({k: part.get(k) for k in ('done_reason', 'eval_count', 'prompt_eval_count')})
+                break
+            if len(message['thinking']) > THINK_CAP and not message['content'] and 'tool_calls' not in message:
+                reply['done_reason'] = 'thinking cap'
+                break
+    if not message['thinking']:
+        del message['thinking']
+    return reply
 
 
 def main():
@@ -156,7 +182,9 @@ def loop(args, root, protected, log, messages, model, ctx, base, started):
         reply = chat(model, messages, ctx, base, think=False if nudges else None)
         message = reply.get('message', {})
         log.write(json.dumps({'step': step, 'reply': message, 'eval_count': reply.get('eval_count'),
-                              'prompt_eval_count': reply.get('prompt_eval_count')}) + '\n')
+                              'prompt_eval_count': reply.get('prompt_eval_count'),
+                              'done_reason': reply.get('done_reason')}) + '\n')
+        log.flush()
         messages.append(message)
         calls = message.get('tool_calls') or []
         if not calls and 'report.md' in args.task and nudges < NUDGES and not (
@@ -167,8 +195,13 @@ def loop(args, root, protected, log, messages, model, ctx, base, started):
             log.write(json.dumps({'step': step, 'nudge': nudges, 'done_reason': reply.get('done_reason')}) + '\n')
             continue
         if not calls:
+            text = message.get('content', '').strip()
+            if 'report.md' in args.task and len(text) > 300 and not (report.exists() and report.stat().st_size > 300):
+                report.write_text('<!-- saved by local_agent.py from the model\'s last reply: it gave the report as '
+                                  'text instead of calling write_file -->\n' + text + '\n', encoding='utf-8')
+                print('report.md saved from the reply text')
             print(f'done in {step} steps, {time.monotonic() - started:.0f} s')
-            print(message.get('content', '').strip())
+            print(text)
             return 0
         for call in calls:
             function = call.get('function', {})

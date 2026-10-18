@@ -99,3 +99,16 @@
 - 2026-10-18 01:51 scenario-review (scenario-review): paused, resumes when idle (6 of 6 chunks asked (34 done before), 6 errors, 2.9 min; 6 chunk(s) failed; rerun to retry them), 3 min
 - 2026-10-18 01:56 scenario-review (scenario-review): report written (scenario-review: 29 items in report.md), 3 min
 - 2026-10-18 02:12 bounty-offers: no report (done in 3 steps, 856 s), 14 min, 7 files
+- 2026-10-18 02:16 easy-destroy: report written (8236 bytes), 2 min, 3 files
+- 2026-10-18 02:27 report-precheck-saluki (claim-check): report written (claim-check: 875 items in report.md), 22 min
+- 2026-10-18 02:28 item-check (item-check): report written (item-check: 2115 items in report.md), 1 min
+- 2026-10-18 02:39 bounty-offers-saluki: no report (done in 5 steps, 1279 s), 21 min, 7 files
+- 2026-10-18 02:44 jedi-unlock-village: report written (11316 bytes), 2 min, 9 files
+- 2026-10-18 02:47 item-check-ok (item-check-ok): paused, resumes when idle (27 of 27 chunks asked (162 done before), 4 errors, 19.3 min, lowest headroom 23.1 GB; 4 chunk(s) failed; rerun to retry them), 19 min
+- 2026-10-18 02:50 core3-bug-comments: report written (15003 bytes), 4 min, 1 files
+- 2026-10-18 02:51 item-check-ok (item-check-ok): report written (item-check-ok: 3768 items in report.md), 4 min
+- 2026-10-18 02:53 droid-storage-quality: report written (5102 bytes), 2 min, 4 files
+- 2026-10-18 03:09 test-index (test-index): report written (test-index: 62 items in report.md), 13 min
+- 2026-10-18 03:11 queue finished on the friend's PC: paused (Agent/local-research/STOP)
+- 2026-10-18 06:25 bounty-offers-saluki (run 2, friend's PC, saluki 32K, by hand): report written (23409 bytes), 22 min, 7 files; one 16K-token thinking reply, then the reminder with thinking off wrote it. Right answer (out of the 6 m range) from the code alone; qwen3.6 wrote nothing on the same question
+- 2026-10-18 06:40 local_agent.py: replies stream and thinking is cut at 20,000 characters (owner: "make sure saluki doesnt keep looping again"); a report given as plain text is saved as report.md. Tested on this PC with the cap forced to 300: cut, reminded, report written in 25 s

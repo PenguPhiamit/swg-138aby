@@ -1,0 +1,12 @@
+done in 5 steps, 1340 s
+I've written report.md with the five requested sections:
+
+1. **Short answer** — The most likely reason Brask got no bounty offer is that the bot was not within 6 m of the terminal (inferred from the code's range check at 170-176 and the bot's own helper note at missions.py:1019-1022). No other hard gate in the code blocks a level-1 offer.
+
+2. **How it works** — Detailed walkthrough of `handleMissionListRequest` (163-230), `populateMissionList` (619-644), `randomizeBountyTerminalMissions` (762-785), `randomizeGenericBountyMission` (1078-1274), player-bounty target validation (2107-2198), and target position generation (1992-2006), with file:line citations for every condition, skill mod, number, and message.
+
+3. **What a bot test should check** — Observable results (system messages, mission bag contents, mission attributes, informant NPC) and the setup required (skill, range, mission bag, cooldown, city ban).
+
+4. **Likely reasons a test sees no effect** — Out of range (most likely), missing skill, no mission bag, cooldown, city ban, no valid target.
+
+5. **Open questions** — 100+ questions about functions and config values not shown in the provided file excerpts, including `bhTargetsAtMissionLevel`, `bhTargetZones`, `getRealBountyReward`, `getRandomBountyPlanet`, and many more.

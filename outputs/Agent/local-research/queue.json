@@ -295,7 +295,7 @@
    "model": "qwen3.6:35b-a3b",
    "note": "17 Oct 8:25 AM, Claude (owner: redo the weak reports): the 16 Oct report came from qwen3:8b at 16K and skipped its main files; rerun on qwen3.6 at 64K",
    "note_frodo": "18 Oct, Claude (owner: \"get some of the backlog over here on this machine (Friends pc aka Microverse)\"): rerun on the friend's PC with qwen3.6:35b-a3b: retry; the 17 Oct run ended without a report",
-   "reviewed": "Claude, 18 Oct 2:20 AM: numbers hold; missed that performance XP needs a flourish (line 1027) and that healing and buffs need private_buff_mind and a grouped or /setperform patron; buff time is minutes. Corrections in report.md, \"Claude's review\""
+   "reviewed": "Claude, 18 Oct 2:10 AM: numbers hold; missed that performance XP needs a flourish (line 1027) and that healing and buffs need private_buff_mind and a grouped or /setperform patron; buff time is minutes. Corrections in report.md, \"Claude's review\""
   },
   {
    "id": "structure-placement",
@@ -1160,7 +1160,7 @@
    "minutes": 2,
    "skipped": null,
    "note_frodo": "18 Oct, Claude (owner: \"get some of the backlog over here on this machine (Friends pc aka Microverse)\"): rerun on the friend's PC with qwen3.6:35b-a3b: retry; the 17 Oct run ended without a report",
-   "reviewed": "Claude, 18 Oct 2:30 AM: hologrind details mostly right (32 professions, not 37; only the 6 assigned at creation count; a quiet holocron is kept), but the galaxy runs the village progression, whose files were not in the sources: rerun as jedi-unlock-village"
+   "reviewed": "Claude, 18 Oct 2:12 AM: hologrind details mostly right (32 professions, not 37; only the 6 assigned at creation count; a quiet holocron is kept), but the galaxy runs the village progression, whose files were not in the sources: rerun as jedi-unlock-village"
   },
   {
    "id": "gambling",
@@ -1241,7 +1241,7 @@
    "tries": 3,
    "finished": "2026-10-18 01:56",
    "note_frodo": "18 Oct, Claude (owner: \"get some of the backlog over here on this machine (Friends pc aka Microverse)\"): rerun on the friend's PC with qwen3.6:35b-a3b: full rerun; the qwen3:8b results are results.qwen3-8b.jsonl and report.qwen3-8b.md",
-   "reviewed": "Claude, 18 Oct 2:50 AM: none of the 103 findings holds; the model misread g.check(label, ok, detail), slash(wait=) and our own commands (agentGear, move). Rerun only with the Bot API docstrings in the instruction; details in report.md"
+   "reviewed": "Claude, 18 Oct 2:16 AM: none of the 103 findings holds; the model misread g.check(label, ok, detail), slash(wait=) and our own commands (agentGear, move). Rerun only with the Bot API docstrings in the instruction; details in report.md"
   },
   {
    "id": "bounty-offers",
@@ -1264,12 +1264,12 @@
    "finished": "2026-10-18 02:12",
    "minutes": 14,
    "skipped": null,
-   "reviewed": "Claude, 18 Oct 2:40 AM: the model wrote no report (a 200,000-character thinking loop); Claude wrote report.md from the code and run 3's events: all 30 lists were refused as out of the 6 m range (@radial_out_of_range_prose, MissionManagerImplementation.cpp:170-175)"
+   "reviewed": "Claude, 18 Oct 2:14 AM: the model wrote no report (a 200,000-character thinking loop); Claude wrote report.md from the code and run 3's events: all 30 lists were refused as out of the 6 m range (@radial_out_of_range_prose, MissionManagerImplementation.cpp:170-175)"
   },
   {
    "id": "easy-destroy",
    "title": "How a group gets an easy, near destroy mission (for the group-pay check)",
-   "status": "running",
+   "status": "done",
    "added_by": "Claude, 18 Oct 2:00 AM (owner: \"figure out what else our local models can do\"); group pay (dev cbd85fdf) is still unchecked because no destroy offer was difficulty 10 or less within 2.3 km",
    "review_by": "Claude",
    "question": "Missions test, group pay: a group needs a destroy mission of difficulty 10 or less within about 2 km of the terminal, and on 17 Oct none of 6 offers at a Tatooine general terminal qualified (the bots are level 1-25 with master combat boxes given by the test kit). From the code: 1) how a destroy mission's difficulty and lair are chosen (player level, group size and level, skill mods, planet spawn lists), with file:line; 2) how its distance from the terminal is chosen; 3) what a group can do to be offered an easy, near lair (a different terminal, fewer or lower-level members, a different city or planet). Say which of these the code shows and which you infer.",
@@ -1279,12 +1279,16 @@
     "src/server/zone/managers/mission/DestroyMissionLairObserverImplementation.cpp"
    ],
    "model": "qwen3.6:35b-a3b",
-   "started": "2026-10-18 02:14"
+   "started": "2026-10-18 02:14",
+   "finished": "2026-10-18 02:16",
+   "minutes": 2,
+   "skipped": null,
+   "reviewed": "Claude, 18 Oct 2:18 AM: lair choice and distance right; missed that the difficulty a bot sees is the lair level (min 4) plus the group level (diffDisplay, sent to the client), so \"difficulty <= 10\" needs group level <= 6; difficulty is 0-4; the ceiling caps the floor. Corrections in report.md"
   },
   {
    "id": "bounty-offers-saluki",
    "title": "The same bounty question, answered by Saluki (model comparison)",
-   "status": "open",
+   "status": "done",
    "added_by": "Claude, 18 Oct 2:00 AM (owner: \"figure out what else our local models can do\"); owner: \"if saluki is better\": the first research topic for Saluki, compared with bounty-offers on qwen3.6",
    "review_by": "Claude",
    "question": "Missions test (functional-test-plan.md section 11), 17 Oct run 3: the bot Brask, given the Novice Bounty Hunter box, stood within 6 m of a bounty terminal on Tatooine and listed missions 30 times, and no bounty mission was offered (the bot's helper is bounty() in missions.py). Another hunter, Ressa, already holds one far bounty. From the code: 1) every check between a mission-list request at a bounty terminal and a bounty mission appearing in the list (skills, skill mods, faction, level, planet, the potential player-bounty targets, how many of the bag's slots get a bounty, any limit of one bounty per hunter), with file:line and the exact message if one is sent; 2) what an NPC bounty target needs to exist (templates, planet, distance) and what makes randomizeGenericBountyMission leave a slot empty; 3) the most likely reason a novice hunter gets an empty list, and what the bot must do or have to get one offer. Say which of these the code shows and which you infer.",
@@ -1298,7 +1302,12 @@
     "h:outputs/tools/bots/missions.py:960-1060"
    ],
    "model": "saluki",
-   "ctx": 32768
+   "ctx": 32768,
+   "started": "2026-10-18 06:03",
+   "finished": "2026-10-18 06:25",
+   "minutes": 22,
+   "skipped": null,
+   "reviewed": "Claude, 18 Oct 6:40 AM (owner: \"finish the saluki task here on Microverse\"): run 2 on the friend's PC (saluki, 32K) wrote report.md (23 KB) after one 16,384-token thinking reply and one reminder with thinking off. It found the real cause from the code alone, against the question's premise: the bot was out of the 6 m range (170-176), as in Claude's bounty-offers report from the run record. Line citations spot-checked and right; one slip: it says every bounty slot gets a non-zero target id, but NPC targets get 0 (1239). Better than qwen3.6, which wrote nothing. Run 1 is agent-log.run1.jsonl. local_agent.py now cuts thinking at 20,000 characters."
   },
   {
    "id": "report-precheck-saluki",
@@ -1307,17 +1316,21 @@
    "job": "claim-check",
    "model": "saluki",
    "ctx": 8192,
-   "status": "here",
+   "status": "done",
    "added_by": "Claude, 18 Oct 2:00 AM (owner: \"figure out what else our local models can do\"); Saluki got 62 of 70 changed verdicts right in claim-recheck; claims are now cut around their citation",
    "review_by": "Claude",
    "note_here": "18 Oct 2:20 AM, Claude (owner: \"import it and start the chunk jobs here\"): status \"here\" while Claude runs it by hand on Miniverse with saluki (Microverse's runner starts only \"open\" topics); Microverse does the research topics",
-   "started": "2026-10-18 02:06"
+   "started": "2026-10-18 02:06",
+   "minutes": 22,
+   "tries": 1,
+   "finished": "2026-10-18 02:27",
+   "reviewed": "Claude, 18 Oct 2:43 AM: sampled: about 9 in 10 \"supported\" and 6 in 10 \"contradicted\" hold; 219 claims had unresolved citations; a lead list for ChatGPT's C63 reviews, not a check"
   },
   {
    "id": "jedi-unlock-village",
    "title": "Jedi unlock on this galaxy: the village progression",
-   "status": "open",
-   "added_by": "Claude, 18 Oct 2:30 AM (owner: \"focus on finishing these reports accurately\"); jedi-unlock covered the hologrind progression, which is off (jedi_manager.lua:14 sets the village one)",
+   "status": "done",
+   "added_by": "Claude, 18 Oct 2:12 AM (owner: \"focus on finishing these reports accurately\"); jedi-unlock covered the hologrind progression, which is off (jedi_manager.lua:14 sets the village one)",
    "review_by": "Claude",
    "question": "The galaxy is set to VILLAGEJEDIPROGRESSION (jedi_manager.lua:14). From these files: 1) how a character becomes force sensitive ('glowing') under the village progression: which skills, badges or other counts, and when it is checked; 2) what happens next (the old man encounter, the Sith shadow, going to the village on Dathomir), with the exact messages and the states or quest flags set at each step; 3) what the holocron does here; 4) how Jedi visibility rises and falls (VisibilityManager.cpp) and when a Jedi shows on bounty terminals; 5) what a bot test can check without a real Jedi (states, flags, messages, a GM tool in village_gm_sui.lua if the files show one). Say which of these the code shows and which you infer.",
    "sources": [
@@ -1331,7 +1344,48 @@
     "src/server/zone/managers/visibility/VisibilityManager.cpp",
     "bin/scripts/managers/jedi/visibility_manager.lua"
    ],
-   "model": "qwen3.6:35b-a3b"
+   "model": "qwen3.6:35b-a3b",
+   "started": "2026-10-18 02:41",
+   "finished": "2026-10-18 02:44",
+   "minutes": 2,
+   "skipped": null,
+   "reviewed": "Claude, 18 Oct 2:53 AM: accurate (badges, delays, Dathomir point, holocron, visibility threshold); one correction: the novice skill, Jedi state and village access come when the Dathomir waypoint is given (onSuccessfulSpawn), not on arrival; village_gm_sui.lua not read"
+  },
+  {
+   "id": "core3-bug-comments",
+   "title": "Known Core3 bugs, from the source's own comments",
+   "status": "done",
+   "added_by": "Claude, 18 Oct 2:20 AM (owner: \"add a research topic ... known Core3 bugs and known bugs of the live servers. if we could fix those i imagine that would be valued in the community\")",
+   "review_by": "Claude",
+   "question": "The file core3-bug-comments-2026-10-18.tsv lists the 283 comments in our Core3 source (upstream SWGEmu as of 1 Oct 2026, 403893d9) that admit a bug or a gap: FIXME, TODO, HACK, broken, crash, exploit, workaround. Each line is 'file:line<TAB>marker<TAB>comment'. 1) Group them by game system (combat, crafting, missions, housing, chat, space, AI, loot, ...). 2) Pick the ones a player would notice on a pre-CU server: wrong results, crashes, exploits, or a feature that is missing or half done. Leave out code tidying, logging and refactor notes. 3) For each pick, give the file:line, what the comment says is wrong, and how a player would see it (inferred unless the comment says so). 4) Rank the top 20 by how much players would value a fix. Say which you infer.",
+   "sources": [
+    "h:outputs/work/known-bugs/core3-bug-comments-2026-10-18.tsv"
+   ],
+   "model": "qwen3.6:35b-a3b",
+   "started": "2026-10-18 02:46",
+   "finished": "2026-10-18 02:50",
+   "minutes": 4,
+   "skipped": null,
+   "reviewed": "Claude, 18 Oct 2:54 AM: not usable as a bug list: it read guard comments (\"X crashes the client, so we do Y\") and our own fix notes as open bugs; one real lead, the unskilled accuracy penalty -15 vs -50/-125 (CombatManager.cpp:1980). Rerun only with code around each comment"
+  },
+  {
+   "id": "droid-storage-quality",
+   "title": "Droid storage compartment shows Mechanism Quality -999999 (SWGEmu GitHub issue 11)",
+   "status": "review",
+   "added_by": "Claude, 18 Oct 2:20 AM (owner: \"add a research topic ... known Core3 bugs and known bugs of the live servers. if we could fix those i imagine that would be valued in the community\"); an open upstream bug report since June 2023",
+   "review_by": "Claude",
+   "question": "SWGEmu's GitHub issue 11: crafting a Droid Storage Compartment shows 'Mechanism Quality -999999'. From these files: 1) where mechanism_quality is set and shown for a droid component (DroidComponentImplementation.cpp) and for the item storage module; 2) which experimental property or crafting value the storage module's template gives it, and why that value can be missing so a sentinel like -999999 shows; 3) the smallest fix, with file:line. Say which you infer.",
+   "sources": [
+    "src/server/zone/objects/tangible/component/droid/DroidComponentImplementation.cpp",
+    "src/server/zone/objects/tangible/components/droid/DroidItemStorageModuleDataComponent.cpp",
+    "src/server/zone/objects/tangible/components/droid/DroidItemStorageModuleDataComponent.h",
+    "bin/scripts/object/tangible/component/droid/item_storage_module_1.lua"
+   ],
+   "model": "qwen3.6:35b-a3b",
+   "started": "2026-10-18 02:52",
+   "finished": "2026-10-18 02:53",
+   "minutes": 2,
+   "skipped": null
   },
   {
    "id": "test-index",
@@ -1339,15 +1393,15 @@
    "kind": "map",
    "job": "test-index",
    "model": "qwen3.6:35b-a3b",
-   "status": "open",
+   "status": "review",
    "added_by": "Claude, 17 Oct 9:00 AM (owner: \"Test-plan index\"; ChatGPT is out until 22 Oct)",
    "review_by": "Claude",
    "model_before": "qwen3.5:9b",
    "note_pc": "17 Oct 11:40 AM, Claude: this PC only (owner); qwen3:8b because 5.9 GB RAM was free. The friend PC model was qwen3.5:9b",
-   "started": "2026-10-17 12:29",
-   "minutes": 14,
-   "tries": 0,
-   "finished": "2026-10-17 12:38",
+   "started": "2026-10-18 02:55",
+   "minutes": 27,
+   "tries": 1,
+   "finished": "2026-10-18 03:09",
    "note_frodo": "18 Oct, Claude (owner: \"get some of the backlog over here on this machine (Friends pc aka Microverse)\"): rerun on the friend's PC with qwen3.6:35b-a3b: full rerun; the qwen3:8b results are results.qwen3-8b.jsonl and report.qwen3-8b.md"
   },
   {
@@ -1372,18 +1426,20 @@
    "kind": "map",
    "job": "item-check",
    "model": "saluki",
-   "status": "here",
+   "status": "done",
    "added_by": "Claude, 17 Oct 9:05 AM (owner: \"make sure that all the items in the game are obtainable in the way they were intended\"; local first, then Claude checks). 2,041 flagged items from tools/core3_audit/item_sources.py, 103 chunks",
    "review_by": "Claude",
    "model_before": "qwen3.6:35b-a3b",
    "note_pc": "17 Oct 11:40 AM, Claude: this PC only (owner); qwen3:8b because 5.9 GB RAM was free. The friend PC model was qwen3.6:35b-a3b",
-   "started": "2026-10-17 17:39",
-   "minutes": 1,
-   "finished": "2026-10-17 17:39",
+   "started": "2026-10-18 02:27",
+   "minutes": 2,
+   "finished": "2026-10-18 02:28",
    "note_frodo": "18 Oct, Claude (owner: \"get some of the backlog over here on this machine (Friends pc aka Microverse)\"): rerun on the friend's PC with qwen3.6:35b-a3b: only the chunks with no answer (results.jsonl keeps the qwen3:8b answers)",
    "note": "18 Oct 1:10 AM, Claude (owner: \"after first task, stop and set everything up to run on Microverse, run the server here\"): open again for the friend's PC (qwen3.6:35b-a3b, 64K)",
    "note_here": "18 Oct 2:20 AM, Claude (owner: \"import it and start the chunk jobs here\"): status \"here\" while Claude runs it by hand on Miniverse with saluki (Microverse's runner starts only \"open\" topics); Microverse does the research topics",
-   "model_before_here": "qwen3.6:35b-a3b"
+   "model_before_here": "qwen3.6:35b-a3b",
+   "tries": 1,
+   "reviewed": "Claude, 18 Oct 2:41 AM: the 31 pre-cu-missing flags do not hold as given: 8 have a way in their own input (our Nal Hutta and Hoth rewards), 4 are not items, 19 have no source and need a real pre-CU source (GPT C64). The model ignored the \"now\" column; the later-era and test-only groups were not checked"
   },
   {
    "id": "item-check-ok",
@@ -1391,18 +1447,20 @@
    "kind": "map",
    "job": "item-check-ok",
    "model": "saluki",
-   "status": "here",
+   "status": "done",
    "added_by": "Claude, 17 Oct 9:15 AM (owner: \"queue a second local pass over the 3,766 items that already have a way, after the flagged ones\"). 189 chunks",
    "review_by": "Claude",
    "model_before": "qwen3.6:35b-a3b",
    "note_pc": "17 Oct 11:40 AM, Claude: this PC only (owner); qwen3:8b because 5.9 GB RAM was free. The friend PC model was qwen3.6:35b-a3b",
-   "started": "2026-10-17 18:36",
-   "minutes": 60,
-   "finished": "2026-10-17 18:44",
+   "started": "2026-10-18 02:48",
+   "minutes": 83,
+   "finished": "2026-10-18 02:51",
    "note_frodo": "18 Oct, Claude (owner: \"get some of the backlog over here on this machine (Friends pc aka Microverse)\"): rerun on the friend's PC with qwen3.6:35b-a3b: only the 27 chunks with no answer (results.jsonl keeps the 162 qwen3:8b answers)",
    "note": "18 Oct 1:10 AM, Claude (owner: \"after first task, stop and set everything up to run on Microverse, run the server here\"): open again for the friend's PC (qwen3.6:35b-a3b, 64K)",
    "note_here": "18 Oct 2:20 AM, Claude (owner: \"import it and start the chunk jobs here\"): status \"here\" while Claude runs it by hand on Miniverse with saluki (Microverse's runner starts only \"open\" topics); Microverse does the research topics",
-   "model_before_here": "qwen3.6:35b-a3b"
+   "model_before_here": "qwen3.6:35b-a3b",
+   "tries": 2,
+   "reviewed": "Claude, 18 Oct 2:53 AM: the 29 wrong-way/pre-cu-missing flags all have a way in their own input (theme-park, Bestine, faction perks, space loot, Dim-U); Saluki's 540 \"fine\" fit the sample; the later-era group was not checked"
   }
  ]
 }
