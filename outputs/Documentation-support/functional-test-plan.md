@@ -143,7 +143,7 @@ Sources read: `Bot-reports/GATE.md` (gate of 15 Oct, 4:31 PM: FAIL, 22 of 35), `
   |---|---|---|---|
   | general | destroy | **PASS** (12:41 PM): lair destroyed, mission removed, owner paid; the two helpers were not (bug 1) | 774 → 258 (3), 344 s |
   | general | deliver | **PASS** twice (Rusk; Cresh's group all have full inventories) | 62 → 20 (3), 80 s; 64 → 21 (3), 85 s |
-  | general | the cap | **PASS** three times: Ilsa holds 6, and a 7th stays in the mission bag | the message arrives only as `@mission:mission_generic` (bug 4) |
+  | general | the cap | **PASS** four times: Ilsa holds 6, and a 7th stays in the mission bag; 11:18 PM, on the new body (dev `1be13676`), the exact message arrives: `@mission/mission_generic:too_many_missions` | before that only as `@mission:mission_generic` (bug 4) |
   | artisan | crafting | **PASS** twice: the NPC's schematic and parts, the generic tool, the hand-over | 64 → 16 (4), 83 s; 102 s |
   | artisan | survey | **PASS** (10:12 PM, run 30): Dova, guarded by Varo, found Vesoide at 75.9% (non-ferrous metal, 50% needed) 1150 m out | 471 → 117 (4), 290 s |
   | entertainer | dancer | **PASS** twice: 10 minutes dancing inside the mission's building | 133 → 44 (3), 667 s; 169 → 56 (3), 706 s |
@@ -161,7 +161,7 @@ Sources read: `Bot-reports/GATE.md` (gate of 15 Oct, 4:31 PM: FAIL, 22 of 35), `
      - 5:38 AM: Cresh and Kor at the lair were unpaid; Ilsa, dead at the first waypoint, was paid.
      - 12:22 PM: Forn's hunting mission completed and he was paid 0.
      - 12:41 PM: Ilsa and Kor at the lair were paid 0.
-     - **Staged fix:** `mission-group-pay.patch` with `mission-group-pay.md`, built into run 30 (dev `cbd85fdf`). Check: "general/destroy: everyone who fought at the lair is paid": **not yet run.** 10:15 PM: all three died at a held difficulty-14 kreetle lair (1152 credits); 10:35 PM: no destroy mission of difficulty 10 or less within 2.3 km (`cresh-missions.py` now caps it at 10).
+     - **Staged fix:** `mission-group-pay.patch` with `mission-group-pay.md`, built into run 30 (dev `cbd85fdf`). Check: "general/destroy: everyone who fought at the lair is paid": **not yet run.** 10:15 PM: all three died at a held difficulty-14 kreetle lair (1152 credits); 10:35 PM and 11:18 PM: no destroy mission of difficulty 10 or less within 2.3 km among the 6 offered (`cresh-missions.py` caps it at 10).
   2. **A deliver pickup into a full inventory leaves the mission stuck** (server). `DeliverMissionObjectiveImplementation::updateMissionStatus` aborts the objective when the datadisk can't be added, but leaves the mission in the datapad with no message. The NPC still says the pickup line (`m3p`). Cresh, 5:38 AM: inventory 80 of 80, no datadisk, waypoint unchanged; the mission is still held. Crafting pickups have the same pattern. Proposed, not fixed.
   3. **A bank terminal's Deposit/Withdraw window opens at any range** (server). Kor, dead and 2 km from the nearest terminal, opened it about 6 AM. The scenarios use it, read only and cancelled, to read the balance. Proposed, not fixed.
   4. **Bot body:**
@@ -170,15 +170,17 @@ Sources read: `Bot-reports/GATE.md` (gate of 15 Oct, 4:31 PM: FAIL, 22 of 35), `
      - `find` from inside a building searches around cell-local x and y (Cresh, cloned indoors, found nothing at 11:56 AM);
      - there is no mission abort.
 
+     Dev `1be13676` (11:14 PM on Forn's and Cresh's bodies) fixes the first and the last: the refusal now reads `@mission/mission_generic:too_many_missions`. New with it, 11:18 PM: Forn's walk to a scout terminal 1 km away failed at once with "walking without z requires the /agentpath helper" (`Bot-reports/Forn/20261017-232839-forn-missions.json`).
+
      The scenarios work around all four.
   5. **Squad bots:** 10 of 24 have full inventories (80 items), mostly spare `/agentgear` kits (Cresh, Ilsa, Kor, Dorn, Nima, Mirren, Aurek, Sela, Oren, Besh), so they can't take deliver, crafting or survey missions.
 - **Gaps:**
   - **Survey** passes since 10:12 PM (run 30), after the class match, the density fraction and the guarded walk back.
   - **Scout and imperial recon** pass since 10:28 PM and 10:47 PM (run 30): Marksman walkers (89737ca), Mirren escorting Dask, and a walk to the building first after "no path" (3a4414e).
-  - **Bounty** isn't completed. Level-1 targets spawn at random spawn points anywhere on the planet, and each list request draws new offers, so the scenario lists again until one starts within 4 km (89737ca; found on the first list at 10:05 PM). The server allows one bounty at a time and Ressa holds a far one (no abort in the old body; dev `1be13676` adds `mission_abort`), so Brask hunted at 10:35 PM (3a4414e), but his lists showed no bounty offers: he likely stood out of the terminal's range ("stopped at the end of the last path"). Next: check the bot's range to the terminal before listing, or abort Ressa's far bounty with the new body's `mission_abort` (dev `1be13676`; the squad bodies still run the old binary). The informant step is offline tested only.
+  - **Bounty** isn't completed. Level-1 targets spawn at random spawn points anywhere on the planet, and each list request draws new offers, so the scenario lists again until one starts within 4 km (89737ca; found on the first list at 10:05 PM). The server allows one bounty at a time and Ressa holds a far one (no abort in the old body; dev `1be13676` adds `mission_abort`), so Brask hunted at 10:35 PM (3a4414e), but his lists showed no bounty offers: he likely stood out of the terminal's range ("stopped at the end of the last path"). 11:18 PM (new body): he stepped up to the terminal and listed 30 more times, still no bounty offers (only the bag's earlier offers), so range is not the cause; Ressa's held bounty was not aborted (no abort event; most likely its target is within 4 km of where she now stands, and a held bounty is not reused). Cause open. Next: check the bot's range to the terminal before listing, or abort Ressa's far bounty with the new body's `mission_abort` (dev `1be13676`; the squad bodies still run the old binary). The informant step is offline tested only.
   - **The full-datapad gate (C56)** is not run.
   - **The 2-mission cap on live** is not checked (live's config).
-- **Pass:** met except the exact refusal message. `cresh-missions.py` "the mission leaves the datapad" and "the share reaches the bank" PASS (general/destroy, 12:41 PM). Deliver and crafting PASS in new scenarios. The seventh mission is refused, but the message reaches the body only as `@mission:mission_generic` (bug 4), so "with the exact message" waits for the body fix.
+- **Pass:** met for 9 of 11 terminal missions, with the exact refusal message on the new body (11:18 PM); bounty and the group-pay check are open. `cresh-missions.py` "the mission leaves the datapad" and "the share reaches the bank" PASS (general/destroy, 12:41 PM). Deliver and crafting PASS in new scenarios. The seventh mission is refused, but the message reaches the body only as `@mission:mission_generic` (bug 4), so "with the exact message" waits for the body fix.
 
 #### 12. Loot and items
 - **Check:** creature and NPC drops have real names; looting works; items stack and split; the junk dealer buys.
