@@ -8,7 +8,7 @@ until Claude or ChatGPT has checked it against the source.
 
 | Server | Models | Used when |
 |---|---|---|
-| The friend's PC (RTX 4070 Super 12 GB, 32 GB RAM), on the home network | `qwen3.6:35b-a3b` (research), `saluki` (claim checks; Underdog Saluki 27B at IQ2, 7.9 GB, 43 tokens/s, since 18 Oct), `qwen3.5:9b` (fast jobs), `gemma4:12b` (bot chat), `qwen3:8b` and `gpt-oss:20b` (older, for comparisons), `qwen-heretic` (Qwen3.8 27B Q4, 17 GB: more than the card holds, so slow; not used). qwen3.5, qwen3.6 and gemma4 also read images. WaifuGemma4 (the npc-dialogue model) is no longer there (checked 18 Oct 1:35 AM). | whenever it answers |
+| The friend's PC (RTX 4070 Super 12 GB, 32 GB RAM), on the home network | `qwen3.6:35b-a3b` (research), `saluki` (claim checks and art checks; Underdog Saluki 27B at IQ2, 7.9 GB, 43 tokens/s, since 18 Oct; with its vision projector since 3:20 AM, 8.3 GB, all on the card), `qwen3.5:9b` (fast jobs), `gemma4:12b` (bot chat), `qwen3:8b` and `gpt-oss:20b` (older, for comparisons), `qwen-heretic` (Qwen3.8 27B Q4, 17 GB: more than the card holds, so slow; not used). qwen3.5, qwen3.6 and gemma4 also read images. WaifuGemma4 (the npc-dialogue model) is no longer there (checked 18 Oct 1:35 AM). | whenever it answers |
 | This PC (RTX 5070 12 GB) | `saluki` at 16K with its vision projector (since 18 Oct 2:10 AM: 50 tokens/s, all on the card), also `qwen3:8b`, WaifuGemma4 (npc-dialogue), `gpt-oss:20b` | fallback, when the friend's PC is off, asleep or Ollama is quit; and chunk jobs Claude runs here by hand (status `here`) while the friend's PC does research |
 
 - **The list is one file:** `outputs/tools/agents/local/ollama-url.txt` (gitignored, because it holds a home-network
@@ -109,7 +109,7 @@ written 18 Oct as `log-triage`, `scenario-draft` and `board-trim` (in the job ta
    - **Update, 18 Oct 2:10 AM: Saluki with its vision projector (this PC) passed.**
      - In 11 s it reported "mesh tearing and pinching on the handles (especially in the right panel)" and said no to the prop.
      - It is the only one of the four models that did. Use it for art checks here.
-     - Microverse can get the same check by adding the projector there (`mmproj-Underdog-Saluki-27B-1.0-Q8_0.gguf`, 0.63 GB, and a Modelfile like `tools/agents/local/models/saluki.Modelfile`).
+     - Microverse has it too since 18 Oct 3:20 AM (owner: "make sure saluki has vision"). Claude uploaded the projector over Ollama's API (`/api/blobs`, then `/api/create` with both files and the same parameters and template). Microverse's `saluki` now lists vision, and it described the crate test image at 45 tokens/s. Art checks can go to either PC.
 9. **Reading bot screenshots** (a stuck character, an error window).
    - Screenshots of the owner's client stay on this PC, so this needs a vision model here: `qwen3.5:9b`, 6.6 GB, a download, so it needs the owner's OK.
 

@@ -141,6 +141,7 @@ Before downloading, importing, deploying, or acting in-game, check:
 Never copy passwords, account hashes, or database secrets (`SWG-login.txt`, `config-local.lua`, backups) into docs, commits, or chat.
 
 **Redact people's names when publishing (owner, 14 Oct).** Anything that leaves this PC must not name real people: a Discord post, a GitHub push (even to a private repo), a shared page or doc. Exception (owner, 15 Oct): author credits that the licences of reused work require (mod and code authors' own public credits, such as the MTG/Hoth port headers, TortoiseBots and SWGEmu) stay in what is pushed; nobody else's usernames go up.
+- Microverse on the home network is not "leaving this PC" for the names sweep and the research queue (owner, 18 Oct 3:25 AM): they may send repo text there, and the results still go only into `work/` (git-ignored) or this PC's files. The personal-details sweep is the exception: it runs on this PC only, once the owner is done using it (owner, 18 Oct, "Here, later"), so personal details never leave this PC.
 - That covers names, forum handles, aliases and character names that identify a real person: the owner's family, players, staff of other servers, and anyone named in the Storyteller research.
 - Replace them with roles ("a player", "a former admin") or leave the line out.
 - The one exception is the credit line an asset's licence requires (for example a CC-BY author credit). Keep that exactly as the licence asks.

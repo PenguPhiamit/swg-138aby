@@ -393,6 +393,12 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 
 ## Log
 
+### 2026-10-18 3:26 AM Claude: Microverse's Saluki has vision; names sweep moved to Microverse
+
+- **Vision on Microverse** (owner: "make sure saluki has vision"): the projector (`mmproj-Underdog-Saluki-27B-1.0-Q8_0.gguf`, 0.63 GB) was uploaded over Ollama's API, and `saluki` was rebuilt there with both files and the same parameters and template. It lists vision and described the crate test image at 45 tok/s, 8.3 GB on the card. Art checks can go to either PC (`Agent/local-model.md`).
+- **Names sweep on Microverse** (owner: "move the remaining jobs on my PC to Microverse's"; when asked about real names: "Microverse is fine"): names-sweep-delta stopped here at 650 of 1661 and resumed there; names-sweep-gone follows. `work/names-sweep-tools/run_local.py` now takes `--url` and stops after 5 failed chunks in a row. Logs: `work/names-sweep-*/run.log`. The personal-details pass stays on this PC, run when the owner is done using it ("Here, later"); AGENTS.md has a line under the redaction rule.
+- **Not checked:** whether Microverse's Saluki sees the crumpled handles (the test reply stopped at 400 tokens before reaching them). The merge waits until both logs say "finished" (the GitHub push capability session).
+
 ### 2026-10-18 2:40 AM Claude: missions rerun on run 30b: bounty and group pay still open
 
 - **The main session's OK, one run on run 30b** (2:31 AM; same build as run 30; BotPop off), with no restart and no build. Forn and Cresh grouped properly. Reports: `Bot-reports/Forn/20261018-023934-forn-missions.json`, `Bot-reports/Cresh/20261018-023742-cresh-missions.json`.
