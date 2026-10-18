@@ -1,0 +1,12 @@
+done in 4 steps, 98 s
+I've read TASK.md and all four source files, then written report.md with the five requested sections:
+
+1. **Short answer** - Explains that `DroidComponentImplementation.cpp` line 15 reads mechanism_quality from crafting values, and when missing returns a sentinel (-999999), which may bypass the validation check on line 62.
+
+2. **How it works** - Documents the crafting flow with file:line citations (DroidComponentImplementation.cpp lines 12-15, 62-63; item_storage_module_1.lua lines 47-55; DroidItemStorageModuleDataComponent.cpp lines 36-37, 64).
+
+3. **What a bot test should check** - Lists observable results (valid mechanism_quality >= 0, storage_module <= 10) and setup requirements (crafting skill, template availability).
+
+4. **Likely reasons a test sees no effect** - Template not loaded, crafting calculation skipped, sentinel comparison bug, or initialization order issues.
+
+5. **Open questions** - Names what the files don't answer: the exact value of `AttributesMap::VALUENOTFOUND`, how `CraftingValues::getCurrentValue` behaves when missing, when mechanism_quality is calculated, why only storage modules are affected, and whether storage modules have a separate initialization path.
