@@ -92,6 +92,10 @@ ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fi
 
 ## Log
 
+### 2026-10-18 3:49 PM Claude: README: what to expect from a public server
+
+Owner's words, written out in the root README (new section after "What's here"): a public or whitelisted server, if there is one, starts in early alpha; expect wipes; progression is sped up to make up for them until a stable live point; a whitelist to start; things will break. Rates and the after-stable details are left open on purpose. Nothing pushed.
+
 ### 2026-10-18 12:54 PM Claude: run 32 (dev `2687887a`): ice caves placement test 4/6, Hoth is not on the installations' planet list; galaxy shut down for the owner's driver update
 
 - **Run 32** up 11:35 AM (ready in 30 s, `--dev-server`, Tailscale address, BotPop settings kept); the squad logged in at 11:37 AM.

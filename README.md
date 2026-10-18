@@ -27,6 +27,28 @@ offline but not installed yet; **planned** means not started. Nothing is open to
 A small friends-only test comes first. The whole plan, with dates, is in
 [outputs/SWG-roadmap.md](outputs/SWG-roadmap.md).
 
+## If there's a public server
+
+If I do open a public or whitelisted server after the friends test, it will be in early alpha for a while. If you
+join, this is what to expect:
+
+- **Expect wipes.** Characters, skills, items, credits, houses and resources can all be reset, maybe more than once,
+  whenever a change needs a clean start: a rebuilt planet, a reworked profession, an economy that went wrong. I'll
+  warn on the Discord before a planned wipe whenever I can, but nothing is promised to carry over.
+- **Progression is sped up to make up for it.** Experience and the slowest grinds run faster than in the original
+  game, so a wipe costs you days rather than months. The speed-up is there because of the wipes, and it gets looked
+  at again once they stop.
+- **Things will break.** Content is unfinished, planets that aren't ready stay closed, and there will be restarts,
+  rollbacks and downtime while fixes go in. Bug reports are the most useful thing you can give back, and they decide
+  what gets fixed first.
+- **A whitelist to start.** A small group keeps the server at a size where problems can be found and fixed. It may
+  open wider as it settles.
+- **Then a stable live point.** When the server gets there, I'll announce it here and on the Discord. From then on
+  characters are meant to last, and a wipe would be a last resort.
+
+You'll need your own copy of the original SWG client to play; the server's patch goes on top of it. Like the rest of
+the project, the server is non-commercial.
+
 ## Goals
 
 - Keep the pre-CU game as it was, and finish what was left thin or broken.
