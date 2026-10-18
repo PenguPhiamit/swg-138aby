@@ -674,3 +674,4 @@ Observed two rounds of an already-running main-plan job. Report/assignment persi
 - 2026-10-18 09:01 Esk: `hoth-echo-base-probe.py` — error, 0/0; [report](Esk/20261018-090140-hoth-echo-base-probe.json)
 - 2026-10-18 09:02 Esk: `hoth-echo-base-probe.py` — failed, 1/2; [report](Esk/20261018-090244-hoth-echo-base-probe.json)
 - 2026-10-18 09:07 Esk: `hoth-echo-base-probe.py` — failed, 1/2; [report](Esk/20261018-090755-hoth-echo-base-probe.json)
+- 2026-10-18 09:41 Esk: `hoth-echo-base-probe.py` — finished, 2/2; [report](Esk/20261018-094152-hoth-echo-base-probe.json)

@@ -1,1238 +1,1245 @@
 {
- "since": "10/18 8:58 AM",
- "matched": 4983,
- "patterns": 206,
+ "since": "10/18 9:39 AM",
+ "matched": 5017,
+ "patterns": 208,
  "known": [
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/base/retrieve_quest_base.lua ERROR cannot open scripts/object/tangible/base/retrieve_quest_base.lua: No such file or directory",
    "count": 1102,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/base/retrieve_quest_base.iff",
    "count": 1102,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/loot/base/loot_base.lua ERROR cannot open scripts/object/tangible/loot/base/loot_base.lua: No such file or directory",
    "count": 332,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/loot/base/loot_base.iff",
    "count": 332,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/loot/creature_loot/collections/base_collection.lua ERROR cannot open scripts/object/tangible/loot/creature_loot/collections/base_collection.lua: No such file or directory",
    "count": 204,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/loot/creature_loot/collections/base_collection.iff",
    "count": 204,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/undead_humanoid.lua ERROR cannot open scripts/object/mobile/skeleton/undead_humanoid.lua: No such file or directory",
    "count": 177,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/undead_humanoid.iff",
    "count": 177,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/dance_prop/prop_base.lua ERROR cannot open scripts/object/tangible/dance_prop/prop_base.lua: No such file or directory",
    "count": 138,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/dance_prop/prop_base.iff",
    "count": 138,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/wearables/base/cybernetic_base.lua ERROR cannot open scripts/object/tangible/wearables/base/cybernetic_base.lua: No such file or directory",
    "count": 47,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/wearables/base/cybernetic_base.iff",
    "count": 47,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
+  },
+  {
+   "level": "ERROR",
+   "pattern": "[ZoneClientSession] bool engine::service::proto::BaseClient::handleNetStatusRequest(Packet *) <ip>: StreamIndexOutOfBoundsException at #",
+   "count": 33,
+   "first": "10/18 9:40 AM",
+   "why": "the core3client bots send net-status packets the server can't parse; the server catches the exception (C41, dropped 18 Oct; the session watch filters it too)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/medicine/base/base_stimpack.lua ERROR cannot open scripts/object/tangible/medicine/base/base_stimpack.lua: No such file or directory",
    "count": 28,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/medicine/base/base_stimpack.iff",
    "count": 28,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/new_weapon/enhancement_melee_base.lua ERROR cannot open scripts/object/tangible/component/weapon/new_weapon/enhancement_melee_base.lua: No such file or directory",
    "count": 27,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/new_weapon/enhancement_melee_base.iff",
    "count": 27,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/new_weapon/enhancement_ranged_base.lua ERROR cannot open scripts/object/tangible/component/weapon/new_weapon/enhancement_ranged_base.lua: No such file or directory",
    "count": 27,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/new_weapon/enhancement_ranged_base.iff",
    "count": 27,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/smuggler/contraband/contraband_base.lua ERROR cannot open scripts/object/tangible/smuggler/contraband/contraband_base.lua: No such file or directory",
    "count": 27,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/smuggler/contraband/contraband_base.iff",
    "count": 27,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/cybernetic/cybernetic_module_base.lua ERROR cannot open scripts/object/tangible/component/cybernetic/cybernetic_module_base.lua: No such file or directory",
    "count": 18,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/cybernetic/cybernetic_module_base.iff",
    "count": 18,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/new_weapon/enhancement_melee_slot_one_base.lua ERROR cannot open scripts/object/tangible/component/weapon/new_weapon/enhancement_melee_slot_one_base.lua: No such file or directory",
    "count": 18,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/new_weapon/enhancement_melee_slot_one_base.iff",
    "count": 18,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_one_base.lua ERROR cannot open scripts/object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_one_base.lua: No such file or directory",
    "count": 18,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_one_base.iff",
    "count": 18,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/armor/armor_layer_new.lua ERROR cannot open scripts/object/tangible/component/armor/armor_layer_new.lua: No such file or directory",
    "count": 13,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/armor/armor_layer_new.iff",
    "count": 13,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/armor/armor_core_base.lua ERROR cannot open scripts/object/tangible/component/armor/armor_core_base.lua: No such file or directory",
    "count": 12,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/armor/armor_core_base.iff",
    "count": 12,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/food/base/base_crafted_beast_food.lua ERROR cannot open scripts/object/tangible/food/base/base_crafted_beast_food.lua: No such file or directory",
    "count": 12,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/food/base/base_crafted_beast_food.iff",
    "count": 12,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/furniture/base/flag_city_base.lua ERROR cannot open scripts/object/tangible/furniture/base/flag_city_base.lua: No such file or directory",
    "count": 12,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/furniture/base/flag_city_base.iff",
    "count": 12,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/vehicle/base/base_vehicle.lua ERROR cannot open scripts/object/tangible/component/vehicle/base/base_vehicle.lua: No such file or directory",
    "count": 11,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/vehicle/base/base_vehicle.iff",
    "count": 11,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/killer_worm.lua ERROR cannot open scripts/object/mobile/skeleton/killer_worm.lua: No such file or directory",
    "count": 10,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/killer_worm.iff",
    "count": 10,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/new_weapon/enhancement_melee_slot_two_base.lua ERROR cannot open scripts/object/tangible/component/weapon/new_weapon/enhancement_melee_slot_two_base.lua: No such file or directory",
    "count": 9,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/new_weapon/enhancement_melee_slot_two_base.iff",
    "count": 9,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_base.lua ERROR cannot open scripts/object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_base.lua: No such file or directory",
    "count": 9,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_base.iff",
    "count": 9,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/base/weapon_core_base.lua ERROR cannot open scripts/object/tangible/component/base/weapon_core_base.lua: No such file or directory",
    "count": 8,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/base/weapon_core_base.iff",
    "count": 8,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/wearables/base/base_cybernetic_arm_l.lua ERROR cannot open scripts/object/tangible/wearables/base/base_cybernetic_arm_l.lua: No such file or directory",
    "count": 8,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/wearables/base/base_cybernetic_arm_l.iff",
    "count": 8,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/wearables/base/base_cybernetic_arm_r.lua ERROR cannot open scripts/object/tangible/wearables/base/base_cybernetic_arm_r.lua: No such file or directory",
    "count": 8,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/wearables/base/base_cybernetic_arm_r.iff",
    "count": 8,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/terminal/base/base_portable_terminal.lua ERROR cannot open scripts/object/tangible/terminal/base/base_portable_terminal.lua: No such file or directory",
    "count": 7,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/terminal/base/base_portable_terminal.iff",
    "count": 7,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/wearables/base/base_cybernetic_torso.lua ERROR cannot open scripts/object/tangible/wearables/base/base_cybernetic_torso.lua: No such file or directory",
    "count": 7,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/wearables/base/base_cybernetic_torso.iff",
    "count": 7,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/vr_bat.lua ERROR cannot open scripts/object/mobile/skeleton/vr_bat.lua: No such file or directory",
    "count": 6,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/vr_bat.iff",
    "count": 6,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/cybernetic/cybernetic_module_base_one_core.lua ERROR cannot open scripts/object/tangible/component/cybernetic/cybernetic_module_base_one_core.lua: No such file or directory",
    "count": 6,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/cybernetic/cybernetic_module_base_one_core.iff",
    "count": 6,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/cybernetic/cybernetic_module_base_three_core.lua ERROR cannot open scripts/object/tangible/component/cybernetic/cybernetic_module_base_three_core.lua: No such file or directory",
    "count": 6,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/cybernetic/cybernetic_module_base_three_core.iff",
    "count": 6,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/cybernetic/cybernetic_module_base_two_core.lua ERROR cannot open scripts/object/tangible/component/cybernetic/cybernetic_module_base_two_core.lua: No such file or directory",
    "count": 6,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/cybernetic/cybernetic_module_base_two_core.iff",
    "count": 6,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/wearables/base/base_cybernetic_forearm_r.lua ERROR cannot open scripts/object/tangible/wearables/base/base_cybernetic_forearm_r.lua: No such file or directory",
    "count": 6,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/wearables/base/base_cybernetic_forearm_r.iff",
    "count": 6,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/wearables/base/base_cybernetic_legs.lua ERROR cannot open scripts/object/tangible/wearables/base/base_cybernetic_legs.lua: No such file or directory",
    "count": 6,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/wearables/base/base_cybernetic_legs.iff",
    "count": 6,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/storyteller/prop/base/storyteller_prop_base.lua ERROR cannot open scripts/object/tangible/storyteller/prop/base/storyteller_prop_base.lua: No such file or directory",
    "count": 5,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/storyteller/prop/base/storyteller_prop_base.iff",
    "count": 5,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/furniture/base/flag_home_base.lua ERROR cannot open scripts/object/tangible/furniture/base/flag_home_base.lua: No such file or directory",
    "count": 5,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/furniture/base/flag_home_base.iff",
    "count": 5,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] expecting SHOT got SSHP in object/ship/base/shared_ship_base.iff",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: a client file of another template type (ship, static, resource container) read as a shared object template"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/static/base/static_flagpole_base.lua ERROR cannot open scripts/object/static/base/static_flagpole_base.lua: No such file or directory",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/static/base/static_flagpole_base.iff",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/draft_schematic/armor/component/new_armor_layer_base.lua ERROR cannot open scripts/object/draft_schematic/armor/component/new_armor_layer_base.lua: No such file or directory",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/draft_schematic/armor/component/new_armor_layer_base.iff",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/draft_schematic/dance_prop/prop_base.lua ERROR cannot open scripts/object/draft_schematic/dance_prop/prop_base.lua: No such file or directory",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/draft_schematic/dance_prop/prop_base.iff",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/new_weapon/elemental_base.lua ERROR cannot open scripts/object/tangible/component/weapon/new_weapon/elemental_base.lua: No such file or directory",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/new_weapon/elemental_base.iff",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/wearables/base/base_cybernetic_forearm_l.lua ERROR cannot open scripts/object/tangible/wearables/base/base_cybernetic_forearm_l.lua: No such file or directory",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/wearables/base/base_cybernetic_forearm_l.iff",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/wearables/base/base_cybernetic_hand_l.lua ERROR cannot open scripts/object/tangible/wearables/base/base_cybernetic_hand_l.lua: No such file or directory",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/wearables/base/base_cybernetic_hand_l.iff",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/wearables/base/base_cybernetic_hand_r.lua ERROR cannot open scripts/object/tangible/wearables/base/base_cybernetic_hand_r.lua: No such file or directory",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/wearables/base/base_cybernetic_hand_r.iff",
    "count": 4,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/mas.lua.lua ERROR cannot open scripts/object/mobile/skeleton/mas.lua.lua: No such file or directory",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/massiff.iff",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/creature/npc/base/toydarian_base_male.lua ERROR cannot open scripts/object/creature/npc/base/toydarian_base_male.lua: No such file or directory",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/creature/npc/base/toydarian_base_male.iff",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/static/structure/nobuild/base/noflora_base.lua ERROR cannot open scripts/object/static/structure/nobuild/base/noflora_base.lua: No such file or directory",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/static/structure/nobuild/base/noflora_base.iff",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/armor/armor_core_enhancement_base.lua ERROR cannot open scripts/object/tangible/component/armor/armor_core_enhancement_base.lua: No such file or directory",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/armor/armor_core_enhancement_base.iff",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/armor/armor_segment_new.lua ERROR cannot open scripts/object/tangible/component/armor/armor_segment_new.lua: No such file or directory",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/armor/armor_segment_new.iff",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/armor/armor_segment_enhancement_base.lua ERROR cannot open scripts/object/tangible/component/armor/armor_segment_enhancement_base.lua: No such file or directory",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/armor/armor_segment_enhancement_base.iff",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/dna/dna_playersample_base.lua ERROR cannot open scripts/object/tangible/component/dna/dna_playersample_base.lua: No such file or directory",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/dna/dna_playersample_base.iff",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/core/weapon_core_melee_base.lua ERROR cannot open scripts/object/tangible/component/weapon/core/weapon_core_melee_base.lua: No such file or directory",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/core/weapon_core_melee_base.iff",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/core/weapon_core_ranged_base.lua ERROR cannot open scripts/object/tangible/component/weapon/core/weapon_core_ranged_base.lua: No such file or directory",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/core/weapon_core_ranged_base.iff",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/new_weapon_comp_gas_cartridge_base.lua ERROR cannot open scripts/object/tangible/component/weapon/new_weapon_comp_gas_cartridge_base.lua: No such file or directory",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/new_weapon_comp_gas_cartridge_base.iff",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/new_weapon_comp_reinforcement_core_base.lua ERROR cannot open scripts/object/tangible/component/weapon/new_weapon_comp_reinforcement_core_base.lua: No such file or directory",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/new_weapon_comp_reinforcement_core_base.iff",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/smuggler/slice_component.lua ERROR cannot open scripts/object/tangible/smuggler/slice_component.lua: No such file or directory",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/smuggler/slice_component.iff",
    "count": 3,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/draft_schematic/armor/component/new_armor_core_base.lua ERROR cannot open scripts/object/draft_schematic/armor/component/new_armor_core_base.lua: No such file or directory",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/draft_schematic/armor/component/new_armor_core_base.iff",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/blistmok.lua ERROR cannot open scripts/object/mobile/skeleton/blistmok.lua: No such file or directory",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/blistmok.iff",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/hawk_bat.lua ERROR cannot open scripts/object/mobile/skeleton/hawk_bat.lua: No such file or directory",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/hawk_bat.iff",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/vr_mynock.lua ERROR cannot open scripts/object/mobile/skeleton/vr_mynock.lua: No such file or directory",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/vr_mynock.iff",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/core/weapon_core_heavy_base.lua ERROR cannot open scripts/object/tangible/component/weapon/core/weapon_core_heavy_base.lua: No such file or directory",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/core/weapon_core_heavy_base.iff",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/base/holobeast_base.lua ERROR cannot open scripts/object/tangible/base/holobeast_base.lua: No such file or directory",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/base/holobeast_base.iff",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/wearables/base/base_dress_longsleeve.lua ERROR cannot open scripts/object/tangible/wearables/base/base_dress_longsleeve.lua: No such file or directory",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/wearables/base/base_dress_longsleeve.iff",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/wearables/base/base_fannypack.lua ERROR cannot open scripts/object/tangible/wearables/base/base_fannypack.lua: No such file or directory",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/wearables/base/base_fannypack.iff",
    "count": 2,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] expecting SHOT got RCCT in object/resource_container/shared_simple.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: a client file of another template type (ship, static, resource container) read as a shared object template"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] expecting SHOT got SITN in object/intangible/vehicle/shared_tcg_#_single_pod_airspeeder.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: a client file of another template type (ship, static, resource container) read as a shared object template"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/sher_kar.lua ERROR cannot open scripts/object/mobile/skeleton/sher_kar.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/sher_kar.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/tanray.lua ERROR cannot open scripts/object/mobile/skeleton/tanray.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/tanray.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/tulrus.lua ERROR cannot open scripts/object/mobile/skeleton/tulrus.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/tulrus.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/dug.lua ERROR cannot open scripts/object/mobile/skeleton/dug.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/dug.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/bm_rancor.lua ERROR cannot open scripts/object/mobile/skeleton/bm_rancor.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/bm_rancor.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/bm_cat_predatory.lua ERROR cannot open scripts/object/mobile/skeleton/bm_cat_predatory.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/bm_cat_predatory.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/varactyl.lua ERROR cannot open scripts/object/mobile/skeleton/varactyl.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/varactyl.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/mobile/skeleton/vr_mouse_droid.lua ERROR cannot open scripts/object/mobile/skeleton/vr_mouse_droid.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/mobile/skeleton/vr_mouse_droid.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/ship/droid_fighter_s#.lua ERROR cannot open scripts/object/ship/droid_fighter_s#.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/ship/droid_fighter_s#.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/ship/havoc.lua ERROR cannot open scripts/object/ship/havoc.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/ship/havoc.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/ship/snow_speeder_s#.lua ERROR cannot open scripts/object/ship/snow_speeder_s#.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/ship/snow_speeder_s#.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/ship/tiedefender.lua ERROR cannot open scripts/object/ship/tiedefender.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/ship/tiedefender.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/ship/twing.lua ERROR cannot open scripts/object/ship/twing.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/ship/twing.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/ship/vwing.lua ERROR cannot open scripts/object/ship/vwing.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/ship/vwing.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/ship/yt#.lua ERROR cannot open scripts/object/ship/yt#.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/ship/yt#.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] expecting SHOT got STAT in object/static/base/shared_static_flagpole_base.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: a client file of another template type (ship, static, resource container) read as a shared object template"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/armor/armor_appearance_enhancement_base_two.lua ERROR cannot open scripts/object/tangible/component/armor/armor_appearance_enhancement_base_two.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/armor/armor_appearance_enhancement_base_two.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/armor/armor_appearance_enhancement_base.lua ERROR cannot open scripts/object/tangible/component/armor/armor_appearance_enhancement_base.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/armor/armor_appearance_enhancement_base.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/armor/bio_cartridge_base.lua ERROR cannot open scripts/object/tangible/component/armor/bio_cartridge_base.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/armor/bio_cartridge_base.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/blaster_pistol_barrel_base.lua ERROR cannot open scripts/object/tangible/component/weapon/blaster_pistol_barrel_base.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/blaster_pistol_barrel_base.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/blaster_rifle_barrel_base.lua ERROR cannot open scripts/object/tangible/component/weapon/blaster_rifle_barrel_base.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/blaster_rifle_barrel_base.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/projectile_pistol_barrel_base.lua ERROR cannot open scripts/object/tangible/component/weapon/projectile_pistol_barrel_base.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/projectile_pistol_barrel_base.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/projectile_rifle_barrel_base.lua ERROR cannot open scripts/object/tangible/component/weapon/projectile_rifle_barrel_base.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/projectile_rifle_barrel_base.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/tangible/component/weapon/vibro_unit_base.lua ERROR cannot open scripts/object/tangible/component/weapon/vibro_unit_base.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/tangible/component/weapon/vibro_unit_base.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/object/weapon/melee/sword/base/generic_lightsaber_base.lua ERROR cannot open scripts/object/weapon/melee/sword/base/generic_lightsaber_base.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: the missing Lua base scripts behind the line above"
   },
   {
    "level": "WARNING",
    "pattern": "[SharedObjectTemplate] could not open lua derv: object/weapon/melee/sword/base/generic_lightsaber_base.iff",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "stock: client templates whose Lua base script doesn't exist in Core3 (paired with the next line)"
   },
   {
    "level": "INFO",
    "pattern": "[SchematicMap] file:scripts/custom_scripts/managers/crafting/schematics.lua ERROR cannot open scripts/custom_scripts/managers/crafting/schematics.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "optional local override scripts Core3 looks for; this project has none"
   },
   {
    "level": "INFO",
    "pattern": "[Lua] file:scripts/custom_scripts/managers/faction_manager.lua ERROR cannot open scripts/custom_scripts/managers/faction_manager.lua: No such file or directory",
    "count": 1,
-   "first": "10/18 8:58 AM",
+   "first": "10/18 9:39 AM",
    "why": "optional local override scripts Core3 looks for; this project has none"
   }
  ],

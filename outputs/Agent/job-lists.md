@@ -48,9 +48,11 @@ builds and sign-offs.
    - F5: the new jobs erase each other's waypoints, because they share `WAYPOINTQUESTTASK`.
    - F6: a bank window that is already open ignores the alive check. File: `BankTerminalSuiCallback.h`.
    - F7 (BotPop walks through walls near a target) affects the test galaxy only. It comes later.
-2. **H1: the Echo Base building doesn't draw.** **Server side checked, 9:11 AM:** a bot at the origin is sent the
-   building, with all its cells. So the owner's client receives it and draws nothing, most likely because the pre-CU
-   client can't render this NGE building. **Waits for the owner:** a client-side check, or Fable's bunker fallback.
+2. **H1: the Echo Base building doesn't draw.** **Fixed on the test galaxy, 9:43 AM (run 31c, dev `0262d8de`).**
+   - The client reads all the building's file formats.
+   - The cause was Core3's 192 m send range: the doors are 319 m and 627 m from the building's centre.
+   - Big buildings are now sent as far as they reach, and the probe passes at the main door.
+   - **Owner to look:** `/teleport -5051 5440 hoth` (main door), then `/teleport -5307 5750 hoth` (hangar).
 3. ~~**The next build and restart.**~~ **Done: run 31 since 8:59 AM** (owner: "i am logged off"). Release build of
    dev `35e7dbe6`:
    - `4bae9ab1` (full-inventory pickup);
@@ -150,5 +152,4 @@ blocks Claude from sending repo text to that PC.
 4. Microverse's access to the code.
 5. GitHub: the names delta sweep, then the new repository `swg-138aby`.
 6. The BotPop social questions 1 to 3 (board, 17 Oct).
-7. H1: check the client side (why the pre-CU client won't draw the NGE Echo Base), or switch to Fable's bunker
-   fallback.
+7. H1: look at Echo Base in the client (main door and hangar) on run 31c.

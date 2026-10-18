@@ -3,3 +3,7 @@ could not open lua derv:	stock: client templates whose Lua base script doesn't e
 ERROR cannot open scripts/object/	stock: the missing Lua base scripts behind the line above
 expecting SHOT got	stock: a client file of another template type (ship, static, resource container) read as a shared object template
 scripts/custom_scripts/	optional local override scripts Core3 looks for; this project has none
+[TreeArchive] datatables/space/	stock: space chassis tables the ground server never loads
+[TreeArchive] clientdata/ship/	stock: ship client data the ground server never loads
+shared_base_vehicle.iff	stock: the vehicle component base template the client data lacks
+Failed to rename log/who.json	the online-players status file for the live map; one failed rename at startup, rewritten every pass

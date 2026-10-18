@@ -2,6 +2,15 @@
 
 Finished task rows and older log entries moved out of `SWG-handoff.md` to keep the board short (it is read every session). Newest first within each move.
 
+## Moved 2026-10-18 9:43 AM (Claude, newest-four log trim)
+
+### 2026-10-18 5:55 AM Claude: Tailscale on this PC; the friend installer downloads the MTG archives
+
+- **Tailscale** (owner: "help me setup that free vpn thing"): installed and signed in by the owner. This PC is `[tailnet address removed]` on the tailnet, key expiry off; the UDP rules for 46453/46462/46463 are in, and WSL lists the address under mirrored networking. Nothing in `/opt/swg` or the galaxy row was touched (Claude's main session holds the lock); the galaxy-address step is still open (`tools/friend-installer/OWNER-README.md`).
+- **MTG archives** (owner chose "Download from your link", then "Tailscale now, R2 later"): Setup now lists the archives a friend lacks, joins Tailscale, downloads them on an Inno download page from `mtg-share.py` on this PC (TCP 43480, tailnet addresses only, the 23 listed files only), checks each sha256, keeps a friend's own different version for the uninstaller, and the uninstaller removes what it added. `MTG-CREDITS.txt` ships with it. Terms checked: MTG asks only for credit; launchers (Infinity, via Dropbox) and server sites (Flurry) hand these files out; no fork hosts them on GitHub. Port 46480 was impossible: WSL mirrored mode reserves 44620-48715 on Windows.
+- Also fixed: two form-feed characters in `friend-installer.iss` that would have broken the uninstaller's script path. Commit `69480cb`.
+- **Tests:** `test-friend-setup.ps1` 24/24; the real share verified and one archive fetched over the tailnet address on this PC; `build.ps1` compiled the 6.5 MB Setup with the real address. **Untested:** Setup on a friend's PC, the TCP 43480 rule and new ACL (owner runs `owner-setup.ps1 -Firewall` and re-pastes `-ShowAcl`), a login over Tailscale. The test galaxy was not running at 5:40 AM (no core3 process).
+
 ## Moved 2026-10-18 9:11 AM (Claude, newest-four log trim)
 
 ### 2026-10-18 3:26 AM Claude: Microverse's Saluki has vision; names sweep moved to Microverse

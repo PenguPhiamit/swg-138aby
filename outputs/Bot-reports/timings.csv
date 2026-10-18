@@ -911,3 +911,4 @@ when,kind,name,seconds,result,note
 2026-10-18 09:01,scenario,hoth-echo-base-probe.py:Esk,0,0/0,error
 2026-10-18 09:02,scenario,hoth-echo-base-probe.py:Esk,22,1/2,
 2026-10-18 09:07,scenario,hoth-echo-base-probe.py:Esk,22,1/2,
+2026-10-18 09:41,scenario,hoth-echo-base-probe.py:Esk,22,2/2,
