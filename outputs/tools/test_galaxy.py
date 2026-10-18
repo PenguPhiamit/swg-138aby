@@ -47,6 +47,9 @@ LOG = TARGET/'console.log'
 DB = 'swgemu_test'
 USER = "'swgemu'@'127.0.0.1'"
 PORTS = {'LoginPort': 46453, 'PingPort': 46462, 'StatusPort': 46455, 'ORBPort': 46419, 'ZoneServerPort': 46463}
+# Private, outside git: one line naming the address the galaxy list hands every client (owner, 18 Oct: this PC's
+# Tailscale address, the only one friends can reach). Without it the galaxy row gets the first `hostname -I` address.
+GALAXY_ADDRESS = Path('/opt/swg/agent/galaxy-address')
 
 
 def run(args, **kwargs):
@@ -130,7 +133,18 @@ def start(args):
                 run(['mariadb', DB], stdin=stream)
             sql(f'GRANT ALL PRIVILEGES ON `{DB}`.* TO {USER}')
         # Every start, resumed or not: the address can change between WSL boots (and with the networking mode).
-        host = subprocess.check_output(['hostname', '-I'], text=True).split()[0]
+        here = subprocess.check_output(['hostname', '-I'], text=True).split()
+        host = here[0]
+        if GALAXY_ADDRESS.exists():
+            # Used only while WSL lists it: with Tailscale down nobody could reach it, so the owner and the bots keep
+            # the LAN address. Matching a listed address also keeps anything else out of the SQL below.
+            wanted = GALAXY_ADDRESS.read_text().strip()
+            if wanted in here:
+                host = wanted
+                print(f'  galaxy address {host} (from {GALAXY_ADDRESS})', flush=True)
+            else:
+                print(f'  WARNING: {GALAXY_ADDRESS} names {wanted!r}, which this PC does not list now; galaxy address '
+                      f'{host}', flush=True)
         sql(f"UPDATE galaxy SET name='Test Galaxy', address='{host}', port={PORTS['ZoneServerPort']}, "
             f"pingport={PORTS['PingPort']} WHERE galaxy_id=2", DB)
 
@@ -202,7 +216,8 @@ def start(args):
             if time.monotonic() - started > 20 and not test_pids():
                 raise SystemExit('Test galaxy exited during startup; see ' + str(LOG))
             time.sleep(2)
-        print(f'Test galaxy ready in {round(time.monotonic() - started)} s: login {host}:{PORTS["LoginPort"]}', flush=True)
+        print(f'Test galaxy ready in {round(time.monotonic() - started)} s: login {here[0]}:{PORTS["LoginPort"]}, '
+              f'galaxy address {host}', flush=True)
     except BaseException:
         stop([] if resume else ['--wipe'], quiet=True)  # a half-made fresh copy goes; a resumed one is kept
         raise

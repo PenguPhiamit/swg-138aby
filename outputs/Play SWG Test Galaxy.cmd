@@ -4,8 +4,10 @@ rem Play on the TEST galaxy: a disposable copy of the live galaxy on ports 46xxx
 rem plus the bot squads). Nothing done there reaches the live galaxy. Log in with your usual account.
 rem Points the client at the test login server, then puts the live login back when the client closes.
 cd /d "%~dp0SWG-client"
+rem Log in at the address the galaxy list hands out (tools\bots\login_host.py: Tailscale since 18 Oct, else the LAN
+rem address): the zone server refuses a session that logged in from another address.
 set WSLIP=
-for /f "tokens=1" %%i in ('wsl -d Debian -u swgemu -- hostname -I') do if not defined WSLIP set WSLIP=%%i
+for /f "tokens=1" %%i in ('wsl -d Debian -u swgemu --cd "%~dp0tools\bots" -- python3 -I login_host.py') do if not defined WSLIP set WSLIP=%%i
 if not defined WSLIP (
   echo Could not read the WSL address. Is Debian running?
   pause

@@ -15,6 +15,7 @@ in /var/tmp/swg-freshstart; nothing under /opt/swg is written. Credentials are n
 """
 import contextlib, io, json, os, subprocess, sys, time
 from pathlib import Path
+from login_host import login_host
 
 CLIENT = '/opt/swg/Core3-dev/MMOCoreORB/build/dev/src/client/core3client'
 BOTS = Path('/opt/swg/agent/bots')
@@ -57,7 +58,7 @@ def start(account, name, race, profession, tutorial):
                                                 'race': f'object/creature/player/{race}.iff',
                                                 'skipTutorial': not tutorial}]}))
     options.chmod(0o600)
-    host = subprocess.check_output(['hostname', '-I'], text=True).split()[0]
+    host = login_host()  # the galaxy row's address: the zone server checks the login IP
     env = dict(os.environ, CORE3_CLIENT_USERNAME=acc['username'], CORE3_CLIENT_PASSWORD=acc['password'],
                CORE3_CLIENT_LOGINHOST=host, CORE3_CLIENT_LOGINPORT='46453')
     began = time.time()
@@ -85,7 +86,7 @@ def login(account, first, env=None):
     run, fifo, log = paths(account)
     if env is None:
         acc = json.loads((BOTS / f'{account}.json').read_text())
-        host = subprocess.check_output(['hostname', '-I'], text=True).split()[0]
+        host = login_host()
         env = dict(os.environ, CORE3_CLIENT_USERNAME=acc['username'], CORE3_CLIENT_PASSWORD=acc['password'],
                    CORE3_CLIENT_LOGINHOST=host, CORE3_CLIENT_LOGINPORT='46453')
     began = time.time()

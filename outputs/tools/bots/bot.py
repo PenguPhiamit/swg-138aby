@@ -15,6 +15,7 @@ NAME "kael" uses /opt/swg/agent/agent-account.json. Credentials are never printe
 """
 import json, os, secrets, subprocess, sys, time
 from pathlib import Path
+from login_host import login_host
 
 CLIENT = '/opt/swg/Core3-dev/MMOCoreORB/build/dev/src/client/core3client'
 BOTS = Path('/opt/swg/agent/bots')
@@ -52,7 +53,7 @@ def start(name, create):
     if not fifo.exists():
         os.mkfifo(fifo)
     acc = account(name)
-    host = subprocess.check_output(['hostname', '-I'], text=True).split()[0]
+    host = login_host()  # the galaxy row's address: the zone server checks the login IP
     env = dict(os.environ, CORE3_CLIENT_USERNAME=acc['username'], CORE3_CLIENT_PASSWORD=acc['password'],
                CORE3_CLIENT_LOGINHOST=host, CORE3_CLIENT_LOGINPORT='46453')
     holder = subprocess.Popen(f'exec sleep infinity > {fifo}', shell=True, start_new_session=True,

@@ -55,6 +55,7 @@ sys.path.insert(0, str(OUTPUTS / 'tools'))
 sys.path.insert(0, str(BOTS_DIR))
 from swgfmt import trn_iff as iff, swg_tables as st  # noqa: E402
 from fresh_start import events, template_crc  # noqa: E402
+from login_host import login_host  # noqa: E402
 
 GROUP = 'Creation'
 FOCUS = 'Character creation sweep: every species and gender, the Hutt (C54 F2/F3), the name filter in game'
@@ -570,7 +571,7 @@ class Body:
 
     def env(self):
         acc = json.loads((CREDS / f'{self.account}.json').read_text())
-        host = subprocess.check_output(['hostname', '-I'], text=True).split()[0]
+        host = login_host()  # the galaxy row's address: the zone server checks the login IP
         env = dict(os.environ, CORE3_CLIENT_USERNAME=acc['username'], CORE3_CLIENT_PASSWORD=acc['password'],
                    CORE3_CLIENT_LOGINHOST=host, CORE3_CLIENT_LOGINPORT=LOGIN_PORT)
         if is_root():

@@ -33,6 +33,7 @@ from datetime import datetime
 from pathlib import Path
 from run_control import RunControl, RunStopped, read_activity
 from fallback import Chooser
+from login_host import login_host
 
 HERE = Path(__file__).resolve().parent
 OUTPUTS = HERE.parents[1]
@@ -208,7 +209,7 @@ class Bot:
         if not self.fifo.exists():
             os.mkfifo(self.fifo)
         acc = self.creds()
-        host = subprocess.check_output(['hostname', '-I'], text=True).split()[0]
+        host = login_host()  # the galaxy row's address: the zone server checks the login IP
         env = dict(os.environ, CORE3_CLIENT_USERNAME=acc['username'], CORE3_CLIENT_PASSWORD=acc['password'],
                    CORE3_CLIENT_LOGINHOST=host, CORE3_CLIENT_LOGINPORT=LOGIN_PORT)
         holder = subprocess.Popen(f'exec sleep infinity > {self.fifo}', shell=True, start_new_session=True,
