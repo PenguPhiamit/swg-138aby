@@ -554,6 +554,11 @@ class Bot:
         self.request('mission_accept', 5, target=mission, terminal=terminal)
         return self.idle(wait)
 
+    def abort_mission(self, mission, wait=3.0):
+        """Abort a held mission (body dev 1be13676 and later; a 'mission_aborted' event follows)."""
+        self.request('mission_abort', 5, target=mission)
+        return self.idle(wait)
+
     def posture(self):
         return self.status().get('me', {}).get('posture')
 

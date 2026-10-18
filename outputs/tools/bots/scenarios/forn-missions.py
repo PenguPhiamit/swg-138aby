@@ -45,7 +45,7 @@ def run(g):
         return M.recon(g, bot, mission, before, divisor, 'scout/recon')
 
     # One bounty per hunter (no abort): Ressa has held a far one since 17 Oct morning, so whoever holds none hunts.
-    free = [b for b in (ressa, brask) if not M.holds_bounty(b)]
+    free = [b for b in (ressa, brask) if not M.holds_bounty(b) or M.drop_far_bounty(g, b, 4000)]
     if not free:
         g.note('bounty: Ressa and Brask each hold a bounty mission already (one at a time; no abort)')
     bh = (free or [ressa])[0]

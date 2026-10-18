@@ -984,6 +984,16 @@ def holds_bounty(bot):
     return any(m.get('type') == 'bounty' for m in held(bot))
 
 
+def drop_far_bounty(g, bot, limit):
+    """Abort a held bounty whose target starts beyond limit m (only one bounty at a time). True when none is held."""
+    here = origin(bot)
+    for m in [m for m in held(bot) if m.get('type') == 'bounty' and far(here, m.get('end')) > limit]:
+        bot.abort_mission(m['oid'])
+        g.note(f"bounty: {bot.first} aborts a held bounty {far(here, m.get('end')):.0f} m away: "
+               + ('gone' if not in_datapad(mission_now(bot, m['oid']) or {}) else 'still held (old body?)'))
+    return not holds_bounty(bot)
+
+
 def bounty(g, bot, terminal, label, divisor, limit=4000, lists=30):
     """An NPC bounty. The informant of the mission's level comes first (InformantMissionScreenHandler: the objective
     leaves INITSTATUS; a level-1 informant also gives the target's waypoint). At level 2 and 3 the probe droid then
@@ -997,6 +1007,11 @@ def bounty(g, bot, terminal, label, divisor, limit=4000, lists=30):
     choose, listed = npc_bounty(bot, limit), []
     for n in range(lists):
         listed = offers(bot, terminal, 'bounty')
+        if n == 0 and not any(m.get('type') == 'bounty' for m in listed):
+            # 17 Oct 10:35 PM: Brask's walk "stopped at the end of the last path" and 30 lists showed only other
+            # terminals' offers: out of the terminal's range. Step up to it once.
+            bot.walk(terminal['x'] + 1.5, terminal['y'], tries=2)
+            listed = offers(bot, terminal, 'bounty')
         if choose([m for m in listed if m.get('type') == 'bounty']):
             break
         bot.idle(LIST_COOLDOWN)
