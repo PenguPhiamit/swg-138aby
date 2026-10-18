@@ -508,3 +508,5 @@ Files that grow without limit get slow to read, for us and for the game tools. R
 - [x] C62 release-track source review (18 Oct, ChatGPT): [all 47 commit verdicts and seven ranked P2 cases](Documentation-support/review-C62/C62-review.md); 21 fit / 5 need fixes / 21 test-only; 199 Lua syntax checks and offline counterexamples pass. Selected fixes, gameplay and exact release rehearsal remain open; no galaxy/server actions.
 
 - [x] C63 first review batch (18 Oct, ChatGPT): 20 local research reports checked against source; dated corrections and done/reviewed fields saved. Remaining review queue listed in Agent/local-research/C63-review-2026-10-18.md; gameplay untested and overall backlog remains open.
+
+- [x] C66 Nal Hutta read-only gap audit (18 Oct, ChatGPT): [34-area stock/Hoth comparison and ranked friends-opening gates](Documentation-support/nal-hutta-gaps.md); about 55% of stock content-system breadth by explicit checklist. No galaxy actions; gameplay and opening approval remain pending.
