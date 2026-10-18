@@ -114,3 +114,4 @@
 - 2026-10-18 06:40 local_agent.py: replies stream and thinking is cut at 20,000 characters (owner: "make sure saluki doesnt keep looping again"); a report given as plain text is saved as report.md. Tested on this PC with the cap forced to 300: cut, reminded, report written in 25 s
 - 2026-10-18 08:31 board-trim (board-trim): report written (board-trim: 0 items in report.md), 0 min
 - 2026-10-18 08:34 log-triage (log-triage): report written (log-triage: 207 items in report.md), 3 min
+- 2026-10-18 09:01 log-triage (log-triage): report written (log-triage: 30 items in report.md), 1 min

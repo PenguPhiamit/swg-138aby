@@ -1,11 +1,11 @@
 # Job lists, one per worker
 
-Started 18 Oct 2026, 9:00 AM, by Claude (owner: "start a job list for each model ... i think some housekeeping is in
+Started 18 Oct 2026, 8:36 AM, by Claude (owner: "start a job list for each model ... i think some housekeeping is in
 order"). Whoever finishes a job ticks it here and says so on the board. The machine queues stay where they are:
 ChatGPT's tasks in `gpt-queue.json`, the local models' topics in `local-research/queue.json`. This page is the readable
 list across all of them.
 
-## Where things stand (18 Oct, 9 AM)
+## Where things stand (18 Oct, 8:30 AM)
 
 - **Galaxies.** Live is stopped (owner, 18 Oct). The test galaxy has been up since 6:05 AM on run 30's build (dev
   `4b113bb7`), with BotPop 200 and the galaxy row on the Tailscale address. The owner played Hoth on it from 7:30 AM
@@ -34,7 +34,7 @@ Usage is tight until 22 Oct, so reading and first passes go to GPT and the local
 builds and sign-offs.
 
 **Now:**
-1. ~~**Fix C62's findings on dev.**~~ **Done 18 Oct ~9:50 AM** (owner: "start the C62 fixes on dev (F1 to F6). No
+1. ~~**Fix C62's findings on dev.**~~ **Done 18 Oct 8:48 AM** (owner: "start the C62 fixes on dev (F1 to F6). No
    restart until I say I'm off the game"): in dev, not built. GPT re-reviews them as C65. The review is
    `Documentation-support/review-C62/C62-review.md`. F1 turned out to affect nine Hoth creatures, not two.
    - F1: two Hoth bosses (Rimefang, Old Echo) are healed by heat and electricity, because resistance values over 200
@@ -48,13 +48,16 @@ builds and sign-offs.
    - F5: the new jobs erase each other's waypoints, because they share `WAYPOINTQUESTTASK`.
    - F6: a bank window that is already open ignores the alive check. File: `BankTerminalSuiCallback.h`.
    - F7 (BotPop walks through walls near a target) affects the test galaxy only. It comes later.
-2. **H1: the Echo Base building doesn't draw.** This needs the server lock and a restart with the owner offline.
-3. **The next build and restart.** Ask first, and only with no owner client running. It contains:
+2. **H1: the Echo Base building doesn't draw.** **Server side checked, 9:11 AM:** a bot at the origin is sent the
+   building, with all its cells. So the owner's client receives it and draws nothing, most likely because the pre-CU
+   client can't render this NGE building. **Waits for the owner:** a client-side check, or Fable's bunker fallback.
+3. ~~**The next build and restart.**~~ **Done: run 31 since 8:59 AM** (owner: "i am logged off"). Release build of
+   dev `35e7dbe6`:
    - `4bae9ab1` (full-inventory pickup);
    - `aa52cc64` (bank radials);
-   - the C62 fixes;
-   - the speed check.
-   Afterwards, tell the "Stage server fixes" session `PICKUP_FIX=True`.
+   - the C62 fixes.
+   Same settings as before: BotPop 200, Tailscale address. The log is clean (Saluki's triage, 9:01 AM).
+   `PICKUP_FIX = True` is set in `tools/bots/missions.py`. **The speed check is still to come, in its own build.**
 4. **Missions after that build.**
    - Bounty: Brask never walks to the terminal.
    - Rerun the group-pay check with Cresh. It needs the Marksman fighting fix.
@@ -79,9 +82,12 @@ Effort: ultra for code reviews, high for report reviews, medium or lower for res
 dispatcher (`next_gpt.sh` in Claude's scratchpad) starts the next open task whenever none is running.
 
 **Queued (`gpt-queue.json`, in this order):**
-0. **C66** (medium): how much is missing from Nal Hutta (owner, 18 Oct ~9:30 AM). A gap table against a stock planet,
+0. **C66** (medium): how much is missing from Nal Hutta (owner, 18 Oct ~8:42 AM). A gap table against a stock planet,
    what blocks opening it, and one rough overall figure, in `Documentation-support/nal-hutta-gaps.md`.
 0. **C65** (ultra): review Claude's C62 fixes (dev, 18 Oct).
+0. **C67** (medium): the bosses in the owner's screenshot (owner, 18 Oct 9:06 AM: "do we have these? or can we have a
+   session find them and see if we can use them?"). What we have, what the originals were, and what we may use
+   (other servers' own bosses only as ideas), in `Documentation-support/bosses-review.md`.
 1. **C63b** (high): the next 20 local research reports, from `vehicle-mount`. It was reopened because the 7:33 AM run
    hit the limit and wrote nothing.
 2. **C63c** (high): the remaining reports.
@@ -144,4 +150,5 @@ blocks Claude from sending repo text to that PC.
 4. Microverse's access to the code.
 5. GitHub: the names delta sweep, then the new repository `swg-138aby`.
 6. The BotPop social questions 1 to 3 (board, 17 Oct).
-7. When the next restart may happen (no owner client running).
+7. H1: check the client side (why the pre-CU client won't draw the NGE Echo Base), or switch to Fable's bunker
+   fallback.

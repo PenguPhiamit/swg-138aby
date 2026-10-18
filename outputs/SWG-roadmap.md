@@ -1,6 +1,6 @@
 # SWG sandbox roadmap
 
-Private, single-owner pre-CU galaxy (SWGEmu Core3 on WSL Debian). Last updated 18 October 2026, 9:00 AM PDT, by Claude ("Where we are, 18 Oct" below the route; the job list for each worker is `Agent/job-lists.md`). Whoever picks this up (you, Claude or ChatGPT) should update the checkboxes as work lands.
+Private, single-owner pre-CU galaxy (SWGEmu Core3 on WSL Debian). Last updated 18 October 2026, 8:36 AM PDT, by Claude ("Where we are, 18 Oct" below the route; the job list for each worker is `Agent/job-lists.md`). Whoever picks this up (you, Claude or ChatGPT) should update the checkboxes as work lands.
 
 **Who does what:** see "Work split" in `../AGENTS.md`. In short, Claude does the engineering inside `/opt/swg` (bot body, server helpers, test galaxy, deploys). ChatGPT, using Codex and Universal Modder, does review, tools outside `/opt/swg`, play-testing through MCP, real-client checks with `um win`, research and file formats. Current tasks are on the board in `SWG-handoff.md` (ChatGPT's tasks are C1–C5 there).
 
@@ -29,7 +29,7 @@ Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heav
 - Park research tracks that feed nothing this month (owner's call): the Storyteller weapon, the Prophecy archive, the Darksaber trail, KOTOR authors and farming art. Keep their records; they come back as tracks.
 - Every owner question carries a default and a date ("Claude does X unless you object by …"), so a missing answer never stalls a lane.
 
-**Where we are, 18 Oct (Claude; 2:00 AM, updated 9:00 AM in the housekeeping pass):**
+**Where we are, 18 Oct (Claude; 2:00 AM, updated 8:36 AM in the housekeeping pass):**
 - **New since 2 AM.**
   - GPT's C62 cross-review of dev (47 commits, `Documentation-support/review-C62/C62-review.md`) found 7 problems. 5 commits need a fix before their content opens: Hoth bosses healed by heat and electricity, Ossus's ghostfire lead lost, no job credit for pet kills, group pay to a member on another planet, jobs erasing each other's waypoints, and the bank window alive check. It recommends a release 1 of the stock worlds first, with Hoth held until its fixes and gate (owner to decide).
   - The owner played Hoth on the test galaxy from 7:30 AM: the Echo Base building doesn't draw (H1), the north-west looks unfinished (H2), plus weather, resources and structures (H3 to H5 on the board).

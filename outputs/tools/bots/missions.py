@@ -157,7 +157,7 @@ INVENTORY_LIMIT = 80  # 17 Oct: ten squad bots stopped at 80 items, mostly spare
 # Documentation-support/mission-full-pickup.patch in the dev server: a full pickup says inv_full and keeps the objective.
 # Set True with the build that installs it; then take(full_ok=PICKUP_FIX) lets a full carrier take a delivery, and
 # errand checks the new behaviour (full_pickup). Stock Core3 aborts the objective and the mission is stuck.
-PICKUP_FIX = False
+PICKUP_FIX = True  # 18 Oct: installed with run 31 (dev 35e7dbe6, which carries 4bae9ab1)
 
 
 def room(bot):

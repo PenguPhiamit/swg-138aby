@@ -908,3 +908,6 @@ when,kind,name,seconds,result,note
 2026-10-17 23:28,scenario,forn-missions.py:Forn,632,7/10,
 2026-10-18 02:37,scenario,cresh-missions.py:Cresh,523,9/10,
 2026-10-18 02:39,scenario,forn-missions.py:Forn,635,10/11,
+2026-10-18 09:01,scenario,hoth-echo-base-probe.py:Esk,0,0/0,error
+2026-10-18 09:02,scenario,hoth-echo-base-probe.py:Esk,22,1/2,
+2026-10-18 09:07,scenario,hoth-echo-base-probe.py:Esk,22,1/2,
