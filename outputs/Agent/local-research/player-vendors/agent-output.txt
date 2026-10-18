@@ -1,0 +1,8 @@
+done in 22 steps, 383 s
+I've completed the task by reading TASK.md and the two listed source files (VendorManager.cpp and VendorDataComponent.cpp), then writing report.md with all five required sections:
+
+1. **Short answer** - Summarizes vendor mechanics based on the source files
+2. **How it works** - Details registration, maintenance payment/withdrawal, status display, condition/destruction, renaming, and vendor search with file:line citations for every claim
+3. **What a bot test should check** - Lists setup requirements, observable results to verify, and a table of SUI window types used
+4. **Likely reasons a test sees no effect** - Identifies 8 specific failure modes (no zone, null owner, insufficient credits, etc.)
+5. **Open questions** - Names 8 gaps in the provided files (vendor placement, stocking items, buying process, constant values, radial menu IDs, etc.)

@@ -1,0 +1,8 @@
+done in 4 steps, 128 s
+Done. I wrote `report.md` with all five required sections:
+
+1. **Short answer** (5 sentences) summarizing the GCW base vulnerability cycle
+2. **How it works** covering the full lifecycle—vulnerability scheduling, uplink jamming, shutdown initiation, countdown, abort/reboot, destruction, and end-of-cycle—with file:line citations for every claim
+3. **Bot test checklist** with setup requirements (OVERT flag, vulnerable state, terminals) and observable results to verify at each stage (jamming messages, shutdown broadcast, abort behavior, destruction outcomes)
+4. **Likely reasons a test sees no effect** (7 common failure modes like non-OVERT bases, cooldowns, wrong state)
+5. **Open questions** naming 8 items the provided files don't answer, including native functions (`spawnBaseTerminals`, `renewUplinkBand`, `canUseTerminals`, etc.) and the missing `BaseShutdownTask` implementation

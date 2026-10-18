@@ -1,0 +1,8 @@
+done in 4 steps, 121 s
+I've written `report.md` with all five required sections:
+
+1. **Short answer** (5 sentences) summarizing how Image Designer sessions work
+2. **How it works** covering conditions to start, the dual window, what can change (body attributes, colors, hair, holo-emotes, stat migration), skill mod checks and XP amounts, costs/credits, all timers (4-min stat migration, 2-min acceptance, 30-sec default timeout), cancellation triggers, and all message types
+3. **What a bot test should check** with setup requirements (skill, group, salon building) and observable results (system messages, session state, inventory changes, credits, XP, holo-emote)
+4. **Likely reasons a test sees no effect** - 7 specific causes including missing skill, group mismatch, target state, salon requirement for stat migration, timer bypass protection, insufficient skill mods, and hair template incompatibility
+5. **Open questions** naming 6 items the files don't answer: the `type` parameter meaning, disabled building check code, commented-out `getSkillLevel` function, incomplete palette validation logic, missing palette data file, and unclear default timeout rationale

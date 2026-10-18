@@ -49,5 +49,46 @@ Not tested: `/sit` before a walk (the command left the bot upright, so the sitti
 
 ## Still open
 
-- **The server's speed check misfires during stalls, for real players too.** A stall (BotPop logins, a world save, heavy load) bounces anyone walking at full speed, and a real client runs at 5.376 m/s with only the 5.6% allowance, so it is more exposed than the bots. The body now rides it out; a player sees a rubber-band. A server change (for example, judging speed over two validation windows, so a late reference packet and the bunched window after it cancel out) touches the stock anti-cheat and needs the owner's decision and a review before it goes anywhere near live. The `[Movement]` log gives the numbers to decide on.
+- **The server's speed check misfires during stalls, for real players too.** A stall (BotPop logins, a world save, heavy load) bounces anyone walking at full speed, and a real client runs at 5.376 m/s with only the 5.6% allowance, so it is more exposed than the bots. The body now rides it out; a player sees a rubber-band. A server change (for example, judging speed over two validation windows, so a late reference packet and the bunched window after it cancel out) touches the stock anti-cheat and needs the owner's decision and a review before it goes anywhere near live. The `[Movement]` log gives the numbers to decide on. Designs: next section.
 - **Stale bodies from before a restart** reconnect over and over (about 108 "netStatusTimeout" disconnects per 10 minutes on run 23, C41's packet problem): noise and load in the server log until `squad.py setup` replaces them.
+
+## Speed check during stalls: design options (Claude, 17 Oct, owner's decision)
+
+### How the stock check works (Core3-dev, `PlayerManagerImplementation::checkSpeedHackTests`)
+
+- The server keeps one **validated position** per player and the server time it was set (`serverLastMovementStamp`).
+- A movement packet less than 1 s of server time after that is accepted without a check (`DELTA_SPEED_CHECK`). The first packet at 1 s or later is judged: straight-line distance from the validated position, divided by server time since it was set. Within run speed × speed multiplier × about 1.056 it becomes the new validated position; above it, the player is put back to the old one.
+- Standing still never closes a window (`updateStatic` skips the check), and a server teleport (travel, cloning, zoning) resets both the position and the time (`updateLastValidatedPosition`).
+
+So the check is "average speed since the last validated position", measured in **processing** time. When the packet that became the reference was handled late (a stall), the window after it is short by that delay and the same walk reads too fast. In run 24's stall the reference packets were late by 0.32 to 1.17 s (bot walking at 5.0 m/s: 8.41 m is 1.68 s of walking, judged over 1.36 s).
+
+**Exposure.** A bot walks at 5.0 against 5.68 m/s: a reference late by more than about 13.5% of the window (135 to 190 ms on the 1.0 to 1.4 s windows) bounces it. A real client runs at 5.376: about 5.6%, so **a reference packet 60 to 80 ms later than the one after it rubber-bands a running player.** On localhost that takes a stall; over the internet (the friends launch) ordinary jitter can do it.
+
+**Counts (b034d15f log).** Run 24 (5:26 to 5:59 AM, 33 minutes, gate and probes walking): 5 bounces, all from the speed check, all in the one stall at 211 s while BotPop logged 300 bots in; none under steady load. The 5:59 AM restart (same build, BotPop 200, no squad bots walking during the login burst): 0 bounces by 6:02 AM. A bounce needs a walker during a stall, so a before/after needs a probe that keeps bots walking through the login burst.
+
+**What stock already lets a cheating client do** (unchanged by either design): stand still for N seconds, then jump up to 5.68 × N metres in one packet; and move freely for the first second after each validation.
+
+### Design A: judge over the last two windows (recommended)
+
+When a step fails the one-window check, judge it again from the validated position **before** the last one, over the server time since then. A late reference makes its own window long by the same amount it makes the next one short, so over both windows the delay cancels. If that fails too, bounce as today.
+
+- **Fixes:** any single late reference packet, whatever made it late (server queue, the whole process pausing, the network). Over two windows the margin also roughly doubles in milliseconds (about 150 ms for a real client).
+- **Cheater's worst case:** no sustained gain. Every accepted position is within the allowance × elapsed time of an earlier validated one, so over any stretch the average stays within the stock allowance. The most it allows is one burst: after a slow window, one window at up to about double speed (6 to 8 m extra once), then it must slow down. A client that stood still for the same second gets that jump from stock already (it gives the same distance and time as a client that never sent the middle packet).
+- **Code:** `PlayerObject.idl` gains the previous validated position, its time and a flag, all `transient` (not saved to the database); the two `DataTransform` files move the current window into "previous" before setting a new validated position; a server teleport clears it; `checkSpeedHackTests` retries over two windows only after a failure and logs `[Movement] speed check forgiven: ...` when it rescues a step, so the rescues can be counted.
+- **On live:** nothing changes for a step that passes today; some steps that bounce today would pass. Every player, the owner included. A `PlayerObject.idl` change rebuilds most of the server (dev build first, then `--release`).
+
+### Design B: time packets when they arrive, not when they are handled
+
+Stamp each movement packet when the server receives it (the callback is built in `ZoneServerImplementation::processMessage`, before the per-client and zone task queues) and use those arrival stamps for both ends of the window.
+
+- **Fixes:** only delays inside the server's queue between arrival and handling. Not a stall of the whole process (the arrival stamp is late too) and not network delay. Which kind run 24's stall was is not known yet.
+- **Cheater's worst case:** none; the stamps are the server's own, and the client controls arrival times exactly as much as it controls handling times today.
+- **Code and live:** `checkSpeedHackTests` gets the packet's queue delay as a parameter (`PlayerManager.idl`), and the validated time is set back by that delay (`PlayerObject.idl`); same rebuild as A. Steps handled on time behave as today.
+
+### Considered and not recommended: trust the client's clock up to a cap
+
+Use the client's own timestamps for the window, capped at server time plus C. The client controls its stamps: freezing its clock for one window and jumping it in the next earns C of credit every two windows, so C = 300 ms on 1 s windows is a sustained speed hack of about 15%, at every speed and on mounts. Bounding it properly (tracking the client's clock against the server's over the session) gets complicated and still leaks.
+
+### Test plan if one is approved
+
+Restart the test galaxy through the lock holder twice with the same probe: a scenario that keeps the 24 squad bots walking 200 m legs from login until 5 minutes after BotPop's login burst (300 bots logging in). Run 1 on b034d15f's binary (baseline), run 2 on the new build. Compare `[Movement]` bounces in that window, and for Design A also the `forgiven` lines.

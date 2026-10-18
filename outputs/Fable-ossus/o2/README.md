@@ -97,5 +97,5 @@ at the holes (the height rule above), the ruins read as a field, the starport dr
 3. Caves: `cave_01`/`cave_03`/`cave_02` on the three hillsides, or the self-contained `flatland` variants on flat
    ground (bigger mounds, 56 x 79 m)? The first client look decides the height rule.
 4. Ruins: Dantooine Jedi temple pieces around `poi_temple_ancient_ruined`, with Gungan/Tatooine ruined walls as older
-   outer courts. Enough, or a crater/scorched version too (that would signal the 137 ABY story point)?
+   outer courts. Enough, or a crater/scorched version too (that would signal the Massacre at Ossus, 130 ABY, when the academy fell)?
 5. Knossa no-build 320 m and the ruins no-build 260 m: fine for player housing later?

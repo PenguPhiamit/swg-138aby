@@ -1,0 +1,8 @@
+done in 4 steps, 97 s
+Done. I wrote `report.md` with all 5 requested sections:
+
+1. **Short answer** (4 sentences) summarizing weather behavior, sandstorm effects, and the admin command
+2. **How it works** with detailed breakdown of weather IDs, per-planet Lua config, timing formulas, sandstorm damage mechanics, protection values, and /server weather command syntax — every claim cited with file:line numbers
+3. **Bot test checklist** covering observable results (system messages, player states, HAM damage) and required setup (planet choice, forcing EXTREMESTORM, player positioning/clothing)
+4. **Likely reasons for no effect** — 6 specific scenarios where tests would see nothing
+5. **Open questions** naming 4 gaps: transition timing variables not found in files, missing trigger for sendWeatherTo(), unclear WeatherMap lifecycle, and absent skill modifiers

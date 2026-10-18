@@ -46,8 +46,10 @@ does not stop attacks). Bots walk on Hoth at normal speed; so should you.
 ## 7. Surveying (not yet verified)
 - Use any survey device anywhere outside the outpost. Hoth has its own 52 resource types, named "Hoth ..." (Wild Meat,
   Wooly Hide, Fiberplast, Water Vapor, Wind and Solar Renewable Energy, the foods and woods).
-- Eleven MTG rows have no name in any client file (steel, iron, aluminum, copper, both ores, reactive gas, both
-  petrochem fuels, radioactive, wild wheat): if a survey lists a blank or raw name, tell Claude which.
+- Type names come from the server's resource tree text, not from a client file (Core3 `ResourceSpawner.cpp:387`), so
+  MTG's eleven inorganic Hoth rows show as "Hothian Steel", "Hothian Reactive Gas" and so on, and the organics as
+  "Hothian Wild Meat" (not the "Hoth Wild Meat" of MTG's string file, which nothing reads). A blank or raw name would
+  be a server-side tree problem: tell Claude the exact text.
 
 ## 8. Loot (designed, not yet tried in game: dev b7f03b0e)
 - Tauntauns (65) and ice mynocks (67) graze 250–350 m south of the pad. Ordinary Hoth creatures: 3% a common

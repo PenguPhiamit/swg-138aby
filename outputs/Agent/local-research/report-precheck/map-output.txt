@@ -1,0 +1,7 @@
+claim-check: 941 lines in 236 chunks
+50/236 chunks, 2.8 s each, 0 errors
+100/236 chunks, 2.8 s each, 0 errors
+150/236 chunks, 2.8 s each, 0 errors
+200/236 chunks, 2.7 s each, 0 errors
+236 of 236 chunks asked (0 done before), 0 errors, 10.7 min
+claim-check: 940 items in report.md

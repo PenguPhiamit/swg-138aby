@@ -1,0 +1,7 @@
+planet,kind,template,level_min,level_max,square_x_km,square_y_km,events,sources
+hutta,creature,clipped_fynock,9,9,-1,1,8,attacked first=1;incapacitated a bot=3;killed=3;killed a bot=1
+hutta,creature,rot_mite,1,11,-2,1,1,attacked first=5;incapacitated a bot=7;killed=11;killed a bot=3
+hutta,creature,rot_mite,1,11,-2,2,7,attacked first=5;incapacitated a bot=7;killed=11;killed a bot=3
+hutta,creature,rot_mite,1,11,-1,0,5,attacked first=5;incapacitated a bot=7;killed=11;killed a bot=3
+hutta,creature,rot_mite,1,11,-1,1,7,attacked first=5;incapacitated a bot=7;killed=11;killed a bot=3
+hutta,creature,rot_mite,1,11,-1,2,6,attacked first=5;incapacitated a bot=7;killed=11;killed a bot=3

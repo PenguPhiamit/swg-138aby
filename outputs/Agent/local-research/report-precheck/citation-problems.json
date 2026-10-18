@@ -1,0 +1,86 @@
+[
+ {
+  "topic": "bank-tips",
+  "cite": "BankTerminalMenuComponent.h:143-155",
+  "claim": "Withdraw all: Available when bank credits 0. Withdraws entire bank balance to cash instantly, no fee. BankTerminalMenuComponent.h:143-155",
+  "problem": "line 143 is past the end (51 lines)"
+ },
+ {
+  "topic": "doctor-enhance-wounds",
+  "cite": "hospital_tatooine.lua:46-47",
+  "claim": "What do private_med_wound_health and private_med_wound_action do (hospital_tatooine.lua:46-47)? What ratings do camps give?",
+  "problem": "3 files are named hospital_tatooine.lua; the citation does not say which"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:21-32",
+  "claim": "Lua conversations delegate getNextConversationScreen and runScreenHandlers to DirectorManager.instance() (src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:21-32).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/managers/conversation/ConversationManager.cpp:36-55",
+  "claim": "ConversationManager::getConversationObserver creates observers based on template type: Normal, DeliverMission, InformantMission, Lua, or Personality (src/src/server/zone/managers/conversation/ConversationManager.cpp:36-55).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:21-32",
+  "claim": "Lua conversations use LuaConversationObserver, which delegates screen logic to DirectorManager (src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:21-32).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/managers/conversation/ConversationManager.cpp:30",
+  "claim": "The NPC must have a valid conversation template registered in CreatureTemplateManager with the correct CRC (src/src/server/zone/managers/conversation/ConversationManager.cpp:30, src/server/zone/objects/creature/conversation/ConversationObserverImplementation.cpp:252-254).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:24, 31",
+  "claim": "For Lua conversations, the DirectorManager must have the appropriate Lua class handler and screen scripts loaded (src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:24, 31).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/managers/conversation/ConversationManager.cpp:32-34",
+  "claim": "Missing conversation template: If CreatureTemplateManager::instance()-getConversationTemplate(conversationTemplateCRC) returns nullptr, getConversationObserver returns null and no observer is created (src/src/server/zone/managers/conversation/ConversationManager.cpp:32-34).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/managers/conversation/ConversationManager.cpp:25-26",
+  "claim": "DEBUG_MODE enabled: If CreatureTemplateManager::DEBUG_MODE is true, getConversationObserver returns nullptr instead of creating an observer (src/src/server/zone/managers/conversation/ConversationManager.cpp:25-26).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:24, 31",
+  "claim": "How are Lua scripts loaded and associated with templates? LuaConversationObserver.idl delegates to DirectorManager.instance() (src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:24, 31), but the DirectorManager source is not included in the listed files.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "quests",
+  "cite": "screenplays.lua:742",
+  "claim": "The script loads from bin/scripts/screenplays/custom_screenplays/screenplays.lua:4 (included at screenplays.lua:742) and starts automatically (TB:14). A second copy (\"...the_beginning-Clean and formatted.lua\") sits in the same folder but is not included.",
+  "problem": "6 files are named screenplays.lua; the citation does not say which"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "pistol_dl44.lua:126-132",
+  "claim": "The mindamage line is weighted CD 1, OQ 1, so 50/50. Its range is 14 to 26, precision 0 (pistol_dl44.lua:126-132).",
+  "problem": "2 files are named pistol_dl44.lua; the citation does not say which"
+ },
+ {
+  "topic": "secure-trade",
+  "cite": "src/src/server/zone/packets/trade/BeginTradeMessage.h:8-15",
+  "claim": "In Core3, a trade is initiated by one player sending a BeginTradeMessage containing the target player's ID to start the session (src/src/server/zone/packets/trade/BeginTradeMessage.h:8-15). The receiver must accept via the radial menu; once accepted, both players use the trade window to add items (via AddItemMessageCallback, parsing a long object ID at line 22) and credits (via GiveMoneyMessageCal",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "travel-shuttles",
+  "cite": "utils/engine3/MMOEngine/src/system/lang/Time.h:423-424",
+  "claim": "Landing window (inferred): seconds remaining = time to the next run + 1 (SDT:62-66, with Time::miliDifference = now minus t in utils/engine3/MMOEngine/src/system/lang/Time.h:423-424). By SDT:79-109, \"about to begin boarding\" then lasts about 2×landing+1 s after touchdown (about 5 s here). Boarding is open for the remaining ~597 s.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ }
+]

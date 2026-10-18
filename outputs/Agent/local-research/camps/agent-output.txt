@@ -1,0 +1,19 @@
+done in 4 steps, 142 s
+I've read TASK.md and all six source files listed in it, then written report.md with the five required sections:
+
+1. **Short answer** - A 4-sentence summary of camp mechanics covering placement conditions, healing, abandonment/despawn timers, XP, and terminal options.
+
+2. **How it works** - Detailed breakdown with file:line citations for every claim, including:
+   - All placement conditions (skill mod, combat state, location restrictions, ownership checks, proximity rules)
+   - Timings (ABANDONTIME=60s, DESPAWNTIME=55min)
+   - Camp creation flow and messages
+   - Healing/regeneration via template skill mods and HEALINGRECEIVED observer
+   - Abandonment triggers (timer or combat) and effects
+   - XP formula at despawn
+   - Terminal menu options (status, disband, assume ownership, requisition)
+
+3. **What a bot test should check** - Specific setup requirements and observable results to verify for placement, entering, healing, abandonment, assuming ownership, disbanding, XP, and proximity checks.
+
+4. **Likely reasons a test sees no effect** - All failure conditions from the code that would silently or explicitly block camp functionality.
+
+5. **Open questions** - Items the provided files don't answer: addTemplateSkillMods implementation, MAP_REGISTER_MOD value, getDuration() template data, noBuildRadius logic, visitors accumulation bug, and removeTemplateSkillMods behavior.

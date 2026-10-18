@@ -1,17 +1,17 @@
 {
  "base": {
-  "path": "work/ossus-o7/local_planets-ossus-o7.tre",
-  "bytes": 4700364,
-  "sha256": "efeff508409964b43380a172bd34324d6778d9058db66448740629573bb264a9",
-  "entries": 183
+  "path": "work/chain-1016/step1-ossus-o7.tre",
+  "bytes": 4839660,
+  "sha256": "3eeb4023df7a59e66f1d4757555f9f48b6c7227495644895edbc4794f7018bbf",
+  "entries": 185
  },
  "out": {
-  "path": "work/ossus-o7/local_planets-ossus-people.tre",
-  "bytes": 4702331,
-  "sha256": "0084def40f8bdfa49dedbb8c874b0c51680ea52bfc18ad9d9d596fbc2c374b66",
-  "entries": 184
+  "path": "work/chain-1016/local_planets-chain-1016.tre",
+  "bytes": 4841629,
+  "sha256": "df1d538e0e23488683406e81b550f4355330865f75e75ec40ec7d36cc4d2ba88",
+  "entries": 186
  },
- "untouched_identical": 181,
+ "untouched_identical": 183,
  "changed": [
   "string/en/badge_d.stf",
   "string/en/badge_n.stf"

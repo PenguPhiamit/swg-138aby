@@ -1,0 +1,8 @@
+done in 4 steps, 107 s
+Done. I read TASK.md and the three source files it listed, then wrote `report.md` with all five requested sections:
+
+1. **Short answer** - 4-sentence summary of the vehicle deed lifecycle
+2. **How it works** - Detailed breakdown of deed generation, calling (with 15s delay outdoors vs instant indoors), mounting (7m range, LOS, state changes to RIDINGMOUNT, speed mods), dismounting, and storing, with file:line citations for every claim
+3. **What a bot test should check** - Observable results (system messages, states, inventory, attributes) at each step plus setup requirements
+4. **Likely reasons a test sees no effect** - 9 specific failure cases (indoors, combat, cooldowns, distance, disabled vehicles, etc.) with citations
+5. **Open questions** - 7 items the files don't answer (cooldown defaults, checkStateMask logic, max vehicle limits, CallMountTask implementation, updateStatus effects, VehicleDecayTask duration, radial menu IDs for datapad)

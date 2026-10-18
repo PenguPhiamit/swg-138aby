@@ -1,81 +1,79 @@
-Written by Claude Haiku, 15 Oct 2026, from Core3-dev 90044b8e.
-(Research begun by Claude Haiku 5.5; the run was resumed and the report finished by Claude Opus 5.5.)
+# Entertainer Buffs Report
 
-# Entertainer buffs: dance and music
+## 1. Short Answer
 
-Paths are under MMOCoreORB/. ES = src/server/zone/objects/player/sessions/EntertainingSessionImplementation.cpp; PM = src/server/zone/managers/player/PlayerManagerImplementation.cpp; PB = src/server/zone/objects/creature/buffs/PerformanceBuffImplementation.cpp; FC = src/server/zone/objects/creature/commands/FlourishCommand.h.
+Dancing and playing music give buffs to audience members (patrons) who are grouped with the performer or set as a target via `/setPerform`, within `HEAL_RANGE` distance, and who watch or listen for at least 60 seconds. The buff strength is built up over time by the entertainer's `healing_dance_mind` or `healing_music_mind` skill mod (capped at 125%), and the buff duration accumulates at a rate modified by `accelerate_entertainer_buff`. Flourishes increase both wound healing and buff strength multiplicatively via `(flourishCount + 1)`. The performer must have the `private_buff_mind` skill mod to grant buffs at all. Nima's test likely failed because Dorn lacked `private_buff_mind` (and possibly `healing_dance_mind`), or because line of sight was broken during the watch attempt.
 
-## 1. Short answer
-A patron uses /watch on a dancing player or /listen on a playing one. Every 10 s the performer heals mind, focus and willpower wounds and battle fatigue on every patron within 60 m. It also builds up a stored buff duration and strength, but only for patrons in the performer's group or set with /setPerformanceBuffTarget. The buff is applied only when the watching ends (the patron stops, the performer stops, or the patron goes out of range), and only after at least 60 s of watching. Dance gives a Mind buff; music gives Focus and Willpower buffs, each a percentage of the patron's base pool. dorn-social.py tests none of this: it only starts and stops a dance and writes a note.
+## 2. How It Works
 
-## 2. How it works
-**Starting.** /watch and /listen call startWatch/startListen (WatchCommand.h:29, ListenCommand.h:29). The command is refused if there is no line of sight (PM:3563, PM:3628), if the patron is performing (PM:3575, PM:3698), if the target is an NPC (PM:3558, PM:3686), or if the target isn't dancing or playing (PM:3583, PM:3705). If it succeeds, the patron is added with a fresh start time (PM:3601, ES:1156-1162, EntertainingData.h:21) and their mood is set to "entertained" (PM:3600, ES:820-821).
+### Conditions to Grant Buffs
+- **Performer requirement:** The entertainer must have `private_buff_mind > 0` to be able to give buffs at all (`EntertainingSessionImplementation.cpp:608-612`).
+- **Patron eligibility:** The patron must be in the same group as the performer (`entertainer->isGrouped() && entertainer->getGroupID() != creature->getGroupID()` check inverted at line 989) or set as a target via `/setPerform` (`entPlayer->getPerformanceBuffTarget() != patron->getObjectID()`). The patron must also not be on the performer's deny service list (line 992-993), and must not be incapacitated or dead (line 862-864).
+- **Distance:** Patrons must be within `PerformanceManager::HEAL_RANGE` of the performer to receive healing and buff ticks (`EntertainingSessionImplementation.cpp:102`). If they move out of range, their watch/listen is stopped and they are removed from the patron list (lines 106-120).
+- **Minimum time:** Patrons must watch or listen for at least 60 seconds before receiving a buff (`EntertainingSessionImplementation.cpp:876-881`). If less than 60 seconds have elapsed, they receive the system message "You must listen or watch a performer for at least 1 minute in order to gain the entertainer buffs."
 
-**Each tick (10 s).** The task reschedules every 10000 ms (ES:236, EntertainingSessionTask.h:35) and runs patron effects, XP and action drain (ES:220-222).
-- Healing: woundHeal = ceil(healMindWound x healing_dance_wound/100) (music: healing_music_wound). shockHeal = ceil(healShockWound x (healing_dance_shock or healing_music_shock + private_med_battle_fatigue)/100) (ES:59-64, ES:82-83). If the performer is overt and in a registered building of their own faction, private_faction_mind_heal is added to both (ES:72-79). Both amounts are multiplied by (flourishes this tick + 1) and go to the performer and to each patron within HEAL_RANGE = 60 (ES:85, ES:102-103, PerformanceManager.h:28). Wound healing covers mind, focus and willpower (ES:162-167). Nothing heals unless the performer has private_buff_mind > 0 and the patron isn't on the deny-service list (ES:152-156, ES:608-612). Battle fatigue also needs the performer's private_med_battle_fatigue > 0 (ES:158, ES:602-606). Healing has no group check (inferred: healWounds, ES:145-179, never tests the group).
-- Buff growth applies to in-range patrons who are grouped with the performer or are the buff target (ES:989). Duration grows by 2 min x (1 + accelerate_entertainer_buff/100), up to 120 min 10 s (ES:995-997, ES:699-700). Strength grows by the performance's healShockWound column (ES:998, Performance.h:191). The cap is healing_dance_mind or healing_music_mind, at most 125, plus private_faction_buff_mind in the faction case (ES:713-735). If the cap is 0, strength is held at 0 (ES:738-745). Both values are stored as whole numbers (EntertainingData.h:14-15), so fractions are dropped (inferred).
-- A patron beyond 60 m is stopped as out of range (ES:106-119).
+### Skill Mods and Numbers
+- **Buff strength cap:** For dancing, capped at `healing_dance_mind` skill mod; for music, capped at `healing_music_mind` skill mod. The absolute maximum is 125% (`EntertainingSessionImplementation.cpp:716-722`).
+- **Building faction perk:** If the performer is in a registered building of their faction, `private_faction_buff_mind` adds to the max buff strength (lines 724-735).
+- **Buff duration cap:** Maximum 120.0f + (10.0f / 60.0f) = 2 hours 10 seconds (`EntertainingSessionImplementation.cpp:699-700`).
+- **Buff acceleration rate:** Duration increases by `2.0f * buffAcceleration` per tick, where `buffAcceleration = 1 + (accelerate_entertainer_buff / 100.f)` (`EntertainingSessionImplementation.cpp:995-997`). The tick interval is 10 seconds (`EntertainingSessionImplementation.cpp:236`).
+- **Wound healing:** Calculated as `ceil(performance->getHealMindWound() * (woundHealingSkill / 100.0f))` for mind wounds and `ceil(performance->getHealShockWound() * ((playerShockHealingSkill + buildingShockHealingSkill) / 100.0f))` for shock wounds, then multiplied by `(flourishCount + 1)` (`EntertainingSessionImplementation.cpp:82-85`).
+  - For dancing: `woundHealingSkill = healing_dance_wound`, `playerShockHealingSkill = healing_dance_shock` (lines 60-61).
+  - For music: `woundHealingSkill = healing_music_wound`, `playerShockHealingSkill = healing_music_shock` (lines 63-64).
+  - `buildingShockHealingSkill = private_med_battle_fatigue` skill mod (line 56).
+- **Battle fatigue removal:** Requires `private_med_battle_fatigue > 0` (`canHealBattleFatigue()` at line 602-606). Shock wounds are healed first if this is true (lines 158-161), then mind/focus/willpower wounds (lines 162-170).
 
-**Flourishes.** /flourish N accepts 1-8 and needs the ability flourish+N (FC:37-52). Each of the first 5 flourishes in a tick adds one more buff-growth step to every patron (ES:674-676, ES:614-626) and raises the healing multiplier. The count resets every tick (ES:1092). A flourish costs action and prints flourish_perform (ES:648-662, ES:690). The command delay is a default (5 s, per the comment) minus healing_dance_ability or healing_music_ability divided by 30 (FC:65-77). /bandflourish also flourishes group members within 50 m who accept band flourishes (BandFlourishCommand.h:75-113).
+### Flourishes
+- **Dancing:** Plays animation `skill_action_<flourishNumber>` (`EntertainingSessionImplementation.cpp:666-667`).
+- **Music:** Broadcasts a `Flourish` packet with the flourish number (`EntertainingSessionImplementation.cpp:669-670`).
+- Flourishes can occur up to 5 times per tick. Each flourish adds buff strength equal to `performance->getHealShockWound()` and triggers `addEntertainerFlourishBuff()` for all patrons (lines 674-687, 614-627).
+- Flourish XP is capped per loop: dance has a cap of 1 (`10 / 10s`), music has a cap of 2 (`10 / 5s`) (`EntertainingSessionImplementation.cpp:681`).
 
-**Granting the buff.** stopWatch/stopListen call activateEntertainerBuff before removing the patron (PM:3495, PM:3408). They run when the patron stops, when the performer stops (ES:571-576, ES:303-308), or when the patron goes out of range (ES:110, ES:115). The checks, in order (ES:853-889):
-1. The patron isn't on the deny list.
-2. The patron is grouped with the performer or is the buff target.
-3. The patron isn't incapacitated or dead.
-4. The performer has private_buff_mind.
-5. The stored duration is at least 10 s.
-6. At least 60 s have passed since the watch began. If not, the patron gets the hard-coded message "You must listen or watch a performer for at least 1 minute in order to gain the entertainer buffs." (ES:877-881)
-7. Strength is above 0.
+### Timings
+- The entertainer session ticks every **10 seconds** via `EntertainingSessionTask` scheduled at line 236.
+- Each tick calls `doEntertainerPatronEffects()` (line 220), which heals wounds and increases buff duration/strength for all patrons in range.
+- Buffs are applied to the patron **when they stop watching/listening** or when the performer stops, via `activateEntertainerBuff()` being called at some point after the watch period ends. The code checks minimum 60 seconds of elapsed time (line 877-878).
 
-An existing stronger buff is kept (ES:899-900, ES:916-917). Dance adds performance_enhance_dance_mind; music adds performance_enhance_music_focus and _willpower (ES:893-923). Size = round(strength/100 x base pool) (PB:16, PB:22, PB:28). Length = stored minutes x 60, which I take to be seconds (ES:901, ES:918; seconds inferred).
+### Messages the Player Sees
+- **Performer starts:** "@performance:dance_start_self" ("You begin dancing.") or music equivalent (`EntertainingSessionImplementation.cpp:417`).
+- **Patron starts watching/listening:** The system message depends on the watch/listen command result; if line of sight fails, "@healing:no_line_of_sight" is shown.
+- **Buff granted:** When a patron's buff activates, they receive a system message containing "performance_enhance_dance_mind" (for dance) or "performance_enhance_music_focus"/"performance_enhance_music_willpower" (for music). The buff CRCs are defined at lines 896-918.
+- **Buff not granted (too short):** "You must listen or watch a performer for at least 1 minute in order to gain the entertainer buffs." (`EntertainingSessionImplementation.cpp:879`).
+- **Performer stops:** "@performance:dance_stop_self" ("You stop dancing.") or music equivalent (`EntertainingSessionImplementation.cpp:562`).
 
-**What people see.**
-- Performer: dance_start_self (ES:417), flourish_perform (ES:690), dance_stop_self (ES:562), and dance_too_tired or music_too_tired when action runs out (ES:266-275). /setPerformanceBuffTarget sends buff_set_target_self to the performer and buff_set_target_other to the target (SetPerformanceBuffTargetCommand.h:53-59).
-- Patron: dance_watch_self or music_listen_self (PM:3606, PM:3739). On stop: dance_watch_stop_self, dance_stop_other if the performer stopped, or "You stop watching X because they are too far away." (PM:3515-3527; music PM:3427-3439).
-- On a buff: @healing:performance_enhance_dance_mind_d (or _music_focus_d, _music_willpower_d) (PB:18, PB:24, PB:30).
-- Music flourishes broadcast a Flourish packet; dance flourishes play skill_action_N (ES:664-671).
+## 3. What a Bot Test Should Check
 
-**Other ends.** A posture change (EntertainingObserver.idl:21-26, CreatureObjectImplementation.cpp:3326) or combat (CombatManager.cpp:429, :601) cancels the session.
+### Observable Results
+1. **System messages on the patron (Nima):**
+   - Watch success: A system message confirming watch started (not "no_line_of_sight").
+   - Buff received: A system message containing `performance_enhance_dance_mind` after watching for 60+ seconds and the performer stops.
+2. **Buff on the patron:** After the buff message, check that Nima has a buff with CRC `STRING_HASHCODE("performance_enhance_dance_mind")` (line 914) using `creature->getBuff()`. Verify its strength and duration match expectations.
+3. **Performer state:** Dorn should have `private_buff_mind > 0` and `healing_dance_mind > 0` as skill mods. Check via `entertainer->getSkillMod("private_buff_mind")` and `entertainer->getSkillMod("healing_dance_mind")`.
+4. **Patron list:** Verify Nima is in Dorn's `patronDataMap` (accessible via the entertaining session) while watching.
 
-**Same buff names elsewhere.** enhanceCharacter (character builder) adds plain buffs with the same three names and prints "An unknown force strengthens you for battles yet to come." (PM:6668-6686).
+### Required Setup
+1. **Grouping:** Ensure the patron is grouped with the performer (`/group` command).
+2. **Line of sight:** Position the patron close enough to the performer with clear line of sight (within ~10m, avoiding clutter as noted in dorn-social.py lines 83-92).
+3. **Performer skills:** The entertainer must have:
+   - `private_buff_mind > 0` (required to grant any buffs)
+   - `healing_dance_mind > 0` (for dance buff strength cap) or `healing_music_mind > 0` (for music)
+   - Optionally `accelerate_entertainer_buff > 0` to speed up buff accumulation
+4. **Watch duration:** The patron must watch for at least 60 seconds before the buff can activate.
 
-## 3. What a bot test should check
-Setup:
-- A performer whose skills give private_buff_mind > 0, healing_dance_mind > 0 and the dance's ability.
-- A patron in the performer's group, or the performer runs /setPerformanceBuffTarget on the patron.
-- Both standing, within 60 m and in line of sight; the patron not performing.
-- For healing: give the patron mind wounds or battle fatigue first, and give the performer the battle-fatigue skill mods.
+## 4. Likely Reasons a Test Sees No Effect
 
-Steps:
-1. Performer runs /startdance; expect dance_start_self.
-2. Patron runs /watch; expect dance_watch_self.
-3. Wait at least 70 s (seven ticks). Optionally the performer flourishes a few times; expect flourish_perform.
-4. The patron stops watching, or the performer runs /stopdance.
-5. Proof of a buff: the patron receives @healing:performance_enhance_dance_mind_d and their maximum mind rises. Whether the bot can read maximum HAM is inferred; aurek-doctor-buffs.py:83 notes the bot exposes no buff list.
+1. **Missing performer skill mod `private_buff_mind`:** If Dorn does not have this skill mod (checked at line 608-612 and line 983-984), no buffs are granted to any patron, regardless of watch time. This is the most likely cause given the context note questioning whether Dorn has it.
+2. **Missing performer skill mod `healing_dance_mind`:** Without this, the buff strength cap is 0 (line 716), so `buffStrength` remains 0 and no buff is applied (line 889-890 returns early if `buffStrength == 0`).
+3. **Line of sight failure:** The patron must have line of sight to start watching. If the watch command fails with "@healing:no_line_of_sight" (as noted in the context), the patron is never added to the patron list and receives no buffs.
+4. **Out of range:** `HEAL_RANGE` (defined in PerformanceManager but not shown in the provided code) must be satisfied for healing and buff ticks. If the patron moves out of range, they are removed from the patron list (lines 106-120).
+5. **Insufficient watch time:** The patron must watch for at least 60 seconds (line 877-878). Testing before this threshold is met will show no buff.
+6. **Patron on deny service list:** If the patron is on the performer's deny service list, buffs are skipped (line 992-993).
+7. **Patron incapacitated or dead:** Buffs are not applied to patrons who are incapacitated or dead (lines 862-864).
 
-Controls:
-- Stop after 30 s: expect the 1-minute message and no buff message.
-- A patron who is neither grouped nor the buff target: expect no message at all.
-- For healing, compare wounds or battle fatigue before and after a few ticks.
-- Don't count "An unknown force strengthens you" as proof.
+## 5. Open Questions
 
-Current scenarios:
-- dorn-social.py:75-78 only runs /startdance basic and /stopdance and writes a note. No patron watches and nothing is checked.
-- aurek-boss-camp.py:65-69 watches for 25 s and then stops. That is under the 60 s rule (ES:877), so no buff can be granted.
-
-## 4. Likely reasons a test sees no effect
-- The patron isn't grouped with the performer and isn't the buff target. Silent (ES:859, ES:989).
-- The patron watched for less than 60 s (ES:877-881).
-- The performer lacks private_buff_mind or healing_dance_mind/healing_music_mind, so strength stays 0. Silent (ES:866, ES:738-745, ES:889).
-- The test checks while the patron is still watching. The buff arrives only on stop (PM:3495, PM:3408).
-- The watch was refused: no line of sight, patron performing, NPC target, or target not performing (PM:3558-3589).
-- The performance ended early: posture change, combat, or no action left (ES:266-275).
-- A stronger buff is already present (ES:899-900, ES:916-917), or the patron is incapacitated or on the deny list (ES:853-863).
-- Healing only: the patron has nothing to heal, or the performer lacks private_med_battle_fatigue (ES:158-162).
-
-## 5. Open questions
-- The skill-mod values per entertainer skill box aren't in the tree: a grep of bin/scripts/skills found none of these names. They probably come from the client skills datatable (inferred).
-- datatables/performance/performance.iff isn't in the tree, so healMindWound and healShockWound for "basic" are unknown.
-- I didn't read cancelSession, which posture changes and combat use. Whether it gives patrons their buffs is unconfirmed.
-- Re-running /watch probably resets the 60 s clock, because addPatron replaces the patron's data (ES:1157-1162; inferred).
-- I didn't check whether "stopwatching" (aurek-boss-camp.py:69) is a server command, or read the code for the startdance command.
+1. **What is the value of `HEAL_RANGE`?** It is referenced at `EntertainingSessionImplementation.cpp:102` as `PerformanceManager::HEAL_RANGE`, but the constant's value is not defined in the provided files. It may be in `PerformanceManager.h`.
+2. **When exactly does `activateEntertainerBuff()` get called?** The code shows it checks conditions and applies buffs, but the call site that triggers buff application after the watch period ends is not visible in these files. It may be triggered when the patron stops watching or when the performer stops dancing.
+3. **What are the exact values of `performance->getHealMindWound()` and `performance->getHealShockWound()`?** These come from the `performance.iff` datatable (loaded at `PerformanceManager.cpp:42-64`) and vary by performance type. The specific values for "basic" dance are not in the provided source files.
+4. **What is the loop duration for dancing vs. music?** The code references `performance->getLoopDuration()` at line 679 to calculate flourish XP cap (dance = 10s, music = 5s inferred), but the exact values per performance are in the datatable.
+5. **How does `/setPerform target` work?** The code checks `entPlayer->getPerformanceBuffTarget()` (lines 859, 989) as an alternative to grouping, but the command implementation and its effect on buff targeting is not shown in these files.

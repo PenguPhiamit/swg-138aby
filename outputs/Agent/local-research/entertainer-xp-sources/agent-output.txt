@@ -1,0 +1,12 @@
+done in 11 steps, 259 s
+I've read TASK.md and both source files, then written report.md with all five required sections:
+
+1. **Short answer** - Summarizes how entertainers earn dance/music XP (per tick with audience/flourish multipliers) and healing XP (from wound healing), plus which boxes a dancing-only bot cannot earn.
+
+2. **How it works** - Details conditions, skill mods, timings (10s tick, flourish cooldown formula), audience effects (up to 50 cap), flourish caps (1 for dance, 2 for music per tick), healing mechanics, and player messages with file:line citations throughout.
+
+3. **What a bot test should check** - Lists setup requirements (entertaining session, audience, watch time) and observable results (system messages, HAM changes, buffs, XP amounts) plus verification steps.
+
+4. **Likely reasons a test sees no effect** - Covers missing audience, insufficient watch time, flourish cooldowns, wrong performance type, building registration, and group member requirements.
+
+5. **Open questions** - Names missing files/functions: Performance class definition (baseXp, healWound values), HEAL_RANGE constant, entertainer tree structure, applause mechanics, and buff strength cap formula.

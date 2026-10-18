@@ -1,0 +1,17 @@
+done in 8 steps, 246 s
+Done. I wrote `report.md` with all five required sections:
+
+1. **Short answer** (5 sentences) summarizing group formation, XP splitting, loot rules, and group level calculation.
+
+2. **How it works** - Detailed breakdown with file:line citations for:
+   - Group formation (invite checks, rejection messages, accept flow, group creation)
+   - Combat XP distribution (80ft range, threat map, pet owner handling)
+   - Loot rules (FREEFORALL, MASTERLOOTER, LOTTERY, RANDOM with 128ft range for lottery/random)
+   - Group level calculation (weighted formula based on member levels)
+   - Squad leader buffs and mission update scheduling
+
+3. **What a bot test should check** - Specific observable results (system messages, object creation, packet types, inventory states) and required setup.
+
+4. **Likely reasons a test sees no effect** - Distance limits, group full, not in threat map, missing skills, inventory full, etc.
+
+5. **Open questions** - The full XP split formula (cut off at line 2140), MissionManagerImplementation.cpp (not provided), LootLotterySession logic, and config file values.

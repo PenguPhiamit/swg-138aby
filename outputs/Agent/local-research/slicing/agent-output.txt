@@ -1,0 +1,12 @@
+done in 4 steps, 110 s
+I've read TASK.md and all five source files, then written `report.md` with the five required sections:
+
+1. **Short answer** - Explains slicing as a smuggler activity requiring a Precision Laser Knife, optional upgrade kits/tools, and a two-cable selection sequence.
+
+2. **How it works** - Documents conditions (inventory requirements, skill checks), the SUI menu phases (0 and 1), tools (Molecular Clamp, Flow Analyzer), success/failure logic based on `firstCable`, and results by object type (containers, weapons, armor, terminals, base slices). Every claim cites file:line numbers.
+
+3. **What a bot test should check** - Lists setup requirements (skills, items in inventory) and observable results (system messages, SUI menu, inventory changes, cooldowns, XP awards), plus specific test scenarios to run.
+
+4. **Likely reasons a test sees no effect** - Covers missing skills, tools, wrong object location, active sessions, and wrong cable selections.
+
+5. **Open questions** - Identifies native functions not visible in the provided files (`handleSliceFailed`, `handleSliceDamage`, etc.), the `RelockLootContainerEvent` behavior, and exact attribute modifications for weapons/armor.

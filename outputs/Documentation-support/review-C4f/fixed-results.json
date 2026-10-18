@@ -1,0 +1,7 @@
+{
+  "skill_source_with_own_archive_first": "patch_14_00.tre",
+  "two_isolated_botanist_builds_identical": true,
+  "matches_installed_stage": true,
+  "protected_stage_unchanged": true,
+  "note": "main/publish not executed; full archive repeat-build evidence belongs to Claude"
+}

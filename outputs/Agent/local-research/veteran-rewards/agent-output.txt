@@ -1,0 +1,12 @@
+done in 9 steps, 128 s
+I've read TASK.md and all seven listed files, then written report.md with the five required sections:
+
+1. **Short answer** - Explains veteran rewards are based on account age (not character play time), with milestone-based eligibility and a two-step SUI claiming process.
+
+2. **How it works** - Details eligibility conditions (account age via `getAgeInDays()`), all system messages with file:line citations, the reward structure (templateFile, milestone, oneTime, jtlReward), and the claiming flow through SUI callbacks.
+
+3. **Bot test checklist** - Lists setup requirements (account age simulation) and observable results to verify (system messages, SUI boxes, inventory delivery).
+
+4. **Likely failure reasons** - Covers account age too low, missing reward definitions, oneTime flags, JTL not installed, and uninitialized PlayerManager.
+
+5. **Open questions** - Identifies that the PlayerManager implementation and Lua data files are missing, leaving milestones, reward selection logic, and storage mechanisms undocumented in these files.

@@ -1,0 +1,15 @@
+done in 10 steps, 250 s
+I've completed the task by:
+
+1. **Reading TASK.md** - which asked me to explain mission generation and completion mechanics from the server source files
+2. **Reading both source files**:
+   - `src/src/server/zone/managers/mission/MissionManagerImplementation.cpp` (2427 lines)
+   - `src/outputs/tools/bots/scenarios/cresh-missions.py` (65 lines)
+3. **Writing report.md** with all 5 required sections:
+   - Short answer summarizing the mission system
+   - Detailed explanation of how missions work with file:line citations for every claim
+   - Checklist of what a bot test should verify
+   - Common reasons tests might see no effect
+   - Open questions about information not present in the provided files
+
+The report covers terminal types and their mission assignments, difficulty/distance/reward calculations for each mission type, mission limits (6 default, 1 bounty max), completion/failure conditions, player messages, and comparison with the cresh-missions.py scenario.

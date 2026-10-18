@@ -1,0 +1,197 @@
+--- a/MMOCoreORB/src/server/zone/objects/player/Races.h
++++ b/MMOCoreORB/src/server/zone/objects/player/Races.h
+@@ -29,7 +29,9 @@
+     "sullustan", // sullustan female
+     "ithorian", // DA E7   -   ithorian female
+     "chiss", // chiss male (Fable species S4)
+-    "chiss"  // chiss female
++    "chiss", // chiss female
++    "nautolan", // nautolan male (Fable species S6)
++    "togruta"  // togruta female (Fable species S6)
+ };
+ 
+ const static int TemplateSpecies[] = {
+@@ -54,7 +56,9 @@
+ 		0x31,
+ 		0x21,
+ 		0xE7, // chiss male: CreatureObject::CHISS
+-		0xE7  // chiss female
++		0xE7, // chiss female
++		0xE8, // nautolan male: CreatureObject::NAUTOLAN
++		0xE9  // togruta female: CreatureObject::TOGRUTA
+ };
+ 
+ const static char* Gender[] = {
+@@ -79,7 +83,9 @@
+     "female", // sullustan female
+     "female", // DA E7   -   ithorian female
+     "male", // chiss male
+-    "female"  // chiss female
++    "female", // chiss female
++    "male", // nautolan male
++    "female"  // togruta female
+ };
+ 
+ const static char* RaceStrs[] = {
+@@ -104,7 +110,9 @@
+     "object/creature/player/shared_sullustan_female.iff", // sullustan female
+     "object/creature/player/shared_ithorian_female.iff", // DA E7   -   ithorian female
+     "object/creature/player/shared_chiss_male.iff", // chiss male
+-    "object/creature/player/shared_chiss_female.iff"  // chiss female
++    "object/creature/player/shared_chiss_female.iff", // chiss female
++    "object/creature/player/shared_nautolan_male.iff", // nautolan male
++    "object/creature/player/shared_togruta_female.iff"  // togruta female
+ };
+ 
+ const static char* CCRaceStrs[] = {
+@@ -129,7 +137,9 @@
+     "object/creature/player/sullustan_female.iff", // sullustan female
+     "object/creature/player/ithorian_female.iff", // DA E7   -   ithorian female
+     "object/creature/player/chiss_male.iff", // chiss male
+-    "object/creature/player/chiss_female.iff"  // chiss female
++    "object/creature/player/chiss_female.iff", // chiss female
++    "object/creature/player/nautolan_male.iff", // nautolan male
++    "object/creature/player/togruta_female.iff"  // togruta female
+ };
+ 
+ // the number of race entries above; every array in this file has RACE_COUNT entries in the same order
+@@ -157,7 +167,9 @@
+     0x1573341A,
+     0xB3E08013,
+     0x02F60EAC, // chiss male: SOE CRC of object/creature/player/shared_chiss_male.iff
+-    0x614A1B68  // chiss female
++    0x614A1B68, // chiss female
++    0xAB03ACB1, // nautolan male: SOE CRC of object/creature/player/shared_nautolan_male.iff
++    0x3D953B50  // togruta female: SOE CRC of object/creature/player/shared_togruta_female.iff
+ };
+ 
+ static unsigned int attributeLimits[10][19] = {
+--- a/MMOCoreORB/src/server/zone/objects/creature/CreatureObject.idl
++++ b/MMOCoreORB/src/server/zone/objects/creature/CreatureObject.idl
+@@ -226,6 +226,8 @@
+ 	public static final int ITHORIAN = 0x21;
+ 	public static final int SULLUSTAN = 0x31;
+ 	public static final int CHISS = 0xE7; // Fable species S4: first id past the stock species table (managers/creature_manager.lua aiSpeciesData ends at 230)
++	public static final int NAUTOLAN = 0xE8; // Fable species S6
++	public static final int TOGRUTA = 0xE9; // Fable species S6
+ 
+ 	public static final int MALE = 0;
+ 	public static final int FEMALE = 1;
+@@ -1973,6 +1975,10 @@
+ 			return "sullustan";
+ 		else if(species == CHISS)
+ 			return "chiss";
++		else if(species == NAUTOLAN)
++			return "nautolan";
++		else if(species == TOGRUTA)
++			return "togruta";
+ 		else
+ 			return "";
+ 	}
+--- a/MMOCoreORB/src/server/zone/managers/director/DirectorManager.cpp
++++ b/MMOCoreORB/src/server/zone/managers/director/DirectorManager.cpp
+@@ -656,6 +656,8 @@
+ 	luaEngine->setGlobalInt("SPECIES_ITHORIAN", CreatureObject::ITHORIAN);
+ 	luaEngine->setGlobalInt("SPECIES_SULLUSTAN", CreatureObject::SULLUSTAN);
+ 	luaEngine->setGlobalInt("SPECIES_CHISS", CreatureObject::CHISS);
++	luaEngine->setGlobalInt("SPECIES_NAUTOLAN", CreatureObject::NAUTOLAN);
++	luaEngine->setGlobalInt("SPECIES_TOGRUTA", CreatureObject::TOGRUTA);
+ 
+ 	//Player Arrangements
+ 	luaEngine->setGlobalLong("RIDER", PlayerArrangement::RIDER);
+--- a/MMOCoreORB/bin/scripts/managers/player_creation_manager.lua
++++ b/MMOCoreORB/bin/scripts/managers/player_creation_manager.lua
+@@ -64,4 +64,6 @@
+ humanRigRaces = {
+ 	{ "object/creature/player/chiss_male.iff", "object/creature/player/human_male.iff" },
+ 	{ "object/creature/player/chiss_female.iff", "object/creature/player/human_female.iff" },
++	{ "object/creature/player/nautolan_male.iff", "object/creature/player/human_male.iff" }, -- Fable species S6
++	{ "object/creature/player/togruta_female.iff", "object/creature/player/human_female.iff" }, -- Fable species S6
+ }
+--- a/MMOCoreORB/bin/scripts/object/creature/player/objects.lua
++++ b/MMOCoreORB/bin/scripts/object/creature/player/objects.lua
+@@ -1712,3 +1712,14 @@
+ 	clientTemplateFileName = "object/creature/player/shared_chiss_male.iff"
+ }
+ ObjectTemplates:addClientTemplate(object_creature_player_shared_chiss_male, "object/creature/player/shared_chiss_male.iff")
++
++-- Sandbox: Nautolan and Togruta shared client templates (Fable species S6, 14 Oct 2026); the client files are the species package's, carried by MTG patch 023.
++object_creature_player_shared_nautolan_male = SharedCreatureObjectTemplate:new {
++	clientTemplateFileName = "object/creature/player/shared_nautolan_male.iff"
++}
++ObjectTemplates:addClientTemplate(object_creature_player_shared_nautolan_male, "object/creature/player/shared_nautolan_male.iff")
++
++object_creature_player_shared_togruta_female = SharedCreatureObjectTemplate:new {
++	clientTemplateFileName = "object/creature/player/shared_togruta_female.iff"
++}
++ObjectTemplates:addClientTemplate(object_creature_player_shared_togruta_female, "object/creature/player/shared_togruta_female.iff")
+--- a/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/object/creature/player/serverobjects.lua
+@@ -68,3 +68,5 @@
+ includeFile("creature/player/zabrak_male.lua")
+ includeFile("creature/player/chiss_male.lua") -- Sandbox: Chiss (Fable species S3)
+ includeFile("creature/player/chiss_female.lua") -- Sandbox: Chiss (Fable species S3)
++includeFile("creature/player/nautolan_male.lua") -- Sandbox: Nautolan (Fable species S6)
++includeFile("creature/player/togruta_female.lua") -- Sandbox: Togruta (Fable species S6)
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/creature/player/nautolan_male.lua
+@@ -0,0 +1,28 @@
++-- Nautolan male player race template. Sandbox: Fable species S6 (14 Oct 2026; outputs/Fable-species/s6/README.md).
++-- Shape: dev's chiss_male.lua (zabrak_male.lua lineage). The shared client template (object/creature/player/shared_nautolan_male.iff) is
++-- the Halyn/Phoenix species package's, carried by MTG patch 023 and declared in objects.lua. baseHAM = the package's
++-- racial_mods row for nautolan (the Zabrak profile); the same row goes into the client's datatables/creation/racial_mods.iff.
++
++object_creature_player_nautolan_male = object_creature_player_shared_nautolan_male:new {
++	baseHAM = { 200, 0, 0, 300, 0, 0, 0, 0, 400 },
++	gameObjectType = 1033,
++	groundZoneComponent = "PlayerZoneComponent",
++	spaceZoneComponent = "PlayerSpaceZoneComponent",
++	objectMenuComponent = "PlayerObjectMenuComponent",
++	containerComponent = "PlayerContainerComponent",
++	pvpStatusBitmask = PLAYER,
++	templateType = PLAYERCREATURE,
++	childObjects = {
++		{templateFile = "object/player/player.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/inventory/character_inventory.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/datapad/character_datapad.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/mission_bag/mission_bag.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/weapon/melee/unarmed/unarmed_default_player.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/bank/character_bank.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4}
++	},
++	defaultLanguage = 1,
++	startingItems = { },
++	startingSkills = { "species_nautolan", "social_language_basic_comprehend", "social_language_basic_speak" }
++}
++
++ObjectTemplates:addTemplate(object_creature_player_nautolan_male, "object/creature/player/nautolan_male.iff")
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/creature/player/togruta_female.lua
+@@ -0,0 +1,28 @@
++-- Togruta female player race template. Sandbox: Fable species S6 (14 Oct 2026; outputs/Fable-species/s6/README.md).
++-- Shape: dev's chiss_female.lua (zabrak_male.lua lineage). The shared client template (object/creature/player/shared_togruta_female.iff) is
++-- the Halyn/Phoenix species package's, carried by MTG patch 023 and declared in objects.lua. baseHAM = the package's
++-- racial_mods row for togruta (the Zabrak profile); the same row goes into the client's datatables/creation/racial_mods.iff.
++
++object_creature_player_togruta_female = object_creature_player_shared_togruta_female:new {
++	baseHAM = { 200, 0, 0, 300, 0, 0, 0, 0, 400 },
++	gameObjectType = 1033,
++	groundZoneComponent = "PlayerZoneComponent",
++	spaceZoneComponent = "PlayerSpaceZoneComponent",
++	objectMenuComponent = "PlayerObjectMenuComponent",
++	containerComponent = "PlayerContainerComponent",
++	pvpStatusBitmask = PLAYER,
++	templateType = PLAYERCREATURE,
++	childObjects = {
++		{templateFile = "object/player/player.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/inventory/character_inventory.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/datapad/character_datapad.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/mission_bag/mission_bag.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/weapon/melee/unarmed/unarmed_default_player.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4},
++		{templateFile = "object/tangible/bank/character_bank.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4}
++	},
++	defaultLanguage = 1,
++	startingItems = { },
++	startingSkills = { "species_togruta", "social_language_basic_comprehend", "social_language_basic_speak" }
++}
++
++ObjectTemplates:addTemplate(object_creature_player_togruta_female, "object/creature/player/togruta_female.iff")

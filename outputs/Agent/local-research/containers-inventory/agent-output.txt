@@ -1,0 +1,8 @@
+done in 4 steps, 114 s
+Done. I wrote `report.md` with all five required sections:
+
+1. **Short answer** - Summarizes the inventory limit mechanism, error messages, and how to check/make room
+2. **How it works** - Details the flow from command entry through permission checks to limit evaluation, with file:line citations for every claim
+3. **What a bot test should check** - Lists setup requirements (zone, distance, permissions) and observable results (system messages, `canAddObject` return codes, container size queries)
+4. **Likely reasons a test sees no effect** - Covers distance limits, permission denials, wrong containment types, NoTrade/building ownership issues
+5. **Open questions** - Names missing information: default inventory capacity (`getContainerVolumeLimit()` implementation), loot overflow behavior (`allowOverflow` usage), nested container limit propagation, exact error code values, and encumbrance logic

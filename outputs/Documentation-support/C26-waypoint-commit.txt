@@ -1,0 +1,3 @@
+Observe own quest waypoints from PLAY8 baselines and deltas
+
+Agent: ChatGPT

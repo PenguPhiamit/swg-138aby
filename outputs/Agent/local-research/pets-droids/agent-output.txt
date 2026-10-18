@@ -1,0 +1,12 @@
+done in 12 steps, 312 s
+I've written `report.md` based on reading TASK.md and all four listed source files. Key findings:
+
+1. **Calling pets**: Radial menu ID 44 triggers `callObject()` with extensive precondition checks (dead, combat, private building, FRS enclave, cooldowns, skill limits). Pets spawn within ±2-3 m of player. Outdoors calls have a 15 s delay; city/camp calls are immediate.
+
+2. **Follow/stay/guard**: Commands route through `PetManagerImplementation::handleChat()` to `EnqueuePetCommand`. `PetFollowCommand` sets the follow target but **does not enforce distance**.
+
+3. **Storing**: Radial ID 59 or "pet store" command triggers `PetControlDeviceStoreTask`. Faction pets delay 60 s; others store immediately.
+
+4. **The 12 m gap issue**: None of the four provided files contain follow distance, leash radius, or catch-up logic. This is implemented in AI movement code (likely `AiAgent.cpp` or `Creature.cpp`) which was not included. The server only sets `setFollowObject()` and does not enforce a hard distance cap.
+
+5. **Open questions**: Follow distance constants, exact radial menu structure, store completion messages, and catch-up behavior are all in files not provided.

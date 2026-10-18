@@ -1,0 +1,8 @@
+done in 5 steps, 138 s
+Done. I read TASK.md and all five listed source files, then wrote `report.md` with the five required sections:
+
+1. **Short answer** — how learning/surrendering works at a glance
+2. **How it works** — prerequisites, XP/skill-point costs, skill modifiers, timings, and messages (with file:line citations)
+3. **What a bot test should check** — setup requirements and observable results after learning or surrendering
+4. **Likely reasons a test sees no effect** — common failure modes
+5. **Open questions** — gaps in the provided files (trainer dialogue, credit charging, trainer menu code, JediManager logic, apprenticeship flag)

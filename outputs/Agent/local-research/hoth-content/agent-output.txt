@@ -1,0 +1,20 @@
+done in 4 steps, 149 s
+I've written `report.md` with all five required sections:
+
+1. **Short answer** - A 6-sentence summary of Hoth's regions, caves, dens, camps, Echo Base, outpost terminals, and scavenger quartermaster task.
+
+2. **How it works** - Detailed breakdown with file:line citations for every claim, covering:
+   - Regions (outpost, ice caves, named places, spawn areas, dens, Echo Base)
+   - Ice caves (4 caves with wampa bosses at 1800s respawn)
+   - Mynock den (23 mynocks + broodmother boss)
+   - Glacial rancor den (single mob, 1800s respawn)
+   - Camps (5 camps with props and NPCs at 300s respawn)
+   - Echo Base (building only, no NPCs)
+   - Outpost terminals (mission, artisan, entertainer terminals + recruiters)
+   - Scavenger quartermaster task (3-mission chain: retrieve → assassinate → deliver)
+
+3. **What a bot test should check** - Specific observable results and setup requirements for each area.
+
+4. **Likely reasons a test sees no effect** - Zone not enabled, out of bounds, terrain patch missing, string file missing, spawn timers not elapsed, NOSPAWNAREA restrictions.
+
+5. **Open questions** - Missing dialogue strings, mission sequencing logic, NPC locations for the quest chain, Echo Base interior content, hoth_world.lua spawn tables, badge/loot details.

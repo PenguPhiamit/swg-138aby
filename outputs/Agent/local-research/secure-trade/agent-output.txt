@@ -1,0 +1,12 @@
+done in 4 steps, 84 s
+I've read TASK.md and all seven listed source files, then written `report.md` with the five required sections:
+
+1. **Short answer** - Summarizes the trade flow from initiation via BeginTradeMessage through add/accept/verify steps to completion or abort.
+
+2. **How it works** - Details each step with file:line citations: message formats, TradeSession state fields, callback parsing, and handler calls. Clearly notes that PlayerManager implementation details (conditions, skill mods, timings, system messages) are not in the provided files.
+
+3. **What a bot test should check** - Lists setup requirements and observable results to verify at each step (initiation, acceptance, adding items/money, accept/verify buttons, abort).
+
+4. **Likely reasons a test sees no effect** - Identifies silent failure points visible in the callbacks (null checks, zero ID rejection) plus missing implementation details.
+
+5. **Open questions** - Names specific missing files/functions (PlayerManager.cpp handlers, radial menu IDs, SUI window definitions, timing constraints, completion mechanics, error message string IDs).

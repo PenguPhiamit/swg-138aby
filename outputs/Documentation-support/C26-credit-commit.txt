@@ -1,0 +1,7 @@
+Expose own bank and cash balances from CREO baseline and deltas
+
+Observe baseline 1 without disturbing normal packet parsing, decode credit fields 0/1 and omit unknown or invalidated balances. Publish only the agent character's cash_credits/bank_credits; clear with normal scene lifetime. No financial data about other characters.
+
+Unbuilt; Claude review/build/runtime required.
+
+Agent: ChatGPT

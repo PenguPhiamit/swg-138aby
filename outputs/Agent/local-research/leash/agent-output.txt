@@ -1,0 +1,10 @@
+done in 5 steps, 103 s
+Done. I read `TASK.md` and the single listed file (`src/src/server/zone/objects/creature/commands/LeashCommand.h`), then wrote `report.md` with all five required sections:
+
+1. **Short answer** — 4-sentence summary of what `/leash` does (a follow-assist for group members, not pets/crew)
+2. **How it works** — conditions, arguments, timings/constants (10 m stuck range, 512 m max range, 2 s interval, etc.), all system messages with file:line citations, and busy-state blocking
+3. **What a bot test should check** — setup requirements (same group, same planet, not in combat/mounted) and observable results to verify (start/stop messages, stuck detection teleport, invalid-target errors)
+4. **Likely reasons a test sees no effect** — 7 common failure modes including disabled config, wrong group, busy states, no walkable path
+5. **Open questions** — 5 items the file doesn't answer (right-click menu handler, cross-player notifications, config loading, etc.)
+
+All claims are cited with `LeashCommand.h:line` numbers; inferences are marked as such.

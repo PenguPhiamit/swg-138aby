@@ -1,0 +1,1412 @@
+{
+ "generated": "2026-10-14",
+ "task": "S6 Nautolan + Togruta",
+ "rule": "packages and archives read in memory; nothing extracted to disk, nothing run; nothing written outside outputs/Fable-species/s6",
+ "summary": {
+  "closure_files": 128,
+  "by_basis": {
+   "package-in-mtg023": 42,
+   "mtg": 29,
+   "stock": 39,
+   "MISSING": 18
+  },
+  "shipped_entries": [
+   "creation/default_pc_equipment.iff",
+   "creation/default_pc_hairstyles.iff",
+   "creation/profession_defaults_combat_brawler.iff",
+   "creation/profession_defaults_combat_marksman.iff",
+   "creation/profession_defaults_crafting_artisan.iff",
+   "creation/profession_defaults_outdoors_scout.iff",
+   "creation/profession_defaults_science_medic.iff",
+   "creation/profession_defaults_social_entertainer.iff",
+   "customization/asset_customization_manager.iff",
+   "datatables/creation/attribute_limits.iff",
+   "datatables/creation/racial_mods.iff",
+   "datatables/customization/allow_bald.iff",
+   "datatables/customization/customization_data.iff",
+   "datatables/customization/customization_group_instance.iff",
+   "datatables/customization/palette_columns.iff",
+   "datatables/skill/skills.iff",
+   "string/en/player_species.stf",
+   "string/en/skl_d.stf",
+   "string/en/skl_n.stf",
+   "ui/ui_avatardata.inc"
+  ],
+  "rights_unclear": [],
+  "missing_stock_gap": [
+   "sound/voice_pl_hum_f_blow_kiss.snd",
+   "sound/voice_pl_hum_f_cough.snd",
+   "sound/voice_pl_hum_f_death.snd",
+   "sound/voice_pl_hum_f_dmg_hvy.snd",
+   "sound/voice_pl_hum_f_hiccup.snd",
+   "sound/voice_pl_hum_f_sigh.snd",
+   "sound/voice_pl_hum_f_sneeze.snd",
+   "sound/voice_pl_hum_f_sniff.snd",
+   "sound/voice_pl_hum_f_yawn.snd",
+   "sound/voice_pl_hum_m_blow_kiss.snd",
+   "sound/voice_pl_hum_m_cough.snd",
+   "sound/voice_pl_hum_m_dmg_hvy.snd",
+   "sound/voice_pl_hum_m_dmg_lgt.snd",
+   "sound/voice_pl_hum_m_hiccup.snd",
+   "sound/voice_pl_hum_m_sigh.snd",
+   "sound/voice_pl_hum_m_sneeze.snd",
+   "sound/voice_pl_hum_m_sniff.snd",
+   "sound/voice_pl_hum_m_yawn.snd"
+  ],
+  "flagged_authorship_unstated": [
+   "appearance/mesh/nautolan_m.lmg",
+   "appearance/mesh/nautolan_m_arms.lmg",
+   "appearance/mesh/nautolan_m_arms_l0.mgn",
+   "appearance/mesh/nautolan_m_arms_l1.mgn",
+   "appearance/mesh/nautolan_m_arms_l2.mgn",
+   "appearance/mesh/nautolan_m_arms_l3.mgn",
+   "appearance/mesh/nautolan_m_body.lmg",
+   "appearance/mesh/nautolan_m_body_l0.mgn",
+   "appearance/mesh/nautolan_m_body_l1.mgn",
+   "appearance/mesh/nautolan_m_body_l2.mgn",
+   "appearance/mesh/nautolan_m_body_l3.mgn",
+   "appearance/mesh/nautolan_m_l0.mgn",
+   "appearance/mesh/nautolan_m_l1.mgn",
+   "appearance/mesh/nautolan_m_l2.mgn",
+   "appearance/mesh/nautolan_m_l3.mgn",
+   "shader/nautolan_dreddlock_m_hcsc21.sht",
+   "shader/nautolan_dreddlock_m_sm_hc8.sht",
+   "shader/nautolan_hand_hcsc21.sht",
+   "shader/nautolan_hand_sm_hc8.sht",
+   "shader/nautolan_head_m_hcsc21.sht",
+   "shader/nautolan_head_m_he9.sht",
+   "shader/nautolan_head_m_sm_hc8.sht",
+   "shader/nautolan_m_body.sht",
+   "shader/nautolan_m_body_sm.sht",
+   "texture/nautolan_body_m.dds",
+   "texture/nautolan_body_m_cn.dds",
+   "texture/nautolan_body_m_s.dds",
+   "texture/nautolan_body_m_sm.dds",
+   "texture/nautolan_dreddlock_m.dds",
+   "texture/nautolan_dreddlock_m_cn.dds",
+   "texture/nautolan_dreddlock_m_s.dds",
+   "texture/nautolan_dreddlock_m_sm.dds",
+   "texture/nautolan_hand.dds",
+   "texture/nautolan_hand_cn.dds",
+   "texture/nautolan_hand_s.dds",
+   "texture/nautolan_hand_sm.dds",
+   "texture/nautolan_head_m.dds",
+   "texture/nautolan_head_m_cn.dds",
+   "texture/nautolan_head_m_s.dds",
+   "texture/nautolan_head_m_sm.dds"
+  ]
+ },
+ "bases": {
+  "ours": {
+   "rights": "our own output (tables rebuilt from today's stock copies with the species rows re-emitted as data; names from the package, descriptions ours)",
+   "credit": "Fable (this project); rows: Halyn/Phoenix species package (data)"
+  },
+  "package-in-mtg023": {
+   "rights": "Halyn (with Phoenix) \"New species for SWGEmu\" package file, as carried by MTG patch 023 in the owner's client. No licence file in the package; the MTG resource page publishes it for server use (catalogue status P) and asks permission for other uses. The package does not say whether its Nautolan mesh/shader/texture files are Halyn's own work or converted from SOE NPC art, so authorship is recorded as unstated. NOT shipped by us: the client already loads it from MTG patch 023; our archive only references the paths.",
+   "credit": "Halyn and Phoenix (New species for SWGEmu, modthegalaxy.com); hosted by Mod the Galaxy patch 023"
+  },
+  "mtg": {
+   "rights": "Mod the Galaxy patch archive in the owner's client (MTG's compilation of SOE/LucasArts NGE-era client assets for the pre-CU client); the same basis as every other MTG file the galaxy already uses (catalogue status P with credit). Not shipped by us; referenced by path.",
+   "credit": "Mod the Galaxy (compilation); Sony Online Entertainment / LucasArts (original assets)"
+  },
+  "stock": {
+   "rights": "stock client asset of the owner's own Star Wars Galaxies installation (SOE/LucasArts). Not shipped by us; referenced by path.",
+   "credit": "Sony Online Entertainment / LucasArts"
+  },
+  "MISSING": {
+   "rights": "not found in our archive or the client load order",
+   "credit": "-"
+  }
+ },
+ "data_used_from_the_package": {
+  "newspecies-original.zip": {
+   "sha256": "59b48293026dd8f747e9bc31140e5f088c748ce346719fb5bbc268ba94fb6472",
+   "species.tre sha256": "b781cff1d78a1fcd3522a96bfb1135909af1c2d170553e43638e9076c4f772fb",
+   "rows_and_blocks": "racial_mods, attribute_limits, customization_data, customization_group_instance, allow_bald, palette_columns rows for nautolan_male / togruta_female; default_pc_equipment and six profession_defaults PTMP blocks; the two ui_avatardata <Data> blocks; name_* strings; the 2016 asset_customization_manager map of appearance/nautolan_m.sat (spliced); its racial_mods rows as baseHAM for the race Lua",
+   "not_used": "desc_* strings (CC BY-SA Wookieepedia text; ours written instead), its C++ and Lua (reference only), its object_template_crc_string_table"
+  },
+  "credit_line_for_CREDITS-and-sources.txt": "Nautolan and Togruta player species: tables and templates from \"New species for SWGEmu\" by Halyn (with Phoenix), modthegalaxy.com, as hosted in Mod the Galaxy patch 023; Nautolan art from the same package; Togruta art from MTG patches 015/016/018 and the stock client; species descriptions, server code and table merging by this project."
+ },
+ "files": {
+  "appearance/mesh/nautolan_m.lmg": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 202,
+   "sha256": "da8939af2e463ea2c5811d635b390234bf28488ff6267ddbfbecbb0880bcd671",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_arms.lmg": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 222,
+   "sha256": "a2b8520e245e44d3805e5024368f7a6dc26809b211bc108bca9e084adebc203a",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_arms_l0.mgn": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 17658,
+   "sha256": "b0ba791e28dcf3c5e3f8976dd389b49a7c557706545c17118ef28c3d5efca905",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_arms_l1.mgn": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 7774,
+   "sha256": "0c8cda8c92d1d1949259d4019d70b70de2fb79cc4d41f5cae857cf74ec8a1383",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_arms_l2.mgn": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 4163,
+   "sha256": "b6ab128ec35a549e7e987642171f00aa05eeb5ad5ab2e2fe64597572eec38f3f",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_arms_l3.mgn": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 1848,
+   "sha256": "dccf2b9685ba1e429b3213ed59b7f30139160b86b98e24f716121d8fc9451dff",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_body.lmg": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 222,
+   "sha256": "7acd99f00e9556a55a91f68a7db764ccaf5ef510c83a49d28b0e96ce6cfa1f7e",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_body_l0.mgn": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 139277,
+   "sha256": "816c1f0afa84692db550b4a7aef4f240d17974d346d21f4da42c4192543e0abb",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_body_l1.mgn": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 107233,
+   "sha256": "80ce785439049755b26c8cc75f6176fb03d34f9ad9cedabcc2893a72c7e7f759",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_body_l2.mgn": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 38176,
+   "sha256": "69b2a5b7553e28e3a37ba9aa6e77ce2176971f7b689024951ca99289d9471dab",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_body_l3.mgn": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 6705,
+   "sha256": "661226c3256e5d4f8e7a89867a1a7f46b4ae0cbed6cd66a1dda152f537c05215",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_l0.mgn": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 275847,
+   "sha256": "6fbcaee313b4d9b5e18c8490cab075ab9743df94004356f91aee44fff5fa506a",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_l1.mgn": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 166755,
+   "sha256": "06ce55816cb09ab4c1f8f7d419257d77c7c1b7dcdb5e5f50f41f1b1cb5882d1c",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_l2.mgn": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 47934,
+   "sha256": "3a74892a35f65ee500fde29ee941bcba47cf0ffd14efb788a05dc7fac1fac0f6",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/nautolan_m_l3.mgn": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 13486,
+   "sha256": "76ef17ac1443e7e2547a9c87a7fd055d21d266dc768339153073f5b2143972c3",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f.lmg": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 198,
+   "sha256": "f405c4a0745c3d0b355b5942a58493db7f21cafd985346c4839d6221eace2a49",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_arms.lmg": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 218,
+   "sha256": "7f56794707b29c2643c2b5ab1a91acdb5f54335c7cf75f28515e8b2e902904ff",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_arms_l0.mgn": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 7934,
+   "sha256": "e9be3749dd592ef875dc3e248ece7225befb76508e6b34e58d44e10d462d6178",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_arms_l1.mgn": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 5542,
+   "sha256": "61e8ec322a5d36bc18355ce5654fe2ac2f4851ae66c5d75774296f7d01127642",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_arms_l2.mgn": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 3245,
+   "sha256": "96eba1a0bf2927c52c83773bebd1d20ab386c0f30c7c6d056606ea11c21f1cc2",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_arms_l3.mgn": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 1815,
+   "sha256": "4881398037f198d440f852c3bc387b551f9449edb27aea230a1a756c23e48025",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_body.lmg": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 218,
+   "sha256": "432ce769c06c5f328816eb09cfcebd3a62d7514fa0b4565665ecd5da2e3cb23c",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_body_l0.mgn": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 134552,
+   "sha256": "ec9ecd5220acf1f4e334f092d4317deaddbe121d2e77574801f549b8f246160a",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_body_l1.mgn": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 91038,
+   "sha256": "27db48309ea585cb23c3a5951edb805c38cd06c6131f21eb257ad26ba2eed6af",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_body_l2.mgn": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 52125,
+   "sha256": "4ca2abef8e224e8236bbe79363db468acabf8369ffd17a881983fa7e3c0982eb",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_body_l3.mgn": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 8321,
+   "sha256": "b23ba3eacf4ce71274b03ee7483c37f462bd6f8bf2bb1c1a059772234e88c24b",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_l0.mgn": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 129725,
+   "sha256": "526d776d0dcc65e0c0a036234b5aacc3831c2ebd3f19e6a8bcfb6a4397ec38b5",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_l1.mgn": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 102478,
+   "sha256": "4734e8f83b4c9a5bff1cff19411ee9713df53160eed3c15b31f1334e1bb6beb4",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_l2.mgn": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 42255,
+   "sha256": "901124df1753a729dab25836d75afc7fdbc5c5ce1c6a66391601ebbfba9d54fe",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/mesh/togruta_f_l3.mgn": {
+   "source": "mtg_patch_016.tre",
+   "bytes": 13234,
+   "sha256": "03174584f4dd5a63e92b224f041a835b6c639dbe397768be88e4cc7eb5d22c7e",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/nautolan_m.sat": {
+   "source": "patch_11_00.tre",
+   "bytes": 361,
+   "sha256": "3fa50d11d1a10a4e5d60aaa781cc6ecf263f1ba9acf68b37fca3834e24187d32",
+   "basis": "stock",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/skeleton/all_b.skt": {
+   "source": "data_other_00.tre",
+   "bytes": 8794,
+   "sha256": "e32781a94ac6e39d9b25911eeb0d5749c9db86865965bd241a2a75163343f690",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/skeleton/hum_f_face.skt": {
+   "source": "data_other_00.tre",
+   "bytes": 1223,
+   "sha256": "48afc8966f1d71cbac9502816541cebfbc589aaf65dc3c55992035852fe615b8",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/skeleton/hum_m_face.skt": {
+   "source": "data_other_00.tre",
+   "bytes": 1223,
+   "sha256": "e6929997ec3646329905dd8b1c831df9899302437973f5f112d77d88d0301f75",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "appearance/togruta_f.sat": {
+   "source": "patch_11_00.tre",
+   "bytes": 358,
+   "sha256": "673819c4e709271c61d42891a51aadf37554d29719a00b3eaacc18dc013f65c5",
+   "basis": "stock",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "clientdata/client_shared_base_player.cdf": {
+   "source": "data_other_00.tre",
+   "bytes": 667,
+   "sha256": "d6456a818c3bb185d13892bd7525c490ea895b87a861fda1fc1c2e29737eb045",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "clientdata/player/client_shared_player_human_f.cdf": {
+   "source": "data_other_00.tre",
+   "bytes": 1529,
+   "sha256": "2a36c7dc5f58b334f439c6e88673e0519fb48d0075af801e998aa4bca5c00be0",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "clientdata/player/client_shared_player_human_m.cdf": {
+   "source": "data_other_00.tre",
+   "bytes": 1531,
+   "sha256": "c2448f1c78fb330626e0e4e09911264572326c345be773491787ce24cdee7438",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "datatables/include/locomotion.iff": {
+   "source": "data_other_00.tre",
+   "bytes": 411,
+   "sha256": "74ffd7c7457113486d6927dd033fb18c1ee7a6804b18a0c3b1111da84a268d20",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "datatables/include/posture.iff": {
+   "source": "data_other_00.tre",
+   "bytes": 297,
+   "sha256": "3aaf1a0d0a27460ca14f30a615136d2908b22c72c5350a6222e338b47694d992",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "datatables/movement/movement_human.iff": {
+   "source": "patch_00.tre",
+   "bytes": 776,
+   "sha256": "09d6591fa3ee516b1f6e85232a351116c5e57b7e185fb41ff28c164c8cd85d8f",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "effect/a_specmap_aniso.eft": {
+   "source": "patch_11_00.tre",
+   "bytes": 1728,
+   "sha256": "649e2db98c7c0d774d9dfe84551b28e0e37fa8676f5b68007dc731581a0bdae6",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "effect/h_color2.eft": {
+   "source": "patch_11_00.tre",
+   "bytes": 1127,
+   "sha256": "78487d1a93a424b4113953e32cb97b1772b7a9d8a42d1df181457662b0e3af70",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "effect/h_color2_specmap_bump.eft": {
+   "source": "patch_11_00.tre",
+   "bytes": 2590,
+   "sha256": "882ae2aba97676d2f87ff43450499ef96eef3611d0b672165db3681199d42ea8",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "effect/h_color2_specmap_cbmp.eft": {
+   "source": "patch_11_00.tre",
+   "bytes": 2239,
+   "sha256": "fdee1e277b1002996f35eb1058ead59adb5f785e05b323b95e5bd841ac07cc11",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "effect/h_envmask.eft": {
+   "source": "patch_11_00.tre",
+   "bytes": 1478,
+   "sha256": "70e60d242e0a9158931bbdc536285c2891d6c64c22be3cdc5ad9091cea1a2d6e",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "object/creature/base/shared_base_creature.iff": {
+   "source": "patch_05.tre",
+   "bytes": 2121,
+   "sha256": "97b5a671c0bf035c3f2296c5b7cdbb55ae7e8fe1a7406355bf72b0c61da34a14",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "object/creature/player/base/shared_base_player.iff": {
+   "source": "patch_14_00.tre",
+   "bytes": 2238,
+   "sha256": "3063381ccae043b41a279d888d4450b16d96d4f75187ed6ee1621067b8ed7adb",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "object/creature/player/shared_nautolan_male.iff": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 1982,
+   "sha256": "08cf1aad0112aa41c8476635afc3056787538e7b5a486edaa058f424cf7fa667",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "object/creature/player/shared_togruta_female.iff": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 1980,
+   "sha256": "6edbff6fd13f60b471f8cb43f408ad7ff797aa889040cec3ec82774f222fa243",
+   "basis": "package-in-mtg023",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "object/object/base/shared_base_object.iff": {
+   "source": "patch_05.tre",
+   "bytes": 938,
+   "sha256": "ecf2850867f55e135c94f01f869870cb079943fd0bdfe52eb619ae09e55a9eca",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "object/tangible/base/shared_tangible_base.iff": {
+   "source": "patch_09.tre",
+   "bytes": 1320,
+   "sha256": "2c15f794282685fbf47274e379222e6fc22887741851693b2bb9bcc495b6927e",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/nautolan_dreddlock_m_hcsc21.sht": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 674,
+   "sha256": "c63a42717b72361a707ebfcf8855e0e5887587aeb4ed0dd024c919b9cfe8d360",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/nautolan_dreddlock_m_sm_hc8.sht": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 498,
+   "sha256": "48a4ea0cf28a961df65e423f52a8fd9b01d7135ef35a80d71edf79106e01dd7a",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/nautolan_hand_hcsc21.sht": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 653,
+   "sha256": "8e7d20332e22848eb81125de3c62e2dd0e520d7c647df95d8b967428268c297a",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/nautolan_hand_sm_hc8.sht": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 491,
+   "sha256": "a02dfdad4cd4b4bc64776a084fa820f0749ac391d549eec080c392977b2d0ea1",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/nautolan_head_m_hcsc21.sht": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 659,
+   "sha256": "92ff7d92a63eb9180a8550cd3eff028dd6a980c34ee4f3fde4b672a0c22e2323",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/nautolan_head_m_he9.sht": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 482,
+   "sha256": "1d8fd2075c418d51663496311e81354b97d33ccf823a8e469dc285c1d938e930",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/nautolan_head_m_sm_hc8.sht": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 493,
+   "sha256": "e164f4e07d8253024c576c66fadf6f65e2945711a342214ea5b54b961ffd2808",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/nautolan_m_body.sht": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 659,
+   "sha256": "a11995fa084704010ddc517e0c9a99087d56dd84a4b0ad11e4341cd12e939d00",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/nautolan_m_body_sm.sht": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 493,
+   "sha256": "2145a8f317a05e8623ebd869c6aed35bb372deffe23aed88f09bbc687c24850f",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/togruta_body.sht": {
+   "source": "mtg_patch_018.tre",
+   "bytes": 678,
+   "sha256": "dac053903ca2c4a4694f62a90c122c2916b3069dfb9e5f16a48aef7347c95fca",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/togruta_body_sm.sht": {
+   "source": "mtg_patch_018.tre",
+   "bytes": 684,
+   "sha256": "b99f378bf296a62f1ba6d49c3bca2f2f99482971d35ea746b801d9f8952155aa",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/togruta_f_mouth.sht": {
+   "source": "mtg_patch_018.tre",
+   "bytes": 502,
+   "sha256": "86e8b4d585e95bb3cb7747e51c4a1725e67b94413119dc2c78c993b921d53fe1",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/togruta_head.sht": {
+   "source": "mtg_patch_018.tre",
+   "bytes": 678,
+   "sha256": "bf52a29764d77b04398d633ae9eb18c43a991b81f01a1faa00ae3236b74ac60c",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "shader/togruta_head_sm.sht": {
+   "source": "mtg_patch_018.tre",
+   "bytes": 684,
+   "sha256": "080cb2d62c0d904255536079105eef7fbdd99a858f93180c0874665d66ba1a80",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/fs_in_carpet_crunch.snd": {
+   "source": "patch_00.tre",
+   "bytes": 292,
+   "sha256": "55bbcc96785232ef42404190883c6d5c0cecabdc88f19acf8d275dc4c0694943",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/fs_in_metal_floor.snd": {
+   "source": "patch_00.tre",
+   "bytes": 284,
+   "sha256": "19315cd2fe7a5470d92c9b5664836e4e9c9e30021323c5d029b2a65c22c988d9",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/fs_in_stone_floor.snd": {
+   "source": "patch_00.tre",
+   "bytes": 284,
+   "sha256": "c379973e9995a8a1ab2fbda25cc53f948d7a2de7bd8b0969f2dfe8405728412a",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/fs_in_wood_floor.snd": {
+   "source": "patch_00.tre",
+   "bytes": 280,
+   "sha256": "9443eedd0adf698f495bff88df28e95718b37beb1f10e2473613a87176043ec5",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/fs_out_grass_bare.snd": {
+   "source": "patch_00.tre",
+   "bytes": 268,
+   "sha256": "8be3de34860a76a523c3ff7213ccfc35a1e6fbf82622200eae85373785039ed6",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/fs_out_hardground_boot.snd": {
+   "source": "patch_00.tre",
+   "bytes": 304,
+   "sha256": "077b39c5af5c4a4975b6b97718c3feabff1805068c447906ad1963585b61697a",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/fs_out_hardground_shoe.snd": {
+   "source": "patch_00.tre",
+   "bytes": 304,
+   "sha256": "85d4a9264164debc4e66d928f7cce98a7fe7d40060d51d78c35ab9092b3f1347",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/fs_out_mud_squash.snd": {
+   "source": "patch_00.tre",
+   "bytes": 284,
+   "sha256": "afef7e947b3ea39a63df745c116232f15287db212b8527ffef6220941f660690",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/fs_out_sand_crunch.snd": {
+   "source": "patch_00.tre",
+   "bytes": 288,
+   "sha256": "61612ba26724bc863e8cf372aeb3c98668c38ffaa7780f255b5614b67755cf32",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/fs_out_snow_crunch.snd": {
+   "source": "patch_00.tre",
+   "bytes": 288,
+   "sha256": "ec00a4f4301ba547767acc4994401bae860e96ecad0a387a7ef4d032ce283ddf",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/fs_out_softground_bare.snd": {
+   "source": "patch_00.tre",
+   "bytes": 300,
+   "sha256": "3982e3255e1710395d6cefccb37323b9c7528bddd70c574f08b8ccb8c7e8208f",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/fs_out_water_splash.snd": {
+   "source": "patch_00.tre",
+   "bytes": 292,
+   "sha256": "7c65c1e613087c36482874ac7841aadcbfb8bddd7dc91d46519b161214d0e352",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/pl_all_bodyfall.snd": {
+   "source": "patch_00.tre",
+   "bytes": 208,
+   "sha256": "b829eb7db6304727d075328761f842b8c178e65df7052fba4a8c36f6687a2913",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/pl_all_pound_on_chest.snd": {
+   "source": "patch_00.tre",
+   "bytes": 208,
+   "sha256": "3922e217f6a158cd69ec183416c10d1962134a378bbbf9a49f76fdb995e9020a",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/pl_fist_in_palm.snd": {
+   "source": "patch_00.tre",
+   "bytes": 204,
+   "sha256": "2da3def5d91746f6912bb20e6afa16cf225e0fea8f9977e51218f099b3deaeaf",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/swim_water_surface.snd": {
+   "source": "patch_00.tre",
+   "bytes": 288,
+   "sha256": "e148984f216b05ca9874533c0af51c47f92bd5bd8b725df516ec1df26e642771",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_f_blow_kiss.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_f_cough.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_f_death.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_f_dmg_hvy.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_f_hiccup.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_f_sigh.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_f_sneeze.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_f_sniff.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_f_yawn.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_m_blow_kiss.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_m_cough.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_m_dmg_hvy.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_m_dmg_lgt.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_m_hiccup.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_m_sigh.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_m_sneeze.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_m_sniff.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "sound/voice_pl_hum_m_yawn.snd": {
+   "source": "MISSING",
+   "bytes": null,
+   "sha256": null,
+   "basis": "MISSING",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/aniso_lookup_medium.dds": {
+   "source": "data_texture_00.tre",
+   "bytes": 349652,
+   "sha256": "200daf67e70411863a05974710314ec8877ba40e92759fd53b56a44339c193a5",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/env_theed.dds": {
+   "source": "data_texture_01.tre",
+   "bytes": 131360,
+   "sha256": "242f7501caf00160a06e5802c2deaa0bf2c8f4877ce9bda4b8006f25cc4657bf",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_body_m.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 174928,
+   "sha256": "fa9866ed6c1dc2fad64a3c5522d2be5f822aee361adbab43af74090bf86cb4eb",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_body_m_cn.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 174928,
+   "sha256": "ce12e83ded6285543f961bc9cd3e3f335911e7e7a3631b8a6c862bdcf7f1f92a",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_body_m_s.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 174928,
+   "sha256": "fcf47002d51de02bfe46a873c184f1e17f82c1cfe605541fcbecb1ea04aa3fde",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_body_m_sm.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 43856,
+   "sha256": "f5e17199ddf1bbab67aeb733b4ba6befadfaf8c2ec6edda21277f83428e8f38c",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_dreddlock_m.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 87536,
+   "sha256": "d8c3ba62c3604c35c987ceb9a74025b2d1b68ba2ce419d3c6bd4d2cc22a2b712",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_dreddlock_m_cn.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 87536,
+   "sha256": "83b4764fbb68d76c1028196cd1ed5e9bb7a2ea5432ad761ea0f488fe90ce0c6e",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_dreddlock_m_s.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 87536,
+   "sha256": "822b1f6770ff43fe3a3331d34673c5cbdb68f018cddf1c8ce0847fea5942cbe6",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_dreddlock_m_sm.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 5616,
+   "sha256": "399d992dbdfc6d77b2293ba55f823bb72888e2dce59d4960e3df3bf23ef0217c",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_hand.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 22000,
+   "sha256": "271d2adb5732342c90f2e9a53c51320a85e2e9c4befa528bf9ae06e3c49320a6",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_hand_cn.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 22000,
+   "sha256": "b692b8da21acf8a193cdb5d991f60c514a8f46a455a8ba84025971c035e61ae3",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_hand_s.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 22000,
+   "sha256": "7dde129dfa881c807e92f25e23542227efa1555af3d476fab8fddc2585c4615c",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_hand_sm.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 1520,
+   "sha256": "53912b7be76d4de96f36d4e5f618fae7c8111a23b153214dfcec26191f54bdb2",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_head_m.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 87536,
+   "sha256": "521a09f12f7f66f1f18534506110b5e0686ed96637e2d54380d94c705e5b22ee",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_head_m_cn.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 87536,
+   "sha256": "bc1137881636fbe2d70b3ef061b2dcfc9898f634316c78bd253763392e62382d",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_head_m_s.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 87536,
+   "sha256": "2fa73a73dba50add287dfa3bd24e0ba3a0bc2f05370dc2e21ed8e976e83b48c6",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/nautolan_head_m_sm.dds": {
+   "source": "mtg_patch_023.tre",
+   "bytes": 5616,
+   "sha256": "556320f73b0888a2fc3c8b6e5c5ae484db6adce21af6750da3ea0243dbad04d2",
+   "basis": "package-in-mtg023",
+   "species": [
+    "nautolan"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/specular_lookup_35.dds": {
+   "source": "data_texture_06.tre",
+   "bytes": 349652,
+   "sha256": "3185bbf7c94ea8c94c301cf2ba7fd5e828d5e0bbe1fc089b4869173f1d90e50e",
+   "basis": "stock",
+   "species": [
+    "shared"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/togruta_body.dds": {
+   "source": "mtg_patch_015.tre",
+   "bytes": 174928,
+   "sha256": "bb2ad954e968717552d5e8a5192830997a396642a1fd9091fb290846a9cf8979",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/togruta_body_n.dds": {
+   "source": "mtg_patch_015.tre",
+   "bytes": 699180,
+   "sha256": "91a77a0d3d6af76b7cf0f21ed1e09d134ddb8e9ab32f9be8ae3a3ca47b9e464e",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/togruta_body_n_sm.dds": {
+   "source": "mtg_patch_015.tre",
+   "bytes": 43820,
+   "sha256": "99bc93b097d102964719d3454683ca5000cd40726739e2c6cb5e86188f1a0ae9",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/togruta_body_sm.dds": {
+   "source": "mtg_patch_015.tre",
+   "bytes": 11088,
+   "sha256": "f934bb4a3eb5866adf0fa10fa6544fcf2bb561e2078196d5d3a513f9369959ae",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/togruta_f_mouth.dds": {
+   "source": "mtg_patch_015.tre",
+   "bytes": 5616,
+   "sha256": "9dce235949e45fc4ebda0231898a7d7f586967b5117cb8550de3996e64ebe371",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/togruta_head.dds": {
+   "source": "mtg_patch_015.tre",
+   "bytes": 87536,
+   "sha256": "e7ed7516ebf3d2d8733ed24107a556344bfa917eb6d1d768fef3acf894e050a5",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/togruta_head_n.dds": {
+   "source": "mtg_patch_015.tre",
+   "bytes": 349652,
+   "sha256": "71b53f2a993fcb44fe1cffc209c5dda1608eda78263d953d02a5163bba0e161a",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/togruta_head_n_sm.dds": {
+   "source": "mtg_patch_015.tre",
+   "bytes": 21972,
+   "sha256": "bf4694138a5374fb7eb73f6a00becfe6c9781573dbfe7b15f543d48187cc6d6e",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  },
+  "texture/togruta_head_sm.dds": {
+   "source": "mtg_patch_015.tre",
+   "bytes": 5616,
+   "sha256": "3fd8362ab2a7edde9368af8ee43915acd59e04fd63d67c504c5d1517ee08a121",
+   "basis": "mtg",
+   "species": [
+    "togruta"
+   ],
+   "shipped_by_us": false
+  }
+ }
+}

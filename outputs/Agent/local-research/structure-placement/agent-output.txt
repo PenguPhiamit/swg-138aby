@@ -1,0 +1,8 @@
+done in 11 steps, 266 s
+I've written `report.md` covering all five required sections based on the two source files:
+
+1. **Short answer** (4 sentences) summarizing the placement flow
+2. **How it works** with detailed step-by-step checks, message string IDs, and file:line citations for every claim from PlaceStructureCommand.h and StructureManager.cpp
+3. **What a bot test should check** including setup requirements, observable results (system messages, deed removal, structure appearance, owner verification), and confirmation lines
+4. **Likely reasons a test sees no effect** listing 9 specific failure conditions with their source locations
+5. **Open questions** identifying the missing PlaceStructureSession file and related unknowns about credit handling and lot consumption timing

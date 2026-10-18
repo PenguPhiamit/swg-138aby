@@ -1,0 +1,8 @@
+done in 18 steps, 400 s
+I've read TASK.md and the CityManagerImplementation.cpp file it listed, then written report.md with all five requested sections:
+
+1. **Short answer** - Summary of city founding, ranking, citizenship, taxes, and planet restrictions
+2. **How it works** - Detailed mechanics with file:line citations for every claim (founding via `createCity`, citizen registration, rank expansion/contraction, tax management, planet checks)
+3. **What a bot test should check** - Observable results (system messages, city state, treasury), setup requirements, and specific validation checks that refuse actions
+4. **Likely reasons a test sees no effect** - Wrong planet, grace period timing, insufficient citizens, cooldowns, missing abilities, rank caps, treasury issues
+5. **Open questions** - Missing deed handling logic, Lua config values, client-side terminal interactions, radius calculations, and citizen registration triggers

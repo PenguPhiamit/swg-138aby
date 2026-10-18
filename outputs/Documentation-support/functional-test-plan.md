@@ -364,3 +364,57 @@ About 90 minutes on the test galaxy. Answer in your own words; a sentence or two
 20. What, if anything, made you want to stop playing?
 
 Results go back to the main session in your own words; it checks the logs for each answer before calling anything fixed.
+
+## 5. Real-client session, 17 Oct: the interaction loss
+
+Claude (real-client session), 17 Oct, 5:10 AM. Main target: the intermittent loss of interaction the owner saw on 16 Oct (radials, NPC conversations, terminals or commands stop responding; headless bots never notice it). Section 4's list stays for a longer session; this one takes about 40 minutes and repeats the same small set of interactions at each stop, so a failure can be pinned to a time and a place.
+
+**The round (R), under a minute, at every stop below.** (R1) Right-click an NPC: does the radial open? (R2) Right-click a terminal and pick its main option: does its window open? Close it. (R3) `/sit`, then `/stand`. (R4) Say one line in spatial chat.
+
+**If anything stops responding.** Press **Insert three times** (the input listener writes the exact second), keep trying the same thing for up to a minute, and remember whether it came back by itself and roughly when. Don't relog to fix it unless it lasts more than two minutes. Tell Claude afterwards, in your own words.
+
+| Step | Where | What | About |
+|---|---|---|---|
+| 1 | Log in | Start with the SWG Test Galaxy shortcut, pick the character, then R where you land | 3 min |
+| 2 | Mos Eisley terminals | Bank terminal (open, close), character builder (open one page, close), travel terminal (open the ticket window, close) | 4 min |
+| 3 | NPC conversations | Talk to a trainer and open its training list; talk to one more NPC that has a conversation | 4 min |
+| 4 | Cantina | R inside (indoor cell, busy); watch a bot dance for a minute | 5 min |
+| 5 | Mission terminal | Open the list, accept one destroy mission | 4 min |
+| 6 | Outside town | Fight one creature with two or three hotbar specials; then right-click the corpse and loot it | 6 min |
+| 7 | Shuttle | Buy a ticket Mos Eisley to Bestine and ride it; R as soon as you land | 7 min |
+| 8 | Idle and alt-tab | Stand still for 2 min without touching anything, then R; alt-tab to another window for 1 min, come back, R | 4 min |
+| 9 | Relog | Log out to character select, log back in, R | 3 min |
+
+**Questions afterwards (answer in your own words).** Did anything stop responding? For each time: what were you doing, what stopped (radial, window, conversation, command, chat, movement), did it come back, after how long, and what brought it back? How did the game feel overall: smooth or stuttering, and where? What else looked wrong?
+
+**What Claude records meanwhile** (read-only; nothing on the galaxy changes):
+- Windows, every 2 s: total CPU, the client's CPU (percent of one core), whether Windows says its window is responding, its memory, VmmemWSL's CPU.
+- WSL, every 2 s: load average, WSL CPU, core3's CPU; the console log with wall-clock times; per-second UDP packet counts for each client port on the zone and login ports, so a stall can be split into "the client sent nothing", "the server did not answer" and "both kept talking".
+- `core3.log` (it has wall-clock times) and `who.json` for the owner's session; the input listener's key and click times (with the owner's OK).
+- BotPop stays as it is (300 bots, WSL load about 1.5 at 5:00 AM), so a failure at this load tests the 16 Oct explanation (CPU starvation at 1,700 bots).
+
+### Results, 17 Oct, 5:32 to 5:48 AM
+
+**Conditions.** [name removed] (admin, the Chiss that lost interaction on 16 Oct) on the test galaxy's run 24 (the galaxy owner's new dev build, restarted 5:24 to 5:26 AM, before the client started at 5:27:47). BotPop "all" at 300 throughout (console: `online 300, active avg 300`; re-spawned at about 5:28). The galaxy owner's bot work overlapped the session, and its load is included in the readings below: the gate (five squad groups) 5:29 to 5:38, esk-routes and a Besh probe 5:40 to 5:47, esk-routes 5:47 to 5:50. The client was started with the test launcher (Above normal priority, DXVK, LAA). The owner played about 15 minutes and logged out at 5:48:08; the full 40-minute list was not finished.
+
+**The owner, in their own words.** *(Waiting for the owner's answers to the four questions above.)* During the session they sent two tells to the Esk bot: "the bots are moving correct lanes and such but, 1 their nowhere near looking like an actual population the way their moving. and im concerned their not progressing/ building guilds and cities and working together" (passed to the BotPop social-play session at their request), and "could you tell me what im testing here myself?" (answered in chat).
+
+**What the logs show** (scripts and raw data: the session's scratchpad, `rc/`):
+
+| Evidence | Value (Windows rows: client running 5:27:47 to 5:48:09, character select included; the rest: logged in 5:32:44 to 5:48:08) |
+|---|---|
+| Windows says the client is responding | 602 of 602 samples (every 2 s); never "not responding" |
+| Client CPU, percent of one core | median 20, max 89 |
+| Windows total CPU | median 21%, max 70% (16 Oct failure: 97%) |
+| Client memory | median 801 MB, max 830 MB |
+| WSL load average | max 2 of 12 threads (16 Oct failure: 9.7) |
+| core3 CPU, percent of one core | median 56, max 108 |
+| Zone packets, session port 61325 | traffic in 903 of 925 seconds. The client was never sending without the server answering. Silent gaps (nothing either way): 5 s at 5:45:20, while the client was not in front; 2 to 6 s each at 5:46:58, 5:47:03, 5:47:12, 5:48:03 and 5:48:06, between character select and logout. Client quiet for 4 s at 5:32:46, while the server sent the login's object data |
+| `core3.log` for the session | login 5:32:45 (`Player 281474994121128 logged in.`); `CheckupTime` changes at 5:41:03 and 5:46:54; logout 5:48:08 `Disconnecting client, hasError = false`. No error or warning for this session |
+| Rubber-band lines (`[Movement] ... bounce`, new in run 24) | none for [name removed] (`0x100000109A9A8`); the only 10 lines are five bots at 5:29:47, before login |
+| Input listener | gate open eight times (the owner switched windows often); 29 right-clicks, 71 left-clicks; **no Insert presses** |
+| Client crash dumps | none new (the newest is 16 Oct, 11:12 PM) |
+
+**Reading.** At 300 bots, with the PC at about a fifth of its CPU, the session shows no sign of the interaction loss. The client always responded, the server always answered, and the logout was clean. This fits the 16 Oct explanation (CPU starvation at 1,700 bots) but does not prove it. The session was short and covered part of the list, and the owner's own account is still to come. The per-second packet counts show that the session talked both ways. They cannot show whether a particular radial request got its particular answer: the packets are encrypted, and the counts are per second.
+
+**Next, proposed (not done).** (1) A repeat at 1,000 to 1,700 bots with the same monitors would test the starvation explanation directly, if the owner wants it. (2) The full 40-minute list (shuttle, fight, relog, idle) is still unplayed. (3) Not part of this test: `Play SWG.cmd` (live) keeps the client's login address as it is, and that address is the old WSL NAT address `172.23.208.109:44453`. Since WSL moved to mirrored networking it is `192.168.1.210`, so the live launcher probably cannot reach the live galaxy when it next runs (the test launcher writes the current address each time).

@@ -1,0 +1,12 @@
+done in 4 steps, 136 s
+I have written `report.md` with all five required sections:
+
+1. **Short answer** - Summarizes slots (single-player, weighted random 0-7), roulette (multi-player up to 4, `/bet` command on numbers/colors/odd/even/high/low), and notes sabacc is commented out.
+
+2. **How it works** - Details join conditions (distance, posture, capacity limits), slot mechanics (weights [79,22,18,16,10,7,5,4], payout schedule, auto-spin at max bet), roulette mechanics (valid targets, red numbers list, countdown timers), betting limits (slots maxBet=3 hardcoded; roulette maxBet=10000), game states, and all system messages with file:line citations.
+
+3. **What a bot test should check** - Lists setup requirements (position within 20 units, valid posture, cash credits) and observable results for both slots and roulette (SUI windows, radial menu text, betting behavior, game messages, state changes).
+
+4. **Likely reasons a test sees no effect** - Covers distance, capacity, invalid posture, already playing, insufficient cash, bet limits, and missing native implementations.
+
+5. **Open questions** - Identifies the missing `calculateOutcome` implementation (native, not in provided files), no skill modifiers found, sabacc commented out, slot maxBet=3 anomaly, unknown roulette payout multipliers, and missing GamblingSlotPayoutSuiCallback header.

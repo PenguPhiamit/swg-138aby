@@ -1,0 +1,12 @@
+done in 5 steps, 129 s
+I've written `report.md` with all five required sections:
+
+1. **Short answer** - A 6-sentence summary of lair mechanics covering spawn waves, healers, destruction, and repopulation.
+
+2. **How it works** - Detailed breakdown of conditions, skill mods, timings, and messages for each mechanic (spawn waves at damage thresholds, healer selection, boss spawning, destruction/XP distribution, creature respawn, and lair repopulation), with file:line citations throughout.
+
+3. **What a bot test should check** - Observable results to verify (creature counts, condition thresholds, system messages, states) and the setup needed (targeting a CREATURE-type lair with boss mobs).
+
+4. **Likely reasons a test sees no effect** - Eight common failure modes including wrong lair type, spawn limits reached, missed damage thresholds, and debug logging being disabled.
+
+5. **Open questions** - Seven items the provided files don't answer, including actual healing amounts, XP distribution details, and the scout creature behavior.

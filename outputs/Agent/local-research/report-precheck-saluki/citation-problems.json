@@ -1,0 +1,1316 @@
+[
+ {
+  "topic": "bank-tips",
+  "cite": "BankTerminalMenuComponent.h:143-155",
+  "claim": "Withdraw all: Available when bank credits 0. Withdraws entire bank balance to cash instantly, no fee. BankTerminalMenuComponent.h:143-155",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "crafting",
+  "cite": "managers/crafting/CraftingManager.idl:37-45",
+  "claim": "Result codes are 0 Amazing to 8 Critical failure (managers/crafting/CraftingManager.idl:37-45).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "src/server/zone/objects/creature/commands/CurePoisonCommand.h:13-16",
+  "claim": "/curePoison is the generic cure-pack command with its state fixed to POISONED (src/server/zone/objects/creature/commands/CurePoisonCommand.h:13-16).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "QueueCommand.cpp:261-279",
+  "claim": "Common medic checks run first: state mask, locomotion, prone/meditating/swimming (\"@error_message:wrong_state\"), mounted (\"@error_message:survey_on_mount\") (QueueCommand.cpp:261-279, called at CurePackCommand.h:359).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CurePackCommand.h:359",
+  "claim": "Common medic checks run first: state mask, locomotion, prone/meditating/swimming (\"@error_message:wrong_state\"), mounted (\"@error_message:survey_on_mount\") (QueueCommand.cpp:261-279, called at CurePackCommand.h:359).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CurePack.idl:50-63",
+  "claim": "The pack's state, effectiveness, medicine use and area come from its template (CurePack.idl:50-63). Crafted packs take them from the crafting values instead (CurePack.idl:33-41).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CurePack.idl:33-41",
+  "claim": "The pack's state, effectiveness, medicine use and area come from its template (CurePack.idl:50-63). Crafted packs take them from the crafting values instead (CurePack.idl:33-41).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CurePack.idl:73-91",
+  "claim": "Using the pack from its radial menu checks healing_ability (\"@error_message:insufficient_skill\") and then sends the command with the pack's object ID (CurePack.idl:73-91).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CurePackCommand.h:27",
+  "claim": "Range: 7 m (CurePackCommand.h:27). The distance between world positions, minus both template radii, must be at most 7 (QueueCommand.h:126-128). Out of range returns TOOFAR (CurePackCommand.h:394-395).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "QueueCommand.h:126-128",
+  "claim": "Range: 7 m (CurePackCommand.h:27). The distance between world positions, minus both template radii, must be at most 7 (QueueCommand.h:126-128). Out of range returns TOOFAR (CurePackCommand.h:394-395).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CurePackCommand.h:394-395",
+  "claim": "Range: 7 m (CurePackCommand.h:27). The distance between world positions, minus both template radii, must be at most 7 (QueueCommand.h:126-128). Out of range returns TOOFAR (CurePackCommand.h:394-395).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CurePackCommand.h:268-355",
+  "claim": "Checks in canPerformSkill, in order, with the healer's message (CurePackCommand.h:268-355)",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CreatureObject.idl:2176-2178",
+  "claim": "1. Patient not poisoned: \"@healing_response:healing_response_82\" when curing yourself, \"@healing_response:healing_response_84\" for a player patient, or plain \"<name is not poisoned.\" (270-284). isPoisoned() tests the state bit (CreatureObject.idl:2176-2178).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CreatureObject.idl:1359-1361",
+  "claim": "2. Cooldown running: \"@healing_response:healing_must_wait\" (320-323). This checks the pending task \"conditionTreatment\" (CreatureObject.idl:1359-1361).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "QueueCommand.cpp:75-104",
+  "claim": "8. playerEntryCheck fails: no message (350-352). No message appears in QueueCommand.cpp:75-104.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CurePackCommand.h:402-431",
+  "claim": "On success (CurePackCommand.h:402-431)",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CurePack.idl:126-129",
+  "claim": "Power = (100 + healing_wound_treatment) / 100 effectiveness (CurePack.idl:126-129). healDot(POISONED, power) is applied (CurePackCommand.h:404, CreatureObject.idl:834-836).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CurePackCommand.h:404",
+  "claim": "Power = (100 + healing_wound_treatment) / 100 effectiveness (CurePack.idl:126-129). healDot(POISONED, power) is applied (CurePackCommand.h:404, CreatureObject.idl:834-836).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CreatureObject.idl:834-836",
+  "claim": "Power = (100 + healing_wound_treatment) / 100 effectiveness (CurePack.idl:126-129). healDot(POISONED, power) is applied (CurePackCommand.h:404, CreatureObject.idl:834-836).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "DamageOverTimeList.cpp:255-256",
+  "claim": "It returns at once if the patient has no DoT entries (DamageOverTimeList.cpp:255-256).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "DamageOverTimeList.cpp:260-291",
+  "claim": "Otherwise it subtracts the power from each active poison DoT's strength (DamageOverTimeList.cpp:260-291). When the power exceeds a DoT's strength, that DoT expires (DamageOverTime.cpp:503-517).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "DamageOverTime.cpp:503-517",
+  "claim": "Otherwise it subtracts the power from each active poison DoT's strength (DamageOverTimeList.cpp:260-291). When the power exceeds a DoT's strength, that DoT expires (DamageOverTime.cpp:503-517).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "DamageOverTimeList.cpp:293-300",
+  "claim": "If the power covered every poison DoT, the POISONED state is cleared (DamageOverTimeList.cpp:293-300). If not, the patient stays poisoned and gets \"@dot_message:decrease_poisoned\" (303-304, 466-467).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CurePackCommand.h:124-143",
+  "claim": "Cooldown: \"conditionTreatment\" task of round(20 - healing_injury_speed/5) s. The food buff heal_recovery shortens it, and it is never under 4 s. When it ends the healer gets healing_response_58 (CurePackCommand.h:124-143).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "DamageOverTime.cpp:155-157, 202-204",
+  "claim": "A poison DoT ticks every 10 s, the first tick 10 s after it is applied (DamageOverTime.cpp:155-157, 202-204). Victim absorption from absorption_poison is capped at 50 (203).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "DamageOverTimeList.cpp:124-126",
+  "claim": "Poison applied with potency above 0 is resisted on a roll; potency below 0 cannot be resisted (DamageOverTimeList.cpp:124-126).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "QueueCommand.cpp:160-163, 188-191",
+  "claim": "Failure codes: TOOFAR and INVALIDTARGET only clear the queue action with an error code and send no chat text (QueueCommand.cpp:160-163, 188-191).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "src/server/zone/objects/creature/commands/AgentGearCommand.h:183-185",
+  "claim": "/agentgear afflict poison on the partner adds a POISONED DoT: strength 30, HEALTH pool, 120 s, potency -1, which bypasses the roll (src/server/zone/objects/creature/commands/AgentGearCommand.h:183-185). The target must be a player on an agent account (142-152).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "AgentGearCommand.h:102",
+  "claim": "Confirm the tester has a cure pack as a direct child of the inventory. The gear kit lists \"object/tangible/medicine/crafted/medpack_cure_poison_a.iff\" (AgentGearCommand.h:102).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "CurePack.idl:112-114",
+  "claim": "Confirm the tester's healing_ability is at least the pack's medicine use. You can read that on the pack as the healing_ability attribute (CurePack.idl:112-114).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "src/client/agent/AgentControl.cpp:704-725",
+  "claim": "The bot sees string-table messages as \"@file:key\" (src/client/agent/AgentControl.cpp:704-725). Treat any of the failure keys above as BLOCKED with that reason, not NO_EFFECT.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "DamageOverTimeList.cpp:255-256",
+  "claim": "5. The partner has the POISONED bit but no DoT entry. healState then returns early and the state stays (DamageOverTimeList.cpp:255-256). The tester still gets the \"You apply\" text, so this would look like a partial success, not NO_EFFECT.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "DamageOverTimeList.cpp:414-436",
+  "claim": "I did not check whether clearState(POISONED) after a full cure sends \"@dot_message:stop_poisoned\" to the patient. sendStopMessage exists (DamageOverTimeList.cpp:414-436), but I did not find its caller.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "AgentGearCommand.h:95-110",
+  "claim": "I did not check which gear-kit name hands out the cure pack, or what happens to it when the inventory is full (AgentGearCommand.h:95-110 not fully read).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "cure-poison",
+  "cite": "QueueCommand.cpp:104",
+  "claim": "I did not read the rest of playerEntryCheck (QueueCommand.cpp:104 onward).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "doctor-enhance-wounds",
+  "cite": "CellObjectImplementation.cpp:208-217",
+  "claim": "The server never checks a room, cell or \"treatment anchor\". Entering any cell of a building whose template lists the mod gives it to the doctor (CellObjectImplementation.cpp:208-217, BO:910-919, StructureObjectImplementation.cpp:711-728).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "doctor-enhance-wounds",
+  "cite": "StructureObjectImplementation.cpp:711-728",
+  "claim": "The server never checks a room, cell or \"treatment anchor\". Entering any cell of a building whose template lists the mod gives it to the doctor (CellObjectImplementation.cpp:208-217, BO:910-919, StructureObjectImplementation.cpp:711-728).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "doctor-enhance-wounds",
+  "cite": "bin/scripts/object/building/tatooine/hospital_tatooine.lua:45",
+  "claim": "Entering any cell of a building whose template lists the mod gives it to the doctor (CellObjectImplementation.cpp:208-217, BO:910-919, StructureObjectImplementation.cpp:711-728). The Tatooine hospital template gives 100 (bin/scripts/object/building/tatooine/hospital_tatooine.lua:45).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "doctor-enhance-wounds",
+  "cite": "CampSiteActiveAreaImplementation.cpp:77",
+  "claim": "The Tatooine hospital template gives 100 (bin/scripts/object/building/tatooine/hospital_tatooine.lua:45). A camp (CampSiteActiveAreaImplementation.cpp:77) or a medical droid module (DroidMedicalModuleDataComponent.cpp:98) also gives it.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "doctor-enhance-wounds",
+  "cite": "DroidMedicalModuleDataComponent.cpp:98",
+  "claim": "The Tatooine hospital template gives 100 (bin/scripts/object/building/tatooine/hospital_tatooine.lua:45). A camp (CampSiteActiveAreaImplementation.cpp:77) or a medical droid module (DroidMedicalModuleDataComponent.cpp:98) also gives it.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "doctor-enhance-wounds",
+  "cite": "src/server/zone/ZoneServerImplementation.cpp:755",
+  "claim": "If the rating is above 0 but the doctor's top-level container is a client object, the part from the structure must also be above 0, or the doctor sees must_be_in_hospital (HE:97-104, HW:119-127). Client objects are made by createClientObject (src/server/zone/ZoneServerImplementation.cpp:755).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "doctor-enhance-wounds",
+  "cite": "src/server/zone/objects/region/CityRegionImplementation.cpp:908",
+  "claim": "Building mods are added on entry and removed on exit (BO:919, BO:1046). City mods are SkillModManager::CITY (src/server/zone/objects/region/CityRegionImplementation.cpp:908) and do not count.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "doctor-enhance-wounds",
+  "cite": "src/server/zone/objects/creature/CreatureObject.idl:1354-1356",
+  "claim": "Cooldown. delay = round(20 − 0.08 × healing_wound_speed) s. A heal_recovery food buff reduces it by its percent, and the minimum is 3 s (HE:28-44, HW:28-44). Both commands use the pending task \"woundTreatment\" (src/server/zone/objects/creature/CreatureObject.idl:1354-1356). When the task ends the doctor sees healing_response_59.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "doctor-enhance-wounds",
+  "cite": "src/server/zone/managers/objectcontroller/command/CommandConfigManager2.cpp:750",
+  "claim": "The doctor has the healenhance command (registered at src/server/zone/managers/objectcontroller/command/CommandConfigManager2.cpp:750).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "doctor-enhance-wounds",
+  "cite": "BuildingObject.idl:75",
+  "claim": "Is the static Tatooine hospital built through createClientObject (client object) or as a normal BuildingObject? (BuildingObject.idl:75 sets the flag false.) Does a client building also run onEnter? Not traced.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "doctor-enhance-wounds",
+  "cite": "hospital_tatooine.lua:46-47",
+  "claim": "What do private_med_wound_health and private_med_wound_action do (hospital_tatooine.lua:46-47)? What ratings do camps give?",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "src/server/zone/managers/combat/CombatManager.cpp:1692-1694",
+  "claim": "Pools and messages. Index order inferred from code: 0 health, 1 strength, 2 constitution, 3 action, 4 quickness, 5 stamina, 6 mind, 7 focus, 8 willpower. \"i % 3 == 0\" marks a primary (PMI:5088, COI:1214), and a combat wound hits pool, pool+1 and pool+2 (src/server/zone/managers/combat/CombatManager.cpp:1692-1694). The client is sent:",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "src/server/zone/managers/player/creation/PlayerCreationManager.cpp:56-98",
+  "claim": "Base values. Species ranges come from client data tables datatables/creation/attribute_limits.iff and racial_mods.iff (src/server/zone/managers/player/creation/PlayerCreationManager.cpp:56-98). The numbers are not in the source tree.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "src/server/zone/objects/player/PlayerObjectImplementation.cpp:2407",
+  "claim": "Regeneration. PlayerObject's update calls activateHAMRegeneration(latency) (src/server/zone/objects/player/PlayerObjectImplementation.cpp:2407). The rules (COI:3198-3233):",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "PlayerObjectImplementation.cpp:2322-2335",
+  "claim": "Incapacitation and death. Each incapacitation is logged, and the counter is the number of incapacitations in the last 600 s (PlayerObjectImplementation.cpp:2322-2335; src/server/zone/objects/player/PlayerObject.idl:1198-1199).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "src/server/zone/objects/player/PlayerObject.idl:1198-1199",
+  "claim": "Incapacitation and death. Each incapacitation is logged, and the counter is the number of incapacitations in the last 600 s (PlayerObjectImplementation.cpp:2322-2335; src/server/zone/objects/player/PlayerObject.idl:1198-1199).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "src/server/zone/objects/player/events/PlayerIncapacitationRecoverTask.h:58-75",
+  "claim": "On recovery, any primary below 0 is set to 1 and the player stands up (src/server/zone/objects/player/events/PlayerIncapacitationRecoverTask.h:58-75).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "src/server/zone/objects/creature/CreatureObject.idl:606",
+  "claim": "addWounds sends the \"wounded\" combat-spam message and by default adds 1 shock (COI:1432-1439; src/server/zone/objects/creature/CreatureObject.idl:606).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "CombatManager.cpp:1688-1694",
+  "claim": "In combat, the weapon's wounds ratio is the % chance to wound. A hit wounds one primary and its two secondaries by 1 each (CombatManager.cpp:1688-1694), which is 3 shock in total (inferred).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "src/server/zone/objects/creature/commands/TendCommand.h:213",
+  "claim": "It is used by tend (src/server/zone/objects/creature/commands/TendCommand.h:213), heal mind (HealMindCommand.h:156) and enhance buff power (HealEnhanceCommand.h:209).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "HealMindCommand.h:156",
+  "claim": "It is used by tend (src/server/zone/objects/creature/commands/TendCommand.h:213), heal mind (HealMindCommand.h:156) and enhance buff power (HealEnhanceCommand.h:209).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "HealEnhanceCommand.h:209",
+  "claim": "It is used by tend (src/server/zone/objects/creature/commands/TendCommand.h:213), heal mind (HealMindCommand.h:156) and enhance buff power (HealEnhanceCommand.h:209).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "src/server/zone/objects/tangible/wearables/ArmorObjectImplementation.cpp:262-264",
+  "claim": "removeEncumbrancies reverses this (PMI:2460-2503). Armor examine shows cat_armor_encumbrance. (src/server/zone/objects/tangible/wearables/ArmorObjectImplementation.cpp:262-264). Lower constitution, stamina or willpower means slower regen (inferred from the regen formula).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "src/server/zone/objects/creature/buffs/BuffImplementation.cpp:274-317",
+  "claim": "Applying a buff with attribute modifiers: max += value (minimum 1). The buff stores the amount actually applied. Current is held to new max minus wounds. Then the pool is filled, or healed by the value if the value is positive (src/server/zone/objects/creature/buffs/BuffImplementation.cpp:274-317).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "BuffImplementation.cpp:383-397",
+  "claim": "Removing it: max -= value. A primary is damaged down to the new max only if current = new max (BuffImplementation.cpp:383-397).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "src/server/zone/objects/creature/buffs/PowerBoostBuffImplementation.cpp:89-121",
+  "claim": "Power Boost changes max HAM on every tick (src/server/zone/objects/creature/buffs/PowerBoostBuffImplementation.cpp:89-121).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "BuffImplementation.cpp:391-397",
+  "claim": "Buff removal compares current against the new max, not max minus wounds. A wounded player can therefore keep current above the usable cap (BuffImplementation.cpp:391-397).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "PlayerIncapacitationRecoverTask.h:68-71",
+  "claim": "Negative current mind (or health/action). inflictDamage with destroy=true lets primaries go below 0 (COI:1208-1215). Regen stops while incapacitated (COI:3199), so the negative value stays until the recovery task sets it to 1 (PlayerIncapacitationRecoverTask.h:68-71).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "PowerBoostBuffImplementation.cpp:89-121",
+  "claim": "Max differs from the bot's expected value. Power Boost ticks change it (PowerBoostBuffImplementation.cpp:89-121). fixHAM can rewrite max at load (PMI:5096-5100). Encumbrance lowers secondary max, not primary max.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "ham",
+  "cite": "CombatManager.cpp:1692-1694",
+  "claim": "Shock jumps by 3 on one combat wound (CombatManager.cpp:1692-1694, inferred).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:6",
+  "claim": "Players can hire up to three mercenaries from a broker NPC named Dax Venn near the Mos Eisley starport on Tatooine (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:6).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:10",
+  "claim": "Players can hire up to three mercenaries from a broker NPC named Dax Venn near the Mos Eisley starport on Tatooine (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:6). The first contract is free; each mercenary costs nothing (src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:10).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:82-85, 104-125",
+  "claim": "The first contract is free; each mercenary costs nothing (src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:10). Hired mercenaries follow the player as escorts and automatically join any combat the player enters (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:82-85, 104-125).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:128-157",
+  "claim": "Hired mercenaries follow the player as escorts and automatically join any combat the player enters (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:82-85, 104-125). They stay for up to 30 seconds after the player logs out or moves more than 120 meters away, at which point they are destroyed (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:128-157).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:14",
+  "claim": "Players can dismiss all mercenaries via conversation option \"Dismiss my mercenaries.\" (src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:14), or the system auto-dismisses them under certain conditions.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:13-31",
+  "claim": "The broker NPC \"Dax Venn (a mercenary broker)\" spawns automatically when the SandboxMercenaries screenplay starts on Tatooine (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:13-31).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:5",
+  "claim": "The maximum number of mercenaries per player is 3 (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:5).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:12-16",
+  "claim": "The broker conversation offers three options on the initial screen (src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:12-16):",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:13",
+  "claim": "\"Hire a mercenary.\" → triggers screen \"hired\" (src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:13)",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:14",
+  "claim": "\"Dismiss my mercenaries.\" → triggers screen \"dismissed\" (src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:14)",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:15",
+  "claim": "\"Not today.\" → ends conversation (src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:15)",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:178-181",
+  "claim": "1. The handler checks if the player already has 3 mercenaries; if so, it returns dialog: \"You've already got three of my people. Dismiss some first if you want fresh blades.\" (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:178-181)",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:69-73",
+  "claim": "2. If under the limit, a new mercenary is spawned near the player's current position using spawnMobile(planet, \"sandbox_mercenary\", ...) (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:69-73).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:80-83",
+  "claim": "3. The mercenary receives AI flags: AI_NOAIAGGRO, AI_ESCORT, and AI_FOLLOW (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:80-83).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:84-85",
+  "claim": "4. It is set to follow the player with movement state AI_FOLLOWING (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:84-85).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:88-89",
+  "claim": "5. The mercenary's object ID is saved to player string data under key sandboxMercenaries (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:88-89).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:94-98",
+  "claim": "6. If this is the first mercenary for this player, a combat observer (DEFENDERADDED) and an upkeep timer (30-second interval) are created per player (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:94-98).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/sandbox/sandbox_mercenaries.lua:3-47",
+  "claim": "Each sandbox_mercenary has (src/bin/scripts/mobile/sandbox/sandbox_mercenaries.lua:3-47):",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:104-125",
+  "claim": "When the player enters combat with a target, every idle mercenary joins the fight by calling engageCombat(pTarget) on each alive mercenary not already in combat (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:104-125).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:7, 97",
+  "claim": "An upkeep event runs every 30 seconds (checkInterval = 30 1000 milliseconds) per player (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:7, 97):",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:135",
+  "claim": "Checks if the player is online (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:135).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:142",
+  "claim": "Checks if the mercenary is on the same planet as the player (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:142).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:8, 143",
+  "claim": "Checks if the mercenary is within 120 meters of the player (maxDistance = 120) (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:8, 143).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:146",
+  "claim": "Mercenaries failing any check are destroyed via destroyObjectFromWorld() (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:146).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:155",
+  "claim": "If no mercenaries remain, the combat observer is removed (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:155).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:159-169",
+  "claim": "Manual dismissal via conversation screen \"dismissed\" calls dismissAll(pPlayer) which destroys all alive mercenaries and clears saved IDs (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:159-169, src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:30).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:30",
+  "claim": "Manual dismissal via conversation screen \"dismissed\" calls dismissAll(pPlayer) which destroys all alive mercenaries and clears saved IDs (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:159-169, src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:30).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:10",
+  "claim": "Initial greeting: \"Need someone to watch your back out there? My crews follow you and fight whoever you fight. On this galaxy the first contract is on the house.\" (src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:10)",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:22",
+  "claim": "After hiring: \"Done. They'll stick to you like a mynock. Come back if you want more, up to three at a time.\" (src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:22)",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:30",
+  "claim": "After dismissal: \"Contracts closed. They'll head back to the cantina.\" (src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:30)",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:180",
+  "claim": "If at max capacity: \"You've already got three of my people. Dismiss some first if you want fresh blades.\" (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:180)",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:38",
+  "claim": "Declining: \"Suit yourself. Tatooine isn't kind to loners.\" (src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:38)",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:6",
+  "claim": "1. Position the bot character near the broker at coordinates tatooine x=3552.0, y=-4782.0 (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:6).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:29",
+  "claim": "2. Initiate conversation with the NPC named \"Dax Venn (a mercenary broker)\" (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:29).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:10, 22",
+  "claim": "System/dialog messages: Confirm the initial greeting appears, and after selecting \"Hire a mercenary,\" the confirmation message appears (src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:10, 22).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:70-72",
+  "claim": "Mercenary spawn: Verify a new creature object of type \"sandbox_mercenary\" spawns near the player within ~3 meters (random offset -3 to +3 on x and y) at the player's current floor height (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:70-72).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:81-85",
+  "claim": "Mercenary state: The spawned mercenary should have AI flags AI_ESCORT and AI_FOLLOW, and its follow target should be set to the player (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:81-85).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:119-121",
+  "claim": "Combat behavior: When the bot enters combat, verify all alive mercenaries call engageCombat() on the same target (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:119-121).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:159-169",
+  "claim": "Dismissal: After selecting \"Dismiss my mercenaries,\" verify all mercenary objects are destroyed and no mercenary IDs remain in player data (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:159-169).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:178-181",
+  "claim": "Max limit: Attempting to hire a fourth mercenary should produce the \"already got three\" message instead of spawning a new one (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:178-181).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:6",
+  "claim": "The bot is not on Tatooine or not near the broker's spawn location (x=3552.0, y=-4782.0) (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:6).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:13-31",
+  "claim": "The SandboxMercenaries screenplay has not started on this server instance, so the broker NPC was never spawned (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:13-31).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:14-16",
+  "claim": "The zone is disabled (isZoneEnabled returns false), preventing the broker from spawning (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:14-16).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:65-67",
+  "claim": "The bot already has 3 mercenaries saved in its string data, so new hires are rejected (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:65-67).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:128-157",
+  "claim": "The upkeep timer destroyed the mercenaries because the player logged out or moved beyond 120 meters (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:128-157).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:10",
+  "claim": "Cost: The initial greeting mentions \"the first contract is on the house\" (src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua:10), but no code in these files implements any payment, credit deduction, or cost check. It is unclear if subsequent contracts have a cost that is not implemented yet, or if all mercenary hires are free.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:142-143",
+  "claim": "Mercenary duration/expiration: There is no explicit time limit on how long a hired mercenary stays active while the player remains online and nearby. They only persist as long as they stay within 120 meters of an online player (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:142-143).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:50",
+  "claim": "Mercenary death: If a mercenary dies in combat, it is removed from the alive list (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:50), but there is no code to spawn a replacement or refund. It is unclear if the player can hire another to replace a dead one immediately.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:41, 59",
+  "claim": "Player data storage: The mercenary IDs are stored in player string data via readStringData/writeStringData (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:41, 59), but it is not clear if this data persists across server restarts or character relogins.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "mercenaries",
+  "cite": "src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:86",
+  "claim": "AI template: The code calls AiAgent(pMerc):setAITemplate() with no arguments (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:86). It is unclear what AI template is applied by default and whether this function requires a parameter.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:21-32",
+  "claim": "Lua conversations delegate getNextConversationScreen and runScreenHandlers to DirectorManager.instance() (src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:21-32).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/managers/conversation/ConversationManager.cpp:36-55",
+  "claim": "ConversationManager::getConversationObserver creates observers based on template type: Normal, DeliverMission, InformantMission, Lua, or Personality (src/src/server/zone/managers/conversation/ConversationManager.cpp:36-55).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:21-32",
+  "claim": "Lua conversations use LuaConversationObserver, which delegates screen logic to DirectorManager (src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:21-32).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/managers/conversation/ConversationManager.cpp:30",
+  "claim": "The NPC must have a valid conversation template registered in CreatureTemplateManager with the correct CRC (src/src/server/zone/managers/conversation/ConversationManager.cpp:30, src/server/zone/objects/creature/conversation/ConversationObserverImplementation.cpp:252-254).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:24, 31",
+  "claim": "For Lua conversations, the DirectorManager must have the appropriate Lua class handler and screen scripts loaded (src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:24, 31).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/managers/conversation/ConversationManager.cpp:32-34",
+  "claim": "Missing conversation template: If CreatureTemplateManager::instance()-getConversationTemplate(conversationTemplateCRC) returns nullptr, getConversationObserver returns null and no observer is created (src/src/server/zone/managers/conversation/ConversationManager.cpp:32-34).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/managers/conversation/ConversationManager.cpp:25-26",
+  "claim": "DEBUG_MODE enabled: If CreatureTemplateManager::DEBUG_MODE is true, getConversationObserver returns nullptr instead of creating an observer (src/src/server/zone/managers/conversation/ConversationManager.cpp:25-26).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "npc-conversations",
+  "cite": "src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:24, 31",
+  "claim": "How are Lua scripts loaded and associated with templates? LuaConversationObserver.idl delegates to DirectorManager.instance() (src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:24, 31), but the DirectorManager source is not included in the listed files.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "src/server/zone/managers/city/CityManagerImplementation.cpp:2320",
+  "claim": "src/server/zone/managers/city/CityManagerImplementation.cpp:2320 has a TODO, but it is about mail only and does not block anything.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "src/server/zone/objects/player/sessions/ImageDesignSessionImplementation.cpp:435",
+  "claim": "src/server/zone/objects/player/sessions/ImageDesignSessionImplementation.cpp:435 has the note \"TODO: Needs research.\"",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "src/server/zone/managers/vendor/VendorManager.cpp:583",
+  "claim": "CreateVendorCommand.h exists (68 lines). The only TODO in src/server/zone/managers/vendor/VendorManager.cpp:583 is about random hair, which is cosmetic.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "CustomizeVehicleCommand.h:16-25",
+  "claim": "customizeVehicle is a template stub, with the note \"treat as unimplemented\" (matrix.md:96; CustomizeVehicleCommand.h:16-25).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "SurveyToolImplementation.cpp:45",
+  "claim": "survey is also a stub, but it is not a real gap: the real gate is the survey tool (matrix.md:97; SurveyToolImplementation.cpp:45, cited in test-plan.md:115).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "VolleyFireAttackCommand.h:25",
+  "claim": "VolleyFireAttackCommand.h:25 has a TODO saying the 'volleyfire' skill mod \"has no effect atm\".",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "InstallShipComponentCommand.h:38",
+  "claim": "Pilots: 22 space-only commands (matrix.md:123). None has a Lua script, so defaults apply (matrix.md:120). InstallShipComponentCommand.h:38 has a TODO.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "SurpriseShotCommand.h:42",
+  "claim": "SurpriseShotCommand.h:42: the alertness check, noted as \"broken Pre-CU\" (rifleman).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "PowerBoostCommand.h:31",
+  "claim": "PowerBoostCommand.h:31: powerboost cancel.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "HealDamageCommand.h:312",
+  "claim": "HealDamageCommand.h:312: area targets.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "HealWoundCommand.h:314",
+  "claim": "HealWoundCommand.h:314: text.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "RevivePlayerCommand.h:109",
+  "claim": "RevivePlayerCommand.h:109 and RegainConsciousnessCommand.h:39, :48: end messages.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "RegainConsciousnessCommand.h:39",
+  "claim": "RevivePlayerCommand.h:109 and RegainConsciousnessCommand.h:39, :48: end messages.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "DeathBlowCommand.h:37",
+  "claim": "DeathBlowCommand.h:37: animations.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "ChangeMusicCommand.h:33",
+  "claim": "ChangeMusicCommand.h:33: outro check.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "TransferstructureCommand.h:166",
+  "claim": "TransferstructureCommand.h:166: a bare TODO.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "profession-gaps",
+  "cite": "ImageDesignSessionImplementation.cpp:435",
+  "claim": "What does the TODO at ImageDesignSessionImplementation.cpp:435 cover? I did not read it.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "quests",
+  "cite": "bin/scripts/mobile/custom_content/the_tutorial/tutorial_0001_han_solo.lua:27, 33",
+  "claim": "An NPC is talkable when its template sets CONVERSABLE and a conversationTemplate (bin/scripts/mobile/custom_content/the_tutorial/tutorial_0001_han_solo.lua:27, 33). The template names a Lua handler class (HC:1-6). Each screen has an id, text and options of the form {text, next screen id} (HC:8-16).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "quests",
+  "cite": "bin/scripts/screenplays/screenplays.lua:78-84",
+  "claim": "Quest journal: Lua can call getPlayerQuestID, getQuestInfo and getQuestTasks, which PlayerManager backs (DM:4360-4406, 4932-4961). Lua task helpers are in quest_tasks/ (bin/scripts/screenplays/screenplays.lua:78-84). I did not trace who uses them.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "quests",
+  "cite": "bin/scripts/screenplays/custom_screenplays/screenplays.lua:4",
+  "claim": "The script loads from bin/scripts/screenplays/custom_screenplays/screenplays.lua:4 (included at screenplays.lua:742) and starts automatically (TB:14). A second copy (\"...the_beginning-Clean and formatted.lua\") sits in the same folder but is not included.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "quests",
+  "cite": "screenplays.lua:742",
+  "claim": "The script loads from bin/scripts/screenplays/custom_screenplays/screenplays.lua:4 (included at screenplays.lua:742) and starts automatically (TB:14). A second copy (\"...the_beginning-Clean and formatted.lua\") sits in the same folder but is not included.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "bin/scripts/object/draft_schematic/weapon/pistol_blaster_dl44.lua:66-75",
+  "claim": "Where the weights come from. The draft schematic Lua lists only the slots and points to a target template (bin/scripts/object/draft_schematic/weapon/pistol_blaster_dl44.lua:66-75).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "bin/scripts/object/weapon/ranged/pistol/pistol_dl44.lua:125-133",
+  "claim": "The weights are in the target object template, in numberExperimentalProperties, experimentalProperties, experimentalWeights, group and subgroup titles, min, max, precision and combine type (bin/scripts/object/weapon/ranged/pistol/pistol_dl44.lua:125-133).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "SharedTangibleObjectTemplate.cpp:441-457",
+  "claim": "The weights are in the target object template, in numberExperimentalProperties, experimentalProperties, experimentalWeights, group and subgroup titles, min, max, precision and combine type (bin/scripts/object/weapon/ranged/pistol/pistol_dl44.lua:125-133). SharedTangibleObjectTemplate.cpp:441-457 turns them into one ResourceWeight per line.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "ResourceWeight.h:46-71",
+  "claim": "SharedTangibleObjectTemplate.cpp:441-457 turns them into one ResourceWeight per line. ResourceWeight.h:46-71 keeps each weight modulo 16 (weight 0 for \"XX\") and turns them into fractions, weight / sum of weights.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "src/server/zone/managers/crafting/CraftingManager.idl:26-35",
+  "claim": "ResourceWeight.h:46-71 keeps each weight modulo 16 (weight 0 for \"XX\") and turns them into fractions, weight / sum of weights. The attribute codes are CR=1, CD=2, DR=3, HR=4, FL=5, MA=6, PE=7, OQ=8, SR=9, UT=10 (src/server/zone/managers/crafting/CraftingManager.idl:26-35).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "src/server/zone/managers/crafting/labratories/SharedLabratory.cpp:73-142",
+  "claim": "Averaging across slots. SharedLabratory::getWeightedValue (src/server/zone/managers/crafting/labratories/SharedLabratory.cpp:73-142) works like this for one attribute:",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "ResourceSlot.h:56-57",
+  "claim": "ResourceSlot.h:56-57 refuses a second, different spawn in a slot that already has one, so you cannot mix two resources inside one slot.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "ResourceLabratory.cpp:59-101",
+  "claim": "Start value and ceiling (ResourceLabratory.cpp:59-101):",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "SharedLabratory.cpp:68-72",
+  "claim": "currentPercentage = assemblyPct(weightedSum) × assemblyModifier (96), where assemblyPct(v) = v × (0.000015v + 0.015) / 100 (SharedLabratory.cpp:68-72). That gives 0.1125 at 500 and 0.30 at 1000.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "SharedLabratory.cpp:59-66",
+  "claim": "assemblyModifier = 1.05 for amazing, otherwise 1.1 − 0.1 × result code (SharedLabratory.cpp:59-66). The codes are 0 amazing, 1 great, 2 good, 3 moderate, 4 success, 5 marginal, 6 ok, 7 barely, 8 critical (CraftingManager.idl:37-45). So great gives 1.0 and barely gives 0.4.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "CraftingManager.idl:37-45",
+  "claim": "assemblyModifier = 1.05 for amazing, otherwise 1.1 − 0.1 × result code (SharedLabratory.cpp:59-66). The codes are 0 amazing, 1 great, 2 good, 3 moderate, 4 success, 5 marginal, 6 ok, 7 barely, 8 critical (CraftingManager.idl:37-45). So great gives 1.0 and barely gives 0.4.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "craftingvalues/CraftingValues.cpp:91-95",
+  "claim": "The value is min + pct × (max − min). If max < min (lower is better, for example attack speed), it is max + (1 − pct) × (min − max) (craftingvalues/CraftingValues.cpp:91-95).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "ResourceLabratory.cpp:252-333",
+  "claim": "Components then add their own stats × slot contribution, according to the line's combine type (ResourceLabratory.cpp:252-333).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "SharedLabratory.cpp:143-208",
+  "claim": "Assembly roll (SharedLabratory.cpp:143-208):",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "CraftingManagerImplementation.cpp:43-132",
+  "claim": "Experimentation (CraftingManagerImplementation.cpp:43-132; CraftingSessionImplementation.cpp:1102-1106):",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "CraftingSessionImplementation.cpp:1102-1106",
+  "claim": "Experimentation (CraftingManagerImplementation.cpp:43-132; CraftingSessionImplementation.cpp:1102-1106):",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "CraftingManagerImplementation.cpp:53",
+  "claim": "Each line attempted gets failure = 50 + (weighted MA − 500) / 40 + expSkill/10 − 5 × points (CraftingManagerImplementation.cpp:53).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "SharedLabratory.cpp:21-58",
+  "claim": "Step per point: amazing +0.08, great +0.07, good +0.055, moderate +0.015, success +0.01, marginal 0, ok −0.04, barely −0.07, critical −0.08 (SharedLabratory.cpp:21-58).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "ResourceLabratory.cpp:127-152",
+  "claim": "The step applies to every attribute in the experimented group, each clamped to between 0 and its own maxPercentage (ResourceLabratory.cpp:127-152).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "CraftingSessionImplementation.cpp:1115-1121",
+  "claim": "A critical failure only happens when more points are spent than the player has, and that also cancels the session (CraftingSessionImplementation.cpp:1115-1121).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "pistol_blaster_dl44.lua:67-70",
+  "claim": "Slots: frame 20 metal, receiver 8 metal, grip 4 metal, then a power handler, barrel and scope as components (pistol_blaster_dl44.lua:67-70).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "pistol_dl44.lua:126-132",
+  "claim": "The mindamage line is weighted CD 1, OQ 1, so 50/50. Its range is 14 to 26, precision 0 (pistol_dl44.lua:126-132).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "src/server/zone/objects/creature/commands/ResourceCommand.h:56-60,77",
+  "claim": "/resource perfect <type creates a spawn with every applicable stat at 1000 (src/server/zone/objects/creature/commands/ResourceCommand.h:56-60,77).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resource-quality",
+  "cite": "ResourceLabratory.cpp:269",
+  "claim": "Components add their stats on top of the resource-based value (ResourceLabratory.cpp:269).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "src/server/zone/managers/resource/ResourceManagerImplementation.cpp:83-161",
+  "claim": "The loader is in src/server/zone/managers/resource/ResourceManagerImplementation.cpp:83-161. If the Lua fails it uses 10 stock zones and 2 h / 86400 / 90 / 1000 / 0 (:163-178). The spawner clamps throttling to 10-90 and the gate override to 1-1000 (resourcespawner/ResourceSpawner.cpp:127-146).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "resourcespawner/ResourceSpawner.cpp:127-146",
+  "claim": "The loader is in src/server/zone/managers/resource/ResourceManagerImplementation.cpp:83-161. If the Lua fails it uses 10 stock zones and 2 h / 86400 / 90 / 1000 / 0 (:163-178). The spawner clamps throttling to 10-90 and the gate override to 1-1000 (resourcespawner/ResourceSpawner.cpp:127-146).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawner.cpp:148-151",
+  "claim": "Shift. At start: load the DB, then shift (ResourceSpawner.cpp:148-151). The task reschedules itself every shiftInterval (ResourceManagerImplementation.cpp:186-212). A shift updates the random, fixed, native, minimum and manual pools in that order, then dumps the resources to Lua (ResourceSpawner.cpp:465-473).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceManagerImplementation.cpp:186-212",
+  "claim": "Shift. At start: load the DB, then shift (ResourceSpawner.cpp:148-151). The task reschedules itself every shiftInterval (ResourceManagerImplementation.cpp:186-212). A shift updates the random, fixed, native, minimum and manual pools in that order, then dumps the resources to Lua (ResourceSpawner.cpp:465-473).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawner.cpp:465-473",
+  "claim": "Shift. At start: load the DB, then shift (ResourceSpawner.cpp:148-151). The task reschedules itself every shiftInterval (ResourceManagerImplementation.cpp:186-212). A shift updates the random, fixed, native, minimum and manual pools in that order, then dumps the resources to Lua (ResourceSpawner.cpp:465-473).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "src/server/zone/objects/resource/ResourceSpawnImplementation.cpp:24-26",
+  "claim": "A slot is refilled when it is empty or !inShift(), where inShift means despawned now (src/server/zone/objects/resource/ResourceSpawnImplementation.cpp:24-26).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "resourcepool/MinimumPool.cpp:69-81",
+  "claim": "The minimum pool first reuses a random-pool spawn of the same type (resourcepool/MinimumPool.cpp:69-81).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "RandomPool.cpp:71",
+  "claim": "The random pool picks an included type by weighted index (RandomPool.cpp:71).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "NativePool.cpp:41-50, 77-119",
+  "claim": "Native slots are keyed <type_<zone, one per zone (NativePool.cpp:41-50, 77-119).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawner.cpp:672-681",
+  "claim": "Despawn drops the spawn from the per-zone lists but keeps it in the global name map (ResourceSpawner.cpp:672-681; resourcemap/ResourceMap.cpp:71-95).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "resourcemap/ResourceMap.cpp:71-95",
+  "claim": "Despawn drops the spawn from the per-zone lists but keeps it in the global name map (ResourceSpawner.cpp:672-681; resourcemap/ResourceMap.cpp:71-95).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "MinimumPool.cpp:99-100",
+  "claim": "Each pool logs \"<Pool updating: Spawned X Despawned Y\" (e.g. MinimumPool.cpp:99-100).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawner.cpp:578-654",
+  "claim": "Creating a spawn (ResourceSpawner.cpp:578-654):",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawnImplementation.cpp:160-189",
+  "claim": "Planet count: random(maxpool-minpool)+minpool, capped at the active zone count; a zone-restricted type gets only its own zone (ResourceSpawnImplementation.cpp:160-189).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawner.cpp:107-116",
+  "claim": "Pool sizes are scaled: (poolzones+5)/10, clamped to 1..zones (ResourceSpawner.cpp:107-116).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawner.cpp:213-263, 297-301",
+  "claim": "Backfill. On start, for zones listed in backfillZones, each in-shift unrestricted spawn is added to that zone when hash(name:zone)%1000 zones < baseMaps1000. It is skipped if already on the zone or at max pool. The roll is the same on every restart. Log: \"Resource backfill: zone ...\" (ResourceSpawner.cpp:213-263, 297-301).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawnImplementation.cpp:144-158",
+  "claim": "Density class: HIGH for JTL, chemical and gas_inert; LOW for ore, water, solar and wind; MEDIUM for everything else (ResourceSpawnImplementation.cpp:144-158).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "src/server/zone/objects/resource/SpawnDensityMap.h:128-148",
+  "claim": "Peak density: HIGH 0.90-0.99, MEDIUM 0.75-0.95, LOW 0.50-0.75 (src/server/zone/objects/resource/SpawnDensityMap.h:128-148).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawnImplementation.cpp:191-201",
+  "claim": "Density at a point = max(0, simplex(xm, ym, seedm)) density, measured from the zone's min X / max Y (:106-115). It reads 0 off-planet or after expiry (ResourceSpawnImplementation.cpp:191-201).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceManagerImplementation.cpp:314-339",
+  "claim": "Power from the player's inventory = sum of qty max(1, PE/500) over energy and radioactive stacks (ResourceManagerImplementation.cpp:314-339).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "src/server/zone/objects/resource/ResourceContainer.idl:20",
+  "claim": "Containers. MAXSIZE is 999999 (src/server/zone/objects/resource/ResourceContainer.idl:20).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceContainerImplementation.cpp:12-25",
+  "claim": "Examine shows resource_contents as qty/999999 (ResourceContainerImplementation.cpp:12-25).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawner.cpp:1171-1233",
+  "claim": "Sampled units go onto an existing stack of the same spawn name; anything past 999999 goes into a new container. A full inventory gives \"no_inv_space\" (ResourceSpawner.cpp:1171-1233).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "resourcespawner/resourcetree/ResourceTree.cpp:32",
+  "claim": "Per-planet lists. The tree is read from datatables/resource/resource_tree.iff (resourcespawner/resourcetree/ResourceTree.cpp:32). The Lua comments say the Hoth (52) and Ossus (45) native types live in the merged tree inside local_planets.tre, and that the _hoth/_ossus substring is the zone restriction (resource_manager.lua:47-50, 127-149).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "resource_manager.lua:47-50, 127-149",
+  "claim": "Per-planet lists. The tree is read from datatables/resource/resource_tree.iff (resourcespawner/resourcetree/ResourceTree.cpp:32). The Lua comments say the Hoth (52) and Ossus (45) native types live in the merged tree inside local_planets.tre, and that the _hoth/_ossus substring is the zone restriction (resource_manager.lua:47-50, 127-149).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawner.cpp:309-311",
+  "claim": "Spawned: the server log shows \"Resource Map Built with N resources\" (ResourceSpawner.cpp:309-311) and the pool lines with Spawned 0. On the planet, a survey tool's resource list shows only in-shift spawns of that tool's type (:858-895). For Hoth/Ossus, expect one _hoth / _ossus spawn per minimum-pool entry. Setup: tre archive in place, zone in activeZones.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceManagerImplementation.cpp:461-474",
+  "claim": "Shifted: set averageShiftTime low, or call the despawn path (ResourceManagerImplementation.cpp:461-474, which sets despawned to now-1 and shifts). Then check that the old name is gone from the zone list and the same pool slot has a new name. The old name should still resolve globally.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawner.cpp:588",
+  "claim": "The merged resource_tree.iff is missing, so the log shows \"Resource type not found\" (ResourceSpawner.cpp:588) and \"Couldn't spawn resource type in ...\".",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawnImplementation.cpp:221-224",
+  "claim": "extractResource only counts units and never depletes the spawn (ResourceSpawnImplementation.cpp:221-224), so \"depletion\" cannot be observed.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceManagerImplementation.cpp:52-81",
+  "claim": "Changing posture cancels sampling (ResourceManagerImplementation.cpp:52-81).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourcePool.h:104-105",
+  "claim": "ResourcePool.h:104-105 reads includes.getStringAt(1) and not the inner table; whether that reads each entry correctly depends on LuaObject, which was not checked.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "resources",
+  "cite": "ResourceSpawner.cpp:377",
+  "claim": "The script-loaded spawns from resource_manager_spawns.lua are created already expired (ResourceSpawner.cpp:377); their purpose was not confirmed.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "secure-trade",
+  "cite": "src/src/server/zone/packets/trade/BeginTradeMessage.h:8-15",
+  "claim": "In Core3, a trade is initiated by one player sending a BeginTradeMessage containing the target player's ID to start the session (src/src/server/zone/packets/trade/BeginTradeMessage.h:8-15).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "survey-sample",
+  "cite": "src/server/zone/objects/tangible/tool/SurveyTool.idl:26-35",
+  "claim": "Tool types are SOLAR 1, CHEMICAL 2, FLORA 3, GAS 4, GEOTHERMAL 5, MINERAL 6, WATER 7, WIND 8, FUSION 9 and INORGANIC 10 (src/server/zone/objects/tangible/tool/SurveyTool.idl:26-35).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "survey-sample",
+  "cite": "survey_tool_inorganic.lua:46",
+  "claim": "Templates: mineral 6, liquid 2 (surveyType \"chemical\"), moisture 7 (\"water\"), gas 4, wind 8, solar 1, lumber 3 (\"flora_resources\") (TL survey_tool_.lua:73-76). Inorganic is 10 and organic is 0 (TL survey_tool_inorganic.lua:46, survey_tool_organic.lua:46).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "survey-sample",
+  "cite": "survey_tool_organic.lua:46",
+  "claim": "Templates: mineral 6, liquid 2 (surveyType \"chemical\"), moisture 7 (\"water\"), gas 4, wind 8, solar 1, lumber 3 (\"flora_resources\") (TL survey_tool_.lua:73-76). Inorganic is 10 and organic is 0 (TL survey_tool_inorganic.lua:46, survey_tool_organic.lua:46).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "survey-sample",
+  "cite": "SurveyTool.idl:15",
+  "claim": "Range options by \"surveying\" mod: 20 gives 64m x3, 35 gives 128m x4, 55 gives 192m x4, 75 gives 256m x5, 100 gives 320m x5, 120 gives 384m x5 (ST:97-113). The range is capped to the skill (ST:121-130). Grid points are 3, 4 or 5 (ST:150-161). Range is a member of each tool (SurveyTool.idl:15), so each new tool asks once (inferred).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "survey-sample",
+  "cite": "SurveyTask.h:37",
+  "claim": "The grid is points x points, spaced range/(points-1) and centred on the player (RSp:934-960). The player sees survey:start_survey %TO (RSp:985-987), and the results are sent 3 s later (SS:367-368, SurveyTask.h:37).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "survey-sample",
+  "cite": "SurveyTask.h:39-43",
+  "claim": "The player sees survey:start_survey %TO (RSp:985-987), and the results are sent 3 s later (SS:367-368, SurveyTask.h:37). If the best density is at least 0.1, the player gets a blue \"Resource Survey\" waypoint and @survey:survey_waypoint (RSp:964-982, SurveyTask.h:39-43).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "survey-sample",
+  "cite": "SampleTask.h:34-40",
+  "claim": "Each sample costs the action and reads the density at the player (RSp:1011-1027). The result comes 3 s later (SS:392-394), and the next sample 25 s later (SS:381-382) through SampleTask and reSample (SampleTask.h:34-40, SurveySession.idl:59-61). Asking for another sample early gives survey:tool_recharge_time %DI (RCS:39-56). Asking while a survey is pending gives sample_survey (RCS:60-64).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "survey-sample",
+  "cite": "SurveySession.idl:59-61",
+  "claim": "Each sample costs the action and reads the density at the player (RSp:1011-1027). The result comes 3 s later (SS:392-394), and the next sample 25 s later (SS:381-382) through SampleTask and reSample (SampleTask.h:34-40, SurveySession.idl:59-61). Asking for another sample early gives survey:tool_recharge_time %DI (RCS:39-56). Asking while a survey is pending gives sample_survey (RCS:60-64).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "survey-sample",
+  "cite": "survey_tool_organic.lua:46",
+  "claim": "Organic: toolType = 0 (TL survey_tool_organic.lua:46) matches no class (RT:169-201, RSp:882), so its list is always []. This is a template bug. Flora needs survey_tool_lumber instead.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "survey-sample",
+  "cite": "survey_tool_liquid.lua:73-76",
+  "claim": "Labels: besh-gather.py:145 \"liquid\" is the chemical tool (TL survey_tool_liquid.lua:73-76), not water.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "survey-sample",
+  "cite": "SurveySession.idl:98-101",
+  "claim": "getRichSampleLocation returns a member (SurveySession.idl:98-101). If it is never null, the sample_failed branch (RSp:1086) never runs (inferred).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "survey-sample",
+  "cite": "src/server/zone/managers/resource/ResourceManagerImplementation.cpp:242",
+  "claim": "The POSTURECHANGED handler registered at src/server/zone/managers/resource/ResourceManagerImplementation.cpp:242 was not read, so exactly how standing cancels sampling is unknown.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "travel-shuttles",
+  "cite": "src/server/zone/objects/tangible/terminal/travel/TravelTerminalImplementation.cpp:13-28",
+  "claim": "Terminal option 20 sends EnterTicketPurchaseModeMessage. If the terminal has no travel point, there is only a server error log (TT = src/server/zone/objects/tangible/terminal/travel/TravelTerminalImplementation.cpp:13-28).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "travel-shuttles",
+  "cite": "TicketCollectorImplementation.cpp:42-43",
+  "claim": "The collector's option 20 runs boardShuttle with no ticket (TicketCollectorImplementation.cpp:42-43). A ticket's own option 20 and the selection list pass that ticket instead (TicketObjectImplementation.cpp:20-27, TicketSelectionSuiCallback.h:37-39).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "travel-shuttles",
+  "cite": "TicketObjectImplementation.cpp:20-27",
+  "claim": "The collector's option 20 runs boardShuttle with no ticket (TicketCollectorImplementation.cpp:42-43). A ticket's own option 20 and the selection list pass that ticket instead (TicketObjectImplementation.cpp:20-27, TicketSelectionSuiCallback.h:37-39).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "travel-shuttles",
+  "cite": "TicketSelectionSuiCallback.h:37-39",
+  "claim": "The collector's option 20 runs boardShuttle with no ticket (TicketCollectorImplementation.cpp:42-43). A ticket's own option 20 and the selection list pass that ticket instead (TicketObjectImplementation.cpp:20-27, TicketSelectionSuiCallback.h:37-39).",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "travel-shuttles",
+  "cite": "utils/engine3/MMOEngine/src/system/lang/Time.h:423-424",
+  "claim": "Landing window (inferred): seconds remaining = time to the next run + 1 (SDT:62-66, with Time::miliDifference = now minus t in utils/engine3/MMOEngine/src/system/lang/Time.h:423-424). By SDT:79-109, \"about to begin boarding\" then lasts about 2×landing+1 s after touchdown (about 5 s here). Boarding is open for the remaining ~597 s.",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ },
+ {
+  "topic": "veteran-rewards",
+  "cite": "SelectVeteranRewardSui.h:50",
+  "claim": "4. On selection, system shows a confirmation message box via playerManager-confirmVeteranReward() (SelectVeteranRewardSui.h:50)",
+  "problem": "no file with that name in the topic copy, Core3-dev or the bot tools"
+ }
+]

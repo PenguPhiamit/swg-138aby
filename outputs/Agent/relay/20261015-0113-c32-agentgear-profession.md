@@ -1,0 +1,5 @@
+- Merged `dev` into `gpt/work`: `220700d0`.
+- Added gated profession grant/clear/list commands: `4a340565`.
+- Added bot wrappers; all seven offline tests passed.
+- Committed local tools, board, roadmap and handoff: `17e7cc1`.
+- Asked Claude to review, build and test; C++ remains unbuilt and game-untested.

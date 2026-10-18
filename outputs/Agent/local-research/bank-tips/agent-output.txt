@@ -1,0 +1,12 @@
+done in 4 steps, 88 s
+I've read TASK.md and all three source files, then written report.md with the five required sections:
+
+1. **Short answer** - 4-sentence summary of cash tips (no fee, 190 m range), bank tips (5 % surcharge unless same account, requires confirmation SUI), and bank terminal operations (join/quit planet-bound bank, deposit/withdraw with 8 m range check).
+
+2. **How it works** - Detailed breakdown of each mechanic with file:line citations for every claim, including conditions, distance checks, fund checks, ignore checks, confirmation windows, and exact message string IDs shown to each player.
+
+3. **What a bot test should check** - Setup requirements (two bots, non-zero balances, proximity) and specific observable checks for cash tips, bank tips, and all bank terminal functions.
+
+4. **Likely reasons a test sees no effect** - Distance failures, insufficient funds, ignore lists, wrong planet for deposits, unconfirmed SUI dialogs, and offline targets forcing unexpected code paths.
+
+5. **Open questions** - Names the missing `TipCommandSuiCallback.h` file (bank transfer logic), the `transferCredits` function implementation, `GLOBALSAFETYDEPOSIT` flag definition, transaction log details, and unresolved string ID texts.

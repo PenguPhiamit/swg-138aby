@@ -1,0 +1,7 @@
+Resolve Hoth and Ossus planet CRCs in agent mission telemetry
+
+Existing resolver knew only stock destinations, so a valid Hoth mission was exposed with a numeric planet string and could be rejected by acceptance filters. Add the project's two custom planet keys; retain numeric fallback for unknown CRCs.
+
+Unbuilt; Claude review/build/runtime required.
+
+Agent: ChatGPT

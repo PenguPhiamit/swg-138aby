@@ -1,0 +1,8 @@
+done in 4 steps, 121 s
+I've read TASK.md and all six listed source files, then written report.md with the five required sections:
+
+1. **Short answer** - 4 sentences summarizing faction joining, status changes, timers, point caps, and promotion mechanics
+2. **How it works** - Detailed breakdown of conditions, skill requirements (Jedi restrictions, smuggler skill), numbers (200 standing minimum, 30s/5min timers, rank caps), timings, and player messages, with file:line citations throughout
+3. **What a bot test should check** - Observable results (system messages, PVP flags, cooldowns, faction points, rank changes) and setup requirements (neutral status, standing thresholds, skill/credit checks)
+4. **Likely reasons a test sees no effect** - Timer delays, Jedi skills blocking covert/resign, insufficient standing/credits, cooldowns, wrong recruiter
+5. **Open questions** - Missing definitions for `getRankCost()`, `isHighestRank()`, `useCovertOvert()`, `getGCWDiscount()`, and the event handler functions (`handleGoCovert`, etc.)

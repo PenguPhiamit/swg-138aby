@@ -1,0 +1,12 @@
+done in 4 steps, 134 s
+I've read TASK.md and all the listed source files, then written report.md with the five requested sections:
+
+1. **Short answer** - A 5-sentence summary of guild creation, sponsorship, kicking, leaving, and disbanding mechanics.
+
+2. **How it works** - Detailed breakdown of each operation (creation via terminal with name/abbrev validation, sponsorship with nearby-player checks and SUI dialogs, kicking with permission checks, leaving with election triggering, disbanding with native destroyGuild call), including all system messages and guild mails sent, with file:line citations throughout.
+
+3. **What a bot test should check** - Setup requirements (two bots, GuildTerminal, proximity) and observable results to verify (guild state changes, system messages, mail delivery, chat room membership).
+
+4. **Likely reasons a test sees no effect** - Seven specific failure modes with citations: already in guild, target out of range/capacity/permissions, name conflicts, terminal distance limits, and native function gaps.
+
+5. **Open questions** - Six areas not answered by the provided files: `destroyGuild` implementation, ChatManager details, election mechanics, permission flag logic, guild size configuration, and SUI callback implementations.

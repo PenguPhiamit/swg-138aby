@@ -1,0 +1,8 @@
+done in 4 steps, 96 s
+I've written report.md with all five required sections based on the two source files:
+
+1. **Short answer** - 4 sentences summarizing the boss system
+2. **How it works** - Detailed breakdown of conditions, timings (120s first spawn, 6hr lifetime, 90min/2min respawn), health multipliers (1.25× to 8×), rewards (25,000 credits), announcements, and the Mos Eisley hunter NPC — every claim cited with file:line
+3. **What a bot test should check** - Setup requirements (server uptime, zone enabled) and observable results (system messages, bank credits, custom object names, waypoints, rotation behavior)
+4. **Likely reasons a test sees no effect** - 6 scenarios including server not running long enough, zones disabled, or player not on damage list
+5. **Open questions** - 5 items the files don't answer (base creature HAM values, damage dealer list persistence, offline player handling, credit stacking, spawn point validity)

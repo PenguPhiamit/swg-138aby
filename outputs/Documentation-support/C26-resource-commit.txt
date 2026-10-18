@@ -1,0 +1,7 @@
+Expose authoritative resource units and spawn IDs to agent inventory
+
+Decode RCNO baseline 3 and quantity delta field 0x0B using the server packet writers. Omit unknown quantities, retain resource spawn IDs and include survey resource IDs for matching receipts. Unknown/malformed resource deltas invalidate the receipt. No commands sent or gameplay changes.
+
+Unbuilt; Claude review/build/runtime required.
+
+Agent: ChatGPT

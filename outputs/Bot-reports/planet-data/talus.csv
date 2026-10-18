@@ -1,81 +1,151 @@
 planet,kind,template,level_min,level_max,square_x_km,square_y_km,events,sources
-talus,creature,acicular_defender,8,8,3,4,4,attacked first=1;incapacitated a bot=2;killed a bot=1
-talus,creature,chunker_goon,7,7,-1,-5,2,attacked first=2;killed=2
-talus,creature,chunker_goon,7,7,4,6,2,attacked first=2;killed=2
-talus,creature,chunker_mooch,7,7,2,5,8,attacked first=2;incapacitated a bot=4;killed a bot=2
-talus,creature,chunker_nitwit,5,5,-1,-5,2,attacked first=7;killed=7
-talus,creature,chunker_nitwit,5,5,0,-5,2,attacked first=7;killed=7
-talus,creature,chunker_nitwit,5,5,3,4,2,attacked first=7;killed=7
-talus,creature,chunker_nitwit,5,5,3,5,4,attacked first=7;killed=7
-talus,creature,chunker_nitwit,5,5,4,6,4,attacked first=7;killed=7
-talus,creature,chunker_punk,6,6,-1,-5,2,attacked first=3;killed=3
-talus,creature,chunker_punk,6,6,3,4,4,attacked first=3;killed=3
-talus,creature,feared_fynock_youth,7,7,-1,-4,1,killed=27
-talus,creature,feared_fynock_youth,7,7,0,-4,9,killed=27
-talus,creature,feared_fynock_youth,7,7,0,-3,7,killed=27
-talus,creature,feared_fynock_youth,7,7,4,4,2,killed=27
-talus,creature,feared_fynock_youth,7,7,4,5,8,killed=27
-talus,creature,fearful_fynock_youth,5,5,-1,-5,1,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,-1,-4,18,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,-1,-3,3,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,0,-4,6,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,0,-3,13,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,0,-2,1,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,1,-5,18,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,1,-4,2,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,1,-3,10,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,2,5,10,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,3,5,22,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,3,6,19,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,4,4,8,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,4,5,29,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,fearful_fynock_youth,5,5,5,6,6,attacked first=41;incapacitated a bot=7;killed=117;killed a bot=1
-talus,creature,paralope,1,6,-2,-3,10,attacked first=27;given up on=2;incapacitated a bot=4;killed=197
-talus,creature,paralope,1,6,-1,-5,9,attacked first=27;given up on=2;incapacitated a bot=4;killed=197
-talus,creature,paralope,1,6,-1,-3,1,attacked first=27;given up on=2;incapacitated a bot=4;killed=197
-talus,creature,paralope,1,6,-1,-2,8,attacked first=27;given up on=2;incapacitated a bot=4;killed=197
-talus,creature,paralope,1,6,0,-4,43,attacked first=27;given up on=2;incapacitated a bot=4;killed=197
-talus,creature,paralope,1,6,0,-3,63,attacked first=27;given up on=2;incapacitated a bot=4;killed=197
-talus,creature,paralope,1,6,3,4,19,attacked first=27;given up on=2;incapacitated a bot=4;killed=197
-talus,creature,paralope,1,6,4,4,13,attacked first=27;given up on=2;incapacitated a bot=4;killed=197
-talus,creature,paralope,1,6,4,5,51,attacked first=27;given up on=2;incapacitated a bot=4;killed=197
-talus,creature,paralope,1,6,5,4,13,attacked first=27;given up on=2;incapacitated a bot=4;killed=197
-talus,creature,putrid_decay_mite_hatchling,7,7,-1,-4,8,killed=31
-talus,creature,putrid_decay_mite_hatchling,7,7,-1,-3,4,killed=31
-talus,creature,putrid_decay_mite_hatchling,7,7,3,4,1,killed=31
-talus,creature,putrid_decay_mite_hatchling,7,7,4,4,13,killed=31
-talus,creature,putrid_decay_mite_hatchling,7,7,4,5,5,killed=31
-talus,creature,repugnant_dung_mite_crawler,7,7,0,-5,4,attacked first=12;killed=29
-talus,creature,repugnant_dung_mite_crawler,7,7,0,-4,13,attacked first=12;killed=29
-talus,creature,repugnant_dung_mite_crawler,7,7,0,-3,5,attacked first=12;killed=29
-talus,creature,repugnant_dung_mite_crawler,7,7,3,5,7,attacked first=12;killed=29
-talus,creature,repugnant_dung_mite_crawler,7,7,4,4,5,attacked first=12;killed=29
-talus,creature,repugnant_dung_mite_crawler,7,7,4,5,3,attacked first=12;killed=29
-talus,creature,repugnant_dung_mite_crawler,7,7,5,5,4,attacked first=12;killed=29
-talus,creature,sleemo_delinquent,7,7,0,-2,10,attacked first=5;incapacitated a bot=4;killed=3;killed a bot=2
-talus,creature,sleemo_delinquent,7,7,1,-3,4,attacked first=5;incapacitated a bot=4;killed=3;killed a bot=2
-talus,creature,sleemo_hoodlum,6,6,0,-2,4,attacked first=3;killed=2
-talus,creature,sleemo_hoodlum,6,6,3,3,1,attacked first=3;killed=2
-talus,creature,sleemo_punk,6,6,0,-2,2,attacked first=3;killed=3
-talus,creature,sleemo_punk,6,6,1,-3,4,attacked first=3;killed=3
-talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,-1,-5,3,mission lair fought=16;mission lair found=5
-talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,2,5,2,mission lair fought=16;mission lair found=5
-talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,3,4,3,mission lair fought=16;mission lair found=5
-talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,3,5,6,mission lair fought=16;mission lair found=5
-talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,4,6,7,mission lair fought=16;mission lair found=5
-talus,lair,talus_fynock_youth_lair_neutral_small,,,-1,-4,3,mission lair fought=12;mission lair found=7
-talus,lair,talus_fynock_youth_lair_neutral_small,,,1,-5,3,mission lair fought=12;mission lair found=7
-talus,lair,talus_fynock_youth_lair_neutral_small,,,1,-3,3,mission lair fought=12;mission lair found=7
-talus,lair,talus_fynock_youth_lair_neutral_small,,,2,5,2,mission lair fought=12;mission lair found=7
-talus,lair,talus_fynock_youth_lair_neutral_small,,,3,5,2,mission lair fought=12;mission lair found=7
-talus,lair,talus_fynock_youth_lair_neutral_small,,,3,6,4,mission lair fought=12;mission lair found=7
-talus,lair,talus_fynock_youth_lair_neutral_small,,,5,6,2,mission lair fought=12;mission lair found=7
-talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,-2,-3,3,mission lair fought=10;mission lair found=5
-talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,-1,-5,2,mission lair fought=10;mission lair found=5
-talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,-1,-2,2,mission lair fought=10;mission lair found=5
-talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,3,4,4,mission lair fought=10;mission lair found=5
-talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,4,4,1,mission lair fought=10;mission lair found=5
-talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,5,4,3,mission lair fought=10;mission lair found=5
-talus,lair,talus_sleemo_delinquent_camp_neutral_medium_theater,,,0,-2,12,mission lair fought=12;mission lair found=4
-talus,lair,talus_sleemo_delinquent_camp_neutral_medium_theater,,,1,-3,2,mission lair fought=12;mission lair found=4
-talus,lair,talus_sleemo_delinquent_camp_neutral_medium_theater,,,3,3,2,mission lair fought=12;mission lair found=4
+talus,creature,acicular_defender,1,8,-1,-4,6,attacked first=6;incapacitated a bot=4;killed=4;killed a bot=2
+talus,creature,acicular_defender,1,8,-1,-3,2,attacked first=6;incapacitated a bot=4;killed=4;killed a bot=2
+talus,creature,acicular_defender,1,8,3,5,2,attacked first=6;incapacitated a bot=4;killed=4;killed a bot=2
+talus,creature,acicular_defender,1,8,3,6,2,attacked first=6;incapacitated a bot=4;killed=4;killed a bot=2
+talus,creature,acicular_defender,1,8,4,3,4,attacked first=6;incapacitated a bot=4;killed=4;killed a bot=2
+talus,creature,chunker_goon,7,7,-1,-4,5,attacked first=16;incapacitated a bot=20;killed=7;killed a bot=10
+talus,creature,chunker_goon,7,7,-1,-3,12,attacked first=16;incapacitated a bot=20;killed=7;killed a bot=10
+talus,creature,chunker_goon,7,7,0,-2,12,attacked first=16;incapacitated a bot=20;killed=7;killed a bot=10
+talus,creature,chunker_goon,7,7,1,-4,16,attacked first=16;incapacitated a bot=20;killed=7;killed a bot=10
+talus,creature,chunker_goon,7,7,2,-4,2,attacked first=16;incapacitated a bot=20;killed=7;killed a bot=10
+talus,creature,chunker_goon,7,7,3,3,2,attacked first=16;incapacitated a bot=20;killed=7;killed a bot=10
+talus,creature,chunker_goon,7,7,4,6,4,attacked first=16;incapacitated a bot=20;killed=7;killed a bot=10
+talus,creature,chunker_mooch,7,7,-1,-4,2,attacked first=7;incapacitated a bot=2;killed=5;killed a bot=2
+talus,creature,chunker_mooch,7,7,1,-5,2,attacked first=7;incapacitated a bot=2;killed=5;killed a bot=2
+talus,creature,chunker_mooch,7,7,1,-2,2,attacked first=7;incapacitated a bot=2;killed=5;killed a bot=2
+talus,creature,chunker_mooch,7,7,3,3,2,attacked first=7;incapacitated a bot=2;killed=5;killed a bot=2
+talus,creature,chunker_mooch,7,7,4,6,2,attacked first=7;incapacitated a bot=2;killed=5;killed a bot=2
+talus,creature,chunker_mooch,7,7,5,3,6,attacked first=7;incapacitated a bot=2;killed=5;killed a bot=2
+talus,creature,chunker_nitwit,5,5,-1,-4,6,attacked first=10;incapacitated a bot=2;killed=9;killed a bot=1
+talus,creature,chunker_nitwit,5,5,-1,-3,8,attacked first=10;incapacitated a bot=2;killed=9;killed a bot=1
+talus,creature,chunker_nitwit,5,5,1,-2,4,attacked first=10;incapacitated a bot=2;killed=9;killed a bot=1
+talus,creature,chunker_nitwit,5,5,2,-4,2,attacked first=10;incapacitated a bot=2;killed=9;killed a bot=1
+talus,creature,chunker_nitwit,5,5,5,5,2,attacked first=10;incapacitated a bot=2;killed=9;killed a bot=1
+talus,creature,chunker_pest,6,6,-1,-4,2,attacked first=14;incapacitated a bot=6;killed=12;killed a bot=2
+talus,creature,chunker_pest,6,6,-1,-3,4,attacked first=14;incapacitated a bot=6;killed=12;killed a bot=2
+talus,creature,chunker_pest,6,6,1,-5,4,attacked first=14;incapacitated a bot=6;killed=12;killed a bot=2
+talus,creature,chunker_pest,6,6,1,-2,6,attacked first=14;incapacitated a bot=6;killed=12;killed a bot=2
+talus,creature,chunker_pest,6,6,2,-4,8,attacked first=14;incapacitated a bot=6;killed=12;killed a bot=2
+talus,creature,chunker_pest,6,6,5,3,4,attacked first=14;incapacitated a bot=6;killed=12;killed a bot=2
+talus,creature,chunker_pest,6,6,5,5,6,attacked first=14;incapacitated a bot=6;killed=12;killed a bot=2
+talus,creature,chunker_punk,6,6,0,-2,2,attacked first=6;incapacitated a bot=5;killed=5;killed a bot=1
+talus,creature,chunker_punk,6,6,1,-2,8,attacked first=6;incapacitated a bot=5;killed=5;killed a bot=1
+talus,creature,chunker_punk,6,6,3,3,3,attacked first=6;incapacitated a bot=5;killed=5;killed a bot=1
+talus,creature,chunker_punk,6,6,4,6,4,attacked first=6;incapacitated a bot=5;killed=5;killed a bot=1
+talus,creature,clipped_fynock,9,9,4,5,1,killed=1
+talus,creature,docile_kahmurra,10,10,0,-4,2,killed=2
+talus,creature,feared_fynock_youth,7,7,-1,-3,2,incapacitated a bot=2;killed=117
+talus,creature,feared_fynock_youth,7,7,0,-5,2,incapacitated a bot=2;killed=117
+talus,creature,feared_fynock_youth,7,7,0,-4,56,incapacitated a bot=2;killed=117
+talus,creature,feared_fynock_youth,7,7,0,-3,16,incapacitated a bot=2;killed=117
+talus,creature,feared_fynock_youth,7,7,3,4,1,incapacitated a bot=2;killed=117
+talus,creature,feared_fynock_youth,7,7,3,5,10,incapacitated a bot=2;killed=117
+talus,creature,feared_fynock_youth,7,7,4,4,16,incapacitated a bot=2;killed=117
+talus,creature,feared_fynock_youth,7,7,4,5,15,incapacitated a bot=2;killed=117
+talus,creature,feared_fynock_youth,7,7,5,5,1,incapacitated a bot=2;killed=117
+talus,creature,fearful_fynock_youth,5,5,-2,-4,1,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,-2,-3,18,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,-1,-5,32,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,-1,-4,30,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,-1,-3,9,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,0,-5,34,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,0,-4,26,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,0,-3,13,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,0,-2,1,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,1,-5,1,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,1,-3,2,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,2,-3,26,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,3,4,3,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,3,5,8,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,3,6,23,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,4,3,20,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,4,4,9,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,4,5,7,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,4,6,17,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,5,5,23,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,fearful_fynock_youth,5,5,5,6,12,attacked first=106;incapacitated a bot=14;killed=193;killed a bot=2
+talus,creature,paralope,1,6,-1,-5,7,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,paralope,1,6,-1,-4,23,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,paralope,1,6,-1,-3,39,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,paralope,1,6,-1,-2,14,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,paralope,1,6,0,-5,28,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,paralope,1,6,0,-4,22,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,paralope,1,6,0,-3,47,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,paralope,1,6,0,-2,21,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,paralope,1,6,3,5,50,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,paralope,1,6,3,6,27,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,paralope,1,6,4,3,23,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,paralope,1,6,4,4,10,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,paralope,1,6,4,5,72,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,paralope,1,6,5,4,1,attacked first=90;incapacitated a bot=15;killed=276;killed a bot=3
+talus,creature,putrid_decay_mite_hatchling,7,7,0,-4,13,given up on=1;killed=41
+talus,creature,putrid_decay_mite_hatchling,7,7,0,-3,16,given up on=1;killed=41
+talus,creature,putrid_decay_mite_hatchling,7,7,1,-4,3,given up on=1;killed=41
+talus,creature,putrid_decay_mite_hatchling,7,7,4,4,5,given up on=1;killed=41
+talus,creature,putrid_decay_mite_hatchling,7,7,4,5,5,given up on=1;killed=41
+talus,creature,repugnant_dung_mite_crawler,1,7,-1,-4,8,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,repugnant_dung_mite_crawler,1,7,-1,-3,7,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,repugnant_dung_mite_crawler,1,7,-1,-2,4,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,repugnant_dung_mite_crawler,1,7,0,-5,19,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,repugnant_dung_mite_crawler,1,7,0,-4,16,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,repugnant_dung_mite_crawler,1,7,0,-3,11,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,repugnant_dung_mite_crawler,1,7,0,-2,4,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,repugnant_dung_mite_crawler,1,7,1,-4,5,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,repugnant_dung_mite_crawler,1,7,1,-3,4,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,repugnant_dung_mite_crawler,1,7,3,4,11,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,repugnant_dung_mite_crawler,1,7,3,5,9,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,repugnant_dung_mite_crawler,1,7,3,6,4,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,repugnant_dung_mite_crawler,1,7,4,4,8,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,repugnant_dung_mite_crawler,1,7,4,5,15,attacked first=52;incapacitated a bot=5;killed=65;killed a bot=3
+talus,creature,sleemo_delinquent,7,7,-1,-2,6,attacked first=14;given up on=1;incapacitated a bot=11;killed=9;killed a bot=4
+talus,creature,sleemo_delinquent,7,7,0,-5,2,attacked first=14;given up on=1;incapacitated a bot=11;killed=9;killed a bot=4
+talus,creature,sleemo_delinquent,7,7,1,-3,15,attacked first=14;given up on=1;incapacitated a bot=11;killed=9;killed a bot=4
+talus,creature,sleemo_delinquent,7,7,3,6,4,attacked first=14;given up on=1;incapacitated a bot=11;killed=9;killed a bot=4
+talus,creature,sleemo_delinquent,7,7,5,6,12,attacked first=14;given up on=1;incapacitated a bot=11;killed=9;killed a bot=4
+talus,creature,sleemo_hoodlum,6,6,-1,-2,2,attacked first=4;incapacitated a bot=1;killed=4
+talus,creature,sleemo_hoodlum,6,6,1,-3,5,attacked first=4;incapacitated a bot=1;killed=4
+talus,creature,sleemo_hoodlum,6,6,5,6,2,attacked first=4;incapacitated a bot=1;killed=4
+talus,creature,sleemo_punk,6,6,-1,-2,4,attacked first=10;given up on=1;incapacitated a bot=2;killed=9
+talus,creature,sleemo_punk,6,6,0,-5,4,attacked first=10;given up on=1;incapacitated a bot=2;killed=9
+talus,creature,sleemo_punk,6,6,1,-3,6,attacked first=10;given up on=1;incapacitated a bot=2;killed=9
+talus,creature,sleemo_punk,6,6,3,6,6,attacked first=10;given up on=1;incapacitated a bot=2;killed=9
+talus,creature,sleemo_punk,6,6,5,6,2,attacked first=10;given up on=1;incapacitated a bot=2;killed=9
+talus,creature,song_rasp,10,10,4,5,12,attacked first=3;given up on=1;killed=7;killed a bot=1
+talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,-1,-4,5,mission lair fought=41;mission lair found=16
+talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,-1,-3,12,mission lair fought=41;mission lair found=16
+talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,0,-2,6,mission lair fought=41;mission lair found=16
+talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,1,-5,2,mission lair fought=41;mission lair found=16
+talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,1,-4,1,mission lair fought=41;mission lair found=16
+talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,1,-2,10,mission lair fought=41;mission lair found=16
+talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,2,-4,3,mission lair fought=41;mission lair found=16
+talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,3,3,4,mission lair fought=41;mission lair found=16
+talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,4,6,4,mission lair fought=41;mission lair found=16
+talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,5,3,3,mission lair fought=41;mission lair found=16
+talus,lair,talus_chunker_goon_camp_neutral_small_theater,,,5,5,7,mission lair fought=41;mission lair found=16
+talus,lair,talus_fynock_youth_lair_neutral_small,,,-2,-3,4,mission lair fought=43;mission lair found=18
+talus,lair,talus_fynock_youth_lair_neutral_small,,,-1,-5,9,mission lair fought=43;mission lair found=18
+talus,lair,talus_fynock_youth_lair_neutral_small,,,-1,-4,6,mission lair fought=43;mission lair found=18
+talus,lair,talus_fynock_youth_lair_neutral_small,,,0,-5,7,mission lair fought=43;mission lair found=18
+talus,lair,talus_fynock_youth_lair_neutral_small,,,2,-3,7,mission lair fought=43;mission lair found=18
+talus,lair,talus_fynock_youth_lair_neutral_small,,,3,6,5,mission lair fought=43;mission lair found=18
+talus,lair,talus_fynock_youth_lair_neutral_small,,,4,3,5,mission lair fought=43;mission lair found=18
+talus,lair,talus_fynock_youth_lair_neutral_small,,,4,6,6,mission lair fought=43;mission lair found=18
+talus,lair,talus_fynock_youth_lair_neutral_small,,,5,5,7,mission lair fought=43;mission lair found=18
+talus,lair,talus_fynock_youth_lair_neutral_small,,,5,6,3,mission lair fought=43;mission lair found=18
+talus,lair,talus_fynock_youth_lair_neutral_small,,,6,5,2,mission lair fought=43;mission lair found=18
+talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,-1,-5,2,mission lair fought=32;mission lair found=14
+talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,-1,-4,4,mission lair fought=32;mission lair found=14
+talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,-1,-3,7,mission lair fought=32;mission lair found=14
+talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,-1,-2,3,mission lair fought=32;mission lair found=14
+talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,0,-5,8,mission lair fought=32;mission lair found=14
+talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,0,-2,3,mission lair fought=32;mission lair found=14
+talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,3,5,9,mission lair fought=32;mission lair found=14
+talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,3,6,4,mission lair fought=32;mission lair found=14
+talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,4,3,4,mission lair fought=32;mission lair found=14
+talus,lair,talus_paralope_lair_neutral_medium_boss_01,,,5,4,2,mission lair fought=32;mission lair found=14
+talus,lair,talus_sleemo_delinquent_camp_neutral_medium_theater,,,-1,-2,4,mission lair fought=21;mission lair found=6
+talus,lair,talus_sleemo_delinquent_camp_neutral_medium_theater,,,0,-5,4,mission lair fought=21;mission lair found=6
+talus,lair,talus_sleemo_delinquent_camp_neutral_medium_theater,,,1,-3,11,mission lair fought=21;mission lair found=6
+talus,lair,talus_sleemo_delinquent_camp_neutral_medium_theater,,,3,6,5,mission lair fought=21;mission lair found=6
+talus,lair,talus_sleemo_delinquent_camp_neutral_medium_theater,,,5,6,3,mission lair fought=21;mission lair found=6

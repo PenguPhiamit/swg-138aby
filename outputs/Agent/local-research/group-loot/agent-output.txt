@@ -1,0 +1,8 @@
+done in 4 steps, 120 s
+I've written `report.md` based on the source files listed in TASK.md. The report covers:
+
+1. **Short answer** - Summary of how group loot rules work across all four types
+2. **How it works** - Detailed breakdown of conditions, skill mods (force_luck), range limits (16 units for /loot, 128 units for credit splitting/lottery eligibility), timings, and system messages for each rule, with file:line citations throughout
+3. **What a bot test should check** - Setup requirements (form group, set leader, change loot rules) and observable results to verify (messages, inventory, credits, range behavior)
+4. **Likely reasons a test sees no effect** - Common failure modes like not being in a group, not being leader, out of range, or corpse already looted
+5. **Open questions** - Identified gaps: client-side lottery winner determination, post-lottery item distribution, and the fact that LootAllCommand.h is a stub

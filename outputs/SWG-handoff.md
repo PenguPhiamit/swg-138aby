@@ -409,6 +409,14 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
 - **Scenario commits:** 89737ca (bounty lists again until a target is within 4 km; recon with a team; Forn's walkers trained as Marksmen) and 3a4414e (one bounty per hunter; a walk to the building after "no path"; Cresh's destroy at difficulty 10 or less).
 - **Next:** for bounty, a range check before listing, or `mission_abort` on Ressa's far bounty once the bodies run `1be13676`; for group pay, an easy lair, or the general terminal of another city.
 
+### 2026-10-17 9:50 PM Claude: overnight simulated population restarted on run 30
+
+- **Owner, about 9:45 PM:** "restart the test galaxy onto run 30 with all the waiting fixes and start the overnight bot population". The main session (server lock, `e9df7e1`) restarted and started it; it watches the run.
+- **Run 30 up since 9:47 PM:** dev `4b113bb7`, archive `e126125c`. `BotPopMax` 1,700: 1,500 multiclass bots plus 200 Ossus explorers queued, both accepted; 1,160 online at 9:48 PM. The memory watchdog is running.
+- **Reports:** the 7 AM job `morning30.sh` writes `Bot-reports/launch-sim/numbers-run30.md`, `findings-run30.md`/`.json`, `travel-run30.md`, `morning-run30.txt` and the planet data.
+- **Gap:** the galaxy was off from the afternoon stop (about 1:15 PM by run 29's report; the main session gives 1:40 PM; 12:35 PM entry) to 9:47 PM while the owner played.
+- No squad runs or restarts from this session.
+
 ### 2026-10-17 1:00 PM Claude: missions at every terminal type (test plan section 11): 7 of 11 PASS with exact pay; group-pay fix staged
 
 - **Runs (all mine, on the test galaxy, no restarts by me):**
@@ -448,6 +456,16 @@ Claimed ChatGPT 2026-10-15 23:50: report/analysis Python tools, offline tests an
   - Dask has Novice Bounty Hunter and Investigation I; Ressa has Novice Bounty Hunter.
   - Ilsa keeps 6 destroy missions, Cresh one stuck delivery, and Mirren, Dask and Dova unfinished recon or survey missions. All expire within 48 h; there's no abort.
 - **Not done:** the full-datapad gate (C56) and live's 2-mission cap. `check_c9_offline.py` still fails on its Aurek fixture (stale, not mine).
+
+### 2026-10-17 12:35 PM Claude: overnight simulated population on run 29; knowledge docs read
+
+- **Owner, 17 Oct afternoon:** "im going to close client, id like you to read all the knowledge docs as efficiently as you can while we run the server bots on the simulated population mode while i sleep."
+- **BotPop overnight:** started at **12:33 PM** on run 29 by the main session, which holds the lock and watches it. Console reply `{"cities":18,"max_online":600,"mode":"all","ok":true,"queued":400}`: 200 already online plus 400 queued, so the run's cap of 600 online at once (`BotPopMax=600`) is full. The 200 Ossus explorers did not queue (`{"from":"Knossa","ok":false,"queued":0}`) because the cap was full. WSL had 9 GB free; the memory watchdog despawns bots below 2 GB.
+- **Reports:** the 7 AM job `morning29.sh` writes `Bot-reports/launch-sim/numbers-run29.md`, `findings-run29.md`/`.json`, `travel-run29.md`, `morning-run29.txt` and the planet data.
+- **Possible restart tonight:** if the Ossus, leash and vehicle fixes all land, the main session may restart onto run 30 (no owner client open, standing OK) with `BotPopMax` 1500, relaunching 1,500 plus 200 Ossus explorers; the morning set then becomes run 30's. The main session logs that restart.
+- **Stopped early, about 1:15 PM** (owner: "stop server, shutdown everything i would like to game a bit"). The main session stopped the test galaxy and BotPop and shut down WSL; the overnight population ran 12:33 to about 1:15 PM. Its message said about 1:40 PM, but run 29's report ends at 13:15 and was written before 1:18 PM. The 7 AM job is cancelled; run 29's set was written early (`report.sh run29`, all five files above, 11:05 AM to 1:15 PM). The overnight simulation restarts when the owner says the PC is free; the main session starts it and logs it. Nothing else runs on this PC meanwhile.
+- **Squad groups:** the missions session's Besh, Cresh, Dorn and Forn run was left alone; no squad runs or restarts from this session.
+- **Knowledge docs ("All of them", owner's card):** 67 mechanics reports in `Agent/local-research/`, 126 docs in `Documentation-support/`, `Agent/notes/`, `Agent/knowledge-sources.md` and Claude's memory. Skimmed (short answers and openings), no agents. Index and key facts: `knowledge-docs-index.md` in the side-session notes folder (`%APPDATA%\Claude\side-session-notes\local_c98a40c3-fc4d-4196-a226-b4493c0df564\`). Caveat: the local claim check found 28 of 941 cited claims contradicted and 102 not shown; four topics have no report yet (entertainer-xp-sources, jedi-unlock, ghostfire-quest, test-index).
 
 ### 2026-10-17 9:43 AM Claude: local 3D in place of fal: TRELLIS.2 through um comfy run, proved with one crate
 

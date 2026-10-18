@@ -1,49 +1,114 @@
-Written by Claude Haiku, 15 Oct 2026, from Core3-dev 90044b8e. (Run restarted part-way; Claude Opus finished the reading and wrote this file.)
+# Faction Joining, Status, Points, and Promotion Report
 
-# Factions and the Galactic Civil War
+## 1. Short Answer
 
-Paths are relative to MMOCoreORB/. "Convo" = bin/scripts/screenplays/gcw/recruiters/recruiterConvoHandler.lua, "Screenplay" = .../recruiterScreenplay.lua in the same folder.
+A player joins a faction by speaking to a recruiter NPC and selecting the join option; this immediately sets their faction affiliation and covert status (status 1). They can later switch between covert (hidden), overt (visible/attackable), and on-leave (inactive) statuses through conversation options, each with timers ranging from 30 seconds to 15 minutes. Faction points are earned through activities and bribes, capped by rank via `getFactionPointsCap()`, and spent to promote ranks. Jedi characters cannot go covert or resign. The bot test must verify status changes, cooldowns, point caps, and system messages at each step.
 
-## 1. Short answer
-A player joins Rebel or Imperial at a recruiter once they have at least 200 standing with that faction, and starts as covert (Convo:125-146, Screenplay:8). Standing goes up and down from NPC kills (killed faction's enemies gain, the faction and its allies lose double) and from PvP kills (+30 / -45). It is spent at the recruiter on promotions and items, always keeping 200 in reserve. Status is on leave (0), covert (1) or overt (2); recruiter changes take 30 s or 5 min. Two players of opposite factions can attack each other only when both are overt, or when a covert one has a 5-minute GCW TEF (temporary enemy flag), unless grouped, in a no-combat area or in different zones.
+## 2. How It Works
 
-## 2. How it works
-**Joining.** Minimum standing 200 (Screenplay:8). Path "accept_join2": below 200 shows screen "neutral_need_more_points2" with the 200 figure; otherwise sets faction to the recruiter's and status 1 (Convo:125-146). No points are deducted on joining (inferred, Convo:140-146). An older "accept_join" screen sets faction and status 1 with no check in that branch (Convo:35-37).
+### Joining a Faction
+- The player initiates conversation with a recruiter NPC. The initial screen is determined by the player's current faction and standing (`recruiterConvoHandler.lua:230-276`).
+- For neutral players meeting the minimum standing requirement (200, defined in `recruiterScreenplay.lua:8`), the "join_military" option appears (`recruiterConvoHandler.lua:287-301`).
+- Selecting join sets the player's faction hash and status to 1 (covert) immediately: `CreatureObject(pPlayer):setFaction(...)` and `setFactionStatus(1)` (`recruiterConvoHandler.lua:36-37`, `144-145`).
+- The recruiter's faction is determined by its own faction hash: rebel = 370444368, imperial = 3679112276 (`recruiterScreenplay.lua:10`).
 
-**Status values and changes at a recruiter.** 0 = on leave, 1 = covert, 2 = overt (Screenplay:780, 794, 799). Each change sets a future status, writes "changingFactionStatus" and schedules an event: go overt 30 000 ms (Convo:39-42); go covert 300 000 ms (Convo:43-51); go on leave 300 000 ms (Convo:52-60); resign 300 000 ms (Convo:62-70); resume duties = covert in 30 000 ms (Convo:73-76). Jedi (force_rank_light/dark_novice) are refused covert, leave and resign with @faction_recruiter:jedi_cant_go_covert / jedi_cant_resign (Convo:44-46, 63-66; Screenplay:774-777). Resign sets rank 0, status 0, faction 0 (Screenplay:819-836).
+### Status Changes (Covert/Overt/On-Leave)
+Three statuses exist: covert (1), overt (2), on-leave (0).
 
-**Field change (no recruiter).** Refused if already overt, same status, or a change is pending (PlayerObjectImplementation.cpp:3681-3687). A box titled @gcw:gcw_status_change asks the player to type YES (PlayerObjectImplementation.cpp:3692-3705); anything else or Cancel gives @gcw:abort_field_change (FieldFactionChangeSuiCallback.h:24-32, under src/server/zone/objects/player/sui/callbacks/). Covert: @gcw:handle_go_covert, applied after 30 000 ms (same file:48-59). Overt: "You will be flagged as Special Forces in 5 minutes.", applied after 300 000 ms (61-72). Overt to covert in the field is refused with @gcw:cannot_change_from_combatant_in_field (43-45).
+**Going Covert:**
+- Jedi characters are blocked: `hasSkill("force_rank_light_novice")` or `hasSkill("force_rank_dark_novice")` prevents it (`recruiterConvoHandler.lua:44-47`, `53-56`).
+- Sets `futureFactionStatus(1)` and writes `changingFactionStatus` data flag (`recruiterConvoHandler.lua:49-50`).
+- Creates a delayed event after 5 minutes (300,000 ms) to call `handleGoCovert` (`recruiterConvoHandler.lua:51`).
+- When complete, `setFactionStatus(1)` is called, which removes the OVERT PVP flag and sends "Your faction affiliation has now been hidden from others." or `@faction_recruiter:covert_complete` (`TangibleObjectImplementation.cpp.lines-176-311:195-200`).
 
-**What the player sees when status lands** (src/server/zone/objects/tangible/TangibleObjectImplementation.cpp). Future status reset to -1 (177-178). Covert: "Your faction affiliation has now been hidden from others." (covert/overt system) or @faction_recruiter:covert_complete; OVERT flag cleared (195-203). Overt: OVERT flag set, cooldown "declare_overt_cooldown" = GCW manager overt cooldown, default 300 s (205-218); "You successfully declare overt faction status. You may now be attacked by opposing faction members." or @faction_recruiter:overt_complete (220-224). On leave: OVERT cleared; @faction_recruiter:resign_complete (covert/overt system) or on_leave_complete (238-251). The PvP status bitmask is resent (254-255).
+**Going Overt:**
+- Similar flow but sets `futureFactionStatus(2)` and uses a 30-second timer (30,000 ms) (`recruiterConvoHandler.lua:39-42`).
+- When complete, `setFactionStatus(2)` adds the OVERT flag, applies a "declare_overt_cooldown" of 300 seconds (configurable via GCWManager), and sends "You successfully declare overt faction status. You may now be attacked by opposing faction members." (`TangibleObjectImplementation.cpp.lines-176-311:204-224`).
+- Also adds the player to the PVP broadcast chat room if enabled (`TangibleObjectImplementation.cpp.lines-176-311:227-237`).
 
-**Standing limits and messages** (PlayerObjectImplementation.cpp). Gain: non-GCW factions capped at 5000; own GCW faction capped at the rank cap; the other GCW faction at 1000 (2170-2184). Message @base_player:prose_award_faction with the amount, or prose_max_faction when nothing changed (2188-2199). +10% bonus if the player's faction won Cries of Alderaan, message prose_coa_bonus (2203-2235). Loss: floor -5000 (2273-2274); message prose_lose_faction or prose_min_faction (2285-2296). Rank cap = max(1000, rank cost x 20) (src/server/zone/managers/faction/FactionManager.cpp:287-292); rank names and costs come from datatables/faction/rank.iff (FactionManager.cpp:26-41).
+**Going On-Leave or Resigning:**
+- Both set `futureFactionStatus(0)` and use 5-minute timers (`recruiterConvoHandler.lua:52-60`, `62-70`).
+- Resignation can also be initiated with a configurable timer (default 15 minutes from `recruiterScreenplay.lua:6`) via pending task instead of immediate event (`recruiterConvoHandler.lua:150-171`).
+- On complete, removes OVERT flag and sends resignation message (`TangibleObjectImplementation.cpp.lines-176-311:238-251`).
 
-**Earning.** NPC kill: gain = level x the faction's adjust factor, added to each player-allowed enemy of the killed faction (rebel/imperial only when the killed faction is itself GCW); the killed faction and its non-GCW allies lose 2 x gain (FactionManager.cpp:91-152). Factions, enemies, allies and adjust factors load from scripts/managers/faction_manager.lua (FactionManager.cpp:20-24, 55-75). PvP kill (both players): rebel kills imperial gives killer +30 rebel and -45 imperial, victim -45 imperial; the mirror for imperial (FactionManager.cpp:238-257).
+**Canceling Resignation:**
+- Removes the `changingFactionStatus` data and cancels the pending task (`recruiterConvoHandler.lua:205-207`).
 
-**Spending.** Promotion: next rank cost from getRankCost; needs standing >= cost + 200, else screen "not_enough_points" with rank name and cost; otherwise cost is deducted and rank +1 (Convo:78-99). Highest rank is the last in the table or 15 (src/server/zone/managers/faction/FactionManager.h:65-67). Purchases need standing >= item cost + 200 (Screenplay:477, 566, 618); failures: inventory full, datapad full, too many hirelings, not enough standing (Screenplay:426-435). Categories: furniture, weapons/armor, installations, uniforms, hirelings, schematics, with a GCW discount (Convo:113-114). Smugglers with combat_smuggler_underworld_04 can bribe 20 000 / 100 000 credits for 250 / 1250 standing if under the cap (Convo:101-111).
+### Faction Points (Standing)
+- **Earning points:** Through activities (not shown in these files) and bribes. Bribe options require `combat_smuggler_underworld_04` skill and sufficient credits (20,000 or 100,000). A 20k bribe gives 250 points; a 100k bribe gives 1,250 points (`recruiterConvoHandler.lua:101-111`, `recruiterScreenplay.lua:75-90`).
+- **Caps:** For faction members, capped by rank via `getFactionPointsCap(player->getFactionRank())` (`PlayerObjectImplementation.cpp.lines-2155-2322:2182`). Non-members cap at 1,000; non-PvP factions cap at 5,000 (`PlayerObjectImplementation.cpp.lines-2155-2322:2174-2185`).
+- **Losing points:** `decreaseFactionStanding` applies similar caps and minimum of -5,000 (`PlayerObjectImplementation.cpp.lines-2155-2322:2263-2299`).
 
-**Who can attack whom (player target)** (src/server/zone/objects/creature/CreatureObjectImplementation.cpp:3628-3809). False if: same object, invisible, dead, different zone, either in a no-combat area, target on load screen (3629-3667). For player vs player, in order: server PvP mode means true (3728-3730); mutual personal enemy flag, mutual duel, bounty mean true (3740-3753); same group means false (3756-3758); both in a PvP area or guild war means true (3760-3768); same faction means false (3771-3772). Different factions, covert/overt system: overt vs overt true; covert target with GCW TEF vs overt attacker, or vs covert attacker with TEF, true; overt target with TEF vs covert attacker with TEF true; else false (3776-3794). Old system: both overt (3796-3800). Faction NPC vs player: never attacks neutral or same faction (3701-3710); covert/overt system needs player overt or with GCW TEF (3712-3715). A crackdown TEF overrides (3696-3699). A target that is attackable is not healable (3818-3819).
+### Rank Promotion
+- Available if current rank is valid and not highest (`recruiterConvoHandler.lua:354-356`).
+- Requires `getRankCost(rank + 1)` points and minimum standing (`recruiterConvoHandler.lua:84-86`, `358-360`).
+- If insufficient points, shows "not_enough_points" screen with required amount (`recruiterConvoHandler.lua:87-95`).
+- On success, decreases standing by the cost and sets new rank via `setFactionRank(rank)`, which broadcasts the change to nearby players (`CreatureObjectImplementation.cpp.lines-2072-2086:2072-2085`).
 
-**TEF timer.** TEFTIMER = 300 000 ms (FactionManager.h:22). A GCW action extends the GCW TEF by that much and sets the TEF bit in the PvP status (PlayerObjectImplementation.cpp:2860-2870); hasGcwTef is true until it expires (2906-2908).
+### Messages the Player Sees
+- Join/covert/overt/resign complete messages as described above.
+- Bribe success/failure based on credit checks.
+- Promotion confirmation with rank name via `getRankName(rank)` (`recruiterConvoHandler.lua:80`, `94`).
+- Jedi restriction messages: `@faction_recruiter:jedi_cant_go_covert` and `@faction_recruiter:jedi_cant_resign` (`recruiterConvoHandler.lua:45`, `54`, `64`).
 
-## 3. What a bot test should check
-Setup: two bots in the same zone, not grouped, no duel, no bounty, outside no-combat and PvP areas, no guild war; server PvP mode off. Give each 200+ standing with its faction (from kills, or an admin tool; see open questions). Know whether the covert/overt system is on.
-1. Join: talk to the recruiter; expect the faction set, status 1 and "hidden from others" message. With under 200, expect the need-more-points screen and no faction.
-2. Covert vs covert, no TEF: neither shows as attackable; an attack is refused.
-3. Go overt (recruiter, 30 s; field, 5 min): expect the OVERT bit and the overt message after the delay, not before. Both overt: each is attackable by the other.
-4. One overt, one covert: not attackable until the covert bot gets a GCW TEF; then attackable for 5 min, and the TEF bit drops after expiry.
-5. Points: record standing, kill a faction NPC, expect the award/loss messages and changed totals. A PvP kill gives killer +30 and both sides -45 to the enemy faction.
-6. Promotion: standing falls by the rank cost and the rank rises; with too few points, the not_enough_points screen and no change.
-7. Group the two overt bots: no longer attackable.
+## 3. What a Bot Test Should Check
 
-## 4. Likely reasons a test sees no effect
-The timer has not run (30 s or 5 min). A change is already pending (field change silently returns). The bot is Jedi. The bots are grouped, in different zones, in a no-combat area, or on a load screen. One is covert without a GCW TEF, or the TEF expired after 5 min. PvP mode on makes everything attackable (false pass). Standing under 200, or under cost + 200 for promotions. Standing at the cap, so the award shows the max message and no change. The recruiter delay uses createEvent; a server restart in between may drop it (inferred).
+### Setup Needed First
+- Ensure bot character has no Jedi skills (`force_rank_light_novice` or `force_rank_dark_novice`) if testing covert/resign paths.
+- Verify bot is neutral (faction = 0) and has at least 200 faction standing with the target recruiter's faction before attempting to join.
+- For bribe tests, ensure bot has `combat_smuggler_underworld_04` skill and sufficient credits (20k or 100k).
 
-## 5. Open questions
-- Config keys and current values behind useCovertOvertSystem and getPvpMode (not read).
-- Which code calls awardFactionStanding and with which level; what exactly sets the GCW TEF (combat manager not read).
-- Rank costs and names (rank.iff is client data, not in the tree); adjust factors in faction_manager.lua (not read).
-- GCWManagerImplementation.cpp was not read: faction bases, overt cooldown value, GCW discount, crackdown scans.
-- FactionStatus.h not read; the 0/1/2 mapping comes from the recruiter scripts.
-- Which command opens the field status change box; whether "accept_join" checks standing earlier in the conversation (checks exist at Convo:289, 295, context not read).
-- How an admin can set standing for a bot quickly (a Lua setFactionStanding exists in PlayerObjectImplementation.cpp:2300; the command was not found).
+### Observable Results to Check
+1. **After joining:** 
+   - System message confirming covert status.
+   - `getFaction()` returns recruiter's faction hash.
+   - `getFactionStatus()` returns 1.
+   - OVERT PVP flag is not set.
+
+2. **After going overt (30s timer):**
+   - System message about being attackable.
+   - OVERT PVP flag is set.
+   - "declare_overt_cooldown" cooldown exists (check via `hasCooldown`).
+   - Player added to PVP broadcast channel if enabled.
+
+3. **After going covert (5min timer):**
+   - System message about hidden affiliation.
+   - OVERT PVP flag removed.
+   - Covert status confirmed.
+
+4. **Faction points:**
+   - Standing increases by bribe amount (250 or 1,250) and system message confirms change.
+   - Standing does not exceed rank cap (verify via `getFactionPointsCap`).
+   - Bribe options only appear when skill and credit requirements are met.
+
+5. **Promotion:**
+   - Promotion option appears if rank < max.
+   - System message with rank name on confirmation.
+   - Faction points decrease by `getRankCost(rank + 1)`.
+   - `getFactionRank()` returns new rank, broadcast to nearby players.
+
+6. **Jedi restrictions:**
+   - Jedi characters see restriction messages and cannot select covert/resign options.
+
+7. **Resignation cancellation:**
+   - Pending task canceled when option selected.
+   - `changingFactionStatus` data removed.
+
+## 4. Likely Reasons a Test Sees No Effect
+
+- **Timer not elapsed:** Status changes require waiting for the event/task to fire (30s or 5min). Bot must wait or verify pending state.
+- **Jedi skills present:** If bot has `force_rank_light_novice` or `force_rank_dark_novice`, covert and resign options are blocked (`recruiterConvoHandler.lua:44-47`).
+- **Insufficient standing:** Joining requires 200 standing (`recruiterScreenplay.lua:8`); promotion requires rank-specific cost.
+- **Missing skill/credits for bribes:** `combat_smuggler_underworld_04` and 20k/100k credits required (`recruiterConvoHandler.lua:101-106`).
+- **Already at highest rank:** Promotion option suppressed if `isHighestRank(rank)` returns true (`recruiterConvoHandler.lua:354`).
+- **Cooldown active:** After going overt, 300s "declare_overt_cooldown" prevents immediate re-declaration (`TangibleObjectImplementation.cpp.lines-176-311:206-217`).
+- **Wrong recruiter faction:** Bot must talk to the correct recruiter for the desired faction.
+
+## 5. Open Questions
+
+- **Rank cost table:** The files reference `getRankCost(rank)` and `getFactionPointsCap(rank)` but do not define these functions in the provided snippets. Missing file or function that defines rank progression costs and caps.
+- **`isHighestRank(rank)`:** Function name used but not defined in provided files. Need source to determine max rank value.
+- **`useCovertOvert()` and `getGCWDiscount()`:** Helper functions called but not defined here; likely in other screenplay or manager files.
+- **Faction point earning activities:** These files only show bribe-based earning. Missing documentation on combat, objectives, or other activities that grant points.
+- **`handleGoCovert`, `handleGoOvert`, `handleResign`, `handleGoOnLeave`:** Event handlers called by timers but not shown in provided snippets; need to verify they correctly apply status changes.
+- **PVP broadcast channel:** Behavior depends on server config `isPvpBroadcastChannelEnabled()`; unclear default behavior (`TangibleObjectImplementation.cpp.lines-176-311:227`).

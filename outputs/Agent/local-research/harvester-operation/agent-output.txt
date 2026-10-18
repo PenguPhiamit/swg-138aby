@@ -1,0 +1,10 @@
+done in 13 steps, 249 s
+I've read both source files listed in TASK.md and written `report.md` with all five required sections:
+
+1. **Short answer** (5 sentences) summarizing the harvester operation flow
+2. **How it works** - Detailed breakdown of radial menu interaction, power/maintenance deposits, resource selection, activation checks, extraction rate calculation, harvesting loop, and shutdown conditions, with file:line citations for every claim
+3. **What a bot test should check** - Setup requirements (deed placement, owner status, power/maintenance deposits) and observable results to verify (radial menu item ID 78, SUI window receipt, delta messages, system message string IDs, hopper quantity changes)
+4. **Likely reasons a test sees no effect** - Six specific failure modes with their corresponding checks and messages from the code
+5. **Open questions** - Seven items the provided files don't answer, including the SUI window structure, skill modifiers, and maintenance credit mechanics
+
+All claims are cited with file:line references, inferred information is marked as "(inferred)", and no code excerpts exceed 3 lines.

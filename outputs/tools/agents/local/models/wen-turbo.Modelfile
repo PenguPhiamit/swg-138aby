@@ -1,0 +1,6 @@
+# wen-turbo: Qwen3.8 27B Brainwaves NM HERETIC (Q4_K_M), from the owner's Downloads, 18 Oct 2026
+FROM C:/Users/Pengw/Downloads/wen-turbo-q4.gguf
+PARAMETER temperature 0.6
+PARAMETER top_p 0.95
+PARAMETER top_k 20
+PARAMETER num_ctx 16384

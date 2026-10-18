@@ -1,0 +1,8 @@
+done in 4 steps, 124 s
+Done. I wrote `report.md` with all five sections requested in TASK.md:
+
+1. **Short answer** — Medical XP only awards when healing another player creature (never self or pets), using the `"medical"` XP type with different formulas per command.
+2. **How it works** — Detailed breakdown of range, LOS, cooldowns, skill modifiers, mind costs, and system messages for all three commands, with file:line citations throughout.
+3. **What a bot test should check** — Setup requirements (skills, items, location) and observable results (messages, HAM changes, XP gains) for each command type.
+4. **Likely reasons a test sees no effect** — Eight common failure modes including the HealWound combat restriction, range/LOS checks, cooldowns, and missing pharmaceutical items.
+5. **Open questions** — Six items the source files don't answer, including `checkForTef`, `medicalAnywhere`, `healDamage()` implementation, and battle fatigue behavior.

@@ -1,0 +1,8 @@
+done in 4 steps, 128 s
+Done. I wrote `report.md` with all five required sections:
+
+1. **Short answer** - Summarizes the roll-based state application system (accuracy chance vs defense skill mods divided by 1.5, plus player level).
+2. **How it works** - Details conditions, skill modifiers per state (stunned: -50 melee/ranged defense + stun divisor; blinded: -60 accuracy/dodge; intimidated: -20 defense + intimidate divisor), timings (duration from effect, cooldowns 100/800/1200ms for stand/kneel/prone), and all success/failure/wear-off messages with file:line citations.
+3. **What a bot test should check** - Observable states via hasState/hasBuff, posture via getPosture(), system messages, flytexts, cooldowns, and duration verification.
+4. **Likely reasons no effect** - Defense exceeding accuracyMod, immunity/exclusion timers, combat_equilibrium counter, already-active state, Jedi defenses.
+5. **Open questions** - Missing getStateChance() values, defense mod names, knockdown duration/mechanics, queueDizzyFallEvent details, snare/root movement modifiers.

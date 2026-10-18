@@ -1,0 +1,3 @@
+report-digest: 6 lines in 6 chunks
+6 of 6 chunks asked (0 done before), 0 errors, 0.7 min
+report-digest: 6 items in report.md

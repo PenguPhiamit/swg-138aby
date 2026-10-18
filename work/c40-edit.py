@@ -1,0 +1,15 @@
+from pathlib import Path
+base=Path('/opt/swg/Core3-gpt/MMOCoreORB/src')
+p=base/'server/zone/objects/creature/commands/AgentPathCommand.h'
+s=p.read_text()
+s=s.replace('#include "server/zone/managers/collision/PathFinderManager.h"', '#include "server/zone/managers/collision/PathFinderManager.h"\n#include "server/zone/managers/planet/PlanetManager.h"\n#include "terrain/manager/TerrainManager.h"')
+s=s.replace('\tJSONSerializationType findPath(CreatureObject*', '\t// Outdoor floor selection is relative to the walker, never a ray from the sky.\n\t// Cell floors are handled exclusively by PathFinderManager with cell-local z.\n\tstatic float floorNear(float x, float y, float referenceZ, Zone* zone) {\n\t\tfloat terrain = zone->getPlanetManager()->getTerrainManager()->getHeight(x, y);\n\t\tfloat best = terrain;\n\t\tSortedVector<IntersectionResult> hits;\n\t\tCollisionManager::getWorldFloorCollisions(x, y, zone, &hits);\n\t\tfor (int i = 0; i < hits.size(); ++i) {\n\t\t\tfloat height = 16384.f - hits.get(i).getIntersectionDistance();\n\t\t\tif (height < terrain || !std::isfinite(height))\n\t\t\t\tcontinue;\n\t\t\tfloat distance = std::fabs(height - referenceZ), previous = std::fabs(best - referenceZ);\n\t\t\tif (distance < previous || (distance == previous && height < best))\n\t\t\t\tbest = height;\n\t\t}\n\t\treturn best;\n\t}\n\n\tJSONSerializationType findPath(CreatureObject*')
+s=s.replace('\t\t\tManagedReference<SceneObject*> object = server->getZoneServer()->getObject(cellID);', '\t\t\tif (!std::isfinite(z))\n\t\t\t\treturn {{"mode", "path"}, {"ok", false}, {"error", "invalid height"}};\n\t\t\t// cellId 0 means an explicitly supplied world height.\n\t\t\tif (cellID != 0) {\n\t\t\tManagedReference<SceneObject*> object = server->getZoneServer()->getObject(cellID);')
+s=s.replace('cell = object.castTo<CellObject*>();\n\t\t} else {\n\t\t\tz = CollisionManager::getWorldFloorCollision(x, y, zone, false);', 'cell = object.castTo<CellObject*>();\n\t\t\t}\n\t\t} else {\n\t\t\tz = floorNear(x, y, creature->getWorldPosition().getZ(), zone);')
+s=s.replace('CollisionManager::getWorldFloorCollision(px, py, zone, false)), nullptr)', 'floorNear(px, py, from.getZ(), zone)), nullptr)')
+s=s.replace('full = !add(px, py, CollisionManager::getWorldFloorCollision(px, py, zone, false), 0);', "// Preserve the route's floor; re-casting from the sky selects roofs.\n\t\t\t\t\tfloat pz = previous->getZ() + (point.getZ() - previous->getZ()) * s / steps;\n\t\t\t\t\tfull = !add(px, py, floorNear(px, py, pz, zone), 0);")
+p.write_text(s)
+p=base/'client/agent/AgentControl.cpp'; s=p.read_text()
+s=s.replace('if (cell != 0)\n\t\t\targs +=', 'if (cell != 0 || request.contains("z"))\n\t\t\targs +=')
+s=s.replace('if (indoors || plan.value("scene_changed", false))', 'if (indoors || !request.contains("z") || plan.value("scene_changed", false))')
+p.write_text(s)

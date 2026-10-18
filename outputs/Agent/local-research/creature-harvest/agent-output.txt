@@ -1,2 +1,8 @@
-done in 11 steps, 143 s
-The report has been written to **report.md**.
+done in 4 steps, 87 s
+I've read TASK.md and both source files, then written report.md with all five required sections:
+
+1. **Short answer** - Explains harvesting mechanics in 5 sentences
+2. **How it works** - Details conditions (7m range, canHarvestMe check), skill modifiers (creature_harvesting %), density multipliers (0.5x-1.25x), group bonuses, timings (1s despawn), and all player messages with file:line citations
+3. **What a bot test should check** - Setup requirements (low-level prey ≤5 near starting cities) and observable results (system messages, inventory containers, XP, corpse despawn)
+4. **Likely reasons for no effect** - Covers blocked prey levels, missing resource spawns, already-harvested corpses, tamed creatures, and HAM thresholds
+5. **Open questions** - Names what the files don't show: canHarvestMe() logic, resource type strings, group modifier conditions, density calculation, and string table contents

@@ -1,115 +1,142 @@
-Written by Claude Haiku, 15 Oct 2026, from Core3-dev 90044b8e.
+# Mission Terminals and Mission Completion Report
 
-# Missions (pre-CU, Core3)
+## 1. Short Answer
 
-## 1. Short answer
-A terminal's `missionTerminalType` decides its list. General terminals give 6 destroy and 6 deliver missions. Artisan terminals give 6 survey and 6 crafting, entertainer terminals 6 dancer and 6 musician, scout terminals 6 recon and 6 hunting, and bounty terminals 10 bounty missions. Imperial and rebel terminals give destroy and deliver plus factional extras. A player may hold 2 missions in the datapad, and at most 1 of them may be a bounty. A destroy target is placed 1000-2000 m from where the list was requested and pays 375xL + rand(15xL) credits into the bank. Its lair spawns only when the owner comes within 128 m of the waypoint, and destroying the lair completes the mission. cresh-missions.py only accepts destroy missions within 600 m, so it should nearly always stop at BLOCKED (inferred from the numbers).
+Missions are generated when a player interacts with a mission terminal, which populates their mission bag with empty slots and then fills them based on terminal type: general terminals give destroy (slots 0–5) and deliver (6–11) missions; artisan terminals give survey (0–5) and crafting (6–11); entertainer terminals give dancer (0–5) and musician (6–11); scout terminals give recon (0–5) and hunting (6–11); bounty terminals give bounty missions (0–9). Faction terminals add factional variants. Players may hold up to 6 active missions by default (configurable via `Core3.MissionManager.MaxActiveMissions`), with only one bounty mission allowed at a time. Destroy missions complete when the target lair is destroyed; deliver missions complete when the item is delivered to the NPC at the end position; survey missions complete via survey tool use on resource nodes; entertainer missions complete via performance at the target structure; crafting missions complete via crafting the required item. The cresh-missions.py scenario tests general terminal missions (deliver and destroy) and verifies that Ilsa's datapad fills to 6 missions while a 7th is refused, and that Cresh's reward reaches his bank after mission completion.
 
-## 2. How it works
-Paths are relative to MMOCoreORB/: MMI = src/server/zone/managers/mission/MissionManagerImplementation.cpp, OBJ = src/server/zone/objects/mission, DMO = OBJ/DestroyMissionObjectiveImplementation.cpp, MOI = OBJ/MissionObjectiveImplementation.cpp, lua = bin/scripts/managers/mission/mission_manager.lua.
+## 2. How It Works
 
-**List request.** The server refuses it:
-- at statue and newbie terminals (MMI:165-167);
-- beyond 6 m (MMI:170-175);
-- at bounty terminals without combat_bountyhunter_novice (MMI:178-182);
-- when the player is city-banned (MMI:187-191);
-- within 1400 ms of the last list, with "You can't request missions yet..." (MMI:194-200).
+### Terminal Types and Mission Generation
 
-The mission bag is filled to 12 slots, plus 6, 6 and 12 when factional crafting, recon and entertainer missions are on (MMI:207-220). All three are on (lua:67-71). Slicers get x1.5 once, and the skill mod private_spec_missions adds a percentage (MMI:610-612, 634-639).
+The `populateMissionList` function dispatches to different randomizers based on terminal type (lines 619–638):
 
-**Which terminal gives which types.** The type comes from the template field missionTerminalType (src/templates/tangible/MissionTerminalTemplate.h:26). terminal_mission.iff is "general" (bin/scripts/object/tangible/terminal/terminal_mission.lua:48). The dispatch is MMI:594-608. Slot rules by terminal:
-- general: MMI:628-632
-- artisan: MMI:657-661
-- entertainer: MMI:686-690
-- scout: MMI:715-719
-- bounty: MMI:746-748
-- imperial and rebel: MMI:774-792
+- **General terminal** (`isGeneralTerminal()`): Calls `randomizeGeneralTerminalMissions` (line 625), which generates destroy missions for slots 0–5 and deliver missions for slots 6–11 (lines 658–662).
+- **Artisan terminal** (`isArtisanTerminal()`): Calls `randomizeArtisanTerminalMissions` (line 627), generating survey missions for slots 0–5 and crafting missions for slots 6–11 (lines 687–691).
+- **Entertainer terminal** (`isEntertainerTerminal()`): Calls `randomizeEntertainerTerminalMissions` (line 629), generating dancer missions for slots 0–5 and musician missions for slots 6–11 (lines 716–720).
+- **Scout terminal** (`isScoutTerminal()`): Calls `randomizeScoutTerminalMissions` (line 631), generating recon missions for slots 0–5 and hunting missions for slots 6–11 (lines 745–749).
+- **Bounty terminal** (`isBountyTerminal()`): Calls `randomizeBountyTerminalMissions` (line 633), generating bounty missions for slots 0–9 (line 776). Requires the player to have `combat_bountyhunter_novice` skill (lines 179–182, 1079–1082).
+- **Imperial/Rebel faction terminals** (`isImperialTerminal()` / `isRebelTerminal()`): Calls `randomizeFactionTerminalMissions` (lines 635–637), generating destroy (0–5), deliver (6–11), and optionally crafting, recon, dancer, musician missions for slots 12+ (lines 804–822).
 
-Unused slots keep type 0 (MMI:626).
+Before populating, the system ensures the player's mission bag has enough empty slots. The base capacity is 12 (line 207), with bonuses added if factional missions are enabled: +6 for crafting (line 211), +6 for recon (line 215), and +12 for entertainer (line 219). Empty mission objects are created to fill the bag (lines 222–227).
 
-**Accept.** If the datapad already holds 2 missions, or the player tries to take a second bounty, the server refuses with mission/mission_generic:too_many_missions (MMI:256-273). Otherwise the mission moves to the datapad and its objective starts (MMI:291-293). It expires after 48 h (MISSIONDURATION 172800000 ms, OBJ/MissionObjective.idl:38; MOI:46-70), and the player then sees "Mission expired" (OBJ/events/FailMissionAfterCertainTimeTask.cpp:23-25). Abort is refused while the player is incapacitated or in combat (MMI:531-539).
+### Difficulty, Distance, and Reward Calculations
 
-**Destroy.**
-- The lair comes from the spawn group "<planet>_destroy_missions". Its min difficulty must be at most level+5 and its max at least min(level-5, ceiling). The group level is used when the player is grouped (MMI:1833, 1880-1899).
-- The difficulty level L is random between the lair's min and max (MMI:828).
-- Distance is 1000 + rand(1000) at a random bearing from the player (lua:83-86, MMI:872-874). The spot must be inside the map, out of water and outside city regions. After 20 failed tries the slot stays empty (MMI:868-907).
-- Reward is 375xL + rand(15xL) (lua:91-94, MMI:921-923).
-- On accept, a 128 m area and the waypoint are placed at that spot (DMO:51-83).
-- Only the owner entering that area spawns the lair (src/server/zone/objects/area/MissionSpawnActiveArea.idl:36-40). The lair lands up to about 256 m from the centre (DMO:96-124).
-- The waypoint and start position then move to the lair, and the player sees "Transmission Received: Mission Target has been located.  Mission waypoint has been updated to exact location" (DMO:163-184).
-- The lair is named @lair_n:<name>, is attackable, and has max condition Lx(900+rand(200)) (DMO:215-219).
-- Creature lairs spawn waves when placed, at first damage and at half condition. NPC lairs spawn only when placed (src/server/zone/managers/mission/DestroyMissionLairObserverImplementation.cpp:84-121).
-- Destroying the lair completes the mission. The code does not check who destroyed it (DMO:227, 300-306).
-- If no spawn point is found, the mission fails with @mission/mission_generic:failed (DMO:126-130).
+**Destroy missions** (`randomizeGenericDestroyMission`, lines 835–1001):
+- **Difficulty**: Randomized between the lair spawn's min and max difficulty (line 858), then mapped to a display value based on player level or group level (lines 866–876). Display difficulty = `difficultyLevel` for levels < 5, else `difficultyLevel + group/player level`.
+- **Distance**: `destroyMissionBaseDistance + destroyMissionDifficultyDistanceFactor * difficultyLevel + random(destroyMissionRandomDistance) + random(destroyMissionDifficultyRandomDistance * difficultyLevel)` (lines 902–903). The position must be outside cities and on land (lines 911–932).
+- **Reward**: `destroyMissionBaseReward + destroyMissionDifficultyRewardFactor * difficultyLevel + random(destroyMissionRandomReward) + random(destroyMissionDifficultyRandomReward * difficultyLevel)` (lines 951–952).
+- **City bonus**: Applied as `1 + private_spec_missions skill mod / 100` (line 668).
+- **Slicer bonus**: If the player sliced the terminal, reward is multiplied by 1.5 (line 665).
 
-**Reward (all types).** On completion the server pays the reward, gives faction points and removes the mission from the datapad (OBJ/events/CompleteMissionObjectiveTask.h:27-31). In detail (MOI:192, 273-320, 348-364):
-- music_mission_complete.snd plays.
-- Group members within 128 m of the mission's end point share the credits. Anyone farther away triggers group_too_far. The owner is always paid.
-- The player sees success_w_amount with the amount, and the credits go to the bank.
+**Deliver missions** (`randomizeGenericDeliverMission`, lines 1276–1416):
+- **Difficulty**: Fixed at 5 (line 1408).
+- **Distance**: Mission can be in-town or out-of-town, randomly chosen (lines 1278–1281). Start and end positions are selected from NPC spawn points within the city (lines 1340–1369).
+- **Reward**: `40 + (distance from player to start + distance from start to end) / 10` (line 1389).
 
-**Deliver.**
-- The start NPC is 10-300 m from the player. The end NPC is in the same city or another one (MMI:1248-1257, 1310-1335).
-- Reward is 40 + route length/10 (MMI:1358-1361).
-- If the NPCs cannot spawn, the player sees mission_incomplete_0N and the mission is removed (OBJ/DeliverMissionObjectiveImplementation.cpp:27-40).
-- Talking to the target NPC puts a datadisk in the inventory and moves the waypoint. Talking to the destination NPC while carrying it completes the mission (OBJ/DeliverMissionObjectiveImplementation.cpp:182-223; src/server/zone/objects/creature/conversation/screenhandlers/DeliverMissionScreenHandler.cpp:139-163).
+**Survey missions** (`randomizeGenericSurveyMission`, lines 1003–1076):
+- **Difficulty**: Based on player's `surveying` skill mod. Base level is 50, increased by 10 for each threshold crossed: >30, >50, >70, >90, and +5 at >100 (capped at 95) (lines 1011–1027). Mission level = `50 + 5 * random((maxLevel - 50) / 5)`.
+- **Distance**: Start position is player's current position (line 1070).
+- **Reward**: `400 + (missionLevel - 50) * 20 + random(100)` (line 1065).
 
-**Survey.**
-- The level runs from 50 to 95 in steps of 5 and rises with the surveying skill (MMI:974-1003). 75% of survey missions are mineral (MMI:1011-1016).
-- Reward is 400 + (level-50)x20 + rand(100) (MMI:1035).
-- The start position is where the player stood when the list was made (MMI:1040).
-- It completes on a sample of the named family with density at least the level, taken more than 1024 m from the start. Closer samples give survey_too_close (OBJ/SurveyMissionObjectiveImplementation.cpp:66-81).
+**Crafting missions** (`randomizeGenericCraftingMission`, lines 1448–1483):
+- Generated by modifying a deliver mission. Target template is changed to `attunement_grid.iff` (line 1476).
+- **Difficulty**: Inherited from the base deliver mission (5).
+- **Distance**: Same as deliver mission.
+- **Reward**: Same as deliver mission.
 
-**Entertainer.**
-- The target is a random performance location (MMI:1466-1475). Reward is 100 + distance/10 + rand(100) (MMI:1504-1506).
-- It completes after 10 minutes of performing inside the 32 m area while inside a building. Leaving the area or stopping cancels the timer (OBJ/EntertainerMissionObjectiveImplementation.cpp:46-47, 139-153, 171-177).
-- Starting and stopping a dance or song updates it (src/server/zone/objects/player/sessions/EntertainingSessionImplementation.cpp:320, 419, 529, 589).
+**Entertainer missions** (`randomizeGenericEntertainerMission`, lines 1485–1564):
+- **Difficulty**: `5 * randomRange` where `randomRange = random(2) + 1`, so difficulty is 5 or 10 (lines 1487–1489, 1561).
+- **Distance**: Target is a performance location structure; distance from player to target determines reward (line 1534).
+- **Reward**: `100 + distance / 10 + random(100)` (line 1536).
 
-**Crafting.**
-- It is generated as a deliver mission and then retyped (MMI:1418-1452).
-- The item is picked at accept from 5 quest items, avoiding one already held (MMI:351-361, lua:3-9).
-- The target NPC gives the schematic and its components. Bringing the crafted item to the destination NPC completes the mission. Abort removes the schematic (OBJ/CraftingMissionObjectiveImplementation.cpp:36-76, 83-101).
+**Bounty missions** (`randomizeGenericBountyMission`, lines 1078–1274):
+- **Difficulty**: Level 1, 2, or 3 based on bounty hunter investigation skills (lines 1092–1097). For NPC targets: `3 * creoLevel + 7` (line 1256). For player targets: fixed at 75 (line 1166).
+- **Distance**: Player targets have no distance (end position 0,0) (line 1128). NPC targets use random planet and spawn point (lines 1201–1207).
+- **Reward**: Varies by level and target type. For player Jedi: 50000 if jediState >= 4, else 25000 (lines 1146–1148). For NPC targets: `creoLevel * (200 + random(200))` for level 1, scaled for levels 2 and 3 (lines 1221–1227).
 
-## 3. What a bot test should check (destroy)
-**Setup:**
-- The owner bot stands within 6 m of a terminal_mission.iff (general) terminal.
-- The datapad holds fewer than 2 missions. Abort leftovers out of combat.
-- Request the list once, then wait at least 1.4 s.
-- Accept a distance bound of at least 2000 m from where the list was requested (about 2300 m with the lair offset).
-- Record bank credits first.
+### Mission Limits
 
-**Checks:**
-- (a) The list has 6 destroy and 6 deliver missions; destroy slots can be empty.
-- (b) Each destroy reward is between 375xL and 390xL, times the city bonus.
-- (c) The accepted mission is in the datapad, and a 3rd accept gets too_many_missions.
-- (d) When the owner comes within 128 m of the waypoint, "Transmission Received..." arrives and the waypoint moves.
-- (e) A TANO named @lair_n:... exists near the new waypoint.
-- (f) After the lair is destroyed, the mission is gone from the datapad, success_w_amount arrives, and the bank rises by the reward (solo). Grouped helpers must be within 128 m of the original spot to share it (the end point is not moved, MMI:914 vs DMO:175; inferred).
+- **Maximum active missions**: Configurable via `Core3.MissionManager.MaxActiveMissions`, default 6 (line 270).
+- **Bounty restriction**: Only one bounty mission allowed at a time (line 272).
+- **Datapad volume limit**: A full datapad refuses the mission before anything is created (lines 281–285).
 
-**Against cresh-missions.py:**
-- The 600 m filter (lines 44, 59) excludes every destroy mission.
-- The terminal filter (line 19) lets artisan and statue terminals through, and those offer no destroy missions.
-- The lair search (lines 64, 68) uses the waypoint read before the lair spawned, with an 80 m radius. Re-read the waypoint after the "Transmission Received" message.
-- Only Cresh, the owner, can trigger the spawn.
-- The completion check (line 74) depends on how the bot renders string ids.
-- The reward goes to the bank, so line 79 should compare bank credits.
+### Completion and Failure
 
-## 4. Likely reasons a test sees no effect
-- The distance bound is under 1000 m.
-- The terminal is the wrong type (artisan, statue or newbie).
-- The bot is over 6 m from the terminal, hit the list cooldown, or is city-banned.
-- 2 missions are already held, for example ones kept by the BLOCKED path at line 60.
-- A non-owner reached the spot first, so no lair spawned.
-- The lair was searched for at the generated spot instead of the updated waypoint.
-- Lair condition (about Lx1000) is too high for 150 s fights (line 72; inferred).
-- Destroy slots are empty because of water, cities or the map edge, or the planet has no destroy group (MMI:905-907, 1852-1856).
-- Cash was checked instead of the bank, or a grouped bot was too far from the end point.
+**Mission abort** (`handleMissionAbort`, lines 560–617):
+- Cannot abort while incapacitated or in combat (lines 561–569).
+- Bounty missions have additional cooldown restrictions based on recent combat with target (lines 577–580).
+- Clears journal quest for space missions (lines 583–598).
+- Calls `mission->abort()` and `removeMission` (lines 601, 616).
 
-## 5. Open questions
-- What the bot's `missions` request reports as waypoint and start, and whether that updates after the spawn. This is bot-side code, not Core3 (squad.py:456-468 only forwards requests).
-- How string-id messages such as success_w_amount and too_many_missions appear in the bot's text.
-- Where the SURVEY event is raised. MissionObjectImplementation.cpp (updateMissionLocation, type strings) was not read.
-- Whether slots 13-36 on a general terminal reach the client as empty missions.
-- Whether System::random bounds are inclusive, and the exact getWorldCoordinate distance.
-- Lair spawn limits per template. Hunting, recon and bounty completion were not covered.
-- Whether the scenario's bots are grouped.
-- Commit 90044b8e was taken from the brief; I did not check it.
+**Mission failure** (`handleMissionFail`, lines 540–558):
+- Clears journal quest and calls `mission->abort()` and `removeMission`.
+
+**Specific completion logic** for each mission type is in separate objective classes (`DestroyMissionObjective`, `DeliverMissionObjective`, `SurveyMissionObjective`, `EntertainerMissionObjective`, `CraftingMissionObjective`) included at lines 14–18 but not shown in this file. The scenario comments indicate:
+- Destroy missions complete when the lair is destroyed (scenario line 9).
+- Deliver missions complete when the item is delivered to the NPC at the end position (scenario line 6).
+- A mission is done when it leaves the player's datapad and the reward reaches their bank (scenario line 10).
+- Missions expire after 48 hours if not aborted (scenario line 14).
+
+### Messages the Player Sees
+
+- Out of range: `"ui_radial_out_of_range_prose"` (line 172).
+- Not a bounty hunter terminal: `"@mission/mission_generic:not_bounty_hunter_terminal"` (lines 180, 1080).
+- Banned from city: `"@city/city:banned_services"` (line 189).
+- Cooldown active: `"You can't request missions yet, please wait a bit before trying again."` (line 195).
+- Too many missions: `"mission/mission_generic:too_many_missions"` (line 273).
+- Datapad full: `"mission/mission_generic:datapad_full"` / `"Your datapad is full. You must first free some space."` (lines 282–283, 318).
+- Mission expired: `"Mission has expired."` (line 295).
+- Cannot abort while incapacitated: `"You cannot abort a mission while incapacitated."` (line 562).
+- Cannot abort while in combat: `"You cannot abort a mission while in combat."` (line 567).
+- Bounty cooldown: `"You cannot abort a bounty hunter mission this soon after being in combat with the mission target."` (line 578).
+
+## 3. What a Bot Test Should Check
+
+### Observable Results
+
+1. **Terminal discovery**: Verify the scenario finds terminals of each type within range (cresh-missions.py line 4–5, 32–34).
+2. **Mission generation at general terminal**:
+   - First 6 slots should be destroy missions (lines 658–659).
+   - Next 6 slots should be deliver missions (lines 660–661).
+   - Deliver mission should have `inTown` flag if near city center (scenario line 6, cresh-missions.py line 45).
+3. **Mission acceptance limits**:
+   - Ilsa fills her datapad to 6 destroy missions; a 7th must be refused (scenario line 7, cresh-missions.py line 7).
+   - Only one bounty mission allowed at a time (line 272).
+4. **Destroy mission properties**:
+   - Difficulty should match lair spawn range and player level (lines 856–876).
+   - Distance should be within calculated range (lines 902–903).
+   - Reward should follow formula (line 951–952).
+5. **Deliver mission properties**:
+   - Should have start and end positions (lines 1383–1384).
+   - Reward should be distance-based (line 1389).
+6. **Mission completion**:
+   - Mission leaves datapad upon completion (scenario line 10).
+   - Reward reaches player's bank, divided by group size if grouped (scenario line 10, cresh-missions.py line 61).
+7. **Newbie/statue terminal rejection**: Both should refuse with `"@skill_teacher:skill_terminal_disabled"` (lines 165–168, scenario line 8).
+
+### Required Setup
+
+1. **Marksman profession**: Every bot needs `combat_marksman_master` skill to fight lairs (scenario lines 12–15, cresh-missions.py line 29).
+2. **Terminal proximity**: General terminal must be within 2 km (scenario line 6, cresh-missions.py line 36).
+3. **Group size calculation**: Divisor for reward sharing (cresh-missions.py line 31).
+
+## 4. Likely Reasons a Test Sees No Effect
+
+1. **Terminal not found or out of range**: The general terminal must be within 2 km; if not, the scenario returns early (cresh-missions.py lines 35–37).
+2. **Player not at terminal**: Must be within 6 meters for mission list request (line 170).
+3. **Cooldown active**: `mission_list_request` cooldown of ~1400ms prevents rapid requests (lines 194–200).
+4. **Datapad full**: If the datapad volume limit is reached, missions are refused (lines 281–285).
+5. **No valid lair spawns**: Destroy missions require a valid lair spawn within difficulty range; if none found, mission generation fails silently (lines 844–846, 935–937).
+6. **City ban**: Player banned from the terminal's city cannot use services (lines 187–192).
+7. **Missing skill for bounty terminal**: `combat_bountyhunter_novice` required (lines 179–182).
+8. **Factional missions disabled**: Crafting, recon, and entertainer factional missions only generate if enabled in Lua config (lines 79–95).
+
+## 5. Open Questions
+
+1. **Exact completion logic for each mission type**: The source file includes headers for `DestroyMissionObjective`, `DeliverMissionObjective`, `SurveyMissionObjective`, `EntertainerMissionObjective`, and `CraftingMissionObjective` (lines 14–18), but their implementation files are not provided. How exactly does each objective type detect completion?
+2. **48-hour expiration mechanism**: The scenario comment mentions missions expire after 48 hours (scenario line 14), but the source code does not show where this timer is set or checked. Which file handles mission expiration?
+3. **Group reward distribution**: How is the reward divided among group members? The scenario mentions "reward // group size" (scenario line 10), but the source code only shows `mission->setRewardCredits()` without division logic. Where does group splitting occur?
+4. **Lua configuration values**: The code reads settings from `scripts/managers/mission/mission_manager.lua` (line 45), including `destroyMissionBaseDistance`, `destroyMissionDifficultyDistanceFactor`, etc. (lines 106–113). What are the actual default values in that file?
+5. **Survey mission completion**: How does the survey tool interact with the `SurveyMissionObjective` to complete the mission? What efficiency threshold is needed?
+6. **Entertainer mission performance requirements**: What specific performance actions or skill checks complete an entertainer mission?
+7. **Crafting mission item selection**: The code picks a random crafting item from `craftingMissionItems` (line 382), but what items are in that list and how is the target item determined for the player to craft?

@@ -1,0 +1,8 @@
+done in 4 steps, 96 s
+I've read TASK.md and all seven source files listed in it, then written `report.md` with the five required sections:
+
+1. **Short answer** (4 sentences) summarizing how badges are awarded and what they provide.
+2. **How it works** covering conditions/triggers for exploration-area badges, accumulation milestones (total at 5/10/25/50/75/100/125; exploration at 10/20/30/40/45), storage structure (bitmasks + type counters), system messages (`badge_n` with `prose_grant`/`prose_hasbadge`), optional music playback, and the `BADGEAWARDED` observer event — all cited with file:line numbers.
+3. **What a bot test should check** including observable results (system message prose keys, music messages, badge ownership via `hasBadge()`, `getNumBadges()`, `getTypeCount()`) and required setup (valid ghost slot, area placement, or `/grantBadge` command).
+4. **Likely reasons a test sees no effect** — six scenarios including duplicate badges, null badge IDs, missing areas, timing issues, missing ghost slots, and type mismatches.
+5. **Open questions** naming what the files don't answer: XP rewards, `/requestBadges` response format, event badge triggers, `PlayerObject::awardBadge` delegation path, and maximum badge index limits.

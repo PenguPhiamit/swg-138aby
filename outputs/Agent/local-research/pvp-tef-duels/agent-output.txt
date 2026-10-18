@@ -1,0 +1,8 @@
+done in 4 steps, 103 s
+Done. I read TASK.md and all four source files it listed, then wrote `report.md` with five sections:
+
+1. **Short answer** – duel lifecycle (request → accept/decline → end) and TEF overview
+2. **How it works** – conditions, messages, PVP flags, timings, with file:line citations for every claim
+3. **What a bot test should check** – observable system messages, states, attributes, and required setup
+4. **Likely reasons a test sees no effect** – distance, no-duel areas, ignore lists, faction/status mismatches, undefined constants
+5. **Open questions** – missing values (TEFTIMER), missing callers for combat action types, missing FactionManager and PvpTefRemovalTask files

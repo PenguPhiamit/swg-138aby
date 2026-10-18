@@ -1,0 +1,8 @@
+done in 5 steps, 96 s
+Done. I read `TASK.md` and the listed file `src/bin/scripts/screenplays/sandbox/sandbox_tools_datapad.lua`, then wrote `report.md` with all five requested sections:
+
+1. **Short answer** – 4-sentence summary of what the datapad is, who gets it, and its four action categories.
+2. **How it works** – Detailed breakdown of admin gate, teleports, creature spawning, kit distribution, and condition application, with file:line citations for every claim, including exact numbers (HAM pools, durations, state bit values).
+3. **What a bot test should check** – Setup steps (admin privilege, item acquisition, being outdoors) and specific observable verifications for each category (zone/coordinate changes, creature presence, inventory items, HAM/wounds/state values).
+4. **Likely reasons a test sees no effect** – Six concrete failure modes (not admin, indoors, full inventory, disabled zone, no recorded back point, spawnMobile returning nil).
+5. **Open questions** – Five items the file doesn't answer, naming the missing function (`isPrivileged()`, `addDotState()`), external variable (`SandboxCreatureFolders`), and unknown behavior (indoors definition, character builder integration).

@@ -1,0 +1,8 @@
+done in 6 steps, 174 s
+I've read TASK.md and all six listed files, then written `report.md` with the five required sections:
+
+1. **Short answer** — 5-sentence summary of the path from meeting the old man through phase patrols and XP conversion.
+2. **How it works** — Detailed breakdown of conditions (eligibility checks, phase gating), numbers (3-week phases, 6 trees to master, 20 patrols), timings (18:00 phase change), messages (system message string IDs), with file:line citations throughout.
+3. **What a bot test should check** — Setup requirements (zone enabled, inventory state, phase) and observable results (items received, quest states, XP changes, skill gating).
+4. **Likely reasons a test sees no effect** — Eight common failure modes including wrong phase, zone disabled, not eligible, inventory full, XP below threshold, and FS cap reached.
+5. **Open questions** — Named the missing function `VillageJediManagerCommon.isVillageEligible`, the undefined `forceSensitiveBranches` array, and several other referenced but absent files/functions.

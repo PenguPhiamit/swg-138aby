@@ -1,0 +1,541 @@
+{
+ "built": "2026-10-14",
+ "archive": "s6/local_planets-s6.tre",
+ "sha256": "b0bfdcf984414f5c8dc346b731a5603aea3d2ae060047341bf38b6658e8b11cd",
+ "bytes": 4044929,
+ "entries": 56,
+ "c29_reference": {
+  "sha256_expected": "fbf62971bbbf2b65e613c7972e2a65ea78b98740d0fa39e26e1613beb97d95b1",
+  "sha256_ok": true,
+  "chain_rebuild_identical_to_c29": true
+ },
+ "against_c29": {
+  "entries_c29": 55,
+  "identical": 36,
+  "changed_by_s6": [
+   "creation/default_pc_equipment.iff",
+   "creation/default_pc_hairstyles.iff",
+   "creation/profession_defaults_combat_brawler.iff",
+   "creation/profession_defaults_combat_marksman.iff",
+   "creation/profession_defaults_crafting_artisan.iff",
+   "creation/profession_defaults_outdoors_scout.iff",
+   "creation/profession_defaults_science_medic.iff",
+   "creation/profession_defaults_social_entertainer.iff",
+   "datatables/creation/attribute_limits.iff",
+   "datatables/creation/racial_mods.iff",
+   "datatables/customization/allow_bald.iff",
+   "datatables/customization/customization_data.iff",
+   "datatables/customization/customization_group_instance.iff",
+   "datatables/customization/palette_columns.iff",
+   "datatables/skill/skills.iff",
+   "string/en/player_species.stf",
+   "string/en/skl_d.stf",
+   "string/en/skl_n.stf",
+   "ui/ui_avatardata.inc"
+  ],
+  "new_entries": [
+   "customization/asset_customization_manager.iff"
+  ],
+  "per_file": {
+   "creation/default_pc_equipment.iff": {
+    "ok": true,
+    "blocks_before": 22,
+    "blocks_after": 24,
+    "added": 2,
+    "status": "changed"
+   },
+   "creation/default_pc_hairstyles.iff": {
+    "ok": true,
+    "blocks_before": 22,
+    "blocks_after": 24,
+    "added": 2,
+    "status": "changed"
+   },
+   "creation/profession_defaults_combat_brawler.iff": {
+    "ok": true,
+    "blocks_before": 23,
+    "blocks_after": 25,
+    "added": 2,
+    "status": "changed"
+   },
+   "creation/profession_defaults_combat_marksman.iff": {
+    "ok": true,
+    "blocks_before": 23,
+    "blocks_after": 25,
+    "added": 2,
+    "status": "changed"
+   },
+   "creation/profession_defaults_crafting_artisan.iff": {
+    "ok": true,
+    "blocks_before": 23,
+    "blocks_after": 25,
+    "added": 2,
+    "status": "changed"
+   },
+   "creation/profession_defaults_outdoors_scout.iff": {
+    "ok": true,
+    "blocks_before": 23,
+    "blocks_after": 25,
+    "added": 2,
+    "status": "changed"
+   },
+   "creation/profession_defaults_science_medic.iff": {
+    "ok": true,
+    "blocks_before": 23,
+    "blocks_after": 25,
+    "added": 2,
+    "status": "changed"
+   },
+   "creation/profession_defaults_social_entertainer.iff": {
+    "ok": true,
+    "blocks_before": 23,
+    "blocks_after": 25,
+    "added": 2,
+    "status": "changed"
+   },
+   "datatables/creation/attribute_limits.iff": {
+    "ok": true,
+    "rows_before": 11,
+    "rows_after": 13,
+    "added": 2,
+    "old_rows_kept_in_order": true,
+    "status": "changed"
+   },
+   "datatables/creation/racial_mods.iff": {
+    "ok": true,
+    "rows_before": 11,
+    "rows_after": 13,
+    "added": 2,
+    "old_rows_kept_in_order": true,
+    "status": "changed"
+   },
+   "datatables/customization/allow_bald.iff": {
+    "ok": true,
+    "rows_before": 18,
+    "rows_after": 20,
+    "added": 2,
+    "old_rows_kept_in_order": true,
+    "status": "changed"
+   },
+   "datatables/customization/customization_data.iff": {
+    "ok": true,
+    "rows_before": 509,
+    "rows_after": 519,
+    "added": 10,
+    "old_rows_kept_in_order": true,
+    "status": "changed"
+   },
+   "datatables/customization/customization_group_instance.iff": {
+    "ok": true,
+    "rows_before": 106,
+    "rows_after": 114,
+    "added": 8,
+    "old_rows_kept_in_order": true,
+    "status": "changed"
+   },
+   "datatables/customization/palette_columns.iff": {
+    "ok": true,
+    "rows_before": 39,
+    "rows_after": 41,
+    "added": 2,
+    "old_rows_kept_in_order": true,
+    "status": "changed"
+   },
+   "datatables/skill/skills.iff": {
+    "ok": true,
+    "rows_before": 1071,
+    "rows_after": 1073,
+    "added": 2,
+    "old_rows_kept_in_order": true,
+    "status": "changed"
+   },
+   "string/en/player_species.stf": {
+    "ok": true,
+    "keys_before": 22,
+    "keys_after": 26,
+    "added": [
+     "desc_nautolan",
+     "desc_togruta",
+     "name_nautolan",
+     "name_togruta"
+    ],
+    "status": "changed"
+   },
+   "string/en/skl_d.stf": {
+    "ok": true,
+    "keys_before": 1162,
+    "keys_after": 1164,
+    "added": [
+     "species_nautolan",
+     "species_togruta"
+    ],
+    "status": "changed"
+   },
+   "string/en/skl_n.stf": {
+    "ok": true,
+    "keys_before": 1484,
+    "keys_after": 1486,
+    "added": [
+     "species_nautolan",
+     "species_togruta"
+    ],
+    "status": "changed"
+   },
+   "ui/ui_avatardata.inc": {
+    "ok": true,
+    "lines_before": 3562,
+    "lines_after": 3594,
+    "added_lines": 32,
+    "added_blocks": 2,
+    "status": "changed"
+   },
+   "customization/asset_customization_manager.iff": {
+    "ok": true,
+    "appearances_before": 19265,
+    "appearances_after": 19267,
+    "changed": 0,
+    "added_crcs": [
+     "0xE201EE84",
+     "0xFA0C2BF2"
+    ],
+    "status": "new (vs the chain base copy)"
+   }
+  },
+  "all_supersets_ok": true,
+  "chiss_rows_c29_vs_s6": {
+   "datatables/creation/attribute_limits.iff": [
+    1,
+    1
+   ],
+   "datatables/creation/racial_mods.iff": [
+    1,
+    1
+   ],
+   "datatables/customization/allow_bald.iff": [
+    2,
+    2
+   ],
+   "datatables/customization/customization_data.iff": [
+    42,
+    42
+   ],
+   "datatables/customization/customization_group_instance.iff": [
+    10,
+    10
+   ],
+   "datatables/customization/palette_columns.iff": [
+    2,
+    2
+   ],
+   "datatables/skill/skills.iff": [
+    1,
+    1
+   ]
+  }
+ },
+ "species_stage": {
+  "species": [
+   "nautolan",
+   "togruta"
+  ],
+  "files": {
+   "datatables/creation/racial_mods.iff": {
+    "rows_before": 11,
+    "rows_added": 2,
+    "types_from_base": true,
+    "bytes": 1011,
+    "sha256": "e57247b36b7a746a2eb7146352a176698d4cad3fe60f28173ace7922602e10ec"
+   },
+   "datatables/creation/attribute_limits.iff": {
+    "rows_before": 11,
+    "rows_added": 2,
+    "types_from_base": true,
+    "bytes": 1704,
+    "sha256": "d720629be2b9a6c6df8b33f68901461bd6a602403d8d6c9f89a8d67ef190a167"
+   },
+   "datatables/customization/customization_data.iff": {
+    "rows_before": 509,
+    "rows_added": 10,
+    "types_from_base": true,
+    "bytes": 58625,
+    "sha256": "d58b432a3974e7dc3b097413ba584eab2999fe27d8d8397bd81754df6e527b1b"
+   },
+   "datatables/customization/customization_group_instance.iff": {
+    "rows_before": 106,
+    "rows_added": 8,
+    "types_from_base": true,
+    "bytes": 4556,
+    "sha256": "e880f91b3ad9df7ece8683ecb3138d9deb77e7ec54b260af61544dd30e16ef7e"
+   },
+   "datatables/customization/hair_assets_skill_mods.iff": {
+    "unchanged": true,
+    "rows_added": 0
+   },
+   "datatables/customization/palette_columns.iff": {
+    "rows_before": 39,
+    "rows_added": 2,
+    "types_from_base": true,
+    "palettes": [
+     "npc_skin_nautolan",
+     "npc_togruta"
+    ],
+    "bytes": 3223,
+    "sha256": "d5cf2ee81a18829ebfc649d3559ddcb537ff2fb232081fa84e01df3257b54132"
+   },
+   "datatables/customization/allow_bald.iff": {
+    "rows_before": 18,
+    "rows_added": 2,
+    "types_from_base": true,
+    "bytes": 438,
+    "sha256": "4af039bc8bc5251ec2bc48a66789e89122aef91ae6bbe8bebf30dd5af3227c5b"
+   },
+   "creation/default_pc_hairstyles.iff": {
+    "blocks_before": 22,
+    "blocks_added": 2,
+    "shape": "NAME-only PTMP, as the stock Mon Calamari / Wookiee blocks",
+    "bytes": 21417,
+    "sha256": "d17bfa3eb90825bc2e2098ebfb8ae53532d68a44f5e2e9da7a89f7faab39d946"
+   },
+   "creation/default_pc_equipment.iff": {
+    "blocks_before": 22,
+    "blocks_added": 2,
+    "bytes": 4987,
+    "sha256": "a26b27806585b58c06ddd7450f26059cfae31aefee95bf43fbb62369cbfb5a5e"
+   },
+   "creation/profession_defaults_combat_brawler.iff": {
+    "blocks_before": 23,
+    "blocks_added": 2,
+    "bytes": 7321,
+    "sha256": "8922b01c91883c5d549d44f29f105eacd095abc5e9ace35a8686890cde33bf77"
+   },
+   "creation/profession_defaults_combat_marksman.iff": {
+    "blocks_before": 23,
+    "blocks_added": 2,
+    "bytes": 6548,
+    "sha256": "62f3564cf3323a2578dcfd54242e2821bf689a24d83dd59966708772ec082995"
+   },
+   "creation/profession_defaults_crafting_artisan.iff": {
+    "blocks_before": 23,
+    "blocks_added": 2,
+    "bytes": 5959,
+    "sha256": "863e861c53452ba3f99e9d02ae08e0c54494d8d011c9b74557225d09432cdbf0"
+   },
+   "creation/profession_defaults_jedi.iff": {
+    "unchanged": true,
+    "blocks_added": 0
+   },
+   "creation/profession_defaults_outdoors_scout.iff": {
+    "blocks_before": 23,
+    "blocks_added": 2,
+    "bytes": 6453,
+    "sha256": "c5dfb2741248fa74998777f34021f014b9c1e00906a8ce5dbd4cb9992b3f7ed0"
+   },
+   "creation/profession_defaults_science_medic.iff": {
+    "blocks_before": 23,
+    "blocks_added": 2,
+    "bytes": 6646,
+    "sha256": "e7006de60b1032430b08a1bdbad3d29cbfd81d54882620ce9f7d60bd3eefb83e"
+   },
+   "creation/profession_defaults_social_entertainer.iff": {
+    "blocks_before": 23,
+    "blocks_added": 2,
+    "bytes": 5817,
+    "sha256": "8e685d6e21d2f9496b94d9530e4cdf15c658da9b9a0f3cd0dae7bf5857011ee3"
+   },
+   "ui/ui_avatardata.inc": {
+    "blocks_added": 2,
+    "blocks_rewritten_in_stock_shape": [
+     "nautolan"
+    ],
+    "shape": "15 attributes as the stock zabrak block (appearancemale = appearancefemale for a single-gender species, as the package does)",
+    "bytes": 92298,
+    "sha256": "8ffcce07ced99f7005720047e0361ca07516135cb72a44e5774d8b0bd54926bb"
+   },
+   "string/en/player_species.stf": {
+    "keys_added": 4,
+    "bytes": 44667,
+    "sha256": "6768d7ce831a8f26023775db2800a5dd9d8becb2b41ff6526753ca875cbebcd0"
+   },
+   "string/en/skl_n.stf": {
+    "keys_added": 2,
+    "bytes": 153799,
+    "sha256": "cbbbff94415d87b75dae4ed07b5743eee96244ca7c4129fc9da24af3b5e1205a"
+   },
+   "string/en/skl_d.stf": {
+    "keys_added": 2,
+    "bytes": 378462,
+    "sha256": "736e90d53b363ae50c28dc95a0f741ceb78211d5917ad0c92d41dedb273a758c"
+   },
+   "datatables/skill/skills.iff": {
+    "rows_added": 2,
+    "cloned_from": "species_human",
+    "bytes": 275184,
+    "sha256": "31aff73436e6974b0fa21593f8db7bf1de51d4f7cdbf9cfd4e742c5a727f0a7e"
+   },
+   "customization/asset_customization_manager.iff": {
+    "appearances_spliced": {
+     "appearance/nautolan_m.sat": {
+      "status": "spliced",
+      "key": 19266,
+      "variables": [
+       "/shared_owner/blend_fat",
+       "/shared_owner/blend_muscle",
+       "/shared_owner/blend_skinny",
+       "/private/index_color_0",
+       "/shared_owner/index_color_skin"
+      ]
+     },
+     "appearance/togruta_f.sat": {
+      "status": "spliced",
+      "key": 19278,
+      "variables": [
+       "/shared_owner/index_color_skin",
+       "/shared_owner/blend_fat",
+       "/shared_owner/blend_flat_chest",
+       "/shared_owner/blend_muscle",
+       "/shared_owner/blend_skinny"
+      ]
+     }
+    },
+    "verification": {
+     "stock_appearances_unchanged": true,
+     "changed_stock_appearances": 0,
+     "spliced_appearances_match_source": true,
+     "tables_sorted": true,
+     "index_limits_ok (u16 keys/positions, u8 UCMP fields)": true
+    },
+    "bytes": 341713,
+    "sha256": "b880603766310a2ae89804d72bf5195f117d8571073f5ec1cd92842ac5c0f73e"
+   }
+  },
+  "notes": [],
+  "summary": {
+   "files_written": 18,
+   "files_unchanged": 4
+  },
+  "s6": {
+   "togruta_map_key_in_other": 21786,
+   "palette_rows_added": [
+    "npc_skin_nautolan",
+    "npc_togruta"
+   ],
+   "hair_blocks_added": [
+    "nautolan",
+    "togruta"
+   ],
+   "ui_blocks": {
+    "inserted": [
+     "togruta"
+    ],
+    "rewritten": [
+     "nautolan"
+    ]
+   },
+   "togruta_resolves_to_design": true,
+   "nautolan_resolves_as_2016": true,
+   "togruta_variables": [
+    "/shared_owner/index_color_skin",
+    "/shared_owner/blend_fat",
+    "/shared_owner/blend_flat_chest",
+    "/shared_owner/blend_muscle",
+    "/shared_owner/blend_skinny"
+   ],
+   "nautolan_variables": [
+    "/shared_owner/blend_fat",
+    "/shared_owner/blend_muscle",
+    "/shared_owner/blend_skinny",
+    "/private/index_color_0",
+    "/shared_owner/index_color_skin"
+   ],
+   "acst_verification": {
+    "stock_appearances_unchanged": true,
+    "changed_stock_appearances": 0,
+    "spliced_appearances_match_source": true,
+    "tables_sorted": true,
+    "index_limits_ok (u16 keys/positions, u8 UCMP fields)": true
+   },
+   "species_in_ui": [
+    "human",
+    "rodian",
+    "moncal",
+    "bothan",
+    "wookiee",
+    "twilek",
+    "trandoshan",
+    "zabrak",
+    "ithorian",
+    "sullustan",
+    "chiss",
+    "nautolan",
+    "togruta"
+   ]
+  },
+  "ok": true
+ },
+ "registration": {
+  "planet_crc": {
+   "hoth": true,
+   "ossus": true
+  },
+  "species_listed": [
+   "human",
+   "rodian",
+   "moncal",
+   "bothan",
+   "wookiee",
+   "twilek",
+   "trandoshan",
+   "zabrak",
+   "ithorian",
+   "sullustan",
+   "chiss",
+   "nautolan",
+   "togruta"
+  ]
+ },
+ "closure": {
+  "seeds": [
+   "object/creature/player/shared_nautolan_male.iff",
+   "object/creature/player/shared_togruta_female.iff"
+  ],
+  "files": 128,
+  "by_source": {
+   "mtg_patch_023.tre": 42,
+   "patch_14_00.tre": 1,
+   "patch_05.tre": 2,
+   "patch_09.tre": 1,
+   "patch_00.tre": 17,
+   "data_other_00.tre": 8,
+   "MISSING": 18,
+   "patch_11_00.tre": 7,
+   "mtg_patch_016.tre": 15,
+   "mtg_patch_018.tre": 5,
+   "mtg_patch_015.tre": 9,
+   "data_texture_06.tre": 1,
+   "data_texture_00.tre": 1,
+   "data_texture_01.tre": 1
+  },
+  "missing": [
+   "sound/voice_pl_hum_f_blow_kiss.snd",
+   "sound/voice_pl_hum_f_cough.snd",
+   "sound/voice_pl_hum_f_death.snd",
+   "sound/voice_pl_hum_f_dmg_hvy.snd",
+   "sound/voice_pl_hum_f_hiccup.snd",
+   "sound/voice_pl_hum_f_sigh.snd",
+   "sound/voice_pl_hum_f_sneeze.snd",
+   "sound/voice_pl_hum_f_sniff.snd",
+   "sound/voice_pl_hum_f_yawn.snd",
+   "sound/voice_pl_hum_m_blow_kiss.snd",
+   "sound/voice_pl_hum_m_cough.snd",
+   "sound/voice_pl_hum_m_dmg_hvy.snd",
+   "sound/voice_pl_hum_m_dmg_lgt.snd",
+   "sound/voice_pl_hum_m_hiccup.snd",
+   "sound/voice_pl_hum_m_sigh.snd",
+   "sound/voice_pl_hum_m_sneeze.snd",
+   "sound/voice_pl_hum_m_sniff.snd",
+   "sound/voice_pl_hum_m_yawn.snd"
+  ],
+  "missing_only_voice_snd": true
+ },
+ "ok": true
+}

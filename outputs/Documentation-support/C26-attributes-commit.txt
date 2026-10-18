@@ -1,0 +1,3 @@
+Expose received secondary creature attributes for diagnostics
+
+Agent: ChatGPT

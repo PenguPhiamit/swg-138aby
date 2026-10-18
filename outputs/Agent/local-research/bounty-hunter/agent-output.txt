@@ -1,0 +1,20 @@
+done in 4 steps, 157 s
+I've read TASK.md and all 8 listed source files, then written report.md with the following sections:
+
+1. **Short answer** (4 sentences) - Summarizes NPC vs player bounty branches, informant levels, droid actions, skill-based success formulas, visibility system, and completion mechanics.
+
+2. **How it works** - Detailed breakdown of:
+   - Mission acceptance and objective status progression (informant levels)
+   - Droid action requirements (mission levels 2/3, not mounted, city region checks)
+   - CALLDROID Arakyd countdown (20 seconds with specific messages)
+   - TRANSMITBIOLOGICALSIGNATURE and Seeker droid mechanics
+   - FindTargetTask success formula: `skillMod − targetLevel/3`, clamped 5–95
+   - Time formula: `150 − skillMod + random(time/2)` seconds
+   - Visibility system (32m radius, faction modifiers 0.25/0.5/1.0, configurable decay)
+   - Mission completion and XP calculation
+
+3. **What a bot test should check** - Setup requirements (mission level, informant speaking, not mounted) and observable results (waypoints, countdown messages, droid spawning, skill impact testing, mission completion).
+
+4. **Likely reasons a test sees no effect** - 8 specific failure modes including INITSTATUS objective, wrong mission level, mounted state, city regions, visibility thresholds, and target spawn issues.
+
+5. **Open questions** - 7 items naming missing code: `handlePlayerKilled()`, `calculateReward()`, the Lua config file, `completePlayerBounty()`, damage handlers, AnonymousBountyTerminals defaults, and group visibility behavior.

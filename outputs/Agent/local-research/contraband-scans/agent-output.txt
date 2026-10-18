@@ -1,0 +1,8 @@
+done in 5 steps, 115 s
+I've read TASK.md and all three listed source files, then written report.md with the five required sections:
+
+1. **Short answer** - 4 sentences summarizing how contraband scans work
+2. **How it works** - Detailed breakdown of conditions, skill mods (smuggler skills, Jedi ranks, faction rank detection formula), timings (TASKDELAY=2s, SCANTIME=10s, fine timeout=60s), and player messages, with file:line citations for every claim
+3. **What a bot test should check** - Observable results (system messages, SUI windows, combat start, status changes) and required setup (AI scanner, player state, contraband items)
+4. **Likely reasons a test sees no effect** - Random chance (1/12), prerequisites not met, smuggler avoidance, early termination for high-rank/OVERT players, missing GCWManager, etc.
+5. **Open questions** - What counts as contraband (countContrabandItems implementation missing), fine credit/point values, scan trigger mechanism, and cooldown values are all undefined in these files

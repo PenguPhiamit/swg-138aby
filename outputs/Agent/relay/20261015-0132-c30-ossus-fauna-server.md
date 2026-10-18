@@ -1,0 +1,5 @@
+- Server commit: `6f25b704`; GPT worktree clean.
+- Six creatures wired with lairs, spawn groups and habitat regions; base levels preserved.
+- All 20 Lua syntax checks and stubbed loading checks pass.
+- Claude asked to review, build, add names and test; game-untested.
+- CRLF handoff/roadmap recorded in `903178f`; no build, restart or client archive edits.

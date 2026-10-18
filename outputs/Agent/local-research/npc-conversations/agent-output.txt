@@ -1,0 +1,8 @@
+done in 4 steps, 93 s
+Done. I read TASK.md and all five source files listed in it, then wrote `report.md` with the five required sections:
+
+1. **Short answer** (4 sentences) summarizing how NPC conversations start, progress through screens via option links, are processed by Lua handlers, and end.
+2. **How it works** with detailed subsections on starting, getting next screens, Lua handlers, sending messages, ending, and template types — every claim cited with `file:line` references.
+3. **What a bot test should check** covering observable results (packets, session state, animations) and required setup (valid templates, range, Lua handlers).
+4. **Likely reasons a test sees no effect** listing 6 specific failure modes with citations.
+5. **Open questions** naming 5 gaps in the provided files (client-side initiation, packet formats, DirectorManager source, ConversationTemplate definition, radial menu logic).

@@ -1,0 +1,139 @@
+--- a/MMOCoreORB/src/server/zone/managers/player/PlayerManagerImplementation.cpp
++++ b/MMOCoreORB/src/server/zone/managers/player/PlayerManagerImplementation.cpp
+@@ -4219,9 +4219,42 @@
+ 
+ 		// Run speed tests
+ 		if (!checkPlayerSpeedTest(player, parent, speed, lastValidPosition, lastValidatedWorldPosition, newWorldPosition, errorVariable)) {
+-			player->info(true) << "[Movement] speed check: " << speed << " m/s (" << movementDistance << " m in " << deltaTime
+-				<< " ms of server time), allowed " << player->getRunSpeed() * player->getSpeedMultiplierMod() << " x " << errorVariable;
+-			return Transform::INVALID_POSITION;
++			// A reference packet handled late (a server stall) makes its own window long and this one short by the same
++			// amount, so judge the step again over both windows before bouncing it (Claude, 17 Oct 2026). This accepts
++			// nothing a client could not get from the one-window check by leaving out the middle packet: every accepted
++			// position stays within the allowance of an earlier validated one.
++			uint64 twoWindowTime = ghost->getPreviousServerMovementTimeDelta();
++			float twoWindowDistance = 0.f;
++			float twoWindowSpeed = 0.f;
++			bool forgiven = false;
++
++			if (twoWindowTime > deltaTime) {
++				Vector3 previousWorldPosition = ghost->getPreviousValidatedPosition()->getWorldPosition(server);
++
++				twoWindowDistance = newWorldPosition.distanceTo2d(previousWorldPosition);
++				twoWindowSpeed = twoWindowDistance / ((float)twoWindowTime / 1000.f);
++
++				float twoWindowError = 1.05f + Math::min(0.05f, (twoWindowSpeed * 0.00103f));
++
++				forgiven = checkPlayerSpeedTest(player, parent, twoWindowSpeed, lastValidPosition, lastValidatedWorldPosition, newWorldPosition, twoWindowError);
++			}
++
++			if (!forgiven) {
++				auto msg = player->info(true);
++				msg << "[Movement] speed check: " << speed << " m/s (" << movementDistance << " m in " << deltaTime
++					<< " ms of server time), allowed " << player->getRunSpeed() * player->getSpeedMultiplierMod() << " x " << errorVariable;
++
++				if (twoWindowTime > deltaTime) {
++					msg << "; over two windows " << twoWindowSpeed << " m/s (" << twoWindowDistance << " m in " << twoWindowTime << " ms)";
++				}
++
++				msg.flush();
++
++				return Transform::INVALID_POSITION;
++			}
++
++			player->info(true) << "[Movement] speed check forgiven: " << speed << " m/s over one window (" << movementDistance << " m in "
++				<< deltaTime << " ms), " << twoWindowSpeed << " m/s over two (" << twoWindowDistance << " m in " << twoWindowTime << " ms)";
+ 		}
+ 	}
+ 
+--- a/MMOCoreORB/src/server/zone/objects/player/PlayerObject.idl
++++ b/MMOCoreORB/src/server/zone/objects/player/PlayerObject.idl
+@@ -239,6 +239,16 @@
+ 	@dereferenced
+ 	protected ValidatedPosition lastValidatedPosition;
+ 
++	// The validated position and time before the last one, so a failed speed check can be judged over two windows
++	// when its reference packet was handled late (PlayerManager::checkSpeedHackTests). Not saved.
++	@dereferenced
++	protected transient ValidatedPosition previousValidatedPosition;
++
++	@dereferenced
++	protected transient Time previousServerMovementStamp;
++
++	protected transient boolean hasPreviousMovementWindow;
++
+ 	protected unsigned int accountID;
+ 
+ 	@dereferenced
+@@ -344,6 +354,7 @@
+ 		teleporting = false;
+ 		onLoadScreen = false;
+ 		forcedTransform = false;
++		hasPreviousMovementWindow = false;
+ 
+ 		muted = false;
+ 		mutedReason = "";
+@@ -1692,6 +1703,33 @@
+ 		SceneObject par = super.getParent();
+ 		lastValidatedPosition.update(par);
+ 		serverLastMovementStamp.updateToCurrentTime();
++		hasPreviousMovementWindow = false;
++	}
++
++	/**
++	 * Keeps the validated position and its time as the previous window, just before a step that passed
++	 * the speed check becomes the validated position
++	 */
++	public void keepPreviousMovementWindow() {
++		previousValidatedPosition = lastValidatedPosition;
++		previousServerMovementStamp = serverLastMovementStamp;
++		hasPreviousMovementWindow = true;
++	}
++
++	@local
++	public ValidatedPosition getPreviousValidatedPosition() {
++		return previousValidatedPosition;
++	}
++
++	/**
++	 * Server time in ms since the validated position before the last one, or 0 when there is none
++	 */
++	@read
++	public unsigned long getPreviousServerMovementTimeDelta() {
++		if (!hasPreviousMovementWindow)
++			return 0;
++
++		return previousServerMovementStamp.miliDifference();
+ 	}
+ 
+ 	@read
+--- a/MMOCoreORB/src/server/zone/objects/player/PlayerObjectImplementation.cpp
++++ b/MMOCoreORB/src/server/zone/objects/player/PlayerObjectImplementation.cpp
+@@ -98,6 +98,7 @@
+ 	countMaxCov = 4500; // Only report very large lists
+ 	foodFillingMax = 100;
+ 	drinkFillingMax = 100;
++	hasPreviousMovementWindow = false;
+ 
+ 	duelList.setNoDuplicateInsertPlan();
+ 	chatRooms.setNoDuplicateInsertPlan();
+--- a/MMOCoreORB/src/server/zone/packets/object/DataTransform.h
++++ b/MMOCoreORB/src/server/zone/packets/object/DataTransform.h
+@@ -360,6 +360,7 @@
+ 			creO->info(true) << "DT --- Transform::FULL_VALIDATED -- Setting New Validated Position: (x:" << transform.getPositionX() << ", y:" << transform.getPositionY() << ", z:" << positionZ << ")";
+ #endif // TRANSFORM_DEBUG
+ 
++			ghost->keepPreviousMovementWindow();
+ 			validPosition->setPosition(transform.getPositionX(), positionZ, transform.getPositionY());
+ 			validPosition->setParent(0);
+ 
+--- a/MMOCoreORB/src/server/zone/packets/object/DataTransformWithParent.h
++++ b/MMOCoreORB/src/server/zone/packets/object/DataTransformWithParent.h
+@@ -448,6 +448,7 @@
+ 			creO->info(true) << "DTWP --- Transform::FULL_VALIDATED -- Setting New Validated Position: " << transform.getPosition().toString();
+ #endif // TRANSFORM_DEBUG
+ 
++			ghost->keepPreviousMovementWindow();
+ 			validPosition->setPosition(transform.getPositionX(), transform.getPositionZ(), transform.getPositionY());
+ 			validPosition->setParent(transform.getParentID());
+ 

@@ -1,0 +1,8 @@
+done in 4 steps, 108 s
+Done. I read TASK.md and all 9 listed source files, then wrote report.md with five sections covering:
+
+1. **Short answer** — summary of food/drink/stomach mechanics, buff types, stacking rules, and spice downers
+2. **How it works** — conditions, skill mods/numbers, timings, and player messages, with file:line citations for every claim
+3. **What a bot test should check** — required setup (alive, not full, no conflicting buffs) and observable results (system messages, buffs, filling values, attributes, inventory)
+4. **Likely reasons a test sees no effect** — already buffed, stomach full, already spiced, dead/incapacitated, species restrictions, zero use count, no damage to heal
+5. **Open questions** — how filling empties over time, default max filling values, per-item modifier data, EatCommand's role, and skill-based reduction mechanics (not in the provided files)

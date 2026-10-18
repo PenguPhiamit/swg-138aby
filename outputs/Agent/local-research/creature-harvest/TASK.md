@@ -4,7 +4,7 @@ You are helping test a private Star Wars Galaxies emulator server (SWGEmu Core3,
 automated test scenarios on a test galaxy. Read the files in src/ and explain the game mechanic below, so that the
 scenarios check it correctly.
 
-Question: How does harvesting a dead creature work: who may harvest (killer, group), range, which creatures give which resource and how much, skill effects, how often a corpse can be harvested, and what the player sees? List what a test must set up and observe.
+Question: How does harvesting a dead creature work: who may harvest (killer, group), range, which creatures give which resource and how much, skill effects, how often a corpse can be harvested, and what the player sees? List what a test must set up and observe. Context, 17 Oct gate: the harvest bot found no 'ordinary wild prey' for meat near Mos Eisley (BLOCKED: prey level unknown or above 5). Which creatures near a starting city can a novice harvest?
 
 The files in src/ are copies of the server source and, where its path says scenarios/, of the bot test scenario. Every line starts with its line number in the
 original file ("  919| ..."); cite those numbers.

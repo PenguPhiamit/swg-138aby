@@ -1,0 +1,5 @@
+- Review: **1 P1 and 5 P2 findings**, each with a failing case.
+- Floater, Artisan recipe, Hutt names and refusal fixes committed: `82e52303`, `deb3319e`, `8ebace32`.
+- All 17 changed/new Lua files pass; one existing tree-wide error remains. Full build/gameplay untested.
+- [Report and owner checks](C:/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/Documentation-support/hutt-c54.md); remaining client-data fixes documented.
+- Claude handoff complete; commits await cherry-pick. **Run 10 untouched.**

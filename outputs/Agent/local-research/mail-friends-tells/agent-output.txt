@@ -1,0 +1,8 @@
+done in 4 steps, 118 s
+I've read TASK.md and all 9 listed source files, then written report.md with the five required sections:
+
+1. **Short answer** (5 sentences) summarizing tells, mail, friends, and ignore behavior
+2. **How it works** with detailed conditions, limits, timings, and messages for each mechanic, citing file:line for every claim
+3. **What a bot test should check** including setup requirements and observable results (system messages, states, waypoints)
+4. **Likely reasons a test sees no effect** (async mail delivery, god mode bypasses, pending mail not loading, etc.)
+5. **Open questions** naming missing constants (IM_MAXSIZE, PM_MAXSIZE), missing implementations (PendingMessageList, PlayerObject methods), and undefined string table keys

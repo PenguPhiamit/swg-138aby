@@ -1,2 +1,101 @@
 - 2026-10-15 06:52 creature-harvest: report written (6036 bytes), 2 min, 2 files
 - 2026-10-15 09:00 12 topics researched by Claude agents (Haiku, finished by Opus): cure-poison, doctor-enhance-wounds, entertainer-buffs, survey-sample, travel-shuttles, missions, crafting, resources, quests, factions, resource-quality, ham; status review
+- 2026-10-15 12:26 bot-gap-list (bot-gaps): report written (bot-gaps: 192 items in report.md), 1 min
+- 2026-10-15 12:36 proofread-player-text (proofread): report written (proofread: 72 items in report.md), 6 min
+- 2026-10-16 03:11 medic-xp-healing: report written (1391 bytes), 1 min, 1 files; skipped src/server/zone/objects/creature/commands/HealWoundCommand.h (over the 30000-character budget), src/server/zone/objects/creature/commands/HealStateCommand.h (over the 30000-character budget)
+- 2026-10-16 03:17 scout-xp-sources: report written (2853 bytes), 2 min, 4 files; skipped src/server/zone/managers/creature/CreatureManagerImplementation.cpp (over the 30000-character budget)
+- 2026-10-16 03:21 entertainer-xp-sources: report written (2033 bytes), 1 min, 1 files; skipped src/server/zone/objects/player/sessions/EntertainingSessionImplementation.cpp (over the 30000-character budget)
+- 2026-10-17 04:31 structure-placement: report written (2327 bytes), 1 min, 1 files; skipped src/server/zone/managers/structure/StructureManager.cpp (over the 60000-character budget)
+- 2026-10-17 04:37 harvester-operation: report written (2509 bytes), 1 min, 2 files
+- 2026-10-17 04:42 vehicle-mount: report written (2739 bytes), 1 min, 3 files
+- 2026-10-17 04:49 bazaar-flow: report written (2802 bytes), 2 min, 6 files
+- 2026-10-17 05:00 secure-trade: no report (**Based on:** Core3 Server Files (TradeSession.idl, AddItemMessageCallback.h, etc.)), 8 min, 7 files
+- 2026-10-17 05:18 structure-placement: report written (1300 bytes), 2 min, 1 files; skipped src/server/zone/managers/structure/StructureManager.cpp (over the 30000-character budget)
+- 2026-10-17 05:22 harvester-operation: report written (2017 bytes), 1 min, 1 files; skipped src/server/zone/objects/installation/InstallationObjectImplementation.cpp (over the 30000-character budget)
+- 2026-10-17 05:31 entertainer-buffs: report written (10222 bytes), 4 min, 3 files
+- 2026-10-17 05:38 creature-harvest: report written (7213 bytes), 1 min, 2 files
+- 2026-10-17 05:46 missions: report written (13474 bytes), 4 min, 2 files
+- 2026-10-17 05:49 factions: no report (Once the source files are available, I'll be happy to write the report.md with all the requested sections (short answer,), 1 min, 0 files
+- 2026-10-17 05:51 bot-gap-list (bot-gaps): report written (bot-gaps: 237 items in report.md), 2 min
+- 2026-10-17 05:54 proofread-player-text (proofread): paused, resumes when idle (39 of 39 chunks asked (37 done before), 3 errors, 3.1 min; 3 chunk(s) failed; rerun to retry them), 3 min
+- 2026-10-17 05:55 proofread-player-text (proofread): report written (proofread: 131 items in report.md), 1 min
+- 2026-10-17 05:57 factions: report written (8989 bytes), 2 min, 6 files
+- 2026-10-17 06:01 structure-placement: report written (10859 bytes), 4 min, 2 files
+- 2026-10-17 06:05 harvester-operation: report written (13892 bytes), 4 min, 2 files
+- 2026-10-17 06:07 vehicle-mount: report written (12278 bytes), 2 min, 3 files
+- 2026-10-17 06:09 bazaar-flow: report written (10270 bytes), 2 min, 6 files
+- 2026-10-17 06:10 secure-trade: report written (8080 bytes), 1 min, 7 files
+- 2026-10-17 06:17 player-cities: report written (9128 bytes), 7 min, 1 files
+- 2026-10-17 06:22 pets-droids: report written (13274 bytes), 5 min, 4 files
+- 2026-10-17 06:26 groups: report written (14959 bytes), 4 min, 3 files
+- 2026-10-17 06:33 player-vendors: report written (15491 bytes), 6 min, 2 files
+- 2026-10-17 06:37 structure-upkeep: report written (7669 bytes), 4 min, 1 files
+- 2026-10-17 06:40 crafting-factories: report written (13168 bytes), 4 min, 2 files
+- 2026-10-17 06:41 report-digest-runs (report-digest): report written (report-digest: 6 items in report.md), 1 min
+- 2026-10-17 06:42 bot-chat-lines (bot-chat): report written (bot-chat: 40 items in report.md), 1 min
+- 2026-10-17 06:49 era-check-player-text (era-check): paused, resumes when idle (43 of 43 chunks asked (0 done before), 2 errors, 7.5 min; 2 chunk(s) failed; rerun to retry them), 8 min
+- 2026-10-17 06:51 era-check-player-text (era-check): paused, resumes when idle (2 of 2 chunks asked (41 done before), 2 errors, 1.3 min; 2 chunk(s) failed; rerun to retry them), 1 min
+- 2026-10-17 06:52 era-check-player-text (era-check): report written (era-check: 41 items in report.md), 1 min
+- 2026-10-17 06:54 combat-states: report written (5859 bytes), 2 min, 12 files
+- 2026-10-17 06:56 pvp-tef-duels: report written (9787 bytes), 2 min, 4 files
+- 2026-10-17 06:58 group-loot: report written (8347 bytes), 2 min, 8 files
+- 2026-10-17 07:00 lairs-spawning: report written (12864 bytes), 2 min, 8 files
+- 2026-10-17 07:02 camps: report written (12926 bytes), 2 min, 6 files
+- 2026-10-17 07:08 foraging: report written (8166 bytes), 6 min, 6 files
+- 2026-10-17 07:12 fishing: report written (10627 bytes), 4 min, 4 files
+- 2026-10-17 07:14 food-drink-spice: report written (8760 bytes), 2 min, 9 files
+- 2026-10-17 07:16 slicing: report written (9003 bytes), 2 min, 5 files
+- 2026-10-17 07:18 guilds: report written (7408 bytes), 2 min, 9 files
+- 2026-10-17 07:20 mail-friends-tells: report written (11100 bytes), 2 min, 9 files
+- 2026-10-17 07:22 badges: report written (6752 bytes), 2 min, 8 files
+- 2026-10-17 07:23 bank-tips: report written (8097 bytes), 1 min, 3 files
+- 2026-10-17 07:25 containers-inventory: report written (8455 bytes), 2 min, 6 files
+- 2026-10-17 07:27 skills-training: report written (11911 bytes), 2 min, 5 files
+- 2026-10-17 07:29 image-design: report written (10488 bytes), 2 min, 5 files
+- 2026-10-17 07:32 bounty-hunter: report written (15176 bytes), 3 min, 8 files
+- 2026-10-17 07:34 gcw-bases: report written (10949 bytes), 2 min, 6 files
+- 2026-10-17 07:36 contraband-scans: report written (10250 bytes), 2 min, 3 files
+- 2026-10-17 07:38 npc-conversations: report written (10580 bytes), 2 min, 5 files
+- 2026-10-17 07:38 queue finished on the friend's PC: paused (Agent/local-research/STOP); 1 still waiting: npc-dialogue-ossus
+- 2026-10-17 08:27 medic-xp-healing: report written (11955 bytes), 2 min, 3 files
+- 2026-10-17 08:41 scout-xp-sources: report written (7363 bytes), 8 min, 5 files
+- 2026-10-17 08:52 entertainer-xp-sources: no report (done in 31 steps, 406 s), 7 min, 2 files
+- 2026-10-17 09:00 npc-dialogue-ossus (npc-dialogue): report written, on this PC by hand (WaifuGemma4), 3 min
+- 2026-10-17 09:08 report-precheck (claim-check): report written (claim-check: 940 items in report.md), 11 min
+- 2026-10-17 09:14 report-diff (report-diff): report written (report-diff: 6 items in report.md), 1 min
+- 2026-10-17 09:21 world-bosses: report written (8101 bytes), 2 min, 2 files
+- 2026-10-17 09:27 mercenaries: report written (10513 bytes), 2 min, 3 files
+- 2026-10-17 09:34 leash: report written (8014 bytes), 2 min, 1 files
+- 2026-10-17 npc-dialogue-hoth (npc-dialogue): report written, on this PC by hand (WaifuGemma4), 2 min; reviewed by Claude, used in Hoth-fill
+- 2026-10-17 09:41 hoth-content: report written (11188 bytes), 2 min, 8 files
+- 2026-10-17 09:49 sandbox-creatures: report written (4695 bytes), 3 min, 1 files
+- 2026-10-17 09:50 owner pause until later tonight (Agent/local-research/STOP), after sandbox-creatures; 10 topics left open
+- 2026-10-17 10:01 owner pause lifted (owner: "go ahead and fire up a few more tasks on his pc"); 2 minutes between topics now
+- 2026-10-17 10:03 datapad-tools: report written (8354 bytes), 2 min, 1 files
+- 2026-10-17 10:07 fs-village: report written (9348 bytes), 3 min, 6 files
+- 2026-10-17 10:23 jedi-unlock: no report (done in 3 steps, 839 s), 14 min, 6 files
+- 2026-10-17 10:28 gambling: report written (8774 bytes), 2 min, 6 files
+- 2026-10-17 10:31 weather: report written (6616 bytes), 2 min, 5 files
+- 2026-10-17 10:36 veteran-rewards: report written (7106 bytes), 2 min, 7 files
+- 2026-10-17 10:37 owner pause (Agent/local-research/STOP): "pause que"
+- 2026-10-17 11:40 owner pause lifted for this PC only (owner: "resume what on my PC only"); the friend's PC is commented out in ollama-url.txt; the four open topics run on qwen3:8b
+- 2026-10-17 11:52 scenario-review (scenario-review): report written (scenario-review: 40 items in report.md), 5 min
+- 2026-10-17 11:58 test-index (test-index): paused, resumes when idle (20 of 56 chunks asked (0 done before), 0 errors, 4.8 min, lowest headroom 13.6 GB; paused: an owner's SWG client is running), 5 min
+- 2026-10-17 12:38 test-index (test-index): report written (test-index: 56 items in report.md), 9 min
+- 2026-10-17 owner: "Stop silly tavern, start research with local model on my pc"; SillyTavern stopped, the pause lifted, this PC only (qwen3:8b)
+- 2026-10-17 17:30 item-check (item-check): paused, resumes when idle (6 of 6 chunks asked (100 done before), 1 errors, 1.5 min, lowest headroom 19.9 GB; 1 chunk(s) failed; rerun to retry them), 1 min
+- 2026-10-17 17:33 item-check (item-check): paused, resumes when idle (1 of 1 chunks asked (105 done before), 1 errors, 0.3 min, lowest headroom 29.4 GB; 1 chunk(s) failed; rerun to retry them), 0 min
+- 2026-10-17 17:39 item-check (item-check): report written (item-check: 2095 items in report.md), 0 min
+- 2026-10-17 18:28 item-check-ok (item-check-ok): paused, resumes when idle (189 of 189 chunks asked (0 done before), 27 errors, 44.1 min, lowest headroom 18.6 GB; 27 chunk(s) failed; rerun to retry them), 44 min
+- 2026-10-17 18:36 item-check-ok (item-check-ok): paused, resumes when idle (27 of 27 chunks asked (162 done before), 27 errors, 8.0 min, lowest headroom 18.6 GB; 27 chunk(s) failed; rerun to retry them), 8 min
+- 2026-10-17 18:44 item-check-ok (item-check-ok): report written (item-check-ok: 3228 items in report.md), 8 min
+- 2026-10-18 00:23 entertainer-xp-sources: report written (8106 bytes), 4 min, 2 files
+- 2026-10-18 00:27 jedi-unlock: report written (5903 bytes), 2 min, 6 files
+- 2026-10-18 01:03 overnight run on Miniverse started (owner: "check all tasks for this PC, queue them and run them, we have until about 6 am"); wen-turbo only, WSL off; jobs: claim-recheck, item-check leftovers, entertainer-xp-sources, jedi-unlock
+- 2026-10-18 01:16 overnight run on Miniverse stopped during claim-recheck (wen-turbo, 17 of 33 chunks): saluki (Underdog Saluki 27B IQ2, on the friend's PC, 43 tok/s) was stricter and 10x faster on the 24-claim test, so the recheck reruns there; the rest goes to the friend's PC (owner: "after first task, stop and set everything up to run on Microverse, run the server here")
+- 2026-10-18 01:22 claim-recheck (saluki, friend's PC): report written (claim-recheck/report.md), 2.8 min; wen-turbo's partial answers kept in claim-recheck/wen-turbo-partial
+- 2026-10-18 02:00 Claude checked claim-recheck against the code: Saluki right on 62 of 70 changed verdicts (claim-recheck/report.md, "Claude's check"); precheck.py now cuts each claim around its citation; queued bounty-offers, easy-destroy, bounty-offers-saluki (model comparison) and report-precheck-saluki (owner: "figure out what else our local models can do")
+- 2026-10-18 01:46 scenario-review (scenario-review): paused, resumes when idle (40 of 40 chunks asked (0 done before), 6 errors, 11.4 min; 6 chunk(s) failed; rerun to retry them), 11 min
+- 2026-10-18 01:51 scenario-review (scenario-review): paused, resumes when idle (6 of 6 chunks asked (34 done before), 6 errors, 2.9 min; 6 chunk(s) failed; rerun to retry them), 3 min
+- 2026-10-18 01:56 scenario-review (scenario-review): report written (scenario-review: 29 items in report.md), 3 min
+- 2026-10-18 02:12 bounty-offers: no report (done in 3 steps, 856 s), 14 min, 7 files

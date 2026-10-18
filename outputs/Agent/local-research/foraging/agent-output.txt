@@ -1,0 +1,8 @@
+done in 4 steps, 351 s
+Done. I've written `report.md` with all five required sections:
+
+1. **Short answer** (5 sentences) summarizing how /forage works
+2. **How it works** with detailed breakdown of conditions, skill mods, costs, timing, forage areas/exhaustion mechanics, loot tables, and player messages — every claim cited with file:line references
+3. **What a bot test should check** covering setup requirements and observable results (system messages, inventory, area exhaustion, movement/combat checks)
+4. **Likely reasons a test sees no effect** listing 7 common failure modes
+5. **Open questions** identifying 6 gaps in the provided source files (loot group contents, uninitialized variable bug, LAIR loot logic, unreachable rare items branch, skill requirements, and density calculation details)

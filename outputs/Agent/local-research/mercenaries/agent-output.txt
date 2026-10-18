@@ -1,0 +1,14 @@
+done in 4 steps, 96 s
+I have completed the task:
+
+1. **Read TASK.md** - which asked me to explain how hiring mercenaries works in this SWGEmu sandbox feature
+2. **Read all three source files**:
+   - `src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua` (main logic)
+   - `src/bin/scripts/mobile/conversations/sandbox/sandbox_mercenary_broker_conv.lua` (conversation screens)
+   - `src/bin/scripts/mobile/sandbox/sandbox_mercenaries.lua` (creature templates)
+3. **Wrote report.md** with all five required sections:
+   - Short answer summarizing the mechanic
+   - Detailed explanation of how it works with file:line citations for every claim
+   - Bot test checklist covering setup, observable results, and test sequence
+   - Likely reasons a test might see no effect
+   - Open questions about missing functionality (cost, duration, death handling, data persistence)

@@ -489,3 +489,6 @@ Files that grow without limit get slow to read, for us and for the game tools. R
 - [x] C53 Ossus o7 staging (16 Oct, ChatGPT): `3f64720`; accepted crater/pod/field and POI moves retained, POI 17 relocated to tested foothills (2200, -4725). End-to-end offline checks PASS; packing, installation and client acceptance pending.
 
 - [x] C54 Hutt review/source checkpoint (16 Oct): [six ranked findings and owner floater checks](Documentation-support/hutt-c54.md); `82e52303`, `deb3319e`, `8ebace32` on gpt/c54-hutt-floater; Artisan floater, names and refusal fixes staged, 17 Lua checks pass. Client profile/text/builder corrections, full build and in-game acceptance remain open; run 10 untouched.
+
+- [x] C55 first-release non-bot source review (16 Oct): [commit verdicts and failing cases](Documentation-support/review-C55/C55-review.md), `fbee3aa`; open inherited helper P1 / global spawn-gate P2; 74 Lua checks pass. XP/delivery/isolated city guard source shortlist; runtime and owner release gates remain open.
+

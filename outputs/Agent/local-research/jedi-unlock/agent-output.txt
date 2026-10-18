@@ -1,0 +1,8 @@
+done in 4 steps, 112 s
+Done. I read TASK.md and all six source files, then wrote report.md with the five required sections:
+
+1. **Short answer** - Server defaults to VILLAGEJEDIPROGRESSION; hologrind requires mastering 6 professions; visibility constants defined in visibility_manager.lua
+2. **How it works** - Conditions (badge awards triggering checks), skill/state changes, timing constants, and player messages with file:line citations throughout
+3. **What a bot test should check** - Observable results (SUI message, skill, jedi state) and setup needed (progression type, badge awards, observer registration)
+4. **Likely reasons a test sees no effect** - Wrong progression type, insufficient mastered professions, missing observer registration, wrong item type
+5. **Open questions** - Missing village_jedi_manager.lua logic, visibility system implementation details, custom progression requirements, skill structure, and hologrind profession assignment effects
