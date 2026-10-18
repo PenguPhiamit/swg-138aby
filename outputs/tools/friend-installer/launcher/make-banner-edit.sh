@@ -1,5 +1,6 @@
 #!/bin/bash
-# Edits over a chosen banner art (copy it to ComfyUIinputg11.png) with FLUX.2 klein 4B reference editing (round 7, 18 Oct).
+# Edits over a chosen banner art with FLUX.2 klein 4B reference editing (round 7, 18 Oct). Copy the art to
+# ComfyUI\input\fg11.png first. Usage: make-banner-edit.sh <out folder>
 S=${1:?out folder}
 W=/c/Users/Pengw/Documents/Codex/2026-10-13/h/outputs/tools/comfy/flux2-klein-4b-edit.json
 curl -s -m 2 http://127.0.0.1:8188/system_stats >/dev/null || (cd /c/Users/Pengw/Tools/ComfyUI_windows_portable && (./python_embeded/python.exe -s ComfyUI/main.py --windows-standalone-build --offline --disable-auto-launch --disable-pinned-memory > "$S/comfy.log" 2>&1 &))
