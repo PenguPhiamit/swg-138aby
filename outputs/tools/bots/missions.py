@@ -844,10 +844,11 @@ def perform(g, bot, mission, before, divisor, label, minutes=12):
 
 
 # ---- scout ----
-def recon(g, bot, mission, before, divisor, label):
+def recon(g, bot, mission, before, divisor, label, team=()):
+    """Walk into the recon area; team walks along and fights (17 Oct: Mirren and Dask, walking alone, were downed)."""
     began, since = time.time(), mark(bot)
     spot = where(mission)
-    trip = guarded_walk(g, [bot], spot, label, minutes=25)
+    trip = guarded_walk(g, [bot, *team], spot, label, minutes=30)
     if trip['arrived']:
         bot.walk(spot['x'], spot['y'], tries=1)  # into the 32 m area's middle
     if not g.check(f'{label}: reach the recon area', trip['arrived'] or far(bot.status(), spot) < 30, trip):
@@ -913,7 +914,7 @@ def npc_bounty(bot, limit):
     return choose
 
 
-def bounty(g, bot, terminal, label, divisor, limit=4000):
+def bounty(g, bot, terminal, label, divisor, limit=4000, lists=30):
     """An NPC bounty. The informant of the mission's level comes first (InformantMissionScreenHandler: the objective
     leaves INITSTATUS; a level-1 informant also gives the target's waypoint). At level 2 and 3 the probe droid then
     transmits the signature and the seeker droid gives the waypoint (both refuse before the informant:
@@ -921,7 +922,16 @@ def bounty(g, bot, terminal, label, divisor, limit=4000):
     began = time.time()
     g.note(f"{label}: {bot.first} skills: " + agentskill(bot, *BOUNTY_BOXES)[:160])
     level = bounty_level(bot)
-    mission, before, divisor = take(g, bot, terminal, 'bounty', [('bounty', npc_bounty(bot, limit))], label, divisor)
+    # A level-1 target starts at a random spawn point anywhere on the planet (getRandomBountyTargetPosition), and every
+    # list request draws new offers (populateMissionList): list again until one starts within limit.
+    choose, listed = npc_bounty(bot, limit), []
+    for n in range(lists):
+        listed = offers(bot, terminal, 'bounty')
+        if choose([m for m in listed if m.get('type') == 'bounty']):
+            break
+        bot.idle(LIST_COOLDOWN)
+    g.note(f'{label}: {n + 1} lists for an NPC target within {limit} m')
+    mission, before, divisor = take(g, bot, terminal, 'bounty', [('bounty', choose)], label, divisor, listed)
     if mission is None:
         return None
     since = mark(bot)
@@ -1080,7 +1090,7 @@ def hunting_choice(bot, radius=1500):
     return choose
 
 
-def faction(g, bot, terminal, ttype, divisor):
+def faction(g, bot, terminal, ttype, divisor, team=()):
     """An imperial or rebel terminal: an in-town deliver mission, else the nearest recon (both need no fight)."""
     mission, before, divisor = take(g, bot, terminal, ttype, [('deliver', in_town(bot)),
                                                               ('recon', nearest(bot, limit=4500))],
@@ -1090,7 +1100,7 @@ def faction(g, bot, terminal, ttype, divisor):
     label = f"{ttype}/{mission.get('type')}"
     if mission.get('type') == 'deliver':
         return errand(g, bot, mission, before, divisor, label)
-    return recon(g, bot, mission, before, divisor, label)
+    return recon(g, bot, mission, before, divisor, label, team)
 
 
 def lowest(listed):
