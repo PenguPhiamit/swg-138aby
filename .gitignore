@@ -104,6 +104,7 @@ outputs/tools/.owner-email
 outputs/Agent/local-research/*/src/
 outputs/Agent/local-research/*/agent-log.jsonl
 outputs/Agent/local-research/.lock
+outputs/Agent/local-research/STOP
 outputs/Agent/local-research/*.tmp
 outputs/Agent/local-research/state.json
 # chunk jobs (local_jobs.py / local_map.py): inputs and raw answers stay local; report.md and map-output.txt are kept

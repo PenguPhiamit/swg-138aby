@@ -1,0 +1,7 @@
+claim-check: 875 lines in 219 chunks
+50/219 chunks, 5.4 s each, 0 errors
+100/219 chunks, 5.4 s each, 0 errors
+150/219 chunks, 5.6 s each, 0 errors
+200/219 chunks, 5.9 s each, 0 errors
+219 of 219 chunks asked (0 done before), 0 errors, 21.4 min, lowest headroom 10.4 GB
+claim-check: 875 items in report.md

@@ -1,0 +1,8 @@
+done in 4 steps, 105 s
+Done. I wrote `report.md` with all five sections requested in TASK.md:
+
+1. **Short answer** (4 sentences) summarizing how difficulty and distance are calculated and what to do for an easy, near lair
+2. **How it works** with detailed file:line citations for lair selection, difficulty calculation, distance formula, and validation logic
+3. **What a bot test should check** including setup requirements and observable results (difficulty, distance, lair template, system messages)
+4. **Likely reasons a test sees no effect** - six specific causes drawn from the code (no qualifying lairs, minLevelCeiling capping, position validation failures, empty spawn lists, faction filtering)
+5. **Open questions** naming missing files/functions: config constants, GroupObject's getGroupLevel logic, LairTemplate mapping, terminal offer trigger, and ConfigManager defaults

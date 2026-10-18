@@ -1,3 +1,4 @@
-test-index: 56 lines in 56 chunks
-36 of 36 chunks asked (20 done before), 0 errors, 8.6 min, lowest headroom 12.0 GB
-test-index: 56 items in report.md
+test-index: 62 lines in 62 chunks
+50/62 chunks, 12.7 s each, 0 errors
+62 of 62 chunks asked (0 done before), 0 errors, 13.4 min
+test-index: 62 items in report.md
