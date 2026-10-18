@@ -1,50 +1,50 @@
 diff -ruN a/MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua b/MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua
 --- a/MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua	2026-10-18 10:48:47.623300900 -0700
-+++ b/MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua	2026-10-18 10:49:08.147107200 -0700
++++ b/MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua	2026-10-18 11:21:48.651226300 -0700
 @@ -13,8 +13,9 @@
  	{"@hoth_region_names:hothstarport", 0, -2000, {CIRCLE, 200}, CITY + NOSPAWNAREA},
  	{"hoth_scavenger_starport_nobuild", 0, -2000, {CIRCLE, 300}, NOBUILDZONEAREA},
  
 -	-- The ice caves (MTG snapshot: cave_01..04_ice)
 -	{"@hoth_region_names:ice_caves", -400, 2600, {CIRCLE, 450}, NAMEDREGION + NOBUILDZONEAREA},
-+	-- The ice caves (MTG snapshot: cave_01..04_ice). Harvesters may go in (owner, 18 Oct 2026: the rich Hoth resources
-+	-- around Goke); houses and other structures may not.
++	-- The ice caves (MTG snapshot: cave_01..04_ice). Harvesters and power generators may go in (owner, 18 Oct 2026: the
++	-- rich Hoth resources around Goke); factories, houses and other structures may not.
 +	{"@hoth_region_names:ice_caves", -400, 2600, {CIRCLE, 450}, NAMEDREGION + NOBUILDZONEAREA + HARVESTERAREA},
  
  	-- Area spawners (batch A, Fable 14 Oct 2026): the plains, foothills and patrol zones of MTG's map, sited with
  	-- outputs/Fable-hoth-batchA/tools/hoth_survey.py (flat ground, away from the outpost, the caves and the massif).
 diff -ruN a/MMOCoreORB/bin/scripts/managers/planet/regions.lua b/MMOCoreORB/bin/scripts/managers/planet/regions.lua
 --- a/MMOCoreORB/bin/scripts/managers/planet/regions.lua	2026-10-18 10:48:47.534339600 -0700
-+++ b/MMOCoreORB/bin/scripts/managers/planet/regions.lua	2026-10-18 10:49:04.496572200 -0700
++++ b/MMOCoreORB/bin/scripts/managers/planet/regions.lua	2026-10-18 11:21:33.247089500 -0700
 @@ -19,6 +19,7 @@
  REBELAREA           = 0x004000
  IMPERIALAREA        = 0x008000
  NOPETAREA           = 0x010000
-+HARVESTERAREA       = 0x020000 -- Sandbox: harvester deeds may still be placed in this no-build area
++HARVESTERAREA       = 0x020000 -- Sandbox: harvester and power generator deeds may still be placed in this no-build area
  
  CIRCLE = 1
  RECTANGLE = 2
 diff -ruN a/MMOCoreORB/src/server/zone/managers/planet/PlanetManager.idl b/MMOCoreORB/src/server/zone/managers/planet/PlanetManager.idl
 --- a/MMOCoreORB/src/server/zone/managers/planet/PlanetManager.idl	2026-10-18 10:48:47.933397200 -0700
-+++ b/MMOCoreORB/src/server/zone/managers/planet/PlanetManager.idl	2026-10-18 10:49:22.345329900 -0700
++++ b/MMOCoreORB/src/server/zone/managers/planet/PlanetManager.idl	2026-10-18 11:21:33.162101900 -0700
 @@ -241,7 +241,7 @@
  
  	public native boolean isSpawningPermittedAt(float x, float y, float margin, boolean isWorldSpawnArea = false);
  
 -	public native boolean isBuildingPermittedAt(float x, float y, SceneObject objectTryingToBuild = null, float margin = 0, boolean checkFootprint = true);
-+	public native boolean isBuildingPermittedAt(float x, float y, SceneObject objectTryingToBuild = null, float margin = 0, boolean checkFootprint = true, boolean placingHarvester = false);
++	public native boolean isBuildingPermittedAt(float x, float y, SceneObject objectTryingToBuild = null, float margin = 0, boolean checkFootprint = true, boolean harvesterOrGenerator = false);
  
  	public native boolean isCampingPermittedAt(float x, float y, float margin);
  
 diff -ruN a/MMOCoreORB/src/server/zone/managers/planet/PlanetManagerImplementation.cpp b/MMOCoreORB/src/server/zone/managers/planet/PlanetManagerImplementation.cpp
 --- a/MMOCoreORB/src/server/zone/managers/planet/PlanetManagerImplementation.cpp	2026-10-18 10:48:48.044049700 -0700
-+++ b/MMOCoreORB/src/server/zone/managers/planet/PlanetManagerImplementation.cpp	2026-10-18 10:49:28.126301700 -0700
++++ b/MMOCoreORB/src/server/zone/managers/planet/PlanetManagerImplementation.cpp	2026-10-18 11:21:33.294052800 -0700
 @@ -1353,7 +1353,7 @@
  	return true;
  }
  
 -bool PlanetManagerImplementation::isBuildingPermittedAt(float x, float y, SceneObject* object, float margin, bool checkFootprint) {
-+bool PlanetManagerImplementation::isBuildingPermittedAt(float x, float y, SceneObject* object, float margin, bool checkFootprint, bool placingHarvester) {
++bool PlanetManagerImplementation::isBuildingPermittedAt(float x, float y, SceneObject* object, float margin, bool checkFootprint, bool harvesterOrGenerator) {
  	SortedVector<ActiveArea*> activeAreas;
  
  	Vector3 targetPos(x, y, 0);
@@ -52,8 +52,8 @@ diff -ruN a/MMOCoreORB/src/server/zone/managers/planet/PlanetManagerImplementati
  	for (int i = 0; i < activeAreas.size(); ++i) {
  		ActiveArea* area = activeAreas.get(i);
  
-+		// Sandbox: a no-build area marked HARVESTERAREA still takes harvesters (Hoth's ice caves)
-+		if (placingHarvester && area->isHarvesterArea())
++		// Sandbox: a no-build area marked HARVESTERAREA still takes harvesters and power generators (Hoth's ice caves)
++		if (harvesterOrGenerator && area->isHarvesterArea())
 +			continue;
 +
  		if (area->isNoBuildZone()) {
@@ -61,27 +61,28 @@ diff -ruN a/MMOCoreORB/src/server/zone/managers/planet/PlanetManagerImplementati
  		}
 diff -ruN a/MMOCoreORB/src/server/zone/managers/structure/StructureManager.cpp b/MMOCoreORB/src/server/zone/managers/structure/StructureManager.cpp
 --- a/MMOCoreORB/src/server/zone/managers/structure/StructureManager.cpp	2026-10-18 10:48:48.134839100 -0700
-+++ b/MMOCoreORB/src/server/zone/managers/structure/StructureManager.cpp	2026-10-18 10:50:11.605673500 -0700
-@@ -314,7 +314,10 @@
++++ b/MMOCoreORB/src/server/zone/managers/structure/StructureManager.cpp	2026-10-18 11:21:48.642926000 -0700
+@@ -314,7 +314,11 @@
  		return 1;
  	}
  
 -	if (!planetManager->isBuildingPermittedAt(x, y, creature)) {
-+	// Sandbox: a harvester deed may go in a no-build area marked HARVESTERAREA (Hoth's ice caves)
-+	bool placingHarvester = serverTemplate->getGameObjectType() == SceneObjectType::HARVESTER;
++	// Sandbox: a harvester or power generator deed may go in a no-build area marked HARVESTERAREA (Hoth's ice caves)
++	int placingType = serverTemplate->getGameObjectType();
++	bool harvesterOrGenerator = placingType == SceneObjectType::HARVESTER || placingType == SceneObjectType::GENERATOR;
 +
-+	if (!planetManager->isBuildingPermittedAt(x, y, creature, 0, true, placingHarvester)) {
++	if (!planetManager->isBuildingPermittedAt(x, y, creature, 0, true, harvesterOrGenerator)) {
  		creature->sendSystemMessage("@player_structure:not_permitted"); // Building is not permitted here.
  		return 1;
  	}
 diff -ruN a/MMOCoreORB/src/server/zone/objects/area/ActiveArea.idl b/MMOCoreORB/src/server/zone/objects/area/ActiveArea.idl
 --- a/MMOCoreORB/src/server/zone/objects/area/ActiveArea.idl	2026-10-18 10:48:47.736260900 -0700
-+++ b/MMOCoreORB/src/server/zone/objects/area/ActiveArea.idl	2026-10-18 10:49:17.291018100 -0700
++++ b/MMOCoreORB/src/server/zone/objects/area/ActiveArea.idl	2026-10-18 11:21:33.259384000 -0700
 @@ -46,6 +46,7 @@
  	public static final int REBELAREA = 0x004000;
  	public static final int IMPERIALAREA = 0x008000;
  	public static final int NOPETAREA = 0x010000;
-+	public static final int HARVESTERAREA = 0x020000; // Sandbox: harvester deeds may still be placed in this no-build area
++	public static final int HARVESTERAREA = 0x020000; // Sandbox: harvester and power generator deeds may still be placed in this no-build area
  
  	public static final int CIRCLE = 1;
  	public static final int RECTANGLE = 2;
@@ -111,19 +112,20 @@ diff -ruN a/MMOCoreORB/src/server/zone/objects/area/ActiveAreaImplementation.cpp
  	if (isCityRegion())
 diff -ruN a/MMOCoreORB/src/server/zone/objects/creature/commands/AgentGearCommand.h b/MMOCoreORB/src/server/zone/objects/creature/commands/AgentGearCommand.h
 --- a/MMOCoreORB/src/server/zone/objects/creature/commands/AgentGearCommand.h	2026-10-18 10:52:24.582711400 -0700
-+++ b/MMOCoreORB/src/server/zone/objects/creature/commands/AgentGearCommand.h	2026-10-18 10:52:47.340800100 -0700
-@@ -98,6 +98,8 @@
++++ b/MMOCoreORB/src/server/zone/objects/creature/commands/AgentGearCommand.h	2026-10-18 11:21:48.658128400 -0700
+@@ -98,6 +98,9 @@
  			add({"object/weapon/melee/special/vibroknuckler.iff"}, 1);
  		} else if (kit == "vehicle") {  // owner, 15 Oct: "provide everyone with speeders"
  			add({"object/tangible/deed/vehicle_deed/speederbike_swoop_deed.iff"}, 1);
-+		} else if (kit == "structures") {  // the Hoth ice caves placement test: a harvester may go in, a generator may not
-+			add({"object/tangible/deed/harvester_deed/harvester_ore_s1_deed.iff", "object/tangible/deed/generator_deed/generator_wind_deed.iff"}, 1);
++		} else if (kit == "structures") {  // the Hoth ice caves placement test: a harvester and a generator may go in, a factory may not
++			add({"object/tangible/deed/harvester_deed/harvester_ore_s1_deed.iff", "object/tangible/deed/generator_deed/generator_wind_deed.iff",
++				"object/tangible/deed/factory_deed/factory_item_deed.iff"}, 1);
  		} else if (kit == "mandohelmet") {  // the Death Watch mines poison anyone without it (deathWatchBunker.lua hasRebreather)
  			add({"object/tangible/wearables/armor/mandalorian/armor_mandalorian_helmet.iff"}, 1);
  		} else if (kit == "heavy") {
 diff -ruN a/MMOCoreORB/src/server/zone/objects/creature/commands/PlaceStructureCommand.h b/MMOCoreORB/src/server/zone/objects/creature/commands/PlaceStructureCommand.h
 --- a/MMOCoreORB/src/server/zone/objects/creature/commands/PlaceStructureCommand.h	2026-10-18 10:48:48.236806400 -0700
-+++ b/MMOCoreORB/src/server/zone/objects/creature/commands/PlaceStructureCommand.h	2026-10-18 10:50:11.491835500 -0700
++++ b/MMOCoreORB/src/server/zone/objects/creature/commands/PlaceStructureCommand.h	2026-10-18 11:21:48.642926000 -0700
 @@ -9,6 +9,7 @@
  #include "server/zone/objects/tangible/deed/structure/StructureDeed.h"
  #include "server/zone/managers/planet/PlanetManager.h"
@@ -132,18 +134,20 @@ diff -ruN a/MMOCoreORB/src/server/zone/objects/creature/commands/PlaceStructureC
  #include "QueueCommand.h"
  
  class PlaceStructureCommand : public QueueCommand {
-@@ -91,12 +92,25 @@
+@@ -91,12 +92,27 @@
  
  			zone->getInRangeActiveAreas(placementLoc.getX(), placementLoc.getZ(), placementLoc.getY(), &activeAreas, true);
  
-+			// Sandbox: a harvester deed may go in a no-build area marked HARVESTERAREA (Hoth's ice caves)
-+			bool placingHarvester = false;
++			// Sandbox: a harvester or power generator deed may go in a no-build area marked HARVESTERAREA (Hoth's ice caves)
++			bool harvesterOrGenerator = false;
 +			ManagedReference<StructureDeed*> placingDeed = server->getZoneServer()->getObject(deedID).castTo<StructureDeed*>();
 +
 +			if (placingDeed != nullptr) {
 +				SharedObjectTemplate* generatedTemplate = TemplateManager::instance()->getTemplate(placingDeed->getGeneratedObjectTemplate().hashCode());
 +
-+				placingHarvester = generatedTemplate != nullptr && generatedTemplate->getGameObjectType() == SceneObjectType::HARVESTER;
++				int placingType = generatedTemplate != nullptr ? generatedTemplate->getGameObjectType() : 0;
++
++				harvesterOrGenerator = placingType == SceneObjectType::HARVESTER || placingType == SceneObjectType::GENERATOR;
 +			}
 +
  			for (int i = 0; i < activeAreas.size(); ++i) {
@@ -152,7 +156,7 @@ diff -ruN a/MMOCoreORB/src/server/zone/objects/creature/commands/PlaceStructureC
  				if (area == nullptr)
  					continue;
  
-+				if (placingHarvester && area->isHarvesterArea())
++				if (harvesterOrGenerator && area->isHarvesterArea())
 +					continue;
 +
  				if (area->isNoBuildZone()) {
