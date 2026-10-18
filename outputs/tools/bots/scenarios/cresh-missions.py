@@ -43,7 +43,12 @@ def run(g):
         return
 
     listed = M.offers(cresh, general, 'general')
-    destroy, _, _ = M.take(g, cresh, general, 'general', [('destroy', M.easiest(cresh, most=10))],
+    # The shown difficulty includes the group's level, so take the lowest on offer, and reuse a held destroy mission
+    # only if it is no harder (17 Oct 10:15 PM: all three died at a held one shown as 14).
+    floor = M.lowest_destroy(cresh, listed)
+    g.note(f'general/destroy: lowest destroy difficulty on offer within 2.3 km: {floor}')
+    destroy, _, _ = M.take(g, cresh, general, 'general',
+                           [('destroy', M.easiest(cresh, most=floor if floor is not None else 10))],
                            'general/destroy', divisor, listed)
     # The deliver goes to whoever has room (a pickup into a full inventory leaves the mission stuck); on 17 Oct all
     # three were full, so dorn-missions.py's Rusk takes one too.

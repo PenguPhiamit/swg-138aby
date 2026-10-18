@@ -328,6 +328,14 @@ def at_terminal(g, bot, ttype, slot=0, radius=3000, at=None, team=None):
         # building's outside first, then route in again
         guarded_walk(g, team or [bot], {'x': spot['x'], 'y': spot['y'] - 8}, f'{ttype}: to the terminal')
         trip = approach(bot, spot, slot)
+    if arrived(trip) and not spot.get('cell'):
+        # A list request needs 6 m (MissionManagerImplementation: @radial_out_of_range_prose:ui_radial, and the bag
+        # keeps the previous terminal's offers). 17 Oct 11:18 PM: Brask "arrived" at the end of a short path and 93
+        # lists were refused. Outdoors the body's x and y are world coordinates, so close the gap.
+        for _ in range(3):
+            if far(bot.status(), spot) <= 5:
+                break
+            bot.walk(spot['x'] + 1.5 * (slot + 1), spot['y'], tries=2)
     if not g.check(f'{ttype}: {bot.first} reaches the terminal', arrived(trip),
                    {k: trip.get(k) for k in ('arrived', 'error', 'seconds')} if isinstance(trip, dict) else trip):
         return None
@@ -1151,7 +1159,9 @@ def in_town(bot):
 
 def easiest(bot, limit=2300, most=math.inf):
     """The lowest-difficulty destroy mission within limit m (1000-2000 m placement plus the lair's offset) and at most
-    difficulty most, avoiding boss lairs on a tie. 17 Oct 10:15 PM: three Marksmen died at a held difficulty-14 lair."""
+    difficulty most, avoiding boss lairs on a tie. 17 Oct 10:15 PM: three Marksmen died at a held difficulty-14 lair.
+    The difficulty shown is the lair's level plus the group's level (the player's alone when solo), so a fixed most
+    only fits a low-level group: see lowest_destroy."""
     def choose(listed):
         here = origin(bot)
         ok = [m for m in listed if far(here, where(m)) <= limit and (m.get('difficulty') or 0) <= most]
@@ -1186,6 +1196,16 @@ def faction(g, bot, terminal, ttype, divisor, team=()):
     if mission.get('type') == 'deliver':
         return errand(g, bot, mission, before, divisor, label)
     return recon(g, bot, mission, before, divisor, label, team)
+
+
+def lowest_destroy(bot, listed, limit=2300):
+    """The lowest difficulty among the destroy offers within limit m, or None. Shown difficulty = lair level (at
+    least 4) + the group's level (MissionManagerImplementation::randomizeGenericDestroyMission), so compare offers
+    with each other, not with a fixed number (17 Oct: "10 or less" never fits a group with master combat boxes)."""
+    here = origin(bot)
+    levels = [m.get('difficulty') for m in listed if m.get('type') == 'destroy' and far(here, where(m)) <= limit
+              and isinstance(m.get('difficulty'), (int, float))]
+    return min(levels) if levels else None
 
 
 def lowest(listed):
