@@ -78,7 +78,11 @@ builds and sign-offs.
 9. **Harvesters allowed in the Hoth Ice Caves no-build circle** (owner, 18 Oct 10:11 AM: "plan it for the rebuild,
    let me finish"). **Built, untested: dev `e56154bb`, release build 11:32 AM (with the speed check and ghostfire).**
    Harvesters and power generators may go in (owner, 11:20 AM: generators too); factories and houses may not. Test
-   after the owner's next start: `tools/bots/scenarios/hoth-ice-caves-harvester.py`. The plan as written at 10:11 AM:
+   after the owner's next start: `tools/bots/scenarios/hoth-ice-caves-harvester.py`. **Run 32, 11:39 AM: 4/6.** The
+   ice caves exception works, but harvesters and generators are refused anywhere on Hoth ("wrong planet"): the
+   installations' default planet list has no Hoth (`SharedInstallationObjectTemplate.lua:52`). Owner's call: Hoth for
+   harvesters and generators only (Lua), only inside the circle (C++), or every installation. The plan as written at
+   10:11 AM:
    - Why: Goke at (-224, 2441) on open ground is 237 m inside the 450 m `@hoth_region_names:ice_caves` circle
      (`hoth_regions.lua:17`, `NAMEDREGION + NOBUILDZONEAREA`), so a harvester deed gets "Building is not permitted
      here". The owner has added a lot of Hoth resources and wants to harvest there.
