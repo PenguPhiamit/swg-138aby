@@ -1,0 +1,1273 @@
+{
+  "base": "a8ece12b6705158b1ec9706ba61077a4249be226",
+  "tip": "aa52cc647a2129096011eb122fe98c7794db4c2b",
+  "head_before": "aa52cc647a2129096011eb122fe98c7794db4c2b",
+  "commit_count": 47,
+  "lua_at_commit": [
+    {
+      "commit": "b6059d7a",
+      "path": "MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua",
+      "sha256": "6b097891edb50f96746c960438ff7b2932ac662c3a06a3a981aadee7be13ac01",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "b6059d7a",
+      "path": "MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua",
+      "sha256": "f22bfe90ed0e79a891f725269458a7a54b1ee76ef8791e426ec8b9f2a4e6c653",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "b6059d7a",
+      "path": "MMOCoreORB/bin/scripts/managers/weather_manager.lua",
+      "sha256": "fb8bfe0f380b1223e39fcbb5c5f9ac047a533546cca65c43c5d3c5eb3bac7cc1",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ad7b5a9d",
+      "path": "MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua",
+      "sha256": "812456eff4ffe71d7175aec810b69d1a59da219681dae98c6a4c47832d097872",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "742ace54",
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations.lua",
+      "sha256": "9d43224c6b808993f66d95c353a978ae726e9fe9c0173b5414caa0d30148c9ad",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "742ace54",
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua",
+      "sha256": "6aba482eaac9f31a9cccbdf948fdb770e405c8f233a7e5160ff9a3573bb8b4a9",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "742ace54",
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/ossus_people.lua",
+      "sha256": "53c5efaff1680b67e9342bd1c60787af67aba53325a3dc7b46ed5c4651146cfd",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "742ace54",
+      "path": "MMOCoreORB/bin/scripts/mobile/serverobjects.lua",
+      "sha256": "4624decc328d8f05d36f9b89ab5f15ab5451b6512f7f78ceba83f63b2ba1fef8",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "742ace54",
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua",
+      "sha256": "0ecd2919dd87c25c6aba2f50c66a17c534b8a51952bf86b7f4159dbab8085c65",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "742ace54",
+      "path": "MMOCoreORB/bin/scripts/screenplays/screenplays.lua",
+      "sha256": "9cac15741146ba01f605d066e24ef8ae26bfbdb9bb783f4a225ee3db259cba4e",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/managers/mission/mission_cities.lua",
+      "sha256": "eb642784973853bd6840fc8aa6a7d91be3680345d3c5c1c059b64308313dbe1b",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/managers/mission/mission_npc_spawn_points.lua",
+      "sha256": "b11c82ca9021be89d55a2e4c4a11acfa6695dd983f0942c490e07886a24e64e9",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua",
+      "sha256": "abb987162b8f2f205508e1b917f01572b282ef9f4e2a4765258df44f57f621fb",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua",
+      "sha256": "cf3c280944a5814e282aa4ac97ec0921d0c44dbb926d7d6cef81742b21c397d0",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations.lua",
+      "sha256": "a06a4cf05bbd1b62334baa93ca74f4efbecc114c76b07a65626378d61c8e3db8",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations/sandbox/hutta_home_conv.lua",
+      "sha256": "df9cc25c986cfc6bb7f766f0d3a1adec77ccf7fd5dc5ad073abc1312b2cb7d51",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/hutta_home.lua",
+      "sha256": "53c0a6fede017002add202d2caaa9befd115ae34b4267166f9b1fc090fdcbc45",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/mobile/serverobjects.lua",
+      "sha256": "7c331d005d0106d23dfb8d586b7e69eb3aff24b5b0cc85c103635e9e6a800ea9",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/destroy_mission/hutta_destroy_missions.lua",
+      "sha256": "a2f1f80e499b21062224a3694a31b398d0e7021f08a9b5a786ef85452f5b3e34",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_deep_swamp.lua",
+      "sha256": "03d7994fd77942a9955dff811283acec6276aa3d2d877c8c2550d21ae6bd12d1",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_mid.lua",
+      "sha256": "0652203e133994ec24f834294230237e8b56075632e132d676dba8e504c64560",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_near.lua",
+      "sha256": "dd2d4487662e150a3670147c53f0525ab48d4ff9454690af09b86dfeda06e88b",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua",
+      "sha256": "980a292ce8fb35f83c434a4253220f6df45bec6c3929d57cbcb8b85bd570ca8e",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_home.lua",
+      "sha256": "1f3fc80ef6dd2bda713262dbc01621f23a1d213fe9bd3b4bb65f29c54be4bf6d",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_home_places.lua",
+      "sha256": "5bec3a6c868f3b5870f2bfe0e984cb33d10b614ac6ee9681232694a6011da3f3",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3b7620fd",
+      "path": "MMOCoreORB/bin/scripts/screenplays/screenplays.lua",
+      "sha256": "322d026f2becfad3dff7d7d71d0da406ab72c39277dcf314cbc5d3878291a115",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "7be8837a",
+      "path": "MMOCoreORB/bin/scripts/managers/mission/mission_cities.lua",
+      "sha256": "d6dda1d70d0109119fc8af2ff7ccc679b637653bc5c0bdd55e1d9436dc51ebff",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "7be8837a",
+      "path": "MMOCoreORB/bin/scripts/managers/mission/mission_npc_spawn_points.lua",
+      "sha256": "f2a70e25d27183c2a1046a4d35628a952bbf33f92d9738d6e74bf2102d061785",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "7be8837a",
+      "path": "MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua",
+      "sha256": "ad159fb26fcaf6119ca4796a01947393ec06918c6cb20bb074001897ce532e92",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "7be8837a",
+      "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_glacial_rancor.lua",
+      "sha256": "2ef772f9b83e68d3ad6b71596cae542211c89178a15c6f2143794cd1e962e22b",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "7be8837a",
+      "path": "MMOCoreORB/bin/scripts/object/mobile/objects.lua",
+      "sha256": "a58f06da6b99b1f29001227b96eda93107c42db23acd83afa149773ddc74d17f",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "7be8837a",
+      "path": "MMOCoreORB/bin/scripts/object/mobile/rancor_ice.lua",
+      "sha256": "54890bd7b22499b1f25fdfa533f2862c0441f1f4291bd301284575ee3dd04e19",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "7be8837a",
+      "path": "MMOCoreORB/bin/scripts/object/mobile/serverobjects.lua",
+      "sha256": "dce8f7bc266d009bf5467c437b3fcd6b991f6e9c7c646d515844ff924e73e9f0",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "7be8837a",
+      "path": "MMOCoreORB/bin/scripts/screenplays/poi/hoth_camps.lua",
+      "sha256": "258cba06a4a2f8d61a729133377cffefc48b0ab7014563221f465b05b24b9692",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "7be8837a",
+      "path": "MMOCoreORB/bin/scripts/screenplays/poi/hoth_glacial_rancor_den.lua",
+      "sha256": "454e5ab836b3616781fed79ac5b395d3a1390fe8689a7813cd4bdafb2e0c1cda",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "7be8837a",
+      "path": "MMOCoreORB/bin/scripts/screenplays/poi/hoth_mynock_den.lua",
+      "sha256": "592cd99f4ce4da3481c93360d2f6749b3b2a97d6efe94b2ce4541a75fac559cf",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "7be8837a",
+      "path": "MMOCoreORB/bin/scripts/screenplays/poi/hoth_outpost_terminals.lua",
+      "sha256": "0e830c38d394176d78b9439fdec8dfac5003589ad4d9ff14208a6889a3e659d0",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "7be8837a",
+      "path": "MMOCoreORB/bin/scripts/screenplays/screenplays.lua",
+      "sha256": "09419d1608d2cc3280af756b8839ab711aac1b6e8e618f77720f0adcd5092a0a",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "7be8837a",
+      "path": "MMOCoreORB/bin/scripts/screenplays/tasks/hoth/scavenger_quartermaster.lua",
+      "sha256": "b97e4b5b4def016ad4741c7bcb6689851c1e5bd367b6ef1909650bfc4e5f68cb",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "fd13513d",
+      "path": "MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua",
+      "sha256": "88118114717ccd6e6fa2487960ce329e6ca1bab0819c4a96cd9a1b808a8628ca",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "fd13513d",
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations.lua",
+      "sha256": "18488d9e8fe2dcd54b38735a0768c000d987407e19d1b55cd6e6099ae3430ce7",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "fd13513d",
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_world_conv.lua",
+      "sha256": "d4714c7e3a450183ea51a7f520275476bb900148f8bfa953ccd86bf55624c510",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "fd13513d",
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/ossus_world.lua",
+      "sha256": "99b24752065b0d4a7e6008ee1b4dd64d1a218d6f2dbb4457442971b3c5aa0ce7",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "fd13513d",
+      "path": "MMOCoreORB/bin/scripts/mobile/serverobjects.lua",
+      "sha256": "8f170836edbe53bb68b20fca65f46c8ab59f721455abd363a247a763e15f7d7a",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "fd13513d",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_canyon.lua",
+      "sha256": "aae3a70775dd35185b16fbec749c4e1c54cc000cced1d73dfb0a3a69ca26eb94",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "fd13513d",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_highlands.lua",
+      "sha256": "005b98a8e73934939909bca4522b62f1f574f25574fdbd179e6977d6a6adc960",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "fd13513d",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_mesa.lua",
+      "sha256": "63bf038a9c5e605ea134582ed0728abab8dbf56c77694f82cb8835d98b6fdea5",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "fd13513d",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua",
+      "sha256": "e1dce1cf550d193ecbb236b7765c4daa8456f0bd7dbbba92c81104bdf1949111",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "fd13513d",
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_world.lua",
+      "sha256": "e113c9aac3de5f69918c56dbed331ca1499969b9bc6490f85a07c3d995e195cd",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "fd13513d",
+      "path": "MMOCoreORB/bin/scripts/screenplays/screenplays.lua",
+      "sha256": "2a3188ef49b6f2cceb0d069536693bb485b1b68d6ff87398cb1a0bc7dd547ef8",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ce3975db",
+      "path": "MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua",
+      "sha256": "574fdc32d05c8909dad283f7829f163b8c9e4851d0aa8975ce060bedaefab2f7",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ce3975db",
+      "path": "MMOCoreORB/bin/scripts/managers/resource_manager.lua",
+      "sha256": "251ee2e6fb30d936a47a7ed3e92340b6211a81e630732e5ad91a51717cc802a2",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ce3975db",
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations.lua",
+      "sha256": "c361d4184fe62ba95fd0c530b856033e1d1846e1300352140d0b8ac241f12ecc",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ce3975db",
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations/sandbox/hutta_life_conv.lua",
+      "sha256": "d132b52967108c84644f885e29b55b65f93517ea9c87d11fe10c7af2ea45381e",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ce3975db",
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/hutta_life.lua",
+      "sha256": "de888ba0cff0a821cfa20dd991b276facbf15bd821e731260e2c64daf65c5d00",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ce3975db",
+      "path": "MMOCoreORB/bin/scripts/mobile/serverobjects.lua",
+      "sha256": "a267d41baa6bd9c1bdb5a1dbdabfcd1f6534566851b141fd17c88d8b62599eb7",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ce3975db",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_deep_swamp.lua",
+      "sha256": "ca0549b2175eb553621a57fca49f0c1d9bde001293efcd3d145e417d3ce747e0",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ce3975db",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_mid.lua",
+      "sha256": "319e8de73e166ae7e63716bd8ee62476c77a4e35e4a881771cfae1484aa8a3ab",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ce3975db",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_near.lua",
+      "sha256": "65e468bc250395c08184e33df19f79625d906033a635145e22b957f063c6564f",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ce3975db",
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_life.lua",
+      "sha256": "8fba4368c401241f5f2f998df1e6dfa5e1f6bad761b937ecc55fd1d2833c8522",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ce3975db",
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_life_places.lua",
+      "sha256": "f179bd81b173dac05e26ddcb13fa12ac401371805a1d50035be33abdac42ac75",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ce3975db",
+      "path": "MMOCoreORB/bin/scripts/screenplays/screenplays.lua",
+      "sha256": "7a5adb925af222c97c04fe4875116d76d6d0974db0cc1170829e0b38adb9955d",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/mobile/outfits/serverobjects.lua",
+      "sha256": "0c1e009f218cf0095d402db53b206a2ca76881d712d554f068c35bd8a2fb39e4",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/mobile/outfits/vong_fanatic_warrior_outfit.lua",
+      "sha256": "c1f6750b57eac72006e14ba577fbe2db796dfeafdcf326182721ef8f87467fa3",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/ossus_vong.lua",
+      "sha256": "67a1666b58d4aa984ee2379d108c96a26312565095f286a25f5e32d0fe7b4bcd",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/mobile/serverobjects.lua",
+      "sha256": "ac0c95e81d74c0614cbb500a6c00e8c40012b29ca44bad86f1e1b3c218942270",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/allobjects.lua",
+      "sha256": "baf21f60c8b6833f80b9a335ec6745aa21e25263a0847b77b076d08747191304",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/serverobjects.lua",
+      "sha256": "b41796251308f07d3a9a9a126023c76ada980820354b209d08e1a97cbd72f2b4",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bicep_l.lua",
+      "sha256": "d892415a2baadf60d0be3c06a69c2a399010b65d05f0881eb65a40aaea1ec410",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bicep_r.lua",
+      "sha256": "c0cc385a3c2bbbc763543f2e86c483889105fc12a006456d9ab9b0ffe4b40614",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_boots.lua",
+      "sha256": "712bb5460410e65efa476df0181ecc745db1e27eb83562655d8cb9a373c1afb6",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bracer_l.lua",
+      "sha256": "a6f00845e9f088027a3651283a66b77a6e5793843441726af886d52595f30aba",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bracer_r.lua",
+      "sha256": "852d994a15cc3ce23a842d442fb54b96b14ca0bbe307210a8782f36a2f615da5",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_gloves.lua",
+      "sha256": "babe3883c0e50baf5e0b4e4b9ef83086117240438bde9ff12cd5368e325cc2e9",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_leggings.lua",
+      "sha256": "46439d179c4f01a151540b68cdc117e67f4babc839e2931f8cb544f11520f06e",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/objects.lua",
+      "sha256": "79a1ed8dc805175b2156bb9c801d41a2d1c9c74ec8fbbb9d7db11aedb879246d",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/serverobjects.lua",
+      "sha256": "78ca69bba7952fc60370bf0d1786a284cb27aee223e98e75ed7fb824ad2a3e0d",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/armor_vongcrab_s02_chest_plate.lua",
+      "sha256": "7adc2575dd7a845f517cee15c3514d7d5569d2823a55040cefb2bad8f16de5f0",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/objects.lua",
+      "sha256": "45cb08ee0ffa8e41e3642700f80d8c6415106e28948f0acc9a207bb42091771b",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/serverobjects.lua",
+      "sha256": "bc6ef938582f50d314c72d306371cd91fb9a8ced7ced53a6468f9afb6b9e8a84",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_vong_look.lua",
+      "sha256": "60a105f4411dfd27800660f6582197f4c14a7a923d7b190baf8517739f9723c4",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "e5d13dfc",
+      "path": "MMOCoreORB/bin/scripts/screenplays/screenplays.lua",
+      "sha256": "8273c537b14a48844bf661bcdf4810b405759e14c20a77049e6d7bc42dea1178",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua",
+      "sha256": "36b43dd2f9e030fda7fecac3ab7075a9179ba18ccdbe9b3697450d6682675c29",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations.lua",
+      "sha256": "5a8e6688e1c6cec778e18ecd28cdda633bc4e615bc50496f02dbd62e1dc3f436",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations/sandbox/hoth_world_conv.lua",
+      "sha256": "1dcb4408c5804d7c26231a32cd30bb8694be816a4f741fcd4fe30543414e488b",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_fill_creatures.lua",
+      "sha256": "894ed34cee57c53439e6bfa30781e7c02a87fadb14b0723fc135901aac93bca0",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_glacial_rancor.lua",
+      "sha256": "10cc5f0ba88fd5611d6fa8177952a2c03f54af3e498ed06f9dc150a0c93f2b90",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/mobile/hoth/serverobjects.lua",
+      "sha256": "ca809ea636127d498f1dcd2918ad2532b8d5e5bf24d6e9b51ff705c21f943883",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_fill_lairs.lua",
+      "sha256": "a11ebd846ceb1d6878faa58d801ec97fa3b2bd1c5c94958c16988e38b77460f1",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/serverobjects.lua",
+      "sha256": "e7ba46f379cc6162e084f7b780efd54f4eaeea1003866a53d9302d544221be88",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/hoth_world.lua",
+      "sha256": "844554b5d44db57be24649db79c48a5b20bee7311f4c59443a3514ed858efb9c",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/mobile/serverobjects.lua",
+      "sha256": "0da10f3556be8d4b549160bebee4792066d047389977ee819be0d26354191ab4",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/hoth/hoth_fill_areas.lua",
+      "sha256": "8f818a06c995cd7c6aa462d40c3e4f45ed1715e90561d79f9db208dbacde1b08",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/hoth/hoth_world.lua",
+      "sha256": "01255da51e1db7a323f562e3ed4a37ae54a2e4d71d9a96f81cf8e67561df4bcd",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua",
+      "sha256": "cd3129e64db7087c89e6beb77eb982b8af19c00383d4bc522bacee8c19a9f53c",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/screenplays/poi/hoth_echo_base.lua",
+      "sha256": "388353a45f75dcd1610e6a9f7e6782ff42b3849acf697fa4ad5665e208e64258",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/screenplays/poi/hoth_glacial_rancor_den.lua",
+      "sha256": "b64149da57d253d8f58afdf300c7f004138e3ae54f9d222fc0f1f80bb20a082b",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/hoth_world.lua",
+      "sha256": "fa1f89d948a0103bea0fb556c6159b432fb587896e65500b250b321673c51e04",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "ac578315",
+      "path": "MMOCoreORB/bin/scripts/screenplays/screenplays.lua",
+      "sha256": "af869130ab5956fe81a13e77876de381791d32f5e55c109c4098a82a1ff4c5bb",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "5191f9b0",
+      "path": "MMOCoreORB/bin/scripts/loot/groups.lua",
+      "sha256": "5c775a3eaa49cdd3fb033eb413f2c50d44ae7d9481d78af040cceea82107e663",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "5191f9b0",
+      "path": "MMOCoreORB/bin/scripts/loot/groups/ossus/ossus_ghostfire_crystal.lua",
+      "sha256": "6f5a22ed5aec44519754ed7f4eb2c06b964db719f807f2b749767289299ab461",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "5191f9b0",
+      "path": "MMOCoreORB/bin/scripts/loot/items.lua",
+      "sha256": "1cbc34cd3fd1a59910da275ab05b95209e74aecaf94f1ac25e6decb9fa92ccd6",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "5191f9b0",
+      "path": "MMOCoreORB/bin/scripts/loot/items/ossus/ossus_ghostfire_crystal.lua",
+      "sha256": "fe1b9e29009fa7e7d4d27876586b75d92141b0e25cdcd3a91857ba5e21737f11",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "5191f9b0",
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua",
+      "sha256": "2a9c83305f1a96066747743b95cbc29c44f29ce43e679462aa70724195cbf0da",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "5191f9b0",
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/ossus_people.lua",
+      "sha256": "67a32b151f8f7d74e65537a1284a33ba93ae29abc7791ec6c5877804aecf5a0f",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "5191f9b0",
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua",
+      "sha256": "f069e9b01007f07f29c3a9547c369827bae8b13330bc911c94e063a5222d3250",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "3cf3d88f",
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua",
+      "sha256": "66fc53923d93ab54b25d4e2168d7cc3891f4f8d8e946021d4f9b1a3f9fbc3f9a",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "4906d2eb",
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_world.lua",
+      "sha256": "d9bd82cf822806acb086c536bf7ef15dba52d4aa53db983fd4fcd08e888459eb",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "a48e1d7d",
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/ossus_vong.lua",
+      "sha256": "3406035d05bbf6c729c7075d46a6be8a43d20af29a8fa9d1b3f0b68f9ebefb69",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "22722efe",
+      "path": "MMOCoreORB/bin/scripts/object/sandbox/mtg_catalog.lua",
+      "sha256": "9292852c823f0d8a421b7803193560850c09d5a38f251b632989a9280dad42c0",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "25344120",
+      "path": "MMOCoreORB/bin/scripts/loot/groups/hoth/hoth_vehicle_deeds.lua",
+      "sha256": "6d0376ebfbdba691c497e0bdbf4bdf8aaf3323a7bee82dedc78543bff0ef8da0",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "25344120",
+      "path": "MMOCoreORB/bin/scripts/loot/items.lua",
+      "sha256": "824231beda2e17e29ee7255ae5ae83cef34bc06947fa41e0c004b256e42668cc",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "25344120",
+      "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_barc_speeder_imperial_deed.lua",
+      "sha256": "1d7afd132c7c8a8eea3380e1a064c7c155812695c5149d16396f849eff788b08",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "25344120",
+      "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_barc_speeder_rebel_deed.lua",
+      "sha256": "2a5f4c465bc55cd918910954ba5216d4451c806fe07f66c22802e4f968e3351b",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "25344120",
+      "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_landspeeder_tantive4_deed.lua",
+      "sha256": "81cd873bc4512fbba52f954d4568b0d008e100019242d99033ee1181743fa139",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "4b113bb7",
+      "path": "MMOCoreORB/bin/scripts/ai/ossus.lua",
+      "sha256": "8a97ef52c3cbbf3cef3cd18476dd70c27c9f446ab1c4246b8753dcb11fc3c940",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "4b113bb7",
+      "path": "MMOCoreORB/bin/scripts/ai/templates.lua",
+      "sha256": "b995554692775a016680690cb633245708e3b61a636ddc0f67fe59ea8b4bc0db",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "commit": "4b113bb7",
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/ossus_world.lua",
+      "sha256": "4a7341f36bbe38e662cd5cc500d05835b49f0af204fd7040309065eb53a1d9bd",
+      "ok": true,
+      "error": ""
+    }
+  ],
+  "changed_files_at_tip": 107,
+  "lua_at_tip": [
+    {
+      "path": "MMOCoreORB/bin/scripts/ai/ossus.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/ai/templates.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/loot/groups.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/loot/groups/hoth/hoth_vehicle_deeds.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/loot/groups/ossus/ossus_ghostfire_crystal.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/loot/items.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_barc_speeder_imperial_deed.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_barc_speeder_rebel_deed.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/loot/items/hoth/hoth_vehicle_landspeeder_tantive4_deed.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/loot/items/ossus/ossus_ghostfire_crystal.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/managers/mission/mission_cities.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/managers/mission/mission_npc_spawn_points.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/managers/planet/hoth_regions.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/managers/planet/hutta_regions.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/managers/planet/ossus_regions.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/managers/planet/planet_manager.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/managers/resource_manager.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/managers/weather_manager.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations/sandbox/hoth_world_conv.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations/sandbox/hutta_home_conv.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations/sandbox/hutta_life_conv.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_people_conv.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/conversations/sandbox/ossus_world_conv.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_fill_creatures.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/hoth/hoth_glacial_rancor.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/hoth/serverobjects.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/hoth/hoth_fill_lairs.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/lair/creature_dynamic/serverobjects.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/outfits/serverobjects.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/outfits/vong_fanatic_warrior_outfit.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/hoth_world.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/hutta_home.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/hutta_life.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/ossus_people.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/ossus_vong.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/sandbox/ossus_world.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/serverobjects.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/destroy_mission/hutta_destroy_missions.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/hoth/hoth_fill_areas.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/hoth/hoth_world.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_deep_swamp.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_mid.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/hutta/hutta_lowlands_near.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_canyon.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_highlands.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/ossus/ossus_mesa.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/mobile/spawn/serverobjects.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/allobjects.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/mobile/objects.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/mobile/rancor_ice.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/mobile/serverobjects.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/sandbox/mtg_catalog.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/serverobjects.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bicep_l.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bicep_r.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_boots.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bracer_l.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_bracer_r.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_gloves.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/armor_vong_s01_leggings.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/objects.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vong/serverobjects.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/armor_vongcrab_s02_chest_plate.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/objects.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/object/tangible/wearables/armor/vongcrab/serverobjects.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/poi/hoth_camps.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/poi/hoth_echo_base.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/poi/hoth_glacial_rancor_den.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/poi/hoth_mynock_den.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/poi/hoth_outpost_terminals.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/hoth_world.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_home.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_home_places.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_life.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/hutta_life_places.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_vong_look.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_world.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/screenplays.lua",
+      "ok": true,
+      "error": ""
+    },
+    {
+      "path": "MMOCoreORB/bin/scripts/screenplays/tasks/hoth/scavenger_quartermaster.lua",
+      "ok": true,
+      "error": ""
+    }
+  ],
+  "lua_counterexamples": {
+    "ok": true,
+    "stdout": "F1 data/arithmetic: hoth_wampa_rimefang encoded=220 resist=120 damage=-200.0\nF1 data/arithmetic: hoth_wampa_old_echo encoded=230 resist=130 damage=-300.0\nF2 confirmed: road payment -> terminal greet_done; ghostfire lead absent\nF3 confirmed: pet attacker is ignored by both jobs; player attacker advances\nF5 confirmed: accepting a second job removes the first job's marker; clearing removes the remaining one",
+    "stderr": "",
+    "limit": "Actual pinned Lua functions, substitute engine objects; not an in-game reproduction."
+  },
+  "group_pay_counterexample": {
+    "owner": {
+      "zone": "tatooine",
+      "x": 250,
+      "y": 0,
+      "z": 0
+    },
+    "end_point": [
+      0,
+      0,
+      0
+    ],
+    "member": {
+      "zone": "naboo",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "old_end_distance": 0,
+    "near_owner": false,
+    "eligible_under_current_or": true,
+    "limit": "Source arithmetic counterexample; preserved older branch, not a new game test."
+  },
+  "head_after": "aa52cc647a2129096011eb122fe98c7794db4c2b",
+  "tracked_status_after": ""
+}

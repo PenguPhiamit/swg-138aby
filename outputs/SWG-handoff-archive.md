@@ -2,6 +2,36 @@
 
 Finished task rows and older log entries moved out of `SWG-handoff.md` to keep the board short (it is read every session). Newest first within each move.
 
+## Moved 2026-10-18 07:32 (ChatGPT, C62 newest-four log trim)
+
+### 2026-10-18 02:31 ChatGPT: C63 first 20 reports reviewed
+- `e51ab16`: 20 dated source reviews/corrections in queue order; only those topics set done/reviewed. Rejected unsupported profession/bug rankings and automatic proofreading edits; corrected XP, timer, density, deed-return and harvester claims. Source: dev `aa52cc647a21`, read only; no builds, server writes, galaxy commands or gameplay checks. 47 still in review, listed in `Agent/local-research/C63-review-2026-10-18.md`; next `vehicle-mount`. Saluki report absent, partial results used as leads. Older log entries moved to archive to retain newest four.
+
+### 2026-10-17 11:30 PM Claude: missions run 3 (new body): the exact refusal message arrives; bounty and group pay still open
+
+- **Run 3,** 11:18 to 11:28 PM: Forn and Cresh on the new body (dev `1be13676`; the main session restarted the bodies at 11:14 PM at the owner's request). There was no restart and no build; the main session's OK covered this one run, and work stops here for tonight. Reports: `Bot-reports/Forn/20261017-232839-forn-missions.json`, `Bot-reports/Cresh/20261017-231834-cresh-missions.json`.
+- **PASS:** the 7th mission is refused, and the exact message now arrives: `@mission/mission_generic:too_many_missions`. That closes section 11's "exact message" gap.
+- **Bounty, still open:** Brask stepped up to the terminal and listed 30 more times, but no bounty offers came, so range is not the cause. Ressa's far bounty was not aborted. Cause unknown.
+- **Group pay (dev `cbd85fdf`), still unchecked:** none of the 6 destroy offers was difficulty 10 or less within 2.3 km.
+- **New body finding:** Forn's walk to a terminal 1 km away failed at once with "walking without z requires the /agentpath helper". Imperial recon was accepted, but its walk stopped 1203 m short (it passed in run 2).
+- Scenario commit 842a068 (`mission_abort` for a far bounty; step up to the terminal; `Bot.abort_mission`).
+
+### 2026-10-17 11:15 PM Claude: missions section 11 rerun on run 30: survey, scout and imperial recon PASS; bounty and group pay still open
+
+- **Galaxy time from the main session** (lock holder): two squad runs on run 30, no restart and no build. Run 1, 10:04 to 10:29 PM, was Besh, Forn and Cresh; run 2, 10:33 to 11:13 PM, was Forn and Cresh, on the old body binary (this session's permissions blocked restarting the bodies onto dev `1be13676`; the main session said to go ahead without it). Reports: `Bot-reports/Besh/20261017-221205-besh-missions.json`, `Bot-reports/Forn/20261017-222849-` and `-231347-forn-missions.json`, `Bot-reports/Cresh/20261017-221504-` and `-223456-cresh-missions.json`.
+- **PASS, exact share (reward // group size):** artisan/survey 471 → 117 (4), 290 s; scout/recon 454 → 90 (5), 510 s; imperial/recon 573 → 114 (5), 809 s. Also artisan/crafting 67 → 16 (4), 104 s, and scout/hunting 2051 → 410 (5), 673 s. Section 11 now stands at 9 of 11.
+- **Not completed:** bounty. Ressa's accept was refused because she already holds a far bounty and the server allows one at a time. Brask's 30 lists then showed no bounty offers, probably because he stood out of the terminal's range. Group pay (dev `cbd85fdf`) is still unchecked: Cresh's group died at a held difficulty-14 lair, then no destroy mission of difficulty 10 or less was within 2.3 km.
+- **Scenario commits:** 89737ca (bounty lists again until a target is within 4 km; recon with a team; Forn's walkers trained as Marksmen) and 3a4414e (one bounty per hunter; a walk to the building after "no path"; Cresh's destroy at difficulty 10 or less).
+- **Next:** for bounty, a range check before listing, or `mission_abort` on Ressa's far bounty once the bodies run `1be13676`; for group pay, an easy lair, or the general terminal of another city.
+
+### 2026-10-17 9:50 PM Claude: overnight simulated population restarted on run 30
+
+- **Owner, about 9:45 PM:** "restart the test galaxy onto run 30 with all the waiting fixes and start the overnight bot population". The main session (server lock, `e9df7e1`) restarted and started it; it watches the run.
+- **Run 30 up since 9:47 PM:** dev `4b113bb7`, archive `e126125c`. `BotPopMax` 1,700: 1,500 multiclass bots plus 200 Ossus explorers queued, both accepted; 1,160 online at 9:48 PM. The memory watchdog is running.
+- **Reports:** the 7 AM job `morning30.sh` writes `Bot-reports/launch-sim/numbers-run30.md`, `findings-run30.md`/`.json`, `travel-run30.md`, `morning-run30.txt` and the planet data.
+- **Gap:** the galaxy was off from the afternoon stop (about 1:15 PM by run 29's report; the main session gives 1:40 PM; 12:35 PM entry) to 9:47 PM while the owner played.
+- No squad runs or restarts from this session.
+
 ## Moved 2026-10-18 02:31 (ChatGPT, C63 newest-four log trim)
 
 ### 2026-10-17 1:00 PM Claude: missions at every terminal type (test plan section 11): 7 of 11 PASS with exact pay; group-pay fix staged
