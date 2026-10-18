@@ -12,6 +12,7 @@ Claude or ChatGPT checks.
 | `gpt-oss:20b`, and `gpt-oss-20b-64k` built from it | OpenAI | Apache 2.0 | https://huggingface.co/openai/gpt-oss-20b |
 | `hf.co/hiwaifu-research/WaifuGemma4-26b-a4b-v1-i1-GGUF:IQ4_XS` (WaifuGemma4 26B-A4B v1, imatrix IQ4_XS, 13.9 GB) | hiwaifu-research, a role-play fine-tune of Google's Gemma 4 26B-A4B-it | Apache 2.0, "as inherited from the base model" | https://huggingface.co/hiwaifu-research/WaifuGemma4-26b-a4b-v1-i1-GGUF (read 17 Oct; licence field `apache-2.0`; not gated) |
 | `gemma4:12b` | Google | Apache 2.0 | https://huggingface.co/google/gemma-4-12b (licence field `apache-2.0`) and https://ai.google.dev/gemma/docs/gemma_4_license (the "Gemma 4 license" page, last updated 2026-04-01, is the Apache License 2.0) |
+| `saluki` (Underdog Saluki 27B 1.0, IQ2 mix, 7.9 GB, plus its Q8_0 vision projector, 0.63 GB; on both PCs since 18 Oct, the projector on Miniverse only) | ConwayResearch, from ISTA-DASLab's Qwen3.8-27B GSQ quant | Apache 2.0 | https://huggingface.co/ConwayResearch/Underdog-Saluki-27B-1.0 (read 18 Oct through the Hub API: licence `apache-2.0`, LICENSE and NOTICE files; sha256 of both files checked against the Hub) |
 
 ## Gemma (the options doc said to read its terms first)
 

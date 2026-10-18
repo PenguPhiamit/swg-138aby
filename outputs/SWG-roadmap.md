@@ -76,9 +76,11 @@ Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heav
   - **Microverse (RTX 4070 Super) is the main local server.**
     - qwen3.6 35B writes the research reports.
     - **Saluki** (Underdog Saluki 27B at IQ2, 7.9 GB, 43 tokens/s) is now the claim checker. It redid 130 disputed claims in 2.8 minutes, and Claude's check found 62 of its 70 changed verdicts right (`Agent/local-research/claim-recheck/report.md`).
-    - qwen3.5, qwen3.6 and gemma4 can read images. On a 3D crate test they described the picture well, but none saw the crumpled handles, so they don't check art yet.
+    - qwen3.5, qwen3.6 and gemma4 can read images. On a 3D crate test they described the picture well, but none saw the crumpled handles.
     - ComfyUI 0.41.0 runs there too (port 8188). Art jobs there still need `comfy-url.txt` and an image-upload step.
-  - **This PC:** qwen3:8b as the fallback. wen-turbo (27B Q4) loads only with WSL off and runs at about 4.5 tokens/s, so it's not worth keeping.
+  - **This PC (since 2:10 AM):** Saluki too, with its vision add-on, at 50 tokens/s entirely on the card. It is the fallback, and it runs the chunk jobs (the claim pass, the item checks) while Microverse does research.
+    - With vision it was the only model that saw the crumpled handles, so art checks run here.
+    - wen-turbo (27B Q4) loads only with WSL off and runs at about 4.5 tokens/s, so it's not worth keeping.
   - **Backlog:** 4 topics are open on Microverse (both item checks, the scenario first pass and the test index). The research reports in "review" wait for a Saluki claim pass, then Claude.
 - **Audits.**
   - Item sources (`Documentation-support/item-sources-audit.md`): 12,062 item templates, of which 3,769 have a way to be obtained, 1,650 have none, 399 come only from test tools and 6,176 are imported but unused. The local model is sorting the flagged and the ok items for Opus to check.

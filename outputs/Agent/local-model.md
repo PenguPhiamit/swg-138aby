@@ -9,7 +9,7 @@ until Claude or ChatGPT has checked it against the source.
 | Server | Models | Used when |
 |---|---|---|
 | The friend's PC (RTX 4070 Super 12 GB, 32 GB RAM), on the home network | `qwen3.6:35b-a3b` (research), `saluki` (claim checks; Underdog Saluki 27B at IQ2, 7.9 GB, 43 tokens/s, since 18 Oct), `qwen3.5:9b` (fast jobs), `gemma4:12b` (bot chat), `qwen3:8b` and `gpt-oss:20b` (older, for comparisons), `qwen-heretic` (Qwen3.8 27B Q4, 17 GB: more than the card holds, so slow; not used). qwen3.5, qwen3.6 and gemma4 also read images. WaifuGemma4 (the npc-dialogue model) is no longer there (checked 18 Oct 1:35 AM). | whenever it answers |
-| This PC | `qwen3:8b` at 16K | fallback, when the friend's PC is off, asleep or Ollama is quit |
+| This PC (RTX 5070 12 GB) | `saluki` at 16K with its vision projector (since 18 Oct 2:10 AM: 50 tokens/s, all on the card), also `qwen3:8b`, WaifuGemma4 (npc-dialogue), `gpt-oss:20b` | fallback, when the friend's PC is off, asleep or Ollama is quit; and chunk jobs Claude runs here by hand (status `here`) while the friend's PC does research |
 
 - **The list is one file:** `outputs/tools/agents/local/ollama-url.txt` (gitignored, because it holds a home-network
   address). It has one server per line, in order, each with its model and context size. Copy
@@ -24,6 +24,9 @@ until Claude or ChatGPT has checked it against the source.
   prompt cache grows in that PC's RAM (it took this PC down on 15 Oct). On this PC the jobs also stop below 6 GB of
   commit headroom, start only above 8 GB, and wait while the owner's SWG client runs.
 - **Owner pause:** creating `Agent/local-research/STOP` stops new topics on every server.
+- **Status `here`** (18 Oct): a topic run by hand on Miniverse while the friend's PC works through the queue. The
+  runner starts only `open` topics, so it leaves it alone. The by-hand run uses the runner's own steps
+  (`idle_research.run()` with this PC's server), which set `review` and write the LOG.md line.
 - **It pauses itself when the friend's queue finishes** (owner, 17 Oct: "when the que finishes on their PC please have
   it pause"). When a timer run finds nothing open that the friend's PC can run, it writes STOP with the time and the
   topics still waiting (for example a model that isn't pulled), and adds a line to `LOG.md`. Nothing more runs, on
@@ -99,6 +102,10 @@ ones that save Claude's own reading. Ranked by that:
      - all three described the crate well, in 12 s (qwen3.5), 23 s (gemma4) and 31 s (qwen3.6);
      - none saw that the right-hand mesh has crumpled handles and a wavy rim.
    - So they sort images but don't check meshes. Any new vision model the owner finds should be tried on that image first.
+   - **Update, 18 Oct 2:10 AM: Saluki with its vision projector (this PC) passed.**
+     - In 11 s it reported "mesh tearing and pinching on the handles (especially in the right panel)" and said no to the prop.
+     - It is the only one of the four models that did. Use it for art checks here.
+     - Microverse can get the same check by adding the projector there (`mmproj-Underdog-Saluki-27B-1.0-Q8_0.gguf`, 0.63 GB, and a Modelfile like `tools/agents/local/models/saluki.Modelfile`).
 9. **Reading bot screenshots** (a stuck character, an error window).
    - Screenshots of the owner's client stay on this PC, so this needs a vision model here: `qwen3.5:9b`, 6.6 GB, a download, so it needs the owner's OK.
 
