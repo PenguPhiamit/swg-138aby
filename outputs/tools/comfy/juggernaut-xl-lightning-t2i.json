@@ -2,25 +2,15 @@
  "1": {
   "class_type": "CheckpointLoaderSimple",
   "inputs": {
-   "ckpt_name": "ponyDiffusionV6XL_v6.safetensors"
-  }
- },
- "2": {
-  "class_type": "CLIPSetLastLayer",
-  "inputs": {
-   "clip": [
-    "1",
-    1
-   ],
-   "stop_at_clip_layer": -2
+   "ckpt_name": "Juggernaut_RunDiffusionPhoto2_Lightning_4Steps.safetensors"
   }
  },
  "3": {
   "class_type": "CLIPTextEncode",
   "inputs": {
    "clip": [
-    "2",
-    0
+    "1",
+    1
    ],
    "text": ""
   }
@@ -29,10 +19,10 @@
   "class_type": "CLIPTextEncode",
   "inputs": {
    "clip": [
-    "2",
-    0
+    "1",
+    1
    ],
-   "text": "score_4, score_5, score_6, source_pony, source_furry, text, watermark"
+   "text": "text, watermark"
   }
  },
  "5": {
@@ -63,10 +53,10 @@
     0
    ],
    "seed": 1,
-   "steps": 25,
-   "cfg": 7.0,
-   "sampler_name": "euler_ancestral",
-   "scheduler": "normal",
+   "steps": 6,
+   "cfg": 2.0,
+   "sampler_name": "dpmpp_sde",
+   "scheduler": "karras",
    "denoise": 1.0
   }
  },
@@ -90,7 +80,7 @@
     "7",
     0
    ],
-   "filename_prefix": "pony-v6"
+   "filename_prefix": "juggernaut-lightning"
   }
  }
 }

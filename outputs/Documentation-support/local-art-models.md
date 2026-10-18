@@ -328,3 +328,12 @@ about 100 MB/s, roughly 7.5 minutes in all.
 - First banner test: a long prose prompt fails on it (CLIP reads 77-token chunks; the scene was lost), and Pony drifts
   to characters, two of six seeds being nude creatures. It needs short tag prompts, `rating_safe` in the prompt and
   nsfw terms in the negative.
+
+## Juggernaut XL Lightning (18 Oct 2026, owner's OK), Pony removed
+
+- The owner: "try this one, delete pony" (RunDiffusion/Juggernaut-XL-Lightning). `Juggernaut_RunDiffusionPhoto2_Lightning_4Steps.safetensors`,
+  7,105,348,284 bytes, SHA-256 `c8df560d2992ac04…`, matching the Hugging Face LFS id; CreativeML OpenRAIL-M; ungated.
+  In `models\checkpoints`. Workflow: `tools/comfy/juggernaut-xl-lightning-t2i.json` (the card's settings: DPM++ SDE
+  Karras, 6 steps, cfg 2; SDXL 3:1 size 1728x576). Pony went to the Recycle Bin (the owner empties it).
+- First banner test: strong photoreal apocalypse (burning city spires, exploding moons), but no recognisable coral
+  worldships; like every SDXL model it reads long prompts in 77-token chunks.
