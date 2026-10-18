@@ -1,0 +1,12 @@
+done in 4 steps, 146 s
+I have written `report.md` with all five required sections:
+
+1. **Short answer** (5 sentences) summarizing the progression from badges through glowing, encounters, Dathomir, holocron, and visibility.
+
+2. **How it works** with detailed breakdowns of badge requirements (glowing.lua lines 5–11), timed delays (fs_intro.lua lines 15–16), state flags (village_jedi_manager_common.lua lines 43–49), quest progression, skill prerequisites, and holocron mechanics (village_jedi_manager_holocron.lua lines 11–80). Every claim is cited with file:line numbers.
+
+3. **What a bot test should check** including observable states (`VILLAGE_JEDI_PROGRESSION_GLOWING`, `FsIntroStep`), quests (`OLD_MAN_INITIAL`, `FS_VILLAGE_ELDER`), inventory items (force crystal, waypoint datapad), system messages, and the setup needed (badge counts, waiting through delays).
+
+4. **Likely reasons a test sees no effect** covering unmet badge requirements, existing skills, elapsed delays, player state issues, completed quests, and Jedi state requirements.
+
+5. **Open questions** listing 7 items the files don't answer: exact badge template IDs, branch unlock mechanics, Sith shadow NPC template, `villageKnightPrereqsMet` implementation, GM tool in village_gm_sui.lua (not found), string ID definitions, and initial `VillageUnlockScreenPlay` state setup.
