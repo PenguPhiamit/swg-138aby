@@ -1,0 +1,1 @@
+Welcome to the Fractured Galaxy test server. The owner posts news here (edit news.txt next to mtg-share.py).

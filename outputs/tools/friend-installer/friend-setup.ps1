@@ -33,12 +33,18 @@ param(
     [string]$KeyFile,
     [string]$MtgListFile,
     [string]$From,
-    [string]$SettingsFile = (Join-Path $PSScriptRoot 'settings.json'),
-    [string]$KitDir = (Join-Path $PSScriptRoot 'kit'),
-    [string]$StateFile = (Join-Path $PSScriptRoot 'state.json'),
+    [string]$SettingsFile,
+    [string]$KitDir,
+    [string]$StateFile,
     [string]$ResultFile,
     [switch]$DryRun
 )
+# Defaults next to this script. Not in param(): Windows PowerShell 5.1 leaves $PSScriptRoot empty there when
+# another program starts the script, which broke every call that relied on them (uninstaller, launcher).
+$Here = Split-Path -Parent $MyInvocation.MyCommand.Definition
+if (-not $SettingsFile) { $SettingsFile = Join-Path $Here 'settings.json' }
+if (-not $KitDir) { $KitDir = Join-Path $Here 'kit' }
+if (-not $StateFile) { $StateFile = Join-Path $Here 'state.json' }
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 $Latin1 = [Text.Encoding]::GetEncoding(28591)
@@ -406,7 +412,9 @@ function Invoke-KitInstall {
         Would "run the client patch kit ($kit) on $ClientDir"
         return
     }
-    $out = & "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File $kit -ClientDir $ClientDir 2>&1 | Out-String
+    $out = & "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File $kit -ClientDir $ClientDir -AllowDowngrade 2>&1 | Out-String
+    # -AllowDowngrade: the launcher may have installed a newer server patch since; this kit's goes back in and the
+    # launcher brings the server's current one again on its next start.
     $code = $LASTEXITCODE
     Note $out.Trim()
     if ($code -ne 0) { Finish 'ERR' ("The client patch did not install:`r`n" + $out.Trim()) $code }

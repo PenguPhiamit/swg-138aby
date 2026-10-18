@@ -10,7 +10,8 @@
   Writes build\settings.iss and build\settings.json, then runs Inno Setup's ISCC.exe. The result is
   build\out\SWG-Friends-Setup-<version>.exe. build\ is gitignored: never commit the .exe.
 #>
-param([switch]$DryRun, [string]$Settings = (Join-Path $PSScriptRoot 'owner-settings.json'), [switch]$AllowLanAddress)
+param([switch]$DryRun, [string]$Settings, [switch]$AllowLanAddress)
+if (-not $Settings) { $Settings = Join-Path $PSScriptRoot 'owner-settings.json' }   # not in param(): 5.1 may leave $PSScriptRoot empty there
 $ErrorActionPreference = 'Stop'
 function Fail($text) { Write-Host "STOPPED: $text" -ForegroundColor Red; exit 1 }
 
@@ -56,6 +57,22 @@ $friend = [ordered]@{ ServerAddress = $addr; LoginPort = [int]$s.LoginPort; MtgB
 $iss = "; Written by build.ps1 from owner-settings.json. Not in git.`r`n#define KitVersion `"$($m.version)`"`r`n#define KitDir `"$kit`"`r`n"
 [IO.File]::WriteAllText((Join-Path $build 'settings.iss'), $iss, [Text.Encoding]::ASCII)
 Write-Host "Wrote $build\settings.json and settings.iss."
+
+# The launcher: compiled with the C# compiler that ships with Windows; the banner is built into the exe.
+$csc = Join-Path $env:SystemRoot 'Microsoft.NET\Framework64\v4.0.30319\csc.exe'
+$banner = Join-Path $PSScriptRoot 'launcher\banner.png'
+if (-not (Test-Path -LiteralPath $banner)) { Fail "no launcher\banner.png (not in git; make one with launcher\make-banner.py, see OWNER-README)." }
+$out = Join-Path $build 'out'
+New-Item -ItemType Directory -Force -Path $out | Out-Null
+$launcher = Join-Path $out 'FracturedGalaxy.exe'
+if ($DryRun) { Write-Host "DRY RUN: would compile the launcher to $launcher." }
+else {
+    & $csc -nologo -target:winexe "-out:$launcher" "-resource:$banner,banner.png" -r:System.Web.Extensions.dll -r:System.Windows.Forms.dll -r:System.Drawing.dll (Join-Path $PSScriptRoot 'launcher\Launcher.cs')
+    if ($LASTEXITCODE -ne 0) { Fail "the launcher did not compile (csc code $LASTEXITCODE)." }
+    $lv = [Reflection.AssemblyName]::GetAssemblyName($launcher).Version.ToString()
+    [IO.File]::WriteAllText((Join-Path $out 'FracturedGalaxy.version'), $lv, [Text.Encoding]::ASCII)
+    Write-Host "Launcher $lv built. mtg-share.py offers it to friends' launchers, which update themselves."
+}
 
 $iscc = @("${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe", "$env:ProgramFiles\Inno Setup 6\ISCC.exe", "$env:LOCALAPPDATA\Programs\Inno Setup 6\ISCC.exe") |
     Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1

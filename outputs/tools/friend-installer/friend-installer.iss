@@ -11,7 +11,7 @@
 
 [Setup]
 AppId={{6E3B4C1A-9D2F-4B7E-8A51-3C0F2D9B7E64}
-AppName=SWG Friends Galaxy
+AppName=SWG Fractured Galaxy
 AppVersion={#KitVersion}
 AppVerName=SWG Friends Galaxy {#KitVersion}
 AppPublisher=The server owner
@@ -27,7 +27,7 @@ OutputBaseFilename=SWG-Friends-Setup-{#KitVersion}
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
-UninstallDisplayName=SWG Friends Galaxy (test server)
+UninstallDisplayName=SWG: Fractured Galaxy (test server)
 SetupLogging=no
 CloseApplications=no
 
@@ -37,6 +37,7 @@ FinishedLabel=Setup has finished.
 
 [Files]
 Source: "friend-setup.ps1"; DestDir: "{app}"; Flags: ignoreversion
+Source: "build\out\FracturedGalaxy.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "build\settings.json"; DestDir: "{app}"; Flags: ignoreversion
 Source: "FRIENDS-README.md"; DestDir: "{app}"; DestName: "README.txt"; Flags: ignoreversion isreadme
 Source: "MTG-CREDITS.txt"; DestDir: "{app}"; Flags: ignoreversion
@@ -45,11 +46,17 @@ Source: "{#KitDir}\manifest.json"; DestDir: "{app}\kit"; Flags: ignoreversion
 Source: "{#KitDir}\Install-ClientPatch.ps1"; DestDir: "{app}\kit"; Flags: ignoreversion
 Source: "{#KitDir}\Uninstall-ClientPatch.ps1"; DestDir: "{app}\kit"; Flags: ignoreversion
 
+[Dirs]
+; Friends' launchers update themselves (FracturedGalaxy.exe) without administrator rights.
+Name: "{app}"; Permissions: users-modify
+
 [Icons]
-Name: "{autodesktop}\Play SWG (owner's server)"; Filename: "{sys}\WindowsPowerShell\v1.0\powershell.exe"; Parameters: "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File ""{app}\friend-setup.ps1"" -Action Play"; WorkingDir: "{app}"; IconFilename: "{code:GetClientDir}\SWGEmu.exe"
+Name: "{autodesktop}\SWG Fractured Galaxy"; Filename: "{app}\FracturedGalaxy.exe"; WorkingDir: "{app}"
 
 [UninstallDelete]
 Type: files; Name: "{app}\state.json"
+Type: files; Name: "{app}\FracturedGalaxy.exe.old"
+Type: files; Name: "{app}\FracturedGalaxy.exe.new"
 Type: dirifempty; Name: "{app}\kit"
 Type: dirifempty; Name: "{app}"
 
