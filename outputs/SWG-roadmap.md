@@ -316,6 +316,15 @@ Goals: (1) **automated regression tests** after every rebuild, (2) make a one-pe
 | B7 | Test the whole server (owner, 13 Oct) | A coverage matrix links every feature group and profession to a scenario. Runs as a regression suite after each rebuild, with one report. Plan: C10 |
 | B8 | Server-side population bots, then the TortoiseBots fork (owner, 15 Oct) | 1,000 client-less bots on the test galaxy, measured ([plan](Documentation-support/server-side-bots.md)); with the new public repo, the bot module moves into a fork of TortoiseBots by Sagiroth ([fork plan](Documentation-support/tortoisebots-fork-plan.md)) |
 
+- [ ] **Bots raise their group level the way live players do** (owner, 18 Oct 2:35 AM).
+  - The owner's words: "in live and servers, players use pets and faction reweards like walkers and stormtroopers to raise the group level. have CH tame higher lvel creatures as they go."
+  - From the code (GroupObjectImplementation.cpp:584-624):
+    - group level = the highest player's level, plus one fifth of every other member's level, pets included;
+    - faction pets count toward mission difficulty unless `Core3.MissionManager.IncludeFactionPets` is false (default true, ConfigManager.h:354);
+    - a destroy mission's shown difficulty is the lair's level plus this group level (MissionManagerImplementation.cpp:864-876).
+  - So Creature Handler bots should tame higher-level creatures as they level, and faction bots should use faction pets (walkers, stormtroopers), to reach harder, better-paid missions.
+  - Open: BotPop and the squad scenarios (respecting the 17 Oct CH/BE taming decisions).
+
 - [x] C7 unattended scenario authoring (14 Oct, ChatGPT): doctor max-HAM evidence and fresh-kill harvesting added to the squad plan; Python compilation/offline mocks passed, in-game validation pending Claude?s overnight check.
 
 ### Track 2: an AI agent that plays a character and learns (owner idea, 13 Oct)
