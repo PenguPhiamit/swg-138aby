@@ -316,3 +316,15 @@ about 100 MB/s, roughly 7.5 minutes in all.
   Recycle Bin, and the owner emptied it.
 - Banner tests (launcher): klein 4B follows "living coral" best; Z-Image and schnell draw photoreal scenes but
   turn "worldships" into metal saucers unless the prompt leads with coral, rock and flesh.
+
+## Pony Diffusion V6 XL (18 Oct 2026, owner's OK), schnell removed
+
+- The owner: "swap it for this" (morikomorizz/Pony-Diffusion-V6-XL-GGUF). With the owner's card answer the full
+  checkpoint was used, not the GGUF (which would need the ComfyUI-GGUF custom node): `ponyDiffusionV6XL_v6.safetensors`,
+  6,938,041,050 bytes, SHA-256 `67ab2fd8ec439a89…`, matching the Hugging Face LFS id and the original Civitai release's
+  hash prefix (`67AB2FD8EC`). Licence: Pony's Fair AI Public License 1.0-SD (not Apache). In `models\checkpoints`.
+  Workflow: `tools/comfy/pony-v6-xl-t2i.json` (clip skip 2, Euler a, 25 steps, cfg 7; SDXL 3:1 size 1728x576).
+- FLUX.1 schnell went to the Recycle Bin.
+- First banner test: a long prose prompt fails on it (CLIP reads 77-token chunks; the scene was lost), and Pony drifts
+  to characters, two of six seeds being nude creatures. It needs short tag prompts, `rating_safe` in the prompt and
+  nsfw terms in the negative.
