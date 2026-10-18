@@ -26,7 +26,7 @@ def run(g):
         return
     listed = M.offers(dova, terminal, 'artisan')
     craft, c_before, _ = M.take(g, dova, terminal, 'artisan', [('crafting', M.in_town(dova))],
-                                'artisan/crafting', divisor, listed)
+                                'artisan/crafting', divisor, listed, full_ok=M.PICKUP_FIX)
     survey, _, _ = M.take(g, dova, terminal, 'artisan', [('survey', M.lowest)], 'artisan/survey', divisor, listed)
     if craft:
         M.crafting(g, dova, craft, c_before, divisor, 'artisan/crafting')

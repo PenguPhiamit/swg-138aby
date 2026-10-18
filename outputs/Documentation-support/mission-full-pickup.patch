@@ -1,0 +1,67 @@
+--- a/MMOCoreORB/src/server/zone/objects/mission/DeliverMissionObjectiveImplementation.cpp
++++ b/MMOCoreORB/src/server/zone/objects/mission/DeliverMissionObjectiveImplementation.cpp
+@@ -180,6 +180,19 @@
+ 	Locker lock(player);
+ 
+ 	if (objectiveStatus == 0) {
++		// Sandbox (Claude, 17 Oct 2026; functional-test-plan.md section 11): a pickup into a full inventory used to
++		// abort the objective, which despawned both NPCs but left the mission in the datapad with no way to finish it,
++		// and no message while the NPC still said the pickup line. Now the player is told and the objective stays in
++		// INITSTATUS, so they can make room and talk to the NPC again. Test galaxy, 17 Oct 5:38 AM: Cresh at 80 of 80.
++		if (inventory == nullptr) {
++			return;
++		}
++
++		if (inventory->isContainerFullRecursive()) {
++			player->sendSystemMessage("@error_message:inv_full"); // Your inventory is full.
++			return;
++		}
++
+ 		itemEntry << "l";
+ 		item = nullptr;
+ 		//TODO: create correct item.
+@@ -198,8 +211,9 @@
+ 		if (inventory->transferObject(item, -1, true)) {
+ 			item->sendTo(player, true);
+ 		} else {
+-			abort();
++			// Sandbox: keep the objective (see above) instead of aborting it.
+ 			item->destroyObjectFromDatabase(true);
++			player->sendSystemMessage("@error_message:inv_full"); // Your inventory is full.
+ 			return;
+ 		}
+ 
+--- a/MMOCoreORB/src/server/zone/objects/mission/CraftingMissionObjectiveImplementation.cpp
++++ b/MMOCoreORB/src/server/zone/objects/mission/CraftingMissionObjectiveImplementation.cpp
+@@ -72,6 +72,14 @@
+ 
+ 	switch (objectiveStatus) {
+ 	case 0:
++		// Sandbox (Claude, 17 Oct 2026): room for every part first, as for a deliver pickup
++		// (DeliverMissionObjectiveImplementation::updateMissionStatus). A part that did not fit used to abort the
++		// objective, leaving the mission stuck in the datapad. Now the player is told and can come back.
++		if (inventory->getCountableObjectsRecursive() + schematic->getDraftSlotCount() > inventory->getContainerVolumeLimit()) {
++			player->sendSystemMessage("@error_message:inv_full"); // Your inventory is full.
++			return;
++		}
++
+ 		//Award schematic and resources needed for it.
+ 		ghost->addRewardedSchematic(schematic, SchematicList::MISSION, 1, true);
+ 
+--- a/MMOCoreORB/src/server/zone/objects/creature/conversation/screenhandlers/DeliverMissionScreenHandler.cpp
++++ b/MMOCoreORB/src/server/zone/objects/creature/conversation/screenhandlers/DeliverMissionScreenHandler.cpp
+@@ -143,7 +143,13 @@
+ 					objective->updateMissionStatus(conversingPlayer);
+ 
+ 					//Converse with the player.
+-					performPickupConversation(conversationScreen, mission);
++					if (objective->getObjectiveStatus() == DeliverMissionObjective::INITSTATUS) {
++						// Sandbox (Claude, 17 Oct 2026): nothing was handed over (a full inventory); no pickup line.
++						text = "@error_message:inv_full";
++						conversationScreen->setDialogText(text);
++					} else {
++						performPickupConversation(conversationScreen, mission);
++					}
+ 				} else {
+ 					//Target NPC already talked to.
+ 					text = "@mission/mission_generic:deliver_already_picked_up";

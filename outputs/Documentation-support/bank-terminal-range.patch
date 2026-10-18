@@ -1,0 +1,29 @@
+--- a/MMOCoreORB/src/server/zone/objects/tangible/components/BankTerminalMenuComponent.cpp
++++ b/MMOCoreORB/src/server/zone/objects/tangible/components/BankTerminalMenuComponent.cpp
+@@ -63,6 +63,26 @@
+ 		return 0;
+ 	}
+ 
++	// Sandbox (Claude, 17 Oct 2026; functional-test-plan.md section 11): the bank's own radials need the player alive,
++	// conscious and within 8 m (the range BankTerminalSuiCallback already uses for a transfer). Nothing checked here, so
++	// the Deposit/Withdraw window opened from anywhere in the zone (test galaxy, 17 Oct about 6 AM: Kor, dead, 2 km
++	// from the nearest terminal), and Deposit all, Withdraw all and Join/Quit worked at any range.
++	if (selectedID == 20 || (selectedID >= WITHDRAW && selectedID <= DEPOSIT)) {
++		if (creature->isDead() || creature->isIncapacitated()) {
++			creature->sendSystemMessage("@error_message:wrong_state"); // You cannot complete that action while in your current state.
++			return 0;
++		}
++
++		if (!creature->isInRange(sceneObject, 8)) {
++			StringIdChatParameter params;
++			params.setStringId("@ui:radial_out_of_range_prose");
++			params.setTT("@terminal_name:terminal_bank");
++			params.setTO(selectedID == DEPOSIT ? "@sui:bank_items" : "@sui:bank_credits");
++			creature->sendSystemMessage(params);
++			return 0;
++		}
++	}
++
+ 	if (selectedID == WITHDRAW || selectedID == 20) {
+ 		ManagedReference<SuiBankTransferBox*> sui = new SuiBankTransferBox(sceneObject, creature, SuiWindowType::BANK_TRANSFER);
+ 

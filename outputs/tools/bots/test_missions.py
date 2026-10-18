@@ -31,6 +31,8 @@ class Galaxy:
         self.lair_hits = 3
         self.lair_offset = 40        # how far from the first waypoint the lair spawns (the server: up to 256 m)
         self.patched_pay = False     # Documentation-support/mission-group-pay.patch: near the owner counts too
+        self.patched_pickup = False  # mission-full-pickup.patch: a full pickup says inv_full and keeps the objective
+        self.bank_range = None       # bank-terminal-range.patch: 8 (m, and alive); stock opens the window anywhere
 
     def oid(self):
         self.next_oid += 1
@@ -113,6 +115,13 @@ class Galaxy:
         if record is None:
             return
         if npc['role'] == 'target' and not record.get('picked'):
+            if M.room(bot) < (2 if record['type'] == 'crafting' else 1):
+                if self.patched_pickup:
+                    bot.hear('@error_message:inv_full')
+                else:  # stock: abort() despawns both NPCs; the mission stays in the datapad, silent
+                    for oid in [o for o, n in self.objects.items() if n.get('mission') == record['oid']]:
+                        del self.objects[oid]
+                return
             record['picked'] = True
             if record['type'] == 'crafting':
                 bot.items += [{'oid': self.oid(), 'name': f'@craft_item:part_{n}', 'type': 'TANO', 'part': True}
@@ -307,7 +316,10 @@ class Bot:
     def select(self, target, radial_id, wait=2.0):
         item = next((i for i in self.items if i['oid'] == target), None)
         name = (item or self.galaxy.objects.get(target) or {}).get('name', '')
-        if radial_id == 68 and any(t['oid'] == target and 'terminal_bank' in t['template'] for t in self.galaxy.terminals):
+        bank = next((t for t in self.galaxy.terminals if t['oid'] == target and 'terminal_bank' in t['template']), None)
+        reach = self.galaxy.bank_range
+        if radial_id == 68 and bank and (reach is None or self.posture_now != 'dead'
+                                         and math.hypot(bank['x'] - self.x, bank['y'] - self.y) <= reach):
             self.pages.append({'page_id': 900, 'script': 'Script.transfer', 'commands': [
                 {'kind': 3, 'narrow': ['transaction.lblStartingFrom', 'Text'], 'wide': ['10000']},
                 {'kind': 3, 'narrow': ['transaction.lblStartingTo', 'Text'], 'wide': [str(self.bank_credits)]}]})
@@ -371,6 +383,8 @@ class Bot:
             for i in self.items:
                 if i['oid'] == target:
                     i['held'], i['parent'] = True, self.oid
+        elif name == 'serverDestroyObject':
+            self.items = [i for i in self.items if i['oid'] != target]
         elif name in ('stopdance', 'stopmusic'):
             self.performing = None
         elif name == 'requestSurvey':
@@ -432,9 +446,9 @@ class Base(unittest.TestCase):
         self.galaxy.bots = bots
         return Group('Test', bots), bots
 
-    def take(self, g, bot, ttype, mtype, choose, divisor):
+    def take(self, g, bot, ttype, mtype, choose, divisor, full_ok=False):
         terminal = self.galaxy.terminal(ttype, bot.x, bot.y)
-        return M.take(g, bot, terminal, ttype, [(mtype, choose)], f'{ttype}/{mtype}', divisor)
+        return M.take(g, bot, terminal, ttype, [(mtype, choose)], f'{ttype}/{mtype}', divisor, full_ok=full_ok)
 
 
 class Readers(Base):
@@ -672,6 +686,47 @@ class Missions(Base):
         self.assertEqual(M.bank(bot), 100000)
         self.assertIn(('sui_respond', 900, 1), bot.slashes)  # cancelled: nothing moves
         self.assertEqual(bot.pages, [])
+
+    def test_with_the_bank_range_patch_the_bot_walks_to_the_terminal_and_back(self):
+        g, (bot,) = self.crew('Kor')
+        start = (bot.x, bot.y)
+        self.galaxy.terminals.append({'oid': 77, 'template': 'object/tangible/terminal/terminal_bank.iff',
+                                      'x': bot.x + 2000, 'y': bot.y})
+        self.galaxy.bank_range = 8
+        bot.bank_known, bot.bank_credits = False, 100000
+        self.assertEqual(M.bank(bot), 100000)
+        self.assertEqual((bot.x, bot.y), start)
+        mission_terminal = self.galaxy.terminal('general', bot.x + 30, bot.y)
+        self.assertEqual(M.bank(bot, mission_terminal), 100000)
+        self.assertLess(math.hypot(bot.x - mission_terminal['x'], bot.y - mission_terminal['y']), 6)
+        bot.posture_now = 'dead'
+        self.assertIsNone(M.bank(bot))  # patched: no window while dead
+
+    def test_a_full_pickup_is_kept_and_finished_with_the_pickup_patch(self):
+        g, (bot,) = self.crew('Cresh')
+        self.full(bot)
+        self.galaxy.patched_pickup = True
+        mission, before, divisor = self.take(g, bot, 'general', 'deliver', M.in_town(bot), 1, full_ok=True)
+        done = M.errand(g, bot, mission, before, divisor, 'general/deliver')
+        self.assertEqual(g.passed('general/deliver: a full inventory is told and keeps the pickup'), [True])
+        self.assertTrue(done['removed'])
+        self.assertEqual(done['paid'], mission['reward'])
+        self.assertEqual(g.failed(), [])
+        self.assertIn(('serverDestroyObject', ''), bot.slashes)
+
+    def test_a_full_pickup_is_stuck_on_stock_core3(self):
+        g, (bot,) = self.crew('Cresh')
+        self.full(bot)
+        mission, before, divisor = self.take(g, bot, 'general', 'deliver', M.in_town(bot), 3, full_ok=True)
+        M.errand(g, bot, mission, before, divisor, 'general/deliver')
+        self.assertEqual(g.passed('general/deliver: a full inventory is told and keeps the pickup'), [False])
+        self.assertEqual(g.passed('general/deliver pickup again: an NPC stands at the waypoint'), [False])
+        self.assertTrue(M.in_datapad(M.mission_now(bot, mission['oid'])))  # stuck
+        self.assertTrue(any(n.startswith('RESULT general/deliver') and 'full inventory' in n for n in g.notes))
+
+    def full(self, bot):
+        bot.items = [{'oid': 1, 'name': '@item_n:inventory', 'type': 'TANO', 'parent': bot.oid}] + [
+            {'oid': 10 + i, 'name': '@medicine_name:stimpack_sm_s1_a', 'type': 'TANO', 'parent': 1} for i in range(80)]
 
     def test_a_full_inventory_takes_no_delivery(self):
         g, (bot,) = self.crew('Cresh')

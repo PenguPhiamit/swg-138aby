@@ -47,9 +47,12 @@ def run(g):
                            'general/destroy', divisor, listed)
     # The deliver goes to whoever has room (a pickup into a full inventory leaves the mission stuck); on 17 Oct all
     # three were full, so dorn-missions.py's Rusk takes one too.
+    # With mission-full-pickup.patch installed (M.PICKUP_FIX), a full carrier takes it anyway and errand checks the
+    # inv_full answer and the kept pickup.
     carrier = max((cresh, kor), key=M.room)
     deliver, d_before, _ = M.take(g, carrier, general, 'general', [('deliver', M.in_town(carrier))],
-                                  'general/deliver', divisor, None if carrier is not cresh else listed)
+                                  'general/deliver', divisor, None if carrier is not cresh else listed,
+                                  full_ok=M.PICKUP_FIX)
 
     jobs = [lambda: M.cap(g, ilsa, general) if M.arrived(trips[1]) else M.blocked(g, 'general/cap', 'Ilsa not at the terminal')]
     if deliver:

@@ -110,28 +110,33 @@ def mission_now(bot, oid):
     return next((m for m in bot.missions() if m.get('oid') == oid), None)
 
 
-_BANK_TERMINALS = {}  # bot first name -> the bank terminal whose window it reads
+BANK_RANGE = 8  # m; BankTerminalSuiCallback's transfer check, and the radial's with bank-terminal-range.patch
 
 
-def bank(bot):
-    """The bank balance: from status() when the body knows it, else from a bank terminal's window."""
+def bank(bot, back='here'):
+    """The bank balance: from status() when the body knows it, else from a bank terminal's window (bank_window, which
+    walks to the terminal; back says where to go afterwards)."""
     value = bot.status().get('bank_credits')
-    return value if isinstance(value, int) else bank_window(bot)
+    return value if isinstance(value, int) else bank_window(bot, back)
 
 
-def bank_window(bot):
-    """The balance from a bank terminal's Deposit/Withdraw window (radial 68, Script.transfer, lblStartingTo), closed
-    at once with cancel, so nothing moves. Needed because the body forgets the balance at the first character delta it
-    cannot parse (AgentControl.cpp, CREO1 deltas; 17 Oct: unknown for every bot). The server opens this window at any
-    range (17 Oct: Kor, dead, 2 km from the nearest terminal), so the terminal found first is reused. None if no
-    window came."""
-    terminal = _BANK_TERMINALS.get(bot.first)
-    if terminal is None:
-        found = sorted(bot.locate('terminal_bank', radius=3000), key=lambda o: o.get('distance', 0))
-        if not found:
-            return None
-        terminal = _BANK_TERMINALS[bot.first] = found[0]['oid']
-    bot.select(terminal, 68, wait=2)
+def bank_window(bot, back='here'):
+    """The balance from the nearest bank terminal's Deposit/Withdraw window (radial 68, Script.transfer,
+    lblStartingTo), closed at once with cancel, so nothing moves. Needed because the body forgets the balance at the
+    first character delta it cannot parse (AgentControl.cpp, CREO1 deltas; 17 Oct: unknown for every bot). Stock Core3
+    opens the window at any range and while dead (17 Oct about 6 AM: Kor, dead, 2 km from the nearest terminal);
+    Documentation-support/bank-terminal-range.patch makes it 8 m and alive. So the bot walks to the terminal first,
+    then back: to back when it is a terminal from locate (approached as at_terminal does), or with 'here' to where it
+    stood, when that was outdoors (an indoor spot has no world walk target; pass its terminal instead). None if no
+    terminal, no arrival or no window."""
+    found = sorted(bot.locate('terminal_bank', radius=3000), key=lambda o: o.get('distance', 0))
+    if not found:
+        return None
+    terminal, here = found[0], bot.status()
+    walked = (terminal.get('distance') or 0) > BANK_RANGE - 2
+    if walked and not arrived(approach(bot, terminal)):
+        return None
+    bot.select(terminal['oid'], 68, wait=2)
     value = None
     for page in [p for p in bot.sui_pages().get('pages', []) if p.get('script') == 'Script.transfer']:
         for command in page.get('commands', []):
@@ -141,18 +146,45 @@ def bank_window(bot):
                 except (TypeError, ValueError):
                     pass
         bot.sui_respond(page['page_id'], 1, [], wait=1)  # cancel
+    if walked and isinstance(back, dict):
+        approach(bot, back)
+    elif walked and back == 'here' and not here.get('cell') and isinstance(here.get('x'), (int, float)):
+        bot.walk(here['x'], here['y'], tries=tries_for(far(bot.status(), here)))
     return value
 
 
 INVENTORY_LIMIT = 80  # 17 Oct: ten squad bots stopped at 80 items, mostly spare /agentgear kits
+# Documentation-support/mission-full-pickup.patch in the dev server: a full pickup says inv_full and keeps the objective.
+# Set True with the build that installs it; then take(full_ok=PICKUP_FIX) lets a full carrier take a delivery, and
+# errand checks the new behaviour (full_pickup). Stock Core3 aborts the objective and the mission is stuck.
+PICKUP_FIX = False
 
 
 def room(bot):
-    """Free inventory slots. A deliver pickup into a full inventory aborts the objective but leaves the mission in the
-    datapad, stuck (DeliverMissionObjectiveImplementation.cpp updateMissionStatus; Cresh, 17 Oct 5:38 AM)."""
+    """Free inventory slots. Stock Core3: a deliver pickup into a full inventory aborts the objective but leaves the
+    mission in the datapad, stuck (DeliverMissionObjectiveImplementation.cpp updateMissionStatus; Cresh, 17 Oct 5:38 AM)."""
+    return INVENTORY_LIMIT - len(loose_items(bot))
+
+
+def loose_items(bot):
+    """The items directly in the inventory (not held, not inside a bag)."""
     stock = bot.inventory().get('items', [])
     box = next((i.get('oid') for i in stock if i.get('name') == '@item_n:inventory'), None)
-    return INVENTORY_LIMIT - sum(1 for i in stock if box is not None and i.get('parent') == box)
+    return [i for i in stock if box is not None and i.get('parent') == box]
+
+
+def spare_item(bot):
+    """An item the bot can lose to free a slot: a medicine, else one of the most duplicated plain items (a spare kit),
+    never a mission item. None if nothing is duplicated."""
+    loose = [i for i in loose_items(bot) if i.get('type') == 'TANO' and '@mission' not in str(i.get('name'))]
+    medicine = [i for i in loose if '@medicine_name:' in str(i.get('name'))]
+    if medicine:
+        return medicine[-1]
+    names = {}
+    for i in loose:
+        names[i.get('name')] = names.get(i.get('name'), 0) + 1
+    name = max(names, key=names.get) if names else None
+    return next(i for i in reversed(loose) if i.get('name') == name) if name and names[name] > 1 else None
 
 
 def mark(bot):
@@ -337,10 +369,10 @@ def accept(bot, mission, terminal):
     return {}
 
 
-def take(g, bot, terminal, ttype, choices, label, divisor, listed=None):
+def take(g, bot, terminal, ttype, choices, label, divisor, listed=None, full_ok=False):
     """List at terminal (unless listed is given), pick with the first (mission type, chooser) that finds one, accept.
-    divisor is the bot's group size (group_size, read before any parallel jobs). Returns (mission, bank before,
-    divisor), or (None, None, None) after a BLOCKED result."""
+    divisor is the bot's group size (group_size, read before any parallel jobs). full_ok lets a full inventory take a
+    delivery (with PICKUP_FIX). Returns (mission, bank before, divisor), or (None, None, None) after a BLOCKED result."""
     if isinstance(terminal.get('x'), (int, float)):
         bot.__dict__['mission_origin'] = {'x': terminal['x'], 'y': terminal['y']}  # world coordinates (locate)
     for mtype, choose in choices:  # finish a mission an earlier run left (there is no abort; the cap is 6)
@@ -348,7 +380,7 @@ def take(g, bot, terminal, ttype, choices, label, divisor, listed=None):
         if old:
             g.note(f'{label}: {bot.first} finishes a held {mtype} mission from an earlier run: '
                    + json.dumps({k: old.get(k) for k in ('title', 'target', 'difficulty', 'reward')}))
-            return old, bank(bot), divisor
+            return old, bank(bot, terminal), divisor
     if len(held(bot)) >= CAP:
         blocked(g, label, f'{bot.first} already holds {CAP} missions')
         return None, None, None
@@ -364,11 +396,11 @@ def take(g, bot, terminal, ttype, choices, label, divisor, listed=None):
     if pick is None:
         blocked(g, label, f'no {" or ".join(wanted)} mission fits', offers=counts(listed))
         return None, None, None
-    if pick.get('type') in CARRY and room(bot) < 3:
+    if pick.get('type') in CARRY and room(bot) < 3 and not full_ok:
         blocked(g, label, f'{bot.first}\'s inventory is full ({INVENTORY_LIMIT - room(bot)} of {INVENTORY_LIMIT}); '
                           f'not taken, since a full pickup leaves the mission stuck')
         return None, None, None
-    before = bank(bot)
+    before = bank(bot, terminal)  # back to the terminal: the accept needs 6 m (MMI:170)
     taken = accept(bot, pick, terminal)
     if not g.check(f'{label}: accepted into the datapad', taken,
                    {k: pick.get(k) for k in ('type', 'title', 'target', 'difficulty', 'reward')}):
@@ -449,6 +481,29 @@ def visit(g, bot, point, label, exclude=()):
     return npc
 
 
+def full_pickup(g, bot, mission, first, since, label, squad):
+    """A pickup that handed nothing to a full inventory. With mission-full-pickup.patch the server says inv_full and
+    keeps the objective (the waypoint stays on the pickup NPC), so after spare items are destroyed a second talk hands
+    the item over. Stock Core3 says nothing, despawns both NPCs and leaves the mission stuck in the datapad (17 Oct
+    5:38 AM: Cresh at 80 of 80). True when the second talk reached the NPC."""
+    kept = mission_now(bot, mission['oid'])
+    spot = where(kept or {})
+    told = said(bot, 'inv_full', since)
+    g.check(f'{label}: a full inventory is told and keeps the pickup', told and in_datapad(kept) and far(spot, first) <= 5,
+            {'inv_full': bool(told), 'held': in_datapad(kept), 'waypoint': spot, 'pickup': first, 'room': room(bot)})
+    lost = []
+    for _ in range(3):  # three slots, as take() wants: a crafting pickup hands over a part per draft slot
+        spare = room(bot) < 3 and spare_item(bot)
+        if not spare:
+            break
+        bot.slash('serverDestroyObject', '', target=spare['oid'], wait=1)
+        lost.append(spare.get('name'))
+    if not g.check(f'{label}: spare items free room', room(bot) > 0, {'room': room(bot), 'destroyed': lost}):
+        return False
+    g.note(f"{label}: {bot.first} destroyed {lost} for room; talks to the pickup NPC again")
+    return visit(g, bot, first, f'{label} pickup again', squad) is not None
+
+
 def errand(g, bot, mission, before, divisor, label, between=None):
     """Deliver and crafting: pick up from the target NPC, run between(items gained) if given (the crafting step;
     False stops), hand over to the destination NPC, get paid."""
@@ -460,6 +515,11 @@ def errand(g, bot, mission, before, divisor, label, between=None):
         return unfinished(g, label, mission, 'pickup failed', began)
     bot.idle(2)
     gained = [i for i in items(bot) if i['oid'] not in stock]
+    if not gained and room(bot) < 3:
+        if not full_pickup(g, bot, mission, first, since, label, squad):
+            return unfinished(g, label, mission, 'full inventory at the pickup', began)
+        bot.idle(2)
+        gained = [i for i in items(bot) if i['oid'] not in stock]
     g.check(f'{label}: the pickup hands something over', gained, [i.get('name') for i in gained][:6])
     moved = where(mission_now(bot, mission['oid']) or {})
     if not g.check(f'{label}: the waypoint moves to the destination', moved and far(moved, first) > 5,
@@ -584,7 +644,7 @@ def destroy(g, team, mission, before, divisor, label):
                 lair_from_end_point=round(far(lair_spot, end)) if far(lair_spot, end) != math.inf else None)
     shares = {}
     for b in team[1:]:
-        after = bank(b)
+        after = bank(b, None)  # the lair is done: a member who walked to a bank stays in town
         shares[b.first] = after - banks[b.first] if isinstance(after, int) and isinstance(banks[b.first], int) else None
     shares[owner.first] = done.get('paid')
     g.note(f'{label}: shares paid {shares} (each member within 128 m of the end point gets reward // {divisor})')
