@@ -52,7 +52,9 @@ builds and sign-offs.
    - The client reads all the building's file formats.
    - The cause was Core3's 192 m send range: the doors are 319 m and 627 m from the building's centre.
    - Big buildings are now sent as far as they reach, and the probe passes at the main door.
-   - **Owner to look:** `/teleport -5051 5440 hoth` (main door), then `/teleport -5307 5750 hoth` (hangar).
+   - **It draws** (owner's screenshots, ~9:45 AM): the main door frame and blast door show. The hangar's roof
+     shows, but its mouth is filled with snow. Still open: walking in, and the hangar mouth (a terrain fit, which
+     needs the owner's OK).
 3. ~~**The next build and restart.**~~ **Done: run 31 since 8:59 AM** (owner: "i am logged off"). Release build of
    dev `35e7dbe6`:
    - `4bae9ab1` (full-inventory pickup);
@@ -152,4 +154,4 @@ blocks Claude from sending repo text to that PC.
 4. Microverse's access to the code.
 5. GitHub: the names delta sweep, then the new repository `swg-138aby`.
 6. The BotPop social questions 1 to 3 (board, 17 Oct).
-7. H1: look at Echo Base in the client (main door and hangar) on run 31c.
+7. H1: can you walk in at the main door? And may the hangar mouth's terrain be fitted (a terrain edit)?
