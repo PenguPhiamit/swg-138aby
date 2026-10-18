@@ -1,0 +1,12 @@
+done in 7 steps, 244 s
+I've read TASK.md and the listed TSV file (283 bug comments), then written report.md with all five required sections:
+
+1. **Short answer** - Summarizes the key player-visible bugs clustered in space travel crashes, SUI interface issues, combat balance gaps, city decoration exploits, and sandbox tool crashes.
+
+2. **How it works** - Details conditions, what each comment says is wrong, and how players would see it (inferred), with file:line citations for every claim. Covers space/crash bugs, city decoration path blocking, combat balance, slicing locks, login issues, SUI crashes, tutorial building destruction, sandbox tools, Hoth vehicle deeds, and vendor exploits.
+
+3. **What a bot test should check** - Lists observable results (system messages, states, inventory, attributes) and required setup for each bug category.
+
+4. **Likely reasons a test sees no effect** - Explains why tests might miss these bugs (specific triggers needed, time dependencies, precise positioning requirements, etc.).
+
+5. **Open questions** - Names 10 specific gaps the source files don't answer, including missing values, undocumented mechanics, and absent reference documentation.
