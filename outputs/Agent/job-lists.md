@@ -61,7 +61,8 @@ builds and sign-offs.
    - `aa52cc64` (bank radials);
    - the C62 fixes.
    Same settings as before: BotPop 200, Tailscale address. The log is clean (Saluki's triage, 9:01 AM).
-   `PICKUP_FIX = True` is set in `tools/bots/missions.py`. **The speed check is still to come, in its own build.**
+   `PICKUP_FIX = True` is set in `tools/bots/missions.py`. **The speed check is built (dev `7550bd13`, `a9ac11e0`,
+   release build 11:32 AM) and untested: the stall probe runs after the owner's next start.**
 4. **Missions after that build.**
    - Bounty: Brask never walks to the terminal.
    - Rerun the group-pay check with Cresh. It needs the Marksman fighting fix.
@@ -74,6 +75,26 @@ builds and sign-offs.
 7. H3, the Hoth weather: look again in clear weather.
 8. Release 1 candidate branch, as C62 recommends: a reviewed cut, not all of dev. This waits for the owner's Hoth
    decision.
+9. **Harvesters allowed in the Hoth Ice Caves no-build circle** (owner, 18 Oct 10:11 AM: "plan it for the rebuild,
+   let me finish"). **Built, untested: dev `e56154bb`, release build 11:32 AM (with the speed check and ghostfire).**
+   Harvesters and power generators may go in (owner, 11:20 AM: generators too); factories and houses may not. Test
+   after the owner's next start: `tools/bots/scenarios/hoth-ice-caves-harvester.py`. The plan as written at 10:11 AM:
+   - Why: Goke at (-224, 2441) on open ground is 237 m inside the 450 m `@hoth_region_names:ice_caves` circle
+     (`hoth_regions.lua:17`, `NAMEDREGION + NOBUILDZONEAREA`), so a harvester deed gets "Building is not permitted
+     here". The owner has added a lot of Hoth resources and wants to harvest there.
+   - Change (C++, dev): a harvester deed is not refused for the Ice Caves circle alone; everything else still is.
+     - `StructureManager.cpp:317` (`isBuildingPermittedAt`, deed path) and `PlaceStructureCommand.h:100` (the
+       `/placeStructure` path) both refuse any `isNoBuildZone()` area, with no way to say what is being placed.
+     - Plan: give the Ice Caves area a new flag (or match its region name) meaning "no-build except harvesters", and
+       let the two checks skip that one area when the deed is a harvester. Echo Base, the outpost and the map edges
+       stay closed. Confirm how to tell a harvester deed from a generator or factory deed (`isInstallationDeed()` is
+       too wide); the owner asked for harvesters only.
+   - Check before the build: `isBuildingPermittedAt` also refuses water, steep ground (15 m over 20 m) and objects'
+     own no-build footprints, so a refusal after the change may be one of those.
+   - Test on the test galaxy after the build: place a harvester at Goke's spot (expect yes), a house deed at the
+     same spot (expect refused), a harvester inside the Echo Base circle (expect refused), and the harvester pulling
+     one of the new Hoth resources.
+   - Ride on the next build with the other dev work; do not build only for this unless the owner asks.
 
 **Later:**
 - the ComfyUI art handoff on Microverse (`comfy-url.txt`, an upload helper);

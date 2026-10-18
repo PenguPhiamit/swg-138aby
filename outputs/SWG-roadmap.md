@@ -68,10 +68,11 @@ Owner, 15 Oct: get as much done as possible with the Claude plan, doing the heav
     - Ossus O7–O11 (people, world, dungeon, the gold sky, the ghostfire quest, the cave mouths);
     - creation fixes B1/B2;
     - the vehicle call fix.
-- **On dev for the next build:**
-  - the full-inventory mission pickup (`4bae9ab1`);
-  - bank radials at 8 m and alive (`aa52cc64`);
-  - the speed check (its own build).
+- **Built for the next start (release build of dev `2687887a`, 18 Oct 11:32 AM; the galaxy is off, all untested):**
+  - the ghostfire saber's shimmer and trail test (`2687887a`);
+  - harvesters and power generators allowed in the Hoth ice caves circle (`e56154bb`);
+  - the speed check, design A (`7550bd13`, `a9ac11e0`).
+  - Run 31 already brought the full-inventory pickup (`4bae9ab1`), the bank radials (`aa52cc64`) and the C62 fixes.
   - The bot bodies already run `1be13676`, which adds `mission_abort`.
 - **Local models (18 Oct).**
   - **Microverse (RTX 4070 Super) is the main local server.**
