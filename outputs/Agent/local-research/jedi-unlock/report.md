@@ -57,7 +57,7 @@ The server is configured for VILLAGEJEDIPROGRESSION (value 2) by default in jedi
 - What happens when a player surrenders a prerequisite skill? canSurrenderSkill returns true by default (jedi_manager.lua line 81), but the actual enforcement logic for Jedi skills is missing from these files.
 - How are hologrind professions assigned to a player? onPlayerCreated randomly selects NUMBEROFPROFESSIONSTOMASTER (6) professions from the list and adds them via addHologrindProfession (hologrind_jedi_manager.lua lines 71-86), but it is unclear if this affects gameplay or is purely cosmetic.
 
-## Claude's review (18 Oct 2:30 AM)
+## Claude's review (18 Oct 2:12 AM)
 
 Checked against the copies in `src/`.
 

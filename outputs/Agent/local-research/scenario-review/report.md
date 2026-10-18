@@ -238,7 +238,7 @@ A first pass over the bot scenarios. Each finding is a lead to check in the code
 | g.parallel(lambda: scout(forn, 0, 'hunting'), lambda: hunter(bh), ...) | Step that leaves the bot stuck for the next test | The `scout` function for hunting does not return until the hunt is complete (presumably). If `M.hunt` blocks or takes a long time, and `g.parallel` doesn't handle timeouts, the test could hang. Furthe |
 
 
-## Claude's review (18 Oct 2:50 AM)
+## Claude's review (18 Oct 2:16 AM)
 
 **Not usable as it stands: none of the 103 findings holds up.** The model doesn't know the bot API, and most items come from that. Checked against `tools/bots/squad.py`:
 

@@ -1,6 +1,6 @@
 # Report: why a bounty terminal offered Brask no bounty mission
 
-Written by Claude, 18 Oct 2:40 AM. The local model (qwen3.6 on Microverse) wrote no report: it read the files, then
+Written by Claude, 18 Oct 2:14 AM. The local model (qwen3.6 on Microverse) wrote no report: it read the files, then
 thought for about 200,000 characters without answering (agent-log.jsonl, step 3). This report is from the code in
 `src/` and run 3's own record, `Bot-reports/Forn/20261017-232839-forn-missions.json`.
 

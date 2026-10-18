@@ -88,7 +88,7 @@ In Core3, entertainers earn three types of experience per 10-second tick: dance 
 - **Applause mechanics**: How `applauseCount` is incremented is not shown in these files (missing function/file).
 - **Buff strength cap calculation**: The exact formula for `maxBuffStrength` beyond the 125% cap and faction perk addition is unclear without the skill template data.
 
-## Claude's review (18 Oct 2:20 AM)
+## Claude's review (18 Oct 2:10 AM)
 
 Checked against the copies in `src/`. The numbers it cites are right: the 10 s tick, the audience cap of 50 and `audienceSize / 50`, +5% per grouped entertainer within 40 m, the flourish cap of 1 (dance) or 2 (music) per tick, the flourish cooldown, and the 60 s watch time. Three things are wrong or missing, and the first one changes the bot test.
 
