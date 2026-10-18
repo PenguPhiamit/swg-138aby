@@ -323,6 +323,11 @@ def at_terminal(g, bot, ttype, slot=0, radius=3000, at=None, team=None):
     if (spot.get('distance') or 0) > 300:
         guarded_walk(g, team or [bot], {'x': spot['x'], 'y': spot['y'] - 8}, f'{ttype}: to the terminal')
     trip = approach(bot, spot, slot)
+    if not arrived(trip) and 'no path' in str(trip.get('error') if isinstance(trip, dict) else trip):
+        # 17 Oct 10:05 PM: Dask, 296 m from the imperial terminal indoors, got "no path" at once; walk to the
+        # building's outside first, then route in again
+        guarded_walk(g, team or [bot], {'x': spot['x'], 'y': spot['y'] - 8}, f'{ttype}: to the terminal')
+        trip = approach(bot, spot, slot)
     if not g.check(f'{ttype}: {bot.first} reaches the terminal', arrived(trip),
                    {k: trip.get(k) for k in ('arrived', 'error', 'seconds')} if isinstance(trip, dict) else trip):
         return None
@@ -974,6 +979,11 @@ def npc_bounty(bot, limit):
     return choose
 
 
+def holds_bounty(bot):
+    """The server allows one bounty mission at a time (handleMissionAccept: too_many_missions)."""
+    return any(m.get('type') == 'bounty' for m in held(bot))
+
+
 def bounty(g, bot, terminal, label, divisor, limit=4000, lists=30):
     """An NPC bounty. The informant of the mission's level comes first (InformantMissionScreenHandler: the objective
     leaves INITSTATUS; a level-1 informant also gives the target's waypoint). At level 2 and 3 the probe droid then
@@ -1124,12 +1134,12 @@ def in_town(bot):
     return choose
 
 
-def easiest(bot, limit=2300):
-    """The lowest-difficulty destroy mission within limit m (1000-2000 m placement plus the lair's offset), avoiding
-    boss lairs on a tie."""
+def easiest(bot, limit=2300, most=math.inf):
+    """The lowest-difficulty destroy mission within limit m (1000-2000 m placement plus the lair's offset) and at most
+    difficulty most, avoiding boss lairs on a tie. 17 Oct 10:15 PM: three Marksmen died at a held difficulty-14 lair."""
     def choose(listed):
         here = origin(bot)
-        ok = [m for m in listed if far(here, where(m)) <= limit]
+        ok = [m for m in listed if far(here, where(m)) <= limit and (m.get('difficulty') or 0) <= most]
         return min(ok, key=lambda m: (m.get('difficulty') or 99, 'boss' in str(m.get('target')),
                                       far(here, where(m)))) if ok else None
     return choose

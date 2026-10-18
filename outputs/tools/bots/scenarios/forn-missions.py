@@ -24,7 +24,7 @@ def run(g):
         bot.recover()
     # The walkers fight on the way (recon areas 1-4 km out, bounty targets up to 4 km): Marksman on the test galaxy,
     # existing boxes kept, as in cresh-missions.py. 17 Oct: Mirren and Dask were downed walking alone.
-    for bot in (forn, dask, ressa, mirren):
+    for bot in g.bots:
         if not any('combat_marksman_master' in str(s) for s in bot.profession('list').get('skills', [])):
             g.note(f'{bot.first} marksman: ' + str(bot.profession('combat_marksman'))[:120])
         g.note(f'{bot.first} gear: ' + str(bot.gear('basic'))[:120])
@@ -44,6 +44,12 @@ def run(g):
             return scout(bot, slot, 'recon') if bot.posture() not in M.DOWN else None  # then a recon, armed
         return M.recon(g, bot, mission, before, divisor, 'scout/recon')
 
+    # One bounty per hunter (no abort): Ressa has held a far one since 17 Oct morning, so whoever holds none hunts.
+    free = [b for b in (ressa, brask) if not M.holds_bounty(b)]
+    if not free:
+        g.note('bounty: Ressa and Brask each hold a bounty mission already (one at a time; no abort)')
+    bh = (free or [ressa])[0]
+
     def hunter(bot):  # M.bounty grants the bounty hunter boxes before it lists (the terminal needs the novice box)
         terminal = M.at_terminal(g, bot, 'bounty', at=points[bot.first])
         return terminal and M.bounty(g, bot, terminal, 'bounty/bounty', divisor)
@@ -53,8 +59,8 @@ def run(g):
         return terminal and M.faction(g, bot, terminal, ttype, divisor, team)
 
     # Mirren (Doctor) died walking alone to a recon area on 17 Oct 12:28 PM, so Forn does the recon after his hunt.
-    g.parallel(lambda: scout(forn, 0, 'hunting'), lambda: hunter(ressa),
-               lambda: side(dask, 'imperial', [mirren]), lambda: side(brask, 'rebel'))
+    g.parallel(lambda: scout(forn, 0, 'hunting'), lambda: hunter(bh),
+               lambda: side(dask, 'imperial', [mirren]), *([lambda: side(brask, 'rebel')] if bh is not brask else []))
     M.summary(g)
     for bot in g.bots:
         g.note(f'{bot.first} after: {bot.posture()}')
