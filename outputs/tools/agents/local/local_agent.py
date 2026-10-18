@@ -23,6 +23,8 @@ READ_CAP = 20000  # characters per read_file call; the model pages with offset
 # 18 Oct: on bounty-offers qwen3.6 thought for 856 s (about 200,000 characters) and ended with no tool call and no
 # report. A reply is now capped (thinking included), and a run whose task asks for report.md that stops without one is
 # asked, at most twice, to write it from what it has read.
+# The same night Saluki thought through three capped replies after the reminders, so a reminded run now also has
+# thinking switched off.
 MAX_REPLY = 16384  # tokens per reply
 NUDGES = 2
 NUDGE = ('You have not written report.md yet. Write it now with write_file, from what you have already read. '
@@ -86,9 +88,12 @@ def run_tool(root, name, args, protected):
         return f'error: {error}'
 
 
-def chat(model, messages, ctx, base=None):
-    body = json.dumps({'model': model, 'messages': messages, 'tools': TOOLS, 'stream': False,
-                       'options': {'num_ctx': ctx, 'temperature': 0.2, 'num_predict': MAX_REPLY}}).encode()
+def chat(model, messages, ctx, base=None, think=None):
+    body = {'model': model, 'messages': messages, 'tools': TOOLS, 'stream': False,
+            'options': {'num_ctx': ctx, 'temperature': 0.2, 'num_predict': MAX_REPLY}}
+    if think is not None:   # after a reminder: thinking off, so the reply is the report itself (18 Oct, see NUDGE)
+        body['think'] = think
+    body = json.dumps(body).encode()
     request = urllib.request.Request(ollama_url.api('/api/chat', base), body, {'Content-Type': 'application/json'})
     with urllib.request.urlopen(request, timeout=900) as response:
         return json.load(response)
@@ -148,7 +153,7 @@ def loop(args, root, protected, log, messages, model, ctx, base, started):
                 if room is not None and room < memguard.MIN_HEADROOM_GB:
                     print(f'stopped: Windows commit headroom {room:.1f} GB after {step - 1} steps')
                     return 3
-        reply = chat(model, messages, ctx, base)
+        reply = chat(model, messages, ctx, base, think=False if nudges else None)
         message = reply.get('message', {})
         log.write(json.dumps({'step': step, 'reply': message, 'eval_count': reply.get('eval_count'),
                               'prompt_eval_count': reply.get('prompt_eval_count')}) + '\n')

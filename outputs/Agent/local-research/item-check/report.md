@@ -2,7 +2,7 @@
 
 Written by the local model through `tools/agents/local/local_jobs.py`; 2117 input lines. A local model's draft: check each item before acting on it.
 
-later-era: 1847, test-only: 160, pre-cu-missing: 31, fine: 28, not-an-item: 25, unsure: 3, new: 1; no answer yet: 22.
+later-era: 1861, test-only: 160, pre-cu-missing: 31, not-an-item: 31, fine: 28, unsure: 3, new: 1; no answer yet: 2.
 
 ## pre-cu-missing (31)
 
@@ -48,10 +48,16 @@ later-era: 1847, test-only: 160, pre-cu-missing: 31, fine: 28, not-an-item: 25, 
 | `object/tangible/firework/firework_four.iff` | no-source \| now: none \| stock: the same |  |  |
 | `object/weapon/ranged/rifle/rifle_cdef_npe.iff` | new \| now: script 1: built from "object/weapon/ranged/rifle/rifle_cdef" in screenplays/themepark/helper_droid/helper_droid_quest.lua; test 0: ; ungranted 1: wea | script | The item is new and its intended method of acquisition is unclear. |
 
-## not-an-item (25)
+## not-an-item (31)
 
 | Item | Now | Intended | Why |
 |---|---|---|---|
+| `object/tangible/deed/vehicle_deed/vehicle_deed_base.iff` | no-source \| now: none \| stock: the same |  | This is a base template for vehicle deeds, not a specific item players can hold. |
+| `object/tangible/deed/vehicle_deed/vehicular_prototype_bike_deed.iff` | no-source \| now: none \| stock: the same |  | This is a prototype template, not a specific item players can hold. |
+| `object/tangible/deed/vehicle_deed/vehicular_prototype_deed.iff` | no-source \| now: none \| stock: the same |  | This is a prototype template, not a specific item players can hold. |
+| `object/tangible/furniture/all/frn_all_chair_kitchen_s2.iff` | no-source \| now: none \| stock: the same |  | This is a furniture template, not a specific item players can hold. |
+| `object/tangible/furniture/all/frn_all_data_terminal_free_s2.iff` | no-source \| now: none \| stock: the same |  | This is a furniture template, not a specific item players can hold. |
+| `object/tangible/furniture/all/frn_all_data_terminal_wall_s2.iff` | no-source \| now: none \| stock: the same |  | This is a furniture template, not a specific item players can hold. |
 | `object/tangible/furniture/all/frn_all_data_terminal_wall_s3.iff` | no-source \| now: none \| stock: the same |  | This is a furniture item that players never hold. |
 | `object/tangible/furniture/all/frn_all_desk_map_table_insert.iff` | no-source \| now: none \| stock: the same |  | This is a furniture item that players never hold. |
 | `object/tangible/furniture/all/frn_all_lamp_tbl_s02.iff` | no-source \| now: none \| stock: the same |  | This is a furniture item that players never hold. |
@@ -111,14 +117,14 @@ later-era: 1847, test-only: 160, pre-cu-missing: 31, fine: 28, not-an-item: 25, 
 | `object/weapon/melee/sword/crafted_saber/sword_lightsaber_ranged_donotuse_s01.iff` | new \| now: script 1: built from "object/weapon/melee/sword/crafted_saber" in screenplays/jedi/padawan/padawan_trials.lua \| stock: none | script | The way it is obtained now fits as it is built from a schematic in a script. |
 | `object/weapon/melee/sword/crafted_saber/sword_lightsaber_ranged_donotuse_s02.iff` | new \| now: script 1: built from "object/weapon/melee/sword/crafted_saber" in screenplays/jedi/padawan/padawan_trials.lua \| stock: none | script | The way it is obtained now fits as it is built from a schematic in a script. |
 
-## later-era (1847), by folder
+## later-era (1861), by folder
 
 - tangible/battery (1): battery
 - tangible/beta (8): beta_terminal_food, beta_terminal_medicine, beta_terminal_money, beta_terminal_resource, beta_terminal_warp, beta_terminal_wound, beta_terminal_xp, donham_terminal
 - tangible/component (258): adv_hvy_blaster_power_handler, adv_hvy_projectile_feed_mech, adv_vehicle_module, adv_vehicle_structure_frame, adv_warhead_launcher, ammo_projectile, ammo_projectile_entanglement, armor_layer, armor_layer_environmental, armor_layer_restraint, armor_module_base, armor_module_heavy, armor_module_light, armor_panel_acid, armor_panel_blast, armor_panel_cold, armor_panel_electrical, armor_panel_energy, armor_panel_heat, armor_panel_kinetic, armor_plating_mk1, armor_plating_mk2, armor_plating_mk3, armor_segment_advanced, armor_segment_enhancement_dragonet, armor_segment_padded_dune_lizard, auto_blast
 - tangible/container (32): armor_crate, clothing_crate, computer_container, droid_crate, food_crate, furniture_crate, gas_filter_container, generic_crate, jar_base, jar_berries_s01, jar_bugs_s01, jar_empty_s01, jar_funk_s01, jar_spice_s01, jar_spice_s02, jar_spice_s03, lunchbox_base, medbag_base, placable_loot_crate, placable_loot_crate_skeleton_bith, placable_loot_crate_skeleton_human, placable_loot_crate_skeleton_ithorian, placable_loot_crate_tech_armoire, placable_loot_crate_tech_chest, placable_loot_crate_trashpile, rock_crevice, tech_bookcase, warren_drum_skeleton, warren_drum_tech_armoire, warren_drum_tech_chest, 
 - tangible/crafting (15): base_public_station, base_repair, base_station, base_tool, default_draft_not_found, jedi_tool_crit_assembly_20, jedi_tool_crit_assembly_5, jedi_tool_crit_experiment_20, jedi_tool_crit_experiment_5, missing_schematic_substitute, public_clothing_station, public_food_station, public_space_station, public_structure_station, public_weapon_station
-- tangible/deed (112): acklay_deed, corellia_house_large_deed, corellia_house_medium_deed, corellia_house_medium_style_02_deed, corellia_house_small_deed, corsec_4x10_honorguard_deed, corsec_stage_theater_deed, crashed_tie_bomber_theater_deed, crashed_tie_fighter_theater_deed, crashed_xwing_theater_deed, dantooine_flag_deed, dathomir_flag_deed, deed_base, deed_building_base, deed_droid_basic_base, deed_installation_base, destroyed_atat_theater_deed, endor_flag_deed, faction_turret_deed, fed_dub_1x10_honorguard_deed, fed_dub_2x10_honorguard_deed, fed_dub_3x10_honorguard_deed, fed_dub_4x10_honorguard_deed, fed_dub_sta
+- tangible/deed (126): acklay_deed, corellia_house_large_deed, corellia_house_medium_deed, corellia_house_medium_style_02_deed, corellia_house_small_deed, corsec_4x10_honorguard_deed, corsec_stage_theater_deed, crashed_tie_bomber_theater_deed, crashed_tie_fighter_theater_deed, crashed_xwing_theater_deed, dantooine_flag_deed, dathomir_flag_deed, deed_base, deed_building_base, deed_droid_basic_base, deed_installation_base, destroyed_atat_theater_deed, endor_flag_deed, faction_turret_deed, fed_dub_1x10_honorguard_deed, fed_dub_2x10_honorguard_deed, fed_dub_3x10_honorguard_deed, fed_dub_4x10_honorguard_deed, fed_dub_sta
 - tangible/droid (2): droid_space_memory_module_base, navicomputer_base
 - tangible/droid_battery (1): base_battery
 - tangible/dungeon (35): cave_stalagmite_ice_style_01, coal_bin_container, corvette_search_imperial_assassination_01, corvette_search_imperial_assassination_02, corvette_search_imperial_assassination_03, corvette_search_imperial_destroy_01, corvette_search_imperial_destroy_02, corvette_search_imperial_destroy_03, corvette_search_imperial_rescue_01, corvette_search_imperial_rescue_02, corvette_search_imperial_rescue_03, corvette_search_neutral_assassination_01, corvette_search_neutral_assassination_02, corvette_search_neutral_assassination_03, corvette_search_neutral_destroy_01, corvette_search_neutral_destroy_02, corv
@@ -159,3 +165,36 @@ later-era: 1847, test-only: 160, pre-cu-missing: 31, fine: 28, not-an-item: 25, 
 - weapon/mine (1): mine_base
 - weapon/ranged (34): base_ranged_weapon, carbine_base, creature_base, creature_spit_heavy_flame, creature_spit_large_green, creature_spit_large_red, creature_spit_large_toxicgreen, creature_spit_large_yellow, creature_spit_lightning_ball, creature_spit_particle_beam, creature_spit_small_green, creature_spit_small_red, creature_spit_small_toxicgreen, creature_spit_small_yellow, creature_spit_spray_green, creature_spit_spray_red, creature_spit_spray_toxicgreen, creature_spit_spray_yellow, droid_astromech_ranged, droid_droideka_ranged, droid_probot_ranged, grenade_base, grenade_fallback, heavy_weapon_base, launcher, 
 - weapon/trap (1): eqp_weapon_auto_laser_trap
+
+## Claude's review (18 Oct 2:41 AM, of the items flagged pre-cu-missing or wrong-way, in this report and item-check-ok)
+
+Claude checked the flagged items against each item's own input line (the "now" and "stock" columns the model was given). These are the 31 from item-check and the 29 from item-check-ok, both answered by qwen3.6 on 17 Oct.
+
+**Wrong because the item does have a way to be obtained (37).** The model said "no way is found" or "meant to be scripted" while its input lists one:
+- **Theme-park rewards:**
+  - `knife_vibroblade_quest` (Jan Dodonna);
+  - `scope_weapon_advanced_quest` and `stock_advanced_quest` (Kaja Or'Zee);
+  - `frn_all_banner_rebel` (Nien Nunb).
+  - These are scripted rewards already. The orphan loot entry beside the scope is a leftover, not the way it is obtained.
+- **The Bestine election script:** `bestine_quest_rug`.
+- **Faction recruiter perks** (`factionPerkData.lua`): the five `furniture/technical/*_s01` pieces.
+- **Space loot** (Jump to Lightspace is in our era): the 18 ship armour components. The orphaned `ship_component_trade_fed_tier4/5` groups are leftovers beside working space loot.
+- **Dim-U monastery drops:** `skill_buff_unarmed_speed`.
+- **Our own content, on purpose:**
+  - `vest_hutt_gang_s01` (Nal Hutta home and life);
+  - the seven Hoth rewards from Hoth creatures: `col_reward_hoth_tauntaun_head`, the TCG travel advertisement, the stuffed tauntaun and wampa, the AT-AT diorama, the armoured tauntaun statue and `frn_plush_tauntaun`.
+  - These are later-era items the owner placed as Hoth rewards, so the right verdict is fine.
+
+**Not items (4):**
+- `furniture/furniture_base.iff` is the base template.
+- `furniture_tatooine_cantina_seat_01` is a fixed cantina seat (inferred from the name).
+- The two `furniture/imperial/warren_*` terminals belong to the Warren dungeon (inferred from the name).
+
+**Truly without a source, pre-CU status unknown (19):**
+- `apron_porcellus`, `apron_s01`;
+- the nine `armor_marauder_s01` pieces and the `s03` double bandolier;
+- `bacta_tank`, `cafe_chair`, `corellian_flagpole`, `fruit_assorted`, `microphone_s02`, `park_bench`, `pitcher_full`.
+
+Whether pre-CU players could get these needs a real source, not a model's guess. They go to GPT's known-bugs research (C64) with that question. Stock SWGEmu gives none of them either.
+
+**Verdict:** the model's pre-cu-missing and wrong-way flags are not usable as they stand. It ignored the "now" column it was given. Before a rerun, the instruction should say: "if `now` lists any way, the verdict is never pre-cu-missing". The large later-era and test-only groups were not checked here.
