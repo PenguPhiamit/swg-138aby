@@ -145,13 +145,13 @@ Sources read: `Bot-reports/GATE.md` (gate of 15 Oct, 4:31 PM: FAIL, 22 of 35), `
   | general | deliver | **PASS** twice (Rusk; Cresh's group all have full inventories) | 62 → 20 (3), 80 s; 64 → 21 (3), 85 s |
   | general | the cap | **PASS** three times: Ilsa holds 6, and a 7th stays in the mission bag | the message arrives only as `@mission:mission_generic` (bug 4) |
   | artisan | crafting | **PASS** twice: the NPC's schematic and parts, the generic tool, the hand-over | 64 → 16 (4), 83 s; 102 s |
-  | artisan | survey | **not completed** (see Gaps) | 427 |
+  | artisan | survey | **PASS** (10:12 PM, run 30): Dova, guarded by Varo, found Vesoide at 75.9% (non-ferrous metal, 50% needed) 1150 m out | 471 → 117 (4), 290 s |
   | entertainer | dancer | **PASS** twice: 10 minutes dancing inside the mission's building | 133 → 44 (3), 667 s; 169 → 56 (3), 706 s |
   | entertainer | musician | **PASS** twice: slitherhorn, same building; the bank also gets the dancer's share | 157 → 52 (+44), 701 s; 205 → 68 (+56), 709 s |
-  | scout | hunting | **PASS** (12:35 PM): 15 kills counted by the server | 1038 → 207 (5), 817 s. 11:56 AM: completed, hunter paid 0 (bug 1) |
-  | scout | recon | **not completed**: Mirren died walking alone; Forn's walk stalled. The same recon flow passes at the rebel terminal | 361, 454 |
-  | bounty | bounty | **not completed**: listing (Novice Bounty Hunter) and accepting work | 5400 to 10584 |
-  | imperial | recon | **not completed**: accepted twice, walk stalled or Dask downed; Mos Eisley's imperial and rebel terminals offer no deliver missions | 573 |
+  | scout | hunting | **PASS** (12:35 PM and 10:20 PM): 15 kills counted by the server | 1038 → 207 (5), 817 s; 2051 → 410 (5), 673 s. 11:56 AM: completed, hunter paid 0 (bug 1) |
+  | scout | recon | **PASS** (10:28 PM, run 30): Forn, now a Marksman, after his hunt; 2 fights on the way, nobody downed | 454 → 90 (5), 510 s |
+  | bounty | bounty | **not completed**: listing (Novice Bounty Hunter) and accepting work; 10:05 PM: a target within 4 km on the first list, but Ressa's accept is refused (`too_many_missions`: she already holds a far bounty from the morning, and the server allows one at a time); 10:35 PM: Brask, given Novice Bounty Hunter, got no bounty offers in 30 lists (the bag kept other terminals' offers; his walk ended "could not reach the destination" near the terminal) | 5400 to 10584; 7074 |
+  | imperial | recon | **PASS** (10:47 PM, run 30): Dask with Mirren as escort, both Marksmen; 2 fights, both downed once on the way and got up. Mos Eisley's imperial and rebel terminals offer no deliver missions | 573 → 114 (5), 809 s |
   | rebel | recon | **PASS** twice | 314 → 62 (5), 328 s; 385 → 77 (5), 471 s |
   | newbie, statue | list | none stands within 3 km of Mos Eisley | — |
 
@@ -161,7 +161,7 @@ Sources read: `Bot-reports/GATE.md` (gate of 15 Oct, 4:31 PM: FAIL, 22 of 35), `
      - 5:38 AM: Cresh and Kor at the lair were unpaid; Ilsa, dead at the first waypoint, was paid.
      - 12:22 PM: Forn's hunting mission completed and he was paid 0.
      - 12:41 PM: Ilsa and Kor at the lair were paid 0.
-     - **Staged fix:** `mission-group-pay.patch` with `mission-group-pay.md` (unbuilt). Check: "general/destroy: everyone who fought at the lair is paid".
+     - **Staged fix:** `mission-group-pay.patch` with `mission-group-pay.md`, built into run 30 (dev `cbd85fdf`). Check: "general/destroy: everyone who fought at the lair is paid": **not yet run.** 10:15 PM: all three died at a held difficulty-14 kreetle lair (1152 credits); 10:35 PM: no destroy mission of difficulty 10 or less within 2.3 km (`cresh-missions.py` now caps it at 10).
   2. **A deliver pickup into a full inventory leaves the mission stuck** (server). `DeliverMissionObjectiveImplementation::updateMissionStatus` aborts the objective when the datadisk can't be added, but leaves the mission in the datapad with no message. The NPC still says the pickup line (`m3p`). Cresh, 5:38 AM: inventory 80 of 80, no datadisk, waypoint unchanged; the mission is still held. Crafting pickups have the same pattern. Proposed, not fixed.
   3. **A bank terminal's Deposit/Withdraw window opens at any range** (server). Kor, dead and 2 km from the nearest terminal, opened it about 6 AM. The scenarios use it, read only and cancelled, to read the balance. Proposed, not fixed.
   4. **Bot body:**
@@ -173,9 +173,9 @@ Sources read: `Bot-reports/GATE.md` (gate of 15 Oct, 4:31 PM: FAIL, 22 of 35), `
      The scenarios work around all four.
   5. **Squad bots:** 10 of 24 have full inventories (80 items), mostly spare `/agentgear` kits (Cresh, Ilsa, Kor, Dorn, Nima, Mirren, Aurek, Sela, Oren, Besh), so they can't take deliver, crafting or survey missions.
 - **Gaps:**
-  - **Survey** isn't completed: the resource class had to be matched to the listed types, the density is a fraction, and Dova was downed walking back. All three are fixed in the scenario since; not rerun.
-  - **Scout and imperial recon** aren't completed: recon areas are 1 to 4 km out, and walks there were downed or stalled. Recon itself passes at the rebel terminal.
-  - **Bounty** isn't completed. Level-1 targets spawn anywhere on the planet: none of 10 offers was within 4 km. The informant step (a Mos Eisley `spynet_operative`) is written and offline tested only.
+  - **Survey** passes since 10:12 PM (run 30), after the class match, the density fraction and the guarded walk back.
+  - **Scout and imperial recon** pass since 10:28 PM and 10:47 PM (run 30): Marksman walkers (89737ca), Mirren escorting Dask, and a walk to the building first after "no path" (3a4414e).
+  - **Bounty** isn't completed. Level-1 targets spawn at random spawn points anywhere on the planet, and each list request draws new offers, so the scenario lists again until one starts within 4 km (89737ca; found on the first list at 10:05 PM). The server allows one bounty at a time and Ressa holds a far one (no abort in the old body; dev `1be13676` adds `mission_abort`), so Brask hunted at 10:35 PM (3a4414e), but his lists showed no bounty offers: he likely stood out of the terminal's range ("stopped at the end of the last path"). Next: check the bot's range to the terminal before listing, or abort Ressa's far bounty with the new body's `mission_abort` (dev `1be13676`; the squad bodies still run the old binary). The informant step is offline tested only.
   - **The full-datapad gate (C56)** is not run.
   - **The 2-mission cap on live** is not checked (live's config).
 - **Pass:** met except the exact refusal message. `cresh-missions.py` "the mission leaves the datapad" and "the share reaches the bank" PASS (general/destroy, 12:41 PM). Deliver and crafting PASS in new scenarios. The seventh mission is refused, but the message reaches the body only as `@mission:mission_generic` (bug 4), so "with the exact message" waits for the body fix.
