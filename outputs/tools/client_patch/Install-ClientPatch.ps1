@@ -7,6 +7,7 @@
     powershell -NoProfile -ExecutionPolicy Bypass -File Install-ClientPatch.ps1 -ClientDir "C:\SWGEmu"
   It refuses a folder that is not a SWGEmu client, a damaged kit, missing MTG archives, a running client,
   and (without -AllowDowngrade) an older version than the one installed.
+  On a stock client (maxSearchPriority=26) it also moves swgemu_live.cfg's stock archives up to the server's layout.
   Whatever it replaces goes to <client>\local_planets-patch\backup\ first. Uninstall-ClientPatch.ps1 undoes it.
   Exit codes: 0 done, 1 error, 2 not a client folder, 3 requirements, 4 kit damaged, 5 client running, 6 downgrade.
 #>
@@ -67,6 +68,34 @@ function Get-LoadedArchives($dir, $skipFile) {
     return $loaded
 }
 
+# The highest maxSearchPriority in the chain's [SharedFile] sections (0 when there is none).
+function Get-SearchTop($dir) {
+    $list = New-Object System.Collections.Generic.List[object]
+    [void](Read-CfgChain $dir 'swgemu.cfg' $null $list)
+    $top = 0
+    foreach ($e in $list) { if ($e.Section -eq 'SharedFile' -and $e.Key -eq 'maxSearchPriority') { $top = [Math]::Max($top, [int]$e.Value) } }
+    return $top
+}
+
+# swgemu_live.cfg with its [SharedFile] stock lines moved $shift levels up and maxSearchPriority set to $newTop. Lines
+# for the MTG archives and ours stay where they are. Also returns the lowest stock level before the move, how many
+# lines moved and whether the file had a maxSearchPriority line to raise.
+function Move-LiveCfg($text, $shift, $newTop, $keep) {
+    $section = $null; $low = [int]::MaxValue; $moved = 0; $topSet = $false
+    $out = foreach ($raw in ($text -split '(?<=\n)')) {
+        $body = ($raw -split ';', 2)[0].Trim()
+        if ($body.StartsWith('[') -and $body.EndsWith(']')) { $section = $body.Substring(1, $body.Length - 2).Trim() }
+        elseif ($section -eq 'SharedFile' -and $body -match '^maxSearchPriority\s*=') {
+            $raw = $raw -replace '(maxSearchPriority\s*=\s*)\d+', ('${1}' + $newTop); $topSet = $true
+        } elseif ($section -eq 'SharedFile' -and $body -match '^searchTree_\d+_(\d+)\s*=\s*(.+)$' -and -not $keep.ContainsKey($Matches[2].Trim().ToLower())) {
+            $n = [int]$Matches[1]; $low = [Math]::Min($low, $n); $moved++
+            $raw = $raw -replace "(searchTree_\d+_)$n(?=\s*=)", ('${1}' + ($n + $shift))
+        }
+        $raw
+    }
+    return @{ Text = ($out -join ''); Low = $low; Moved = $moved; TopSet = $topSet }
+}
+
 function Write-Ascii($path, $text) { [IO.File]::WriteAllText($path, $text, [Text.Encoding]::ASCII) }
 
 # --- checks -------------------------------------------------------------------------------------------
@@ -113,6 +142,25 @@ if ($State -ne $null -and -not $AllowDowngrade -and $new -lt [version]$State.ver
     Fail 6 "version $($State.version) is installed, newer than this kit ($($Manifest.version)). Use -AllowDowngrade to go back."
 }
 
+# A stock SWGEmu client loads only below maxSearchPriority=26, its own archives at 25 and down. The server is built on
+# the owner's layout: the stock archives 24 levels higher (49..24 under maxSearchPriority=50), the MTG archives under
+# them (23..1) and ours at 49 on top. A client whose cap is too low for ours gets the same move in swgemu_live.cfg
+# (the original goes to backup\original first; Uninstall-ClientPatch.ps1 puts it back). Anything else stops here.
+$LiveCfg = Join-Path $ClientDir 'swgemu_live.cfg'
+$want = [int]$Manifest.archive.priority + 1
+$top = Get-SearchTop $ClientDir
+$LiveMove = $null
+if ($top -lt $want) {
+    $keep = @{ ($Manifest.archive.file.ToLower()) = $true }
+    $mtgTop = 0
+    foreach ($r in $Manifest.requires) { $keep[$r.file.ToLower()] = $true; $mtgTop = [Math]::Max($mtgTop, [int]$r.priority) }
+    $shift = $want - $top
+    $LiveMove = Move-LiveCfg ([IO.File]::ReadAllText($LiveCfg, $Latin1)) $shift $want $keep
+    if (-not $LiveMove.TopSet -or $LiveMove.Moved -eq 0 -or $LiveMove.Low + $shift -le $mtgTop) {
+        Fail 1 "this client's archive list (maxSearchPriority $top) is laid out differently from the server's, so nothing was changed. Send the owner your swgemu_live.cfg."
+    }
+}
+
 # --- install ------------------------------------------------------------------------------------------
 $Original = Join-Path $PatchDir 'backup\original'
 New-Item -ItemType Directory -Force -Path $Original | Out-Null
@@ -136,6 +184,14 @@ if (-not $same) {
     Move-Item -LiteralPath $tmp -Destination $Target -Force
 }
 
+$liveMoved = $false
+if ($State -ne $null) { $liveMoved = [bool]$State.live_cfg_moved }
+if ($LiveMove) {
+    Save-Backup 'swgemu_live.cfg' $Original
+    [IO.File]::WriteAllText($LiveCfg, $LiveMove.Text, $Latin1)
+    $liveMoved = $true
+}
+
 # The cfg block: our archive, plus any required MTG archive the client's own cfg files do not load yet.
 $loaded = Get-LoadedArchives $ClientDir 'local_planets.cfg'
 $lines = @("searchTree_00_$($Manifest.archive.priority)=$($Manifest.archive.file)")
@@ -144,21 +200,37 @@ foreach ($r in $Manifest.requires) {
     if (-not $loaded.ContainsKey($r.file.ToLower())) { $lines += "searchTree_00_$($r.priority)=$($r.file)"; $added += $r.file }
 }
 $cfgPath = Join-Path $ClientDir 'local_planets.cfg'
-if ($firstRun) { Save-Backup 'local_planets.cfg' $Original }
+# A run that stopped before writing state.json (kits before 18 Oct) left our own file here: not the friend's original.
+$cfgOurs = (Test-Path -LiteralPath $cfgPath) -and ([IO.File]::ReadAllText($cfgPath, $Latin1) -match 'Written by Install-ClientPatch\.ps1')
+if ($firstRun -and -not $cfgOurs) { Save-Backup 'local_planets.cfg' $Original }
 $cfgText = "; Loads the owner's server content. Written by Install-ClientPatch.ps1; Uninstall-ClientPatch.ps1 removes it.`r`n[SharedFile]`r`n"
 foreach ($l in $lines) { $cfgText += "`t$l`r`n" }
 Write-Ascii $cfgPath $cfgText
 
 $mainCfg = Join-Path $ClientDir 'swgemu.cfg'
 $mainText = [IO.File]::ReadAllText($mainCfg, $Latin1)
+$includeRe = '(?m)^\s*\.include\s+"local_planets\.cfg"\s*$'
 $includeAdded = $false
 if ($State -ne $null) { $includeAdded = [bool]$State.include_added }
-if (-not ($mainText -match '(?m)^\s*\.include\s+"local_planets\.cfg"\s*$')) {
+else {
+    # Same case: that run saved swgemu.cfg before adding the line, so the backup without it says the line is ours.
+    $savedMain = Join-Path $Original 'swgemu.cfg'
+    if ((Test-Path -LiteralPath $savedMain) -and -not ([IO.File]::ReadAllText($savedMain, $Latin1) -match $includeRe)) { $includeAdded = $true }
+}
+if (-not ($mainText -match $includeRe)) {
     Save-Backup 'swgemu.cfg' $Original
     if ($mainText.Length -gt 0 -and -not $mainText.EndsWith("`n")) { $mainText += "`r`n" }
     [IO.File]::WriteAllText($mainCfg, $mainText + $Include + "`r`n", $Latin1)
     $includeAdded = $true
 }
+
+# State before the check, so a stopped install can still be undone by Uninstall-ClientPatch.ps1 or run again.
+$stateObj = [ordered]@{
+    version = $Manifest.version; sha256 = $Manifest.archive.sha256; installed = (Get-Date).ToString('yyyy-MM-dd h:mm tt')
+    include_added = $includeAdded; mtg_lines_added = $added; previous = $(if ($State -ne $null) { $State.version } else { $null })
+    live_cfg_moved = $liveMoved; live_cfg_top = $want
+}
+Write-Ascii $StateFile (($stateObj | ConvertTo-Json) + "`r`n")
 
 # --- verify -------------------------------------------------------------------------------------------
 $after = Get-LoadedArchives $ClientDir $null
@@ -168,12 +240,8 @@ if ($after['local_planets.tre'] -ne [int]$Manifest.archive.priority) {
 $notLoaded = @($Manifest.requires | Where-Object { -not $after.ContainsKey($_.file.ToLower()) } | ForEach-Object { $_.file })
 if ($notLoaded.Count -gt 0) { Fail 1 ("still not loaded: " + ($notLoaded -join ', ')) }
 
-$stateObj = [ordered]@{
-    version = $Manifest.version; sha256 = $Manifest.archive.sha256; installed = (Get-Date).ToString('yyyy-MM-dd h:mm tt')
-    include_added = $includeAdded; mtg_lines_added = $added; previous = $(if ($State -ne $null) { $State.version } else { $null })
-}
-Write-Ascii $StateFile (($stateObj | ConvertTo-Json) + "`r`n")
 Write-Host "Installed local_planets version $($Manifest.version) (sha256 $($Manifest.archive.sha256.Substring(0, 12))...)."
 if ($added.Count -gt 0) { Write-Host "Also told the client to load: $($added -join ', ')" }
+if ($LiveMove) { Write-Host "Moved the stock archives in swgemu_live.cfg up $shift levels (maxSearchPriority $want), as on the server's own client." }
 Write-Host "Backups: $PatchDir\backup"
 exit 0

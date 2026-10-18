@@ -32,15 +32,16 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def make_client(folder, mtg_in_cfg=True, mtg_files=True, extra=None):
-    """A folder that looks like a SWGEmu client: exe, cfg chain, stock and MTG archive stand-ins."""
+def make_client(folder, mtg_in_cfg=True, mtg_files=True, extra=None, top=50, levels=(47, 46, 45, 44)):
+    """A folder that looks like a SWGEmu client: exe, cfg chain, stock and MTG archive stand-ins. The default is the
+    owner's layout; top=26, levels=(23, 5, 1, 0) is a stock SWGEmu Launchpad client."""
     folder = Path(folder)
     folder.mkdir(parents=True)
     (folder / 'SWGEmu.exe').write_bytes(b'MZ dummy')
     (folder / 'swgemu.cfg').write_bytes(CRLF.join(['.include "swgemu_login.cfg"', '.include "swgemu_live.cfg"',
                                                    '.include "user.cfg"']).encode() + b'\r\n')
     (folder / 'swgemu_login.cfg').write_bytes(b'[ClientGame]\r\nloginServerPort0=44453\r\n')
-    live = ['[SharedFile]', '\tmaxSearchPriority=50'] + ['\tsearchTree_00_%d=%s' % (47 - i, n) for i, n in enumerate(STOCK)]
+    live = ['[SharedFile]', '\tmaxSearchPriority=%d' % top] + ['\tsearchTree_00_%d=%s' % (p, n) for p, n in zip(levels, STOCK)]
     live += ['', '[Station]', 'subscriptionFeatures=1']
     if mtg_in_cfg:
         live += ['[SharedFile]'] + ['\tsearchTree_00_%d=%s' % (p, n) for p, n in MTG]
@@ -159,6 +160,52 @@ class KitTests(unittest.TestCase):
         code, out = self.uninstall(self.v1, c)
         self.assertEqual(code, 0, out)
         self.assertNotIn('mtg_patch_023.tre', loaded(c))
+
+    def test_stock_client_gets_the_server_layout(self):
+        # Microverse, 18 Oct: a fresh Launchpad client caps at 26, so 49 was never loaded.
+        c = self.client('stock26', mtg_in_cfg=False, top=26, levels=(23, 5, 1, 0))
+        before = {p.name: p.read_bytes() for p in c.iterdir()}
+        code, out = self.install(self.v1, c)
+        self.assertEqual(code, 0, out)
+        got = loaded(c)
+        self.assertEqual([got.get(n) for n in ('local_planets.tre', 'patch_14_00.tre', 'bottom.tre', 'mtg_patch_023.tre', 'mtg_patch_016.tre')],
+                         [49, 47, 24, 23, 16])
+        self.assertTrue(json.loads((c / 'local_planets-patch' / 'state.json').read_text())['live_cfg_moved'])
+        code, out = self.install(self.v1, c)                                   # again: not moved a second time
+        self.assertEqual(code, 0, out)
+        self.assertEqual(loaded(c).get('patch_14_00.tre'), 47)
+        code, out = self.uninstall(self.v1, c)
+        self.assertEqual(code, 0, out)
+        after = {p.name: p.read_bytes() for p in c.iterdir() if p.name != 'local_planets-patch'}
+        self.assertEqual(after, before)
+
+    def test_other_layout_refused_unchanged(self):
+        # Moving these up to cap 50 would put bottom.tre (0 + 10) among the MTG archives: stop instead.
+        c = self.client('odd', mtg_in_cfg=False, top=40, levels=(37, 10, 1, 0))
+        before = {p.name: p.read_bytes() for p in c.iterdir()}
+        code, out = self.install(self.v1, c)
+        self.assertEqual(code, 1, out)
+        self.assertIn('laid out differently', out)
+        self.assertEqual({p.name: p.read_bytes() for p in c.iterdir()}, before)
+
+    def test_rerun_after_a_stopped_install(self):
+        # What an older kit left on Microverse: our tre, our cfg, the include line and a swgemu.cfg backup, no state.
+        c = self.client('stopped', mtg_in_cfg=False, top=26, levels=(23, 5, 1, 0))
+        before = {p.name: p.read_bytes() for p in c.iterdir()}
+        original = c / 'local_planets-patch' / 'backup' / 'original'
+        original.mkdir(parents=True)
+        shutil.copyfile(c / 'swgemu.cfg', original / 'swgemu.cfg')
+        (c / 'swgemu.cfg').write_bytes((c / 'swgemu.cfg').read_bytes() + INCLUDE.encode() + b'\r\n')
+        shutil.copyfile(self.v1 / 'local_planets.cfg', c / 'local_planets.cfg')
+        shutil.copyfile(self.v1 / 'local_planets.tre', c / 'local_planets.tre')
+        code, out = self.install(self.v1, c)
+        self.assertEqual(code, 0, out)
+        self.assertEqual(loaded(c).get('local_planets.tre'), 49)
+        self.assertFalse((original / 'local_planets.cfg').exists())             # ours is not the friend's original
+        code, out = self.uninstall(self.v1, c)
+        self.assertEqual(code, 0, out)
+        after = {p.name: p.read_bytes() for p in c.iterdir() if p.name != 'local_planets-patch'}
+        self.assertEqual(after, before)
 
     def test_existing_archive_backed_up_and_restored(self):
         theirs = b'EERT somebody else\'s archive'

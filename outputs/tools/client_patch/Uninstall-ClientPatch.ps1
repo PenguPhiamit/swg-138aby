@@ -5,7 +5,8 @@
 .DESCRIPTION
     powershell -NoProfile -ExecutionPolicy Bypass -File Uninstall-ClientPatch.ps1 -ClientDir "C:\SWGEmu"
   Restores the files saved in <client>\local_planets-patch\backup\original\ (the state before the first install),
-  removes the kit's local_planets.tre and local_planets.cfg, and takes the one .include line out of swgemu.cfg.
+  removes the kit's local_planets.tre and local_planets.cfg, takes the one .include line out of swgemu.cfg, and puts
+  back swgemu_live.cfg if the installer moved its archives (and the file still has that move).
   A local_planets.tre that is not the kit's (changed since install) is moved to backup\removed-<time>\, not deleted.
   The backup folder stays; delete it by hand once you are happy.
   Exit codes: 0 done (or nothing to do), 1 error, 2 not a client folder, 5 client running.
@@ -38,6 +39,18 @@ if ([bool]$State.include_added) {
     $text = [IO.File]::ReadAllText($mainCfg, $Latin1)
     $clean = [regex]::Replace($text, '(?m)^[ \t]*\.include[ \t]+"local_planets\.cfg"[ \t]*\r?\n?', '')
     if ($clean -ne $text) { [IO.File]::WriteAllText($mainCfg, $clean, $Latin1) }
+}
+
+# swgemu_live.cfg: the original back if the installer moved the stock archives up and the file still has that move
+# (the SWGEmu launcher may have put its own copy back since).
+if ([bool]$State.live_cfg_moved) {
+    $live = Join-Path $ClientDir 'swgemu_live.cfg'
+    $saved = Join-Path $Original 'swgemu_live.cfg'
+    if ((Test-Path -LiteralPath $saved) -and (Test-Path -LiteralPath $live) -and
+        ([IO.File]::ReadAllText($live, $Latin1) -match "(?m)^\s*maxSearchPriority\s*=\s*$([int]$State.live_cfg_top)\s*$")) {
+        Copy-Item -LiteralPath $saved -Destination $live -Force
+        Write-Host 'Restored your original swgemu_live.cfg'
+    }
 }
 
 # local_planets.cfg and local_planets.tre: the original back if there was one, else remove the kit's copy.
