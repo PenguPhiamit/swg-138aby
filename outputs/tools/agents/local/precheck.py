@@ -27,7 +27,7 @@ CORE3 = Path('/opt/swg/Core3-dev/MMOCoreORB')
 CITE = re.compile(r'(?<![\w/.-])((?:[\w.-]+/)*[\w-]+\.(?:cpp|h|idl|lua|py))((?::\d+(?:-\d+)?)(?:,\s*\d+(?:-\d+)?)*)')
 NUMBERED = re.compile(r'^\s*(\d+)\| ?(.*)$')
 MAX_CLAIMS, MAX_LINES, CONTEXT = 40, 24, 2   # per report; cited lines shown per claim; lines around a single-line cite
-SKIP_TOPICS = {'report-precheck', 'report-diff', 'test-index', 'scenario-review'}
+SKIP_TOPICS = {'report-precheck', 'report-diff', 'test-index', 'scenario-review', 'claim-recheck'}
 AUDIT = OUTPUTS / 'tools' / 'core3_audit' / 'command_audit.json'
 SLASH = re.compile(r"""\.slash\(\s*['"]([A-Za-z0-9_]+)""")
 SECTION3 = re.compile(r'^(#+)\s*(?:3[.)]?\s*)?what a (?:[\w-]+ )?test should check', re.I)
@@ -148,6 +148,26 @@ def resolve(cited, snap, index):
     return found[0].as_posix(), {n: t for n, t in enumerate(text, 1)}, None
 
 
+def claim_at(text, cite, cap=400):
+    """The part of one report row that a citation belongs to, at most cap characters. A short row is the claim as it
+    is; in a longer one, the sentence holding the citation (with the one before it while that fits), so a citation
+    late in a paragraph is not cut off (18 Oct: player-vendors#3 lost its sentence to the old first-400 cut)."""
+    if len(text) <= cap:
+        return text
+    at = text.find(cite)
+    if at < 0:
+        return text[:cap]
+    starts = [0] + [s.end() for s in re.finditer(r'[.;]\s+(?=[A-Z0-9(])', text)]
+    i = max(k for k, s in enumerate(starts) if s <= at)
+    a, b = starts[i], starts[i + 1] if i + 1 < len(starts) else len(text)
+    if i and b - starts[i - 1] <= cap:
+        a = starts[i - 1]
+    if b - a > cap:
+        end = min(b, at + len(cite) + 40)
+        a, b = max(a, end - cap), end
+    return text[a:b].strip()
+
+
 def claim_lines(root=RESEARCH, index=None):
     """([(id, chunk text)] for the model, [mechanical problems]) over every report's citations."""
     index = tree_index() if index is None else index
@@ -155,8 +175,9 @@ def claim_lines(root=RESEARCH, index=None):
     for tid, folder in topics(root):
         snap, seen, n = snapshot(folder), set(), 0
         for row in (folder / 'report.md').read_text(encoding='utf-8', errors='replace').split('\n'):
-            claim = flat(re.sub(r'[*`#>]', '', row), 400).lstrip('- ').strip()
+            clean = flat(re.sub(r'[*`#>]', '', row), 100000).lstrip('- ').strip()
             for m in CITE.finditer(row):
+                claim = claim_at(clean, m.group(0))
                 key = (m.group(1), m.group(2), claim)
                 if key in seen or n >= MAX_CLAIMS:
                     continue

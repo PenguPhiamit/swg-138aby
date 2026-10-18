@@ -8,7 +8,7 @@ until Claude or ChatGPT has checked it against the source.
 
 | Server | Models | Used when |
 |---|---|---|
-| The friend's PC (RTX 4070 Super 12 GB, 32 GB RAM), on the home network | `qwen3.6:35b-a3b` (research), `qwen3.5:9b` (fast jobs), `gemma4:12b` (bot chat), `qwen3:8b`, `gpt-oss:20b` and `gpt-oss-20b-64k` (the older defaults, for comparisons), WaifuGemma4 26B-A4B (role-play drafts) | whenever it answers |
+| The friend's PC (RTX 4070 Super 12 GB, 32 GB RAM), on the home network | `qwen3.6:35b-a3b` (research), `saluki` (claim checks; Underdog Saluki 27B at IQ2, 7.9 GB, 43 tokens/s, since 18 Oct), `qwen3.5:9b` (fast jobs), `gemma4:12b` (bot chat), `qwen3:8b` and `gpt-oss:20b` (older, for comparisons), `qwen-heretic` (Qwen3.8 27B Q4, 17 GB: more than the card holds, so slow; not used). qwen3.5, qwen3.6 and gemma4 also read images. WaifuGemma4 (the npc-dialogue model) is no longer there (checked 18 Oct 1:35 AM). | whenever it answers |
 | This PC | `qwen3:8b` at 16K | fallback, when the friend's PC is off, asleep or Ollama is quit |
 
 - **The list is one file:** `outputs/tools/agents/local/ollama-url.txt` (gitignored, because it holds a home-network
@@ -42,7 +42,7 @@ until Claude or ChatGPT has checked it against the source.
 | **Bot chat drafts** (social play): job `bot-chat`, about 40 situations, three lines each | queue topic with `"kind": "map", "job": "bot-chat"` | `"model": "gemma4:12b"` |
 | **Role-play and NPC dialogue drafts** (owner's OK, 17 Oct): job `npc-dialogue`, briefs from DIR/briefs.txt or the Ossus roster | a chunk job (`local_map.py` sends `think: false`, which this model needs) | `"model": "hf.co/hiwaifu-research/WaifuGemma4-26b-a4b-v1-i1-GGUF:IQ4_XS", "ctx": 8192`. Its card says 18+ only with no extra safety tuning, so the job's instruction sets the content rules. A drafter only: every line is reviewed before it goes into the game ([MODEL-LICENCES.md](../tools/agents/local/friend-pc/MODEL-LICENCES.md)). |
 | **Era check:** job `era-check`, the proofread lines checked against 138-139 ABY | queue topic with `"kind": "map", "job": "era-check"` | `"model": "qwen3.6:35b-a3b"` (lore knowledge) |
-| **Pre-check of the research reports** (17 Oct): every cited claim against its cited lines, and each rerun against the previous report | queue topics with `"kind": "map", "job": "claim-check"` or `"job": "report-diff"` (precheck.py) | `"model": "qwen3.5:9b"`. Citations that don't resolve are listed without the model. The reviewer starts with the "contradicted" and "not shown" claims, and still checks the rest. |
+| **Pre-check of the research reports** (17 Oct): every cited claim against its cited lines, and each rerun against the previous report | queue topics with `"kind": "map", "job": "claim-check"` or `"job": "report-diff"` (precheck.py) | `"model": "saluki"` since 18 Oct (it was `qwen3.5:9b`; on the 130 claims qwen disputed, Saluki was right on 62 of the 70 it changed, `Agent/local-research/claim-recheck/report.md`). Citations that don't resolve are listed without the model. Each claim is the sentence around its citation, not the row's first 400 characters (fixed 18 Oct). The reviewer starts with the "contradicted" and "not shown" claims, and still checks the rest: Saluki errs both ways and trusts stale source comments. |
 | **Test-plan index** (17 Oct): section 3 of every report as setup / do / expect steps | `"job": "test-index"` | `"model": "qwen3.5:9b"`; queue it after the research topics it should include |
 | **Scenario first pass** (17 Oct; ChatGPT's review work while it is out until 22 Oct) | `"job": "scenario-review"` | `"model": "qwen3.6:35b-a3b"`. Commands the server doesn't know are found without the model; the rest are leads for Claude, or for ChatGPT when it is back, since the scenarios are ChatGPT's |
 | **A quick one-off**: summarise a log, list files that mention X | run `local_map.py` or `local_agent.py` by hand (below) | any |
@@ -51,6 +51,68 @@ Not for the friend's PC: decisions, reviews and sign-offs, anything that must be
 account data, and **text with real people's names**. A topic that must read such text is marked `"local_only": true`.
 It then waits for this PC's model and never goes over the network (AGENTS.md, Privacy; the friend agreed to source,
 bot notes and game text only).
+
+### What else they can do (Claude, 18 Oct 2:00 AM; owner: "figure out what else our local models can do")
+
+Claude's weekly limit is 73% used, with 4.8 days to the reset, and GPT is out until 22 Oct. So the best local jobs are the
+ones that save Claude's own reading. Ranked by that:
+
+**Queued 18 Oct (no new code):**
+1. **Saluki claim pass over every report** (`report-precheck-saluki`). The research reports in `review` then reach
+   Claude with the doubtful claims listed first. It takes about 20 minutes.
+2. **The two open mission bugs as research topics:**
+   - `bounty-offers`: why a bounty terminal lists no NPC bounty;
+   - `easy-destroy`: how a group gets an easy lair for the group-pay check.
+   - `bounty-offers-saluki` asks Saluki the same bounty question, so its first research report can be compared with
+     qwen3.6's.
+
+**Each needs one small job written in `local_jobs.py`** (Claude, or ChatGPT after 22 Oct):
+
+3. **Log triage after every restart and overnight run.**
+   - The new error and warning lines in `core3.log` are deduplicated by pattern, with counts, and the model sorts each into known and harmless, new, or crash risk.
+   - This replaces Claude reading the log ("log clean at start").
+   - Model: `saluki` or `qwen3.5:9b`.
+4. **First drafts of bot scenarios from the research reports.**
+   - Section 3 of each report already lists setup, do and expect steps.
+   - With `tools/bots/squad.py`'s Bot API and one finished scenario as the example, `qwen3.6:35b-a3b` drafts a scenario for each untested area in test plan section 3: trainers, vehicles, buffs, surveys, groups/mail/guilds, bazaar/vendors/trade, housing/harvesters/cities/factions.
+   - Claude reviews and runs them. Writing scenarios is most of the test work left, so this saves the most.
+5. **Board trim.**
+   - Each log entry on `SWG-handoff.md` older than two days becomes one line, and the full entry moves to `SWG-handoff-archive.md`.
+   - Every session reads the board, so this cuts every session's cost.
+   - Model: `saluki`. Claude checks the lines before the move.
+6. **Item names and examine texts for new content** (Hoth rewards, Ossus loot, Nal Hutta).
+   - The model drafts them; then the era check runs and the owner picks.
+   - Model: `qwen3.6:35b-a3b`.
+
+**Needs a download on the friend's PC (the owner does it there):**
+
+7. **A search index for the project.**
+   - A small embedding model (for example `nomic-embed-text` or `embeddinggemma`, under 1 GB) indexes the reports, `Documentation-support/` and the Core3 source.
+   - A "where is X handled" question then gets file:line answers from the friend's PC instead of a Claude reader agent.
+   - It also needs a short indexing script on this PC.
+
+**Image jobs (the models are already there: `qwen3.5:9b`, `gemma4:12b`, `qwen3.6:35b-a3b`):**
+
+8. **Art pre-sort.**
+   - From a ComfyUI batch, keep the images that match the brief: the right object, a plain background for TRELLIS input, and no text or watermark. The owner then looks at a few instead of all of them.
+   - Tested 18 Oct on `Local-art/trellis2-test/crate_compare.png`:
+     - all three described the crate well, in 12 s (qwen3.5), 23 s (gemma4) and 31 s (qwen3.6);
+     - none saw that the right-hand mesh has crumpled handles and a wavy rim.
+   - So they sort images but don't check meshes. Any new vision model the owner finds should be tried on that image first.
+9. **Reading bot screenshots** (a stuck character, an error window).
+   - Screenshots of the owner's client stay on this PC, so this needs a vision model here: `qwen3.5:9b`, 6.6 GB, a download, so it needs the owner's OK.
+
+**Later:**
+
+10. **The local-model bot driver** (proposal card `task_aed46fe5`): bots that chat and choose with a local model.
+11. **A first pass over dev commits with `saluki`** while GPT is out.
+    - It lists likely bugs: null checks, locks, comparison signs.
+    - It does not replace the cross-review that live needs.
+
+Still not for local models:
+- decisions and sign-offs;
+- real names over the network;
+- checking meshes for defects.
 
 ### Queued by the owner: the names delta sweep (17 Oct)
 
