@@ -20,6 +20,13 @@ import memguard
 import ollama_url
 
 READ_CAP = 20000  # characters per read_file call; the model pages with offset
+# 18 Oct: on bounty-offers qwen3.6 thought for 856 s (about 200,000 characters) and ended with no tool call and no
+# report. A reply is now capped (thinking included), and a run whose task asks for report.md that stops without one is
+# asked, at most twice, to write it from what it has read.
+MAX_REPLY = 16384  # tokens per reply
+NUDGES = 2
+NUDGE = ('You have not written report.md yet. Write it now with write_file, from what you have already read. '
+         'Keep any further thinking short.')
 
 SYSTEM = (
     'You are a careful assistant working on files in one folder. Use the tools to read files before answering; never '
@@ -81,7 +88,7 @@ def run_tool(root, name, args, protected):
 
 def chat(model, messages, ctx, base=None):
     body = json.dumps({'model': model, 'messages': messages, 'tools': TOOLS, 'stream': False,
-                       'options': {'num_ctx': ctx, 'temperature': 0.2}}).encode()
+                       'options': {'num_ctx': ctx, 'temperature': 0.2, 'num_predict': MAX_REPLY}}).encode()
     request = urllib.request.Request(ollama_url.api('/api/chat', base), body, {'Content-Type': 'application/json'})
     with urllib.request.urlopen(request, timeout=900) as response:
         return json.load(response)
@@ -128,6 +135,7 @@ def main():
 
 def loop(args, root, protected, log, messages, model, ctx, base, started):
     local = ollama_url.is_local(base)
+    nudges, report = 0, root / 'report.md'
     for step in range(1, args.max_steps + 1):
         if step > 1 and (step - 1) % 5 == 0:   # memguard.py: the prompt cache grows with every request, on any PC
             memguard.unload(base, model)
@@ -146,6 +154,13 @@ def loop(args, root, protected, log, messages, model, ctx, base, started):
                               'prompt_eval_count': reply.get('prompt_eval_count')}) + '\n')
         messages.append(message)
         calls = message.get('tool_calls') or []
+        if not calls and 'report.md' in args.task and nudges < NUDGES and not (
+                report.exists() and report.stat().st_size > 300):
+            nudges += 1
+            messages[-1] = {k: v for k, v in message.items() if k != 'thinking'}   # a long thought isn't sent back
+            messages.append({'role': 'user', 'content': NUDGE})
+            log.write(json.dumps({'step': step, 'nudge': nudges, 'done_reason': reply.get('done_reason')}) + '\n')
+            continue
         if not calls:
             print(f'done in {step} steps, {time.monotonic() - started:.0f} s')
             print(message.get('content', '').strip())
