@@ -26,12 +26,14 @@ and Hutts as a playable species. This installer gets your PC ready in a few clic
 5. **The MTG download**, if you need it: a progress bar per file. It can take an hour or two, depending on the
    owner's upload speed. Every file is checked against the server's own copy before it goes into your client. If
    you already had a different version of one, yours is kept in `local_planets-patch\backup` in your client folder.
-6. Setup adds the server's planets to your client, points the client at the server, puts **Play SWG (owner's
-   server)** on your desktop, and tests the connection.
+6. Setup adds the server's planets to your client, points the client at the server, puts **SWG Fractured Galaxy** (the
+   launcher) on your desktop, and tests the connection.
 
 ## Play
 
-- Double-click **Play SWG (owner's server)**. It also fixes things if the SWGEmu launcher reset your settings.
+- Double-click **SWG Fractured Galaxy**. The launcher shows whether the server is up, downloads the owner's latest
+  update if there is one (Play stays greyed out until it's done), fixes things if the SWGEmu launcher reset your
+  settings, and starts the game. Windows may warn the first time ("More info" > "Run anyway"): it isn't signed.
 - **Tailscale must be running**: its icon sits by the clock. Through it your PC can reach the game server and
   nothing else on the owner's network, and the owner's network cannot reach your PC.
 - First login: type any username and password you like. The server makes your account then. Don't reuse a

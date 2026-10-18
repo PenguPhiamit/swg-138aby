@@ -18,6 +18,9 @@ PC, over Tailscale) and checks each against the kit manifest's sha256.
 | `test-friend-setup.ps1` | offline test on a dummy client and a loopback share (`-ProbeAddress <ip>` also pings the login port) |
 | `owner-settings.example.json` | copy to `owner-settings.json` (gitignored) |
 | `FRIENDS-README.md` | the friends' one page (also installed as `README.txt`) |
+| `launcher/Launcher.cs` | the **SWG: Fractured Galaxy** launcher and updater (the friends' desktop shortcut); `build.ps1` compiles it |
+| `launcher/make-banner-art.sh`, `make-banner.py` | the banner: local ComfyUI art, then the title (`launcher/banner.png`, not in git) |
+| `news.txt` | the news line friends' launchers show; edit it any time, `mtg-share.py` reads it on each request |
 
 ## Your one-time steps
 
@@ -43,6 +46,20 @@ PC, over Tailscale) and checks each against the kit manifest's sha256.
 6. **The galaxy address** (the lock holder does this, see below). Without it a friend logs in and then hangs at
    the galaxy list or the zone connection.
 7. **Run `.\owner-setup.ps1`** (no switches). Every line should say ok.
+
+## The launcher: updates without a new Setup.exe
+
+Friends start the game from **SWG Fractured Galaxy** on their desktop. Each time it opens it asks `mtg-share.py`
+(the same window as the MTG share, port 43480, Tailscale only) for `update.json`, then:
+- downloads **the `local_planets.tre` the server loads right now** (read from `\\wsl.localhost\Debian\opt\swg\tre`,
+  read-only) whenever the friend's copy differs, keeping their old one in `local_planets-patch\backup\<version>`;
+- downloads any MTG archive they're missing; every file is checked against its sha256 before it replaces anything;
+- replaces itself when `build.ps1` has built a newer launcher (bump `AssemblyVersion` in `Launcher.cs`);
+- puts the login and `.include` lines back if the SWGEmu launcher reset them, and shows server status and `news.txt`.
+
+Play stays off while a friend's patch differs from the server's. So after a server archive change you only need
+`Share MTG files.cmd` running when friends start their launchers; rebuild Setup.exe only for new friends or a new
+installer. When the share is off, the launcher says it can't check and lets them play with what they have.
 
 ## Each friend
 
