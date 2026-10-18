@@ -57,6 +57,11 @@ Friends start the game from **SWG Fractured Galaxy** on their desktop. Each time
 - replaces itself when `build.ps1` has built a newer launcher (bump `AssemblyVersion` in `Launcher.cs`);
 - puts the login and `.include` lines back if the SWGEmu launcher reset them, and shows server status and `news.txt`.
 
+The banner (built into the exe) is `launcher/banner.png`, not in git: the owner's pick of 18 Oct, B_s303, made on
+Juggernaut XL Lightning with the Star Wars Cinematic Style XL LoRA (image-to-image and inpaint over the owner's seed-128
+picture), titled by `launcher/make-banner.py`. To change it, replace `banner.png` (1536x512), bump `AssemblyVersion`
+in `Launcher.cs`, and run `build.ps1`; friends' launchers pick up the new exe by themselves.
+
 Play stays off while a friend's patch differs from the server's. So after a server archive change you only need
 `Share MTG files.cmd` running when friends start their launchers; rebuild Setup.exe only for new friends or a new
 installer. When the share is off, the launcher says it can't check and lets them play with what they have.

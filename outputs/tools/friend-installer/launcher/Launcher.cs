@@ -87,10 +87,11 @@ namespace FracturedGalaxy
             var panel = new Panel { Location = new Point(0, 320), Size = new Size(960, 200), BackColor = CPanel };
             Controls.Add(panel);
             serverLabel = AddLabel(panel, 24, 16, 600, "Server: checking...");
-            filesLabel = AddLabel(panel, 24, 44, 600, "Your files: checking...");
-            newsLabel = AddLabel(panel, 24, 72, 640, "");
+            filesLabel = AddLabel(panel, 24, 44, 640, "Your files: checking...");
+            filesLabel.Height = 44;    // two lines: the longer messages wrap
+            newsLabel = AddLabel(panel, 24, 90, 640, "");
             newsLabel.ForeColor = CDim;
-            newsLabel.Height = 48;
+            newsLabel.Height = 36;
             stepLabel = AddLabel(panel, 24, 128, 640, "");
             stepLabel.ForeColor = CDim;
             bar = new ProgressBar { Location = new Point(24, 156), Size = new Size(640, 18), Style = ProgressBarStyle.Continuous };
