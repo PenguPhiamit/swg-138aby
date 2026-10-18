@@ -34,8 +34,9 @@ Usage is tight until 22 Oct, so reading and first passes go to GPT and the local
 builds and sign-offs.
 
 **Now:**
-1. **Fix C62's findings on dev.** The review is `Documentation-support/review-C62/C62-review.md`; GPT re-reviews
-   the fixes as C65.
+1. ~~**Fix C62's findings on dev.**~~ **Done 18 Oct ~9:50 AM** (owner: "start the C62 fixes on dev (F1 to F6). No
+   restart until I say I'm off the game"): in dev, not built. GPT re-reviews them as C65. The review is
+   `Documentation-support/review-C62/C62-review.md`. F1 turned out to affect nine Hoth creatures, not two.
    - F1: two Hoth bosses (Rimefang, Old Echo) are healed by heat and electricity, because resistance values over 200
      decode to over 100%. File: `hoth_fill_creatures.lua:85,89`.
    - F2: walking the memorial road first hides Ossus's ghostfire lead for good. Files: `ossus_people.lua`,
@@ -78,6 +79,9 @@ Effort: ultra for code reviews, high for report reviews, medium or lower for res
 dispatcher (`next_gpt.sh` in Claude's scratchpad) starts the next open task whenever none is running.
 
 **Queued (`gpt-queue.json`, in this order):**
+0. **C66** (medium): how much is missing from Nal Hutta (owner, 18 Oct ~9:30 AM). A gap table against a stock planet,
+   what blocks opening it, and one rough overall figure, in `Documentation-support/nal-hutta-gaps.md`.
+0. **C65** (ultra): review Claude's C62 fixes (dev, 18 Oct).
 1. **C63b** (high): the next 20 local research reports, from `vehicle-mount`. It was reopened because the 7:33 AM run
    hit the limit and wrote nothing.
 2. **C63c** (high): the remaining reports.
@@ -86,7 +90,6 @@ dispatcher (`next_gpt.sh` in Claude's scratchpad) starts the next open task when
    - the unskilled accuracy penalty at `CombatManager.cpp:1980`.
 
 **To queue when ready:**
-- **C65** (ultra): review Claude's C62 fixes, after they are committed.
 - **H4: which Hoth resources spawn** (medium). From the config and the server's own output, read-only. The owner's
   surveys give the in-game half.
 

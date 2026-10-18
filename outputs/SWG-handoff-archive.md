@@ -2,6 +2,16 @@
 
 Finished task rows and older log entries moved out of `SWG-handoff.md` to keep the board short (it is read every session). Newest first within each move.
 
+## Moved 2026-10-18 9:55 AM (Claude, newest-four log trim)
+
+### 2026-10-18 2:40 AM Claude: missions rerun on run 30b: bounty and group pay still open
+
+- **The main session's OK, one run on run 30b** (2:31 AM; same build as run 30; BotPop off), with no restart and no build. Forn and Cresh grouped properly. Reports: `Bot-reports/Forn/20261018-023934-forn-missions.json`, `Bot-reports/Cresh/20261018-023742-cresh-missions.json`.
+- **PASS again:** imperial/recon 340 → 68 (5), 401 s. The 7th mission is refused with the exact `too_many_missions` message.
+- **Bounty, still open:** with 3b76661's step to the terminal, Brask still got 93 out-of-range refusals and never moved (no server position events).
+- **Group pay (dev `cbd85fdf`), still unchecked:** the lowest destroy mission on offer was difficulty 14, the held kreetle lair. Ilsa and Kor died at it and Cresh was incapacitated. These Marksmen can't clear the easiest lair on offer.
+- **Next:** find out why Brask's walk to the terminal doesn't move him. For group pay, wait for the fighting fix or use stronger fighters.
+
 ## Moved 2026-10-18 9:00 AM (Claude, housekeeping: answered questions, finished task rows, the 13-14 Oct task instructions, older lock lines)
 
 ### Server lock lines, 16-17 Oct
