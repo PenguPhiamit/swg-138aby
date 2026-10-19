@@ -110,3 +110,6 @@ them. The only line I keep is for this project's own code and assets, as above. 
 will be posted here; until then, message me on GitHub.
 
 Discord: *link coming*
+
+Sincerely,  
+Penguin
