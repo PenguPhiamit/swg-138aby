@@ -1,9 +1,9 @@
 {
  "base_sha256": "c8a610801494690b51dd6129ef716b631e2aa0991a4db5377196f5bf96670ac9",
  "base_entries": 385,
- "out_sha256": "4c5a29d049ca85799ba85814276c058983810e7a7fb08eb95d8922b5fb19d710",
- "out_bytes": 7313477,
- "out_entries": 391,
+ "out_sha256": "b60189b74ce2406caff787b6a8414d535393d0ea5dab554d1a68ab052663f34e",
+ "out_bytes": 7315375,
+ "out_entries": 395,
  "unchanged_entries": 371,
  "changed": [
   "appearance/ghostfire_ribbon_a.swh",
@@ -24,9 +24,13 @@
  ],
  "added": [
   "appearance/sw_ghostfire_b.swh",
+  "appearance/sw_ghostfire_trail.swh",
   "customization/asset_customization_manager.iff",
+  "effect/ghostfire_trail.eft",
   "object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire_b.iff",
+  "pixel_program/ghostfire_trail_ps20.psh",
   "shader/sw_ghostfire_b.sht",
+  "shader/sw_ghostfire_trail.sht",
   "texture/sw_ghostfire_b.dds"
  ],
  "acm_rows": {
@@ -55,7 +59,7 @@
   "appearance/wp_mle_sword_lightsaber_blade_ghostfire.lsb": "39b63b7576a411ed3edff9196ce3fc5cba0db927230ae5c12b28dbb9ad3064bb",
   "datatables/weapon/swoosh.iff": "6c9976f179aee2fd81a8f5ddb3b45c4eb890bcec28bd2e7f189b92e7f49995b3",
   "misc/object_template_crc_string_table.iff": "e1d09aafb1cc34b0ead7a01fca16993c3d2e6e1a4f51623aba62599e5292e37c",
-  "palette/wp_lightsaber.pal": "da60b183a73538c8836f5392b5e3cc7f75aac44e5d9c36a21f8961252f41b38c",
+  "palette/wp_lightsaber.pal": "17e77040695cf69e9152ba2e72928a94e19b254ee9d04f8428f34b95ec2175fe",
   "pixel_program/e_h_lightsaberblade_ps20.psh": "79911d141b7b5e1fcbdd8cfc6749ba7066c9ef29847867b59bb332ecb0403f89",
   "texture/sw_ghostfire.dds": "6096786c2b85c0f08ba77bc998550bfd90bc1de0fe7721c22591b3e5166dee3a"
  },
@@ -76,7 +80,7 @@
   "201420",
   "201820",
   "201c20",
-  "202020"
+  "201e20"
  ],
  "stock_crystal_brightest": {
   "0": 1.0,
@@ -92,6 +96,19 @@
   "10": 1.0,
   "11": 0.729,
   "31": 0.949
+ },
+ "ghostfire_trail": {
+  "files": [
+   "appearance/sw_ghostfire_trail.swh",
+   "shader/sw_ghostfire_trail.sht",
+   "effect/ghostfire_trail.eft",
+   "pixel_program/ghostfire_trail_ps20.psh"
+  ],
+  "slots": 21,
+  "code_sha256": "5d25ccf0f3219521788c2b5c6e3bbb92c32c53ae5707354595d6032787c53145",
+  "texture": "texture/sw_ghostfire.dds",
+  "seconds": 1.2,
+  "alpha": 1.0
  },
  "ribbon_trail_seconds": 1.2,
  "ribbon_samples": 60,

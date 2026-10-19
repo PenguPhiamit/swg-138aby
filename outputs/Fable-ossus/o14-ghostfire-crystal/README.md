@@ -41,6 +41,23 @@ O14 `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre` = `4c5a29
 - **Mirage:** the blade's compiled code changed, so its id is now `0ea2a331` (was `fac25b60`; the whip's `238eb66a` is unchanged). Add `extra_ids=0ea2a331` to `SWG-client/mirage.ini` with this install, or the mirage stops; no proxy rebuild is needed. The ghostfire c3 values are unchanged, so `max_bright` stays.
 - **Builder fix:** the builder read its "stock" pixel program and customization table from the live client, whose `local_planets.tre` is now ours. It now reads them from the archives under it.
 
+## ~8:45 PM: "the ghostfire crystal also has no trails on the whip hilt"
+
+**Built, not installed (8:54 PM):** O14 `b60189b74ce2406caff787b6a8414d535393d0ea5dab554d1a68ab052663f34e`; two builds give the same hash. The light whip session is asked to rebuild its step on it, with the whip's trail row on the new ghostfire trail. Its chain hash goes to the main session.
+- **What I checked:**
+  - The whip has `tr1e` at 2.025 m in its LOD and every mesh.
+  - Its colour follows the crystal, so the server treats it as a Jedi weapon and starts the shimmer task. The run 37 binary (7:32 PM) is newer than the task's sources (5:30 PM).
+  - The ribbon effects are in the archive. The whip's transparent trail uses its own shader and texture, so it can't hide the ribbons.
+  - **The one gate:** the task plays the tip ribbons only while the wielder is in combat. Out of combat the ghostfire whip has no trail at all, because its own trail is transparent.
+  - Nothing else whip-specific could be checked without the game.
+- **The fix, client only:** a trail that draws only for the ghostfire crystal (`appearance/sw_ghostfire_trail.swh`, `shader/sw_ghostfire_trail.sht`, `effect/ghostfire_trail.eft`, `pixel_program/ghostfire_trail_ps20.psh` from `ghostfire_trail_ps20.hlsl`, 21 slots).
+  - A trail row with UseObjectHue 1 hands the crystal's palette colour to the trail as its vertex colour; the vertex program copies it unchanged.
+  - The program draws the oil-slick strobe bars for ghostfire, (0x20, g, 0x20) with g below r, and nothing for any other crystal. That keeps the whip's rule, "the trail; none without a specific crystal".
+  - It's the saber trail layout at 1.2 s and full alpha.
+  - Only the shader-model-2 path is gated; older cards would draw the bars in any crystal's colour.
+- **Palette:** entry 40 is now (0x20, 0x1e, 0x20) instead of grey (0x20, 0x20, 0x20). A white crystal's trail can then never pass for ghostfire, even if a trail darkens its colour as it fades. The blade program and its mirage id `0ea2a331` are unchanged, and every ghostfire channel is still 0.17 or less.
+- The same trail could later serve every crafted saber, once test saber B shows how the stock trail lays out its texture (normal crystals would then need their stock look instead of nothing).
+
 ## Any hilt (owner, 18 Oct ~8:15 PM)
 
 The owner said: "id def prefer not using singular hilts for this, being able to swap is important to player agency". The ghostfire blade already follows the crystal in any stock hilt, through the shared blade shader. The server's tip ribbons follow it too. The stacked-copies trail is still tied to the Ghostfire Lightsaber's own trail row. Next step: move it onto the shared saber trail (`sw_light_saber_white.swh`, every crafted saber), drawn only for the ghostfire crystal's colours.

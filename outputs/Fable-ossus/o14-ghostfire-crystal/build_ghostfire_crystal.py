@@ -123,7 +123,9 @@ def read_pal(data):
 
 
 def ghost_entry(k):
-    return [0x20, 4 * k, 0x20, 0]
+    # green 4k, but entry 40 at 0x1e rather than 0x20: a grey (g = r = b) never reads as ghostfire to the trail program,
+    # so a white crystal's trail can't pass for one even if a trail darkens its colour as it fades
+    return [0x20, min(4 * k, 0x1E), 0x20, 0]
 
 
 # Owner, 7:50 PM, on 2 s / full alpha / the doubled effect / 8 bars: "trails are too vibrant" (a big fan of full-strength
@@ -139,6 +141,14 @@ TRAIL_B_SWH = 'appearance/sw_ghostfire_b.swh'
 TRAIL_B_SHT = 'shader/sw_ghostfire_b.sht'
 TRAIL_B_DDS = 'texture/sw_ghostfire_b.dds'
 ACM = 'customization/asset_customization_manager.iff'
+# A trail that draws only for the ghostfire crystal, for any saber's trail row with UseObjectHue 1 (first the light whip:
+# owner, ~8:45 PM, "the ghostfire crystal also has no trails on the whip hilt"). Its pixel program reads the crystal's
+# palette colour from the vertex colour and draws the strobe texture's oil-slick bars for ghostfire, nothing otherwise.
+GTRAIL_SOURCE = os.path.join(HERE, 'ghostfire_trail_ps20.hlsl')
+GTRAIL_PSH = 'pixel_program/ghostfire_trail_ps20.psh'
+GTRAIL_EFT = 'effect/ghostfire_trail.eft'
+GTRAIL_SHT = 'shader/sw_ghostfire_trail.sht'
+GTRAIL_SWH = 'appearance/sw_ghostfire_trail.swh'
 WHIP_LSB = 'appearance/wp_mle_lightwhip_blade.lsb'   # the main session's light whip blade (Lightwhip/), same gap
 
 
@@ -288,6 +298,37 @@ def main(argv):
         assert stock_file(TRAIL_EFFECT), TRAIL_EFFECT
         changed[o13.TRAIL_SHT] = trn_iff.build(sht)
 
+    # the ghostfire-only trail: its own pixel program (ps_2_0) in a copy of the single additive particle effect (only the
+    # shader-model-2 implementation changes; the older ones stay a_modulate), on the strobe bars, in the saber trail file
+    gnodes = trn_iff.parse(stock)
+    gver = gnodes[0].children[0]
+    gsource = open(GTRAIL_SOURCE, 'rb').read().replace(b'\r\n', b'\n')
+    gcode, gdis = compile_ps20(gsource)
+    for want in ('ps_2_0', 'alphaFadeOpacityHolder c7', 'diffuseMap             s0'):
+        assert want in gdis, 'trail program lacks %r' % want
+    gslots = int(gdis.split('approximately ')[1].split(' instruction')[0])
+    assert gslots <= 64, gslots
+    gver.children[0].data = gsource + (b'\0' if stock_src.endswith(b'\0') else b'')
+    gver.children[1].data = gcode
+    added[GTRAIL_PSH] = trn_iff.build(gnodes)
+    geft = trn_iff.parse(stock_file('effect/e_particle_emisadd.eft'))
+    ppsh = [x for _, x in trn_iff.walk(geft) if not x.is_form and x.data == b'\x01pixel_program/a_modulate.psh\0']
+    assert len(ppsh) == 2, len(ppsh)
+    ppsh[0].data = b'\x01' + GTRAIL_PSH.encode() + b'\0'
+    added[GTRAIL_EFT] = trn_iff.build(geft)
+    gsht = trn_iff.parse(base[o13.TRAIL_SHT])
+    gname = [x for _, x in trn_iff.walk(gsht) if not x.is_form and x.tag == 'NAME' and x.data.startswith(b'effect')]
+    assert len(gname) == 1
+    gname[0].data = GTRAIL_EFT.encode() + b'\0'
+    added[GTRAIL_SHT] = trn_iff.build(gsht)
+    gswh = trn_iff.parse(changed[o13.TRAIL_SWH])
+    gptex = [x for _, x in trn_iff.walk(gswh) if not x.is_form and x.tag == '0000' and x.data.startswith(b'shader/')]
+    assert len(gptex) == 1 and o13.cstr(gptex[0].data) == o13.TRAIL_SHT
+    gptex[0].data = GTRAIL_SHT.encode() + gptex[0].data[gptex[0].data.index(b'\0'):]
+    added[GTRAIL_SWH] = trn_iff.build(gswh)
+    for name in (GTRAIL_PSH, GTRAIL_EFT, GTRAIL_SHT, GTRAIL_SWH):
+        assert trn_iff.build(trn_iff.parse(added[name])) == added[name]
+
     # B is now a one-look diagnostic for the any-hilt trail (owner, ~8:15 PM: "being able to swap is important"): the
     # stock saber trail file itself (sw_light_saber_white.swh, the one every crafted saber shares) with only its shader,
     # colour (full) and life (1.2 s) changed, and a texture that is white for the first 8% of v, then a rainbow along
@@ -415,6 +456,9 @@ def main(argv):
                          'bands': BANDS},
               'palette_32_40': ['%02x%02x%02x' % tuple(ents[GHOST_FIRST + k][:3]) for k in range(GHOST_COUNT)],
               'stock_crystal_brightest': {k: round(max(ents[k][:3]) / 255.0, 3) for k in used},
+              'ghostfire_trail': {'files': [GTRAIL_SWH, GTRAIL_SHT, GTRAIL_EFT, GTRAIL_PSH], 'slots': gslots,
+                                  'code_sha256': hashlib.sha256(gcode).hexdigest(), 'texture': o13.TRAIL_DDS,
+                                  'seconds': STROBE_SECONDS, 'alpha': TRAIL_ALPHA},
               'ribbon_trail_seconds': args.trail, 'ribbon_samples': 60, 'ribbon_rgba_was': old_ribbon_rgba,
               'ribbon_rgba': {n: [round(x, 3) for x in oil(k, 0.0)] + [TRAIL_ALPHA] for k, n in enumerate(RIBBONS)}}
     with open(os.path.join(HERE, 'checks-crystal.json'), 'w', encoding='utf-8') as f:
