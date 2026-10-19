@@ -14,15 +14,19 @@ offline but not installed yet; **planned** means not started. Nothing is open to
 |---|---|---|
 | Hoth | Travel from Corellia, Echo Base, the Scavenger outpost, ice caves and creature dens, Quartermaster Vell's job chain, Hoth resources and named loot | On the test galaxy |
 | Ossus | The old Jedi world, with terrain built from scratch by our own tools (Knossa, the Academy benchland, Imhar Canyon), the One Sith in the caves, the spirit of Ood Bnar | On the test galaxy (still filling out) |
+| Ghostfire crystal | A lightsaber colour crystal with an almost invisible blade and its own blade shader: the colour is in the trails, which shimmer through oil-slick hues in any hilt | On the test galaxy (being tuned) |
 | New species | Chiss, Nautolan (male) and Togruta (female) at character creation | On the test galaxy |
+| Light whip | A one-handed lightsaber variant: a 4.5 m strand with more reach than a saber and weaker against armour, which bends like a rope with the graphics hook. Krayt dragon bosses drop it, and a Master Weaponsmith with Lightsaber Technique I or a Lightsaber Master can learn its schematic | On the test galaxy; the drop and the schematic are staged |
 | The Hutt | Can be created; can't be played yet, because the pre-CU client won't drive the Hutt body as a player. Nal Hutta as its home world | Staged, in research |
 | Backports | Vehicles and items from Mod the Galaxy, new creatures and enemies | On the test galaxy |
 | The base game | Fixing what was left thin or broken: professions such as Image Designer and Politician, Creature Handler and Bio-Engineer pets, missions and bounties | In progress |
 | Test bots | A squad of 24 bots that log in through the real game protocol, play the professions and report what works and what doesn't | On the test galaxy |
 | Bot population | Up to 1,700 bots that live in the world (hunting, travelling, exploring) for load tests and launch rehearsals | On the test galaxy |
+| Graphics hook | An optional client add-on in front of DXVK: the light whip's bend and a heat haze around ghostfire blades, each switched in game (Ctrl+Shift+B, Ctrl+Shift+M); without it the game looks stock | On the test galaxy; the friends' launcher installs it |
 | Tools | Readers and writers for SWG's file formats (TRE, IFF, terrain), content builders with offline checks, a live map and a Discord feed | In use; the map and feed are staged |
 | Next places | Kashyyyk and Mustafar; places from KOTOR rebuilt from public descriptions with SWG's own art (the Dantooine Jedi Enclave ruins first) | Planned |
 | An AI player | An agent that plays a character and learns, under strict safety rules | Planned |
+| Light whip, next | A hilt model (credited), a crack sound, a coil at the wielder's feet when idle, and the parry and blocking changes | Planned |
 
 A small friends-only test comes first. The whole plan, with dates, is in
 [outputs/SWG-roadmap.md](outputs/SWG-roadmap.md).
