@@ -1,8 +1,8 @@
 {
- "base_sha256": "892475a431ce95b4e3f83a92dad3b4a0f9774d856886e5de8f4713c3a2e4d997",
+ "base_sha256": "feb3bf8407506e345bcb6b5f6a6ac6622302243b8db764bffdb49e96db4010fa",
  "base_entries": 390,
- "out_sha256": "d424d2f66497a7c4958d40a2850454b0ad340867da491ae8fc8a032cbf92554d",
- "out_bytes": 7074767,
+ "out_sha256": "a2610d64975aa2022ebd2583f6d02772387cf42a7869c8aaadefd298d9b0dafe",
+ "out_bytes": 7080302,
  "out_entries": 409,
  "unchanged_entries": 386,
  "changed": [
@@ -44,7 +44,7 @@
   "object/draft_schematic/weapon/lightsaber/shared_lightsaber_lightwhip.iff": "744749a808a45e89fa76861289ed76d154368abc031af8ed8dd8d9297e7d1e4f",
   "object/tangible/loot/loot_schematic/shared_lightwhip_schematic.iff": "dfef454efe601893e90632d24abebfddbf0b78b42cd46c7826bfd35af44d4a67",
   "object/weapon/melee/sword/crafted_saber/shared_sword_lightwhip.iff": "ee0e487281ee6e461549567e4761d8f8e7869d1bf77e0e191119603b663b6771",
-  "pixel_program/e_h_lightwhipblade_ps20.psh": "af5ed9e2cbae78c472a74268a927489ef2df7ebb7f2e352d8a5407bf94534f92",
+  "pixel_program/e_h_lightwhipblade_ps20.psh": "fb7e165268caa3b32a217332f0d920e28483d8e39e4e6ea8a90beb9746fec409",
   "shader/lightwhipblade.sht": "90794ffc63711a4b846fd23e5133eedc7779b107d74d869ac970f7d345952b19",
   "shader/lightwhipblade_a.sht": "96d96371ec24ba1b0a3431613978fd78f70e6c06a0e0e71ec764671c1d7b25cb",
   "shader/lightwhipblade_b.sht": "176c2c9e2fe6d34812bc5932942b9277646f81c73299ac8b8a6b294e159dd7d7",
@@ -70,11 +70,11 @@
  },
  "pixel_program_ids": {
   "stock": "acc853c5",
-  "o14": "7b68e0f1",
-  "whip": "cb72c453"
+  "o14": "fac25b60",
+  "whip": "238eb66a"
  },
  "shader_slots": 37,
- "shader_code_sha256": "b0ddbecb349ef9239f96ba504d10aa33df434ad31ed6b7922716efbeb9817c4c",
+ "shader_code_sha256": "a92246956c4861577fc4155b684d8c77d10069da2ee8a006b964f9e4417af1e3",
  "swoosh_rows": 204,
  "crc_entries": 29372,
  "strings": {

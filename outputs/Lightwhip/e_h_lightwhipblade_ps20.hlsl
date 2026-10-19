@@ -12,8 +12,9 @@
 sampler diffuseMap : register(s0);
 
 static const float WHIP_CORE = 0.75f;    // white core of a normal crystal (stock is 1)
-static const float GHOST_GLOW = 0.18f;   // opal glow strength (stock glow is 1)
-static const float GHOST_CORE = 0.04f;   // white core strength (stock core is 1)
+// The ghostfire values follow O14's program (archive feb3bf84): owner, "the blade should be almost nonexistent".
+static const float GHOST_GLOW = 0.035f;  // glow strength (stock glow is 1)
+static const float GHOST_CORE = 0.006f;  // white core strength (stock core is 1)
 static const float BANDS = 1.6f;         // opal bands along the blade
 
 float4 main
@@ -38,7 +39,7 @@ float4 main
 	float angle = 6.2831853f * (tcs_MAIN.x * BANDS + phase);
 	float s, c;
 	sincos(angle, s, c);
-	float3 opal = 0.65f + 0.35f * (c * float3(1.0f, -0.5f, -0.5f) + s * float3(0.0f, 0.8660254f, -0.8660254f));
+	float3 opal = 0.82f + 0.18f * (c * float3(1.0f, -0.5f, -0.5f) + s * float3(0.0f, 0.8660254f, -0.8660254f));
 	float glow = dot(diffuseColor.rgb, float3(0.3333333f, 0.3333333f, 0.3333333f));
 	float3 ghostColor = saturate(glow * GHOST_GLOW * opal + diffuseColor.a * GHOST_CORE);
 

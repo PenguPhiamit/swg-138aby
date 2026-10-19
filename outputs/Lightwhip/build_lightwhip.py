@@ -37,7 +37,7 @@ The server half (saber template, schematic, loot schematic, loot items and group
 Every other entry of the base archive stays byte for byte.
 
     C:/Users/Pengw/miniconda3/python.exe -I build_lightwhip.py [--base PATH] [--out PATH] [--length M] [--width M] [--trail S]
-Default base: ../../work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre (O14, sha256 892475a4..., built,
+Default base: ../../work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre (O14, sha256 feb3bf84..., built,
 not installed). Default out: ../../work/lightwhip/local_planets-lightwhip.tre (+ .sha256); checks in ./checks-lightwhip.json.
 """
 import argparse
@@ -59,7 +59,7 @@ from swgfmt import swg_tables  # noqa: E402
 import build_ghostfire_crystal as o14  # noqa: E402  (fxc compile with the client's include files)
 import blade_ids  # noqa: E402  (the O15 hook's pixel program id; read only)
 
-BASE_SHA_PREFIX = '892475a4'
+BASE_SHA_PREFIX = 'feb3bf84'
 
 SRC_LSB = 'appearance/wp_mle_sword_lightsaber_blade_leather.lsb'
 SRC_APT = 'appearance/wp_mle_sword_lightsaber_leather.apt'
@@ -152,6 +152,33 @@ def move_hardpoints(nodes, length):
     return seen
 
 
+_stock_index = None
+
+
+def stock_index():
+    """{lower name: archive}: the client's archives in trn_iff.client_index's order, without local_planets.tre. The
+    installed local_planets.tre may already hold the whip, and every older entry of it is in the base anyway."""
+    global _stock_index
+    if _stock_index is None:
+        sys.path.insert(0, os.path.join(OUTPUTS, 'tools', 'hoth'))
+        import client_load_order as clo  # noqa: E402
+        trees, _, _ = clo.load_order()
+        order = [n for _, n in sorted(trees, key=lambda t: t[0])]
+        mtg = sorted(n for n in os.listdir(trn_iff.CLIENT) if n.lower().startswith('mtg_') and n.lower().endswith('.tre'))
+        _stock_index = {}
+        for n in mtg + order:
+            path = os.path.join(trn_iff.CLIENT, n)
+            if n.lower() != 'local_planets.tre' and os.path.exists(path):
+                for entry in trn_iff.list_tre(path):
+                    _stock_index[entry] = n
+    return _stock_index
+
+
+def stock_file(name):
+    archive = stock_index().get(name.lower())
+    return trn_iff.open_tre_entry(os.path.join(trn_iff.CLIENT, archive), name) if archive else None
+
+
 def main(argv):
     ap = argparse.ArgumentParser()
     ap.add_argument('--base', default=os.path.join(H, 'work', 'ossus-ghostfire-crystal', 'local_planets-ghostfire-crystal.tre'))
@@ -168,14 +195,14 @@ def main(argv):
     base = tre_write.read(base_bytes)[0]
 
     def src(name):
-        data = base.get(name) or trn_iff.client_file(name)
+        data = base.get(name) or stock_file(name)
         assert data, 'missing ' + name
         return data
 
     msh_names = ['appearance/' + MSH % k for k in range(3)]
     new_names = [APT, LOD, LSB, BLADE_SHT, EFT, PSH, SWH, SHARED, DS, LS] + msh_names + \
         [FRAME_SHT % c for c in 'abcd']
-    clash = [n for n in new_names if n in base or trn_iff.client_index().get(n)]
+    clash = [n for n in new_names if n in base or stock_index().get(n)]
     assert not clash, 'already exist: %s' % clash
     added, changed = {}, {}
 
@@ -244,7 +271,7 @@ def main(argv):
     ver.children[0].data = source + (b'\0' if stock_src.endswith(b'\0') else b'')
     ver.children[1].data = code
     added[PSH] = trn_iff.build(psh)
-    ids = {'stock': '%08x' % blade_ids.shader_id(blade_ids.pexe(trn_iff.client_file(STOCK_PSH))),
+    ids = {'stock': '%08x' % blade_ids.shader_id(blade_ids.pexe(stock_file(STOCK_PSH))),
            'o14': '%08x' % blade_ids.shader_id(o14_code), 'whip': '%08x' % blade_ids.shader_id(code)}
     assert len(set(ids.values())) == 3, ids
 
