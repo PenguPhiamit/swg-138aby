@@ -2,7 +2,9 @@
 
 Owner, 18 Oct ~6:10 PM: "can we make a new Crystal entry with the new shader and make all sabers compatible with the new crystal type? also the blade needs to be dimmer and the trails more prominent (and slow like LSD ...)". Later: "def make sure you understand the stacking of the tracers ... almost time dilation kinda vibes" and "a mirage effect for the blade to help hide light". On the decision card the owner picked **the strobe trail, tested first**, and asked how a real mirage could be made possible.
 
-**Built, not installed** (the game was running): archive `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre`, sha256 `3797288d…`, on `c8a61080` (now its default base, `work/ossus-ghostfire-blade/`). The main session installed the earlier `feb3bf84` with its light whip as `a2610d64` (run 37, 7:41 PM). The light whip step chained on this build is `work/ossus-ghostfire-crystal/chain/local_planets-o14-lightwhip.tre`, sha256 `b9fbc48a…`. Its only differences from the installed `a2610d64` are the customization table and the trail files, including test saber B's diagnostic. Two builds give the same hash. Checks are in `checks-crystal.json`.
+**Installed 18 Oct 8:07 PM** (owner, 8:05 PM, client closed: "Install now"): `b9fbc48a…` is on the client and at `/opt/swg/tre` (renamed in), with backups `.bak-a2610d64` in both places. Client data only, so run 37 kept running with no restart. Untested in game.
+
+The O14 archive alone is `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre`, sha256 `3797288d…`, on `c8a61080` (its default base, `work/ossus-ghostfire-blade/`). The installed file is the main session's light whip step chained on it, `work/ossus-ghostfire-crystal/chain/local_planets-o14-lightwhip.tre`, sha256 `b9fbc48a…`. Its only differences from the previous `a2610d64` are the customization table and the trail files, including test saber B's diagnostic. Two builds give the same hash. Checks are in `checks-crystal.json`.
 
 ## The crystal drives the blade (any saber)
 
@@ -62,9 +64,10 @@ A real mirage needs a small graphics hook between the game and DXVK. When our bl
 
 ## Install (main session or this one, owner off the game)
 
-1. Archive in both places, by rename at `/opt/swg/tre`; back up `c8a61080`.
-2. `git apply` `server/strobe-test-dev.patch` in dev.
-3. Restart the test galaxy with run 35's settings (Lua for test saber B).
+Done: the archive at 8:07 PM (above). The test saber B Lua (`server/strobe-test-dev.patch`) is in dev as `e6e6d3bb` and loaded in run 37.
+For a later rebuild:
+1. Archive in both places, by rename at `/opt/swg/tre`; back up the file it replaces (now `b9fbc48a`). Chain on `b9fbc48a`'s parts: O14's `--base` is `c8a61080`, then the light whip step.
+2. Client data only needs no restart; a Lua change does.
 
 ## Please look at these (your own words)
 
