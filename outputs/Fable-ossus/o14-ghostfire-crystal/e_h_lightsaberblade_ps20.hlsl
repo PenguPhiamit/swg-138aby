@@ -12,8 +12,8 @@
 
 sampler diffuseMap : register(s0);
 
-static const float GHOST_GLOW = 0.035f;  // glow strength (stock glow is 1); owner: "the blade should be almost nonexistent"
-static const float GHOST_CORE = 0.006f;  // white core strength (stock core is 1)
+static const float GHOST_GLOW = 0.14f;   // glow strength (stock glow is 1); owner, 8:15 PM: "the blade can come to where the trails are now" (0.035 was unseen)
+static const float GHOST_CORE = 0.02f;   // white core strength (stock core is 1)
 static const float BANDS = 1.6f;         // opal bands along the blade
 
 float4 main
@@ -38,7 +38,7 @@ float4 main
 	float angle = 6.2831853f * (tcs_MAIN.x * BANDS + phase);
 	float s, c;
 	sincos(angle, s, c);
-	float3 opal = 0.82f + 0.18f * (c * float3(1.0f, -0.5f, -0.5f) + s * float3(0.0f, 0.8660254f, -0.8660254f));
+	float3 opal = 0.75f + 0.25f * (c * float3(1.0f, -0.5f, -0.5f) + s * float3(0.0f, 0.8660254f, -0.8660254f));
 	float glow = dot(diffuseColor.rgb, float3(0.3333333f, 0.3333333f, 0.3333333f));
 	float3 ghostColor = saturate(glow * GHOST_GLOW * opal + diffuseColor.a * GHOST_CORE);
 

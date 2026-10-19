@@ -62,8 +62,8 @@ SOURCE = os.path.join(HERE, 'e_h_lightsaberblade_ps20.hlsl')
 INCLUDES = ['pixel_program/include/pixel_shader_constants.inc', 'pixel_program/include/functions.inc',
             'shared_program/functions.inc']
 GHOST_FIRST, GHOST_COUNT = 32, 9           # entries 32 (idle) and 33-40 (shimmer steps)
-GHOST_GLOW, GHOST_CORE, BANDS = 0.035, 0.006, 1.6   # must match the .hlsl
-OPAL_BASE, OPAL_SWING = 0.82, 0.18
+GHOST_GLOW, GHOST_CORE, BANDS = 0.14, 0.02, 1.6   # must match the .hlsl
+OPAL_BASE, OPAL_SWING = 0.75, 0.25
 
 
 def fxc_path():
@@ -80,7 +80,7 @@ def compile_ps20(source):
             path = os.path.join(tmp, inc)
             os.makedirs(os.path.dirname(path), exist_ok=True)
             with open(path, 'wb') as f:
-                f.write(trn_iff.client_file(inc))
+                f.write(stock_file(inc))
         src = os.path.join(tmp, 'blade.hlsl')
         with open(src, 'wb') as f:
             f.write(source)
@@ -90,6 +90,30 @@ def compile_ps20(source):
         code = open(out, 'rb').read()
         dis = subprocess.run([fxc, '/nologo', '/dumpbin', out], check=True, capture_output=True, text=True).stdout
     return code, dis
+
+
+_stock_index = None
+
+
+def stock_file(name):
+    """A client file as the archives under ours give it. trn_iff.client_file reads the live client, whose
+    local_planets.tre is now an O14 build (b9fbc48a, 8:07 PM), so it would hand back our own pixel program and
+    customization table instead of the stock ones."""
+    global _stock_index
+    if _stock_index is None:
+        trn_iff.client_index()  # puts client_load_order on the path
+        import client_load_order as clo
+        trees, _, _ = clo.load_order()
+        order = [n for _, n in sorted(trees, key=lambda t: t[0])]
+        mtg = sorted(n for n in os.listdir(trn_iff.CLIENT) if n.lower().startswith('mtg_') and n.lower().endswith('.tre'))
+        _stock_index = {}
+        for arc in mtg + order:
+            path = os.path.join(trn_iff.CLIENT, arc)
+            if arc.lower() != 'local_planets.tre' and os.path.exists(path):
+                for entry in trn_iff.list_tre(path):
+                    _stock_index[entry] = arc
+    arc = _stock_index.get(name.lower())
+    return trn_iff.open_tre_entry(os.path.join(trn_iff.CLIENT, arc), name) if arc else None
 
 
 def read_pal(data):
@@ -104,9 +128,11 @@ def ghost_entry(k):
 
 # Owner, 7:50 PM, on 2 s / full alpha / the doubled effect / 8 bars: "trails are too vibrant" (a big fan of full-strength
 # bars around the Jedi). Back to the single additive effect, half alpha, 1.2 s and 6 copies per trail.
+# Owner, 8:15 PM, on that: "the trails are too faint now" and "we dont see enough of all the colors". Full alpha again on
+# the single effect (half the 7:50 strength), and every band at full strength in its own hue (OIL below).
 STROBE_SECONDS = 1.2
 STROBE_BARS = 6
-TRAIL_ALPHA = 0.5
+TRAIL_ALPHA = 1.0
 TRAIL_EFFECT = 'effect/e_particle_emisadd.eft'   # the colour-band trail's single effect (the 2x one was too loud)
 SHARED_B = 'object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire_b.iff'
 TRAIL_B_SWH = 'appearance/sw_ghostfire_b.swh'
@@ -121,17 +147,20 @@ WHIP_LSB = 'appearance/wp_mle_lightwhip_blade.lsb'   # the main session's light 
 # indigo, petrol blue, teal and magenta, one bronze glint, on dark. Additive light can't darken, so "darker" means
 # deep hues and every other band at about half strength.
 # Owner, later: "add some cyan and a brighter green" (both at full strength, so they land on even, undimmed bands).
-OIL = [(0.36, 0.10, 0.62), (0.18, 0.12, 0.66), (0.00, 0.90, 1.00), (0.08, 0.30, 0.78), (0.30, 1.00, 0.35),
-       (0.02, 0.55, 0.58), (0.72, 0.08, 0.52), (0.42, 0.04, 0.38), (0.62, 0.45, 0.12), (0.30, 0.20, 0.85)]
-OIL_DIM = 0.5   # every other band
-OIL_GREY = (0.30, 0.24, 0.40)   # 20% of every colour goes to this smoky violet ("too vibrant", 7:50 PM)
+# Owner, 8:15 PM: "we dont see enough of all the colors". The capture showed pale green streaks: the half-strength bands
+# and the 20% smoky-violet mix washed the violets out, and green and cyan, far brighter to the eye, won on the grass. Now
+# no dimmed bands and no grey: ten hues in thin-film order (an oil slick's sequence), half of them purples and blues at
+# full strength, with green, cyan, gold and teal held a little lower so they don't drown the rest. The first six are
+# the strobe bars and the first eight the tip ribbons, so each spans the whole range.
+OIL = [(0.62, 0.20, 1.00), (0.18, 0.38, 1.00), (0.00, 0.78, 0.85), (0.28, 0.85, 0.30), (0.90, 0.68, 0.12),
+       (1.00, 0.18, 0.80), (0.55, 0.12, 1.00), (0.00, 0.72, 0.66), (1.00, 0.40, 0.35), (0.38, 0.28, 1.00)]
+# violet, blue, cyan, green, gold, magenta, purple, teal, rose, indigo
 
 
 def oil(i, u):
     """Band i's colour, drifting towards the next band's from hilt (u=0) to tip (u=1), like a thin film."""
-    a, b = [[0.8 * x + 0.2 * g for x, g in zip(c, OIL_GREY)] for c in (OIL[i % len(OIL)], OIL[(i + 1) % len(OIL)])]
-    k = 1.0 if i % 2 == 0 else OIL_DIM
-    return [k * (x + (y - x) * u) for x, y in zip(a, b)]
+    a, b = OIL[i % len(OIL)], OIL[(i + 1) % len(OIL)]
+    return [x + (y - x) * u for x, y in zip(a, b)]
 
 
 def strobe_texture(profile, bars, duty):
@@ -189,7 +218,7 @@ def main(argv):
     changed = {}
 
     # the pixel program: stock layout (PSHP > 0000 > PSRC, PEXE), our source and code
-    stock = base.get(PSH) or trn_iff.client_file(PSH)
+    stock = base.get(PSH) or stock_file(PSH)
     nodes = trn_iff.parse(stock)
     ver = nodes[0].children[0]
     assert nodes[0].form == 'PSHP' and ver.form == '0000' and [c.tag for c in ver.children] == ['PSRC', 'PEXE']
@@ -241,7 +270,7 @@ def main(argv):
     # B (a second test saber): the same, in the 0001 layout with 8 samples a second and one bar per texture, in case the
     # texture repeats per sample segment rather than once along the trail. Whichever shows copies tells us the mapping.
     added = {}
-    profile = [p[3] for p in o13.dxt3_top(trn_iff.client_file(o13.SRC_TRAIL_DDS))[32]]
+    profile = [p[3] for p in o13.dxt3_top(stock_file(o13.SRC_TRAIL_DDS))[32]]
     changed[o13.TRAIL_DDS], _ = o13.dds_argb(strobe_texture(profile, STROBE_BARS, 0.45))
     swh = trn_iff.parse(base[o13.TRAIL_SWH])
     assert swh[0].children[0].form == '0000'
@@ -256,7 +285,7 @@ def main(argv):
     assert len(eft) == 1 and o13.cstr(eft[0].data) == 'effect/e_particle_emisadd.eft', eft
     if TRAIL_EFFECT != 'effect/e_particle_emisadd.eft':
         eft[0].data = TRAIL_EFFECT.encode() + b'\0'
-        assert trn_iff.client_file(TRAIL_EFFECT), TRAIL_EFFECT
+        assert stock_file(TRAIL_EFFECT), TRAIL_EFFECT
         changed[o13.TRAIL_SHT] = trn_iff.build(sht)
 
     # B is now a one-look diagnostic for the any-hilt trail (owner, ~8:15 PM: "being able to swap is important"): the
@@ -268,7 +297,7 @@ def main(argv):
     assert len(tname) == 1
     tname[0].data = TRAIL_B_DDS.encode() + b'\0'
     added[TRAIL_B_SHT] = trn_iff.build(sht)
-    swh_b = trn_iff.parse(trn_iff.client_file(o13.SRC_SWH))
+    swh_b = trn_iff.parse(stock_file(o13.SRC_SWH))
     ptex = [x for _, x in trn_iff.walk(swh_b) if not x.is_form and x.tag == '0000' and x.data.startswith(b'shader/')][0]
     assert o13.cstr(ptex.data) == 'shader/sw_light_saber_add.sht'
     ptex.data = TRAIL_B_SHT.encode() + ptex.data[ptex.data.index(b'\0'):]
@@ -296,7 +325,7 @@ def main(argv):
     # blades are listed; our new blade file was not (nor the light whip's), so the crystal's colour was dropped and the
     # default, palette 0 (red), drew. Both get a row pointing at the sleek silver blade's key. The server never uses this
     # table for the blade colour (only image design, goggles and Lua), so this is client data only.
-    acm_stock = trn_iff.client_file(ACM)
+    acm_stock = stock_file(ACM)
     acm = trn_iff.parse(acm_stock)
     assert trn_iff.build(acm) == acm_stock and acm[0].form == 'ACST' and acm[0].children[0].form == '0000'
     acm_chunks = {c.tag: c for c in acm[0].children[0].children}
@@ -314,7 +343,7 @@ def main(argv):
         acm_rows[path] = '%08x' % crc_l
     cidx.data = b''.join(struct.pack('<IH', c, rows[c]) for c in sorted(rows))
     added[ACM] = trn_iff.build(acm)
-    gen5 = trn_iff.parse(trn_iff.client_file('appearance/wp_mle_2h_sword_lightsaber_blade_gen5.lsb'))
+    gen5 = trn_iff.parse(stock_file('appearance/wp_mle_2h_sword_lightsaber_blade_gen5.lsb'))
     lght = [x for _, x in trn_iff.walk(gen5) if x.is_form and x.form == 'LGHT'][0]
     colr = [c for c in lght.children if not c.is_form and c.tag == 'COLR']
     assert len(colr) == 1 and colr[0].data == bytes.fromhex('202020ff')
@@ -351,7 +380,7 @@ def main(argv):
     assert all(ours[n] == added[n] for n in added)
 
     # previews: the stock blade frame a under each ghostfire step, blended as the game blends it
-    tex = o13.dxt3_top(trn_iff.client_file('texture/lightsaberblade_a.dds'))
+    tex = o13.dxt3_top(stock_file('texture/lightsaberblade_a.dds'))
     frames = []
     for k in range(1, GHOST_COUNT):
         phase = (4 * k / 255.0) * (255.0 / 32.0)

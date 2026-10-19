@@ -1,8 +1,8 @@
 {
  "base_sha256": "c8a610801494690b51dd6129ef716b631e2aa0991a4db5377196f5bf96670ac9",
  "base_entries": 385,
- "out_sha256": "3797288d70a10e53027eeb8ea7a6025f580d641a5c5f94dcd1b5202a24c0f176",
- "out_bytes": 7313000,
+ "out_sha256": "4c5a29d049ca85799ba85814276c058983810e7a7fb08eb95d8922b5fb19d710",
+ "out_bytes": 7313477,
  "out_entries": 391,
  "unchanged_entries": 371,
  "changed": [
@@ -37,34 +37,34 @@
  "strobe": {
   "seconds": 1.2,
   "a_bars": 6,
-  "alpha": 0.5,
+  "alpha": 1.0,
   "effect": "effect/e_particle_emisadd.eft",
   "b_diagnostic": "stock saber trail layout, white for v < 0.08 then a rainbow along v, full colour, same life as A",
   "template_b_crc": "4136b322"
  },
  "changed_sha256": {
-  "appearance/ghostfire_ribbon_a.swh": "32e0d9a1d37d906c27af7a7d05d544eb38951aecf644adb8a8af0812b3892dbf",
-  "appearance/ghostfire_ribbon_b.swh": "acf2c39e97fc9306c8542bd35dc0a51b7e668440429ba72b9f091eec26cdb139",
-  "appearance/ghostfire_ribbon_c.swh": "5d8ae6e0608fea44c5bb0437c91c55cf965f26498488ce8f5a00a3d1965a392e",
-  "appearance/ghostfire_ribbon_d.swh": "215b9fcfc8b41bf3d62b4bf5c2f619cd96dcbbae8cc228b363ef99825bb39a4f",
-  "appearance/ghostfire_ribbon_e.swh": "b5cce4b51f4a2bfa7f406e3bcd793d48f58cac6d409df3948b353407ec51d2e1",
-  "appearance/ghostfire_ribbon_f.swh": "d8902ea99fab447c8c14a1974f9d79ca13bea1088a82491e081cab6a63b06142",
-  "appearance/ghostfire_ribbon_g.swh": "f120310f18f14e39c4c0ce0192f2af8924b43e51d31140bb0bea8960ccd2f41c",
-  "appearance/ghostfire_ribbon_h.swh": "255ecbe470a467989e6dc986df42f860e643ad7f0edb600f4b10c03777b0067e",
-  "appearance/sw_ghostfire.swh": "ff476a2936c211da87b38c3dfd22f3e19b96737aaa23c8fa2d3478c42dcababf",
+  "appearance/ghostfire_ribbon_a.swh": "87284714980fe3274d84e1d7ace79f7fd706754ff2110ad41ecd3bcc9fe06468",
+  "appearance/ghostfire_ribbon_b.swh": "80d023eb7e065c529f38a26c7439a24d2e8e237a01c776b2bf133890197d8122",
+  "appearance/ghostfire_ribbon_c.swh": "612b40367a78bd9d0250767256d34db49b72874634fb75d51575f9b8af2fe0ae",
+  "appearance/ghostfire_ribbon_d.swh": "7d8c20967f69c522ff7cd874bab196dcd0442b5108c58833cf34811cbbbe6971",
+  "appearance/ghostfire_ribbon_e.swh": "05d5b854adb619925a8c795a8ad3a1f430272de027a6173e9b69e14096b2ae02",
+  "appearance/ghostfire_ribbon_f.swh": "6c99cab63856412f163e5a93d5ab29097b6fb671ea7a928d84af17a2a623f92f",
+  "appearance/ghostfire_ribbon_g.swh": "2c2f9842ddcd4d9404e1c0ae012a68c96c5cbe4db1680ec6642b2c2374216ce9",
+  "appearance/ghostfire_ribbon_h.swh": "1bd936b972287509901f16c39ed0b4a4fb9eb0d6128755e7074701896f1b3772",
+  "appearance/sw_ghostfire.swh": "7ad3ced93ce257e27e18c491f29d4508a49df71d6b702e5626ed4d909bced6fd",
   "appearance/wp_mle_sword_lightsaber_blade_ghostfire.lsb": "39b63b7576a411ed3edff9196ce3fc5cba0db927230ae5c12b28dbb9ad3064bb",
   "datatables/weapon/swoosh.iff": "6c9976f179aee2fd81a8f5ddb3b45c4eb890bcec28bd2e7f189b92e7f49995b3",
   "misc/object_template_crc_string_table.iff": "e1d09aafb1cc34b0ead7a01fca16993c3d2e6e1a4f51623aba62599e5292e37c",
   "palette/wp_lightsaber.pal": "da60b183a73538c8836f5392b5e3cc7f75aac44e5d9c36a21f8961252f41b38c",
-  "pixel_program/e_h_lightsaberblade_ps20.psh": "6ad2687986fc90d4ced9ed91410764164013918b7e12aa989666e39b0e66d5dd",
-  "texture/sw_ghostfire.dds": "ca211b44c59a20aa2fb3f3e019ac36a81229e1975d97a6ea1f5e2c38dd159cd8"
+  "pixel_program/e_h_lightsaberblade_ps20.psh": "79911d141b7b5e1fcbdd8cfc6749ba7066c9ef29847867b59bb332ecb0403f89",
+  "texture/sw_ghostfire.dds": "6096786c2b85c0f08ba77bc998550bfd90bc1de0fe7721c22591b3e5166dee3a"
  },
  "shader": {
   "fxc": "10.0.26100.0",
   "slots": 36,
-  "code_sha256": "12e38a83cd144c0b611152ea5459997b98c469d42f2e262fc6d263bdd59f3950",
-  "glow": 0.035,
-  "core": 0.006,
+  "code_sha256": "9e61d69d610591478185fa4dd0863ec64ad683c21c51d9933997e27879152cd3",
+  "glow": 0.14,
+  "core": 0.02,
   "bands": 1.6
  },
  "palette_32_40": [
@@ -147,52 +147,52 @@
  },
  "ribbon_rgba": {
   "appearance/ghostfire_ribbon_a.swh": [
-   0.348,
-   0.128,
-   0.576,
-   0.5
+   0.62,
+   0.2,
+   1.0,
+   1.0
   ],
   "appearance/ghostfire_ribbon_b.swh": [
-   0.102,
-   0.072,
-   0.304,
-   0.5
+   0.18,
+   0.38,
+   1.0,
+   1.0
   ],
   "appearance/ghostfire_ribbon_c.swh": [
-   0.06,
-   0.768,
-   0.88,
-   0.5
+   0.0,
+   0.78,
+   0.85,
+   1.0
   ],
   "appearance/ghostfire_ribbon_d.swh": [
-   0.062,
-   0.144,
-   0.352,
-   0.5
+   0.28,
+   0.85,
+   0.3,
+   1.0
   ],
   "appearance/ghostfire_ribbon_e.swh": [
-   0.3,
-   0.848,
-   0.36,
-   0.5
+   0.9,
+   0.68,
+   0.12,
+   1.0
   ],
   "appearance/ghostfire_ribbon_f.swh": [
-   0.038,
-   0.244,
-   0.272,
-   0.5
+   1.0,
+   0.18,
+   0.8,
+   1.0
   ],
   "appearance/ghostfire_ribbon_g.swh": [
-   0.636,
-   0.112,
-   0.496,
-   0.5
+   0.55,
+   0.12,
+   1.0,
+   1.0
   ],
   "appearance/ghostfire_ribbon_h.swh": [
-   0.198,
-   0.04,
-   0.192,
-   0.5
+   0.0,
+   0.72,
+   0.66,
+   1.0
   ]
  }
 }
