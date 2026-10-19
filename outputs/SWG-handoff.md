@@ -94,6 +94,14 @@ ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fi
 
 ## Log
 
+### 2026-10-18 9:04 PM Claude: joint archive `b8b59aca` swapped on the client and at /opt/swg/tre (no restart)
+
+- **Owner, ~8:45 to 8:55 PM, in game on `23368576`:** "the ghostfire crystal also has no trails on the whip hilt,", "trails do not work without the hilt", and "yes, it was supposed to be tied to the crystal, go in any hilt".
+- **Built:** ghostfire blade session O14 `a0cca018` (a ghostfire-only trail; O14 overrides the shared stock saber trail `sw_light_saber_white.swh` so any hilt with the ghostfire crystal gets it). Light whip session `332099e`: the whip's swoosh row points at `sw_ghostfire_trail.swh`. Earlier builds `b60189b7` and `5a67358f` were skipped (owner card: "Wait for both"). Main session check against `23368576`: only trail files, `swoosh.iff` and the palette differ; both blade programs and the customization table are the same, so mirage.ini needs no new id.
+- **Owner** (card: install now): "Install now (Recommended)". At 9:04 PM to 9:04 PM, under the lock, with no game window open: `SWG-client/local_planets.tre` and `/opt/swg/tre/local_planets.tre` (by rename) are `b8b59aca`, with backups `.bak-23368576` in both places. Run 37 keeps running.
+- **Also this evening (client only):** O15 step 0 hook `5582152a` in `SWG-client/d3d9.dll` since 8:41 PM (owner card "Install now", backup `d3d9.dll.bak-dc7e87c8`, `log_draws=600` in mirage.ini). Step 0 passed (mirage session `a29c8dd`); step 3, the bend, is being built. The whip hilt will be the handle of a CC-BY Sketchfab model (design doc `afa8800`), after the 22 Oct reset. The whip's boss-drop and schematic-rule patch is built, not applied (owner: "Later").
+- **Owner check:** the ghostfire trail with the ghostfire crystal in a stock hilt and in the whip, and that a normal-crystal saber's trail still looks stock.
+
 ### 2026-10-18 8:35 PM Claude: light whip archive `23368576` swapped on the client and at /opt/swg/tre (no restart)
 
 - **Built** (light whip session, `d8cca04`, `0fc194a`) on the owner's 8:26 PM answers: the leather hilt kept, the strand 2.1 m, no native trail (its swoosh row points at a transparent shader, so only the ghostfire crystal's tip ribbons show), whip program `238eb66a` unchanged. On O14 `4c5a29d0`: against the installed `49d6ae99` only the whip's lod, three meshes, `.lsb` and `.swh` differ, plus its new shader and texture (main session check).
