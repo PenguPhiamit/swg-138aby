@@ -2148,3 +2148,53 @@ Claude uses the grid squares to place new planets on the ticket-purchase galaxy 
 ### 2026-10-18 3:49 PM Claude: README: what to expect from a public server
 
 Owner's words, written out in the root README (new section after "What's here"): a public or whitelisted server, if there is one, starts in early alpha; expect wipes; progression is sped up to make up for them until a stable live point; a whitelist to start; things will break. Rates and the after-stable details are left open on purpose. Nothing pushed.
+
+## Moved 2026-10-18 22:36 (C63c: keep newest four log entries)
+
+### 2026-10-18 8:29 PM Claude: O14 archive `49d6ae99` swapped on the client and at /opt/swg/tre (no restart)
+
+- **Owner, 8:14 PM:** "ready for capture". UM capture take 4 (8:14 to 8:15 PM, scratchpad only). Then: "the trails are too faint now, and the blade can come to where the trails are now", and "we dont see enough of all the colors". mirage.log: the mirage fires, about 1,790 ghostfire blade draws and as many mirage passes per 30 s.
+- **Fix** (ghostfire blade session, `48bc1c0`): trails at full alpha (half the 7:50 PM strength the owner called "too vibrant"), ten full-strength oil-slick colours, and with the ghostfire crystal a blade glow of 14% and a core of 2%. New blade program id `0ea2a331`. Archive O14 `4c5a29d0`, with the light whip `49d6ae99`.
+- **Owner, 8:25 PM** (card: install now, or wait for the whip hook): "Install now". At 8:29 PM to 8:29 PM, under the lock: `SWG-client/local_planets.tre` and `/opt/swg/tre/local_planets.tre` (by rename) are `49d6ae99`, with backups `.bak-b9fbc48a` in both places; `SWG-client/mirage.ini` has `extra_ids=0ea2a331`. Client files only, so run 37 keeps running.
+- **Light whip** (owner, 8:15 to 8:26 PM): step 2 (parry slip, weaker blocking) waits until after the 22 Oct reset ("can we wait on the parry thing in favor of the bend?"). The bend (steps 0 and 3) is with the mirage session, stopping at 96% weekly usage. The owner's whip answers (keep the hilt, a little shorter, no trail without a specific crystal, the krayt dragon boss drops it, the schematic for Master Weaponsmith plus saber crafting or a Jedi master) are with the light whip session to build, not applied.
+
+### 2026-10-18 8:07 PM Claude: O14 fix archive `b9fbc48a` swapped on the client and at /opt/swg/tre (no restart)
+
+- **Owner, 7:50 PM:** "take a capture, its not looking right at all, trails are too vibrant, and there is a red saber in there somehow." UM capture take 3 (7:50 to 7:51 PM, scratchpad only): a full red blade and the strobe trails as large full-strength rainbow fans. Sent to the ghostfire blade session.
+- **Fix** (ghostfire blade session, `5cea6b8`, `eda5802`, `4a02d43`): the red came from the client's customization table, which had no row for our blade file or the light whip's, so colour 32 was dropped; both now use the sleek silver blade's key. Trails toned down (single effect, half alpha, 1.2 s, 6 copies, smokier). Test saber B is a one-swing trail-layout diagnostic. Archive O14 `3797288d`, with the light whip `b9fbc48a`.
+- **Owner, 8:05 PM** (card: install the fixed archive now, client closed): "Install now". At 8:06 to 8:07 PM, under the lock: `SWG-client/local_planets.tre` and `/opt/swg/tre/local_planets.tre` (by rename) are `b9fbc48a`; backups `.bak-a2610d64` in both places. Client files only, so run 37 keeps running (core3 pid 9051).
+- **Mirage** (mirage session): the new proxy `dc7e87c8` (`b9fa9d6`, `a10fac9`) has been on the client since 7:52 PM. The 7:35 PM look was the O14 blade, not the mirage: the old proxy never drew. The new rule needs the ghostfire colour (c3 brightest 0.17 or less), so it should show now that colour 32 reaches the blade. Not seen in game yet.
+- **Owner check:** the questions are in the O14 README (ghostfire crystal in any hilt, the trails, one slow swing of test saber B while a capture runs).
+
+### 2026-10-18 7:04 PM Claude: C65 checked; N1 and N3 fixed in dev (`6d544cf3`, not built); N2 accepted for now
+
+- **Owner:** "before the next restart check gpts work", then "Yes: fix N1 and N3 in dev (no build), accept N2 for now. Build at the next restart when I'm off the game."
+- **C65** (GPT, `e1f202c`): F1, F2, F3 and F6 fixed; F4 and F5 fixed for C62's cases. All three new findings hold in the code.
+  - **N1 fixed:** a destroy mission's helper at the lair got nothing when the owner had walked more than 128 m off. `spawnLair` moves the mission's start position to the lair, so a member within 128 m of it on the start planet is now paid too (`MissionObjectiveImplementation.cpp`). Other planets and the stale first waypoint still pay nothing.
+  - **N3 fixed:** a giver now also puts back the report-back marker: Hoth's kill jobs at step 2, Kessoth at step 4.
+  - **N2 accepted for now:** buildings saved before the H1 change load their old radius and keep the 192 m send range; fresh ones such as Echo Base get the wider range. That also keeps stock starports, theatres and Jabba's palace at their old range, without the extra load GPT measured (2.3 to 12 times the area).
+- **Checks:** `-fsyntax-only` on the C++ file, `luac5.3 -p` on both Lua files, GPT's `check_c62_fixes.py` run on the working tree (extended Lua failures 0, the three N3 cases pass; its N1 model reads only the old predicate), and a model of the new N1 predicate on GPT's case and five neighbours (6/6). Not built or run in game.
+- **C67** (bosses) done, `473f3e1`. **C63b** hit GPT's limit again at 5:45 PM; it retries after 10:27 PM.
+- **Next build** (when the owner is off the game): dev `6d544cf3`, plus the ghostfire session's uncommitted `CombatManager.cpp` and `GhostfireShimmerTask.h` edits, which run 34 and 35 already carry.
+
+### 2026-10-18 17:40 ChatGPT: C67 boss review complete
+
+`473f3e1`: [boss review](Documentation-support/bosses-review.md) + archive/template inventory, rights/era/planet decisions and ranked S/M/L shortlist. Stock wildlife/ancient rotation present; Horsemen and all 19 undead encounters incomplete; Necrosis weapon groups unresolved; Una-K'Jao identity open (Unkajo only a candidate). Krayt ghost stays in its separate design lane; lore corrections flagged. Gameplay untested; next accept existing bosses, then choose one original encounter. No galaxy commands, builds or /opt/swg writes.
+
+### 2026-10-18 5:33 PM ChatGPT: C65 source/offline re-review complete
+
+Reviewed by ChatGPT: `35e7dbe6` on `aa52cc64` and H1 `0262d8de` on `a27adc4d`. [C65](Documentation-support/review-C62/C65-review.md): changes requested, 2 P2 (destroy fighter loses pay after owner retreats; old saved building radius overrides H1) + 1 P3 (three report-stage retrack gaps). Original F1-F6 examples pass; expanded checker 36/41 pass, five acceptance failures; 12 Lua syntax passes; 55 stock layouts inventoried. Gameplay/relog/performance untested; next Claude fixes and runtime acceptance. No builds, galaxy commands or /opt/swg writes.
+
+### 2026-10-18 5:26 PM Claude: Ossus rain frozen at forest edges: forest weather area switched off (O12), built, not installed
+
+- **Owner:** "ossus rain is BROKE", "its static and patchy, raining in some areas not in others", then "Rain hanging still in the air, near trees or at the edge of a forest".
+- **Likely cause:** the client takes the environment family for each spot from the terrain's AENV affectors and swaps the camera's rain whenever the family changes, leaving the old rain hanging. Ossus's `forest` family sits under the fractal filter `forest patches`, so forest and plains alternate in small patches all over the map. All six families have the same rain rows (stock Dantooine's) and the same sky, and today's archives did not touch the weather table (`ebafbbab` since O9). Stock planets place environments with circles and rectangles; Dathomir and Lok use a few fractal ones.
+- **Fix** (owner: "Yes, switch off the Ossus forest weather area. Build the archive now; install it when I say I'm off the game"): `Fable-ossus/o12-rain/build_ossus_rain.py` sets the `forest` AENV's active flag from 1 to 0, one byte of `terrain/ossus.trn`. The forest trees, undergrowth, ferns and floor shader stay; forests fall back to the plains family and lose only their steppe ambient sound. Base `dc07e0b9` (installed, ghostfire LSD), out `fbdf58e8` in `work/ossus-rain/`; every other entry is byte for byte.
+- **Install when the owner is off the game:** `SWG-client/local_planets.tre`, and `/opt/swg/tre/local_planets.tre` under the lock, by rename so the running server keeps its open copy. Microverse's launcher then picks it up from the MTG share. Then the owner looks at rain at a forest edge in bad weather.
+
+### 2026-10-18 5:03 PM Claude: Fable back for art direction; its first job, a review of the Vong look and the banner, Thu 22 Oct 10:15 PM
+
+- **Owner:** "bring Fable back for art direction and design passes only, starting after Thursday's reset. Opus keeps the engineering. Start with a Fable review of the Vong look and the banner."
+- **Why it came up:** Fable's weekly cap sits inside the all-models weekly, not beside it (Anthropic's help article "Claude Fable models on your plan", checked today), so Fable can't run once the weekly is used up. Anthropic's model docs put Fable 5.1 above Opus 5.5, at 2.5 times the API price. Usage at 4:55 PM: all models 86%, Fable 22%, both resetting Thu 22 Oct 10:00 PM.
+- **Set up:** brief `Fable-art-review/BRIEF.md` (review only: Fable writes `Fable-art-review/README.md`; Claude does every generation run, bake and install). One-time scheduled task `fable-art-review-1`, Thu 22 Oct 10:15 PM: it starts one Fable agent and reports to `Agent/to-claude.md`. Standing line and `Agent/job-lists.md` updated.
+- **Not done:** nothing run. The test galaxy (run 33) and the lock untouched.
