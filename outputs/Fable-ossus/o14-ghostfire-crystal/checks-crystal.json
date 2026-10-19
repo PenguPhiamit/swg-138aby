@@ -1,9 +1,9 @@
 {
  "base_sha256": "c8a610801494690b51dd6129ef716b631e2aa0991a4db5377196f5bf96670ac9",
  "base_entries": 385,
- "out_sha256": "feb3bf8407506e345bcb6b5f6a6ac6622302243b8db764bffdb49e96db4010fa",
- "out_bytes": 7050285,
- "out_entries": 390,
+ "out_sha256": "a6dcb82c7fd30752ac21e3260bf0813e6d3c96ab09498f1c2bbd678bf093e3f2",
+ "out_bytes": 7052434,
+ "out_entries": 394,
  "unchanged_entries": 370,
  "changed": [
   "appearance/ghostfire_ribbon_a.swh",
@@ -20,40 +20,46 @@
   "misc/object_template_crc_string_table.iff",
   "palette/wp_lightsaber.pal",
   "pixel_program/e_h_lightsaberblade_ps20.psh",
-  "shader/sw_ghostfire.sht",
+  "shader/ghostfire_blade.sht",
   "texture/sw_ghostfire.dds"
  ],
  "added": [
   "appearance/sw_ghostfire_b.swh",
   "object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire_b.iff",
+  "shader/ghostfire_blade_a.sht",
+  "shader/ghostfire_blade_b.sht",
+  "shader/ghostfire_blade_c.sht",
+  "shader/ghostfire_blade_d.sht",
   "shader/sw_ghostfire_b.sht",
   "texture/sw_ghostfire_b.dds"
  ],
  "strobe": {
-  "seconds": 2.0,
-  "a_bars": 8,
+  "seconds": 1.2,
+  "a_bars": 6,
+  "alpha": 0.5,
+  "effect": "effect/e_particle_emisadd.eft",
   "b_bars": 1,
   "b_rate": 8.0,
   "b_samples": 16,
   "template_b_crc": "4136b322"
  },
  "changed_sha256": {
-  "appearance/ghostfire_ribbon_a.swh": "68940c3eb96729864b41125c47be30e0b293ba0cfbd57a80b813598b50298a9f",
-  "appearance/ghostfire_ribbon_b.swh": "5ecb37bbcd81c383f856cc4f6fa4fffbaafeb1aba8a65e9c49923a26f979a609",
-  "appearance/ghostfire_ribbon_c.swh": "3e53f4f5cad54233678c581bad66f49b9912c5d5600418b4971f42b3506f5e2f",
-  "appearance/ghostfire_ribbon_d.swh": "655cdbb8644c666591e711b042546d12e4bf52706a4af3bbb4d2f8a5831079a7",
-  "appearance/ghostfire_ribbon_e.swh": "22cc8c7b0d57a12e7e18a3a6574cb561082f5e8a5207c5916d0ea54fdd894ded",
-  "appearance/ghostfire_ribbon_f.swh": "f2bb6fb208f586cadf0b75caa0b0a6bd7ff34a807bc1905e01084469c3931d92",
-  "appearance/ghostfire_ribbon_g.swh": "9935ec777531a434ca62ab7d43d0ee26758817442d6da87919fda8be9714535e",
-  "appearance/ghostfire_ribbon_h.swh": "9590c58db08a78f7b36c3b16df351d73ca496d57c805173a16697462a669f356",
-  "appearance/sw_ghostfire.swh": "7d938e26f055ecc599d29743532ca9c14485569909d882f2021fdb366c28a68d",
-  "appearance/wp_mle_sword_lightsaber_blade_ghostfire.lsb": "39b63b7576a411ed3edff9196ce3fc5cba0db927230ae5c12b28dbb9ad3064bb",
+  "appearance/ghostfire_ribbon_a.swh": "32e0d9a1d37d906c27af7a7d05d544eb38951aecf644adb8a8af0812b3892dbf",
+  "appearance/ghostfire_ribbon_b.swh": "acf2c39e97fc9306c8542bd35dc0a51b7e668440429ba72b9f091eec26cdb139",
+  "appearance/ghostfire_ribbon_c.swh": "5d8ae6e0608fea44c5bb0437c91c55cf965f26498488ce8f5a00a3d1965a392e",
+  "appearance/ghostfire_ribbon_d.swh": "215b9fcfc8b41bf3d62b4bf5c2f619cd96dcbbae8cc228b363ef99825bb39a4f",
+  "appearance/ghostfire_ribbon_e.swh": "b5cce4b51f4a2bfa7f406e3bcd793d48f58cac6d409df3948b353407ec51d2e1",
+  "appearance/ghostfire_ribbon_f.swh": "d8902ea99fab447c8c14a1974f9d79ca13bea1088a82491e081cab6a63b06142",
+  "appearance/ghostfire_ribbon_g.swh": "f120310f18f14e39c4c0ce0192f2af8924b43e51d31140bb0bea8960ccd2f41c",
+  "appearance/ghostfire_ribbon_h.swh": "255ecbe470a467989e6dc986df42f860e643ad7f0edb600f4b10c03777b0067e",
+  "appearance/sw_ghostfire.swh": "ff476a2936c211da87b38c3dfd22f3e19b96737aaa23c8fa2d3478c42dcababf",
+  "appearance/wp_mle_sword_lightsaber_blade_ghostfire.lsb": "a941cfdfe36a37752abe6391f789a001a594b46a85ef5e424b8f0c1aba9228d6",
   "datatables/weapon/swoosh.iff": "6c9976f179aee2fd81a8f5ddb3b45c4eb890bcec28bd2e7f189b92e7f49995b3",
   "misc/object_template_crc_string_table.iff": "e1d09aafb1cc34b0ead7a01fca16993c3d2e6e1a4f51623aba62599e5292e37c",
   "palette/wp_lightsaber.pal": "da60b183a73538c8836f5392b5e3cc7f75aac44e5d9c36a21f8961252f41b38c",
   "pixel_program/e_h_lightsaberblade_ps20.psh": "6ad2687986fc90d4ced9ed91410764164013918b7e12aa989666e39b0e66d5dd",
-  "shader/sw_ghostfire.sht": "457026fa1c854e8aa17cf6de2d16485ee7b4cfe8ac492a9ba833087f283bd4d6",
-  "texture/sw_ghostfire.dds": "892a7a34196e89537b427641b16ce7d3ec6658f0b5e7f717a77dc10272282a35"
+  "shader/ghostfire_blade.sht": "771bfd3c43e43b9f98286e72c3ceafc63f202be09e5bc24370258e81d8dd95ac",
+  "texture/sw_ghostfire.dds": "ca211b44c59a20aa2fb3f3e019ac36a81229e1975d97a6ea1f5e2c38dd159cd8"
  },
  "shader": {
   "fxc": "10.0.26100.0",
@@ -143,52 +149,52 @@
  },
  "ribbon_rgba": {
   "appearance/ghostfire_ribbon_a.swh": [
-   0.36,
-   0.1,
-   0.62,
-   1.0
+   0.348,
+   0.128,
+   0.576,
+   0.5
   ],
   "appearance/ghostfire_ribbon_b.swh": [
-   0.09,
-   0.06,
-   0.33,
-   1.0
+   0.102,
+   0.072,
+   0.304,
+   0.5
   ],
   "appearance/ghostfire_ribbon_c.swh": [
-   0.0,
-   0.9,
-   1.0,
-   1.0
+   0.06,
+   0.768,
+   0.88,
+   0.5
   ],
   "appearance/ghostfire_ribbon_d.swh": [
-   0.04,
-   0.15,
-   0.39,
-   1.0
+   0.062,
+   0.144,
+   0.352,
+   0.5
   ],
   "appearance/ghostfire_ribbon_e.swh": [
    0.3,
-   1.0,
-   0.35,
-   1.0
+   0.848,
+   0.36,
+   0.5
   ],
   "appearance/ghostfire_ribbon_f.swh": [
-   0.01,
-   0.275,
-   0.29,
-   1.0
+   0.038,
+   0.244,
+   0.272,
+   0.5
   ],
   "appearance/ghostfire_ribbon_g.swh": [
-   0.72,
-   0.08,
-   0.52,
-   1.0
+   0.636,
+   0.112,
+   0.496,
+   0.5
   ],
   "appearance/ghostfire_ribbon_h.swh": [
-   0.21,
-   0.02,
-   0.19,
-   1.0
+   0.198,
+   0.04,
+   0.192,
+   0.5
   ]
  }
 }

@@ -2,7 +2,7 @@
 
 Owner, 18 Oct ~6:10 PM: "can we make a new Crystal entry with the new shader and make all sabers compatible with the new crystal type? also the blade needs to be dimmer and the trails more prominent (and slow like LSD ...)". Later: "def make sure you understand the stacking of the tracers ... almost time dilation kinda vibes" and "a mirage effect for the blade to help hide light". On the decision card the owner picked **the strobe trail, tested first**, and asked how a real mirage could be made possible.
 
-**Built, not installed** (the game was running): archive `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre`, sha256 `feb3bf84…`, on the installed `c8a61080`. Two builds give the same hash. Checks are in `checks-crystal.json`.
+**Built, not installed** (the game was running): archive `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre`, sha256 `a6dcb82c…`, on `c8a61080` (now its default base, `work/ossus-ghostfire-blade/`). The main session installed the earlier `feb3bf84` with its light whip as `a2610d64` (run 37, 7:41 PM). The light whip step chained on this build is `work/ossus-ghostfire-crystal/chain/local_planets-o14-lightwhip.tre`, sha256 `f8df3089…`. Its only differences from the installed `a2610d64` are the trail files and the Ghostfire Lightsaber's blade frames. Two builds give the same hash. Checks are in `checks-crystal.json`.
 
 ## The crystal drives the blade (any saber)
 
@@ -20,6 +20,12 @@ The owner said: "the trails are still too faint and the blade is still too visib
 - **The Ghostfire Lightsaber draws the stock blade again.** The crystal decides its look like any saber, and the ghostfire crystal gives the faint opal path. The O13 opal textures stay in the archive, unused.
 - **Red light:** the ghostfire blade file has no light section; the sleek silver blade it was copied from has none. So the red didn't come from a light set in that file. In case the engine falls back to a default light in the crystal's colour, the file now has the gen5 blade's light with its colour at 0. Which crystal was in the saber, and where the red came from, are open.
 - **Strobe trails:** they now last 2.0 s, at full colour alpha (was 0.5), with the stock saber trail's doubled additive effect (`e_particle_emisadd_2x`). The bars are more saturated.
+
+## 7:50 PM: "trails are too vibrant, and there is a red saber in there somehow"
+
+- **The red saber:** the server sets the blade colour only when a colour crystal goes in (`SaberInventoryContainerComponent.cpp`: insert sets the crystal colour, remove sets 31). A saber that never had one has no colour, so the client uses the blade shader's default, palette 0, which is red. The take 2 red light fits this too. The owner is dark side, but alignment plays no part: nothing else on the server sets a player's blade colour.
+  - The Ghostfire Lightsaber now has its own copy of the stock blade (`shader/ghostfire_blade.sht` over `ghostfire_blade_a..d.sht`) whose default is 32. With no colour crystal it shows the ghostfire blade, and any colour crystal still decides as usual. Every other saber is unchanged.
+- **The trails:** the strobe copies work; each swing left a fan of separate bars. They were far too loud, so they're now on the single additive effect (was doubled), at half alpha, last 1.2 s (was 2), with 6 copies per trail (was 8). Every colour is 20% toward a smoky violet. The tip ribbons are at half alpha too.
 
 ## Oil-slick trails, and an almost invisible blade (owner, 18 Oct evening)
 
@@ -57,5 +63,6 @@ A real mirage needs a small graphics hook between the game and DXVK. When our bl
 1. Any saber with the ghostfire crystal: is the blade almost nonexistent now, or still too visible?
 2. A normal crystal in any saber: does it look the same as before?
 3. Spawn `/server loot item ossus_ghostfire_saber 1` (A) and `/server loot item ossus_ghostfire_saber_b 1` (B). Put the ghostfire crystal in each, and swing slowly, then fast. Which one leaves copies of the blade, and how long do they stay?
-5. Is the red light on the creature and your robe still there? Which crystal was in the saber when you saw it?
+5. Is the red light on the creature and your robe still there? Which crystal was in the saber when you saw it, if any?
+6. After the 7:50 PM changes: are the trails now a dark petrol sheen, or too faint? Which test saber left the fan of copies, A or B?
 4. With the ghostfire crystal: how do the oil-slick colours and the 1.2 s tip ribbons look next to the strobe trail? Dark enough, or too dim to see?

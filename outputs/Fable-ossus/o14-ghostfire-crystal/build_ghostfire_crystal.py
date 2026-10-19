@@ -28,7 +28,8 @@ behind the swing.
 Older graphics paths (the effect's ps_1_1 and fixed-function versions) are left stock: there the crystal stays a dim tint.
 
     C:/Users/Pengw/miniconda3/python.exe -I build_ghostfire_crystal.py [--base PATH] [--out PATH] [--trail SECONDS]
-Default base: ../../SWG-client/local_planets.tre (installed c8a61080: lsd2 + the O12 rain byte + O13).
+Default base: ../../../work/ossus-ghostfire-blade/local_planets-ghostfire-blade.tre (c8a61080: lsd2 + the O12 rain byte + O13;
+the installed archive now has O14 and the light whip on top, so it can't be the base).
 Default out:  ../../../work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre (+ .sha256, previews);
 checks in ./checks-crystal.json.
 """
@@ -101,12 +102,17 @@ def ghost_entry(k):
     return [0x20, 4 * k, 0x20, 0]
 
 
-STROBE_SECONDS = 2.0
-TRAIL_EFFECT = 'effect/e_particle_emisadd_2x.eft'   # the stock saber trail's effect
+# Owner, 7:50 PM, on 2 s / full alpha / the doubled effect / 8 bars: "trails are too vibrant" (a big fan of full-strength
+# bars around the Jedi). Back to the single additive effect, half alpha, 1.2 s and 6 copies per trail.
+STROBE_SECONDS = 1.2
+STROBE_BARS = 6
+TRAIL_ALPHA = 0.5
+TRAIL_EFFECT = 'effect/e_particle_emisadd.eft'   # the colour-band trail's single effect (the 2x one was too loud)
 SHARED_B = 'object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire_b.iff'
 TRAIL_B_SWH = 'appearance/sw_ghostfire_b.swh'
 TRAIL_B_SHT = 'shader/sw_ghostfire_b.sht'
 TRAIL_B_DDS = 'texture/sw_ghostfire_b.dds'
+GHOST_FRAME = 'shader/ghostfire_blade_%s.sht'   # the Ghostfire Lightsaber's stock blade frames, default colour 32
 
 
 # Owner, 18 Oct evening: "maybe mix some darker colors in too for a more gasoline purple fumed kinda thing, and the
@@ -117,11 +123,12 @@ TRAIL_B_DDS = 'texture/sw_ghostfire_b.dds'
 OIL = [(0.36, 0.10, 0.62), (0.18, 0.12, 0.66), (0.00, 0.90, 1.00), (0.08, 0.30, 0.78), (0.30, 1.00, 0.35),
        (0.02, 0.55, 0.58), (0.72, 0.08, 0.52), (0.42, 0.04, 0.38), (0.62, 0.45, 0.12), (0.30, 0.20, 0.85)]
 OIL_DIM = 0.5   # every other band
+OIL_GREY = (0.30, 0.24, 0.40)   # 20% of every colour goes to this smoky violet ("too vibrant", 7:50 PM)
 
 
 def oil(i, u):
     """Band i's colour, drifting towards the next band's from hilt (u=0) to tip (u=1), like a thin film."""
-    a, b = OIL[i % len(OIL)], OIL[(i + 1) % len(OIL)]
+    a, b = [[0.8 * x + 0.2 * g for x, g in zip(c, OIL_GREY)] for c in (OIL[i % len(OIL)], OIL[(i + 1) % len(OIL)])]
     k = 1.0 if i % 2 == 0 else OIL_DIM
     return [k * (x + (y - x) * u) for x, y in zip(a, b)]
 
@@ -155,7 +162,7 @@ def shader_model(diffuse, tf):
 
 def main(argv):
     ap = argparse.ArgumentParser()
-    ap.add_argument('--base', default=os.path.join(OUTPUTS, 'SWG-client', 'local_planets.tre'))
+    ap.add_argument('--base', default=os.path.join(H, 'work', 'ossus-ghostfire-blade', 'local_planets-ghostfire-blade.tre'))
     ap.add_argument('--out', default=os.path.join(H, 'work', 'ossus-ghostfire-crystal', 'local_planets-ghostfire-crystal.tre'))
     ap.add_argument('--trail', type=float, default=1.2, help='ribbon trail lifetime in seconds (was 0.1)')
     args = ap.parse_args(argv)
@@ -210,7 +217,7 @@ def main(argv):
         rate, samples = struct.unpack_from('<fI', d.data, 48)
         assert abs(dur - 0.1) < 1e-6 and rate == 30.0 and samples == 20, (name, dur, rate, samples)
         old_ribbon_rgba[name] = [round(x, 3) for x in struct.unpack_from('<4f', d.data, 0)]
-        d.data = struct.pack('<4f', *oil(k, 0.0), 1.0) + struct.pack('<f', args.trail) + d.data[20:52] + struct.pack('<I', 60) + d.data[56:]
+        d.data = struct.pack('<4f', *oil(k, 0.0), TRAIL_ALPHA) + struct.pack('<f', args.trail) + d.data[20:52] + struct.pack('<I', 60) + d.data[56:]
         changed[name] = trn_iff.build(rn)
 
     # strobe trail test (owner: "Strobe trail, test first"): the saber trail is the surface the blade sweeps between its
@@ -220,23 +227,22 @@ def main(argv):
     # texture repeats per sample segment rather than once along the trail. Whichever shows copies tells us the mapping.
     added = {}
     profile = [p[3] for p in o13.dxt3_top(trn_iff.client_file(o13.SRC_TRAIL_DDS))[32]]
-    changed[o13.TRAIL_DDS], _ = o13.dds_argb(strobe_texture(profile, 8, 0.45))
+    changed[o13.TRAIL_DDS], _ = o13.dds_argb(strobe_texture(profile, STROBE_BARS, 0.45))
     swh = trn_iff.parse(base[o13.TRAIL_SWH])
     assert swh[0].children[0].form == '0000'
     data = [c for c in swh[0].children[0].children if not c.is_form][-1]
     assert abs(struct.unpack_from('<f', data.data, 16)[0] - 0.06) < 1e-6
-    # owner, 7:15 PM: "the trails are still too faint": full colour alpha (was 0.5) and the stock saber trail's
-    # doubled additive effect (emisadd_2x) instead of the colour-band trail's single one
     assert struct.unpack_from('<4f', data.data, 0) == (1.0, 1.0, 1.0, 0.5)
-    data.data = struct.pack('<4f', 1.0, 1.0, 1.0, 1.0) + struct.pack('<f', STROBE_SECONDS) + data.data[20:]
+    data.data = struct.pack('<4f', 1.0, 1.0, 1.0, TRAIL_ALPHA) + struct.pack('<f', STROBE_SECONDS) + data.data[20:]
     changed[o13.TRAIL_SWH] = trn_iff.build(swh)
     a_data = data.data
     sht = trn_iff.parse(base[o13.TRAIL_SHT])
     eft = [x for _, x in trn_iff.walk(sht) if not x.is_form and x.tag == 'NAME' and x.data.startswith(b'effect')]
     assert len(eft) == 1 and o13.cstr(eft[0].data) == 'effect/e_particle_emisadd.eft', eft
-    eft[0].data = TRAIL_EFFECT.encode() + b'\0'
-    assert trn_iff.client_file(TRAIL_EFFECT), TRAIL_EFFECT
-    changed[o13.TRAIL_SHT] = trn_iff.build(sht)
+    if TRAIL_EFFECT != 'effect/e_particle_emisadd.eft':
+        eft[0].data = TRAIL_EFFECT.encode() + b'\0'
+        assert trn_iff.client_file(TRAIL_EFFECT), TRAIL_EFFECT
+        changed[o13.TRAIL_SHT] = trn_iff.build(sht)
 
     added[TRAIL_B_DDS], _ = o13.dds_argb(strobe_texture(profile, 1, 0.3))
     tname = [x for _, x in trn_iff.walk(sht) if not x.is_form and x.tag == 'NAME' and x.data.startswith(b'texture/')]
@@ -255,12 +261,29 @@ def main(argv):
     # decides its look like any saber (the ghostfire crystal gives the dim opal path above), and its blade light is off.
     # The sleek silver blade file has no light section (LGHT); the gen5 files do (BASE, ASND, LGHT, BLAD). In case the
     # engine falls back to a default light in the crystal's colour, ours gets the gen5 one with its colour at 0.
+    # Owner, 7:50 PM: "there is a red saber in there somehow". The server sets the blade colour only when a colour
+    # crystal goes in (SaberInventoryContainerComponent.cpp: insert = crystal colour, remove = 31), so a saber that never
+    # had one has no colour and the client uses the blade shader's default, palette 0 = red. This saber gets its own
+    # copy of the stock blade (switching shader over frames a..d) whose default is 32, ghostfire: with no colour crystal
+    # it is the ghostfire blade, and any colour crystal still decides as usual.
+    stock_switch = trn_iff.parse(trn_iff.client_file(o13.STOCK_BLADE_SHT))
+    frames = [o13.cstr(x.data) for _, x in trn_iff.walk(stock_switch) if not x.is_form and x.tag == 'NAME']
+    assert frames == ['shader/lightsaberblade_%s.sht' % c for c in 'abcd'], frames
+    for c in 'abcd':
+        frame = trn_iff.parse(trn_iff.client_file('shader/lightsaberblade_%s.sht' % c))
+        pal = [x for _, x in trn_iff.walk(frame) if not x.is_form and x.tag == 'PAL ']
+        assert len(pal) == 1 and pal[0].data.startswith(b'index_color_blade\0') and pal[0].data[-4:] == b'\0\0\0\0'
+        pal[0].data = pal[0].data[:-4] + struct.pack('<I', GHOST_FIRST)
+        added[GHOST_FRAME % c] = trn_iff.build(frame)
+    for _, x in trn_iff.walk(stock_switch):
+        if not x.is_form and x.tag == 'NAME':
+            x.data = (GHOST_FRAME % o13.cstr(x.data)[-5]).encode() + b'\0'
+    changed[o13.BLADE_SHT] = trn_iff.build(stock_switch)
     lsb = trn_iff.parse(base[o13.LSB])
     ver = lsb[0].children[0]
     shdr = [x for _, x in trn_iff.walk(lsb) if not x.is_form and x.tag == 'SHDR']
     assert len(shdr) == 1 and o13.cstr(shdr[0].data) == o13.BLADE_SHT
     assert [c.tag if not c.is_form else c.form for c in ver.children] == ['BASE', 'ASND', 'BLAD']
-    shdr[0].data = o13.STOCK_BLADE_SHT.encode() + b'\0'
     gen5 = trn_iff.parse(trn_iff.client_file('appearance/wp_mle_2h_sword_lightsaber_blade_gen5.lsb'))
     lght = [x for _, x in trn_iff.walk(gen5) if x.is_form and x.form == 'LGHT'][0]
     colr = [c for c in lght.children if not c.is_form and c.tag == 'COLR']
@@ -319,13 +342,13 @@ def main(argv):
     o13.png(os.path.join(out_dir, 'preview-crystal-day.png'), o13.preview(frames, (150, 160, 170)))
 
     o13.png(os.path.join(out_dir, 'preview-strobe-a.png'),
-            [[tuple(c * p[3] // 255 for c in p[:3]) for p in row] for row in strobe_texture(profile, 8, 0.45)])
+            [[tuple(c * p[3] // 255 for c in p[:3]) for p in row] for row in strobe_texture(profile, STROBE_BARS, 0.45)])
     o13.png(os.path.join(out_dir, 'preview-strobe-b.png'),
             [[tuple(c * p[3] // 255 for c in p[:3]) for p in row] for row in strobe_texture(profile, 1, 0.3)])
 
     checks = {'base_sha256': base_sha, 'base_entries': len(base), 'out_sha256': sha, 'out_bytes': len(out),
               'out_entries': len(ours), 'unchanged_entries': len(same), 'changed': sorted(changed),
-              'added': sorted(added), 'strobe': {'seconds': STROBE_SECONDS, 'a_bars': 8, 'b_bars': 1, 'b_rate': 8.0,
+              'added': sorted(added), 'strobe': {'seconds': STROBE_SECONDS, 'a_bars': STROBE_BARS, 'alpha': TRAIL_ALPHA, 'effect': TRAIL_EFFECT, 'b_bars': 1, 'b_rate': 8.0,
                                                   'b_samples': 16, 'template_b_crc': '%08x' % crc_b},
               'changed_sha256': {n: hashlib.sha256(ours[n]).hexdigest() for n in sorted(changed)},
               'shader': {'fxc': os.path.basename(os.path.dirname(os.path.dirname(fxc_path()))), 'slots': slots,
@@ -334,7 +357,7 @@ def main(argv):
               'palette_32_40': ['%02x%02x%02x' % tuple(ents[GHOST_FIRST + k][:3]) for k in range(GHOST_COUNT)],
               'stock_crystal_brightest': {k: round(max(ents[k][:3]) / 255.0, 3) for k in used},
               'ribbon_trail_seconds': args.trail, 'ribbon_samples': 60, 'ribbon_rgba_was': old_ribbon_rgba,
-              'ribbon_rgba': {n: [round(x, 3) for x in oil(k, 0.0)] + [1.0] for k, n in enumerate(RIBBONS)}}
+              'ribbon_rgba': {n: [round(x, 3) for x in oil(k, 0.0)] + [TRAIL_ALPHA] for k, n in enumerate(RIBBONS)}}
     with open(os.path.join(HERE, 'checks-crystal.json'), 'w', encoding='utf-8') as f:
         json.dump(checks, f, indent=1)
     print(json.dumps({k: checks[k] for k in ('base_sha256', 'out_sha256', 'out_entries', 'changed', 'shader')}, indent=1))
