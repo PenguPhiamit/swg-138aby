@@ -371,6 +371,7 @@ Session preparation and checks so far:
 - [x] Staged interaction upgrade (ChatGPT), then reviewed, fixed, built and tested by Claude (dev `e1344def`)
 - [x] Sweep findings fixed in dev: NPC speech decoded, stale conversation choices refused, silent Han/greeters (cause: wrong height broke the server's line-of-sight check), "z 180" (a real plateau north-east of Mos Eisley)
 - [ ] Promote the new body to live: ChatGPT cross-review (C4) + owner OK; then ChatGPT plays The Beginning
+- [x] C67 boss availability and adaptation research (18 Oct, ChatGPT): `473f3e1`; `Documentation-support/bosses-review.md` + inventory, seven groups, rights/era/planet fit and ranked S/M/L shortlist. New encounters untested; no galaxy changes.
 - [x] C4 cross-review of `e1344def`, `a72026b6`, `eebdd99d`, `5c39f411`, `697f2002` and world-boss `bda2c0dd` (13 Oct, ChatGPT). Review in `Documentation-support/review-C4/C4-review-2026-10-13.md`; changes requested, not promotion approval.
 - [x] Fix original C4 F1–F3 (total movement deadline, dead/incap path guard, strict 256-point cap): dev `3797430a`/`cde59ec5`, Claude's test-galaxy results, ChatGPT source re-review and compiled cap reproduction (14 Oct).
 - [x] C4b + C4c exported-packet cross-reviews (14 Oct, ChatGPT): `Documentation-support/review-C4b/C4b-C4c-review.md`; 3 P1 + 4 P2 findings, changes requested. Runtime checks untested by ChatGPT; fixes and re-review remain before promotion.

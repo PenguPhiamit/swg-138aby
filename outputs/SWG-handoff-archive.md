@@ -2142,3 +2142,9 @@ Claude uses the grid squares to place new planets on the ticket-purchase galaxy 
 - **H1:** see its task row. It waits for the owner: a client-side check, or Fable's bunker fallback.
 - **GPT queue:** C66 (Nal Hutta gaps), C65 (review of the C62 fixes), C67 (the bosses in the owner's screenshot: what we have and what we can use; owner: "do we have these? or can we have a session find them and see if we can use them?"), then C63b, C63c, C64.
 - **Times corrected:** the 8:36 AM and 8:48 AM entries first carried estimated times (9:00 and 9:55 AM). The commit messages of `0cf496c` and `421fa7d` keep the estimates.
+
+## Moved 2026-10-18 17:40 (C67: keep newest four log entries)
+
+### 2026-10-18 3:49 PM Claude: README: what to expect from a public server
+
+Owner's words, written out in the root README (new section after "What's here"): a public or whitelisted server, if there is one, starts in early alpha; expect wipes; progression is sped up to make up for them until a stable live point; a whitelist to start; things will break. Rates and the after-stable details are left open on purpose. Nothing pushed.
