@@ -94,6 +94,13 @@ ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fi
 
 ## Log
 
+### 2026-10-18 8:29 PM Claude: O14 archive `49d6ae99` swapped on the client and at /opt/swg/tre (no restart)
+
+- **Owner, 8:14 PM:** "ready for capture". UM capture take 4 (8:14 to 8:15 PM, scratchpad only). Then: "the trails are too faint now, and the blade can come to where the trails are now", and "we dont see enough of all the colors". mirage.log: the mirage fires, about 1,790 ghostfire blade draws and as many mirage passes per 30 s.
+- **Fix** (ghostfire blade session, `48bc1c0`): trails at full alpha (half the 7:50 PM strength the owner called "too vibrant"), ten full-strength oil-slick colours, and with the ghostfire crystal a blade glow of 14% and a core of 2%. New blade program id `0ea2a331`. Archive O14 `4c5a29d0`, with the light whip `49d6ae99`.
+- **Owner, 8:25 PM** (card: install now, or wait for the whip hook): "Install now". At 8:29 PM to 8:29 PM, under the lock: `SWG-client/local_planets.tre` and `/opt/swg/tre/local_planets.tre` (by rename) are `49d6ae99`, with backups `.bak-b9fbc48a` in both places; `SWG-client/mirage.ini` has `extra_ids=0ea2a331`. Client files only, so run 37 keeps running.
+- **Light whip** (owner, 8:15 to 8:26 PM): step 2 (parry slip, weaker blocking) waits until after the 22 Oct reset ("can we wait on the parry thing in favor of the bend?"). The bend (steps 0 and 3) is with the mirage session, stopping at 96% weekly usage. The owner's whip answers (keep the hilt, a little shorter, no trail without a specific crystal, the krayt dragon boss drops it, the schematic for Master Weaponsmith plus saber crafting or a Jedi master) are with the light whip session to build, not applied.
+
 ### 2026-10-18 8:07 PM Claude: O14 fix archive `b9fbc48a` swapped on the client and at /opt/swg/tre (no restart)
 
 - **Owner, 7:50 PM:** "take a capture, its not looking right at all, trails are too vibrant, and there is a red saber in there somehow." UM capture take 3 (7:50 to 7:51 PM, scratchpad only): a full red blade and the strobe trails as large full-strength rainbow fans. Sent to the ghostfire blade session.
