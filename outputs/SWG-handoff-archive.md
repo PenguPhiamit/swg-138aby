@@ -2094,3 +2094,51 @@ Claude uses the grid squares to place new planets on the ticket-purchase galaxy 
 ### 2026-10-18 07:32 ChatGPT: C62 release-track cross-review
 
 - Reviewed by ChatGPT: dev `a8ece12b..aa52cc64`, all 47 commits; 21 fit in source, 5 need fixes, 21 test-only. Seven ranked P2 failing cases and release-1 scope: `Documentation-support/review-C62/C62-review.md`. 199 Lua syntax checks and offline counterexamples pass; gameplay/build/rehearsal untested. No server writes or galaxy actions; Claude keeps lock. Next: Claude fixes, exact candidate review and acceptance before owner deploy OK. Older entries archived; newest four retained.
+
+## Moved 2026-10-18 5:33 PM: C65 keeps the newest four log entries
+
+### 2026-10-18 3:34 PM Claude: run 32b: squad logged in, BotPop 200
+
+- **Owner:** "Yes, run squad.py setup and start BotPop as in run 32". Run 32 itself never had BotPop: its config had no `BotPop=true` and the server's `botpop-launch.jsonl` stops at 11:02 AM (end of run 31c). So this follows run 31c: `botpop launch 200` in "all" mode over the 18 starting cities.
+- **Restart** 3:31 PM (no client, no squad round), same start as 3:26 PM plus `--config BotPop=true --config 'BotPopMode="all"'`, ready in 30 s. `squad.py setup`: all 23 bots in, six groups formed. BotPop: 200 online at 3:33 PM, none failed, pass 36 ms. Memory: 10 GB available in Debian.
+- **Log:** three "Failed to rename log/who.json" lines at 35 to 48 s, then none (a known startup pattern in `tools/agents/local/log-known.txt`); nothing else. Saluki's triage not run.
+
+### 2026-10-18 3:27 PM Claude: test galaxy back on, run 32 resumed (dev `2687887a`)
+
+- **Owner:** "Make sure everything in dev is pushed to test, then start test server". Dev HEAD is `2687887a` with no uncommitted changes; the dev core3 (built 11:32 AM) and the test copy's core3 are the same file (sha1 `1f609766`); `/opt/swg/tre/local_planets.tre` is archive `9d0588a3`. So nothing was waiting; the start copied fresh dev scripts as always.
+- **Start** 3:26 PM: `test_galaxy.py start --dev-server` with the squad accounts and `AgentGear=true` (as run 32), resumed, ready in 34 s, galaxy address [tailnet address removed]. Startup log: no errors (only stock "could not open lua derv" warnings). No client was running.
+- **Not in dev** (ChatGPT's, not reviewed or cherry-picked, so not on test): `git cherry dev gpt/work` lists 9 patches from 14 to 15 Oct (agent telemetry, the test-only profession kit `4a340565`, Ossus fauna `6f25b704`, affliction DOT `19cfb3a5`, among others); some may already be in dev in changed form.
+- **Not done:** `squad.py setup`, BotPop, the ice caves rerun and the stall probe from the 12:54 PM entry.
+
+### 2026-10-18 12:54 PM Claude: run 32 (dev `2687887a`): ice caves placement test 4/6, Hoth is not on the installations' planet list; galaxy shut down for the owner's driver update
+
+- **Run 32** up 11:35 AM (ready in 30 s, `--dev-server`, Tailscale address, BotPop settings kept); the squad logged in at 11:37 AM.
+- **Placement test** (`Bot-reports/Esk/20261018-113920-hoth-ice-caves-harvester.json`, 4/6): the ice caves exception works at the `/placeStructure` check: the harvester and generator passed it, while the factory at (-124, 2441) and a harvester inside the Echo Base circle were refused "not permitted". But the deed path then refused the harvester and generator with `@player_structure:wrong_planet`: stock's default `allowedZones` for every installation (`SharedInstallationObjectTemplate.lua:52`) lists the ten stock planets, not Hoth. So no harvester or generator can be placed anywhere on Hoth yet (this is H5).
+- **Open, owner's call** (asked when the session was interrupted): add Hoth to the planet list of the harvester and generator templates only (Lua, a restart, no build; they then work anywhere buildable on Hoth, the ice caves included); or let them through only inside the ice caves circle (C++, rebuild); or Hoth for every installation, factories included.
+- **Not run:** the stall probe (speed check) and Saluki's log triage. The galaxy stopped clean at 12:54 PM and is kept (owner: "shutdown server, i need to update drivers").
+
+### 2026-10-18 12:32 PM ChatGPT: C66 Nal Hutta gap audit (read-only)
+
+- `1351c23`: [34-area stock/Hoth comparison](Documentation-support/nal-hutta-gaps.md), ranked friends-opening gates and about 55% content-system breadth (18.5/34). Missing bazaar/specialist terminals, outer-world depth, POI/badges and structure eligibility; bank/clone/insurance children and 45 resource types already exist. C62 pet/waypoint fixes present in source. No galaxy commands, builds or /opt/swg writes; gameplay untested. Next: owner/Claude schedule travel, recovery, quest/vendor/mission/resource acceptance and agree destination scope.
+
+### 2026-10-18 11:33 AM Claude: release build of dev `2687887a`: ghostfire, Hoth ice caves harvesters and generators, speed-check design A (galaxy off, untested)
+
+- **Owner:** "work on all the things that need to be built for the server", then "Build now, no restart" (the galaxy stays off) and "lets commit to dev". The ghostfire session handed over the lock with the owner's OK at 11:21 AM.
+- **Dev commits:** `7550bd13` speed-check design A (owner picked it 17 Oct; `Documentation-support/speed-check-design-A.patch`) and `a9ac11e0` its fix (the IDL compiler made the window copy a pointer assignment, so the copy is native now); `e56154bb` Hoth ice caves: a `HARVESTERAREA` region flag lets harvester and power generator deeds through both no-build checks (deed path and `/placeStructure`), while factories, houses, Echo Base, the outpost and the map edges stay refused (owner 10:11 AM, generators added 11:20 AM; `/agentgear structures` gives a bot the three deeds); `2687887a` the ghostfire session's shimmer task and trail test, unchanged.
+- **Release build** 11:32 AM, 453 steps, no errors; its core3 is in `Core3-dev/MMOCoreORB/bin/`, which `--dev-server` takes at the next start. The Lua of both region files passes `luac5.3`. The board had been rewritten with LF line endings by another session; CRLF restored.
+- **Untested.** After the owner's next start: `tools/bots/scenarios/hoth-ice-caves-harvester.py` (harvester and generator east of the owner's spot by Goke expect placed, a factory there and a harvester at Echo Base expect refused) and `claude-probe-stall.py` through a BotPop login burst. A "[Movement] speed check forgiven" line is a step stock would have bounced, so no baseline run is needed. Then Saluki's log triage.
+
+### 2026-10-18 9:43 AM Claude: H1 fixed on the test galaxy: Echo Base was never sent at its doors (192 m send range)
+
+- **Owner:** "Check the client side first: compare the Echo Base building's appearance and portal files with what the pre-CU client can read." **The client reads them all:** the `PRTO 0004` portal layout is the format of the stock JTL ship interiors, and the floors, meshes and cells are the stock versions (`Hoth-fill/echo_base_formats.py`, `pob_versions.py`; 214 stock layouts are `0003`, 4 stock ones `0004`, MTG ships 68 `0004`).
+- **Cause:** `BuildingObjectImplementation::getOutOfRangeDistance` is 192 m from the centre; Echo Base's main door is 319 m and its hangar 627 m out, and the centre is inside the mountain, so nobody standing anywhere useful was sent the building. **Fix, dev `0262d8de`:** a building that reaches past 96 m (its cell floors) is sent to 192 m + its reach, as Core3 already does for every other object. Stock buildings within 96 m are unchanged; GPT's C65 also reviews this.
+- **Run 31c** at 9:39 AM on that build (873 files: reverting a header with git checkout changed its timestamp). The probe passes 2/2; Saluki's log triage is clean (four more stock patterns in `log-known.txt`).
+- **Next:** the owner looks at the main door and the hangar in the client. If the building now draws, H1 is done; if it is sent and still not drawn, the client side needs a closer look.
+
+### 2026-10-18 9:11 AM Claude: run 31 on the C62 fixes; H1: Echo Base is sent, the client doesn't draw it; C66 and C67 queued
+
+- **Run 31** (owner: "i am logged off"): release build of dev `35e7dbe6` at 8:56 AM (C62 F1-F6, the full-inventory pickup `4bae9ab1`, the bank radials `aa52cc64`), up at 8:59 AM with BotPop 200 on the Tailscale address. Saluki's log triage is clean. `PICKUP_FIX = True` is now set in `tools/bots/missions.py`. The speed check still waits for its own build.
+- **Run 31b** at 9:05 AM, same build, for an Echo Base template change (`6beef4ab`) that rested on a misread probe: Core3 sends every building's baseline with the TANO tag. It is reverted in dev (`a27adc4d`) and harmless until the next restart.
+- **H1:** see its task row. It waits for the owner: a client-side check, or Fable's bunker fallback.
+- **GPT queue:** C66 (Nal Hutta gaps), C65 (review of the C62 fixes), C67 (the bosses in the owner's screenshot: what we have and what we can use; owner: "do we have these? or can we have a session find them and see if we can use them?"), then C63b, C63c, C64.
+- **Times corrected:** the 8:36 AM and 8:48 AM entries first carried estimated times (9:00 and 9:55 AM). The commit messages of `0cf496c` and `421fa7d` keep the estimates.

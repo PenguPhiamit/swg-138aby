@@ -1,0 +1,214 @@
+{
+  "revision": "35e7dbe64c235befc3f1da3fd3aa0d0301c36a08",
+  "h1_revision": "0262d8deb36c9ced07b9a226e0aa8614335ad3ee",
+  "kind": "offline substitute Lua / static C++ contracts",
+  "original_lua_checks_ok": true,
+  "cases": [
+    {
+      "name": "F1 all loaded heat/electricity damage is nonnegative",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F2 lead before road survives reward and simulated relog",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F2 road before lead on reward screen",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F2 paid before update and simulated relog",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 echo solo pet, direct player and unowned NPC",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 echo grouped pet with range, zone and quest eligibility",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 echo distant grouped owner does not deny nearby helper",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 echo direct grouped player uses same eligibility",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 rimefang solo pet, direct player and unowned NPC",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 rimefang grouped pet with range, zone and quest eligibility",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 rimefang distant grouped owner does not deny nearby helper",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 rimefang direct grouped player uses same eligibility",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 1 solo pet, direct player and unowned NPC",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 1 grouped pet with range, zone and quest eligibility",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 1 distant grouped owner does not deny nearby helper",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 1 direct grouped player uses same eligibility",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 3 solo pet, direct player and unowned NPC",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 3 grouped pet with range, zone and quest eligibility",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 3 distant grouped owner does not deny nearby helper",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F3 3 direct grouped player uses same eligibility",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F5 simultaneous jobs, stock marker, travel, rewards and simulated relog",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F5 existing quest-task marker is retained by deliberate migration policy",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F5 all active stages recover exactly one owned marker after simulated relog",
+      "ok": true,
+      "detail": "actual Lua / substitute engine"
+    },
+    {
+      "name": "F5 restore deleted report-back marker for echo",
+      "ok": false,
+      "detail": "stdin:2572: step 2 report-back marker was not restored"
+    },
+    {
+      "name": "F5 restore deleted report-back marker for rimefang",
+      "ok": false,
+      "detail": "stdin:2572: step 2 report-back marker was not restored"
+    },
+    {
+      "name": "F5 restore deleted report-back marker for Kessoth",
+      "ok": false,
+      "detail": "stdin:2582: step 4 report-back marker was not restored"
+    },
+    {
+      "name": "F5 real waypoint binding returns an ID and defaults persistent",
+      "ok": true,
+      "detail": "Static binding contract, not a persistence run"
+    },
+    {
+      "name": "F6 submitted-window state guard precedes range and transfer",
+      "ok": true,
+      "detail": "Pinned callback source order; no SUI dispatched"
+    },
+    {
+      "name": "F1 NPC resistance upper cap",
+      "ok": true,
+      "detail": "Pinned cap source contract; damage arithmetic exercised by Lua"
+    },
+    {
+      "name": "F4 matching coordinates on another planet across nine implemented mission types",
+      "ok": true,
+      "detail": "Pinned eligibility expressions evaluated with substitute distances/zones"
+    },
+    {
+      "name": "F4 stale destroy and hunting listing locations are excluded",
+      "ok": true,
+      "detail": "Owner 250 m away; member at the stale endpoint"
+    },
+    {
+      "name": "F4 delivery/crafting/recon/performance completion anchors retained",
+      "ok": true,
+      "detail": "Same-zone members near the intended endpoint can qualify when away from owner"
+    },
+    {
+      "name": "F4 near-owner eligibility ignores height and life state by policy; strict 128 m",
+      "ok": true,
+      "detail": "No dead/alive input in the pinned predicate; distance is flat and <128"
+    },
+    {
+      "name": "F4 actual destroy helper paid after owner retreats",
+      "ok": false,
+      "detail": "FAIL case: helper at actual lair (20,0), owner at (300,0); old endpoint (0,0)"
+    },
+    {
+      "name": "F4 whole-group divisor and integer split retained",
+      "ok": true,
+      "detail": "Source contract and arithmetic: 1000/2=500 each; 1001/3=333, even with only two eligible players"
+    },
+    {
+      "name": "F6 real range helper is same-zone, horizontal and inclusive",
+      "ok": true,
+      "detail": "Static contract for callback/radial isInRange(...,8)"
+    },
+    {
+      "name": "F6 alive to dead/incap submitted window and 8 m boundary model",
+      "ok": true,
+      "detail": "Source-derived state predicate plus source-verified range model; no bank transaction executed"
+    },
+    {
+      "name": "H1 source has persistent radius and template-before-deserialization order",
+      "ok": true,
+      "detail": "Static lifecycle contract, not a database load test"
+    },
+    {
+      "name": "H1 database restore has no building radius refresh",
+      "ok": true,
+      "detail": "Pinned building load lifecycle; generated TreeEntry reader also inspected separately"
+    },
+    {
+      "name": "H1 fresh layout radius boundaries and quad-range preservation",
+      "ok": true,
+      "detail": "Source formula model; does not benchmark range updates"
+    },
+    {
+      "name": "H1 existing saved building retains newly calculated reach",
+      "ok": false,
+      "detail": "FAIL lifecycle model: 483.01 m reach is overwritten by saved radius 0.5; range returns to 192 m"
+    }
+  ],
+  "lua_error": ""
+}

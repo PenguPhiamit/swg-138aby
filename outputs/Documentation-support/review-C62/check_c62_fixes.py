@@ -1,8 +1,19 @@
-"""Offline check of Claude's C62 fixes (18 Oct 2026), the reverse of GPT's check_c62.py: the same substitute engine,
-the fixed Lua from the dev working tree, and each of GPT's failing cases asserted to pass now. Run in WSL as swgemu."""
-import pathlib, subprocess, sys
+"""Pinned C62 repair checks and C65 edge cases; run in WSL as swgemu.
 
-S = pathlib.Path('/opt/swg/Core3-dev/MMOCoreORB/bin/scripts')
+Lua handlers run with substitute engine objects, not a galaxy. Relog cases copy
+the persisted fields only; they do not test the database or network. C++ checks
+are source contracts / predicate models, not compiled engine execution.
+Exit 1 when any extended acceptance case fails, preserving all case results.
+"""
+import json, math, os, pathlib, re, subprocess, sys
+
+ROOT = pathlib.Path('/opt/swg/Core3-dev')
+REV = '35e7dbe64c235befc3f1da3fd3aa0d0301c36a08'
+os.environ['GIT_OPTIONAL_LOCKS'] = '0'
+
+def source(path):
+    return subprocess.check_output(['git', '-C', str(ROOT), 'show', f'{REV}:MMOCoreORB/{path}'], text=True)
+
 host = r'''
 local function new(self, t) return t end
 ScreenPlay={new=new}; CityScreenPlay={new=new}; conv_handler={new=new}
@@ -50,7 +61,9 @@ function player()
   end
   function p:addWaypoint(planet,name,desc,x,z,y,color,a,b,kind)
     nextId=nextId+1
-    table.insert(self.waypoints,{id=nextId,name=name,kind=kind})
+    -- Real PlayerObject::addWaypoint replaces the matching nonzero special type.
+    if kind ~= 0 then self:removeWaypointBySpecialType(kind) end
+    table.insert(self.waypoints,{id=nextId,name=name,kind=kind,planet=planet,x=x,z=z,y=y})
     return nextId
   end
   function p:removeWaypoint(id,notify)
@@ -69,7 +82,7 @@ files = ['mobile/hoth/hoth_fill_creatures.lua'] + [f'mobile/hoth/{n}.lua' for n 
     'hoth_wampa_icemaw', 'hoth_wampa_patriarch', 'hoth_wampa_frostfang')] + [
     'mobile/conversations/sandbox/ossus_people_conv.lua', 'screenplays/sandbox/ossus_people.lua',
     'screenplays/sandbox/hoth_world.lua', 'screenplays/sandbox/hutta_life.lua']
-loaded = '\n'.join((S / f).read_text() for f in files)
+loaded = '\n'.join(source('bin/scripts/' + f) for f in files)
 tests = r'''
 -- F1: no resistance over 200 on any Hoth creature loaded; the bosses keep their order of toughness.
 local n=0
@@ -129,8 +142,139 @@ local c=0; for _,x in ipairs(w.waypoints) do if x.name:find("Hask") then c=c+1 e
 assert(c==1)
 print("F5 fixed: each job keeps its own marker; stock quest-task markers survive; talking to the giver restores one")
 '''
-run = subprocess.run(['lua5.3', '-'], input=host + loaded + tests, text=True, capture_output=True)
+extra = pathlib.Path(__file__).with_name('c65_cases.lua').read_text()
+run = subprocess.run(['lua5.3', '-'], input=host + loaded + tests + extra, text=True, capture_output=True)
 print(run.stdout.strip())
-if run.returncode:
+if run.stderr:
     print(run.stderr.strip())
-    sys.exit(1)
+cases = []
+for line in run.stdout.splitlines():
+    if line.startswith('CASE\t'):
+        _, status, name, detail = line.split('\t', 3)
+        cases.append({'name': name, 'ok': status == 'PASS', 'detail': detail})
+
+def check(name, ok, detail):
+    cases.append({'name': name, 'ok': bool(ok), 'detail': detail})
+    print(('PASS' if ok else 'FAIL') + ': ' + name + ' - ' + detail)
+
+binding = source('src/server/zone/objects/player/LuaPlayerObject.cpp')
+check('F5 real waypoint binding returns an ID and defaults persistent',
+      'lua_pushinteger(L, waypoint->getObjectID())' in binding and 'persistence = 1' in binding,
+      'Static binding contract, not a persistence run')
+callback = source('src/server/zone/objects/player/sui/callbacks/BankTerminalSuiCallback.h')
+check('F6 submitted-window state guard precedes range and transfer',
+      callback.index('player->isDead() || player->isIncapacitated()') < callback.index('player->isInRange(bankObject, 8)')
+      < callback.index('transferCredits'), 'Pinned callback source order; no SUI dispatched')
+combat = source('src/server/zone/managers/combat/CombatManager.cpp')
+check('F1 NPC resistance upper cap',
+      re.search(r'if \(resist > 100\.f\)\s+resist = 100\.f;', combat) is not None,
+      'Pinned cap source contract; damage arithmetic exercised by Lua')
+
+# Evaluate the actual pinned bool expressions after substituting engine values.
+# This checks their logic, not C++ execution, observer dispatch or engine vectors.
+mission = source('src/server/zone/objects/mission/MissionObjectiveImplementation.cpp')
+expressions = {name: re.search(r'bool ' + name + r' = ([^;]+);', mission).group(1)
+               for name in ('sameZone', 'nearOwner', 'endPointCounts', 'nearEnd')}
+def eligibility(kind, same_zone, owner, member, endpoint):
+    values = {'memberZone': 'same' if same_zone else 'other', 'ownerZone': 'same',
+              'ownerDistance': math.dist(member[:2], owner[:2]),
+              'endDistance': math.dist((*member[:2],0) if kind == 'BOUNTY' else member, endpoint),
+              'missionType': kind}
+    substitutions = {'groupMember->getZone()': 'memberZone',
+                     'memberFlat.distanceTo(ownerPoint)': 'ownerDistance',
+                     'memberPosition.distanceTo(missionEndPoint)': 'endDistance',
+                     'MissionTypes::DESTROY': repr('DESTROY'),
+                     'MissionTypes::HUNTING': repr('HUNTING')}
+    for name, expression in expressions.items():
+        for old, new in substitutions.items():
+            expression = expression.replace(old, new)
+        values[name] = eval(expression.replace('&&', ' and ').replace('||', ' or '),
+                            {'__builtins__': {}}, values)
+    decision = re.search(r'if \((nearEnd \|\| nearOwner)\)', mission).group(1)
+    return eval(decision.replace('||', ' or '), {'__builtins__': {}}, values)
+
+kinds = ('DESTROY','HUNTING','DELIVER','CRAFTING','DANCER','MUSICIAN','RECON','SURVEY','BOUNTY')
+check('F4 matching coordinates on another planet across nine implemented mission types',
+      all(not eligibility(k,False,(250,0,0),(0,0,0),(0,0,0)) for k in kinds),
+      'Pinned eligibility expressions evaluated with substitute distances/zones')
+check('F4 stale destroy and hunting listing locations are excluded',
+      all(not eligibility(k,True,(250,0,0),(0,0,0),(0,0,0)) for k in ('DESTROY','HUNTING')),
+      'Owner 250 m away; member at the stale endpoint')
+check('F4 delivery/crafting/recon/performance completion anchors retained',
+      all(eligibility(k,True,(300,0,0),(20,0,0),(0,0,0)) for k in ('DELIVER','CRAFTING','RECON','DANCER','MUSICIAN')),
+      'Same-zone members near the intended endpoint can qualify when away from owner')
+check('F4 near-owner eligibility ignores height and life state by policy; strict 128 m',
+      eligibility('DESTROY',True,(250,0,0),(260,0,100),(0,0,0))
+      and not eligibility('DESTROY',True,(0,0,0),(128,0,0),(0,0,0)),
+      'No dead/alive input in the pinned predicate; distance is flat and <128')
+check('F4 actual destroy helper paid after owner retreats',
+      eligibility('DESTROY',True,(300,0,0),(20,0,0),(0,0,0)),
+      'FAIL case: helper at actual lair (20,0), owner at (300,0); old endpoint (0,0)')
+check('F4 whole-group divisor and integer split retained',
+      'playerCount = group->getNumberOfPlayerMembers()' in mission
+      and 'divisor = playerCount' in mission
+      and 'mission->getRewardCredits() / Math::max(divisor, 1)' in mission
+      and 1000//max(2,2,1)==500 and 1001//max(2,3,1)==333,
+      'Source contract and arithmetic: 1000/2=500 each; 1001/3=333, even with only two eligible players')
+
+state_expression = re.search(r'if \((player->isDead\(\) \|\| player->isIncapacitated\(\))\)', callback).group(1)
+state_expression = state_expression.replace('player->isDead()', 'dead').replace('player->isIncapacitated()', 'incap').replace('||', ' or ')
+range_source = source('src/server/zone/objects/scene/SceneObjectImplementation.cpp')
+range_body = range_source[range_source.index('bool SceneObjectImplementation::isInRange('):]
+range_body = range_body[:range_body.index('\n}')]
+check('F6 real range helper is same-zone, horizontal and inclusive',
+      'getZone() != object->getZone()' in range_body and range_body.count('setZ(0)') == 2
+      and re.search(r'<=\s*range\s*\*\s*range', range_body) is not None,
+      'Static contract for callback/radial isInRange(...,8)')
+def bank_allowed(dead, incap, same_zone, distance):
+    blocked = eval(state_expression, {'__builtins__': {}}, {'dead': dead, 'incap': incap})
+    return not blocked and same_zone and distance <= 8
+check('F6 alive to dead/incap submitted window and 8 m boundary model',
+      all(not bank_allowed(dead,incap,True,d) for dead,incap in ((True,False),(False,True)) for d in (0,8))
+      and bank_allowed(False,False,True,7.99) and bank_allowed(False,False,True,8)
+      and not bank_allowed(False,False,True,8.01) and not bank_allowed(False,False,False,0),
+      'Source-derived state predicate plus source-verified range model; no bank transaction executed')
+
+# H1: the new radius is calculated before database fields are restored. The IDL
+# declares radius persistent; neither building transient init nor load callback
+# recalculates it. Model that ordering, without reading any world database.
+H1_REV = '0262d8deb36c9ced07b9a226e0aa8614335ad3ee'
+def h1_source(path):
+    return subprocess.check_output(['git','-C',str(ROOT),'show',f'{H1_REV}:MMOCoreORB/{path}'], text=True)
+building = h1_source('src/server/zone/objects/building/BuildingObjectImplementation.cpp')
+tree_idl = h1_source('src/server/zone/TreeEntry.idl')
+manager = h1_source('src/server/zone/managers/object/ObjectManager.cpp')
+check('H1 source has persistent radius and template-before-deserialization order',
+      'protected float radius;' in tree_idl
+      and manager.index('object = instantiateSceneObject(serverObjectCRC, objectID, true)')
+          < manager.index('deSerializeObject(scene, &objectData)')
+      and 'setRadius(reach)' in building,
+      'Static lifecycle contract, not a database load test')
+transient_body = building[building.index('void BuildingObjectImplementation::initializeTransientMembers()'):building.index('void BuildingObjectImplementation::loadTemplateData(')]
+check('H1 database restore has no building radius refresh',
+      'setRadius' not in transient_body and 'loadTemplateData(' not in transient_body
+      and 'BuildingObjectImplementation::notifyLoadFromDatabase' not in building,
+      'Pinned building load lifecycle; generated TreeEntry reader also inspected separately')
+def building_range(radius, quad=False):
+    base = 768 if quad else 192
+    return max(base,192+radius) if radius > 96 else base
+check('H1 fresh layout radius boundaries and quad-range preservation',
+      building_range(96)==192 and building_range(96.01)>288
+      and building_range(769.8468)>961
+      and building_range(126.53,True)==768,
+      'Source formula model; does not benchmark range updates')
+computed_radius = 483.01  # stock Jabba palace floor bounds
+saved_pre_fix_radius = 0.5
+restored_radius = saved_pre_fix_radius  # persistent field read follows template load
+check('H1 existing saved building retains newly calculated reach',
+      building_range(restored_radius) == building_range(computed_radius),
+      'FAIL lifecycle model: 483.01 m reach is overwritten by saved radius 0.5; range returns to 192 m')
+
+result = {'revision': REV, 'h1_revision': H1_REV, 'kind': 'offline substitute Lua / static C++ contracts',
+          'original_lua_checks_ok': run.returncode == 0, 'cases': cases,
+          'lua_error': run.stderr.strip()}
+out = pathlib.Path(__file__).with_name('C65-checks.json')
+out.write_text(json.dumps(result, indent=2) + '\n')
+failed = sum(not c['ok'] for c in cases)
+print(f'C65 extended cases: {len(cases)-failed}/{len(cases)} pass; {failed} fail; evidence: {out.name}')
+sys.exit(1 if failed or run.returncode else 0)
