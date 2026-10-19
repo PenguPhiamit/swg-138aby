@@ -1,7 +1,7 @@
 # Star Wars Galaxies, 138 ABY
 
-A personal, non-commercial project: a private SWGEmu (Core3) server that keeps pre-Combat-Upgrade Star Wars Galaxies
-as it was and builds on it. The new content is set in the Legends era around 138–139 ABY, after Darth Krayt's fall:
+A personal, non-commercial project: a private SWGEmu (Core3) server that starts from pre-Combat-Upgrade Star Wars
+Galaxies and builds on it. The new content is set in the Legends era around 138–139 ABY, after Darth Krayt's fall:
 new planets, playable species, creatures and story, plus a population of bots that play the game through the real
 client protocol to test it.
 
@@ -70,7 +70,7 @@ the project, the server is non-commercial.
 
 ## Goals
 
-- Keep the pre-CU game as it was, and finish what was left thin or broken.
+- Build on the pre-CU game: keep its spirit, and finish what was left thin or broken.
 - Add places and story that fit the setting, in our own words.
 - Make testing cheap and honest: bots that play each profession and report what works and what doesn't.
 - Give back. This repository is open source now, under the AGPL-3.0. Anyone may read it, learn from it and reuse it
