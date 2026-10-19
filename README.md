@@ -30,7 +30,7 @@ offline but not installed yet; **planned** means not started. Nothing is open to
 | Ossus | The old Jedi world, with terrain built from scratch by our own tools (Knossa, the Academy benchland, Imhar Canyon), the One Sith in the caves, the spirit of Ood Bnar | On the test galaxy (still filling out) |
 | Ghostfire crystal | A lightsaber colour crystal with an almost invisible blade and its own blade shader: the colour is in the trails, which shimmer through oil-slick hues in any hilt | On the test galaxy (being tuned) |
 | New species | Chiss at character creation | On the test galaxy |
-| More species | Nautolan (male) and Togruta (female) at character creation | Staged |
+| More species | Nautolan (male) and Togruta (female) at character creation | On the test galaxy (not yet checked in game) |
 | Light whip | A one-handed lightsaber variant: a 4.5 m strand with more reach than a saber and weaker against armour, which bends like a rope with the graphics hook. Krayt dragon bosses drop it, and a Master Weaponsmith with Lightsaber Technique I or a Lightsaber Master can learn its schematic | On the test galaxy; the drop and the schematic are staged |
 | The Hutt | A playable Hutt, with Nal Hutta as its home world; still being worked out | Staged, in research |
 | Backports | Vehicles and items from Mod the Galaxy, new creatures and enemies | On the test galaxy |
@@ -43,8 +43,8 @@ offline but not installed yet; **planned** means not started. Nothing is open to
 | An AI player | An agent that plays a character and learns, under strict safety rules | Planned |
 | Light whip, next | A hilt model (credited), a crack sound, a coil at the wielder's feet when idle, and the parry and blocking changes | Planned |
 
-A small friends-only test comes first. The whole plan, with dates, is in
-[outputs/SWG-roadmap.md](outputs/SWG-roadmap.md).
+A small friends-only test comes first. What's done, what's being tested and what comes next is in
+[ROADMAP.md](ROADMAP.md).
 
 ## If there's a public server
 
@@ -94,7 +94,7 @@ This is a working project, not a polished release, and there's no installer for 
 your own copy of the SWG client and a Core3 build.
 
 - [outputs/SWG-handoff.md](outputs/SWG-handoff.md): the agents' task board and log, newest first.
-- [outputs/SWG-roadmap.md](outputs/SWG-roadmap.md): the plan, by phase.
+- [ROADMAP.md](ROADMAP.md): what's done, what's being tested and what comes next.
 - [outputs/tools/](outputs/tools/): the bots, the file-format tools and the build and check scripts.
 - `outputs/Fable-*`, `outputs/Hoth-*`, `outputs/Vong-look/` and similar folders: content batches, each with its own
   README, patch and checks.
