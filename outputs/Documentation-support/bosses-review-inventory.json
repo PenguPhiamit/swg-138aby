@@ -1,0 +1,571 @@
+{
+  "checked": "2026-10-18; offline, no galaxy commands",
+  "dev_head": "2687887ae60e392ab459c03485dc64c5439ece1a",
+  "scope": "Core3-dev worktree including current files; client winning load-order index via tools/hoth/client_load_order.py; not a runtime census",
+  "client_index_entries": 202952,
+  "template_paths": {
+    "exar": [
+      "bin/scripts/mobile/custom_content/mobile/costume_exar_kun_cultist.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_caretaker.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_cultist.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_cultist_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_cultist_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_cultist_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_cultist_f.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_cultist_f_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_cultist_f_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_cultist_f_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_fist_of_hate.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_head_cultist.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_intro_giver.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_intro_magnus_grenz.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_minder.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_open_hand.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_professor_wagglehorn.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_tomb_guardian.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_tomb_guardian_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_tomb_guardian_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_tomb_guardian_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_tomb_guardian_f.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_tomb_guardian_f_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_tomb_guardian_f_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_tomb_guardian_f_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_warrior.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_kun_warrior_f.lua",
+      "bin/scripts/mobile/custom_content/mobile/exar_professor.lua"
+    ],
+    "myyydril": [
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/dressed_treun_lorn.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/ep3_myyydril_nk3.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/general_grievous.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/lorn_servant.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/serverobjects.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/urnsoris.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/urnsoris_assassin.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/urnsoris_eviscerater.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/urnsoris_guard.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/urnsoris_handmaiden.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/urnsoris_nefarious.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/urnsoris_nurse.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/urnsoris_queen.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/urnsoris_royal_guard.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/urnsoris_soldier.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/urnsoris_worker.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/urnsoris_young.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/uwari_beetle_aggro.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/uwari_beetle_aggro_1.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/uwari_beetle_aggro_2.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/uwari_beetle_domestic.lua",
+      "bin/scripts/mobile/custom_content/kashyyyk/dead_forest/myyydril_caverns/uwari_deathswarm.lua"
+    ],
+    "undead": [
+      "bin/scripts/mobile/custom_content/mobile/costume_undead_wke_f_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/costume_undead_wke_m_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/dressed_biologist_10_undead.lua",
+      "bin/scripts/mobile/custom_content/mobile/dressed_imperial_inquisitor_human_male_03_undead.lua",
+      "bin/scripts/mobile/custom_content/mobile/dressed_imperial_officer_m_undead.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_biologist_10.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_both_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_hum_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_hum_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_ith_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_nightsister_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_nightsister_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_nightsister_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_both_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_hum_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_hum_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_hum_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_hum_04.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_ith_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_rod_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_sul_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_trn_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_twe_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_wke_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_wke_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_04.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_05.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_06.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_07.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_08.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_09.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_10.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_11.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_12.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_13.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_14.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_15.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_16.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_17.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_18.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_19.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_20.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_21.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_22.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_24.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_25.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_26.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_27.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_28.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_29.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_30.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_31.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_32.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_33.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_34.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_35.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_36.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_37.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_38.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_39.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_40.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_42.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_43.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_44.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_45.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_46.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_48.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_49.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_civilian_50.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_01_f.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_01_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_02_f.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_02_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_03_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_04_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_05_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_06_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_07_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_08_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_09_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_10_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_11_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_12_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_13_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_14_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_15_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_16_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_17_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_18_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_19_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_20_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_21_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_22_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_23_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_24_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_25_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_26_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_27_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_28_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_imperial_inquisitor_human_male_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_hum_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_hum_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_hum_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_hum_04.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_hum_05.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_monc_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_monc_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_rod_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_twi_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_twi_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_wke_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_wke_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_zab_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_zab_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_prisoner_m_zab_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_04.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_05.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_06.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_07.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_08.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_09.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_10.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_11.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_12.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_13.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_14.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_15.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_f_hum_16.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_04.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_05.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_06.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_07.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_08.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_09.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_10.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_11.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_12.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_13.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_14.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_15.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_scientist_m_hum_16.lua"
+    ],
+    "undead_boss": [
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_both_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_hum_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_hum_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_ith_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_nightsister_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_nightsister_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_f_nightsister_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_both_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_hum_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_hum_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_hum_03.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_hum_04.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_ith_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_rod_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_sul_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_trn_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_twe_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_wke_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_boss_m_wke_02.lua"
+    ],
+    "deathtrooper": [
+      "bin/scripts/mobile/custom_content/mobile/deathtrooper_01.lua",
+      "bin/scripts/mobile/custom_content/mobile/deathtrooper_02.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_01_f.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_01_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_02_f.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_02_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_03_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_04_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_05_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_06_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_07_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_08_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_09_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_10_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_11_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_12_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_13_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_14_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_15_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_16_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_17_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_18_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_19_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_20_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_21_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_22_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_23_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_24_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_25_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_26_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_27_m.lua",
+      "bin/scripts/mobile/custom_content/mobile/outbreak_undead_deathtrooper_28_m.lua"
+    ]
+  },
+  "asset_reference_scans": [
+    {
+      "seed": "object/mobile/shared_gorax.iff",
+      "archive": "patch_01.tre",
+      "direct_refs": [
+        "appearance/gorax_m.sat",
+        "clientdata/npc/client_shared_npc_gorax_m.cdf",
+        "object/mobile/skeleton/shared_simian_ape.iff"
+      ],
+      "reached": 42,
+      "missing": [
+        "sound/voice_npc_gorax_m_dmg_hvy.snd",
+        "sound/voice_npc_gorax_m_dmg_lgt.snd"
+      ]
+    },
+    {
+      "seed": "object/mobile/shared_krayt_dragon.iff",
+      "archive": "patch_00.tre",
+      "direct_refs": [
+        "appearance/krayt_dragon.sat",
+        "clientdata/creature/client_shared_cr_krayt_dragon.cdf",
+        "object/mobile/skeleton/shared_lizard_giant.iff"
+      ],
+      "reached": 39,
+      "missing": []
+    },
+    {
+      "seed": "object/mobile/shared_krayt_dragon_hue.iff",
+      "archive": "patch_01.tre",
+      "direct_refs": [
+        "appearance/krayt_dragon_hue.sat",
+        "clientdata/creature/client_shared_cr_krayt_dragon.cdf",
+        "object/mobile/shared_krayt_dragon.iff"
+      ],
+      "reached": 61,
+      "missing": []
+    },
+    {
+      "seed": "object/mobile/shared_mutant_rancor.iff",
+      "archive": "patch_01.tre",
+      "direct_refs": [
+        "appearance/rancor_hue.sat",
+        "clientdata/creature/client_shared_cr_mutant_rancor.cdf",
+        "object/mobile/skeleton/shared_rancor.iff"
+      ],
+      "reached": 35,
+      "missing": [
+        "sound/cr_huge_breath_slow.snd",
+        "sound/cr_mutant_rancor_walk.snd"
+      ]
+    },
+    {
+      "seed": "object/mobile/ep3/shared_general_grievous.iff",
+      "archive": "mtg_patch_010_object_01.tre",
+      "direct_refs": [
+        "appearance/general_grievous.sat",
+        "clientdata/npc/client_shared_general_grievous.cdf",
+        "object/mobile/skeleton/shared_humanoid.iff"
+      ],
+      "reached": 44,
+      "missing": [
+        "sound/voice_npc_human_f_dmg_hvy.snd",
+        "sound/voice_npc_human_f_dmg_lgt.snd"
+      ]
+    },
+    {
+      "seed": "object/mobile/shared_ep3_myyydril_nk3.iff",
+      "archive": "mtg_patch_010_object_01.tre",
+      "direct_refs": [
+        "appearance/nk3.sat",
+        "clientdata/droid/client_shared_ep3_myyydril_nk3.cdf",
+        "object/mobile/skeleton/shared_protocol_droid.iff"
+      ],
+      "reached": 38,
+      "missing": [
+        "sound/dro_protocol_m_hello.snd"
+      ]
+    },
+    {
+      "seed": "object/mobile/shared_exar_kun_tomb_guardian.iff",
+      "archive": "mtg_patch_010_object_01.tre",
+      "direct_refs": [
+        "appearance/hum_m.sat",
+        "clientdata/npc/client_exar_kun_tomb_guardian.cdf",
+        "object/mobile/skeleton/shared_humanoid.iff"
+      ],
+      "reached": 90,
+      "missing": [
+        "sound/voice_npc_hum_m_dmg_hvy.snd",
+        "sound/voice_npc_hum_m_dmg_lgt.snd"
+      ]
+    },
+    {
+      "seed": "object/mobile/shared_outbreak_undead_boss_f_hum_01.iff",
+      "archive": "mtg_patch_010_object_01.tre",
+      "direct_refs": [
+        "appearance/hum_f_zombie.sat",
+        "clientdata/npc/client_outbreak_undead_boss_f_hum_01.cdf",
+        "object/mobile/skeleton/shared_undead_humanoid.iff"
+      ],
+      "reached": 106,
+      "missing": []
+    },
+    {
+      "seed": "object/mobile/shared_wampa.iff",
+      "archive": "mtg_patch_022.tre",
+      "direct_refs": [
+        "appearance/wampa.sat",
+        "clientdata/creature/client_shared_bm_rancor.cdf",
+        "object/mobile/skeleton/shared_rancor.iff"
+      ],
+      "reached": 36,
+      "missing": [
+        "sound/cr_rancor_youth_attack_heavy.snd",
+        "sound/cr_rancor_youth_attack_light.snd"
+      ]
+    },
+    {
+      "seed": "object/building/heroic/shared_exar_kun_tomb.iff",
+      "archive": "mtg_patch_019.tre",
+      "direct_refs": [
+        "appearance/exar_kun_heroic.pob",
+        "object/building/base/shared_base_cave.iff"
+      ],
+      "reached": 96,
+      "missing": []
+    },
+    {
+      "seed": "object/building/kashyyyk/shared_thm_kash_myyydril_caverns.iff",
+      "archive": "mtg_patch_023.tre",
+      "direct_refs": [
+        "appearance/thm_kash_cave_myyydril_interior.pob",
+        "object/building/base/shared_base_palace.iff"
+      ],
+      "reached": 267,
+      "missing": []
+    },
+    {
+      "seed": "terrain/dathomir.trn",
+      "archive": "patch_10.tre",
+      "reached": 699,
+      "missing": [
+        "appearance/skeleton/pt_ambient_flying_narwhal1.skt",
+        "shader/dirt.sht",
+        "shader/flat.sht",
+        "shader/grass.sht",
+        "shader/lll.sht",
+        "shader/mistyfalls.sht",
+        "shader/mountain.sht",
+        "shader/rock.sht",
+        "shader/rocks.sht",
+        "shader/sand.sht"
+      ]
+    },
+    {
+      "seed": "snapshot/dathomir.ws",
+      "archive": "patch_14_00.tre",
+      "reached": 4325,
+      "missing": [
+        "appearance/godclient_cylinder_15.apt",
+        "appearance/thm_tatt_jawa_tent_small.apt",
+        "clientdata/client_shared_e3_landspeeder.cdf"
+      ]
+    },
+    {
+      "seed": "terrain/hoth.trn",
+      "archive": "mtg_patch_022.tre",
+      "reached": 78,
+      "missing": [
+        "shader/rock.sht",
+        "shader/snow.sht"
+      ]
+    },
+    {
+      "seed": "snapshot/hoth.ws",
+      "archive": "mtg_planets.tre",
+      "reached": 412,
+      "missing": []
+    }
+  ],
+  "snapshot_scans": {
+    "snapshot/dathomir.ws": {
+      "nodes": 2852,
+      "named_candidates": [],
+      "quarantine_rectangle_root_count": 10
+    },
+    "snapshot/kashyyyk_dead_forest.ws": {
+      "nodes": 2007,
+      "named_candidates": [
+        {
+          "template": "object/building/kashyyyk/shared_thm_kash_cave_myyydril_exterior.iff",
+          "id": 14913456,
+          "parent": 0,
+          "x": -264.1700439453125,
+          "y": 350.280029296875
+        },
+        {
+          "template": "object/tangible/door/shared_thm_kash_cave_myyydril_door.iff",
+          "id": 14913592,
+          "parent": 0,
+          "x": -264.969970703125,
+          "y": 354.449951171875
+        }
+      ],
+      "quarantine_rectangle_root_count": 0
+    },
+    "snapshot/kashyyyk_pob_dungeons.ws": {
+      "nodes": 853,
+      "named_candidates": [
+        {
+          "template": "object/building/kashyyyk/shared_thm_kash_myyydril_caverns.iff",
+          "id": 14400001,
+          "parent": 0,
+          "x": 0.0,
+          "y": 0.0
+        },
+        {
+          "template": "object/building/kashyyyk/shared_thm_kash_myyydril_caverns.iff",
+          "id": 14400081,
+          "parent": 0,
+          "x": 0.0,
+          "y": 600.0
+        },
+        {
+          "template": "object/building/kashyyyk/shared_thm_kash_myyydril_caverns.iff",
+          "id": 14400161,
+          "parent": 0,
+          "x": 0.0,
+          "y": 1200.0
+        },
+        {
+          "template": "object/building/kashyyyk/shared_thm_kash_myyydril_caverns.iff",
+          "id": 14400241,
+          "parent": 0,
+          "x": 0.0,
+          "y": 1800.0
+        },
+        {
+          "template": "object/building/kashyyyk/shared_thm_kash_myyydril_caverns.iff",
+          "id": 14400321,
+          "parent": 0,
+          "x": 0.0,
+          "y": 2400.0
+        },
+        {
+          "template": "object/building/kashyyyk/shared_thm_kash_myyydril_caverns.iff",
+          "id": 14400401,
+          "parent": 0,
+          "x": 0.0,
+          "y": -600.0
+        },
+        {
+          "template": "object/building/kashyyyk/shared_thm_kash_myyydril_caverns.iff",
+          "id": 14400481,
+          "parent": 0,
+          "x": 0.0,
+          "y": -1200.0
+        },
+        {
+          "template": "object/building/kashyyyk/shared_thm_kash_myyydril_caverns.iff",
+          "id": 14400561,
+          "parent": 0,
+          "x": 0.0,
+          "y": -1800.0
+        },
+        {
+          "template": "object/building/kashyyyk/shared_thm_kash_myyydril_caverns.iff",
+          "id": 14400641,
+          "parent": 0,
+          "x": 0.0,
+          "y": -2400.0
+        },
+        {
+          "template": "object/building/kashyyyk/shared_thm_kash_myyydril_caverns.iff",
+          "id": 14400721,
+          "parent": 0,
+          "x": 0.0,
+          "y": -3000.0
+        }
+      ],
+      "quarantine_rectangle_root_count": 0
+    },
+    "snapshot/yavin4.ws": {
+      "nodes": 1537,
+      "named_candidates": [
+        {
+          "template": "object/building/yavin/shared_temple_exar_kun.iff",
+          "id": 3465379,
+          "parent": 0,
+          "x": 5056.66015625,
+          "y": 5537.7900390625
+        }
+      ],
+      "quarantine_rectangle_root_count": 0
+    }
+  },
+  "limitations": [
+    "Reference scanner reports candidates, including possible optional or unused strings. Does not establish client compatibility, navigation, complete wardrobe/animation behaviour, runtime spawns or legal permission.",
+    "19 appearance templates have no verified mapping to the 19 named outdoor undead bosses.",
+    "Kashyyyk assets exist; no Kashyyyk planet block in managers/planet/planet_manager.lua."
+  ]
+}
