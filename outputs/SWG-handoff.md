@@ -94,6 +94,13 @@ ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fi
 
 ## Log
 
+### 2026-10-18 9:32 PM Claude: chain `f2ac1b6c` and O15 hook `9f64739e` swapped in (no restart)
+
+- **Owner, ~9:10 PM, on `b8b59aca` with the bend hook `525cd302`:** "lightwhip looks great, just need to be a good bit longer, and more coily it looks pretty phallic right now, ghostfire trail has weird white trails added with normal hilt, and not enough trailing on the whip. core can probably raise a smidge too. not too much". Cards: length "4-5? i want it to be able to coil at their feet with an idle animation (idle comes later on)", core "Both".
+- **Built:** ghostfire blade session `baa230f`: the tip ribbons off (they were the white streaks), the whip's ghostfire trail 2 s and 1.6x, the ghostfire core up a smidge (saber 3.5%, whip 1.5%; new ids `983bc32d` and `3df92ce3`), the whip 4.5 m; O14 `b7378ca8`, chain `f2ac1b6c`. Mirage session `d6fcc42` and `eb6e430`: the rope longer and coilier (droop, a travelling coil, looser follow, thinner and tapered, 40 segments) and the new ids; the idle coil at the feet noted for later.
+- **Owner, ~9:32 PM** (card): "Install both now (Recommended)". At 9:32 PM to 9:32 PM, under the lock, with no game window open: `SWG-client/local_planets.tre` and `/opt/swg/tre/local_planets.tre` (by rename) are `f2ac1b6c`, backups `.bak-b8b59aca`; `SWG-client/d3d9.dll` is `9f64739e`, backup `.bak-525cd302`. Run 37 keeps running.
+- **Sessions:** at the owner's word ("trim all sessions we are not using right now"), about 80 idle project sessions were archived (reopenable); the owner stopped the last few. Kept: main, ghostfire blade, mirage, light whip, Microverse processes, the README note.
+
 ### 2026-10-18 9:04 PM Claude: joint archive `b8b59aca` swapped on the client and at /opt/swg/tre (no restart)
 
 - **Owner, ~8:45 to 8:55 PM, in game on `23368576`:** "the ghostfire crystal also has no trails on the whip hilt,", "trails do not work without the hilt", and "yes, it was supposed to be tied to the crystal, go in any hilt".
