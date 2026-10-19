@@ -1,0 +1,440 @@
+diff --git a/MMOCoreORB/bin/scripts/loot/groups.lua b/MMOCoreORB/bin/scripts/loot/groups.lua
+index 40753aa..0897262 100644
+--- a/MMOCoreORB/bin/scripts/loot/groups.lua
++++ b/MMOCoreORB/bin/scripts/loot/groups.lua
+@@ -736,3 +736,5 @@ includeFile("groups/hoth/hoth_vehicle_deeds.lua")
+ --ossus sub-folder (the Ossus ghostfire quest, 17 Oct 2026)
+ includeFile("groups/ossus/ossus_ghostfire_crystal.lua")
+ includeFile("groups/ossus/ossus_ghostfire_saber.lua")
++--lightwhip sub-folder (the light whip, L1, 18 Oct 2026)
++includeFile("groups/lightwhip/lightwhip_nightsister.lua")
+diff --git a/MMOCoreORB/bin/scripts/loot/groups/lightwhip/lightwhip_nightsister.lua b/MMOCoreORB/bin/scripts/loot/groups/lightwhip/lightwhip_nightsister.lua
+new file mode 100644
+index 0000000..175f341
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/loot/groups/lightwhip/lightwhip_nightsister.lua
+@@ -0,0 +1,14 @@
++-- Light whip loot (L1, 18 Oct 2026): mostly the schematic, sometimes a finished whip. Not on any creature yet: the
++-- Nightsister placement on Dathomir is step 4 of Documentation-support/lightwhip-design.md.
++
++lightwhip_nightsister = {
++	description = "",
++	minimumLevel = 0,
++	maximumLevel = 0,
++	lootItems = {
++		{itemTemplate = "lightwhip_schematic", weight = 8000000},
++		{itemTemplate = "lightwhip", weight = 2000000}
++	}
++}
++
++addLootGroupTemplate("lightwhip_nightsister", lightwhip_nightsister)
+diff --git a/MMOCoreORB/bin/scripts/loot/items.lua b/MMOCoreORB/bin/scripts/loot/items.lua
+index a9ae9d4..2e4b869 100644
+--- a/MMOCoreORB/bin/scripts/loot/items.lua
++++ b/MMOCoreORB/bin/scripts/loot/items.lua
+@@ -2311,3 +2311,6 @@ includeFile("items/hoth/hoth_vehicle_tcg_military_transport_deed.lua")
+ --ossus sub-folder (the Ossus ghostfire quest, 17 Oct 2026)
+ includeFile("items/ossus/ossus_ghostfire_crystal.lua")
+ includeFile("items/ossus/ossus_ghostfire_saber.lua")
++--lightwhip sub-folder (the light whip, L1, 18 Oct 2026)
++includeFile("items/lightwhip/lightwhip.lua")
++includeFile("items/lightwhip/lightwhip_schematic.lua")
+diff --git a/MMOCoreORB/bin/scripts/loot/items/lightwhip/lightwhip.lua b/MMOCoreORB/bin/scripts/loot/items/lightwhip/lightwhip.lua
+new file mode 100644
+index 0000000..f2091da
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/loot/items/lightwhip/lightwhip.lua
+@@ -0,0 +1,25 @@
++-- The light whip (L1, 18 Oct 2026): a one-handed saber with a long, thin blade and its own trail
++-- (object/weapon/melee/sword/crafted_saber/sword_lightwhip.lua; client files in local_planets.tre). Like any saber it
++-- lights only with a colour crystal in it. Fixed stats: the middle of the s5 gen4 one-handed crafting ranges. The name
++-- comes from the client string file (weapon_name:sword_lightwhip), so a blank name in game means the strings did not load.
++
++lightwhip = {
++	minimumLevel = 0,
++	maximumLevel = -1,
++	customObjectName = "",
++	directObjectTemplate = "object/weapon/melee/sword/crafted_saber/sword_lightwhip.iff",
++	craftingValues = {
++		{"mindamage",150,150,0},
++		{"maxdamage",250,250,0},
++		{"attackspeed",4.3,4.3,1},
++		{"woundchance",37,37,0},
++		{"forcecost",51,51,1},
++		{"attackhealthcost",42,42,0},
++		{"attackactioncost",52,52,0},
++		{"attackmindcost",80,80,0},
++	},
++	customizationStringNames = {},
++	customizationValues = {}
++}
++
++addLootItemTemplate("lightwhip", lightwhip)
+diff --git a/MMOCoreORB/bin/scripts/loot/items/lightwhip/lightwhip_schematic.lua b/MMOCoreORB/bin/scripts/loot/items/lightwhip/lightwhip_schematic.lua
+new file mode 100644
+index 0000000..7b657e6
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/loot/items/lightwhip/lightwhip_schematic.lua
+@@ -0,0 +1,15 @@
++-- The lightwhip schematic (L1, 18 Oct 2026): teaches the lightwhip draft schematic for 3 crafts
++-- (object/tangible/loot/loot_schematic/lightwhip_schematic.lua).
++
++lightwhip_schematic = {
++	minimumLevel = 0,
++	maximumLevel = -1,
++	customObjectName = "",
++	directObjectTemplate = "object/tangible/loot/loot_schematic/lightwhip_schematic.iff",
++	craftingValues = {
++	},
++	customizationStringNames = {},
++	customizationValues = {}
++}
++
++addLootItemTemplate("lightwhip_schematic", lightwhip_schematic)
+diff --git a/MMOCoreORB/bin/scripts/managers/crafting/schematics.lua b/MMOCoreORB/bin/scripts/managers/crafting/schematics.lua
+index c4a653d..6ee57de 100644
+--- a/MMOCoreORB/bin/scripts/managers/crafting/schematics.lua
++++ b/MMOCoreORB/bin/scripts/managers/crafting/schematics.lua
+@@ -1401,6 +1401,7 @@ schematics = {
+ 	{path="object/draft_schematic/weapon/lightsaber/lightsaber_polearm_gen3.iff"},
+ 	{path="object/draft_schematic/weapon/lightsaber/lightsaber_polearm_gen4.iff"},
+ 	{path="object/draft_schematic/weapon/lightsaber/lightsaber_one_hand_gen4.iff"},
++	{path="object/draft_schematic/weapon/lightsaber/lightsaber_lightwhip.iff"}, -- light whip (L1)
+ 	{path="object/draft_schematic/weapon/lightsaber/lightsaber_two_hand_gen4.iff"},
+ 	{path="object/draft_schematic/structure/city/bank_corellia.iff"},
+ 	{path="object/draft_schematic/structure/city/bank_naboo.iff"},
+diff --git a/MMOCoreORB/bin/scripts/object/draft_schematic/weapon/lightsaber/lightsaber_lightwhip.lua b/MMOCoreORB/bin/scripts/object/draft_schematic/weapon/lightsaber/lightsaber_lightwhip.lua
+new file mode 100644
+index 0000000..faba0dd
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/draft_schematic/weapon/lightsaber/lightsaber_lightwhip.lua
+@@ -0,0 +1,82 @@
++--Copyright (C) 2010 <SWGEmu>
++
++
++--This File is part of Core3.
++
++--This program is free software; you can redistribute 
++--it and/or modify it under the terms of the GNU Lesser 
++--General Public License as published by the Free Software
++--Foundation; either version 2 of the License, 
++--or (at your option) any later version.
++
++--This program is distributed in the hope that it will be useful, 
++--but WITHOUT ANY WARRANTY; without even the implied warranty of 
++--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
++--See the GNU Lesser General Public License for
++--more details.
++
++--You should have received a copy of the GNU Lesser General 
++--Public License along with this program; if not, write to
++--the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
++
++--Linking Engine3 statically or dynamically with other modules 
++--is making a combined work based on Engine3. 
++--Thus, the terms and conditions of the GNU Lesser General Public License 
++--cover the whole combination.
++
++--In addition, as a special exception, the copyright holders of Engine3 
++--give you permission to combine Engine3 program with free software 
++--programs or libraries that are released under the GNU LGPL and with 
++--code included in the standard release of Core3 under the GNU LGPL 
++--license (or modified versions of such code, with unchanged license). 
++--You may copy and distribute such a system following the terms of the 
++--GNU LGPL for Engine3 and the licenses of the other code concerned, 
++--provided that you include the source code of that other code when 
++--and as the GNU LGPL requires distribution of source code.
++
++--Note that people who make modified versions of Engine3 are not obligated 
++--to grant this special exception for their modified versions; 
++--it is their choice whether to do so. The GNU Lesser General Public License 
++--gives permission to release a modified version without this exception; 
++--this exception also makes it possible to release a modified version 
++
++
++-- The light whip schematic (L1, 18 Oct 2026): the gen4 one-handed saber schematic making the whip. It is
++-- learnt from the lightwhip loot schematic (object/tangible/loot/loot_schematic/lightwhip_schematic.lua).
++object_draft_schematic_weapon_lightsaber_lightsaber_lightwhip = object_draft_schematic_weapon_lightsaber_shared_lightsaber_lightwhip:new {
++
++   templateType = DRAFTSCHEMATIC,
++
++   customObjectName = "Lightwhip",
++
++   craftingToolTab = 2048, -- (See DraftSchematicObjectTemplate.h)
++   complexity = 19, 
++   size = 1, 
++   factoryCrateType = "object/factory/factory_crate_weapon.iff",
++   
++   xpType = "jedi_general", 
++   xp = 0, 
++
++   assemblySkill = "jedi_saber_assembly", 
++   experimentingSkill = "jedi_saber_experimentation", 
++   customizationSkill = "jedi_customization", 
++   factoryCrateSize = 0,   
++
++   customizationOptions = {},
++   customizationStringNames = {},
++   customizationDefaults = {},
++
++   ingredientTemplateNames = {"craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n"},
++   ingredientTitleNames = {"emitter_shroud", "primary_crystal", "activator", "handgrip", "focusing_crystals", "power_field_insulator", "energizers"},
++   ingredientSlotType = {0, 1, 0, 0, 1, 0, 0},
++   resourceTypes = {"steel_duralloy", "object/tangible/component/weapon/lightsaber/shared_lightsaber_refined_crystal_pack.iff", "aluminum_titanium", "petrochem_inert_polymer", "object/tangible/component/weapon/lightsaber/shared_lightsaber_refined_crystal_pack.iff", "gas_inert_culsion", "copper_polysteel"},
++   resourceQuantities = {40, 1, 22, 28, 1, 28, 28},
++   contribution = {100, 100, 100, 100, 100, 100, 100},
++
++
++   targetTemplate = "object/weapon/melee/sword/crafted_saber/sword_lightwhip.iff",
++
++   additionalTemplates = {}
++
++}
++ObjectTemplates:addTemplate(object_draft_schematic_weapon_lightsaber_lightsaber_lightwhip, "object/draft_schematic/weapon/lightsaber/lightsaber_lightwhip.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/draft_schematic/weapon/lightsaber/objects.lua b/MMOCoreORB/bin/scripts/object/draft_schematic/weapon/lightsaber/objects.lua
+index 8ecdee4..8914995 100644
+--- a/MMOCoreORB/bin/scripts/object/draft_schematic/weapon/lightsaber/objects.lua
++++ b/MMOCoreORB/bin/scripts/object/draft_schematic/weapon/lightsaber/objects.lua
+@@ -873,3 +873,10 @@ object_draft_schematic_weapon_lightsaber_shared_lightsaber_two_hand_gen5 = Share
+ }
+ 
+ ObjectTemplates:addClientTemplate(object_draft_schematic_weapon_lightsaber_shared_lightsaber_two_hand_gen5, "object/draft_schematic/weapon/lightsaber/shared_lightsaber_two_hand_gen5.iff")
++
++-- The light whip schematic: the gen4 one-handed saber schematic, making the whip (L1, 18 Oct 2026). The .iff is in the light whip archive, local_planets.tre (client and server).
++object_draft_schematic_weapon_lightsaber_shared_lightsaber_lightwhip = SharedDraftSchematicObjectTemplate:new {
++	clientTemplateFileName = "object/draft_schematic/weapon/lightsaber/shared_lightsaber_lightwhip.iff"
++}
++
++ObjectTemplates:addClientTemplate(object_draft_schematic_weapon_lightsaber_shared_lightsaber_lightwhip, "object/draft_schematic/weapon/lightsaber/shared_lightsaber_lightwhip.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/draft_schematic/weapon/lightsaber/serverobjects.lua b/MMOCoreORB/bin/scripts/object/draft_schematic/weapon/lightsaber/serverobjects.lua
+index 1c31698..a2beecb 100644
+--- a/MMOCoreORB/bin/scripts/object/draft_schematic/weapon/lightsaber/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/object/draft_schematic/weapon/lightsaber/serverobjects.lua
+@@ -49,6 +49,7 @@ includeFile("draft_schematic/weapon/lightsaber/lightsaber_one_hand_gen1.lua")
+ includeFile("draft_schematic/weapon/lightsaber/lightsaber_one_hand_gen2.lua")
+ includeFile("draft_schematic/weapon/lightsaber/lightsaber_one_hand_gen3.lua")
+ includeFile("draft_schematic/weapon/lightsaber/lightsaber_one_hand_gen4.lua")
++includeFile("draft_schematic/weapon/lightsaber/lightsaber_lightwhip.lua") -- light whip (L1)
+ includeFile("draft_schematic/weapon/lightsaber/lightsaber_one_hand_gen5.lua")
+ includeFile("draft_schematic/weapon/lightsaber/lightsaber_polearm_gen1.lua")
+ includeFile("draft_schematic/weapon/lightsaber/lightsaber_polearm_gen2.lua")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/lightwhip_schematic.lua b/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/lightwhip_schematic.lua
+new file mode 100644
+index 0000000..0f9e533
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/lightwhip_schematic.lua
+@@ -0,0 +1,12 @@
++-- The lightwhip schematic (L1, 18 Oct 2026): a Jedi who can craft gen4 sabers learns to make the lightwhip, 3 crafts.
++
++object_tangible_loot_loot_schematic_lightwhip_schematic = object_tangible_loot_loot_schematic_shared_lightwhip_schematic:new {
++	templateType = LOOTSCHEMATIC,
++	objectMenuComponent = "LootSchematicMenuComponent",
++	attributeListComponent = "LootSchematicAttributeListComponent",
++	requiredSkill = "force_discipline_light_saber_master",
++	targetDraftSchematic = "object/draft_schematic/weapon/lightsaber/lightsaber_lightwhip.iff",
++	targetUseCount = 3
++}
++
++ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_lightwhip_schematic, "object/tangible/loot/loot_schematic/lightwhip_schematic.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/objects.lua b/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/objects.lua
+index 2015e41..ed342c9 100644
+--- a/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/objects.lua
++++ b/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/objects.lua
+@@ -4937,3 +4937,10 @@ object_tangible_loot_loot_schematic_shared_utensils_schematic = SharedTangibleOb
+ }
+ 
+ ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_utensils_schematic, "object/tangible/loot/loot_schematic/shared_utensils_schematic.iff")
++
++-- The lightwhip schematic: a handheld viewscreen like the Geonosian schematics, with its own name (L1, 18 Oct 2026). The .iff is in the light whip archive, local_planets.tre (client and server).
++object_tangible_loot_loot_schematic_shared_lightwhip_schematic = SharedTangibleObjectTemplate:new {
++	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_lightwhip_schematic.iff"
++}
++
++ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_lightwhip_schematic, "object/tangible/loot/loot_schematic/shared_lightwhip_schematic.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/serverobjects.lua b/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/serverobjects.lua
+index 842552a..0fe636f 100644
+--- a/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/serverobjects.lua
+@@ -101,6 +101,7 @@ includeFile("tangible/loot/loot_schematic/geonosian_acklay_bone_armor_schematic.
+ includeFile("tangible/loot/loot_schematic/geonosian_acklay_muscle_armor_schematic.lua")
+ includeFile("tangible/loot/loot_schematic/geonosian_reinforcement_core_schematic.lua")
+ includeFile("tangible/loot/loot_schematic/geonosian_sonic_blaster_schematic.lua")
++includeFile("tangible/loot/loot_schematic/lightwhip_schematic.lua") -- light whip (L1)
+ includeFile("tangible/loot/loot_schematic/geonosian_sword_core_schematic.lua")
+ includeFile("tangible/loot/loot_schematic/geonosian_tenloss_dxr6_schematic.lua")
+ includeFile("tangible/loot/loot_schematic/hanging_planter_schematic.lua")
+diff --git a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/objects.lua b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/objects.lua
+index 2f97932..f7798b0 100644
+--- a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/objects.lua
++++ b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/objects.lua
+@@ -5214,3 +5214,10 @@ object_weapon_melee_sword_crafted_saber_shared_sword_lightsaber_one_handed_ghost
+ }
+ 
+ ObjectTemplates:addClientTemplate(object_weapon_melee_sword_crafted_saber_shared_sword_lightsaber_one_handed_ghostfire, "object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire.iff")
++
++-- The light whip: the s5 gen4 one-handed saber template with a long, thin blade and its own trail (L1, 18 Oct 2026). The .iff is in the light whip archive, local_planets.tre (client and server).
++object_weapon_melee_sword_crafted_saber_shared_sword_lightwhip = SharedWeaponObjectTemplate:new {
++	clientTemplateFileName = "object/weapon/melee/sword/crafted_saber/shared_sword_lightwhip.iff"
++}
++
++ObjectTemplates:addClientTemplate(object_weapon_melee_sword_crafted_saber_shared_sword_lightwhip, "object/weapon/melee/sword/crafted_saber/shared_sword_lightwhip.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/serverobjects.lua b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/serverobjects.lua
+index a0a6732..7d10144 100644
+--- a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/serverobjects.lua
+@@ -100,6 +100,7 @@ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen
+ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen2.lua")
+ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen3.lua")
+ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen4.lua")
++includeFile("weapon/melee/sword/crafted_saber/sword_lightwhip.lua") -- light whip (L1)
+ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s6.lua")
+ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s6_gen1.lua")
+ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s6_gen2.lua")
+diff --git a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/sword_lightwhip.lua b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/sword_lightwhip.lua
+new file mode 100644
+index 0000000..cecdf7d
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/sword_lightwhip.lua
+@@ -0,0 +1,142 @@
++--Copyright (C) 2010 <SWGEmu>
++
++
++--This File is part of Core3.
++
++--This program is free software; you can redistribute
++--it and/or modify it under the terms of the GNU Lesser
++--General Public License as published by the Free Software
++--Foundation; either version 2 of the License,
++--or (at your option) any later version.
++
++--This program is distributed in the hope that it will be useful,
++--but WITHOUT ANY WARRANTY; without even the implied warranty of
++--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
++--See the GNU Lesser General Public License for
++--more details.
++
++--You should have received a copy of the GNU Lesser General
++--Public License along with this program; if not, write to
++--the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
++
++--Linking Engine3 statically or dynamically with other modules
++--is making a combined work based on Engine3.
++--Thus, the terms and conditions of the GNU Lesser General Public License
++--cover the whole combination.
++
++--In addition, as a special exception, the copyright holders of Engine3
++--give you permission to combine Engine3 program with free software
++--programs or libraries that are released under the GNU LGPL and with
++--code included in the standard release of Core3 under the GNU LGPL
++--license (or modified versions of such code, with unchanged license).
++--You may copy and distribute such a system following the terms of the
++--GNU LGPL for Engine3 and the licenses of the other code concerned,
++--provided that you include the source code of that other code when
++--and as the GNU LGPL requires distribution of source code.
++
++--Note that people who make modified versions of Engine3 are not obligated
++--to grant this special exception for their modified versions;
++--it is their choice whether to do so. The GNU Lesser General Public License
++--gives permission to release a modified version without this exception;
++--this exception also makes it possible to release a modified version
++
++
++-- The light whip (L1, 18 Oct 2026): the s5 gen4 one-handed saber renamed. Its client template draws a long,
++-- thin blade with a longer trail. More reach (the saber specials use the weapon's range) and weaker against
++-- armour, per the lore. Weaker blocking and the parry slip need C++ (step 2, lightwhip-design.md).
++object_weapon_melee_sword_crafted_saber_sword_lightwhip = object_weapon_melee_sword_crafted_saber_shared_sword_lightwhip:new {
++	playerRaces = {
++		"object/creature/player/bothan_male.iff",
++		"object/creature/player/bothan_female.iff",
++		"object/creature/player/human_male.iff",
++		"object/creature/player/human_female.iff",
++		"object/creature/player/ithorian_male.iff",
++		"object/creature/player/ithorian_female.iff",
++		"object/creature/player/moncal_male.iff",
++		"object/creature/player/moncal_female.iff",
++		"object/creature/player/rodian_male.iff",
++		"object/creature/player/rodian_female.iff",
++		"object/creature/player/sullustan_male.iff",
++		"object/creature/player/sullustan_female.iff",
++		"object/creature/player/trandoshan_male.iff",
++		"object/creature/player/trandoshan_female.iff",
++		"object/creature/player/twilek_male.iff",
++		"object/creature/player/twilek_female.iff",
++		"object/creature/player/wookiee_male.iff",
++		"object/creature/player/wookiee_female.iff",
++		"object/creature/player/zabrak_male.iff",
++		"object/creature/player/zabrak_female.iff"
++	},
++
++	-- RANGEDATTACK, MELEEATTACK, FORCEATTACK, TRAPATTACK, GRENADEATTACK, HEAVYACIDBEAMATTACK,
++	-- HEAVYLIGHTNINGBEAMATTACK, HEAVYPARTICLEBEAMATTACK, HEAVYROCKETLAUNCHERATTACK, HEAVYLAUNCHERATTACK
++	attackType = MELEEATTACK,
++
++	-- ENERGY, KINETIC, ELECTRICITY, STUN, BLAST, HEAT, COLD, ACID, LIGHTSABER
++	damageType = LIGHTSABER,
++
++	-- NONE, LIGHT, MEDIUM, HEAVY
++	armorPiercing = LIGHT, -- light whip: MEDIUM on the saber
++
++	-- combat_rangedspecialize_bactarifle, combat_rangedspecialize_rifle, combat_rangedspecialize_pistol, combat_rangedspecialize_heavy, combat_rangedspecialize_carbine
++	-- combat_meleespecialize_unarmed, combat_meleespecialize_twohand, combat_meleespecialize_polearm, combat_meleespecialize_onehand, combat_general,
++	-- combat_meleespecialize_twohandlightsaber, combat_meleespecialize_polearmlightsaber, jedi_general
++	xpType = "jedi_general",
++
++	-- See http://www.ocdsoft.com/files/certifications.xls
++	certificationsRequired = { "cert_onehandlightsaber_gen4" },
++	-- See http://www.ocdsoft.com/files/accuracy.xls
++	creatureAccuracyModifiers = { "onehandlightsaber_accuracy" },
++
++	-- See http://www.ocdsoft.com/files/defense.xls
++	defenderDefenseModifiers = { "melee_defense" },
++
++	-- Leave as "dodge" for now, may have additions later
++	defenderSecondaryDefenseModifiers = { "saber_block" },
++
++	-- See http://www.ocdsoft.com/files/speed.xls
++	speedModifiers = { "onehandlightsaber_speed" },
++
++	-- Leave blank for now
++	damageModifiers = { },
++
++
++	-- The values below are the default values.  To be used for blue frog objects primarily
++	healthAttackCost = 20,
++	actionAttackCost = 35,
++	mindAttackCost = 40,
++	forceCost = 40,
++
++	pointBlankRange = 0,
++	pointBlankAccuracy = 20,
++
++	idealRange = 5, -- light whip: 3 on the saber
++	idealAccuracy = 15,
++
++	maxRange = 7, -- light whip: 5 on the saber
++	maxRangeAccuracy = 5,
++
++	attackSpeed = 4.5,
++
++	woundsRatio = 37,
++
++	defenderToughnessModifiers = { "lightsaber_toughness" },
++
++	noTrade = 1,
++
++	childObjects = {
++		{templateFile = "object/tangible/inventory/lightsaber_inventory_4.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4}
++	},
++
++	numberExperimentalProperties = {1, 1, 2, 2, 2, 2, 2, 1, 1, 1},
++	experimentalProperties = {"XX", "XX", "CD", "OQ", "CD", "OQ", "CD", "OQ", "SR", "UT", "CD", "OQ", "OQ", "OQ", "OQ"},
++	experimentalWeights = {1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1},
++	experimentalGroupTitles = {"null", "null", "expDamage", "expDamage", "expDamage", "expDamage", "expEffeciency", "expEffeciency", "expEffeciency", "expEffeciency"},
++	experimentalSubGroupTitles = {"null", "null", "mindamage", "maxdamage", "attackspeed", "woundchance", "forcecost", "attackhealthcost", "attackactioncost", "attackmindcost"},
++	experimentalMin = {0, 0, 140, 230, 4.5, 25, 55, 45, 60, 95},
++	experimentalMax = {0, 0, 160, 270, 4.2, 50, 48, 40, 45, 65},
++	experimentalPrecision = {0, 0, 0, 0, 1, 0, 1, 0, 0, 0},
++	experimentalCombineType = {0, 0, 1, 1, 1, 1, 1, 1, 1, 1},
++}
++
++ObjectTemplates:addTemplate(object_weapon_melee_sword_crafted_saber_sword_lightwhip, "object/weapon/melee/sword/crafted_saber/sword_lightwhip.iff")

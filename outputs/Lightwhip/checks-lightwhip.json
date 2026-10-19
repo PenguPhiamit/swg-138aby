@@ -1,0 +1,94 @@
+{
+ "base_sha256": "892475a431ce95b4e3f83a92dad3b4a0f9774d856886e5de8f4713c3a2e4d997",
+ "base_entries": 390,
+ "out_sha256": "d424d2f66497a7c4958d40a2850454b0ad340867da491ae8fc8a032cbf92554d",
+ "out_bytes": 7074767,
+ "out_entries": 409,
+ "unchanged_entries": 386,
+ "changed": [
+  "datatables/weapon/swoosh.iff",
+  "misc/object_template_crc_string_table.iff",
+  "string/en/weapon_detail.stf",
+  "string/en/weapon_name.stf"
+ ],
+ "added": [
+  "appearance/lod/wp_mle_lightwhip.lod",
+  "appearance/mesh/wp_mle_lightwhip_l0.msh",
+  "appearance/mesh/wp_mle_lightwhip_l1.msh",
+  "appearance/mesh/wp_mle_lightwhip_l2.msh",
+  "appearance/sw_lightwhip.swh",
+  "appearance/wp_mle_lightwhip.apt",
+  "appearance/wp_mle_lightwhip_blade.lsb",
+  "effect/e_h_lightwhipblade.eft",
+  "object/draft_schematic/weapon/lightsaber/shared_lightsaber_lightwhip.iff",
+  "object/tangible/loot/loot_schematic/shared_lightwhip_schematic.iff",
+  "object/weapon/melee/sword/crafted_saber/shared_sword_lightwhip.iff",
+  "pixel_program/e_h_lightwhipblade_ps20.psh",
+  "shader/lightwhipblade.sht",
+  "shader/lightwhipblade_a.sht",
+  "shader/lightwhipblade_b.sht",
+  "shader/lightwhipblade_c.sht",
+  "shader/lightwhipblade_d.sht",
+  "string/en/craft_weapon_ingredients_d.stf",
+  "string/en/craft_weapon_ingredients_n.stf"
+ ],
+ "added_sha256": {
+  "appearance/lod/wp_mle_lightwhip.lod": "c468208265ba5c0951d9d789f13574cfbce92092425aec1e1d1b2830c1cc2f2b",
+  "appearance/mesh/wp_mle_lightwhip_l0.msh": "d4a181aeaa12da118ae0d5660cc761586d5956647fa21f293c4a78e452a84f42",
+  "appearance/mesh/wp_mle_lightwhip_l1.msh": "f29969c050f163badeb3af5989bc41d148f3de494f450f41e8dd0d7ac1dfc222",
+  "appearance/mesh/wp_mle_lightwhip_l2.msh": "ec03bfee4308548e7c389cfae48dd24a3a9acb78e5a23118d4650ee054ec3d46",
+  "appearance/sw_lightwhip.swh": "7ef46e47ed44c60a3cfc5a644ab2085c2281ce214c11a6a57e3b2b3bb2c74681",
+  "appearance/wp_mle_lightwhip.apt": "78c6b45e5cabd0a3e2052698f99d2089c691fde4c933b9d5df466209638e8d9d",
+  "appearance/wp_mle_lightwhip_blade.lsb": "0e26bfaa77e3afca98f92105ad99cf5627cf57c15d9f9c3fca9fd5ff6721d7ce",
+  "effect/e_h_lightwhipblade.eft": "285bc86fac012f87112632fc46b8f3f84812200ade8c0c595a15bb0be430e363",
+  "object/draft_schematic/weapon/lightsaber/shared_lightsaber_lightwhip.iff": "744749a808a45e89fa76861289ed76d154368abc031af8ed8dd8d9297e7d1e4f",
+  "object/tangible/loot/loot_schematic/shared_lightwhip_schematic.iff": "dfef454efe601893e90632d24abebfddbf0b78b42cd46c7826bfd35af44d4a67",
+  "object/weapon/melee/sword/crafted_saber/shared_sword_lightwhip.iff": "ee0e487281ee6e461549567e4761d8f8e7869d1bf77e0e191119603b663b6771",
+  "pixel_program/e_h_lightwhipblade_ps20.psh": "af5ed9e2cbae78c472a74268a927489ef2df7ebb7f2e352d8a5407bf94534f92",
+  "shader/lightwhipblade.sht": "90794ffc63711a4b846fd23e5133eedc7779b107d74d869ac970f7d345952b19",
+  "shader/lightwhipblade_a.sht": "96d96371ec24ba1b0a3431613978fd78f70e6c06a0e0e71ec764671c1d7b25cb",
+  "shader/lightwhipblade_b.sht": "176c2c9e2fe6d34812bc5932942b9277646f81c73299ac8b8a6b294e159dd7d7",
+  "shader/lightwhipblade_c.sht": "8103a9ac71e4a3ad3245c323b773b56af2ec2db53dcd9d81fcb81f7db159c9d4",
+  "shader/lightwhipblade_d.sht": "b6ea5fe9a5f425d5578aee12125a0d51a4c919a814a5b498e6b58562d8e42aee",
+  "string/en/craft_weapon_ingredients_d.stf": "5302598cf1628f06a9597876328d65d62f3b369cda3e3fc3be67c128f21b8a25",
+  "string/en/craft_weapon_ingredients_n.stf": "f68fb4fdcb292bcf0017199d53c03d9a560a0c18964e679011440e7ff38cff71"
+ },
+ "settings": {
+  "length": 2.5,
+  "width": 0.09,
+  "trail_seconds": 0.25
+ },
+ "hardpoints_y": {
+  "tr1e": 2.425,
+  "tr1s": 0.1258,
+  "whp1": 1.5625
+ },
+ "template_crcs": {
+  "object/weapon/melee/sword/crafted_saber/shared_sword_lightwhip.iff": "49d39c1f",
+  "object/draft_schematic/weapon/lightsaber/shared_lightsaber_lightwhip.iff": "f4f702dd",
+  "object/tangible/loot/loot_schematic/shared_lightwhip_schematic.iff": "5aac8315"
+ },
+ "pixel_program_ids": {
+  "stock": "acc853c5",
+  "o14": "7b68e0f1",
+  "whip": "cb72c453"
+ },
+ "shader_slots": 37,
+ "shader_code_sha256": "b0ddbecb349ef9239f96ba504d10aa33df434ad31ed6b7922716efbeb9817c4c",
+ "swoosh_rows": 204,
+ "crc_entries": 29372,
+ "strings": {
+  "string/en/weapon_name.stf": {
+   "sword_lightwhip": "Lightwhip"
+  },
+  "string/en/weapon_detail.stf": {
+   "sword_lightwhip": "A rare cousin of the lightsaber. Several small crystals feed a long, flexible strand of energy instead of a rigid blade, giving the wielder a reach few duelists know how to answer. It is hard to master, poor at blocking, and weaker against heavy armor than a true blade."
+  },
+  "string/en/craft_weapon_ingredients_n.stf": {
+   "lightwhip_schematic": "Lightwhip Schematic"
+  },
+  "string/en/craft_weapon_ingredients_d.stf": {
+   "lightwhip_schematic": "Notes on building a lightwhip, kept by the witches of Dathomir. A Jedi who has mastered lightsaber construction can learn to make one from them."
+  }
+ }
+}
