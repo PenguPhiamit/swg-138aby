@@ -149,6 +149,14 @@ GTRAIL_PSH = 'pixel_program/ghostfire_trail_ps20.psh'
 GTRAIL_EFT = 'effect/ghostfire_trail.eft'
 GTRAIL_SHT = 'shader/sw_ghostfire_trail.sht'
 GTRAIL_SWH = 'appearance/sw_ghostfire_trail.swh'
+# Any hilt (owner, ~8:5x PM: "yes, it was supposed to be tied to the crystal, go in any hilt"): the trail all 169 saber
+# rows share, with a program that keeps the stock trail for every other crystal and draws the strobe bars for ghostfire.
+GSABER_SOURCE = os.path.join(HERE, 'ghostfire_saber_trail_ps20.hlsl')
+GSABER_PSH = 'pixel_program/ghostfire_saber_trail_ps20.psh'
+GSABER_EFT = 'effect/ghostfire_saber_trail.eft'
+GSABER_SHT = 'shader/sw_light_saber_ghostfire.sht'
+GSABER_DDS = 'texture/sw_light_saber_ghostfire.dds'
+STOCK_SABER_SHT = 'shader/sw_light_saber_add.sht'
 WHIP_LSB = 'appearance/wp_mle_lightwhip_blade.lsb'   # the main session's light whip blade (Lightwhip/), same gap
 
 
@@ -173,17 +181,34 @@ def oil(i, u):
     return [x + (y - x) * u for x, y in zip(a, b)]
 
 
+def strobe_lit(y, h, bars, duty):
+    """Row y's bar index and how lit it is (soft bars along v, the trail's time axis)."""
+    v = (y + 0.5) / h * bars
+    i, f = int(v), v - int(v)
+    d = abs(f - 0.5) * 2                     # 0 at a bar's centre, 1 at the gap's centre
+    edge = 1 - duty
+    return i, 1.0 if d <= edge - 0.15 else 0.0 if d >= edge + 0.15 else (edge + 0.15 - d) / 0.3
+
+
+def saber_trail_texture(stock_rows, bars, duty):
+    """64x64 for the shared saber trail: the stock trail texture's alpha texel for texel (the stock look for every other
+    crystal), and the strobe bars' oil-slick colours (times how lit each row is) in the colour channels for ghostfire."""
+    h, w = len(stock_rows), len(stock_rows[0])
+    rows = []
+    for y in range(h):
+        i, lit = strobe_lit(y, h, bars, duty)
+        rows.append([tuple(int(round(c * lit * 255)) for c in oil(i, x / (w - 1))) + (stock_rows[y][x][3],)
+                     for x in range(w)])
+    return rows
+
+
 def strobe_texture(profile, bars, duty):
     """64x64: the stock saber trail's profile across u (hilt to tip) times soft bars along v (the trail's time axis),
     each bar its own oil-slick colour, so each bar can read as one copy of the blade."""
     h, w = 64, len(profile)
     rows = []
     for y in range(h):
-        v = (y + 0.5) / h * bars
-        i, f = int(v), v - int(v)
-        d = abs(f - 0.5) * 2                     # 0 at a bar's centre, 1 at the gap's centre
-        edge = 1 - duty
-        lit = 1.0 if d <= edge - 0.15 else 0.0 if d >= edge + 0.15 else (edge + 0.15 - d) / 0.3
+        i, lit = strobe_lit(y, h, bars, duty)
         row = []
         for x, p in enumerate(profile):
             r, g, b = oil(i, x / (w - 1))
@@ -329,6 +354,45 @@ def main(argv):
     for name in (GTRAIL_PSH, GTRAIL_EFT, GTRAIL_SHT, GTRAIL_SWH):
         assert trn_iff.build(trn_iff.parse(added[name])) == added[name]
 
+    # any hilt: the shared saber trail (sw_light_saber_white.swh, UseObjectHue 1 on all 169 saber rows) gets its own
+    # program in a copy of its doubled additive effect, our texture (stock alpha, strobe colours), 1.2 s and alpha 1.
+    # The program draws the stock trail over the newest 5% (0.06 s) for every other crystal, the bars for ghostfire.
+    snodes = trn_iff.parse(stock)
+    sver = snodes[0].children[0]
+    ssource = open(GSABER_SOURCE, 'rb').read().replace(b'\r\n', b'\n')
+    scode, sdis = compile_ps20(ssource)
+    for want in ('ps_2_0', 'alphaFadeOpacityHolder c7', 'diffuseMap             s0'):
+        assert want in sdis, 'saber trail program lacks %r' % want
+    sslots = int(sdis.split('approximately ')[1].split(' instruction')[0])
+    assert sslots <= 64, sslots
+    sver.children[0].data = ssource + (b'\0' if stock_src.endswith(b'\0') else b'')
+    sver.children[1].data = scode
+    added[GSABER_PSH] = trn_iff.build(snodes)
+    seft = trn_iff.parse(stock_file('effect/e_particle_emisadd_2x.eft'))
+    sppsh = [x for _, x in trn_iff.walk(seft) if not x.is_form and x.data == b'\x01pixel_program/a_modulate2x.psh\0']
+    assert len(sppsh) == 2, len(sppsh)
+    sppsh[0].data = b'\x01' + GSABER_PSH.encode() + b'\0'
+    added[GSABER_EFT] = trn_iff.build(seft)
+    ssht = trn_iff.parse(stock_file(STOCK_SABER_SHT))
+    sname = {o13.cstr(x.data): x for _, x in trn_iff.walk(ssht) if not x.is_form and x.tag == 'NAME'}
+    assert sorted(sname) == ['effect/e_particle_emisadd_2x.eft', 'texture/sw_light_saber_add.dds'], sorted(sname)
+    sname['effect/e_particle_emisadd_2x.eft'].data = GSABER_EFT.encode() + b'\0'
+    sname['texture/sw_light_saber_add.dds'].data = GSABER_DDS.encode() + b'\0'
+    added[GSABER_SHT] = trn_iff.build(ssht)
+    stock_rows = o13.dxt3_top(stock_file(o13.SRC_TRAIL_DDS))
+    added[GSABER_DDS], _ = o13.dds_argb(saber_trail_texture(stock_rows, STROBE_BARS, 0.45))
+    sswh = trn_iff.parse(stock_file(o13.SRC_SWH))
+    sptex = [x for _, x in trn_iff.walk(sswh) if not x.is_form and x.tag == '0000' and x.data.startswith(b'shader/')]
+    assert len(sptex) == 1 and o13.cstr(sptex[0].data) == STOCK_SABER_SHT
+    sptex[0].data = GSABER_SHT.encode() + sptex[0].data[sptex[0].data.index(b'\0'):]
+    sdat = [c for c in sswh[0].children[0].children if not c.is_form][-1]
+    assert sswh[0].children[0].form == '0000'
+    assert struct.unpack_from('<5f', sdat.data, 0)[3:] == (0.5, struct.unpack_from('<f', struct.pack('<f', 0.06))[0])
+    sdat.data = struct.pack('<5f', 1.0, 1.0, 1.0, 1.0, STROBE_SECONDS) + sdat.data[20:]
+    added[o13.SRC_SWH] = trn_iff.build(sswh)
+    for name in (GSABER_PSH, GSABER_EFT, GSABER_SHT, o13.SRC_SWH):
+        assert trn_iff.build(trn_iff.parse(added[name])) == added[name]
+
     # B is now a one-look diagnostic for the any-hilt trail (owner, ~8:15 PM: "being able to swap is important"): the
     # stock saber trail file itself (sw_light_saber_white.swh, the one every crafted saber shares) with only its shader,
     # colour (full) and life (1.2 s) changed, and a texture that is white for the first 8% of v, then a rainbow along
@@ -394,6 +458,10 @@ def main(argv):
 
     table = o13.swg_tables.read_dtii(base[o13.SWOOSH])
     assert [r for r in table['rows'] if r[0] == o13.SHARED] and not [r for r in table['rows'] if r[0] == SHARED_B]
+    # the Ghostfire Lightsaber is an ordinary hilt now (owner: "being able to swap is important"): the shared trail
+    a_row = [r for r in table['rows'] if r[0] == o13.SHARED]
+    assert len(a_row) == 1 and a_row[0][1:] == [o13.TRAIL_SWH, 0], a_row
+    a_row[0][1:] = [o13.SRC_SWH, 1]
     table['rows'].append([SHARED_B, TRAIL_B_SWH, 0])
     changed[o13.SWOOSH] = o13.swg_tables.write_dtii(table)
     crc = o13.swg_tables.read_cstb(base[o13.CRC])
@@ -459,6 +527,9 @@ def main(argv):
               'ghostfire_trail': {'files': [GTRAIL_SWH, GTRAIL_SHT, GTRAIL_EFT, GTRAIL_PSH], 'slots': gslots,
                                   'code_sha256': hashlib.sha256(gcode).hexdigest(), 'texture': o13.TRAIL_DDS,
                                   'seconds': STROBE_SECONDS, 'alpha': TRAIL_ALPHA},
+              'saber_trail': {'swh': o13.SRC_SWH, 'files': [GSABER_SHT, GSABER_EFT, GSABER_PSH, GSABER_DDS],
+                              'slots': sslots, 'code_sha256': hashlib.sha256(scode).hexdigest(),
+                              'seconds': STROBE_SECONDS, 'stock_share': 0.05, 'ghostfire_lightsaber_row': [o13.SRC_SWH, 1]},
               'ribbon_trail_seconds': args.trail, 'ribbon_samples': 60, 'ribbon_rgba_was': old_ribbon_rgba,
               'ribbon_rgba': {n: [round(x, 3) for x in oil(k, 0.0)] + [TRAIL_ALPHA] for k, n in enumerate(RIBBONS)}}
     with open(os.path.join(HERE, 'checks-crystal.json'), 'w', encoding='utf-8') as f:

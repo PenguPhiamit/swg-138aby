@@ -41,6 +41,20 @@ O14 `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre` = `4c5a29
 - **Mirage:** the blade's compiled code changed, so its id is now `0ea2a331` (was `fac25b60`; the whip's `238eb66a` is unchanged). Add `extra_ids=0ea2a331` to `SWG-client/mirage.ini` with this install, or the mirage stops; no proxy rebuild is needed. The ghostfire c3 values are unchanged, so `max_bright` stays.
 - **Builder fix:** the builder read its "stock" pixel program and customization table from the live client, whose `local_planets.tre` is now ours. It now reads them from the archives under it.
 
+## ~8:5x PM: the ghostfire trail in any hilt ("yes, it was supposed to be tied to the crystal, go in any hilt")
+
+The owner, after "trails do not work without the hilt": the broad swing trail showed only on the Ghostfire Lightsaber, because only its own trail row had the strobe file. The server's tip ribbons are thin, play only in combat, and don't count as the trail.
+
+**Built, not installed:** O14 `a0cca018aceaeea12a140752dbc3bed326e086957e7e368651f6726566b47522` (two builds give the same hash; it replaces `b60189b7` below and contains it). The light whip step has to be rebuilt on it (below).
+- **The shared saber trail:** `appearance/sw_light_saber_white.swh` is the trail all 169 saber rows use, with UseObjectHue 1. It now lasts 1.2 s at alpha 1, on `shader/sw_light_saber_ghostfire.sht`. That shader's effect is a copy of the stock doubled additive effect with our ps_2_0 program, `ghostfire_saber_trail_ps20.hlsl` (28 slots).
+  - **Every other crystal:** the program draws the stock result (texture × crystal colour × 2), only over the newest 5% of the trail: the stock 0.06 s, with the stock fade. Those trails should look as before.
+  - **Ghostfire:** the oil-slick strobe bars over the whole 1.2 s, in any hilt.
+- **The texture** `texture/sw_light_saber_ghostfire.dds` keeps the stock trail texture's alpha texel for texel, with the bars in the colour channels. The stock texture is white wherever it's visible; its faint edge texels darken with the alpha, and the program follows that.
+- **The Ghostfire Lightsaber** now uses the shared trail row (UseObjectHue 1) like any hilt. Its own strobe files stay in the archive, used by the whip's trail. Test saber B is unchanged.
+- **Unverified assumption:** the trail fades its vertex alpha linearly from the file's alpha to 0 over its life. The texture is uniform along the trail, so the fade has to come from the vertices, and the 7:50 PM capture shows older copies dimming. If normal crystals' trails now linger 1.2 s, the assumption is wrong. The fix then is to reinstall the previous archive (client only, no restart).
+- **Older graphics paths** (ps_1_x, fixed function) keep `a_modulate2x` on the new texture: there every crystal would show coloured bars for 1.2 s. DXVK always takes the ps_2_0 path.
+- **The light whip builder** copies `sw_light_saber_white.swh` from its base, and asserts its stock 0.06 s life. On this O14 it must read the stock file with `o14.stock_file(STOCK_SWH)`. I asked the light whip session.
+
 ## ~8:45 PM: "the ghostfire crystal also has no trails on the whip hilt"
 
 **Built, not installed (8:54 PM):** O14 `b60189b74ce2406caff787b6a8414d535393d0ea5dab554d1a68ab052663f34e`; two builds give the same hash. The light whip session is asked to rebuild its step on it, with the whip's trail row on the new ghostfire trail. Its chain hash goes to the main session.

@@ -1,9 +1,9 @@
 {
  "base_sha256": "c8a610801494690b51dd6129ef716b631e2aa0991a4db5377196f5bf96670ac9",
  "base_entries": 385,
- "out_sha256": "b60189b74ce2406caff787b6a8414d535393d0ea5dab554d1a68ab052663f34e",
- "out_bytes": 7315375,
- "out_entries": 395,
+ "out_sha256": "a0cca018aceaeea12a140752dbc3bed326e086957e7e368651f6726566b47522",
+ "out_bytes": 7326869,
+ "out_entries": 400,
  "unchanged_entries": 371,
  "changed": [
   "appearance/ghostfire_ribbon_a.swh",
@@ -25,13 +25,18 @@
  "added": [
   "appearance/sw_ghostfire_b.swh",
   "appearance/sw_ghostfire_trail.swh",
+  "appearance/sw_light_saber_white.swh",
   "customization/asset_customization_manager.iff",
+  "effect/ghostfire_saber_trail.eft",
   "effect/ghostfire_trail.eft",
   "object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire_b.iff",
+  "pixel_program/ghostfire_saber_trail_ps20.psh",
   "pixel_program/ghostfire_trail_ps20.psh",
   "shader/sw_ghostfire_b.sht",
   "shader/sw_ghostfire_trail.sht",
-  "texture/sw_ghostfire_b.dds"
+  "shader/sw_light_saber_ghostfire.sht",
+  "texture/sw_ghostfire_b.dds",
+  "texture/sw_light_saber_ghostfire.dds"
  ],
  "acm_rows": {
   "appearance/wp_mle_sword_lightsaber_blade_ghostfire.lsb": "a98a4fcc",
@@ -57,7 +62,7 @@
   "appearance/ghostfire_ribbon_h.swh": "1bd936b972287509901f16c39ed0b4a4fb9eb0d6128755e7074701896f1b3772",
   "appearance/sw_ghostfire.swh": "7ad3ced93ce257e27e18c491f29d4508a49df71d6b702e5626ed4d909bced6fd",
   "appearance/wp_mle_sword_lightsaber_blade_ghostfire.lsb": "39b63b7576a411ed3edff9196ce3fc5cba0db927230ae5c12b28dbb9ad3064bb",
-  "datatables/weapon/swoosh.iff": "6c9976f179aee2fd81a8f5ddb3b45c4eb890bcec28bd2e7f189b92e7f49995b3",
+  "datatables/weapon/swoosh.iff": "7987ec37de98d529b4574eec64befa3cf51a7bc64177b777d44c4a08e28b9a8f",
   "misc/object_template_crc_string_table.iff": "e1d09aafb1cc34b0ead7a01fca16993c3d2e6e1a4f51623aba62599e5292e37c",
   "palette/wp_lightsaber.pal": "17e77040695cf69e9152ba2e72928a94e19b254ee9d04f8428f34b95ec2175fe",
   "pixel_program/e_h_lightsaberblade_ps20.psh": "79911d141b7b5e1fcbdd8cfc6749ba7066c9ef29847867b59bb332ecb0403f89",
@@ -109,6 +114,23 @@
   "texture": "texture/sw_ghostfire.dds",
   "seconds": 1.2,
   "alpha": 1.0
+ },
+ "saber_trail": {
+  "swh": "appearance/sw_light_saber_white.swh",
+  "files": [
+   "shader/sw_light_saber_ghostfire.sht",
+   "effect/ghostfire_saber_trail.eft",
+   "pixel_program/ghostfire_saber_trail_ps20.psh",
+   "texture/sw_light_saber_ghostfire.dds"
+  ],
+  "slots": 28,
+  "code_sha256": "55bd487e365297b77deb0918882004163476d19fcaab07a65063f730110222d2",
+  "seconds": 1.2,
+  "stock_share": 0.05,
+  "ghostfire_lightsaber_row": [
+   "appearance/sw_light_saber_white.swh",
+   1
+  ]
  },
  "ribbon_trail_seconds": 1.2,
  "ribbon_samples": 60,
