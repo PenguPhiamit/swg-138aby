@@ -17,7 +17,7 @@ The stiff whip is a straight 4.5 m strand (owner, 9:10 PM, with the bend hook in
 - **Drop:** "Krayt dragons for now, the boss". Only the rotation's two krayt bosses (Ghost-Scale the Canyon Krayt, `giant_canyon_krayt_dragon`; Old Rattlebones, `krayt_dragon_ancient`), at 10% per kill.
 - **Schematic:** "Master weaponsmith +saber crafting 1 or 2 or jedi master". The skill names are found but not wired yet; see the design note.
 - **Ghostfire:** "the ghostfire almost looks better in the whip". The whip keeps its own ghostfire values (O14 `feb3bf84`'s 3.5% glow, 0.6% core) rather than O14's newer take.
-- **9:10 PM look (built by the O14 session, not installed):** 4.5 m. The ghostfire core is 1.5% (was 0.6%), so the whip program id is now `3df92ce3` (was `238eb66a`). The chain is `f2ac1b6c…` on O14 `b7378ca8`; details are in the O14 README.
+- **9:10 PM look (built by the O14 session; installed 9:32 PM as chain `f2ac1b6c`, with the bend hook `9f64739e`; backups `.bak-b8b59aca`, hook `.bak-525cd302`):** 4.5 m. The ghostfire core is 1.5% (was 0.6%), so the whip program id is now `3df92ce3` (was `238eb66a`). The chain is `f2ac1b6c…` on O14 `b7378ca8`; details are in the O14 README.
 - **Final chain for the joint swap (owner: "Wait for both"):** `b8b59aca…` on O14 `a0cca018`, which ties the ghostfire trail to the crystal in any hilt (418 entries; two builds give the same hash). Installed at 9:04 PM.
   - O14 now overrides the shared saber trail, so the builder reads the stock `sw_light_saber_white.swh` from the client's own archives.
   - O14's override stays in the chain untouched. The whip's row still points at `sw_ghostfire_trail.swh`.
