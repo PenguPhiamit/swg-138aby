@@ -94,6 +94,12 @@ ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fi
 
 ## Log
 
+### 2026-10-18 8:35 PM Claude: light whip archive `23368576` swapped on the client and at /opt/swg/tre (no restart)
+
+- **Built** (light whip session, `d8cca04`, `0fc194a`) on the owner's 8:26 PM answers: the leather hilt kept, the strand 2.1 m, no native trail (its swoosh row points at a transparent shader, so only the ghostfire crystal's tip ribbons show), whip program `238eb66a` unchanged. On O14 `4c5a29d0`: against the installed `49d6ae99` only the whip's lod, three meshes, `.lsb` and `.swh` differ, plus its new shader and texture (main session check).
+- **Owner, 8:34 PM** (cards): the schematic rule "Smith + Tech I, or LS Master" (crafting_weaponsmith_master and force_discipline_light_saber_technique_01, or force_discipline_light_saber_master); the archive "Install now". At 8:35 PM to 8:35 PM, under the lock, with no game window open: `SWG-client/local_planets.tre` and `/opt/swg/tre/local_planets.tre` (by rename) are `23368576`, with backups `.bak-49d6ae99` in both places. Run 37 keeps running.
+- **Not applied yet:** `Lightwhip/server/lightwhip-boss-drop-dev.patch` (the two krayt bosses in the rotation, 10% per kill) and the schematic rule's Lua menu (to be wired). Both need a test galaxy restart.
+
 ### 2026-10-18 8:29 PM Claude: O14 archive `49d6ae99` swapped on the client and at /opt/swg/tre (no restart)
 
 - **Owner, 8:14 PM:** "ready for capture". UM capture take 4 (8:14 to 8:15 PM, scratchpad only). Then: "the trails are too faint now, and the blade can come to where the trails are now", and "we dont see enough of all the colors". mirage.log: the mirage fires, about 1,790 ghostfire blade draws and as many mirage passes per 30 s.
