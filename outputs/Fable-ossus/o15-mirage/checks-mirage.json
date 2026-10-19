@@ -1,0 +1,56 @@
+{
+ "built": "18 Oct 2026, 6:53 PM (MSVC 14.44 x86 /MT, fxc 10.0.26100.0 ps_2_0); MSVC builds embed a timestamp, so a rebuild gives a new hash",
+ "proxy_dll": {
+  "path": "work/o15-mirage/d3d9.dll",
+  "bytes": 154624,
+  "sha256": "541505197b8e3cec3158dc68b47be90ef1b137264e3de92f3a5e5a1bd8fd1962"
+ },
+ "dxvk_chained": {
+  "source": "SWG-client/d3d9.dll (DXVK 3.1.1, x86)",
+  "sha256": "265888c31ca78dffa290c39cb7e50bfb02762590e41927906e46fb32f01497fa"
+ },
+ "blade_program_ids": {
+  "stock e_h_lightsaberblade_ps20 (installed c8a61080)": "0xacc853c5",
+  "O14 crystal-aware (892475a4)": "0x7b68e0f1"
+ },
+ "sources_sha256": {
+  "src/mirage.c": "e1ae5ce8fed195f51dc5750399fa9a0b377f8a377a7ce256051aa89c87ca1d42",
+  "src/mask_ps.hlsl": "899d53888df59794d000df939205a577126f94677d092c56a2d8dafed241c3ad",
+  "src/haze_ps.hlsl": "dfa6a677668f4ae5d3e389d854e341a5e1bcfa7f933c26ee077305fdda861bcd",
+  "src/d3d9.def": "d0028dd3bf9c37da95195d1c2bd595c928146f60875258ba611bcadbc775f601",
+  "src/blade_ids.h": "503e47ffbb3c9a960ca3183335014d23a87a0da2cf483ec1007fb920445d93e6",
+  "src/mirage_test.c": "5fcdd0996003094a170969e8c6700e943135443be1e5cc5803ec5d6deb2f0d80",
+  "mirage.ini": "f187d4d82b7a4d53a80c521fbbbf1f815f0cb6fc8881f8a966e711e99d44d106"
+ },
+ "harness": {
+  "what": "mirage_test.exe, 800x450 window, RTX 5070: striped background, opaque bar in front, ghostfire blade (dark c3, shimmer steps) left, stock red blade right, Reset at frame 20, screenshots of frames 40 and 48; every D3D call returned success in every run",
+  "changed_pixels_and_max_difference": {
+   "mirage on vs off, ghostfire half": [
+    6963,
+    142
+   ],
+   "mirage on vs off, red blade half (must be 0)": [
+    0,
+    0
+   ],
+   "strength 0 vs off, whole frame (state restored exactly; must be 0)": [
+    0,
+    0
+   ],
+   "frame 40 vs 48 with mirage, ghostfire half (the haze moves)": [
+    12292,
+    14
+   ],
+   "O14 blade with mirage vs off, red blade half (must be 0)": [
+    0,
+    0
+   ],
+   "without DXVK (system d3d9, passes through by default) vs off (must be 0)": [
+    0,
+    0
+   ]
+  },
+  "native_d3d9_finding": "with allow_native=1 on the system d3d9 every call succeeds but the haze quad draws nothing (debug_view=2 shows no pixels); so the proxy passes through when DXVK is missing",
+  "install_scripts": "install.ps1 (twice) and uninstall.ps1 run on a scratch folder holding a copy of the client DXVK d3d9.dll: DXVK renamed and back, proxy placed and removed"
+ }
+}
