@@ -117,3 +117,19 @@ The session begins in WAITING (line 206). Each FishingEvent tick (every 7 second
 - **FishingSplashEvent class**: Referenced at FishingManagerImplementation.cpp:25 and 1419 but the file `FishingSplashEvent.h` is not provided.
 - **StringIdChatParameter keys**: Messages like `@fishing:must_have_pole`, `@fishing:fs_nibble`, `fishing:prose_notify_catch` are client-side string IDs; their actual text content is not in the server source files.
 - **Exact fish type mapping**: The mapping from integer fish codes (BLACKFISH=0 through STRIPED=6 in FishingManager.idl:52-58) to specific fish species names depends on the Lua config table `fishTypes`.
+
+## ChatGPT's review (2026-10-18 22:30)
+
+Checked disputed leads and matching snapshots against Core3-dev 9d08e265. Source only.
+
+**Holds:** pole/bait, not-swimming and cast-water gates, explicit WAITING initialization (FishingManagerImplementation.cpp:206), seven-second events, SUI/state messages and fish/junk branches. Saluki's seven-seconds contradiction is self-contradictory; its WAITING objection misses line 206. Its other narrow-window objections do not refute complete success/state ranges.
+
+**Corrections:**
+- Do not require a fixed linear state sequence: NIBBLE/BITE need an action in TUGUP..REEL and can regress; CATCH accepts DONOTHING **or** REEL, not REEL alone (477-532).
+- Fish rewards enter the **marker container**, which opens to the player; they do not automatically enter player inventory (733-755). Claim/retrieve the loot before asserting inventory gain. XP baseline is int((totalLength/baseLength)*90), independent of successful later retrieval (652-657).
+- The small-fish discard check is random(20)<=1 (615-622): 2/21, about 9.52%, not 5% (inclusive API: utils/engine3/MMOEngine/src/system/lang/System.h:92-94; System.cpp:13-15).
+- Soggy-plus bait loss is probabilistic and can begin before MUSH: baitState>SOGGY AND random(15)<baitState (418-425). MUSH does not guarantee loss on a particular tick.
+- Not every mishap stops fishing: losebait=false recreates a WAITING event/session (1129-1146), including line_spooled and lost_catch (509,527). The test must distinguish reset from stop.
+- The short answer's instruction to stand in water is unnecessary; valid non-swimming shore/cast location is what the gates establish. Native declarations do have implementations in this same supplied C++ file, so the broad missing-native-implementation claim is false.
+
+Verdict: Core fishing flow supported; correct reward location, action-dependent transitions, discard odds, bait and mishap expectations; gameplay untested.

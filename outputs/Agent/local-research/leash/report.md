@@ -84,3 +84,19 @@ The source file contains no skill modifiers or stat calculations. All behavior i
 3. **What happens when the leash ends due to group change or planet switch**: The code removes the pending task and sends a message, but does not specify whether the leader's side receives any notification (inferred).
 4. **Config file location**: The comment says "config-local.lua" (line 37), but this is a C++ header; the actual Lua config loading is in an unlisted file.
 5. **Interaction with other follow-assist or pathing systems**: It is unclear whether `/leash` conflicts with or complements any existing server-side follow mechanics not described here.
+
+## ChatGPT's review (2026-10-18 22:35)
+
+Checked the matching command snapshot against Core3-dev 9d08e265. No Saluki disputed lead was listed. Source only; no player/bot commands.
+
+**Holds:** group/same-zone/online pair,2-second checks,10 m threshold,3 non-closing comparisons,512 m stop,walkability-prefix selection and building-entry check (LeashCommand.h:47-55,103-157,267-364). It is player follow assistance, not the AI monster leash.
+
+**Corrections:**
+- Code fallback is **LeashEnabled=true** (389), not disabled by default. The header comment says setting false disables it; it does not establish config-local.lua currently does so. Private live configuration was not read.
+- The first distance sample establishes lastDistance; three subsequent comparisons trigger unstick (lastDistance=-1 at42,125-134). From a new start this is normally four ticks/~8 seconds, not a guaranteed6. Exactly0.5 m progress resets the counter because comparison is strict >.
+- No client-/follow-active flag is checked; the text tells the user to keep following, while the server measures distance alone (110-135). It also checks follower combat/death/incap and either mounted, **not leader combat/death/incap** (117-118).
+- Targeting the current leader again with no name toggles off; naming them keeps it on (410-420). An invalid name while already active can resolve null and stop the current leash, rather than always show usage (417-425).
+- The endpoint may be a reachable prefix far from the leader. BEHIND is a3 m route-segment offset, not a guarantee of <=3 m final separation or facing-relative 'behind' (290-346). Door transitions validate same building and <=12 m here, not a full portal trace (173-194).
+- Follower logout removes task without a stop message (75-77); pending-task queries are internal APIs, not demonstrated bot telemetry.
+
+Verdict: Follow-assist structure holds; correct enabled fallback, initial sampling delay, /follow/busy assumptions, toggle semantics and endpoint guarantees; gameplay untested.

@@ -119,3 +119,19 @@ Hoth contains four named ice caves (frostfang_cavern, icemaw_den, snowblind_lair
 - The world spawner hoth_world.lua (referenced in hoth_regions.lua:59) is not provided; its spawn tables, lairs, herds, and patrols are unspecified.
 - No file documents how the badge bdg_thm_park_hoth_salvage (badge 141) is awarded or what it displays (scavenger_quartermaster.lua:66).
 - The lootGroup "hoth_decor_rare" contents are not defined in these files (scavenger_quartermaster.lua:65).
+
+## ChatGPT's review (2026-10-18 22:35)
+
+Checked Saluki leads and eight snapshots against current Core3-dev 9d08e265. Three supplied copies are stale: Echo Base,glacial rancor and region definitions. Source only, not a Hoth release/visibility acceptance.
+
+**Holds:** four cave sites,regular/elder420-second spawns,mynock-den position/template,300-second camp NPCs,outpost terminals and the three quartermaster reward definitions remain (hoth_ice_caves.lua; hoth_mynock_den.lua; hoth_camps.lua; scavenger_quartermaster.lua:10-96). Saluki's variable-only objections miss values supplied in the same object: mynock caveX/Z/Y at13 and rancor x/z/y/respawn at12-13.
+
+**Corrections:**
+- There are **five** named wampa boss spawns across four caves: icemaw60,snowblind89,frostfang130,patriarch159,matriarch220 in bin/scripts/screenplays/caves/hoth_ice_caves.lua. The report misassigns patriarch to the matriarch cave and omits the final matriarch.
+- Mynock list has **23 total**, including one broodmother and22 regular/greater, not23 plus a boss (bin/scripts/screenplays/poi/hoth_mynock_den.lua:17-39). It logs when cell count<11, not requires exactly11 (59-70).
+- Current glacial rancor respawn is **7200 seconds**, not1800 (bin/scripts/screenplays/poi/hoth_glacial_rancor_den.lua:12-20).
+- Current Echo Base spawns its interior population and baron (bin/scripts/screenplays/poi/hoth_echo_base.lua:17-61,72-97). Reject the proposed 'no NPCs inside/around' test; no-NPC is an old snapshot fact.
+- Named camp circles are NAMEDREGION only; the wide imperial/rebel/scavenger zones are separate SPAWNAREA entries, not the report's camp-name48-mob circles (bin/scripts/managers/planet/hoth_regions.lua:23-44). Ice-cave region now includes NOBUILDZONEAREA+HARVESTERAREA (18), contradicting no-build-rule prose.
+- Echo Base snapshot exclusion is not established by a comment about the **mynock cave**. NOSPAWN areas suppress relevant area spawners, not proof explicit screenplay objects/NPCs cannot spawn. Quartermaster mission definitions alone do not verify ThemePark dialogue, item delivery or badge/loot acceptance.
+
+Verdict: Historical content inventory needs material updates for five bosses,total mynock count,Echo population,rancor timer and region semantics; gameplay/visibility/rewards untested.

@@ -76,3 +76,19 @@ The sandbox world boss system maintains three active bosses at any time, drawn f
 - **What happens if a player disconnects before receiving credits?** The code iterates the damage dealer list at kill time (line 161); if a player is offline, `SceneObject(pPlayer):isPlayerCreature()` may fail or the credit addition may not persist. This is not addressed in these files.
 - **Can players stack credits by relogging and re-damaging?** The system does not appear to track per-player damage history across boss lifetimes; a player could potentially deal minimal damage, log out, log back in, and deal damage again to the same or another boss for repeated rewards. This behavior is not explicitly prevented.
 - **What if `getSpawnPoint` fails consistently?** The fallback at line 116 uses raw reference coordinates, but whether those are valid spawn locations (e.g., inside terrain or buildings) is unknown without additional zone data.
+
+## ChatGPT's review (2026-10-18 22:34)
+
+Checked both supplied Lua snapshots against current Core3-dev 9d08e265 (matching). No Saluki mechanic claim set for this topic. Source only; this review does not enable or test encounters.
+
+**Holds:**14 roster entries,three rotation slots, listed HAM multipliers (floor applied),25,000 bank-credit request for player damage-dealer entries,90-minute kill refill,2-minute escape refill and nearest50 m waypoints (bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua:12-37,129-177,215-240).
+
+**Corrections:**
+- Roster spans **ten planets**, not nine (22-36). Slots are a target capacity, not three bosses always alive: deaths/refill/failure create gaps.
+- Initial events are at **125,130,135 seconds**, since delay is firstSpawnDelay+slot*5 with slots1..3 (75-77), not120 then125/130.
+- At six hours an out-of-combat boss disappears immediately; the ten-minute delay is scheduled **only while in combat**, and can recur repeatedly (183-211). It is not mandatory grace after every expiry.
+- Reward eligibility is the returned damage-dealer list filtered to player creatures; the script does not prove every nearby helper or pet owner receives credit (157-167). It also does not establish a relog duplicate-payment exploit. Repeated damage before a single death does not itself create repeated reward executions; remove that speculative diagnosis pending dealer-list/observer evidence.
+- HAM multiplier applies to spawned getMaxHAM after spawn, with floor, not necessarily a fixed template numeric base independent of spawn-level randomness (129-133).
+- Snapshot presence/registerScreenPlay does not prove the running server started this screenplay or restored bosses after a restart. Fallback spawn safety, offline pay and missing-object slot recovery remain runtime/source-follow-up questions, not established failures.
+
+Verdict: Rotation/reward outline supported after correcting planet count, slot guarantees, initial delays, expiry grace and unsupported relog speculation; gameplay untested.

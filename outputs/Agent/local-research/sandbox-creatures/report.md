@@ -42,3 +42,18 @@ Since this file contains only static data, a bot test cannot verify behavior fro
 3. **How is the datapad accessed?** The mechanism for opening the spawn menu and selecting creatures is not defined here.
 4. **What happens after spawning?** Rewards, loot, boss mechanics, or special behaviors are not described in this data file.
 5. **Is the tameable flag used?** Some entries include "(tameable)" in the display name (e.g., line 6 "agrilat plumed rasp (level 8, tameable)"), but it's unclear if this affects spawn behavior or is purely informational.
+
+## ChatGPT's review (2026-10-18 22:35)
+
+Checked the supplied generated-data snapshot against Core3-dev 9d08e265 (matching), and followed its datapad consumer. No Saluki disputed lead. Source only.
+
+**Holds:** it is a static17-folder table with the stated folder counts; display strings carry level/tameable labels and template IDs. Generated-file header points to outputs/tools/sandbox_menus.py (bin/scripts/screenplays/sandbox/sandbox_creatures.lua:1-6). It contains no spawn implementation.
+
+**Corrections:**
+- This is a sequential array of folder records/subgroup records, not directly a table indexed by folder-name string. The consumer traverses these records to build menus (bin/scripts/screenplays/sandbox/sandbox_tools_datapad.lua:215-267).
+- **Folder planet does not constrain spawn planet.** spawnNear uses the player's current zone and the selected template, with no comparison to folder name (sandbox_tools_datapad.lua:302-312). Reject the report's planet-must-match setup and wrong-planet diagnosis.
+- The actual gate is privileged player and unparented/outdoors (109-121,297-312); faction/skills as independent gates are not shown. sandbox_menus.py generates data; it does not execute the runtime spawn.
+- Level/tameable text is descriptive generated metadata, not an enforcement rule or proof of a current playable pet. Template/level scaling and creature-handler gates require their own check; creation success need not imply a tameable result or an inventory change.
+- This matching generated file does not prove complete coverage of all later mobile scripts: e.g. Hoth folder13 at456-470 excludes newly added Echo NPCs. The report is a menu snapshot inventory, not a complete current-content census.
+
+Verdict: Static structure/count overview supported; correct array shape, reject planet restriction and separate display metadata from runtime behavior; gameplay untested.

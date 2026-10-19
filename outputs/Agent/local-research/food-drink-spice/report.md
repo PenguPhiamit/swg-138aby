@@ -71,3 +71,18 @@ Food and drink each have separate stomach capacities tracked on the player's gho
 3. **What specific attribute/skill modifiers do individual foods/drinks provide?** The source shows the mechanism (`modifiers` VectorMap) but the actual values depend on per-item template data (Lua files), which are not included.
 4. **How does the `EATCOMMAND.h` relate to consumption?** It only contains a stub `doQueueCommand` that checks state and locomotion masks; the actual consumption logic is in `ConsumableImplementation::handleObjectMenuSelect`. The command likely delegates to the item's radial menu handler, but the bridge is not shown.
 5. **What triggers stomach filling reduction via skills or items?** The code references a `food_reduce` instant effect (Tilla Tilla) at line 324-328, but general skill-based or passive reduction mechanics are not present in these files.
+
+## ChatGPT's review (2026-10-18 22:30)
+
+Checked Saluki lead, matching snapshots and Core3-dev 9d08e265. Source only.
+
+**Holds:** separate stomach space, species/dead/incap gates, consumption messages, item charge reduction and 120-second base spice downer with HAM floor protection and 15-second animation scheduling (ConsumableImplementation.cpp:132-178,350-390; SpiceBuffImplementation.cpp:13-51).
+
+**Corrections:**
+- Duplicate gate is hasBuff(buffCRC) && (!isAttributeEffect() || isForagedFood()) (ConsumableImplementation.cpp:149). Thus an existing **ordinary attribute** food can be reapplied; existing foraged attribute food is blocked. The report reverses this exception. Saluki flags the right issue but its paraphrase loses the !, so use the actual expression.
+- setModifiers replaces the modifier value with newNutrition for **both attribute and skill effects** whenever !isSpice() && !isForagedFood() (395-410), not only attributes. Raw template skill values are not generally what is applied.
+- Twi'lek's newDuration bonus is used for ordinary attribute/skill buffs (180-203), but the spice constructor uses duration directly (216-225); do not apply the 10% claim universally. Spice returns through its own branch before generic stomach/consume processing.
+- The downer is created only when deactivate(removeModifiers) receives true (SpiceBuffImplementation.cpp:13-31). Downtime reduction uses the named food buff's skill value and only applies when 1-mod/100 > 0 (SpiceDownerBuff.idl:26-34); >=100% does not yield a zero-duration downer here.
+- Zero charges causing an early failure is not demonstrated by a decreaseUseCount call after the effect; trace the caller/item lifecycle before using that diagnosis. EatCommand's empty handler does not establish automatic delegation to the radial implementation.
+
+Verdict: Consumption skeleton holds; fix reversed duplicate-food rule, nutrition scaling and spice duration/control-flow assumptions; gameplay untested.

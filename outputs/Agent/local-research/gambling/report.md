@@ -95,3 +95,18 @@ The gambling system supports two games: slots and roulette; sabacc is declared b
 - **Slot max bet of 3**: Slots have `maxBet = 3` hardcoded in loadTemplateData() (GamblingTerminal.idl line 234), which seems intentionally low or possibly a bug. It is unclear if this is intentional design or an error.
 - **Roulette payout multipliers**: The code shows bet targets and result messages but does not reveal the payout table (e.g., straight-up pays 35:1, red/black pays 2:1). This logic is likely in the missing `calculateOutcome` implementation.
 - **GamblingSlotPayoutSuiCallback**: Included in GamblingManagerImplementation.cpp line 21 but its header file is not provided; the payout window callback behavior is unknown.
+
+## ChatGPT's review (2026-10-18 22:36)
+
+Checked matching supplied snapshots and current Core3-dev 9d08e265, including the complete outcome implementation. No Saluki disputed lead. Source only; no wagers or game commands.
+
+**Holds:** slots/roulette capacities1/4,join20 m,bet25 m,cash debit,slot max3,roulette max10000,bet-one/max controls and scheduled state progression. Slot max3 matches the three-credit777 bonus logic, so its size is not evidence of a placeholder bug.
+
+**Corrections:**
+- **Payout implementations exist in the supplied C++ file**, not merely IDL declarations: GamblingManagerImplementation.cpp:683-870 calculates slot and roulette payouts; stopGame at623 onward and GamblingTerminalImplementation.cpp:225-258 handles leaving. Reject missing-native/link-failure diagnosis.
+- Slot triples pay bet*slot multiplier, with +500 when win==4500; mixed1/2/3 pay bet*2 (683-730). Roulette outside bets credit bet*2; straight-up credits bet*35 (752-832,865-867). These are **gross credits after stake debit**, not a promise of textbook35:1 net payout.
+- Configured slot weights sum161, but initializer sets total=-1+sum=160 and roll loops while rolledWeight>weight (281-306). Inclusive random0..160 means first bucket80 outcomes,last3,not exactly normalized79/161 and4/161. Use code-derived frequencies rather than assume textbook weighted sampling.
+- Leaving roulette removes that player/winnings but only stops the table when no players remain (GamblingTerminalImplementation.cpp:243-252). It does not end every remaining player's game.
+- Displayed bank balance does not authorize bank-funded bets; actual debit is cash (GamblingManagerImplementation.cpp:402-420). A SUI close by itself is not proof of refund, payout or removal: follow the callback/state path and balance changes.
+
+Verdict: Game/control outline supported; reject absent-payout diagnosis and correct actual gross payouts,weight boundaries and multiplayer leave behavior; gameplay untested.

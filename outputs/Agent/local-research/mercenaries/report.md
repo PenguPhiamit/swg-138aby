@@ -94,3 +94,19 @@ Manual dismissal via conversation screen "dismissed" calls `dismissAll(pPlayer)`
 - **Mercenary death**: If a mercenary dies in combat, it is removed from the alive list (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:50), but there is no code to spawn a replacement or refund. It is unclear if the player can hire another to replace a dead one immediately.
 - **Player data storage**: The mercenary IDs are stored in player string data via `readStringData`/`writeStringData` (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:41, 59), but it is not clear if this data persists across server restarts or character relogins.
 - **AI template**: The code calls `AiAgent(pMerc):setAITemplate()` with no arguments (src/bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua:86). It is unclear what AI template is applied by default and whether this function requires a parameter.
+
+## ChatGPT's review (2026-10-18 22:34)
+
+Checked the three supplied snapshots against Core3-dev 9d08e265 (matching). Saluki could not resolve the report's50 src/bin citations: actual paths start **bin/**, not src/bin/. All line references below use bin/scripts/screenplays/sandbox/sandbox_mercenaries.lua unless qualified. Source only.
+
+**Holds:** cap3 living hires,free hire code,broker ground correction,escort/follow flags,idle-only combat joining,30-second upkeep,120 m/same-zone/online retention and manual dismissal (5-31,62-168). Mobile template has level18,damage170-180,HAM range3000-3500 (bin/scripts/mobile/sandbox/sandbox_mercenaries.lua:10-16).
+
+**Corrections:**
+- No first-contract accounting or payment exists in hire (62-100): **all hires in this implementation are free**; the greeting does not establish later charges.
+- Dead or vanished mercenaries are filtered before checking the cap (39-66), so hiring a replacement is permitted immediately on the next hire attempt. The open question implying dead IDs might continue to block hires is answered by this code.
+- onOwnerCombat joins only mercenaries **not already fighting**, on DEFENDERADDED, not guaranteed every mercenary retargeting whenever the owner attacks (94-120).
+- Spawn offset is a square with each axis +/-3 m, so up to sqrt(18)~=4.24 m planar distance, not necessarily within3 m (70-73). Coordinates are world coordinates and parent0; using player's Z does not establish an interior-cell-safe spawn.
+- Upkeep is a scheduled periodic check, not a hard30-second logout cleanup guarantee if the player pointer/event disappears (128-135); it destroys living hires from world, not proof of database deletion (139-150). Line155 resets an observer **flag** but does not directly drop DEFENDERADDED. Existing queued upkeep/observer lifecycle needs runtime verification after dismissal/re-hire.
+- hire false also means spawnMobile failure (75-76), yet handler displays the same 'already got three' text (177-181). That text does not by itself prove cap reached. No broker conversation skill requirement is shown.
+
+Verdict: Hire/follow/upkeep outline holds; fix source paths, cost/death/cap, spatial/combat and observer/diagnostic assumptions; gameplay untested.

@@ -61,3 +61,17 @@ Guilds are created through a GuildTerminal by entering a name (1–25 characters
 - **Permission flags**: Methods like `hasKickPermission`, `hasDisbandPermission`, `hasSponsorPermission`, and `hasAcceptPermission` are GuildObject methods not in these files. Their logic (e.g., leader-only vs. permission-based) is unclear.
 - **Guild size defaults**: `requiredMembers = 5` and `maximumMembers = 500` are set in the GuildManager constructor (GuildManager.idl lines 57–58), but it is unknown if these can be overridden by configuration or if they apply to all guilds uniformly.
 - **SUI callbacks**: The actual callback implementations (`GuildCreateNameResponseSuiCallback`, `GuildSponsorVerifySuiCallback`, etc.) are referenced but not included, so the exact flow from dialog submission to server action is incomplete.
+
+## ChatGPT's review (2026-10-18 22:31)
+
+Checked supplied matching snapshots and Core3-dev 9d08e265, including the actual config. No Saluki disputed lead was listed. Source only.
+
+**Holds:** name/abbrev validation, creator membership/full permissions, permission-controlled kicking/leaving/disband flow and sponsor online/32 m gates (GuildManagerImplementation.cpp:524-683,1247-1312,1436-1476,2092-2130). These actions are permission-based, not exclusively leader actions.
+
+**Corrections:**
+- **Accepting sponsorship does not join the guild.** acceptSponsorshipRequest only adds the pending sponsored list (1494-1534); an actor with accept permission must then call acceptSponsoredPlayer, which adds membership, guild object and chat-room entry (1608-1670). The report's two-bot test skips this second approval and would fail correctly.
+- Capacity counts members **plus pending sponsored players** (1441), not members alone.
+- RequiredMembers/MaximumMembers are loaded from scripts/managers/guild_manager.lua (75-79); current Lua is RequiredMembers=2, MaximumMembers=500 (55-59). Constructor five-member defaults are not the active config.
+- destroyGuild is implemented in this same supplied C++ file (375 onward): chat destruction, sponsored-map cleanup, war cleanup, loaded-member guild clearing and disband mail are visible (375-440). Calling a method native in IDL does not mean absent/unimplemented. Do not diagnose silent failure on that basis. Election behavior and offline persistence still need their own acceptance tests.
+
+Verdict: Basic guild operations supported; fix two-stage membership acceptance, pending capacity and active config; reject missing-native diagnosis; gameplay untested.

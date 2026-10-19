@@ -115,3 +115,18 @@ Bounty hunting has two branches: NPC bounties (spawning a target creature) and p
 5. **ObserverEventType::PLAYERKILLED handler details**: The code for when the bounty hunter themselves is killed (handlePlayerKilled) or when the NPC target receives damage (handleNpcTargetReceivesDamage, declared at BountyMissionObjective.idl:144 but body not in provided files) is missing.
 6. **AnonymousBountyTerminals config behavior**: When true, the Seeker droid reveals the target's name; when false, it only gives distance/direction. The default value and how to toggle it are not specified in the provided files (FindTargetTask.h:136).
 7. **Group visibility disable flag**: ConfigManager reads "Core3.PlayerManager.DisableGroupVisibility" at VisibilityManager.cpp:34, but its default behavior and interaction with group members is only partially described.
+
+## ChatGPT's review (2026-10-18 22:33)
+
+Checked Saluki disputed leads, matching snapshots and current Core3-dev 9d08e265. Source only.
+
+**Holds:** level gates for droids, first five-second deployment delay (FindTargetTask.h:52), subsequent calculated search/track delays, level>2 starport movement and <256 m **currentPosition** spawn gate (BountyHunterTargetTask.h:85-116), capped skill and level-based success formula, and integer XP baseline (reward+bonus)/50. Saluki's deployment and tracking objections miss earlier lines or strip >; the original tracking paragraph says >0 correctly. Config tickRateInSeconds is a real Lua key; terminalVisThreshold is the member populated by key termThreshold (VisibilityManager.cpp:195-203).
+
+**Corrections:**
+- Status transitions to HASBIOSIGNATURESTATUS then HASTALKED are unconditional within their respective switch cases; informantLevel gates **waypoint updates**, not the transitions (BountyMissionObjectiveImplementation.cpp:214-235). The message key is @mission/mission_bounty_informant:target_location_received (261), as Saluki correctly notes.
+- Completion is on OBJECTDESTRUCTION with loot **ownership rights**, not a requirement to loot the corpse (194-199,530-547). The short answer/test must not add that extra action.
+- Visibility needs LOS as well as <=32 m and excludes god-mode witnesses (VisibilityManager.cpp:50-64). The +0.5 case is subject neutral OR witness faction is neither Imperial nor Rebel, not merely witness neutral. Increases are invoked events multiplied by visibilityMultiplier, not automatically every decay tick.
+- Success rolls random(100)<chance have chance/101 probability, not exactly chance percent; failure message suffix random(5)+1 can be 1..6 (FindTargetTask.h:78,176-194; inclusive System.h:93). Speed skill+buff sum is clamped before time calculation (205-216).
+- handlePlayerKilled and handleNpcTargetReceivesDamage are implemented in the supplied C++ at582 and556 onward; reject the missing-native-handler claims. The report is not a diagnosis of terminal offer availability.
+
+Verdict: Droid/target framework useful after correcting status gates, message, loot-rights completion, visibility and probability details; gameplay untested.

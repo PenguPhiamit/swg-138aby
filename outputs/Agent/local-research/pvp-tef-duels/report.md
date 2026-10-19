@@ -116,3 +116,18 @@ A duel starts when a player issues `/duel <target>` within 25 meters, not in a n
 5. **Missing file for `FactionManager`** – The class and its `TEFTIMER` constant are referenced but not included.
 6. **Missing file for `PvpTefRemovalTask`** – The task class is instantiated at line 2938 but its implementation is not in this range.
 7. **What happens to duel state on logout/login** – `freeDuelList` is called with `spam=false` (line 3401) during cleanup, but the trigger for that call on disconnect is not shown here.
+
+## ChatGPT's review (2026-10-18 22:30)
+
+Checked numbered snapshots and current Core3-dev 9d08e265, including the omitted constant and caller branches. No Saluki disputed claim was listed for this report; that is not a correctness guarantee. Source review only.
+
+**Holds:** mutual challenge, 25 m and no-duel/ignore gates, pending challenge cancellation, pet status updates and four timestamp families are implemented (DuelCommand.h:37-81; EndDuelCommand.h:34-83; CombatManager.cpp:3220-3488).
+
+**Corrections:**
+- Accepting a duel sends per-recipient UpdatePVPStatusMessage packets, without globally setting either creature's PvP bitmask or adding actual combat defenders (CombatManager.cpp:3240-3273). Ending removes defenders; other concurrent duels and faction attackability can remain. Do not require an empty entire duel list or globally cleared ATTACKABLE/AGGRESSIVE after ending one target.
+- TEFTIMER is defined as 300000 ms = five minutes (src/server/zone/managers/faction/FactionManager.h:22). An undefined constant would fail the build, not produce an immediate-expiry runtime branch.
+- Current hasTef() includes hasPvpTef(), hence **also PvP-area TEF** (PlayerObjectImplementation.cpp:2907-2913); the report's three-kind list is stale even relative to the supplied implementation's composed call.
+- The covert condition is faction status >= COVERT, requires targetFaction > 0 and excludes duels; the alternate overt and bounty branches also exclude duels (CombatManager.cpp:3520-3534). Ordinary neutral duel combat is not a TEF test. BH mission ownership in either direction triggers the BH branch, and PvP-area timestamp updates are at CombatManager.cpp:325-329.
+- Timer removal is scheduled only when no task is already scheduled; the code selects signed timestamp differences then llabs, not a guaranteed earliest future expiry (PlayerObjectImplementation.cpp:2970-2983). Verify actual expiry behavior separately.
+
+Verdict: Duel flow mostly supported; correct recipient-specific flags, five-minute TEF, current hasTef and trigger/test assumptions; gameplay untested.

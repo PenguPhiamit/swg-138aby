@@ -96,3 +96,19 @@ The sandbox datapad is an admin-only test tool obtained from the character build
 3. **How does `addDotState()` work internally?** The file calls it with specific parameters (lines 383–389) but the function definition is elsewhere; tick behavior, stacking rules, and removal timing are unknown from this file alone.
 4. **What exactly counts as "indoors" for the spawn gate?** The check `getParentID() ~= 0` (line 307) treats any parented object as indoors, but it is unclear if being inside a building with no explicit parent still counts.
 5. **How does the character builder terminal integration work?** Line 400 adds a radial item that delegates to `CharacterBuilderTerminal`, but that file is not included here.
+
+## ChatGPT's review (2026-10-18 22:35)
+
+Checked supplied matching Lua against Core3-dev 9d08e265 and traced the DoT binding. No Saluki disputed lead. Source only; no admin tool use or game mutations.
+
+**Holds:** privilege gate,teleport menu/outdoor spawn6 m in+x,six kit groups,partial kit accounting and eight condition actions (bin/scripts/screenplays/sandbox/sandbox_tools_datapad.lua:109-121,302-346,353-406).
+
+**Corrections:**
+- addDotState arguments are **strength30,health pool0,duration120/60,potency100,objectID0,defense0** (Lua:383-389; src/server/zone/objects/creature/LuaCreatureObject.cpp:258-271). The report swaps strength/potency into 'damage100 every30 seconds'. There is **no tick-interval parameter** here. Actual DoT cadence/resistance/application must be traced separately; the confirmation string does not prove a DoT landed.
+- Heal clears wounds/restores all9 HAM attributes and only clears entries in STATE_BITS, not every possible state bit (Lua:363-371). It does not call a DoT-list removal method, so a cleared bit alone does not prove the underlying timed effect is gone.
+- Damage halves **current** HAM, not maximum; wound writes are requests to setWounds and may be constrained downstream (374-378). Confirm actual values rather than treating a requested100 as an unconditional outcome.
+- Nonprivileged rejection is not silent: it explicitly sends the admin-only message (116-118). Menu radial visibility versus action permission are distinct (397-405).
+- 'X items given' is always sent, but ',Y failed' is conditional on failures>0 (346), not an unconditional two-count string. giveItem failure is not proved to be inventory-full only.
+- Privilege is a PlayerObject server binding, not evidenced as a playerobject.lua implementation. The current file's APIs do not establish the bot exposes all menu/state operations. Preset teleports cover listed places, not literally every enabled test planet.
+
+Verdict: Tool categories/gates hold; correct DoT parameter units, limited heal cleanup, conditional messages and effect-success assumptions; gameplay untested.

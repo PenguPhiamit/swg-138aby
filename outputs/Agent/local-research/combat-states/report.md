@@ -73,3 +73,17 @@ For knockdown and posture changes, combat_equilibrium skill mod is checked; if h
 - How knockdown duration is determined and what posture it sets (CreaturePosture::KNOCKEDDOWN is referenced in StandCommand.h:25 but not its duration).
 - The exact mechanics of `queueDizzyFallEvent()` that causes dizzied characters to fall when attempting posture changes.
 - Whether snare/root have movement speed modifiers not shown in these files.
+
+## ChatGPT's review (2026-10-18 22:30)
+
+Checked disputed Saluki leads, supplied numbered snapshots and current Core3-dev (9d08e265); current CombatManager lines have shifted by six. Paths below are MMOCoreORB-relative, with unique basenames where unambiguous. Source review only; no gameplay check.
+
+**Holds:** immunity/exclusion gates, defense /1.5, state-only accuracy, the listed buff modifiers and success/fade effects are present. The three posture commands do define MINDELTA 100/800/1200; Saluki's single-citation objection does not invalidate those definitions.
+
+**Corrections:**
+- The defense level contribution is calculated player level **minus five**, and accuracy includes stateAccuracyBonus (CombatManager.cpp:2991-3022,3062-3088). The code calls System::random(100), truncates accuracy minus defense to int, and fails on roll > calc; do not describe an assured 0-99 range. Jedi reuse that same roll for each separate Jedi modifier, rather than drawing a second roll (3098-3112).
+- effect.getStateLength() at 3121 populates the delay message; actual application calls applyEffect with state strength + bonus (3129). That citation does not establish every buff's duration. Trace the individual command effect before setting test deadlines.
+- Equilibrium's actual mod is combat_equillibrium; it is capped at 100 **before** halving (3168-3177), so the stated half-mod capped at 100 formula is wrong.
+- Stun/blind target message keys are go_stunned_single/go_blind_single, not go_dizzy_single for all three (CreatureObjectImplementation.cpp:1001-1014). Test only messages that the relevant branch sends; both parties do not receive every flytext/message.
+
+Verdict: Useful state overview after correcting level/bonus arithmetic, equilibrium, duration provenance and message expectations; gameplay untested.

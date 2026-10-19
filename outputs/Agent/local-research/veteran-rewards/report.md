@@ -89,3 +89,19 @@ The missing files that would answer these questions include:
 - `PlayerManager.cpp` (or `.cc`)
 - Lua data files defining veteran reward entries (likely in `data/veteran/` or similar)
 - PlayerObject storage for tracking claimed rewards
+
+## ChatGPT's review (2026-10-18 22:36)
+
+Checked supplied matching headers/IDL and current Core3-dev 9d08e265, following Account,PlayerManager and shared account reward data. Source only; no account-age edits or claims executed.
+
+**Holds:** account creation age in whole days,command eligibility/list flow,optional one-time reward confirmation and session tracking. AccountImplementation.cpp:174-182 divides elapsed creation seconds by86400; it is **not days spent logged in**, despite the localized message.
+
+**Corrections:**
+- Actual configured milestones start at **90 days**,then180,270,...1080,with360-day increments afterward (bin/scripts/managers/player_manager.lua:73-75). Thirty/sixty are unsupported examples, not current thresholds.
+- Confirmation is shown only for **oneTime** rewards; others generate directly (PlayerManagerImplementation.cpp:6099-6112). Fix the misspelled citation SelectVeteranRewardSui.h to SelectVeteranRewardSuiCallback.h:50.
+- Reward list includes entries with reward milestone<=eligible milestone,excluding chosen one-time templates (6033-6038), not necessarily only items from that exact day bucket.
+- Reward goes directly to inventory with **allowOverflow=true** (6175-6186), not speculative mail delivery. Failure destroys the new object and cancels. This is a concrete exception to universal no-reward-overflow claims in the container draft.
+- Milestone/template claim history is shared via GalaxyAccountInfo: PlayerObject.idl:1992-1998 delegates there; generation records the milestone (JTL special key1) at6188-6195. oneTime means suppress that template after choice; each ordinary milestone is separately consumed even for repeatable item types.
+- Yacht **announcement** checks eligibleMilestone>=180,inside the eligible branch (GetVeteranRewardTimeCommand.h:57-66), not accountAge>=180 alone or installation detection. A200-day account still eligible for its first90-day claim need not get it from that query. This message does not prove a yacht is generated for every character.
+
+Verdict: Account-age/session outline holds; correct90-day first milestone,conditional confirmation,shared claims,overflow inventory delivery and yacht-message gate; gameplay untested.

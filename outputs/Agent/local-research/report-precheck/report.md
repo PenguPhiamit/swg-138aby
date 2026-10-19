@@ -197,3 +197,17 @@ Written by the local model through `tools/agents/local/local_jobs.py`; 941 input
 - **resource-quality** `pistol_dl44.lua:126-132`: 2 files are named pistol_dl44.lua; the citation does not say which. Claim: The mindamage line is weighted CD 1, OQ 1, so 50/50. Its range is 14 to 26, precision 0 (pistol_dl44.lua:126-132).
 - **secure-trade** `src/src/server/zone/packets/trade/BeginTradeMessage.h:8-15`: no file with that name in the topic copy, Core3-dev or the bot tools. Claim: In Core3, a trade is initiated by one player sending a BeginTradeMessage containing the target player's ID to start the session (src/src/server/zone/packets/trade/BeginTradeMessage.h:8-15). The receiv
 - **travel-shuttles** `utils/engine3/MMOEngine/src/system/lang/Time.h:423-424`: no file with that name in the topic copy, Core3-dev or the bot tools. Claim: Landing window (inferred): seconds remaining = time to the next run + 1 (SDT:62-66, with Time::miliDifference = now minus t in utils/engine3/MMOEngine/src/system/lang/Time.h:423-424). By SDT:79-109, "
+
+## ChatGPT's review (2026-10-18 22:34)
+
+Reviewed this **meta-report as a lead generator**, not as approval of its 941 mechanic claims. Read the saved input/results/lines/citation-problems and compared disputed examples with Core3-dev and the individual topic reviews. Source-only; no model rerun.
+
+**Holds:** 941 input claim IDs,38 topic prefixes,14 mechanical citation problems. Raw results contain941 items:810 supported,102 not shown,28 contradicted,one blank verdict. One ID is misspelled lair-spawning#1 instead of lairs-spawning#1. precheck.py:220-231 filters unknown IDs, explaining the displayed809 supported plus one unanswered and the malformed blank category. These are bookkeeping totals, not verified accuracy.
+
+**Wrong/unsafe conclusions:**
+- The contraband timing objection trusts stale comments; actual TASKDELAY2000 plus SCANDELAY's extra1000 and timeLeft-- determine cadence (ContrabandScanSessionImplementation.cpp:144-197), not the IDL comment's10 seconds.
+- Conversation packet denial is false: NpcConversationMessage/StringList are constructed at ConversationScreen.h:179-198 and sent at198-199. Smuggler weapon-level2 objection is real (SlicingSessionImplementation.cpp:518-531); not all model flags have the same merit.
+- Missing src/src NPC citations are duplicated-prefix problems; stripping the extra src resolves real ConversationManager.cpp:20-55 and LuaConversationObserver.idl:21-31. They are not evidence files/features are absent.
+- Claims are capped40/report, supplied range capped24 lines and packed to2400 characters (outputs/tools/agents/local/precheck.py:29,171-201). Comparator symbols in angle brackets were lost in saved claims; several >/>= claims become bare numbers. Multi-part claims can therefore be incorrectly marked supported or contradicted on a partial window.
+
+Verdict: Retain as historical triage only; reject blanket accuracy/acceptance inference and use dated human topic reviews instead.

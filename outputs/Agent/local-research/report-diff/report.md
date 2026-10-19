@@ -67,3 +67,18 @@ Written by the local model through `tools/agents/local/local_jobs.py`; 6 input l
 | Trapping Skill Requirement | `trapping` skill ≥1 (line 25). | Requires `outdoors_scout_novice` skill and `trapping` skill mod >= 1. |
 | Trapping Target Conditions | Target valid creatures (line 75). | Target must be alive, attackable, not a pet, is a creature, and is a monster. |
 
+## ChatGPT's review (2026-10-18 22:34)
+
+Checked all six saved OLD/NEW inputs against corresponding report.previous.md/report.md bodies and source-corrected topic reviews. This is a **text comparison**, not validation of whichever version is newer. Source only.
+
+**Holds:** six input pairs cover creature-harvest,entertainer-buffs,factions,medic-xp-healing,missions,scout-xp-sources. Harvest/despawn specificity, changed mission formulas, added scout detail and differing faction timer prose are real drafting differences.
+
+**Corrections:**
+- Several equal statements are presented as differences: level*5+19 versus creature level*5+19,30 s versus30 seconds, and120 min10 s versus2 hours10 seconds. They do not establish changed behavior.
+- Harvest level<=5/80% HAM additions are **scenario policies**, not server harvesting prerequisites (tools/bots/scenarios/besh-harvest.py:56-63; CreatureManagerImplementation.cpp:920-1068). The table must not promote them to mechanic restrictions.
+- New scout text claiming ThrowTrapTask is missing is false: src/server/zone/objects/creature/events/ThrowTrapTask.h:190-230,270-275 contains XP behavior. A report-to-report discrepancy does not settle source truth.
+- New entertainer absolute125% cap omits faction addition; source grows duration in seconds and applies conversion/truncation, so comparing prose-equivalent durations does not validate units (EntertainingSessionImplementation.cpp:699-700,721-724; see entertainer-buffs human review).
+- New medic wound combat gate is real (HealWoundCommand.h:131-139); its location phrasing is incomplete (115-128), and the table's summarized HealDamage cooldown omits the ranged branch. Follow the dated medic review before tests use it.
+- Input is truncated to9000 characters per version and tables are also clipped (outputs/tools/agents/local/precheck.py:205-212); omitted changes are not evidence of equality. Baseline timing/config versus active configuration must be checked in source.
+
+Verdict: Useful historical change index with redundant rows and incomplete context; neither OLD nor NEW is certified by this diff; use human mechanic reviews.

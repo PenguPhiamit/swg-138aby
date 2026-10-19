@@ -106,3 +106,18 @@ Group loot rules are set by the group leader via `/grouploot` and control who ma
 - **What happens when a lottery finishes?** The server sets deny permissions to prevent theft (GroupManager.cpp.lines-596-900 lines 766-777), but there is no visible code here showing how the winner receives items or how non-winners can access remaining loot.
 - **Where is the actual `/lootall` implementation?** `LootAllCommand.h` is a stub that returns SUCCESS without doing anything (LootAllCommand.h lines 15-25). The real behavior comes from passing "all" as an argument to `/loot`, which triggers `LootCommand` to call `playerManager->lootAll()` (LootCommand.h lines 87-88, PlayerManagerImplementation.cpp.lines-4241-4306).
 - **What is the exact format of the lottery window?** The server sends an `OpenLotteryWindow` packet (GroupManager.cpp.lines-596-900 line 796), but the client-side UI and interaction model are not described in these files.
+
+## ChatGPT's review (2026-10-18 22:30)
+
+Checked supplied snapshots against current Core3-dev and followed the server lottery implementation. No Saluki disputed lead was listed. Source review only.
+
+**Holds:** leader changes rules/master, range-gated lottery/random eligibility, corpse item permissions and random per-item assignment are present (GroupManager.cpp:596-900; GroupLootTask.h:44-108). Integer base shares and randomized remainder payouts are implemented (GroupLootTask.h:174-203).
+
+**Corrections:**
+- The initial looter's force_luck increases the **shared credit pool**, not a personal bonus (GroupLootTask.h:130-153,174-203). Only player creatures within 128 m are payees, not pets or every member.
+- Credits are not always split merely by opening /loot: the ordinary open-container branch has no splitCredits call (GroupLootTask.h:97-120). Splitting is explicit on lottery creation, random distribution and loot-all paths. Assert balances after the intended path.
+- /lootall's command class is indeed a stub; the functioning route shown is /loot all (LootCommand.h:78-88; LootAllCommand.h:15-25). The short answer and proposed standalone /lootall test contradict this distinction.
+- Lottery winners are selected **server-side**, not apparently client-side: LootLotterySessionImplementation.cpp:68-116 builds candidates, selects System::random(candidates.size()-1), and calls GroupManager::transferLoot. Unselected items have deny permissions cleared (90-101).
+- The opening rule/leader citations that say lines 36-68 of the 596-900 slice mix relative and absolute numbers; use GroupManager.cpp:626 onward for rule confirmation/notifications. Full inventory leaves winner-owned items on the corpse (866-900), as correctly described.
+
+Verdict: Core item rules hold; correct shared luck, credit timing, /loot all route and server-side lottery before using the test plan; gameplay untested.

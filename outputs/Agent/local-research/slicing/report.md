@@ -92,3 +92,19 @@ Slicing is a smuggler activity that lets the player open locked containers, modi
 - How base slicing and keypad slicing differ from normal container slicing beyond the XP amount is unclear; the files reference these flags but do not show their full setup logic.
 - The exact attribute modifications applied to weapons and armor are not visible in these files.
 - The `handleSliceFailed()` implementation is native and not shown (SlicingSession.idl:106).
+
+## ChatGPT's review (2026-10-18 22:31)
+
+Checked Saluki disputed leads, matching snapshots and current Core3-dev 9d08e265. Source only.
+
+**Holds:** knife/upgrade-kit gates, sliceable or base/keypad requirement (actual citation SlicingSessionImplementation.cpp:60), two-minute terminal cooldown and XP baselines 250 container/weapon/armor,100 terminal,1000 base (471-497). Saluki's XP denials miss these award lines. Flow Analyzer really uses effectiveness: chance=random(100), then chance += chance+effectiveness, success >25 (SlicingToolImplementation.cpp:75-83), so that objection is false.
+
+**Corrections:**
+- First cable must equal firstCable, but **second must differ**, not match it twice (SlicingSessionImplementation.cpp:177-216). Knife useCharge happens on **each cable selection**, successful or failed (180,190,212,268-294), not failure only.
+- Weapon ranges are levels 2/3:10-25%,4:15-30%,5:20-35%; lower levels return (514-535). Armor begins at level3 with type-dependent ranges (614-650); the cited 542-576 is not its implementation.
+- Static loot containers and mission terminals also bypass inventory containment (78-83,168-173). The report incorrectly limits exceptions to base/keypad.
+- Container relock is implemented at 744-756, not 471-473; player loot crates instead become a new loot crate and the old object is destroyed (711-742). Relock behavior is not universal.
+- handleSliceFailed is present at 764-815 and can mark objects sliced or fail base security; failure does more than consume a charge/end. Damage/speed/armor handlers are also present (564-692); reject the missing-native-implementation open questions.
+- getSlicingSkill returns levels but its existence does not itself enforce entry permission. Use the particular object's radial/command permission gate; slicing_01 is not a proven universal prerequisite.
+
+Verdict: Substantial correction required: opposite second cable, charges, skill ranges, containment exceptions and implemented native handlers; gameplay untested.

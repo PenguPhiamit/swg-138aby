@@ -89,3 +89,18 @@ Cash tips use `/tip [player] <amount>` within 190 m, deduct cash immediately, an
 - **`GLOBALSAFETYDEPOSIT` flag:** Its definition and effect on cross-planet deposits are unclear without the header where it is declared.
 - **Transaction log details:** The `TransactionLog` constructor parameters (e.g., what `TrxCode::PLAYERTIP` vs `TrxCode::BANK` encode) are not documented in these files.
 - **String ID texts:** Several messages use string IDs (`@base_player:bank_success`, `@newbie_tutorial/system_messages:bank_info_2`) whose actual displayed text is not in the source.
+
+## ChatGPT's review (2026-10-18 22:32)
+
+Checked disputed Saluki leads, numbered snapshots and current Core3-dev 9d08e265 (bank radial/callback have since gained state/range gates). Source only.
+
+**Holds:** cash tipping 190 m and positive amount/funds/ignore gates, bank confirmation, named/look-at resolution and offline-bank routing (TipCommand.h:155-224). Saluki's cash-syntax objection conflates the explicitly cash-only subsection with the optional bank branch. Its deposit-all objection also loses the original > symbol.
+
+**Corrections:**
+- Nonempty bank **does not clear registration** on quit; empty-bank success sends destroy to the client, not deletion of the actual slotted object (current BankTerminalMenuComponent.cpp:118-137). Saluki is right about registration.
+- Current bank actions require alive/conscious and <=8 m before the radial, and submission checks again (BankTerminalMenuComponent.cpp:66-84; BankTerminalSuiCallback.h:41-57). The report's old snapshot misses these changes.
+- Bank callback transfers to **recipient bank**, not uncertain cash: TipCommandSuiCallback.h:35-67 charges amount+fee, with min 1 credit for amount<21, otherwise round(amount*0.05). Same-account waiver also requires Core3.SameAccountTipsAreFree; sharing an account alone is insufficient (41-49). Wire prose IDs differ from cash tips, and mail is sent (70-103).
+- Planet registration limits physical bank-container access, not credit deposit/withdraw (BankTerminalMenuComponent.cpp:86-96,141-160). GLOBALSAFETYDEPOSIT is false in its header:25. The withdraw-all citation should be .cpp, not .h.
+- A bank-tip test must explicitly use bank for online recipients; the setup text accidentally says to take the cash path. Balance expectations must include the rounded/minimum fee and recheck funds on confirmation.
+
+Verdict: Basic bank/tip flow supported; correct quit registration, current state/range checks, physical-versus-credit access and exact wire callback behavior; gameplay untested.

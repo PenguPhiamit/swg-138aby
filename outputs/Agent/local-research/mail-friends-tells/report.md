@@ -113,3 +113,18 @@ Tells to offline players fail silently with an "IM_OFFLINE" message; tells to ig
 - **StringIdChatParameter keys**: Message keys like `"friend_fail_is_ignored"`, `"friend_duplicate"`, `"friend_not_found"`, `"ignore_duplicate"`, `"ignore_not_found"`, and `"@ui_cmnty:friend_location_failed"` reference external string tables not included.
 - **God mode detection**: `hasGodMode()` implementation is not shown; unclear how god mode is set or cleared.
 - **Mail persistence storage**: The database schema for "mail" objects in `ObjectManager` is not defined here.
+
+## ChatGPT's review (2026-10-18 22:31)
+
+Checked Saluki lead, supplied snapshots and current Core3-dev 9d08e265, including delegated PlayerObject methods. Source only.
+
+**Holds:** tell mute/invalid/ignore/length gates, asynchronous mail and pending-ID path, 1000 friend cap and findfriend's target-permission/zone checks. Saluki is wrong that a zone check is missing: FindFriendCommand.h:71-79 explicitly rejects a null zone.
+
+**Corrections:**
+- IM_OFFLINE/IM_IGNORED/IM_SUCCESS are protocol acknowledgment codes (ChatOnSendInstantMessage), not guaranteed literal system-message text (ChatManagerImplementation.cpp:1507-1561). Invalid names are distinguished by NOAVATAR before receiver lookup. An existing loaded but offline recipient is also checked explicitly (1532).
+- findfriend requires **the target to list the requester**, not mutual friendship, and no isOnline check is explicit in this command (FindFriendCommand.h:42-79). It does return a failure message, not silently fail. Test permission direction separately.
+- IM_MAXSIZE=255 and PM_MAXSIZE=4000 are defined (src/server/chat/ChatManager.idl:99-100). Plain internal sendMail lacks the same checks as the client-facing overload; mail is neither always delivered nor universally ignore-filtered (ChatManagerImplementation.cpp:1783-1819,1888-1891). Null loaded receiver versus isOnline are separate states.
+- Remove commands delegate to methods that **do** send feedback: friend_not_found/friend_removed and ignore_not_found/ignore_removed (PlayerObjectImplementation.cpp:1462-1518,1627-1657). The test's no-feedback expectation is false.
+- God bypass is based on the **sender's** godMode in tell/mail paths, not either bot, and findfriend has no such bypass (ChatManagerImplementation.cpp:1529,1888; FindFriendCommand.h:55-69). Reading mail sets READ; don't infer a NEW-to-UNREAD transition merely from declared constants.
+
+Verdict: Useful protocol outline after correcting friendship direction, delegated feedback, constants, sender-only bypass and mail/ack guarantees; gameplay untested.

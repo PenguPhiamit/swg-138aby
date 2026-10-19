@@ -77,3 +77,19 @@ The Force-sensitive village path begins when a player meets an old man NPC who g
 - **`FsOutro:startOldMan`**, **`FsPatrol:start`**, **`FsPatrol:completeFsPatrol`**: These phase-specific screenplay objects are called but their source files are absent.
 - **Exact XP cap values** for each `fs_<category>` experience type — the code checks caps (line 283) but does not define them.
 - **How `VillageUnlockScreenPlay:` states are set to 1 or 2** — the converter comments explain the values (lines 6-9 of experience_converter.lua) but no file in this set shows where state transitions occur.
+
+## ChatGPT's review (2026-10-18 22:36)
+
+Checked all six supplied snapshots against current Core3-dev 9d08e265 (matching), with the common eligibility/unlock helper. No Saluki disputed lead. Source only; no Jedi progression or account changes.
+
+**Holds:** four rotating phases,old-man ownership dialogue,elder replacement crystal path,XP conversion ratios/caps and six-tree outro trigger appear in the supplied code.
+
+**Corrections:**
+- **Phase duration is seven days**, not three weeks: VILLAGE_PHASE_DURATION=7*24*60*60*1000; the trailing '3 weeks' comment is stale (bin/scripts/screenplays/village/village_jedi_manager_township.lua:12). Initial scheduling uses this duration; the18:00 alignment belongs to later scheduling helpers, not an unconditional first-switch wall-clock guarantee (16-52).
+- Sarguillo unlocks ranged_accuracy at **10 patrols**, not20. Twenty grants final quest completion/banner (bin/scripts/screenplays/village/convos/phase1/sarguillo_phase1_conv_handler.lua:88-110). Those are separate milestones.
+- unlockBranch sets state2 when current state0 (village_jedi_manager_common.lua:82-90); this is an actual state transition source missing from the report's open-question list. Eligibility is village-access progression bit **and completed FS_VILLAGE_ELDER**, not speculative species/faction conditions (62-67).
+- Converter entries are XP conversion **ratios**, which also serve minimum-XP listing checks. Standard XP debit is convertedXp*ratio after rounding/remainder removal and cap adjustment, not the same numerical amount as the FS XP gain (convos/convohelpers/experience_converter.lua:258-312).
+- The force_sensitive skill gate shown applies only when its name contains '0', strips the last3 characters and requires branch state>=2 (bin/scripts/managers/jedi/village_jedi_manager.lua:102-111), not every matching novice/master name indiscriminately. Unlocking is only one prerequisite; XP/skill points and other skill-tree gates still apply.
+- This is a village-path excerpt, not the complete initial Force-sensitive unlock/old-man scheduling eligibility. Elder crystal replacement does not establish the old-man grant's duplicate/inventory behavior; those separate functions need their own checks.
+
+Verdict: Material corrections required for one-week phases,10-patrol unlock,XP debit units and scoped skill eligibility; gameplay/progression untested.

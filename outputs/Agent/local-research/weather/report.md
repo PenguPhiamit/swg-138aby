@@ -76,3 +76,19 @@ WeatherMap.h uses Simplex Noise to create spatial variation across the planet. T
 - **sendWeatherTo() trigger**: The files show sendWeatherTo() sends ServerWeatherMessage packets to players, but none of these files show what event or interval triggers it to be called on connected players.
 - **WeatherMap lifecycle**: When does the current WeatherMap expire and a new one get created? The code shows endTime is set at creation (WeatherMap.h:56), but the trigger for createNewWeatherPattern() beyond the weatherChangeEvent timer is unclear.
 - **Skill mods**: No skill modifiers are mentioned in these files that affect sandstorm protection or damage mitigation beyond clothing CRC checks.
+
+## ChatGPT's review (2026-10-18 22:36)
+
+Checked Saluki disputed leads and matching snapshots against Core3-dev 9d08e265. Source only; no weather/admin commands.
+
+**Holds:** per-zone Lua settings,base plus position/time noise,scheduled pattern replacement,extreme-weather damage/blind checks and clothing CRC protection. Saluki's 'no density/seed' objection is false: printInfo delegates to WeatherMap::printInfo, which prints density,local weather,seed and time (WeatherManagerImplementation.cpp:330-339; WeatherMap.h:125-131). Out-of-window map returns0; replacement is via WeatherChangeEvent.h:26-31 and manager:120-130, not getWeatherAt itself.
+
+**Corrections:**
+- Shelter gate is **(!riding && parentID!=0) OR camp**, not 'mounted players exempt' (WeatherManagerImplementation.cpp:183). Mounts can be damaged and blown off (202-209); Saluki correctly flags the boolean mismatch, though the original KD predicate already says applicableKDChance>0.
+- Blind is applied **before clothing protection**, so fully covered does not establish blindness immunity (187-194). Damage is max(0,sandstormDamage-coverings), not negative healing (193-198).
+- KD call random(200)>198 succeeds2/201 (~0.995%) per eligible damage invocation, not an exact1% or an established fixed-time tick. sendWeatherTo applies damage before early return for unchanged weather (145-150). The report did not trace the caller cadence.
+- Stability comparisons use random(100) and strict< (108-115): stability95 threshold96 gives96/101, not96%; stability60 threshold68 gives68/101, not68%. Base probabilities are not the full local weather distribution.
+- Clothing checks are slot-specific,with Tusken robe suppressing separate leg checks and pants1/pants2 separate possibilities (213-286), not a generic one-point-any-pants rule.
+- Setting baseWeather4 does not by itself establish local currentWeather4 while a spatial map contributes (138); test the local result. No live configuration or rendering behavior was verified.
+
+Verdict: Core weather model holds after correcting mounted shelter logic,probability/cadence,protection and local-weather test assumptions; gameplay untested.

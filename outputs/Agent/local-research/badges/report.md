@@ -63,3 +63,19 @@ Badges are awarded through three main paths: entering a `BadgeActiveArea` grants
 3. **Event badge triggers**: No source code in these files shows what game events call `awardBadge` for EVENT-type badges (Badge.h line 19).
 4. **`PlayerObject::awardBadge` wrapper**: The `Badges::setBadge` method updates bitmasks and counters, but the path from `PlayerObject` to this class (e.g., whether `PlayerObject` delegates to its internal `Badges` object) is not shown in these files.
 5. **Maximum badge index**: The bitmask supports 160 badges (5 × 32 bits), but it is unclear if the datatable or game design enforces a lower limit.
+
+## ChatGPT's review (2026-10-18 22:31)
+
+Checked matching badge/area/command snapshots and current Core3-dev 9d08e265; no Saluki disputed lead for this report. Source only.
+
+**Holds:** five uint32 masks and six type counters, 0-159 representable indices, data-driven music/type, direct-award duplicate guard, BADGEAWARDED observer and the listed exact total/exploration milestone cases (Badges.h:104-127; PlayerManagerImplementation.cpp:2516-2591; BadgeActiveArea.idl:22-31).
+
+**Corrections and test limits:**
+- Re-entering a BadgeActiveArea with an owned badge is **silent** because the area skips awardBadge; prose_hasbadge is a direct duplicate-award result (BadgeActiveArea.idl:29-30 versus PlayerManagerImplementation.cpp:2527-2530).
+- A primary award can recursively award accumulation badges and increase total by more than one (2545-2586). Assert the complete delta at milestone boundaries, not always +1. Threshold checks are equality switch cases, not a generic catch-up for every already-passed threshold.
+- Badge index zero is not inherently invalid: Badges::setBadge rejects bitmaskNumber outside 0..4, not badgeId==0 (109-120). Only absence from BadgeList proves a null-definition failure (PlayerManagerImplementation.cpp:2517-2520).
+- getTypeCount belongs to the internal Badges helper; the PlayerObject-facing call shown in the award path is getBadgeTypeCount (2572). These C++/IDL APIs are not evidence the bot MCP exposes them.
+- /grantBadge is an in-game administrative queue command with a target/area syntax (GrantBadgeCommand.h:18-50), not a server-console syntax guarantee. No direct grants or game commands were executed for this review. Prefer natural area entry to test the exploration trigger.
+- No XP award is present in this award path; unrelated badge observers/content may have separate rewards. Their absence from this excerpt does not establish a global no-XP rule.
+
+Verdict: Badge storage/award mechanics largely supported; qualify duplicate-area silence, recursive count deltas, index zero and test API/command assumptions; gameplay untested.

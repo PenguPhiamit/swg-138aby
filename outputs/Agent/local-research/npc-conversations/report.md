@@ -66,3 +66,18 @@ An NPC conversation starts when a player initiates it via radial menu or command
 - **How are Lua scripts loaded and associated with templates?** `LuaConversationObserver.idl` delegates to `DirectorManager.instance()` (src/src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:24, 31), but the DirectorManager source is not included in the listed files.
 - **What is the ConversationTemplate structure?** The template stores screens and provides `getInitialScreen()` and `getScreen(screenId)` (src/server/zone/objects/creature/conversation/ConversationObserverImplementation.cpp:188, 200, 203), but its full definition is not in the provided files.
 - **How does the radial menu populate conversation options?** The client-side logic for building and displaying the radial menu with NPC conversation options is not present in these server-side files.
+
+## ChatGPT's review (2026-10-18 22:33)
+
+Checked Saluki disputed leads, supplied snapshots and current Core3-dev 9d08e265. Source only.
+
+**Holds:** session/option-link flow, native handler chaining, Lua delegation, dialog/option packets, animations and normal-versus-ship stop branches (ConversationObserverImplementation.cpp:180-240; ConversationScreen.h:178-233). Saluki's stop objection reads only the ship branch; normal NPCs send StopNpcConversation at222-223. Its packet objection ignores declarations/assembly at179-198.
+
+**Corrections:**
+- Replace duplicated src/src citation prefixes with src/. Both cited files exist at src/server/zone/managers/conversation/ConversationManager.cpp:20-58 and src/server/zone/objects/creature/conversation/LuaConversationObserver.idl:21-31. Thus precheck's eight unresolved citations are formatting failures, not absent source.
+- Personality type creates **PetTrainingConversationObserver** (ConversationManager.cpp:49-50). DEBUG_MODE prevents new observer creation only after the existing-cache lookup; it does not universally return null (20-26).
+- Null-handler redirects in runScreenHandlers are a **native C++ handler** path. LuaConversationObserver delegates to DirectorManager separately (IDL:21-31). Lines219-226 show no Lua exception handling; the proposed Lua-error diagnosis is unproven.
+- Missing next screen is handled by sendConversationScreenToPlayer's explicit null branch, rather than inferred silent no-op (ConversationObserverImplementation.cpp:237 onward). A terminal screen saves nullptr and may already drop the session (ConversationScreen.h:214-233); don't require an active session after every start/option.
+- NPC template CRC is server configuration, not a demonstrated requirement that a client sends that same CRC. Dialog and StringList are conversation packets, not ordinary system-chat messages; screen ID/animation visibility must be supported by the actual bot protocol before tests rely on it.
+
+Verdict: Conversation skeleton supported; repair paths and qualify handler/error, cache, terminal-session and bot-observability claims; gameplay untested.

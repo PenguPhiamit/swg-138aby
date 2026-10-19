@@ -64,3 +64,19 @@ A player's inventory is a volume container that limits items by counting entries
 - **Nested container limits**: The code checks that no ancestor has `ContainerType::NONE` (ContainerComponent.cpp:104-111), but there is no logic here for propagating a parent container's item count into a child container's limit. Whether nested containers share or inherit limits is not answered by these files.
 - **Exact error code enum**: The file `TransferErrorCode.h` is included (ContainerComponent.cpp:18) but not provided; the numeric values of `CONTAINERFULL`, `SLOTOCCUPIED`, etc., are unknown.
 - **Encumbrance interaction**: `PlayerContainerComponent::canAddObject` calls `checkEncumbrancies` for armor (PlayerContainerComponent.cpp:63), which may impose additional restrictions beyond the item-count limit, but the encumbrance calculation logic is not in these files.
+
+## ChatGPT's review (2026-10-18 22:32)
+
+Checked Saluki disputed leads and matching snapshots against Core3-dev 9d08e265. Source only.
+
+**Holds:** generic immediate-child volume limit, containment-type validation, occupied equipment slots and error forwarding (ContainerComponent.cpp:66-149; TransferItemMiscCommand.h:292-307). Saluki incorrectly rejects container03 merely because the caller forwards errorDescription: the callee sets that exact value at 147. container28 is likewise set after validationError at 114-122, and maxDistance really is 16.5 (TransferItemMiscCommand.h:195).
+
+**Corrections:**
+- MOVEOUT/MOVEIN failures at TransferItemMiscCommand.h:150-153,335-338 log/abort without sending perm_no_move. That message is explicit for MOVECONTAINER at 132-135. Saluki is right to distinguish these.
+- Destination MOVEIN is checked **after canAddObject**, not before all limit checks (295 versus335). No universal permission-first ordering follows.
+- transferObject's !allowOverflow && full branch enforces the limit and returns false; it does not bypass it (ContainerComponent.cpp:303-305). canAddObject and direct transfer are distinct layers.
+- These files establish the generic local container check, not an absolute guarantee that every loot/reward caller forbids overflow or that recursive inventory checks are absent elsewhere. The short answer's universal no-bypass claim exceeds the evidence and conflicts with its own open question. Trace each reward caller and check its return value.
+- Range has root/building/ship/cell-dependent branches, not just a single destination-distance rule (TransferItemMiscCommand.h:190-285). Equipment validation delegates to the generic layer (PlayerContainerComponent.cpp:114); those player slots are not the same object as the volume inventory.
+- C++ canAddObject/removeObject are server APIs, not demonstrated bot control methods. Moving items through normal authorized commands should verify both old/new containment; raw removeObject is not an adequate end-to-end inventory test.
+
+Verdict: Generic capacity/error mechanism holds; correct permission order/messages and overflow wording, and reject universal reward/nesting conclusions; gameplay untested.

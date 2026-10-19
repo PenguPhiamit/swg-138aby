@@ -92,3 +92,19 @@ Both designer and target receive `ImageDesignStartMessage` packets containing th
 4. **Palette validation logic**: The `validatePalette` function in ImageDesignManager.cpp has commented-out palette data retrieval and skill-level-based index limits (lines 508-521). It is unclear whether palette colors are validated server-side or left entirely to the client.
 5. **Missing file for palette data**: The commented code references `CustomizationIdManager::instance()->getPaletteData(paletteName)` (line 509), but there is no evidence in these files that palette data is loaded or used. The actual palette validation behavior is unclear without access to `CustomizationIdManager`.
 6. **Default timeout rationale**: The 30-second default timeout (ImageDesignSession.idl:108) seems very short for a session where the client may take longer to configure changes. It is unclear if this is a safety measure, a placeholder, or if the client resets it during interaction.
+
+## ChatGPT's review (2026-10-18 22:32)
+
+Checked Saluki disputed leads, matching snapshots and current Core3-dev 9d08e265. Source only.
+
+**Holds:** entertainer/group/target checks, customization skill gates, hair creation validation and cash-first payment are implemented. XP baselines 100 cosmetic/holo,300 physical,2000 successful migration and half for self-design exist (ImageDesignSessionImplementation.cpp:198-204,268-307); Saluki's XP objection is false. Hair creation/removal/100 ms deferred slot transfer is at ImageDesignManager.cpp:396-475.
+
+**Corrections:**
+- Payment is **max(requiredPayment,offeredPayment)**, not min (ImageDesignSessionImplementation.cpp:326-331); Saluki is right.
+- Cross-player commit requires both designer acceptance **and target acceptance**, plus payment success (175-188). Designer acceptance alone does not apply changes.
+- Start messages use each recipient's tent ID, not necessarily identical data (53-98). Both salon IDs gate initial UI eligibility/position observers. But the actual migration predicate checks the **designer twice**, not target, and requires an existing target MIGRATESTATS session; it does not start one (198-204). Saluki correctly identifies the duplicated-designer check. This is source behavior, not proof of safe client reachability.
+- Four-minute anti-bypass applies only when designer!=target (138-147). A 30-second event is scheduled by queueIdTimeoutEvent, not automatically at session creation (104 versus ImageDesignSession.idl:99-108). The accepted/waiting branch schedules 120 seconds (184-185).
+- checkDequeueEvent returns if either party is outside a salon; it **dequeues the timeout when both are inside**, not immediately cancels on leaving (363-382). sessionTimeout has separate conditions (385-410). Reject the report's leave-salon and default-start-timeout guarantees.
+- Group mismatch sends not_in_same_group (ImagedesignCommand.h:60-70); calling it silent contradicts the same report's message section.
+
+Verdict: Customization/XP skeleton holds; correct maximum payment, bilateral acceptance and actual salon/session/timer predicates; gameplay untested.

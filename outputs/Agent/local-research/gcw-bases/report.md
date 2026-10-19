@@ -139,3 +139,19 @@ A faction leader can call `resetVulnerability()` to force a new cycle early:
 6. **BaseShutdownTask completion**: The task that runs after the 60-second delay is not in the provided files; we assume it calls `scheduleBaseDestruction()`, but this is inferred.
 7. **`isFacilityRebooting()` implementation**: Native at line 243; unclear if it checks state == `REBOOTSEQUENCE` or a separate timer.
 8. **Exact terminal interaction flow**: The menu/SUI flow for selecting bands and initiating shutdown is not visible in these files; the client-side protocol is unknown.
+
+## ChatGPT's review (2026-10-18 22:33)
+
+Checked supplied matching snapshots and current Core3-dev 9d08e265, including the HQ radial and task/callback. No Saluki disputed lead was listed. Source only.
+
+**Holds:** vulnerability task cycle, two-stage uplink game, countdown scheduling, defender cancellation/reboot, static flip observer and player-base destruction are present (GCWManagerImplementation.cpp:973-1054,1506-1538,2153-2248,2302-2325).
+
+**Corrections:**
+- Active Lua vulnerabilityDuration is **10800 seconds = three hours**, not the IDL fallback two hours; frequency172800, destruction600 and overtCooldown300 are configured (bin/scripts/managers/gcw_manager.lua:5-8,26,54; GCWManagerImplementation.cpp:92-104).
+- **Jamming alone cannot start attacker overload.** HQMenuComponent.cpp:74-76,166-175 requires power-overloaded state and outdoors_squadleader_novice. Intermediate security/DNA/power progression is omitted. The report's test is therefore incomplete.
+- startAbortSequenceDelay/BaseShutdownTask is the **defender abort** confirmation path, not attacker detonation initiation: after60 seconds it opens confirmation (BaseShutdownTask.h:38-78), and BaseShutdownSuiCallback.h:53 calls abortShutdownSequence. Attacker uses ShutdownSequenceTask from HQMenuComponent.cpp:174. Correct this reversed flow before writing scenarios.
+- Non-OVERT bases are treated vulnerable; they do spawn terminals and can reset the uplink after24 hours. Non-OVERT alone is not a reason all mechanics are skipped (GCWManagerImplementation.cpp:1247,1524-1531).
+- canUseTerminals is implemented, requires alive/conscious, same cell, <=5 m and overt status for PvP/covert-or-higher for PvE, unless privileged after spatial/state checks (1394-1428). areOpposingFactions is both nonzero and unequal (1431-1435). State helpers and terminal spawning are implemented in this same file (1260-1357,3580 onward), not missing because IDL says native.
+- A refunded base unit is placement capacity; no deed/item/credit refund is shown (2229-2248). Static faction flip requires its observer implementation; notification alone is not proof the faction changed.
+
+Verdict: Reject the shutdown test as written: attacker/defender paths are reversed, prerequisite stages omitted and active duration wrong; retain corrected lifecycle facts; gameplay untested.

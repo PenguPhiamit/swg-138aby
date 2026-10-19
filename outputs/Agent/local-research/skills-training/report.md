@@ -118,3 +118,18 @@ The provided files do **not** contain trainer dialogue or system messages for pr
 4. **What is the maximum skill-point cap beyond the default 250?** The default comes from config key `Core3.Sandbox.SkillPoints` (line 428), but there is no visible per-skill or global cap override in these files.
 5. **How does `JediManager::canLearnSkill` and `canSurrenderSkill` work?** These are delegated to a separate manager not included here; the exact Jedi-tree rules are opaque.
 6. **What happens with the "apprenticeshipEnabled" flag?** It is loaded from `scripts/managers/skill_manager.lua` (line 63) but never used in these files. Its effect is unknown without that Lua file or other C++ code.
+
+## ChatGPT's review (2026-10-18 22:32)
+
+Checked Saluki leads, supplied snapshots and current Core3-dev 9d08e265. Source only.
+
+**Holds:** species/admin/prerequisite/Jedi gates, XP >= cost and free-points checks, normal XP/point debit, modifiers/abilities/schematics, level/Force updates and surrender dependencies (SkillManager.cpp:335-482,504-691,839-952). Saluki's XP contradiction strips the original >=; rejection on < is exactly equivalent. XP defaults do come from xp_limits.iff (203-227), so a short single-line citation alone is not a refutation.
+
+**Corrections:**
+- Re-awarding an owned skill returns **false at canLearnSkill**, called at353 before the later return-true check at358. The apparently idempotent comment/branch is unreachable in this normal route (353-359,847-849). Surrender of an absent skill separately returns true (510-512).
+- XP debit is skipped with noXpRequired; recursively awarding prerequisites is another explicit option (346-371). A test must specify normal trainer versus privileged/admin award, rather than universally expect a debit.
+- Privilege bypass at944 comes **after** admin/species/prerequisite/Jedi-state checks; it bypasses the later JediManager gate, not XP/free points or every earlier requirement (899-952).
+- This is a SkillManager/surrender overview, not a verified **trainer purchase** flow: trainer dialogue, trainer eligibility and credit handling remain unreviewed here. Missing those from a limited source bundle does not establish no credit costs or absent training logic.
+- FindMyTrainer is a Jedi-specific waypoint lookup, not a general profession trainer locator, as the report correctly qualifies; its internal APIs and the manager APIs are not automatically available through bot MCP.
+
+Verdict: Skill mutation mechanics mostly supported; fix owned-skill return path and qualify award options/privilege; trainer purchase/credit behavior remains unverified and gameplay untested.

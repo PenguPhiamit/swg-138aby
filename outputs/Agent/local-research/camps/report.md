@@ -146,3 +146,19 @@ Available by interacting with the camp terminal within 16 meters (CampTerminalMe
 - **What are the exact noBuildRadius values for different terrain/planet types?** The code uses planetManager->isCampingPermittedAt() and object templates' getNoBuildRadius(), but the underlying logic is in missing files.
 - **How do visitors.size() count work exactly?** Visitors are added on notifyEnter (CampSiteActiveAreaImplementation.cpp:102-103) but there is no corresponding removal on exit, so the count may accumulate incorrectly over time.
 - **What happens to skill mods when a player exits the camp?** removeTemplateSkillMods is called (CampSiteActiveAreaImplementation.cpp:124), but without seeing that function's implementation, we cannot confirm what is removed or restored.
+
+## ChatGPT's review (2026-10-18 22:30)
+
+Checked Saluki disputed claims against matching snapshots and current Core3-dev 9d08e265. Source only.
+
+**Holds:** placement skill >= required, combat/cell/posture/mount/city/water/proximity gates, template modifiers on enter/exit, unique visitors, per-heal XP pool and terminal ownership options. Saluki's equality and abandonment-scheduling objections are wrong: the report says >= and notifyExit explicitly checks !abandonTask->isScheduled() (CampKitMenuComponent.cpp:95-121; CampSiteActiveAreaImplementation.cpp:135-148). Full ranges also show the named fire, timer and terminal operations.
+
+**Corrections:**
+- The kit checks standing posture, not zero movement speed (CampKitMenuComponent.cpp:118). The suggested building-too-close test must be <=100 m, not >100 (166).
+- DESPAWNTIME is total lifetime from scheduling, not 55 minutes of inactivity. startTasks schedules both tasks; owner entry cancels abandonment (CampSiteActiveAreaImplementation.cpp:42-61,84-91).
+- Abandonment reschedules despawn for min(55 minutes/6, remaining original lifetime), not always another 9.17 minutes (212-217).
+- **Abandoned camps award no XP**: the entire award block requires !abandoned (234-254). The displayed formula also truncates each contribution separately; campXp/30 is integer division. Include downstream award modifiers before asserting exact player XP.
+- visitors is a unique historical visitor list (102-103), not current occupancy. No exit removal is intentional to that counting scheme, not evidence of incorrect accumulation.
+- The observer tracks healing received; this is not proof the camp independently initiates wound healing. Test medic/entertainer actions separately.
+
+Verdict: Placement and camp lifecycle mostly hold; correct abandoned-XP eligibility, lifetime/rounding and movement/visitor test assumptions; gameplay untested.

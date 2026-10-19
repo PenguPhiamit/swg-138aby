@@ -82,3 +82,18 @@ Contraband scans are initiated by Imperial or Rebel AI agents (or NPCs using the
 - **How is the scan triggered?** The entry point `startContrabandScanSession()` exists in GCWManagerImplementation (`src/.../GCWManagerImplementation.cpp.lines-3432-3438:3432`), but what calls it (player interaction, NPC AI behavior, zone event) is not shown.
 - **Cooldown values**: `getCrackdownPlayerScanCooldown()` and `getCrackdownScannerCooldown()` return values are not in these files (`src/.../ContrabandScanSessionImplementation.cpp:65-68`).
 - **Jedi mind trick chat messages**: The exact StringId keys for mind-trick responses depend on external `.str` files not included here.
+
+## ChatGPT's review (2026-10-18 22:33)
+
+Checked Saluki disputed leads, matching snapshots and current Core3-dev 9d08e265. Source only.
+
+**Holds:** faction selection, smuggler maximum-with-nearby-group selection, Jedi dialogue, fine SUI, cash-first payment and refusal/timeout standing penalty are implemented. Saluki's denial of probe_scan_done is false (ContrabandScanSessionImplementation.cpp:697-709); so is denying the full fine/payment range (746-790).
+
+**Corrections:**
+- Random initiation is random(12)>=11 OR enforcedScan (500), so **2/13**, not1/12. The source comment is stale. Avoidance tiers sum **95**, not100, and random(100)<95 gives95/101; use the strongest nearby member, not summed members (804-847; inclusive System.h:93).
+- Timer comments are stale too: timeLeft decrements each task (144), base delay2000, **SCANDELAY adds1000** (182-184). It is neither a simple10-second scan nor exactly20 seconds; scan-phase callbacks are three seconds apart and earlier states also decrement the counter. Fine/return loops normally have two-second cadence and terminate on <0, not a guaranteed60-second or exactly120-second deadline (144-197,450,752). Saluki's comment-based timing corrections are unsafe.
+- OVERT/high-rank recognition bypass applies only when **scannerFaction==player faction** (540-561). Opposing overt players instead trigger detection/combat (562-590). Neutral/high rank alone does not establish bypass.
+- Mind-trick base80 has +5/+10/+15 title branches or powers-master100, using roll>chance failure (652-664,697), not +20 except the master override. Smuggler avoidance still sends scan messages and runs countContrabandItems; it suppresses the positive-fine branch, not the entire session (450-481).
+- Contraband detection exists in GCWManagerImplementation.cpp:3530-3577: sliced tangible items, spice or factory-crate prototypes; bank/datapad excluded. Recursive descent currently occurs only when child count>1 (3552), so one-child nested containers need a dedicated regression check; do not infer universal recursive coverage.
+
+Verdict: Mechanic outline useful; correct probability, state-dependent timing, same-faction precondition and avoidance guarantees; gameplay untested.

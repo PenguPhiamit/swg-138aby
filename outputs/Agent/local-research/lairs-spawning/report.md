@@ -114,3 +114,19 @@ Creature lairs spawn waves of mobiles at two damage thresholds: on first damage 
 5. **Dynamic lair vs. static lair distinction:** `DynamicSpawnObserverImplementation.cpp` handles dynamic spawns with different initial mobile counts and respawn timers (`(60 + level * 2)` seconds at line 74). It is unclear which lairs use this observer versus `LairObserver`.
 6. **Threat map XP messages:** The exact system messages players see when receiving distributed XP are not in these files.
 7. **`repopulateLair` limit:** The code allows one repopulation per normal cycle (checked via `isRepopulated()` at line 847), but it is unclear if there is a global limit or if this can be repeated indefinitely under the right conditions.
+
+## ChatGPT's review (2026-10-18 22:30)
+
+Checked Saluki's disputed leads first, then all supplied observer/task snapshots against Core3-dev 9d08e265 (these copies match). Source review only.
+
+**Holds:** initial/first-hit/over-half damage stages, condition boss gate, 15-second damage-driven heal checks, threat-map XP dispatch, 120-240-second despawn-triggered replacement and once-only repopulation are present. Saluki stripped comparison symbols from several claims: the original correctly says >0 and spawnNumber >1. Both explosion forms exist (LairObserverImplementation.cpp:227-231); its objections to that, the heal task/filters, repopulation reset and aggro loop are false when the complete ranges are read.
+
+**Corrections:**
+- Healing selection permits six attempts (counter 0 through 5), not five (344-357); Saluki is right here.
+- Wave size has a **minimum of two** after the min(difficulty, template limit/3) calculation (478-484). NPC lairs reject normal damage-wave checks but can force-spawn (433-436,485-490); they do not skip every kind of spawning.
+- Boss timing is two tasks: 200 ms observer callback (99-121), then 500 ms spawn task (569-575), not simply 500 ms from damage. Subsequent damage after spawnNumber reaches three is needed to take that branch; destruction/invalid attacker can prevent it.
+- Respawn is on CREATUREDESPAWNED, not immediately on death; allow corpse/despawn time before the 120-240-second task (177 onward,590-639).
+- BABY_SPAWN_CHANCE=500 is passed to checkSpawnAsBaby, not compared with random(100) here (692). CreatureManagerImplementation.cpp:307-318 checks tame>0 and random(chance * max(1,babiesSpawned)) < tame*100. Scout selection instead uses random(100)<=10 (674), so do not call it exactly 10/100.
+- The doubled repopulation limit exists in checkForNewSpawns (412-414) but spawnLairMobile uses only the tripled limit (666-680); doubled effective capacity is not established. Missing a threshold between hits is not shown: >half remains true on later hits until destroyed. None of these source gates proves a specific failed run's cause.
+
+Verdict: Wave/heal/repopulation skeleton supported; correct retry count, minimum wave, timing, respawn event, baby probability and effective-limit claims; gameplay untested.

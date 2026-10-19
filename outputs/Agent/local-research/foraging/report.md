@@ -111,3 +111,17 @@ The `/forage` command (SCOUT type) requires the player to be on foot, outside an
 4. **Rare items unreachable**: The SCOUT loot table has a branch for "forage_rare" at dice >= 200, but `System::random(200)` returns 0-199, making this branch unreachable (lines 280-289).
 5. **Foraging skill requirement**: The code checks the "foraging" skill mod but does not verify the player has the base "foraging" skill itself; it is unclear if a minimum skill level is required or if only the mod matters.
 6. **Resource density calculation**: The `forageGiveResource` function uses `getDensityAt` to filter resources, but the exact threshold and how density varies by location are not defined in these files.
+
+## ChatGPT's review (2026-10-18 22:30)
+
+Checked supplied snapshots against Core3-dev 9d08e265; no Saluki disputed lead for this topic. Random API checked in utils/engine3/MMOEngine/src/system/lang/System.h:92-94 and System.cpp:13-15: integer random(n) includes n. Source only.
+
+**Holds:** adjusted 50 action cost (must leave one), shellfish action/mind and water gates, 8500 ms task, per-axis 2 m/same-zone and combat finish checks, type-specific skill formulas and three-use exhaustion (ForageManagerImplementation.cpp:20-200).
+
+**Corrections:**
+- SCOUT rare loot is reachable at roll 200: food 160/201, bait 40/201, rare 1/201 (277-289). Medical rolls split 40/201 food,70/201 flora,60/201 level-1,30/201 level-60,1/201 level-200 components (294-320); the report's 30% for 170-199 and combined 60/200 range are wrong. LAIR eggs include 109 (324-342), so creatures 40/110 and eggs 70/110. Success is (chance+1)/81 until certainty, not a percent out of 100 (166-200).
+- SIZE=10 is a coordinate half-width: abs(dx)<10 AND abs(dy)<10, on short/truncated coordinates, about a 20 m-wide box (ForageArea.h:31-60), despite its misleading side-length comment. Uses are consumed before the success/inventory check (ForageManagerImplementation.cpp:145-200); shellfish skips exhaustion. Three uses is not a three-item maximum: scout skills can add up to two items (228-241).
+- resName is explicitly empty, not uninitialized (248), selecting random flora; zero density is rejected only while more than one candidate remains (371-388). This is no demonstrated bug.
+- LAIR eggs return before createLoot; they are not conditional on failed creature creation (331-350). The open-question claim reverses execution order.
+
+Verdict: Basic action and exhaustion flow supported; reject unreachable-rare, loot percentages, area size and invented medical/lair bug claims; gameplay untested.
