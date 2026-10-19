@@ -2,10 +2,21 @@
 
 Owner, 18 Oct: "a mirage effect for the blade to help hide light", then "how do we make it possible?" (the client has no heat-distortion pass), then "also this hook could be used for other effects too right?"
 
-**Built and tested outside the game on this PC, not installed.** It is a small `d3d9.dll` of our own that sits in front of DXVK in the client folder. It watches the game's own draw calls, recognises particular draws, and adds screen passes around them. The mirage on the ghostfire blade is the first effect. The code holds that one effect today, and the layer below is how more effects fit in. It is for Miniverse only until it has been tried in game.
+It is a small `d3d9.dll` of our own that sits in front of DXVK in the client folder. It watches the game's own draw calls, recognises particular draws, and adds screen passes around them. The mirage on the ghostfire blade is the first effect. The code holds that one effect today, and the layer below is how more effects fit in. It is for Miniverse only, not for friends through the launcher.
 
-- **Archives.** O14 is not installed (owner: "not yet"), so the installed archive is still `c8a61080`. The mirage then follows the stock blade program with the ghostfire crystal's dark colour, and it follows the O14 program as well once that is installed.
-- **Preview.** From left to right: mirage off; on; on 8 frames later; on with the O14 blade; the debug view. It is in `work/o15-mirage/preview-mirage.png`, and the numbers are in `checks-mirage.json`.
+**State, 18 Oct, 7:55 PM.**
+- **The first proxy never bent anything in game.** It is `54150519` (built 6:53 PM) and has been on the owner's client since about 7:11 PM. Its `mirage.log` from the 7:11 and 7:35 PM sessions shows the blade programs loading, but not a single ghostfire draw or mirage pass. It followed the game's SetPixelShader and constant calls. The harness reproduces the miss when a blade's program and colour come from a recorded state block.
+- **The rebuilt proxy reads the bound program and c3 from the device at each draw**, so it doesn't matter how the game sets them. Its log also lists the first blade draws with their c3, and every 30 seconds counts how often a blade program was bound and drawn. That way the next session shows directly whether it matches.
+- **Archives.** The owner's OK covers the setup installed at 7:41 PM: archive `a2610d64`, which is O14 `feb3bf84` (the near-invisible ghostfire blade with oil-slick trails) plus the light whip. The ids come from `blade_ids.py`:
+
+  | Program | Id |
+  |---|---|
+  | stock saber blade | `0xacc853c5` |
+  | O14 saber blade | `0xfac25b60` |
+  | light whip blade (its own `e_h_lightwhipblade_ps20`) | `0x238eb66a` |
+
+  Both of ours use the same dark-crystal rule as before.
+- **Preview.** It is `work/o15-mirage/preview-mirage-a2610d64.png`. From left to right: saber off; saber on; saber on 8 frames later; whip off; whip on. Off shows almost nothing, because the blade is only a faint sheen now. On, a ripple traces the blade. The numbers are in `checks-mirage.json`.
 
 ## The layer
 
@@ -38,7 +49,7 @@ Every effect is made of the same three parts.
    Today the file is `mirage.ini`, with one `[mirage]` section that does both jobs. With a second effect it becomes `effects.ini`, with a `[layer]` section plus one section per effect.
 
 **What the code has now.**
-- The 9 hooked device methods (Reset, Present, the four draw calls, and pixel program create, set and constants) are all a draw rule needs. New rules add no hooks.
+- A draw rule needs only Reset, Present, pixel program create and the four draw calls. At each draw it reads the bound program and constants from the device; following the Set calls missed the blade in game. New rules add no hooks. SetPixelShader, BeginStateBlock and CreateStateBlock are hooked as well, but only for the log.
 - The mirage's rule and pass are written out in `run()`. The next step is a rule table read from the ini.
 - "After the world, before the UI" needs a detector for the UI's first draw.
 - Depth (below) needs hooks on CreateDevice, Reset, and the depth surface get and set calls.
@@ -84,9 +95,9 @@ Every effect is made of the same three parts.
 
 ## The mirage (the first effect)
 
-1. **The hook.** The client's graphics plugin (`gl07_r.dll`) imports only `Direct3DCreate9` from `d3d9.dll`. Our DLL takes that name, loads DXVK from `dxvk_d3d9.dll` beside it, and patches the 9 device methods above.
+1. **The hook.** The client's graphics plugin (`gl07_r.dll`) imports only `Direct3DCreate9` from `d3d9.dll`. Our DLL takes that name, loads DXVK from `dxvk_d3d9.dll` beside it, and patches the device methods above.
 2. **The rule.** A draw counts when both of these hold:
-   - the bound pixel program is a lightsaber blade program: the stock one, `0xacc853c5`, in effect on `c8a61080`, or the O14 one, `0x7b68e0f1`;
+   - the pixel program bound at that draw (read from the device) is a blade program: the stock one, the O14 saber's or the light whip's, all listed above;
    - the crystal colour in c3 has every channel at 0.17 or less. That is the O14 shader's own rule: palette 32-40 is ghostfire, and every stock crystal is 0.65 or brighter.
 
    Normal crystals never trigger it.
@@ -107,6 +118,7 @@ Every effect is made of the same three parts.
 | Bend set to 0, vs off, whole frame | 0 pixels changed: the game's state comes back exactly, and the blade draws as before |
 | Frame 40 vs 48, mirage on | the haze moves (about 12,000 pixels) |
 | Reset (window or resolution change) | succeeds: our targets are released first and made again |
+| The ghostfire blade's program and c3 set through a recorded state block (rerun at 7:50 PM, hidden window) | the first proxy: 0 pixels changed, as in game. The rebuilt one: about 7,000-7,900 changed for the stock, O14 saber and whip programs, the red blade 0, bend 0 identical to off |
 | install.ps1 twice, then uninstall.ps1, on a scratch copy of the client's DXVK DLL | renames DXVK and back, places and removes the proxy |
 
 **Without DXVK (Windows' own Direct3D 9) the haze draws nothing.** Every call succeeds, but the screen quad leaves no pixel, even in the debug view with nothing discarded. I could not trace it without Microsoft's debug runtime. So when `dxvk_d3d9.dll` is missing, the proxy passes everything through and logs that; `allow_native=1` would try anyway. The client ships with DXVK, so this only matters if someone removes it. It holds for every effect in the layer.

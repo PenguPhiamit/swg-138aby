@@ -163,13 +163,13 @@ static IDirect3DDevice9Vtbl R;   // the real device methods
 static IDirect3DDevice9 *g_dev;
 
 static IDirect3DPixelShader9 *g_blade_ps[16];
-static int g_blade_n, g_cur_blade;
-static float g_c3[4];
-static int g_c3_set;
+static int g_blade_n;
 
 static int g_on = 1, g_broken, g_busy, g_first_done;
 static LONGLONG g_qpf, g_t0, g_frame_t, g_stat_t;
 static unsigned int g_frames, g_frame_mirages, g_stat_match, g_stat_done, g_stat_capped;
+static unsigned int g_stat_bind, g_stat_blade, g_blade_logged;   // diagnostics: blade program binds and draws
+static float g_stat_bmin = 9.0f, g_stat_bmax = -1.0f;            // brightest c3 channel seen on blade draws
 
 static IDirect3DPixelShader9 *g_mask_ps, *g_haze_ps;
 static IDirect3DTexture9 *g_noise;
@@ -327,7 +327,7 @@ static int ensure(IDirect3DDevice9 *d, const D3DSURFACE_DESC *rd)
 	    FAILED(hr = v->CreateTexture(d, rd->Width, rd->Height, 1, D3DUSAGE_RENDERTARGET, D3DFMT_A8R8G8B8,
 	                                 D3DPOOL_DEFAULT, &g_mask_tex, NULL)) ||
 	    FAILED(hr = g_mask_tex->lpVtbl->GetSurfaceLevel(g_mask_tex, 0, &g_mask_surf)) ||
-	    FAILED(hr = v->CreateStateBlock(d, D3DSBT_ALL, &g_sb)))
+	    FAILED(hr = R.CreateStateBlock(d, D3DSBT_ALL, &g_sb)))
 		goto fail;
 	if (rd->MultiSampleType != D3DMULTISAMPLE_NONE) {
 		// the game's depth buffer is multisampled too, so the mask draws multisampled and resolves into g_mask_tex
@@ -518,13 +518,35 @@ static void mirage(IDirect3DDevice9 *d, const Draw *c)
 	rt->lpVtbl->Release(rt);
 }
 
+// Reads the bound pixel program and c3 from the device at each draw instead of tracking the Set calls: in game
+// (18 Oct, 7:11 and 7:35 PM) the tracked state never matched although the blade programs loaded, so the client may
+// set them some other way (state blocks, say). Costs one GetPixelShader per draw once a blade program exists.
 static int ghost_draw(IDirect3DDevice9 *d)
 {
-	float b;
-	if (d != g_dev || !g_cur_blade || !g_c3_set || !g_on || g_broken || g_busy)
+	IDirect3DPixelShader9 *ps = NULL;
+	float c3[4], b;
+	int blade, ghost;
+	if (d != g_dev || !g_blade_n || !g_on || g_broken || g_busy)
 		return 0;
-	b = max(g_c3[0], max(g_c3[1], g_c3[2]));
-	return b > 0.01f && b <= cfg.max_bright;
+	if (FAILED(d->lpVtbl->GetPixelShader(d, &ps)) || !ps)
+		return 0;
+	blade = is_blade_ps(ps);
+	ps->lpVtbl->Release(ps);
+	if (!blade || FAILED(d->lpVtbl->GetPixelShaderConstantF(d, 3, c3, 1)))
+		return 0;
+	b = max(c3[0], max(c3[1], c3[2]));
+	ghost = b > 0.01f && b <= cfg.max_bright;
+	g_stat_blade++;
+	if (b < g_stat_bmin)
+		g_stat_bmin = b;
+	if (b > g_stat_bmax)
+		g_stat_bmax = b;
+	if (g_blade_logged < 8) {
+		g_blade_logged++;
+		logf_("blade program draw: c3 %.3f %.3f %.3f %.3f%s", c3[0], c3[1], c3[2], c3[3],
+		      ghost ? " (ghostfire)" : "");
+	}
+	return ghost;
 }
 
 static void poll_toggle(void)
@@ -558,13 +580,17 @@ static void end_frame(void)
 	g_frame_t = now.QuadPart;
 	poll_toggle();
 	if (g_frames == 1200 && g_blade_n == 0)
-		logf_("1200 frames and no lightsaber blade pixel program seen yet (set log_shaders=1 to list the ids)");
+		logf_("1200 frames and no blade pixel program seen yet (set log_shaders=1 to list the ids)");
 	if (now.QuadPart - g_stat_t > 30 * g_qpf) {
-		if (g_stat_match)
-			logf_("last %.0f s: %u ghostfire blade draws, %u mirage passes, %u over the per-frame cap%s",
-			      (double)(now.QuadPart - g_stat_t) / g_qpf, g_stat_match, g_stat_done, g_stat_capped,
-			      g_on ? "" : " (switched off)");
-		g_stat_match = g_stat_done = g_stat_capped = 0;
+		if (g_stat_match || g_stat_blade || g_stat_bind)
+			logf_("last %.0f s: blade program bound %u times, %u draws with it (c3 brightest %.3f to %.3f), "
+			      "%u ghostfire, %u mirage passes, %u over the per-frame cap%s",
+			      (double)(now.QuadPart - g_stat_t) / g_qpf, g_stat_bind, g_stat_blade,
+			      g_stat_blade ? g_stat_bmin : 0.0f, g_stat_blade ? g_stat_bmax : 0.0f, g_stat_match, g_stat_done,
+			      g_stat_capped, g_on ? "" : " (switched off)");
+		g_stat_match = g_stat_done = g_stat_capped = g_stat_bind = g_stat_blade = 0;
+		g_stat_bmin = 9.0f;
+		g_stat_bmax = -1.0f;
 		g_stat_t = now.QuadPart;
 	}
 }
@@ -603,7 +629,7 @@ static HRESULT STDMETHODCALLTYPE hk_CreatePixelShader(IDirect3DDevice9 *d, const
 			}
 		if (is_blade_id(id) && g_blade_n < 16) {
 			g_blade_ps[g_blade_n++] = *out;
-			logf_("lightsaber blade pixel program 0x%08x created", id);
+			logf_("blade pixel program 0x%08x created", id);
 		} else if (cfg.log_shaders) {
 			logf_("pixel program 0x%08x, version 0x%08lx", id, fn[0]);
 		}
@@ -611,21 +637,29 @@ static HRESULT STDMETHODCALLTYPE hk_CreatePixelShader(IDirect3DDevice9 *d, const
 	return hr;
 }
 
+// diagnostics only: how often the game binds a blade program directly, and whether it records state blocks
 static HRESULT STDMETHODCALLTYPE hk_SetPixelShader(IDirect3DDevice9 *d, IDirect3DPixelShader9 *ps)
 {
-	if (d == g_dev)
-		g_cur_blade = is_blade_ps(ps);
+	if (d == g_dev && g_blade_n && is_blade_ps(ps))
+		g_stat_bind++;
 	return R.SetPixelShader(d, ps);
 }
 
-static HRESULT STDMETHODCALLTYPE hk_SetPixelShaderConstantF(IDirect3DDevice9 *d, UINT start, const float *data,
-                                                            UINT count)
+static HRESULT STDMETHODCALLTYPE hk_BeginStateBlock(IDirect3DDevice9 *d)
 {
-	if (d == g_dev && data && start <= 3 && start + count > 3) {
-		memcpy(g_c3, data + (3 - start) * 4, sizeof g_c3);
-		g_c3_set = 1;
-	}
-	return R.SetPixelShaderConstantF(d, start, data, count);
+	static int said;
+	if (!said++)
+		logf_("the game records state blocks (BeginStateBlock)");
+	return R.BeginStateBlock(d);
+}
+
+static HRESULT STDMETHODCALLTYPE hk_CreateStateBlock(IDirect3DDevice9 *d, D3DSTATEBLOCKTYPE type,
+                                                     IDirect3DStateBlock9 **out)
+{
+	static int said;
+	if (!said++)
+		logf_("the game creates state blocks (CreateStateBlock type %d)", (int)type);
+	return R.CreateStateBlock(d, type, out);
 }
 
 static HRESULT STDMETHODCALLTYPE hk_DrawPrimitive(IDirect3DDevice9 *d, D3DPRIMITIVETYPE type, UINT start, UINT n)
@@ -693,7 +727,8 @@ static void hook_device(IDirect3DDevice9 *d)
 	patch((void **)&vt->Present, (void *)hk_Present);
 	patch((void **)&vt->CreatePixelShader, (void *)hk_CreatePixelShader);
 	patch((void **)&vt->SetPixelShader, (void *)hk_SetPixelShader);
-	patch((void **)&vt->SetPixelShaderConstantF, (void *)hk_SetPixelShaderConstantF);
+	patch((void **)&vt->BeginStateBlock, (void *)hk_BeginStateBlock);
+	patch((void **)&vt->CreateStateBlock, (void *)hk_CreateStateBlock);
 	patch((void **)&vt->DrawPrimitive, (void *)hk_DrawPrimitive);
 	patch((void **)&vt->DrawIndexedPrimitive, (void *)hk_DrawIndexedPrimitive);
 	patch((void **)&vt->DrawPrimitiveUP, (void *)hk_DrawPrimitiveUP);
@@ -712,7 +747,7 @@ static HRESULT STDMETHODCALLTYPE hk_CreateDevice(IDirect3D9 *self, UINT adapter,
 		if (g_dev && g_dev != *out)   // a new device: what we made belongs to the old one
 			release_all();
 		g_dev = *out;
-		g_blade_n = g_cur_blade = g_c3_set = 0;
+		g_blade_n = 0;
 		hook_device(*out);
 	}
 	return hr;

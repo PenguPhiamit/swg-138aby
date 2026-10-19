@@ -1,26 +1,29 @@
 {
- "built": "18 Oct 2026, 6:53 PM (MSVC 14.44 x86 /MT, fxc 10.0.26100.0 ps_2_0); MSVC builds embed a timestamp, so a rebuild gives a new hash",
+ "built": "18 Oct 2026, 7:49 PM (MSVC 14.44 x86 /MT, fxc 10.0.26100.0 ps_2_0); MSVC builds embed a timestamp, so a rebuild gives a new hash",
  "proxy_dll": {
   "path": "work/o15-mirage/d3d9.dll",
-  "bytes": 154624,
-  "sha256": "541505197b8e3cec3158dc68b47be90ef1b137264e3de92f3a5e5a1bd8fd1962"
+  "bytes": 155136,
+  "sha256": "dc7e87c8a3ee5209a4006fb38528d04be9e8fc921e6a3be33a9d107808c6cfa3",
+  "replaces": "54150519 (6:53 PM build; tracked Set calls and never matched in game)"
  },
  "dxvk_chained": {
   "source": "SWG-client/d3d9.dll (DXVK 3.1.1, x86)",
   "sha256": "265888c31ca78dffa290c39cb7e50bfb02762590e41927906e46fb32f01497fa"
  },
  "blade_program_ids": {
-  "stock e_h_lightsaberblade_ps20 (installed c8a61080)": "0xacc853c5",
-  "O14 crystal-aware (892475a4)": "0x7b68e0f1"
+  "stock e_h_lightsaberblade_ps20 (mtg_patch_011_files_01.tre)": "0xacc853c5",
+  "O14 saber blade in local_planets.tre a2610d64": "0xfac25b60",
+  "light whip blade in local_planets.tre a2610d64": "0x238eb66a"
  },
  "sources_sha256": {
-  "src/mirage.c": "e1ae5ce8fed195f51dc5750399fa9a0b377f8a377a7ce256051aa89c87ca1d42",
+  "src/mirage.c": "041f281d1943c1f35f4e31a53c696fec0eaa6f04afdf03e9c2fe86abd49a3bf8",
   "src/mask_ps.hlsl": "899d53888df59794d000df939205a577126f94677d092c56a2d8dafed241c3ad",
   "src/haze_ps.hlsl": "dfa6a677668f4ae5d3e389d854e341a5e1bcfa7f933c26ee077305fdda861bcd",
   "src/d3d9.def": "d0028dd3bf9c37da95195d1c2bd595c928146f60875258ba611bcadbc775f601",
-  "src/blade_ids.h": "503e47ffbb3c9a960ca3183335014d23a87a0da2cf483ec1007fb920445d93e6",
-  "src/mirage_test.c": "5fcdd0996003094a170969e8c6700e943135443be1e5cc5803ec5d6deb2f0d80",
-  "mirage.ini": "f187d4d82b7a4d53a80c521fbbbf1f815f0cb6fc8881f8a966e711e99d44d106"
+  "src/blade_ids.h": "c7aca6f8493804154e849f3284f87c82dbfd509cc9b781df4165b5bc0f1cbbc0",
+  "src/mirage_test.c": "9a7c9cb3783e3ae07ddb9e359d7d46931f9711a4adec9d7cc4ceefea3157f638",
+  "mirage.ini": "f187d4d82b7a4d53a80c521fbbbf1f815f0cb6fc8881f8a966e711e99d44d106",
+  "blade_ids.py": "e4fce35ee568a7f4a93fc4af492cabe61f29270ace0e62f1a98b3f8fdee95675"
  },
  "harness": {
   "what": "mirage_test.exe, 800x450 window, RTX 5070: striped background, opaque bar in front, ghostfire blade (dark c3, shimmer steps) left, stock red blade right, Reset at frame 20, screenshots of frames 40 and 48; every D3D call returned success in every run",
@@ -52,5 +55,48 @@
   },
   "native_d3d9_finding": "with allow_native=1 on the system d3d9 every call succeeds but the haze quad draws nothing (debug_view=2 shows no pixels); so the proxy passes through when DXVK is missing",
   "install_scripts": "install.ps1 (twice) and uninstall.ps1 run on a scratch folder holding a copy of the client DXVK d3d9.dll: DXVK renamed and back, proxy placed and removed"
+ },
+ "in_game_first_proxy": "mirage.log 7:11 and 7:35 PM: blade programs 0xacc853c5 and 0x7b68e0f1 created, no ghostfire draw and no mirage pass logged",
+ "harness_a2610d64": {
+  "what": "hidden window; the ghostfire blade gets its program and c3 (0.125, 0.031, 0.125) from a recorded state block, the red blade from direct calls; Reset at frame 20 (state block released and re-recorded)",
+  "first proxy, stock program, ghostfire half vs off": [
+   0,
+   0
+  ],
+  "rebuilt, stock: ghostfire half vs off / red half": [
+   [
+    7027,
+    142
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "rebuilt, O14 saber: ghostfire half vs off / red half": [
+   [
+    7892,
+    150
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "rebuilt, light whip: ghostfire half vs off / red half": [
+   [
+    7891,
+    150
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "rebuilt, O14 saber, bend 0 vs off, whole frame": [
+   0,
+   0
+  ],
+  "note": "the harness draws the whip as a straight strip like the saber; the real whip shape is untested"
  }
 }

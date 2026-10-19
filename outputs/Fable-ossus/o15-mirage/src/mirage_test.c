@@ -1,9 +1,11 @@
 // Ossus O15 mirage test harness (Claude, 18 Oct 2026): drives the proxy d3d9.dll the way the client draws a blade,
 // outside the game, and saves screenshots.
 // Usage: mirage_test <proxy d3d9.dll> <blade .pexe> <out prefix>
-// Each frame: a striped background, an opaque bar in front, a ghostfire blade (dark c3, stepping like the server's
-// shimmer) on the left and a stock red blade on the right, with the real blade pixel program. Reset at frame 20,
-// screenshots of frames 40 and 48 as <prefix>-40.bmp and <prefix>-48.bmp. Exit code 0 when every call worked.
+// Each frame: a striped background, an opaque bar in front, a ghostfire blade (dark c3) on the left and a stock red
+// blade on the right, with the real blade pixel program. The left blade's program and c3 come from a recorded state
+// block, the right one's from direct calls, so the hook must read the device state rather than track Set calls.
+// The window stays hidden (it must not take focus from a game being played). Reset at frame 20, screenshots of
+// frames 40 and 48 as <prefix>-40.bmp and <prefix>-48.bmp. Exit code 0 when every call worked.
 
 #define CINTERFACE
 #define WIN32_LEAN_AND_MEAN
@@ -77,6 +79,18 @@ static void blade(IDirect3DDevice9 *d, float hx, float hy, float tx, float ty, f
 	check(d->lpVtbl->DrawPrimitiveUP(d, D3DPT_TRIANGLESTRIP, 2, q, sizeof q[0]), "DrawPrimitiveUP blade");
 }
 
+// the left blade's state: its program and a dark ghostfire c3, recorded the way an engine might
+static IDirect3DStateBlock9 *record(IDirect3DDevice9 *d, IDirect3DPixelShader9 *ps)
+{
+	IDirect3DStateBlock9 *sb = NULL;
+	float ghost[4] = { 32 / 255.0f, 8 / 255.0f, 32 / 255.0f, 1 };
+	check(d->lpVtbl->BeginStateBlock(d), "BeginStateBlock");
+	d->lpVtbl->SetPixelShader(d, ps);
+	d->lpVtbl->SetPixelShaderConstantF(d, 3, ghost, 1);
+	check(d->lpVtbl->EndStateBlock(d, &sb), "EndStateBlock");
+	return sb;
+}
+
 static void save_bmp(IDirect3DDevice9 *d, const char *path)
 {
 	IDirect3DSurface9 *bb = NULL, *sys = NULL;
@@ -118,6 +132,7 @@ int main(int argc, char **argv)
 	IDirect3DDevice9 *d = NULL;
 	IDirect3DPixelShader9 *ps = NULL;
 	IDirect3DTexture9 *bg, *bt;
+	IDirect3DStateBlock9 *sb;
 	D3DPRESENT_PARAMETERS pp = { 0 };
 	WNDCLASSA wc = { 0 };
 	RECT r = { 0, 0, W, H };
@@ -152,7 +167,7 @@ int main(int argc, char **argv)
 	wc.lpszClassName = "mirage_test";
 	RegisterClassA(&wc);
 	AdjustWindowRect(&r, WS_OVERLAPPEDWINDOW, FALSE);
-	wnd = CreateWindowA("mirage_test", "mirage test", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 40, 40, r.right - r.left,
+	wnd = CreateWindowA("mirage_test", "mirage test", WS_OVERLAPPEDWINDOW, 40, 40, r.right - r.left,
 	                    r.bottom - r.top, NULL, NULL, wc.hInstance, NULL);
 
 	d3d = create(D3D_SDK_VERSION);
@@ -177,16 +192,19 @@ int main(int argc, char **argv)
 	check(d->lpVtbl->CreatePixelShader(d, code, &ps), "CreatePixelShader blade");
 	bg = texture(d, 256, 256, 0);
 	bt = texture(d, 256, 64, 1);
+	sb = record(d, ps);
 
 	for (frame = 0; frame <= 48; frame++) {
 		MSG msg;
 		float c7[4] = { 0, 0, 0, 1 };   // fade off, bloom off, opacity 1
-		float ghost[4] = { 32 / 255.0f, (4 * (frame % 9)) / 255.0f, 32 / 255.0f, 1 };
 		float red[4] = { 1.0f, 0.15f, 0.15f, 1 };
 		while (PeekMessageA(&msg, NULL, 0, 0, PM_REMOVE))
 			DispatchMessageA(&msg);
 		if (frame == 20) {
-			HRESULT hr = d->lpVtbl->Reset(d, &pp);
+			HRESULT hr;
+			sb->lpVtbl->Release(sb);   // state blocks go before a Reset
+			hr = d->lpVtbl->Reset(d, &pp);
+			sb = record(d, ps);
 			printf("Reset at frame 20: 0x%08lx\n", hr);
 			check(hr, "Reset");
 		}
@@ -224,14 +242,14 @@ int main(int argc, char **argv)
 		d->lpVtbl->SetSamplerState(d, 0, D3DSAMP_ADDRESSV, D3DTADDRESS_CLAMP);
 		d->lpVtbl->SetSamplerState(d, 0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
 		d->lpVtbl->SetSamplerState(d, 0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
-		d->lpVtbl->SetPixelShader(d, ps);
 		d->lpVtbl->SetPixelShaderConstantF(d, 7, c7, 1);
 		d->lpVtbl->SetRenderState(d, D3DRS_ZWRITEENABLE, FALSE);
 		d->lpVtbl->SetRenderState(d, D3DRS_ALPHABLENDENABLE, TRUE);
 		d->lpVtbl->SetRenderState(d, D3DRS_SRCBLEND, D3DBLEND_ONE);
 		d->lpVtbl->SetRenderState(d, D3DRS_DESTBLEND, D3DBLEND_ONE);
-		d->lpVtbl->SetPixelShaderConstantF(d, 3, ghost, 1);
+		check(sb->lpVtbl->Apply(sb), "Apply");
 		blade(d, 200, 400, 250, 60, 70);
+		d->lpVtbl->SetPixelShader(d, ps);
 		d->lpVtbl->SetPixelShaderConstantF(d, 3, red, 1);
 		blade(d, 580, 400, 620, 60, 70);
 		check(d->lpVtbl->EndScene(d), "EndScene");
@@ -241,6 +259,7 @@ int main(int argc, char **argv)
 		}
 		check(d->lpVtbl->Present(d, NULL, NULL, NULL, NULL), "Present");
 	}
+	sb->lpVtbl->Release(sb);
 	ps->lpVtbl->Release(ps);
 	bg->lpVtbl->Release(bg);
 	bt->lpVtbl->Release(bt);
