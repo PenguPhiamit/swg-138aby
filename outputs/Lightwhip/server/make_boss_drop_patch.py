@@ -7,8 +7,9 @@
 Owner, 18 Oct ~8:20 PM (via the main session's card): "Bosses only", over Dathomir Nightsisters and over not yet.
 
 What the patch does (Lua only):
-  screenplays/sandbox/sandbox_world_bosses.lua    a slain rotation boss (the 14 named bosses) gives, with
-        lightwhipChance (5%) per kill, one roll of the light whip group to one random player who damaged it, straight
+  screenplays/sandbox/sandbox_world_bosses.lua    a slain krayt boss of the rotation (Ghost-Scale the Canyon Krayt and
+        Old Rattlebones, marked lightwhip = true; owner, 8:26 PM: "Krayt dragons for now, the boss") gives, with
+        lightwhipChance (10%) per kill, one roll of the light whip group to one random player who damaged it, straight
         into their inventory (the next one if it is full), with a message. The roster's templates stay stock, so an
         ordinary krayt or gorax never drops it.
   loot/groups/lightwhip/lightwhip_nightsister.lua -> lightwhip_boss.lua (and its include line): the owner chose bosses
@@ -66,8 +67,9 @@ addLootGroupTemplate("lightwhip_boss", lightwhip_boss)
 '''
 
 DROP = '''
-	-- Light whip (L1, owner 18 Oct: bosses only): sometimes one damage dealer gets a roll of the whip group.
-	if paid > 0 and getRandomNumber(1, 100) <= self.lightwhipChance then
+	-- Light whip (L1, owner 18 Oct: "Krayt dragons for now, the boss"): sometimes one damage dealer of a krayt boss gets a
+	-- roll of the whip group.
+	if paid > 0 and boss ~= nil and boss.lightwhip and getRandomNumber(1, 100) <= self.lightwhipChance then
 		self:giveLightwhip(dealers, name)
 	end
 '''
@@ -119,8 +121,11 @@ def main():
     text = head(BOSSES)
     text = replace_once(text, '\treward = 25000,                 -- bank credits per player who damaged the boss\n',
                         '\treward = 25000,                 -- bank credits per player who damaged the boss\n'
-                        '\tlightwhipChance = 5,            -- percent per kill: one damage dealer gets a light whip group roll (L1)\n'
+                        '\tlightwhipChance = 10,           -- percent per kill of a roster boss marked lightwhip (the krayts; L1)\n'
                         '\tlightwhipLootGroup = "lightwhip_boss",\n')
+    for krayt in ('{ template = "giant_canyon_krayt_dragon", name = "Ghost-Scale the Canyon Krayt", ham = 1.5, planet = "tatooine"',
+                  '{ template = "krayt_dragon_ancient", name = "Old Rattlebones, Ancient Krayt", ham = 1.25, planet = "tatooine"'):
+        text = replace_once(text, krayt + ' },', krayt + ', lightwhip = true },')
     text = replace_once(text, '\tbroadcastToGalaxy(nil, "\\\\#ffcc66[World boss]\\\\#ffffff " .. name .. " has been slain on " .. planetLabel(planet) .. by .. "!")\n',
                         '\tbroadcastToGalaxy(nil, "\\\\#ffcc66[World boss]\\\\#ffffff " .. name .. " has been slain on " .. planetLabel(planet) .. by .. "!")\n'
                         + DROP)

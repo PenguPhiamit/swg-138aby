@@ -21,7 +21,9 @@ This step adds, for the whip only (no stock file changes except the tables and s
         e_h_lightwhipblade_ps20.hlsl next to this script: the O14 blade program (ghostfire included) with the white core
         at 75%; its own instructions give it its own id for the O15 hook
   appearance/sw_lightwhip.swh
-        the stock saber trail with a longer life (TRAIL seconds, stock 0.06), tinted by the crystal like stock
+        no visible trail by default (owner, 8:26 PM: "the trail; none without a specific crystal"): the stock saber trail
+        on shader/sw_lightwhip_none.sht, a fully transparent texture/sw_lightwhip_none.dds. The ghostfire crystal still
+        brings its server-played ribbons at tr1e (GhostfireShimmerTask, any Jedi weapon). --trail S: the stock trail, S s
   object/weapon/melee/sword/crafted_saber/shared_sword_lightwhip.iff
         the s5 gen4 one-handed saber template with the whip blade and its own name and description
   object/draft_schematic/weapon/lightsaber/shared_lightsaber_lightwhip.iff
@@ -37,7 +39,7 @@ The server half (saber template, schematic, loot schematic, loot items and group
 Every other entry of the base archive stays byte for byte.
 
     C:/Users/Pengw/miniconda3/python.exe -I build_lightwhip.py [--base PATH] [--out PATH] [--length M] [--width M] [--trail S]
-Default base: ../../work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre (O14, sha256 feb3bf84..., built,
+Default base: ../../work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre (O14, sha256 4c5a29d0..., built,
 not installed). Default out: ../../work/lightwhip/local_planets-lightwhip.tre (+ .sha256); checks in ./checks-lightwhip.json.
 """
 import argparse
@@ -59,7 +61,7 @@ from swgfmt import swg_tables  # noqa: E402
 import build_ghostfire_crystal as o14  # noqa: E402  (fxc compile with the client's include files)
 import blade_ids  # noqa: E402  (the O15 hook's pixel program id; read only)
 
-BASE_SHA_PREFIX = 'feb3bf84'
+BASE_SHA_PREFIX = '4c5a29d0'
 
 SRC_LSB = 'appearance/wp_mle_sword_lightsaber_blade_leather.lsb'
 SRC_APT = 'appearance/wp_mle_sword_lightsaber_leather.apt'
@@ -73,6 +75,7 @@ STOCK_FRAME_SHT = 'shader/lightsaberblade_%s.sht'
 STOCK_EFT = 'effect/e_h_lightsaberblade.eft'
 STOCK_PSH = 'pixel_program/e_h_lightsaberblade_ps20.psh'
 STOCK_SWH = 'appearance/sw_light_saber_white.swh'
+STOCK_TRAIL_SHT = 'shader/sw_light_saber_add.sht'
 SWOOSH = 'datatables/weapon/swoosh.iff'
 CRC = 'misc/object_template_crc_string_table.iff'
 
@@ -85,6 +88,8 @@ FRAME_SHT = 'shader/lightwhipblade_%s.sht'
 EFT = 'effect/e_h_lightwhipblade.eft'
 PSH = 'pixel_program/e_h_lightwhipblade_ps20.psh'
 SWH = 'appearance/sw_lightwhip.swh'
+NONE_SHT = 'shader/sw_lightwhip_none.sht'
+NONE_DDS = 'texture/sw_lightwhip_none.dds'
 SHARED = 'object/weapon/melee/sword/crafted_saber/shared_sword_lightwhip.iff'
 DS = 'object/draft_schematic/weapon/lightsaber/shared_lightsaber_lightwhip.iff'
 LS = 'object/tangible/loot/loot_schematic/shared_lightwhip_schematic.iff'
@@ -183,11 +188,13 @@ def main(argv):
     ap = argparse.ArgumentParser()
     ap.add_argument('--base', default=os.path.join(H, 'work', 'ossus-ghostfire-crystal', 'local_planets-ghostfire-crystal.tre'))
     ap.add_argument('--out', default=os.path.join(H, 'work', 'lightwhip', 'local_planets-lightwhip.tre'))
-    ap.add_argument('--length', type=float, default=2.5, help='blade length in metres (stock saber 1.2)')
+    ap.add_argument('--length', type=float, default=2.1,
+                    help='blade length in metres (stock saber 1.2; owner, 8:26 PM: "a little shorter" than the first 2.5)')
     ap.add_argument('--width', type=float, default=0.09, help='blade glow width in metres (stock saber 0.15)')
-    ap.add_argument('--trail', type=float, default=0.25, help='swing trail life in seconds (stock saber 0.06)')
+    ap.add_argument('--trail', type=float, default=0.0,
+                    help='0 (default): no visible trail; otherwise the stock trail lasting this many seconds (stock 0.06)')
     args = ap.parse_args(argv)
-    assert 1.2 <= args.length <= 6.0 and 0.02 <= args.width <= 0.3 and 0.03 <= args.trail <= 3.0
+    assert 1.2 <= args.length <= 6.0 and 0.02 <= args.width <= 0.3 and (args.trail == 0 or 0.03 <= args.trail <= 3.0)
     base_bytes = open(args.base, 'rb').read()
     base_sha = hashlib.sha256(base_bytes).hexdigest()
     if not base_sha.startswith(BASE_SHA_PREFIX):
@@ -200,7 +207,7 @@ def main(argv):
         return data
 
     msh_names = ['appearance/' + MSH % k for k in range(3)]
-    new_names = [APT, LOD, LSB, BLADE_SHT, EFT, PSH, SWH, SHARED, DS, LS] + msh_names + \
+    new_names = [APT, LOD, LSB, BLADE_SHT, EFT, PSH, SWH, SHARED, DS, LS, NONE_SHT, NONE_DDS] + msh_names + \
         [FRAME_SHT % c for c in 'abcd']
     clash = [n for n in new_names if n in base or stock_index().get(n)]
     assert not clash, 'already exist: %s' % clash
@@ -288,12 +295,23 @@ def main(argv):
     lgth.data, wdth.data = struct.pack('<f', args.length), struct.pack('<f', args.width)
     added[LSB] = trn_iff.build(lsb)
 
-    # ---- the trail: the stock saber trail, longer lived
+    # ---- the trail: none by default (the stock trail on a transparent texture), or the stock trail, longer lived
     swh = trn_iff.parse(src(STOCK_SWH))
     assert swh[0].form == 'SWSH' and swh[0].children[0].form == '0000'
     data = [c for c in swh[0].children[0].children if not c.is_form][-1]
     assert abs(struct.unpack_from('<f', data.data, 16)[0] - 0.06) < 1e-6
-    data.data = data.data[:16] + struct.pack('<f', args.trail) + data.data[20:]
+    if args.trail:
+        data.data = data.data[:16] + struct.pack('<f', args.trail) + data.data[20:]
+    else:
+        ptex = [x for x in chunks(swh, '0000') if x.data.startswith(b'shader/')]
+        assert len(ptex) == 1 and cstr(ptex[0].data) == STOCK_TRAIL_SHT, ptex
+        ptex[0].data = NONE_SHT.encode() + ptex[0].data[ptex[0].data.index(b'\0'):]
+        sht = trn_iff.parse(src(STOCK_TRAIL_SHT))
+        tex = [n for n in chunks(sht, 'NAME') if n.data.startswith(b'texture/')]
+        assert len(tex) == 1, tex
+        tex[0].data = NONE_DDS.encode() + b'\0'
+        added[NONE_SHT] = trn_iff.build(sht)
+        added[NONE_DDS], _ = o14.o13.dds_argb([[(0, 0, 0, 0)] * 4 for _ in range(4)])
     added[SWH] = trn_iff.build(swh)
 
     # ---- the templates
@@ -347,7 +365,7 @@ def main(argv):
         assert all(after[k] == v for k, v in before.items()) and all(after[k] == v for k, v in wanted.items())
 
     for n, d in added.items():
-        assert trn_iff.build(trn_iff.parse(d)) == d, n
+        assert n.endswith('.dds') or trn_iff.build(trn_iff.parse(d)) == d, n
 
     files = dict(base)
     files.update(added)

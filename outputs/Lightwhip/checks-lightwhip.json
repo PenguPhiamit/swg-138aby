@@ -1,10 +1,10 @@
 {
- "base_sha256": "feb3bf8407506e345bcb6b5f6a6ac6622302243b8db764bffdb49e96db4010fa",
- "base_entries": 390,
- "out_sha256": "a2610d64975aa2022ebd2583f6d02772387cf42a7869c8aaadefd298d9b0dafe",
- "out_bytes": 7080302,
- "out_entries": 409,
- "unchanged_entries": 386,
+ "base_sha256": "4c5a29d049ca85799ba85814276c058983810e7a7fb08eb95d8922b5fb19d710",
+ "base_entries": 391,
+ "out_sha256": "2336857614c5ab76d37b422f929ce61caa133fde7f4455115c82063e075a2f74",
+ "out_bytes": 7343811,
+ "out_entries": 412,
+ "unchanged_entries": 387,
  "changed": [
   "datatables/weapon/swoosh.iff",
   "misc/object_template_crc_string_table.iff",
@@ -29,17 +29,19 @@
   "shader/lightwhipblade_b.sht",
   "shader/lightwhipblade_c.sht",
   "shader/lightwhipblade_d.sht",
+  "shader/sw_lightwhip_none.sht",
   "string/en/craft_weapon_ingredients_d.stf",
-  "string/en/craft_weapon_ingredients_n.stf"
+  "string/en/craft_weapon_ingredients_n.stf",
+  "texture/sw_lightwhip_none.dds"
  ],
  "added_sha256": {
-  "appearance/lod/wp_mle_lightwhip.lod": "c468208265ba5c0951d9d789f13574cfbce92092425aec1e1d1b2830c1cc2f2b",
-  "appearance/mesh/wp_mle_lightwhip_l0.msh": "d4a181aeaa12da118ae0d5660cc761586d5956647fa21f293c4a78e452a84f42",
-  "appearance/mesh/wp_mle_lightwhip_l1.msh": "f29969c050f163badeb3af5989bc41d148f3de494f450f41e8dd0d7ac1dfc222",
-  "appearance/mesh/wp_mle_lightwhip_l2.msh": "ec03bfee4308548e7c389cfae48dd24a3a9acb78e5a23118d4650ee054ec3d46",
-  "appearance/sw_lightwhip.swh": "7ef46e47ed44c60a3cfc5a644ab2085c2281ce214c11a6a57e3b2b3bb2c74681",
+  "appearance/lod/wp_mle_lightwhip.lod": "bf4c4974bb58037bc61477802fe0c72a8c9ebaef17e9602f4c9919e26c230f0f",
+  "appearance/mesh/wp_mle_lightwhip_l0.msh": "8fcc5e9950bccca1ad06bf48ceb6aa9c3fd90aeb16eb9e7bdf6f2b9563de9b3d",
+  "appearance/mesh/wp_mle_lightwhip_l1.msh": "66c960da2629e06aae4cc34a68120f372d88f110c444c1cdcee6e7a5a52bdf82",
+  "appearance/mesh/wp_mle_lightwhip_l2.msh": "b8db047ee194e7c8a7c3cc459673c8444f1d52775887148673df3c70fa67e991",
+  "appearance/sw_lightwhip.swh": "e8dbe84226d6b42d0e0089a36b482a147dd90f2f701dd958dac0d87f88c946fd",
   "appearance/wp_mle_lightwhip.apt": "78c6b45e5cabd0a3e2052698f99d2089c691fde4c933b9d5df466209638e8d9d",
-  "appearance/wp_mle_lightwhip_blade.lsb": "0e26bfaa77e3afca98f92105ad99cf5627cf57c15d9f9c3fca9fd5ff6721d7ce",
+  "appearance/wp_mle_lightwhip_blade.lsb": "494e8c15768e5a9015754f0bdbc38d9d6f1d8d91e1b48e470e90b28886ac6fba",
   "effect/e_h_lightwhipblade.eft": "285bc86fac012f87112632fc46b8f3f84812200ade8c0c595a15bb0be430e363",
   "object/draft_schematic/weapon/lightsaber/shared_lightsaber_lightwhip.iff": "744749a808a45e89fa76861289ed76d154368abc031af8ed8dd8d9297e7d1e4f",
   "object/tangible/loot/loot_schematic/shared_lightwhip_schematic.iff": "dfef454efe601893e90632d24abebfddbf0b78b42cd46c7826bfd35af44d4a67",
@@ -50,18 +52,20 @@
   "shader/lightwhipblade_b.sht": "176c2c9e2fe6d34812bc5932942b9277646f81c73299ac8b8a6b294e159dd7d7",
   "shader/lightwhipblade_c.sht": "8103a9ac71e4a3ad3245c323b773b56af2ec2db53dcd9d81fcb81f7db159c9d4",
   "shader/lightwhipblade_d.sht": "b6ea5fe9a5f425d5578aee12125a0d51a4c919a814a5b498e6b58562d8e42aee",
+  "shader/sw_lightwhip_none.sht": "d2f05e1ba77947bdb98b3b2cc6293481c28c3293e12e7711316ec4b6379366ee",
   "string/en/craft_weapon_ingredients_d.stf": "5302598cf1628f06a9597876328d65d62f3b369cda3e3fc3be67c128f21b8a25",
-  "string/en/craft_weapon_ingredients_n.stf": "f68fb4fdcb292bcf0017199d53c03d9a560a0c18964e679011440e7ff38cff71"
+  "string/en/craft_weapon_ingredients_n.stf": "f68fb4fdcb292bcf0017199d53c03d9a560a0c18964e679011440e7ff38cff71",
+  "texture/sw_lightwhip_none.dds": "a54d7af2345d88205eae6e1322bd0e8d3a1060beff7cc012a801eb0f6a21defb"
  },
  "settings": {
-  "length": 2.5,
+  "length": 2.1,
   "width": 0.09,
-  "trail_seconds": 0.25
+  "trail_seconds": 0.0
  },
  "hardpoints_y": {
-  "tr1e": 2.425,
+  "tr1e": 2.025,
   "tr1s": 0.1258,
-  "whp1": 1.5625
+  "whp1": 1.3125
  },
  "template_crcs": {
   "object/weapon/melee/sword/crafted_saber/shared_sword_lightwhip.iff": "49d39c1f",
@@ -70,7 +74,7 @@
  },
  "pixel_program_ids": {
   "stock": "acc853c5",
-  "o14": "fac25b60",
+  "o14": "0ea2a331",
   "whip": "238eb66a"
  },
  "shader_slots": 37,

@@ -33,31 +33,39 @@ index 175f341..8e338f1 100644
 -addLootGroupTemplate("lightwhip_nightsister", lightwhip_nightsister)
 +addLootGroupTemplate("lightwhip_boss", lightwhip_boss)
 diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua
-index 94c9e94..9700b28 100644
+index 94c9e94..c5a9761 100644
 --- a/MMOCoreORB/bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua
 +++ b/MMOCoreORB/bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua
-@@ -17,6 +17,8 @@ SandboxWorldBosses = ScreenPlay:new {
+@@ -17,11 +17,13 @@ SandboxWorldBosses = ScreenPlay:new {
  	respawnAfterEscape = 2 * 60,    -- seconds before an escaped boss's slot refills
  	spawnRadius = 400,              -- metres around a reference point
  	reward = 25000,                 -- bank credits per player who damaged the boss
-+	lightwhipChance = 5,            -- percent per kill: one damage dealer gets a light whip group roll (L1)
++	lightwhipChance = 10,           -- percent per kill of a roster boss marked lightwhip (the krayts; L1)
 +	lightwhipLootGroup = "lightwhip_boss",
  
  	-- template, display name, health multiplier, home planet
  	roster = {
-@@ -171,6 +173,11 @@ function SandboxWorldBosses:onBossKilled(pBoss, pKiller)
+-		{ template = "giant_canyon_krayt_dragon", name = "Ghost-Scale the Canyon Krayt", ham = 1.5, planet = "tatooine" },
+-		{ template = "krayt_dragon_ancient", name = "Old Rattlebones, Ancient Krayt", ham = 1.25, planet = "tatooine" },
++		{ template = "giant_canyon_krayt_dragon", name = "Ghost-Scale the Canyon Krayt", ham = 1.5, planet = "tatooine", lightwhip = true },
++		{ template = "krayt_dragon_ancient", name = "Old Rattlebones, Ancient Krayt", ham = 1.25, planet = "tatooine", lightwhip = true },
+ 		{ template = "gorax", name = "The Gorax Patriarch", ham = 1.5, planet = "endor" },
+ 		{ template = "blurrg_raptor", name = "Razorback the Blurrg Raptor", ham = 4, planet = "endor" },
+ 		{ template = "graul_marauder", name = "Gnasher the Graul Marauder", ham = 3, planet = "dantooine" },
+@@ -171,6 +173,12 @@ function SandboxWorldBosses:onBossKilled(pBoss, pKiller)
  	local by = paid > 0 and (" by " .. table.concat(names, ", ")) or ""
  	broadcastToGalaxy(nil, "\\#ffcc66[World boss]\\#ffffff " .. name .. " has been slain on " .. planetLabel(planet) .. by .. "!")
  
-+	-- Light whip (L1, owner 18 Oct: bosses only): sometimes one damage dealer gets a roll of the whip group.
-+	if paid > 0 and getRandomNumber(1, 100) <= self.lightwhipChance then
++	-- Light whip (L1, owner 18 Oct: "Krayt dragons for now, the boss"): sometimes one damage dealer of a krayt boss gets a
++	-- roll of the whip group.
++	if paid > 0 and boss ~= nil and boss.lightwhip and getRandomNumber(1, 100) <= self.lightwhipChance then
 +		self:giveLightwhip(dealers, name)
 +	end
 +
  	deleteData(bossID .. ":sandboxWorldBossSlot")
  	if slot ~= nil and slot > 0 then
  		writeData(PREFIX .. "slot:" .. slot, 0)
-@@ -180,6 +187,35 @@ function SandboxWorldBosses:onBossKilled(pBoss, pKiller)
+@@ -180,6 +188,35 @@ function SandboxWorldBosses:onBossKilled(pBoss, pKiller)
  	return 1
  end
  

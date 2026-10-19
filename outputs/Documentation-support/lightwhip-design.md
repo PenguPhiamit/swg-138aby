@@ -9,6 +9,10 @@
 - **Source:** loot plus schematic. A rare drop (a schematic or a broken whip) that a crafter finishes.
   - **Owner, about 8:20 PM: bosses only**, chosen over Dathomir Nightsisters and over not yet. Each kill of a world-rotation boss has a 5% chance to give one player who damaged it a roll of the whip group (schematic 80%, whip 20%). Patch built, not applied: `Lightwhip/server/lightwhip-boss-drop-dev.patch`.
 - **Stats:** reach and the lore's trade-offs, and whip attacks partly slip past parries (a small C++ change).
+- **Owner's answers, 8:26 PM:**
+  - The leather hilt for now, a shorter strand (now 2.1 m), and no trail without a specific crystal (now no visible native trail; the ghostfire crystal still brings its ribbons).
+  - Drop: "Krayt dragons for now, the boss", so the two rotation krayts at 10% per kill.
+  - Schematic: "Master weaponsmith +saber crafting 1 or 2 or jedi master". As skills (client `skills.iff`): (`crafting_weaponsmith_master` and `force_discipline_light_saber_technique_01`, Lightsaber Technique I, which gives `jedi_saber_assembly`; Technique II needs I) or `force_title_jedi_master`. A loot schematic takes one `requiredSkill` (`LootSchematicMenuComponent.cpp:35`), so the OR needs a small Lua menu component that checks the skills and calls `addRewardedSchematic` (bound in `LuaPlayerObject.cpp:37`). Not wired yet: the main session confirms with the owner first.
 - **Looks (owner, about 7:35 PM, after the first look):** "keep as built". The crystal decides the colour, and the ghostfire crystal gives the near-invisible ghostfire blade.
 - **Scope (owner, about 8:20 PM, then 8:3x PM):** first, "step 2 and the bosses-only drop now; bend and art after the reset". Then: "can we wait on the parry thing in favor of the bend?"
   - So now: the bosses-only drop, and the bend (steps 0 and 3), which goes to the mirage session because it owns the O15 hook.
