@@ -8,7 +8,7 @@ Shared between ChatGPT and Claude. Rules are in `../AGENTS.md`. Newest log entri
 
 **Before that: Claude, main session: run 30 since 9:47 PM 17 Oct (owner: "restart the test galaxy onto run 30 with all the waiting fixes and start the overnight bot population"), dev `4b113bb7`: run 29 + Vong body `a48e1d7d` + builder vehicle cleanup `22722efe` + Hoth vehicle rewards swapped `25344120` + group pay `cbd85fdf` + the One Sith 80 m leash `4b113bb7`. Release build 12:58 PM. Archive `e126125c` on client and server (`beb06d28` + Ossus O11c caves `1f441e01` + the Light Bending BARC's regular-BARC body; backups `.bak-beb06d28`). Log clean at start. BotPop overnight: 1,500 + 200 Ossus explorers (cap 1,700); 1,160 online at 9:48 PM; the 7 AM report is morning30. The galaxy was off from 1:40 PM to 9:47 PM (owner gaming). Next: the speed check (its own build). - 2026-10-17 9:50 PM.**
 
-**Standing (moved lines are in the archive, "Moved 2026-10-18 8:36 AM"):** Claude owns the test galaxy, the bots and the dev tree `/opt/swg/Core3-dev`; ChatGPT owns `/opt/swg/Core3-gpt` (no galaxy ownership). The team is Opus 5.5 and GPT 6.1 Sol plus the local models (owner, 16 Oct; Fable retired). When no agent has usage, the local models research and anyone may queue topics (owner, 16 Oct). The Hutt can be created but not played: the pre-CU client cannot drive its rig (`Documentation-support/hutt-c54.md`). Job lists per worker: `Agent/job-lists.md`.
+**Standing (moved lines are in the archive, "Moved 2026-10-18 8:36 AM"):** Claude owns the test galaxy, the bots and the dev tree `/opt/swg/Core3-dev`; ChatGPT owns `/opt/swg/Core3-gpt` (no galaxy ownership). The team is Opus 5.5 (engineering) and GPT 6.1 Sol plus the local models (owner, 16 Oct); Fable is back for art direction and design passes only, from Thursday 22 Oct's usage reset (owner, 18 Oct 5 PM). When no agent has usage, the local models research and anyone may queue topics (owner, 16 Oct). The Hutt can be created but not played: the pre-CU client cannot drive its rig (`Documentation-support/hutt-c54.md`). Job lists per worker: `Agent/job-lists.md`.
 
 (Write `Server lock: Claude — <task> — <time>` or `Server lock: ChatGPT — …` before touching `/opt/swg`; set it back to `free` afterwards.)
 
@@ -91,6 +91,13 @@ The 13-14 Oct instructions for C1-C25 and the C41 and C47 notes are in `SWG-hand
 ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fix `7c68e39f` (gpt/work, dev merged first); h implementation/report `e86fcf7`. See `Documentation-support/C40-roof-ledge.md`. C40 source slice idle; Claude retains dev/runtime lock and bot driver. No bots/build/restart by ChatGPT.
 
 ## Log
+
+### 2026-10-18 5:03 PM Claude: Fable back for art direction; its first job, a review of the Vong look and the banner, Thu 22 Oct 10:15 PM
+
+- **Owner:** "bring Fable back for art direction and design passes only, starting after Thursday's reset. Opus keeps the engineering. Start with a Fable review of the Vong look and the banner."
+- **Why it came up:** Fable's weekly cap sits inside the all-models weekly, not beside it (Anthropic's help article "Claude Fable models on your plan", checked today), so Fable can't run once the weekly is used up. Anthropic's model docs put Fable 5.1 above Opus 5.5, at 2.5 times the API price. Usage at 4:55 PM: all models 86%, Fable 22%, both resetting Thu 22 Oct 10:00 PM.
+- **Set up:** brief `Fable-art-review/BRIEF.md` (review only: Fable writes `Fable-art-review/README.md`; Claude does every generation run, bake and install). One-time scheduled task `fable-art-review-1`, Thu 22 Oct 10:15 PM: it starts one Fable agent and reports to `Agent/to-claude.md`. Standing line and `Agent/job-lists.md` updated.
+- **Not done:** nothing run. The test galaxy (run 33) and the lock untouched.
 
 ### 2026-10-18 3:49 PM Claude: README: what to expect from a public server
 

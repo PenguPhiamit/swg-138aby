@@ -133,6 +133,18 @@ dispatcher (`next_gpt.sh` in Claude's scratchpad) starts the next open task when
 - C23c, the Hoth gameplay rerun: waits for the C62 Hoth fixes and H1.
 - C38, the class-check campaign: bots lane.
 
+## Fable (art direction and design passes only; from Thursday 22 Oct's reset)
+
+Owner, 18 Oct about 5 PM: "bring Fable back for art direction and design passes only, starting after Thursday's
+reset. Opus keeps the engineering." Fable looks, judges and writes direction; Claude makes the art and installs it.
+One pass per job: Fable uses the shared weekly limit faster than Opus.
+
+- **Scheduled Thu 22 Oct 10:15 PM: art review 1**, the Vong look and the launcher banner (brief
+  `Fable-art-review/BRIEF.md`, scheduled task `fable-art-review-1`). It writes `Fable-art-review/README.md` and a
+  summary in `Agent/to-claude.md`. Claude then makes the changes the owner picks.
+- **Next:** the owner's choice. Candidates: the Krayt ghost boss (`Krayt-ghost-design/DESIGN.md`, a draft of 18 Oct),
+  and the amphistaff and patrol looks (step 7 of `Documentation-support/vong-look-test.md`).
+
 ## Saluki on this PC (RTX 5070, with vision)
 
 Runs by hand with queue status `here`. It yields to the owner's game client, and nothing leaves this PC.
