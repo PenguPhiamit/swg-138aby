@@ -6,10 +6,10 @@
 // block, the right one's from direct calls, so the hook must read the device state rather than track Set calls.
 // The window stays hidden (it must not take focus from a game being played). Reset at frame 20, screenshots of
 // frames 40 and 48 as <prefix>-40.bmp and <prefix>-48.bmp. Exit code 0 when every call worked.
-// With "whip", a light whip swings in the middle as the client draws it (step 0 capture): a 2.1 m quad in object space
-// (x +-0.09, z 0 to 2.1) as a triangle fan plus a line over its first two vertices, from a vertex buffer, through a
+// With "whip", a light whip swings in the middle as the client draws it (step 0 capture): a 4.5 m quad in object space
+// (x +-0.09, z 0 to 4.5), swung until frame 30 and then held still, as a triangle fan plus a line over its first two vertices, from a vertex buffer, through a
 // vertex program with the client's constant packing (c0-c3 object to clip, c4-c7 object to world, c8 camera), with a
-// dark ghostfire c3. Frames 36, 40, 44 and 48 are saved.
+// dark ghostfire c3, for 120 frames. Frames 12, 24, 40, 48, 72 and 120 are saved.
 
 #define CINTERFACE
 #define WIN32_LEAN_AND_MEAN
@@ -118,12 +118,13 @@ static void mat_mul(float o[4][4], float a[4][4], float b[4][4])
 				o[i][j] += a[i][k] * b[k][j];
 }
 
-// the whip at frame f: object to world (row vectors) = scale 0.817, z up, a swing about the view axis, 5 m ahead
+// the whip at frame f: object to world (row vectors) = scale 0.817, z up, a swing about the view axis 7 m ahead,
+// swung until frame 30 and then held still
 static void whip_constants(IDirect3DDevice9 *d, int frame)
 {
-	float th = 1.2f * sinf(frame * 0.25f), c = cosf(th), s = sinf(th), k = 0.817f;
+	float th = 1.0f * sinf((frame < 30 ? frame : 30) * 0.12f), c = cosf(th), s = sinf(th), k = 0.817f;
 	float zn = 1.0f, zf = 100.0f, ys = 1.0f / tanf(0.5236f), xs = ys * H / W;
-	float world[4][4] = { { k * c, k * s, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0.0f, -1.2f, 5.0f, 1 } };
+	float world[4][4] = { { k * c, k * s, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0.0f, -1.6f, 7.0f, 1 } };
 	float proj[4][4] = { { xs, 0, 0, 0 }, { 0, ys, 0, 0 }, { 0, 0, zf / (zf - zn), 1 }, { 0, 0, -zn * zf / (zf - zn), 0 } };
 	float wvp[4][4], reg[9][4];
 	int i, j;
@@ -263,8 +264,8 @@ int main(int argc, char **argv)
 		static const D3DVERTEXELEMENT9 el[] = { { 0, 0, D3DDECLTYPE_FLOAT3, 0, D3DDECLUSAGE_POSITION, 0 },
 			{ 0, 12, D3DDECLTYPE_D3DCOLOR, 0, D3DDECLUSAGE_COLOR, 0 },
 			{ 0, 16, D3DDECLTYPE_FLOAT2, 0, D3DDECLUSAGE_TEXCOORD, 0 }, D3DDECL_END() };
-		WVtx q[4] = { { 0.09f, 0, 2.1f, 0xFFFFFFFF, 0, 0 }, { 0.09f, 0, 0, 0xFFFFFFFF, 1, 0 },
-		              { -0.09f, 0, 0, 0xFFFFFFFF, 1, 1 }, { -0.09f, 0, 2.1f, 0xFFFFFFFF, 0, 1 } };
+		WVtx q[4] = { { 0.09f, 0, 4.5f, 0xFFFFFFFF, 0, 0 }, { 0.09f, 0, 0, 0xFFFFFFFF, 1, 0 },
+		              { -0.09f, 0, 0, 0xFFFFFFFF, 1, 1 }, { -0.09f, 0, 4.5f, 0xFFFFFFFF, 0, 1 } };
 		void *p;
 		check(d->lpVtbl->CreateVertexShader(d, (const DWORD *)g_test_vs_code, &wvs), "CreateVertexShader");
 		check(d->lpVtbl->CreateVertexDeclaration(d, el, &wdecl), "CreateVertexDeclaration");
@@ -276,7 +277,7 @@ int main(int argc, char **argv)
 		wvb->lpVtbl->Unlock(wvb);
 	}
 
-	for (frame = 0; frame <= 48; frame++) {
+	for (frame = 0; frame <= (whip ? 120 : 48); frame++) {
 		MSG msg;
 		float c7[4] = { 0, 0, 0, 1 };   // fade off, bloom off, opacity 1
 		float red[4] = { 1.0f, 0.15f, 0.15f, 1 };
@@ -346,7 +347,7 @@ int main(int argc, char **argv)
 			check(d->lpVtbl->DrawPrimitive(d, D3DPT_LINELIST, 4, 1), "DrawPrimitive whip line");
 		}
 		check(d->lpVtbl->EndScene(d), "EndScene");
-		if (frame == 40 || frame == 48 || (whip && (frame == 36 || frame == 44))) {
+		if (frame == 40 || frame == 48 || (whip && (frame == 12 || frame == 24 || frame == 72 || frame == 120))) {
 			sprintf(path, "%s-%d.bmp", argv[3], frame);
 			save_bmp(d, path);
 		}

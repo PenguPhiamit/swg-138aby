@@ -24,6 +24,8 @@
 #include "mask_ps.h"   // g_mask_ps_code (fxc /Fh from mask_ps.hlsl)
 #include "haze_ps.h"   // g_haze_ps_code (fxc /Fh from haze_ps.hlsl)
 
+#define ROPE_MAX 64   // the whip rope's most segments
+
 // ---- settings (mirage.ini beside the DLL, section [mirage]; MIRAGE_INI overrides the path) ----
 
 static struct {
@@ -47,6 +49,7 @@ static struct {
 	// [whip]: the light whip's rope (step 3)
 	int whip_enabled, whip_key, whip_segments;
 	float whip_follow_base, whip_follow_tip, whip_momentum, whip_hz, whip_fixed_dt;
+	float whip_droop, whip_coil, whip_coil_turns, whip_coil_speed, whip_width, whip_taper;
 	unsigned int whip_ids[4];
 	int whip_count;
 	unsigned int extra_ids[8];
@@ -137,14 +140,20 @@ static void load_config(void)
 	g_sect = "whip";
 	cfg.whip_enabled = ini_int(ini, "enabled", 1);
 	cfg.whip_key = ini_int(ini, "toggle_key", 0x42);   // B, with toggle_mods
-	cfg.whip_segments = ini_int(ini, "segments", 20);
+	cfg.whip_segments = ini_int(ini, "segments", 40);
 	if (cfg.whip_segments < 4)
 		cfg.whip_segments = 4;
-	if (cfg.whip_segments > 32)
-		cfg.whip_segments = 32;
-	cfg.whip_follow_base = ini_float(ini, "follow_base", 0.5f);
-	cfg.whip_follow_tip = ini_float(ini, "follow_tip", 0.1f);
-	cfg.whip_momentum = ini_float(ini, "momentum", 0.5f);
+	if (cfg.whip_segments > ROPE_MAX)
+		cfg.whip_segments = ROPE_MAX;
+	cfg.whip_follow_base = ini_float(ini, "follow_base", 0.35f);
+	cfg.whip_follow_tip = ini_float(ini, "follow_tip", 0.04f);
+	cfg.whip_momentum = ini_float(ini, "momentum", 0.6f);
+	cfg.whip_droop = ini_float(ini, "droop", 0.08f);
+	cfg.whip_coil = ini_float(ini, "coil", 0.18f);
+	cfg.whip_coil_turns = ini_float(ini, "coil_turns", 1.5f);
+	cfg.whip_coil_speed = ini_float(ini, "coil_speed", 3.0f);
+	cfg.whip_width = ini_float(ini, "width", 0.7f);
+	cfg.whip_taper = ini_float(ini, "taper", 0.25f);
 	cfg.whip_follow_base = max(0.001f, min(cfg.whip_follow_base, 1.0f));
 	cfg.whip_follow_tip = max(0.001f, min(cfg.whip_follow_tip, 1.0f));
 	cfg.whip_momentum = max(0.0f, min(cfg.whip_momentum, 0.95f));
@@ -162,9 +171,11 @@ static void load_config(void)
 		cfg.whip_ids[cfg.whip_count++] = (unsigned int)id;
 	}
 	g_sect = "mirage";
-	logf_("whip rope %s: %d segments, follow %.2f at the hilt to %.2f at the tip, momentum %.2f, %.0f sub-steps a "
-	      "second, toggle key 0x%02x, %d whip program ids", cfg.whip_enabled ? "on" : "off", cfg.whip_segments,
-	      cfg.whip_follow_base, cfg.whip_follow_tip, cfg.whip_momentum, cfg.whip_hz, cfg.whip_key, cfg.whip_count);
+	logf_("whip rope %s: %d segments, follow %.2f at the hilt to %.2f at the tip, momentum %.2f, droop %.2f, coil %.2f "
+	      "(%.1f turns, %.1f rad/s), width %.2f tapering to %.2f, %.0f sub-steps a second, toggle key 0x%02x, %d whip "
+	      "program ids", cfg.whip_enabled ? "on" : "off", cfg.whip_segments, cfg.whip_follow_base, cfg.whip_follow_tip,
+	      cfg.whip_momentum, cfg.whip_droop, cfg.whip_coil, cfg.whip_coil_turns, cfg.whip_coil_speed, cfg.whip_width,
+	      cfg.whip_taper, cfg.whip_hz, cfg.whip_key, cfg.whip_count);
 	if (cfg.log_draws > 0)
 		logf_("blade-draw capture on: %d draws of each blade program, key 0x%02x adds %.0f s, to mirage-draws-%lu.log",
 		      cfg.log_draws, cfg.draw_key, cfg.draw_burst, g_pid);
@@ -872,13 +883,15 @@ static void capture(IDirect3DDevice9 *d, const Draw *c, unsigned int id)
 // 8:46 PM). For the whip program only, the fan becomes a rope: a chain of segments in world space from the base, each
 // segment's direction easing towards its parent's direction of the step before (the first towards the straight
 // blade), quickly near the hilt and slowly at the tip, with some momentum. So it trails a swing, snaps round when the
-// swing stops, settles straight, keeps its length and cannot fold back on itself (springs towards points on the
-// straight blade folded it into a coil in the harness, 18 Oct 9:01 PM).
+// swing stops, keeps its length and cannot fold back on itself (springs towards points on the straight blade folded it
+// into a coil in the harness, 18 Oct 9:01 PM). Each segment's aim is its parent's direction bent a little down (droop)
+// and a little round (coil: a helical wave travelling from the hilt to the tip, in the frame of the hilt's own x axis),
+// both growing towards the tip, so at rest it hangs in curls rather than standing like a rod (owner, 9:10 PM: "more
+// coily"). The strip narrows towards the tip (taper).
 // The rope is drawn as a camera-facing strip, put back into the blade's object space through the inverse of c4-c7, with
 // the game's own vertex layout, vertex program, constants, pixel program, textures and depth test. The edge line
 // follows the rope. Anything unexpected draws the straight blade as the game does.
 
-#define ROPE_MAX 32
 #define ROPES 8
 
 typedef struct { float x, y, z; DWORD col; float u, v; } WVtx;   // the game's blade layout, stride 24
@@ -892,6 +905,7 @@ typedef struct {
 	float d[ROPE_MAX + 1][3];     // segment directions (1..n), and the step before
 	float dp[ROPE_MAX + 1][3];
 	float x[ROPE_MAX + 1][3];     // points, 0 at the base
+	float time;                   // the coil wave's clock
 } Rope;
 
 static Rope g_rope[ROPES];
@@ -993,8 +1007,37 @@ static void rope_reset(Rope *r, const float *B, const float *T, int n)
 	rope_points(r, B, n);
 }
 
-// one frame of the rope: the straight blade moves from (base, tip) to (B, T) over dt, in sub-steps
-static void rope_step(Rope *r, const float *B, const float *T, float dt, int n)
+// where segment q (0 at the hilt, 1 at the tip) aims: its parent's direction, bent down and round the coil
+static void rope_aim(float *o, const float *par, const float *X, float q, float time)
+{
+	float s1[3], s2[3], l, ph, a = cfg.whip_coil * q, g = cfg.whip_droop * q, xp = X[0] * par[0] + X[1] * par[1] + X[2] * par[2];
+	int k;
+	for (k = 0; k < 3; k++)
+		s1[k] = X[k] - xp * par[k];   // the hilt's x axis, square to the parent
+	l = v3len(s1);
+	if (l < 0.1f) {
+		float up[3] = { 0, 1, 0 };
+		v3cross(s1, par, up);
+		l = v3len(s1);
+	}
+	if (l < 1e-6f) {
+		memcpy(o, par, 3 * sizeof(float));
+		return;
+	}
+	for (k = 0; k < 3; k++)
+		s1[k] /= l;
+	v3cross(s2, par, s1);
+	ph = 6.2831853f * cfg.whip_coil_turns * q - cfg.whip_coil_speed * time;
+	for (k = 0; k < 3; k++)
+		o[k] = par[k] + a * (cosf(ph) * s1[k] + sinf(ph) * s2[k]) - (k == 1 ? g : 0.0f);   // y is up in SWG
+	l = v3len(o);
+	for (k = 0; k < 3; k++)
+		o[k] = l > 1e-6f ? o[k] / l : par[k];
+}
+
+// one frame of the rope: the straight blade moves from (base, tip) to (B, T) over dt, in sub-steps; X is the hilt's
+// x axis in the world
+static void rope_step(Rope *r, const float *B, const float *T, const float *X, float dt, int n)
 {
 	static float old[ROPE_MAX + 1][3];
 	float ae[ROPE_MAX + 1], me, h;
@@ -1021,14 +1064,16 @@ static void rope_step(Rope *r, const float *B, const float *T, float dt, int n)
 			for (k = 0; k < 3; k++)
 				D[k] /= l;
 		memcpy(old, r->d, sizeof old);
+		r->time += h;
 		for (i = 1; i <= n; i++) {
 			const float *par = i == 1 ? D : old[i - 1];
-			float nw[3];
+			float nw[3], aim[3];
+			rope_aim(aim, par, X, (float)i / n, r->time);
 			for (k = 0; k < 3; k++)
-				nw[k] = old[i][k] + ae[i] * (par[k] - old[i][k]) + me * (old[i][k] - r->dp[i][k]);
+				nw[k] = old[i][k] + ae[i] * (aim[k] - old[i][k]) + me * (old[i][k] - r->dp[i][k]);
 			l = v3len(nw);
 			if (l < 1e-6f)
-				memcpy(nw, par, sizeof nw);
+				memcpy(nw, aim, sizeof nw);
 			else
 				for (k = 0; k < 3; k++)
 					nw[k] /= l;
@@ -1066,9 +1111,11 @@ static void rope_strip(const Rope *r, int n, const float *cam, const float inv[3
 		memcpy(prev, side, sizeof prev);
 		for (j = 0; j < 2; j++) {
 			float w[3], o[3];
+
 			WVtx *v = &g_wstrip[2 * i + j];
+			float hw = r->hw * cfg.whip_width * (1.0f - (1.0f - cfg.whip_taper) * i / n);
 			for (k = 0; k < 3; k++)
-				w[k] = r->x[i][k] + (j ? -side[k] : side[k]) * r->hw - t[k];
+				w[k] = r->x[i][k] + (j ? -side[k] : side[k]) * hw - t[k];
 			for (k = 0; k < 3; k++)
 				o[k] = inv[k][0] * w[0] + inv[k][1] * w[1] + inv[k][2] * w[2];
 			v->x = o[0], v->y = o[1], v->z = o[2];
@@ -1206,7 +1253,10 @@ static void whip_body(IDirect3DDevice9 *d, Draw *c)
 		r->len = len;
 		rope_reset(r, B, T, n);
 	} else {
-		rope_step(r, B, T, min(dt, 0.05f), n);
+		float X[3] = { A[0][0], A[1][0], A[2][0] }, xl = v3len(X);
+		for (k = 0; k < 3; k++)
+			X[k] /= xl;
+		rope_step(r, B, T, X, min(dt, 0.05f), n);
 	}
 	r->hw = hw;
 	r->frame = g_frames;

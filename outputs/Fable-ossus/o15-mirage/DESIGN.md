@@ -184,8 +184,25 @@ The plan is in [lightwhip-design.md](../../Documentation-support/lightwhip-desig
 - **Tested in the harness** (`mirage_test.exe ... whip`). A 2.1 m whip, drawn as the client draws it (fan plus edge line, from a vertex buffer, through a vs_2_0 with the client's packing), swings 1.2 rad at 15 rad/s with `fixed_dt=0.016667`.
   - Every call worked.
   - Without the whip, the frame is identical to `dc7e87c8`.
-  - With `debug_view=1` (the haze area painted in), the rope's area differs from the straight blade's by 4,200 to 4,900 pixels a frame. It keeps its length and trails as a smooth curve: `work/o15-mirage/preview-whip-rope-mask.png`, straight on top, rope below, frames 36 to 48.
+  - With `debug_view=1` (the haze area painted in), the rope keeps its length and trails as a smooth curve: `work/o15-mirage/preview-whip-rope-mask.png`.
   - Not tested: real-time steps in game, two whips at once, the examine view, MSAA.
+- **In game, about 9:10 PM** (`525cd302`, the owner's words via the main session): "lightwhip looks great, just need to be a good bit longer, and more coily it looks pretty phallic right now, ... and not enough trailing on the whip". On length: "4-5? i want it to be able to coil at their feet with an idle animation (idle comes later on)".
+
+**Step 3b, longer and coilier: built 9:18 PM as `86d08fdb`, not installed.** It waits for the ghostfire session's archive with the whip at 4.5 m and its new strand program id, so the two go in together.
+- **Length.** The rope takes its length from the game's quad, so 4.5 m needs no code. The default is now 40 segments (up to 64), so a 4.5 m strand (3.7 m in the world) has segments of about 9 cm.
+- **Coil and droop.** Each segment now aims at its parent's direction bent a little down (`droop`) and a little round (`coil`, a helical wave of `coil_turns` along the strand, travelling from the hilt at `coil_speed`). The round direction is taken from the hilt's own x axis, so the wave turns with the hand. Both grow towards the tip.
+  - In the harness, a 4.5 m whip swung and then held: it trails in waves during the swing and rests in an S-curve with a curl or hook at the end, rather than a rod. See `work/o15-mirage/preview-whip-4p5m.png`: straight on top, rope below, frames 12, 24, 48, 72 and 120.
+  - It takes 1 to 2 s to settle, because the tip follows slowly.
+  - At `coil` above about 0.3 the strand bunches into a knot by the hilt (`preview-whip-curl.png`), so 0.18 is the default.
+- **More trailing.** The follow rates are looser: 0.35 at the hilt to 0.04 at the tip, with momentum 0.6 (before: 0.5, 0.1, 0.5). "Not enough trailing" may also mean the ghostfire trail; that is the ghostfire session's.
+- **Thinner, tapered.** The strip is 0.7 of the blade's width and narrows to 0.25 of that at the tip (`width`, `taper`). This takes the rod look away without changing the `.lsb`. Players without the DLL see the `.lsb` width, but only the owner has the DLL.
+- **Settings**, all in `[whip]` and read at game start: `segments`, `follow_base`, `follow_tip`, `momentum`, `droop`, `coil`, `coil_turns`, `coil_speed`, `width`, `taper`. Tuning needs no rebuild.
+- **The new program id.** The whip rule matches by id (`[whip] ids`, default `238eb66a`), and the mirage by its id table. When the ghostfire session's id arrives, either set `[whip] ids=<new>` and `[mirage] extra_ids=<new>` in the ini, or rebuild with `blade_ids.py` on the new archive (preferred: one build for both).
+- **Future step: the coil at the feet** (owner: "coil at their feet with an idle animation (idle comes later on)"). Not built. When the wielder is idle (the hilt still for a second or more), the strand would lie on the ground: segments below the hilt's height pulled to the ground plane at the wielder's feet and laid out in a loose spiral. Open questions:
+  - where the ground is (the hook sees no terrain; the lowest point of the wielder's model, or a fixed height below the hilt);
+  - how to tell idle from a slow walk;
+  - what the idle animation itself does with the hand.
+
 - **To try** (game closed, the owner's OK):
   1. Copy `work/o15-mirage/d3d9.dll` over `SWG-client/d3d9.dll`, or run `install.ps1`.
   2. Set `log_draws=0` in `mirage.ini`.
