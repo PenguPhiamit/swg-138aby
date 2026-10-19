@@ -2,7 +2,7 @@
 
 Owner, 18 Oct ~7:05 PM: "build step 1 of the light whip: the whip hilt template, the long thin blade with its own shaders and trail, and the server saber template with loot and schematic. Built, not installed."
 
-The stiff whip is a straight 2.1 m strand (2.5 m until the owner's 8:26 PM answers). Later it is the fallback for anyone without the graphics hook, once the bending whip (step 3) exists. Design and later steps: [lightwhip-design.md](../Documentation-support/lightwhip-design.md).
+The stiff whip is a straight 4.5 m strand (owner, 9:10 PM, with the bend hook in: "a good bit longer", "4-5? i want it to be able to coil at their feet"; 2.1 m from 8:26 PM, 2.5 m before). Without the graphics hook, which friends' installs may not have, 4.5 m draws as a straight pole. Later it is the fallback for anyone without the graphics hook, once the bending whip (step 3) exists. Design and later steps: [lightwhip-design.md](../Documentation-support/lightwhip-design.md).
 
 **On the test galaxy since 18 Oct 7:42 PM (run 37); archive `b8b59aca` since 9:04 PM** (installed by the main session on the client and at `/opt/swg/tre`; backups `.bak-23368576`; board commit `65ff724`). The boss-drop and schematic-rule patch is still not applied (owner: "Later"). Owner, 7:26 PM: "Install the light whip archive (with O14) and the Lua patch on the test galaxy and restart it." The archive is on the client and at `/opt/swg/tre` (backups `.bak-c8a61080`). Dev `e6e6d3bb` has O14's test-B Lua, and `9d08e265` has the whip's. The server log shows no new warnings or errors, and the whip's schematic is in the database.
 
@@ -12,11 +12,12 @@ The stiff whip is a straight 2.1 m strand (2.5 m until the owner's 8:26 PM answe
 ## The owner's answers (8:26 PM, via the main session) and the rebuild
 
 - **Hilt:** "the hilt it has now for now". The leather hilt stays.
-- **Length:** "a little shorter then it is now to start". Now 2.1 m, with `tr1e` at 2.025 m and `whp1` at 1.3125 m.
+- **Length:** "a little shorter then it is now to start". That was 2.1 m. **Since 9:10 PM it's 4.5 m** (the builder's default), with `tr1e` at 4.425 m and `whp1` at 2.8125 m.
 - **Trail:** "none without a specific crystal". The default is now no visible trail: the whip's trail file draws a transparent texture. The ghostfire crystal still brings its server-played ribbons, because `GhostfireShimmerTask` runs on any Jedi weapon and plays at the `tr1e` tip.
 - **Drop:** "Krayt dragons for now, the boss". Only the rotation's two krayt bosses (Ghost-Scale the Canyon Krayt, `giant_canyon_krayt_dragon`; Old Rattlebones, `krayt_dragon_ancient`), at 10% per kill.
 - **Schematic:** "Master weaponsmith +saber crafting 1 or 2 or jedi master". The skill names are found but not wired yet; see the design note.
 - **Ghostfire:** "the ghostfire almost looks better in the whip". The whip keeps its own ghostfire values (O14 `feb3bf84`'s 3.5% glow, 0.6% core) rather than O14's newer take.
+- **9:10 PM look (built by the O14 session, not installed):** 4.5 m. The ghostfire core is 1.5% (was 0.6%), so the whip program id is now `3df92ce3` (was `238eb66a`). The chain is `f2ac1b6c…` on O14 `b7378ca8`; details are in the O14 README.
 - **Final chain for the joint swap (owner: "Wait for both"):** `b8b59aca…` on O14 `a0cca018`, which ties the ghostfire trail to the crystal in any hilt (418 entries; two builds give the same hash). Installed at 9:04 PM.
   - O14 now overrides the shared saber trail, so the builder reads the stock `sw_light_saber_white.swh` from the client's own archives.
   - O14's override stays in the chain untouched. The whip's row still points at `sw_ghostfire_trail.swh`.

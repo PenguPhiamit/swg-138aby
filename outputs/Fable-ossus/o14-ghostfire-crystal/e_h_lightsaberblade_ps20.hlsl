@@ -13,7 +13,7 @@
 sampler diffuseMap : register(s0);
 
 static const float GHOST_GLOW = 0.14f;   // glow strength (stock glow is 1); owner, 8:15 PM: "the blade can come to where the trails are now" (0.035 was unseen)
-static const float GHOST_CORE = 0.02f;   // white core strength (stock core is 1)
+static const float GHOST_CORE = 0.035f;  // white core strength (stock core is 1); owner, 9:10 PM: "core can probably raise a smidge too. not too much"
 static const float BANDS = 1.6f;         // opal bands along the blade
 
 float4 main

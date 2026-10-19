@@ -190,8 +190,9 @@ def main(argv):
     ap = argparse.ArgumentParser()
     ap.add_argument('--base', default=os.path.join(H, 'work', 'ossus-ghostfire-crystal', 'local_planets-ghostfire-crystal.tre'))
     ap.add_argument('--out', default=os.path.join(H, 'work', 'lightwhip', 'local_planets-lightwhip.tre'))
-    ap.add_argument('--length', type=float, default=2.1,
-                    help='blade length in metres (stock saber 1.2; owner, 8:26 PM: "a little shorter" than the first 2.5)')
+    ap.add_argument('--length', type=float, default=4.5,
+                    help='blade length in metres (stock saber 1.2; owner, 8:26 PM: "a little shorter" than the first 2.5; '
+                         'then 9:10 PM, with the bend: "a good bit longer", "4-5", so it can coil at the feet)')
     ap.add_argument('--width', type=float, default=0.09, help='blade glow width in metres (stock saber 0.15)')
     ap.add_argument('--trail', default='ghostfire',
                     help='ghostfire (default): O14\'s ghostfire-only trail; none: no visible trail; or seconds: the stock '

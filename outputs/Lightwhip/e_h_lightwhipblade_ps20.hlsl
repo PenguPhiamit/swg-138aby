@@ -14,7 +14,7 @@ sampler diffuseMap : register(s0);
 static const float WHIP_CORE = 0.75f;    // white core of a normal crystal (stock is 1)
 // The ghostfire values follow O14's program (archive feb3bf84): owner, "the blade should be almost nonexistent".
 static const float GHOST_GLOW = 0.035f;  // glow strength (stock glow is 1)
-static const float GHOST_CORE = 0.006f;  // white core strength (stock core is 1)
+static const float GHOST_CORE = 0.015f;  // white core strength (stock core is 1); owner, 9:10 PM: "core can probably raise a smidge too. not too much"
 static const float BANDS = 1.6f;         // opal bands along the blade
 
 float4 main

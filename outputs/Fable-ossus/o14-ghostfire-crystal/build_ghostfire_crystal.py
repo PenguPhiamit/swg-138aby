@@ -62,7 +62,7 @@ SOURCE = os.path.join(HERE, 'e_h_lightsaberblade_ps20.hlsl')
 INCLUDES = ['pixel_program/include/pixel_shader_constants.inc', 'pixel_program/include/functions.inc',
             'shared_program/functions.inc']
 GHOST_FIRST, GHOST_COUNT = 32, 9           # entries 32 (idle) and 33-40 (shimmer steps)
-GHOST_GLOW, GHOST_CORE, BANDS = 0.14, 0.02, 1.6   # must match the .hlsl
+GHOST_GLOW, GHOST_CORE, BANDS = 0.14, 0.035, 1.6   # must match the .hlsl
 OPAL_BASE, OPAL_SWING = 0.75, 0.25
 
 
@@ -135,6 +135,14 @@ def ghost_entry(k):
 STROBE_SECONDS = 1.2
 STROBE_BARS = 6
 TRAIL_ALPHA = 1.0
+# Owner, 9:10 PM: "ghostfire trail has weird white trails added with normal hilt". The any-hilt trail replaces the stock
+# saber trail file itself, so the extra white streaks are the server's tip ribbons: full alpha on their doubled effect
+# washes their colours to white (take 4 showed them pale at half alpha). The any-hilt trail carries the colour now, so
+# the ribbons draw nothing (colour and alpha 0); the server still plays them in combat.
+RIBBONS_SHOWN = False
+# The whip's ghostfire-only trail, owner, 9:10 PM: "not enough trailing on the whip": 2 s instead of 1.2, and its
+# program brightens the bars (GAIN in ghostfire_trail_ps20.hlsl).
+WHIP_TRAIL_SECONDS = 2.0
 TRAIL_EFFECT = 'effect/e_particle_emisadd.eft'   # the colour-band trail's single effect (the 2x one was too loud)
 SHARED_B = 'object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire_b.iff'
 TRAIL_B_SWH = 'appearance/sw_ghostfire_b.swh'
@@ -296,7 +304,8 @@ def main(argv):
         rate, samples = struct.unpack_from('<fI', d.data, 48)
         assert abs(dur - 0.1) < 1e-6 and rate == 30.0 and samples == 20, (name, dur, rate, samples)
         old_ribbon_rgba[name] = [round(x, 3) for x in struct.unpack_from('<4f', d.data, 0)]
-        d.data = struct.pack('<4f', *oil(k, 0.0), TRAIL_ALPHA) + struct.pack('<f', args.trail) + d.data[20:52] + struct.pack('<I', 60) + d.data[56:]
+        rgba = list(oil(k, 0.0)) + [TRAIL_ALPHA] if RIBBONS_SHOWN else [0.0, 0.0, 0.0, 0.0]
+        d.data = struct.pack('<4f', *rgba) + struct.pack('<f', args.trail) + d.data[20:52] + struct.pack('<I', 60) + d.data[56:]
         changed[name] = trn_iff.build(rn)
 
     # strobe trail test (owner: "Strobe trail, test first"): the saber trail is the surface the blade sweeps between its
@@ -350,6 +359,9 @@ def main(argv):
     gptex = [x for _, x in trn_iff.walk(gswh) if not x.is_form and x.tag == '0000' and x.data.startswith(b'shader/')]
     assert len(gptex) == 1 and o13.cstr(gptex[0].data) == o13.TRAIL_SHT
     gptex[0].data = GTRAIL_SHT.encode() + gptex[0].data[gptex[0].data.index(b'\0'):]
+    gdat = [c for c in gswh[0].children[0].children if not c.is_form][-1]
+    assert struct.unpack_from('<4f', gdat.data, 0) == (1.0, 1.0, 1.0, TRAIL_ALPHA)
+    gdat.data = gdat.data[:16] + struct.pack('<f', WHIP_TRAIL_SECONDS) + gdat.data[20:]
     added[GTRAIL_SWH] = trn_iff.build(gswh)
     for name in (GTRAIL_PSH, GTRAIL_EFT, GTRAIL_SHT, GTRAIL_SWH):
         assert trn_iff.build(trn_iff.parse(added[name])) == added[name]
@@ -526,12 +538,13 @@ def main(argv):
               'stock_crystal_brightest': {k: round(max(ents[k][:3]) / 255.0, 3) for k in used},
               'ghostfire_trail': {'files': [GTRAIL_SWH, GTRAIL_SHT, GTRAIL_EFT, GTRAIL_PSH], 'slots': gslots,
                                   'code_sha256': hashlib.sha256(gcode).hexdigest(), 'texture': o13.TRAIL_DDS,
-                                  'seconds': STROBE_SECONDS, 'alpha': TRAIL_ALPHA},
+                                  'seconds': WHIP_TRAIL_SECONDS, 'alpha': TRAIL_ALPHA, 'gain': 1.6},
               'saber_trail': {'swh': o13.SRC_SWH, 'files': [GSABER_SHT, GSABER_EFT, GSABER_PSH, GSABER_DDS],
                               'slots': sslots, 'code_sha256': hashlib.sha256(scode).hexdigest(),
                               'seconds': STROBE_SECONDS, 'stock_share': 0.05, 'ghostfire_lightsaber_row': [o13.SRC_SWH, 1]},
               'ribbon_trail_seconds': args.trail, 'ribbon_samples': 60, 'ribbon_rgba_was': old_ribbon_rgba,
-              'ribbon_rgba': {n: [round(x, 3) for x in oil(k, 0.0)] + [TRAIL_ALPHA] for k, n in enumerate(RIBBONS)}}
+              'ribbon_rgba': {n: ([round(x, 3) for x in oil(k, 0.0)] + [TRAIL_ALPHA]) if RIBBONS_SHOWN else [0, 0, 0, 0]
+                              for k, n in enumerate(RIBBONS)}}
     with open(os.path.join(HERE, 'checks-crystal.json'), 'w', encoding='utf-8') as f:
         json.dump(checks, f, indent=1)
     print(json.dumps({k: checks[k] for k in ('base_sha256', 'out_sha256', 'out_entries', 'changed', 'shader')}, indent=1))

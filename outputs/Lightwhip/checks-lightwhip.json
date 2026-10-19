@@ -1,8 +1,8 @@
 {
- "base_sha256": "a0cca018aceaeea12a140752dbc3bed326e086957e7e368651f6726566b47522",
+ "base_sha256": "b7378ca8c1a4d301c62e63dcf904d396ff7725ac847634e9b974e3dcab60b07c",
  "base_entries": 400,
- "out_sha256": "b8b59aca22802d0977633f7a13657590045df9e4a11a070081054cce2ee33f9d",
- "out_bytes": 7356747,
+ "out_sha256": "f2ac1b6cc5082c1418c7ca7f5af94f2acde6b520814b999e714b7675e8f5f37c",
+ "out_bytes": 7356832,
  "out_entries": 418,
  "unchanged_entries": 396,
  "changed": [
@@ -32,17 +32,17 @@
   "string/en/craft_weapon_ingredients_n.stf"
  ],
  "added_sha256": {
-  "appearance/lod/wp_mle_lightwhip.lod": "bf4c4974bb58037bc61477802fe0c72a8c9ebaef17e9602f4c9919e26c230f0f",
-  "appearance/mesh/wp_mle_lightwhip_l0.msh": "8fcc5e9950bccca1ad06bf48ceb6aa9c3fd90aeb16eb9e7bdf6f2b9563de9b3d",
-  "appearance/mesh/wp_mle_lightwhip_l1.msh": "66c960da2629e06aae4cc34a68120f372d88f110c444c1cdcee6e7a5a52bdf82",
-  "appearance/mesh/wp_mle_lightwhip_l2.msh": "b8db047ee194e7c8a7c3cc459673c8444f1d52775887148673df3c70fa67e991",
+  "appearance/lod/wp_mle_lightwhip.lod": "35d34773cd4cc4bda9b1e22e5360bbc90ed12960f36063c0e747276588ba7f17",
+  "appearance/mesh/wp_mle_lightwhip_l0.msh": "08120d8b93beb0afc3f268a995d0763e3d786437462a6efaa4bbd61248d64641",
+  "appearance/mesh/wp_mle_lightwhip_l1.msh": "af599e8649e3da7dee4e9139eb558ecfa4badaa303d01fe0c9faf9a3f18d7164",
+  "appearance/mesh/wp_mle_lightwhip_l2.msh": "33ecb6dcce50f3ba5b56623145be36322335f9e78430801ea3848744b5148998",
   "appearance/wp_mle_lightwhip.apt": "78c6b45e5cabd0a3e2052698f99d2089c691fde4c933b9d5df466209638e8d9d",
-  "appearance/wp_mle_lightwhip_blade.lsb": "494e8c15768e5a9015754f0bdbc38d9d6f1d8d91e1b48e470e90b28886ac6fba",
+  "appearance/wp_mle_lightwhip_blade.lsb": "24ef5d797a60b00660347418c84383185a54bda15be4409828ec10bf4716e5cd",
   "effect/e_h_lightwhipblade.eft": "285bc86fac012f87112632fc46b8f3f84812200ade8c0c595a15bb0be430e363",
   "object/draft_schematic/weapon/lightsaber/shared_lightsaber_lightwhip.iff": "744749a808a45e89fa76861289ed76d154368abc031af8ed8dd8d9297e7d1e4f",
   "object/tangible/loot/loot_schematic/shared_lightwhip_schematic.iff": "dfef454efe601893e90632d24abebfddbf0b78b42cd46c7826bfd35af44d4a67",
   "object/weapon/melee/sword/crafted_saber/shared_sword_lightwhip.iff": "ee0e487281ee6e461549567e4761d8f8e7869d1bf77e0e191119603b663b6771",
-  "pixel_program/e_h_lightwhipblade_ps20.psh": "fb7e165268caa3b32a217332f0d920e28483d8e39e4e6ea8a90beb9746fec409",
+  "pixel_program/e_h_lightwhipblade_ps20.psh": "308cf392c993c00a6e784ee4dea7d093905183d2c07878de3eb104f5097aff98",
   "shader/lightwhipblade.sht": "90794ffc63711a4b846fd23e5133eedc7779b107d74d869ac970f7d345952b19",
   "shader/lightwhipblade_a.sht": "96d96371ec24ba1b0a3431613978fd78f70e6c06a0e0e71ec764671c1d7b25cb",
   "shader/lightwhipblade_b.sht": "176c2c9e2fe6d34812bc5932942b9277646f81c73299ac8b8a6b294e159dd7d7",
@@ -52,15 +52,15 @@
   "string/en/craft_weapon_ingredients_n.stf": "f68fb4fdcb292bcf0017199d53c03d9a560a0c18964e679011440e7ff38cff71"
  },
  "settings": {
-  "length": 2.1,
+  "length": 4.5,
   "width": 0.09,
   "trail": "ghostfire",
   "trail_row": "appearance/sw_ghostfire_trail.swh"
  },
  "hardpoints_y": {
-  "tr1e": 2.025,
+  "tr1e": 4.425,
   "tr1s": 0.1258,
-  "whp1": 1.3125
+  "whp1": 2.8125
  },
  "template_crcs": {
   "object/weapon/melee/sword/crafted_saber/shared_sword_lightwhip.iff": "49d39c1f",
@@ -69,11 +69,11 @@
  },
  "pixel_program_ids": {
   "stock": "acc853c5",
-  "o14": "0ea2a331",
-  "whip": "238eb66a"
+  "o14": "983bc32d",
+  "whip": "3df92ce3"
  },
  "shader_slots": 37,
- "shader_code_sha256": "a92246956c4861577fc4155b684d8c77d10069da2ee8a006b964f9e4417af1e3",
+ "shader_code_sha256": "9ece378eef366b811ec1db385dd1f3e61d4062511982b949cc9135ed1fe64d77",
  "swoosh_rows": 204,
  "crc_entries": 29372,
  "strings": {

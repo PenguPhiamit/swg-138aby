@@ -41,6 +41,18 @@ O14 `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre` = `4c5a29
 - **Mirage:** the blade's compiled code changed, so its id is now `0ea2a331` (was `fac25b60`; the whip's `238eb66a` is unchanged). Add `extra_ids=0ea2a331` to `SWG-client/mirage.ini` with this install, or the mirage stops; no proxy rebuild is needed. The ghostfire c3 values are unchanged, so `max_bright` stays.
 - **Builder fix:** the builder read its "stock" pixel program and customization table from the live client, whose `local_planets.tre` is now ours. It now reads them from the archives under it.
 
+## 9:10 PM look at `b8b59aca` (with the bend hook `525cd302`)
+
+Owner: "lightwhip looks great, just need to be a good bit longer, and more coily it looks pretty phallic right now, ghostfire trail has weird white trails added with normal hilt, and not enough trailing on the whip. core can probably raise a smidge too. not too much". Card answers: length "4-5? i want it to be able to coil at their feet with an idle animation (idle comes later on)"; core "Both".
+
+**Built, not installed (9:18 PM):** O14 `b7378ca8c1a4d301c62e63dcf904d396ff7725ac847634e9b974e3dcab60b07c`. The chain with the light whip is `f2ac1b6cc5082c1418c7ca7f5af94f2acde6b520814b999e714b7675e8f5f37c`. Two builds of each give the same hash, and the light whip builder run on its own gives the same chain. This round was mine alone; the light whip session sat it out.
+- **White trails on a normal hilt:** the any-hilt trail replaces the stock saber trail file itself, so the stock trail can't draw beside it. The white streaks are the server's tip ribbons: at full alpha (since `49d6ae99`) on their doubled effect, their colours wash to white. Take 4 already showed them pale at half alpha. They now draw nothing (colour and alpha 0); the server still plays them in combat, and a later C++ change can stop that.
+- **Whip trail:** the whip's ghostfire-only trail lasts 2.0 s (was 1.2), and its program brightens the bars 1.6 times. At 4.5 m it also sweeps about twice the area.
+  - **Limit:** the trail is drawn between the straight hardpoints `tr1s` and `tr1e`. The bend hook bends only the blade, so the trail fans out along where a straight whip would be, not along the curled strand. Making it follow the bend would mean the hook redrawing the trail too (it can recognise the trail by its program).
+- **Core:** the ghostfire saber blade's core goes from 2% to 3.5% (glow stays 14%). The whip strand's ghostfire core goes from 0.6% to 1.5% (its glow stays 3.5%).
+- **New program ids for the mirage and bend hook:** saber blade `983bc32d` (was `0ea2a331`), whip strand `3df92ce3` (was `238eb66a`).
+- **Whip length:** 4.5 m (the light whip builder's new default), with `tr1e` at 4.425 m and `whp1` at 2.8125 m. "More coily" is the bend hook's shape, the mirage session's part.
+
 ## ~8:5x PM: the ghostfire trail in any hilt ("yes, it was supposed to be tied to the crystal, go in any hilt")
 
 The owner, after "trails do not work without the hilt": the broad swing trail showed only on the Ghostfire Lightsaber, because only its own trail row had the strobe file. The server's tip ribbons are thin, play only in combat, and don't count as the trail.

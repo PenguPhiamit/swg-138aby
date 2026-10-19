@@ -13,6 +13,8 @@
 
 sampler diffuseMap : register(s0);
 
+static const float GAIN = 1.6f;  // owner, 9:10 PM, on the whip: "not enough trailing"
+
 float4 main
 (
 	in float4 vertexColor : COLOR0,
@@ -28,7 +30,7 @@ float4 main
 	            * saturate((vertexColor.r - vertexColor.g - 0.004f) * 400.0f);
 
 	float4 result;
-	result.rgb = texel.rgb * ghost;
+	result.rgb = saturate(texel.rgb * GAIN) * ghost;
 	result.a = texel.a * vertexColor.a * alphaFadeOpacity * ghost;
 	return result;
 }
