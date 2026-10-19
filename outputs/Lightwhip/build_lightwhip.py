@@ -20,10 +20,12 @@ This step adds, for the whip only (no stock file changes except the tables and s
   pixel_program/e_h_lightwhipblade_ps20.psh
         e_h_lightwhipblade_ps20.hlsl next to this script: the O14 blade program (ghostfire included) with the white core
         at 75%; its own instructions give it its own id for the O15 hook
-  appearance/sw_lightwhip.swh
-        no visible trail by default (owner, 8:26 PM: "the trail; none without a specific crystal"): the stock saber trail
-        on shader/sw_lightwhip_none.sht, a fully transparent texture/sw_lightwhip_none.dds. The ghostfire crystal still
-        brings its server-played ribbons at tr1e (GhostfireShimmerTask, any Jedi weapon). --trail S: the stock trail, S s
+  the trail (owner, 8:26 PM: "the trail; none without a specific crystal"; 8:45 PM: "the ghostfire crystal also has no
+        trails on the whip hilt"). Default --trail ghostfire: the whip's swoosh row points at O14's ghostfire-only trail,
+        appearance/sw_ghostfire_trail.swh (its program draws the strobe bars for palette entries 32-40 and nothing for any
+        other crystal, on the ps_2_0 path). --trail none: appearance/sw_lightwhip.swh, the stock saber trail on a fully
+        transparent texture (shader/sw_lightwhip_none.sht, texture/sw_lightwhip_none.dds). --trail S: sw_lightwhip.swh as
+        the stock trail lasting S seconds
   object/weapon/melee/sword/crafted_saber/shared_sword_lightwhip.iff
         the s5 gen4 one-handed saber template with the whip blade and its own name and description
   object/draft_schematic/weapon/lightsaber/shared_lightsaber_lightwhip.iff
@@ -39,7 +41,7 @@ The server half (saber template, schematic, loot schematic, loot items and group
 Every other entry of the base archive stays byte for byte.
 
     C:/Users/Pengw/miniconda3/python.exe -I build_lightwhip.py [--base PATH] [--out PATH] [--length M] [--width M] [--trail S]
-Default base: ../../work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre (O14, sha256 4c5a29d0..., built,
+Default base: ../../work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre (O14, sha256 b60189b7..., built,
 not installed). Default out: ../../work/lightwhip/local_planets-lightwhip.tre (+ .sha256); checks in ./checks-lightwhip.json.
 """
 import argparse
@@ -61,7 +63,7 @@ from swgfmt import swg_tables  # noqa: E402
 import build_ghostfire_crystal as o14  # noqa: E402  (fxc compile with the client's include files)
 import blade_ids  # noqa: E402  (the O15 hook's pixel program id; read only)
 
-BASE_SHA_PREFIX = '4c5a29d0'
+BASE_SHA_PREFIX = 'b60189b7'
 
 SRC_LSB = 'appearance/wp_mle_sword_lightsaber_blade_leather.lsb'
 SRC_APT = 'appearance/wp_mle_sword_lightsaber_leather.apt'
@@ -191,10 +193,14 @@ def main(argv):
     ap.add_argument('--length', type=float, default=2.1,
                     help='blade length in metres (stock saber 1.2; owner, 8:26 PM: "a little shorter" than the first 2.5)')
     ap.add_argument('--width', type=float, default=0.09, help='blade glow width in metres (stock saber 0.15)')
-    ap.add_argument('--trail', type=float, default=0.0,
-                    help='0 (default): no visible trail; otherwise the stock trail lasting this many seconds (stock 0.06)')
+    ap.add_argument('--trail', default='ghostfire',
+                    help='ghostfire (default): O14\'s ghostfire-only trail; none: no visible trail; or seconds: the stock '
+                         'saber trail lasting that long (stock 0.06)')
     args = ap.parse_args(argv)
-    assert 1.2 <= args.length <= 6.0 and 0.02 <= args.width <= 0.3 and (args.trail == 0 or 0.03 <= args.trail <= 3.0)
+    if args.trail not in ('ghostfire', 'none'):
+        args.trail = float(args.trail)
+        assert 0.03 <= args.trail <= 3.0, args.trail
+    assert 1.2 <= args.length <= 6.0 and 0.02 <= args.width <= 0.3
     base_bytes = open(args.base, 'rb').read()
     base_sha = hashlib.sha256(base_bytes).hexdigest()
     if not base_sha.startswith(BASE_SHA_PREFIX):
@@ -295,12 +301,16 @@ def main(argv):
     lgth.data, wdth.data = struct.pack('<f', args.length), struct.pack('<f', args.width)
     added[LSB] = trn_iff.build(lsb)
 
-    # ---- the trail: none by default (the stock trail on a transparent texture), or the stock trail, longer lived
+    # ---- the trail: O14's ghostfire-only trail (default), none (the stock trail on a transparent texture), or the stock
+    # trail, longer lived
     swh = trn_iff.parse(src(STOCK_SWH))
     assert swh[0].form == 'SWSH' and swh[0].children[0].form == '0000'
     data = [c for c in swh[0].children[0].children if not c.is_form][-1]
     assert abs(struct.unpack_from('<f', data.data, 16)[0] - 0.06) < 1e-6
-    if args.trail:
+    if args.trail == 'ghostfire':
+        assert o14.GTRAIL_SWH in base and o14.GTRAIL_SHT in base, 'the base lacks O14\'s ghostfire-only trail'
+        trail_row = o14.GTRAIL_SWH
+    elif args.trail != 'none':
         data.data = data.data[:16] + struct.pack('<f', args.trail) + data.data[20:]
     else:
         ptex = [x for x in chunks(swh, '0000') if x.data.startswith(b'shader/')]
@@ -312,7 +322,9 @@ def main(argv):
         tex[0].data = NONE_DDS.encode() + b'\0'
         added[NONE_SHT] = trn_iff.build(sht)
         added[NONE_DDS], _ = o14.o13.dds_argb([[(0, 0, 0, 0)] * 4 for _ in range(4)])
-    added[SWH] = trn_iff.build(swh)
+    if args.trail != 'ghostfire':
+        added[SWH] = trn_iff.build(swh)
+        trail_row = SWH
 
     # ---- the templates
     shared = trn_iff.parse(src(SRC_SHARED))
@@ -341,7 +353,7 @@ def main(argv):
     assert swg_tables.write_dtii(table) == old, 'swoosh table does not round-trip'
     assert [r for r in table['rows'] if r[0] == SRC_SHARED] == [[SRC_SHARED, STOCK_SWH, 1]]
     assert not [r for r in table['rows'] if r[0] == SHARED]
-    table['rows'].append([SHARED, SWH, 1])
+    table['rows'].append([SHARED, trail_row, 1])
     changed[SWOOSH] = swg_tables.write_dtii(table)
 
     old_crc = src(CRC)
@@ -389,7 +401,7 @@ def main(argv):
               'out_entries': len(ours), 'unchanged_entries': len(same),
               'changed': sorted(n for n in changed if n in base), 'added': new_entries,
               'added_sha256': {n: hashlib.sha256(ours[n]).hexdigest() for n in new_entries},
-              'settings': {'length': args.length, 'width': args.width, 'trail_seconds': args.trail},
+              'settings': {'length': args.length, 'width': args.width, 'trail': args.trail, 'trail_row': trail_row},
               'hardpoints_y': hardpoints, 'template_crcs': {n: '%08x' % c for n, c in crcs.items()},
               'pixel_program_ids': ids, 'shader_slots': slots,
               'shader_code_sha256': hashlib.sha256(code).hexdigest(), 'swoosh_rows': len(table['rows']),

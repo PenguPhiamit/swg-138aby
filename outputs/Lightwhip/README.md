@@ -17,7 +17,11 @@ The stiff whip is a straight 2.1 m strand (2.5 m until the owner's 8:26 PM answe
 - **Drop:** "Krayt dragons for now, the boss". Only the rotation's two krayt bosses (Ghost-Scale the Canyon Krayt, `giant_canyon_krayt_dragon`; Old Rattlebones, `krayt_dragon_ancient`), at 10% per kill.
 - **Schematic:** "Master weaponsmith +saber crafting 1 or 2 or jedi master". The skill names are found but not wired yet; see the design note.
 - **Ghostfire:** "the ghostfire almost looks better in the whip". The whip keeps its own ghostfire values (O14 `feb3bf84`'s 3.5% glow, 0.6% core) rather than O14's newer take.
-- **Rebuilt and installed:** `23368576…` on O14 `4c5a29d0` (412 entries). Two builds give the same hash. It replaces the main session's chain `49d6ae99`, which is the same builder with the old settings on `4c5a29d0`.
+- **Trail fix, 8:45 PM.** Owner in game: "the ghostfire crystal also has no trails on the whip hilt". Rebuilt as `5a67358f…` on O14 `b60189b7` (413 entries; two builds give the same hash). Built, not installed.
+  - The whip's swoosh row now points at O14's ghostfire-only trail, `appearance/sw_ghostfire_trail.swh`, with UseObjectHue 1. Its program draws the strobe bars for the ghostfire palette (32-40) and nothing for any other crystal.
+  - Only the shader-model-2 path is gated. On ps_1_x or fixed-function graphics the bars would show tinted by any crystal; DXVK always takes the first path.
+  - The transparent "none" trail files are left out now; `--trail none` still makes them.
+- **Before that, rebuilt and installed:** `23368576…` on O14 `4c5a29d0` (412 entries). Two builds give the same hash. It replaces the main session's chain `49d6ae99`, which is the same builder with the old settings on `4c5a29d0`.
   - The main session installed it at 8:35 PM with the owner's OK ("Install now (Recommended)"), on the client and at `/opt/swg/tre`, by rename. Backups are `.bak-49d6ae99` in both places.
   - It's client data only, so run 37 kept running.
 - **Schematic rule (owner's pick, 8:3x PM):** "Smith + Tech I, or LS Master", that is (`crafting_weaponsmith_master` and `force_discipline_light_saber_technique_01`) or `force_discipline_light_saber_master`.
@@ -50,7 +54,7 @@ The stiff whip is a straight 2.1 m strand (2.5 m until the owner's 8:26 PM answe
 | `appearance/wp_mle_lightwhip_blade.lsb` | That hilt with a 2.1 m blade (saber 1.2 m), 0.09 m wide (saber 0.15). Stock hum, ignite and retract values. |
 | `shader/lightwhipblade.sht`, `…_a..d.sht` | The stock blade shaders on the whip's own effect. Stock textures, and the crystal still sets the colour. |
 | `effect/e_h_lightwhipblade.eft`, `pixel_program/e_h_lightwhipblade_ps20.psh` | The blade program: the O14 one (ghostfire included), with the white core at 75% so a thin strand shows more of the crystal's colour. Its id is `238eb66a`, against stock `acc853c5` and O14 `0ea2a331` (`4c5a29d0`). The hook's `blade_ids.h` still lists the old O14 id `7b68e0f1`. The O15 hook can find whip blades by that id. |
-| `appearance/sw_lightwhip.swh`, `shader/sw_lightwhip_none.sht`, `texture/sw_lightwhip_none.dds` | No visible trail: the stock saber trail on a fully transparent texture. `--trail S` gives the stock trail lasting S seconds instead. |
+| (trail) | Default: the swoosh row points at O14's `appearance/sw_ghostfire_trail.swh`, so there's a trail only with the ghostfire crystal. `--trail none`: `sw_lightwhip.swh` on a transparent texture. `--trail S`: the stock trail lasting S seconds. |
 | `object/…/crafted_saber/shared_sword_lightwhip.iff` | The s5 gen4 one-handed saber template with that blade, named "Lightwhip" with its own description. |
 | `object/draft_schematic/…/shared_lightsaber_lightwhip.iff` | The gen4 one-handed saber schematic, making the whip. |
 | `object/tangible/loot/loot_schematic/shared_lightwhip_schematic.iff` | "Lightwhip Schematic", a handheld viewscreen like the Geonosian schematics. |
