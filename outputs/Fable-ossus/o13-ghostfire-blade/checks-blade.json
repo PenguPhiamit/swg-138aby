@@ -1,10 +1,10 @@
 {
- "base_sha256": "fbdf58e816b9f54cfc007cc769839acfdcb2115a7b8b34a4b3d06b0bd2444528",
- "base_entries": 349,
- "out_sha256": "5dd2632554892f766b92fc839302ef4f7492f9cba3b1006911966e571cf60ead",
- "out_bytes": 7036516,
- "out_entries": 373,
- "unchanged_entries": 348,
+ "base_sha256": "912f48fdc9c5e131e6d341edef48eeb4a0fbd0a9065e28f46f58ecddb69296ba",
+ "base_entries": 361,
+ "out_sha256": "c8a610801494690b51dd6129ef716b631e2aa0991a4db5377196f5bf96670ac9",
+ "out_bytes": 7039149,
+ "out_entries": 385,
+ "unchanged_entries": 360,
  "changed": [
   "misc/object_template_crc_string_table.iff"
  ],

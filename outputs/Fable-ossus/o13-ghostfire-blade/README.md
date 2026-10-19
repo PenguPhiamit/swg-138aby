@@ -2,7 +2,12 @@
 
 Owner, 18 Oct: the ghostfire saber should be "damn near invisible with an opalescent sheen", leave "LSD trails", and use a custom shader.
 
-**Built and checked, not installed, untested in game.** Ossus stays closed for the friends launch, so this goes to the test galaxy only.
+**Installed on the test galaxy, 18 Oct 5:55 PM (run 35), untested in game.** Owner, 5:50 PM: "Install it get the test server up and ill look at it." Ossus stays closed for the friends launch, so this goes to the test galaxy only.
+
+- **Installed archive: `c8a61080`.** It chains the archive that was installed then, `2ee1799f` (the main session's lsd2 step: half-brightness blade, eight synced ribbons), with the O12 rain byte (`912f48fd`, made with `build_ossus_rain.py --base`), then this step (`--base` that file). Backups are `.bak-2ee1799f` on the client and at `/opt/swg/tre`. The 5dd26325 build below, made on the rain-fix archive alone, was not installed: it lacks lsd2.
+- **Dev `03c180d4`** has the Lua patch. `checks-blade.json` is from the installed build.
+
+**Crystal or hilt?** In stock SWG the crystal sets the colour: it picks one entry in the blade palette. The saber object picks the blade file, and every stock blade file uses the same shader, so the crystal looks like the only thing that matters. A palette entry can only tint that shared shader, and it can't touch the white core, so a crystal alone can't make a blade near-invisible or opal. That's why this look comes with its own saber. The ghostfire crystal in an ordinary saber keeps the dim tint. The question about a different crystal in this saber asks whether it should still look ghostfire (as built) or take that crystal's colour.
 
 ## Why the blade drew white (read from the client files)
 
