@@ -2,7 +2,7 @@
 
 Owner, 18 Oct ~6:10 PM: "can we make a new Crystal entry with the new shader and make all sabers compatible with the new crystal type? also the blade needs to be dimmer and the trails more prominent (and slow like LSD ...)". Later: "def make sure you understand the stacking of the tracers ... almost time dilation kinda vibes" and "a mirage effect for the blade to help hide light". On the decision card the owner picked **the strobe trail, tested first**, and asked how a real mirage could be made possible.
 
-**Built, not installed** (the game was running): archive `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre`, sha256 `54dcc00a…`, on the installed `c8a61080`. Two builds give the same hash. Checks are in `checks-crystal.json`.
+**Built, not installed** (the game was running): archive `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre`, sha256 `feb3bf84…`, on the installed `c8a61080`. Two builds give the same hash. Checks are in `checks-crystal.json`.
 
 ## The crystal drives the blade (any saber)
 
@@ -25,7 +25,7 @@ The owner said: "the trails are still too faint and the blade is still too visib
 
 The owner, relayed by the main session: "maybe mix some darker colors in too for a more gasoline purple fumed kinda thing, and the color is mostly for the trails, the blade should be almost nonexistent".
 - **Blade:** the ghostfire path is now at 3.5% glow and 0.6% core, a near-colourless milky sheen (0.82 ± 0.18).
-- **Trails:** the strobe-trail bars and the eight tip ribbons use an oil-slick or fumed-metal palette: deep violet, indigo, petrol blue, teal, one bronze glint, magenta, plum and blue-violet. Each band drifts towards the next colour from hilt to tip, like a thin film. Additive light can't darken anything, so "darker" here means deep hues, with every other band at half strength.
+- **Trails:** the strobe-trail bars and the eight tip ribbons use an oil-slick or fumed-metal palette: deep violet, indigo, petrol blue, teal, one bronze glint, magenta, plum and blue-violet. Then the owner asked to "add some cyan and a brighter green": both are now full-strength bands. Each band drifts towards the next colour from hilt to tip, like a thin film. Additive light can't darken anything, so "darker" here means deep hues, with every other band at half strength.
 - The ribbons' old pastel colours are kept in `checks-crystal.json`.
 
 ## Trails

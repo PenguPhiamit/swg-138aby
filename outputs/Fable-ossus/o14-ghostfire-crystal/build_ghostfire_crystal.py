@@ -113,8 +113,9 @@ TRAIL_B_DDS = 'texture/sw_ghostfire_b.dds'
 # color is mostly for the trails". An oil slick or heat-tinted (fumed) metal: thin-film colours, mostly deep violet,
 # indigo, petrol blue, teal and magenta, one bronze glint, on dark. Additive light can't darken, so "darker" means
 # deep hues and every other band at about half strength.
-OIL = [(0.36, 0.10, 0.62), (0.18, 0.12, 0.66), (0.08, 0.30, 0.78), (0.02, 0.55, 0.58),
-       (0.62, 0.45, 0.12), (0.72, 0.08, 0.52), (0.42, 0.04, 0.38), (0.30, 0.20, 0.85)]
+# Owner, later: "add some cyan and a brighter green" (both at full strength, so they land on even, undimmed bands).
+OIL = [(0.36, 0.10, 0.62), (0.18, 0.12, 0.66), (0.00, 0.90, 1.00), (0.08, 0.30, 0.78), (0.30, 1.00, 0.35),
+       (0.02, 0.55, 0.58), (0.72, 0.08, 0.52), (0.42, 0.04, 0.38), (0.62, 0.45, 0.12), (0.30, 0.20, 0.85)]
 OIL_DIM = 0.5   # every other band
 
 
