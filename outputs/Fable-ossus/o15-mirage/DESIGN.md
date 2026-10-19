@@ -4,7 +4,7 @@ Owner, 18 Oct: "a mirage effect for the blade to help hide light", then "how do 
 
 It is a small `d3d9.dll` of our own that sits in front of DXVK in the client folder. It watches the game's own draw calls, recognises particular draws, and adds screen passes around them. The mirage on the ghostfire blade is the first effect. The code holds that one effect today, and the layer below is how more effects fit in. It is for Miniverse only, not for friends through the launcher.
 
-**State, 18 Oct, 7:55 PM.**
+**State, 18 Oct, 7:51 PM.**
 - **The first proxy never bent anything in game.** It is `54150519` (built 6:53 PM) and has been on the owner's client since about 7:11 PM. Its `mirage.log` from the 7:11 and 7:35 PM sessions shows the blade programs loading, but not a single ghostfire draw or mirage pass. It followed the game's SetPixelShader and constant calls. The harness reproduces the miss when a blade's program and colour come from a recorded state block.
 - **The rebuilt proxy reads the bound program and c3 from the device at each draw**, so it doesn't matter how the game sets them. Its log also lists the first blade draws with their c3, and every 30 seconds counts how often a blade program was bound and drawn. That way the next session shows directly whether it matches.
 - **Archives.** The owner's OK covers the setup installed at 7:41 PM: archive `a2610d64`, which is O14 `feb3bf84` (the near-invisible ghostfire blade with oil-slick trails) plus the light whip. The ids come from `blade_ids.py`:
