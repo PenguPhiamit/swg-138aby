@@ -1,28 +1,97 @@
-# Ossus O15: a real mirage for the ghostfire blade (Claude, 18 Oct 2026)
+# Ossus O15: a small effects layer for the client, with the mirage first (Claude, 18 Oct 2026)
 
-Owner, 18 Oct: "a mirage effect for the blade to help hide light", then "how do we make it possible?" (the client has no heat-distortion pass).
+Owner, 18 Oct: "a mirage effect for the blade to help hide light", then "how do we make it possible?" (the client has no heat-distortion pass), then "also this hook could be used for other effects too right?"
 
-**Built and tested outside the game on this PC, not installed.** It is a small `d3d9.dll` of our own that sits in front of DXVK in the client folder. When a ghostfire blade draws, the scene behind it bends like heat haze, with a slight opal colour split. Then the blade draws on top as usual. Everything else in the game passes through unchanged. It is for Miniverse only until it has been tried in game.
+**Built and tested outside the game on this PC, not installed.** It is a small `d3d9.dll` of our own that sits in front of DXVK in the client folder. It watches the game's own draw calls, recognises particular draws, and adds screen passes around them. The mirage on the ghostfire blade is the first effect. The code holds that one effect today, and the layer below is how more effects fit in. It is for Miniverse only until it has been tried in game.
 
-Preview, from left to right: mirage off; on; on 8 frames later; on with the O14 blade; the debug view. It is in `work/o15-mirage/preview-mirage.png`. The numbers are in `checks-mirage.json`.
+- **Archives.** O14 is not installed (owner: "not yet"), so the installed archive is still `c8a61080`. The mirage then follows the stock blade program with the ghostfire crystal's dark colour, and it follows the O14 program as well once that is installed.
+- **Preview.** From left to right: mirage off; on; on 8 frames later; on with the O14 blade; the debug view. It is in `work/o15-mirage/preview-mirage.png`, and the numbers are in `checks-mirage.json`.
 
-## Why this route
+## The layer
+
+Every effect is made of the same three parts.
+
+1. **Draw rules (per-draw hooks).** A rule recognises a draw and says what to do with it.
+   - **Recognise by:**
+     - the pixel program's id: FNV-1a over its bytecode without the comment block, the same for every player with the same archives;
+     - a test on the shader constants, such as the crystal colour in c3 or the fade in c7;
+     - later, the vertex program's id or the bound texture.
+   - **Actions:**
+     - **mask:** replay the draw into a named screen mask, then let the game's draw happen as usual (the mirage does this);
+     - **redirect:** draw it only into a mask, not into the scene (for the NGE heat programs below, whose draws are not meant to be seen);
+     - **swap:** draw with our own pixel program instead (possible, but the archive stays the normal route for looks everyone should see);
+     - **mark:** a draw whose only job is to carry settings in its constants, such as a per-planet colour grade.
+   - **Marker programs.** For new effects we ship a tiny pixel program of our own in the archive, and art that should drive an effect uses it. The layer knows its id, so recognition is exact and never guesses at stock shaders.
+2. **Screen passes, at a point in the frame.**
+   - **Before the matching draw.** Only what is already drawn is affected. The mirage runs here: the blade then draws on top, and the UI is untouched.
+   - **After the world, before the UI.** For grading or haze over everything 3D. This needs the point where the UI starts, which is still to be found. The UI likely starts at the first pre-transformed 2D draw after the scene.
+   - **Before Present.** Everything, the UI included.
+   - **Kinds of pass:**
+     - a distortion through a mask (mirage, heat);
+     - a colour pass (grading);
+     - later others.
+3. **Switches.**
+   - one master `enabled` for the whole layer (pass-through when 0);
+   - per effect, its own `enabled`, toggle key and settings in its own ini section;
+   - the uninstall script.
+
+   Today the file is `mirage.ini`, with one `[mirage]` section that does both jobs. With a second effect it becomes `effects.ini`, with a `[layer]` section plus one section per effect.
+
+**What the code has now.**
+- The 9 hooked device methods (Reset, Present, the four draw calls, and pixel program create, set and constants) are all a draw rule needs. New rules add no hooks.
+- The mirage's rule and pass are written out in `run()`. The next step is a rule table read from the ini.
+- "After the world, before the UI" needs a detector for the UI's first draw.
+- Depth (below) needs hooks on CreateDevice, Reset, and the depth surface get and set calls.
+
+## Candidates
+
+| Effect | Draw rule | Screen pass | Depth texture? | Notes |
+|---|---|---|---|---|
+| **Mirage on the ghostfire blade** (built) | blade program id plus c3 at 0.17 or less: mask | distortion with an opal colour split, before the blade draw | No | See "The mirage" below. |
+| **NGE heat shaders** (in `mtg_patch_018.tre`) | the ids of `3d_heat_render.psh` and `3d_lava_heat_render.psh`: redirect into a heat mask | `2d_heat_composite.psh` itself (ps_2_0; there is also a ps_1_4 copy), with a copy of the scene at s0 and the heat mask at s1 | No | Details below the table. |
+| **Heat haze over lava, engine exhausts** | lava: the lava surface or a heat sheet above it with `3d_lava_heat_effect`. Exhausts: a particle with a marker program or `3d_heat_effect`. Either one is masked or redirected. | distortion, before the next non-heat draw or after the world | No (optional, to fade with distance) | It is the same route as NGE heat once that works. |
+| **Stealth or cloak shimmer** | the stealthed character's draws: mask, or redirect for a fully see-through, Predator-like body | distortion | No | Recognising the draws is the hard part. Stock stealth fades the character through c7 on ordinary programs, and a rule on c7 would also catch every other fading object. A server-side marker (switching the stealthed body to a marker program) would be exact. |
+| **Force-power shockwaves** | an expanding ring particle with a marker program: mask, where the mask's two spare channels carry the push direction, like NGE's heat mask | distortion that pushes outward | No (optional, so the foreground isn't bent) | It needs the ring particle in our archive and the server playing it on the power. |
+| **Per-planet colour grading** | a mark draw per planet: a marker program on an invisible object or the sky, whose constants carry the grade. Recognising each planet's sky textures is the fallback. | colour pass (lift, gamma and gain, or a small 3D lookup table), after the world and before the UI | No (yes for grading by distance, like fog) | It needs the UI-start detector. |
+
+**NGE heat shaders in detail.**
+- **The files.** `mtg_patch_018.tre` has the whole set:
+  - pixel programs `3d_heat_render`, `3d_lava_heat_render`, `2d_heat_composite` and `2d_heat_composite_1_4`;
+  - vertex programs `vertex_heat_render` and `vertex_lava_heat_render`;
+  - effects `3d_heat_effect` and `3d_lava_heat_effect`;
+  - shaders `3d_heat_render`, `3d_lava_heat_render` and `2d_heat_composite`.
+- **The heat render.** It writes the heat mask: red is intensity, green and blue are offsets from a 3D noise texture, and alpha is 0.
+- **The composite.** It bends the scene by (green and blue minus 0.5) × intensity × 1% of the screen, so at most about half a percent. It keeps the old pixel where the bent lookup would land outside the heat area.
+- **In the layer.** NGE's engine drew heat objects into their own target; this client would draw them straight into the scene. The layer redirects them into its mask and runs the composite at the end, so any object we give `3d_heat_effect` becomes a heat source. That makes it the general heat route, which the mirage could use too.
+- **Unknowns.**
+  - whether this client loads those NGE effect and shader files;
+  - where their 3D noise texture lives;
+  - the time value in `userConstants[0]` (c8), which NGE's engine set (the layer can set it if the client doesn't).
+
+**Depth.**
+- **Not needed for draw-rule effects.** They replay with the game's own depth buffer bound, so walls in front already hide the effect.
+- **Needed for anything that reads depth as a texture.** Examples: haze that fades with distance, soft edges against the ground, not bending what stands in front, distance fog in a grade.
+- **How to get it.** At device creation and Reset, the layer swaps the game's depth buffer for an INTZ depth texture and returns that to the game, the way ReShade does on Direct3D 9. DXVK lists INTZ among the depth formats it supports; I have not tried it here.
+- **Limits.** An INTZ texture can't be multisampled, so depth effects would need SWG's anti-aliasing off (Client-graphics already asks that for ReShade). It is one more hooked path that touches every frame, so it should be an option only the effects that need depth turn on.
+
+## Why a proxy rather than ReShade
 
 | | Our proxy `d3d9.dll` (chosen) | ReShade add-on |
 |---|---|---|
-| Sees the blade? | Yes. It sees the game's own Direct3D 9 calls: the blade pixel program and the crystal colour. | Not with DXVK. ReShade's d3d9 build wants to be `d3d9.dll` itself and loads Windows' d3d9, not DXVK. Its Vulkan mode only sees DXVK's translated shaders, without the blade program or the crystal colour. |
+| Sees the game's draws? | Yes. It sees the game's own Direct3D 9 calls: pixel programs and constants. | Not with DXVK. ReShade's d3d9 build wants to be `d3d9.dll` itself and loads Windows' d3d9, not DXVK. Its Vulkan mode only sees DXVK's translated shaders, without the program ids or constants. |
 | Download | None (about 150 KB, built here with VS 2022) | ReShade with full add-on support (needs your OK), plus our add-on |
 | Friends later | One more DLL and an ini in the client folder | ReShade's installer on every PC |
 
-## How it works
+## The mirage (the first effect)
 
-1. **The hook.** The client's graphics plugin (`gl07_r.dll`) imports only `Direct3DCreate9` from `d3d9.dll`. Our DLL takes that name, loads DXVK from `dxvk_d3d9.dll` beside it, and patches 9 slots of the device's method table: Reset, Present, the four draw calls, and pixel-program create/set/constants.
-2. **Finding the ghostfire blade.** A draw counts when both of these hold:
-   - the bound pixel program is a lightsaber blade program. They are recognised by an id (FNV-1a over the bytecode without its comment block): the stock one, `0xacc853c5`, in effect now on the installed `c8a61080`, and the O14 one, `0x7b68e0f1`, built but not installed;
-   - the crystal colour in register c3 has every channel at 0.17 or less. That is the O14 shader's own rule: palette 32-40 is ghostfire, and every stock crystal is 0.65 or brighter.
-   So it works with today's archive and with O14, and normal crystals never trigger it.
+1. **The hook.** The client's graphics plugin (`gl07_r.dll`) imports only `Direct3DCreate9` from `d3d9.dll`. Our DLL takes that name, loads DXVK from `dxvk_d3d9.dll` beside it, and patches the 9 device methods above.
+2. **The rule.** A draw counts when both of these hold:
+   - the bound pixel program is a lightsaber blade program: the stock one, `0xacc853c5`, in effect on `c8a61080`, or the O14 one, `0x7b68e0f1`;
+   - the crystal colour in c3 has every channel at 0.17 or less. That is the O14 shader's own rule: palette 32-40 is ghostfire, and every stock crystal is 0.65 or brighter.
+
+   Normal crystals never trigger it.
 3. **Three passes before that blade draw.** ps_2_0 has no screen position, so the screen position comes from rasterising:
-   1. **Mask.** The same draw is replayed into a screen-sized mask target, with the game's vertices, viewport and depth test. Our pixel program turns the blade's glow and core into a mask value and multiplies it by the game's fade. Because the depth test is the game's, a blade behind a wall makes no haze.
+   1. **Mask.** The same draw is replayed into a screen-sized mask target, with the game's vertices, viewport and depth test. Our pixel program turns the blade's glow and core into a mask value and multiplies it by the game's fade.
    2. **Copy.** The scene drawn so far is copied with StretchRect.
    3. **Bend.** One screen quad whose texture coordinates are screen positions. It widens and softens the mask, and bends the copy by two scrolling noise layers (one rising like heat). It splits red and blue a little for an opal fringe. Pixels outside the mask are discarded, and only colour is written: alpha may carry the game's bloom.
 4. **Back to the game.** A state block puts every state back, and the blade draws on top as usual. Only what was drawn before the blade bends. The UI, name tags and later particles do not.
@@ -40,25 +109,25 @@ Preview, from left to right: mirage off; on; on 8 frames later; on with the O14 
 | Reset (window or resolution change) | succeeds: our targets are released first and made again |
 | install.ps1 twice, then uninstall.ps1, on a scratch copy of the client's DXVK DLL | renames DXVK and back, places and removes the proxy |
 
-**Without DXVK (Windows' own Direct3D 9) the haze draws nothing.** Every call succeeds, but the screen quad leaves no pixel, even in the debug view with nothing discarded. I could not trace it without Microsoft's debug runtime. So when `dxvk_d3d9.dll` is missing, the proxy passes everything through and logs that; `allow_native=1` would try anyway. The client ships with DXVK, so this only matters if someone removes it.
+**Without DXVK (Windows' own Direct3D 9) the haze draws nothing.** Every call succeeds, but the screen quad leaves no pixel, even in the debug view with nothing discarded. I could not trace it without Microsoft's debug runtime. So when `dxvk_d3d9.dll` is missing, the proxy passes everything through and logs that; `allow_native=1` would try anyway. The client ships with DXVK, so this only matters if someone removes it. It holds for every effect in the layer.
 
 ## Risks
 
-- **Crashes.** A failing step is logged once and the game's own draw still happens. An exception in our code switches the mirage off for the session. A crash inside DXVK or the driver can't be caught, so the first in-game run is the real test.
+- **Crashes.** A failing step is logged once and the game's own draw still happens. An exception in our code switches the layer off for the session. A crash inside DXVK or the driver can't be caught, so the first in-game run is the real test.
 - **Untested in game.** Several things are still unknown:
   - which draw call the client uses for blades;
   - whether "Post Process Effects" (bloom) draws the blade into another target (the mirage then bends that target, which should be fine);
   - SWG's anti-aliasing (MSAA). There is a multisampled path, but the harness ran without MSAA.
   - whether the O13 Ghostfire Lightsaber, whose shader has no palette part, still sets a dark c3. If it doesn't, only crystal-coloured blades get the mirage.
 - **DXVK chaining.** The method table is the fixed Direct3D 9 interface, so new DXVK versions keep working. But an updated DXVK `d3d9.dll` must be renamed to `dxvk_d3d9.dll` again. ReShade's d3d9 build (Client-graphics Path A) also wants to be `d3d9.dll`, and dgVoodoo (Path B) replaces DXVK. With either one in place, this proxy can't sit in front.
-- **Friends' GPUs.** Cost comes only while a ghostfire blade is on screen. Each one adds a screen copy and two full-screen passes, about ten texture reads a pixel. That is nothing on a 5070, and well under a millisecond on most cards from the last ten years. `max_per_frame=8` caps a crowd of ghostfire wielders. With no ghostfire blade in view, the cost is a few comparisons per draw.
-- **Only players with the DLL see it.** It changes nothing on the server. Without it, a player sees the O14 blade as it is.
-- **Launchers.** Both launchers start the same `SWG-client` folder. I haven't checked whether their file check minds an extra `dxvk_d3d9.dll` or a changed `d3d9.dll`. DXVK's `d3d9.dll` was already an addition, so probably not; watch the first launch. To ship it to friends later, the installer would carry `d3d9.dll`, `dxvk_d3d9.dll` and `mirage.ini` together. Not before it has been tried here.
+- **Friends' GPUs.** Cost comes only while a matching draw is on screen. A mirage adds a screen copy and two full-screen passes, about ten texture reads a pixel. That is nothing on a 5070, and well under a millisecond on most cards from the last ten years. `max_per_frame=8` caps a crowd of ghostfire wielders. With no match in view, the cost is a few comparisons per draw. Each new effect needs its own cap.
+- **Only players with the DLL see it.** It changes nothing on the server. Without it, a player sees the archive's look as it is. Effects built on redirect, such as NGE heat, would show the raw heat draw to players without the DLL, so their art has to look acceptable without it, or be marker-only.
+- **Launchers.** Both launchers start the same `SWG-client` folder. I haven't checked whether their file check minds an extra `dxvk_d3d9.dll` or a changed `d3d9.dll`. DXVK's `d3d9.dll` was already an addition, so probably not; watch the first launch. To ship it to friends later, the installer would carry `d3d9.dll`, `dxvk_d3d9.dll` and the ini together. Not before it has been tried here.
 - **Two clients at once** (`allowMultipleInstances`). Each loads its own copy. They share `mirage.log`, and each block starts with the process id.
 
 ## Switching it off
 
-1. **In game:** Ctrl+Shift+M switches the mirage off and on at once (only while the game window is in front).
+1. **In game:** Ctrl+Shift+M switches the mirage off and on at once (only while the game window is in front). Each later effect gets its own key.
 2. **Next start:** `enabled=0` in `SWG-client/mirage.ini`. The proxy then only passes DXVK through.
 3. **Remove it:** `uninstall.ps1` with the game closed. By hand: delete `d3d9.dll`, then rename `dxvk_d3d9.dll` back to `d3d9.dll`.
 
@@ -77,9 +146,9 @@ Preview, from left to right: mirage off; on; on 8 frames later; on with the O14 
 
 | File | What it is |
 |---|---|
-| `src/mirage.c` | The proxy: exports, hooks, the three passes, settings and log |
+| `src/mirage.c` | The proxy: exports, hooks, the mirage's rule and three passes, settings and log |
 | `src/mask_ps.hlsl`, `src/haze_ps.hlsl` | The two ps_2_0 programs (compiled by fxc and built into the DLL) |
-| `src/blade_ids.h`, `blade_ids.py` | The blade program ids. The script reads them from the client archives and the O14 archive. |
+| `src/blade_ids.h`, `blade_ids.py` | The blade program ids. The script reads them from the client archives and the O14 archive; later effects' ids come the same way. |
 | `src/d3d9.def` | The export names |
 | `src/mirage_test.c` | The harness used for the checks above |
 | `build.cmd` | Builds `work\o15-mirage\d3d9.dll` and `mirage_test.exe` (VS 2022, x86) |
