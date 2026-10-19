@@ -29,13 +29,13 @@ index 0000000..175f341
 +
 +addLootGroupTemplate("lightwhip_nightsister", lightwhip_nightsister)
 diff --git a/MMOCoreORB/bin/scripts/loot/items.lua b/MMOCoreORB/bin/scripts/loot/items.lua
-index a9ae9d4..2e4b869 100644
+index d31ce15..feb5be6 100644
 --- a/MMOCoreORB/bin/scripts/loot/items.lua
 +++ b/MMOCoreORB/bin/scripts/loot/items.lua
-@@ -2311,3 +2311,6 @@ includeFile("items/hoth/hoth_vehicle_tcg_military_transport_deed.lua")
- --ossus sub-folder (the Ossus ghostfire quest, 17 Oct 2026)
+@@ -2312,3 +2312,6 @@ includeFile("items/hoth/hoth_vehicle_tcg_military_transport_deed.lua")
  includeFile("items/ossus/ossus_ghostfire_crystal.lua")
  includeFile("items/ossus/ossus_ghostfire_saber.lua")
+ includeFile("items/ossus/ossus_ghostfire_saber_b.lua")
 +--lightwhip sub-folder (the light whip, L1, 18 Oct 2026)
 +includeFile("items/lightwhip/lightwhip.lua")
 +includeFile("items/lightwhip/lightwhip_schematic.lua")
@@ -264,13 +264,13 @@ index 842552a..0fe636f 100644
  includeFile("tangible/loot/loot_schematic/geonosian_tenloss_dxr6_schematic.lua")
  includeFile("tangible/loot/loot_schematic/hanging_planter_schematic.lua")
 diff --git a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/objects.lua b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/objects.lua
-index 2f97932..f7798b0 100644
+index 3db0028..77fc92d 100644
 --- a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/objects.lua
 +++ b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/objects.lua
-@@ -5214,3 +5214,10 @@ object_weapon_melee_sword_crafted_saber_shared_sword_lightsaber_one_handed_ghost
+@@ -5221,3 +5221,10 @@ object_weapon_melee_sword_crafted_saber_shared_sword_lightsaber_one_handed_ghost
  }
  
- ObjectTemplates:addClientTemplate(object_weapon_melee_sword_crafted_saber_shared_sword_lightsaber_one_handed_ghostfire, "object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire.iff")
+ ObjectTemplates:addClientTemplate(object_weapon_melee_sword_crafted_saber_shared_sword_lightsaber_one_handed_ghostfire_b, "object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire_b.iff")
 +
 +-- The light whip: the s5 gen4 one-handed saber template with a long, thin blade and its own trail (L1, 18 Oct 2026). The .iff is in the light whip archive, local_planets.tre (client and server).
 +object_weapon_melee_sword_crafted_saber_shared_sword_lightwhip = SharedWeaponObjectTemplate:new {
@@ -279,10 +279,10 @@ index 2f97932..f7798b0 100644
 +
 +ObjectTemplates:addClientTemplate(object_weapon_melee_sword_crafted_saber_shared_sword_lightwhip, "object/weapon/melee/sword/crafted_saber/shared_sword_lightwhip.iff")
 diff --git a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/serverobjects.lua b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/serverobjects.lua
-index a0a6732..7d10144 100644
+index d9f01ca..04cc70d 100644
 --- a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/serverobjects.lua
 +++ b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/serverobjects.lua
-@@ -100,6 +100,7 @@ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen
+@@ -101,6 +101,7 @@ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen
  includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen2.lua")
  includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen3.lua")
  includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen4.lua")

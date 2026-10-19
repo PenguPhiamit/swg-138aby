@@ -4,7 +4,7 @@ Owner, 18 Oct ~7:05 PM: "build step 1 of the light whip: the whip hilt template,
 
 The stiff whip is a straight 2.5 m strand. Later it is the fallback for anyone without the graphics hook, once the bending whip (step 3) exists. Design and later steps: [lightwhip-design.md](../Documentation-support/lightwhip-design.md).
 
-**Built, not installed, untested in game.**
+**Installed on the test galaxy, 18 Oct 7:33 PM (run 36), untested in game.** Owner, 7:26 PM: "Install the light whip archive (with O14) and the Lua patch on the test galaxy and restart it." The archive is on the client and at `/opt/swg/tre` (backups `.bak-c8a61080`). Dev `e6e6d3bb` has O14's test-B Lua, and `9d08e265` has the whip's. The server log shows no new warnings or errors, and one new schematic loaded.
 
 ## Client archive (`build_lightwhip.py`)
 
@@ -32,7 +32,7 @@ Settings: `--length`, `--width` and `--trail` rebuild it longer, thinner or with
 
 ## Server half (`server/lightwhip-dev.patch`, Lua only, no C++ build)
 
-Made by `server/make_lightwhip_patch.py` from Core3-dev HEAD `6d544cf3`. It passes `git apply --check` on the dev tree, and `luac -p` passes on all 15 files.
+Made by `server/make_lightwhip_patch.py`, first on Core3-dev `6d544cf3`. For the install it was re-made on `e6e6d3bb` (O14's test-B Lua) and committed as dev `9d08e265`. `luac -p` passes on all 15 files.
 
 - **Saber template `sword_lightwhip`:** the s5 gen4 one-handed saber.
   - More reach: ideal range 3 → 5 m, max range 5 → 7 m. The saber specials use the weapon's range.
