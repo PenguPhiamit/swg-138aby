@@ -32,7 +32,7 @@ offline but not installed yet; **planned** means not started. Nothing is open to
 | New species | Chiss at character creation | On the test galaxy |
 | More species | Nautolan (male) and Togruta (female) at character creation | Staged |
 | Light whip | A one-handed lightsaber variant: a 4.5 m strand with more reach than a saber and weaker against armour, which bends like a rope with the graphics hook. Krayt dragon bosses drop it, and a Master Weaponsmith with Lightsaber Technique I or a Lightsaber Master can learn its schematic | On the test galaxy; the drop and the schematic are staged |
-| The Hutt | Can be created; can't be played yet, because the pre-CU client won't drive the Hutt body as a player. Nal Hutta as its home world | Staged, in research |
+| The Hutt | A playable Hutt, with Nal Hutta as its home world; still being worked out | Staged, in research |
 | Backports | Vehicles and items from Mod the Galaxy, new creatures and enemies | On the test galaxy |
 | The base game | Fixing what was left thin or broken: professions such as Image Designer and Politician, Creature Handler and Bio-Engineer pets, missions and bounties | In progress |
 | Test bots | A squad of 24 bots that log in through the real game protocol, play the professions and report what works and what doesn't | On the test galaxy |
