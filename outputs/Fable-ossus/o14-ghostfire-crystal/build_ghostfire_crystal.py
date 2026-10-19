@@ -61,8 +61,8 @@ SOURCE = os.path.join(HERE, 'e_h_lightsaberblade_ps20.hlsl')
 INCLUDES = ['pixel_program/include/pixel_shader_constants.inc', 'pixel_program/include/functions.inc',
             'shared_program/functions.inc']
 GHOST_FIRST, GHOST_COUNT = 32, 9           # entries 32 (idle) and 33-40 (shimmer steps)
-GHOST_GLOW, GHOST_CORE, BANDS = 0.08, 0.015, 1.6   # must match the .hlsl
-OPAL_BASE, OPAL_SWING = 0.72, 0.28
+GHOST_GLOW, GHOST_CORE, BANDS = 0.035, 0.006, 1.6   # must match the .hlsl
+OPAL_BASE, OPAL_SWING = 0.82, 0.18
 
 
 def fxc_path():
@@ -109,9 +109,25 @@ TRAIL_B_SHT = 'shader/sw_ghostfire_b.sht'
 TRAIL_B_DDS = 'texture/sw_ghostfire_b.dds'
 
 
+# Owner, 18 Oct evening: "maybe mix some darker colors in too for a more gasoline purple fumed kinda thing, and the
+# color is mostly for the trails". An oil slick or heat-tinted (fumed) metal: thin-film colours, mostly deep violet,
+# indigo, petrol blue, teal and magenta, one bronze glint, on dark. Additive light can't darken, so "darker" means
+# deep hues and every other band at about half strength.
+OIL = [(0.36, 0.10, 0.62), (0.18, 0.12, 0.66), (0.08, 0.30, 0.78), (0.02, 0.55, 0.58),
+       (0.62, 0.45, 0.12), (0.72, 0.08, 0.52), (0.42, 0.04, 0.38), (0.30, 0.20, 0.85)]
+OIL_DIM = 0.5   # every other band
+
+
+def oil(i, u):
+    """Band i's colour, drifting towards the next band's from hilt (u=0) to tip (u=1), like a thin film."""
+    a, b = OIL[i % len(OIL)], OIL[(i + 1) % len(OIL)]
+    k = 1.0 if i % 2 == 0 else OIL_DIM
+    return [k * (x + (y - x) * u) for x, y in zip(a, b)]
+
+
 def strobe_texture(profile, bars, duty):
     """64x64: the stock saber trail's profile across u (hilt to tip) times soft bars along v (the trail's time axis),
-    each bar its own pastel colour, so each bar can read as one copy of the blade."""
+    each bar its own oil-slick colour, so each bar can read as one copy of the blade."""
     h, w = 64, len(profile)
     rows = []
     for y in range(h):
@@ -120,9 +136,11 @@ def strobe_texture(profile, bars, duty):
         d = abs(f - 0.5) * 2                     # 0 at a bar's centre, 1 at the gap's centre
         edge = 1 - duty
         lit = 1.0 if d <= edge - 0.15 else 0.0 if d >= edge + 0.15 else (edge + 0.15 - d) / 0.3
-        r, g, b = colorsys.hsv_to_rgb((i / max(bars, 1) + 0.6) % 1.0, 0.6, 1.0)
-        rows.append([(int(round(r * 255)), int(round(g * 255)), int(round(b * 255)), int(round(p * lit)))
-                     for p in profile])
+        row = []
+        for x, p in enumerate(profile):
+            r, g, b = oil(i, x / (w - 1))
+            row.append((int(round(r * 255)), int(round(g * 255)), int(round(b * 255)), int(round(p * lit))))
+        rows.append(row)
     return rows
 
 
@@ -181,7 +199,8 @@ def main(argv):
     assert all(ghost_weights[GHOST_FIRST + k] == 1.0 for k in range(GHOST_COUNT))
 
     # the ribbons: trail lifetime (offset 16) and sample count (offset 52 in version 0001)
-    for name in RIBBONS:
+    old_ribbon_rgba = {}
+    for k, name in enumerate(RIBBONS):
         rn = trn_iff.parse(base[name])
         v = rn[0].children[0]
         assert rn[0].form == 'SWSH' and v.form == '0001'
@@ -189,7 +208,8 @@ def main(argv):
         dur, = struct.unpack_from('<f', d.data, 16)
         rate, samples = struct.unpack_from('<fI', d.data, 48)
         assert abs(dur - 0.1) < 1e-6 and rate == 30.0 and samples == 20, (name, dur, rate, samples)
-        d.data = d.data[:16] + struct.pack('<f', args.trail) + d.data[20:52] + struct.pack('<I', 60) + d.data[56:]
+        old_ribbon_rgba[name] = [round(x, 3) for x in struct.unpack_from('<4f', d.data, 0)]
+        d.data = struct.pack('<4f', *oil(k, 0.0), 1.0) + struct.pack('<f', args.trail) + d.data[20:52] + struct.pack('<I', 60) + d.data[56:]
         changed[name] = trn_iff.build(rn)
 
     # strobe trail test (owner: "Strobe trail, test first"): the saber trail is the surface the blade sweeps between its
@@ -312,7 +332,8 @@ def main(argv):
                          'bands': BANDS},
               'palette_32_40': ['%02x%02x%02x' % tuple(ents[GHOST_FIRST + k][:3]) for k in range(GHOST_COUNT)],
               'stock_crystal_brightest': {k: round(max(ents[k][:3]) / 255.0, 3) for k in used},
-              'ribbon_trail_seconds': args.trail, 'ribbon_samples': 60}
+              'ribbon_trail_seconds': args.trail, 'ribbon_samples': 60, 'ribbon_rgba_was': old_ribbon_rgba,
+              'ribbon_rgba': {n: [round(x, 3) for x in oil(k, 0.0)] + [1.0] for k, n in enumerate(RIBBONS)}}
     with open(os.path.join(HERE, 'checks-crystal.json'), 'w', encoding='utf-8') as f:
         json.dump(checks, f, indent=1)
     print(json.dumps({k: checks[k] for k in ('base_sha256', 'out_sha256', 'out_entries', 'changed', 'shader')}, indent=1))
