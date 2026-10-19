@@ -41,11 +41,19 @@ In our words: a rare lightsaber variant with several small crystals instead of o
 ## Steps
 
 0. **Capture (needs the O15 hook installed and the owner in game).** Add a log option for blade draws: draw kind, primitive type, vertex count, stride, the first vertices and vertex constants c0 to c11. The owner swings a stock saber for a few seconds. This shows whether the blade's two ends can be recovered every frame. If they can't, stop and rethink before building step 3.
-   - **Built 18 Oct 8:36 PM, not installed:** O15 proxy `5582152a`. Its `log_draws` setting (off by default) writes `SWG-client/mirage-draws-<pid>.log`. To run it:
+   - **Installed 18 Oct 8:41 PM, with `log_draws=600`:** O15 proxy `5582152a` (built 8:36 PM). `Fable-ossus/o15-mirage/capture_read.py` reads its log. Its `log_draws` setting (off by default) writes `SWG-client/mirage-draws-<pid>.log`. To run it:
      1. With the client closed, swap the proxy in and add `log_draws=600` to `mirage.ini`.
      2. In game, swing a stock saber for a few seconds, then the whip, pressing Ctrl+Shift+L while swinging.
 
      The details, and what step 3 needs from the log, are in [O15 DESIGN.md](../Fable-ossus/o15-mirage/DESIGN.md), under "The light whip's bend".
+   - **Result, 8:50 PM (`capture_read.py` on both clients' logs, 8:43 to 8:50 PM): the ends can be recovered every frame.**
+     - **The draws.** Each blade draws once per frame as a 4-vertex triangle fan, plus a 2-vertex line list over one edge. Both use vertex program `5e68b930`.
+     - **The quad, in object space:** x is plus or minus half the width (0.15 for the saber, 0.09 for the whip), y is 0, and z runs from 0 at the base to the current length at the tip. Vertex 0 is always at the tip.
+     - **Off or igniting.** A blade that is off or still igniting draws with length 0. The saber grows over about 24 frames; the whip appears at full length at once.
+     - **World positions.** c4 to c7 are packed column-major (world.x = dot(p, c4)). Base = object (0, 0, 0), tip = object (0, 0, length).
+     - **Scale.** The object-to-world scale is 0.817 (the character's scale), so the whip's 2.1 m is 1.72 m in the world and the saber's 1.2 m is 0.98 m.
+     - **Tracks.** Tracked by the nearest base, every blade had a quad in every frame. The exceptions were 3 frames in 211 (the saber) and 0 in 142 (the whip).
+     - **Speeds.** During swings the base moved up to 7 m/s and the whip's tip up to 48 m/s, so the rope needs sub-steps.
    - **The constants.** `a_nolighting.vsh` includes `vertex_shader_constants.inc`, which sets c0 to c3 as object to clip, c4 to c7 as object to world and c8 as the camera position. So the vertices plus c4 to c7 should give the blade's two ends in world space. The game draws the blade with `DrawPrimitive`, twice a frame (O15 `mirage.log`, 8:11 PM).
 1. **Base (no game needed to build).** The archive gets a whip hilt template (a stock hilt for now), a long, thin `.lsb` blade with its own blade shaders and pixel program, and its own swoosh trail row. The server Lua gets a one-handed saber template with longer range, lower damage against armour and weaker blocking, plus the loot item and schematic. Built, not installed; then the test galaxy.
    - **On the test galaxy since 18 Oct 7:42 PM (run 37):** archive `a2610d64` on O14 `feb3bf84`. Built first at 7:25 PM as `d424d2f6` on O14, plus a Lua patch for dev. What's in it, the install steps and the test questions are in [Lightwhip/README.md](../Lightwhip/README.md). The blocking penalty isn't in it, because `saber_block` is the wielder's skill mod, not the weapon's, so it moved to step 2.

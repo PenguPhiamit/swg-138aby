@@ -20,7 +20,7 @@ It is a small `d3d9.dll` of our own that sits in front of DXVK in the client fol
   | O14 saber blade in `23368576` (O14 `4c5a29d0`) | `0x0ea2a331` |
   | O14 saber blade in `b9fbc48a` and `a2610d64` | `0xfac25b60` |
   | light whip blade (its own `e_h_lightwhipblade_ps20`) | `0x238eb66a` |
-- **Built, not installed: `5582152a`** (8:36 PM). It adds the blade-draw capture for the light whip's bend, off by default (see "The light whip's bend" below), and the ids above. With the capture off it draws exactly like `dc7e87c8`.
+- **Installed 8:41 PM: `5582152a`** (built 8:36 PM; swapped by the main session on the owner's OK, "Install now (Recommended)"). `SWG-client/d3d9.dll` is `5582152a`, with the backup `d3d9.dll.bak-dc7e87c8`. `dxvk_d3d9.dll` (`265888c3`) is unchanged. `mirage.ini` ends with `extra_ids=0ea2a331` and `log_draws=600`. It adds the blade-draw capture for the light whip's bend (see "The light whip's bend" below) and the ids above. With the capture off it draws exactly like `dc7e87c8`. `capture_read.py` reads the capture.
 
 ## The layer
 
@@ -115,7 +115,7 @@ Every effect is made of the same three parts.
 
 The plan is in [lightwhip-design.md](../../Documentation-support/lightwhip-design.md), steps 0 and 3. The owner, 18 Oct, 8:3x PM: "can we wait on the parry thing in favor of the bend?"
 
-**Step 0, the capture (in build `5582152a`, not installed).**
+**Step 0, the capture (build `5582152a`, installed 8:41 PM with `log_draws=600`).**
 - **What it's for.** The rope needs the blade's base and tip every frame. The capture shows whether the game's blade draw gives them.
 - **What it writes.** For each blade-program draw, one record in `SWG-client/mirage-draws-<pid>.log`:
   - the call and its counts;
@@ -147,12 +147,21 @@ The plan is in [lightwhip-design.md](../../Documentation-support/lightwhip-desig
 
   If any of these fail, step 3 waits and the plan is rethought.
 
-**Step 3, the bend (only after step 0 works).**
+- **Result, 8:50 PM: step 0 passes.** `capture_read.py` was run on both clients' logs, from 8:43 to 8:50 PM: 4,532 draws, the capture key pressed 16 times.
+  - **The draws.** Per blade per frame, `DrawPrimitive` draws a triangle fan of 4 vertices, then a line list over its first 2 vertices. Both use vertex program `5e68b930`; its bytecode is in `SWG-client/mirage-vs-5e68b930.bin`. The layout is `FLOAT3 POSITION0`, `D3DCOLOR COLOR0`, `FLOAT2 TEXCOORD0`, stride 24, in a 2 MB dynamic buffer.
+  - **The quad, in object space:** x = plus or minus half the width (0.15 saber, 0.09 whip), y = 0, z = 0 at the base to the current length at the tip (1.2 saber, 2.1 whip). Vertex 0 is always at the tip. Off and igniting blades draw with length 0.
+  - **The matrices.** c4 to c7 are column-major (world.x = dot(p, c4), with c7 = 0 0 0 1). The object-to-world scale is 0.817, so in the world the whip is 1.72 m and the saber 0.98 m.
+  - **Tracks.** By nearest base, every lit blade had its quad in every frame: 0 frames missing for the whip (142 frames); 3 missing in 502 frames for the saber.
+  - **Speeds.** Up to 7 m/s at the base and 48 m/s at the whip's tip during swings.
+  - **Another 3D view.** Some frames draw the same saber three more times, one of them 0.6 m from its camera. That is likely the examine or inventory 3D view. Step 3 should leave a whip drawn in such a view straight (see below).
+
+**Step 3, the bend (step 0 works).**
 - **Rule.** Only the whip program `238eb66a`. Its straight draw is skipped and the rope is drawn in its place.
 - **Rope.** 16 to 24 points in world space, pinned at the hilt. Each point is pulled towards its place on the straight blade, with lag and damping, so the strand trails the swing and snaps at the end.
 - **Draw.** A strip along the rope, facing the camera (c8). Its vertices go back into the blade's object space through the inverse of c4 to c7. It is drawn with the game's own vertex layout, vertex program, constants, pixel program, textures and depth test, with `DrawPrimitiveUP`. Fog, fade and the ghostfire look then come out as for the straight blade, and the mirage rule sees the strip like any blade draw.
 - **Several whips.** Each draw is matched to last frame's rope by the nearest hilt. A rope not seen for a few frames is dropped.
 - **Fallback.** Anything unexpected (another layout, a vertex count it can't read, an exception) draws the straight blade as the game does.
+- **Main view only.** A whip in another 3D view (examine, inventory) stays straight: the rope runs only when the viewport is the full render target.
 
 ## Tested (outside the game, 18 Oct)
 
