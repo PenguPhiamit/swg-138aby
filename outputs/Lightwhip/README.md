@@ -9,6 +9,16 @@ The stiff whip is a straight 2.5 m strand. Later it is the fallback for anyone w
 - **Run 36** (7:33 PM) had `d424d2f6`, built on the older O14 `892475a4`. **Run 37** has `a2610d64`, built on the current O14 `feb3bf84`; the main session caught the old base.
 - **Owner's first look:** "whip doesnt bend". That's expected, since this is the stiff whip and bending is step 3. On the colour ("the same color as the ghostfire? not wuite what i wanted") they picked "keep as built": the crystal decides, and the ghostfire crystal gives the near-invisible ghostfire blade.
 
+## Scope until the 22 Oct reset (owner, about 8:20 PM)
+
+- **Now:**
+  - **Step 2:** the parry slip and weaker blocking (dev C++). The owner picks from options A, B or C (see the design note) before any C++ is written.
+  - **Drop: bosses only.** `server/lightwhip-boss-drop-dev.patch` (made by `server/make_boss_drop_patch.py`), built, not applied.
+    - A slain world-rotation boss (the 14 in `sandbox_world_bosses.lua`) has a 5% chance to give one random player who damaged it a roll of `lightwhip_boss`: the schematic 80%, a finished whip 20%. It goes into their inventory, or the next player's if that one is full.
+    - The bosses' stock templates are untouched, so ordinary creatures never drop it.
+    - The patch renames the group from `lightwhip_nightsister`. It passes `git apply --check` on dev `9d08e265`, and `luac5.3 -p` passes.
+- **After the reset:** step 3 (the bending whip through the O15 hook, with the step-0 capture first) and step 4 (an original hilt and crack sound).
+
 ## Client archive (`build_lightwhip.py`)
 
 - **Out:** `work/lightwhip/local_planets-lightwhip.tre`, sha256 `a2610d64…` (full hash in the `.sha256` file). Two builds give the same hash.

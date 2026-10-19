@@ -1,0 +1,95 @@
+diff --git a/MMOCoreORB/bin/scripts/loot/groups.lua b/MMOCoreORB/bin/scripts/loot/groups.lua
+index 0897262..00ce19b 100644
+--- a/MMOCoreORB/bin/scripts/loot/groups.lua
++++ b/MMOCoreORB/bin/scripts/loot/groups.lua
+@@ -737,4 +737,4 @@ includeFile("groups/hoth/hoth_vehicle_deeds.lua")
+ includeFile("groups/ossus/ossus_ghostfire_crystal.lua")
+ includeFile("groups/ossus/ossus_ghostfire_saber.lua")
+ --lightwhip sub-folder (the light whip, L1, 18 Oct 2026)
+-includeFile("groups/lightwhip/lightwhip_nightsister.lua")
++includeFile("groups/lightwhip/lightwhip_boss.lua")
+diff --git a/MMOCoreORB/bin/scripts/loot/groups/lightwhip/lightwhip_nightsister.lua b/MMOCoreORB/bin/scripts/loot/groups/lightwhip/lightwhip_boss.lua
+similarity index 50%
+rename from MMOCoreORB/bin/scripts/loot/groups/lightwhip/lightwhip_nightsister.lua
+rename to MMOCoreORB/bin/scripts/loot/groups/lightwhip/lightwhip_boss.lua
+index 175f341..8e338f1 100644
+--- a/MMOCoreORB/bin/scripts/loot/groups/lightwhip/lightwhip_nightsister.lua
++++ b/MMOCoreORB/bin/scripts/loot/groups/lightwhip/lightwhip_boss.lua
+@@ -1,7 +1,7 @@
+--- Light whip loot (L1, 18 Oct 2026): mostly the schematic, sometimes a finished whip. Not on any creature yet: the
+--- Nightsister placement on Dathomir is step 4 of Documentation-support/lightwhip-design.md.
++-- Light whip loot (L1, 18 Oct 2026): mostly the schematic, sometimes a finished whip. Owner, 18 Oct: bosses only.
++-- Rolled for one damage dealer of a slain rotation boss (screenplays/sandbox/sandbox_world_bosses.lua, lightwhipChance).
+ 
+-lightwhip_nightsister = {
++lightwhip_boss = {
+ 	description = "",
+ 	minimumLevel = 0,
+ 	maximumLevel = 0,
+@@ -11,4 +11,4 @@ lightwhip_nightsister = {
+ 	}
+ }
+ 
+-addLootGroupTemplate("lightwhip_nightsister", lightwhip_nightsister)
++addLootGroupTemplate("lightwhip_boss", lightwhip_boss)
+diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua
+index 94c9e94..9700b28 100644
+--- a/MMOCoreORB/bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua
++++ b/MMOCoreORB/bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua
+@@ -17,6 +17,8 @@ SandboxWorldBosses = ScreenPlay:new {
+ 	respawnAfterEscape = 2 * 60,    -- seconds before an escaped boss's slot refills
+ 	spawnRadius = 400,              -- metres around a reference point
+ 	reward = 25000,                 -- bank credits per player who damaged the boss
++	lightwhipChance = 5,            -- percent per kill: one damage dealer gets a light whip group roll (L1)
++	lightwhipLootGroup = "lightwhip_boss",
+ 
+ 	-- template, display name, health multiplier, home planet
+ 	roster = {
+@@ -171,6 +173,11 @@ function SandboxWorldBosses:onBossKilled(pBoss, pKiller)
+ 	local by = paid > 0 and (" by " .. table.concat(names, ", ")) or ""
+ 	broadcastToGalaxy(nil, "\\#ffcc66[World boss]\\#ffffff " .. name .. " has been slain on " .. planetLabel(planet) .. by .. "!")
+ 
++	-- Light whip (L1, owner 18 Oct: bosses only): sometimes one damage dealer gets a roll of the whip group.
++	if paid > 0 and getRandomNumber(1, 100) <= self.lightwhipChance then
++		self:giveLightwhip(dealers, name)
++	end
++
+ 	deleteData(bossID .. ":sandboxWorldBossSlot")
+ 	if slot ~= nil and slot > 0 then
+ 		writeData(PREFIX .. "slot:" .. slot, 0)
+@@ -180,6 +187,35 @@ function SandboxWorldBosses:onBossKilled(pBoss, pKiller)
+ 	return 1
+ end
+ 
++-- One random player who damaged the boss gets the light whip group's roll (schematic or finished whip) in their inventory;
++-- if that inventory is full, the next player in the list does.
++function SandboxWorldBosses:giveLightwhip(dealers, name)
++	local players = {}
++
++	for _, pPlayer in pairs(dealers) do
++		if pPlayer ~= nil and SceneObject(pPlayer):isPlayerCreature() then
++			table.insert(players, pPlayer)
++		end
++	end
++
++	if #players == 0 then
++		return
++	end
++
++	local first = getRandomNumber(1, #players)
++
++	for i = 0, #players - 1 do
++		local pPlayer = players[(first + i - 1) % #players + 1]
++		local pInventory = CreatureObject(pPlayer):getSlottedObject("inventory")
++
++		if pInventory ~= nil and not SceneObject(pInventory):isContainerFullRecursive() then
++			createLoot(pInventory, self.lightwhipLootGroup, 0, true)
++			CreatureObject(pPlayer):sendSystemMessage("Among " .. name .. "'s remains you find something left by an earlier victim: a lightwhip, or the notes to build one.")
++			return
++		end
++	end
++end
++
+ function SandboxWorldBosses:expire(pNil, args)
+ 	local slot, bossID = string.match(args, "(%d+):(%d+)")
+ 	slot, bossID = tonumber(slot), tonumber(bossID)

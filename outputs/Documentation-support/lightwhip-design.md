@@ -7,7 +7,10 @@
 - **Route:** the real bending whip, through the graphics hook (the O15 effects layer), not only a stiff blade or a lash effect.
 - **Users:** Jedi, as a saber. It is a one-handed saber template, so Jedi skills, Force cost and crystals apply, including the ghostfire crystal through the O14 shader.
 - **Source:** loot plus schematic. A rare drop (a schematic or a broken whip) that a crafter finishes.
+  - **Owner, about 8:20 PM: bosses only**, chosen over Dathomir Nightsisters and over not yet. Each kill of a world-rotation boss has a 5% chance to give one player who damaged it a roll of the whip group (schematic 80%, whip 20%). Patch built, not applied: `Lightwhip/server/lightwhip-boss-drop-dev.patch`.
 - **Stats:** reach and the lore's trade-offs, and whip attacks partly slip past parries (a small C++ change).
+- **Looks (owner, about 7:35 PM, after the first look):** "keep as built". The crystal decides the colour, and the ghostfire crystal gives the near-invisible ghostfire blade.
+- **Scope until the 22 Oct reset (owner, about 8:20 PM):** step 2 and the bosses-only drop now. The bending whip (step 3) and the art (step 4) wait for the reset.
 
 ## Lore (Wookieepedia, Legends: [Lightwhip](https://starwars.fandom.com/wiki/Lightwhip/Legends))
 
@@ -32,10 +35,21 @@ In our words: a rare lightsaber variant with several small crystals instead of o
 
 0. **Capture (needs the O15 hook installed and the owner in game).** Add a log option for blade draws: draw kind, primitive type, vertex count, stride, the first vertices and vertex constants c0 to c11. The owner swings a stock saber for a few seconds. This shows whether the blade's two ends can be recovered every frame. If they can't, stop and rethink before building step 3.
 1. **Base (no game needed to build).** The archive gets a whip hilt template (a stock hilt for now), a long, thin `.lsb` blade with its own blade shaders and pixel program, and its own swoosh trail row. The server Lua gets a one-handed saber template with longer range, lower damage against armour and weaker blocking, plus the loot item and schematic. Built, not installed; then the test galaxy.
-   - **Built 18 Oct 7:25 PM, not installed, untested:** archive `d424d2f6` on O14, plus a Lua patch for dev. What's in it, the install steps and the test questions are in [Lightwhip/README.md](../Lightwhip/README.md). The blocking penalty isn't in it, because `saber_block` is the wielder's skill mod, not the weapon's, so it moved to step 2.
+   - **On the test galaxy since 18 Oct 7:42 PM (run 37):** archive `a2610d64` on O14 `feb3bf84`. Built first at 7:25 PM as `d424d2f6` on O14, plus a Lua patch for dev. What's in it, the install steps and the test questions are in [Lightwhip/README.md](../Lightwhip/README.md). The blocking penalty isn't in it, because `saber_block` is the wielder's skill mod, not the weapon's, so it moved to step 2.
 2. **Parry slip and weaker blocking (dev C++, `CombatManager.cpp`).** Whip attacks partly ignore the target's parry and block, and a Jedi holding a whip blocks less well. First check which Core3 defence rolls apply to melee against a Jedi, then agree the number with the owner.
-3. **Hook effect.** The rope strip from "How it works", as one more effect in the O15 effects layer (`Fable-ossus/o15-mirage/DESIGN.md`), after the mirage works in game.
-4. **Art and placement.** An original hilt and crack sound (no film sounds), a Nightsister loot entry on Dathomir and the schematic's resources.
+   - **What Core3 rolls** (`CombatManager.cpp` `getHitChance`, `CombatManager.h:282`):
+     - **Roll 1 (to hit).** Accuracy against the target's defence: its level plus the attacking weapon's defence mods (`melee_defense` for the whip), capped at 125, plus private, group and food bonuses.
+     - **Roll 2 (after a hit; never for Force attacks).** It is decided by the target's own weapon.
+       - If the target holds any saber, it takes the ricochet path: `saber_block` applies only to ranged and heavy attacks, so a melee hit, the whip included, gets no second roll.
+       - Otherwise one-handed melee and pistols give dodge, two-handed and carbines give counter, and polearms and rifles give block. The chance comes from level plus the target's weapon's secondary mods (capped at 125), plus center of being and posture.
+     - So against a saber-holding Jedi the only parry-like defence is roll 1's `melee_defense`. The whip's "weaker blocking" means its holder's `saber_block` against ranged shots.
+   - **Options sent to the owner (8:27 PM), C++ waits for the pick:**
+     - **A:** ignore 25% of roll 2; holder −25% `saber_block`.
+     - **B (recommended):** ignore 50% of roll 2 and 10% of the target's `melee_defense` in roll 1, so it also works on saber Jedi; holder −33% `saber_block`.
+     - **C:** skip roll 2 and ignore 20% of `melee_defense`; holder −50% `saber_block`.
+     - The whip is recognised by its server template CRC. The patch must sit on the dev working tree, because `CombatManager.cpp` has the ghostfire session's uncommitted edits.
+3. **Hook effect.** The rope strip from "How it works", as one more effect in the O15 effects layer (`Fable-ossus/o15-mirage/DESIGN.md`), after the mirage works in game. Waits for the 22 Oct reset (owner), and so does step 0.
+4. **Art.** An original hilt and crack sound (no film sounds). Waits for the 22 Oct reset. Placement is settled: bosses only (see Owner decisions).
 
 ## Open questions
 
