@@ -94,6 +94,14 @@ ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fi
 
 ## Log
 
+### 2026-10-18 8:07 PM Claude: O14 fix archive `b9fbc48a` swapped on the client and at /opt/swg/tre (no restart)
+
+- **Owner, 7:50 PM:** "take a capture, its not looking right at all, trails are too vibrant, and there is a red saber in there somehow." UM capture take 3 (7:50 to 7:51 PM, scratchpad only): a full red blade and the strobe trails as large full-strength rainbow fans. Sent to the ghostfire blade session.
+- **Fix** (ghostfire blade session, `5cea6b8`, `eda5802`, `4a02d43`): the red came from the client's customization table, which had no row for our blade file or the light whip's, so colour 32 was dropped; both now use the sleek silver blade's key. Trails toned down (single effect, half alpha, 1.2 s, 6 copies, smokier). Test saber B is a one-swing trail-layout diagnostic. Archive O14 `3797288d`, with the light whip `b9fbc48a`.
+- **Owner, 8:05 PM** (card: install the fixed archive now, client closed): "Install now". At 8:06 to 8:07 PM, under the lock: `SWG-client/local_planets.tre` and `/opt/swg/tre/local_planets.tre` (by rename) are `b9fbc48a`; backups `.bak-a2610d64` in both places. Client files only, so run 37 keeps running (core3 pid 9051).
+- **Mirage** (mirage session): the new proxy `dc7e87c8` (`b9fa9d6`, `a10fac9`) has been on the client since 7:52 PM. The 7:35 PM look was the O14 blade, not the mirage: the old proxy never drew. The new rule needs the ghostfire colour (c3 brightest 0.17 or less), so it should show now that colour 32 reaches the blade. Not seen in game yet.
+- **Owner check:** the questions are in the O14 README (ghostfire crystal in any hilt, the trails, one slow swing of test saber B while a capture runs).
+
 ### 2026-10-18 7:04 PM Claude: C65 checked; N1 and N3 fixed in dev (`6d544cf3`, not built); N2 accepted for now
 
 - **Owner:** "before the next restart check gpts work", then "Yes: fix N1 and N3 in dev (no build), accept N2 for now. Build at the next restart when I'm off the game."
