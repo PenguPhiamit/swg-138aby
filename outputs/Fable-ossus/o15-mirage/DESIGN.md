@@ -21,6 +21,7 @@ It is a small `d3d9.dll` of our own that sits in front of DXVK in the client fol
   | O14 saber blade in `b9fbc48a` and `a2610d64` | `0xfac25b60` |
   | light whip blade (its own `e_h_lightwhipblade_ps20`) | `0x238eb66a` |
 - **Installed 8:41 PM: `5582152a`** (built 8:36 PM; swapped by the main session on the owner's OK, "Install now (Recommended)"). `SWG-client/d3d9.dll` is `5582152a`, with the backup `d3d9.dll.bak-dc7e87c8`. `dxvk_d3d9.dll` (`265888c3`) is unchanged. `mirage.ini` ends with `extra_ids=0ea2a331` and `log_draws=600`. It adds the blade-draw capture for the light whip's bend (see "The light whip's bend" below) and the ids above. With the capture off it draws exactly like `dc7e87c8`. `capture_read.py` reads the capture.
+- **Built, not installed: `525cd302`** (9:03 PM): the light whip's bend (step 3, below), plus everything in `5582152a`.
 
 ## The layer
 
@@ -155,13 +156,41 @@ The plan is in [lightwhip-design.md](../../Documentation-support/lightwhip-desig
   - **Speeds.** Up to 7 m/s at the base and 48 m/s at the whip's tip during swings.
   - **Another 3D view.** Some frames draw the same saber three more times, one of them 0.6 m from its camera. That is likely the examine or inventory 3D view. Step 3 should leave a whip drawn in such a view straight (see below).
 
-**Step 3, the bend (step 0 works).**
-- **Rule.** Only the whip program `238eb66a`. Its straight draw is skipped and the rope is drawn in its place.
-- **Rope.** 16 to 24 points in world space, pinned at the hilt. Each point is pulled towards its place on the straight blade, with lag and damping, so the strand trails the swing and snaps at the end.
-- **Draw.** A strip along the rope, facing the camera (c8). Its vertices go back into the blade's object space through the inverse of c4 to c7. It is drawn with the game's own vertex layout, vertex program, constants, pixel program, textures and depth test, with `DrawPrimitiveUP`. Fog, fade and the ghostfire look then come out as for the straight blade, and the mirage rule sees the strip like any blade draw.
-- **Several whips.** Each draw is matched to last frame's rope by the nearest hilt. A rope not seen for a few frames is dropped.
-- **Fallback.** Anything unexpected (another layout, a vertex count it can't read, an exception) draws the straight blade as the game does.
-- **Main view only.** A whip in another 3D view (examine, inventory) stays straight: the rope runs only when the viewport is the full render target.
+**Step 3, the bend: built 9:03 PM as `525cd302`, not installed.**
+- **Rule.** Only the whip program (`ids=238eb66a` under `[whip]`).
+  - The fan is replaced by a strip along a rope of 20 segments.
+  - The edge line that follows it becomes a line along the rope's edge.
+  - Every other blade stays as the game draws it.
+- **Rope: a follow-through chain in world space.**
+  - It starts at the base. Each segment's direction eases towards its parent's direction of the step before, with some momentum. The first segment eases towards the straight blade.
+  - Near the hilt it follows quickly (0.5 per 1/240 s); at the tip, slowly (0.1). The momentum is 0.5.
+  - So the whip trails a swing, snaps round when the swing stops, and settles straight. It keeps its length and can't fold back on itself.
+  - The first model, springs pulling points towards their places on the straight blade, folded the rope into a coil by the hilt in the harness, so it was replaced.
+- **Draw.**
+  - The base and tip come from the quad (z 0 and z length) through c4 to c7, as in step 0.
+  - The strip faces the camera (c8) and goes back into object space through the inverse of c4 to c7.
+  - It is drawn with `DrawPrimitiveUP` with the game's layout, vertex program, constants, pixel program, textures and depth test. Culling is off for the strip.
+  - Stream 0 and the cull mode are put back afterwards.
+  - Texture coordinates run as on the game's quad: u is 1 at the base and 0 at the tip, v is 0 and 1 across.
+  - The mirage bends the rope, not the straight blade, because its mask replays the rope draw.
+- **Several whips.** Up to 8 ropes. Each is matched by the nearest base within 1 m of a rope drawn in the last 10 frames. A new whip, a jump of more than 0.25 s, or a change in length starts the rope straight.
+- **Fallbacks.** These draw the straight blade as the game does:
+  - another call or shape, another layout, an unreadable buffer, or no matrix (each logged once);
+  - a length of 0 (off);
+  - another 3D view (examine, inventory): the rope runs only when the viewport fills the render target;
+  - an exception: whips stay straight for the session.
+- **Switches.** `[whip] enabled=0`, or Ctrl+Shift+B in game. The settings are `segments`, `follow_base`, `follow_tip`, `momentum` and `substeps_hz`. A `mirage.ini` without a `[whip]` section, like the one on the client now, gets the bend on with these defaults.
+- **Also in this build: one mirage pass per blade.** The mirage no longer runs its screen pass a second time for the blade's edge line, which lies inside the quad's mask. That halves the mirage's cost per blade; in the 8:4x PM logs it ran twice per blade per frame.
+- **Tested in the harness** (`mirage_test.exe ... whip`). A 2.1 m whip, drawn as the client draws it (fan plus edge line, from a vertex buffer, through a vs_2_0 with the client's packing), swings 1.2 rad at 15 rad/s with `fixed_dt=0.016667`.
+  - Every call worked.
+  - Without the whip, the frame is identical to `dc7e87c8`.
+  - With `debug_view=1` (the haze area painted in), the rope's area differs from the straight blade's by 4,200 to 4,900 pixels a frame. It keeps its length and trails as a smooth curve: `work/o15-mirage/preview-whip-rope-mask.png`, straight on top, rope below, frames 36 to 48.
+  - Not tested: real-time steps in game, two whips at once, the examine view, MSAA.
+- **To try** (game closed, the owner's OK):
+  1. Copy `work/o15-mirage/d3d9.dll` over `SWG-client/d3d9.dll`, or run `install.ps1`.
+  2. Set `log_draws=0` in `mirage.ini`.
+  3. Swing the whip; Ctrl+Shift+B compares rope and straight.
+  4. `mirage.log` counts ropes and straight whips every 30 s.
 
 ## Tested (outside the game, 18 Oct)
 
@@ -217,7 +246,8 @@ The plan is in [lightwhip-design.md](../../Documentation-support/lightwhip-desig
 | `src/mask_ps.hlsl`, `src/haze_ps.hlsl` | The two ps_2_0 programs (compiled by fxc and built into the DLL) |
 | `src/blade_ids.h`, `blade_ids.py` | The blade program ids. The script reads them from the client archives and the O14 archive; later effects' ids come the same way. |
 | `src/d3d9.def` | The export names |
-| `src/mirage_test.c` | The harness used for the checks above |
+| `src/mirage_test.c`, `src/test_vs.hlsl` | The harness used for the checks above (`whip` mode: the client's whip draws through a stand-in vertex program) |
+| `capture_read.py` | Reads `mirage-draws-<pid>.log` (step 0): the blade's shape, ends, tracks and a verdict |
 | `build.cmd` | Builds `work\o15-mirage\d3d9.dll` and `mirage_test.exe` (VS 2022, x86) |
 | `install.ps1`, `uninstall.ps1`, `mirage.ini` | For the owner's client |
 | `checks-mirage.json` | Hashes, ids and the harness numbers |

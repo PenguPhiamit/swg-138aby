@@ -1,11 +1,15 @@
 // Ossus O15 mirage test harness (Claude, 18 Oct 2026): drives the proxy d3d9.dll the way the client draws a blade,
 // outside the game, and saves screenshots.
-// Usage: mirage_test <proxy d3d9.dll> <blade .pexe> <out prefix>
+// Usage: mirage_test <proxy d3d9.dll> <blade .pexe> <out prefix> [whip]
 // Each frame: a striped background, an opaque bar in front, a ghostfire blade (dark c3) on the left and a stock red
 // blade on the right (from a vertex buffer with DrawPrimitive, as the game draws), with the real blade pixel program. The left blade's program and c3 come from a recorded state
 // block, the right one's from direct calls, so the hook must read the device state rather than track Set calls.
 // The window stays hidden (it must not take focus from a game being played). Reset at frame 20, screenshots of
 // frames 40 and 48 as <prefix>-40.bmp and <prefix>-48.bmp. Exit code 0 when every call worked.
+// With "whip", a light whip swings in the middle as the client draws it (step 0 capture): a 2.1 m quad in object space
+// (x +-0.09, z 0 to 2.1) as a triangle fan plus a line over its first two vertices, from a vertex buffer, through a
+// vertex program with the client's constant packing (c0-c3 object to clip, c4-c7 object to world, c8 camera), with a
+// dark ghostfire c3. Frames 36, 40, 44 and 48 are saved.
 
 #define CINTERFACE
 #define WIN32_LEAN_AND_MEAN
@@ -15,6 +19,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "test_vs.h"   // g_test_vs_code (fxc /Fh from test_vs.hlsl)
 
 #define W 800
 #define H 450
@@ -101,6 +107,39 @@ static IDirect3DVertexBuffer9 *blade_vb(IDirect3DDevice9 *d, float hx, float hy,
 	return vb;
 }
 
+typedef struct { float x, y, z; DWORD c; float u, v; } WVtx;   // the client's blade layout, stride 24
+
+static void mat_mul(float o[4][4], float a[4][4], float b[4][4])
+{
+	int i, j, k;
+	for (i = 0; i < 4; i++)
+		for (j = 0; j < 4; j++)
+			for (o[i][j] = 0, k = 0; k < 4; k++)
+				o[i][j] += a[i][k] * b[k][j];
+}
+
+// the whip at frame f: object to world (row vectors) = scale 0.817, z up, a swing about the view axis, 5 m ahead
+static void whip_constants(IDirect3DDevice9 *d, int frame)
+{
+	float th = 1.2f * sinf(frame * 0.25f), c = cosf(th), s = sinf(th), k = 0.817f;
+	float zn = 1.0f, zf = 100.0f, ys = 1.0f / tanf(0.5236f), xs = ys * H / W;
+	float world[4][4] = { { k * c, k * s, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0.0f, -1.2f, 5.0f, 1 } };
+	float proj[4][4] = { { xs, 0, 0, 0 }, { 0, ys, 0, 0 }, { 0, 0, zf / (zf - zn), 1 }, { 0, 0, -zn * zf / (zf - zn), 0 } };
+	float wvp[4][4], reg[9][4];
+	int i, j;
+	// object y -> world -z (unused by the quad), object z -> world up, then the swing: rows of the 3x3
+	world[1][0] = 0, world[1][1] = 0, world[1][2] = -k;
+	world[2][0] = -k * s, world[2][1] = k * c, world[2][2] = 0;
+	mat_mul(wvp, world, proj);
+	for (i = 0; i < 4; i++)
+		for (j = 0; j < 4; j++) {
+			reg[i][j] = wvp[j][i];       // column-major: register i = column i
+			reg[4 + i][j] = world[j][i];
+		}
+	reg[8][0] = reg[8][1] = reg[8][2] = 0, reg[8][3] = 1;   // the camera at the origin
+	d->lpVtbl->SetVertexShaderConstantF(d, 0, &reg[0][0], 9);
+}
+
 // the left blade's state: its program and a dark ghostfire c3, recorded the way an engine might
 static IDirect3DStateBlock9 *record(IDirect3DDevice9 *d, IDirect3DPixelShader9 *ps)
 {
@@ -155,7 +194,10 @@ int main(int argc, char **argv)
 	IDirect3DPixelShader9 *ps = NULL;
 	IDirect3DTexture9 *bg, *bt;
 	IDirect3DStateBlock9 *sb;
-	IDirect3DVertexBuffer9 *vb;
+	IDirect3DVertexBuffer9 *vb, *wvb = NULL;
+	IDirect3DVertexShader9 *wvs = NULL;
+	IDirect3DVertexDeclaration9 *wdecl = NULL;
+	int whip = argc > 4 && !strcmp(argv[4], "whip");
 	D3DPRESENT_PARAMETERS pp = { 0 };
 	WNDCLASSA wc = { 0 };
 	RECT r = { 0, 0, W, H };
@@ -217,6 +259,22 @@ int main(int argc, char **argv)
 	bt = texture(d, 256, 64, 1);
 	sb = record(d, ps);
 	vb = blade_vb(d, 580, 400, 620, 60, 70);
+	if (whip) {
+		static const D3DVERTEXELEMENT9 el[] = { { 0, 0, D3DDECLTYPE_FLOAT3, 0, D3DDECLUSAGE_POSITION, 0 },
+			{ 0, 12, D3DDECLTYPE_D3DCOLOR, 0, D3DDECLUSAGE_COLOR, 0 },
+			{ 0, 16, D3DDECLTYPE_FLOAT2, 0, D3DDECLUSAGE_TEXCOORD, 0 }, D3DDECL_END() };
+		WVtx q[4] = { { 0.09f, 0, 2.1f, 0xFFFFFFFF, 0, 0 }, { 0.09f, 0, 0, 0xFFFFFFFF, 1, 0 },
+		              { -0.09f, 0, 0, 0xFFFFFFFF, 1, 1 }, { -0.09f, 0, 2.1f, 0xFFFFFFFF, 0, 1 } };
+		void *p;
+		check(d->lpVtbl->CreateVertexShader(d, (const DWORD *)g_test_vs_code, &wvs), "CreateVertexShader");
+		check(d->lpVtbl->CreateVertexDeclaration(d, el, &wdecl), "CreateVertexDeclaration");
+		check(d->lpVtbl->CreateVertexBuffer(d, 8 * sizeof(WVtx), D3DUSAGE_WRITEONLY, 0, D3DPOOL_MANAGED, &wvb, NULL),
+		      "CreateVertexBuffer whip");
+		check(wvb->lpVtbl->Lock(wvb, 0, 0, &p, 0), "Lock whip");
+		memset(p, 0, 8 * sizeof(WVtx));
+		memcpy((WVtx *)p + 4, q, sizeof q);   // at vertex 4, as the client draws from a running offset
+		wvb->lpVtbl->Unlock(wvb);
+	}
 
 	for (frame = 0; frame <= 48; frame++) {
 		MSG msg;
@@ -277,8 +335,18 @@ int main(int argc, char **argv)
 		d->lpVtbl->SetPixelShaderConstantF(d, 3, red, 1);
 		d->lpVtbl->SetStreamSource(d, 0, vb, 0, sizeof(Vtx));
 		check(d->lpVtbl->DrawPrimitive(d, D3DPT_TRIANGLESTRIP, 2, 2), "DrawPrimitive blade");
+		if (whip) {   // the whip: ghostfire c3, the client's two draws
+			float ghost[4] = { 32 / 255.0f, 8 / 255.0f, 32 / 255.0f, 1 };
+			d->lpVtbl->SetPixelShaderConstantF(d, 3, ghost, 1);
+			d->lpVtbl->SetVertexShader(d, wvs);
+			d->lpVtbl->SetVertexDeclaration(d, wdecl);
+			d->lpVtbl->SetStreamSource(d, 0, wvb, 0, sizeof(WVtx));
+			whip_constants(d, frame);
+			check(d->lpVtbl->DrawPrimitive(d, D3DPT_TRIANGLEFAN, 4, 2), "DrawPrimitive whip fan");
+			check(d->lpVtbl->DrawPrimitive(d, D3DPT_LINELIST, 4, 1), "DrawPrimitive whip line");
+		}
 		check(d->lpVtbl->EndScene(d), "EndScene");
-		if (frame == 40 || frame == 48) {
+		if (frame == 40 || frame == 48 || (whip && (frame == 36 || frame == 44))) {
 			sprintf(path, "%s-%d.bmp", argv[3], frame);
 			save_bmp(d, path);
 		}
@@ -286,6 +354,11 @@ int main(int argc, char **argv)
 	}
 	sb->lpVtbl->Release(sb);
 	vb->lpVtbl->Release(vb);
+	if (whip) {
+		wvb->lpVtbl->Release(wvb);
+		wvs->lpVtbl->Release(wvs);
+		wdecl->lpVtbl->Release(wdecl);
+	}
 	ps->lpVtbl->Release(ps);
 	bg->lpVtbl->Release(bg);
 	bt->lpVtbl->Release(bt);

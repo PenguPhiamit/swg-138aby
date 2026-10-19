@@ -11,8 +11,9 @@ call "%VS%\VC\Auxiliary\Build\vcvarsall.bat" x86 >nul || exit /b 1
 if not exist "%OUT%\gen" mkdir "%OUT%\gen"
 fxc /nologo /T ps_2_0 /E main /Vn g_mask_ps_code /Fh "%OUT%\gen\mask_ps.h" "%HERE%src\mask_ps.hlsl" || exit /b 1
 fxc /nologo /T ps_2_0 /E main /Vn g_haze_ps_code /Fh "%OUT%\gen\haze_ps.h" "%HERE%src\haze_ps.hlsl" || exit /b 1
+fxc /nologo /T vs_2_0 /E main /Vn g_test_vs_code /Fh "%OUT%\gen\test_vs.h" "%HERE%src\test_vs.hlsl" || exit /b 1
 cl /nologo /O2 /W3 /MT /D_CRT_SECURE_NO_WARNINGS /LD /I "%OUT%\gen" /Fo"%OUT%\gen\\" "%HERE%src\mirage.c" /Fe"%OUT%\d3d9.dll" ^
    /link /DEF:"%HERE%src\d3d9.def" user32.lib || exit /b 1
-cl /nologo /O2 /W3 /MT /D_CRT_SECURE_NO_WARNINGS /Fo"%OUT%\gen\\" "%HERE%src\mirage_test.c" /Fe"%OUT%\mirage_test.exe" ^
+cl /nologo /O2 /W3 /MT /D_CRT_SECURE_NO_WARNINGS /Fo"%OUT%\gen\\" /I "%OUT%\gen" "%HERE%src\mirage_test.c" /Fe"%OUT%\mirage_test.exe" ^
    /link user32.lib || exit /b 1
 echo built %OUT%\d3d9.dll and %OUT%\mirage_test.exe

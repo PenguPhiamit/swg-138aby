@@ -44,6 +44,11 @@ static struct {
 	int log_draws;        // >0: log this many draws of each blade program to mirage-draws-<pid>.log (the whip capture)
 	int draw_key;         // with toggle_mods: log every blade draw for draw_burst seconds more (needs log_draws > 0)
 	float draw_burst;
+	// [whip]: the light whip's rope (step 3)
+	int whip_enabled, whip_key, whip_segments;
+	float whip_follow_base, whip_follow_tip, whip_momentum, whip_hz, whip_fixed_dt;
+	unsigned int whip_ids[4];
+	int whip_count;
 	unsigned int extra_ids[8];
 	int extra_count;
 } cfg;
@@ -71,9 +76,11 @@ static void logf_(const char *fmt, ...)
 	fflush(g_log);
 }
 
+static const char *g_sect = "mirage";   // the ini section being read
+
 static const char *ini_str(const char *ini, const char *key, const char *def, char *buf, int size)
 {
-	GetPrivateProfileStringA("mirage", key, def, buf, size, ini);
+	GetPrivateProfileStringA(g_sect, key, def, buf, size, ini);
 	return buf;
 }
 
@@ -127,6 +134,37 @@ static void load_config(void)
 	      "chroma %.2f, mask gain %.2f, noise tiles %.1f, ghostfire at brightest <= %.3f, %d per frame, %d extra ids",
 	      ini, cfg.enabled, cfg.toggle_key, cfg.toggle_mods, cfg.strength, cfg.spread, cfg.speed, cfg.chroma,
 	      cfg.mask_gain, cfg.noise_tiles, cfg.max_bright, cfg.max_per_frame, cfg.extra_count);
+	g_sect = "whip";
+	cfg.whip_enabled = ini_int(ini, "enabled", 1);
+	cfg.whip_key = ini_int(ini, "toggle_key", 0x42);   // B, with toggle_mods
+	cfg.whip_segments = ini_int(ini, "segments", 20);
+	if (cfg.whip_segments < 4)
+		cfg.whip_segments = 4;
+	if (cfg.whip_segments > 32)
+		cfg.whip_segments = 32;
+	cfg.whip_follow_base = ini_float(ini, "follow_base", 0.5f);
+	cfg.whip_follow_tip = ini_float(ini, "follow_tip", 0.1f);
+	cfg.whip_momentum = ini_float(ini, "momentum", 0.5f);
+	cfg.whip_follow_base = max(0.001f, min(cfg.whip_follow_base, 1.0f));
+	cfg.whip_follow_tip = max(0.001f, min(cfg.whip_follow_tip, 1.0f));
+	cfg.whip_momentum = max(0.0f, min(cfg.whip_momentum, 0.95f));
+	cfg.whip_hz = ini_float(ini, "substeps_hz", 240.0f);
+	if (cfg.whip_hz < 30.0f)
+		cfg.whip_hz = 30.0f;
+	cfg.whip_fixed_dt = ini_float(ini, "fixed_dt", 0.0f);
+	ini_str(ini, "ids", "238eb66a", buf, sizeof buf);
+	for (p = buf; *p && cfg.whip_count < 4; p = end) {
+		unsigned long id = strtoul(p, &end, 16);
+		if (end == p) {
+			end = p + 1;
+			continue;
+		}
+		cfg.whip_ids[cfg.whip_count++] = (unsigned int)id;
+	}
+	g_sect = "mirage";
+	logf_("whip rope %s: %d segments, follow %.2f at the hilt to %.2f at the tip, momentum %.2f, %.0f sub-steps a "
+	      "second, toggle key 0x%02x, %d whip program ids", cfg.whip_enabled ? "on" : "off", cfg.whip_segments,
+	      cfg.whip_follow_base, cfg.whip_follow_tip, cfg.whip_momentum, cfg.whip_hz, cfg.whip_key, cfg.whip_count);
 	if (cfg.log_draws > 0)
 		logf_("blade-draw capture on: %d draws of each blade program, key 0x%02x adds %.0f s, to mirage-draws-%lu.log",
 		      cfg.log_draws, cfg.draw_key, cfg.draw_burst, g_pid);
@@ -376,6 +414,7 @@ typedef struct {
 	const void *idx, *vtx;
 	D3DFORMAT ifmt;
 	UINT stride;
+	int replaced;   // the whip rule turned it into a DrawPrimitiveUP of the rope (whip_finish draws it)
 } Draw;
 
 static HRESULT replay(IDirect3DDevice9 *d, const Draw *c)
@@ -827,18 +866,418 @@ static void capture(IDirect3DDevice9 *d, const Draw *c, unsigned int id)
 	}
 }
 
+// ---- the light whip's bend (Documentation-support/lightwhip-design.md step 3; DESIGN.md "The light whip's bend") ----
+// The client draws a blade as a 4-vertex triangle fan in object space (x = +-half width, y = 0, z = 0 at the base to
+// the length at the tip; vertex 0 at the tip) and then a line list over its first two vertices (step 0 capture, 18 Oct
+// 8:46 PM). For the whip program only, the fan becomes a rope: a chain of segments in world space from the base, each
+// segment's direction easing towards its parent's direction of the step before (the first towards the straight
+// blade), quickly near the hilt and slowly at the tip, with some momentum. So it trails a swing, snaps round when the
+// swing stops, settles straight, keeps its length and cannot fold back on itself (springs towards points on the
+// straight blade folded it into a coil in the harness, 18 Oct 9:01 PM).
+// The rope is drawn as a camera-facing strip, put back into the blade's object space through the inverse of c4-c7, with
+// the game's own vertex layout, vertex program, constants, pixel program, textures and depth test. The edge line
+// follows the rope. Anything unexpected draws the straight blade as the game does.
+
+#define ROPE_MAX 32
+#define ROPES 8
+
+typedef struct { float x, y, z; DWORD col; float u, v; } WVtx;   // the game's blade layout, stride 24
+
+typedef struct {
+	int used;
+	unsigned int frame;           // the frame it was last drawn in
+	LONGLONG t;                   // when it was last stepped
+	float len, hw;                // world length and half width
+	float base[3], tip[3];        // the straight blade last time
+	float d[ROPE_MAX + 1][3];     // segment directions (1..n), and the step before
+	float dp[ROPE_MAX + 1][3];
+	float x[ROPE_MAX + 1][3];     // points, 0 at the base
+} Rope;
+
+static Rope g_rope[ROPES];
+static WVtx g_wstrip[2 * (ROPE_MAX + 1)], g_wline[ROPE_MAX + 1];
+static int g_whip_on = 1, g_whip_broken, g_whip_first;
+static unsigned int g_wline_frame = 0xFFFFFFFFu, g_wline_start, g_wline_n;
+static void *g_wdecl;                  // the last vertex declaration checked, and whether it had the blade layout
+static int g_wdecl_ok;
+static IDirect3DVertexBuffer9 *g_wvb;  // stream 0 to put back after the rope's DrawPrimitiveUP
+static UINT g_wvb_off, g_wvb_stride;
+static DWORD g_wcull;
+static int g_wcull_set;
+static unsigned int g_stat_rope, g_stat_straight;
+static int g_wsaid[8];                 // each pass-through reason is logged once
+
+static void whip_said(int why, const char *msg)
+{
+	if (!g_wsaid[why]++)
+		logf_("whip drawn straight: %s (logged once)", msg);
+}
+
+static int is_whip_id(unsigned int id)
+{
+	int i;
+	for (i = 0; i < cfg.whip_count; i++)
+		if (cfg.whip_ids[i] == id)
+			return 1;
+	return 0;
+}
+
+static float v3len(const float *a)
+{
+	return sqrtf(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);
+}
+
+static void v3cross(float *o, const float *a, const float *b)
+{
+	o[0] = a[1] * b[2] - a[2] * b[1];
+	o[1] = a[2] * b[0] - a[0] * b[2];
+	o[2] = a[0] * b[1] - a[1] * b[0];
+}
+
+static int main_view(IDirect3DDevice9 *d)
+{
+	D3DVIEWPORT9 vp;
+	IDirect3DSurface9 *rt = NULL;
+	D3DSURFACE_DESC rd;
+	int ok = 0;
+	if (SUCCEEDED(d->lpVtbl->GetViewport(d, &vp)) && SUCCEEDED(d->lpVtbl->GetRenderTarget(d, 0, &rt)) && rt) {
+		ok = SUCCEEDED(rt->lpVtbl->GetDesc(rt, &rd)) && vp.X == 0 && vp.Y == 0 && vp.Width == rd.Width &&
+		     vp.Height == rd.Height;
+		rt->lpVtbl->Release(rt);
+	}
+	return ok;
+}
+
+static int blade_layout(IDirect3DDevice9 *d)
+{
+	IDirect3DVertexDeclaration9 *decl = NULL;
+	D3DVERTEXELEMENT9 el[MAXD3DDECLLENGTH + 1];
+	UINT n = 0;
+	if (FAILED(d->lpVtbl->GetVertexDeclaration(d, &decl)) || !decl)
+		return 0;
+	if ((void *)decl != g_wdecl) {
+		g_wdecl = decl;
+		g_wdecl_ok = SUCCEEDED(decl->lpVtbl->GetDeclaration(decl, el, &n)) && n == 4 &&
+		             el[0].Stream == 0 && el[0].Offset == 0 && el[0].Type == D3DDECLTYPE_FLOAT3 &&
+		             el[0].Usage == D3DDECLUSAGE_POSITION && el[1].Stream == 0 && el[1].Offset == 12 &&
+		             el[1].Type == D3DDECLTYPE_D3DCOLOR && el[1].Usage == D3DDECLUSAGE_COLOR &&
+		             el[2].Stream == 0 && el[2].Offset == 16 && el[2].Type == D3DDECLTYPE_FLOAT2 &&
+		             el[2].Usage == D3DDECLUSAGE_TEXCOORD && el[3].Stream == 0xFF;
+	}
+	decl->lpVtbl->Release(decl);
+	return g_wdecl_ok;
+}
+
+static void rope_points(Rope *r, const float *B, int n)
+{
+	int i, k;
+	float rest = r->len / n;
+	memcpy(r->x[0], B, sizeof r->x[0]);
+	for (i = 1; i <= n; i++)
+		for (k = 0; k < 3; k++)
+			r->x[i][k] = r->x[i - 1][k] + r->d[i][k] * rest;
+}
+
+static void rope_reset(Rope *r, const float *B, const float *T, int n)
+{
+	float D[3] = { T[0] - B[0], T[1] - B[1], T[2] - B[2] }, l = v3len(D);
+	int i, k;
+	for (k = 0; k < 3; k++)
+		D[k] = l > 1e-6f ? D[k] / l : (k == 2);
+	for (i = 1; i <= n; i++) {
+		memcpy(r->d[i], D, sizeof D);
+		memcpy(r->dp[i], D, sizeof D);
+	}
+	memcpy(r->base, B, sizeof r->base);
+	memcpy(r->tip, T, sizeof r->tip);
+	rope_points(r, B, n);
+}
+
+// one frame of the rope: the straight blade moves from (base, tip) to (B, T) over dt, in sub-steps
+static void rope_step(Rope *r, const float *B, const float *T, float dt, int n)
+{
+	static float old[ROPE_MAX + 1][3];
+	float ae[ROPE_MAX + 1], me, h;
+	int steps = (int)ceilf(dt * cfg.whip_hz), s, i, k;
+	if (steps < 1)
+		steps = 1;
+	if (steps > 64)
+		steps = 64;
+	h = dt / steps;
+	// per segment, how far it turns towards its parent each sub-step (rates are per 1/whip_hz s)
+	for (i = 1; i <= n; i++) {
+		float a = cfg.whip_follow_base * powf(cfg.whip_follow_tip / cfg.whip_follow_base, (float)i / n);
+		ae[i] = 1.0f - powf(1.0f - a, cfg.whip_hz * h);
+	}
+	me = powf(cfg.whip_momentum, cfg.whip_hz * h);
+	for (s = 1; s <= steps; s++) {
+		float f = (float)s / steps, D[3], l;
+		for (k = 0; k < 3; k++)
+			D[k] = (r->tip[k] + (T[k] - r->tip[k]) * f) - (r->base[k] + (B[k] - r->base[k]) * f);
+		l = v3len(D);
+		if (l < 1e-6f)
+			memcpy(D, r->d[1], sizeof D);
+		else
+			for (k = 0; k < 3; k++)
+				D[k] /= l;
+		memcpy(old, r->d, sizeof old);
+		for (i = 1; i <= n; i++) {
+			const float *par = i == 1 ? D : old[i - 1];
+			float nw[3];
+			for (k = 0; k < 3; k++)
+				nw[k] = old[i][k] + ae[i] * (par[k] - old[i][k]) + me * (old[i][k] - r->dp[i][k]);
+			l = v3len(nw);
+			if (l < 1e-6f)
+				memcpy(nw, par, sizeof nw);
+			else
+				for (k = 0; k < 3; k++)
+					nw[k] /= l;
+			memcpy(r->dp[i], old[i], sizeof nw);
+			memcpy(r->d[i], nw, sizeof nw);
+		}
+	}
+	memcpy(r->base, B, sizeof r->base);
+	memcpy(r->tip, T, sizeof r->tip);
+	rope_points(r, B, n);
+}
+
+// the rope as a camera-facing strip in the blade's object space (inv = the inverse of c4-c7's 3x3, t = its translation)
+static void rope_strip(const Rope *r, int n, const float *cam, const float inv[3][3], const float *t, DWORD col)
+{
+	float prev[3] = { 0, 0, 0 };
+	int i, k, j;
+	for (i = 0; i <= n; i++) {
+		const float *a = r->x[i > 0 ? i - 1 : 0], *b = r->x[i < n ? i + 1 : n];
+		float tan[3], view[3], side[3], l;
+		for (k = 0; k < 3; k++) {
+			tan[k] = b[k] - a[k];
+			view[k] = r->x[i][k] - cam[k];
+		}
+		v3cross(side, tan, view);
+		l = v3len(side);
+		if (l < 1e-6f)
+			memcpy(side, prev, sizeof side);
+		else
+			for (k = 0; k < 3; k++)
+				side[k] /= l;
+		if (i && side[0] * prev[0] + side[1] * prev[1] + side[2] * prev[2] < 0)
+			for (k = 0; k < 3; k++)
+				side[k] = -side[k];
+		memcpy(prev, side, sizeof prev);
+		for (j = 0; j < 2; j++) {
+			float w[3], o[3];
+			WVtx *v = &g_wstrip[2 * i + j];
+			for (k = 0; k < 3; k++)
+				w[k] = r->x[i][k] + (j ? -side[k] : side[k]) * r->hw - t[k];
+			for (k = 0; k < 3; k++)
+				o[k] = inv[k][0] * w[0] + inv[k][1] * w[1] + inv[k][2] * w[2];
+			v->x = o[0], v->y = o[1], v->z = o[2];
+			v->col = col;
+			v->u = 1.0f - (float)i / n;   // as the game's quad: u 1 at the base, 0 at the tip; v 0 and 1 across
+			v->v = (float)j;
+		}
+		g_wline[i] = g_wstrip[2 * i];
+	}
+}
+
+static int hold_stream(IDirect3DDevice9 *d)
+{
+	g_wvb = NULL;
+	return SUCCEEDED(d->lpVtbl->GetStreamSource(d, 0, &g_wvb, &g_wvb_off, &g_wvb_stride)) && g_wvb;
+}
+
+static void whip_body(IDirect3DDevice9 *d, Draw *c)
+{
+	IDirect3DDevice9Vtbl *v = d->lpVtbl;
+	WVtx q[4];
+	void *p;
+	float m[5][4], A[3][3], inv[3][3], det, B[3], T[3], len, hw, best = 1.0f, dt;
+	int n = cfg.whip_segments, i, k, bi = -1, lo = 0, hi = 0;
+	LARGE_INTEGER now;
+	Rope *r;
+
+	if (c->kind != 0) {
+		whip_said(0, "not a DrawPrimitive call");
+		return;
+	}
+	if (c->type == D3DPT_LINELIST && c->b == 1) {   // the edge line after the fan: along the rope
+		if (g_wline_frame != g_frames || c->a != g_wline_start || !hold_stream(d))
+			return;
+		g_wline_frame = 0xFFFFFFFFu;
+		c->kind = 2, c->type = D3DPT_LINESTRIP, c->a = g_wline_n, c->vtx = g_wline, c->stride = sizeof(WVtx);
+		c->replaced = 1;
+		return;
+	}
+	if (c->type != D3DPT_TRIANGLEFAN || c->b != 2) {
+		whip_said(1, "not the 4-vertex fan");
+		return;
+	}
+	if (!main_view(d))
+		return;   // the examine or inventory view: the straight blade
+	if (!blade_layout(d)) {
+		whip_said(2, "another vertex layout");
+		return;
+	}
+	if (!hold_stream(d))
+		return;
+	if (g_wvb_stride != sizeof(WVtx) ||
+	    FAILED(g_wvb->lpVtbl->Lock(g_wvb, g_wvb_off + c->a * sizeof(WVtx), sizeof q, &p, D3DLOCK_READONLY))) {
+		whip_said(3, "the vertex buffer could not be read");
+		goto straight;
+	}
+	memcpy(q, p, sizeof q);
+	g_wvb->lpVtbl->Unlock(g_wvb);
+	for (i = 1; i < 4; i++) {
+		if (q[i].z < q[lo].z)
+			lo = i;
+		if (q[i].z > q[hi].z)
+			hi = i;
+	}
+	len = q[hi].z - q[lo].z;
+	if (len < 0.01f)
+		goto straight;   // off or igniting: nothing to bend
+	for (i = 0; i < 4; i++)
+		if (fabsf(q[i].y) > 1e-3f || (fabsf(q[i].z - q[lo].z) > 1e-3f && fabsf(q[i].z - q[hi].z) > 1e-3f) ||
+		    fabsf(q[lo].z) > 1e-3f) {
+			whip_said(4, "the quad has another shape");
+			goto straight;
+		}
+	hw = fabsf(q[0].x);
+	if (FAILED(v->GetVertexShaderConstantF(d, 4, &m[0][0], 5))) {
+		whip_said(5, "no vertex constants");
+		goto straight;
+	}
+	// c4-c7 as the game packs them (step 0): world.x = dot(p, c4), with c7 = 0 0 0 1
+	for (i = 0; i < 3; i++)
+		for (k = 0; k < 3; k++)
+			A[i][k] = m[i][k];
+	det = A[0][0] * (A[1][1] * A[2][2] - A[1][2] * A[2][1]) - A[0][1] * (A[1][0] * A[2][2] - A[1][2] * A[2][0]) +
+	      A[0][2] * (A[1][0] * A[2][1] - A[1][1] * A[2][0]);
+	if (fabsf(det) < 1e-9f || fabsf(m[3][3] - 1) > 1e-3f) {
+		whip_said(6, "c4-c7 is not an object-to-world matrix");
+		goto straight;
+	}
+	inv[0][0] = (A[1][1] * A[2][2] - A[1][2] * A[2][1]) / det;
+	inv[0][1] = (A[0][2] * A[2][1] - A[0][1] * A[2][2]) / det;
+	inv[0][2] = (A[0][1] * A[1][2] - A[0][2] * A[1][1]) / det;
+	inv[1][0] = (A[1][2] * A[2][0] - A[1][0] * A[2][2]) / det;
+	inv[1][1] = (A[0][0] * A[2][2] - A[0][2] * A[2][0]) / det;
+	inv[1][2] = (A[0][2] * A[1][0] - A[0][0] * A[1][2]) / det;
+	inv[2][0] = (A[1][0] * A[2][1] - A[1][1] * A[2][0]) / det;
+	inv[2][1] = (A[0][1] * A[2][0] - A[0][0] * A[2][1]) / det;
+	inv[2][2] = (A[0][0] * A[1][1] - A[0][1] * A[1][0]) / det;
+	for (i = 0; i < 3; i++) {
+		B[i] = m[i][3];
+		T[i] = A[i][2] * len + m[i][3];
+	}
+	{
+		float x[3] = { A[0][0], A[1][0], A[2][0] }, wl[3] = { T[0] - B[0], T[1] - B[1], T[2] - B[2] };
+		hw *= v3len(x);
+		len = v3len(wl);
+	}
+
+	// the rope this whip had last frame: the nearest base within 1 m
+	for (i = 0; i < ROPES; i++) {
+		float dd[3];
+		if (!g_rope[i].used || g_rope[i].frame == g_frames || g_frames - g_rope[i].frame > 10)
+			continue;
+		for (k = 0; k < 3; k++)
+			dd[k] = g_rope[i].base[k] - B[k];
+		if (v3len(dd) < best)
+			best = v3len(dd), bi = i;
+	}
+	QueryPerformanceCounter(&now);
+	if (bi < 0) {   // a new whip: a free rope, or the one seen longest ago
+		for (i = 0, bi = 0; i < ROPES; i++) {
+			if (!g_rope[i].used) {
+				bi = i;
+				break;
+			}
+			if (g_rope[i].frame < g_rope[bi].frame)
+				bi = i;
+		}
+		r = &g_rope[bi];
+		r->used = 0;
+	}
+	r = &g_rope[bi];
+	dt = cfg.whip_fixed_dt > 0 ? cfg.whip_fixed_dt : (float)((double)(now.QuadPart - r->t) / g_qpf);
+	if (!r->used || dt > 0.25f || fabsf(len - r->len) > 0.05f * len) {
+		r->used = 1;
+		r->len = len;
+		rope_reset(r, B, T, n);
+	} else {
+		rope_step(r, B, T, min(dt, 0.05f), n);
+	}
+	r->hw = hw;
+	r->frame = g_frames;
+	r->t = now.QuadPart;
+	{
+		float cam[4];
+		if (FAILED(v->GetVertexShaderConstantF(d, 8, cam, 1)))
+			goto straight;
+		rope_strip(r, n, cam, inv, B, q[0].col);
+	}
+	if (!g_whip_first++)
+		logf_("first whip rope: %d segments, %.2f m, half width %.3f m", n, len, hw);
+	g_wline_frame = g_frames;
+	g_wline_start = c->a;
+	g_wline_n = n;
+	c->kind = 2, c->type = D3DPT_TRIANGLESTRIP, c->a = 2 * n, c->vtx = g_wstrip, c->stride = sizeof(WVtx);
+	c->replaced = 1;
+	return;
+straight:
+	RELEASE(g_wvb);
+}
+
+static void whip_rule(IDirect3DDevice9 *d, Draw *c)
+{
+	__try {
+		whip_body(d, c);
+		if (c->replaced) {
+			d->lpVtbl->GetRenderState(d, D3DRS_CULLMODE, &g_wcull);
+			d->lpVtbl->SetRenderState(d, D3DRS_CULLMODE, D3DCULL_NONE);
+			g_wcull_set = 1;
+			if (c->type == D3DPT_TRIANGLESTRIP)
+				g_stat_rope++;
+		} else if (c->type == D3DPT_TRIANGLEFAN) {
+			g_stat_straight++;
+		}
+	} __except (EXCEPTION_EXECUTE_HANDLER) {
+		g_whip_broken = 1;
+		c->replaced = 0;
+		RELEASE(g_wvb);
+		logf_("exception 0x%08lx in the whip rope; whips straight for this session", GetExceptionCode());
+	}
+}
+
+// draws the rope (or its edge line) in place of the game's draw, then puts stream 0 and the cull mode back
+static HRESULT whip_finish(IDirect3DDevice9 *d, const Draw *c)
+{
+	HRESULT hr = R.DrawPrimitiveUP(d, c->type, c->a, c->vtx, c->stride);
+	if (g_wvb) {
+		d->lpVtbl->SetStreamSource(d, 0, g_wvb, g_wvb_off, g_wvb_stride);
+		RELEASE(g_wvb);
+	}
+	if (g_wcull_set) {
+		d->lpVtbl->SetRenderState(d, D3DRS_CULLMODE, g_wcull);
+		g_wcull_set = 0;
+	}
+	return hr;
+}
+
 // Reads the bound pixel program and c3 from the device at each draw instead of tracking the Set calls: in game
 // (18 Oct, 7:11 and 7:35 PM) the tracked state never matched although the blade programs loaded, so the client may
 // set them some other way (state blocks, say). Costs one GetPixelShader per draw once a blade program exists.
-static int ghost_draw(IDirect3DDevice9 *d, const Draw *c)
+static int ghost_draw(IDirect3DDevice9 *d, Draw *c)
 {
 	IDirect3DPixelShader9 *ps = NULL;
 	float c3[4], b;
-	int slot, ghost, on;
+	int slot, ghost, on, whip;
 	if (d != g_dev || !g_blade_n || g_busy)
 		return 0;
 	on = g_on && !g_broken;
-	if (!on && cfg.log_draws <= 0)
+	whip = cfg.whip_enabled && g_whip_on && !g_whip_broken && cfg.whip_count;
+	if (!on && !whip && cfg.log_draws <= 0)
 		return 0;
 	if (FAILED(d->lpVtbl->GetPixelShader(d, &ps)) || !ps)
 		return 0;
@@ -848,10 +1287,13 @@ static int ghost_draw(IDirect3DDevice9 *d, const Draw *c)
 		return 0;
 	if (cfg.log_draws > 0)
 		capture(d, c, g_blade_id[slot]);
+	if (whip && is_whip_id(g_blade_id[slot]))
+		whip_rule(d, c);
 	if (!on || FAILED(d->lpVtbl->GetPixelShaderConstantF(d, 3, c3, 1)))
 		return 0;
 	b = max(c3[0], max(c3[1], c3[2]));
-	ghost = b > 0.01f && b <= cfg.max_bright;
+	// the edge line the client draws after each blade quad lies inside the quad's mask: no second screen pass for it
+	ghost = b > 0.01f && b <= cfg.max_bright && c->type != D3DPT_LINELIST && c->type != D3DPT_LINESTRIP;
 	g_stat_blade++;
 	if (b < g_stat_bmin)
 		g_stat_bmin = b;
@@ -887,10 +1329,14 @@ static int key_pressed(int key, int *was)
 
 static void poll_toggle(LONGLONG now)
 {
-	static int was_toggle, was_draw;
+	static int was_toggle, was_draw, was_whip;
 	if (key_pressed(cfg.toggle_key, &was_toggle)) {
 		g_on = !g_on;
 		logf_("mirage switched %s (toggle key)", g_on ? "on" : "off");
+	}
+	if (cfg.whip_enabled && key_pressed(cfg.whip_key, &was_whip)) {
+		g_whip_on = !g_whip_on;
+		logf_("whip rope switched %s (toggle key)", g_whip_on ? "on" : "off");
 	}
 	if (cfg.log_draws > 0 && !g_cap_off && key_pressed(cfg.draw_key, &was_draw)) {
 		g_cap_until = now + (LONGLONG)(cfg.draw_burst * g_qpf);
@@ -919,6 +1365,11 @@ static void end_frame(void)
 			      (double)(now.QuadPart - g_stat_t) / g_qpf, g_stat_bind, g_stat_blade,
 			      g_stat_blade ? g_stat_bmin : 0.0f, g_stat_blade ? g_stat_bmax : 0.0f, g_stat_match, g_stat_done,
 			      g_stat_capped, g_on ? "" : " (switched off)");
+		if (g_stat_rope || g_stat_straight)
+			logf_("last %.0f s: whip %u drawn as a rope, %u straight (off, igniting or another view)%s",
+			      (double)(now.QuadPart - g_stat_t) / g_qpf, g_stat_rope, g_stat_straight,
+			      g_whip_on ? "" : " (switched off)");
+		g_stat_rope = g_stat_straight = 0;
 		g_stat_match = g_stat_done = g_stat_capped = g_stat_bind = g_stat_blade = 0;
 		g_stat_bmin = 9.0f;
 		g_stat_bmax = -1.0f;
@@ -1001,6 +1452,8 @@ static HRESULT STDMETHODCALLTYPE hk_DrawPrimitive(IDirect3DDevice9 *d, D3DPRIMIT
 	c.kind = 0, c.type = type, c.a = start, c.b = n;
 	if (ghost_draw(d, &c))
 		mirage(d, &c);
+	if (c.replaced)
+		return whip_finish(d, &c);
 	return R.DrawPrimitive(d, type, start, n);
 }
 

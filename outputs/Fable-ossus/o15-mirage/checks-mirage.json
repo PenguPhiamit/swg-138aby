@@ -1,11 +1,11 @@
 {
- "built": "18 Oct 2026, 8:36 PM (MSVC 14.44 x86 /MT, fxc 10.0.26100.0 ps_2_0); MSVC builds embed a timestamp, so a rebuild gives a new hash",
+ "built": "18 Oct 2026, 9:03 PM (MSVC 14.44 x86 /MT, fxc 10.0.26100.0 ps_2_0 and vs_2_0); MSVC builds embed a timestamp, so a rebuild gives a new hash",
  "proxy_dll": {
   "path": "work/o15-mirage/d3d9.dll",
-  "bytes": 163328,
-  "sha256": "5582152a729dcbaa28d04cc5ec4b5a2906ee966e390746782cf175d3f7c9eceb",
-  "replaces": "dc7e87c8 (7:49 PM build, installed 7:52 PM; kept as work/o15-mirage/old/d3d9-dc7e87c8.dll)",
-  "adds": "log_draws blade-draw capture (off by default), the pid on every mirage.log line, ids for archive 23368576"
+  "bytes": 195072,
+  "sha256_16": "525cd3027ed52cc6",
+  "installed": "no; the client has 5582152a (step 0 capture) since 8:41 PM",
+  "adds": "the light whip's bend ([whip] in mirage.ini, Ctrl+Shift+B); the mirage skips its second screen pass on the blade's edge line"
  },
  "dxvk_chained": {
   "source": "SWG-client/d3d9.dll (DXVK 3.1.1, x86)",
@@ -108,5 +108,13 @@
   "image_speed0": "frames 40 and 48 identical for the installed dc7e87c8, the new build with log_draws=0, and with log_draws=40 (sha256 9a0f98f28275...)",
   "capture_log": "40 draws logged (20 DrawPrimitiveUP, 20 DrawPrimitive): layout from the FVF, the vertex buffer read at its start offset, positions and full rows match the harness's vertices; the vertex program path is untested (the harness has none)",
   "bends_per_program": "on (speed 0) vs off differ for 0ea2a331, fac25b60, 238eb66a and acc853c5; all calls worked"
+ },
+ "harness_whip": {
+  "when": "18 Oct, 9:03 PM, hidden window, DXVK 3.1.1, RTX 5070",
+  "setup": "mirage_test.exe ... lightwhip_blade.pexe <prefix> whip: a 2.1 m whip quad (fan plus edge line) from a vertex buffer through a vs_2_0 with the client's packing, swung 1.2 rad at 15 rad/s, fixed_dt 1/60, dark c3",
+  "regression": "without the whip, frame 40 identical to dc7e87c8 and 5582152a (9a0f98f282...)",
+  "rope_vs_straight": "debug_view masks differ by 4,248 to 4,858 pixels over frames 36-48; the rope keeps its length and trails the swing as a smooth curve (work/o15-mirage/preview-whip-rope-mask.png, top straight, bottom rope)",
+  "first_model": "springs towards points on the straight blade folded the rope into a coil at the hilt; replaced by the follow-through chain (Python checks: fast swing end-to-end at least 0.66 of the length, no turn sharper than 21 degrees between segments; settles straight within 1.5 s)",
+  "all_calls": "worked in every run"
  }
 }
