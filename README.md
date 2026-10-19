@@ -5,6 +5,13 @@ as it was and builds on it. The new content is set in the Legends era around 138
 new planets, playable species, creatures and story, plus a population of bots that play the game through the real
 client protocol to test it.
 
+## How it started
+
+What began as a way to preserve the pre-CU era with bots on a private LAN has grown into a much wider project. The bots
+log in through the real game protocol and play the professions, and they still test everything that goes in. From there
+the world kept growing: Hoth, Ossus and new species, set around 138 ABY, along with a light whip and ghostfire crystals.
+New professions might be possible one day, but for now it stays small, with a friends-only test first.
+
 ## What's here
 
 Status words: **on the test galaxy** means installed and being played and tested; **staged** means built and checked
@@ -15,7 +22,8 @@ offline but not installed yet; **planned** means not started. Nothing is open to
 | Hoth | Travel from Corellia, Echo Base, the Scavenger outpost, ice caves and creature dens, Quartermaster Vell's job chain, Hoth resources and named loot | On the test galaxy |
 | Ossus | The old Jedi world, with terrain built from scratch by our own tools (Knossa, the Academy benchland, Imhar Canyon), the One Sith in the caves, the spirit of Ood Bnar | On the test galaxy (still filling out) |
 | Ghostfire crystal | A lightsaber colour crystal with an almost invisible blade and its own blade shader: the colour is in the trails, which shimmer through oil-slick hues in any hilt | On the test galaxy (being tuned) |
-| New species | Chiss, Nautolan (male) and Togruta (female) at character creation | On the test galaxy |
+| New species | Chiss at character creation | On the test galaxy |
+| More species | Nautolan (male) and Togruta (female) at character creation | Staged |
 | Light whip | A one-handed lightsaber variant: a 4.5 m strand with more reach than a saber and weaker against armour, which bends like a rope with the graphics hook. Krayt dragon bosses drop it, and a Master Weaponsmith with Lightsaber Technique I or a Lightsaber Master can learn its schematic | On the test galaxy; the drop and the schematic are staged |
 | The Hutt | Can be created; can't be played yet, because the pre-CU client won't drive the Hutt body as a player. Nal Hutta as its home world | Staged, in research |
 | Backports | Vehicles and items from Mod the Galaxy, new creatures and enemies | On the test galaxy |
