@@ -39,11 +39,18 @@ and Hutts as a playable species. This installer gets your PC ready in a few clic
 - First login: type any username and password you like. The server makes your account then. Don't reuse a
   password from anywhere else. Tell the owner your username (not your password).
 - If it says the server is not answering, the owner's server is probably off. Message the owner.
+- **The graphics add-on.** The launcher also puts in DXVK (it runs the game's Direct3D 9 on Vulkan, capped at
+  60 fps) with the owner's small graphics hook in front of it: the light whip bends like a rope, and ghostfire
+  blades get a heat haze. In game, Ctrl+Shift+B switches the bend on and off, Ctrl+Shift+M the haze. If the game
+  won't start or looks wrong after it arrives, delete `d3d9.dll` in the game folder (the launcher then leaves the
+  add-on off) and tell the owner. It's left out on a PC without Vulkan, or if your game folder already has a
+  `d3d9.dll` of its own.
 
 ## Remove it
 
 Settings > Apps > **SWG Friends Galaxy** > Uninstall. It puts your client back the way it was (your own login
-file and config, the MTG archives it downloaded removed and your own versions back) and asks what to do with
+file and config, the MTG archives it downloaded removed and your own versions back, the graphics add-on taken
+out) and asks what to do with
 Tailscale: keep it, log out of the owner's network, or remove it.
 Don't log in on another server with a character standing on Hoth, Ossus or Nal Hutta.
 
@@ -59,3 +66,6 @@ Don't log in on another server with a character standing on Hoth, Ossus or Nal H
 The MTG archives are the work of Mod the Galaxy and its community (https://modthegalaxy.com), not the owner's.
 `MTG-CREDITS.txt` next to this file lists who made them. Nal Hutta in those archives is the Levarrishawk/Darklight
 public version.
+
+DXVK (https://github.com/doitsujin/dxvk) is the work of the DXVK project and its contributors, under the zlib/libpng
+licence; the add-on passes on its official 3.1.1 release unchanged.

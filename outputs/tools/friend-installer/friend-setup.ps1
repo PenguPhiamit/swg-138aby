@@ -15,8 +15,8 @@
     Patch            install the client patch (the C57 kit's Install-ClientPatch.ps1) and point the login at the server
     Probe            does the server's login port answer? (one UDP session request, read-only)
     Play             put the login and patch lines back if the SWGEmu launcher reset them, then start the game
-    Uninstall        take the patch, the login change and the MTG archives Setup added out again, and restore
-                     the friend's own files
+    Uninstall        take the patch, the login change, the MTG archives Setup added and the launcher's graphics
+                     add-on out again, and restore the friend's own files
     TailscaleLogout  log this PC out of Tailscale
     TailscaleRemove  uninstall Tailscale
   -DryRun prints what would change and changes nothing (no download, no install, no file written in the client).
@@ -430,12 +430,46 @@ function Invoke-Patch {
     Save-State $state
     Finish 'OK' "Client patch installed and the login points at $($s.ServerAddress):$($s.LoginPort)." 0
 }
+# The launcher's graphics add-on (DXVK and the O15 hook), from its record local_planets-patch\addon.json: take out the
+# files it added and put back the friend's own ones it replaced. A file that changed since (not the add-on's copy) stays.
+function Undo-Addon {
+    $rec = Join-Path $ClientDir 'local_planets-patch\addon.json'
+    if (-not (Test-Path -LiteralPath $rec)) { return @() }
+    $r = Read-Json $rec
+    $added = @($r.added | Where-Object { $_ })
+    $keep = Join-Path $ClientDir 'local_planets-patch\backup\friends-installer\addon'
+    $done = @()
+    foreach ($name in 'd3d9.dll', 'dxvk_d3d9.dll', 'mirage.ini', 'dxvk.conf') {
+        $p = Join-Path $ClientDir $name
+        $saved = Join-Path $keep $name
+        if (-not (Test-Path -LiteralPath $p)) { continue }
+        $ours = if ($name -like '*.dll') { (Get-FileHash -Algorithm SHA256 -LiteralPath $p).Hash.ToLower() -eq $r.sha256.$name } else { $added -contains $name }
+        if (-not $ours) { continue }
+        if (Test-Path -LiteralPath $saved) {
+            if ($DryRun) { Would "put back your own $name" } else { Copy-Item -LiteralPath $saved -Destination $p -Force }
+            $done += $name
+        } elseif ($added -contains $name) {
+            if ($DryRun) { Would "remove $name (the graphics add-on)" } else { Remove-Item -LiteralPath $p -Force }
+            $done += $name
+        }
+    }
+    if ($added -contains 'd3d9.dll') {
+        # Logs only the add-on writes (there was no d3d9.dll before it).
+        foreach ($log in @(Get-ChildItem -LiteralPath $ClientDir -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -match '^(mirage\.log|mirage-draws-\d+\.log|.*_d3d9\.log)$' })) {
+            if ($DryRun) { Would "remove $($log.Name)" } else { Remove-Item -LiteralPath $log.FullName -Force }
+        }
+    }
+    if (-not $DryRun) { Remove-Item -LiteralPath $rec -Force }
+    if ($done) { return @("Took the graphics add-on out ($($done -join ', ')).") }
+    return @()
+}
 function Invoke-Uninstall {
     Resolve-ClientDir
     $state = Get-State
     $msgs = @()
     $kit = Join-Path $KitDir 'Uninstall-ClientPatch.ps1'
     if (Test-ClientRunning $ClientDir) { Finish 'ERR' 'The game is running. Close it, then uninstall again.' 5 }
+    $msgs += Undo-Addon
     if ($DryRun) { Would "run $kit on $ClientDir" }
     else {
         $out = & "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File $kit -ClientDir $ClientDir 2>&1 | Out-String

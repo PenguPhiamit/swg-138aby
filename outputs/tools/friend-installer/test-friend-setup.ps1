@@ -6,7 +6,7 @@
   -ProbeAddress also sends one UDP session request to that address's login port (read-only).
   mtg-share.py runs on 127.0.0.1:43499 for a few seconds (needs python on PATH).
 #>
-param([string]$ProbeAddress, [switch]$Keep)   # -Keep leaves the dummy folders in %TEMP% for a look
+param([string]$ProbeAddress, [switch]$Keep, [string]$Launcher)   # -Keep leaves the dummy folders in %TEMP% for a look; -Launcher tests another FracturedGalaxy.exe than build\out's
 $ErrorActionPreference = 'Stop'
 $here = $PSScriptRoot
 $root = Join-Path $env:TEMP ('friend-setup-test-' + [guid]::NewGuid().ToString('N'))
@@ -131,7 +131,7 @@ try {
     Check 'kit -LayoutOnly again is harmless' ($LASTEXITCODE -eq 0 -and (Test-Layout))
 
     # The built launcher, headless: the same reset, fixed by FracturedGalaxy.exe --repair (as on its start and Play).
-    $exe = Join-Path $here 'build\out\FracturedGalaxy.exe'
+    $exe = if ($Launcher) { $Launcher } else { Join-Path $here 'build\out\FracturedGalaxy.exe' }
     if (-not (Test-Path -LiteralPath $exe)) { Write-Host 'SKIP launcher --repair: no build\out\FracturedGalaxy.exe (run build.ps1 first)' -ForegroundColor Yellow }
     else {
         Copy-Item $exe $app; Copy-Item $plain (Join-Path $app 'settings.json')
@@ -155,6 +155,49 @@ try {
         Check "launcher --repair reports a layout it could not put back (exit 1: $($r.Out))" ($r.Code -eq 1 -and $r.Out -match 'archive cap 26')
         Copy-Item (Join-Path $kit 'manifest.json') (Join-Path $app 'kit'); $r = Repair-Launcher
         Check 'launcher --repair fixes it once the kit manifest is back' ($r.Code -eq 0 -and (Test-Layout))
+
+        # The graphics add-on, headless (--update) against mtg-share.py on loopback, with the add-on files from the
+        # owner's client (read only). The friend here already has this DXVK as d3d9.dll, so Undo-Addon below must put
+        # it back. Skipped when the owner's client doesn't have the add-on the share would offer.
+        $src = Join-Path $here '..\..\SWG-client'
+        $py = (Get-Command python -ErrorAction SilentlyContinue).Source
+        if (-not $py -or -not (Test-Path -LiteralPath (Join-Path $src 'dxvk_d3d9.dll')) -or -not (Test-Path -LiteralPath (Join-Path $src 'd3d9.dll'))) { Write-Host 'SKIP graphics add-on: no python or no add-on in SWG-client' -ForegroundColor Yellow }
+        else {
+            Copy-Item $withMtg (Join-Path $app 'settings.json') -Force
+            Copy-Item $tre (Join-Path $root 'server.tre')
+            $shareArgs = @('-I', "`"$(Join-Path $here 'mtg-share.py')`"", '--bind', '127.0.0.1', '--port', $port, '--dir', "`"$share`"", '--manifest', "`"$(Join-Path $kit 'manifest.json')`"",
+                '--archive', "`"$(Join-Path $root 'server.tre')`"", '--launcher', "`"$(Join-Path $root 'no-launcher.exe')`"", '--addon-client', "`"$src`"")
+            $srv = Start-Process -FilePath $py -ArgumentList $shareArgs -PassThru -NoNewWindow -RedirectStandardOutput (Join-Path $root 'addon-share-out.txt') -RedirectStandardError (Join-Path $root 'addon-share-err.txt')
+            try {
+                for ($i = 0; $i -lt 40; $i++) { try { $c = New-Object Net.Sockets.TcpClient('127.0.0.1', $port); $c.Close(); break } catch { Start-Sleep -Milliseconds 250 } }
+                function Update-Launcher([string[]]$more) {
+                    $o = Join-Path $root 'update-out.txt'
+                    $p = Start-Process -FilePath (Join-Path $app 'FracturedGalaxy.exe') -ArgumentList (@('--update') + $more) -Wait -PassThru -RedirectStandardOutput $o
+                    return [pscustomobject]@{ Code = $p.ExitCode; Out = ([IO.File]::ReadAllText($o).Trim() -replace "`r?`n", ' / ') }
+                }
+                $d3d9 = Join-Path $client 'd3d9.dll'; $dxvk = Join-Path $client 'dxvk_d3d9.dll'; $rec = Join-Path $client 'local_planets-patch\addon.json'
+                $hookSha = Sha (Join-Path $src 'd3d9.dll'); $dxvkSha = Sha (Join-Path $src 'dxvk_d3d9.dll')
+                Copy-Item (Join-Path $src 'dxvk_d3d9.dll') $d3d9    # the friend's own copy of this DXVK
+                $before = Snapshot $client; $r = Update-Launcher @('--dry-run')
+                if ($Keep) { Write-Host "  --update --dry-run: code $($r.Code); $($r.Out)" }
+                Check "launcher --update --dry-run downloads the add-on and changes nothing ($($r.Out))" ($r.Out -match 'DRY RUN: would install the graphics add-on' -and (Compare-Object @($before) @(Snapshot $client)) -eq $null)
+                $r = Update-Launcher @()
+                if ($Keep) { Write-Host "  --update: code $($r.Code); $($r.Out)" }
+                $rj = Get-Content -Raw $rec | ConvertFrom-Json
+                Check "launcher --update puts DXVK in as dxvk_d3d9.dll and the hook as d3d9.dll, keeps the friend's d3d9.dll ($($r.Out))" ($r.Code -eq 0 -and
+                    (Sha $d3d9) -eq $hookSha -and (Sha $dxvk) -eq $dxvkSha -and (Test-Path (Join-Path $client 'mirage.ini')) -and (Test-Path (Join-Path $client 'dxvk.conf')) -and
+                    (Sha (Join-Path $client 'local_planets-patch\backup\friends-installer\addon\d3d9.dll')) -eq $dxvkSha -and @($rj.added) -notcontains 'd3d9.dll' -and @($rj.added) -contains 'dxvk_d3d9.dll' -and
+                    -not (Get-ChildItem -LiteralPath $client -Filter *.part))
+                $before = Snapshot $client; $r = Update-Launcher @()
+                Check "launcher --update again changes nothing ($($r.Out))" ($r.Code -eq 0 -and $r.Out -notmatch 'graphics add-on' -and (Compare-Object @($before) @(Snapshot $client)) -eq $null)
+                Remove-Item -LiteralPath $d3d9; $before = Snapshot $client; $r = Update-Launcher @()
+                Check "launcher --update leaves a deleted d3d9.dll deleted ($($r.Out))" ($r.Code -eq 0 -and $r.Out -match 'off \(its d3d9.dll was deleted\)' -and (Compare-Object @($before) @(Snapshot $client)) -eq $null)
+                Set-Content -LiteralPath $d3d9 -Value 'someone else''s d3d9.dll' -NoNewline; $before = Snapshot $client; $r = Update-Launcher @()
+                Check "launcher --update leaves a d3d9.dll it doesn't know alone ($($r.Out))" ($r.Code -eq 0 -and $r.Out -match "isn't one it knows" -and (Compare-Object @($before) @(Snapshot $client)) -eq $null)
+                Copy-Item (Join-Path $src 'd3d9.dll') $d3d9 -Force
+            } finally { Stop-Process -Id $srv.Id -Force -ErrorAction SilentlyContinue }
+            Copy-Item $plain (Join-Path $app 'settings.json') -Force
+        }
     }
 
     $r = Run @('-Action', 'Uninstall')   # client folder from state.json
@@ -162,6 +205,11 @@ try {
     $main = [IO.File]::ReadAllText((Join-Path $client 'swgemu.cfg'))
     Check 'Uninstall restores the login file and the cfg, removes the archive' ($r.Code -eq 0 -and $login -match 'login.swgemu.com' -and $main -notmatch 'local_planets' -and -not (Test-Path (Join-Path $client 'local_planets.tre')))
     Check 'Uninstall removes the downloaded MTG archive and puts the friend''s own version back' (-not (Test-Path (Join-Path $client 'mtg_planets.tre')) -and (Len (Join-Path $client 'mtg_patch_001.tre')) -eq 7 -and -not (Test-Path (Join-Path $bk 'mtg_patch_001.tre')))
+    if ($hookSha) {
+        Check "Uninstall takes the graphics add-on out and puts the friend's own d3d9.dll back ($(($r.Result -split "`r`n") -match 'graphics add-on'))" ((Sha (Join-Path $client 'd3d9.dll')) -eq $dxvkSha -and
+            -not (Test-Path (Join-Path $client 'dxvk_d3d9.dll')) -and -not (Test-Path (Join-Path $client 'mirage.ini')) -and -not (Test-Path (Join-Path $client 'dxvk.conf')) -and
+            -not (Test-Path (Join-Path $client 'local_planets-patch\addon.json')))
+    }
 
     $r = Run @('-Action', 'Detect'); Check "Detect runs ($(($r.Result -split "`r`n")[1]))" ($r.Code -eq 0 -or $r.Code -eq 2)
     if ($ProbeAddress) { $r = Run @('-Action', 'Probe'); Check "Probe $ProbeAddress`:46453 ($(($r.Result -split "`r`n")[1]))" ($r.Code -eq 0) }

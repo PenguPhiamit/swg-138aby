@@ -55,7 +55,14 @@ Friends start the game from **SWG Fractured Galaxy** on their desktop. Each time
   read-only) whenever the friend's copy differs, keeping their old one in `local_planets-patch\backup\<version>`;
 - downloads any MTG archive they're missing; every file is checked against its sha256 before it replaces anything;
 - replaces itself when `build.ps1` has built a newer launcher (bump `AssemblyVersion` in `Launcher.cs`);
-- puts the login and `.include` lines back if the SWGEmu launcher reset them, and shows server status and `news.txt`.
+- puts the login and `.include` lines back if the SWGEmu launcher reset them, and shows server status and `news.txt`;
+- (since 1.0.2, owner 18 Oct: "on for everyone") puts in the **graphics add-on**: DXVK 3.1.1 as `dxvk_d3d9.dll` with
+  the O15 hook in front of it as `d3d9.dll` (the light whip's bend, the ghostfire haze), O15's default `mirage.ini`
+  and this client's `dxvk.conf` (60 fps cap). The share offers `SWG-client`'s own copies, and only while its
+  `dxvk_d3d9.dll` is that DXVK and its `d3d9.dll` a mirage build, so **a hook installed on your client reaches
+  friends at their next launch**. Left out on a PC without Vulkan, next to a `d3d9.dll` it doesn't know, and after a
+  friend deleted ours (their way to turn it off). Settings files that are there are never overwritten. What it adds
+  is recorded in `local_planets-patch\addon.json`, and the uninstaller takes it out again.
 
 The banner (built into the exe) is `launcher/banner.png`, not in git: the owner's pick of 18 Oct, B_s303, made on
 Juggernaut XL Lightning with the Star Wars Cinematic Style XL LoRA (image-to-image and inpaint over the owner's seed-128

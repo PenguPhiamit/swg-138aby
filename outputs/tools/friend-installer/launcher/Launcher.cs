@@ -10,9 +10,11 @@
 // it replaces anything; the old local_planets.tre is kept in local_planets-patch\backup\<version>. MTG archives
 // go through friend-setup.ps1 -Action PlaceMtg, so the uninstaller knows what to undo. A newer launcher replaces
 // this exe (renamed to .old) and restarts. Play stays off while the client's patch differs from the server's or
-// the client would not load it.
+// the client would not load it. The graphics add-on (DXVK with the O15 hook in front of it) never keeps Play off,
+// and it is left out where it could clash (see AddonNeeds).
 //   FracturedGalaxy.exe --repair   the cfg checks and fixes only, no window; exit 0 when the client loads our files
 //                                  (test-friend-setup.ps1 runs it on a dummy client)
+//   FracturedGalaxy.exe --update   the whole check and update, no window; prints each step (for tests)
 //
 // Built by build.ps1 with the C# compiler that ships with Windows (.NET Framework 4, C# 5): no downloads. The client
 // patch kit's Install-ClientPatch.ps1 is built in as a resource, so a friend's older kit folder doesn't matter.
@@ -33,7 +35,7 @@ using System.Windows.Forms;
 
 [assembly: AssemblyTitle("SWG: Fractured Galaxy")]
 [assembly: AssemblyProduct("SWG: Fractured Galaxy launcher")]
-[assembly: AssemblyVersion("1.0.1.0")]
+[assembly: AssemblyVersion("1.0.2.0")]
 
 namespace FracturedGalaxy
 {
@@ -44,6 +46,7 @@ namespace FracturedGalaxy
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             if (Array.IndexOf(args, "--repair") >= 0) return new LauncherForm(args).RepairOnly();
+            if (Array.IndexOf(args, "--update") >= 0) return new LauncherForm(args).UpdateOnly();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LauncherForm(args));
@@ -65,6 +68,7 @@ namespace FracturedGalaxy
 
         readonly string appDir = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\');
         readonly bool dryRun;
+        bool headless;
         Dictionary<string, object> settings;
         string clientDir;
         Label serverLabel, filesLabel, newsLabel, stepLabel;
@@ -136,9 +140,9 @@ namespace FracturedGalaxy
 
         // --- UI from the worker thread ----------------------------------------------------------------------
         void Ui(Action a) { if (IsHandleCreated) BeginInvoke(a); }
-        void Step(string text) { Ui(delegate { stepLabel.Text = text; }); }
+        void Step(string text) { if (headless && text != "") Console.WriteLine("step: " + text); Ui(delegate { stepLabel.Text = text; }); }
         void Progress(long done, long total) { Ui(delegate { bar.Maximum = 1000; bar.Value = total > 0 ? (int)Math.Min(1000, done * 1000 / total) : 0; }); }
-        void SetLabel(Label l, string text, Color c) { Ui(delegate { l.Text = text; l.ForeColor = c; }); }
+        void SetLabel(Label l, string text, Color c) { if (headless) Console.WriteLine(text); Ui(delegate { l.Text = text; l.ForeColor = c; }); }
         void UpdatePlay() { Ui(delegate { playButton.Enabled = !busy && filesReady && clientDir != null; }); }
 
         void StartCheck(bool deep)
@@ -173,6 +177,13 @@ namespace FracturedGalaxy
             string problem = Repair();
             Console.WriteLine(problem == null ? "OK: the client loads the server's files." : "ERR: " + problem);
             return problem == null ? 0 : 1;
+        }
+
+        public int UpdateOnly()
+        {
+            headless = true;
+            Check(false);
+            return filesReady ? 0 : 1;
         }
 
         void Check(bool deep)
@@ -218,6 +229,9 @@ namespace FracturedGalaxy
             if (patchOld) plan.Add("the server patch (version " + Str(patch, "version") + ")");
             var mtg = MtgNeeds(info, deep);
             if (mtg.Count > 0) plan.Add(mtg.Count + " MTG archive(s)");
+            var addon = info.ContainsKey("addon") ? info["addon"] as Dictionary<string, object> : null;
+            var addonNeed = AddonNeeds(addon);
+            if (addonNeed.Count > 0) plan.Add("the graphics add-on");
 
             if (plan.Count > 0 && Running())
             {
@@ -228,13 +242,14 @@ namespace FracturedGalaxy
             }
             if (patchOld) UpdatePatch(baseUrl, patch);
             if (mtg.Count > 0) UpdateMtg(baseUrl, mtg);
+            if (addonNeed.Count > 0 && !InstallAddon(baseUrl, addon, addonNeed)) plan.Remove("the graphics add-on");
             string problem = Repair();
             filesReady = patch == null || Sha256(tre) == Str(patch, "sha256");
             if (problem == null && !filesReady) problem = "the update did not finish. Click Check all files to try again.";
             filesReady = problem == null;
             SetLabel(filesLabel, filesReady ? "Your files: up to date (server patch " + (patch != null ? Str(patch, "version") : "?") + ")"
                 : "Your files: " + problem, filesReady ? CGood : CWarn);
-            Step(plan.Count > 0 ? "Updated " + string.Join(" and ", plan.ToArray()) + "." : "");
+            Step((plan.Count > 0 ? "Updated " + string.Join(" and ", plan.ToArray()) + ". " : "") + (addonNote ?? ""));
             Progress(0, 0);
         }
 
@@ -450,6 +465,117 @@ namespace FracturedGalaxy
                 return true;
             }
             catch (Exception e) { Step("Could not update the launcher (" + e.Message + "); carrying on with this one."); return false; }
+        }
+
+        // --- the graphics add-on (owner, 18 Oct: on for everyone) ----------------------------------------------
+        // DXVK 3.1.1 as dxvk_d3d9.dll, the Ossus O15 hook in front of it as d3d9.dll (it bends the light whip and adds
+        // the ghostfire heat haze), O15's mirage.ini and DXVK's dxvk.conf (the 60 fps cap): the owner's copies, named
+        // in update.json. Left alone: a PC without Vulkan (DXVK runs on it), a d3d9.dll or dxvk_d3d9.dll the add-on
+        // doesn't know (the friend's own ReShade or another DXVK), and a client where our d3d9.dll was deleted (the
+        // way to turn it off). Settings files that are there are never overwritten. What it adds or replaces is
+        // recorded in local_planets-patch\addon.json, so friend-setup.ps1 -Action Uninstall can undo it.
+        static readonly string[] AddonFiles = { "dxvk_d3d9.dll", "d3d9.dll", "mirage.ini", "dxvk.conf" };
+        string addonNote;
+
+        string AddonRecord() { return Path.Combine(clientDir, "local_planets-patch\\addon.json"); }
+
+        List<string> AddonNeeds(Dictionary<string, object> addon)
+        {
+            addonNote = null;
+            var need = new List<string>();
+            if (addon == null) return need;
+            foreach (string name in AddonFiles) if (!(addon.ContainsKey(name) && addon[name] is Dictionary<string, object>)) return need;
+            var rec = ReadJson(AddonRecord());
+            var had = rec != null && rec.ContainsKey("sha256") ? rec["sha256"] as Dictionary<string, object> : null;
+            if (!File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.SystemX86), "vulkan-1.dll")))
+            {
+                addonNote = "Graphics add-on left out: this PC has no Vulkan, which it needs.";
+                return need;
+            }
+            if (had != null && had.ContainsKey("d3d9.dll") && !File.Exists(Path.Combine(clientDir, "d3d9.dll")))
+            {
+                addonNote = "Graphics add-on: off (its d3d9.dll was deleted). Ask the owner to turn it back on.";
+                return need;
+            }
+            string dxvkSha = Str(addon["dxvk_d3d9.dll"] as Dictionary<string, object>, "sha256");
+            foreach (string name in AddonFiles)
+            {
+                string p = Path.Combine(clientDir, name);
+                if (!File.Exists(p)) { need.Add(name); continue; }
+                if (!name.EndsWith(".dll")) continue;
+                string sha = Sha256(p);
+                if (sha == Str(addon[name] as Dictionary<string, object>, "sha256")) continue;
+                // An older copy of ours, or this same DXVK sitting where the hook goes: replace it.
+                if ((had != null && Str(had, name) == sha) || (name == "d3d9.dll" && sha == dxvkSha)) { need.Add(name); continue; }
+                addonNote = "Graphics add-on left out: your " + name + " isn't one it knows, so it stays as it is.";
+                return new List<string>();
+            }
+            return need;
+        }
+
+        // Downloads every file first; the game folder changes only once all of them arrived intact. DXVK goes in
+        // before the hook, so until d3d9.dll is replaced the game draws as it did. Returns false if it did not finish.
+        bool InstallAddon(string baseUrl, Dictionary<string, object> addon, List<string> need)
+        {
+            foreach (string name in need)
+            {
+                var want = addon[name] as Dictionary<string, object>;
+                Step("Downloading the graphics add-on (" + name + ")...");
+                if (!Download(baseUrl + "/" + Str(want, "file"), Path.Combine(clientDir, name + ".part"), Convert.ToInt64(want["size"]), Str(want, "sha256")))
+                {
+                    foreach (string n in need) TryDelete(Path.Combine(clientDir, n + ".part"));
+                    addonNote = "Graphics add-on: the download stopped; it will try again next time.";
+                    return false;
+                }
+            }
+            if (dryRun)
+            {
+                foreach (string n in need) TryDelete(Path.Combine(clientDir, n + ".part"));
+                addonNote = "DRY RUN: would install the graphics add-on (" + string.Join(", ", need.ToArray()) + ").";
+                return false;
+            }
+            string patchDir = Path.Combine(clientDir, "local_planets-patch");
+            var rec = ReadJson(AddonRecord()) ?? new Dictionary<string, object>();
+            var shas = rec.ContainsKey("sha256") ? rec["sha256"] as Dictionary<string, object> : null;
+            if (shas == null) shas = new Dictionary<string, object>();
+            var added = rec.ContainsKey("added") ? rec["added"] as ArrayList : null;
+            if (added == null) added = new ArrayList();
+            try
+            {
+                foreach (string name in AddonFiles)
+                {
+                    if (!need.Contains(name)) continue;
+                    string p = Path.Combine(clientDir, name), part = p + ".part";
+                    if (File.Exists(p))
+                    {
+                        // Not a copy of ours: the friend's own (this DXVK as d3d9.dll). Kept once, for the uninstaller.
+                        if (Str(shas, name) != Sha256(p))
+                        {
+                            string keep = Path.Combine(patchDir, "backup\\friends-installer\\addon");
+                            Directory.CreateDirectory(keep);
+                            if (!File.Exists(Path.Combine(keep, name))) File.Copy(p, Path.Combine(keep, name));
+                        }
+                        File.Replace(part, p, null);
+                    }
+                    else
+                    {
+                        File.Move(part, p);
+                        if (!added.Contains(name)) added.Add(name);
+                    }
+                    shas[name] = Str(addon[name] as Dictionary<string, object>, "sha256");
+                }
+            }
+            catch (Exception e) { addonNote = "Graphics add-on: could not finish (" + e.Message + "); it will try again next time."; }
+            finally
+            {
+                foreach (string n in need) TryDelete(Path.Combine(clientDir, n + ".part"));
+                rec["sha256"] = shas;
+                rec["added"] = added;
+                rec["installed"] = DateTime.Now.ToString("yyyy-MM-dd h:mm tt");
+                Directory.CreateDirectory(patchDir);
+                File.WriteAllText(AddonRecord(), new JavaScriptSerializer().Serialize(rec), Encoding.ASCII);
+            }
+            return addonNote == null;
         }
 
         // --- play -----------------------------------------------------------------------------------------

@@ -10,6 +10,11 @@ Community-content/MTG-assets. For the Fractured Galaxy launcher it also serves:
                         from its time), the MTG list, the newest launcher and news.txt
   /local_planets.tre    the archive the server loads (--archive; read-only, through \\wsl.localhost)
   /FracturedGalaxy.exe  build\out\FracturedGalaxy.exe, with its version from FracturedGalaxy.version (build.ps1)
+  /addon/<file>         the graphics add-on (owner, 18 Oct: on for everyone): DXVK 3.1.1 (dxvk_d3d9.dll) with the
+                        Ossus O15 hook in front of it (d3d9.dll; it bends the light whip and adds the ghostfire haze),
+                        from the owner's client, plus O15's default mirage.ini and the client's dxvk.conf. Offered only
+                        while the owner's client has exactly that DXVK and a mirage build, so friends get what runs here
+                        and whose blade ids match the server's archive.
 GET and HEAD only, and only to Tailscale (100.64.0.0/10) or loopback addresses.
 Nothing else on this PC is reachable through it. Ctrl+C stops it.
 """
@@ -19,6 +24,8 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 TAILNET = ipaddress.ip_network('100.64.0.0/10')
 TAILSCALE = Path(r'C:\Program Files\Tailscale\tailscale.exe')
+DXVK_SHA = '265888c31ca78dffa290c39cb7e50bfb02762590e41927906e46fb32f01497fa'   # DXVK 3.1.1 x32 d3d9.dll, official release
+ADDON = ('dxvk_d3d9.dll', 'd3d9.dll', 'mirage.ini', 'dxvk.conf')
 
 
 def default_manifest():
@@ -84,6 +91,16 @@ class Handler(http.server.BaseHTTPRequestHandler):
     requires = []
     archive = launcher = None
     launcher_version = news = None
+    addon = {}
+
+    @classmethod
+    def addon_files(cls):
+        got = {n: l.get() for n, l in cls.addon.items()}
+        if len(got) != len(ADDON) or not all(got.values()):
+            return None
+        if got['dxvk_d3d9.dll'].sha != DXVK_SHA or b'mirage.ini' not in got['d3d9.dll'].data:
+            return None
+        return got
 
     def update_info(self):
         info = {'format': 1, 'requires': self.requires, 'news': self.news.read_text(encoding='utf-8').strip() if self.news and self.news.is_file() else ''}
@@ -95,6 +112,9 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if l and self.launcher_version and self.launcher_version.is_file():
             info['launcher'] = {'file': 'FracturedGalaxy.exe', 'size': len(l.data), 'sha256': l.sha,
                                 'version': self.launcher_version.read_text().strip()}
+        ad = self.addon_files()
+        if ad:
+            info['addon'] = {n: {'file': 'addon/' + n, 'size': len(g.data), 'sha256': g.sha} for n, g in ad.items()}
         return json.dumps(info, indent=1).encode()
 
     def send_bytes(self, body, body_too, kind='application/octet-stream'):
@@ -120,6 +140,16 @@ class Handler(http.server.BaseHTTPRequestHandler):
         live = {'local_planets.tre': self.archive, 'FracturedGalaxy.exe': self.launcher}.get(name)
         if name == 'update.json':
             self.send_bytes(self.update_info(), body_too, 'application/json')
+            return
+        if name.startswith('addon/'):
+            ad = self.addon_files()
+            got = ad.get(name[6:]) if ad else None
+            if got is None:
+                self.send_error(404)
+                return
+            self.send_bytes(got.data, body_too)
+            if body_too:
+                print(f"{time.strftime('%I:%M %p').lstrip('0')}  {self.client_address[0]}  {name}  (graphics add-on)", flush=True)
             return
         if live is not None:
             got = live.get()
@@ -171,14 +201,21 @@ def main():
                     help="the local_planets.tre the server loads (read-only)")
     ap.add_argument('--launcher', default=str(HERE / 'build' / 'out' / 'FracturedGalaxy.exe'))
     ap.add_argument('--news', default=str(HERE / 'news.txt'))
+    ap.add_argument('--addon-client', default=str(HERE.parent.parent / 'SWG-client'),
+                    help="the client folder the add-on's d3d9.dll, dxvk_d3d9.dll and dxvk.conf come from")
+    ap.add_argument('--addon-ini', default=str(HERE.parent.parent / 'Fable-ossus' / 'o15-mirage' / 'mirage.ini'))
     a = ap.parse_args()
     manifest = a.manifest or default_manifest()
     Handler.files = load_files(a.dir, manifest, a.verify)
     Handler.requires = [{k: r[k] for k in ('file', 'size', 'sha256')} for r in json.loads(Path(manifest).read_text())['requires']]
     Handler.archive, Handler.launcher, Handler.news = Live(a.archive), Live(a.launcher), Path(a.news)
     Handler.launcher_version = Path(a.launcher).with_suffix('.version')
+    Handler.addon = {n: Live(Path(a.addon_client) / n) for n in ADDON if n != 'mirage.ini'}
+    Handler.addon['mirage.ini'] = Live(a.addon_ini)
     if Handler.archive.get() is None:
         print(f"Note: {a.archive} can't be read (is WSL running?); launchers will be told there's no patch to compare.")
+    if Handler.addon_files() is None:
+        print("Note: the graphics add-on is not offered (the client's dxvk_d3d9.dll isn't DXVK 3.1.1, or d3d9.dll isn't the hook).")
     bind = a.bind or tailscale_ip()
     server = http.server.ThreadingHTTPServer((bind, a.port), Handler)
     server.daemon_threads = True

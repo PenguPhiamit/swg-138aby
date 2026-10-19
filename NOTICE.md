@@ -15,6 +15,8 @@ It builds on other people's work, credited here:
 - **Kenney** (https://kenney.nl), CC0. Only the licence notices and download receipts are stored here.
 - **Quaternius** (https://quaternius.com), CC0. Its art is used in the test client and is not stored here.
 - **Wookieepedia** (https://starwars.fandom.com), CC BY-SA, for lore research. Our text is our own.
+- **DXVK** (https://github.com/doitsujin/dxvk), zlib/libpng licence. The friends' launcher passes on the official 3.1.1
+  release's 32-bit `d3d9.dll` unchanged; it is not stored here.
 
 Star Wars and Star Wars Galaxies are trademarks of Lucasfilm Ltd. and their respective owners. This is a non-commercial
 fan project, not affiliated with or endorsed by them. No game client files are included.
