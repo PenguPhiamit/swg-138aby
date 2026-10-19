@@ -67,6 +67,12 @@ builds and sign-offs.
    - Bounty: Brask never walks to the terminal.
    - Rerun the group-pay check with Cresh. It needs the Marksman fighting fix.
 
+4b. **Ossus rain frozen at forest edges** (owner, 18 Oct ~5:30 PM). **Built, not installed:** O12
+   (`Fable-ossus/o12-rain/build_ossus_rain.py`) switches off the forest's own weather area, so forests use the plains
+   one. The archive is `work/ossus-rain/` (`fbdf58e8`, on `dc07e0b9`). Install it in the client and `/opt/swg/tre`
+   when the owner says they're off the game (owner: "install it when I say I'm off the game"), then the owner checks
+   rain at a forest edge.
+
 **Next:**
 5. Read the local models' output:
    - the scenario drafts, then run them (test plan section 3: trainers, vehicles, buffs, surveys, groups, bazaar,
