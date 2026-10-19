@@ -7,10 +7,17 @@ client protocol to test it.
 
 ## How it started
 
-What began as a way to preserve the pre-CU era with bots on a private LAN has grown into a much wider project. The bots
-log in through the real game protocol and play the professions, and they still test everything that goes in. From there
-the world kept growing: Hoth, Ossus and new species, set around 138 ABY, along with a light whip and ghostfire crystals.
-New professions might be possible one day, but for now it stays small, with a friends-only test first.
+It started small: a private server on my own LAN with some bots, just to keep pre-CU Star Wars Galaxies alive the way
+I remembered it. Then it kept growing. I had to learn the tools as I went, from running the AI agents to SWG's file
+formats to building and testing a server, and somewhere along the way it turned into a whole project: new places, new
+species, new features, and maybe new professions one day.
+
+Standing up a server from scratch showed me how much work sits under this game. A fresh build has a lot of base issues,
+and every one I hit gave me more respect for the people who came before me. The SWGEmu team rebuilt the whole server
+from nothing, and they and the community server teams have spent years fixing so many goddang bugs so the rest of us
+can play. None of this would exist without them, and I can't thank them enough, SWGEmu above all.
+
+For now it stays small, with a friends-only test first.
 
 ## What's here
 
