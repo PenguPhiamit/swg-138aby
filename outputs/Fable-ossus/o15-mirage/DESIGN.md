@@ -21,7 +21,7 @@ It is a small `d3d9.dll` of our own that sits in front of DXVK in the client fol
   | O14 saber blade in `b9fbc48a` and `a2610d64` | `0xfac25b60` |
   | light whip blade (its own `e_h_lightwhipblade_ps20`) | `0x238eb66a` |
 - **Installed 8:41 PM: `5582152a`** (built 8:36 PM; swapped by the main session on the owner's OK, "Install now (Recommended)"). `SWG-client/d3d9.dll` is `5582152a`, with the backup `d3d9.dll.bak-dc7e87c8`. `dxvk_d3d9.dll` (`265888c3`) is unchanged. `mirage.ini` ends with `extra_ids=0ea2a331` and `log_draws=600`. It adds the blade-draw capture for the light whip's bend (see "The light whip's bend" below) and the ids above. With the capture off it draws exactly like `dc7e87c8`. `capture_read.py` reads the capture.
-- **Built, not installed: `525cd302`** (9:03 PM): the light whip's bend (step 3, below), plus everything in `5582152a`.
+- **Installed 9:07 PM: `525cd302`** (built 9:03 PM): the light whip's bend (step 3, below), plus everything in `5582152a`. Swapped by the main session on the owner's OK, "Install now (Recommended)". The backups are `d3d9.dll.bak-5582152a` and `.bak-dc7e87c8`. `mirage.ini` has `log_draws=0` and no `[whip]` section, so the whip defaults apply. Not yet seen in game.
 
 ## The layer
 
@@ -156,7 +156,7 @@ The plan is in [lightwhip-design.md](../../Documentation-support/lightwhip-desig
   - **Speeds.** Up to 7 m/s at the base and 48 m/s at the whip's tip during swings.
   - **Another 3D view.** Some frames draw the same saber three more times, one of them 0.6 m from its camera. That is likely the examine or inventory 3D view. Step 3 should leave a whip drawn in such a view straight (see below).
 
-**Step 3, the bend: built 9:03 PM as `525cd302`, not installed.**
+**Step 3, the bend: built 9:03 PM as `525cd302`, installed 9:07 PM, not yet seen in game.**
 - **Rule.** Only the whip program (`ids=238eb66a` under `[whip]`).
   - The fan is replaced by a strip along a rope of 20 segments.
   - The edge line that follows it becomes a line along the rope's edge.
