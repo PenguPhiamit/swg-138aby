@@ -4,14 +4,17 @@ Owner, 18 Oct ~7:05 PM: "build step 1 of the light whip: the whip hilt template,
 
 The stiff whip is a straight 2.5 m strand. Later it is the fallback for anyone without the graphics hook, once the bending whip (step 3) exists. Design and later steps: [lightwhip-design.md](../Documentation-support/lightwhip-design.md).
 
-**Installed on the test galaxy, 18 Oct 7:33 PM (run 36), untested in game.** Owner, 7:26 PM: "Install the light whip archive (with O14) and the Lua patch on the test galaxy and restart it." The archive is on the client and at `/opt/swg/tre` (backups `.bak-c8a61080`). Dev `e6e6d3bb` has O14's test-B Lua, and `9d08e265` has the whip's. The server log shows no new warnings or errors, and one new schematic loaded.
+**On the test galaxy since 18 Oct 7:42 PM (run 37).** Owner, 7:26 PM: "Install the light whip archive (with O14) and the Lua patch on the test galaxy and restart it." The archive is on the client and at `/opt/swg/tre` (backups `.bak-c8a61080`). Dev `e6e6d3bb` has O14's test-B Lua, and `9d08e265` has the whip's. The server log shows no new warnings or errors, and the whip's schematic is in the database.
+
+- **Run 36** (7:33 PM) had `d424d2f6`, built on the older O14 `892475a4`. **Run 37** has `a2610d64`, built on the current O14 `feb3bf84`; the main session caught the old base.
+- **Owner's first look:** "whip doesnt bend". That's expected, since this is the stiff whip and bending is step 3. On the colour ("the same color as the ghostfire? not wuite what i wanted") they picked "keep as built": the crystal decides, and the ghostfire crystal gives the near-invisible ghostfire blade.
 
 ## Client archive (`build_lightwhip.py`)
 
-- **Out:** `work/lightwhip/local_planets-lightwhip.tre`, sha256 `d424d2f6…` (full hash in the `.sha256` file). Two builds give the same hash.
+- **Out:** `work/lightwhip/local_planets-lightwhip.tre`, sha256 `a2610d64…` (full hash in the `.sha256` file). Two builds give the same hash.
   - 409 entries: 386 unchanged, 4 changed, 19 new.
   - Checks are in `checks-lightwhip.json`.
-- **Base:** the O14 archive `892475a4` (built, not installed). Installing this archive installs O14 too.
+- **Base:** the O14 archive `feb3bf84`. Installing this archive installs O14 too.
 - **What it adds:**
 
 | Files | What they are |
@@ -19,7 +22,7 @@ The stiff whip is a straight 2.5 m strand. Later it is the fallback for anyone w
 | `appearance/wp_mle_lightwhip.apt`, `lod/…lightwhip.lod`, `mesh/…lightwhip_l0..2.msh` | The leather-grip one-handed hilt. The trail's tip hardpoint `tr1e` moves from 1.125 to 2.425 m, and the mid-blade `whp1` from 0.75 to 1.5625 m, so the trail covers the whole strand. |
 | `appearance/wp_mle_lightwhip_blade.lsb` | That hilt with a 2.5 m blade (saber 1.2 m), 0.09 m wide (saber 0.15). Stock hum, ignite and retract values. |
 | `shader/lightwhipblade.sht`, `…_a..d.sht` | The stock blade shaders on the whip's own effect. Stock textures, and the crystal still sets the colour. |
-| `effect/e_h_lightwhipblade.eft`, `pixel_program/e_h_lightwhipblade_ps20.psh` | The blade program: the O14 one (ghostfire included), with the white core at 75% so a thin strand shows more of the crystal's colour. Its id is `cb72c453`, against stock `acc853c5` and O14 `7b68e0f1` (the two ids in the hook's `blade_ids.h` match). The O15 hook can find whip blades by that id. |
+| `effect/e_h_lightwhipblade.eft`, `pixel_program/e_h_lightwhipblade_ps20.psh` | The blade program: the O14 one (ghostfire included), with the white core at 75% so a thin strand shows more of the crystal's colour. Its id is `238eb66a`, against stock `acc853c5` and O14 `fac25b60`. The hook's `blade_ids.h` still lists the old O14 id `7b68e0f1`. The O15 hook can find whip blades by that id. |
 | `appearance/sw_lightwhip.swh` | The stock saber trail, lasting 0.25 s (saber 0.06 s), tinted by the crystal. |
 | `object/…/crafted_saber/shared_sword_lightwhip.iff` | The s5 gen4 one-handed saber template with that blade, named "Lightwhip" with its own description. |
 | `object/draft_schematic/…/shared_lightsaber_lightwhip.iff` | The gen4 one-handed saber schematic, making the whip. |
