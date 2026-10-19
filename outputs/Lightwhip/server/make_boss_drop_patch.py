@@ -28,6 +28,70 @@ BOSSES = S + 'screenplays/sandbox/sandbox_world_bosses.lua'
 GROUPS = S + 'loot/groups.lua'
 OLD_GROUP = S + 'loot/groups/lightwhip/lightwhip_nightsister.lua'
 NEW_GROUP = S + 'loot/groups/lightwhip/lightwhip_boss.lua'
+SCREENPLAYS = S + 'screenplays/screenplays.lua'
+MENU = S + 'screenplays/sandbox/lightwhip_schematic_menu.lua'
+LOOT_SCHEMATIC = S + 'object/tangible/loot/loot_schematic/lightwhip_schematic.lua'
+
+# Owner, 18 Oct ~8:35 PM (via the main session): "Smith + Tech I, or LS Master". The stock loot-schematic menu checks one
+# requiredSkill (LootSchematicMenuComponent.cpp), so the lightwhip schematic gets this Lua menu instead. Lua has no use
+# count binding, so the item is destroyed once learnt (stock loot schematics are single use too).
+MENU_TEXT = '''-- The lightwhip schematic's menu (L1, 18 Oct 2026). Owner: "Smith + Tech I, or LS Master", that is
+-- (Master Weaponsmith and Lightsaber Technique I) or Lightsaber Master. It stands in for the stock
+-- LootSchematicMenuComponent, which checks one skill only. Teaches the lightwhip schematic for 3 crafts, then the notes are used up.
+
+LightwhipSchematicMenuComponent = {
+	schematic = "object/draft_schematic/weapon/lightsaber/lightsaber_lightwhip.iff",
+	uses = 3,
+	lootType = 1, -- SchematicList::LOOT
+}
+
+function LightwhipSchematicMenuComponent:canLearn(pPlayer)
+	local player = CreatureObject(pPlayer)
+
+	return (player:hasSkill("crafting_weaponsmith_master") and player:hasSkill("force_discipline_light_saber_technique_01"))
+		or player:hasSkill("force_discipline_light_saber_master")
+end
+
+function LightwhipSchematicMenuComponent:fillObjectMenuResponse(pSceneObject, pMenuResponse, pPlayer)
+	if (pPlayer == nil or pMenuResponse == nil) then
+		return
+	end
+
+	if (self:canLearn(pPlayer)) then
+		LuaObjectMenuResponse(pMenuResponse):addRadialMenuItem(50, 3, "@loot_schematic:use_schematic") -- Learn Schematic
+	end
+end
+
+function LightwhipSchematicMenuComponent:handleObjectMenuSelect(pObject, pPlayer, selectedID)
+	if (pPlayer == nil or pObject == nil or selectedID ~= 50) then
+		return 0
+	end
+
+	if (not SceneObject(pObject):isASubChildOf(pPlayer)) then
+		CreatureObject(pPlayer):sendSystemMessage("@loot_schematic:must_be_holding") -- You must be holding that in order to use it.
+		return 0
+	end
+
+	if (not self:canLearn(pPlayer)) then
+		CreatureObject(pPlayer):sendSystemMessage("To follow these notes you need Master Weaponsmith and Lightsaber Technique I, or Lightsaber Master.")
+		return 0
+	end
+
+	local pGhost = CreatureObject(pPlayer):getPlayerObject()
+
+	if (pGhost == nil) then
+		return 0
+	end
+
+	if (PlayerObject(pGhost):addRewardedSchematic(self.schematic, self.lootType, self.uses, true)) then
+		CreatureObject(pPlayer):sendSystemMessage("@loot_schematic:schematic_learned") -- You acquire a new crafting schematic!
+		SceneObject(pObject):destroyObjectFromWorld()
+		SceneObject(pObject):destroyObjectFromDatabase()
+	end
+
+	return 0
+end
+'''
 
 
 def git(*args, cwd=STAGE):
@@ -113,7 +177,7 @@ def main():
     git('config', 'user.name', 'stage')
     git('config', 'user.email', 'stage@localhost')
     git('config', 'core.autocrlf', 'false')
-    for p in (BOSSES, GROUPS, OLD_GROUP):
+    for p in (BOSSES, GROUPS, OLD_GROUP, SCREENPLAYS, LOOT_SCHEMATIC):
         put(p, head(p))
     git('add', '-A')
     git('commit', '-q', '-m', 'Core3-dev HEAD ' + git('rev-parse', '--short', 'HEAD', cwd=DEV).decode().strip())
@@ -138,14 +202,29 @@ def main():
     put(GROUPS, replace_once(head(GROUPS), 'includeFile("groups/lightwhip/lightwhip_nightsister.lua")\n',
                              'includeFile("groups/lightwhip/lightwhip_boss.lua")\n'))
 
-    git('add', '-N', NEW_GROUP)
+    # the schematic rule: our Lua menu on the loot schematic, its file included with the other sandbox screenplays
+    put(MENU, MENU_TEXT)
+    put(SCREENPLAYS, replace_once(head(SCREENPLAYS), 'includeFile("sandbox/sandbox_world_bosses.lua")\n',
+                                  'includeFile("sandbox/sandbox_world_bosses.lua")\n'
+                                  'includeFile("sandbox/lightwhip_schematic_menu.lua") -- light whip (L1)\n'))
+    ls = head(LOOT_SCHEMATIC)
+    ls = replace_once(ls, '-- The lightwhip schematic (L1, 18 Oct 2026): a Jedi who can craft gen4 sabers learns to make the lightwhip, 3 crafts.\n',
+                      '-- The lightwhip schematic (L1, 18 Oct 2026): teaches the lightwhip, 3 crafts. Owner, 18 Oct: "Smith + Tech I, or LS Master",\n'
+                      '-- checked by LightwhipSchematicMenuComponent (screenplays/sandbox/lightwhip_schematic_menu.lua), which also does the\n'
+                      '-- learning; requiredSkill stays empty because the stock menu and attribute list take one skill only.\n')
+    ls = replace_once(ls, '\tobjectMenuComponent = "LootSchematicMenuComponent",\n', '\tobjectMenuComponent = "LightwhipSchematicMenuComponent",\n')
+    ls = replace_once(ls, '\trequiredSkill = "force_discipline_light_saber_master",\n', '\trequiredSkill = "",\n')
+    put(LOOT_SCHEMATIC, ls)
+
+    git('add', '-N', NEW_GROUP, MENU)
     patch = git('diff')
     with open(OUT, 'wb') as f:
         f.write(patch)
     git('apply', '--check', OUT, cwd=DEV)
-    for p in (BOSSES, GROUPS, NEW_GROUP):
+    checked = (BOSSES, GROUPS, NEW_GROUP, SCREENPLAYS, MENU, LOOT_SCHEMATIC)
+    for p in checked:
         subprocess.run(['luac5.3', '-p', os.path.join(STAGE, p)], check=True)
-    print('wrote %s (%d bytes); git apply --check on %s: ok; luac5.3 -p on 3 files: ok' % (OUT, len(patch), DEV))
+    print('wrote %s (%d bytes); git apply --check on %s: ok; luac5.3 -p on %d files: ok' % (OUT, len(patch), DEV, len(checked)))
 
 
 if __name__ == '__main__':

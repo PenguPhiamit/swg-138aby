@@ -32,6 +32,88 @@ index 175f341..8e338f1 100644
  
 -addLootGroupTemplate("lightwhip_nightsister", lightwhip_nightsister)
 +addLootGroupTemplate("lightwhip_boss", lightwhip_boss)
+diff --git a/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/lightwhip_schematic.lua b/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/lightwhip_schematic.lua
+index 0f9e533..48ac37e 100644
+--- a/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/lightwhip_schematic.lua
++++ b/MMOCoreORB/bin/scripts/object/tangible/loot/loot_schematic/lightwhip_schematic.lua
+@@ -1,10 +1,12 @@
+--- The lightwhip schematic (L1, 18 Oct 2026): a Jedi who can craft gen4 sabers learns to make the lightwhip, 3 crafts.
++-- The lightwhip schematic (L1, 18 Oct 2026): teaches the lightwhip, 3 crafts. Owner, 18 Oct: "Smith + Tech I, or LS Master",
++-- checked by LightwhipSchematicMenuComponent (screenplays/sandbox/lightwhip_schematic_menu.lua), which also does the
++-- learning; requiredSkill stays empty because the stock menu and attribute list take one skill only.
+ 
+ object_tangible_loot_loot_schematic_lightwhip_schematic = object_tangible_loot_loot_schematic_shared_lightwhip_schematic:new {
+ 	templateType = LOOTSCHEMATIC,
+-	objectMenuComponent = "LootSchematicMenuComponent",
++	objectMenuComponent = "LightwhipSchematicMenuComponent",
+ 	attributeListComponent = "LootSchematicAttributeListComponent",
+-	requiredSkill = "force_discipline_light_saber_master",
++	requiredSkill = "",
+ 	targetDraftSchematic = "object/draft_schematic/weapon/lightsaber/lightsaber_lightwhip.iff",
+ 	targetUseCount = 3
+ }
+diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/lightwhip_schematic_menu.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/lightwhip_schematic_menu.lua
+new file mode 100644
+index 0000000..eb98517
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/screenplays/sandbox/lightwhip_schematic_menu.lua
+@@ -0,0 +1,56 @@
++-- The lightwhip schematic's menu (L1, 18 Oct 2026). Owner: "Smith + Tech I, or LS Master", that is
++-- (Master Weaponsmith and Lightsaber Technique I) or Lightsaber Master. It stands in for the stock
++-- LootSchematicMenuComponent, which checks one skill only. Teaches the lightwhip schematic for 3 crafts, then the notes are used up.
++
++LightwhipSchematicMenuComponent = {
++	schematic = "object/draft_schematic/weapon/lightsaber/lightsaber_lightwhip.iff",
++	uses = 3,
++	lootType = 1, -- SchematicList::LOOT
++}
++
++function LightwhipSchematicMenuComponent:canLearn(pPlayer)
++	local player = CreatureObject(pPlayer)
++
++	return (player:hasSkill("crafting_weaponsmith_master") and player:hasSkill("force_discipline_light_saber_technique_01"))
++		or player:hasSkill("force_discipline_light_saber_master")
++end
++
++function LightwhipSchematicMenuComponent:fillObjectMenuResponse(pSceneObject, pMenuResponse, pPlayer)
++	if (pPlayer == nil or pMenuResponse == nil) then
++		return
++	end
++
++	if (self:canLearn(pPlayer)) then
++		LuaObjectMenuResponse(pMenuResponse):addRadialMenuItem(50, 3, "@loot_schematic:use_schematic") -- Learn Schematic
++	end
++end
++
++function LightwhipSchematicMenuComponent:handleObjectMenuSelect(pObject, pPlayer, selectedID)
++	if (pPlayer == nil or pObject == nil or selectedID ~= 50) then
++		return 0
++	end
++
++	if (not SceneObject(pObject):isASubChildOf(pPlayer)) then
++		CreatureObject(pPlayer):sendSystemMessage("@loot_schematic:must_be_holding") -- You must be holding that in order to use it.
++		return 0
++	end
++
++	if (not self:canLearn(pPlayer)) then
++		CreatureObject(pPlayer):sendSystemMessage("To follow these notes you need Master Weaponsmith and Lightsaber Technique I, or Lightsaber Master.")
++		return 0
++	end
++
++	local pGhost = CreatureObject(pPlayer):getPlayerObject()
++
++	if (pGhost == nil) then
++		return 0
++	end
++
++	if (PlayerObject(pGhost):addRewardedSchematic(self.schematic, self.lootType, self.uses, true)) then
++		CreatureObject(pPlayer):sendSystemMessage("@loot_schematic:schematic_learned") -- You acquire a new crafting schematic!
++		SceneObject(pObject):destroyObjectFromWorld()
++		SceneObject(pObject):destroyObjectFromDatabase()
++	end
++
++	return 0
++end
 diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua
 index 94c9e94..c5a9761 100644
 --- a/MMOCoreORB/bin/scripts/screenplays/sandbox/sandbox_world_bosses.lua
@@ -101,3 +183,15 @@ index 94c9e94..c5a9761 100644
  function SandboxWorldBosses:expire(pNil, args)
  	local slot, bossID = string.match(args, "(%d+):(%d+)")
  	slot, bossID = tonumber(slot), tonumber(bossID)
+diff --git a/MMOCoreORB/bin/scripts/screenplays/screenplays.lua b/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
+index 1b6f3b1..44fe6fd 100644
+--- a/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
++++ b/MMOCoreORB/bin/scripts/screenplays/screenplays.lua
+@@ -746,6 +746,7 @@ includeFile("custom_screenplays/screenplays.lua")
+ -- Local sandbox: mercenary companions
+ includeFile("sandbox/sandbox_mercenaries.lua")
+ includeFile("sandbox/sandbox_world_bosses.lua")
++includeFile("sandbox/lightwhip_schematic_menu.lua") -- light whip (L1)
+ includeFile("sandbox/sandbox_creatures.lua")
+ includeFile("sandbox/sandbox_tools_datapad.lua")
+ includeFile("sandbox/ossus_people.lua")

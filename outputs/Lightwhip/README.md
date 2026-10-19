@@ -4,7 +4,7 @@ Owner, 18 Oct ~7:05 PM: "build step 1 of the light whip: the whip hilt template,
 
 The stiff whip is a straight 2.1 m strand (2.5 m until the owner's 8:26 PM answers). Later it is the fallback for anyone without the graphics hook, once the bending whip (step 3) exists. Design and later steps: [lightwhip-design.md](../Documentation-support/lightwhip-design.md).
 
-**On the test galaxy since 18 Oct 7:42 PM (run 37).** Owner, 7:26 PM: "Install the light whip archive (with O14) and the Lua patch on the test galaxy and restart it." The archive is on the client and at `/opt/swg/tre` (backups `.bak-c8a61080`). Dev `e6e6d3bb` has O14's test-B Lua, and `9d08e265` has the whip's. The server log shows no new warnings or errors, and the whip's schematic is in the database.
+**On the test galaxy since 18 Oct 7:42 PM (run 37); archive `23368576` since 8:35 PM.** Owner, 7:26 PM: "Install the light whip archive (with O14) and the Lua patch on the test galaxy and restart it." The archive is on the client and at `/opt/swg/tre` (backups `.bak-c8a61080`). Dev `e6e6d3bb` has O14's test-B Lua, and `9d08e265` has the whip's. The server log shows no new warnings or errors, and the whip's schematic is in the database.
 
 - **Run 36** (7:33 PM) had `d424d2f6`, built on the older O14 `892475a4`. **Run 37** has `a2610d64`, built on the current O14 `feb3bf84`; the main session caught the old base.
 - **Owner's first look:** "whip doesnt bend". That's expected, since this is the stiff whip and bending is step 3. On the colour ("the same color as the ghostfire? not wuite what i wanted") they picked "keep as built": the crystal decides, and the ghostfire crystal gives the near-invisible ghostfire blade.
@@ -17,16 +17,23 @@ The stiff whip is a straight 2.1 m strand (2.5 m until the owner's 8:26 PM answe
 - **Drop:** "Krayt dragons for now, the boss". Only the rotation's two krayt bosses (Ghost-Scale the Canyon Krayt, `giant_canyon_krayt_dragon`; Old Rattlebones, `krayt_dragon_ancient`), at 10% per kill.
 - **Schematic:** "Master weaponsmith +saber crafting 1 or 2 or jedi master". The skill names are found but not wired yet; see the design note.
 - **Ghostfire:** "the ghostfire almost looks better in the whip". The whip keeps its own ghostfire values (O14 `feb3bf84`'s 3.5% glow, 0.6% core) rather than O14's newer take.
-- **Rebuilt, not installed:** `23368576…` on O14 `4c5a29d0` (412 entries). Two builds give the same hash. It replaces the main session's chain `49d6ae99`, which is the same builder with the old settings on `4c5a29d0`.
+- **Rebuilt and installed:** `23368576…` on O14 `4c5a29d0` (412 entries). Two builds give the same hash. It replaces the main session's chain `49d6ae99`, which is the same builder with the old settings on `4c5a29d0`.
+  - The main session installed it at 8:35 PM with the owner's OK ("Install now (Recommended)"), on the client and at `/opt/swg/tre`, by rename. Backups are `.bak-49d6ae99` in both places.
+  - It's client data only, so run 37 kept running.
+- **Schematic rule (owner's pick, 8:3x PM):** "Smith + Tech I, or LS Master", that is (`crafting_weaponsmith_master` and `force_discipline_light_saber_technique_01`) or `force_discipline_light_saber_master`.
+  - It's done as a Lua menu, `LightwhipSchematicMenuComponent` in `screenplays/sandbox/lightwhip_schematic_menu.lua`. It checks the rule, teaches the schematic for 3 crafts, then uses the notes up.
+  - Its `requiredSkill` is empty, because the stock menu takes one skill only.
 
 ## Scope (owner, 18 Oct about 8:20 PM, changed 8:3x PM)
 
 - **Now:**
   - **The bend** (steps 0 and 3). It goes to the mirage session, which owns the O15 hook. Owner: "can we wait on the parry thing in favor of the bend?"
-  - **Drop: the krayt bosses only.** `server/lightwhip-boss-drop-dev.patch` (made by `server/make_boss_drop_patch.py`), built, not applied.
+  - **Drop: the krayt bosses only, plus the schematic rule.** `server/lightwhip-boss-drop-dev.patch` (made by `server/make_boss_drop_patch.py`), built, not applied. Both go in at the next test galaxy restart, which needs the owner's OK.
     - A slain krayt boss of the world rotation (2 of the 14 in `sandbox_world_bosses.lua`, marked `lightwhip = true`) has a 10% chance to give one random player who damaged it a roll of `lightwhip_boss`: the schematic 80%, a finished whip 20%. It goes into their inventory, or the next player's if that one is full.
     - The bosses' stock templates are untouched, so ordinary creatures never drop it.
-    - The patch renames the group from `lightwhip_nightsister`. It passes `git apply --check` on dev `9d08e265`, and `luac5.3 -p` passes.
+    - The patch renames the group from `lightwhip_nightsister`, and it adds the Lua menu with its include line.
+    - It passes `git apply --check` on dev `9d08e265`, and `luac5.3 -p` passes on all 6 files.
+    - Untested: the Lua menu replaces the stock menu without calling it, as the radiation sensor's Lua menu does on another inventory item.
 - **After the 22 Oct reset:** step 2, the parry slip and weaker blocking (its options are in the design note, and no C++ is written), and step 4, an original hilt and crack sound.
 
 ## Client archive (`build_lightwhip.py`)
