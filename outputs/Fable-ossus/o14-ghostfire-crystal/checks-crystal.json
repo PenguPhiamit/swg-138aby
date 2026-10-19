@@ -1,10 +1,10 @@
 {
  "base_sha256": "c8a610801494690b51dd6129ef716b631e2aa0991a4db5377196f5bf96670ac9",
  "base_entries": 385,
- "out_sha256": "892475a431ce95b4e3f83a92dad3b4a0f9774d856886e5de8f4713c3a2e4d997",
- "out_bytes": 7044821,
+ "out_sha256": "4b1196a26bf74d6ec7ddab966e0e89b4efbd463e732f66520963452adb1a95fe",
+ "out_bytes": 7044909,
  "out_entries": 390,
- "unchanged_entries": 372,
+ "unchanged_entries": 370,
  "changed": [
   "appearance/ghostfire_ribbon_a.swh",
   "appearance/ghostfire_ribbon_b.swh",
@@ -15,10 +15,12 @@
   "appearance/ghostfire_ribbon_g.swh",
   "appearance/ghostfire_ribbon_h.swh",
   "appearance/sw_ghostfire.swh",
+  "appearance/wp_mle_sword_lightsaber_blade_ghostfire.lsb",
   "datatables/weapon/swoosh.iff",
   "misc/object_template_crc_string_table.iff",
   "palette/wp_lightsaber.pal",
   "pixel_program/e_h_lightsaberblade_ps20.psh",
+  "shader/sw_ghostfire.sht",
   "texture/sw_ghostfire.dds"
  ],
  "added": [
@@ -28,7 +30,7 @@
   "texture/sw_ghostfire_b.dds"
  ],
  "strobe": {
-  "seconds": 1.5,
+  "seconds": 2.0,
   "a_bars": 8,
   "b_bars": 1,
   "b_rate": 8.0,
@@ -44,19 +46,21 @@
   "appearance/ghostfire_ribbon_f.swh": "c0b39b9eb6dfd6dbda6367d43c1d42208f07f72a6b6e7642d5f6ba9f38017f55",
   "appearance/ghostfire_ribbon_g.swh": "07ae89556fa815c2405ec3315d6870087d7d455432ac98fab44adf954d16fe9c",
   "appearance/ghostfire_ribbon_h.swh": "6bc4e3031debfd38e942bb55ac7960eda3e7c8778900395ddc6d3d66e23a3233",
-  "appearance/sw_ghostfire.swh": "aca4e7b5ddca619088b4c3c8e3bc7bd1f0c26a1f2f9314433f370a5f0208ec13",
+  "appearance/sw_ghostfire.swh": "7d938e26f055ecc599d29743532ca9c14485569909d882f2021fdb366c28a68d",
+  "appearance/wp_mle_sword_lightsaber_blade_ghostfire.lsb": "39b63b7576a411ed3edff9196ce3fc5cba0db927230ae5c12b28dbb9ad3064bb",
   "datatables/weapon/swoosh.iff": "6c9976f179aee2fd81a8f5ddb3b45c4eb890bcec28bd2e7f189b92e7f49995b3",
   "misc/object_template_crc_string_table.iff": "e1d09aafb1cc34b0ead7a01fca16993c3d2e6e1a4f51623aba62599e5292e37c",
   "palette/wp_lightsaber.pal": "da60b183a73538c8836f5392b5e3cc7f75aac44e5d9c36a21f8961252f41b38c",
-  "pixel_program/e_h_lightsaberblade_ps20.psh": "68d5cd60910b59a90d06ee4b2324d31f39fa3d31871a86e53f29cc8bbd5fdd08",
-  "texture/sw_ghostfire.dds": "565a5a4bd97cc22303cc43474a2c4ef2563bf7af412f03e478fbdfb6f12ac4c5"
+  "pixel_program/e_h_lightsaberblade_ps20.psh": "4b3d8c8916c47c75e9d495f228f915335f00bcd667cf808405de6b93c5d95fac",
+  "shader/sw_ghostfire.sht": "457026fa1c854e8aa17cf6de2d16485ee7b4cfe8ac492a9ba833087f283bd4d6",
+  "texture/sw_ghostfire.dds": "e61d01bee1b510d77cae044d71a9d9b64063d99620370d46eacc395561a679a2"
  },
  "shader": {
   "fxc": "10.0.26100.0",
   "slots": 36,
-  "code_sha256": "d8c1157e331f0845f0c5acdefcc76628c0cdbac748ecde68d5a1bb172ff5140d",
-  "glow": 0.18,
-  "core": 0.04,
+  "code_sha256": "eb7fdd4c3e9734ac691f247d222db1ac7da4acd8b152e30e5b7607a95ee172c7",
+  "glow": 0.08,
+  "core": 0.015,
   "bands": 1.6
  },
  "palette_32_40": [

@@ -2,28 +2,36 @@
 
 Owner, 18 Oct ~6:10 PM: "can we make a new Crystal entry with the new shader and make all sabers compatible with the new crystal type? also the blade needs to be dimmer and the trails more prominent (and slow like LSD ...)". Later: "def make sure you understand the stacking of the tracers ... almost time dilation kinda vibes" and "a mirage effect for the blade to help hide light". On the decision card the owner picked **the strobe trail, tested first**, and asked how a real mirage could be made possible.
 
-**Built, not installed** (the game was running): archive `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre`, sha256 `892475a4…`, on the installed `c8a61080`. Two builds give the same hash. Checks are in `checks-crystal.json`.
+**Built, not installed** (the game was running): archive `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre`, sha256 `4b1196a2…`, on the installed `c8a61080`. Two builds give the same hash. Checks are in `checks-crystal.json`.
 
 ## The crystal drives the blade (any saber)
 
 - The crystal only picks a palette entry, and every stock blade draws with one pixel shader, `e_h_lightsaberblade_ps20.psh`. O14 replaces that shader with `e_h_lightsaberblade_ps20.hlsl`, compiled for ps_2_0 with the Windows SDK's `fxc.exe`. It uses 36 of 64 instruction slots, on the stock registers.
 - **Every crystal the server gives** (palette 0-11 and 31, brightest channel 65% or more) gets exactly the stock result: the ghostfire weight is 0.
-- **The ghostfire crystal** (32, and the server's shimmer steps 33-40) has every channel at 15.7% or less. For it, the white core drops to 4%, and the glow becomes dim milky opal bands at 18%, dimmer than O13's 32%.
+- **The ghostfire crystal** (32, and the server's shimmer steps 33-40) has every channel at 15.7% or less. For it, the white core drops to 1.5%, and the glow becomes faint milky opal bands at 8%. The owner, 7:15 PM, on O13's 32%: "the blade is still too visible"; it read as a solid rainbow rod in game, two to three times brighter than the preview.
   - The palette's green channel carries the shimmer step, `(20, 4k, 20)` for entry 32 + k. So the bands drift along the blade as the server steps the colour every 150 ms.
 - No new server crystal is needed: the existing ghostfire crystal (colour 32) is the new crystal type.
 - Older graphics paths (the effect's ps_1_1 and fixed-function versions) stay stock and show the dim tint.
+
+## Changes after the owner's look at O13 (7:15 PM, in game)
+
+The owner said: "the trails are still too faint and the blade is still too visible." The main session's capture showed a solid pastel rainbow rod, a swing trail that shows for a frame or two, and the kirruk and the robe lit strongly red while the blade was out.
+- **Blade:** the ghostfire path is now at 8% glow and 1.5% core, and the opal is milkier (0.72 ± 0.28).
+- **The Ghostfire Lightsaber draws the stock blade again.** The crystal decides its look like any saber, and the ghostfire crystal gives the faint opal path. The O13 opal textures stay in the archive, unused.
+- **Red light:** the ghostfire blade file has no light section; the sleek silver blade it was copied from has none. So the red didn't come from a light set in that file. In case the engine falls back to a default light in the crystal's colour, the file now has the gen5 blade's light with its colour at 0. Which crystal was in the saber, and where the red came from, are open.
+- **Strobe trails:** they now last 2.0 s, at full colour alpha (was 0.5), with the stock saber trail's doubled additive effect (`e_particle_emisadd_2x`). The bars are more saturated.
 
 ## Trails
 
 - **Research.** Dubois and VanRullen 2011 (PLOS Biology) describe LSD trails as discrete still afterimages behind a moving object, like a stroboscopic multiple-exposure photograph. PsychonautWiki: at high intensity, trails are nearly solid, last seconds and cover the whole path. Bluelight reports: repeated copies of a moving hand, with colour inside the smear. The owner adds stacking (copies that build up) and "time dilation" (the swing seems to lag behind itself).
 - **Base-game trails** are one continuous smear sampled 30 times a second, with a lifetime set in the trail file (weapons 0.06 s, contrails 0.25-0.5 s, missile smoke 2-4 s). So they can't stack copies by themselves.
 - **The server's tip ribbons** (main session, crystal-linked) now last 1.2 s instead of 0.1 s.
-- **Strobe-trail test.** A saber's trail is the surface the blade sweeps between its trail hardpoints (`tr1s` hilt, `tr1e` tip). Bright bars with gaps along the trail's time axis should leave copies of the whole blade that stack and fade over 1.5 s.
-  - **A, the Ghostfire Lightsaber (O13):** its trail, 1.5 s, 8 pastel bars per trail texture.
+- **Strobe-trail test.** A saber's trail is the surface the blade sweeps between its trail hardpoints (`tr1s` hilt, `tr1e` tip). Bright bars with gaps along the trail's time axis should leave copies of the whole blade that stack and fade over 2 s.
+  - **A, the Ghostfire Lightsaber (O13):** its trail, 2 s, 8 pastel bars per trail texture.
   - **B, "Ghostfire Lightsaber (trail test B)":** the same saber on a second template. It uses the newer trail layout with 8 samples a second and one bar per texture, in case the game repeats the texture for each sample rather than once along the trail.
   - Whichever shows copies tells us how the game maps the texture; then I tune it and tie it to the crystal.
   - Previews: `preview-strobe-a.png` and `preview-strobe-b.png` next to the archive.
-  - Server: `server/strobe-test-dev.patch` (Lua: template B and its loot item). It passes `git apply --check` on dev `03c180d4`.
+  - Server: `server/strobe-test-dev.patch` (Lua: template B and its loot item). It passes `git apply --check` on dev `6d544cf3`.
 
 ## Mirage
 
@@ -41,5 +49,6 @@ A real mirage needs a small graphics hook between the game and DXVK. When our bl
 
 1. Any saber with the ghostfire crystal: what does the blade look like now, and is it dim enough?
 2. A normal crystal in any saber: does it look the same as before?
-3. Spawn `/server loot item ossus_ghostfire_saber 1` (A) and `/server loot item ossus_ghostfire_saber_b 1` (B). Put a normal crystal in each, so only the strobe trail shows, and swing slowly, then fast. Which one leaves copies of the blade, and how long do they stay?
+3. Spawn `/server loot item ossus_ghostfire_saber 1` (A) and `/server loot item ossus_ghostfire_saber_b 1` (B). Put the ghostfire crystal in each, and swing slowly, then fast. Which one leaves copies of the blade, and how long do they stay?
+5. Is the red light on the creature and your robe still there? Which crystal was in the saber when you saw it?
 4. With the ghostfire crystal: how do the 1.2 s tip ribbons look next to the strobe trail?

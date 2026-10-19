@@ -61,7 +61,8 @@ SOURCE = os.path.join(HERE, 'e_h_lightsaberblade_ps20.hlsl')
 INCLUDES = ['pixel_program/include/pixel_shader_constants.inc', 'pixel_program/include/functions.inc',
             'shared_program/functions.inc']
 GHOST_FIRST, GHOST_COUNT = 32, 9           # entries 32 (idle) and 33-40 (shimmer steps)
-GHOST_GLOW, GHOST_CORE, BANDS = 0.18, 0.04, 1.6   # must match the .hlsl
+GHOST_GLOW, GHOST_CORE, BANDS = 0.08, 0.015, 1.6   # must match the .hlsl
+OPAL_BASE, OPAL_SWING = 0.72, 0.28
 
 
 def fxc_path():
@@ -100,7 +101,8 @@ def ghost_entry(k):
     return [0x20, 4 * k, 0x20, 0]
 
 
-STROBE_SECONDS = 1.5
+STROBE_SECONDS = 2.0
+TRAIL_EFFECT = 'effect/e_particle_emisadd_2x.eft'   # the stock saber trail's effect
 SHARED_B = 'object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire_b.iff'
 TRAIL_B_SWH = 'appearance/sw_ghostfire_b.swh'
 TRAIL_B_SHT = 'shader/sw_ghostfire_b.sht'
@@ -118,7 +120,7 @@ def strobe_texture(profile, bars, duty):
         d = abs(f - 0.5) * 2                     # 0 at a bar's centre, 1 at the gap's centre
         edge = 1 - duty
         lit = 1.0 if d <= edge - 0.15 else 0.0 if d >= edge + 0.15 else (edge + 0.15 - d) / 0.3
-        r, g, b = colorsys.hsv_to_rgb((i / max(bars, 1) + 0.6) % 1.0, 0.45, 1.0)
+        r, g, b = colorsys.hsv_to_rgb((i / max(bars, 1) + 0.6) % 1.0, 0.6, 1.0)
         rows.append([(int(round(r * 255)), int(round(g * 255)), int(round(b * 255)), int(round(p * lit)))
                      for p in profile])
     return rows
@@ -202,12 +204,20 @@ def main(argv):
     assert swh[0].children[0].form == '0000'
     data = [c for c in swh[0].children[0].children if not c.is_form][-1]
     assert abs(struct.unpack_from('<f', data.data, 16)[0] - 0.06) < 1e-6
-    data.data = data.data[:16] + struct.pack('<f', STROBE_SECONDS) + data.data[20:]
+    # owner, 7:15 PM: "the trails are still too faint": full colour alpha (was 0.5) and the stock saber trail's
+    # doubled additive effect (emisadd_2x) instead of the colour-band trail's single one
+    assert struct.unpack_from('<4f', data.data, 0) == (1.0, 1.0, 1.0, 0.5)
+    data.data = struct.pack('<4f', 1.0, 1.0, 1.0, 1.0) + struct.pack('<f', STROBE_SECONDS) + data.data[20:]
     changed[o13.TRAIL_SWH] = trn_iff.build(swh)
     a_data = data.data
+    sht = trn_iff.parse(base[o13.TRAIL_SHT])
+    eft = [x for _, x in trn_iff.walk(sht) if not x.is_form and x.tag == 'NAME' and x.data.startswith(b'effect')]
+    assert len(eft) == 1 and o13.cstr(eft[0].data) == 'effect/e_particle_emisadd.eft', eft
+    eft[0].data = TRAIL_EFFECT.encode() + b'\0'
+    assert trn_iff.client_file(TRAIL_EFFECT), TRAIL_EFFECT
+    changed[o13.TRAIL_SHT] = trn_iff.build(sht)
 
     added[TRAIL_B_DDS], _ = o13.dds_argb(strobe_texture(profile, 1, 0.3))
-    sht = trn_iff.parse(base[o13.TRAIL_SHT])
     tname = [x for _, x in trn_iff.walk(sht) if not x.is_form and x.tag == 'NAME' and x.data.startswith(b'texture/')]
     assert len(tname) == 1
     tname[0].data = TRAIL_B_DDS.encode() + b'\0'
@@ -218,6 +228,25 @@ def main(argv):
         '0001', trn_iff.form('PTEX', trn_iff.chunk('0000', ptex_b)),
         trn_iff.chunk('0000', a_data + struct.pack('<fII', 8.0, 16, 5))))])
     added[SHARED_B] = base[o13.SHARED]
+
+    # owner, 7:15 PM: "the blade is still too visible", and the capture shows the blade's light lighting the kirruk red
+    # (the blade light takes the crystal's colour). The Ghostfire Lightsaber now draws the stock blade, so the crystal
+    # decides its look like any saber (the ghostfire crystal gives the dim opal path above), and its blade light is off.
+    # The sleek silver blade file has no light section (LGHT); the gen5 files do (BASE, ASND, LGHT, BLAD). In case the
+    # engine falls back to a default light in the crystal's colour, ours gets the gen5 one with its colour at 0.
+    lsb = trn_iff.parse(base[o13.LSB])
+    ver = lsb[0].children[0]
+    shdr = [x for _, x in trn_iff.walk(lsb) if not x.is_form and x.tag == 'SHDR']
+    assert len(shdr) == 1 and o13.cstr(shdr[0].data) == o13.BLADE_SHT
+    assert [c.tag if not c.is_form else c.form for c in ver.children] == ['BASE', 'ASND', 'BLAD']
+    shdr[0].data = o13.STOCK_BLADE_SHT.encode() + b'\0'
+    gen5 = trn_iff.parse(trn_iff.client_file('appearance/wp_mle_2h_sword_lightsaber_blade_gen5.lsb'))
+    lght = [x for _, x in trn_iff.walk(gen5) if x.is_form and x.form == 'LGHT'][0]
+    colr = [c for c in lght.children if not c.is_form and c.tag == 'COLR']
+    assert len(colr) == 1 and colr[0].data == bytes.fromhex('202020ff')
+    colr[0].data = b'\0\0\0\0'
+    ver.children.insert(2, lght)
+    changed[o13.LSB] = trn_iff.build(lsb)
 
     table = o13.swg_tables.read_dtii(base[o13.SWOOSH])
     assert [r for r in table['rows'] if r[0] == o13.SHARED] and not [r for r in table['rows'] if r[0] == SHARED_B]
@@ -258,7 +287,7 @@ def main(argv):
             for x, (r, g, b, a) in enumerate(row):
                 ang = 2 * math.pi * (x / len(row) * BANDS + phase)
                 c, s = math.cos(ang), math.sin(ang)
-                opal = [0.65 + 0.35 * (c * u + s * w) for u, w in ((1, 0), (-0.5, 0.8660254), (-0.5, -0.8660254))]
+                opal = [OPAL_BASE + OPAL_SWING * (c * u + s * w) for u, w in ((1, 0), (-0.5, 0.8660254), (-0.5, -0.8660254))]
                 glow = (r + g + b) / 765.0
                 line.append(tuple(min(255, int(round(255 * (glow * GHOST_GLOW * o + a / 255.0 * GHOST_CORE))))
                                   for o in opal) + (0,))
