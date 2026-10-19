@@ -1,0 +1,68 @@
+{
+ "base_sha256": "c8a610801494690b51dd6129ef716b631e2aa0991a4db5377196f5bf96670ac9",
+ "base_entries": 385,
+ "out_sha256": "237875ebc9e6bf092189e2336b0ceb2687fe60e6256c0346502c3c9c7c96739b",
+ "out_bytes": 7040880,
+ "out_entries": 386,
+ "unchanged_entries": 376,
+ "changed": [
+  "appearance/ghostfire_ribbon_a.swh",
+  "appearance/ghostfire_ribbon_b.swh",
+  "appearance/ghostfire_ribbon_c.swh",
+  "appearance/ghostfire_ribbon_d.swh",
+  "appearance/ghostfire_ribbon_e.swh",
+  "appearance/ghostfire_ribbon_f.swh",
+  "appearance/ghostfire_ribbon_g.swh",
+  "appearance/ghostfire_ribbon_h.swh",
+  "palette/wp_lightsaber.pal",
+  "pixel_program/e_h_lightsaberblade_ps20.psh"
+ ],
+ "changed_sha256": {
+  "appearance/ghostfire_ribbon_a.swh": "dafeb441dd5d3d310275dcc10279eb77a36da6866da3d1571f6762fb5cacfabf",
+  "appearance/ghostfire_ribbon_b.swh": "74cfd84ac21ee6b3a2547eded36f3035b474fb90e6f29b8625adf4d6a7b81f37",
+  "appearance/ghostfire_ribbon_c.swh": "90de95e8d2bdd3df4e69545f59fdc2d4a16b1f868e0000549d9ae70b4f799421",
+  "appearance/ghostfire_ribbon_d.swh": "17a7bafe562656e52f6a2e3212ca3f1c22dfa8921088dc198de4ca935580d2be",
+  "appearance/ghostfire_ribbon_e.swh": "026ae1c5252106c9961d5865e1684ea082fd73bf5eee59b436be0b9e9892f379",
+  "appearance/ghostfire_ribbon_f.swh": "c0b39b9eb6dfd6dbda6367d43c1d42208f07f72a6b6e7642d5f6ba9f38017f55",
+  "appearance/ghostfire_ribbon_g.swh": "07ae89556fa815c2405ec3315d6870087d7d455432ac98fab44adf954d16fe9c",
+  "appearance/ghostfire_ribbon_h.swh": "6bc4e3031debfd38e942bb55ac7960eda3e7c8778900395ddc6d3d66e23a3233",
+  "palette/wp_lightsaber.pal": "da60b183a73538c8836f5392b5e3cc7f75aac44e5d9c36a21f8961252f41b38c",
+  "pixel_program/e_h_lightsaberblade_ps20.psh": "68d5cd60910b59a90d06ee4b2324d31f39fa3d31871a86e53f29cc8bbd5fdd08"
+ },
+ "shader": {
+  "fxc": "10.0.26100.0",
+  "slots": 36,
+  "code_sha256": "d8c1157e331f0845f0c5acdefcc76628c0cdbac748ecde68d5a1bb172ff5140d",
+  "glow": 0.18,
+  "core": 0.04,
+  "bands": 1.6
+ },
+ "palette_32_40": [
+  "200020",
+  "200420",
+  "200820",
+  "200c20",
+  "201020",
+  "201420",
+  "201820",
+  "201c20",
+  "202020"
+ ],
+ "stock_crystal_brightest": {
+  "0": 1.0,
+  "1": 0.702,
+  "2": 1.0,
+  "3": 0.651,
+  "4": 1.0,
+  "5": 0.651,
+  "6": 1.0,
+  "7": 0.702,
+  "8": 0.949,
+  "9": 0.69,
+  "10": 1.0,
+  "11": 0.729,
+  "31": 0.949
+ },
+ "ribbon_trail_seconds": 1.2,
+ "ribbon_samples": 60
+}
