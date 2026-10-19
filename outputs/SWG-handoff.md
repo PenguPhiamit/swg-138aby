@@ -94,6 +94,17 @@ ChatGPT source/offline complete; Claude review/build/gameplay pending. Server fi
 
 ## Log
 
+### 2026-10-18 7:04 PM Claude: C65 checked; N1 and N3 fixed in dev (`6d544cf3`, not built); N2 accepted for now
+
+- **Owner:** "before the next restart check gpts work", then "Yes: fix N1 and N3 in dev (no build), accept N2 for now. Build at the next restart when I'm off the game."
+- **C65** (GPT, `e1f202c`): F1, F2, F3 and F6 fixed; F4 and F5 fixed for C62's cases. All three new findings hold in the code.
+  - **N1 fixed:** a destroy mission's helper at the lair got nothing when the owner had walked more than 128 m off. `spawnLair` moves the mission's start position to the lair, so a member within 128 m of it on the start planet is now paid too (`MissionObjectiveImplementation.cpp`). Other planets and the stale first waypoint still pay nothing.
+  - **N3 fixed:** a giver now also puts back the report-back marker: Hoth's kill jobs at step 2, Kessoth at step 4.
+  - **N2 accepted for now:** buildings saved before the H1 change load their old radius and keep the 192 m send range; fresh ones such as Echo Base get the wider range. That also keeps stock starports, theatres and Jabba's palace at their old range, without the extra load GPT measured (2.3 to 12 times the area).
+- **Checks:** `-fsyntax-only` on the C++ file, `luac5.3 -p` on both Lua files, GPT's `check_c62_fixes.py` run on the working tree (extended Lua failures 0, the three N3 cases pass; its N1 model reads only the old predicate), and a model of the new N1 predicate on GPT's case and five neighbours (6/6). Not built or run in game.
+- **C67** (bosses) done, `473f3e1`. **C63b** hit GPT's limit again at 5:45 PM; it retries after 10:27 PM.
+- **Next build** (when the owner is off the game): dev `6d544cf3`, plus the ghostfire session's uncommitted `CombatManager.cpp` and `GhostfireShimmerTask.h` edits, which run 34 and 35 already carry.
+
 ### 2026-10-18 17:40 ChatGPT: C67 boss review complete
 
 `473f3e1`: [boss review](Documentation-support/bosses-review.md) + archive/template inventory, rights/era/planet decisions and ranked S/M/L shortlist. Stock wildlife/ancient rotation present; Horsemen and all 19 undead encounters incomplete; Necrosis weapon groups unresolved; Una-K'Jao identity open (Unkajo only a candidate). Krayt ghost stays in its separate design lane; lore corrections flagged. Gameplay untested; next accept existing bosses, then choose one original encounter. No galaxy commands, builds or /opt/swg writes.

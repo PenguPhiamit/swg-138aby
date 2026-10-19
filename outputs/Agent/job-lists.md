@@ -119,8 +119,9 @@ dispatcher (`next_gpt.sh` in Claude's scratchpad) starts the next open task when
 **Queued (`gpt-queue.json`, in this order):**
 0. **C66** (medium): how much is missing from Nal Hutta (owner, 18 Oct ~8:42 AM). A gap table against a stock planet,
    what blocks opening it, and one rough overall figure, in `Documentation-support/nal-hutta-gaps.md`.
-0. **C65** (ultra): review Claude's C62 fixes (dev, 18 Oct).
-0. **C67** (medium): the bosses in the owner's screenshot (owner, 18 Oct 9:06 AM: "do we have these? or can we have a
+0. ~~**C65**: review Claude's C62 fixes (dev, 18 Oct).~~ **Done 5:34 PM** (`e1f202c`): three new findings, all
+   confirmed. N1 and N3 fixed in dev `6d544cf3` (not built); N2 accepted for now (owner, 7 PM).
+0. ~~**C67**~~ **Done 5:41 PM** (`473f3e1`): the bosses in the owner's screenshot (owner, 18 Oct 9:06 AM: "do we have these? or can we have a
    session find them and see if we can use them?"). What we have, what the originals were, and what we may use
    (other servers' own bosses only as ideas), in `Documentation-support/bosses-review.md`.
 1. **C63b** (high): the next 20 local research reports, from `vehicle-mount`. It was reopened because the 7:33 AM run
