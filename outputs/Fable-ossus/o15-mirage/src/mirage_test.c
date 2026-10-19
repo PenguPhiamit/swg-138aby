@@ -2,7 +2,7 @@
 // outside the game, and saves screenshots.
 // Usage: mirage_test <proxy d3d9.dll> <blade .pexe> <out prefix>
 // Each frame: a striped background, an opaque bar in front, a ghostfire blade (dark c3) on the left and a stock red
-// blade on the right, with the real blade pixel program. The left blade's program and c3 come from a recorded state
+// blade on the right (from a vertex buffer with DrawPrimitive, as the game draws), with the real blade pixel program. The left blade's program and c3 come from a recorded state
 // block, the right one's from direct calls, so the hook must read the device state rather than track Set calls.
 // The window stays hidden (it must not take focus from a game being played). Reset at frame 20, screenshots of
 // frames 40 and 48 as <prefix>-40.bmp and <prefix>-48.bmp. Exit code 0 when every call worked.
@@ -14,6 +14,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define W 800
 #define H 450
@@ -70,13 +71,34 @@ static void quad(IDirect3DDevice9 *d, float x0, float y0, float x1, float y1, fl
 }
 
 // a blade strip from (hx, hy) to (tx, ty), wide px across including the glow; u runs hilt to tip
-static void blade(IDirect3DDevice9 *d, float hx, float hy, float tx, float ty, float wide)
+static void blade_verts(Vtx *q, float hx, float hy, float tx, float ty, float wide)
 {
 	float dx = tx - hx, dy = ty - hy, len = sqrtf(dx * dx + dy * dy);
 	float nx = -dy / len * wide * 0.5f, ny = dx / len * wide * 0.5f;
-	Vtx q[4] = { { hx - nx, hy - ny, 0.5f, 1, 0xFFFFFFFF, 0, 0 }, { hx + nx, hy + ny, 0.5f, 1, 0xFFFFFFFF, 0, 1 },
+	Vtx v[4] = { { hx - nx, hy - ny, 0.5f, 1, 0xFFFFFFFF, 0, 0 }, { hx + nx, hy + ny, 0.5f, 1, 0xFFFFFFFF, 0, 1 },
 	             { tx - nx, ty - ny, 0.5f, 1, 0xFFFFFFFF, 1, 0 }, { tx + nx, ty + ny, 0.5f, 1, 0xFFFFFFFF, 1, 1 } };
+	memcpy(q, v, sizeof v);
+}
+
+static void blade(IDirect3DDevice9 *d, float hx, float hy, float tx, float ty, float wide)
+{
+	Vtx q[4];
+	blade_verts(q, hx, hy, tx, ty, wide);
 	check(d->lpVtbl->DrawPrimitiveUP(d, D3DPT_TRIANGLESTRIP, 2, q, sizeof q[0]), "DrawPrimitiveUP blade");
+}
+
+// the same strip from a vertex buffer with DrawPrimitive, the call the game uses for its blades (mirage.log, 18 Oct)
+static IDirect3DVertexBuffer9 *blade_vb(IDirect3DDevice9 *d, float hx, float hy, float tx, float ty, float wide)
+{
+	IDirect3DVertexBuffer9 *vb = NULL;
+	void *p;
+	check(d->lpVtbl->CreateVertexBuffer(d, 8 * sizeof(Vtx), D3DUSAGE_WRITEONLY, FVF, D3DPOOL_MANAGED, &vb, NULL),
+	      "CreateVertexBuffer");
+	check(vb->lpVtbl->Lock(vb, 0, 0, &p, 0), "Lock vertex buffer");
+	memset(p, 0, 8 * sizeof(Vtx));
+	blade_verts((Vtx *)p + 2, hx, hy, tx, ty, wide);   // at vertex 2, so the start offset is exercised too
+	vb->lpVtbl->Unlock(vb);
+	return vb;
 }
 
 // the left blade's state: its program and a dark ghostfire c3, recorded the way an engine might
@@ -133,6 +155,7 @@ int main(int argc, char **argv)
 	IDirect3DPixelShader9 *ps = NULL;
 	IDirect3DTexture9 *bg, *bt;
 	IDirect3DStateBlock9 *sb;
+	IDirect3DVertexBuffer9 *vb;
 	D3DPRESENT_PARAMETERS pp = { 0 };
 	WNDCLASSA wc = { 0 };
 	RECT r = { 0, 0, W, H };
@@ -193,6 +216,7 @@ int main(int argc, char **argv)
 	bg = texture(d, 256, 256, 0);
 	bt = texture(d, 256, 64, 1);
 	sb = record(d, ps);
+	vb = blade_vb(d, 580, 400, 620, 60, 70);
 
 	for (frame = 0; frame <= 48; frame++) {
 		MSG msg;
@@ -251,7 +275,8 @@ int main(int argc, char **argv)
 		blade(d, 200, 400, 250, 60, 70);
 		d->lpVtbl->SetPixelShader(d, ps);
 		d->lpVtbl->SetPixelShaderConstantF(d, 3, red, 1);
-		blade(d, 580, 400, 620, 60, 70);
+		d->lpVtbl->SetStreamSource(d, 0, vb, 0, sizeof(Vtx));
+		check(d->lpVtbl->DrawPrimitive(d, D3DPT_TRIANGLESTRIP, 2, 2), "DrawPrimitive blade");
 		check(d->lpVtbl->EndScene(d), "EndScene");
 		if (frame == 40 || frame == 48) {
 			sprintf(path, "%s-%d.bmp", argv[3], frame);
@@ -260,6 +285,7 @@ int main(int argc, char **argv)
 		check(d->lpVtbl->Present(d, NULL, NULL, NULL, NULL), "Present");
 	}
 	sb->lpVtbl->Release(sb);
+	vb->lpVtbl->Release(vb);
 	ps->lpVtbl->Release(ps);
 	bg->lpVtbl->Release(bg);
 	bt->lpVtbl->Release(bt);

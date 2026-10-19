@@ -1,10 +1,11 @@
 {
- "built": "18 Oct 2026, 7:49 PM (MSVC 14.44 x86 /MT, fxc 10.0.26100.0 ps_2_0); MSVC builds embed a timestamp, so a rebuild gives a new hash",
+ "built": "18 Oct 2026, 8:36 PM (MSVC 14.44 x86 /MT, fxc 10.0.26100.0 ps_2_0); MSVC builds embed a timestamp, so a rebuild gives a new hash",
  "proxy_dll": {
   "path": "work/o15-mirage/d3d9.dll",
-  "bytes": 155136,
-  "sha256": "dc7e87c8a3ee5209a4006fb38528d04be9e8fc921e6a3be33a9d107808c6cfa3",
-  "replaces": "54150519 (6:53 PM build; tracked Set calls and never matched in game)"
+  "bytes": 163328,
+  "sha256": "5582152a729dcbaa28d04cc5ec4b5a2906ee966e390746782cf175d3f7c9eceb",
+  "replaces": "dc7e87c8 (7:49 PM build, installed 7:52 PM; kept as work/o15-mirage/old/d3d9-dc7e87c8.dll)",
+  "adds": "log_draws blade-draw capture (off by default), the pid on every mirage.log line, ids for archive 23368576"
  },
  "dxvk_chained": {
   "source": "SWG-client/d3d9.dll (DXVK 3.1.1, x86)",
@@ -12,18 +13,19 @@
  },
  "blade_program_ids": {
   "stock e_h_lightsaberblade_ps20 (mtg_patch_011_files_01.tre)": "0xacc853c5",
-  "O14 saber blade in local_planets.tre a2610d64": "0xfac25b60",
-  "light whip blade in local_planets.tre a2610d64": "0x238eb66a"
+  "O14 saber blade in local_planets.tre 23368576 (O14 4c5a29d0, installed 8:35 PM)": "0x0ea2a331",
+  "light whip blade in local_planets.tre 23368576 and b9fbc48a": "0x238eb66a",
+  "O14 saber blade in local_planets.tre b9fbc48a (the .bak-b9fbc48a rollback)": "0xfac25b60"
  },
  "sources_sha256": {
-  "src/mirage.c": "041f281d1943c1f35f4e31a53c696fec0eaa6f04afdf03e9c2fe86abd49a3bf8",
+  "src/mirage.c": "c1eb743bb3edca73022f2a1edc771807e7d483cba838c9e095ea346d995e0c9d",
   "src/mask_ps.hlsl": "899d53888df59794d000df939205a577126f94677d092c56a2d8dafed241c3ad",
   "src/haze_ps.hlsl": "dfa6a677668f4ae5d3e389d854e341a5e1bcfa7f933c26ee077305fdda861bcd",
   "src/d3d9.def": "d0028dd3bf9c37da95195d1c2bd595c928146f60875258ba611bcadbc775f601",
-  "src/blade_ids.h": "c7aca6f8493804154e849f3284f87c82dbfd509cc9b781df4165b5bc0f1cbbc0",
-  "src/mirage_test.c": "9a7c9cb3783e3ae07ddb9e359d7d46931f9711a4adec9d7cc4ceefea3157f638",
-  "mirage.ini": "f187d4d82b7a4d53a80c521fbbbf1f815f0cb6fc8881f8a966e711e99d44d106",
-  "blade_ids.py": "e4fce35ee568a7f4a93fc4af492cabe61f29270ace0e62f1a98b3f8fdee95675"
+  "src/blade_ids.h": "9501bfb7b499e55034fc6e3042040269630e4d42c9551aa5f26803b4c0d67292",
+  "src/mirage_test.c": "cdf817a2e2f87527542a518bd28b60f2b78104acc607cb87af42ea758537c87e",
+  "mirage.ini": "0e3b3d312d8e9e9323ff21544a6999441c18562467b9fe9706df98d47aad5a83",
+  "blade_ids.py": "5a6f58787a53d9f877f1c22b230e57e1591b0b261075bc3bef7d40ad360a488b"
  },
  "harness": {
   "what": "mirage_test.exe, 800x450 window, RTX 5070: striped background, opaque bar in front, ghostfire blade (dark c3, shimmer steps) left, stock red blade right, Reset at frame 20, screenshots of frames 40 and 48; every D3D call returned success in every run",
@@ -98,5 +100,13 @@
    0
   ],
   "note": "the harness draws the whip as a straight strip like the saber; the real whip shape is untested"
+ },
+ "in_game_rebuilt_proxy": "dc7e87c8 in game from 8:11 PM (mirage.log): ghostfire matched (c3 0.125 0.031-0.063 0.125), first mirage 1600x900 via DrawPrimitive (kind 0), then about 1,790 blade draws per 30 s, all ghostfire, as many mirage passes, 0 over the cap; two draws per frame; the doubled 30-s lines were the owner's two clients sharing the log",
+ "harness_capture": {
+  "when": "18 Oct, 8:33 to 8:36 PM, hidden window, DXVK 3.1.1, RTX 5070",
+  "harness_change": "the red blade now draws from a managed vertex buffer with DrawPrimitive (start 2), as the game does",
+  "image_speed0": "frames 40 and 48 identical for the installed dc7e87c8, the new build with log_draws=0, and with log_draws=40 (sha256 9a0f98f28275...)",
+  "capture_log": "40 draws logged (20 DrawPrimitiveUP, 20 DrawPrimitive): layout from the FVF, the vertex buffer read at its start offset, positions and full rows match the harness's vertices; the vertex program path is untested (the harness has none)",
+  "bends_per_program": "on (speed 0) vs off differ for 0ea2a331, fac25b60, 238eb66a and acc853c5; all calls worked"
  }
 }

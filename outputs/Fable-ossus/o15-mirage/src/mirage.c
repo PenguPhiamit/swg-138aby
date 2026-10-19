@@ -41,6 +41,9 @@ static struct {
 	float mask_gain;      // blade texture to mask
 	float noise_tiles;    // noise tiles per screen height
 	float max_bright;     // c3 brightest channel at or below this = ghostfire
+	int log_draws;        // >0: log this many draws of each blade program to mirage-draws-<pid>.log (the whip capture)
+	int draw_key;         // with toggle_mods: log every blade draw for draw_burst seconds more (needs log_draws > 0)
+	float draw_burst;
 	unsigned int extra_ids[8];
 	int extra_count;
 } cfg;
@@ -48,6 +51,7 @@ static struct {
 static char g_dir[MAX_PATH];
 static FILE *g_log;
 static int g_log_lines;
+static DWORD g_pid;   // two clients write into the same mirage.log, so each line names its process
 
 static void logf_(const char *fmt, ...)
 {
@@ -56,8 +60,8 @@ static void logf_(const char *fmt, ...)
 	if (!g_log || g_log_lines >= 4000)
 		return;
 	GetLocalTime(&st);
-	fprintf(g_log, "%d:%02d:%02d.%03d %s  ", st.wHour % 12 ? st.wHour % 12 : 12, st.wMinute, st.wSecond,
-	        st.wMilliseconds, st.wHour < 12 ? "AM" : "PM");
+	fprintf(g_log, "%d:%02d:%02d.%03d %s [%lu]  ", st.wHour % 12 ? st.wHour % 12 : 12, st.wMinute, st.wSecond,
+	        st.wMilliseconds, st.wHour < 12 ? "AM" : "PM", g_pid);
 	va_start(ap, fmt);
 	vfprintf(g_log, fmt, ap);
 	va_end(ap);
@@ -107,6 +111,9 @@ static void load_config(void)
 	cfg.mask_gain = ini_float(ini, "mask_gain", 2.0f);
 	cfg.noise_tiles = ini_float(ini, "noise_tiles", 6.0f);
 	cfg.max_bright = ini_float(ini, "max_bright", 0.17f);
+	cfg.log_draws = ini_int(ini, "log_draws", 0);
+	cfg.draw_key = ini_int(ini, "draw_key", 0x4C);       // L
+	cfg.draw_burst = ini_float(ini, "draw_burst", 4.0f);
 	ini_str(ini, "extra_ids", "", buf, sizeof buf);
 	for (p = buf; *p && cfg.extra_count < 8; p = end) {
 		unsigned long id = strtoul(p, &end, 16);
@@ -120,6 +127,9 @@ static void load_config(void)
 	      "chroma %.2f, mask gain %.2f, noise tiles %.1f, ghostfire at brightest <= %.3f, %d per frame, %d extra ids",
 	      ini, cfg.enabled, cfg.toggle_key, cfg.toggle_mods, cfg.strength, cfg.spread, cfg.speed, cfg.chroma,
 	      cfg.mask_gain, cfg.noise_tiles, cfg.max_bright, cfg.max_per_frame, cfg.extra_count);
+	if (cfg.log_draws > 0)
+		logf_("blade-draw capture on: %d draws of each blade program, key 0x%02x adds %.0f s, to mirage-draws-%lu.log",
+		      cfg.log_draws, cfg.draw_key, cfg.draw_burst, g_pid);
 }
 
 // ---- the real d3d9 ----
@@ -163,6 +173,7 @@ static IDirect3DDevice9Vtbl R;   // the real device methods
 static IDirect3DDevice9 *g_dev;
 
 static IDirect3DPixelShader9 *g_blade_ps[16];
+static unsigned int g_blade_id[16];
 static int g_blade_n;
 
 static int g_on = 1, g_broken, g_busy, g_first_done;
@@ -245,14 +256,16 @@ static int is_blade_id(unsigned int id)
 	return 0;
 }
 
-static int is_blade_ps(IDirect3DPixelShader9 *ps)
+static int blade_slot(IDirect3DPixelShader9 *ps)
 {
 	int i;
 	for (i = 0; ps && i < g_blade_n; i++)
 		if (g_blade_ps[i] == ps)
-			return 1;
-	return 0;
+			return i;
+	return -1;
 }
+
+#define is_blade_ps(ps) (blade_slot(ps) >= 0)
 
 // ---- our resources ----
 
@@ -518,21 +531,324 @@ static void mirage(IDirect3DDevice9 *d, const Draw *c)
 	rt->lpVtbl->Release(rt);
 }
 
+// ---- blade-draw capture (log_draws: the light whip's bend, Documentation-support/lightwhip-design.md step 0) ----
+// Writes each blade-program draw to mirage-draws-<pid>.log: the call, stream 0 and its vertex layout, the indices,
+// the vertex positions, the first vertices in full and the vertex program constants c0-c11 (a_nolighting.vsh:
+// c0-c3 object to clip, c4-c7 object to world, c8 camera position, c9 viewport, c10 fog, c11 material). Each new
+// vertex program is saved as mirage-vs-<id>.bin (fxc /dumpbin reads it). Read-only: it never changes a draw.
+
+#define CAP_VERTS 64
+#define CAP_ROWS 4
+#define CAP_INDICES 48
+#define CAP_MAX_BYTES (24u << 20)
+
+static FILE *g_cap;
+static int g_cap_off;
+static unsigned int g_cap_n, g_cap_bytes;
+static struct { unsigned int id, n; } g_cap_count[8];
+static int g_cap_ids;
+static LONGLONG g_cap_until;
+static void *g_cap_decl;
+static unsigned int g_cap_vs[8];
+static int g_cap_vs_n;
+
+static void capf(const char *fmt, ...)
+{
+	va_list ap;
+	int n;
+	va_start(ap, fmt);
+	n = vfprintf(g_cap, fmt, ap);
+	va_end(ap);
+	if (n > 0)
+		g_cap_bytes += n;
+}
+
+static UINT verts_of(D3DPRIMITIVETYPE type, UINT prims)
+{
+	switch (type) {
+	case D3DPT_POINTLIST: return prims;
+	case D3DPT_LINELIST: return prims * 2;
+	case D3DPT_LINESTRIP: return prims + 1;
+	case D3DPT_TRIANGLELIST: return prims * 3;
+	default: return prims + 2;   // triangle strips and fans
+	}
+}
+
+static const BYTE g_dsize[17] = { 4, 8, 12, 16, 4, 4, 4, 8, 4, 4, 8, 4, 8, 4, 4, 4, 8 };
+static const char *const g_dtype[17] = { "FLOAT1", "FLOAT2", "FLOAT3", "FLOAT4", "D3DCOLOR", "UBYTE4", "SHORT2",
+	"SHORT4", "UBYTE4N", "SHORT2N", "SHORT4N", "USHORT2N", "USHORT4N", "UDEC3", "DEC3N", "FLOAT16_2", "FLOAT16_4" };
+static const char *const g_dusage[14] = { "POSITION", "BLENDWEIGHT", "BLENDINDICES", "NORMAL", "PSIZE", "TEXCOORD",
+	"TANGENT", "BINORMAL", "TESSFACTOR", "POSITIONT", "COLOR", "FOG", "DEPTH", "SAMPLE" };
+
+// is this draw of blade program id due for the log (the per-program budget, or a capture-key burst)?
+static int capture_due(unsigned int id, LONGLONG now)
+{
+	int i;
+	if (cfg.log_draws <= 0 || g_cap_off)
+		return 0;
+	for (i = 0; i < g_cap_ids && g_cap_count[i].id != id; i++)
+		;
+	if (i == g_cap_ids && g_cap_ids < 8)
+		g_cap_count[g_cap_ids].id = id, g_cap_count[g_cap_ids++].n = 0;
+	if (i < g_cap_ids && g_cap_count[i].n < (unsigned int)cfg.log_draws) {
+		g_cap_count[i].n++;
+		return 1;
+	}
+	return now < g_cap_until;
+}
+
+static void save_vs(IDirect3DVertexShader9 *vs, unsigned int *id_out, UINT *size_out)
+{
+	static BYTE fn[65536];
+	UINT size = 0, i;
+	unsigned int id = 0x811C9DC5u;
+	char path[MAX_PATH];
+	FILE *f;
+	if (FAILED(vs->lpVtbl->GetFunction(vs, NULL, &size)) || !size || size > sizeof fn ||
+	    FAILED(vs->lpVtbl->GetFunction(vs, fn, &size)))
+		return;
+	for (i = 0; i < size; i++)
+		id = (id ^ fn[i]) * 0x01000193u;
+	*id_out = id;
+	*size_out = size;
+	for (i = 0; i < (UINT)g_cap_vs_n; i++)
+		if (g_cap_vs[i] == id)
+			return;
+	if (g_cap_vs_n == 8)
+		return;
+	g_cap_vs[g_cap_vs_n++] = id;
+	_snprintf(path, MAX_PATH, "%s\\mirage-vs-%08x.bin", g_dir, id);
+	if ((f = fopen(path, "wb")) != NULL) {
+		fwrite(fn, 1, size, f);
+		fclose(f);
+		capf("vertex program 0x%08x, %u bytes, saved to %s\n", id, size, path);
+	}
+}
+
+static void capture_body(IDirect3DDevice9 *d, const Draw *c, unsigned int id, LONGLONG now)
+{
+	static const char *const kinds[4] = { "DrawPrimitive", "DrawIndexedPrimitive", "DrawPrimitiveUP",
+		"DrawIndexedPrimitiveUP" };
+	static BYTE vcopy[CAP_VERTS * 256];
+	IDirect3DDevice9Vtbl *v = d->lpVtbl;
+	IDirect3DVertexBuffer9 *vb = NULL;
+	IDirect3DIndexBuffer9 *ib = NULL;
+	IDirect3DVertexDeclaration9 *decl = NULL;
+	IDirect3DVertexShader9 *vs = NULL;
+	D3DVERTEXELEMENT9 el[MAXD3DDECLLENGTH + 1];
+	D3DVERTEXBUFFER_DESC vd;
+	D3DINDEXBUFFER_DESC idd;
+	UINT nel = 0, off = 0, stride = c->stride, first = 0, nv = 0, ncopy = 0, nidx = 0, isz = 2, vsize = 0, i, k;
+	UINT posoff = 0, prims = c->kind == 0 ? c->b : c->kind == 1 ? c->d : c->kind == 2 ? c->a : c->c;
+	DWORD idx[CAP_INDICES], fvf = 0;
+	unsigned int vsid = 0;
+	float vc[48], pc[8];
+	void *p;
+
+	capf("draw %u frame %u t %.3f ps 0x%08x %s type %d", ++g_cap_n, g_frames, (double)(now - g_t0) / g_qpf, id,
+	     kinds[c->kind], (int)c->type);
+	if (c->kind == 0)
+		capf(" start %u prims %u", c->a, c->b), first = c->a, nv = verts_of(c->type, c->b);
+	else if (c->kind == 1)
+		capf(" base %d minv %u nv %u start %u prims %u", c->base, c->a, c->b, c->c, c->d), first = c->base + c->a,
+		    nv = c->b;
+	else if (c->kind == 2)
+		capf(" prims %u stride %u", c->a, c->stride), nv = verts_of(c->type, c->a);
+	else
+		capf(" minv %u nv %u prims %u ifmt %d stride %u", c->a, c->b, c->c, (int)c->ifmt, c->stride), first = c->a,
+		    nv = c->b;
+	capf("\n");
+
+	// vertices: stream 0 for the buffer draws, the game's own memory for the UP ones
+	if (c->kind < 2) {
+		if (FAILED(v->GetStreamSource(d, 0, &vb, &off, &stride)) || !vb) {
+			capf(" no stream 0\n");
+		} else if (SUCCEEDED(vb->lpVtbl->GetDesc(vb, &vd))) {
+			capf(" stream0 offset %u stride %u, buffer %u bytes pool %d usage 0x%lx fvf 0x%lx\n", off, stride, vd.Size,
+			     (int)vd.Pool, vd.Usage, vd.FVF);
+			ncopy = min(nv, CAP_VERTS);
+			if (stride == 0 || stride > 256)
+				ncopy = 0;
+			while (ncopy && off + (first + ncopy) * stride > vd.Size)
+				ncopy--;
+			if (ncopy && SUCCEEDED(vb->lpVtbl->Lock(vb, off + first * stride, ncopy * stride, &p, D3DLOCK_READONLY))) {
+				memcpy(vcopy, p, ncopy * stride);
+				vb->lpVtbl->Unlock(vb);
+			} else if (ncopy) {
+				capf(" vertex buffer Lock failed\n");
+				ncopy = 0;
+			}
+		}
+	} else if (c->vtx && stride && stride <= 256) {
+		ncopy = min(nv, CAP_VERTS);
+		memcpy(vcopy, (const BYTE *)c->vtx + first * stride, ncopy * stride);
+	}
+
+	// indices
+	nidx = c->kind == 1 || c->kind == 3 ? min(verts_of(c->type, prims), CAP_INDICES) : 0;
+	if (c->kind == 1 && nidx) {
+		if (FAILED(v->GetIndices(d, &ib)) || !ib || FAILED(ib->lpVtbl->GetDesc(ib, &idd))) {
+			nidx = 0;
+		} else {
+			isz = idd.Format == D3DFMT_INDEX32 ? 4 : 2;
+			while (nidx && (c->c + nidx) * isz > idd.Size)
+				nidx--;
+			if (nidx && SUCCEEDED(ib->lpVtbl->Lock(ib, c->c * isz, nidx * isz, &p, D3DLOCK_READONLY))) {
+				for (i = 0; i < nidx; i++)
+					idx[i] = isz == 4 ? ((const DWORD *)p)[i] : ((const WORD *)p)[i];
+				ib->lpVtbl->Unlock(ib);
+			} else {
+				nidx = 0;
+			}
+		}
+	} else if (c->kind == 3 && c->idx) {
+		isz = c->ifmt == D3DFMT_INDEX32 ? 4 : 2;
+		for (i = 0; i < nidx; i++)
+			idx[i] = isz == 4 ? ((const DWORD *)c->idx)[i] : ((const WORD *)c->idx)[i];
+	}
+	if (nidx) {
+		capf(" indices");
+		for (i = 0; i < nidx; i++)
+			capf(" %lu", idx[i]);
+		capf("\n");
+	}
+
+	// the vertex layout (logged when it changes) and where the position is
+	if (SUCCEEDED(v->GetVertexDeclaration(d, &decl)) && decl &&
+	    SUCCEEDED(decl->lpVtbl->GetDeclaration(decl, el, &nel))) {
+		if ((void *)decl != g_cap_decl) {
+			g_cap_decl = decl;
+			capf(" layout");
+			for (i = 0; i < nel && el[i].Stream != 0xFF; i++)
+				capf(" s%u+%u %s %s%u", el[i].Stream, el[i].Offset, el[i].Type < 17 ? g_dtype[el[i].Type] : "?",
+				     el[i].Usage < 14 ? g_dusage[el[i].Usage] : "?", el[i].UsageIndex);
+			capf("\n");
+		}
+		for (i = 0; i < nel && el[i].Stream != 0xFF; i++)
+			if (el[i].Stream == 0 && el[i].UsageIndex == 0 &&
+			    (el[i].Usage == D3DDECLUSAGE_POSITION || el[i].Usage == D3DDECLUSAGE_POSITIONT))
+				posoff = el[i].Offset;
+	} else {
+		nel = 0;
+		v->GetFVF(d, &fvf);
+		capf(" no declaration, fvf 0x%lx\n", fvf);
+	}
+
+	// positions of up to CAP_VERTS vertices, then the first CAP_ROWS in full
+	if (ncopy && posoff + 12 <= stride) {
+		capf(" pos");
+		for (i = 0; i < ncopy; i++) {
+			const float *f = (const float *)(vcopy + i * stride + posoff);
+			capf(" %.4f,%.4f,%.4f", f[0], f[1], f[2]);
+		}
+		capf("%s\n", ncopy < nv ? " ..." : "");
+	}
+	for (k = 0; k < ncopy && k < CAP_ROWS; k++) {
+		const BYTE *row = vcopy + k * stride;
+		capf(" v%u", k);
+		if (nel) {
+			for (i = 0; i < nel && el[i].Stream != 0xFF; i++) {
+				UINT t = el[i].Type, j, sz = t < 17 ? g_dsize[t] : 4;
+				if (el[i].Stream != 0 || el[i].Offset + sz > stride)
+					continue;
+				capf(" |");
+				for (j = 0; j < sz / 4; j++)
+					if (t <= D3DDECLTYPE_FLOAT4)
+						capf(" %.4f", ((const float *)(row + el[i].Offset))[j]);
+					else
+						capf(" %08lx", ((const DWORD *)(row + el[i].Offset))[j]);
+			}
+		} else {
+			for (i = 0; i + 4 <= stride && i < 64; i += 4)
+				capf(" %.4f", *(const float *)(row + i));
+		}
+		capf("\n");
+	}
+
+	// the vertex program and its constants (the fixed-function transforms when there is none)
+	if (SUCCEEDED(v->GetVertexShader(d, &vs)) && vs) {
+		save_vs(vs, &vsid, &vsize);
+		capf(" vs 0x%08x (%u bytes)\n", vsid, vsize);
+		if (SUCCEEDED(v->GetVertexShaderConstantF(d, 0, vc, 12)))
+			for (k = 0; k < 12; k += 4)
+				capf(" c%u-c%u %g %g %g %g | %g %g %g %g | %g %g %g %g | %g %g %g %g\n", k, k + 3, vc[k * 4],
+				     vc[k * 4 + 1], vc[k * 4 + 2], vc[k * 4 + 3], vc[k * 4 + 4], vc[k * 4 + 5], vc[k * 4 + 6],
+				     vc[k * 4 + 7], vc[k * 4 + 8], vc[k * 4 + 9], vc[k * 4 + 10], vc[k * 4 + 11], vc[k * 4 + 12],
+				     vc[k * 4 + 13], vc[k * 4 + 14], vc[k * 4 + 15]);
+	} else {
+		static const D3DTRANSFORMSTATETYPE ts[3] = { D3DTS_WORLD, D3DTS_VIEW, D3DTS_PROJECTION };
+		static const char *const tn[3] = { "world", "view", "projection" };
+		D3DMATRIX m;
+		for (k = 0; k < 3; k++)
+			if (SUCCEEDED(v->GetTransform(d, ts[k], &m)))
+				capf(" fixed function %s %g %g %g %g | %g %g %g %g | %g %g %g %g | %g %g %g %g\n", tn[k], m._11,
+				     m._12, m._13, m._14, m._21, m._22, m._23, m._24, m._31, m._32, m._33, m._34, m._41, m._42,
+				     m._43, m._44);
+	}
+	if (SUCCEEDED(v->GetPixelShaderConstantF(d, 3, pc, 1)) && SUCCEEDED(v->GetPixelShaderConstantF(d, 7, pc + 4, 1)))
+		capf(" ps c3 %.3f %.3f %.3f %.3f c7 %.3f %.3f %.3f %.3f\n", pc[0], pc[1], pc[2], pc[3], pc[4], pc[5], pc[6],
+		     pc[7]);
+	RELEASE(vs);
+	RELEASE(decl);
+	RELEASE(ib);
+	RELEASE(vb);
+}
+
+static void capture(IDirect3DDevice9 *d, const Draw *c, unsigned int id)
+{
+	LARGE_INTEGER now;
+	QueryPerformanceCounter(&now);
+	if (!capture_due(id, now.QuadPart))
+		return;
+	if (!g_cap) {
+		char path[MAX_PATH];
+		_snprintf(path, MAX_PATH, "%s\\mirage-draws-%lu.log", g_dir, g_pid);
+		if (!(g_cap = fopen(path, "w"))) {
+			logf_("could not write %s; capture off", path);
+			g_cap_off = 1;
+			return;
+		}
+		logf_("blade-draw capture writing to %s", path);
+		capf("Ossus O15 blade-draw capture, pid %lu; t in seconds since the proxy loaded; matrices row by row\n",
+		     g_pid);
+	}
+	__try {
+		capture_body(d, c, id, now.QuadPart);
+	} __except (EXCEPTION_EXECUTE_HANDLER) {
+		g_cap_off = 1;
+		logf_("exception 0x%08lx in the blade-draw capture; capture off for this session", GetExceptionCode());
+	}
+	fflush(g_cap);
+	if (g_cap_bytes > CAP_MAX_BYTES) {
+		g_cap_off = 1;
+		capf("(capture full)\n");
+		fflush(g_cap);
+		logf_("blade-draw capture full after %u draws", g_cap_n);
+	}
+}
+
 // Reads the bound pixel program and c3 from the device at each draw instead of tracking the Set calls: in game
 // (18 Oct, 7:11 and 7:35 PM) the tracked state never matched although the blade programs loaded, so the client may
 // set them some other way (state blocks, say). Costs one GetPixelShader per draw once a blade program exists.
-static int ghost_draw(IDirect3DDevice9 *d)
+static int ghost_draw(IDirect3DDevice9 *d, const Draw *c)
 {
 	IDirect3DPixelShader9 *ps = NULL;
 	float c3[4], b;
-	int blade, ghost;
-	if (d != g_dev || !g_blade_n || !g_on || g_broken || g_busy)
+	int slot, ghost, on;
+	if (d != g_dev || !g_blade_n || g_busy)
+		return 0;
+	on = g_on && !g_broken;
+	if (!on && cfg.log_draws <= 0)
 		return 0;
 	if (FAILED(d->lpVtbl->GetPixelShader(d, &ps)) || !ps)
 		return 0;
-	blade = is_blade_ps(ps);
+	slot = blade_slot(ps);
 	ps->lpVtbl->Release(ps);
-	if (!blade || FAILED(d->lpVtbl->GetPixelShaderConstantF(d, 3, c3, 1)))
+	if (slot < 0)
+		return 0;
+	if (cfg.log_draws > 0)
+		capture(d, c, g_blade_id[slot]);
+	if (!on || FAILED(d->lpVtbl->GetPixelShaderConstantF(d, 3, c3, 1)))
 		return 0;
 	b = max(c3[0], max(c3[1], c3[2]));
 	ghost = b > 0.01f && b <= cfg.max_bright;
@@ -549,26 +865,41 @@ static int ghost_draw(IDirect3DDevice9 *d)
 	return ghost;
 }
 
-static void poll_toggle(void)
+// a key, with toggle_mods held, went down while this game's window is in front
+static int key_pressed(int key, int *was)
 {
-	static int was;
-	int down;
-	if (!cfg.toggle_key)
-		return;
-	down = (GetAsyncKeyState(cfg.toggle_key) & 0x8000) &&
+	int down, hit = 0;
+	if (!key)
+		return 0;
+	down = (GetAsyncKeyState(key) & 0x8000) &&
 	       (!(cfg.toggle_mods & 1) || (GetAsyncKeyState(VK_CONTROL) & 0x8000)) &&
 	       (!(cfg.toggle_mods & 2) || (GetAsyncKeyState(VK_SHIFT) & 0x8000)) &&
 	       (!(cfg.toggle_mods & 4) || (GetAsyncKeyState(VK_MENU) & 0x8000));
-	if (down && !was) {
+	if (down && !*was) {
 		DWORD pid = 0;
 		HWND fg = GetForegroundWindow();
 		GetWindowThreadProcessId(fg, &pid);
-		if (fg && pid == GetCurrentProcessId()) {
-			g_on = !g_on;
-			logf_("mirage switched %s (toggle key)", g_on ? "on" : "off");
+		hit = fg && pid == GetCurrentProcessId();
+	}
+	*was = down != 0;
+	return hit;
+}
+
+static void poll_toggle(LONGLONG now)
+{
+	static int was_toggle, was_draw;
+	if (key_pressed(cfg.toggle_key, &was_toggle)) {
+		g_on = !g_on;
+		logf_("mirage switched %s (toggle key)", g_on ? "on" : "off");
+	}
+	if (cfg.log_draws > 0 && !g_cap_off && key_pressed(cfg.draw_key, &was_draw)) {
+		g_cap_until = now + (LONGLONG)(cfg.draw_burst * g_qpf);
+		logf_("capture key: every blade draw for %.0f s", cfg.draw_burst);
+		if (g_cap) {
+			capf("capture key at frame %u: every blade draw for %.0f s\n", g_frames, cfg.draw_burst);
+			fflush(g_cap);
 		}
 	}
-	was = down != 0;
 }
 
 static void end_frame(void)
@@ -578,7 +909,7 @@ static void end_frame(void)
 	g_frames++;
 	g_frame_mirages = 0;
 	g_frame_t = now.QuadPart;
-	poll_toggle();
+	poll_toggle(now.QuadPart);
 	if (g_frames == 1200 && g_blade_n == 0)
 		logf_("1200 frames and no blade pixel program seen yet (set log_shaders=1 to list the ids)");
 	if (now.QuadPart - g_stat_t > 30 * g_qpf) {
@@ -625,9 +956,11 @@ static HRESULT STDMETHODCALLTYPE hk_CreatePixelShader(IDirect3DDevice9 *d, const
 		for (i = 0; i < g_blade_n; i++)   // an address the game freed and reused
 			if (g_blade_ps[i] == *out) {
 				g_blade_ps[i] = g_blade_ps[--g_blade_n];
+				g_blade_id[i] = g_blade_id[g_blade_n];
 				break;
 			}
 		if (is_blade_id(id) && g_blade_n < 16) {
+			g_blade_id[g_blade_n] = id;
 			g_blade_ps[g_blade_n++] = *out;
 			logf_("blade pixel program 0x%08x created", id);
 		} else if (cfg.log_shaders) {
@@ -664,33 +997,30 @@ static HRESULT STDMETHODCALLTYPE hk_CreateStateBlock(IDirect3DDevice9 *d, D3DSTA
 
 static HRESULT STDMETHODCALLTYPE hk_DrawPrimitive(IDirect3DDevice9 *d, D3DPRIMITIVETYPE type, UINT start, UINT n)
 {
-	if (ghost_draw(d)) {
-		Draw c = { 0 };
-		c.kind = 0, c.type = type, c.a = start, c.b = n;
+	Draw c = { 0 };
+	c.kind = 0, c.type = type, c.a = start, c.b = n;
+	if (ghost_draw(d, &c))
 		mirage(d, &c);
-	}
 	return R.DrawPrimitive(d, type, start, n);
 }
 
 static HRESULT STDMETHODCALLTYPE hk_DrawIndexedPrimitive(IDirect3DDevice9 *d, D3DPRIMITIVETYPE type, INT base,
                                                          UINT minv, UINT nv, UINT start, UINT n)
 {
-	if (ghost_draw(d)) {
-		Draw c = { 0 };
-		c.kind = 1, c.type = type, c.base = base, c.a = minv, c.b = nv, c.c = start, c.d = n;
+	Draw c = { 0 };
+	c.kind = 1, c.type = type, c.base = base, c.a = minv, c.b = nv, c.c = start, c.d = n;
+	if (ghost_draw(d, &c))
 		mirage(d, &c);
-	}
 	return R.DrawIndexedPrimitive(d, type, base, minv, nv, start, n);
 }
 
 static HRESULT STDMETHODCALLTYPE hk_DrawPrimitiveUP(IDirect3DDevice9 *d, D3DPRIMITIVETYPE type, UINT n,
                                                     const void *vtx, UINT stride)
 {
-	if (ghost_draw(d)) {
-		Draw c = { 0 };
-		c.kind = 2, c.type = type, c.a = n, c.vtx = vtx, c.stride = stride;
+	Draw c = { 0 };
+	c.kind = 2, c.type = type, c.a = n, c.vtx = vtx, c.stride = stride;
+	if (ghost_draw(d, &c))
 		mirage(d, &c);
-	}
 	return R.DrawPrimitiveUP(d, type, n, vtx, stride);
 }
 
@@ -698,12 +1028,11 @@ static HRESULT STDMETHODCALLTYPE hk_DrawIndexedPrimitiveUP(IDirect3DDevice9 *d, 
                                                            UINT nv, UINT n, const void *idx, D3DFORMAT ifmt,
                                                            const void *vtx, UINT stride)
 {
-	if (ghost_draw(d)) {
-		Draw c = { 0 };
-		c.kind = 3, c.type = type, c.a = minv, c.b = nv, c.c = n, c.idx = idx, c.ifmt = ifmt, c.vtx = vtx,
-		c.stride = stride;
+	Draw c = { 0 };
+	c.kind = 3, c.type = type, c.a = minv, c.b = nv, c.c = n, c.idx = idx, c.ifmt = ifmt, c.vtx = vtx,
+	c.stride = stride;
+	if (ghost_draw(d, &c))
 		mirage(d, &c);
-	}
 	return R.DrawIndexedPrimitiveUP(d, type, minv, nv, n, idx, ifmt, vtx, stride);
 }
 
@@ -846,6 +1175,7 @@ BOOL WINAPI DllMain(HINSTANCE inst, DWORD reason, LPVOID unused)
 		LARGE_INTEGER f, now;
 		WIN32_FILE_ATTRIBUTE_DATA fa;
 		DisableThreadLibraryCalls(inst);
+		g_pid = GetCurrentProcessId();
 		GetModuleFileNameA(inst, g_dir, MAX_PATH);
 		slash = strrchr(g_dir, '\\');
 		if (slash)

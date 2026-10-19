@@ -4,19 +4,23 @@ Owner, 18 Oct: "a mirage effect for the blade to help hide light", then "how do 
 
 It is a small `d3d9.dll` of our own that sits in front of DXVK in the client folder. It watches the game's own draw calls, recognises particular draws, and adds screen passes around them. The mirage on the ghostfire blade is the first effect. The code holds that one effect today, and the layer below is how more effects fit in. It is for Miniverse only, not for friends through the launcher.
 
-**State, 18 Oct, 7:51 PM.**
-- **The first proxy never bent anything in game.** It is `54150519` (built 6:53 PM) and has been on the owner's client since about 7:11 PM. Its `mirage.log` from the 7:11 and 7:35 PM sessions shows the blade programs loading, but not a single ghostfire draw or mirage pass. It followed the game's SetPixelShader and constant calls. The harness reproduces the miss when a blade's program and colour come from a recorded state block.
-- **The rebuilt proxy reads the bound program and c3 from the device at each draw**, so it doesn't matter how the game sets them. Its log also lists the first blade draws with their c3, and every 30 seconds counts how often a blade program was bound and drawn. That way the next session shows directly whether it matches.
-- **Archives.** The owner's OK covers the setup installed at 7:41 PM: archive `a2610d64`, which is O14 `feb3bf84` (the near-invisible ghostfire blade with oil-slick trails) plus the light whip. The ids come from `blade_ids.py`:
+**State, 18 Oct, 8:37 PM.**
+- **The mirage runs in game.** The rebuilt proxy `dc7e87c8` has been on the owner's client since 7:52 PM. Its `mirage.log` from 8:11 PM shows:
+  - the ghostfire blade matched, with c3 at about 0.125, 0.031 to 0.063, 0.125;
+  - the first mirage, at 1600x900, through `DrawPrimitive`;
+  - every 30 s after that, about 1,790 blade draws, all ghostfire, with the same number of mirage passes and none over the cap. The blade draws twice a frame.
+
+  Each 30-second line appeared twice because the owner's two clients write into the same log. Each line now carries its process id.
+- **The first proxy never bent anything in game** (`54150519`, 7:11 to 7:47 PM). It followed the Set calls, and the game's state got past them; the harness reproduces this with a state block. The rebuild reads the bound program and c3 from the device at each draw.
+- **Archives and ids.** At 8:35 PM the client got archive `23368576`, which is O14 `4c5a29d0` plus the light whip at 2.1 m. Its saber program is new (`0ea2a331`). The installed proxy finds it through `extra_ids=0ea2a331` in `SWG-client/mirage.ini`. The next build (below) has it in its table. `blade_ids.py` now reads several archives, so one build also matches the `b9fbc48a` rollback.
 
   | Program | Id |
   |---|---|
   | stock saber blade | `0xacc853c5` |
-  | O14 saber blade | `0xfac25b60` |
+  | O14 saber blade in `23368576` (O14 `4c5a29d0`) | `0x0ea2a331` |
+  | O14 saber blade in `b9fbc48a` and `a2610d64` | `0xfac25b60` |
   | light whip blade (its own `e_h_lightwhipblade_ps20`) | `0x238eb66a` |
-
-  Both of ours use the same dark-crystal rule as before.
-- **Preview.** It is `work/o15-mirage/preview-mirage-a2610d64.png`. From left to right: saber off; saber on; saber on 8 frames later; whip off; whip on. Off shows almost nothing, because the blade is only a faint sheen now. On, a ripple traces the blade. The numbers are in `checks-mirage.json`.
+- **Built, not installed: `5582152a`** (8:36 PM). It adds the blade-draw capture for the light whip's bend, off by default (see "The light whip's bend" below), and the ids above. With the capture off it draws exactly like `dc7e87c8`.
 
 ## The layer
 
@@ -107,6 +111,49 @@ Every effect is made of the same three parts.
    3. **Bend.** One screen quad whose texture coordinates are screen positions. It widens and softens the mask, and bends the copy by two scrolling noise layers (one rising like heat). It splits red and blue a little for an opal fringe. Pixels outside the mask are discarded, and only colour is written: alpha may carry the game's bloom.
 4. **Back to the game.** A state block puts every state back, and the blade draws on top as usual. Only what was drawn before the blade bends. The UI, name tags and later particles do not.
 
+## The light whip's bend (the second effect)
+
+The plan is in [lightwhip-design.md](../../Documentation-support/lightwhip-design.md), steps 0 and 3. The owner, 18 Oct, 8:3x PM: "can we wait on the parry thing in favor of the bend?"
+
+**Step 0, the capture (in build `5582152a`, not installed).**
+- **What it's for.** The rope needs the blade's base and tip every frame. The capture shows whether the game's blade draw gives them.
+- **What it writes.** For each blade-program draw, one record in `SWG-client/mirage-draws-<pid>.log`:
+  - the call and its counts;
+  - stream 0 (offset, stride, the buffer's pool, usage and FVF) and the vertex layout;
+  - the indices, the positions of up to 64 vertices, and the first 4 vertices in full;
+  - the vertex program's id. Its bytecode is saved once as `mirage-vs-<id>.bin`, which `fxc /dumpbin` reads.
+  - the vertex constants c0 to c11, and the pixel constants c3 and c7.
+- **The constants.** They follow `vertex_program/include/vertex_shader_constants.inc`, which `a_nolighting.vsh`, the blade's vertex program, includes:
+  - c0 to c3: object to clip;
+  - c4 to c7: object to world;
+  - c8: camera position;
+  - c9: viewport;
+  - c10: fog;
+  - c11: material.
+
+  So the blade's vertices and c4 to c7 should give its base and tip in world space.
+- **How much.** `log_draws=N` logs N draws of each blade program. The saber (`0ea2a331`) and the whip (`238eb66a`) are counted separately. Ctrl+Shift+L (`draw_key`, `draw_burst`) adds 4 s of every blade draw, for when the swing comes later than the ignition. At two draws a frame, 600 draws is about 10 s and 1 to 2 MB. The log stops at 24 MB. Each client writes its own file, overwritten when that process id starts again. Reading the buffer back is read-only: the capture never changes a draw.
+- **Tested in the harness.** The harness's red blade now draws from a vertex buffer with `DrawPrimitive` at a start offset, the way the game draws. Both that path and the UP path log the right vertices. With speed 0, the image is identical for `dc7e87c8`, for the new build with the capture off, and with it on. Not tested: the vertex program path, because the harness has none and the game's blade does.
+- **To run it** (with the next swap, client closed):
+  1. `install.ps1` copies the proxy.
+  2. Add `log_draws=600` under `[mirage]` in `SWG-client/mirage.ini`.
+  3. The owner lights a stock saber and swings it for a few seconds, pressing Ctrl+Shift+L while swinging. Then the same with the whip.
+  4. Afterwards, set `log_draws=0` again.
+- **What decides step 3.** In the log, for every frame with the blade lit:
+  - the blade's vertices, put through c4 to c7, have two far ends: the base and the tip;
+  - the vertex order stays the same from frame to frame;
+  - the length matches the `.lsb` (2.1 m for the whip);
+  - both draws of a frame agree.
+
+  If any of these fail, step 3 waits and the plan is rethought.
+
+**Step 3, the bend (only after step 0 works).**
+- **Rule.** Only the whip program `238eb66a`. Its straight draw is skipped and the rope is drawn in its place.
+- **Rope.** 16 to 24 points in world space, pinned at the hilt. Each point is pulled towards its place on the straight blade, with lag and damping, so the strand trails the swing and snaps at the end.
+- **Draw.** A strip along the rope, facing the camera (c8). Its vertices go back into the blade's object space through the inverse of c4 to c7. It is drawn with the game's own vertex layout, vertex program, constants, pixel program, textures and depth test, with `DrawPrimitiveUP`. Fog, fade and the ghostfire look then come out as for the straight blade, and the mirage rule sees the strip like any blade draw.
+- **Several whips.** Each draw is matched to last frame's rope by the nearest hilt. A rope not seen for a few frames is dropped.
+- **Fallback.** Anything unexpected (another layout, a vertex count it can't read, an exception) draws the straight blade as the game does.
+
 ## Tested (outside the game, 18 Oct)
 
 `mirage_test.exe` draws the way the client does on this PC (RTX 5070, DXVK 3.1.1). It uses the real stock and O14 blade programs and a Reset at frame 20. Every Direct3D call succeeded in every run.
@@ -126,8 +173,7 @@ Every effect is made of the same three parts.
 ## Risks
 
 - **Crashes.** A failing step is logged once and the game's own draw still happens. An exception in our code switches the layer off for the session. A crash inside DXVK or the driver can't be caught, so the first in-game run is the real test.
-- **Untested in game.** Several things are still unknown:
-  - which draw call the client uses for blades;
+- **Untested in game.** The blade draws with `DrawPrimitive` from a vertex buffer (seen in game, 8:11 PM). Still unknown:
   - whether "Post Process Effects" (bloom) draws the blade into another target (the mirage then bends that target, which should be fine);
   - SWG's anti-aliasing (MSAA). There is a multisampled path, but the harness ran without MSAA.
   - whether the O13 Ghostfire Lightsaber, whose shader has no palette part, still sets a dark c3. If it doesn't, only crystal-coloured blades get the mirage.
@@ -135,7 +181,7 @@ Every effect is made of the same three parts.
 - **Friends' GPUs.** Cost comes only while a matching draw is on screen. A mirage adds a screen copy and two full-screen passes, about ten texture reads a pixel. That is nothing on a 5070, and well under a millisecond on most cards from the last ten years. `max_per_frame=8` caps a crowd of ghostfire wielders. With no match in view, the cost is a few comparisons per draw. Each new effect needs its own cap.
 - **Only players with the DLL see it.** It changes nothing on the server. Without it, a player sees the archive's look as it is. Effects built on redirect, such as NGE heat, would show the raw heat draw to players without the DLL, so their art has to look acceptable without it, or be marker-only.
 - **Launchers.** Both launchers start the same `SWG-client` folder. I haven't checked whether their file check minds an extra `dxvk_d3d9.dll` or a changed `d3d9.dll`. DXVK's `d3d9.dll` was already an addition, so probably not; watch the first launch. To ship it to friends later, the installer would carry `d3d9.dll`, `dxvk_d3d9.dll` and the ini together. Not before it has been tried here.
-- **Two clients at once** (`allowMultipleInstances`). Each loads its own copy. They share `mirage.log`, and each block starts with the process id.
+- **Two clients at once** (`allowMultipleInstances`). Each loads its own copy. They share `mirage.log`, and from build `5582152a` every line carries the process id. The capture writes one file per process.
 
 ## Switching it off
 
@@ -158,7 +204,7 @@ Every effect is made of the same three parts.
 
 | File | What it is |
 |---|---|
-| `src/mirage.c` | The proxy: exports, hooks, the mirage's rule and three passes, settings and log |
+| `src/mirage.c` | The proxy: exports, hooks, the mirage's rule and three passes, the blade-draw capture, settings and log |
 | `src/mask_ps.hlsl`, `src/haze_ps.hlsl` | The two ps_2_0 programs (compiled by fxc and built into the DLL) |
 | `src/blade_ids.h`, `blade_ids.py` | The blade program ids. The script reads them from the client archives and the O14 archive; later effects' ids come the same way. |
 | `src/d3d9.def` | The export names |
