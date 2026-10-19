@@ -112,7 +112,8 @@ SHARED_B = 'object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_
 TRAIL_B_SWH = 'appearance/sw_ghostfire_b.swh'
 TRAIL_B_SHT = 'shader/sw_ghostfire_b.sht'
 TRAIL_B_DDS = 'texture/sw_ghostfire_b.dds'
-GHOST_FRAME = 'shader/ghostfire_blade_%s.sht'   # the Ghostfire Lightsaber's stock blade frames, default colour 32
+ACM = 'customization/asset_customization_manager.iff'
+WHIP_LSB = 'appearance/wp_mle_lightwhip_blade.lsb'   # the main session's light whip blade (Lightwhip/), same gap
 
 
 # Owner, 18 Oct evening: "maybe mix some darker colors in too for a more gasoline purple fumed kinda thing, and the
@@ -261,29 +262,37 @@ def main(argv):
     # decides its look like any saber (the ghostfire crystal gives the dim opal path above), and its blade light is off.
     # The sleek silver blade file has no light section (LGHT); the gen5 files do (BASE, ASND, LGHT, BLAD). In case the
     # engine falls back to a default light in the crystal's colour, ours gets the gen5 one with its colour at 0.
-    # Owner, 7:50 PM: "there is a red saber in there somehow". The server sets the blade colour only when a colour
-    # crystal goes in (SaberInventoryContainerComponent.cpp: insert = crystal colour, remove = 31), so a saber that never
-    # had one has no colour and the client uses the blade shader's default, palette 0 = red. This saber gets its own
-    # copy of the stock blade (switching shader over frames a..d) whose default is 32, ghostfire: with no colour crystal
-    # it is the ghostfire blade, and any colour crystal still decides as usual.
-    stock_switch = trn_iff.parse(trn_iff.client_file(o13.STOCK_BLADE_SHT))
-    frames = [o13.cstr(x.data) for _, x in trn_iff.walk(stock_switch) if not x.is_form and x.tag == 'NAME']
-    assert frames == ['shader/lightsaberblade_%s.sht' % c for c in 'abcd'], frames
-    for c in 'abcd':
-        frame = trn_iff.parse(trn_iff.client_file('shader/lightsaberblade_%s.sht' % c))
-        pal = [x for _, x in trn_iff.walk(frame) if not x.is_form and x.tag == 'PAL ']
-        assert len(pal) == 1 and pal[0].data.startswith(b'index_color_blade\0') and pal[0].data[-4:] == b'\0\0\0\0'
-        pal[0].data = pal[0].data[:-4] + struct.pack('<I', GHOST_FIRST)
-        added[GHOST_FRAME % c] = trn_iff.build(frame)
-    for _, x in trn_iff.walk(stock_switch):
-        if not x.is_form and x.tag == 'NAME':
-            x.data = (GHOST_FRAME % o13.cstr(x.data)[-5]).encode() + b'\0'
-    changed[o13.BLADE_SHT] = trn_iff.build(stock_switch)
     lsb = trn_iff.parse(base[o13.LSB])
     ver = lsb[0].children[0]
     shdr = [x for _, x in trn_iff.walk(lsb) if not x.is_form and x.tag == 'SHDR']
     assert len(shdr) == 1 and o13.cstr(shdr[0].data) == o13.BLADE_SHT
     assert [c.tag if not c.is_form else c.form for c in ver.children] == ['BASE', 'ASND', 'BLAD']
+    shdr[0].data = o13.STOCK_BLADE_SHT.encode() + b'\0'
+
+    # Owner, 7:50 PM, with the ghostfire crystal in: "there is a red saber in there somehow". The client only applies a
+    # customization variable to an appearance that its asset customization table lists (CIDX: appearance path CRC ->
+    # asset key; the key's links lead to /private/index_color_blade on palette/wp_lightsaber.pal, default 0). Stock
+    # blades are listed; our new blade file was not (nor the light whip's), so the crystal's colour was dropped and the
+    # default, palette 0 (red), drew. Both get a row pointing at the sleek silver blade's key. The server never uses this
+    # table for the blade colour (only image design, goggles and Lua), so this is client data only.
+    acm_stock = trn_iff.client_file(ACM)
+    acm = trn_iff.parse(acm_stock)
+    assert trn_iff.build(acm) == acm_stock and acm[0].form == 'ACST' and acm[0].children[0].form == '0000'
+    acm_chunks = {c.tag: c for c in acm[0].children[0].children}
+    cidx = acm_chunks['CIDX']
+    rows = {struct.unpack_from('<I', cidx.data, i)[0]: struct.unpack_from('<H', cidx.data, i + 4)[0]
+            for i in range(0, len(cidx.data), 6)}
+    assert len(rows) * 6 == len(cidx.data) and list(rows) == sorted(rows)
+    donor_key = rows[o13.swg_tables.soe_crc(o13.SRC_LSB)]
+    assert donor_key == 18199, donor_key
+    acm_rows = {}
+    for path in (o13.LSB, WHIP_LSB):
+        crc_l = o13.swg_tables.soe_crc(path)
+        assert crc_l not in rows, path
+        rows[crc_l] = donor_key
+        acm_rows[path] = '%08x' % crc_l
+    cidx.data = b''.join(struct.pack('<IH', c, rows[c]) for c in sorted(rows))
+    added[ACM] = trn_iff.build(acm)
     gen5 = trn_iff.parse(trn_iff.client_file('appearance/wp_mle_2h_sword_lightsaber_blade_gen5.lsb'))
     lght = [x for _, x in trn_iff.walk(gen5) if x.is_form and x.form == 'LGHT'][0]
     colr = [c for c in lght.children if not c.is_form and c.tag == 'COLR']
@@ -348,7 +357,7 @@ def main(argv):
 
     checks = {'base_sha256': base_sha, 'base_entries': len(base), 'out_sha256': sha, 'out_bytes': len(out),
               'out_entries': len(ours), 'unchanged_entries': len(same), 'changed': sorted(changed),
-              'added': sorted(added), 'strobe': {'seconds': STROBE_SECONDS, 'a_bars': STROBE_BARS, 'alpha': TRAIL_ALPHA, 'effect': TRAIL_EFFECT, 'b_bars': 1, 'b_rate': 8.0,
+              'added': sorted(added), 'acm_rows': acm_rows, 'acm_donor_key': donor_key, 'strobe': {'seconds': STROBE_SECONDS, 'a_bars': STROBE_BARS, 'alpha': TRAIL_ALPHA, 'effect': TRAIL_EFFECT, 'b_bars': 1, 'b_rate': 8.0,
                                                   'b_samples': 16, 'template_b_crc': '%08x' % crc_b},
               'changed_sha256': {n: hashlib.sha256(ours[n]).hexdigest() for n in sorted(changed)},
               'shader': {'fxc': os.path.basename(os.path.dirname(os.path.dirname(fxc_path()))), 'slots': slots,

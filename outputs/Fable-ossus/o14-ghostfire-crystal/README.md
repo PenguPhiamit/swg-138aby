@@ -2,7 +2,7 @@
 
 Owner, 18 Oct ~6:10 PM: "can we make a new Crystal entry with the new shader and make all sabers compatible with the new crystal type? also the blade needs to be dimmer and the trails more prominent (and slow like LSD ...)". Later: "def make sure you understand the stacking of the tracers ... almost time dilation kinda vibes" and "a mirage effect for the blade to help hide light". On the decision card the owner picked **the strobe trail, tested first**, and asked how a real mirage could be made possible.
 
-**Built, not installed** (the game was running): archive `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre`, sha256 `a6dcb82c…`, on `c8a61080` (now its default base, `work/ossus-ghostfire-blade/`). The main session installed the earlier `feb3bf84` with its light whip as `a2610d64` (run 37, 7:41 PM). The light whip step chained on this build is `work/ossus-ghostfire-crystal/chain/local_planets-o14-lightwhip.tre`, sha256 `f8df3089…`. Its only differences from the installed `a2610d64` are the trail files and the Ghostfire Lightsaber's blade frames. Two builds give the same hash. Checks are in `checks-crystal.json`.
+**Built, not installed** (the game was running): archive `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre`, sha256 `660fe25d…`, on `c8a61080` (now its default base, `work/ossus-ghostfire-blade/`). The main session installed the earlier `feb3bf84` with its light whip as `a2610d64` (run 37, 7:41 PM). The light whip step chained on this build is `work/ossus-ghostfire-crystal/chain/local_planets-o14-lightwhip.tre`, sha256 `cf41f80f…`. Its only differences from the installed `a2610d64` are the customization table and the trail files. Two builds give the same hash. Checks are in `checks-crystal.json`.
 
 ## The crystal drives the blade (any saber)
 
@@ -23,9 +23,14 @@ The owner said: "the trails are still too faint and the blade is still too visib
 
 ## 7:50 PM: "trails are too vibrant, and there is a red saber in there somehow"
 
-- **The red saber:** the server sets the blade colour only when a colour crystal goes in (`SaberInventoryContainerComponent.cpp`: insert sets the crystal colour, remove sets 31). A saber that never had one has no colour, so the client uses the blade shader's default, palette 0, which is red. The take 2 red light fits this too. The owner is dark side, but alignment plays no part: nothing else on the server sets a player's blade colour.
+- **The red saber, found (the owner had the ghostfire crystal in):** the client applies a customization variable only to appearances its asset customization table (`customization/asset_customization_manager.iff`, `CIDX`) lists. Stock blades link through to `/private/index_color_blade` on `wp_lightsaber.pal`. Our new blade file and the light whip's were not listed, so the server's colour 32 was dropped and the default, palette 0 (red), drew. Both now have a row pointing at the sleek silver blade's key (18199), and the Ghostfire Lightsaber draws the stock blade again. The server never uses this table for the blade colour, so this is client data only. Four MTG saber blades have the same gap and ignore their crystal: mandalorian, must, gcw_1h and pvp_bf.
+- *(Superseded, kept for the record)* **The red saber, first reading:** the server sets the blade colour only when a colour crystal goes in (`SaberInventoryContainerComponent.cpp`: insert sets the crystal colour, remove sets 31). A saber that never had one has no colour, so the client uses the blade shader's default, palette 0, which is red. The take 2 red light fits this too. The owner is dark side, but alignment plays no part: nothing else on the server sets a player's blade colour.
   - The Ghostfire Lightsaber now has its own copy of the stock blade (`shader/ghostfire_blade.sht` over `ghostfire_blade_a..d.sht`) whose default is 32. With no colour crystal it shows the ghostfire blade, and any colour crystal still decides as usual. Every other saber is unchanged.
 - **The trails:** the strobe copies work; each swing left a fan of separate bars. They were far too loud, so they're now on the single additive effect (was doubled), at half alpha, last 1.2 s (was 2), with 6 copies per trail (was 8). Every colour is 20% toward a smoky violet. The tip ribbons are at half alpha too.
+
+## Any hilt (owner, 18 Oct ~8:15 PM)
+
+The owner said: "id def prefer not using singular hilts for this, being able to swap is important to player agency". The ghostfire blade already follows the crystal in any stock hilt, through the shared blade shader. The server's tip ribbons follow it too. The stacked-copies trail is still tied to the Ghostfire Lightsaber's own trail row. Next step: move it onto the shared saber trail (`sw_light_saber_white.swh`, every crafted saber), drawn only for the ghostfire crystal's colours.
 
 ## Oil-slick trails, and an almost invisible blade (owner, 18 Oct evening)
 
