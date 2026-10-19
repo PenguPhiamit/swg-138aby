@@ -153,6 +153,20 @@ def strobe_texture(profile, bars, duty):
     return rows
 
 
+def diag_texture(profile):
+    """64x64 diagnostic: white for v < 8%, then hues red -> yellow -> green -> cyan -> blue -> violet along v; the stock
+    trail profile across u."""
+    rows = []
+    for y in range(64):
+        v = (y + 0.5) / 64
+        if v < 0.08:
+            r = g = b = 1.0
+        else:
+            r, g, b = colorsys.hsv_to_rgb((v - 0.08) / 0.92 * 0.8, 1.0, 1.0)
+        rows.append([(int(round(r * 255)), int(round(g * 255)), int(round(b * 255)), p) for p in profile])
+    return rows
+
+
 def shader_model(diffuse, tf):
     """The .hlsl's ghostfire branch in Python, for the previews and the stock-path check."""
     r, g, b, a = [v / 255.0 for v in diffuse]
@@ -245,16 +259,23 @@ def main(argv):
         assert trn_iff.client_file(TRAIL_EFFECT), TRAIL_EFFECT
         changed[o13.TRAIL_SHT] = trn_iff.build(sht)
 
-    added[TRAIL_B_DDS], _ = o13.dds_argb(strobe_texture(profile, 1, 0.3))
+    # B is now a one-look diagnostic for the any-hilt trail (owner, ~8:15 PM: "being able to swap is important"): the
+    # stock saber trail file itself (sw_light_saber_white.swh, the one every crafted saber shares) with only its shader,
+    # colour (full) and life (1.2 s) changed, and a texture that is white for the first 8% of v, then a rainbow along
+    # the rest. A capture shows whether v runs once along the trail or repeats per sample, and which end is the newest.
+    added[TRAIL_B_DDS], _ = o13.dds_argb(diag_texture(profile))
     tname = [x for _, x in trn_iff.walk(sht) if not x.is_form and x.tag == 'NAME' and x.data.startswith(b'texture/')]
     assert len(tname) == 1
     tname[0].data = TRAIL_B_DDS.encode() + b'\0'
     added[TRAIL_B_SHT] = trn_iff.build(sht)
-    ptex = [x for _, x in trn_iff.walk(swh) if not x.is_form and x.tag == '0000' and x.data.startswith(b'shader/')][0]
-    ptex_b = TRAIL_B_SHT.encode() + ptex.data[ptex.data.index(b'\0'):]
-    added[TRAIL_B_SWH] = trn_iff.build([trn_iff.form('SWSH', trn_iff.form(
-        '0001', trn_iff.form('PTEX', trn_iff.chunk('0000', ptex_b)),
-        trn_iff.chunk('0000', a_data + struct.pack('<fII', 8.0, 16, 5))))])
+    swh_b = trn_iff.parse(trn_iff.client_file(o13.SRC_SWH))
+    ptex = [x for _, x in trn_iff.walk(swh_b) if not x.is_form and x.tag == '0000' and x.data.startswith(b'shader/')][0]
+    assert o13.cstr(ptex.data) == 'shader/sw_light_saber_add.sht'
+    ptex.data = TRAIL_B_SHT.encode() + ptex.data[ptex.data.index(b'\0'):]
+    bdat = [c for c in swh_b[0].children[0].children if not c.is_form][-1]
+    assert struct.unpack_from('<5f', bdat.data, 0)[3:] == (0.5, struct.unpack_from('<f', struct.pack('<f', 0.06))[0])
+    bdat.data = struct.pack('<5f', 1.0, 1.0, 1.0, 1.0, STROBE_SECONDS) + bdat.data[20:]
+    added[TRAIL_B_SWH] = trn_iff.build(swh_b)
     added[SHARED_B] = base[o13.SHARED]
 
     # owner, 7:15 PM: "the blade is still too visible", and the capture shows the blade's light lighting the kirruk red
@@ -353,12 +374,12 @@ def main(argv):
     o13.png(os.path.join(out_dir, 'preview-strobe-a.png'),
             [[tuple(c * p[3] // 255 for c in p[:3]) for p in row] for row in strobe_texture(profile, STROBE_BARS, 0.45)])
     o13.png(os.path.join(out_dir, 'preview-strobe-b.png'),
-            [[tuple(c * p[3] // 255 for c in p[:3]) for p in row] for row in strobe_texture(profile, 1, 0.3)])
+            [[tuple(c * p[3] // 255 for c in p[:3]) for p in row] for row in diag_texture(profile)])
 
     checks = {'base_sha256': base_sha, 'base_entries': len(base), 'out_sha256': sha, 'out_bytes': len(out),
               'out_entries': len(ours), 'unchanged_entries': len(same), 'changed': sorted(changed),
-              'added': sorted(added), 'acm_rows': acm_rows, 'acm_donor_key': donor_key, 'strobe': {'seconds': STROBE_SECONDS, 'a_bars': STROBE_BARS, 'alpha': TRAIL_ALPHA, 'effect': TRAIL_EFFECT, 'b_bars': 1, 'b_rate': 8.0,
-                                                  'b_samples': 16, 'template_b_crc': '%08x' % crc_b},
+              'added': sorted(added), 'acm_rows': acm_rows, 'acm_donor_key': donor_key, 'strobe': {'seconds': STROBE_SECONDS, 'a_bars': STROBE_BARS, 'alpha': TRAIL_ALPHA, 'effect': TRAIL_EFFECT, 'b_diagnostic': 'stock saber trail layout, white for v < 0.08 then a rainbow along v, full colour, same life as A',
+                                                  'template_b_crc': '%08x' % crc_b},
               'changed_sha256': {n: hashlib.sha256(ours[n]).hexdigest() for n in sorted(changed)},
               'shader': {'fxc': os.path.basename(os.path.dirname(os.path.dirname(fxc_path()))), 'slots': slots,
                          'code_sha256': hashlib.sha256(code).hexdigest(), 'glow': GHOST_GLOW, 'core': GHOST_CORE,

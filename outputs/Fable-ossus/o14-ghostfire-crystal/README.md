@@ -2,7 +2,7 @@
 
 Owner, 18 Oct ~6:10 PM: "can we make a new Crystal entry with the new shader and make all sabers compatible with the new crystal type? also the blade needs to be dimmer and the trails more prominent (and slow like LSD ...)". Later: "def make sure you understand the stacking of the tracers ... almost time dilation kinda vibes" and "a mirage effect for the blade to help hide light". On the decision card the owner picked **the strobe trail, tested first**, and asked how a real mirage could be made possible.
 
-**Built, not installed** (the game was running): archive `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre`, sha256 `660fe25d…`, on `c8a61080` (now its default base, `work/ossus-ghostfire-blade/`). The main session installed the earlier `feb3bf84` with its light whip as `a2610d64` (run 37, 7:41 PM). The light whip step chained on this build is `work/ossus-ghostfire-crystal/chain/local_planets-o14-lightwhip.tre`, sha256 `cf41f80f…`. Its only differences from the installed `a2610d64` are the customization table and the trail files. Two builds give the same hash. Checks are in `checks-crystal.json`.
+**Built, not installed** (the game was running): archive `work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre`, sha256 `3797288d…`, on `c8a61080` (now its default base, `work/ossus-ghostfire-blade/`). The main session installed the earlier `feb3bf84` with its light whip as `a2610d64` (run 37, 7:41 PM). The light whip step chained on this build is `work/ossus-ghostfire-crystal/chain/local_planets-o14-lightwhip.tre`, sha256 `b9fbc48a…`. Its only differences from the installed `a2610d64` are the customization table and the trail files, including test saber B's diagnostic. Two builds give the same hash. Checks are in `checks-crystal.json`.
 
 ## The crystal drives the blade (any saber)
 
@@ -31,6 +31,9 @@ The owner said: "the trails are still too faint and the blade is still too visib
 ## Any hilt (owner, 18 Oct ~8:15 PM)
 
 The owner said: "id def prefer not using singular hilts for this, being able to swap is important to player agency". The ghostfire blade already follows the crystal in any stock hilt, through the shared blade shader. The server's tip ribbons follow it too. The stacked-copies trail is still tied to the Ghostfire Lightsaber's own trail row. Next step: move it onto the shared saber trail (`sw_light_saber_white.swh`, every crafted saber), drawn only for the ghostfire crystal's colours.
+- The trail's effect multiplies its texture by the vertex colour, which carries the crystal's colour (`e_particle_emisadd_2x.eft`, `a_modulate2x.psh`). So a trail shader can tell the ghostfire crystal apart, like the blade shader does.
+- To keep normal crystals' trails short while the ghostfire trail lingers, the shader needs to know how the trail lays out its texture along its length, and which end is the newest. That's unknown.
+- **Test saber B is now the diagnostic:** the stock saber trail file itself, with full colour and 1.2 s life, and a texture that is white for the first 8% along the trail, then red, yellow, green, cyan, blue and violet. One swing in a capture shows the layout and the direction.
 
 ## Oil-slick trails, and an almost invisible blade (owner, 18 Oct evening)
 
@@ -70,4 +73,5 @@ A real mirage needs a small graphics hook between the game and DXVK. When our bl
 3. Spawn `/server loot item ossus_ghostfire_saber 1` (A) and `/server loot item ossus_ghostfire_saber_b 1` (B). Put the ghostfire crystal in each, and swing slowly, then fast. Which one leaves copies of the blade, and how long do they stay?
 5. Is the red light on the creature and your robe still there? Which crystal was in the saber when you saw it, if any?
 6. After the 7:50 PM changes: are the trails now a dark petrol sheen, or too faint? Which test saber left the fan of copies, A or B?
+7. Test saber B (diagnostic): swing it slowly once while a capture runs. That's all I need from it.
 4. With the ghostfire crystal: how do the oil-slick colours and the 1.2 s tip ribbons look next to the strobe trail? Dark enough, or too dim to see?

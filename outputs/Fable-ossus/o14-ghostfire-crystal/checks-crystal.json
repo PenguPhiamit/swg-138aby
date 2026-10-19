@@ -1,8 +1,8 @@
 {
  "base_sha256": "c8a610801494690b51dd6129ef716b631e2aa0991a4db5377196f5bf96670ac9",
  "base_entries": 385,
- "out_sha256": "660fe25dbf4375b16e474df8e83e5956de3f52a84a41643ebfcb7797e4b3388e",
- "out_bytes": 7309969,
+ "out_sha256": "3797288d70a10e53027eeb8ea7a6025f580d641a5c5f94dcd1b5202a24c0f176",
+ "out_bytes": 7313000,
  "out_entries": 391,
  "unchanged_entries": 371,
  "changed": [
@@ -39,9 +39,7 @@
   "a_bars": 6,
   "alpha": 0.5,
   "effect": "effect/e_particle_emisadd.eft",
-  "b_bars": 1,
-  "b_rate": 8.0,
-  "b_samples": 16,
+  "b_diagnostic": "stock saber trail layout, white for v < 0.08 then a rainbow along v, full colour, same life as A",
   "template_b_crc": "4136b322"
  },
  "changed_sha256": {
