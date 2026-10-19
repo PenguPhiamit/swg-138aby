@@ -1,10 +1,10 @@
 {
- "base_sha256": "b60189b74ce2406caff787b6a8414d535393d0ea5dab554d1a68ab052663f34e",
- "base_entries": 395,
- "out_sha256": "5a67358f81c5ea2fce031425a147a752845cddbd0c88447dd33c7a6c4f77c59e",
- "out_bytes": 7345260,
- "out_entries": 413,
- "unchanged_entries": 391,
+ "base_sha256": "a0cca018aceaeea12a140752dbc3bed326e086957e7e368651f6726566b47522",
+ "base_entries": 400,
+ "out_sha256": "b8b59aca22802d0977633f7a13657590045df9e4a11a070081054cce2ee33f9d",
+ "out_bytes": 7356747,
+ "out_entries": 418,
+ "unchanged_entries": 396,
  "changed": [
   "datatables/weapon/swoosh.iff",
   "misc/object_template_crc_string_table.iff",

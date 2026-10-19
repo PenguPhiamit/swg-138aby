@@ -17,6 +17,9 @@ The stiff whip is a straight 2.1 m strand (2.5 m until the owner's 8:26 PM answe
 - **Drop:** "Krayt dragons for now, the boss". Only the rotation's two krayt bosses (Ghost-Scale the Canyon Krayt, `giant_canyon_krayt_dragon`; Old Rattlebones, `krayt_dragon_ancient`), at 10% per kill.
 - **Schematic:** "Master weaponsmith +saber crafting 1 or 2 or jedi master". The skill names are found but not wired yet; see the design note.
 - **Ghostfire:** "the ghostfire almost looks better in the whip". The whip keeps its own ghostfire values (O14 `feb3bf84`'s 3.5% glow, 0.6% core) rather than O14's newer take.
+- **Final chain for the joint swap (owner: "Wait for both"):** `b8b59aca…` on O14 `a0cca018`, which ties the ghostfire trail to the crystal in any hilt (418 entries; two builds give the same hash). Built, not installed.
+  - O14 now overrides the shared saber trail, so the builder reads the stock `sw_light_saber_white.swh` from the client's own archives.
+  - O14's override stays in the chain untouched. The whip's row still points at `sw_ghostfire_trail.swh`.
 - **Trail fix, 8:45 PM.** Owner in game: "the ghostfire crystal also has no trails on the whip hilt". Rebuilt as `5a67358f…` on O14 `b60189b7` (413 entries; two builds give the same hash). Built, not installed.
   - The whip's swoosh row now points at O14's ghostfire-only trail, `appearance/sw_ghostfire_trail.swh`, with UseObjectHue 1. Its program draws the strobe bars for the ghostfire palette (32-40) and nothing for any other crystal.
   - Only the shader-model-2 path is gated. On ps_1_x or fixed-function graphics the bars would show tinted by any crystal; DXVK always takes the first path.

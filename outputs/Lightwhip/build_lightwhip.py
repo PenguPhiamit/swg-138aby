@@ -41,7 +41,7 @@ The server half (saber template, schematic, loot schematic, loot items and group
 Every other entry of the base archive stays byte for byte.
 
     C:/Users/Pengw/miniconda3/python.exe -I build_lightwhip.py [--base PATH] [--out PATH] [--length M] [--width M] [--trail S]
-Default base: ../../work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre (O14, sha256 b60189b7..., built,
+Default base: ../../work/ossus-ghostfire-crystal/local_planets-ghostfire-crystal.tre (O14, sha256 a0cca018..., built,
 not installed). Default out: ../../work/lightwhip/local_planets-lightwhip.tre (+ .sha256); checks in ./checks-lightwhip.json.
 """
 import argparse
@@ -63,7 +63,7 @@ from swgfmt import swg_tables  # noqa: E402
 import build_ghostfire_crystal as o14  # noqa: E402  (fxc compile with the client's include files)
 import blade_ids  # noqa: E402  (the O15 hook's pixel program id; read only)
 
-BASE_SHA_PREFIX = 'b60189b7'
+BASE_SHA_PREFIX = 'a0cca018'
 
 SRC_LSB = 'appearance/wp_mle_sword_lightsaber_blade_leather.lsb'
 SRC_APT = 'appearance/wp_mle_sword_lightsaber_leather.apt'
@@ -303,7 +303,7 @@ def main(argv):
 
     # ---- the trail: O14's ghostfire-only trail (default), none (the stock trail on a transparent texture), or the stock
     # trail, longer lived
-    swh = trn_iff.parse(src(STOCK_SWH))
+    swh = trn_iff.parse(stock_file(STOCK_SWH))   # the client's own: O14 overrides this file since a0cca018
     assert swh[0].form == 'SWSH' and swh[0].children[0].form == '0000'
     data = [c for c in swh[0].children[0].children if not c.is_form][-1]
     assert abs(struct.unpack_from('<f', data.data, 16)[0] - 0.06) < 1e-6
@@ -316,7 +316,7 @@ def main(argv):
         ptex = [x for x in chunks(swh, '0000') if x.data.startswith(b'shader/')]
         assert len(ptex) == 1 and cstr(ptex[0].data) == STOCK_TRAIL_SHT, ptex
         ptex[0].data = NONE_SHT.encode() + ptex[0].data[ptex[0].data.index(b'\0'):]
-        sht = trn_iff.parse(src(STOCK_TRAIL_SHT))
+        sht = trn_iff.parse(stock_file(STOCK_TRAIL_SHT))
         tex = [n for n in chunks(sht, 'NAME') if n.data.startswith(b'texture/')]
         assert len(tex) == 1, tex
         tex[0].data = NONE_DDS.encode() + b'\0'
