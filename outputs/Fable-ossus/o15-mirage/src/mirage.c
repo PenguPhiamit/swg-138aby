@@ -161,7 +161,7 @@ static void load_config(void)
 	if (cfg.whip_hz < 30.0f)
 		cfg.whip_hz = 30.0f;
 	cfg.whip_fixed_dt = ini_float(ini, "fixed_dt", 0.0f);
-	ini_str(ini, "ids", "238eb66a", buf, sizeof buf);
+	ini_str(ini, "ids", "238eb66a,3df92ce3", buf, sizeof buf);   // the whip strand before and after 4.5 m
 	for (p = buf; *p && cfg.whip_count < 4; p = end) {
 		unsigned long id = strtoul(p, &end, 16);
 		if (end == p) {

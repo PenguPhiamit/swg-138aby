@@ -1,21 +1,25 @@
 {
- "built": "18 Oct 2026, 9:18 PM (MSVC 14.44 x86 /MT, fxc 10.0.26100.0 ps_2_0 and vs_2_0); MSVC builds embed a timestamp, so a rebuild gives a new hash",
+ "built": "18 Oct 2026, 9:21 PM (MSVC 14.44 x86 /MT, fxc 10.0.26100.0 ps_2_0 and vs_2_0); MSVC builds embed a timestamp, so a rebuild gives a new hash",
  "proxy_dll": {
   "path": "work/o15-mirage/d3d9.dll",
   "bytes": 201728,
-  "sha256_16": "86d08fdb6ebc941e",
+  "sha256_16": "9f64739e82ea09c7",
   "installed": "no; the client has 525cd302 (the first bend) since 9:07 PM",
-  "adds": "the whip rope's droop, coil, taper and width; 40 segments by default (up to 64); looser follow (0.35 to 0.04, momentum 0.6)"
+  "adds": "the whip rope's droop, coil, taper and width; 40 segments by default (up to 64); looser follow (0.35 to 0.04, momentum 0.6)",
+  "replaces_build": "86d08fdb (same code, the 4.5 m chain's ids added)",
+  "goes_in_with": "chain f2ac1b6c (work/ossus-ghostfire-crystal/chain/local_planets-o14-lightwhip.tre)"
  },
  "dxvk_chained": {
   "source": "SWG-client/d3d9.dll (DXVK 3.1.1, x86)",
   "sha256": "265888c31ca78dffa290c39cb7e50bfb02762590e41927906e46fb32f01497fa"
  },
  "blade_program_ids": {
-  "stock e_h_lightsaberblade_ps20 (mtg_patch_011_files_01.tre)": "0xacc853c5",
-  "O14 saber blade in local_planets.tre 23368576 (O14 4c5a29d0, installed 8:35 PM)": "0x0ea2a331",
-  "light whip blade in local_planets.tre 23368576 and b9fbc48a": "0x238eb66a",
-  "O14 saber blade in local_planets.tre b9fbc48a (the .bak-b9fbc48a rollback)": "0xfac25b60"
+  "stock (mtg_patch_011_files_01.tre)": "0xacc853c5",
+  "saber in b8b59aca (installed)": "0x0ea2a331",
+  "whip in b8b59aca and b9fbc48a": "0x238eb66a",
+  "saber in f2ac1b6c (4.5 m chain)": "0x983bc32d",
+  "whip in f2ac1b6c (4.5 m chain)": "0x3df92ce3",
+  "saber in b9fbc48a (rollback)": "0xfac25b60"
  },
  "sources_sha256": {
   "src/mirage.c": "c1eb743bb3edca73022f2a1edc771807e7d483cba838c9e095ea346d995e0c9d",
@@ -121,5 +125,6 @@
   "when": "18 Oct, 9:12 to 9:18 PM",
   "setup": "a 4.5 m whip quad, swung 1 rad until frame 30 then held, 120 frames at fixed_dt 1/60, 7 m from the camera",
   "result": "all calls worked; no-whip frames identical to dc7e87c8; at rest an S-curve with a curl at the end, trailing waves while swung (work/o15-mirage/preview-whip-4p5m.png); coil 0.3 to 0.45 bunched into a knot (preview-whip-curl.png)"
- }
+ },
+ "harness_ids_9f64739e": "9:21 PM: 983bc32d and 0ea2a331 bend (mirage on vs off differ); whip 3df92ce3 rope vs straight differ by 5,347 / 4,804 / 4,552 pixels at frames 24 / 72 / 120 (as for 238eb66a); no-whip regression identical to dc7e87c8"
 }
