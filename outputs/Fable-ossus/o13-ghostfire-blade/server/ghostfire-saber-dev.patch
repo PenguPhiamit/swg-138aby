@@ -1,0 +1,297 @@
+diff --git a/MMOCoreORB/bin/scripts/loot/groups.lua b/MMOCoreORB/bin/scripts/loot/groups.lua
+index 646ce80..40753aa 100644
+--- a/MMOCoreORB/bin/scripts/loot/groups.lua
++++ b/MMOCoreORB/bin/scripts/loot/groups.lua
+@@ -735,3 +735,4 @@ includeFile("groups/hoth/hoth_decor_rare.lua")
+ includeFile("groups/hoth/hoth_vehicle_deeds.lua")
+ --ossus sub-folder (the Ossus ghostfire quest, 17 Oct 2026)
+ includeFile("groups/ossus/ossus_ghostfire_crystal.lua")
++includeFile("groups/ossus/ossus_ghostfire_saber.lua")
+diff --git a/MMOCoreORB/bin/scripts/loot/groups/ossus/ossus_ghostfire_saber.lua b/MMOCoreORB/bin/scripts/loot/groups/ossus/ossus_ghostfire_saber.lua
+new file mode 100644
+index 0000000..d910150
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/loot/groups/ossus/ossus_ghostfire_saber.lua
+@@ -0,0 +1,12 @@
++-- One item, so createLoot() hands over exactly the ghostfire lightsaber (Ossus ghostfire quest, O13, 18 Oct 2026).
++
++ossus_ghostfire_saber = {
++	description = "",
++	minimumLevel = 0,
++	maximumLevel = 0,
++	lootItems = {
++		{itemTemplate = "ossus_ghostfire_saber", weight = 10000000}
++	}
++}
++
++addLootGroupTemplate("ossus_ghostfire_saber", ossus_ghostfire_saber)
+diff --git a/MMOCoreORB/bin/scripts/loot/items.lua b/MMOCoreORB/bin/scripts/loot/items.lua
+index 687bcd1..a9ae9d4 100644
+--- a/MMOCoreORB/bin/scripts/loot/items.lua
++++ b/MMOCoreORB/bin/scripts/loot/items.lua
+@@ -2310,3 +2310,4 @@ includeFile("items/hoth/hoth_vehicle_tcg_8_single_pod_airspeeder_deed.lua")
+ includeFile("items/hoth/hoth_vehicle_tcg_military_transport_deed.lua")
+ --ossus sub-folder (the Ossus ghostfire quest, 17 Oct 2026)
+ includeFile("items/ossus/ossus_ghostfire_crystal.lua")
++includeFile("items/ossus/ossus_ghostfire_saber.lua")
+diff --git a/MMOCoreORB/bin/scripts/loot/items/ossus/ossus_ghostfire_saber.lua b/MMOCoreORB/bin/scripts/loot/items/ossus/ossus_ghostfire_saber.lua
+new file mode 100644
+index 0000000..c580d85
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/loot/items/ossus/ossus_ghostfire_saber.lua
+@@ -0,0 +1,24 @@
++-- The ghostfire lightsaber (Ossus O13, 18 Oct 2026): given with the ghostfire crystal by the spirit of Ood Bnar
++-- (screenplays/sandbox/ossus_people.lua). Its blade, swing trail and quiet hum are in our client archive (local_planets.tre);
++-- like any saber it lights only with a colour crystal in it. Fixed stats: the middle of the s12 gen4 one-handed crafting ranges.
++
++ossus_ghostfire_saber = {
++	minimumLevel = 0,
++	maximumLevel = -1,
++	customObjectName = "Ghostfire Lightsaber",
++	directObjectTemplate = "object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_ghostfire.iff",
++	craftingValues = {
++		{"mindamage",150,150,0},
++		{"maxdamage",250,250,0},
++		{"attackspeed",4.3,4.3,1},
++		{"woundchance",37,37,0},
++		{"forcecost",51,51,1},
++		{"attackhealthcost",42,42,0},
++		{"attackactioncost",52,52,0},
++		{"attackmindcost",80,80,0},
++	},
++	customizationStringNames = {},
++	customizationValues = {}
++}
++
++addLootItemTemplate("ossus_ghostfire_saber", ossus_ghostfire_saber)
+diff --git a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/objects.lua b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/objects.lua
+index 737b847..2f97932 100644
+--- a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/objects.lua
++++ b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/objects.lua
+@@ -5206,3 +5206,11 @@ object_weapon_melee_sword_crafted_saber_shared_sword_lightsaber_training = Share
+ }
+ 
+ ObjectTemplates:addClientTemplate(object_weapon_melee_sword_crafted_saber_shared_sword_lightsaber_training, "object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_training.iff")
++
++-- The Ossus ghostfire lightsaber (O13, 18 Oct 2026): the s12 gen4 one-handed template with the ghostfire blade, trail and hum
++-- (appearance/wp_mle_sword_lightsaber_blade_ghostfire.lsb). The .iff is in our archive, local_planets.tre (client and server).
++object_weapon_melee_sword_crafted_saber_shared_sword_lightsaber_one_handed_ghostfire = SharedWeaponObjectTemplate:new {
++	clientTemplateFileName = "object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire.iff"
++}
++
++ObjectTemplates:addClientTemplate(object_weapon_melee_sword_crafted_saber_shared_sword_lightsaber_one_handed_ghostfire, "object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire.iff")
+diff --git a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/serverobjects.lua b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/serverobjects.lua
+index 80c6b0e..a0a6732 100644
+--- a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/serverobjects.lua
++++ b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/serverobjects.lua
+@@ -70,6 +70,7 @@ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_ge
+ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen3.lua")
+ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen4.lua")
+ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen4_ranged.lua")
++includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_ghostfire.lua") -- Ossus O13
+ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13.lua")
+ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen1.lua")
+ includeFile("weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen2.lua")
+diff --git a/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_ghostfire.lua b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_ghostfire.lua
+new file mode 100644
+index 0000000..48b9647
+--- /dev/null
++++ b/MMOCoreORB/bin/scripts/object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_ghostfire.lua
+@@ -0,0 +1,141 @@
++--Copyright (C) 2010 <SWGEmu>
++
++
++--This File is part of Core3.
++
++--This program is free software; you can redistribute 
++--it and/or modify it under the terms of the GNU Lesser 
++--General Public License as published by the Free Software
++--Foundation; either version 2 of the License, 
++--or (at your option) any later version.
++
++--This program is distributed in the hope that it will be useful, 
++--but WITHOUT ANY WARRANTY; without even the implied warranty of 
++--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
++--See the GNU Lesser General Public License for
++--more details.
++
++--You should have received a copy of the GNU Lesser General 
++--Public License along with this program; if not, write to
++--the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
++
++--Linking Engine3 statically or dynamically with other modules 
++--is making a combined work based on Engine3. 
++--Thus, the terms and conditions of the GNU Lesser General Public License 
++--cover the whole combination.
++
++--In addition, as a special exception, the copyright holders of Engine3 
++--give you permission to combine Engine3 program with free software 
++--programs or libraries that are released under the GNU LGPL and with 
++--code included in the standard release of Core3 under the GNU LGPL 
++--license (or modified versions of such code, with unchanged license). 
++--You may copy and distribute such a system following the terms of the 
++--GNU LGPL for Engine3 and the licenses of the other code concerned, 
++--provided that you include the source code of that other code when 
++--and as the GNU LGPL requires distribution of source code.
++
++--Note that people who make modified versions of Engine3 are not obligated 
++--to grant this special exception for their modified versions; 
++--it is their choice whether to do so. The GNU Lesser General Public License 
++--gives permission to release a modified version without this exception; 
++--this exception also makes it possible to release a modified version 
++
++
++-- The Ossus ghostfire lightsaber (O13, 18 Oct 2026): the s12 gen4 one-handed saber renamed; its client
++-- template draws the ghostfire blade. Given by the ghostfire quest (loot/items/ossus/ossus_ghostfire_saber.lua).
++object_weapon_melee_sword_crafted_saber_sword_lightsaber_one_handed_ghostfire = object_weapon_melee_sword_crafted_saber_shared_sword_lightsaber_one_handed_ghostfire:new {
++	playerRaces = {
++		"object/creature/player/bothan_male.iff",
++		"object/creature/player/bothan_female.iff",
++		"object/creature/player/human_male.iff",
++		"object/creature/player/human_female.iff",
++		"object/creature/player/ithorian_male.iff",
++		"object/creature/player/ithorian_female.iff",
++		"object/creature/player/moncal_male.iff",
++		"object/creature/player/moncal_female.iff",
++		"object/creature/player/rodian_male.iff",
++		"object/creature/player/rodian_female.iff",
++		"object/creature/player/sullustan_male.iff",
++		"object/creature/player/sullustan_female.iff",
++		"object/creature/player/trandoshan_male.iff",
++		"object/creature/player/trandoshan_female.iff",
++		"object/creature/player/twilek_male.iff",
++		"object/creature/player/twilek_female.iff",
++		"object/creature/player/wookiee_male.iff",
++		"object/creature/player/wookiee_female.iff",
++		"object/creature/player/zabrak_male.iff",
++		"object/creature/player/zabrak_female.iff"
++	},
++
++	-- RANGEDATTACK, MELEEATTACK, FORCEATTACK, TRAPATTACK, GRENADEATTACK, HEAVYACIDBEAMATTACK, 
++	-- HEAVYLIGHTNINGBEAMATTACK, HEAVYPARTICLEBEAMATTACK, HEAVYROCKETLAUNCHERATTACK, HEAVYLAUNCHERATTACK
++	attackType = MELEEATTACK,
++
++	-- ENERGY, KINETIC, ELECTRICITY, STUN, BLAST, HEAT, COLD, ACID, LIGHTSABER
++	damageType = LIGHTSABER,
++
++	-- NONE, LIGHT, MEDIUM, HEAVY
++	armorPiercing = MEDIUM,
++
++	-- combat_rangedspecialize_bactarifle, combat_rangedspecialize_rifle, combat_rangedspecialize_pistol, combat_rangedspecialize_heavy, combat_rangedspecialize_carbine
++	-- combat_meleespecialize_unarmed, combat_meleespecialize_twohand, combat_meleespecialize_polearm, combat_meleespecialize_onehand, combat_general,
++	-- combat_meleespecialize_twohandlightsaber, combat_meleespecialize_polearmlightsaber, jedi_general
++	xpType = "jedi_general",
++	
++	-- See http://www.ocdsoft.com/files/certifications.xls
++	certificationsRequired = { "cert_onehandlightsaber_gen4" },
++	-- See http://www.ocdsoft.com/files/accuracy.xls
++	creatureAccuracyModifiers = { "onehandlightsaber_accuracy" },
++
++	-- See http://www.ocdsoft.com/files/defense.xls
++	defenderDefenseModifiers = { "melee_defense" },
++
++	-- Leave as "dodge" for now, may have additions later
++	defenderSecondaryDefenseModifiers = { "saber_block" },
++
++	-- See http://www.ocdsoft.com/files/speed.xls
++	speedModifiers = { "onehandlightsaber_speed" },
++
++	-- Leave blank for now
++	damageModifiers = { },
++
++
++	-- The values below are the default values.  To be used for blue frog objects primarily
++	healthAttackCost = 20,
++	actionAttackCost = 35,
++	mindAttackCost = 40,
++	forceCost = 40,
++
++	pointBlankRange = 0,
++	pointBlankAccuracy = 20,
++
++	idealRange = 3,
++	idealAccuracy = 15,
++
++	maxRange = 5,
++	maxRangeAccuracy = 5,
++
++	attackSpeed = 4.5,	
++
++	woundsRatio = 37,
++
++	defenderToughnessModifiers = { "lightsaber_toughness" },
++	
++	noTrade = 1,
++	
++	childObjects = {
++		{templateFile = "object/tangible/inventory/lightsaber_inventory_4.iff", x = 0, z = 0, y = 0, ox = 0, oy = 0, oz = 0, ow = 0, cellid = -1, containmentType = 4}
++	},
++
++	numberExperimentalProperties = {1, 1, 2, 2, 2, 2, 2, 1, 1, 1},
++	experimentalProperties = {"XX", "XX", "CD", "OQ", "CD", "OQ", "CD", "OQ", "SR", "UT", "CD", "OQ", "OQ", "OQ", "OQ"},
++	experimentalWeights = {1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1},
++	experimentalGroupTitles = {"null", "null", "expDamage", "expDamage", "expDamage", "expDamage", "expEffeciency", "expEffeciency", "expEffeciency", "expEffeciency"},
++	experimentalSubGroupTitles = {"null", "null", "mindamage", "maxdamage", "attackspeed", "woundchance", "forcecost", "attackhealthcost", "attackactioncost", "attackmindcost"},
++	experimentalMin = {0, 0, 140, 230, 4.5, 25, 55, 45, 60, 95},
++	experimentalMax = {0, 0, 160, 270, 4.2, 50, 48, 40, 45, 65},
++	experimentalPrecision = {0, 0, 0, 0, 1, 0, 1, 0, 0, 0},
++	experimentalCombineType = {0, 0, 1, 1, 1, 1, 1, 1, 1, 1},
++}
++
++ObjectTemplates:addTemplate(object_weapon_melee_sword_crafted_saber_sword_lightsaber_one_handed_ghostfire, "object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_ghostfire.iff")
+diff --git a/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua b/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua
+index 95fcbd7..b114f93 100644
+--- a/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua
++++ b/MMOCoreORB/bin/scripts/screenplays/sandbox/ossus_people.lua
+@@ -96,6 +96,7 @@ OssusPeople = ScreenPlay:new {
+ 		templeBadges = { 12, 23, 30 },  -- stock exploration_jedi: Ben Kenobi's old home, Exar Kun's temple, Dantooine's Jedi temple
+ 		retry = 60 * 60,            -- seconds before a player who answered wrongly may answer again
+ 		lootGroup = "ossus_ghostfire_crystal",
++		saberLootGroup = "ossus_ghostfire_saber",  -- O13: the ghostfire lightsaber, given with the crystal
+ 	},
+ 
+ 	waypoints = {
+@@ -413,12 +414,33 @@ function OssusPeople:giveGhostfire(pPlayer)
+ 		return false
+ 	end
+ 
++	-- O13: the crystal and the saber made to carry it, so two free slots
++	if SceneObject(pInventory):getContainerVolumeLimit() - SceneObject(pInventory):getCountableObjectsRecursive() < 2 then
++		return false
++	end
++
+ 	createLoot(pInventory, self.ghostfire.lootGroup, 1, true)
++	createLoot(pInventory, self.ghostfire.saberLootGroup, 1, true)
+ 	setState(pPlayer, "ghostfire", "done")
+-	CreatureObject(pPlayer):sendSystemMessage("You receive the ghostfire crystal.")
++	setState(pPlayer, "gfSaber", "1")
++	CreatureObject(pPlayer):sendSystemMessage("You receive the ghostfire crystal, and a lightsaber made to carry it.")
+ 	return true
+ end
+ 
++-- O13: a player who finished the quest before the saber existed gets it on the next visit to the keeper.
++function OssusPeople:giveGhostfireSaber(pPlayer)
++	local pInventory = CreatureObject(pPlayer):getSlottedObject("inventory")
++
++	if pInventory == nil or SceneObject(pInventory):isContainerFullRecursive() then
++		CreatureObject(pPlayer):sendSystemMessage("The spirit has something more for you. Make room in your inventory and come back.")
++		return
++	end
++
++	createLoot(pInventory, self.ghostfire.saberLootGroup, 1, true)
++	setState(pPlayer, "gfSaber", "1")
++	CreatureObject(pPlayer):sendSystemMessage("You receive a lightsaber made to carry the ghostfire.")
++end
++
+ -- The rare hidden Jedi in the sanctuary
+ 
+ function OssusPeople:jediAppear(pNil, args)
+@@ -612,6 +634,8 @@ function OssusHiddenJediConvoHandler:runScreenHandlers(pConvTemplate, pPlayer, p
+ 		if not OssusPeople:giveGhostfire(pPlayer) then
+ 			return screenOf(pConvTemplate, "pass_full")
+ 		end
++	elseif id == "after" and getState(pPlayer, "gfSaber") ~= "1" then
++		OssusPeople:giveGhostfireSaber(pPlayer)
+ 	elseif id == "fail_force" or id == "fail_greed" then
+ 		setState(pPlayer, "gfRetry", os.time() + OssusPeople.ghostfire.retry)
+ 	end
