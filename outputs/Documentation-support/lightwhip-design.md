@@ -10,7 +10,9 @@
   - **Owner, about 8:20 PM: bosses only**, chosen over Dathomir Nightsisters and over not yet. Each kill of a world-rotation boss has a 5% chance to give one player who damaged it a roll of the whip group (schematic 80%, whip 20%). Patch built, not applied: `Lightwhip/server/lightwhip-boss-drop-dev.patch`.
 - **Stats:** reach and the lore's trade-offs, and whip attacks partly slip past parries (a small C++ change).
 - **Looks (owner, about 7:35 PM, after the first look):** "keep as built". The crystal decides the colour, and the ghostfire crystal gives the near-invisible ghostfire blade.
-- **Scope until the 22 Oct reset (owner, about 8:20 PM):** step 2 and the bosses-only drop now. The bending whip (step 3) and the art (step 4) wait for the reset.
+- **Scope (owner, about 8:20 PM, then 8:3x PM):** first, "step 2 and the bosses-only drop now; bend and art after the reset". Then: "can we wait on the parry thing in favor of the bend?"
+  - So now: the bosses-only drop, and the bend (steps 0 and 3), which goes to the mirage session because it owns the O15 hook.
+  - Step 2 and the art (step 4) wait until after the 22 Oct reset.
 
 ## Lore (Wookieepedia, Legends: [Lightwhip](https://starwars.fandom.com/wiki/Lightwhip/Legends))
 
@@ -43,12 +45,13 @@ In our words: a rare lightsaber variant with several small crystals instead of o
        - If the target holds any saber, it takes the ricochet path: `saber_block` applies only to ranged and heavy attacks, so a melee hit, the whip included, gets no second roll.
        - Otherwise one-handed melee and pistols give dodge, two-handed and carbines give counter, and polearms and rifles give block. The chance comes from level plus the target's weapon's secondary mods (capped at 125), plus center of being and posture.
      - So against a saber-holding Jedi the only parry-like defence is roll 1's `melee_defense`. The whip's "weaker blocking" means its holder's `saber_block` against ranged shots.
-   - **Options sent to the owner (8:27 PM), C++ waits for the pick:**
+   - **On hold until after the 22 Oct reset** (owner, 8:3x PM: "can we wait on the parry thing in favor of the bend?"). No C++ was written. The options stand for then.
+   - **Options sent to the owner (8:27 PM):**
      - **A:** ignore 25% of roll 2; holder −25% `saber_block`.
      - **B (recommended):** ignore 50% of roll 2 and 10% of the target's `melee_defense` in roll 1, so it also works on saber Jedi; holder −33% `saber_block`.
      - **C:** skip roll 2 and ignore 20% of `melee_defense`; holder −50% `saber_block`.
      - The whip is recognised by its server template CRC. The patch must sit on the dev working tree, because `CombatManager.cpp` has the ghostfire session's uncommitted edits.
-3. **Hook effect.** The rope strip from "How it works", as one more effect in the O15 effects layer (`Fable-ossus/o15-mirage/DESIGN.md`), after the mirage works in game. Waits for the 22 Oct reset (owner), and so does step 0.
+3. **Hook effect.** The rope strip from "How it works", as one more effect in the O15 effects layer (`Fable-ossus/o15-mirage/DESIGN.md`), after the mirage works in game. Owner, 8:3x PM: the bend comes before the parry slip. Steps 0 and 3 belong to the mirage session, which owns the O15 hook. The whip's blade program id is `238eb66a` (archive `a2610d64`), and the blade is 2.5 m by 0.09 m on the leather hilt, with `tr1e` at 2.425 m.
 4. **Art.** An original hilt and crack sound (no film sounds). Waits for the 22 Oct reset. Placement is settled: bosses only (see Owner decisions).
 
 ## Open questions
