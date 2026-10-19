@@ -4,7 +4,7 @@
 //   - the server: one SOE session request to the login port (the same probe as friend-setup.ps1 -Action Probe);
 //   - the owner's update server (mtg-share.py, over Tailscale): update.json lists the local_planets.tre the server
 //     loads right now, the MTG archives, the newest launcher and a news line;
-//   - the client: local_planets.tre against the server's sha256, the MTG archives by size, the .include line in
+//   - the client: local_planets.tre against the server's sha256, the MTG archives by size, the .include lines in
 //     swgemu.cfg, the login lines in swgemu_login.cfg and the archive cap (maxSearchPriority) the cfg files set.
 // Then it brings the client in line: every download goes to a .part file and is checked against its sha256 before
 // it replaces anything; the old local_planets.tre is kept in local_planets-patch\backup\<version>. MTG archives
@@ -35,7 +35,7 @@ using System.Windows.Forms;
 
 [assembly: AssemblyTitle("SWG: Fractured Galaxy")]
 [assembly: AssemblyProduct("SWG: Fractured Galaxy launcher")]
-[assembly: AssemblyVersion("1.0.2.0")]
+[assembly: AssemblyVersion("1.0.3.0")]
 
 namespace FracturedGalaxy
 {
@@ -57,6 +57,8 @@ namespace FracturedGalaxy
     class LauncherForm : Form
     {
         const string LoginMarker = "; Written by the SWG friends installer";
+        const string FriendCfg = "; Written by the SWG Fractured Galaxy launcher; the uninstaller removes it.\r\n" +
+            "[SwgClient]\r\nallowMultipleInstances=true\r\n\r\n[ClientGraphics]\r\nconstrainMouseCursorToWindow=false\r\n";
         static readonly Encoding Latin1 = Encoding.GetEncoding(28591);
         static readonly Color CBack = Color.FromArgb(14, 12, 16);
         static readonly Color CPanel = Color.FromArgb(26, 22, 28);
@@ -429,6 +431,20 @@ namespace FracturedGalaxy
                 {
                     if (text.Length > 0 && !text.EndsWith("\n")) text += "\r\n";
                     File.WriteAllText(main, text + ".include \"local_planets.cfg\"\r\n", Latin1);
+                }
+            }
+            // Friends' client settings (owner, 18 Oct: on friends' PCs only one client would run, and the mouse could
+            // not leave the window without the Windows key): the two lines the owner's own user.cfg has, in our own
+            // fractured-galaxy.cfg, included after the client's cfg files. The uninstaller takes both out again.
+            if (File.Exists(main))
+            {
+                string cfg = Path.Combine(clientDir, "fractured-galaxy.cfg");
+                if (!File.Exists(cfg) || File.ReadAllText(cfg, Latin1) != FriendCfg) File.WriteAllText(cfg, FriendCfg, Latin1);
+                string text = File.ReadAllText(main, Latin1);
+                if (!System.Text.RegularExpressions.Regex.IsMatch(text, "(?m)^\\s*\\.include\\s+\"fractured-galaxy\\.cfg\"\\s*$"))
+                {
+                    if (text.Length > 0 && !text.EndsWith("\n")) text += "\r\n";
+                    File.WriteAllText(main, text + ".include \"fractured-galaxy.cfg\"\r\n", Latin1);
                 }
             }
             string login = Path.Combine(clientDir, "swgemu_login.cfg");

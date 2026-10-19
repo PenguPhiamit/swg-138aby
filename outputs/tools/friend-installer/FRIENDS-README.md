@@ -60,6 +60,8 @@ Don't log in on another server with a character standing on Hoth, Ossus or Nal H
   switches to it. Switch back from the Tailscale icon.
 - Your SWGEmu login goes back to the normal SWGEmu servers only when you uninstall.
 - The installer contains only the owner's own files: no game files, no MTG files, no keys.
+- You can run more than one game window, and the mouse can leave the game window: the launcher sets that in
+  `fractured-galaxy.cfg` in the game folder (the uninstaller removes it).
 
 ## Credits
 

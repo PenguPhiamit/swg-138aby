@@ -147,6 +147,10 @@ try {
         if ($Keep) { Write-Host "  --repair: code $($r.Code); $($r.Out)" }
         Check "launcher --repair puts the layout, the .include line and the login back on a reset client ($($r.Out))" ($r.Code -eq 0 -and (Test-Layout) -and
             ([IO.File]::ReadAllText((Join-Path $client 'swgemu_login.cfg'))) -match "loginServerAddress0=$([regex]::Escape($addr))")
+        $fg = Join-Path $client 'fractured-galaxy.cfg'
+        Check 'launcher --repair writes fractured-galaxy.cfg (more than one client, the mouse free) and includes it' ((Test-Path $fg) -and
+            [IO.File]::ReadAllText($fg) -match 'allowMultipleInstances=true' -and [IO.File]::ReadAllText($fg) -match 'constrainMouseCursorToWindow=false' -and
+            ([IO.File]::ReadAllText((Join-Path $client 'swgemu.cfg'))) -match '(?m)^\.include "fractured-galaxy\.cfg"')
         $before = Snapshot $client; $r = Repair-Launcher
         Check 'launcher --repair on a client that loads our files changes nothing' ($r.Code -eq 0 -and (Compare-Object @($before) @(Snapshot $client)) -eq $null)
         Reset-Cfg
@@ -205,6 +209,7 @@ try {
     $main = [IO.File]::ReadAllText((Join-Path $client 'swgemu.cfg'))
     Check 'Uninstall restores the login file and the cfg, removes the archive' ($r.Code -eq 0 -and $login -match 'login.swgemu.com' -and $main -notmatch 'local_planets' -and -not (Test-Path (Join-Path $client 'local_planets.tre')))
     Check 'Uninstall removes the downloaded MTG archive and puts the friend''s own version back' (-not (Test-Path (Join-Path $client 'mtg_planets.tre')) -and (Len (Join-Path $client 'mtg_patch_001.tre')) -eq 7 -and -not (Test-Path (Join-Path $bk 'mtg_patch_001.tre')))
+    if ($fg) { Check 'Uninstall removes fractured-galaxy.cfg and its .include line' (-not (Test-Path $fg) -and $main -notmatch 'fractured-galaxy') }
     if ($hookSha) {
         Check "Uninstall takes the graphics add-on out and puts the friend's own d3d9.dll back ($(($r.Result -split "`r`n") -match 'graphics add-on'))" ((Sha (Join-Path $client 'd3d9.dll')) -eq $dxvkSha -and
             -not (Test-Path (Join-Path $client 'dxvk_d3d9.dll')) -and -not (Test-Path (Join-Path $client 'mirage.ini')) -and -not (Test-Path (Join-Path $client 'dxvk.conf')) -and

@@ -56,6 +56,9 @@ Friends start the game from **SWG Fractured Galaxy** on their desktop. Each time
 - downloads any MTG archive they're missing; every file is checked against its sha256 before it replaces anything;
 - replaces itself when `build.ps1` has built a newer launcher (bump `AssemblyVersion` in `Launcher.cs`);
 - puts the login and `.include` lines back if the SWGEmu launcher reset them, and shows server status and `news.txt`;
+- (since 1.0.3, owner 18 Oct: friends could run only one client, and the mouse stayed in the window) writes
+  `fractured-galaxy.cfg` (`allowMultipleInstances=true`, `constrainMouseCursorToWindow=false`, as in your own
+  `user.cfg`) and keeps its `.include` line in `swgemu.cfg`; the uninstaller takes both out;
 - (since 1.0.2, owner 18 Oct: "on for everyone") puts in the **graphics add-on**: DXVK 3.1.1 as `dxvk_d3d9.dll` with
   the O15 hook in front of it as `d3d9.dll` (the light whip's bend, the ghostfire haze), O15's default `mirage.ini`
   and this client's `dxvk.conf` (60 fps cap). The share offers `SWG-client`'s own copies, and only while its

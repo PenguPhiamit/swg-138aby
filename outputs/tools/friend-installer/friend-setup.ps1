@@ -470,6 +470,16 @@ function Invoke-Uninstall {
     $kit = Join-Path $KitDir 'Uninstall-ClientPatch.ps1'
     if (Test-ClientRunning $ClientDir) { Finish 'ERR' 'The game is running. Close it, then uninstall again.' 5 }
     $msgs += Undo-Addon
+    # The launcher's fractured-galaxy.cfg (more than one client, the mouse free of the window) and its .include line.
+    $fgCfg = Join-Path $ClientDir 'fractured-galaxy.cfg'
+    $mainCfg = Join-Path $ClientDir 'swgemu.cfg'
+    if ((Test-Path -LiteralPath $mainCfg) -and ([IO.File]::ReadAllText($mainCfg, $Latin1) -match '(?m)^[ \t]*\.include[ \t]+"fractured-galaxy\.cfg"')) {
+        if ($DryRun) { Would 'take the fractured-galaxy.cfg line out of swgemu.cfg' }
+        else { [IO.File]::WriteAllText($mainCfg, [regex]::Replace([IO.File]::ReadAllText($mainCfg, $Latin1), '(?m)^[ \t]*\.include[ \t]+"fractured-galaxy\.cfg"[ \t]*\r?\n?', ''), $Latin1) }
+    }
+    if ((Test-Path -LiteralPath $fgCfg) -and ([IO.File]::ReadAllText($fgCfg, $Latin1)).StartsWith('; Written by the SWG Fractured Galaxy launcher')) {
+        if ($DryRun) { Would 'remove fractured-galaxy.cfg' } else { Remove-Item -LiteralPath $fgCfg -Force; $msgs += 'Removed the launcher''s client settings (fractured-galaxy.cfg).' }
+    }
     if ($DryRun) { Would "run $kit on $ClientDir" }
     else {
         $out = & "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File $kit -ClientDir $ClientDir 2>&1 | Out-String
