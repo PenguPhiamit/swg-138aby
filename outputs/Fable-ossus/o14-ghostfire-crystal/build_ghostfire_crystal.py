@@ -100,6 +100,30 @@ def ghost_entry(k):
     return [0x20, 4 * k, 0x20, 0]
 
 
+STROBE_SECONDS = 1.5
+SHARED_B = 'object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire_b.iff'
+TRAIL_B_SWH = 'appearance/sw_ghostfire_b.swh'
+TRAIL_B_SHT = 'shader/sw_ghostfire_b.sht'
+TRAIL_B_DDS = 'texture/sw_ghostfire_b.dds'
+
+
+def strobe_texture(profile, bars, duty):
+    """64x64: the stock saber trail's profile across u (hilt to tip) times soft bars along v (the trail's time axis),
+    each bar its own pastel colour, so each bar can read as one copy of the blade."""
+    h, w = 64, len(profile)
+    rows = []
+    for y in range(h):
+        v = (y + 0.5) / h * bars
+        i, f = int(v), v - int(v)
+        d = abs(f - 0.5) * 2                     # 0 at a bar's centre, 1 at the gap's centre
+        edge = 1 - duty
+        lit = 1.0 if d <= edge - 0.15 else 0.0 if d >= edge + 0.15 else (edge + 0.15 - d) / 0.3
+        r, g, b = colorsys.hsv_to_rgb((i / max(bars, 1) + 0.6) % 1.0, 0.45, 1.0)
+        rows.append([(int(round(r * 255)), int(round(g * 255)), int(round(b * 255)), int(round(p * lit)))
+                     for p in profile])
+    return rows
+
+
 def shader_model(diffuse, tf):
     """The .hlsl's ghostfire branch in Python, for the previews and the stock-path check."""
     r, g, b, a = [v / 255.0 for v in diffuse]
@@ -166,8 +190,50 @@ def main(argv):
         d.data = d.data[:16] + struct.pack('<f', args.trail) + d.data[20:52] + struct.pack('<I', 60) + d.data[56:]
         changed[name] = trn_iff.build(rn)
 
+    # strobe trail test (owner: "Strobe trail, test first"): the saber trail is the surface the blade sweeps between its
+    # trail hardpoints; bright bars with gaps along the trail's time axis should leave copies of the whole blade.
+    # A (the Ghostfire Lightsaber): the saber trail layout (0000), 1.5 s, 8 pastel bars per texture.
+    # B (a second test saber): the same, in the 0001 layout with 8 samples a second and one bar per texture, in case the
+    # texture repeats per sample segment rather than once along the trail. Whichever shows copies tells us the mapping.
+    added = {}
+    profile = [p[3] for p in o13.dxt3_top(trn_iff.client_file(o13.SRC_TRAIL_DDS))[32]]
+    changed[o13.TRAIL_DDS], _ = o13.dds_argb(strobe_texture(profile, 8, 0.45))
+    swh = trn_iff.parse(base[o13.TRAIL_SWH])
+    assert swh[0].children[0].form == '0000'
+    data = [c for c in swh[0].children[0].children if not c.is_form][-1]
+    assert abs(struct.unpack_from('<f', data.data, 16)[0] - 0.06) < 1e-6
+    data.data = data.data[:16] + struct.pack('<f', STROBE_SECONDS) + data.data[20:]
+    changed[o13.TRAIL_SWH] = trn_iff.build(swh)
+    a_data = data.data
+
+    added[TRAIL_B_DDS], _ = o13.dds_argb(strobe_texture(profile, 1, 0.3))
+    sht = trn_iff.parse(base[o13.TRAIL_SHT])
+    tname = [x for _, x in trn_iff.walk(sht) if not x.is_form and x.tag == 'NAME' and x.data.startswith(b'texture/')]
+    assert len(tname) == 1
+    tname[0].data = TRAIL_B_DDS.encode() + b'\0'
+    added[TRAIL_B_SHT] = trn_iff.build(sht)
+    ptex = [x for _, x in trn_iff.walk(swh) if not x.is_form and x.tag == '0000' and x.data.startswith(b'shader/')][0]
+    ptex_b = TRAIL_B_SHT.encode() + ptex.data[ptex.data.index(b'\0'):]
+    added[TRAIL_B_SWH] = trn_iff.build([trn_iff.form('SWSH', trn_iff.form(
+        '0001', trn_iff.form('PTEX', trn_iff.chunk('0000', ptex_b)),
+        trn_iff.chunk('0000', a_data + struct.pack('<fII', 8.0, 16, 5))))])
+    added[SHARED_B] = base[o13.SHARED]
+
+    table = o13.swg_tables.read_dtii(base[o13.SWOOSH])
+    assert [r for r in table['rows'] if r[0] == o13.SHARED] and not [r for r in table['rows'] if r[0] == SHARED_B]
+    table['rows'].append([SHARED_B, TRAIL_B_SWH, 0])
+    changed[o13.SWOOSH] = o13.swg_tables.write_dtii(table)
+    crc = o13.swg_tables.read_cstb(base[o13.CRC])
+    crc_b = o13.swg_tables.soe_crc(SHARED_B)
+    assert crc_b not in {c for c, _ in crc['entries']}
+    changed[o13.CRC] = o13.swg_tables.write_cstb(crc['entries'] + [(crc_b, SHARED_B)], crc['version'])
+    for name in (TRAIL_B_SWH, TRAIL_B_SHT):
+        assert trn_iff.build(trn_iff.parse(added[name])) == added[name]
+    assert not [n for n in added if n in base]
+
     files = dict(base)
     files.update(changed)
+    files.update(added)
     out = tre_write.pack(files)
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
     with open(args.out, 'wb') as f:
@@ -176,9 +242,10 @@ def main(argv):
     with open(args.out + '.sha256', 'w', newline='\n') as f:
         f.write('%s *%s\n' % (sha, os.path.basename(args.out)))
     ours = tre_write.read(out)[0]
-    assert sorted(ours) == sorted(set(base) | set(changed))
+    assert sorted(ours) == sorted(set(base) | set(changed) | set(added))
     same = [n for n in base if n not in changed]
     assert all(ours[n] == base[n] for n in same) and all(ours[n] == changed[n] for n in changed)
+    assert all(ours[n] == added[n] for n in added)
 
     # previews: the stock blade frame a under each ghostfire step, blended as the game blends it
     tex = o13.dxt3_top(trn_iff.client_file('texture/lightsaberblade_a.dds'))
@@ -201,8 +268,15 @@ def main(argv):
     o13.png(os.path.join(out_dir, 'preview-crystal-dark.png'), o13.preview(frames, (12, 12, 16)))
     o13.png(os.path.join(out_dir, 'preview-crystal-day.png'), o13.preview(frames, (150, 160, 170)))
 
+    o13.png(os.path.join(out_dir, 'preview-strobe-a.png'),
+            [[tuple(c * p[3] // 255 for c in p[:3]) for p in row] for row in strobe_texture(profile, 8, 0.45)])
+    o13.png(os.path.join(out_dir, 'preview-strobe-b.png'),
+            [[tuple(c * p[3] // 255 for c in p[:3]) for p in row] for row in strobe_texture(profile, 1, 0.3)])
+
     checks = {'base_sha256': base_sha, 'base_entries': len(base), 'out_sha256': sha, 'out_bytes': len(out),
               'out_entries': len(ours), 'unchanged_entries': len(same), 'changed': sorted(changed),
+              'added': sorted(added), 'strobe': {'seconds': STROBE_SECONDS, 'a_bars': 8, 'b_bars': 1, 'b_rate': 8.0,
+                                                  'b_samples': 16, 'template_b_crc': '%08x' % crc_b},
               'changed_sha256': {n: hashlib.sha256(ours[n]).hexdigest() for n in sorted(changed)},
               'shader': {'fxc': os.path.basename(os.path.dirname(os.path.dirname(fxc_path()))), 'slots': slots,
                          'code_sha256': hashlib.sha256(code).hexdigest(), 'glow': GHOST_GLOW, 'core': GHOST_CORE,

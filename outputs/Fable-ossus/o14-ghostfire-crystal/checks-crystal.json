@@ -1,10 +1,10 @@
 {
  "base_sha256": "c8a610801494690b51dd6129ef716b631e2aa0991a4db5377196f5bf96670ac9",
  "base_entries": 385,
- "out_sha256": "237875ebc9e6bf092189e2336b0ceb2687fe60e6256c0346502c3c9c7c96739b",
- "out_bytes": 7040880,
- "out_entries": 386,
- "unchanged_entries": 376,
+ "out_sha256": "892475a431ce95b4e3f83a92dad3b4a0f9774d856886e5de8f4713c3a2e4d997",
+ "out_bytes": 7044821,
+ "out_entries": 390,
+ "unchanged_entries": 372,
  "changed": [
   "appearance/ghostfire_ribbon_a.swh",
   "appearance/ghostfire_ribbon_b.swh",
@@ -14,9 +14,27 @@
   "appearance/ghostfire_ribbon_f.swh",
   "appearance/ghostfire_ribbon_g.swh",
   "appearance/ghostfire_ribbon_h.swh",
+  "appearance/sw_ghostfire.swh",
+  "datatables/weapon/swoosh.iff",
+  "misc/object_template_crc_string_table.iff",
   "palette/wp_lightsaber.pal",
-  "pixel_program/e_h_lightsaberblade_ps20.psh"
+  "pixel_program/e_h_lightsaberblade_ps20.psh",
+  "texture/sw_ghostfire.dds"
  ],
+ "added": [
+  "appearance/sw_ghostfire_b.swh",
+  "object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_ghostfire_b.iff",
+  "shader/sw_ghostfire_b.sht",
+  "texture/sw_ghostfire_b.dds"
+ ],
+ "strobe": {
+  "seconds": 1.5,
+  "a_bars": 8,
+  "b_bars": 1,
+  "b_rate": 8.0,
+  "b_samples": 16,
+  "template_b_crc": "4136b322"
+ },
  "changed_sha256": {
   "appearance/ghostfire_ribbon_a.swh": "dafeb441dd5d3d310275dcc10279eb77a36da6866da3d1571f6762fb5cacfabf",
   "appearance/ghostfire_ribbon_b.swh": "74cfd84ac21ee6b3a2547eded36f3035b474fb90e6f29b8625adf4d6a7b81f37",
@@ -26,8 +44,12 @@
   "appearance/ghostfire_ribbon_f.swh": "c0b39b9eb6dfd6dbda6367d43c1d42208f07f72a6b6e7642d5f6ba9f38017f55",
   "appearance/ghostfire_ribbon_g.swh": "07ae89556fa815c2405ec3315d6870087d7d455432ac98fab44adf954d16fe9c",
   "appearance/ghostfire_ribbon_h.swh": "6bc4e3031debfd38e942bb55ac7960eda3e7c8778900395ddc6d3d66e23a3233",
+  "appearance/sw_ghostfire.swh": "aca4e7b5ddca619088b4c3c8e3bc7bd1f0c26a1f2f9314433f370a5f0208ec13",
+  "datatables/weapon/swoosh.iff": "6c9976f179aee2fd81a8f5ddb3b45c4eb890bcec28bd2e7f189b92e7f49995b3",
+  "misc/object_template_crc_string_table.iff": "e1d09aafb1cc34b0ead7a01fca16993c3d2e6e1a4f51623aba62599e5292e37c",
   "palette/wp_lightsaber.pal": "da60b183a73538c8836f5392b5e3cc7f75aac44e5d9c36a21f8961252f41b38c",
-  "pixel_program/e_h_lightsaberblade_ps20.psh": "68d5cd60910b59a90d06ee4b2324d31f39fa3d31871a86e53f29cc8bbd5fdd08"
+  "pixel_program/e_h_lightsaberblade_ps20.psh": "68d5cd60910b59a90d06ee4b2324d31f39fa3d31871a86e53f29cc8bbd5fdd08",
+  "texture/sw_ghostfire.dds": "565a5a4bd97cc22303cc43474a2c4ef2563bf7af412f03e478fbdfb6f12ac4c5"
  },
  "shader": {
   "fxc": "10.0.26100.0",
